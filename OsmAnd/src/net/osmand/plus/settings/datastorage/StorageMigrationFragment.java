@@ -2,6 +2,7 @@ package net.osmand.plus.settings.datastorage;
 
 import android.os.Bundle;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -36,6 +37,10 @@ import net.osmand.plus.settings.datastorage.StorageMigrationAsyncTask.StorageMig
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class StorageMigrationFragment extends BaseOsmAndDialogFragment implements StorageMigrationListener {
@@ -50,6 +55,9 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	private View copyFilesDescr;
 	private TextView progressTitle;
 	private ProgressBar progressBar;
+
+	private Map<String, Pair<String, Long>> errors = new HashMap<>();
+	private List<File> existingFiles = new ArrayList<>();
 
 	private int filesCount;
 	private long filesSize;
@@ -144,13 +152,32 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 		String formattedSize = "(" + AndroidUtils.formatSize(app, filesSize) + ")";
 		String warning = getString(copyFinished ? R.string.storage_copied_files_size : R.string.storage_copying_files_size, amount, formattedSize);
 
-		SpannableString spannable = new SpannableString(warning);
+		SpannableStringBuilder spannable = new SpannableStringBuilder(warning);
 		int index = warning.indexOf(amount);
 		spannable.setSpan(new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), index, index + amount.length(), 0);
 		index = warning.indexOf(formattedSize);
 		spannable.setSpan(new ForegroundColorSpan(ColorUtilities.getSecondaryTextColor(app, nightMode)), index, index + formattedSize.length(), 0);
 
+		if (copyFinished) {
+			if (!Algorithms.isEmpty(errors)) {
+				long size = 0;
+				for (Pair<String, Long> pair : errors.values()) {
+					size += pair.second;
+				}
+				spannable.append("\n").append(getString(R.string.files_failed, errors.size(), size));
+			}
+			if (!Algorithms.isEmpty(existingFiles)) {
+				long size = 0;
+				for (File file : existingFiles) {
+					size += file.length();
+				}
+				String currentStorage = dataStorageHelper.getCurrentStorage().getTitle();
+				spannable.append("\n").append(getString(R.string.migration_files_present,
+						existingFiles.size(), AndroidUtils.formatSize(app, size), currentStorage));
+			}
+		}
 		TextView warningInfo = copyFilesDescr.findViewById(android.R.id.title);
+		warningInfo.setSingleLine(false);
 		warningInfo.setText(spannable);
 	}
 
@@ -226,8 +253,10 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	@Override
-	public void onFilesCopyFinished(@NonNull Map<String, String> errors) {
+	public void onFilesCopyFinished(@NonNull Map<String, Pair<String, Long>> errors, @NonNull List<File> existingFiles) {
 		copyFinished = true;
+		this.errors = errors;
+		this.existingFiles = existingFiles;
 		generalProgress = (int) (filesSize / 1024);
 		updateContent();
 	}

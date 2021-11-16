@@ -14,7 +14,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
 import net.osmand.util.Algorithms;
 
@@ -25,16 +24,19 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, String>> {
+class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair<String, Long>>> {
 
 	public final static Log log = PlatformUtil.getLog(StorageMigrationAsyncTask.class);
 
 	private final OsmandApplication app;
 	private final List<DocumentFile> documentFiles;
+	private final List<File> existingFiles = new ArrayList<>();
+
 	private final WeakReference<FragmentActivity> activityRef;
 	private StorageMigrationListener migrationListener;
 
@@ -64,22 +66,34 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Stri
 	}
 
 	@Override
-	protected Map<String, String> doInBackground(Void... params) {
-		Map<String, String> errors = new HashMap<>();
+	protected Map<String, Pair<String, Long>> doInBackground(Void... params) {
+		Map<String, Pair<String, Long>> errors = new HashMap<>();
 		CopyFilesListener copyFilesListener = getCopyFilesListener(filesSize / 1024);
 
 		long remainingSize = filesSize;
 		for (int i = 0; i < documentFiles.size(); i++) {
 			DocumentFile file = documentFiles.get(i);
-			remainingSize -= file.length();
+			long fileLength = file.length();
+			remainingSize -= fileLength;
 
 			Uri uri = file.getUri();
 			String fileName = getFileName(uri, file.getName());
-			String error = copyFile(uri, fileName, copyFilesListener);
-			if (error == null) {
-				file.delete();
-			} else {
-				errors.put(fileName, error);
+			if (fileName != null) {
+				copyFilesListener.onFileCopyStarted(fileName);
+
+				File destFile = app.getAppPath(fileName);
+				if (!destFile.exists()) {
+					String error = copyFile(uri, fileName, copyFilesListener);
+					if (error == null) {
+						file.delete();
+					} else {
+						errors.put(fileName, new Pair<>(error, fileLength));
+					}
+				} else {
+					existingFiles.add(destFile);
+					int progress = (int) (fileLength / 1024);
+					copyFilesListener.onFileCopyProgress(fileName, progress, progress);
+				}
 			}
 			publishProgress(new Pair<>(documentFiles.size() - i, remainingSize));
 		}
@@ -103,35 +117,28 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Stri
 	}
 
 	@Override
-	protected void onPostExecute(Map<String, String> errors) {
+	protected void onPostExecute(Map<String, Pair<String, Long>> errors) {
 		if (migrationListener != null) {
-			migrationListener.onFilesCopyFinished(errors);
+			migrationListener.onFilesCopyFinished(errors, existingFiles);
 		}
 	}
 
 	@Nullable
-	private String copyFile(@NonNull Uri uri, @NonNull String fileName, @Nullable CopyFilesListener filesListener) {
+	private String copyFile(@NonNull Uri uri, @NonNull String fileName, @NonNull CopyFilesListener filesListener) {
 		String error = null;
 		InputStream stream = null;
 		OutputStream outputStream = null;
 		try {
-			if (filesListener != null) {
-				filesListener.onFileCopyStarted(fileName);
-			}
 			File destFile = app.getAppPath(fileName);
-			if (destFile.exists()) {
-				error = app.getString(R.string.file_with_name_already_exists);
-			} else {
-				File dir = destFile.getParentFile();
-				if (dir != null) {
-					dir.mkdirs();
-				}
-				stream = app.getContentResolver().openInputStream(uri);
-				if (stream != null) {
-					outputStream = new FileOutputStream(destFile);
-					IProgress progress = getCopyProgress(fileName, filesListener);
-					Algorithms.streamCopy(stream, outputStream, progress, 1024);
-				}
+			File dir = destFile.getParentFile();
+			if (dir != null) {
+				dir.mkdirs();
+			}
+			stream = app.getContentResolver().openInputStream(uri);
+			if (stream != null) {
+				outputStream = new FileOutputStream(destFile);
+				IProgress progress = getCopyProgress(fileName, filesListener);
+				Algorithms.streamCopy(stream, outputStream, progress, 1024);
 			}
 		} catch (Exception e) {
 			log.error(e);
@@ -144,17 +151,15 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Stri
 	}
 
 	@NonNull
-	private IProgress getCopyProgress(@NonNull String fileName, @Nullable CopyFilesListener filesListener) {
+	private IProgress getCopyProgress(@NonNull String fileName, @NonNull CopyFilesListener filesListener) {
 		return new AbstractProgress() {
 
 			private int progress = 0;
 
 			@Override
 			public void progress(int deltaWork) {
-				if (filesListener != null) {
-					progress += deltaWork;
-					filesListener.onFileCopyProgress(fileName, progress, deltaWork);
-				}
+				progress += deltaWork;
+				filesListener.onFileCopyProgress(fileName, progress, deltaWork);
 			}
 		};
 	}
@@ -206,7 +211,7 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Stri
 
 		void onFilesCopyProgress(int progress);
 
-		void onFilesCopyFinished(@NonNull Map<String, String> errors);
+		void onFilesCopyFinished(@NonNull Map<String, Pair<String, Long>> errors, @NonNull List<File> existingFiles);
 
 		void onRemainingFilesUpdate(@NonNull Pair<Integer, Long> pair);
 
