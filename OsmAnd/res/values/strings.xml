@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="favourites_exit_dialog_descr">Are you sure you exit without saving? You will lost all changes.</string>
     <string name="show_parameter_seekbar">Show parameter seekbar</string>
     <string name="files_remaining">Files remaining: %1$s %2$s</string>
     <string name="copying_file">Copying file %1$s</string>

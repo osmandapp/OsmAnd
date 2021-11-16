@@ -2015,7 +2015,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				dismiss(mapActivity);
 				return;
 			}
-			ExitBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), this);
+			ExitBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), this, getString(R.string.plan_route_exit_dialog_descr));
 		}
 	}
 

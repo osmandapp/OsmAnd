@@ -1,9 +1,16 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
+import static net.osmand.GPXUtilities.log;
+import static net.osmand.data.FavouritePoint.BackgroundType;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
+import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
+import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.isPersonalCategoryDisplayName;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -31,7 +38,6 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
@@ -55,6 +61,7 @@ import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
+import net.osmand.plus.measurementtool.ExitBottomSheetDialogFragment;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
@@ -74,14 +81,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
-
-import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
-import static net.osmand.GPXUtilities.log;
-import static net.osmand.data.FavouritePoint.BackgroundType;
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
-import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
-import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.isPersonalCategoryDisplayName;
 
 public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implements ColorPickerListener, CardListener {
 
@@ -1034,32 +1033,37 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	public void showExitDialog() {
 		hideKeyboard();
 		if (!wasSaved()) {
-			AlertDialog.Builder dismissDialog = createWarningDialog(getActivity(),
-					R.string.shared_string_dismiss, R.string.exit_without_saving, R.string.shared_string_cancel);
-			dismissDialog.setPositiveButton(R.string.shared_string_exit, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					exitEditing();
-				}
-			});
-			dismissDialog.show();
+			final MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null){
+				ExitBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), this, getString(R.string.favourites_exit_dialog_descr));
+			}
+
 		} else {
 			exitEditing();
+		}
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		MapActivity mapActivity = getMapActivity();
+		switch (resultCode) {
+			case ExitBottomSheetDialogFragment.EXIT_RESULT_CODE:
+				if (mapActivity != null) {
+					exitEditing();
+				}
+				break;
+			case ExitBottomSheetDialogFragment.SAVE_RESULT_CODE:
+				if (mapActivity != null) {
+					savePressed();
+				}
+				break;
 		}
 	}
 
 	public void exitEditing() {
 		cancelled = true;
 		dismiss();
-	}
-
-	private AlertDialog.Builder createWarningDialog(Activity activity, int title, int message, int negButton) {
-		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
-		AlertDialog.Builder warningDialog = new AlertDialog.Builder(themedContext);
-		warningDialog.setTitle(getString(title));
-		warningDialog.setMessage(getString(message));
-		warningDialog.setNegativeButton(negButton, null);
-		return warningDialog;
 	}
 
 	class GroupAdapter extends RecyclerView.Adapter<GroupsViewHolder> {
