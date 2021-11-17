@@ -4510,4 +4510,18 @@
     <string name="rendering_attr_natureReserves_description">عرض المحمية الطبيعية والمناطق المحمية والمتنزهات الوطنية.</string>
     <string name="not_enough_contributions_descr">الحد الأدنى من %1$s تغيير خلال فترة الشهرين الماضية %2$s مطلوب للحصول على تحديثات خرائط غير محدودة كل ساعة.</string>
     <string name="show_parameter_seekbar">إظهار شريط البحث المتغير</string>
+    <string name="fold_unfold">طي/كشف</string>
+    <string name="app_profile_type">نوع ملف تعريف التطبيق</string>
+    <string name="map_marker_options">خيارات علامة الخريطة</string>
+    <string name="add_to_group">إضافة إلى المجموعة</string>
+    <string name="app_modes_options">اختيار أوضاع التطبيق</string>
+    <string name="shared_string_memory">الذاكرة</string>
+    <string name="memory_allocated_for_routing_ds">تعمل قيمة الذاكرة الأعلى على تسريع حساب المسارات الطويلة (أكثر من 500 كم) ، ولكنها قد تؤثر على أداء التطبيقات الأخرى.
+\nلا يؤثر على سرعة حساب الطرق القصيرة.</string>
+    <string name="memory_allocated_for_routing">الذاكرة المخصصة للتوجيه</string>
+    <string name="reading_files">قراءة الملفات …</string>
+    <string name="shared_string_hide_all">إخفاء الكل</string>
+    <string name="migration_files_present">%1$d ملف %2$s متواجد في المكان \'%3$s\' المحدد.</string>
+    <string name="no_items_selected_warning">الرجاء تحديد عنصر واحد على الأقل</string>
+    <string name="display_groups_visibility_dialog_description">يمكنك التحكم في رؤية المجموعات على الخريطة. إذا كان المسار مخفيًا ، فسيتم إخفاء جميع المجموعات أيضًا.</string>
 </resources>

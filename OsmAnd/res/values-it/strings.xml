@@ -3973,8 +3973,8 @@
     <string name="select_segments">Seleziona segmenti</string>
     <string name="select_segments_description">%1$s contiene più di un segmento, è necessario selezionare la parte da navigare.</string>
     <string name="segments_count">Segmento %1$d</string>
-    <string name="activity_type_water_name">Water</string>
-    <string name="activity_type_winter_name">Winter</string>
+    <string name="activity_type_water_name">Acquatici</string>
+    <string name="activity_type_winter_name">Invernale</string>
     <string name="activity_type_snowmobile_name">Gatto delle nevi</string>
     <string name="activity_type_riding_name">Riding</string>
     <string name="activity_type_racing_name">Corse</string>
@@ -4429,4 +4429,19 @@
     <string name="shared_storage_first_step">Premi \"%1$s\".
 \nIl gestore di file apre dove necessito di cercare e apre la cartella OsmAnd.</string>
     <string name="show_parameter_seekbar">Mostra la barra di ricerca dei parametri</string>
+    <string name="sample_wikivoyage">Esempio Wikivoyage</string>
+    <string name="fold_unfold">compatta/espandi</string>
+    <string name="app_profile_type">Tipo profilo app</string>
+    <string name="map_marker_options">Opzioni marcatori mappa</string>
+    <string name="add_to_group">Aggiungi al gruppo</string>
+    <string name="app_modes_options">Scegli le modalità dell\'app</string>
+    <string name="shared_string_memory">Memoria</string>
+    <string name="memory_allocated_for_routing_ds">Valori di memoria alti velocizzano il calcolo dei lunghi percorsi (sopra i 500 km), ma può impattare sulle prestazioni delle altre applicazioni.
+\nNon influenza la velocità dei percorsi brevi.</string>
+    <string name="memory_allocated_for_routing">Memoria allocata per il Calcolo del percorso</string>
+    <string name="reading_files">Lettura file…</string>
+    <string name="no_items_selected_warning">Seleziona almeno un oggetto</string>
+    <string name="display_groups_visibility_dialog_description">Puoi gestire la visibilità dei gruppi nella mappa. Se la traccia è nascosta anche tutti i gruppi lo saranno.</string>
+    <string name="shared_string_hide_all">Nascondi tutto</string>
+    <string name="migration_files_present">%1$d file (%2$s) sono presenti nella posizione selezionata \'%3$s\'.</string>
 </resources>

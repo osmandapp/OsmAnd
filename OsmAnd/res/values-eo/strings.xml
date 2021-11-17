@@ -4407,4 +4407,7 @@
     <string name="delete_history_items_descr">Ĉu vi certe volas forigi la elektitajn objektojn el historio\?</string>
     <string name="delete_history_items">Ĉu forigi %1$s objektojn el historio\?</string>
     <string name="quick_action_toggle_preference">Ŝaltilo por ŝanĝi elektitan agordon.</string>
+    <string name="icon_group_education">Edukado</string>
+    <string name="add_to_group">Aldoni al grupo</string>
+    <string name="shared_string_memory">Memoro</string>
 </resources>
