@@ -1033,11 +1033,10 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	public void showExitDialog() {
 		hideKeyboard();
 		if (!wasSaved()) {
-			final MapActivity mapActivity = getMapActivity();
+			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null){
-				ExitBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), this, getString(R.string.favourites_exit_dialog_descr));
+				ExitBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), this, getString(R.string.exit_without_saving_warning));
 			}
-
 		} else {
 			exitEditing();
 		}
@@ -1046,18 +1045,12 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		MapActivity mapActivity = getMapActivity();
-		switch (resultCode) {
-			case ExitBottomSheetDialogFragment.EXIT_RESULT_CODE:
-				if (mapActivity != null) {
-					exitEditing();
-				}
-				break;
-			case ExitBottomSheetDialogFragment.SAVE_RESULT_CODE:
-				if (mapActivity != null) {
-					savePressed();
-				}
-				break;
+		if (requestCode == ExitBottomSheetDialogFragment.REQUEST_CODE){
+			if (resultCode == ExitBottomSheetDialogFragment.EXIT_RESULT_CODE){
+				exitEditing();
+			} else if (resultCode == ExitBottomSheetDialogFragment.SAVE_RESULT_CODE) {
+				savePressed();
+			}
 		}
 	}
 

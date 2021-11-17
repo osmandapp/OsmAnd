@@ -18,21 +18,21 @@ public class ExitBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
 	public static final int REQUEST_CODE = 1001;
 	public static final int SAVE_RESULT_CODE = 2;
 	public static final int EXIT_RESULT_CODE = 3;
-	public static final String DESCRIPTION = "description";
-
+	private static final String DESCRIPTION = "description";
 	public static final String TAG = ExitBottomSheetDialogFragment.class.getSimpleName();
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-
-		if (getArguments() != null) {
-			items.add(new ShortDescriptionItem.Builder()
-					.setDescription(getArguments().getString(DESCRIPTION))
-					.setTitle(getString(R.string.exit_without_saving))
-					.setLayoutId(R.layout.bottom_sheet_item_list_title_with_descr)
-					.create());
+		Bundle args = getArguments();
+		String description = "";
+		if (args != null) {
+			description = args.getString(DESCRIPTION);
 		}
-
+		items.add(new ShortDescriptionItem.Builder()
+				.setDescription(description)
+				.setTitle(getString(R.string.exit_without_saving))
+				.setLayoutId(R.layout.bottom_sheet_item_list_title_with_descr)
+				.create());
 		items.add(new DividerSpaceItem(getContext(), getResources().getDimensionPixelSize(R.dimen.bottom_sheet_exit_button_margin)));
 	}
 
@@ -79,7 +79,7 @@ public class ExitBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
 		return (DialogButtonType.SECONDARY);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment targetFragment, String description) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment targetFragment, @NonNull String description) {
 		if (!fragmentManager.isStateSaved()) {
 			ExitBottomSheetDialogFragment fragment = new ExitBottomSheetDialogFragment();
 			Bundle bundle = new Bundle();
