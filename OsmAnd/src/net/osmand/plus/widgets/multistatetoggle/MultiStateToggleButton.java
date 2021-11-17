@@ -123,7 +123,7 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 
 		GradientDrawable background = new GradientDrawable();
 		background.setColor(ColorUtilities.getColorWithAlpha(selectedBgColor, 0.1f));
-		background.setStroke(AndroidUtils.dpToPx(app, 1), ColorUtilities.getColorWithAlpha(selectedBgColor, 0.5f));
+		background.setStroke(AndroidUtils.dpToPx(app, 1.5f), ColorUtilities.getColorWithAlpha(selectedBgColor, 0.5f));
 
 		showAllDividers();
 		for (int i = 0; i < items.size(); i++) {

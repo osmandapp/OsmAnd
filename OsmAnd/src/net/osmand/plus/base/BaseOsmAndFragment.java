@@ -18,13 +18,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
+
 	private UiUtilities iconsCache;
 
 	private int statusBarColor = -1;
@@ -196,5 +197,13 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 	protected OsmandSettings requireSettings() {
 		OsmandApplication app = requireMyApplication();
 		return app.getSettings();
+	}
+
+	protected boolean isNightMode(boolean usedOnMap) {
+		OsmandApplication app = requireMyApplication();
+		if (usedOnMap) {
+			return app.getDaynightHelper().isNightModeForMapControls();
+		}
+		return !app.getSettings().isLightContent();
 	}
 }

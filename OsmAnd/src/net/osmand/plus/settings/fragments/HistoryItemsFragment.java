@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,6 +54,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	protected final List<Object> selectedItems = new ArrayList<>();
 	protected final Map<Integer, List<?>> itemsGroups = new HashMap<>();
 
+	protected View appbar;
 	protected View deleteButton;
 	protected View selectAllButton;
 	protected ImageView shareButton;
@@ -81,6 +83,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 		MapActivity mapActivity = (MapActivity) requireActivity();
 		View view = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.history_preferences_fragment, container, false);
 
+		appbar = view.findViewById(R.id.appbar);
 		recyclerView = view.findViewById(R.id.list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(mapActivity));
 		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -116,23 +119,29 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 		selectedItems.clear();
 	}
 
-	protected void setupToolbar(@NonNull View view) {
-		View appbar = view.findViewById(R.id.appbar);
+	protected void setupToolbar(@NonNull View appbar) {
 		ViewCompat.setElevation(appbar, 5.0f);
-
 		ImageView closeButton = appbar.findViewById(R.id.close_button);
 		closeButton.setImageDrawable(getIcon(R.drawable.ic_action_close));
-		closeButton.setOnClickListener(v -> dismiss());
+		closeButton.setOnClickListener(v -> {
+			dismiss();
+		});
 
 		shareButton = appbar.findViewById(R.id.action_button_icon);
-		shareButton.setOnClickListener(v -> shareItems());
+		shareButton.setOnClickListener(v -> {
+			if (selectedItems.isEmpty()) {
+				app.showShortToastMessage(getString(R.string.no_items_selected_warning));
+			} else {
+				shareItems();
+			}
+		});
 		updateToolbarSwitch(appbar);
 	}
 
 	protected void updateToolbarSwitch(@NonNull View view) {
 		boolean checked = isHistoryEnabled();
 
-		if (checked) {
+		if (checked && !selectedItems.isEmpty()) {
 			shareButton.setImageDrawable(getIcon(R.drawable.ic_action_upload));
 		} else {
 			int color = ContextCompat.getColor(app, R.color.active_buttons_and_links_text_light);
@@ -210,6 +219,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 		} else {
 			selectedItems.remove(item);
 		}
+		updateToolbarSwitch(appbar);
 		updateButtonsState();
 	}
 
@@ -220,6 +230,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 		} else {
 			selectedItems.removeAll(items);
 		}
+		updateToolbarSwitch(appbar);
 		updateButtonsState();
 	}
 
@@ -229,6 +240,10 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 		updateHistoryItems();
 		updateButtonsState();
 		adapter.notifyDataSetChanged();
+		Fragment fragment = getTargetFragment();
+		if (fragment instanceof OnPreferenceChanged) {
+			((OnPreferenceChanged) fragment).onPreferenceChanged(settings.SEARCH_HISTORY.getId());
+		}
 	}
 
 	@Override

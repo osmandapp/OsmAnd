@@ -4478,4 +4478,36 @@
     <string name="delete_history_items_descr">هل تريد بالتأكيد حذف عناصر السجل المحددة؟</string>
     <string name="delete_history_items">حذف %1$s عنصر سجل؟</string>
     <string name="quick_action_toggle_preference">كبسة لتبديل حالة خيارات محددة.</string>
+    <string name="copying_file">نسخ الملف %1$s</string>
+    <string name="from_to_with_params">من %1$s إلى %2$s</string>
+    <string name="progress_complete">%1$s انتهى</string>
+    <string name="storage_found_files_descr">اضغط على “%1$s” لنسخ %2$s ملف من “%3$s” إلى “%4$s”. قد يستغرق بعض الوقت.</string>
+    <string name="storage_copied_files_size">نسخ %1$s ملف %2$s</string>
+    <string name="storage_copying_files_size">جاري نسخ %1$s ملف %2$s</string>
+    <string name="storage_found_files_size">تم العثور على %1$s ملف %2$s</string>
+    <string name="shared_string_skip_warning">هل أنت متأكد أنك تريد تخطي الترحيل؟ OsmAnd لم يعد لديه حق الوصول إلى ملفاتك في التخزين المشترك.
+\n
+\nسيبدأ التطبيق في المجلد الجديد ببياناتك.</string>
+    <string name="shared_storage_first_step">اضغط على \"%1$s\".
+\nسيفتح مدير الملفات حيث عليك البحث عن مجلد osmand وفتحه.</string>
+    <string name="shared_storage_second_step">انقر فوق \"استخدام هذا المجلد\".</string>
+    <string name="folder_access_denied">مطلوب إذن للوصول إلى المجلد المحدد.</string>
+    <string name="copying_completed">اكتمل النسخ</string>
+    <string name="shared_string_copy_to">نسخ إلى</string>
+    <string name="skip_confirmation">نعم، تخطي</string>
+    <string name="shared_storage">التخزين المشترك</string>
+    <string name="shared_string_migration">الترحيل</string>
+    <string name="icon_group_education">التعليم</string>
+    <string name="icon_group_industrial">صناعي</string>
+    <string name="start_copying">ابدأ النسخ</string>
+    <string name="shared_storage_third_step">امنح الإذن للوصول إلى المجلد. بدون هذا الإذن لا يمكن للتطبيق نسخ الملفات.</string>
+    <string name="files_remaining">الملفات المتبقية: %1$s %2$s</string>
+    <string name="shared_storage_last_step">ستتمكن من تحديد مكان تخزين بيانات جديد بعد تحديد التخزين المشترك.</string>
+    <string name="shared_storage_migration_descr">بسبب التغييرات في قواعد الوصول إلى التخزين في Android ، لم يعد بإمكان التطبيق استخدام %1$s.
+\n
+\nتحتاج إلى نسخ جميع بياناتك إلى موقع التخزين الجديد.</string>
+    <string name="shared_storage_migration">ترحيل التخزين المشترك</string>
+    <string name="rendering_attr_natureReserves_description">عرض المحمية الطبيعية والمناطق المحمية والمتنزهات الوطنية.</string>
+    <string name="not_enough_contributions_descr">الحد الأدنى من %1$s تغيير خلال فترة الشهرين الماضية %2$s مطلوب للحصول على تحديثات خرائط غير محدودة كل ساعة.</string>
+    <string name="show_parameter_seekbar">إظهار شريط البحث المتغير</string>
 </resources>

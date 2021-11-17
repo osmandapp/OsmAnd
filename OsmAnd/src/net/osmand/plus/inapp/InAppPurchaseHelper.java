@@ -177,6 +177,7 @@ public abstract class InAppPurchaseHelper {
 
 	public static boolean isAndroidAutoAvailable(@NonNull OsmandApplication ctx) {
 		return Version.isDeveloperBuild(ctx) || Version.isPaidVersion(ctx);
+		// return true;
 	}
 
 	public static boolean isFullVersionPurchased(@NonNull OsmandApplication ctx) {

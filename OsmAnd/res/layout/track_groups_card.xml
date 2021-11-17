@@ -17,8 +17,4 @@
 		android:paddingRight="@dimen/content_padding"
 		android:scrollbars="none" />
 
-	<include
-		android:id="@+id/show_on_map"
-		layout="@layout/bottom_sheet_item_with_switch_no_icon" />
-
 </LinearLayout>

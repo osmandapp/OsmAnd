@@ -654,7 +654,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 
 	public void processStoragePermission(boolean granted) {
 		if (granted) {
-			DataStoragePlaceDialogFragment.showInstance(getActivity().getSupportFragmentManager(), false);
+			DataStoragePlaceDialogFragment.showInstance(getActivity().getSupportFragmentManager(), null, false);
 		}
 	}
 
@@ -719,7 +719,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 									FIRST_USAGE_REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION);
 
 						} else {
-							DataStoragePlaceDialogFragment.showInstance(getActivity().getSupportFragmentManager(), false);
+							DataStoragePlaceDialogFragment.showInstance(getActivity().getSupportFragmentManager(), null, false);
 						}
 					}
 				});

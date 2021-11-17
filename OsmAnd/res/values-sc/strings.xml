@@ -4313,7 +4313,7 @@
     <string name="no_activity_for_intent">Installa un\'aplicatzione chi potzat fàghere custa atzione.</string>
     <string name="no_items_of_type_message">Non tenes perunu elementu de custa genia</string>
     <string name="routeInfo_tracktype_description">Colorimentu de un\'àndala o de una lìnia de rasta sighende sas cunditziones de sos caminos basadas in sa cumpositzione de sa superfìtzie issoro. Aplicada de sòlitu a sos caminos in ue sa retza de caminos printzipale cunsistet in caminos chene asfaltu.</string>
-    <string name="routeInfo_winter_ice_road_description">Colorimentu de s\'àndala o sa lìnia de sa rasta sighende sa classificatzione de su caminu ierrile chi si podet impreare in s\'ierru ebbia.</string>
+    <string name="routeInfo_winter_ice_road_description">Colora s\'àndala o sa lìnia de sa rasta sighende sa classificatzione de su caminu ierrile suo.</string>
     <string name="routeInfo_roadClass_description">Colora s\'àndala o sa lìnia de sa rasta sighende sa classificatzione de su caminu.</string>
     <string name="routeInfo_smoothness_description">Frunit un\'ischema de classificatzione chi pertocat a s\'usabilidade fìsica de unu caminu pro veìculos a rodas, mescamente pro su chi pertocat a sa regularidade e a sa pranaridade de sas superfìtzies.</string>
     <string name="routeInfo_surface_description">Fruni informatziones in subra de sa superfìtzie fìsica de sos caminos e de sas camineras pro andare a pee.</string>

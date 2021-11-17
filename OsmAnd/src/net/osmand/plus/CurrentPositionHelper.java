@@ -18,6 +18,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutingConfiguration;
+import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.router.RoutingContext;
 import net.osmand.util.MapUtils;
 
@@ -26,7 +27,6 @@ import org.apache.commons.logging.Log;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -139,11 +139,12 @@ public class CurrentPositionHelper {
 			for (BinaryMapReaderResource rep : checkReaders) {
 				rs[i++] = rep.getReader(BinaryMapReaderResourceType.STREET_LOOKUP);
 			}
-			RoutingConfiguration cfg = app.getRoutingConfigForMode(am).build(p, 10,
+			RoutingMemoryLimits memoryLimits = new RoutingMemoryLimits(10, 10);
+			RoutingConfiguration cfg = app.getRoutingConfigForMode(am).build(p, memoryLimits,
 					new HashMap<String, String>());
 			cfg.routeCalculationTime = System.currentTimeMillis();
 			ctx = new RoutePlannerFrontEnd().buildRoutingContext(cfg, null, rs);
-			RoutingConfiguration defCfg = app.getDefaultRoutingConfig().build("geocoding", 10,
+			RoutingConfiguration defCfg = app.getDefaultRoutingConfig().build("geocoding", memoryLimits,
 					new HashMap<String, String>());
 			defCtx = new RoutePlannerFrontEnd().buildRoutingContext(defCfg, null, rs);
 		} else {
@@ -314,11 +315,12 @@ public class CurrentPositionHelper {
 			});
 			return;
 		}
-		Collections.sort(complete,new Comparator<GeocodingResult>() {
-			@Override
-			public int compare(GeocodingResult o1, GeocodingResult o2) {
-				return Double.compare(o1.getDistance(), o2.getDistance());
+		Collections.sort(complete, (o1, o2) -> {
+			int projectionCompare = Double.compare(o1.getDistanceP(), o2.getDistanceP());
+			if (projectionCompare != 0) {
+				return projectionCompare;
 			}
+			return Double.compare(o1.getDistance(), o2.getDistance());
 		});
 		final GeocodingResult rts = complete.size() > 0 ? complete.get(0) : new GeocodingResult();
 		app.runInUIThread(new Runnable() {

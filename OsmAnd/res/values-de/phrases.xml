@@ -4206,4 +4206,6 @@
     <string name="poi_faculty_law">Rechtswissenschaften</string>
     <string name="poi_faculty_architecture">Architektur</string>
     <string name="poi_faculty_medicine">Medizin</string>
+    <string name="poi_tool_hire">Werkzeugverleih</string>
+    <string name="poi_escape_game">Escape Game</string>
 </resources>

@@ -1,21 +1,8 @@
 package net.osmand.plus.track;
 
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.CompoundButton;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.CompoundButtonType;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
@@ -25,21 +12,21 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 public class PointsGroupsCard extends MapBaseCard {
 
 	public static final int SELECT_GROUP_INDEX = 0;
-	public static final int SHOW_HIDE_GROUP_INDEX = 1;
 
 	private GpxDisplayGroup selectedGroup;
-	private final SelectedGpxFile selectedGpxFile;
 	private final List<GpxDisplayGroup> displayGroups = new ArrayList<>();
 
 	public PointsGroupsCard(@NonNull MapActivity mapActivity,
-							@NonNull SelectedGpxFile selectedGpxFile,
-							@NonNull List<GpxDisplayGroup> groups) {
+	                        @NonNull List<GpxDisplayGroup> groups) {
 		super(mapActivity);
 		displayGroups.addAll(groups);
-		this.selectedGpxFile = selectedGpxFile;
 	}
 
 	@Override
@@ -72,7 +59,6 @@ public class PointsGroupsCard extends MapBaseCard {
 				if (listener != null) {
 					listener.onCardButtonPressed(PointsGroupsCard.this, SELECT_GROUP_INDEX);
 				}
-				updateShowOnMapItem();
 				selectionAdapter.notifyDataSetChanged();
 			}
 		});
@@ -85,44 +71,10 @@ public class PointsGroupsCard extends MapBaseCard {
 		} else {
 			selectionAdapter.setSelectedItemByTitle(app.getString(R.string.shared_string_all));
 		}
-		updateShowOnMapItem();
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setAdapter(selectionAdapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
 		selectionAdapter.notifyDataSetChanged();
-	}
-
-	private void updateShowOnMapItem() {
-		View container = view.findViewById(R.id.show_on_map);
-		if (selectedGroup != null) {
-			TextView title = view.findViewById(R.id.title);
-			title.setText(R.string.shared_string_show_on_map);
-
-			final String groupName = Algorithms.isEmpty(selectedGroup.getName()) ? null : selectedGroup.getName();
-			boolean checked = !selectedGpxFile.isGroupHidden(groupName);
-			CompoundButton compoundButton = view.findViewById(R.id.compound_button);
-			compoundButton.setChecked(checked);
-			UiUtilities.setupCompoundButton(compoundButton, nightMode, CompoundButtonType.GLOBAL);
-
-			view.setOnClickListener(v -> {
-				boolean showGroup = !compoundButton.isChecked();
-				if (showGroup) {
-					selectedGpxFile.removeHiddenGroups(groupName);
-				} else {
-					selectedGpxFile.addHiddenGroups(groupName);
-				}
-				app.getSelectedGpxHelper().updateSelectedGpxFile(selectedGpxFile);
-
-				compoundButton.setChecked(showGroup);
-				mapActivity.refreshMap();
-
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardButtonPressed(PointsGroupsCard.this, SHOW_HIDE_GROUP_INDEX);
-				}
-			});
-		}
-		AndroidUiHelper.updateVisibility(container, selectedGroup != null);
 	}
 }

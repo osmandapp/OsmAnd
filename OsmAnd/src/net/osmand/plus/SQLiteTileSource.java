@@ -1,5 +1,8 @@
 package net.osmand.plus;
 
+import static net.osmand.IndexConstants.SQLITE_EXT;
+import static net.osmand.IndexConstants.TILES_INDEX_DIR;
+
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDiskIOException;
 import android.graphics.Bitmap;
@@ -9,6 +12,7 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.map.ITileSource;
+import net.osmand.map.ParameterType;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
@@ -22,9 +26,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.List;
-
-import static net.osmand.IndexConstants.SQLITE_EXT;
-import static net.osmand.IndexConstants.TILES_INDEX_DIR;
+import java.util.Map;
 
 
 public class SQLiteTileSource implements ITileSource {
@@ -191,7 +193,7 @@ public class SQLiteTileSource implements ITileSource {
 		if (invertedY) {
 			y = (1 << zoom) - 1 - y;
 		}
-		return TileSourceTemplate.buildUrlToLoad(urlTemplate, randomsArray, x, y, zoom);
+		return TileSourceTemplate.buildUrlToLoad(urlTemplate, randomsArray, x, y, zoom, null);
 	}
 
 	@Override
@@ -696,4 +698,45 @@ public class SQLiteTileSource implements ITileSource {
 		return userAgent;
 	}
 
+	@Override
+	public ParameterType getParamType() {
+		return ParameterType.UNDEFINED;
+	}
+
+	@Override
+	public long getParamMin() {
+		return 0;
+	}
+
+	@Override
+	public long getParamStep() {
+		return 0;
+	}
+
+	@Override
+	public long getParamMax() {
+		return 0;
+	}
+
+	@Override
+	public Map<String, String> getUrlParameters() {
+		return null;
+	}
+
+	@Override
+	public String getUrlParameter(String name) {
+		return null;
+	}
+
+	@Override
+	public void setUrlParameter(String name, String value) {
+	}
+
+	@Override
+	public void resetUrlParameter(String name) {
+	}
+
+	@Override
+	public void resetUrlParameters() {
+	}
 }
