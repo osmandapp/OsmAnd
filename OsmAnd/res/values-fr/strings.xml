@@ -4405,9 +4405,9 @@
 \n</string>
     <string name="from_to_with_params">De %1$s vers %2$s</string>
     <string name="progress_complete">%1$s terminé</string>
-    <string name="storage_copied_files_size">%1$s fichiers copiés sur %2$s</string>
-    <string name="storage_copying_files_size">Copie de %1$s fichiers sur %2$s</string>
-    <string name="storage_found_files_size">%1$s fichiers trouvés sur %2$s</string>
+    <string name="storage_copied_files_size">%1$s fichiers copiés pour %2$s</string>
+    <string name="storage_copying_files_size">Copie de %1$s fichiers pour %2$s</string>
+    <string name="storage_found_files_size">%1$s fichiers trouvés pour %2$s</string>
     <string name="storage_found_files_descr">Appuyez sur « %1$s » pour copier %2$s fichiers de « %3$s » vers « %4$s ». Cette opération peut prendre un peu de temps.</string>
     <string name="shared_string_skip_warning">Souhaitez-vous vraiment ignorer la migration \? OsmAnd ne peut plus accéder à vos fichiers dans le stockage partagé.
 \n
@@ -4435,4 +4435,18 @@
 \nLe gestionnaire de fichiers va afficher le dossier qui devrait contenir un dossier Osmand.</string>
     <string name="not_enough_contributions_descr">Un minimum de %1$s modifications au cours des deux derniers mois %2$s est requis pour bénéficier de la mise à jour horaire des cartes en illimité.</string>
     <string name="show_parameter_seekbar">Afficher la barre de recherche des paramètres</string>
+    <string name="migration_files_present">%1$d fichiers (%2$s) sont présents dans l\'emplacement sélectionné \'%3$s\'.</string>
+    <string name="fold_unfold">plier / déplier</string>
+    <string name="app_profile_type">Type de profil d’application</string>
+    <string name="map_marker_options">Options pour les marques</string>
+    <string name="add_to_group">Ajouter au groupe</string>
+    <string name="app_modes_options">Choisissez les modes d\'application</string>
+    <string name="memory_allocated_for_routing">Mémoire allouée pour le calcul d\'itinéraire</string>
+    <string name="reading_files">Lecture des fichiers…</string>
+    <string name="shared_string_hide_all">Tout masquer</string>
+    <string name="display_groups_visibility_dialog_description">Vous pouvez contrôler la visibilité des groupes sur la carte. Si la trace est masquée, tous les groupes le seront aussi.</string>
+    <string name="shared_string_memory">Mémoire</string>
+    <string name="no_items_selected_warning">Veuillez sélectionner au moins un élément</string>
+    <string name="memory_allocated_for_routing_ds">Un paramètre de mémoire plus élevé accélère le calcul des longs itinéraires (supérieurs à 500 km) mais peut réduire les performances des autres applications.
+\nCe paramètre de mémoire est sans effet sur le calcul des itinéraires courts.</string>
 </resources>

@@ -606,7 +606,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	}
 
 	protected int getIconIdByName(String iconName) {
-		return RenderingIcons.getBigIconId(iconName);
+		return RenderingIcons.getBigIconResourceId(iconName);
 	}
 
 	private void createIconSelector() {
@@ -654,7 +654,10 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	}
 
 	protected String getDefaultIconName() {
-		if (!Algorithms.isEmpty(lastUsedIcons)) {
+		String preselectedIconName = getPreselectedIconName();
+		if (!Algorithms.isEmpty(preselectedIconName)) {
+			return preselectedIconName;
+		} else if (!Algorithms.isEmpty(lastUsedIcons)) {
 			return lastUsedIcons.get(0);
 		}
 		return DEFAULT_ICON_NAME;
@@ -719,6 +722,13 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 					e.printStackTrace();
 				}
 			}
+
+			String preselectedIconName = getPreselectedIconName();
+			if (!Algorithms.isEmpty(preselectedIconName)) {
+				iconNameList.remove(preselectedIconName);
+				iconNameList.add(0, preselectedIconName);
+			}
+
 			for (String name : iconNameList) {
 				int minimalPaddingBetweenIcon = app.getResources().getDimensionPixelSize(R.dimen.favorites_select_icon_button_right_padding);
 				selectIcon.addView(createIconItemView(name, selectIcon), new FlowLayout.LayoutParams(minimalPaddingBetweenIcon, 0));
@@ -987,6 +997,9 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	public abstract BackgroundType getBackgroundType();
 
 	public abstract int getIconId();
+
+	@Nullable
+	public abstract String getPreselectedIconName();
 
 	public abstract Set<String> getCategories();
 

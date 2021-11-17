@@ -4442,4 +4442,5 @@
 \nLa aplicación cargará los datos desde la nueva carpeta.</string>
     <string name="rendering_attr_natureReserves_description">Mostrar reservas naturales, áreas protegidas y parques nacionales.</string>
     <string name="not_enough_contributions_descr">Necesitas un mínimo de %1$s cambios en el último bimestre %2$s para obtener acceso a actualizaciones de mapas ilimitadas por hora.</string>
+    <string name="show_parameter_seekbar">Mostrar barra de búsqueda de parámetros</string>
 </resources>

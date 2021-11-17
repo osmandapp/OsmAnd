@@ -276,7 +276,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 	}
 
 	private void setupStorageItemSummary(StorageItem item, TextView summary) {
-		if (!item.isStorageSizeDefineable()) {
+		if (!item.isStorageSizeDefinable()) {
 			summary.setText(getStorageItemDescriptionOrPath(item));
 			summary.setVisibility(View.VISIBLE);
 		} else {
@@ -329,7 +329,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 	}
 
 	private void setupAdditionalDescription(StorageItem item, TextView additionalDescription) {
-		if (item.isStorageSizeDefineable()) {
+		if (item.isStorageSizeDefinable()) {
 			additionalDescription.setText(getStorageItemDescriptionOrPath(item));
 			additionalDescription.setVisibility(View.VISIBLE);
 		} else {

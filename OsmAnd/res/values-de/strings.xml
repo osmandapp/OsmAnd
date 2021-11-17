@@ -4447,4 +4447,18 @@
     <string name="rendering_attr_natureReserves_description">Naturreservate, Schutzgebiete und Nationalparks anzeigen.</string>
     <string name="not_enough_contributions_descr">Ein Minimum von %1$s Änderungen in den letzten zwei Monaten %2$s ist erforderlich, um Zugang zu unbegrenzten stündlichen Kartenaktualisierungen zu erhalten.</string>
     <string name="show_parameter_seekbar">Parametersuchleiste anzeigen</string>
+    <string name="fold_unfold">zusammenfalten/auffalten</string>
+    <string name="app_profile_type">App Profiltyp</string>
+    <string name="map_marker_options">Optionen für Kartenmarkierungen</string>
+    <string name="add_to_group">Zur Gruppe hinzufügen</string>
+    <string name="app_modes_options">App-Modi auswählen</string>
+    <string name="shared_string_memory">Speicher</string>
+    <string name="memory_allocated_for_routing_ds">Mehr Speicher beschleunigt die Berechnung von langen Routen (mehr als 500 km), kann aber die Leistung anderer Anwendungen beeinträchtigen.
+\nHat keinen Einfluss auf die Berechnungsgeschwindigkeit von kurzen Routen.</string>
+    <string name="memory_allocated_for_routing">Für das Routing zugewiesener Speicher</string>
+    <string name="reading_files">Lese Dateien…</string>
+    <string name="no_items_selected_warning">Bitte wählen Sie mindestens einen Artikel</string>
+    <string name="display_groups_visibility_dialog_description">Sie können die Sichtbarkeit von Gruppen auf der Karte steuern. Wenn der Track ausgeblendet ist, werden auch alle Gruppen ausgeblendet.</string>
+    <string name="shared_string_hide_all">Alle ausblenden</string>
+    <string name="migration_files_present">%1$d Dateien (%2$s) sind am ausgewählten Speicherort \'%3$s\' vorhanden.</string>
 </resources>

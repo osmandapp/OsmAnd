@@ -791,8 +791,8 @@ public class OsmandApplication extends MultiDexApplication {
 		uiHandler.sendMessageDelayed(msg, delay);
 	}
 	
-	public File getAppPath(String path) {
-		if(path == null) {
+	public File getAppPath(@Nullable String path) {
+		if (path == null) {
 			path = "";
 		}
 		return new File(externalStorageDirectory, path);

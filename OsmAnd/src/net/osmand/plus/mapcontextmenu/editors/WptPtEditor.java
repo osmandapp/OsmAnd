@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
@@ -8,6 +9,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.util.Algorithms;
 
 public class WptPtEditor extends PointEditor {
 
@@ -61,6 +63,10 @@ public class WptPtEditor extends PointEditor {
 	}
 
 	public void add(GPXFile gpxFile, LatLon latLon, String title) {
+		add(gpxFile, latLon, title, null);
+	}
+
+	public void add(GPXFile gpxFile, LatLon latLon, String title, @Nullable String preselectedIconName) {
 		MapActivity mapActivity = getMapActivity();
 		if (latLon == null || mapActivity == null) {
 			return;
@@ -75,6 +81,10 @@ public class WptPtEditor extends PointEditor {
 		wpt = new WptPt(latLon.getLatitude(), latLon.getLongitude(),
 				System.currentTimeMillis(), Double.NaN, 0, Double.NaN);
 		wpt.name = title;
+		if (!Algorithms.isEmpty(preselectedIconName)) {
+			wpt.setIconName(preselectedIconName);
+		}
+
 		showEditorFragment();
 	}
 
