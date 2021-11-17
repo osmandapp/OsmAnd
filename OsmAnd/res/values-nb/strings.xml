@@ -4359,4 +4359,17 @@
     <string name="quick_action_toggle_preference">En bryter for å veksle valgt innstilling.</string>
     <string name="delete_history_items_descr">Slett valgte historikkelementer\?</string>
     <string name="delete_history_items">Slett %1$s-historikkelementer\?</string>
+    <string name="fold_unfold">fold sammen/utvid</string>
+    <string name="app_profile_type">Programprofiltype</string>
+    <string name="add_to_group">Legg til i gruppe</string>
+    <string name="map_marker_options">Kartmarkørvalg</string>
+    <string name="app_modes_options">Velg programmodus</string>
+    <string name="memory_allocated_for_routing_ds">En høyere minneverdi kan regne ut ruter på mer enn 500 km fortere, men kan sakke ned andre programmer.</string>
+    <string name="reading_files">Leser filer …</string>
+    <string name="no_items_selected_warning">Velg minst ett element</string>
+    <string name="shared_string_hide_all">Skjul alle</string>
+    <string name="memory_allocated_for_routing">Minnetildelning for ruting</string>
+    <string name="display_groups_visibility_dialog_description">Du kan kontrollere gryppesynlighet på kartet. Hvis et spor er skjult vil alle grupper også være det.</string>
+    <string name="migration_files_present">%1$d filer (%2$s) i valgt mappe «%3$s».</string>
+    <string name="shared_string_memory">Minne</string>
 </resources>
