@@ -37,9 +37,11 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.DocumentFilesCollectTask.FilesCollectListener;
 import net.osmand.plus.settings.datastorage.SkipMigrationBottomSheet.OnConfirmMigrationSkipListener;
+import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -54,8 +56,9 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 	private OsmandApplication app;
 	private DataStorageHelper storageHelper;
 	private DocumentFilesCollectTask collectTask;
-	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
+	private String selectedStorageKey;
 	private DocumentFile folderFile;
 	private List<DocumentFile> documentFiles = new ArrayList<>();
 	private long filesSize;
@@ -81,6 +84,9 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 		storageHelper = new DataStorageHelper(app);
 		nightMode = isNightMode(usedOnMap);
 
+		if (selectedStorageKey == null) {
+			selectedStorageKey = DataStorageHelper.INTERNAL_STORAGE;
+		}
 		FragmentActivity activity = requireMyActivity();
 		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
@@ -180,7 +186,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 		title.setText(R.string.shared_string_copy_to);
 		icon.setImageDrawable(getIcon(R.drawable.ic_action_folder_move_to, ColorUtilities.getActiveColorId(nightMode)));
 
-		String storageName = storageHelper.getCurrentStorage().getTitle();
+		String storageName = storageHelper.getStorage(selectedStorageKey).getTitle();
 		SpannableString spannable = new SpannableString(storageName);
 		spannable.setSpan(new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), 0, storageName.length(), 0);
 		spannable.setSpan(new ForegroundColorSpan(ColorUtilities.getActiveColor(app, nightMode)), 0, storageName.length(), 0);
@@ -218,7 +224,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 		String amount = String.valueOf(documentFiles.size());
 		String startCopying = getString(R.string.start_copying);
 		String sharedStorage = getString(R.string.shared_storage);
-		String storageName = storageHelper.getCurrentStorage().getTitle();
+		String storageName = storageHelper.getStorage(selectedStorageKey).getTitle();
 
 		TextView title = view.findViewById(R.id.found_files_descr);
 		title.setText(getString(R.string.storage_found_files_descr, startCopying, amount, sharedStorage, storageName));
@@ -236,6 +242,15 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 			skipButton.setOnClickListener(v -> {
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
+					StorageItem currentStorage = storageHelper.getCurrentStorage();
+					if (!Algorithms.stringsEqual(currentStorage.getKey(), selectedStorageKey)) {
+						StorageItem selectedStorage = storageHelper.getStorage(selectedStorageKey);
+						File dir = new File(selectedStorage.getDirectory());
+						int type = selectedStorage.getType();
+						DataStoragePlaceDialogFragment.saveFilesLocation(activity, type, dir);
+						DataStoragePlaceDialogFragment.checkAssets(app);
+						DataStoragePlaceDialogFragment.updateDownloadIndexes(app);
+					}
 					StorageMigrationAsyncTask copyFilesTask = new StorageMigrationAsyncTask(activity, documentFiles, filesSize, usedOnMap);
 					copyFilesTask.executeOnExecutor(singleThreadExecutor);
 					dismiss();
@@ -282,6 +297,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 	@Override
 	public void onDismissDialogFragment(DialogFragment dialogFragment) {
 		storageHelper = new DataStorageHelper(app);
+		selectedStorageKey = storageHelper.getCurrentStorage().getKey();
 		updateContent();
 	}
 
@@ -328,16 +344,12 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 
 	public static boolean dialogShowRequired(@NonNull OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
-		return Build.VERSION.SDK_INT >= 30 && settings.getDefaultInternalStorage().exists()
-				&& !settings.SHARED_STORAGE_MIGRATION_DIALOG_SHOWN.get();
+		return Build.VERSION.SDK_INT >= 30 && DataStorageHelper.isCurrentStorageShared(app)
+				&& !settings.SHARED_STORAGE_MIGRATION_FINISHED.get();
 	}
 
-	public static void showInstance(@NonNull FragmentActivity activity, boolean usedOnMap) {
-		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+	public static void showInstance(@NonNull FragmentManager fragmentManager, boolean usedOnMap) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			OsmandApplication app = (OsmandApplication) activity.getApplication();
-			app.getSettings().SHARED_STORAGE_MIGRATION_DIALOG_SHOWN.set(true);
-
 			SharedStorageWarningFragment fragment = new SharedStorageWarningFragment();
 			fragment.usedOnMap = usedOnMap;
 			fragment.setRetainInstance(true);
