@@ -4434,4 +4434,18 @@
     <string name="shared_string_copy_to">複製到</string>
     <string name="shared_storage">共享儲存空間</string>
     <string name="not_enough_contributions_descr">需要在過去兩個月內 %2$s 進行最少 %1$s 次變更才能存取無限制的每小時地圖更新。</string>
+    <string name="fold_unfold">折疊／展開</string>
+    <string name="app_profile_type">應用程式設定檔類型</string>
+    <string name="map_marker_options">地圖標記選項</string>
+    <string name="add_to_group">新增至群組</string>
+    <string name="app_modes_options">選擇應用程式模式</string>
+    <string name="shared_string_memory">記憶體</string>
+    <string name="memory_allocated_for_routing_ds">較高的記憶體值可加快長路線（多於 500 公里）的計算速度，但可能會影響其他應用程式的效能。
+\n不會影響短路線的計算速度。</string>
+    <string name="memory_allocated_for_routing">為計算路線分配的記憶體</string>
+    <string name="reading_files">正在讀取檔案……</string>
+    <string name="no_items_selected_warning">請選取至少一個項目</string>
+    <string name="display_groups_visibility_dialog_description">您可以在地圖上控制群組能見度。若隱藏軌跡，也將會隱藏所有的群組。</string>
+    <string name="shared_string_hide_all">隱藏全部</string>
+    <string name="migration_files_present">%1$d 個檔案 (%2$s) 位於選定的位置「%3$s」。</string>
 </resources>
