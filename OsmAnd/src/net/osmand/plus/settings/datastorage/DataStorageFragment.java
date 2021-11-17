@@ -357,7 +357,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 			detailsButton.setOnClickListener(v -> {
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
-					SharedStorageWarningFragment.showInstance(mapActivity, false);
+					SharedStorageWarningFragment.showInstance(mapActivity.getSupportFragmentManager(), false);
 				}
 			});
 		}

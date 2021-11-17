@@ -20,6 +20,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
@@ -136,12 +137,15 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 			icon.setImageDrawable(getContentIcon(item.getNotSelectedIconResId()));
 
 			itemView.setOnClickListener(v -> {
-				int type = item.getType();
-				boolean res = saveFilesLocation(type, dir);
-				checkAssets();
-				updateDownloadIndexes();
-				if (res || OsmandSettings.EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE != type) {
-					dismiss();
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					int type = item.getType();
+					boolean res = saveFilesLocation(activity, type, dir);
+					checkAssets(app);
+					updateDownloadIndexes(app);
+					if (res || OsmandSettings.EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE != type) {
+						dismiss();
+					}
 				}
 			});
 			itemsContainer.addView(itemView);
@@ -167,27 +171,29 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 				.getDefaultInternalStorage();
 	}
 
-	private void checkAssets() {
+	public static void checkAssets(@NonNull OsmandApplication app) {
 		app.getResourceManager().checkAssets(IProgress.EMPTY_PROGRESS, true);
 	}
 
-	private void updateDownloadIndexes() {
+	public static void updateDownloadIndexes(@NonNull OsmandApplication app) {
 		app.getDownloadThread().runReloadIndexFilesSilent();
 	}
 
-	public boolean saveFilesLocation(int type, File selectedFile) {
+	public static boolean saveFilesLocation(@NonNull FragmentActivity activity, int type, @NonNull File selectedFile) {
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		boolean writable = FileUtils.isWritable(selectedFile);
 		if (writable) {
 			app.setExternalStorageDirectory(type, selectedFile.getAbsolutePath());
-			reloadData();
+			reloadData(activity);
 		} else {
 			app.showToastMessage(R.string.specified_directiory_not_writeable);
 		}
 		return writable;
 	}
 
-	private void reloadData() {
-		new ReloadData(getActivity(), app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+	private static void reloadData(@NonNull FragmentActivity activity) {
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
+		new ReloadData(activity, app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment target, boolean storageReadOnly) {

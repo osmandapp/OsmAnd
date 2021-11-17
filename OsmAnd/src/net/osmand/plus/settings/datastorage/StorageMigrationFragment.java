@@ -258,6 +258,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 		this.errors = errors;
 		this.existingFiles = existingFiles;
 		generalProgress = (int) (filesSize / 1024);
+		app.getSettings().SHARED_STORAGE_MIGRATION_FINISHED.set(true);
 		updateContent();
 	}
 
