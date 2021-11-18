@@ -38,7 +38,7 @@
     <string name="shared_storage_last_step">You can specify a new data folder afterwards.</string>
     <string name="shared_storage_third_step">Grant permission to access the folder. Without it OsmAnd cannot copy files.</string>
     <string name="shared_storage_first_step">Press \"%1$s\".\nThe file manager opens where you need to find and open the osmand folder.</string>
-    <string name="shared_storage_migration_descr">Due to changes in Andorid storage access, OsmAnd can no longer use %1$s.\n\nCopy all your data to the new folder.</string>
+    <string name="shared_storage_migration_descr">Due to changes in Android storage access, OsmAnd can no longer use %1$s.\n\nCopy all your data to the new folder.</string>
     <string name="shared_storage_second_step">Click \"Use this folder\".</string>
     <string name="folder_access_denied">Permission required to access selected folder.</string>
     <string name="copying_completed">Copied</string>
