@@ -4298,7 +4298,6 @@
     <string name="use_login_and_password">Usar nombre de usuario y contraseña</string>
     <string name="available_until">Disponible hasta el %1$s</string>
     <string name="enough_contributions_descr">¡Felicitaciones, has hecho suficientes contribuciones a OpenStreetMap y ahora puedes disfrutar de actualizaciones ilimitadas de los mapas de OsmAnd!</string>
-    <string name="not_enough_contributions_descr">Necesitas al menos %1$s contribuciones a OpenStreetMap dentro de los %2$s días.</string>
     <string name="shared_string_contributions">Contribuciones</string>
     <string name="contributions_may_calculate_with_delay">El cálculo de las contribuciones puede tomar varias horas.</string>
     <string name="map_updates_are_unavailable_yet">Las actualizaciones de mapas no están disponibles aún :-(</string>
@@ -4349,9 +4348,8 @@
     <string name="icon_group_nautical">Náutico</string>
     <string name="shared_app_storage_description">La memoria compartida ya no está disponible debido al cambio en el acceso al almacenamiento de Android.</string>
     <string name="shared_string_details">Detalles</string>
-    <string name="rendering_attr_noNatureReserves_name">Reserva natural</string>
+    <string name="rendering_attr_natureReserves_name">Reserva natural</string>
     <string name="internal_app_storage_description">Almacenamiento interno, oculto para todos los usuarios y otras aplicaciones, por lo que sólo OsmAnd puede acceder a los datos.</string>
-    <string name="rendering_attr_noNatureReserves_description">Ocultar reservas naturales, áreas protegidas y parques nacionales.</string>
     <string name="included_categories">Categorías incluidas</string>
     <string name="shared_string_articles">Artículos</string>
     <string name="release_4_1">• Se ha añadido la compatibilidad inicial con Android Auto
@@ -4413,4 +4411,36 @@
     <string name="quick_action_toggle_preference">Un interruptor para alterna el estado de las preferencias.</string>
     <string name="delete_history_items_descr">¿Borrar los elementos marcados en el historial\?</string>
     <string name="delete_history_items">¿Borrar %1$s elementos del historial\?</string>
+    <string name="copying_file">Copiando archivo %1$s</string>
+    <string name="from_to_with_params">De %1$s a %2$s</string>
+    <string name="progress_complete">%1$s completo</string>
+    <string name="storage_found_files_descr">Pulsa «%1$s» para copiar %2$s archivos de «%3$s» a «%4$s». Puede llevar algún tiempo.</string>
+    <string name="storage_copying_files_size">Copiaron %1$s archivos (%2$s)</string>
+    <string name="storage_copied_files_size">Se copiaron %1$s archivos (%2$s)</string>
+    <string name="storage_found_files_size">Se encontraron %1$s archivos %2$s</string>
+    <string name="shared_storage_last_step">Podrás definir un nuevo almacenamiento de datos al pulsar en «Almacenamiento compartido».</string>
+    <string name="shared_storage_third_step">Permite acceder a la carpeta. Sin este permiso OsmAnd no puede copiar archivos.</string>
+    <string name="shared_storage_first_step">Pulsa «%1$s».
+\nEl gestor de archivos se abrirá donde debería encontrar y abrir la carpeta «osmand».</string>
+    <string name="shared_storage_migration_descr">Debido a los cambios en las reglas de acceso al almacenamiento en Android, OsmAnd ya no puede utilizar «%1$s».
+\n
+\nDebes copiar todos los datos, a la nueva ubicación de almacenamiento.</string>
+    <string name="shared_storage_second_step">Pulsa en «Usar esta carpeta».</string>
+    <string name="folder_access_denied">Se necesitan permisos para acceder a la carpeta elegida.</string>
+    <string name="shared_string_copy_to">Copiar a</string>
+    <string name="skip_confirmation">Sí, omitir</string>
+    <string name="shared_storage_migration">Migración del almacenamiento compartido</string>
+    <string name="shared_string_migration">Migración</string>
+    <string name="icon_group_education">Educación</string>
+    <string name="files_remaining">Archivos restantes: %1$s %2$s</string>
+    <string name="copying_completed">Copia completada</string>
+    <string name="start_copying">Iniciar copia</string>
+    <string name="shared_storage">Almacenamiento compartido</string>
+    <string name="icon_group_industrial">Industrial</string>
+    <string name="shared_string_skip_warning">¿Omitir migración\? OsmAnd ya no tiene acceso a los archivos en el almacenamiento compartido.
+\n
+\nLa aplicación cargará los datos desde la nueva carpeta.</string>
+    <string name="rendering_attr_natureReserves_description">Mostrar reservas naturales, áreas protegidas y parques nacionales.</string>
+    <string name="not_enough_contributions_descr">Necesitas un mínimo de %1$s cambios en el último bimestre %2$s para obtener acceso a actualizaciones de mapas ilimitadas por hora.</string>
+    <string name="show_parameter_seekbar">Mostrar barra de búsqueda de parámetros</string>
 </resources>

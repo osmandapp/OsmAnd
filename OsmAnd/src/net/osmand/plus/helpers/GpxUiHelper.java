@@ -183,7 +183,7 @@ public class GpxUiHelper {
 		// OUTPUT:
 		// 1. Total distance, Start time, End time
 		description.append(app.getString(R.string.gpx_info_distance, getColorValue(distanceClr,
-						OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app), html),
+				OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app), html),
 				getColorValue(distanceClr, analysis.points + "", html)));
 		if (analysis.totalTracks > 1) {
 			description.append(nl).append(app.getString(R.string.gpx_info_subtracks, getColorValue(speedClr, analysis.totalTracks + "", html)));
@@ -441,7 +441,17 @@ public class GpxUiHelper {
 				final ContextMenuItem item = contextMenuAdapter.getItem(position);
 				GPXInfo info = gpxInfoList.get(position);
 				boolean currentlyRecordingTrack = showCurrentGpx && position == 0;
-				updateGpxInfoView(v, item.getTitle(), info, currentlyRecordingTrack ? null : getDataItem(info), currentlyRecordingTrack, app);
+
+				GPXTrackAnalysis analysis = null;
+				if (currentlyRecordingTrack) {
+					analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis(app);
+				} else {
+					GpxDataItem dataItem = getDataItem(info);
+					if (dataItem != null) {
+						analysis = dataItem.getAnalysis();
+					}
+				}
+				updateGpxInfoView(v, item.getTitle(), info, analysis, app);
 
 				if (item.getSelected() == null) {
 					v.findViewById(R.id.check_item).setVisibility(View.GONE);
@@ -658,7 +668,7 @@ public class GpxUiHelper {
 						SelectedGpxFile selectedGpxFile =
 								app.getSelectedGpxHelper().getSelectedFileByName(fileName);
 						if (selectedGpxFile != null) {
-							callbackWithObject.processResult(new GPXFile[]{selectedGpxFile.getGpxFile()});
+							callbackWithObject.processResult(new GPXFile[] {selectedGpxFile.getGpxFile()});
 						} else {
 							loadGPXFileInDifferentThread(activity, callbackWithObject, dir, null, fileName);
 						}
@@ -762,7 +772,7 @@ public class GpxUiHelper {
 	                                      @Nullable Drawable iconDrawable,
 	                                      @NonNull GPXInfo info,
 	                                      @NonNull GpxDataItem dataItem) {
-		updateGpxInfoView(v, itemTitle, info, dataItem, false, app);
+		updateGpxInfoView(v, itemTitle, info, dataItem.getAnalysis(), app);
 		if (iconDrawable != null) {
 			ImageView icon = v.findViewById(R.id.icon);
 			icon.setImageDrawable(iconDrawable);
@@ -773,8 +783,7 @@ public class GpxUiHelper {
 	public static void updateGpxInfoView(View v,
 	                                     String itemTitle,
 	                                     GPXInfo info,
-	                                     GpxDataItem dataItem,
-	                                     boolean currentlyRecordingTrack,
+	                                     GPXTrackAnalysis analysis,
 	                                     OsmandApplication app) {
 		TextView viewName = v.findViewById(R.id.name);
 		viewName.setText(itemTitle.replace("/", " • ").trim());
@@ -782,13 +791,6 @@ public class GpxUiHelper {
 		ImageView icon = v.findViewById(R.id.icon);
 		icon.setVisibility(View.GONE);
 		//icon.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_polygom_dark));
-
-		GPXTrackAnalysis analysis = null;
-		if (currentlyRecordingTrack) {
-			analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis(app);
-		} else if (dataItem != null) {
-			analysis = dataItem.getAnalysis();
-		}
 
 		boolean sectionRead = analysis == null;
 		if (sectionRead) {
@@ -1242,7 +1244,7 @@ public class GpxUiHelper {
 				if (!Algorithms.isEmpty(formatX)) {
 					return MessageFormat.format(formatX + mainUnitX, value);
 				} else {
-					return (int)value + " " + mainUnitX;
+					return (int) value + " " + mainUnitX;
 				}
 			}
 		});
@@ -1256,7 +1258,7 @@ public class GpxUiHelper {
 		xAxis.setValueFormatter(new ValueFormatter() {
 			@Override
 			public String getFormattedValue(float value) {
-				int seconds = (int)value;
+				int seconds = (int) value;
 				if (useHours) {
 					int hours = seconds / (60 * 60);
 					int minutes = (seconds / 60) % 60;
@@ -1278,7 +1280,7 @@ public class GpxUiHelper {
 		xAxis.setValueFormatter(new ValueFormatter() {
 			@Override
 			public String getFormattedValue(float value) {
-				long seconds = (long) (startTime/1000 + value);
+				long seconds = (long) (startTime / 1000 + value);
 				return OsmAndFormatter.getFormattedTimeShort(seconds);
 			}
 		});
@@ -1472,7 +1474,7 @@ public class GpxUiHelper {
 
 			@Override
 			public String getFormattedValue(float value) {
-				return (int)value + " " + mainUnitY;
+				return (int) value + " " + mainUnitY;
 			}
 		});
 
@@ -1578,7 +1580,7 @@ public class GpxUiHelper {
 		float nextY;
 		float x;
 		for (Speed s : speedData) {
-			switch(axisType) {
+			switch (axisType) {
 				case TIMEOFDAY:
 				case TIME:
 					x = s.time;
@@ -1629,7 +1631,7 @@ public class GpxUiHelper {
 				if (!Algorithms.isEmpty(formatY)) {
 					return MessageFormat.format(formatY + mainUnitY, value);
 				} else {
-					return (int)value + " " + mainUnitY;
+					return (int) value + " " + mainUnitY;
 				}
 			}
 		});
@@ -1725,7 +1727,7 @@ public class GpxUiHelper {
 
 			@Override
 			public String getFormattedValue(float value) {
-				return (int)value + " " + mainUnitY;
+				return (int) value + " " + mainUnitY;
 			}
 		});
 
@@ -1784,7 +1786,7 @@ public class GpxUiHelper {
 		int index = (int) ((SLOPE_PROXIMITY / STEP) / 2);
 		for (int k = 0; k < calculatedSlopeDist.length; k++) {
 			calculatedSlopeDist[k] = calculatedDist[index + k];
-			calculatedSlope[k] = (calculatedH[ 2 * index + k] - calculatedH[k]) * 100 / SLOPE_PROXIMITY;
+			calculatedSlope[k] = (calculatedH[2 * index + k] - calculatedH[k]) * 100 / SLOPE_PROXIMITY;
 			if (Double.isNaN(calculatedSlope[k])) {
 				calculatedSlope[k] = 0;
 			}

@@ -4262,7 +4262,6 @@
     <string name="on_hold_since">Pozastavené od %1$s</string>
     <string name="active_till">Aktívne do %1$s</string>
     <string name="track_has_no_needed_data">V stope chýbajú potrebné údaje.</string>
-    <string name="not_enough_contributions_descr">Vyžaduje sa aspoň %1$s príspevkov do OpenStreetMap za posledných %2$s dní.</string>
     <string name="shared_string_contributions">Príspevky</string>
     <string name="contributions_may_calculate_with_delay">Výpočet príspevkov môže trvať niekoľko hodín.</string>
     <string name="map_updates_are_unavailable_yet">Aktualizácie máp ešte nie sú dostupné :-(</string>
@@ -4342,9 +4341,8 @@
     <string name="internal_app_storage_description">Interné úložisko, skryté pred všetkými používateľmi a inými aplikáciami, kde len OsmAnd môže použiť vaše údaje.</string>
     <string name="shared_string_details">Podrobnosti</string>
     <string name="shared_app_storage_description">Zdieľaná pamäť už nie je dostupná kvôli zmenám prístupu k úložisku v Androide.</string>
-    <string name="rendering_attr_noNatureReserves_description">Skryť prírodné rezervácie, chránené oblasti a národné parky.</string>
     <string name="purchases_feature_desc_android_auto">Prináša mapy a navigáciu OsmAnd na obrazovku vášho vozidla a zapojí sa do ovládania vášho vozidla.</string>
-    <string name="rendering_attr_noNatureReserves_name">Prírodná rezervácia</string>
+    <string name="rendering_attr_natureReserves_name">Prírodné rezervácie</string>
     <string name="shared_string_articles">Články</string>
     <string name="included_categories">Zahrnuté kategórie</string>
     <string name="release_4_1">• Prvotná podpora pre Android Auto
@@ -4406,4 +4404,36 @@
     <string name="delete_history_items_descr">Naozaj chcete vymazať zvolené položky histórie\?</string>
     <string name="quick_action_toggle_preference">Prepínač stavu zvoleného nastavenia.</string>
     <string name="delete_history_items">Vymazať %1$s položiek histórie\?</string>
+    <string name="from_to_with_params">Z %1$s do %2$s</string>
+    <string name="progress_complete">%1$s hotovo</string>
+    <string name="storage_copying_files_size">Kopíruje sa %1$s súborov %2$s</string>
+    <string name="storage_found_files_size">Nájdených %1$s súborov %2$s</string>
+    <string name="shared_storage_first_step">Stlačte \"%1$s\".
+\nOtvorí sa správca súborov, v ktorom vyhľadajte priečinok osmand.</string>
+    <string name="copying_completed">Kopírovanie dokončené</string>
+    <string name="shared_string_copy_to">Kopírovať do</string>
+    <string name="icon_group_industrial">Priemysel</string>
+    <string name="start_copying">Začať kopírovanie</string>
+    <string name="storage_found_files_descr">Stlačte “%1$s” pre skopírovanie %2$s súborov z “%3$s” do “%4$s”. Môže to chvíľu trvať.</string>
+    <string name="shared_storage_third_step">Povoľte prístup k priečinku. Bez tohto povolenia nemôže OsmAnd skopírovať súbory.</string>
+    <string name="files_remaining">Zostávajúce súbory: %1$s %2$s</string>
+    <string name="storage_copied_files_size">Skopírovaných %1$s súborov %2$s</string>
+    <string name="copying_file">Kopíruje sa súbor %1$s</string>
+    <string name="shared_string_skip_warning">Naozaj chcete preskočiť migráciu\? OsmAnd už nemá prístup k vašim súborom v zdieľanom úložisku.
+\n
+\nAplikácia sa spustí v novom priečinku s vašimi údajmi.</string>
+    <string name="shared_storage_last_step">Po zvolení zdieľaného úložiska budete môcť zadať nové úložisko.</string>
+    <string name="folder_access_denied">Na prístup k zvolenému priečinku je potrebné povolenie.</string>
+    <string name="skip_confirmation">Áno, preskočiť</string>
+    <string name="shared_storage">Zdieľané úložisko</string>
+    <string name="shared_storage_migration_descr">Kvôli zmenám pravidiel prístupu k úložisku v Androide už OsmAnd nemôže ďalej používať %1$s.
+\n
+\nMusíte skopírovať všetky vaše údaje do nového úložného miesta.</string>
+    <string name="shared_storage_migration">Migrácia zdieľaného úložiska</string>
+    <string name="icon_group_education">Vzdelávanie</string>
+    <string name="shared_storage_second_step">Stlačte \"Použiť tento priečinok\".</string>
+    <string name="shared_string_migration">Migrácia</string>
+    <string name="rendering_attr_natureReserves_description">Zobraziť prírodné rezervácie, chránené oblasti a národné parky.</string>
+    <string name="not_enough_contributions_descr">Vyžaduje sa aspoň %1$s zmien za posledné 2 mesiace %2$s, aby ste získali neobmedzené hodinové aktualizácie máp.</string>
+    <string name="show_parameter_seekbar">Zobraziť hľadanie parametrov</string>
 </resources>

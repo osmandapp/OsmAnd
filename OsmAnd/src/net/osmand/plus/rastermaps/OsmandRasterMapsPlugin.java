@@ -148,6 +148,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			createLayers(context);
 		}
 		overlayLayer.setAlpha(settings.MAP_OVERLAY_TRANSPARENCY.get());
+		overlayLayer.updateParameter();
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		if (isActive()) {
 			updateLayer(mapView, settings, overlayLayer, settings.MAP_OVERLAY, 0.7f, settings.MAP_OVERLAY == settingsToWarnAboutMap);
@@ -168,7 +169,11 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				layers.getMapControlsLayer().showTransparencyBar(settings.MAP_TRANSPARENCY);
 			} else if (settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.OVERLAY &&
 					overlayLayer.getMap() != null || overlayLayer.getMapTileAdapter() != null) {
-				layers.getMapControlsLayer().showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY);
+				if (settings.SHOW_MAP_LAYER_PARAMETER.get()) {
+					layers.getMapControlsLayer().showParameterBar(overlayLayer);
+				} else {
+					layers.getMapControlsLayer().showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY);
+				}
 			} else {
 				layers.getMapControlsLayer().hideTransparencyBar();
 			}

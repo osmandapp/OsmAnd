@@ -4289,7 +4289,6 @@
     <string name="use_login_and_password">使用使用者名稱與密碼</string>
     <string name="available_until">可用至 %1$s</string>
     <string name="enough_contributions_descr">恭喜！您提供 OpenStreetMap 夠多的貢獻，現在可以享受無限的 OsmAnd 地圖更新了！</string>
-    <string name="not_enough_contributions_descr">在%2$s天內至少需要 %1$s 次 OpenStreetMap 貢獻。</string>
     <string name="shared_string_contributions">貢獻</string>
     <string name="contributions_may_calculate_with_delay">計算貢獻可能需要數小時。</string>
     <string name="map_updates_are_unavailable_yet">地圖更新尚不可用 :-(</string>
@@ -4341,8 +4340,7 @@
     <string name="shared_storage_warning_title">儲存空間存取規則的變更</string>
     <string name="purchases_feature_desc_android_auto">將 OsmAnd 離線地圖與導航帶到您的車輛螢幕上，並與您的車輛控制介面整合。</string>
     <string name="shared_string_details">詳細資訊</string>
-    <string name="rendering_attr_noNatureReserves_name">自然保留區</string>
-    <string name="rendering_attr_noNatureReserves_description">隱藏自然保留區、保護區與國家公園。</string>
+    <string name="rendering_attr_natureReserves_name">自然保留區</string>
     <string name="included_categories">包含分類</string>
     <string name="shared_string_articles">文章</string>
     <string name="release_4_1">• 新增對 Android Auto 的初步支援
@@ -4404,4 +4402,50 @@
     <string name="delete_history_items">刪除 %1$s 歷史紀錄項目嗎？</string>
     <string name="quick_action_toggle_preference">用於切換所選偏好設定狀態的開關。</string>
     <string name="delete_history_items_descr">您確定要刪除選定的歷史紀錄項目嗎？</string>
+    <string name="files_remaining">檔案剩餘：%1$s %2$s</string>
+    <string name="copying_file">正在複製檔案 %1$s</string>
+    <string name="from_to_with_params">從 %1$s 到 %2$s</string>
+    <string name="progress_complete">%1$s 完成</string>
+    <string name="shared_string_migration">遷移</string>
+    <string name="storage_found_files_descr">點擊「%1$s」以從「%3$s」複製 %2$s 檔案到「%4$s」。其可能需要一點時間。</string>
+    <string name="storage_copied_files_size">已複製 %1$s 檔案 %2$s</string>
+    <string name="storage_copying_files_size">正在複製 %1$s 檔案 %2$s</string>
+    <string name="storage_found_files_size">已找到 %1$s 檔案 %2$s</string>
+    <string name="shared_string_skip_warning">您確定您要略過遷移嗎？OsmAnd 不再有權存取您在共享儲存空間中的檔案。
+\n
+\n應用程式將在包含您資料的新資料夾中啟動。</string>
+    <string name="shared_storage_last_step">選取共享儲存空間後，您將可以指定新的資料儲存空間。</string>
+    <string name="shared_storage_third_step">給予存取資料夾的權限。沒有此權限，OsmAnd 就無法複製檔案。</string>
+    <string name="shared_storage_migration_descr">由於 Android 的儲存空間存取規則變更，OsmAnd 將無法再使用 %1$s。
+\n
+\n您必須複製您所有的資料到新的儲存空間位置。</string>
+    <string name="shared_storage_second_step">點擊「使用此資料夾」。</string>
+    <string name="folder_access_denied">存取選定資料夾需要權限。</string>
+    <string name="copying_completed">複製完成</string>
+    <string name="start_copying">開始複製</string>
+    <string name="skip_confirmation">是的，略過</string>
+    <string name="shared_storage_migration">共享儲存空間遷移</string>
+    <string name="icon_group_education">教育</string>
+    <string name="icon_group_industrial">工業區</string>
+    <string name="rendering_attr_natureReserves_description">展示自然保留區、保護區與國家公園。</string>
+    <string name="show_parameter_seekbar">顯示參數搜尋列</string>
+    <string name="shared_storage_first_step">按下「%1$s」。
+\n檔案管理程式會在您需要尋找並開啟 osmand 資料夾時開啟。</string>
+    <string name="shared_string_copy_to">複製到</string>
+    <string name="shared_storage">共享儲存空間</string>
+    <string name="not_enough_contributions_descr">需要在過去兩個月內 %2$s 進行最少 %1$s 次變更才能存取無限制的每小時地圖更新。</string>
+    <string name="fold_unfold">折疊／展開</string>
+    <string name="app_profile_type">應用程式設定檔類型</string>
+    <string name="map_marker_options">地圖標記選項</string>
+    <string name="add_to_group">新增至群組</string>
+    <string name="app_modes_options">選擇應用程式模式</string>
+    <string name="shared_string_memory">記憶體</string>
+    <string name="memory_allocated_for_routing_ds">較高的記憶體值可加快長路線（多於 500 公里）的計算速度，但可能會影響其他應用程式的效能。
+\n不會影響短路線的計算速度。</string>
+    <string name="memory_allocated_for_routing">為計算路線分配的記憶體</string>
+    <string name="reading_files">正在讀取檔案……</string>
+    <string name="no_items_selected_warning">請選取至少一個項目</string>
+    <string name="display_groups_visibility_dialog_description">您可以在地圖上控制群組能見度。若隱藏軌跡，也將會隱藏所有的群組。</string>
+    <string name="shared_string_hide_all">隱藏全部</string>
+    <string name="migration_files_present">%1$d 個檔案 (%2$s) 位於選定的位置「%3$s」。</string>
 </resources>

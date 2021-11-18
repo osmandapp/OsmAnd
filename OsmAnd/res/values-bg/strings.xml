@@ -2466,7 +2466,6 @@
     <string name="use_login_and_password">Използване на потребителско име и парола</string>
     <string name="available_until">Налично до %1$s</string>
     <string name="enough_contributions_descr">Поздравления, направили достатъчно приноси към OpenStreetMap и можете да се наслаждавате на неограничени актуализации на картата.</string>
-    <string name="not_enough_contributions_descr">Трябва да направите поне %1$s приноса към OpenStreetMap за последните %2$s дни.</string>
     <string name="shared_string_contributions">Принос</string>
     <string name="map_updates_are_unavailable_yet">Актуализациите на картата все още не са налични :-(</string>
     <string name="save_poi_too_many_uppercase">Името съдържа прекалено много главни букви. Продължаване \?</string>

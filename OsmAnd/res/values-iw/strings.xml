@@ -487,7 +487,7 @@
     <string name="reading_cached_tiles">האריחים שנשמרו נקראים…</string>
     <string name="version_index_is_big_for_memory">האינדקס „{0}“ גדול מדי לזיכרון</string>
     <string name="version_index_is_not_supported">גרסת האינדקס „{0}“ אינה נתמכת</string>
-    <string name="safe_mode_description">הפעלת היישום במצב בטוח (על ידי שימוש בקוד Android אטי יותר במקום בקוד טבעי).</string>
+    <string name="safe_mode_description">הפעלת היישומון במצב (אטי) בטוח.</string>
     <string name="safe_mode">מצב בטוח</string>
     <string name="native_library_not_running">היישום פועל כעת במצב בטוח (ניתן לכבות זאת ב‚הגדרות’).</string>
     <string name="background_service_is_enabled_question">שירות הרקע של OsmAnd עדיין פעיל. לעצור גם אותו?</string>
@@ -500,7 +500,7 @@
     <string name="build_installed">הבנייה {0} הותקנה ({1}).</string>
     <string name="downloading_build">הבנייה מתקבלת…</string>
     <string name="install_selected_build">להתקין את OsmAnd‏ - {0} מתוך {1}‏ {2} מ״ב ?</string>
-    <string name="loading_builds_failed">קבלת רשימת הבניות של OsmAnd נכשלה</string>
+    <string name="loading_builds_failed">לא ניתן לקבל את רשימת הבניות של OsmAnd</string>
     <string name="loading_builds">הבניות של OsmAnd נטענות…</string>
     <string name="select_build_to_install">יש לבחור בנייה של OsmAnd להתקנה</string>
     <string name="contribution_activity">התקנת הגרסה</string>
@@ -4260,7 +4260,6 @@
     <string name="online_maps_required_descr">לרוע המזל, OsmAnd לא הצליח למצוא מסלול להגדרות שלך.
 \n
 \nאולי חלק מהמפות לא נטענו, ניתן להריץ בדיקה מקוונת של המפות הנחוצות.</string>
-    <string name="not_enough_contributions_descr">נדרשות לפחות %1$s תרומות ל־OpenStreetMap תוך %2$s ימים.</string>
     <string name="grey_color_undefined">הצבע האפור משמש לחלקים ללא נתונים.</string>
     <string name="cancel_anytime_in_amazon_app">ניתן לבטל בכל עת דרך יישומון Amazon</string>
     <string name="amz_manage_subscription_descr">כדי לנהל את המינויים שלך עלי להשתמש ביישומון של Amazon במכשיר או לפתוח את האתר Amazon.com תחת הפרופיל שלך.</string>
@@ -4270,11 +4269,11 @@
     <string name="remove_group_from_markers">הסרת קבוצה מרשימת הסמנים</string>
     <string name="start_point">התחלה</string>
     <string name="mapillary_menu_filter_description_new">סינון תמונות לפי תאריך או לפי סוג. פעיל רק בתקריב קרוב.</string>
-    <string name="service_is_not_available_please_try_later">השירות אינו זמין, נא לנסות שוב בהמשך</string>
+    <string name="service_is_not_available_please_try_later">השירות אינו זמין. נא לנסות שוב בהמשך.</string>
     <string name="shared_string_files">קבצים</string>
     <string name="travel_route_types">סוגי מסלולים</string>
     <string name="no_items_of_type_message">אין לך פריטים מהסוג הזה</string>
-    <string name="routeInfo_roadClass_description">צביעת המסלול או מתאר הדרך בהתאם לסיווג הדרך.</string>
+    <string name="routeInfo_roadClass_description">צביעת המסלול או מתאר הדרך לפי סיווג הדרך.</string>
     <string name="sample_wikivoyage">דוגמה מוויקימסע</string>
     <string name="shared_string_mini">מוקטן</string>
     <string name="horseback_riding">רכיבה על סוסים</string>
@@ -4302,9 +4301,9 @@
     <string name="shared_storage_warning_title">שינוי בכללי הגישה לאחסון</string>
     <string name="shared_string_articles">ערכים</string>
     <string name="android_auto_map_placeholder_title">המפה מוצגת על המסך במכונית.</string>
-    <string name="continue_on_phone">להמשיך בטלפון</string>
+    <string name="continue_on_phone">להמשיך במכשיר הנייד</string>
     <string name="android_auto_purchase_request_title">יש לרכוש את OsmAnd Pro או את Maps+‎ כדי להשתמש ב־OsmAnd עם Android Auto</string>
-    <string name="location_access_request_title">ל־OsmAnd דרושה גישה למיקום לצורך ניווט</string>
+    <string name="location_access_request_title">ל־OsmAnd דרושה הרשאה למיקום כדי לנווט.</string>
     <string name="location_access_request_action">הענקת גישה</string>
     <string name="android_auto_map_placeholder_descr">נא לנתק את המכשיר שלך מ־Android Auto כדי לצפות במפה ביישומון.</string>
     <string name="location_access_request_result">אושר: %1$s נדחה: %2$s</string>
@@ -4320,14 +4319,12 @@
     <string name="routeInfo_surface_description">אספקת מידע נוסף על המשטח הפיזי של כבישים/דרכים.</string>
     <string name="exit_pan_mode_descr">יש ללחוץ על בחירה כדי לצאת ממצב הסריקה</string>
     <string name="purchases_feature_desc_android_auto">המפות הבלתי מקוונות של OsmAnd והניווט ישירות על מסך המכונית שלך. עם שילוב נוח בפקדי המכונית.</string>
-    <string name="clear_all_history_warning">לפנות את כל ההיסטוריה ביישומון\?
-\n
-\nהחיפוש, הניווט והיסטוריית הסמנים יימחקו.</string>
+    <string name="clear_all_history_warning">לפנות את כל ההיסטוריה ביישומון לרבות החיפוש, הניווט והיסטוריית הסמנים\?</string>
     <string name="icon_group_nautical">ימי</string>
     <string name="transparent_status_bar_descr">הצגת מפה מתחת לסרגל המצב</string>
     <string name="transparent_status_bar">סרגל מצב שקוף</string>
-    <string name="search_history_is_disabled_descr">אפשר להפעיל היסטוריית חיפוש בהגדרות</string>
-    <string name="markers_history_is_disabled_descr">הפעלת היסטוריה תאפשר לך לקבל רשימת סמני מפה שביקרת בהם.</string>
+    <string name="search_history_is_disabled_descr">אפשר להפעיל את היסטוריית החיפוש בהגדרות.</string>
+    <string name="markers_history_is_disabled_descr">יש להפעיל את ההיסטוריה כדי לזכור את רשימת סמני המפה שביקרת בהם.</string>
     <string name="travel_routes">מסלולי טיול</string>
     <string name="direct_line_maps_required_descr">חישוב המסלול אורך מעבר למתוכנן.
 \n
@@ -4346,11 +4343,10 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_description">צביעה לפי השתייכות לרשת.</string>
     <string name="display_route_tracks">הצגת מסלולים</string>
     <string name="walking_route_osmc_description">צביעת מסלולים לפי הצבע המקומי הייחודי שלהם (אם קיים ב־OpenStreetMap) וסוג (בינלאומי, אזורי, מקומי).</string>
-    <string name="rendering_attr_noNatureReserves_name">שמורת טבע</string>
-    <string name="rendering_attr_noNatureReserves_description">הסתרת שמורות טבע, אזורים מוגנים ופארקים לאומיים.</string>
+    <string name="rendering_attr_natureReserves_name">שמורת טבע</string>
     <string name="use_external_timestamps">שימוש בחותמות זמן חיצוניות</string>
     <string name="approx_safe_mode_description">ביצוע הערכת GPX באמצעות שיטה אטית של Android במקום בקוד מובנה.</string>
-    <string name="history_is_disabled_descr">יש להפעיל היסטוריה כדי לגשת לתוצאות בהן השתמשת לאחרונה מהר יותר.</string>
+    <string name="history_is_disabled_descr">יש להפעיל את ההיסטוריה כדי לגשת לתוצאות בהן השתמשת לאחרונה מהר יותר.</string>
     <string name="routes_color_by_type">צביעת מסלולים לפי…</string>
     <string name="explore_osmnad_plans_to_find_suitable">ניתן לחקור את התכניות של OsmAnd ולמצוא אחת שמתאימה לך.</string>
     <string name="purchases_feature_desc_pro_widgets">קבלת גישה לתכונות מקצועיות של OsmAnd: צביעת מסלולים ועוד.</string>
@@ -4359,4 +4355,71 @@
     <string name="quick_action_toggle_preference">מתג להחלפת מצב העדפה נבחר.</string>
     <string name="delete_history_items_descr">למחוק את פריטי ההיסטוריה הנבחרים\?</string>
     <string name="delete_history_items">למחוק %1$s פריטי היסטוריה\?</string>
+    <string name="copying_file">הקובץ %1$s מועתק</string>
+    <string name="progress_complete">%1$s הושלמו</string>
+    <string name="storage_copied_files_size">%1$s קבצים הועתקו %2$s</string>
+    <string name="storage_copying_files_size">%1$s קבצים מועתקים %2$s</string>
+    <string name="storage_found_files_size">%1$s קבצים נמצאו %2$s</string>
+    <string name="shared_storage_last_step">תהיה לך אפשרות לציין אחסון נתונים חדש לאחר בחירה באחסון משותף.</string>
+    <string name="shared_storage_third_step">יש להעניק הרשאת גישה לתיקייה. ללא ההרשאה הזאת ל־OsmAnd הרשאה להעתיק קבצים.</string>
+    <string name="shared_storage_first_step">יש ללחוץ על „%1$s”.
+\nמנהל הקבצים ייפתח איפה שעליך לאתר ולפתוח את תיקיית osmand.</string>
+    <string name="folder_access_denied">נדרשת הרשאה כדי לגשת לתיקייה הנבחרת.</string>
+    <string name="shared_string_copy_to">העתקה אל</string>
+    <string name="start_copying">התחלת העתקה</string>
+    <string name="shared_storage">אחסון משותף</string>
+    <string name="shared_storage_migration">המרת אחסון משותף</string>
+    <string name="shared_string_migration">המרה</string>
+    <string name="icon_group_industrial">תעשייתי</string>
+    <string name="icon_group_education">חינוכי</string>
+    <string name="files_remaining">קבצים שנותרו: %1$s %2$s</string>
+    <string name="shared_string_skip_warning">לדלג על ההמרה\? ל־OsmAnd אין עוד קשר לקבצים באחסון המשותף שלך.
+\n
+\nהיישומון ייפתח בתיקייה החדשה עם הנתונים שלך.</string>
+    <string name="from_to_with_params">מתוך %1$s אל %2$s</string>
+    <string name="shared_storage_second_step">יש ללחוץ על „להשתמש בתיקייה זו”.</string>
+    <string name="copying_completed">ההעתקה הושלמה</string>
+    <string name="skip_confirmation">כן, לדלג</string>
+    <string name="storage_found_files_descr">יש לגעת ב־„%1$s” כדי להעתיק %2$s קבצים מתוך „%3$s” אל „%4$s”. עשוי לארוך זמן מה.</string>
+    <string name="shared_storage_migration_descr">עקב שינויים בכללי הגישה לאחסון ב־Android, ל־OsmAnd אין עוד אפשרות להשתמש ב־%1$s.
+\n
+\nעליך להעתיק את כל הנתונים שלך למקום האחסון החדש.</string>
+    <string name="shared_storage_warning_description">עקב כללים חדשים ב־Android, החל מנובמבר 2021, OsmAnd בגרסה 4.2 יאבד את הגישה לאחסון המשותף.
+\n
+\nנא להעביר את תיקיית הנתונים מהתיקייה המשותפת לאחסון הזמין, אחרת היישומון יאבד כישה לכל הנתונים שלך כגון מפות בלתי מקוונות, מסלולי GPX וכו׳.</string>
+    <string name="release_4_1">• נוספה תמיכה ראשונית ב־Android Auto
+\n
+\n • עדכון מנשק משתמש לחיפוש נקודות ציון UTM
+\n
+\n • מועדפים: נוספה היכולת לצפות בסמלים בהם נעשה שימוש לאחרונה
+\n
+\n • תכנון מסלול: ישתמש בפרופיל הנבחר לאחר ההפעלה
+\n
+\n • תוקנה שכבת Mapillary התוסף מושבת כרגע כבררת מחדל
+\n
+\n • נוסף מסך לניהול כל היסטוריית היישומון
+\n
+\n • כיוון המפה לא מתאפס לאחר הפעלת היישומון מחדש.
+\n
+\n • עיבוד סמן הגובה SRTM השתפר
+\n
+\n • הכיתוב הערבי במפה השתפר
+\n
+\n • תוקנו מגוון תקלות ניווט
+\n
+\n</string>
+    <string name="app_modes_options">בחירת מצבי יישומון</string>
+    <string name="shared_string_memory">זיכרון</string>
+    <string name="reading_files">קבצים נקראים…</string>
+    <string name="memory_allocated_for_routing">זיכרון שמוקצה לניתוב</string>
+    <string name="no_items_selected_warning">נא לבחור לפחות פריט אחד</string>
+    <string name="shared_string_hide_all">להסתיר הכול</string>
+    <string name="purchases_feature_desc_hourly_map_updates">קבלת גישה לעדכוני מפה תכופים יותר. שעתיים, יומיים או שבועיים. עדכונים מתקבלים באופן מצטבר, רק לאזורים שהשתנו.</string>
+    <string name="migration_files_present">%1$d קבצים (%2$s) קיימים במיקום הנבחר ‚%3$s’.</string>
+    <string name="fold_unfold">קיפול/פריסה</string>
+    <string name="app_profile_type">סוג פרופיל יישומון</string>
+    <string name="add_to_group">הוספה לקבוצה</string>
+    <string name="display_groups_visibility_dialog_description">אפשר לשלוט בהצגת קבוצות על המפה. אם מסלול מוסתר, כל הקבוצות תוסתרנה אף הן.</string>
+    <string name="rendering_attr_natureReserves_description">הצגת שמורת טבע, אזורים מוגנים ופארקים לאומיים.</string>
+    <string name="map_marker_options">אפשרויות סמני מפה</string>
 </resources>

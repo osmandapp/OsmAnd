@@ -8,6 +8,7 @@ import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
@@ -933,7 +934,7 @@ public class MapMarkersHelper {
 			if (selectedGpxFile != null) {
 				boolean passedPoint = marker.wptPt.getExtensionsToWrite().containsKey(VISITED_DATE);
 				if (marker.history && !passedPoint) {
-					marker.wptPt.getExtensionsToWrite().put(VISITED_DATE, ItineraryDataHelper.formatTime(System.currentTimeMillis()));
+					marker.wptPt.getExtensionsToWrite().put(VISITED_DATE, GPXUtilities.formatTime(System.currentTimeMillis()));
 					gpxFiles.add(selectedGpxFile.getGpxFile());
 				} else if (!marker.history && passedPoint) {
 					marker.wptPt.getExtensionsToWrite().remove(VISITED_DATE);

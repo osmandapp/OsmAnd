@@ -32,21 +32,20 @@ public class ActiveDownloadsDialogFragment extends DialogFragment implements Dow
 		builder.setAdapter(adapter, null);
 		return builder.create();
 	}
-	
+
 	public void onUpdatedIndexesList() {
 		adapter.refreshAllData();
-	};
-	
+	}
+
 	@Override
 	public void downloadHasFinished() {
-		adapter.refreshAllData();		
+		adapter.refreshAllData();
 	}
-	
+
 	public void downloadInProgress() {
 		adapter.notifyDataSetChanged();
-	};
-	
-	
+	}
+
 	DownloadActivity getDownloadActivity() {
 		return (DownloadActivity) getActivity();
 	}
@@ -65,7 +64,7 @@ public class ActiveDownloadsDialogFragment extends DialogFragment implements Dow
 		public void refreshAllData() {
 			clear();
 			List<IndexItem> items = context.getDownloadThread().getCurrentDownloadingItems();
-			if(items.isEmpty()) {
+			if (items.isEmpty()) {
 				dlgFragment.dismissAllowingStateLoss();
 			}
 			for (IndexItem item : context.getDownloadThread().getCurrentDownloadingItems()) {
@@ -90,9 +89,5 @@ public class ActiveDownloadsDialogFragment extends DialogFragment implements Dow
 			viewHolder.bindDownloadItem(item);
 			return convertView;
 		}
-		
 	}
-
-	
-	
 }

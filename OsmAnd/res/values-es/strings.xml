@@ -4161,7 +4161,6 @@
     <string name="use_login_and_password">Usar nombre de usuario y contraseña</string>
     <string name="available_until">Disponible hasta el %1$s</string>
     <string name="enough_contributions_descr">¡Felicitaciones, has hecho suficientes contribuciones a OpenStreetMap y ahora puedes disfrutar de actualizaciones ilimitadas de los mapas de OsmAnd!</string>
-    <string name="not_enough_contributions_descr">Necesitas al menos %1$s contribuciones a OpenStreetMap dentro de los %2$s días.</string>
     <string name="shared_string_contributions">Contribuciones</string>
     <string name="contributions_may_calculate_with_delay">El cálculo de las contribuciones puede tomar varias horas.</string>
     <string name="map_updates_are_unavailable_yet">Las actualizaciones de mapas no están disponibles aún :-(</string>
@@ -4395,8 +4394,7 @@
     <string name="srtm_download_single_help_message">Marca la variante. Deberás volver a descargar el archivo para cambiar el formato.</string>
     <string name="srtm_download_list_help_message">OsmAnd proporciona datos de curvas de nivel en metros y pies. Deberás volver a descargar el archivo para cambiar el formato.</string>
     <string name="srtm_unit_format">Variante de unidad de las curvas de nivel</string>
-    <string name="rendering_attr_noNatureReserves_name">Reserva natural</string>
-    <string name="rendering_attr_noNatureReserves_description">Ocultar reservas naturales, áreas protegidas y parques nacionales.</string>
+    <string name="rendering_attr_natureReserves_name">Reserva natural</string>
     <string name="search_more">Buscar más…</string>
     <string name="purchases_feature_desc_unlimited_map_download">Obtén acceso sin conexión a descargas ilimitadas para todos los continentes y mapas de regiones.</string>
     <string name="shared_string_articles">Artículos</string>

@@ -2,6 +2,7 @@ package net.osmand.plus.helpers;
 
 import static net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import static net.osmand.plus.track.TrackMenuFragment.CURRENT_RECORDING;
+import static net.osmand.plus.track.TrackMenuFragment.OPEN_TAB_NAME;
 import static net.osmand.plus.track.TrackMenuFragment.RETURN_SCREEN_NAME;
 import static net.osmand.plus.track.TrackMenuFragment.TRACK_FILE_NAME;
 
@@ -265,8 +266,9 @@ public class IntentHelper {
 			if (intent.hasExtra(TrackMenuFragment.OPEN_TRACK_MENU)) {
 				String path = intent.getStringExtra(TRACK_FILE_NAME);
 				String name = intent.getStringExtra(RETURN_SCREEN_NAME);
+				String tabName = intent.getStringExtra(OPEN_TAB_NAME);
 				boolean currentRecording = intent.getBooleanExtra(CURRENT_RECORDING, false);
-				TrackMenuFragment.showInstance(mapActivity, path, currentRecording, name, null);
+				TrackMenuFragment.showInstance(mapActivity, path, currentRecording, name, null, tabName);
 				mapActivity.setIntent(null);
 			}
 			if (intent.getExtras() != null) {

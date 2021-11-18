@@ -373,6 +373,7 @@ public class FavouritesDbHelper {
 		} else {
 			point = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), specialType.getName(), specialType.getCategory());
 			point.setAddress(address);
+			point.setCreationDate(System.currentTimeMillis());
 			point.setTimestamp(pickupTimestamp);
 			point.setCalendarEvent(addToCalendar);
 			point.setIconId(specialType.getIconId(context));

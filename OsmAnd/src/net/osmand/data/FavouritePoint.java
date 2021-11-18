@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
@@ -20,7 +21,6 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.mapmarkers.ItineraryDataHelper;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.BooleanPreference;
@@ -185,7 +185,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	public void setIconIdFromName(String iconName) {
-		this.iconId = RenderingIcons.getBigIconId(iconName);
+		this.iconId = RenderingIcons.getBigIconResourceId(iconName);
 	}
 
 	public boolean isSpecialPoint() {
@@ -510,11 +510,11 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		}
 		if (pt.getExtensionsToWrite().containsKey(VISITED_DATE)) {
 			String time = pt.getExtensionsToWrite().get(VISITED_DATE);
-			fp.setVisitedDate(ItineraryDataHelper.parseTime(time));
+			fp.setVisitedDate(GPXUtilities.parseTime(time));
 		}
 		if (pt.getExtensionsToWrite().containsKey(CREATION_DATE)) {
 			String time = pt.getExtensionsToWrite().get(CREATION_DATE);
-			fp.setCreationDate(ItineraryDataHelper.parseTime(time));
+			fp.setCreationDate(GPXUtilities.parseTime(time));
 		}
 		if (pt.getExtensionsToWrite().containsKey(CALENDAR_EXTENSION)) {
 			String calendarEvent = pt.getExtensionsToWrite().get(CALENDAR_EXTENSION);
@@ -545,10 +545,10 @@ public class FavouritePoint implements Serializable, LocationPoint {
 			pt.getExtensionsToWrite().put(ADDRESS_EXTENSION, getAddress());
 		}
 		if (getVisitedDate() != 0) {
-			pt.getExtensionsToWrite().put(VISITED_DATE, ItineraryDataHelper.formatTime(getVisitedDate()));
+			pt.getExtensionsToWrite().put(VISITED_DATE, GPXUtilities.formatTime(getVisitedDate()));
 		}
 		if (getCreationDate() != 0) {
-			pt.getExtensionsToWrite().put(CREATION_DATE, ItineraryDataHelper.formatTime(getCreationDate()));
+			pt.getExtensionsToWrite().put(CREATION_DATE, GPXUtilities.formatTime(getCreationDate()));
 		}
 		if (getCalendarEvent()) {
 			pt.getExtensionsToWrite().put(CALENDAR_EXTENSION, "true");

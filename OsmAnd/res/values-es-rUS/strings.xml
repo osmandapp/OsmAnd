@@ -691,7 +691,7 @@
     <string name="search_villages_and_postcodes">Buscar más pueblos o códigos postales</string>
     <string name="rendering_attr_showRoadMaps_description">Elige cuando mostrar mapas viales:</string>
     <string name="rendering_attr_showRoadMaps_name">Mapas viales</string>
-    <string name="safe_mode_description">Ejecutar aplicación en modo seguro (usando código de Android, más lento, en vez del nativo).</string>
+    <string name="safe_mode_description">Ejecutar aplicación en modo seguro (más lento).</string>
     <string name="safe_mode">Modo seguro</string>
     <string name="native_library_not_running">Ejecutando aplicación en modo seguro (desactivar en «Ajustes»).</string>
     <string name="close_changeset">Cerrar conjunto de cambios</string>
@@ -1221,7 +1221,7 @@
     <string name="install_selected_build">¿Instalar OsmAnd {0}\?
 \nFecha: {1}
 \nTamaño: {2} MB</string>
-    <string name="loading_builds_failed">Error al recuperar la lista de compilaciones de OsmAnd</string>
+    <string name="loading_builds_failed">No se pudo obtener la lista de compilaciones de OsmAnd</string>
     <string name="loading_builds">Cargando compilaciones de OsmAnd…</string>
     <string name="select_build_to_install">Instalar compilación de OsmAnd</string>
     <string name="gps_status_app_not_found">La aplicación «GPS Status» no está instalada. ¿Buscar en la tienda de aplicaciones?</string>
@@ -1723,7 +1723,7 @@
     <string name="first_usage_item_description">Cómo descargar mapas, definir ajustes básicos.</string>
     <string name="navigation_item_description">Configuración de navegación.</string>
     <string name="faq_item">Preguntas Frecuentes</string>
-    <string name="faq_item_description">Preguntas Frecuentes</string>
+    <string name="faq_item_description">Preguntas frecuentes.</string>
     <string name="map_viewing_item">Vista del mapa</string>
     <string name="search_on_the_map_item">Búsqueda en el mapa</string>
     <string name="planning_trip_item">Planificación de viaje</string>
@@ -3118,7 +3118,7 @@
     <string name="get_discount_title">Obtén %1$d %2$s a %3$s de descuento.</string>
     <string name="get_discount_first_part">%1$s durante el primer %2$s</string>
     <string name="get_discount_first_few_part">%1$s durante el primer %2$s</string>
-    <string name="get_discount_second_part">luego %1$s</string>
+    <string name="get_discount_second_part">Luego %1$s</string>
     <string name="cancel_subscription">Cancelar suscripción</string>
     <string name="price_and_discount">%1$s • Ahorra %2$s</string>
     <string name="configure_profile_info">Ajustes para el perfil:</string>
@@ -3408,9 +3408,9 @@
     <string name="please_provide_profile_name_message">Proporciona un nombre para el perfil</string>
     <string name="open_settings">Abrir los ajustes</string>
     <string name="plugin_disabled">Complemento desactivado</string>
-    <string name="plugin_disabled_descr">Este complemento es una aplicación independiente, deberás quitarlo por separado si no piensas seguir usándolo.
+    <string name="plugin_disabled_descr">Este complemento es una aplicación independiente, desactivarlo no lo quita.
 \n
-\nEl complemento permanecerá en el dispositivo después de desinstalar OsmAnd.</string>
+\nPuede desinstalarse en los ajustes de aplicaciones de Android.</string>
     <string name="shared_string_menu">Menú</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s → %2$s → %3$s</string>
     <string name="shared_string_routing">Navegación</string>
@@ -4267,7 +4267,7 @@
     <string name="active_till">Activa hasta %1$s</string>
     <string name="promo_subscription">Suscripción promocional</string>
     <string name="track_has_no_needed_data">La traza no contiene los datos necesarios.</string>
-    <string name="option_available_only_in_osmand_pro">Opción disponible como parte de la suscripción a OsmAnd Pro.</string>
+    <string name="option_available_only_in_osmand_pro">Disponible como parte de la suscripción a OsmAnd Pro.</string>
     <string name="pro_widgets">Widgets avanzados</string>
     <string name="purchases_feature_desc_pro_widgets">Obtén acceso a las funciones de OsmAnd Pro: Coloración de rutas y más.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Explora los planes de OsmAnd para encontrar uno adecuado para ti.</string>
@@ -4292,39 +4292,38 @@
     <string name="backup_error_no_subscription">Sin suscripción válida</string>
     <string name="map_updates_for_mappers">Actualizaciones de mapas para cartógrafos</string>
     <string name="benefits_for_contributors">Beneficios para colaboradores activos de OSM</string>
-    <string name="benefits_for_contributors_primary_descr">Podrás beneficiarte de actualizaciones ilimitadas de los mapas cada hora si eres un colaborador activo de OpenStreetMap.org.</string>
+    <string name="benefits_for_contributors_primary_descr">Los colaboradores activos de OpenStreetMap.org pueden beneficiarse de actualizaciones ilimitadas de los mapas cada hora.</string>
     <string name="benefits_for_contributors_secondary_descr">Accede a OpenStreetMap para comprobar si tienes derecho a actualizaciones mensuales y horarias ilimitadas de los mapas.</string>
     <string name="use_login_and_password">Usar nombre de usuario y contraseña</string>
     <string name="available_until">Disponible hasta el %1$s</string>
     <string name="enough_contributions_descr">¡Felicitaciones, has hecho suficientes contribuciones a OpenStreetMap y ahora puedes disfrutar de actualizaciones ilimitadas de los mapas de OsmAnd!</string>
-    <string name="not_enough_contributions_descr">Necesitas al menos %1$s contribuciones a OpenStreetMap dentro de los %2$s días.</string>
     <string name="shared_string_contributions">Contribuciones</string>
     <string name="contributions_may_calculate_with_delay">El cálculo de las contribuciones puede tomar varias horas.</string>
     <string name="map_updates_are_unavailable_yet">Las actualizaciones de mapas no están disponibles aún :-(</string>
     <string name="connect_track_points_as">Conectar puntos de ruta</string>
     <string name="pro_features">Funciones «Pro»</string>
     <string name="purchases_restored">Compras restauradas</string>
-    <string name="grey_color_undefined">El color gris se usa para tramos sin datos.</string>
+    <string name="grey_color_undefined">Los tramos sin datos son grises.</string>
     <string name="osm_live_payment_subscription_management_amz">El pago se carga en la cuenta de Amazon al confirmar la compra.
 \n
 \nLa suscripción se renueva automáticamente a menos que se cancele antes de la fecha de renovación.
 \n
 \nGestiona o cancela las suscripciones cuando quieras, en los ajustes de Amazon.</string>
-    <string name="cancel_anytime_in_amazon_app">Se puede cancelar en cualquier momento en la aplicación de Amazon</string>
-    <string name="amz_manage_subscription_descr">Para gestionar la suscripción usa la aplicación de Amazon en el dispositivo o abre la página web de Amazon.com en tu perfil.</string>
+    <string name="cancel_anytime_in_amazon_app">Puede cancelarse en cualquier momento desde la aplicación de Amazon</string>
+    <string name="amz_manage_subscription_descr">Gestiona la suscripción usando la aplicación o página web de Amazon.</string>
     <string name="empty_category_name">Nombre de categoría vacío</string>
-    <string name="no_activity_for_intent">Sin aplicaciones adecuadas para realizar esta acción</string>
-    <string name="no_items_of_type_message">No existe ningún elemento de este tipo</string>
-    <string name="routeInfo_tracktype_description">Colorea la ruta o el trazado de la vía según el estado del camino en función de su composición superficial. Se aplica normalmente a las rutas en los que la red principal de caminos está formada por caminos sin pavimentar.</string>
-    <string name="routeInfo_winter_ice_road_description">Colorea la ruta o el trazado de la vía según la clasificación del camino, sólo utilizable durante el invierno.</string>
-    <string name="routeInfo_smoothness_description">Proporciona un esquema de clasificación con respecto a la usabilidad física de un camino para vehículos con ruedas, particularmente con respecto a la regularidad y planitud de la superficie.</string>
-    <string name="routeInfo_surface_description">Proporciona información adicional sobre la superficie física de los caminos y senderos.</string>
+    <string name="no_activity_for_intent">Instala una aplicación que pueda realizar esta acción.</string>
+    <string name="no_items_of_type_message">No existen elementos de este tipo</string>
+    <string name="routeInfo_tracktype_description">Colorea la ruta o el trazado de la vía por su composición superficial. Suele aplicarse cuando la red de caminos está en gran parte sin pavimentar.</string>
+    <string name="routeInfo_winter_ice_road_description">Colorea la ruta o el trazado de la vía según la clasificación del camino en invierno.</string>
+    <string name="routeInfo_smoothness_description">Clasificación con respecto a la usabilidad física de un camino para vehículos con ruedas, particularmente con respecto a la regularidad y planitud de la superficie.</string>
+    <string name="routeInfo_surface_description">Proporciona información sobre la superficie física de los caminos y senderos.</string>
     <string name="routeInfo_roadClass_description">Colorea la ruta o el trazado de la vía según la clasificación del camino.</string>
     <string name="add_group_to_markers">Añadir grupo a la lista de marcadores</string>
     <string name="remove_group_from_markers">Quitar grupo de la lista de marcadores</string>
     <string name="start_point">Iniciar</string>
     <string name="mapillary_menu_filter_description_new">Filtrar imágenes por fecha o tipo. Sólo activado en los primeros zums.</string>
-    <string name="service_is_not_available_please_try_later">Servicio no disponible, por favor intenta más tarde</string>
+    <string name="service_is_not_available_please_try_later">Servicio no disponible. Intenta más tarde.</string>
     <string name="shared_string_files">Archivos</string>
     <string name="travel_route_types">Tipos de rutas</string>
     <string name="sample_wikivoyage">Ejemplo de Wikiviajes</string>
@@ -4340,10 +4339,10 @@
     <string name="routing_attr_allow_gate_name">Permitir usar puertas</string>
     <string name="routing_attr_prefer_tactile_paving_description">Preferir el pavimento táctil</string>
     <string name="routing_attr_prefer_tactile_paving_name">Preferir pavimento táctil</string>
-    <string name="shared_app_storage_description">La memoria compartida ya no está disponible debido a los cambios en las reglas de acceso al almacenamiento en Android.</string>
+    <string name="shared_app_storage_description">La memoria compartida ya no está disponible debido al cambio en el acceso al almacenamiento de Android.</string>
     <string name="included_categories">Categorías incluidas</string>
-    <string name="internal_app_storage_description">Almacenamiento interno, oculto para el usuario y otras aplicaciones, por lo que nadie (excepto OsmAnd) puede acceder a los datos</string>
-    <string name="rendering_attr_noNatureReserves_name">Reserva natural</string>
+    <string name="internal_app_storage_description">Almacenamiento interno, oculto para todos los usuarios y otras aplicaciones, por lo que sólo OsmAnd puede acceder a los datos.</string>
+    <string name="rendering_attr_natureReserves_name">Reserva natural</string>
     <string name="release_4_1">• Se ha añadido la compatibilidad inicial con Android Auto
 \n
 \n• Actualización de la interfaz de usuario para la búsqueda de coordenadas UTM
@@ -4360,33 +4359,32 @@
 \n
 \n• Se ha mejorado la visualización del marcador SRTM de altura
 \n
-\n• Se ha corregido la visualización en árabe en el mapa
+\n• Se han corregido los subtítulos de los mapas en árabe
 \n
 \n• Se ha corregido diferentes problemas de navegación
 \n
 \n</string>
     <string name="shared_string_articles">Artículos</string>
     <string name="shared_string_details">Detalles</string>
-    <string name="rendering_attr_noNatureReserves_description">Ocultar reservas naturales, áreas protegidas y parques nacionales.</string>
     <string name="exit_pan_mode_descr">Pulsa «Elegir» para salir del modo panorámico</string>
     <string name="upload_gpx_description_hint">Al dejarlo vacío, serán utilizados los nombres de las trazas como descripción. La descripción ingresada se aplica a cada traza.</string>
     <string name="search_title">Buscar: %1$s</string>
     <string name="icon_group_nautical">Náutico</string>
     <string name="shared_storage_warning_title">Cambios en las normas de acceso al almacenamiento</string>
-    <string name="purchases_feature_desc_android_auto">OsmAnd: Mapas y navegación sin conexión, se integra cómodamente en la pantalla y controles del vehículo.</string>
+    <string name="purchases_feature_desc_android_auto">Transmite los mapas y navegación sin conexión de OsmAnd en la pantalla del vehículo y se integra con los controles del mismo.</string>
     <string name="android_auto_map_placeholder_descr">Desconecta el dispositivo de Android Auto para ver el mapa en la aplicación.</string>
     <string name="android_auto_map_placeholder_title">El mapa se muestra en la pantalla del vehículo.</string>
     <string name="android_auto_purchase_request_title">Comprar «OsmAnd Pro» o «Maps+» para usar OsmAnd con Android Auto</string>
-    <string name="continue_on_phone">Continuar en el teléfono</string>
+    <string name="continue_on_phone">Continuar en el dispositivo móvil</string>
     <string name="location_access_request_action">Dar acceso</string>
     <string name="location_access_request_result">Aprobado: %1$s Rechazado: %2$s</string>
-    <string name="location_access_request_title">OsmAnd debe acceder a la ubicación para poder navegar</string>
-    <string name="shared_storage_warning_description">A partir de noviembre de 2021, OsmAnd 4.2 perderá el acceso al almacenamiento compartido, debido al cambio en las reglas de acceso al almacenamiento en Android.
+    <string name="location_access_request_title">OsmAnd debe acceder a la ubicación para poder navegar.</string>
+    <string name="shared_storage_warning_description">Debido a las nuevas reglas de Android, a partir de noviembre de 2021, OsmAnd 4.2 perderá el acceso al almacenamiento compartido.
 \n
-\nPor favor, cambia el modo de almacenamiento de «Almacenamiento compartido» a «Almacenamiento disponible», si esto no se hace la aplicación perderá el acceso a los datos: incluyendo los mapas sin conexión, las trazas GPX y todo lo demás.</string>
+\nPor favor, mueva la carpeta de datos del almacenamiento compartido al almacenamiento disponible, de lo contrario la aplicación perderá el acceso a los datos como mapas sin conexión, trazas GPX y etc.</string>
     <string name="history_is_disabled_descr">Activa el historial para acceder más rápido a los últimos resultados.</string>
-    <string name="search_history_is_disabled_descr">Puedes activar el historial de búsqueda en los ajustes</string>
-    <string name="markers_history_is_disabled_descr">Activar el historial para obtener la lista de marcadores de mapa visitados.</string>
+    <string name="search_history_is_disabled_descr">Puedes activar el historial de búsqueda en los ajustes.</string>
+    <string name="markers_history_is_disabled_descr">Activa el historial para recordar una lista de los marcadores de mapa visitados.</string>
     <string name="map_markers_history">Historial de los marcadores del mapa</string>
     <string name="transparent_status_bar_descr">Mostrar mapa debajo de la barra de estado</string>
     <string name="history_actions_descr">Puedes exportar el historial a un archivo.</string>
@@ -4395,11 +4393,21 @@
     <string name="shortcut_start_recording">Iniciar grabación</string>
     <string name="navigation_history">Historial de navegación</string>
     <string name="clear_all_history">Vaciar todo el historial</string>
-    <string name="shortcut_navigate_to_work">Ir al trabajo</string>
-    <string name="shortcut_navigate_to_home">Ir a casa</string>
+    <string name="shortcut_navigate_to_work">Ir a «Trabajo»</string>
+    <string name="shortcut_navigate_to_home">Ir a «Casa»</string>
     <string name="transparent_status_bar">Barra de estado transparente</string>
     <string name="is_disabled">%1$s desactivado</string>
-    <string name="clear_all_history_warning">¿Borrar todo el historial de la aplicación\?
-\n
-\nEl historial de búsqueda, navegación y marcadores serán vaciados.</string>
+    <string name="clear_all_history_warning">¿Borrar todos los registros del historial de la aplicación, incluyendo el historial de búsqueda, navegación y marcadores\?</string>
+    <string name="delete_history_items_descr">¿Borrar los elementos marcados en el historial\?</string>
+    <string name="delete_history_items">¿Borrar %1$s elementos del historial\?</string>
+    <string name="quick_action_toggle_preference">Un interruptor para alterna el estado de las preferencias.</string>
+    <string name="display_route_tracks_as_poi">Mostrar trazas como PDI</string>
+    <string name="safe_settings">Modo seguro</string>
+    <string name="approx_safe_mode">Aproximación segura de GPX</string>
+    <string name="approx_safe_mode_description">Realiza una aproximación GPX usando un Android más lento en lugar del código nativo.</string>
+    <string name="use_external_timestamps">Usar marcas de tiempo externas</string>
+    <string name="use_external_timestamps_description">Usa las marcas de tiempo del navegador en línea para ajustar el tiempo estimado y la velocidad media</string>
+    <string name="no_plugins_enabled">No tienes ningún complemento activado. Puedes encontrar una lista de los complementos disponibles en «Menú → Complementos».</string>
+    <string name="display_route_tracks">Mostrar trazas</string>
+    <string name="shared_string_travelbooks">Libro de viajes</string>
 </resources>

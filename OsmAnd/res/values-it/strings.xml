@@ -487,8 +487,8 @@
     <string name="choose_intersected_street">Scegli incrocio</string>
     <string name="Closest_Amenities">Amenità più vicine</string>
     <string name="app_mode_default">Scorri la mappa</string>
-    <string name="app_mode_car">Alla guida</string>
-    <string name="app_mode_bicycle">In bicicletta</string>
+    <string name="app_mode_car">Automobile</string>
+    <string name="app_mode_bicycle">Bicicletta</string>
     <string name="app_mode_pedestrian">A piedi</string>
     <string name="position_on_map_center">Al centro</string>
     <string name="position_on_map_bottom">In basso</string>
@@ -2210,9 +2210,9 @@
     <string name="subscribe_email_error">Errore</string>
     <string name="subscribe_email_desc">Sottoscrivi la mailing list delle offerte dell\'applicazione e otterrai ulteriori 3 download di mappe!</string>
     <string name="quick_action_auto_zoom">Zoom della mappa automatico acceso/spento</string>
-    <string name="quick_action_auto_zoom_desc">Toccando il pulsante azione si accende o spegne lo zoom automatico della mappa in base alla tua velocità.</string>
-    <string name="quick_action_auto_zoom_on">Abilita lo zoom automatico della mappa</string>
-    <string name="quick_action_auto_zoom_off">Disattiva lo zoom automatico della mappa</string>
+    <string name="quick_action_auto_zoom_desc">Toccando il pulsante azione si accende o spegne lo zoom automatico in base alla velocità.</string>
+    <string name="quick_action_auto_zoom_on">Abilita lo zoom automatico</string>
+    <string name="quick_action_auto_zoom_off">Disattiva lo zoom automatico</string>
     <string name="quick_action_add_destination">Imposta destinazione</string>
     <string name="quick_action_replace_destination">Sostituisci la destinazione</string>
     <string name="quick_action_add_first_intermediate">Aggiungi il primo intermedio</string>
@@ -3290,7 +3290,7 @@
     <string name="edit_profiles">Modifica i profili</string>
     <string name="profile_appearance">Aspetto del profilo</string>
     <string name="choose_icon_color_name">Icona, colore e nome</string>
-    <string name="reorder_profiles">Modifica la lista del profilo</string>
+    <string name="reorder_profiles">Modifica la lista dei profili</string>
     <string name="selected_profile">Profilo selezionato</string>
     <string name="reset_confirmation_descr">Cliccando %1$s, tutte le modifiche andranno perse.</string>
     <string name="reset_all_profile_settings_descr">Tutte le impostazioni del profilo saranno reimpostate come da prima installazione.</string>
@@ -3973,8 +3973,8 @@
     <string name="select_segments">Seleziona segmenti</string>
     <string name="select_segments_description">%1$s contiene più di un segmento, è necessario selezionare la parte da navigare.</string>
     <string name="segments_count">Segmento %1$d</string>
-    <string name="activity_type_water_name">Water</string>
-    <string name="activity_type_winter_name">Winter</string>
+    <string name="activity_type_water_name">Acquatici</string>
+    <string name="activity_type_winter_name">Invernale</string>
     <string name="activity_type_snowmobile_name">Gatto delle nevi</string>
     <string name="activity_type_riding_name">Riding</string>
     <string name="activity_type_racing_name">Corse</string>
@@ -4167,7 +4167,6 @@
 \nAlcune mappe potrebbero non essere state caricate.</string>
     <string name="benefits_for_contributors">Benefici per i contributori OSM attivi</string>
     <string name="enough_contributions_descr">Congratulazioni, hai contributo a OpensStreetMap a sufficienza per godere degli aggiornamenti illimitati delle mappe OsmAnd!</string>
-    <string name="not_enough_contributions_descr">Sono richiesti almeno %1$s contributi a OpenStreetMap negli ultimi %2$s giorni.</string>
     <string name="contributions_may_calculate_with_delay">L\'elaborazione dei contributi può richiedere diverse ore.</string>
     <string name="shared_string_includes">Include</string>
     <string name="complete_purchase">Completa l\'acquisto</string>
@@ -4294,7 +4293,7 @@
     <string name="cancel_anytime_in_huawei_appgallery">Cancellalo in ogni momento in Huawei AppGallery</string>
     <string name="cancel_anytime_in_gplay">Cancellalo in ogni momento in Google Play.</string>
     <string name="shared_string_not_included">Non include</string>
-    <string name="amz_manage_subscription_descr">Per gestire la tua sottoscrizione usa l\'app Amazon dal dispositivo o il tuo profilo nel sito Amazon.com.</string>
+    <string name="amz_manage_subscription_descr">Gestisci la tua sottoscrizione usando l\'app Amazon o dal sito Amazon.com.</string>
     <string name="no_activity_for_intent">Installa una applicazione che possa completare l\'azione.</string>
     <string name="grey_color_undefined">Il grigio è utilizzato per le parti in cui non sono presenti dati.</string>
     <string name="osm_live_payment_subscription_management_amz">Il pagamento viene addebitato sul tuo account Amazon alla conferma dell\'acquisto.
@@ -4335,8 +4334,7 @@
     <string name="routing_attr_prefer_horse_routes_description">Preferisci i percorsi per cavalli</string>
     <string name="shared_app_storage_description">La memoria condivisa non è più disponibile a causa delle modifiche alle regole di accesso all\'archiviazione in Android.</string>
     <string name="internal_app_storage_description">Memorizzazione interna, nascosto all\'utilizzatore e alle altre app, così solo OsmAnd può accedere ai tuoi dati.</string>
-    <string name="rendering_attr_noNatureReserves_name">Riserva naturale</string>
-    <string name="rendering_attr_noNatureReserves_description">Nascondi riserve naturali, aree protette e parchi nazionali.</string>
+    <string name="rendering_attr_natureReserves_name">Riserva naturale</string>
     <string name="shared_string_details">Dettagli</string>
     <string name="shared_string_articles">Articoli</string>
     <string name="included_categories">Categorie incluse</string>
@@ -4367,12 +4365,12 @@
     <string name="navigation_history">Cronologia di navigazione</string>
     <string name="shortcut_start_recording">Avvia registrazione</string>
     <string name="shortcut_navigate_to">Naviga verso…</string>
-    <string name="shortcut_navigate_to_home">Naviga fino a casa</string>
+    <string name="shortcut_navigate_to_home">Naviga fino a \'Casa\'</string>
     <string name="android_auto_map_placeholder_descr">Scollega il tuo dispositivo da Android Auto per visualizzare la mappa nell\'app.</string>
     <string name="android_auto_purchase_request_title">Acquista OsmAnd Pro o Maps+ per utilizzare OsmAnd con Android Auto</string>
-    <string name="continue_on_phone">Prosegui sul telefono</string>
+    <string name="continue_on_phone">Prosegui sul dispositivo mobile</string>
     <string name="location_access_request_title">Per navigare OsmAnd ha bisogno di accedere alla localizzazione.</string>
-    <string name="location_access_request_action">Dai il permesso</string>
+    <string name="location_access_request_action">Concedi il permesso</string>
     <string name="transparent_status_bar">Barra di stato trasparente</string>
     <string name="map_markers_history">Cronologia dei marcatori della mappa</string>
     <string name="search_history_is_disabled_descr">Puoi abilitare la ricerca nella cronologia dalle Impostazioni.</string>
@@ -4382,15 +4380,68 @@
     <string name="location_access_request_result">Approvati: %1$s Rifiutati: %2$s</string>
     <string name="transparent_status_bar_descr">Mostra la mappa sotto la barra di stato</string>
     <string name="history_preferences_descr">Puoi disabilitare la registrazione della cronologia singolarmente per ogni tipo di cronologia.</string>
-    <string name="shortcut_navigate_to_work">Naviga fino al lavoro</string>
+    <string name="shortcut_navigate_to_work">Naviga fino al \'Lavoro\'</string>
     <string name="android_auto_map_placeholder_title">La mappa è visualizzata nello schermo del veicolo.</string>
     <string name="display_route_tracks">Mostra tracce</string>
     <string name="shared_string_travelbooks">Guide di viaggio</string>
     <string name="display_route_tracks_as_poi">Visualizza le tracce come PDI</string>
     <string name="safe_settings">Sicuro</string>
     <string name="approx_safe_mode">Approssimazione gpx sicura</string>
-    <string name="approx_safe_mode_description">Approssima i gpx utilizzando il codice Android invece del codice nativo.</string>
+    <string name="approx_safe_mode_description">Approssima i gpx utilizzando il più lento codice Android invece del nativo.</string>
     <string name="use_external_timestamps">Utilizza le marche temporali esterne</string>
     <string name="use_external_timestamps_description">Utilizza le marche temporali del navigatore online per correggere il tempo stimato e la velocità media</string>
-    <string name="no_plugins_enabled">Non hai alcun componente aggiuntivo abilitato. Puoi vedere la lista dei componenti aggiuntivi nel Menu - Componenti aggiuntivi.</string>
+    <string name="no_plugins_enabled">Non hai alcun componente aggiuntivo abilitato. Puoi vedere la lista dei componenti aggiuntivi nel \'Menu\' → \'Componenti aggiuntivi\'.</string>
+    <string name="delete_history_items_descr">Sei sicuro di voler eliminare gli elementi della cronologia selezionati\?</string>
+    <string name="delete_history_items">Eliminare gli elementi della cronologia %1$s\?</string>
+    <string name="quick_action_toggle_preference">Un cursore per cambiare lo stato delle preferenze selezionate.</string>
+    <string name="shared_storage_warning_description">A causa delle nuove regole Android da novembre 2021 OsmAnd 4.2 perderà l\'accesso alla memoria condivisa.
+\n
+\nSposta i dati dalla Memoria condivisa alla memoria disponibile oppure l\'app perderà l\'accesso a dati quali mappe offline, tracce GPX, ecc.</string>
+    <string name="horseback_riding">A cavallo</string>
+    <string name="copying_file">Copia dei file %1$s</string>
+    <string name="storage_copied_files_size">Copiati %1$s file %2$s</string>
+    <string name="storage_copying_files_size">In copia %1$s file %2$s</string>
+    <string name="storage_found_files_size">Trovati %1$s file %2$s</string>
+    <string name="shared_storage_last_step">Puoi specificare una nuova archiviazione dei dati dopo aver scelto Archivio condiviso.</string>
+    <string name="shared_storage_migration_descr">A causa dei cambiamenti alle regole Android di accesso alla memoria, OsmAnd non può più utilizzare %1$s.
+\n
+\nDevi copiare tutti i tuoi dati nella nuova posizione di memorizzazione.</string>
+    <string name="shared_storage_second_step">Tocca \"Usa questa cartella\".</string>
+    <string name="folder_access_denied">È richiesto il permesso per accedere alla cartella selezionata.</string>
+    <string name="copying_completed">Copia completa</string>
+    <string name="shared_string_copy_to">Copia in</string>
+    <string name="start_copying">Copia iniziata</string>
+    <string name="skip_confirmation">Si, salta</string>
+    <string name="shared_storage_migration">Migrazione memoria condivisa</string>
+    <string name="shared_string_migration">Migrazione</string>
+    <string name="icon_group_education">Istruzione</string>
+    <string name="icon_group_industrial">Industriale</string>
+    <string name="rendering_attr_natureReserves_description">Mostra riserve naturali, aree protette e parchi naturali.</string>
+    <string name="shared_storage_third_step">concedi il permesso di accedere alla cartella. Senza il permesso OsmAnd non può copiare i file.</string>
+    <string name="files_remaining">File rimanenti: %1$s %2$s</string>
+    <string name="from_to_with_params">Da %1$s a %2$s</string>
+    <string name="progress_complete">%1$s completato</string>
+    <string name="storage_found_files_descr">Tocca “%1$s” per copiare %2$s file da “%3$s” a “%4$s”. Potrebbe richiedere tempo.</string>
+    <string name="shared_string_skip_warning">Sei sicuro di voler saltare la migrazione\? OsmAnd non ha più accesso ai tuoi file nell\'archiviazione condivisa.
+\n
+\nL\'applicazione partirà dalla nuova cartella con i tuoi dati.</string>
+    <string name="shared_storage">Memorizzazione condivisa</string>
+    <string name="shared_storage_first_step">Premi \"%1$s\".
+\nIl gestore di file apre dove necessito di cercare e apre la cartella OsmAnd.</string>
+    <string name="show_parameter_seekbar">Mostra la barra di ricerca dei parametri</string>
+    <string name="sample_wikivoyage">Esempio Wikivoyage</string>
+    <string name="fold_unfold">compatta/espandi</string>
+    <string name="app_profile_type">Tipo profilo app</string>
+    <string name="map_marker_options">Opzioni marcatori mappa</string>
+    <string name="add_to_group">Aggiungi al gruppo</string>
+    <string name="app_modes_options">Scegli le modalità dell\'app</string>
+    <string name="shared_string_memory">Memoria</string>
+    <string name="memory_allocated_for_routing_ds">Valori di memoria alti velocizzano il calcolo dei lunghi percorsi (sopra i 500 km), ma può impattare sulle prestazioni delle altre applicazioni.
+\nNon influenza la velocità dei percorsi brevi.</string>
+    <string name="memory_allocated_for_routing">Memoria allocata per il Calcolo del percorso</string>
+    <string name="reading_files">Lettura file…</string>
+    <string name="no_items_selected_warning">Seleziona almeno un oggetto</string>
+    <string name="display_groups_visibility_dialog_description">Puoi gestire la visibilità dei gruppi nella mappa. Se la traccia è nascosta anche tutti i gruppi lo saranno.</string>
+    <string name="shared_string_hide_all">Nascondi tutto</string>
+    <string name="migration_files_present">%1$d file (%2$s) sono presenti nella posizione selezionata \'%3$s\'.</string>
 </resources>

@@ -7,6 +7,7 @@ import static net.osmand.search.core.ObjectType.SEARCH_STARTED;
 import static net.osmand.search.core.SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
@@ -191,6 +192,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private boolean foundPartialLocation;
 	private String toolbarTitle;
 	private boolean toolbarVisible;
+	private boolean tabBarHidden;
 
 	private boolean newSearch;
 	private boolean interruptedSearch;
@@ -478,16 +480,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		Drawable icBack = iconsCache.getThemedIcon(AndroidUtils.getNavigationIconResId(app));
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setNavigationOnClickListener(
-				new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (!processBackAction()) {
-							dismiss();
-						}
-					}
-				}
-		);
+		toolbar.setNavigationOnClickListener(v -> onBackButtonPressed());
 
 		toolbarEdit = (Toolbar) view.findViewById(R.id.toolbar_edit);
 		toolbarEdit.setNavigationIcon(iconsCache.getIcon(R.drawable.ic_action_remove_dark));
@@ -609,7 +602,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						updateClearButtonAndHint();
 						updateClearButtonVisibility(true);
 						boolean textEmpty = newQueryText.length() == 0;
-						updateTabbarVisibility(textEmpty && !isOnlineSearch());
+						updateTabBarVisibility(textEmpty && !isOnlineSearch());
 						updateSendEmptySearchBottomBar(false);
 						if (textEmpty) {
 							if (addressSearch) {
@@ -728,15 +721,28 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		Dialog dialog = new Dialog(getActivity(), getTheme()) {
 			@Override
 			public void onBackPressed() {
-				if (!processBackAction()) {
-					cancel();
-				}
+				onBackButtonPressed();
 			}
 		};
 		if (!getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
 			dialog.getWindow().getAttributes().windowAnimations = R.style.Animations_Alpha;
 		}
 		return dialog;
+	}
+
+	private void onBackButtonPressed() {
+		if (tabBarHidden) {
+			Activity activity = getActivity();
+			if (activity != null) {
+				AndroidUtils.hideSoftKeyboard(activity, searchEditText);
+			}
+			updateTabBarVisibility(true);
+		} else if (!processBackAction()) {
+			Dialog dialog = getDialog();
+			if (dialog != null) {
+				dialog.cancel();
+			}
+		}
 	}
 
 	public void saveCustomFilter() {
@@ -1128,7 +1134,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
-	private void updateTabbarVisibility(boolean show) {
+	private void updateTabBarVisibility(boolean show) {
+		tabBarHidden = !show;
 		if (show) {
 			tabToolbarView.setVisibility(View.VISIBLE);
 			buttonToolbarView.setVisibility(View.GONE);
@@ -1259,7 +1266,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						}
 						startOnlineSearch();
 						mainSearchFragment.getAdapter().clear();
-						updateTabbarVisibility(false);
+						updateTabBarVisibility(false);
 						openKeyboard();
 					}
 				}));
@@ -1487,7 +1494,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			public void onClick(View v) {
 				searchEditText.setHint(R.string.type_city_town);
 				startCitySearch();
-				updateTabbarVisibility(false);
+				updateTabBarVisibility(false);
 				runCoreSearch("", false, false);
 				openKeyboard();
 			}
@@ -1499,7 +1506,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				searchEditText.setHint(R.string.type_postcode);
 				startPostcodeSearch();
 				mainSearchFragment.getAdapter().clear();
-				updateTabbarVisibility(false);
+				updateTabBarVisibility(false);
 				openKeyboard();
 			}
 		}));
@@ -2058,7 +2065,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							}
 							startOnlineSearch();
 							mainSearchFragment.getAdapter().clear();
-							updateTabbarVisibility(false);
+							updateTabBarVisibility(false);
 							runCoreSearch(searchQuery, false, true);
 						}
 					});

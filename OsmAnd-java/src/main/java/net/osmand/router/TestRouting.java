@@ -1,6 +1,18 @@
 package net.osmand.router;
 
 
+import net.osmand.NativeLibrary;
+import net.osmand.PlatformUtil;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.LatLon;
+import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
+import net.osmand.router.BinaryRoutePlanner.RouteSegment;
+import net.osmand.router.RoutingConfiguration.Builder;
+import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,21 +23,11 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.osmand.NativeLibrary;
-import net.osmand.PlatformUtil;
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.data.LatLon;
-import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
-import net.osmand.router.BinaryRoutePlanner.RouteSegment;
-import net.osmand.router.RoutingConfiguration.Builder;
-
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-
 public class TestRouting {
 	
 	public static int MEMORY_TEST_LIMIT = 800;
-	public static boolean TEST_WO_HEURISTIC = false; 
+	public static int NATIVE_MEMORY_TEST_LIMIT = 256;
+	public static boolean TEST_WO_HEURISTIC = false;
 	public static boolean TEST_BOTH_DIRECTION = false;
 	public static NativeLibrary lib = null;
 	private static String vehicle = "car";
@@ -201,7 +203,8 @@ public class TestRouting {
 			System.err.println("\n\n!! Skipped test case '" + testDescription + "' because 'best_percent' attribute is not specified \n\n" );
 			return;
 		}
-		RoutingConfiguration rconfig = config.build(vehicle, MEMORY_TEST_LIMIT);
+		RoutingMemoryLimits memoryLimits = new RoutingMemoryLimits(MEMORY_TEST_LIMIT, NATIVE_MEMORY_TEST_LIMIT);
+		RoutingConfiguration rconfig = config.build(vehicle, memoryLimits);
 		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd();
 		RoutingContext ctx = router.buildRoutingContext(rconfig, 
 				lib, rs);
@@ -306,7 +309,8 @@ public class TestRouting {
 			throws IOException, InterruptedException {
 		long ts = System.currentTimeMillis();
 		Builder config = RoutingConfiguration.getDefault();
-		RoutingConfiguration rconfig = config.build(vehicle, MEMORY_TEST_LIMIT);
+		RoutingMemoryLimits memoryLimits = new RoutingMemoryLimits(MEMORY_TEST_LIMIT, NATIVE_MEMORY_TEST_LIMIT);
+		RoutingConfiguration rconfig = config.build(vehicle, memoryLimits);
 		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd();
 		RoutingContext ctx = router.buildRoutingContext(rconfig, lib, rs);
 		RouteSegment startSegment = router.findRouteSegment(startLat, startLon, ctx, null);

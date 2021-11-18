@@ -1,5 +1,14 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.COMPASS_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.LAYERS_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MENU_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.QUICK_SEARCH_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTE_PLANNING_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
+
 import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -69,6 +78,7 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.MapActions;
+import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -84,15 +94,6 @@ import java.util.Set;
 
 import gnu.trove.list.array.TIntArrayList;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.COMPASS_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.LAYERS_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MENU_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.QUICK_SEARCH_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTE_PLANNING_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
-
 public class MapControlsLayer extends OsmandMapLayer {
 
 	private static final int TIMEOUT_TO_SHOW_BUTTONS = 7000;
@@ -106,9 +107,16 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private List<MapHudButton> controls = new ArrayList<>();
 
-	private Slider transparencySlider;
 	private LinearLayout transparencyBarLayout;
+	private Slider transparencySlider;
 	private static CommonPreference<Integer> transparencySetting;
+
+	private LinearLayout parameterBarLayout;
+	private Slider parameterSlider;
+	private static CommonPreference<Float> parameterMinSetting;
+	private static CommonPreference<Float> parameterMaxSetting;
+	private static CommonPreference<Float> parameterStepSetting;
+	private static CommonPreference<Float> parameterValueSetting;
 
 	private MapRouteInfoMenu mapRouteInfoMenu;
 	private MapHudButton backToLocationControl;
@@ -159,6 +167,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 			controls = new ArrayList<>();
 			transparencySlider = null;
 			transparencyBarLayout = null;
+			parameterSlider = null;
+			parameterBarLayout = null;
 			mapRouteInfoMenu = null;
 			backToLocationControl = null;
 			menuControl = null;
@@ -1017,6 +1027,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		MapActivity mapActivity = requireMapActivity();
 		transparencyBarLayout = mapActivity.findViewById(R.id.map_transparency_layout);
 		transparencySlider = mapActivity.findViewById(R.id.map_transparency_slider);
+		parameterBarLayout = mapActivity.findViewById(R.id.layer_param_layout);
+		parameterSlider = mapActivity.findViewById(R.id.layer_param_slider);
 		transparencySlider.setValueTo(255);
 		if (transparencySetting != null) {
 			transparencySlider.setValue(transparencySetting.get());
@@ -1030,11 +1042,39 @@ public class MapControlsLayer extends OsmandMapLayer {
 				mapActivity.refreshMap();
 			}
 		});
+		boolean showParameterSlider = false;
+		if (parameterMinSetting != null && parameterMaxSetting != null
+				&& parameterStepSetting != null && parameterValueSetting != null) {
+			float paramMin = parameterMinSetting.get();
+			float paramMax = parameterMaxSetting.get();
+			float paramStep = parameterStepSetting.get();
+			float paramValue = parameterValueSetting.get();
+			if (paramMin < paramMax && paramStep < Math.abs(paramMax - paramMin) && paramStep > 0
+					&& paramValue >= paramMin && paramValue <= paramMax) {
+				parameterSlider.setValueFrom(paramMin);
+				parameterSlider.setValueTo(paramMax);
+				parameterSlider.setStepSize(paramStep);
+				parameterSlider.setValue(paramValue);
+				showParameterSlider = true;
+			}
+		}
+		parameterSlider.addOnChangeListener((slider, value, fromUser) -> {
+			if (parameterValueSetting != null) {
+				parameterValueSetting.set(value);
+				mapActivity.refreshMap();
+			}
+		});
 
 		LayerTransparencySeekbarMode seekbarMode = settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
 		if (OsmandPlugin.isActive(OsmandRasterMapsPlugin.class)) {
 			if (seekbarMode == LayerTransparencySeekbarMode.OVERLAY && settings.MAP_OVERLAY.get() != null) {
-				showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY);
+				if (showParameterSlider) {
+					hideTransparencyBar();
+					parameterBarLayout.setVisibility(View.VISIBLE);
+					updateParameterSliderUi();
+				} else {
+					showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY);
+				}
 			} else if (seekbarMode == LayerTransparencySeekbarMode.UNDERLAY && settings.MAP_UNDERLAY.get() != null) {
 				showTransparencyBar(settings.MAP_TRANSPARENCY);
 			}
@@ -1053,9 +1093,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	public void showTransparencyBar(@NonNull CommonPreference<Integer> transparentPreference) {
-		if (MapControlsLayer.transparencySetting != transparentPreference) {
-			MapControlsLayer.transparencySetting = transparentPreference;
-		}
+		hideParameterBar();
+		transparencySetting = transparentPreference;
 		transparencyBarLayout.setVisibility(View.VISIBLE);
 		transparencySlider.setValue(transparentPreference.get());
 		updateTransparencySliderUi();
@@ -1071,6 +1110,49 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void hideTransparencyBar() {
 		transparencyBarLayout.setVisibility(View.GONE);
 		transparencySetting = null;
+	}
+
+	public void showParameterBar(@NonNull MapTileLayer layer) {
+		CommonPreference<Float> paramMinPref = layer.getParamMinPref();
+		CommonPreference<Float> paramMaxPref = layer.getParamMaxPref();
+		CommonPreference<Float> paramStepPref = layer.getParamStepPref();
+		CommonPreference<Float> paramValuePref = layer.getParamValuePref();
+		parameterMinSetting = paramMinPref;
+		parameterMaxSetting = paramMaxPref;
+		parameterStepSetting = paramStepPref;
+		parameterValueSetting = paramValuePref;
+		if (paramMinPref != null && paramMaxPref != null && paramStepPref != null && paramValuePref != null) {
+			float paramMin = paramMinPref.get();
+			float paramMax = paramMaxPref.get();
+			float paramStep = paramStepPref.get();
+			float paramValue = paramValuePref.get();
+			if (paramMin < paramMax && paramStep < Math.abs(paramMax - paramMin) && paramStep > 0
+					&& paramValue >= paramMin && paramValue <= paramMax) {
+				hideTransparencyBar();
+				parameterBarLayout.setVisibility(View.VISIBLE);
+				parameterSlider.setValueFrom(paramMin);
+				parameterSlider.setValueTo(paramMax);
+				parameterSlider.setStepSize(paramStep);
+				parameterSlider.setValue(paramValue);
+				updateParameterSliderUi();
+				layer.setupParameterListener();
+			}
+		}
+	}
+
+	private void updateParameterSliderUi() {
+		ApplicationMode appMode = app.getSettings().getApplicationMode();
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		int selectedModeColor = appMode.getProfileColor(nightMode);
+		UiUtilities.setupSlider(parameterSlider, nightMode, selectedModeColor);
+	}
+
+	public void hideParameterBar() {
+		parameterBarLayout.setVisibility(View.GONE);
+		parameterMinSetting = null;
+		parameterMaxSetting = null;
+		parameterStepSetting = null;
+		parameterValueSetting = null;
 	}
 
 	public class MapHudButton {

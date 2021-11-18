@@ -3730,7 +3730,6 @@
     <string name="use_login_and_password">Använd användarnamn och lösenord</string>
     <string name="available_until">Tillgänglig till %1$s</string>
     <string name="enough_contributions_descr">Grattis, du har bidragit tillräckligt mycket till OpenStreetMap och kan nu dra nytta av obegränsade kartuppdateringar i OsmAnd!</string>
-    <string name="not_enough_contributions_descr">Minst %1$s bidrag till OpenStreetMap inom %2$s dagar krävs.</string>
     <string name="map_updates_are_unavailable_yet">Kartuppdateringar är ännu inte tillgängliga. :-(</string>
     <string name="shared_string_min_height">Lägsta höjd</string>
     <string name="shared_string_max_height">Högsta höjd</string>
@@ -3817,8 +3816,7 @@
     <string name="routeInfo_winter_ice_road_description">Färgsättning av rutt- eller spårlinjen enligt vinterväglags-klassificering, endast användbar på vintern.</string>
     <string name="recorded_description">Inspelad röst låter bättre, men kan bara uttala förinspelade fraser som sväng-instruktioner. Kan inte uttala gatunamn eller POI-namn.</string>
     <string name="srtm_unit_format">Måttenhet för höjdkurvor</string>
-    <string name="rendering_attr_noNatureReserves_description">Dölj naturreservat, nationalparker och andra skyddade områden.</string>
-    <string name="rendering_attr_noNatureReserves_name">Naturreservat</string>
+    <string name="rendering_attr_natureReserves_name">Naturreservat</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Lift</string>
     <string name="rendering_attr_piste_type_sleigh_name">Släde</string>
     <string name="rendering_attr_piste_type_sled_name">Kälke</string>

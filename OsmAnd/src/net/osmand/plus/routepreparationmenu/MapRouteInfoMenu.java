@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
@@ -1007,6 +1008,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			ApplicationMode mode = iterator.next();
 			View toggle = AppModeDialog.createToggle(mapActivity.getLayoutInflater(), app, R.layout.mode_view_route_preparation,
 					ll.findViewById(R.id.app_modes_content), mode, true);
+
+			toggle.setAccessibilityDelegate(new View.AccessibilityDelegate() {
+				public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfo info) {
+					super.onInitializeAccessibilityNodeInfo(host, info);
+					info.setContentDescription(mapActivity.getString(mode.getNameKeyResource()));
+					info.setEnabled(host.isEnabled());
+				}
+			});
 
 			if (toggle.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
 				ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) toggle.getLayoutParams();
@@ -2145,6 +2154,18 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(ChooseRouteFragment.TAG);
 			if (fragment instanceof ChooseRouteFragment && !((ChooseRouteFragment) fragment).isPaused()) {
 				return new WeakReference<>((ChooseRouteFragment) fragment);
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	public WeakReference<FollowTrackFragment> findFollowTrackFragment() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(FollowTrackFragment.TAG);
+			if (fragment instanceof FollowTrackFragment && !((FollowTrackFragment) fragment).isPaused()) {
+				return new WeakReference<>((FollowTrackFragment) fragment);
 			}
 		}
 		return null;

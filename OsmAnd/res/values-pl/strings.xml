@@ -193,7 +193,7 @@
     <string name="build_installed">Zainstalowano kompilację {0} ({1}).</string>
     <string name="downloading_build">Pobieranie kompilacji…</string>
     <string name="install_selected_build">Zainstalować OsmAnd - {0} z {1} {2} MB ?</string>
-    <string name="loading_builds_failed">Nie udało się pobrać listy kompilacji OsmAnd</string>
+    <string name="loading_builds_failed">Nie można pobrać listy kompilacji OsmAnd</string>
     <string name="loading_builds">Wczytywanie listy kompilacji OsmAnd…</string>
     <string name="select_build_to_install">Wybieranie wersji do zainstalowania</string>
     <string name="contribution_activity">Wersje instalacyjne</string>
@@ -867,7 +867,7 @@
     <string name="rendering_attr_showRoadMaps_name">Tylko mapy samochodowe</string>
     <string name="download_roads_only_item">Samochodowe</string>
     <string name="download_roads_only_maps">Mapa samochodowa</string>
-    <string name="safe_mode_description">Uruchamia aplikację w trybie bezpiecznym (używa wolniejszego kodu Androida zamiast natywnego).</string>
+    <string name="safe_mode_description">Uruchom aplikację w (wolniejszym) trybie bezpiecznym.</string>
     <string name="safe_mode">Tryb bezpieczny</string>
     <string name="native_library_not_running">Aplikacja działa w trybie bezpiecznym (wyłącz to w \"Ustawieniach\").</string>
     <string name="background_service_is_enabled_question">Usługa w tle jest nadal aktywna. Czy ją również zatrzymać?</string>
@@ -2334,7 +2334,7 @@
     <string name="ascent_descent">Podjazd/zjazd</string>
     <string name="moving_time">Czas w ruchu</string>
     <string name="max_min">Maks./min.</string>
-    <string name="quick_action_resume_pause_navigation">Zatrzymaj/wznów nawigację</string>
+    <string name="quick_action_resume_pause_navigation">Wstrzymaj/wznów nawigację</string>
     <string name="quick_action_resume_pause_navigation_descr">Przycisk do zatrzymania lub wznowienia nawigacji.</string>
     <string name="quick_action_start_stop_navigation">Rozpocznij/zakończ nawigację</string>
     <string name="quick_action_start_stop_navigation_descr">Przycisk rozpoczęcia lub zakończenia nawigacji.</string>
@@ -3390,9 +3390,9 @@
     <string name="please_provide_profile_name_message">Proszę wprowadzić nazwę dla profilu</string>
     <string name="open_settings">Otwórz ustawienia</string>
     <string name="plugin_disabled">Wtyczka wyłączona</string>
-    <string name="plugin_disabled_descr">Ta wtyczka jest osobną aplikacją. Należy usunąć ją indywidualnie, jeśli nie będzie więcej używana. 
-\n 
-\nWtyczka pozostanie na urządzeniu po usunięciu OsmAnd.</string>
+    <string name="plugin_disabled_descr">Ta wtyczka jest oddzielną aplikacją, wyłączenie jej nie powoduje jej usunięcia.
+\n
+\nMożna ją odinstalować w ustawieniach \'Aplikacje\' Androida.</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_include_data">Uwzględnij dodatkowe dane</string>
     <string name="import_profile_dialog_description">Zaimportowany profil zawiera dodatkowe dane. Kliknij \"Importuj\", aby zaimportować tylko dane profilu, lub wybierz dodatkowe dane.</string>
@@ -4185,7 +4185,7 @@
     <string name="shared_string_includes">Zawiera</string>
     <string name="from_with_param">Od %1$s</string>
     <string name="complete_purchase">Zakończ zakup</string>
-    <string name="regular_price">Zwykła cena</string>
+    <string name="regular_price">Standardowa cena</string>
     <string name="purchases_feature_desc_nautical">Uzyskaj dostęp do informacji o głębokości morskiej</string>
     <string name="purchases_feature_desc_terrain">Poziomice terenu, pełna mapa cieniowana w ciemnych odcieniach oraz mapy nachylenia z kolorami pokazującymi szczyty i niziny.</string>
     <string name="purchases_feature_desc_wikivoyage">Przeglądaj Wikipodróże w trybie offline. Artykuły podzielone według krajów i regionów, dostępne we wszystkich językach.</string>
@@ -4208,7 +4208,7 @@
     <string name="backup_delete_types_descr">Usunąć wszystkie dane z chmury OsmAnd Cloud dla nieaktualnych typów\?</string>
     <string name="shared_string_discussion">Dyskusja</string>
     <string name="backup_error_user_is_already_registered">Ten adres e-mail jest już w użyciu na innym koncie</string>
-    <string name="backup_error_subscription_was_expired">Subskrypcja nieważna</string>
+    <string name="backup_error_subscription_was_expired">Subskrypcja wygasła</string>
     <string name="backup_error_subscription_was_used">Subskrypcja lub promocja wykorzystana przez inne konto %1$s</string>
     <string name="backup_error_size_is_exceeded">Przekroczono maksymalny rozmiar chmury OsmAnd Cloud %1$s</string>
     <string name="backup_error_gzip_only_supported_upload">Plik powinien zostać przesłany w formacie gzip</string>
@@ -4266,7 +4266,7 @@
     <string name="active_till">Aktywna do %1$s</string>
     <string name="promo_subscription">Subskrypcja promocyjna</string>
     <string name="track_has_no_needed_data">Trasa nie zawiera potrzebnych danych.</string>
-    <string name="option_available_only_in_osmand_pro">Opcja jest dostępna w ramach subskrypcji OsmAnd Pro.</string>
+    <string name="option_available_only_in_osmand_pro">Dostępne w ramach subskrypcji OsmAnd Pro.</string>
     <string name="pro_widgets">Widżety Pro</string>
     <string name="purchases_feature_desc_pro_widgets">Uzyskaj dostęp do funkcji OsmAnd Pro: Kolorowanie tras i nie tylko.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Poznaj plany OsmAnd, aby znaleźć odpowiedni dla Ciebie.</string>
@@ -4288,7 +4288,7 @@
     <string name="benefits_for_contributors_secondary_descr">Zaloguj się do OpenStreetMap i sprawdź, czy jesteś uprawniony do otrzymywania nieograniczonych miesięcznych i godzinnych aktualizacji map.</string>
     <string name="use_login_and_password">Użyj nazwy użytkownika i hasła</string>
     <string name="available_until">Dostępne do %1$s</string>
-    <string name="enough_contributions_descr">Gratulacje, wniosłeś wystarczający wkład w OpenStreetMap i możesz teraz cieszyć się nieograniczonymi aktualizacjami map OsmAnd!</string>
+    <string name="enough_contributions_descr">Gratulacje, dostarczyłeś wystarczająco dużo wkładu OpenStreetMap i możesz teraz cieszyć się nieograniczonymi aktualizacjami map OsmAnd!</string>
     <string name="map_updates_are_unavailable_yet">Aktualizacje map nie są jeszcze dostępne :-(</string>
     <string name="connect_track_points_as">Połącz punkty trasy</string>
     <string name="routes_color_by_type">Kolor trasy według…</string>
@@ -4296,37 +4296,36 @@
     <string name="rendering_value_walkingRoutesOSMC_description">Przypisz kolor trasom na podstawie ich indywidualnie przypisanego lokalnie koloru (jeśli dostępny w OpenStreetMap) i symbolu odznaki turystycznej.</string>
     <string name="walking_route_osmc_description">Przypisz kolor trasom na podstawie ich indywidualnie przypisanego lokalnie koloru (jeśli dostępny w OpenStreetMap) i typu (międzynarodowe, regionalne, lokalne).</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Kolor trasy według typu sieci węzłów (międzynarodowy, regionalny, lokalny).</string>
-    <string name="benefits_for_contributors_primary_descr">Możesz być uprawniony do nieograniczonych aktualizacji map co godzinę, jeśli jesteś aktywnym współtwórcą OpenStreetMap.org.</string>
-    <string name="not_enough_contributions_descr">Wymagany jest co najmniej %1$s wkład OpenStreetMap w ciągu %2$s dni.</string>
+    <string name="benefits_for_contributors_primary_descr">Aktywni współtwórcy OpenStreetMap.org mogą być uprawnieni do nieograniczonych godzinnych aktualizacji map.</string>
     <string name="shared_string_contributions">Wkłady w rozwój</string>
-    <string name="contributions_may_calculate_with_delay">Wkłady mogą być obliczane z kilkugodzinnymi opóźnieniami.</string>
+    <string name="contributions_may_calculate_with_delay">Obliczanie składek może potrwać kilka godzin.</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Kolor wg przeznaczenia trasy.</string>
     <string name="pro_features">Funkcje Pro</string>
     <string name="purchases_restored">Przywrócono zakupy</string>
     <string name="grey_color_undefined">Kolor szary jest używany dla części bez danych.</string>
-    <string name="cancel_anytime_in_amazon_app">Anuluj w dowolnym momencie w aplikacji Amazon</string>
-    <string name="amz_manage_subscription_descr">Aby zarządzać subskrypcją, skorzystaj z aplikacji Amazon na urządzeniu lub otwórz witrynę Amazon.com pod swoim profilem.</string>
+    <string name="cancel_anytime_in_amazon_app">Anuluj w dowolnym momencie za pomocą aplikacji Amazon</string>
+    <string name="amz_manage_subscription_descr">Zarządzaj swoją subskrypcją za pomocą aplikacji Amazon lub witryny Amazon.</string>
     <string name="empty_category_name">Pusta nazwa kategorii</string>
-    <string name="no_activity_for_intent">Nie znaleziono odpowiednich aplikacji do wykonania tej czynności</string>
+    <string name="no_activity_for_intent">Zainstaluj aplikację, która może wykonać tę czynność.</string>
     <string name="osm_live_payment_subscription_management_amz">Płatność jest pobierana z konta Amazon podczas potwierdzania zakupu.
 \n
 \nOdnawia się, chyba że zostanie anulowana przed wybranym okresem odnowienia.
 \n
 \nZarządzaj lub anuluj subskrypcje w ustawieniach Amazon w dowolnym momencie.</string>
     <string name="no_items_of_type_message">Nie masz żadnych elementów tego typu</string>
-    <string name="routeInfo_winter_ice_road_description">Kolorowanie trasy lub linii toru zgodnie z zimową klasyfikacją dróg, która jest użyteczna tylko w okresie zimowym.</string>
-    <string name="routeInfo_smoothness_description">Zapewnia schemat klasyfikacji dotyczący fizycznej użyteczności drogi dla pojazdów kołowych, w szczególności w odniesieniu do regularności/płaskości powierzchni.</string>
-    <string name="routeInfo_surface_description">Podaj dodatkowe informacje o fizycznej nawierzchni dróg/ścieżek.</string>
-    <string name="routeInfo_roadClass_description">Kolorowanie trasy lub linii toru zgodnie z klasyfikacją dróg.</string>
+    <string name="routeInfo_winter_ice_road_description">Pokoloruj trasę lub linię śladu według zimowej klasyfikacji dróg.</string>
+    <string name="routeInfo_smoothness_description">Klasyfikacja zwrotności drogi/ścieżki dla pojazdów kołowych, w szczególności w odniesieniu do regularności/płaskości nawierzchni.</string>
+    <string name="routeInfo_surface_description">Podaj informacje o fizycznej powierzchni drogi/chodnika.</string>
+    <string name="routeInfo_roadClass_description">Pokoloruj trasę lub linię śladu według klasyfikacji dróg.</string>
     <string name="add_group_to_markers">Dodaj grupę do listy znaczników</string>
     <string name="remove_group_from_markers">Usuń grupę z listy znaczników</string>
-    <string name="routeInfo_tracktype_description">Kolorowanie trasy lub linii toru zgodnie z stanem dróg na podstawie ich składu powierzchni. Zazwyczaj stosuje się je do dróg, na których główna sieć drogowa składa się z dróg nieutwardzonych.</string>
+    <string name="routeInfo_tracktype_description">Pokoloruj trasę lub linię śladu według składu powierzchni. Zwykle stosuje się, gdy sieć dróg jest w dużej mierze nieutwardzona.</string>
     <string name="start_point">Uruchom</string>
     <string name="mapillary_menu_filter_description_new">Filtrowanie obrazów według daty lub typu. Aktywne tylko w zbliżeniu.</string>
-    <string name="service_is_not_available_please_try_later">Usługa nie jest dostępna, spróbuj później</string>
+    <string name="service_is_not_available_please_try_later">Usługa niedostępna. Spróbuj ponownie później.</string>
     <string name="shared_string_files">Pliki</string>
     <string name="travel_route_types">Typy tras</string>
-    <string name="sample_wikivoyage">Przykładowe Wikipodróże</string>
+    <string name="sample_wikivoyage">Przykład Wikipodróży</string>
     <string name="horseback_riding">Jazda konna</string>
     <string name="routing_attr_prefer_horse_routes_description">Preferuj trasy konne</string>
     <string name="routing_attr_prefer_horse_routes_name">Preferuj trasy konne</string>
@@ -4337,16 +4336,13 @@
     <string name="exit_pan_mode_descr">Naciśnij przycisk Wybierz, aby wyjść z trybu panoramowania</string>
     <string name="icon_group_nautical">Morski</string>
     <string name="shared_string_details">Szczegóły</string>
-    <string name="shared_app_storage_description">Pamięć współdzielona nie jest już dostępna ze względu na zmiany w zasadach dostępu do pamięci masowej w systemie Android.</string>
-    <string name="internal_app_storage_description">Pamięć wewnętrzna, ukryta przed użytkownikiem i innymi aplikacjami, więc nikt poza OsmAnd nie ma dostępu do Twoich danych</string>
+    <string name="shared_app_storage_description">Pamięć współdzielona nie jest już dostępna z powodu zmienionego dostępu do pamięci masowej systemu Android.</string>
+    <string name="internal_app_storage_description">Pamięć wewnętrzna, ukryta przed wszystkimi użytkownikami i innymi aplikacjami, dzięki czemu tylko OsmAnd może uzyskać dostęp do Twoich danych.</string>
     <string name="shared_storage_warning_title">Zmiany w zasadach dostępu do pamięci masowej</string>
-    <string name="rendering_attr_noNatureReserves_name">Rezerwat przyrody</string>
-    <string name="rendering_attr_noNatureReserves_description">Ukryj rezerwaty przyrody, obszary chronione i parki narodowe.</string>
-    <string name="clear_all_history_warning">Czy na pewno chcesz wyczyścić całą historię w aplikacji\?
-\n
-\nHistoria wyszukiwania, nawigacji i znaczników zostanie wyczyszczona.</string>
-    <string name="markers_history_is_disabled_descr">Włącz historię, aby uzyskać listę odwiedzonych znaczników mapy.</string>
-    <string name="search_history_is_disabled_descr">Możesz włączyć w ustawieniach historię wyszukiwania</string>
+    <string name="rendering_attr_natureReserves_name">Rezerwat przyrody</string>
+    <string name="clear_all_history_warning">Wyczyścić wszystkie wpisy historii aplikacji, w tym historię wyszukiwania, nawigacji i znaczników\?</string>
+    <string name="markers_history_is_disabled_descr">Włącz historię, aby zapamiętać listę odwiedzonych znaczników mapy.</string>
+    <string name="search_history_is_disabled_descr">Historię wyszukiwania można włączyć w ustawieniach.</string>
     <string name="history_is_disabled_descr">Włącz historię, aby uzyskać szybszy dostęp do ostatnio używanych wyników.</string>
     <string name="clear_all_history">Wyczyść całą historię</string>
     <string name="history_preferences_descr">Rejestrowanie historii można wyłączyć indywidualnie dla każdego typu historii.</string>
@@ -4368,18 +4364,18 @@
 \n
 \n  • Ulepszone renderowanie znaczników wysokości SRTM
 \n
-\n  • Poprawiono wyświetlanie arabskiego na mapie
+\n  • Poprawiono arabskie podpisy pod mapami
 \n
 \n  • Naprawiono różne problemy z routingiem
 \n
 \n"</string>
     <string name="routing_attr_allow_gate_name">Zezwól na użycie bramy</string>
     <string name="routing_attr_only_permitted_ways_name">Celowo dozwolone ulice</string>
-    <string name="purchases_feature_desc_android_auto">Mapy offline i nawigacja OsmAnd na ekranie Twojego pojazdu. Wygodna integracja z elementami sterującymi pojazd.</string>
+    <string name="purchases_feature_desc_android_auto">Przenosi mapy offline i nawigację OsmAnd na ekran pojazdu i integruje się z urządzeniami sterującymi pojazdu.</string>
     <string name="routing_attr_prefer_tactile_paving_name">Preferuj nawierzchnię brukową</string>
-    <string name="shared_storage_warning_description">Od listopada 2021 OsmAnd 4.2 utraci dostęp do pamięci współdzielonej z powodu zmienionych zasad dostępu do pamięci w systemie Android.
+    <string name="shared_storage_warning_description">Ze względu na nowe zasady Androida od listopada 2021 OsmAnd 4.2 utraci dostęp do współdzielonej pamięci masowej.
 \n
-\nZmień pamięć z pamięci współdzielonej na dostępną, jeśli nie zostanie to zrobione, aplikacja utraci dostęp do Twoich danych: w tym map offline, śladów GPX i wszystkiego innego.</string>
+\nPrzenieś folder danych z pamięci współdzielonej do dostępnej pamięci, w przeciwnym razie aplikacja utraci dostęp do danych, takich jak mapy offline, ścieżki GPX itp.</string>
     <string name="android_auto_map_placeholder_title">Mapa jest wyświetlana na ekranie pojazdu.</string>
     <string name="shared_string_mini">mini</string>
     <string name="is_disabled">%1$s jest wyłączony</string>
@@ -4390,8 +4386,8 @@
     <string name="shortcut_navigate_to">Nawiguj do…</string>
     <string name="shortcut_navigate_to_work">Nawiguj do pracy</string>
     <string name="android_auto_purchase_request_title">Kup OsmAnd Pro lub Maps+, aby używać OsmAnd z Android Auto</string>
-    <string name="continue_on_phone">Kontynuuj przez telefon</string>
-    <string name="location_access_request_title">OsmAnd potrzebuje dostępu do lokalizacji w celu nawigacji</string>
+    <string name="continue_on_phone">Kontynuuj na urządzeniu mobilnym</string>
+    <string name="location_access_request_title">OsmAnd potrzebuje dostępu do lokalizacji w celu nawigacji.</string>
     <string name="location_access_request_action">Dotacja uznana</string>
     <string name="location_access_request_result">Zatwierdzono: %1$s Odrzucono: %2$s</string>
     <string name="shared_string_articles">Artykuły</string>
@@ -4407,5 +4403,10 @@
     <string name="approx_safe_mode_description">Wykonaj przybliżenie gpx przy użyciu wolniejszego Androida zamiast kodu natywnego.</string>
     <string name="use_external_timestamps">Użyj zewnętrznych znaczników czasu</string>
     <string name="use_external_timestamps_description">Użyj znaczników czasu routera online, aby dostosować szacowany czas i średnią prędkość.</string>
-    <string name="no_plugins_enabled">Nie masz włączonych wtyczek. Listę wszystkich dostępnych wtyczek znajdziesz w Menu – Wtyczki.</string>
+    <string name="no_plugins_enabled">Nie masz włączonych wtyczek. Listę dostępnych wtyczek znajdziesz w \'Menu\' → \'Wtyczki\'.</string>
+    <string name="delete_history_items_descr">Czy na pewno chcesz usunąć wybrane elementy historii\?</string>
+    <string name="delete_history_items">Liczba elementów historii do usunięcia %1$. Usunąć\?</string>
+    <string name="display_route_tracks">Wyświetlanie ścieżek</string>
+    <string name="display_route_tracks_as_poi">Wyświetlanie ścieżek jako POI</string>
+    <string name="quick_action_toggle_preference">Przełącznik do przełączania wybranego stanu preferencji.</string>
 </resources>
