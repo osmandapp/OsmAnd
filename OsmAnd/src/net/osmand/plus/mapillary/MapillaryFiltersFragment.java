@@ -306,9 +306,9 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
                     return;
                 }
 
-                int spaceHeight = AndroidUtils.getScreenHeight(activity) - container.getTop()
-                        - (view.getHeight() - bottomEmptySpace.getHeight())
-                        - AndroidUtils.getStatusBarHeight(activity);
+                int spaceHeight = AndroidUtils.getScreenHeight(activity)
+                        - container.getTop()
+                        - (view.getHeight() - bottomEmptySpace.getHeight());
                 if (spaceHeight > bottomEmptySpace.getHeight()) {
                     ViewGroup.LayoutParams params = bottomEmptySpace.getLayoutParams();
                     params.height = spaceHeight;
