@@ -4231,27 +4231,27 @@
     <string name="reset_to_original">Resetovat do původního stavu</string>
     <string name="attribute">Atribut</string>
     <string name="contour_lines_hillshades_slope">Vrstevnice, stínování svahů, sklon svahů</string>
-    <string name="copying_file">Kopírování souboru %1$s</string>
+    <string name="copying_file">Kopírování souboru %1$s…</string>
     <string name="from_to_with_params">Z %1$s do %2$s</string>
     <string name="progress_complete">%1$s hotovo</string>
-    <string name="storage_found_files_descr">Stiskněte “%1$s” pro zkopírování %2$s souborů z “%3$s” do “%4$s”. Může to chvíli trvat.</string>
+    <string name="storage_found_files_descr">Stiskněte \"%1$s\" pro zkopírování %2$s souborů z \"%3$s\" do \"%4$s\". Může to chvíli trvat.</string>
     <string name="storage_copied_files_size">Zkopírováno %1$s souborů %2$s</string>
     <string name="storage_copying_files_size">Kopírování %1$s souborů %2$s</string>
     <string name="storage_found_files_size">Nalezeno %1$s souborů %2$s</string>
-    <string name="shared_string_skip_warning">Opravdu chcete přeskočit migraci\? OsmAnd již nemá přístup k vašim souborům ve sdíleném úložišti.
+    <string name="shared_string_skip_warning">Přeskočit migraci\? OsmAnd již nemá přístup k vašim souborům ve sdíleném úložišti.
 \n
-\nAplikace se spustí v nové složce s vašimi daty.</string>
-    <string name="shared_storage_last_step">Poté, co vyberete sdílené úložiště, budete moci zadat nové úložiště.</string>
-    <string name="shared_storage_third_step">Povolte přístup ke složce. Bez něj OsmAnd nemůže zkopírovat soubory.</string>
+\nAplikace začne používat vaši novou datovou složku.</string>
+    <string name="shared_storage_last_step">Zvolit novou datovou složku můžete potom.</string>
+    <string name="shared_storage_third_step">Udělte oprávnění pro přístup ke složce. Bez něj OsmAnd nemůže zkopírovat soubory.</string>
     <string name="shared_storage_second_step">Stiskněte \"Použít tuto složku\".</string>
     <string name="folder_access_denied">Pro přístup ke zvolené složce je potřeba oprávnění.</string>
-    <string name="copying_completed">Kopírování je dokončeno</string>
+    <string name="copying_completed">Zkopírováno</string>
     <string name="start_copying">Zahájit kopírování</string>
     <string name="shared_storage">Sdílené úložiště</string>
     <string name="shared_storage_migration">Migrace sdíleného úložiště</string>
     <string name="icon_group_industrial">Průmysl</string>
     <string name="delete_history_items">Smazat %1$s položek historie\?</string>
-    <string name="quick_action_toggle_preference">Přepínač stavu vybraného nastavení.</string>
+    <string name="quick_action_toggle_preference">Přepínač pro změnu nastavení.</string>
     <string name="approx_safe_mode_description">Provádět GPX aproximaci pomocí pomalejšího kódu pro Android místo nativního kódu.</string>
     <string name="use_external_timestamps_description">Použít časové značky online navigační služby pro úpravu odhadovaného času a průměrné rychlosti</string>
     <string name="search_history_is_disabled_descr">V nastavení můžete zapnout historii vyhledávání.</string>
@@ -4270,7 +4270,7 @@
     <string name="routeInfo_tracktype_description">Obarvit čáru trasy nebo stopy podle složení jejího povrchu. Obvykle se používá, pokud je silniční síť převážně nezpevněná.</string>
     <string name="shared_storage_migration_descr">Kvůli změnám pravidel pro přístup k úložišti v Androidu již OsmAnd nemůže používat %1$s.
 \n
-\nMusíte zkopírovat všechna svoje data do nového úložiště.</string>
+\nZkopírujte všechna svoje data do nové složky.</string>
     <string name="files_remaining">Zbývající soubory: %1$s %2$s</string>
     <string name="shared_storage_first_step">Stiskněte \"%1$s\".
 \nOtevře se správce souborů, v němž musíte vyhledat složku osmand.</string>
@@ -4339,7 +4339,7 @@
     <string name="pro_features">Pokročilé funkce</string>
     <string name="exit_pan_mode_descr">Stisknutím \"Zvolit\" opustíte režim posouvání</string>
     <string name="upload_gpx_description_hint">Ponecháte-li prázdné, názvy stop se použijí jako popis. Zadaný popis se aplikuje na každou stopu.</string>
-    <string name="delete_history_items_descr">Opravdu chcete smazat vybrané položky historie\?</string>
+    <string name="delete_history_items_descr">Smazat vybrané položky historie\?</string>
     <string name="routeInfo_winter_ice_road_description">Obarvit čáru trasy nebo stopy podle její zimní klasifikace.</string>
     <string name="connect_track_points_as">Spojit body trasy</string>
     <string name="benefits_for_contributors_primary_descr">Aktivní přispěvatelé do OpenStreetMap.org mohou mít nárok na neomezené hodinové aktualizace map.</string>
@@ -4446,8 +4446,7 @@
     <string name="add_to_group">Přidat do skupiny</string>
     <string name="app_modes_options">Vybrat režimy aplikace</string>
     <string name="shared_string_memory">Paměť</string>
-    <string name="memory_allocated_for_routing_ds">Vyšší hodnota paměti zrychluje výpočet dlouhých tras (více než 500 km), ale může ovlivnit výkonnost jiných aplikací.
-\nNeovlivňuje rychlost výpočtu krátkých tras.</string>
+    <string name="memory_allocated_for_routing_ds">Vyšší hodnota paměti může zrychlit výpočet tras delších než 500 km, ale může také zpomalit jiné aplikace.</string>
     <string name="memory_allocated_for_routing">Paměť vyhrazená pro plánování trasy</string>
     <string name="reading_files">Načítám soubory…</string>
     <string name="no_items_selected_warning">Vyberte prosím aspoň jednu položku</string>
