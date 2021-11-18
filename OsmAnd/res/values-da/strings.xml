@@ -4457,7 +4457,9 @@
     <string name="display_groups_visibility_dialog_description">Du kan regulere gruppesynlighed på kortet. Hvis spor er skjult, vil alle grupper også være skjult.</string>
     <string name="shared_string_hide_all">Skjul alle</string>
     <string name="app_modes_options">Vælg App-tilstande</string>
-    <string name="memory_allocated_for_routing_ds">En højere hukommelsesværdi kan gøre beregningen af ruter på mere end 500 km hurtigere, men kan gøre andre apps langsommere.</string>
+    <string name="memory_allocated_for_routing_ds">Højere hukommelsesværdi gør beregningen af ruter (mere end 500 km) hurtigere, men kan påvirke andre applikationers ydeevne.
+\nHar ingen indflydelse på beregningshastigheden for korte ruter.</string>
     <string name="fold_unfold">fold/fold ud</string>
     <string name="migration_files_present">Der findes %1$d-filer (%2$s) på den valgte placering \'%3$s\'.</string>
+    <string name="exit_without_saving_warning">Er du sikker på, at du vil afslutte uden at gemme\? Du vil miste alle ændringer.</string>
 </resources>
