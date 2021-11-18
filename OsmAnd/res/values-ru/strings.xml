@@ -4458,4 +4458,7 @@
     <string name="map_marker_options">Параметры маркеров карты</string>
     <string name="app_profile_type">Тип профиля приложения</string>
     <string name="migration_files_present">%1$d файлов (%2$s) присутствуют в выбранном местоположении «%3$s».</string>
+    <string name="show_parameter_seekbar">Показать параметр ползунка</string>
+    <string name="app_modes_options">Выбор режимов приложения</string>
+    <string name="exit_without_saving_warning">Выйти без сохранения\? Все изменения будут потеряны.</string>
 </resources>
