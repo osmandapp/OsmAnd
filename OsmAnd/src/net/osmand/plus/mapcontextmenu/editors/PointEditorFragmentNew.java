@@ -1,5 +1,13 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
+import static net.osmand.GPXUtilities.log;
+import static net.osmand.data.FavouritePoint.BackgroundType;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
+import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
+import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.isPersonalCategoryDisplayName;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -74,14 +82,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
-
-import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
-import static net.osmand.GPXUtilities.log;
-import static net.osmand.data.FavouritePoint.BackgroundType;
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
-import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
-import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.isPersonalCategoryDisplayName;
 
 public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implements ColorPickerListener, CardListener {
 
@@ -454,14 +454,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 			addDelDescription.setText(app.getString(R.string.add_description));
 		}
 		updateDescriptionIcon();
-	}
-
-	boolean isAddressAvailable() {
-		return addressCaption.getVisibility() == View.VISIBLE;
-	}
-
-	boolean isDescriptionAvailable() {
-		return descriptionCaption.getVisibility() == View.VISIBLE;
 	}
 
 	private void createGroupSelector() {
