@@ -396,7 +396,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 
 		private final UpdateLocationViewCache locationViewCache;
 
-		private final Map<GpxDisplayItem, String> addresses = new HashMap<>();
+		private final Map<WptPt, String> addresses = new HashMap<>();
 		private final String searchingAddressMsg;
 		private final String addressNotFoundMsg;
 
@@ -419,23 +419,49 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 		private void lookupAddresses() {
 			Collection<List<GpxDisplayItem>> allGroupsItems = itemGroups.values();
 
-			int count = 0;
-			for (List<GpxDisplayItem> displayItems : allGroupsItems) {
-				count += displayItems.size();
+			Map<WptPt, String> oldAddresses = new HashMap<>(addresses);
+			addresses.clear();
+
+			int emptyAddressesNumber = 0;
+
+			for (List<GpxDisplayItem> groupItems : allGroupsItems) {
+				for (GpxDisplayItem item : groupItems) {
+					WptPt point = item.locationStart;
+					if (!addresses.containsKey(point)) {
+						String address = oldAddresses.get(point);
+						if (address == null) {
+							addresses.put(point, null);
+							emptyAddressesNumber++;
+						} else {
+							addresses.put(point, address);
+						}
+					}
+				}
 			}
-			final long allItemsCount = count;
+
+			final long allItemsCount = emptyAddressesNumber;
+			final int[] processedAddresses = {0};
 
 			for (List<GpxDisplayItem> groupItems: allGroupsItems) {
 				for (final GpxDisplayItem item : groupItems) {
-					LatLon latLon = new LatLon(item.locationStart.lat, item.locationStart.lon);
+
+					WptPt point = item.locationStart;
+					if (addresses.get(point) != null) {
+						continue;
+					}
+
+					LatLon latLon = new LatLon(point.lat, point.lon);
 					AddressLookupRequest lookupRequest = new AddressLookupRequest(latLon, address -> {
 						String addressToShow = Algorithms.isBlank(address) ? addressNotFoundMsg : address;
-						addresses.put(item, addressToShow);
-						boolean allAddressesDefined = allItemsCount == addresses.size();
+						addresses.put(point, addressToShow);
+
+						processedAddresses[0]++;
+						boolean allAddressesDefined = processedAddresses[0] == allItemsCount;
 						if (allAddressesDefined) {
 							notifyDataSetChanged();
 						}
 					}, null);
+
 					app.getGeocodingLookupService().lookupAddress(lookupRequest);
 				}
 			}
@@ -656,7 +682,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 				AndroidUiHelper.updateVisibility(checkBox, false);
 			}
 
-			setupLocationData(row, gpxItem);
+			setupLocationData(row, gpxItem.locationStart);
 
 			AndroidUiHelper.updateVisibility(row.findViewById(R.id.divider), false);
 			AndroidUiHelper.updateVisibility(row.findViewById(R.id.vertical_divider), false);
@@ -666,14 +692,13 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			return row;
 		}
 
-		private void setupLocationData(View container, GpxDisplayItem displayItem) {
+		private void setupLocationData(@NonNull View container, @NonNull WptPt point) {
 			AppCompatImageView directionArrow = container.findViewById(R.id.direction_arrow);
 			TextView distanceText = container.findViewById(R.id.distance);
-			WptPt point = displayItem.locationStart;
 			app.getUIUtilities().updateLocationView(locationViewCache, directionArrow, distanceText,
 					point.lat, point.lon);
 
-			String definedAddress = addresses.get(displayItem);
+			String definedAddress = addresses.get(point);
 			String addressToShow = definedAddress == null ? searchingAddressMsg : definedAddress;
 			TextView addressContainer = container.findViewById(R.id.address);
 			addressContainer.setText(addressToShow);
