@@ -89,15 +89,12 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		return count;
 	}
 
-	public boolean isChildOf(@NonNull SelectedGpxFile selectedGpxFile) {
-		return selectedGpxFile.equals(sourceSelectedGpxFile);
-	}
-
-	public void resetFilters() {
+	public void resetFilters(@NonNull OsmandApplication app) {
 		smoothingFilter.reset();
 		speedFilter.reset();
 		altitudeFilter.reset();
 		hdopFilter.reset();
+		app.getGpsFilterHelper().filterGpxFile(this);
 	}
 
 	@Override

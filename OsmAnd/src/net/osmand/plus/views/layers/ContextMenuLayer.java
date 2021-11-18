@@ -970,7 +970,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (mInChangeMarkerPositionMode || mInGpxDetailsMode || mInAddGpxPointMode
 				|| mapActivity == null || mapActivity.getMapRouteInfoMenu().isVisible()
 				|| MapRouteInfoMenu.waypointsVisible || MapRouteInfoMenu.followTrackVisible
-				|| getApplication().getGpsFilterHelper().isEnabled()) {
+				|| mapActivity.getGpsFilterFragment() != null) {
 			return true;
 		}
 		boolean res = false;
@@ -1086,7 +1086,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null || menu == null || mInChangeMarkerPositionMode || mInGpxDetailsMode
-				|| getApplication().getGpsFilterHelper().isEnabled()) {
+				|| mapActivity.getGpsFilterFragment() != null) {
 			return true;
 		}
 

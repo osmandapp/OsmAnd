@@ -23,9 +23,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.util.MapUtils;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -38,73 +36,13 @@ import androidx.annotation.Nullable;
 public class GpsFilterHelper {
 
 	private final OsmandApplication app;
-
-	@Nullable
-	private FilteredSelectedGpxFile currentFilteredGpxFile;
-
 	private final Set<GpsFilterListener> listeners = new HashSet<>();
-
-	private String lastSavedFilePath;
 
 	private final Executor singleThreadExecutor = Executors.newSingleThreadExecutor();
 	private GpsFilterTask gpsFilterTask = null;
 
 	public GpsFilterHelper(@NonNull OsmandApplication app) {
 		this.app = app;
-	}
-
-	public void setSelectedGpxFile(@NonNull SelectedGpxFile selectedGpxFile) {
-		currentFilteredGpxFile = new FilteredSelectedGpxFile(app, selectedGpxFile);
-		lastSavedFilePath = null;
-	}
-
-	@Nullable
-	public FilteredSelectedGpxFile getCurrentFilteredGpxFile() {
-		return currentFilteredGpxFile;
-	}
-
-	public boolean isEnabled() {
-		return currentFilteredGpxFile != null;
-	}
-
-	public boolean isSourceOfFilteredGpxFile(@NonNull SelectedGpxFile selectedGpxFile) {
-		return currentFilteredGpxFile != null && currentFilteredGpxFile.isChildOf(selectedGpxFile);
-	}
-
-	public boolean isSourceGpxFileExist() {
-		GPXFile gpxFile = currentFilteredGpxFile == null ? null : currentFilteredGpxFile.getGpxFile();
-		return gpxFile != null && new File(gpxFile.path).exists();
-	}
-
-	public void onSavedFile(@NonNull String path) {
-		lastSavedFilePath = path;
-	}
-
-	@Nullable
-	public String getLastSavedFilePath() {
-		return lastSavedFilePath;
-	}
-
-	public void disableFilter() {
-		if (currentFilteredGpxFile != null && !isSourceGpxFileExist()) {
-			GPXFile sourceGpxFile = currentFilteredGpxFile.getSourceSelectedGpxFile().getGpxFile();
-			app.getSelectedGpxHelper().selectGpxFile(sourceGpxFile, false, false);
-		}
-		currentFilteredGpxFile = null;
-		listeners.clear();
-	}
-
-	@NonNull
-	public List<SelectedGpxFile> replaceWithFilteredTrack(@NonNull List<SelectedGpxFile> selectedGpxFiles) {
-		if (currentFilteredGpxFile == null || currentFilteredGpxFile.getGpxFile() == null) {
-			return selectedGpxFiles;
-		} else {
-			List<SelectedGpxFile> tempList = new ArrayList<>(selectedGpxFiles);
-			tempList.remove(currentFilteredGpxFile.getSourceSelectedGpxFile());
-			tempList.add(currentFilteredGpxFile);
-
-			return tempList;
-		}
 	}
 
 	public void addListener(@NonNull GpsFilterListener listener) {
@@ -115,26 +53,16 @@ public class GpsFilterHelper {
 		listeners.remove(listener);
 	}
 
-	public void resetFilters() {
-		if (currentFilteredGpxFile != null) {
-			currentFilteredGpxFile.resetFilters();
-		}
-		filterGpxFile();
-
-		for (GpsFilterListener listener : listeners) {
-			listener.onFiltersReset();
-		}
+	public void clearListeners() {
+		listeners.clear();
 	}
 
-	public void filterGpxFile() {
-		if (currentFilteredGpxFile != null) {
-			if (gpsFilterTask != null) {
-				gpsFilterTask.cancel(false);
-			}
-
-			gpsFilterTask = new GpsFilterTask(app, currentFilteredGpxFile, listeners);
-			gpsFilterTask.executeOnExecutor(singleThreadExecutor);
+	public void filterGpxFile(@NonNull FilteredSelectedGpxFile filteredSelectedGpxFile) {
+		if (gpsFilterTask != null) {
+			gpsFilterTask.cancel(false);
 		}
+		gpsFilterTask = new GpsFilterTask(app, filteredSelectedGpxFile, listeners);
+		gpsFilterTask.executeOnExecutor(singleThreadExecutor);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -320,7 +248,5 @@ public class GpsFilterHelper {
 	public interface GpsFilterListener {
 
 		void onFinishFiltering();
-
-		void onFiltersReset();
 	}
 }

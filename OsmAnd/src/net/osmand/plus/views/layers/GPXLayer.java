@@ -258,9 +258,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		List<SelectedGpxFile> selectedGPXFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
-		if (gpsFilterHelper.isEnabled()) {
-			selectedGPXFiles = gpsFilterHelper.replaceWithFilteredTrack(selectedGPXFiles);
-		}
 
 		cache.clear();
 		removeCachedUnselectedTracks(selectedGPXFiles);
@@ -1026,18 +1023,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 		for (Iterator<String> iterator = cachedTracksPaths.iterator(); iterator.hasNext(); ) {
 			String cachedTrackPath = iterator.next();
-			CachedTrack cachedTrack = segmentsCache.get(cachedTrackPath);
-			SelectedGpxFile gpx = cachedTrack == null ? null : cachedTrack.getSelectedGpxFile();
-
 			boolean trackHidden = !selectedTracksPaths.contains(cachedTrackPath);
-			boolean replacedByFilteredTrack = gpx != null && gpsFilterHelper.isSourceOfFilteredGpxFile(gpx);
-			boolean oldFilteredTrack = false;
-			if (gpx instanceof FilteredSelectedGpxFile) {
-				FilteredSelectedGpxFile filteredGpx = ((FilteredSelectedGpxFile) gpx);
-				oldFilteredTrack = gpsFilterHelper.isSourceOfFilteredGpxFile(filteredGpx.getSourceSelectedGpxFile());
-			}
-
-			if (trackHidden || replacedByFilteredTrack || oldFilteredTrack) {
+			if (trackHidden) {
 				iterator.remove();
 			}
 		}

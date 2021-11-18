@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.FilteredSelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -29,6 +30,7 @@ public class GpsFilterScreensAdapter extends PagerAdapter implements CustomTabPr
 	private final OsmandApplication app;
 	private final MapActivity mapActivity;
 	private final Fragment target;
+	private final FilteredSelectedGpxFile filteredSelectedGpxFile;
 	private final boolean nightMode;
 
 	@ColorInt
@@ -39,10 +41,14 @@ public class GpsFilterScreensAdapter extends PagerAdapter implements CustomTabPr
 	private final List<GpsFilterBaseCard> cards = new ArrayList<>(2);
 	private int currentPosition;
 
-	public GpsFilterScreensAdapter(MapActivity mapActivity, Fragment target, boolean nightMode) {
+	public GpsFilterScreensAdapter(@NonNull MapActivity mapActivity,
+	                               @NonNull Fragment target,
+	                               @NonNull FilteredSelectedGpxFile filteredSelectedGpxFile,
+	                               boolean nightMode) {
 		this.app = mapActivity.getMyApplication();
 		this.mapActivity = mapActivity;
 		this.target = target;
+		this.filteredSelectedGpxFile = filteredSelectedGpxFile;
 		this.nightMode = nightMode;
 
 		this.selectedTextColor = ColorUtilities.getPrimaryTextColor(mapActivity, nightMode);
@@ -119,8 +125,8 @@ public class GpsFilterScreensAdapter extends PagerAdapter implements CustomTabPr
 	@Override
 	public Object instantiateItem(@NonNull ViewGroup container, int position) {
 		GpsFilterBaseCard card = position == 0
-				? new GpsFiltersCard(mapActivity, target)
-				: new GpsFilterGraphCard(mapActivity, target);
+				? new GpsFiltersCard(mapActivity, target, filteredSelectedGpxFile)
+				: new GpsFilterGraphCard(mapActivity, target, filteredSelectedGpxFile);
 		cards.add(card);
 		View cardView = card.build(mapActivity);
 		container.addView(cardView);

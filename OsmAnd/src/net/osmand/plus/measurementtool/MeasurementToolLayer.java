@@ -23,6 +23,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ChartPointsHelper;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.measurementtool.MeasurementEditingContext.AdditionMode;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -351,7 +352,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	private boolean isDrawingEnabled() {
-		return inMeasurementMode && !getApplication().getGpsFilterHelper().isEnabled();
+		MapActivity mapActivity = getMapActivity();
+		return inMeasurementMode && (mapActivity == null || mapActivity.getGpsFilterFragment() == null);
 	}
 
 	private boolean isInTileBox(RotatedTileBox tb, WptPt point) {

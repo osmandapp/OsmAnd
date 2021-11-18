@@ -33,22 +33,20 @@ public class GpsFilterGraphCard extends GpsFilterBaseCard {
 
 	private View view;
 	PagerSlidingTabStrip slidingTabs;
-	private GPXItemPagerAdapter pagerAdapter;
 
-	public GpsFilterGraphCard(@NonNull MapActivity mapActivity, @NonNull Fragment target) {
-		super(mapActivity, target);
+	public GpsFilterGraphCard(@NonNull MapActivity mapActivity,
+	                          @NonNull Fragment target,
+	                          @NonNull FilteredSelectedGpxFile filteredSelectedGpxFile) {
+		super(mapActivity, target, filteredSelectedGpxFile);
 		displayHelper = createTrackDisplayHelper();
 		trackChartPoints = new TrackChartPoints();
 	}
 
 	private TrackDisplayHelper createTrackDisplayHelper() {
 		TrackDisplayHelper displayHelper = new TrackDisplayHelper(app);
-		FilteredSelectedGpxFile currentFilteredGpxFile = gpsFilterHelper.getCurrentFilteredGpxFile();
-		if (currentFilteredGpxFile != null) {
-			GPXFile gpxFile = currentFilteredGpxFile.getGpxFile();
-			displayHelper.setFile(new File(gpxFile.path));
-			displayHelper.setGpx(gpxFile);
-		}
+		GPXFile gpxFile = filteredSelectedGpxFile.getGpxFile();
+		displayHelper.setFile(new File(gpxFile.path));
+		displayHelper.setGpx(gpxFile);
 		return displayHelper;
 	}
 
@@ -86,7 +84,7 @@ public class GpsFilterGraphCard extends GpsFilterBaseCard {
 		slidingTabs = view.findViewById(R.id.sliding_tabs);
 		WrapContentHeightViewPager pager = view.findViewById(R.id.pager);
 
-		pagerAdapter = new GPXItemPagerAdapter(app, displayItem, displayHelper, nightMode,
+		GPXItemPagerAdapter pagerAdapter = new GPXItemPagerAdapter(app, displayItem, displayHelper, nightMode,
 				getSegmentActionsListener(), false, true);
 		pagerAdapter.setChartHMargin(app.getResources().getDimensionPixelSize(R.dimen.content_padding));
 		pager.setAdapter(pagerAdapter);
@@ -134,17 +132,9 @@ public class GpsFilterGraphCard extends GpsFilterBaseCard {
 
 	@Override
 	public void onFinishFiltering() {
-		FilteredSelectedGpxFile currentFilteredGpxFile = gpsFilterHelper.getCurrentFilteredGpxFile();
-		if (currentFilteredGpxFile != null) {
-			GPXFile filteredGpx = currentFilteredGpxFile.getGpxFile();
-			displayHelper.setGpx(filteredGpx);
-			trackChartPoints.setGpx(filteredGpx);
-
-			if (pagerAdapter.isTabTypesSetChanged()) {
-				updateMainContent();
-			} else {
-				pagerAdapter.updateAllGraph();
-			}
-		}
+		GPXFile filteredGpx = filteredSelectedGpxFile.getGpxFile();
+		displayHelper.setGpx(filteredGpx);
+		trackChartPoints.setGpx(filteredGpx);
+		updateMainContent();
 	}
 }

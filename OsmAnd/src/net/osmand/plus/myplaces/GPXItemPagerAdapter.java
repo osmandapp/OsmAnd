@@ -102,15 +102,6 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		return displayHelper.getGpx() != null && displayHelper.getGpx().showCurrentTrack;
 	}
 
-	private boolean isFilteredTrack() {
-		SelectedGpxFile currentFilteredGpxFile = app.getGpsFilterHelper().getCurrentFilteredGpxFile();
-		if (currentFilteredGpxFile != null) {
-			GPXFile filteredGpxFile = currentFilteredGpxFile.getGpxFile();
-			return displayHelper.getGpx() != null && displayHelper.getGpx().equals(filteredGpxFile);
-		}
-		return false;
-	}
-
 	public GPXItemPagerAdapter(@NonNull OsmandApplication app,
 	                           @Nullable GpxDisplayItem gpxItem,
 	                           @NonNull TrackDisplayHelper displayHelper,
@@ -140,8 +131,8 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				analysis = gpxFile.getAnalysis(0);
 				gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, ChartPointLayer.GPX);
 			}
-		} else if (isFilteredTrack() && app.getGpsFilterHelper().getCurrentFilteredGpxFile() != null) {
-			GPXFile gpxFile = app.getGpsFilterHelper().getCurrentFilteredGpxFile().getGpxFile();
+		} else if (getFilteredGpxFile() != null) {
+			GPXFile gpxFile = getFilteredGpxFile();
 			gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, ChartPointLayer.GPX);
 			analysis = gpxItem == null
 					? gpxFile.getAnalysis(System.currentTimeMillis())
@@ -149,6 +140,18 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		} else if (gpxItem != null) {
 			analysis = gpxItem.analysis;
 		}
+	}
+
+	@Nullable
+	private GPXFile getFilteredGpxFile() {
+		String gpxPath = displayHelper.getGpx() != null ? displayHelper.getGpx().path : null;
+		if (gpxPath != null) {
+			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxPath);
+			if (selectedGpxFile != null && selectedGpxFile.getFilteredSelectedGpxFile() != null) {
+				return selectedGpxFile.getGpxFile(); // todo gps: should return filtered gpx
+			}
+		}
+		return null;
 	}
 
 	private void fetchTabTypes() {
@@ -797,32 +800,11 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		return false;
 	}
 
-	public boolean isTabTypesSetChanged() {
-		GPXTabItemType[] oldTabs = Arrays.copyOf(tabTypes, tabTypes.length);
-		updateAnalysis();
-		fetchTabTypes();
-		return !Arrays.equals(oldTabs, tabTypes);
-	}
-
 	public void updateGraph(int position) {
-		updateGraph(Collections.singletonList(position));
-	}
-
-	public void updateAllGraph() {
-		List<Integer> positions = new ArrayList<>();
-		for (int i = 0; i < getCount(); i++) {
-			positions.add(i);
-		}
-		updateGraph(positions);
-	}
-
-	private void updateGraph(@NonNull List<Integer> positions) {
 		updateAnalysis();
 		fetchTabTypes();
 		if (getCount() > 0 && views.size() > 0) {
-			for (int position : positions) {
-				updateGraphTab(position);
-			}
+			updateGraphTab(position);
 		}
 		notifyDataSetChanged();
 	}

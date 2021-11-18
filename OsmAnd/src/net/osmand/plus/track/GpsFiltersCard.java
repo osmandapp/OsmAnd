@@ -29,8 +29,10 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 
 	private View view;
 
-	public GpsFiltersCard(@NonNull MapActivity mapActivity, @NonNull Fragment target) {
-		super(mapActivity, target);
+	public GpsFiltersCard(@NonNull MapActivity mapActivity,
+	                      @NonNull Fragment target,
+	                      @NonNull FilteredSelectedGpxFile filteredSelectedGpxFile) {
+		super(mapActivity, target, filteredSelectedGpxFile);
 	}
 
 	@Override
@@ -44,20 +46,17 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 			view = inflateMainContent();
 		}
 
-		FilteredSelectedGpxFile currentFilteredGpx = gpsFilterHelper.getCurrentFilteredGpxFile();
-		if (currentFilteredGpx != null) {
-			updatePointsRatio(currentFilteredGpx);
-			setupSmoothingFilter(currentFilteredGpx);
-			setupSpeedFilter(currentFilteredGpx);
-			setupAltitudeFilter(currentFilteredGpx);
-			setupHdopFilter(currentFilteredGpx);
-		}
+		updatePointsRatio();
+		setupSmoothingFilter();
+		setupSpeedFilter();
+		setupAltitudeFilter();
+		setupHdopFilter();
 	}
 
-	private void updatePointsRatio(@NonNull FilteredSelectedGpxFile gpxFile) {
+	private void updatePointsRatio() {
 		String pointsString = app.getString(R.string.shared_string_gpx_points);
-		String leftPoints = String.valueOf(gpxFile.getLeftPointsCount());
-		String totalPoints = String.valueOf(gpxFile.getTotalPointsCount());
+		String leftPoints = String.valueOf(filteredSelectedGpxFile.getLeftPointsCount());
+		String totalPoints = String.valueOf(filteredSelectedGpxFile.getTotalPointsCount());
 		String ratio = app.getString(R.string.ltr_or_rtl_combine_via_slash_with_space, leftPoints, totalPoints);
 		String fullText = app.getString(R.string.ltr_or_rtl_combine_via_colon, pointsString, ratio);
 		SpannableString spannedText = new SpannableString(fullText);
@@ -68,20 +67,20 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 		pointsRatio.setText(spannedText);
 	}
 
-	private void setupSmoothingFilter(@NonNull FilteredSelectedGpxFile gpxFile) {
-		setupFilter(view.findViewById(R.id.smoothing_filter), gpxFile.getSmoothingFilter());
+	private void setupSmoothingFilter() {
+		setupFilter(view.findViewById(R.id.smoothing_filter), filteredSelectedGpxFile.getSmoothingFilter());
 	}
 
-	private void setupSpeedFilter(@NonNull FilteredSelectedGpxFile gpxFile) {
-		setupFilter(view.findViewById(R.id.speed_filter), gpxFile.getSpeedFilter());
+	private void setupSpeedFilter() {
+		setupFilter(view.findViewById(R.id.speed_filter), filteredSelectedGpxFile.getSpeedFilter());
 	}
 
-	private void setupAltitudeFilter(@NonNull FilteredSelectedGpxFile gpxFile) {
-		setupFilter(view.findViewById(R.id.altitude_filter), gpxFile.getAltitudeFilter());
+	private void setupAltitudeFilter() {
+		setupFilter(view.findViewById(R.id.altitude_filter), filteredSelectedGpxFile.getAltitudeFilter());
 	}
 
-	private void setupHdopFilter(@NonNull FilteredSelectedGpxFile gpxFile) {
-		setupFilter(view.findViewById(R.id.hdop_filter), gpxFile.getHdopFilter());
+	private void setupHdopFilter() {
+		setupFilter(view.findViewById(R.id.hdop_filter), filteredSelectedGpxFile.getHdopFilter());
 	}
 
 	private void setupFilter(@NonNull View container, @NonNull GpsFilter filter) {
@@ -138,7 +137,7 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 				if (fromUser && values.size() == 2) {
 					filter.updateValues((values.get(0)), values.get(1));
 					updateDisplayedFilterNumbers(container, filter);
-					app.getGpsFilterHelper().filterGpxFile();
+					gpsFilterHelper.filterGpxFile(filteredSelectedGpxFile);
 				}
 			});
 			UiUtilities.setupSlider(rangeSlider, nightMode, ColorUtilities.getActiveColor(app, nightMode), false);
@@ -150,7 +149,7 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 				if (fromUser) {
 					filter.updateValue((slider.getValue()));
 					updateDisplayedFilterNumbers(container, filter);
-					app.getGpsFilterHelper().filterGpxFile();
+					gpsFilterHelper.filterGpxFile(filteredSelectedGpxFile);
 				}
 			});
 			UiUtilities.setupSlider(slider, nightMode, ColorUtilities.getActiveColor(app, nightMode));
@@ -170,9 +169,6 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 
 	@Override
 	public void onFinishFiltering() {
-		FilteredSelectedGpxFile currentFilteredGpxFile = gpsFilterHelper.getCurrentFilteredGpxFile();
-		if (currentFilteredGpxFile != null) {
-			updatePointsRatio(currentFilteredGpxFile);
-		}
+		updateMainContent();
 	}
 }

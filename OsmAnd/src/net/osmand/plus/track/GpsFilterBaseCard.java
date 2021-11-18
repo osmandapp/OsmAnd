@@ -10,7 +10,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.FilteredSelectedGpxFile;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -40,15 +39,19 @@ import androidx.fragment.app.Fragment;
 public abstract class GpsFilterBaseCard extends MapBaseCard implements GpsFilterListener {
 
 	protected final GpsFilterHelper gpsFilterHelper;
+	protected final FilteredSelectedGpxFile filteredSelectedGpxFile;
 
 	private final Fragment target;
 	private final List<BaseBottomSheetItem> actionButtonsItems;
 
-	public GpsFilterBaseCard(@NonNull MapActivity mapActivity, @NonNull Fragment target) {
+	public GpsFilterBaseCard(@NonNull MapActivity mapActivity,
+	                         @NonNull Fragment target,
+	                         @NonNull FilteredSelectedGpxFile filteredSelectedGpxFile) {
 		super(mapActivity);
 		this.gpsFilterHelper = app.getGpsFilterHelper();
 		this.gpsFilterHelper.addListener(this);
 		this.target = target;
+		this.filteredSelectedGpxFile = filteredSelectedGpxFile;
 		this.actionButtonsItems = createActionButtons();
 	}
 
@@ -73,7 +76,7 @@ public abstract class GpsFilterBaseCard extends MapBaseCard implements GpsFilter
 		List<BaseBottomSheetItem> actionButtons = new ArrayList<>();
 		for (ActionButton actionButton : ActionButton.values()) {
 
-			boolean actionAvailable = actionButton != ActionButton.SAVE_AS_COPY || gpsFilterHelper.isSourceGpxFileExist();
+			boolean actionAvailable = actionButton != ActionButton.SAVE_AS_COPY || isSourceFileSaved();
 			int colorId = actionAvailable
 					? ColorUtilities.getActiveColorId(nightMode)
 					: ColorUtilities.getDefaultIconColorId(nightMode);
@@ -94,7 +97,7 @@ public abstract class GpsFilterBaseCard extends MapBaseCard implements GpsFilter
 
 	private void onActionButtonClick(@NonNull ActionButton actionButton) {
 		if (actionButton == ActionButton.RESET_TO_ORIGINAL) {
-			gpsFilterHelper.resetFilters();
+			filteredSelectedGpxFile.resetFilters(app);
 		} else if (actionButton == ActionButton.SAVE_AS_COPY) {
 			saveAsCopy();
 		} else if (actionButton == ActionButton.SAVE_INTO_FILE) {
@@ -103,29 +106,19 @@ public abstract class GpsFilterBaseCard extends MapBaseCard implements GpsFilter
 	}
 
 	private void saveAsCopy() {
-		FilteredSelectedGpxFile currentFilteredGpxFile = gpsFilterHelper.getCurrentFilteredGpxFile();
-		if (currentFilteredGpxFile != null) {
-			String sourceFilePath = currentFilteredGpxFile.getGpxFile().path;
-			String sourceFileNameWithExtension = Algorithms.getFileWithoutDirs(sourceFilePath);
-			String sourceFileName = Algorithms.getFileNameWithoutExtension(sourceFileNameWithExtension);
-			String destFileName = sourceFileName + "-copy";
-			if (target instanceof SaveAsNewTrackFragmentListener) {
-				SaveAsNewTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-						target, null, sourceFileName, destFileName, false, true);
-			}
+		String sourceFilePath = filteredSelectedGpxFile.getGpxFile().path;
+		String sourceFileNameWithExtension = Algorithms.getFileWithoutDirs(sourceFilePath);
+		String sourceFileName = Algorithms.getFileNameWithoutExtension(sourceFileNameWithExtension);
+		String destFileName = sourceFileName + "-copy";
+		if (target instanceof SaveAsNewTrackFragmentListener) {
+			SaveAsNewTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
+					target, null, sourceFileName, destFileName, false, true);
 		}
 	}
 
 	private void saveIntoFile() {
-		FilteredSelectedGpxFile currentFilteredGpxFile = gpsFilterHelper.getCurrentFilteredGpxFile();
-		if (currentFilteredGpxFile == null) {
-			return;
-		}
-
-		SelectedGpxFile sourceSelectedGpxFile = currentFilteredGpxFile.getSourceSelectedGpxFile();
-		GPXFile newGpxFile = currentFilteredGpxFile.getGpxFile();
-		sourceSelectedGpxFile.setGpxFile(newGpxFile, app);
-		gpsFilterHelper.setSelectedGpxFile(sourceSelectedGpxFile);
+		GPXFile newGpxFile = filteredSelectedGpxFile.getGpxFile();
+		filteredSelectedGpxFile.getSourceSelectedGpxFile().setGpxFile(newGpxFile, app);
 
 		File outFile = new File(newGpxFile.path);
 		new SaveGpxAsyncTask(outFile, newGpxFile, new SaveGpxListener() {
@@ -142,7 +135,9 @@ public abstract class GpsFilterBaseCard extends MapBaseCard implements GpsFilter
 							: errorMessage.getMessage();
 					app.showToastMessage(toastMessage);
 				}
-				gpsFilterHelper.onSavedFile(newGpxFile.path);
+				if (target instanceof SaveIntoFileListener) {
+					((SaveIntoFileListener) target).onSavedIntoFile(newGpxFile.path);
+				}
 			}
 		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
@@ -191,7 +186,7 @@ public abstract class GpsFilterBaseCard extends MapBaseCard implements GpsFilter
 			int dp20 = view.getResources().getDimensionPixelSize(R.dimen.title_padding);
 			AndroidUtils.setPadding(actionButton.getView(), dp20, 0, 0, 0);
 
-			boolean disableSaveAsCopy = !gpsFilterHelper.isSourceGpxFileExist()
+			boolean disableSaveAsCopy = !isSourceFileSaved()
 					&& Algorithms.objectEquals(actionButton.getTag(), ActionButton.SAVE_AS_COPY.ordinal());
 			if (disableSaveAsCopy) {
 				actionButton.getView().setEnabled(false);
@@ -199,9 +194,8 @@ public abstract class GpsFilterBaseCard extends MapBaseCard implements GpsFilter
 		}
 	}
 
-	@Override
-	public void onFiltersReset() {
-		updateMainContent();
+	private boolean isSourceFileSaved() {
+		return new File(filteredSelectedGpxFile.getGpxFile().path).exists();
 	}
 
 	private enum ActionButton {
@@ -219,5 +213,10 @@ public abstract class GpsFilterBaseCard extends MapBaseCard implements GpsFilter
 			this.iconId = iconId;
 			this.titleId = titleId;
 		}
+	}
+
+	public interface SaveIntoFileListener {
+
+		void onSavedIntoFile(@NonNull String filePath);
 	}
 }

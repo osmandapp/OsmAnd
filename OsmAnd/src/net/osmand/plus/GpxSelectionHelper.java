@@ -888,6 +888,8 @@ public class GpxSelectionHelper {
 		private boolean showCurrentTrack;
 		protected boolean splitProcessed = false;
 
+		private FilteredSelectedGpxFile filteredSelectedGpxFile;
+
 		public void setGpxFile(GPXFile gpxFile, OsmandApplication app) {
 			this.gpxFile = gpxFile;
 			if (gpxFile.tracks.size() > 0) {
@@ -1006,6 +1008,17 @@ public class GpxSelectionHelper {
 				update(app);
 			}
 			this.displayGroups = displayGroups;
+		}
+
+		@NonNull
+		public FilteredSelectedGpxFile createFilteredSelectedGpxFile(@NonNull OsmandApplication app) {
+			filteredSelectedGpxFile = new FilteredSelectedGpxFile(app, this);
+			return filteredSelectedGpxFile;
+		}
+
+		@Nullable
+		public FilteredSelectedGpxFile getFilteredSelectedGpxFile() {
+			return filteredSelectedGpxFile;
 		}
 
 		public boolean isFollowTrack(OsmandApplication app) {

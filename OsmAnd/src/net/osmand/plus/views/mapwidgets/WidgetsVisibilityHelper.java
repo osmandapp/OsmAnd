@@ -232,7 +232,7 @@ public class WidgetsVisibilityHelper {
 	}
 
 	private boolean isInGpsFilteringMode() {
-		return mapActivity.getMyApplication().getGpsFilterHelper().isEnabled();
+		return mapActivity.getGpsFilterFragment() != null;
 	}
 
 	private boolean isMapLinkedToLocation() {
