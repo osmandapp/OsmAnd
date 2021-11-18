@@ -4416,7 +4416,7 @@
     <string name="display_route_tracks_as_poi">Показать треки как POI</string>
     <string name="delete_history_items">Удалить записи истории (%1$s шт.)\?</string>
     <string name="delete_history_items_descr">Удалить выбранные записи\?</string>
-    <string name="quick_action_toggle_preference">Переключатель для выбранного состояния предпочтений.</string>
+    <string name="quick_action_toggle_preference">Переключатель для изменения предпочтений.</string>
     <string name="from_to_with_params">Из %1$s в %2$s</string>
     <string name="progress_complete">%1$s завершено</string>
     <string name="shared_string_migration">Миграция</string>
@@ -4436,7 +4436,7 @@
     <string name="files_remaining">Осталось файлов: %1$s %2$s</string>
     <string name="copying_file">Копирование файла %1$s</string>
     <string name="storage_found_files_descr">Нажмите «%1$s», чтобы скопировать файлы (%2$s шт.) из «%3$s» в «%4$s». Это может занять некоторое время.</string>
-    <string name="shared_storage_third_step">Предоставьте разрешение на доступ к папке. Без этого разрешения OsmAnd не cможет копировать файлы.</string>
+    <string name="shared_storage_third_step">Предоставьте разрешение на доступ к папке. Без этого OsmAnd не cможет копировать файлы.</string>
     <string name="shared_string_skip_warning">Вы уверены, что хотите пропустить миграцию\? OsmAnd больше не имеет доступа к вашим файлам в общем хранилище.
 \n
 \nПриложение запустится в новой папке с вашими данными.</string>
