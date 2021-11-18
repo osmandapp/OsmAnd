@@ -19,7 +19,7 @@
     <string name="add_to_group">Add to group</string>
     <string name="app_modes_options">Choose App modes</string>
     <string name="shared_string_memory">Memory</string>
-    <string name="memory_allocated_for_routing_ds">A higher memory value can speed up calculating routes of more than 500 km, but may slow down other apps.</string>
+    <string name="memory_allocated_for_routing_ds">Higher memory value speeds up the calculation of long routes (more than 500 km), but may affect the performance of other applications.\nDoes not affect calculation speed of short routes.</string>
     <string name="memory_allocated_for_routing">Memory allocated for routing</string>
     <string name="reading_files">Reading files…</string>
     <string name="no_items_selected_warning">Please select at least one item</string>
