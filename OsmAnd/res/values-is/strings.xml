@@ -4306,7 +4306,7 @@
     <string name="icon_group_education">Menntun</string>
     <string name="icon_group_industrial">Iðnaðar</string>
     <string name="delete_history_items">Eyða %1$s aðgerðaferlum\?</string>
-    <string name="delete_history_items_descr">Ertu viss um að þú viljir eyða völdum atriðum í aðgerðaferlinum\?</string>
+    <string name="delete_history_items_descr">Eyða völdum atriðum í aðgerðaferlinum\?</string>
     <string name="use_external_timestamps">Nota utanaðkomandi tímamerki</string>
     <string name="clear_all_history">Hreinsa allan aðgerðaferil</string>
     <string name="approx_safe_mode_description">Framkvæma GPX-nálgun með hægvirkari Android-kóða í stað þess innbyggða.</string>
@@ -4328,7 +4328,7 @@
     <string name="migration_files_present">%1$d skrár (%2$s) eru til staðar á völdu staðsetningunni \'%3$s\'.</string>
     <string name="fold_unfold">breiða/brjóta</string>
     <string name="shared_string_hide_all">Fela allt</string>
-    <string name="storage_found_files_descr">Ýttu á “%1$s” til að afrita %2$s skrár úr “%3$s” yfir í “%4$s”. Þetta gæti tekið nokkra stund.</string>
+    <string name="storage_found_files_descr">Ýttu á \"%1$s\" til að afrita %2$s skrár úr \"%3$s\" yfir í \"%4$s\". Þetta gæti tekið nokkra stund.</string>
     <string name="continue_on_phone">Halda áfram á snjalltæki</string>
     <string name="shared_string_travelbooks">Travelbooks</string>
     <string name="show_parameter_seekbar">Birta leitarstiku fyrir breytur</string>
@@ -4340,12 +4340,12 @@
     <string name="history_actions_descr">Þú getur flutt aðgerðaferil út í skrá.</string>
     <string name="not_enough_contributions_descr">Að lágmarki þarf %1$s breytingar á undangengnu tveggja-mánaða tímabili %2$s til að fá aðgang að ótakmörkuðum uppfærlum á klukkustundar fresti.</string>
     <string name="files_remaining">Endurnefning skráa: %1$s %2$s</string>
-    <string name="copying_file">Afrita skrá %1$s</string>
+    <string name="copying_file">Afrita skrá %1$s…</string>
     <string name="from_to_with_params">Frá %1$s til %2$s</string>
     <string name="progress_complete">%1$s lokið</string>
     <string name="shared_storage_second_step">Smelltu á \"Nota þessa möppu\".</string>
     <string name="folder_access_denied">Heimild þarf til að fá aðgang að völdu möppunni.</string>
-    <string name="copying_completed">Afritun lokið</string>
+    <string name="copying_completed">Afritað</string>
     <string name="shared_string_copy_to">Afrita í</string>
     <string name="display_route_tracks_as_poi">Birta ferla sem POI-merkisstaði</string>
     <string name="approx_safe_mode">Örugg GPX-nálgun</string>
