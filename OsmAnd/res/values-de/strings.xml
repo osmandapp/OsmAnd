@@ -4453,11 +4453,13 @@
     <string name="add_to_group">Zur Gruppe hinzufügen</string>
     <string name="app_modes_options">App-Modi auswählen</string>
     <string name="shared_string_memory">Speicher</string>
-    <string name="memory_allocated_for_routing_ds">Die Zuweisung von mehr Speicher kann die Berechnung von Routen von mehr als 500 km beschleunigen, kann aber andere Anwendungen verlangsamen.</string>
+    <string name="memory_allocated_for_routing_ds">Die Zuweisung von mehr Speicher kann die Berechnung von langen Routen (mehr als 500 km) beschleunigen, kann aber die Leistung anderer Anwendungen beeinträchtigen.
+\nAuf die Berechnung von kurzen Routen hat dies keinen Einfluss.</string>
     <string name="memory_allocated_for_routing">Für das Routing zugewiesener Speicher</string>
     <string name="reading_files">Lese Dateien…</string>
     <string name="no_items_selected_warning">Bitte wählen Sie mindestens einen Artikel</string>
     <string name="display_groups_visibility_dialog_description">Sie können die Sichtbarkeit von Gruppen auf der Karte steuern. Wenn der Track ausgeblendet ist, werden auch alle Gruppen ausgeblendet.</string>
     <string name="shared_string_hide_all">Alle ausblenden</string>
     <string name="migration_files_present">%1$d Dateien (%2$s) sind am ausgewählten Speicherort \'%3$s\' vorhanden.</string>
+    <string name="exit_without_saving_warning">Sind Sie sicher, dass Sie ohne zu speichern beenden möchten\? Alle Änderungen gingen verloren.</string>
 </resources>
