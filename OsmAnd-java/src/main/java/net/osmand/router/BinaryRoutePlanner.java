@@ -791,7 +791,6 @@ public class BinaryRoutePlanner {
 			if (nextIterator != null) {
 				next = nextIterator.next();
 			}
-			// TODO - (OK) double check not to add itself (doesn't look correct)
 			if (next.getSegmentStart() == currentSegment.getSegmentEnd() && 
 					next.getRoad().getId() == currentSegment.getRoad().getId()) {
 				// skip itself
@@ -815,7 +814,7 @@ public class BinaryRoutePlanner {
 				// exception as it should not occur
 				throw new IllegalStateException();
 			} else {
-				// TODO (create issue): we know bug in data, so we workaround it
+				// TODO Issue #...: we know that bug in data (how we simplify base data and connect between regions), so we workaround it
 				int newEnd = currentSegment.getSegmentEnd() + (currentSegment.isPositive() ? +1 :-1);
 				if (newEnd >= 0 && newEnd < currentSegment.getRoad().getPointsLength() - 1) {
 					nextCurrentSegment = new RouteSegment(currentSegment.getRoad(), currentSegment.getSegmentEnd(),
@@ -854,33 +853,37 @@ public class BinaryRoutePlanner {
 					printRoad("  >?", visitedSegments.get(calculateRoutePointId(next)), null);
 				}
 				toAdd = false;
-				// TODO update comment
-				// the segment was already visited! We need to follow better route if it exists
-				// that is very exceptional situation and almost exception, it can happen
-				// 1. when we underestimate distanceToEnd - wrong h() of A*
-				// 2. because we process not small segments but the whole road, it could be that
-				// deviation from the road is faster than following the whole road itself!
-				if (distFromStart < visIt.distanceFromStart) { // TODO ??? && next.getParentRoute() == null
+				// The segment was already visited! We can try to follow new route if it's shorter.
+				// That is very exceptional situation and almost exception, it can happen
+				// 1. We underestimate distanceToEnd - wrong h() of A* (heuristic > 1)
+				// 2. We don't process small segments 1 by 1 from the queue but the whole road, 
+				//  and it could be that deviation from the road is faster than following the whole road itself!
+				if (distFromStart < visIt.distanceFromStart) {
 					double routeSegmentTime = calculateRouteSegmentTime(ctx, reverseWaySearch, visIt);
+					// we need to properly compare @distanceFromStart VISITED and NON-VISITED segment
 					if (distFromStart + routeSegmentTime < visIt.distanceFromStart) {
-						// TODO can we add again ? without breaking final segment
-						// Here it's not very legitimate cause we need to go up to final segment & decrease final time
+						// Here it's not very legitimate action cause in theory we need to go up to the final segment in the queue & decrease final time
+						// But it's compensated by chain reaction cause next.distanceFromStart < finalSegment.distanceFromStart and revisiting all segments
+						
+						// We don't check ```next.getParentRoute() == null``` cause segment could be unloaded
+						// so we need to add segment back to the queue & reassign the parent (same as for next.getParentRoute() == null)
 						toAdd = true;
 						if (ctx.config.heuristicCoefficient <= 1) {
 							System.err.println("! ALERT new faster path to a visited segment: " + (distFromStart + routeSegmentTime) + " < "
 									+ visIt.distanceFromStart + ": " + next + " - " + visIt);
 						}
-						// TODO is it needed here (works with and without)s?
-//						visIt.setParentRoute(segment);
-//						visIt.distanceFromStart = (float) (distFromStart + routeSegmentTime);
-//						visIt.distanceToEnd = segment.distanceToEnd;
+						// ??? It's not clear whether this block is needed or not ???
+						// All Test cases work with and without it
+						// visIt.setParentRoute(segment);
+						// visIt.distanceFromStart = (float) (distFromStart + routeSegmentTime);
+						// visIt.distanceToEnd = segment.distanceToEnd;
+						// ???
 					}
 				}
 				
 			}
 			if (toAdd && (!next.isSegmentAttachedToStart() || ctx.roadPriorityComparator(next.distanceFromStart,
 					next.distanceToEnd, distFromStart, segment.distanceToEnd) > 0)) {
-			//if (toAdd && next.getParentRoute() == null) {
 				next.distanceFromStart = distFromStart;
 				next.distanceToEnd = segment.distanceToEnd;
 				if (TRACE_ROUTING) {
@@ -944,28 +947,44 @@ public class BinaryRoutePlanner {
 		
 	}
 
+	// Route segment represents part (segment) of the road. 
+	// In our current data it's always length of 1: [X, X + 1] or [X - 1, X] 
 	public static class RouteSegment {
 		
+		// # Represents parent segment for Start & End segment 
 		public static final RouteSegment NULL = new RouteSegment(null, 0, 1);
 		
+		// # Final fields that store objects 
 		final short segStart;
 		final short segEnd;
 		final RouteDataObject road;
-		// needed to store intersection of routes
-		RouteSegment next = null;
+		
+		// # Represents cheap-storage of LinkedList connected segments
+		// All the road segments from map data connected to the same end point   
 		RouteSegment nextLoaded = null;
+		// Segments only allowed for Navigation connected to the same end point 
+		RouteSegment next = null;
+		
+		// # Caches of similar segments to speed up routing calculation 
+		// Segment of opposite direction i.e. for [4 -> 5], opposite [5 -> 4]
 		RouteSegment oppositeDirection = null;
+		// Same Road/ same Segment but used for opposite A* search (important to have different cause #parentRoute is different)
+		// Note: if we use 1-direction A* then this is field is not needed
 		RouteSegment reverseSearch = null;
 
-		// search context (needed for searching route)
-		// Initially it should be null (!) because it checks was it segment visited before
-		// TODO explain NULL
+		// # Important for A*-search to distinguish whether segment was visited or not
+		// Initially all segments null and startSegment/endSegment.parentRoute = RouteSegment.NULL;
+		// After iteration stores previous segment i.e. how it was reached from startSegment
 		RouteSegment parentRoute = null;
 
-		// distance measured in time (seconds)
-		// doesn't include distance from @segStart to @segStart + @directionAssgn
-		// TODO explain difference for visited & non visited segment
+		// # A* routing - Distance measured in time (seconds)
+		// There is a small (important!!!) difference how it's calculated for visited (parentRoute != null) and non-visited
+		// NON-VISITED: time from Start [End for reverse A*] to @segStart of @this, including turn time from previous segment (@parentRoute)
+		// VISITED: time from Start [End for reverse A*] to @segEnd of @this, 
+		//          including turn time from previous segment (@parentRoute) and obstacle / distance time between @segStart-@segEnd on @this 
 		float distanceFromStart = 0;
+		// NON-VISITED: Approximated (h(x)) time from @segStart of @this route segment to End [Start for reverse A*] 
+		// VISITED: Approximated (h(x)) time from @segEnd of @this route segment to End [Start for reverse A*]
 		float distanceToEnd = 0;
 
 		public RouteSegment(RouteDataObject road, int segmentStart, int segmentEnd) {
