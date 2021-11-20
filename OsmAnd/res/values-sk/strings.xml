@@ -4443,10 +4443,12 @@
     <string name="add_to_group">Pridať do skupiny</string>
     <string name="app_modes_options">Vybrať režimy aplikácie</string>
     <string name="shared_string_memory">Pamäť</string>
-    <string name="memory_allocated_for_routing_ds">Vyššia hodnota pamäte môže zrýchliť výpočet trás dlhších ako 500 km, ale môže spomaliť iné aplikácie.</string>
+    <string name="memory_allocated_for_routing_ds">Vyššia hodnota pamäte zrýchli výpočet dlhších trás (viac ako 500 km), ale môže spomaliť iné aplikácie.
+\nNeovplyvní výpočet kratších trás.</string>
     <string name="reading_files">Načítajú sa súbory…</string>
     <string name="no_items_selected_warning">Prosím zvoľte aspoň jednu položku</string>
     <string name="shared_string_hide_all">Skryť všetko</string>
     <string name="memory_allocated_for_routing">Pamäť pridelená výpočtu trasy</string>
     <string name="display_groups_visibility_dialog_description">Môžete ovládať viditeľnosť skupín na mape. Ak je skupina skrytá, budú skryté aj všetky stopy.</string>
+    <string name="exit_without_saving_warning">Naozaj chcete skončiť bez uloženia\? Stratíte všetky zmeny.</string>
 </resources>
