@@ -13,11 +13,11 @@ import com.google.android.material.slider.Slider;
 
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.FilteredSelectedGpxFile;
-import net.osmand.plus.FilteredSelectedGpxFile.GpsFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.GpsFilterHelper.GpsFilter;
 
 import java.util.List;
 
