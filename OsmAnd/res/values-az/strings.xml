@@ -2823,4 +2823,9 @@
     <string name="contact_support">Dəstəklə əlaqə</string>
     <string name="troubleshooting">Problem həlli</string>
     <string name="lang_lmo">Lombard</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="mgrs_format_descr">OsmAnd UTM NATO formatına bənzəyən MGRS istifadə edir.</string>
+    <string name="general_settings_profile_descr">Proqram teması, vahidlər, region</string>
+    <string name="angular_measeurement">Bucaq vahidi</string>
+    <string name="utm_format_descr">OsmAnd UTM NATO formatına bənzəyən, lakin eyni olmayan UTM standartı istifadə edir.</string>
 </resources>
