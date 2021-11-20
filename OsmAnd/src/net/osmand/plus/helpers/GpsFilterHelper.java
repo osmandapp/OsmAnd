@@ -95,7 +95,9 @@ public class GpsFilterHelper {
 			int pointsCount = 0;
 			for (Track track : sourceGpx.tracks) {
 
-				Track filteredTrack = copyTrack(track);
+				Track filteredTrack = new Track();
+				filteredTrack.name = track.name;
+				filteredTrack.desc = track.desc;
 
 				for (TrkSegment segment : track.segments) {
 
@@ -191,13 +193,14 @@ public class GpsFilterHelper {
 		}
 	}
 
+	@NonNull
 	public static GPXFile copyGpxFile(@NonNull OsmandApplication app, @NonNull GPXFile source) {
 		GPXFile copy = new GPXFile(Version.getFullVersion(app));
 		copy.author = source.author;
 		if (source.metadata != null) {
 			copy.metadata = copyMetadata(source.metadata);
 		}
-		copy.tracks = new ArrayList<>(source.tracks);
+		copy.tracks = copyTracks(source.tracks);
 		copy.addPoints(source.getPoints());
 		copy.routes = new ArrayList<>(source.routes);
 		copy.path = source.path;
@@ -207,6 +210,34 @@ public class GpsFilterHelper {
 		return copy;
 	}
 
+	@NonNull
+	private static List<Track> copyTracks(@NonNull List<Track> sourceTracks) {
+		List<Track> copiedTracks = new ArrayList<>(sourceTracks.size());
+		for (Track sourceTrack : sourceTracks) {
+
+			Track trackCopy = new Track();
+			trackCopy.name = sourceTrack.name;
+			trackCopy.desc = sourceTrack.desc;
+			trackCopy.generalTrack = sourceTrack.generalTrack;
+			copiedTracks.add(trackCopy);
+
+			for (TrkSegment sourceSegment : sourceTrack.segments) {
+
+				TrkSegment segmentCopy = new TrkSegment();
+				segmentCopy.name = sourceSegment.name;
+				segmentCopy.generalSegment = sourceSegment.generalSegment;
+				trackCopy.segments.add(segmentCopy);
+
+				for (WptPt sourcePoint : sourceSegment.points) {
+					segmentCopy.points.add(new WptPt(sourcePoint));
+				}
+			}
+		}
+
+		return copiedTracks;
+	}
+
+	@NonNull
 	private static Metadata copyMetadata(@NonNull Metadata source) {
 		Metadata copy = new Metadata();
 		copy.name = source.name;
@@ -235,13 +266,6 @@ public class GpsFilterHelper {
 
 		copy.copyExtensions(source);
 
-		return copy;
-	}
-
-	private static Track copyTrack(Track source) {
-		Track copy = new Track();
-		copy.name = source.name;
-		copy.desc = source.desc;
 		return copy;
 	}
 
