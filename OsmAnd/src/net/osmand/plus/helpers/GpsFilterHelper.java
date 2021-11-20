@@ -655,12 +655,12 @@ public class GpsFilterHelper {
 
 		@Override
 		public double getMinValue() {
-			return 0d;
+			return Math.floor(analysis.minHdop);
 		}
 
 		@Override
 		public double getMaxValue() {
-			return analysis.maxHdop;
+			return Math.ceil(analysis.maxHdop);
 		}
 
 		@Override
@@ -671,16 +671,21 @@ public class GpsFilterHelper {
 		@NonNull
 		@Override
 		public String getFormattedValue(double value, @NonNull OsmandApplication app) {
-			return String.format(app.getLocaleHelper().getPreferredLocale(), "%.1f", value);
+			return OsmAndFormatter.getFormattedDistance(((float) value), app);
 		}
 
 		@NonNull
 		@Override
 		public CharSequence getFilterTitle(@NonNull OsmandApplication app) {
 			String gpsPrecision = app.getString(R.string.gps_filter_precision);
-			String value = isNeeded()
-					? getFormattedValue(getSelectedMaxValue(), app)
-					: app.getString(R.string.gpx_logging_no_data);
+			String value;
+			if (isNeeded()) {
+				String minHdop = getFormattedValue(getMinValue(), app);
+				String maxHdop = getFormattedValue(getSelectedMaxValue(), app);
+				value = app.getString(R.string.ltr_or_rtl_combine_via_dash, minHdop, maxHdop);
+			} else {
+				value = app.getString(R.string.gpx_logging_no_data);
+			}
 			String title = app.getString(R.string.ltr_or_rtl_combine_via_colon, gpsPrecision, value);
 			return styleFilterTitle(title, gpsPrecision.length() + 1);
 		}
@@ -688,7 +693,7 @@ public class GpsFilterHelper {
 		@NonNull
 		@Override
 		public String getLeftText(@NonNull OsmandApplication app) {
-			return app.getString(R.string.max_hdop);
+			return app.getString(R.string.shared_string_precision);
 		}
 
 		@NonNull

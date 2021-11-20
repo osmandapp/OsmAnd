@@ -603,6 +603,7 @@ public class GPXUtilities {
 		public float maxSpeed = 0;
 		public float avgSpeed;
 
+		public double minHdop = Double.NaN;
 		public double maxHdop = Double.NaN;
 
 		public int points;
@@ -652,7 +653,7 @@ public class GPXUtilities {
 		}
 
 		public boolean isHdopSpecified() {
-			return !Double.isNaN(maxHdop);
+			return minHdop > 0;
 		}
 
 		public boolean isColorizationTypeAvailable(ColorizationType colorizationType) {
@@ -767,8 +768,13 @@ public class GPXUtilities {
 					}
 
 					double hdop = point.hdop;
-					if (!Double.isNaN(hdop) && (Double.isNaN(maxHdop) || hdop > maxHdop)) {
-						maxHdop = hdop;
+					if (hdop > 0) {
+						if (Double.isNaN(minHdop) || hdop < minHdop) {
+							minHdop = hdop;
+						}
+						if (Double.isNaN(maxHdop) || hdop > maxHdop) {
+							maxHdop = hdop;
+						}
 					}
 
 					// Trend channel analysis for elevation gain/loss, Hardy 2015-09-22, LPF filtering added 2017-10-26:
