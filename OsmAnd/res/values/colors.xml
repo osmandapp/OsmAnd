@@ -499,5 +499,6 @@
 	<color name="track_gradient_start">#5ADC5F</color>
 	<color name="track_gradient_center">#D4EF32</color>
 	<color name="track_gradient_end">#F3374D</color>
+	<color name="backup_restore_icons_blue">#6C19FF</color>
 
 </resources>
