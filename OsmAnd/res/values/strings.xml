@@ -18,12 +18,12 @@
     <string name="add_to_group">Add to group</string>
     <string name="app_modes_options">Choose App modes</string>
     <string name="shared_string_memory">Memory</string>
-    <string name="memory_allocated_for_routing_ds">Higher memory value speeds up the calculation of long routes (more than 500 km), but may affect the performance of other applications.\nDoes not affect calculation speed of short routes.</string>
-    <string name="memory_allocated_for_routing">Memory allocated for Routing</string>
+    <string name="memory_allocated_for_routing_ds">A higher memory value can speed up calculating routes of more than 500 km, but may slow down other apps.</string>
+    <string name="memory_allocated_for_routing">Memory allocated for routing</string>
     <string name="reading_files">Reading files…</string>
     <string name="no_items_selected_warning">Please select at least one item</string>
     <string name="show_parameter_seekbar">Show parameter seekbar</string>
-    <string name="display_groups_visibility_dialog_description">You can control groups visibility on the map. If track is hidden, all groups will be hidden too.</string>
+    <string name="display_groups_visibility_dialog_description">You can control group visibility on the map. If track is hidden, all groups will be hidden, too.</string>
     <string name="shared_string_hide_all">Hide all</string>
     <string name="files_remaining">Files remaining: %1$s %2$s</string>
     <string name="copying_file">Copying file %1$s</string>
