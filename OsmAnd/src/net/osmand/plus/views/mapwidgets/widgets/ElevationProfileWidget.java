@@ -3,7 +3,6 @@ package net.osmand.plus.views.mapwidgets.widgets;
 import android.graphics.Matrix;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -367,15 +366,13 @@ public class ElevationProfileWidget {
 		firstVisiblePointIndex = firstPointIndex;
 		lastVisiblePointIndex = lastPointIndex;
 		if (firstPointIndex >= 0 && lastPointIndex > firstPointIndex) {
-			ElevationDiffsCalculator elevationDiffsCalc = new ElevationDiffsCalculator(lastPointIndex - firstPointIndex + 1) {
+			ElevationDiffsCalculator elevationDiffsCalc = new ElevationDiffsCalculator(firstPointIndex, lastPointIndex - firstPointIndex + 1) {
 				@Override
 				public WptPt getPoint(int index) {
 					return points.get(index);
 				}
 			};
-			for (int i = firstPointIndex; i <= lastPointIndex; i++) {
-				elevationDiffsCalc.calculateElevationDiff(i);
-			}
+			elevationDiffsCalc.calculateElevationDiffs();
 			String uphill = OsmAndFormatter.getFormattedAlt(elevationDiffsCalc.getDiffElevationUp(), app);
 			updateTextWidget(uphillView, uphill);
 			String downhill = OsmAndFormatter.getFormattedAlt(elevationDiffsCalc.getDiffElevationDown(), app);
