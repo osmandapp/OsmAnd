@@ -10,7 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="exit_without_saving_warning">Are you sure you exit without saving? You will lost all changes.</string>
     <string name="migration_files_present">%1$d files (%2$s) are present in the selected location \'%3$s\'.</string>
     <string name="fold_unfold">fold/unfold</string>
