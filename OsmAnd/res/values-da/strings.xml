@@ -2170,7 +2170,7 @@
     <string name="routing_attr_height_obstacles_name">Brug højdedata</string>
     <string name="route_altitude">Rutehøjde</string>
     <string name="altitude_descent">Fald</string>
-    <string name="altitude_ascent">Stigning</string>
+    <string name="altitude_ascent">Op ad bakke</string>
     <string name="altitude_range">Højdeinterval</string>
     <string name="average_altitude">Gennemsnitshøjde</string>
     <string name="shared_string_time">Tid</string>
@@ -4462,4 +4462,10 @@
     <string name="fold_unfold">fold/fold ud</string>
     <string name="migration_files_present">Der findes %1$d-filer (%2$s) på den valgte placering \'%3$s\'.</string>
     <string name="exit_without_saving_warning">Er du sikker på, at du vil afslutte uden at gemme\? Du vil miste alle ændringer.</string>
+    <string name="shared_string_show_slope">Vis hældning</string>
+    <string name="shared_string_uphill">Op ad bakke</string>
+    <string name="shared_string_downhill">Ned ad bakke</string>
+    <string name="shared_string_grade">Graduering</string>
+    <string name="shared_string_hide_slope">Skjul hældning</string>
+    <string name="elevation_profile">Højdeprofil</string>
 </resources>
