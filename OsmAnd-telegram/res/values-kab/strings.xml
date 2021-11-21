@@ -268,7 +268,7 @@
     <string name="disable_all_sharing_desc">Sens beṭṭu n wadig i meṛṛa asqerdec yettwafernen (%1$d).</string>
     <string name="choose_osmand">Fren lqem OsmAnd ara tesqedceḍ</string>
     <string name="shared_string_export">Sifeḍ</string>
-    <string name="logcat_buffer">Logcat buffer</string>
+    <string name="logcat_buffer">Takatut n weHraz Logcat</string>
     <string name="logcat_buffer_descr">Senqed daɣen bḍu iɣmisen lqayen n usnas</string>
     <string name="send_report">Azen aneqqis</string>
 </resources>
