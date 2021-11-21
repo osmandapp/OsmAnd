@@ -23,7 +23,7 @@ public class ElevationProfileWidgetState extends WidgetState {
 
 	@Override
 	public int getMenuIconId() {
-		return R.drawable.ic_action_elevation;
+		return R.drawable.ic_action_elevation_profile;
 	}
 
 	@Override

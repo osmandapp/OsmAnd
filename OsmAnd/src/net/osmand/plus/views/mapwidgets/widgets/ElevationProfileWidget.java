@@ -212,6 +212,7 @@ public class ElevationProfileWidget {
 			@Override
 			public void onChartGestureEnd(MotionEvent me, ChartGesture lastPerformedGesture) {
 				gpxItem.chartMatrix = new Matrix(chart.getViewPortHandler().getMatrixTouch());
+				app.runInUIThread(() -> updateWidgets());
 			}
 
 			@Override
@@ -240,6 +241,7 @@ public class ElevationProfileWidget {
 
 			@Override
 			public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
+				app.runInUIThread(() -> updateWidgets());
 			}
 
 			@Override

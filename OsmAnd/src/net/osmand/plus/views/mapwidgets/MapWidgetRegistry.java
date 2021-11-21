@@ -19,7 +19,9 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapmarkers.DirectionIndicationDialogFragment;
 import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -572,7 +574,9 @@ public class MapWidgetRegistry {
 				.setListener(new AppearanceItemClickListener(settings.SHOW_DISTANCE_RULER, mapActivity))
 				.setLayout(R.layout.list_item_icon_and_switch).createItem());
 
-		addElevationProfileWidget(mapActivity, cm, mode);
+		if (InAppPurchaseHelper.isOsmAndProAvailable(app)) {
+			addElevationProfileWidget(mapActivity, cm, mode);
+		}
 
 		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_markers, mapActivity)
 				.setDescription(settings.MAP_MARKERS_MODE.get().toHumanString(mapActivity))
@@ -597,7 +601,7 @@ public class MapWidgetRegistry {
 		final ElevationProfileWidgetState widgetState = new ElevationProfileWidgetState(app);
 		ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder()
 				.setTitleId(widgetState.getMenuTitleId(), app)
-				.setIcon(R.drawable.ic_action_elevation)
+				.setIcon(R.drawable.ic_action_elevation_profile)
 				.setSelected(pref.get())
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(new ContextMenuAdapter.OnRowItemClick() {

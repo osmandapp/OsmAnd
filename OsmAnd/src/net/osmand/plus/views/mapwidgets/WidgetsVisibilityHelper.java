@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -26,11 +27,14 @@ public class WidgetsVisibilityHelper {
 	private final RoutingHelper routingHelper;
 	private final MapLayers mapLayers;
 
+	boolean proVersionAvailable;
+
 	public WidgetsVisibilityHelper(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		this.settings = mapActivity.getMyApplication().getSettings();
 		this.routingHelper = mapActivity.getRoutingHelper();
 		this.mapLayers = mapActivity.getMapLayers();
+		this.proVersionAvailable = InAppPurchaseHelper.isOsmAndProAvailable(mapActivity.getMyApplication());
 	}
 
 	public boolean shouldShowQuickActionButton() {
@@ -137,7 +141,7 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public boolean shouldShowElevationProfileWidget() {
-		return settings.SHOW_ELEVATION_PROFILE_WIDGET.get()
+		return proVersionAvailable && settings.SHOW_ELEVATION_PROFILE_WIDGET.get()
 				&& isRouteCalculated()
 				&& !isDashboardVisible()
 				&& !isInChangeMarkerPositionMode()
