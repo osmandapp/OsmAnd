@@ -4342,7 +4342,7 @@
     <string name="shared_string_details">Podrobnosti</string>
     <string name="shared_app_storage_description">Zdieľaná pamäť už nie je dostupná kvôli zmenám prístupu k úložisku v Androide.</string>
     <string name="purchases_feature_desc_android_auto">Prináša mapy a navigáciu OsmAnd na obrazovku vášho vozidla a zapojí sa do ovládania vášho vozidla.</string>
-    <string name="rendering_attr_natureReserves_name">Prírodná rezervácia</string>
+    <string name="rendering_attr_natureReserves_name">Prírodné rezervácie</string>
     <string name="shared_string_articles">Články</string>
     <string name="included_categories">Zahrnuté kategórie</string>
     <string name="release_4_1">• Prvotná podpora pre Android Auto
@@ -4401,7 +4401,54 @@
     <string name="no_plugins_enabled">Nemáte zapnuté žiadne zásuvné moduly. Zoznam dostupných modulov môžete nájsť v \'Menu\' → \'Zásuvné moduly\'.</string>
     <string name="display_route_tracks">Zobraziť stopy</string>
     <string name="approx_safe_mode_description">Vykonať aproximácie GPX pomocou pomalšieho kódu pre Android namiesto natívneho kódu.</string>
-    <string name="delete_history_items_descr">Naozaj chcete vymazať zvolené položky histórie\?</string>
-    <string name="quick_action_toggle_preference">Prepínač stavu zvoleného nastavenia.</string>
+    <string name="delete_history_items_descr">Vymazať zvolené položky histórie\?</string>
+    <string name="quick_action_toggle_preference">Prepínač na zmenu nastavenia.</string>
     <string name="delete_history_items">Vymazať %1$s položiek histórie\?</string>
+    <string name="from_to_with_params">Z %1$s do %2$s</string>
+    <string name="progress_complete">%1$s hotovo</string>
+    <string name="storage_copying_files_size">Kopíruje sa %1$s súborov %2$s</string>
+    <string name="storage_found_files_size">Nájdených %1$s súborov %2$s</string>
+    <string name="shared_storage_first_step">Stlačte \"%1$s\".
+\nOtvorí sa správca súborov, v ktorom vyhľadajte priečinok osmand.</string>
+    <string name="copying_completed">Skopírované</string>
+    <string name="shared_string_copy_to">Kopírovať do</string>
+    <string name="icon_group_industrial">Priemysel</string>
+    <string name="start_copying">Začať kopírovanie</string>
+    <string name="storage_found_files_descr">Stlačte \"%1$s\" pre skopírovanie %2$s súborov z \"%3$s\" do \"%4$s\". Môže to chvíľu trvať.</string>
+    <string name="shared_storage_third_step">Povoľte prístup k priečinku. Bez tohto povolenia nemôže OsmAnd skopírovať súbory.</string>
+    <string name="files_remaining">Zostávajúce súbory: %1$s %2$s</string>
+    <string name="storage_copied_files_size">Skopírovaných %1$s súborov %2$s</string>
+    <string name="copying_file">Kopíruje sa súbor %1$s…</string>
+    <string name="shared_string_skip_warning">Preskočiť migráciu\? OsmAnd už nemá prístup k vašim súborom v zdieľanom úložisku.
+\n
+\nAplikácia začne používať váš nový údajový priečinok.</string>
+    <string name="shared_storage_last_step">Zvoliť nový priečinok s údajmi môžete potom.</string>
+    <string name="folder_access_denied">Na prístup k zvolenému priečinku je potrebné povolenie.</string>
+    <string name="skip_confirmation">Áno, preskočiť</string>
+    <string name="shared_storage">Zdieľané úložisko</string>
+    <string name="shared_storage_migration_descr">Kvôli zmenám pravidiel prístupu k úložisku v Androide už OsmAnd nemôže ďalej používať %1$s.
+\n
+\nSkopírujte všetky vaše údaje do nového priečinka.</string>
+    <string name="shared_storage_migration">Migrácia zdieľaného úložiska</string>
+    <string name="icon_group_education">Vzdelávanie</string>
+    <string name="shared_storage_second_step">Stlačte \"Použiť tento priečinok\".</string>
+    <string name="shared_string_migration">Migrácia</string>
+    <string name="rendering_attr_natureReserves_description">Zobraziť prírodné rezervácie, chránené oblasti a národné parky.</string>
+    <string name="not_enough_contributions_descr">Vyžaduje sa aspoň %1$s zmien za posledné 2 mesiace %2$s, aby ste získali neobmedzené hodinové aktualizácie máp.</string>
+    <string name="show_parameter_seekbar">Zobraziť hľadanie parametrov</string>
+    <string name="migration_files_present">%1$d súborov (%2$s) sa nachádza v zvolenom umiestnení \'%3$s\'.</string>
+    <string name="fold_unfold">zbaliť/rozbaliť</string>
+    <string name="app_profile_type">Typ profilu aplikácie</string>
+    <string name="map_marker_options">Možnosti mapových značiek</string>
+    <string name="add_to_group">Pridať do skupiny</string>
+    <string name="app_modes_options">Vybrať režimy aplikácie</string>
+    <string name="shared_string_memory">Pamäť</string>
+    <string name="memory_allocated_for_routing_ds">Vyššia hodnota pamäte zrýchli výpočet dlhších trás (viac ako 500 km), ale môže spomaliť iné aplikácie.
+\nNeovplyvní výpočet kratších trás.</string>
+    <string name="reading_files">Načítajú sa súbory…</string>
+    <string name="no_items_selected_warning">Prosím zvoľte aspoň jednu položku</string>
+    <string name="shared_string_hide_all">Skryť všetko</string>
+    <string name="memory_allocated_for_routing">Pamäť pridelená výpočtu trasy</string>
+    <string name="display_groups_visibility_dialog_description">Môžete ovládať viditeľnosť skupín na mape. Ak je skupina skrytá, budú skryté aj všetky stopy.</string>
+    <string name="exit_without_saving_warning">Naozaj chcete skončiť bez uloženia\? Stratíte všetky zmeny.</string>
 </resources>

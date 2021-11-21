@@ -37,15 +37,15 @@
 						android:layout_width="match_parent"
 						android:layout_height="match_parent"
 						android:layout_gravity="center_vertical"
+						android:layout_marginStart="@dimen/context_menu_buttons_padding_bottom"
 						android:layout_marginLeft="@dimen/context_menu_buttons_padding_bottom"
+						android:layout_marginEnd="@dimen/context_menu_buttons_padding_bottom"
 						android:layout_marginRight="@dimen/context_menu_buttons_padding_bottom"
 						android:orientation="horizontal"
 						android:paddingStart="@dimen/route_info_app_modes_padding"
 						android:paddingLeft="@dimen/route_info_app_modes_padding"
 						android:paddingEnd="@dimen/route_info_app_modes_padding"
-						android:paddingRight="@dimen/route_info_app_modes_padding"
-						android:layout_marginStart="@dimen/context_menu_buttons_padding_bottom"
-						android:layout_marginEnd="@dimen/context_menu_buttons_padding_bottom" />
+						android:paddingRight="@dimen/route_info_app_modes_padding" />
 
 					<LinearLayout
 						android:id="@+id/app_modes_fold_container"
@@ -58,6 +58,7 @@
 						<androidx.appcompat.widget.AppCompatImageView
 							android:id="@+id/fold_button"
 							android:layout_width="wrap_content"
+							android:contentDescription="@string/fold_unfold"
 							android:layout_height="match_parent"
 							android:background="?attr/selectableItemBackgroundBorderless"
 							android:paddingLeft="@dimen/route_info_icon_padding_right"
@@ -78,6 +79,7 @@
 
 						<androidx.appcompat.widget.AppCompatImageView
 							android:id="@+id/app_modes_options"
+							android:contentDescription="@string/app_modes_options"
 							android:layout_width="wrap_content"
 							android:layout_height="match_parent"
 							android:background="?attr/selectableItemBackgroundBorderless"

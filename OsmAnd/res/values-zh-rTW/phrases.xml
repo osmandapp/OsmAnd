@@ -4209,4 +4209,6 @@
     <string name="poi_faculty_chemistry">化學</string>
     <string name="poi_faculty_communication">通訊</string>
     <string name="poi_faculty_medicine">醫學</string>
+    <string name="poi_tool_hire">工具租用</string>
+    <string name="poi_escape_game">密室脫逃遊戲</string>
 </resources>

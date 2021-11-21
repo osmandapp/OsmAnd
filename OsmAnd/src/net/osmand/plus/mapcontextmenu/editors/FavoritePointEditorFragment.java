@@ -31,6 +31,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
 
 import java.util.LinkedHashSet;
@@ -248,8 +249,8 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		if (favorite != null) {
 			final FavouritePoint point = new FavouritePoint(favorite.getLatitude(), favorite.getLongitude(),
 					getNameTextValue(), getCategoryTextValue(), favorite.getAltitude(), favorite.getTimestamp());
-			point.setDescription(isDescriptionAvailable() ? getDescriptionTextValue() : null);
-			point.setAddress(isAddressAvailable() ? getAddressTextValue() : null);
+			point.setDescription(getDescriptionTextValue());
+			point.setAddress(getAddressTextValue());
 			point.setColor(color);
 			point.setBackgroundType(backgroundType);
 			point.setIconId(iconId);
@@ -264,8 +265,8 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		if (favorite != null) {
 			final FavouritePoint point = new FavouritePoint(favorite.getLatitude(), favorite.getLongitude(),
 					getNameTextValue(), getCategoryTextValue(), favorite.getAltitude(), favorite.getTimestamp());
-			point.setDescription(isDescriptionAvailable() ? getDescriptionTextValue() : null);
-			point.setAddress(isAddressAvailable() ? getAddressTextValue() : null);
+			point.setDescription(getDescriptionTextValue());
+			point.setAddress(getAddressTextValue());
 			point.setColor(color);
 			point.setBackgroundType(backgroundType);
 			point.setIconId(iconId);
@@ -467,6 +468,15 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 	@Override
 	public int getIconId() {
 		return iconId;
+	}
+
+	@Nullable
+	@Override
+	public String getPreselectedIconName() {
+		PointEditor editor = getEditor();
+		return editor == null || !editor.isNew || favorite == null
+				? null
+				: RenderingIcons.getBigIconName(favorite.getIconId());
 	}
 
 	private int getColor() {

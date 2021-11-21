@@ -24,17 +24,18 @@ import java.util.List;
 
 public class TargetPointsHelper {
 
-	private List<TargetPoint> intermediatePoints = new ArrayList<>();
+	private final OsmandApplication ctx;
+	private OsmandSettings settings;
+	private final RoutingHelper routingHelper;
+
+	private final List<TargetPoint> intermediatePoints = new ArrayList<>();
 	private TargetPoint pointToNavigate = null;
 	private TargetPoint pointToStart = null;
 	private TargetPoint pointToNavigateBackup = null;
 	private TargetPoint pointToStartBackup = null;
 	private TargetPoint myLocationToStart = null;
-	private OsmandSettings settings;
-	private RoutingHelper routingHelper;
-	private List<StateChangedListener<Void>> listeners = new ArrayList<>();
-	private List<TargetPointChangedListener> pointListeners = new ArrayList<>();
-	private OsmandApplication ctx;
+	private final List<StateChangedListener<Void>> listeners = new ArrayList<>();
+	private final List<TargetPointChangedListener> pointListeners = new ArrayList<>();
 
 	private AddressLookupRequest startPointRequest;
 	private AddressLookupRequest targetPointRequest;
@@ -152,18 +153,15 @@ public class TargetPointsHelper {
 		this.routingHelper = ctx.getRoutingHelper();
 		readFromSettings();
 
-		OsmAndAppCustomizationListener customizationListener = new OsmAndAppCustomizationListener() {
-			@Override
-			public void onOsmAndSettingsCustomized() {
-				settings = TargetPointsHelper.this.ctx.getSettings();
-				readFromSettings();
-				updateRouteAndRefresh(true);
-			}
+		OsmAndAppCustomizationListener customizationListener = () -> {
+			settings = TargetPointsHelper.this.ctx.getSettings();
+			readFromSettings();
+			updateRouteAndRefresh(true);
 		};
 		ctx.getAppCustomization().addListener(customizationListener);
 	}
 
-	public void lookupAddessAll() {
+	public void lookupAddressAll() {
 		lookupAddressForPointToNavigate();
 		lookupAddessForStartPoint();
 		for (TargetPoint targetPoint : intermediatePoints) {
@@ -187,7 +185,7 @@ public class TargetPointsHelper {
 			intermediatePoints.add(targetPoint);
 		}
 		if (!ctx.isApplicationInitializing()) {
-			lookupAddessAll();
+			lookupAddressAll();
 		}
 	}
 
@@ -442,7 +440,7 @@ public class TargetPointsHelper {
 
 	public void updateMyLocationToStart() {
 		if (pointToStart == null) {
-			Location lastKnownLocation = ctx.getLocationProvider().getLastKnownLocation();
+			Location lastKnownLocation = ctx.getLocationProvider().getLastStaleKnownLocation();
 			LatLon latLon = lastKnownLocation != null ?
 					new LatLon(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()) : null;
 			RoutingHelperUtils.checkAndUpdateStartLocation(ctx, latLon, false);
@@ -454,8 +452,8 @@ public class TargetPointsHelper {
 		LatLon start = settings.getPointToStart();
 		LatLon finish = settings.getPointToNavigate();
 		List<LatLon> is = getIntermediatePointsLatLonNavigation();
-		Location lastKnownLocation = ctx.getLocationProvider().getLastKnownLocation();
-		if((routingHelper.isFollowingMode() && lastKnownLocation != null) || start == null) {
+		Location lastKnownLocation = ctx.getLocationProvider().getLastStaleKnownLocation();
+		if ((routingHelper.isFollowingMode() && lastKnownLocation != null) || start == null) {
 			routingHelper.setFinalAndCurrentLocation(finish, is, lastKnownLocation);
 		} else {
 			Location loc = wrap(start);

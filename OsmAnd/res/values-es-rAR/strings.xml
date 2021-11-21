@@ -4408,7 +4408,54 @@
     <string name="display_route_tracks_as_poi">Mostrar trazas como PDI</string>
     <string name="shared_string_travelbooks">Libro de viajes</string>
     <string name="display_route_tracks">Mostrar trazas</string>
-    <string name="quick_action_toggle_preference">Un interruptor para alterna el estado de las preferencias.</string>
+    <string name="quick_action_toggle_preference">Un botón que cambia las preferencias.</string>
     <string name="delete_history_items_descr">¿Borrar los elementos marcados en el historial\?</string>
     <string name="delete_history_items">¿Borrar %1$s elementos del historial\?</string>
+    <string name="copying_file">Copiando archivo %1$s…</string>
+    <string name="from_to_with_params">De %1$s a %2$s</string>
+    <string name="progress_complete">%1$s completo</string>
+    <string name="storage_found_files_descr">Pulsa «%1$s» para copiar %2$s archivos de «%3$s» a «%4$s». Puede tardar un poco.</string>
+    <string name="storage_copying_files_size">Copiando %1$s archivos (%2$s)</string>
+    <string name="storage_copied_files_size">Se copiaron %1$s archivos (%2$s)</string>
+    <string name="storage_found_files_size">Se encontraron %1$s archivos (%2$s)</string>
+    <string name="shared_storage_last_step">Puedes definir una nueva carpeta de datos después.</string>
+    <string name="shared_storage_third_step">Permite acceder a la carpeta. Sin esto, OsmAnd no puede copiar archivos.</string>
+    <string name="shared_storage_first_step">Pulsa «%1$s».
+\nEl gestor de archivos se abrirá donde debería encontrar y abrir la carpeta «osmand».</string>
+    <string name="shared_storage_migration_descr">Debido a los cambios en el acceso al almacenamiento en Android, OsmAnd ya no puede usar «%1$s».
+\n
+\nCopia todos los datos a la nueva carpeta.</string>
+    <string name="shared_storage_second_step">Pulsa en «Usar esta carpeta».</string>
+    <string name="folder_access_denied">Se necesitan permisos para acceder a la carpeta elegida.</string>
+    <string name="shared_string_copy_to">Copiar a</string>
+    <string name="skip_confirmation">Sí, omitir</string>
+    <string name="shared_storage_migration">Migración del almacenamiento compartido</string>
+    <string name="shared_string_migration">Migración</string>
+    <string name="icon_group_education">Educación</string>
+    <string name="files_remaining">Archivos restantes: %1$s %2$s</string>
+    <string name="copying_completed">Copiado</string>
+    <string name="start_copying">Iniciar copia</string>
+    <string name="shared_storage">Almacenamiento compartido</string>
+    <string name="icon_group_industrial">Industrial</string>
+    <string name="shared_string_skip_warning">¿Omitir migración\? OsmAnd ya no tiene acceso a los archivos en el almacenamiento compartido.
+\n
+\nLa aplicación cargará los datos usando la nueva carpeta.</string>
+    <string name="rendering_attr_natureReserves_description">Mostrar reservas naturales, áreas protegidas y parques nacionales.</string>
+    <string name="not_enough_contributions_descr">Necesitas un mínimo de %1$s cambios en el último bimestre %2$s para obtener acceso a actualizaciones de mapas ilimitadas por hora.</string>
+    <string name="show_parameter_seekbar">Mostrar barra de búsqueda de parámetros</string>
+    <string name="migration_files_present">Existen %1$d archivo(s) (%2$s) en la ubicación anterior «%3$s».</string>
+    <string name="fold_unfold">Contraer/expandir</string>
+    <string name="app_profile_type">Tipo de perfil de la aplicación</string>
+    <string name="map_marker_options">Opciones del marcador de mapa</string>
+    <string name="add_to_group">Añadir al grupo</string>
+    <string name="app_modes_options">Eligir modos de aplicación</string>
+    <string name="shared_string_memory">Memoria</string>
+    <string name="memory_allocated_for_routing_ds">Un valor de memoria más alto acelera el cálculo de rutas largas (más de 500 km), pero puede afectar al rendimiento de otras aplicaciones.
+\nNo afecta al cálculo de rutas cortas.</string>
+    <string name="memory_allocated_for_routing">Memoria asignada para navegación</string>
+    <string name="reading_files">Leyendo archivos…</string>
+    <string name="no_items_selected_warning">Marca al menos un elemento</string>
+    <string name="display_groups_visibility_dialog_description">Puedes controlar la visibilidad de los grupos en el mapa. Si la traza está oculta, todos los grupos también lo estarán.</string>
+    <string name="shared_string_hide_all">Ocultar todo</string>
+    <string name="exit_without_saving_warning">¿Salir sin guardar\? Se perderán todos los cambios.</string>
 </resources>

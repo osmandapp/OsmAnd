@@ -487,7 +487,7 @@
     <string name="reading_cached_tiles">האריחים שנשמרו נקראים…</string>
     <string name="version_index_is_big_for_memory">האינדקס „{0}“ גדול מדי לזיכרון</string>
     <string name="version_index_is_not_supported">גרסת האינדקס „{0}“ אינה נתמכת</string>
-    <string name="safe_mode_description">הפעלת היישום במצב בטוח (על ידי שימוש בקוד Android אטי יותר במקום בקוד טבעי).</string>
+    <string name="safe_mode_description">הפעלת היישומון במצב (אטי) בטוח.</string>
     <string name="safe_mode">מצב בטוח</string>
     <string name="native_library_not_running">היישום פועל כעת במצב בטוח (ניתן לכבות זאת ב‚הגדרות’).</string>
     <string name="background_service_is_enabled_question">שירות הרקע של OsmAnd עדיין פעיל. לעצור גם אותו?</string>
@@ -500,7 +500,7 @@
     <string name="build_installed">הבנייה {0} הותקנה ({1}).</string>
     <string name="downloading_build">הבנייה מתקבלת…</string>
     <string name="install_selected_build">להתקין את OsmAnd‏ - {0} מתוך {1}‏ {2} מ״ב ?</string>
-    <string name="loading_builds_failed">קבלת רשימת הבניות של OsmAnd נכשלה</string>
+    <string name="loading_builds_failed">לא ניתן לקבל את רשימת הבניות של OsmAnd</string>
     <string name="loading_builds">הבניות של OsmAnd נטענות…</string>
     <string name="select_build_to_install">יש לבחור בנייה של OsmAnd להתקנה</string>
     <string name="contribution_activity">התקנת הגרסה</string>
@@ -4273,7 +4273,7 @@
     <string name="shared_string_files">קבצים</string>
     <string name="travel_route_types">סוגי מסלולים</string>
     <string name="no_items_of_type_message">אין לך פריטים מהסוג הזה</string>
-    <string name="routeInfo_roadClass_description">צביעת המסלול או מתאר הדרך בהתאם לסיווג הדרך.</string>
+    <string name="routeInfo_roadClass_description">צביעת המסלול או מתאר הדרך לפי סיווג הדרך.</string>
     <string name="sample_wikivoyage">דוגמה מוויקימסע</string>
     <string name="shared_string_mini">מוקטן</string>
     <string name="horseback_riding">רכיבה על סוסים</string>
@@ -4352,7 +4352,78 @@
     <string name="purchases_feature_desc_pro_widgets">קבלת גישה לתכונות מקצועיות של OsmAnd: צביעת מסלולים ועוד.</string>
     <string name="option_available_only_in_osmand_pro">האפשרות הזאת קיימת כחלק ממינוי OsmAnd Pro.</string>
     <string name="display_route_tracks_as_poi">הצגת מסלולים כנקודות עניין</string>
-    <string name="quick_action_toggle_preference">מתג להחלפת מצב העדפה נבחר.</string>
+    <string name="quick_action_toggle_preference">מתג להחלפת העדפה.</string>
     <string name="delete_history_items_descr">למחוק את פריטי ההיסטוריה הנבחרים\?</string>
     <string name="delete_history_items">למחוק %1$s פריטי היסטוריה\?</string>
+    <string name="copying_file">הקובץ %1$s מועתק…</string>
+    <string name="progress_complete">%1$s הושלמו</string>
+    <string name="storage_copied_files_size">%1$s קבצים הועתקו %2$s</string>
+    <string name="storage_copying_files_size">%1$s קבצים מועתקים %2$s</string>
+    <string name="storage_found_files_size">%1$s קבצים נמצאו %2$s</string>
+    <string name="shared_storage_last_step">ניתן לציין תיקיית נתונים חדשה לאחר מכן.</string>
+    <string name="shared_storage_third_step">יש להעניק הרשאת גישה לתיקייה. בלעדיה ל־OsmAnd אין אפשרות להעתיק קבצים.</string>
+    <string name="shared_storage_first_step">יש ללחוץ על „%1$s”.
+\nמנהל הקבצים ייפתח איפה שעליך לאתר ולפתוח את תיקיית osmand.</string>
+    <string name="folder_access_denied">נדרשת הרשאה כדי לגשת לתיקייה הנבחרת.</string>
+    <string name="shared_string_copy_to">העתקה אל</string>
+    <string name="start_copying">התחלת העתקה</string>
+    <string name="shared_storage">אחסון משותף</string>
+    <string name="shared_storage_migration">המרת אחסון משותף</string>
+    <string name="shared_string_migration">המרה</string>
+    <string name="icon_group_industrial">תעשייתי</string>
+    <string name="icon_group_education">חינוכי</string>
+    <string name="files_remaining">קבצים שנותרו: %1$s %2$s</string>
+    <string name="shared_string_skip_warning">לדלג על ההמרה\? ל־OsmAnd אין עוד קשר לקבצים שלך באחסון המשותף.
+\n
+\nהיישומון יחל להשתמש בתיקיית הנתונים החדשה שלך.</string>
+    <string name="from_to_with_params">מתוך %1$s אל %2$s</string>
+    <string name="shared_storage_second_step">יש ללחוץ על „להשתמש בתיקייה זו”.</string>
+    <string name="copying_completed">הועתק</string>
+    <string name="skip_confirmation">כן, לדלג</string>
+    <string name="storage_found_files_descr">יש לגעת ב־„%1$s” כדי להעתיק %2$s קבצים מתוך „%3$s” אל „%4$s”. עשוי לארוך זמן מה.</string>
+    <string name="shared_storage_migration_descr">עקב שינויים בכללי הגישה לאחסון ב־Android, ל־OsmAnd אין עוד אפשרות להשתמש ב־%1$s.
+\n
+\nעליך להעתיק את כל הנתונים שלך למקום האחסון החדש.</string>
+    <string name="shared_storage_warning_description">עקב כללים חדשים ב־Android, החל מנובמבר 2021, OsmAnd בגרסה 4.2 יאבד את הגישה לאחסון המשותף.
+\n
+\nנא להעביר את תיקיית הנתונים מהתיקייה המשותפת לאחסון הזמין, אחרת היישומון יאבד כישה לכל הנתונים שלך כגון מפות בלתי מקוונות, מסלולי GPX וכו׳.</string>
+    <string name="release_4_1">• נוספה תמיכה ראשונית ב־Android Auto
+\n
+\n • עדכון מנשק משתמש לחיפוש נקודות ציון UTM
+\n
+\n • מועדפים: נוספה היכולת לצפות בסמלים בהם נעשה שימוש לאחרונה
+\n
+\n • תכנון מסלול: ישתמש בפרופיל הנבחר לאחר ההפעלה
+\n
+\n • תוקנה שכבת Mapillary התוסף מושבת כרגע כבררת מחדל
+\n
+\n • נוסף מסך לניהול כל היסטוריית היישומון
+\n
+\n • כיוון המפה לא מתאפס לאחר הפעלת היישומון מחדש.
+\n
+\n • עיבוד סמן הגובה SRTM השתפר
+\n
+\n • הכיתוב הערבי במפה השתפר
+\n
+\n • תוקנו מגוון תקלות ניווט
+\n
+\n</string>
+    <string name="app_modes_options">בחירת מצבי יישומון</string>
+    <string name="shared_string_memory">זיכרון</string>
+    <string name="reading_files">קבצים נקראים…</string>
+    <string name="memory_allocated_for_routing">זיכרון שמוקצה לניתוב</string>
+    <string name="no_items_selected_warning">נא לבחור לפחות פריט אחד</string>
+    <string name="shared_string_hide_all">להסתיר הכול</string>
+    <string name="purchases_feature_desc_hourly_map_updates">קבלת גישה לעדכוני מפה תכופים יותר. שעתיים, יומיים או שבועיים. עדכונים מתקבלים באופן מצטבר, רק לאזורים שהשתנו.</string>
+    <string name="migration_files_present">%1$d קבצים (%2$s) קיימים במיקום הנבחר ‚%3$s’.</string>
+    <string name="fold_unfold">קיפול/פריסה</string>
+    <string name="app_profile_type">סוג פרופיל יישומון</string>
+    <string name="add_to_group">הוספה לקבוצה</string>
+    <string name="display_groups_visibility_dialog_description">אפשר לשלוט בהצגת קבוצות על המפה. אם מסלול מוסתר, כל הקבוצות תוסתרנה אף הן.</string>
+    <string name="rendering_attr_natureReserves_description">הצגת שמורת טבע, אזורים מוגנים ופארקים לאומיים.</string>
+    <string name="map_marker_options">אפשרויות סמני מפה</string>
+    <string name="show_parameter_seekbar">הצגת סרגל גלילת משתנים</string>
+    <string name="exit_without_saving_warning">לצאת בלי לשמור\? כל השינויים יאבדו.</string>
+    <string name="memory_allocated_for_routing_ds">ערך זיכרון גבוה יותר מאיץ את החישוב של מסלולים ארוכים (למעלה מ־500 ק״מ), אך עשוי להשפיע על הביצועים של שאר היישומונים.
+\nלא משפיע על מהירות החישוב של מסלולים קצרים.</string>
 </resources>

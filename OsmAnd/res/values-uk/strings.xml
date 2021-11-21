@@ -566,9 +566,9 @@
     <string name="loading_cities">Завантажуються міста…</string>
     <string name="poi">Корисне місце</string>
     <string name="error_occurred_saving_gpx">Не вдалося зберегти GPX-файл.</string>
-    <string name="error_calculating_route">Не вдалося розрахувати маршрут.</string>
-    <string name="error_calculating_route_occured">Не вдалося розрахувати маршрут.</string>
-    <string name="empty_route_calculated">Розрахований маршрут порожній.</string>
+    <string name="error_calculating_route">Не вдалося обчислити маршрут.</string>
+    <string name="error_calculating_route_occured">Не вдалося обчислити маршрут.</string>
+    <string name="empty_route_calculated">Обчислений маршрут порожній.</string>
     <string name="arrived_at_destination">Ви прибули.</string>
     <string name="invalid_locations">Недійсні координати</string>
     <string name="go_back_to_osmand">Повернутись до мапи</string>
@@ -730,7 +730,7 @@
     <string name="osmand_parking_position_description_add_time">Автомобіль припарковано о</string>
     <string name="use_compass_navigation_descr">Використовувати навігацію за компасом, коли напрямок невизначений.</string>
     <string name="use_compass_navigation">Використовувати компас</string>
-    <string name="route_updated_loc_found">Очікування визначення місцерозташування для розрахунку маршруту</string>
+    <string name="route_updated_loc_found">Очікування визначення місцерозташування для обчислення маршруту</string>
     <string name="continue_follow_previous_route_auto">Продовжити рух попереднім незавершеним маршрутом? (%1$s секунд)</string>
     <string name="show_cameras">Камери детектування швидкості</string>
     <string name="show_traffic_warnings">Попередження про дорожній рух</string>
@@ -853,10 +853,10 @@
     <string name="delete_target_point">Вилучити точку призначення</string>
     <string name="target_point">Пункт призначення %1$s</string>
     <string name="intermediate_point">Проміжний пункт %1$s</string>
-    <string name="context_menu_item_last_intermediate_point">Додати як останню проміжну точку</string>
-    <string name="context_menu_item_first_intermediate_point">Додати як першу проміжну точку</string>
-    <string name="add_as_last_destination_point">Додати як останній проміжний пункт призначення</string>
-    <string name="add_as_first_destination_point">Додати як перший проміжний пункт призначення</string>
+    <string name="context_menu_item_last_intermediate_point">Додати останньою проміжною точкою</string>
+    <string name="context_menu_item_first_intermediate_point">Додати першою проміжною точкою</string>
+    <string name="add_as_last_destination_point">Додати останньою проміжною точкою</string>
+    <string name="add_as_first_destination_point">Додати першою проміжною точкою</string>
     <string name="replace_destination_point">Замінити пункт призначення</string>
     <string name="new_destination_point_dialog">Ви вже встановили пункт призначення:</string>
     <string name="shared_string_target_points">Точки призначення</string>
@@ -1202,7 +1202,7 @@
     <string name="index_name_canada">Північна Америка - Канада</string>
     <string name="index_name_italy">Європа - Італія</string>
     <string name="index_name_gb">Європа - Великобританія</string>
-    <string name="calculate_osmand_route_without_internet">Офлайн-розрахунок ділянки маршруту OsmAnd</string>
+    <string name="calculate_osmand_route_without_internet">Офлайн-обчислення ділянки маршруту OsmAnd</string>
     <string name="gpx_option_calculate_first_last_segment">Обчислити маршрут OsmAnd для першого та останнього сегментів маршруту</string>
     <string name="use_displayed_track_for_navigation">Використовувати показаний трек для навігації?</string>
     <string name="keep_and_add_destination_point">Додати наступним пунктом призначення</string>
@@ -1230,7 +1230,7 @@
     <string name="copying_osmand_one_file_descr">Файл (%s) копіюється на нове місце…</string>
     <string name="copying_osmand_files_descr">Копіювання файлів даних OsmAnd до нового місця (%s)…</string>
     <string name="copying_osmand_files">Копіювання файлів даних OsmAnd…</string>
-    <string name="calculate_osmand_route_gpx">Офлайн-розрахунок маршруту OsmAnd</string>
+    <string name="calculate_osmand_route_gpx">Офлайн-обчислення маршруту OsmAnd</string>
     <string name="app_mode_truck">Вантажівка</string>
     <string name="guidance_preferences_descr">Навігаційні налаштування</string>
     <string name="routing_preferences_descr">Налаштування маршрутизації</string>
@@ -1249,8 +1249,8 @@
     <string name="app_mode_aircraft">Літак</string>
     <string name="local_osm_changes_delete_all_confirm">Видалити %1$d змін OSM\?</string>
     <string name="shared_string_delete_all">Вилучити все</string>
-    <string name="animate_routing_route_not_calculated">Будь ласка, розрахуйте маршрут спершу</string>
-    <string name="animate_routing_route">Моделювати за допомогою розрахованого маршруту</string>
+    <string name="animate_routing_route_not_calculated">Будь ласка, спершу обчисліть маршрут</string>
+    <string name="animate_routing_route">Моделювати за допомогою обчисленого маршруту</string>
     <string name="animate_routing_gpx">Моделювати за допомогою записаного треку GPX</string>
     <string name="shared_string_remember_my_choice">Запам’ятати вибір</string>
     <string name="shared_string_and">та</string>
@@ -1531,7 +1531,7 @@
     <string name="index_name_netherlands">Європа - Нідерланди</string>
     <string name="routing_attr_avoid_borders_description">Уникати перетину національних кордонів</string>
     <string name="routing_attr_height_name">Обмеження по висоті</string>
-    <string name="routing_attr_height_description">Укажіть висоту транспортного засобу для розрахунку маршрутів.</string>
+    <string name="routing_attr_height_description">Укажіть висоту транспортного засобу для обчислення маршрутів.</string>
     <string name="use_fast_recalculation">Інтелектуальне переобчислення маршруту</string>
     <string name="use_fast_recalculation_desc">Переобчислити лише початкову частину маршруту, корисно для тривалих подорожей.</string>
     <string name="light_theme">Світла</string>
@@ -1773,7 +1773,7 @@
     <string name="access_from_map_description">Кнопка меню запускає панель керування, а не меню</string>
     <string name="access_from_map">Доступ з мапи</string>
     <string name="simulate_initial_startup_descr">Установлює прапорець першого запуску застосунку, не змінює інші налаштування.</string>
-    <string name="simulate_your_location_descr">Моделювати моє розташування, використовуючи розрахований маршрут або записаний GPX-трек.</string>
+    <string name="simulate_your_location_descr">Моделювати моє розташування, використовуючи обчислений маршрут або записаний GPX-трек.</string>
     <string name="user_hates_app_get_feedback_long">Будь ласка, повідомте нам будь-які пропозиції.</string>
     <string name="opening_at">Відкриття о</string>
     <string name="closing_at">Закриття о</string>
@@ -2236,7 +2236,7 @@
     <string name="quick_action_replace_destination">Замінити пункт призначення</string>
     <string name="quick_action_add_first_intermediate">Додати першу проміжну точку</string>
     <string name="quick_action_add_destination_desc">Кнопка, щоб центрувати екран на пункті призначення, раніше вибране місце призначення стане останнім проміжним пунктом призначення.</string>
-    <string name="quick_action_directions_from_desc">Кнопка, щоб зробити центр екрану точкою відправлення. Потім буде запропоновано встановити місце призначення або запустити розрахунок маршруту.</string>
+    <string name="quick_action_directions_from_desc">Кнопка, щоб зробити центр екрану точкою відправлення. Потім буде запропоновано встановити місце призначення або запустити обчислення маршруту.</string>
     <string name="quick_action_replace_destination_desc">Кнопка, щоб перетворити середину екрану на нове місце призначення маршруту, замінивши раніше вибране місце призначення (якщо воно є).</string>
     <string name="quick_action_add_first_intermediate_desc">Кнопка, щоб зробити центр екрану першим проміжним пунктом призначення.</string>
     <string name="no_overlay">Нема накладки мапи</string>
@@ -2520,7 +2520,7 @@
     <string name="wrong_format">Неправильний формат</string>
     <string name="shared_string_road">Дорога</string>
     <string name="show_map">Показати мапу</string>
-    <string name="route_is_calculated">Маршрут розраховується</string>
+    <string name="route_is_calculated">Маршрут обчислюється</string>
     <string name="round_trip">Подорож туди і назад</string>
     <string name="plan_route_no_markers_toast">Ви повинні додати принаймні одну позначку, щоб використовувати цю функцію.</string>
     <string name="rendering_value_darkyellow_name">Темно-жовтий</string>
@@ -2829,7 +2829,7 @@
     <string name="run_full_osmand_header">Запустити OsmAnd\?</string>
     <string name="shared_string_walk">Пішки</string>
     <string name="save_poi_value_exceed_length">Довжина мітки \"%s\" має бути менше 255 символів.</string>
-    <string name="public_transport_warning_descr_blog">Докладніше про те, як OsmAnd розраховує маршрути, читайте в нашому деннику.</string>
+    <string name="public_transport_warning_descr_blog">Докладніше про те, як OsmAnd обчислює маршрути, читайте в нашому деннику.</string>
     <string name="public_transport_warning_title">Навігація громадським транспортом на даний час проходить тестування, можливі помилки та неточності.</string>
     <string name="add_intermediate">Додати проміжну точку</string>
     <string name="transfers_size">%1$d пересадки</string>
@@ -2872,7 +2872,7 @@
     <string name="rendering_attr_highway_class_service_name">Проїзд</string>
     <string name="rendering_attr_highway_class_footway_name">Піша доріжка</string>
     <string name="rendering_attr_highway_class_steps_name">Сходи</string>
-    <string name="waiting_for_route_calculation">Розрахунок маршруту…</string>
+    <string name="waiting_for_route_calculation">Обчислення маршруту…</string>
     <string name="shared_string_description">Опис</string>
     <string name="routing_attr_avoid_tram_name">Уникати трамваїв</string>
     <string name="routing_attr_avoid_tram_description">Уникати трамваїв</string>
@@ -2923,7 +2923,7 @@
     <string name="public_transport_no_route_title">На жаль, OsmAnd не зміг підібрати маршрут, що відповідав би Вашим налаштуванням.</string>
     <string name="public_transport_try_ped">Спробуйте пішу навігацію.</string>
     <string name="public_transport_try_change_settings">Спробуйте змінити налаштування.</string>
-    <string name="public_transport_calc_pedestrian">Розрахувати піший маршрут</string>
+    <string name="public_transport_calc_pedestrian">Обчислити піший маршрут</string>
     <string name="public_transport_type">Тип транспорту</string>
     <string name="searching_gps">Пошук GPS</string>
     <string name="coordinates_widget">Віджет координат</string>
@@ -3097,7 +3097,8 @@
     <string name="rendering_attr_showLez_name">Показати зони низьких викидів</string>
     <string name="temporary_conditional_routing">Враховувати тимчасові обмеження</string>
     <string name="shared_string_default">Типовий</string>
-    <string name="new_route_calculated_dist_dbg">Маршрут: відстань %1$s, час навігації %2$s \nРозрахунок: %3$.1f с, %4$d доріг, %5$d тайлів)</string>
+    <string name="new_route_calculated_dist_dbg">Маршрут: відстань %1$s, час навігації %2$s
+\nОбчислення: %3$.1f с, %4$d доріг, %5$d тайлів)</string>
     <string name="lang_oc">Окситанська</string>
     <string name="app_mode_wagon">Фургон</string>
     <string name="app_mode_pickup_truck">Пікап</string>
@@ -3169,7 +3170,7 @@
     <string name="logcat_buffer">Буфер logcat</string>
     <string name="plugins_settings">Налаштування розширень</string>
     <string name="shared_string_by_default">Типово</string>
-    <string name="default_speed_dialog_msg">Розраховує час прибуття для невідомих типів доріг і обмежує швидкість для всіх доріг (може вплинути на маршрутизацію)</string>
+    <string name="default_speed_dialog_msg">Обчислює час прибуття для невідомих типів доріг і обмежує швидкість для всіх доріг (може вплинути на маршрутизацію)</string>
     <string name="download_detailed_map">Завантажте докладну мапу %s, щоб переглянути цю область.</string>
     <string name="change_data_storage_full_description">Перемістити файли даних OsmAnd до нового місця призначення\?
 \n%1$s &gt; %2$s</string>
@@ -3205,7 +3206,7 @@
     <string name="app_mode_utv">Поруч</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Повітряна дорога</string>
     <string name="rendering_attr_piste_difficulty_connection_name">З\'єднання</string>
-    <string name="shared_string_calculate">Розрахувати</string>
+    <string name="shared_string_calculate">Обчислити</string>
     <string name="shared_string_osmand_usage">Використання OsmAnd</string>
     <string name="shared_sting_tiles">Тайли</string>
     <string name="shared_string_maps">Мапи</string>
@@ -3424,7 +3425,7 @@
     <string name="profile_type_custom_string">Власний профіль</string>
     <string name="shared_string_angle_param">Кут: %s°</string>
     <string name="shared_string_angle">Кут</string>
-    <string name="recalc_angle_dialog_descr">Додатковий прямий відрізок між моїм розташуванням та розрахунковим маршрутом відображатиметься, поки маршрут не буде перераховано</string>
+    <string name="recalc_angle_dialog_descr">Додатковий прямий відрізок між моїм розташуванням та обчислюваним маршрутом відображатиметься, поки маршрут не буде переобчислено</string>
     <string name="recalc_angle_dialog_title">Найменший кут між моїм розташуванням та маршрутом</string>
     <string name="shared_string_preparing">Підготування</string>
     <string name="shared_string_poi_types">Види POI</string>
@@ -3671,7 +3672,7 @@
     <string name="item_deleted">%1$s видалено</string>
     <string name="speed_cameras_restart_descr">Перезапустіть застосунок для видалення даних про камери контролю швидкості.</string>
     <string name="shared_string_uninstall_and_restart">Видалити та перезапустити</string>
-    <string name="routing_attr_length_description">Укажіть довжину транспортного засобу для розрахунку маршрутів.</string>
+    <string name="routing_attr_length_description">Укажіть довжину транспортного засобу для обчислення маршрутів.</string>
     <string name="routing_attr_length_name">Обмеження довжини</string>
     <string name="speed_cameras_removed_descr">На цьому пристрої немає камер контролю швидкості.</string>
     <string name="app_mode_inline_skates">Роликові ковзани</string>
@@ -4270,7 +4271,7 @@
     <string name="use_login_and_password">Ввести ім\'я користувача та пароль</string>
     <string name="available_until">Доступно до %1$s</string>
     <string name="enough_contributions_descr">Вітаємо, ви надали достатньо внесків OpenStreetMap і тепер можете насолоджуватися необмеженою кількістю оновлень мап OsmAnd!</string>
-    <string name="not_enough_contributions_descr">Щоб отримати безкоштовні оновлення, зробіть мінімум %1$s змін, у сумі за останні два місяці %2$s</string>
+    <string name="not_enough_contributions_descr">Щоб отримати безплатні щогодинні оновлення, зробіть щонайменше %1$s змін за останні два місяці %2$s.</string>
     <string name="shared_string_contributions">Внески</string>
     <string name="contributions_may_calculate_with_delay">Обчислення внесків може тривати кілька годин.</string>
     <string name="map_updates_are_unavailable_yet">Оновлення мап досі недоступні. :-(</string>
@@ -4322,7 +4323,7 @@
     <string name="remove_group_from_markers">Вилучити групу зі списку позначок</string>
     <string name="start_point">Почати</string>
     <string name="mapillary_menu_filter_description_new">Добирати зображення за датою або типом. Працює лише в наближенні великим планом.</string>
-    <string name="service_is_not_available_please_try_later">Служба недоступна, будь ласка, спробуйте пізніше</string>
+    <string name="service_is_not_available_please_try_later">Служба недоступна, повторіть спробу пізніше.</string>
     <string name="shared_string_files">Файли</string>
     <string name="travel_route_types">Типи маршрутів</string>
     <string name="sample_wikivoyage">Приклад Вікімадрів</string>
@@ -4359,7 +4360,7 @@
 \n
 \n• Планування маршруту: буде використовувати вибраний профіль після запуску
 \n
-\n• Виправлено шар mapillary, плагін тепер типово вимкнено
+\n• Виправлено шар mapillary, розширення тепер типово вимкнено
 \n
 \n• Додано сторінку керування всією історією в застосунку
 \n
@@ -4374,7 +4375,7 @@
 \n</string>
     <string name="android_auto_purchase_request_title">Придбати OsmAnd Pro або Maps+ для використання OsmAnd з Android Auto</string>
     <string name="continue_on_phone">Продовжити на мобільному пристрої</string>
-    <string name="location_access_request_title">OsmAnd потрібен доступ до місця розташування для навігації</string>
+    <string name="location_access_request_title">OsmAnd потрібен доступ до місця розташування для навігації.</string>
     <string name="android_auto_map_placeholder_title">Мапа показана на екрані автомобіля.</string>
     <string name="android_auto_map_placeholder_descr">Від\'єднайте пристрій від Android Auto, щоб переглянути мапу в застосунку.</string>
     <string name="location_access_request_action">Надати доступ</string>
@@ -4407,7 +4408,52 @@
     <string name="shared_string_travelbooks">Путівники</string>
     <string name="display_route_tracks">Показати треки</string>
     <string name="display_route_tracks_as_poi">Показувати треки як POI</string>
-    <string name="delete_history_items_descr">Ви впевнені, що хочете видалити вибрані елементи історії\?</string>
+    <string name="delete_history_items_descr">Видалити вибрані елементи історії\?</string>
     <string name="delete_history_items">Видалити елементи історії %1$s\?</string>
-    <string name="quick_action_toggle_preference">Перемикач для перемикання вибраного стану налаштувань.</string>
+    <string name="quick_action_toggle_preference">Перемикач для зміни налаштувань.</string>
+    <string name="copying_file">Копіювання файлу %1$s…</string>
+    <string name="from_to_with_params">З %1$s до %2$s</string>
+    <string name="progress_complete">%1$s завершено</string>
+    <string name="storage_found_files_descr">Торкніться «%1$s», щоб скопіювати файли %2$s з «%3$s» на «%4$s». Це може тривати деякий час.</string>
+    <string name="storage_copied_files_size">Скопійовано %1$s файлів %2$s</string>
+    <string name="storage_copying_files_size">Копіювання %1$s файлів %2$s</string>
+    <string name="storage_found_files_size">Знайдено %1$s файлів %2$s</string>
+    <string name="shared_storage_last_step">Після цього можна вказати нову теку даних.</string>
+    <string name="shared_storage_third_step">Надайте дозвіл на доступ до каталогу. Без нього OsmAnd не може копіювати файли.</string>
+    <string name="shared_storage_first_step">Натисніть «%1$s».
+\nВідкриється файловий менеджер, де потрібно знайти та відкрити каталог osmand.</string>
+    <string name="copying_completed">Скопійовано</string>
+    <string name="shared_string_copy_to">Копіювати до</string>
+    <string name="start_copying">Почати копіювання</string>
+    <string name="shared_string_migration">Переміщення</string>
+    <string name="folder_access_denied">Для доступу до вибраного каталогу потрібен дозвіл.</string>
+    <string name="skip_confirmation">Так, пропустити</string>
+    <string name="shared_storage_migration">Переміщення Спільного сховища</string>
+    <string name="icon_group_industrial">Промисловість</string>
+    <string name="shared_string_skip_warning">Пропустити переміщення\? OsmAnd більше не має доступу до ваших файлів у спільній пам’яті.
+\n
+\nЗастосунок почне використовувати вашу нову теку даних.</string>
+    <string name="shared_storage">Спільне сховище</string>
+    <string name="files_remaining">Файлів лишилося: %1$s %2$s</string>
+    <string name="shared_storage_second_step">Натисніть «Використовувати цей каталог».</string>
+    <string name="shared_storage_migration_descr">Через зміни в Android доступу до пам’яті, OsmAnd більше не може використовувати %1$s.
+\n
+\nСкопіюйте всі дані до нової теки.</string>
+    <string name="icon_group_education">Освіта</string>
+    <string name="show_parameter_seekbar">Показати панель пошуку параметрів</string>
+    <string name="fold_unfold">згорнути/розгорнути</string>
+    <string name="app_profile_type">Тип профілю застосунку</string>
+    <string name="map_marker_options">Варіанти маркерів на карті</string>
+    <string name="add_to_group">Додати до групи</string>
+    <string name="app_modes_options">Вибір режимів застосунку</string>
+    <string name="shared_string_memory">Пам\'ять</string>
+    <string name="memory_allocated_for_routing_ds">Вище значення пам\'яті прискорює обчислення довгих маршрутів (понад 500 км), але може вплинути на швидкодію інших застосунків.
+\nНе впливає на швидкість обчислення коротких маршрутів.</string>
+    <string name="memory_allocated_for_routing">Пам\'ять, виділена для маршрутизації</string>
+    <string name="reading_files">Читання файлів…</string>
+    <string name="no_items_selected_warning">Виберіть принаймні один елемент</string>
+    <string name="display_groups_visibility_dialog_description">Ви можете контролювати видимість груп на мапі. Якщо трек приховано, усі групи також будуть приховані.</string>
+    <string name="shared_string_hide_all">Сховати все</string>
+    <string name="migration_files_present">%1$d файлів (%2$s) присутні у вибраному розташуванні «%3$s».</string>
+    <string name="exit_without_saving_warning">Ви впевнені, що виходите без збереження\? Ви втратите всі зміни.</string>
 </resources>

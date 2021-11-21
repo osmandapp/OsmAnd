@@ -1,12 +1,12 @@
 package net.osmand.plus.settings.datastorage.item;
 
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.MANUALLY_SPECIFIED;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.SHARED_STORAGE;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.IdRes;
-
-import static net.osmand.plus.settings.datastorage.DataStorageHelper.MANUALLY_SPECIFIED;
-import static net.osmand.plus.settings.datastorage.DataStorageHelper.SHARED_STORAGE;
 
 public class StorageItem implements Parcelable, Cloneable {
 
@@ -92,7 +92,7 @@ public class StorageItem implements Parcelable, Cloneable {
 		this.directory = directory;
 	}
 
-	public boolean isStorageSizeDefineable() {
+	public boolean isStorageSizeDefinable() {
 		return !SHARED_STORAGE.equals(key) && !MANUALLY_SPECIFIED.equals(key);
 	}
 

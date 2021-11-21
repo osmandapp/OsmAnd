@@ -229,6 +229,11 @@ public abstract class TilesCache<T> {
 		}
 	}
 
+	protected synchronized void clearAllTiles() {
+		log.info("Cleaning tiles - size = " + cache.size());
+		cache.clear();
+	}
+
 	public synchronized T get(String key, long accessTime) {
 		CacheEntry<T> entry = cache.get(key);
 		if (entry == null) {
