@@ -1236,8 +1236,8 @@ public class RouteCalculationResult {
 	}
 
 	public int getDistanceFromStart() {
-		if (listDistance != null && currentRoute < listDistance.length) {
-			return listDistance[0] - listDistance[currentRoute];
+		if (listDistance != null && currentRoute > 0 && currentRoute < listDistance.length) {
+			return listDistance[0] - listDistance[currentRoute - 1];
 		}
 		return 0;
 	}

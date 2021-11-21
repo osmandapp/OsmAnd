@@ -1301,7 +1301,7 @@ public class GpxUiHelper {
 		Entry lastEntry = null;
 		float lastXSameY = -1;
 		boolean hasSameY = false;
-		float x;
+		float x = 0f;
 		for (Elevation e : elevationData) {
 			i++;
 			if (axisType == GPXDataSetAxisType.TIME || axisType == GPXDataSetAxisType.TIMEOFDAY) {
@@ -1309,7 +1309,7 @@ public class GpxUiHelper {
 			} else {
 				x = e.distance;
 			}
-			if (x > 0) {
+			if (x >= 0) {
 				if (!(calcWithoutGaps && e.firstPoint && lastEntry != null)) {
 					nextX += x / divX;
 				}
@@ -1317,7 +1317,7 @@ public class GpxUiHelper {
 					elev = e.elevation;
 					if (prevElevOrig != -80000) {
 						if (elev > prevElevOrig) {
-							elev -= 1f;
+							//elev -= 1f;
 						} else if (prevElevOrig == elev && i < lastIndex) {
 							hasSameY = true;
 							lastXSameY = nextX;
