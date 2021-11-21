@@ -4451,4 +4451,5 @@
     <string name="reading_files">Lendo arquivos…</string>
     <string name="memory_allocated_for_routing_ds">Um valor de memória mais alto acelera o cálculo de rotas longas (mais de 500 km), mas pode afetar o desempenho de outros aplicativos.
 \nNão afeta a velocidade de cálculo de rotas curtas.</string>
+    <string name="exit_without_saving_warning">Tem certeza de que deseja sair sem salvar\? Você perderá todas as alterações.</string>
 </resources>
