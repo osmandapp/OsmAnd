@@ -140,7 +140,7 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
 					int type = item.getType();
-					boolean res = saveFilesLocation(activity, type, dir);
+					boolean res = saveFilesLocation(app, activity, type, dir);
 					checkAssets(app);
 					updateDownloadIndexes(app);
 					if (res || OsmandSettings.EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE != type) {
@@ -179,21 +179,19 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 		app.getDownloadThread().runReloadIndexFilesSilent();
 	}
 
-	public static boolean saveFilesLocation(@NonNull FragmentActivity activity, int type, @NonNull File selectedFile) {
-		OsmandApplication app = (OsmandApplication) activity.getApplication();
+	public static boolean saveFilesLocation(@NonNull OsmandApplication app, @NonNull FragmentActivity activity, int type, @NonNull File selectedFile) {
 		boolean writable = FileUtils.isWritable(selectedFile);
 		if (writable) {
 			app.setExternalStorageDirectory(type, selectedFile.getAbsolutePath());
-			reloadData(activity);
+			reloadData(app, activity);
 		} else {
 			app.showToastMessage(R.string.specified_directiory_not_writeable);
 		}
 		return writable;
 	}
 
-	private static void reloadData(@NonNull FragmentActivity activity) {
-		OsmandApplication app = (OsmandApplication) activity.getApplication();
-		new ReloadData(activity, app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+	private static void reloadData(@NonNull OsmandApplication app, @NonNull FragmentActivity activity) {
+		new ReloadData(app, activity).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment target, boolean storageReadOnly) {

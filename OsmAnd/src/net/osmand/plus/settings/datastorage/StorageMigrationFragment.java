@@ -34,6 +34,7 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.datastorage.StorageMigrationAsyncTask.StorageMigrationListener;
+import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
@@ -48,7 +49,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	private static final String TAG = StorageMigrationFragment.class.getSimpleName();
 
 	private OsmandApplication app;
-	private DataStorageHelper dataStorageHelper;
+	private StorageItem selectedStorage;
 
 	private View mainView;
 	private View remainingFiles;
@@ -56,11 +57,11 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	private TextView progressTitle;
 	private ProgressBar progressBar;
 
+	private Pair<Long, Long> filesSize;
 	private Map<String, Pair<String, Long>> errors = new HashMap<>();
 	private List<File> existingFiles = new ArrayList<>();
 
 	private int filesCount;
-	private long filesSize;
 	private long remainingSize;
 	private int remainingCount;
 	private int generalProgress;
@@ -73,7 +74,6 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = getMyApplication();
-		dataStorageHelper = new DataStorageHelper(app);
 		nightMode = isNightMode(usedOnMap);
 	}
 
@@ -130,7 +130,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 		copyFilesDescr = mainView.findViewById(R.id.copy_files_descr);
 
 		progressBar.setMin(0);
-		progressBar.setMax((int) (filesSize / 1024));
+		progressBar.setMax((int) (filesSize.second / 1024));
 
 		setupFilesTitle();
 		setupFilesDescr();
@@ -149,7 +149,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 
 	private void setupFilesTitle() {
 		String amount = String.valueOf(filesCount);
-		String formattedSize = "(" + AndroidUtils.formatSize(app, filesSize) + ")";
+		String formattedSize = "(" + AndroidUtils.formatSize(app, filesSize.first) + ")";
 		String warning = getString(copyFinished ? R.string.storage_copied_files_size : R.string.storage_copying_files_size, amount, formattedSize);
 
 		SpannableStringBuilder spannable = new SpannableStringBuilder(warning);
@@ -171,7 +171,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 				for (File file : existingFiles) {
 					size += file.length();
 				}
-				String currentStorage = dataStorageHelper.getCurrentStorage().getTitle();
+				String currentStorage = selectedStorage.getTitle();
 				spannable.append("\n").append(getString(R.string.migration_files_present,
 						existingFiles.size(), AndroidUtils.formatSize(app, size), currentStorage));
 			}
@@ -183,7 +183,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 
 	private void setupFilesDescr() {
 		String sharedStorage = "\"" + getString(R.string.shared_storage) + "\"";
-		String currentStorage = "\"" + dataStorageHelper.getCurrentStorage().getTitle() + "\"";
+		String currentStorage = "\"" + selectedStorage.getTitle() + "\"";
 		String description = getString(R.string.from_to_with_params, sharedStorage, currentStorage);
 
 		TextView summary = copyFilesDescr.findViewById(android.R.id.summary);
@@ -257,18 +257,23 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 		copyFinished = true;
 		this.errors = errors;
 		this.existingFiles = existingFiles;
-		generalProgress = (int) (filesSize / 1024);
+		generalProgress = (int) (filesSize.second / 1024);
 		app.getSettings().SHARED_STORAGE_MIGRATION_FINISHED.set(true);
 		updateContent();
 	}
 
-	public static StorageMigrationListener showInstance(@NonNull FragmentManager fragmentManager, int generalProgress,
-	                                                    int filesCount, long filesSize, boolean usedOnMap) {
+	public static StorageMigrationListener showInstance(@NonNull FragmentManager fragmentManager,
+	                                                    @NonNull StorageItem selectedStorage,
+	                                                    int generalProgress,
+	                                                    int filesCount,
+	                                                    Pair<Long, Long> filesSize,
+	                                                    boolean usedOnMap) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			StorageMigrationFragment fragment = new StorageMigrationFragment();
 			fragment.usedOnMap = usedOnMap;
 			fragment.filesSize = filesSize;
 			fragment.filesCount = filesCount;
+			fragment.selectedStorage = selectedStorage;
 			fragment.generalProgress = generalProgress;
 			fragment.setRetainInstance(true);
 			fragment.show(fragmentManager, TAG);
