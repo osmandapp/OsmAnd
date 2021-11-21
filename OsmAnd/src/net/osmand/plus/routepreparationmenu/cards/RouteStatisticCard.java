@@ -28,7 +28,7 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
-import net.osmand.plus.measurementtool.graph.CommonGraphAdapter;
+import net.osmand.plus.measurementtool.graph.CommonChartAdapter;
 import net.osmand.plus.routing.RoutingHelper;
 
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ public class RouteStatisticCard extends MapBaseCard {
 	@Nullable
 	private OrderedLineDataSet elevationDataSet;
 	private OnClickListener onAnalyseClickListener;
-	private CommonGraphAdapter graphAdapter;
+	private CommonChartAdapter graphAdapter;
 
 	public RouteStatisticCard(MapActivity mapActivity, GPXFile gpx,
 							  OnClickListener onAnalyseClickListener) {
@@ -206,14 +206,14 @@ public class RouteStatisticCard extends MapBaseCard {
 	}
 
 	@Nullable
-	public CommonGraphAdapter getGraphAdapter() {
+	public CommonChartAdapter getGraphAdapter() {
 		return graphAdapter;
 	}
 
 	private void buildHeader(GPXTrackAnalysis analysis) {
 		LineChart mChart = (LineChart) view.findViewById(R.id.chart);
 		GpxUiHelper.setupGPXChart(mChart, 4, 24f, 16f, !nightMode, true);
-		graphAdapter = new CommonGraphAdapter(app, mChart, true);
+		graphAdapter = new CommonChartAdapter(app, mChart, true);
 
 		if (analysis.hasElevationData) {
 			List<ILineDataSet> dataSets = new ArrayList<>();

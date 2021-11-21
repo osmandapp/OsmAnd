@@ -5,7 +5,6 @@ import android.view.MotionEvent;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
@@ -17,13 +16,13 @@ import net.osmand.plus.OsmandApplication;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CommonGraphAdapter extends BaseGraphAdapter<LineChart, LineData, GpxDisplayItem> {
+public class CommonChartAdapter extends BaseCommonChartAdapter {
 
 	private Highlight highlight;
-	private Map<String, ExternalValueSelectedListener> externalValueSelectedListeners = new HashMap<>();
+	private final Map<String, ExternalValueSelectedListener> externalValueSelectedListeners = new HashMap<>();
 	private ExternalGestureListener externalGestureListener;
 
-	public CommonGraphAdapter(OsmandApplication app, LineChart chart, boolean usedOnMap) {
+	public CommonChartAdapter(OsmandApplication app, LineChart chart, boolean usedOnMap) {
 		super(app, chart, usedOnMap);
 	}
 
@@ -119,12 +118,6 @@ public class CommonGraphAdapter extends BaseGraphAdapter<LineChart, LineData, Gp
 
 	public void setExternalGestureListener(ExternalGestureListener listener) {
 		this.externalGestureListener = listener;
-	}
-
-	@Override
-	public void updateView() {
-		chart.setData(chartData);
-		updateHighlight();
 	}
 
 	@Override

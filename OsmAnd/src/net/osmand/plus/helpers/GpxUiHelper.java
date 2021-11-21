@@ -67,8 +67,8 @@ import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IFillFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
@@ -1108,8 +1108,18 @@ public class GpxUiHelper {
 		setupGPXChart(mChart, yLabelsCount, 24f, 16f, settings.isLightContent(), true);
 	}
 
-	public static void setupGPXChart(LineChart mChart, int yLabelsCount, float topOffset, float bottomOffset, boolean light, boolean useGesturesAndScale) {
-		mChart.setHardwareAccelerationEnabled(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP);
+	public static void setupGPXChart(LineChart mChart, int yLabelsCount, float topOffset, float bottomOffset,
+	                                 boolean light, boolean useGesturesAndScale) {
+		setupGPXChart(mChart, yLabelsCount, topOffset, bottomOffset, light, useGesturesAndScale, null);
+	}
+
+	public static void setupGPXChart(LineChart mChart, int yLabelsCount, float topOffset, float bottomOffset,
+	                                 boolean light, boolean useGesturesAndScale, Drawable markerIcon) {
+		if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+			mChart.setHardwareAccelerationEnabled(false);
+		} else {
+			mChart.setHardwareAccelerationEnabled(true);
+		}
 		mChart.setTouchEnabled(useGesturesAndScale);
 		mChart.setDragEnabled(useGesturesAndScale);
 		mChart.setScaleEnabled(useGesturesAndScale);
@@ -1127,7 +1137,7 @@ public class GpxUiHelper {
 
 		// create a custom MarkerView (extend MarkerView) and specify the layout
 		// to use for it
-		GPXMarkerView mv = new GPXMarkerView(mChart.getContext());
+		GPXMarkerView mv = new GPXMarkerView(mChart.getContext(), markerIcon);
 		mv.setChartView(mChart); // For bounds control
 		mChart.setMarker(mv); // Set the marker to the chart
 		mChart.setDrawMarkers(true);
@@ -1227,10 +1237,10 @@ public class GpxUiHelper {
 		final String mainUnitX = ctx.getString(mainUnitStr);
 
 		axisBase.setGranularity(granularity);
-		axisBase.setValueFormatter(new IAxisValueFormatter() {
+		axisBase.setValueFormatter(new ValueFormatter() {
 
 			@Override
-			public String getFormattedValue(float value, AxisBase axis) {
+			public String getFormattedValue(float value) {
 				if (!Algorithms.isEmpty(formatX)) {
 					return MessageFormat.format(formatX + mainUnitX, value);
 				} else {
@@ -1245,9 +1255,9 @@ public class GpxUiHelper {
 	private static float setupXAxisTime(XAxis xAxis, long timeSpan) {
 		final boolean useHours = timeSpan / 3600000 > 0;
 		xAxis.setGranularity(1f);
-		xAxis.setValueFormatter(new IAxisValueFormatter() {
+		xAxis.setValueFormatter(new ValueFormatter() {
 			@Override
-			public String getFormattedValue(float value, AxisBase axis) {
+			public String getFormattedValue(float value) {
 				int seconds = (int) value;
 				if (useHours) {
 					int hours = seconds / (60 * 60);
@@ -1267,9 +1277,9 @@ public class GpxUiHelper {
 
 	private static float setupXAxisTimeOfDay(XAxis xAxis, final long startTime) {
 		xAxis.setGranularity(1f);
-		xAxis.setValueFormatter(new IAxisValueFormatter() {
+		xAxis.setValueFormatter(new ValueFormatter() {
 			@Override
-			public String getFormattedValue(float value, AxisBase axis) {
+			public String getFormattedValue(float value) {
 				long seconds = (long) (startTime / 1000 + value);
 				return OsmAndFormatter.getFormattedTimeShort(seconds);
 			}
@@ -1291,7 +1301,7 @@ public class GpxUiHelper {
 		Entry lastEntry = null;
 		float lastXSameY = -1;
 		boolean hasSameY = false;
-		float x;
+		float x = 0f;
 		for (Elevation e : elevationData) {
 			i++;
 			if (axisType == GPXDataSetAxisType.TIME || axisType == GPXDataSetAxisType.TIMEOFDAY) {
@@ -1299,7 +1309,7 @@ public class GpxUiHelper {
 			} else {
 				x = e.distance;
 			}
-			if (x > 0) {
+			if (x >= 0) {
 				if (!(calcWithoutGaps && e.firstPoint && lastEntry != null)) {
 					nextX += x / divX;
 				}
@@ -1307,7 +1317,7 @@ public class GpxUiHelper {
 					elev = e.elevation;
 					if (prevElevOrig != -80000) {
 						if (elev > prevElevOrig) {
-							elev -= 1f;
+							//elev -= 1f;
 						} else if (prevElevOrig == elev && i < lastIndex) {
 							hasSameY = true;
 							lastXSameY = nextX;
@@ -1460,10 +1470,10 @@ public class GpxUiHelper {
 		yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_blue_grid));
 		yAxis.setGranularity(1f);
 		yAxis.resetAxisMinimum();
-		yAxis.setValueFormatter(new IAxisValueFormatter() {
+		yAxis.setValueFormatter(new ValueFormatter() {
 
 			@Override
-			public String getFormattedValue(float value, AxisBase axis) {
+			public String getFormattedValue(float value) {
 				return (int) value + " " + mainUnitY;
 			}
 		});
@@ -1502,12 +1512,7 @@ public class GpxUiHelper {
 
 		//dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
 
-		dataSet.setFillFormatter(new IFillFormatter() {
-			@Override
-			public float getFillLinePosition(ILineDataSet dataSet, LineDataProvider dataProvider) {
-				return dataProvider.getYChartMin();
-			}
-		});
+		dataSet.setFillFormatter((ds, dataProvider) -> dataProvider.getYChartMin());
 		if (useRightAxis) {
 			dataSet.setAxisDependency(YAxis.AxisDependency.RIGHT);
 		}
@@ -1619,10 +1624,10 @@ public class GpxUiHelper {
 			format = "{0,number,0.#} ";
 		}
 		final String formatY = format;
-		yAxis.setValueFormatter(new IAxisValueFormatter() {
+		yAxis.setValueFormatter(new ValueFormatter() {
 
 			@Override
-			public String getFormattedValue(float value, AxisBase axis) {
+			public String getFormattedValue(float value) {
 				if (!Algorithms.isEmpty(formatY)) {
 					return MessageFormat.format(formatY + mainUnitY, value);
 				} else {
@@ -1718,10 +1723,10 @@ public class GpxUiHelper {
 		yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_green_grid));
 		yAxis.setGranularity(1f);
 		yAxis.resetAxisMinimum();
-		yAxis.setValueFormatter(new IAxisValueFormatter() {
+		yAxis.setValueFormatter(new ValueFormatter() {
 
 			@Override
-			public String getFormattedValue(float value, AxisBase axis) {
+			public String getFormattedValue(float value) {
 				return (int) value + " " + mainUnitY;
 			}
 		});
@@ -1987,25 +1992,57 @@ public class GpxUiHelper {
 		}
 	}
 
+	public static class GPXHighlight extends Highlight {
+
+		private final boolean showIcon;
+
+		public GPXHighlight(float x, int dataSetIndex, boolean showIcon) {
+			super(x, Float.NaN, dataSetIndex);
+			this.showIcon = showIcon;
+		}
+
+		public GPXHighlight(float x, float y, int dataSetIndex, boolean showIcon) {
+			super(x, y, dataSetIndex);
+			this.showIcon = showIcon;
+		}
+
+		public boolean shouldShowIcon() {
+			return showIcon;
+		}
+	}
+
 	@SuppressLint("ViewConstructor")
 	private static class GPXMarkerView extends MarkerView {
 
 		private final View textAltView;
 		private final View textSpdView;
 		private final View textSlpView;
+		private final boolean hasIcon;
 
-		public GPXMarkerView(Context context) {
+		public GPXMarkerView(@NonNull Context context,
+		                     @Nullable Drawable icon) {
 			super(context, R.layout.chart_marker_view);
 			textAltView = findViewById(R.id.text_alt_container);
 			textSpdView = findViewById(R.id.text_spd_container);
 			textSlpView = findViewById(R.id.text_slp_container);
+			if (icon != null) {
+				findViewById(R.id.icon_divider).setVisibility(VISIBLE);
+				findViewById(R.id.icon_container).setVisibility(VISIBLE);
+				((ImageView) findViewById(R.id.icon)).setImageDrawable(icon);
+			}
+			hasIcon = icon != null;
 		}
 
 		// callbacks everytime the MarkerView is redrawn, can be used to update the
 		// content (user-interface)
 		@Override
 		public void refreshContent(Entry e, Highlight highlight) {
-			ChartData chartData = getChartView().getData();
+			ChartData<?> chartData = getChartView().getData();
+			if (hasIcon && highlight instanceof GPXHighlight) {
+				boolean showIcon = ((GPXHighlight) highlight).shouldShowIcon();
+				AndroidUiHelper.setVisibility(showIcon ? VISIBLE : GONE, findViewById(R.id.icon_divider));
+				AndroidUiHelper.setVisibility(showIcon ? VISIBLE : GONE, findViewById(R.id.icon_container));
+			}
 			if (chartData.getDataSetCount() == 1) {
 				OrderedLineDataSet dataSet = (OrderedLineDataSet) chartData.getDataSetByIndex(0);
 				String value = (int) e.getY() + " ";
@@ -2271,8 +2308,8 @@ public class GpxUiHelper {
 		return dataSet;
 	}
 
-	public static GpxDisplayItem makeGpxDisplayItem(OsmandApplication app, GPXFile gpxFile,
-	                                                ChartPointLayer chartPointLayer) {
+	public static GpxDisplayItem makeGpxDisplayItem(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
+	                                                @NonNull ChartPointLayer chartPointLayer) {
 		GpxDisplayGroup group = null;
 		if (!Algorithms.isEmpty(gpxFile.tracks)) {
 			GpxSelectionHelper helper = app.getSelectedGpxHelper();
