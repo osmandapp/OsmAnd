@@ -129,12 +129,4 @@ public class GpsFilterGraphCard extends GpsFilterBaseCard {
 			}
 		};
 	}
-
-	@Override
-	public void onFinishFiltering() {
-		GPXFile filteredGpx = filteredSelectedGpxFile.getGpxFile();
-		displayHelper.setGpx(filteredGpx);
-		trackChartPoints.setGpx(filteredGpx);
-		updateMainContent();
-	}
 }

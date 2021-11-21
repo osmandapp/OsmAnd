@@ -17,7 +17,6 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpsFilterHelper;
-import net.osmand.plus.helpers.GpsFilterHelper.GpsFilterListener;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
@@ -36,7 +35,7 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
-public abstract class GpsFilterBaseCard extends MapBaseCard implements GpsFilterListener {
+public abstract class GpsFilterBaseCard extends MapBaseCard {
 
 	protected final GpsFilterHelper gpsFilterHelper;
 	protected final FilteredSelectedGpxFile filteredSelectedGpxFile;
@@ -49,7 +48,6 @@ public abstract class GpsFilterBaseCard extends MapBaseCard implements GpsFilter
 	                         @NonNull FilteredSelectedGpxFile filteredSelectedGpxFile) {
 		super(mapActivity);
 		this.gpsFilterHelper = app.getGpsFilterHelper();
-		this.gpsFilterHelper.addListener(this);
 		this.target = target;
 		this.filteredSelectedGpxFile = filteredSelectedGpxFile;
 		this.actionButtonsItems = createActionButtons();
@@ -58,14 +56,6 @@ public abstract class GpsFilterBaseCard extends MapBaseCard implements GpsFilter
 	@Override
 	public final int getCardLayoutId() {
 		return R.layout.gps_filter_base_card;
-	}
-
-	public void startListeningGpsFilter() {
-		gpsFilterHelper.addListener(this);
-	}
-
-	public void stopListeningGpsFilter() {
-		gpsFilterHelper.removeListener(this);
 	}
 
 	public void softScrollToActionCard() {

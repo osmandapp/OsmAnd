@@ -156,7 +156,7 @@ public enum ColoringType {
 	                                          @NonNull SelectedGpxFile selectedGpxFile,
 	                                          @Nullable String attributeName) {
 		if (isGradient()) {
-			return selectedGpxFile.getTrackAnalysis(app)
+			return selectedGpxFile.getTrackAnalysisToDisplay(app)
 					.isColorizationTypeAvailable(toGradientScaleType().toColorizationType());
 		}
 

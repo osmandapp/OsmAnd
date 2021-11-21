@@ -129,9 +129,9 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 		AndroidUiHelper.updateVisibility(rangeSlider, range);
 
 		if (range) {
-			rangeSlider.setValues(((float) filter.getSelectedMinValue()), ((float) filter.getSelectedMaxValue()));
 			rangeSlider.setValueFrom((float) filter.getMinValue());
 			rangeSlider.setValueTo((float) filter.getMaxValue());
+			rangeSlider.setValues(((float) filter.getSelectedMinValue()), ((float) filter.getSelectedMaxValue()));
 			rangeSlider.addOnChangeListener((slider1, value, fromUser) -> {
 				List<Float> values = rangeSlider.getValues();
 				if (fromUser && values.size() == 2) {
@@ -142,9 +142,9 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 			});
 			UiUtilities.setupSlider(rangeSlider, nightMode, ColorUtilities.getActiveColor(app, nightMode), false);
 		} else {
-			slider.setValue((float) filter.getSelectedMaxValue());
 			slider.setValueFrom((float) filter.getMinValue());
 			slider.setValueTo((float) filter.getMaxValue());
+			slider.setValue((float) filter.getSelectedMaxValue());
 			slider.addOnChangeListener((slider1, value, fromUser) -> {
 				if (fromUser) {
 					filter.updateValue((slider.getValue()));
@@ -165,10 +165,5 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 
 		TextView rightText = container.findViewById(R.id.right_text);
 		rightText.setText(filter.getRightText(app));
-	}
-
-	@Override
-	public void onFinishFiltering() {
-		updateMainContent();
 	}
 }

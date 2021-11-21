@@ -641,7 +641,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private void drawSelectedFileSegments(SelectedGpxFile selectedGpxFile, boolean currentTrack,
 										  Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
 		QuadRect correctedQuadRect = getCorrectedQuadRect(tileBox.getLatLonBounds());
 		String coloringTypeName = getAvailableOrDefaultColoringType(selectedGpxFile);
 		ColoringType coloringType = ColoringType.getNonNullTrackColoringTypeByName(coloringTypeName);

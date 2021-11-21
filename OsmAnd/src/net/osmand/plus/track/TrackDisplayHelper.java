@@ -23,6 +23,7 @@ public class TrackDisplayHelper {
 
 	private File file;
 	private GPXFile gpxFile;
+	private GPXFile filteredGpxFile;
 	private GpxDataItem gpxDataItem;
 
 	private long modifiedTime = -1;
@@ -36,6 +37,10 @@ public class TrackDisplayHelper {
 	@Nullable
 	public GPXFile getGpx() {
 		return gpxFile;
+	}
+
+	@Nullable GPXFile getGpxFileToDisplay() {
+		return filteredGpxFile != null ? filteredGpxFile : gpxFile;
 	}
 
 	@Nullable
@@ -58,13 +63,19 @@ public class TrackDisplayHelper {
 		}
 	}
 
+	public void setFilteredGpxFile(@Nullable GPXFile filteredGpxFile) {
+		this.filteredGpxFile = filteredGpxFile;
+	}
+
 	public void setGpxDataItem(GpxDataItem gpxDataItem) {
 		this.gpxDataItem = gpxDataItem;
 	}
 
 	public QuadRect getRect() {
-		if (getGpx() != null) {
-			return getGpx().getRect();
+		if (filteredGpxFile != null) {
+			return filteredGpxFile.getRect();
+		} if (gpxFile != null) {
+			return gpxFile.getRect();
 		} else {
 			return new QuadRect(0, 0, 0, 0);
 		}
@@ -88,7 +99,7 @@ public class TrackDisplayHelper {
 	}
 
 	public List<GpxDisplayGroup> getGpxFile(boolean useDisplayGroups) {
-		if (gpxFile == null) {
+		if (filteredGpxFile == null && gpxFile == null) {
 			return new ArrayList<>();
 		}
 		if (gpxFile.modifiedTime != modifiedTime) {
@@ -104,7 +115,9 @@ public class TrackDisplayHelper {
 	public void updateDisplayGroups() {
 		modifiedTime = gpxFile.modifiedTime;
 		GpxSelectionHelper selectedGpxHelper = app.getSelectedGpxHelper();
-		displayGroups = selectedGpxHelper.collectDisplayGroups(gpxFile);
+		displayGroups = filteredGpxFile != null
+				? selectedGpxHelper.collectDisplayGroups(filteredGpxFile)
+				: selectedGpxHelper.collectDisplayGroups(gpxFile);
 		originalGroups.clear();
 		for (GpxDisplayGroup g : displayGroups) {
 			originalGroups.add(g.cloneInstance());

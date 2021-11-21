@@ -57,6 +57,16 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		leftPointsCount = calculateLeftPointsCount();
 	}
 
+	@Override
+	protected void update(OsmandApplication app) {
+		GPXTrackAnalysis sourceAnalysis = sourceSelectedGpxFile.trackAnalysis;
+		smoothingFilter.updateAnalysis(sourceAnalysis);
+		speedFilter.updateAnalysis(sourceAnalysis);
+		altitudeFilter.updateAnalysis(sourceAnalysis);
+		hdopFilter.updateAnalysis(sourceAnalysis);
+		app.getGpsFilterHelper().filterGpxFile(this);
+	}
+
 	public void updateGpxFile(@NonNull GPXFile gpxFile) {
 		this.gpxFile = gpxFile;
 		if (gpxFile.tracks.size() > 0) {
@@ -71,9 +81,14 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		this.trackAnalysis = trackAnalysis;
 	}
 
-	public void setDisplayGroups(@NonNull List<GpxDisplayGroup> displayGroups) {
+	public void setDisplayGroups(@Nullable List<GpxDisplayGroup> displayGroups) {
 		this.displayGroups = displayGroups;
 		this.splitProcessed = true;
+	}
+
+	@Override
+	public void processPoints(OsmandApplication app) {
+		processedPointsToDisplay = gpxFile.proccessPoints();
 	}
 
 	private int calculateLeftPointsCount() {

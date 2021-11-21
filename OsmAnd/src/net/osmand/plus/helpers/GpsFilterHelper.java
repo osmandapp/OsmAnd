@@ -188,11 +188,9 @@ public class GpsFilterHelper {
 			if (successfulFinish && !isCancelled()) {
 				filteredSelectedGpxFile.updateGpxFile(filteredGpxFile);
 				filteredSelectedGpxFile.setTrackAnalysis(trackAnalysis);
-				if (displayGroups != null) {
-					filteredSelectedGpxFile.setDisplayGroups(displayGroups);
-				}
+				filteredSelectedGpxFile.setDisplayGroups(displayGroups);
 				for (GpsFilterListener listener : listeners) {
-					listener.onFinishFiltering();
+					listener.onFinishFiltering(filteredGpxFile);
 				}
 			}
 		}
@@ -209,6 +207,7 @@ public class GpsFilterHelper {
 		copy.addPoints(source.getPoints());
 		copy.routes = new ArrayList<>(source.routes);
 		copy.path = source.path;
+		copy.showCurrentTrack = source.showCurrentTrack;
 		copy.hasAltitude = source.hasAltitude;
 		copy.modifiedTime = System.currentTimeMillis();
 		copy.copyExtensions(source);
@@ -278,7 +277,7 @@ public class GpsFilterHelper {
 
 		protected static final int SPAN_FLAGS = Spanned.SPAN_EXCLUSIVE_INCLUSIVE;
 
-		protected final GPXTrackAnalysis analysis;
+		protected GPXTrackAnalysis analysis;
 
 		protected double selectedMinValue;
 		protected double selectedMaxValue;
@@ -302,6 +301,11 @@ public class GpsFilterHelper {
 			blackTextSpan = new ForegroundColorSpan(ColorUtilities.getPrimaryTextColor(app, nightMode));
 			greyTextSpan = new ForegroundColorSpan(ColorUtilities.getSecondaryTextColor(app, nightMode));
 			boldSpan = new StyleSpan(Typeface.BOLD);
+		}
+
+		public void updateAnalysis(@NonNull GPXTrackAnalysis analysis) {
+			this.analysis = analysis;
+			checkSelectedValues();
 		}
 
 		protected void checkSelectedValues() {
@@ -710,6 +714,6 @@ public class GpsFilterHelper {
 
 	public interface GpsFilterListener {
 
-		void onFinishFiltering();
+		void onFinishFiltering(@NonNull GPXFile filteredGpxFile);
 	}
 }

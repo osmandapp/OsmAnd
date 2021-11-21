@@ -26,6 +26,7 @@ import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpsFilterHelper;
+import net.osmand.plus.helpers.GpsFilterHelper.GpsFilterListener;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import net.osmand.plus.measurementtool.SavedTrackBottomSheetDialogFragment;
 import net.osmand.plus.track.GpsFilterBaseCard.SaveIntoFileListener;
@@ -48,7 +49,7 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 
 public class GpsFilterFragment extends ContextMenuScrollFragment implements SaveAsNewTrackFragmentListener,
-		SaveIntoFileListener {
+		SaveIntoFileListener, GpsFilterListener {
 
 	public static final String TAG = GpsFilterFragment.class.getName();
 
@@ -207,7 +208,6 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 
 		gpsFilterScreensAdapter = new GpsFilterScreensAdapter(requireMapActivity(), this,
 				filteredSelectedGpxFile, isNightMode());
-		gpsFilterScreensAdapter.startListeningGpsFilter();
 
 		pager.setAdapter(gpsFilterScreensAdapter);
 		pager.setOffscreenPageLimit(1);
@@ -279,6 +279,12 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		app.getGpsFilterHelper().addListener(this);
+	}
+
+	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(KEY_GPX_FILE_PATH, selectedGpxFile.getGpxFile().path);
@@ -288,9 +294,6 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		if (gpsFilterScreensAdapter != null) {
-			gpsFilterScreensAdapter.stopListeningGpsFilter();
-		}
 		exitGpsFilterMode();
 	}
 
@@ -405,14 +408,14 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	@Override
 	public void onSaveAsNewTrack(@Nullable String folderName, @NonNull String fileName,
 	                             boolean showOnMap, boolean simplifiedTrack) {
-		if (app != null) {
+		if (app != null && selectedGpxFile.getFilteredSelectedGpxFile() != null) {
 			File destFile = app.getAppPath(GPX_INDEX_DIR);
 			if (!Algorithms.isEmpty(folderName) && !destFile.getName().equals(folderName)) {
 				destFile = new File(destFile, folderName);
 			}
 			destFile = new File(destFile, fileName + GPX_FILE_EXT);
 
-			GPXFile filteredGpxFile = selectedGpxFile.getGpxFile(); // todo gps: filtered gpx should be returned
+			GPXFile filteredGpxFile = selectedGpxFile.getFilteredSelectedGpxFile().getGpxFile();
 			GPXFile gpxFileToWrite = GpsFilterHelper.copyGpxFile(app, filteredGpxFile);
 			gpxFileToWrite.path = destFile.getAbsolutePath();
 
@@ -450,7 +453,6 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		boolean isGpxFileExist = new File(selectedGpxFile.getGpxFile().path).exists();
 		if (app != null && !isGpxFileExist) {
 			app.getSelectedGpxHelper().selectGpxFile(selectedGpxFile.getGpxFile(), false, false);
-			// todo gps: pass ORIGINAL gpx-file as param
 		}
 		gpsFilterHelper.clearListeners();
 
@@ -464,6 +466,15 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	@Override
 	public void onSavedIntoFile(@NonNull String filePath) {
 		savedGpxFilePath = filePath;
+	}
+
+	@Override
+	public void onFinishFiltering(@NonNull GPXFile filteredGpxFile) {
+		gpsFilterScreensAdapter.updateContent();
+		Fragment target = getTargetFragment();
+		if (target instanceof GpsFilterFragmentLister) {
+			((GpsFilterFragmentLister) target).onFinishFiltering(filteredGpxFile);
+		}
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
@@ -485,6 +496,8 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	}
 
 	public interface GpsFilterFragmentLister {
+
+		void onFinishFiltering(@NonNull GPXFile filteredGpxFile);
 
 		void onDismissGpsFilterFragment(boolean savedCopy, @Nullable String savedFilePath);
 	}

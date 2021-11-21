@@ -96,6 +96,9 @@ public class OverviewCard extends MapBaseCard {
 				initDirectionsButton(iconColorDef, iconColorPres);
 			}
 		}
+		GPXTrackAnalysis analysis = selectedGpxFile.getFilteredSelectedGpxFile() != null
+				? selectedGpxFile.getFilteredSelectedGpxFile().getTrackAnalysis(app)
+				: this.analysis;
 		blockStatisticsBuilder.initStatBlocks(actionsListener, getActiveColor(), analysis);
 
 		if (blocksView.getVisibility() == View.VISIBLE && description.getVisibility() == View.VISIBLE) {

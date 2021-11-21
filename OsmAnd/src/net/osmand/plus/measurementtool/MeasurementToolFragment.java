@@ -2279,6 +2279,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	@Override
+	public void onFinishFiltering(@NonNull GPXFile filteredGpxFile) {
+	}
+
+	@Override
 	public void onDismissGpsFilterFragment(boolean savedCopy, @Nullable String savedFilePath) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
