@@ -4408,21 +4408,21 @@
     <string name="shared_string_travelbooks">Путівники</string>
     <string name="display_route_tracks">Показати треки</string>
     <string name="display_route_tracks_as_poi">Показувати треки як POI</string>
-    <string name="delete_history_items_descr">Ви впевнені, що хочете видалити вибрані елементи історії\?</string>
+    <string name="delete_history_items_descr">Видалити вибрані елементи історії\?</string>
     <string name="delete_history_items">Видалити елементи історії %1$s\?</string>
-    <string name="quick_action_toggle_preference">Перемикач для перемикання вибраного стану налаштувань.</string>
-    <string name="copying_file">Копіювання файлу %1$s</string>
+    <string name="quick_action_toggle_preference">Перемикач для зміни налаштувань.</string>
+    <string name="copying_file">Копіювання файлу %1$s…</string>
     <string name="from_to_with_params">З %1$s до %2$s</string>
     <string name="progress_complete">%1$s завершено</string>
     <string name="storage_found_files_descr">Торкніться «%1$s», щоб скопіювати файли %2$s з «%3$s» на «%4$s». Це може тривати деякий час.</string>
     <string name="storage_copied_files_size">Скопійовано %1$s файлів %2$s</string>
     <string name="storage_copying_files_size">Копіювання %1$s файлів %2$s</string>
     <string name="storage_found_files_size">Знайдено %1$s файлів %2$s</string>
-    <string name="shared_storage_last_step">Ви зможете вказати нове сховище даних після вибору Спільного сховища.</string>
-    <string name="shared_storage_third_step">Надайте дозвіл на доступ до каталогу. Без цього дозволу OsmAnd не може копіювати файли.</string>
+    <string name="shared_storage_last_step">Після цього можна вказати нову теку даних.</string>
+    <string name="shared_storage_third_step">Надайте дозвіл на доступ до каталогу. Без нього OsmAnd не може копіювати файли.</string>
     <string name="shared_storage_first_step">Натисніть «%1$s».
 \nВідкриється файловий менеджер, де потрібно знайти та відкрити каталог osmand.</string>
-    <string name="copying_completed">Копіювання завершено</string>
+    <string name="copying_completed">Скопійовано</string>
     <string name="shared_string_copy_to">Копіювати до</string>
     <string name="start_copying">Почати копіювання</string>
     <string name="shared_string_migration">Переміщення</string>
@@ -4430,15 +4430,15 @@
     <string name="skip_confirmation">Так, пропустити</string>
     <string name="shared_storage_migration">Переміщення Спільного сховища</string>
     <string name="icon_group_industrial">Промисловість</string>
-    <string name="shared_string_skip_warning">Ви впевнені, що хочете пропустити переміщення\? OsmAnd більше не має доступу до ваших файлів у спільній пам’яті.
+    <string name="shared_string_skip_warning">Пропустити переміщення\? OsmAnd більше не має доступу до ваших файлів у спільній пам’яті.
 \n
-\nЗастосунок запуститься в новому каталозі з вашими даними.</string>
+\nЗастосунок почне використовувати вашу нову теку даних.</string>
     <string name="shared_storage">Спільне сховище</string>
     <string name="files_remaining">Файлів лишилося: %1$s %2$s</string>
     <string name="shared_storage_second_step">Натисніть «Використовувати цей каталог».</string>
-    <string name="shared_storage_migration_descr">Через зміни правил доступу до пам’яті в Android, OsmAnd більше не може використовувати %1$s.
+    <string name="shared_storage_migration_descr">Через зміни в Android доступу до пам’яті, OsmAnd більше не може використовувати %1$s.
 \n
-\nВам потрібно скопіювати всі свої дані в нове місце зберігання.</string>
+\nСкопіюйте всі дані до нової теки.</string>
     <string name="icon_group_education">Освіта</string>
     <string name="show_parameter_seekbar">Показати панель пошуку параметрів</string>
     <string name="fold_unfold">згорнути/розгорнути</string>
@@ -4447,7 +4447,7 @@
     <string name="add_to_group">Додати до групи</string>
     <string name="app_modes_options">Вибір режимів застосунку</string>
     <string name="shared_string_memory">Пам\'ять</string>
-    <string name="memory_allocated_for_routing_ds">Більше значення пам’яті прискорює обчислення довгих маршрутів (понад 500 км), але може вплинути на швидкодію інших застосунків.
+    <string name="memory_allocated_for_routing_ds">Вище значення пам\'яті прискорює обчислення довгих маршрутів (понад 500 км), але може вплинути на швидкодію інших застосунків.
 \nНе впливає на швидкість обчислення коротких маршрутів.</string>
     <string name="memory_allocated_for_routing">Пам\'ять, виділена для маршрутизації</string>
     <string name="reading_files">Читання файлів…</string>
@@ -4455,4 +4455,5 @@
     <string name="display_groups_visibility_dialog_description">Ви можете контролювати видимість груп на мапі. Якщо трек приховано, усі групи також будуть приховані.</string>
     <string name="shared_string_hide_all">Сховати все</string>
     <string name="migration_files_present">%1$d файлів (%2$s) присутні у вибраному розташуванні «%3$s».</string>
+    <string name="exit_without_saving_warning">Ви впевнені, що виходите без збереження\? Ви втратите всі зміни.</string>
 </resources>

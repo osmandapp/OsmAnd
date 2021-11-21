@@ -4413,25 +4413,25 @@
     <string name="shared_string_travelbooks">Reiseführer</string>
     <string name="display_route_tracks_as_poi">Tracks als POI anzeigen</string>
     <string name="delete_history_items">%1$s Verlaufseinträge löschen\?</string>
-    <string name="quick_action_toggle_preference">Eine Möglichkeit zum Umschalten des ausgewählten Präferenzstatus.</string>
-    <string name="delete_history_items_descr">Sicher, dass Sie die ausgewählten Verlaufseinträge löschen möchten\?</string>
-    <string name="copying_file">Kopieren der Datei %1$s</string>
+    <string name="quick_action_toggle_preference">Ein Umschalter zum Ändern der Präferenz.</string>
+    <string name="delete_history_items_descr">Ausgewählte Verlaufseinträge löschen\?</string>
+    <string name="copying_file">Kopieren der Datei %1$s…</string>
     <string name="from_to_with_params">Von %1$s nach %2$s</string>
     <string name="progress_complete">%1$s abgeschlossen</string>
     <string name="storage_found_files_descr">Tippen Sie auf \"%1$s\", um %2$s Dateien von \"%3$s\" nach \"%4$s\" zu kopieren. Dies kann einige Zeit dauern.</string>
     <string name="storage_copied_files_size">%1$s Dateien %2$s kopiert</string>
     <string name="storage_copying_files_size">Kopieren von %1$s Dateien %2$s</string>
     <string name="storage_found_files_size">%1$s Dateien %2$s gefunden</string>
-    <string name="shared_storage_last_step">Sie können einen neuen Datenspeicher angeben, nachdem Sie den gemeinsamen Speicher ausgewählt haben.</string>
-    <string name="shared_storage_third_step">Erteilen Sie die Erlaubnis zum Zugriff auf den Ordner. Ohne diese Erlaubnis kann OsmAnd keine Dateien kopieren.</string>
+    <string name="shared_storage_last_step">Sie können anschließend einen neuen Datenordner angeben.</string>
+    <string name="shared_storage_third_step">Erteilen Sie die Berechtigung zum Zugriff auf den Ordner. Ohne sie kann OsmAnd keine Dateien kopieren.</string>
     <string name="shared_storage_first_step">Drücken Sie \"%1$s\".
 \nEs öffnet sich der Dateimanager, in dem Sie den Ordner osmand finden und öffnen müssen.</string>
-    <string name="shared_storage_migration_descr">Aufgrund von Änderungen bei den Speicherzugriffsregeln in Android kann OsmAnd nicht mehr %1$s verwenden.
+    <string name="shared_storage_migration_descr">Aufgrund von Änderungen im Android Speicherzugriff kann OsmAnd nicht mehr %1$s verwenden.
 \n
-\nSie müssen alle Ihre Daten an den neuen Speicherort kopieren.</string>
+\nKopieren Sie alle Ihre Daten in den neuen Ordner.</string>
     <string name="shared_storage_second_step">Klicken Sie auf \"Diesen Ordner verwenden\".</string>
     <string name="folder_access_denied">Für den Zugriff auf den ausgewählten Ordner ist eine Berechtigung erforderlich.</string>
-    <string name="copying_completed">Kopiervorgang abgeschlossen</string>
+    <string name="copying_completed">Kopiert</string>
     <string name="skip_confirmation">Ja, überspringen</string>
     <string name="shared_storage">Gemeinsamer Speicher</string>
     <string name="shared_storage_migration">Migration des gemeinsamen Speichers</string>
@@ -4439,9 +4439,9 @@
     <string name="icon_group_education">Bildung</string>
     <string name="start_copying">Kopieren starten</string>
     <string name="files_remaining">Verbleibende Dateien: %1$s %2$s</string>
-    <string name="shared_string_skip_warning">Sind Sie sicher, dass Sie die Migration überspringen wollen\? OsmAnd hat keinen Zugriff mehr auf Ihre Dateien im gemeinsamen Speicher.
+    <string name="shared_string_skip_warning">Migration überspringen\? OsmAnd hat keinen Zugriff mehr auf Ihre Dateien im gemeinsamen Speicher.
 \n
-\nDie Anwendung wird in dem neuen Ordner mit Ihren Daten gestartet.</string>
+\nDie App wird Ihren neuen Datenordner verwenden.</string>
     <string name="shared_string_copy_to">Kopieren nach</string>
     <string name="icon_group_industrial">Industriell</string>
     <string name="rendering_attr_natureReserves_description">Naturreservate, Schutzgebiete und Nationalparks anzeigen.</string>
@@ -4453,12 +4453,13 @@
     <string name="add_to_group">Zur Gruppe hinzufügen</string>
     <string name="app_modes_options">App-Modi auswählen</string>
     <string name="shared_string_memory">Speicher</string>
-    <string name="memory_allocated_for_routing_ds">Mehr Speicher beschleunigt die Berechnung von langen Routen (mehr als 500 km), kann aber die Leistung anderer Anwendungen beeinträchtigen.
-\nHat keinen Einfluss auf die Berechnungsgeschwindigkeit von kurzen Routen.</string>
+    <string name="memory_allocated_for_routing_ds">Die Zuweisung von mehr Speicher kann die Berechnung von langen Routen (mehr als 500 km) beschleunigen, kann aber die Leistung anderer Anwendungen beeinträchtigen.
+\nAuf die Berechnung von kurzen Routen hat dies keinen Einfluss.</string>
     <string name="memory_allocated_for_routing">Für das Routing zugewiesener Speicher</string>
     <string name="reading_files">Lese Dateien…</string>
     <string name="no_items_selected_warning">Bitte wählen Sie mindestens einen Artikel</string>
     <string name="display_groups_visibility_dialog_description">Sie können die Sichtbarkeit von Gruppen auf der Karte steuern. Wenn der Track ausgeblendet ist, werden auch alle Gruppen ausgeblendet.</string>
     <string name="shared_string_hide_all">Alle ausblenden</string>
     <string name="migration_files_present">%1$d Dateien (%2$s) sind am ausgewählten Speicherort \'%3$s\' vorhanden.</string>
+    <string name="exit_without_saving_warning">Sind Sie sicher, dass Sie ohne zu speichern beenden möchten\? Alle Änderungen gingen verloren.</string>
 </resources>

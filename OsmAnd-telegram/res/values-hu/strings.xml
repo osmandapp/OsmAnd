@@ -253,7 +253,7 @@
     <string name="time_zone_descr">Időzóna kijelölése a helyzetjelentésekben való megjelenítéshez.</string>
     <string name="time_zone">Időzóna</string>
     <string name="units_and_formats">Mértékegységek &amp; formátumok</string>
-    <string name="unit_of_length_descr">Távolság mértékegységének módosítása</string>
+    <string name="unit_of_length_descr">Távolság mértékegységének módosítása.</string>
     <string name="unit_of_length">Hosszmértékegységek</string>
     <string name="unit_of_speed_system_descr">Sebesség mértékegységének meghatározása</string>
     <string name="unit_of_speed_system">Sebesség mértékegysége</string>

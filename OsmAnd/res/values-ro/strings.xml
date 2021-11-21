@@ -4412,7 +4412,52 @@
     <string name="display_route_tracks">Afișarea traseelor</string>
     <string name="shared_string_travelbooks">Cărți de călătorie</string>
     <string name="display_route_tracks_as_poi">Afișarea traseelor ca POI</string>
-    <string name="delete_history_items_descr">Sunteți sigur că doriți să ștergeți elementele selectate din istoric\?</string>
+    <string name="delete_history_items_descr">Ștergeți elementele selectate din istoric\?</string>
     <string name="delete_history_items">Ștergeți %1$s elemente din istoric\?</string>
-    <string name="quick_action_toggle_preference">Un comutator pentru a schimba starea preferințelor selectate.</string>
+    <string name="quick_action_toggle_preference">Un comutator pentru a schimba preferințele.</string>
+    <string name="not_enough_contributions_descr">Pentru a avea acces la actualizări nelimitate ale hărților din oră în oră, este necesar un minim de %1$s modificări în ultimele două luni %2$s.</string>
+    <string name="copying_file">Copierea fișierului %1$s…</string>
+    <string name="shared_storage_second_step">Faceți clic pe \" Utilizați acest dosar\".</string>
+    <string name="fold_unfold">pliați/dezpliați</string>
+    <string name="app_profile_type">Tipul de profil al aplicației</string>
+    <string name="map_marker_options">Opțiuni de marcare a hărții</string>
+    <string name="add_to_group">Adăugați la grup</string>
+    <string name="app_modes_options">Alegeți modurile de aplicații</string>
+    <string name="shared_string_memory">Memorie</string>
+    <string name="reading_files">Citirea fișierelor…</string>
+    <string name="no_items_selected_warning">Vă rugăm să selectați cel puțin un element</string>
+    <string name="show_parameter_seekbar">Afișați bara de căutare a parametrilor</string>
+    <string name="shared_string_hide_all">Ascunde toate</string>
+    <string name="files_remaining">Fișiere rămase: %1$s %2$s</string>
+    <string name="from_to_with_params">De la %1$s spre %2$s</string>
+    <string name="progress_complete">%1$s complet</string>
+    <string name="storage_copied_files_size">A copiat %1$s fișiere %2$s</string>
+    <string name="storage_copying_files_size">Copierea fișierelor %1$s %2$s</string>
+    <string name="storage_found_files_size">Am găsit %1$s fișiere %2$s</string>
+    <string name="shared_storage_first_step">Apăsați \"%1$s\".
+\nSe deschide managerul de fișiere în care trebuie să găsiți și să deschideți dosarul osmand.</string>
+    <string name="copying_completed">Copiat</string>
+    <string name="start_copying">Începeți copierea</string>
+    <string name="shared_storage">Stocare partajată</string>
+    <string name="shared_storage_migration">Migrarea stocării partajate</string>
+    <string name="shared_string_migration">Migrație</string>
+    <string name="icon_group_education">Educație</string>
+    <string name="icon_group_industrial">Industrială</string>
+    <string name="rendering_attr_natureReserves_description">Afișează rezervații naturale, zone protejate și parcuri naționale.</string>
+    <string name="memory_allocated_for_routing">Memorie alocată pentru rutare</string>
+    <string name="shared_string_skip_warning">Săriți peste migrație\? OsmAnd nu mai are acces la fișierele dumneavoastră din stocarea partajată.
+\n
+\nAplicația va începe să utilizeze noul vostru folder de date.</string>
+    <string name="shared_storage_migration_descr">Din cauza modificărilor în accesul la spațiul de stocare Andorid, OsmAnd nu mai poate utiliza %1$s.
+\n
+\nCopiați toate datele în noul folder.</string>
+    <string name="folder_access_denied">Permisiune necesară pentru a accesa folderul selectat.</string>
+    <string name="shared_string_copy_to">Copiați la</string>
+    <string name="migration_files_present">%1$d fișiere (%2$s) sunt prezente în locația selectată \'%3$s\'.</string>
+    <string name="memory_allocated_for_routing_ds">O valoare mai mare a memoriei poate accelera calcularea rutelor de peste 500 km, dar poate încetini alte aplicații.</string>
+    <string name="display_groups_visibility_dialog_description">Puteți controla vizibilitatea grupului pe hartă. Dacă pista este ascunsă, toate grupurile vor fi și ele ascunse.</string>
+    <string name="storage_found_files_descr">Atingeți \"%1$s\" pentru a copia %2$s fișiere de la \"%3$s\" spre \"%4$s\". Este posibil să dureze ceva timp.</string>
+    <string name="skip_confirmation">Da, sari peste</string>
+    <string name="shared_storage_last_step">Ulterior, puteți specifica un nou dosar de date.</string>
+    <string name="shared_storage_third_step">Acordați permisiunea de a accesa dosarul. Fără aceasta, OsmAnd nu poate copia fișiere.</string>
 </resources>

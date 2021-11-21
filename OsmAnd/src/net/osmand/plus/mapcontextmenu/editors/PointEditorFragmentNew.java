@@ -455,14 +455,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		updateDescriptionIcon();
 	}
 
-	boolean isAddressAvailable() {
-		return addressCaption.getVisibility() == View.VISIBLE;
-	}
-
-	boolean isDescriptionAvailable() {
-		return descriptionCaption.getVisibility() == View.VISIBLE;
-	}
-
 	private void createGroupSelector() {
 		groupListAdapter = new GroupAdapter();
 		groupRecyclerView = view.findViewById(R.id.group_recycler_view);
