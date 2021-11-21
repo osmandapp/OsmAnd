@@ -1017,8 +1017,8 @@
     <string name="index_name_wiki">Ümumdünya Vikipediya POI-ləri</string>
     <string name="shared_string_release">Buraxılış</string>
     <string name="local_index_installed">Yerli versiya</string>
-    <string name="local_index_items_deleted">%1$d / %2$d obyekt silindi.</string>
-    <string name="local_index_items_restored">%1$d / %2$d obyekt aktivləşdirildi.</string>
+    <string name="local_index_items_deleted">%1$d / %2$d element silindi.</string>
+    <string name="local_index_items_restored">%1$d / %2$d element aktivləşdirildi.</string>
     <string name="local_index_mi_restore">Aktivləşdir</string>
     <string name="local_index_mi_backup">Qeyri-aktiv et</string>
     <string name="local_index_transport_data">İctimai nəqliyyat məlumatları</string>
@@ -1045,7 +1045,7 @@
     <string name="show_zoom_buttons_navigation_descr">Naviqasiya zamanı miqyas düymələrini göstər.</string>
     <string name="show_zoom_buttons_navigation">Miqyas düymələrini göstər</string>
     <string name="hide_from_zoom_level">Miqyas səviyyəsindən gizlət</string>
-    <string name="show_from_zoom_level">Miqyas səviyyəsində göstər</string>
+    <string name="show_from_zoom_level">Göstərilməyə başlanacaq miqyas səviyyəsi</string>
     <string name="display_zoom_level">Görüntünün miqyası: %1$s</string>
     <string name="quick_action_auto_zoom">Avtomatik miqyası yandır/söndür</string>
     <string name="quick_action_auto_zoom_desc">Bu fəaliyyət düyməsinə toxunulduqda sürətinizə görə avtomatik xəritə miqyası yandırılır/söndürülür.</string>
@@ -1285,8 +1285,8 @@
     <string name="shared_string_gpx_track">İz</string>
     <string name="select_gpx_folder">GPX fayl qovluğunu seçin</string>
     <string name="shared_string_gpx_tracks">İzlər</string>
-    <string name="gpx_no_tracks_title">Hələ hər hansı GPX fayllarınız yoxdur</string>
-    <string name="gpx_no_tracks_title_folder">Qovluğa GPX fayllar da əlavə edə bilərsiniz</string>
+    <string name="gpx_no_tracks_title">Hələ hər hansı iz fayllarınız yoxdur</string>
+    <string name="gpx_no_tracks_title_folder">Qovluğa iz faylları da əlavə edə bilərsiniz</string>
     <string name="gpx_add_track">Daha çox əlavə et…</string>
     <string name="storage_place_description">OsmAnd-ın məlumat saxlama yeri (xəritələr, iz faylları və s.): %1$s.</string>
     <string name="shared_string_tracks">İzlər</string>
@@ -1427,9 +1427,9 @@
     <string name="unit_of_length_descr">Uzunluq vahidlərini dəyişin.</string>
     <string name="unit_of_length">Uzunluq vahidi</string>
     <string name="map_widget_ruler_control">Radius xətkeşi</string>
-    <string name="local_index_items_backuped">%1$d / %2$d obyekt qeyri-aktiv edildi.</string>
-    <string name="local_index_no_items_to_do">%1$smək üçün obyekt yoxdur</string>
-    <string name="local_index_action_do">%2$s obyekti %1$smək üzrəsiniz. Davam edilsin?</string>
+    <string name="local_index_items_backuped">%1$d / %2$d element qeyri-aktiv edildi.</string>
+    <string name="local_index_no_items_to_do">%1$smək üçün element yoxdur</string>
+    <string name="local_index_action_do">%2$s elementi %1$smək üzrəsiniz. Davam edilsin\?</string>
     <string name="local_indexes_cat_backup">Qeyri-aktiv edilmiş</string>
     <string name="ttsvoice">TTS səsi</string>
     <string name="internet_connection_required_for_online_route">Onlayn naviqasiya oflayn rejimdə işləmir.</string>
@@ -1759,7 +1759,7 @@
     <string name="poi_filter_nominatim">Onlayn Nominatim</string>
     <string name="route_successfully_saved_at">Marşrut “%1$s” olaraq yadda saxlandı.</string>
     <string name="file_with_name_already_exist">Eyni adlı fayl artıq mövcuddur.</string>
-    <string name="local_index_items_uploaded">%1$d / %2$d obyekt yükləndi.</string>
+    <string name="local_index_items_uploaded">%1$d / %2$d element yükləndi.</string>
     <string name="favourites_delete_multiple_succesful">Favorit nöqtələr silindi.</string>
     <string name="overlay_transparency_descr">Örtüyün şəffaflığını dəyişin.</string>
     <string name="overlay_transparency">Örtük şəffaflığı</string>
@@ -1793,7 +1793,7 @@
     <string name="save_route_point">Marşrut nöqtəsini saxla</string>
     <string name="waypoint_one">Yol nöqtəsi 1</string>
     <string name="route_point_one">Marşrut nöqtəsi 1</string>
-    <string name="empty_state_favourites_desc">Xəritədə favoritlər əlavə edin və ya bir fayldan idxal edin.</string>
+    <string name="empty_state_favourites_desc">Favoritləri idxal edin və ya xəritədə nöqtələri işarələyərək əlavə edin.</string>
     <string name="copy_location_name">Məkan/POI adını kopyala</string>
     <string name="toast_empty_name_error">Adsız məkan</string>
     <string name="show_tunnels">Tunellər</string>
@@ -1854,7 +1854,7 @@
     <string name="fav_point_dublicate">Təkrar Favorit adı təyin edilib</string>
     <string name="background_service_int">GPS oyandırma intervalı</string>
     <string name="average">Orta</string>
-    <string name="select_index_file_to_download">Heç bir şey tapılmadı. Regionunuzu tapa bilməsəniz, özünüz yarada bilərsiniz (bax: https://osmand.net).</string>
+    <string name="select_index_file_to_download">Heç bir şey tapılmadı, amma özünüz yarada bilərsiniz (bax: https://osmand.net).</string>
     <string name="osb_author_or_password_not_specified">“Parametrlər”də OSM istifadəçi adı və şifrəni daxil edin</string>
     <string name="new_directions_point_dialog">Artıq müəyyənləşdirilmiş ara təyinat nöqtələriniz var.</string>
     <string name="map_import_error">Xəritə idxalı səhvi</string>
@@ -2692,7 +2692,7 @@
     <string name="backup_delete_old_data_descr">Məlumatlarınızın hazırkı versiyaları OsmAnd Cloud-da qorunacaq</string>
     <string name="speed_cameras_legal_descr">Bəzi ölkələrdə və ya bölgələrdə sürət kamerası ilə bağlı xəbərdarlıq proqramlarından istifadə qanunla qadağandır.
 \n
-\nÖlkənizin qanunlarından asılı olaraq seçim etməlisiniz
+\nÖlkənizin qanunlarından asılı olaraq seçim etməlisiniz.
 \n
 \n%1$s-nı seçsəniz, sürət kameraları haqqında siqnallar və xəbərdarlıqlar alacaqsınız.
 \n
@@ -2715,7 +2715,7 @@
 \n
 \n“Parametrlər” → “Gizlilik və təhlükəsizlik”də istənilən vaxt tənzimləyin.</string>
     <string name="enter_path_to_folder">Qovluğun yolunu daxil edin</string>
-    <string name="paste_Osmand_data_folder_path">OsmAnd məlumat qovluğun yolunu əlavə edin</string>
+    <string name="paste_Osmand_data_folder_path">OsmAnd məlumat qovluğunun yolunu əlavə edin</string>
     <string name="dialogs_and_notifications_descr">Açılan pəncərələri, dialoqları və bildirişləri idarə edin.</string>
     <string name="start_up_message_pref">Başlanğıc mesajı</string>
     <string name="markers_history_is_disabled_descr">Ziyarət edilən xəritə işarələrinin siyahısını xatırlamaq üçün tarixçəni aktivləşdirin.</string>
@@ -2828,4 +2828,77 @@
     <string name="general_settings_profile_descr">Proqram teması, vahidlər, region</string>
     <string name="angular_measeurement">Bucaq vahidi</string>
     <string name="utm_format_descr">OsmAnd UTM NATO formatına bənzəyən, lakin eyni olmayan UTM standartı istifadə edir.</string>
+    <string name="quick_action_switch_day_night_descr">OsmAnd üçün gündüz və gecə rejimləri arasında keçid üçün düymə.</string>
+    <string name="message_need_calculate_route_before_show_graph">%1$s məlumatları yalnız yollarda mövcuddur, qrafiklərə baxmaq üçün “Nöqtələr arasında marşrut” istifadə edərək marşrutu hesablayın.</string>
+    <string name="external_input_device">Xarici giriş cihazları</string>
+    <string name="external_input_device_descr">Klaviatura və ya WunderLINQ kimi xarici idarəetmə cihazı seçin.</string>
+    <string name="add_segment_to_the_track">İz faylına əlavə et</string>
+    <string name="use_volume_buttons_as_zoom">Səs düymələri ilə miqyas</string>
+    <string name="av_photo_play_sound_descr">Şəkil çəkmə üçün səs və ya səssizliyi təyin edin.</string>
+    <string name="display_route_tracks">İzləri göstər</string>
+    <string name="display_route_tracks_as_poi">İzləri POI kimi göstər</string>
+    <string name="benefits_for_contributors_primary_descr">OpenStreetMap.org-a aktiv töhfə verənlərin limitsiz saatlıq xəritə yeniləmələri almaq hüququ ola bilər.</string>
+    <string name="benefits_for_contributors">Aktiv OSM töhfəçiləri üçün üstünlüklər</string>
+    <string name="layer_gpx_layer">İzlər</string>
+    <string name="shared_string_gpx_files">İzlər</string>
+    <string name="ui_customization">UI fərdiləşdirmə</string>
+    <string name="create_custom_categories_list_promo">Siyahı sırasını dəyişdirin və kateqoriyaları gizlədin. Bütün dəyişiklikləri profil kimi idxal və ya ixrac edin.</string>
+    <string name="routing_profile_straightline">Düz xətt</string>
+    <string name="rec_split_clip_length">Klip uzunluğu</string>
+    <string name="rec_split_clip_length_desc">Qeyd edilən kliplər üçün vaxt limiti.</string>
+    <string name="rec_split_storage_size_desc">Bütün qeydə alınmış kliplərin tuta biləcəyi yerin miqdarı.</string>
+    <string name="quick_action_interim_dialog">Aralıq dialoqu göstər</string>
+    <string name="quick_action_fav_name_descr">Ünvanı və ya yer adını istifadə etmək üçün boş saxlayın.</string>
+    <string name="quick_action_page_list_descr">Aşağıdakı siyahı elementləri arasında keçid üçün düymə.</string>
+    <string name="empty_state_my_tracks_desc">İz fayllarını idxal və ya qeyd edin</string>
+    <string name="empty_state_my_tracks">İz faylları əlavə et</string>
+    <string name="show_gpx">İzlər</string>
+    <string name="rendering_attr_streetLightingNight_name">Yalnız gecə göstər</string>
+    <string name="rearrange_categories">Kateqoriyaları təşkil et</string>
+    <string name="multimedia_photo_play_sound">Kamera çəkmə səsi</string>
+    <string name="rendering_attr_streetLighting_name">Küçə işıqlandırılması</string>
+    <string name="layer_amenity_label">Nöqtə adları (POI, Favoritlər)</string>
+    <string name="use_volume_buttons_as_zoom_descr">Cihazdakı səs düymələrini istifadə edərək xəritənin yaxınlaşdırma səviyyəsini idarə edin.</string>
+    <string name="shared_string_available">Mövcuddur</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Seçilmiş izləri xəritədə göstərmək və ya gizlətmək üçün düymə.</string>
+    <string name="track_storage_directory_descrp">İzlər “rec” qovluğunda, aylıq və ya günlük qovluqlarda saxlanıla bilər.</string>
+    <string name="osm_edits_view_descr">Hələ yüklənməmiş bütün düzəlişlərinizə və ya OSM səhvlərinə %1$s-ndə baxın. Artıq yüklənmiş dəyişikliklər daha görünməyəcək.</string>
+    <string name="use_dev_url_descr">OSM qeydi / POI / GPX yükləməyi sınaqdan keçirmək üçün openstreetmap.org əvəzinə dev.openstreetmap.org istifadə edin.</string>
+    <string name="release_3_6">• Profillər: indi sıralamanı dəyişə, xəritə üçün ikon təyin edə, əsas profillər üçün bütün parametrləri dəyişə və onları standartlara qaytara bilərsiniz
+\n
+\n • Naviqasiyaya çıxış nömrəsi əlavə edildi
+\n
+\n • Qoşma parametrləri yeniləndi
+\n
+\n • Bütün profillərə sürətli daxil olmaq üçün Parametrlər ekranı yeniləndi
+\n
+\n • Parametrləri başqa profildən kopyalamaq üçün seçim əlavə edildi
+\n
+\n • Axtarışda sıralamanı dəyişmək və ya POI kateqoriyalarını gizlətmək imkanı əlavə edildi
+\n
+\n • Xəritədə POI ikonları düzgün düzüldü
+\n
+\n • Xəritəni tənzimləmək etmək üçün Gün çıxır/Gün çıxır məlumatları əlavə edildi
+\n
+\n • Xəritədə Ev/İş ikonları əlavə edildi
+\n
+\n • Parametrlərdə çoxsətirli açıqlama üçün dəstək əlavə edildi
+\n
+\n • Yaponiya xəritəsinə düzgün transliterasiya əlavə edildi
+\n
+\n • Antarktida xəritəsi əlavə edildi
+\n
+\n</string>
+    <string name="quick_action_toggle_preference">Seçimi dəyişmək üçün düymə.</string>
+    <string name="empty_state_markers_groups_desc">Favorit qrupları və ya yol nöqtələrini işarələr olaraq idxal edin.</string>
+    <string name="add_group_descr">Qrupları Favoritlərdən və ya GPX yol nöqtələrindən idxal edin.</string>
+    <string name="search_no_results_feedback">Nəticə yoxdur\?
+\nRəy göndərin</string>
+    <string name="layer_osm_edits">OSM düzəlişləri</string>
+    <string name="contributions_may_calculate_with_delay">Töhfələrin hesablanması bir neçə saat çəkə bilər.</string>
+    <string name="shared_string_contributions">Töhfələr</string>
+    <string name="enough_contributions_descr">Təbrik edirik, kifayət qədər OpenStreetMap töhfəsi təqdim etdiniz və indi limitsiz OsmAnd xəritə yeniləmələrindən istifadə edə bilərsiniz!</string>
+    <string name="not_enough_contributions_descr">Limitsiz saatlıq xəritə yeniləmələrinə giriş əldə etmək üçün son iki ay ərzində %2$s minimum %1$s dəyişiklik tələb olunur.</string>
+    <string name="travel_routes">Səyahət marşrutları</string>
+    <string name="reset_to_default_category_button_promo">“Standarta sıfırla” sıralama qaydasını quraşdırma standartına bərpa edəcək.</string>
 </resources>
