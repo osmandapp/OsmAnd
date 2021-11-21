@@ -4450,4 +4450,10 @@
     <string name="memory_allocated_for_routing_ds">Une mémoire plus importante accélère le calcul des longs itinéraires (supérieurs à 500 km) mais peut ralentir les autres applications.
 \nCe paramètre de mémoire est sans effet sur le calcul des itinéraires courts.</string>
     <string name="exit_without_saving_warning">Êtes-vous certain de vouloir quitter sans enregistrer \? Toutes vos modifications seront perdues.</string>
+    <string name="shared_string_hide_slope">Masquer la pente</string>
+    <string name="elevation_profile">Profil d\'altitude</string>
+    <string name="shared_string_uphill">Montée</string>
+    <string name="shared_string_downhill">Descente</string>
+    <string name="shared_string_show_slope">Afficher la pente</string>
+    <string name="shared_string_grade">Classe</string>
 </resources>
