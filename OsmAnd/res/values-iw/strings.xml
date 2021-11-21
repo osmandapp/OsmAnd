@@ -4264,7 +4264,7 @@
     <string name="cancel_anytime_in_amazon_app">ניתן לבטל בכל עת דרך יישומון Amazon</string>
     <string name="amz_manage_subscription_descr">כדי לנהל את המינויים שלך עלי להשתמש ביישומון של Amazon במכשיר או לפתוח את האתר Amazon.com תחת הפרופיל שלך.</string>
     <string name="empty_category_name">שם הקטגוריה ריק</string>
-    <string name="no_activity_for_intent">לא נמצאו יישומים מתאימים לביצוע הפעולה הזאת</string>
+    <string name="no_activity_for_intent">יש להתקין יישומון שיודע לבצע את הפעולה הזאת.</string>
     <string name="add_group_to_markers">הוספת קבוצה לרשימת הסמנים</string>
     <string name="remove_group_from_markers">הסרת קבוצה מרשימת הסמנים</string>
     <string name="start_point">התחלה</string>
@@ -4297,7 +4297,7 @@
     <string name="shared_app_storage_description">הזיכרון המשותף לא זמין עוד עקב שינויים בכללי גישה לאחסון ב־Android.</string>
     <string name="shared_string_details">פרטים</string>
     <string name="included_categories">קטגוריות כלולות</string>
-    <string name="internal_app_storage_description">אחסון פנימי, נסתר מהמשתמש ומיישומונים אחרים, כדי שלאף אחד למעט OsmAnd לא תהיה גישה לנתונים שלך</string>
+    <string name="internal_app_storage_description">אחסון פנימי, נסתר מהמשתמש ומיישומונים אחרים, כדי שרק ל־OsmAnd תהיה גישה לנתונים שלך.</string>
     <string name="shared_storage_warning_title">שינוי בכללי הגישה לאחסון</string>
     <string name="shared_string_articles">ערכים</string>
     <string name="android_auto_map_placeholder_title">המפה מוצגת על המסך במכונית.</string>
