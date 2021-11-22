@@ -1497,7 +1497,7 @@
     <string name="rendering_attr_buildings15zoom_name">Здания на масштабе 15</string>
     <string name="rendering_attr_hideAccess_name">Ограничения доступа</string>
     <string name="rendering_attr_showAccess_name">Ограничения доступа и платный проезд</string>
-    <string name="rendering_attr_showCycleRoutes_name">Веломаршруты</string>
+    <string name="rendering_attr_showCycleRoutes_name">Велосипедные маршруты</string>
     <string name="map_preferred_locale_descr">Предпочтительный язык для меток на карте (если он не доступен, то английский язык или местные названия).</string>
     <string name="map_preferred_locale">Предпочтительный язык на карте</string>
     <string name="lang_sw">Суахили</string>
