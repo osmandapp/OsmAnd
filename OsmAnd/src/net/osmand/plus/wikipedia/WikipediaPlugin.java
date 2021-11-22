@@ -331,17 +331,21 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	private void showWikiOnMap() {
-		PoiFiltersHelper ph = app.getPoiFilters();
-		PoiUIFilter wiki = ph.getTopWikiPoiFilter();
-		ph.loadSelectedPoiFilters();
-		ph.addSelectedPoiFilter(wiki);
+		PoiFiltersHelper helper = app.getPoiFilters();
+		PoiUIFilter filter = helper.getTopWikiPoiFilter();
+		if (filter != null) {
+			helper.loadSelectedPoiFilters();
+			helper.addSelectedPoiFilter(filter);
+		}
 	}
 
 	private void hideWikiFromMap() {
-		PoiFiltersHelper ph = app.getPoiFilters();
-		PoiUIFilter wiki = ph.getTopWikiPoiFilter();
-		ph.removePoiFilter(wiki);
-		ph.removeSelectedPoiFilter(wiki);
+		PoiFiltersHelper helper = app.getPoiFilters();
+		PoiUIFilter filter = helper.getTopWikiPoiFilter();
+		if (filter != null) {
+			helper.removePoiFilter(filter);
+			helper.removeSelectedPoiFilter(filter);
+		}
 	}
 
 	public String getLanguagesSummary() {

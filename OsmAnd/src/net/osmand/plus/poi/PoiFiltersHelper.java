@@ -461,10 +461,12 @@ public class PoiFiltersHelper {
 			for (PoiUIFilter filter : selectedPoiFilters) {
 				boolean skip = false;
 				for (PoiUIFilter filterToExclude : filtersToExclude) {
-					String filterToExcludeId = filterToExclude.getFilterId();
-					if (filterToExcludeId != null && filterToExcludeId.equals(filter.getFilterId())) {
-						skip = true;
-						break;
+					if (filterToExclude != null) {
+						String filterToExcludeId = filterToExclude.getFilterId();
+						if (filterToExcludeId != null && filterToExcludeId.equals(filter.getFilterId())) {
+							skip = true;
+							break;
+						}
 					}
 				}
 				if (!skip) {
@@ -503,11 +505,12 @@ public class PoiFiltersHelper {
 				PoiUIFilter filter = it.next();
 				boolean skip = false;
 				for (PoiUIFilter filterToExclude : filtersToExclude) {
-					String filterToExcludeId = filterToExclude.getFilterId();
-					if (filterToExcludeId != null
-							&& filterToExcludeId.equals(filter.getFilterId())) {
-						skip = true;
-						break;
+					if (filterToExclude != null) {
+						String filterToExcludeId = filterToExclude.getFilterId();
+						if (filterToExcludeId != null && filterToExcludeId.equals(filter.getFilterId())) {
+							skip = true;
+							break;
+						}
 					}
 				}
 				if (!skip) {
