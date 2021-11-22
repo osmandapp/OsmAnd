@@ -165,7 +165,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	private FilteredSelectedGpxFile setFileToFilter(@NonNull SelectedGpxFile selectedGpxFile) {
 		FilteredSelectedGpxFile filteredSelectedGpxFile = selectedGpxFile.getFilteredSelectedGpxFile();
 		if (app != null && selectedGpxFile.getFilteredSelectedGpxFile() == null) {
-			filteredSelectedGpxFile = selectedGpxFile.createFilteredSelectedGpxFile(app);
+			filteredSelectedGpxFile = selectedGpxFile.createFilteredSelectedGpxFile(app, null);
 		}
 		return filteredSelectedGpxFile;
 	}

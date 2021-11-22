@@ -110,6 +110,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginsFragment;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
+import net.osmand.plus.helpers.GpsFilterHelper.GpsFilter;
 import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.helpers.enums.SpeedConstants;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -2370,6 +2371,7 @@ public class GpxUiHelper {
 		if (dataItem.getColoringType() != null) {
 			gpxFile.setColoringType(dataItem.getColoringType());
 		}
+		GpsFilter.writeValidFilterValuesToExtensions(gpxFile.getExtensionsToWrite(), dataItem);
 	}
 
 	public static void shareGpx(@NonNull Context context, @NonNull File file) {

@@ -740,6 +740,9 @@ public class GpxSelectionHelper {
 			displayed = selectedGPXFiles.contains(sf);
 			if (!displayed && show) {
 				sf.selectedByUser = selectedByUser;
+				if (dataItem != null && FilteredSelectedGpxFile.isGpsFiltersConfigValid(dataItem)) {
+					sf.createFilteredSelectedGpxFile(app, dataItem);
+				}
 			}
 		} else {
 			assert gpx != null;
@@ -753,6 +756,9 @@ public class GpxSelectionHelper {
 					sf.setJoinSegments(dataItem.isJoinSegments());
 				}
 				sf.setGpxFile(gpx, app);
+				if (dataItem != null && FilteredSelectedGpxFile.isGpsFiltersConfigValid(dataItem)) {
+					sf.createFilteredSelectedGpxFile(app, dataItem);
+				}
 				sf.notShowNavigationDialog = notShowNavigationDialog;
 				sf.selectedByUser = selectedByUser;
 			}
@@ -897,7 +903,7 @@ public class GpxSelectionHelper {
 			}
 			processPoints(app);
 			if (filteredSelectedGpxFile != null) {
-				app.getGpsFilterHelper().filterGpxFile(filteredSelectedGpxFile);
+				app.getGpsFilterHelper().filterGpxFile(filteredSelectedGpxFile, false);
 			}
 		}
 
@@ -1044,8 +1050,9 @@ public class GpxSelectionHelper {
 		}
 
 		@NonNull
-		public FilteredSelectedGpxFile createFilteredSelectedGpxFile(@NonNull OsmandApplication app) {
-			filteredSelectedGpxFile = new FilteredSelectedGpxFile(app, this);
+		public FilteredSelectedGpxFile createFilteredSelectedGpxFile(@NonNull OsmandApplication app,
+		                                                             @Nullable GpxDataItem gpxDataItem) {
+			filteredSelectedGpxFile = new FilteredSelectedGpxFile(app, this, gpxDataItem);
 			return filteredSelectedGpxFile;
 		}
 

@@ -13,15 +13,20 @@ import com.google.android.material.slider.Slider;
 
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.FilteredSelectedGpxFile;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.plus.GpxDbHelper;
+import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpsFilterHelper.GpsFilter;
 
+import java.io.File;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
@@ -29,10 +34,34 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 
 	private View view;
 
+	private final GpxDbHelper gpxDbHelper;
+	private GpxDataItem gpxDataItem;
+
 	public GpsFiltersCard(@NonNull MapActivity mapActivity,
 	                      @NonNull Fragment target,
 	                      @NonNull FilteredSelectedGpxFile filteredSelectedGpxFile) {
 		super(mapActivity, target, filteredSelectedGpxFile);
+		gpxDbHelper = app.getGpxDbHelper();
+		gpxDataItem = fetchGpxDataItem();
+	}
+
+	@Nullable
+	private GpxDataItem fetchGpxDataItem() {
+		File file = new File(filteredSelectedGpxFile.getGpxFile().path);
+		GpxDataItemCallback callback = new GpxDataItemCallback() {
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+
+			@Override
+			public void onGpxDataItemReady(GpxDataItem item) {
+				if (item != null) {
+					gpxDataItem = item;
+				}
+			}
+		};
+		return gpxDbHelper.getItem(file, callback);
 	}
 
 	@Override
@@ -137,7 +166,12 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 				if (fromUser && values.size() == 2) {
 					filter.updateValues((values.get(0)), values.get(1));
 					updateDisplayedFilterNumbers(container, filter);
-					gpsFilterHelper.filterGpxFile(filteredSelectedGpxFile);
+					if (gpxDataItem != null) {
+						boolean updated = gpxDbHelper.updateGpsFilters(gpxDataItem, filteredSelectedGpxFile);
+						if (updated) {
+							gpsFilterHelper.filterGpxFile(filteredSelectedGpxFile, true);
+						}
+					}
 				}
 			});
 			UiUtilities.setupSlider(rangeSlider, nightMode, ColorUtilities.getActiveColor(app, nightMode), false);
@@ -149,7 +183,12 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 				if (fromUser) {
 					filter.updateValue((slider.getValue()));
 					updateDisplayedFilterNumbers(container, filter);
-					gpsFilterHelper.filterGpxFile(filteredSelectedGpxFile);
+					if (gpxDataItem != null) {
+						boolean updated = gpxDbHelper.updateGpsFilters(gpxDataItem, filteredSelectedGpxFile);
+						if (updated) {
+							gpsFilterHelper.filterGpxFile(filteredSelectedGpxFile, true);
+						}
+					}
 				}
 			});
 			UiUtilities.setupSlider(slider, nightMode, ColorUtilities.getActiveColor(app, nightMode));

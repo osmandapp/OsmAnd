@@ -25,11 +25,13 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -62,8 +64,8 @@ public class GpsFilterHelper {
 		listeners.clear();
 	}
 
-	public void filterGpxFile(@NonNull FilteredSelectedGpxFile filteredSelectedGpxFile) {
-		if (gpsFilterTask != null) {
+	public void filterGpxFile(@NonNull FilteredSelectedGpxFile filteredSelectedGpxFile, boolean cancelPrevious) {
+		if (cancelPrevious && gpsFilterTask != null) {
 			gpsFilterTask.cancel(false);
 		}
 		gpsFilterTask = new GpsFilterTask(app, filteredSelectedGpxFile, listeners);
@@ -275,6 +277,13 @@ public class GpsFilterHelper {
 
 	public static abstract class GpsFilter {
 
+		public static final String TAG_SMOOTHING_THRESHOLD = "smoothing_threshold";
+		public static final String TAG_MIN_FILTER_SPEED = "min_filter_speed";
+		public static final String TAG_MAX_FILTER_SPEED = "max_filter_speed";
+		public static final String TAG_MIN_FILTER_ALTITUDE = "min_filter_altitude";
+		public static final String TAG_MAX_FILTER_ALTITUDE = "max_filter_altitude";
+		public static final String TAG_MAX_FILTER_HDOP = "max_filter_hdop";
+
 		protected static final int SPAN_FLAGS = Spanned.SPAN_EXCLUSIVE_INCLUSIVE;
 
 		protected GPXTrackAnalysis analysis;
@@ -397,6 +406,36 @@ public class GpsFilterHelper {
 
 		@StringRes
 		public abstract int getDescriptionId();
+
+		protected static double parseValueFromExtensions(@NonNull Map<String, String> gpxExtensions,
+		                                                 @NonNull String tag) {
+			String value = gpxExtensions.get(tag);
+			if (Algorithms.isEmpty(value)) {
+				return Double.NaN;
+			}
+			try {
+				return Double.parseDouble(value);
+			} catch (NumberFormatException e) {
+				return Double.NaN;
+			}
+		}
+
+		public static void writeValidFilterValuesToExtensions(@NonNull Map<String, String> gpxExtensions,
+		                                                      @NonNull GpxDataItem dataItem) {
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_SMOOTHING_THRESHOLD, dataItem.getSmoothingThreshold());
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_MIN_FILTER_SPEED, dataItem.getMinFilterSpeed());
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_SPEED, dataItem.getMaxFilterSpeed());
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_MIN_FILTER_ALTITUDE, dataItem.getMinFilterAltitude());
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_ALTITUDE, dataItem.getMaxFilterAltitude());
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_HDOP, dataItem.getMaxFilterHdop());
+		}
+
+		private static void writeValueToExtensionsIfValid(@NonNull Map<String, String> gpxExtensions,
+		                                                  @NonNull String tag, double value) {
+			if (!Double.isNaN(value)) {
+				gpxExtensions.put(tag, String.valueOf(value));
+			}
+		}
 	}
 
 	public static class SmoothingFilter extends GpsFilter {
@@ -434,6 +473,7 @@ public class GpsFilterHelper {
 		@Override
 		public void updateValue(double maxValue) {
 			selectedMaxValue = ((int) maxValue);
+			checkSelectedValues();
 		}
 
 		@Override
@@ -471,6 +511,10 @@ public class GpsFilterHelper {
 		@Override
 		public int getDescriptionId() {
 			return R.string.gps_filter_smoothing_desc;
+		}
+
+		public static double getSmoothingThreshold(@NonNull Map<String, String> gpxExtensions) {
+			return parseValueFromExtensions(gpxExtensions, TAG_SMOOTHING_THRESHOLD);
 		}
 	}
 
@@ -554,6 +598,14 @@ public class GpsFilterHelper {
 		public int getDescriptionId() {
 			return R.string.gps_filter_speed_altitude_desc;
 		}
+
+		public static double getMinFilterSpeed(@NonNull Map<String, String> gpxExtensions) {
+			return parseValueFromExtensions(gpxExtensions, TAG_MIN_FILTER_SPEED);
+		}
+
+		public static double getMaxFilterSpeed(@NonNull Map<String, String> gpxExtensions) {
+			return parseValueFromExtensions(gpxExtensions, TAG_MAX_FILTER_SPEED);
+		}
 	}
 
 	public static class AltitudeFilter extends GpsFilter {
@@ -634,6 +686,14 @@ public class GpsFilterHelper {
 		public int getDescriptionId() {
 			return R.string.gps_filter_speed_altitude_desc;
 		}
+
+		public static double getMinFilterAltitude(@NonNull Map<String, String> gpxExtensions) {
+			return parseValueFromExtensions(gpxExtensions, TAG_MIN_FILTER_ALTITUDE);
+		}
+
+		public static double getMaxFilterAltitude(@NonNull Map<String, String> gpxExtensions) {
+			return parseValueFromExtensions(gpxExtensions, TAG_MAX_FILTER_ALTITUDE);
+		}
 	}
 
 	public static class HdopFilter extends GpsFilter {
@@ -670,6 +730,7 @@ public class GpsFilterHelper {
 		@Override
 		public void updateValue(double maxValue) {
 			selectedMaxValue = maxValue;
+			checkSelectedValues();
 		}
 
 		@NonNull
@@ -709,6 +770,10 @@ public class GpsFilterHelper {
 		@Override
 		public int getDescriptionId() {
 			return R.string.gps_filter_hdop_desc;
+		}
+
+		public static double getMaxFilterHdop(@NonNull Map<String, String> gpxExtensions) {
+			return parseValueFromExtensions(gpxExtensions, TAG_MAX_FILTER_HDOP);
 		}
 	}
 
