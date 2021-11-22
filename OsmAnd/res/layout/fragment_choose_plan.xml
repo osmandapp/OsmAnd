@@ -92,6 +92,7 @@
                         android:layout_height="wrap_content"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:padding="@dimen/list_content_padding"
+                        android:contentDescription="@string/access_shared_string_navigate_up"
                         android:tint="@color/icon_color_default_light"
                         osmand:srcCompat="@drawable/ic_arrow_back" />
 
@@ -109,6 +110,7 @@
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/button_reset"
+                        android:contentDescription="@string/restore_purchases"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="?attr/selectableItemBackgroundBorderless"
