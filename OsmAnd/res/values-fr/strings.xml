@@ -4456,4 +4456,13 @@
     <string name="shared_string_downhill">Descente</string>
     <string name="shared_string_show_slope">Afficher la pente</string>
     <string name="shared_string_grade">Classe</string>
+    <string name="shared_string_statistics">Statistiques</string>
+    <string name="gps_filter_precision">Précision min du GPS</string>
+    <string name="gps_filter_smoothing">Lissage</string>
+    <string name="save_changes_into_file">Enregistrer les modifications dans le fichier</string>
+    <string name="save_as_copy">Enregistrer comme copie</string>
+    <string name="shared_string_gps_filter">Filtre GPS</string>
+    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
+    <string name="distance_between_points">Distance entre les points</string>
+    <string name="shared_string_precision">Précision</string>
 </resources>
