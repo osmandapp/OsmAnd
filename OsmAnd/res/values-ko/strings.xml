@@ -1846,4 +1846,26 @@
     <string name="route_descr_select_start_point">출발지 선택</string>
     <string name="plan_route_split_after">다음 후 분할</string>
     <string name="copy_to_map_markers">지도 마커에 복사</string>
+    <string name="backup_and_restore">백업 &amp; 복원</string>
+    <string name="login_open_place_reviews">OpenPlaceReviews에 로그인</string>
+    <string name="ui_customization">UI 사용자 지정</string>
+    <string name="profile_appearance">프로필 모양</string>
+    <string name="analytics_pref_title">진단공유</string>
+    <string name="waypoints_removed_from_map_markers">지도 마커에서 경유지가 제거됨</string>
+    <string name="empty_state_markers_active">지도 마커가 작성됨!</string>
+    <string name="map_markers">맵 마커</string>
+    <string name="osmand_settings">OsmAnd 설정</string>
+    <string name="purchases">구입내역</string>
+    <string name="app_profile_type">앱 프로파일 유형</string>
+    <string name="plugins_settings">플러그인 설정</string>
+    <string name="monitoring_notification">알림</string>
+    <string name="dialogs_and_notifications_title">대화상자 및 알림</string>
+    <string name="dialogs_and_notifications_descr">팝업, 대화 상자 및 알림을 제어합니다.</string>
+    <string name="nautical_render_descr">항해용이다. 부표, 등대, 강변도로, 바닷길 및 표지판, 항만, 시어크 서비스 및 깊이 윤곽이 특징이다.</string>
+    <string name="plugin_global_prefs_info">이러한 플러그인 설정은 전역이며 모든 프로파일에 적용</string>
+    <string name="purchases_restored">구입이 복원됨</string>
+    <string name="depth_contour_descr">해수면 등고선 및 seamarks.</string>
+    <string name="sea_depth_thanks">해당 항목을 구입해 주셔서 감사합니다 \'해상 깊이 등고선\'</string>
+    <string name="fonts_header">지도 글꼴</string>
+    <string name="map_markers_other">기타 마커</string>
 </resources>

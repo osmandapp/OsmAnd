@@ -4,6 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
@@ -16,15 +19,17 @@ public class ReloadData extends AsyncTask<Void, Void, Boolean> {
 	private final Context ctx;
 	private ProgressImplementation progress;
 
-	public ReloadData(Context ctx, OsmandApplication app) {
+	public ReloadData(@NonNull OsmandApplication app, @Nullable Context ctx) {
 		this.ctx = ctx;
 		this.app = app;
 	}
 
 	@Override
 	protected void onPreExecute() {
-		progress = ProgressImplementation.createProgressDialog(ctx, ctx.getString(R.string.loading_data),
-				ctx.getString(R.string.loading_data), ProgressDialog.STYLE_HORIZONTAL);
+		if (ctx != null) {
+			progress = ProgressImplementation.createProgressDialog(ctx, ctx.getString(R.string.loading_data),
+					ctx.getString(R.string.loading_data), ProgressDialog.STYLE_HORIZONTAL);
+		}
 	}
 
 	@Override

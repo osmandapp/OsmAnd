@@ -139,7 +139,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private ViewGroup cardsContainer;
 	private MapBaseCard visibleCard;
 	private PointsCard pointsCard;
-	private GraphsCard graphsCard;
+	private ChartsCard chartsCard;
 	private MultiStateToggleButton infoTypeBtn;
 	private RadioItem pointsBtn;
 	private RadioItem graphBtn;
@@ -339,7 +339,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		infoTypeBtn.setItems(pointsBtn, graphBtn);
 
 		pointsCard = new PointsCard(mapActivity, this);
-		graphsCard = new GraphsCard(mapActivity, detailsMenu, this);
+		chartsCard = new ChartsCard(mapActivity, detailsMenu, this);
 
 		if (progressBarVisible) {
 			showProgressBar();
@@ -645,7 +645,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				if (InfoType.POINTS == type) {
 					visibleCard = pointsCard;
 				} else if (InfoType.GRAPH == type) {
-					visibleCard = graphsCard;
+					visibleCard = chartsCard;
 				}
 				cardsContainer.removeAllViews();
 				View cardView = visibleCard.getView() != null ? visibleCard.getView() : visibleCard.build(app);
@@ -703,7 +703,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	private void updateInfoView() {
 		updateInfoView(pointsCard);
-		updateInfoView(graphsCard);
+		updateInfoView(chartsCard);
 	}
 
 	private void updateInfoView(OnUpdateInfoListener listener) {
@@ -2042,7 +2042,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				dismiss(mapActivity);
 				return;
 			}
-			ExitBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), this);
+			ExitBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), this, getString(R.string.plan_route_exit_dialog_descr));
 		}
 	}
 

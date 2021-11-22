@@ -698,7 +698,7 @@
     <string name="impassable_road">Избегавај путеве…</string>
     <string name="traffic_warning_border_control">Управљање границама</string>
     <string name="no_index_file_to_download">Нема пронађених преузимања, проверите везу са Интернетом.</string>
-    <string name="select_index_file_to_download">Нема ничег пронађеног. Ако програм не може наћи ову област, можете то учинити сами (погледајте https://osmand.net).</string>
+    <string name="select_index_file_to_download">Ништа није нађено, али можете га сами направити (погледајте https://osmand.net).</string>
     <string name="local_index_select_gpx_file">Одаберите стазу</string>
     <string name="gpx_split_interval">Време раздвајања</string>
     <string name="sort_by_distance">Распоред по даљини</string>
@@ -915,7 +915,7 @@
     <string name="rendering_attr_hikingRoutesOSMC_description">Приказуј путеве према путањама ОСМЦ-а.</string>
     <string name="rendering_attr_showRoadMaps_description">Одаберите када ће се приказивати само путне карте:</string>
     <string name="rendering_attr_showRoadMaps_name">Само путне карте</string>
-    <string name="safe_mode_description">Покрени апликацију у безбедном начину рада (користећи спорији Андроидов код уместо бржег програмског).</string>
+    <string name="safe_mode_description">Покрени апликацију у (споријем) безбедном начину рада.</string>
     <string name="safe_mode">Безбедни начин рада</string>
     <string name="native_library_not_running">Програм је у безбедном начину рада (искључите у „Поставкама“).</string>
     <string name="rendering_attr_roadColors_description">Изаберите образац боја путева:</string>
@@ -2049,7 +2049,7 @@
     <string name="build_installed">Верзија {0} инсталирана ({1}).</string>
     <string name="downloading_build">Преузимам верзију…</string>
     <string name="install_selected_build">Инсталирати OsmAnd - {0} од {1} {2} MB ?</string>
-    <string name="loading_builds_failed">Преузимање списка OsmAnd верзија није успело</string>
+    <string name="loading_builds_failed">Није успело преузимање списка OsmAnd верзијаљ</string>
     <string name="loading_builds">Учитавам OsmAnd верзије…</string>
     <string name="select_build_to_install">Одаберите OsmAnd верзију за инсталирање</string>
     <string name="voice_is_not_available_title">Одаберите пакет гласовног навођења</string>
@@ -2393,7 +2393,7 @@
     <string name="pref_vector_rendering">Опције специфичне за векторски рендерер</string>
     <string name="pref_raster_map">Поставке извора карте</string>
     <string name="old_poi_file_should_be_deleted">Фајл са подацима тачака од интереса \'%1$s\' је непотребан и може бити избрисан.</string>
-    <string name="favorite_delete_multiple">Да ли сте сигурни да желите да обришете %1$d Омиљених тачака и %2$d Омиљених група\?</string>
+    <string name="favorite_delete_multiple">Обрисати %1$d Омиљених тачака и %2$d Омиљених група\?</string>
     <string name="local_index_items_backuped">%1$d од %2$d ставке(и) деактивирано.</string>
     <string name="local_index_items_deleted">%1$d of %2$d ставке(и) избрисано.</string>
     <string name="local_index_items_restored">%1$d of %2$d ставке(и) активирано.</string>
@@ -3114,7 +3114,7 @@
     <string name="get_discount_title">Набавите %1$d %2$s за %3$s ниже.</string>
     <string name="get_discount_first_part">%1$s првих %2$s</string>
     <string name="get_discount_first_few_part">%1$s првих %2$s</string>
-    <string name="get_discount_second_part">онда %1$s</string>
+    <string name="get_discount_second_part">Онда %1$s</string>
     <string name="cancel_subscription">Поништи чланарину</string>
     <string name="price_and_discount">%1$s • Уштеди %2$s</string>
     <string name="configure_profile_info">Поставке за профил:</string>
@@ -3410,9 +3410,9 @@
 \n • Додата карта Антарктика
 \n
 \n</string>
-    <string name="plugin_disabled_descr">Овај додатак је посебна апликација, морате га посебно уклонити ако не планирате да га користите.
+    <string name="plugin_disabled_descr">Овај додатак је посебна апликација и ако га искључите, нећете га уклонити.
 \n
-\nДодатак ће остати на уређају и после уклањања OsmAnd апликације.</string>
+\nМожете да га избришете из подешавања апликација на Андроиду.</string>
     <string name="shared_string_routing">Рутирање</string>
     <string name="shared_string_app_default_w_val">Подразумевано у апликацију (%s)</string>
     <string name="no_recalculation_setting">Без прерачунавања</string>
@@ -4213,9 +4213,9 @@
     <string name="backup_error_token_is_not_valid_or_expired">Неважећи или истекао токен</string>
     <string name="backup_error_user_is_not_registered">Ниједан корисник није регистрован са том адресом е-поште</string>
     <string name="backup_error_no_valid_subscription">Нема важеће претплате</string>
-    <string name="routeInfo_winter_ice_road_description">Боји линију путање или стазе према каквоћи путева зими које је употребљиво само зимама.</string>
-    <string name="routeInfo_smoothness_description">Доставља податке о правилима бојења у зависности од употребљивости путева за возила на точковима, нарочито према исправности/равности површине.</string>
-    <string name="routeInfo_surface_description">Доставља додатне податке о врсти подлоге путева/стаза.</string>
+    <string name="routeInfo_winter_ice_road_description">Бојење линије путање или стазе према класификацији зимских путева.</string>
+    <string name="routeInfo_smoothness_description">Класификација квалитета маневрисања на путевима/стазама за возила на точковима, према исправности/равности површине.</string>
+    <string name="routeInfo_surface_description">Доставља информације о врсти подлоге путева/стаза.</string>
     <string name="routeInfo_roadClass_description">Бојење линије путање или стазе по врсти пута.</string>
     <string name="add_group_to_markers">Додајте групу на маркер листу</string>
     <string name="remove_group_from_markers">Уклони групу са маркер листе</string>
@@ -4230,7 +4230,7 @@
     <string name="promo_subscription">Попустна претплата</string>
     <string name="track_has_no_needed_data">Стаза не садржи потребне податке.</string>
     <string name="routes_color_by_type">Боји путање по…</string>
-    <string name="walking_route_osmc_description">Боји путање по њиховим појединачним местним бојама (уколико је присутно на OpenStreetMap-ама) и врсти (међуародне, областне, местне).</string>
+    <string name="walking_route_osmc_description">Боји путање по њиховим појединачним месним бојама (уколико је присутно на OpenStreetMap-ама) и врсти (међународне, областне, месне).</string>
     <string name="travel_routes">Путање путовања</string>
     <string name="setting_supported_by_style">Ове поставке су одређене изгледом карте „%1$s“</string>
     <string name="direct_line_maps_required_descr">Прорачун путање је дужи него што је очекивано.
@@ -4250,18 +4250,18 @@
     <string name="available_until">Доступно до %1$s</string>
     <string name="enough_contributions_descr">Честитамо, стекли сте довољно доприноса OpenStreetMap-ама и сада можете уживати неограничено у освежавању OsmAnd карата !</string>
     <string name="shared_string_contributions">Доприноси</string>
-    <string name="contributions_may_calculate_with_delay">Прорачунавање учешћа може потрајати неколико часова.</string>
+    <string name="contributions_may_calculate_with_delay">Прорачунавање допроноса може потрајати неколико часова.</string>
     <string name="map_updates_are_unavailable_yet">Надоградње карата још увек нису доступне. :=(</string>
     <string name="connect_track_points_as">Повежите тачке пута</string>
     <string name="pro_features">Плаћене могућности</string>
     <string name="purchases_restored">Куповина је повраћена</string>
-    <string name="grey_color_undefined">Зелена боја се користи за делове без података.</string>
-    <string name="cancel_anytime_in_amazon_app">Откажите било када у програму Амазон</string>
-    <string name="amz_manage_subscription_descr">Ради управљања своје претплате на програм Амазон на уређају или отварање странице Amazon.com под својим налогом.</string>
-    <string name="empty_category_name">Име врсте је празно</string>
+    <string name="grey_color_undefined">Делови без података су обојени сиво.</string>
+    <string name="cancel_anytime_in_amazon_app">Откажите било када кроз Амазон апликацију</string>
+    <string name="amz_manage_subscription_descr">Управљајте својом претплатом користећи Амазон апликацију или Амазон веб сајт.</string>
+    <string name="empty_category_name">Име категорије је празно</string>
     <string name="no_activity_for_intent">Инсталирајте апликацију која може да изведе ову радњу.</string>
     <string name="no_items_of_type_message">Немате ни једну ставку ове врсте</string>
-    <string name="routeInfo_tracktype_description">Бојење линије пута или стазе према стању пута засновано на саставу површи. Обично се користи на путевима где је главна мрежа путева од непресвучених површи.</string>
+    <string name="routeInfo_tracktype_description">Бојење линије пута или стазе према типу њихове површине. Обично се користи тамо где је мрежа путева од непресвучених површи.</string>
     <string name="backup_deleting_all_data">Бришем све податке…</string>
     <string name="backup_deleted_all_data">Сви подаци су уклоњени.</string>
     <string name="backup_version_history_removed">Сва издања историје су уклоњена.</string>
@@ -4292,8 +4292,8 @@
     <string name="horseback_riding">Јахање коња</string>
     <string name="benefits_for_contributors_primary_descr">Активни доприносиоци OpenStreetMap-ама могу имати право на неограничена ажурирања карте сваких сат времена.</string>
     <string name="attribute">Атрибут</string>
-    <string name="option_available_only_in_osmand_pro">Ова опција је доступна само као део OsmAnd Pro претплате.</string>
-    <string name="benefits_for_contributors_secondary_descr">Пријавите се на OpenStreetMap-е да проверите да ли имате право на наограничена ажурирања карте сваки сат и месец.</string>
+    <string name="option_available_only_in_osmand_pro">Доступно само као део OsmAnd Pro претплате.</string>
+    <string name="benefits_for_contributors_secondary_descr">Пријавите се на OpenStreetMap-е да проверите да ли имате право на неограничена ажурирања карте сваки сат и месец.</string>
     <string name="sample_wikivoyage">Пример Википутовања</string>
     <string name="backup_error_subscription_was_expired_descr">Ваша OsmAnd Pro претплата је истекла, обновите је да правите резервне копије. И даље можете повратити податке из облака.</string>
     <string name="logout_from_osmand_cloud">Odjava sa OsmAnd облака</string>
@@ -4435,4 +4435,5 @@
     <string name="transparent_status_bar_descr">Прикажи мапу испод статусне траке</string>
     <string name="transparent_status_bar">Транспарентна статусна трака</string>
     <string name="shared_string_details">Детаљи</string>
+    <string name="not_enough_contributions_descr">Минимум од %1$s измена кроз период од последња два месеца %2$s је потребан да добијете приступ неограниченим ажурирањима карте сваких сат времена.</string>
 </resources>

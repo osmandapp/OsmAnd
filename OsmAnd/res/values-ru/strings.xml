@@ -4326,7 +4326,7 @@
     <string name="no_items_of_type_message">У вас нет элементов этого типа</string>
     <string name="routeInfo_tracktype_description">Раскрашивание маршрута или трека на основе состава их поверхности. Обычно применяется, когда дорожная сеть в основном не имеет покрытия.</string>
     <string name="routeInfo_winter_ice_road_description">Раскрашивание маршрута или трека в соответствии с классификацией зимних дорог (зимников).</string>
-    <string name="routeInfo_smoothness_description">Классификация пригодности дорог/тротуаров для колесных транспортных средств, в отношении регулярности/ровности поверхности.</string>
+    <string name="routeInfo_smoothness_description">Классификация пригодности дорог/тротуаров для колёсных транспортных средств в отношении регулярности/ровности поверхности.</string>
     <string name="routeInfo_surface_description">Предоставляет информацию о физическом покрытии дорог/тротуаров.</string>
     <string name="routeInfo_roadClass_description">Раскрашивание маршрута или трека в соответствии с классификацией дорог.</string>
     <string name="start_point">Старт</string>
@@ -4416,7 +4416,7 @@
     <string name="display_route_tracks_as_poi">Показать треки как POI</string>
     <string name="delete_history_items">Удалить записи истории (%1$s шт.)\?</string>
     <string name="delete_history_items_descr">Удалить выбранные записи\?</string>
-    <string name="quick_action_toggle_preference">Переключатель для выбранного состояния предпочтений.</string>
+    <string name="quick_action_toggle_preference">Переключатель для изменения предпочтений.</string>
     <string name="from_to_with_params">Из %1$s в %2$s</string>
     <string name="progress_complete">%1$s завершено</string>
     <string name="shared_string_migration">Миграция</string>
@@ -4436,7 +4436,7 @@
     <string name="files_remaining">Осталось файлов: %1$s %2$s</string>
     <string name="copying_file">Копирование файла %1$s</string>
     <string name="storage_found_files_descr">Нажмите «%1$s», чтобы скопировать файлы (%2$s шт.) из «%3$s» в «%4$s». Это может занять некоторое время.</string>
-    <string name="shared_storage_third_step">Предоставьте разрешение на доступ к папке. Без этого разрешения OsmAnd не cможет копировать файлы.</string>
+    <string name="shared_storage_third_step">Предоставьте разрешение на доступ к папке. Без этого OsmAnd не cможет копировать файлы.</string>
     <string name="shared_string_skip_warning">Вы уверены, что хотите пропустить миграцию\? OsmAnd больше не имеет доступа к вашим файлам в общем хранилище.
 \n
 \nПриложение запустится в новой папке с вашими данными.</string>
@@ -4446,4 +4446,19 @@
     <string name="storage_copied_files_size">Скопировано файлов: %1$s %2$s</string>
     <string name="storage_found_files_size">Найдено файлов: %1$s %2$s</string>
     <string name="storage_copying_files_size">Копируется файлов: %1$s %2$s</string>
+    <string name="shared_string_memory">Память</string>
+    <string name="reading_files">Чтение файлов…</string>
+    <string name="shared_string_hide_all">Скрыть все</string>
+    <string name="add_to_group">Добавить в группу</string>
+    <string name="fold_unfold">свернуть/развернуть</string>
+    <string name="memory_allocated_for_routing_ds">Более высокий объем памяти ускоряет расчет длинных маршрутов (более 500 км), но может повлиять на производительность других приложений. Не влияет на скорость расчета коротких маршрутов.</string>
+    <string name="memory_allocated_for_routing">Выделение памяти для маршрутизации</string>
+    <string name="no_items_selected_warning">Выберите хотя бы один элемент</string>
+    <string name="display_groups_visibility_dialog_description">Вы можете управлять видимостью групп на карте. Если трек скрыт, все группы также будут скрыты.</string>
+    <string name="map_marker_options">Параметры маркеров карты</string>
+    <string name="app_profile_type">Тип профиля приложения</string>
+    <string name="migration_files_present">%1$d файлов (%2$s) присутствуют в выбранном местоположении «%3$s».</string>
+    <string name="show_parameter_seekbar">Показать параметр ползунка</string>
+    <string name="app_modes_options">Выбор режимов приложения</string>
+    <string name="exit_without_saving_warning">Выйти без сохранения\? Все изменения будут потеряны.</string>
 </resources>

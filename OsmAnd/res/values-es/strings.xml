@@ -1827,7 +1827,7 @@
     <string name="weekly">Cada semana</string>
     <string name="morning">Por la mañana</string>
     <string name="night">Por la noche</string>
-    <string name="shared_string_not_selected">No marcado(s)</string>
+    <string name="shared_string_not_selected">Sin marcar</string>
     <string name="select_month_and_country">Mes y país:</string>
     <string name="shared_string_type">Tipo</string>
     <string name="starting_point">Punto de partida</string>

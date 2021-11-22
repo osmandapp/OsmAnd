@@ -746,6 +746,8 @@ public class OsmandSettings {
 	public final CommonPreference<RadiusRulerMode> RADIUS_RULER_MODE = new EnumStringPreference<>(this, "ruler_mode", RadiusRulerMode.FIRST, RadiusRulerMode.values()).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> SHOW_COMPASS_CONTROL_RULER = new BooleanPreference(this, "show_compass_ruler", true).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> SHOW_DISTANCE_RULER = new BooleanPreference(this, "show_distance_ruler", false).makeProfile();
+	public final OsmandPreference<Boolean> SHOW_ELEVATION_PROFILE_WIDGET = new BooleanPreference(this, "show_elevation_profile_widget", false).makeProfile();
+	public final OsmandPreference<Boolean> SHOW_SLOPES_ON_ELEVATION_WIDGET = new BooleanPreference(this, "show_slopes_on_elevation_widget", false).makeProfile();
 
 	public final CommonPreference<Boolean> SHOW_LINES_TO_FIRST_MARKERS = new BooleanPreference(this, "show_lines_to_first_markers", false).makeProfile();
 	public final CommonPreference<Boolean> SHOW_ARROWS_TO_FIRST_MARKERS = new BooleanPreference(this, "show_arrows_to_first_markers", false).makeProfile();
@@ -917,7 +919,7 @@ public class OsmandSettings {
 			return super.setValue(prefs, val);
 		}
 
-		protected DrivingRegion getDefaultValue() {
+		public DrivingRegion getDefaultValue() {
 			return DrivingRegion.getDrivingRegionByLocale();
 		}
 
@@ -927,7 +929,7 @@ public class OsmandSettings {
 	// cache of metrics constants as they are used very often
 	public final EnumStringPreference<MetricsConstants> METRIC_SYSTEM = (EnumStringPreference<MetricsConstants>) new EnumStringPreference<MetricsConstants>(this,
 			"default_metric_system", MetricsConstants.KILOMETERS_AND_METERS, MetricsConstants.values()) {
-		protected MetricsConstants getDefaultValue() {
+		public MetricsConstants getDefaultValue() {
 			return DRIVING_REGION.get().defMetrics;
 		}
 
@@ -1187,7 +1189,7 @@ public class OsmandSettings {
 	public final OsmandPreference<String> MAP_PREFERRED_LOCALE = new StringPreference(this, "map_preferred_locale", "").makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> MAP_TRANSLITERATE_NAMES = new BooleanPreference(this, "map_transliterate_names", false) {
 
-		protected Boolean getDefaultValue() {
+		public Boolean getDefaultValue() {
 			return usingEnglishNames();
 		}
 
@@ -1324,7 +1326,7 @@ public class OsmandSettings {
 
 	public final CommonPreference<Integer> DELAY_TO_START_NAVIGATION = new IntPreference(this, "delay_to_start_navigation", -1) {
 
-		protected Integer getDefaultValue() {
+		public Integer getDefaultValue() {
 			if (DEFAULT_APPLICATION_MODE.get().isDerivedRoutingFrom(ApplicationMode.CAR)) {
 				return 10;
 			}
@@ -1374,7 +1376,7 @@ public class OsmandSettings {
 
 	public final CommonPreference<Boolean> SHOW_SAVED_TRACK_REMEMBER = new BooleanPreference(this, "show_saved_track_remember", false) {
 		@Override
-		protected Boolean getDefaultValue() {
+		public Boolean getDefaultValue() {
 			for (SelectedGpxFile selectedGpxFile : ctx.getSelectedGpxHelper().getSelectedGPXFiles()) {
 				if (!selectedGpxFile.isShowCurrentTrack()) {
 					return true;
@@ -1930,8 +1932,8 @@ public class OsmandSettings {
 		return map;
 	}
 
-	public final OsmandPreference<Boolean> SHARED_STORAGE_MIGRATION_DIALOG_SHOWN = new BooleanPreference(this,
-			"shared_storage_migration_dialog_shown", false).makeGlobal();
+	public final OsmandPreference<Boolean> SHARED_STORAGE_MIGRATION_FINISHED = new BooleanPreference(this,
+			"shared_storage_migration_finished", false).makeGlobal();
 
 	public static final String EXTERNAL_STORAGE_DIR = "external_storage_dir"; //$NON-NLS-1$
 
@@ -2888,6 +2890,9 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Long> AGPS_DATA_LAST_TIME_DOWNLOADED =
 			new LongPreference(this, "agps_data_downloaded", 0).makeGlobal();
+
+	public final CommonPreference<Integer> MEMORY_ALLOCATED_FOR_ROUTING =
+			new IntPreference(this, "memory_allocated_for_routing", 256).makeGlobal();
 
 	// Live Updates
 	public final OsmandPreference<Boolean> IS_LIVE_UPDATES_ON =

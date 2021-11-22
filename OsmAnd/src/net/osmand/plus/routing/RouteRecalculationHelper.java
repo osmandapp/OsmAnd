@@ -1,5 +1,7 @@
 package net.osmand.plus.routing;
 
+import static net.osmand.plus.notifications.OsmandNotification.NotificationType.NAVIGATION;
+
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
@@ -24,9 +26,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-
-import static net.osmand.plus.notifications.OsmandNotification.NotificationType.NAVIGATION;
-import static net.osmand.plus.onlinerouting.engine.EngineType.GPX_TYPE;
 
 class RouteRecalculationHelper {
 
@@ -250,7 +249,7 @@ class RouteRecalculationHelper {
 			if (params.mode.getRouteService() == RouteService.ONLINE) {
 				OnlineRoutingEngine engine = app.getOnlineRoutingHelper().getEngineByKey(params.mode.getRoutingProfile());
 				if (engine != null) {
-					engine.updateRouteParameters(params, previousRoute);
+					engine.updateRouteParameters(params, paramsChanged ? previousRoute : null);
 				}
 			}
 			startRouteCalculationThread(params, paramsChanged, updateProgress);
@@ -357,9 +356,8 @@ class RouteRecalculationHelper {
 
 		public boolean startMissingMapsOnlineSearch() {
 			if (missingMapsOnlineSearchTask == null) {
-				missingMapsOnlineSearchTask = new MissingMapsOnlineSearchTask(params, missingMaps -> {
-					RouteRecalculationTask.this.missingMaps = missingMaps;
-				});
+				missingMapsOnlineSearchTask = new MissingMapsOnlineSearchTask(params, missingMaps ->
+						RouteRecalculationTask.this.missingMaps = missingMaps);
 				missingMapsOnlineSearchTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				return true;
 			}
@@ -418,12 +416,7 @@ class RouteRecalculationHelper {
 				}
 			}
 			if (!updateProgress) {
-				routingHelper.getApplication().runInUIThread(new Runnable() {
-					@Override
-					public void run() {
-						routingThreadHelper.finishProgress(params);
-					}
-				});
+				routingHelper.getApplication().runInUIThread(() -> routingThreadHelper.finishProgress(params));
 			}
 			app.getNotificationHelper().refreshNotification(NAVIGATION);
 		}
@@ -432,7 +425,7 @@ class RouteRecalculationHelper {
 	private class RouteRecalculationExecutor extends ThreadPoolExecutor {
 
 		public RouteRecalculationExecutor() {
-			super(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
+			super(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
 		}
 
 		protected void afterExecute(Runnable r, Throwable t) {

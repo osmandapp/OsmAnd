@@ -419,7 +419,7 @@ public class UiUtilities {
 
 		GradientDrawable background = new GradientDrawable();
 		background.setColor(ColorUtilities.getColorWithAlpha(activeColor, 0.1f));
-		background.setStroke(AndroidUtils.dpToPx(app, 1), ColorUtilities.getColorWithAlpha(activeColor, 0.5f));
+		background.setStroke(AndroidUtils.dpToPx(app, 1.5f), ColorUtilities.getColorWithAlpha(activeColor, 0.5f));
 		if (buttonType == CustomRadioButtonType.START) {
 			if (isLayoutRtl) {
 				background.setCornerRadii(new float[] {0, 0, radius, radius, radius, radius, 0, 0});

@@ -2,6 +2,8 @@ package net.osmand.plus.measurementtool.graph;
 
 import android.view.MotionEvent;
 
+import androidx.annotation.NonNull;
+
 import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.Entry;
@@ -10,7 +12,7 @@ import com.github.mikephil.charting.listener.ChartTouchListener;
 
 import net.osmand.plus.OsmandApplication;
 
-public abstract class BaseGraphAdapter<_Chart extends Chart, _ChartData extends ChartData, _Data> {
+public abstract class BaseChartAdapter<_Chart extends Chart, _ChartData extends ChartData, _Data> {
 
 	private Highlight lastKnownHighlight;
 	protected OsmandApplication app;
@@ -19,7 +21,7 @@ public abstract class BaseGraphAdapter<_Chart extends Chart, _ChartData extends 
 	protected _Data additionalData;
 	protected boolean usedOnMap;
 
-	public BaseGraphAdapter(OsmandApplication app, _Chart chart, boolean usedOnMap) {
+	public BaseChartAdapter(@NonNull OsmandApplication app, @NonNull _Chart chart, boolean usedOnMap) {
 		this.app = app;
 		this.chart = chart;
 		this.usedOnMap = usedOnMap;

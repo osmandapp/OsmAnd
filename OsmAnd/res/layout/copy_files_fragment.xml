@@ -67,8 +67,41 @@
 
 				<include layout="@layout/simple_divider_item" />
 
-				<include
+				<LinearLayout
 					android:id="@+id/remaining_files"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:paddingLeft="@dimen/content_padding"
+					android:paddingTop="@dimen/content_padding"
+					android:paddingRight="@dimen/content_padding"
+					android:paddingBottom="@dimen/content_padding">
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@android:id/title"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:letterSpacing="@dimen/text_button_letter_spacing"
+						android:textColor="?android:textColorPrimary"
+						android:textSize="@dimen/default_list_text_size"
+						osmand:typeface="@string/font_roboto_regular" />
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@android:id/summary"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:letterSpacing="@dimen/description_letter_spacing"
+						android:maxLines="4"
+						android:text="@string/osmand_net_previously_installed"
+						android:textColor="?android:textColorSecondary"
+						android:textSize="@dimen/default_desc_text_size"
+						osmand:lineHeight="@dimen/default_desc_line_height"
+						osmand:typeface="@string/font_roboto_regular" />
+
+				</LinearLayout>
+
+				<include
+					android:id="@+id/restart_required"
 					layout="@layout/preference_with_descr" />
 
 			</LinearLayout>
@@ -111,18 +144,6 @@
 			</androidx.appcompat.widget.Toolbar>
 
 		</com.google.android.material.appbar.CollapsingToolbarLayout>
-
-		<me.zhanghai.android.materialprogressbar.MaterialProgressBar
-			android:id="@+id/progress_bar"
-			style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="5dp"
-			android:indeterminate="true"
-			android:visibility="gone"
-			osmand:mpb_progressStyle="horizontal"
-			osmand:mpb_setBothDrawables="true"
-			osmand:mpb_useIntrinsicPadding="false"
-			tools:visibility="visible" />
 
 	</com.google.android.material.appbar.AppBarLayout>
 

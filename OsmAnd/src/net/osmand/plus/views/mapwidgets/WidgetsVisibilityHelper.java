@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -26,11 +27,14 @@ public class WidgetsVisibilityHelper {
 	private final RoutingHelper routingHelper;
 	private final MapLayers mapLayers;
 
+	boolean proVersionAvailable;
+
 	public WidgetsVisibilityHelper(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		this.settings = mapActivity.getMyApplication().getSettings();
 		this.routingHelper = mapActivity.getRoutingHelper();
 		this.mapLayers = mapActivity.getMapLayers();
+		this.proVersionAvailable = InAppPurchaseHelper.isOsmAndProAvailable(mapActivity.getMyApplication());
 	}
 
 	public boolean shouldShowQuickActionButton() {
@@ -144,6 +148,25 @@ public class WidgetsVisibilityHelper {
 				&& (additionalDialogsHide || !isPortrait());
 	}
 
+	public boolean shouldShowElevationProfileWidget() {
+		return proVersionAvailable && settings.SHOW_ELEVATION_PROFILE_WIDGET.get()
+				&& isRouteCalculated()
+				&& !isDashboardVisible()
+				&& !isInChangeMarkerPositionMode()
+				&& !isInGpxDetailsMode()
+				&& !isInMeasurementToolMode()
+				&& !isInPlanRouteMode()
+				&& !isInTrackAppearanceMode()
+				&& !isInTrackMenuMode()
+				&& !isInRouteLineAppearanceMode()
+				&& !isMapRouteInfoMenuVisible()
+				&& !isInChoosingRoutesMode()
+				&& !isInWaypointsChoosingMode()
+				&& !isInFollowTrackMode()
+				&& !isContextMenuFragmentVisible()
+				&& !isMultiSelectionMenuFragmentVisible();
+	}
+
 	public boolean shouldShowDownloadMapWidget() {
 		return !isInRouteLineAppearanceMode()
 				&& !isInGpsFilteringMode();
@@ -211,6 +234,10 @@ public class WidgetsVisibilityHelper {
 		return MapRouteInfoMenu.followTrackVisible;
 	}
 
+	public boolean isDashboardVisible() {
+		return mapActivity.getDashboard().isVisible();
+	}
+
 	private boolean isContextMenuFragmentVisible() {
 		MapContextMenu contextMenu = mapActivity.getContextMenu();
 		WeakReference<MapContextMenuFragment> contextMenuMenuFragmentRef = contextMenu.findMenuFragment();
@@ -241,6 +268,10 @@ public class WidgetsVisibilityHelper {
 
 	private boolean isTrackDetailsMenuOpened() {
 		return mapActivity.getTrackDetailsMenu().isVisible();
+	}
+
+	private boolean isRouteCalculated() {
+		return mapActivity.getRoutingHelper().isRouteCalculated();
 	}
 
 	private boolean isPortrait() {

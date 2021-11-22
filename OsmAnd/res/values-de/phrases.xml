@@ -548,7 +548,7 @@
     <string name="poi_tunnel">Tunnel</string>
     <string name="poi_turning_circle">Wendestelle</string>
     <string name="poi_university">Universität</string>
-    <string name="poi_craft_upholsterer">Tapezierer</string>
+    <string name="poi_craft_upholsterer">Polsterer</string>
     <string name="poi_vacuum_cleaner">Staubsaugergeschäft</string>
     <string name="poi_variety_store">Kleinkaufhaus</string>
     <string name="poi_vehicle_inspection">Fahrzeugprüfstelle</string>
@@ -4208,4 +4208,7 @@
     <string name="poi_faculty_medicine">Medizin</string>
     <string name="poi_tool_hire">Werkzeugverleih</string>
     <string name="poi_escape_game">Escape Game</string>
+    <string name="poi_couplings">Kopplungen</string>
+    <string name="poi_lgbtq_yes">LGBTQ erlaubt</string>
+    <string name="poi_lgbtq_no">LGBTQ jetzt erlaubt</string>
 </resources>

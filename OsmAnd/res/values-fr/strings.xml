@@ -521,7 +521,7 @@
     <string name="Closest_Amenities">Équipements à proximité</string>
     <string name="app_mode_default">Parcourir la carte</string>
     <string name="app_mode_car">En voiture</string>
-    <string name="app_mode_bicycle">À vélo</string>
+    <string name="app_mode_bicycle">Vélo</string>
     <string name="app_mode_pedestrian">À pied</string>
     <string name="position_on_map_center">Centre</string>
     <string name="position_on_map_bottom">Bas</string>
@@ -2375,7 +2375,7 @@
     <string name="rendering_value_translucent_pink_name">Rose translucide</string>
     <string name="quick_action_resume_pause_navigation">Suspendre / Reprendre le guidage</string>
     <string name="quick_action_resume_pause_navigation_descr">Bouton pour suspendre ou reprendre le guidage.</string>
-    <string name="quick_action_show_navigation_finish_dialog">Afficher la fenêtre « Guidage terminé »</string>
+    <string name="quick_action_show_navigation_finish_dialog">Afficher la fenêtre « Guidage terminé »</string>
     <string name="quick_action_start_stop_navigation">Démarrer / Arrêter le guidage</string>
     <string name="quick_action_start_stop_navigation_descr">Bouton pour démarrer ou arrêter le guidage.</string>
     <string name="mappilary_no_internet_desc">Vous devez être connectés à Internet pour afficher les photos Mapillary.</string>
@@ -2934,7 +2934,7 @@
     <string name="app_mode_horse">À cheval</string>
     <string name="app_mode_helicopter">Hélicoptère</string>
     <string name="osmand_routing_promo">Ajoutez votre propre version du fichier routing.xml dans ..osmand/routing</string>
-    <string name="app_mode_skiing">À ski</string>
+    <string name="app_mode_skiing">Ski</string>
     <string name="settings_routing_mode_string">Mode : %s</string>
     <string name="routing_profile_ski">Ski</string>
     <string name="profile_type_descr_string">Type : %s</string>
@@ -3910,7 +3910,7 @@
     <string name="shared_string_server_url">URL du serveur</string>
     <string name="shared_string_enter_param">Saisissez le paramètre</string>
     <string name="test_route_calculation">Calculer un itinéraire d’essai</string>
-    <string name="routing_engine_vehicle_type_driving">En voiture</string>
+    <string name="routing_engine_vehicle_type_driving">Voiture</string>
     <string name="routing_engine_vehicle_type_foot">A pieds</string>
     <string name="routing_engine_vehicle_type_bike">Vélo</string>
     <string name="routing_engine_vehicle_type_car">Automobile</string>
@@ -4379,9 +4379,9 @@
     <string name="shared_string_travelbooks">Carnets de voyage</string>
     <string name="display_route_tracks">Afficher les traces</string>
     <string name="display_route_tracks_as_poi">Afficher les traces en tant que PI</string>
-    <string name="delete_history_items_descr">Voulez-vous vraiment supprimer les éléments d’historique sélectionnés \?</string>
+    <string name="delete_history_items_descr">Supprimer les éléments d’historique sélectionnés \?</string>
     <string name="delete_history_items">Supprimer %1$s éléments d’historique \?</string>
-    <string name="quick_action_toggle_preference">Un bouton à bascule pour modifier l\'état de l\'option sélectionnée.</string>
+    <string name="quick_action_toggle_preference">Un bouton à bascule pour modifier le choix.</string>
     <string name="release_4_1">- Première prise en charge d\'Android Auto
 \n
 \n - Mise à jour de l\'interface utilisateur pour la recherche de coordonnées UTM
@@ -4405,15 +4405,15 @@
 \n</string>
     <string name="from_to_with_params">De %1$s vers %2$s</string>
     <string name="progress_complete">%1$s terminé</string>
-    <string name="storage_copied_files_size">%1$s fichiers copiés sur %2$s</string>
-    <string name="storage_copying_files_size">Copie de %1$s fichiers sur %2$s</string>
-    <string name="storage_found_files_size">%1$s fichiers trouvés sur %2$s</string>
-    <string name="storage_found_files_descr">Appuyez sur « %1$s » pour copier %2$s fichiers de « %3$s » vers « %4$s ». Cette opération peut prendre un peu de temps.</string>
-    <string name="shared_string_skip_warning">Souhaitez-vous vraiment ignorer la migration \? OsmAnd ne peut plus accéder à vos fichiers dans le stockage partagé.
+    <string name="storage_copied_files_size">%1$s fichiers copiés pour %2$s</string>
+    <string name="storage_copying_files_size">Copie de %1$s fichiers pour %2$s</string>
+    <string name="storage_found_files_size">%1$s fichiers trouvés pour %2$s</string>
+    <string name="storage_found_files_descr">Appuyez sur \"%1$s\" pour copier %2$s fichiers de \"%3$s\" vers \"%4$s\". Cette opération peut prendre un peu de temps.</string>
+    <string name="shared_string_skip_warning">Souhaitez-vous ignorer la migration \? OsmAnd ne peut plus accéder à vos fichiers dans le stockage partagé.
 \n
 \nL\'application démarrera en utilisant un nouveau dossier de données.</string>
-    <string name="shared_storage_last_step">Vous pourrez indiquer un nouvel emplacement de stockage de vos données après avoir sélectionné le stockage partagé.</string>
-    <string name="shared_storage_third_step">Accordez l’accès au dossier. Sans cette autorisation, OsmAnd ne pourra pas copier les fichiers.</string>
+    <string name="shared_storage_last_step">Vous pourrez indiquer, plus tard, un nouvel emplacement de stockage pour vos données.</string>
+    <string name="shared_storage_third_step">Accordez l’accès au dossier. Sans cette autorisation, OsmAnd ne peut pas copier les fichiers.</string>
     <string name="shared_string_copy_to">Copier vers</string>
     <string name="start_copying">Démarrer la copie</string>
     <string name="skip_confirmation">Oui, ignorer</string>
@@ -4421,18 +4421,33 @@
     <string name="shared_storage_migration">Migration du stockage partagé</string>
     <string name="shared_string_migration">Migration</string>
     <string name="icon_group_industrial">Industrie</string>
-    <string name="shared_storage_migration_descr">En raison des modifications des règles d\'accès au stockage par Android, OsmAnd ne peut plus utiliser %1$s.
+    <string name="shared_storage_migration_descr">En raison de la modification des règles d\'accès au stockage par Android, OsmAnd ne peut plus utiliser %1$s.
 \n
-\nVous devez copier toutes vos données vers le nouvel emplacement de stockage.</string>
-    <string name="copying_file">Copie du fichier %1$s</string>
+\nCopiez toutes vos données vers un nouvel emplacement de stockage.</string>
+    <string name="copying_file">Copie du fichier %1$s…</string>
     <string name="shared_storage_second_step">Appuyez sur \"Utiliser ce dossier\".</string>
     <string name="icon_group_education">Enseignement</string>
     <string name="files_remaining">Fichiers restants : %1$s %2$s</string>
     <string name="folder_access_denied">Une autorisation est requise pour accéder au dossier sélectionné.</string>
-    <string name="copying_completed">Copie terminée</string>
+    <string name="copying_completed">Copié</string>
     <string name="rendering_attr_natureReserves_description">Afficher les réserves naturelles, les zones protégées et les parcs nationaux.</string>
     <string name="shared_storage_first_step">Appuyez sur \"%1$s\".
 \nLe gestionnaire de fichiers va afficher le dossier qui devrait contenir un dossier Osmand.</string>
     <string name="not_enough_contributions_descr">Un minimum de %1$s modifications au cours des deux derniers mois %2$s est requis pour bénéficier de la mise à jour horaire des cartes en illimité.</string>
     <string name="show_parameter_seekbar">Afficher la barre de recherche des paramètres</string>
+    <string name="migration_files_present">%1$d fichiers (%2$s) sont présents dans l\'emplacement sélectionné \'%3$s\'.</string>
+    <string name="fold_unfold">plier / déplier</string>
+    <string name="app_profile_type">Type de profil d’application</string>
+    <string name="map_marker_options">Options pour les marques</string>
+    <string name="add_to_group">Ajouter au groupe</string>
+    <string name="app_modes_options">Choisissez les modes d\'application</string>
+    <string name="memory_allocated_for_routing">Mémoire allouée pour le calcul d\'itinéraire</string>
+    <string name="reading_files">Lecture des fichiers…</string>
+    <string name="shared_string_hide_all">Tout masquer</string>
+    <string name="display_groups_visibility_dialog_description">Vous pouvez contrôler la visibilité des groupes sur la carte. Si la trace est masquée, tous les groupes le seront aussi.</string>
+    <string name="shared_string_memory">Mémoire</string>
+    <string name="no_items_selected_warning">Veuillez sélectionner au moins un élément</string>
+    <string name="memory_allocated_for_routing_ds">Une mémoire plus importante accélère le calcul des longs itinéraires (supérieurs à 500 km) mais peut ralentir les autres applications.
+\nCe paramètre de mémoire est sans effet sur le calcul des itinéraires courts.</string>
+    <string name="exit_without_saving_warning">Êtes-vous certain de vouloir quitter sans enregistrer \? Toutes vos modifications seront perdues.</string>
 </resources>

@@ -1202,9 +1202,8 @@ public class RouteCalculationResult {
 		return null;
 	}
 
-
 	public Location getNextRouteLocation(int after) {
-		if (currentRoute + after < locations.size()) {
+		if (currentRoute + after >= 0 && currentRoute + after < locations.size()) {
 			return locations.get(currentRoute + after);
 		}
 		return null;
@@ -1232,6 +1231,13 @@ public class RouteCalculationResult {
 	public int getDistanceFromPoint(int locationIndex) {
 		if (listDistance != null && locationIndex < listDistance.length) {
 			return listDistance[locationIndex];
+		}
+		return 0;
+	}
+
+	public int getDistanceFromStart() {
+		if (listDistance != null && currentRoute > 0 && currentRoute < listDistance.length) {
+			return listDistance[0] - listDistance[currentRoute - 1];
 		}
 		return 0;
 	}

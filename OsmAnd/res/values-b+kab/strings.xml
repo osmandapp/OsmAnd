@@ -1036,7 +1036,8 @@
     <string name="fonts_header">Tisefsiyin</string>
     <string name="shared_string_time_span">Akud</string>
     <string name="file_can_not_be_moved">Ulamek an sekḥer afaylu $1 deg $2.</string>
-    <string name="navigate_point_olc_info_invalid">Arameɣtu</string>
+    <string name="navigate_point_olc_info_invalid">Arameɣtu
+\n</string>
     <string name="navigate_point_olc">Ldi adeg…</string>
     <string name="quick_action_map_source_title">Iɣbula</string>
     <string name="quick_action_map_styles">Iɣunab</string>
@@ -1174,8 +1175,7 @@
     <string name="app_modes_choose">Imeɣna</string>
     <string name="route_descr_select_destination">Taniɣert</string>
     <string name="select_gpx">Fren...</string>
-    <string name="gpx_selection_number_of_points">%1$s 
-\nn tneqqidin</string>
+    <string name="gpx_selection_number_of_points">%1$s n tneqqidin</string>
     <string name="rendering_value_browse_map_name">Snirem</string>
     <string name="monitoring_settings">Asekles</string>
     <string name="proxy_port_descr">Uṭṭun n tebburt n upruksi-ik (m.d.. 8118)</string>
@@ -1221,7 +1221,7 @@
     <string name="shared_string_trip_recording">Asekles</string>
     <string name="nm_h">Kannada</string>
     <string name="regions">Meṛṛa timnaḍin</string>
-    <string name="go_to_map">"Sken ɣef  tkarḍa"</string>
+    <string name="go_to_map">Sken ɣef tkarḍa</string>
     <string name="map_downloaded">yettusider</string>
     <string name="shared_string_qr_code">Tangalt</string>
     <string name="lang_als">Talbanit</string>
@@ -1335,6 +1335,7 @@
     <string name="profile_type_user_string">Amaɣnu n useqdac</string>
     <string name="shared_string_logout">Tuffɣa</string>
     <string name="duration_ago">%1$s aya</string>
-    <string name="logcat_buffer">Logcat buffer</string>
+    <string name="logcat_buffer">Takatut n weHraz Logcat</string>
     <string name="logcat_buffer_descr">Senqed daɣen bḍu iɣmisen lqayen n usnas</string>
+    <string name="monitoring_control_start">SKLS</string>
 </resources>
