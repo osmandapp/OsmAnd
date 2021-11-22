@@ -59,10 +59,8 @@ public class PointsGroupsCard extends MapBaseCard {
 			@Override
 			public void onItemSelected(HorizontalSelectionItem item) {
 				selectedGroup = (GpxDisplayGroup) item.getObject();
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardButtonPressed(PointsGroupsCard.this, SELECT_GROUP_INDEX);
-				}
+				notifyButtonPressed(SELECT_GROUP_INDEX);
+				updateShowOnMapItem();
 				selectionAdapter.notifyDataSetChanged();
 			}
 		});

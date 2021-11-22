@@ -341,13 +341,17 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	}
 
 	private void updateTabStyles() {
-		tabsContainer.setBackgroundResource(tabBackgroundResId);
+		if (tabBackgroundResId != 0) {
+			tabsContainer.setBackgroundResource(tabBackgroundResId);
+		}
 		if (pager.getAdapter() instanceof CustomTabProvider) {
 			((CustomTabProvider) pager.getAdapter()).tabStylesUpdated(tabsContainer, currentPosition);
 		} else {
 			for (int i = 0; i < tabCount; i++) {
 				View v = tabsContainer.getChildAt(i);
-				v.setBackgroundResource(tabBackgroundResId);
+				if (tabBackgroundResId != 0) {
+					v.setBackgroundResource(tabBackgroundResId);
+				}
 				v.setPadding(tabPadding, v.getPaddingTop(), tabPadding, v.getPaddingBottom());
 
 				TextView tabTitle = v.findViewById(R.id.tab_title);

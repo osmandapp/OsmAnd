@@ -130,6 +130,10 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		commandManager.resetChangesCounter();
 	}
 
+	public void clearCommands() {
+		commandManager.clearCommands();
+	}
+
 	boolean isInAddPointMode() {
 		return inAddPointMode;
 	}

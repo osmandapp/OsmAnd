@@ -63,6 +63,7 @@ import net.osmand.plus.download.DownloadService;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.DayNightHelper;
+import net.osmand.plus.helpers.GpsFilterHelper;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.LockHelper;
@@ -180,6 +181,7 @@ public class OsmandApplication extends MultiDexApplication {
 	BackupHelper backupHelper;
 	TravelRendererHelper travelRendererHelper;
 	LauncherShortcutsHelper launcherShortcutsHelper;
+	GpsFilterHelper gpsFilterHelper;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -520,6 +522,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public LauncherShortcutsHelper getLauncherShortcutsHelper() {
 		return launcherShortcutsHelper;
+	}
+
+	public GpsFilterHelper getGpsFilterHelper() {
+		return gpsFilterHelper;
 	}
 
 	public CommandPlayer getPlayer() {
