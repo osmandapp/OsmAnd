@@ -170,7 +170,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 					h.icon.setImageDrawable(uiUtilities.getIcon(menuItem.getIcon(), nightMode));
 					h.icon.setVisibility(View.VISIBLE);
 					h.actionIcon.setVisibility(View.VISIBLE);
-					h.actionIcon.setContentDescription(app.getString(R.string.quick_action_show_hide_title) + " " + menuItem.getTitle());
+					h.actionIcon.setContentDescription(app.getString(R.string.ltr_or_rtl_combine_via_space, app.getString(R.string.quick_action_show_hide_title), menuItem.getTitle()));
 				}
 				h.title.setTypeface(FontCache.getFont(app, app.getString(R.string.font_roboto_regular)));
 				h.title.setText(menuItem.getTitle());
