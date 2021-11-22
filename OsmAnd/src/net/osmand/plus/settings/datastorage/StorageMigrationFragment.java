@@ -215,7 +215,6 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 		title.setText(spannable);
 
 		AndroidUiHelper.updateVisibility(remainingFiles, !copyFinished);
-		AndroidUiHelper.updateVisibility(remainingFiles.findViewById(android.R.id.icon), false);
 	}
 
 	@Override
