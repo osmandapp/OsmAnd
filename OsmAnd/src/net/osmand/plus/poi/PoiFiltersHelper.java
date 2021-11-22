@@ -1,5 +1,7 @@
 package net.osmand.plus.poi;
 
+import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
@@ -125,10 +127,15 @@ public class PoiFiltersHelper {
 		return customPOIFilter;
 	}
 
+	@NonNull
+	public static String getTopWikiPoiFilterId() {
+		return PoiUIFilter.STD_PREFIX + OSM_WIKI_CATEGORY;
+	}
+
 	@Nullable
 	public PoiUIFilter getTopWikiPoiFilter() {
 		if (topWikiPoiFilter == null) {
-			String wikiFilterId = PoiUIFilter.STD_PREFIX + "osmwiki";
+			String wikiFilterId = getTopWikiPoiFilterId();
 			for (PoiUIFilter filter : getTopDefinedPoiFilters()) {
 				if (wikiFilterId.equals(filter.getFilterId())) {
 					topWikiPoiFilter = filter;
@@ -532,16 +539,6 @@ public class PoiFiltersHelper {
 
 	public boolean isPoiFilterSelected(PoiUIFilter filter) {
 		return selectedPoiFilters.contains(filter);
-	}
-
-	public boolean isTopWikiFilterSelected() {
-		String wikiFilterId = getTopWikiPoiFilter().getFilterId();
-		for (PoiUIFilter filter : selectedPoiFilters) {
-			if (wikiFilterId.equals(filter.getFilterId())) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	public boolean isPoiFilterSelected(String filterId) {
