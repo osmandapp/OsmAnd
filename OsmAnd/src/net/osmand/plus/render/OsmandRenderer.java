@@ -84,6 +84,7 @@ public class OsmandRenderer {
 		double order;
 		double area;
 		int objectType;
+		int priority;
 	};
 
 	private static class IconDrawInfo {
@@ -421,6 +422,20 @@ public class OsmandRenderer {
 
 		};
 	}
+
+	Comparator<MapDataObjectPrimitive> sortByPriority() {
+		return new Comparator<MapDataObjectPrimitive>() {
+
+			@Override
+			public int compare(MapDataObjectPrimitive i, MapDataObjectPrimitive j) {
+				if (i.priority == j.priority) {
+					return sortByOrder().compare(i, j);
+				}
+				return (i.priority < j.priority ? -1 : 1);
+			}
+
+		};
+	}
 	
 	Comparator<MapDataObjectPrimitive> sortPolygonsOrder() {
 		return new Comparator<MapDataObjectPrimitive>() {
@@ -463,11 +478,13 @@ public class OsmandRenderer {
 							int objectType = render.getIntPropertyValue(render.ALL.R_OBJECT_TYPE);
 							boolean ignorePointArea = render.getIntPropertyValue(render.ALL.R_IGNORE_POLYGON_AS_POINT_AREA) != 0;
 							int order = render.getIntPropertyValue(render.ALL.R_ORDER);
+							int priority = render.getIntPropertyValue(render.ALL.R_RENDERING_PRIORITY);
 							MapDataObjectPrimitive mapObj = new MapDataObjectPrimitive();
 							mapObj.objectType = objectType;
 							mapObj.order = order;
 							mapObj.typeInd = j;
 							mapObj.obj = o;
+							mapObj.priority = priority;
 							if(objectType == 3) {
 								MapDataObjectPrimitive pointObj = new MapDataObjectPrimitive();
 								pointObj.order = order;
@@ -510,8 +527,9 @@ public class OsmandRenderer {
 		}
 		Collections.sort(polygonsArray, sortByOrder());
 		Collections.sort(pointsArray, sortByOrder());
-		Collections.sort(linesArray, sortByOrder());
+		Collections.sort(linesArray, sortByPriority());
 		filterLinesByDensity(rc, linesResArray, linesArray);
+		Collections.sort(linesResArray, sortByOrder());
 	}
 	
 	void filterLinesByDensity(RenderingContext rc, List<MapDataObjectPrimitive>  linesResArray,
