@@ -12,7 +12,7 @@
 -->
 
     <string name="shared_string_precision">Precision</string>
-    <string name="shared_string_statistic">Statistic</string>
+    <string name="shared_string_statistics">Statistics</string>
     <string name="gps_filter_hdop_desc">Set the maximum allowable value for HDOP.\nPoints greater than the set parameter will be hidden.</string>
     <string name="gps_filter_speed_altitude_desc">The track points matching the set interval will be visible on the chart and map, the rest will be hidden.</string>
     <string name="gps_filter_smoothing_desc">Set the threshold distance between points.\nTrack points that are at least X distance from the last visible point will be hidden.\nBe careful the greater the distance, the simpler the track geometry.</string>

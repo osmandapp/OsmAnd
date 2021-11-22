@@ -88,7 +88,7 @@ public class GpsFilterScreensAdapter extends PagerAdapter implements CustomTabPr
 	@Nullable
 	@Override
 	public CharSequence getPageTitle(int position) {
-		int titleId = position == 0 ? R.string.search_poi_filter : R.string.shared_string_statistic;
+		int titleId = position == 0 ? R.string.search_poi_filter : R.string.shared_string_statistics;
 		return app.getString(titleId);
 	}
 
