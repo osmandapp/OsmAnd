@@ -726,7 +726,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (getFragment(SharedStorageWarningFragment.TAG) == null && SharedStorageWarningFragment.dialogShowRequired(app)) {
 				showStorageMigrationScreen = true;
 				SecondSplashScreenFragment.SHOW = false;
-				SharedStorageWarningFragment.showInstance(this, true);
+				SharedStorageWarningFragment.showInstance(getSupportFragmentManager(), true);
 			}
 		}
 
@@ -816,7 +816,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		if (!showWelcomeScreen && !permissionDone && !app.getAppInitializer().isFirstTime()) {
 			if (!permissionAsked) {
-				if (app.isExternalStorageDirectoryReadOnly()
+				if (app.isExternalStorageDirectoryReadOnly() && !showStorageMigrationScreen
+						&& fragmentManager.findFragmentByTag(SharedStorageWarningFragment.TAG) == null
 						&& fragmentManager.findFragmentByTag(DataStoragePlaceDialogFragment.TAG) == null) {
 					if (DownloadActivity.hasPermissionToWriteExternalStorage(this)) {
 						DataStoragePlaceDialogFragment.showInstance(fragmentManager, null, true);
@@ -2202,7 +2203,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
-	<T> T getFragment(String fragmentTag) {
+	public <T> T getFragment(String fragmentTag) {
 		Fragment fragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
 		return fragment != null && !fragment.isDetached() && !fragment.isRemoving() ? (T) fragment : null;
 	}

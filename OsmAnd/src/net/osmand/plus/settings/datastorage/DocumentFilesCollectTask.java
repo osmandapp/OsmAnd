@@ -2,24 +2,33 @@ package net.osmand.plus.settings.datastorage;
 
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.documentfile.provider.DocumentFile;
 
+import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class DocumentFilesCollectTask extends AsyncTask<Void, Void, Void> {
+class DocumentFilesCollectTask extends AsyncTask<Void, Void, String> {
 
+	public static final int APPROXIMATE_FILE_SIZE_BYTES = 5 * 1024 * 1024;
+
+	private final OsmandApplication app;
 	private final DocumentFile folderFile;
 	private final List<DocumentFile> documentFiles = new ArrayList<>();
 	private final FilesCollectListener listener;
 	private final long[] filesSize = new long[1];
+	private final long[] estimatedSize = new long[1];
 
 	public DocumentFilesCollectTask(@NonNull OsmandApplication app, @NonNull Uri folderUri, @Nullable FilesCollectListener listener) {
+		this.app = app;
 		this.listener = listener;
 		folderFile = DocumentFile.fromTreeUri(app, folderUri);
 	}
@@ -32,19 +41,28 @@ class DocumentFilesCollectTask extends AsyncTask<Void, Void, Void> {
 	}
 
 	@Override
-	protected Void doInBackground(Void... voids) {
-		collectFiles(folderFile, documentFiles, filesSize);
+	protected String doInBackground(Void... voids) {
+		String folderName = IndexConstants.APP_DIR.replace("/", "");
+		if (Algorithms.stringsEqual(folderName, folderFile.getName())) {
+			collectFiles(folderFile, documentFiles, filesSize, estimatedSize);
+		} else {
+			return app.getString(R.string.storage_migration_wrong_folder_warning);
+		}
 		return null;
 	}
 
 	@Override
-	protected void onPostExecute(Void result) {
+	protected void onPostExecute(String error) {
 		if (listener != null) {
-			listener.onFilesCollectingFinished(folderFile, documentFiles, filesSize[0]);
+			Pair<Long, Long> pair = new Pair<>(filesSize[0], estimatedSize[0]);
+			listener.onFilesCollectingFinished(error, folderFile, documentFiles, pair);
 		}
 	}
 
-	private void collectFiles(@NonNull DocumentFile documentFile, @NonNull List<DocumentFile> documentFiles, long[] size) {
+	private void collectFiles(@NonNull DocumentFile documentFile,
+	                          @NonNull List<DocumentFile> documentFiles,
+	                          long[] size,
+	                          long[] estimatedSize) {
 		if (isCancelled()) {
 			return;
 		}
@@ -54,10 +72,12 @@ class DocumentFilesCollectTask extends AsyncTask<Void, Void, Void> {
 				if (isCancelled()) {
 					break;
 				}
-				collectFiles(file, documentFiles, size);
+				collectFiles(file, documentFiles, size, estimatedSize);
 			}
 		} else {
-			size[0] += documentFile.length();
+			long length = documentFile.length();
+			size[0] += length;
+			estimatedSize[0] += length + APPROXIMATE_FILE_SIZE_BYTES;
 			documentFiles.add(documentFile);
 		}
 	}
@@ -66,7 +86,6 @@ class DocumentFilesCollectTask extends AsyncTask<Void, Void, Void> {
 
 		void onFilesCollectingStarted();
 
-		void onFilesCollectingFinished(@NonNull DocumentFile folder, @NonNull List<DocumentFile> files, long size);
-
+		void onFilesCollectingFinished(@Nullable String error, @NonNull DocumentFile folder, @NonNull List<DocumentFile> files, @NonNull Pair<Long, Long> filesSize);
 	}
 }

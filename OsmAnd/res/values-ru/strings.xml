@@ -4326,7 +4326,7 @@
     <string name="no_items_of_type_message">У вас нет элементов этого типа</string>
     <string name="routeInfo_tracktype_description">Раскрашивание маршрута или трека на основе состава их поверхности. Обычно применяется, когда дорожная сеть в основном не имеет покрытия.</string>
     <string name="routeInfo_winter_ice_road_description">Раскрашивание маршрута или трека в соответствии с классификацией зимних дорог (зимников).</string>
-    <string name="routeInfo_smoothness_description">Классификация пригодности дорог/тротуаров для колесных транспортных средств, в отношении регулярности/ровности поверхности.</string>
+    <string name="routeInfo_smoothness_description">Классификация пригодности дорог/тротуаров для колёсных транспортных средств в отношении регулярности/ровности поверхности.</string>
     <string name="routeInfo_surface_description">Предоставляет информацию о физическом покрытии дорог/тротуаров.</string>
     <string name="routeInfo_roadClass_description">Раскрашивание маршрута или трека в соответствии с классификацией дорог.</string>
     <string name="start_point">Старт</string>
@@ -4458,4 +4458,7 @@
     <string name="map_marker_options">Параметры маркеров карты</string>
     <string name="app_profile_type">Тип профиля приложения</string>
     <string name="migration_files_present">%1$d файлов (%2$s) присутствуют в выбранном местоположении «%3$s».</string>
+    <string name="show_parameter_seekbar">Показать параметр ползунка</string>
+    <string name="app_modes_options">Выбор режимов приложения</string>
+    <string name="exit_without_saving_warning">Выйти без сохранения\? Все изменения будут потеряны.</string>
 </resources>

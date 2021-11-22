@@ -10,7 +10,10 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributions/translating-osmand
 	Thx - Hardy
 -->
+
     <string name="exit_without_saving_warning">Are you sure you exit without saving? You will lost all changes.</string>
+    <string name="exit_without_saving_warning">Are you sure you exit without saving? You will lose all changes.</string>
+    <string name="storage_migration_wrong_folder_warning">We can\'t find OsmAnd data in the selected folder. Please try again.</string>
     <string name="migration_files_present">%1$d files (%2$s) are present in the selected location \'%3$s\'.</string>
     <string name="fold_unfold">fold/unfold</string>
     <string name="app_profile_type">App profile type</string>
@@ -324,6 +327,12 @@
     <string name="backup_and_restore">Backup &amp; Restore</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="search_more">Search more…</string>
+    <string name="shared_string_show_slope">Show slope</string>
+    <string name="shared_string_hide_slope">Hide slope</string>
+    <string name="shared_string_grade">Grade</string>
+    <string name="shared_string_uphill">Uphill</string>
+    <string name="shared_string_downhill">Downhill</string>
+    <string name="elevation_profile">Elevation profile</string>
     <string name="routing_attr_avoid_low_emission_zone_name">Avoid low emission zones</string>
     <string name="routing_attr_avoid_low_emission_zone_description">Avoid low emission zones</string>
     <string name="poi_routes">Routes</string>
@@ -1982,8 +1991,8 @@
     <string name="shared_string_gpx_tracks">Tracks</string>
     <string name="routing_attr_driving_style_name">Driving style</string>
     <string name="route_altitude">Route elevation</string>
-    <string name="altitude_descent">Descent</string>
-    <string name="altitude_ascent">Ascent</string>
+    <string name="altitude_descent">Downhill</string>
+    <string name="altitude_ascent">Uphill</string>
     <string name="altitude_range">Altitude range</string>
     <string name="average_altitude">Average altitude</string>
     <string name="shared_string_time">Time</string>

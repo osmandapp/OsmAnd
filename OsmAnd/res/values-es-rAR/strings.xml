@@ -1825,7 +1825,7 @@
     <string name="weekly">Cada semana</string>
     <string name="morning">Por la mañana</string>
     <string name="night">Por la noche</string>
-    <string name="shared_string_not_selected">No marcado(s)</string>
+    <string name="shared_string_not_selected">Sin marcar</string>
     <string name="select_month_and_country">Mes y país:</string>
     <string name="shared_string_type">Tipo</string>
     <string name="starting_point">Punto de partida</string>
@@ -4415,9 +4415,9 @@
     <string name="from_to_with_params">De %1$s a %2$s</string>
     <string name="progress_complete">%1$s completo</string>
     <string name="storage_found_files_descr">Pulsa «%1$s» para copiar %2$s archivos de «%3$s» a «%4$s». Puede tardar un poco.</string>
-    <string name="storage_copying_files_size">Copiaron %1$s archivos (%2$s)</string>
+    <string name="storage_copying_files_size">Copiando %1$s archivos (%2$s)</string>
     <string name="storage_copied_files_size">Se copiaron %1$s archivos (%2$s)</string>
-    <string name="storage_found_files_size">Se encontraron %1$s archivos %2$s</string>
+    <string name="storage_found_files_size">Se encontraron %1$s archivos (%2$s)</string>
     <string name="shared_storage_last_step">Puedes definir una nueva carpeta de datos después.</string>
     <string name="shared_storage_third_step">Permite acceder a la carpeta. Sin esto, OsmAnd no puede copiar archivos.</string>
     <string name="shared_storage_first_step">Pulsa «%1$s».
@@ -4450,10 +4450,12 @@
     <string name="add_to_group">Añadir al grupo</string>
     <string name="app_modes_options">Eligir modos de aplicación</string>
     <string name="shared_string_memory">Memoria</string>
-    <string name="memory_allocated_for_routing_ds">Un valor de memoria más alto puede acelerar el cálculo de rutas de más de 500 km, pero puede ralentizar otras aplicaciones.</string>
+    <string name="memory_allocated_for_routing_ds">Un valor de memoria más alto acelera el cálculo de rutas largas (más de 500 km), pero puede afectar al rendimiento de otras aplicaciones.
+\nNo afecta al cálculo de rutas cortas.</string>
     <string name="memory_allocated_for_routing">Memoria asignada para navegación</string>
     <string name="reading_files">Leyendo archivos…</string>
     <string name="no_items_selected_warning">Marca al menos un elemento</string>
     <string name="display_groups_visibility_dialog_description">Puedes controlar la visibilidad de los grupos en el mapa. Si la traza está oculta, todos los grupos también lo estarán.</string>
     <string name="shared_string_hide_all">Ocultar todo</string>
+    <string name="exit_without_saving_warning">¿Salir sin guardar\? Se perderán todos los cambios.</string>
 </resources>

@@ -1335,7 +1335,7 @@
     <string name="profile_type_user_string">Amaɣnu n useqdac</string>
     <string name="shared_string_logout">Tuffɣa</string>
     <string name="duration_ago">%1$s aya</string>
-    <string name="logcat_buffer">Logcat buffer</string>
+    <string name="logcat_buffer">Takatut n weHraz Logcat</string>
     <string name="logcat_buffer_descr">Senqed daɣen bḍu iɣmisen lqayen n usnas</string>
     <string name="monitoring_control_start">SKLS</string>
 </resources>

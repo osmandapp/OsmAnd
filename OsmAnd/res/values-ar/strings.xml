@@ -4503,7 +4503,7 @@
     <string name="shared_storage_third_step">منح الإذن للوصول إلى المجلد. لا يمكن للتطبيق نسخ الملفات بدون ذلك.</string>
     <string name="files_remaining">الملفات المتبقية: %1$s %2$s</string>
     <string name="shared_storage_last_step">يمكنك تحديد مجلد بيانات جديد بعد ذلك.</string>
-    <string name="shared_storage_migration_descr">بسبب التغييرات في الوصول إلى تخزين Andorid ، لم يعد بإمكان OsmAnd استخدام %1$s.
+    <string name="shared_storage_migration_descr">بسبب التغييرات في الوصول إلى تخزين Android ، لم يعد بإمكان OsmAnd استخدام %1$s.
 \n
 \nانسخ جميع بياناتك إلى المجلد الجديد.</string>
     <string name="shared_storage_migration">ترحيل التخزين المشترك</string>
@@ -4516,11 +4516,13 @@
     <string name="add_to_group">إضافة إلى المجموعة</string>
     <string name="app_modes_options">اختيار أوضاع التطبيق</string>
     <string name="shared_string_memory">الذاكرة</string>
-    <string name="memory_allocated_for_routing_ds">يمكن أن تؤدي قيمة الذاكرة الأعلى إلى تسريع حساب المسارات لأكثر من 500 كيلومتر ، ولكنها قد تبطئ التطبيقات الأخرى.</string>
+    <string name="memory_allocated_for_routing_ds">تعمل قيمة الذاكرة الأعلى على تسريع حساب المسارات الطويلة (أكثر من 500 كم) ، ولكنها قد تؤثر على أداء التطبيقات الأخرى.
+\nلا يؤثر على سرعة حساب الطرق القصيرة.</string>
     <string name="memory_allocated_for_routing">الذاكرة المخصصة للتوجيه</string>
     <string name="reading_files">قراءة الملفات …</string>
     <string name="shared_string_hide_all">إخفاء الكل</string>
     <string name="migration_files_present">%1$d ملف %2$s متواجد في المكان \'%3$s\' المحدد.</string>
     <string name="no_items_selected_warning">الرجاء تحديد عنصر واحد على الأقل</string>
     <string name="display_groups_visibility_dialog_description">يمكنك التحكم في رؤية المجموعة على الخريطة. إذا كان المسار مخفيًا ، فسيتم إخفاء جميع المجموعات أيضًا.</string>
+    <string name="exit_without_saving_warning">هل أنت متأكد من الخروج دون حفظ؟ سوف تفقد كل التغييرات.</string>
 </resources>
