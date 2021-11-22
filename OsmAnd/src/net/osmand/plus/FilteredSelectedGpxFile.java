@@ -23,7 +23,7 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 	@NonNull
 	private final SelectedGpxFile sourceSelectedGpxFile;
 
-	private final int totalPointsCount;
+	private int totalPointsCount;
 	private int leftPointsCount;
 
 	@NonNull
@@ -46,7 +46,6 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		if (joinSegments) {
 			gpxFile.addGeneralTrack();
 		}
-		totalPointsCount = leftPointsCount;
 
 		smoothingFilter = new SmoothingFilter(app, sourceSelectedGpxFile);
 		speedFilter = new SpeedFilter(app, sourceSelectedGpxFile);
@@ -63,7 +62,8 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 	@Override
 	public void setGpxFile(@NonNull GPXFile gpxFile, @NonNull OsmandApplication app) {
 		super.setGpxFile(gpxFile, app);
-		leftPointsCount = calculateLeftPointsCount();
+		leftPointsCount = calculatePointsCount(gpxFile);
+		totalPointsCount = calculatePointsCount(getSourceSelectedGpxFile().getGpxFile());
 	}
 
 	@Override
@@ -83,7 +83,8 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		}
 		modifiedTime = gpxFile.modifiedTime;
 		processedPointsToDisplay = gpxFile.proccessPoints();
-		leftPointsCount = calculateLeftPointsCount();
+		leftPointsCount = calculatePointsCount(gpxFile);
+		totalPointsCount = calculatePointsCount(sourceSelectedGpxFile.getGpxFile());
 	}
 
 	public void setTrackAnalysis(@NonNull GPXTrackAnalysis trackAnalysis) {
@@ -100,7 +101,7 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		processedPointsToDisplay = gpxFile.proccessPoints();
 	}
 
-	private int calculateLeftPointsCount() {
+	private int calculatePointsCount(@NonNull GPXFile gpxFile) {
 		int count = 0;
 		List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
 		for (TrkSegment segment : segments) {

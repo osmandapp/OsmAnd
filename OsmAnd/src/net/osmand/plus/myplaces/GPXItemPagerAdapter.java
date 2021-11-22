@@ -248,7 +248,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		LineChart chart = view.findViewById(R.id.chart);
 		ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) chart.getLayoutParams();
 		AndroidUtils.setMargins(lp, chartHMargin, lp.topMargin, chartHMargin, lp.bottomMargin);
-		if (analysis != null) {
+		if (analysis != null && gpxItem != null) {
 			setupChart(view, chart);
 			switch (tabType) {
 				case GPX_TAB_ITEM_GENERAL:
