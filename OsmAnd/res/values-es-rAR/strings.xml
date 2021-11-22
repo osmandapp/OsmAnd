@@ -4382,7 +4382,7 @@
     <string name="continue_on_phone">Continuar en el dispositivo móvil</string>
     <string name="shared_storage_warning_description">Debido a las nuevas reglas de Android, a partir de noviembre de 2021, OsmAnd 4.2 perderá el acceso al almacenamiento compartido.
 \n
-\nPor favor, mueva la carpeta de datos del almacenamiento compartido al almacenamiento disponible, de lo contrario la aplicación perderá el acceso a los datos como mapas sin conexión, trazas GPX y etc.</string>
+\nPor favor, mueve la carpeta de datos del almacenamiento compartido al almacenamiento disponible, de lo contrario la aplicación perderá el acceso a los datos como mapas sin conexión, trazas GPX y etc.</string>
     <string name="search_history_is_disabled_descr">Puedes activar el historial de búsqueda en los ajustes.</string>
     <string name="is_disabled">%1$s desactivado</string>
     <string name="clear_all_history_warning">¿Borrar todos los registros del historial de la aplicación, incluyendo el historial de búsqueda, navegación y marcadores\?</string>
@@ -4458,4 +4458,10 @@
     <string name="display_groups_visibility_dialog_description">Puedes controlar la visibilidad de los grupos en el mapa. Si la traza está oculta, todos los grupos también lo estarán.</string>
     <string name="shared_string_hide_all">Ocultar todo</string>
     <string name="exit_without_saving_warning">¿Salir sin guardar\? Se perderán todos los cambios.</string>
+    <string name="shared_string_show_slope">Mostrar pendiente</string>
+    <string name="shared_string_hide_slope">Ocultar pendiente</string>
+    <string name="shared_string_grade">Calificación</string>
+    <string name="shared_string_uphill">Ascenso</string>
+    <string name="shared_string_downhill">Descenso</string>
+    <string name="elevation_profile">Perfil de elevación</string>
 </resources>

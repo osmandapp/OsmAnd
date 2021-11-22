@@ -2174,8 +2174,8 @@
     <string name="shared_string_start_time">وقت البدء</string>
     <string name="shared_string_end_time">وقت الانتهاء</string>
     <string name="routing_attr_driving_style_name">اسلوب القيادة</string>
-    <string name="altitude_descent">منحدر</string>
-    <string name="altitude_ascent">مرتفع</string>
+    <string name="altitude_descent">المنحدر</string>
+    <string name="altitude_ascent">المرتفع</string>
     <string name="altitude_range">مدى الارتفاع</string>
     <string name="average_altitude">متوسط الارتفاع</string>
     <string name="routing_attr_height_obstacles_name">بيانات الارتفاع</string>
@@ -4525,4 +4525,10 @@
     <string name="no_items_selected_warning">الرجاء تحديد عنصر واحد على الأقل</string>
     <string name="display_groups_visibility_dialog_description">يمكنك التحكم في رؤية المجموعة على الخريطة. إذا كان المسار مخفيًا ، فسيتم إخفاء جميع المجموعات أيضًا.</string>
     <string name="exit_without_saving_warning">هل أنت متأكد من الخروج دون حفظ؟ سوف تفقد كل التغييرات.</string>
+    <string name="shared_string_hide_slope">إخفاء المنحدر</string>
+    <string name="shared_string_show_slope">إظهار المنحدر</string>
+    <string name="elevation_profile">ملف تعريف الارتفاع</string>
+    <string name="shared_string_grade">درجة</string>
+    <string name="shared_string_uphill">المرتفع</string>
+    <string name="shared_string_downhill">المنحدر</string>
 </resources>

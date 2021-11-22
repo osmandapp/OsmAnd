@@ -4449,4 +4449,10 @@
     <string name="shared_string_hide_all">隱藏全部</string>
     <string name="migration_files_present">%1$d 個檔案 (%2$s) 位於選定的位置「%3$s」。</string>
     <string name="exit_without_saving_warning">您確定不儲存就退出？您將會遺失所有變動。</string>
+    <string name="shared_string_uphill">上坡</string>
+    <string name="shared_string_downhill">下坡</string>
+    <string name="shared_string_show_slope">顯示斜率</string>
+    <string name="shared_string_hide_slope">隱藏斜率</string>
+    <string name="shared_string_grade">漸層</string>
+    <string name="elevation_profile">海拔剖面</string>
 </resources>

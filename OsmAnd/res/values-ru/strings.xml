@@ -4461,4 +4461,10 @@
     <string name="show_parameter_seekbar">Показать параметр ползунка</string>
     <string name="app_modes_options">Выбор режимов приложения</string>
     <string name="exit_without_saving_warning">Выйти без сохранения\? Все изменения будут потеряны.</string>
+    <string name="shared_string_hide_slope">Скрыть уклон</string>
+    <string name="shared_string_show_slope">Показать уклон</string>
+    <string name="shared_string_uphill">Подъём</string>
+    <string name="shared_string_downhill">Спуск</string>
+    <string name="elevation_profile">Профиль высоты</string>
+    <string name="shared_string_grade">Уклон</string>
 </resources>

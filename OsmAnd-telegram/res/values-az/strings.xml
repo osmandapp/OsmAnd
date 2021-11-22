@@ -5,4 +5,5 @@
     <string name="units_and_formats">Vahidlər və formatlar</string>
     <string name="si_mi_feet">Mil/fut</string>
     <string name="si_mi_yard">Mil/yard</string>
+    <string name="si_nm_h">Saatda dəniz mili (düyünlər)</string>
 </resources>

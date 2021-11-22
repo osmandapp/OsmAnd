@@ -4425,10 +4425,10 @@
     <string name="copying_file">Copiando arquivo %1$s…</string>
     <string name="from_to_with_params">De %1$s para %2$s</string>
     <string name="storage_found_files_size">Encontrados %1$s arquivos (%2$s)</string>
-    <string name="shared_string_skip_warning">Tem certeza de que deseja pular a migração\? OsmAnd não tem mais acesso aos seus arquivos no armazenamento compartilhado.
+    <string name="shared_string_skip_warning">Saltar a migração\? OsmAnd não tem mais acesso aos seus arquivos em armazenamento compartilhado.
 \n
-\nO aplicativo será iniciado na nova pasta com seus dados.</string>
-    <string name="shared_storage_last_step">Você poderá especificar um novo armazenamento de dados após selecionar armazenamento compartilhado.</string>
+\nO aplicativo começará a usar sua nova pasta de dados.</string>
+    <string name="shared_storage_last_step">Você pode especificar uma nova pasta de dados posteriormente.</string>
     <string name="start_copying">Comece a copiar</string>
     <string name="shared_storage_third_step">Dê permissão para acessar a pasta. Sem esta permissão, OsmAnd não pode copiar arquivos.</string>
     <string name="shared_storage_first_step">Pressione \"%1$s\".

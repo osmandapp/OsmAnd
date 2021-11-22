@@ -260,7 +260,7 @@
     <string name="back_to_map">Xəritəyə qayıt</string>
     <string name="share_note">Qeydi paylaş</string>
     <string name="watch">İzlə</string>
-    <string name="notes">Qeydlər</string>
+    <string name="notes">A/V qeydlər</string>
     <string name="online_map">Onlayn xəritə</string>
     <string name="free">%1$s boş</string>
     <string name="device_memory">Cihaz yaddaşı</string>
@@ -831,7 +831,7 @@
     <string name="rendering_attr_showSurfaces_name">Yol örtüyünü göstər</string>
     <string name="gpx_split_interval">Bölünmə intervalı</string>
     <string name="save_as_favorites_points">Favorit qrup olaraq saxla</string>
-    <string name="select_destination_and_intermediate_points">Təyinat nöqtələrini seçin</string>
+    <string name="select_destination_and_intermediate_points">Təyinat nöqtələri seç</string>
     <string name="shared_string_waypoint">Yol nöqtəsi</string>
     <string name="gpx_info_waypoints">Yol nöqtələri: %1$s</string>
     <string name="gpx_info_distance">Məsafə: %1$s (%2$s nöqtə)</string>
@@ -853,16 +853,16 @@
     <string name="lang_hu_formal">Macarca (rəsmi)</string>
     <string name="lang_id">İndonezcə</string>
     <string name="lang_ko">Koreyaca</string>
-    <string name="route_descr_select_destination">Təyinat nöqtəsi seçin</string>
+    <string name="route_descr_select_destination">Təyinat nöqtəsi seç</string>
     <string name="routing_attr_avoid_toll_description">Pullu yollardan yayınır</string>
     <string name="routing_attr_avoid_unpaved_name">Asfaltsız yollardan yayın</string>
     <string name="routing_attr_avoid_unpaved_description">Asfaltsız yollardan yayınır</string>
     <string name="routing_attr_avoid_ferries_name">Bərələrdən yayın</string>
-    <string name="routing_attr_avoid_ferries_description">Bərələrdən yayın</string>
+    <string name="routing_attr_avoid_ferries_description">Bərələrdən yayınır</string>
     <string name="routing_attr_avoid_motorway_name">Avtomagistrallardan yayın</string>
-    <string name="routing_attr_avoid_motorway_description">Avtomagistrallardan yayın</string>
-    <string name="android_19_location_disabled">Android 4.4 (KitKat) versiyasından bu yana xəritələri köhnə saxlama qovluğuna (%s) endirə və yeniləyə bilməzsiniz. Bütün OsmAnd faylları yeni saxlama yerinə kopyalansın? 
-\n Qeyd 1: Köhnə fayllarınıza toxunulmayacaq (amma əllə silmək olar). 
+    <string name="routing_attr_avoid_motorway_description">Avtomagistrallardan yayınır</string>
+    <string name="android_19_location_disabled">Android 4.4 (KitKat) versiyasından bu yana xəritələri köhnə saxlama qovluğuna (%s) endirə və yeniləyə bilməzsiniz. Bütün OsmAnd faylları yeni saxlama yerinə kopyalansın\?
+\n Qeyd 1: Köhnə fayllarınıza toxunulmayacaq (amma əllə silmək olar).
 \n Qeyd 2: Yeni saxlama yerində OsmAnd və OsmAnd+ arasında fayl paylaşmaq mümkün olmayacaq.</string>
     <string name="copying_osmand_one_file_descr">Fayl (%s) yeni təyinat yerinə kopyalanır…</string>
     <string name="copying_osmand_files_descr">OsmAnd məlumat faylları yeni təyinat yerinə kopyalanır (%s)…</string>
@@ -874,7 +874,7 @@
     <string name="si_min_km">Kilometrdə dəqiqə</string>
     <string name="si_min_m">Mildə dəqiqə</string>
     <string name="shared_string_navigation">Naviqasiya</string>
-    <string name="osmand_running_in_background">Arxa fonda işləyir</string>
+    <string name="osmand_running_in_background">Arxa fonda işlət</string>
     <string name="analyze_on_map">Xəritədə təhlil et</string>
     <string name="shared_string_visible">Görünən</string>
     <string name="restore_purchases">Alışları bərpa et</string>
@@ -884,7 +884,7 @@
     <string name="online_photos">Onlayn şəkillər</string>
     <string name="shared_string_add_photos">Şəkillər əlavə et</string>
     <string name="live_updates">Canlı yeniləmələr</string>
-    <string name="access_from_map_description">Menyu düyməsi menyunu yox, alət panelini açır.</string>
+    <string name="access_from_map_description">Menyu düyməsi menyunun əvəzinə idarəetmə panelini açır</string>
     <string name="lang_als">Albanca (Tosk)</string>
     <string name="regions">Regionlar</string>
     <string name="days_behind">gün əvvəl</string>
@@ -946,7 +946,7 @@
     <string name="mapillary">Mapillary</string>
     <string name="private_access_routing_req">Təyinat nöqtəniz xüsusi girişi olan ərazidə yerləşir. Bu səyahət üçün xüsusi yollara girişə icazə verilsin\?</string>
     <string name="shared_string_plugin">Qoşma</string>
-    <string name="srtm_purchase_header">Xəritədə kontur xətlərini görmək üçün “Kontur xətləri” qoşmasını alıb quraşdırmalısınız</string>
+    <string name="srtm_purchase_header">Dərəcəli şaquli sahələri göstərmək üçün “Kontur xətləri” qoşmasını alın və quraşdırın.</string>
     <string name="plugin_settings">Qoşmalar</string>
     <string name="srtm_paid_version_title">Kontur xətləri qoşması</string>
     <string name="osmand_srtm_short_description_80_chars">Oflayn kontur xətləri üçün OsmAnd qoşması</string>
@@ -961,7 +961,7 @@
     <string name="plugins_menu_group">Qoşmalar</string>
     <string name="impassable_road_desc">Naviqasiya zamanı yayınmaq istədiyiniz yolları seçin.</string>
     <string name="roads_only">Yalnız yollar</string>
-    <string name="avoid_roads_msg">Yayınmaq üçün yollar seçərək alternativ marşrut yarada bilərsiniz</string>
+    <string name="avoid_roads_msg">Yayınmaq üçün yollar seçərək alternativ marşrut başlat</string>
     <string name="rendering_attr_roadStyle_name">Yol stili</string>
     <string name="rendering_attr_roadStyle_description">Yol stili</string>
     <string name="rendering_value_germanRoadAtlas_name">Almaniya yol atlası</string>
@@ -1349,7 +1349,7 @@
     <string name="app_mode_motorcycle">Motosiklet</string>
     <string name="local_osm_changes_delete_all_confirm">%1$d OSM dəyişikliyi silinsin\?</string>
     <string name="animate_routing_route_not_calculated">Zəhmət olmasa əvvəlcə marşrutu hesablayın</string>
-    <string name="route_is_too_long_v2">Bu uzun marşrut üçün 10 dəqiqə ərzində yol tapılmasa, ara təyinat nöqtələri əlavə edin.</string>
+    <string name="route_is_too_long_v2">Uzun məsafələr üçün: 10 dəqiqə ərzində marşrut tapılmasa, ara təyinat nöqtələri əlavə edin.</string>
     <string name="auto_zoom_close">İri plana</string>
     <string name="auto_zoom_far">Orta plana</string>
     <string name="auto_zoom_farthest">Uzaq plana</string>
@@ -1417,12 +1417,12 @@
     <string name="recording_delete_confirm">Bu element silinsin?</string>
     <string name="routing_attr_allow_motorway_name">Avtomagistrallara icazə ver</string>
     <string name="routing_attr_allow_motorway_description">Avtomagistrallara icazə verir.</string>
-    <string name="trip_rec_notification_settings">Səyahət qeydetmə (məlumat yoxdur)</string>
+    <string name="trip_rec_notification_settings">Sürətli qeydetməni yandır</string>
     <string name="trip_rec_notification_settings_desc">Səyahət qeydini başlatmağa imkan verən sistem bildirişi göstər.</string>
     <string name="save_track_min_speed">Minimum qeydiyyat sürəti</string>
     <string name="new_filter_desc">Yeni filtr üçün ad daxil edin. Bu, sizin “Kateqoriyalar” bölmənizə əlavə olunur.</string>
     <string name="donation_to_osm">OSM cəmiyyəti üçün ianə</string>
-    <string name="donation_to_osm_desc">İanənizin bir hissəsi OpenStreetMap-a dəyişikliklər təqdim edən OSM istifadəçilərinə göndəriləcək. Abunəliyin qiyməti eyni qalır.</string>
+    <string name="donation_to_osm_desc">İanənizin bir hissəsi OSM töhfə verənlərə göndərilir. Abunə haqqı eyni olaraq qalır.</string>
     <string name="access_expanded_list">Genişlədilmiş siyahı</string>
     <string name="unit_of_length_descr">Uzunluq vahidlərini dəyişin.</string>
     <string name="unit_of_length">Uzunluq vahidi</string>
@@ -1925,7 +1925,7 @@
     <string name="use_magnetic_sensor_descr">Kompasın oxunması üçün istiqamət sensoru əvəzinə maqnit sensorunu istifadə et.</string>
     <string name="safe_mode_description">Proqramı təhlükəsiz rejimdə işlət (Yerli kod əvəzinə daha yavaş Android istifadə edir).</string>
     <string name="use_compass_navigation_descr">Başqa bir başlıq aşkar edilmədikdə kompasdan istifadə et.</string>
-    <string name="rotate_map_to_bearing_descr">Xəritənin fırlanma üsulunu seçin.</string>
+    <string name="rotate_map_to_bearing_descr">Xəritənin düzülüşü:</string>
     <string name="map_screen_orientation">Ekran istiqaməti</string>
     <string name="distance_farthest">İlk ən uzaqdakı</string>
     <string name="distance_nearest">İlk ən yaxındakı</string>
@@ -2039,8 +2039,9 @@
     <string name="error_notification_desc">Bu bildirişin ekran şəklini support@osmand.net ünvanına göndərin</string>
     <string name="get_osmand_live">Bütün xüsusiyyətləri açmaq üçün OsmAnd Live əldə edin: Limitsiz endirmələr ilə günlük xəritəsi yeniləmələri, bütün pullu və pulsuz qoşmalar, Vikipediya, Vikisəyahət və daha çoxu.</string>
     <string name="thank_you_for_feedback">Əks əlaqəniz üçün təşəkkürlər</string>
-    <string name="send_search_query_description">Axtarış sorğunuzu göndərəcəyik: \"%1$s\", eləcə də məkanınızı.\n
-        \n Şəxsi məlumatları toplamırıq, yalnız axtarış alqoritmini yaxşılaşdırmaq üçün axtarış məlumatlarına ehtiyacımız var.</string>
+    <string name="send_search_query_description">Axtarış sorğunuzu göndərəcəyik: \"%1$s\", eləcə də məkanınızı.
+\n
+\n Şəxsi məlumatları toplamırıq, yalnız axtarış alqoritmini yaxşılaşdırmaq üçün axtarış məlumatlarına ehtiyacımız var.</string>
     <string name="send_search_query">Axtarış sorğusu göndərilsin?</string>
     <string name="shared_string_world">Dünya</string>
     <string name="read_wikipedia_offline_description">Vikipediya və Vikisəyahət məqalələrini oflayn oxumaq üçün OsmAnd Live abunəliyi alın.</string>
@@ -2173,7 +2174,7 @@
     <string name="backup_error_no_subscription">Abunəlik yoxdur</string>
     <string name="reset_to_original">Orijinala sıfırla</string>
     <string name="attribute">Atribut</string>
-    <string name="service_is_not_available_please_try_later">Xidmət mövcud deyil. Zəhmət olmasa, sonra cəhd edin</string>
+    <string name="service_is_not_available_please_try_later">Xidmət mövcud deyil. Zəhmət olmasa, sonra cəhd edin.</string>
     <string name="start_point">Başlanğıc</string>
     <string name="no_items_of_type_message">Bu növ elementləriniz yoxdur</string>
     <string name="amz_manage_subscription_descr">Amazon proqramından və ya Amazon veb saytından istifadə edərək abunəliyinizi idarə edin.</string>
@@ -2221,7 +2222,7 @@
     <string name="duration_moment_ago">indicə</string>
     <string name="history_actions_descr">Tarixçəni bir fayla ixrac edə bilərsiniz.</string>
     <string name="clear_all_history">Bütün tarixçəni təmizlə</string>
-    <string name="search_history_is_disabled_descr">Axtarış tarixçəsini parametrlərdən aktiv edə bilərsiniz</string>
+    <string name="search_history_is_disabled_descr">Axtarış tarixçəsini parametrlərdən aktiv edə bilərsiniz.</string>
     <string name="history_is_disabled_descr">Son istifadə olunan nəticələrə daha sürətli daxil olmaq üçün tarixçəni aktiv edin.</string>
     <string name="backup_error_file_not_available">Fayl əlçatan deyil</string>
     <string name="receiving_data_from_server">Serverdən məlumatlar alınır…</string>
@@ -2562,7 +2563,7 @@
     <string name="button_rate">Qiymətləndir</string>
     <string name="changes_applied_to_profile">Dəyişikliklər “%1$s” profilinə tətbiq edildi.</string>
     <string name="gpx_monitoring_start"/>
-    <string name="routing_attr_height_obstacles_description"/>
+    <string name="routing_attr_height_obstacles_description">Marşrut kəskin yoxuşlardan yayına bilər.</string>
     <string name="add_to_opr">OpenPlaceReviews-a əlavə et</string>
     <string name="add_online_source">Onlayn mənbə əlavə et</string>
     <string name="details_dialog_decr">Əlavə xəritə detallarını göstər və ya gizlət</string>
@@ -2901,4 +2902,6 @@
     <string name="not_enough_contributions_descr">Limitsiz saatlıq xəritə yeniləmələrinə giriş əldə etmək üçün son iki ay ərzində %2$s minimum %1$s dəyişiklik tələb olunur.</string>
     <string name="travel_routes">Səyahət marşrutları</string>
     <string name="reset_to_default_category_button_promo">“Standarta sıfırla” sıralama qaydasını quraşdırma standartına bərpa edəcək.</string>
+    <string name="routing_attr_short_way_description">Optimallaşdırılmış qısa marşrut (enerjiyə qənaət)</string>
+    <string name="map_widget_monitoring">Səyahət qeydetmə</string>
 </resources>

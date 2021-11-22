@@ -4461,4 +4461,10 @@
     <string name="display_groups_visibility_dialog_description">Pode controlar a visibilidade do grupo no mapa. Se o trilho estiver oculto, também todos os grupos ficarão ocultos.</string>
     <string name="shared_string_hide_all">Ocultar tudo</string>
     <string name="exit_without_saving_warning">Quer sair sem guardar\? Irá perder todas as alterações.</string>
+    <string name="shared_string_show_slope">Mostrar declive</string>
+    <string name="shared_string_hide_slope">Ocultar declive</string>
+    <string name="shared_string_grade">Grau</string>
+    <string name="elevation_profile">Perfil de elevação</string>
+    <string name="shared_string_uphill">Subida</string>
+    <string name="shared_string_downhill">Descida</string>
 </resources>
