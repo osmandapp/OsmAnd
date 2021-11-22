@@ -4434,4 +4434,6 @@
     <string name="not_enough_contributions_descr">נדרשים %1$s שינויים על פני החודשיים האחרונים %2$s כדי לקבל גישה לעדכוני מפה שעתיים ללא הגבלה.</string>
     <string name="elevation_profile">פרופיל עלרוד</string>
     <string name="from_with_param">מ־%1$s</string>
+    <string name="shared_string_statistics">סטטיסטיקה</string>
+    <string name="shared_string_precision">דיוק</string>
 </resources>
