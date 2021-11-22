@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.datastorage;
 
+import static net.osmand.plus.settings.datastorage.DocumentFilesCollectTask.APPROXIMATE_FILE_SIZE_BYTES;
+
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Pair;
@@ -14,7 +16,9 @@ import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
+import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -34,25 +38,28 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair
 	public final static Log log = PlatformUtil.getLog(StorageMigrationAsyncTask.class);
 
 	private final OsmandApplication app;
+	private final StorageItem selectedStorage;
+	private final Pair<Long, Long> filesSize;
 	private final List<DocumentFile> documentFiles;
 	private final List<File> existingFiles = new ArrayList<>();
 
 	private final WeakReference<FragmentActivity> activityRef;
 	private StorageMigrationListener migrationListener;
 
-	protected int generalProgress;
-	protected final long filesSize;
-	protected final boolean usedOnMap;
+	private int generalProgress;
+	private final boolean usedOnMap;
 
 	public StorageMigrationAsyncTask(@NonNull FragmentActivity activity,
 	                                 @NonNull List<DocumentFile> documentFiles,
-	                                 long filesSize,
+	                                 @NonNull StorageItem selectedStorage,
+	                                 Pair<Long, Long> filesSize,
 	                                 boolean usedOnMap) {
 		activityRef = new WeakReference<>(activity);
 		this.app = (OsmandApplication) activity.getApplication();
 		this.usedOnMap = usedOnMap;
 		this.filesSize = filesSize;
 		this.documentFiles = documentFiles;
+		this.selectedStorage = selectedStorage;
 	}
 
 	@Override
@@ -60,7 +67,7 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair
 		FragmentActivity activity = activityRef.get();
 		if (AndroidUtils.isActivityNotDestroyed(activity)) {
 			FragmentManager manager = activity.getSupportFragmentManager();
-			migrationListener = StorageMigrationFragment.showInstance(manager, generalProgress,
+			migrationListener = StorageMigrationFragment.showInstance(manager, selectedStorage, generalProgress,
 					documentFiles.size(), filesSize, usedOnMap);
 		}
 	}
@@ -68,9 +75,9 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair
 	@Override
 	protected Map<String, Pair<String, Long>> doInBackground(Void... params) {
 		Map<String, Pair<String, Long>> errors = new HashMap<>();
-		CopyFilesListener copyFilesListener = getCopyFilesListener(filesSize / 1024);
+		CopyFilesListener copyFilesListener = getCopyFilesListener(filesSize.second / 1024);
 
-		long remainingSize = filesSize;
+		long remainingSize = filesSize.first;
 		for (int i = 0; i < documentFiles.size(); i++) {
 			DocumentFile file = documentFiles.get(i);
 			long fileLength = file.length();
@@ -81,7 +88,7 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair
 			if (fileName != null) {
 				copyFilesListener.onFileCopyStarted(fileName);
 
-				File destFile = app.getAppPath(fileName);
+				File destFile = new File(selectedStorage.getDirectory(), fileName);
 				if (!destFile.exists()) {
 					String error = copyFile(uri, fileName, copyFilesListener);
 					if (error == null) {
@@ -89,10 +96,11 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair
 					} else {
 						errors.put(fileName, new Pair<>(error, fileLength));
 					}
+					copyFilesListener.onFileCopyFinished(fileName, APPROXIMATE_FILE_SIZE_BYTES / 1024);
 				} else {
 					existingFiles.add(destFile);
-					int progress = (int) (fileLength / 1024);
-					copyFilesListener.onFileCopyProgress(fileName, progress, progress);
+					int progress = (int) ((fileLength + APPROXIMATE_FILE_SIZE_BYTES) / 1024);
+					copyFilesListener.onFileCopyFinished(fileName, progress);
 				}
 			}
 			publishProgress(new Pair<>(documentFiles.size() - i, remainingSize));
@@ -118,6 +126,12 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair
 
 	@Override
 	protected void onPostExecute(Map<String, Pair<String, Long>> errors) {
+		DataStorageHelper storageHelper = new DataStorageHelper(app);
+		StorageItem currentStorage = storageHelper.getCurrentStorage();
+		if (!Algorithms.stringsEqual(currentStorage.getKey(), selectedStorage.getKey())) {
+			File dir = new File(selectedStorage.getDirectory());
+			DataStoragePlaceDialogFragment.saveFilesLocation(app, activityRef.get(), selectedStorage.getType(), dir);
+		}
 		if (migrationListener != null) {
 			migrationListener.onFilesCopyFinished(errors, existingFiles);
 		}
@@ -129,7 +143,7 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair
 		InputStream stream = null;
 		OutputStream outputStream = null;
 		try {
-			File destFile = app.getAppPath(fileName);
+			File destFile = new File(selectedStorage.getDirectory(), fileName);
 			File dir = destFile.getParentFile();
 			if (dir != null) {
 				dir.mkdirs();
@@ -190,7 +204,17 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair
 			@Override
 			public void onFileCopyProgress(@NonNull String fileName, int progress, int deltaWork) {
 				deltaProgress += deltaWork;
-				if ((deltaProgress > (size / 100)) || ((progress + deltaProgress) >= size)) {
+				if ((deltaProgress > (size / 100)) || (progress + deltaProgress >= size)) {
+					generalProgress += deltaProgress;
+					publishProgress(generalProgress);
+					deltaProgress = 0;
+				}
+			}
+
+			@Override
+			public void onFileCopyFinished(@NonNull String fileName, int deltaWork) {
+				deltaProgress += deltaWork;
+				if ((deltaProgress > (size / 100)) || deltaProgress >= size) {
 					generalProgress += deltaProgress;
 					publishProgress(generalProgress);
 					deltaProgress = 0;
@@ -203,6 +227,8 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair
 		void onFileCopyStarted(@NonNull String fileName);
 
 		void onFileCopyProgress(@NonNull String fileName, int progress, int deltaWork);
+
+		void onFileCopyFinished(@NonNull String fileName, int progress);
 	}
 
 	public interface StorageMigrationListener {
