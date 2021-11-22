@@ -4474,7 +4474,7 @@
 \nБудьте обережні, чим більше відстань, тим простіша геометрія треку.</string>
     <string name="gps_filter_precision">Мін. точність GPS</string>
     <string name="gps_filter_smoothing">Згладжування</string>
-    <string name="save_changes_into_file">Зберегти зміни в файл</string>
+    <string name="save_changes_into_file">Зберегти зміни у файл</string>
     <string name="save_as_copy">Зберегти як копію</string>
     <string name="gps_filter_actions_description">OsmAnd застосовує зміни до треку без збереження його у файлі. Ви можете зберегти зміни вручну.</string>
     <string name="shared_string_gps_filter">GPS-фільтр</string>
