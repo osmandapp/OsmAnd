@@ -891,9 +891,7 @@ public class GPXUtilities {
 
 		public abstract static class ElevationDiffsCalculator {
 
-			private static final double DEFAULT_WINDOW_LENGTH = 25d;
-
-			private double windowLength = DEFAULT_WINDOW_LENGTH;
+			private double windowLength;
 			private final int startIndex;
 			private final int numberOfPoints;
 
@@ -903,6 +901,8 @@ public class GPXUtilities {
 			public ElevationDiffsCalculator(int startIndex, int numberOfPoints) {
 				this.startIndex = startIndex;
 				this.numberOfPoints = numberOfPoints;
+				WptPt lastPoint = getPoint(startIndex + numberOfPoints - 1);
+				this.windowLength = Math.max(20d, lastPoint.distance / numberOfPoints * 4);
 			}
 
 			public ElevationDiffsCalculator(double windowLength, int startIndex, int numberOfPoints) {
