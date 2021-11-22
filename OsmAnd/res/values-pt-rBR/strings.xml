@@ -4403,8 +4403,8 @@
     <string name="shared_string_travelbooks">Livros de viagem</string>
     <string name="display_route_tracks">Exibir trilhas</string>
     <string name="display_route_tracks_as_poi">Exibir trilhas como POI</string>
-    <string name="quick_action_toggle_preference">Uma alternância para alternar o estado de preferência selecionado.</string>
-    <string name="delete_history_items_descr">Tem certeza de que deseja apagar os itens selecionados do histórico\?</string>
+    <string name="quick_action_toggle_preference">Um botão de alternância para alterar a preferência.</string>
+    <string name="delete_history_items_descr">Excluir itens de histórico selecionados\?</string>
     <string name="delete_history_items">Apagar itens do histórico %1$s\?</string>
     <string name="progress_complete">%1$s completo</string>
     <string name="storage_found_files_descr">Toque em \"%1$s\" para copiar %2$s arquivos de \"%3$s\" para \"%4$s\". Pode levar algum tempo.</string>
@@ -4412,7 +4412,7 @@
     <string name="storage_copying_files_size">Copiando %1$s arquivos (%2$s)</string>
     <string name="shared_storage_second_step">Clique em \"Usar esta pasta\".</string>
     <string name="folder_access_denied">É necessária permissão para acessar a pasta selecionada.</string>
-    <string name="copying_completed">Cópia concluída</string>
+    <string name="copying_completed">Copiado</string>
     <string name="shared_string_copy_to">Copiar para</string>
     <string name="skip_confirmation">Sim, pular</string>
     <string name="shared_storage">Armazenamento compartilhado</string>
@@ -4430,12 +4430,12 @@
 \nO aplicativo começará a usar sua nova pasta de dados.</string>
     <string name="shared_storage_last_step">Você pode especificar uma nova pasta de dados posteriormente.</string>
     <string name="start_copying">Comece a copiar</string>
-    <string name="shared_storage_third_step">Dê permissão para acessar a pasta. Sem esta permissão, OsmAnd não pode copiar arquivos.</string>
+    <string name="shared_storage_third_step">Conceda permissão para acessar a pasta. Sem ele, OsmAnd não pode copiar arquivos.</string>
     <string name="shared_storage_first_step">Pressione \"%1$s\".
 \nO gerenciador de arquivos é aberto onde você precisa encontrar e abrir a pasta osmand.</string>
-    <string name="shared_storage_migration_descr">Devido a mudanças nas regras de acesso ao armazenamento no Android, OsmAnd não pode mais usar %1$s.
+    <string name="shared_storage_migration_descr">Devido a mudanças no acesso ao armazenamento do Android, OsmAnd não pode mais usar %1$s.
 \n
-\nVocê precisa copiar todos os seus dados para o novo local de armazenamento.</string>
+\nCopie todos os seus dados para a nova pasta.</string>
     <string name="show_parameter_seekbar">Mostrar a barra de busca de parâmetros</string>
     <string name="add_to_group">Adicionar ao grupo</string>
     <string name="app_modes_options">Escolha os modos de aplicativo</string>
@@ -4452,4 +4452,27 @@
     <string name="memory_allocated_for_routing_ds">Um valor de memória mais alto acelera o cálculo de rotas longas (mais de 500 km), mas pode afetar o desempenho de outros aplicativos.
 \nNão afeta a velocidade de cálculo de rotas curtas.</string>
     <string name="exit_without_saving_warning">Tem certeza de que deseja sair sem salvar\? Você perderá todas as alterações.</string>
+    <string name="save_as_copy">Salvar como cópia</string>
+    <string name="gps_filter_actions_description">OsmAnd aplicando mudanças à trilha sem salvá-la no arquivo. Você pode salvar as alterações manualmente.</string>
+    <string name="shared_string_gps_filter">Filtro GPS</string>
+    <string name="storage_migration_wrong_folder_warning">Não conseguimos encontrar os dados OsmAnd na pasta selecionada. Por favor, tente novamente.</string>
+    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
+    <string name="shared_string_downhill">Descida</string>
+    <string name="shared_string_hide_slope">Esconder inclinação</string>
+    <string name="shared_string_uphill">Subida</string>
+    <string name="elevation_profile">Perfil de elevação</string>
+    <string name="shared_string_show_slope">Mostrar inclinação</string>
+    <string name="shared_string_grade">Grau</string>
+    <string name="save_changes_into_file">Salvar as alterações no arquivo</string>
+    <string name="gps_filter_precision">Precisão mínima do GPS</string>
+    <string name="gps_filter_smoothing">Alisamento</string>
+    <string name="shared_string_precision">Precisão</string>
+    <string name="shared_string_statistics">Estatísticas</string>
+    <string name="gps_filter_hdop_desc">Defina o valor máximo permitido para HDOP.
+\nPontos maiores do que o parâmetro definido serão ocultados.</string>
+    <string name="gps_filter_speed_altitude_desc">Os pontos de trilha correspondentes ao intervalo definido ficarão visíveis no gráfico e no mapa, o resto ficará oculto.</string>
+    <string name="gps_filter_smoothing_desc">Defina a distância limite entre os pontos.
+\nOs pontos de rastreamento que estão a pelo menos X distância do último ponto visível serão ocultados.
+\nTenha cuidado quanto maior a distância, mais simples é a geometria da pista.</string>
+    <string name="distance_between_points">Distância entre pontos</string>
 </resources>
