@@ -122,6 +122,7 @@ public class OpeningHoursParser {
 
 			private boolean opened;
 			private boolean opened24_7;
+			private boolean fallback;
 			private String openingTime;
 			private String nearToOpeningTime;
 			private String closingTime;
@@ -138,8 +139,12 @@ public class OpeningHoursParser {
 				return opened24_7;
 			}
 
+			public boolean isFallback() {
+				return fallback;
+			}
+
 			public String getInfo() {
-				if (isOpened24_7()) {
+				if (isOpened24_7() && !isFallback()) {
 					if (!Algorithms.isEmpty(ruleString)) {
 						return additionalStrings.get("is_open") + " " + ruleString;
 					} else {
@@ -205,6 +210,7 @@ public class OpeningHoursParser {
 		private Info getInfo(Calendar cal, int sequenceIndex) {
 			Info info = new Info();
 			boolean opened = isOpenedForTimeV2(cal, sequenceIndex);
+			info.fallback = isFallBackRule(sequenceIndex);
 			info.opened = opened;
 			info.ruleString = getCurrentRuleTime(cal, sequenceIndex);
 			if (opened) {
@@ -454,6 +460,14 @@ public class OpeningHoursParser {
 			return getCurrentRuleTime(cal, ALL_SEQUENCES);
 		}
 
+		public boolean isFallBackRule(int sequenceIndex) {
+			if (sequenceIndex != ALL_SEQUENCES) {
+				ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
+				return rules.get(0).isFallbackRule();
+			}
+			return false;
+		}
+
 		public String getCurrentRuleTime(Calendar cal, int sequenceIndex) {
 			// make exception for overlapping times i.e.
 			// (1) Mo 14:00-16:00; Tu off
@@ -638,6 +652,8 @@ public class OpeningHoursParser {
 
 		public int getSequenceIndex();
 
+		boolean isFallbackRule();
+
 		public String toRuleString();
 
 		public String toLocalRuleString();
@@ -673,6 +689,8 @@ public class OpeningHoursParser {
 		private int[] lastYearMonths = null;
 		private int fullYears = 0;
 		private int year = 0;
+
+		private boolean fallback;
 
 		/**
 		 * represents the list on which day it is open.
@@ -711,6 +729,11 @@ public class OpeningHoursParser {
 
 		public int getSequenceIndex() {
 			return sequenceIndex;
+		}
+
+		@Override
+		public boolean isFallbackRule() {
+			return fallback;
 		}
 
 		/**
@@ -1169,7 +1192,9 @@ public class OpeningHoursParser {
 			if (startTimes == null || startTimes.size() == 0) {
 				if (isOpened24_7()) {
 					b.setLength(0);
-					b.append("24/7 ");
+					if (!isFallbackRule()) {
+						b.append("24/7 ");
+					}
 				}
 				if (off) {
 					b.append(offStr);
@@ -1627,6 +1652,11 @@ public class OpeningHoursParser {
 		public int getSequenceIndex() {
 			return 0;
 		}
+
+		@Override
+		public boolean isFallbackRule() {
+			return false;
+		}
 	}
 	
 	private enum TokenType { 
@@ -1696,9 +1726,14 @@ public class OpeningHoursParser {
 		String endOfDay = "24:00";
 		r = r.replace('(', ' '); // avoid "(mo-su 17:00-20:00"
 		r = r.replace(')', ' ');
+		boolean fallback = r.startsWith("|| ");
+		if (fallback) {
+			r = r.replace("|| ", "");
+		}
 		String localRuleString = r.replaceAll("(?i)sunset", sunset).replaceAll("(?i)sunrise", sunrise)
 				.replaceAll("\\+", "-" + endOfDay);
 		BasicOpeningHourRule basic = new BasicOpeningHourRule(sequenceIndex);
+		basic.fallback = fallback;
 		boolean[] days = basic.getDays();
 		boolean[] months = basic.getMonths();
 		//boolean[][] dayMonths = basic.getDayMonths();
@@ -2039,7 +2074,7 @@ public class OpeningHoursParser {
 			return null;
 		}
 		List<List<String>> res = new ArrayList<>();
-		String[] sequences = format.split("\\|\\|");
+		String[] sequences = format.split("(?= \\|\\| )");
 		for (String seq : sequences) {
 			seq = seq.trim();
 			if (seq.length() == 0) {
