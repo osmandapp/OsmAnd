@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.FavouritePoint.SpecialPointType;
 import net.osmand.data.LatLon;
@@ -18,6 +19,8 @@ import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.views.layers.MapControlsLayer;
+
+import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,6 +36,8 @@ import androidx.core.content.pm.ShortcutManagerCompat;
 import androidx.core.graphics.drawable.IconCompat;
 
 public class LauncherShortcutsHelper {
+
+	private static final Log LOG = PlatformUtil.getLog(LauncherShortcutsHelper.class);
 
 	public static final String INTENT_SCHEME = "osmand.shortcuts";
 
@@ -72,25 +77,33 @@ public class LauncherShortcutsHelper {
 	}
 
 	private void setNeededShortcutsInOrder() {
-		List<ShortcutInfoCompat> shortcutInfoList = new ArrayList<>();
-		int count = 0;
-		for (Shortcut shortcut : Shortcut.values()) {
-			if (count == VISIBLE_DYNAMIC_SHORTCUTS_LIMIT) {
-				break;
-			}
+		try {
+			List<ShortcutInfoCompat> shortcutInfoList = new ArrayList<>();
+			int counter = 0;
 
-			if ((shortcut.shouldPublish(app) || shortcut.isPublished(app)) && !shortcut.isPinned(app)) {
-				ShortcutInfoCompat orderedShortcutInfo = new ShortcutInfoCompat.Builder(app, shortcut.id)
-						.setShortLabel(app.getString(shortcut.labelId))
-						.setIcon(getIcon(shortcut.iconId))
-						.setIntent(createIntent(shortcut.id))
-						.setRank(count++)
-						.build();
-				shortcutInfoList.add(orderedShortcutInfo);
+			for (Shortcut shortcut : Shortcut.values()) {
+
+				boolean noMoreShortcutsAllowed = counter == VISIBLE_DYNAMIC_SHORTCUTS_LIMIT
+						|| counter == ShortcutManagerCompat.getMaxShortcutCountPerActivity(app);
+				if (noMoreShortcutsAllowed) {
+					break;
+				}
+
+				if ((shortcut.shouldPublish(app) || shortcut.isPublished(app)) && !shortcut.isPinned(app)) {
+					ShortcutInfoCompat orderedShortcutInfo = new ShortcutInfoCompat.Builder(app, shortcut.id)
+							.setShortLabel(app.getString(shortcut.labelId))
+							.setIcon(getIcon(shortcut.iconId))
+							.setIntent(createIntent(shortcut.id))
+							.setRank(counter++)
+							.build();
+					shortcutInfoList.add(orderedShortcutInfo);
+				}
 			}
+			ShortcutManagerCompat.removeAllDynamicShortcuts(app);
+			ShortcutManagerCompat.setDynamicShortcuts(app, shortcutInfoList);
+		} catch (IllegalArgumentException | IllegalStateException e) {
+			LOG.error("Failed to update launcher shortcuts", e);
 		}
-		ShortcutManagerCompat.removeAllDynamicShortcuts(app);
-		ShortcutManagerCompat.setDynamicShortcuts(app, shortcutInfoList);
 	}
 
 	private IconCompat getIcon(@DrawableRes int iconId) {
@@ -175,7 +188,7 @@ public class LauncherShortcutsHelper {
 		}
 
 		@SuppressLint("WrongConstant")
-		public boolean isPinned(@NonNull OsmandApplication app) {
+		public boolean isPinned(@NonNull OsmandApplication app) throws IllegalStateException {
 			List<ShortcutInfoCompat> pinned = ShortcutManagerCompat.getShortcuts(app, ShortcutManagerCompat.FLAG_MATCH_PINNED);
 			for (ShortcutInfoCompat shortcutInfo : pinned) {
 				if (id.equals(shortcutInfo.getId())) {
