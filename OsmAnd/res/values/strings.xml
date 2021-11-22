@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="exit_without_saving_warning">Are you sure you exit without saving? You will lost all changes.</string>
     <string name="exit_without_saving_warning">Are you sure you exit without saving? You will lose all changes.</string>
     <string name="storage_migration_wrong_folder_warning">We can\'t find OsmAnd data in the selected folder. Please try again.</string>
     <string name="migration_files_present">%1$d files (%2$s) are present in the selected location \'%3$s\'.</string>
