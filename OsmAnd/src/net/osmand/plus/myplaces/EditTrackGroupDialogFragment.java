@@ -40,7 +40,7 @@ import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.activities.EditFavoriteGroupDialogFragment.FavoriteColorAdapter;
+import net.osmand.plus.myplaces.EditFavoriteGroupDialogFragment.FavoriteColorAdapter;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;

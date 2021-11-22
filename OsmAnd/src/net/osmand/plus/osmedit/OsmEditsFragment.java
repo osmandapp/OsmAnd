@@ -11,7 +11,6 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Xml;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,7 +23,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
@@ -36,18 +34,12 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
-import net.osmand.IndexConstants;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.edit.Entity;
-import net.osmand.osm.edit.Node;
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
@@ -62,6 +54,7 @@ import net.osmand.plus.osmedit.FileTypeBottomSheetDialogFragment.FileTypeFragmen
 import net.osmand.plus.osmedit.OpenstreetmapLocalUtil.OnNodeCommittedListener;
 import net.osmand.plus.osmedit.OsmEditOptionsBottomSheetDialogFragment.OsmEditOptionsFragmentListener;
 import net.osmand.plus.osmedit.OsmPoint.Group;
+import net.osmand.plus.osmedit.ShareOsmPointsAsyncTask.ShareOsmPointsListener;
 import net.osmand.plus.osmedit.dialogs.ProgressDialogPoiUploader;
 import net.osmand.plus.osmedit.dialogs.SendOsmNoteBottomSheetFragment;
 import net.osmand.plus.osmedit.dialogs.SendPoiBottomSheetFragment;
@@ -69,11 +62,6 @@ import net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
-import org.xmlpull.v1.XmlSerializer;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -82,7 +70,7 @@ import java.util.List;
 import java.util.Map;
 
 public class OsmEditsFragment extends OsmAndListFragment implements ProgressDialogPoiUploader,
-		OnNodeCommittedListener, FavoritesFragmentStateHolder, OsmAuthorizationListener {
+		OnNodeCommittedListener, FavoritesFragmentStateHolder, OsmAuthorizationListener, ShareOsmPointsListener {
 
 	public static final int EXPORT_TYPE_ALL = 0;
 	public static final int EXPORT_TYPE_POI = 1;
@@ -114,7 +102,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 
 	private List<OsmPoint> osmEdits = new ArrayList<>();
 	private OsmEditsAdapter listAdapter;
-	private ArrayList<OsmPoint> osmEditsSelected = new ArrayList<>();
+	private final ArrayList<OsmPoint> osmEditsSelected = new ArrayList<>();
 
 	private ActionMode actionMode;
 	private long refreshId;
@@ -146,7 +134,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		app = getMyApplication();
 		boolean nightMode = !app.getSettings().isLightContent();
 		if (savedInstanceState != null) {
@@ -477,7 +465,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 			}
 
 			@Override
-			public void onItemShowMap(OsmPoint point,  int position) {
+			public void onItemShowMap(OsmPoint point, int position) {
 				showOnMap(point, position);
 			}
 
@@ -550,7 +538,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		return new OsmEditOptionsFragmentListener() {
 			@Override
 			public void onUploadClick(OsmPoint osmPoint) {
-				uploadItems(new OsmPoint[]{getPointAfterModify(osmPoint)});
+				uploadItems(new OsmPoint[] {getPointAfterModify(osmPoint)});
 			}
 
 			@Override
@@ -597,10 +585,26 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 			@Override
 			public void onClick(int type) {
 				List<OsmPoint> points = getPointsToExport();
-				new BackupOpenstreetmapPointAsyncTask(type, exportType).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
-						points.toArray(new OsmPoint[0]));
+				ShareOsmPointsAsyncTask backupTask = new ShareOsmPointsAsyncTask(app, type, exportType, OsmEditsFragment.this);
+				backupTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, points.toArray(new OsmPoint[0]));
 			}
 		};
+	}
+
+	@Override
+	public void shareOsmPointsStarted() {
+		OsmandActionBarActivity activity = getActionBarActivity();
+		if (activity != null) {
+			activity.setSupportProgressBarIndeterminateVisibility(true);
+		}
+	}
+
+	@Override
+	public void shareOsmPointsFinished() {
+		OsmandActionBarActivity activity = getActionBarActivity();
+		if (activity != null) {
+			activity.setSupportProgressBarIndeterminateVisibility(false);
+		}
 	}
 
 	private void openFileTypeMenu() {
@@ -628,10 +632,6 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 			}
 		}
 		return info;
-	}
-
-	public OsmandApplication getMyApplication() {
-		return (OsmandApplication) getActivity().getApplication();
 	}
 
 	private void uploadItems(final OsmPoint[] points) {
@@ -723,11 +723,11 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 	}
 
 	public static class DeleteOsmEditsConfirmDialogFragment extends DialogFragment {
+
 		public static final String TAG = "DeleteOsmEditsConfirmDialogFragment";
 		private static final String POINTS_LIST = "points_list";
 
-		public static DeleteOsmEditsConfirmDialogFragment createInstance(
-				ArrayList<OsmPoint> points) {
+		public static DeleteOsmEditsConfirmDialogFragment createInstance(ArrayList<OsmPoint> points) {
 			DeleteOsmEditsConfirmDialogFragment fragment = new DeleteOsmEditsConfirmDialogFragment();
 			Bundle args = new Bundle();
 			args.putSerializable(POINTS_LIST, points);
@@ -740,8 +740,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			final OsmEditsFragment parentFragment = (OsmEditsFragment) getParentFragment();
 			final OsmEditingPlugin plugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
-			@SuppressWarnings("unchecked")
-			final ArrayList<OsmPoint> points = (ArrayList<OsmPoint>) getArguments().getSerializable(POINTS_LIST);
+			@SuppressWarnings("unchecked") final ArrayList<OsmPoint> points = (ArrayList<OsmPoint>) getArguments().getSerializable(POINTS_LIST);
 
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			assert points != null;
@@ -770,177 +769,6 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		}
 	}
 
-	public class BackupOpenstreetmapPointAsyncTask extends AsyncTask<OsmPoint, OsmPoint, String> {
-
-		private File osmchange;
-		private boolean oscFile;
-
-		public BackupOpenstreetmapPointAsyncTask(int fileType, int exportType) {
-			OsmandApplication app = (OsmandApplication) getActivity().getApplication();
-			oscFile = fileType == FILE_TYPE_OSC;
-			osmchange = app.getAppPath(getFileName(exportType));
-		}
-
-		@Override
-		protected String doInBackground(OsmPoint... points) {
-			if (oscFile) {
-				FileOutputStream out = null;
-				try {
-					out = new FileOutputStream(osmchange);
-					XmlSerializer sz = Xml.newSerializer();
-
-					sz.setOutput(out, "UTF-8");
-					sz.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
-					sz.startDocument("UTF-8", true);
-					sz.startTag("", "osmChange");
-					sz.attribute("", "generator", "OsmAnd");
-					sz.attribute("", "version", "0.6");
-					sz.startTag("", "create");
-					writeContent(sz, points, OsmPoint.Action.CREATE);
-					sz.endTag("", "create");
-					sz.startTag("", "modify");
-					writeContent(sz, points, OsmPoint.Action.MODIFY);
-					writeContent(sz, points, OsmPoint.Action.REOPEN);
-
-					sz.endTag("", "modify");
-					sz.startTag("", "delete");
-					writeContent(sz, points, OsmPoint.Action.DELETE);
-					sz.endTag("", "delete");
-					sz.endTag("", "osmChange");
-					sz.endDocument();
-				} catch (Exception e) {
-					return e.getMessage();
-				} finally {
-					try {
-						if (out != null) out.close();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-			} else {
-				GPXFile gpx = new GPXFile(Version.getFullVersion(getMyApplication()));
-				for (OsmPoint point : points) {
-					if (point.getGroup() == Group.POI) {
-						OpenstreetmapPoint p = (OpenstreetmapPoint) point;
-						WptPt wpt = new WptPt();
-						wpt.name = p.getTagsString();
-						wpt.lat = p.getLatitude();
-						wpt.lon = p.getLongitude();
-						wpt.desc = "id: " + String.valueOf(p.getId()) +
-								" node" + " " + OsmPoint.stringAction.get(p.getAction());
-						gpx.addPoint(wpt);
-					} else if (point.getGroup() == Group.BUG) {
-						OsmNotesPoint p = (OsmNotesPoint) point;
-						WptPt wpt = new WptPt();
-						wpt.name = p.getText();
-						wpt.lat = p.getLatitude();
-						wpt.lon = p.getLongitude();
-						wpt.desc = "id: " + String.valueOf(p.getId()) +
-								" note" + " " + OsmPoint.stringAction.get(p.getAction()) ;
-						gpx.addPoint(wpt);
-					}
-				}
-				GPXUtilities.writeGpxFile(osmchange, gpx);
-			}
-
-			return null;
-		}
-
-		private String getFileName(int exportType) {
-			StringBuilder sb = new StringBuilder();
-			if (exportType == EXPORT_TYPE_POI) {
-				sb.append("osm_edits_modification");
-			} else if (exportType == EXPORT_TYPE_NOTES) {
-				sb.append("osm_notes_modification");
-			} else {
-				sb.append("osm_modification");
-			}
-			sb.append(oscFile ? ".osc" : IndexConstants.GPX_FILE_EXT);
-			return sb.toString();
-		}
-
-		private void writeContent(XmlSerializer sz, OsmPoint[] points, OsmPoint.Action a) throws IllegalArgumentException, IllegalStateException, IOException {
-			for (OsmPoint point : points) {
-				if (point.getGroup() == Group.POI) {
-					OpenstreetmapPoint p = (OpenstreetmapPoint) point;
-					if (p.getAction() == a) {
-						Entity entity = p.getEntity();
-						if (entity != null && entity instanceof Node) {
-							writeNode(sz, (Node) entity);
-						}
-					}
-				} else if (point.getGroup() == Group.BUG) {
-					OsmNotesPoint p = (OsmNotesPoint) point;
-					if (p.getAction() == a) {
-						sz.startTag("", "note");
-						sz.attribute("", "lat", p.getLatitude() + "");
-						sz.attribute("", "lon", p.getLongitude() + "");
-						sz.attribute("", "id", p.getId() + "");
-						sz.startTag("", "comment");
-						sz.attribute("", "text", p.getText() + "");
-						sz.endTag("", "comment");
-						sz.endTag("", "note");
-					}
-				}
-			}
-		}
-
-		private void writeNode(XmlSerializer sz, Node p) {
-			try {
-				sz.startTag("", "node");
-				sz.attribute("", "lat", p.getLatitude() + "");
-				sz.attribute("", "lon", p.getLongitude() + "");
-				sz.attribute("", "id", p.getId() + "");
-				sz.attribute("", "version", "1");
-				writeTags(sz, p);
-				sz.endTag("", "node");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-		private void writeTags(XmlSerializer sz, Entity p) {
-			for (String tag : p.getTagKeySet()) {
-				String val = p.getTag(tag);
-				if (p.isNotValid(tag)) {
-					continue;
-				}
-				try {
-					sz.startTag("", "tag");
-					sz.attribute("", "k", tag);
-					sz.attribute("", "v", val);
-					sz.endTag("", "tag");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-		@Override
-		protected void onPreExecute() {
-			getActivity().setProgressBarIndeterminateVisibility(true);
-		}
-
-		@Override
-		protected void onPostExecute(String result) {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				activity.setProgressBarIndeterminateVisibility(false);
-				if (result != null) {
-					Toast.makeText(activity, getString(R.string.local_osm_changes_backup_failed) + " " + result, Toast.LENGTH_LONG).show();
-				} else {
-					Intent sendIntent = new Intent();
-					sendIntent.setAction(Intent.ACTION_SEND);
-					sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_osm_edits_subject));
-					sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMyApplication(), osmchange));
-					sendIntent.setType("text/plain");
-					sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-					AndroidUtils.startActivityIfSafe(activity, sendIntent);
-				}
-			}
-		}
-	}
-
 	@Override
 	public Bundle storeState() {
 		Bundle bundle = new Bundle();
@@ -948,19 +776,17 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		bundle.putInt(ITEM_POSITION, selectedItemPosition);
 		return bundle;
 	}
-	
+
 	public void restoreState(Bundle bundle) {
-		if (bundle != null && bundle.containsKey(TAB_ID) && bundle.containsKey(ITEM_POSITION)) {
-			if (bundle.getInt(TAB_ID) == OSM_EDIT_TAB) {
-				selectedItemPosition = bundle.getInt(ITEM_POSITION, -1);
-				if (selectedItemPosition != -1) {
-					int itemsCount = getListView().getAdapter().getCount();
-					if (itemsCount > 0 && itemsCount > selectedItemPosition) {
-						if (selectedItemPosition == 1) {
-							getListView().setSelection(0);
-						} else {
-							getListView().setSelection(selectedItemPosition);
-						}
+		if (bundle != null && bundle.containsKey(TAB_ID) && bundle.containsKey(ITEM_POSITION) && bundle.getInt(TAB_ID) == OSM_EDIT_TAB) {
+			selectedItemPosition = bundle.getInt(ITEM_POSITION, -1);
+			if (selectedItemPosition != -1) {
+				int itemsCount = getListView().getAdapter().getCount();
+				if (itemsCount > 0 && itemsCount > selectedItemPosition) {
+					if (selectedItemPosition == 1) {
+						getListView().setSelection(0);
+					} else {
+						getListView().setSelection(selectedItemPosition);
 					}
 				}
 			}
