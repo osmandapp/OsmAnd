@@ -1,5 +1,8 @@
 package net.osmand.plus.voice;
 
+import static net.osmand.IndexConstants.TTSVOICE_INDEX_EXT_JS;
+import static net.osmand.IndexConstants.VOICE_PROVIDER_SUFFIX;
+
 import android.content.Intent;
 import android.media.AudioAttributes;
 import android.os.Build;
@@ -7,7 +10,8 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
 
-import net.osmand.IndexConstants;
+import androidx.annotation.NonNull;
+
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -63,6 +67,12 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 		initializeEngine();
 		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, settings.AUDIO_MANAGER_STREAM
 				.getModeValue(applicationMode).toString());
+	}
+
+	@Override
+	public File getTtsFileFromDir(@NonNull File voiceProviderDir) {
+		String fileName = voiceProviderDir.getName().replace(VOICE_PROVIDER_SUFFIX, "_" + TTSVOICE_INDEX_EXT_JS);
+		return new File(voiceProviderDir, fileName);
 	}
 
 	private void initializeEngine() {
@@ -306,7 +316,7 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 		if (!voiceDir.getName().contains("tts")) {
 			return false;
 		}
-		String langName = voiceDir.getName().replace(IndexConstants.VOICE_PROVIDER_SUFFIX, "");
-		return new File(voiceDir, langName + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS).exists();
+		String langName = voiceDir.getName().replace(VOICE_PROVIDER_SUFFIX, "");
+		return new File(voiceDir, langName + "_" + TTSVOICE_INDEX_EXT_JS).exists();
 	}
 }
