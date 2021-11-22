@@ -30,7 +30,6 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
@@ -55,8 +54,6 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -396,14 +393,11 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 
 		private final UpdateLocationViewCache locationViewCache;
 
-		private final Map<WptPt, String> addresses = new HashMap<>();
-		private final String searchingAddressMsg;
-		private final String addressNotFoundMsg;
+		private final String noAddressDetermined;
 
 		PointGPXAdapter() {
 			locationViewCache = app.getUIUtilities().getUpdateLocationViewCache();
-			searchingAddressMsg = PointDescription.getSearchAddressStr(app);
-			addressNotFoundMsg = PointDescription.getAddressNotFoundStr(app);
+			noAddressDetermined = PointDescription.getAddressNotFoundStr(app);
 		}
 
 		public void synchronizeGroups(@NonNull List<GpxDisplayGroup> displayGroups) {
@@ -412,59 +406,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			itemGroups.clear();
 			groups.addAll(displayGroupsHolder.groups);
 			itemGroups.putAll(displayGroupsHolder.itemGroups);
-			lookupAddresses();
 			notifyDataSetChanged();
-		}
-
-		private void lookupAddresses() {
-			Collection<List<GpxDisplayItem>> allGroupsItems = itemGroups.values();
-
-			Map<WptPt, String> oldAddresses = new HashMap<>(addresses);
-			addresses.clear();
-
-			int emptyAddressesNumber = 0;
-
-			for (List<GpxDisplayItem> groupItems : allGroupsItems) {
-				for (GpxDisplayItem item : groupItems) {
-					WptPt point = item.locationStart;
-					if (!addresses.containsKey(point)) {
-						String address = oldAddresses.get(point);
-						if (address == null) {
-							addresses.put(point, null);
-							emptyAddressesNumber++;
-						} else {
-							addresses.put(point, address);
-						}
-					}
-				}
-			}
-
-			final long allItemsCount = emptyAddressesNumber;
-			final int[] processedAddresses = {0};
-
-			for (List<GpxDisplayItem> groupItems: allGroupsItems) {
-				for (final GpxDisplayItem item : groupItems) {
-
-					WptPt point = item.locationStart;
-					if (addresses.get(point) != null) {
-						continue;
-					}
-
-					LatLon latLon = new LatLon(point.lat, point.lon);
-					AddressLookupRequest lookupRequest = new AddressLookupRequest(latLon, address -> {
-						String addressToShow = Algorithms.isBlank(address) ? addressNotFoundMsg : address;
-						addresses.put(point, addressToShow);
-
-						processedAddresses[0]++;
-						boolean allAddressesDefined = processedAddresses[0] == allItemsCount;
-						if (allAddressesDefined) {
-							notifyDataSetChanged();
-						}
-					}, null);
-
-					app.getGeocodingLookupService().lookupAddress(lookupRequest);
-				}
-			}
 		}
 
 		@Override
@@ -698,8 +640,8 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			app.getUIUtilities().updateLocationView(locationViewCache, directionArrow, distanceText,
 					point.lat, point.lon);
 
-			String definedAddress = addresses.get(point);
-			String addressToShow = definedAddress == null ? searchingAddressMsg : definedAddress;
+			String pointAddress = point.getAddress();
+			String addressToShow = Algorithms.isBlank(pointAddress) ? noAddressDetermined : pointAddress;
 			TextView addressContainer = container.findViewById(R.id.address);
 			addressContainer.setText(addressToShow);
 		}

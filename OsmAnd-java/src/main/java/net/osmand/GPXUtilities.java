@@ -54,9 +54,11 @@ public class GPXUtilities {
 	private static final String ICON_NAME_EXTENSION = "icon";
 	private static final String BACKGROUND_TYPE_EXTENSION = "background";
 	private static final String PROFILE_TYPE_EXTENSION = "profile";
+	private static final String ADDRESS_EXTENSION = "address";
 	private static final String GAP_PROFILE_TYPE = "gap";
 	private static final String TRKPT_INDEX_EXTENSION = "trkpt_idx";
 	public static final String DEFAULT_ICON_NAME = "special_star";
+
 	public static final char TRAVEL_GPX_CONVERT_FIRST_LETTER = 'A';
 	public static final int TRAVEL_GPX_CONVERT_FIRST_DIST = 5000;
 	public static final int TRAVEL_GPX_CONVERT_MULT_1 = 2;
@@ -362,6 +364,14 @@ public class GPXUtilities {
 
 		public String getProfileType() {
 			return getExtensionsToRead().get(PROFILE_TYPE_EXTENSION);
+		}
+
+		public String getAddress() {
+			return getExtensionsToRead().get(ADDRESS_EXTENSION);
+		}
+
+		public String setAddress(String address) {
+			return getExtensionsToWrite().put(ADDRESS_EXTENSION, address);
 		}
 
 		public void setProfileType(String profileType) {
