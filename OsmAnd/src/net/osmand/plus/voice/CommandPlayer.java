@@ -112,12 +112,6 @@ public abstract class CommandPlayer {
 		return jsScope;
 	}
 
-	private static File getTtsFileFromDir(@NonNull File voiceProviderDir) {
-		String ttsFileName = voiceProviderDir.getName()
-				.replace("-tts", "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS);
-		return new File(voiceProviderDir, ttsFileName);
-	}
-
 	public abstract CommandBuilder newCommandBuilder();
 
 	public abstract boolean supportsStructuredStreetNames();
@@ -125,6 +119,8 @@ public abstract class CommandPlayer {
 	public abstract List<String> playCommands(CommandBuilder builder);
 
 	public abstract void stop();
+
+	public abstract File getTtsFileFromDir(@NonNull File voiceProviderDir);
 
 	public String getLanguage() {
 		return language;
