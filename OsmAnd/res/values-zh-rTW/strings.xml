@@ -4455,4 +4455,21 @@
     <string name="shared_string_hide_slope">隱藏斜率</string>
     <string name="shared_string_grade">漸層</string>
     <string name="elevation_profile">海拔剖面</string>
+    <string name="gps_filter_hdop_desc">設定 HDOP 的最大允許值。
+\n大於設定參數的點將被隱藏。</string>
+    <string name="gps_filter_speed_altitude_desc">與設定間隔相符的軌跡點將在圖表與地圖上可見，其餘的將隱藏。</string>
+    <string name="gps_filter_smoothing_desc">設定點之間的距離閾值。
+\n距離最後一個可見點至少 X 距離的軌跡點將被隱藏。
+\n請注意，距離愈大，軌跡的幾何形狀就愈簡單。</string>
+    <string name="distance_between_points">點之間的距離</string>
+    <string name="gps_filter_precision">最小 GPS 精度</string>
+    <string name="gps_filter_smoothing">平滑</string>
+    <string name="save_changes_into_file">將變更儲存至檔案</string>
+    <string name="save_as_copy">另存為副本</string>
+    <string name="gps_filter_actions_description">OsmAnd 將套用變更至軌跡而不將其儲存至檔案中。您可以手動儲存變更。</string>
+    <string name="shared_string_gps_filter">GPS 過濾條件</string>
+    <string name="storage_migration_wrong_folder_warning">我們在選定的資料夾中找不到 OsmAnd 資料。請再試一次。</string>
+    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
+    <string name="shared_string_precision">精確</string>
+    <string name="shared_string_statistics">統計</string>
 </resources>
