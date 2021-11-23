@@ -654,7 +654,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			} else {
 				Set<Object> filter = new HashSet<>();
 				String cs = constraint.toString().toLowerCase();
-				for (GpxDisplayGroup g : getDisplayGroups()) {
+				for (GpxDisplayGroup g : getOriginalGroups()) {
 					for (GpxDisplayItem i : g.getModifiableList()) {
 						if (i.name.toLowerCase().contains(cs)) {
 							filter.add(i);
@@ -678,6 +678,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			}
 			adapter.notifyDataSetChanged();
 			expandAllGroups();
+			onSelectedGroupChanged();
 		}
 	}
 }
