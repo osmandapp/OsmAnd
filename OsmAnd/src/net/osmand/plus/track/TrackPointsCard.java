@@ -12,7 +12,6 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
@@ -23,6 +22,11 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.WptPt;
@@ -60,11 +64,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.content.ContextCompat;
 
 public class TrackPointsCard extends MapBaseCard implements OnChildClickListener, OnPointsDeleteListener,
 		OsmAndCompassListener, OsmAndLocationListener {
@@ -374,11 +373,8 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 
 		private final UpdateLocationViewCache locationViewCache;
 
-		private final String noAddressDetermined;
-
 		PointGPXAdapter() {
 			locationViewCache = app.getUIUtilities().getUpdateLocationViewCache();
-			noAddressDetermined = PointDescription.getAddressNotFoundStr(app);
 		}
 
 		public void synchronizeGroups(@NonNull List<GpxDisplayGroup> displayGroups) {
@@ -618,13 +614,10 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 		private void setupLocationData(@NonNull View container, @NonNull WptPt point) {
 			AppCompatImageView directionArrow = container.findViewById(R.id.direction_arrow);
 			TextView distanceText = container.findViewById(R.id.distance);
-			app.getUIUtilities().updateLocationView(locationViewCache, directionArrow, distanceText,
-					point.lat, point.lon);
+			app.getUIUtilities().updateLocationView(locationViewCache, directionArrow, distanceText, point.lat, point.lon);
 
-			String pointAddress = point.getAddress();
-			String addressToShow = Algorithms.isBlank(pointAddress) ? noAddressDetermined : pointAddress;
 			TextView addressContainer = container.findViewById(R.id.address);
-			addressContainer.setText(addressToShow);
+			addressContainer.setText(point.getAddress());
 		}
 
 		public int getGroupIndex(@NonNull GpxDisplayGroup group) {
