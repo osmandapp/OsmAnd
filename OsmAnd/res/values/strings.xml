@@ -103,6 +103,8 @@
     <string name="release_4_1">
     • Added initial support for Android Auto\n\n
     • User interface update for UTM coordinate search\n\n
+    • GPS Filter for GPX Tracks\n\n
+    • Elevation Widget (Pro)\n\n
     • Favorites: added ability to view recently used icons\n\n
     • Route planning: will use the selected profile after launch\n\n
     • Fixed Mapillary layer, the plugin is now disabled by default\n\n
