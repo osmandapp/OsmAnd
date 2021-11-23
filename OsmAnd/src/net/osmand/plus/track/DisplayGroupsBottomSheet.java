@@ -42,8 +42,8 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 	private TrackDisplayHelper displayHelper;
 	private SelectedGpxFile selectedGpxFile;
 
-	private List<SelectableItem> uiItems = new ArrayList<>();
-	private Map<SelectableItem, View> listViews = new HashMap<>();
+	private final List<SelectableItem> uiItems = new ArrayList<>();
+	private final Map<SelectableItem, View> listViews = new HashMap<>();
 	private LayoutInflater inflater;
 	private LinearLayout listContainer;
 	private TextView sizeIndication;
@@ -197,6 +197,11 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 	}
 
+	@Override
+	protected int getDismissButtonTextId() {
+		return R.string.shared_string_close;
+	}
+
 	public static DisplayGroupsBottomSheet showInstance(@NonNull AppCompatActivity activity,
 	                                                    @NonNull Fragment targetFragment,
 	                                                    boolean usedOnMap) {
@@ -217,5 +222,4 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 		TrackDisplayHelper getDisplayHelper();
 
 	}
-
 }

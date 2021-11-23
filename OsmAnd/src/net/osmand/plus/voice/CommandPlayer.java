@@ -3,6 +3,9 @@ package net.osmand.plus.voice;
 import android.content.Context;
 import android.media.AudioManager;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -20,9 +23,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public abstract class CommandPlayer {
 
@@ -61,8 +61,7 @@ public abstract class CommandPlayer {
 
 		File voicesDir = app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
 		File voiceProviderDir = new File(voicesDir, voiceProvider);
-		File ttsFile = getTtsFileFromDir(voiceProviderDir);
-		if (!ttsFile.exists()) {
+		if (!voiceProviderDir.exists()) {
 			throw new CommandPlayerException(app.getString(R.string.voice_data_unavailable));
 		}
 
@@ -113,12 +112,6 @@ public abstract class CommandPlayer {
 		return jsScope;
 	}
 
-	private static File getTtsFileFromDir(@NonNull File voiceProviderDir) {
-		String ttsFileName = voiceProviderDir.getName()
-				.replace("-tts", "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS);
-		return new File(voiceProviderDir, ttsFileName);
-	}
-
 	public abstract CommandBuilder newCommandBuilder();
 
 	public abstract boolean supportsStructuredStreetNames();
@@ -126,6 +119,8 @@ public abstract class CommandPlayer {
 	public abstract List<String> playCommands(CommandBuilder builder);
 
 	public abstract void stop();
+
+	public abstract File getTtsFileFromDir(@NonNull File voiceProviderDir);
 
 	public String getLanguage() {
 		return language;
