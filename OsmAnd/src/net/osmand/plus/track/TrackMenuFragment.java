@@ -526,7 +526,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			addCardViewToHeader(groupsCard);
 		} else {
 			MapActivity mapActivity = requireMapActivity();
-			groupsCard = new PointsGroupsCard(mapActivity, selectedGpxFile, pointsCard.getGroups());
+			groupsCard = new PointsGroupsCard(mapActivity, pointsCard.getGroups());
 			groupsCard.setListener(this);
 			headerContainer.addView(groupsCard.build(mapActivity));
 		}
@@ -712,7 +712,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					}
 					cardsContainer.addView(pointsCard.getView());
 				} else {
-					pointsCard = new TrackPointsCard(mapActivity, displayHelper);
+					pointsCard = new TrackPointsCard(mapActivity, displayHelper, selectedGpxFile);
 					pointsCard.setListener(this);
 					cardsContainer.addView(pointsCard.build(mapActivity));
 				}
@@ -807,6 +807,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (overviewCard != null && menuType == TrackMenuType.OVERVIEW && isCurrentRecordingTrack()) {
 			overviewCard.getBlockStatisticsBuilder().runUpdatingStatBlocksIfNeeded();
 		}
+		if (pointsCard != null) {
+			pointsCard.startListeningLocationUpdates();
+		}
 	}
 
 	@Override
@@ -820,6 +823,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		stopLocationUpdate();
 		if (overviewCard != null) {
 			overviewCard.getBlockStatisticsBuilder().stopUpdatingStatBlocks();
+		}
+		if (pointsCard != null) {
+			pointsCard.stopListeningLocationUpdates();
 		}
 	}
 

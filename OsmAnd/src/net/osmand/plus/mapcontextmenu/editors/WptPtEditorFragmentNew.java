@@ -497,7 +497,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	}
 
 	@Override
-	protected boolean isCategoryVisible(String name) {
+	protected boolean isCategoryVisible(String categoryName) {
 		WptPtEditor editor = getWptPtEditor();
 		if (selectedGpxHelper == null || editor == null || editor.getGpxFile() == null) {
 			return true;
@@ -509,8 +509,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 			selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(editor.getGpxFile().path);
 		}
 		if (selectedGpxFile != null) {
-			Set<String> hiddenGroups = selectedGpxFile.getHiddenGroups();
-			return !hiddenGroups.contains(name);
+			return !selectedGpxFile.isGroupHidden(categoryName);
 		}
 		return true;
 	}
