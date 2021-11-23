@@ -1147,7 +1147,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	public boolean isResultEmpty() {
 		SearchResultCollection res = getResultCollection();
-		return res == null || res.getCurrentSearchResults().size() == 0;
+		return res == null || res.isEmpty();
 	}
 
 	public void onSearchListFragmentResume(QuickSearchListFragment searchListFragment) {
@@ -1174,8 +1174,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					searchEditText.setText(searchQuery);
 					searchEditText.setSelection(searchQuery.length());
 				}
-				if (getResultCollection() != null) {
-					updateSearchResult(getResultCollection(), false);
+				SearchResultCollection res = getResultCollection();
+				if (res != null) {
+					updateSearchResult(res, false);
 					onSearchFinished(searchUICore.getPhrase());
 				}
 				break;
@@ -1769,11 +1770,13 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						final SearchCoreAPI regionApi = regionResultApi;
 						final SearchResultCollection regionCollection = regionResultCollection;
 						final boolean hasRegionCollection = (searchApi == regionApi && regionCollection != null);
+						List<SearchResult> originalResults;
 						if (hasRegionCollection) {
-							apiResults = regionCollection.getCurrentSearchResults();
+							originalResults = regionCollection.getCurrentSearchResults();
 						} else {
-							apiResults = results;
+							originalResults = results;
 						}
+						apiResults = updateSearchResultsInPlugins(originalResults);
 						regionResultApi = null;
 						regionResultCollection = null;
 						results = new ArrayList<>();
@@ -2016,9 +2019,27 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void onSearchFinished(SearchPhrase phrase) {
-		if (!OsmandPlugin.onSearchFinished(this, phrase, isResultEmpty())) {
+		if (isResultEmpty()) {
+			onEmptySearchResult(phrase);
+		}
+	}
+
+	private void onEmptySearchResult(SearchPhrase phrase) {
+		boolean uiUpdated = OsmandPlugin.onEmptySearchResult(this, phrase);
+		if (!uiUpdated) {
 			addMoreButton(searchUICore.isSearchMoreAvailable(phrase));
 		}
+	}
+
+	private List<SearchResult> updateSearchResultsInPlugins(List<SearchResult> results) {
+		List<SearchResult> list = new ArrayList<>();
+		for (SearchResult r : results) {
+			if (!OsmandPlugin.shouldFilterSearchResult(r)) {
+				OsmandPlugin.updateSearchResultIfNeeded(r);
+				list.add(r);
+			}
+		}
+		return list;
 	}
 
 	private void addMoreButton(boolean searchMoreAvailable) {

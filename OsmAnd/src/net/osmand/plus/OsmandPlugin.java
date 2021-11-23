@@ -59,6 +59,7 @@ import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.search.core.SearchPhrase;
+import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -578,8 +579,15 @@ public abstract class OsmandPlugin {
 	protected void optionsMenuFragment(FragmentActivity activity, Fragment fragment, ContextMenuAdapter optionsMenuAdapter) {
 	}
 
-	protected boolean searchFinished(QuickSearchDialogFragment searchFragment, SearchPhrase phrase, boolean isResultEmpty) {
+	protected boolean processEmptySearchResult(QuickSearchDialogFragment searchFragment, SearchPhrase phrase) {
 		return false;
+	}
+
+	protected boolean shouldFilterSearchResultImpl(SearchResult result) {
+		return false;
+	}
+
+	protected void updateSearchResult(SearchResult result) {
 	}
 
 	protected void newDownloadIndexes(Fragment fragment) {
@@ -866,12 +874,27 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	public static boolean onSearchFinished(QuickSearchDialogFragment searchFragment, SearchPhrase phrase, boolean isResultEmpty) {
+	public static boolean onEmptySearchResult(QuickSearchDialogFragment searchFragment, SearchPhrase phrase) {
 		boolean processed = false;
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			processed = plugin.searchFinished(searchFragment, phrase, isResultEmpty) || processed;
+			processed = plugin.processEmptySearchResult(searchFragment, phrase) || processed;
 		}
 		return processed;
+	}
+
+	public static boolean shouldFilterSearchResult(SearchResult searchResult) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
+			if (plugin.shouldFilterSearchResultImpl(searchResult)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static void updateSearchResultIfNeeded(SearchResult searchResult) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
+			plugin.updateSearchResult(searchResult);
+		}
 	}
 
 	public static void onNewDownloadIndexes(Fragment fragment) {

@@ -176,6 +176,10 @@ public class SearchUICore {
 			return Collections.unmodifiableList(searchResults);
 		}
 
+		public boolean isEmpty() {
+			return getCurrentSearchResults().size() == 0;
+		}
+
 		public SearchPhrase getPhrase() {
 			return phrase;
 		}

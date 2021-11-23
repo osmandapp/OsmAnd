@@ -23,6 +23,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
@@ -55,6 +56,7 @@ import net.osmand.plus.views.layers.DownloadedRegionsLayer;
 import net.osmand.plus.wikimedia.WikiImageHelper;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
+import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 
 import java.io.IOException;
@@ -423,8 +425,8 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected boolean searchFinished(final QuickSearchDialogFragment searchFragment, SearchPhrase phrase, boolean isResultEmpty) {
-		if (isResultEmpty && isSearchByWiki(phrase)) {
+	protected boolean processEmptySearchResult(final QuickSearchDialogFragment searchFragment, SearchPhrase phrase) {
+		if (isSearchByWiki(phrase)) {
 			if (!Version.isPaidVersion(app)) {
 				searchFragment.addSearchListItem(new QuickSearchFreeBannerListItem(app));
 			} else {
@@ -438,6 +440,27 @@ public class WikipediaPlugin extends OsmandPlugin {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	protected boolean shouldFilterSearchResultImpl(SearchResult result) {
+		if (result.object instanceof AbstractPoiType) {
+			// filter Wikipedia poi type
+			AbstractPoiType type = (AbstractPoiType) result.object;
+			return WIKI_PLACE.equals(type.getKeyName());
+		}
+		return false;
+	}
+
+	@Override
+	protected void updateSearchResult(SearchResult result) {
+		if (result.object instanceof PoiCategory) {
+			PoiCategory category = (PoiCategory) result.object;
+			if (OSM_WIKI_CATEGORY.equals(category.getKeyName())) {
+				// change Wikipedia POI category name to "Wikipedia (all languages)"
+				result.localeName = app.getString(R.string.wikipedia_all_languages);
+			}
+		}
 	}
 
 	@Override
