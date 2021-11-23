@@ -1938,7 +1938,7 @@ public class GPXUtilities {
 	}
 
 	public static String asString(GPXFile file) {
-		final Writer writer = new StringWriter();
+		Writer writer = new StringWriter();
 		writeGpx(writer, file, null);
 		return writer.toString();
 	}
@@ -1958,13 +1958,7 @@ public class GPXUtilities {
 			log.error("Error saving gpx", e); //$NON-NLS-1$
 			return e;
 		} finally {
-			if (output != null) {
-				try {
-					output.close();
-				} catch (IOException ignore) {
-					// ignore
-				}
-			}
+			Algorithms.closeStream(output);
 		}
 	}
 

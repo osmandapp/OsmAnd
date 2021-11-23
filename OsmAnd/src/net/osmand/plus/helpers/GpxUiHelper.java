@@ -68,10 +68,8 @@ import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IFillFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.MPPointF;
 
@@ -2359,7 +2357,7 @@ public class GpxUiHelper {
 			@Override
 			public void gpxSavingFinished(Exception errorMessage) {
 				if (errorMessage == null) {
-					GpxUiHelper.shareGpx(app, new File(gpxFile.path));
+					shareGpx(app, new File(gpxFile.path));
 				}
 			}
 		};
@@ -2414,14 +2412,15 @@ public class GpxUiHelper {
 
 	public static void shareGpx(@NonNull Context context, @NonNull File file) {
 		Uri fileUri = AndroidUtils.getUriForFile(context, file);
-		Intent sendIntent = new Intent(Intent.ACTION_SEND);
-		sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
-		sendIntent.setType("application/gpx+xml");
-		sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.putExtra(Intent.EXTRA_STREAM, fileUri);
+		intent.setType("application/gpx+xml");
+		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 		if (context instanceof OsmandApplication) {
-			sendIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		}
-		AndroidUtils.startActivityIfSafe(context, sendIntent);
+		Intent chooserIntent = Intent.createChooser(intent, context.getString(R.string.shared_string_share));
+		AndroidUtils.startActivityIfSafe(context, chooserIntent);
 	}
 
 	@NonNull
