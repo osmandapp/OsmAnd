@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="press_again_to_change_the_map_orientation">Quichatz un còp de mai per cambiar l\'orientacion de la mapa</string>
     <string name="shared_string_color_magenta">Magenta</string>
@@ -496,4 +496,15 @@
     <string name="shared_string_revert">Tornar arrier</string>
     <string name="clear_confirmation_msg">Volètz netejar %1$s\?</string>
     <string name="dialogs_and_notifications_title">Dialògs e notificacions</string>
+    <string name="map_widget_distance_by_tap">Distança de la tòca</string>
+    <string name="screen_alerts">Alèrtas d\'ecran</string>
+    <string name="download_depth_countours">Isobates</string>
+    <string name="coordinates">Coordonadas</string>
+    <string name="shared_string_next">Seguent</string>
+    <string name="active_markers">Marcadors actius</string>
+    <string name="markers_history">Cronologia dei marcadors</string>
+    <string name="routing_attr_length_name">Longor maximala</string>
+    <string name="map_during_navigation">Mapa pendent la navegacion</string>
+    <string name="search_more">Cercar mai…</string>
+    <string name="vehicle_parameters">Paramètres dau veïcul</string>
 </resources>
