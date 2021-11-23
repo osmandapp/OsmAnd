@@ -4466,7 +4466,7 @@
     <string name="shared_string_uphill">Подъём</string>
     <string name="shared_string_downhill">Спуск</string>
     <string name="elevation_profile">Профиль высоты</string>
-    <string name="shared_string_grade">Уклон</string>
+    <string name="shared_string_grade">Макс. уклон</string>
     <string name="shared_string_statistics">Статистика</string>
     <string name="distance_between_points">Расстояние между точками</string>
     <string name="gps_filter_precision">Мин. точность GPS</string>
