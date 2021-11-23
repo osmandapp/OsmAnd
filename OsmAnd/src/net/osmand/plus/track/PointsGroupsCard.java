@@ -1,11 +1,6 @@
 package net.osmand.plus.track;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
@@ -17,20 +12,21 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 public class PointsGroupsCard extends MapBaseCard {
 
 	public static final int SELECT_GROUP_INDEX = 0;
 
 	private GpxDisplayGroup selectedGroup;
-	private final SelectedGpxFile selectedGpxFile;
 	private final List<GpxDisplayGroup> displayGroups = new ArrayList<>();
 
 	public PointsGroupsCard(@NonNull MapActivity mapActivity,
-							@NonNull SelectedGpxFile selectedGpxFile,
-							@NonNull List<GpxDisplayGroup> groups) {
+	                        @NonNull List<GpxDisplayGroup> groups) {
 		super(mapActivity);
 		displayGroups.addAll(groups);
-		this.selectedGpxFile = selectedGpxFile;
 	}
 
 	@Override
@@ -81,5 +77,4 @@ public class PointsGroupsCard extends MapBaseCard {
 		recyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
 		selectionAdapter.notifyDataSetChanged();
 	}
-
 }
