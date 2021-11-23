@@ -19,7 +19,7 @@
 	<View
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:background="?divider_color"
+		android:background="?attr/divider_color_basic"
 		android:layout_marginStart="@dimen/content_padding" />
 
 	<include
