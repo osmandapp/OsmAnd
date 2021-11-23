@@ -1,11 +1,11 @@
 package net.osmand.plus.mapcontextmenu.other;
 
-import static net.osmand.util.Algorithms.capitalizeFirstLetter;
-
+import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,6 +24,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 
 public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalSelectionAdapter.ItemViewHolder> {
@@ -93,8 +95,18 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 			AndroidUtils.setBackground(holder.button, buttonBackground);
 		}
 		textView.setTextColor(itemColor);
+		if (item.isTextItalic()) {
+			textView.setTypeface(null, Typeface.ITALIC);
+		}
+		int iconColor = item.iconColorId != INVALID_ID ? app.getColor(item.iconColorId) : itemColor;
 		if (item.iconId != INVALID_ID) {
-			imageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(item.iconId, itemColor));
+			imageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(item.iconId, iconColor));
+		}
+		if (item.iconSizePx != INVALID_ID && imageView.getLayoutParams() != null) {
+			LayoutParams imgLayoutParams = imageView.getLayoutParams();
+			imgLayoutParams.height = item.iconSizePx;
+			imgLayoutParams.width = item.iconSizePx;
+			imageView.requestLayout();
 		}
 		AndroidUiHelper.updateVisibility(textView, !item.isShowOnlyIcon());
 		AndroidUiHelper.updateVisibility(imageView, item.iconId != INVALID_ID);
@@ -180,6 +192,9 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 		private int titleColorId = INVALID_ID;
 		private Object object;
 		private int iconId = INVALID_ID;
+		private int iconColorId = INVALID_ID;
+		private int iconSizePx = INVALID_ID;
+		private boolean isTextItalic = false;
 		private boolean showOnlyIcon;
 
 		public HorizontalSelectionItem(String title) {
@@ -221,6 +236,30 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 
 		public int getIconId() {
 			return iconId;
+		}
+
+		public int getIconColorId() {
+			return iconColorId;
+		}
+
+		public void setIconColorId(int iconColorId) {
+			this.iconColorId = iconColorId;
+		}
+
+		public boolean isTextItalic() {
+			return isTextItalic;
+		}
+
+		public void setTextItalic(boolean textItalic) {
+			isTextItalic = textItalic;
+		}
+
+		public int getIconSizePx() {
+			return iconSizePx;
+		}
+
+		public void setIconSizePx(int iconSizePx) {
+			this.iconSizePx = iconSizePx;
 		}
 
 		public Object getObject() {

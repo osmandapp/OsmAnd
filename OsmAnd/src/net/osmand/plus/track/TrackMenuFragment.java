@@ -529,7 +529,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			addCardViewToHeader(groupsCard);
 		} else {
 			MapActivity mapActivity = requireMapActivity();
-			groupsCard = new PointsGroupsCard(mapActivity, pointsCard.getGroups());
+			groupsCard = new PointsGroupsCard(mapActivity, pointsCard.getGroups(), selectedGpxFile);
 			groupsCard.setListener(this);
 			headerContainer.addView(groupsCard.build(mapActivity));
 		}
@@ -675,6 +675,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			app.getSelectedGpxHelper().updateSelectedGpxFile(selectedGpxFile);
 			mapActivity.refreshMap();
 			updateDisplayGroupsWidget();
+			updatePointGroupsCard();
 		}
 	}
 
@@ -1320,10 +1321,14 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (pointsCard != null) {
 			pointsCard.updateContent();
 		}
+		updatePointGroupsCard();
+		setupCards();
+	}
+
+	private void updatePointGroupsCard() {
 		if (groupsCard != null) {
 			groupsCard.updateContent();
 		}
-		setupCards();
 	}
 
 	@Override
