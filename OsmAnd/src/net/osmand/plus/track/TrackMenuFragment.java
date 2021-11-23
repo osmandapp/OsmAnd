@@ -1125,7 +1125,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	private void fitTrackOnMap() {
-		GPXFile gpxFile = getGpx();
+		GPXFile gpxFile = displayHelper.getGpxFileToDisplay();
 		if (gpxFile != null) {
 			QuadRect rect = gpxFile.getRect();
 			adjustMapPosition(rect);

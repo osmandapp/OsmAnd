@@ -129,4 +129,9 @@ public class GpsFilterGraphCard extends GpsFilterBaseCard {
 			}
 		};
 	}
+
+	@Override
+	public void onFinishFiltering() {
+		updateMainContent();
+	}
 }
