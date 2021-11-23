@@ -1318,8 +1318,8 @@
     <string name="shared_string_gpx_tracks">Путање</string>
     <string name="routing_attr_driving_style_name">Начин вожње</string>
     <string name="route_altitude">Успон пута</string>
-    <string name="altitude_descent">Силазан</string>
-    <string name="altitude_ascent">Узлазан</string>
+    <string name="altitude_descent">Низбрдо</string>
+    <string name="altitude_ascent">Узбрдо</string>
     <string name="altitude_range">Распон висине</string>
     <string name="average_altitude">Просечна висина</string>
     <string name="shared_string_time">Време</string>
@@ -4336,30 +4336,30 @@
 \n • Ажурирања за OsmAnd Уживо померена у „Преузми карте &gt; Надоградње”
 \n
 \n</string>
-    <string name="copying_file">Копирање датотеке %1$s</string>
+    <string name="copying_file">Копирање фајла %1$s…</string>
     <string name="progress_complete">%1$s завршено</string>
     <string name="storage_copied_files_size">Копирано %1$s фајлова %2$s</string>
     <string name="storage_copying_files_size">Копирање %1$s фајлова %2$s</string>
-    <string name="files_remaining">Преостале датотеке: %1$s %2$s</string>
-    <string name="storage_found_files_descr">Додирните „%1$s]“ да бисте копирали %2$s датотеке са „%3$s“ на „%4$s“. Може потрајати неко време.</string>
+    <string name="files_remaining">Преостали фајлови: %1$s %2$s</string>
+    <string name="storage_found_files_descr">Додирните „%1$s]“ да бисте копирали %2$s фајла са „%3$s“ на „%4$s“. Може потрајати неко време.</string>
     <string name="from_to_with_params">Од %1$s до %2$s</string>
     <string name="storage_found_files_size">Пронађено %1$s фајлова %2$s</string>
-    <string name="shared_string_skip_warning">Да ли сте сигурни да желите да прескочите миграцију\? OsmAnd више нема приступ вашим датотекама у дељеном складишту.
+    <string name="shared_string_skip_warning">Прескочити миграцију\? OsmAnd више нема приступ вашим датотекама у Дељеном складишту.
 \n
-\nАпликација ће почети у новој фасцикли са Вашим подацима.</string>
-    <string name="shared_storage_last_step">Моћи ћете да дефинишете ново складиште података пошто одаберете Дељено складиште.</string>
-    <string name="shared_storage_third_step">Дајте дозволу за приступ овој фасцикли. Без дозволе, OsmAnd не може да прекопира фајлове.</string>
+\nАпликација ће започети са коришћењем Ваше нове фасцикле података.</string>
+    <string name="shared_storage_last_step">Можете одредити нову фасциклу са подацима после.</string>
+    <string name="shared_storage_third_step">Одобрите дозволу за приступ овој фасцикли. Без ње, OsmAnd не може да прекопира фајлове.</string>
     <string name="shared_storage_first_step">Притисните „%1$s”.
 \nМенаџер фајлова отвара где треба да нађете и отворите osmand фасциклу.</string>
     <string name="shared_storage_second_step">Кликните „Користи ову фасциклу”.</string>
-    <string name="copying_completed">Копирање завршено</string>
+    <string name="copying_completed">Ископирано</string>
     <string name="shared_storage_migration">Миграција на дељено складиште</string>
     <string name="shared_string_migration">Миграција</string>
     <string name="icon_group_education">Образовање</string>
     <string name="icon_group_industrial">Индустрија</string>
-    <string name="delete_history_items_descr">Да ли сте сигурни да желите да обришете одабране ставке из историјата\?</string>
+    <string name="delete_history_items_descr">Обрисати одабране ставке из историјата\?</string>
     <string name="delete_history_items">Обрисати %1$s ставки из историјата\?</string>
-    <string name="quick_action_toggle_preference">Прекидач да мењате одабрано стање подешавања.</string>
+    <string name="quick_action_toggle_preference">Прекидач да мењате стање подешавања.</string>
     <string name="display_route_tracks_as_poi">Прикаже стазе као тачке од интереса</string>
     <string name="shared_string_travelbooks">Дневници путовања</string>
     <string name="use_external_timestamps">Користи спољне временске ознаке</string>
@@ -4368,8 +4368,8 @@
     <string name="use_external_timestamps_description">Користи временске ознаке усмеривача са мреже да подесите процењена времена и просечну брзину</string>
     <string name="shared_storage_migration_descr">Због измена права приступа складишту у Андроид систему, OsmAnd више не може да користи %1$s.
 \n
-\nМорате да прекопирате све Ваше податке на нову локацију складишта.</string>
-    <string name="folder_access_denied">Потребне су дозволе за приступ одабраној фасцикли.</string>
+\nПрекопирајте све Ваше податке у нову фасциклу.</string>
+    <string name="folder_access_denied">Потребне дозволе за приступ одабраној фасцикли.</string>
     <string name="shared_string_copy_to">Копирај у</string>
     <string name="start_copying">Започни копирање</string>
     <string name="skip_confirmation">Да, прескочи</string>
@@ -4436,4 +4436,29 @@
     <string name="transparent_status_bar">Транспарентна статусна трака</string>
     <string name="shared_string_details">Детаљи</string>
     <string name="not_enough_contributions_descr">Минимум од %1$s измена кроз период од последња два месеца %2$s је потребан да добијете приступ неограниченим ажурирањима карте сваких сат времена.</string>
+    <string name="shared_string_gps_filter">GPS филтер</string>
+    <string name="storage_migration_wrong_folder_warning">Нема OsmAnd података у одабраној фасцикли. Покушајте поново.</string>
+    <string name="exit_without_saving_warning">Да ли сте сигурни да желите да изађете без снимања\? Изгубићете све измене.</string>
+    <string name="elevation_profile">Висински профил</string>
+    <string name="memory_allocated_for_routing_ds">Веће вредности меморије убрзавају израчунавање дужих рута (преко 500km), али утичу на перформансе других апликација.
+\nНема утицај на брзину израчунавања краћих рута.</string>
+    <string name="shared_string_uphill">Узбрдо</string>
+    <string name="gps_filter_precision">Најмања GPS прецизност</string>
+    <string name="save_as_copy">Сачувај као копију</string>
+    <string name="shared_string_precision">Прецизност</string>
+    <string name="distance_between_points">Удаљеност између тачака</string>
+    <string name="shared_string_statistics">Статистике</string>
+    <string name="save_changes_into_file">Сачувај измене у фајл</string>
+    <string name="gps_filter_smoothing">Углачавање</string>
+    <string name="reading_files">Читам фајлове…</string>
+    <string name="ltr_or_rtl_combine">%1$s%2$s</string>
+    <string name="memory_allocated_for_routing">Меморија додељена за израчунавање пута</string>
+    <string name="no_items_selected_warning">Одаберите бар једну ставку</string>
+    <string name="shared_string_hide_all">Сакриј све</string>
+    <string name="shared_string_downhill">Низбрдо</string>
+    <string name="fold_unfold">склопи/развиј</string>
+    <string name="app_profile_type">Тип апликативних профила</string>
+    <string name="add_to_group">Додај у групу</string>
+    <string name="app_modes_options">Одаберите режим апликације</string>
+    <string name="shared_string_memory">Меморија</string>
 </resources>
