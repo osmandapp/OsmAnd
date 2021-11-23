@@ -1,4 +1,4 @@
-package net.osmand.plus.activities;
+package net.osmand.plus.myplaces;
 
 import android.app.Activity;
 import android.content.Context;
@@ -27,6 +27,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
