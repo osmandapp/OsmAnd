@@ -423,20 +423,6 @@ public class OsmandRenderer {
 		};
 	}
 
-	Comparator<MapDataObjectPrimitive> sortByPriority() {
-		return new Comparator<MapDataObjectPrimitive>() {
-
-			@Override
-			public int compare(MapDataObjectPrimitive i, MapDataObjectPrimitive j) {
-				if (i.priority == j.priority) {
-					return sortByOrder().compare(i, j);
-				}
-				return (i.priority < j.priority ? -1 : 1);
-			}
-
-		};
-	}
-	
 	Comparator<MapDataObjectPrimitive> sortPolygonsOrder() {
 		return new Comparator<MapDataObjectPrimitive>() {
 
@@ -527,9 +513,8 @@ public class OsmandRenderer {
 		}
 		Collections.sort(polygonsArray, sortByOrder());
 		Collections.sort(pointsArray, sortByOrder());
-		Collections.sort(linesArray, sortByPriority());
-		filterLinesByDensity(rc, linesResArray, linesArray);
 		Collections.sort(linesResArray, sortByOrder());
+		filterLinesByDensity(rc, linesResArray, linesArray);
 	}
 	
 	void filterLinesByDensity(RenderingContext rc, List<MapDataObjectPrimitive>  linesResArray,
