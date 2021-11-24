@@ -122,6 +122,8 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 			updateUpDownButton(upDownButton, false);
 			AndroidUiHelper.updateVisibility(content, false);
 			return;
+		} else {
+			updateUpDownButton(upDownButton, content.getVisibility() == View.VISIBLE);
 		}
 
 		header.setOnClickListener(v -> {
@@ -151,6 +153,7 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 
 	private void setupSlider(@NonNull final View container, @NonNull final GpsFilter filter) {
 		boolean range = filter.isRangeSupported();
+		boolean enabled = filter.getMinValue() != filter.getMaxValue();
 		Slider slider = container.findViewById(R.id.filter_slider);
 		RangeSlider rangeSlider = container.findViewById(R.id.filter_range_slider);
 
@@ -158,39 +161,47 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 		AndroidUiHelper.updateVisibility(rangeSlider, range);
 
 		if (range) {
-			rangeSlider.setValueFrom((float) filter.getMinValue());
-			rangeSlider.setValueTo((float) filter.getMaxValue());
-			rangeSlider.setValues(((float) filter.getSelectedMinValue()), ((float) filter.getSelectedMaxValue()));
-			rangeSlider.addOnChangeListener((slider1, value, fromUser) -> {
-				List<Float> values = rangeSlider.getValues();
-				if (fromUser && values.size() == 2) {
-					filter.updateValues((values.get(0)), values.get(1));
-					updateDisplayedFilterNumbers(container, filter);
-					if (gpxDataItem != null) {
-						boolean updated = gpxDbHelper.updateGpsFilters(gpxDataItem, filteredSelectedGpxFile);
-						if (updated) {
-							gpsFilterHelper.filterGpxFile(filteredSelectedGpxFile, true);
+			rangeSlider.setEnabled(enabled);
+			rangeSlider.clearOnChangeListeners();
+			if (enabled) {
+				rangeSlider.setValueFrom((float) filter.getMinValue());
+				rangeSlider.setValueTo((float) filter.getMaxValue());
+				rangeSlider.setValues(((float) filter.getSelectedMinValue()), ((float) filter.getSelectedMaxValue()));
+				rangeSlider.addOnChangeListener((slider1, value, fromUser) -> {
+					List<Float> values = rangeSlider.getValues();
+					if (fromUser && values.size() == 2) {
+						filter.updateValues((values.get(0)), values.get(1));
+						updateDisplayedFilterNumbers(container, filter);
+						if (gpxDataItem != null) {
+							boolean updated = gpxDbHelper.updateGpsFilters(gpxDataItem, filteredSelectedGpxFile);
+							if (updated) {
+								gpsFilterHelper.filterGpxFile(filteredSelectedGpxFile, true);
+							}
 						}
 					}
-				}
-			});
+				});
+			}
 			UiUtilities.setupSlider(rangeSlider, nightMode, ColorUtilities.getActiveColor(app, nightMode), false);
 		} else {
-			slider.setValueFrom((float) filter.getMinValue());
-			slider.setValueTo((float) filter.getMaxValue());
-			slider.setValue((float) filter.getSelectedMaxValue());
-			slider.addOnChangeListener((slider1, value, fromUser) -> {
-				if (fromUser) {
-					filter.updateValue((slider.getValue()));
-					updateDisplayedFilterNumbers(container, filter);
-					if (gpxDataItem != null) {
-						boolean updated = gpxDbHelper.updateGpsFilters(gpxDataItem, filteredSelectedGpxFile);
-						if (updated) {
-							gpsFilterHelper.filterGpxFile(filteredSelectedGpxFile, true);
+			slider.setEnabled(enabled);
+			slider.clearOnChangeListeners();
+			if (enabled) {
+				slider.setValueFrom((float) filter.getMinValue());
+				slider.setValueTo((float) filter.getMaxValue());
+				slider.setValue((float) filter.getSelectedMaxValue());
+				slider.addOnChangeListener((slider1, value, fromUser) -> {
+					if (fromUser) {
+						filter.updateValue((slider.getValue()));
+						updateDisplayedFilterNumbers(container, filter);
+						if (gpxDataItem != null) {
+							boolean updated = gpxDbHelper.updateGpsFilters(gpxDataItem, filteredSelectedGpxFile);
+							if (updated) {
+								gpsFilterHelper.filterGpxFile(filteredSelectedGpxFile, true);
+							}
 						}
 					}
-				}
-			});
+				});
+			}
 			UiUtilities.setupSlider(slider, nightMode, ColorUtilities.getActiveColor(app, nightMode));
 		}
 	}
@@ -204,5 +215,10 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 
 		TextView rightText = container.findViewById(R.id.right_text);
 		rightText.setText(filter.getRightText(app));
+	}
+
+	@Override
+	public void onFinishFiltering() {
+		updatePointsRatio();
 	}
 }

@@ -495,8 +495,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private void adjustMapPosition(int y) {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && mapActivity.getMapView() != null) {
-			GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		if (mapActivity != null) {
+			mapActivity.getMapView();
+			GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
 			QuadRect r = gpxFile.getRect();
 
 			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
