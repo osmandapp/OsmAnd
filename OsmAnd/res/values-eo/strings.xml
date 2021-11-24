@@ -4460,4 +4460,13 @@
 \n
 \nKopiu ĉiujn viajn datumojn al nova dosierujo.</string>
     <string name="not_enough_contributions_descr">Almenaŭ %1$s kontribuoj al OpenStreetMap dum la antaŭaj du monatoj (%2$s) estas necesaj por akiri senlimajn ĉiuhorajn map-ĝisdatigojn.</string>
+    <string name="shared_string_statistics">Statistiko</string>
+    <string name="gps_filter_hdop_desc">Agordi maksimuman permesatan valoron de la horizontala precizo.
+\nPunktoj registritaj kun malplia precizo estos kaŝitaj.</string>
+    <string name="gps_filter_speed_altitude_desc">Nur punktoj de la spuro ene la difinita amplekso de rapidoj estos videblaj sur la mapo kaj diagramo, aliaj punktoj estos kaŝitaj.</string>
+    <string name="distance_between_points">Distanco inter punktoj</string>
+    <string name="shared_string_precision">Precizeco</string>
+    <string name="gps_filter_smoothing_desc">Agordi la sojlan distancon inter punktoj.
+\nPunktoj de la spuro disigitaj per distanco malplia ol la difinita estos kaŝitaj.
+\nJu pli granda la sojla distanco, des pli simpla la geometrio de la spuro estos.</string>
 </resources>
