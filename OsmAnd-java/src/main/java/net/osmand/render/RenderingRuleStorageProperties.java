@@ -98,7 +98,7 @@ public class RenderingRuleStorageProperties {
 	public static final String TEXT_WRAP_WIDTH = "textWrapWidth";
 	public static final String SHADOW_LEVEL = "shadowLevel";
 	public static final String ADD_POINT = "addPoint";
-	public static final String RENDERING_PRIORITY = "renderingPriority";
+	public static final String DENSITY_PRIORITY = "densityPriority";
 
 	
 	public RenderingRuleProperty R_TEST;
@@ -186,7 +186,7 @@ public class RenderingRuleStorageProperties {
 	public RenderingRuleProperty R_TEXT_HALO_COLOR;
 	public RenderingRuleProperty R_TEXT_WRAP_WIDTH;
 	public RenderingRuleProperty R_ADD_POINT;
-	public RenderingRuleProperty R_RENDERING_PRIORITY;
+	public RenderingRuleProperty R_DENSITY_PRIORITY;
 
 	final Map<String, RenderingRuleProperty> properties;
 	// C++
@@ -314,7 +314,7 @@ public class RenderingRuleStorageProperties {
 		R_ADD_POINT = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(ADD_POINT));
 		R_IGNORE_POLYGON_AS_POINT_AREA = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(IGNORE_POLYGON_AS_POINT_AREA));
 
-		R_RENDERING_PRIORITY = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(RENDERING_PRIORITY));
+		R_DENSITY_PRIORITY = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(DENSITY_PRIORITY));
 	}
 
 	public RenderingRuleProperty get(String name) {
