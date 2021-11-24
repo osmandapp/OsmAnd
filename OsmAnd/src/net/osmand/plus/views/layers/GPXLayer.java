@@ -718,7 +718,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private String getAvailableOrDefaultColoringType(SelectedGpxFile selectedGpxFile) {
-		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
 
 		if (hasTrackDrawInfoForTrack(gpxFile)) {
 			return trackDrawInfo.getColoringType().getName(trackDrawInfo.getRouteInfoAttribute());

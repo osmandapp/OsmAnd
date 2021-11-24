@@ -37,6 +37,8 @@ import androidx.fragment.app.Fragment;
 
 public abstract class GpsFilterBaseCard extends MapBaseCard {
 
+	public static final int RESET_FILTERS_BUTTON_INDEX = 0;
+
 	protected final GpsFilterHelper gpsFilterHelper;
 	protected final FilteredSelectedGpxFile filteredSelectedGpxFile;
 
@@ -88,6 +90,7 @@ public abstract class GpsFilterBaseCard extends MapBaseCard {
 	private void onActionButtonClick(@NonNull ActionButton actionButton) {
 		if (actionButton == ActionButton.RESET_TO_ORIGINAL) {
 			filteredSelectedGpxFile.resetFilters(app);
+			notifyButtonPressed(RESET_FILTERS_BUTTON_INDEX);
 		} else if (actionButton == ActionButton.SAVE_AS_COPY) {
 			saveAsCopy();
 		} else if (actionButton == ActionButton.SAVE_INTO_FILE) {
@@ -187,6 +190,8 @@ public abstract class GpsFilterBaseCard extends MapBaseCard {
 	private boolean isSourceFileSaved() {
 		return new File(filteredSelectedGpxFile.getGpxFile().path).exists();
 	}
+
+	public abstract void onFinishFiltering();
 
 	private enum ActionButton {
 

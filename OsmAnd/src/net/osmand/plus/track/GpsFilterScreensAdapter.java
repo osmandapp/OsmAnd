@@ -10,6 +10,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip.CustomTabProvider;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager.ViewAtPositionInterface;
 
@@ -22,8 +24,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerAdapter;
 
+import static net.osmand.plus.track.GpsFilterBaseCard.RESET_FILTERS_BUTTON_INDEX;
+
 public class GpsFilterScreensAdapter extends PagerAdapter implements CustomTabProvider,
-		ViewAtPositionInterface {
+		ViewAtPositionInterface, CardListener {
 
 	private static final int SCREENS_NUMBER = 2;
 
@@ -59,7 +63,13 @@ public class GpsFilterScreensAdapter extends PagerAdapter implements CustomTabPr
 		cards.get(currentPosition).softScrollToActionCard();
 	}
 
-	public void updateContent() {
+	public void onFinishFiltering() {
+		for (GpsFilterBaseCard card : cards) {
+			card.onFinishFiltering();
+		}
+	}
+
+	public void onResetFilters() {
 		for (GpsFilterBaseCard card : cards) {
 			card.update();
 		}
@@ -121,6 +131,7 @@ public class GpsFilterScreensAdapter extends PagerAdapter implements CustomTabPr
 		GpsFilterBaseCard card = position == 0
 				? new GpsFiltersCard(mapActivity, target, filteredSelectedGpxFile)
 				: new GpsFilterGraphCard(mapActivity, target, filteredSelectedGpxFile);
+		card.setListener(this);
 		cards.add(card);
 		View cardView = card.build(mapActivity);
 		container.addView(cardView);
@@ -143,5 +154,20 @@ public class GpsFilterScreensAdapter extends PagerAdapter implements CustomTabPr
 	public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object item) {
 		cards.remove(position);
 		container.removeView(((View) item));
+	}
+
+	@Override
+	public void onCardLayoutNeeded(@NonNull BaseCard card) {
+	}
+
+	@Override
+	public void onCardPressed(@NonNull BaseCard card) {
+	}
+
+	@Override
+	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
+		if (buttonIndex == RESET_FILTERS_BUTTON_INDEX) {
+			onResetFilters();
+		}
 	}
 }
