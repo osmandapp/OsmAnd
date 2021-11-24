@@ -1825,7 +1825,7 @@
     <string name="weekly">Cada semana</string>
     <string name="morning">Por la mañana</string>
     <string name="night">Por la noche</string>
-    <string name="shared_string_not_selected">No marcado(s)</string>
+    <string name="shared_string_not_selected">Sin marcar</string>
     <string name="select_month_and_country">Mes y país:</string>
     <string name="shared_string_type">Tipo</string>
     <string name="starting_point">Punto de partida</string>
@@ -4382,7 +4382,7 @@
     <string name="continue_on_phone">Continuar en el dispositivo móvil</string>
     <string name="shared_storage_warning_description">Debido a las nuevas reglas de Android, a partir de noviembre de 2021, OsmAnd 4.2 perderá el acceso al almacenamiento compartido.
 \n
-\nPor favor, mueva la carpeta de datos del almacenamiento compartido al almacenamiento disponible, de lo contrario la aplicación perderá el acceso a los datos como mapas sin conexión, trazas GPX y etc.</string>
+\nPor favor, mueve la carpeta de datos del almacenamiento compartido al almacenamiento disponible, de lo contrario la aplicación perderá el acceso a los datos como mapas sin conexión, trazas GPX y etc.</string>
     <string name="search_history_is_disabled_descr">Puedes activar el historial de búsqueda en los ajustes.</string>
     <string name="is_disabled">%1$s desactivado</string>
     <string name="clear_all_history_warning">¿Borrar todos los registros del historial de la aplicación, incluyendo el historial de búsqueda, navegación y marcadores\?</string>
@@ -4458,4 +4458,27 @@
     <string name="display_groups_visibility_dialog_description">Puedes controlar la visibilidad de los grupos en el mapa. Si la traza está oculta, todos los grupos también lo estarán.</string>
     <string name="shared_string_hide_all">Ocultar todo</string>
     <string name="exit_without_saving_warning">¿Salir sin guardar\? Se perderán todos los cambios.</string>
+    <string name="shared_string_show_slope">Mostrar pendiente</string>
+    <string name="shared_string_hide_slope">Ocultar pendiente</string>
+    <string name="shared_string_grade">Calificación</string>
+    <string name="shared_string_uphill">Ascenso</string>
+    <string name="shared_string_downhill">Descenso</string>
+    <string name="elevation_profile">Perfil de elevación</string>
+    <string name="gps_filter_hdop_desc">Define el valor máximo permitido para el HDOP.
+\nSe ocultarán los puntos mayores al parámetro definido.</string>
+    <string name="gps_filter_speed_altitude_desc">Los puntos de la traza que coincidan con el intervalo definido serán visibles en el gráfico y el mapa, el resto se ocultará.</string>
+    <string name="gps_filter_smoothing_desc">Define el umbral de distancia entre puntos.
+\nLos puntos de la traza que estén a una distancia mínima de X del último punto visible, se ocultarán.
+\nTen cuidado, cuanto mayor sea la distancia, más simple será la geometría de la traza.</string>
+    <string name="gps_filter_smoothing">Suavizado</string>
+    <string name="shared_string_statistics">Estadísticas</string>
+    <string name="storage_migration_wrong_folder_warning">No podemos encontrar los datos de OsmAnd en la carpeta elegida. Inténtelo de nuevo.</string>
+    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
+    <string name="gps_filter_precision">Precisión mínima del GPS</string>
+    <string name="save_changes_into_file">Guardar cambios en archivo</string>
+    <string name="shared_string_precision">Precisión</string>
+    <string name="distance_between_points">Distancia entre puntos</string>
+    <string name="save_as_copy">Guardar como copia</string>
+    <string name="gps_filter_actions_description">OsmAnd aplica cambios a la traza sin guardarla en el archivo. Puede guardar los cambios manualmente.</string>
+    <string name="shared_string_gps_filter">Filtro del GPS</string>
 </resources>

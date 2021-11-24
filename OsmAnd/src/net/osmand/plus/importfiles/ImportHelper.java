@@ -18,6 +18,7 @@ import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SETTINGS_TYPE_LIST_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
 
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -29,6 +30,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.provider.Settings;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -350,19 +352,22 @@ public class ImportHelper {
 		return error;
 	}
 
-	public void chooseFileToImport(final ImportType importType, final CallbackWithObject callback) {
-		final MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
-			return;
+	public void chooseFileToImport(@NonNull ImportType importType, @Nullable CallbackWithObject<?> callback) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			try {
+				Intent intent = ImportHelper.getImportTrackIntent();
+				ActivityResultListener listener = getImportFileResultListener(importType, callback);
+				mapActivity.startActivityForResult(intent, IMPORT_FILE_REQUEST);
+				mapActivity.registerActivityResultListener(listener);
+			} catch (ActivityNotFoundException e) {
+				Toast.makeText(mapActivity, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
+			}
 		}
-		final OsmandApplication app = mapActivity.getMyApplication();
-		Intent intent = ImportHelper.getImportTrackIntent();
-		if (!AndroidUtils.isIntentSafe(app, intent)) {
-			app.showToastMessage(R.string.no_activity_for_intent);
-			return;
-		}
+	}
 
-		ActivityResultListener listener = new ActivityResultListener(IMPORT_FILE_REQUEST, (resultCode, resultData) -> {
+	private ActivityResultListener getImportFileResultListener(@NonNull ImportType importType, @Nullable CallbackWithObject callback) {
+		return new ActivityResultListener(IMPORT_FILE_REQUEST, (resultCode, resultData) -> {
 			if (resultCode == RESULT_OK) {
 				Uri data = resultData.getData();
 				if (data == null) {
@@ -371,15 +376,14 @@ public class ImportHelper {
 				String scheme = data.getScheme();
 				String fileName = "";
 				if ("file".equals(scheme)) {
-					final String path = data.getPath();
+					String path = data.getPath();
 					if (path != null) {
 						fileName = new File(path).getName();
 					}
 				} else if ("content".equals(scheme)) {
 					fileName = getNameFromContentUri(app, data);
 				}
-
-				if (fileName.endsWith(importType.getExtension())) {
+				if (fileName != null && fileName.endsWith(importType.getExtension())) {
 					if (importType.equals(ImportType.SETTINGS)) {
 						handleOsmAndSettingsImport(data, fileName, resultData.getExtras(), callback);
 					} else if (importType.equals(ImportType.ROUTING)) {
@@ -391,9 +395,6 @@ public class ImportHelper {
 				}
 			}
 		});
-
-		mapActivity.registerActivityResultListener(listener);
-		mapActivity.startActivityForResult(intent, IMPORT_FILE_REQUEST);
 	}
 
 	public static Intent getImportTrackIntent() {

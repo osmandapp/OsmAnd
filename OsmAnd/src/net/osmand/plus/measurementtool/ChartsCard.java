@@ -1,5 +1,13 @@
 package net.osmand.plus.measurementtool;
 
+import static net.osmand.GPXUtilities.GPXFile;
+import static net.osmand.GPXUtilities.GPXTrackAnalysis;
+import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.ALTITUDE;
+import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SLOPE;
+import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SPEED;
+import static net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
+import static net.osmand.router.RouteStatisticsHelper.RouteStatistics;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -29,16 +37,14 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.LineGraphType;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.MeasurementToolFragment.OnUpdateInfoListener;
-import net.osmand.plus.measurementtool.graph.BaseGraphAdapter;
-import net.osmand.plus.measurementtool.graph.CommonGraphAdapter;
-import net.osmand.plus.measurementtool.graph.CustomGraphAdapter;
-import net.osmand.plus.measurementtool.graph.CustomGraphAdapter.LegendViewType;
-import net.osmand.plus.measurementtool.graph.GraphAdapterHelper;
-import net.osmand.plus.measurementtool.graph.GraphAdapterHelper.RefreshMapCallback;
+import net.osmand.plus.measurementtool.graph.ChartAdapterHelper;
+import net.osmand.plus.measurementtool.graph.ChartAdapterHelper.RefreshMapCallback;
+import net.osmand.plus.measurementtool.graph.CommonChartAdapter;
+import net.osmand.plus.measurementtool.graph.CustomChartAdapter;
+import net.osmand.plus.measurementtool.graph.CustomChartAdapter.LegendViewType;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.router.RouteSegmentResult;
@@ -48,18 +54,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static net.osmand.GPXUtilities.GPXFile;
-import static net.osmand.GPXUtilities.GPXTrackAnalysis;
-import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.ALTITUDE;
-import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SLOPE;
-import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SPEED;
-import static net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
-import static net.osmand.router.RouteStatisticsHelper.RouteStatistics;
+public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 
-public class GraphsCard extends MapBaseCard implements OnUpdateInfoListener {
-
-	private static String GRAPH_DATA_GPX_FILE_NAME = "graph_data_tmp";
-	private static int INVALID_ID = -1;
+	private static final String GRAPH_DATA_GPX_FILE_NAME = "graph_data_tmp";
+	private static final int INVALID_ID = -1;
 
 	private MeasurementEditingContext editingCtx;
 	private MeasurementToolFragment fragment;
@@ -72,14 +70,14 @@ public class GraphsCard extends MapBaseCard implements OnUpdateInfoListener {
 	private View commonGraphContainer;
 	private View customGraphContainer;
 	private View messageContainer;
-	private CommonGraphAdapter commonGraphAdapter;
-	private CustomGraphAdapter customGraphAdapter;
+	private CommonChartAdapter commonGraphAdapter;
+	private CustomChartAdapter customGraphAdapter;
 	private RecyclerView graphTypesMenu;
 
-	private GraphType visibleType;
-	private List<GraphType> graphTypes = new ArrayList<>();
+	private ChartType visibleType;
+	private final List<ChartType> chartTypes = new ArrayList<>();
 
-	public GraphsCard(@NonNull MapActivity mapActivity,
+	public ChartsCard(@NonNull MapActivity mapActivity,
 	                  TrackDetailsMenu trackDetailsMenu,
 	                  MeasurementToolFragment fragment) {
 		super(mapActivity);
@@ -97,21 +95,16 @@ public class GraphsCard extends MapBaseCard implements OnUpdateInfoListener {
 		commonGraphContainer = view.findViewById(R.id.common_graphs_container);
 		customGraphContainer = view.findViewById(R.id.custom_graphs_container);
 		messageContainer = view.findViewById(R.id.message_container);
-		LineChart lineChart = (LineChart) view.findViewById(R.id.line_chart);
-		HorizontalBarChart barChart = (HorizontalBarChart) view.findViewById(R.id.horizontal_chart);
-		commonGraphAdapter = new CommonGraphAdapter(app, lineChart, true);
-		customGraphAdapter = new CustomGraphAdapter(app, barChart, true);
+		LineChart lineChart = view.findViewById(R.id.line_chart);
+		HorizontalBarChart barChart = view.findViewById(R.id.horizontal_chart);
+		commonGraphAdapter = new CommonChartAdapter(app, lineChart, true);
+		customGraphAdapter = new CustomChartAdapter(app, barChart, true);
 
-		customGraphAdapter.setLegendContainer((ViewGroup) view.findViewById(R.id.route_legend));
-		customGraphAdapter.setLayoutChangeListener(new BaseGraphAdapter.LayoutChangeListener() {
-			@Override
-			public void onLayoutChanged() {
-				setLayoutNeeded();
-			}
-		});
+		customGraphAdapter.setLegendContainer(view.findViewById(R.id.route_legend));
+		customGraphAdapter.setLayoutChangeListener(() -> setLayoutNeeded());
 
-		GraphAdapterHelper.bindGraphAdapters(commonGraphAdapter, Collections.singletonList((BaseGraphAdapter) customGraphAdapter), (ViewGroup) view);
-		refreshMapCallback = GraphAdapterHelper.bindToMap(commonGraphAdapter, mapActivity, trackDetailsMenu);
+		ChartAdapterHelper.bindGraphAdapters(commonGraphAdapter, Collections.singletonList(customGraphAdapter), (ViewGroup) view);
+		refreshMapCallback = ChartAdapterHelper.bindToMap(commonGraphAdapter, mapActivity, trackDetailsMenu);
 		updateTopPadding();
 		fullUpdate();
 	}
@@ -159,7 +152,7 @@ public class GraphsCard extends MapBaseCard implements OnUpdateInfoListener {
 		int activeColorId = ColorUtilities.getActiveColorId(nightMode);
 		final HorizontalSelectionAdapter adapter = new HorizontalSelectionAdapter(app, nightMode);
 		final ArrayList<HorizontalSelectionItem> items = new ArrayList<>();
-		for (GraphType type : graphTypes) {
+		for (ChartType type : chartTypes) {
 			HorizontalSelectionItem item = new HorizontalSelectionItem(type.getTitle(), type);
 			if (type.isCustom()) {
 				item.setTitleColorId(activeColorId);
@@ -171,35 +164,32 @@ public class GraphsCard extends MapBaseCard implements OnUpdateInfoListener {
 		adapter.setItems(items);
 		String selectedItemKey = visibleType.getTitle();
 		adapter.setSelectedItemByTitle(selectedItemKey);
-		adapter.setListener(new HorizontalSelectionAdapterListener() {
-			@Override
-			public void onItemSelected(HorizontalSelectionItem item) {
-				adapter.setItems(items);
-				adapter.setSelectedItem(item);
-				GraphType chosenType = (GraphType) item.getObject();
-				if (!isVisibleType(chosenType)) {
-					changeVisibleType(chosenType);
-				}
+		adapter.setListener(item -> {
+			adapter.setItems(items);
+			adapter.setSelectedItem(item);
+			ChartType chosenType = (ChartType) item.getObject();
+			if (!isVisibleType(chosenType)) {
+				changeVisibleType(chosenType);
 			}
 		});
 		graphTypesMenu.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
 	}
 
-	private void changeVisibleType(GraphType type) {
+	private void changeVisibleType(ChartType type) {
 		visibleType = type;
 		updateView();
 	}
 
-	private boolean isVisibleType(GraphType type) {
+	private boolean isVisibleType(ChartType type) {
 		if (visibleType != null && type != null) {
 			return Algorithms.objectEquals(visibleType.getTitle(), type.getTitle());
 		}
 		return false;
 	}
 
-	private GraphType getFirstAvailableType() {
-		for (GraphType type : graphTypes) {
+	private ChartType getFirstAvailableType() {
+		for (ChartType type : chartTypes) {
 			if (type.isAvailable()) {
 				return type;
 			}
@@ -277,12 +267,12 @@ public class GraphsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 	private void showGraph() {
 		if (visibleType.isCustom()) {
-			CustomGraphType customGraphType = (CustomGraphType) visibleType;
+			CustomChartType customGraphType = (CustomChartType) visibleType;
 			customGraphContainer.setVisibility(View.VISIBLE);
 			customGraphAdapter.setLegendViewType(LegendViewType.ONE_ELEMENT);
 			customGraphAdapter.updateContent(customGraphType.getChartData(), customGraphType.getStatistics());
 		} else {
-			CommonGraphType commonGraphType = (CommonGraphType) visibleType;
+			CommonChartType commonGraphType = (CommonChartType) visibleType;
 			commonGraphContainer.setVisibility(View.VISIBLE);
 			customGraphAdapter.setLegendViewType(LegendViewType.GONE);
 			commonGraphAdapter.updateContent(commonGraphType.getChartData(), gpxItem);
@@ -290,7 +280,7 @@ public class GraphsCard extends MapBaseCard implements OnUpdateInfoListener {
 	}
 
 	private void updateData() {
-		graphTypes.clear();
+		chartTypes.clear();
 		OsmandApplication app = getMyApplication();
 		gpxFile = getGpxFile();
 		analysis = gpxFile != null ? gpxFile.getAnalysis(0) : null;
@@ -315,7 +305,7 @@ public class GraphsCard extends MapBaseCard implements OnUpdateInfoListener {
 		if (analysis != null && routeStatistics != null) {
 			for (RouteStatistics statistics : routeStatistics) {
 				String title = AndroidUtils.getStringRouteInfoPropertyValue(app, statistics.name);
-				graphTypes.add(new CustomGraphType(title, statistics));
+				chartTypes.add(new CustomChartType(title, statistics));
 			}
 		}
 	}
@@ -334,14 +324,14 @@ public class GraphsCard extends MapBaseCard implements OnUpdateInfoListener {
 	                           LineGraphType secondType) {
 		OsmandApplication app = getMyApplication();
 		String title = app.getString(titleId);
-		graphTypes.add(new CommonGraphType(title, canBeCalculated, hasData, firstType, secondType));
+		chartTypes.add(new CommonChartType(title, canBeCalculated, hasData, firstType, secondType));
 	}
 
 	private void setupVisibleType() {
 		if (visibleType == null) {
 			visibleType = getFirstAvailableType();
 		} else {
-			for (GraphType type : graphTypes) {
+			for (ChartType type : chartTypes) {
 				if (isVisibleType(type)) {
 					visibleType = type.isAvailable() ? type : getFirstAvailableType();
 					break;
@@ -377,11 +367,11 @@ public class GraphsCard extends MapBaseCard implements OnUpdateInfoListener {
 				|| (customGraphContainer != null && customGraphContainer.getVisibility() == View.VISIBLE);
 	}
 
-	private abstract class GraphType<T extends ChartData> {
-		private String title;
-		private boolean canBeCalculated;
+	private abstract class ChartType<T extends ChartData> {
+		private final String title;
+		private final boolean canBeCalculated;
 
-		public GraphType(String title, boolean canBeCalculated) {
+		public ChartType(String title, boolean canBeCalculated) {
 			this.title = title;
 			this.canBeCalculated = canBeCalculated;
 		}
@@ -391,7 +381,7 @@ public class GraphsCard extends MapBaseCard implements OnUpdateInfoListener {
 		}
 
 		public boolean isCustom() {
-			return this instanceof CustomGraphType;
+			return this instanceof CustomChartType;
 		}
 
 		public boolean isAvailable() {
@@ -411,13 +401,13 @@ public class GraphsCard extends MapBaseCard implements OnUpdateInfoListener {
 		public abstract T getChartData();
 	}
 
-	private class CommonGraphType extends  GraphType<LineData> {
+	private class CommonChartType extends ChartType<LineData> {
 
-		private boolean hasData;
-		private LineGraphType firstType;
-		private LineGraphType secondType;
+		private final boolean hasData;
+		private final LineGraphType firstType;
+		private final LineGraphType secondType;
 
-		public CommonGraphType(String title, boolean canBeCalculated, boolean hasData, @NonNull LineGraphType firstType, @Nullable LineGraphType secondType) {
+		public CommonChartType(String title, boolean canBeCalculated, boolean hasData, @NonNull LineGraphType firstType, @Nullable LineGraphType secondType) {
 			super(title, canBeCalculated);
 			this.hasData = hasData;
 			this.firstType = firstType;
@@ -438,11 +428,11 @@ public class GraphsCard extends MapBaseCard implements OnUpdateInfoListener {
 		}
 	}
 
-	private class CustomGraphType extends GraphType<BarData> {
+	private class CustomChartType extends ChartType<BarData> {
 
-		private RouteStatistics statistics;
+		private final RouteStatistics statistics;
 
-		public CustomGraphType(String title, RouteStatistics statistics) {
+		public CustomChartType(String title, RouteStatistics statistics) {
 			super(title, false);
 			this.statistics = statistics;
 		}

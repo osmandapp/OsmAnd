@@ -865,6 +865,7 @@ public class RouteProvider {
 		return new RouteCalculationResult("Empty result");
 	}
 
+	@NonNull
 	public static List<RouteSegmentResult> parseOsmAndGPXRoute(List<Location> points, GPXFile gpxFile,
 	                                                           List<Location> segmentEndpoints,
 	                                                           int selectedSegment) {

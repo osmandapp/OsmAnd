@@ -88,23 +88,11 @@ public class SimpleRouteCard extends MapBaseCard {
 		durationText.setText(OsmAndFormatter.getFormattedDuration(routingHelper.getLeftTime(), app));
 		durationTitle.setText(app.getString(R.string.arrive_at_time, OsmAndFormatter.getFormattedTime(routingHelper.getLeftTime(), true)));
 
-		view.findViewById(R.id.details_button).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardButtonPressed(SimpleRouteCard.this, 0);
-				}
-			}
-		});
+		view.findViewById(R.id.details_button).setOnClickListener(v -> notifyButtonPressed(0));
 
 		FrameLayout detailsButton = view.findViewById(R.id.details_button);
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			AndroidUtils.setBackground(app, detailsButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
-			AndroidUtils.setBackground(app, view.findViewById(R.id.details_button_descr), nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
-		} else {
-			AndroidUtils.setBackground(app, view.findViewById(R.id.details_button_descr), nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
-		}
+		AndroidUtils.setBackground(app, detailsButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
+		AndroidUtils.setBackground(app, view.findViewById(R.id.details_button_descr), nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 
 		buildHeader(view);
 	}

@@ -2167,8 +2167,8 @@
     <string name="rendering_attr_depthContours_name">Nautische Tiefenlinien</string>
     <string name="rendering_attr_depthContours_description">Tiefenlinien und -punkte einblenden.</string>
     <string name="route_altitude">Routenhöhenprofil</string>
-    <string name="altitude_descent">Abstieg</string>
-    <string name="altitude_ascent">Aufstieg</string>
+    <string name="altitude_descent">Bergab</string>
+    <string name="altitude_ascent">Bergauf</string>
     <string name="altitude_range">Höhenbereich</string>
     <string name="average_altitude">Durchschnittliche Höhe</string>
     <string name="shared_string_time">Zeit</string>
@@ -4462,4 +4462,10 @@
     <string name="shared_string_hide_all">Alle ausblenden</string>
     <string name="migration_files_present">%1$d Dateien (%2$s) sind am ausgewählten Speicherort \'%3$s\' vorhanden.</string>
     <string name="exit_without_saving_warning">Sind Sie sicher, dass Sie ohne zu speichern beenden möchten\? Alle Änderungen gingen verloren.</string>
+    <string name="shared_string_show_slope">Hangneigung anzeigen</string>
+    <string name="shared_string_hide_slope">Hangneigung ausblenden</string>
+    <string name="shared_string_grade">Grad</string>
+    <string name="shared_string_uphill">Aufstieg</string>
+    <string name="shared_string_downhill">Abstieg</string>
+    <string name="elevation_profile">Höhenprofil</string>
 </resources>

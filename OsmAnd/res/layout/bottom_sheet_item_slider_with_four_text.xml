@@ -33,7 +33,7 @@
 			android:id="@android:id/summary"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:textColor="?android:textColorSecondary"
+			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
 			osmand:typeface="@string/font_roboto_regular"
 			tools:text="summary" />
@@ -63,7 +63,7 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
-			android:textColor="?android:textColorPrimary"
+			android:textColor="?android:textColorSecondary"
 			android:textSize="@dimen/default_desc_text_size"
 			osmand:typeface="@string/font_roboto_regular"
 			tools:text="0" />

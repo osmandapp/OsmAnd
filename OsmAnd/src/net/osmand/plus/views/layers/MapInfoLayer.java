@@ -31,10 +31,11 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControll
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
 import net.osmand.plus.views.mapwidgets.MapMarkersWidgetsFactory;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
+import net.osmand.plus.views.mapwidgets.widgets.ElevationProfileWidget;
 import net.osmand.plus.views.mapwidgets.widgets.NextTurnWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
@@ -86,6 +87,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private TopTextView streetNameView;
 	private TopToolbarView topToolbarView;
 	private TopCoordinatesView topCoordinatesView;
+	private ElevationProfileWidget elevationProfileWidget;
 
 	public MapInfoLayer(@NonNull Context context, @NonNull RouteLayer layer) {
 		super(context);
@@ -230,6 +232,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 		alarmControl = RouteInfoWidgetsFactory.createAlarmInfoControl(app, map);
 		alarmControl.setVisibility(false);
+
+		elevationProfileWidget = new ElevationProfileWidget(map);
 
 		setupRulerWidget(mapRulerLayout);
 
@@ -465,6 +469,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			streetNameView.updateInfo(drawSettings);
 			topToolbarView.updateInfo();
 			topCoordinatesView.updateInfo();
+			elevationProfileWidget.updateInfo();
 			alarmControl.updateInfo(drawSettings, false);
 			lanesControl.updateInfo(drawSettings);
 

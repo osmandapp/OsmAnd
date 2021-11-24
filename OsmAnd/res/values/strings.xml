@@ -11,7 +11,21 @@
 	Thx - Hardy
 -->
 
-    <string name="exit_without_saving_warning">Are you sure you exit without saving? You will lose all changes.</string>
+    <string name="gps_filter_precision">GPS Precision</string>
+    <string name="shared_string_precision">Precision</string>
+    <string name="shared_string_statistics">Statistics</string>
+    <string name="gps_filter_hdop_desc">Set the maximum allowable value for HDOP.\nPoints greater than the set parameter will be hidden.</string>
+    <string name="gps_filter_speed_altitude_desc">The track points matching the set interval will be visible on the chart and map, the rest will be hidden.</string>
+    <string name="gps_filter_smoothing_desc">Set the threshold distance between points.\nTrack points that are at least X distance from the last visible point will be hidden.\nBe careful the greater the distance, the simpler the track geometry.</string>
+    <string name="distance_between_points">Distance between points</string>
+    <string name="gps_filter_smoothing">Smoothing</string>
+    <string name="save_changes_into_file">Save changes into file</string>
+    <string name="save_as_copy">Save as copy</string>
+    <string name="gps_filter_actions_description">OsmAnd applying changes to the track without saving it to the file. You can save changes manually.</string>
+    <string name="shared_string_gps_filter">GPS filter</string>
+    <string name="storage_migration_wrong_folder_warning">We can\'t find OsmAnd data in the selected folder. Please try again.</string>
+    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
+    <string name="exit_without_saving_warning">Are you sure you exit without saving? You will lost all changes.</string>
     <string name="migration_files_present">%1$d files (%2$s) are present in the selected location \'%3$s\'.</string>
     <string name="fold_unfold">fold/unfold</string>
     <string name="app_profile_type">App profile type</string>
@@ -89,6 +103,8 @@
     <string name="release_4_1">
     • Added initial support for Android Auto\n\n
     • User interface update for UTM coordinate search\n\n
+    • GPS Filter for GPX Tracks\n\n
+    • Elevation Widget (Pro)\n\n
     • Favorites: added ability to view recently used icons\n\n
     • Route planning: will use the selected profile after launch\n\n
     • Fixed Mapillary layer, the plugin is now disabled by default\n\n
@@ -325,6 +341,12 @@
     <string name="backup_and_restore">Backup &amp; Restore</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="search_more">Search more…</string>
+    <string name="shared_string_show_slope">Show slope</string>
+    <string name="shared_string_hide_slope">Hide slope</string>
+    <string name="shared_string_grade">Grade</string>
+    <string name="shared_string_uphill">Uphill</string>
+    <string name="shared_string_downhill">Downhill</string>
+    <string name="elevation_profile">Elevation profile</string>
     <string name="routing_attr_avoid_low_emission_zone_name">Avoid low emission zones</string>
     <string name="routing_attr_avoid_low_emission_zone_description">Avoid low emission zones</string>
     <string name="poi_routes">Routes</string>
@@ -1983,8 +2005,8 @@
     <string name="shared_string_gpx_tracks">Tracks</string>
     <string name="routing_attr_driving_style_name">Driving style</string>
     <string name="route_altitude">Route elevation</string>
-    <string name="altitude_descent">Descent</string>
-    <string name="altitude_ascent">Ascent</string>
+    <string name="altitude_descent">Downhill</string>
+    <string name="altitude_ascent">Uphill</string>
     <string name="altitude_range">Altitude range</string>
     <string name="average_altitude">Average altitude</string>
     <string name="shared_string_time">Time</string>

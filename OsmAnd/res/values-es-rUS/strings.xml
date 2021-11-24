@@ -1825,7 +1825,7 @@
     <string name="weekly">Cada semana</string>
     <string name="morning">Por la mañana</string>
     <string name="night">Por la noche</string>
-    <string name="shared_string_not_selected">No marcado(s)</string>
+    <string name="shared_string_not_selected">Sin marcar</string>
     <string name="select_month_and_country">Mes y país:</string>
     <string name="shared_string_type">Tipo</string>
     <string name="starting_point">Punto de partida</string>
@@ -4381,7 +4381,7 @@
     <string name="location_access_request_title">OsmAnd debe acceder a la ubicación para poder navegar.</string>
     <string name="shared_storage_warning_description">Debido a las nuevas reglas de Android, a partir de noviembre de 2021, OsmAnd 4.2 perderá el acceso al almacenamiento compartido.
 \n
-\nPor favor, mueva la carpeta de datos del almacenamiento compartido al almacenamiento disponible, de lo contrario la aplicación perderá el acceso a los datos como mapas sin conexión, trazas GPX y etc.</string>
+\nPor favor, mueve la carpeta de datos del almacenamiento compartido al almacenamiento disponible, de lo contrario la aplicación perderá el acceso a los datos como mapas sin conexión, trazas GPX y etc.</string>
     <string name="history_is_disabled_descr">Activa el historial para acceder más rápido a los últimos resultados.</string>
     <string name="search_history_is_disabled_descr">Puedes activar el historial de búsqueda en los ajustes.</string>
     <string name="markers_history_is_disabled_descr">Activa el historial para recordar una lista de los marcadores de mapa visitados.</string>
@@ -4457,4 +4457,10 @@
     <string name="not_enough_contributions_descr">Necesitas un mínimo de %1$s cambios en el último bimestre %2$s para obtener acceso a actualizaciones de mapas ilimitadas por hora.</string>
     <string name="rendering_attr_natureReserves_description">Mostrar reservas naturales, áreas protegidas y parques nacionales.</string>
     <string name="exit_without_saving_warning">¿Salir sin guardar\? Se perderán todos los cambios.</string>
+    <string name="shared_string_show_slope">Mostrar pendiente</string>
+    <string name="shared_string_hide_slope">Ocultar pendiente</string>
+    <string name="shared_string_grade">Calificación</string>
+    <string name="shared_string_uphill">Ascenso</string>
+    <string name="shared_string_downhill">Descenso</string>
+    <string name="elevation_profile">Perfil de elevación</string>
 </resources>

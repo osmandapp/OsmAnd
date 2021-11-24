@@ -84,6 +84,7 @@ public class OsmandRenderer {
 		double order;
 		double area;
 		int objectType;
+		int priority;
 	};
 
 	private static class IconDrawInfo {
@@ -421,7 +422,7 @@ public class OsmandRenderer {
 
 		};
 	}
-	
+
 	Comparator<MapDataObjectPrimitive> sortPolygonsOrder() {
 		return new Comparator<MapDataObjectPrimitive>() {
 
@@ -463,11 +464,13 @@ public class OsmandRenderer {
 							int objectType = render.getIntPropertyValue(render.ALL.R_OBJECT_TYPE);
 							boolean ignorePointArea = render.getIntPropertyValue(render.ALL.R_IGNORE_POLYGON_AS_POINT_AREA) != 0;
 							int order = render.getIntPropertyValue(render.ALL.R_ORDER);
+							int priority = render.getIntPropertyValue(render.ALL.R_DENSITY_PRIORITY);
 							MapDataObjectPrimitive mapObj = new MapDataObjectPrimitive();
 							mapObj.objectType = objectType;
 							mapObj.order = order;
 							mapObj.typeInd = j;
 							mapObj.obj = o;
+							mapObj.priority = priority;
 							if(objectType == 3) {
 								MapDataObjectPrimitive pointObj = new MapDataObjectPrimitive();
 								pointObj.order = order;

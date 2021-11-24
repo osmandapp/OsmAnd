@@ -1367,7 +1367,7 @@
     <string name="context_menu_item_search">Serĉi proksime</string>
     <string name="filename_input">Dosiernomo:</string>
     <string name="route_successfully_saved_at">Konservis kurson kiel “%1$s”.</string>
-    <string name="file_with_name_already_exist">Dosiero kun samo nomo jam ekzistas.</string>
+    <string name="file_with_name_already_exist">Dosiero kun la sama nomo jam ekzistas.</string>
     <string name="local_index_upload_gpx_description">Alŝuti GPX-dosierojn al la OSM-komunumo por plibonigi la mapon.</string>
     <string name="local_index_items_uploaded">Alŝutis %1$d el %2$d.</string>
     <string name="local_index_mi_upload_gpx">Sendi al OSM</string>
@@ -4404,13 +4404,60 @@
     <string name="shared_string_travelbooks">Vojaĝ-gvidiloj</string>
     <string name="display_route_tracks_as_poi">Montri kursojn kiel interesejojn</string>
     <string name="display_route_tracks">Montri kursojn</string>
-    <string name="delete_history_items_descr">Ĉu vi certe volas forigi la elektitajn objektojn el historio\?</string>
+    <string name="delete_history_items_descr">Ĉu forigi la elektitajn objektojn el historio\?</string>
     <string name="delete_history_items">Ĉu forigi %1$s objektojn el historio\?</string>
-    <string name="quick_action_toggle_preference">Ŝaltilo por ŝanĝi elektitan agordon.</string>
+    <string name="quick_action_toggle_preference">Ŝaltilo por ŝanĝi agordon.</string>
     <string name="icon_group_education">Edukado</string>
     <string name="add_to_group">Aldoni al grupo</string>
     <string name="shared_string_memory">Memoro</string>
     <string name="migration_files_present">%1$d dosieroj (%2$s) ekzistas en la elektita dosierujo: “%3$s”.</string>
     <string name="fold_unfold">etendi/maletendi</string>
     <string name="exit_without_saving_warning">Ĉu vi certe volas eliri sen konservi\? Ĉiuj faritaj ŝanĝoj perdiĝos.</string>
+    <string name="map_marker_options">Agordoj pri map-marko</string>
+    <string name="app_modes_options">Elekti profilojn de aplikaĵo</string>
+    <string name="app_profile_type">Aldoni specon de profilo</string>
+    <string name="shared_string_show_slope">Montri deklivecon</string>
+    <string name="shared_string_hide_slope">Kaŝi deklivecon</string>
+    <string name="shared_string_downhill">Malsupreniro</string>
+    <string name="files_remaining">Pliaj dosieroj: %1$s (%2$s)</string>
+    <string name="copying_file">Kopiado de dosiero %1$s…</string>
+    <string name="from_to_with_params">El %1$s al %2$s</string>
+    <string name="progress_complete">%1$s farita</string>
+    <string name="storage_copied_files_size">Kopiis %1$s dosierojn (%2$s)</string>
+    <string name="storage_copying_files_size">Kopiado de %1$s dosieroj (%2$s)</string>
+    <string name="storage_found_files_size">Trovis %1$s dosierojn (%2$s)</string>
+    <string name="shared_string_hide_all">Kaŝi ĉiujn</string>
+    <string name="copying_completed">Kopiita</string>
+    <string name="shared_string_copy_to">Kopii al</string>
+    <string name="start_copying">Kopii</string>
+    <string name="shared_storage_first_step">Frapetu “%1$s”.
+\nLa dosieradministrilo malfermiĝos, per kiu vi devos trovi kaj malfermi la dosierujon de OsmAnd.</string>
+    <string name="shared_storage_second_step">Frapetu “Uzi tiun ĉi dosierujon”.</string>
+    <string name="skip_confirmation">Jes, preterpasi</string>
+    <string name="memory_allocated_for_routing">Memoro rezervata por kurs-difinado</string>
+    <string name="shared_storage_last_step">Sekve difinu novan dosierujon por datumoj.</string>
+    <string name="memory_allocated_for_routing_ds">Pli altaj valoroj de memoro plirapidigas kalkuladon de longaj kursoj (pli ol 500 km), tamen povas influi rendimenton de aliaj aplikaĵoj.
+\nNe influas kalkul-rapidon de mallongaj kursoj.</string>
+    <string name="reading_files">Legado de dosieroj…</string>
+    <string name="no_items_selected_warning">Elektu almenaŭ unu elementon</string>
+    <string name="show_parameter_seekbar">Montri ŝovilon de parametro</string>
+    <string name="display_groups_visibility_dialog_description">Vi povas agordi videblon de grupo sur la mapo. Se spuro estos kaŝita, ĉiuj grupoj ankaŭ estos kaŝitaj.</string>
+    <string name="storage_found_files_descr">Frapetu “%1$s” por kopii %2$s dosierojn el “%3$s” al “%4$s”. Tio ĉi povos okupi iom da tempo.</string>
+    <string name="shared_string_skip_warning">Ĉu preterpasi movadon de datumoj\? OsmAnd jam ne havos aliron al viaj dosieroj en komuna konservejo.
+\n
+\nLa aplikaĵo komencos uzi novan dosierujon por datumoj.</string>
+    <string name="shared_storage_third_step">Donu permeson por aliri la dosierujon. Aliokaze OsmAnd ne povos kopii dosierojn.</string>
+    <string name="shared_storage">Komuna konservejo</string>
+    <string name="shared_storage_migration">Movado de datumoj el komuna konservejo</string>
+    <string name="shared_string_migration">Movado de datumoj</string>
+    <string name="folder_access_denied">Permeso estas necesa por aliri la elektitan dosierujon.</string>
+    <string name="icon_group_industrial">Industrio</string>
+    <string name="rendering_attr_natureReserves_description">Montri natur-rezervejojn, protektatajn areojn kaj naciajn parkojn.</string>
+    <string name="shared_string_grade">Kvalito</string>
+    <string name="shared_string_uphill">Supreniro</string>
+    <string name="elevation_profile">Profilo de altitudo</string>
+    <string name="shared_storage_migration_descr">Pro ŝanĝo en reguloj de aliro al la konservejo en Android, %1$s ne povas esti plue uzata de OsmAnd.
+\n
+\nKopiu ĉiujn viajn datumojn al nova dosierujo.</string>
+    <string name="not_enough_contributions_descr">Almenaŭ %1$s kontribuoj al OpenStreetMap dum la antaŭaj du monatoj (%2$s) estas necesaj por akiri senlimajn ĉiuhorajn map-ĝisdatigojn.</string>
 </resources>

@@ -113,7 +113,7 @@ public class GpxBlockStatisticsBuilder {
 	}
 
 	private GPXFile getGPXFile() {
-		return selectedGpxFile.getGpxFile();
+		return selectedGpxFile.getGpxFileToDisplay();
 	}
 
 	public void initStatBlocks(@Nullable SegmentActionsListener actionsListener, @ColorInt int activeColor,

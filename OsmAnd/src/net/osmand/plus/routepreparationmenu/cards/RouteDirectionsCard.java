@@ -105,15 +105,7 @@ public class RouteDirectionsCard extends MapBaseCard {
 		RouteDetailsFragment.CumulativeInfo cumulativeInfo = RouteDetailsFragment.getRouteDirectionCumulativeInfo(directionInfoIndex, directionsInfo);
 		cumulativeDistanceLabel.setText(OsmAndFormatter.getFormattedDistance(cumulativeInfo.distance, app));
 		cumulativeTimeLabel.setText(Algorithms.formatDuration(cumulativeInfo.time, app.accessibilityEnabled()));
-		row.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardButtonPressed(RouteDirectionsCard.this, directionInfoIndex);
-				}
-			}
-		});
+		row.setOnClickListener(v -> notifyButtonPressed(directionInfoIndex));
 		return row;
 	}
 }

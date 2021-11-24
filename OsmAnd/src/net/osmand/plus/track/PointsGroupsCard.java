@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
@@ -16,6 +17,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class PointsGroupsCard extends MapBaseCard {
 
@@ -26,11 +28,11 @@ public class PointsGroupsCard extends MapBaseCard {
 	private final List<GpxDisplayGroup> displayGroups = new ArrayList<>();
 
 	public PointsGroupsCard(@NonNull MapActivity mapActivity,
-							@NonNull SelectedGpxFile selectedGpxFile,
-							@NonNull List<GpxDisplayGroup> groups) {
+	                        @NonNull List<GpxDisplayGroup> groups,
+	                        @NonNull SelectedGpxFile selectedGpxFile) {
 		super(mapActivity);
-		displayGroups.addAll(groups);
 		this.selectedGpxFile = selectedGpxFile;
+		displayGroups.addAll(groups);
 	}
 
 	@Override
@@ -46,12 +48,23 @@ public class PointsGroupsCard extends MapBaseCard {
 	protected void updateContent() {
 		ArrayList<HorizontalSelectionItem> items = new ArrayList<>();
 		items.add(new HorizontalSelectionItem(app.getString(R.string.shared_string_all), null));
+
+		int iconSizePx = app.getResources().getDimensionPixelSize(R.dimen.poi_icon_size);
+		int iconColorId = ColorUtilities.getSecondaryIconColorId(nightMode);
+
+		Set<String> hidden = selectedGpxFile.getHiddenGroups();
 		for (GpxDisplayGroup group : displayGroups) {
 			String categoryName = group.getName();
 			if (Algorithms.isEmpty(categoryName)) {
 				categoryName = app.getString(R.string.shared_string_gpx_points);
 			}
-			items.add(new HorizontalSelectionItem(categoryName, group));
+			HorizontalSelectionItem item = new HorizontalSelectionItem(categoryName, group);
+			if (hidden.contains(categoryName)) {
+				item.setIconId(R.drawable.ic_action_hide_16);
+				item.setIconColorId(iconColorId);
+				item.setIconSizePx(iconSizePx);
+			}
+			items.add(item);
 		}
 		final HorizontalSelectionAdapter selectionAdapter = new HorizontalSelectionAdapter(app, nightMode);
 		selectionAdapter.setItems(items);
@@ -81,5 +94,4 @@ public class PointsGroupsCard extends MapBaseCard {
 		recyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
 		selectionAdapter.notifyDataSetChanged();
 	}
-
 }

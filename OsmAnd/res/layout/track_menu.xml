@@ -178,7 +178,9 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
 			android:orientation="horizontal"
-			android:padding="@dimen/content_padding_half">
+			android:paddingVertical="@dimen/content_padding_half"
+			android:paddingStart="@dimen/content_padding_small"
+			android:paddingEnd="@dimen/content_padding">
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:layout_width="@dimen/standard_icon_size"
@@ -192,13 +194,14 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"
+				android:gravity="center_vertical"
 				android:layout_marginStart="@dimen/content_padding_half"
 				android:letterSpacing="@dimen/text_button_letter_spacing"
 				android:minHeight="@dimen/default_title_line_height"
 				android:textColor="?active_color_basic"
-				android:textSize="@dimen/default_list_text_size"
+				android:textSize="@dimen/default_desc_text_size"
 				osmand:lineHeight="@dimen/default_title_line_height"
-				osmand:typeface="@string/font_roboto_regular"
+				osmand:typeface="@string/font_roboto_medium"
 				tools:text="5/6" />
 
 		</LinearLayout>
@@ -271,6 +274,14 @@
 					android:contentDescription="@string/access_shared_string_navigate_up"
 					android:visibility="gone"
 					osmand:srcCompat="@drawable/ic_action_search_dark" />
+
+				<ImageButton
+					android:id="@+id/appbar_display_groups_button"
+					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+					android:layout_width="@dimen/toolbar_height"
+					android:layout_height="@dimen/toolbar_height"
+					android:contentDescription="@string/access_shared_string_navigate_up"
+					osmand:srcCompat="@drawable/ic_action_folder_visible" />
 
 			</LinearLayout>
 

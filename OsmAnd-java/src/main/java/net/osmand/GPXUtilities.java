@@ -54,9 +54,11 @@ public class GPXUtilities {
 	private static final String ICON_NAME_EXTENSION = "icon";
 	private static final String BACKGROUND_TYPE_EXTENSION = "background";
 	private static final String PROFILE_TYPE_EXTENSION = "profile";
+	private static final String ADDRESS_EXTENSION = "address";
 	private static final String GAP_PROFILE_TYPE = "gap";
 	private static final String TRKPT_INDEX_EXTENSION = "trkpt_idx";
 	public static final String DEFAULT_ICON_NAME = "special_star";
+
 	public static final char TRAVEL_GPX_CONVERT_FIRST_LETTER = 'A';
 	public static final int TRAVEL_GPX_CONVERT_FIRST_DIST = 5000;
 	public static final int TRAVEL_GPX_CONVERT_MULT_1 = 2;
@@ -245,8 +247,8 @@ public class GPXUtilities {
 		public int speedColor = 0;
 		public int altitudeColor = 0;
 		public int slopeColor = 0;
-		public int colourARGB = 0;                    // point colour (used for altitude/speed colouring)
-		public double distance = 0.0;                // cumulative distance, if in a track
+		public int colourARGB = 0;    // point colour (used for altitude/speed colouring)
+		public double distance = 0.0; // cumulative distance, if in a track; depends on split type of GPX-file
 
 		public WptPt() {
 		}
@@ -362,6 +364,14 @@ public class GPXUtilities {
 
 		public String getProfileType() {
 			return getExtensionsToRead().get(PROFILE_TYPE_EXTENSION);
+		}
+
+		public String getAddress() {
+			return getExtensionsToRead().get(ADDRESS_EXTENSION);
+		}
+
+		public String setAddress(String address) {
+			return getExtensionsToWrite().put(ADDRESS_EXTENSION, address);
 		}
 
 		public void setProfileType(String profileType) {
@@ -603,6 +613,9 @@ public class GPXUtilities {
 		public float maxSpeed = 0;
 		public float avgSpeed;
 
+		public double minHdop = Double.NaN;
+		public double maxHdop = Double.NaN;
+
 		public int points;
 		public int wptPoints = 0;
 
@@ -649,6 +662,10 @@ public class GPXUtilities {
 			return avgSpeed > 0;
 		}
 
+		public boolean isHdopSpecified() {
+			return minHdop > 0;
+		}
+
 		public boolean isColorizationTypeAvailable(ColorizationType colorizationType) {
 			if (colorizationType == ColorizationType.SPEED) {
 				return isSpeedSpecified();
@@ -680,24 +697,11 @@ public class GPXUtilities {
 			double totalSpeedSum = 0;
 			points = 0;
 
-			double channelThresMin = 10;           // Minimum oscillation amplitude considered as relevant or as above noise for accumulated Ascent/Descent analysis
-			double channelThres = channelThresMin; // Actual oscillation amplitude considered as above noise (dynamic channel adjustment, accomodates depedency on current VDOP/getAccuracy if desired)
-			double channelBase;
-			double channelTop;
-			double channelBottom;
-			boolean climb = false;
-
 			elevationData = new ArrayList<>();
 			speedData = new ArrayList<>();
 
-			for (SplitSegment s : splitSegments) {
+			for (final SplitSegment s : splitSegments) {
 				final int numberOfPoints = s.getNumberOfPoints();
-
-				channelBase = 99999;
-				channelTop = channelBase;
-				channelBottom = channelBase;
-				//channelThres = channelThresMin; //only for dynamic channel adjustment
-
 				float segmentDistance = 0f;
 				metricEnd += s.metricEnd;
 				secondaryMetricEnd += s.secondaryMetricEnd;
@@ -760,78 +764,13 @@ public class GPXUtilities {
 						hasSpeedInTrack = true;
 					}
 
-					// Trend channel analysis for elevation gain/loss, Hardy 2015-09-22, LPF filtering added 2017-10-26:
-					// - Detect the consecutive elevation trend channels: Only use the net elevation changes of each trend channel (i.e. between the turnarounds) to accumulate the Ascent/Descent values.
-					// - Perform the channel evaluation on Low Pass Filter (LPF) smoothed ele data instead of on the raw ele data
-					// Parameters:
-					// - channelThresMin (in meters): defines the channel turnaround detection, i.e. oscillations smaller than this are ignored as irrelevant or noise.
-					// - smoothWindow (number of points): is the LPF window
-					// NOW REMOVED, as no relevant examples found: Dynamic channel adjustment: To suppress unreliable measurement points, could relax the turnaround detection from the constant channelThresMin to channelThres which is e.g. based on the maximum VDOP of any point which contributed to the current trend. (Good assumption is VDOP=2*HDOP, which accounts for invisibility of lower hemisphere satellites.)
-
-					// LPF smooting of ele data, usually smooth over odd number of values like 5
-					final int smoothWindow = 5;
-					double eleSmoothed = Double.NaN;
-					int j2 = 0;
-					for (int j1 = - smoothWindow + 1; j1 <= 0; j1++) {
-						if ((j + j1 >= 0) && !Double.isNaN(s.get(j + j1).ele)) {
-							j2++;
-							if (!Double.isNaN(eleSmoothed)) {
-								eleSmoothed = eleSmoothed + s.get(j + j1).ele;
-							} else {
-								eleSmoothed = s.get(j + j1).ele;
-							}
+					double hdop = point.hdop;
+					if (hdop > 0) {
+						if (Double.isNaN(minHdop) || hdop < minHdop) {
+							minHdop = hdop;
 						}
-					}
-					if (!Double.isNaN(eleSmoothed)) {
-						eleSmoothed = eleSmoothed / j2;
-					}
-
-					if (!Double.isNaN(eleSmoothed)) {
-						// Init channel
-						if (channelBase == 99999) {
-							channelBase = eleSmoothed;
-							channelTop = channelBase;
-							channelBottom = channelBase;
-							//channelThres = channelThresMin; //only for dynamic channel adjustment
-						}
-						// Channel maintenance
-						if (eleSmoothed > channelTop) {
-							channelTop = eleSmoothed;
-							//if (!Double.isNaN(point.hdop)) {
-							//	channelThres = Math.max(channelThres, 2.0 * point.hdop); //only for dynamic channel adjustment
-							//}
-						} else if (eleSmoothed < channelBottom) {
-							channelBottom = eleSmoothed;
-							//if (!Double.isNaN(point.hdop)) {
-							//	channelThres = Math.max(channelThres, 2.0 * point.hdop); //only for dynamic channel adjustment
-							//}
-						}
-						// Turnaround (breakout) detection
-						if ((eleSmoothed <= (channelTop - channelThres)) && (climb == true)) {
-							if ((channelTop - channelBase) >= channelThres) {
-								diffElevationUp += channelTop - channelBase;
-							}
-							channelBase = channelTop;
-							channelBottom = eleSmoothed;
-							climb = false;
-							//channelThres = channelThresMin; //only for dynamic channel adjustment
-						} else if ((eleSmoothed >= (channelBottom + channelThres)) && (climb == false)) {
-							if ((channelBase - channelBottom) >= channelThres) {
-								diffElevationDown += channelBase - channelBottom;
-							}
-							channelBase = channelBottom;
-							channelTop = eleSmoothed;
-							climb = true;
-							//channelThres = channelThresMin; //only for dynamic channel adjustment
-						}
-						// End detection without breakout
-						if (j == (numberOfPoints - 1)) {
-							if ((channelTop - channelBase) >= channelThres) {
-								diffElevationUp += channelTop - channelBase;
-							}
-							if ((channelBase - channelBottom) >= channelThres) {
-								diffElevationDown += channelBase - channelBottom;
-							}
+						if (Double.isNaN(maxHdop) || hdop > maxHdop) {
+							maxHdop = hdop;
 						}
 					}
 
@@ -929,6 +868,16 @@ public class GPXUtilities {
 						}
 					}
 				}
+
+				ElevationDiffsCalculator elevationDiffsCalc = new ElevationDiffsCalculator(0, numberOfPoints) {
+					@Override
+					public WptPt getPoint(int index) {
+						return s.get(index);
+					}
+				};
+				elevationDiffsCalc.calculateElevationDiffs();
+				diffElevationUp += elevationDiffsCalc.diffElevationUp;
+				diffElevationDown += elevationDiffsCalc.diffElevationDown;
 			}
 			if (totalDistance < 0) {
 				hasElevationData = false;
@@ -967,6 +916,78 @@ public class GPXUtilities {
 			return this;
 		}
 
+		public abstract static class ElevationDiffsCalculator {
+
+			private double windowLength;
+			private final int startIndex;
+			private final int numberOfPoints;
+
+			private double diffElevationUp = 0;
+			private double diffElevationDown = 0;
+
+			public ElevationDiffsCalculator(int startIndex, int numberOfPoints) {
+				this.startIndex = startIndex;
+				this.numberOfPoints = numberOfPoints;
+				WptPt lastPoint = getPoint(startIndex + numberOfPoints - 1);
+				this.windowLength = Math.max(20d, lastPoint.distance / numberOfPoints * 4);
+			}
+
+			public ElevationDiffsCalculator(double windowLength, int startIndex, int numberOfPoints) {
+				this(startIndex, numberOfPoints);
+				this.windowLength = windowLength;
+			}
+
+			public abstract WptPt getPoint(int index);
+
+			public double getDiffElevationUp() {
+				return diffElevationUp;
+			}
+
+			public double getDiffElevationDown() {
+				return diffElevationDown;
+			}
+
+			public void calculateElevationDiffs() {
+				WptPt initialPoint = getPoint(startIndex);
+				double eleSumm = initialPoint.ele;
+				int pointsCount = 1;
+				double eleAvg = Double.NaN;
+				double nextWindowPos = initialPoint.distance + windowLength;
+				int pointIndex = startIndex + 1;
+				while (pointIndex < numberOfPoints + startIndex) {
+					WptPt point = getPoint(pointIndex);
+					if (point.distance > nextWindowPos) {
+						eleAvg = calcAvg(eleSumm, pointsCount, eleAvg);
+						eleSumm = point.ele;
+						pointsCount = 1;
+						while (nextWindowPos < point.distance) {
+							nextWindowPos += windowLength;
+						}
+					} else {
+						eleSumm += point.ele;
+						pointsCount++;
+					}
+					pointIndex++;
+				}
+				if (pointsCount > 1) {
+					calcAvg(eleSumm, pointsCount, eleAvg);
+				}
+				diffElevationUp = Math.round(diffElevationUp + 0.3f);
+			}
+
+			private double calcAvg(double eleSumm, int pointsCount, double eleAvg) {
+				double avg = eleSumm / pointsCount;
+				if (!Double.isNaN(eleAvg)) {
+					double diff = avg - eleAvg;
+					if (diff > 0) {
+						diffElevationUp += diff;
+					} else {
+						diffElevationDown -= diff;
+					}
+				}
+				return avg;
+			}
+		}
 	}
 
 	private static class SplitSegment {
@@ -982,6 +1003,14 @@ public class GPXUtilities {
 			startPointInd = 0;
 			startCoeff = 0;
 			endPointInd = s.points.size() - 2;
+			endCoeff = 1;
+			this.segment = s;
+		}
+
+		public SplitSegment(int startInd, int endInd, TrkSegment s) {
+			startPointInd = startInd;
+			startCoeff = 0;
+			endPointInd = endInd - 2;
 			endCoeff = 1;
 			this.segment = s;
 		}
@@ -1318,9 +1347,23 @@ public class GPXUtilities {
 		}
 
 		public GPXTrackAnalysis getAnalysis(long fileTimestamp) {
+			return getAnalysis(fileTimestamp, null, null);
+		}
+
+		public GPXTrackAnalysis getAnalysis(long fileTimestamp,
+		                                    Double fromDistance,
+		                                    Double toDistance) {
 			GPXTrackAnalysis g = new GPXTrackAnalysis();
 			g.wptPoints = points.size();
 			g.wptCategoryNames = getWaypointCategories(true);
+			List<SplitSegment> segments = getSplitSegments(g, fromDistance, toDistance);
+			g.prepareInformation(fileTimestamp, segments.toArray(new SplitSegment[0]));
+			return g;
+		}
+
+		private List<SplitSegment> getSplitSegments(GPXTrackAnalysis g,
+		                                            Double fromDistance,
+		                                            Double toDistance) {
 			List<SplitSegment> splitSegments = new ArrayList<>();
 			for (int i = 0; i < tracks.size(); i++) {
 				Track subtrack = tracks.get(i);
@@ -1328,13 +1371,38 @@ public class GPXUtilities {
 					if (!segment.generalSegment) {
 						g.totalTracks++;
 						if (segment.points.size() > 1) {
-							splitSegments.add(new SplitSegment(segment));
+							splitSegments.add(createSplitSegment(segment, fromDistance, toDistance));
 						}
 					}
 				}
 			}
-			g.prepareInformation(fileTimestamp, splitSegments.toArray(new SplitSegment[0]));
-			return g;
+			return splitSegments;
+		}
+
+		private SplitSegment createSplitSegment(TrkSegment segment,
+		                                        Double fromDistance,
+		                                        Double toDistance) {
+			if (fromDistance != null && toDistance != null) {
+				int startInd = getPointIndexByDistance(segment.points, fromDistance);
+				int endInd = getPointIndexByDistance(segment.points, toDistance);
+				return new SplitSegment(startInd, endInd, segment);
+			} else {
+				return new SplitSegment(segment);
+			}
+		}
+
+		public int getPointIndexByDistance(List<WptPt> points, double distance) {
+			int index = 0;
+			double minDistanceChange = Double.MAX_VALUE;
+			for (int i = 0; i < points.size(); i++) {
+				WptPt point = points.get(i);
+				double currentDistanceChange = Math.abs(point.distance - distance);
+				if (currentDistanceChange < minDistanceChange) {
+					minDistanceChange = currentDistanceChange;
+					index = i;
+				}
+			}
+			return index;
 		}
 
 		public boolean containsRoutePoint(WptPt point) {
@@ -1871,7 +1939,7 @@ public class GPXUtilities {
 	}
 
 	public static String asString(GPXFile file) {
-		final Writer writer = new StringWriter();
+		Writer writer = new StringWriter();
 		writeGpx(writer, file, null);
 		return writer.toString();
 	}
@@ -1891,13 +1959,7 @@ public class GPXUtilities {
 			log.error("Error saving gpx", e); //$NON-NLS-1$
 			return e;
 		} finally {
-			if (output != null) {
-				try {
-					output.close();
-				} catch (IOException ignore) {
-					// ignore
-				}
-			}
+			Algorithms.closeStream(output);
 		}
 	}
 

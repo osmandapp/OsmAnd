@@ -140,6 +140,7 @@ import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.settings.fragments.ConfigureProfileFragment;
+import net.osmand.plus.track.GpsFilterFragment;
 import net.osmand.plus.track.TrackAppearanceFragment;
 import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
@@ -726,7 +727,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (getFragment(SharedStorageWarningFragment.TAG) == null && SharedStorageWarningFragment.dialogShowRequired(app)) {
 				showStorageMigrationScreen = true;
 				SecondSplashScreenFragment.SHOW = false;
-				SharedStorageWarningFragment.showInstance(this, true);
+				SharedStorageWarningFragment.showInstance(getSupportFragmentManager(), true);
 			}
 		}
 
@@ -816,7 +817,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		if (!showWelcomeScreen && !permissionDone && !app.getAppInitializer().isFirstTime()) {
 			if (!permissionAsked) {
-				if (app.isExternalStorageDirectoryReadOnly()
+				if (app.isExternalStorageDirectoryReadOnly() && !showStorageMigrationScreen
+						&& fragmentManager.findFragmentByTag(SharedStorageWarningFragment.TAG) == null
 						&& fragmentManager.findFragmentByTag(DataStoragePlaceDialogFragment.TAG) == null) {
 					if (DownloadActivity.hasPermissionToWriteExternalStorage(this)) {
 						DataStoragePlaceDialogFragment.showInstance(fragmentManager, null, true);
@@ -1949,17 +1951,19 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private void fitCurrentRouteToMap() {
 		boolean portrait = true;
 		int leftBottomPaddingPx = 0;
-		WeakReference fragmentRef = mapRouteInfoMenu.findMenuFragment();
+		WeakReference<?> fragmentRef = mapRouteInfoMenu.findMenuFragment();
 		if (fragmentRef == null) {
 			fragmentRef = mapRouteInfoMenu.findFollowTrackFragment();
 		}
+		View mapBottomView = findViewById(R.id.MapBottomContainer);
+		int mapBottomViewHeight = mapBottomView.getHeight();
 		if (fragmentRef != null) {
 			ContextMenuFragment f = (ContextMenuFragment) fragmentRef.get();
 			portrait = f.isPortrait();
 			if (!portrait) {
 				leftBottomPaddingPx = f.getWidth();
 			} else {
-				leftBottomPaddingPx = f.getHeight();
+				leftBottomPaddingPx = Math.max(0, f.getHeight() - mapBottomViewHeight);
 			}
 		}
 		app.getOsmandMap().fitCurrentRouteToMap(portrait, leftBottomPaddingPx);
@@ -2184,6 +2188,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return getFragment(TrackMenuFragment.TAG);
 	}
 
+	@Nullable
+	public GpsFilterFragment getGpsFilterFragment() {
+		return getFragment(GpsFilterFragment.TAG);
+	}
+
 	public void dismissTrackMenu() {
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		if (!fragmentManager.isStateSaved()) {
@@ -2202,7 +2211,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
-	<T> T getFragment(String fragmentTag) {
+	@Nullable
+	public <T> T getFragment(String fragmentTag) {
 		Fragment fragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
 		return fragment != null && !fragment.isDetached() && !fragment.isRemoving() ? (T) fragment : null;
 	}

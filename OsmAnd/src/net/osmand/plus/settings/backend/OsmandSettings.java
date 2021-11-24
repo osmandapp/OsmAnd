@@ -1,6 +1,11 @@
 package net.osmand.plus.settings.backend;
 
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
+import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
+
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -84,11 +89,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
-import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 
 public class OsmandSettings {
 
@@ -746,6 +746,8 @@ public class OsmandSettings {
 	public final CommonPreference<RadiusRulerMode> RADIUS_RULER_MODE = new EnumStringPreference<>(this, "ruler_mode", RadiusRulerMode.FIRST, RadiusRulerMode.values()).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> SHOW_COMPASS_CONTROL_RULER = new BooleanPreference(this, "show_compass_ruler", true).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> SHOW_DISTANCE_RULER = new BooleanPreference(this, "show_distance_ruler", false).makeProfile();
+	public final OsmandPreference<Boolean> SHOW_ELEVATION_PROFILE_WIDGET = new BooleanPreference(this, "show_elevation_profile_widget", false).makeProfile();
+	public final OsmandPreference<Boolean> SHOW_SLOPES_ON_ELEVATION_WIDGET = new BooleanPreference(this, "show_slopes_on_elevation_widget", false).makeProfile();
 
 	public final CommonPreference<Boolean> SHOW_LINES_TO_FIRST_MARKERS = new BooleanPreference(this, "show_lines_to_first_markers", false).makeProfile();
 	public final CommonPreference<Boolean> SHOW_ARROWS_TO_FIRST_MARKERS = new BooleanPreference(this, "show_arrows_to_first_markers", false).makeProfile();
@@ -1930,8 +1932,8 @@ public class OsmandSettings {
 		return map;
 	}
 
-	public final OsmandPreference<Boolean> SHARED_STORAGE_MIGRATION_DIALOG_SHOWN = new BooleanPreference(this,
-			"shared_storage_migration_dialog_shown", false).makeGlobal();
+	public final OsmandPreference<Boolean> SHARED_STORAGE_MIGRATION_FINISHED = new BooleanPreference(this,
+			"shared_storage_migration_finished", false).makeGlobal();
 
 	public static final String EXTERNAL_STORAGE_DIR = "external_storage_dir"; //$NON-NLS-1$
 

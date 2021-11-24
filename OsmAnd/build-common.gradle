@@ -351,7 +351,7 @@ dependencies {
 	implementation 'androidx.gridlayout:gridlayout:1.0.0'
 	implementation 'androidx.cardview:cardview:1.0.0'
 	implementation 'androidx.appcompat:appcompat:1.2.0'
-	implementation 'com.google.android.material:material:1.2.1'
+	implementation 'com.google.android.material:material:1.4.0'
 	implementation 'androidx.browser:browser:1.0.0'
 	implementation 'androidx.preference:preference:1.1.0'
 	implementation fileTree(include: ['gnu-trove-osmand.jar', 'icu4j-49_1_patched.jar'], dir: 'libs')
@@ -379,7 +379,7 @@ dependencies {
 	implementation("com.getkeepsafe.taptargetview:taptargetview:1.13.2") {
 		exclude group: 'com.android.support'
 	}
-	implementation 'com.github.PhilJay:MPAndroidChart:v3.0.1'
+	implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 	implementation("com.github.HITGIF:TextFieldBoxes:1.4.5") {
 		exclude group: 'com.android.support'
 	}

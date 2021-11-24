@@ -55,10 +55,10 @@ import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
-import net.osmand.plus.measurementtool.graph.BaseGraphAdapter;
-import net.osmand.plus.measurementtool.graph.CommonGraphAdapter;
-import net.osmand.plus.measurementtool.graph.GraphAdapterHelper;
-import net.osmand.plus.measurementtool.graph.GraphAdapterHelper.RefreshMapCallback;
+import net.osmand.plus.measurementtool.graph.BaseChartAdapter;
+import net.osmand.plus.measurementtool.graph.CommonChartAdapter;
+import net.osmand.plus.measurementtool.graph.ChartAdapterHelper;
+import net.osmand.plus.measurementtool.graph.ChartAdapterHelper.RefreshMapCallback;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
@@ -337,17 +337,17 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		}
 		routeDetailsMenu.setMapActivity(mapActivity);
 
-		CommonGraphAdapter mainGraphAdapter = statisticCard.getGraphAdapter();
+		CommonChartAdapter mainGraphAdapter = statisticCard.getGraphAdapter();
 		if (mainGraphAdapter != null) {
-			GraphAdapterHelper.bindGraphAdapters(mainGraphAdapter, getRouteInfoCardsGraphAdapters(), getMainView());
-			refreshMapCallback = GraphAdapterHelper.bindToMap(mainGraphAdapter, mapActivity, routeDetailsMenu);
+			ChartAdapterHelper.bindGraphAdapters(mainGraphAdapter, getRouteInfoCardsGraphAdapters(), getMainView());
+			refreshMapCallback = ChartAdapterHelper.bindToMap(mainGraphAdapter, mapActivity, routeDetailsMenu);
 		}
 	}
 
-	private List<BaseGraphAdapter> getRouteInfoCardsGraphAdapters() {
-		List<BaseGraphAdapter> adapters = new ArrayList<>();
+	private List<BaseChartAdapter> getRouteInfoCardsGraphAdapters() {
+		List<BaseChartAdapter> adapters = new ArrayList<>();
 		for (RouteInfoCard card : routeInfoCards) {
-			BaseGraphAdapter adapter = card.getGraphAdapter();
+			BaseChartAdapter adapter = card.getGraphAdapter();
 			if (adapter != null) {
 				adapters.add(adapter);
 			}

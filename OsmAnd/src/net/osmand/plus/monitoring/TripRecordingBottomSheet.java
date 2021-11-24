@@ -353,7 +353,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		displayHelper.setGpxDataItem(app.getGpxDbHelper().getItem(file));
 		displayHelper.setGpx(gpxFile);
 
-		graphsAdapter = new GPXItemPagerAdapter(app, null, displayHelper, nightMode, this, true);
+		graphsAdapter = new GPXItemPagerAdapter(app, null, displayHelper, nightMode, this, true, true);
 		graphsAdapter.setChartHMargin(getDimen(R.dimen.content_padding));
 
 		pager.setAdapter(graphsAdapter);

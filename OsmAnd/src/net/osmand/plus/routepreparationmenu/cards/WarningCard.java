@@ -81,9 +81,8 @@ public abstract class WarningCard extends MapBaseCard {
 
 				@Override
 				public void onClick(@NonNull View widget) {
-					CardListener listener = getListener();
-					if (listener != null) {
-						listener.onCardButtonPressed(WarningCard.this, 0);
+					if (getListener() != null) {
+						notifyButtonPressed(0);
 					} else {
 						onLinkClicked();
 					}

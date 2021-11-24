@@ -123,6 +123,17 @@ public class GpxDbHelper {
 		return res;
 	}
 
+	public boolean updateGpsFilters(@NonNull GpxDataItem item, @NonNull FilteredSelectedGpxFile selectedGpxFile) {
+		boolean res = db.updateGpsFiltersConfig(item, selectedGpxFile);
+		putToCache(item);
+		return res;
+	}
+
+	public void resetGpsFilters(@NonNull GpxDataItem item) {
+		db.resetGpsFilters(item);
+		putToCache(item);
+	}
+
 	public boolean remove(File file) {
 		boolean res = db.remove(file);
 		itemsCache.remove(file);

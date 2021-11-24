@@ -96,6 +96,9 @@ public class OverviewCard extends MapBaseCard {
 				initDirectionsButton(iconColorDef, iconColorPres);
 			}
 		}
+		GPXTrackAnalysis analysis = selectedGpxFile.getFilteredSelectedGpxFile() != null
+				? selectedGpxFile.getFilteredSelectedGpxFile().getTrackAnalysis(app)
+				: this.analysis;
 		blockStatisticsBuilder.initStatBlocks(actionsListener, getActiveColor(), analysis);
 
 		if (blocksView.getVisibility() == View.VISIBLE && description.getVisibility() == View.VISIBLE) {
@@ -147,7 +150,7 @@ public class OverviewCard extends MapBaseCard {
 			public void onClick(View v) {
 				CardListener listener = getListener();
 				if (listener != null) {
-					listener.onCardButtonPressed(OverviewCard.this, buttonIndex);
+					notifyButtonPressed(buttonIndex);
 					if (buttonIndex == SHOW_ON_MAP_BUTTON_INDEX) {
 						setImageDrawable(icon, getActiveShowHideIcon(), iconColorDef);
 					}
