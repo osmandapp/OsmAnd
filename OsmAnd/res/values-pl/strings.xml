@@ -4409,4 +4409,7 @@
     <string name="display_route_tracks">Wyświetlanie ścieżek</string>
     <string name="display_route_tracks_as_poi">Wyświetlanie ścieżek jako POI</string>
     <string name="quick_action_toggle_preference">Przełącznik do przełączania wybranego stanu preferencji.</string>
+    <string name="shared_string_statistics">Statystyki</string>
+    <string name="gps_filter_hdop_desc">Ustaw maksymalną dopuszczalną wartość HDOP.
+\nPunkty większe niż ustawiony parametr zostaną ukryte.</string>
 </resources>
