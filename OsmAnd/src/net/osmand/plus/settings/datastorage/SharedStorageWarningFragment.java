@@ -3,7 +3,6 @@ package net.osmand.plus.settings.datastorage;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -25,6 +24,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
+import net.osmand.FileUtils;
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OnDismissDialogFragmentListener;
 import net.osmand.plus.OsmandApplication;
@@ -44,6 +44,7 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenTyp
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -348,8 +349,8 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 
 	public static boolean dialogShowRequired(@NonNull OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
-		return Build.VERSION.SDK_INT >= 30 && DataStorageHelper.isCurrentStorageShared(app)
-				&& !settings.SHARED_STORAGE_MIGRATION_FINISHED.get();
+		File dir = settings.getExternalStorageDirectory();
+		return !FileUtils.isWritable(dir) && !settings.SHARED_STORAGE_MIGRATION_FINISHED.get();
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, boolean usedOnMap) {
