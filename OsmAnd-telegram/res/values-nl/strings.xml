@@ -190,7 +190,7 @@
     <string name="nm">nmi</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
-    <string name="nm_h"></string>
+    <string name="nm_h"/>
     <string name="m_s">m/s</string>
     <string name="km_h">km/u</string>
     <string name="mile_per_hour">mpu</string>
@@ -261,4 +261,5 @@
     <string name="shared_string_export">Exporteer</string>
     <string name="logcat_buffer">Logcat buffer</string>
     <string name="logcat_buffer_descr">Controleer en deel gedetailleerde logs van de app</string>
+    <string name="duration_ago">%1$s geleden</string>
 </resources>
