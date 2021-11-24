@@ -513,7 +513,7 @@ public class OsmandRenderer {
 		}
 		Collections.sort(polygonsArray, sortByOrder());
 		Collections.sort(pointsArray, sortByOrder());
-		Collections.sort(linesResArray, sortByOrder());
+		Collections.sort(linesArray, sortByOrder());
 		filterLinesByDensity(rc, linesResArray, linesArray);
 	}
 	
