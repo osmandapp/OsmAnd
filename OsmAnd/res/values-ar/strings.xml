@@ -2290,7 +2290,7 @@
     <string name="index_item_depth_contours_osmand_ext">معالم العمق البحري</string>
     <string name="index_item_depth_points_southern_hemisphere">معالم أعماق البحار في نصف الكرة الجنوبي</string>
     <string name="index_item_depth_points_northern_hemisphere">معالم أعماق البحار في نصف الكرة الشمالي</string>
-    <string name="download_depth_countours">محيطات الأعماق البحرية</string>
+    <string name="download_depth_countours">ملامح العمق البحري</string>
     <string name="do_not_send_anonymous_app_usage_desc">أوسماند يقوم بجمع معلومات حول أجزاء من التطبيقات التي تفتحها. الموقع الخاص بك لا يرسل ابدأ، ولا أي شيء تقوم بإدخاله في التطبيق أو أي تفاصيل لمناطق رأيتها ، بحثت عنها أو نزلتها.</string>
     <string name="do_not_show_startup_messages_desc">عرض خصومات التطبيق ورسائل الأحداث المحلية الخاصة.</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">تضاريس أقل</string>
@@ -2968,7 +2968,7 @@
 \n• عرض السمت في قياس المسافة
 \n
 \n</string-->
-    <string name="day">نهار</string>
+    <string name="day">يوم</string>
     <string name="days_2_4">أيام</string>
     <string name="days_5">أيام</string>
     <string name="week">أسبوع</string>
@@ -4421,6 +4421,10 @@
 \n
 \n • تحديث واجهة المستخدم ل تنسيق البحث UTM
 \n
+\n• مرشح GPS لمسارات GPX
+\n
+\n• أداة الارتفاع (Pro)
+\n
 \n • المفضلة: تمت إضافة القدرة على عرض الأيقونات المستخدمة مؤخرا
 \n
 \n • تخطيط الطريق: سيستخدم ملف التعريف المحدد بعد البدأ
@@ -4547,5 +4551,5 @@
 \nكن حذرًا كلما زادت المسافة، كانت هندسة المسار أبسط.</string>
     <string name="shared_string_gps_filter">مرشح GPS</string>
     <string name="gps_filter_smoothing">التنعيم</string>
-    <string name="gps_filter_precision">دقة GPS الأدنى</string>
+    <string name="gps_filter_precision">دقة تحديد المواقع</string>
 </resources>
