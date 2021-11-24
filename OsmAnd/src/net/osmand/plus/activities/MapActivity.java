@@ -1951,17 +1951,19 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private void fitCurrentRouteToMap() {
 		boolean portrait = true;
 		int leftBottomPaddingPx = 0;
-		WeakReference fragmentRef = mapRouteInfoMenu.findMenuFragment();
+		WeakReference<?> fragmentRef = mapRouteInfoMenu.findMenuFragment();
 		if (fragmentRef == null) {
 			fragmentRef = mapRouteInfoMenu.findFollowTrackFragment();
 		}
+		View mapBottomView = findViewById(R.id.MapBottomContainer);
+		int mapBottomViewHeight = mapBottomView.getHeight();
 		if (fragmentRef != null) {
 			ContextMenuFragment f = (ContextMenuFragment) fragmentRef.get();
 			portrait = f.isPortrait();
 			if (!portrait) {
 				leftBottomPaddingPx = f.getWidth();
 			} else {
-				leftBottomPaddingPx = f.getHeight();
+				leftBottomPaddingPx = Math.max(0, f.getHeight() - mapBottomViewHeight);
 			}
 		}
 		app.getOsmandMap().fitCurrentRouteToMap(portrait, leftBottomPaddingPx);

@@ -972,6 +972,7 @@ public class GPXUtilities {
 				if (pointsCount > 1) {
 					calcAvg(eleSumm, pointsCount, eleAvg);
 				}
+				diffElevationUp = Math.round(diffElevationUp + 0.3f);
 			}
 
 			private double calcAvg(double eleSumm, int pointsCount, double eleAvg) {
@@ -981,7 +982,7 @@ public class GPXUtilities {
 					if (diff > 0) {
 						diffElevationUp += diff;
 					} else {
-						diffElevationDown += diff;
+						diffElevationDown -= diff;
 					}
 				}
 				return avg;

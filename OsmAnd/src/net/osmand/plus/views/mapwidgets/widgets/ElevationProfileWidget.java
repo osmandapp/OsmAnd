@@ -28,6 +28,7 @@ import net.osmand.GPXUtilities.GPXTrackAnalysis.ElevationDiffsCalculator;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
+import net.osmand.StateChangedListener;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -78,17 +79,28 @@ public class ElevationProfileWidget {
 	private int lastVisiblePointIndex = -1;
 	private OrderedLineDataSet slopeDataSet;
 
+	private boolean movedToLocation = false;
+
+	private final StateChangedListener<Boolean> linkedToLocationListener = change -> {
+		if (change) {
+			movedToLocation = true;
+		}
+	};
+
 	public ElevationProfileWidget(MapActivity map) {
 		this.map = map;
 		app = map.getMyApplication();
 		settings = app.getSettings();
 		initView();
+		settings.MAP_LINKED_TO_LOCATION.addListener(linkedToLocationListener);
 	}
 
 	private void initView() {
 		this.view = map.findViewById(R.id.elevation_profile_widget_layout);
 		setupStatisticBlocks();
 	}
+
+
 
 	private void setupStatisticBlocks() {
 		uphillView = setupStatisticBlock(R.id.uphill_widget,
@@ -295,10 +307,16 @@ public class ElevationProfileWidget {
 		float startMoveChartPosition = minVisibleX + twentyPercent;
 		float pos = distanceFromStart / ((OrderedLineDataSet) ds.get(0)).getDivX();
 
-		if (pos >= minVisibleX && pos <= maxVisibleX) {
+		boolean movedToLocation = this.movedToLocation;
+		if (pos >= minVisibleX && pos <= maxVisibleX || movedToLocation) {
 			if (pos >= startMoveChartPosition) {
 				float nextVisibleX = pos - twentyPercent;
 				moveViewToX(chart, nextVisibleX);
+			} else if (movedToLocation) {
+				moveViewToX(chart, Math.max(pos - twentyPercent, chart.getXChartMin()));
+			}
+			if (movedToLocation) {
+				this.movedToLocation = false;
 			}
 			gpxItem.chartHighlightPos = pos;
 			Highlight newLocationHighlight = createHighlight(pos, true);
@@ -368,7 +386,8 @@ public class ElevationProfileWidget {
 		firstVisiblePointIndex = firstPointIndex;
 		lastVisiblePointIndex = lastPointIndex;
 		if (firstPointIndex >= 0 && lastPointIndex > firstPointIndex) {
-			ElevationDiffsCalculator elevationDiffsCalc = new ElevationDiffsCalculator(firstPointIndex, lastPointIndex - firstPointIndex + 1) {
+			ElevationDiffsCalculator elevationDiffsCalc =
+					new ElevationDiffsCalculator(10d, firstPointIndex, lastPointIndex - firstPointIndex + 1) {
 				@Override
 				public WptPt getPoint(int index) {
 					return points.get(index);
