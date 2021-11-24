@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
+import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
@@ -190,35 +191,33 @@ public class AvoidSpecificRoads {
 	}
 
 	public void showDialog(@NonNull final MapActivity mapActivity, final @Nullable ApplicationMode mode) {
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
+		if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
+			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+			Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
 
-		AlertDialog.Builder bld = new AlertDialog.Builder(themedContext);
-		bld.setTitle(R.string.impassable_road);
-		if (impassableRoads.isEmpty()) {
-			bld.setMessage(R.string.avoid_roads_msg);
-		} else {
-			final ArrayAdapter<AvoidRoadInfo> listAdapter = createAdapter(mapActivity, nightMode);
-			bld.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
+			builder.setTitle(R.string.impassable_road);
+			if (impassableRoads.isEmpty()) {
+				builder.setMessage(R.string.avoid_roads_msg);
+			} else {
+				final ArrayAdapter<AvoidRoadInfo> listAdapter = createAdapter(mapActivity, nightMode);
+				builder.setAdapter(listAdapter, (dialog, which) -> {
 					AvoidRoadInfo point = listAdapter.getItem(which);
 					if (point != null) {
 						showOnMap(mapActivity, point.latitude, point.longitude, point.name);
 					}
 					dialog.dismiss();
-				}
-
-			});
-		}
-		bld.setPositiveButton(R.string.shared_string_select_on_map, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialogInterface, int i) {
-				selectFromMap(mapActivity, mode);
+				});
 			}
-		});
-		bld.setNegativeButton(R.string.shared_string_close, null);
-		bld.show();
+			builder.setPositiveButton(R.string.shared_string_select_on_map, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialogInterface, int i) {
+					selectFromMap(mapActivity, mode);
+				}
+			});
+			builder.setNegativeButton(R.string.shared_string_close, null);
+			builder.show();
+		}
 	}
 
 	public void selectFromMap(@NonNull final MapActivity mapActivity) {
