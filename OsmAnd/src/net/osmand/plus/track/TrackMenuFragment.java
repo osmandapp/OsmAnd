@@ -24,6 +24,14 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import net.osmand.AndroidUtils;
@@ -83,9 +91,9 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.search.QuickSearchDialogFragment;
-import net.osmand.plus.track.GpsFilterFragment.GpsFilterFragmentLister;
 import net.osmand.plus.track.DisplayGroupsBottomSheet.DisplayPointGroupsCallback;
 import net.osmand.plus.track.DisplayPointsGroupsHelper.DisplayGroupsHolder;
+import net.osmand.plus.track.GpsFilterFragment.GpsFilterFragmentLister;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.track.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
@@ -98,14 +106,6 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.List;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.GPXUtilities.GPXTrackAnalysis;
 import static net.osmand.plus.GpxSelectionHelper.isGpxFileSelected;
@@ -162,6 +162,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private View toolbarContainer;
 	private View searchContainer;
 	private ImageView searchButton;
+	private ImageView displayGroupsButton;
 	private EditText searchEditText;
 	private View backButtonContainer;
 	private View displayGroupsWidget;
@@ -392,6 +393,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			toolbarContainer = view.findViewById(R.id.context_menu_toolbar_container);
 			toolbarTextView = view.findViewById(R.id.toolbar_title);
 			searchButton = view.findViewById(R.id.search_button);
+			displayGroupsButton = view.findViewById(R.id.appbar_display_groups_button);
 			searchContainer = view.findViewById(R.id.search_container);
 			backButtonContainer = view.findViewById(R.id.back_button_container);
 			displayGroupsWidget = view.findViewById(R.id.display_groups_button_container);
@@ -446,6 +448,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			AndroidUiHelper.updateVisibility(searchButton, false);
 			AndroidUiHelper.updateVisibility(searchContainer, false);
 		}
+		AndroidUiHelper.updateVisibility(displayGroupsButton, hasPointsGroups());
 		AndroidUiHelper.updateVisibility(headerIcon, menuType != TrackMenuType.OPTIONS);
 	}
 
@@ -526,7 +529,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			addCardViewToHeader(groupsCard);
 		} else {
 			MapActivity mapActivity = requireMapActivity();
-			groupsCard = new PointsGroupsCard(mapActivity, pointsCard.getGroups());
+			groupsCard = new PointsGroupsCard(mapActivity, pointsCard.getGroups(), selectedGpxFile);
 			groupsCard.setListener(this);
 			headerContainer.addView(groupsCard.build(mapActivity));
 		}
@@ -558,6 +561,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				if (menuType == TrackMenuType.POINTS) {
 					AndroidUiHelper.updateVisibility(toolbarTextView, true);
 					AndroidUiHelper.updateVisibility(searchButton, true);
+					AndroidUiHelper.updateVisibility(displayGroupsButton, hasPointsGroups());
 					AndroidUiHelper.updateVisibility(searchContainer, false);
 				}
 				openMenuHeaderOnly();
@@ -570,6 +574,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			public void onClick(View v) {
 				AndroidUiHelper.updateVisibility(searchContainer, true);
 				AndroidUiHelper.updateVisibility(searchButton, false);
+				AndroidUiHelper.updateVisibility(displayGroupsButton, false);
 				AndroidUiHelper.updateVisibility(toolbarTextView, false);
 			}
 		});
@@ -625,21 +630,26 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			backIconId = R.drawable.ic_action_close;
 		}
 		backButtonIcon.setImageResource(backIconId);
-		displayGroupsWidget.setOnClickListener(view -> {
+		setupDisplayGroupsWidget();
+	}
+
+	private void setupDisplayGroupsWidget() {
+		OnClickListener listener = view -> {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
-				DisplayGroupsBottomSheet.showInstance(mapActivity, this, true);
+				DisplayGroupsBottomSheet.showInstance(mapActivity, TrackMenuFragment.this, true);
 			}
-		});
+		};
+		displayGroupsButton.setOnClickListener(listener);
+		displayGroupsWidget.setOnClickListener(listener);
 		updateDisplayGroupsWidget();
 	}
 
 	public void updateDisplayGroupsWidget() {
-		List<GpxDisplayGroup> displayGroups = displayHelper.getPointsOriginalGroups();
-		if (displayGroups.size() > 0) {
+		if (hasPointsGroups()) {
 			displayGroupsWidget.setVisibility(View.VISIBLE);
 			DisplayGroupsHolder displayGroupsHolder =
-					DisplayPointsGroupsHelper.getGroups(app, displayGroups, null);
+					DisplayPointsGroupsHelper.getGroups(app, displayHelper.getPointsOriginalGroups(), null);
 			int total = displayGroupsHolder.groups.size();
 			int hidden = selectedGpxFile.getHiddenGroups().size();
 			int visible = total - hidden;
@@ -654,6 +664,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 	}
 
+	private boolean hasPointsGroups() {
+		return displayHelper.getPointsOriginalGroups().size() > 0;
+	}
+
 	@Override
 	public void onPointGroupsVisibilityChanged() {
 		MapActivity mapActivity = getMapActivity();
@@ -661,6 +675,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			app.getSelectedGpxHelper().updateSelectedGpxFile(selectedGpxFile);
 			mapActivity.refreshMap();
 			updateDisplayGroupsWidget();
+			updatePointGroupsCard();
 		}
 	}
 
@@ -1306,10 +1321,14 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (pointsCard != null) {
 			pointsCard.updateContent();
 		}
+		updatePointGroupsCard();
+		setupCards();
+	}
+
+	private void updatePointGroupsCard() {
 		if (groupsCard != null) {
 			groupsCard.updateContent();
 		}
-		setupCards();
 	}
 
 	@Override
