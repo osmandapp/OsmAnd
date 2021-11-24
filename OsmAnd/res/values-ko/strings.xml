@@ -941,7 +941,7 @@
     <string name="map_widget_fluorescent">깜박이는 경로</string>
     <string name="map_widget_show_ruler">축척(Ruler)</string>
     <string name="map_widget_view_direction">방향 보기</string>
-    <string name="map_widget_transparent">투명 스킨</string>
+    <string name="map_widget_transparent">투명 위젯</string>
     <string name="bg_service_sleep_mode_off">동작중\n 절전 모드</string>
     <string name="bg_service_sleep_mode_on">정지\n 절전 모드</string>
     <string name="int_continuosly">연속적인</string>
@@ -1367,7 +1367,7 @@
     <string name="route_points">루트 포인트</string>
     <string name="shared_string_release">릴리스</string>
     <string name="shared_string_ellipsis">…</string>
-    <string name="shared_string_ok">네 알겠습니다</string>
+    <string name="shared_string_ok">승인</string>
     <string name="shared_string_cancel">취소</string>
     <string name="shared_string_dismiss">해제</string>
     <string name="shared_string_yes">네</string>
@@ -1874,4 +1874,9 @@
     <string name="map_widget_battery">배터리 잔량</string>
     <string name="search_my_location">내 위치 찾기</string>
     <string name="shared_string_from">부터</string>
+    <string name="mapillary_menu_title_tile_cache">타일 캐시</string>
+    <string name="translit_name_if_miss">이름이 누락된 1%1$s 번역 하기</string>
+    <string name="offline_maps_required_descr">이 경로에 필요한 일부 오프라인 맵이 없습니다.</string>
+    <string name="shared_string_all_languages">모든 언어</string>
+    <string name="street_level_imagery">거리 기반의 파노라마 영상 서비스</string>
 </resources>
