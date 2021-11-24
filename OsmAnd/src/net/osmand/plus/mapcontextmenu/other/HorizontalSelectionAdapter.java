@@ -6,6 +6,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,8 +32,8 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 	public static int INVALID_ID = -1;
 
 	private List<HorizontalSelectionItem> items;
-	private OsmandApplication app;
-	private boolean nightMode;
+	private final OsmandApplication app;
+	private final boolean nightMode;
 	private HorizontalSelectionAdapterListener listener;
 	private HorizontalSelectionItem selectedItem = null;
 
@@ -72,7 +73,7 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 		if (item.equals(selectedItem) && item.isEnabled()) {
 			int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 			AndroidUtils.setBackground(holder.button, UiUtilities.createTintedDrawable(app,
-							R.drawable.bg_select_icon_group_button, activeColor));
+					R.drawable.bg_select_icon_group_button, activeColor));
 			itemColor = ContextCompat.getColor(app, R.color.color_white);
 		} else {
 			if (!item.isEnabled()) {
@@ -93,8 +94,16 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 			AndroidUtils.setBackground(holder.button, buttonBackground);
 		}
 		textView.setTextColor(itemColor);
+
+		int iconColor = item.iconColorId != INVALID_ID ? app.getColor(item.iconColorId) : itemColor;
 		if (item.iconId != INVALID_ID) {
-			imageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(item.iconId, itemColor));
+			imageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(item.iconId, iconColor));
+		}
+		if (item.iconSizePx != INVALID_ID && imageView.getLayoutParams() != null) {
+			LayoutParams imgLayoutParams = imageView.getLayoutParams();
+			imgLayoutParams.height = item.iconSizePx;
+			imgLayoutParams.width = item.iconSizePx;
+			imageView.requestLayout();
 		}
 		AndroidUiHelper.updateVisibility(textView, !item.isShowOnlyIcon());
 		AndroidUiHelper.updateVisibility(imageView, item.iconId != INVALID_ID);
@@ -175,12 +184,16 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 	}
 
 	public static class HorizontalSelectionItem {
-		private String title;
-		private boolean enabled = true;
+
+		private final String title;
+		private final Object object;
+
 		private int titleColorId = INVALID_ID;
-		private Object object;
 		private int iconId = INVALID_ID;
+		private int iconColorId = INVALID_ID;
+		private int iconSizePx = INVALID_ID;
 		private boolean showOnlyIcon;
+		private boolean enabled = true;
 
 		public HorizontalSelectionItem(String title) {
 			this(title, null);
@@ -221,6 +234,22 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 
 		public int getIconId() {
 			return iconId;
+		}
+
+		public int getIconColorId() {
+			return iconColorId;
+		}
+
+		public void setIconColorId(int iconColorId) {
+			this.iconColorId = iconColorId;
+		}
+
+		public int getIconSizePx() {
+			return iconSizePx;
+		}
+
+		public void setIconSizePx(int iconSizePx) {
+			this.iconSizePx = iconSizePx;
 		}
 
 		public Object getObject() {

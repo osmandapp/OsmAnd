@@ -1,6 +1,12 @@
 package net.osmand.plus.track;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
@@ -11,21 +17,21 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import java.util.Set;
 
 public class PointsGroupsCard extends MapBaseCard {
 
 	public static final int SELECT_GROUP_INDEX = 0;
 
 	private GpxDisplayGroup selectedGroup;
+	private final SelectedGpxFile selectedGpxFile;
 	private final List<GpxDisplayGroup> displayGroups = new ArrayList<>();
 
 	public PointsGroupsCard(@NonNull MapActivity mapActivity,
-	                        @NonNull List<GpxDisplayGroup> groups) {
+	                        @NonNull List<GpxDisplayGroup> groups,
+	                        @NonNull SelectedGpxFile selectedGpxFile) {
 		super(mapActivity);
+		this.selectedGpxFile = selectedGpxFile;
 		displayGroups.addAll(groups);
 	}
 
@@ -42,12 +48,23 @@ public class PointsGroupsCard extends MapBaseCard {
 	protected void updateContent() {
 		ArrayList<HorizontalSelectionItem> items = new ArrayList<>();
 		items.add(new HorizontalSelectionItem(app.getString(R.string.shared_string_all), null));
+
+		int iconSizePx = app.getResources().getDimensionPixelSize(R.dimen.poi_icon_size);
+		int iconColorId = ColorUtilities.getSecondaryIconColorId(nightMode);
+
+		Set<String> hidden = selectedGpxFile.getHiddenGroups();
 		for (GpxDisplayGroup group : displayGroups) {
 			String categoryName = group.getName();
 			if (Algorithms.isEmpty(categoryName)) {
 				categoryName = app.getString(R.string.shared_string_gpx_points);
 			}
-			items.add(new HorizontalSelectionItem(categoryName, group));
+			HorizontalSelectionItem item = new HorizontalSelectionItem(categoryName, group);
+			if (hidden.contains(categoryName)) {
+				item.setIconId(R.drawable.ic_action_hide_16);
+				item.setIconColorId(iconColorId);
+				item.setIconSizePx(iconSizePx);
+			}
+			items.add(item);
 		}
 		final HorizontalSelectionAdapter selectionAdapter = new HorizontalSelectionAdapter(app, nightMode);
 		selectionAdapter.setItems(items);

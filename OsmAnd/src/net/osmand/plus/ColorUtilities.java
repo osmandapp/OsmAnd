@@ -141,6 +141,16 @@ public class ColorUtilities {
 	}
 
 	@ColorInt
+	public static int getSecondaryIconColor(@NonNull Context ctx, boolean nightMode) {
+		return ContextCompat.getColor(ctx, getSecondaryIconColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getSecondaryIconColorId(boolean nightMode) {
+		return nightMode ? R.color.icon_color_secondary_dark : R.color.icon_color_secondary_light;
+	}
+
+	@ColorInt
 	public static int getActivityBgColor(@NonNull Context ctx, boolean nightMode) {
 		return ContextCompat.getColor(ctx, getActivityBgColorId(nightMode));
 	}
