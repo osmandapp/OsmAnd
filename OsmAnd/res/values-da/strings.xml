@@ -4379,25 +4379,29 @@
     <string name="markers_history_is_disabled_descr">Aktiver historik for huske en liste over besøgte kortmarkører.</string>
     <string name="is_disabled">%1$s er deaktiveret</string>
     <string name="map_markers_history">Kortmarkørhistorik</string>
-    <string name="release_4_1">- Tilføjet indledende understøttelse af Android Auto
+    <string name="release_4_1">• Tilføjet indledende understøttelse af Android Auto
 \n
-\n - Opdatering af brugergrænseflade til søgning efter UTM-koordinater
+\n • Opdatering af brugergrænseflade til søgning efter UTM-koordinater
 \n
-\n - Favoritter: tilføjede mulighed for at få vist senest anvendte ikoner
+\n • GPS-filter til GPS-spor
 \n
-\n - Ruteplanlægning: vil bruge den valgte profil efter start
+\n •Højde-modul (Pro)
 \n
-\n - Rettet Mapillary-lag, plugin\'et er nu deaktiveret som standard
+\n • Favoritter: tilføjede mulighed for at få vist senest anvendte ikoner
 \n
-\n - Tilføjet skærm til administration af al historik i appen
+\n • Ruteplanlægning: vil bruge den valgte profil efter start
 \n
-\n - Kortets orientering nulstilles ikke efter genstart af appen
+\n • Rettet Mapillary-lag, plugin\'et er nu deaktiveret som standard
 \n
-\n - Forbedret gengivelse af SRTM-højdemarkører
+\n • Tilføjet skærm til administration af al historik i appen
 \n
-\n - Rettet arabiske korttekster
+\n • Kortets orientering nulstilles ikke efter genstart af appen
 \n
-\n - Rettet forskellige problemer med ruteføring
+\n • Forbedret gengivelse af SRTM-højdemarkører
+\n
+\n • Rettet arabiske korttekster
+\n
+\n • Rettet forskellige problemer med ruteføring
 \n
 \n</string>
     <string name="safe_settings">Sikker</string>
@@ -4471,7 +4475,7 @@
     <string name="gps_filter_hdop_desc">Indstil den maksimalt tilladte værdi for HDOP.
 \nPunkter med højere værdi end den indstillede parameter, vil blive skjult.</string>
     <string name="gps_filter_speed_altitude_desc">De sporpunkter, der passer til det indstillede interval, vil være synlige på diagrammet og kortet, mens resten vil være skjult.</string>
-    <string name="gps_filter_precision">Minimum GPS-præcision</string>
+    <string name="gps_filter_precision">GPS-præcision</string>
     <string name="gps_filter_smoothing">Udjævning</string>
     <string name="save_as_copy">Gem som kopi</string>
     <string name="ltr_or_rtl_combine">%1$s %2$s</string>
