@@ -1012,7 +1012,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			toggle.setAccessibilityDelegate(new View.AccessibilityDelegate() {
 				public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfo info) {
 					super.onInitializeAccessibilityNodeInfo(host, info);
-					info.setContentDescription(mapActivity.getString(mode.getNameKeyResource()));
+					info.setContentDescription(mode.toHumanString());
 					info.setEnabled(host.isEnabled());
 				}
 			});

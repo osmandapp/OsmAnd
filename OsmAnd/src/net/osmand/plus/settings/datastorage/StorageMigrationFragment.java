@@ -139,7 +139,6 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	private void updateProgress(int progress) {
-		generalProgress = progress;
 		progressBar.setProgress(progress);
 
 		int maxProgress = progressBar.getMax();
@@ -243,12 +242,17 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	public void onRemainingFilesUpdate(@NonNull Pair<Integer, Long> pair) {
 		remainingSize = pair.second;
 		remainingCount = pair.first;
-		setupRemainingFiles();
+		if (isAdded()) {
+			setupRemainingFiles();
+		}
 	}
 
 	@Override
 	public void onFilesCopyProgress(int progress) {
-		updateProgress(progress);
+		generalProgress = progress;
+		if (isAdded()) {
+			updateProgress(progress);
+		}
 	}
 
 	@Override
@@ -258,7 +262,10 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 		this.existingFiles = existingFiles;
 		generalProgress = (int) (filesSize.second / 1024);
 		app.getSettings().SHARED_STORAGE_MIGRATION_FINISHED.set(true);
-		updateContent();
+
+		if (isAdded()) {
+			updateContent();
+		}
 	}
 
 	public static StorageMigrationListener showInstance(@NonNull FragmentManager fragmentManager,
