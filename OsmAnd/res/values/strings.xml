@@ -24,7 +24,7 @@
     <string name="gps_filter_actions_description">OsmAnd applying changes to the track without saving it to the file. You can save changes manually.</string>
     <string name="shared_string_gps_filter">GPS filter</string>
     <string name="storage_migration_wrong_folder_warning">We can\'t find OsmAnd data in the selected folder. Please try again.</string>
-    <string name="exit_without_saving_warning">Are you sure you exit without saving? You will lost all changes.</string>
+    <string name="exit_without_saving_warning">Are you sure you exit without saving? You will lose all changes.</string>
     <string name="migration_files_present">%1$d files (%2$s) are present in the selected location \'%3$s\'.</string>
     <string name="fold_unfold">fold/unfold</string>
     <string name="app_profile_type">App profile type</string>
