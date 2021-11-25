@@ -124,6 +124,12 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	}
 
 	private void createLayers(@NonNull Context context) {
+		if (underlayLayer != null) {
+			app.getOsmandMap().getMapView().removeLayer(underlayLayer);
+		}
+		if (overlayLayer != null) {
+			app.getOsmandMap().getMapView().removeLayer(overlayLayer);
+		}
 		underlayLayer = new MapTileLayer(context, false);
 		// mapView.addLayer(underlayLayer, -0.5f);
 		overlayLayer = new MapTileLayer(context, false);
