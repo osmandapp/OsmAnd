@@ -3,6 +3,7 @@ package net.osmand.plus.measurementtool;
 import android.annotation.SuppressLint;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver.OnScrollChangedListener;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -67,6 +68,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 	private GPXTrackAnalysis analysis;
 	private GpxDisplayItem gpxItem;
 
+	private OnScrollChangedListener scrollChangedListener;
 	private View commonGraphContainer;
 	private View customGraphContainer;
 	private View messageContainer;
@@ -86,37 +88,59 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 	}
 
 	@Override
+	public int getCardLayoutId() {
+		return R.layout.measurement_tool_graph_card;
+	}
+
+	@Override
 	protected void updateContent() {
 		editingCtx = fragment.getEditingCtx();
 
 		graphTypesMenu = view.findViewById(R.id.graph_types_recycler_view);
 		graphTypesMenu.setLayoutManager(new LinearLayoutManager(mapActivity, RecyclerView.HORIZONTAL, false));
-		commonGraphContainer = view.findViewById(R.id.common_graphs_container);
-		customGraphContainer = view.findViewById(R.id.custom_graphs_container);
-		messageContainer = view.findViewById(R.id.message_container);
+
+		setupScrollListener();
+
 		LineChart lineChart = view.findViewById(R.id.line_chart);
 		HorizontalBarChart barChart = view.findViewById(R.id.horizontal_chart);
 		commonGraphAdapter = new CommonChartAdapter(app, lineChart, true);
 		customGraphAdapter = new CustomChartAdapter(app, barChart, true);
 
+		commonGraphContainer = view.findViewById(R.id.common_graphs_container);
+		customGraphContainer = view.findViewById(R.id.custom_graphs_container);
 		customGraphAdapter.setLegendContainer(view.findViewById(R.id.route_legend));
 		customGraphAdapter.setLayoutChangeListener(this::setLayoutNeeded);
 
-		ChartAdapterHelper.bindGraphAdapters(commonGraphAdapter, Collections.singletonList(customGraphAdapter), (ViewGroup) view);
+		messageContainer = view.findViewById(R.id.message_container);
+
+		ViewGroup scrollView = view.findViewById(R.id.scroll_view);
+		ChartAdapterHelper.bindGraphAdapters(commonGraphAdapter, Collections.singletonList(customGraphAdapter), scrollView);
 		refreshMapCallback = ChartAdapterHelper.bindToMap(commonGraphAdapter, mapActivity, trackDetailsMenu);
+
 		updateTopPadding();
 		fullUpdate();
+	}
+
+	private void setupScrollListener() {
+		if (scrollChangedListener == null) {
+			View scrollContainer = view.findViewById(R.id.scroll_container);
+			View scrollView = view.findViewById(R.id.scroll_view);
+			scrollChangedListener = () -> {
+				boolean scrollToTopAvailable = scrollView.canScrollVertically(-1);
+				if (scrollToTopAvailable) {
+					scrollContainer.setForeground(getIcon(R.drawable.bg_contextmenu_shadow));
+				} else {
+					scrollContainer.setForeground(null);
+				}
+			};
+			scrollView.getViewTreeObserver().addOnScrollChangedListener(scrollChangedListener);
+		}
 	}
 
 	private void updateTopPadding() {
 		int topPadding = AndroidUiHelper.isOrientationPortrait(mapActivity) ?
 				0 : app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
 		view.setPadding(0, topPadding, 0, 0);
-	}
-
-	@Override
-	public int getCardLayoutId() {
-		return R.layout.measurement_tool_graph_card;
 	}
 
 	@Override
@@ -258,7 +282,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 		if (visibleType.isCustom()) {
 			CustomChartType customGraphType = (CustomChartType) visibleType;
 			customGraphContainer.setVisibility(View.VISIBLE);
-			customGraphAdapter.setLegendViewType(LegendViewType.ONE_ELEMENT);
+			customGraphAdapter.setLegendViewType(LegendViewType.ALL_AS_LIST);
 			customGraphAdapter.updateContent(customGraphType.getChartData(), customGraphType.getStatistics());
 		} else {
 			CommonChartType commonGraphType = (CommonChartType) visibleType;
