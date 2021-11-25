@@ -3,8 +3,11 @@ package net.osmand.plus.monitoring;
 import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -26,6 +29,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -56,6 +60,7 @@ import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class OsmandMonitoringPlugin extends OsmandPlugin {
 
@@ -71,6 +76,10 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	private TextInfoWidget monitoringControl;
 	private boolean isSaving;
 	private boolean showDialogWhenActivityResumed;
+	private BroadcastReceiver powerChangeReceiver;
+	private AtomicBoolean powerChangeReceiverRegistered;
+	private StateChangedListener<Boolean> powerChangeOptionListener;
+	private IntentFilter powerChangeActions;
 
 	public OsmandMonitoringPlugin(OsmandApplication app) {
 		super(app);
@@ -83,6 +92,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		pluginPreferences.add(settings.SAVE_TRACK_MIN_DISTANCE);
 		pluginPreferences.add(settings.SAVE_TRACK_PRECISION);
 		pluginPreferences.add(settings.AUTO_SPLIT_RECORDING);
+		pluginPreferences.add(settings.POWERCHANGE_SPLIT_RECORDING);
 		pluginPreferences.add(settings.DISABLE_RECORDING_ONCE_APP_KILLED);
 		pluginPreferences.add(settings.SAVE_HEADING_TO_GPX);
 		pluginPreferences.add(settings.SHOW_TRIP_REC_NOTIFICATION);
@@ -92,12 +102,49 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		pluginPreferences.add(settings.LIVE_MONITORING_URL);
 		pluginPreferences.add(settings.LIVE_MONITORING_INTERVAL);
 		pluginPreferences.add(settings.LIVE_MONITORING_MAX_INTERVAL_TO_SEND);
+
+		powerChangeReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get() && settings.POWERCHANGE_SPLIT_RECORDING.get()) {
+					app.getSavingTrackHelper().startNewSegment();
+				}
+			}
+		};
+		powerChangeReceiverRegistered = new AtomicBoolean(false);
+
+		powerChangeActions = new IntentFilter();
+		powerChangeActions.addAction(Intent.ACTION_POWER_CONNECTED);
+		powerChangeActions.addAction(Intent.ACTION_POWER_DISCONNECTED);
+
+		powerChangeOptionListener = new StateChangedListener<Boolean>() {
+			@Override
+			public void stateChanged(Boolean change) {
+				if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get() && settings.POWERCHANGE_SPLIT_RECORDING.get()) {
+					app.registerReceiver(powerChangeReceiver, powerChangeActions);
+					powerChangeReceiverRegistered.set(true);
+				} else if (powerChangeReceiverRegistered.get()) {
+					app.unregisterReceiver(powerChangeReceiver);
+					powerChangeReceiverRegistered.set(false);
+				}
+			}
+		};
+
+		settings.SAVE_GLOBAL_TRACK_TO_GPX.addListener(powerChangeOptionListener);
+		settings.POWERCHANGE_SPLIT_RECORDING.addListener(powerChangeOptionListener);
+		powerChangeOptionListener.stateChanged(settings.SAVE_GLOBAL_TRACK_TO_GPX.get());
 	}
 
 	@Override
 	public void disable(OsmandApplication app) {
 		super.disable(app);
 		app.getNotificationHelper().refreshNotifications();
+		settings.SAVE_GLOBAL_TRACK_TO_GPX.removeListener(powerChangeOptionListener);
+		settings.POWERCHANGE_SPLIT_RECORDING.removeListener(powerChangeOptionListener);
+		if (powerChangeReceiverRegistered.get()) {
+			app.unregisterReceiver(powerChangeReceiver);
+			powerChangeReceiverRegistered.set(false);
+		}
 	}
 
 	@Override
@@ -696,5 +743,4 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	public DashFragmentData getCardFragment() {
 		return DashTrackFragment.FRAGMENT_DATA;
 	}
-
 }
