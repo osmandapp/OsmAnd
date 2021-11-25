@@ -4354,6 +4354,10 @@
 \n
 \n • Aktualisierung der Benutzeroberfläche für die Suche nach UTM Koordinaten
 \n
+\n • GPS Filter für GPX Tracks
+\n
+\n • Höhen Widget (Pro)
+\n
 \n • Favoriten: Möglichkeit zur Anzeige der zuletzt verwendeten Symbole hinzugefügt
 \n
 \n • Routenplanung: verwendet nach dem Start das ausgewählte Profil
@@ -4477,7 +4481,7 @@
 \nTrackpunkte, die mindestens X vom letzten sichtbaren Punkt entfernt sind, werden ausgeblendet.
 \nAchten Sie darauf, je größer der Abstand ist, desto einfacher ist die Trackgeometrie.</string>
     <string name="distance_between_points">Abstand zwischen Punkten</string>
-    <string name="gps_filter_precision">Minimale GPS Präzision</string>
+    <string name="gps_filter_precision">GPS Präzision</string>
     <string name="gps_filter_smoothing">Glättung</string>
     <string name="save_changes_into_file">Änderungen in Datei speichern</string>
     <string name="save_as_copy">Als Kopie speichern</string>
