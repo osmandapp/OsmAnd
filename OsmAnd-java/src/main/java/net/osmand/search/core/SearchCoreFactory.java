@@ -1,23 +1,8 @@
 package net.osmand.search.core;
 
 
-import java.io.IOException;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeSet;
+import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
+import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -49,6 +34,24 @@ import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
 import net.osmand.util.LocationParser;
 import net.osmand.util.LocationParser.ParsedOpenLocationCode;
 import net.osmand.util.MapUtils;
+
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeSet;
 
 
 public class SearchCoreFactory {
@@ -881,6 +884,11 @@ public class SearchCoreFactory {
 				NameStringMatcher nmAdditional = includeAdditional ?
 						new NameStringMatcher(phrase.getFirstUnknownSearchWord(), StringMatcherMode.CHECK_EQUALS_FROM_SPACE) : null;
 				Map<String, PoiTypeResult> poiTypes = getPoiTypeResults(nm, nmAdditional);
+				PoiTypeResult wikiCategory = poiTypes.get(OSM_WIKI_CATEGORY);
+				PoiTypeResult wikiType = poiTypes.get(WIKI_PLACE);
+				if (wikiCategory != null && wikiType != null) {
+					poiTypes.remove(WIKI_PLACE);
+				}
 				for (PoiTypeResult ptr : poiTypes.values()) {
 					boolean match = !phrase.isFirstUnknownSearchWordComplete();
 					if (!match) {
@@ -894,7 +902,11 @@ public class SearchCoreFactory {
 					}
 					if (match) {
 						SearchResult res = new SearchResult(phrase);
-						res.localeName = ptr.pt.getTranslation();
+						if (OSM_WIKI_CATEGORY.equals(ptr.pt.getKeyName())) {
+							res.localeName = ptr.pt.getTranslation() + " (" + types.getAllLanguagesTranslationSuffix() + ")";
+						} else {
+							res.localeName = ptr.pt.getTranslation();
+						}
 						res.object = ptr.pt;
 						addPoiTypeResult(phrase, resultMatcher, showTopFiltersOnly, getStandardFilterId(ptr.pt),
 								res);

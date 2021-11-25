@@ -324,6 +324,11 @@ public class SearchUICoreTest {
 		}
 
 		@Override
+		public String getAllLanguagesTranslationSuffix() {
+			return "all languages";
+		}
+
+		@Override
 		public String getEnTranslation(AbstractPoiType type) {
 			AbstractPoiType baseLangType = type.getBaseLangType();
 			if (baseLangType != null) {
