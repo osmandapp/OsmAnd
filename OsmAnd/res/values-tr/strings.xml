@@ -1235,7 +1235,7 @@
     <string name="shared_string_collapse">Daralt</string>
     <string name="shared_string_tracks">İzlenen yollar</string>
     <string name="shared_string_currently_recording_track">Şu anda kaydedilen yol</string>
-    <string name="route_points">Rota noktaları</string>
+    <string name="route_points">Güzergah noktaları</string>
     <string name="track_segments">İz bölümü</string>
     <string name="track_points">İz noktası</string>
     <string name="record_plugin_name">Seyahat kaydetme</string>
@@ -4336,7 +4336,7 @@
 \nSon görünür noktadan en az X uzaklıkta olan yol noktaları gizlenecektir.
 \nMesafe ne kadar büyükse, yol geometrisi o kadar basittir, dikkatli olun.</string>
     <string name="distance_between_points">Noktalar arasındaki mesafe</string>
-    <string name="gps_filter_precision">Asgari GPS Hassasiyeti</string>
+    <string name="gps_filter_precision">GPS Hassasiyeti</string>
     <string name="gps_filter_smoothing">Düzeltme</string>
     <string name="save_as_copy">Kopya olarak kaydet</string>
     <string name="shared_string_gps_filter">GPS filtresi</string>
@@ -4444,6 +4444,10 @@
     <string name="release_4_1">• Android Auto için ilk destek eklendi
 \n
 \n • UTM koordinat araması için kullanıcı arayüzü güncellemesi
+\n
+\n • GPX yolları için GPS filtresi
+\n
+\n • Yükseklik widget\'ı (Pro)
 \n
 \n • Sık kullanılanlar: son kullanılan simgeleri görüntüleme özelliği eklendi
 \n
