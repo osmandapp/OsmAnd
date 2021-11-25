@@ -903,7 +903,7 @@ public class SearchCoreFactory {
 					if (match) {
 						SearchResult res = new SearchResult(phrase);
 						if (OSM_WIKI_CATEGORY.equals(ptr.pt.getKeyName())) {
-							res.localeName = ptr.pt.getTranslation() + " (all languages)";
+							res.localeName = ptr.pt.getTranslation() + " (" + types.getAllLanguagesTranslationSuffix() + ")";
 						} else {
 							res.localeName = ptr.pt.getTranslation();
 						}

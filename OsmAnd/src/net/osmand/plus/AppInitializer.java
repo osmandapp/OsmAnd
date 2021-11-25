@@ -349,6 +349,11 @@ public class AppInitializer implements IProgress {
 			}
 
 			@Override
+			public String getAllLanguagesTranslationSuffix() {
+				return app.getString(R.string.shared_string_all_languages).toLowerCase();
+			}
+
+			@Override
 			public String getEnTranslation(AbstractPoiType type) {
 				AbstractPoiType baseLangType = type.getBaseLangType();
 				if (baseLangType != null) {
