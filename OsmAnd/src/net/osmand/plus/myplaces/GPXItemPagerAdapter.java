@@ -50,7 +50,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -305,14 +304,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				chart.setVisibility(View.GONE);
 			}
 			if (!hideStatistics) {
-				((ImageView) view.findViewById(R.id.average_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_speed_16));
-				((ImageView) view.findViewById(R.id.max_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_max_speed_16));
-				((ImageView) view.findViewById(R.id.time_moving_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_moving_16));
-				((ImageView) view.findViewById(R.id.distance_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_distance_16));
+				setupSpeedStatisticsIcons(view, iconsCache);
 
 				view.findViewById(R.id.gpx_join_gaps_container).setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -350,14 +342,21 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		}
 	}
 
+	public static void setupSpeedStatisticsIcons(@NonNull View container, @NonNull UiUtilities iconsCache) {
+		((ImageView) container.findViewById(R.id.average_icon))
+				.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_speed_16));
+		((ImageView) container.findViewById(R.id.max_icon))
+				.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_max_speed_16));
+		((ImageView) container.findViewById(R.id.time_moving_icon))
+				.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_moving_16));
+		((ImageView) container.findViewById(R.id.distance_icon))
+				.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_distance_16));
+	}
+
 	private void setupOptionsPopupMenu(TextView overflowMenu, final boolean confirmDeletion) {
 		overflowMenu.setVisibility(View.VISIBLE);
-		overflowMenu.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				actionsListener.showOptionsPopupMenu(view, getTrkSegment(), confirmDeletion, gpxItem);
-			}
-		});
+		overflowMenu.setOnClickListener(view ->
+				actionsListener.showOptionsPopupMenu(view, getTrkSegment(), confirmDeletion, gpxItem));
 	}
 
 	private void setupAltitudeTab(View view, LineChart chart, int position) {
@@ -371,14 +370,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				chart.setVisibility(View.GONE);
 			}
 			if (!hideStatistics) {
-				((ImageView) view.findViewById(R.id.average_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_average_16));
-				((ImageView) view.findViewById(R.id.range_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_average_16));
-				((ImageView) view.findViewById(R.id.ascent_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_ascent_16));
-				((ImageView) view.findViewById(R.id.descent_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_descent_16));
+				setupAltitudeStatisticsIcons(view, iconsCache);
 
 				view.findViewById(R.id.gpx_join_gaps_container).setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -416,6 +408,17 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		}
 	}
 
+	public static void setupAltitudeStatisticsIcons(@NonNull View container, @NonNull UiUtilities iconsCache) {
+		((ImageView) container.findViewById(R.id.average_icon))
+				.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_average_16));
+		((ImageView) container.findViewById(R.id.range_icon))
+				.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_average_16));
+		((ImageView) container.findViewById(R.id.ascent_icon))
+				.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_ascent_16));
+		((ImageView) container.findViewById(R.id.descent_icon))
+				.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_descent_16));
+	}
+
 	private void setupGeneralTab(View view, LineChart chart, int position) {
 		if (analysis != null) {
 			if (analysis.hasElevationData || analysis.hasSpeedData) {
@@ -427,14 +430,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				chart.setVisibility(View.GONE);
 			}
 			if (!hideStatistics) {
-				((ImageView) view.findViewById(R.id.distance_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_distance_16));
-				((ImageView) view.findViewById(R.id.duration_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_span_16));
-				((ImageView) view.findViewById(R.id.start_time_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_start_16));
-				((ImageView) view.findViewById(R.id.end_time_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_end_16));
+				setupGeneralStatisticsIcons(view, iconsCache);
 
 				view.findViewById(R.id.gpx_join_gaps_container).setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -449,15 +445,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 					}
 				});
 				if (analysis.timeSpan > 0) {
-					DateFormat tf = SimpleDateFormat.getTimeInstance(DateFormat.SHORT);
-					DateFormat df = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
-
-					Date start = new Date(analysis.startTime);
-					((TextView) view.findViewById(R.id.start_time_text)).setText(tf.format(start));
-					((TextView) view.findViewById(R.id.start_date_text)).setText(df.format(start));
-					Date end = new Date(analysis.endTime);
-					((TextView) view.findViewById(R.id.end_time_text)).setText(tf.format(end));
-					((TextView) view.findViewById(R.id.end_date_text)).setText(df.format(end));
+					setupTimeSpanStatistics(view, analysis);
 				} else {
 					view.findViewById(R.id.list_divider).setVisibility(View.GONE);
 					view.findViewById(R.id.bottom_line_blocks).setVisibility(View.GONE);
@@ -484,6 +472,29 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				overflowMenu.setVisibility(View.GONE);
 			}
 		}
+	}
+
+	public static void setupGeneralStatisticsIcons(@NonNull View container, @NonNull UiUtilities iconsCache) {
+		((ImageView) container.findViewById(R.id.distance_icon))
+				.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_distance_16));
+		((ImageView) container.findViewById(R.id.duration_icon))
+				.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_span_16));
+		((ImageView) container.findViewById(R.id.start_time_icon))
+				.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_start_16));
+		((ImageView) container.findViewById(R.id.end_time_icon))
+				.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_end_16));
+	}
+
+	public static void setupTimeSpanStatistics(@NonNull View container, @NonNull GPXTrackAnalysis analysis) {
+		DateFormat timeFormat = SimpleDateFormat.getTimeInstance(DateFormat.SHORT);
+		DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
+
+		Date start = new Date(analysis.startTime);
+		((TextView) container.findViewById(R.id.start_time_text)).setText(timeFormat.format(start));
+		((TextView) container.findViewById(R.id.start_date_text)).setText(dateFormat.format(start));
+		Date end = new Date(analysis.endTime);
+		((TextView) container.findViewById(R.id.end_time_text)).setText(timeFormat.format(end));
+		((TextView) container.findViewById(R.id.end_date_text)).setText(dateFormat.format(end));
 	}
 
 	private void setupChart(final View view, final LineChart chart) {
@@ -706,20 +717,19 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 			if (analysis != null) {
 				if (tabType == GPX_TAB_ITEM_GENERAL) {
-					updateGeneralTabInfo(view);
+					updateGeneralTabInfo(view, app, analysis, joinSegments, generalTrack);
 				} else if (tabType == GPX_TAB_ITEM_ALTITUDE) {
-					updateAltitudeTabInfo(view);
+					updateAltitudeTabInfo(view, app, analysis);
 				} else if (tabType == GPX_TAB_ITEM_SPEED) {
-					updateSpeedTabInfo(view);
+					updateSpeedTabInfo(view, app, analysis, joinSegments, generalTrack);
 				}
 			}
 		}
 	}
 
-	private void updateGeneralTabInfo(@NonNull View container) {
-		boolean joinSegments = displayHelper.isJoinSegments();
-		boolean generalTrack = gpxItem.isGeneralTrack();
-
+	public static void updateGeneralTabInfo(@NonNull View container, @NonNull OsmandApplication app,
+	                                        @NonNull GPXTrackAnalysis analysis,
+	                                        boolean joinSegments, boolean generalTrack) {
 		float totalDistance = !joinSegments && generalTrack ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
 		float timeSpan = !joinSegments && generalTrack ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
 
@@ -730,7 +740,8 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		durationText.setText(Algorithms.formatDuration((int) (timeSpan / 1000), app.accessibilityEnabled()));
 	}
 
-	private void updateAltitudeTabInfo(@NonNull View container) {
+	public static void updateAltitudeTabInfo(@NonNull View container, @NonNull OsmandApplication app,
+	                                         @NonNull GPXTrackAnalysis analysis) {
 		String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
 		String max = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
 
@@ -745,10 +756,9 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		descentText.setText(OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app));
 	}
 
-	private void updateSpeedTabInfo(@NonNull View container) {
-		boolean joinSegments = displayHelper.isJoinSegments();
-		boolean generalTrack = gpxItem.isGeneralTrack();
-
+	public static void updateSpeedTabInfo(@NonNull View container, @NonNull OsmandApplication app,
+	                                      @NonNull GPXTrackAnalysis analysis,
+	                                      boolean joinSegments, boolean generalTrack) {
 		long timeMoving = !joinSegments && generalTrack ? analysis.timeMovingWithoutGaps : analysis.timeMoving;
 		float totalDistanceMoving = !joinSegments && generalTrack ?
 				analysis.totalDistanceMovingWithoutGaps : analysis.totalDistanceMoving;

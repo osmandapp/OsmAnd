@@ -25,22 +25,6 @@
         tools:listitem="@layout/point_editor_icon_category_item"
         tools:orientation="horizontal" />
 
-    <LinearLayout
-        android:id="@+id/common_graphs_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone"
-        tools:visibility="visible">
-
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/line_chart"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/route_info_line_chart_height"
-            android:layout_gravity="center_vertical" />
-
-    </LinearLayout>
-
     <FrameLayout
         android:id="@+id/scroll_container"
         android:layout_width="match_parent"
@@ -58,6 +42,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/common_graphs_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/line_chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/route_info_line_chart_height"
+                        android:layout_gravity="center_vertical" />
+
+                    <FrameLayout
+                        android:id="@+id/statistics_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/custom_graphs_container"

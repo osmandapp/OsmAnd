@@ -32,6 +32,7 @@ import net.osmand.plus.measurementtool.graph.ChartAdapterHelper.RefreshMapCallba
 import net.osmand.plus.measurementtool.graph.CommonChartAdapter;
 import net.osmand.plus.measurementtool.graph.CustomChartAdapter;
 import net.osmand.plus.measurementtool.graph.CustomChartAdapter.LegendViewType;
+import net.osmand.plus.myplaces.GPXTabItemType;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.router.RouteSegmentResult;
@@ -107,6 +108,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 		customGraphAdapter = new CustomChartAdapter(app, barChart, true);
 
 		commonGraphContainer = view.findViewById(R.id.common_graphs_container);
+		commonGraphAdapter.setBottomInfoContainer(view.findViewById(R.id.statistics_container));
 		customGraphContainer = view.findViewById(R.id.custom_graphs_container);
 		customGraphAdapter.setBottomInfoContainer(view.findViewById(R.id.route_legend));
 		customGraphAdapter.setLayoutChangeListener(this::setLayoutNeeded);
@@ -286,8 +288,9 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 			customGraphAdapter.updateContent(customGraphType.getChartData(), customGraphType.getStatistics());
 		} else {
 			CommonChartType commonGraphType = (CommonChartType) visibleType;
-			commonGraphContainer.setVisibility(View.VISIBLE);
 			customGraphAdapter.setLegendViewType(LegendViewType.GONE);
+			commonGraphContainer.setVisibility(View.VISIBLE);
+			commonGraphAdapter.setGpxGraphType(commonGraphType.getGpxGraphType());
 			commonGraphAdapter.updateContent(commonGraphType.getChartData(), gpxItem);
 		}
 	}
@@ -437,6 +440,18 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 			List<ILineDataSet> dataSets = GpxUiHelper.getDataSets(commonGraphAdapter.getChart(),
 					app, analysis, firstType, secondType, false);
 			return new LineData(dataSets);
+		}
+
+		@Nullable
+		public GPXTabItemType getGpxGraphType() {
+			if (firstType == ALTITUDE && secondType == SLOPE) {
+				return GPXTabItemType.GPX_TAB_ITEM_GENERAL;
+			} else if (firstType == ALTITUDE || firstType == SLOPE) {
+				return GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
+			} else if (firstType == SPEED) {
+				return GPXTabItemType.GPX_TAB_ITEM_SPEED;
+			}
+			return null;
 		}
 	}
 
