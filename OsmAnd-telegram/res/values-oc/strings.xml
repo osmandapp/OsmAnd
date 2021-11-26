@@ -173,4 +173,5 @@
     <string name="my_location_search_hint">Recercar: Grop ò contacte</string>
     <string name="start_location_sharing">Parteja la posicion</string>
     <string name="show_on_map">Monstrar sus la mapa</string>
+    <string name="shared_string_export">Exportar</string>
 </resources>

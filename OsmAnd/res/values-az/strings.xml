@@ -831,7 +831,7 @@
     <string name="rendering_attr_showSurfaces_name">Yol örtüyünü göstər</string>
     <string name="gpx_split_interval">Bölünmə intervalı</string>
     <string name="save_as_favorites_points">Favorit qrup olaraq saxla</string>
-    <string name="select_destination_and_intermediate_points">Təyinat nöqtələri seç</string>
+    <string name="select_destination_and_intermediate_points">Təyinatları seç</string>
     <string name="shared_string_waypoint">Yol nöqtəsi</string>
     <string name="gpx_info_waypoints">Yol nöqtələri: %1$s</string>
     <string name="gpx_info_distance">Məsafə: %1$s (%2$s nöqtə)</string>
@@ -853,7 +853,7 @@
     <string name="lang_hu_formal">Macarca (rəsmi)</string>
     <string name="lang_id">İndonezcə</string>
     <string name="lang_ko">Koreyaca</string>
-    <string name="route_descr_select_destination">Təyinat nöqtəsi seç</string>
+    <string name="route_descr_select_destination">Təyinat seç</string>
     <string name="routing_attr_avoid_toll_description">Pullu yollardan yayınır</string>
     <string name="routing_attr_avoid_unpaved_name">Asfaltsız yollardan yayın</string>
     <string name="routing_attr_avoid_unpaved_description">Asfaltsız yollardan yayınır</string>
@@ -935,7 +935,7 @@
     <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner proqramı quraşdırılmayıb. Google Play-də axtarılsın?</string>
     <string name="rendering_attr_roadColors_description">Yol rəng sxemi seçin:</string>
     <string name="rendering_attr_roadColors_name">Yol rəng sxemi</string>
-    <string name="map_widget_show_destination_arrow">Təyinat nöqtəsi istiqamətini göstər</string>
+    <string name="map_widget_show_destination_arrow">Təyinat istiqamətini göstər</string>
     <string name="no_route">Marşrut yoxdur</string>
     <string name="delete_target_point">Təyinat nöqtəsini sil</string>
     <string name="target_point">Təyinat nöqtəsi %1$s</string>
@@ -1079,7 +1079,7 @@
     <string name="fav_points_not_exist">Favorit nöqtələr yoxdur</string>
     <string name="only_show">Marşrutu göstər</string>
     <string name="follow">Naviqasiyanı başlat</string>
-    <string name="mark_final_location_first">İlk olaraq təyinat nöqtəsi seçin</string>
+    <string name="mark_final_location_first">Əvvəlcə təyinat seçin</string>
     <string name="get_directions">İstiqamətlər</string>
     <string name="auth_failed">İcazə uğursuz oldu</string>
     <string name="converting_names">Yerli/İngiliscə adlar çevrilir…</string>
@@ -1225,7 +1225,7 @@
     <string name="map_widget_distance">Təyinat nöqtəsi</string>
     <string name="quick_action_add_first_intermediate">Birinci aralığı əlavə et</string>
     <string name="quick_action_add_destination_desc">Ekranın mərkəzini təyinat nöqtəsi etmək üçün düymə, əvvəl seçilmiş hər hansı təyinat nöqtəsi son ara təyinat nöqtəsi olacaq.</string>
-    <string name="quick_action_replace_destination_desc">Ekranın mərkəzini yeni təyinat nöqtəsi edən düymə, əvvəl seçilmiş təyinat nöqtəsini (əgər varsa) əvəz edəcək.</string>
+    <string name="quick_action_replace_destination_desc">Ekranın mərkəzini yeni marşrut təyinatı edən düymə. Əvvəl seçilmiş təyinatı (əgər varsa) əvəz edəcək.</string>
     <string name="quick_action_add_first_intermediate_desc">Ekranın mərkəzini birinci aralıq təyinat nöqtəsi etmək üçün düymə.</string>
     <string name="do_not_show_startup_messages_desc">Proqram endirimləri və xüsusi yerli hadisə mesajları göstərmə.</string>
     <string name="translit_name_if_miss">%1$s ad yoxdursa, transliterasiya et</string>
@@ -1326,7 +1326,7 @@
     <string name="lang_zh_tw">Çincə (Ənənəvi)</string>
     <string name="calculate_osmand_route_without_internet">OsmAnd marşrut seqmentinin oflayn hesablanması</string>
     <string name="gpx_option_calculate_first_last_segment">İlk və son marşrut seqmenti üçün OsmAnd marşrutunu hesabla</string>
-    <string name="keep_and_add_destination_point">Sonrakı təyinat nöqtəsi kimi əlavə et</string>
+    <string name="keep_and_add_destination_point">Sonrakı təyinat olaraq əlavə et</string>
     <string name="route_info">Marşrut məlumatı</string>
     <string name="routing_attr_prefer_motorway_name">Avtomagistralları üstün tut</string>
     <string name="routing_attr_prefer_motorway_description">Avtomagistralları üstün tut</string>
@@ -1385,7 +1385,7 @@
     <string name="prefer_motorways">Avtomagistralları üstün tut</string>
     <string name="prefer_in_routing_title">Üstün tut…</string>
     <string name="prefer_in_routing_descr">Avtomagistralları üstün tut.</string>
-    <string name="clear_dest_confirm">Təyinat nöqtəsini (və ara təyinat nöqtələrini) təmizləmək istədiyinizdən əminsiniz?</string>
+    <string name="clear_dest_confirm">Təyinatınız (və ara təyinatlarınız) silinsin\?</string>
     <string name="intermediate_points_change_order">Sıralamanı dəyiş</string>
     <string name="av_settings_descr">Səs və video parametrlərini tənzimləyin.</string>
     <string name="recording_camera_not_available">Kamera dəstəklənmir</string>
@@ -1577,8 +1577,8 @@
     <string name="lang_sk">Slovakca</string>
     <string name="lang_sl">Slovencə</string>
     <string name="use_high_res_maps">Yüksək dəqiqlikli ekran</string>
-    <string name="transport_searching_transport">Nəqliyyat nəticələri (təyinat nöqtəsi yoxdur):</string>
-    <string name="transport_searching_route">Nəqliyyat nəticələri (təyinat nöqtəsinə {0}):</string>
+    <string name="transport_searching_transport">Nəqliyyat nəticələri (təyinat yoxdur):</string>
+    <string name="transport_searching_route">Nəqliyyat nəticələri (təyinata {0}):</string>
     <string name="transport_search_again">Nəqliyyat axtarışını sıfırla</string>
     <string name="voice">Qeyd edilən səs</string>
     <string name="no_vector_map_loaded">Vektor xəritələr yüklənməyib</string>
@@ -1947,7 +1947,7 @@
     <string name="mark_passed">Keçilmiş işarələ</string>
     <string name="round_trip">Gediş-gəliş səyahəti</string>
     <string name="make_round_trip">Gediş-gəliş səyahət et</string>
-    <string name="shared_string_finish">Finiş</string>
+    <string name="shared_string_finish">Bitir</string>
     <string name="marker_show_distance_descr">Xəritədə xəritə işarələrinə məsafənin və istiqamətin necə göstəriləcəyini seçin:</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd seçilmiş profil üçün nöqtələri marşrut ilə birləşdirəcək.</string>
     <string name="save_track_min_speed_descr">Filtr: Bu sürətdən aşağıda nöqtələri qeyd etmə.</string>
@@ -2930,4 +2930,22 @@
     <string name="quick_action_directions_from_desc">Ekran mərkəzini çıxış nöqtəsi etmək üçün düymə. Sonra təyinatı seçmək və ya marşrut hesablamasını başlatmaq lazım olacaq.</string>
     <string name="add_start_and_end_points">Çıxış və təyinat əlavə edin</string>
     <string name="intermediate_destinations">Ara təyinat nöqtələri</string>
+    <string name="shared_string_precision">Dəqiqlik</string>
+    <string name="shared_string_statistics">Statistika</string>
+    <string name="lost_data_warning">Bütün saxlanmamış məlumatlar itiriləcək.</string>
+    <string name="trip_recording_save_and_continue">Yadda saxla və davam et</string>
+    <string name="shared_string_min_speed">Min. sürət</string>
+    <string name="show_start_dialog">Başlatma dialoqunu göstər</string>
+    <string name="clear_recorded_data_warning">Qeyd edilən məlumatlar təmizlənsin\?</string>
+    <string name="track_has_no_needed_data">İzdə müvafiq məlumatlar yoxdur.</string>
+    <string name="select_another_colorization">Zəhmət olmasa, başqa rəngləmə növü seçin.</string>
+    <string name="intermediate_point_too_far">Ara təyinat %1$s ən yaxın yoldan çox uzaqdır.</string>
+    <string name="legend_item_description">Xəritənin simvolları üçün bələdçi.</string>
+    <string name="clear_recorded_data">Qeyd edilən məlumatları təmizlə</string>
+    <string name="gps_filter_precision">GPS dəqiqliyi</string>
+    <string name="trip_recording_show_start_dialog_setting">Qeyri-aktiv edilərsə, vidcetə və ya menyu elementinə toxunduqdan dərhal sonra, təsdiq dialoqu göstərilmədən qeyd başladılacaq.</string>
+    <string name="track_recording_description">Qeyd dayandırılsın\?
+\nBütün saxlanmamış məlumatlar itiriləcək.</string>
+    <string name="gpx_direction_arrows">İstiqamət oxları</string>
+    <string name="shared_string_max_speed">Maks. sürət</string>
 </resources>

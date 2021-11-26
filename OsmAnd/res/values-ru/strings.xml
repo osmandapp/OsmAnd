@@ -4362,6 +4362,10 @@
 \n
 \n• Обновление пользовательского интерфейса для поиска координат UTM
 \n
+\n• Фильтр GPS для GPX треков
+\n
+\n• Виджет «Профиль высоты» (Pro)
+\n
 \n• Избранные: добавлена возможность просмотра недавно использованных значков
 \n
 \n• Планирование маршрута: после запуска будет использоваться выбранный профиль
@@ -4469,7 +4473,7 @@
     <string name="shared_string_grade">Макс. уклон</string>
     <string name="shared_string_statistics">Статистика</string>
     <string name="distance_between_points">Расстояние между точками</string>
-    <string name="gps_filter_precision">Мин. точность GPS</string>
+    <string name="gps_filter_precision">Точность GPS</string>
     <string name="gps_filter_smoothing">Сглаживание</string>
     <string name="gps_filter_actions_description">OsmAnd применяет изменения к треку, не сохраняя их в файл. Вы можете сохранить изменения вручную.</string>
     <string name="shared_string_gps_filter">GPS фильтр</string>
