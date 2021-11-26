@@ -23,7 +23,7 @@ import com.google.gson.GsonBuilder;
 public class RouteTestingTest {
 	private final TestEntry te;
 
-	//private static final int TIMEOUT = 500;
+	private static final int TIMEOUT = 500;
 	private static final boolean NATIVE_LIB = false;
 
 	public RouteTestingTest(String name, TestEntry te) {
@@ -53,8 +53,7 @@ public class RouteTestingTest {
 
 	}
 
-	//@Test(timeout = TIMEOUT)
-	@Test
+	@Test(timeout = TIMEOUT)
 	public void testRouting() throws Exception {
 		NativeLibrary nativeLibrary;
 		if (NATIVE_LIB) {
