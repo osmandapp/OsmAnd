@@ -38,7 +38,6 @@ import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -80,7 +79,10 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.base.ExportGPXMultipleSelectionBottomSheet;
 import net.osmand.plus.base.OsmandExpandableListFragment;
+import net.osmand.plus.base.SelectionBottomSheet;
+import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.enums.TracksSortByMode;
@@ -88,6 +90,7 @@ import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
+import net.osmand.plus.osmedit.dialogs.SendGpxBottomSheetFragment;
 import net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
@@ -110,7 +113,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment implements
-		FavoritesFragmentStateHolder, OsmAuthorizationListener, OnTrackFileMoveListener, RenameCallback {
+		FavoritesFragmentStateHolder, OsmAuthorizationListener, OnTrackFileMoveListener, RenameCallback, SendGpxBottomSheetFragment.GpxUploadListener {
 
 	public static final int SEARCH_ID = -1;
 	// public static final int ACTION_ID = 0;
@@ -693,7 +696,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	public void openSelectionMode(final int actionResId, int darkIcon, int lightIcon,
-								  final DialogInterface.OnClickListener listener) {
+	                              final DialogInterface.OnClickListener listener) {
 		final int actionIconId = !isLightActionBar() ? darkIcon : lightIcon;
 		String value = app.getString(actionResId);
 		if (value.endsWith("...")) {
@@ -701,9 +704,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		}
 		final String actionButton = value;
 		if (allGpxAdapter.getGroupCount() == 0) {
-			Toast.makeText(getActivity(),
-					app.getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT)
-					.show();
+			app.showShortToastMessage(app.getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()));
 			return;
 		}
 
@@ -732,18 +733,58 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			@Override
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				if (selectedItems.isEmpty()) {
-					Toast.makeText(getActivity(),
-							app.getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()),
-							Toast.LENGTH_SHORT).show();
+					app.showShortToastMessage(app.getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()));
 					return true;
 				}
 
-				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-				builder.setMessage(getString(R.string.local_index_action_do, actionButton.toLowerCase(),
-						String.valueOf(selectedItems.size())));
-				builder.setPositiveButton(actionButton, listener);
-				builder.setNegativeButton(R.string.shared_string_cancel, null);
-				builder.show();
+				List<SelectableItem> allTracks = new ArrayList<>();
+				List<SelectableItem> selectedTracks = new ArrayList<>();
+
+				for (GpxInfo gpxInfo: selectedItems) {
+					SelectableItem s = createSelectableItem(gpxInfo);
+					s.setObject(gpxInfo);
+					s.setIconId(R.drawable.ic_notification_track);
+					s.setTitle(gpxInfo.name);
+
+					GPXTrackAnalysis analysis = getGpxTrackAnalysis(gpxInfo, app, null);
+					s.setDistance(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+					s.setPoints_count(analysis.wptPoints + "");
+					s.setTime(formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()) + "");
+
+					allTracks.add(s);
+					selectedTracks.add(s);
+				}
+
+				ExportGPXMultipleSelectionBottomSheet dialog = ExportGPXMultipleSelectionBottomSheet.showInstance(getMyActivity(), allTracks, selectedTracks);
+				dialog.setDialogStateListener(new SelectionBottomSheet.DialogStateListener() {
+					@Override
+					public void onDialogCreated() {dialog.setTitle(actionButton);
+					dialog.setApplyButtonTitle(app.getString(R.string.shared_string_continue));
+						String total = app.getString(R.string.shared_string_total);
+
+						long size = 0;
+						for (SelectableItem s: allTracks) {
+							if (s.getObject() instanceof GpxInfo){
+								size += ((GpxInfo) s.getObject()).getSize();
+							}
+						}
+						dialog.setTitleDescription(app.getString(R.string.ltr_or_rtl_combine_via_colon, total, AndroidUtils.formatSize(app, size)));
+					}
+
+					@Override
+					public void onCloseDialog() {
+					}
+				});
+				dialog.setOnApplySelectionListener(selItems -> {
+					GpxInfo[] gpxInfo = new GpxInfo[selItems.size()];
+					for (int i = 0; i < selItems.size(); i++) {
+						gpxInfo[i] = (GpxInfo) selItems.get(i).getObject();
+					}
+					final OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
+					if (osmEditingPlugin != null) {
+						osmEditingPlugin.sendGPXFiles(getActivity(), AvailableGPXFragment.this, gpxInfo);
+					}
+				});
 				return true;
 			}
 
@@ -755,6 +796,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 		});
 		allGpxAdapter.notifyDataSetChanged();
+	}
+
+	private SelectableItem createSelectableItem(GpxInfo item) {
+		SelectableItem selectableItem = new SelectableItem();
+		selectableItem.setObject(item);
+		return selectableItem;
 	}
 
 	private void showGpxOnMap(GpxInfo info) {
@@ -772,7 +819,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			}
 		}
 		if (e) {
-			Toast.makeText(getActivity(), R.string.gpx_file_is_empty, Toast.LENGTH_LONG).show();
+			app.showToastMessage(app.getString(R.string.gpx_file_is_empty));
 		}
 	}
 
@@ -824,6 +871,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 	public void renamedTo(File file) {
 		reloadTracks();
+	}
+
+	@Override
+	public void onGpxUpload(String output) {
+		allGpxAdapter.selected.clear();
+		allGpxAdapter.notifyDataSetChanged();
 	}
 
 	public class LoadGpxTask extends AsyncTask<Activity, GpxInfo, List<GpxInfo>> {
@@ -1071,7 +1124,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 		@Override
 		public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild,
-								 View convertView, ViewGroup parent) {
+		                         View convertView, ViewGroup parent) {
 			View v = convertView;
 			final GpxInfo child = getChild(groupPosition, childPosition);
 			if (v == null) {
@@ -1768,7 +1821,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		SelectedGpxFile sgpx = getSelectedGpxFile(gpxInfo, app);
 		GPXTrackAnalysis analysis = null;
 		if (sgpx != null && sgpx.isLoaded()) {
-				analysis = sgpx.getTrackAnalysis(app);
+			analysis = sgpx.getTrackAnalysis(app);
 		} else if (gpxInfo.currentlyRecordingTrack) {
 			analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis(app);
 		} else if (gpxInfo.file != null) {

@@ -4,32 +4,34 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:minHeight="@dimen/favorites_list_item_height"
 	android:background="?attr/selectableItemBackground"
+	android:minHeight="@dimen/favorites_list_item_height"
+	android:paddingRight="@dimen/content_padding"
+	android:paddingEnd="@dimen/content_padding"
 	android:orientation="horizontal">
 
 	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/icon"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
 		android:layout_marginStart="@dimen/list_content_padding"
 		android:layout_marginLeft="@dimen/list_content_padding"
 		android:layout_marginEnd="@dimen/list_content_padding"
 		android:layout_marginRight="@dimen/list_content_padding"
-		android:layout_gravity="center_vertical"
-		osmand:srcCompat="@drawable/ic_action_polygom_dark"
+		android:contentDescription="@string/shared_string_icon"
 		android:visibility="visible"
-		android:contentDescription="@string/shared_string_icon" />
+		osmand:srcCompat="@drawable/ic_action_polygom_dark" />
 
 	<LinearLayout
 		android:layout_width="0dp"
 		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
 		android:layout_marginStart="@dimen/list_content_padding"
 		android:layout_marginLeft="@dimen/list_content_padding"
 		android:layout_marginEnd="@dimen/list_content_padding"
 		android:layout_marginRight="@dimen/list_content_padding"
 		android:layout_weight="1"
-		android:layout_gravity="center_vertical"
 		android:orientation="vertical">
 
 		<TextView
@@ -45,10 +47,10 @@
 			android:id="@+id/read_section"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:paddingTop="@dimen/subHeaderPadding"
-			android:paddingBottom="@dimen/subHeaderPadding"
 			android:gravity="center_vertical"
 			android:orientation="horizontal"
+			android:paddingTop="@dimen/subHeaderPadding"
+			android:paddingBottom="@dimen/subHeaderPadding"
 			android:visibility="visible">
 
 			<androidx.appcompat.widget.AppCompatImageView
@@ -57,8 +59,8 @@
 				android:layout_height="wrap_content"
 				android:layout_marginEnd="@dimen/content_padding_half"
 				android:layout_marginRight="@dimen/content_padding_half"
-				osmand:srcCompat="@drawable/ic_action_distance_16"
-				android:contentDescription="@string/distance" />
+				android:contentDescription="@string/distance"
+				osmand:srcCompat="@drawable/ic_action_distance_16" />
 
 			<TextView
 				android:id="@+id/distance"
@@ -75,8 +77,8 @@
 				android:layout_height="wrap_content"
 				android:layout_marginEnd="@dimen/content_padding_half"
 				android:layout_marginRight="@dimen/content_padding_half"
-				osmand:srcCompat="@drawable/ic_action_waypoint_16"
-				android:contentDescription="@string/track_points" />
+				android:contentDescription="@string/track_points"
+				osmand:srcCompat="@drawable/ic_action_waypoint_16" />
 
 			<TextView
 				android:id="@+id/points_count"
@@ -94,8 +96,8 @@
 				android:layout_height="wrap_content"
 				android:layout_marginEnd="@dimen/content_padding_half"
 				android:layout_marginRight="@dimen/content_padding_half"
-				osmand:srcCompat="@drawable/ic_action_time_16"
-				android:contentDescription="@string/shared_string_time_moving" />
+				android:contentDescription="@string/shared_string_time_moving"
+				osmand:srcCompat="@drawable/ic_action_time_16" />
 
 			<TextView
 				android:id="@+id/time"
@@ -123,5 +125,19 @@
 				android:textSize="@dimen/default_desc_text_size" />
 
 		</LinearLayout>
+
 	</LinearLayout>
+
+	<androidx.appcompat.widget.AppCompatCheckBox
+		android:id="@+id/compound_button"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:layout_marginStart="@dimen/bottom_sheet_content_margin"
+		android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
+		android:background="@null"
+		android:clickable="false"
+		android:focusable="false"
+		android:visibility="gone"
+		android:focusableInTouchMode="false" />
 </LinearLayout>

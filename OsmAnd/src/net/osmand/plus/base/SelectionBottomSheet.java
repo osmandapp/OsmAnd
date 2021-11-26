@@ -274,6 +274,10 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 		private String description;
 		private int iconId;
 		private Object object;
+
+		private String distance;
+		private String points_count;
+		private String time;
 		@ColorInt
 		private int color;
 
@@ -316,6 +320,30 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 
 		public void setColor(@ColorInt int color) {
 			this.color = color;
+		}
+
+		public String getDistance() {
+			return distance;
+		}
+
+		public void setDistance(String distance) {
+			this.distance = distance;
+		}
+
+		public String getPoints_count() {
+			return points_count;
+		}
+
+		public void setPoints_count(String points_count) {
+			this.points_count = points_count;
+		}
+
+		public String getTime() {
+			return time;
+		}
+
+		public void setTime(String time) {
+			this.time = time;
 		}
 	}
 
