@@ -214,6 +214,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			for (Map.Entry<String, GPXFile> entry : data.entrySet()) {
 				String f = entry.getKey();
 				GPXFile gpx = entry.getValue();
+				gpx.setupCreationTime();
 				log.debug("Filename: " + f);
 				File fout = new File(dir, f + IndexConstants.GPX_FILE_EXT);
 				if (!gpx.isEmpty()) {

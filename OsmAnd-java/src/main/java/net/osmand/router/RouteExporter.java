@@ -34,6 +34,7 @@ public class RouteExporter {
 
 	public GPXFile exportRoute() {
 		GPXFile gpx = new GPXFile(OSMAND_ROUTER_V2);
+		gpx.setupCreationTime();
 		Track track = new Track();
 		track.name = name;
 		gpx.tracks.add(track);
