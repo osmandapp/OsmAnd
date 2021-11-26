@@ -108,7 +108,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 		commonGraphContainer = view.findViewById(R.id.common_graphs_container);
 		customGraphContainer = view.findViewById(R.id.custom_graphs_container);
-		customGraphAdapter.setLegendContainer(view.findViewById(R.id.route_legend));
+		customGraphAdapter.setBottomInfoContainer(view.findViewById(R.id.route_legend));
 		customGraphAdapter.setLayoutChangeListener(this::setLayoutNeeded);
 
 		messageContainer = view.findViewById(R.id.message_container);

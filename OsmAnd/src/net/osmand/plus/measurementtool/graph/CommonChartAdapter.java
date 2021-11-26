@@ -5,6 +5,7 @@ import android.view.MotionEvent;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
@@ -16,7 +17,7 @@ import net.osmand.plus.OsmandApplication;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CommonChartAdapter extends BaseCommonChartAdapter {
+public class CommonChartAdapter extends BaseChartAdapter<LineChart, LineData, GpxDisplayItem> {
 
 	private Highlight highlight;
 	private final Map<String, ExternalValueSelectedListener> externalValueSelectedListeners = new HashMap<>();
@@ -110,6 +111,11 @@ public class CommonChartAdapter extends BaseCommonChartAdapter {
 				}
 			}
 		});
+	}
+
+	@Override
+	protected void attachBottomInfo() {
+		// TODO
 	}
 
 	public void addValueSelectedListener(String key, ExternalValueSelectedListener listener) {
