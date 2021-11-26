@@ -678,10 +678,6 @@ public class RoutingContext {
 	}
 	
 	public void unloadUnusedTiles(long memoryLimit) {
-		// TODO DELETE this check (test with & without it carefully !)
-//		if (true) {
-//			return;
-//		}
 		float desirableSize = memoryLimit * 0.7f;
 		List<RoutingSubregionTile> list = new ArrayList<RoutingSubregionTile>(subregionTiles.size() / 2);
 		int loaded = 0;
