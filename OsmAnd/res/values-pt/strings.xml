@@ -1396,7 +1396,7 @@
     <string name="shared_string_audio">Áudio</string>
     <string name="shared_string_video">Vídeo</string>
     <string name="shared_string_photo">Fotografia</string>
-    <string name="route_points">Pontos de rota</string>
+    <string name="route_points">Pontos da rota</string>
     <string name="track_segments">Segmentos do trajeto</string>
     <string name="track_points">Pontos do trajeto</string>
     <string name="plugin_touringview_name">Ver mapa de turismo</string>
@@ -4366,6 +4366,10 @@
 \n
 \n - Atualização da interface do utilizador para pesquisa de coordenadas UTM
 \n
+\n • Filtro GPS para trilhos GPX
+\n
+\n • Widget de elevação (Pro)
+\n
 \n - Favoritos: agora pode-se ver os ícones usados recentemente
 \n
 \n - Planeamento de rotas: agora usa o perfil selecionado ao abrir a aplicação
@@ -4477,7 +4481,7 @@
     <string name="gps_filter_hdop_desc">Defina o valor máximo permitido para o HDOP.
 \nOs pontos maiores do que o parâmetro definido serão ocultados.</string>
     <string name="gps_filter_speed_altitude_desc">Os pontos do trilho correspondentes ao intervalo definido serão visíveis no gráfico e no mapa, o resto será ocultado.</string>
-    <string name="gps_filter_precision">Precisão mínima do GPS</string>
+    <string name="gps_filter_precision">Precisão do GPS</string>
     <string name="save_changes_into_file">Guardar alterações num ficheiro</string>
     <string name="save_as_copy">Guardar como cópia</string>
     <string name="gps_filter_actions_description">OsmAnd aplicando alterações no trilho sem o guardar no ficheiro. Pode guardar as alterações manualmente.</string>

@@ -4347,6 +4347,10 @@
 \n
 \n • UTM 座標搜尋的使用者介面
 \n
+\n • GPX 軌跡的 GPS 過濾條件
+\n
+\n • 海拔小工具 (Pro)
+\n
 \n • 最愛：新增檢視最近使用圖示的功能
 \n
 \n • 路線規劃：啟動後將使用選定的設定檔
@@ -4462,7 +4466,7 @@
 \n距離最後一個可見點至少 X 距離的軌跡點將被隱藏。
 \n請注意，距離愈大，軌跡的幾何形狀就愈簡單。</string>
     <string name="distance_between_points">點之間的距離</string>
-    <string name="gps_filter_precision">最小 GPS 精度</string>
+    <string name="gps_filter_precision">GPS 精度</string>
     <string name="gps_filter_smoothing">平滑</string>
     <string name="save_changes_into_file">將變更儲存至檔案</string>
     <string name="save_as_copy">另存為副本</string>

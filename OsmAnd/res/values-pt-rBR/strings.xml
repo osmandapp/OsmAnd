@@ -4383,6 +4383,10 @@
 \n
 \n - Atualização da interface do usuário para busca de coordenadas UTM
 \n
+\n • Filtro GPS para trilhas GPX
+\n
+\n • Widget de elevação (Pro)
+\n
 \n - Favoritos: adicionada a capacidade de visualizar ícones usados recentemente
 \n
 \n - Planeamento de rotas: utilizará o perfil selecionado após o lançamento
@@ -4464,7 +4468,7 @@
     <string name="shared_string_show_slope">Mostrar inclinação</string>
     <string name="shared_string_grade">Grau</string>
     <string name="save_changes_into_file">Salvar as alterações no arquivo</string>
-    <string name="gps_filter_precision">Precisão mínima do GPS</string>
+    <string name="gps_filter_precision">Precisão GPS</string>
     <string name="gps_filter_smoothing">Alisamento</string>
     <string name="shared_string_precision">Precisão</string>
     <string name="shared_string_statistics">Estatísticas</string>
