@@ -15,9 +15,6 @@ public class BaseCommonChartAdapter extends BaseChartAdapter<LineChart, LineData
 	}
 
 	@Override
-	public void updateView() {
-		chart.setData(chartData);
-		updateHighlight();
+	protected void attachBottomInfo() {
 	}
-
 }
