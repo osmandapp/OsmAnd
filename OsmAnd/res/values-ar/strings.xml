@@ -148,7 +148,7 @@
     <string name="accessibility_mode_descr">تفعيل مميزات إتاحة الوصول.</string>
     <string name="shared_string_on">تشغيل</string>
     <string name="shared_string_off">إيقاف</string>
-    <string name="accessibility_default">وفقا لإعداد النظام العالمي</string>
+    <string name="accessibility_default">حسب إعدادات نظام تشغيل الجهاز</string>
     <string name="backToMenu">الرجوع إلى القائمة</string>
     <string name="zoomOut">تصغير</string>
     <string name="zoomIn">تكبير</string>
@@ -223,7 +223,7 @@
     <string name="website">الموقع</string>
     <string name="phone">الهاتف</string>
     <string name="contribution_activity">تثبيت الإصدار</string>
-    <string name="accessibility_options">خيارات إمكانية الوصول</string>
+    <string name="accessibility_options">خيارات تسهيل الاستخدام/إمكانية الوصول</string>
     <string name="select_address_activity">حدد عنوان</string>
     <string name="shared_string_more_actions">خيارات أخرى</string>
     <string name="edit_filter_save_as_menu_item">حفظ باسم</string>
@@ -447,7 +447,7 @@
     <string name="online_map_settings_descr">حدد مصادر خريطة التجانب المخزنة مؤقتاً عبر الإنترنت.</string>
     <string name="auto_zoom_farthest">إلى مدى بعيد \"٥٠٠م\"</string>
     <string name="use_magnetic_sensor_descr">استخدم الحساس المغناطيسي لتحديد قيمة البوصلة بدلا من حساس الاتجاهات.</string>
-    <string name="osmand_accessibility_description">يجعل هذا الملحق ميزات إمكانية الوصول الخاصة بالجهاز متاحة مباشرة في أوسماند. إنه يسهل على سبيل المثال ضبط معدل الكلام لأصوات تحويل النص إلى كلام ، أو تكوين تنقل شاشة لوحة الاتجاه ، باستخدام كرة التتبع للتحكم في التكبير/التصغير ، أو تعليقات تحويل النص إلى كلام ، على سبيل المثال لإعلام موضعك تلقائياً.</string>
+    <string name="osmand_accessibility_description">هذا الملحق يضيف إلى أوسماند ميزة تسهيل الاستخدام/إمكانية الوصول المتاحة في نظامك، فهو على سبيل المثال يسمح لك بضبط معدل الكلام المنطوق من النص ومثل إتاحة التحكم من كرة التحكم بالريموت أو التفاعل عبر خدمة تحويل النص إلى كلام مثل إعلامك صوتيا بمكانك.</string>
     <string name="osmand_development_plugin_description">هذا الملحق يعرض إعدادات لتطوير وتصحيح الميزات كاختبار أو محاكاة التوجيه، أداء الشاشة، أو الإشعار الصوتي. هذه الإعدادات معدة للمطورين و المستخدم العام لا يحتاجها.</string>
     <string name="plugins_screen">الملحقات</string>
     <string name="prefs_plugins_descr">تقوم الملحقات بتفعيل إعدادات متقدمة ووظائف إضافية.</string>
@@ -486,8 +486,8 @@
     <string name="back_right">الأيمن الخلفي</string>
     <string name="accuracy">الدقة</string>
     <string name="altitude">الارتفاع</string>
-    <string name="accessibility_preferences_descr">الإعدادات المتعلقة بإمكانية الوصول.</string>
-    <string name="shared_string_accessibility">إمكانية الوصول</string>
+    <string name="accessibility_preferences_descr">الإعدادات المتعلقة بتسهيلات الاستخدام.</string>
+    <string name="shared_string_accessibility">تسهيلات الاستخدام</string>
     <string name="rendering_out_of_memory">ذاكرة التشغيل غير كافية لعرض المنطقة المختارة</string>
     <string name="offline_edition">التعديل دون اتصال</string>
     <string name="offline_edition_descr">إذا تم تمكين التحرير دون اتصال ، فسيتم حفظ التغييرات محليًا أولاً ثم رفعها حسب الطلب ، أو سيتم رفع التغييرات على الفور.</string>
@@ -3434,7 +3434,7 @@
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">غروب الشمس على %1$s</string>
     <string name="sunrise_at">شروق الشمس على %1$s</string>
-    <string name="accessibility_mode_disabled">تم تعطيل وضع إمكانية الوصول في النظام الخاص بك.</string>
+    <string name="accessibility_mode_disabled">وضع إمكانية الوصول معطل في إعدادات النظام الخاص بك.</string>
     <string name="reset_to_default_category_button_promo">سيعيد خيار \'إعادة التعيين إلى الافتراضي\' ترتيب الفرز إلى التثبيت الافتراضي.</string>
     <string name="use_system_screen_timeout">استخدام مهلة انطفاء شاشة النظام</string>
     <string name="use_system_screen_timeout_promo">معطل افتراضيا، اذا كان التطبيق شغالا في المقدمة، الشاشة لن تنطفأ. 
