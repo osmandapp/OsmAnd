@@ -4391,6 +4391,10 @@
 \n
 \n • עדכון מנשק משתמש לחיפוש נקודות ציון UTM
 \n
+\n • מסנן GPS למסלולי GPX
+\n
+\n • וידג׳ט רום (פרו)
+\n
 \n • מועדפים: נוספה היכולת לצפות בסמלים בהם נעשה שימוש לאחרונה
 \n
 \n • תכנון מסלול: ישתמש בפרופיל הנבחר לאחר ההפעלה
@@ -4415,7 +4419,7 @@
     <string name="no_items_selected_warning">נא לבחור לפחות פריט אחד</string>
     <string name="shared_string_hide_all">להסתיר הכול</string>
     <string name="purchases_feature_desc_hourly_map_updates">קבלת גישה לעדכוני מפה תכופים יותר. שעתיים, יומיים או שבועיים. עדכונים מתקבלים באופן מצטבר, רק לאזורים שהשתנו.</string>
-    <string name="migration_files_present">%1$d קבצים (%2$s) קיימים במיקום הנבחר ‚%3$s’.</string>
+    <string name="migration_files_present">יש %1$d קבצים (%2$s) במיקום הנבחר ‚%3$s’.</string>
     <string name="fold_unfold">קיפול/פריסה</string>
     <string name="app_profile_type">סוג פרופיל יישומון</string>
     <string name="add_to_group">הוספה לקבוצה</string>
@@ -4423,7 +4427,7 @@
     <string name="rendering_attr_natureReserves_description">הצגת שמורת טבע, אזורים מוגנים ופארקים לאומיים.</string>
     <string name="map_marker_options">אפשרויות סמני מפה</string>
     <string name="show_parameter_seekbar">הצגת סרגל גלילת משתנים</string>
-    <string name="exit_without_saving_warning">לצאת בלי לשמור\? כל השינויים יאבדו.</string>
+    <string name="exit_without_saving_warning">לצאת בלי לשמור את השינויים\?</string>
     <string name="memory_allocated_for_routing_ds">ערך זיכרון גבוה יותר מאיץ את החישוב של מסלולים ארוכים (למעלה מ־500 ק״מ), אך עשוי להשפיע על הביצועים של שאר היישומונים.
 \nלא משפיע על מהירות החישוב של מסלולים קצרים.</string>
     <string name="rendering_value_walkingRoutesOSMC_description">לצבוע נתיבים לפי הצבע המקומי הייחודי שלהם (אם קיים ב־OpenStreetMap) וסמל המגן לטיולים.</string>
@@ -4437,7 +4441,19 @@
     <string name="shared_string_statistics">סטטיסטיקה</string>
     <string name="shared_string_precision">דיוק</string>
     <string name="gps_filter_hdop_desc">הגדרת הערך המרבי המותר ל־HDOP.
-\nנקודות שעוברות את המשתנה שהוגדר יוסתרו.</string>
-    <string name="gps_filter_speed_altitude_desc">נקודות המעקב שתואמות למשך הזמן שהוצג יופיעו בתרשים ובמפה, השאר יוסתרו.</string>
+\nנקודות עם ערך גבוה מזה יוסתרו.</string>
+    <string name="gps_filter_speed_altitude_desc">רק נקודות מעקב שתואמות למשך הזמן שהוצג יופיעו בתרשים ובמפה, השאר יוסתרו.</string>
     <string name="gps_filter_precision">דיוק GPS</string>
+    <string name="distance_between_points">מרחק בין נקודות</string>
+    <string name="gps_filter_smoothing">החלקה</string>
+    <string name="save_changes_into_file">שמירת שינויים לקובץ</string>
+    <string name="save_as_copy">שמירה כעותק</string>
+    <string name="gps_filter_actions_description">OsmAnd יחיל את השינויים למסלול מבלי לעדכן את הקובץ. אפשר לשמור את השינויים ידנית.</string>
+    <string name="shared_string_gps_filter">מסנן GPS</string>
+    <string name="storage_migration_wrong_folder_warning">לא נמצאו נתוני OsmAnd בתיקייה הנבחרת. נא לנסות שוב.</string>
+    <string name="shared_string_downhill">במדרון</string>
+    <string name="shared_string_uphill">במעלה</string>
+    <string name="shared_string_grade">ציון</string>
+    <string name="shared_string_hide_slope">הסתרת שיפוע</string>
+    <string name="shared_string_show_slope">הצגת שיפוע</string>
 </resources>
