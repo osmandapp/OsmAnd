@@ -785,8 +785,8 @@
     <string name="poi_fuel_diesel">Дизель</string>
     <string name="poi_fuel_ethanol">Этанол</string>
     <string name="poi_fuel_methanol">Метанол</string>
-    <string name="poi_fuel_gtl_diesel">Дизель GTL</string>
-    <string name="poi_fuel_hgv_diesel">Дизель HGV</string>
+    <string name="poi_fuel_gtl_diesel">Синтетический дизель GTL</string>
+    <string name="poi_fuel_hgv_diesel">Скоростная дизельная ТРК для грузовиков</string>
     <string name="poi_fuel_biodiesel">Биодизель</string>
     <string name="poi_fuel_lpg">Пропан-бутан (LPG)</string>
     <string name="poi_fuel_cng">Метан/CNG</string>
@@ -1749,7 +1749,7 @@
     <string name="poi_fuel_91ul">Топливо 91UL</string>
     <string name="poi_fuel_100ll">Топливо 100LL</string>
     <string name="poi_fuel_jeta1">Топливо Jet A-1</string>
-    <string name="poi_fuel_adblue">Дизельная выхлопная жидкость</string>
+    <string name="poi_fuel_adblue">AdBlue (Жидкость для выхлопных газов дизельных двигателей)</string>
     <string name="poi_fuel_wood">Топливо: дрова</string>
     <string name="poi_fuel_charcoal">Топливо: древесный уголь</string>
     <string name="poi_fuel_coal">Топливо: каменный уголь</string>

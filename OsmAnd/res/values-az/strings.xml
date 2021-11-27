@@ -45,7 +45,7 @@
     <string name="no_inet_connection">İnternet bağlantısı yoxdur</string>
     <string name="search_location">Məkan axtarılır…</string>
     <string name="storage_free_space">Boş yaddaş</string>
-    <string name="int_continuosly">Davam et</string>
+    <string name="int_continuosly">Fasiləsiz</string>
     <string name="shared_string_change">Dəyiş</string>
     <string name="get_started">Başla</string>
     <string name="back_to_search">Axtarışa qayıt</string>
@@ -461,13 +461,13 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="gpxup_public">İctimai</string>
-    <string name="gpxup_private">Xüsusi</string>
+    <string name="gpxup_private">Şəxsi</string>
     <string name="address_search_desc">Ünvan axtar</string>
     <string name="favourites_search_desc">Favoritləri axtarmağın bir yolu</string>
     <string name="confirm_interrupt_download">Endirmə ləğv edilsin\?</string>
     <string name="index_settings_descr">Oflayn xəritə fayllarını cihazınıza endirin və idarə edin.</string>
     <string name="send_files_to_osm">GPX faylları OSM-a göndərilsin?</string>
-    <string name="gpx_tags_txt">İşarələr</string>
+    <string name="gpx_tags_txt">Etiketlər</string>
     <string name="shared_string_description">Açıqlama</string>
     <string name="default_buttons_support">Dəstək</string>
     <string name="info_button">Məlumat</string>
@@ -488,7 +488,7 @@
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Gec</string>
     <string name="offline_edition">Oflayn düzəliş</string>
-    <string name="offline_edition_descr">Hər zaman oflayn düzəlişi istifadə et.</string>
+    <string name="offline_edition_descr">Oflayn düzəliş aktivdirsə, dəyişikliklər əvvəlcə yerli olaraq yadda saxlanılacaq və istəyə görə yüklənəcək, əks halda dəyişikliklər dərhal yüklənəcək.</string>
     <string name="local_openstreetmap_uploading">Yüklənir…</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/qeyd yükləndi</string>
     <string name="local_openstreetmap_uploadall">Hamısını yüklə</string>
@@ -552,7 +552,7 @@
     <string name="install_more">Daha çox quraşdır…</string>
     <string name="error_doing_search">Oflayn axtarış həyata keçirilə bilmədi.</string>
     <string name="system_locale">Sistem</string>
-    <string name="preferred_locale_descr">Proqramın dilini seçin (OsmAnd yenidən başladıldıqda təsirli olur).</string>
+    <string name="preferred_locale_descr">Proqramın dili (OsmAnd yenidən başladıldıqda istifadə olunur).</string>
     <string name="preferred_locale">Proqram dili</string>
     <string name="incomplete_locale">natamam</string>
     <string name="si_km_m">Kilometr/metr</string>
@@ -988,7 +988,7 @@
     <string name="west_south_west">qərb-cənub-qərb</string>
     <string name="west_north_west">qərb-şimal-qərb</string>
     <string name="front">irəli</string>
-    <string name="modify_transparency">Şəffaflığı dəyişdir (0 - şəffaf, 255 - qeyri-şəffaf)</string>
+    <string name="modify_transparency">Şəffaflığı seç (0 - şəffaf, 255 - qeyri-şəffaf)</string>
     <string name="gpx_visibility_txt">Görünüş</string>
     <string name="support_new_features">Yeni xüsusiyyətləri dəstəklə</string>
     <string name="back_to_location">Mövqeyə qayıt</string>
@@ -1012,7 +1012,7 @@
     <string name="settings_direction_style_descr">Hərəkət zamanı nisbi istiqamətləri ifadə etmək üçün stil seçin</string>
     <string name="accessibility_preferences_descr">Xüsusi imkanlarla əlaqəli seçimlər.</string>
     <string name="rendering_out_of_memory">Seçilən sahəni göstərmək üçün kifayət qədər proses yaddaşı yoxdur</string>
-    <string name="free_version_message">%1$s xəritə endirə və ya yeniləyə bilərsiniz.</string>
+    <string name="free_version_message">Endirmək və ya yeniləmək üçün %1$s xəritə.</string>
     <string name="index_name_other">Ümumdünya və mövzu xəritələri</string>
     <string name="index_name_wiki">Ümumdünya Vikipediya POI-ləri</string>
     <string name="shared_string_release">Buraxılış</string>
@@ -1120,7 +1120,7 @@
     <string name="poi_error_unexpected_template">{0} əməliyyatını yerinə yetirmək olmadı.</string>
     <string name="poi_error_io_error_template">{0} əməliyyatı zamanı I/O səhvi.</string>
     <string name="poi_dialog_comment_default">POI dəyişdirmə</string>
-    <string name="poi_dialog_other_tags_message">Bütün digər işarələr qorunur</string>
+    <string name="poi_dialog_other_tags_message">Bütün digər etiketlər qorunur</string>
     <string name="routing_settings">Naviqasiya</string>
     <string name="routing_settings_descr">Naviqasiya üçün seçimlər təyin edin.</string>
     <string name="global_settings">Ümumi parametrlər</string>
@@ -1447,7 +1447,7 @@
     <string name="shared_string_accessibility">Xüsusi imkanlar</string>
     <string name="accessibility_options">Xüsusi imkanlar seçimləri</string>
     <string name="accessibility_mode">Xüsusi imkanlar rejimi</string>
-    <string name="accessibility_mode_descr">Xüsusi imkanlar xüsusiyyətlərini aktivləşdirir.</string>
+    <string name="accessibility_mode_descr">Əngəlli istifadəçilər üçün xüsusiyyətləri aktivləşdirir.</string>
     <string name="index_item_depth_points_northern_hemisphere">Şimal yarımkürəsinin dəniz dərinliyi nöqtələri</string>
     <string name="no_waypoints_found">Yol nöqtələri tapılmadı</string>
     <string name="context_menu_item_delete_waypoint">GPX yol nöqtəsi silinsin?</string>
@@ -1548,7 +1548,7 @@
     <string name="quick_action_show_navigation_finish_dialog">“Naviqasiya bitdi” dialoqunu göstər</string>
     <string name="quick_action_start_stop_navigation">Naviqasiyanı başlat/dayandır</string>
     <string name="quick_action_start_stop_navigation_descr">Naviqasiyanı başlatmaq və ya bitirmək üçün düymə.</string>
-    <string name="mappilary_no_internet_desc">Mapillary-dən şəkillərə baxmaq üçün internetiniz olmalıdır.</string>
+    <string name="mappilary_no_internet_desc">Mapillary-dən şəkillər yalnız onlayn mövcuddur.</string>
     <string name="retry">Təkrar cəhd</string>
     <string name="osm_edit_modified_poi">Dəyişdirilmiş OSM POI</string>
     <string name="osm_edit_deleted_poi">Silinmiş OSM POI</string>
@@ -1651,7 +1651,7 @@
     <string name="shared_string_edited">Düzəliş edildi</string>
     <string name="shared_string_added">Əlavə edildi</string>
     <string name="marker_activated">İşarə %s aktivləşdirildi.</string>
-    <string name="notes_by_date">Tarixə görə qeydlər</string>
+    <string name="notes_by_date">Tarixə görə A/V qeydlər</string>
     <string name="by_date">Tarixə görə</string>
     <string name="by_type">Növünə görə</string>
     <string name="looking_for_tracks_with_waypoints">Yol nöqtələri olan izlər axtarılır</string>
@@ -1708,7 +1708,7 @@
     <string name="shared_string_undo_all">Hamısını qaytar</string>
     <string name="shared_string_undo">Qaytar</string>
     <string name="save_poi_without_poi_type_message">POI növ olmadan yadda saxlansın\?</string>
-    <string name="missing_write_external_storage_permission">Proqramın SD kartdan istifadə etmək icazəsi yoxdur</string>
+    <string name="missing_write_external_storage_permission">OsmAnd-ın yaddaş kartından istifadə etmək icazəsi yoxdur</string>
     <string name="quick_action_navigation_voice">Səs yanılı/sönülü</string>
     <string name="quick_action_navigation_voice_off">Səsi aç</string>
     <string name="quick_action_navigation_voice_on">Səsi söndür</string>
@@ -1761,7 +1761,7 @@
     <string name="file_with_name_already_exist">Eyni adlı fayl artıq mövcuddur.</string>
     <string name="local_index_items_uploaded">%1$d / %2$d element yükləndi.</string>
     <string name="favourites_delete_multiple_succesful">Favorit nöqtələr silindi.</string>
-    <string name="overlay_transparency_descr">Örtüyün şəffaflığını dəyişin.</string>
+    <string name="overlay_transparency_descr">Örtüyün şəffaflığını tənzimləyin.</string>
     <string name="overlay_transparency">Örtük şəffaflığı</string>
     <string name="layer_underlay">Xəritə altlığı…</string>
     <string name="map_underlay">Xəritə altlığı</string>
@@ -1893,7 +1893,7 @@
     <string name="save_poi_too_many_uppercase">Adda çoxlu böyük hərflər var. Davam edilsin?</string>
     <string name="live_update">Canlı yeniləmə</string>
     <string name="configure_screen_quick_action">Sürətli fəaliyyət</string>
-    <string name="quick_action_duplicates">Göstərilən sürətli fəaliyyət adı artıq istifadə olunur, təkrarlanmaması üçün ad %1$s olaraq dəyişdirildi.</string>
+    <string name="quick_action_duplicates">Təkrarlanmaması üçün sürətli fəaliyyətin adı %1$s olaraq dəyişdirildi.</string>
     <string name="quick_action_duplicate">Sürətli fəaliyyət adı təkrardır</string>
     <string name="quick_action_gpx_category_descr">Kateqoriya seçin (məcbur deyil).</string>
     <string name="add_line">Xətt əlavə et</string>
@@ -2948,4 +2948,22 @@
 \nBütün saxlanmamış məlumatlar itiriləcək.</string>
     <string name="gpx_direction_arrows">İstiqamət oxları</string>
     <string name="shared_string_max_speed">Maks. sürət</string>
+    <string name="shared_string_gps_filter">GPS filtri</string>
+    <string name="save_as_copy">Kopya kimi saxla</string>
+    <string name="save_changes_into_file">Dəyişiklikləri faylda saxla</string>
+    <string name="manage_subscription">Abunəliyi idarə et</string>
+    <string name="rename_track">İzi yenidən adlandır</string>
+    <string name="edit_track">İzə düzəliş et</string>
+    <string name="upload_gpx_description_hint">Bu sahə boş buraxılsa, iz adları açıqlama kimi istifadə olunacaq. Daxil edilən açıqlama hər bir iz üçün tətbiq ediləcək.</string>
+    <string name="send_files_to_openstreetmap">GPX faylını OpenStreetMap-a göndər</string>
+    <string name="shared_string_open_track">İzi aç</string>
+    <string name="save_track_to_gpx">Naviqasiya zamanı izi avtomatik qeyd et</string>
+    <string name="enter_text_separated">Etiketləri vergüllə ayıraraq daxil edin.</string>
+    <string name="save_as_new_track">Yeni iz olaraq saxla</string>
+    <string name="track_saved">İz yadda saxlandı</string>
+    <string name="track_storage_directory">İzlərin saxlandığı qovluq</string>
+    <string name="store_tracks_in_rec_directory">İzləri “rec” qovluğuna qeyd et</string>
+    <string name="store_tracks_in_daily_directories">İzləri günlük qovluqlara qeyd et</string>
+    <string name="store_tracks_in_daily_directories_descrp">İzləri hər qeyd edildiyi günə görə alt qovluqlarda qeyd et (2018-01-01 kimi).</string>
+    <string name="sort_last_modified">Son dəyişiklik</string>
 </resources>
