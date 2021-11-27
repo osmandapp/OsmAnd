@@ -770,11 +770,7 @@ public abstract class InAppPurchaseHelper {
 					}
 					notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_SUBSCRIPTION);
 					notifyItemPurchased(sku, active);
-					NavigationSession carNavigationSession = ctx.getCarNavigationSession();
-					if (carNavigationSession != null) {
-						logDebug("Call Android Auto");
-						carNavigationSession.onPurchaseDone();
-					}
+					refreshAndroidAuto();
 					stop(true);
 				}
 			});
@@ -789,6 +785,7 @@ public abstract class InAppPurchaseHelper {
 
 			notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_FULL_VERSION);
 			notifyItemPurchased(fullVersion.getSku(), false);
+			refreshAndroidAuto();
 			stop(true);
 
 		} else if (depthContours != null && info.getSku().equals(depthContours.getSku())) {
@@ -819,6 +816,14 @@ public abstract class InAppPurchaseHelper {
 		} else {
 			notifyDismissProgress(activeTask);
 			stop(true);
+		}
+	}
+
+	private void refreshAndroidAuto() {
+		NavigationSession carNavigationSession = ctx.getCarNavigationSession();
+		if (carNavigationSession != null) {
+			logDebug("Call Android Auto");
+			carNavigationSession.onPurchaseDone();
 		}
 	}
 

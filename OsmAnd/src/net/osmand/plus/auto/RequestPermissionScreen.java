@@ -5,7 +5,6 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.car.app.CarContext;
-import androidx.car.app.CarToast;
 import androidx.car.app.Screen;
 import androidx.car.app.model.Action;
 import androidx.car.app.model.CarColor;
@@ -36,8 +35,8 @@ public class RequestPermissionScreen extends Screen {
 
 	LocationPermissionCheckCallback mLocationPermissionCheckCallback;
 
-	public RequestPermissionScreen(
-			@NonNull CarContext carContext, @Nullable LocationPermissionCheckCallback callback) {
+	public RequestPermissionScreen(@NonNull CarContext carContext,
+	                               @Nullable LocationPermissionCheckCallback callback) {
 		super(carContext);
 		mLocationPermissionCheckCallback = callback;
 	}
@@ -54,17 +53,13 @@ public class RequestPermissionScreen extends Screen {
 				getCarContext().requestPermissions(
 						permissions,
 						(approved, rejected) -> {
-							CarToast.makeText(
-									getCarContext(),
-									getCarContext().getString(R.string.location_access_request_result, approved, rejected),
-									CarToast.LENGTH_LONG).show();
 							if (!approved.isEmpty()) {
 								LocationPermissionCheckCallback locationPermissionCheckCallback = mLocationPermissionCheckCallback;
 								if (locationPermissionCheckCallback != null) {
 									locationPermissionCheckCallback.onPermissionGranted();
 								}
-								finish();
 							}
+							finish();
 						}));
 
 		Action action = new Action.Builder()
