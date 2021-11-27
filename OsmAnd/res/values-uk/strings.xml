@@ -4459,7 +4459,7 @@
     <string name="display_groups_visibility_dialog_description">Ви можете контролювати видимість груп на мапі. Якщо трек приховано, усі групи також будуть приховані.</string>
     <string name="shared_string_hide_all">Сховати все</string>
     <string name="migration_files_present">%1$d файлів (%2$s) присутні у вибраному розташуванні «%3$s».</string>
-    <string name="exit_without_saving_warning">Ви впевнені, що вийдете без збереження\? Ви втратите всі зміни.</string>
+    <string name="exit_without_saving_warning">Точно вийти без збереження\? Ви втратите всі зміни.</string>
     <string name="shared_string_show_slope">Показати схил</string>
     <string name="shared_string_hide_slope">Сховати схил</string>
     <string name="shared_string_downhill">Спуск</string>
