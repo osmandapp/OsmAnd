@@ -20,7 +20,6 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
 import net.osmand.AndroidUtils;
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Metadata;
 import net.osmand.PicassoUtils;
@@ -56,8 +55,8 @@ public class DescriptionCard extends MapBaseCard {
 
 	@Override
 	protected void updateContent() {
-		if (gpxFile.metadata == null) {
-			gpxFile.metadata = new GPXUtilities.Metadata();
+		if (!gpxFile.showCurrentTrack) {
+			view.findViewById(R.id.shadow).setVisibility(View.GONE);
 		}
 
 		final String title = gpxFile.metadata.getArticleTitle();

@@ -153,7 +153,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private SegmentsCard segmentsCard;
 	private OptionsCard optionsCard;
 	private DescriptionCard descriptionCard;
-	private InfoCard infoCard;
+	private GpxInfoCard gpxInfoCard;
 	private OverviewCard overviewCard;
 	private TrackPointsCard pointsCard;
 	private PointsGroupsCard groupsCard;
@@ -714,15 +714,21 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					ViewGroup parent = ((ViewGroup) descriptionCard.getView().getParent());
 					if (parent != null) {
 						parent.removeView(descriptionCard.getView());
-						parent.removeView(infoCard.getView());
 					}
 					cardsContainer.addView(descriptionCard.getView());
-					cardsContainer.addView(infoCard.getView());
 				} else {
 					descriptionCard = new DescriptionCard(getMapActivity(), this, displayHelper.getGpx());
-					infoCard = new InfoCard(getMapActivity(), this, displayHelper.getGpx());
 					cardsContainer.addView(descriptionCard.build(mapActivity));
-					cardsContainer.addView(infoCard.build(mapActivity));
+				}
+				if (gpxInfoCard != null && gpxInfoCard.getView() != null) {
+					ViewGroup parent = ((ViewGroup) gpxInfoCard.getView().getParent());
+					if (parent != null) {
+						parent.removeView(gpxInfoCard.getView());
+					}
+					cardsContainer.addView(gpxInfoCard.getView());
+				} else {
+					gpxInfoCard = new GpxInfoCard(getMapActivity(),  displayHelper.getGpx());
+					cardsContainer.addView(gpxInfoCard.build(mapActivity));
 				}
 			} else if (menuType == TrackMenuType.POINTS) {
 				if (pointsCard != null && pointsCard.getView() != null) {
@@ -1323,8 +1329,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (descriptionCard != null) {
 			descriptionCard.updateContent();
 		}
-		if (infoCard != null) {
-			infoCard.updateContent();
+		if (gpxInfoCard != null) {
+			gpxInfoCard.updateContent();
 		}
 		if (pointsCard != null) {
 			pointsCard.updateContent();
