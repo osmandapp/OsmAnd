@@ -25,132 +25,25 @@
 				android:textSize="@dimen/default_desc_text_size"
 				app:typeface="@string/font_roboto_regular" />
 		</LinearLayout>
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/setting_list_item_group_height"
-			android:orientation="horizontal">
 
-			<androidx.appcompat.widget.AppCompatImageView
-				android:layout_width="@dimen/standard_icon_size"
-				android:layout_height="@dimen/standard_icon_size"
-				android:layout_gravity="center"
-				android:layout_marginStart="@dimen/title_padding"
-				android:tint="?attr/default_icon_color"
-				app:srcCompat="@drawable/ic_sdcard" />
+		<include
+			android:id="@+id/size_container"
+			layout="@layout/item_with_title_desc_icon_68dp"/>
 
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_marginVertical="@dimen/list_header_text_left_margin"
-				android:layout_marginStart="@dimen/gpx_info_card_margin_start"
-				android:layout_marginEnd="@dimen/dashboard_parking_left_margin"
-				android:orientation="vertical">
-
-				<net.osmand.plus.widgets.TextViewEx
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:text="@string/size"
-					android:textColor="?android:textColorSecondary"
-					android:textSize="@dimen/default_desc_text_size"
-					app:typeface="@string/font_roboto_regular" />
-
-				<net.osmand.plus.widgets.TextViewEx
-					android:id="@+id/size"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:text="9.7 mb"
-					android:textColor="?android:textColorPrimary"
-					android:textSize="@dimen/default_list_text_size"
-					app:typeface="@string/font_roboto_regular" />
-			</LinearLayout>
-		</LinearLayout>
-		<LinearLayout
-			android:id="@+id/timeContainer"
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/setting_list_item_group_height"
+		<include
+			android:id="@+id/created_on_container"
 			android:visibility="gone"
-			android:orientation="horizontal">
+			layout="@layout/item_with_title_desc_icon_68dp"/>
 
-			<androidx.appcompat.widget.AppCompatImageView
-				android:layout_width="@dimen/standard_icon_size"
-				android:layout_height="@dimen/standard_icon_size"
-				android:layout_gravity="center"
-				android:layout_marginStart="@dimen/title_padding"
-				android:tint="?attr/default_icon_color"
-				app:srcCompat="@drawable/ic_action_data" />
+		<include
+			android:id="@+id/location_container"
+			layout="@layout/item_with_title_desc_icon_68dp"/>
 
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_marginVertical="@dimen/list_header_text_left_margin"
-				android:layout_marginStart="@dimen/gpx_info_card_margin_start"
-				android:layout_marginEnd="@dimen/dashboard_parking_left_margin"
-				android:orientation="vertical">
-
-				<net.osmand.plus.widgets.TextViewEx
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:text="@string/created_on"
-					android:textColor="?android:textColorSecondary"
-					android:textSize="@dimen/default_desc_text_size"
-					app:typeface="@string/font_roboto_regular" />
-
-				<net.osmand.plus.widgets.TextViewEx
-					android:id="@+id/created_on"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:text="10 Jul 2021"
-					android:textColor="?android:textColorPrimary"
-					android:textSize="@dimen/default_list_text_size"
-					app:typeface="@string/font_roboto_regular" />
-			</LinearLayout>
-		</LinearLayout>
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/setting_list_item_group_height"
-			android:orientation="horizontal">
-
-			<androidx.appcompat.widget.AppCompatImageView
-				android:layout_width="@dimen/standard_icon_size"
-				android:layout_height="@dimen/standard_icon_size"
-				android:layout_gravity="center"
-				android:layout_marginStart="@dimen/title_padding"
-				android:tint="?attr/default_icon_color"
-				app:srcCompat="@drawable/ic_action_folder" />
-
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_marginVertical="@dimen/list_header_text_left_margin"
-				android:layout_marginStart="@dimen/gpx_info_card_margin_start"
-				android:layout_marginEnd="@dimen/dashboard_parking_left_margin"
-				android:orientation="vertical">
-
-				<net.osmand.plus.widgets.TextViewEx
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:textColor="?android:textColorSecondary"
-					android:text="@string/shared_string_location"
-					android:textSize="@dimen/default_desc_text_size"
-					app:typeface="@string/font_roboto_regular" />
-
-				<net.osmand.plus.widgets.TextViewEx
-					android:id="@+id/location"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:text="Rec"
-					android:textColor="?android:textColorPrimary"
-					android:textSize="@dimen/default_list_text_size"
-					app:typeface="@string/font_roboto_regular" />
-			</LinearLayout>
-		</LinearLayout>
 	</LinearLayout>
 
 	<FrameLayout
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="@dimen/context_menu_padding_margin_small"
-		android:background="?attr/activity_background_basic">
+		android:layout_height="wrap_content">
 
 		<include
 			android:id="@+id/shadow"

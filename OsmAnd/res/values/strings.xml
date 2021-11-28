@@ -10,7 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributions/translating-osmand
 	Thx - Hardy
 -->
-    <string name="size">Size</string>
+    <string name="shared_string_size">Size</string>
     <string name="created_on">Created on</string>
     <string name="gps_filter_precision">GPS Precision</string>
     <string name="shared_string_precision">Precision</string>
