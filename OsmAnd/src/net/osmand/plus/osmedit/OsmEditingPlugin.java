@@ -88,6 +88,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return ID;
 	}
 
+	@NonNull
 	public OpenstreetmapsDbHelper getDBPOI() {
 		if (dbpoi == null) {
 			dbpoi = new OpenstreetmapsDbHelper(app);
@@ -95,6 +96,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return dbpoi;
 	}
 
+	@NonNull
 	public OpenstreetmapLocalUtil getPoiModificationLocalUtil() {
 		if (localUtil == null) {
 			localUtil = new OpenstreetmapLocalUtil(this);
@@ -102,6 +104,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return localUtil;
 	}
 
+	@NonNull
 	public OpenstreetmapRemoteUtil getPoiModificationRemoteUtil() {
 		if (remoteUtil == null) {
 			remoteUtil = new OpenstreetmapRemoteUtil(app);
@@ -109,6 +112,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return remoteUtil;
 	}
 
+	@NonNull
 	public OsmBugsRemoteUtil getOsmNotesRemoteUtil() {
 		if (remoteNotesUtil == null) {
 			remoteNotesUtil = new OsmBugsRemoteUtil(app);
@@ -116,6 +120,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return remoteNotesUtil;
 	}
 
+	@NonNull
 	public OsmBugsLocalUtil getOsmNotesLocalUtil() {
 		if (localNotesUtil == null) {
 			localNotesUtil = new OsmBugsLocalUtil(app, getDBBug());
@@ -123,7 +128,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return localNotesUtil;
 	}
 
-
+	@NonNull
 	public OsmBugsDbHelper getDBBug() {
 		if (dbbug == null) {
 			dbbug = new OsmBugsDbHelper(app);
