@@ -1,5 +1,26 @@
 package net.osmand.plus.track;
 
+import static net.osmand.GPXUtilities.GPXTrackAnalysis;
+import static net.osmand.plus.GpxSelectionHelper.isGpxFileSelected;
+import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
+import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
+import static net.osmand.plus.track.OptionsCard.ANALYZE_BY_INTERVALS_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.ANALYZE_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.APPEARANCE_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.CHANGE_FOLDER_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.DELETE_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.DIRECTIONS_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.EDIT_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.GPS_FILTER_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.JOIN_GAPS_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.RENAME_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.SHARE_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.UPLOAD_OSM_BUTTON_INDEX;
+import static net.osmand.plus.track.TrackPointsCard.ADD_WAYPOINT_INDEX;
+import static net.osmand.plus.track.TrackPointsCard.DELETE_WAYPOINTS_INDEX;
+import static net.osmand.plus.track.TrackPointsCard.OPEN_WAYPOINT_INDEX;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.ProgressDialog;
@@ -107,27 +128,6 @@ import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-import static net.osmand.GPXUtilities.GPXTrackAnalysis;
-import static net.osmand.plus.GpxSelectionHelper.isGpxFileSelected;
-import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
-import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
-import static net.osmand.plus.track.OptionsCard.ANALYZE_BY_INTERVALS_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.ANALYZE_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.APPEARANCE_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.CHANGE_FOLDER_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.DELETE_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.DIRECTIONS_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.EDIT_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.GPS_FILTER_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.JOIN_GAPS_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.RENAME_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.SHARE_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.UPLOAD_OSM_BUTTON_INDEX;
-import static net.osmand.plus.track.TrackPointsCard.ADD_WAYPOINT_INDEX;
-import static net.osmand.plus.track.TrackPointsCard.DELETE_WAYPOINTS_INDEX;
-import static net.osmand.plus.track.TrackPointsCard.OPEN_WAYPOINT_INDEX;
-
 public class TrackMenuFragment extends ContextMenuScrollFragment implements CardListener,
 		SegmentActionsListener, RenameCallback, OnTrackFileMoveListener, OnPointsDeleteListener,
 		OsmAndLocationListener, OsmAndCompassListener, OnSegmentSelectedListener, GpsFilterFragmentLister,
@@ -153,6 +153,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private SegmentsCard segmentsCard;
 	private OptionsCard optionsCard;
 	private DescriptionCard descriptionCard;
+	private InfoCard infoCard;
 	private OverviewCard overviewCard;
 	private TrackPointsCard pointsCard;
 	private PointsGroupsCard groupsCard;
@@ -713,11 +714,15 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					ViewGroup parent = ((ViewGroup) descriptionCard.getView().getParent());
 					if (parent != null) {
 						parent.removeView(descriptionCard.getView());
+						parent.removeView(infoCard.getView());
 					}
 					cardsContainer.addView(descriptionCard.getView());
+					cardsContainer.addView(infoCard.getView());
 				} else {
 					descriptionCard = new DescriptionCard(getMapActivity(), this, displayHelper.getGpx());
+					infoCard = new InfoCard(getMapActivity(), this, displayHelper.getGpx());
 					cardsContainer.addView(descriptionCard.build(mapActivity));
+					cardsContainer.addView(infoCard.build(mapActivity));
 				}
 			} else if (menuType == TrackMenuType.POINTS) {
 				if (pointsCard != null && pointsCard.getView() != null) {
@@ -1317,6 +1322,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 		if (descriptionCard != null) {
 			descriptionCard.updateContent();
+		}
+		if (infoCard != null) {
+			infoCard.updateContent();
 		}
 		if (pointsCard != null) {
 			pointsCard.updateContent();
