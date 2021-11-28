@@ -175,4 +175,18 @@
     <string name="show_on_map">Monstrar sus la mapa</string>
     <string name="shared_string_export">Exportar</string>
     <string name="shared_string_cancel">Anullar</string>
+    <string name="shared_string_apply">Aplicar</string>
+    <string name="si_mi_meters">Milas/mètres</string>
+    <string name="si_km_m">Quilomètres/mètres</string>
+    <string name="si_kmh">Quilomètres a l\'ora</string>
+    <string name="nm">MN</string>
+    <string name="nm_h">nos</string>
+    <string name="unit_of_length">Unitats de longitud</string>
+    <string name="si_mi_yard">Milas/iards</string>
+    <string name="si_mph">Milas a l\'ora</string>
+    <string name="si_mi_feet">Milas/pè</string>
+    <string name="si_nm">Milas nautic</string>
+    <string name="si_m_s">Mètres a la segonda</string>
+    <string name="si_min_km">Minutas au quilomètre</string>
+    <string name="si_nm_h">Milas nautics a l\'ora (Nos)</string>
 </resources>
