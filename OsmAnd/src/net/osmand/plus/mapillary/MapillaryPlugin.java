@@ -121,6 +121,9 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	@Override
 	public void registerLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
+		if (vectorLayer != null) {
+			app.getOsmandMap().getMapView().removeLayer(vectorLayer);
+		}
 		createLayers(context);
 	}
 

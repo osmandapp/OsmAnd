@@ -1,5 +1,7 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.GPXUtilities.GPXTrackAnalysis.ElevationDiffsCalculator.CALCULATED_GPX_WINDOW_LENGTH;
+
 import android.graphics.Matrix;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -385,9 +387,11 @@ public class ElevationProfileWidget {
 		}
 		firstVisiblePointIndex = firstPointIndex;
 		lastVisiblePointIndex = lastPointIndex;
-		if (firstPointIndex >= 0 && lastPointIndex > firstPointIndex) {
-			ElevationDiffsCalculator elevationDiffsCalc =
-					new ElevationDiffsCalculator(10d, firstPointIndex, lastPointIndex - firstPointIndex + 1) {
+		firstPointIndex = Math.max(0, firstPointIndex - 1);
+		lastPointIndex = Math.min(points.size() - 1, lastPointIndex + 1);
+		if (lastPointIndex > firstPointIndex) {
+			ElevationDiffsCalculator elevationDiffsCalc = new ElevationDiffsCalculator(
+					CALCULATED_GPX_WINDOW_LENGTH, firstPointIndex, lastPointIndex - firstPointIndex + 1) {
 				@Override
 				public WptPt getPoint(int index) {
 					return points.get(index);

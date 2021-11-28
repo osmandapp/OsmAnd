@@ -74,6 +74,7 @@ public class MapPoiTypes {
 		String getSynonyms(AbstractPoiType type);
 		String getSynonyms(String keyName);
 
+		String getAllLanguagesTranslationSuffix();
 	}
 
 	public static MapPoiTypes getDefaultNoInit() {
@@ -819,6 +820,13 @@ public class MapPoiTypes {
 			}
 		}
 		return getBasePoiName(abstractPoiType);
+	}
+
+	public String getAllLanguagesTranslationSuffix() {
+		if (poiTranslator != null) {
+			return poiTranslator.getAllLanguagesTranslationSuffix();
+		}
+		return "all languages";
 	}
 
 	public String getBasePoiName(AbstractPoiType abstractPoiType) {

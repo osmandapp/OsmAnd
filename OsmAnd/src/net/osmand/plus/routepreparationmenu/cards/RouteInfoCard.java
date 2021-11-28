@@ -44,7 +44,7 @@ public class RouteInfoCard extends MapBaseCard {
 		GpxUiHelper.setupHorizontalGPXChart(getMyApplication(), chart, 5, 9, 24, true, nightMode);
 		BarData barData = GpxUiHelper.buildStatisticChart(app, chart, statistics, analysis, true, nightMode);
 		graphAdapter = new CustomChartAdapter(app, chart, true);
-		graphAdapter.setLegendContainer(container);
+		graphAdapter.setBottomInfoContainer(container);
 		graphAdapter.updateData(barData, statistics);
 		updateView();
 

@@ -376,7 +376,7 @@
     <string name="poi_parish">مكتب رعية الكنيسة</string>
     <string name="poi_publisher">مكتب النشر</string>
     <string name="poi_toilets_wheelchair_yes">الوصول إلى المراحيض بالكراسي المتحركة: نعم</string>
-    <string name="poi_toilets_wheelchair_no">الوصول إلى المراحيض بالكراسي المتحركة: لا</string>
+    <string name="poi_toilets_wheelchair_no">دوارات المياه مهيأة لكراسي المعاقين: لا</string>
     <string name="poi_toilets_access_customers">الوصول إلى دورة المياة: العملاء فقط</string>
     <string name="poi_diaper_yes">طاولة تغيير حفائض الأطفال</string>
     <string name="poi_diaper_no">لا توجد طاولة تغيير الحفاض</string>
@@ -4011,8 +4011,8 @@
     <string name="poi_payment_calling_cards_yes">بطاقات الاتصال مقبولة</string>
     <string name="poi_payment_reverse_charge_calls_no">مكالمات الشحن العكسي: لا</string>
     <string name="poi_payment_calling_cards_no">بطاقات الاتصال غير مقبولة</string>
-    <string name="poi_manufacturer">الشركه المصنعه</string>
-    <string name="poi_arch">قوس</string>
+    <string name="poi_manufacturer">الشركة المصنعة</string>
+    <string name="poi_arch">قوس طبيعي</string>
     <string name="poi_contact_xing">شينغ</string>
     <string name="poi_glacier_status_marked_retreat">حالة النهر الجليدي: تراجع ملحوظ</string>
     <string name="poi_glacier_status_retreat">حالة الأنهار الجليدية: تراجع</string>

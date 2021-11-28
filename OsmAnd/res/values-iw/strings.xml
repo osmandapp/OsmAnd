@@ -4436,4 +4436,8 @@
     <string name="from_with_param">מ־%1$s</string>
     <string name="shared_string_statistics">סטטיסטיקה</string>
     <string name="shared_string_precision">דיוק</string>
+    <string name="gps_filter_hdop_desc">הגדרת הערך המרבי המותר ל־HDOP.
+\nנקודות שעוברות את המשתנה שהוגדר יוסתרו.</string>
+    <string name="gps_filter_speed_altitude_desc">נקודות המעקב שתואמות למשך הזמן שהוצג יופיעו בתרשים ובמפה, השאר יוסתרו.</string>
+    <string name="gps_filter_precision">דיוק GPS</string>
 </resources>

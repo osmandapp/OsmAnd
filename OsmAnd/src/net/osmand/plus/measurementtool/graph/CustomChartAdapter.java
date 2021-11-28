@@ -7,12 +7,8 @@ import android.text.SpannableStringBuilder;
 import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.core.graphics.ColorUtils;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -34,14 +30,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.core.graphics.ColorUtils;
+
 import static net.osmand.plus.track.ColorsCard.MINIMUM_CONTRAST_RATIO;
 
 public class CustomChartAdapter extends BaseChartAdapter<HorizontalBarChart, BarData, RouteStatistics> {
 
 	private String selectedPropertyName;
-	private ViewGroup legendContainer;
 	private LegendViewType legendViewType;
-	private LayoutChangeListener layoutChangeListener;
 
 	public enum LegendViewType {
 		ONE_ELEMENT,
@@ -61,44 +58,31 @@ public class CustomChartAdapter extends BaseChartAdapter<HorizontalBarChart, Bar
 		chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
 			@Override
 			public void onValueSelected(Entry e, Highlight h) {
-				if (getStatistics() == null) return;
+				if (getStatistics() == null) {
+					return;
+				}
 
 				List<RouteSegmentAttribute> elems = getStatistics().elements;
 				int i = h.getStackIndex();
 				if (i >= 0 && elems.size() > i) {
 					selectedPropertyName = elems.get(i).getPropertyName();
-					updateLegend();
+					updateBottomInfo();
 				} else if (LegendViewType.ONE_ELEMENT == legendViewType && elems.size() == 1) {
 					selectedPropertyName = elems.get(0).getPropertyName();
-					updateLegend();
+					updateBottomInfo();
 				}
 			}
 
 			@Override
 			public void onNothingSelected() {
 				selectedPropertyName = null;
-				updateLegend();
+				updateBottomInfo();
 			}
 		});
 	}
 
-	@Override
-	public void updateView() {
-		chart.setData(chartData);
-		updateHighlight();
-		updateLegend();
-	}
-
-	public void setLegendContainer(ViewGroup legendContainer) {
-		this.legendContainer = legendContainer;
-	}
-
 	public void setLegendViewType(LegendViewType legendViewType) {
 		this.legendViewType = legendViewType;
-	}
-
-	public void setLayoutChangeListener(LayoutChangeListener layoutChangeListener) {
-		this.layoutChangeListener = layoutChangeListener;
 	}
 
 	public void highlight(Highlight h) {
@@ -110,19 +94,12 @@ public class CustomChartAdapter extends BaseChartAdapter<HorizontalBarChart, Bar
 		chart.highlightValue(bh, true);
 	}
 
-	private void updateLegend() {
-		if (legendContainer != null) {
-			legendContainer.removeAllViews();
-			attachLegend();
-			if (layoutChangeListener != null) {
-				layoutChangeListener.onLayoutChanged();
-			}
-		}
-	}
-
-	private void attachLegend() {
+	@Override
+	protected void attachBottomInfo() {
 		List<RouteSegmentAttribute> attributes = getSegmentsList();
-		if (attributes == null) return;
+		if (attributes == null) {
+			return;
+		}
 
 		switch (legendViewType) {
 			case ONE_ELEMENT:
@@ -144,7 +121,7 @@ public class CustomChartAdapter extends BaseChartAdapter<HorizontalBarChart, Bar
 		Context themedCtx = UiUtilities.getThemedContext(app, isNightMode());
 		LayoutInflater inflater = LayoutInflater.from(themedCtx);
 		for (RouteSegmentAttribute segment : list) {
-			View view = inflater.inflate(R.layout.route_details_legend, legendContainer, false);
+			View view = inflater.inflate(R.layout.route_details_legend, bottomInfoContainer, false);
 			int segmentColor = segment.getColor();
 			Drawable circle = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_circle, segmentColor);
 			ImageView legendIcon = (ImageView) view.findViewById(R.id.legend_icon_color);
@@ -161,7 +138,7 @@ public class CustomChartAdapter extends BaseChartAdapter<HorizontalBarChart, Bar
 			TextView legend = (TextView) view.findViewById(R.id.legend_text);
 			legend.setText(text);
 
-			legendContainer.addView(view);
+			bottomInfoContainer.addView(view);
 		}
 	}
 

@@ -1,5 +1,7 @@
 package net.osmand.plus.search;
 
+import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
+
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -426,10 +428,12 @@ public class QuickSearchHelper implements ResourceListener {
 	public static class SearchHistoryAPI extends SearchBaseAPI {
 
 		private final OsmandApplication app;
+		private final MapPoiTypes poiTypes;
 
 		public SearchHistoryAPI(OsmandApplication app) {
 			super(ObjectType.RECENT_OBJ);
 			this.app = app;
+			this.poiTypes = app.getPoiTypes();
 		}
 
 		@Override
@@ -452,7 +456,11 @@ public class QuickSearchHelper implements ResourceListener {
 						pt = mapPoiTypes.getAnyPoiAdditionalTypeByKey(name);
 					}
 					if (pt != null) {
-						sr.localeName = pt.getTranslation();
+						if (OSM_WIKI_CATEGORY.equals(pt.getKeyName())) {
+							sr.localeName = pt.getTranslation() + " (" + poiTypes.getAllLanguagesTranslationSuffix() + ")";
+						} else {
+							sr.localeName = pt.getTranslation();
+						}
 						sr.object = pt;
 						sr.relatedObject = point;
 						sr.priorityDistance = 0;
