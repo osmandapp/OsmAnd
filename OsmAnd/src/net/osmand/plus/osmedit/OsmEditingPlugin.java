@@ -45,6 +45,7 @@ import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.osmedit.dialogs.SendGpxBottomSheetFragment;
+import net.osmand.plus.osmedit.dialogs.SendGpxBottomSheetFragment.UpdateFragmentOnGpxUploadListener;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -58,7 +59,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class OsmEditingPlugin extends OsmandPlugin {
+public class OsmEditingPlugin extends OsmandPlugin implements UpdateFragmentOnGpxUploadListener {
 	private static final Log LOG = PlatformUtil.getLog(OsmEditingPlugin.class);
 	public static final int OSM_EDIT_TAB = R.string.osm_edits;
 	private static final String ID = "osm.editing";
@@ -417,6 +418,11 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 	}
 
+	@Override
+	public void onGpxUpload(String result) {
+
+	}
+
 	public enum UploadVisibility {
 		PUBLIC(R.string.gpxup_public, R.string.gpx_upload_public_visibility_descr),
 		IDENTIFIABLE(R.string.gpxup_identifiable, R.string.gpx_upload_identifiable_visibility_descr),
@@ -456,7 +462,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), fragment);
 			return false;
 		} else {
-			SendGpxBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), fragment, info);
+			SendGpxBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), fragment, info, this);
 			return true;
 		}
 	}

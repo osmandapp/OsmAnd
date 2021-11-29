@@ -124,4 +124,15 @@
 
 		</LinearLayout>
 	</LinearLayout>
+	<androidx.appcompat.widget.AppCompatCheckBox
+		android:id="@+id/compound_button"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:layout_marginEnd="@dimen/bottom_sheet_content_margin"
+		android:background="@null"
+		android:clickable="false"
+		android:focusable="false"
+		android:visibility="gone"
+		android:focusableInTouchMode="false" />
 </LinearLayout>

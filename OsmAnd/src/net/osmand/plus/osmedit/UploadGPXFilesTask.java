@@ -24,16 +24,19 @@ public class UploadGPXFilesTask extends AsyncTask<GpxInfo, String, String> {
 	private final String visibility;
 	private final String commonDescription;
 	private final String tags;
+	public final UploadGpxListener uploadGpxListener;
 
 	public UploadGPXFilesTask(@NonNull Activity activity,
 	                          @NonNull String commonDescription,
 	                          @NonNull String tags,
-	                          @Nullable UploadVisibility visibility) {
+	                          @Nullable UploadVisibility visibility,
+	                          @Nullable UploadGpxListener uploadGpxListener) {
 		app = (OsmandApplication) activity.getApplication();
 		this.activityRef = new WeakReference<>(activity);
 		this.commonDescription = commonDescription;
 		this.tags = tags;
 		this.visibility = visibility != null ? visibility.asURLparam() : UploadVisibility.PRIVATE.asURLparam();
+		this.uploadGpxListener = uploadGpxListener;
 	}
 
 	@Override
@@ -88,5 +91,10 @@ public class UploadGPXFilesTask extends AsyncTask<GpxInfo, String, String> {
 			activity.setProgressBarIndeterminateVisibility(false);
 		}
 		app.showToastMessage(result);
+		uploadGpxListener.OnUploadToOsm(result);
+	}
+
+	public interface UploadGpxListener {
+		void OnUploadToOsm(String result);
 	}
 }

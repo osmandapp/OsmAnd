@@ -269,11 +269,11 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 		void onSelectionApplied(List<SelectableItem> selectedItems);
 	}
 
-	public static class SelectableItem {
+	public static class SelectableItem<T> {
 		private String title;
 		private String description;
 		private int iconId;
-		private Object object;
+		private T object;
 		@ColorInt
 		private int color;
 
@@ -289,7 +289,7 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 			return iconId;
 		}
 
-		public Object getObject() {
+		public T getObject() {
 			return object;
 		}
 
@@ -305,7 +305,7 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 			this.iconId = iconId;
 		}
 
-		public void setObject(Object object) {
+		public void setObject(T object) {
 			this.object = object;
 		}
 
