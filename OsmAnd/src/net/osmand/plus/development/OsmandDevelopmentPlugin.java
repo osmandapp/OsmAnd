@@ -132,7 +132,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 	@Override
 	public SettingsScreenType getSettingsScreenType() {
-		return SettingsScreenType.DEVELOPMENT_SETTINGS;
+		return SettingsScreenType.DEVELOPMENT;
 	}
 
 	@Override

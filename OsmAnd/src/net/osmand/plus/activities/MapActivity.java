@@ -2131,7 +2131,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public void showSettings() {
 		dismissSettingsScreens();
-		BaseSettingsFragment.showInstance(this, SettingsScreenType.MAIN_SETTINGS);
+		BaseSettingsFragment.showInstance(this, SettingsScreenType.MAIN);
 	}
 
 	private void hideVisibleMenu() {

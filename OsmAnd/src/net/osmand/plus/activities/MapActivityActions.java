@@ -692,7 +692,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
-						BaseSettingsFragment.showInstance(mapActivity, BaseSettingsFragment.SettingsScreenType.MAIN_SETTINGS);
+						BaseSettingsFragment.showInstance(mapActivity, BaseSettingsFragment.SettingsScreenType.MAIN);
 						return true;
 					}
 				})

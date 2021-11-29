@@ -186,7 +186,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 			case PROFILE:
 			case CUSTOM_ROUTING:
 			case ONLINE_ROUTING_ENGINES:
-				BaseSettingsFragment.showInstance(requireActivity(), SettingsScreenType.MAIN_SETTINGS);
+				BaseSettingsFragment.showInstance(requireActivity(), SettingsScreenType.MAIN);
 				break;
 			case QUICK_ACTIONS:
 				QuickActionListFragment.showInstance(activity);

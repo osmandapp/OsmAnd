@@ -182,7 +182,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	@Override
 	public SettingsScreenType getSettingsScreenType() {
-		return SettingsScreenType.MONITORING_SETTINGS;
+		return SettingsScreenType.MONITORING;
 	}
 
 	@Override

@@ -87,6 +87,6 @@ public abstract class AppModesBottomSheetDialogFragment<T extends AbstractProfil
 	@Override
 	public void onButtonPressed() {
 		this.dismiss();
-		BaseSettingsFragment.showInstance(getActivity(), BaseSettingsFragment.SettingsScreenType.MAIN_SETTINGS);
+		BaseSettingsFragment.showInstance(getActivity(), BaseSettingsFragment.SettingsScreenType.MAIN);
 	}
 }

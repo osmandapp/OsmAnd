@@ -114,4 +114,32 @@ public interface OsmAndCustomizationConstants {
 	String PLUGIN_RASTER_MAPS = "osmand.rastermaps";
 	String PLUGIN_SKI_MAPS = "skimaps.plugin";
 	String PLUGIN_SRTM = "osmand.srtm";
+
+	//Settings:
+	String SETTINGS_ID = "settings.screen.";
+	String SETTINGS_MAIN_ID = SETTINGS_ID + "main";
+	String SETTINGS_GLOBAL_ID = SETTINGS_ID + "global";
+	String SETTINGS_CONFIGURE_PROFILE_ID = SETTINGS_ID + "configure_profile";
+	String SETTINGS_PROXY_ID = SETTINGS_ID + "proxy";
+	String SETTINGS_GENERAL_PROFILE_ID = SETTINGS_ID + "general_profile";
+	String SETTINGS_NAVIGATION_ID = SETTINGS_ID + "navigation";
+	String SETTINGS_COORDINATES_FORMAT_ID = SETTINGS_ID + "coordinates_format";
+	String SETTINGS_ROUTE_PARAMETERS_ID = SETTINGS_ID + "route_parameters";
+	String SETTINGS_SCREEN_ALERTS_ID = SETTINGS_ID + "screen_alerts";
+	String SETTINGS_VOICE_ANNOUNCES_ID = SETTINGS_ID + "voice_announces";
+	String SETTINGS_VEHICLE_PARAMETERS_ID = SETTINGS_ID + "vehicle_parameters";
+	String SETTINGS_MAP_DURING_NAVIGATION_ID = SETTINGS_ID + "map_during_navigation";
+	String SETTINGS_TURN_SCREEN_ON_ID = SETTINGS_ID + "turn_screen_on";
+	String SETTINGS_DATA_STORAGE_ID = SETTINGS_ID + "data_storage";
+	String SETTINGS_DIALOGS_AND_NOTIFICATIONS_ID = SETTINGS_ID + "dialogs_and_notifications";
+	String SETTINGS_HISTORY_ID = SETTINGS_ID + "history";
+	String SETTINGS_PROFILE_APPEARANCE_ID = SETTINGS_ID + "profile_appearance";
+	String SETTINGS_OPEN_STREET_MAP_EDITING_ID = SETTINGS_ID + "open_street_map_editing";
+	String SETTINGS_MULTIMEDIA_NOTES_ID = SETTINGS_ID + "multimedia_notes";
+	String SETTINGS_MONITORING_ID = SETTINGS_ID + "monitoring";
+	String SETTINGS_LIVE_MONITORING_ID = SETTINGS_ID + "live_monitoring";
+	String SETTINGS_ACCESSIBILITY_ID = SETTINGS_ID + "accessibility";
+	String SETTINGS_OPEN_PLACE_REVIEWS_ID = SETTINGS_ID + "open_place_reviews";
+	String SETTINGS_DEVELOPMENT_ID = SETTINGS_ID + "development";
+	String SETTINGS_BACKUP_AUTHORIZATION_ID = SETTINGS_ID + "backup_authorization";
 }

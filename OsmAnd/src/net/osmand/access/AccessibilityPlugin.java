@@ -67,7 +67,7 @@ public class AccessibilityPlugin extends OsmandPlugin {
 
 	@Override
 	public SettingsScreenType getSettingsScreenType() {
-		return SettingsScreenType.ACCESSIBILITY_SETTINGS;
+		return SettingsScreenType.ACCESSIBILITY;
 	}
 
 	@Override
