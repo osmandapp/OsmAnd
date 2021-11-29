@@ -4057,11 +4057,14 @@
     <string name="poi_butcher_horse">Ló</string>
     <string name="poi_butcher_lamb">Bárány</string>
     <string name="poi_butcher_pork">Sertés</string>
-    <string name="poi_coffee_yes"></string>
+    <string name="poi_coffee_yes"/>
     <string name="poi_lgbtq_primary">Elsősorban LMBTQ</string>
     <string name="poi_lgbtq_yes">LMBTQ személyeknek engedélyezett</string>
     <string name="poi_lgbtq_only">Kizárólag LMBTQ</string>
     <string name="poi_lgbtq_no">LMBTQ személyeknek nem engedélyezett</string>
     <string name="poi_beauty_salon_tanning">Szolárium</string>
     <string name="poi_beauty_salon_cosmetics">Kozmetika</string>
+    <string name="poi_medical_supply_filter">Gyógyászati ellátási kategória</string>
+    <string name="poi_agrarian_type">Mezőgazdasági inputok</string>
+    <string name="poi_membership_filter">Tagság szükséges</string>
 </resources>
