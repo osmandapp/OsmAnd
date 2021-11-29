@@ -742,7 +742,6 @@ public class BinaryRoutePlanner {
 					directionAllowed = false;
 				} else {
 					if (nextCurrentSegment.isSegmentAttachedToStart()) {
-						// TODO count how many times in (should we optimize processOneRoadIntersection for this case)
 						directionAllowed = processOneRoadIntersection(ctx, reverseWaySearch, null, 
 								visitedSegments, currentSegment, nextCurrentSegment);
 					} else {
