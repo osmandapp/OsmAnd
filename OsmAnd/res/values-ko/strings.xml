@@ -2043,7 +2043,7 @@
     <string name="cancel_anytime_in_huawei_appgallery">Huawei AppGallery에서 언제든지 취소</string>
     <string name="rearrange_categories">카테고리 재정렬</string>
     <string name="animate_my_location">자신의 위치에 애니메이션을 사용</string>
-    <string name="route_line_use_gradient_coloring">경로 선은 표면고도 경사로 색상이 지정됩니다.</string>
+    <string name="route_line_use_gradient_coloring">경로 선은 해발고도 경사로 색상이 지정됩니다.</string>
     <string name="navigate_to_track_descr">내 위치에서 트랙으로 이동</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">비포장도로 선호</string>
     <string name="routing_attr_height_obstacles_name">표면고도 데이터 사용</string>
