@@ -4445,42 +4445,42 @@
     <string name="rendering_attr_natureReserves_description">Mostrar reservas naturales, áreas protegidas y parques nacionales.</string>
     <string name="not_enough_contributions_descr">Necesitas un mínimo de %1$s cambios en el último bimestre %2$s para obtener acceso a actualizaciones de mapas ilimitadas por hora.</string>
     <string name="show_parameter_seekbar">Mostrar barra de búsqueda de parámetros</string>
-    <string name="migration_files_present">Existen %1$d archivo(s) (%2$s) en la ubicación anterior «%3$s».</string>
+    <string name="migration_files_present">Existen %1$d archivo(s) (%2$s) en la ubicación «%3$s».</string>
     <string name="fold_unfold">Contraer/expandir</string>
     <string name="app_profile_type">Tipo de perfil de la aplicación</string>
     <string name="map_marker_options">Opciones del marcador de mapa</string>
     <string name="add_to_group">Añadir al grupo</string>
     <string name="app_modes_options">Eligir modos de aplicación</string>
     <string name="shared_string_memory">Memoria</string>
-    <string name="memory_allocated_for_routing_ds">Un valor de memoria más alto acelera el cálculo de rutas largas (más de 500 km), pero puede afectar al rendimiento de otras aplicaciones.
-\nNo afecta al cálculo de rutas cortas.</string>
+    <string name="memory_allocated_for_routing_ds">Mayor asignación de memoria acelerá el cálculo de rutas largas (más de 500 km), pero puede afectar al rendimiento de otras aplicaciones.
+\nNo afecta a la velocidad de cálculo de rutas cortas.</string>
     <string name="memory_allocated_for_routing">Memoria asignada para navegación</string>
     <string name="reading_files">Leyendo archivos…</string>
     <string name="no_items_selected_warning">Marca al menos un elemento</string>
     <string name="display_groups_visibility_dialog_description">Puedes controlar la visibilidad de los grupos en el mapa. Si la traza está oculta, todos los grupos también lo estarán.</string>
     <string name="shared_string_hide_all">Ocultar todo</string>
-    <string name="exit_without_saving_warning">¿Salir sin guardar\? Se perderán todos los cambios.</string>
+    <string name="exit_without_saving_warning">¿Salir sin guardar los cambios\?</string>
     <string name="shared_string_show_slope">Mostrar pendiente</string>
     <string name="shared_string_hide_slope">Ocultar pendiente</string>
     <string name="shared_string_grade">Calificación</string>
     <string name="shared_string_uphill">Ascenso</string>
     <string name="shared_string_downhill">Descenso</string>
     <string name="elevation_profile">Perfil de elevación</string>
-    <string name="gps_filter_hdop_desc">Define el valor máximo permitido para el HDOP.
-\nSe ocultarán los puntos mayores al parámetro definido.</string>
-    <string name="gps_filter_speed_altitude_desc">Los puntos de la traza que coincidan con el intervalo definido serán visibles en el gráfico y el mapa, el resto se ocultará.</string>
+    <string name="gps_filter_hdop_desc">Define el valor máximo permitido para la dilución de precisión horizontal (HDOP).
+\nLos puntos con un valor más alto serán ocultados.</string>
+    <string name="gps_filter_speed_altitude_desc">Sólo los puntos de la traza que coincidan con el intervalo definido aparecerán en el gráfico y el mapa, el resto quedará oculto.</string>
     <string name="gps_filter_smoothing_desc">Define el umbral de distancia entre puntos.
-\nLos puntos de la traza que estén a una distancia mínima de X del último punto visible, se ocultarán.
-\nTen cuidado, cuanto mayor sea la distancia, más simple será la geometría de la traza.</string>
+\nSerán ocultados los puntos de la traza que no estén al menos a esta distancia del último punto visible.
+\nTen en cuenta que umbrales altos pueden simplificar demasiado la geometría de la traza.</string>
     <string name="gps_filter_smoothing">Suavizado</string>
     <string name="shared_string_statistics">Estadísticas</string>
-    <string name="storage_migration_wrong_folder_warning">No podemos encontrar los datos de OsmAnd en la carpeta elegida. Inténtelo de nuevo.</string>
+    <string name="storage_migration_wrong_folder_warning">No se han encontrado datos de OsmAnd en la carpeta elegida. Inténtalo de nuevo.</string>
     <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="gps_filter_precision">Precisión del GPS</string>
-    <string name="save_changes_into_file">Guardar cambios en archivo</string>
+    <string name="save_changes_into_file">Guardar cambios en el archivo</string>
     <string name="shared_string_precision">Precisión</string>
     <string name="distance_between_points">Distancia entre puntos</string>
     <string name="save_as_copy">Guardar como copia</string>
-    <string name="gps_filter_actions_description">OsmAnd aplica cambios a la traza sin guardarla en el archivo. Puede guardar los cambios manualmente.</string>
+    <string name="gps_filter_actions_description">OsmAnd aplicará los cambios a la traza, sin actualizar el archivo. Puedes guardar los cambios manualmente.</string>
     <string name="shared_string_gps_filter">Filtro del GPS</string>
 </resources>
