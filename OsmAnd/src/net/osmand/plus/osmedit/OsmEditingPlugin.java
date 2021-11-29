@@ -24,7 +24,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
-import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.MapObject;
 import net.osmand.data.TransportStop;
@@ -45,7 +44,7 @@ import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.osmedit.dialogs.SendGpxBottomSheetFragment;
-import net.osmand.plus.osmedit.dialogs.SendGpxBottomSheetFragment.UpdateFragmentOnGpxUploadListener;
+import net.osmand.plus.osmedit.dialogs.SendGpxBottomSheetFragment.GpxUploadListener;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -53,14 +52,11 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenTyp
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
 
-import org.apache.commons.logging.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class OsmEditingPlugin extends OsmandPlugin implements UpdateFragmentOnGpxUploadListener {
-	private static final Log LOG = PlatformUtil.getLog(OsmEditingPlugin.class);
+public class OsmEditingPlugin extends OsmandPlugin implements GpxUploadListener {
 	public static final int OSM_EDIT_TAB = R.string.osm_edits;
 	private static final String ID = "osm.editing";
 

@@ -1,5 +1,9 @@
 package net.osmand.plus.base;
 
+import static net.osmand.view.ThreeStateCheckbox.State.CHECKED;
+import static net.osmand.view.ThreeStateCheckbox.State.MISC;
+import static net.osmand.view.ThreeStateCheckbox.State.UNCHECKED;
+
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
@@ -22,15 +26,11 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.view.ThreeStateCheckbox.State.CHECKED;
-import static net.osmand.view.ThreeStateCheckbox.State.MISC;
-import static net.osmand.view.ThreeStateCheckbox.State.UNCHECKED;
-
 public class MultipleSelectionBottomSheet extends SelectionBottomSheet {
 
 	public static final String TAG = MultipleSelectionBottomSheet.class.getSimpleName();
 
-	private final List<SelectableItem> selectedItems = new ArrayList<>();
+	protected final List<SelectableItem> selectedItems = new ArrayList<>();
 	private SelectionUpdateListener selectionUpdateListener;
 
 	@Override

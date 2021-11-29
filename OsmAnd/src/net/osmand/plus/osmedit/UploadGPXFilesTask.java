@@ -24,7 +24,7 @@ public class UploadGPXFilesTask extends AsyncTask<GpxInfo, String, String> {
 	private final String visibility;
 	private final String commonDescription;
 	private final String tags;
-	public final UploadGpxListener uploadGpxListener;
+	private final UploadGpxListener uploadGpxListener;
 
 	public UploadGPXFilesTask(@NonNull Activity activity,
 	                          @NonNull String commonDescription,
@@ -91,10 +91,10 @@ public class UploadGPXFilesTask extends AsyncTask<GpxInfo, String, String> {
 			activity.setProgressBarIndeterminateVisibility(false);
 		}
 		app.showToastMessage(result);
-		uploadGpxListener.OnUploadToOsm(result);
+		uploadGpxListener.onGpxUploaded(result);
 	}
 
 	public interface UploadGpxListener {
-		void OnUploadToOsm(String result);
+		void onGpxUploaded(String result);
 	}
 }

@@ -89,7 +89,7 @@ import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
-import net.osmand.plus.osmedit.dialogs.SendGpxBottomSheetFragment.UpdateFragmentOnGpxUploadListener;
+import net.osmand.plus.osmedit.dialogs.SendGpxBottomSheetFragment.GpxUploadListener;
 import net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
@@ -112,7 +112,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment implements
-		FavoritesFragmentStateHolder, OsmAuthorizationListener, OnTrackFileMoveListener, RenameCallback, UpdateFragmentOnGpxUploadListener {
+		FavoritesFragmentStateHolder, OsmAuthorizationListener, OnTrackFileMoveListener, RenameCallback, GpxUploadListener {
 
 	public static final int SEARCH_ID = -1;
 	// public static final int ACTION_ID = 0;
@@ -747,7 +747,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 					List<SelectableItem> selectedTracks = new ArrayList<>();
 					for (GpxInfo gpxInfo: selectedItems) {
 						SelectableItem s = createSelectableItem(gpxInfo);
-						s.setObject(gpxInfo);
 						s.setIconId(R.drawable.ic_notification_track);
 						s.setTitle(gpxInfo.name);
 						allTracks.add(s);
@@ -770,6 +769,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 						public void onCloseDialog() {
 						}
 					});
+
 					dialog.setOnApplySelectionListener(selItems -> {
 						GpxInfo[] gpxInfo = new GpxInfo[selItems.size()];
 						for (int i = 0; i < selItems.size(); i++) {
@@ -780,6 +780,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 							osmEditingPlugin.sendGPXFiles(getActivity(), AvailableGPXFragment.this, gpxInfo);
 						}
 					});
+
 				}
 				return true;
 			}
@@ -1842,4 +1843,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		}
 		return analysis;
 	}
+
+//	public interface OnSendSelectedListener {
+//		void onSelectionSend(List<SelectableItem> selectedItems);
+//	}
 }
