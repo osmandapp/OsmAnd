@@ -4482,5 +4482,5 @@
     <string name="save_as_copy">Зберегти як копію</string>
     <string name="gps_filter_actions_description">OsmAnd застосовує зміни до треку без збереження його у файлі. Ви можете зберегти зміни вручну.</string>
     <string name="shared_string_gps_filter">GPS-фільтр</string>
-    <string name="storage_migration_wrong_folder_warning">У вибраному каталозі не знайдено даних OsmAnd. Будь ласка спробуйте ще раз.</string>
+    <string name="storage_migration_wrong_folder_warning">У вибраному каталозі не знайдено даних OsmAnd. Спробуйте ще раз.</string>
 </resources>

@@ -4520,15 +4520,15 @@
     <string name="add_to_group">إضافة إلى المجموعة</string>
     <string name="app_modes_options">اختيار أوضاع التطبيق</string>
     <string name="shared_string_memory">الذاكرة</string>
-    <string name="memory_allocated_for_routing_ds">تعمل قيمة الذاكرة الأعلى على تسريع حساب المسارات الطويلة (أكثر من 500 كم) ، ولكنها قد تؤثر على أداء التطبيقات الأخرى.
-\nلا يؤثر على سرعة حساب الطرق القصيرة.</string>
+    <string name="memory_allocated_for_routing_ds">سيؤدي تخصيص الذاكرة الأعلى إلى تسريع حساب المسارات الطويلة (أكثر من 500 كيلومتر) ، ولكنه قد يؤثر على أداء التطبيقات الأخرى.
+\nلا يوجد تأثير على سرعة حساب الطرق القصيرة.</string>
     <string name="memory_allocated_for_routing">الذاكرة المخصصة للتوجيه</string>
     <string name="reading_files">قراءة الملفات …</string>
     <string name="shared_string_hide_all">إخفاء الكل</string>
-    <string name="migration_files_present">%1$d ملف %2$s متواجد في المكان \'%3$s\' المحدد.</string>
+    <string name="migration_files_present">يوجد %1$d ملف (%2$s) في الموقع المحدد \'%3$s\'.</string>
     <string name="no_items_selected_warning">الرجاء تحديد عنصر واحد على الأقل</string>
     <string name="display_groups_visibility_dialog_description">يمكنك التحكم في رؤية المجموعة على الخريطة. إذا كان المسار مخفيًا ، فسيتم إخفاء جميع المجموعات أيضًا.</string>
-    <string name="exit_without_saving_warning">هل أنت متأكد من الخروج دون حفظ؟ سوف تفقد كل التغييرات.</string>
+    <string name="exit_without_saving_warning">هل تريد الخروج بدون حفظ التغييرات؟</string>
     <string name="shared_string_hide_slope">إخفاء المنحدر</string>
     <string name="shared_string_show_slope">إظهار المنحدر</string>
     <string name="elevation_profile">ملف تعريف الارتفاع</string>
@@ -4539,16 +4539,16 @@
     <string name="distance_between_points">المسافة بين النقاط</string>
     <string name="ltr_or_rtl_combine">%1$s%2$s</string>
     <string name="save_changes_into_file">احفظ التغييرات في ملف</string>
-    <string name="storage_migration_wrong_folder_warning">لا يمكننا العثور على بيانات OsmAnd في المجلد المحدد. حاول مرة اخرى.</string>
+    <string name="storage_migration_wrong_folder_warning">لم يتم العثور على بيانات OsmAnd في المجلد المحدد. حاول مرة اخرى.</string>
     <string name="shared_string_precision">الدقة</string>
-    <string name="gps_filter_hdop_desc">قم بتعيين الحد الأقصى المسموح به لقيمة HDOP.
-\nسيتم إخفاء النقاط التي تزيد عن المعيار المحدد.</string>
+    <string name="gps_filter_hdop_desc">قم بتعيين الحد الأقصى للقيمة المقبولة ل HDOP.
+\nسيتم إخفاء النقاط ذات القيمة الأعلى.</string>
     <string name="save_as_copy">حفظ كنسخة</string>
-    <string name="gps_filter_actions_description">OsmAnd يطبق التغييرات على المسار دون حفظها في ملف. يمكنك حفظ التغييرات يدويا.</string>
-    <string name="gps_filter_speed_altitude_desc">ستكون نقاط المسار المطابقة للفاصل الزمني المحدد مرئية على الرسم البياني والخريطة ، وسيتم إخفاء الباقي.</string>
-    <string name="gps_filter_smoothing_desc">اضبط المسافة الفاصلة بين النقاط.
-\nسيتم إخفاء نقاط التعقب التي تكون على الأقل بمسافة X من آخر نقطة مرئية.
-\nكن حذرًا كلما زادت المسافة، كانت هندسة المسار أبسط.</string>
+    <string name="gps_filter_actions_description">التطبيق سيطبق التغييرات على المسار دون تحديث الملف. يمكنك حفظ التغييرات يدويا.</string>
+    <string name="gps_filter_speed_altitude_desc">ستكون نقاط المسار المطابقة للفاصل الزمني المحدد ظاهرة على الرسم البياني والخريطة ، الباقي سيكون مخفيا.</string>
+    <string name="gps_filter_smoothing_desc">اضبط عتبة المسافة الفاصلة بين النقاط.
+\nسيتم إخفاء نقاط التعقب التي ليست بعيدة بقدر هذه المسافة على الأقل عن آخر نقطة مرئية.
+\nاعلم أن العتبات العالية قد تبالغ في تبسيط هندسة المسار.</string>
     <string name="shared_string_gps_filter">مرشح GPS</string>
     <string name="gps_filter_smoothing">التنعيم</string>
     <string name="gps_filter_precision">دقة تحديد المواقع</string>

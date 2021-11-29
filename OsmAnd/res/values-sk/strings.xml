@@ -4440,21 +4440,21 @@
     <string name="rendering_attr_natureReserves_description">Zobraziť prírodné rezervácie, chránené oblasti a národné parky.</string>
     <string name="not_enough_contributions_descr">Vyžaduje sa aspoň %1$s zmien za posledné 2 mesiace %2$s, aby ste získali neobmedzené hodinové aktualizácie máp.</string>
     <string name="show_parameter_seekbar">Zobraziť hľadanie parametrov</string>
-    <string name="migration_files_present">%1$d súborov (%2$s) sa nachádza v zvolenom umiestnení \'%3$s\'.</string>
+    <string name="migration_files_present">V zvolenom umiestnení \'%3$s\' sa nachádza %1$d súborov (%2$s).</string>
     <string name="fold_unfold">zbaliť/rozbaliť</string>
     <string name="app_profile_type">Typ profilu aplikácie</string>
     <string name="map_marker_options">Možnosti mapových značiek</string>
     <string name="add_to_group">Pridať do skupiny</string>
     <string name="app_modes_options">Vybrať režimy aplikácie</string>
     <string name="shared_string_memory">Pamäť</string>
-    <string name="memory_allocated_for_routing_ds">Vyššia hodnota pamäte zrýchli výpočet dlhších trás (viac ako 500 km), ale môže spomaliť iné aplikácie.
+    <string name="memory_allocated_for_routing_ds">Vyššia hodnota vyhradenia pamäte zrýchli výpočet dlhších trás (nad 500 km), ale môže spomaliť iné aplikácie.
 \nNeovplyvní výpočet kratších trás.</string>
     <string name="reading_files">Načítajú sa súbory…</string>
     <string name="no_items_selected_warning">Prosím zvoľte aspoň jednu položku</string>
     <string name="shared_string_hide_all">Skryť všetko</string>
     <string name="memory_allocated_for_routing">Pamäť pridelená výpočtu trasy</string>
     <string name="display_groups_visibility_dialog_description">Môžete ovládať viditeľnosť skupín na mape. Ak je skupina skrytá, budú skryté aj všetky stopy.</string>
-    <string name="exit_without_saving_warning">Naozaj chcete skončiť bez uloženia\? Stratíte všetky zmeny.</string>
+    <string name="exit_without_saving_warning">Skončiť bez uloženia zmien\?</string>
     <string name="shared_string_show_slope">Zobraziť svah</string>
     <string name="shared_string_hide_slope">Skryť svah</string>
     <string name="shared_string_grade">Stupeň</string>
@@ -4463,19 +4463,19 @@
     <string name="elevation_profile">Výškový profil</string>
     <string name="shared_string_precision">Presnosť</string>
     <string name="shared_string_statistics">Štatistiky</string>
-    <string name="gps_filter_hdop_desc">Zadajte maximálnu povolenú hodnotu pre HDOP.
-\nBody väčšie ako zadaná hodnota budú skryté.</string>
+    <string name="gps_filter_hdop_desc">Zadajte maximálnu prípustnú hodnotu pre HDOP.
+\nBody s väčšou hodnotou budú skryté.</string>
     <string name="gps_filter_smoothing">Vyhladenie</string>
     <string name="save_changes_into_file">Uložiť zmeny do súboru</string>
     <string name="save_as_copy">Uložiť ako kópiu</string>
-    <string name="gps_filter_actions_description">OsmAnd aplikuje zmeny stopy bez uloženia do súboru. Zmeny môžete uložiť manuálne.</string>
+    <string name="gps_filter_actions_description">OsmAnd aplikuje zmeny stopy bez aktualizácie súboru. Zmeny môžete uložiť manuálne.</string>
     <string name="shared_string_gps_filter">Filter GPS</string>
     <string name="ltr_or_rtl_combine">%1$s %2$s</string>
-    <string name="gps_filter_speed_altitude_desc">Body stopy vo zadanom intervale budú viditeľné na mape a grafe, ostatné budú skryté.</string>
+    <string name="gps_filter_speed_altitude_desc">Len body stopy spĺňajúce zadaný interval budú viditeľné na mape a grafe, ostatné budú skryté.</string>
     <string name="gps_filter_smoothing_desc">Zadajte hraničnú vzdialenosť medzi bodmi.
-\nBody stopy, ktoré sú aspoň v danej vzdialenosti od posledného viditeľného bodu budú skryté.
-\nBuďte opatrní lebo čím väčšia vzdialenosť tým jednoduchšia bude geometria stopy.</string>
+\nBody stopy, ktoré nie sú aspoň v danej vzdialenosti od posledného viditeľného bodu budú skryté.
+\nBuďte si vedomý, že veľká vzdialenosť môže príliš zjednodušiť geometriu stopy.</string>
     <string name="distance_between_points">Vzdialenosť medzi bodmi</string>
     <string name="gps_filter_precision">Presnosť GPS</string>
-    <string name="storage_migration_wrong_folder_warning">V zvolenom priečinku sa nepodarilo nájsť údaje OsmAnd. Prosím skúste znovu.</string>
+    <string name="storage_migration_wrong_folder_warning">V zvolenom priečinku sa nenašli údaje OsmAnd. Prosím skúste znovu.</string>
 </resources>

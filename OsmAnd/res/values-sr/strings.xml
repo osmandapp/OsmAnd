@@ -4442,7 +4442,7 @@
     <string name="not_enough_contributions_descr">Минимум од %1$s измена кроз период од последња два месеца %2$s је потребан да добијете приступ неограниченим ажурирањима карте сваких сат времена.</string>
     <string name="shared_string_gps_filter">GPS филтер</string>
     <string name="storage_migration_wrong_folder_warning">Нема OsmAnd података у одабраној фасцикли. Покушајте поново.</string>
-    <string name="exit_without_saving_warning">Да ли сте сигурни да желите да изађете без снимања\? Изгубићете све измене.</string>
+    <string name="exit_without_saving_warning">Изаћи без чувања измена\?</string>
     <string name="elevation_profile">Висински профил</string>
     <string name="memory_allocated_for_routing_ds">Веће вредности меморије убрзавају израчунавање дужих рута (преко 500km), али утичу на перформансе других апликација.
 \nНема утицај на брзину израчунавања краћих рута.</string>
