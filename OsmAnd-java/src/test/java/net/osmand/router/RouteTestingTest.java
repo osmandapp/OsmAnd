@@ -35,7 +35,7 @@ public class RouteTestingTest {
 	private final TestEntry te;
 
 	private static final int TIMEOUT = 1000;
-	private static final boolean NATIVE_LIB = true;
+	private static final boolean NATIVE_LIB = false;
 
 	public RouteTestingTest(String name, TestEntry te) {
 		this.te = te;
