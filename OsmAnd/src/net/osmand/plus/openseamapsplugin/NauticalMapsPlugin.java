@@ -1,12 +1,14 @@
 package net.osmand.plus.openseamapsplugin;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_NAUTICAL;
+
 import android.graphics.drawable.Drawable;
 
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.settings.backend.ApplicationMode;
 
 import java.util.Collections;
 import java.util.List;
@@ -14,7 +16,6 @@ import java.util.List;
 
 public class NauticalMapsPlugin extends OsmandPlugin {
 
-	public static final String ID = "nauticalPlugin.plugin";
 	public static final String COMPONENT = "net.osmand.nauticalPlugin";
 
 	public NauticalMapsPlugin(OsmandApplication app) {
@@ -73,6 +74,6 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 
 	@Override
 	public String getId() {
-		return ID;
+		return PLUGIN_NAUTICAL;
 	}
 }

@@ -1,5 +1,7 @@
 package net.osmand.access;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_ACCESSIBILITY;
+
 import android.app.Activity;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -22,10 +24,8 @@ public class AccessibilityPlugin extends OsmandPlugin {
 	public static final int INCLINATION_LEFT = 2;
 	public static final int INCLINATION_RIGHT = 3;
 
-	private static final String ID = "osmand.accessibility";
-
 	private SoundPool sounds;
-	private Map<Integer, Integer> soundIcons = new HashMap<Integer, Integer>();
+	private final Map<Integer, Integer> soundIcons = new HashMap<Integer, Integer>();
 
 	public AccessibilityPlugin(OsmandApplication app) {
 		super(app);
@@ -52,7 +52,7 @@ public class AccessibilityPlugin extends OsmandPlugin {
 
 	@Override
 	public String getId() {
-		return ID;
+		return PLUGIN_ACCESSIBILITY;
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class AccessibilityPlugin extends OsmandPlugin {
 
 	@Override
 	public SettingsScreenType getSettingsScreenType() {
-		return SettingsScreenType.ACCESSIBILITY;
+		return SettingsScreenType.ACCESSIBILITY_SETTINGS;
 	}
 
 	@Override

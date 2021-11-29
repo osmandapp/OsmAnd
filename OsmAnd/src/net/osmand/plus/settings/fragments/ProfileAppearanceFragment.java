@@ -994,7 +994,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			fragment.setArguments(args);
 			fragmentManager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, tag)
-					.addToBackStack(DRAWER_SETTINGS_ID + ".new")
+					.addToBackStack(DRAWER_SETTINGS_ID)
 					.commitAllowingStateLoss();
 			return true;
 		}

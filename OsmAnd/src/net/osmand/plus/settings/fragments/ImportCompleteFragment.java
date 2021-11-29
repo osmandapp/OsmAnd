@@ -180,13 +180,13 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 			return;
 		}
 		dismissFragment();
-		fm.popBackStack(DRAWER_SETTINGS_ID + ".new", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+		fm.popBackStack(DRAWER_SETTINGS_ID, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		switch (type) {
 			case GLOBAL:
 			case PROFILE:
 			case CUSTOM_ROUTING:
 			case ONLINE_ROUTING_ENGINES:
-				BaseSettingsFragment.showInstance(requireActivity(), SettingsScreenType.MAIN);
+				BaseSettingsFragment.showInstance(requireActivity(), SettingsScreenType.MAIN_SETTINGS);
 				break;
 			case QUICK_ACTIONS:
 				QuickActionListFragment.showInstance(activity);

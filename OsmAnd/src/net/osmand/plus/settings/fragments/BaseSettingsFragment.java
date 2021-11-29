@@ -1,6 +1,7 @@
 package net.osmand.plus.settings.fragments;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.SETTINGS_ID;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -70,6 +71,7 @@ import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment.AppModeChangedListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet;
@@ -81,6 +83,7 @@ import net.osmand.plus.settings.datastorage.DataStorageFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -101,6 +104,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
+	protected OsmAndAppCustomization appCustomization;
 	protected UiUtilities iconsCache;
 
 	protected int themeRes;
@@ -114,10 +118,10 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	public enum SettingsScreenType {
 
-		MAIN(MainSettingsFragment.class.getName(), false, null, R.xml.settings_main_screen, R.layout.global_preference_toolbar),
-		GLOBAL(GlobalSettingsFragment.class.getName(), false, null, R.xml.global_settings, R.layout.global_preference_toolbar),
+		MAIN_SETTINGS(MainSettingsFragment.class.getName(), false, null, R.xml.settings_main_screen, R.layout.global_preference_toolbar),
+		GLOBAL_SETTINGS(GlobalSettingsFragment.class.getName(), false, null, R.xml.global_settings, R.layout.global_preference_toolbar),
 		CONFIGURE_PROFILE(ConfigureProfileFragment.class.getName(), true, null, R.xml.configure_profile, R.layout.profile_preference_toolbar_with_switch),
-		PROXY(ProxySettingsFragment.class.getName(), false, null, R.xml.proxy_preferences, R.layout.global_preferences_toolbar_with_switch),
+		PROXY_SETTINGS(ProxySettingsFragment.class.getName(), false, null, R.xml.proxy_preferences, R.layout.global_preferences_toolbar_with_switch),
 		GENERAL_PROFILE(GeneralProfileSettingsFragment.class.getName(), true, ApplyQueryType.BOTTOM_SHEET, R.xml.general_profile_settings, R.layout.profile_preference_toolbar),
 		NAVIGATION(NavigationFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.navigation_settings_new, R.layout.profile_preference_toolbar),
 		COORDINATES_FORMAT(CoordinatesFormatFragment.class.getName(), true, ApplyQueryType.BOTTOM_SHEET, R.xml.coordinates_format, R.layout.profile_preference_toolbar),
@@ -128,16 +132,16 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		MAP_DURING_NAVIGATION(MapDuringNavigationFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.map_during_navigation, R.layout.profile_preference_toolbar),
 		TURN_SCREEN_ON(TurnScreenOnFragment.class.getName(), true, ApplyQueryType.BOTTOM_SHEET, R.xml.turn_screen_on, R.layout.profile_preference_toolbar),
 		DATA_STORAGE(DataStorageFragment.class.getName(), false, null, R.xml.data_storage, R.layout.global_preference_toolbar),
-		DIALOGS_AND_NOTIFICATIONS(DialogsAndNotificationsSettingsFragment.class.getName(), false, null, R.xml.dialogs_and_notifications_preferences, R.layout.global_preference_toolbar),
-		HISTORY(HistorySettingsFragment.class.getName(), false, null, R.xml.history_preferences, R.layout.global_preference_toolbar),
+		DIALOGS_AND_NOTIFICATIONS_SETTINGS(DialogsAndNotificationsSettingsFragment.class.getName(), false, null, R.xml.dialogs_and_notifications_preferences, R.layout.global_preference_toolbar),
+		HISTORY_SETTINGS(HistorySettingsFragment.class.getName(), false, null, R.xml.history_preferences, R.layout.global_preference_toolbar),
 		PROFILE_APPEARANCE(ProfileAppearanceFragment.TAG, true, null, R.xml.profile_appearance, R.layout.profile_preference_toolbar),
 		OPEN_STREET_MAP_EDITING(OsmEditingFragment.class.getName(), false, null, R.xml.osm_editing, R.layout.global_preference_toolbar),
 		MULTIMEDIA_NOTES(MultimediaNotesFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.multimedia_notes, R.layout.profile_preference_toolbar),
-		MONITORING(MonitoringSettingsFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.monitoring_settings, R.layout.profile_preference_toolbar),
+		MONITORING_SETTINGS(MonitoringSettingsFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.monitoring_settings, R.layout.profile_preference_toolbar),
 		LIVE_MONITORING(LiveMonitoringFragment.class.getName(), false, ApplyQueryType.SNACK_BAR, R.xml.live_monitoring, R.layout.global_preferences_toolbar_with_switch),
-		ACCESSIBILITY(AccessibilitySettingsFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.accessibility_settings, R.layout.profile_preference_toolbar),
+		ACCESSIBILITY_SETTINGS(AccessibilitySettingsFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.accessibility_settings, R.layout.profile_preference_toolbar),
 		OPEN_PLACE_REVIEWS(OprSettingsFragment.class.getName(), false, null, R.xml.open_place_reviews, R.layout.global_preference_toolbar),
-		DEVELOPMENT(DevelopmentSettingsFragment.class.getName(), false, null, R.xml.development_settings, R.layout.global_preference_toolbar),
+		DEVELOPMENT_SETTINGS(DevelopmentSettingsFragment.class.getName(), false, null, R.xml.development_settings, R.layout.global_preference_toolbar),
 		BACKUP_AUTHORIZATION(BackupAuthorizationFragment.class.getName(), false, null, R.xml.backup_authorization, R.layout.profile_preference_toolbar);
 
 		public final String fragmentName;
@@ -159,6 +163,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public void onCreate(Bundle savedInstanceState) {
 		app = requireMyApplication();
 		settings = app.getSettings();
+		appCustomization = app.getAppCustomization();
 		Bundle args = getArguments();
 		if (savedInstanceState != null) {
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
@@ -411,7 +416,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			fm.popBackStack();
 			fm.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, fragment.getClass().getName())
-					.addToBackStack(DRAWER_SETTINGS_ID + ".new")
+					.addToBackStack(DRAWER_SETTINGS_ID)
 					.commit();
 		}
 	}
@@ -714,6 +719,10 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			preference.setOnPreferenceChangeListener(this);
 			preference.setOnPreferenceClickListener(this);
 
+			String prefId = preference.getKey();
+			if (!Algorithms.isEmpty(prefId)) {
+				preference.setVisible(appCustomization.isFeatureEnabled(SETTINGS_ID + prefId));
+			}
 			if (preference instanceof ListPreference) {
 				ListPreference listPreference = (ListPreference) preference;
 				assert listPreference.getEntryValues().length == listPreference.getEntries().length;
@@ -892,16 +901,21 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		return listPreference;
 	}
 
-	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType) {
+	public static boolean showInstance(@NonNull FragmentActivity activity, @NonNull SettingsScreenType screenType) {
 		return showInstance(activity, screenType, null);
 	}
 
-	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType, @Nullable ApplicationMode appMode) {
+	public static boolean showInstance(@NonNull FragmentActivity activity,
+	                                   @NonNull SettingsScreenType screenType,
+	                                   @Nullable ApplicationMode appMode) {
 		return showInstance(activity, screenType, appMode, new Bundle(), null);
 	}
 
-	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType,
-	                                   @Nullable ApplicationMode appMode, @NonNull Bundle args, @Nullable Fragment target) {
+	public static boolean showInstance(@NonNull FragmentActivity activity,
+	                                   @NonNull SettingsScreenType screenType,
+	                                   @Nullable ApplicationMode appMode,
+	                                   @NonNull Bundle args,
+	                                   @Nullable Fragment target) {
 		try {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
 			String tag = screenType.fragmentName;
@@ -914,7 +928,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 				fragment.setTargetFragment(target, 0);
 				fragmentManager.beginTransaction()
 						.replace(R.id.fragmentContainer, fragment, tag)
-						.addToBackStack(DRAWER_SETTINGS_ID + ".new")
+						.addToBackStack(DRAWER_SETTINGS_ID)
 						.commitAllowingStateLoss();
 				return true;
 			}
@@ -956,8 +970,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 	}
 
-	protected void applyPreferenceWithSnackBar(final String prefId,
-	                                           final Serializable newValue) {
+	protected void applyPreferenceWithSnackBar(final String prefId, final Serializable newValue) {
 		onApplyPreferenceChange(prefId, false, newValue);
 		updateSetting(prefId);
 		View containerView = getView();

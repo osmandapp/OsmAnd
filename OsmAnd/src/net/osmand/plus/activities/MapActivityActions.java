@@ -692,7 +692,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
-						BaseSettingsFragment.showInstance(mapActivity, BaseSettingsFragment.SettingsScreenType.MAIN);
+						BaseSettingsFragment.showInstance(mapActivity, BaseSettingsFragment.SettingsScreenType.MAIN_SETTINGS);
 						return true;
 					}
 				})
@@ -929,7 +929,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 				}).createItem());
 
 		optionsMenuHelper.addItem(new ItemBuilder().setTitle(getString(R.string.shared_string_settings))
-				.setId(DRAWER_SETTINGS_ID + ".new")
+				.setId(DRAWER_SETTINGS_ID)
 				.setIcon(R.drawable.ic_action_settings)
 				.setListener(new ItemClickListener() {
 					@Override

@@ -1,5 +1,6 @@
 package net.osmand.plus.monitoring;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_MONITORING;
 import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 import android.app.Activity;
@@ -60,8 +61,7 @@ import java.util.Map;
 public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	private static final Log LOG = PlatformUtil.getLog(OsmandMonitoringPlugin.class);
-	public static final String ID = "osmand.monitoring";
-	public final static String OSMAND_SAVE_SERVICE_ACTION = "OSMAND_SAVE_SERVICE_ACTION";
+	public static final String OSMAND_SAVE_SERVICE_ACTION = "OSMAND_SAVE_SERVICE_ACTION";
 	public static final int REQUEST_LOCATION_PERMISSION_FOR_GPX_RECORDING = 208;
 
 	private final OsmandSettings settings;
@@ -123,7 +123,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	@Override
 	public String getId() {
-		return ID;
+		return PLUGIN_OSMAND_MONITORING;
 	}
 
 	@Override
@@ -176,13 +176,13 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		}
 	}
 
-	public static final int[] SECONDS = new int[]{0, 1, 2, 3, 5, 10, 15, 20, 30, 60, 90};
-	public static final int[] MINUTES = new int[]{2, 3, 5};
-	public static final int[] MAX_INTERVAL_TO_SEND_MINUTES = new int[]{1, 2, 5, 10, 15, 20, 30, 60, 90, 2 * 60, 3 * 60, 4 * 60, 6 * 60, 12 * 60, 24 * 60};
+	public static final int[] SECONDS = new int[] {0, 1, 2, 3, 5, 10, 15, 20, 30, 60, 90};
+	public static final int[] MINUTES = new int[] {2, 3, 5};
+	public static final int[] MAX_INTERVAL_TO_SEND_MINUTES = new int[] {1, 2, 5, 10, 15, 20, 30, 60, 90, 2 * 60, 3 * 60, 4 * 60, 6 * 60, 12 * 60, 24 * 60};
 
 	@Override
 	public SettingsScreenType getSettingsScreenType() {
-		return SettingsScreenType.MONITORING;
+		return SettingsScreenType.MONITORING_SETTINGS;
 	}
 
 	@Override

@@ -146,7 +146,7 @@ public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogF
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				hide();
-				BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.MONITORING,
+				BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.MONITORING_SETTINGS,
 						null, new Bundle(), TripRecordingStartingBottomSheet.this);
 			}
 		});

@@ -1875,7 +1875,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (AndroidUtils.isFragmentCanBeAdded(manager, tag)) {
 				manager.beginTransaction()
 						.replace(R.id.fragmentContainer, fragment, tag)
-						.addToBackStack(DRAWER_SETTINGS_ID + ".new")
+						.addToBackStack(DRAWER_SETTINGS_ID)
 						.commitAllowingStateLoss();
 				return true;
 			}
@@ -1888,7 +1888,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void dismissSettingsScreens() {
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		if (!fragmentManager.isStateSaved()) {
-			fragmentManager.popBackStack(DRAWER_SETTINGS_ID + ".new", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+			fragmentManager.popBackStack(DRAWER_SETTINGS_ID, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
 	}
 
@@ -2131,7 +2131,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public void showSettings() {
 		dismissSettingsScreens();
-		BaseSettingsFragment.showInstance(this, SettingsScreenType.MAIN);
+		BaseSettingsFragment.showInstance(this, SettingsScreenType.MAIN_SETTINGS);
 	}
 
 	private void hideVisibleMenu() {
