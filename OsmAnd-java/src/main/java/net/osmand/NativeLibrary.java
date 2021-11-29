@@ -483,6 +483,7 @@ public class NativeLibrary {
 
 
 	public static class RenderedObject extends MapObject {
+		public static final String ROUTE_PREFIX = "route_";
 		private Map<String, String> tags = new LinkedHashMap<>();
 		private QuadRect bbox = new QuadRect();
 		private TIntArrayList x = new TIntArrayList();
@@ -614,6 +615,54 @@ public class NativeLibrary {
 				}
 			}
 			return null;
+		}
+
+		public boolean isRoute(final String type) {
+			boolean isRoute = false;
+			for (String tag : tags.keySet()) {
+				if (tag.startsWith(ROUTE_PREFIX + type)) {
+					isRoute = true;
+					break;
+				}
+			}
+			return isRoute;
+		}
+
+		public List<String> getRouteStringKeys(final String type) {
+			List<String> allTagsList = new ArrayList<>(tags.keySet());
+			List<String> routeTagsList = new ArrayList<>();
+			int routeQuantity;
+			routeQuantity = getRouteQuantity(type, allTagsList);
+			if (routeQuantity != 0) {
+				for (int routeIdx = 1; routeIdx <= routeQuantity; routeIdx++) {
+					StringBuilder tagKey = new StringBuilder();
+					List<String> tagValueList = new ArrayList<>();
+					for (String tag : allTagsList) {
+						if (tag.startsWith(ROUTE_PREFIX + type + "_" + routeIdx)) {
+							tagValueList.add(tags.get(tag));
+						}
+					}
+					Collections.sort(tagValueList);
+					for (String str : tagValueList) {
+						tagKey.append(str);
+					}
+					routeTagsList.add(tagKey.toString());
+				}
+			}
+			return routeTagsList;
+		}
+
+		private int getRouteQuantity(String type, List<String> allTagsList) {
+			Collections.sort(allTagsList);
+			int routeQuantity = 0;
+			for (int i = allTagsList.size() - 1; i > 0; i--) {
+				String tag = allTagsList.get(i);
+				if (tag.startsWith(ROUTE_PREFIX + type)) {
+					routeQuantity = Algorithms.extractIntegerNumber(tag);
+					break;
+				}
+			}
+			return routeQuantity;
 		}
 
 		public String getGpxFileName() {
