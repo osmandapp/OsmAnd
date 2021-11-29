@@ -466,13 +466,6 @@ public class BinaryRoutePlanner {
 			}
 			// calculate new start segment time as we're going to assign to put to visited segments
 			float distFromStartPlusSegmentTime = currentSegment.distanceFromStart + segmentAndObstaclesTime;
-			if (ctx.precalculatedRouteDirection != null && ctx.precalculatedRouteDirection.isFollowNext()) {
-				// speed up calculation with calculated route by using different distance from start
-				final int x = road.getPoint31XTile(currentSegment.getSegmentStart());
-				final int y = road.getPoint31YTile(currentSegment.getSegmentStart());
-				// TODO double check is it correct (looks OK)
-				distFromStartPlusSegmentTime = ctx.precalculatedRouteDirection.getDeviationDistance(x, y) / ctx.getRouter().getMaxSpeed();
-			}
 			// 2. check if segment was already visited in opposite direction
 			// We check before we calculate segmentTime (to not calculate it twice with opposite and calculate turns
 			// onto each segment).
