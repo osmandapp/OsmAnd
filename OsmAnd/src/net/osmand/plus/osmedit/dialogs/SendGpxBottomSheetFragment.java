@@ -52,7 +52,6 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 
 	private TextInputEditText tagsField;
 	private TextInputEditText messageField;
-	private GpxUploadListener gpxUploadListener;
 
 	public void setGpxInfos(GpxInfo[] gpxInfos) {
 		this.gpxInfos = gpxInfos;
@@ -172,22 +171,21 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager,
 	                                @Nullable Fragment targetFragment,
-	                                GpxInfo[] info,
-	                                @Nullable GpxUploadListener updateFragmentOnGpxUploadListener) {
+	                                GpxInfo[] info) {
 		if (!fragmentManager.isStateSaved()) {
 			SendGpxBottomSheetFragment fragment = new SendGpxBottomSheetFragment();
 			fragment.setTargetFragment(targetFragment, 0);
 			fragment.setGpxInfos(info);
 			fragment.setRetainInstance(true);
-			fragment.gpxUploadListener = updateFragmentOnGpxUploadListener;
 			fragment.show(fragmentManager, TAG);
 		}
 	}
 
 	@Override
 	public void onGpxUploaded(String result) {
-		if (gpxUploadListener != null){
-			gpxUploadListener.onGpxUpload(result);
+		Fragment target = getTargetFragment();
+		if (target instanceof GpxUploadListener){
+			((GpxUploadListener) target).onGpxUpload(result);
 		}
 	}
 

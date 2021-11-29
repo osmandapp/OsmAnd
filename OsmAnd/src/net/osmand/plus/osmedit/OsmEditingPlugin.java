@@ -44,7 +44,6 @@ import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.osmedit.dialogs.SendGpxBottomSheetFragment;
-import net.osmand.plus.osmedit.dialogs.SendGpxBottomSheetFragment.GpxUploadListener;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -56,7 +55,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class OsmEditingPlugin extends OsmandPlugin implements GpxUploadListener {
+public class OsmEditingPlugin extends OsmandPlugin {
 	public static final int OSM_EDIT_TAB = R.string.osm_edits;
 	private static final String ID = "osm.editing";
 
@@ -403,20 +402,15 @@ public class OsmEditingPlugin extends OsmandPlugin implements GpxUploadListener 
 					.setColor(app, R.color.color_white)
 					.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
 						f.openSelectionMode(R.string.local_index_mi_upload_gpx, R.drawable.ic_action_upload_to_openstreetmap,
-								R.drawable.ic_action_upload_to_openstreetmap, (dialog, which) -> {
+								R.drawable.ic_action_upload_to_openstreetmap, dialog -> {
 									List<GpxInfo> selectedItems = f.getSelectedItems();
-									sendGPXFiles(activity, f,
+									OsmEditingPlugin.this.sendGPXFiles(activity, f,
 											selectedItems.toArray(new GpxInfo[0]));
 								});
 						return true;
 					})
 					.createItem());
 		}
-	}
-
-	@Override
-	public void onGpxUpload(String result) {
-
 	}
 
 	public enum UploadVisibility {
@@ -458,7 +452,7 @@ public class OsmEditingPlugin extends OsmandPlugin implements GpxUploadListener 
 			LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), fragment);
 			return false;
 		} else {
-			SendGpxBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), fragment, info, this);
+			SendGpxBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), fragment, info);
 			return true;
 		}
 	}

@@ -488,10 +488,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 					openShowOnMapMode();
 				} else if (itemId == R.string.shared_string_delete) {
 					openSelectionMode(itemId, R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_dark,
-							new DialogInterface.OnClickListener() {
-
+							new SelectionModeListener() {
 								@Override
-								public void onClick(DialogInterface dialog, int which) {
+								public void onItemSelected(List<GpxInfo> items) {
+									selectedItems = items;
 									doAction(itemId);
 								}
 							});
@@ -695,7 +695,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	public void openSelectionMode(final int actionResId, int darkIcon, int lightIcon,
-	                              final DialogInterface.OnClickListener listener) {
+	                              final SelectionModeListener listener) {
 		final int actionIconId = !isLightActionBar() ? darkIcon : lightIcon;
 		String value = app.getString(actionResId);
 		if (value.endsWith("...")) {
@@ -739,16 +739,21 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 					AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 					builder.setMessage(getString(R.string.local_index_action_do, actionButton.toLowerCase(),
 							String.valueOf(selectedItems.size())));
-					builder.setPositiveButton(actionButton, listener);
+					builder.setPositiveButton(actionButton, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							if (listener != null){
+								listener.onItemSelected(selectedItems);
+							}
+						}
+					});
 					builder.setNegativeButton(R.string.shared_string_cancel, null);
 					builder.show();
 				} else if (actionResId == R.string.local_index_mi_upload_gpx){
 					List<SelectableItem> allTracks = new ArrayList<>();
 					List<SelectableItem> selectedTracks = new ArrayList<>();
 					for (GpxInfo gpxInfo: selectedItems) {
-						SelectableItem s = createSelectableItem(gpxInfo);
-						s.setIconId(R.drawable.ic_notification_track);
-						s.setTitle(gpxInfo.name);
+						SelectableItem s = createSelectableItem(gpxInfo, R.drawable.ic_notification_track);
 						allTracks.add(s);
 						selectedTracks.add(s);
 					}
@@ -771,16 +776,14 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 					});
 
 					dialog.setOnApplySelectionListener(selItems -> {
-						GpxInfo[] gpxInfo = new GpxInfo[selItems.size()];
-						for (int i = 0; i < selItems.size(); i++) {
-							gpxInfo[i] = (GpxInfo) selItems.get(i).getObject();
+						List<GpxInfo> gpxInfoList = new ArrayList<>();
+						for (SelectableItem g: selItems) {
+							gpxInfoList.add((GpxInfo)g.getObject());
 						}
-						final OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
-						if (osmEditingPlugin != null) {
-							osmEditingPlugin.sendGPXFiles(getActivity(), AvailableGPXFragment.this, gpxInfo);
+						if (listener != null){
+							listener.onItemSelected(gpxInfoList);
 						}
 					});
-
 				}
 				return true;
 			}
@@ -795,9 +798,11 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		allGpxAdapter.notifyDataSetChanged();
 	}
 
-	private SelectableItem createSelectableItem(GpxInfo item) {
+	private SelectableItem createSelectableItem(GpxInfo item, int iconId) {
 		SelectableItem selectableItem = new SelectableItem();
 		selectableItem.setObject(item);
+		selectableItem.setIconId(iconId);
+		selectableItem.setTitle(item.name);
 		return selectableItem;
 	}
 
@@ -872,8 +877,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 	@Override
 	public void onGpxUpload(String output) {
-		allGpxAdapter.selected.clear();
-		allGpxAdapter.refreshSelected();
+		if (actionMode != null) {
+			actionMode.finish();
+		}
 	}
 
 	public class LoadGpxTask extends AsyncTask<Activity, GpxInfo, List<GpxInfo>> {
@@ -1844,7 +1850,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		return analysis;
 	}
 
-//	public interface OnSendSelectedListener {
-//		void onSelectionSend(List<SelectableItem> selectedItems);
-//	}
+	public interface SelectionModeListener {
+		void onItemSelected(List<GpxInfo> items);
+	}
 }
