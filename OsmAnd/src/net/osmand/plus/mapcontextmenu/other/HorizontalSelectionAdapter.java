@@ -28,7 +28,7 @@ import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalSelectionAdapter.ItemViewHolder> {
 
-	public static int INVALID = -1;
+	public static int INVALID_ID = -1;
 
 	private List<HorizontalSelectionItem> items;
 	private final OsmandApplication app;
@@ -82,7 +82,7 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 			} else {
 				int defaultTitleColorId = nightMode ? R.color.active_color_primary_dark : R.color.preference_category_title;
 				itemColor = ContextCompat.getColor(app,
-						item.getTitleColorId() != INVALID ? item.getTitleColorId() : defaultTitleColorId);
+						item.getTitleColorId() != INVALID_ID ? item.getTitleColorId() : defaultTitleColorId);
 			}
 			GradientDrawable buttonBackground = (GradientDrawable) AppCompatResources.getDrawable(app,
 					R.drawable.bg_select_icon_group_button).mutate();
@@ -94,20 +94,20 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 		}
 		textView.setTextColor(itemColor);
 
-		int iconColor = item.iconColorId != INVALID ? app.getColor(item.iconColorId) : itemColor;
-		if (item.iconId != INVALID) {
+		int iconColor = item.iconColorId != INVALID_ID ? app.getColor(item.iconColorId) : itemColor;
+		if (item.iconId != INVALID_ID) {
 			imageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(item.iconId, iconColor));
 		}
-		if (item.iconSizePx != INVALID && imageView.getLayoutParams() != null) {
+		if (item.iconSizePx != INVALID_ID && imageView.getLayoutParams() != null) {
 			LayoutParams imgLayoutParams = imageView.getLayoutParams();
 			imgLayoutParams.height = item.iconSizePx;
 			imgLayoutParams.width = item.iconSizePx;
 			imageView.requestLayout();
 		}
 		AndroidUiHelper.updateVisibility(textView, !item.isShowOnlyIcon());
-		AndroidUiHelper.updateVisibility(imageView, item.iconId != INVALID);
+		AndroidUiHelper.updateVisibility(imageView, item.iconId != INVALID_ID);
 		AndroidUiHelper.updateVisibility(holder.space,
-				item.iconId != INVALID && !item.isShowOnlyIcon());
+				item.iconId != INVALID_ID && !item.isShowOnlyIcon());
 		textView.setText(capitalizeFirstLetter(item.title));
 		textView.requestLayout();
 		holder.button.setEnabled(item.isEnabled());
@@ -123,7 +123,7 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 		View buttonContainer = holder.button.findViewById(R.id.button_container);
 		int rippleId = nightMode ? R.drawable.ripple_solid_dark_18dp : R.drawable.ripple_solid_light_18dp;
 		AndroidUtils.setBackground(app, buttonContainer, rippleId);
-		if (item.getHorizontalPaddingPx() != INVALID) {
+		if (item.getHorizontalPaddingPx() != INVALID_ID) {
 			int top = buttonContainer.getPaddingTop();
 			int bottom = buttonContainer.getPaddingBottom();
 			int hPadding = item.getHorizontalPaddingPx();
@@ -191,11 +191,11 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 		private final String title;
 		private final Object object;
 
-		private int titleColorId = INVALID;
-		private int iconId = INVALID;
-		private int iconColorId = INVALID;
-		private int iconSizePx = INVALID;
-		private int horizontalPaddingPx = INVALID;
+		private int titleColorId = INVALID_ID;
+		private int iconId = INVALID_ID;
+		private int iconColorId = INVALID_ID;
+		private int iconSizePx = INVALID_ID;
+		private int horizontalPaddingPx = INVALID_ID;
 		private boolean showOnlyIcon;
 		private boolean enabled = true;
 
@@ -269,7 +269,7 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 		}
 
 		public boolean isShowOnlyIcon() {
-			return iconId != INVALID && showOnlyIcon;
+			return iconId != INVALID_ID && showOnlyIcon;
 		}
 	}
 }
