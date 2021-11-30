@@ -1,19 +1,20 @@
 package net.osmand.plus.skimapsplugin;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_SKI_MAPS;
+
 import android.graphics.drawable.Drawable;
 
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.settings.backend.ApplicationMode;
 
 import java.util.Collections;
 import java.util.List;
 
 public class SkiMapsPlugin extends OsmandPlugin {
 
-	public static final String ID = "skimaps.plugin";
 	public static final String COMPONENT = "net.osmand.skimapsPlugin";
 
 	public SkiMapsPlugin(OsmandApplication app) {
@@ -72,6 +73,6 @@ public class SkiMapsPlugin extends OsmandPlugin {
 
 	@Override
 	public String getId() {
-		return ID;
+		return PLUGIN_SKI_MAPS;
 	}
 }

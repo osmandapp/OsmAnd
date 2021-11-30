@@ -21,6 +21,7 @@ import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_TIME;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import com.google.gson.Gson;
@@ -34,6 +35,7 @@ import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.routing.RouteService;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -120,9 +122,9 @@ public class ApplicationMode {
 			.icon(R.drawable.ic_action_horse)
 			.description(R.string.horseback_riding).reg();
 
-	public static List<ApplicationMode> values(OsmandApplication app) {
+	public static List<ApplicationMode> values(@NonNull OsmandApplication app) {
 		if (customizationListener == null) {
-			customizationListener = new OsmAndAppCustomization.OsmAndAppCustomizationListener() {
+			customizationListener = new OsmAndAppCustomizationListener() {
 				@Override
 				public void onOsmAndSettingsCustomized() {
 					cachedFilteredValues = new ArrayList<>();
@@ -532,6 +534,14 @@ public class ApplicationMode {
 		app.getSettings().APP_MODE_ORDER.setModeValue(this, order);
 	}
 
+	public int getVersion() {
+		return app.getSettings().APP_MODE_VERSION.getModeValue(this);
+	}
+
+	public void setVersion(int version) {
+		app.getSettings().APP_MODE_VERSION.setModeValue(this, version);
+	}
+
 	public static void onApplicationStart(OsmandApplication app) {
 		initCustomModes(app);
 		initModesParams(app);
@@ -632,6 +642,7 @@ public class ApplicationMode {
 			mode.setLocationIcon(builder.locationIcon);
 			mode.setNavigationIcon(builder.navigationIcon);
 			mode.setOrder(builder.order);
+			mode.setVersion(builder.version);
 		} else {
 			mode = builder.customReg();
 			initRegVisibility();
@@ -657,6 +668,7 @@ public class ApplicationMode {
 		builder.setLocationIcon(modeBean.locIcon);
 		builder.setNavigationIcon(modeBean.navIcon);
 		builder.setOrder(modeBean.order);
+		builder.setVersion(modeBean.version);
 
 		return builder;
 	}
@@ -679,6 +691,7 @@ public class ApplicationMode {
 		mb.locIcon = getLocationIcon();
 		mb.navIcon = getNavigationIcon();
 		mb.order = getOrder();
+		mb.version = getVersion();
 		return mb;
 	}
 
@@ -752,6 +765,7 @@ public class ApplicationMode {
 		private LocationIcon locationIcon;
 		private NavigationIcon navigationIcon;
 		private int order = -1;
+		private int version = -1;
 
 		public ApplicationMode getApplicationMode() {
 			return applicationMode;
@@ -777,6 +791,7 @@ public class ApplicationMode {
 			applicationMode.setLocationIcon(locationIcon);
 			applicationMode.setNavigationIcon(navigationIcon);
 			applicationMode.setOrder(order != -1 ? order : values.size());
+			applicationMode.setVersion(version);
 
 			return applicationMode;
 		}
@@ -831,6 +846,11 @@ public class ApplicationMode {
 			return this;
 		}
 
+		public ApplicationModeBuilder setVersion(int version) {
+			this.version = version;
+			return this;
+		}
+
 		public ApplicationModeBuilder setLocationIcon(LocationIcon locIcon) {
 			this.locationIcon = locIcon;
 			return this;
@@ -865,5 +885,7 @@ public class ApplicationMode {
 		public NavigationIcon navIcon = null;
 		@Expose
 		public int order = -1;
+		@Expose
+		public int version = -1;
 	}
 }

@@ -1,5 +1,7 @@
 package net.osmand.plus.openplacereviews;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OPEN_PLACE_REVIEWS;
+
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 
@@ -15,8 +17,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardType;
+import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.util.Algorithms;
 
@@ -33,8 +35,6 @@ public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 
 	private static final Log LOG = PlatformUtil.getLog(OpenPlaceReviewsPlugin.class);
 
-	public static final String ID = "osmand.openplacereviews";
-
 	private MapActivity mapActivity;
 
 	public OpenPlaceReviewsPlugin(OsmandApplication app) {
@@ -43,7 +43,7 @@ public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 
 	@Override
 	public String getId() {
-		return ID;
+		return PLUGIN_OPEN_PLACE_REVIEWS;
 	}
 
 	@Override

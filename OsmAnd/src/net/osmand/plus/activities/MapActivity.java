@@ -1,6 +1,8 @@
 package net.osmand.plus.activities;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_CRASH_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RATE_US_ID;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -133,6 +135,7 @@ import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.DataStorageFragment;
@@ -708,10 +711,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				if (settings.SHOW_DASHBOARD_ON_START.get()) {
 					dashboardOnMap.setDashboardVisibility(true, DashboardOnMap.staticVisibleType);
 				} else {
-					if (CrashBottomSheetDialogFragment.shouldShow(settings, this)) {
+					OsmAndAppCustomization customization = app.getAppCustomization();
+					if (customization.isFeatureEnabled(FRAGMENT_CRASH_ID)
+							&& CrashBottomSheetDialogFragment.shouldShow(settings, this)) {
 						SecondSplashScreenFragment.SHOW = false;
 						CrashBottomSheetDialogFragment.showInstance(fragmentManager);
-					} else if (RateUsHelper.shouldShowRateDialog(app)) {
+					} else if (customization.isFeatureEnabled(FRAGMENT_RATE_US_ID)
+							&& RateUsHelper.shouldShowRateDialog(app)) {
 						SecondSplashScreenFragment.SHOW = false;
 						RateUsHelper.showRateDialog(this);
 					}
@@ -1875,7 +1881,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (AndroidUtils.isFragmentCanBeAdded(manager, tag)) {
 				manager.beginTransaction()
 						.replace(R.id.fragmentContainer, fragment, tag)
-						.addToBackStack(DRAWER_SETTINGS_ID + ".new")
+						.addToBackStack(DRAWER_SETTINGS_ID)
 						.commitAllowingStateLoss();
 				return true;
 			}
@@ -1888,7 +1894,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void dismissSettingsScreens() {
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		if (!fragmentManager.isStateSaved()) {
-			fragmentManager.popBackStack(DRAWER_SETTINGS_ID + ".new", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+			fragmentManager.popBackStack(DRAWER_SETTINGS_ID, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
 	}
 

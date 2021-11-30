@@ -1,5 +1,10 @@
 package net.osmand.plus.srtmplugin;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_SRTM;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN;
+import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -42,14 +47,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN;
-import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
-
 public class SRTMPlugin extends OsmandPlugin {
-
-	public static final String ID = "osmand.srtm";
-	public static final String FREE_ID = "osmand.srtm.paid";
 
 	private static final String SRTM_PLUGIN_COMPONENT_PAID = "net.osmand.srtmPlugin.paid";
 	private static final String SRTM_PLUGIN_COMPONENT = "net.osmand.srtmPlugin";
@@ -63,13 +61,13 @@ public class SRTMPlugin extends OsmandPlugin {
 	public static final int TERRAIN_MIN_ZOOM = 3;
 	public static final int TERRAIN_MAX_ZOOM = 19;
 
-	private OsmandSettings settings;
+	private final OsmandSettings settings;
 
 	private TerrainLayer terrainLayer;
 
 	@Override
 	public String getId() {
-		return FREE_ID;
+		return PLUGIN_SRTM;
 	}
 
 	public SRTMPlugin(OsmandApplication app) {

@@ -3,6 +3,7 @@ package net.osmand.plus.rastermaps;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DOWNLOAD_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_UPDATE_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_RASTER_MAPS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
 import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 
@@ -37,12 +38,12 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.DownloadTilesDialog;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
@@ -54,12 +55,11 @@ import java.util.Map;
 
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
-	public static final String ID = "osmand.rastermaps";
 	// Constants for determining the order of items in the additional actions context menu
 	private static final int UPDATE_MAP_ITEM_ORDER = 12300;
 	private static final int DOWNLOAD_MAP_ITEM_ORDER = 12600;
 
-	private OsmandSettings settings;
+	private final OsmandSettings settings;
 
 	private MapTileLayer overlayLayer;
 	private MapTileLayer underlayLayer;
@@ -83,7 +83,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 	@Override
 	public String getId() {
-		return ID;
+		return PLUGIN_RASTER_MAPS;
 	}
 
 	@Override
@@ -373,7 +373,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			settings.MAP_UNDERLAY.addListener(underlayListener);
 		}
 		String overlayMapDescr = settings.MAP_OVERLAY.get();
-		if (overlayMapDescr!=null && overlayMapDescr.contains(".sqlitedb")) {
+		if (overlayMapDescr != null && overlayMapDescr.contains(".sqlitedb")) {
 			overlayMapDescr = overlayMapDescr.replaceFirst(".sqlitedb", "");
 		}
 		boolean hasOverlayDescription = overlayMapDescr != null;
@@ -389,7 +389,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				.setItemDeleteAction(makeDeleteAction(settings.MAP_OVERLAY, settings.MAP_OVERLAY_PREVIOUS, settings.MAP_OVERLAY_TRANSPARENCY))
 				.createItem());
 		String underlayMapDescr = settings.MAP_UNDERLAY.get();
-		if (underlayMapDescr!=null && underlayMapDescr.contains(".sqlitedb")) {
+		if (underlayMapDescr != null && underlayMapDescr.contains(".sqlitedb")) {
 			underlayMapDescr = underlayMapDescr.replaceFirst(".sqlitedb", "");
 		}
 		boolean hasUnderlayDescription = underlayMapDescr != null;
@@ -571,7 +571,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			}
 			updateMapLayers(mapActivity, mapActivity, null);
 			// hide seekbar
-			if(currentMapTypeSeekbarMode == settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get()) {
+			if (currentMapTypeSeekbarMode == settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get()) {
 				settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(LayerTransparencySeekbarMode.UNDEFINED);
 				mapLayers.getMapControlsLayer().hideTransparencyBar();
 			}

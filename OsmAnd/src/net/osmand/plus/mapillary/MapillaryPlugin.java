@@ -2,6 +2,7 @@ package net.osmand.plus.mapillary;
 
 import static android.content.Intent.ACTION_VIEW;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAPILLARY;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_MAPILLARY;
 import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 
 import android.app.Activity;
@@ -60,10 +61,9 @@ import java.util.Map;
 
 public class MapillaryPlugin extends OsmandPlugin {
 
-	public static String TYPE_MAPILLARY_PHOTO = "mapillary-photo";
-	public static String TYPE_MAPILLARY_CONTRIBUTE = "mapillary-contribute";
+	public static final String TYPE_MAPILLARY_PHOTO = "mapillary-photo";
+	public static final String TYPE_MAPILLARY_CONTRIBUTE = "mapillary-contribute";
 
-	public static final String ID = "osmand.mapillary";
 	private static final String MAPILLARY_PACKAGE_ID = "com.mapillary.app";
 
 	private static final Log LOG = PlatformUtil.getLog(OpenPlaceReviewsPlugin.class);
@@ -93,7 +93,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	@Override
 	public String getId() {
-		return ID;
+		return PLUGIN_MAPILLARY;
 	}
 
 	@Override
