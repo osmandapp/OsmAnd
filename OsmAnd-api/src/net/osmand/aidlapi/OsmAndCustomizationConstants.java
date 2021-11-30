@@ -25,7 +25,7 @@ public interface OsmAndCustomizationConstants {
 	String DRAWER_MEASURE_DISTANCE_ID = DRAWER_ITEM_ID_SCHEME + "measure_distance";
 	String DRAWER_CONFIGURE_SCREEN_ID = DRAWER_ITEM_ID_SCHEME + "configure_screen";
 	String DRAWER_PLUGINS_ID = DRAWER_ITEM_ID_SCHEME + "plugins";
-	String DRAWER_SETTINGS_ID = DRAWER_ITEM_ID_SCHEME + "settings";
+	String DRAWER_SETTINGS_ID = DRAWER_ITEM_ID_SCHEME + "settings.new";
 	String DRAWER_HELP_ID = DRAWER_ITEM_ID_SCHEME + "help";
 	String DRAWER_BUILDS_ID = DRAWER_ITEM_ID_SCHEME + "builds";
 	String DRAWER_DIVIDER_ID = DRAWER_ITEM_ID_SCHEME + "divider";
