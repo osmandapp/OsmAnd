@@ -1,14 +1,12 @@
 package net.osmand.plus.osmedit;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,7 +18,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
@@ -47,7 +44,6 @@ import net.osmand.util.Algorithms;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -210,6 +206,7 @@ public class AddPOIAction extends QuickAction {
 		this.title = title;
 	}
 
+	@SuppressLint("ClickableViewAccessibility")
 	@Override
 	public void drawUI(@NonNull final ViewGroup parent, @NonNull final MapActivity mapActivity) {
 		final View view = LayoutInflater.from(parent.getContext())
@@ -220,8 +217,7 @@ public class AddPOIAction extends QuickAction {
 		final boolean isLayoutRtl = AndroidUtils.isLayoutRtl(mapActivity);
 		Drawable deleteDrawable = application.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark, isLightTheme);
 
-		final LinearLayout editTagsLineaLayout =
-				(LinearLayout) view.findViewById(R.id.editTagsList);
+		final LinearLayout editTagsLineaLayout = view.findViewById(R.id.editTagsList);
 
 		final TagAdapterLinearLayoutHack mAdapter = new TagAdapterLinearLayoutHack(editTagsLineaLayout, getTagsFromParams(), deleteDrawable);
 		// It is possible to not restart initialization every time, and probably move initialization to appInit
@@ -234,32 +230,23 @@ public class AddPOIAction extends QuickAction {
 		tagKeys.addAll(EditPoiDialogFragment.BASIC_TAGS);
 		mAdapter.setTagData(tagKeys.toArray(new String[0]));
 		mAdapter.setValueData(valueKeys.toArray(new String[0]));
-		Button addTagButton = (Button) view.findViewById(R.id.addTagButton);
-		addTagButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				for (int i = 0; i < editTagsLineaLayout.getChildCount(); i++) {
-					View item = editTagsLineaLayout.getChildAt(i);
-					if (((EditText) item.findViewById(R.id.tagEditText)).getText().toString().isEmpty() &&
-							((EditText) item.findViewById(R.id.valueEditText)).getText().toString().isEmpty())
-						return;
-				}
-				mAdapter.addTagView("", "");
+		Button addTagButton = view.findViewById(R.id.addTagButton);
+		addTagButton.setOnClickListener(v -> {
+			for (int i = 0; i < editTagsLineaLayout.getChildCount(); i++) {
+				View item = editTagsLineaLayout.getChildAt(i);
+				if (((EditText) item.findViewById(R.id.tagEditText)).getText().toString().isEmpty() &&
+						((EditText) item.findViewById(R.id.valueEditText)).getText().toString().isEmpty())
+					return;
 			}
+			mAdapter.addTagView("", "");
 		});
 
 		mAdapter.updateViews();
 
-		final TextInputLayout poiTypeTextInputLayout = (TextInputLayout) view.findViewById(R.id.poiTypeTextInputLayout);
-		final AutoCompleteTextView poiTypeEditText = (AutoCompleteTextView) view.findViewById(R.id.poiTypeEditText);
-		final SwitchCompat showDialog = (SwitchCompat) view.findViewById(R.id.saveButton);
-//            showDialog.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                @Override
-//                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                    getParams().put(KEY_DIALOG, Boolean.toString(isChecked));
-//                }
-//            });
-		showDialog.setChecked(Boolean.valueOf(getParams().get(KEY_DIALOG)));
+		final TextInputLayout poiTypeTextInputLayout = view.findViewById(R.id.poiTypeTextInputLayout);
+		final AutoCompleteTextView poiTypeEditText = view.findViewById(R.id.poiTypeEditText);
+		final SwitchCompat showDialog = view.findViewById(R.id.saveButton);
+		showDialog.setChecked(Boolean.parseBoolean(getParams().get(KEY_DIALOG)));
 
 		final String text = getTagsFromParams().get(POI_TYPE_TAG);
 		poiTypeEditText.addTextChangedListener(new TextWatcher() {
@@ -337,8 +324,7 @@ public class AddPOIAction extends QuickAction {
 
 		setUpAdapterForPoiTypeEditText(mapActivity, getAllTranslatedNames(mapActivity), poiTypeEditText);
 
-		ImageButton onlineDocumentationButton =
-				(ImageButton) view.findViewById(R.id.onlineDocumentationButton);
+		ImageButton onlineDocumentationButton = view.findViewById(R.id.onlineDocumentationButton);
 		onlineDocumentationButton.setOnClickListener(v -> {
 			Uri uri = Uri.parse("https://wiki.openstreetmap.org/wiki/Map_Features");
 			Intent intent = new Intent(Intent.ACTION_VIEW, uri);
@@ -347,70 +333,21 @@ public class AddPOIAction extends QuickAction {
 
 		final int activeColor = ColorUtilities.getActiveColor(mapActivity, !isLightTheme);
 		onlineDocumentationButton.setImageDrawable(mapActivity.getMyApplication().getUIUtilities().getPaintedIcon(R.drawable.ic_action_help, activeColor));
-//            poiTypeEditText.setCompoundDrawables(null, null, activity.getMyApplication().getIconsCache().getPaintedIcon(R.drawable.ic_action_arrow_drop_down, activeColor), null);
-
-//            Button addTypeButton = (Button) view.findViewById(R.id.addTypeButton);
-//            addTypeButton.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    PoiSubTypeDialogFragment f = PoiSubTypeDialogFragment.createInstance(poiTypes.getOtherPoiCategory());
-//                    f.setOnItemSelectListener(new PoiSubTypeDialogFragment.OnItemSelectListener() {
-//                        @Override
-//                        public void select(String category) {
-//                            putTagIntoParams(POI_TYPE_TAG, category);
-//                        }
-//                    });
-//
-//                    CreateEditActionDialog parentFragment = (CreateEditActionDialog) activity.getSupportFragmentManager().findFragmentByTag(CreateEditActionDialog.TAG);
-//                    f.show(parentFragment.getChildFragmentManager(), "PoiSubTypeDialogFragment");
-//                }
-//            });
 
 		parent.addView(view);
 	}
 
-	private void setUpAdapterForPoiTypeEditText(final MapActivity activity, final Map<String, PoiType> allTranslatedNames, final AutoCompleteTextView poiTypeEditText) {
+	private void setUpAdapterForPoiTypeEditText(final MapActivity activity,
+	                                            final Map<String, PoiType> allTranslatedNames,
+	                                            final AutoCompleteTextView poiTypeEditText) {
 		final Map<String, PoiType> subCategories = new LinkedHashMap<>();
-//            PoiCategory ct = editPoiData.getPoiCategory();
-//            if (ct != null) {
-//                for (PoiType s : ct.getPoiTypes()) {
-//                    if (!s.isReference() && !s.isNotEditableOsm() && s.getBaseLangType() == null) {
-//                        addMapEntryAdapter(subCategories, s.getTranslation(), s);
-//                        if(!s.getKeyName().contains("osmand")) {
-//                            addMapEntryAdapter(subCategories, s.getKeyName().replace('_', ' '), s);
-//                        }
-//                    }
-//                }
-//            }
 		for (Map.Entry<String, PoiType> s : allTranslatedNames.entrySet()) {
 			addMapEntryAdapter(subCategories, s.getKey(), s.getValue());
 		}
 		final ArrayAdapter<Object> adapter;
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			adapter = new ArrayAdapter<>(activity,
-					R.layout.list_textview, subCategories.keySet().toArray());
-		} else {
-			TypedValue typedValue = new TypedValue();
-			Resources.Theme theme = activity.getTheme();
-			theme.resolveAttribute(android.R.attr.textColorSecondary, typedValue, true);
-			final int textColor = typedValue.data;
-
-			adapter = new ArrayAdapter<Object>(activity,
-					R.layout.list_textview, subCategories.keySet().toArray()) {
-				@Override
-				public View getView(int position, View convertView, ViewGroup parent) {
-					final View view = super.getView(position, convertView, parent);
-					((TextView) view.findViewById(R.id.textView)).setTextColor(textColor);
-					return view;
-				}
-			};
-		}
-		adapter.sort(new Comparator<Object>() {
-			@Override
-			public int compare(Object lhs, Object rhs) {
-				return lhs.toString().compareTo(rhs.toString());
-			}
-		});
+		adapter = new ArrayAdapter<>(activity,
+				R.layout.list_textview, subCategories.keySet().toArray());
+		adapter.sort((lhs, rhs) -> lhs.toString().compareTo(rhs.toString()));
 		poiTypeEditText.setAdapter(adapter);
 		poiTypeEditText.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -447,8 +384,8 @@ public class AddPOIAction extends QuickAction {
 		private final Drawable deleteDrawable;
 
 		public TagAdapterLinearLayoutHack(LinearLayout linearLayout,
-										  Map<String, String> tagsData,
-										  Drawable deleteDrawable) {
+		                                  Map<String, String> tagsData,
+		                                  Drawable deleteDrawable) {
 			this.linearLayout = linearLayout;
 			this.tagsData = tagsData;
 			this.deleteDrawable = deleteDrawable;
@@ -461,9 +398,9 @@ public class AddPOIAction extends QuickAction {
 			linearLayout.removeAllViews();
 			List<Map.Entry<String, String>> entries = new ArrayList<>(tagsData.entrySet());
 			for (Map.Entry<String, String> tag : entries) {
-				if (tag.getKey().equals(POI_TYPE_TAG)
-						/*|| tag.getKey().equals(OSMSettings.OSMTagKey.NAME.getValue())*/)
+				if (tag.getKey().equals(POI_TYPE_TAG)) {
 					continue;
+				}
 				addTagView(tag.getKey(), tag.getValue());
 			}
 		}
@@ -471,37 +408,28 @@ public class AddPOIAction extends QuickAction {
 		public void addTagView(String tg, String vl) {
 			View convertView = LayoutInflater.from(linearLayout.getContext())
 					.inflate(R.layout.poi_tag_list_item, null, false);
-			final AutoCompleteTextView tagEditText =
-					(AutoCompleteTextView) convertView.findViewById(R.id.tagEditText);
-			ImageButton deleteItemImageButton =
-					(ImageButton) convertView.findViewById(R.id.deleteItemImageButton);
+			final AutoCompleteTextView tagEditText = convertView.findViewById(R.id.tagEditText);
+			ImageButton deleteItemImageButton = convertView.findViewById(R.id.deleteItemImageButton);
 			deleteItemImageButton.setImageDrawable(deleteDrawable);
 			final String[] previousTag = new String[]{tg};
-			deleteItemImageButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					linearLayout.removeView((View) v.getParent());
-					tagsData.remove(tagEditText.getText().toString());
-					setTagsIntoParams(tagsData);
-				}
+			deleteItemImageButton.setOnClickListener(v -> {
+				linearLayout.removeView((View) v.getParent());
+				tagsData.remove(tagEditText.getText().toString());
+				setTagsIntoParams(tagsData);
 			});
-			final AutoCompleteTextView valueEditText =
-					(AutoCompleteTextView) convertView.findViewById(R.id.valueEditText);
+			final AutoCompleteTextView valueEditText = convertView.findViewById(R.id.valueEditText);
 			tagEditText.setText(tg);
 			tagEditText.setAdapter(tagAdapter);
 			tagEditText.setThreshold(1);
-			tagEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-				@Override
-				public void onFocusChange(View v, boolean hasFocus) {
-					if (!hasFocus) {
-						String s = tagEditText.getText().toString();
-						tagsData.remove(previousTag[0]);
-						tagsData.put(s.toString(), valueEditText.getText().toString());
-						previousTag[0] = s.toString();
-						setTagsIntoParams(tagsData);
-					} else {
-						tagAdapter.getFilter().filter(tagEditText.getText());
-					}
+			tagEditText.setOnFocusChangeListener((v, hasFocus) -> {
+				if (!hasFocus) {
+					String s = tagEditText.getText().toString();
+					tagsData.remove(previousTag[0]);
+					tagsData.put(s, valueEditText.getText().toString());
+					previousTag[0] = s;
+					setTagsIntoParams(tagsData);
+				} else {
+					tagAdapter.getFilter().filter(tagEditText.getText());
 				}
 			});
 
@@ -548,14 +476,11 @@ public class AddPOIAction extends QuickAction {
 	}
 
 	private static void initAutocompleteTextView(final AutoCompleteTextView textView,
-												 final ArrayAdapter<String> adapter) {
+	                                             final ArrayAdapter<String> adapter) {
 
-		textView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				if (hasFocus) {
-					adapter.getFilter().filter(textView.getText());
-				}
+		textView.setOnFocusChangeListener((v, hasFocus) -> {
+			if (hasFocus) {
+				adapter.getFilter().filter(textView.getText());
 			}
 		});
 	}
@@ -574,7 +499,7 @@ public class AddPOIAction extends QuickAction {
 			}.getType();
 			quickActions = new Gson().fromJson(json, type);
 		}
-		return quickActions != null ? quickActions : new LinkedHashMap<String, String>();
+		return quickActions != null ? quickActions : new LinkedHashMap<>();
 	}
 
 	private void setTagsIntoParams(Map<String, String> tags) {
