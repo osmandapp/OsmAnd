@@ -1262,10 +1262,12 @@ public class GPXUtilities {
 		private TrkSegment generalSegment;
 
 		public GPXFile(String author) {
+			metadata.time = System.currentTimeMillis();
 			this.author = author;
 		}
 
 		public GPXFile(String title, String lang, String description) {
+			metadata.time = System.currentTimeMillis();
 			if(description != null) {
 				metadata.getExtensionsToWrite().put("desc", description);
 			}
