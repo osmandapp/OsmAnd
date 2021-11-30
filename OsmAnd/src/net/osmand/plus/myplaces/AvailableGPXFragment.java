@@ -1,13 +1,5 @@
 package net.osmand.plus.myplaces;
 
-import static net.osmand.plus.GpxSelectionHelper.CURRENT_TRACK;
-import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
-import static net.osmand.plus.track.TrackMenuFragment.openTrack;
-import static net.osmand.util.Algorithms.capitalizeFirstLetter;
-import static net.osmand.util.Algorithms.formatDuration;
-import static net.osmand.util.Algorithms.objectEquals;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -39,13 +31,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ActionMode;
-import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Collator;
@@ -93,6 +78,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -108,6 +94,21 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ActionMode;
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.FragmentActivity;
+
+import static net.osmand.plus.GpxSelectionHelper.CURRENT_TRACK;
+import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.track.TrackMenuFragment.openTrack;
+import static net.osmand.util.Algorithms.capitalizeFirstLetter;
+import static net.osmand.util.Algorithms.formatDuration;
+import static net.osmand.util.Algorithms.objectEquals;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment implements
 		FavoritesFragmentStateHolder, OsmAuthorizationListener, OnTrackFileMoveListener, RenameCallback {
@@ -701,9 +702,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		}
 		final String actionButton = value;
 		if (allGpxAdapter.getGroupCount() == 0) {
-			Toast.makeText(getActivity(),
-					app.getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT)
-					.show();
+			showNoItemsForActionsToast(actionButton);
 			return;
 		}
 
@@ -732,18 +731,19 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			@Override
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				if (selectedItems.isEmpty()) {
-					Toast.makeText(getActivity(),
-							app.getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()),
-							Toast.LENGTH_SHORT).show();
+					showNoItemsForActionsToast(actionButton);
 					return true;
 				}
 
-				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-				builder.setMessage(getString(R.string.local_index_action_do, actionButton.toLowerCase(),
-						String.valueOf(selectedItems.size())));
-				builder.setPositiveButton(actionButton, listener);
-				builder.setNegativeButton(R.string.shared_string_cancel, null);
-				builder.show();
+				Context context = getContext();
+				if (context != null) {
+					AlertDialog.Builder builder = new AlertDialog.Builder(context);
+					builder.setMessage(getString(R.string.local_index_action_do, actionButton.toLowerCase(),
+							String.valueOf(selectedItems.size())));
+					builder.setPositiveButton(actionButton, listener);
+					builder.setNegativeButton(R.string.shared_string_cancel, null);
+					builder.show();
+				}
 				return true;
 			}
 
@@ -755,6 +755,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 		});
 		allGpxAdapter.notifyDataSetChanged();
+	}
+
+	private void showNoItemsForActionsToast(@NonNull String action) {
+		if (app != null) {
+			String message = getString(R.string.local_index_no_items_to_do, action.toLowerCase());
+			app.showShortToastMessage(Algorithms.capitalizeFirstLetter(message));
+		}
 	}
 
 	private void showGpxOnMap(GpxInfo info) {
