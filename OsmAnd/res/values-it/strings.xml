@@ -4450,4 +4450,10 @@
     <string name="shared_string_uphill">Salita</string>
     <string name="shared_string_downhill">Discesa</string>
     <string name="elevation_profile">Profilo dell\'altitudine</string>
+    <string name="shared_string_precision">Precisione</string>
+    <string name="shared_string_statistics">Statistiche</string>
+    <string name="gps_filter_hdop_desc">Imposta il valore massimo accettato di HDOP.
+\nI punti con valori maggiori saranno nascosti.</string>
+    <string name="gps_filter_speed_altitude_desc">Solo i punti della traccia nell\'intervallo impostato saranno visibili sulla mappa, gli altri nascosti.</string>
+    <string name="gps_filter_precision">Precisione GPS</string>
 </resources>
