@@ -4148,7 +4148,7 @@
     <string name="attribute">Eigenschappen</string>
     <string name="shared_string_purchased">Gekocht</string>
     <string name="routeInfo_surface_description">Vermeld informatie over het fysieke oppervlak van wegen en paden.</string>
-    <string name="routeInfo_roadClass_description">Kleur de route volgens de weegclassificatie.</string>
+    <string name="routeInfo_roadClass_description">Kleur de route volgens de wegclassificatie.</string>
     <string name="add_group_to_markers">Groep toevoegen aan markeringslijst</string>
     <string name="remove_group_from_markers">Groep uit markeringslijst verwijderen</string>
     <string name="start_point">Start</string>
@@ -4160,7 +4160,7 @@
 \n
 \nMisschien zijn enkele kaarten niet geladen.</string>
     <string name="cancel_anytime_in_amazon_app">Annuleer het op elk moment via de Amazon app</string>
-    <string name="no_activity_for_intent">App installeren om deze actie uit te voeren.</string>
+    <string name="no_activity_for_intent">Installeer een app die deze actie kan uitvoeren.</string>
     <string name="no_items_of_type_message">Je heb geen items van dit type</string>
     <string name="routeInfo_smoothness_description">Voorziet een classificatieschema volgens de bruikbaarheid van een weg voor wielvoertuigen in het bijzonder voor de regelmatigheid en vlakte van de ondergrond.</string>
     <string name="shared_string_files">Bestanden</string>
@@ -4390,7 +4390,7 @@
     <string name="shared_string_copy_to">Kopieer naar</string>
     <string name="skip_confirmation">Ja, sla over</string>
     <string name="shared_storage_second_step">Klik op \"Gebruik deze map\".</string>
-    <string name="routeInfo_winter_ice_road_description">Kleur de route- of tracklijn volgens de winterse weg categorieën.</string>
+    <string name="routeInfo_winter_ice_road_description">Kleur de route- of tracklijn volgens de winterse wegcategorieën.</string>
     <string name="approximate_route_description">Hecht de route vast aan de wegen op de kaart om all richtingsaanwijzingen en extra informatie te verkrijgen zoals effenheid, wegtypes en meer.</string>
     <string name="unlimited_map_downloads">Onbeperkte kaart downloads</string>
     <string name="purchases_feature_desc_wikipedia">Verken Wikipedia offline. Artikels zijn verdeeld over de landen en regio\'s en beschikbaar in alle talen.</string>

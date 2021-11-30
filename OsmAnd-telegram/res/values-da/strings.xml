@@ -202,7 +202,7 @@
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram (besked app) bruges til at forbinde og kommunikere med mennesker.</string>
     <string name="privacy_policy_telegram_client">OsmAnd Tracker er en af de klienter, der bruger den åbne Telegram platform. Kontaktpersoner kan bruge enhver anden Telegram klient.</string>
-    <string name="privacy_policy_agree">Ved at klikke på \"Fortsæt\" accepteres betingelserne i Telegram- og OsmAnd privatlivspolitik.</string>
+    <string name="privacy_policy_agree">Ved at klikke på \"Fortsæt\" accepterer du betingelserne i Telegram- og OsmAnd privatlivspolitik.</string>
     <string name="shared_string_accept">Accepter</string>
     <string name="telegram_privacy_policy">Telegram privatlivspolitik</string>
     <string name="osmand_privacy_policy">OsmAnd privatlivspolitik</string>

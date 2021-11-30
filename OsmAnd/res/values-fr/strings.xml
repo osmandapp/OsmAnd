@@ -325,7 +325,7 @@
     <string name="shared_string_favorites">Favoris</string>
     <string name="layer_osm_bugs">Notes OSM (en ligne)</string>
     <string name="layer_poi">Sur-couche des points d\'intérêt…</string>
-    <string name="layer_map">Carte en ligne…</string>
+    <string name="layer_map">Source de la carte…</string>
     <string name="menu_layers">Couches</string>
     <string name="context_menu_item_search_poi">Rechercher un Point d\'Intérêt</string>
     <string name="use_trackball_descr">Utiliser le pointeur pour déplacer la carte.</string>
@@ -1356,7 +1356,7 @@
     <string name="use_opengl_render">Utiliser le rendu OpenGL</string>
     <string name="use_opengl_render_descr">Utiliser le rendu matériel accéléré OpenGL (peut consommer plus de batterie et ne pas fonctionner sur les anciens appareils).</string>
     <string name="everything_up_to_date">Tous les fichiers sont à jour</string>
-    <string name="shared_string_dismiss">Arrêter</string>
+    <string name="shared_string_dismiss">Ignorer</string>
     <string name="no_internet_connection">Téléchargement impossible, veuillez vérifier votre connexion Internet.</string>
     <string name="download_tab_downloads">Tous les téléchargements</string>
     <string name="download_tab_updates">Mises à jour</string>
@@ -3703,7 +3703,7 @@
     <string name="route_between_points_desc">Définissez comment relier les points : par une ligne droite ou en calculant un itinéraire avec le profil ci-dessous.</string>
     <string name="route_between_points_whole_track_button_desc">Toute la trace sera recalculée en utilisant le profil sélectionné.</string>
     <string name="route_between_points_next_segment_button_desc">Seul le prochain segment sera recalculé en utilisant le profil sélectionné.</string>
-    <string name="route_between_points_warning_desc">Ensuite, sélectionnez le profil de navigation pour déplacer votre trace sur les routes les plus proches, autorisées par votre profil de navigation.</string>
+    <string name="route_between_points_warning_desc">Sur l\'écran suivant, sélectionnez un profil de navigation ce qui déplacera votre trace sur les routes les plus adaptées.</string>
     <string name="route_between_points_add_track_desc">Sélectionnez le fichier de trace auquel vous souhaitez ajouter un nouveau segment.</string>
     <string name="save_as_new_track">Enregistrer comme nouvelle trace</string>
     <string name="reverse_route">Inverser l\'itinéraire</string>
