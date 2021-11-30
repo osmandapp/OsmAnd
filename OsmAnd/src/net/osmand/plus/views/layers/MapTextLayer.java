@@ -17,6 +17,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.Algorithms;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -51,7 +52,7 @@ public class MapTextLayer extends OsmandMapLayer {
 	}
 
 	public void putData(OsmandMapLayer ml, Collection<?> objects) {
-		if (objects == null || objects.isEmpty()) {
+		if (Algorithms.isEmpty(objects)) {
 			textObjects.remove(ml);
 		} else {
 			if (ml instanceof MapTextProvider) {
