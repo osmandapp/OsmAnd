@@ -1,8 +1,5 @@
 package net.osmand.plus.osmedit;
 
-import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
-import static net.osmand.plus.osmedit.AdvancedEditPoiFragment.addPoiToStringSet;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -25,15 +22,11 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SwitchCompat;
-
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import net.osmand.AndroidUtils;
-import net.osmand.CallbackWithObject;
 import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -47,7 +40,6 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.osmedit.dialogs.PoiSubTypeDialogFragment;
-import net.osmand.plus.quickaction.CreateEditActionDialog;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.render.RenderingIcons;
@@ -61,6 +53,13 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
+
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
+import static net.osmand.plus.osmedit.AdvancedEditPoiFragment.addPoiToStringSet;
 
 public class AddPOIAction extends QuickAction {
 
@@ -101,15 +100,35 @@ public class AddPOIAction extends QuickAction {
 
 	@Override
 	public int getIconRes(Context context) {
-		PoiCategory category = getCategory(getAllTranslatedNames(context));
-			if (category != null) {
-				category.getIconKeyName();
-				String res = category.getIconKeyName();
-				if (res != null && RenderingIcons.containsBigIcon(res)) {
-					return RenderingIcons.getBigIconResourceId(res);
+		PoiType poiType = getPoiType(context);
+		if (poiType != null) {
+			String iconName = poiType.getIconKeyName();
+			if (!Algorithms.isEmpty(iconName)) {
+				if (RenderingIcons.containsBigIcon(iconName)) {
+					return RenderingIcons.getBigIconResourceId(iconName);
+				}
+				iconName = poiType.getOsmTag() + "_" + iconName;
+				if (RenderingIcons.containsBigIcon(iconName)) {
+					return RenderingIcons.getBigIconResourceId(iconName);
 				}
 			}
+		}
+
+		PoiCategory poiCategory = getCategory(context);
+		if (poiCategory != null) {
+			String iconName = poiCategory.getIconKeyName();
+			if (!Algorithms.isEmpty(iconName) && RenderingIcons.containsBigIcon(iconName)) {
+				return RenderingIcons.getBigIconResourceId(iconName);
+			}
+		}
+
 		return super.getIconRes();
+	}
+
+	@Nullable
+	private PoiType getPoiType(@NonNull Context context) {
+		String poiTypeTranslation = getPoiTypeTranslation();
+		return poiTypeTranslation == null ? null : getAllTranslatedNames(context).get(poiTypeTranslation.toLowerCase());
 	}
 
 	@Override
@@ -256,7 +275,7 @@ public class AddPOIAction extends QuickAction {
 			public void afterTextChanged(Editable s) {
 				String tp = s.toString();
 				putTagIntoParams(POI_TYPE_TAG, tp);
-				PoiCategory category = getCategory(getAllTranslatedNames(application));
+				PoiCategory category = getCategory(application);
 
 				if (category != null) {
 					poiTypeTextInputLayout.setHint(category.getTranslation());
@@ -298,7 +317,7 @@ public class AddPOIAction extends QuickAction {
 					}
 
 					if (expandButtonPressed) {
-						PoiCategory category = getCategory(getAllTranslatedNames(mapActivity));
+						PoiCategory category = getCategory(mapActivity);
 						PoiCategory tempPoiCategory = (category != null) ? category : getPoiTypes(mapActivity).getOtherPoiCategory();
 						PoiSubTypeDialogFragment f =
 								PoiSubTypeDialogFragment.createInstance(tempPoiCategory);
@@ -408,14 +427,10 @@ public class AddPOIAction extends QuickAction {
 		});
 	}
 
-	private PoiCategory getCategory(Map<String, PoiType> allTranslatedNames) {
-		String tp = getTagsFromParams().get(POI_TYPE_TAG);
-		if (tp == null) return null;
-		PoiType pt = allTranslatedNames.get(tp.toLowerCase());
-		if (pt != null) {
-			return pt.getCategory();
-		} else
-			return null;
+	@Nullable
+	private PoiCategory getCategory(@NonNull Context context) {
+		PoiType poiType = getPoiType(context);
+		return poiType != null ? poiType.getCategory() : null;
 	}
 
 	private void addMapEntryAdapter(final Map<String, PoiType> subCategories, String key, PoiType v) {
@@ -566,7 +581,7 @@ public class AddPOIAction extends QuickAction {
 		if (!tags.containsKey(POI_TYPE_TAG)) {
 			Map<String, String> additionalTags = new HashMap<>(tags);
 			tags.clear();
-			tags.put(POI_TYPE_TAG, getTagsFromParams().get(POI_TYPE_TAG));
+			tags.put(POI_TYPE_TAG, getPoiTypeTranslation());
 			tags.putAll(additionalTags);
 		}
 		getParams().put(KEY_TAG, new Gson().toJson(tags));
@@ -576,5 +591,10 @@ public class AddPOIAction extends QuickAction {
 		Map<String, String> tagsFromParams = getTagsFromParams();
 		tagsFromParams.put(tag, value);
 		setTagsIntoParams(tagsFromParams);
+	}
+
+	@Nullable
+	private String getPoiTypeTranslation() {
+		return getTagsFromParams().get(POI_TYPE_TAG);
 	}
 }
