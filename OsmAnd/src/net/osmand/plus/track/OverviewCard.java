@@ -167,10 +167,6 @@ public class OverviewCard extends MapBaseCard {
 
 	private void setupDescription() {
 		GPXFile gpxFile = getGPXFile();
-		if (gpxFile.metadata == null) {
-			gpxFile.metadata = new Metadata();
-		}
-
 		final String descriptionHtml = gpxFile.metadata.getDescription();
 		if (Algorithms.isBlank(descriptionHtml)) {
 			AndroidUiHelper.updateVisibility(description, false);

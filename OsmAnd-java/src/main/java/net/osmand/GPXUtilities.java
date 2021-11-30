@@ -1247,7 +1247,7 @@ public class GPXUtilities {
 
 	public static class GPXFile extends GPXExtensions {
 		public String author;
-		public Metadata metadata;
+		public Metadata metadata = new Metadata();
 		public List<Track> tracks = new ArrayList<>();
 		private List<WptPt> points = new ArrayList<>();
 		public List<Route> routes = new ArrayList<>();
@@ -1266,7 +1266,6 @@ public class GPXUtilities {
 		}
 
 		public GPXFile(String title, String lang, String description) {
-			this.metadata = new Metadata();
 			if(description != null) {
 				metadata.getExtensionsToWrite().put("desc", description);
 			}
@@ -1957,7 +1956,7 @@ public class GPXUtilities {
 		}
 
 		public String getArticleTitle() {
-			return metadata != null ? metadata.getArticleTitle() : null;
+			return metadata.getArticleTitle();
 		}
 
 		private int getItemsToWriteSize() {
@@ -1968,9 +1967,19 @@ public class GPXUtilities {
 			for (TrkSegment segment : getNonEmptyTrkSegments(false)) {
 				size += segment.points.size();
 			}
-			if (metadata != null) {
+
+			// metadata
+			size++;
+			if (metadata.author != null) {
 				size++;
 			}
+			if (metadata.copyright != null) {
+				size++;
+			}
+			if (metadata.bounds != null) {
+				size++;
+			}
+
 			if (!getExtensionsToWrite().isEmpty() || getExtensionsWriter() != null) {
 				size++;
 			}
@@ -2055,33 +2064,32 @@ public class GPXUtilities {
 	}
 
 	private static void writeMetadata(XmlSerializer serializer, GPXFile file, IProgress progress) throws IOException {
-		String trackName = file.metadata != null ? file.metadata.name : getFilename(file.path);
+		String defName = file.metadata.name;
+		String trackName = !Algorithms.isEmpty(defName) ? defName : getFilename(file.path);
 		serializer.startTag(null, "metadata");
 		writeNotNullText(serializer, "name", trackName);
-		if (file.metadata != null) {
-			writeNotNullText(serializer, "desc", file.metadata.desc);
-			if (file.metadata.author != null) {
-				serializer.startTag(null, "author");
-				writeAuthor(serializer, file.metadata.author);
-				serializer.endTag(null, "author");
-			}
-			if (file.metadata.copyright != null) {
-				serializer.startTag(null, "copyright");
-				writeCopyright(serializer, file.metadata.copyright);
-				serializer.endTag(null, "copyright");
-			}
-			writeNotNullTextWithAttribute(serializer, "link", "href", file.metadata.link);
-			if (file.metadata.time != 0) {
-				writeNotNullText(serializer, "time", GPX_TIME_FORMAT.format(new Date(file.metadata.time)));
-			}
-			writeNotNullText(serializer, "keywords", file.metadata.keywords);
-			if (file.metadata.bounds != null) {
-				writeBounds(serializer, file.metadata.bounds);
-			}
-			writeExtensions(serializer, file.metadata, null);
-			if (progress != null) {
-				progress.progress(1);
-			}
+		writeNotNullText(serializer, "desc", file.metadata.desc);
+		if (file.metadata.author != null) {
+			serializer.startTag(null, "author");
+			writeAuthor(serializer, file.metadata.author);
+			serializer.endTag(null, "author");
+		}
+		if (file.metadata.copyright != null) {
+			serializer.startTag(null, "copyright");
+			writeCopyright(serializer, file.metadata.copyright);
+			serializer.endTag(null, "copyright");
+		}
+		writeNotNullTextWithAttribute(serializer, "link", "href", file.metadata.link);
+		if (file.metadata.time != 0) {
+			writeNotNullText(serializer, "time", GPX_TIME_FORMAT.format(new Date(file.metadata.time)));
+		}
+		writeNotNullText(serializer, "keywords", file.metadata.keywords);
+		if (file.metadata.bounds != null) {
+			writeBounds(serializer, file.metadata.bounds);
+		}
+		writeExtensions(serializer, file.metadata, null);
+		if (progress != null) {
+			progress.progress(1);
 		}
 		serializer.endTag(null, "metadata");
 	}
