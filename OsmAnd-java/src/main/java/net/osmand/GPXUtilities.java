@@ -496,6 +496,30 @@ public class GPXUtilities {
 		public Copyright copyright = null;
 		public Bounds bounds = null;
 
+		public Metadata() { }
+
+		public Metadata(Metadata source) {
+			name = source.name;
+			desc = source.desc;
+			link = source.link;
+			keywords = source.keywords;
+			time = source.time;
+
+			if (source.author != null) {
+				author = new Author(source.author);
+			}
+
+			if (source.copyright != null) {
+				copyright = new Copyright(source.copyright);
+			}
+
+			if (source.bounds != null) {
+				bounds = new Bounds(source.bounds);
+			}
+
+			copyExtensions(source);
+		}
+
 		public String getArticleTitle() {
 			return getExtensionsToRead().get("article_title");
 		}
@@ -513,12 +537,30 @@ public class GPXUtilities {
 		public String name;
 		public String email;
 		public String link;
+
+		public Author() { }
+
+		public Author(Author author) {
+			name = author.name;
+			email = author.email;
+			link = author.link;
+			copyExtensions(author);
+		}
 	}
 
 	public static class Copyright extends GPXExtensions {
 		public String author;
 		public String year;
 		public String license;
+
+		public Copyright() { }
+
+		public Copyright(Copyright copyright) {
+			author = copyright.author;
+			year = copyright.year;
+			license = copyright.license;
+			copyExtensions(copyright);
+		}
 	}
 
 	public static class Bounds extends GPXExtensions {
@@ -526,6 +568,17 @@ public class GPXUtilities {
 		public double minlon;
 		public double maxlat;
 		public double maxlon;
+
+		public Bounds() { }
+
+		public Bounds(Bounds source) {
+			minlat = source.minlat;
+			minlon = source.minlon;
+			maxlat = source.maxlat;
+			maxlon = source.maxlon;
+			copyExtensions(source);
+		}
+
 	}
 
 	public static class RouteSegment {
