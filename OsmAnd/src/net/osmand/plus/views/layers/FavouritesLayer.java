@@ -37,7 +37,7 @@ import java.util.List;
 public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvider,
 		IMoveObjectProvider, MapTextProvider<FavouritePoint> {
 
-	protected int startZoom = 6;
+	private static final int START_ZOOM = 6;
 
 	protected OsmandMapTileView view;
 	private FavouritesDbHelper favouritesDbHelper;
@@ -98,7 +98,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		cache.clear();
 		if (this.settings.SHOW_FAVORITES.get() && favouritesDbHelper.isFavoritesLoaded()) {
-			if (tileBox.getZoom() >= startZoom) {
+			if (tileBox.getZoom() >= START_ZOOM) {
 				float textScale = getTextScale();
 				float iconSize = getIconSize(view.getApplication());
 				QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
@@ -240,7 +240,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res, boolean unknownLocation) {
-		if (this.settings.SHOW_FAVORITES.get() && tileBox.getZoom() >= startZoom) {
+		if (this.settings.SHOW_FAVORITES.get() && tileBox.getZoom() >= START_ZOOM) {
 			getFavoriteFromPoint(tileBox, point, res);
 		}
 	}
