@@ -216,7 +216,7 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private boolean isVisible(String groupName) {
-		return !selectedGpxFile.getHiddenGroups().contains(groupName);
+		return !selectedGpxFile.isGroupHidden(groupName);
 	}
 
 	@Override
