@@ -9,17 +9,19 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
+import net.osmand.aidlapi.OsmAndCustomizationConstants;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 import org.apache.commons.logging.Log;
 
 public class CrashBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
-	public static final String TAG = "CrashBottomSheetDialogFragment";
+
+	private static final String TAG = OsmAndCustomizationConstants.FRAGMENT_CRASH_ID;
 	private static final Log LOG = PlatformUtil.getLog(CrashBottomSheetDialogFragment.class);
 
 	@Override

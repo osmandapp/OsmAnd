@@ -163,4 +163,9 @@ public interface OsmAndCustomizationConstants {
 	String NAVIGATION_LOCAL_ROUTING_GROUP_ID = NAVIGATION_OPTIONS_ID + "local_routing_group";
 	String NAVIGATION_LOCAL_ROUTING_ID = NAVIGATION_OPTIONS_ID + "local_routing";
 	String NAVIGATION_DIVIDER_ID = NAVIGATION_OPTIONS_ID + "divider";
+
+	//Dialogs IDs:
+	String FRAGMENT_ID = "fragment.";
+	String FRAGMENT_RATE_US_ID = FRAGMENT_ID + "rate_us";
+	String FRAGMENT_CRASH_ID = FRAGMENT_ID + "crash";
 }
