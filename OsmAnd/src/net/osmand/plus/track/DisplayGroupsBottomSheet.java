@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -47,7 +46,7 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 	private LayoutInflater inflater;
 	private LinearLayout listContainer;
 	private TextView sizeIndication;
-	private View hideAllButton;
+	private View stateButton;
 
 	private DisplayPointGroupsCallback callback;
 
@@ -62,10 +61,10 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 		inflater = UiUtilities.getInflater(requireContext(), nightMode);
 		View view = inflater.inflate(R.layout.bottom_sheet_display_groups_visibility, null);
 		sizeIndication = view.findViewById(R.id.selected_size);
-		hideAllButton = view.findViewById(R.id.hide_all_button);
+		stateButton = view.findViewById(R.id.state_button);
 		listContainer = view.findViewById(R.id.list);
 		updateListItems();
-		setupHideAllButton();
+		setupStateButton();
 		items.add(new SimpleBottomSheetItem.Builder().setCustomView(view).create());
 	}
 
@@ -108,6 +107,15 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 	}
 
+	private void updateStateButton() {
+		TextView title = stateButton.findViewById(R.id.state_button_text);
+		if (isAnyVisible()) {
+			title.setText(R.string.shared_string_hide_all);
+		} else {
+			title.setText(R.string.shared_string_show_all);
+		}
+	}
+
 	private void updateListItems() {
 		listContainer.removeAllViews();
 		listViews.clear();
@@ -133,10 +141,11 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 	}
 
-	private void setupHideAllButton() {
-		hideAllButton.setOnClickListener(view -> {
+	private void setupStateButton() {
+		stateButton.setOnClickListener(view -> {
+			boolean newState = !isAnyVisible();
 			for (String groupName : getGroupsNames()) {
-				updateGroupVisibility(groupName, false);
+				updateGroupVisibility(groupName, newState);
 			}
 			callback.onPointGroupsVisibilityChanged();
 			fullUpdate();
@@ -160,6 +169,7 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void fullUpdate() {
+		updateStateButton();
 		updateSizeView();
 		updateList();
 	}
@@ -178,13 +188,12 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private void updateList() {
 		int defaultIconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
-		Set<String> hiddenGroupsNames = selectedGpxFile.getHiddenGroups();
 		for (SelectableItem item : uiItems) {
 			View view = listViews.get(item);
 			if (view == null) {
 				continue;
 			}
-			boolean isVisible = !hiddenGroupsNames.contains(item.getTitle());
+			boolean isVisible = isVisible(item.getTitle());
 			int iconId = isVisible ? R.drawable.ic_action_folder : R.drawable.ic_action_folder_hidden;
 			int iconColor = item.getColor();
 			if (iconColor == 0 || !isVisible) {
@@ -195,6 +204,19 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 			CompoundButton cb = view.findViewById(R.id.compound_button);
 			cb.setChecked(isVisible);
 		}
+	}
+
+	private boolean isAnyVisible() {
+		for (String groupName : getGroupsNames()) {
+			if (isVisible(groupName)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean isVisible(String groupName) {
+		return !selectedGpxFile.getHiddenGroups().contains(groupName);
 	}
 
 	@Override
