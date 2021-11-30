@@ -4057,7 +4057,7 @@
     <string name="poi_butcher_horse">Ló</string>
     <string name="poi_butcher_lamb">Bárány</string>
     <string name="poi_butcher_pork">Sertés</string>
-    <string name="poi_coffee_yes"/>
+    <string name="poi_coffee_yes">Igen</string>
     <string name="poi_lgbtq_primary">Elsősorban LMBTQ</string>
     <string name="poi_lgbtq_yes">LMBTQ személyeknek engedélyezett</string>
     <string name="poi_lgbtq_only">Kizárólag LMBTQ</string>
@@ -4067,4 +4067,20 @@
     <string name="poi_medical_supply_filter">Gyógyászati ellátási kategória</string>
     <string name="poi_agrarian_type">Mezőgazdasági inputok</string>
     <string name="poi_membership_filter">Tagság szükséges</string>
+    <string name="poi_fridge_filter">Hűtő</string>
+    <string name="poi_reusable_packaging_accept_no">Újrahasználható csomagolás elfogadása: nem</string>
+    <string name="poi_reusable_packaging_accept_only">Újrahasználható csomagolás elfogadása: kizárólag</string>
+    <string name="poi_reusable_packaging_offer_yes">Újrahasználható csomagolás kínálata: igen</string>
+    <string name="poi_reusable_packaging_offer_no">Újrahasználható csomagolás kínálata: nem</string>
+    <string name="poi_membership_yes">Igen</string>
+    <string name="poi_membership_no">Nem</string>
+    <string name="poi_origin">Eredet</string>
+    <string name="poi_zero_waste_only">Hulladékmentes: kizárólag</string>
+    <string name="poi_reusable_packaging_accept_yes">Újrahasználható csomagolás elfogadása: igen</string>
+    <string name="poi_reusable_packaging_offer_only">Újrahasználható csomagolás kínálata: kizárólag</string>
+    <string name="poi_zero_waste_yes">Hulladékmentes: igen</string>
+    <string name="poi_zero_waste_no">Hulladékmentes: nem</string>
+    <string name="poi_tobacco_yes">Igen</string>
+    <string name="poi_coffee_no">Nem</string>
+    <string name="poi_ice_cream_yes">Igen</string>
 </resources>
