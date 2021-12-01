@@ -4378,7 +4378,7 @@
     <string name="backup_and_restore">Back-up &amp; Herstel</string>
     <string name="search_more">Zoek meer…</string>
     <string name="shared_string_show_slope">Toon hellingen</string>
-    <string name="shared_string_uphill">Bergop</string>
+    <string name="shared_string_uphill">Stijgen</string>
     <string name="copying_file">Kopiëren van bestand %1$s…</string>
     <string name="loading_list_of_routing_services">Laden van lijst van beschikbare routeringsdiensten</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
@@ -4433,7 +4433,7 @@
     <string name="osmand_cloud_login_descr">Gelieve het e-mailadres waarmee je geregistreerd bent in te vullen. Er zal een éénmalig wachtwoord nodig voor de volgende stap naar toe worden gestuurd.</string>
     <string name="elevation_profile">Hoogteprofiel</string>
     <string name="shared_string_hide_slope">Hellingen verbergen</string>
-    <string name="shared_string_downhill">Bergaf</string>
+    <string name="shared_string_downhill">Dalen</string>
     <string name="transparent_status_bar_descr">Geef de kaart weer onder de statusbalk</string>
     <string name="contour_lines_hillshades_slope">Hoogtelijnen, reliëfschaduwen en hellingen</string>
     <string name="backup_error_file_not_available">Bestand onbeschikbaar</string>
@@ -4452,4 +4452,5 @@
     <string name="last_backup">Laatste back-up</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="send_logcat_log">Logcat log verzenden</string>
+    <string name="shared_string_grade">Helling</string>
 </resources>

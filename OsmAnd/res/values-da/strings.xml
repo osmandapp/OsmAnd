@@ -500,7 +500,7 @@
     <string name="local_index_items_deleted">%1$d af %2$d emner slettet.</string>
     <string name="local_index_items_restored">%1$d af %2$d emner aktiveret.</string>
     <string name="local_index_no_items_to_do">Ingen emner at %1$s</string>
-    <string name="local_index_action_do">%1$s %2$s emner slettes. Fortsæt?</string>
+    <string name="local_index_action_do">%1$s: %2$s emne(r). Fortsæt\?</string>
     <string name="local_index_descr_title">Administrer kortfiler.</string>
     <string name="local_index_mi_restore">Aktiver</string>
     <string name="local_index_mi_backup">Deaktiver</string>
@@ -3593,7 +3593,7 @@
     <string name="save_track_to_gpx">Automatisk optagelse af spor under navigation</string>
     <string name="one_image_per_tile">En billedfil pr. kortflise</string>
     <string name="online_map_url_helper_text">Angiv eller indsæt URL-adressen til onlinekilden.</string>
-    <string name="shared_string_legal">Lovlig</string>
+    <string name="shared_string_legal">Juridisk</string>
     <string name="keep_active">Hold aktiv</string>
     <string name="speed_cameras_alert">I nogle lande er indberetninger om hastighedskameraer forbudt i henhold til loven.</string>
     <string name="vessel_height_warning_link">Indstil fartøjets højde</string>
