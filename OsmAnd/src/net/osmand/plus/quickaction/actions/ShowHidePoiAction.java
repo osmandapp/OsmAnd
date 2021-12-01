@@ -281,7 +281,9 @@ public class ShowHidePoiAction extends QuickAction {
 		final List<PoiUIFilter> list = new ArrayList<>();
 
 		for (PoiUIFilter f : poiFilters.getSortedPoiFilters(true)) {
-			addFilterToList(adapter, list, f);
+			if (!f.isCustomPoiFilter()) {
+				addFilterToList(adapter, list, f);
+			}
 		}
 
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
