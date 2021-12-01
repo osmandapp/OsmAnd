@@ -20,7 +20,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.GPXUtilities.Metadata;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -31,8 +30,8 @@ import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.util.Algorithms;
 
 import static net.osmand.AndroidUtils.dpToPx;
-import static net.osmand.plus.track.DescriptionCard.getMetadataImageLink;
 import static net.osmand.plus.GpxSelectionHelper.isGpxFileSelected;
+import static net.osmand.plus.track.DescriptionCard.getMetadataImageLink;
 import static net.osmand.plus.track.OptionsCard.APPEARANCE_BUTTON_INDEX;
 import static net.osmand.plus.track.OptionsCard.DIRECTIONS_BUTTON_INDEX;
 import static net.osmand.plus.track.OptionsCard.EDIT_BUTTON_INDEX;
@@ -167,10 +166,6 @@ public class OverviewCard extends MapBaseCard {
 
 	private void setupDescription() {
 		GPXFile gpxFile = getGPXFile();
-		if (gpxFile.metadata == null) {
-			gpxFile.metadata = new Metadata();
-		}
-
 		final String descriptionHtml = gpxFile.metadata.getDescription();
 		if (Algorithms.isBlank(descriptionHtml)) {
 			AndroidUiHelper.updateVisibility(description, false);

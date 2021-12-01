@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
@@ -20,8 +22,6 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.List;
-
-import androidx.annotation.NonNull;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 
@@ -90,10 +90,7 @@ class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
             backupFile = FileUtils.backupFile(app, outFile);
             String trackName = Algorithms.getFileNameWithoutExtension(outFile);
             GPXFile gpx = generateGpxFile(editingContext, trackName, gpxFile);
-            if (gpxFile.metadata != null) {
-                gpx.metadata = new Metadata();
-                gpx.metadata.getExtensionsToWrite().putAll(gpxFile.metadata.getExtensionsToRead());
-            }
+            gpx.metadata = new Metadata(gpxFile.metadata);
             if (!gpx.showCurrentTrack) {
                 res = GPXUtilities.writeGpxFile(outFile, gpx);
             }

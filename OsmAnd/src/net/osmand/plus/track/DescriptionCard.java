@@ -56,10 +56,6 @@ public class DescriptionCard extends MapBaseCard {
 
 	@Override
 	protected void updateContent() {
-		if (gpxFile.metadata == null) {
-			gpxFile.metadata = new GPXUtilities.Metadata();
-		}
-
 		final String title = gpxFile.metadata.getArticleTitle();
 		final String imageUrl = getMetadataImageLink(gpxFile.metadata);
 		final String descriptionHtml = gpxFile.metadata.getDescription();
