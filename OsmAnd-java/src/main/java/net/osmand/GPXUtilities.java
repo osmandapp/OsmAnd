@@ -952,7 +952,8 @@ public class GPXUtilities {
 			public void calculateElevationDiffs() {
 				WptPt initialPoint = getPoint(startIndex);
 				double eleSumm = initialPoint.ele;
-				int pointsCount = 1;
+				double prevEle = initialPoint.ele;
+				int pointsCount = Double.isNaN(eleSumm) ? 0 : 1;
 				double eleAvg = Double.NaN;
 				double nextWindowPos = initialPoint.distance + windowLength;
 				int pointIndex = startIndex + 1;
@@ -960,14 +961,29 @@ public class GPXUtilities {
 					WptPt point = getPoint(pointIndex);
 					if (point.distance > nextWindowPos) {
 						eleAvg = calcAvg(eleSumm, pointsCount, eleAvg);
-						eleSumm = point.ele;
-						pointsCount = 1;
+						if (!Double.isNaN(point.ele)) {
+							eleSumm = point.ele;
+							prevEle = point.ele;
+							pointsCount = 1;
+						} else if (!Double.isNaN(prevEle)) {
+							eleSumm = prevEle;
+							pointsCount = 1;
+						} else {
+							eleSumm = Double.NaN;
+							pointsCount = 0;
+						}
 						while (nextWindowPos < point.distance) {
 							nextWindowPos += windowLength;
 						}
 					} else {
-						eleSumm += point.ele;
-						pointsCount++;
+						if (!Double.isNaN(point.ele)) {
+							eleSumm += point.ele;
+							prevEle = point.ele;
+							pointsCount++;
+						} else if (!Double.isNaN(prevEle)) {
+							eleSumm += prevEle;
+							pointsCount++;
+						}
 					}
 					pointIndex++;
 				}
@@ -978,6 +994,9 @@ public class GPXUtilities {
 			}
 
 			private double calcAvg(double eleSumm, int pointsCount, double eleAvg) {
+				if (Double.isNaN(eleSumm) || pointsCount == 0) {
+					return Double.NaN;
+				}
 				double avg = eleSumm / pointsCount;
 				if (!Double.isNaN(eleAvg)) {
 					double diff = avg - eleAvg;
