@@ -37,6 +37,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.osmedit.dialogs.PoiSubTypeDialogFragment;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.render.RenderingIcons;
@@ -97,28 +98,15 @@ public class AddPOIAction extends QuickAction {
 	@Override
 	public int getIconRes(Context context) {
 		PoiType poiType = getPoiType(context);
-		if (poiType != null) {
-			String iconName = poiType.getIconKeyName();
-			if (!Algorithms.isEmpty(iconName)) {
-				if (RenderingIcons.containsBigIcon(iconName)) {
-					return RenderingIcons.getBigIconResourceId(iconName);
-				}
-				iconName = poiType.getOsmTag() + "_" + iconName;
-				if (RenderingIcons.containsBigIcon(iconName)) {
-					return RenderingIcons.getBigIconResourceId(iconName);
-				}
-			}
+		String iconName = PoiUIFilter.getPoiTypeIconName(poiType);
+		if (!Algorithms.isEmpty(iconName)) {
+			return RenderingIcons.getBigIconResourceId(iconName);
 		}
-
 		PoiCategory poiCategory = getCategory(context);
-		if (poiCategory != null) {
-			String iconName = poiCategory.getIconKeyName();
-			if (!Algorithms.isEmpty(iconName) && RenderingIcons.containsBigIcon(iconName)) {
-				return RenderingIcons.getBigIconResourceId(iconName);
-			}
-		}
-
-		return super.getIconRes();
+		String categoryIconName = PoiUIFilter.getPoiTypeIconName(poiCategory);
+		return Algorithms.isEmpty(categoryIconName)
+				? super.getIconRes()
+				: RenderingIcons.getBigIconResourceId(categoryIconName);
 	}
 
 	@Nullable
@@ -345,8 +333,7 @@ public class AddPOIAction extends QuickAction {
 			addMapEntryAdapter(subCategories, s.getKey(), s.getValue());
 		}
 		final ArrayAdapter<Object> adapter;
-		adapter = new ArrayAdapter<>(activity,
-				R.layout.list_textview, subCategories.keySet().toArray());
+		adapter = new ArrayAdapter<>(activity, R.layout.list_textview, subCategories.keySet().toArray());
 		adapter.sort((lhs, rhs) -> lhs.toString().compareTo(rhs.toString()));
 		poiTypeEditText.setAdapter(adapter);
 		poiTypeEditText.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -398,7 +385,7 @@ public class AddPOIAction extends QuickAction {
 			linearLayout.removeAllViews();
 			List<Map.Entry<String, String>> entries = new ArrayList<>(tagsData.entrySet());
 			for (Map.Entry<String, String> tag : entries) {
-				if (tag.getKey().equals(POI_TYPE_TAG)) {
+				if (POI_TYPE_TAG.equals(tag.getKey())) {
 					continue;
 				}
 				addTagView(tag.getKey(), tag.getValue());
