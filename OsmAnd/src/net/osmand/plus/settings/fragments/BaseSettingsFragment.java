@@ -721,7 +721,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 			String prefId = preference.getKey();
 			if (!Algorithms.isEmpty(prefId)) {
-				preference.setVisible(appCustomization.isFeatureEnabled(SETTINGS_ID + prefId));
+				boolean featureEnabled = appCustomization.isFeatureEnabled(SETTINGS_ID + prefId);
+				preference.setVisible(featureEnabled && preference.isVisible());
 			}
 			if (preference instanceof ListPreference) {
 				ListPreference listPreference = (ListPreference) preference;
