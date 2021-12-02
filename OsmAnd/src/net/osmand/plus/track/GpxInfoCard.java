@@ -1,6 +1,5 @@
 package net.osmand.plus.track;
 
-import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -39,18 +38,17 @@ public class GpxInfoCard extends MapBaseCard {
 	@Override
 	protected void updateContent() {
 
-		if ( gpxFile.showCurrentTrack) view.setVisibility(View.GONE);
-
+		AndroidUiHelper.updateVisibility(view, !gpxFile.showCurrentTrack);
 		File file = new File(gpxFile.path);
 		String trackSize = AndroidUtils.formatSize(app, file.length());
 		String trackDate = SIMPLE_DATE_FORMAT.format(gpxFile.metadata.time);
 		String trackLocation = "";
 
-		if (file.getParentFile() != null){
-			if (file.getParentFile().equals(app.getAppPath(IndexConstants.GPX_INDEX_DIR))){
+		File dir = file.getParentFile();
+		if (dir != null){
+			if (dir.equals(app.getAppPath(IndexConstants.GPX_INDEX_DIR))){
 				trackLocation = app.getString(R.string.shared_string_tracks);
-			} else trackLocation = Algorithms.capitalizeFirstLetter(file.getParentFile().getName());
-
+			} else trackLocation = Algorithms.capitalizeFirstLetter(dir.getName());
 		}
 
 		fillCardItems(R.id.size_container, R.drawable.ic_sdcard, R.string.shared_string_size, trackSize);

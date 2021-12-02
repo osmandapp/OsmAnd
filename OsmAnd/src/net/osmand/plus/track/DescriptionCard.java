@@ -55,10 +55,8 @@ public class DescriptionCard extends MapBaseCard {
 
 	@Override
 	protected void updateContent() {
-		if (!gpxFile.showCurrentTrack) {
-			view.findViewById(R.id.shadow).setVisibility(View.GONE);
-		}
 
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.shadow), gpxFile.showCurrentTrack);
 		final String title = gpxFile.metadata.getArticleTitle();
 		final String imageUrl = getMetadataImageLink(gpxFile.metadata);
 		final String descriptionHtml = gpxFile.metadata.getDescription();
