@@ -806,7 +806,7 @@ public class BinaryRoutePlanner {
 				// exception as it should not occur
 				throw new IllegalStateException();
 			} else {
-				// TODO Issue #...: we know that bug in data (how we simplify base data and connect between regions), so we workaround it
+				//  Issue #13284: we know that bug in data (how we simplify base data and connect between regions), so we workaround it
 				int newEnd = currentSegment.getSegmentEnd() + (currentSegment.isPositive() ? +1 :-1);
 				if (newEnd >= 0 && newEnd < currentSegment.getRoad().getPointsLength() - 1) {
 					nextCurrentSegment = new RouteSegment(currentSegment.getRoad(), currentSegment.getSegmentEnd(),
