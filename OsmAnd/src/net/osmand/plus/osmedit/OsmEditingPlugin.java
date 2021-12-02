@@ -402,11 +402,9 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					.setColor(app, R.color.color_white)
 					.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
 						f.openSelectionMode(R.string.local_index_mi_upload_gpx, R.drawable.ic_action_upload_to_openstreetmap,
-								R.drawable.ic_action_upload_to_openstreetmap, dialog -> {
-									List<GpxInfo> selectedItems = f.getSelectedItems();
-									OsmEditingPlugin.this.sendGPXFiles(activity, f,
-											selectedItems.toArray(new GpxInfo[0]));
-								});
+								R.drawable.ic_action_upload_to_openstreetmap, selectedList ->
+										OsmEditingPlugin.this.sendGPXFiles(activity, f,
+										selectedList.toArray(new GpxInfo[0])));
 						return true;
 					})
 					.createItem());
