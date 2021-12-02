@@ -2194,4 +2194,25 @@
     <string name="lang_mn">몽골어</string>
     <string name="lang_nap">네폴리탄어</string>
     <string name="lang_pnb">펀자브어</string>
+    <string name="shared_string_trip">트립</string>
+    <string name="searching_gps">GPS 검색</string>
+    <string name="wiki_article_search_text">해당 Wiki 문서를 검색하는 중</string>
+    <string name="whats_new">의 새로운 기능</string>
+    <string name="backup_delete_all_data_descr">OsmAnd Cloud의 모든 데이터가 삭제됩니다. 로컬 버전은 그대로 유지됩니다.</string>
+    <string name="map_viewing_item">지도 보기</string>
+    <string name="shared_string_finish">끝내기</string>
+    <string name="shared_string_resume">재시작</string>
+    <string name="backup_delete_old_data_descr">현재 버전의 데이터는 OsmAnd Cloud에서 보존됨</string>
+    <string name="backup_delete_old_data">이전 버전 제거</string>
+    <string name="troubleshooting_description">구매에 문제가 있으시면 이 링크를 따라오세요.</string>
+    <string name="troubleshooting">문제 해결</string>
+    <string name="what_is_here">여기 있는 내용:</string>
+    <string name="shared_string_pause">일시 중지</string>
+    <string name="what_is_new">새로운 소식</string>
+    <string name="versions_item">버전</string>
+    <string name="first_usage_item">처음 사용</string>
+    <string name="map_legend">지도 범례</string>
+    <string name="search_on_the_map_item">지도에서 검색</string>
+    <string name="instalation_troubleshooting_item">설치 및 문제 해결</string>
+    <string name="first_usage_item_description">지도 다운로드 방법, 기본 설정 설정 방법.</string>
 </resources>
