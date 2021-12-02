@@ -4404,12 +4404,57 @@
     <string name="use_external_timestamps">Użyj zewnętrznych znaczników czasu</string>
     <string name="use_external_timestamps_description">Użyj znaczników czasu routera online, aby dostosować szacowany czas i średnią prędkość</string>
     <string name="no_plugins_enabled">Nie masz włączonych wtyczek. Listę dostępnych wtyczek znajdziesz w \'Menu\' → \'Wtyczki\'.</string>
-    <string name="delete_history_items_descr">Czy na pewno chcesz usunąć wybrane elementy historii\?</string>
+    <string name="delete_history_items_descr">Usunąć wybrane elementy historii\?</string>
     <string name="delete_history_items">Liczba elementów historii do usunięcia %1$s. Usunąć\?</string>
     <string name="display_route_tracks">Wyświetlanie ścieżek</string>
     <string name="display_route_tracks_as_poi">Wyświetlanie ścieżek jako POI</string>
     <string name="quick_action_toggle_preference">Przełącznik do przełączania wybranego stanu preferencji.</string>
     <string name="shared_string_statistics">Statystyki</string>
-    <string name="gps_filter_hdop_desc">Ustaw maksymalną dopuszczalną wartość HDOP.
-\nPunkty większe niż ustawiony parametr zostaną ukryte.</string>
+    <string name="gps_filter_hdop_desc">Ustaw maksymalną akceptowaną wartość dla HDOP.
+\nPunkty z wyższą wartością będą ukrywane.</string>
+    <string name="files_remaining">Pozostałe pliki: %1$s %2$s</string>
+    <string name="storage_found_files_descr">Stuknij \"%1$s\", aby skopiować pliki %2$s z \"%3$s\" do \"%4$s\". Może to chwilę potrwać.</string>
+    <string name="start_copying">Rozpocznij kopiowanie</string>
+    <string name="skip_confirmation">Tak, pomiń</string>
+    <string name="icon_group_education">Edukacja</string>
+    <string name="shared_string_precision">Dokładność</string>
+    <string name="gps_filter_smoothing">Wygładzanie</string>
+    <string name="save_as_copy">Zapisz jako kopię</string>
+    <string name="shared_string_gps_filter">Filtr GPS</string>
+    <string name="shared_storage_last_step">Później możesz określić nowy folder danych.</string>
+    <string name="shared_string_hide_all">Ukryj wszystko</string>
+    <string name="from_to_with_params">Od %1$s do %2$s</string>
+    <string name="shared_storage_first_step">Naciśnij \"%1$s\".
+\nOtworzy się menedżer plików, w którym należy znaleźć i otworzyć folder osmand.</string>
+    <string name="shared_storage">Pamięć współdzielona</string>
+    <string name="shared_storage_migration_descr">Z powodu zmian w dostępie do pamięci masowej w systemie Android, OsmAnd nie może już używać %1$s.
+\n
+\nSkopiuj wszystkie swoje dane do nowego folderu.</string>
+    <string name="folder_access_denied">Wymagane uprawnienia dostępu do wybranego folderu.</string>
+    <string name="copying_completed">Skopiowano</string>
+    <string name="add_to_group">Dodaj do grupy</string>
+    <string name="app_modes_options">Wybierz tryby pracy aplikacji</string>
+    <string name="reading_files">Czytanie plików…</string>
+    <string name="no_items_selected_warning">Wybierz co najmniej jedną pozycję</string>
+    <string name="shared_storage_third_step">Przyznaj uprawnienia dostępu do folderu. Bez tego OsmAnd nie może kopiować plików.</string>
+    <string name="shared_storage_migration">Migracja pamięci współdzielonej</string>
+    <string name="gps_filter_speed_altitude_desc">Na wykresie i mapie pojawią się tylko punkty trasy odpowiadające ustawionemu interwałowi, pozostałe zostaną ukryte.</string>
+    <string name="gps_filter_smoothing_desc">Ustaw progową odległość między punktami.
+\nPunkty toru znajdujące się w odległości nie mniejszej niż ta odległość od ostatniego widocznego punktu zostaną ukryte.
+\nNależy pamiętać, że wysokie progi mogą nadmiernie upraszczać geometrię toru.</string>
+    <string name="distance_between_points">Odległość między punktami</string>
+    <string name="exit_without_saving_warning">Wyjść bez zapisywania zmian\?</string>
+    <string name="shared_string_memory">Pamięć</string>
+    <string name="display_groups_visibility_dialog_description">Możesz kontrolować widoczność grupy na mapie. Jeśli ścieżka jest ukryta, wszystkie grupy również będą ukryte.</string>
+    <string name="copying_file">Kopiowanie pliku %1$s…</string>
+    <string name="progress_complete">%1$s ukończone</string>
+    <string name="shared_string_skip_warning">Pominąć migrację\? OsmAnd nie ma już dostępu do Twoich plików w pamięci współdzielonej.
+\n
+\nAplikacja zacznie używać nowego folderu danych.</string>
+    <string name="shared_storage_second_step">Kliknij „Użyj tego folderu”.</string>
+    <string name="shared_string_copy_to">Kopiuj do</string>
+    <string name="save_changes_into_file">Zapisz zmiany do pliku</string>
+    <string name="gps_filter_precision">Dokładność GPS</string>
+    <string name="gps_filter_actions_description">OsmAnd zastosuje zmiany do ścieżki bez aktualizowania pliku. Zmiany można zapisywać ręcznie.</string>
+    <string name="storage_migration_wrong_folder_warning">W wybranym folderze nie znaleziono danych OsmAnd. Proszę spróbuj ponownie.</string>
 </resources>

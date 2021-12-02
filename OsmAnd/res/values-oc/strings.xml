@@ -665,7 +665,7 @@
     <string name="explore_wikipedia_offline">Explorar la Viquipèdia fòra de linha.</string>
     <string name="quick_action_remove_next_destination">Suprimir lo ponch de destinacion pus pròche</string>
     <string name="track_show_start_finish_icons">Mostrar lei icònas de començament e de fin</string>
-    <string name="shared_string_terrain">Terren</string>
+    <string name="shared_string_terrain">Relèu</string>
     <string name="rendering_attr_showLez_name">Mostrar lei zònas d\'escampament bas</string>
     <string name="routing_attr_allow_private_name">Permetre l\'accès ai proprietats privadas</string>
     <string name="routing_attr_allow_private_description">Permet l\'accès a d\'airaus privats.</string>
@@ -1334,4 +1334,107 @@
     <string name="download_tab_local">Installat en locau</string>
     <string name="rendering_attr_showSurfaceGrade_name">Mostrar la qualitat de la via</string>
     <string name="rendering_attr_showAccess_name">Mostrar lei limitacions d\'accès e lei peatges</string>
+    <string name="cloud_email_already_registered">Aquesta adreiça electronica es ja enregistrada.</string>
+    <string name="routes_color_by_type">Colorar lei percors per…</string>
+    <string name="cloud_email_not_registered">Aquesta adreiça electronica es pas enregistrada sus la Nívol OsmAnd</string>
+    <string name="backup_welcome_back">Content de vos tornar veire !</string>
+    <string name="offline_wikipeadia">Wikipèdia fòra de linha</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">Mapas dau relèu : corbas de nivèu, ombratge, penda</string>
+    <string name="offline_wikivoyage">Wikiviatge fòra de linha</string>
+    <string name="terrain_maps">Mapas dau relèu</string>
+    <string name="osm_live_subscription">Abonament OsmAnd Live</string>
+    <string name="backup_welcome_back_descr">Restauratz lei donadas sus aquest aparelh amb l\'ajuda dei sauvagardas existentas ò sauvagardatz lei donadas sus la Nívol OsmAnd.</string>
+    <string name="osmand_routing_experimental">La navigacion fòra de linha OsmAnd es un servici experimentau e non foncciona per de distàncias superioras a 20 km.
+\n
+\nLa navigacion es desviada per un temps au servicici Fai-la-Nívol en linha.</string>
+    <string name="osmand_cloud_login_descr">Per plaser, indicatz l\'adreiça electronica que vos siatz enregistrat-da amb ela. Un senhau de l\'us unic serà mandat per l\'etapa seguenta.</string>
+    <string name="logout_from_osmand_cloud_decsr">Se deconnectar \?
+\nVos deuretz tornar connectar per sauvagardar ò restaurar lei donadas.</string>
+    <string name="backup_deleting_all_data_descr">Esperatz un momenton que OsmAnd suprime vòstrei donadas de la nívol. Totei lei donadas sus l\'aparelh demoraràn intactas.</string>
+    <string name="logout_from_osmand_cloud">Se deconnectar de la Nívol OsmAnd</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s ò %2$s</string>
+    <string name="closing_changeset">Plegar lo registre dei modificacions…</string>
+    <string name="backup_error_subscription_was_expired">Abonament despassat</string>
+    <string name="contour_lines_hillshades_slope">Corbas de nivèu, ombratge, penda</string>
+    <string name="backup_error_subscription_was_used">Abonament ò promocion utilizada per un autre còmpte %1$s</string>
+    <string name="backup_deleted_all_data_descr">La supression de totei vòstrei donadas sus la Nívol OsmAnd a ben capitat.</string>
+    <string name="backup_delete_types_descr">Suprimir tota mena de donadas obsoletas de la Nívol OsmAnd \?</string>
+    <string name="from_with_param">De %1$s</string>
+    <string name="cancel_anytime_in_gplay">Anullatz quand volètz sus Google Play.</string>
+    <string name="continue_with">Continuar amb %1$s</string>
+    <string name="nautical_depth">Profondor de la mar</string>
+    <string name="osmand_cloud_authorize_descr">Jamai perdretz vòstrei donadas. Sauvagardatz e restauratz totei leis informacions facilament.</string>
+    <string name="osmand_cloud">La Nívol OsmAnd</string>
+    <string name="attribute">Atribut</string>
+    <string name="approximate_route_description">Associatz percors e rotas sus la mapa per aver totei leis indicacions e donadas suplementàrias, coma la fluiditat, la natura dei rotas, eca.</string>
+    <string name="backup_error_user_is_not_registered">Ges d\'utilizator enregistrat amb aquesta adreiça electronica</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Testimòni de seguretat non valide ò expirat</string>
+    <string name="backup_error_token_is_not_valid">I a quauqua-ren que va pas amb l\'ID de l\'aparelh ò lo testimòni de seguretat fornit</string>
+    <string name="regular_price">Pretz ordinària</string>
+    <string name="complete_purchase">Acabar la cròmpa</string>
+    <string name="cancel_anytime_in_huawei_appgallery">Anullatz quand volètz sus Huawei AppGallery</string>
+    <string name="shared_string_learn_more">Legir mai</string>
+    <string name="osmand_pro_tagline">Obtenir lo mai de fonccionalitats</string>
+    <string name="redeem_promo_code">Utilisar lo còde promocionau</string>
+    <string name="you_can_get_feature_as_part_of_pattern">Obtenir“%1$s” de part dau plan %2$s . Comparatz :</string>
+    <string name="no_plugins_enabled">Avètz ges d\'ajust actiu. Trobaretz una lista deis ajusts disponibles dins \'Menut\' → \'Ajusts\'.</string>
+    <string name="shared_storage_warning_description">En rason dei règlas novèlas d\'Android, partent de novembre 2021, OsmAnd 4.2 perdrà l\'accès ai memòrias partejadas.
+\n
+\nDesplaçatz lo repertòri de donadas partejadas vèrs la resèrva disponibla, autrament l\'applicacion perdrà l\'accès a vòstrei donadas : mapas fòra de linha, traças GPX, eca.</string>
+    <string name="restore_from_osmand_cloud">Restaurar de la Nívol OsmAnd</string>
+    <string name="osm_live_payment_subscription_management_amz">Lo pagament se debita de vòstre còmpte Amazon a la confirmacion de la cròmpa.
+\n
+\nFranc d\'anullacion, se renovèla a l\'escasença chausida.
+\n
+\nAdministratz ò anullatz vòstreis abondaments partent de vòstra configuracion Amazon quand volètz.</string>
+    <string name="setting_supported_by_style">Aquest paramètre es fornit per la representacion de la mapa \'%1$s\'</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Coloratz lei percors segon sa color locala particulara (se figura sus OpenStreetMap) e aquela dau simbòl dau blason d\'escorreguda.</string>
+    <string name="walking_route_osmc_description">Coloratz lei percors de sa color locala particulara (se figura sus OpenStreetMap) e sa categoria (internationala, regionala, locala).</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Exploratz lei plans d\'OsmAnd per trobar çò que vos convèn.</string>
+    <string name="purchases_feature_desc_pro_widgets">Obtenètz l\'accès ai fonccionalitats OsmAnd avançadas : coloracion dei percors eca.</string>
+    <string name="option_available_only_in_osmand_pro">Disponible dins lo quadre de l\'abonament OsmAnd Pro.</string>
+    <string name="track_has_no_needed_data">Mancan lei donadas relativas a la traça.</string>
+    <string name="promo_subscription">Abonament promocionau</string>
+    <string name="active_till">Actiu fins a %1$s</string>
+    <string name="on_hold_since">A l\'espèra despuei %1$s</string>
+    <string name="shared_string_purchased">Crompat</string>
+    <string name="backup_restore_now">Restaurar tot d\'un temps</string>
+    <string name="backup_setup">Configurar la sauvagarda</string>
+    <string name="backup_dont_have_any_descr">Planificatz de sauvagardas automaticas e ansin perdretz jamais de donadas.</string>
+    <string name="backup_do_not_have_any">Avètz pas encar de sauvagardas en linha.</string>
+    <string name="backup_data_removed">Totei lei donadas son estadas suprimidas.</string>
+    <string name="backup_version_history_removed">Tot l\'istoric dei versions es estat suprimit.</string>
+    <string name="backup_deleted_all_data">Suprimir totei lei donadas.</string>
+    <string name="backup_deleting_all_data">A suprimir totei lei donadas…</string>
+    <string name="duration_moment_ago">i a gaire</string>
+    <string name="backup_error_no_valid_subscription">Ges d\'abonament valide</string>
+    <string name="backup_error_file_not_available">Fichier non disponible</string>
+    <string name="backup_error_gzip_only_supported_upload">Lo fichier se deu mandar au format .gzip</string>
+    <string name="backup_error_subscription_was_expired_descr">Vòstre abonament OsmAnd Pro es despassat, renovelatz-lo per utilizar la sauvagarda. Podètz pasmens totjorn restaurar lei donadas dau Nívol.</string>
+    <string name="backup_error_size_is_exceeded">Passa la dimension maximala dau Nívol OsmAnd de %1$s</string>
+    <string name="purchases_feature_desc_osmand_cloud">Obtenètz la Nívol OsmAnd per conservar totei lei donadas OsmAnd en linha. Ges de donadas perdudas ansin per cas de tornar installar. Sauvagardatz e restauratz totei leis informacions facilament.</string>
+    <string name="backup_error_user_is_already_registered">Aquesta adreiça electronica es emplegada per una autre còmpte</string>
+    <string name="shared_string_view_all">Tot visualizar</string>
+    <string name="shared_string_discussion">Discussion</string>
+    <string name="backup_delete_types">Suprimir lei donadas desactivadas</string>
+    <string name="shared_string_includes">Compren</string>
+    <string name="shared_string_not_included">Compren pas</string>
+    <string name="osmand_maps_plus_tagline">Obtenir de fonccionalitats relargadas</string>
+    <string name="not_available_with">Non disponible amb %1$s</string>
+    <string name="purchases_feature_desc_terrain">Corbas de nivèu, ombratge dau relèu d\'un aspècte sorn e mapas de penda amb de colors que visualizan lei auturas e lei baissas.</string>
+    <string name="backup_version_history_delete_descr">Suprimir lo jornau dei modificacions per lei donadas obsoletas d\'OsmAnd \?</string>
+    <string name="backup_delete_old_data_descr">La version correnta de vòstrei donadas seràn conservadas sus la Nívol OsmAnd</string>
+    <string name="backup_delete_all_data_warning">Siatz a suprimir totei lei donadas telecargadas sus la Nívol OsmAnd, istoric dei versions comprés.
+\n
+\nPodrètz pas recuperar lei donadas suprimidas.</string>
+    <string name="backup_delete_all_data_descr">Totei lei donadas de la Nívol OsmAnd seràn suprimidas. Lei versions localas demoraràn intactas.</string>
+    <string name="osmand_cloud_create_account_descr">Per plaser, indicatz vòstra adreiça electronica, un còde de verificacion vos serà mandat
+\ne totei vòstrei donadas i seràn ligadas.</string>
+    <string name="osmand_cloud_help_descr">Besonh d\'ajuda \? Per plaser contactatz-nos a %1$s</string>
+    <string name="relief_smoothness_factor_descr">Terren preferit : plan ò escalabrós.</string>
+    <string name="osm_live_ask_for_purchase">Vos fau premier vos abonar a OsmAnd Live</string>
+    <string name="opening_changeset">A dobrir lo registre dei modificacions…</string>
+    <string name="commiting_node">A mandar lo nos…</string>
+    <string name="loading_poi_obj">A teledescargar lo PDI…</string>
+    <string name="shared_string_progress">Progression</string>
 </resources>

@@ -1966,7 +1966,7 @@
     <string name="current_track">Aktuelt spor</string>
     <string name="change_markers_position">Skift markørens position</string>
     <string name="lang_es_us">Spansk (Amerikansk)</string>
-    <string name="lang_be_by">Hviderussisk (Latin)</string>
+    <string name="lang_be_by">Hviderussisk (latinsk)</string>
     <string name="lang_kn">Kannada</string>
     <string name="lang_en_gb">Engelsk (Storbritannien)</string>
     <string name="lang_ast">Asturisk</string>
@@ -3519,7 +3519,7 @@
     <string name="lang_bar">Bayersk</string>
     <string name="lang_ba">Basjkirisk</string>
     <string name="lang_lmo">Lombardisk</string>
-    <string name="lang_an">Aragonsk</string>
+    <string name="lang_an">Aragonesisk</string>
     <string name="custom_color">Brugerdefineret farve</string>
     <string name="some_articles_may_not_available_in_lang">Nogle Wikipedia-artikler er muligvis ikke tilgængelige på dit sprog.</string>
     <string name="extra_maps_menu_group">Ekstra kort</string>
