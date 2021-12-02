@@ -861,7 +861,7 @@
     <string name="active_markers">激活标记</string>
     <string name="map_markers">地图标记</string>
     <string name="map_marker">地图标记</string>
-    <string name="rendering_attr_showMtbRoutes_name">显示山地自行车道</string>
+    <string name="rendering_attr_showMtbRoutes_name">山地自行车路线</string>
     <string name="show_polygons">显示多边形</string>
     <string name="shared_string_email_address">电子邮件地址</string>
     <string name="rendering_attr_hideUnderground_name">隐藏地下物体</string>
@@ -1197,7 +1197,7 @@
     <string name="rendering_attr_showSurfaces_name">显示路面材质</string>
     <string name="map_widget_left">左边栏</string>
     <string name="map_widget_right">右边栏</string>
-    <string name="rendering_attr_showCycleRoutes_name">显示</string>
+    <string name="rendering_attr_showCycleRoutes_name">骑车路线</string>
     <string name="rendering_attr_horseRoutes_name">马匹路线</string>
     <string name="download_wikipedia_maps">维基百科</string>
     <string name="do_not_show_startup_messages_desc">不显示应用折扣和特殊的本地事件消息。</string>
@@ -1564,8 +1564,8 @@
     <string name="lang_kab">卡布列语</string>
     <string name="lang_ber">柏柏尔文</string>
     <string name="archive_wikipedia_data">你有旧的不兼容的维基百科数据。归档它？</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">按网络从属着色</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">按 OSMC 徒步旅行标志着色</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">网络从属</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="application_dir_change_warning3">将 OsmAnd 数据文件移动到新的目的地？</string>
     <string name="specified_directiory_not_writeable">不能在指定目录中创建地图</string>
     <string name="confirm_usage_speed_cameras">在许多国家（德国、法国、意大利和其他国家），使用超速摄像头警告是非法的。如果你违反了法律，OsmAnd 不承担任何责任。请只当你有资格使用此功能时才点击“是”。</string>
@@ -1916,7 +1916,7 @@
     <string name="map_widget_audionotes">音频注记</string>
     <string name="rendering_attr_alpineHiking_name">高山远足量表（SAC）</string>
     <string name="rendering_attr_alpineHiking_description">依据 SAC 分级计算路径。</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">徒步旅行符号叠加层</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">徒步旅行路线</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">根据 OSMC 轨迹渲染路径。</string>
     <string name="target_point">目的地 %1$s</string>
     <string name="intermediate_point">中转地点 %1$s</string>
