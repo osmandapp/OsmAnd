@@ -479,7 +479,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 		//remove custom filter
 		for (int i = filters.size() - 1; i >= 0; i--) {
 			PoiUIFilter filter = filters.get(i);
-			if (filter.getFilterId().equals(CUSTOM_FILTER_ID)) {
+			if (filter.isCustomPoiFilter()) {
 				filters.remove(filter);
 				break;
 			}

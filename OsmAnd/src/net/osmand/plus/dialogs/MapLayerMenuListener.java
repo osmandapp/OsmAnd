@@ -177,9 +177,9 @@ final class MapLayerMenuListener extends OnRowItemClick {
 					item.setColor(mapActivity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 					adapter.notifyDataSetChanged();
 				};
-		boolean isMultichoose = poiFiltersHelper.getSelectedPoiFilters(wiki).size() > 1;
-		if (isMultichoose) {
-			mapActivity.getMapLayers().showMultichoicePoiFilterDialog(mapActivity, dismissListener);
+		boolean isMultiChoice = poiFiltersHelper.getSelectedPoiFilters(wiki).size() > 1;
+		if (isMultiChoice) {
+			mapActivity.getMapLayers().showMultiChoicePoiFilterDialog(mapActivity, dismissListener);
 		} else {
 			mapActivity.getMapLayers().showSingleChoicePoiFilterDialog(mapActivity, dismissListener);
 		}
