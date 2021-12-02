@@ -1280,7 +1280,7 @@
     <string name="shared_string_location">Konum</string>
     <string name="share_osm_edits_subject">Osmand üzerinden paylaşılan OSM düzenlemeler</string>
     <string name="lang_nds">Aşağı Almanca</string>
-    <string name="lang_mk">Makedonyaca</string>
+    <string name="lang_mk">Makedonca</string>
     <string name="lang_fy">Frizce</string>
     <string name="lang_als">Arnavutça (Tosk)</string>
     <string name="read_more">Devamını oku</string>
@@ -1557,7 +1557,7 @@
     <string name="lang_fa">Farsça</string>
     <string name="lang_pl">Lehçe</string>
     <string name="lang_pt">Portekizce</string>
-    <string name="lang_ro">Romence</string>
+    <string name="lang_ro">Rumence</string>
     <string name="lang_ru">Rusça</string>
     <string name="lang_sc">Sardunyaca</string>
     <string name="lang_sr">Sırpça (kiril)</string>
