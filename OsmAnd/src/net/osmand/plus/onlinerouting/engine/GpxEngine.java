@@ -121,7 +121,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 
 	private OnlineRoutingResponse prepareResponse(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
 	                                              boolean initialCalculation) {
-		boolean calculatedTimeSpeed = false;
+		boolean calculatedTimeSpeed = useExternalTimestamps();
 		if (shouldApproximateRoute() && !initialCalculation) {
 			MeasurementEditingContext ctx = prepareApproximationContext(app, gpxFile);
 			if (ctx != null) {
