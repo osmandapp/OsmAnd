@@ -3809,7 +3809,7 @@
     <string name="what_is_new">Novedades</string>
     <string name="perform_oauth_authorization_description">Ingresar con OAuth para usar las funciones de edición de OSM</string>
     <string name="perform_oauth_authorization">Ingresar a través de OAuth</string>
-    <string name="clear_osm_token">Vaciar llave OAuth de OpenStreetMap</string>
+    <string name="clear_osm_token">Vaciar clave OAuth de OpenStreetMap</string>
     <string name="osm_edit_logout_success">Sesión finalizada</string>
     <string name="snowmobile_render_descr">Para caminos y senderos exclusivos de motos de nieve.</string>
     <string name="file_already_imported">El archivo ya fue importado en OsmAnd</string>
@@ -4213,8 +4213,8 @@
     <string name="backup_error_size_is_exceeded">Tamaño máximo de OsmAnd Cloud excedido %1$s</string>
     <string name="backup_error_gzip_only_supported_upload">El archivo debe enviarse en formato «.gzip»</string>
     <string name="backup_error_file_not_available">Archivo no disponible</string>
-    <string name="backup_error_token_is_not_valid">Algo está mal con el ID del dispositivo o la clave token proporcionada</string>
-    <string name="backup_error_token_is_not_valid_or_expired">Clave token inválida o vencida</string>
+    <string name="backup_error_token_is_not_valid">Algo está mal con el ID del dispositivo o la clave proporcionada</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Clave inválida o vencida</string>
     <string name="backup_error_user_is_not_registered">Ningún usuario se encuentra registrado con ese correo electrónico</string>
     <string name="backup_error_no_valid_subscription">No hay ninguna suscripción válida</string>
     <string name="enter_verification_code">Ingresa la contraseña de un solo uso</string>
