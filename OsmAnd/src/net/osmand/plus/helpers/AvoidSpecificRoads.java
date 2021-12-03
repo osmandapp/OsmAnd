@@ -348,7 +348,10 @@ public class AvoidSpecificRoads {
 										   @NonNull LatLon loc) {
 		boolean roadAdded = false;
 		for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {
-			roadAdded |= builder.addImpassableRoad(avoidRoadInfo.id);
+			if (!builder.getImpassableRoadLocations().contains(avoidRoadInfo.id)) {
+				builder.addImpassableRoad(avoidRoadInfo.id);
+				roadAdded = true;
+			}
 		}
 		if (roadAdded) {
 			app.getSettings().updateImpassableRoadInfo(avoidRoadInfo);
