@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="use_routing_fallback">Use routing fallback</string>
+    <string name="use_routing_fallback_description">Use offline routing when online routing cannot be reached.</string>
     <string name="gps_filter_precision">GPS precision</string>
     <string name="shared_string_precision">Precision</string>
     <string name="shared_string_statistics">Statistics</string>
