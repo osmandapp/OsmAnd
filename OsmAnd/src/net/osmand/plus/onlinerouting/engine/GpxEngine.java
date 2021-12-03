@@ -96,6 +96,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 		params.add(EngineParameter.CUSTOM_URL);
 		params.add(EngineParameter.APPROXIMATE_ROUTE);
 		params.add(EngineParameter.USE_EXTERNAL_TIMESTAMPS);
+		params.add(EngineParameter.USE_ROUTING_FALLBACK);
 	}
 
 	@Override
@@ -166,6 +167,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 		return parseGpx(content) != null;
 	}
 
+	@Nullable
 	private GPXFile parseGpx(@NonNull String content) {
 		InputStream gpxStream;
 		try {
