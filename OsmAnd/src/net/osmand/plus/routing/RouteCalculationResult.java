@@ -516,8 +516,9 @@ public class RouteCalculationResult {
 
 		int previousLocation = 0;
 		int prevBearingLocation = 0;
+		int prevStrictLocation = 0;
 		float startSpeed = speed;
-		Location prevLoc = locations.get(previousLocation);
+		Location prevLoc = locations.get(prevStrictLocation);
 		if (useLocationTime && locations.size() > 1 && locations.get(1).getTime() > 0 && prevLoc.getTime() > 0
 				&& locations.get(1).getTime() > prevLoc.getTime()) {
 			startSpeed = locations.get(1).distanceTo(prevLoc) / ((locations.get(1).getTime() - prevLoc.getTime()) / 1000f);
@@ -616,23 +617,32 @@ public class RouteCalculationResult {
 				// calculate for previousRoute 
 				previousInfo.distance = listDistance[previousLocation] - listDistance[i];
 				type.setTurnAngle(360 - delta);
-				float directionSpeed = speed;
-				Location previous = locations.get(previousLocation);
-				if (useLocationTime && current.getTime() > 0 && previous.getTime() > 0 && current.getTime() > previous.getTime()) {
-					directionSpeed = previousInfo.distance / ((current.getTime() - previous.getTime()) / 1000f);
+				Location strictPrevious = locations.get(prevStrictLocation);
+				if (useLocationTime && current.getTime() > 0 && strictPrevious.getTime() > 0
+						&& current.getTime() > strictPrevious.getTime()) {
+					float directionSpeed = previousInfo.distance / ((current.getTime() - strictPrevious.getTime()) / 1000f);
+					previousInfo.setAverageSpeed(directionSpeed);
 				}
-				previousInfo = new RouteDirectionInfo(directionSpeed, type);
+				previousInfo = new RouteDirectionInfo(speed, type);
 				previousInfo.setDescriptionRoute(description);
 				previousInfo.routePointOffset = startTurnPoint;
 				computeDirections.add(previousInfo);
 				previousLocation = startTurnPoint;
 				prevBearingLocation = i; // for bearing using current location
+				prevStrictLocation = i;
 			}
 			// clear dist for turn
 			distForTurn = 0;
 		}
 
 		previousInfo.distance = listDistance[previousLocation];
+		Location strictPrevious = locations.get(prevStrictLocation);
+		Location current = locations.get(locations.size() - 1);
+		if (useLocationTime && current.getTime() > 0 && strictPrevious.getTime() > 0
+				&& current.getTime() > strictPrevious.getTime()) {
+			float directionSpeed = previousInfo.distance / ((current.getTime() - strictPrevious.getTime()) / 1000f);
+			previousInfo.setAverageSpeed(directionSpeed);
+		}
 		if (originalDirections.isEmpty()) {
 			originalDirections.addAll(computeDirections);
 		} else {
