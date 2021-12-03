@@ -1,7 +1,10 @@
 package net.osmand.plus.routing;
 
+import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
+
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Location;
@@ -29,8 +32,6 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 
 public class RouteCalculationResult {
 	private final static Log log = PlatformUtil.getLog(RouteCalculationResult.class);
@@ -96,7 +97,8 @@ public class RouteCalculationResult {
 		this.initialCalculation = false;
 	}
 
-	public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions, RouteCalculationParams params, List<LocationPoint> waypoints, boolean addMissingTurns) {
+	public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions,
+	                              RouteCalculationParams params, List<LocationPoint> waypoints, boolean addMissingTurns) {
 		this.routingTime = 0;
 		this.loadedTiles = 0;
 		this.calculateTime = 0;
@@ -113,8 +115,8 @@ public class RouteCalculationResult {
 		}
 		if (addMissingTurns) {
 			removeUnnecessaryGoAhead(localDirections);
-			addMissingTurnsToRoute(locations, localDirections, params.start, params.end,
-					params.mode, params.ctx, params.leftSide);
+			addMissingTurnsToRoute(locations, localDirections, params.mode, params.ctx, params.leftSide,
+					params.gpxRoute != null && params.gpxRoute.calculatedRouteTimeSpeed);
 			// if there is no closest points to start - add it
 			introduceFirstPointAndLastPoint(locations, localDirections, null, params.start, params.end, params.ctx);
 		}
@@ -492,9 +494,11 @@ public class RouteCalculationResult {
 		return segmentsToPopulate;
 	}
 
-	protected static void addMissingTurnsToRoute(List<Location> locations,
-												 List<RouteDirectionInfo> originalDirections, Location start, LatLon end, ApplicationMode mode, Context ctx,
-												 boolean leftSide) {
+	protected static void addMissingTurnsToRoute(@NonNull List<Location> locations,
+	                                             @NonNull List<RouteDirectionInfo> originalDirections,
+	                                             @NonNull ApplicationMode mode,
+	                                             @NonNull Context ctx, boolean leftSide,
+	                                             boolean useLocationTime) {
 		if (locations.isEmpty()) {
 			return;
 		}
@@ -512,7 +516,13 @@ public class RouteCalculationResult {
 
 		int previousLocation = 0;
 		int prevBearingLocation = 0;
-		RouteDirectionInfo previousInfo = new RouteDirectionInfo(speed, TurnType.straight());
+		float startSpeed = speed;
+		Location prevLoc = locations.get(previousLocation);
+		if (useLocationTime && locations.size() > 1 && locations.get(1).getTime() > 0 && prevLoc.getTime() > 0
+				&& locations.get(1).getTime() > prevLoc.getTime()) {
+			startSpeed = locations.get(1).distanceTo(prevLoc) / ((locations.get(1).getTime() - prevLoc.getTime()) / 1000f);
+		}
+		RouteDirectionInfo previousInfo = new RouteDirectionInfo(startSpeed, TurnType.straight());
 		previousInfo.routePointOffset = 0;
 		previousInfo.setDescriptionRoute(ctx.getString(R.string.route_head));
 		computeDirections.add(previousInfo);
@@ -606,7 +616,12 @@ public class RouteCalculationResult {
 				// calculate for previousRoute 
 				previousInfo.distance = listDistance[previousLocation] - listDistance[i];
 				type.setTurnAngle(360 - delta);
-				previousInfo = new RouteDirectionInfo(speed, type);
+				float directionSpeed = speed;
+				Location previous = locations.get(previousLocation);
+				if (useLocationTime && current.getTime() > 0 && previous.getTime() > 0 && current.getTime() > previous.getTime()) {
+					directionSpeed = previousInfo.distance / ((current.getTime() - previous.getTime()) / 1000f);
+				}
+				previousInfo = new RouteDirectionInfo(directionSpeed, type);
 				previousInfo.setDescriptionRoute(description);
 				previousInfo.routePointOffset = startTurnPoint;
 				computeDirections.add(previousInfo);
