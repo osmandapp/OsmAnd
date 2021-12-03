@@ -1443,7 +1443,7 @@
     <string name="lang_be_by">البيلاروسية (اللاتينية)</string>
     <string name="lang_en_gb">الإنجليزية (المملكة المتحدة)</string>
     <string name="lang_eo">إسبرانتو</string>
-    <string name="lang_gl">الغاليشية</string>
+    <string name="lang_gl">الجاليكية</string>
     <string name="lang_kn">الكانادا</string>
     <string name="lang_nb">النرويجية ( بوكمال )</string>
     <string name="lang_nn">النرويجية (الحديثة )</string>
@@ -1856,10 +1856,10 @@
     <string name="traffic_warning_hazard">خطر</string>
     <string name="rendering_value_boldOutline_name">مخطط واضح</string>
     <string name="lang_pms">بييمونتي</string>
-    <string name="lang_br">بريتون</string>
+    <string name="lang_br">بريتونية</string>
     <string name="lang_bpy">بيشنوبريا</string>
     <string name="lang_new">نوار / باهاسا النيبال</string>
-    <string name="lang_ceb">سيبوانو</string>
+    <string name="lang_ceb">السيبيونو</string>
     <string name="archive_wikipedia_data">لديك بيانات ويكيبيديا منزلة قديمة غير متوافقة. هل تريد أرشفتها؟</string>
     <string name="disable_recording_once_app_killed">منع التسجيل في الخلفية</string>
     <string name="shared_string_import2osmand">استيراد إلى أوسماند</string>
