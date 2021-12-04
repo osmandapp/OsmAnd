@@ -2936,7 +2936,7 @@
     <string name="choose_data_to_share">Оберіть, даними якого типу Ви хотіли б поділитися:</string>
     <string name="downloaded_maps">Мап завантажено</string>
     <string name="visited_screens">Екранів відвідано</string>
-    <string name="collected_data_descr">Визначте, які дані ви поширюватимете в OsmAnd.</string>
+    <string name="collected_data_descr">Визначте, якими даними ви ділитимитеся з OsmAnd.</string>
     <string name="downloaded_maps_collect_descr">Допомагає нам зрозуміти популярність на мапі країни та областей.</string>
     <string name="visited_screens_collect_descr">Допомагає нам зрозуміти, які можливості OsmAnd є найпопулярнішими.</string>
     <string name="privacy_and_security_change_descr">Натискаючи \"Дозволити\", Ви погоджуєтесь з нашими %1$s</string>
