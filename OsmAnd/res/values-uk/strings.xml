@@ -863,7 +863,7 @@
     <string name="intermediate_point_too_far">Проміжна точка %1$s занадто далека від найближчої дороги.</string>
     <string name="arrived_at_intermediate_point">Проміжного пункту досягнуто</string>
     <string name="context_menu_item_intermediate_point">Додати як проміжну точку</string>
-    <string name="ending_point_too_far">Кінець маршруту знаходиться далеко від найближчої дороги.</string>
+    <string name="ending_point_too_far">Кінець маршруту надто далеко від найближчої дороги.</string>
     <string name="add_tag">Додати мітку</string>
     <string name="btn_advanced_mode">Розширений режим…</string>
     <string name="poi_filter_parking">Стоянки</string>
@@ -3666,7 +3666,7 @@
 \n
 \nВиберіть %2$s, щоб видалити всі дані, пов\'язані з камерами контролю швидкості (повідомлення, попередження і POI), до повного перевстановлення OsmAnd.</string>
     <string name="keep_active">Лишати ввімкненим</string>
-    <string name="shared_string_uninstall">Вилучити</string>
+    <string name="shared_string_uninstall">Видалити</string>
     <string name="speed_cameras_alert">Попередження про камери контролю швидкості в деяких країнах заборонено законом.</string>
     <string name="shared_string_bearing">Орієнтація</string>
     <string name="item_deleted">%1$s видалено</string>
@@ -3849,10 +3849,10 @@
     <string name="markers_history">Історія позначок</string>
     <string name="send_files_to_openstreetmap">Надіслати файл GPX на OpenStreetMap</string>
     <string name="enter_text_separated">Введіть мітки через коми.</string>
-    <string name="gpx_upload_public_visibility_descr">«Публічний» означає що трек буде видно публічно в \"Ваших GPS треках\" і в загальному списку GPS треків, разом з мітками часу у сирцевому вигляді. Дані, що надаються через API, не посилаються на сторінку з вашими треками. Мітки часу точок треку недоступні через загальнодоступний API GPS і не впорядковані хронологічно.</string>
-    <string name="gpx_upload_private_visibility_descr">«Приватний» означає що треки не будуть видимими в публічних списках, але точки треку будуть доступні через публічний GPS API без міток часу.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">«Ідентифікований» означає що трек буде видно публічно у \"Ваших GPS треках\" і в загальному списку GPS треків, тобто інші користувачі зможуть завантажувати оригінальний трек і асоціювати його з вашим нікнеймом. Дані отримані через API треків будуть посилатися на Вашу оригінальну сторінку із треками. Мітки часу для точок треку доступні через публічний GPS API.</string>
-    <string name="gpx_upload_trackable_visibility_descr">«Відстежуваний» означає, що трек не з\'явиться в жодному загальнодоступному списку, але обробка точок з позначками часу від нього (які не можуть бути безпосередньо пов\'язані з вами) виконується за допомогою завантажень із загальнодоступного API GPS.</string>
+    <string name="gpx_upload_public_visibility_descr">«Загальнодоступний» означає, що трек буде видно публічно у «Ваших GPS треках» і в загальному списку GPS треків, разом з мітками часу у необробленому вигляді. Дані, що надаються через API, не посилаються на сторінку з вашими треками. Мітки часу точок треку недоступні через загальнодоступний API GPS і не впорядковані хронологічно.</string>
+    <string name="gpx_upload_private_visibility_descr">«Приватний» означає що треки не будуть видимими в загальнодоступних списках, але точки треку будуть доступні через загальнодоступний GPS API без міток часу.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">«Ідентифікований» означає що трек буде видно публічно у «Ваших GPS треках» і в загальному списку GPS треків, тобто інші користувачі зможуть завантажувати оригінальний трек і асоціювати його з вашим іменем користувача. Дані отримані через API треків будуть посилатися на вашу оригінальну сторінку із треками. Мітки часу для точок треку доступні через публічний GPS API.</string>
+    <string name="gpx_upload_trackable_visibility_descr">«Відстежуваний» означає, що трек не зʼявиться в жодному загальнодоступному списку, але обробка точок з позначками часу від нього (які не можуть бути безпосередньо повʼязані з вами) виконується за допомогою завантажень із загальнодоступного API GPS.</string>
     <string name="osm_edit_close_note">Закрити примітку OSM</string>
     <string name="osm_edit_comment_note">Коментувати примітку OSM</string>
     <string name="osm_login_descr">Увійдіть за допомогою методу OAuth або за допомогою своїх ім\'я користувача й паролю OSM.</string>
