@@ -3425,7 +3425,7 @@
     <string name="profile_type_custom_string">Власний профіль</string>
     <string name="shared_string_angle_param">Кут: %s°</string>
     <string name="shared_string_angle">Кут</string>
-    <string name="recalc_angle_dialog_descr">Додатковий прямий відрізок між моїм розташуванням та обчислюваним маршрутом відображатиметься, поки маршрут не буде переобчислено</string>
+    <string name="recalc_angle_dialog_descr">Додатковий прямий відтинок між моїм розташуванням та прокладеним маршрутом показуватиметься, поки маршрут не буде переобчислено</string>
     <string name="recalc_angle_dialog_title">Найменший кут між моїм розташуванням та маршрутом</string>
     <string name="shared_string_preparing">Підготування</string>
     <string name="shared_string_poi_types">Типи точок інтересу</string>
@@ -3886,13 +3886,13 @@
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Німецька (звичайна)</string>
     <string name="app_mode_light_aircraft">Легкий літак</string>
-    <string name="plan_route_join_segments">Об\'єднати відрізки</string>
+    <string name="plan_route_join_segments">Об\'єднати відтинки</string>
     <string name="plan_route_split_before">Розділити перед</string>
     <string name="plan_route_split_after">Розділити після</string>
-    <string name="plan_route_add_new_segment">Додати новий відрізок</string>
+    <string name="plan_route_add_new_segment">Додати новий відтинок</string>
     <string name="release_3_9">• Додано можливість експортувати та імпортувати всі дані, включно з налаштуваннями, ресурсами, моїми місцями
 \n
-\n• План маршруту: графіки для відрізків треків з маршрутом та додано можливість створення і зміни кількох відрізків треку
+\n• План маршруту: графіки для відтинків треків з маршрутом та додано можливість створення і зміни кількох відтинків треку
 \n
 \n• Додано метод автентифікації OAuth для OpenStreetMap, покращено вигляд діалогів OSM
 \n
@@ -3932,7 +3932,7 @@
     <string name="select_folder">Вибрати теку</string>
     <string name="select_folder_descr">Виберіть теку або додайте нову</string>
     <string name="shared_string_empty">Порожньо</string>
-    <string name="analyze_by_intervals">Аналізувати по інтервалах</string>
+    <string name="analyze_by_intervals">Аналізувати за інтервалами</string>
     <string name="upload_to_openstreetmap">Надіслати до OpenStreetMap</string>
     <string name="edit_track">Редагувати трек</string>
     <string name="rename_track">Перейменувати трек</string>
@@ -3996,9 +3996,9 @@
     <string name="activity_type_running_name">Біг</string>
     <string name="activity_type_car_name">Автівка</string>
     <string name="activity_type_motorbike_name">Мотоцикл</string>
-    <string name="select_segments">Вибір відрізків</string>
-    <string name="select_segments_description">%1$s містить більше ніж один відрізок, потрібно вибрати необхідну частину для навігації.</string>
-    <string name="segments_count">Відрізок %1$d</string>
+    <string name="select_segments">Вибір відтинків</string>
+    <string name="select_segments_description">%1$s містить більше ніж один відтинок, потрібно вибрати необхідну частину для навігації.</string>
+    <string name="segments_count">Відтинок %1$d</string>
     <string name="temporary_conditional_routing_descr">Застосовувати дорожні обмеження, які зараз діють на мапі</string>
     <string name="routing_attr_short_way_description">Оптимізований коротший маршрут (енергоощадження)</string>
     <string name="routing_attr_driving_style_description">Виберіть тип маршруту, щоб отримати коротший, швидший або безпечніший маршрут</string>
