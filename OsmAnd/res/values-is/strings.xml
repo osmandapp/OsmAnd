@@ -4437,4 +4437,55 @@
     <string name="shared_string_skip_warning">Sleppa yfirfærslunni\? OsmAnd er ekki lengur með aðgang að skránum þínum í sameiginlega geymslurýminu.
 \n
 \nForritið mun fara að nota nýju gagnamöppuna.</string>
+    <string name="purchases_feature_desc_android_auto">Færir ónettengd kort og leiðsögn OsmAnd yfir á skjáinn í bifreiðinni þinni og samtvinnar aðgerðir við stýringar ökutækisins.</string>
+    <string name="backup_delete_old_data_warning">Þú ert að fara að eyða breytingaferli áður innhlaðinna gagna.
+\n
+\nFyrirliggjandi útgáfa gagnanna verður vistuð á netþjóninum, en þú munt ekki geta endurstillt í breytingar sem gerðar hafa verið áður.</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Fáðu aðgang að tíðari uppfærslum korta. Vikulega, daglega eða á klukkustundar fresti. Uppfærslur eru sóttar í hlutum, einungis fyrir breytt svæði.</string>
+    <string name="release_4_1">• Bætt við frumstuðningi við Android Auto
+\n
+\n • Uppfærsla notandaviðmóts fyrir leit að UTM-hnitum
+\n
+\n • GPS-sía fyrir GPX-ferla
+\n
+\n • Viðmótshluti fyrir hæðarsnið (Pro)
+\n
+\n • Eftirlæti: hægt að skoða nýlega notuð tákn
+\n
+\n • Leiðagerð: notar valið snið eftir ræsingu
+\n
+\n • Lagað Mapillary-lag, viðbótin er núna sjálfgefið óvirk
+\n
+\n • Bætt við skjá til að sýsla með alla vinnsluferla
+\n
+\n • Snúningur korts er ekki núllstilltur eftir endurræsingu
+\n
+\n • Bætt myndgerð SRTM hæðarmerkja
+\n
+\n • Lagfærðar kortaskýringar á arabísku
+\n
+\n • Lagfærð ýmis vandamál við leiðagerð
+\n
+\n</string>
+    <string name="release_4_0">• Öryggisafrit í tölvuský
+\n
+\n • Bætt við næturham fyrir \"Topo\" kortastíl
+\n
+\n • Hægt að sækja hæðarlínur í fetum
+\n
+\n • Hægt er að lita ferla eftir hæð, hraða eða halla
+\n
+\n • Uppfærður gluggi \"Skráning ferðar\"
+\n
+\n • Fjarlægð með því að ýta fært úr mælistiku í sérstakan valkost
+\n
+\n • Skipuleggja leið: Hægt að breyta valkostum leiðsagnar, breyta uppsetningu korts og leita án þess að fara út úr leiðavali
+\n
+\n • Nýr \"Innkaup\" skjár með nákvæmun verslunarferli
+\n
+\n • Hægt að breyta útliti leiðar
+\n
+\n • OsmAnd Live uppfærslur færðar í \"Sótt gögn &gt; Uppfærslur\"
+\n
+\n</string>
 </resources>
