@@ -3723,7 +3723,7 @@
     <string name="attach_to_the_roads">Tengja við vegina</string>
     <string name="plan_route_exit_dialog_descr">Henda öllum óvistuðum breytingum í skipulögðu leiðinni\?</string>
     <string name="marker_save_as_track">Vista sem ferilskrá</string>
-    <string name="threshold_distance">Þolvik vegalengdar</string>
+    <string name="threshold_distance">Mörk vegalengdar</string>
     <string name="save_track_to_gpx_globally">Skrifa feril í GPX-skrá</string>
     <string name="navigate_to_track_descr">Leiðsegja frá staðsetningu minni að ferlinum</string>
     <string name="follow_track">Fylgja ferli</string>
@@ -4401,4 +4401,40 @@
 \nPunktar með hærra gildi verða faldir.</string>
     <string name="distance_between_points">Vegalengd milli punkta</string>
     <string name="shared_string_show_slope">Sýna halla</string>
+    <string name="shared_app_storage_description">Sameiginlegt minni er ekki lengur í boði vegna breytinga á reglum varðandi aðgengi geymslumiðla í Android.</string>
+    <string name="gps_filter_actions_description">OsmAnd mun beita breytingunum á ferilinn án þess að uppfæra skrána. Þú getur vistað breytingar handvirkt.</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Lita leiðir eftir stökum staðbundnum litum (ef til staðar í OpenStreetMap) og tákni í gönguleiðaflokkun.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Fáðu aðgang að OsmAnd Cloud tölvuskýi til að geyma öll OsmAnd-gögn á netinu. Engin gögn tapast við enduruppsetningu. Taktu öryggisafrit og endurheimtu allar upplýsingar á einfaldan hátt.</string>
+    <string name="use_routing_fallback_description">Nota varaleið við leiðagerð þegar ekki næst samband við leiðagerðarþjónustu á netinu.</string>
+    <string name="history_preferences_descr">Þú getur gert skráningu vinnsluferils óvirka sérstaklega fyrir hverja gerð vinnsluferils.</string>
+    <string name="upload_gpx_description_hint">Ef þetta er skilið eftir autt, verða heiti ferla notuð sem lýsing. Séu settar inn lýsingar, er þeim beitt á hvern feril fyrir sig.</string>
+    <string name="routeInfo_smoothness_description">Flokkun aksturseiginleika fyrir farartæki á hjólum, sérstaklega með tilliti til flatar og áferðar yfirborðs.</string>
+    <string name="backup_confilcts_descr">Ekki tókst að senda sumar skrár inn á netþjóninn því á honum er geymd nýrri útgáfa viðkomandi skráa.</string>
+    <string name="use_external_timestamps_description">Nota tímamerki frá leiðargerðarþjónustu á netinu til aðlögunar á áætluðum tímum og meðalhraða</string>
+    <string name="shared_storage_warning_description">Vegna breytinga frá og með nóvember 2021 á reglum varðandi aðgengi geymslumiðla í Android, getur OsmAnd 4.2 ekki lengur notað sameiginlegt geymslurými.
+\n
+\nFærðu gagnamöppuna úr sameiginlegu geymslurými yfir í tiltækt geymslurými, annars mun forritið missa aðgang að gögnunum þínum, eins og t.d. ónettengdum landakortum, GPX-ferlum, o.fl.</string>
+    <string name="routeInfo_roadClass_description">Lita leið eða ferillínu samkvæmt flokkun vegar.</string>
+    <string name="routeInfo_surface_description">Gefa upp yfirborðsupplýsingar fyrir vegi/stíga.</string>
+    <string name="routeInfo_winter_ice_road_description">Lita leið eða ferillínu samkvæmt vetrarflokkun vegar.</string>
+    <string name="routeInfo_tracktype_description">Lita leið eða ferillínu samkvæmt samsetningu yfirborðs. Er venjulega notað þegar vegakerfið er að mestu leiti án bundins slitlags.</string>
+    <string name="walking_route_osmc_description">Lita leiðir eftir stökum staðbundnum litum (ef til staðar í OpenStreetMap) og tegund vega (alþjóðlegt, héraðsbundið, staðbundið.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Lita leiðir eftir tegund vega í vegakerfi (alþjóðlegt, héraðsbundið, staðbundið.</string>
+    <string name="make_backup_descr">Það eru margar breytingar á þessu tæki, taktu öryggisafrit af þessum gögnum svo þau tapist síður.</string>
+    <string name="use_routing_fallback">Nota varaleiðagerð</string>
+    <string name="memory_allocated_for_routing_ds">Úthlutun á meira minni mun hraða útreikningum á löngum leiðum (yfir 500 km), en getur haft áhrif á afköst annarra forrita.
+\nHefur engin áhrif á útreikninga styttri leiða.</string>
+    <string name="approximate_route_description">Hengdu leiðina við vegi á kortinu til að fá fram allar beygjur og viðbótargögn, eins og t.d. áferð, tegund vega, o.fl.</string>
+    <string name="backup_error_subscription_was_used">Áskrift eða kynningarafsláttur notaður af öðrum notandaaðgangi %1$s</string>
+    <string name="backup_error_subscription_was_expired_descr">OsmAnd Pro áskriftin þín er útrunnin, endurnýjaðu hanta til að nota öryggisafrit. Þú getur ennþá endurheimt gögn úr tölvuskýinu.</string>
+    <string name="backup_delete_all_data_warning">Þú ert í þann mund að fara að eyða öllum gögnum sem send hafa verið inn á OsmAnd tölvuskýið, að meðtalinni útgáfuskráningunni.
+\n
+\nÞú munt ekki geta endurheimt eydd gögn.</string>
+    <string name="gps_filter_smoothing_desc">Settu mörk vegalengdar milli punkta.
+\nFerilpunktar sem eru ekki a.m.k. þetta langt frá síðasta sýnilega punkti verða faldir.
+\nHafðu í huga að mjög há mörk munu ofureinfalda lögun ferilsins.</string>
+    <string name="gps_filter_speed_altitude_desc">Einungis þeir ferilpunktar sem samsvara settu bili munu sjást á kortinu, aðrir verða faldir.</string>
+    <string name="shared_string_skip_warning">Sleppa yfirfærslunni\? OsmAnd er ekki lengur með aðgang að skránum þínum í sameiginlega geymslurýminu.
+\n
+\nForritið mun fara að nota nýju gagnamöppuna.</string>
 </resources>
