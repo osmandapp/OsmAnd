@@ -994,7 +994,7 @@
     <string name="local_osm_changes_backup_successful">Файл змін OSM створений в %1$s</string>
     <string name="osmand_distance_planning_plugin_name">Інструмент планування маршруту та підрахунку відстані</string>
     <string name="please_select_address">Виберіть місто або вулицю</string>
-    <string name="osmand_distance_planning_plugin_description">Створіть трек, торкаючись мапи або використовуючи чи змінюючи наявні файли GPX, щоб спланувати поїздку і виміряти відстань між точками. Результат може бути збережений як файл GPX, який можна використовувати для навігації.</string>
+    <string name="osmand_distance_planning_plugin_description">Створіть трек, торкнувшись мапи або використовуючи чи змінюючи наявні файли GPX, щоб спланувати поїздку і виміряти відстань між точками. Результат може бути збережений як файл GPX, який можна використовувати для навігації.</string>
     <string name="distance_measurement_finish_subtrack">Виміряти нову ділянку</string>
     <string name="local_indexes_cat_srtm">Горизонталі</string>
     <string name="context_menu_item_destination_point">Установити як пункт призначення</string>
