@@ -347,7 +347,7 @@
     <string name="m">м</string>
     <string name="old_map_index_is_not_supported">Застарілий формат даних мапи \'\'{0}\'\' не підтримується</string>
     <string name="poi_filter_car_aid">Автодопомога</string>
-    <string name="poi_filter_closest_poi">Найближчі цікаві точки (POI)</string>
+    <string name="poi_filter_closest_poi">Найближчі точки інтересу (POI)</string>
     <string name="poi_filter_custom_filter">Власний фільтр</string>
     <string name="poi_filter_food_shop">Продукти</string>
     <string name="poi_filter_for_tourists">Для туристів</string>
@@ -545,7 +545,7 @@
     <string name="downloading_list_indexes">Завантажується список доступних регіонів…</string>
     <string name="list_index_files_was_not_loaded">Не вдалося отримати список регіонів з https://osmand.net.</string>
     <string name="fav_points_edited">Збережена точка закладки була змінена</string>
-    <string name="fav_points_not_exist">Немає закладених точок</string>
+    <string name="fav_points_not_exist">Немає точок в закладках</string>
     <string name="update_existing">Замінити</string>
     <string name="only_show">Показати маршрут</string>
     <string name="follow">Почати супровід</string>
@@ -556,7 +556,7 @@
     <string name="opening_changeset">Відкривається набір змін…</string>
     <string name="closing_changeset">Закривається набір змін…</string>
     <string name="commiting_node">Надсилання вузла…</string>
-    <string name="loading_poi_obj">Завантаження POI…</string>
+    <string name="loading_poi_obj">Завантаження точок інтересу…</string>
     <string name="auth_failed">Помилка авторизації</string>
     <string name="failed_op">помилка</string>
     <string name="converting_names">Конвертація місцевих/англійських назв…</string>
@@ -564,7 +564,7 @@
     <string name="loading_postcodes">Завантажуються поштові індекси…</string>
     <string name="loading_streets">Завантажуються вулиці…</string>
     <string name="loading_cities">Завантажуються міста…</string>
-    <string name="poi">Корисне місце</string>
+    <string name="poi">Точка інтересу</string>
     <string name="error_occurred_saving_gpx">Не вдалося зберегти GPX-файл.</string>
     <string name="error_calculating_route">Не вдалося обчислити маршрут.</string>
     <string name="error_calculating_route_occured">Не вдалося обчислити маршрут.</string>
@@ -672,7 +672,7 @@
     <string name="poi_create_title">Створити POI</string>
     <string name="poi_remove_confirm_template">Видалити {0} (коментар)?</string>
     <string name="poi_remove_title">Вилучення POI</string>
-    <string name="shared_string_delete">Видалити</string>
+    <string name="shared_string_delete">Вилучити</string>
     <string name="poi_remove_success">Видалено</string>
     <string name="poi_action_add">додати</string>
     <string name="poi_action_change">змінити</string>
@@ -855,15 +855,15 @@
     <string name="intermediate_point">Проміжний пункт %1$s</string>
     <string name="context_menu_item_last_intermediate_point">Додати останньою проміжною точкою</string>
     <string name="context_menu_item_first_intermediate_point">Додати першою проміжною точкою</string>
-    <string name="add_as_last_destination_point">Додати останньою проміжною точкою</string>
-    <string name="add_as_first_destination_point">Додати першою проміжною точкою</string>
+    <string name="add_as_last_destination_point">Останній проміжний пункт призначення</string>
+    <string name="add_as_first_destination_point">Перший проміжний пункт призначення</string>
     <string name="replace_destination_point">Замінити пункт призначення</string>
     <string name="new_destination_point_dialog">Ви вже встановили пункт призначення:</string>
     <string name="shared_string_target_points">Точки призначення</string>
     <string name="intermediate_point_too_far">Проміжна точка %1$s занадто далека від найближчої дороги.</string>
     <string name="arrived_at_intermediate_point">Проміжного пункту досягнуто</string>
     <string name="context_menu_item_intermediate_point">Додати як проміжну точку</string>
-    <string name="ending_point_too_far">Кінцевий пункт занадто далеко від найближчої дороги.</string>
+    <string name="ending_point_too_far">Кінець маршруту знаходиться далеко від найближчої дороги.</string>
     <string name="add_tag">Додати мітку</string>
     <string name="btn_advanced_mode">Розширений режим…</string>
     <string name="poi_filter_parking">Стоянки</string>
@@ -990,7 +990,7 @@
     <string name="cancel_route">Відхилити маршрут\?</string>
     <string name="search_street_in_neighborhood_cities">Шукати вулицю в навколишніх містах</string>
     <string name="intermediate_items_sort_return">Оптимальний порядок проміжних точок на шляху до пункту призначення.</string>
-    <string name="intermediate_items_sort_by_distance">Впорядкувати від дверей до дверей</string>
+    <string name="intermediate_items_sort_by_distance">Впорядкувати за відстанню</string>
     <string name="local_osm_changes_backup_successful">Файл змін OSM створений в %1$s</string>
     <string name="osmand_distance_planning_plugin_name">Знаряддя підрахунку відстані і планування</string>
     <string name="please_select_address">Виберіть місто або вулицю</string>
@@ -1175,10 +1175,10 @@
     <string name="lang_it">Італійська</string>
     <string name="lang_ja">Японська</string>
     <string name="lang_ko">Корейська</string>
-    <string name="lang_lv">Латиська</string>
+    <string name="lang_lv">Латвійська</string>
     <string name="lang_lt">Литовська</string>
     <string name="lang_mr">Маратхі</string>
-    <string name="lang_no">Норвезька Bokmål</string>
+    <string name="lang_no">Норвезька Букмол</string>
     <string name="lang_fa">Перська</string>
     <string name="lang_pl">Польська</string>
     <string name="lang_pt">Португальська</string>
@@ -1197,7 +1197,7 @@
     <string name="lang_sr">Сербська (кирилиця)</string>
     <string name="lang_zh_cn">Китайська (спрощена)</string>
     <string name="lang_zh_tw">Китайська (традиційна)</string>
-    <string name="lang_vi">В’єтнамська</string>
+    <string name="lang_vi">В\'єтнамська</string>
     <string name="lang_cy">Валлійська</string>
     <string name="index_name_canada">Північна Америка - Канада</string>
     <string name="index_name_italy">Європа - Італія</string>
@@ -1309,7 +1309,7 @@
     <string name="shared_string_waypoints">Шляхові точки</string>
     <string name="way_alarms">Перешкоди</string>
     <string name="speak_favorites">Довколишні закладки</string>
-    <string name="speak_poi">Довколишні POI</string>
+    <string name="speak_poi">Точки інтересу поруч</string>
     <string name="confirm_every_run">Завжди питати</string>
     <string name="save_global_track_interval">Загальний інтервал запису треку</string>
     <string name="home_button">Дім</string>
@@ -1536,7 +1536,7 @@
     <string name="use_fast_recalculation_desc">Переобчислити лише початкову частину маршруту, корисно для тривалих подорожей.</string>
     <string name="light_theme">Світла</string>
     <string name="dark_theme">Темна</string>
-    <string name="lang_pms">П’ємонтський</string>
+    <string name="lang_pms">П\'ємонтська</string>
     <string name="rendering_attr_currentTrackColor_name">Колір GPX</string>
     <string name="rendering_attr_currentTrackWidth_name">Ширина GPX</string>
     <string name="rendering_value_red_name">Червоний</string>
@@ -1556,7 +1556,7 @@
     <string name="restart_is_required">Для застосування змін потрібен перезапуск.</string>
     <string name="lang_bn">Бенгальська</string>
     <string name="lang_tl">Тагальська</string>
-    <string name="lang_sh">Сербсько-Хорватьська</string>
+    <string name="lang_sh">Сербохорватська</string>
     <string name="lang_az">Азербайджанська</string>
     <string name="lang_br">Бретонська</string>
     <string name="lang_sq">Албанська</string>
@@ -1567,18 +1567,18 @@
     <string name="lang_la">Латинська</string>
     <string name="lang_ku">Курдська</string>
     <string name="lang_ta">Тамільська</string>
-    <string name="lang_ml">Малаямам</string>
+    <string name="lang_ml">Малаялам</string>
     <string name="lang_lb">Люксембурзька</string>
-    <string name="lang_os">Осетинський</string>
+    <string name="lang_os">Осетинська</string>
     <string name="lang_eo">Есперанто</string>
     <string name="lang_es_ar">Іспанська (Аргентина)</string>
     <string name="lang_nb">Норвезька Букмол</string>
     <string name="lang_vo">Волапюк</string>
     <string name="lang_th">Тайська</string>
     <string name="lang_te">Телугу</string>
-    <string name="lang_nn">Норвезька Нюнорськ</string>
-    <string name="lang_new">Невар / непал-бхаса</string>
-    <string name="lang_ms">Малазійська</string>
+    <string name="lang_nn">Норвезька Ненорськ</string>
+    <string name="lang_new">Ньюар / Непал Бхаса</string>
+    <string name="lang_ms">Малайзійська</string>
     <string name="lang_ht">Гаїтянська</string>
     <string name="lang_gl">Галісійська</string>
     <string name="lang_et">Естонська</string>
@@ -1812,12 +1812,12 @@
     <string name="road_blocked">Дорога заблокована</string>
     <string name="shared_string_select">Обрати</string>
     <string name="switch_start_finish">Поміняти місцями пункт відправлення і пункт призначення</string>
-    <string name="rendering_attr_hideIcons_name">Значки POI</string>
+    <string name="rendering_attr_hideIcons_name">Значки точок інтересу</string>
     <string name="item_removed">Елемент видалено</string>
     <string name="n_items_removed">Елементи видалено</string>
     <string name="shared_string_undo_all">Скасувати усе</string>
     <string name="shared_string_type">Тип</string>
-    <string name="starting_point">Відправна точка</string>
+    <string name="starting_point">Початок маршруту</string>
     <string name="shared_string_not_selected">Не вибрано</string>
     <string name="rec_split_clip_length">Тривалість кліпу</string>
     <string name="nm">nmi</string>
@@ -1916,7 +1916,7 @@
     <string name="rendering_value_medium_name">Середньо</string>
     <string name="rendering_value_bold_name">Жирно</string>
     <string name="no_map_markers_found">Додайте позначки на мапі</string>
-    <string name="no_waypoints_found">Маршрутні точки не знайдені</string>
+    <string name="no_waypoints_found">Маршрутних точок не знайдено</string>
     <string name="storage_permission_restart_is_required">Застосунок отримав дозвіл на запис у зовнішнє сховище. Потрібне перезавантаження програми.</string>
     <string name="shared_string_move_up">Перемістити ↑</string>
     <string name="shared_string_move_down">Перемістити ↓</string>
@@ -2072,8 +2072,8 @@
     <string name="lang_hsb">Верхньолужицька</string>
     <string name="lang_kab">Кабільська</string>
     <string name="lang_hu_formal">Угорська (офіційна)</string>
-    <string name="lang_sr_latn">Сербська (латиниця)</string>
-    <string name="lang_zh_hk">Китайська (Гонконг)</string>
+    <string name="lang_sr_latn">Сербська (латина)</string>
+    <string name="lang_zh_hk">Китайська (Hong Kong)</string>
     <string name="driving_region_australia">Австралія</string>
     <string name="quick_action_item_action">Дія %d</string>
     <string name="configure_screen_quick_action">Швидка дія</string>
@@ -2123,7 +2123,7 @@
     <string name="shared_string_time">Час</string>
     <string name="total_distance">Загальна відстань</string>
     <string name="routing_attr_height_obstacles_name">Використовувати дані висоти</string>
-    <string name="rendering_attr_depthContours_description">Показати контури глибини і точки.</string>
+    <string name="rendering_attr_depthContours_description">Показувати ізолінії та точки глибин.</string>
     <string name="rendering_attr_depthContours_name">Контури морських глибин</string>
     <string name="auto_split_recording_title">Авто-розрив запису після перерви</string>
     <string name="auto_split_recording_descr">Почати новий сегмент після 6 хвилинної перерви, новий трек після 2 годинної перерви, або новий файл після тривалої перерви (якщо змінилася дата).</string>
@@ -2154,7 +2154,7 @@
     <string name="quick_action_btn_tutorial_descr">Довге натискання з перетягуванням кнопки змінює її розташування на екрані.</string>
     <string name="quick_action_add_osm_bug">Додати примітку OSM</string>
     <string name="rendering_value_fine_name">Дуже тонкий</string>
-    <string name="navigate_point_olc">Відкритий код розташування (OLC)</string>
+    <string name="navigate_point_olc">Open Location Code (OLC)</string>
     <string name="quick_action_take_audio_note">Нова аудіопримітка</string>
     <string name="quick_action_take_video_note">Нова відеопримітка</string>
     <string name="quick_action_take_photo_note">Нова фотопримітка</string>
@@ -2248,7 +2248,7 @@
     <string name="index_item_depth_contours_osmand_ext">Контури морських глибин</string>
     <string name="index_item_depth_points_southern_hemisphere">Відмітки морських глибин південної півкулі</string>
     <string name="index_item_depth_points_northern_hemisphere">Відмітки морських глибин північної півкулі</string>
-    <string name="download_depth_countours">Контури морських глибин</string>
+    <string name="download_depth_countours">Ізолінії в морі</string>
     <string name="nautical_maps">Морські мапи</string>
     <string name="analyze_on_map">Аналізувати на мапі</string>
     <string name="shared_string_visible">Видимі</string>
@@ -2387,7 +2387,7 @@
 \nБільшість країн по всьому світу доступні для завантаження! 
 \nОтримайте надійний навігатор у Вашій країні — будь то Україна, Франція, Німеччина, Мексика, Великобританія, Іспанія, Нідерланди, США, Росія, Бразилія чи будь-яка інша…
 \n</string>
-    <string name="save_poi_too_many_uppercase">Назва містить занадто багато великих літер. Продовжити?</string>
+    <string name="save_poi_too_many_uppercase">Назва містить забагато великих літер. Продовжити\?</string>
     <string name="shared_string_add_photos">Додати світлини</string>
     <string name="mapillary_action_descr">Поділитися своїми вуличними видами цієї місцевості через Mapillary.</string>
     <string name="mapillary_widget">Віджет Mapillary</string>
@@ -2618,7 +2618,7 @@
     <string name="all_data">Усі дані</string>
     <string name="osm_notes">Примітки OSM</string>
     <string name="will_open_tomorrow_at">Відкриється завтра о</string>
-    <string name="rendering_attr_hidePOILabels_name">Підписи до цікавих точок</string>
+    <string name="rendering_attr_hidePOILabels_name">Назви точок інтересу</string>
     <string name="shared_string_without_name">Без назви</string>
     <string name="lang_lo">Лаоська</string>
     <string name="copy_location_name">Копіювати назву точки/POI</string>
@@ -2639,7 +2639,7 @@
     <string name="south_abbreviation">Пд</string>
     <string name="north_abbreviation">Пн</string>
     <string name="optional_point_name">Необов\'язкова назва точки</string>
-    <string name="transport_nearby_routes_within">Близькі маршрути в межах</string>
+    <string name="transport_nearby_routes_within">Найближчі маршрути в межах</string>
     <string name="transport_nearby_routes">В межах</string>
     <string name="distance_farthest">Відстань: спочатку найдальше</string>
     <string name="distance_nearest">Відстань: спочатку найближче</string>
@@ -2743,8 +2743,8 @@
     <string name="select_waypoints_category_description">Додати усі проміжні точки маршруту або вибрати окремі категорії.</string>
     <string name="shared_string_total">Усього</string>
     <string name="index_item_world_wikivoyage">Статті путівника Вікімандрів</string>
-    <string name="access_intermediate_arrival_time">Проміжний час прибуття</string>
-    <string name="map_widget_intermediate_time">Проміжний час</string>
+    <string name="access_intermediate_arrival_time">Прибуття в проміжний пункт призначення</string>
+    <string name="map_widget_intermediate_time">Час до проміжного пункту призначення</string>
     <string name="download_wikipedia_description">Завантажити статті Вікіпедії для %1$s, щоб читати їх в автономному режимі.</string>
     <string name="download_wikipedia_label">Завантаження даних Вікіпедії</string>
     <string name="open_in_browser_wiki">Відкрити статтю в Інтернеті</string>
@@ -2936,7 +2936,7 @@
     <string name="choose_data_to_share">Оберіть, даними якого типу Ви хотіли б поділитися:</string>
     <string name="downloaded_maps">Мап завантажено</string>
     <string name="visited_screens">Екранів відвідано</string>
-    <string name="collected_data_descr">Визначте, якими даними ви дозволяєте OsmAnd ділитися.</string>
+    <string name="collected_data_descr">Визначте, якими даними ви ділитимитеся з OsmAnd.</string>
     <string name="downloaded_maps_collect_descr">Допомагає нам зрозуміти популярність на мапі країни та областей.</string>
     <string name="visited_screens_collect_descr">Допомагає нам зрозуміти, які можливості OsmAnd є найпопулярнішими.</string>
     <string name="privacy_and_security_change_descr">Натискаючи \"Дозволити\", Ви погоджуєтесь з нашими %1$s</string>
@@ -2971,7 +2971,7 @@
     <string name="profile_alert_cant_delete_base">Ви не можете видалити основні профілі OsmAnd</string>
     <string name="profile_alert_need_save_title">Зберегти зміни</string>
     <string name="profile_alert_need_save_msg">Спочатку збережіть зміни в профілі</string>
-    <string name="profile_alert_delete_title">Видалити профіль</string>
+    <string name="profile_alert_delete_title">Вилучити профіль</string>
     <string name="profile_alert_delete_msg">Видалити профіль «%s»</string>
     <string name="select_base_profile_dialog_title">Виберіть профіль для початку</string>
     <string name="process_downloading_service">Служба завантаження OsmAnd</string>
@@ -3428,7 +3428,7 @@
     <string name="recalc_angle_dialog_descr">Додатковий прямий відрізок між моїм розташуванням та обчислюваним маршрутом відображатиметься, поки маршрут не буде переобчислено</string>
     <string name="recalc_angle_dialog_title">Найменший кут між моїм розташуванням та маршрутом</string>
     <string name="shared_string_preparing">Підготування</string>
-    <string name="shared_string_poi_types">Види POI</string>
+    <string name="shared_string_poi_types">Типи точок інтересу</string>
     <string name="shared_string_nothing_selected">Нічого не вибрано</string>
     <string name="shared_string_quick_actions">Швидкі дії</string>
     <string name="shared_string_profiles">Профілі</string>
@@ -3495,7 +3495,7 @@
     <string name="shared_string_languages">Мови</string>
     <string name="shared_string_language">Мова</string>
     <string name="shared_string_all_languages">Усі мови</string>
-    <string name="wiki_menu_download_descr">Для перегляду POI Вікіпедії на мапі потрібні додаткові мапи.</string>
+    <string name="wiki_menu_download_descr">Для перегляду точок інтересу з Вікіпедії на мапі потрібні додаткові мапи.</string>
     <string name="ui_customization_description">Установлення кількості елементів меню \"Скринька\", \"Налаштувати мапу\" та \"Контекстне меню\".
 \n
 \nВимкніть непотрібні розширення, щоб приховати всі їхні елементи керування %1$s.</string>
@@ -3519,20 +3519,20 @@
     <string name="lang_zhyue">Кантонська</string>
     <string name="lang_zhminnan">Південний Мін</string>
     <string name="lang_yo">Йоруба</string>
-    <string name="lang_war">Варей</string>
+    <string name="lang_war">Варайська</string>
     <string name="lang_uz">Узбецька</string>
     <string name="lang_ur">Урду</string>
     <string name="lang_tt">Татарська</string>
     <string name="lang_tg">Таджицька</string>
     <string name="lang_sco">Шотландська</string>
-    <string name="lang_scn">Сіцілійська</string>
+    <string name="lang_scn">Сицилійська</string>
     <string name="lang_pnb">Панджабі</string>
     <string name="lang_ne">Непальська</string>
     <string name="lang_nap">Неаполітанська</string>
     <string name="lang_my">Бірманська</string>
     <string name="lang_mn">Монгольська</string>
     <string name="lang_min">Мінангкабау</string>
-    <string name="lang_mg">Малаґасійська</string>
+    <string name="lang_mg">Малагасійська</string>
     <string name="lang_ky">Кирґизька</string>
     <string name="lang_kk">Казаська</string>
     <string name="lang_jv">Яванська</string>
@@ -3666,7 +3666,7 @@
 \n
 \nВиберіть %2$s, щоб видалити всі дані, пов\'язані з камерами контролю швидкості (повідомлення, попередження і POI), до повного перевстановлення OsmAnd.</string>
     <string name="keep_active">Лишати ввімкненим</string>
-    <string name="shared_string_uninstall">Видалити</string>
+    <string name="shared_string_uninstall">Вилучити</string>
     <string name="speed_cameras_alert">Попередження про камери контролю швидкості в деяких країнах заборонено законом.</string>
     <string name="shared_string_bearing">Орієнтація</string>
     <string name="item_deleted">%1$s видалено</string>
@@ -3679,9 +3679,9 @@
     <string name="use_volume_buttons_as_zoom_descr">Зміна масштабу мапи кнопками гучності пристрою.</string>
     <string name="use_volume_buttons_as_zoom">Масштабування кнопками гучності</string>
     <string name="lenght_limit_description">Зазначте довжину вашого автомобіля, для довгих транспортних засобів можуть застосовуватися деякі обмеження на маршрутах.</string>
-    <string name="quick_action_remove_next_destination">Видалити найближчу точку призначення</string>
+    <string name="quick_action_remove_next_destination">Вилучити найближчу точку призначення</string>
     <string name="please_provide_point_name_error">Укажіть назву пункту</string>
-    <string name="quick_action_remove_next_destination_descr">Видаляє наступний пункт призначення з маршруту. Якщо це кінцевий пункт призначення, навігація зупиниться.</string>
+    <string name="quick_action_remove_next_destination_descr">Вилучає наступний пункт призначення з маршруту. Якщо це кінцевий пункт призначення, навігація зупиниться.</string>
     <string name="search_download_wikipedia_maps">Завантажити мапи Вікіпедії</string>
     <string name="plugin_wikipedia_description">Отримайте відомості про визначні місця з Вікіпедії, кишенькового автономного путівника, що містить статті про місця та пункти призначення.</string>
     <string name="app_mode_motor_scooter">Моторолер</string>
@@ -3769,7 +3769,7 @@
     <string name="one_point_error">Додайте принаймні дві точки.</string>
     <string name="disable_recording_once_app_killed_descrp">Запис треку буде зупинено після припинення роботи застосунку через меню з переліком нещодавно запущених застосунків. (Індикатор, що повідомляє про роботу OsmAnd у тлі зникне з панелі сповіщень Android)</string>
     <string name="simplified_track">Спрощений трек</string>
-    <string name="simplified_track_description">Буде збережено лише лінію маршруту, а проміжні точки буде видалено.</string>
+    <string name="simplified_track_description">Буде збережено лише лінію маршруту, а проміжні точки буде вилучено.</string>
     <string name="shared_string_file_name">Назва файлу</string>
     <string name="shared_string_redo">Повторити</string>
     <string name="release_3_8">• Оновлено функції планування маршруту: дозволено застосувати різні типи переходів для кожного сегмента і прив\'язати будь-який трек до доріг
@@ -3849,10 +3849,10 @@
     <string name="markers_history">Історія позначок</string>
     <string name="send_files_to_openstreetmap">Надіслати файл GPX на OpenStreetMap</string>
     <string name="enter_text_separated">Введіть мітки через коми.</string>
-    <string name="gpx_upload_public_visibility_descr">«Громадський» означає, що трасування показано загальнодоступно у ваших GPS-трасуваннях та у загальнодоступних списках GPS-трасування, а також у загальнодоступному списку трасування з позначками часу в необробленому вигляді. Дані, що подаються через API, не посилаються на вашу сторінку трасування. Мітки часу точок трасування недоступні через загальнодоступний API GPS і не впорядковані хронологічно.</string>
-    <string name="gpx_upload_private_visibility_descr">«Приватне» означає, що трасування не з\'являється в жодному загальнодоступному списку, але контрольні точки з нього не у хронологічному порядку доступні через загальнодоступний API GPS без позначок часу.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">«Ідентифікований» означає, що трасування буде показано публічно у вашому трасуванні GPS і в загальнодоступних списках трасування GPS, тобто інші користувачі зможуть завантажити необроблене трасування та пов\'язати його з вашим користувацьким ім\'ям. Загальнодоступні дані трасування з GPS API, що обслуговуються за допомогою API точок відстеження, посилаються на початкову сторінку трасування.</string>
-    <string name="gpx_upload_trackable_visibility_descr">«Відстежуваний» означає, що трек не з\'явиться в жодному загальнодоступному списку, але обробка точок з позначками часу від нього (які не можуть бути безпосередньо пов’язані з вами) виконується за допомогою завантажень із загальнодоступного API GPS.</string>
+    <string name="gpx_upload_public_visibility_descr">«Публічний» означає що трек буде видно публічно в \"Ваших GPS треках\" і в загальному списку GPS треків, разом з мітками часу у сирцевому вигляді. Дані, що надаються через API, не посилаються на сторінку з вашими треками. Мітки часу точок треку недоступні через загальнодоступний API GPS і не впорядковані хронологічно.</string>
+    <string name="gpx_upload_private_visibility_descr">«Приватний» означає що треки не будуть видимими в публічних списках, але точки треку будуть доступні через публічний GPS API без міток часу.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">«Ідентифікований» означає що трек буде видно публічно у \"Ваших GPS треках\" і в загальному списку GPS треків, тобто інші користувачі зможуть завантажувати оригінальний трек і асоціювати його з вашим нікнеймом. Дані отримані через API треків будуть посилатися на Вашу оригінальну сторінку із треками. Мітки часу для точок треку доступні через публічний GPS API.</string>
+    <string name="gpx_upload_trackable_visibility_descr">«Відстежуваний» означає, що трек не з\'явиться в жодному загальнодоступному списку, але обробка точок з позначками часу від нього (які не можуть бути безпосередньо пов\'язані з вами) виконується за допомогою завантажень із загальнодоступного API GPS.</string>
     <string name="osm_edit_close_note">Закрити примітку OSM</string>
     <string name="osm_edit_comment_note">Коментувати примітку OSM</string>
     <string name="osm_login_descr">Увійдіть за допомогою методу OAuth або за допомогою своїх ім\'я користувача й паролю OSM.</string>
@@ -3968,7 +3968,7 @@
     <string name="delete_online_routing_engine">Видалити цей рушій мережної маршрутизації\?</string>
     <string name="context_menu_read_full">Читати повністю</string>
     <string name="context_menu_edit_descr">Змінити опис</string>
-    <string name="delete_waypoints">Видалити маршрутні точки</string>
+    <string name="delete_waypoints">Вилучити маршрутні точки</string>
     <string name="copy_to_map_markers">Копіювати до позначок мапи</string>
     <string name="copy_to_map_favorites">Копіювати до закладок</string>
     <string name="upload_photo">Вивантаження</string>
@@ -4080,7 +4080,7 @@
     <string name="announce_when_exceeded">Повідомляти про перевищення</string>
     <string name="user_points">Користувацькі точки</string>
     <string name="output">Вивід</string>
-    <string name="srtm_download_list_help_message">OsmAnd надає дані горизонталей у метрах і футах. Щоб змінити формат, потрібно повторно завантажити файл.</string>
+    <string name="srtm_download_list_help_message">OsmAnd надає дані про ізолінії в метрах та футах. Щоб змінити формат, потрібно повторно завантажити файл.</string>
     <string name="srtm_unit_format">Варіант одиниць вимірювання горизонталей</string>
     <string name="shared_string_feet">фути</string>
     <string name="srtm_download_single_help_message">Виберіть потрібний формат. Щоб змінити його, потрібно повторно завантажувати файл.</string>
@@ -4245,7 +4245,7 @@
     <string name="logout_from_osmand_cloud_decsr">Вийти\?
 \nЩоб створити резервну копію даних або відновити їх, потрібно буде ввійти ще раз.</string>
     <string name="backup_error_subscription_was_expired_descr">Термін дії передплати osmAnd Pro завершився, поновіть її, щоб користуватись резервним копіюванням. Ви досі можете відновити дані з Хмари.</string>
-    <string name="contour_lines_hillshades_slope">Горизонталі, горби, нахил</string>
+    <string name="contour_lines_hillshades_slope">Ізолінії, відмивка рельєфу, схили</string>
     <string name="backup_deleting_all_data">Видалення всіх даних…</string>
     <string name="backup_deleted_all_data">Видалено всі дані.</string>
     <string name="backup_deleting_all_data_descr">Зачекайте, поки OsmAnd видалить ваші дані з хмари. Усі дані на пристрої залишаться незміненими.</string>
@@ -4303,7 +4303,7 @@
     <string name="benefits_for_contributors">Переваги для активних учасників OSM</string>
     <string name="pro_features">Можливості Pro</string>
     <string name="purchases_restored">Покупки відновлено</string>
-    <string name="grey_color_undefined">Частини без даних сірі.</string>
+    <string name="grey_color_undefined">Частки без даних – сірі.</string>
     <string name="no_activity_for_intent">Установіть відповідний застосунок, що може виконувати цю дію.</string>
     <string name="osm_live_payment_subscription_management_amz">Оплата стягується з вашого облікового запису Amazon під час підтвердження покупки.
 \n
