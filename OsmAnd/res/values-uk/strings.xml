@@ -3252,7 +3252,7 @@
     <string name="layer_osm_edits">Правки OSM</string>
     <string name="quick_action_contour_lines_descr">Увімк/вимк показ ізоліній на мапі.</string>
     <string name="quick_action_hillshade_descr">Кнопка, що показує чи приховує рельєф на мапі.</string>
-    <string name="tts_initialization_error">Не вдається запустити рушій перетворення тексту на голосові інструкції.</string>
+    <string name="tts_initialization_error">Не вдається запустити рушій перетворення тексту на голосові вказівки.</string>
     <string name="simulate_your_location_gpx_descr">Відтворити свою позицію за допомогою записаного треку GPX.</string>
     <string name="export_profile">Експорт профілю</string>
     <string name="exported_osmand_profile">Профіль OsmAnd: %1$s</string>
@@ -3272,7 +3272,7 @@
     <string name="clear_confirmation_msg">Очистити %1$s\?</string>
     <string name="download_map_dialog">Діалогове вікно завантаження мапи</string>
     <string name="dialogs_and_notifications_title">Діалоги та сповіщення</string>
-    <string name="dialogs_and_notifications_descr">Керуйте виринаючими вікнами, діалогами та сповіщеннями.</string>
+    <string name="dialogs_and_notifications_descr">Керуйте спливними вікнами, діалогами та сповіщеннями.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Вузлові мережі</string>
     <string name="suggested_maps">Пропоновані мапи</string>
     <string name="suggested_maps_descr">Ці мапи потрібні для роботи втулка.</string>
@@ -3280,7 +3280,7 @@
     <string name="added_profiles_descr">Профілі, додані втулком</string>
     <string name="shared_string_turn_off">Вимкнути</string>
     <string name="new_plugin_added">Додано новий втулок</string>
-    <string name="join_segments">Об’єднати відрізки</string>
+    <string name="join_segments">Об’єднати відтинки</string>
     <string name="add_new_profile_q">Додати новий профіль \'%1$s\'\?</string>
     <string name="save_heading">Додавати напрямок</string>
     <string name="save_heading_descr">Зберігати напрямок для кожної точки треку під час запису.</string>
