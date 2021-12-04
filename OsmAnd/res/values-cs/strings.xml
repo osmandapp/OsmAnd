@@ -1620,7 +1620,7 @@
     <string name="lang_bn">Bengálština</string>
     <string name="lang_tl">Tagalština</string>
     <string name="lang_sh">Srbochorvatština</string>
-    <string name="lang_az">Ázerbájdžánsky</string>
+    <string name="lang_az">Ázerbájdžánština</string>
     <string name="lang_br">Bretonština</string>
     <string name="lang_sq">Albánština</string>
     <string name="lang_is">Islandština</string>
@@ -2057,7 +2057,7 @@
     <string name="new_filter">Nový filtr</string>
     <string name="new_filter_desc">Zadejte prosím název pro nový filtr, který bude přidán na záložku \"Kategorie“.</string>
     <string name="rendering_value_fine_name">Jemné</string>
-    <string name="lang_kab">Kabylsky</string>
+    <string name="lang_kab">Kabylština</string>
     <string name="driving_region_australia">Austrálie</string>
     <string name="route_calculation">Výpočet trasy</string>
     <string name="route_roundabout_short">Použijte %1$d. výjezd a pokračujte</string>
@@ -2066,8 +2066,8 @@
     <string name="routing_attr_allow_motorway_description">Povolí jízdu po dálnicích.</string>
     <string name="wiki_around">Články Wikipedie v okolí</string>
     <string name="search_map_hint">Město nebo oblast</string>
-    <string name="lang_sr_latn">Srbsky (latinka)</string>
-    <string name="lang_zh_hk">Čínsky (Hong Kong)</string>
+    <string name="lang_sr_latn">Srbština (latinka)</string>
+    <string name="lang_zh_hk">Čínština (Hong Kong)</string>
     <string name="rendering_attr_contourDensity_description">Hustota vrstevnic</string>
     <string name="rendering_attr_contourDensity_name">Hustota vrstevnic</string>
     <string name="rendering_value_high_name">Velká</string>
@@ -2194,7 +2194,7 @@
     <string name="routing_attr_driving_style_safety_name">Preferovat vedlejší silnice</string>
     <string name="relief_smoothness_factor_descr">Preferovaný terén: rovinatý nebo kopcovitý.</string>
     <string name="shared_string_slope">Svah</string>
-    <string name="lang_ber">Berbersky</string>
+    <string name="lang_ber">Berberština</string>
     <string name="do_not_send_anonymous_app_usage">Neposílat anonymní statistiky používání aplikace</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd sbírá anonymní informace o tom, které části aplikace používáte. Nikdy se neodesílá poloha, nic co je zapisováno do aplikace nebo detaily prohlížených oblastí, hledání nebo stahování.</string>
     <string name="do_not_show_startup_messages">Nezobrazovat zprávy při spuštění</string>
@@ -2478,7 +2478,7 @@
     <string name="will_open_tomorrow_at">Otevírá zítra v</string>
     <string name="shared_string_marker">Značka</string>
     <string name="osm_recipient_stat">Počet úprav %1$s, součet %2$s mBTC</string>
-    <string name="lang_lo">Laosky</string>
+    <string name="lang_lo">Laoština</string>
     <string name="show_closed_notes">Zobrazit zavřené poznámky</string>
     <string name="switch_osm_notes_visibility_desc">Zobrazit nebo skrýt OpenStreetMap poznámky na mapě.</string>
     <string name="gpx_file_desc">GPX - vhodné pro export do JOSM nebo jiných editorů OSM.</string>
@@ -3071,7 +3071,7 @@
     <string name="shared_string_default">Výchozí</string>
     <string name="new_route_calculated_dist_dbg">Trasa: vzdálenost %1$s, potřebný čas %2$s
 \nVýpočet: %3$.1f sekund, %4$d cest, %5$d dlaždic)</string>
-    <string name="lang_oc">Okcitánsky</string>
+    <string name="lang_oc">Okcitánština</string>
     <string name="app_mode_wagon">Dodávkové auto</string>
     <string name="app_mode_pickup_truck">Pickup auto</string>
     <string name="day">Den</string>
