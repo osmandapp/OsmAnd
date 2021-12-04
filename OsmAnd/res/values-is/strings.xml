@@ -4325,7 +4325,7 @@
     <string name="start_copying">Hefja afritun</string>
     <string name="skip_confirmation">Já, sleppa</string>
     <string name="shared_storage">Samnýtt geymslurými</string>
-    <string name="migration_files_present">%1$d skrár (%2$s) eru til staðar á völdu staðsetningunni \'%3$s\'.</string>
+    <string name="migration_files_present">Það eru %1$d skrár (%2$s) til staðar á völdu staðsetningunni \'%3$s\'.</string>
     <string name="fold_unfold">breiða/brjóta</string>
     <string name="shared_string_hide_all">Fela allt</string>
     <string name="storage_found_files_descr">Ýttu á \"%1$s\" til að afrita %2$s skrár úr \"%3$s\" yfir í \"%4$s\". Þetta gæti tekið nokkra stund.</string>
@@ -4378,4 +4378,27 @@
     <string name="routing_attr_prefer_tactile_paving_name">Kjósa yfirborð með snertimerkingum</string>
     <string name="exit_pan_mode_descr">Ýttu á \'Velja\' til að hætta í hliðrunarham</string>
     <string name="shared_storage_warning_title">Breytingar á reglum varðandi aðgengi geymslumiðla</string>
+    <string name="gps_filter_smoothing">Mýking</string>
+    <string name="save_changes_into_file">Vista breytingar í skrá</string>
+    <string name="save_as_copy">Vista sem afrit</string>
+    <string name="shared_string_gps_filter">GPS-sía</string>
+    <string name="storage_migration_wrong_folder_warning">Fann engin OsmAnd-gögn í valinni möppu. Reyndu aftur.</string>
+    <string name="exit_without_saving_warning">Loka án þess að vista\?</string>
+    <string name="shared_storage_last_step">Þú getur skilgreint nýja gagnamöppu síðar.</string>
+    <string name="shared_storage_migration_descr">Vegna breytinga á reglum varðandi aðgengi geymslumiðla í Android, getur OsmAnd ekki lengur notað %1$s.
+\n
+\nAfritaðu öll gögnin þín í nýju möppuna.</string>
+    <string name="quick_action_toggle_preference">Víxlhnappur til að breyta kjörstillingu.</string>
+    <string name="shared_string_hide_slope">Fela halla</string>
+    <string name="shared_string_grade">Gráða</string>
+    <string name="shared_string_uphill">Hækkun</string>
+    <string name="shared_string_downhill">Lækkun</string>
+    <string name="elevation_profile">Hæðarsnið</string>
+    <string name="gps_filter_precision">GPS-nákvæmni</string>
+    <string name="shared_string_precision">Nákvæmni</string>
+    <string name="shared_string_statistics">Tölfræði</string>
+    <string name="gps_filter_hdop_desc">Settu hámark ásættanlegs gildis fyrir HDOP.
+\nPunktar með hærra gildi verða faldir.</string>
+    <string name="distance_between_points">Vegalengd milli punkta</string>
+    <string name="shared_string_show_slope">Sýna halla</string>
 </resources>
