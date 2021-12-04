@@ -4456,4 +4456,6 @@
     <string name="shared_string_grade">ציון</string>
     <string name="shared_string_hide_slope">הסתרת שיפוע</string>
     <string name="shared_string_show_slope">הצגת שיפוע</string>
+    <string name="use_routing_fallback_description">להשתמש בניווט בלתי מקוון כשאין אפשרות להציע ניווט מקוון.</string>
+    <string name="use_routing_fallback">להשתמש בנסיגה של הניווט</string>
 </resources>

@@ -4552,4 +4552,6 @@
     <string name="shared_string_gps_filter">مرشح GPS</string>
     <string name="gps_filter_smoothing">التنعيم</string>
     <string name="gps_filter_precision">دقة تحديد المواقع</string>
+    <string name="use_routing_fallback_description">استخدم التوجيه دون اتصال عندما يتعذر الوصول إلى التوجيه عبر الإنترنت.</string>
+    <string name="use_routing_fallback">استخدام التوجيه الاحتياطي</string>
 </resources>

@@ -4481,4 +4481,6 @@
     <string name="shared_string_downhill">Klesání</string>
     <string name="shared_string_hide_slope">Skrýt sklon</string>
     <string name="shared_string_grade">Stupeň</string>
+    <string name="use_routing_fallback_description">Použít offline plánování, pokud online služba není dosažitelná.</string>
+    <string name="use_routing_fallback">Použít náhradní plánovač</string>
 </resources>
