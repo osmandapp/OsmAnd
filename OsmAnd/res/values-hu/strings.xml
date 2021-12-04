@@ -4475,4 +4475,6 @@
 \nVegye figyelembe, hogy a túl magas korlát túlságosan leegyszerűsítheti a nyomvonalat.</string>
     <string name="gps_filter_actions_description">Az OsmAnd a fájl frissítése nélkül fogja alkalmazni a nyomvonal változásait. Kézileg mentheti a módosításokat.</string>
     <string name="storage_migration_wrong_folder_warning">Nem találhatók OsmAnd adatok a kiválasztott mappában. Próbálja újra.</string>
+    <string name="use_routing_fallback_description">Offline útvonaltervezés használata, ha az online útvonaltervezés nem érhető el.</string>
+    <string name="use_routing_fallback">Útvonaltervezési tartalék használata</string>
 </resources>
