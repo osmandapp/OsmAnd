@@ -4554,4 +4554,6 @@
     <string name="gps_filter_precision">دقة تحديد المواقع</string>
     <string name="use_routing_fallback_description">استخدم التوجيه دون اتصال عندما يتعذر الوصول إلى التوجيه عبر الإنترنت.</string>
     <string name="use_routing_fallback">استخدام التوجيه الاحتياطي</string>
+    <string name="created_on">تم الإنشاء في</string>
+    <string name="shared_string_size">الحجم</string>
 </resources>
