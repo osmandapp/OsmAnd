@@ -1922,7 +1922,7 @@
     <string name="shared_string_move_down">Перемістити ↓</string>
     <string name="finish_navigation">Закінчити навігацію</string>
     <string name="avoid_road">Уникати доріг</string>
-    <string name="storage_directory_readonly_desc">Використовується внутрішня пам\'ять, бо обрана тека для зберігання даних доступна лише для читання. Будь ласка, виберіть теку з можливістю запису.</string>
+    <string name="storage_directory_readonly_desc">Використовується внутрішня пам\'ять, оскільки обрана тека для зберігання даних доступна лише для читання. Виберіть теку з можливістю запису.</string>
     <string name="storage_directory_shared">Спільне сховище</string>
     <string name="shared_string_topbar">Верхня панель</string>
     <string name="full_report">Повний звіт</string>
