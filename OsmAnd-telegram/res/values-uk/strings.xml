@@ -115,7 +115,7 @@
     <string name="not_logged_in">Ви не увійшли до системи</string>
     <string name="shared_string_continue">Продовжити</string>
     <string name="shared_string_cancel">Скасувати</string>
-    <string name="shared_string_settings">Параметри</string>
+    <string name="shared_string_settings">Налаштування</string>
     <string name="no_location_permission">Застосунок не має дозволу до отримання даних позиціювання.</string>
     <string name="gps_not_available">Будь ласка, увімкніть «Позиціювання» у системних налаштуваннях</string>
     <string name="osmand_service">Режим тла</string>
@@ -161,7 +161,7 @@
     <string name="send_my_location_desc">Установіть мінімальний інтервал між надсиланням позиції.</string>
     <string name="expire_at">Діє до</string>
     <string name="last_update_from_telegram">Нещодавнє оновлення з Telegram</string>
-    <string name="shared_string_ok">Гаразд</string>
+    <string name="shared_string_ok">Так</string>
     <string name="timeline_available_for_free_now">Хронологія тепер доступна безкоштовно.</string>
     <string name="disable_monitoring">Вимкнути моніторинг</string>
     <string name="shared_string_telegram">Telegram</string>
