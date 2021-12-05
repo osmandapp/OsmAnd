@@ -457,8 +457,8 @@
     <string name="lang_bg">Búlgaro</string>
     <string name="lang_ca">Catalão</string>
     <string name="lang_hr">Croata</string>
-    <string name="lang_cs">Tcheco</string>
-    <string name="lang_da">Dinamarquês</string>
+    <string name="lang_cs">Tcheca</string>
+    <string name="lang_da">Dinamarquesa</string>
     <string name="lang_nl">Holandês</string>
     <string name="lang_fi">Finlandês</string>
     <string name="lang_fr">Francês</string>
@@ -3535,7 +3535,7 @@
     <string name="lang_gu">Guzerate</string>
     <string name="lang_cv">Tchuvache</string>
     <string name="lang_ce">Checheno</string>
-    <string name="lang_bar">Bávaro</string>
+    <string name="lang_bar">Bávara</string>
     <string name="lang_ba">Basquir</string>
     <string name="lang_an">Aragonês</string>
     <string name="lang_lmo">Lombardo</string>
