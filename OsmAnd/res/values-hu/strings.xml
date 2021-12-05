@@ -4477,4 +4477,6 @@
     <string name="storage_migration_wrong_folder_warning">Nem találhatók OsmAnd adatok a kiválasztott mappában. Próbálja újra.</string>
     <string name="use_routing_fallback_description">Offline útvonaltervezés használata, ha az online útvonaltervezés nem érhető el.</string>
     <string name="use_routing_fallback">Útvonaltervezési tartalék használata</string>
+    <string name="created_on">Létrehozás ideje</string>
+    <string name="shared_string_size">Méret</string>
 </resources>
