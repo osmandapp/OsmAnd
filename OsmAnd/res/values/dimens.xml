@@ -18,5 +18,4 @@
     <dimen name="line_spacing_extra_description">5dp</dimen>
 	<dimen name="price_button_bottom_padding">2dp</dimen>
     <dimen name="price_bottom_title_bottom_padding">1dp</dimen>
-
 </resources>
