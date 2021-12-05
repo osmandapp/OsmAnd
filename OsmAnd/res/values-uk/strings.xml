@@ -1393,7 +1393,7 @@
     <string name="speak_pedestrian">Пішохідні переходи</string>
     <string name="rendering_attr_roadStyle_name">Стиль доріг</string>
     <string name="rendering_value_default_name">Типово</string>
-    <string name="rendering_value_orange_name">Помаранчевий</string>
+    <string name="rendering_value_orange_name">Жовтогарячий</string>
     <string name="rendering_value_germanRoadAtlas_name">Атлас доріг Німеччини</string>
     <string name="traffic_warning_railways">Залізничний переїзд</string>
     <string name="traffic_warning_pedestrian">Пішохідний перехід</string>
@@ -1437,7 +1437,7 @@
 \nСпеціальне розширення-мапа для OsmAnd надасть усі навігаційні знаки, як для плавання у внутрішніх водах, так і для прибережної навігації. Опис кожного навігаційного знаку містить подробиці, необхідні для їх ідентифікації, а також їх значення (категорія, форма, колір, послідовність, номер та інше).
 \n
 \nЩоб повернутися до одного зі звичайних стилів OsmAnd, просто вимкніть цей втулок або змініть «Стиль мапи» у розділі «Налаштування мапи» на потрібний.</string>
-    <string name="osmand_parking_overdue">прострочено</string>
+    <string name="osmand_parking_overdue">застаріло</string>
     <string name="action_create">Створити дію</string>
     <string name="action_modify">Змінити дію</string>
     <string name="action_delete">Вилучити дію</string>
@@ -1490,7 +1490,7 @@
     <string name="confirm_usage_speed_cameras">У багатьох країнах (Німеччина, Франція, Італія та інші) використання детекторів камер контролю швидкості не дозволено законом. OsmAnd не несе ніякої відповідальності, якщо Ви порушите закон. Будь ласка, натисніть кнопку „Так“, тільки якщо Ви маєте право використовувати цю функцію.</string>
     <string name="welmode_download_maps">Завантаження мап</string>
     <string name="welcome_select_region">Щоб правильно показувати дорожні знаки та правила дорожнього руху, будь ласка, виберіть Ваш регіон:</string>
-    <string name="welcome_text">OsmAnd надає можливість перегляд глобальної мапи офлайн разом із навігацією.</string>
+    <string name="welcome_text">OsmAnd надає можливість перегляду глобальної мапи офлайн разом із навігацією.</string>
     <string name="welcome_header">Ласкаво просимо</string>
     <string name="current_route">Поточний маршрут</string>
     <string name="osm_changes_added_to_local_edits">Зміни OSM додані до локального набору змін</string>
@@ -1586,7 +1586,7 @@
     <string name="archive_wikipedia_data">У Вас є старі несумісні дані з Вікіпедії. Заархівувати їх?</string>
     <string name="download_wikipedia_files">Завантажити додаткові дані з Вікіпедії (%1$s Мб)\?</string>
     <string name="gps_network_not_enabled">Служба визначення розташування вимкнена. Увімкнути\?</string>
-    <string name="disable_recording_once_app_killed">Зупиняти запис логів по виході із застосунку</string>
+    <string name="disable_recording_once_app_killed">Зупиняти запис після виходу з застосунку</string>
     <string name="shared_string_import2osmand">Імпортувати до OsmAnd</string>
     <string name="read_full_article">Читати повну статтю (онлайн)</string>
     <string name="local_indexes_cat_wiki">Вікіпедія</string>
@@ -1600,14 +1600,14 @@
     <string name="download_wikipedia_maps">Вікіпедія</string>
     <string name="rendering_value_default13_name">Типово (13)</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Типово (напівпрозорий блакитний)</string>
-    <string name="rendering_value_translucent_orange_name">Напівпрозорий помаранчевий</string>
+    <string name="rendering_value_translucent_orange_name">Напівпрозорий жовтогарячий</string>
     <string name="shared_string_update">Оновити</string>
     <string name="rendering_attr_horseRoutes_name">Кінні маршрути</string>
     <string name="no_address_found">Адреса не визначена</string>
     <string name="shared_string_near">Поблизу</string>
     <string name="shared_string_hide">Приховати</string>
-    <string name="av_video_quality_low">Низька якість</string>
-    <string name="av_video_quality_high">Висока якість</string>
+    <string name="av_video_quality_low">Найнижча якість</string>
+    <string name="av_video_quality_high">Найвища якість</string>
     <string name="av_video_quality">Якість відео</string>
     <string name="av_video_quality_descr">Виберіть якість відео.</string>
     <string name="av_audio_format">Формат аудіо</string>
