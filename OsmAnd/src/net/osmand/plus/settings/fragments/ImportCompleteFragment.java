@@ -180,7 +180,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 			return;
 		}
 		dismissFragment();
-		fm.popBackStack(DRAWER_SETTINGS_ID + ".new", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+		fm.popBackStack(DRAWER_SETTINGS_ID, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		switch (type) {
 			case GLOBAL:
 			case PROFILE:

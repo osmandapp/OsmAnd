@@ -1439,7 +1439,7 @@
     <string name="shared_string_disable">Zakázat</string>
     <string name="plugin_install_needs_network">Pro instalaci tohoto modulu musíte být online.</string>
     <string name="get_plugin">Získat</string>
-    <string name="route_points">Body cesty</string>
+    <string name="route_points">Body trasy</string>
     <string name="simulate_your_location">Simulovat polohu</string>
     <string name="short_location_on_map">Šířka %1$s
 \nDélka %2$s</string>
@@ -1620,7 +1620,7 @@
     <string name="lang_bn">Bengálština</string>
     <string name="lang_tl">Tagalština</string>
     <string name="lang_sh">Srbochorvatština</string>
-    <string name="lang_az">Ázerbájdžánsky</string>
+    <string name="lang_az">Ázerbájdžánština</string>
     <string name="lang_br">Bretonština</string>
     <string name="lang_sq">Albánština</string>
     <string name="lang_is">Islandština</string>
@@ -2057,7 +2057,7 @@
     <string name="new_filter">Nový filtr</string>
     <string name="new_filter_desc">Zadejte prosím název pro nový filtr, který bude přidán na záložku \"Kategorie“.</string>
     <string name="rendering_value_fine_name">Jemné</string>
-    <string name="lang_kab">Kabylsky</string>
+    <string name="lang_kab">Kabylština</string>
     <string name="driving_region_australia">Austrálie</string>
     <string name="route_calculation">Výpočet trasy</string>
     <string name="route_roundabout_short">Použijte %1$d. výjezd a pokračujte</string>
@@ -2066,8 +2066,8 @@
     <string name="routing_attr_allow_motorway_description">Povolí jízdu po dálnicích.</string>
     <string name="wiki_around">Články Wikipedie v okolí</string>
     <string name="search_map_hint">Město nebo oblast</string>
-    <string name="lang_sr_latn">Srbsky (latinka)</string>
-    <string name="lang_zh_hk">Čínsky (Hong Kong)</string>
+    <string name="lang_sr_latn">Srbština (latinka)</string>
+    <string name="lang_zh_hk">Čínština (Hong Kong)</string>
     <string name="rendering_attr_contourDensity_description">Hustota vrstevnic</string>
     <string name="rendering_attr_contourDensity_name">Hustota vrstevnic</string>
     <string name="rendering_value_high_name">Velká</string>
@@ -2194,7 +2194,7 @@
     <string name="routing_attr_driving_style_safety_name">Preferovat vedlejší silnice</string>
     <string name="relief_smoothness_factor_descr">Preferovaný terén: rovinatý nebo kopcovitý.</string>
     <string name="shared_string_slope">Svah</string>
-    <string name="lang_ber">Berbersky</string>
+    <string name="lang_ber">Berberština</string>
     <string name="do_not_send_anonymous_app_usage">Neposílat anonymní statistiky používání aplikace</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd sbírá anonymní informace o tom, které části aplikace používáte. Nikdy se neodesílá poloha, nic co je zapisováno do aplikace nebo detaily prohlížených oblastí, hledání nebo stahování.</string>
     <string name="do_not_show_startup_messages">Nezobrazovat zprávy při spuštění</string>
@@ -2478,7 +2478,7 @@
     <string name="will_open_tomorrow_at">Otevírá zítra v</string>
     <string name="shared_string_marker">Značka</string>
     <string name="osm_recipient_stat">Počet úprav %1$s, součet %2$s mBTC</string>
-    <string name="lang_lo">Laosky</string>
+    <string name="lang_lo">Laoština</string>
     <string name="show_closed_notes">Zobrazit zavřené poznámky</string>
     <string name="switch_osm_notes_visibility_desc">Zobrazit nebo skrýt OpenStreetMap poznámky na mapě.</string>
     <string name="gpx_file_desc">GPX - vhodné pro export do JOSM nebo jiných editorů OSM.</string>
@@ -3071,7 +3071,7 @@
     <string name="shared_string_default">Výchozí</string>
     <string name="new_route_calculated_dist_dbg">Trasa: vzdálenost %1$s, potřebný čas %2$s
 \nVýpočet: %3$.1f sekund, %4$d cest, %5$d dlaždic)</string>
-    <string name="lang_oc">Okcitánsky</string>
+    <string name="lang_oc">Okcitánština</string>
     <string name="app_mode_wagon">Dodávkové auto</string>
     <string name="app_mode_pickup_truck">Pickup auto</string>
     <string name="day">Den</string>
@@ -4291,6 +4291,10 @@
 \n
 \n• Aktualizace uživatelského rozhraní pro vyhledávání souřadnic UTM
 \n
+\n• Filtr GPS pro GPX stopy
+\n
+\n• Nástroj nadmořské výšky (Pro)
+\n
 \n• Oblíbené: přidána možnost zobrazit naposledy použité ikony
 \n
 \n• Plánování cesty: po spuštění použije právě vybraný profil
@@ -4446,13 +4450,37 @@
     <string name="add_to_group">Přidat do skupiny</string>
     <string name="app_modes_options">Vybrat režimy aplikace</string>
     <string name="shared_string_memory">Paměť</string>
-    <string name="memory_allocated_for_routing_ds">Vyšší hodnota paměti zrychluje výpočet dlouhých tras (více než 500 km), ale může ovlivnit výkonnost jiných aplikací.
+    <string name="memory_allocated_for_routing_ds">Větší množství vyhrazené paměti zrychlí výpočet dlouhých tras (nad 500 km), ale může ovlivnit výkonnost jiných aplikací.
 \nNeovlivňuje rychlost výpočtu krátkých tras.</string>
     <string name="memory_allocated_for_routing">Paměť vyhrazená pro plánování trasy</string>
     <string name="reading_files">Načítám soubory…</string>
     <string name="no_items_selected_warning">Vyberte prosím aspoň jednu položku</string>
     <string name="display_groups_visibility_dialog_description">Můžete nastavit viditelnost skupin na mapě. Je-li stopa skrytá, všechny skupiny budou také skryté.</string>
     <string name="shared_string_hide_all">Skrýt vše</string>
-    <string name="migration_files_present">%1$d souborů (%2$s) se nachází ve vybraném umístění \'%3$s\'.</string>
-    <string name="exit_without_saving_warning">Opravdu chcete odejít bez uložení\? Ztratíte tak všechny změny.</string>
+    <string name="migration_files_present">Ve vybraném umístění \'%3$s\' se nachází %1$d souborů (%2$s).</string>
+    <string name="exit_without_saving_warning">Ukončit bez uložení změn\?</string>
+    <string name="shared_string_precision">Přesnost</string>
+    <string name="gps_filter_hdop_desc">Zadejte maximální přípustnou hodnotu pro HDOP.
+\nBody s vyšší hodnotou budou skryté.</string>
+    <string name="distance_between_points">Vzdálenost mezi body</string>
+    <string name="gps_filter_smoothing">Vyhlazování</string>
+    <string name="save_as_copy">Uložit jako kopii</string>
+    <string name="gps_filter_actions_description">OsmAnd aplikuje změny na stopu, aniž by aktualizoval soubor. Změny můžete uložit manuálně.</string>
+    <string name="shared_string_gps_filter">Filtr GPS</string>
+    <string name="storage_migration_wrong_folder_warning">Ve vybrané složce nebyla nalezena žádná OsmAnd data. Zkuste to prosím znovu.</string>
+    <string name="shared_string_statistics">Statistiky</string>
+    <string name="gps_filter_speed_altitude_desc">Pouze body stopy splňující zadaný interval budou viditelné v grafu a na mapě, ostatní budou skryté.</string>
+    <string name="shared_string_show_slope">Zobrazit sklon</string>
+    <string name="shared_string_uphill">Stoupání</string>
+    <string name="gps_filter_smoothing_desc">Zadejte hraniční vzdálenost mezi body.
+\nBody stopy, jejichž vzdálenost od posledního viditelného bodu je menší než tato hodnota, budou skryté.
+\nBerte na vědomí, že vysoké hodnoty mohou příliš zjednodušit geometrii stopy.</string>
+    <string name="gps_filter_precision">Přesnost GPS</string>
+    <string name="save_changes_into_file">Uložit změny do souboru</string>
+    <string name="elevation_profile">Výškový profil</string>
+    <string name="shared_string_downhill">Klesání</string>
+    <string name="shared_string_hide_slope">Skrýt sklon</string>
+    <string name="shared_string_grade">Stupeň</string>
+    <string name="use_routing_fallback_description">Použít offline plánování, pokud online služba není dosažitelná.</string>
+    <string name="use_routing_fallback">Použít náhradní plánovač</string>
 </resources>

@@ -1,13 +1,5 @@
 package net.osmand.plus.myplaces;
 
-import static net.osmand.plus.GpxSelectionHelper.CURRENT_TRACK;
-import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
-import static net.osmand.plus.track.TrackMenuFragment.openTrack;
-import static net.osmand.util.Algorithms.capitalizeFirstLetter;
-import static net.osmand.util.Algorithms.formatDuration;
-import static net.osmand.util.Algorithms.objectEquals;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -38,13 +30,6 @@ import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ActionMode;
-import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Collator;
@@ -95,6 +80,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -110,6 +96,21 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ActionMode;
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.FragmentActivity;
+
+import static net.osmand.plus.GpxSelectionHelper.CURRENT_TRACK;
+import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.track.TrackMenuFragment.openTrack;
+import static net.osmand.util.Algorithms.capitalizeFirstLetter;
+import static net.osmand.util.Algorithms.formatDuration;
+import static net.osmand.util.Algorithms.objectEquals;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment implements
 		FavoritesFragmentStateHolder, OsmAuthorizationListener, OnTrackFileMoveListener, RenameCallback, GpxUploadListener {
@@ -703,7 +704,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		}
 		final String actionButton = value;
 		if (allGpxAdapter.getGroupCount() == 0) {
-			app.showShortToastMessage(app.getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()));
+			showNoItemsForActionsToast(actionButton);
 			return;
 		}
 
@@ -732,7 +733,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			@Override
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				if (selectedItems.isEmpty()) {
-					app.showShortToastMessage(app.getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()));
+					showNoItemsForActionsToast(actionButton);
 					return true;
 				}
 				if (actionResId == R.string.shared_string_delete){
@@ -796,6 +797,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 		});
 		allGpxAdapter.notifyDataSetChanged();
+	}
+
+	private void showNoItemsForActionsToast(@NonNull String action) {
+		if (app != null) {
+			String message = getString(R.string.local_index_no_items_to_do, action.toLowerCase());
+			app.showShortToastMessage(Algorithms.capitalizeFirstLetter(message));
+		}
 	}
 
 	private SelectableItem createSelectableItem(GpxInfo item, int iconId) {

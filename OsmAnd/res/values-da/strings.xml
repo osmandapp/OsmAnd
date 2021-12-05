@@ -500,7 +500,7 @@
     <string name="local_index_items_deleted">%1$d af %2$d emner slettet.</string>
     <string name="local_index_items_restored">%1$d af %2$d emner aktiveret.</string>
     <string name="local_index_no_items_to_do">Ingen emner at %1$s</string>
-    <string name="local_index_action_do">%1$s %2$s emner slettes. Fortsæt?</string>
+    <string name="local_index_action_do">%1$s: %2$s emne(r). Fortsæt\?</string>
     <string name="local_index_descr_title">Administrer kortfiler.</string>
     <string name="local_index_mi_restore">Aktiver</string>
     <string name="local_index_mi_backup">Deaktiver</string>
@@ -1966,7 +1966,7 @@
     <string name="current_track">Aktuelt spor</string>
     <string name="change_markers_position">Skift markørens position</string>
     <string name="lang_es_us">Spansk (Amerikansk)</string>
-    <string name="lang_be_by">Hviderussisk (Latin)</string>
+    <string name="lang_be_by">Hviderussisk (latinsk)</string>
     <string name="lang_kn">Kannada</string>
     <string name="lang_en_gb">Engelsk (Storbritannien)</string>
     <string name="lang_ast">Asturisk</string>
@@ -3519,7 +3519,7 @@
     <string name="lang_bar">Bayersk</string>
     <string name="lang_ba">Basjkirisk</string>
     <string name="lang_lmo">Lombardisk</string>
-    <string name="lang_an">Aragonsk</string>
+    <string name="lang_an">Aragonesisk</string>
     <string name="custom_color">Brugerdefineret farve</string>
     <string name="some_articles_may_not_available_in_lang">Nogle Wikipedia-artikler er muligvis ikke tilgængelige på dit sprog.</string>
     <string name="extra_maps_menu_group">Ekstra kort</string>
@@ -3593,7 +3593,7 @@
     <string name="save_track_to_gpx">Automatisk optagelse af spor under navigation</string>
     <string name="one_image_per_tile">En billedfil pr. kortflise</string>
     <string name="online_map_url_helper_text">Angiv eller indsæt URL-adressen til onlinekilden.</string>
-    <string name="shared_string_legal">Lovlig</string>
+    <string name="shared_string_legal">Juridisk</string>
     <string name="keep_active">Hold aktiv</string>
     <string name="speed_cameras_alert">I nogle lande er indberetninger om hastighedskameraer forbudt i henhold til loven.</string>
     <string name="vessel_height_warning_link">Indstil fartøjets højde</string>
@@ -4460,31 +4460,31 @@
     <string name="no_items_selected_warning">Vælg venligst mindst ét element</string>
     <string name="display_groups_visibility_dialog_description">Du kan regulere gruppesynlighed på kortet. Hvis spor er skjult, vil alle grupper også være skjult.</string>
     <string name="shared_string_hide_all">Skjul alle</string>
-    <string name="app_modes_options">Vælg App-tilstande</string>
-    <string name="memory_allocated_for_routing_ds">Højere hukommelsesværdi gør beregningen af ruter (mere end 500 km) hurtigere, men kan påvirke andre applikationers ydeevne.
+    <string name="app_modes_options">Vælg app-tilstande</string>
+    <string name="memory_allocated_for_routing_ds">Højere hukommelsestildeling gør beregningen af ruter (mere end 500 km) hurtigere, men kan påvirke andre applikationers ydeevne.
 \nHar ingen indflydelse på beregningshastigheden for korte ruter.</string>
     <string name="fold_unfold">fold/fold ud</string>
-    <string name="migration_files_present">Der findes %1$d-filer (%2$s) på den valgte placering \'%3$s\'.</string>
-    <string name="exit_without_saving_warning">Er du sikker på, at du vil afslutte uden at gemme\? Du vil miste alle ændringer.</string>
+    <string name="migration_files_present">Der er %1$d-filer (%2$s) på den valgte placering \'%3$s\'.</string>
+    <string name="exit_without_saving_warning">Afslut uden at gemme ændringer\?</string>
     <string name="shared_string_show_slope">Vis hældning</string>
     <string name="shared_string_uphill">Op ad bakke</string>
     <string name="shared_string_downhill">Ned ad bakke</string>
     <string name="shared_string_grade">Graduering</string>
     <string name="shared_string_hide_slope">Skjul hældning</string>
     <string name="elevation_profile">Højdeprofil</string>
-    <string name="gps_filter_hdop_desc">Indstil den maksimalt tilladte værdi for HDOP.
-\nPunkter med højere værdi end den indstillede parameter, vil blive skjult.</string>
-    <string name="gps_filter_speed_altitude_desc">De sporpunkter, der passer til det indstillede interval, vil være synlige på diagrammet og kortet, mens resten vil være skjult.</string>
+    <string name="gps_filter_hdop_desc">Indstil den maksimalt accepteret værdi for HDOP.
+\nPunkter med højere værdi skjules.</string>
+    <string name="gps_filter_speed_altitude_desc">Kun sporpunkter, der passer til det indstillede interval, vil være synlige på diagrammet og kortet, mens resten vil være skjult.</string>
     <string name="gps_filter_precision">GPS-præcision</string>
     <string name="gps_filter_smoothing">Udjævning</string>
     <string name="save_as_copy">Gem som kopi</string>
     <string name="ltr_or_rtl_combine">%1$s %2$s</string>
-    <string name="gps_filter_actions_description">OsmAnd anvender ændringer på sporet uden at gemme det i filen. Du kan gemme ændringer manuelt.</string>
+    <string name="gps_filter_actions_description">OsmAnd vil anvende ændringerne på sporet uden at opdatere filen. Du kan gemme ændringer manuelt.</string>
     <string name="gps_filter_smoothing_desc">Indstil afstandsgrænsen mellem punkter.
-\nSporpunkter, der er mindst X afstand fra det sidste synlige punkt, skjules.
-\nVær forsigtig, jo større afstanden er, jo mere simpel er sporgeometrien.</string>
-    <string name="save_changes_into_file">Gem ændringer i fil</string>
-    <string name="storage_migration_wrong_folder_warning">Vi kan ikke finde OsmAnd-data i den valgte mappe. Prøv venligst igen.</string>
+\nSporpunkter, der er ikke er mindst denne afstand fra det sidste synlige punkt, skjules.
+\nVær opmærksom på, at høje afstandsgrænser kan gøre sporgeometrien for simpel.</string>
+    <string name="save_changes_into_file">Gem ændringer til fil</string>
+    <string name="storage_migration_wrong_folder_warning">Ingen OsmAnd-data fundet i den valgte mappe. Prøv venligst igen.</string>
     <string name="shared_string_precision">Præcision</string>
     <string name="shared_string_statistics">Statistikker</string>
     <string name="distance_between_points">Afstand mellem punkter</string>

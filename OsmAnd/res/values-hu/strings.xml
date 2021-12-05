@@ -4347,6 +4347,10 @@
 \n
 \n - Felhasználói felület frissítése UTM koordináták kereséséhez
 \n
+\n • GPS szűrő a GPX nyomvonalakhoz
+\n
+\n • Tengerszint feletti magasságot megjelenítő modul (Pro)
+\n
 \n - Kedvencek: megtekinthetők a legutóbb használt ikonok
 \n
 \n - Útvonaltervezés: indítás után a kiválasztott profil használata
@@ -4444,9 +4448,33 @@
     <string name="app_profile_type">Alkalmazásprofil típusa</string>
     <string name="map_marker_options">Térképjelölő beállításai</string>
     <string name="add_to_group">Csoporthoz adás</string>
-    <string name="memory_allocated_for_routing_ds">A magasabb memóriaérték felgyorsítja a hosszú útvonalak (több mint 500km) kiszámítását, de hatással lehet a többi alkalmazás teljesítményére.
-\nA rövid útvonalak kiszámítási sebességére nincs hatással.</string>
+    <string name="memory_allocated_for_routing_ds">A magasabb memóriafoglalás felgyorsítja a hosszú útvonalak (több mint 500km) kiszámítását, de hatással lehet a többi alkalmazás teljesítményére.
+\nNincs hatással a rövid útvonalak kiszámítási sebességére.</string>
     <string name="display_groups_visibility_dialog_description">Beállíthatja a csoport láthatóságát a térképen. Ha a nyomvonal rejtett, az összes csoport rejtve lesz.</string>
     <string name="not_enough_contributions_descr">Legalább %1$s változtatás szükséges az elmúlt két hónapos időszakban %2$s, hogy hozzáférést kapjon a korlátlan óránkénti térképfrissítéshez.</string>
-    <string name="exit_without_saving_warning">Biztos, hogy mentés nélkül kilép\? Az összes változtatás elvész.</string>
+    <string name="exit_without_saving_warning">Kilép mentés nélkül\?</string>
+    <string name="shared_string_precision">Pontosság</string>
+    <string name="shared_string_statistics">Statisztika</string>
+    <string name="gps_filter_hdop_desc">A legnagyobb elfogadott érték beállítása a HDOP számára.
+\nA nagyobb értékű pontok el lesznek rejtve.</string>
+    <string name="gps_filter_precision">GPS pontossága</string>
+    <string name="gps_filter_smoothing">Simítás</string>
+    <string name="save_changes_into_file">Módosítások fájlba mentése</string>
+    <string name="save_as_copy">Mentés másolatként</string>
+    <string name="shared_string_gps_filter">GPS szűrő</string>
+    <string name="gps_filter_speed_altitude_desc">Csak a megadott intervallumba eső nyomvonalpontok fognak megjelenni a diagramon és a térképen, a többi el lesz rejtve.</string>
+    <string name="shared_string_uphill">Emelkedő</string>
+    <string name="shared_string_downhill">Lejtő</string>
+    <string name="shared_string_show_slope">Lejtő megjelenítése</string>
+    <string name="shared_string_hide_slope">Lejtő elrejtése</string>
+    <string name="shared_string_grade">Osztály</string>
+    <string name="elevation_profile">Magassági profil</string>
+    <string name="distance_between_points">Pontok közti távolság</string>
+    <string name="gps_filter_smoothing_desc">Állítsa be a pontok közti távolság korlátját.
+\nAzok a nyomvonalpontok, melyek nincsenek legalább ekkora távolságra az előző látható ponttól, el lesznek rejtve.
+\nVegye figyelembe, hogy a túl magas korlát túlságosan leegyszerűsítheti a nyomvonalat.</string>
+    <string name="gps_filter_actions_description">Az OsmAnd a fájl frissítése nélkül fogja alkalmazni a nyomvonal változásait. Kézileg mentheti a módosításokat.</string>
+    <string name="storage_migration_wrong_folder_warning">Nem találhatók OsmAnd adatok a kiválasztott mappában. Próbálja újra.</string>
+    <string name="use_routing_fallback_description">Offline útvonaltervezés használata, ha az online útvonaltervezés nem érhető el.</string>
+    <string name="use_routing_fallback">Útvonaltervezési tartalék használata</string>
 </resources>

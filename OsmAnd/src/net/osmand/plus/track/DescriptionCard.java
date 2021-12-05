@@ -20,7 +20,6 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
 import net.osmand.AndroidUtils;
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Metadata;
 import net.osmand.PicassoUtils;
@@ -42,8 +41,8 @@ public class DescriptionCard extends MapBaseCard {
 	private final GPXFile gpxFile;
 
 	public DescriptionCard(@NonNull MapActivity mapActivity,
-						   @NonNull Fragment targetFragment,
-						   @NonNull GPXFile gpxFile) {
+	                       @NonNull Fragment targetFragment,
+	                       @NonNull GPXFile gpxFile) {
 		super(mapActivity);
 		this.gpxFile = gpxFile;
 		this.targetFragment = targetFragment;
@@ -56,10 +55,6 @@ public class DescriptionCard extends MapBaseCard {
 
 	@Override
 	protected void updateContent() {
-		if (gpxFile.metadata == null) {
-			gpxFile.metadata = new GPXUtilities.Metadata();
-		}
-
 		final String title = gpxFile.metadata.getArticleTitle();
 		final String imageUrl = getMetadataImageLink(gpxFile.metadata);
 		final String descriptionHtml = gpxFile.metadata.getDescription();
@@ -71,6 +66,7 @@ public class DescriptionCard extends MapBaseCard {
 		} else {
 			showDescription(title, imageUrl, descriptionHtml);
 		}
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.shadow), gpxFile.showCurrentTrack);
 	}
 
 	private void showAddBtn() {

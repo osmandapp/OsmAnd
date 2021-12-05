@@ -109,8 +109,9 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 		BackupHelper.setLastModifiedTime(context, OPENSTREETMAP_DB_LAST_MODIFIED_NAME);
 	}
 
+	@NonNull
 	public List<OpenstreetmapPoint> getOpenstreetmapPoints() {
-		if(cache == null ) {
+		if (cache == null) {
 			return checkOpenstreetmapPoints();
 		}
 		return cache;
@@ -179,10 +180,11 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 		}
 		return false;
 	}
-	
+
+	@NonNull
 	private List<OpenstreetmapPoint> checkOpenstreetmapPoints() {
 		SQLiteDatabase db = getReadableDatabase();
-		List<OpenstreetmapPoint> points = new ArrayList<OpenstreetmapPoint>();
+		List<OpenstreetmapPoint> points = new ArrayList<>();
 		if (db != null) {
 			Cursor query = db.rawQuery("SELECT " +
 					OPENSTREETMAP_COL_ID + ", " +

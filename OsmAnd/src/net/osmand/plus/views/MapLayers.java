@@ -295,7 +295,7 @@ public class MapLayers {
 		return GpxUiHelper.selectGPXFiles(files, mapActivity, callbackWithObject, getThemeRes(getApplication()), isNightMode(getApplication()));
 	}
 
-	public void showMultichoicePoiFilterDialog(final MapActivity mapActivity, final DismissListener listener) {
+	public void showMultiChoicePoiFilterDialog(final MapActivity mapActivity, final DismissListener listener) {
 		final OsmandApplication app = getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(app);
@@ -304,11 +304,11 @@ public class MapLayers {
 			if (!f.isTopWikiFilter()
 					&& !f.isRoutesFilter()
 					&& !f.isRouteArticleFilter()
-					&& !f.isRouteArticlePointFilter()) {
+					&& !f.isRouteArticlePointFilter()
+					&& !f.isCustomPoiFilter()) {
 				addFilterToList(adapter, list, f, true);
 			}
 		}
-		list.add(poiFilters.getCustomPOIFilter());
 		adapter.setProfileDependent(true);
 		adapter.setNightMode(isNightMode(app));
 
@@ -347,7 +347,6 @@ public class MapLayers {
 					mapActivity.getMapView().refreshMap();
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null)
-				// TODO go to single choice dialog
 				.setNeutralButton(" ", (dialog, which) -> showSingleChoicePoiFilterDialog(mapActivity, listener));
 		final AlertDialog alertDialog = builder.create();
 		alertDialog.setOnShowListener(dialog -> {
@@ -368,12 +367,13 @@ public class MapLayers {
 				.setTitleId(R.string.shared_string_search, app)
 				.setIcon(R.drawable.ic_action_search_dark).createItem());
 		final List<PoiUIFilter> list = new ArrayList<>();
-		list.add(poiFilters.getCustomPOIFilter());
+		list.add(null);
 		for (PoiUIFilter f : poiFilters.getSortedPoiFilters(true)) {
 			if (!f.isTopWikiFilter()
 					&& !f.isRoutesFilter()
 					&& !f.isRouteArticleFilter()
-					&& !f.isRouteArticlePointFilter()) {
+					&& !f.isRouteArticlePointFilter()
+					&& !f.isCustomPoiFilter()) {
 				addFilterToList(adapter, list, f, false);
 			}
 		}
@@ -381,27 +381,26 @@ public class MapLayers {
 		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(mapActivity, !isNightMode(app));
 		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(mapActivity, getThemeRes(app)));
 		builder.setAdapter(listAdapter, (dialog, which) -> {
-			PoiUIFilter pf = list.get(which);
-			String filterId = pf.getFilterId();
-			if (filterId.equals(PoiUIFilter.CUSTOM_FILTER_ID)) {
+			PoiUIFilter filter = list.get(which);
+			if (filter == null) {
 				if (mapActivity.getDashboard().isVisible()) {
 					mapActivity.getDashboard().hideDashboard();
 				}
 				mapActivity.showQuickSearch(ShowQuickSearchMode.NEW, true);
 			} else {
-				if (pf.isStandardFilter()) {
-					pf.removeUnsavedFilterByName();
+				if (filter.isStandardFilter()) {
+					filter.removeUnsavedFilterByName();
 				}
 				PoiUIFilter wiki = poiFilters.getTopWikiPoiFilter();
 				poiFilters.clearSelectedPoiFilters(wiki);
-				poiFilters.addSelectedPoiFilter(pf);
+				poiFilters.addSelectedPoiFilter(filter);
 				updateRoutingPoiFiltersIfNeeded();
 				mapActivity.getMapView().refreshMap();
 			}
 		});
 		builder.setTitle(R.string.show_poi_over_map);
 		builder.setNegativeButton(R.string.shared_string_dismiss, null);
-		builder.setNeutralButton(" ", (dialog, which) -> showMultichoicePoiFilterDialog(mapActivity, listener));
+		builder.setNeutralButton(" ", (dialog, which) -> showMultiChoicePoiFilterDialog(mapActivity, listener));
 		final AlertDialog alertDialog = builder.create();
 		alertDialog.setOnShowListener(dialog -> {
 			Button neutralButton = alertDialog.getButton(DialogInterface.BUTTON_NEUTRAL);

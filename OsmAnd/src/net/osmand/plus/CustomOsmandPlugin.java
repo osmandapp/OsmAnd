@@ -56,7 +56,8 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 
 	private static final Log LOG = PlatformUtil.getLog(CustomOsmandPlugin.class);
 
-	private String pluginId;
+	private final int version;
+	private final String pluginId;
 	private String resourceDirName;
 	private Map<String, String> names = new HashMap<>();
 	private Map<String, String> descriptions = new HashMap<>();
@@ -70,8 +71,6 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	private List<String> routerNames = new ArrayList<>();
 	private List<SuggestedDownloadItem> suggestedDownloadItems = new ArrayList<>();
 	private List<WorldRegion> customRegions = new ArrayList<>();
-
-	private int version;
 
 	public CustomOsmandPlugin(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		super(app);
@@ -492,10 +491,10 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 
 	public static class SuggestedDownloadItem {
 
-		private String scopeId;
-		private String searchType;
-		private List<String> names;
-		private int limit;
+		private final String scopeId;
+		private final String searchType;
+		private final List<String> names;
+		private final int limit;
 
 		public SuggestedDownloadItem(String scopeId, String searchType, List<String> names, int limit) {
 			this.scopeId = scopeId;

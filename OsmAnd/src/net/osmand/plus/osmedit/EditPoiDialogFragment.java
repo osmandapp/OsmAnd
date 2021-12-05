@@ -712,26 +712,28 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 	public static void showEditInstance(final MapObject mapObject,
 										final AppCompatActivity activity) {
-		final OsmandSettings settings = ((OsmandApplication) activity.getApplication())
-				.getSettings();
-		final OpenstreetmapUtil openstreetmapUtilToLoad;
-		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
-		if (//settings.OFFLINE_EDITION.get() ||
-				!settings.isInternetConnectionAvailable(true)) {
-			openstreetmapUtilToLoad = plugin.getPoiModificationLocalUtil();
-		} else {
-			openstreetmapUtilToLoad = plugin.getPoiModificationRemoteUtil();
+		final OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		if (plugin == null) {
+			return;
 		}
+		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
+		final OpenstreetmapUtil openstreetmapUtilToLoad = app.getSettings().isInternetConnectionAvailable(true)
+				? plugin.getPoiModificationRemoteUtil()
+				: plugin.getPoiModificationLocalUtil();
+
 		new AsyncTask<Void, Void, Entity>() {
 			@Override
 			protected Entity doInBackground(Void... params) {
 				return openstreetmapUtilToLoad.loadEntity(mapObject);
 			}
 
+			@Override
 			protected void onPostExecute(Entity entity) {
 				if (entity != null) {
+					Entity existingOsmEditEntity = getExistingOsmEditEntity(plugin, entity.getId());
+					Entity entityToEdit = existingOsmEditEntity != null ? existingOsmEditEntity : entity;
 					EditPoiDialogFragment fragment =
-							EditPoiDialogFragment.createInstance(entity, false);
+							EditPoiDialogFragment.createInstance(entityToEdit, false);
 					fragment.show(activity.getSupportFragmentManager(), TAG);
 				} else {
 					Toast.makeText(activity,
@@ -739,6 +741,18 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 							Toast.LENGTH_LONG).show();
 				}
 			}
+
+			@Nullable
+			private Entity getExistingOsmEditEntity(@NonNull OsmEditingPlugin osmEditingPlugin, long entityId) {
+				List<OpenstreetmapPoint> osmEdits = osmEditingPlugin.getDBPOI().getOpenstreetmapPoints();
+				for (OpenstreetmapPoint osmEdit : osmEdits) {
+					if (osmEdit.getId() == entityId && osmEdit.getAction() == Action.MODIFY) {
+						return osmEdit.getEntity();
+					}
+				}
+				return null;
+			}
+
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 

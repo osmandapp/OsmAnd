@@ -210,8 +210,9 @@ public class RoutingConfiguration {
 			return impassableRoadLocations;
 		}
 		
-		public boolean addImpassableRoad(long routeId) {
-			return impassableRoadLocations.add(routeId);
+		public Builder addImpassableRoad(long routeId) {
+			impassableRoadLocations.add(routeId);
+			return this;
 		}
 
 		public Map<String, String> getAttributes() {
