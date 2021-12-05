@@ -412,9 +412,9 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					.setColor(app, R.color.color_white)
 					.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
 						f.openSelectionMode(R.string.local_index_mi_upload_gpx, R.drawable.ic_action_upload_to_openstreetmap,
-								R.drawable.ic_action_upload_to_openstreetmap, selectedList ->
+								R.drawable.ic_action_upload_to_openstreetmap, items ->
 										OsmEditingPlugin.this.sendGPXFiles(activity, f,
-										selectedList.toArray(new GpxInfo[0])));
+												items.toArray(new GpxInfo[0])));
 						return true;
 					})
 					.createItem());
@@ -452,7 +452,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 	}
 
-	public boolean sendGPXFiles(final FragmentActivity activity, Fragment fragment, final GpxInfo... info) {
+	public boolean sendGPXFiles(final FragmentActivity activity, Fragment fragment, GpxInfo... info) {
 		String name = settings.OSM_USER_NAME_OR_EMAIL.get();
 		String pwd = settings.OSM_USER_PASSWORD.get();
 		String authToken = settings.OSM_USER_ACCESS_TOKEN.get();
@@ -460,7 +460,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), fragment);
 			return false;
 		} else {
-			SendGpxBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), fragment, info);
+			SendGpxBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), info, fragment);
 			return true;
 		}
 	}

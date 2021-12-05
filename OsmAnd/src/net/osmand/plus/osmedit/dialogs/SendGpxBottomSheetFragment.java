@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -169,27 +170,21 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 		dismiss();
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager,
-	                                @Nullable Fragment targetFragment,
-	                                GpxInfo[] info) {
-		if (!fragmentManager.isStateSaved()) {
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull GpxInfo[] info, @Nullable Fragment target) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SendGpxBottomSheetFragment fragment = new SendGpxBottomSheetFragment();
-			fragment.setTargetFragment(targetFragment, 0);
+			fragment.setTargetFragment(target, 0);
 			fragment.setGpxInfos(info);
 			fragment.setRetainInstance(true);
-			fragment.show(fragmentManager, TAG);
+			fragment.show(manager, TAG);
 		}
 	}
 
 	@Override
 	public void onGpxUploaded(String result) {
 		Fragment target = getTargetFragment();
-		if (target instanceof GpxUploadListener){
-			((GpxUploadListener) target).onGpxUpload(result);
+		if (target instanceof UploadGpxListener) {
+			((UploadGpxListener) target).onGpxUploaded(result);
 		}
-	}
-
-	public interface GpxUploadListener{
-		void onGpxUpload(String result);
 	}
 }

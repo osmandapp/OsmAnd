@@ -67,9 +67,9 @@ public class MultipleSelectionBottomSheet extends SelectionBottomSheet {
 		CompoundButtonCompat.setButtonTintList(checkBox, AndroidUtils.createCheckedColorStateList(app, secondaryColorRes, activeColorRes));
 
 		view.setOnClickListener(v -> {
-			boolean chk = !checkBox.isChecked();
-			checkBox.setChecked(chk);
-			if (chk) {
+			boolean selected = !checkBox.isChecked();
+			checkBox.setChecked(selected);
+			if (selected) {
 				selectedItems.add(item);
 			} else {
 				selectedItems.remove(item);
@@ -77,7 +77,9 @@ public class MultipleSelectionBottomSheet extends SelectionBottomSheet {
 			onSelectedItemsChanged();
 		});
 		title.setText(item.getTitle());
-		description.setText(item.getDescription());
+		if (description != null) {
+			description.setText(item.getDescription());
+		}
 		imageView.setImageDrawable(uiUtilities.getIcon(item.getIconId(), activeColorRes));
 	}
 

@@ -1,5 +1,13 @@
 package net.osmand.plus.myplaces;
 
+import static net.osmand.plus.GpxSelectionHelper.CURRENT_TRACK;
+import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.track.TrackMenuFragment.openTrack;
+import static net.osmand.util.Algorithms.capitalizeFirstLetter;
+import static net.osmand.util.Algorithms.formatDuration;
+import static net.osmand.util.Algorithms.objectEquals;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -30,6 +38,14 @@ import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ActionMode;
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Collator;
@@ -65,7 +81,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.base.OsmandExpandableListFragment;
-import net.osmand.plus.base.SelectionBottomSheet;
+import net.osmand.plus.base.SelectionBottomSheet.DialogStateListener;
 import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
@@ -74,7 +90,7 @@ import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
-import net.osmand.plus.osmedit.dialogs.SendGpxBottomSheetFragment.GpxUploadListener;
+import net.osmand.plus.osmedit.UploadGPXFilesTask.UploadGpxListener;
 import net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
@@ -97,23 +113,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ActionMode;
-import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.FragmentActivity;
-
-import static net.osmand.plus.GpxSelectionHelper.CURRENT_TRACK;
-import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
-import static net.osmand.plus.track.TrackMenuFragment.openTrack;
-import static net.osmand.util.Algorithms.capitalizeFirstLetter;
-import static net.osmand.util.Algorithms.formatDuration;
-import static net.osmand.util.Algorithms.objectEquals;
-
 public class AvailableGPXFragment extends OsmandExpandableListFragment implements
-		FavoritesFragmentStateHolder, OsmAuthorizationListener, OnTrackFileMoveListener, RenameCallback, GpxUploadListener {
+		FavoritesFragmentStateHolder, OsmAuthorizationListener, OnTrackFileMoveListener,
+		RenameCallback, UploadGpxListener {
 
 	public static final int SEARCH_ID = -1;
 	// public static final int ACTION_ID = 0;
@@ -260,7 +262,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		if (isRecording) {
 			currentGpxView.findViewById(R.id.segment_time_div).setVisibility(View.VISIBLE);
 			TextView segmentTime = (TextView) currentGpxView.findViewById(R.id.segment_time);
-			segmentTime.setText(OsmAndFormatter.getFormattedDurationShort((int)(sth.getDuration() / 1000)));
+			segmentTime.setText(OsmAndFormatter.getFormattedDurationShort((int) (sth.getDuration() / 1000)));
 			segmentTime.setVisibility(View.VISIBLE);
 			Drawable stopIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_rec_stop, activeColorId);
 			stop.setCompoundDrawablesWithIntrinsicBounds(stopIcon, null, null, null);
@@ -314,7 +316,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		((TextView) currentGpxView.findViewById(R.id.distance))
 				.setText(OsmAndFormatter.getFormattedDistance(sth.getDistance(), app));
 
-		@SuppressWarnings("ConstantConditions")
 		final CheckBox checkbox = (CheckBox) currentGpxView.findViewById(R.id.check_local_index);
 		checkbox.setVisibility(selectionMode && showOnMapMode ? View.VISIBLE : View.GONE);
 		if (selectionMode && showOnMapMode) {
@@ -491,14 +492,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 					openSelectionMode(itemId, R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_dark,
 							new SelectionModeListener() {
 								@Override
-								public void onItemSelected(List<GpxInfo> items) {
-									selectedItems = items;
+								public void onItemsSelected(List<GpxInfo> items) {
 									doAction(itemId);
 								}
 							});
 				} else if (itemId == R.string.gpx_add_track) {
 					addTrack();
-				}else if (itemId == R.string.coordinate_input) {
+				} else if (itemId == R.string.coordinate_input) {
 					openCoordinatesInput();
 				}
 				return true;
@@ -696,7 +696,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	public void openSelectionMode(final int actionResId, int darkIcon, int lightIcon,
-	                              final SelectionModeListener listener) {
+	                              @Nullable final SelectionModeListener listener) {
 		final int actionIconId = !isLightActionBar() ? darkIcon : lightIcon;
 		String value = app.getString(actionResId);
 		if (value.endsWith("...")) {
@@ -736,55 +736,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 					showNoItemsForActionsToast(actionButton);
 					return true;
 				}
-				if (actionResId == R.string.shared_string_delete){
-					AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-					builder.setMessage(getString(R.string.local_index_action_do, actionButton.toLowerCase(),
-							String.valueOf(selectedItems.size())));
-					builder.setPositiveButton(actionButton, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							if (listener != null){
-								listener.onItemSelected(selectedItems);
-							}
-						}
-					});
-					builder.setNegativeButton(R.string.shared_string_cancel, null);
-					builder.show();
-				} else if (actionResId == R.string.local_index_mi_upload_gpx){
-					List<SelectableItem> allTracks = new ArrayList<>();
-					List<SelectableItem> selectedTracks = new ArrayList<>();
-					for (GpxInfo gpxInfo: selectedItems) {
-						SelectableItem s = createSelectableItem(gpxInfo, R.drawable.ic_notification_track);
-						allTracks.add(s);
-						selectedTracks.add(s);
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					if (actionResId == R.string.shared_string_delete) {
+						showDeleteConfirmationDialog(activity, actionButton, listener);
+					} else if (actionResId == R.string.local_index_mi_upload_gpx) {
+						showUploadConfirmationDialog(activity, actionButton, listener);
 					}
-					ExportGPXMultipleSelectionBottomSheet dialog = ExportGPXMultipleSelectionBottomSheet.showInstance(getMyActivity(), allTracks, selectedTracks);
-					dialog.setDialogStateListener(new SelectionBottomSheet.DialogStateListener() {
-						@Override
-						public void onDialogCreated() {dialog.setTitle(actionButton);
-							dialog.setApplyButtonTitle(app.getString(R.string.shared_string_continue));
-							String total = app.getString(R.string.shared_string_total);
-							long size = 0;
-							for (SelectableItem s: allTracks) {
-								size += ((GpxInfo) s.getObject()).getSize();
-							}
-							dialog.setTitleDescription(app.getString(R.string.ltr_or_rtl_combine_via_colon, total, AndroidUtils.formatSize(app, size)));
-						}
-
-						@Override
-						public void onCloseDialog() {
-						}
-					});
-
-					dialog.setOnApplySelectionListener(selItems -> {
-						List<GpxInfo> gpxInfoList = new ArrayList<>();
-						for (SelectableItem g: selItems) {
-							gpxInfoList.add((GpxInfo)g.getObject());
-						}
-						if (listener != null){
-							listener.onItemSelected(gpxInfoList);
-						}
-					});
 				}
 				return true;
 			}
@@ -806,12 +764,63 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		}
 	}
 
-	private SelectableItem createSelectableItem(GpxInfo item, int iconId) {
-		SelectableItem selectableItem = new SelectableItem();
-		selectableItem.setObject(item);
-		selectableItem.setIconId(iconId);
-		selectableItem.setTitle(item.name);
-		return selectableItem;
+	private void showUploadConfirmationDialog(@NonNull FragmentActivity activity,
+	                                          @NonNull String actionButton,
+	                                          @Nullable SelectionModeListener listener) {
+		long[] size = new long[1];
+		List<SelectableItem> items = new ArrayList<>();
+		for (GpxInfo gpxInfo : selectedItems) {
+			SelectableItem item = new SelectableItem();
+			item.setObject(gpxInfo);
+			item.setTitle(gpxInfo.name);
+			item.setIconId(R.drawable.ic_notification_track);
+
+			items.add(item);
+			size[0] += gpxInfo.getSize();
+		}
+		List<SelectableItem> selectedItems = new ArrayList<>(items);
+		FragmentManager manager = activity.getSupportFragmentManager();
+		UploadMultipleGPXBottomSheet dialog = UploadMultipleGPXBottomSheet.showInstance(manager, items, selectedItems);
+		if (dialog != null) {
+			dialog.setDialogStateListener(new DialogStateListener() {
+				@Override
+				public void onDialogCreated() {
+					dialog.setTitle(actionButton);
+					dialog.setApplyButtonTitle(app.getString(R.string.shared_string_continue));
+					String total = app.getString(R.string.shared_string_total);
+					dialog.setTitleDescription(app.getString(R.string.ltr_or_rtl_combine_via_colon, total,
+							AndroidUtils.formatSize(app, size[0])));
+				}
+
+				@Override
+				public void onCloseDialog() {
+				}
+			});
+			dialog.setOnApplySelectionListener(selItems -> {
+				List<GpxInfo> gpxInfos = new ArrayList<>();
+				for (SelectableItem item : selItems) {
+					gpxInfos.add((GpxInfo) item.getObject());
+				}
+				if (listener != null) {
+					listener.onItemsSelected(gpxInfos);
+				}
+			});
+		}
+	}
+
+	private void showDeleteConfirmationDialog(@NonNull FragmentActivity activity,
+	                                          @NonNull String actionButton,
+	                                          @Nullable SelectionModeListener listener) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		builder.setMessage(getString(R.string.local_index_action_do, actionButton.toLowerCase(),
+				String.valueOf(selectedItems.size())));
+		builder.setPositiveButton(actionButton, (dialog, which) -> {
+			if (listener != null) {
+				listener.onItemsSelected(selectedItems);
+			}
+		});
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		builder.show();
 	}
 
 	private void showGpxOnMap(GpxInfo info) {
@@ -884,7 +893,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	@Override
-	public void onGpxUpload(String output) {
+	public void onGpxUploaded(String result) {
 		if (actionMode != null) {
 			actionMode.finish();
 		}
@@ -1182,7 +1191,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 			final CompoundButton checkItem = (CompoundButton) v.findViewById(R.id.toggle_item);
 			if (isSelectedGroup(groupPosition)) {
-				v.findViewById(R.id.check_item).setVisibility(selectionMode? View.INVISIBLE : View.VISIBLE);
+				v.findViewById(R.id.check_item).setVisibility(selectionMode ? View.INVISIBLE : View.VISIBLE);
 				v.findViewById(R.id.options).setVisibility(View.GONE);
 			} else {
 				v.findViewById(R.id.check_item).setVisibility(View.GONE);
@@ -1828,7 +1837,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	@Nullable
-	static GPXTrackAnalysis getGpxTrackAnalysis(GpxInfo gpxInfo, OsmandApplication app, @Nullable final GpxInfoViewCallback callback) {
+	static GPXTrackAnalysis getGpxTrackAnalysis(@NonNull GpxInfo gpxInfo,
+	                                            @NonNull OsmandApplication app,
+	                                            @Nullable final GpxInfoViewCallback callback) {
 		SelectedGpxFile sgpx = getSelectedGpxFile(gpxInfo, app);
 		GPXTrackAnalysis analysis = null;
 		if (sgpx != null && sgpx.isLoaded()) {
@@ -1859,6 +1870,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	public interface SelectionModeListener {
-		void onItemSelected(List<GpxInfo> items);
+		void onItemsSelected(List<GpxInfo> items);
 	}
 }
