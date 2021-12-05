@@ -134,7 +134,6 @@
 		android:layout_marginLeft="@dimen/card_padding"
 		android:layout_marginTop="@dimen/content_padding"
 		android:visibility="gone"
-		android:layout_marginBottom="@dimen/context_menu_padding_margin_small"
 		tools:visibility="visible">
 
 		<net.osmand.plus.widgets.TextViewEx

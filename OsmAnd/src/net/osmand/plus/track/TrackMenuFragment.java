@@ -727,7 +727,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					}
 					cardsContainer.addView(gpxInfoCard.getView());
 				} else {
-					gpxInfoCard = new GpxInfoCard(getMapActivity(),  displayHelper.getGpx());
+					gpxInfoCard = new GpxInfoCard(getMapActivity(), displayHelper.getGpx());
 					cardsContainer.addView(gpxInfoCard.build(mapActivity));
 				}
 			} else if (menuType == TrackMenuType.POINTS) {
@@ -1066,7 +1066,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 						segment = segments.get(0);
 					}
 				}
-				GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[]{GpxDisplayItemType.TRACK_SEGMENT};
+				GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT};
 				List<GpxDisplayItem> items = TrackDisplayHelper.flatten(displayHelper.getOriginalGroups(filterTypes));
 				if (segment != null && !Algorithms.isEmpty(items)) {
 					SplitSegmentDialogFragment.showInstance(fragmentManager, displayHelper, items.get(0), segment);
@@ -1513,7 +1513,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			@Override
 			public void gpxSavingFinished(Exception errorMessage) {
 				if (selectedGpxFile != null) {
-					List<GpxDisplayGroup> groups = displayHelper.getDisplayGroups(new GpxDisplayItemType[]{GpxDisplayItemType.TRACK_SEGMENT});
+					List<GpxDisplayGroup> groups = displayHelper.getDisplayGroups(new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT});
 					selectedGpxFile.setDisplayGroups(groups, app);
 					selectedGpxFile.processPoints(app);
 				}
