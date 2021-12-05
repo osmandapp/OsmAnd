@@ -3349,9 +3349,9 @@
     <string name="plugin_disabled">התוסף כבוי</string>
     <string name="clear_recorded_data">מחיקת הנתונים שהוקלטו</string>
     <string name="copy_coordinates">העתקת נקודות ציון</string>
-    <string name="plugin_disabled_descr">תוסף זה הוא יישומון נפרד, יהיה עליך להסיר אותו בנפרד אם אין לך כוונה להשתמש בו עוד.
+    <string name="plugin_disabled_descr">תוסף זה הוא יישומון נפרד, השבתתו אינה מסירה אותו.
 \n
-\nהתוסף יישאר על המכשיר גם לאחר הסרת OsmAnd.</string>
+\nניתן להסיר אותו דרך הגדרת ‚יישומונים’ של Android.</string>
     <string name="shared_string_menu">תפריט</string>
     <string name="no_recalculation_setting">ללא חישוב מחדש</string>
     <string name="route_recalculation_dist_title">מרחק מזערי לחישוב המסלול מחדש</string>
@@ -4428,8 +4428,8 @@
     <string name="map_marker_options">אפשרויות סמני מפה</string>
     <string name="show_parameter_seekbar">הצגת סרגל גלילת משתנים</string>
     <string name="exit_without_saving_warning">לצאת בלי לשמור את השינויים\?</string>
-    <string name="memory_allocated_for_routing_ds">ערך זיכרון גבוה יותר מאיץ את החישוב של מסלולים ארוכים (למעלה מ־500 ק״מ), אך עשוי להשפיע על הביצועים של שאר היישומונים.
-\nלא משפיע על מהירות החישוב של מסלולים קצרים.</string>
+    <string name="memory_allocated_for_routing_ds">הקצאת זיכרון גבוהה יותר מאיצה את החישוב של מסלולים ארוכים (למעלה מ־500 ק״מ), אך עשויה להשפיע על הביצועים של שאר היישומונים.
+\nאין השפעה על מהירות החישוב של מסלולים קצרים.</string>
     <string name="rendering_value_walkingRoutesOSMC_description">לצבוע נתיבים לפי הצבע המקומי הייחודי שלהם (אם קיים ב־OpenStreetMap) וסמל המגן לטיולים.</string>
     <string name="routeInfo_winter_ice_road_description">צביעת המסלול או קו הנסיעה לפי סיווג הדרך בחורף.</string>
     <string name="shared_string_includes">כולל</string>
@@ -4461,4 +4461,26 @@
     <string name="gps_filter_smoothing_desc">הגדרת סף המרחק בין נקודות.
 \nנקודות מסלול שאינן במרחק שכזה מהנקודה הגלויה האחרונה תוסתרנה.
 \nנא לשים לב שסף גבוה יכול לפשט את צורת המסלול יתר על המידה.</string>
+    <string name="routeInfo_smoothness_description">סיווג עבירות כביש/דרך לכלי רכב גלגליים, במיוחד סביב כמה המשטח רגיל/שטוח.</string>
+    <string name="release_4_0">• גיבוי לענן
+\n
+\n • נוסף מצב לילה לסגנון המפה „טוֹפּוֹ”
+\n
+\n • נוספה אפשרות להוריד קווי מתאר ביחידת מידה רגל
+\n
+\n • אפשר לצבוע מסלולים לפי גובה, מהירות או שיפוע
+\n
+\n • נוספה חלונית „הקלטת מסע”
+\n
+\n • מרחק בנגיעה הועבר מסרגל הרדיוס לאפשרות נפרדת
+\n
+\n • תכנון מסלול: אפשר לשנות את אפשרויות הניווט, לגשת להגדרות המפה ולחפש מבלי לצאת מתכנון המסלול
+\n
+\n • מסך „רכישה” חדש עם פירוט רכישה מפורט
+\n
+\n • נוספה אפשרות לשנות את מראה קו המסלול
+\n
+\n • העדכונים החיים של OsmAnd הועברו אל „הורדות &gt; עדכונים”
+\n
+\n</string>
 </resources>
