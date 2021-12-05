@@ -11,6 +11,11 @@
 	Thx - Hardy
 -->
 
+    <string name="predefined_waypoint_appearance_description">Taping on the action will automatically save waypoint with predefined parameters.</string>
+    <string name="always_ask_waypoint_appearance_description">Taping on action will open “Add waypoint” screen, where you can change name and appearance.</string>
+    <string name="waypoint_appearance">Waypoint appearance</string>
+    <string name="track_file_description">Taping on action will show a dialogue with all available tracks to be selected.</string>
+    <string name="track_file">Track file</string>
     <string name="gps_filter_precision">GPS precision</string>
     <string name="shared_string_precision">Precision</string>
     <string name="shared_string_statistics">Statistics</string>
