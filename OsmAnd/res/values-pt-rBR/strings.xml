@@ -4479,4 +4479,8 @@
 \nOs pontos da trilha que não estejam a pelo menos esta distância do último ponto visível serão ocultados.
 \nEsteja ciente de que limites altos podem simplificar demais a geometria da trilha.</string>
     <string name="distance_between_points">Distância entre pontos</string>
+    <string name="shared_string_size">Tamanho</string>
+    <string name="created_on">Criado em</string>
+    <string name="use_routing_fallback_description">Use o roteamento offline quando o roteamento online não puder ser alcançado.</string>
+    <string name="use_routing_fallback">Use fallback de roteamento</string>
 </resources>
