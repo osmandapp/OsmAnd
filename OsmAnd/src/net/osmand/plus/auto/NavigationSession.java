@@ -27,6 +27,7 @@ import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.auto.RequestPermissionScreen.LocationPermissionCheckCallback;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -62,6 +63,9 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 	public OsmandMapTileView getMapView() {
 		return mapView;
 	}
+
+	private final LocationPermissionCheckCallback locationPermissionGrantedCallback =
+			() -> getApp().startNavigationService(NavigationService.USED_BY_CAR_APP);
 
 	public void setMapView(OsmandMapTileView mapView) {
 		this.mapView = mapView;
@@ -140,7 +144,7 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 		if (ActivityCompat.checkSelfPermission(getCarContext(), Manifest.permission.ACCESS_FINE_LOCATION)
 				!= PackageManager.PERMISSION_GRANTED) {
 			getCarContext().getCarService(ScreenManager.class).push(navigationScreen);
-			return new RequestPermissionScreen(getCarContext(), null);
+			return new RequestPermissionScreen(getCarContext(), locationPermissionGrantedCallback);
 		}
 
 		return navigationScreen;
@@ -152,7 +156,19 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 			requestPurchaseScreen.finish();
 			requestPurchaseScreen = null;
 			app.getOsmandMap().getMapView().setupOpenGLView();
+
+			requestLocationPermission();
 		}
+	}
+
+	private boolean requestLocationPermission() {
+		if (ActivityCompat.checkSelfPermission(getCarContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+				!= PackageManager.PERMISSION_GRANTED) {
+			getCarContext().getCarService(ScreenManager.class).push(
+					new RequestPermissionScreen(getCarContext(), locationPermissionGrantedCallback));
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -172,7 +188,8 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 							settingsAction,
 							navigationCarSurface,
 							query),
-					(obj) -> { });
+					(obj) -> {
+					});
 
 			return;
 		}
@@ -197,6 +214,11 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 		if (navigationCarSurface != null) {
 			navigationCarSurface.onCarConfigurationChanged();
 		}
+	}
+
+	@Override
+	public boolean requestLocationNavigation() {
+		return requestLocationPermission();
 	}
 
 	@Override

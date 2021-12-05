@@ -37,7 +37,7 @@ public class TransportRoutingConfiguration {
 	public boolean useSchedule;
 	// 10 seconds based
 	public int scheduleTimeOfDay = 12 * 60 * 6; // 12:00 - 60*6*12
-	public int scheduleMaxTime = 50 * 6; // TODO not appropriate variable, should be dynamic
+	public int scheduleMaxTime = 50 * 6; // not appropriate variable, should be dynamic
 	// day since 2000
 	public int scheduleDayNumber;
 

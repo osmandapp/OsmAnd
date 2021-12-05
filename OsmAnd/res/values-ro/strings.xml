@@ -1645,7 +1645,7 @@
     <string name="shared_string_audio">Audio</string>
     <string name="shared_string_video">Video</string>
     <string name="shared_string_photo">Foto</string>
-    <string name="route_points">Puncte pe traseu</string>
+    <string name="route_points">Puncte de traseu</string>
     <string name="track_segments">Segmente de traseu</string>
     <string name="track_points">Puncte pe traseu</string>
     <string name="shared_string_markers">Marcaje</string>
@@ -1946,8 +1946,8 @@
     <string name="shared_string_result">Rezultat</string>
     <string name="nautical_maps">Hărți maritime</string>
     <string name="route_altitude">Elevație rută</string>
-    <string name="altitude_descent">Coborâre</string>
-    <string name="altitude_ascent">Urcare</string>
+    <string name="altitude_descent">Pârtie</string>
+    <string name="altitude_ascent">Urcuș</string>
     <string name="average_altitude">Altitudinea medie</string>
     <string name="rendering_value_medium_w_name">Mediu</string>
     <string name="rendering_attr_hideWaterPolygons_description">Apă</string>
@@ -4356,6 +4356,10 @@
 \n
 \n • Actualizare a interfeței utilizatorului pentru căutarea coordonatelor UTM
 \n
+\n• Filtru GPS pentru pistele GPX
+\n
+\n • Widget de elevație (Pro)
+\n
 \n • Favorite: a fost adăugată posibilitatea de a vizualiza pictogramele utilizate recent
 \n
 \n • Planificarea traseului: va utiliza profilul selectat după lansare
@@ -4422,7 +4426,7 @@
     <string name="app_profile_type">Tipul de profil al aplicației</string>
     <string name="map_marker_options">Opțiuni de marcare a hărții</string>
     <string name="add_to_group">Adăugați la grup</string>
-    <string name="app_modes_options">Alegeți modurile de aplicații</string>
+    <string name="app_modes_options">Alegeți modurile aplicației</string>
     <string name="shared_string_memory">Memorie</string>
     <string name="reading_files">Citirea fișierelor…</string>
     <string name="no_items_selected_warning">Vă rugăm să selectați cel puțin un element</string>
@@ -4448,16 +4452,40 @@
     <string name="shared_string_skip_warning">Săriți peste migrație\? OsmAnd nu mai are acces la fișierele dumneavoastră din stocarea partajată.
 \n
 \nAplicația va începe să utilizeze noul vostru folder de date.</string>
-    <string name="shared_storage_migration_descr">Din cauza modificărilor în accesul la spațiul de stocare Andorid, OsmAnd nu mai poate utiliza %1$s.
+    <string name="shared_storage_migration_descr">Din cauza modificărilor în accesul la spațiul de stocare Android, OsmAnd nu mai poate utiliza %1$s.
 \n
 \nCopiați toate datele în noul folder.</string>
     <string name="folder_access_denied">Permisiune necesară pentru a accesa folderul selectat.</string>
     <string name="shared_string_copy_to">Copiați la</string>
-    <string name="migration_files_present">%1$d fișiere (%2$s) sunt prezente în locația selectată \'%3$s\'.</string>
-    <string name="memory_allocated_for_routing_ds">O valoare mai mare a memoriei poate accelera calcularea rutelor de peste 500 km, dar poate încetini alte aplicații.</string>
+    <string name="migration_files_present">Există %1$d fișiere (%2$s) în locația selectată \"%3$s\".</string>
+    <string name="memory_allocated_for_routing_ds">O alocare mai mare a memoriei va accelera calcularea rutelor lungi (peste 500 km), dar poate avea un impact asupra performanței altor aplicații.
+\nNu are niciun impact asupra vitezei de calcul a traseelor scurte.</string>
     <string name="display_groups_visibility_dialog_description">Puteți controla vizibilitatea grupului pe hartă. Dacă pista este ascunsă, toate grupurile vor fi și ele ascunse.</string>
     <string name="storage_found_files_descr">Atingeți \"%1$s\" pentru a copia %2$s fișiere de la \"%3$s\" spre \"%4$s\". Este posibil să dureze ceva timp.</string>
     <string name="skip_confirmation">Da, sari peste</string>
     <string name="shared_storage_last_step">Ulterior, puteți specifica un nou dosar de date.</string>
     <string name="shared_storage_third_step">Acordați permisiunea de a accesa dosarul. Fără aceasta, OsmAnd nu poate copia fișiere.</string>
+    <string name="gps_filter_smoothing">Netezire</string>
+    <string name="save_changes_into_file">Salvați modificările în fișier</string>
+    <string name="save_as_copy">Salvați ca copie</string>
+    <string name="gps_filter_actions_description">OsmAnd va aplica modificările la pistă fără a actualiza fișierul. Puteți salva modificările manual.</string>
+    <string name="shared_string_gps_filter">Filtru GPS</string>
+    <string name="storage_migration_wrong_folder_warning">Nu s-au găsit date OsmAnd în dosarul selectat. Vă rugăm să încercați din nou.</string>
+    <string name="shared_string_show_slope">Arată panta</string>
+    <string name="shared_string_hide_slope">Ascundeți panta</string>
+    <string name="exit_without_saving_warning">Ieșiți fără a salva modificările\?</string>
+    <string name="shared_string_precision">Precizie</string>
+    <string name="shared_string_statistics">Statistici</string>
+    <string name="gps_filter_hdop_desc">Setați valoarea maximă acceptată pentru HDOP.
+\nPunctele cu o valoare mai mare vor fi ascunse.</string>
+    <string name="distance_between_points">Distanța dintre puncte</string>
+    <string name="shared_string_uphill">Urcuș</string>
+    <string name="shared_string_downhill">Coborâre</string>
+    <string name="gps_filter_speed_altitude_desc">Numai punctele de urmărire care corespund intervalului setat vor apărea pe hartă și pe grafic, restul fiind ascunse.</string>
+    <string name="gps_filter_smoothing_desc">Setați distanța de prag între puncte.
+\nPunctele de urmărire care nu se află cel puțin la această distanță de ultimul punct vizibil vor fi ascunse.
+\nRețineți că pragurile ridicate pot simplifica excesiv geometria pistei.</string>
+    <string name="gps_filter_precision">Precizie GPS</string>
+    <string name="elevation_profile">Profil de elevație</string>
+    <string name="shared_string_grade">Grad</string>
 </resources>

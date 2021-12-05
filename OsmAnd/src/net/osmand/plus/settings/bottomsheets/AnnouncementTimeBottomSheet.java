@@ -52,7 +52,7 @@ public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet {
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		app = requiredMyApplication();
-		announceTimeDistances = new AnnounceTimeDistances(getAppMode(), app.getSettings());
+		announceTimeDistances = new AnnounceTimeDistances(getAppMode(), app);
 
 		listPreference = getListPreference();
 		if (listPreference == null || listPreference.getEntries() == null ||

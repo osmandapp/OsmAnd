@@ -127,10 +127,10 @@
     <string name="shared_string_description">Beskrivning</string>
     <string name="validate_gpx_upload_name_pwd">Vänligen ange ditt OSM-användarnamn och lösenord för att ladda upp GPX-filer.</string>
     <string name="accessibility_mode">Tillgänglighetsläge</string>
-    <string name="accessibility_mode_descr">Sätter på tillgänglighetsfunktioner.</string>
+    <string name="accessibility_mode_descr">Aktiverar tillgänglighetsverktyg.</string>
     <string name="shared_string_on">På</string>
     <string name="shared_string_off">Av</string>
-    <string name="accessibility_default">Enligt de globala systeminställningarna</string>
+    <string name="accessibility_default">Enligt Androids systeminställningar</string>
     <string name="backToMenu">Tillbaka till menyn</string>
     <string name="zoomOut">Zooma ut</string>
     <string name="zoomIn">Zooma in</string>
@@ -191,7 +191,7 @@
     <string name="map_online_plugin_is_not_installed">Aktivera modulen online-kartor för att välja olika kartkällor</string>
     <string name="map_online_data">Online-kartor och kartrutor</string>
     <string name="map_online_data_descr">Använd online-kartor (hämta och cacha kartbitar på SD-kortet).</string>
-    <string name="online_map_settings_descr">Konfigurera online- eller cachade källor för kartbitar.</string>
+    <string name="online_map_settings_descr">Välj online eller cachelagrade källor för rasterkartor.</string>
     <string name="osmand_rastermaps_plugin_description">Med denna modul får man tillgång till många typer av online-kartor, från fördefinierade Openstreetmap-rutor (som Mapnik) till satellitbilder och speciella lager såsom väderkartor, klimatkartor, geologiska kartor, reliefkartor o.s.v.
 \n
 \nDessa kartor kan användas antingen som huvudkarta (baskarta) och visas på kartskärmen i OsmAnd eller som ett över- eller underlägg till en annan baskarta (som OsmAnds vanliga offline-kartor). För att göra en underliggande karta tydligare kan vissa element i OsmAnds vektorkartor lätt döljas via menyn \'Konfigurera karta\'.
@@ -212,7 +212,7 @@
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorkartor ritas sannolikt upp snabbare. Fungerar kanske inte så bra på vissa enheter.</string>
     <string name="play_commands_of_currently_selected_voice">Välj en röst och testa genom att spela meddelanden:</string>
     <string name="test_voice_prompts">Test av röstmeddelanden</string>
-    <string name="switch_to_raster_map_to_see">Det finns ingen offline vektorkarta för den här platsen. Du kan hämta en i Inställningar (Hantera kartfiler) eller byta till online-kartor (aktivera modulen för online-kartor för detta).</string>
+    <string name="switch_to_raster_map_to_see">Ladda ner en offline vektorkarta för den här platsen under \'Hämta kartor\', eller använd insticksmodulen för online-kartor.</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
 \n
 \nOsmAnd är en kart- och navigationsapp med öppen källkod som ger tillgång till en stor mängd globala OpenStreetMap (OSM)-data. Alla kartdata (vektor- och rasterkartor) kan lagras på telefonens minneskort för användning offline. Navigeringsfunktioner både offline och online erbjuds också, inklusive röstinstruktioner steg-för-steg.
@@ -240,7 +240,7 @@
     <string name="support_new_features">Ge stöd till nya funktioner</string>
     <string name="show_ruler_level">Visa linjal</string>
     <string name="info_button">Info</string>
-    <string name="back_to_location">Tillbaka till plats</string>
+    <string name="back_to_location">Återgå till position</string>
     <string name="oclock">klockan</string>
     <string name="accuracy">Noggrannhet</string>
     <string name="no_info">Ingen info</string>
@@ -878,7 +878,7 @@
     <string name="incremental_search_building">Sök byggnader stegvis</string>
     <string name="show_view_angle">Visa färdriktning</string>
     <string name="Closest_Amenities">Närmaste bekvämligheter</string>
-    <string name="support_new_features_descr">Skänk lite pengar så att nya funktioner kan läggas till i appen.</string>
+    <string name="support_new_features_descr">Ge en gåva så att nya funktioner kan läggas till i appen.</string>
     <string name="download_hillshade_maps">Skuggad relief</string>
     <string name="av_use_external_camera_descr">Andvänd systemappen för foton.</string>
     <string name="av_use_external_camera">Använd kameraappen</string>
@@ -3866,4 +3866,49 @@
     <string name="shortcut_navigate_to_work">Navigera till arbete</string>
     <string name="shortcut_navigate_to_home">Navigera till hem</string>
     <string name="continue_on_phone">Fortsätta på mobil</string>
+    <string name="shared_string_precision">Precision</string>
+    <string name="shared_string_statistics">Statistik</string>
+    <string name="distance_between_points">Avstånd mellan punkter</string>
+    <string name="gps_filter_smoothing">Utjämning</string>
+    <string name="save_as_copy">Spara som kopia</string>
+    <string name="shared_string_gps_filter">GPS-filter</string>
+    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
+    <string name="exit_without_saving_warning">Är du säker på att du vill avsluta utan att spara\? Du kommer att förlora alla ändringar.</string>
+    <string name="from_to_with_params">Från %1$s till %2$s</string>
+    <string name="storage_copied_files_size">Kopierade %1$s filer %2$s</string>
+    <string name="storage_copying_files_size">Kopierar %1$s filer %2$s ...</string>
+    <string name="storage_found_files_size">Hittade %1$s filer %2$s</string>
+    <string name="shared_storage_last_step">Du kan ange en ny datamapp efteråt.</string>
+    <string name="app_modes_options">Välj app-läge</string>
+    <string name="shared_string_memory">Minne</string>
+    <string name="migration_files_present">%1$d filer (%2$s) finns i den valda mappen \'%3$s\'.</string>
+    <string name="fold_unfold">fäll ihop/veckla ut</string>
+    <string name="app_profile_type">App-profiltyp</string>
+    <string name="map_marker_options">Alternativ för kartmarkörer</string>
+    <string name="add_to_group">Lägg till i grupp</string>
+    <string name="copying_file">Kopierar fil %1$s…</string>
+    <string name="shared_string_hide_all">Dölj alla</string>
+    <string name="memory_allocated_for_routing_ds">Ett högre minnesvärde påskyndar beräkningen av långa rutter (över 500 km), men kan påverka prestandan för andra appar.
+\nPåverkar inte beräkningshastigheten för korta rutter.</string>
+    <string name="memory_allocated_for_routing">Minne allokerat för ruttberäkning</string>
+    <string name="reading_files">Läser in filer…</string>
+    <string name="no_items_selected_warning">Välj minst ett objekt</string>
+    <string name="show_parameter_seekbar">Visa parametersökfältet</string>
+    <string name="display_groups_visibility_dialog_description">Du kan styra gruppens synlighet på kartan. Om spåret är dolt kommer alla grupper också att vara dolda.</string>
+    <string name="gps_filter_hdop_desc">Ställ in det högsta tillåtna värdet för HDOP.
+\nPunkter med högre värde än den inställda parametern kommer att döljas.</string>
+    <string name="gps_filter_speed_altitude_desc">Spårpunkterna som motsvarar det inställda intervallet visas på diagrammet och kartan, övriga kommer att döljas.</string>
+    <string name="gps_filter_precision">GPS-precision</string>
+    <string name="gps_filter_smoothing_desc">Ställ in tröskelavstånd mellan punkter.
+\nSpårpunkter som ligger inom X avstånd från den senast synliga punkten döljs.
+\nVar försiktig, ju större avstånd, desto mer förenklad blir spårgeometrin.</string>
+    <string name="save_changes_into_file">Spara ändringar till fil</string>
+    <string name="gps_filter_actions_description">OsmAnd tillämpar ändringar på spåret utan att spara det i filen. Du kan spara ändringarna manuellt.</string>
+    <string name="storage_migration_wrong_folder_warning">Vi kan inte hitta OsmAnd-data i den valda mappen. Vänligen försök igen.</string>
+    <string name="files_remaining">Återstående filer: %1$s %2$s</string>
+    <string name="progress_complete">%1$s klar</string>
+    <string name="storage_found_files_descr">Tryck på \"%1$s\" för att kopiera %2$s filer från \"%3$s\" till \"%4$s\". Det kan ta ett tag.</string>
+    <string name="shared_string_skip_warning">Hoppa över migreringen\? OsmAnd har inte längre tillgång till dina filer i delad lagring.
+\n
+\nAppen kommer att börja använda den nya datamappen.</string>
 </resources>

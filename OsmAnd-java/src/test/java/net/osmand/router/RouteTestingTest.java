@@ -17,17 +17,25 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeSet;
+import net.osmand.NativeLibrary;
+import net.osmand.binary.BinaryMapIndexReader;
+
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 @RunWith(Parameterized.class)
 public class RouteTestingTest {
-	private TestEntry te;
+	private final TestEntry te;
 
+	private static final int TIMEOUT = 1500;
+	private static final boolean NATIVE_LIB = false;
 
 	public RouteTestingTest(String name, TestEntry te) {
 		this.te = te;
@@ -41,7 +49,7 @@ public class RouteTestingTest {
 	@Parameterized.Parameters(name = "{index}: {0}")
 	public static Iterable<Object[]> data() throws IOException {
 		String fileName = "/test_routing.json";
-		Reader reader = new InputStreamReader(RouteTestingTest.class.getResourceAsStream(fileName));
+		Reader reader = new InputStreamReader(Objects.requireNonNull(RouteTestingTest.class.getResourceAsStream(fileName)));
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		TestEntry[] testEntries = gson.fromJson(reader, TestEntry[].class);
 		ArrayList<Object[]> arrayList = new ArrayList<>();
@@ -56,8 +64,17 @@ public class RouteTestingTest {
 
 	}
 
-	@Test
+	@Test(timeout = TIMEOUT)
 	public void testRouting() throws Exception {
+		NativeLibrary nativeLibrary;
+		if (NATIVE_LIB) {
+			boolean old = NativeLibrary.loadOldLib("/Users/plotva/work/osmand/core-legacy/binaries/darwin/intel/Release");
+			nativeLibrary = new NativeLibrary();
+			if (!old) {
+				throw new UnsupportedOperationException("Not supported");
+			}
+		}
+
 		String fl = "src/test/resources/Routing_test.obf";
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 		RoutePlannerFrontEnd fe = new RoutePlannerFrontEnd();
@@ -72,10 +89,15 @@ public class RouteTestingTest {
 					new BinaryMapIndexReader(raf1, new File(fl1)),
 					new BinaryMapIndexReader(raf, new File(fl))
 			};
+			if (NATIVE_LIB) {
+				nativeLibrary.initMapFile(new File(fl1).getAbsolutePath(), true);
+			}
 		} else {
 			binaryMapIndexReaders = new BinaryMapIndexReader[]{new BinaryMapIndexReader(raf, new File(fl))};
 		}
-
+		if (NATIVE_LIB) {
+			nativeLibrary.initMapFile(new File(fl).getAbsolutePath(), true);
+		}
 		for (int planRoadDirection = -1; planRoadDirection <= 1; planRoadDirection++) {
 			if (params.containsKey("wrongPlanRoadDirection")) {
 				if (params.get("wrongPlanRoadDirection").equals(planRoadDirection + "")) {
@@ -89,9 +111,22 @@ public class RouteTestingTest {
 			RoutingConfiguration config = builder.build(params.containsKey("vehicle") ? params.get("vehicle") : "car",
 					memoryLimits, params);
 
+			System.out.println("planRoadDirection: " + planRoadDirection);
+
+			if (params.containsKey("heuristicCoefficient")) {
+				config.heuristicCoefficient = Float.parseFloat(params.get("heuristicCoefficient"));
+			}
+
 			config.planRoadDirection = planRoadDirection;
-			RoutingContext ctx = fe.buildRoutingContext(config, null, binaryMapIndexReaders,
-					RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
+			RoutingContext ctx;
+			if (NATIVE_LIB) {
+				ctx = fe.buildRoutingContext(config, nativeLibrary, binaryMapIndexReaders,
+						RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
+			} else {
+				ctx = fe.buildRoutingContext(config, null, binaryMapIndexReaders,
+						RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
+			}
+
 			ctx.leftSideNavigation = false;
 			List<RouteSegmentResult> routeSegments = fe.searchRoute(ctx, te.getStartPoint(), te.getEndPoint(),
 					te.getTransitPoint());
@@ -113,6 +148,10 @@ public class RouteTestingTest {
 				}
 			}
 			Map<Long, String> expectedResults = te.getExpectedResults();
+			if (expectedResults == null) {
+				System.out.println("This is test on hanging routing");
+				break;
+			}
 			for (Entry<Long, String> es : expectedResults.entrySet()) {
 				switch (es.getValue()) {
 					case "false":

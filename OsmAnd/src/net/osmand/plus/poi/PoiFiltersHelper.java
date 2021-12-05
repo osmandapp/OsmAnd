@@ -404,7 +404,7 @@ public class PoiFiltersHelper {
 	}
 
 	public boolean removePoiFilter(PoiUIFilter filter) {
-		if (filter.getFilterId().equals(PoiUIFilter.CUSTOM_FILTER_ID) ||
+		if (filter.isCustomPoiFilter() ||
 				filter.getFilterId().equals(PoiUIFilter.BY_NAME_FILTER_ID) ||
 				filter.getFilterId().startsWith(PoiUIFilter.STD_PREFIX)) {
 			return false;
@@ -442,8 +442,9 @@ public class PoiFiltersHelper {
 	}
 
 	public boolean editPoiFilter(PoiUIFilter filter) {
-		if (filter.getFilterId().equals(PoiUIFilter.CUSTOM_FILTER_ID) ||
-				filter.getFilterId().equals(PoiUIFilter.BY_NAME_FILTER_ID) || filter.getFilterId().startsWith(PoiUIFilter.STD_PREFIX)) {
+		if (filter.isCustomPoiFilter()
+				|| filter.getFilterId().equals(PoiUIFilter.BY_NAME_FILTER_ID)
+				|| filter.getFilterId().startsWith(PoiUIFilter.STD_PREFIX)) {
 			return false;
 		}
 		PoiFilterDbHelper helper = openDbHelper();

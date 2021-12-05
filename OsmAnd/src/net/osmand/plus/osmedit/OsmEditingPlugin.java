@@ -4,6 +4,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_C
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_EDITING;
 import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 
@@ -59,9 +60,9 @@ import java.util.List;
 
 
 public class OsmEditingPlugin extends OsmandPlugin {
+
 	private static final Log LOG = PlatformUtil.getLog(OsmEditingPlugin.class);
 	public static final int OSM_EDIT_TAB = R.string.osm_edits;
-	private static final String ID = "osm.editing";
 
 	// Constants for determining the order of items in the additional actions context menu
 	private static final int CREATE_POI_ITEM_ORDER = 7300;
@@ -85,9 +86,10 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	@Override
 	public String getId() {
-		return ID;
+		return PLUGIN_OSMAND_EDITING;
 	}
 
+	@NonNull
 	public OpenstreetmapsDbHelper getDBPOI() {
 		if (dbpoi == null) {
 			dbpoi = new OpenstreetmapsDbHelper(app);
@@ -95,6 +97,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return dbpoi;
 	}
 
+	@NonNull
 	public OpenstreetmapLocalUtil getPoiModificationLocalUtil() {
 		if (localUtil == null) {
 			localUtil = new OpenstreetmapLocalUtil(this);
@@ -102,6 +105,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return localUtil;
 	}
 
+	@NonNull
 	public OpenstreetmapRemoteUtil getPoiModificationRemoteUtil() {
 		if (remoteUtil == null) {
 			remoteUtil = new OpenstreetmapRemoteUtil(app);
@@ -109,6 +113,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return remoteUtil;
 	}
 
+	@NonNull
 	public OsmBugsRemoteUtil getOsmNotesRemoteUtil() {
 		if (remoteNotesUtil == null) {
 			remoteNotesUtil = new OsmBugsRemoteUtil(app);
@@ -116,6 +121,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return remoteNotesUtil;
 	}
 
+	@NonNull
 	public OsmBugsLocalUtil getOsmNotesLocalUtil() {
 		if (localNotesUtil == null) {
 			localNotesUtil = new OsmBugsLocalUtil(app, getDBBug());
@@ -123,7 +129,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return localNotesUtil;
 	}
 
-
+	@NonNull
 	public OsmBugsDbHelper getDBBug() {
 		if (dbbug == null) {
 			dbbug = new OsmBugsDbHelper(app);
@@ -252,7 +258,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				amenity = ((TransportStop) selectedObj).getAmenity();
 			}
 			final PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
-			isEditable = !amenity.getType().isWiki() && poiType !=null && !poiType.isNotEditableOsm();
+			isEditable = !amenity.getType().isWiki() && poiType != null && !poiType.isNotEditableOsm();
 		} else if (selectedObj instanceof MapObject) {
 			Long objectId = ((MapObject) selectedObj).getId();
 			isEditable = objectId != null && objectId > 0 && (objectId % 2 == MapObject.AMENITY_ID_RIGHT_SHIFT

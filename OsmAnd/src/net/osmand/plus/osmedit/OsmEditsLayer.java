@@ -37,7 +37,7 @@ import java.util.Map;
 public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvider, IMoveObjectProvider,
 		MapTextProvider<OpenstreetmapPoint> {
 
-	private static final int startZoom = 10;
+	private static final int START_ZOOM = 10;
 
 	private final OsmandApplication app;
 	private final OsmEditingPlugin plugin;
@@ -45,14 +45,16 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 	private final OpenstreetmapLocalUtil mOsmChangeUtil;
 	private final OsmBugsLocalUtil mOsmBugsUtil;
 
+	private final List<OsmPoint> drawnOsmEdits = new ArrayList<>();
+
 	private ContextMenuLayer contextMenuLayer;
 	private MapTextLayer mapTextLayer;
 
-	public OsmEditsLayer(@NonNull Context context, OsmEditingPlugin plugin) {
+	public OsmEditsLayer(@NonNull Context context, @NonNull OsmEditingPlugin plugin) {
 		super(context);
 		this.ctx = context;
 		this.plugin = plugin;
-		app = (OsmandApplication) context.getApplicationContext();
+		app = getApplication();
 		mOsmChangeUtil = plugin.getPoiModificationLocalUtil();
 		mOsmBugsUtil = plugin.getOsmNotesLocalUtil();
 	}
@@ -74,22 +76,25 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		if (tileBox.getZoom() >= startZoom) {
+		drawnOsmEdits.clear();
+		if (tileBox.getZoom() >= START_ZOOM) {
 			List<LatLon> fullObjectsLatLon = new ArrayList<>();
-			drawOsmbugsPoints(canvas, tileBox, fullObjectsLatLon);
+			drawOsmBugsPoints(canvas, tileBox, fullObjectsLatLon);
 			drawOpenstreetmapPoints(canvas, tileBox, fullObjectsLatLon);
 			this.fullObjectsLatLon = fullObjectsLatLon;
 		}
+		if (mapTextLayer != null && isTextVisible()) {
+			mapTextLayer.putData(this, drawnOsmEdits);
+		}
 	}
 
-	private void drawOsmbugsPoints(Canvas canvas, RotatedTileBox tileBox, List<LatLon> fullObjectsLatLon) {
+	private void drawOsmBugsPoints(Canvas canvas, RotatedTileBox tileBox, List<LatLon> fullObjectsLatLon) {
 		drawPoints(canvas, tileBox, plugin.getDBBug().getOsmbugsPoints(), fullObjectsLatLon);
 	}
 
 	private void drawOpenstreetmapPoints(Canvas canvas, RotatedTileBox tileBox, List<LatLon> fullObjectsLatLon) {
 		List<OpenstreetmapPoint> objects = plugin.getDBPOI().getOpenstreetmapPoints();
-		List<OsmPoint> result = drawPoints(canvas, tileBox, objects, fullObjectsLatLon);
-		mapTextLayer.putData(this, result);
+		drawnOsmEdits.addAll(drawPoints(canvas, tileBox, objects, fullObjectsLatLon));
 	}
 
 	private List<OsmPoint> drawPoints(Canvas canvas, RotatedTileBox tileBox,
@@ -194,7 +199,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 
 	public int getRadiusPoi(RotatedTileBox tb) {
 		int r;
-		if (tb.getZoom() < startZoom) {
+		if (tb.getZoom() < START_ZOOM) {
 			r = 0;
 		} else {
 			r = 15;
@@ -229,7 +234,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
-		if (tileBox.getZoom() >= startZoom) {
+		if (tileBox.getZoom() >= START_ZOOM) {
 			getOsmEditsFromPoint(point, tileBox, o);
 		}
 	}

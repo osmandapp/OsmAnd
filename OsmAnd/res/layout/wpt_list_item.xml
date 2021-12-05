@@ -130,6 +130,7 @@
 						tools:textColor="@color/icon_color_active_light" />
 
 					<androidx.appcompat.widget.AppCompatImageView
+						android:id="@+id/bullet_icon"
 						android:layout_width="@dimen/list_item_button_padding"
 						android:layout_height="@dimen/list_item_button_padding"
 						android:layout_marginStart="@dimen/content_padding"

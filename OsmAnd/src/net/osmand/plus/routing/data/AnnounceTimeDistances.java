@@ -6,6 +6,7 @@ import android.text.SpannableStringBuilder;
 import android.text.style.StyleSpan;
 
 import net.osmand.Location;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -47,8 +48,11 @@ public class AnnounceTimeDistances {
 	private int SHORT_PNT_ANNOUNCE_RADIUS;
 	private int LONG_ALARM_ANNOUNCE_RADIUS;
 	private int SHORT_ALARM_ANNOUNCE_RADIUS;
+	OsmAndLocationProvider locationProvider;
 
-	public AnnounceTimeDistances(ApplicationMode appMode, OsmandSettings settings) {
+	public AnnounceTimeDistances(ApplicationMode appMode, OsmandApplication app) {
+		OsmandSettings settings = app.getSettings();
+		locationProvider = app.getLocationProvider();
 		if (appMode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 			// keep it as minimum 30 km/h for voice announcement
 			DEFAULT_SPEED = (float) Math.max(8, appMode.getDefaultSpeed());
@@ -186,8 +190,12 @@ public class AnnounceTimeDistances {
 	}
 
 	public float getSpeed(Location loc) {
+		boolean simulation = false;
+		if (locationProvider != null) {
+			simulation = locationProvider.getLocationSimulation().isRouteAnimating();
+		}
 		float speed = DEFAULT_SPEED;
-		if (loc != null && loc.hasSpeed()) {
+		if (loc != null && loc.hasSpeed() && !simulation) {
 			speed = Math.max(loc.getSpeed(), speed);
 		}
 		return speed;

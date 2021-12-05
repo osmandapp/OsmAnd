@@ -4398,6 +4398,10 @@
 \n
 \n • Ажурирање корисничког интерфејса за претрагу УТМ координата
 \n
+\n• GPS филтер за GPX путање
+\n
+\n • Справица за висински профил (про верзија)
+\n
 \n • Фаворити: додата могућност прегледа недавно коришћених икона
 \n
 \n • Планирање руте: користиће се изабрани профил након покретања
@@ -4438,12 +4442,12 @@
     <string name="not_enough_contributions_descr">Минимум од %1$s измена кроз период од последња два месеца %2$s је потребан да добијете приступ неограниченим ажурирањима карте сваких сат времена.</string>
     <string name="shared_string_gps_filter">GPS филтер</string>
     <string name="storage_migration_wrong_folder_warning">Нема OsmAnd података у одабраној фасцикли. Покушајте поново.</string>
-    <string name="exit_without_saving_warning">Да ли сте сигурни да желите да изађете без снимања\? Изгубићете све измене.</string>
+    <string name="exit_without_saving_warning">Изаћи без чувања измена\?</string>
     <string name="elevation_profile">Висински профил</string>
-    <string name="memory_allocated_for_routing_ds">Веће вредности меморије убрзавају израчунавање дужих рута (преко 500km), али утичу на перформансе других апликација.
+    <string name="memory_allocated_for_routing_ds">Веће вредности меморије убрзавају израчунавање дужих рута (преко 500km), али могу да утичу на перформансе других апликација.
 \nНема утицај на брзину израчунавања краћих рута.</string>
     <string name="shared_string_uphill">Узбрдо</string>
-    <string name="gps_filter_precision">Најмања GPS прецизност</string>
+    <string name="gps_filter_precision">GPS прецизност</string>
     <string name="save_as_copy">Сачувај као копију</string>
     <string name="shared_string_precision">Прецизност</string>
     <string name="distance_between_points">Удаљеност између тачака</string>
@@ -4461,4 +4465,17 @@
     <string name="add_to_group">Додај у групу</string>
     <string name="app_modes_options">Одаберите режим апликације</string>
     <string name="shared_string_memory">Меморија</string>
+    <string name="gps_filter_hdop_desc">Поставите највећу прихваћену вредност за хоризонталну прецизност.
+\nТачке са већим вредностима ће бити сакривене.</string>
+    <string name="gps_filter_actions_description">OsmAnd ће применити измене на путањи без измена фајла. Измене можете сачувати ручно.</string>
+    <string name="shared_string_show_slope">Прикажи нагиб</string>
+    <string name="shared_string_hide_slope">Сакриј нагиб</string>
+    <string name="shared_string_grade">Квалитет</string>
+    <string name="migration_files_present">Постоји %1$d фајлова (%2$s) који су присутни на одабраној локацији ’%3$s’.</string>
+    <string name="map_marker_options">Опције ознака на карти</string>
+    <string name="gps_filter_speed_altitude_desc">Само тачке путање које одговарају постављеном интервалу ће се наћи на графикону и карти, а остале ће бити скривене.</string>
+    <string name="gps_filter_smoothing_desc">Поставите границу удаљености међу тачкама.
+\nТачке путање које су удаљене бар X од последње видљиве тачке ће бити скривене.
+\nБудите пажљиви са великим вредностима удаљености што је геометрија путање простија.</string>
+    <string name="display_groups_visibility_dialog_description">Можете контролисати видљивост групе на карти. Ако је путања скривена, све групе ће такође бити скривене.</string>
 </resources>

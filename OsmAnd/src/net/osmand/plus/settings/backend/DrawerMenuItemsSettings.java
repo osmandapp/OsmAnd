@@ -53,7 +53,7 @@ public class DrawerMenuItemsSettings extends ContextMenuItemsSettings {
 		originalOrderIds.add(DRAWER_DIVIDER_ID);
 		originalOrderIds.add(DRAWER_CONFIGURE_SCREEN_ID);
 		originalOrderIds.add(DRAWER_PLUGINS_ID);
-		originalOrderIds.add(DRAWER_SETTINGS_ID + ".new");
+		originalOrderIds.add(DRAWER_SETTINGS_ID);
 		originalOrderIds.add(DRAWER_HELP_ID);
 	}
 

@@ -66,6 +66,7 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 	 * A listener for navigation start and stop signals.
 	 */
 	public interface Listener {
+		boolean requestLocationNavigation();
 		void updateNavigation(boolean navigating);
 		void stopNavigation();
 	}
@@ -254,7 +255,11 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 														getCarContext(),
 														R.drawable.ic_my_location))
 												.build())
-								.setOnClickListener(surfaceRenderer::handleRecenter)
+								.setOnClickListener(() -> {
+									if (!listener.requestLocationNavigation()) {
+										surfaceRenderer.handleRecenter();
+									}
+								})
 								.build())
 				.addAction(
 						new Action.Builder()

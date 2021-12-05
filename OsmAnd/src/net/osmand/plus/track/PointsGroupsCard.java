@@ -51,6 +51,7 @@ public class PointsGroupsCard extends MapBaseCard {
 
 		int iconSizePx = app.getResources().getDimensionPixelSize(R.dimen.poi_icon_size);
 		int iconColorId = ColorUtilities.getSecondaryIconColorId(nightMode);
+		int smallPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
 
 		Set<String> hidden = selectedGpxFile.getHiddenGroups();
 		for (GpxDisplayGroup group : displayGroups) {
@@ -63,6 +64,7 @@ public class PointsGroupsCard extends MapBaseCard {
 				item.setIconId(R.drawable.ic_action_hide_16);
 				item.setIconColorId(iconColorId);
 				item.setIconSizePx(iconSizePx);
+				item.setHorizontalPaddingPx(smallPadding);
 			}
 			items.add(item);
 		}

@@ -1059,10 +1059,16 @@ public class RouteDataObject {
 
 	@Override
 	public String toString() {
-		String name = getName();
+		String str = String.format("Road (%d)", id / 64);
 		String rf = getRef("", false, true);
-		return String.format("Road id (%d), name ('%s'), ref ('%s')", id / 64, name, rf);
-//		return String.format("Road [%d, '%s', '%s'] - [%s, %s]", id / 64, name, rf, Arrays.toString(pointsX), Arrays.toString(pointsY));
+		if (!Algorithms.isEmpty(rf)) {
+			str += ", ref ('" + rf + "')";
+		}
+		String name = getName();
+		if (!Algorithms.isEmpty(name)) {
+			str += ", name ('" + name + "')";
+		}
+		return str;
 	}
 
 	public boolean hasNameTagStartsWith(String tagStartsWith) {
