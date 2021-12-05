@@ -1,5 +1,7 @@
 package net.osmand.plus.osmedit.dialogs;
 
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType.OPEN_STREET_MAP_EDITING;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -8,8 +10,17 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.textfield.TextInputEditText;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -25,6 +36,7 @@ import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin.UploadVisibility;
 import net.osmand.plus.osmedit.UploadGPXFilesTask;
+import net.osmand.plus.osmedit.UploadGPXFilesTask.UploadGpxListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.util.Algorithms;
@@ -32,17 +44,7 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType.OPEN_STREET_MAP_EDITING;
-
-public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
+public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment implements UploadGpxListener {
 
 	public static final String TAG = SendGpxBottomSheetFragment.class.getSimpleName();
 
@@ -162,19 +164,27 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 			String tags = tagsText != null ? tagsText.toString() : "";
 
 			UploadGPXFilesTask uploadGPXFilesTask = new UploadGPXFilesTask(activity, commonDescription,
-					tags, selectedUploadVisibility);
+					tags, selectedUploadVisibility, this);
 			uploadGPXFilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, gpxInfos);
 		}
 		dismiss();
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment targetFragment, GpxInfo[] info) {
-		if (!fragmentManager.isStateSaved()) {
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull GpxInfo[] info, @Nullable Fragment target) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SendGpxBottomSheetFragment fragment = new SendGpxBottomSheetFragment();
-			fragment.setTargetFragment(targetFragment, 0);
+			fragment.setTargetFragment(target, 0);
 			fragment.setGpxInfos(info);
 			fragment.setRetainInstance(true);
-			fragment.show(fragmentManager, TAG);
+			fragment.show(manager, TAG);
+		}
+	}
+
+	@Override
+	public void onGpxUploaded(String result) {
+		Fragment target = getTargetFragment();
+		if (target instanceof UploadGpxListener) {
+			((UploadGpxListener) target).onGpxUploaded(result);
 		}
 	}
 }
