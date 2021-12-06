@@ -552,14 +552,14 @@ public class ResourceManager {
 		boolean versionChanged = !fv.equalsIgnoreCase(settings.PREVIOUS_INSTALLED_VERSION.get());
 		boolean overwrite = versionChanged || forceUpdate;
 		if (overwrite || forceCheck) {
-			File applicationDataDir = context.getAppPath(null);
-			applicationDataDir.mkdirs();
-			if (applicationDataDir.canWrite()) {
+			File appDataDir = context.getAppPath(null);
+			appDataDir.mkdirs();
+			if (appDataDir.canWrite()) {
 				try {
 					progress.startTask(context.getString(R.string.installing_new_resources), -1);
 					AssetManager assetManager = context.getAssets();
 					boolean firstInstall = !settings.PREVIOUS_INSTALLED_VERSION.isSet();
-					unpackBundledAssets(assetManager, applicationDataDir, firstInstall || forceUpdate, forceCheck);
+					unpackBundledAssets(assetManager, appDataDir, firstInstall || forceUpdate, overwrite, forceCheck);
 					settings.PREVIOUS_INSTALLED_VERSION.set(fv);
 					copyRegionsBoundaries(overwrite);
 					// see Issue #3381
@@ -613,7 +613,9 @@ public class ResourceManager {
 	private final static String ASSET_COPY_MODE__copyOnlyIfDoesNotExist = "copyOnlyIfDoesNotExist";
 
 	private void unpackBundledAssets(@NonNull AssetManager assetManager, @NonNull File appDataDir,
-	                                 boolean forceUpdate, boolean forceCheck) throws IOException, XmlPullParserException {
+	                                 boolean firstInstall,
+	                                 boolean overwrite,
+	                                 boolean forceCheck) throws IOException, XmlPullParserException {
 		List<AssetEntry> assetEntries = DownloadOsmandIndexesHelper.getBundledAssets(assetManager);
 		for (AssetEntry asset : assetEntries) {
 			String[] modes = asset.combinedMode.split("\\|");
@@ -636,22 +638,25 @@ public class ResourceManager {
 			}
 
 			File destinationFile = new File(appDataDir, asset.destination);
-			if (destinationFile.exists() && !forceUpdate) {
-				continue;
-			}
+
 			boolean unconditional = false;
 			if (installMode != null) {
-				unconditional = ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall.equals(installMode) && (forceUpdate || forceCheck);
+				unconditional = ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall.equals(installMode) && (firstInstall || forceCheck);
 			}
 			if (copyMode == null) {
 				log.error("No copy mode was defined for " + asset.source);
 			}
-			unconditional = unconditional || ASSET_COPY_MODE__alwaysOverwriteOrCopy.equals(copyMode);
+			if (firstInstall || overwrite) {
+				unconditional |= ASSET_COPY_MODE__alwaysOverwriteOrCopy.equals(copyMode);
+			} else if (forceCheck) {
+				unconditional |= ASSET_COPY_MODE__alwaysOverwriteOrCopy.equals(copyMode) && !destinationFile.exists();
+			}
 
 			boolean shouldCopy = unconditional;
-			shouldCopy |= ASSET_COPY_MODE__overwriteOnlyIfExists.equals(copyMode) && destinationFile.exists();
-			shouldCopy |= ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(copyMode) && !destinationFile.exists();
-
+			if (firstInstall || overwrite) {
+				shouldCopy |= ASSET_COPY_MODE__overwriteOnlyIfExists.equals(copyMode) && destinationFile.exists();
+				shouldCopy |= ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(copyMode) && !destinationFile.exists();
+			}
 			if (shouldCopy) {
 				copyAssets(assetManager, asset.source, destinationFile);
 			}
