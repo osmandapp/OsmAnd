@@ -4488,4 +4488,6 @@
 \n • OsmAnd Live uppfærslur færðar í \"Sótt gögn &gt; Uppfærslur\"
 \n
 \n</string>
+    <string name="created_on">Búið til</string>
+    <string name="shared_string_size">Stærð</string>
 </resources>

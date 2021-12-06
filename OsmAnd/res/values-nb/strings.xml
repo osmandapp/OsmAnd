@@ -4389,4 +4389,6 @@
     <string name="shared_string_statistics">Statistikk</string>
     <string name="distance_between_points">Avstand mellom punkter</string>
     <string name="gps_filter_precision">GPS-preisisjon</string>
+    <string name="shared_string_size">Størrelse</string>
+    <string name="created_on">Opprettet</string>
 </resources>

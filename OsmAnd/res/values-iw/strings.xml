@@ -4483,4 +4483,6 @@
 \n • העדכונים החיים של OsmAnd הועברו אל „הורדות &gt; עדכונים”
 \n
 \n</string>
+    <string name="created_on">נוצר בתאריך</string>
+    <string name="shared_string_size">גודל</string>
 </resources>

@@ -467,7 +467,7 @@
     <string name="update_poi_error_local">Nem sikerült frissíteni a helyi érdekes pontok (POI-k) listáját.</string>
     <string name="update_poi_error_loading">Nem sikerült adatokat letölteni a kiszolgálóról.</string>
     <string name="update_poi_no_offline_poi_index">Nincs helyi POI indexadat ehhez a területhez</string>
-    <string name="update_poi_is_not_available_for_zoom">Belenagyítva tudja frissíteni a POI-kat</string>
+    <string name="update_poi_is_not_available_for_zoom">Nagyítással frissülnek az érdekes pontok (POI-k)</string>
     <string name="context_menu_item_update_poi">POI-k frissítése</string>
     <string name="context_menu_item_update_map_confirm">Frissíti a helyi adatokat az internetről\?</string>
     <string name="search_history_city">Település: {0}</string>
@@ -493,7 +493,7 @@
     <string name="router_service">Útvonaltervező szolgáltatás</string>
     <string name="sd_dir_not_accessible">A tárolási mappa nem érhető el a memóriakártyán!</string>
     <string name="download_question">Letöltés {0} - {1} ?</string>
-    <string name="download_question_exist">A(z) {0} régióhoz már le van töltve offline adat ({1}). Frissíti ({2})\?</string>
+    <string name="download_question_exist">A(z) {0} régióhoz már van offline adat ({1}). Frissíti ({2})\?</string>
     <string name="address">Cím</string>
     <string name="shared_string_download_successful">Letöltve</string>
     <string name="downloading_list_indexes">Elérhető régiók listájának letöltése…</string>
@@ -2060,7 +2060,7 @@
     <string name="routing_attr_allow_motorway_name">Autópálya használata</string>
     <string name="routing_attr_allow_motorway_description">Engedélyezi az autópályákat.</string>
     <string name="lang_sr_latn">szerb (latin betűs)</string>
-    <string name="lang_zh_hk">kínai (hongkongi)</string>
+    <string name="lang_zh_hk">kínai (Hong Kong)</string>
     <string name="rendering_attr_contourDensity_description">Szintvonalak sűrűsége</string>
     <string name="rendering_attr_contourDensity_name">Szintvonalak sűrűsége</string>
     <string name="rendering_value_high_name">Magas</string>
@@ -4335,7 +4335,7 @@
     <string name="search_title">Keresés: %1$s</string>
     <string name="exit_pan_mode_descr">A pásztázó módból való kilépéshez nyomja meg a Kijelölés gombot</string>
     <string name="icon_group_nautical">Hajózás</string>
-    <string name="internal_app_storage_description">Belső tárhely, a felhasználó és más alkalmazások elől rejtve, így csak az OsmAnd férhet hozzá az adataihoz.</string>
+    <string name="internal_app_storage_description">Belső tárhely, minden felhasználó és más alkalmazások elől elrejtve, így csak az OsmAnd férhet hozzá az adataihoz.</string>
     <string name="shared_storage_warning_title">Változások a tárhely-hozzáférési szabályokban</string>
     <string name="purchases_feature_desc_android_auto">Elhozza az OsmAnd offline térképeit és navigációját az autója képernyőjére, és integrálódik a jármű kezelőszerveivel.</string>
     <string name="shared_string_details">Részletek</string>
@@ -4430,16 +4430,16 @@
     <string name="skip_confirmation">Igen, kihagyás</string>
     <string name="shared_storage">Közös tárhely</string>
     <string name="shared_storage_migration">Átköltöztetés a közös tárhelyre</string>
-    <string name="icon_group_industrial">Ipari</string>
+    <string name="icon_group_industrial">Ipar</string>
     <string name="rendering_attr_natureReserves_description">Tájvédelmi körzetek, természetvédelmi területek és nemzeti parkok megjelenítése.</string>
-    <string name="show_parameter_seekbar">Paraméterkereső-sáv megjelenítése</string>
+    <string name="show_parameter_seekbar">Paraméterkereső sáv megjelenítése</string>
     <string name="shared_storage_last_step">Utána adhatja meg az új adatmappát.</string>
     <string name="shared_storage_migration_descr">Az Android tárhelyelérési szabályainak változása miatt az OsmAnd már nem használhatja a(z) %1$s mappát.
 \n
 \nÁt kell másolnia az összes adatát az új mappába.</string>
-    <string name="migration_files_present">%1$d fájl (%2$s) található a kiválasztott „%3$s” helyen.</string>
-    <string name="fold_unfold">összehajtás/szétnyitás</string>
-    <string name="app_modes_options">Alkalmazásmódok választása</string>
+    <string name="migration_files_present">A kiválasztott „%3$s” helyen %1$d fájl (%2$s) található.</string>
+    <string name="fold_unfold">összecsukás / kibontás</string>
+    <string name="app_modes_options">Alkalmazásmódok kiválasztása</string>
     <string name="shared_string_memory">Memória</string>
     <string name="reading_files">Fájlok beolvasása…</string>
     <string name="no_items_selected_warning">Válasszon legalább egy elemet</string>
@@ -4448,8 +4448,8 @@
     <string name="app_profile_type">Alkalmazásprofil típusa</string>
     <string name="map_marker_options">Térképjelölő beállításai</string>
     <string name="add_to_group">Csoporthoz adás</string>
-    <string name="memory_allocated_for_routing_ds">A magasabb memóriafoglalás felgyorsítja a hosszú útvonalak (több mint 500km) kiszámítását, de hatással lehet a többi alkalmazás teljesítményére.
-\nNincs hatással a rövid útvonalak kiszámítási sebességére.</string>
+    <string name="memory_allocated_for_routing_ds">A nagyobb memóriakiosztás felgyorsítja a hosszú (500 km-nél hosszabb) útvonalak kiszámítását, de hatással lehet más alkalmazások teljesítményére.
+\nRövid útvonalak kiszámításának sebességére nincs hatással.</string>
     <string name="display_groups_visibility_dialog_description">Beállíthatja a csoport láthatóságát a térképen. Ha a nyomvonal rejtett, az összes csoport rejtve lesz.</string>
     <string name="not_enough_contributions_descr">Legalább %1$s változtatás szükséges az elmúlt két hónapos időszakban %2$s, hogy hozzáférést kapjon a korlátlan óránkénti térképfrissítéshez.</string>
     <string name="exit_without_saving_warning">Kilép mentés nélkül\?</string>
@@ -4471,12 +4471,12 @@
     <string name="elevation_profile">Magassági profil</string>
     <string name="distance_between_points">Pontok közti távolság</string>
     <string name="gps_filter_smoothing_desc">Állítsa be a pontok közti távolság korlátját.
-\nAzok a nyomvonalpontok, melyek nincsenek legalább ekkora távolságra az előző látható ponttól, el lesznek rejtve.
+\nAzok a nyomvonalpontok, amelyek nincsenek legalább ekkora távolságra az előző látható ponttól, el lesznek rejtve.
 \nVegye figyelembe, hogy a túl magas korlát túlságosan leegyszerűsítheti a nyomvonalat.</string>
     <string name="gps_filter_actions_description">Az OsmAnd a fájl frissítése nélkül fogja alkalmazni a nyomvonal változásait. Kézileg mentheti a módosításokat.</string>
-    <string name="storage_migration_wrong_folder_warning">Nem találhatók OsmAnd adatok a kiválasztott mappában. Próbálja újra.</string>
+    <string name="storage_migration_wrong_folder_warning">Nem találhatók OsmAnd adatok a kiválasztott mappában. Próbálja meg újra.</string>
     <string name="use_routing_fallback_description">Offline útvonaltervezés használata, ha az online útvonaltervezés nem érhető el.</string>
     <string name="use_routing_fallback">Útvonaltervezési tartalék használata</string>
-    <string name="created_on">Létrehozás ideje</string>
+    <string name="created_on">Létrehozva:</string>
     <string name="shared_string_size">Méret</string>
 </resources>

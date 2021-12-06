@@ -4491,4 +4491,6 @@
     <string name="shared_string_gps_filter">GPS-filter</string>
     <string name="use_routing_fallback_description">Brug offline-ruteberegning, når der ikke er forbindelse til online-ruteberegning.</string>
     <string name="use_routing_fallback">Brug ruteberegningsalternativ</string>
+    <string name="created_on">Oprettet den</string>
+    <string name="shared_string_size">Størrelse</string>
 </resources>

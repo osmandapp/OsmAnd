@@ -457,8 +457,8 @@
     <string name="lang_bg">Búlgaro</string>
     <string name="lang_ca">Catalão</string>
     <string name="lang_hr">Croata</string>
-    <string name="lang_cs">Tcheco</string>
-    <string name="lang_da">Dinamarquês</string>
+    <string name="lang_cs">Tcheca</string>
+    <string name="lang_da">Dinamarquesa</string>
     <string name="lang_nl">Holandês</string>
     <string name="lang_fi">Finlandês</string>
     <string name="lang_fr">Francês</string>
@@ -3535,7 +3535,7 @@
     <string name="lang_gu">Guzerate</string>
     <string name="lang_cv">Tchuvache</string>
     <string name="lang_ce">Checheno</string>
-    <string name="lang_bar">Bávaro</string>
+    <string name="lang_bar">Bávara</string>
     <string name="lang_ba">Basquir</string>
     <string name="lang_an">Aragonês</string>
     <string name="lang_lmo">Lombardo</string>
@@ -4479,4 +4479,8 @@
 \nOs pontos da trilha que não estejam a pelo menos esta distância do último ponto visível serão ocultados.
 \nEsteja ciente de que limites altos podem simplificar demais a geometria da trilha.</string>
     <string name="distance_between_points">Distância entre pontos</string>
+    <string name="shared_string_size">Tamanho</string>
+    <string name="created_on">Criado em</string>
+    <string name="use_routing_fallback_description">Use o roteamento offline quando o roteamento online não puder ser alcançado.</string>
+    <string name="use_routing_fallback">Use fallback de roteamento</string>
 </resources>

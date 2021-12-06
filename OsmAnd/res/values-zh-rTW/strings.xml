@@ -4476,4 +4476,8 @@
     <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="shared_string_precision">精確</string>
     <string name="shared_string_statistics">統計</string>
+    <string name="shared_string_size">大小</string>
+    <string name="use_routing_fallback">使用路線規劃汰退</string>
+    <string name="use_routing_fallback_description">當無法使用線上路線規劃時，則使用離線路線規劃。</string>
+    <string name="created_on">建立於</string>
 </resources>

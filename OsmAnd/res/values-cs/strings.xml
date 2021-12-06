@@ -3817,7 +3817,7 @@
 \nPoužijte metodu OAuth nebo své jméno a heslo v OSM.</string>
     <string name="use_login_password">Použít jméno a heslo</string>
     <string name="login_account">Účet</string>
-    <string name="user_login">Uživatelské jméno</string>
+    <string name="user_login">Přihlásit se</string>
     <string name="markers_history">Historie značek</string>
     <string name="gpx_upload_public_visibility_descr">„Veřejná“ znamená, že trasa je veřejně dostupná ve vašich GPS trasách, ve veřejných seznamech GPS tras a také ve veřejném seznamu stop s nezpracovanými časovými razítky. Data poskytnutá prostřednictvím API nebudou odkazovat na vaši stránku s trasou. Časová razítka bodů trasy nebudou dostupná prostřednictvím veřejného GPS API a body nebudou chronologicky seřazeny.</string>
     <string name="gpx_upload_private_visibility_descr">„Soukromá“ znamená, že trasa se neobjeví v žádném veřejném seznamu, ale body trasy budou dostupné prostřednictvím veřejného GPS API, bez časových razítek a nebudou chronologicky seřazeny.</string>
@@ -4483,4 +4483,6 @@
     <string name="shared_string_grade">Stupeň</string>
     <string name="use_routing_fallback_description">Použít offline plánování, pokud online služba není dosažitelná.</string>
     <string name="use_routing_fallback">Použít náhradní plánovač</string>
+    <string name="shared_string_size">Velikost</string>
+    <string name="created_on">Vytvořeno dne</string>
 </resources>
