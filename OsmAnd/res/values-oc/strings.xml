@@ -233,7 +233,7 @@
     <string name="app_mode_helicopter">Elicoptèr</string>
     <string name="app_mode_skiing">Esquí</string>
     <string name="rendering_attr_smoothness_very_horrible_name">Fòrça marrit</string>
-    <string name="hide_full_description">Amaga la descripcion completa</string>
+    <string name="hide_full_description">Amagar la descripcion completa</string>
     <string name="show_full_description">Mòstra la descripcion completa</string>
     <string name="open_wikipedia_link_online">Òbra lo liame en linha vèrs Wikipèdia</string>
     <string name="open_wikipedia_link_online_description">Lo liame se dobrirà dins vòstre navigador oèb.</string>
@@ -839,16 +839,16 @@
     <string name="av_settings_descr">Configuratz lei preferéncias de son e de video.</string>
     <string name="av_settings">Configuracion de son/ video</string>
     <string name="download_select_map_types">Autrei mapas</string>
-    <string name="show_poi_over_map_description">Mostrar la darriera superpausicion de PDI emplegada.</string>
+    <string name="show_poi_over_map_description">Mostrar la darriera superposicion de PDI emplegada.</string>
     <string name="quick_action_map_overlay">Modificar la superposicion de la mapa</string>
     <string name="layer_underlay">Mapa de fons…</string>
     <string name="map_underlay_descr">Chausissètz la mapa de fons</string>
-    <string name="map_overlay">Mapa subrepausada</string>
+    <string name="map_overlay">Mapa superpausada</string>
     <string name="tile_source_already_installed">Mapa ja installada, s\'actualizarà dins \'Configuracion\'.</string>
     <string name="fav_imported_sucessfully">Preferéncias importadas</string>
     <string name="import_file_favourites">Sauvagardar lei donadas per fichier GPX ò importar leis etapas dins lei \'Preferéncias\' \?</string>
     <string name="fav_saved_sucessfully">Preferéncias saugardadas en {0}</string>
-    <string name="layer_poi">Subreposicion de PDI…</string>
+    <string name="layer_poi">Superposicion de PDI…</string>
     <string name="favourites">Preferéncias</string>
     <string name="quick_action_map_overlay_switch">La mapa superpausada es estada modificada en \"%s\".</string>
     <string name="quick_action_map_overlay_action">Ajustar una superposicion</string>
@@ -912,7 +912,7 @@
     <string name="pref_raster_map">Configuracion de la fònt de mapa</string>
     <string name="internet_connection_required_for_online_route">La navigacion en linha foncciona pas sensa connexion.</string>
     <string name="layer_overlay">Mapa subrepausada…</string>
-    <string name="map_overlay_descr">Chausissètz la mapa subrepausada</string>
+    <string name="map_overlay_descr">Chausissètz la mapa superpausada</string>
     <string name="hello">Aplicacion de navigacion OsmAnd</string>
     <string name="app_description">Aplicacion de navigacion</string>
     <string name="quick_action_navigation_voice">Votz activa/desactivada</string>
@@ -1150,7 +1150,7 @@
     <string name="rendering_category_hide">Amagar</string>
     <string name="rendering_category_details">Detalhs</string>
     <string name="rendering_category_transport">Transpòrt collectiu</string>
-    <string name="rendering_attr_coloredBuildings_name">Colorar leis edificis per mena</string>
+    <string name="rendering_attr_coloredBuildings_name">Colorar leis edificis segon la mena</string>
     <string name="rendering_attr_tracktype_grade4_name">Au mai leugier</string>
     <string name="rendering_attr_tracktype_grade3_name">Basicament compacte</string>
     <string name="rendering_attr_tracktype_grade2_name">Compacte (sensa caladat)</string>
@@ -1295,7 +1295,7 @@
     <string name="rendering_value_brown_name">Marron</string>
     <string name="traffic_warning_border_control">Contraròtle dei frontieras</string>
     <string name="traffic_warning_stop">Senhau d\'estòp</string>
-    <string name="rendering_attr_roadStyle_description">Representacion dei rotas</string>
+    <string name="rendering_attr_roadStyle_description">Representacion dei vias</string>
     <string name="rendering_category_others">Autreis atributs de la mapa</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Partejar lei percors en taxi</string>
     <string name="rendering_attr_publicTransportMode_name">Linhas de bus, troleibús e tramvai</string>
@@ -1314,7 +1314,7 @@
     <string name="rendering_attr_noAdminboundaries_description">Pas mostrar lei limits admistratius (de nivèu 5-9).</string>
     <string name="rendering_attr_noAdminboundaries_name">Limits administratius</string>
     <string name="rendering_attr_alpineHiking_description">Representacion dei camins e draias segon l\'escala SAC (Club Alpinn Soisse).</string>
-    <string name="rendering_attr_alpineHiking_name">Escala deis escorregudas alpinas SAC (Club Alpin Soisse)</string>
+    <string name="rendering_attr_alpineHiking_name">Escala deis escorregudas alpinas (SAC)</string>
     <string name="map_widget_renderer">Representacion de la mapa</string>
     <string name="rendering_attr_appMode_description">Optimizar la mapa per</string>
     <string name="rendering_attr_appMode_name">Mòde de representacion</string>
@@ -1437,4 +1437,14 @@
     <string name="commiting_node">A mandar lo nos…</string>
     <string name="loading_poi_obj">A teledescargar lo PDI…</string>
     <string name="shared_string_progress">Progression</string>
+    <string name="delete_filter">Escafar un filtre</string>
+    <string name="shared_string_delete">Supprimir</string>
+    <string name="quick_action_show_hide_title">Mostrar/amagar</string>
+    <string name="delete_waypoints">Suprimir lei ponchs d\'etapa</string>
+    <string name="routing_attr_prefer_hiking_routes_name">Priorizar lei percors d\'escorreguda</string>
+    <string name="rendering_attr_streetLighting_name">Illumination dei carrieras</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Priorizar lei percors d\'escorreguda</string>
+    <string name="shared_string_reload">Actualizar</string>
+    <string name="save_poi_too_many_uppercase">Lo nom contèn tròp de majusculas. Volètz continuar\?</string>
+    <string name="shared_string_hide_slope">Amagar la penda</string>
 </resources>
