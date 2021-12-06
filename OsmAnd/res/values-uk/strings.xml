@@ -1466,7 +1466,7 @@
     <string name="shared_string_video">Відео</string>
     <string name="shared_string_photo">Світлина</string>
     <string name="route_points">Точки маршруту</string>
-    <string name="track_segments">Відрізки треку</string>
+    <string name="track_segments">Відтинки треку</string>
     <string name="track_points">Точки треку</string>
     <string name="plugin_touringview_name">Туристична мапа</string>
     <string name="rename_failed">Перейменування не вдалося.</string>
