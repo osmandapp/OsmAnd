@@ -229,9 +229,12 @@ public class GPXAction extends QuickAction {
 
 		View trackInfoContainer = container.findViewById(R.id.selected_track_file_container);
 
+		boolean currentTrack = gpxFilePath.isEmpty();
 		File file = new File(gpxFilePath);
-		String gpxName = GpxUiHelper.getGpxTitle(file.getName());
-		SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);
+		String gpxName = currentTrack ? app.getString(R.string.current_track) : GpxUiHelper.getGpxTitle(file.getName());
+		SelectedGpxFile selectedGpxFile = currentTrack
+				? app.getSavingTrackHelper().getCurrentTrack()
+				: app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);
 		if (selectedGpxFile != null) {
 			setupGpxTrackInfo(trackInfoContainer, gpxName, selectedGpxFile.getTrackAnalysis(app), app);
 		} else {

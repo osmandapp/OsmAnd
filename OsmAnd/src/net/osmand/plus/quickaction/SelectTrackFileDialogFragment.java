@@ -70,7 +70,8 @@ public class SelectTrackFileDialogFragment extends BaseOsmAndDialogFragment {
 			if (onGpxSelectedListener != null) {
 				GPXInfo selectedGpxInfo = gpxInfoList.get(position);
 				String fileName = selectedGpxInfo.getFileName();
-				String gpxFilePath = fileName.isEmpty() ? "" : gpxRootDir.getAbsolutePath() + "/" + fileName;
+				boolean currentTrack = getString(R.string.current_track).equals(fileName);
+				String gpxFilePath = currentTrack ? "" : gpxRootDir.getAbsolutePath() + "/" + fileName;
 				onGpxSelectedListener.processResult(gpxFilePath);
 			}
 			dismiss();
