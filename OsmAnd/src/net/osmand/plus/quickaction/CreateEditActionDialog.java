@@ -323,4 +323,18 @@ public class CreateEditActionDialog extends DialogFragment
         quickActionRegistry.notifyUpdates();
         dismiss();
     }
+
+    public void hide() {
+        Dialog dialog = getDialog();
+        if (dialog != null) {
+            dialog.hide();
+        }
+    }
+
+    public void show() {
+        Dialog dialog = getDialog();
+        if (dialog != null) {
+            dialog.show();
+        }
+    }
 }

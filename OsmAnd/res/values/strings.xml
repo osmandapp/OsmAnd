@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="waypoint_template">Waypoint template</string>
     <string name="predefined_waypoint_appearance_description">Taping on the action will automatically save waypoint with predefined parameters.</string>
     <string name="always_ask_waypoint_appearance_description">Taping on action will open “Add waypoint” screen, where you can change name and appearance.</string>
     <string name="waypoint_appearance">Waypoint appearance</string>

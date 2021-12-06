@@ -23,7 +23,6 @@ import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
@@ -35,6 +34,8 @@ import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
+import net.osmand.plus.quickaction.CreateEditActionDialog;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SelectTrackFileDialogFragment;
@@ -50,6 +51,9 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.TextViewCompat;
+import androidx.fragment.app.Fragment;
+
+import static net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 
 public class GPXAction extends QuickAction {
 
@@ -63,6 +67,7 @@ public class GPXAction extends QuickAction {
 
 	private static final String KEY_USE_PREDEFINED_WPT_APPEARANCE = "use_predefined_appearance";
 	private static final String KEY_PREDEFINED_WPT_NAME = "name";
+	private static final String KEY_PREDEFINED_WPT_ADDRESS = "predefined_wpt_address";
 	private static final String KEY_PREDEFINED_WPT_DESCRIPTION = "predefined_wpt_description";
 	private static final String KEY_PREDEFINED_WPT_COLOR = "predefined_wpt_color";
 	private static final String KEY_PREDEFINED_WPT_ICON = "predefined_wpt_icon";
@@ -72,8 +77,12 @@ public class GPXAction extends QuickAction {
 	private static final String KEY_PREDEFINED_CATEGORY_COLOR = "category_color";
 
 	private transient String selectedGpxFilePath;
+	private transient WptPt predefinedWaypoint;
+	@ColorInt
+	private transient int predefinedCategoryColor;
 
 	private transient TextToggleButton trackToggleButton;
+	private transient TextToggleButton appearanceToggleButton;
 
 	public GPXAction() {
 		super(TYPE);
@@ -85,57 +94,63 @@ public class GPXAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull final MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		unselectGpxFileIfMissing();
+
 		if (!shouldUseSelectedGpxFile()) {
 			addWaypoint(null, mapActivity);
 		} else {
-			String selectedGpxFilePath = getSelectedGpxFilePath();
-			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(selectedGpxFilePath);
-			if (selectedGpxFile != null) {
-				addWaypoint(selectedGpxFile.getGpxFile(), mapActivity);
-			} else {
-				CallbackWithObject<GPXFile[]> onGpxFileLoaded = gpxFiles -> {
-					addWaypoint(gpxFiles[0], mapActivity);
-					return true;
-				};
-				String gpxFileName = Algorithms.getFileWithoutDirs(selectedGpxFilePath);
-				File gpxFileDir = new File(selectedGpxFilePath.replace("/" + gpxFileName, ""));
-				GpxUiHelper.loadGPXFileInDifferentThread(mapActivity, onGpxFileLoaded, gpxFileDir,
-						null, gpxFileName);
-			}
+			getGpxFile(getSelectedGpxFilePath(true), mapActivity, gpxFile -> {
+				addWaypoint(gpxFile, mapActivity);
+				return true;
+			});
 		}
 	}
 
 	private void addWaypoint(@Nullable GPXFile gpxFile, @NonNull MapActivity mapActivity) {
-		final LatLon latLon = mapActivity.getMapView()
+		LatLon latLon = mapActivity.getMapView()
 				.getCurrentRotatedTileBox()
 				.getCenterLatLon();
 
-		final String title = getParams().get(KEY_PREDEFINED_WPT_NAME);
+		boolean usePredefinedWaypoint = Boolean.parseBoolean(getParams().get(KEY_USE_PREDEFINED_WPT_APPEARANCE));
+		if (usePredefinedWaypoint) {
+			String name = getParams().get(KEY_PREDEFINED_WPT_NAME);
+			String address = getParams().get(KEY_PREDEFINED_WPT_ADDRESS);
+			String description = getParams().get(KEY_PREDEFINED_WPT_DESCRIPTION);
+			int color = getWaypointColorFromParams();
+			String backgroundType = getBackgroundTypeFromParams();
+			String categoryName = getParams().get(KEY_PREDEFINED_CATEGORY_NAME);
+			int categoryColor = getColorFromParams(KEY_PREDEFINED_CATEGORY_COLOR, 0);
 
-		if (Algorithms.isEmpty(title)) {
+			if (Algorithms.isBlank(name) && Algorithms.isBlank(address)) {
+				lookupAddress(latLon, mapActivity, foundAddress -> {
 
-			final Dialog progressDialog = new ProgressDialog(mapActivity);
-			progressDialog.setCancelable(false);
-			progressDialog.setTitle(R.string.search_address);
-			progressDialog.show();
-
-			GeocodingLookupService.AddressLookupRequest lookupRequest = new GeocodingLookupService.AddressLookupRequest(latLon,
-					address -> {
-						progressDialog.dismiss();
-						mapActivity.getContextMenu().addWptPt(latLon, address,
-								getParams().get(KEY_PREDEFINED_CATEGORY_NAME),
-								Integer.valueOf(getParams().get(KEY_PREDEFINED_CATEGORY_COLOR)),
-								false, gpxFile);
-					}, null);
-
-			mapActivity.getMyApplication().getGeocodingLookupService().lookupAddress(lookupRequest);
-
+					mapActivity.getContextMenu().addWptPt(latLon, address, null, description,
+							color, backgroundType, categoryName, categoryColor, true, gpxFile);
+					return true;
+				});
+			} else {
+				mapActivity.getContextMenu().addWptPt(latLon, name, address, description, color,
+						backgroundType, categoryName, categoryColor, true, gpxFile);
+			}
 		} else {
-			mapActivity.getContextMenu().addWptPt(latLon, title,
-					getParams().get(KEY_PREDEFINED_CATEGORY_NAME),
-					Integer.valueOf(getParams().get(KEY_PREDEFINED_CATEGORY_COLOR)), false, gpxFile);
+			mapActivity.getContextMenu()
+					.addWptPt(latLon, null, null, null, 0, null, null, 0, false, gpxFile);
 		}
+	}
+
+	private void lookupAddress(@NonNull LatLon latLon,
+	                           @NonNull MapActivity mapActivity,
+	                           @NonNull CallbackWithObject<String> onAddressDetermined) {
+		final Dialog progressDialog = new ProgressDialog(mapActivity);
+		progressDialog.setCancelable(false);
+		progressDialog.setTitle(R.string.search_address);
+		progressDialog.show();
+
+		AddressLookupRequest lookupRequest = new AddressLookupRequest(latLon, address -> {
+			progressDialog.dismiss();
+			onAddressDetermined.processResult(address);
+		}, null);
+		mapActivity.getMyApplication().getGeocodingLookupService().lookupAddress(lookupRequest);
 	}
 
 	@Override
@@ -144,13 +159,14 @@ public class GPXAction extends QuickAction {
 				.inflate(R.layout.quick_action_add_gpx, parent, false);
 		parent.addView(root);
 
+		unselectGpxFileIfMissing();
 		setupTrackToggleButton(root, mapActivity);
 		setupWaypointAppearanceToggle(root, mapActivity);
 	}
 
 	private void setupTrackToggleButton(@NonNull View container, @NonNull MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
-		boolean night = app.getDaynightHelper().isNightModeForMapControls();
+		boolean night = isNightMode(mapActivity);
 		LinearLayout trackToggle = container.findViewById(R.id.track_toggle);
 		trackToggleButton = new TextToggleButton(app, trackToggle, night);
 
@@ -206,7 +222,7 @@ public class GPXAction extends QuickAction {
 	}
 
 	private void setupGpxTrackInfo(@NonNull final View container, @NonNull final OsmandApplication app) {
-		String gpxFilePath = getSelectedGpxFilePath();
+		String gpxFilePath = getSelectedGpxFilePath(false);
 		if (gpxFilePath == null) {
 			return;
 		}
@@ -286,33 +302,36 @@ public class GPXAction extends QuickAction {
 
 	private void setupWaypointAppearanceToggle(@NonNull View container, @NonNull MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
-		boolean night = app.getDaynightHelper().isNightModeForMapControls();
-		boolean usePredefinedAppearance = Boolean.parseBoolean(getParams().get(KEY_USE_PREDEFINED_WPT_APPEARANCE));
+		boolean night = isNightMode(mapActivity);
+		boolean usePredefinedAppearance = predefinedWaypoint != null
+				|| Boolean.parseBoolean(getParams().get(KEY_USE_PREDEFINED_WPT_APPEARANCE));
 		LinearLayout appearanceToggle = container.findViewById(R.id.appearance_toggle);
-		TextToggleButton appearanceToggleButton = new TextToggleButton(app, appearanceToggle, night);
+		appearanceToggleButton = new TextToggleButton(app, appearanceToggle, night);
 
 		TextRadioItem alwaysAskButton = new TextRadioItem(app.getString(R.string.confirm_every_run));
 		TextRadioItem predefinedAppearanceButton = new TextRadioItem(app.getString(R.string.shared_string_predefined));
 
-		alwaysAskButton.setOnClickListener(getOnAppearanceToggleButtonClicked(container, true, night));
-		predefinedAppearanceButton.setOnClickListener(getOnAppearanceToggleButtonClicked(container, false, night));
+		alwaysAskButton.setOnClickListener(getOnAppearanceToggleButtonClicked(container, true, mapActivity));
+		predefinedAppearanceButton.setOnClickListener(getOnAppearanceToggleButtonClicked(container, false, mapActivity));
 
 		appearanceToggleButton.setItems(alwaysAskButton, predefinedAppearanceButton);
 		TextRadioItem selectedItem = usePredefinedAppearance ? predefinedAppearanceButton : alwaysAskButton;
 		appearanceToggleButton.setSelectedItem(selectedItem);
-		updateAppearanceBottomInfo(container, !usePredefinedAppearance, night);
+		updateAppearanceBottomInfo(container, !usePredefinedAppearance, mapActivity);
 	}
 
 	@NonNull
-	private OnRadioItemClickListener getOnAppearanceToggleButtonClicked(@NonNull View container, boolean alwaysAsk, boolean night) {
+	private OnRadioItemClickListener getOnAppearanceToggleButtonClicked(@NonNull View container,
+	                                                                    boolean alwaysAsk,
+	                                                                    @NonNull MapActivity mapActivity) {
 		return (radioItem, view) -> {
 			if (alwaysAsk) {
-				updateAppearanceBottomInfo(container, true, night);
+				updateAppearanceBottomInfo(container, true, mapActivity);
 			} else {
 				if (hasPredefinedWaypointAppearance()) {
-					updateAppearanceBottomInfo(container, false, night);
+					updateAppearanceBottomInfo(container, false, mapActivity);
 				} else {
-					// todo: open edit favorite dialog
+					showPredefineWaypointAppearanceDialog(container, mapActivity);
 					return false;
 				}
 			}
@@ -320,14 +339,15 @@ public class GPXAction extends QuickAction {
 		};
 	}
 
-	private void updateAppearanceBottomInfo(@NonNull View container, boolean alwaysAsk, boolean night) {
+	private void updateAppearanceBottomInfo(@NonNull View container, boolean alwaysAsk, @NonNull MapActivity mapActivity) {
 		Context context = container.getContext();
+		boolean night = isNightMode(mapActivity);
 
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.always_ask_waypoint_appearance), alwaysAsk);
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.predefined_appearance_container), !alwaysAsk);
 
 		if (!alwaysAsk) {
-			WptPt waypoint = createWaypointFromParams();
+			WptPt waypoint = createWaypoint();
 
 			ImageView predefinedIcon = container.findViewById(R.id.predefined_icon);
 			Drawable icon = PointImageDrawable.getFromWpt(context, waypoint.getColor(),
@@ -342,7 +362,11 @@ public class GPXAction extends QuickAction {
 			TextView predefinedCategoryName = container.findViewById(R.id.predefined_category_name);
 			String categoryName = Algorithms.isEmpty(waypoint.category) ? "" : waypoint.category;
 			predefinedCategoryName.setText(categoryName);
-			ColorStateList categoryIconTint = ColorStateList.valueOf(getCategoryColorFromParams(context, night));
+			int categoryColor = getCategoryColor();
+			int categoryColorToDisplay = categoryColor != 0
+					? categoryColor
+					: ColorUtilities.getDefaultIconColor(context, night);
+			ColorStateList categoryIconTint = ColorStateList.valueOf(categoryColorToDisplay);
 			TextViewCompat.setCompoundDrawableTintList(predefinedCategoryName, categoryIconTint);
 
 			View editAppearanceButtonContainer = container.findViewById(R.id.edit_appearance_button_container);
@@ -352,29 +376,81 @@ public class GPXAction extends QuickAction {
 					R.drawable.ripple_oval_light, R.drawable.ripple_oval_dark);
 			AndroidUtils.setBackground(context, editAppearanceButton, night,
 					R.drawable.btn_oval_blue, R.drawable.btn_oval_orange);
+
+			editAppearanceButtonContainer.setOnClickListener(v ->
+					showPredefineWaypointAppearanceDialog(container, mapActivity));
 		}
+	}
+
+	private void showPredefineWaypointAppearanceDialog(@NonNull View container, @NonNull final MapActivity mapActivity) {
+		WptPtEditor waypointEditor = mapActivity.getContextMenu().getWptPtPointEditor();
+		if (waypointEditor != null) {
+			WptPt source = hasPredefinedWaypointAppearance()
+					? createWaypoint()
+					: null;
+			String gpxFilePath = getSelectedGpxFilePath(true);
+			waypointEditor.setOnDismissListener(() -> {
+				CreateEditActionDialog dialog = getDialog(mapActivity);
+				if (dialog != null) {
+					dialog.show();
+				}
+			});
+			waypointEditor.setOnWaypointTemplateAddedListener((waypoint, categoryColor) -> {
+				predefinedWaypoint = waypoint;
+				predefinedCategoryColor = categoryColor;
+				setupWaypointAppearanceToggle(container, mapActivity);
+			});
+
+			if (gpxFilePath == null) {
+				int categoryColor = getColorFromParams(KEY_PREDEFINED_CATEGORY_COLOR, 0);
+				waypointEditor.addWaypointTemplate(source, categoryColor);
+				hideDialog(mapActivity);
+			} else {
+				getGpxFile(gpxFilePath, mapActivity, gpxFile -> {
+					waypointEditor.addWaypointTemplate(source, gpxFile);
+					hideDialog(mapActivity);
+					return true;
+				});
+			}
+		}
+	}
+
+	private void hideDialog(@NonNull MapActivity mapActivity) {
+		CreateEditActionDialog dialog = getDialog(mapActivity);
+		if (dialog != null) {
+			dialog.hide();
+		}
+	}
+
+	@Nullable
+	private CreateEditActionDialog getDialog(@NonNull MapActivity mapActivity) {
+		Fragment fragment = mapActivity.getFragment(CreateEditActionDialog.TAG);
+		return fragment instanceof CreateEditActionDialog
+				? ((CreateEditActionDialog) fragment)
+				: null;
 	}
 
 	private boolean shouldUseSelectedGpxFile() {
 		boolean useSelectedGpxFile = Boolean.parseBoolean(getParams().get(KEY_USE_SELECTED_GPX_FILE));
-		String gpxFilePath = getSelectedGpxFilePath();
+		String gpxFilePath = getSelectedGpxFilePath(false);
 		boolean gpxFileExist = gpxFilePath != null && (gpxFilePath.isEmpty() || new File(gpxFilePath).exists());
-		return useSelectedGpxFile && gpxFileExist;
+		return (useSelectedGpxFile || this.selectedGpxFilePath != null) && gpxFileExist;
 	}
 
 	private boolean hasPredefinedWaypointAppearance() {
-		return getParams().containsKey(KEY_PREDEFINED_WPT_COLOR);
+		return predefinedWaypoint != null || getParams().containsKey(KEY_PREDEFINED_WPT_COLOR);
 	}
 
 	@NonNull
-	private WptPt createWaypointFromParams() {
+	private WptPt createWaypoint() {
 		WptPt waypoint = new WptPt();
-		waypoint.name = getParams().get(KEY_PREDEFINED_WPT_NAME);
-		waypoint.desc = getParams().get(KEY_PREDEFINED_WPT_DESCRIPTION);
-		waypoint.category = getParams().get(KEY_PREDEFINED_CATEGORY_NAME);
-		waypoint.setColor(getWaypointColorFromParams());
-		waypoint.setIconName(getIconNameFromParams());
-		waypoint.setBackgroundType(getBackgroundTypeFromParams());
+		waypoint.name = predefinedWaypoint != null ? predefinedWaypoint.name : getParams().get(KEY_PREDEFINED_WPT_NAME);
+		waypoint.setAddress(predefinedWaypoint != null ? predefinedWaypoint.getAddress() : getParams().get(KEY_PREDEFINED_WPT_ADDRESS));
+		waypoint.desc = predefinedWaypoint != null ? predefinedWaypoint.desc : getParams().get(KEY_PREDEFINED_WPT_DESCRIPTION);
+		waypoint.category = predefinedWaypoint != null ? predefinedWaypoint.category : getParams().get(KEY_PREDEFINED_CATEGORY_NAME);
+		waypoint.setColor(predefinedWaypoint != null ? predefinedWaypoint.getColor() : getWaypointColorFromParams());
+		waypoint.setIconName(predefinedWaypoint != null ? predefinedWaypoint.getIconName() : getIconNameFromParams());
+		waypoint.setBackgroundType(predefinedWaypoint != null ? predefinedWaypoint.getBackgroundType() : getBackgroundTypeFromParams());
 		return waypoint;
 	}
 
@@ -398,9 +474,10 @@ public class GPXAction extends QuickAction {
 	}
 
 	@ColorInt
-	private int getCategoryColorFromParams(@NonNull Context context, boolean night) {
-		int defaultColor = ColorUtilities.getDefaultIconColor(context, night);
-		return getColorFromParams(KEY_PREDEFINED_CATEGORY_COLOR, defaultColor);
+	private int getCategoryColor() {
+		return predefinedWaypoint != null
+				? predefinedCategoryColor
+				: getColorFromParams(KEY_PREDEFINED_CATEGORY_COLOR, 0);
 	}
 
 	@ColorInt
@@ -424,10 +501,59 @@ public class GPXAction extends QuickAction {
 			getParams().put(KEY_GPX_FILE_PATH, selectedGpxFilePath);
 		}
 
+		boolean usePredefinedTemplate = appearanceToggleButton.getSelectedItemIndex() == 1;
+		getParams().put(KEY_USE_PREDEFINED_WPT_APPEARANCE, String.valueOf(usePredefinedTemplate));
+		if (predefinedWaypoint != null) {
+			getParams().put(KEY_PREDEFINED_WPT_NAME, predefinedWaypoint.name);
+			getParams().put(KEY_PREDEFINED_WPT_ADDRESS, predefinedWaypoint.getAddress());
+			getParams().put(KEY_PREDEFINED_WPT_DESCRIPTION, predefinedWaypoint.desc);
+			getParams().put(KEY_PREDEFINED_WPT_COLOR, String.valueOf(predefinedWaypoint.getColor()));
+			getParams().put(KEY_PREDEFINED_WPT_ICON, predefinedWaypoint.getIconName());
+			getParams().put(KEY_PREDEFINED_WPT_BACKGROUND_TYPE, predefinedWaypoint.getBackgroundType());
+			getParams().put(KEY_PREDEFINED_CATEGORY_NAME, predefinedWaypoint.category);
+			getParams().put(KEY_PREDEFINED_CATEGORY_COLOR, String.valueOf(predefinedCategoryColor));
+		}
+
 		return true;
 	}
 
-	private String getSelectedGpxFilePath() {
-		return selectedGpxFilePath != null ? selectedGpxFilePath : getParams().get(KEY_GPX_FILE_PATH);
+	private String getSelectedGpxFilePath(boolean paramsOnly) {
+		return paramsOnly || selectedGpxFilePath == null ? getParams().get(KEY_GPX_FILE_PATH) : selectedGpxFilePath;
+	}
+
+	private void unselectGpxFileIfMissing() {
+		String gpxFilePath = getSelectedGpxFilePath(true);
+		boolean gpxFileMissing = !Algorithms.isEmpty(gpxFilePath) && !new File(gpxFilePath).exists();
+		if (gpxFileMissing) {
+			getParams().put(KEY_USE_SELECTED_GPX_FILE, String.valueOf(false));
+			getParams().remove(KEY_GPX_FILE_PATH);
+		}
+	}
+
+	private void getGpxFile(@NonNull String gpxFilePath,
+	                        @NonNull MapActivity mapActivity,
+	                        @NonNull CallbackWithObject<GPXFile> onGpxFileAvailable) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		if (gpxFilePath.isEmpty()) {
+			onGpxFileAvailable.processResult(app.getSavingTrackHelper().getCurrentGpx());
+		} else {
+			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);
+			if (selectedGpxFile != null) {
+				onGpxFileAvailable.processResult(selectedGpxFile.getGpxFile());
+			} else {
+				CallbackWithObject<GPXFile[]> onGpxFileLoaded = gpxFiles -> {
+					onGpxFileAvailable.processResult(gpxFiles[0]);
+					return true;
+				};
+				String gpxFileName = Algorithms.getFileWithoutDirs(gpxFilePath);
+				File gpxFileDir = new File(gpxFilePath.replace("/" + gpxFileName, ""));
+				GpxUiHelper.loadGPXFileInDifferentThread(mapActivity, onGpxFileLoaded, gpxFileDir,
+						null, gpxFileName);
+			}
+		}
+	}
+
+	private boolean isNightMode(@NonNull MapActivity mapActivity) {
+		return mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 	}
 }

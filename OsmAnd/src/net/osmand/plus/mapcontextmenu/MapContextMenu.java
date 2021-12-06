@@ -1209,8 +1209,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				: RenderingIcons.getBigIconResourceId(preselectedIconName);
 	}
 
-	public void addWptPt(@NonNull LatLon latLon, @Nullable String title, @Nullable String categoryName,
-	                     int categoryColor, boolean skipDialog, @Nullable GPXFile gpxFile) {
+	public void addWptPt(@NonNull LatLon latLon, @Nullable String title, @Nullable String address,
+	                     @Nullable String description, int color, @Nullable String backgroundType,
+	                     @Nullable String categoryName, int categoryColor, boolean skipDialog, @Nullable GPXFile gpxFile) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			WptPtEditor wptPtPointEditor = getWptPtPointEditor();
@@ -1219,15 +1220,17 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			}
 
 			if (gpxFile != null) {
-				wptPtPointEditor.add(gpxFile, latLon, title, categoryName, categoryColor, skipDialog);
+				wptPtPointEditor.add(gpxFile, latLon, title, address, description, color, backgroundType, categoryName, categoryColor, skipDialog);
 			} else {
 				final List<SelectedGpxFile> list
 						= mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
 				if (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().showCurrentTrack)) {
 					GPXFile currentGpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
-					wptPtPointEditor.add(currentGpxFile, latLon, title, categoryName, categoryColor, skipDialog);
+					wptPtPointEditor.add(currentGpxFile, latLon, title, address, description, color,
+							backgroundType, categoryName, categoryColor, skipDialog);
 				} else {
-					addNewWptToGPXFile(latLon, title, categoryName, categoryColor, skipDialog);
+					addNewWptToGPXFile(latLon, title, address, description, color, backgroundType,
+							categoryName, categoryColor, skipDialog);
 				}
 			}
 		}
@@ -1243,9 +1246,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public void addNewWptToGPXFile(final LatLon latLon, final String title,
-								   final String categoryName,
-								   final int categoryColor, final boolean skipDialog) {
+	public void addNewWptToGPXFile(LatLon latLon, String title, String address, String description,
+	                               int color, String backgroundType, String categoryName, int categoryColor, boolean skipDialog) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
@@ -1261,7 +1263,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 						}
 						WptPtEditor wptPtPointEditor = getWptPtPointEditor();
 						if (wptPtPointEditor != null) {
-							wptPtPointEditor.add(gpxFile, latLon, title, categoryName, categoryColor, skipDialog);
+							wptPtPointEditor.add(gpxFile, latLon, title, address, description,
+									color, backgroundType, categoryName, categoryColor, skipDialog);
 						}
 					}
 					return true;

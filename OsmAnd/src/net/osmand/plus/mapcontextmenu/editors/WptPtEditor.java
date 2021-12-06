@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -11,13 +12,22 @@ import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class WptPtEditor extends PointEditor {
 
+	private OnWaypointTemplateAddedListener onWaypointTemplateAddedListener;
 	private OnDismissListener onDismissListener;
+
 	private GPXFile gpxFile;
 	private WptPt wpt;
+	@ColorInt
+	private int categoryColor;
+
 	private boolean gpxSelected;
 	private boolean newGpxPointProcessing;
+	private boolean processingWaypointTemplate;
 
 	public static final String TAG = "WptPtEditorFragment";
 
@@ -33,6 +43,11 @@ public class WptPtEditor extends PointEditor {
 		return newGpxPointProcessing;
 	}
 
+	@Override
+	public boolean isProcessingTemplate() {
+		return processingWaypointTemplate;
+	}
+
 	public interface OnDismissListener {
 		void onDismiss();
 	}
@@ -45,9 +60,32 @@ public class WptPtEditor extends PointEditor {
 		return onDismissListener;
 	}
 
+	public void setOnWaypointTemplateAddedListener(OnWaypointTemplateAddedListener listener) {
+		onWaypointTemplateAddedListener = listener;
+	}
+
+	public OnWaypointTemplateAddedListener getOnWaypointTemplateAddedListener() {
+		return onWaypointTemplateAddedListener;
+	}
+
+	@Nullable
 	public GPXFile getGpxFile() {
 		return gpxFile;
 	}
+
+	@NonNull
+	public Map<String, Integer> getColoredWaypointCategories() {
+		if (gpxFile != null) {
+			return gpxFile.getWaypointCategoriesWithColors(false);
+		}
+		if (processingWaypointTemplate && !Algorithms.isEmpty(wpt.category) && categoryColor != 0) {
+			Map<String, Integer> predefinedCategory = new HashMap<>();
+			predefinedCategory.put(wpt.category, categoryColor);
+			return predefinedCategory;
+		}
+		return new HashMap<>();
+	}
+
 
 	public boolean isGpxSelected() {
 		return gpxSelected;
@@ -72,6 +110,8 @@ public class WptPtEditor extends PointEditor {
 			return;
 		}
 		isNew = true;
+		processingWaypointTemplate = false;
+		categoryColor = 0;
 
 		this.gpxFile = gpxFile;
 		SelectedGpxFile selectedGpxFile =
@@ -88,12 +128,15 @@ public class WptPtEditor extends PointEditor {
 		showEditorFragment();
 	}
 
-	public void add(GPXFile gpxFile, LatLon latLon, String title, String categoryName, int categoryColor, boolean skipDialog) {
+	public void add(GPXFile gpxFile, LatLon latLon, String title, String address, String description,
+	                int color, String backgroundType, String categoryName, int categoryColor, boolean skipDialog) {
 		MapActivity mapActivity = getMapActivity();
 		if (latLon == null || mapActivity == null) {
 			return;
 		}
 		isNew = true;
+		processingWaypointTemplate = false;
+		this.categoryColor = 0;
 
 		this.gpxFile = gpxFile;
 		SelectedGpxFile selectedGpxFile =
@@ -104,6 +147,10 @@ public class WptPtEditor extends PointEditor {
 				System.currentTimeMillis(), Double.NaN, 0, Double.NaN);
 
 		wpt.name = title;
+		wpt.setAddress(address);
+		wpt.desc = description;
+		wpt.setColor(color);
+		wpt.setBackgroundType(backgroundType);
 
 		if (categoryName != null && !categoryName.isEmpty()) {
 			FavouritesDbHelper.FavoriteGroup category = mapActivity.getMyApplication()
@@ -111,13 +158,14 @@ public class WptPtEditor extends PointEditor {
 					.getGroup(categoryName);
 
 			if (category == null) {
-
 				mapActivity.getMyApplication()
 						.getFavorites()
 						.addEmptyCategory(categoryName, categoryColor);
 			}
 
-		} else categoryName = "";
+		} else {
+			categoryName = "";
+		}
 
 		wpt.category = categoryName;
 		this.wpt = wpt;
@@ -131,6 +179,8 @@ public class WptPtEditor extends PointEditor {
 			return;
 		}
 		isNew = false;
+		processingWaypointTemplate = false;
+		categoryColor = 0;
 		SelectedGpxFile selectedGpxFile =
 				mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFile(wpt);
 		if (selectedGpxFile != null) {
@@ -138,6 +188,36 @@ public class WptPtEditor extends PointEditor {
 			gpxFile = selectedGpxFile.getGpxFile();
 		}
 		this.wpt = wpt;
+		showEditorFragment();
+	}
+
+	public void addWaypointTemplate(@Nullable WptPt from, @NonNull GPXFile gpxFile) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			return;
+		}
+
+		this.isNew = true;
+		this.processingWaypointTemplate = true;
+		this.categoryColor = 0;
+		this.gpxSelected = mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path) != null;
+		this.gpxFile = gpxFile;
+		this.wpt = from != null ? from : new WptPt();
+		showEditorFragment();
+	}
+
+	public void addWaypointTemplate(@Nullable WptPt from, @ColorInt int categoryColor) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			return;
+		}
+
+		this.isNew = true;
+		this.processingWaypointTemplate = true;
+		this.categoryColor = categoryColor;
+		this.gpxSelected = false;
+		this.gpxFile = null;
+		this.wpt = from != null ? from : new WptPt();
 		showEditorFragment();
 	}
 
@@ -153,5 +233,10 @@ public class WptPtEditor extends PointEditor {
 		if (mapActivity != null) {
 			WptPtEditorFragmentNew.showInstance(mapActivity, skipDialog);
 		}
+	}
+
+	public interface OnWaypointTemplateAddedListener {
+
+		void onAddWaypointTemplate(@NonNull WptPt waypoint, @ColorInt int categoryColor);
 	}
 }
