@@ -4466,4 +4466,7 @@
 \nI punti della traccia a una distanza maggiore dall\'ultimi punto visibile non saranno visualizzati.
 \nRicordate che soglie elevate possono semplificare eccessivamente la geometria della traccia.</string>
     <string name="gps_filter_actions_description">OsmAnd applicherà le modifiche alla traccia senza aggiornare il file. Puoi salvare le modifiche manualmente.</string>
+    <string name="shared_string_size">Misura</string>
+    <string name="created_on">Cerato su</string>
+    <string name="use_routing_fallback_description">Utilizza la navigazione offline quando quella online non è disponibile.</string>
 </resources>
