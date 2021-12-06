@@ -21,19 +21,22 @@ public class UploadGPXFilesTask extends AsyncTask<GpxInfo, String, String> {
 	private final OsmandApplication app;
 	private final WeakReference<Activity> activityRef;
 
+	private final String tags;
 	private final String visibility;
 	private final String commonDescription;
-	private final String tags;
+	private final UploadGpxListener listener;
 
 	public UploadGPXFilesTask(@NonNull Activity activity,
 	                          @NonNull String commonDescription,
 	                          @NonNull String tags,
-	                          @Nullable UploadVisibility visibility) {
+	                          @Nullable UploadVisibility visibility,
+	                          @Nullable UploadGpxListener listener) {
 		app = (OsmandApplication) activity.getApplication();
 		this.activityRef = new WeakReference<>(activity);
 		this.commonDescription = commonDescription;
 		this.tags = tags;
 		this.visibility = visibility != null ? visibility.asURLparam() : UploadVisibility.PRIVATE.asURLparam();
+		this.listener = listener;
 	}
 
 	@Override
@@ -83,10 +86,17 @@ public class UploadGPXFilesTask extends AsyncTask<GpxInfo, String, String> {
 
 	@Override
 	protected void onPostExecute(String result) {
+		if (listener != null) {
+			listener.onGpxUploaded(result);
+		}
 		Activity activity = activityRef.get();
 		if (AndroidUtils.isActivityNotDestroyed(activity)) {
 			activity.setProgressBarIndeterminateVisibility(false);
 		}
 		app.showToastMessage(result);
+	}
+
+	public interface UploadGpxListener {
+		void onGpxUploaded(String result);
 	}
 }

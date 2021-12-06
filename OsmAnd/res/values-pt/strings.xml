@@ -1171,7 +1171,7 @@
     <string name="lang_ka">Georgiano</string>
     <string name="lang_de">Alemão</string>
     <string name="lang_el">Grego</string>
-    <string name="lang_iw">Hebreu</string>
+    <string name="lang_iw">Hebraico</string>
     <string name="lang_hi">Hindi</string>
     <string name="lang_hu">Húngaro</string>
     <string name="lang_id">Indonésio</string>
@@ -2381,7 +2381,7 @@
     <string name="lang_bn">Bengali</string>
     <string name="lang_tl">Tagalo</string>
     <string name="lang_az">Azerbaijano</string>
-    <string name="lang_bpy">Bishnupriya Manipuri</string>
+    <string name="lang_bpy">Bishnupriya</string>
     <string name="lang_nv">Navajo</string>
     <string name="lang_ku">Curdo</string>
     <string name="lang_ml">Malaiala</string>
@@ -2389,12 +2389,12 @@
     <string name="lang_os">Osseta</string>
     <string name="lang_es_us">Espanhol (americano)</string>
     <string name="lang_es_ar">Espanhol (argentino)</string>
-    <string name="lang_nb">Norueguês Bokmål</string>
+    <string name="lang_nb">Bokmål norueguês</string>
     <string name="lang_vo">Volapuque</string>
     <string name="lang_th">Tailandês</string>
     <string name="lang_te">Telugu</string>
     <string name="lang_nn">Novo norueguês</string>
-    <string name="lang_new">Neuari</string>
+    <string name="lang_new">Neuari / Nepal bhasa</string>
     <string name="lang_ms">Malásio</string>
     <string name="lang_ht">Haitiano</string>
     <string name="lang_gl">Galego</string>
