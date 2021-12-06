@@ -1209,19 +1209,26 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				: RenderingIcons.getBigIconResourceId(preselectedIconName);
 	}
 
-	public void addWptPt(LatLon latLon, String title, String categoryName, int categoryColor, boolean skipDialog) {
+	public void addWptPt(@NonNull LatLon latLon, @Nullable String title, @Nullable String categoryName,
+	                     int categoryColor, boolean skipDialog, @Nullable GPXFile gpxFile) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			final List<SelectedGpxFile> list
-					= mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
-			if (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().showCurrentTrack)) {
-				GPXFile gpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
-				WptPtEditor wptPtPointEditor = getWptPtPointEditor();
-				if (wptPtPointEditor != null) {
-					wptPtPointEditor.add(gpxFile, latLon, title, categoryName, categoryColor, skipDialog);
-				}
+			WptPtEditor wptPtPointEditor = getWptPtPointEditor();
+			if (wptPtPointEditor == null) {
+				return;
+			}
+
+			if (gpxFile != null) {
+				wptPtPointEditor.add(gpxFile, latLon, title, categoryName, categoryColor, skipDialog);
 			} else {
-				addNewWptToGPXFile(latLon, title, categoryName, categoryColor, skipDialog);
+				final List<SelectedGpxFile> list
+						= mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
+				if (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().showCurrentTrack)) {
+					GPXFile currentGpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
+					wptPtPointEditor.add(currentGpxFile, latLon, title, categoryName, categoryColor, skipDialog);
+				} else {
+					addNewWptToGPXFile(latLon, title, categoryName, categoryColor, skipDialog);
+				}
 			}
 		}
 	}

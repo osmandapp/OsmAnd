@@ -14,7 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.FavouritePoint.BackgroundType;
@@ -35,6 +37,7 @@ import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.quickaction.SelectTrackFileDialogFragment;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
@@ -45,6 +48,7 @@ import java.io.File;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.widget.TextViewCompat;
 
 public class GPXAction extends QuickAction {
@@ -67,6 +71,10 @@ public class GPXAction extends QuickAction {
 	private static final String KEY_PREDEFINED_CATEGORY_NAME = "category_name";
 	private static final String KEY_PREDEFINED_CATEGORY_COLOR = "category_color";
 
+	private transient String selectedGpxFilePath;
+
+	private transient TextToggleButton trackToggleButton;
+
 	public GPXAction() {
 		super(TYPE);
 	}
@@ -77,14 +85,35 @@ public class GPXAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull final MapActivity mapActivity) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		if (!shouldUseSelectedGpxFile()) {
+			addWaypoint(null, mapActivity);
+		} else {
+			String selectedGpxFilePath = getSelectedGpxFilePath();
+			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(selectedGpxFilePath);
+			if (selectedGpxFile != null) {
+				addWaypoint(selectedGpxFile.getGpxFile(), mapActivity);
+			} else {
+				CallbackWithObject<GPXFile[]> onGpxFileLoaded = gpxFiles -> {
+					addWaypoint(gpxFiles[0], mapActivity);
+					return true;
+				};
+				String gpxFileName = Algorithms.getFileWithoutDirs(selectedGpxFilePath);
+				File gpxFileDir = new File(selectedGpxFilePath.replace("/" + gpxFileName, ""));
+				GpxUiHelper.loadGPXFileInDifferentThread(mapActivity, onGpxFileLoaded, gpxFileDir,
+						null, gpxFileName);
+			}
+		}
+	}
 
+	private void addWaypoint(@Nullable GPXFile gpxFile, @NonNull MapActivity mapActivity) {
 		final LatLon latLon = mapActivity.getMapView()
 				.getCurrentRotatedTileBox()
 				.getCenterLatLon();
 
 		final String title = getParams().get(KEY_PREDEFINED_WPT_NAME);
 
-		if (title == null || title.isEmpty()) {
+		if (Algorithms.isEmpty(title)) {
 
 			final Dialog progressDialog = new ProgressDialog(mapActivity);
 			progressDialog.setCancelable(false);
@@ -92,26 +121,21 @@ public class GPXAction extends QuickAction {
 			progressDialog.show();
 
 			GeocodingLookupService.AddressLookupRequest lookupRequest = new GeocodingLookupService.AddressLookupRequest(latLon,
-
-					new GeocodingLookupService.OnAddressLookupResult() {
-
-						@Override
-						public void geocodingDone(String address) {
-
-							progressDialog.dismiss();
-							mapActivity.getContextMenu().addWptPt(latLon, address,
-									getParams().get(KEY_PREDEFINED_CATEGORY_NAME),
-									Integer.valueOf(getParams().get(KEY_PREDEFINED_CATEGORY_COLOR)),
-									false);
-						}
-
+					address -> {
+						progressDialog.dismiss();
+						mapActivity.getContextMenu().addWptPt(latLon, address,
+								getParams().get(KEY_PREDEFINED_CATEGORY_NAME),
+								Integer.valueOf(getParams().get(KEY_PREDEFINED_CATEGORY_COLOR)),
+								false, gpxFile);
 					}, null);
 
 			mapActivity.getMyApplication().getGeocodingLookupService().lookupAddress(lookupRequest);
 
-		} else mapActivity.getContextMenu().addWptPt(latLon, title,
-				getParams().get(KEY_PREDEFINED_CATEGORY_NAME),
-				Integer.valueOf(getParams().get(KEY_PREDEFINED_CATEGORY_COLOR)), false);
+		} else {
+			mapActivity.getContextMenu().addWptPt(latLon, title,
+					getParams().get(KEY_PREDEFINED_CATEGORY_NAME),
+					Integer.valueOf(getParams().get(KEY_PREDEFINED_CATEGORY_COLOR)), false, gpxFile);
+		}
 	}
 
 	@Override
@@ -128,7 +152,7 @@ public class GPXAction extends QuickAction {
 		OsmandApplication app = mapActivity.getMyApplication();
 		boolean night = app.getDaynightHelper().isNightModeForMapControls();
 		LinearLayout trackToggle = container.findViewById(R.id.track_toggle);
-		TextToggleButton trackToggleButton = new TextToggleButton(app, trackToggle, night);
+		trackToggleButton = new TextToggleButton(app, trackToggle, night);
 
 		TextRadioItem alwaysAskButton = new TextRadioItem(app.getString(R.string.confirm_every_run));
 		TextRadioItem selectTrackButton = new TextRadioItem(app.getString(R.string.shared_string_select));
@@ -156,7 +180,7 @@ public class GPXAction extends QuickAction {
 				if (shouldUseSelectedGpxFile()) {
 					updateTrackBottomInfo(container, false);
 				} else {
-					showSelectTrackFileDialog(mapActivity);
+					showSelectTrackFileDialog(container, mapActivity);
 					return false;
 				}
 			}
@@ -178,11 +202,11 @@ public class GPXAction extends QuickAction {
 		AndroidUtils.setBackground(container.getContext(), selectAnotherTrackButton, night,
 				R.drawable.btn_solid_border_light, R.drawable.btn_solid_border_light);
 
-		selectAnotherTrackButtonContainer.setOnClickListener(v -> showSelectTrackFileDialog(mapActivity));
+		selectAnotherTrackButtonContainer.setOnClickListener(v -> showSelectTrackFileDialog(container, mapActivity));
 	}
 
 	private void setupGpxTrackInfo(@NonNull final View container, @NonNull final OsmandApplication app) {
-		String gpxFilePath = getParams().get(KEY_GPX_FILE_PATH);
+		String gpxFilePath = getSelectedGpxFilePath();
 		if (gpxFilePath == null) {
 			return;
 		}
@@ -251,8 +275,13 @@ public class GPXAction extends QuickAction {
 		}
 	}
 
-	private void showSelectTrackFileDialog(@NonNull MapActivity mapActivity) {
-		// TODO
+	private void showSelectTrackFileDialog(@NonNull View container, @NonNull MapActivity mapActivity) {
+		CallbackWithObject<String> onGpxFileSelected = gpxFileName -> {
+			selectedGpxFilePath = gpxFileName;
+			setupTrackToggleButton(container, mapActivity);
+			return true;
+		};
+		SelectTrackFileDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), onGpxFileSelected);
 	}
 
 	private void setupWaypointAppearanceToggle(@NonNull View container, @NonNull MapActivity mapActivity) {
@@ -328,7 +357,7 @@ public class GPXAction extends QuickAction {
 
 	private boolean shouldUseSelectedGpxFile() {
 		boolean useSelectedGpxFile = Boolean.parseBoolean(getParams().get(KEY_USE_SELECTED_GPX_FILE));
-		String gpxFilePath = getParams().get(KEY_GPX_FILE_PATH);
+		String gpxFilePath = getSelectedGpxFilePath();
 		boolean gpxFileExist = gpxFilePath != null && (gpxFilePath.isEmpty() || new File(gpxFilePath).exists());
 		return useSelectedGpxFile && gpxFileExist;
 	}
@@ -389,6 +418,16 @@ public class GPXAction extends QuickAction {
 
 	@Override
 	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {
+		boolean useSelectedGpxFile = trackToggleButton.getSelectedItemIndex() == 1;
+		getParams().put(KEY_USE_SELECTED_GPX_FILE, String.valueOf(useSelectedGpxFile));
+		if (selectedGpxFilePath != null) {
+			getParams().put(KEY_GPX_FILE_PATH, selectedGpxFilePath);
+		}
+
 		return true;
+	}
+
+	private String getSelectedGpxFilePath() {
+		return selectedGpxFilePath != null ? selectedGpxFilePath : getParams().get(KEY_GPX_FILE_PATH);
 	}
 }
