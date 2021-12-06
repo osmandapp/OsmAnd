@@ -636,7 +636,9 @@ public class ResourceManager {
 			}
 
 			File destinationFile = new File(appDataDir, asset.destination);
-
+			if (destinationFile.exists() && !forceUpdate) {
+				continue;
+			}
 			boolean unconditional = false;
 			if (installMode != null) {
 				unconditional = ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall.equals(installMode) && (forceUpdate || forceCheck);
