@@ -144,11 +144,15 @@ public class OpeningHoursParser {
 			}
 
 			public String getInfo() {
-				if (isOpened24_7() && !isFallback()) {
-					if (!Algorithms.isEmpty(ruleString)) {
-						return additionalStrings.get("is_open") + " " + ruleString;
+				if (isOpened24_7()) {
+					if (!isFallback()) {
+						if (!Algorithms.isEmpty(ruleString)) {
+							return additionalStrings.get("is_open") + " " + ruleString;
+						} else {
+							return additionalStrings.get("is_open_24_7");
+						}
 					} else {
-						return additionalStrings.get("is_open_24_7");
+						return !Algorithms.isEmpty(ruleString) ? ruleString : "";
 					}
 				} else if (!Algorithms.isEmpty(nearToOpeningTime)) {
 					return additionalStrings.get("will_open_at") + " " + nearToOpeningTime;
@@ -162,10 +166,8 @@ public class OpeningHoursParser {
 					return additionalStrings.get("will_open_tomorrow_at") + " " + openingTomorrow;
 				} else if (!Algorithms.isEmpty(openingDay)) {
 					return additionalStrings.get("will_open_on") + " " + openingDay + ".";
-				} else if (!Algorithms.isEmpty(ruleString)) {
-					return ruleString;
 				} else {
-					return "";
+					return !Algorithms.isEmpty(ruleString) ? ruleString : "";
 				}
 			}
 		}
@@ -1726,14 +1728,13 @@ public class OpeningHoursParser {
 		String endOfDay = "24:00";
 		r = r.replace('(', ' '); // avoid "(mo-su 17:00-20:00"
 		r = r.replace(')', ' ');
-		boolean fallback = r.startsWith("|| ");
-		if (fallback) {
+		BasicOpeningHourRule basic = new BasicOpeningHourRule(sequenceIndex);
+		if (r.startsWith("|| ")) {
 			r = r.replace("|| ", "");
+			basic.fallback = true;
 		}
 		String localRuleString = r.replaceAll("(?i)sunset", sunset).replaceAll("(?i)sunrise", sunrise)
 				.replaceAll("\\+", "-" + endOfDay);
-		BasicOpeningHourRule basic = new BasicOpeningHourRule(sequenceIndex);
-		basic.fallback = fallback;
 		boolean[] days = basic.getDays();
 		boolean[] months = basic.getMonths();
 		//boolean[][] dayMonths = basic.getDayMonths();
