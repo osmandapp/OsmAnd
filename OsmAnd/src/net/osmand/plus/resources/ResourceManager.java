@@ -558,7 +558,7 @@ public class ResourceManager {
 				try {
 					progress.startTask(context.getString(R.string.installing_new_resources), -1);
 					AssetManager assetManager = context.getAssets();
-					boolean firstInstall = settings.PREVIOUS_INSTALLED_VERSION.isSet();
+					boolean firstInstall = !settings.PREVIOUS_INSTALLED_VERSION.isSet();
 					unpackBundledAssets(assetManager, applicationDataDir, firstInstall || forceUpdate, forceCheck);
 					settings.PREVIOUS_INSTALLED_VERSION.set(fv);
 					copyRegionsBoundaries(overwrite);
