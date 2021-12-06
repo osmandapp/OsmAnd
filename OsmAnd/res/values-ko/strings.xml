@@ -2215,4 +2215,24 @@
     <string name="search_on_the_map_item">지도에서 검색</string>
     <string name="instalation_troubleshooting_item">설치 및 문제 해결</string>
     <string name="first_usage_item_description">지도 다운로드 방법, 기본 설정 설정 방법.</string>
+    <string name="moving_time">이동 시간</string>
+    <string name="rendering_attr_tracktype_grade2_name">단색 레이어 (비포장)</string>
+    <string name="track_coloring_solid">단색 레이어</string>
+    <string name="rendering_attr_tracktype_grade1_name">단색 레이어 (포장)</string>
+    <string name="shared_string_time_span">시간 범위</string>
+    <string name="ascent_descent">상승/하강</string>
+    <string name="created_on">작성 날짜</string>
+    <string name="monitoring_min_speed">최소 속도</string>
+    <string name="shared_string_size">크기</string>
+    <string name="voice_prompts_timetable">음성 프롬프트 시간</string>
+    <string name="context_menu_edit_descr">설명 편집</string>
+    <string name="add_description">설명 추가</string>
+    <string name="delete_description">설명 삭제</string>
+    <string name="slope_description">경사는 색상을 사용하여 지형 경사를 시각화합니다.</string>
+    <string name="hillshade_description">힐쉐이드 지도는 어두운 색조를 사용하여 경사, 봉우리 및 저지대를 표시합니다.</string>
+    <string name="max_speed">최대 속도</string>
+    <string name="shared_string_start_time">시작시간</string>
+    <string name="shared_string_end_time">종료시간</string>
+    <string name="average_speed">평균 속도</string>
+    <string name="routing_attr_piste_type_sled_description">썰매 사용을 위한 슬로프.</string>
 </resources>
