@@ -10,7 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="turn_arrows">Turn Arrows</string>
+    <string name="turn_arrows_descr">Control the visibility of the turn arrows on the route line.</string>
     <string name="gps_filter_precision">GPS precision</string>
     <string name="shared_string_precision">Precision</string>
     <string name="shared_string_statistics">Statistics</string>

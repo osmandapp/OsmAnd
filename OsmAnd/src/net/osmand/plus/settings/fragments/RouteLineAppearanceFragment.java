@@ -40,6 +40,7 @@ import net.osmand.plus.routing.cards.RouteLineColorCard;
 import net.osmand.plus.routing.cards.RouteLineColorCard.OnMapThemeUpdateListener;
 import net.osmand.plus.routing.cards.RouteLineColorCard.OnSelectedColorChangeListener;
 import net.osmand.plus.routing.cards.RouteLineWidthCard;
+import net.osmand.plus.routing.cards.RouteTurnArrowCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
@@ -74,6 +75,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 
 	private RouteLineColorCard colorCard;
 	private RouteLineWidthCard widthCard;
+	private RouteTurnArrowCard turnArrowCard;
 
 	@Override
 	public int getMainLayoutId() {
@@ -156,9 +158,10 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		ColoringType coloringType = settings.ROUTE_COLORING_TYPE.getModeValue(appMode);
 		String routeInfoAttribute = settings.ROUTE_INFO_ATTRIBUTE.getModeValue(appMode);
 		String widthKey = settings.ROUTE_LINE_WIDTH.getModeValue(appMode);
+		boolean hasTurnArrow = settings.CURRENT_TRACK_SHOW_TURN_ARROWS.getModeValue(appMode);
 
 		PreviewRouteLineInfo previewRouteLineInfo =  new PreviewRouteLineInfo(colorDay, colorNight,
-				coloringType, routeInfoAttribute, widthKey);
+				coloringType, routeInfoAttribute, widthKey, hasTurnArrow);
 
 		previewRouteLineInfo.setIconId(appMode.getNavigationIcon().getIconId());
 		previewRouteLineInfo.setIconColor(appMode.getProfileColor(isNightMode()));
@@ -219,6 +222,9 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 
 		widthCard = new RouteLineWidthCard(mapActivity, previewRouteLineInfo, createScrollListener(), this);
 		cardsContainer.addView(widthCard.build(mapActivity));
+
+		turnArrowCard = new RouteTurnArrowCard(mapActivity, previewRouteLineInfo);
+		cardsContainer.addView(turnArrowCard.build(mapActivity));
 	}
 
 	@Override
@@ -318,6 +324,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 			settings.ROUTE_COLORING_TYPE.setModeValue(appMode, previewRouteLineInfo.getRouteColoringType());
 			settings.ROUTE_INFO_ATTRIBUTE.setModeValue(appMode, previewRouteLineInfo.getRouteInfoAttribute());
 			settings.ROUTE_LINE_WIDTH.setModeValue(appMode, previewRouteLineInfo.getWidth());
+			settings.CURRENT_TRACK_SHOW_TURN_ARROWS.setModeValue(appMode, previewRouteLineInfo.isHasTurnArrow());
 		}
 	}
 

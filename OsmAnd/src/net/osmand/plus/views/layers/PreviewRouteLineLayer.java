@@ -1,5 +1,9 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.render.RenderingRuleStorageProperties.ADDITIONAL;
+import static net.osmand.render.RenderingRuleStorageProperties.TAG;
+import static net.osmand.render.RenderingRuleStorageProperties.VALUE;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
@@ -10,6 +14,10 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.LayerDrawable;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -37,14 +45,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.graphics.drawable.DrawableCompat;
-
-import static net.osmand.render.RenderingRuleStorageProperties.ADDITIONAL;
-import static net.osmand.render.RenderingRuleStorageProperties.TAG;
-import static net.osmand.render.RenderingRuleStorageProperties.VALUE;
 
 public class PreviewRouteLineLayer extends BaseRouteLayer {
 
@@ -161,16 +161,19 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		path.moveTo(centerX + offset, startY);
 		path.lineTo(centerX, startY);
 		path.lineTo(centerX, startY - lineLength);
-		canvas.drawPath(path, attrs.paint3);
-		drawTurnArrow(canvas, matrix, centerX, startY - lineLength, centerX, startY);
+		if (previewRouteLineInfo.isHasTurnArrow()){
+			drawTurnArrow(canvas, matrix, centerX, startY - lineLength, centerX, startY);
+			canvas.drawPath(path, attrs.paint3);
+		}
 		path.reset();
 		path.moveTo(centerX, endY + lineLength);
 		path.lineTo(centerX, endY);
 		path.lineTo(centerX - offset, endY);
-		canvas.drawPath(path, attrs.paint3);
-		drawTurnArrow(canvas, matrix, centerX - offset, endY, centerX, endY);
-		attrs.paint3.setColor(attrsTurnArrowColor);
-
+		if (previewRouteLineInfo.isHasTurnArrow()){
+			drawTurnArrow(canvas, matrix, centerX - offset, endY, centerX, endY);
+			attrs.paint3.setColor(attrsTurnArrowColor);
+			canvas.drawPath(path, attrs.paint3);
+		}
 		if (previewIcon == null) {
 			previewIcon = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), previewInfo.getIconId());
 			DrawableCompat.setTint(previewIcon.getDrawable(1), previewInfo.getIconColor());
