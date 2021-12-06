@@ -57,7 +57,7 @@
     <string name="switch_to_raster_map_to_see">Для поточної місцевості відсутні векторні офлайн мапи. Завантажте їх у \'Налаштуваннях\' (\'Керування файлами мап\') або увімкніть втулок \'Онлайн мапи\'.</string>
     <string name="send_files_to_osm">Надіслати GPX файли до OSM\?</string>
     <string name="gpx_visibility_txt">Видимість</string>
-    <string name="gpx_tags_txt">Теґи</string>
+    <string name="gpx_tags_txt">Мітки</string>
     <string name="validate_gpx_upload_name_pwd">Для надсилання GPX-файлів вкажіть облікові дані OSM.</string>
     <string name="default_buttons_support">Підтримка</string>
     <string name="support_new_features">Підтримати розробку нових функцій</string>
@@ -163,7 +163,7 @@
     <string name="global_settings">Загальні налаштування</string>
     <string name="index_settings">Керування мапами</string>
     <string name="general_settings">Загальні</string>
-    <string name="general_settings_descr">Налаштування екрану та загальні параметри застосунку.</string>
+    <string name="general_settings_descr">Налаштування екрана та загальні параметри застосунку.</string>
     <string name="global_app_settings">Загальні налаштування</string>
     <string name="user_name">Ім\'я користувача OSM</string>
     <string name="open_street_map_login_descr">Потрібно для входу до openstreetmap.org.</string>
@@ -181,7 +181,7 @@
     <string name="auto_follow_route_navigation">Автоцентрування мапи тільки під час навігації</string>
     <string name="auto_follow_route_navigation_descr">Повертати мапу в поточну позицію тільки при навігації.</string>
     <string name="auto_follow_location_enabled">Автоматичне центрування мапи.</string>
-    <string name="pref_vector_rendering">Налаштування векторного рендерінгу</string>
+    <string name="pref_vector_rendering">Налаштування векторного рендерингу</string>
     <string name="pref_overlay">Додаткові шари</string>
     <string name="pref_raster_map">Налаштування джерел мап</string>
     <string name="pref_vector_map">Налаштування векторних мап</string>
@@ -256,8 +256,8 @@
     <string name="search_offline_clear_search">Новий пошук</string>
     <string name="map_text_size_descr">Виберіть розмір шрифту для підписів на мапі:</string>
     <string name="map_text_size">Розмір тексту</string>
-    <string name="trace_rendering">Дані для пошуку проблем рендерінгу</string>
-    <string name="trace_rendering_descr">Інформація про рендерінг.</string>
+    <string name="trace_rendering">Дані для пошуку проблем рендерингу</string>
+    <string name="trace_rendering_descr">Інформація про швидкість рендерингу.</string>
     <string name="installing_new_resources">Розпаковуються нові дані…</string>
     <string name="internet_connection_required_for_online_route">Онлайн навігація не працює без під\'єднання до мережі.</string>
     <string name="tts_language_not_supported_title">Мова не підтримується</string>
@@ -389,7 +389,7 @@
     <string name="select_max_zoom_preload_area">Оберіть максимальний масштаб для попереднього завантаження</string>
     <string name="maps_could_not_be_downloaded">Цю мапу неможливо завантажити</string>
     <string name="continuous_rendering">Безперервний рендеринг</string>
-    <string name="continuous_rendering_descr">Використовувати безперервний рендерінг замість рендерінгу одного екрану за раз.</string>
+    <string name="continuous_rendering_descr">Використовувати безперервний рендеринг замість рендерингу всього екрана.</string>
     <string name="rendering_exception">Не вдалося показати вибрану ділянку.</string>
     <string name="show_point_options">Використовувати локацію…</string>
     <string name="renderer_load_sucess">Рендер завантажено</string>
@@ -575,7 +575,7 @@
     <string name="shared_string_close">Закрити</string>
     <string name="loading_data">Дані завантажуються…</string>
     <string name="reading_indexes">Зчитування даних…</string>
-    <string name="previous_run_crashed">Помилка роботи застосунку. Лог розміщено тут {0}. Повідомте розробника про помилку (з додаванням логу).</string>
+    <string name="previous_run_crashed">Помилка роботи застосунку. Журнал розміщено тут {0}. Повідомте розробника про помилку (з додаванням журналу).</string>
     <string name="saving_gpx_tracks">Збереження GPX-файлу…</string>
     <string name="finished_task">Закінчено</string>
     <string name="use_online_routing_descr">Використовувати Інтернет для прокладання маршруту.</string>
@@ -683,7 +683,7 @@
     <string name="poi_dialog_opening_hours">Відкрити</string>
     <string name="poi_dialog_comment">Коментар</string>
     <string name="poi_dialog_comment_default">Зміна POI</string>
-    <string name="poi_dialog_other_tags_message">Всі інші теґи POI не буде змінено</string>
+    <string name="poi_dialog_other_tags_message">Усі інші мітки POI не буде змінено</string>
     <string name="default_buttons_commit">Зберегти</string>
     <string name="shared_string_clear">Очистити</string>
     <string name="filter_current_poiButton">Фільтр</string>
@@ -864,7 +864,7 @@
     <string name="arrived_at_intermediate_point">Ви прибули в проміжний пункт призначення</string>
     <string name="context_menu_item_intermediate_point">Додати як проміжний пункт призначення</string>
     <string name="ending_point_too_far">Кінець маршруту надто далеко від найближчої дороги.</string>
-    <string name="add_tag">Додати теґ</string>
+    <string name="add_tag">Додати мітку</string>
     <string name="btn_advanced_mode">Розширений режим…</string>
     <string name="poi_filter_parking">Стоянки</string>
     <string name="poi_filter_public_transport">Громадський транспорт</string>
@@ -1085,7 +1085,7 @@
     <string name="live_monitoring_m">Онлайн моніторинг (потрібен GPX)</string>
     <string name="live_monitoring_start">Розпочати моніторинг</string>
     <string name="live_monitoring_stop">Зупинити моніторинг</string>
-    <string name="gpx_start_new_segment">Розпочати новий відрізок</string>
+    <string name="gpx_start_new_segment">Розпочати новий відтинок</string>
     <string name="rendering_attr_hideBuildings_name">Будівлі</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Дороги не призначені для автівок</string>
     <string name="rendering_attr_hideText_name">Текст</string>
@@ -1129,7 +1129,7 @@
     <string name="gpx_info_asc_altitude">Спуск/підйом: %1$s</string>
     <string name="gpx_timespan">Загальний час: %1$s</string>
     <string name="gpx_timemoving">Час руху: %1$s</string>
-    <string name="gpx_selection_segment_title">Відрізок</string>
+    <string name="gpx_selection_segment_title">Відтинок</string>
     <string name="gpx_selection_number_of_points">%1$s точок</string>
     <string name="gpx_selection_point">Точка %1$s</string>
     <string name="gpx_selection_route_points">%1$s↵
@@ -1202,8 +1202,8 @@
     <string name="index_name_canada">Північна Америка - Канада</string>
     <string name="index_name_italy">Європа - Італія</string>
     <string name="index_name_gb">Європа - Великобританія</string>
-    <string name="calculate_osmand_route_without_internet">Прокладання відрізку маршруту в OsmAnd офлайн</string>
-    <string name="gpx_option_calculate_first_last_segment">Прокласти маршрут в OsmAnd для першого та останнього відрізків маршруту</string>
+    <string name="calculate_osmand_route_without_internet">Прокладання відтинку маршруту в OsmAnd офлайн</string>
+    <string name="gpx_option_calculate_first_last_segment">Прокласти маршрут в OsmAnd для першого та останнього відтинків маршруту</string>
     <string name="use_displayed_track_for_navigation">Використовувати показаний трек для навігації?</string>
     <string name="keep_and_add_destination_point">Додати наступним пунктом призначення</string>
     <string name="select_gpx">Виберіть GPX…</string>
