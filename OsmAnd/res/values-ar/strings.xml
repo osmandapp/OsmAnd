@@ -848,7 +848,7 @@
     <string name="localization_pref_title">إعدادات إقليمية</string>
     <string name="lang_hr">الكرواتية</string>
     <string name="lang_pt_br">البرتغالية (البرازيل)</string>
-    <string name="lang_af">اﻷفريكانية</string>
+    <string name="lang_af">الأفريكانية</string>
     <string name="lang_hy">الأرمينية</string>
     <string name="lang_eu">الباسكية</string>
     <string name="lang_be">البيلاروسية</string>
@@ -1443,7 +1443,7 @@
     <string name="lang_be_by">البيلاروسية (اللاتينية)</string>
     <string name="lang_en_gb">الإنجليزية (المملكة المتحدة)</string>
     <string name="lang_eo">إسبرانتو</string>
-    <string name="lang_gl">الجاليكية</string>
+    <string name="lang_gl">الغاليسية</string>
     <string name="lang_kn">الكانادا</string>
     <string name="lang_nb">النرويجية ( بوكمال )</string>
     <string name="lang_nn">النرويجية (الحديثة )</string>
@@ -1856,10 +1856,10 @@
     <string name="traffic_warning_hazard">خطر</string>
     <string name="rendering_value_boldOutline_name">مخطط واضح</string>
     <string name="lang_pms">بييمونتي</string>
-    <string name="lang_br">بريتونية</string>
+    <string name="lang_br">البريتونية</string>
     <string name="lang_bpy">بيشنوبريا</string>
     <string name="lang_new">نوار / باهاسا النيبال</string>
-    <string name="lang_ceb">السيبيونو</string>
+    <string name="lang_ceb">السيبوانية</string>
     <string name="archive_wikipedia_data">لديك بيانات ويكيبيديا منزلة قديمة غير متوافقة. هل تريد أرشفتها؟</string>
     <string name="disable_recording_once_app_killed">منع التسجيل في الخلفية</string>
     <string name="shared_string_import2osmand">استيراد إلى أوسماند</string>
@@ -2023,7 +2023,7 @@
     <string name="donation_to_osm_desc">يتم إرسال جزء من تبرعك إلى رسامي الخرائط OSM. تكلفة الاشتراك لا تزال هي نفسها.</string>
     <string name="osm_live_subscription_desc">يُتيحُ لك الاشتراك الحصول على تحديثات أسبوعياً، يومياً أو كل ساعة بالإضافة إلى تحميلات غير محدودة لكافة الخرائط.</string>
     <string name="driving_region_australia">أستراليا</string>
-    <string name="lang_kab">قبائلي</string>
+    <string name="lang_kab">القبائلية</string>
     <string name="shared_string_filters">تصفية</string>
     <string name="apply_filters">تطبيق التصفية</string>
     <string name="save_filter">حفظ التصفية</string>
@@ -3601,7 +3601,7 @@
     <string name="lang_mn">المنغولية</string>
     <string name="lang_min">مينانغكابو</string>
     <string name="lang_mg">مدغشقر</string>
-    <string name="lang_ky">القرقيزية</string>
+    <string name="lang_ky">القيرغيزستانية</string>
     <string name="lang_kk">الكازاخستانية</string>
     <string name="lang_jv">الجاوية</string>
     <string name="lang_gu">الجوجاراتية</string>
