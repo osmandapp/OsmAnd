@@ -112,6 +112,7 @@ public class FileUtils {
 				selected.resetSplitProcessed();
 				selected.getGpxFile().path = dest.getAbsolutePath();
 				helper.updateSelectedGpxFile(selected);
+				app.getQuickActionRegistry().onRenameGpxFile(src.getAbsolutePath(), dest.getAbsolutePath());
 			}
 			return dest;
 		}

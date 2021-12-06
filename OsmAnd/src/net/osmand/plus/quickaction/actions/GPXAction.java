@@ -62,19 +62,19 @@ public class GPXAction extends QuickAction {
 			.iconRes(R.drawable.ic_action_gnew_label_dark)
 			.category(QuickActionType.CREATE_CATEGORY);
 
-	private static final String KEY_USE_SELECTED_GPX_FILE = "use_selected_gpx_file";
-	private static final String KEY_GPX_FILE_PATH = "gpx_file_path";
+	public static final String KEY_USE_SELECTED_GPX_FILE = "use_selected_gpx_file";
+	public static final String KEY_GPX_FILE_PATH = "gpx_file_path";
 
-	private static final String KEY_USE_PREDEFINED_WPT_APPEARANCE = "use_predefined_appearance";
-	private static final String KEY_PREDEFINED_WPT_NAME = "name";
-	private static final String KEY_PREDEFINED_WPT_ADDRESS = "predefined_wpt_address";
-	private static final String KEY_PREDEFINED_WPT_DESCRIPTION = "predefined_wpt_description";
-	private static final String KEY_PREDEFINED_WPT_COLOR = "predefined_wpt_color";
-	private static final String KEY_PREDEFINED_WPT_ICON = "predefined_wpt_icon";
-	private static final String KEY_PREDEFINED_WPT_BACKGROUND_TYPE = "predefined_wpt_background_type";
+	public static final String KEY_USE_PREDEFINED_WPT_APPEARANCE = "use_predefined_appearance";
+	public static final String KEY_PREDEFINED_WPT_NAME = "name";
+	public static final String KEY_PREDEFINED_WPT_ADDRESS = "predefined_wpt_address";
+	public static final String KEY_PREDEFINED_WPT_DESCRIPTION = "predefined_wpt_description";
+	public static final String KEY_PREDEFINED_WPT_COLOR = "predefined_wpt_color";
+	public static final String KEY_PREDEFINED_WPT_ICON = "predefined_wpt_icon";
+	public static final String KEY_PREDEFINED_WPT_BACKGROUND_TYPE = "predefined_wpt_background_type";
 
-	private static final String KEY_PREDEFINED_CATEGORY_NAME = "category_name";
-	private static final String KEY_PREDEFINED_CATEGORY_COLOR = "category_color";
+	public static final String KEY_PREDEFINED_CATEGORY_NAME = "category_name";
+	public static final String KEY_PREDEFINED_CATEGORY_COLOR = "category_color";
 
 	private transient String selectedGpxFilePath;
 	private transient WptPt predefinedWaypoint;
