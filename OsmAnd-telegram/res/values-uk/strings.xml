@@ -42,7 +42,7 @@
     <string name="live_now_description">Контакти та групи, які транслюють свою позицію Вам.</string>
     <string name="logout_from_osmand_telegram_descr">Ви впевнені, що бажаєте вийти з OsmAnd Tracker, оскільки не зможете транслювати свою позицію чи бачити позицію інших\?</string>
     <string name="logout_from_osmand_telegram">Вийти з OsmAnd Tracker\?</string>
-    <string name="shared_string_name">Імʼя</string>
+    <string name="shared_string_name">Назва</string>
     <string name="by_distance">За відстанню</string>
     <string name="by_name">За імʼям</string>
     <string name="by_group">За групою</string>
@@ -118,7 +118,7 @@
     <string name="shared_string_settings">Налаштування</string>
     <string name="no_location_permission">Застосунок не має дозволу до отримання даних позиціювання.</string>
     <string name="gps_not_available">Будь ласка, увімкніть «Позиціювання» у системних налаштуваннях</string>
-    <string name="osmand_service">Режим тла</string>
+    <string name="osmand_service">Фоновий режим</string>
     <string name="osmand_service_descr">OsmAnd Tracker працює у фоновому режимі з вимкненим екраном.</string>
     <string name="shared_string_distance">Віддаль</string>
     <string name="share_location">Поділитися позицією</string>
@@ -253,7 +253,7 @@
     <string name="time_zone">Часовий пояс</string>
     <string name="units_and_formats">Одиниці виміру й формати</string>
     <string name="unit_of_length">Одиниці вимірювання довжини</string>
-    <string name="unit_of_length_descr">Змінити одиницю вимірювання відстані.</string>
+    <string name="unit_of_length_descr">Змінити одиниці вимірювання відстані.</string>
     <string name="unit_of_speed_system_descr">Визначити одиницю вимірювання швидкості.</string>
     <string name="unit_of_speed_system">Одиниця вимірювання швидкості</string>
     <string name="buffer_time_descr">Найбільший час зберігання точок у буфері</string>
