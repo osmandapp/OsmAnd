@@ -1378,7 +1378,7 @@
     <string name="nautical_maps_missing">Для показу морських мап, потрібно завантажити спеціалізовані мапи.</string>
     <string name="edit_group">Редагувати групу</string>
     <string name="parking_place">Місце для стоянки</string>
-    <string name="remove_the_tag">ВИЛУЧИТИ ТЕҐ</string>
+    <string name="remove_the_tag">ВИЛУЧИТИ МІТКУ</string>
     <string name="gps_status">Стан GPS</string>
     <string name="version_settings_descr">Завантажити нічні збірки.</string>
     <string name="version_settings">Збірки</string>
