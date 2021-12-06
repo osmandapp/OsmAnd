@@ -3882,4 +3882,7 @@
     <string name="copying_file">Copiant fitxer %1$s…</string>
     <string name="progress_complete">%1$s complet</string>
     <string name="reading_files">Llegint fitxers…</string>
+    <string name="gps_filter_hdop_desc">Definiu el valor màxim acceptat per a HDOP.
+\nS\'ocultaran els punts amb un valor més alt.</string>
+    <string name="created_on">Creat el</string>
 </resources>
