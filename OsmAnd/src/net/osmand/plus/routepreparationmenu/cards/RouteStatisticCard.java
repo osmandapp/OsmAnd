@@ -118,36 +118,17 @@ public class RouteStatisticCard extends MapBaseCard {
 	}
 
 	private void updateButtons() {
-		FrameLayout detailsButton = (FrameLayout) view.findViewById(R.id.details_button);
-		TextView detailsButtonDescr = (TextView) view.findViewById(R.id.details_button_descr);
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			AndroidUtils.setBackground(app, detailsButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
-			AndroidUtils.setBackground(app, detailsButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
-		} else {
-			AndroidUtils.setBackground(app, detailsButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
-		}
-		detailsButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardButtonPressed(RouteStatisticCard.this, DETAILS_BUTTON_INDEX);
-				}
-			}
-		});
-		FrameLayout startButton = (FrameLayout) view.findViewById(R.id.start_button);
-		TextView startButtonDescr = (TextView) view.findViewById(R.id.start_button_descr);
+		FrameLayout detailsButton = view.findViewById(R.id.details_button);
+		TextView detailsButtonDescr = view.findViewById(R.id.details_button_descr);
+		AndroidUtils.setBackground(app, detailsButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
+		AndroidUtils.setBackground(app, detailsButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
+		detailsButton.setOnClickListener(v -> notifyButtonPressed(DETAILS_BUTTON_INDEX));
+
+		FrameLayout startButton = view.findViewById(R.id.start_button);
+		TextView startButtonDescr = view.findViewById(R.id.start_button_descr);
 		AndroidUtils.setBackground(app, startButton, nightMode, R.drawable.btn_active_light, R.drawable.btn_active_dark);
 		int color = ContextCompat.getColor(app, R.color.card_and_list_background_light);
-		startButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardButtonPressed(RouteStatisticCard.this, START_BUTTON_INDEX);
-				}
-			}
-		});
+		startButton.setOnClickListener(v -> notifyButtonPressed(START_BUTTON_INDEX));
 		RoutingHelper helper = app.getRoutingHelper();
 		if (helper.isFollowingMode() || helper.isPauseNavigation()) {
 			startButtonDescr.setText(R.string.shared_string_resume);

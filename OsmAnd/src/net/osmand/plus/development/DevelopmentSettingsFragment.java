@@ -148,7 +148,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 		Preference preference = findPreference(settings.MEMORY_ALLOCATED_FOR_ROUTING.getId());
 		int value = settings.MEMORY_ALLOCATED_FOR_ROUTING.get();
 		String description = getString(
-				R.string.ltr_or_rtl_combine_via_slash,
+				R.string.ltr_or_rtl_combine_via_space,
 				String.valueOf(value),
 				"MB");
 		preference.setSummary(description);

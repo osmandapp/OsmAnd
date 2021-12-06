@@ -1,11 +1,5 @@
 package net.osmand.plus.search;
 
-import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_LOCATION_KEY;
-import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_QUERY_KEY;
-import static net.osmand.search.core.ObjectType.POI_TYPE;
-import static net.osmand.search.core.ObjectType.SEARCH_STARTED;
-import static net.osmand.search.core.SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -38,19 +32,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -121,6 +102,25 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
+import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_LOCATION_KEY;
+import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_QUERY_KEY;
+import static net.osmand.search.core.ObjectType.POI_TYPE;
+import static net.osmand.search.core.ObjectType.SEARCH_STARTED;
+import static net.osmand.search.core.SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY;
 
 public class QuickSearchDialogFragment extends DialogFragment implements OsmAndCompassListener,
 		OsmAndLocationListener, DownloadEvents, OnPreferenceChanged {
@@ -265,24 +265,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		final View view = inflater.inflate(R.layout.search_dialog_fragment, container, false);
 
 		toolbarController = new QuickSearchToolbarController();
-		toolbarController.setOnBackButtonClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mapActivity.showQuickSearch(ShowQuickSearchMode.CURRENT, false);
-			}
-		});
-		toolbarController.setOnTitleClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mapActivity.showQuickSearch(ShowQuickSearchMode.CURRENT, false);
-			}
-		});
-		toolbarController.setOnCloseButtonClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mapActivity.closeQuickSearch();
-			}
-		});
+		toolbarController.setOnBackButtonClickListener(v ->
+				mapActivity.showQuickSearch(ShowQuickSearchMode.CURRENT, false));
+		toolbarController.setOnTitleClickListener(v ->
+				mapActivity.showQuickSearch(ShowQuickSearchMode.CURRENT, false));
+		toolbarController.setOnCloseButtonClickListener(v -> mapActivity.closeQuickSearch());
 
 		Bundle arguments = getArguments();
 		if (savedInstanceState != null) {
@@ -485,14 +472,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		toolbarEdit = (Toolbar) view.findViewById(R.id.toolbar_edit);
 		toolbarEdit.setNavigationIcon(iconsCache.getIcon(R.drawable.ic_action_remove_dark));
 		toolbarEdit.setNavigationContentDescription(R.string.shared_string_cancel);
-		toolbarEdit.setNavigationOnClickListener(
-				new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						enableSelectionMode(false, -1);
-					}
-				}
-		);
+		toolbarEdit.setNavigationOnClickListener(v -> enableSelectionMode(false, -1));
 
 		titleEdit = (TextView) view.findViewById(R.id.titleEdit);
 		Drawable shareIcon = iconsCache.getIcon(R.drawable.ic_action_gshare_dark, R.color.color_white);
@@ -663,12 +643,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		);
 
 		fab = view.findViewById(R.id.fab);
-		fab.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				saveCustomFilter();
-			}
-		});
+		fab.setOnClickListener(v -> saveCustomFilter());
 		updateFab();
 
 		setupSearch(mapActivity);
@@ -702,7 +677,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	@Override
-	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
 		updateToolbarButton();
@@ -732,10 +707,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void onBackButtonPressed() {
 		if (tabBarHidden) {
-			Activity activity = getActivity();
-			if (activity != null) {
-				AndroidUtils.hideSoftKeyboard(activity, searchEditText);
-			}
+			hideKeyboard();
+			searchEditText.setText("");
 			updateTabBarVisibility(true);
 		} else if (!processBackAction()) {
 			Dialog dialog = getDialog();
@@ -838,8 +811,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void hideKeyboard() {
-		if (searchEditText.hasFocus()) {
-			AndroidUtils.hideSoftKeyboard(getActivity(), searchEditText);
+		Activity activity = getActivity();
+		if (activity != null && searchEditText.hasFocus()) {
+			AndroidUtils.hideSoftKeyboard(activity, searchEditText);
 		}
 	}
 

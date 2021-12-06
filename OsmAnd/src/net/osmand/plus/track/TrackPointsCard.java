@@ -173,15 +173,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 		addWaypointIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_name_field));
 
 
-		addWaypointActionView.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardButtonPressed(TrackPointsCard.this, ADD_WAYPOINT_INDEX);
-				}
-			}
-		});
+		addWaypointActionView.setOnClickListener(v -> notifyButtonPressed(ADD_WAYPOINT_INDEX));
 		listView.addFooterView(addWaypointActionView);
 	}
 
@@ -193,15 +185,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 		deleteWaypointsTitle.setText(R.string.delete_waypoints);
 		deleteWaypointsIcon.setImageDrawable(getColoredIcon(R.drawable.ic_action_delete_dark, R.color.color_osm_edit_delete));
 
-		deleteWaypointActionView.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardButtonPressed(TrackPointsCard.this, DELETE_WAYPOINTS_INDEX);
-				}
-			}
-		});
+		deleteWaypointActionView.setOnClickListener(v -> notifyButtonPressed(DELETE_WAYPOINTS_INDEX));
 		listView.addFooterView(deleteWaypointActionView);
 	}
 
@@ -229,10 +213,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		GpxDisplayItem item = adapter.getChild(groupPosition, childPosition);
 		if (item != null && item.locationStart != null) {
-			CardListener cardListener = getListener();
-			if (cardListener != null) {
-				cardListener.onCardButtonPressed(this, OPEN_WAYPOINT_INDEX);
-			}
+			notifyButtonPressed(OPEN_WAYPOINT_INDEX);
 			LatLon location = new LatLon(item.locationStart.lat, item.locationStart.lon);
 			PointDescription description = new PointDescription(PointDescription.POINT_TYPE_WPT, item.name);
 

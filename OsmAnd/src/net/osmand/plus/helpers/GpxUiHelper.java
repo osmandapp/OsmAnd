@@ -17,6 +17,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -106,10 +107,12 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActivityResultListener;
+import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginsFragment;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
+import net.osmand.plus.helpers.GpsFilterHelper.GpsFilter;
 import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.helpers.enums.SpeedConstants;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -855,11 +858,11 @@ public class GpxUiHelper {
 	}
 
 	@TargetApi(Build.VERSION_CODES.KITKAT)
-	private static void addTrack(final Activity activity, ArrayAdapter<String> listAdapter,
+	private static void addTrack(Activity activity, ArrayAdapter<String> listAdapter,
 	                             ContextMenuAdapter contextMenuAdapter, List<GPXInfo> allGpxFiles) {
 		if (activity instanceof MapActivity) {
 			final MapActivity mapActivity = (MapActivity) activity;
-			ActivityResultListener.OnActivityResultListener onActivityResultListener = (resultCode, resultData) -> {
+			OnActivityResultListener listener = (resultCode, resultData) -> {
 				if (resultCode != Activity.RESULT_OK || resultData == null) {
 					return;
 				}
@@ -886,12 +889,11 @@ public class GpxUiHelper {
 
 			Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
 			intent.setType("*/*");
-			if (AndroidUtils.isIntentSafe(mapActivity, intent)) {
-				ActivityResultListener listener = new ActivityResultListener(OPEN_GPX_DOCUMENT_REQUEST, onActivityResultListener);
-				mapActivity.registerActivityResultListener(listener);
+			try {
 				mapActivity.startActivityForResult(intent, OPEN_GPX_DOCUMENT_REQUEST);
-			} else {
-				mapActivity.getMyApplication().showToastMessage(R.string.no_activity_for_intent);
+				mapActivity.registerActivityResultListener(new ActivityResultListener(OPEN_GPX_DOCUMENT_REQUEST, listener));
+			} catch (ActivityNotFoundException e) {
+				Toast.makeText(mapActivity, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
 			}
 		}
 	}
@@ -2407,6 +2409,7 @@ public class GpxUiHelper {
 		if (dataItem.getColoringType() != null) {
 			gpxFile.setColoringType(dataItem.getColoringType());
 		}
+		GpsFilter.writeValidFilterValuesToExtensions(gpxFile.getExtensionsToWrite(), dataItem);
 	}
 
 	public static void shareGpx(@NonNull Context context, @NonNull File file) {

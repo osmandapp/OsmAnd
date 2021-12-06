@@ -245,8 +245,8 @@ public class GPXUtilities {
 		public int speedColor = 0;
 		public int altitudeColor = 0;
 		public int slopeColor = 0;
-		public int colourARGB = 0;                    // point colour (used for altitude/speed colouring)
-		public double distance = 0.0;                // cumulative distance, if in a track
+		public int colourARGB = 0;    // point colour (used for altitude/speed colouring)
+		public double distance = 0.0; // cumulative distance, if in a track; depends on split type of GPX-file
 
 		public WptPt() {
 		}
@@ -603,6 +603,9 @@ public class GPXUtilities {
 		public float maxSpeed = 0;
 		public float avgSpeed;
 
+		public double minHdop = Double.NaN;
+		public double maxHdop = Double.NaN;
+
 		public int points;
 		public int wptPoints = 0;
 
@@ -647,6 +650,10 @@ public class GPXUtilities {
 
 		public boolean isSpeedSpecified() {
 			return avgSpeed > 0;
+		}
+
+		public boolean isHdopSpecified() {
+			return minHdop > 0;
 		}
 
 		public boolean isColorizationTypeAvailable(ColorizationType colorizationType) {
@@ -745,6 +752,16 @@ public class GPXUtilities {
 					float speed = (float) point.speed;
 					if (speed > 0) {
 						hasSpeedInTrack = true;
+					}
+
+					double hdop = point.hdop;
+					if (hdop > 0) {
+						if (Double.isNaN(minHdop) || hdop < minHdop) {
+							minHdop = hdop;
+						}
+						if (Double.isNaN(maxHdop) || hdop > maxHdop) {
+							maxHdop = hdop;
+						}
 					}
 
 					if (j > 0) {
@@ -891,9 +908,7 @@ public class GPXUtilities {
 
 		public abstract static class ElevationDiffsCalculator {
 
-			private static final double DEFAULT_WINDOW_LENGTH = 25d;
-
-			private double windowLength = DEFAULT_WINDOW_LENGTH;
+			private double windowLength;
 			private final int startIndex;
 			private final int numberOfPoints;
 
@@ -903,6 +918,8 @@ public class GPXUtilities {
 			public ElevationDiffsCalculator(int startIndex, int numberOfPoints) {
 				this.startIndex = startIndex;
 				this.numberOfPoints = numberOfPoints;
+				WptPt lastPoint = getPoint(startIndex + numberOfPoints - 1);
+				this.windowLength = Math.max(20d, lastPoint.distance / numberOfPoints * 4);
 			}
 
 			public ElevationDiffsCalculator(double windowLength, int startIndex, int numberOfPoints) {

@@ -2174,8 +2174,8 @@
     <string name="shared_string_start_time">وقت البدء</string>
     <string name="shared_string_end_time">وقت الانتهاء</string>
     <string name="routing_attr_driving_style_name">اسلوب القيادة</string>
-    <string name="altitude_descent">منحدر</string>
-    <string name="altitude_ascent">مرتفع</string>
+    <string name="altitude_descent">المنحدر</string>
+    <string name="altitude_ascent">المرتفع</string>
     <string name="altitude_range">مدى الارتفاع</string>
     <string name="average_altitude">متوسط الارتفاع</string>
     <string name="routing_attr_height_obstacles_name">بيانات الارتفاع</string>
@@ -4525,4 +4525,27 @@
     <string name="no_items_selected_warning">الرجاء تحديد عنصر واحد على الأقل</string>
     <string name="display_groups_visibility_dialog_description">يمكنك التحكم في رؤية المجموعة على الخريطة. إذا كان المسار مخفيًا ، فسيتم إخفاء جميع المجموعات أيضًا.</string>
     <string name="exit_without_saving_warning">هل أنت متأكد من الخروج دون حفظ؟ سوف تفقد كل التغييرات.</string>
+    <string name="shared_string_hide_slope">إخفاء المنحدر</string>
+    <string name="shared_string_show_slope">إظهار المنحدر</string>
+    <string name="elevation_profile">ملف تعريف الارتفاع</string>
+    <string name="shared_string_grade">درجة</string>
+    <string name="shared_string_uphill">المرتفع</string>
+    <string name="shared_string_downhill">المنحدر</string>
+    <string name="shared_string_statistics">إحصائيات</string>
+    <string name="distance_between_points">المسافة بين النقاط</string>
+    <string name="ltr_or_rtl_combine">%1$s%2$s</string>
+    <string name="save_changes_into_file">احفظ التغييرات في ملف</string>
+    <string name="storage_migration_wrong_folder_warning">لا يمكننا العثور على بيانات OsmAnd في المجلد المحدد. حاول مرة اخرى.</string>
+    <string name="shared_string_precision">الدقة</string>
+    <string name="gps_filter_hdop_desc">قم بتعيين الحد الأقصى المسموح به لقيمة HDOP.
+\nسيتم إخفاء النقاط التي تزيد عن المعيار المحدد.</string>
+    <string name="save_as_copy">حفظ كنسخة</string>
+    <string name="gps_filter_actions_description">OsmAnd يطبق التغييرات على المسار دون حفظها في ملف. يمكنك حفظ التغييرات يدويا.</string>
+    <string name="gps_filter_speed_altitude_desc">ستكون نقاط المسار المطابقة للفاصل الزمني المحدد مرئية على الرسم البياني والخريطة ، وسيتم إخفاء الباقي.</string>
+    <string name="gps_filter_smoothing_desc">اضبط المسافة الفاصلة بين النقاط.
+\nسيتم إخفاء نقاط التعقب التي تكون على الأقل بمسافة X من آخر نقطة مرئية.
+\nكن حذرًا كلما زادت المسافة، كانت هندسة المسار أبسط.</string>
+    <string name="shared_string_gps_filter">مرشح GPS</string>
+    <string name="gps_filter_smoothing">التنعيم</string>
+    <string name="gps_filter_precision">دقة GPS الأدنى</string>
 </resources>

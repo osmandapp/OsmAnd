@@ -5,10 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.os.AsyncTask;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
@@ -53,6 +49,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.StringTokenizer;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 public class GpxSelectionHelper {
 
@@ -183,35 +183,60 @@ public class GpxSelectionHelper {
 		return null;
 	}
 
-	public static boolean processSplit(OsmandApplication app) {
+	public static boolean processSplit(@Nullable OsmandApplication app,
+	                                   @Nullable SelectedGpxFile fileToProcess) {
 		if (app == null || app.isApplicationInitializing()) {
 			return false;
 		}
-		List<GpxDataItem> items = app.getGpxDbHelper().getSplitItems();
-		for (GpxDataItem dataItem : items) {
-			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(dataItem.getFile().getAbsolutePath());
-			if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
-				GPXFile gpxFile = selectedGpxFile.getGpxFile();
-				List<GpxDisplayGroup> groups = app.getSelectedGpxHelper().collectDisplayGroups(gpxFile);
 
-				GpxSplitType splitType = GpxSplitType.getSplitTypeByTypeId(dataItem.getSplitType());
-				if (splitType == GpxSplitType.NO_SPLIT) {
-					for (GpxDisplayGroup model : groups) {
-						model.noSplit(app);
-					}
-				} else if (splitType == GpxSplitType.DISTANCE) {
-					for (GpxDisplayGroup model : groups) {
-						model.splitByDistance(app, dataItem.getSplitInterval(), dataItem.isJoinSegments());
-					}
-				} else if (splitType == GpxSplitType.TIME) {
-					for (GpxDisplayGroup model : groups) {
-						model.splitByTime(app, (int) dataItem.getSplitInterval(), dataItem.isJoinSegments());
-					}
-				}
-				selectedGpxFile.setDisplayGroups(groups, app);
+		List<GpxDataItem> items = app.getGpxDbHelper().getSplitItems();
+
+		for (GpxDataItem dataItem : items) {
+			String path = dataItem.getFile().getAbsolutePath();
+			SelectedGpxFile selectedGpxFile;
+
+			GPXFile gpxFileToProcess = fileToProcess == null ? null : fileToProcess.getGpxFile();
+			if (gpxFileToProcess != null && path.equals(gpxFileToProcess.path)) {
+				selectedGpxFile = fileToProcess;
+			} else {
+				selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(path);
+			}
+
+			if (selectedGpxFile == null || fileToProcess != null && !fileToProcess.equals(selectedGpxFile)) {
+				continue;
+			}
+
+			if (selectedGpxFile.getGpxFile() != null) {
+				GPXFile gpxFile = selectedGpxFile.getGpxFile();
+				List<GpxDisplayGroup> displayGroups = processSplit(app, dataItem, gpxFile);
+				selectedGpxFile.setDisplayGroups(displayGroups, app);
 			}
 		}
-		return true;
+		return fileToProcess == null || fileToProcess.splitProcessed;
+	}
+
+	@NonNull
+	public static List<GpxDisplayGroup> processSplit(@NonNull OsmandApplication app,
+	                                                 @NonNull GpxDataItem dataItem,
+	                                                 @NonNull GPXFile gpxFile) {
+		List<GpxDisplayGroup> groups = app.getSelectedGpxHelper().collectDisplayGroups(gpxFile);
+
+		GpxSplitType splitType = GpxSplitType.getSplitTypeByTypeId(dataItem.getSplitType());
+		if (splitType == GpxSplitType.NO_SPLIT) {
+			for (GpxDisplayGroup model : groups) {
+				model.noSplit(app);
+			}
+		} else if (splitType == GpxSplitType.DISTANCE) {
+			for (GpxDisplayGroup model : groups) {
+				model.splitByDistance(app, dataItem.getSplitInterval(), dataItem.isJoinSegments());
+			}
+		} else if (splitType == GpxSplitType.TIME) {
+			for (GpxDisplayGroup model : groups) {
+				model.splitByTime(app, (int) dataItem.getSplitInterval(), dataItem.isJoinSegments());
+			}
+		}
+
+		return groups;
 	}
 
 	private String getString(int resId, Object... formatArgs) {
@@ -715,6 +740,9 @@ public class GpxSelectionHelper {
 			displayed = selectedGPXFiles.contains(sf);
 			if (!displayed && show) {
 				sf.selectedByUser = selectedByUser;
+				if (dataItem != null && FilteredSelectedGpxFile.isGpsFiltersConfigValid(dataItem)) {
+					sf.createFilteredSelectedGpxFile(app, dataItem);
+				}
 			}
 		} else {
 			assert gpx != null;
@@ -728,6 +756,9 @@ public class GpxSelectionHelper {
 					sf.setJoinSegments(dataItem.isJoinSegments());
 				}
 				sf.setGpxFile(gpx, app);
+				if (dataItem != null && FilteredSelectedGpxFile.isGpsFiltersConfigValid(dataItem)) {
+					sf.createFilteredSelectedGpxFile(app, dataItem);
+				}
 				sf.notShowNavigationDialog = notShowNavigationDialog;
 				sf.selectedByUser = selectedByUser;
 			}
@@ -848,20 +879,22 @@ public class GpxSelectionHelper {
 		public boolean notShowNavigationDialog = false;
 		public boolean selectedByUser = true;
 
-		private GPXFile gpxFile;
-		private GPXTrackAnalysis trackAnalysis;
+		protected GPXFile gpxFile;
+		protected GPXTrackAnalysis trackAnalysis;
 
-		private Set<String> hiddenGroups = new HashSet<>();
-		private List<TrkSegment> processedPointsToDisplay = new ArrayList<>();
-		private List<GpxDisplayGroup> displayGroups;
+		protected Set<String> hiddenGroups = new HashSet<>();
+		protected List<TrkSegment> processedPointsToDisplay = new ArrayList<>();
+		protected List<GpxDisplayGroup> displayGroups;
 
-		private int color;
-		private long modifiedTime = -1;
+		protected int color;
+		protected long modifiedTime = -1;
 
 		private boolean routePoints;
-		private boolean joinSegments;
+		protected boolean joinSegments;
 		private boolean showCurrentTrack;
-		private boolean splitProcessed = false;
+		protected boolean splitProcessed = false;
+
+		private FilteredSelectedGpxFile filteredSelectedGpxFile;
 
 		public void setGpxFile(GPXFile gpxFile, OsmandApplication app) {
 			this.gpxFile = gpxFile;
@@ -869,6 +902,9 @@ public class GpxSelectionHelper {
 				this.color = gpxFile.tracks.get(0).getColor(0);
 			}
 			processPoints(app);
+			if (filteredSelectedGpxFile != null) {
+				app.getGpsFilterHelper().filterGpxFile(filteredSelectedGpxFile, false);
+			}
 		}
 
 		public boolean isLoaded() {
@@ -882,13 +918,30 @@ public class GpxSelectionHelper {
 			return trackAnalysis;
 		}
 
-		private void update(OsmandApplication app) {
+		public GPXTrackAnalysis getTrackAnalysisToDisplay(OsmandApplication app) {
+			return filteredSelectedGpxFile != null
+					? filteredSelectedGpxFile.getTrackAnalysis(app)
+					: getTrackAnalysis(app);
+		}
+
+		protected void update(OsmandApplication app) {
 			modifiedTime = gpxFile.modifiedTime;
-			trackAnalysis = gpxFile.getAnalysis(
-					Algorithms.isEmpty(gpxFile.path) ? System.currentTimeMillis() :
-							new File(gpxFile.path).lastModified());
+
+			long fileTimestamp = Algorithms.isEmpty(gpxFile.path)
+					? System.currentTimeMillis()
+					: new File(gpxFile.path).lastModified();
+			trackAnalysis = gpxFile.getAnalysis(fileTimestamp);
+
 			displayGroups = null;
-			splitProcessed = GpxSelectionHelper.processSplit(app);
+			splitProcessed = processSplit(app);
+
+			if (filteredSelectedGpxFile != null) {
+				filteredSelectedGpxFile.update(app);
+			}
+		}
+
+		protected boolean processSplit(@Nullable OsmandApplication app) {
+			return GpxSelectionHelper.processSplit(app, null);
 		}
 
 		public void processPoints(OsmandApplication app) {
@@ -898,6 +951,9 @@ public class GpxSelectionHelper {
 				this.processedPointsToDisplay = gpxFile.processRoutePoints();
 				routePoints = !this.processedPointsToDisplay.isEmpty();
 			}
+			if (filteredSelectedGpxFile != null) {
+				filteredSelectedGpxFile.processPoints(app);
+			}
 		}
 
 		public boolean isRoutePoints() {
@@ -905,14 +961,15 @@ public class GpxSelectionHelper {
 		}
 
 		public List<TrkSegment> getPointsToDisplay() {
-			if (joinSegments) {
-				if (gpxFile != null && gpxFile.getGeneralTrack() != null) {
-					return gpxFile.getGeneralTrack().segments;
-				} else {
-					return Collections.emptyList();
-				}
+			if (filteredSelectedGpxFile != null) {
+				return filteredSelectedGpxFile.getPointsToDisplay();
+			} else if (joinSegments) {
+				return gpxFile != null && gpxFile.getGeneralTrack() != null
+						? gpxFile.getGeneralTrack().segments
+						: Collections.emptyList();
+			} else {
+				return processedPointsToDisplay;
 			}
-			return processedPointsToDisplay;
 		}
 
 		public List<TrkSegment> getModifiablePointsToDisplay() {
@@ -935,6 +992,10 @@ public class GpxSelectionHelper {
 			return gpxFile;
 		}
 
+		public GPXFile getGpxFileToDisplay() {
+			return filteredSelectedGpxFile != null ? filteredSelectedGpxFile.getGpxFile() : gpxFile;
+		}
+
 		public GPXFile getModifiableGpxFile() {
 			// call process points after
 			return gpxFile;
@@ -954,6 +1015,9 @@ public class GpxSelectionHelper {
 
 		public void setJoinSegments(boolean joinSegments) {
 			this.joinSegments = joinSegments;
+			if (filteredSelectedGpxFile != null) {
+				filteredSelectedGpxFile.setJoinSegments(joinSegments);
+			}
 		}
 
 		public int getColor() {
@@ -962,28 +1026,39 @@ public class GpxSelectionHelper {
 
 		public void resetSplitProcessed() {
 			splitProcessed = false;
+			if (filteredSelectedGpxFile != null) {
+				filteredSelectedGpxFile.splitProcessed = false;
+			}
 		}
 
 		public List<GpxDisplayGroup> getDisplayGroups(OsmandApplication app) {
 			if (modifiedTime != gpxFile.modifiedTime || !splitProcessed) {
 				update(app);
 			}
-			return displayGroups;
+			return filteredSelectedGpxFile != null ? filteredSelectedGpxFile.getDisplayGroups(app) : displayGroups;
 		}
 
 		public void setDisplayGroups(List<GpxDisplayGroup> displayGroups, OsmandApplication app) {
-			if (modifiedTime != gpxFile.modifiedTime) {
-				update(app);
+			if (filteredSelectedGpxFile != null) {
+				filteredSelectedGpxFile.setDisplayGroups(displayGroups, app);
+			} else {
+				if (modifiedTime != gpxFile.modifiedTime) {
+					update(app);
+				}
+				this.displayGroups = displayGroups;
 			}
-			this.displayGroups = displayGroups;
 		}
 
-		public boolean isFollowTrack(OsmandApplication app) {
-			GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
-			if (routeParams != null) {
-				return gpxFile.path.equals(routeParams.getFile().path);
-			}
-			return false;
+		@NonNull
+		public FilteredSelectedGpxFile createFilteredSelectedGpxFile(@NonNull OsmandApplication app,
+		                                                             @Nullable GpxDataItem gpxDataItem) {
+			filteredSelectedGpxFile = new FilteredSelectedGpxFile(app, this, gpxDataItem);
+			return filteredSelectedGpxFile;
+		}
+
+		@Nullable
+		public FilteredSelectedGpxFile getFilteredSelectedGpxFile() {
+			return filteredSelectedGpxFile;
 		}
 	}
 

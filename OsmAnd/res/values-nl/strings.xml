@@ -4304,4 +4304,38 @@
     <string name="quick_action_toggle_preference">Een knop om te schakelen tussen je voorkeursstatus.</string>
     <string name="display_route_tracks_as_poi">Geef tracks weer als POI</string>
     <string name="android_auto_map_placeholder_title">De kaart wordt op het wagenscherm weergegeven.</string>
+    <string name="shared_string_statistics">Statistieken</string>
+    <string name="gps_filter_hdop_desc">Stel de maximale toegelaten waarde in voor HDOP.
+\nPunten groter dan de ingestelde waarde zullen worden verborgen.</string>
+    <string name="gps_filter_speed_altitude_desc">De track punten die voldoen aan het ingestelde interval zullen zichtbaar zijn op de kaart en de grafiek. De andere punten zullen verborgen worden.</string>
+    <string name="distance_between_points">Afstand tussen de punten</string>
+    <string name="gps_filter_precision">Minimum GPS nauwkeurigheid</string>
+    <string name="gps_filter_smoothing">Afvlakking</string>
+    <string name="save_changes_into_file">Sla de wijzigingen op in een bestand</string>
+    <string name="save_as_copy">Sla op als kopie</string>
+    <string name="gps_filter_actions_description">OsmAnd past de wijziging toe op de track zonder deze op te slaan in het bestand. Je kan de wijziging handmatig opslaan.</string>
+    <string name="shared_string_gps_filter">GPS filter</string>
+    <string name="storage_migration_wrong_folder_warning">We kunnen geen OsmAnd gegevens vinden in de geselecteerde map. Gelieve opnieuw te proberen.</string>
+    <string name="ltr_or_rtl_combine">%1$s%2$s</string>
+    <string name="icon_group_education">Educatie</string>
+    <string name="shared_string_precision">Nauwkeurigheid</string>
+    <string name="gps_filter_smoothing_desc">Stel de drempelafstand tussen de punten in.
+\nTrackpunten die zich op een afstand minder dan de drempelafstand bevinden van het laatst zichtbare punt zal worden verborgen.
+\nLet op, hoe groter de afstand hoe simpeler de track vorm.</string>
+    <string name="shared_string_migration">Migratie</string>
+    <string name="migration_files_present">%1$d bestanden (%2$s) zijn aanwezig in de geselecteerde locatie \'%3$s\'.</string>
+    <string name="fold_unfold">vouw / ontvouw</string>
+    <string name="reading_files">Bestanden lezen…</string>
+    <string name="no_items_selected_warning">Gelieve op zijn minst één item te selecteren</string>
+    <string name="icon_group_industrial">Industrie</string>
+    <string name="add_to_group">Voeg toe aan groep</string>
+    <string name="app_profile_type">App profieltype</string>
+    <string name="map_marker_options">Kaartmarkeringsopties</string>
+    <string name="app_modes_options">Kies App modus</string>
+    <string name="shared_string_memory">Geheugen</string>
+    <string name="memory_allocated_for_routing_ds">Hoger geheugenwaardes versnellen de berekening van lange routes (meer dan 500 km), maar kunnen de prestaties van andere applicaties beïnvloeden.
+\nDit heeft geen effect op de snelheid voor het berekenen van kortere routes.</string>
+    <string name="memory_allocated_for_routing">Geheugen toegewezen voor routeberekeningen</string>
+    <string name="show_parameter_seekbar">Toon parameter zoekbalk</string>
+    <string name="exit_without_saving_warning">Ben je zeker dat je dit wil verlaten zonder op te slaan\? Alle wijzigingen zullen verloren gaan.</string>
 </resources>

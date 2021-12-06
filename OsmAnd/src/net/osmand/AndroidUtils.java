@@ -7,6 +7,7 @@ import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 import android.app.Activity;
 import android.app.KeyguardManager;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -52,6 +53,7 @@ import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
@@ -174,35 +176,31 @@ public class AndroidUtils {
 		}
 	}
 
-	public static boolean isIntentSafe(@NonNull Context context, @NonNull Intent intent) {
-		return intent.resolveActivity(context.getPackageManager()) != null;
-	}
-
 	public static boolean startActivityIfSafe(@NonNull Context context, @NonNull Intent intent) {
 		return startActivityIfSafe(context, intent, null);
 	}
 
 	public static boolean startActivityIfSafe(@NonNull Context context, @NonNull Intent intent, @Nullable Intent chooserIntent) {
-		if (isIntentSafe(context, intent)) {
+		try {
 			if (!(context instanceof Activity)) {
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			}
 			context.startActivity(chooserIntent != null ? chooserIntent : intent);
 			return true;
-		} else {
-			OsmandApplication app = (OsmandApplication) context.getApplicationContext();
-			app.showToastMessage(R.string.no_activity_for_intent);
+		} catch (ActivityNotFoundException e) {
+			LOG.error(e);
+			Toast.makeText(context, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
 			return false;
 		}
 	}
 
 	public static boolean startActivityForResultIfSafe(@NonNull Activity activity, @NonNull Intent intent, int requestCode) {
-		if (isIntentSafe(activity, intent)) {
+		try {
 			activity.startActivityForResult(intent, requestCode);
 			return true;
-		} else {
-			OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-			app.showToastMessage(R.string.no_activity_for_intent);
+		} catch (ActivityNotFoundException e) {
+			LOG.error(e);
+			Toast.makeText(activity, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
 			return false;
 		}
 	}

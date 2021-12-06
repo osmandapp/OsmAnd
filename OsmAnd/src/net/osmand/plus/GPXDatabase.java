@@ -6,6 +6,10 @@ import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.plus.helpers.GpsFilterHelper.AltitudeFilter;
+import net.osmand.plus.helpers.GpsFilterHelper.HdopFilter;
+import net.osmand.plus.helpers.GpsFilterHelper.SmoothingFilter;
+import net.osmand.plus.helpers.GpsFilterHelper.SpeedFilter;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.GradientScaleType;
@@ -24,7 +28,7 @@ import androidx.annotation.Nullable;
 
 public class GPXDatabase {
 
-	private static final int DB_VERSION = 12;
+	private static final int DB_VERSION = 13;
 	private static final String DB_NAME = "gpx_database";
 
 	private static final String GPX_TABLE_NAME = "gpxTable";
@@ -81,6 +85,13 @@ public class GPXDatabase {
 
 	private static final String GPX_COL_COLORING_TYPE = "gradientScaleType";
 
+	private static final String GPX_COL_SMOOTHING_THRESHOLD = "smoothingThreshold";
+	private static final String GPX_COL_MIN_FILTER_SPEED = "minFilterSpeed";
+	private static final String GPX_COL_MAX_FILTER_SPEED = "maxFilterSpeed";
+	private static final String GPX_COL_MIN_FILTER_ALTITUDE = "minFilterAltitude";
+	private static final String GPX_COL_MAX_FILTER_ALTITUDE = "maxFilterAltitude";
+	private static final String GPX_COL_MAX_FILTER_HDOP = "maxFilterHdop";
+
 	private static final String GPX_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + GPX_TABLE_NAME + " (" +
 			GPX_COL_NAME + " TEXT, " +
 			GPX_COL_DIR + " TEXT, " +
@@ -118,7 +129,13 @@ public class GPXDatabase {
 			GPX_COL_GRADIENT_SPEED_COLOR + " TEXT, " +
 			GPX_COL_GRADIENT_ALTITUDE_COLOR + " TEXT, " +
 			GPX_COL_GRADIENT_SLOPE_COLOR + " TEXT, " +
-			GPX_COL_COLORING_TYPE + " TEXT);";
+			GPX_COL_COLORING_TYPE + " TEXT, " +
+			GPX_COL_SMOOTHING_THRESHOLD + " double, " +
+			GPX_COL_MIN_FILTER_SPEED + " double, " +
+			GPX_COL_MAX_FILTER_SPEED + " double, " +
+			GPX_COL_MIN_FILTER_ALTITUDE + " double, " +
+			GPX_COL_MAX_FILTER_ALTITUDE + " double, " +
+			GPX_COL_MAX_FILTER_HDOP + " double);";
 
 	private static final String GPX_TABLE_SELECT = "SELECT " +
 			GPX_COL_NAME + ", " +
@@ -154,7 +171,13 @@ public class GPXDatabase {
 			GPX_COL_GRADIENT_SPEED_COLOR + ", " +
 			GPX_COL_GRADIENT_ALTITUDE_COLOR + ", " +
 			GPX_COL_GRADIENT_SLOPE_COLOR + ", " +
-			GPX_COL_COLORING_TYPE +
+			GPX_COL_COLORING_TYPE + ", " +
+			GPX_COL_SMOOTHING_THRESHOLD + ", " +
+			GPX_COL_MIN_FILTER_SPEED + ", " +
+			GPX_COL_MAX_FILTER_SPEED + ", " +
+			GPX_COL_MIN_FILTER_ALTITUDE + ", " +
+			GPX_COL_MAX_FILTER_ALTITUDE + ", " +
+			GPX_COL_MAX_FILTER_HDOP +
 			" FROM " + GPX_TABLE_NAME;
 
 	private static final String GPX_TABLE_UPDATE_ANALYSIS = "UPDATE " +
@@ -178,6 +201,15 @@ public class GPXDatabase {
 			GPX_COL_FILE_LAST_MODIFIED_TIME + " = ?, " +
 			GPX_COL_WPT_CATEGORY_NAMES + " = ? ";
 
+	private static final String GPX_TABLE_UPDATE_FILTERS = "UPDATE " +
+			GPX_TABLE_NAME + " SET " +
+			GPX_COL_SMOOTHING_THRESHOLD + " = ?, " +
+			GPX_COL_MIN_FILTER_SPEED + " = ?, " +
+			GPX_COL_MAX_FILTER_SPEED + " = ?, " +
+			GPX_COL_MIN_FILTER_ALTITUDE + " = ?, " +
+			GPX_COL_MAX_FILTER_ALTITUDE + " = ?, " +
+			GPX_COL_MAX_FILTER_HDOP + " = ? ";
+
 	private OsmandApplication context;
 
 	public static class GpxDataItem {
@@ -196,6 +228,12 @@ public class GPXDatabase {
 		private boolean joinSegments;
 		private boolean showArrows;
 		private boolean showStartFinish = true;
+		private double smoothingThreshold = Double.NaN;
+		private double minFilterSpeed = Double.NaN;
+		private double maxFilterSpeed = Double.NaN;
+		private double minFilterAltitude = Double.NaN;
+		private double maxFilterAltitude = Double.NaN;
+		private double maxFilterHdop = Double.NaN;
 
 		public GpxDataItem(File file, GPXTrackAnalysis analysis) {
 			this.file = file;
@@ -236,6 +274,14 @@ public class GPXDatabase {
 				ColoringType coloringType = ColoringType.fromGradientScaleType(scaleType);
 				this.coloringType = coloringType == null ? null : coloringType.getName(null);
 			}
+
+			Map<String, String> extensions = gpxFile.getExtensionsToRead();
+			smoothingThreshold = SmoothingFilter.getSmoothingThreshold(extensions);
+			minFilterSpeed = SpeedFilter.getMinFilterSpeed(extensions);
+			maxFilterSpeed = SpeedFilter.getMaxFilterSpeed(extensions);
+			minFilterAltitude = AltitudeFilter.getMinFilterAltitude(extensions);
+			maxFilterAltitude = AltitudeFilter.getMaxFilterAltitude(extensions);
+			maxFilterHdop = HdopFilter.getMaxFilterHdop(extensions);
 		}
 
 		public File getFile() {
@@ -301,6 +347,30 @@ public class GPXDatabase {
 
 		public boolean isShowStartFinish() {
 			return showStartFinish;
+		}
+
+		public double getSmoothingThreshold() {
+			return smoothingThreshold;
+		}
+
+		public double getMinFilterSpeed() {
+			return minFilterSpeed;
+		}
+
+		public double getMaxFilterSpeed() {
+			return maxFilterSpeed;
+		}
+
+		public double getMinFilterAltitude() {
+			return minFilterAltitude;
+		}
+
+		public double getMaxFilterAltitude() {
+			return maxFilterAltitude;
+		}
+
+		public double getMaxFilterHdop() {
+			return maxFilterHdop;
 		}
 
 		@Override
@@ -447,6 +517,14 @@ public class GPXDatabase {
 		}
 		if (oldVersion < 12) {
 			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_FILE_LAST_UPLOADED_TIME + " long");
+		}
+		if (oldVersion < 13) {
+			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_SMOOTHING_THRESHOLD + " double");
+			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_MIN_FILTER_SPEED + " double");
+			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_MAX_FILTER_SPEED + " double");
+			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_MIN_FILTER_ALTITUDE + " double");
+			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_MAX_FILTER_ALTITUDE + " double");
+			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_MAX_FILTER_HDOP + " double");
 		}
 		db.execSQL("CREATE INDEX IF NOT EXISTS " + GPX_INDEX_NAME_DIR + " ON " + GPX_TABLE_NAME + " (" + GPX_COL_NAME + ", " + GPX_COL_DIR + ");");
 	}
@@ -663,6 +741,58 @@ public class GPXDatabase {
 		return false;
 	}
 
+	public boolean updateGpsFiltersConfig(@NonNull GpxDataItem item, @NonNull FilteredSelectedGpxFile selectedGpxFile) {
+		SQLiteConnection db = openConnection(false);
+		if (db != null){
+			try {
+				double smoothingThreshold = selectedGpxFile.getSmoothingFilter().getSelectedMaxValue();
+				double minSpeed = selectedGpxFile.getSpeedFilter().getSelectedMinValue();
+				double maxSpeed = selectedGpxFile.getSpeedFilter().getSelectedMaxValue();
+				double minAltitude = selectedGpxFile.getAltitudeFilter().getSelectedMinValue();
+				double maxAltitude = selectedGpxFile.getAltitudeFilter().getSelectedMaxValue();
+				double maxHdop = selectedGpxFile.getHdopFilter().getSelectedMaxValue();
+				String fileName = getFileName(item.file);
+				String fileDir = getFileDir(item.file);
+				db.execSQL(GPX_TABLE_UPDATE_FILTERS +
+								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
+						new Object[] {smoothingThreshold, minSpeed, maxSpeed, minAltitude, maxAltitude,
+								maxHdop, fileName, fileDir});
+				item.smoothingThreshold = smoothingThreshold;
+				item.minFilterSpeed = minSpeed;
+				item.maxFilterSpeed = maxSpeed;
+				item.minFilterAltitude = minAltitude;
+				item.maxFilterAltitude = maxAltitude;
+				item.maxFilterHdop = maxHdop;
+			} finally {
+				db.close();
+			}
+			return true;
+		}
+		return false;
+	}
+
+	public void resetGpsFilters(@NonNull GpxDataItem item) {
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				String fileName = getFileName(item.file);
+				String fileDir = getFileDir(item.file);
+				db.execSQL(GPX_TABLE_UPDATE_FILTERS +
+								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
+						new Object[] {Double.NaN, Double.NaN, Double.NaN, Double.NaN, Double.NaN,
+								Double.NaN, fileName, fileDir});
+				item.smoothingThreshold = Double.NaN;
+				item.minFilterSpeed = Double.NaN;
+				item.maxFilterSpeed = Double.NaN;
+				item.minFilterAltitude = Double.NaN;
+				item.maxFilterAltitude = Double.NaN;
+				item.maxFilterHdop = Double.NaN;
+			} finally {
+				db.close();
+			}
+		}
+	}
+
 	public boolean remove(File file) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
@@ -732,6 +862,12 @@ public class GPXDatabase {
 		rowsMap.put(GPX_COL_SHOW_START_FINISH, item.showStartFinish ? 1 : 0);
 		rowsMap.put(GPX_COL_WIDTH, item.width);
 		rowsMap.put(GPX_COL_COLORING_TYPE, item.coloringType);
+		rowsMap.put(GPX_COL_SMOOTHING_THRESHOLD, item.smoothingThreshold);
+		rowsMap.put(GPX_COL_MIN_FILTER_SPEED, item.minFilterSpeed);
+		rowsMap.put(GPX_COL_MAX_FILTER_SPEED, item.maxFilterSpeed);
+		rowsMap.put(GPX_COL_MIN_FILTER_ALTITUDE, item.minFilterAltitude);
+		rowsMap.put(GPX_COL_MAX_FILTER_ALTITUDE, item.maxFilterAltitude);
+		rowsMap.put(GPX_COL_MAX_FILTER_HDOP, item.maxFilterHdop);
 
 		if (trackAnalysis != null) {
 			rowsMap.put(GPX_COL_TOTAL_DISTANCE, trackAnalysis.totalDistance);
@@ -838,6 +974,12 @@ public class GPXDatabase {
 		boolean showStartFinish = query.getInt(28) == 1;
 		String width = query.getString(29);
 		String coloringTypeName = query.getString(33);
+		double smoothingThreshold = query.getDouble(34);
+		double minFilterSpeed = query.getDouble(35);
+		double maxFilterSpeed = query.getDouble(36);
+		double minFilterAltitude = query.getDouble(37);
+		double maxFilterAltitude = query.getDouble(38);
+		double maxFilterHdop = query.getDouble(39);
 
 		GPXTrackAnalysis a = new GPXTrackAnalysis();
 		a.totalDistance = totalDistance;
@@ -887,6 +1029,13 @@ public class GPXDatabase {
 			ColoringType coloringType = ColoringType.fromGradientScaleType(scaleType);
 			item.coloringType = coloringType == null ? null : coloringType.getName(null);
 		}
+
+		item.smoothingThreshold = smoothingThreshold;
+		item.minFilterSpeed = minFilterSpeed;
+		item.maxFilterSpeed = maxFilterSpeed;
+		item.minFilterAltitude = minFilterAltitude;
+		item.maxFilterAltitude = maxFilterAltitude;
+		item.maxFilterHdop = maxFilterHdop;
 
 		return item;
 	}

@@ -64,8 +64,9 @@ public class WhatsNewDialogFragment extends DialogFragment {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			OsmandApplication app = requireMyApplication();
-			if (SharedStorageWarningFragment.dialogShowRequired(app)) {
-				SharedStorageWarningFragment.showInstance(mapActivity, true);
+			if (mapActivity.getFragment(SharedStorageWarningFragment.TAG) == null
+					&& SharedStorageWarningFragment.dialogShowRequired(app)) {
+				SharedStorageWarningFragment.showInstance(mapActivity.getSupportFragmentManager(), true);
 			}
 		}
 	}

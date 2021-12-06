@@ -123,7 +123,7 @@ public class SegmentsCard extends MapBaseCard {
 			AndroidUiHelper.updateVisibility(holder.title, !Algorithms.isBlank(displayItem.trackSegmentName));
 
 			holder.pager.setAdapter(new GPXItemPagerAdapter(app, displayItem, displayHelper, nightMode,
-					listener, false));
+					listener, false, false));
 			holder.tabLayout.setViewPager(holder.pager);
 
 			AndroidUiHelper.updateVisibility(holder.bottomDivider, position + 1 == displayItems.size());

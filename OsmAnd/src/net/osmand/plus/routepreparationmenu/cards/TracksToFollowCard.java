@@ -100,11 +100,8 @@ public class TracksToFollowCard extends MapBaseCard {
 			public void onItemClick(int position) {
 				if (position != RecyclerView.NO_POSITION) {
 					GPXInfo gpxInfo = tracksAdapter.getGpxInfoList().get(position);
-					CardListener listener = getListener();
-					if (listener != null) {
-						int index = gpxInfoList.indexOf(gpxInfo);
-						listener.onCardButtonPressed(TracksToFollowCard.this, index);
-					}
+					int index = gpxInfoList.indexOf(gpxInfo);
+					notifyButtonPressed(index);
 				}
 			}
 		});

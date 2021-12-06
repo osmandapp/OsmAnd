@@ -11,7 +11,21 @@
 	Thx - Hardy
 -->
 
-    <string name="exit_without_saving_warning">Are you sure you exit without saving? You will lose all changes.</string>
+    <string name="shared_string_precision">Precision</string>
+    <string name="shared_string_statistics">Statistics</string>
+    <string name="gps_filter_hdop_desc">Set the maximum allowable value for HDOP.\nPoints greater than the set parameter will be hidden.</string>
+    <string name="gps_filter_speed_altitude_desc">The track points matching the set interval will be visible on the chart and map, the rest will be hidden.</string>
+    <string name="gps_filter_smoothing_desc">Set the threshold distance between points.\nTrack points that are at least X distance from the last visible point will be hidden.\nBe careful the greater the distance, the simpler the track geometry.</string>
+    <string name="distance_between_points">Distance between points</string>
+    <string name="gps_filter_precision">Min GPS Precision</string>
+    <string name="gps_filter_smoothing">Smoothing</string>
+    <string name="save_changes_into_file">Save changes into file</string>
+    <string name="save_as_copy">Save as copy</string>
+    <string name="gps_filter_actions_description">OsmAnd applying changes to the track without saving it to the file. You can save changes manually.</string>
+    <string name="shared_string_gps_filter">GPS filter</string>
+    <string name="storage_migration_wrong_folder_warning">We can\'t find OsmAnd data in the selected folder. Please try again.</string>
+    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
+    <string name="exit_without_saving_warning">Are you sure you exit without saving? You will lost all changes.</string>
     <string name="migration_files_present">%1$d files (%2$s) are present in the selected location \'%3$s\'.</string>
     <string name="fold_unfold">fold/unfold</string>
     <string name="app_profile_type">App profile type</string>

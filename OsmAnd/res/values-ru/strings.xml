@@ -1497,7 +1497,7 @@
     <string name="rendering_attr_buildings15zoom_name">Здания на масштабе 15</string>
     <string name="rendering_attr_hideAccess_name">Ограничения доступа</string>
     <string name="rendering_attr_showAccess_name">Ограничения доступа и платный проезд</string>
-    <string name="rendering_attr_showCycleRoutes_name">Веломаршруты</string>
+    <string name="rendering_attr_showCycleRoutes_name">Велосипедные маршруты</string>
     <string name="map_preferred_locale_descr">Предпочтительный язык для меток на карте (если он не доступен, то английский язык или местные названия).</string>
     <string name="map_preferred_locale">Предпочтительный язык на карте</string>
     <string name="lang_sw">Суахили</string>
@@ -4461,4 +4461,27 @@
     <string name="show_parameter_seekbar">Показать параметр ползунка</string>
     <string name="app_modes_options">Выбор режимов приложения</string>
     <string name="exit_without_saving_warning">Выйти без сохранения\? Все изменения будут потеряны.</string>
+    <string name="shared_string_hide_slope">Скрыть уклон</string>
+    <string name="shared_string_show_slope">Показать уклон</string>
+    <string name="shared_string_uphill">Подъём</string>
+    <string name="shared_string_downhill">Спуск</string>
+    <string name="elevation_profile">Профиль высоты</string>
+    <string name="shared_string_grade">Уклон</string>
+    <string name="shared_string_statistics">Статистика</string>
+    <string name="distance_between_points">Расстояние между точками</string>
+    <string name="gps_filter_precision">Мин. точность GPS</string>
+    <string name="gps_filter_smoothing">Сглаживание</string>
+    <string name="gps_filter_actions_description">OsmAnd применяет изменения к треку, не сохраняя их в файл. Вы можете сохранить изменения вручную.</string>
+    <string name="shared_string_gps_filter">GPS фильтр</string>
+    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
+    <string name="save_changes_into_file">Сохранить изменения в файл</string>
+    <string name="save_as_copy">Сохранить как копию</string>
+    <string name="gps_filter_hdop_desc">Установите максимально допустимое значение для HDOP.
+\nТочки, превышающие установленный параметр, будут скрыты.</string>
+    <string name="shared_string_precision">Точность</string>
+    <string name="gps_filter_speed_altitude_desc">Точки трека, соответствующие заданному интервалу, будут видны на графике и карте, остальные будут скрыты.</string>
+    <string name="gps_filter_smoothing_desc">Установите пороговое расстояние между точками.
+\nТочки трека, находящиеся на расстоянии не менее X от последней видимой точки, будут скрыты.
+\nБудьте внимательны, чем больше расстояние, тем проще геометрия трека.</string>
+    <string name="storage_migration_wrong_folder_warning">Мы не можем найти данные OsmAnd в выбранной папке. Повторите попытку.</string>
 </resources>

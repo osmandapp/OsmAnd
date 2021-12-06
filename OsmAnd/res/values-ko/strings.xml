@@ -1367,7 +1367,7 @@
     <string name="route_points">루트 포인트</string>
     <string name="shared_string_release">릴리스</string>
     <string name="shared_string_ellipsis">…</string>
-    <string name="shared_string_ok">오케이</string>
+    <string name="shared_string_ok">네 알겠습니다</string>
     <string name="shared_string_cancel">취소</string>
     <string name="shared_string_dismiss">해제</string>
     <string name="shared_string_yes">네</string>
@@ -1868,4 +1868,10 @@
     <string name="sea_depth_thanks">해당 항목을 구입해 주셔서 감사합니다 \'해상 깊이 등고선\'</string>
     <string name="fonts_header">지도 글꼴</string>
     <string name="map_markers_other">기타 마커</string>
+    <string name="storage_free_space">사용 가능한 공간</string>
+    <string name="allow_access_location">위치 액세스 허용</string>
+    <string name="app_mode_bus">버스</string>
+    <string name="map_widget_battery">배터리 잔량</string>
+    <string name="search_my_location">내 위치 찾기</string>
+    <string name="shared_string_from">부터</string>
 </resources>

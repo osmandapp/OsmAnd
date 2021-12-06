@@ -913,7 +913,7 @@
     <string name="av_def_action_picture">Tirar uma fotografia</string>
     <string name="srtm_plugin_description">Este complemento disponibiliza \"Curvas de nível\" e \"Sombras de relevo\", que podem ser aplicadas nos mapas padrão do OsmAnd. Esta funcionalidade pode ser útil para atletas, caminhantes e qualquer pessoa interessada na informação do relevo de uma paisagem.
 \n
-\nOs dados globais (entre as latitudes 70° norte e 70° sul) são baseados nas medições do SRTM (Shuttle Radar Topography Mission) e do ASTER (Advanced Spaceborn Thermal Emission and Reflection Radiometer), um instrumento de imagens no satélite \'Terra\', o satélite principal do Sistema de Observação da Terra da NASA. O ASTER é um esforço conjunto da NASA, do Ministério da Economia, Comércio e Indústria do Japão e do Sistema Espacial Japonês (J-spacesystems).</string>
+\nOs dados globais (entre as latitudes 70° norte e 70° sul) são baseados nas medições do SRTM (Shuttle Radar Topography Mission) e do ASTER (Advanced Spaceborn Thermal Emission and Reflection Radiometer), um instrumento de imagens no satélite \"Terra\", o satélite principal do Sistema de Observação da Terra da NASA. O ASTER é um esforço conjunto da NASA, do Ministério da Economia, Comércio e Indústria do Japão e do Sistema Espacial Japonês (J-spacesystems).</string>
     <string name="srtm_plugin_name">Curvas de nível</string>
     <string name="download_select_map_types">Outros mapas</string>
     <string name="download_srtm_maps">Curvas de nível</string>
@@ -1804,7 +1804,7 @@
     <string name="search_another_country">Selecionar outra região</string>
     <string name="shared_string_change">Alterar</string>
     <string name="storage_directory_card">Cartão de memória</string>
-    <string name="skip_map_downloading_desc">Não tem nenhum mapa offline instalado. Pode escolher um mapa na lista ou descarregar mapas mais tarde em \'Menu - %1$s\'.</string>
+    <string name="skip_map_downloading_desc">Não tem nenhum mapa offline instalado. Pode escolher um mapa na lista ou descarregar mapas mais tarde em \"Menu\" → \"%1$s\".</string>
     <string name="shared_string_markers">Marcadores</string>
     <string name="coordinates_format">Formato de coordenadas</string>
     <string name="use_system_keyboard">Usar teclado do sistema</string>
@@ -2409,10 +2409,10 @@
 \n
 \nFornece um mapa especial para OsmAnd com todas as balizas de navegação náutica e símbolos cartográficos, para o interior assim como para navegação próxima da costa. A descrição de cada baliza de navegação fornece os detalhes necessários para identificá-las e o seu significado (categoria, forma, cor, sequência, referência, etc.).
 \n
-\nPara voltar a usar o estilo convencional de mapa do OsmAnd, simplesmente desative este complemento ou altere-o sempre que quiser em: botão no canto superior esquerdo (perfil ativo) &gt; \"Configurar mapa\" &gt; \"Estilo de mapa\".</string>
+\nPara voltar a usar o estilo convencional de mapa do OsmAnd, simplesmente desative este complemento ou altere-o sempre que quiser em: botão no canto superior esquerdo (perfil ativo) → \"Configurar mapa\" → \"Estilo de mapa\".</string>
     <string name="plugin_ski_descr">Este complemento para o OsmAnd coloca ao seu alcance detalhes de declives de descida de esqui, de travessia, rotas de esqui alpino, teleféricos e elevadores de esqui. As rotas e pistas são mostradas com codificação de cores por dificuldade e retratadas num estilo especial de mapa \"Inverno\" que assimila uma paisagem de inverno cor de neve.
 \n
-\nAtivando esta mudança na visualização do estilo de mapa de \'Inverno e esqui\', mostra todas as características da paisagem em condições de inverno. Esta visualização pode ser revertida desativando aqui ou alterando o \"Estilo de mapa\" em \"Configurar mapa\" quando desejado.</string>
+\nAtivando esta mudança na visualização do estilo de mapa de \"Inverno e esqui\", mostra todas as características da paisagem em condições de inverno. Esta visualização pode ser revertida desativando aqui ou alterando o \"Estilo de mapa\" em \"Configurar mapa\" quando desejado.</string>
     <string name="navigate_point_olc_info_invalid">Código de localização aberto (OLC) inválido
 \n</string>
     <string name="navigate_point_olc_info_short">O código de localização aberto (OLC) é curto
@@ -4461,4 +4461,27 @@
     <string name="display_groups_visibility_dialog_description">Pode controlar a visibilidade do grupo no mapa. Se o trilho estiver oculto, também todos os grupos ficarão ocultos.</string>
     <string name="shared_string_hide_all">Ocultar tudo</string>
     <string name="exit_without_saving_warning">Quer sair sem guardar\? Irá perder todas as alterações.</string>
+    <string name="shared_string_show_slope">Mostrar declive</string>
+    <string name="shared_string_hide_slope">Ocultar declive</string>
+    <string name="shared_string_grade">Grau</string>
+    <string name="elevation_profile">Perfil de elevação</string>
+    <string name="shared_string_uphill">Subida</string>
+    <string name="shared_string_downhill">Descida</string>
+    <string name="gps_filter_smoothing">Suavização</string>
+    <string name="gps_filter_smoothing_desc">Defina a distância limite entre os pontos.
+\nOs pontos do trilho que estejam pelo menos a X distância do último ponto visível serão ocultados.
+\nTenha cuidado, quanto maior for a distância, mais simples será a geometria do trilho.</string>
+    <string name="distance_between_points">Distância entre os pontos</string>
+    <string name="shared_string_statistics">Estatísticas</string>
+    <string name="shared_string_precision">Precisão</string>
+    <string name="gps_filter_hdop_desc">Defina o valor máximo permitido para o HDOP.
+\nOs pontos maiores do que o parâmetro definido serão ocultados.</string>
+    <string name="gps_filter_speed_altitude_desc">Os pontos do trilho correspondentes ao intervalo definido serão visíveis no gráfico e no mapa, o resto será ocultado.</string>
+    <string name="gps_filter_precision">Precisão mínima do GPS</string>
+    <string name="save_changes_into_file">Guardar alterações num ficheiro</string>
+    <string name="save_as_copy">Guardar como cópia</string>
+    <string name="gps_filter_actions_description">OsmAnd aplicando alterações no trilho sem o guardar no ficheiro. Pode guardar as alterações manualmente.</string>
+    <string name="shared_string_gps_filter">Filtro GPS</string>
+    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
+    <string name="storage_migration_wrong_folder_warning">Não foram encontrados dados do OsmAnd na pasta selecionada. Tente novamente.</string>
 </resources>

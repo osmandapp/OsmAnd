@@ -1,7 +1,6 @@
 package net.osmand.plus;
 
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
-import static net.osmand.plus.settings.backend.OsmandSettings.EXTERNAL_STORAGE_TYPE_INTERNAL_FILE;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
@@ -19,7 +18,6 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Build.VERSION;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
@@ -65,6 +63,7 @@ import net.osmand.plus.download.DownloadService;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.DayNightHelper;
+import net.osmand.plus.helpers.GpsFilterHelper;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.LockHelper;
@@ -182,6 +181,7 @@ public class OsmandApplication extends MultiDexApplication {
 	BackupHelper backupHelper;
 	TravelRendererHelper travelRendererHelper;
 	LauncherShortcutsHelper launcherShortcutsHelper;
+	GpsFilterHelper gpsFilterHelper;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -212,12 +212,6 @@ public class OsmandApplication extends MultiDexApplication {
 			osmandSettings.initExternalStorageDirectory();
 		}
 		externalStorageDirectory = osmandSettings.getExternalStorageDirectory();
-		boolean sharedStorage = Algorithms.objectEquals(osmandSettings.getDefaultInternalStorage(), externalStorageDirectory);
-		if (VERSION.SDK_INT >= 30 && sharedStorage) {
-			String dir = osmandSettings.getInternalAppPath().getAbsolutePath();
-			osmandSettings.setExternalStorageDirectory(EXTERNAL_STORAGE_TYPE_INTERNAL_FILE, dir);
-			externalStorageDirectory = osmandSettings.getExternalStorageDirectory();
-		}
 		if (!FileUtils.isWritable(externalStorageDirectory)) {
 			externalStorageDirectoryReadOnly = true;
 			externalStorageDirectory = osmandSettings.getInternalAppPath();
@@ -528,6 +522,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public LauncherShortcutsHelper getLauncherShortcutsHelper() {
 		return launcherShortcutsHelper;
+	}
+
+	public GpsFilterHelper getGpsFilterHelper() {
+		return gpsFilterHelper;
 	}
 
 	public CommandPlayer getPlayer() {

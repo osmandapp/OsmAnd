@@ -2159,8 +2159,8 @@
     <string name="rendering_attr_depthContours_name">Námorné hĺbkové vrstevnice</string>
     <string name="routing_attr_height_obstacles_name">Použiť údaje nadmorskej výšky</string>
     <string name="route_altitude">Prevýšenie trasy</string>
-    <string name="altitude_descent">Klesanie</string>
-    <string name="altitude_ascent">Stúpanie</string>
+    <string name="altitude_descent">Z kopca</string>
+    <string name="altitude_ascent">Do kopca</string>
     <string name="altitude_range">Výškový rozsah</string>
     <string name="average_altitude">Priemerná výška</string>
     <string name="shared_string_time">Čas</string>
@@ -4451,4 +4451,10 @@
     <string name="memory_allocated_for_routing">Pamäť pridelená výpočtu trasy</string>
     <string name="display_groups_visibility_dialog_description">Môžete ovládať viditeľnosť skupín na mape. Ak je skupina skrytá, budú skryté aj všetky stopy.</string>
     <string name="exit_without_saving_warning">Naozaj chcete skončiť bez uloženia\? Stratíte všetky zmeny.</string>
+    <string name="shared_string_show_slope">Zobraziť svah</string>
+    <string name="shared_string_hide_slope">Skryť svah</string>
+    <string name="shared_string_grade">Stupeň</string>
+    <string name="shared_string_uphill">Do kopca</string>
+    <string name="shared_string_downhill">Z kopca</string>
+    <string name="elevation_profile">Výškový profil</string>
 </resources>

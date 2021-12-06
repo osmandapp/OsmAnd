@@ -37,6 +37,7 @@ import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ChartPointsHelper;
 import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.FilteredSelectedGpxFile;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.GpxSelectionHelper;
@@ -48,6 +49,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.PointImageDrawable;
+import net.osmand.plus.helpers.GpsFilterHelper;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -120,6 +122,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private GpxDbHelper gpxDbHelper;
 	private MapMarkersHelper mapMarkersHelper;
 	private GpxSelectionHelper selectedGpxHelper;
+	private GpsFilterHelper gpsFilterHelper;
 
 	private final Map<String, CachedTrack> segmentsCache = new HashMap<>();
 
@@ -164,6 +167,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		gpxDbHelper = view.getApplication().getGpxDbHelper();
 		selectedGpxHelper = view.getApplication().getSelectedGpxHelper();
 		mapMarkersHelper = view.getApplication().getMapMarkersHelper();
+		gpsFilterHelper = view.getApplication().getGpsFilterHelper();
 		osmandRenderer = view.getApplication().getResourceManager().getRenderer().getRenderer();
 		chartPointsHelper = new ChartPointsHelper(view.getContext());
 
@@ -637,7 +641,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private void drawSelectedFileSegments(SelectedGpxFile selectedGpxFile, boolean currentTrack,
 										  Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
 		QuadRect correctedQuadRect = getCorrectedQuadRect(tileBox.getLatLonBounds());
 		String coloringTypeName = getAvailableOrDefaultColoringType(selectedGpxFile);
 		ColoringType coloringType = ColoringType.getNonNullTrackColoringTypeByName(coloringTypeName);
@@ -1018,7 +1022,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			selectedTracksPaths.add(gpx.getGpxFile().path);
 		}
 		for (Iterator<String> iterator = cachedTracksPaths.iterator(); iterator.hasNext(); ) {
-			if (!selectedTracksPaths.contains(iterator.next())) {
+			String cachedTrackPath = iterator.next();
+			boolean trackHidden = !selectedTracksPaths.contains(cachedTrackPath);
+			if (trackHidden) {
 				iterator.remove();
 			}
 		}
