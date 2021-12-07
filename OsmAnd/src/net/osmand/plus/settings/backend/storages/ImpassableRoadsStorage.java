@@ -1,15 +1,16 @@
-package net.osmand.plus.settings.backend;
+package net.osmand.plus.settings.backend.storages;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
 
-class ImpassableRoadsStorage extends SettingsMapPointsStorage {
+public class ImpassableRoadsStorage extends SettingsMapPointsStorage {
 
 	protected String roadsIdsKey;
 	protected String directionsKey;

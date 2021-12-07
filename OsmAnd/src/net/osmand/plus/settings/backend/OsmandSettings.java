@@ -36,6 +36,8 @@ import net.osmand.plus.settings.backend.preferences.LongPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.preferences.PreferenceWithListener;
 import net.osmand.plus.settings.backend.preferences.StringPreference;
+import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
+import net.osmand.plus.settings.backend.storages.IntermediatePointsStorage;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;

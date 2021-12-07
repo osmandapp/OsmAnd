@@ -1,10 +1,11 @@
-package net.osmand.plus.settings.backend;
+package net.osmand.plus.settings.backend.storages;
 
 import net.osmand.data.LatLon;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.util.List;
 
-class IntermediatePointsStorage extends SettingsMapPointsStorage {
+public class IntermediatePointsStorage extends SettingsMapPointsStorage {
 
 	public IntermediatePointsStorage(OsmandSettings osmandSettings) {
 		super(osmandSettings, false);

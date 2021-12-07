@@ -1,9 +1,10 @@
-package net.osmand.plus.settings.backend;
+package net.osmand.plus.settings.backend.storages;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.util.ArrayList;
 import java.util.Arrays;
