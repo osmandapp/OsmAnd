@@ -76,7 +76,7 @@ import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
-import net.osmand.plus.settings.backend.MainContextMenuItemsSettings;
+import net.osmand.plus.settings.backend.menuitems.MainContextMenuItemsSettings;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.AnimateDraggingMapThread;

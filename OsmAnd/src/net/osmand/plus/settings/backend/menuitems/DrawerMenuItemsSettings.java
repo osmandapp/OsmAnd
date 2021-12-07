@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.backend;
+package net.osmand.plus.settings.backend.menuitems;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_AV_NOTES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BACKUP_RESTORE_ID;

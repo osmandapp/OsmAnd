@@ -20,6 +20,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 
+import net.osmand.plus.settings.backend.menuitems.ContextMenuItemsSettings;
+import net.osmand.plus.settings.backend.menuitems.DrawerMenuItemsSettings;
+import net.osmand.plus.settings.backend.menuitems.MainContextMenuItemsSettings;
 import net.osmand.plus.settings.backend.preferences.BooleanAccessibilityPreference;
 import net.osmand.plus.settings.backend.preferences.BooleanPreference;
 import net.osmand.plus.settings.backend.preferences.BooleanStringPreference;

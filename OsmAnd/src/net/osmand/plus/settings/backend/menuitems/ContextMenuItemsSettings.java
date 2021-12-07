@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.backend;
+package net.osmand.plus.settings.backend.menuitems;
 
 import net.osmand.PlatformUtil;
 import net.osmand.util.Algorithms;

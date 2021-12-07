@@ -1,6 +1,6 @@
 package net.osmand.plus.settings.backend.preferences;
 
-import net.osmand.plus.settings.backend.ContextMenuItemsSettings;
+import net.osmand.plus.settings.backend.menuitems.ContextMenuItemsSettings;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 import androidx.annotation.NonNull;

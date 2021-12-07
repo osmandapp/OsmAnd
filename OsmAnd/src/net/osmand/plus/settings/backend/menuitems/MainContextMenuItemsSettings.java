@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.backend;
+package net.osmand.plus.settings.backend.menuitems;
 
 import androidx.annotation.NonNull;
 
