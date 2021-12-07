@@ -1,4 +1,4 @@
-package net.osmand.plus.track;
+package net.osmand.plus.track.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,6 +24,8 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.track.GpxSplitType;
+import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
@@ -37,7 +39,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.plus.track.TrackMenuFragment.TRACK_FILE_NAME;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
 
 public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 

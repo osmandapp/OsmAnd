@@ -1,6 +1,6 @@
 package net.osmand.plus.routepreparationmenu;
 
-import static net.osmand.plus.track.TrackMenuFragment.startNavigationForGPX;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.startNavigationForGPX;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -32,7 +32,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.GPXRouteParams;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.track.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
+import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.widgets.TextViewExProgress;
 
 public class MapRouteInfoMenuFragment extends ContextMenuFragment

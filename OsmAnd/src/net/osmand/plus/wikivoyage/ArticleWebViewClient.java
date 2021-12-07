@@ -18,7 +18,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.track.GpxReadDescriptionDialogFragment;
+import net.osmand.plus.track.fragments.GpxReadDescriptionDialogFragment;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 
 import static net.osmand.plus.wikipedia.WikiArticleHelper.WIKIVOYAGE_DOMAIN;

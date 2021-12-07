@@ -38,7 +38,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.track.TrackMenuFragment.TrackMenuType;
+import net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuType;
 import net.osmand.plus.wikipedia.WikiArticleBaseDialogFragment;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.WikivoyageShowPicturesDialogFragment;
@@ -56,7 +56,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.osmand.plus.track.TrackMenuFragment.openTrack;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.openTrack;
 import static net.osmand.plus.wikipedia.WikiArticleShowImages.OFF;
 
 

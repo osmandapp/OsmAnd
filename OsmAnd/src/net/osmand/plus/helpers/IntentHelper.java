@@ -1,10 +1,10 @@
 package net.osmand.plus.helpers;
 
 import static net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
-import static net.osmand.plus.track.TrackMenuFragment.CURRENT_RECORDING;
-import static net.osmand.plus.track.TrackMenuFragment.OPEN_TAB_NAME;
-import static net.osmand.plus.track.TrackMenuFragment.RETURN_SCREEN_NAME;
-import static net.osmand.plus.track.TrackMenuFragment.TRACK_FILE_NAME;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.CURRENT_RECORDING;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.OPEN_TAB_NAME;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.RETURN_SCREEN_NAME;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -38,7 +38,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
-import net.osmand.plus.track.TrackMenuFragment;
+import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

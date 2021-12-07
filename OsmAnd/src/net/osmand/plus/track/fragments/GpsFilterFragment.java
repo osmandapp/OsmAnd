@@ -1,4 +1,4 @@
-package net.osmand.plus.track;
+package net.osmand.plus.track.fragments;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -29,6 +29,8 @@ import net.osmand.plus.helpers.GpsFilterHelper;
 import net.osmand.plus.helpers.GpsFilterHelper.GpsFilterListener;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import net.osmand.plus.measurementtool.SavedTrackBottomSheetDialogFragment;
+import net.osmand.plus.track.GpsFilterScreensAdapter;
+import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.cards.GpsFilterBaseCard.SaveIntoFileListener;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;

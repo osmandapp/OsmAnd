@@ -32,7 +32,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.AppearanceViewHolder;
-import net.osmand.plus.track.TrackAppearanceFragment;
+import net.osmand.plus.track.fragments.TrackAppearanceFragment;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteStatisticsHelper;

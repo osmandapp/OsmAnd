@@ -39,7 +39,8 @@ public class TrackDisplayHelper {
 		return gpxFile;
 	}
 
-	@Nullable GPXFile getGpxFileToDisplay() {
+	@Nullable
+	public GPXFile getGpxFileToDisplay() {
 		return filteredGpxFile != null ? filteredGpxFile : gpxFile;
 	}
 

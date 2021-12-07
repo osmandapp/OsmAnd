@@ -1,4 +1,4 @@
-package net.osmand.plus.track;
+package net.osmand.plus.track.fragments;
 
 import android.content.Context;
 import android.graphics.Typeface;

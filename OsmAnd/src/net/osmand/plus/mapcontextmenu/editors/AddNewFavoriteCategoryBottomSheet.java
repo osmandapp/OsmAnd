@@ -38,7 +38,7 @@ import java.util.Set;
 
 import static net.osmand.plus.mapcontextmenu.editors.SelectFavoriteCategoryBottomSheet.*;
 import static net.osmand.plus.routepreparationmenu.cards.BaseCard.*;
-import static net.osmand.plus.track.CustomColorBottomSheet.*;
+import static net.osmand.plus.track.fragments.CustomColorBottomSheet.*;
 
 public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFragment implements
 		ColorPickerListener, CardListener {

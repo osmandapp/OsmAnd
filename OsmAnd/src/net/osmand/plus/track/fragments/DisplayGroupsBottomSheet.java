@@ -1,4 +1,4 @@
-package net.osmand.plus.track;
+package net.osmand.plus.track.fragments;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -26,7 +26,9 @@ import net.osmand.plus.UiUtilities.CompoundButtonType;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
+import net.osmand.plus.track.DisplayPointsGroupsHelper;
 import net.osmand.plus.track.DisplayPointsGroupsHelper.DisplayGroupsHolder;
+import net.osmand.plus.track.TrackDisplayHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;

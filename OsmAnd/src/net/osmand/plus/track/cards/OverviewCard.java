@@ -28,7 +28,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.SegmentActionsListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.track.GpxBlockStatisticsBuilder;
-import net.osmand.plus.track.GpxReadDescriptionDialogFragment;
+import net.osmand.plus.track.fragments.GpxReadDescriptionDialogFragment;
 import net.osmand.util.Algorithms;
 
 import static net.osmand.AndroidUtils.dpToPx;
