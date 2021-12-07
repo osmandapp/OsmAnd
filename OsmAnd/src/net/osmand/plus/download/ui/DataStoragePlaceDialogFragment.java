@@ -172,7 +172,7 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 	}
 
 	public static void checkAssets(@NonNull OsmandApplication app) {
-		app.getResourceManager().checkAssets(IProgress.EMPTY_PROGRESS, true);
+		app.getResourceManager().checkAssets(IProgress.EMPTY_PROGRESS, true, false);
 	}
 
 	public static void updateDownloadIndexes(@NonNull OsmandApplication app) {

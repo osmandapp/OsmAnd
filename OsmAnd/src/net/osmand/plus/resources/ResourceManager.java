@@ -48,9 +48,11 @@ import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.AsyncLoadingThread.MapLoadRequest;
 import net.osmand.plus.resources.AsyncLoadingThread.OnMapLoadedListener;
 import net.osmand.plus.resources.AsyncLoadingThread.TileLoadDownloadRequest;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -449,7 +451,7 @@ public class ResourceManager {
 	public List<String> reloadIndexesOnStart(AppInitializer progress, List<String> warnings) {
 		close();
 		// check we have some assets to copy to sdcard
-		warnings.addAll(checkAssets(progress, false));
+		warnings.addAll(checkAssets(progress, false, true));
 		progress.notifyEvent(InitEvents.ASSETS_COPIED);
 		reloadIndexes(progress, warnings);
 		progress.notifyEvent(InitEvents.MAPS_INITIALIZED);
@@ -536,42 +538,40 @@ public class ResourceManager {
 					}
 				}
 			}
-		} catch (XmlPullParserException e) {
-			log.error("Error while loading tts files from assets", e);
-		} catch (IOException e) {
+		} catch (XmlPullParserException | IOException e) {
 			log.error("Error while loading tts files from assets", e);
 		}
 	}
 
-	public List<String> checkAssets(IProgress progress, boolean forceUpdate) {
-		String fv = Version.getFullVersion(context);
+	public List<String> checkAssets(IProgress progress, boolean forceUpdate, boolean forceCheck) {
 		if (context.getAppInitializer().isAppVersionChanged()) {
 			copyMissingJSAssets();
 		}
-		if (!fv.equalsIgnoreCase(context.getSettings().PREVIOUS_INSTALLED_VERSION.get()) || forceUpdate) {
-			File applicationDataDir = context.getAppPath(null);
-			applicationDataDir.mkdirs();
-			if (applicationDataDir.canWrite()) {
+		String fv = Version.getFullVersion(context);
+		OsmandSettings settings = context.getSettings();
+		boolean versionChanged = !fv.equalsIgnoreCase(settings.PREVIOUS_INSTALLED_VERSION.get());
+		boolean overwrite = versionChanged || forceUpdate;
+		if (overwrite || forceCheck) {
+			File appDataDir = context.getAppPath(null);
+			appDataDir.mkdirs();
+			if (appDataDir.canWrite()) {
 				try {
 					progress.startTask(context.getString(R.string.installing_new_resources), -1);
 					AssetManager assetManager = context.getAssets();
-					boolean isFirstInstall = context.getSettings().PREVIOUS_INSTALLED_VERSION.get().isEmpty();
-					unpackBundledAssets(assetManager, applicationDataDir, progress, isFirstInstall || forceUpdate);
-					context.getSettings().PREVIOUS_INSTALLED_VERSION.set(fv);
-					copyRegionsBoundaries();
+					boolean firstInstall = !settings.PREVIOUS_INSTALLED_VERSION.isSet();
+					unpackBundledAssets(assetManager, appDataDir, firstInstall || forceUpdate, overwrite, forceCheck);
+					settings.PREVIOUS_INSTALLED_VERSION.set(fv);
+					copyRegionsBoundaries(overwrite);
 					// see Issue #3381
 					//copyPoiTypes();
-					for (String internalStyle : context.getRendererRegistry().getInternalRenderers().keySet()) {
-						File fl = context.getRendererRegistry().getFileForInternalStyle(internalStyle);
-						if (fl.exists()) {
-							context.getRendererRegistry().copyFileForInternalStyle(internalStyle);
+					RendererRegistry registry = context.getRendererRegistry();
+					for (String internalStyle : registry.getInternalRenderers().keySet()) {
+						File file = registry.getFileForInternalStyle(internalStyle);
+						if (file.exists() && overwrite) {
+							registry.copyFileForInternalStyle(internalStyle);
 						}
 					}
-				} catch (SQLiteException e) {
-					log.error(e.getMessage(), e);
-				} catch (IOException e) {
-					log.error(e.getMessage(), e);
-				} catch (XmlPullParserException e) {
+				} catch (SQLiteException | IOException | XmlPullParserException e) {
 					log.error(e.getMessage(), e);
 				}
 			}
@@ -579,10 +579,11 @@ public class ResourceManager {
 		return Collections.emptyList();
 	}
 
-	private void copyRegionsBoundaries() {
+	private void copyRegionsBoundaries(boolean overwrite) {
 		try {
 			File file = context.getAppPath("regions.ocbf");
-			if (file != null) {
+			boolean exists = file.exists();
+			if (!exists || overwrite) {
 				FileOutputStream fout = new FileOutputStream(file);
 				Algorithms.streamCopy(OsmandRegions.class.getResourceAsStream("regions.ocbf"), fout);
 				fout.close();
@@ -592,10 +593,11 @@ public class ResourceManager {
 		}
 	}
 
-	private void copyPoiTypes() {
+	private void copyPoiTypes(boolean overwrite) {
 		try {
 			File file = context.getAppPath(IndexConstants.SETTINGS_DIR + "poi_types.xml");
-			if (file != null) {
+			boolean exists = file.exists();
+			if (!exists || overwrite) {
 				FileOutputStream fout = new FileOutputStream(file);
 				Algorithms.streamCopy(MapPoiTypes.class.getResourceAsStream("poi_types.xml"), fout);
 				fout.close();
@@ -610,10 +612,13 @@ public class ResourceManager {
 	private final static String ASSET_COPY_MODE__alwaysOverwriteOrCopy = "alwaysOverwriteOrCopy";
 	private final static String ASSET_COPY_MODE__copyOnlyIfDoesNotExist = "copyOnlyIfDoesNotExist";
 
-	private void unpackBundledAssets(AssetManager assetManager, File appDataDir, IProgress progress, boolean isFirstInstall) throws IOException, XmlPullParserException {
+	private void unpackBundledAssets(@NonNull AssetManager assetManager, @NonNull File appDataDir,
+	                                 boolean firstInstall,
+	                                 boolean overwrite,
+	                                 boolean forceCheck) throws IOException, XmlPullParserException {
 		List<AssetEntry> assetEntries = DownloadOsmandIndexesHelper.getBundledAssets(assetManager);
 		for (AssetEntry asset : assetEntries) {
-			final String[] modes = asset.combinedMode.split("\\|");
+			String[] modes = asset.combinedMode.split("\\|");
 			if (modes.length == 0) {
 				log.error("Mode '" + asset.combinedMode + "' is not valid");
 				continue;
@@ -621,29 +626,39 @@ public class ResourceManager {
 			String installMode = null;
 			String copyMode = null;
 			for (String mode : modes) {
-				if (ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall.equals(mode))
+				if (ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall.equals(mode)) {
 					installMode = mode;
-				else if (ASSET_COPY_MODE__overwriteOnlyIfExists.equals(mode) ||
+				} else if (ASSET_COPY_MODE__overwriteOnlyIfExists.equals(mode) ||
 						ASSET_COPY_MODE__alwaysOverwriteOrCopy.equals(mode) ||
-						ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(mode))
+						ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(mode)) {
 					copyMode = mode;
-				else
+				} else {
 					log.error("Mode '" + mode + "' is unknown");
+				}
 			}
 
-			final File destinationFile = new File(appDataDir, asset.destination);
+			File destinationFile = new File(appDataDir, asset.destination);
+			boolean exists = destinationFile.exists();
 
 			boolean unconditional = false;
-			if (installMode != null)
-				unconditional = unconditional || (ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall.equals(installMode) && isFirstInstall);
-			if (copyMode == null)
+			if (installMode != null) {
+				unconditional = ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall.equals(installMode)
+						&& (firstInstall || forceCheck && !exists);
+			}
+			if (copyMode == null) {
 				log.error("No copy mode was defined for " + asset.source);
-			unconditional = unconditional || ASSET_COPY_MODE__alwaysOverwriteOrCopy.equals(copyMode);
+			}
+			if (firstInstall || overwrite) {
+				unconditional |= ASSET_COPY_MODE__alwaysOverwriteOrCopy.equals(copyMode);
+			} else if (forceCheck) {
+				unconditional |= ASSET_COPY_MODE__alwaysOverwriteOrCopy.equals(copyMode) && !exists;
+			}
 
 			boolean shouldCopy = unconditional;
-			shouldCopy = shouldCopy || (ASSET_COPY_MODE__overwriteOnlyIfExists.equals(copyMode) && destinationFile.exists());
-			shouldCopy = shouldCopy || (ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(copyMode) && !destinationFile.exists());
-
+			if (firstInstall || overwrite) {
+				shouldCopy |= ASSET_COPY_MODE__overwriteOnlyIfExists.equals(copyMode) && exists;
+				shouldCopy |= ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(copyMode) && !exists;
+			}
 			if (shouldCopy) {
 				copyAssets(assetManager, asset.source, destinationFile);
 			}
