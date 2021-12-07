@@ -552,7 +552,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	public void setDashboardVisibility(boolean visible, DashboardType type, DashboardType prevItem, boolean animation, int[] animationCoordinates) {
-		if (visible == this.visible && type == visibleType) {
+		if (visible == this.visible && type == visibleType || !AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 			return;
 		}
 		mapActivity.getRoutingHelper().removeListener(this);

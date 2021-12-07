@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.osm.MapPoiTypes;
@@ -21,11 +22,10 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.download.ReloadIndexesTask;
-import net.osmand.plus.download.ReloadIndexesTask.ReloadIndexesListener;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RendererRegistry.IRendererLoadedEventListener;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.resources.ResourceManager.ReloadIndexesListener;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.render.RenderingRule;
@@ -43,8 +43,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class TravelRendererHelper implements IRendererLoadedEventListener {
 
@@ -62,8 +60,6 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 	private final ResourceManager resourceManager;
 	private final RendererRegistry rendererRegistry;
 	private StateChangedListener<Boolean> listener;
-
-	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	private final Map<String, CommonPreference<Boolean>> filesVisibilityProperties = new LinkedHashMap<>();
 	private StateChangedListener<Boolean> fileVisibilityPropertiesListener;
@@ -191,7 +187,7 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 	}
 
 	private void reloadIndexes() {
-		ReloadIndexesListener listener = new ReloadIndexesListener() {
+		app.getResourceManager().reloadIndexesAsync(IProgress.EMPTY_PROGRESS, new ReloadIndexesListener() {
 			@Override
 			public void reloadIndexesStarted() {
 			}
@@ -200,9 +196,7 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 			public void reloadIndexesFinished(List<String> warnings) {
 				app.getOsmandMap().refreshMap();
 			}
-		};
-		ReloadIndexesTask reloadIndexesTask = new ReloadIndexesTask(app, listener);
-		reloadIndexesTask.executeOnExecutor(singleThreadExecutor);
+		});
 	}
 
 	public CommonPreference<Boolean> getFileVisibilityProperty(@NonNull String fileName) {

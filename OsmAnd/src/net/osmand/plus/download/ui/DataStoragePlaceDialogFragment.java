@@ -2,8 +2,8 @@ package net.osmand.plus.download.ui;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -28,15 +28,18 @@ import net.osmand.FileUtils;
 import net.osmand.IProgress;
 import net.osmand.plus.OnDismissDialogFragmentListener;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
-import net.osmand.plus.dashboard.ReloadData;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.resources.ResourceManager.ReloadIndexesListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.DataStorageHelper;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
+import java.util.List;
 
 public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 
@@ -191,7 +194,31 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 	}
 
 	private static void reloadData(@NonNull OsmandApplication app, @NonNull FragmentActivity activity) {
-		new ReloadData(app, activity).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		final WeakReference<FragmentActivity> activityRef = new WeakReference<>((FragmentActivity) activity);
+		app.getResourceManager().reloadIndexesAsync(IProgress.EMPTY_PROGRESS, new ReloadIndexesListener() {
+
+			private ProgressImplementation progress;
+
+			@Override
+			public void reloadIndexesStarted() {
+				FragmentActivity activity = activityRef.get();
+				if (activity != null) {
+					progress = ProgressImplementation.createProgressDialog(activity, app.getString(R.string.loading_data),
+							app.getString(R.string.loading_data), ProgressDialog.STYLE_HORIZONTAL);
+				}
+			}
+
+			@Override
+			public void reloadIndexesFinished(List<String> warnings) {
+				try {
+					if (progress != null && progress.getDialog().isShowing()) {
+						progress.getDialog().dismiss();
+					}
+				} catch (Exception e) {
+					//ignored
+				}
+			}
+		});
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment target, boolean storageReadOnly) {
