@@ -9,7 +9,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxTrackAdapter;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
-import net.osmand.plus.helpers.enums.TracksSortByMode;
+import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.routepreparationmenu.FollowTrackFragment;
 import net.osmand.util.Algorithms;

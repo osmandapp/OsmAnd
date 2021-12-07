@@ -23,7 +23,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.helpers.enums.SpeedConstants;
+import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.StringPreference;

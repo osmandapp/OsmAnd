@@ -1,4 +1,4 @@
-package net.osmand.plus.helpers.enums;
+package net.osmand.plus.settings.enums;
 
 import android.content.Context;
 import android.hardware.Sensor;

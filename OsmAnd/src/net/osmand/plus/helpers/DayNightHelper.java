@@ -13,7 +13,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.auto.NavigationSession;
-import net.osmand.plus.helpers.enums.DayNightMode;
+import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.SunriseSunset;
 

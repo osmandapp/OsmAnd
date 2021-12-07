@@ -28,7 +28,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointHelper;
-import net.osmand.plus.helpers.enums.DrivingRegion;
+import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
