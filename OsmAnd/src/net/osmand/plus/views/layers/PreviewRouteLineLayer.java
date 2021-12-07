@@ -169,10 +169,18 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		path.moveTo(centerX, endY + lineLength);
 		path.lineTo(centerX, endY);
 		path.lineTo(centerX - offset, endY);
-		if (previewRouteLineInfo.isHasTurnArrow()){
-			drawTurnArrow(canvas, matrix, centerX - offset, endY, centerX, endY);
-			attrs.paint3.setColor(attrsTurnArrowColor);
-			canvas.drawPath(path, attrs.paint3);
+		if (previewRouteLineInfo != null){
+			if (previewRouteLineInfo.isHasTurnArrow()){
+				drawTurnArrow(canvas, matrix, centerX - offset, endY, centerX, endY);
+				attrs.paint3.setColor(attrsTurnArrowColor);
+				canvas.drawPath(path, attrs.paint3);
+			}
+		} else {
+			if (view.getSettings().ROUTE_SHOW_TURN_ARROWS.getModeValue(getAppMode())){
+				drawTurnArrow(canvas, matrix, centerX - offset, endY, centerX, endY);
+				attrs.paint3.setColor(attrsTurnArrowColor);
+				canvas.drawPath(path, attrs.paint3);
+			}
 		}
 		if (previewIcon == null) {
 			previewIcon = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), previewInfo.getIconId());

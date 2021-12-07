@@ -35,31 +35,23 @@ public class RouteTurnArrowCard extends MapBaseCard {
 		return previewRouteLineInfo.isHasTurnArrow();
 	}
 
-	private boolean isNightMode() {
-		return app.getDaynightHelper().isNightModeForMapControls();
-	}
-
 	@Override
 	protected void updateContent() {
 		TextView title = view.findViewById(R.id.title);
 		LinearLayout container = view.findViewById(R.id.turn_arrow_switch_container);
 		SwitchCompat arrowSwitch = view.findViewById(R.id.compound_button);
-		Drawable active = AppCompatResources.getDrawable(getMapActivity(),isNightMode() ? R.drawable.btn_background_inactive_dark : R.drawable.btn_background_inactive_light);
-		Drawable inActive = AppCompatResources.getDrawable(getMapActivity(),isNightMode() ? R.drawable.btn_border_dark : R.drawable.btn_border_light);
+		Drawable active = AppCompatResources.getDrawable(getMapActivity(),nightMode ? R.drawable.btn_background_inactive_dark : R.drawable.btn_background_inactive_light);
+		Drawable inActive = AppCompatResources.getDrawable(getMapActivity(),nightMode ? R.drawable.btn_border_dark : R.drawable.btn_border_light);
 
-		arrowSwitch.setClickable(true);
 		arrowSwitch.setChecked(isHasTurnArrow());
 		title.setText(arrowSwitch.isChecked() ? app.getString(R.string.shared_string_visible) : app.getString(R.string.shared_string_hidden));
 		container.setBackground(isHasTurnArrow() ? active : inActive);
 
-		arrowSwitch.setOnCheckedChangeListener((view, isChecked) -> {
-			title.setText(isChecked ? app.getString(R.string.shared_string_visible) : app.getString(R.string.shared_string_hidden));
-			container.setBackground(isChecked ? active : inActive);
-			setHasTurnArrow(isChecked);
-		});
-
 		container.setOnClickListener(view -> {
 			arrowSwitch.setChecked(!arrowSwitch.isChecked());
+			setHasTurnArrow(!isHasTurnArrow());
+			title.setText(isHasTurnArrow() ? app.getString(R.string.shared_string_visible) : app.getString(R.string.shared_string_hidden));
+			container.setBackground(isHasTurnArrow() ? active : inActive);
 		});
 	}
 }

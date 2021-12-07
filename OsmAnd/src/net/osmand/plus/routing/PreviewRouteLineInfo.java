@@ -62,20 +62,6 @@ public class PreviewRouteLineInfo {
 		readBundle(bundle);
 	}
 
-	public PreviewRouteLineInfo(@NonNull PreviewRouteLineInfo existed) {
-		this.customColorDay = existed.customColorDay;
-		this.customColorNight = existed.customColorNight;
-		this.coloringType = existed.coloringType;
-		this.routeInfoAttribute = existed.routeInfoAttribute;
-		this.width = existed.width;
-		this.iconId = existed.iconId;
-		this.iconColor = existed.iconColor;
-		this.lineBounds = existed.lineBounds;
-		this.centerX = existed.centerX;
-		this.centerY = existed.centerY;
-		this.screenHeight = existed.screenHeight;
-	}
-
 	public void setCustomColor(@ColorInt int color, boolean nightMode) {
 		if (nightMode) {
 			customColorNight = color;
