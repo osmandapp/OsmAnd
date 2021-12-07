@@ -1702,7 +1702,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public List<String> indexingFiles(IProgress progress) {
+	public List<String> indexingFiles(@Nullable IProgress progress) {
 		return indexingFiles(true, false);
 	}
 

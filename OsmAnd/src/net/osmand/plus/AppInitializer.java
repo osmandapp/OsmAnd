@@ -124,7 +124,7 @@ public class AppInitializer implements IProgress {
 
 	public enum InitEvents {
 		FAVORITES_INITIALIZED, NATIVE_INITIALIZED,
-		NATIVE_OPEN_GLINITIALIZED,
+		NATIVE_OPEN_GL_INITIALIZED,
 		TASK_CHANGED, MAPS_INITIALIZED, POI_TYPES_INITIALIZED, ASSETS_COPIED, INIT_RENDERERS,
 		RESTORE_BACKUPS, INDEX_REGION_BOUNDARIES, SAVE_GPX_TRACKS, LOAD_GPX_TRACKS, ROUTING_CONFIG_INITIALIZED
 	}
@@ -614,7 +614,7 @@ public class AppInitializer implements IProgress {
 			notifyEvent(InitEvents.INIT_RENDERERS);
 			// native depends on renderers
 			initOpenGl();
-			notifyEvent(InitEvents.NATIVE_OPEN_GLINITIALIZED);
+			notifyEvent(InitEvents.NATIVE_OPEN_GL_INITIALIZED);
 
 			// init poi types before indexes and before POI
 			initPoiTypes();
