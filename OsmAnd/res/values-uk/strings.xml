@@ -3759,7 +3759,7 @@
     <string name="previous_segment">Попередній відрізок</string>
     <string name="all_previous_segments">Усі попередні відрізки</string>
     <string name="only_selected_segment_recalc">Лише вибраний відрізок буде обчислено за допомогою вибраного профілю.</string>
-    <string name="all_next_segments_will_be_recalc">Усі попередні відрізки буде обраховано за допомогою вибраного профілю.</string>
+    <string name="all_next_segments_will_be_recalc">Усі попередні відрізки буде обчислено за допомогою вибраного профілю.</string>
     <string name="all_previous_segments_will_be_recalc">Усі попередні відрізки буде обраховано за допомогою вибраного профілю.</string>
     <string name="number_of_gpx_files_selected_pattern">Вибрано %s файлів треків</string>
     <string name="gpx_monitoring_stop">Зупинити записування подорожі</string>
