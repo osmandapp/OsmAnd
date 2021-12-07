@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.osmedit;
+package net.osmand.plus.plugins.osmedit.quickactions;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -36,6 +36,13 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.plugins.osmedit.EditPoiData;
+import net.osmand.plus.plugins.osmedit.OpenstreetmapLocalUtil;
+import net.osmand.plus.plugins.osmedit.OpenstreetmapPoint;
+import net.osmand.plus.plugins.osmedit.OpenstreetmapUtil;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.plugins.osmedit.OsmPoint;
+import net.osmand.plus.plugins.osmedit.OsmPoint.Action;
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.PoiSubTypeDialogFragment;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -144,7 +151,7 @@ public class AddPOIAction extends QuickAction {
 
 			final boolean offlineEdit = mOpenstreetmapUtil instanceof OpenstreetmapLocalUtil;
 			Node newNode = new Node(node.getLatitude(), node.getLongitude(), node.getId());
-			OsmPoint.Action action = newNode.getId() < 0 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
+			Action action = newNode.getId() < 0 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
 			for (Map.Entry<String, String> tag : editPoiData.getTagValues().entrySet()) {
 				if (tag.getKey().equals(POI_TYPE_TAG)) {
 					final PoiType poiType = editPoiData.getAllTranslatedSubTypes().get(tag.getValue().trim().toLowerCase());
