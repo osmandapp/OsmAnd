@@ -78,7 +78,7 @@ import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.SQLiteTileSource;
+import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter;

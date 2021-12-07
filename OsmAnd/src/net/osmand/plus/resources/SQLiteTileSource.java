@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.resources;
 
 import static net.osmand.IndexConstants.SQLITE_EXT;
 import static net.osmand.IndexConstants.TILES_INDEX_DIR;
@@ -14,6 +14,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.map.ITileSource;
 import net.osmand.map.ParameterType;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
