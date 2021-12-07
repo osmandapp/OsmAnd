@@ -4475,4 +4475,8 @@
     <string name="gps_filter_smoothing_desc">Définissez la distance entre points.
 \nLes points de la trace en dessous de cette distance du dernier point visible seront masqués.
 \nAttention : plus cette distance est élevée, plus la forme de la trace sera simplifiée.</string>
+    <string name="use_routing_fallback_description">Utiliser la navigation hors ligne lorsque la navigation en ligne n\'est pas disponible.</string>
+    <string name="use_routing_fallback">Utiliser le routage de secours</string>
+    <string name="created_on">Créé le</string>
+    <string name="shared_string_size">Taille</string>
 </resources>
