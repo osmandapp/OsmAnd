@@ -14,7 +14,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
-import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;

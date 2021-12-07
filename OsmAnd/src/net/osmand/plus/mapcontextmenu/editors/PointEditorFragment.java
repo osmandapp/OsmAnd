@@ -35,8 +35,8 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 import net.osmand.util.Algorithms;
 
-import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
-import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.isPersonalCategoryDisplayName;
+import static net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
+import static net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup.isPersonalCategoryDisplayName;
 
 public abstract class PointEditorFragment extends BaseOsmAndFragment {
 

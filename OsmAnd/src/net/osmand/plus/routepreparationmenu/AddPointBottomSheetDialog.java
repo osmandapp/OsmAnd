@@ -29,7 +29,7 @@ import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;

@@ -13,7 +13,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.FavouritePoint.SpecialPointType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.FavouritesDbHelper.FavoritesListener;
+import net.osmand.plus.myplaces.FavouritesDbHelper.FavoritesListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.plugins.OsmandPlugin;

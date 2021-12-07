@@ -16,7 +16,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;

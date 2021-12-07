@@ -17,7 +17,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.CollapsableView;

@@ -1,7 +1,7 @@
 /**
  *
  */
-package net.osmand.plus.activities;
+package net.osmand.plus.myplaces;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -26,6 +26,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;

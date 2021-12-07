@@ -14,7 +14,7 @@ import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
-import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.OsmandPlugin;

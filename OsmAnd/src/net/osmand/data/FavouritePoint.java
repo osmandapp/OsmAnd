@@ -18,7 +18,7 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;

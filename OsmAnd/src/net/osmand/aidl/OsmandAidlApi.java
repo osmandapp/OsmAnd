@@ -15,7 +15,7 @@ import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_E
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
-import static net.osmand.plus.FavouritesDbHelper.FILE_TO_SAVE;
+import static net.osmand.plus.myplaces.FavouritesDbHelper.FILE_TO_SAVE;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
 
@@ -72,7 +72,7 @@ import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.plugins.CustomOsmandPlugin;
-import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;

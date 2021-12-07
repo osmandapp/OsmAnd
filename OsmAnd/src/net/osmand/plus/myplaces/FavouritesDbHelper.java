@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.myplaces;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,6 +17,11 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.FavouritePoint.SpecialPointType;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
+import net.osmand.plus.GeocodingLookupService.OnAddressLookupResult;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
+import net.osmand.plus.Version;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
@@ -215,7 +220,7 @@ public class FavouritesDbHelper {
 		notifyListeners();
 	}
 
-	void fixBlackBackground() {
+	public void fixBlackBackground() {
 		flatGroups.clear();
 		favoriteGroups.clear();
 		for (FavouritePoint fp : cachedFavoritePoints) {
@@ -448,7 +453,7 @@ public class FavouritesDbHelper {
 		if (request == null || !request.getLatLon().equals(new LatLon(latitude, longitude))) {
 			cancelAddressRequest(p);
 			request = new AddressLookupRequest(new LatLon(latitude, longitude),
-					new GeocodingLookupService.OnAddressLookupResult() {
+					new OnAddressLookupResult() {
 						@Override
 						public void geocodingDone(String address) {
 							addressRequestMap.remove(p);

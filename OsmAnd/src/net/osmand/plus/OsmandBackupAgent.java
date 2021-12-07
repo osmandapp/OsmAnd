@@ -8,6 +8,7 @@ import android.content.Context;
 import android.os.ParcelFileDescriptor;
 
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.plugins.osmedit.OsmBugsDbHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;

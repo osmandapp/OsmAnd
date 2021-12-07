@@ -25,8 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
-import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;

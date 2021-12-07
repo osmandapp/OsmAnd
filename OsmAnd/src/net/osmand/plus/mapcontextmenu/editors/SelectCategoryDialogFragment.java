@@ -20,7 +20,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;

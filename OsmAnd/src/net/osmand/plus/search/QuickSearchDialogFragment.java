@@ -54,7 +54,7 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;

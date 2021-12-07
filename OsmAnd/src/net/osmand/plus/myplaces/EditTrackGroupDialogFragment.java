@@ -31,7 +31,6 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.FavouritePoint;
-import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;

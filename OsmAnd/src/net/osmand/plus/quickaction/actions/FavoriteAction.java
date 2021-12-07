@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 
 import net.osmand.data.LatLon;
-import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.GeocodingLookupService.OnAddressLookupResult;
 import net.osmand.plus.R;

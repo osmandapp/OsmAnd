@@ -13,6 +13,7 @@ import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.mapmarkers.MarkersDb39HelperLegacy;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.EnumStringPreference;
