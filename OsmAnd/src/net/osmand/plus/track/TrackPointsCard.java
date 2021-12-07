@@ -616,8 +616,10 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			TextView distanceText = container.findViewById(R.id.distance);
 			app.getUIUtilities().updateLocationView(locationViewCache, directionArrow, distanceText, point.lat, point.lon);
 
+			String address = point.getAddress();
 			TextView addressContainer = container.findViewById(R.id.address);
-			addressContainer.setText(point.getAddress());
+			addressContainer.setText(address);
+			AndroidUiHelper.updateVisibility(container.findViewById(R.id.bullet_icon), !Algorithms.isEmpty(address));
 		}
 
 		public int getGroupIndex(@NonNull GpxDisplayGroup group) {

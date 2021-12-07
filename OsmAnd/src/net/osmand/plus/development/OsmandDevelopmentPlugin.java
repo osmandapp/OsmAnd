@@ -1,6 +1,7 @@
 package net.osmand.plus.development;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_DEV;
 
 import android.app.Activity;
 import android.content.Context;
@@ -28,8 +29,6 @@ import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
-	private static final String ID = "osmand.development";
-
 	public OsmandDevelopmentPlugin(OsmandApplication app) {
 		super(app);
 		//ApplicationMode.regWidgetVisibility("fps", new ApplicationMode[0]);
@@ -37,7 +36,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 	@Override
 	public String getId() {
-		return ID;
+		return PLUGIN_OSMAND_DEV;
 	}
 
 	@Override

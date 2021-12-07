@@ -325,7 +325,7 @@
     <string name="shared_string_favorites">Favoris</string>
     <string name="layer_osm_bugs">Notes OSM (en ligne)</string>
     <string name="layer_poi">Sur-couche des points d\'intérêt…</string>
-    <string name="layer_map">Carte en ligne…</string>
+    <string name="layer_map">Source de la carte…</string>
     <string name="menu_layers">Couches</string>
     <string name="context_menu_item_search_poi">Rechercher un Point d\'Intérêt</string>
     <string name="use_trackball_descr">Utiliser le pointeur pour déplacer la carte.</string>
@@ -1356,7 +1356,7 @@
     <string name="use_opengl_render">Utiliser le rendu OpenGL</string>
     <string name="use_opengl_render_descr">Utiliser le rendu matériel accéléré OpenGL (peut consommer plus de batterie et ne pas fonctionner sur les anciens appareils).</string>
     <string name="everything_up_to_date">Tous les fichiers sont à jour</string>
-    <string name="shared_string_dismiss">Arrêter</string>
+    <string name="shared_string_dismiss">Ignorer</string>
     <string name="no_internet_connection">Téléchargement impossible, veuillez vérifier votre connexion Internet.</string>
     <string name="download_tab_downloads">Tous les téléchargements</string>
     <string name="download_tab_updates">Mises à jour</string>
@@ -3703,7 +3703,7 @@
     <string name="route_between_points_desc">Définissez comment relier les points : par une ligne droite ou en calculant un itinéraire avec le profil ci-dessous.</string>
     <string name="route_between_points_whole_track_button_desc">Toute la trace sera recalculée en utilisant le profil sélectionné.</string>
     <string name="route_between_points_next_segment_button_desc">Seul le prochain segment sera recalculé en utilisant le profil sélectionné.</string>
-    <string name="route_between_points_warning_desc">Ensuite, sélectionnez le profil de navigation pour déplacer votre trace sur les routes les plus proches, autorisées par votre profil de navigation.</string>
+    <string name="route_between_points_warning_desc">Sur l\'écran suivant, sélectionnez un profil de navigation ce qui déplacera votre trace sur les routes les plus adaptées.</string>
     <string name="route_between_points_add_track_desc">Sélectionnez le fichier de trace auquel vous souhaitez ajouter un nouveau segment.</string>
     <string name="save_as_new_track">Enregistrer comme nouvelle trace</string>
     <string name="reverse_route">Inverser l\'itinéraire</string>
@@ -4386,6 +4386,10 @@
 \n
 \n - Mise à jour de l\'interface utilisateur pour la recherche de coordonnées UTM
 \n
+\n- Filtre GPS pour les traces GPX
+\n
+\n- Gadget d\'altitude (Pro)
+\n
 \n - Favoris : possibilité d\'afficher les icônes récemment utilisés
 \n
 \n - Planification d\'itinéraire : le profil sélectionné est désormais utilisé
@@ -4435,21 +4439,21 @@
 \nLe gestionnaire de fichiers va afficher le dossier qui devrait contenir un dossier Osmand.</string>
     <string name="not_enough_contributions_descr">Un minimum de %1$s modifications au cours des deux derniers mois %2$s est requis pour bénéficier de la mise à jour horaire des cartes en illimité.</string>
     <string name="show_parameter_seekbar">Afficher la barre de recherche des paramètres</string>
-    <string name="migration_files_present">%1$d fichiers (%2$s) sont présents dans l\'emplacement sélectionné \'%3$s\'.</string>
+    <string name="migration_files_present">Il y a %1$d fichiers (%2$s) dans l\'emplacement sélectionné \'%3$s\'.</string>
     <string name="fold_unfold">plier / déplier</string>
     <string name="app_profile_type">Type de profil d’application</string>
     <string name="map_marker_options">Options pour les marques</string>
     <string name="add_to_group">Ajouter au groupe</string>
-    <string name="app_modes_options">Choisissez les modes d\'application</string>
+    <string name="app_modes_options">Sélectionnez les modes de l\'application</string>
     <string name="memory_allocated_for_routing">Mémoire allouée pour le calcul d\'itinéraire</string>
     <string name="reading_files">Lecture des fichiers…</string>
     <string name="shared_string_hide_all">Tout masquer</string>
     <string name="display_groups_visibility_dialog_description">Vous pouvez contrôler la visibilité des groupes sur la carte. Si la trace est masquée, tous les groupes le seront aussi.</string>
     <string name="shared_string_memory">Mémoire</string>
     <string name="no_items_selected_warning">Veuillez sélectionner au moins un élément</string>
-    <string name="memory_allocated_for_routing_ds">Une mémoire plus importante accélère le calcul des longs itinéraires (supérieurs à 500 km) mais peut ralentir les autres applications.
+    <string name="memory_allocated_for_routing_ds">Une mémoire plus importante accélèrera le calcul des itinéraires longs (supérieurs à 500 km) mais peut ralentir les autres applications.
 \nCe paramètre de mémoire est sans effet sur le calcul des itinéraires courts.</string>
-    <string name="exit_without_saving_warning">Êtes-vous certain de vouloir quitter sans enregistrer \? Toutes vos modifications seront perdues.</string>
+    <string name="exit_without_saving_warning">Quitter sans enregistrer \?</string>
     <string name="shared_string_hide_slope">Masquer la pente</string>
     <string name="elevation_profile">Profil d\'altitude</string>
     <string name="shared_string_uphill">Montée</string>
@@ -4465,10 +4469,14 @@
     <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="distance_between_points">Distance entre les points</string>
     <string name="shared_string_precision">Précision</string>
-    <string name="gps_filter_speed_altitude_desc">Les points de la trace seront affichés à l\'intervalle défini sur la carte et le graphique, les autres points seront masqués.</string>
-    <string name="gps_filter_actions_description">OsmAnd modifie uniquement l\'affichage de la trace. Si vous le souhaitez, vous pouvez manuellement enregistrer les modifications dans le fichier.</string>
+    <string name="gps_filter_speed_altitude_desc">Seuls les points correspondant à l\'intervalle défini apparaîtront sur la carte et le graphique, les autres points de la trace seront masqués.</string>
+    <string name="gps_filter_actions_description">OsmAnd modifiera uniquement l\'affichage de la trace. Si vous le souhaitez, vous pouvez enregistrer manuellement les modifications dans le fichier.</string>
     <string name="storage_migration_wrong_folder_warning">Aucune donnée OsmAnd n\'est présente dans le dossier sélectionné. Veuillez réessayer.</string>
-    <string name="gps_filter_smoothing_desc">Définissez la distance seuil entre points.
-\nLes points de la trace qui sont à moins de X distance du dernier point visible seront masqués.
-\nAttention plus cette distance est élevée, plus la forme de la trace sera simplifiée.</string>
+    <string name="gps_filter_smoothing_desc">Définissez la distance entre points.
+\nLes points de la trace en dessous de cette distance du dernier point visible seront masqués.
+\nAttention : plus cette distance est élevée, plus la forme de la trace sera simplifiée.</string>
+    <string name="use_routing_fallback_description">Utiliser la navigation hors ligne lorsque la navigation en ligne n\'est pas disponible.</string>
+    <string name="use_routing_fallback">Utiliser le routage de secours</string>
+    <string name="created_on">Créé le</string>
+    <string name="shared_string_size">Taille</string>
 </resources>

@@ -7,8 +7,10 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 
-import net.osmand.GPXUtilities.Author;
-import net.osmand.GPXUtilities.Copyright;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.Metadata;
@@ -35,10 +37,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 public class GpsFilterHelper {
 
@@ -202,9 +200,7 @@ public class GpsFilterHelper {
 	public static GPXFile copyGpxFile(@NonNull OsmandApplication app, @NonNull GPXFile source) {
 		GPXFile copy = new GPXFile(Version.getFullVersion(app));
 		copy.author = source.author;
-		if (source.metadata != null) {
-			copy.metadata = copyMetadata(source.metadata);
-		}
+		copy.metadata = new Metadata(source.metadata);
 		copy.tracks = copyTracks(source.tracks);
 		copy.addPoints(source.getPoints());
 		copy.routes = new ArrayList<>(source.routes);
@@ -241,38 +237,6 @@ public class GpsFilterHelper {
 		}
 
 		return copiedTracks;
-	}
-
-	@NonNull
-	private static Metadata copyMetadata(@NonNull Metadata source) {
-		Metadata copy = new Metadata();
-		copy.name = source.name;
-		copy.desc = source.desc;
-		copy.link = source.link;
-		copy.keywords = source.keywords;
-		copy.time = source.time;
-
-		if (source.author != null) {
-			Author author = new Author();
-			author.name = source.author.name;
-			author.email = source.author.email;
-			author.link = source.author.link;
-			author.copyExtensions(source.author);
-			copy.author = author;
-		}
-
-		if (source.copyright != null) {
-			Copyright copyright = new Copyright();
-			copyright.author = source.copyright.author;
-			copyright.year = source.copyright.year;
-			copyright.license = source.copyright.license;
-			copyright.copyExtensions(source.copyright);
-			copy.copyright = copyright;
-		}
-
-		copy.copyExtensions(source);
-
-		return copy;
 	}
 
 	public static abstract class GpsFilter {

@@ -2,6 +2,7 @@ package net.osmand.plus.parkingpoint;
 
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_PARKING_POSITION;
 
 import android.app.Activity;
 import android.content.Context;
@@ -58,7 +59,6 @@ import java.util.List;
  */
 public class ParkingPositionPlugin extends OsmandPlugin {
 
-	public static final String ID = "osmand.parking.position";
 	public static final String PARKING_PLUGIN_COMPONENT = "net.osmand.parkingPlugin"; //$NON-NLS-1$
 	public static final String PARKING_POINT_LAT = "parking_point_lat"; //$NON-NLS-1$
 	public static final String PARKING_POINT_LON = "parking_point_lon"; //$NON-NLS-1$
@@ -167,7 +167,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 
 	@Override
 	public String getId() {
-		return ID;
+		return PLUGIN_PARKING_POSITION;
 	}
 
 	@Override

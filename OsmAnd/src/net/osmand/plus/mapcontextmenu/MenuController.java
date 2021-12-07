@@ -595,7 +595,9 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		int k = 0;
 		for (int i = 0; i < openingHoursInfo.size(); i++) {
 			OpeningHours.Info info = openingHoursInfo.get(i);
-			infoStr.setSpan(new ForegroundColorSpan(info.isOpened() ? colorOpen : colorClosed), k, pos[i], 0);
+			boolean opened = info.isFallback() ? openingHoursInfo.get(i - 1).isOpened() : info.isOpened();
+			int color = opened ? colorOpen : colorClosed;
+			infoStr.setSpan(new ForegroundColorSpan(color), k, pos[i], 0);
 			k = pos[i];
 		}
 		return infoStr;

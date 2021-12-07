@@ -1693,7 +1693,7 @@
     <string name="poi_vending_toys">Mänguasjad</string>
     <string name="poi_vending_ice_cream">Jäätis</string>
     <string name="poi_vending_sim_cards">SIM kaardid</string>
-    <string name="poi_branch">Oks</string>
+    <string name="poi_branch">Filiaal</string>
     <string name="poi_memorial_war">Sõjamemoriaal</string>
     <string name="poi_memorial_plaque">Tahvel</string>
     <string name="poi_memorial_statue">Sammas</string>
@@ -3861,7 +3861,7 @@
     <string name="poi_embassy_interests_section">Huvide jaotis</string>
     <string name="poi_embassy_high_commission">Kõrge komisjonitasu</string>
     <string name="poi_embassy_delegation">Delegatsioon</string>
-    <string name="poi_embassy_branch_embassy">Filiaal</string>
+    <string name="poi_embassy_branch_embassy">Saatkonna harukontor</string>
     <string name="poi_embassy_yes">Juhib suursaadik</string>
     <string name="poi_diplomatic_liaison">Sidepidamine</string>
     <string name="poi_diplomatic_services_citizen_services_filter">Kodanike teenused</string>

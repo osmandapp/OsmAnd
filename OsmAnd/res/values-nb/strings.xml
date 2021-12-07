@@ -4372,4 +4372,23 @@
     <string name="display_groups_visibility_dialog_description">Du kan kontrollere gryppesynlighet på kartet. Hvis et spor er skjult vil alle grupper også være det.</string>
     <string name="migration_files_present">%1$d filer (%2$s) i valgt mappe «%3$s».</string>
     <string name="shared_string_memory">Minne</string>
+    <string name="save_changes_into_file">Lagre endringer til fil</string>
+    <string name="save_as_copy">Lagre som kopi</string>
+    <string name="shared_string_gps_filter">GPS-filter</string>
+    <string name="storage_migration_wrong_folder_warning">Ingen OsmAnd-data ble funnet i valgt mappe. Prøv igjen.</string>
+    <string name="exit_without_saving_warning">Avslutt uten å lagre endringer\?</string>
+    <string name="shared_string_grade">Gradering</string>
+    <string name="shared_string_uphill">Oppoverbakke</string>
+    <string name="shared_string_downhill">Nedoverbakke</string>
+    <string name="use_routing_fallback_description">Bruk frakoblet ruting når nettbasert kilde ikke kan nås.</string>
+    <string name="shared_string_hide_slope">Skjul helning</string>
+    <string name="shared_string_show_slope">Vis helning</string>
+    <string name="elevation_profile">Høydeprofil</string>
+    <string name="use_routing_fallback">Andrevalgsruting</string>
+    <string name="shared_string_precision">Presisjon</string>
+    <string name="shared_string_statistics">Statistikk</string>
+    <string name="distance_between_points">Avstand mellom punkter</string>
+    <string name="gps_filter_precision">GPS-preisisjon</string>
+    <string name="shared_string_size">Størrelse</string>
+    <string name="created_on">Opprettet</string>
 </resources>

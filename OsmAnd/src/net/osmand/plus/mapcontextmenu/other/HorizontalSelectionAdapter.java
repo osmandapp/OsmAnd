@@ -1,9 +1,6 @@
 package net.osmand.plus.mapcontextmenu.other;
 
-import static net.osmand.util.Algorithms.capitalizeFirstLetter;
-
 import android.graphics.drawable.GradientDrawable;
-import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -25,6 +22,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 
 public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalSelectionAdapter.ItemViewHolder> {
@@ -121,10 +120,14 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 				}
 			}
 		});
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			View buttonContainer = holder.button.findViewById(R.id.button_container);
-			AndroidUtils.setBackground(app, buttonContainer, nightMode, R.drawable.ripple_solid_light_18dp,
-					R.drawable.ripple_solid_dark_18dp);
+		View buttonContainer = holder.button.findViewById(R.id.button_container);
+		int rippleId = nightMode ? R.drawable.ripple_solid_dark_18dp : R.drawable.ripple_solid_light_18dp;
+		AndroidUtils.setBackground(app, buttonContainer, rippleId);
+		if (item.getHorizontalPaddingPx() != INVALID_ID) {
+			int top = buttonContainer.getPaddingTop();
+			int bottom = buttonContainer.getPaddingBottom();
+			int hPadding = item.getHorizontalPaddingPx();
+			buttonContainer.setPadding(hPadding, top, hPadding, bottom);
 		}
 	}
 
@@ -192,6 +195,7 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 		private int iconId = INVALID_ID;
 		private int iconColorId = INVALID_ID;
 		private int iconSizePx = INVALID_ID;
+		private int horizontalPaddingPx = INVALID_ID;
 		private boolean showOnlyIcon;
 		private boolean enabled = true;
 
@@ -250,6 +254,14 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 
 		public void setIconSizePx(int iconSizePx) {
 			this.iconSizePx = iconSizePx;
+		}
+
+		public int getHorizontalPaddingPx() {
+			return horizontalPaddingPx;
+		}
+
+		public void setHorizontalPaddingPx(int horizontalPaddingPx) {
+			this.horizontalPaddingPx = horizontalPaddingPx;
 		}
 
 		public Object getObject() {

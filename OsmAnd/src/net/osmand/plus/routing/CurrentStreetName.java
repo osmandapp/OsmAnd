@@ -32,10 +32,6 @@ public class CurrentStreetName {
 	public static CurrentStreetName getCurrentName(@NonNull RoutingHelper routingHelper, @NonNull NextDirectionInfo n) {
 		CurrentStreetName streetName = new CurrentStreetName();
 		Location l = routingHelper.getLastFixedLocation();
-		float speed = 0;
-		if (l != null && l.hasSpeed()) {
-			speed = l.getSpeed();
-		}
 		AnnounceTimeDistances adt = routingHelper.getVoiceRouter().getAnnounceTimeDistances();
 		boolean isSet = false;
 		// 1. turn is imminent

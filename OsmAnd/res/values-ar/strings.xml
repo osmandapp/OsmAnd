@@ -820,15 +820,15 @@
     <string name="lang_fr">الفرنسية</string>
     <string name="lang_iw">العبرية</string>
     <string name="lang_hi">الهندية</string>
-    <string name="lang_hu">الهنغارية</string>
-    <string name="lang_id">اﻹندونيسية</string>
-    <string name="lang_it">اﻹيطالية</string>
+    <string name="lang_hu">المجرية</string>
+    <string name="lang_id">الإندونيسية</string>
+    <string name="lang_it">الإيطالية</string>
     <string name="lang_ja">اليابانية</string>
     <string name="lang_ko">الكورية</string>
     <string name="lang_no">النرويجية</string>
     <string name="lang_ro">الرومانية</string>
     <string name="lang_ru">الروسية</string>
-    <string name="lang_es">اﻷسبانية</string>
+    <string name="lang_es">الإسبانية</string>
     <string name="lang_sv">السويدية</string>
     <string name="lang_tr">التركية</string>
     <string name="lang_uk">اﻷوكرانية</string>
@@ -848,17 +848,17 @@
     <string name="localization_pref_title">إعدادات إقليمية</string>
     <string name="lang_hr">الكرواتية</string>
     <string name="lang_pt_br">البرتغالية (البرازيل)</string>
-    <string name="lang_af">اﻷفريكانية</string>
-    <string name="lang_hy">اﻷرمينية</string>
+    <string name="lang_af">الأفريكانية</string>
+    <string name="lang_hy">الأرمينية</string>
     <string name="lang_eu">الباسكية</string>
     <string name="lang_be">البيلاروسية</string>
-    <string name="lang_ca">الكتالونية</string>
+    <string name="lang_ca">الكتالانية</string>
     <string name="lang_cs">التشيكية</string>
-    <string name="lang_da">الدنماركية</string>
+    <string name="lang_da">الدانماركية</string>
     <string name="lang_nl">الهولندية</string>
     <string name="lang_fi">الفنلندية</string>
     <string name="lang_ka">الجورجية</string>
-    <string name="lang_de">اﻷلمانية</string>
+    <string name="lang_de">الألمانية</string>
     <string name="lang_el">اليونانية</string>
     <string name="lang_lv">اللاتيفية</string>
     <string name="lang_lt">اللتوانية</string>
@@ -867,7 +867,7 @@
     <string name="lang_sk">السلوفاكية</string>
     <string name="lang_sl">السلوفينية</string>
     <string name="lang_vi">الفيتنامية</string>
-    <string name="lang_cy">الوِلزية</string>
+    <string name="lang_cy">الويلزية</string>
     <string name="index_name_gb">أوروبا - بريطانيا العظمى</string>
     <string name="route_preferences">تفضيلات الطريق</string>
     <string name="route_info">معلومات الطريق</string>
@@ -1218,10 +1218,10 @@
     <string name="index_item_world_altitude_correction">تصحيح الارتفاعات للعالم</string>
     <string name="index_item_world_bitcoin_payments">دفع البيتكوين على مستوى العالم</string>
     <string name="index_item_world_basemap">خريطة العالم العامة</string>
-    <string name="lang_al">ألباني</string>
+    <string name="lang_al">الألبانية</string>
     <string name="lang_ar">العربية</string>
     <string name="lang_mr">ماراثى</string>
-    <string name="lang_fa">فارسي</string>
+    <string name="lang_fa">الفارسية</string>
     <string name="lang_sc">سردينيا</string>
     <string name="lang_sr">صربي</string>
     <string name="lang_zh_cn">الصيني ( المبسط )</string>
@@ -1439,15 +1439,15 @@
     <string name="select_map_markers">حدد توجيه مباشرعلى الخريطة</string>
     <string name="shared_string_reverse_order">ترتيب عكسي</string>
     <string name="show_map_markers_description">تفعيل ميزة العلامات.</string>
-    <string name="lang_ast">الأسترية</string>
-    <string name="lang_be_by">البيلاروسية (لاتينية)</string>
-    <string name="lang_en_gb">الإنجليزية ( المملكة المتحدة )</string>
-    <string name="lang_eo">الاسبرانتو</string>
-    <string name="lang_gl">الجاليكية</string>
+    <string name="lang_ast">أستوريانية</string>
+    <string name="lang_be_by">البيلاروسية (اللاتينية)</string>
+    <string name="lang_en_gb">الإنجليزية (المملكة المتحدة)</string>
+    <string name="lang_eo">إسبرانتو</string>
+    <string name="lang_gl">الغاليسية</string>
     <string name="lang_kn">الكانادا</string>
     <string name="lang_nb">النرويجية ( بوكمال )</string>
     <string name="lang_nn">النرويجية (الحديثة )</string>
-    <string name="lang_es_ar">الأسبانية (الأرجنتين)</string>
+    <string name="lang_es_ar">الإسبانية (الأرجنتين)</string>
     <string name="si_nm">ميل بحري</string>
     <string name="dark_theme">ليلي</string>
     <string name="routing_attr_height_name">ارتفاع المركبة</string>
@@ -1571,7 +1571,7 @@
     <string name="lang_bn">البنغالية</string>
     <string name="lang_et">الإستونية</string>
     <string name="lang_ga">الأيرلندية</string>
-    <string name="lang_is">الإسلندية</string>
+    <string name="lang_is">الأيسلندية</string>
     <string name="lang_ku">الكردية</string>
     <string name="lang_la">اللاتينية</string>
     <string name="lang_mk">المقدونية</string>
@@ -1670,7 +1670,7 @@
     <string name="osn_add_dialog_success">تم إنشاء نقطة الملاحظة بنجاح</string>
     <string name="osn_close_dialog_success">تم إغلاق نقطة الملاحظة بنجاح</string>
     <string name="share_osm_edits_subject">تعديلات OSM تمت مشاركتها بواسطة أوسماند</string>
-    <string name="lang_als">اﻷلبانية (توسك)</string>
+    <string name="lang_als">الألبانية (توسك)</string>
     <string name="read_more">اقرأ المزيد</string>
     <string name="whats_new">الجديد في</string>
     <string name="shared_string_update">تحديث</string>
@@ -1712,11 +1712,11 @@
     <string name="rendering_value_purple_name">بنفسجي</string>
     <string name="light_theme">نهاري</string>
     <string name="lang_sh">الكرواتية-الصربية</string>
-    <string name="lang_az">الأزيرية</string>
+    <string name="lang_az">الأذربيجانية</string>
     <string name="lang_ta">التاميلية</string>
     <string name="lang_ml">المالايلامية</string>
-    <string name="lang_es_us">الإسبانية (أمريكا)</string>
-    <string name="lang_ht">الهاييتية</string>
+    <string name="lang_es_us">الإسبانية (الأمريكية)</string>
+    <string name="lang_ht">الهايتية</string>
     <string name="download_wikipedia_files">هل تريد تحميل بيانات إضافية من ويكيبيديا ( %1$s ميغابايت ) ؟</string>
     <string name="read_full_article">قراءة المقال كاملا (على الإنترنت)</string>
     <string name="shared_string_wikipedia">ويكيبيديا</string>
@@ -1799,7 +1799,7 @@
     <string name="shared_string_trip_recording">تسجيل الرحلة</string>
     <string name="simulate_your_location_stop_descr">إيقاف المحاكات التخيلية.</string>
     <string name="restart_is_required">الرجاء إعادة تشغيل التطبيق يدوياً لتفعيل التغييرات.</string>
-    <string name="lang_hsb">الصربية (العليا)</string>
+    <string name="lang_hsb">الصوربية (العليا)</string>
     <string name="update_all">تحديث الكل ( %1$s ميغابايت )</string>
     <string name="downloads_left_template">%1$s تحميلات باقية</string>
     <string name="saved_at_time">تم الحفظ في : %1$s</string>
@@ -1839,7 +1839,7 @@
     <string name="context_menu_item_delete_waypoint">حذف إحداثية GPX ؟</string>
     <string name="context_menu_item_edit_waypoint">تعدبل إحداثية GPX</string>
     <string name="lang_nds">ألمانية منخفضة</string>
-    <string name="lang_fy">اللغة الفريزية</string>
+    <string name="lang_fy">فريسك</string>
     <string name="rendering_attr_hideProposed_name">الأشياء المقترحة</string>
     <string name="osm_edit_created_poi">إنشاء OSM POI</string>
     <string name="coords_search">بحث عن إحداثيات</string>
@@ -1856,10 +1856,10 @@
     <string name="traffic_warning_hazard">خطر</string>
     <string name="rendering_value_boldOutline_name">مخطط واضح</string>
     <string name="lang_pms">بييمونتي</string>
-    <string name="lang_br">بريتون</string>
-    <string name="lang_bpy">اللغة البيشنوبيرية (هندية)</string>
+    <string name="lang_br">البريتونية</string>
+    <string name="lang_bpy">بيشنوبريا</string>
     <string name="lang_new">نوار / باهاسا النيبال</string>
-    <string name="lang_ceb">لغة السيبيونو</string>
+    <string name="lang_ceb">السيبوانية</string>
     <string name="archive_wikipedia_data">لديك بيانات ويكيبيديا منزلة قديمة غير متوافقة. هل تريد أرشفتها؟</string>
     <string name="disable_recording_once_app_killed">منع التسجيل في الخلفية</string>
     <string name="shared_string_import2osmand">استيراد إلى أوسماند</string>
@@ -1874,7 +1874,7 @@
     <string name="proxy_host_descr">ضبط اسم مضيف البروكسي (مثال 127.0.0.1).</string>
     <string name="map_preferred_locale_descr">اللغة المفضلة للمسميات على الخريطة (إذا لم تكن متوفرة ستتحول إلى اللغة الإنجليزية أو الأسماء المحلية).</string>
     <string name="rendering_attr_hideWoodScrubs_name">خشب وشجيرات</string>
-    <string name="lang_hu_formal">الهنغارية (الرسمية)</string>
+    <string name="lang_hu_formal">المجرية (الرسمية)</string>
     <string name="routing_attr_avoid_stairs_name">لا سلالم</string>
     <string name="routing_attr_avoid_stairs_description">تجنب السلالم</string>
     <string name="routing_attr_avoid_borders_description">تجنب عبور الحدود الوطنية</string>
@@ -2023,7 +2023,7 @@
     <string name="donation_to_osm_desc">يتم إرسال جزء من تبرعك إلى رسامي الخرائط OSM. تكلفة الاشتراك لا تزال هي نفسها.</string>
     <string name="osm_live_subscription_desc">يُتيحُ لك الاشتراك الحصول على تحديثات أسبوعياً، يومياً أو كل ساعة بالإضافة إلى تحميلات غير محدودة لكافة الخرائط.</string>
     <string name="driving_region_australia">أستراليا</string>
-    <string name="lang_kab">قبائلي</string>
+    <string name="lang_kab">القبائلية</string>
     <string name="shared_string_filters">تصفية</string>
     <string name="apply_filters">تطبيق التصفية</string>
     <string name="save_filter">حفظ التصفية</string>
@@ -2844,7 +2844,7 @@
     <string name="active_markers_descr">عدد الأسهم تجاه الوجهات النشطة ( للملاحة في الصحراء).</string>
     <string name="rendering_value_black_name">أسود</string>
     <string name="shared_string_launch">تشغيل</string>
-    <string name="lang_gn_py">الغوارانية</string>
+    <string name="lang_gn_py">غواراني</string>
     <string name="access_intermediate_arrival_time">متوسط وقت الوصول</string>
     <string name="map_widget_intermediate_time">متوسط الوقت</string>
     <string name="quick_action_switch_day_night_descr">التبديل بين الوضع النهاري والليلي.</string>
@@ -3601,7 +3601,7 @@
     <string name="lang_mn">المنغولية</string>
     <string name="lang_min">مينانغكابو</string>
     <string name="lang_mg">مدغشقر</string>
-    <string name="lang_ky">القرقيزية</string>
+    <string name="lang_ky">القيرغيزستانية</string>
     <string name="lang_kk">الكازاخستانية</string>
     <string name="lang_jv">الجاوية</string>
     <string name="lang_gu">الجوجاراتية</string>
@@ -3609,7 +3609,7 @@
     <string name="lang_ce">الشيشانية</string>
     <string name="lang_bar">البافارية</string>
     <string name="lang_ba">باشكير</string>
-    <string name="lang_an">ارجواني</string>
+    <string name="lang_an">أراغونيزية</string>
     <string name="lang_lmo">لومبارد</string>
     <string name="custom_color">لون مخصص</string>
     <string name="extra_maps_menu_group">خرائط إضافية</string>
@@ -3953,7 +3953,7 @@
     <string name="cannot_upload_image">لا يمكن تحميل الصورة، من فضلك، حاول مرة أخرى في وقت لاحق</string>
     <string name="select_picture">تحديد صورة</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
-    <string name="lang_de_casual">الألمانية (تقليدية)</string>
+    <string name="lang_de_casual">الألمانية (العادية)</string>
     <string name="app_mode_light_aircraft">طائرة</string>
     <string name="plan_route_join_segments">ربط الأجزاء</string>
     <string name="plan_route_split_before">تقسيم قبل</string>
@@ -4520,15 +4520,15 @@
     <string name="add_to_group">إضافة إلى المجموعة</string>
     <string name="app_modes_options">اختيار أوضاع التطبيق</string>
     <string name="shared_string_memory">الذاكرة</string>
-    <string name="memory_allocated_for_routing_ds">تعمل قيمة الذاكرة الأعلى على تسريع حساب المسارات الطويلة (أكثر من 500 كم) ، ولكنها قد تؤثر على أداء التطبيقات الأخرى.
-\nلا يؤثر على سرعة حساب الطرق القصيرة.</string>
+    <string name="memory_allocated_for_routing_ds">سيؤدي تخصيص الذاكرة الأعلى إلى تسريع حساب المسارات الطويلة (أكثر من 500 كيلومتر) ، ولكنه قد يؤثر على أداء التطبيقات الأخرى.
+\nلا يوجد تأثير على سرعة حساب الطرق القصيرة.</string>
     <string name="memory_allocated_for_routing">الذاكرة المخصصة للتوجيه</string>
     <string name="reading_files">قراءة الملفات …</string>
     <string name="shared_string_hide_all">إخفاء الكل</string>
-    <string name="migration_files_present">%1$d ملف %2$s متواجد في المكان \'%3$s\' المحدد.</string>
+    <string name="migration_files_present">يوجد %1$d ملف (%2$s) في الموقع المحدد \'%3$s\'.</string>
     <string name="no_items_selected_warning">الرجاء تحديد عنصر واحد على الأقل</string>
     <string name="display_groups_visibility_dialog_description">يمكنك التحكم في رؤية المجموعة على الخريطة. إذا كان المسار مخفيًا ، فسيتم إخفاء جميع المجموعات أيضًا.</string>
-    <string name="exit_without_saving_warning">هل أنت متأكد من الخروج دون حفظ؟ سوف تفقد كل التغييرات.</string>
+    <string name="exit_without_saving_warning">هل تريد الخروج بدون حفظ التغييرات؟</string>
     <string name="shared_string_hide_slope">إخفاء المنحدر</string>
     <string name="shared_string_show_slope">إظهار المنحدر</string>
     <string name="elevation_profile">ملف تعريف الارتفاع</string>
@@ -4539,17 +4539,21 @@
     <string name="distance_between_points">المسافة بين النقاط</string>
     <string name="ltr_or_rtl_combine">%1$s%2$s</string>
     <string name="save_changes_into_file">احفظ التغييرات في ملف</string>
-    <string name="storage_migration_wrong_folder_warning">لا يمكننا العثور على بيانات OsmAnd في المجلد المحدد. حاول مرة اخرى.</string>
+    <string name="storage_migration_wrong_folder_warning">لم يتم العثور على بيانات OsmAnd في المجلد المحدد. حاول مرة اخرى.</string>
     <string name="shared_string_precision">الدقة</string>
-    <string name="gps_filter_hdop_desc">قم بتعيين الحد الأقصى المسموح به لقيمة HDOP.
-\nسيتم إخفاء النقاط التي تزيد عن المعيار المحدد.</string>
+    <string name="gps_filter_hdop_desc">قم بتعيين الحد الأقصى للقيمة المقبولة ل HDOP.
+\nسيتم إخفاء النقاط ذات القيمة الأعلى.</string>
     <string name="save_as_copy">حفظ كنسخة</string>
-    <string name="gps_filter_actions_description">OsmAnd يطبق التغييرات على المسار دون حفظها في ملف. يمكنك حفظ التغييرات يدويا.</string>
-    <string name="gps_filter_speed_altitude_desc">ستكون نقاط المسار المطابقة للفاصل الزمني المحدد مرئية على الرسم البياني والخريطة ، وسيتم إخفاء الباقي.</string>
-    <string name="gps_filter_smoothing_desc">اضبط المسافة الفاصلة بين النقاط.
-\nسيتم إخفاء نقاط التعقب التي تكون على الأقل بمسافة X من آخر نقطة مرئية.
-\nكن حذرًا كلما زادت المسافة، كانت هندسة المسار أبسط.</string>
+    <string name="gps_filter_actions_description">التطبيق سيطبق التغييرات على المسار دون تحديث الملف. يمكنك حفظ التغييرات يدويا.</string>
+    <string name="gps_filter_speed_altitude_desc">ستكون نقاط المسار المطابقة للفاصل الزمني المحدد ظاهرة على الرسم البياني والخريطة ، الباقي سيكون مخفيا.</string>
+    <string name="gps_filter_smoothing_desc">اضبط عتبة المسافة الفاصلة بين النقاط.
+\nسيتم إخفاء نقاط التعقب التي ليست بعيدة بقدر هذه المسافة على الأقل عن آخر نقطة مرئية.
+\nاعلم أن العتبات العالية قد تبالغ في تبسيط هندسة المسار.</string>
     <string name="shared_string_gps_filter">مرشح GPS</string>
     <string name="gps_filter_smoothing">التنعيم</string>
     <string name="gps_filter_precision">دقة تحديد المواقع</string>
+    <string name="use_routing_fallback_description">استخدم التوجيه دون اتصال عندما يتعذر الوصول إلى التوجيه عبر الإنترنت.</string>
+    <string name="use_routing_fallback">استخدام التوجيه الاحتياطي</string>
+    <string name="created_on">تم الإنشاء في</string>
+    <string name="shared_string_size">الحجم</string>
 </resources>

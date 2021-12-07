@@ -3,6 +3,7 @@ package net.osmand.plus.audionotes;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_AUDIO_NOTE;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_PHOTO_NOTE;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_VIDEO_NOTE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_AUDIO_VIDEO_NOTES;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.RECORDING_LAYER;
 import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 
@@ -100,7 +101,6 @@ import java.util.TimerTask;
 public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	public static final int NOTES_TAB = R.string.notes;
-	public static final String ID = "osmand.audionotes";
 	public static final String THREEGP_EXTENSION = "3gp";
 	public static final String MPEG4_EXTENSION = "mp4";
 	public static final String IMG_EXTENSION = "jpg";
@@ -556,7 +556,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public String getId() {
-		return ID;
+		return PLUGIN_AUDIO_VIDEO_NOTES;
 	}
 
 	public AudioVideoNotesPlugin(OsmandApplication app) {
@@ -1702,7 +1702,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public List<String> indexingFiles(IProgress progress) {
+	public List<String> indexingFiles(@Nullable IProgress progress) {
 		return indexingFiles(true, false);
 	}
 

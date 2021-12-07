@@ -3349,9 +3349,9 @@
     <string name="plugin_disabled">התוסף כבוי</string>
     <string name="clear_recorded_data">מחיקת הנתונים שהוקלטו</string>
     <string name="copy_coordinates">העתקת נקודות ציון</string>
-    <string name="plugin_disabled_descr">תוסף זה הוא יישומון נפרד, יהיה עליך להסיר אותו בנפרד אם אין לך כוונה להשתמש בו עוד.
+    <string name="plugin_disabled_descr">תוסף זה הוא יישומון נפרד, השבתתו אינה מסירה אותו.
 \n
-\nהתוסף יישאר על המכשיר גם לאחר הסרת OsmAnd.</string>
+\nניתן להסיר אותו דרך הגדרת ‚יישומונים’ של Android.</string>
     <string name="shared_string_menu">תפריט</string>
     <string name="no_recalculation_setting">ללא חישוב מחדש</string>
     <string name="route_recalculation_dist_title">מרחק מזערי לחישוב המסלול מחדש</string>
@@ -4260,7 +4260,7 @@
     <string name="online_maps_required_descr">לרוע המזל, OsmAnd לא הצליח למצוא מסלול להגדרות שלך.
 \n
 \nאולי חלק מהמפות לא נטענו, ניתן להריץ בדיקה מקוונת של המפות הנחוצות.</string>
-    <string name="grey_color_undefined">חלקים ללא נתונים נצבעים באפור.</string>
+    <string name="grey_color_undefined">חלקים ללא נתונים הם אפורים.</string>
     <string name="cancel_anytime_in_amazon_app">ניתן לבטל בכל עת דרך יישומון Amazon</string>
     <string name="amz_manage_subscription_descr">ניתן לנהל את המינויים שלך דרך יישומון Amazon או אתר Amazon.</string>
     <string name="empty_category_name">שם הקטגוריה ריק</string>
@@ -4391,6 +4391,10 @@
 \n
 \n • עדכון מנשק משתמש לחיפוש נקודות ציון UTM
 \n
+\n • מסנן GPS למסלולי GPX
+\n
+\n • וידג׳ט רום (פרו)
+\n
 \n • מועדפים: נוספה היכולת לצפות בסמלים בהם נעשה שימוש לאחרונה
 \n
 \n • תכנון מסלול: ישתמש בפרופיל הנבחר לאחר ההפעלה
@@ -4415,7 +4419,7 @@
     <string name="no_items_selected_warning">נא לבחור לפחות פריט אחד</string>
     <string name="shared_string_hide_all">להסתיר הכול</string>
     <string name="purchases_feature_desc_hourly_map_updates">קבלת גישה לעדכוני מפה תכופים יותר. שעתיים, יומיים או שבועיים. עדכונים מתקבלים באופן מצטבר, רק לאזורים שהשתנו.</string>
-    <string name="migration_files_present">%1$d קבצים (%2$s) קיימים במיקום הנבחר ‚%3$s’.</string>
+    <string name="migration_files_present">יש %1$d קבצים (%2$s) במיקום הנבחר ‚%3$s’.</string>
     <string name="fold_unfold">קיפול/פריסה</string>
     <string name="app_profile_type">סוג פרופיל יישומון</string>
     <string name="add_to_group">הוספה לקבוצה</string>
@@ -4423,9 +4427,9 @@
     <string name="rendering_attr_natureReserves_description">הצגת שמורת טבע, אזורים מוגנים ופארקים לאומיים.</string>
     <string name="map_marker_options">אפשרויות סמני מפה</string>
     <string name="show_parameter_seekbar">הצגת סרגל גלילת משתנים</string>
-    <string name="exit_without_saving_warning">לצאת בלי לשמור\? כל השינויים יאבדו.</string>
-    <string name="memory_allocated_for_routing_ds">ערך זיכרון גבוה יותר מאיץ את החישוב של מסלולים ארוכים (למעלה מ־500 ק״מ), אך עשוי להשפיע על הביצועים של שאר היישומונים.
-\nלא משפיע על מהירות החישוב של מסלולים קצרים.</string>
+    <string name="exit_without_saving_warning">לצאת בלי לשמור את השינויים\?</string>
+    <string name="memory_allocated_for_routing_ds">הקצאת זיכרון גבוהה יותר מאיצה את החישוב של מסלולים ארוכים (למעלה מ־500 ק״מ), אך עשויה להשפיע על הביצועים של שאר היישומונים.
+\nאין השפעה על מהירות החישוב של מסלולים קצרים.</string>
     <string name="rendering_value_walkingRoutesOSMC_description">לצבוע נתיבים לפי הצבע המקומי הייחודי שלהם (אם קיים ב־OpenStreetMap) וסמל המגן לטיולים.</string>
     <string name="routeInfo_winter_ice_road_description">צביעת המסלול או קו הנסיעה לפי סיווג הדרך בחורף.</string>
     <string name="shared_string_includes">כולל</string>
@@ -4437,7 +4441,48 @@
     <string name="shared_string_statistics">סטטיסטיקה</string>
     <string name="shared_string_precision">דיוק</string>
     <string name="gps_filter_hdop_desc">הגדרת הערך המרבי המותר ל־HDOP.
-\nנקודות שעוברות את המשתנה שהוגדר יוסתרו.</string>
-    <string name="gps_filter_speed_altitude_desc">נקודות המעקב שתואמות למשך הזמן שהוצג יופיעו בתרשים ובמפה, השאר יוסתרו.</string>
+\nנקודות עם ערך גבוה מזה יוסתרו.</string>
+    <string name="gps_filter_speed_altitude_desc">רק נקודות מעקב שתואמות למשך הזמן שהוצג יופיעו בתרשים ובמפה, השאר יוסתרו.</string>
     <string name="gps_filter_precision">דיוק GPS</string>
+    <string name="distance_between_points">מרחק בין נקודות</string>
+    <string name="gps_filter_smoothing">החלקה</string>
+    <string name="save_changes_into_file">שמירת שינויים לקובץ</string>
+    <string name="save_as_copy">שמירה כעותק</string>
+    <string name="gps_filter_actions_description">OsmAnd יחיל את השינויים למסלול מבלי לעדכן את הקובץ. אפשר לשמור את השינויים ידנית.</string>
+    <string name="shared_string_gps_filter">מסנן GPS</string>
+    <string name="storage_migration_wrong_folder_warning">לא נמצאו נתוני OsmAnd בתיקייה הנבחרת. נא לנסות שוב.</string>
+    <string name="shared_string_downhill">במדרון</string>
+    <string name="shared_string_uphill">במעלה</string>
+    <string name="shared_string_grade">ציון</string>
+    <string name="shared_string_hide_slope">הסתרת שיפוע</string>
+    <string name="shared_string_show_slope">הצגת שיפוע</string>
+    <string name="use_routing_fallback_description">להשתמש בניווט בלתי מקוון כשאין אפשרות להציע ניווט מקוון.</string>
+    <string name="use_routing_fallback">להשתמש בנסיגה של הניווט</string>
+    <string name="gps_filter_smoothing_desc">הגדרת סף המרחק בין נקודות.
+\nנקודות מסלול שאינן במרחק שכזה מהנקודה הגלויה האחרונה תוסתרנה.
+\nנא לשים לב שסף גבוה יכול לפשט את צורת המסלול יתר על המידה.</string>
+    <string name="routeInfo_smoothness_description">סיווג עבירות כביש/דרך לכלי רכב גלגליים, במיוחד סביב כמה המשטח רגיל/שטוח.</string>
+    <string name="release_4_0">• גיבוי לענן
+\n
+\n • נוסף מצב לילה לסגנון המפה „טוֹפּוֹ”
+\n
+\n • נוספה אפשרות להוריד קווי מתאר ביחידת מידה רגל
+\n
+\n • אפשר לצבוע מסלולים לפי גובה, מהירות או שיפוע
+\n
+\n • נוספה חלונית „הקלטת מסע”
+\n
+\n • מרחק בנגיעה הועבר מסרגל הרדיוס לאפשרות נפרדת
+\n
+\n • תכנון מסלול: אפשר לשנות את אפשרויות הניווט, לגשת להגדרות המפה ולחפש מבלי לצאת מתכנון המסלול
+\n
+\n • מסך „רכישה” חדש עם פירוט רכישה מפורט
+\n
+\n • נוספה אפשרות לשנות את מראה קו המסלול
+\n
+\n • העדכונים החיים של OsmAnd הועברו אל „הורדות &gt; עדכונים”
+\n
+\n</string>
+    <string name="created_on">נוצר בתאריך</string>
+    <string name="shared_string_size">גודל</string>
 </resources>
