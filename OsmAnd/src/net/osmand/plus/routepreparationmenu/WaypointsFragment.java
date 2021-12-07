@@ -32,7 +32,7 @@ import com.github.ksoichiro.android.observablescrollview.ScrollState;
 
 import net.osmand.AndroidUtils;
 import net.osmand.StateChangedListener;
-import net.osmand.ValueHolder;
+import net.osmand.data.ValueHolder;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;

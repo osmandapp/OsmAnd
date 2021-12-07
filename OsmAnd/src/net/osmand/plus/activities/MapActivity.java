@@ -54,7 +54,7 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.SecondSplashScreenFragment;
 import net.osmand.StateChangedListener;
-import net.osmand.ValueHolder;
+import net.osmand.data.ValueHolder;
 import net.osmand.access.MapAccessibilityActions;
 import net.osmand.aidl.AidlMapPointWrapper;
 import net.osmand.aidl.OsmandAidlApi.AMapPointUpdateListener;

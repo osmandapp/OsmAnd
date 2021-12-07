@@ -22,7 +22,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.Location;
-import net.osmand.ValueHolder;
+import net.osmand.data.ValueHolder;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;

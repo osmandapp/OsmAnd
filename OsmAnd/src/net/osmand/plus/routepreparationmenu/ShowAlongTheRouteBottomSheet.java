@@ -20,7 +20,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.AndroidUtils;
-import net.osmand.ValueHolder;
+import net.osmand.data.ValueHolder;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;

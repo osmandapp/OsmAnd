@@ -8,7 +8,7 @@ import net.osmand.Location;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.ValueHolder;
+import net.osmand.data.ValueHolder;
 import net.osmand.data.LatLon;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
