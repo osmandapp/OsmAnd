@@ -448,7 +448,7 @@ public class ResourceManager {
 
 	////////////////////////////////////////////// Working with indexes ////////////////////////////////////////////////
 
-	public List<String> reloadIndexesOnStart(AppInitializer progress, List<String> warnings) {
+	public List<String> reloadIndexesOnStart(@NonNull AppInitializer progress, List<String> warnings) {
 		close();
 		// check we have some assets to copy to sdcard
 		warnings.addAll(checkAssets(progress, false, true));
@@ -459,7 +459,7 @@ public class ResourceManager {
 		return warnings;
 	}
 
-	public List<String> reloadIndexes(IProgress progress, List<String> warnings) {
+	public List<String> reloadIndexes(@Nullable IProgress progress, @NonNull List<String> warnings) {
 		geoidAltitudeCorrection = new GeoidAltitudeCorrection(context.getAppPath(null));
 		// do it lazy
 		// indexingImageTiles(progress);
@@ -471,12 +471,12 @@ public class ResourceManager {
 		return warnings;
 	}
 
-	public List<String> indexAdditionalMaps(IProgress progress) {
+	public List<String> indexAdditionalMaps(@Nullable IProgress progress) {
 		return context.getAppCustomization().onIndexingFiles(progress, indexFileNames);
 	}
 
 
-	public List<String> indexVoiceFiles(IProgress progress) {
+	public List<String> indexVoiceFiles(@Nullable IProgress progress) {
 		File file = context.getAppPath(VOICE_INDEX_DIR);
 		file.mkdirs();
 		List<String> warnings = new ArrayList<>();
@@ -499,7 +499,7 @@ public class ResourceManager {
 		return warnings;
 	}
 
-	public List<String> indexFontFiles(IProgress progress) {
+	public List<String> indexFontFiles(@Nullable IProgress progress) {
 		File file = context.getAppPath(IndexConstants.FONT_INDEX_DIR);
 		file.mkdirs();
 		List<String> warnings = new ArrayList<>();
@@ -705,11 +705,11 @@ public class ResourceManager {
 		}
 	}
 
-	public List<String> indexingMaps(IProgress progress) {
+	public List<String> indexingMaps(@Nullable IProgress progress) {
 		return indexingMaps(progress, Collections.emptyList());
 	}
 
-	public List<String> indexingMaps(final IProgress progress, List<File> filesToReindex) {
+	public List<String> indexingMaps(@Nullable IProgress progress, @NonNull List<File> filesToReindex) {
 		long val = System.currentTimeMillis();
 		ArrayList<File> files = new ArrayList<>();
 		File appPath = context.getAppPath(null);
@@ -775,7 +775,9 @@ public class ResourceManager {
 		java.text.DateFormat dateFormat = getDateFormat();
 		for (File f : files) {
 			String fileName = f.getName();
-			progress.startTask(context.getString(R.string.indexing_map) + " " + fileName, -1);
+			if (progress != null) {
+				progress.startTask(context.getString(R.string.indexing_map) + " " + fileName, -1);
+			}
 			try {
 				BinaryMapIndexReader mapReader = null;
 				try {

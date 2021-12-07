@@ -19,6 +19,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.Lifecycle.State;
 import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.Location;
@@ -97,6 +98,10 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 	public boolean hasStarted() {
 		Lifecycle.State state = getLifecycle().getCurrentState();
 		return state == Lifecycle.State.STARTED || state == Lifecycle.State.RESUMED;
+	}
+
+	public boolean isStateAtLeast(@NonNull State state) {
+		return getLifecycle().getCurrentState().isAtLeast(state);
 	}
 
 	public boolean hasSurface() {

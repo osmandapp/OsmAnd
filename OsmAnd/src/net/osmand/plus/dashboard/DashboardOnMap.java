@@ -51,6 +51,7 @@ import net.osmand.ValueHolder;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
@@ -818,33 +819,30 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		}
 	}
 
-	private OnItemClickListener getOptionsMenuOnClickListener(final ContextMenuAdapter cm,
-															  final ArrayAdapter<ContextMenuItem> listAdapter) {
-		return new AdapterView.OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int which, long id) {
-				ContextMenuItem item = cm.getItem(which);
-				ContextMenuAdapter.ItemClickListener click = item.getItemClickListener();
-				if (click instanceof OnRowItemClick) {
-					boolean cl = ((OnRowItemClick) click).onRowItemClick(listAdapter, view, item.getTitleId(), which);
-					if (cl) {
-						hideDashboard();
-					}
-				} else if (click != null) {
-					CompoundButton btn = view.findViewById(R.id.toggle_item);
-					if (btn != null && btn.getVisibility() == View.VISIBLE) {
-						btn.setChecked(!btn.isChecked());
-					} else {
-						if (click.onContextMenuClick(listAdapter, item.getTitleId(), which, false, null)) {
-							hideDashboard();
-						}
-					}
-				} else {
-					if (!item.isCategory()) {
-						hideDashboard();
-					}
+	private OnItemClickListener getOptionsMenuOnClickListener(final ContextMenuAdapter adapter,
+	                                                          final ArrayAdapter<ContextMenuItem> listAdapter) {
+		return (parent, view, position, id) -> {
+			int size = adapter.getItems().size();
+			if (position < 0 || position >= size) {
+				LOG.warn("Tried to select item " + position + " items in list: " + size);
+				return;
+			}
+			ContextMenuItem item = adapter.getItem(position);
+			ItemClickListener click = item.getItemClickListener();
+			if (click instanceof OnRowItemClick) {
+				boolean cl = ((OnRowItemClick) click).onRowItemClick(listAdapter, view, item.getTitleId(), position);
+				if (cl) {
+					hideDashboard();
 				}
+			} else if (click != null) {
+				CompoundButton btn = view.findViewById(R.id.toggle_item);
+				if (btn != null && btn.getVisibility() == View.VISIBLE) {
+					btn.setChecked(!btn.isChecked());
+				} else if (click.onContextMenuClick(listAdapter, item.getTitleId(), position, false, null)) {
+					hideDashboard();
+				}
+			} else if (!item.isCategory()) {
+				hideDashboard();
 			}
 		};
 	}

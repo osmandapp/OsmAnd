@@ -503,7 +503,7 @@ public class MenuBuilder {
 						AndroidUtils.startActivityForResultIfSafe(mapActivity, chooserIntent, PICK_IMAGE);
 					});
 				} else {
-					OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
+					app.runInUIThread(() -> OprStartFragment.showInstance(mapActivity.getSupportFragmentManager()));
 				}
 			}).start();
 		});
