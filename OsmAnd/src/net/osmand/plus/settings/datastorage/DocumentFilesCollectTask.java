@@ -43,9 +43,10 @@ class DocumentFilesCollectTask extends AsyncTask<Void, Void, String> {
 	@Override
 	protected String doInBackground(Void... voids) {
 		String folderName = IndexConstants.APP_DIR.replace("/", "");
-		if (Algorithms.stringsEqual(folderName, folderFile.getName())) {
+		if (folderName.equalsIgnoreCase(folderFile.getName())) {
 			collectFiles(folderFile, documentFiles, filesSize, estimatedSize);
-		} else {
+		}
+		if (Algorithms.isEmpty(documentFiles)) {
 			return app.getString(R.string.storage_migration_wrong_folder_warning);
 		}
 		return null;

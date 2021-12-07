@@ -599,7 +599,7 @@ public abstract class OsmandPlugin {
 		return null;
 	}
 
-	public List<String> indexingFiles(IProgress progress) {
+	public List<String> indexingFiles(@Nullable IProgress progress) {
 		return null;
 	}
 
@@ -779,7 +779,7 @@ public abstract class OsmandPlugin {
 		return l;
 	}
 
-	public static List<String> onIndexingFiles(IProgress progress) {
+	public static List<String> onIndexingFiles(@Nullable IProgress progress) {
 		List<String> l = new ArrayList<String>();
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			List<String> ls = plugin.indexingFiles(progress);

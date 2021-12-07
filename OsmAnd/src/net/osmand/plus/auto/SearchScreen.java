@@ -299,7 +299,9 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 
 				// History
 				SearchResultCollection res = getSearchUICore().shallowSearch(SearchHistoryAPI.class, "", null, false, false);
-				recentResults.addAll(res.getCurrentSearchResults());
+				if (res != null) {
+					recentResults.addAll(res.getCurrentSearchResults());
+				}
 				this.recentResults = recentResults;
 				if (!searchHelper.isSearching() && Algorithms.isEmpty(searchHelper.getSearchQuery())) {
 					showRecents();

@@ -52,7 +52,7 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair
 	public StorageMigrationAsyncTask(@NonNull FragmentActivity activity,
 	                                 @NonNull List<DocumentFile> documentFiles,
 	                                 @NonNull StorageItem selectedStorage,
-	                                 Pair<Long, Long> filesSize,
+	                                 @NonNull Pair<Long, Long> filesSize,
 	                                 boolean usedOnMap) {
 		activityRef = new WeakReference<>(activity);
 		this.app = (OsmandApplication) activity.getApplication();
@@ -67,8 +67,8 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair
 		FragmentActivity activity = activityRef.get();
 		if (AndroidUtils.isActivityNotDestroyed(activity)) {
 			FragmentManager manager = activity.getSupportFragmentManager();
-			migrationListener = StorageMigrationFragment.showInstance(manager, selectedStorage, generalProgress,
-					documentFiles.size(), filesSize, usedOnMap);
+			migrationListener = StorageMigrationFragment.showInstance(manager, selectedStorage, filesSize,
+					generalProgress, documentFiles.size(), usedOnMap);
 		}
 	}
 
