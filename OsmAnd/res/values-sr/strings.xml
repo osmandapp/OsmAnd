@@ -375,7 +375,7 @@
     <string name="read_more">Прочитај више</string>
     <string name="whats_new">Шта је ново</string>
     <string name="rendering_attr_hideProposed_name">Предложене објекте</string>
-    <string name="shared_string_update">Ажурирај</string>
+    <string name="shared_string_update">Надгради</string>
     <string name="shared_string_upload">Отпреми</string>
     <string name="world_map_download_descr">Основна карта света (која покрива целу Земљу при погледу издалека) не постоји или је застарела. Преузмите основну карту света за употпуњавање радне средине.</string>
     <string name="shared_string_qr_code">QR код</string>
@@ -534,7 +534,7 @@
     <string name="shared_string_next">Следеће</string>
     <string name="shared_string_enable">Омогући</string>
     <string name="shared_string_disable">Онемогући</string>
-    <string name="shared_string_enabled">Укључен</string>
+    <string name="shared_string_enabled">Омогућено</string>
     <string name="shared_string_disabled">Искључен</string>
     <string name="shared_string_selected">Изабрано</string>
     <string name="shared_string_selected_lowercase">изабрано</string>
@@ -1229,7 +1229,7 @@
     <string name="change_color">Промени боју</string>
     <string name="edit_name">Промени име</string>
     <string name="animate_my_location">Анимирај мој положај</string>
-    <string name="shared_string_install">Инсталирај</string>
+    <string name="shared_string_install">Угради</string>
     <string name="online_photos">Мрежне слике</string>
     <string name="shared_string_add_photos">Додај слике</string>
     <string name="no_photos_descr">Нема слика овде.</string>
@@ -1429,7 +1429,7 @@
     <string name="my_location">Мој положај</string>
     <string name="shared_string_finish">Крај</string>
     <string name="plan_route">План путовања</string>
-    <string name="shared_string_sort">Сортирај</string>
+    <string name="shared_string_sort">Разврстај</string>
     <string name="coordinate_input">Унос координата</string>
     <string name="marker_save_as_track_descr">Извезите ознаке у следећи GPX фајл:</string>
     <string name="move_to_history">Премести у историју</string>
@@ -2311,7 +2311,7 @@
     <string name="transport_nearby_routes">Близу</string>
     <string name="speech_rate_descr">Одаберите брзину изговора синтетичког TTS гласа.</string>
     <string name="local_osm_changes_backup">Прави резервну копију како се OSM мења</string>
-    <string name="osmand_service">Позадински режим</string>
+    <string name="osmand_service">Позадински рад</string>
     <string name="osmand_service_descr">OsmAnd ради у позадини док је екран искључен.</string>
     <string name="download_files_not_enough_space">Нема довољно слободног простора да се скине %1$s MB (слободно: %2$s).</string>
     <string name="keep_informing">Понови инструкције навођења</string>
@@ -3133,7 +3133,7 @@
     <string name="turn_screen_on_info">Прикажи карту на закључаном екрану за време навођења.</string>
     <string name="route_parameters_info">Поставке за креирање пута у означеном профилу „%1$s”.</string>
     <string name="wake_time">Тајмаут после буђења</string>
-    <string name="units_and_formats">Мерне јединице &amp; форматирања</string>
+    <string name="units_and_formats">Мерне јединице и облици</string>
     <string name="map_look_descr">Изглед карте</string>
     <string name="map_look">Изглед карте</string>
     <string name="list_of_installed_plugins">Инсталирани додаци</string>
@@ -3162,7 +3162,7 @@
     <string name="route_parameters_descr">Конфигуриши параметре пута</string>
     <string name="route_parameters">Параметри пута</string>
     <string name="application_profile_changed">Апликативни профил промењен на „%s“</string>
-    <string name="logcat_buffer">Logcat бафер</string>
+    <string name="logcat_buffer">Спремник дневника</string>
     <string name="plugins_settings">Поставке додатака</string>
     <string name="shared_string_by_default">Подразумевано</string>
     <string name="download_detailed_map">Преузми детаљну карту места %s, да видите ову област.</string>
@@ -3328,7 +3328,7 @@
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Иконица која се приказује за време навођења или померања.</string>
     <string name="select_map_icon_descr">Иконица која се приказује у мировању.</string>
-    <string name="logcat_buffer_descr">Проверите и поделите детаљне записе апликације</string>
+    <string name="logcat_buffer_descr">Проверите и поделите дневнике са појединостима програма</string>
     <string name="search_offline_geo_error">Не могу да расчланим гео намеру ’%s’.</string>
     <string name="permission_is_required">Потребне су дозволе за коришћење ове опције.</string>
     <string name="monitoring_min_speed_descr">Ово је филтер за одсецање малих брзина који не бележи тачке испод одређене брзине. Овим снимљене стазе изгледају глаткије када се гледају на карти.</string>
