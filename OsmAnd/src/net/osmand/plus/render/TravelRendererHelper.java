@@ -9,7 +9,6 @@ import static net.osmand.render.RenderingRulesStorage.LINE_RULES;
 import static net.osmand.render.RenderingRulesStorage.ORDER_RULES;
 import static net.osmand.render.RenderingRulesStorage.POINT_RULES;
 
-import android.os.AsyncTask;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
@@ -44,6 +43,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class TravelRendererHelper implements IRendererLoadedEventListener {
 
@@ -61,6 +62,8 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 	private final ResourceManager resourceManager;
 	private final RendererRegistry rendererRegistry;
 	private StateChangedListener<Boolean> listener;
+
+	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	private final Map<String, CommonPreference<Boolean>> filesVisibilityProperties = new LinkedHashMap<>();
 	private StateChangedListener<Boolean> fileVisibilityPropertiesListener;
@@ -199,7 +202,7 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 			}
 		};
 		ReloadIndexesTask reloadIndexesTask = new ReloadIndexesTask(app, listener);
-		reloadIndexesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		reloadIndexesTask.executeOnExecutor(singleThreadExecutor);
 	}
 
 	public CommonPreference<Boolean> getFileVisibilityProperty(@NonNull String fileName) {

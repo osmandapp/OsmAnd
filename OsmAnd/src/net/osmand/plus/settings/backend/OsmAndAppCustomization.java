@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.backend;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -33,7 +35,6 @@ import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.routing.RouteCalculationResult;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -57,8 +58,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 
 public class OsmAndAppCustomization {
 
@@ -190,7 +189,7 @@ public class OsmAndAppCustomization {
 		return DownloadActivity.class;
 	}
 
-	public List<String> onIndexingFiles(IProgress progress, Map<String, String> indexFileNames) {
+	public List<String> onIndexingFiles(@Nullable IProgress progress, @NonNull Map<String, String> indexFileNames) {
 		return Collections.emptyList();
 	}
 

@@ -1,24 +1,5 @@
 package net.osmand.plus.importfiles;
 
-import android.net.Uri;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
-
-import net.osmand.AndroidUtils;
-import net.osmand.FileUtils;
-import net.osmand.plus.R;
-import net.osmand.plus.base.BaseLoadAsyncTask;
-import net.osmand.plus.importfiles.ImportHelper.ImportType;
-import net.osmand.util.Algorithms;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
 import static net.osmand.FileUtils.createUniqueFileName;
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.MAPS_PATH;
@@ -33,19 +14,37 @@ import static net.osmand.util.Algorithms.SQLITE_FILE_SIGNATURE;
 import static net.osmand.util.Algorithms.XML_FILE_SIGNATURE;
 import static net.osmand.util.Algorithms.ZIP_FILE_SIGNATURE;
 
+import android.net.Uri;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+
+import net.osmand.AndroidUtils;
+import net.osmand.FileUtils;
+import net.osmand.plus.R;
+import net.osmand.plus.base.BaseLoadAsyncTask;
+import net.osmand.plus.importfiles.ImportHelper.ImportType;
+import net.osmand.util.Algorithms;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 class UriImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 
-	private ImportHelper importHelper;
-	private Uri uri;
+	private final ImportHelper importHelper;
+	private final Uri uri;
 	private String tempFileName;
 
 	private int fileSignature;
 
-	private boolean save;
-	private boolean useImportDir;
+	private final boolean save;
+	private final boolean useImportDir;
 
 	public UriImportTask(@NonNull ImportHelper importHelper, @NonNull FragmentActivity activity,
-						 @NonNull Uri uri, boolean save, boolean useImportDir) {
+	                     @NonNull Uri uri, boolean save, boolean useImportDir) {
 		super(activity);
 		this.importHelper = importHelper;
 		this.uri = uri;
@@ -72,13 +71,7 @@ class UriImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 					Algorithms.streamCopy(is, out);
 				}
 			}
-		} catch (FileNotFoundException e) {
-			ImportHelper.log.error(e);
-			error = e.getMessage();
-		} catch (SecurityException e) {
-			ImportHelper.log.error(e);
-			error = e.getMessage();
-		} catch (IOException e) {
+		} catch (SecurityException | NullPointerException | IOException e) {
 			ImportHelper.log.error(e);
 			error = e.getMessage();
 		} finally {

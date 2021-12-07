@@ -8,6 +8,8 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.LocationManager;
 
+import androidx.lifecycle.Lifecycle.State;
+
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
@@ -78,7 +80,7 @@ public class DayNightHelper implements SensorEventListener {
 	public boolean isNightModeForProfile(ApplicationMode mode) {
 		DayNightMode dayNightMode = app.getSettings().DAYNIGHT_MODE.getModeValue(mode);
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
-		if (carNavigationSession != null) {
+		if (carNavigationSession != null && carNavigationSession.isStateAtLeast(State.CREATED)) {
 			boolean carDarkMode = carNavigationSession.getCarContext().isDarkMode();
 			dayNightMode = carDarkMode ? DayNightMode.NIGHT : DayNightMode.DAY;
 		}
@@ -86,8 +88,7 @@ public class DayNightHelper implements SensorEventListener {
 			return false;
 		} else if (dayNightMode.isNight()) {
 			return true;
-		} else // We are in auto mode!
-		if (dayNightMode.isAuto()) {
+		} else if (dayNightMode.isAuto()) { // We are in auto mode!
 			long currentTime = System.currentTimeMillis();
 			// allow recalculation each 60 seconds
 			if (currentTime - lastTime > 60000) {

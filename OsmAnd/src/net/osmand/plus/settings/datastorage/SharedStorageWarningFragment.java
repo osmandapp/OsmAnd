@@ -302,7 +302,9 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 
 	@Override
 	public void onFilesCollectingStarted() {
-		updateContent();
+		if (isAdded()) {
+			updateContent();
+		}
 	}
 
 	@Override
@@ -318,7 +320,9 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 		} else {
 			app.showToastMessage(error);
 		}
-		updateContent();
+		if (isAdded()) {
+			updateContent();
+		}
 	}
 
 	private void dismiss() {

@@ -213,7 +213,9 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 		try {
 			SearchUICore searchUICore = app.getSearchUICore().getCore();
 			SearchResultCollection res = searchUICore.shallowSearch(SearchHistoryAPI.class, "", null, false, false);
-			searchResults.addAll(res.getCurrentSearchResults());
+			if (res != null) {
+				searchResults.addAll(res.getCurrentSearchResults());
+			}
 		} catch (IOException e) {
 			log.error(e);
 		}
