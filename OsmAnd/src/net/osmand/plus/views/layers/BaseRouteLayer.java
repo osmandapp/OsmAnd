@@ -80,6 +80,12 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		initIcons();
 	}
 
+	protected boolean hasTurnArrows(){
+		if (previewRouteLineInfo != null){
+			return previewRouteLineInfo.isHasTurnArrow();
+		} else return view.getSettings().ROUTE_SHOW_TURN_ARROWS.getModeValue(getAppMode());
+	}
+
 	protected void initAttrs(float density) {
 		attrs = new RenderingLineAttributes("route");
 		attrs.defaultWidth = (int) (12 * density);
