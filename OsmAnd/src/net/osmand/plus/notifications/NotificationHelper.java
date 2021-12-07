@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.notifications;
 
 import android.annotation.TargetApi;
 import android.app.Notification;
@@ -6,21 +6,18 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat.Builder;
-import androidx.core.app.NotificationManagerCompat;
-
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.auto.CarAppNotification;
-import net.osmand.plus.notifications.DownloadNotification;
-import net.osmand.plus.notifications.ErrorNotification;
-import net.osmand.plus.notifications.GpxNotification;
-import net.osmand.plus.notifications.NavigationNotification;
-import net.osmand.plus.notifications.OsmandNotification;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat.Builder;
+import androidx.core.app.NotificationManagerCompat;
 
 public class NotificationHelper {
 

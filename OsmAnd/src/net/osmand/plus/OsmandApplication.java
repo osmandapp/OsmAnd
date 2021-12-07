@@ -69,6 +69,7 @@ import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.RateUsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
