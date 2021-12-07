@@ -73,7 +73,7 @@ import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
 import net.osmand.plus.plugins.mapillary.MapillaryFiltersFragment;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin.MapillaryFirstDialogFragment;
-import net.osmand.plus.plugins.osmedit.OsmNotesMenu;
+import net.osmand.plus.plugins.osmedit.menu.OsmNotesMenu;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
 import net.osmand.plus.routing.IRouteInformationListener;

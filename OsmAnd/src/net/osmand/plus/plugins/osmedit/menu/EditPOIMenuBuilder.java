@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.osmedit;
+package net.osmand.plus.plugins.osmedit.menu;
 
 import android.view.View;
 

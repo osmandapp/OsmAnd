@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.osmedit;
+package net.osmand.plus.plugins.osmedit.menu;
 
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
@@ -15,6 +15,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
