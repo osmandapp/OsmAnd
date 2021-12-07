@@ -1,4 +1,4 @@
-package net.osmand.plus.track;
+package net.osmand.plus.track.cards;
 
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -36,7 +36,7 @@ public class GpxInfoCard extends MapBaseCard {
 	}
 
 	@Override
-	protected void updateContent() {
+	public void updateContent() {
 		if (gpxFile.showCurrentTrack) {
 			updateVisibility(false);
 			return;

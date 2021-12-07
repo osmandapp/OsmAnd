@@ -1,4 +1,4 @@
-package net.osmand.plus.track;
+package net.osmand.plus.track.cards;
 
 import android.graphics.Typeface;
 import android.text.Spannable;
@@ -16,6 +16,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.track.GpxSplitType;
+import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 public class SplitIntervalCard extends MapBaseCard {
@@ -33,7 +35,7 @@ public class SplitIntervalCard extends MapBaseCard {
 	}
 
 	@Override
-	protected void updateContent() {
+	public void updateContent() {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.icon), false);
 
 		TextView titleView = view.findViewById(R.id.title);

@@ -1,4 +1,4 @@
-package net.osmand.plus.track;
+package net.osmand.plus.track.cards;
 
 import android.text.Spannable;
 import android.text.SpannableString;

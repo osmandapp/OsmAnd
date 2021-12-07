@@ -1,4 +1,4 @@
-package net.osmand.plus.track;
+package net.osmand.plus.track.cards;
 
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -21,6 +21,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ListStringPreference;
+import net.osmand.plus.track.CustomColorBottomSheet;
 import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.widgets.FlowLayout.LayoutParams;

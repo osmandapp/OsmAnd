@@ -29,7 +29,7 @@ import net.osmand.plus.helpers.GpsFilterHelper;
 import net.osmand.plus.helpers.GpsFilterHelper.GpsFilterListener;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import net.osmand.plus.measurementtool.SavedTrackBottomSheetDialogFragment;
-import net.osmand.plus.track.GpsFilterBaseCard.SaveIntoFileListener;
+import net.osmand.plus.track.cards.GpsFilterBaseCard.SaveIntoFileListener;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager;

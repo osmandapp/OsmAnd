@@ -1,4 +1,4 @@
-package net.osmand.plus.track;
+package net.osmand.plus.track.cards;
 
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
@@ -22,11 +22,15 @@ import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.track.AppearanceViewHolder;
+import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.GpxAppearanceAdapter.AppearanceListItem;
 import net.osmand.plus.track.GpxAppearanceAdapter.GpxAppearanceAdapterType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.track.TrackAppearanceFragment;
 import net.osmand.plus.track.TrackAppearanceFragment.OnNeedScrollListener;
+import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.util.Algorithms;
 
 import java.util.List;

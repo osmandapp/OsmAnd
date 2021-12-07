@@ -33,7 +33,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.core.graphics.ColorUtils;
 
-import static net.osmand.plus.track.ColorsCard.MINIMUM_CONTRAST_RATIO;
+import static net.osmand.plus.track.cards.ColorsCard.MINIMUM_CONTRAST_RATIO;
 
 public class CustomChartAdapter extends BaseChartAdapter<HorizontalBarChart, BarData, RouteStatistics> {
 

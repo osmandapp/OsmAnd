@@ -1,4 +1,4 @@
-package net.osmand.plus.track;
+package net.osmand.plus.track.cards;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -45,7 +45,7 @@ public class PointsGroupsCard extends MapBaseCard {
 	}
 
 	@Override
-	protected void updateContent() {
+	public void updateContent() {
 		ArrayList<HorizontalSelectionItem> items = new ArrayList<>();
 		items.add(new HorizontalSelectionItem(app.getString(R.string.shared_string_all), null));
 

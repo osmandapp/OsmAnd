@@ -12,6 +12,9 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
+import net.osmand.plus.track.cards.GpsFilterBaseCard;
+import net.osmand.plus.track.cards.GpsFilterGraphCard;
+import net.osmand.plus.track.cards.GpsFiltersCard;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip.CustomTabProvider;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager.ViewAtPositionInterface;
 
@@ -24,7 +27,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerAdapter;
 
-import static net.osmand.plus.track.GpsFilterBaseCard.RESET_FILTERS_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.GpsFilterBaseCard.RESET_FILTERS_BUTTON_INDEX;
 
 public class GpsFilterScreensAdapter extends PagerAdapter implements CustomTabProvider,
 		ViewAtPositionInterface, CardListener {

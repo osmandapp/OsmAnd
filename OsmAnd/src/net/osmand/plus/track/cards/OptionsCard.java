@@ -1,4 +1,4 @@
-package net.osmand.plus.track;
+package net.osmand.plus.track.cards;
 
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -22,6 +22,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.track.TrackDisplayHelper;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -66,7 +67,7 @@ public class OptionsCard extends MapBaseCard {
 	}
 
 	@Override
-	protected void updateContent() {
+	public void updateContent() {
 		ViewGroup itemsContainer = (ViewGroup) view;
 		itemsContainer.removeAllViews();
 		items.clear();

@@ -1,4 +1,4 @@
-package net.osmand.plus.track;
+package net.osmand.plus.track.cards;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +15,7 @@ import net.osmand.plus.myplaces.GPXItemPagerAdapter;
 import net.osmand.plus.myplaces.SegmentActionsListener;
 import net.osmand.plus.myplaces.SegmentGPXAdapter;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.track.TrackDisplayHelper;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager;
 import net.osmand.util.Algorithms;
@@ -71,7 +72,7 @@ public class SegmentsCard extends MapBaseCard {
 	}
 
 	@Override
-	protected void updateContent() {
+	public void updateContent() {
 		List<GpxDisplayItem> items = TrackDisplayHelper.flatten(displayHelper.getOriginalGroups(filterTypes));
 
 		updateLocationOnMap(items);

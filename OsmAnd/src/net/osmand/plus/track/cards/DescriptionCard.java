@@ -1,4 +1,4 @@
-package net.osmand.plus.track;
+package net.osmand.plus.track.cards;
 
 import static net.osmand.plus.wikivoyage.WikivoyageUtils.ARTICLE_LANG;
 import static net.osmand.plus.wikivoyage.WikivoyageUtils.ARTICLE_TITLE;
@@ -27,6 +27,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.track.GpxEditDescriptionDialogFragment;
+import net.osmand.plus.track.GpxReadDescriptionDialogFragment;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
@@ -54,7 +56,7 @@ public class DescriptionCard extends MapBaseCard {
 	}
 
 	@Override
-	protected void updateContent() {
+	public void updateContent() {
 		final String title = gpxFile.metadata.getArticleTitle();
 		final String imageUrl = getMetadataImageLink(gpxFile.metadata);
 		final String descriptionHtml = gpxFile.metadata.getDescription();

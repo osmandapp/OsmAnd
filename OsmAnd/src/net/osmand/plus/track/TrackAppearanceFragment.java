@@ -5,7 +5,7 @@ import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
 import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
 import static net.osmand.plus.track.GpxAppearanceAdapter.getAppearanceItems;
 import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.UPDATE_TRACK_ICON;
-import static net.osmand.plus.track.ActionsCard.RESET_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.ActionsCard.RESET_BUTTON_INDEX;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -62,6 +62,14 @@ import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
+import net.osmand.plus.track.cards.ActionsCard;
+import net.osmand.plus.track.cards.ColoringTypeCard;
+import net.osmand.plus.track.cards.ColorsCard;
+import net.osmand.plus.track.cards.DirectionArrowsCard;
+import net.osmand.plus.track.cards.ShowStartFinishCard;
+import net.osmand.plus.track.cards.SplitIntervalCard;
+import net.osmand.plus.track.cards.TrackColoringCard;
+import net.osmand.plus.track.cards.TrackWidthCard;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 

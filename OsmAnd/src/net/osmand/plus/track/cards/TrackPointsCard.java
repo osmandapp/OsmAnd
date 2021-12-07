@@ -1,4 +1,4 @@
-package net.osmand.plus.track;
+package net.osmand.plus.track.cards;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -46,6 +46,8 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.track.DisplayPointsGroupsHelper;
+import net.osmand.plus.track.TrackDisplayHelper;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -114,7 +116,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 	}
 
 	@Override
-	protected void updateContent() {
+	public void updateContent() {
 		listView = view.findViewById(android.R.id.list);
 		listView.setOnChildClickListener(this);
 

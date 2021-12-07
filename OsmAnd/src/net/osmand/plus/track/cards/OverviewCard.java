@@ -1,4 +1,4 @@
-package net.osmand.plus.track;
+package net.osmand.plus.track.cards;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
@@ -27,15 +27,17 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.SegmentActionsListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.track.GpxBlockStatisticsBuilder;
+import net.osmand.plus.track.GpxReadDescriptionDialogFragment;
 import net.osmand.util.Algorithms;
 
 import static net.osmand.AndroidUtils.dpToPx;
 import static net.osmand.plus.GpxSelectionHelper.isGpxFileSelected;
-import static net.osmand.plus.track.DescriptionCard.getMetadataImageLink;
-import static net.osmand.plus.track.OptionsCard.APPEARANCE_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.DIRECTIONS_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.EDIT_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.DescriptionCard.getMetadataImageLink;
+import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.DIRECTIONS_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
 import static net.osmand.plus.wikipedia.WikiArticleHelper.getFirstParagraph;
 
 public class OverviewCard extends MapBaseCard {
@@ -72,7 +74,7 @@ public class OverviewCard extends MapBaseCard {
 	}
 
 	@Override
-	protected void updateContent() {
+	public void updateContent() {
 		int iconColorDef = nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light;
 		int iconColorPres = R.color.active_buttons_and_links_text_dark;
 		GPXFile gpxFile = getGPXFile();
