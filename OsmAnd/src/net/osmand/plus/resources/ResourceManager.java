@@ -6,6 +6,7 @@ import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteException;
+import android.os.AsyncTask;
 import android.os.HandlerThread;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
@@ -83,6 +84,9 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Resource manager is responsible to work with all resources
@@ -448,6 +452,8 @@ public class ResourceManager {
 
 	////////////////////////////////////////////// Working with indexes ////////////////////////////////////////////////
 
+	private final ExecutorService reloadIndexesSingleThreadExecutor = Executors.newSingleThreadExecutor();
+
 	public List<String> reloadIndexesOnStart(@NonNull AppInitializer progress, List<String> warnings) {
 		close();
 		// check we have some assets to copy to sdcard
@@ -459,16 +465,66 @@ public class ResourceManager {
 		return warnings;
 	}
 
+	public void reloadIndexesAsync(@Nullable IProgress progress, @Nullable ReloadIndexesListener listener) {
+		ReloadIndexesTask reloadIndexesTask = new ReloadIndexesTask(progress, listener);
+		reloadIndexesTask.executeOnExecutor(reloadIndexesSingleThreadExecutor);
+	}
+
 	public List<String> reloadIndexes(@Nullable IProgress progress, @NonNull List<String> warnings) {
-		geoidAltitudeCorrection = new GeoidAltitudeCorrection(context.getAppPath(null));
-		// do it lazy
-		// indexingImageTiles(progress);
-		warnings.addAll(indexingMaps(progress));
-		warnings.addAll(indexVoiceFiles(progress));
-		warnings.addAll(indexFontFiles(progress));
-		warnings.addAll(OsmandPlugin.onIndexingFiles(progress));
-		warnings.addAll(indexAdditionalMaps(progress));
+		ReloadIndexesTask task = new ReloadIndexesTask(progress, null);
+		try {
+			warnings.addAll(task.executeOnExecutor(reloadIndexesSingleThreadExecutor).get());
+		} catch (ExecutionException | InterruptedException e) {
+			log.error(e);
+		}
 		return warnings;
+	}
+
+	private class ReloadIndexesTask extends AsyncTask<Void, String, List<String>> {
+
+		private final IProgress progress;
+		private final ReloadIndexesListener listener;
+
+		public ReloadIndexesTask(@Nullable IProgress progress, @Nullable ReloadIndexesListener listener) {
+			this.progress = progress;
+			this.listener = listener;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			if (listener != null) {
+				listener.reloadIndexesStarted();
+			}
+		}
+
+		@Override
+		protected List<String> doInBackground(Void... params) {
+			geoidAltitudeCorrection = new GeoidAltitudeCorrection(context.getAppPath(null));
+			// do it lazy
+			// indexingImageTiles(progress);
+			List<String> warnings = new ArrayList<>();
+			warnings.addAll(indexingMaps(progress));
+			warnings.addAll(indexVoiceFiles(progress));
+			warnings.addAll(indexFontFiles(progress));
+			warnings.addAll(OsmandPlugin.onIndexingFiles(progress));
+			warnings.addAll(indexAdditionalMaps(progress));
+
+			return warnings;
+		}
+
+		@Override
+		protected void onPostExecute(List<String> warnings) {
+			if (listener != null) {
+				listener.reloadIndexesFinished(warnings);
+			}
+		}
+	}
+
+	public interface ReloadIndexesListener {
+
+		void reloadIndexesStarted();
+
+		void reloadIndexesFinished(List<String> reloadIndexesWarnings);
 	}
 
 	public List<String> indexAdditionalMaps(@Nullable IProgress progress) {
