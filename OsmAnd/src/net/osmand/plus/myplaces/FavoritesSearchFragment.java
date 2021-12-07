@@ -48,7 +48,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.base.PointImageDrawable;
+import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 

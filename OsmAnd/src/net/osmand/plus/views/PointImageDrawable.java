@@ -1,4 +1,4 @@
-package net.osmand.plus.base;
+package net.osmand.plus.views;
 
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;

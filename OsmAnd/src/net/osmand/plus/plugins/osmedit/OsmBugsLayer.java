@@ -25,7 +25,7 @@ import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.PointImageDrawable;
+import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.plugins.osmedit.HandleOsmNoteAsyncTask.HandleBugListener;
 import net.osmand.plus.plugins.osmedit.OsmPoint.Action;
 import net.osmand.plus.plugins.osmedit.dialogs.BugBottomSheetDialog;
