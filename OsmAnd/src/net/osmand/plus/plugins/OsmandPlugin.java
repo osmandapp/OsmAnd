@@ -26,7 +26,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.CustomRegion;
+import net.osmand.plus.download.CustomRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;

@@ -11,9 +11,7 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.activities.LocalIndexHelper;
-import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
-import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.download.LocalIndexHelper.LocalIndexType;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;

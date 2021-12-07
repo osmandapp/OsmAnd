@@ -27,7 +27,7 @@ import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.CustomRegion;
+import net.osmand.plus.download.CustomRegion;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;

@@ -19,7 +19,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
 import net.osmand.map.WorldRegion;
-import net.osmand.plus.CustomRegion;
+import net.osmand.plus.download.CustomRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.resources.SQLiteTileSource;

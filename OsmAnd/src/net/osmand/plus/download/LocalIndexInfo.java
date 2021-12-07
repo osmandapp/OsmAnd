@@ -1,10 +1,10 @@
-package net.osmand.plus.activities;
+package net.osmand.plus.download;
 
 import androidx.annotation.NonNull;
 
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
+import net.osmand.plus.download.LocalIndexHelper.LocalIndexType;
 
 import java.io.File;
 

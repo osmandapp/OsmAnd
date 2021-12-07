@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.download;
 
 import android.content.Context;
 
@@ -11,9 +11,7 @@ import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
 import net.osmand.JsonUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.map.WorldRegion;
-import net.osmand.plus.download.CustomIndexItem;
-import net.osmand.plus.download.DownloadActivityType;
-import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.ui.DownloadDescriptionInfo;
 import net.osmand.util.Algorithms;
 

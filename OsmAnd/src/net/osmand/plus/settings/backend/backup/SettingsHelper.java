@@ -1,6 +1,6 @@
 package net.osmand.plus.settings.backend.backup;
 
-import static net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
+import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType;
 import static net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 
 import androidx.annotation.NonNull;
@@ -20,8 +20,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.resources.SQLiteTileSource;
-import net.osmand.plus.activities.LocalIndexHelper;
-import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.download.LocalIndexHelper;
+import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;

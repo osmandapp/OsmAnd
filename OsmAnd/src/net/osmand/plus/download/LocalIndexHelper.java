@@ -1,4 +1,4 @@
-package net.osmand.plus.activities;
+package net.osmand.plus.download;
 
 
 import android.content.Context;
@@ -9,7 +9,6 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.resources.SQLiteTileSource;
-import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.voice.JsMediaCommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
