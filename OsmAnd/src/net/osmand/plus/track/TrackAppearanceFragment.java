@@ -1,9 +1,9 @@
 package net.osmand.plus.track;
 
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
-import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
-import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
-import static net.osmand.plus.dialogs.GpxAppearanceAdapter.getAppearanceItems;
+import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
+import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
+import static net.osmand.plus.track.GpxAppearanceAdapter.getAppearanceItems;
 import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.UPDATE_TRACK_ICON;
 import static net.osmand.plus.track.ActionsCard.RESET_BUTTON_INDEX;
 
@@ -50,9 +50,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.chooseplan.PromoBannerCard;
-import net.osmand.plus.dialogs.GpxAppearanceAdapter;
-import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
-import net.osmand.plus.dialogs.GpxAppearanceAdapter.GpxAppearanceAdapterType;
+import net.osmand.plus.track.GpxAppearanceAdapter.AppearanceListItem;
+import net.osmand.plus.track.GpxAppearanceAdapter.GpxAppearanceAdapterType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet;
 import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;

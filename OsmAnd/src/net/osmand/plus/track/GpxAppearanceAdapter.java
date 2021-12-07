@@ -1,4 +1,4 @@
-package net.osmand.plus.dialogs;
+package net.osmand.plus.track;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -14,6 +14,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.render.RenderingRule;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;

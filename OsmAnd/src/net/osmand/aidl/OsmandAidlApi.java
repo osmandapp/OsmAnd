@@ -81,7 +81,7 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.dialogs.GpxAppearanceAdapter;
+import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ExternalApiHelper;
