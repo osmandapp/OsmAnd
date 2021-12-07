@@ -14,9 +14,9 @@ import net.osmand.core.jni.MapStylesCollection;
 import net.osmand.core.jni.ObfsCollection;
 import net.osmand.core.jni.QIODeviceLogSink;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.srtmplugin.SRTMPlugin;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 
 import java.io.File;
 

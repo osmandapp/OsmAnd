@@ -19,13 +19,13 @@ import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.osmedit.oauth.OsmOAuthHelper;
+import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.settings.bottomsheets.OsmLoginDataBottomSheet;
 
 import org.apache.commons.logging.Log;
 
-import static net.osmand.plus.osmedit.OsmEditingFragment.OSM_LOGIN_DATA;
-import static net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
+import static net.osmand.plus.plugins.osmedit.OsmEditingFragment.OSM_LOGIN_DATA;
+import static net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 
 public class LoginBottomSheetFragment extends MenuBottomSheetDialogFragment implements OsmAuthorizationListener {
 

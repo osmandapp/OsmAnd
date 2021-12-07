@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.map.WorldRegion;
-import net.osmand.plus.CustomOsmandPlugin;
+import net.osmand.plus.plugins.CustomOsmandPlugin;
 import net.osmand.plus.CustomRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;

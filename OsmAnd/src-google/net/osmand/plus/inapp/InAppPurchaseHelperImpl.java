@@ -18,7 +18,7 @@ import com.android.billingclient.api.SkuDetailsResponseListener;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseState;
@@ -28,7 +28,7 @@ import net.osmand.plus.inapp.InAppPurchases.PurchaseInfo;
 import net.osmand.plus.inapp.InAppPurchasesImpl.InAppPurchaseLiveUpdatesOldSubscription;
 import net.osmand.plus.inapp.util.BillingManager;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.srtmplugin.SRTMPlugin;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;

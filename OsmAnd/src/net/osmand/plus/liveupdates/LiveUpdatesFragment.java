@@ -10,8 +10,8 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayT
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
-import static net.osmand.plus.monitoring.TripRecordingBottomSheet.getOsmandIconColorId;
-import static net.osmand.plus.monitoring.TripRecordingBottomSheet.getSecondaryIconColorId;
+import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.getOsmandIconColorId;
+import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.getSecondaryIconColorId;
 
 import android.app.Activity;
 import android.app.AlarmManager;

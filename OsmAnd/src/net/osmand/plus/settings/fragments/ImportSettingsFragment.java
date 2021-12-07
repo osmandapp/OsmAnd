@@ -17,10 +17,10 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.AppInitializer;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.download.ReloadIndexesTask;
 import net.osmand.plus.download.ReloadIndexesTask.ReloadIndexesListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;

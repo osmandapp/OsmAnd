@@ -21,7 +21,7 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
+import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.BooleanPreference;
 import net.osmand.plus.settings.backend.OsmandPreference;

@@ -12,7 +12,7 @@ import android.view.KeyEvent;
 
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.helpers.ScrollHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMap;

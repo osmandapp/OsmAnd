@@ -41,6 +41,7 @@ import net.osmand.data.QuadPoint;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.LocationServiceHelper;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.routing.RouteSegmentSearchResult;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;

@@ -15,7 +15,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routing.RouteCalculationParams.RouteCalculationResultListener;

@@ -41,7 +41,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
-import net.osmand.plus.activities.PluginsFragment;
+import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.helpers.FontCache;

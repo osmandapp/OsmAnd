@@ -70,7 +70,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 

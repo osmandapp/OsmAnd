@@ -22,9 +22,9 @@ import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.util.Algorithms;
 
 import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
-import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.MAX_INTERVAL_TO_SEND_MINUTES;
-import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.MINUTES;
-import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.SECONDS;
+import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.MAX_INTERVAL_TO_SEND_MINUTES;
+import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.MINUTES;
+import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.SECONDS;
 
 public class LiveMonitoringFragment extends BaseSettingsFragment {
 

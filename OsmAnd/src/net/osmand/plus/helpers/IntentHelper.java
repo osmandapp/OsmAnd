@@ -1,6 +1,6 @@
 package net.osmand.plus.helpers;
 
-import static net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
+import static net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import static net.osmand.plus.track.TrackMenuFragment.CURRENT_RECORDING;
 import static net.osmand.plus.track.TrackMenuFragment.OPEN_TAB_NAME;
 import static net.osmand.plus.track.TrackMenuFragment.RETURN_SCREEN_NAME;
@@ -23,7 +23,7 @@ import net.osmand.plus.LauncherShortcutsHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.PluginsFragment;
+import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
@@ -31,8 +31,8 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
-import net.osmand.plus.openplacereviews.OPRConstants;
-import net.osmand.plus.openplacereviews.OprAuthHelper.OprAuthorizationListener;
+import net.osmand.plus.plugins.openplacereviews.OPRConstants;
+import net.osmand.plus.plugins.openplacereviews.OprAuthHelper.OprAuthorizationListener;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;

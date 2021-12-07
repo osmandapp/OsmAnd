@@ -3,7 +3,7 @@ package net.osmand.plus.settings.backend;
 import android.util.Log;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.util.Algorithms;
 

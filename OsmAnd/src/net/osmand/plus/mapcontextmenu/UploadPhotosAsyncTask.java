@@ -18,9 +18,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.UploadPhotoProgressBottomSheet;
-import net.osmand.plus.openplacereviews.OPRConstants;
-import net.osmand.plus.openplacereviews.OprStartFragment;
-import net.osmand.plus.osmedit.opr.OpenDBAPI;
+import net.osmand.plus.plugins.openplacereviews.OPRConstants;
+import net.osmand.plus.plugins.openplacereviews.OprStartFragment;
+import net.osmand.plus.plugins.osmedit.opr.OpenDBAPI;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

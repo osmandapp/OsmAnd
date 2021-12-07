@@ -36,7 +36,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.osmedit.AddPOIAction;
+import net.osmand.plus.plugins.osmedit.AddPOIAction;
 
 import java.util.List;
 

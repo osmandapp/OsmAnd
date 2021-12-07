@@ -85,7 +85,7 @@
 
 		<receiver android:name="net.osmand.plus.notifications.NotificationDismissReceiver" />
 		<receiver android:name="net.osmand.plus.liveupdates.LiveUpdatesAlarmReceiver" />
-		<receiver android:name="net.osmand.plus.audionotes.MediaRemoteControlReceiver">
+		<receiver android:name=".plugins.audionotes.MediaRemoteControlReceiver">
 			<intent-filter>
 				<action android:name="android.intent.action.CAMERA_BUTTON" />
 				<!-- <action android:name="android.intent.action.MEDIA_BUTTON" /> -->
@@ -1057,8 +1057,8 @@
 		</activity>
 		<activity android:name="net.osmand.plus.activities.EditPOIFilterActivity" />
 
-		<activity android:name="net.osmand.plus.development.TestVoiceActivity" />
-		<activity android:name="net.osmand.plus.development.LogcatActivity" />
+		<activity android:name=".plugins.development.TestVoiceActivity" />
+		<activity android:name=".plugins.development.LogcatActivity" />
 		<activity android:name="net.osmand.plus.download.DownloadActivity" android:label="" />
 		<activity android:name=".wikivoyage.explore.WikivoyageExploreActivity">
 
