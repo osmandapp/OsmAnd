@@ -55,7 +55,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.OsmandListActivity;
+import net.osmand.plus.base.OsmandListActivity;
 import net.osmand.plus.poi.NominatimPoiFilter;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.poi.PoiUIFilter.AmenityNameFilter;

@@ -45,7 +45,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;

@@ -1,4 +1,4 @@
-package net.osmand.plus.activities;
+package net.osmand.plus.base;
 
 import android.app.ActionBar;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.ActionBarProgressActivity;
 
 
 public abstract class OsmandListActivity extends

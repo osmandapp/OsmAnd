@@ -41,7 +41,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 import net.osmand.plus.activities.LocalIndexInfo;
-import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.download.DownloadActivity;

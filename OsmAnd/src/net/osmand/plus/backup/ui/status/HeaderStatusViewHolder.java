@@ -1,6 +1,6 @@
 package net.osmand.plus.backup.ui.status;
 
-import static net.osmand.plus.activities.OsmandBaseExpandableListAdapter.adjustIndicator;
+import static net.osmand.plus.base.OsmandBaseExpandableListAdapter.adjustIndicator;
 import static net.osmand.plus.backup.NetworkSettingsHelper.BACKUP_ITEMS_KEY;
 
 import android.graphics.drawable.Drawable;

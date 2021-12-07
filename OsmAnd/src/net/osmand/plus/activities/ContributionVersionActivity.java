@@ -22,6 +22,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.base.OsmandListActivity;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;

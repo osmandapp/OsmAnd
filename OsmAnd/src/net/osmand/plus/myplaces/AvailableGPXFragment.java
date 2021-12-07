@@ -78,7 +78,7 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.base.SelectionBottomSheet.DialogStateListener;

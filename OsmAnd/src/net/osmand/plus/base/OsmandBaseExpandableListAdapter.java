@@ -1,4 +1,4 @@
-package net.osmand.plus.activities;
+package net.osmand.plus.base;
 
 import android.graphics.drawable.Drawable;
 import android.view.View;
