@@ -21,7 +21,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
-import net.osmand.plus.views.MapTileLayer;
+import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

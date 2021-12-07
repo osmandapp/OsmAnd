@@ -1,4 +1,4 @@
-package net.osmand.plus.views;
+package net.osmand.plus.views.layers.base;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -40,6 +40,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.MapUtils;
@@ -164,7 +165,7 @@ public abstract class OsmandMapLayer {
 
 	/**
 	 * This method returns whether canvas should be rotated as
-	 * map rotated before {@link #onDraw(android.graphics.Canvas, net.osmand.data.RotatedTileBox, net.osmand.plus.views.OsmandMapLayer.DrawSettings)}.
+	 * map rotated before {@link #onDraw(android.graphics.Canvas, net.osmand.data.RotatedTileBox, OsmandMapLayer.DrawSettings)}.
 	 * If the layer draws simply layer over screen (not over map)
 	 * it should return true.
 	 */

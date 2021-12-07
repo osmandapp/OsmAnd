@@ -1,4 +1,4 @@
-package net.osmand.plus.views;
+package net.osmand.plus.views.layers;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -28,6 +28,10 @@ import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.MapTileAdapter;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.YandexTrafficAdapter;
+import net.osmand.plus.views.layers.base.BaseMapLayer;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 

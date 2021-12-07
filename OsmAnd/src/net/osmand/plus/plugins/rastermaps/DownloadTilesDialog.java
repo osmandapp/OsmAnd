@@ -24,8 +24,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.views.BaseMapLayer;
-import net.osmand.plus.views.MapTileLayer;
+import net.osmand.plus.views.layers.base.BaseMapLayer;
+import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.MapUtils;
 

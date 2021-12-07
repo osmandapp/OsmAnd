@@ -12,7 +12,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.R;
-import net.osmand.plus.views.MapTileLayer;
+import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 
 class MapillaryRasterLayer extends MapTileLayer implements MapillaryLayer {

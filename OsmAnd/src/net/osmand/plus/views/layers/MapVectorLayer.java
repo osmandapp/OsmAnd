@@ -1,4 +1,4 @@
-package net.osmand.plus.render;
+package net.osmand.plus.views.layers;
 
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.TileSourceProxyProvider;
@@ -8,10 +8,10 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
+import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.views.BaseMapLayer;
-import net.osmand.plus.views.MapTileLayer;
+import net.osmand.plus.views.layers.base.BaseMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.Algorithms;
