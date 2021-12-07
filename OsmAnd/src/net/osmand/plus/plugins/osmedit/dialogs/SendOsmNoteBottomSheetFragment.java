@@ -28,7 +28,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.plugins.osmedit.DashOsmEditsFragment;
+import net.osmand.plus.plugins.osmedit.fragments.DashOsmEditsFragment;
 import net.osmand.plus.plugins.osmedit.OsmNotesPoint;
 import net.osmand.plus.plugins.osmedit.OsmPoint;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthAuthorizationAdapter;
@@ -40,7 +40,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import static net.osmand.plus.UiUtilities.setupDialogButton;
-import static net.osmand.plus.plugins.osmedit.OsmEditingFragment.OSM_LOGIN_DATA;
+import static net.osmand.plus.plugins.osmedit.fragments.OsmEditingFragment.OSM_LOGIN_DATA;
 import static net.osmand.plus.plugins.osmedit.ValidateOsmLoginDetailsTask.ValidateOsmLoginListener;
 import static net.osmand.plus.plugins.osmedit.dialogs.SendGpxBottomSheetFragment.showOpenStreetMapScreen;
 import static net.osmand.plus.plugins.osmedit.dialogs.SendPoiBottomSheetFragment.OPENSTREETMAP_POINT;

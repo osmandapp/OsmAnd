@@ -56,7 +56,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 
 import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
-import static net.osmand.plus.plugins.osmedit.AdvancedEditPoiFragment.addPoiToStringSet;
+import static net.osmand.plus.plugins.osmedit.fragments.AdvancedEditPoiFragment.addPoiToStringSet;
 
 public class AddPOIAction extends QuickAction {
 

@@ -62,6 +62,8 @@ import net.osmand.plus.plugins.osmedit.dialogs.PoiSubTypeDialogFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.PoiTypeDialogFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.SaveExtraValidationDialogFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.ValueExceedLimitDialogFragment;
+import net.osmand.plus.plugins.osmedit.fragments.AdvancedEditPoiFragment;
+import net.osmand.plus.plugins.osmedit.fragments.BasicEditPoiFragment;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;

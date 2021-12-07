@@ -15,7 +15,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.osmedit.BasicEditPoiFragment;
+import net.osmand.plus.plugins.osmedit.fragments.BasicEditPoiFragment;
 import net.osmand.util.OpeningHoursParser;
 
 public class OpeningHoursHoursDialogFragment extends DialogFragment {

@@ -19,6 +19,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.plugins.osmedit.OsmPoint.Group;
+import net.osmand.plus.plugins.osmedit.fragments.OsmEditsFragment;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

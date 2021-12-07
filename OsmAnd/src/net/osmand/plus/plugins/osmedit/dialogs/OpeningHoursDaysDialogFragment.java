@@ -12,7 +12,7 @@ import androidx.fragment.app.DialogFragment;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.osmedit.BasicEditPoiFragment;
+import net.osmand.plus.plugins.osmedit.fragments.BasicEditPoiFragment;
 import net.osmand.util.OpeningHoursParser;
 
 import org.apache.commons.logging.Log;

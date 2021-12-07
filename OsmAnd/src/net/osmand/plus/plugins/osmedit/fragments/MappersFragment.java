@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.osmedit;
+package net.osmand.plus.plugins.osmedit.fragments;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;

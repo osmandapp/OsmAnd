@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.osmedit;
+package net.osmand.plus.plugins.osmedit.fragments;
 
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
@@ -49,12 +49,25 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.myplaces.FavoritesFragmentStateHolder;
+import net.osmand.plus.plugins.osmedit.EditPoiDialogFragment;
+import net.osmand.plus.plugins.osmedit.ExportOptionsBottomSheetDialogFragment;
 import net.osmand.plus.plugins.osmedit.ExportOptionsBottomSheetDialogFragment.ExportOptionsFragmentListener;
+import net.osmand.plus.plugins.osmedit.FileTypeBottomSheetDialogFragment;
 import net.osmand.plus.plugins.osmedit.FileTypeBottomSheetDialogFragment.FileTypeFragmentListener;
 import net.osmand.plus.plugins.osmedit.OpenstreetmapLocalUtil.OnNodeCommittedListener;
+import net.osmand.plus.plugins.osmedit.OpenstreetmapPoint;
+import net.osmand.plus.plugins.osmedit.OsmEditOptionsBottomSheetDialogFragment;
 import net.osmand.plus.plugins.osmedit.OsmEditOptionsBottomSheetDialogFragment.OsmEditOptionsFragmentListener;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.plugins.osmedit.OsmEditsAdapter;
+import net.osmand.plus.plugins.osmedit.OsmEditsUploadListener;
+import net.osmand.plus.plugins.osmedit.OsmEditsUploadListenerHelper;
+import net.osmand.plus.plugins.osmedit.OsmNotesPoint;
+import net.osmand.plus.plugins.osmedit.OsmPoint;
 import net.osmand.plus.plugins.osmedit.OsmPoint.Group;
+import net.osmand.plus.plugins.osmedit.ShareOsmPointsAsyncTask;
 import net.osmand.plus.plugins.osmedit.ShareOsmPointsAsyncTask.ShareOsmPointsListener;
+import net.osmand.plus.plugins.osmedit.UploadOpenstreetmapPointAsyncTask;
 import net.osmand.plus.plugins.osmedit.dialogs.ProgressDialogPoiUploader;
 import net.osmand.plus.plugins.osmedit.dialogs.SendOsmNoteBottomSheetFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.SendPoiBottomSheetFragment;
@@ -78,7 +91,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 
 	@Retention(RetentionPolicy.SOURCE)
 	@IntDef({EXPORT_TYPE_ALL, EXPORT_TYPE_POI, EXPORT_TYPE_NOTES})
-	@interface ExportTypesDef {
+	public @interface ExportTypesDef {
 	}
 
 	public static final int FILE_TYPE_OSC = 0;
@@ -86,7 +99,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 
 	@Retention(RetentionPolicy.SOURCE)
 	@IntDef({FILE_TYPE_OSC, FILE_TYPE_GPX})
-	@interface FileTypesDef {
+	public @interface FileTypesDef {
 	}
 
 	private static final String EXPORT_TYPE_KEY = "export_type";

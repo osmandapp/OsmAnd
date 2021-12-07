@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.osmedit;
+package net.osmand.plus.plugins.osmedit.fragments;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -33,6 +33,11 @@ import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.plugins.osmedit.EditPoiData;
+import net.osmand.plus.plugins.osmedit.EditPoiData.TagsChangedListener;
+import net.osmand.plus.plugins.osmedit.EditPoiDialogFragment;
+import net.osmand.plus.plugins.osmedit.EditPoiDialogFragment.OnFragmentActivatedListener;
+import net.osmand.plus.plugins.osmedit.EditPoiDialogFragment.OnSaveButtonClickListener;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -45,13 +50,13 @@ import java.util.Set;
 import static net.osmand.plus.plugins.osmedit.EditPoiDialogFragment.AMENITY_TEXT_LENGTH;
 
 public class AdvancedEditPoiFragment extends BaseOsmAndFragment
-		implements EditPoiDialogFragment.OnFragmentActivatedListener,
-		EditPoiDialogFragment.OnSaveButtonClickListener {
+		implements OnFragmentActivatedListener,
+		OnSaveButtonClickListener {
 	private static final String TAG = "AdvancedEditPoiFragment";
 	private static final Log LOG = PlatformUtil.getLog(AdvancedEditPoiFragment.class);
 
 	private TagAdapterLinearLayoutHack mAdapter;
-	private EditPoiData.TagsChangedListener mTagsChangedListener;
+	private TagsChangedListener mTagsChangedListener;
 	private Drawable deleteDrawable;
 	private TextView nameTextView;
 	private TextView amenityTagTextView;
@@ -107,7 +112,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 		mAdapter.updateViews();
 		updateName();
 		updatePoiType();
-		mTagsChangedListener = new EditPoiData.TagsChangedListener() {
+		mTagsChangedListener = new TagsChangedListener() {
 			@Override
 			public void onTagsChanged(String anyTag) {
 				if (Algorithms.objectEquals(anyTag, OSMSettings.OSMTagKey.NAME.getValue())) {

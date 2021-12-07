@@ -1,6 +1,6 @@
-package net.osmand.plus.plugins.osmedit;
+package net.osmand.plus.plugins.osmedit.fragments;
 
-import static net.osmand.plus.plugins.osmedit.OsmEditingFragment.OSM_LOGIN_DATA;
+import static net.osmand.plus.plugins.osmedit.fragments.OsmEditingFragment.OSM_LOGIN_DATA;
 
 import android.graphics.drawable.Drawable;
 import android.os.Build;

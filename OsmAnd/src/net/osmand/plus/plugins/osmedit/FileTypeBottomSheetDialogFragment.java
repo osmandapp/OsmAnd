@@ -10,7 +10,8 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.plugins.osmedit.OsmEditsFragment.FileTypesDef;
+import net.osmand.plus.plugins.osmedit.fragments.OsmEditsFragment;
+import net.osmand.plus.plugins.osmedit.fragments.OsmEditsFragment.FileTypesDef;
 
 public class FileTypeBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 

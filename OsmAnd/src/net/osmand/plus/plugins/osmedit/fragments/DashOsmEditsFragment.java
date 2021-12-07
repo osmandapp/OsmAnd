@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.osmedit;
+package net.osmand.plus.plugins.osmedit.fragments;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -20,6 +20,13 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
+import net.osmand.plus.plugins.osmedit.OpenstreetmapPoint;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.plugins.osmedit.OsmEditsUploadListener;
+import net.osmand.plus.plugins.osmedit.OsmEditsUploadListenerHelper;
+import net.osmand.plus.plugins.osmedit.OsmNotesPoint;
+import net.osmand.plus.plugins.osmedit.OsmPoint;
+import net.osmand.plus.plugins.osmedit.UploadOpenstreetmapPointAsyncTask;
 import net.osmand.plus.plugins.osmedit.dialogs.ProgressDialogPoiUploader;
 import net.osmand.plus.plugins.osmedit.dialogs.SendOsmNoteBottomSheetFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.SendPoiBottomSheetFragment;
@@ -48,7 +55,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 					return TITLE_ID;
 				}
 			};
-	static final DashFragmentData FRAGMENT_DATA =
+	public static final DashFragmentData FRAGMENT_DATA =
 			new DashFragmentData(TAG, DashOsmEditsFragment.class, SHOULD_SHOW_FUNCTION, 130, ROW_NUMBER_TAG);
 
 	OsmEditingPlugin plugin;
