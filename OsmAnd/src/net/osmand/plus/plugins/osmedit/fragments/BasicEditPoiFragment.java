@@ -31,8 +31,8 @@ import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.plugins.osmedit.EditPoiData;
-import net.osmand.plus.plugins.osmedit.EditPoiDialogFragment;
-import net.osmand.plus.plugins.osmedit.EditPoiDialogFragment.OnFragmentActivatedListener;
+import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
+import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment.OnFragmentActivatedListener;
 import net.osmand.plus.plugins.osmedit.dialogs.OpeningHoursDaysDialogFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.OpeningHoursHoursDialogFragment;
 import net.osmand.util.Algorithms;
@@ -45,7 +45,7 @@ import java.util.Map;
 
 import gnu.trove.list.array.TIntArrayList;
 
-import static net.osmand.plus.plugins.osmedit.EditPoiDialogFragment.AMENITY_TEXT_LENGTH;
+import static net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment.AMENITY_TEXT_LENGTH;
 
 public class BasicEditPoiFragment extends BaseOsmAndFragment
 		implements OnFragmentActivatedListener {

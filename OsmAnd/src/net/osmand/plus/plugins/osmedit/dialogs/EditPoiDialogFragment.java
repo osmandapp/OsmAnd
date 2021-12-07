@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.osmedit;
+package net.osmand.plus.plugins.osmedit.dialogs;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -56,12 +56,15 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.plugins.osmedit.EditPoiData;
+import net.osmand.plus.plugins.osmedit.EditPoiViewPager;
+import net.osmand.plus.plugins.osmedit.OpenstreetmapLocalUtil;
+import net.osmand.plus.plugins.osmedit.OpenstreetmapPoint;
+import net.osmand.plus.plugins.osmedit.OpenstreetmapRemoteUtil;
+import net.osmand.plus.plugins.osmedit.OpenstreetmapUtil;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.plugins.osmedit.OsmPoint;
 import net.osmand.plus.plugins.osmedit.OsmPoint.Action;
-import net.osmand.plus.plugins.osmedit.dialogs.AreYouSureBottomSheetDialogFragment;
-import net.osmand.plus.plugins.osmedit.dialogs.PoiSubTypeDialogFragment;
-import net.osmand.plus.plugins.osmedit.dialogs.PoiTypeDialogFragment;
-import net.osmand.plus.plugins.osmedit.dialogs.SaveExtraValidationDialogFragment;
-import net.osmand.plus.plugins.osmedit.dialogs.ValueExceedLimitDialogFragment;
 import net.osmand.plus.plugins.osmedit.fragments.AdvancedEditPoiFragment;
 import net.osmand.plus.plugins.osmedit.fragments.BasicEditPoiFragment;
 import net.osmand.plus.settings.backend.OsmandSettings;

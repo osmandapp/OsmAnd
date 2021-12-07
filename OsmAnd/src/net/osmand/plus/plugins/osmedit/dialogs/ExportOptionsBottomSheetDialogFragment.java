@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.osmedit;
+package net.osmand.plus.plugins.osmedit.dialogs;
 
 import android.os.Bundle;
 import android.view.View;

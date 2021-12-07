@@ -45,6 +45,7 @@ import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.plugins.osmedit.OsmPoint.Action;
+import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.SendGpxBottomSheetFragment;
 import net.osmand.plus.plugins.osmedit.fragments.DashOsmEditsFragment;
 import net.osmand.plus.plugins.osmedit.fragments.OsmEditsFragment;

@@ -8,7 +8,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.plugins.osmedit.EditPoiDialogFragment;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;

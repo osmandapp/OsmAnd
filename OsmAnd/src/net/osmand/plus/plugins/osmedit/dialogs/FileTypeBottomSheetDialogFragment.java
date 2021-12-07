@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.osmedit;
+package net.osmand.plus.plugins.osmedit.dialogs;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;

@@ -8,7 +8,6 @@ import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
-import net.osmand.plus.plugins.osmedit.EditPoiDialogFragment;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
