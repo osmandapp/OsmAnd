@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
+import net.osmand.plus.track.GpxTrackAdapter;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;

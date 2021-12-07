@@ -1,4 +1,4 @@
-package net.osmand.plus.helpers;
+package net.osmand.plus.track;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
+import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.OsmAndFormatter;
