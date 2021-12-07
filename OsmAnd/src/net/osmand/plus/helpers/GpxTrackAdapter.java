@@ -8,6 +8,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
@@ -25,10 +29,6 @@ import java.io.File;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -148,7 +148,7 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 	private void updateGpxInfoView(TrackViewHolder holder, String itemTitle, GPXInfo info,
 	                               GpxDataItem dataItem, boolean currentlyRecordingTrack,
 	                               OsmandApplication app) {
-		holder.name.setText(itemTitle.replace("/", " • ").trim());
+		holder.title.setText(itemTitle.replace("/", " • ").trim());
 		GPXUtilities.GPXTrackAnalysis analysis = null;
 		if (currentlyRecordingTrack) {
 			analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis(app);
@@ -207,7 +207,7 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 	static class TrackViewHolder extends RecyclerView.ViewHolder {
 
 		ImageView icon;
-		TextView name;
+		TextView title;
 		TextView distance;
 		TextView pointsCount;
 		TextView time;
@@ -218,7 +218,7 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 		TrackViewHolder(View itemView) {
 			super(itemView);
 			icon = itemView.findViewById(R.id.icon);
-			name = itemView.findViewById(R.id.name);
+			title = itemView.findViewById(R.id.title);
 			distance = itemView.findViewById(R.id.distance);
 			pointsCount = itemView.findViewById(R.id.points_count);
 			time = itemView.findViewById(R.id.time);

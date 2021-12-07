@@ -2055,7 +2055,7 @@
     <string name="poi_payment_ep_monedero_no">Monedero не приймаються</string>
     <string name="poi_bridge_pedestrian">Пішохідний міст</string>
     <string name="poi_site_type_tumulus">Курган</string>
-    <string name="poi_aerodrome_type_public">Громадський</string>
+    <string name="poi_aerodrome_type_public">Загальнодоступний</string>
     <string name="poi_barometer_yes">Барометр</string>
     <string name="poi_payment_bankaxess_yes">BankAxess</string>
     <string name="poi_bridge_bicycle">Велосипедний міст</string>

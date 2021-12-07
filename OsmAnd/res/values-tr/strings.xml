@@ -4483,4 +4483,8 @@
     <string name="routing_attr_only_permitted_ways_description">Yalnızca açıkça izin verilen yolları (izler, patikalar vb.) kullanın</string>
     <string name="shared_string_details">Ayrıntılar</string>
     <string name="is_disabled">%1$s devre dışı</string>
+    <string name="use_routing_fallback">Yönlendirme yedeği kullan</string>
+    <string name="use_routing_fallback_description">Çevrim içi yönlendirmeye ulaşılamadığında çevrim dışı yönlendirmeyi kullanın.</string>
+    <string name="created_on">Oluşturulma tarihi</string>
+    <string name="shared_string_size">Boyut</string>
 </resources>

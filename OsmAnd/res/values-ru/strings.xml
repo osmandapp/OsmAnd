@@ -4488,4 +4488,8 @@
 \nТочки трека, находящиеся на расстоянии менее заданного от последней видимой точки, будут скрыты.
 \nИмейте в виду, что высокие пороговые значения могут чрезмерно упростить геометрию трека.</string>
     <string name="storage_migration_wrong_folder_warning">В выбранной папке данные OsmAnd не найдены. Повторите попытку.</string>
+    <string name="created_on">Создано на</string>
+    <string name="use_routing_fallback">Использовать резервную маршрутизацию</string>
+    <string name="shared_string_size">Размер</string>
+    <string name="use_routing_fallback_description">Использовать офлайн маршрутизацию, если онлайн недоступна.</string>
 </resources>

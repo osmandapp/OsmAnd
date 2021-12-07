@@ -42,7 +42,7 @@
     <string name="live_now_description">Контакти та групи, які транслюють свою позицію Вам.</string>
     <string name="logout_from_osmand_telegram_descr">Ви впевнені, що бажаєте вийти з OsmAnd Tracker, оскільки не зможете транслювати свою позицію чи бачити позицію інших\?</string>
     <string name="logout_from_osmand_telegram">Вийти з OsmAnd Tracker\?</string>
-    <string name="shared_string_name">Імʼя</string>
+    <string name="shared_string_name">Назва</string>
     <string name="by_distance">За відстанню</string>
     <string name="by_name">За імʼям</string>
     <string name="by_group">За групою</string>
@@ -89,7 +89,7 @@
     <string name="hours_and_minutes_format">%1$d г %2$d хв</string>
     <string name="minutes_format">%1$d хв</string>
     <string name="hours_format">%1$d г</string>
-    <string name="shared_string_install">Установити</string>
+    <string name="shared_string_install">Встановити</string>
     <string name="shared_string_share">Поділитися</string>
     <string name="shared_string_back">Назад</string>
     <string name="set_time">Оберіть час</string>
@@ -115,10 +115,10 @@
     <string name="not_logged_in">Ви не увійшли до системи</string>
     <string name="shared_string_continue">Продовжити</string>
     <string name="shared_string_cancel">Скасувати</string>
-    <string name="shared_string_settings">Параметри</string>
+    <string name="shared_string_settings">Налаштування</string>
     <string name="no_location_permission">Застосунок не має дозволу до отримання даних позиціювання.</string>
     <string name="gps_not_available">Будь ласка, увімкніть «Позиціювання» у системних налаштуваннях</string>
-    <string name="osmand_service">Режим тла</string>
+    <string name="osmand_service">Фоновий режим</string>
     <string name="osmand_service_descr">OsmAnd Tracker працює у фоновому режимі з вимкненим екраном.</string>
     <string name="shared_string_distance">Віддаль</string>
     <string name="share_location">Поділитися позицією</string>
@@ -161,7 +161,7 @@
     <string name="send_my_location_desc">Установіть мінімальний інтервал між надсиланням позиції.</string>
     <string name="expire_at">Діє до</string>
     <string name="last_update_from_telegram">Нещодавнє оновлення з Telegram</string>
-    <string name="shared_string_ok">Гаразд</string>
+    <string name="shared_string_ok">Так</string>
     <string name="timeline_available_for_free_now">Хронологія тепер доступна безкоштовно.</string>
     <string name="disable_monitoring">Вимкнути моніторинг</string>
     <string name="shared_string_telegram">Telegram</string>
@@ -177,7 +177,7 @@
     <string name="gps_points">GPS точки</string>
     <string name="shared_string_sent">Надіслати</string>
     <string name="average_altitude">Середня висота</string>
-    <string name="average_speed">Середня швидкість</string>
+    <string name="average_speed">Рекомендована швидкість</string>
     <string name="open_in_osmand">Показати в OsmAnd</string>
     <string name="end_date">Дата завершення</string>
     <string name="start_date">Дата початку</string>
@@ -253,7 +253,7 @@
     <string name="time_zone">Часовий пояс</string>
     <string name="units_and_formats">Одиниці виміру й формати</string>
     <string name="unit_of_length">Одиниці вимірювання довжини</string>
-    <string name="unit_of_length_descr">Змінити одиницю вимірювання відстані.</string>
+    <string name="unit_of_length_descr">Змінити одиниці вимірювання відстані.</string>
     <string name="unit_of_speed_system_descr">Визначити одиницю вимірювання швидкості.</string>
     <string name="unit_of_speed_system">Одиниця вимірювання швидкості</string>
     <string name="buffer_time_descr">Найбільший час зберігання точок у буфері</string>
@@ -269,6 +269,6 @@
     <string name="shared_string_error_short">ПМЛК</string>
     <string name="shared_string_export">Експорт</string>
     <string name="logcat_buffer">Буфер logcat</string>
-    <string name="logcat_buffer_descr">Переглянути та надіслати докладний журнал застосунку</string>
+    <string name="logcat_buffer_descr">Переглянути та надіслати докладний журнал роботи застосунку</string>
     <string name="send_report">Надіслати звіт</string>
 </resources>

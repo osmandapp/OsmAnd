@@ -10,8 +10,13 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributions/translating-osmand
 	Thx - Hardy
 -->
+
     <string name="turn_arrows">Turn Arrows</string>
     <string name="turn_arrows_descr">Control the visibility of the turn arrows on the route line.</string>
+    <string name="shared_string_size">Size</string>
+    <string name="created_on">Created on</string>
+    <string name="use_routing_fallback">Use routing fallback</string>
+    <string name="use_routing_fallback_description">Use offline routing when online routing cannot be reached.</string>
     <string name="gps_filter_precision">GPS precision</string>
     <string name="shared_string_precision">Precision</string>
     <string name="shared_string_statistics">Statistics</string>

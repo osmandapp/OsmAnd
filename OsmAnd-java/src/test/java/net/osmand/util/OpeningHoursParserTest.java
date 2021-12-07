@@ -532,7 +532,7 @@ public class OpeningHoursParserTest {
 			testOpened("22.01.2018 02:00", hours, true);
 			testOpened("22.01.2018 17:00", hours, true);
 			testInfo("22.01.2018 05:00", hours, "Will open at 07:00 - Restaurant", 0);
-			testInfo("22.01.2018 04:00", hours, "Open 24/7 - McDrive", 1);
+			testInfo("22.01.2018 04:00", hours, "McDrive", 1);
 
 			hours = parseOpenedHours("Mo-Fr 12:00-15:00, Tu-Fr 17:00-23:00, Sa 12:00-23:00, Su 14:00-23:00");
 			System.out.println(hours);
