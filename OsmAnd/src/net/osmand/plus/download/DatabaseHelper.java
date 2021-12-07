@@ -1,4 +1,4 @@
-package net.osmand.plus.helpers;
+package net.osmand.plus.download;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI;
