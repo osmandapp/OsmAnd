@@ -48,7 +48,7 @@ import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet;

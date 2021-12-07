@@ -17,7 +17,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;

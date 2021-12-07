@@ -39,7 +39,7 @@ import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;

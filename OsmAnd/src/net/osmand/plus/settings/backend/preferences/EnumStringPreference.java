@@ -1,16 +1,18 @@
-package net.osmand.plus.settings.backend;
+package net.osmand.plus.settings.backend.preferences;
+
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class EnumStringPreference<E extends Enum<E>> extends CommonPreference<E> {
 
 	private final E[] values;
 
-	EnumStringPreference(OsmandSettings settings, String id, E defaultValue, E[] values) {
+	public EnumStringPreference(OsmandSettings settings, String id, E defaultValue, E[] values) {
 		super(settings, id, defaultValue);
 		this.values = values;
 	}
 
 	@Override
-	protected E getValue(Object prefs, E defaultValue) {
+	public E getValue(Object prefs, E defaultValue) {
 		try {
 			String defaultValueName = defaultValue == null ? null : defaultValue.name();
 			String name = getSettingsAPI().getString(prefs, getId(), defaultValueName);

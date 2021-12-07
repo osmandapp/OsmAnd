@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;

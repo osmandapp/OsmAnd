@@ -35,7 +35,7 @@ import net.osmand.plus.liveupdates.LiveUpdatesClearBottomSheet.RefreshLiveUpdate
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import net.osmand.plus.resources.IncrementalChangesManager;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem;

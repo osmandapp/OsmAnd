@@ -11,7 +11,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.render.RendererRegistry;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;

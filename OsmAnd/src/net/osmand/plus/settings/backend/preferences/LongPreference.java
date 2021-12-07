@@ -1,13 +1,15 @@
-package net.osmand.plus.settings.backend;
+package net.osmand.plus.settings.backend.preferences;
+
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class LongPreference extends CommonPreference<Long> {
 
-	LongPreference(OsmandSettings settings, String id, long defaultValue) {
+	public LongPreference(OsmandSettings settings, String id, long defaultValue) {
 		super(settings, id, defaultValue);
 	}
 
 	@Override
-	protected Long getValue(Object prefs, Long defaultValue) {
+	public Long getValue(Object prefs, Long defaultValue) {
 		return getSettingsAPI().getLong(prefs, getId(), defaultValue);
 	}
 

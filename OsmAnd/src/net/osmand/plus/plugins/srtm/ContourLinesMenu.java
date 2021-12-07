@@ -15,7 +15,7 @@ import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.SelectIndexesHelper;
 import net.osmand.plus.download.SrtmDownloadItem;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;

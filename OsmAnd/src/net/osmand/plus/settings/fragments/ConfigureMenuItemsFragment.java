@@ -47,7 +47,7 @@ import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.ContextMenuItemsPreference;
+import net.osmand.plus.settings.backend.preferences.ContextMenuItemsPreference;
 import net.osmand.plus.settings.backend.ContextMenuItemsSettings;
 import net.osmand.plus.settings.backend.DrawerMenuItemsSettings;
 import net.osmand.plus.settings.backend.MainContextMenuItemsSettings;

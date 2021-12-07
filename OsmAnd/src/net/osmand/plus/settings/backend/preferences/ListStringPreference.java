@@ -1,4 +1,7 @@
-package net.osmand.plus.settings.backend;
+package net.osmand.plus.settings.backend.preferences;
+
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,7 +11,7 @@ public class ListStringPreference extends StringPreference {
 
 	private String delimiter;
 
-	ListStringPreference(OsmandSettings osmandSettings, String id, String defaultValue, String delimiter) {
+	public ListStringPreference(OsmandSettings osmandSettings, String id, String defaultValue, String delimiter) {
 		super(osmandSettings, id, defaultValue);
 		this.delimiter = delimiter;
 	}

@@ -18,7 +18,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.routing.data.StreetName;

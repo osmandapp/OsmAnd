@@ -20,6 +20,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 
+import net.osmand.plus.settings.backend.preferences.BooleanAccessibilityPreference;
+import net.osmand.plus.settings.backend.preferences.BooleanPreference;
+import net.osmand.plus.settings.backend.preferences.BooleanStringPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.ContextMenuItemsPreference;
+import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
+import net.osmand.plus.settings.backend.preferences.FloatPreference;
+import net.osmand.plus.settings.backend.preferences.IntPreference;
+import net.osmand.plus.settings.backend.preferences.ListStringPreference;
+import net.osmand.plus.settings.backend.preferences.LongPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.PreferenceWithListener;
+import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -564,19 +577,19 @@ public class OsmandSettings {
 		}
 	}
 
-	<T> void registerInternalPreference(String id, CommonPreference<T> tCommonPreference) {
+	public <T> void registerInternalPreference(String id, CommonPreference<T> tCommonPreference) {
 		registeredPreferences.put(id, tCommonPreference);
 	}
 
-	boolean isSet(boolean global, String id) {
+	public boolean isSet(boolean global, String id) {
 		return settingsAPI.contains(getPreferences(global), id);
 	}
 
-	boolean isSet(ApplicationMode m, String id) {
+	public boolean isSet(ApplicationMode m, String id) {
 		return settingsAPI.contains(getProfilePreferences(m), id);
 	}
 
-	Object getPreferences(boolean global) {
+	public Object getPreferences(boolean global) {
 		return global ? globalPreferences : profilePreferences;
 	}
 
@@ -604,7 +617,7 @@ public class OsmandSettings {
 		return settingsAPI.getLong(preferences, LAST_PREFERENCES_EDIT_TIME, 0);
 	}
 
-	protected void updateLastPreferencesEditTime(Object preferences) {
+	public void updateLastPreferencesEditTime(Object preferences) {
 		long time = System.currentTimeMillis();
 		updateLastPreferencesEditTime(preferences, time);
 	}
@@ -816,7 +829,7 @@ public class OsmandSettings {
 	public final OsmandPreference<ApplicationMode> DEFAULT_APPLICATION_MODE = new CommonPreference<ApplicationMode>(this, "default_application_mode_string", ApplicationMode.DEFAULT) {
 
 		@Override
-		protected ApplicationMode getValue(Object prefs, ApplicationMode defaultValue) {
+		public ApplicationMode getValue(Object prefs, ApplicationMode defaultValue) {
 			String key;
 			if (USE_LAST_APPLICATION_MODE_BY_DEFAULT.get()) {
 				key = LAST_USED_APPLICATION_MODE.get();
@@ -868,7 +881,7 @@ public class OsmandSettings {
 	public final OsmandPreference<ApplicationMode> LAST_ROUTE_APPLICATION_MODE = new CommonPreference<ApplicationMode>(this, "last_route_application_mode_backup_string", ApplicationMode.DEFAULT) {
 
 		@Override
-		protected ApplicationMode getValue(Object prefs, ApplicationMode defaultValue) {
+		 public ApplicationMode getValue(Object prefs, ApplicationMode defaultValue) {
 			String key = settingsAPI.getString(prefs, getId(), defaultValue.getStringKey());
 			return ApplicationMode.valueOfStringKey(key, defaultValue);
 		}

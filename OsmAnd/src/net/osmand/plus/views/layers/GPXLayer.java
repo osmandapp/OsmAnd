@@ -57,7 +57,7 @@ import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.routing.ColoringType;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.track.CachedTrack;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.track.SaveGpxAsyncTask;

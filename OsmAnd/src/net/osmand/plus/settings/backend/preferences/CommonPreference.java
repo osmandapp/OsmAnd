@@ -1,10 +1,12 @@
-package net.osmand.plus.settings.backend;
+package net.osmand.plus.settings.backend.preferences;
 
 import android.util.Log;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.api.SettingsAPI;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -37,7 +39,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	}
 
 	// Methods to possibly override
-	protected abstract T getValue(Object prefs, T defaultValue);
+	public abstract T getValue(Object prefs, T defaultValue);
 
 	protected long getLastModifiedTime(Object prefs) {
 		if (!lastModifiedTimeStored) {

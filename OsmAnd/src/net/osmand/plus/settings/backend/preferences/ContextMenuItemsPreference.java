@@ -1,18 +1,22 @@
-package net.osmand.plus.settings.backend;
+package net.osmand.plus.settings.backend.preferences;
+
+import net.osmand.plus.settings.backend.ContextMenuItemsSettings;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 import androidx.annotation.NonNull;
 
 public class ContextMenuItemsPreference extends CommonPreference<ContextMenuItemsSettings> {
+
 	@NonNull
 	private String idScheme;
 
-	ContextMenuItemsPreference(OsmandSettings settings, String id, @NonNull String idScheme, @NonNull ContextMenuItemsSettings defValue) {
+	public ContextMenuItemsPreference(OsmandSettings settings, String id, @NonNull String idScheme, @NonNull ContextMenuItemsSettings defValue) {
 		super(settings, id, defValue);
 		this.idScheme = idScheme;
 	}
 
 	@Override
-	protected ContextMenuItemsSettings getValue(Object prefs, ContextMenuItemsSettings defaultValue) {
+	public ContextMenuItemsSettings getValue(Object prefs, ContextMenuItemsSettings defaultValue) {
 		String s = getSettingsAPI().getString(prefs, getId(), defaultValue.writeToJsonString(idScheme));
 		return readValue(s);
 	}

@@ -28,7 +28,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.myplaces.AddNewTrackFolderBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.settings.backend.ListStringPreference;
+import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.track.cards.ColorsCard;
 import net.osmand.util.Algorithms;
 

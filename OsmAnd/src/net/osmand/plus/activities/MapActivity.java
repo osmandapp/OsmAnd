@@ -134,7 +134,7 @@ import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;

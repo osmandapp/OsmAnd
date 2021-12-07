@@ -20,7 +20,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.ListStringPreference;
+import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.track.fragments.CustomColorBottomSheet;
 import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.widgets.FlowLayout;

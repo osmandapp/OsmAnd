@@ -59,7 +59,7 @@ import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routing.ColoringType;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SplitTrackAsyncTask;

@@ -23,7 +23,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ConfigureMapUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.render.RenderingRuleProperty;
 

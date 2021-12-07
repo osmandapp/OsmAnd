@@ -27,7 +27,7 @@ import net.osmand.plus.download.ReloadIndexesTask.ReloadIndexesListener;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RendererRegistry.IRendererLoadedEventListener;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.render.RenderingRule;
 import net.osmand.render.RenderingRulesStorage;

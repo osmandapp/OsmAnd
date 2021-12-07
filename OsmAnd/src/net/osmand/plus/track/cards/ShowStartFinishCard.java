@@ -10,7 +10,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
-import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.track.TrackDrawInfo;
 
 public class ShowStartFinishCard extends MapBaseCard {

@@ -1,13 +1,15 @@
-package net.osmand.plus.settings.backend;
+package net.osmand.plus.settings.backend.preferences;
+
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class BooleanPreference extends CommonPreference<Boolean> {
 
-	BooleanPreference(OsmandSettings settings, String id, boolean defaultValue) {
+	public BooleanPreference(OsmandSettings settings, String id, boolean defaultValue) {
 		super(settings, id, defaultValue);
 	}
 
 	@Override
-	protected Boolean getValue(Object prefs, Boolean defaultValue) {
+	public Boolean getValue(Object prefs, Boolean defaultValue) {
 		return getSettingsAPI().getBoolean(prefs, getId(), defaultValue);
 	}
 

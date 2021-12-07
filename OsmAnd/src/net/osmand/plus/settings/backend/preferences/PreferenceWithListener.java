@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.backend;
+package net.osmand.plus.settings.backend.preferences;
 
 import net.osmand.StateChangedListener;
 
@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-abstract class PreferenceWithListener<T> implements OsmandPreference<T> {
+public abstract class PreferenceWithListener<T> implements OsmandPreference<T> {
 	private List<WeakReference<StateChangedListener<T>>> l = null;
 
 	@Override

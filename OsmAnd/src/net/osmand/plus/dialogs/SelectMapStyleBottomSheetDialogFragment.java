@@ -36,7 +36,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTitleWithDescrAndButt
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.render.RendererRegistry;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRulesStorage;

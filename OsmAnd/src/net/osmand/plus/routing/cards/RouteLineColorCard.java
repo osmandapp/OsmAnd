@@ -23,7 +23,7 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.routing.ColoringType;
-import net.osmand.plus.settings.backend.ListStringPreference;
+import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.fragments.HeaderInfo;
 import net.osmand.plus.settings.fragments.HeaderUiAdapter;
 import net.osmand.plus.track.AppearanceViewHolder;

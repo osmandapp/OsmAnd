@@ -26,7 +26,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.StringPreference;
+import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.settings.bottomsheets.VehicleParametersBottomSheet;
 import net.osmand.plus.settings.bottomsheets.VehicleSizeAssets;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;

@@ -65,7 +65,7 @@ import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.render.RenderingRuleProperty;

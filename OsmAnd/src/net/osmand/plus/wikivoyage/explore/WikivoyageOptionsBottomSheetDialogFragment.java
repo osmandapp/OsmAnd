@@ -18,7 +18,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 

@@ -1,13 +1,15 @@
-package net.osmand.plus.settings.backend;
+package net.osmand.plus.settings.backend.preferences;
+
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class FloatPreference extends CommonPreference<Float> {
 
-	FloatPreference(OsmandSettings settings, String id, float defaultValue) {
+	public FloatPreference(OsmandSettings settings, String id, float defaultValue) {
 		super(settings, id, defaultValue);
 	}
 
 	@Override
-	protected Float getValue(Object prefs, Float defaultValue) {
+	public Float getValue(Object prefs, Float defaultValue) {
 		return getSettingsAPI().getFloat(prefs, getId(), defaultValue);
 	}
 

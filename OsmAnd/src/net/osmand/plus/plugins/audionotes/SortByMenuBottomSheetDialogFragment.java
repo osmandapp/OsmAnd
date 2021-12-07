@@ -3,7 +3,7 @@ package net.osmand.plus.plugins.audionotes;
 import android.os.Bundle;
 import android.view.View;
 
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;

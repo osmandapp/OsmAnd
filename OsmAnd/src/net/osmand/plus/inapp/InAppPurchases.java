@@ -19,7 +19,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;

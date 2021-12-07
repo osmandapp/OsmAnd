@@ -30,7 +30,7 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;

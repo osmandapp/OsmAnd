@@ -40,7 +40,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapTileLayer;

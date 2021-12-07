@@ -1,4 +1,6 @@
-package net.osmand.plus.settings.backend;
+package net.osmand.plus.settings.backend.preferences;
+
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class BooleanStringPreference extends BooleanPreference {
 
@@ -7,7 +9,7 @@ public class BooleanStringPreference extends BooleanPreference {
 	}
 
 	@Override
-	protected Boolean getValue(Object prefs, Boolean defaultValue) {
+	public Boolean getValue(Object prefs, Boolean defaultValue) {
 		Boolean value;
 		try {
 			value = parseString(getSettingsAPI().getString(prefs, getId(), defaultValue.toString()));

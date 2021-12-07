@@ -18,7 +18,7 @@ import net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.OnMapSelectedCallback;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.RasterMapType;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapTileLayer;

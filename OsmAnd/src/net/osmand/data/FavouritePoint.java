@@ -23,8 +23,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.settings.backend.BooleanPreference;
-import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.BooleanPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.util.Algorithms;
 
 import java.io.Serializable;

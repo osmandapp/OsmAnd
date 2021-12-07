@@ -19,7 +19,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;

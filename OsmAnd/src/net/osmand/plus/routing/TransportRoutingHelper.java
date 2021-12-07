@@ -20,7 +20,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routing.RouteCalculationParams.RouteCalculationResultListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.NativeTransportRoutingResult;

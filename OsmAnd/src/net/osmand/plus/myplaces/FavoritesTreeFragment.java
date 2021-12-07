@@ -58,7 +58,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.ShareFavoritesAsyncTask.ShareFavoritesListener;
-import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.MapUtils;
 

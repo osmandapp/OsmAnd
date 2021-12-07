@@ -37,7 +37,7 @@ import net.osmand.plus.backup.commands.RegisterDeviceCommand;
 import net.osmand.plus.backup.commands.RegisterUserCommand;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;

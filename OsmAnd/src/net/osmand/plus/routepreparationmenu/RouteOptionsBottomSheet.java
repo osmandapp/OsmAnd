@@ -56,7 +56,7 @@ import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.ElevationDateBottomSheet;

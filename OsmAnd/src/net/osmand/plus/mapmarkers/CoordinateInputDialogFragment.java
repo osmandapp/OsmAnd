@@ -79,7 +79,7 @@ import net.osmand.plus.mapmarkers.CoordinateInputFormats.DDM;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.DMS;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.mapmarkers.adapters.CoordinateInputAdapter;
-import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.widgets.EditTextEx;
 import net.osmand.util.Algorithms;

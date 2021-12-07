@@ -1,13 +1,15 @@
-package net.osmand.plus.settings.backend;
+package net.osmand.plus.settings.backend.preferences;
+
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class StringPreference extends CommonPreference<String> {
 
-	StringPreference(OsmandSettings settings, String id, String defaultValue) {
+	public StringPreference(OsmandSettings settings, String id, String defaultValue) {
 		super(settings, id, defaultValue);
 	}
 
 	@Override
-	protected String getValue(Object prefs, String defaultValue) {
+	public String getValue(Object prefs, String defaultValue) {
 		return getSettingsAPI().getString(prefs, getId(), defaultValue);
 	}
 

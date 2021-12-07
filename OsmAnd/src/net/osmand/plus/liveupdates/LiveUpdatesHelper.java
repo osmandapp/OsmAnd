@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.LocalIndexInfo;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.FileNameTranslationHelper;

@@ -26,7 +26,7 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 

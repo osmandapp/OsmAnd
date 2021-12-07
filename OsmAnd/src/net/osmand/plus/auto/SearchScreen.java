@@ -35,7 +35,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.ObjectType;

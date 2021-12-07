@@ -24,7 +24,7 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapmarkers.DirectionIndicationDialogFragment;
 import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.layers.MapInfoLayer;

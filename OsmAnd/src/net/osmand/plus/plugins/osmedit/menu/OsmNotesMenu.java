@@ -17,8 +17,8 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
-import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.util.Arrays;
