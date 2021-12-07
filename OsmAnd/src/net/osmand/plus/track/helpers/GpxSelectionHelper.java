@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.track.helpers;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
@@ -17,8 +17,10 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;

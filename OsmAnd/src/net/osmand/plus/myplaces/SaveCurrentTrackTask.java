@@ -8,7 +8,7 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 
 import java.io.File;

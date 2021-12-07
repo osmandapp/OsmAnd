@@ -27,7 +27,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.track.TrackDisplayHelper;
+import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.widgets.WebViewEx;
 import net.osmand.plus.wikivoyage.ArticleWebViewClient;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;

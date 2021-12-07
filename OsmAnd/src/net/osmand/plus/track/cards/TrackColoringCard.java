@@ -24,7 +24,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;

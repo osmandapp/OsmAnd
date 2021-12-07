@@ -5,7 +5,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.FilteredSelectedGpxFile;
+import net.osmand.plus.track.helpers.FilteredSelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;

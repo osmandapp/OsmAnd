@@ -8,7 +8,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -22,7 +22,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
-import net.osmand.plus.track.TrackDisplayHelper;
+import net.osmand.plus.track.helpers.TrackDisplayHelper;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 
-import static net.osmand.plus.GpxSelectionHelper.isGpxFileSelected;
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 public class OptionsCard extends MapBaseCard {

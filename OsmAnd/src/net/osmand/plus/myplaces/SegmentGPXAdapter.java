@@ -9,11 +9,11 @@ import androidx.annotation.NonNull;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.track.TrackDisplayHelper;
+import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager;
 

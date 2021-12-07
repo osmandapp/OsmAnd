@@ -50,7 +50,7 @@ import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;

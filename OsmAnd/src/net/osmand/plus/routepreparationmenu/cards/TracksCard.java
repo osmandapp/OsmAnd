@@ -15,7 +15,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
 import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;

@@ -55,7 +55,7 @@ import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.myplaces.FavouritesDbHelper.FavoritesListener;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;

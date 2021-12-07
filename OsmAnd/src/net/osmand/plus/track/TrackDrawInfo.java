@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.OsmandSettings;

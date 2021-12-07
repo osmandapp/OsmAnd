@@ -20,7 +20,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -32,7 +32,7 @@ import net.osmand.plus.track.fragments.GpxReadDescriptionDialogFragment;
 import net.osmand.util.Algorithms;
 
 import static net.osmand.AndroidUtils.dpToPx;
-import static net.osmand.plus.GpxSelectionHelper.isGpxFileSelected;
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
 import static net.osmand.plus.track.cards.DescriptionCard.getMetadataImageLink;
 import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.DIRECTIONS_BUTTON_INDEX;

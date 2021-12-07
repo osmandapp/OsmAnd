@@ -57,7 +57,7 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.helpers.AndroidUiHelper;

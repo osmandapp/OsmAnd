@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.track.helpers;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
@@ -9,7 +9,8 @@ import androidx.annotation.Nullable;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.track.GpxSplitType;
 
@@ -38,11 +39,11 @@ public class GpxDbHelper {
 		void onGpxDataItemReady(GpxDataItem item);
 	}
 
-	GpxDbHelper(@NonNull OsmandApplication app) {
+	public GpxDbHelper(@NonNull OsmandApplication app) {
 		db = new GPXDatabase(app);
 	}
 
-	void loadGpxItems() {
+	public void loadGpxItems() {
 		List<GpxDataItem> items = getItems();
 		for (GpxDataItem item : items) {
 			putToCache(item);

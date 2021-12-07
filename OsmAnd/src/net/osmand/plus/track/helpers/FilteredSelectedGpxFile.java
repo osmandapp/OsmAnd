@@ -1,16 +1,16 @@
-package net.osmand.plus;
+package net.osmand.plus.track.helpers;
 
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.TrkSegment;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.helpers.GpsFilterHelper;
-import net.osmand.plus.helpers.GpsFilterHelper.AltitudeFilter;
-import net.osmand.plus.helpers.GpsFilterHelper.HdopFilter;
-import net.osmand.plus.helpers.GpsFilterHelper.SmoothingFilter;
-import net.osmand.plus.helpers.GpsFilterHelper.SpeedFilter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.GpsFilterHelper.AltitudeFilter;
+import net.osmand.plus.track.helpers.GpsFilterHelper.HdopFilter;
+import net.osmand.plus.track.helpers.GpsFilterHelper.SmoothingFilter;
+import net.osmand.plus.track.helpers.GpsFilterHelper.SpeedFilter;
 
 import java.io.File;
 import java.util.List;

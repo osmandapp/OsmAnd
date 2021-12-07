@@ -16,9 +16,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -26,9 +26,9 @@ import net.osmand.plus.UiUtilities.CompoundButtonType;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.track.DisplayPointsGroupsHelper;
-import net.osmand.plus.track.DisplayPointsGroupsHelper.DisplayGroupsHolder;
-import net.osmand.plus.track.TrackDisplayHelper;
+import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper;
+import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper.DisplayGroupsHolder;
+import net.osmand.plus.track.helpers.TrackDisplayHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;

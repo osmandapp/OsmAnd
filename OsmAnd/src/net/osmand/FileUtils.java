@@ -1,6 +1,5 @@
 package net.osmand;
 
-import android.os.AsyncTask;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -9,10 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.Metadata;
-import net.osmand.plus.GpxSelectionHelper;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.dialogs.RenameFileBottomSheet;

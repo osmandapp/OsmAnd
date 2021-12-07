@@ -66,7 +66,7 @@ import static net.osmand.data.Amenity.ROUTE_ID;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
-import static net.osmand.plus.GpxSelectionHelper.*;
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.*;
 import static net.osmand.plus.helpers.GpxUiHelper.getGpxTitle;
 import static net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.*;
 import static net.osmand.plus.wikivoyage.data.PopularArticles.ARTICLES_PER_PAGE;
