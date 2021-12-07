@@ -26,7 +26,7 @@ import net.osmand.plus.plugins.osmedit.OsmEditsUploadListener;
 import net.osmand.plus.plugins.osmedit.OsmEditsUploadListenerHelper;
 import net.osmand.plus.plugins.osmedit.OsmNotesPoint;
 import net.osmand.plus.plugins.osmedit.OsmPoint;
-import net.osmand.plus.plugins.osmedit.UploadOpenstreetmapPointAsyncTask;
+import net.osmand.plus.plugins.osmedit.asynctasks.UploadOpenstreetmapPointAsyncTask;
 import net.osmand.plus.plugins.osmedit.dialogs.ProgressDialogPoiUploader;
 import net.osmand.plus.plugins.osmedit.dialogs.SendOsmNoteBottomSheetFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.SendPoiBottomSheetFragment;

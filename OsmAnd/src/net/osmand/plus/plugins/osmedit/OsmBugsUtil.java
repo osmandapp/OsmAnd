@@ -5,9 +5,9 @@ import net.osmand.plus.plugins.osmedit.OsmPoint.Action;
 public interface OsmBugsUtil {
 
 	class OsmBugResult {
-		OsmNotesPoint local;
-		String userName;
-		String warning;
+		public OsmNotesPoint local;
+		public String userName;
+		public String warning;
 	}
 	
 	OsmBugResult commit(OsmNotesPoint bug, String text, Action action);

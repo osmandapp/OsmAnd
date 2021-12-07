@@ -41,7 +41,7 @@ import org.apache.commons.logging.Log;
 
 import static net.osmand.plus.UiUtilities.setupDialogButton;
 import static net.osmand.plus.plugins.osmedit.fragments.OsmEditingFragment.OSM_LOGIN_DATA;
-import static net.osmand.plus.plugins.osmedit.ValidateOsmLoginDetailsTask.ValidateOsmLoginListener;
+import static net.osmand.plus.plugins.osmedit.asynctasks.ValidateOsmLoginDetailsTask.ValidateOsmLoginListener;
 import static net.osmand.plus.plugins.osmedit.dialogs.SendGpxBottomSheetFragment.showOpenStreetMapScreen;
 import static net.osmand.plus.plugins.osmedit.dialogs.SendPoiBottomSheetFragment.OPENSTREETMAP_POINT;
 

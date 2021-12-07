@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.osmedit;
+package net.osmand.plus.plugins.osmedit.asynctasks;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -10,6 +10,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
+import net.osmand.plus.plugins.osmedit.OpenstreetmapRemoteUtil;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin.UploadVisibility;
 import net.osmand.util.Algorithms;
 

@@ -1,10 +1,12 @@
-package net.osmand.plus.plugins.osmedit;
+package net.osmand.plus.plugins.osmedit.asynctasks;
 
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.plugins.osmedit.OsmBugsUtil;
+import net.osmand.plus.plugins.osmedit.OsmNotesPoint;
 import net.osmand.plus.plugins.osmedit.OsmPoint.Action;
 
 import static net.osmand.plus.plugins.osmedit.OsmBugsLayer.*;

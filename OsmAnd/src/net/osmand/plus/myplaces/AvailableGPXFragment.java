@@ -90,7 +90,7 @@ import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
-import net.osmand.plus.plugins.osmedit.UploadGPXFilesTask.UploadGpxListener;
+import net.osmand.plus.plugins.osmedit.asynctasks.UploadGPXFilesTask.UploadGpxListener;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;

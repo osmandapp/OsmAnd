@@ -30,6 +30,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
+import net.osmand.plus.plugins.osmedit.asynctasks.UploadOpenstreetmapPointAsyncTask;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;

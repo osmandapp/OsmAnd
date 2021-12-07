@@ -12,7 +12,7 @@ import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditsUploadListener;
 import net.osmand.plus.plugins.osmedit.OsmEditsUploadListenerHelper;
 import net.osmand.plus.plugins.osmedit.OsmPoint;
-import net.osmand.plus.plugins.osmedit.UploadOpenstreetmapPointAsyncTask;
+import net.osmand.plus.plugins.osmedit.asynctasks.UploadOpenstreetmapPointAsyncTask;
 
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.osmedit;
+package net.osmand.plus.plugins.osmedit.asynctasks;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -18,6 +18,9 @@ import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.plugins.osmedit.OpenstreetmapPoint;
+import net.osmand.plus.plugins.osmedit.OsmNotesPoint;
+import net.osmand.plus.plugins.osmedit.OsmPoint;
 import net.osmand.plus.plugins.osmedit.OsmPoint.Group;
 import net.osmand.plus.plugins.osmedit.fragments.OsmEditsFragment;
 import net.osmand.util.Algorithms;

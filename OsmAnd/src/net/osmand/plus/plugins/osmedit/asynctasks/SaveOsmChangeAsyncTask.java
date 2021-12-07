@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.osmedit;
+package net.osmand.plus.plugins.osmedit.asynctasks;
 
 import android.os.AsyncTask;
 
@@ -7,16 +7,18 @@ import androidx.annotation.Nullable;
 
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.EntityInfo;
+import net.osmand.plus.plugins.osmedit.OpenstreetmapLocalUtil;
+import net.osmand.plus.plugins.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
 
-class SaveOsmChangeAsyncTask extends AsyncTask<Void, Void, Entity> {
+public class SaveOsmChangeAsyncTask extends AsyncTask<Void, Void, Entity> {
 
 	private final OpenstreetmapLocalUtil mOpenstreetmapUtil;
 	@Nullable
 	private final ApplyMovedObjectCallback mCallback;
 	private final OpenstreetmapPoint objectInMotion;
 
-	SaveOsmChangeAsyncTask(@NonNull OpenstreetmapLocalUtil openstreetmapUtil,
+	public SaveOsmChangeAsyncTask(@NonNull OpenstreetmapLocalUtil openstreetmapUtil,
 						   @NonNull OpenstreetmapPoint objectInMotion,
 						   @Nullable ApplyMovedObjectCallback callback) {
 		this.mOpenstreetmapUtil = openstreetmapUtil;

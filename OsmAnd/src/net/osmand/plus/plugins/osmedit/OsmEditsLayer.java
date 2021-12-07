@@ -19,6 +19,8 @@ import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.plugins.osmedit.asynctasks.SaveOsmChangeAsyncTask;
+import net.osmand.plus.plugins.osmedit.asynctasks.SaveOsmNoteAsyncTask;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.views.OsmandMapLayer;

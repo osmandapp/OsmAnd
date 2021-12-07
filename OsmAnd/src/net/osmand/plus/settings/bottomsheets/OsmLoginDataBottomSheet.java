@@ -19,8 +19,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.plugins.osmedit.ValidateOsmLoginDetailsTask;
-import net.osmand.plus.plugins.osmedit.ValidateOsmLoginDetailsTask.ValidateOsmLoginListener;
+import net.osmand.plus.plugins.osmedit.asynctasks.ValidateOsmLoginDetailsTask;
+import net.osmand.plus.plugins.osmedit.asynctasks.ValidateOsmLoginDetailsTask.ValidateOsmLoginListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 
 public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {

@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.osmedit;
+package net.osmand.plus.plugins.osmedit.asynctasks;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -8,9 +8,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
+import net.osmand.plus.plugins.osmedit.OsmBugsUtil;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.plugins.osmedit.OsmNotesPoint;
+import net.osmand.plus.plugins.osmedit.OsmPoint.Action;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
 
-class SaveOsmNoteAsyncTask extends AsyncTask<OsmNotesPoint, Void, OsmNotesPoint> {
+public class SaveOsmNoteAsyncTask extends AsyncTask<OsmNotesPoint, Void, OsmNotesPoint> {
 	private final String mText;
 	private final Context mContext;
 	@Nullable
@@ -32,7 +36,7 @@ class SaveOsmNoteAsyncTask extends AsyncTask<OsmNotesPoint, Void, OsmNotesPoint>
 	@Override
 	protected OsmNotesPoint doInBackground(OsmNotesPoint... params) {
 		OsmNotesPoint mOsmNotesPoint = params[0];
-		OsmPoint.Action action = mOsmNotesPoint.getAction();
+		Action action = mOsmNotesPoint.getAction();
 		plugin.getDBBug().deleteAllBugModifications(mOsmNotesPoint);
 		OsmBugsUtil.OsmBugResult result = mOsmbugsUtil.commit(mOsmNotesPoint, mText, action);
 		return result == null ? null : result.local;

@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.osmedit;
+package net.osmand.plus.plugins.osmedit.asynctasks;
 
 import android.content.DialogInterface;
 import android.net.TrafficStats;
@@ -7,6 +7,13 @@ import android.os.AsyncTask;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
+import net.osmand.plus.plugins.osmedit.OpenstreetmapPoint;
+import net.osmand.plus.plugins.osmedit.OpenstreetmapRemoteUtil;
+import net.osmand.plus.plugins.osmedit.OsmBugsRemoteUtil;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.plugins.osmedit.OsmEditsUploadListener;
+import net.osmand.plus.plugins.osmedit.OsmNotesPoint;
+import net.osmand.plus.plugins.osmedit.OsmPoint;
 
 import java.util.HashMap;
 import java.util.Map;
