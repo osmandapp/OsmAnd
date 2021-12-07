@@ -19,8 +19,8 @@ import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibilityAssistant;
-import net.osmand.access.NavigationInfo;
+import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
+import net.osmand.plus.plugins.accessibility.NavigationInfo;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndLocationProvider;

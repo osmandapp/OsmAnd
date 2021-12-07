@@ -38,8 +38,8 @@ import androidx.core.view.ViewCompat;
 
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
-import net.osmand.access.AccessibilityAssistant;
-import net.osmand.access.NavigationInfo;
+import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
+import net.osmand.plus.plugins.accessibility.NavigationInfo;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;

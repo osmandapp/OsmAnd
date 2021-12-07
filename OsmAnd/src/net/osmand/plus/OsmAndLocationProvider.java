@@ -33,7 +33,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.access.NavigationInfo;
+import net.osmand.plus.plugins.accessibility.NavigationInfo;
 import net.osmand.binary.GeocodingUtilities.GeocodingResult;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;

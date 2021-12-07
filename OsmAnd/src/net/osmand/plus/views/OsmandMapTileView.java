@@ -33,7 +33,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibilityActionsProvider;
+import net.osmand.plus.plugins.accessibility.AccessibilityActionsProvider;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;

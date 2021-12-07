@@ -38,7 +38,7 @@ import com.ibm.icu.impl.IllegalIcuArgumentException;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibilityAssistant;
+import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.map.WorldRegion;

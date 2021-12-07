@@ -1,4 +1,4 @@
-package net.osmand.access;
+package net.osmand.plus.plugins.accessibility;
 
 import android.app.Activity;
 import android.os.Build;

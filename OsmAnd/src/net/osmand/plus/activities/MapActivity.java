@@ -55,7 +55,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.SecondSplashScreenFragment;
 import net.osmand.StateChangedListener;
 import net.osmand.data.ValueHolder;
-import net.osmand.access.MapAccessibilityActions;
+import net.osmand.plus.plugins.accessibility.MapAccessibilityActions;
 import net.osmand.aidl.AidlMapPointWrapper;
 import net.osmand.aidl.OsmandAidlApi.AMapPointUpdateListener;
 import net.osmand.core.android.AtlasMapRendererView;

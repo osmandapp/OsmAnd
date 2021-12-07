@@ -1,4 +1,4 @@
-package net.osmand.access;
+package net.osmand.plus.plugins.accessibility;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,8 +17,6 @@ import androidx.preference.PreferenceViewHolder;
 
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.access.AccessibilityMode;
-import net.osmand.plus.access.RelativeDirectionStyle;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;

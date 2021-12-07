@@ -24,7 +24,7 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 
-import net.osmand.access.AccessibilityAssistant;
+import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;

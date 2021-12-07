@@ -1,4 +1,4 @@
-package net.osmand.plus.access;
+package net.osmand.plus.plugins.accessibility;
 
 import net.osmand.plus.R;
 import android.content.Context;

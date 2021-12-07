@@ -26,7 +26,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CollatorStringMatcher;
-import net.osmand.access.AccessibilityAssistant;
+import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;

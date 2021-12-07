@@ -1,4 +1,4 @@
-package net.osmand.access;
+package net.osmand.plus.plugins.accessibility;
 
 
 import android.content.Context;
@@ -18,7 +18,6 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.access.RelativeDirectionStyle;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;

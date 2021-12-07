@@ -36,7 +36,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.access.AccessibilityAssistant;
+import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
