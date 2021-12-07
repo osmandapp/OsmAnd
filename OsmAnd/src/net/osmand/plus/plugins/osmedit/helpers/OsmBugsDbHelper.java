@@ -7,8 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.backup.BackupHelper;
-import net.osmand.plus.plugins.osmedit.OsmNotesPoint;
-import net.osmand.plus.plugins.osmedit.OsmPoint;
+import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
+import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.util.Algorithms;
 
 import java.io.File;

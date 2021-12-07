@@ -11,7 +11,7 @@ import net.osmand.plus.plugins.osmedit.OsmBugsLayer;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditsUploadListener;
 import net.osmand.plus.plugins.osmedit.helpers.OsmEditsUploadListenerHelper;
-import net.osmand.plus.plugins.osmedit.OsmPoint;
+import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.plugins.osmedit.asynctasks.UploadOpenstreetmapPointAsyncTask;
 
 import java.util.Map;

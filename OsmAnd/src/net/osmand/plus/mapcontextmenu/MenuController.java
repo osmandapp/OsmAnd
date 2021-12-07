@@ -71,7 +71,7 @@ import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.plugins.osmedit.EditPOIMenuController;
 import net.osmand.plus.plugins.osmedit.OsmBugMenuController;
 import net.osmand.plus.plugins.osmedit.OsmBugsLayer.OpenStreetNote;
-import net.osmand.plus.plugins.osmedit.OsmPoint;
+import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.plugins.parking.ParkingPositionMenuController;
 import net.osmand.plus.resources.OsmandRegionSearcher;
 import net.osmand.plus.transport.TransportStopRoute;

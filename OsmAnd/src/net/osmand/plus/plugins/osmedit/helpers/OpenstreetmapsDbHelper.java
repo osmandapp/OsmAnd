@@ -11,8 +11,8 @@ import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
 import net.osmand.plus.backup.BackupHelper;
-import net.osmand.plus.plugins.osmedit.OpenstreetmapPoint;
-import net.osmand.plus.plugins.osmedit.OsmPoint;
+import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
+import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

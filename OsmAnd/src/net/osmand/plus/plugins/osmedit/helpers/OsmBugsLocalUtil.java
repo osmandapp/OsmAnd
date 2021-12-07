@@ -3,9 +3,9 @@ package net.osmand.plus.plugins.osmedit.helpers;
 
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.osmedit.OsmNotesPoint;
-import net.osmand.plus.plugins.osmedit.OsmPoint;
-import net.osmand.plus.plugins.osmedit.OsmPoint.Action;
+import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
+import net.osmand.plus.plugins.osmedit.data.OsmPoint;
+import net.osmand.plus.plugins.osmedit.data.OsmPoint.Action;
 
 import java.util.List;
 

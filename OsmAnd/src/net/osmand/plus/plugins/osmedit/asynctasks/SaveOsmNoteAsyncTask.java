@@ -10,8 +10,8 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.osmedit.helpers.OsmBugsUtil;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
-import net.osmand.plus.plugins.osmedit.OsmNotesPoint;
-import net.osmand.plus.plugins.osmedit.OsmPoint.Action;
+import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
+import net.osmand.plus.plugins.osmedit.data.OsmPoint.Action;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
 
 public class SaveOsmNoteAsyncTask extends AsyncTask<OsmNotesPoint, Void, OsmNotesPoint> {

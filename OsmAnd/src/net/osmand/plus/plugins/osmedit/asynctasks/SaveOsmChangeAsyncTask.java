@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapLocalUtil;
-import net.osmand.plus.plugins.osmedit.OpenstreetmapPoint;
+import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
 
 public class SaveOsmChangeAsyncTask extends AsyncTask<Void, Void, Entity> {

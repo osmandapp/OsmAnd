@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.osmedit;
 
+import net.osmand.plus.plugins.osmedit.data.OsmPoint;
+
 import java.util.Map;
 
 /**

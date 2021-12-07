@@ -18,10 +18,10 @@ import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.plugins.osmedit.OpenstreetmapPoint;
-import net.osmand.plus.plugins.osmedit.OsmNotesPoint;
-import net.osmand.plus.plugins.osmedit.OsmPoint;
-import net.osmand.plus.plugins.osmedit.OsmPoint.Group;
+import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
+import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
+import net.osmand.plus.plugins.osmedit.data.OsmPoint;
+import net.osmand.plus.plugins.osmedit.data.OsmPoint.Group;
 import net.osmand.plus.plugins.osmedit.fragments.OsmEditsFragment;
 import net.osmand.util.Algorithms;
 

@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 import net.osmand.data.MapObject;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.EntityInfo;
-import net.osmand.plus.plugins.osmedit.OsmPoint.Action;
+import net.osmand.plus.plugins.osmedit.data.OsmPoint.Action;
 
 import java.util.Set;
 
