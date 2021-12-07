@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.helpers;
 
 
 import android.annotation.SuppressLint;
@@ -10,6 +10,9 @@ import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
+import net.osmand.plus.GeocodingLookupService.OnAddressLookupResult;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
@@ -91,7 +94,7 @@ public class TargetPointsHelper {
 		@SuppressLint("StringFormatInvalid")
 		public PointDescription getPointDescription(Context ctx) {
 			if (!intermediate) {
-				return new PointDescription(PointDescription.POINT_TYPE_TARGET, ctx.getString(R.string.destination_point, ""), 
+				return new PointDescription(PointDescription.POINT_TYPE_TARGET, ctx.getString(R.string.destination_point, ""),
 						getOnlyName());
 			} else {
 				return new PointDescription(PointDescription.POINT_TYPE_TARGET, (index + 1) + ". " + ctx.getString(R.string.intermediate_point, ""), 
@@ -199,7 +202,7 @@ public class TargetPointsHelper {
 	private void lookupAddressForIntermediatePoint(final TargetPoint targetPoint) {
 		if (targetPoint != null && targetPoint.pointDescription.isSearchingAddress(ctx)) {
 			cancelPointAddressRequests(targetPoint.point);
-			AddressLookupRequest lookupRequest = new AddressLookupRequest(targetPoint.point, new GeocodingLookupService.OnAddressLookupResult() {
+			AddressLookupRequest lookupRequest = new AddressLookupRequest(targetPoint.point, new OnAddressLookupResult() {
 				@Override
 				public void geocodingDone(String address) {
 					for (TargetPoint p : intermediatePoints) {
@@ -222,7 +225,7 @@ public class TargetPointsHelper {
 		if (pointToStart != null && pointToStart.isSearchingAddress(ctx)
 				&& (startPointRequest == null || !startPointRequest.getLatLon().equals(pointToStart.point))) {
 			cancelStartPointAddressRequest();
-			startPointRequest = new AddressLookupRequest(pointToStart.point, new GeocodingLookupService.OnAddressLookupResult() {
+			startPointRequest = new AddressLookupRequest(pointToStart.point, new OnAddressLookupResult() {
 				@Override
 				public void geocodingDone(String address) {
 					startPointRequest = null;
@@ -243,7 +246,7 @@ public class TargetPointsHelper {
 		if (pointToNavigate != null && pointToNavigate.isSearchingAddress(ctx)
 				&& (targetPointRequest == null || !targetPointRequest.getLatLon().equals(pointToNavigate.point))) {
 			cancelTargetPointAddressRequest();
-			targetPointRequest = new AddressLookupRequest(pointToNavigate.point, new GeocodingLookupService.OnAddressLookupResult() {
+			targetPointRequest = new AddressLookupRequest(pointToNavigate.point, new OnAddressLookupResult() {
 				@Override
 				public void geocodingDone(String address) {
 					targetPointRequest = null;
@@ -264,7 +267,7 @@ public class TargetPointsHelper {
 		if (myLocationToStart != null && myLocationToStart.isSearchingAddress(ctx)
 				&& (myLocationPointRequest == null || !myLocationPointRequest.getLatLon().equals(myLocationToStart.point))) {
 			cancelMyLocationPointAddressRequest();
-			myLocationPointRequest = new AddressLookupRequest(myLocationToStart.point, new GeocodingLookupService.OnAddressLookupResult() {
+			myLocationPointRequest = new AddressLookupRequest(myLocationToStart.point, new OnAddressLookupResult() {
 				@Override
 				public void geocodingDone(String address) {
 					myLocationPointRequest = null;

@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.helpers;
 
 import android.app.backup.BackupAgentHelper;
 import android.app.backup.BackupDataInput;

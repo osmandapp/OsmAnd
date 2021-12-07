@@ -43,7 +43,7 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.CurrentPositionHelper;
+import net.osmand.plus.helpers.CurrentPositionHelper;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.GPSInfo;

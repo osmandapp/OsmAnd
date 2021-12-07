@@ -83,7 +83,7 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.plugins.PluginsFragment;

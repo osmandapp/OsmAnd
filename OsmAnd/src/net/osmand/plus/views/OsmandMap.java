@@ -19,7 +19,7 @@ import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandApplication.NavigationSessionListener;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.base.MapViewTrackingUtilities;

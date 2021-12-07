@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.helpers;
 
 import android.annotation.SuppressLint;
 import android.database.Cursor;
@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.Version;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;

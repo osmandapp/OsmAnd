@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.helpers;
 
 import android.annotation.SuppressLint;
 import android.content.ComponentName;
@@ -13,6 +13,9 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.FavouritePoint.SpecialPointType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.myplaces.FavouritesDbHelper.FavoritesListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;

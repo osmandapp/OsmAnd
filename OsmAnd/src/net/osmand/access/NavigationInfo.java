@@ -17,7 +17,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.access.RelativeDirectionStyle;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
