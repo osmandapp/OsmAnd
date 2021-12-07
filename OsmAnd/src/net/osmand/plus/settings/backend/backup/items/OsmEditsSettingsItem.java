@@ -15,7 +15,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.osmedit.OpenstreetmapPoint;
-import net.osmand.plus.plugins.osmedit.OpenstreetmapsDbHelper;
+import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapsDbHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.OsmPoint;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;

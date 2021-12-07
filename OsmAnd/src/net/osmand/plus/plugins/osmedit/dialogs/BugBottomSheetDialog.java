@@ -23,7 +23,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.plugins.osmedit.asynctasks.HandleOsmNoteAsyncTask;
 import net.osmand.plus.plugins.osmedit.OsmBugsLayer;
-import net.osmand.plus.plugins.osmedit.OsmBugsUtil;
+import net.osmand.plus.plugins.osmedit.helpers.OsmBugsUtil;
 import net.osmand.plus.plugins.osmedit.OsmNotesPoint;
 import net.osmand.plus.plugins.osmedit.OsmPoint;
 

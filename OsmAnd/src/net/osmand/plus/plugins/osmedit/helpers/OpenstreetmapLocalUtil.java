@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.osmedit;
+package net.osmand.plus.plugins.osmedit.helpers;
 
 import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
@@ -14,6 +14,10 @@ import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.osm.edit.Way;
+import net.osmand.plus.plugins.osmedit.OpenstreetmapPoint;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.plugins.osmedit.OsmPoint;
+import net.osmand.plus.plugins.osmedit.OsmPoint.Action;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -53,7 +57,7 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 	}
 	
 	@Override
-	public Entity commitEntityImpl(OsmPoint.Action action, Entity entity, EntityInfo info, String comment,
+	public Entity commitEntityImpl(Action action, Entity entity, EntityInfo info, String comment,
 	                               boolean closeChangeSet, Set<String> changedTags) {
 		Entity newEntity = entity;
 		if (entity.getId() == -1) {

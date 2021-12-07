@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.osmedit;
+package net.osmand.plus.plugins.osmedit.helpers;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.plugins.osmedit.OsmNotesPoint;
+import net.osmand.plus.plugins.osmedit.OsmPoint;
 import net.osmand.util.Algorithms;
 
 import java.io.File;

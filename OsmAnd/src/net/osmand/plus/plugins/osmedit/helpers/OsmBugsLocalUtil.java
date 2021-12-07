@@ -1,8 +1,10 @@
-package net.osmand.plus.plugins.osmedit;
+package net.osmand.plus.plugins.osmedit.helpers;
 
 
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.plugins.osmedit.OsmNotesPoint;
+import net.osmand.plus.plugins.osmedit.OsmPoint;
 import net.osmand.plus.plugins.osmedit.OsmPoint.Action;
 
 import java.util.List;

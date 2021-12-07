@@ -5,12 +5,12 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.plugins.osmedit.OsmBugsUtil;
+import net.osmand.plus.plugins.osmedit.helpers.OsmBugsUtil;
 import net.osmand.plus.plugins.osmedit.OsmNotesPoint;
 import net.osmand.plus.plugins.osmedit.OsmPoint.Action;
 
 import static net.osmand.plus.plugins.osmedit.OsmBugsLayer.*;
-import static net.osmand.plus.plugins.osmedit.OsmBugsUtil.*;
+import static net.osmand.plus.plugins.osmedit.helpers.OsmBugsUtil.*;
 
 public class HandleOsmNoteAsyncTask extends AsyncTask<Void, Void, OsmBugResult> {
 	private OsmBugsUtil osmbugsUtil;

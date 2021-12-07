@@ -26,6 +26,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.osmedit.asynctasks.HandleOsmNoteAsyncTask;
+import net.osmand.plus.plugins.osmedit.helpers.OsmBugsLocalUtil;
+import net.osmand.plus.plugins.osmedit.helpers.OsmBugsUtil;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.plugins.osmedit.asynctasks.HandleOsmNoteAsyncTask.HandleBugListener;
 import net.osmand.plus.plugins.osmedit.OsmPoint.Action;

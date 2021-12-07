@@ -54,14 +54,14 @@ import net.osmand.plus.plugins.osmedit.dialogs.ExportOptionsBottomSheetDialogFra
 import net.osmand.plus.plugins.osmedit.dialogs.ExportOptionsBottomSheetDialogFragment.ExportOptionsFragmentListener;
 import net.osmand.plus.plugins.osmedit.dialogs.FileTypeBottomSheetDialogFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.FileTypeBottomSheetDialogFragment.FileTypeFragmentListener;
-import net.osmand.plus.plugins.osmedit.OpenstreetmapLocalUtil.OnNodeCommittedListener;
+import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapLocalUtil.OnNodeCommittedListener;
 import net.osmand.plus.plugins.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.dialogs.OsmEditOptionsBottomSheetDialogFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.OsmEditOptionsBottomSheetDialogFragment.OsmEditOptionsFragmentListener;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditsAdapter;
 import net.osmand.plus.plugins.osmedit.OsmEditsUploadListener;
-import net.osmand.plus.plugins.osmedit.OsmEditsUploadListenerHelper;
+import net.osmand.plus.plugins.osmedit.helpers.OsmEditsUploadListenerHelper;
 import net.osmand.plus.plugins.osmedit.OsmNotesPoint;
 import net.osmand.plus.plugins.osmedit.OsmPoint;
 import net.osmand.plus.plugins.osmedit.OsmPoint.Group;

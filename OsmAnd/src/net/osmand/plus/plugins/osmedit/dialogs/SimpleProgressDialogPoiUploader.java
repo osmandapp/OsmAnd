@@ -10,7 +10,7 @@ import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.plugins.osmedit.OsmBugsLayer;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditsUploadListener;
-import net.osmand.plus.plugins.osmedit.OsmEditsUploadListenerHelper;
+import net.osmand.plus.plugins.osmedit.helpers.OsmEditsUploadListenerHelper;
 import net.osmand.plus.plugins.osmedit.OsmPoint;
 import net.osmand.plus.plugins.osmedit.asynctasks.UploadOpenstreetmapPointAsyncTask;
 

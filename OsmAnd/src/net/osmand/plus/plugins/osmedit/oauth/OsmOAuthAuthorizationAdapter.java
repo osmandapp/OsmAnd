@@ -18,7 +18,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.osm.oauth.OsmOAuthAuthorizationClient;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.osmedit.OsmBugsRemoteUtil;
+import net.osmand.plus.plugins.osmedit.helpers.OsmBugsRemoteUtil;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 import org.apache.commons.logging.Log;

@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.osmedit;
+package net.osmand.plus.plugins.osmedit.helpers;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -11,6 +11,8 @@ import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
 import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.plugins.osmedit.OpenstreetmapPoint;
+import net.osmand.plus.plugins.osmedit.OsmPoint;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

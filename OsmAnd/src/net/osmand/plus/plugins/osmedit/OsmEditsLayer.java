@@ -21,6 +21,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.osmedit.asynctasks.SaveOsmChangeAsyncTask;
 import net.osmand.plus.plugins.osmedit.asynctasks.SaveOsmNoteAsyncTask;
+import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapLocalUtil;
+import net.osmand.plus.plugins.osmedit.helpers.OsmBugsLocalUtil;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.views.OsmandMapLayer;

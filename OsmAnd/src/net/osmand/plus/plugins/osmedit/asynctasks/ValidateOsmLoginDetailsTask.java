@@ -7,8 +7,8 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.osmedit.OsmBugsRemoteUtil;
-import net.osmand.plus.plugins.osmedit.OsmBugsUtil.OsmBugResult;
+import net.osmand.plus.plugins.osmedit.helpers.OsmBugsRemoteUtil;
+import net.osmand.plus.plugins.osmedit.helpers.OsmBugsUtil.OsmBugResult;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
