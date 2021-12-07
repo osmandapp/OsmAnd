@@ -1,6 +1,6 @@
 package net.osmand.plus.helpers;
 
-import static net.osmand.AndroidUtils.dpToPx;
+import static net.osmand.plus.utils.AndroidUtils.dpToPx;
 
 import android.content.Context;
 import android.graphics.Color;

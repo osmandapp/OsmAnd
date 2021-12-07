@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.utils;
 
 import android.content.Context;
 import android.text.format.DateUtils;
@@ -18,6 +18,8 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SpeedConstants;

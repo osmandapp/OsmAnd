@@ -10,8 +10,8 @@ import android.os.AsyncTask.Status;
 import android.view.View;
 import android.widget.Toast;
 
-import net.osmand.AndroidNetworkUtils;
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.WorldRegion;

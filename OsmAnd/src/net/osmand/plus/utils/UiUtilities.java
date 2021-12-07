@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.utils;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -46,7 +46,8 @@ import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.snackbar.SnackbarContentLayout;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;

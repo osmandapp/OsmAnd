@@ -1,4 +1,4 @@
-package net.osmand;
+package net.osmand.plus.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,6 +8,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
+import net.osmand.CallbackWithObject;
+import net.osmand.IProgress;
+import net.osmand.PlatformUtil;
+import net.osmand.StreamWriter;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;

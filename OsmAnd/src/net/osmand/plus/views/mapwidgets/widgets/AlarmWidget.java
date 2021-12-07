@@ -20,7 +20,7 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;

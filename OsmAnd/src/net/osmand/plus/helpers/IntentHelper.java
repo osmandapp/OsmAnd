@@ -12,7 +12,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import net.osmand.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;

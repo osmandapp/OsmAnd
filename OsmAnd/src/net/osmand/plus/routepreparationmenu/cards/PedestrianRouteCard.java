@@ -2,7 +2,6 @@ package net.osmand.plus.routepreparationmenu.cards;
 
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.StyleSpan;
@@ -13,8 +12,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 

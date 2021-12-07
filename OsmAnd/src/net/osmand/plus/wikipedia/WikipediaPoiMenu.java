@@ -2,7 +2,7 @@ package net.osmand.plus.wikipedia;
 
 import android.widget.ArrayAdapter;
 
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;

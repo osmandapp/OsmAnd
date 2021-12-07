@@ -11,7 +11,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.data.ValueHolder;
 import net.osmand.data.LatLon;
 import net.osmand.plus.NavigationService;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;

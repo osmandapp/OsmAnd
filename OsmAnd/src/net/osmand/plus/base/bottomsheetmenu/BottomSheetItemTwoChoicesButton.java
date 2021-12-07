@@ -16,8 +16,8 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.StringRes;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 

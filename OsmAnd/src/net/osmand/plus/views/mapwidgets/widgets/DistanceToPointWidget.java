@@ -4,7 +4,7 @@ import android.view.View;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;

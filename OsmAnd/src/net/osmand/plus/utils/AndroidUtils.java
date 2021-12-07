@@ -1,4 +1,4 @@
-package net.osmand;
+package net.osmand.plus.utils;
 
 
 import static android.content.Context.POWER_SERVICE;
@@ -68,7 +68,7 @@ import androidx.core.text.TextUtilsCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.ColorUtilities;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;

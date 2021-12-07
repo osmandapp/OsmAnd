@@ -35,7 +35,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.ibm.icu.impl.IllegalIcuArgumentException;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityAssistant;

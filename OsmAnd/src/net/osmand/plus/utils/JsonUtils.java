@@ -1,4 +1,4 @@
-package net.osmand;
+package net.osmand.plus.utils;
 
 import android.content.Context;
 import android.content.res.Configuration;

@@ -1,4 +1,4 @@
-package net.osmand;
+package net.osmand.plus.utils;
 
 import android.content.Context;
 import android.os.StatFs;
@@ -9,6 +9,7 @@ import com.squareup.picasso.LruCache;
 import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 
 import org.apache.commons.logging.Log;

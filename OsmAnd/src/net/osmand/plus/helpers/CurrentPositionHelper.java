@@ -48,7 +48,7 @@ public class CurrentPositionHelper {
 	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 	private LongSparseArray<AtomicInteger> requestNumbersMap = new LongSparseArray<>();
 
-	CurrentPositionHelper(OsmandApplication app) {
+	public CurrentPositionHelper(OsmandApplication app) {
 		this.app = app;
 	}
 

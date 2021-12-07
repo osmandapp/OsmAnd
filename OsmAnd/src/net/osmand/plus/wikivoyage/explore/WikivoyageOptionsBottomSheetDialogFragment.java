@@ -8,7 +8,7 @@ import android.webkit.WebView;
 
 import androidx.appcompat.widget.PopupMenu;
 
-import net.osmand.PicassoUtils;
+import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.plus.OnDialogFragmentResultListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;

@@ -6,7 +6,7 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import net.osmand.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
@@ -78,7 +78,7 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 		List<AnalyticsItem> items;
 	}
 
-	AnalyticsHelper(OsmandApplication ctx) {
+	public AnalyticsHelper(OsmandApplication ctx) {
 		super(ctx, DATABASE_NAME, null, DATABASE_VERSION);
 		this.ctx = ctx;
 		insertEventScript = "INSERT INTO " + TABLE_NAME + " VALUES (?, ?, ?)";

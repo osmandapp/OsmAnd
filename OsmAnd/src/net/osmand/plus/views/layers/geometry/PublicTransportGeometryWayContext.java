@@ -13,7 +13,7 @@ import android.util.Pair;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.RenderingLineAttributes;
 

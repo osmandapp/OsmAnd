@@ -10,7 +10,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;

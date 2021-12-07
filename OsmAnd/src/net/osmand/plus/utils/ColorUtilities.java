@@ -1,7 +1,9 @@
-package net.osmand.plus;
+package net.osmand.plus.utils;
 
 import android.content.Context;
 import android.graphics.Color;
+
+import net.osmand.plus.R;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
