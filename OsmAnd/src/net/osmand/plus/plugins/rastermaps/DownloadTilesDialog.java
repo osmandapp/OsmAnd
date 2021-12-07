@@ -1,4 +1,4 @@
-package net.osmand.plus.activities;
+package net.osmand.plus.plugins.rastermaps;
 
 import android.app.ProgressDialog;
 import android.content.Context;
