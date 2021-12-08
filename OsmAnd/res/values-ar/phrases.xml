@@ -457,7 +457,7 @@
     <string name="poi_caravans">كارفان (مقطورة متنقلة)</string>
     <string name="poi_power_supply">مصدر الطاقة</string>
     <string name="poi_medical_system">النظام الطبي</string>
-    <string name="poi_fuel_avia_type">نوع الوقود (افيا)</string>
+    <string name="poi_fuel_avia_type">نوع الوقود (آفيا)</string>
     <string name="poi_additional_type">إضافي</string>
     <string name="poi_vending_type">نوع البيع</string>
     <string name="poi_clothes_type">النوع</string>
@@ -4211,4 +4211,15 @@
     <string name="poi_faculty_psychology">علم النفس</string>
     <string name="poi_tool_hire">تأجير الأدوات</string>
     <string name="poi_escape_game">لعبة الهروب</string>
+    <string name="poi_computer_sales">بيع أجهزة الكمبيوتر</string>
+    <string name="poi_computer_repair">إصلاح الحواسيب</string>
+    <string name="poi_computer_parts">قطع غيار الكمبيوتر</string>
+    <string name="poi_computer_sales_no">بيع اجهزة الكمبيوتر: لا</string>
+    <string name="poi_computer_repair_yes">نعم</string>
+    <string name="poi_computer_parts_yes">نعم</string>
+    <string name="poi_diet_vegan_limited">نباتي: محدود</string>
+    <string name="poi_computer_repair_no">إصلاح الحواسيب: لا</string>
+    <string name="poi_computer_sales_yes">نعم</string>
+    <string name="poi_computer_sales_used">مستعمل</string>
+    <string name="poi_computer_parts_no">قطع الكمبيوتر: لا</string>
 </resources>
