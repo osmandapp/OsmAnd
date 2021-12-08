@@ -4211,4 +4211,15 @@
     <string name="poi_faculty_psychology">Психології</string>
     <string name="poi_escape_game">Квест-гра</string>
     <string name="poi_tool_hire">Прокат інструментів</string>
+    <string name="poi_computer_repair">Ремонт компʼютерів</string>
+    <string name="poi_diet_vegan_limited">Для веганів: обмежено</string>
+    <string name="poi_computer_sales_yes">Так</string>
+    <string name="poi_computer_sales_used">Використовується</string>
+    <string name="poi_computer_repair_yes">Так</string>
+    <string name="poi_computer_sales_no">Продаж компʼютерів: ні</string>
+    <string name="poi_computer_repair_no">Ремонт компʼютерів: ні</string>
+    <string name="poi_computer_parts_yes">Так</string>
+    <string name="poi_computer_parts_no">Запчастини для компʼютерів: ні</string>
+    <string name="poi_computer_sales">Продаж компʼютерів</string>
+    <string name="poi_computer_parts">Запчастини для компʼютерів</string>
 </resources>
