@@ -21,7 +21,7 @@ import java.util.Locale;
 
 public class GpxInfoCard extends MapBaseCard {
 
-	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("d MMM yyyy", Locale.getDefault());
 
 	private final GPXFile gpxFile;
 
