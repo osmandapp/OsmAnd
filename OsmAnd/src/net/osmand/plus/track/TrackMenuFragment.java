@@ -646,8 +646,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	public void updateDisplayGroupsWidget() {
-		if (hasPointsGroups()) {
-			displayGroupsWidget.setVisibility(View.VISIBLE);
+		boolean widgetVisible = hasPointsGroups() && !shouldShowWidgets();
+		if (widgetVisible) {
 			DisplayGroupsHolder displayGroupsHolder =
 					DisplayPointsGroupsHelper.getGroups(app, displayHelper.getPointsOriginalGroups(), null);
 			int total = displayGroupsHolder.groups.size();
@@ -659,9 +659,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					String.valueOf(visible),
 					String.valueOf(total)
 			));
-		} else {
-			displayGroupsWidget.setVisibility(View.GONE);
 		}
+		AndroidUiHelper.updateVisibility(displayGroupsWidget, widgetVisible);
 	}
 
 	private boolean hasPointsGroups() {
@@ -782,11 +781,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		boolean menuStateChanged = currentMenuState != previousMenuState;
 		if (menuStateChanged) {
 			updateControlsVisibility(true);
-			boolean appbarButtonsVisible = currentMenuState != MenuState.FULL_SCREEN;
-			AndroidUiHelper.updateVisibility(backButtonContainer, appbarButtonsVisible);
 		}
-		if (currentMenuState != MenuState.FULL_SCREEN && (menuStateChanged || adjustMapPosition)
-				&& !menuTypeChanged) {
+		if (currentMenuState != MenuState.FULL_SCREEN 
+				&& (menuStateChanged || adjustMapPosition) && !menuTypeChanged) {
 			fitTrackOnMap();
 		}
 		if (menuStateChanged) {
@@ -940,6 +937,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public void updateControlsVisibility(boolean menuVisible) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
+			updateDisplayGroupsWidget();
+			boolean appbarButtonsVisible = getCurrentMenuState() != MenuState.FULL_SCREEN && !shouldShowWidgets();
+			AndroidUiHelper.updateVisibility(backButtonContainer, appbarButtonsVisible);
+
 			boolean topControlsVisible = shouldShowTopControls(menuVisible);
 			boolean bottomControlsVisible = shouldShowBottomControls(menuVisible);
 			mapActivity.getWidgetsVisibilityHelper().updateControlsVisibility(topControlsVisible, bottomControlsVisible);
@@ -952,7 +953,13 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	public boolean shouldShowTopControls(boolean menuVisible) {
-		return !menuVisible;
+		return !menuVisible || shouldShowWidgets();
+	}
+
+	public boolean shouldShowWidgets() {
+		return Algorithms.isEmpty(returnScreenName)
+				&& menuType == TrackMenuType.OVERVIEW
+				&& getCurrentMenuState() == MenuState.HEADER_ONLY;
 	}
 
 	public boolean shouldShowBottomControls(boolean menuVisible) {
@@ -1252,6 +1259,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					setupCards();
 					updateHeader();
 					updateHeadersBottomShadow();
+					updateControlsVisibility(isVisible());
 					updateCardsLayout();
 					if (type == TrackMenuType.OVERVIEW && isPortrait() && overviewInitialHeight
 							&& getCurrentMenuState() != MenuState.FULL_SCREEN) {
