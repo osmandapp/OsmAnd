@@ -16,17 +16,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -77,12 +77,6 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		initGeometries(density);
 		initPaints();
 		initIcons();
-	}
-
-	protected boolean hasTurnArrows(){
-		if (previewRouteLineInfo != null){
-			return previewRouteLineInfo.isHasTurnArrow();
-		} else return view.getSettings().ROUTE_SHOW_TURN_ARROWS.getModeValue(getAppMode());
 	}
 
 	protected void initAttrs(float density) {
@@ -200,6 +194,14 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		}
 		cachedRouteLineWidth.put(widthKey, resultValue);
 		return resultValue;
+	}
+
+	protected boolean showTurnArrows() {
+		if (previewRouteLineInfo != null) {
+			return previewRouteLineInfo.showTurnArrows();
+		} else {
+			return view.getSettings().ROUTE_SHOW_TURN_ARROWS.getModeValue(getAppMode());
+		}
 	}
 
 	protected void drawTurnArrow(Canvas canvas, Matrix matrix, float x, float y, float px, float py) {

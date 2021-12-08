@@ -220,13 +220,11 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 						if (routeWidth != 0) {
 							attrs.paint3.setStrokeWidth(routeWidth / 2);
 						}
-
-						if (hasTurnArrows()){
+						if (showTurnArrows()){
 							drawTurnArrow(canvas, matrix, x, y, px, py);
 							attrs.paint3.setColor(defaultTurnArrowColor);
 							canvas.drawPath(pth, attrs.paint3);
 						}
-
 					} else {
 						px = x;
 						py = y;
