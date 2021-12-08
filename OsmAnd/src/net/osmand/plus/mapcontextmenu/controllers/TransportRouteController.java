@@ -6,7 +6,7 @@ import android.view.View.OnClickListener;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.binary.OsmandOdb.TransportRouteStop;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;

@@ -7,6 +7,17 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.util.Log;
 
+import net.osmand.Location;
+import net.osmand.data.ValueHolder;
+import net.osmand.plus.NavigationService;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.auto.RequestPermissionScreen.LocationPermissionCheckCallback;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.routing.IRouteInformationListener;
+import net.osmand.plus.views.OsmandMapTileView;
+
 import androidx.annotation.NonNull;
 import androidx.car.app.CarContext;
 import androidx.car.app.CarToast;
@@ -21,17 +32,6 @@ import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.Lifecycle.State;
 import androidx.lifecycle.LifecycleOwner;
-
-import net.osmand.Location;
-import net.osmand.ValueHolder;
-import net.osmand.plus.NavigationService;
-import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.auto.RequestPermissionScreen.LocationPermissionCheckCallback;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.routing.IRouteInformationListener;
-import net.osmand.plus.views.OsmandMapTileView;
 
 /**
  * Session class for the Navigation sample app.

@@ -10,7 +10,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
-import net.osmand.PicassoUtils;
+import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
 

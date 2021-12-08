@@ -8,17 +8,14 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.AppInitializer;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.resources.ResourceManager.ReloadIndexesListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CheckDuplicatesListener;
@@ -29,6 +26,9 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import org.apache.commons.logging.Log;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public abstract class ImportSettingsFragment extends BaseSettingsListFragment {
 

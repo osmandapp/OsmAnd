@@ -17,7 +17,7 @@ import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.Location;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 
 /**

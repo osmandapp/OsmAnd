@@ -11,20 +11,20 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.preference.Preference;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.preferences.EditTextPreferenceEx;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.util.Algorithms;
 
-import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
-import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.MAX_INTERVAL_TO_SEND_MINUTES;
-import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.MINUTES;
-import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.SECONDS;
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
+import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.MAX_INTERVAL_TO_SEND_MINUTES;
+import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.MINUTES;
+import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.SECONDS;
 
 public class LiveMonitoringFragment extends BaseSettingsFragment {
 

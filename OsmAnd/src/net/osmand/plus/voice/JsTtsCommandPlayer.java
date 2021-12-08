@@ -18,7 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.api.AudioFocusHelperImpl;
 import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;

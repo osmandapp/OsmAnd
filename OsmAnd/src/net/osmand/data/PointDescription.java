@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import com.google.openlocationcode.OpenLocationCode;
 
 import net.osmand.LocationConvert;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;

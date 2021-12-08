@@ -1,8 +1,8 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
-import static net.osmand.plus.UiUtilities.CustomRadioButtonType;
-import static net.osmand.plus.UiUtilities.CustomRadioButtonType.END;
-import static net.osmand.plus.UiUtilities.CustomRadioButtonType.START;
+import static net.osmand.plus.utils.UiUtilities.CustomRadioButtonType;
+import static net.osmand.plus.utils.UiUtilities.CustomRadioButtonType.END;
+import static net.osmand.plus.utils.UiUtilities.CustomRadioButtonType.START;
 
 import android.view.View;
 import android.widget.TextView;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;

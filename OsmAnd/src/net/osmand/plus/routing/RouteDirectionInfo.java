@@ -3,7 +3,7 @@ package net.osmand.plus.routing;
 import androidx.annotation.Nullable;
 
 import net.osmand.binary.RouteDataObject;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.router.ExitInfo;
 import net.osmand.router.TurnType;

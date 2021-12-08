@@ -8,8 +8,7 @@ import androidx.annotation.Nullable;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.LocalIndexInfo;
-import net.osmand.plus.helpers.enums.MetricsConstants;
+import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -19,7 +18,7 @@ import java.util.List;
 
 import static net.osmand.IndexConstants.BINARY_SRTM_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.BINARY_SRTM_MAP_INDEX_EXT_ZIP;
-import static net.osmand.plus.activities.LocalIndexHelper.LocalIndexType.SRTM_DATA;
+import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.SRTM_DATA;
 import static net.osmand.plus.download.DownloadActivityType.SRTM_COUNTRY_FILE;
 
 public class SrtmDownloadItem extends DownloadItem {
