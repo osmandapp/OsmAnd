@@ -23,14 +23,14 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidUtils;
-import net.osmand.FileUtils;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OnDismissDialogFragmentListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.DialogButtonType;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
@@ -302,7 +302,9 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 
 	@Override
 	public void onFilesCollectingStarted() {
-		updateContent();
+		if (isAdded()) {
+			updateContent();
+		}
 	}
 
 	@Override
@@ -318,7 +320,9 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 		} else {
 			app.showToastMessage(error);
 		}
-		updateContent();
+		if (isAdded()) {
+			updateContent();
+		}
 	}
 
 	private void dismiss() {

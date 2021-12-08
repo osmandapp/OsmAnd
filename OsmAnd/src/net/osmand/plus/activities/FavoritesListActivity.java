@@ -5,9 +5,10 @@ import android.view.MenuItem;
 
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.myplaces.FavoritesListFragment;
 
 
 public class FavoritesListActivity extends OsmandActionBarActivity {

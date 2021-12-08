@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.layers.ContextMenuLayer;

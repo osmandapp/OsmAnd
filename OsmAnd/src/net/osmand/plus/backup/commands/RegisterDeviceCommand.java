@@ -2,7 +2,7 @@ package net.osmand.plus.backup.commands;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.OperationLog;
 import net.osmand.plus.backup.BackupCommand;
 import net.osmand.plus.backup.BackupError;

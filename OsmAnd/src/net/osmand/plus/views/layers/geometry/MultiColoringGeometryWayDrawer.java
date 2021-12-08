@@ -8,7 +8,7 @@ import android.graphics.Path;
 import android.graphics.Shader;
 
 import net.osmand.plus.routing.ColoringType;
-import net.osmand.plus.views.MapTileLayer;
+import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.layers.geometry.MultiColoringGeometryWay.GeometryGradientWayStyle;
 import net.osmand.util.Algorithms;
 

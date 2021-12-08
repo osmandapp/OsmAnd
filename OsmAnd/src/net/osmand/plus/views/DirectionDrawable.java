@@ -1,6 +1,6 @@
 package net.osmand.plus.views;
 
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import android.content.Context;

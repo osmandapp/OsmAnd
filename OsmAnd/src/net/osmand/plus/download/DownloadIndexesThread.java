@@ -10,8 +10,8 @@ import android.os.AsyncTask.Status;
 import android.view.View;
 import android.widget.Toast;
 
-import net.osmand.AndroidNetworkUtils;
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.WorldRegion;
@@ -21,10 +21,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
-import net.osmand.plus.helpers.DatabaseHelper;
 import net.osmand.plus.notifications.OsmandNotification;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 

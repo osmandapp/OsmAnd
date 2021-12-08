@@ -7,25 +7,26 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.view.ContextThemeWrapper;
-
-import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
-import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 
 import java.io.File;
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.view.ContextThemeWrapper;
 
 public class TracksCard extends MapBaseCard {
 
@@ -53,7 +54,13 @@ public class TracksCard extends MapBaseCard {
 			String fileName = gpx.path.startsWith(gpxDir) ? gpx.path.substring(gpxDir.length() + 1) : f.getName();
 			gpxItems.add(new GpxItem(GpxUiHelper.getGpxTitle(f.getName()), gpx, new GPXInfo(fileName, f.lastModified(), f.length())));
 		}
-		Collections.sort(gpxItems, Comparator.comparing(i -> i.title.toLowerCase()));
+		Collator collator = Collator.getInstance();
+		Collections.sort(gpxItems, new Comparator<GpxItem>() {
+			@Override
+			public int compare(GpxItem lhs, GpxItem rhs) {
+				return collator.compare(lhs.title.toLowerCase(), rhs.title.toLowerCase());
+			}
+		});
 	}
 
 	@Override

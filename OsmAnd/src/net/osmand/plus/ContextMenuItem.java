@@ -11,6 +11,7 @@ import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.ContextMenuAdapter.OnItemDeleteAction;
+import net.osmand.plus.utils.ColorUtilities;
 
 public class ContextMenuItem {
 	public static final int INVALID_ID = -1;
