@@ -47,6 +47,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.plugins.osmedit.dialogs.UploadMultipleGPXBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -1837,9 +1838,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	@Nullable
-	static GPXTrackAnalysis getGpxTrackAnalysis(@NonNull GpxInfo gpxInfo,
-	                                            @NonNull OsmandApplication app,
-	                                            @Nullable final GpxInfoViewCallback callback) {
+	public static GPXTrackAnalysis getGpxTrackAnalysis(@NonNull GpxInfo gpxInfo,
+	                                                   @NonNull OsmandApplication app,
+	                                                   @Nullable final GpxInfoViewCallback callback) {
 		SelectedGpxFile sgpx = getSelectedGpxFile(gpxInfo, app);
 		GPXTrackAnalysis analysis = null;
 		if (sgpx != null && sgpx.isLoaded()) {

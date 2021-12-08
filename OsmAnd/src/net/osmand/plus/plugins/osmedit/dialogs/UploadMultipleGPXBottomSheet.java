@@ -1,4 +1,4 @@
-package net.osmand.plus.myplaces;
+package net.osmand.plus.plugins.osmedit.dialogs;
 
 import static net.osmand.plus.myplaces.AvailableGPXFragment.getGpxTrackAnalysis;
 import static net.osmand.util.Algorithms.formatDuration;
