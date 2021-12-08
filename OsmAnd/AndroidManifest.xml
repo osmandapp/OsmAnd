@@ -50,6 +50,7 @@
 		android:xlargeScreens="true" android:anyDensity="true" />
 
 	<queries>
+		<package android:name="btools.routingapp" />
 		<intent>
 			<action android:name="android.intent.action.TTS_SERVICE" />
 		</intent>
