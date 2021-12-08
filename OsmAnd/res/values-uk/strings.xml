@@ -256,8 +256,8 @@
     <string name="search_offline_clear_search">Новий пошук</string>
     <string name="map_text_size_descr">Виберіть розмір шрифту для підписів на мапі:</string>
     <string name="map_text_size">Розмір тексту</string>
-    <string name="trace_rendering">Дані для пошуку проблем рендерингу</string>
-    <string name="trace_rendering_descr">Інформація про швидкість рендерингу.</string>
+    <string name="trace_rendering">Дані для пошуку вад рендерингу</string>
+    <string name="trace_rendering_descr">Відомості про швидкість рендерингу.</string>
     <string name="installing_new_resources">Розпаковуються нові дані…</string>
     <string name="internet_connection_required_for_online_route">Онлайн навігація не працює без під\'єднання до мережі.</string>
     <string name="tts_language_not_supported_title">Мова не підтримується</string>
@@ -2196,7 +2196,7 @@
     <string name="animate_my_location_desc">Увімкнути анімацію пересування мапи з моїм місцем розташування під час навігації.</string>
     <string name="do_not_show_startup_messages">Не показувати повідомлення під час запуску</string>
     <string name="subscribe_email_desc">Підпишіться на нашу email-розсилку про знижки на OsmAnd та отримаєте 3 додаткові завантаження мап!</string>
-    <string name="do_not_show_startup_messages_desc">Не показувати інформацію про знижки на застосунок та спеціальні повідомлення про місцеві події.</string>
+    <string name="do_not_show_startup_messages_desc">Не показувати відомості про знижки на застосунок та спеціальні повідомлення про місцеві події.</string>
     <string name="restart_search">Шукати знову</string>
     <string name="increase_search_radius">Збільшити радіус пошуку</string>
     <string name="nothing_found">Нічого не знайдено</string>
@@ -2669,7 +2669,7 @@
     <string name="topo_render_descr">Для походів, пішого та вело туризму. Добре читається на вулиці. Контрастні дороги та природні об’єкти, різні типи маршрутів, розширені варіанти ізоліній, більше подробиць. Регулювання цілісності поверхні відрізняє якість дороги. Нічного режиму немає.</string>
     <string name="mapnik_render_descr">Старий типовий стиль \"Mapnik\". Подібні кольори до \'Mapnik\'.</string>
     <string name="touring_view_render_descr">Туристичний стиль з високим контрастом та високою деталізацією. Включає всі типові параметри стилю OsmAnd, показуючи при цьому докладні відомості, зокрема дороги, стежки та інші шляхи для подорожі. \"Туристичний атлас\" чітко показує різницю між типами доріг. Підходить для денного, нічного та використання на природі.</string>
-    <string name="default_render_descr">Стиль загального призначення. Щільно забудовані міста показуються охайно. Містить ізолінії, маршрути, інформацію про якість дорожнього покриття, обмеження доступу, дорожні вказівники, показ стежок за шкалою SAC, елементи водних видів спорту.</string>
+    <string name="default_render_descr">Стиль загального призначення. Щільно забудовані міста показуються охайно. Містить ізолінії, маршрути, відомості про якість дорожнього покриття, обмеження доступу, дорожні вказівники, показ стежок за шкалою SAC, елементи водних видів спорту.</string>
     <string name="open_wikipedia_link_online">Відкрити посилання Вікіпедії з мережі</string>
     <string name="open_wikipedia_link_online_description">Посилання буде відкрите в вебоглядачі.</string>
     <string name="read_wikipedia_offline_description">Передплатіть OsmAnd Live, щоб читати статті з Вікіпедії та Вікімандрів в офлайн режимі.</string>
