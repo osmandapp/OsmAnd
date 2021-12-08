@@ -4479,4 +4479,6 @@
     <string name="use_routing_fallback">Utiliser le routage de secours</string>
     <string name="created_on">Créé le</string>
     <string name="shared_string_size">Taille</string>
+    <string name="gps_filter_hdop_desc">Définissez la valeur maximale acceptée pour HDOP.
+\nLes points de valeur supérieure seront masqués.</string>
 </resources>
