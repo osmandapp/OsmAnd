@@ -179,7 +179,7 @@ public class VoiceRouter {
 
 	public void updateAppMode() {
 		appMode = router.getAppMode() == null ? settings.getApplicationMode() : router.getAppMode();
-		atd = new AnnounceTimeDistances(appMode, settings);
+		atd = new AnnounceTimeDistances(appMode, app);
 	}
 
 	public int calculateImminent(float dist, Location loc) {

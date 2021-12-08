@@ -17,7 +17,7 @@ import androidx.car.app.navigation.model.RoutePreviewNavigationTemplate;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
-import net.osmand.ValueHolder;
+import net.osmand.data.ValueHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.IRouteInformationListener;
@@ -47,7 +47,7 @@ public final class RoutePreviewScreen extends Screen implements IRouteInformatio
 	private boolean calculating;
 
 	public RoutePreviewScreen(@NonNull CarContext carContext, @NonNull Action settingsAction,
-							  @NonNull SurfaceRenderer surfaceRenderer, @NonNull SearchResult searchResult) {
+	                          @NonNull SurfaceRenderer surfaceRenderer, @NonNull SearchResult searchResult) {
 		super(carContext);
 		this.settingsAction = settingsAction;
 		this.surfaceRenderer = surfaceRenderer;
@@ -138,7 +138,11 @@ public final class RoutePreviewScreen extends Screen implements IRouteInformatio
 			SpannableString description = new SpannableString("  •  ");
 			description.setSpan(DistanceSpan.create(distance), 0, 1, 0);
 			description.setSpan(DurationSpan.create(leftTimeSec), 4, 5, 0);
-			routeRows.add(new Row.Builder().setTitle(searchResult.localeName).addText(description).build());
+
+			String name = QuickSearchListItem.getName(app, searchResult);
+			String typeName = QuickSearchListItem.getTypeName(app, searchResult);
+			String title = Algorithms.isEmpty(name) ? typeName : name;
+			routeRows.add(new Row.Builder().setTitle(title).addText(description).build());
 			this.routeRows = routeRows;
 			calculating = false;
 			invalidate();

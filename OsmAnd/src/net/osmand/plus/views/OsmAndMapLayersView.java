@@ -1,6 +1,6 @@
 package net.osmand.plus.views;
 
-import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;

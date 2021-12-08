@@ -11,8 +11,8 @@ import androidx.annotation.LayoutRes;
 
 import net.osmand.plus.R;
 
-import static net.osmand.plus.UiUtilities.*;
-import static net.osmand.plus.UiUtilities.DialogButtonType.PRIMARY;
+import static net.osmand.plus.utils.UiUtilities.*;
+import static net.osmand.plus.utils.UiUtilities.DialogButtonType.PRIMARY;
 
 public class BottomSheetItemButton extends SimpleBottomSheetItem {
 

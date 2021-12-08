@@ -7,6 +7,17 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.util.Log;
 
+import net.osmand.Location;
+import net.osmand.data.ValueHolder;
+import net.osmand.plus.NavigationService;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.auto.RequestPermissionScreen.LocationPermissionCheckCallback;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.routing.IRouteInformationListener;
+import net.osmand.plus.views.OsmandMapTileView;
+
 import androidx.annotation.NonNull;
 import androidx.car.app.CarContext;
 import androidx.car.app.CarToast;
@@ -19,17 +30,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.Lifecycle.State;
 import androidx.lifecycle.LifecycleOwner;
-
-import net.osmand.Location;
-import net.osmand.ValueHolder;
-import net.osmand.plus.NavigationService;
-import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.routing.IRouteInformationListener;
-import net.osmand.plus.views.OsmandMapTileView;
 
 /**
  * Session class for the Navigation sample app.
@@ -63,6 +65,9 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 		return mapView;
 	}
 
+	private final LocationPermissionCheckCallback locationPermissionGrantedCallback =
+			() -> getApp().startNavigationService(NavigationService.USED_BY_CAR_APP);
+
 	public void setMapView(OsmandMapTileView mapView) {
 		this.mapView = mapView;
 		SurfaceRenderer navigationCarSurface = this.navigationCarSurface;
@@ -93,6 +98,10 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 	public boolean hasStarted() {
 		Lifecycle.State state = getLifecycle().getCurrentState();
 		return state == Lifecycle.State.STARTED || state == Lifecycle.State.RESUMED;
+	}
+
+	public boolean isStateAtLeast(@NonNull State state) {
+		return getLifecycle().getCurrentState().isAtLeast(state);
 	}
 
 	public boolean hasSurface() {
@@ -140,7 +149,7 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 		if (ActivityCompat.checkSelfPermission(getCarContext(), Manifest.permission.ACCESS_FINE_LOCATION)
 				!= PackageManager.PERMISSION_GRANTED) {
 			getCarContext().getCarService(ScreenManager.class).push(navigationScreen);
-			return new RequestPermissionScreen(getCarContext(), null);
+			return new RequestPermissionScreen(getCarContext(), locationPermissionGrantedCallback);
 		}
 
 		return navigationScreen;
@@ -152,7 +161,19 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 			requestPurchaseScreen.finish();
 			requestPurchaseScreen = null;
 			app.getOsmandMap().getMapView().setupOpenGLView();
+
+			requestLocationPermission();
 		}
+	}
+
+	private boolean requestLocationPermission() {
+		if (ActivityCompat.checkSelfPermission(getCarContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+				!= PackageManager.PERMISSION_GRANTED) {
+			getCarContext().getCarService(ScreenManager.class).push(
+					new RequestPermissionScreen(getCarContext(), locationPermissionGrantedCallback));
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -172,7 +193,8 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 							settingsAction,
 							navigationCarSurface,
 							query),
-					(obj) -> { });
+					(obj) -> {
+					});
 
 			return;
 		}
@@ -197,6 +219,11 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 		if (navigationCarSurface != null) {
 			navigationCarSurface.onCarConfigurationChanged();
 		}
+	}
+
+	@Override
+	public boolean requestLocationNavigation() {
+		return requestLocationPermission();
 	}
 
 	@Override

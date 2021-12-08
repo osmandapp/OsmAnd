@@ -20,14 +20,15 @@ import net.osmand.data.LatLon;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
+import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.OnlineRoutingResponse;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
@@ -140,6 +141,14 @@ public class RouteProvider {
 					res = findBROUTERRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.ONLINE) {
 					res = findOnlineRoute(params);
+					if (!res.isCalculated()) {
+						OnlineRoutingHelper helper = params.ctx.getOnlineRoutingHelper();
+						String engineKey = params.mode.getRoutingProfile();
+						OnlineRoutingEngine engine = helper.getEngineByKey(engineKey);
+						if (engine != null && engine.useRoutingFallback()) {
+							res = findVectorMapsRoute(params, calcGPXRoute);
+						}
+					}
 				} else if (params.mode.getRouteService() == RouteService.STRAIGHT ||
 						params.mode.getRouteService() == RouteService.DIRECT_TO) {
 					res = findStraightRoute(params);
@@ -1105,6 +1114,8 @@ public class RouteProvider {
 				params.intermediates = null;
 				return new RouteCalculationResult(route, directions, params, null, false);
 			}
+		} else {
+			params.initialCalculation = false;
 		}
 
 		return new RouteCalculationResult("Route is empty");

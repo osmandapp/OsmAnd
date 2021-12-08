@@ -1,5 +1,11 @@
 package net.osmand.plus.routepreparationmenu;
 
+import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.RELIEF_SMOOTHNESS_FACTOR;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.getRoutingParameterTitle;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.isRoutingParameterSelected;
+import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
+
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -10,19 +16,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -48,7 +56,8 @@ import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.ElevationDateBottomSheet;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
@@ -65,12 +74,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
-import static net.osmand.plus.settings.fragments.RouteParametersFragment.RELIEF_SMOOTHNESS_FACTOR;
-import static net.osmand.plus.settings.fragments.RouteParametersFragment.getRoutingParameterTitle;
-import static net.osmand.plus.settings.fragments.RouteParametersFragment.isRoutingParameterSelected;
-import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
 
 public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -170,9 +173,10 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new TitleItem(app.getString(R.string.shared_string_settings), ColorUtilities.getActiveColorId(nightMode)));
 
+		OsmAndAppCustomization customization = app.getAppCustomization();
 		List<LocalRoutingParameter> list = getRoutingParameters(applicationMode);
 		for (final LocalRoutingParameter optionsItem : list) {
-			if (!dialogMode.isAvailableParameter(optionsItem)) {
+			if (!dialogMode.isAvailableParameter(optionsItem) || !customization.isFeatureEnabled(optionsItem.getKey())) {
 				continue;
 			}
 
@@ -707,14 +711,14 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		return (MapActivity) getActivity();
 	}
 
-	public static void showInstance(MapActivity mapActivity) {
+	public static void showInstance(@NonNull MapActivity mapActivity) {
 		showInstance(mapActivity, null, DialogMode.DIRECTIONS, null);
 	}
 
-	public static void showInstance(MapActivity mapActivity,
-									Fragment targetFragment,
-									DialogMode dialogMode,
-									String appModeKey) {
+	public static void showInstance(@NonNull MapActivity mapActivity,
+	                                @Nullable Fragment targetFragment,
+	                                @NonNull DialogMode dialogMode,
+	                                @Nullable String appModeKey) {
 		try {
 			FragmentManager fm = mapActivity.getSupportFragmentManager();
 			if (!fm.isStateSaved()) {

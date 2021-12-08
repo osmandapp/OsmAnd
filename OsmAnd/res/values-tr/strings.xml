@@ -1235,7 +1235,7 @@
     <string name="shared_string_collapse">Daralt</string>
     <string name="shared_string_tracks">İzlenen yollar</string>
     <string name="shared_string_currently_recording_track">Şu anda kaydedilen yol</string>
-    <string name="route_points">Rota noktaları</string>
+    <string name="route_points">Güzergah noktaları</string>
     <string name="track_segments">İz bölümü</string>
     <string name="track_points">İz noktası</string>
     <string name="record_plugin_name">Seyahat kaydetme</string>
@@ -1280,7 +1280,7 @@
     <string name="shared_string_location">Konum</string>
     <string name="share_osm_edits_subject">Osmand üzerinden paylaşılan OSM düzenlemeler</string>
     <string name="lang_nds">Aşağı Almanca</string>
-    <string name="lang_mk">Makedonyaca</string>
+    <string name="lang_mk">Makedonca</string>
     <string name="lang_fy">Frizce</string>
     <string name="lang_als">Arnavutça (Tosk)</string>
     <string name="read_more">Devamını oku</string>
@@ -1557,7 +1557,7 @@
     <string name="lang_fa">Farsça</string>
     <string name="lang_pl">Lehçe</string>
     <string name="lang_pt">Portekizce</string>
-    <string name="lang_ro">Romence</string>
+    <string name="lang_ro">Rumence</string>
     <string name="lang_ru">Rusça</string>
     <string name="lang_sc">Sardunyaca</string>
     <string name="lang_sr">Sırpça (kiril)</string>
@@ -4331,16 +4331,16 @@
     <string name="shared_string_precision">Hassasiyet</string>
     <string name="shared_string_statistics">İstatistikler</string>
     <string name="save_changes_into_file">Değişiklikleri dosyaya kaydet</string>
-    <string name="gps_filter_actions_description">OsmAnd, değişiklikleri dosyaya kaydetmeden yola uyguluyor. Değişiklikleri el ile kaydedebilirsiniz.</string>
+    <string name="gps_filter_actions_description">OsmAnd, değişiklikleri dosyayı güncellemeden yola uygulayacaktır. Değişiklikleri el ile kaydedebilirsiniz.</string>
     <string name="gps_filter_smoothing_desc">Noktalar arasındaki eşik mesafesini ayarlayın.
-\nSon görünür noktadan en az X uzaklıkta olan yol noktaları gizlenecektir.
-\nMesafe ne kadar büyükse, yol geometrisi o kadar basittir, dikkatli olun.</string>
+\nSon görünür noktadan en az bu uzaklıkta olmayan yol noktaları gizlenecektir.
+\nYüksek eşiklerin yol geometrisini aşırı basitleştirebileceğini unutmayın.</string>
     <string name="distance_between_points">Noktalar arasındaki mesafe</string>
-    <string name="gps_filter_precision">Asgari GPS Hassasiyeti</string>
+    <string name="gps_filter_precision">GPS hassasiyeti</string>
     <string name="gps_filter_smoothing">Düzeltme</string>
     <string name="save_as_copy">Kopya olarak kaydet</string>
     <string name="shared_string_gps_filter">GPS filtresi</string>
-    <string name="exit_without_saving_warning">Kaydetmeden çıkmak istediğinize emin misiniz\? Tüm değişiklikleri kaybedeceksiniz.</string>
+    <string name="exit_without_saving_warning">Değişiklikleri kaydetmeden çıkılsın mı\?</string>
     <string name="icon_group_industrial">Sanayi</string>
     <string name="delete_history_items">%1$s geçmiş ögesi silinsin mi\?</string>
     <string name="quick_action_toggle_preference">Tercihi değiştirmek için bir geçiş.</string>
@@ -4360,10 +4360,10 @@
     <string name="shared_string_hide_slope">Yamacı gizle</string>
     <string name="shared_string_uphill">Yokuş yukarı</string>
     <string name="elevation_profile">Yükseklik profili</string>
-    <string name="gps_filter_speed_altitude_desc">Belirlenen aralığa uyan yol noktaları grafikte ve haritada görünecek, geri kalanı gizlenecektir.</string>
-    <string name="gps_filter_hdop_desc">HDOP için izin verilen azami değeri ayarlayın.
-\nAyarlanan parametreden daha büyük olan noktalar gizlenecektir.</string>
-    <string name="storage_migration_wrong_folder_warning">Seçilen klasörde OsmAnd verilerini bulamıyoruz. Lütfen tekrar deneyin.</string>
+    <string name="gps_filter_speed_altitude_desc">Yalnızca belirlenen aralığa uyan yol noktaları grafikte ve haritada görünecek, geri kalanı gizlenecektir.</string>
+    <string name="gps_filter_hdop_desc">HDOP için kabul edilen azami değeri ayarlayın.
+\nDaha yüksek değere sahip noktalar gizlenecektir.</string>
+    <string name="storage_migration_wrong_folder_warning">Seçilen klasörde OsmAnd verileri bulunamadı. Lütfen tekrar deneyin.</string>
     <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="storage_found_files_size">%1$s dosya bulundu %2$s</string>
     <string name="history_actions_descr">Geçmişi bir dosyaya aktarabilirsiniz.</string>
@@ -4374,7 +4374,7 @@
     <string name="shared_string_grade">Derece</string>
     <string name="shared_string_downhill">Yokuş aşağı</string>
     <string name="rendering_attr_natureReserves_description">Doğa koruma alanı, korunan alanlar ve milli parkları göster.</string>
-    <string name="migration_files_present">%1$d dosyaları (%2$s) seçilen \'%3$s\' konumunda mevcut.</string>
+    <string name="migration_files_present">Seçilen \'%3$s\' konumunda %1$d dosya (%2$s) var.</string>
     <string name="storage_found_files_descr">%2$s dosyayı \"%3$s\"den \"%4$s\"e kopyalamak için \"%1$s\" düğmesine dokunun. Biraz zaman alabilir.</string>
     <string name="storage_copied_files_size">%1$s dosya kopyalandı %2$s</string>
     <string name="storage_copying_files_size">%1$s dosya kopyalanıyor %2$s</string>
@@ -4410,8 +4410,8 @@
     <string name="add_to_group">Gruba ekle</string>
     <string name="app_modes_options">Uygulama modlarını seç</string>
     <string name="shared_string_memory">Bellek</string>
-    <string name="memory_allocated_for_routing_ds">Daha yüksek bellek değeri, uzun güzergahların (500 km\'den fazla) hesaplanmasını hızlandırır, ancak diğer uygulamaların performansını etkileyebilir.
-\nKısa güzergahların hesaplanma hızını etkilemez.</string>
+    <string name="memory_allocated_for_routing_ds">Daha yüksek bellek ayrılması, uzun güzergahların (500 km\'den fazla) hesaplanmasını hızlandıracaktır, ancak diğer uygulamaların performansını etkileyebilir.
+\nKısa güzergahların hesaplanma hızı üzerinde etkisi yoktur.</string>
     <string name="reading_files">Dosyalar okunuyor…</string>
     <string name="shared_storage_second_step">\"Bu klasörü kullan\" seçeneğine tıklayın.</string>
     <string name="icon_group_education">Eğitim</string>
@@ -4444,6 +4444,10 @@
     <string name="release_4_1">• Android Auto için ilk destek eklendi
 \n
 \n • UTM koordinat araması için kullanıcı arayüzü güncellemesi
+\n
+\n • GPX yolları için GPS filtresi
+\n
+\n • Yükseklik widget\'ı (Pro)
 \n
 \n • Sık kullanılanlar: son kullanılan simgeleri görüntüleme özelliği eklendi
 \n
@@ -4479,4 +4483,8 @@
     <string name="routing_attr_only_permitted_ways_description">Yalnızca açıkça izin verilen yolları (izler, patikalar vb.) kullanın</string>
     <string name="shared_string_details">Ayrıntılar</string>
     <string name="is_disabled">%1$s devre dışı</string>
+    <string name="use_routing_fallback">Yönlendirme yedeği kullan</string>
+    <string name="use_routing_fallback_description">Çevrim içi yönlendirmeye ulaşılamadığında çevrim dışı yönlendirmeyi kullanın.</string>
+    <string name="created_on">Oluşturulma tarihi</string>
+    <string name="shared_string_size">Boyut</string>
 </resources>
