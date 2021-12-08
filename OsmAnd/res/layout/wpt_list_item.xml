@@ -35,8 +35,7 @@
 			android:id="@+id/list_divider"
 			android:layout_width="match_parent"
 			android:layout_height="1dp"
-			android:layout_marginStart="64dp"
-			android:layout_marginLeft="64dp"
+			android:layout_marginStart="@dimen/settings_divider_margin_start"
 			android:background="?attr/dashboard_divider"
 			android:visibility="gone" />
 

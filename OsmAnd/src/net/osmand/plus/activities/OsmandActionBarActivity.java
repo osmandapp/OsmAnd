@@ -6,8 +6,8 @@ import android.view.ViewGroup;
 
 import androidx.appcompat.app.ActionBar;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 
 @SuppressLint("Registered")

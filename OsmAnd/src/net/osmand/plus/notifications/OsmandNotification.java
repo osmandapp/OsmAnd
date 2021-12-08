@@ -10,7 +10,6 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationCompat.Builder;
 import androidx.core.app.NotificationManagerCompat;
 
-import net.osmand.plus.NotificationHelper;
 import net.osmand.plus.OsmandApplication;
 
 public abstract class OsmandNotification {

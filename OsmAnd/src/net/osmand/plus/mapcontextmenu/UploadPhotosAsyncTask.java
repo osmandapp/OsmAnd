@@ -11,16 +11,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.UploadPhotoProgressBottomSheet;
-import net.osmand.plus.openplacereviews.OPRConstants;
-import net.osmand.plus.openplacereviews.OprStartFragment;
-import net.osmand.plus.osmedit.opr.OpenDBAPI;
+import net.osmand.plus.plugins.openplacereviews.OPRConstants;
+import net.osmand.plus.plugins.openplacereviews.OprStartFragment;
+import net.osmand.plus.plugins.osmedit.opr.OpenDBAPI;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

@@ -825,7 +825,7 @@
     <string name="lang_it">الإيطالية</string>
     <string name="lang_ja">اليابانية</string>
     <string name="lang_ko">الكورية</string>
-    <string name="lang_no">النرويجية</string>
+    <string name="lang_no">بوكمول النرويجية</string>
     <string name="lang_ro">الرومانية</string>
     <string name="lang_ru">الروسية</string>
     <string name="lang_es">الإسبانية</string>
@@ -848,7 +848,7 @@
     <string name="localization_pref_title">إعدادات إقليمية</string>
     <string name="lang_hr">الكرواتية</string>
     <string name="lang_pt_br">البرتغالية (البرازيل)</string>
-    <string name="lang_af">اﻷفريكانية</string>
+    <string name="lang_af">الأفريكانية</string>
     <string name="lang_hy">الأرمينية</string>
     <string name="lang_eu">الباسكية</string>
     <string name="lang_be">البيلاروسية</string>
@@ -860,8 +860,8 @@
     <string name="lang_ka">الجورجية</string>
     <string name="lang_de">الألمانية</string>
     <string name="lang_el">اليونانية</string>
-    <string name="lang_lv">اللاتيفية</string>
-    <string name="lang_lt">اللتوانية</string>
+    <string name="lang_lv">اللاتفية</string>
+    <string name="lang_lt">الليتوانية</string>
     <string name="lang_pl">البولندية</string>
     <string name="lang_pt">البرتغالية</string>
     <string name="lang_sk">السلوفاكية</string>
@@ -1220,7 +1220,7 @@
     <string name="index_item_world_basemap">خريطة العالم العامة</string>
     <string name="lang_al">الألبانية</string>
     <string name="lang_ar">العربية</string>
-    <string name="lang_mr">ماراثى</string>
+    <string name="lang_mr">الماراثية</string>
     <string name="lang_fa">الفارسية</string>
     <string name="lang_sc">سردينيا</string>
     <string name="lang_sr">صربي</string>
@@ -1443,10 +1443,10 @@
     <string name="lang_be_by">البيلاروسية (اللاتينية)</string>
     <string name="lang_en_gb">الإنجليزية (المملكة المتحدة)</string>
     <string name="lang_eo">إسبرانتو</string>
-    <string name="lang_gl">الجاليكية</string>
-    <string name="lang_kn">الكانادا</string>
-    <string name="lang_nb">النرويجية ( بوكمال )</string>
-    <string name="lang_nn">النرويجية (الحديثة )</string>
+    <string name="lang_gl">الغاليسية</string>
+    <string name="lang_kn">الكنادية</string>
+    <string name="lang_nb">بوكمول النرويجية</string>
+    <string name="lang_nn">نينورسك النرويجية</string>
     <string name="lang_es_ar">الإسبانية (الأرجنتين)</string>
     <string name="si_nm">ميل بحري</string>
     <string name="dark_theme">ليلي</string>
@@ -1582,7 +1582,7 @@
     <string name="lang_vo">فولابوك</string>
     <string name="lang_te">التيلوغوية</string>
     <string name="lang_tl">التاغالوغية</string>
-    <string name="lang_nv">النافاجونية</string>
+    <string name="lang_nv">نافاجو</string>
     <string name="map_widget_magnetic_bearing">تأثير مغناطيسي</string>
     <string name="coords_format">نمط الإحداثيات</string>
     <string name="night">ليلاً</string>
@@ -1838,7 +1838,7 @@
     <string name="shared_string_commit">تقديم</string>
     <string name="context_menu_item_delete_waypoint">حذف إحداثية GPX ؟</string>
     <string name="context_menu_item_edit_waypoint">تعدبل إحداثية GPX</string>
-    <string name="lang_nds">ألمانية منخفضة</string>
+    <string name="lang_nds">الألمانية الدنيا</string>
     <string name="lang_fy">فريسك</string>
     <string name="rendering_attr_hideProposed_name">الأشياء المقترحة</string>
     <string name="osm_edit_created_poi">إنشاء OSM POI</string>
@@ -1856,10 +1856,10 @@
     <string name="traffic_warning_hazard">خطر</string>
     <string name="rendering_value_boldOutline_name">مخطط واضح</string>
     <string name="lang_pms">بييمونتي</string>
-    <string name="lang_br">بريتونية</string>
+    <string name="lang_br">البريتونية</string>
     <string name="lang_bpy">بيشنوبريا</string>
-    <string name="lang_new">نوار / باهاسا النيبال</string>
-    <string name="lang_ceb">السيبيونو</string>
+    <string name="lang_new">نيوار / نيبال بهاسا</string>
+    <string name="lang_ceb">السيبوانية</string>
     <string name="archive_wikipedia_data">لديك بيانات ويكيبيديا منزلة قديمة غير متوافقة. هل تريد أرشفتها؟</string>
     <string name="disable_recording_once_app_killed">منع التسجيل في الخلفية</string>
     <string name="shared_string_import2osmand">استيراد إلى أوسماند</string>
@@ -2023,7 +2023,7 @@
     <string name="donation_to_osm_desc">يتم إرسال جزء من تبرعك إلى رسامي الخرائط OSM. تكلفة الاشتراك لا تزال هي نفسها.</string>
     <string name="osm_live_subscription_desc">يُتيحُ لك الاشتراك الحصول على تحديثات أسبوعياً، يومياً أو كل ساعة بالإضافة إلى تحميلات غير محدودة لكافة الخرائط.</string>
     <string name="driving_region_australia">أستراليا</string>
-    <string name="lang_kab">قبائلي</string>
+    <string name="lang_kab">القبائلية</string>
     <string name="shared_string_filters">تصفية</string>
     <string name="apply_filters">تطبيق التصفية</string>
     <string name="save_filter">حفظ التصفية</string>
@@ -2623,7 +2623,7 @@
     <string name="osm_notes">ملاحظات OSM</string>
     <string name="will_open_tomorrow_at">يفتح غدًا على</string>
     <string name="what_is_here">ماذا هنا:</string>
-    <string name="lang_lo">اللاوسية</string>
+    <string name="lang_lo">لغة لاو</string>
     <string name="touring_view_renderer">عرض خريطة السياحة</string>
     <string name="copy_location_name">انسخ الموقع / اسم نقطة الاهتمام</string>
     <string name="toast_empty_name_error">ليس للمكان أي اسم</string>
@@ -3340,7 +3340,7 @@
     <string name="sett_parrot_ext_input">ببغاء</string>
     <string name="new_route_calculated_dist_dbg">المسار: المسافة%2$s، وقت التوجيه %1$s.
 \nالحساب: %3$.1f ث، %4$d طريق، %5$d تجانب)</string>
-    <string name="lang_oc">الأوكيتانية</string>
+    <string name="lang_oc">الأوكسيتانية</string>
     <string name="get_discount_second_part">ثم %1$s</string>
     <string name="apply_to_current_profile">تطبيق فقط على \"%1$s\"</string>
     <string name="route_parameters_info">إعدادات التوجيه في الوضع المحدد \"%1$s\".</string>
@@ -3596,12 +3596,12 @@
     <string name="lang_scn">الصقلية</string>
     <string name="lang_pnb">البنجابية</string>
     <string name="lang_ne">النيبالية</string>
-    <string name="lang_nap">نابولي</string>
+    <string name="lang_nap">النابولية</string>
     <string name="lang_my">البورمية</string>
     <string name="lang_mn">المنغولية</string>
-    <string name="lang_min">مينانغكابو</string>
-    <string name="lang_mg">مدغشقر</string>
-    <string name="lang_ky">القرقيزية</string>
+    <string name="lang_min">لغة مينانغكاباو</string>
+    <string name="lang_mg">الملغاشية</string>
+    <string name="lang_ky">القيرغيزستانية</string>
     <string name="lang_kk">الكازاخستانية</string>
     <string name="lang_jv">الجاوية</string>
     <string name="lang_gu">الجوجاراتية</string>
@@ -3610,7 +3610,7 @@
     <string name="lang_bar">البافارية</string>
     <string name="lang_ba">باشكير</string>
     <string name="lang_an">أراغونيزية</string>
-    <string name="lang_lmo">لومبارد</string>
+    <string name="lang_lmo">اللومباردية</string>
     <string name="custom_color">لون مخصص</string>
     <string name="extra_maps_menu_group">خرائط إضافية</string>
     <string name="download_unsupported_action">%1$s إجراء غير معتمد</string>

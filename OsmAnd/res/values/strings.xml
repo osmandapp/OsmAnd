@@ -18,6 +18,8 @@
     <string name="waypoint_appearance">Waypoint appearance</string>
     <string name="track_file_description">Taping on action will show a dialogue with all available tracks to be selected.</string>
     <string name="track_file">Track file</string>
+    <string name="turn_arrows">Turn Arrows</string>
+    <string name="turn_arrows_descr">Control the visibility of the turn arrows on the route line.</string>
     <string name="shared_string_size">Size</string>
     <string name="created_on">Created on</string>
     <string name="use_routing_fallback">Use routing fallback</string>

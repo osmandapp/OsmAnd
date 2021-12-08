@@ -1,14 +1,7 @@
 package net.osmand.plus.helpers;
 
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_ALARM_ANNOUNCE;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PNT_APPROACH;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_ALARM_ANNOUNCE;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_PNT_APPROACH;
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-
-import androidx.appcompat.content.res.AppCompatResources;
 
 import net.osmand.GPXUtilities;
 import net.osmand.Location;
@@ -22,16 +15,11 @@ import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.activities.IntermediatePointsDialog;
-import net.osmand.plus.base.PointImageDrawable;
-import net.osmand.plus.helpers.enums.DrivingRegion;
-import net.osmand.plus.helpers.enums.MetricsConstants;
-import net.osmand.plus.helpers.enums.SpeedConstants;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.AlarmInfo;
@@ -41,6 +29,10 @@ import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.DrivingRegion;
+import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -51,7 +43,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import androidx.appcompat.content.res.AppCompatResources;
 import gnu.trove.list.array.TIntArrayList;
+
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_ALARM_ANNOUNCE;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PNT_APPROACH;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_ALARM_ANNOUNCE;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_PNT_APPROACH;
 
 //	import android.widget.Toast;
 
@@ -160,13 +158,36 @@ public class WaypointHelper {
 			}
 		}
 		if (checkedIntermediates != null) {
-			IntermediatePointsDialog.commitPointsRemoval(app, checkedIntermediates);
+			commitPointsRemoval(checkedIntermediates);
 		}
+	}
 
+	private void commitPointsRemoval(final boolean[] checkedIntermediates) {
+		int cnt = 0;
+		for (int i = checkedIntermediates.length - 1; i >= 0; i--) {
+			if (!checkedIntermediates[i]) {
+				cnt++;
+			}
+		}
+		if (cnt > 0) {
+			boolean changeDestinationFlag = !checkedIntermediates[checkedIntermediates.length - 1];
+			if (cnt == checkedIntermediates.length) { // there is no alternative destination if all points are to be removed?
+				app.getTargetPointsHelper().removeAllWayPoints(true, true);
+			} else {
+				for (int i = checkedIntermediates.length - 2; i >= 0; i--) { // skip the destination until a retained waypoint is found
+					if (checkedIntermediates[i] && changeDestinationFlag) { // Find a valid replacement for the destination
+						app.getTargetPointsHelper().makeWayPointDestination(cnt == 0, i);
+						changeDestinationFlag = false;
+					} else if (!checkedIntermediates[i]) {
+						cnt--;
+						app.getTargetPointsHelper().removeWayPoint(cnt == 0, i);
+					}
+				}
+			}
+		}
 	}
 
 	public LocationPointWrapper getMostImportantLocationPoint(List<LocationPointWrapper> list) {
-		//Location lastProjection = app.getRoutingHelper().getLastProjection();
 		if (list != null) {
 			list.clear();
 		}

@@ -7,6 +7,17 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.util.Log;
 
+import net.osmand.Location;
+import net.osmand.data.ValueHolder;
+import net.osmand.plus.NavigationService;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.auto.RequestPermissionScreen.LocationPermissionCheckCallback;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.routing.IRouteInformationListener;
+import net.osmand.plus.views.OsmandMapTileView;
+
 import androidx.annotation.NonNull;
 import androidx.car.app.CarContext;
 import androidx.car.app.CarToast;
@@ -19,18 +30,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.Lifecycle.State;
 import androidx.lifecycle.LifecycleOwner;
-
-import net.osmand.Location;
-import net.osmand.ValueHolder;
-import net.osmand.plus.NavigationService;
-import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.auto.RequestPermissionScreen.LocationPermissionCheckCallback;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.routing.IRouteInformationListener;
-import net.osmand.plus.views.OsmandMapTileView;
 
 /**
  * Session class for the Navigation sample app.
@@ -97,6 +98,10 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 	public boolean hasStarted() {
 		Lifecycle.State state = getLifecycle().getCurrentState();
 		return state == Lifecycle.State.STARTED || state == Lifecycle.State.RESUMED;
+	}
+
+	public boolean isStateAtLeast(@NonNull State state) {
+		return getLifecycle().getCurrentState().isAtLeast(state);
 	}
 
 	public boolean hasSurface() {

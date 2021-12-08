@@ -4421,7 +4421,7 @@
     <string name="storage_copied_files_size">Se copiaron %1$s archivos (%2$s)</string>
     <string name="storage_found_files_size">Se encontraron %1$s archivos (%2$s)</string>
     <string name="shared_storage_last_step">Puedes definir una nueva carpeta de datos después.</string>
-    <string name="shared_storage_third_step">Permite acceder a la carpeta. Sin esto, OsmAnd no puede copiar archivos.</string>
+    <string name="shared_storage_third_step">Concede acceso a la carpeta. Sin esto, OsmAnd no puede copiar archivos.</string>
     <string name="shared_storage_first_step">Pulsa «%1$s».
 \nEl gestor de archivos se abrirá donde debería encontrar y abrir la carpeta «osmand».</string>
     <string name="shared_storage_migration_descr">Debido a los cambios en el acceso al almacenamiento en Android, OsmAnd ya no puede usar «%1$s».
@@ -4483,4 +4483,8 @@
     <string name="save_as_copy">Guardar como copia</string>
     <string name="gps_filter_actions_description">OsmAnd aplicará los cambios a la traza, sin actualizar el archivo. Puedes guardar los cambios manualmente.</string>
     <string name="shared_string_gps_filter">Filtro del GPS</string>
+    <string name="use_routing_fallback">Usar navegación alternativa</string>
+    <string name="created_on">Creado el</string>
+    <string name="shared_string_size">Tamaño</string>
+    <string name="use_routing_fallback_description">Usar la navegación sin conexión cuando la navegación en línea no pueda conseguirse.</string>
 </resources>
