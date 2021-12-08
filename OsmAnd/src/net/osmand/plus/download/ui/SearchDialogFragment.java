@@ -159,7 +159,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 
 		searchEditText = (EditText) view.findViewById(R.id.searchEditText);
 		searchEditText.setHint(R.string.search_map_hint);
-		searchEditText.setTextColor(ColorUtilities.getPrimaryTextColor(activity, !nightMode));
+		searchEditText.setTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(activity, nightMode));
 		searchEditText.setHintTextColor(ContextCompat.getColor(activity, nightMode ? R.color.searchbar_tab_inactive_dark : R.color.inactive_item_orange));
 
 		progressBar = (ProgressBar) view.findViewById(R.id.searchProgressBar);
