@@ -3779,7 +3779,34 @@
     <string name="travel_route_types">路线类型</string>
     <string name="gps_filter_smoothing">平滑</string>
     <string name="not_enough_contributions_descr">至少需要在过去两个月 %2$s 期间进行 %1$s 次更改才能访问无限制的每小时地图更新。</string>
-    <string name="shared_string_precision">精确</string>
+    <string name="shared_string_precision">精度</string>
     <string name="shared_string_feet">英尺</string>
     <string name="gps_filter_precision">GPS 精度</string>
+    <string name="save_as_copy">另存为副本</string>
+    <string name="gps_filter_actions_description">OsmAnd 将在不更新文件的情况下将更改应用到轨迹中。你可以手动保存更改。</string>
+    <string name="shared_string_gps_filter">GPS 筛选器</string>
+    <string name="save_changes_into_file">将更改保存到文件</string>
+    <string name="storage_migration_wrong_folder_warning">在选定的文件夹中找不到 OsmAnd 数据。请再试一次。</string>
+    <string name="exit_without_saving_warning">不保存更改就退出？</string>
+    <string name="migration_files_present">在所选位置 \'%3$s\' 中有 %1$d 个文件（%2$s）。</string>
+    <string name="memory_allocated_for_routing_ds">更高的内存分配将加速长途线路(超过500公里)的计算，但可能会影响其他应用程序的性能。
+\n对短途线路的计算速度没有影响。</string>
+    <string name="use_routing_fallback">使用路线规划后备</string>
+    <string name="shared_string_statistics">统计数字</string>
+    <string name="gps_filter_hdop_desc">设置 HDOP 的最大接受值。
+\n值较高的点将被隐藏。</string>
+    <string name="created_on">创建于</string>
+    <string name="fold_unfold">折叠/展开</string>
+    <string name="app_profile_type">应用程序配置文件类型</string>
+    <string name="map_marker_options">地图标识选项</string>
+    <string name="add_to_group">添加到组</string>
+    <string name="shared_string_memory">内存</string>
+    <string name="shared_string_size">尺寸</string>
+    <string name="distance_between_points">点之间的距离</string>
+    <string name="use_routing_fallback_description">无法使用联网路线规划时，使用离线路线规划。</string>
+    <string name="gps_filter_smoothing_desc">设置点之间的阈值距离。
+\n离上一个可见点不超过这个距离的轨迹点将被隐藏。
+\n注意，过高的阈值可能会过度简化轨迹的几何形状。</string>
+    <string name="app_modes_options">选择程序模式</string>
+    <string name="gps_filter_speed_altitude_desc">只有匹配设定间隔的轨迹点才会出现在图表和地图上，其余的轨迹点将被隐藏。</string>
 </resources>
