@@ -8,7 +8,7 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.renderer.HorizontalBarChartRenderer;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class CustomBarChartRenderer extends HorizontalBarChartRenderer {
 	private float highlightHalfWidth;

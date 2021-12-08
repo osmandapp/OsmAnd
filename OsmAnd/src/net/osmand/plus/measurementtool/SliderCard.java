@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 

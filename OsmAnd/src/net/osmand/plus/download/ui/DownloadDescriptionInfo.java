@@ -3,7 +3,7 @@ package net.osmand.plus.download.ui;
 import android.content.Context;
 import android.text.Html;
 
-import net.osmand.JsonUtils;
+import net.osmand.plus.utils.JsonUtils;
 import net.osmand.PlatformUtil;
 
 import org.apache.commons.logging.Log;

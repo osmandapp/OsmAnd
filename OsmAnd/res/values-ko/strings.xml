@@ -2235,4 +2235,20 @@
     <string name="shared_string_end_time">종료시간</string>
     <string name="average_speed">평균 속도</string>
     <string name="routing_attr_piste_type_sled_description">썰매 사용을 위한 슬로프.</string>
+    <string name="shared_string_add_photo">사진 추가</string>
+    <string name="select_data_to_export">파일로 내보낼 데이터를 선택합니다.</string>
+    <string name="icon_group_travel">여행</string>
+    <string name="icon_group_service">서비스</string>
+    <string name="icon_group_emergency">비상</string>
+    <string name="icon_group_symbols">기호</string>
+    <string name="use_routing_fallback">라우팅 대체 사용</string>
+    <string name="app_mode_light_aircraft">경비행기</string>
+    <string name="file_size_needed_for_import">가져오기에 필요</string>
+    <string name="register_opr_create_new_account">새 계정 만들기</string>
+    <string name="select_groups_for_import">가져올 그룹을 선택하십시오.</string>
+    <string name="approximate_file_size">대략적인 파일 크기</string>
+    <string name="select_picture">사진 선택</string>
+    <string name="enter_text_separated">태그를 쉼표로 구분하여 입력하십시오.</string>
+    <string name="icon_group_sport">스포츠</string>
+    <string name="use_routing_fallback_description">온라인 라우팅에 연결할 수 없는 경우 오프라인 라우팅을 사용합니다.</string>
 </resources>
