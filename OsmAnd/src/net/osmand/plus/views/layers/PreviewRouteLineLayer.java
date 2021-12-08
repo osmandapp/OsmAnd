@@ -19,13 +19,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.graphics.drawable.DrawableCompat;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.layers.base.BaseRouteLayer;
 import net.osmand.plus.views.layers.geometry.GeometryWayStyle;
 import net.osmand.plus.views.layers.geometry.MultiColoringGeometryWay.GeometryGradientWayStyle;
@@ -146,32 +146,31 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		previewLineGeometry.drawRouteSegment(tileBox, canvas, tx, ty, angles, distances, 0, styles);
 		canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
-		Matrix matrix = new Matrix();
-		Path path = new Path();
-		int lineLength = AndroidUtils.dpToPx(view.getContext(), 24);
-		int offset = AndroidUtils.isLayoutRtl(view.getContext()) ? lineLength : -lineLength;
-		int attrsTurnArrowColor = attrs.paint3.getColor();
-		if (customTurnArrowColor != 0) {
-			attrs.paint3.setColor(customTurnArrowColor);
-		}
-		float routeWidth = previewLineGeometry.getDefaultWayStyle().getWidth(0);
-		if (routeWidth != 0) {
-			attrs.paint3.setStrokeWidth(routeWidth / 2);
-			//attrs.paint3.setStrokeWidth(Math.min(previewLineGeometry.getContext().getAttrs().defaultWidth3, routeWidth / 2));
-		}
-		path.moveTo(centerX + offset, startY);
-		path.lineTo(centerX, startY);
-		path.lineTo(centerX, startY - lineLength);
-		if (previewRouteLineInfo.showTurnArrows()){
+		if (previewRouteLineInfo.showTurnArrows()) {
+			Path path = new Path();
+			Matrix matrix = new Matrix();
+			int lineLength = AndroidUtils.dpToPx(view.getContext(), 24);
+			int offset = AndroidUtils.isLayoutRtl(view.getContext()) ? lineLength : -lineLength;
+			int attrsTurnArrowColor = attrs.paint3.getColor();
+			if (customTurnArrowColor != 0) {
+				attrs.paint3.setColor(customTurnArrowColor);
+			}
+			float routeWidth = previewLineGeometry.getDefaultWayStyle().getWidth(0);
+			if (routeWidth != 0) {
+				attrs.paint3.setStrokeWidth(routeWidth / 2);
+				//attrs.paint3.setStrokeWidth(Math.min(previewLineGeometry.getContext().getAttrs().defaultWidth3, routeWidth / 2));
+			}
+			path.moveTo(centerX + offset, startY);
+			path.lineTo(centerX, startY);
+			path.lineTo(centerX, startY - lineLength);
 			drawTurnArrow(canvas, matrix, centerX, startY - lineLength, centerX, startY);
 			canvas.drawPath(path, attrs.paint3);
-		}
-		path.reset();
-		path.moveTo(centerX, endY + lineLength);
-		path.lineTo(centerX, endY);
-		path.lineTo(centerX - offset, endY);
 
-		if (showTurnArrows()){
+			path.reset();
+			path.moveTo(centerX, endY + lineLength);
+			path.lineTo(centerX, endY);
+			path.lineTo(centerX - offset, endY);
+
 			drawTurnArrow(canvas, matrix, centerX - offset, endY, centerX, endY);
 			attrs.paint3.setColor(attrsTurnArrowColor);
 			canvas.drawPath(path, attrs.paint3);
@@ -254,7 +253,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 	}
 
 	private boolean fillRouteInfoAttributeArrays(List<Float> tx, List<Float> ty, List<Double> angles,
-	                                          List<Double> distances, List<GeometryWayStyle<?>> styles) {
+	                                             List<Double> distances, List<GeometryWayStyle<?>> styles) {
 		List<Integer> palette = fetchColorsOfRouteInfoAttribute();
 		if (Algorithms.isEmpty(palette)) {
 			return false;
