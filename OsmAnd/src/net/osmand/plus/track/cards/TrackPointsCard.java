@@ -488,7 +488,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			AndroidUiHelper.updateVisibility(row.findViewById(R.id.divider), true);
 			AndroidUiHelper.updateVisibility(row.findViewById(R.id.waypoint_description), false);
 			AndroidUiHelper.updateVisibility(row.findViewById(R.id.list_divider), false);
-			AndroidUiHelper.updateVisibility(row.findViewById(R.id.group_divider), true);
+			AndroidUiHelper.updateVisibility(row.findViewById(R.id.group_divider), false);
 			AndroidUiHelper.updateVisibility(row.findViewById(R.id.vertical_divider), true);
 			AndroidUiHelper.updateVisibility(row.findViewById(R.id.location_data), false);
 
@@ -553,7 +553,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 
 			TextView description = row.findViewById(R.id.waypoint_description);
 			if (!Algorithms.isEmpty(gpxItem.description)) {
-				description.setText(gpxItem.description);
+				description.setText(gpxItem.description.replace("\n", " "));
 				AndroidUiHelper.updateVisibility(description, true);
 			} else {
 				AndroidUiHelper.updateVisibility(description, false);
