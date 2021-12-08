@@ -551,7 +551,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 
 			TextView description = row.findViewById(R.id.waypoint_description);
 			if (!Algorithms.isEmpty(gpxItem.description)) {
-				description.setText(gpxItem.description.replace("\n", ""));
+				description.setText(gpxItem.description.replace("\n", " "));
 				AndroidUiHelper.updateVisibility(description, true);
 			} else {
 				AndroidUiHelper.updateVisibility(description, false);
