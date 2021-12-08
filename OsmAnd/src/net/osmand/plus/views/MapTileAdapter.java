@@ -1,6 +1,9 @@
 package net.osmand.plus.views;
 
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.views.layers.MapTileLayer;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
+
 import android.graphics.Canvas;
 
 /**

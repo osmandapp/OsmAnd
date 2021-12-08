@@ -8,7 +8,7 @@ import android.webkit.WebViewClient;
 
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.Amenity;
 
 import static net.osmand.plus.wikipedia.WikiArticleHelper.WIKI_DOMAIN;

@@ -19,10 +19,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.google.android.material.slider.Slider;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
@@ -30,7 +30,7 @@ import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.settings.fragments.HeaderInfo;
 import net.osmand.plus.settings.fragments.HeaderUiAdapter;
 import net.osmand.plus.track.AppearanceViewHolder;
-import net.osmand.plus.track.TrackAppearanceFragment.OnNeedScrollListener;
+import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
 import net.osmand.util.Algorithms;
 
 import java.util.Arrays;

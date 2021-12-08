@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.FavouritePoint;
-import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseLoadAsyncTask;

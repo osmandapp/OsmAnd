@@ -45,16 +45,17 @@ import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.ValueHolder;
+import net.osmand.data.ValueHolder;
 import net.osmand.data.LatLon;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
@@ -71,18 +72,18 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
-import net.osmand.plus.mapillary.MapillaryFiltersFragment;
-import net.osmand.plus.mapillary.MapillaryPlugin.MapillaryFirstDialogFragment;
-import net.osmand.plus.osmedit.OsmNotesMenu;
-import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.plugins.mapillary.MapillaryFiltersFragment;
+import net.osmand.plus.plugins.mapillary.MapillaryPlugin.MapillaryFirstDialogFragment;
+import net.osmand.plus.plugins.osmedit.menu.OsmNotesMenu;
+import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.srtmplugin.ContourLinesMenu;
-import net.osmand.plus.srtmplugin.SRTMPlugin;
-import net.osmand.plus.srtmplugin.TerrainFragment;
+import net.osmand.plus.plugins.srtm.ContourLinesMenu;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
+import net.osmand.plus.plugins.srtm.TerrainFragment;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
@@ -551,7 +552,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	public void setDashboardVisibility(boolean visible, DashboardType type, DashboardType prevItem, boolean animation, int[] animationCoordinates) {
-		if (visible == this.visible && type == visibleType) {
+		if (visible == this.visible && type == visibleType || !AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 			return;
 		}
 		mapActivity.getRoutingHelper().removeListener(this);
@@ -818,33 +819,30 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		}
 	}
 
-	private OnItemClickListener getOptionsMenuOnClickListener(final ContextMenuAdapter cm,
-															  final ArrayAdapter<ContextMenuItem> listAdapter) {
-		return new AdapterView.OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int which, long id) {
-				ContextMenuItem item = cm.getItem(which);
-				ContextMenuAdapter.ItemClickListener click = item.getItemClickListener();
-				if (click instanceof OnRowItemClick) {
-					boolean cl = ((OnRowItemClick) click).onRowItemClick(listAdapter, view, item.getTitleId(), which);
-					if (cl) {
-						hideDashboard();
-					}
-				} else if (click != null) {
-					CompoundButton btn = view.findViewById(R.id.toggle_item);
-					if (btn != null && btn.getVisibility() == View.VISIBLE) {
-						btn.setChecked(!btn.isChecked());
-					} else {
-						if (click.onContextMenuClick(listAdapter, item.getTitleId(), which, false, null)) {
-							hideDashboard();
-						}
-					}
-				} else {
-					if (!item.isCategory()) {
-						hideDashboard();
-					}
+	private OnItemClickListener getOptionsMenuOnClickListener(final ContextMenuAdapter adapter,
+	                                                          final ArrayAdapter<ContextMenuItem> listAdapter) {
+		return (parent, view, position, id) -> {
+			int size = adapter.getItems().size();
+			if (position < 0 || position >= size) {
+				LOG.warn("Tried to select item " + position + " items in list: " + size);
+				return;
+			}
+			ContextMenuItem item = adapter.getItem(position);
+			ItemClickListener click = item.getItemClickListener();
+			if (click instanceof OnRowItemClick) {
+				boolean cl = ((OnRowItemClick) click).onRowItemClick(listAdapter, view, item.getTitleId(), position);
+				if (cl) {
+					hideDashboard();
 				}
+			} else if (click != null) {
+				CompoundButton btn = view.findViewById(R.id.toggle_item);
+				if (btn != null && btn.getVisibility() == View.VISIBLE) {
+					btn.setChecked(!btn.isChecked());
+				} else if (click.onContextMenuClick(listAdapter, item.getTitleId(), position, false, null)) {
+					hideDashboard();
+				}
+			} else if (!item.isCategory()) {
+				hideDashboard();
 			}
 		};
 	}

@@ -22,39 +22,24 @@ import android.widget.ProgressBar;
 import android.widget.Space;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.UiThread;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.viewpager.widget.ViewPager;
-
 import com.ibm.icu.impl.IllegalIcuArgumentException;
 
-import net.osmand.AndroidUtils;
+import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibilityAssistant;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.base.BottomSheetDialogFragment;
-import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
-import net.osmand.plus.download.ReloadIndexesTask.ReloadIndexesListener;
 import net.osmand.plus.download.ui.ActiveDownloadsDialogFragment;
 import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
 import net.osmand.plus.download.ui.LocalIndexesFragment;
@@ -63,9 +48,13 @@ import net.osmand.plus.download.ui.UpdatesIndexFragment;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
-import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
+import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
+import net.osmand.plus.resources.ResourceManager.ReloadIndexesListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.srtmplugin.SRTMPlugin;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.util.Algorithms;
 
@@ -77,8 +66,17 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import static net.osmand.plus.download.ui.SearchDialogFragment.SHOW_WIKI_KEY;
 
@@ -123,8 +121,6 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	private boolean srtmNeedsInstallation;
 	private boolean nauticalPluginDisabled;
 	private boolean freeVersion;
-
-	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -572,8 +568,8 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	}
 
 	public void reloadLocalIndexes() {
-		final OsmandApplication app = (OsmandApplication) getApplication();
-		ReloadIndexesTask reloadIndexesTask = new ReloadIndexesTask(app, new ReloadIndexesListener() {
+		OsmandApplication app = getMyApplication();
+		app.getResourceManager().reloadIndexesAsync(IProgress.EMPTY_PROGRESS, new ReloadIndexesListener() {
 			@Override
 			public void reloadIndexesStarted() {
 				setSupportProgressBarIndeterminateVisibility(true);
@@ -588,7 +584,6 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 				onUpdatedIndexesList();
 			}
 		});
-		reloadIndexesTask.executeOnExecutor(singleThreadExecutor);
 	}
 
 	public void setDownloadItem(WorldRegion region, String targetFileName) {

@@ -15,7 +15,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.widget.CompoundButtonCompat;
 
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 
 public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescription {
 

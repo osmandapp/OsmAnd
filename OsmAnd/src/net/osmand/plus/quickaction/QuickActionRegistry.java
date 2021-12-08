@@ -14,7 +14,7 @@ import com.google.gson.JsonSerializer;
 import com.google.gson.reflect.TypeToken;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.quickaction.actions.DayNightModeAction;
 import net.osmand.plus.quickaction.actions.DisplayPositionAction;

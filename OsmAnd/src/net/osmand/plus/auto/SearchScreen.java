@@ -26,8 +26,8 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.auto.SearchHelper.SearchHelperListener;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -35,7 +35,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.ObjectType;
@@ -299,7 +299,9 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 
 				// History
 				SearchResultCollection res = getSearchUICore().shallowSearch(SearchHistoryAPI.class, "", null, false, false);
-				recentResults.addAll(res.getCurrentSearchResults());
+				if (res != null) {
+					recentResults.addAll(res.getCurrentSearchResults());
+				}
 				this.recentResults = recentResults;
 				if (!searchHelper.isSearching() && Algorithms.isEmpty(searchHelper.getSearchQuery())) {
 					showRecents();
