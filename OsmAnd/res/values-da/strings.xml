@@ -4493,4 +4493,6 @@
     <string name="use_routing_fallback">Brug ruteberegningsalternativ</string>
     <string name="created_on">Oprettet den</string>
     <string name="shared_string_size">Størrelse</string>
+    <string name="turn_arrows_descr">Indstil synligheden af svingpilene på rutelinjen.</string>
+    <string name="turn_arrows">Svingpile</string>
 </resources>
