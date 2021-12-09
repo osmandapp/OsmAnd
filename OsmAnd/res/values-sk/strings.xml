@@ -4480,4 +4480,6 @@
     <string name="storage_migration_wrong_folder_warning">V zvolenom priečinku sa nenašli údaje OsmAnd. Prosím skúste znovu.</string>
     <string name="use_routing_fallback_description">Použiť offline výpočet trasy ak je online služba nedosiahnuteľná.</string>
     <string name="use_routing_fallback">Použiť náhradný výpočet trasy</string>
+    <string name="created_on">Vytvorené dňa</string>
+    <string name="shared_string_size">Veľkosť</string>
 </resources>
