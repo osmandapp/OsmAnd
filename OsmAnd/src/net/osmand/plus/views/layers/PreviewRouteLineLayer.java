@@ -214,7 +214,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 	private void fillAltitudeGradientArrays(List<Double> distances, List<GeometryWayStyle<?>> styles) {
 		int[] colors = RouteColorize.COLORS;
 		for (int i = 1; i < distances.size(); i++) {
-			RouteGeometryWay.GeometryGradientWayStyle style = previewLineGeometry.getGradientWayStyle();
+			GeometryGradientWayStyle<?> style = previewLineGeometry.getGradientWayStyle();
 			styles.add(style);
 			double prevDist = distances.get(i - 1);
 			double currDist = distances.get(i);
@@ -237,11 +237,11 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		fillMultiColorLineArrays(palette, gradientLengthsRatio, tx, ty, angles, distances, colors);
 
 		for (int i = 1; i < tx.size(); i++) {
-			GeometryGradientWayStyle style = previewLineGeometry.getGradientWayStyle();
+			GeometryGradientWayStyle<?> style = previewLineGeometry.getGradientWayStyle();
 			styles.add(style);
 			double currDist = distances.get(i);
 			double nextDist = i + 1 == distances.size() ? 0 : distances.get(i + 1);
-			style.currColor = i == 1 ? colors.get(0) : ((GeometryGradientWayStyle) styles.get(i - 2)).nextColor;
+			style.currColor = i == 1 ? colors.get(0) : ((GeometryGradientWayStyle<?>) styles.get(i - 2)).nextColor;
 			if (colors.get(i) != 0) {
 				style.nextColor = colors.get(i);
 			} else {
@@ -266,7 +266,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		fillMultiColorLineArrays(palette, attributesLengthsRatio, tx, ty, angles, distances, colors);
 
 		for (int i = 0; i < tx.size() - 1; i++) {
-			GeometrySolidWayStyle style = previewLineGeometry.getSolidWayStyle(colors.get(i));
+			GeometrySolidWayStyle<?> style = previewLineGeometry.getSolidWayStyle(colors.get(i));
 			styles.add(style);
 		}
 		styles.add(styles.get(styles.size() - 1));
@@ -377,7 +377,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		List<RenderingRule> renderingRules = renderer.getRenderingAttributeRule(routeInfoAttribute)
 				.getIfElseChildren();
 		if (Algorithms.isEmpty(renderingRules)) {
-			Collections.emptyList();
+			return Collections.emptyList();
 		}
 
 		List<Integer> colors = new ArrayList<>();
