@@ -2163,8 +2163,8 @@
     <string name="rendering_attr_depthContours_name">Izobaty</string>
     <string name="routing_attr_height_obstacles_name">Używanie danych wysokościowych</string>
     <string name="route_altitude">Wysokość trasy</string>
-    <string name="altitude_descent">W dół</string>
-    <string name="altitude_ascent">W górę</string>
+    <string name="altitude_descent">Spadek</string>
+    <string name="altitude_ascent">Pod górę</string>
     <string name="altitude_range">Zakres wysokości</string>
     <string name="average_altitude">Średnia wysokość</string>
     <string name="total_distance">Całkowita odległość</string>
@@ -4314,7 +4314,7 @@
 \nZarządzaj lub anuluj subskrypcje w ustawieniach Amazon w dowolnym momencie.</string>
     <string name="no_items_of_type_message">Nie masz żadnych elementów tego typu</string>
     <string name="routeInfo_winter_ice_road_description">Pokoloruj trasę lub linię śladu według zimowej klasyfikacji dróg.</string>
-    <string name="routeInfo_smoothness_description">Klasyfikacja zwrotności drogi/ścieżki dla pojazdów kołowych, w szczególności w odniesieniu do regularności/płaskości nawierzchni.</string>
+    <string name="routeInfo_smoothness_description">Klasyfikacja manewrowości drogi/chodnika dla pojazdów kołowych, w szczególności w odniesieniu do regularności/płaskości nawierzchni.</string>
     <string name="routeInfo_surface_description">Podaj informacje o fizycznej powierzchni drogi/chodnika.</string>
     <string name="routeInfo_roadClass_description">Pokoloruj trasę lub linię śladu według klasyfikacji dróg.</string>
     <string name="add_group_to_markers">Dodaj grupę do listy znaczników</string>
@@ -4388,7 +4388,7 @@
     <string name="android_auto_purchase_request_title">Kup OsmAnd Pro lub Maps+, aby używać OsmAnd z Android Auto</string>
     <string name="continue_on_phone">Kontynuuj na urządzeniu mobilnym</string>
     <string name="location_access_request_title">OsmAnd potrzebuje dostępu do lokalizacji w celu nawigacji.</string>
-    <string name="location_access_request_action">Dotacja uznana</string>
+    <string name="location_access_request_action">Przyznanie dostępu</string>
     <string name="location_access_request_result">Zatwierdzono: %1$s Odrzucono: %2$s</string>
     <string name="shared_string_articles">Artykuły</string>
     <string name="included_categories">Uwzględnione kategorie</string>
@@ -4457,4 +4457,23 @@
     <string name="gps_filter_precision">Dokładność GPS</string>
     <string name="gps_filter_actions_description">OsmAnd zastosuje zmiany do ścieżki bez aktualizowania pliku. Zmiany można zapisywać ręcznie.</string>
     <string name="storage_migration_wrong_folder_warning">W wybranym folderze nie znaleziono danych OsmAnd. Proszę spróbuj ponownie.</string>
+    <string name="fold_unfold">złóż/rozłóż</string>
+    <string name="app_profile_type">Typ profilu aplikacji</string>
+    <string name="storage_copied_files_size">Skopiowane %1$s pliki %2$s</string>
+    <string name="rendering_attr_natureReserves_description">Pokaż rezerwat przyrody, obszary chronione i parki narodowe.</string>
+    <string name="migration_files_present">W wybranej lokalizacji \'%3$s\' znajdują się pliki %1$d (%2$s).</string>
+    <string name="map_marker_options">Opcje znaczników mapy</string>
+    <string name="shared_string_size">Rozmiar</string>
+    <string name="created_on">Utworzono na</string>
+    <string name="show_parameter_seekbar">Pokaż pasek wyszukiwania parametrów</string>
+    <string name="shared_string_grade">Stopień</string>
+    <string name="storage_found_files_size">Znaleziono %1$s plików %2$s</string>
+    <string name="shared_string_show_slope">Pokaż nachylenie</string>
+    <string name="shared_string_hide_slope">Ukryj nachylenie</string>
+    <string name="shared_string_uphill">Pod górę</string>
+    <string name="shared_string_downhill">Spadek</string>
+    <string name="elevation_profile">Profil wysokościowy</string>
+    <string name="memory_allocated_for_routing_ds">Wyższy przydział pamięci przyspiesza obliczanie długich tras (ponad 500 km), ale może mieć wpływ na działanie innych aplikacji.
+\nNie ma wpływu na szybkość obliczania tras krótkich.</string>
+    <string name="not_enough_contributions_descr">Co najmniej %1$s zmian w ciągu ostatnich dwóch miesięcy %2$s jest wymagane, aby uzyskać dostęp do nieograniczonych godzinowych aktualizacji map.</string>
 </resources>
