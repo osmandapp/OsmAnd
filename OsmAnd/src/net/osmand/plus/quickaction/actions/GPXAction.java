@@ -264,9 +264,9 @@ public class GPXAction extends QuickAction {
 	                               @NonNull OsmandApplication app) {
 		UiUtilities iconsCache = app.getUIUtilities();
 
-		TextView name = trackInfoContainer.findViewById(R.id.name);
-		name.setText(gpxName);
-		name.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+		TextView title = trackInfoContainer.findViewById(R.id.title);
+		title.setText(gpxName);
+		title.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 
 		ImageView trackIcon = trackInfoContainer.findViewById(R.id.icon);
 		trackIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_polygom_dark));
