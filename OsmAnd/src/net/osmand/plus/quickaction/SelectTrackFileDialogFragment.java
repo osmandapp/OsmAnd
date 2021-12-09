@@ -7,29 +7,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import net.osmand.AndroidUtils;
-import net.osmand.CallbackWithObject;
-import net.osmand.IndexConstants;
-import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.helpers.GpxTrackAdapter;
-import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
-import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
-
-import java.io.File;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import net.osmand.CallbackWithObject;
+import net.osmand.IndexConstants;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.track.GpxTrackAdapter;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+
+import java.io.File;
+import java.util.List;
 
 public class SelectTrackFileDialogFragment extends BaseOsmAndDialogFragment {
 
