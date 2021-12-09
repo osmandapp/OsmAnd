@@ -140,8 +140,15 @@ public class RouteProvider {
 				} else if (params.mode.getRouteService() == RouteService.BROUTER) {
 					res = findBROUTERRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.ONLINE) {
-					res = findOnlineRoute(params);
-					if (!res.isCalculated()) {
+					boolean useFallbackRouting = false;
+					try {
+						res = findOnlineRoute(params);
+					} catch (IOException | JSONException e) {
+						res = new RouteCalculationResult(null);
+						params.initialCalculation = false;
+						useFallbackRouting = true;
+					}
+					if (useFallbackRouting || !res.isCalculated()) {
 						OnlineRoutingHelper helper = params.ctx.getOnlineRoutingHelper();
 						String engineKey = params.mode.getRoutingProfile();
 						OnlineRoutingEngine engine = helper.getEngineByKey(engineKey);
@@ -159,7 +166,7 @@ public class RouteProvider {
 					log.info("Finding route contained " + res.getImmutableAllLocations().size() + " points for " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				}
 				return res;
-			} catch (IOException | ParserConfigurationException | SAXException | JSONException e) {
+			} catch (IOException | ParserConfigurationException | SAXException e) {
 				log.error("Failed to find route ", e);
 			}
 		}
