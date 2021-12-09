@@ -3,10 +3,6 @@ package net.osmand.plus.utils;
 import android.content.Context;
 import android.text.format.DateUtils;
 
-import androidx.annotation.NonNull;
-import androidx.core.text.TextUtilsCompat;
-import androidx.core.view.ViewCompat;
-
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.MGRSPoint;
 import com.jwetherell.openmap.common.UTMPoint;
@@ -33,10 +29,17 @@ import java.text.DecimalFormatSymbols;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.core.text.TextUtilsCompat;
+import androidx.core.view.ViewCompat;
 
 import static java.util.Calendar.DAY_OF_YEAR;
 import static java.util.Calendar.ERA;
@@ -288,9 +291,6 @@ public class OsmAndFormatter {
 	}
 
 	public static String getFormattedDistance(float meters, OsmandApplication ctx, boolean forceTrailingZeros, MetricsConstants mc) {
-		String format1 = forceTrailingZeros ? "{0,number,0.0} " : "{0,number,0.#} ";
-		String format2 = forceTrailingZeros ? "{0,number,0.00} " : "{0,number,0.##} ";
-
 		int mainUnitStr;
 		float mainUnitInMeters;
 		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
@@ -304,31 +304,34 @@ public class OsmAndFormatter {
 			mainUnitInMeters = METERS_IN_ONE_MILE;
 		}
 
+		float floatDistance = ((float) meters) / mainUnitInMeters;
+
 		if (meters >= 100 * mainUnitInMeters) {
-			return (int) (meters / mainUnitInMeters + 0.5) + " " + ctx.getString(mainUnitStr); //$NON-NLS-1$
+			return formatValue((int) (meters / mainUnitInMeters + 0.5), mainUnitStr, forceTrailingZeros,
+					0, ctx);
 		} else if (meters > 9.99f * mainUnitInMeters) {
-			return MessageFormat.format(format1 + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
+			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 1, ctx);
 		} else if (meters > 0.999f * mainUnitInMeters) {
-			return MessageFormat.format(format2 + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
+			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 2, ctx);
 		} else if (mc == MetricsConstants.MILES_AND_FEET && meters > 0.249f * mainUnitInMeters) {
-			return MessageFormat.format(format2 + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
+			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 2, ctx);
 		} else if (mc == MetricsConstants.MILES_AND_METERS && meters > 0.249f * mainUnitInMeters) {
-			return MessageFormat.format(format2 + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
+			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 2, ctx);
 		} else if (mc == MetricsConstants.MILES_AND_YARDS && meters > 0.249f * mainUnitInMeters) {
-			return MessageFormat.format(format2 + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
+			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 2, ctx);
 		} else if (mc == MetricsConstants.NAUTICAL_MILES && meters > 0.99f * mainUnitInMeters) {
-			return MessageFormat.format(format2 + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
+			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 2, ctx);
 		} else {
 			if (mc == MetricsConstants.KILOMETERS_AND_METERS || mc == MetricsConstants.MILES_AND_METERS) {
-				return ((int) (meters + 0.5)) + " " + ctx.getString(R.string.m); //$NON-NLS-1$
+				return formatValue((int) (meters + 0.5), R.string.m, forceTrailingZeros, 0, ctx);
 			} else if (mc == MetricsConstants.MILES_AND_FEET) {
 				int feet = (int) (meters * FEET_IN_ONE_METER + 0.5);
-				return feet + " " + ctx.getString(R.string.foot); //$NON-NLS-1$
+				return formatValue(feet, R.string.foot, forceTrailingZeros, 0, ctx);
 			} else if (mc == MetricsConstants.MILES_AND_YARDS) {
 				int yards = (int) (meters * YARDS_IN_ONE_METER + 0.5);
-				return yards + " " + ctx.getString(R.string.yard); //$NON-NLS-1$
+				return formatValue(yards, R.string.yard, forceTrailingZeros, 0, ctx);
 			}
-			return ((int) (meters + 0.5)) + " " + ctx.getString(R.string.m); //$NON-NLS-1$
+			return formatValue((int) (meters + 0.5), R.string.m, forceTrailingZeros, 0, ctx);
 		}
 	}
 
@@ -340,10 +343,12 @@ public class OsmAndFormatter {
 
 	public static String getFormattedAlt(double alt, OsmandApplication ctx, MetricsConstants mc) {
 		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS);
-		if (!useFeet) {
-			return ((int) (alt + 0.5)) + " " + ctx.getString(R.string.m);
+		if (useFeet) {
+			int feet = (int) (alt * FEET_IN_ONE_METER + 0.5);
+			return formatValue(feet, R.string.foot, false, 0, ctx);
 		} else {
-			return ((int) (alt * FEET_IN_ONE_METER + 0.5)) + " " + ctx.getString(R.string.foot);
+			int meters = (int) (alt + 0.5);
+			return formatValue(meters, R.string.m, false, 0, ctx);
 		}
 	}
 
@@ -359,26 +364,26 @@ public class OsmAndFormatter {
 		if (mc == SpeedConstants.KILOMETERS_PER_HOUR) {
 			// e.g. car case and for high-speeds: Display rounded to 1 km/h (5% precision at 20 km/h)
 			if (kmh >= 20 || am.hasFastSpeed()) {
-				return getFormattedSpeed((int) Math.round(kmh), mc.toShortString(ctx), withUnits);
+				return getFormattedSpeed((int) Math.round(kmh), mc.toShortString(ctx), withUnits, ctx);
 			}
 			// for smaller values display 1 decimal digit x.y km/h, (0.5% precision at 20 km/h)
 			int kmh10 = (int) Math.round(kmh * 10f);
-			return getFormattedSpeed(kmh10 / 10f, mc.toShortString(ctx), withUnits);
+			return getFormattedSpeed(kmh10 / 10f, mc.toShortString(ctx), withUnits, ctx);
 		} else if (mc == SpeedConstants.MILES_PER_HOUR) {
 			float mph = kmh * METERS_IN_KILOMETER / METERS_IN_ONE_MILE;
 			if (mph >= 20 || am.hasFastSpeed()) {
-				return getFormattedSpeed((int) Math.round(mph), mc.toShortString(ctx), withUnits);
+				return getFormattedSpeed((int) Math.round(mph), mc.toShortString(ctx), withUnits, ctx);
 			} else {
 				int mph10 = (int) Math.round(mph * 10f);
-				return getFormattedSpeed(mph10 / 10f, mc.toShortString(ctx), withUnits);
+				return getFormattedSpeed(mph10 / 10f, mc.toShortString(ctx), withUnits, ctx);
 			}
 		} else if (mc == SpeedConstants.NAUTICALMILES_PER_HOUR) {
 			float mph = kmh * METERS_IN_KILOMETER / METERS_IN_ONE_NAUTICALMILE;
 			if (mph >= 20 || am.hasFastSpeed()) {
-				return getFormattedSpeed((int) Math.round(mph), mc.toShortString(ctx), withUnits);
+				return getFormattedSpeed((int) Math.round(mph), mc.toShortString(ctx), withUnits, ctx);
 			} else {
 				int mph10 = (int) Math.round(mph * 10f);
-				return getFormattedSpeed(mph10 / 10f, mc.toShortString(ctx), withUnits);
+				return getFormattedSpeed(mph10 / 10f, mc.toShortString(ctx), withUnits, ctx);
 			}
 		} else if (mc == SpeedConstants.MINUTES_PER_KILOMETER) {
 			if (metersPerSeconds < 0.111111111) {
@@ -386,7 +391,7 @@ public class OsmAndFormatter {
 			}
 			float minPerKm = METERS_IN_KILOMETER / (metersPerSeconds * 60);
 			if (minPerKm >= 10) {
-				return getFormattedSpeed((int) Math.round(minPerKm), mc.toShortString(ctx), withUnits);
+				return getFormattedSpeed((int) Math.round(minPerKm), mc.toShortString(ctx), withUnits, ctx);
 			} else {
 				int seconds = Math.round(minPerKm * 60);
 				return withUnits
@@ -399,25 +404,63 @@ public class OsmAndFormatter {
 			}
 			float minPerM = (METERS_IN_ONE_MILE) / (metersPerSeconds * 60);
 			if (minPerM >= 10) {
-				return getFormattedSpeed((int) Math.round(minPerM), mc.toShortString(ctx), withUnits);
+				return getFormattedSpeed((int) Math.round(minPerM), mc.toShortString(ctx), withUnits, ctx);
 			} else {
 				int mph10 = (int) Math.round(minPerM * 10f);
-				return getFormattedSpeed(mph10 / 10f, mc.toShortString(ctx), withUnits);
+				return getFormattedSpeed(mph10 / 10f, mc.toShortString(ctx), withUnits, ctx);
 			}
-		} else /*if (mc == SpeedConstants.METERS_PER_SECOND) */ {
+		} else {
 			if (metersPerSeconds >= 10) {
 				String unit = SpeedConstants.METERS_PER_SECOND.toShortString(ctx);
-				return getFormattedSpeed((int) Math.round(metersPerSeconds), unit, withUnits);
+				return getFormattedSpeed((int) Math.round(metersPerSeconds), unit, withUnits, ctx);
 			}
 			// for smaller values display 1 decimal digit x.y km/h, (0.5% precision at 20 km/h)
 			int kmh10 = (int) Math.round(metersPerSeconds * 10f);
 			String unit = SpeedConstants.METERS_PER_SECOND.toShortString(ctx);
-			return getFormattedSpeed(kmh10 / 10f, unit, withUnits);
+			return getFormattedSpeed(kmh10 / 10f, unit, withUnits, ctx);
 		}
 	}
 
-	public static String getFormattedSpeed(Number speed, String unit, boolean withUnits) {
-		return withUnits ? speed + " " + unit : String.valueOf(speed);
+	public static String getFormattedSpeed(float speed, @NonNull String unit, boolean withUnits,
+	                                       @NonNull OsmandApplication app) {
+		return formatValue(speed, withUnits ? unit : null, false, 0, app);
+	}
+
+	private static String formatValue(float value, @StringRes int unitId, boolean forceTrailingZeroes,
+	                                  int decimalPlacesNumber, @NonNull OsmandApplication app) {
+		return formatValue(value, app.getString(unitId), forceTrailingZeroes, decimalPlacesNumber, app);
+	}
+
+	private static String formatValue(float value, @Nullable String unit, boolean forceTrailingZeroes,
+	                                  int decimalPlacesNumber, @NonNull OsmandApplication app) {
+		String pattern = "0";
+		if (decimalPlacesNumber > 0) {
+			char fractionDigitPattern = forceTrailingZeroes ? '0' : '#';
+			char[] fractionDigitsPattern = new char[decimalPlacesNumber];
+			Arrays.fill(fractionDigitsPattern, fractionDigitPattern);
+			pattern += "." + String.valueOf(fractionDigitsPattern);
+		}
+
+		Locale preferredLocale = app.getLocaleHelper().getPreferredLocale();
+		Locale locale = preferredLocale != null ? preferredLocale : Locale.getDefault();
+
+		DecimalFormatSymbols decimalFormatSymbols = new DecimalFormatSymbols(locale);
+		decimalFormatSymbols.setGroupingSeparator(' ');
+
+		DecimalFormat decimalFormat = new DecimalFormat(pattern);
+		decimalFormat.setDecimalFormatSymbols(decimalFormatSymbols);
+
+		boolean fiveOrMoreDigits = Math.abs(value) >= 10_000;
+		if (fiveOrMoreDigits) {
+			decimalFormat.setGroupingUsed(true);
+			decimalFormat.setGroupingSize(3);
+		}
+
+		MessageFormat messageFormat = new MessageFormat("{0}{1}");
+		messageFormat.setFormatByArgumentIndex(0, decimalFormat);
+		String unitToShow = Algorithms.isEmpty(unit) ? "" : " " + unit;
+		return messageFormat.format(new Object[] {value, unitToShow})
+				.replace('\n', ' ');
 	}
 
 	public static boolean isSameDay(@NonNull Date firstDate, @NonNull Date secondDate) {
