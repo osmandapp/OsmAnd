@@ -633,7 +633,7 @@
     <string name="app_mode_default">Огляд мапи</string>
     <string name="app_mode_car">Автівка</string>
     <string name="app_mode_bicycle">Велосипед</string>
-    <string name="app_mode_pedestrian">Пішки</string>
+    <string name="app_mode_pedestrian">Пішохід</string>
     <string name="position_on_map_center">В центрі</string>
     <string name="position_on_map_bottom">Внизу</string>
     <string name="navigate_point_top_text">Широта та довгота у вибраному форматі (D - градуси, M - хвилини, S - секунди)</string>
