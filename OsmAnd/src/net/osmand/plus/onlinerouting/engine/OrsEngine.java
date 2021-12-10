@@ -84,7 +84,7 @@ public class OrsEngine extends JsonOnlineRoutingEngine {
 
 	@Override
 	protected void makeFullUrl(@NonNull StringBuilder sb,
-	                           @NonNull List<LatLon> path) {
+	                           @NonNull List<LatLon> path, @Nullable Float heading) {
 		if (path.size() > 1) {
 			String vehicleKey = getVehicleKeyForUrl();
 			if (!isEmpty(vehicleKey)) {

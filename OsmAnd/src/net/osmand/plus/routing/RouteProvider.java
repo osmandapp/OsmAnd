@@ -1106,7 +1106,7 @@ public class RouteProvider {
 		OsmandSettings settings = app.getSettings();
 		String engineKey = params.mode.getRoutingProfile();
 		OnlineRoutingResponse response =
-				helper.calculateRouteOnline(engineKey, getPathFromParams(params), params.leftSide, params.initialCalculation);
+				helper.calculateRouteOnline(engineKey, getPathFromParams(params), params.currentHeading, params.leftSide, params.initialCalculation);
 
 		if (response != null) {
 			if (response.getGpxFile() != null) {
