@@ -34,7 +34,6 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -42,13 +41,8 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
@@ -66,6 +60,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.openplacereviews.OPRConstants;
 import net.osmand.plus.plugins.openplacereviews.OprStartFragment;
 import net.osmand.plus.plugins.osmedit.opr.OpenDBAPI;
@@ -74,6 +69,11 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchToolbarController;
 import net.osmand.plus.transport.TransportStopRoute;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.views.layers.TransportStopsLayer;
 import net.osmand.plus.widgets.TextViewEx;
@@ -490,22 +490,7 @@ public class MenuBuilder {
 				OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
 				return;
 			}
-			new Thread(() -> {
-				if (openDBAPI.checkPrivateKeyValid(app, baseUrl, name, privateKey)) {
-					app.runInUIThread(() -> {
-						Intent intent = new Intent()
-								.setAction(Intent.ACTION_GET_CONTENT)
-								.setType("image/*");
-						if (Build.VERSION.SDK_INT > 18) {
-							intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-						}
-						Intent chooserIntent = Intent.createChooser(intent, mapActivity.getString(R.string.select_picture));
-						AndroidUtils.startActivityForResultIfSafe(mapActivity, chooserIntent, PICK_IMAGE);
-					});
-				} else {
-					app.runInUIThread(() -> OprStartFragment.showInstance(mapActivity.getSupportFragmentManager()));
-				}
-			}).start();
+			execute(new SelectPictureTask(mapActivity, openDBAPI, app, baseUrl, name, privateKey));
 		});
 		AndroidUiHelper.updateVisibility(view, false);
 		photoButton = view;
@@ -1534,5 +1519,43 @@ public class MenuBuilder {
 	@SuppressWarnings("unchecked")
 	public static <P> void execute(AsyncTask<P, ?, ?> task, P... requests) {
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
+	}
+
+	private static class SelectPictureTask extends AsyncTask<Void, Void, Boolean>{
+
+		private final MapActivity mapActivity;
+		private final OsmandApplication app;
+		private final OpenDBAPI openDBAPI;
+		private final String baseUrl;
+		private final String name;
+		private final String privateKey;
+
+		private SelectPictureTask(MapActivity mapActivity, OpenDBAPI openDBAPI, @NonNull OsmandApplication app, String baseUrl, String name, String privateKey) {
+			this.mapActivity = mapActivity;
+			this.openDBAPI = openDBAPI;
+			this.app = app;
+			this.baseUrl = baseUrl;
+			this.name = name;
+			this.privateKey = privateKey;
+		}
+
+		@Override
+		protected Boolean doInBackground(Void... voids) {
+			return openDBAPI.checkPrivateKeyValid(app, baseUrl, name, privateKey);
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			if (result){
+				Intent intent = new Intent()
+						.setAction(Intent.ACTION_GET_CONTENT)
+						.setType("image/*");
+				if (Build.VERSION.SDK_INT > 18) {
+					intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+				}
+				Intent chooserIntent = Intent.createChooser(intent, mapActivity.getString(R.string.select_picture));
+				AndroidUtils.startActivityForResultIfSafe(mapActivity, chooserIntent, PICK_IMAGE);
+			} else OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
+		}
 	}
 }
