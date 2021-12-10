@@ -172,8 +172,8 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 			path.lineTo(centerX - offset, endY);
 
 			drawTurnArrow(canvas, matrix, centerX - offset, endY, centerX, endY);
-			attrs.paint3.setColor(attrsTurnArrowColor);
 			canvas.drawPath(path, attrs.paint3);
+			attrs.paint3.setColor(attrsTurnArrowColor);
 		}
 
 		if (previewIcon == null) {
