@@ -3809,4 +3809,72 @@
 \n注意，过高的阈值可能会过度简化轨迹的几何形状。</string>
     <string name="app_modes_options">选择程序模式</string>
     <string name="gps_filter_speed_altitude_desc">只有匹配设定间隔的轨迹点才会出现在图表和地图上，其余的轨迹点将被隐藏。</string>
+    <string name="shared_storage_first_step">按 “%1$s”。
+\n文件管理器会在你需要寻找并打开 osmand 文件夹的地方打开。</string>
+    <string name="folder_access_denied">需要权限才能访问所选文件夹。</string>
+    <string name="copying_completed">已复制</string>
+    <string name="shared_string_migration">迁移</string>
+    <string name="icon_group_education">教育</string>
+    <string name="icon_group_industrial">工业</string>
+    <string name="display_route_tracks">显示轨迹</string>
+    <string name="shared_string_travelbooks">旅游书</string>
+    <string name="shortcut_navigate_to_home">导航到“家”</string>
+    <string name="reading_files">正在读取文件…</string>
+    <string name="shared_string_hide_all">隐藏全部</string>
+    <string name="display_groups_visibility_dialog_description">你可以控制地图上的组的可见性。如果轨迹被隐藏，则所有组也将被隐藏。</string>
+    <string name="files_remaining">剩余文件：%1$s %2$s</string>
+    <string name="shared_storage_second_step">点击“使用此文件夹”。</string>
+    <string name="shared_storage_migration_descr">由于 Android 存储权限的改变，OsmAnd 不能再使用 %1$s。
+\n
+\n将所有数据复制到新文件夹中。</string>
+    <string name="shared_string_skip_warning">跳过迁移？OsmAnd 无法再访问共享存储中的文件。
+\n
+\n应用程序将开始使用新数据文件夹。</string>
+    <string name="shared_storage_third_step">授予访问文件夹的权限。没有它 OsmAnd 不能复制文件。</string>
+    <string name="shared_string_copy_to">复制到</string>
+    <string name="display_route_tracks_as_poi">将轨迹显示为兴趣点</string>
+    <string name="is_disabled">%1$s 被禁用</string>
+    <string name="safe_settings">安全</string>
+    <string name="shortcut_start_recording">开始记录</string>
+    <string name="shortcut_navigate_to">导航到…</string>
+    <string name="shortcut_navigate_to_work">导航到“工作地点”</string>
+    <string name="memory_allocated_for_routing">为路线规划分配的内存</string>
+    <string name="no_items_selected_warning">请选择至少一个项目</string>
+    <string name="show_parameter_seekbar">显示参数查找栏</string>
+    <string name="copying_file">复制文件 %1$s 中…</string>
+    <string name="from_to_with_params">从 %1$s 到 %2$s</string>
+    <string name="progress_complete">%1$s 完成</string>
+    <string name="storage_found_files_descr">轻按 “%1$s”将 %2$s 个文件从 “%3$s” 复制到 “%4$s”。这可能需要一会儿。</string>
+    <string name="storage_copied_files_size">复制了 %1$s 个文件 %2$s</string>
+    <string name="storage_copying_files_size">正在复制 %1$s 个文件 %2$s</string>
+    <string name="storage_found_files_size">找到了 %1$s 个文件 %2$s</string>
+    <string name="start_copying">开始复制</string>
+    <string name="skip_confirmation">好，跳过</string>
+    <string name="shared_storage">共享存储</string>
+    <string name="shared_storage_migration">共享存储迁移</string>
+    <string name="approx_safe_mode">安全 GPX 近似</string>
+    <string name="no_plugins_enabled">你没有启用插件。你可以在“菜单”→“插件”中找到可用插件的列表。</string>
+    <string name="shared_storage_warning_description">由于新的 Android 规则，从 2021 年 11 月开始 OsmAnd 4.2 将失去对共享存储的访问。
+\n
+\n请将数据文件夹从共享存储移动到可用存储，否则应用程序将无法访问你的数据，如离线地图，GPX 轨迹等。</string>
+    <string name="search_history_is_disabled_descr">你可以在设置中启用搜索历史记录。</string>
+    <string name="markers_history_is_disabled_descr">启用历史记录来记住访问过的地图标识物的列表。</string>
+    <string name="history_is_disabled_descr">启用历史记录以更快地访问上次使用的结果。</string>
+    <string name="clear_all_history_warning">清除所有的应用程序历史条目，包括搜索、导航和标识物历史？</string>
+    <string name="clear_all_history">清除所有历史记录</string>
+    <string name="history_actions_descr">你可以将历史记录导出到一个文件。</string>
+    <string name="map_markers_history">地图标识物历史记录</string>
+    <string name="navigation_history">导航历史</string>
+    <string name="shared_storage_last_step">你可以之后指定一个新的数据文件夹。</string>
+    <string name="delete_history_items_descr">删除所选历史条目吗？</string>
+    <string name="delete_history_items">删除 %1$s 条历史项目吗？</string>
+    <string name="quick_action_toggle_preference">更改首选项的开关。</string>
+    <string name="approx_safe_mode_description">使用较慢的 Android 而不是原生代码执行 GPX 近似。</string>
+    <string name="use_external_timestamps">使用外部时间戳</string>
+    <string name="use_external_timestamps_description">使用在线路径规划服务的时间戳来调整估计时间和平均速度。</string>
+    <string name="history_preferences_descr">你可以为每种历史记录类型单独禁用历史日志记录。</string>
+    <string name="android_auto_map_placeholder_title">地图显示在车辆屏幕上。</string>
+    <string name="android_auto_map_placeholder_descr">要在程序中查看地图，请断开设备与 Android Auto 的连接。</string>
+    <string name="android_auto_purchase_request_title">要将 OsmAnd 与 Android Auto 搭配使用，请购买 OsmAnd Pro 或 Maps+</string>
+    <string name="continue_on_phone">在移动设备上继续</string>
 </resources>

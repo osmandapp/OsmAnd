@@ -4080,4 +4080,14 @@
     <string name="poi_beauty_salon_waxing">Восковая эпиляция</string>
     <string name="poi_direction_north">Северное направление</string>
     <string name="poi_beauty_salon_hair_removal">Удаление волос</string>
+    <string name="poi_computer_repair_no">Ремонт компьютеров: нет</string>
+    <string name="poi_computer_sales_no">Продажа компьютеров: нет</string>
+    <string name="poi_mattress_no">Нет</string>
+    <string name="poi_furniture_office">Офис</string>
+    <string name="poi_furniture_no">Нет</string>
+    <string name="poi_furniture_sofa">Диван</string>
+    <string name="poi_furniture_bed">Кровать</string>
+    <string name="poi_furniture_living_room">Гостиная</string>
+    <string name="poi_furniture_kitchen">Кухня</string>
+    <string name="poi_furniture_bedroom">Спальня</string>
 </resources>

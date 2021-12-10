@@ -4485,4 +4485,8 @@
     <string name="storage_migration_wrong_folder_warning">У вибраній теці не має даних OsmAnd. Спробуйте ще раз.</string>
     <string name="use_routing_fallback_description">Використовувати офлайнову навігацію, коли втрачається зв\'язок.</string>
     <string name="use_routing_fallback">Використовувати резервну маршрутизацію</string>
+    <string name="turn_arrows_descr">Контролюйте появу стрілок повороту на лінії маршруту.</string>
+    <string name="shared_string_size">Розмір</string>
+    <string name="created_on">Створено</string>
+    <string name="turn_arrows">Стрілки повороту</string>
 </resources>

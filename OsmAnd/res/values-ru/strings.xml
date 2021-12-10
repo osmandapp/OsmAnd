@@ -4492,4 +4492,6 @@
     <string name="use_routing_fallback">Использовать резервную маршрутизацию</string>
     <string name="shared_string_size">Размер</string>
     <string name="use_routing_fallback_description">Использовать офлайн маршрутизацию, если онлайн недоступна.</string>
+    <string name="turn_arrows">Стрелки поворота</string>
+    <string name="turn_arrows_descr">Управляйте видимостью стрелок поворота на линии маршрута.</string>
 </resources>
