@@ -52,11 +52,6 @@
 
 	</LinearLayout>
 
-	<include
-		android:id="@+id/shadow"
-		android:layout_height="wrap_content"
-		android:layout_width="match_parent"
-		android:layout_marginBottom="@dimen/card_row_min_height"
-		layout="@layout/card_bottom_divider"/>
+	<include layout="@layout/card_bottom_margin_48dp"/>
 
 </LinearLayout>
