@@ -1550,9 +1550,7 @@ public class MenuBuilder {
 				Intent intent = new Intent()
 						.setAction(Intent.ACTION_GET_CONTENT)
 						.setType("image/*");
-				if (Build.VERSION.SDK_INT > 18) {
-					intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-				}
+				intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
 				Intent chooserIntent = Intent.createChooser(intent, mapActivity.getString(R.string.select_picture));
 				AndroidUtils.startActivityForResultIfSafe(mapActivity, chooserIntent, PICK_IMAGE);
 			} else OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
