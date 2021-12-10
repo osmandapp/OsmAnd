@@ -3876,4 +3876,5 @@
     <string name="android_auto_map_placeholder_title">地图显示在车辆屏幕上。</string>
     <string name="android_auto_map_placeholder_descr">要在程序中查看地图，请断开设备与 Android Auto 的连接。</string>
     <string name="android_auto_purchase_request_title">要将 OsmAnd 与 Android Auto 搭配使用，请购买 OsmAnd Pro 或 Maps+</string>
+    <string name="continue_on_phone">在移动设备上继续</string>
 </resources>
