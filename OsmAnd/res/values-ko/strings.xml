@@ -2251,4 +2251,8 @@
     <string name="enter_text_separated">태그를 쉼표로 구분하여 입력하십시오.</string>
     <string name="icon_group_sport">스포츠</string>
     <string name="use_routing_fallback_description">온라인 라우팅에 연결할 수 없는 경우 오프라인 라우팅을 사용합니다.</string>
+    <string name="backup_welcome_back">다시 오신 것을 환영합니다!</string>
+    <string name="map_widget_monitoring">주행 기록</string>
+    <string name="register_opr_have_account">이미 계정이 있다면 로그인</string>
+    <string name="local_backup">로컬 백업</string>
 </resources>
