@@ -15,6 +15,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PointF;
@@ -22,6 +23,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.StateListDrawable;
@@ -72,6 +74,7 @@ import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -460,6 +463,28 @@ public class AndroidUtils {
 		} else {
 			view.setBackgroundDrawable(drawable);
 		}
+	}
+
+	public static Drawable getStrokedBackgroundForSwitch(OsmandApplication app, int highlightColorDay, int highlightColorNight, boolean checked, boolean nightMode) {
+		if (app != null) {
+			GradientDrawable background = (GradientDrawable) AppCompatResources.getDrawable(app,
+					R.drawable.bg_select_group_button_outline);
+			if (background != null) {
+				int highlightColor = ContextCompat.getColor(app, nightMode ?
+						highlightColorNight : highlightColorDay);
+				int strokedColor = AndroidUtils.getColorFromAttr(UiUtilities.getThemedContext(app, nightMode),
+						R.attr.stroked_buttons_and_links_outline);
+				background = (GradientDrawable) background.mutate();
+				if (checked) {
+					background.setStroke(0, Color.TRANSPARENT);
+					background.setColor(highlightColor);
+				} else {
+					background.setStroke(app.getResources().getDimensionPixelSize(R.dimen.map_button_stroke), strokedColor);
+				}
+			}
+			return background;
+		}
+		return null;
 	}
 
 	public static void setForeground(Context ctx, View view, boolean night, int lightResId, int darkResId) {

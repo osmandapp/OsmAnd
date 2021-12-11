@@ -2,9 +2,6 @@ package net.osmand.plus.measurementtool;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,8 +12,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -29,7 +24,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
-import net.osmand.PlatformUtil;
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -47,8 +41,6 @@ import net.osmand.plus.myplaces.MoveGpxFileBottomSheet;
 import net.osmand.plus.myplaces.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.util.Algorithms;
 
-import org.apache.commons.logging.Log;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,8 +49,6 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		implements OnTrackFileMoveListener, OnTrackFolderAddListener {
 
 	public static final String TAG = SaveAsNewTrackBottomSheetDialogFragment.class.getSimpleName();
-	private static final Log LOG = PlatformUtil.getLog(SaveAsNewTrackBottomSheetDialogFragment.class);
-
 	public static final String SHOW_ON_MAP_KEY = "show_on_map_key";
 	public static final String SIMPLIFIED_TRACK_KEY = "simplified_track_key";
 	public static final String DEST_FOLDER_NAME_KEY = "dest_folder_name_key";
@@ -180,7 +170,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 					.setChecked(simplifiedTrack)
 					.setCompoundButtonColorId(activeColorRes)
 					.setDescription(getSimplifiedTrackDescription())
-					.setBackground(getBackground(simplifiedTrack))
+					.setBackground(AndroidUtils.getStrokedBackgroundForSwitch(app, R.color.activity_background_color_light, R.color.list_background_color_dark, simplifiedTrack, nightMode))
 					.setTitle(getString(R.string.simplified_track))
 					.setLayoutId(R.layout.bottom_sheet_item_with_switch_and_descr)
 					.setOnClickListener(new View.OnClickListener() {
@@ -188,7 +178,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 						public void onClick(View v) {
 							simplifiedTrack = !simplifiedTrack;
 							simplifiedTrackItem[0].setChecked(simplifiedTrack);
-							AndroidUtils.setBackground(simplifiedTrackItem[0].getView(), getBackground(simplifiedTrack));
+							AndroidUtils.setBackground(simplifiedTrackItem[0].getView(), AndroidUtils.getStrokedBackgroundForSwitch(app, R.color.activity_background_color_light, R.color.list_background_color_dark, simplifiedTrack, nightMode));
 							simplifiedTrackItem[0].setDescription(getSimplifiedTrackDescription());
 						}
 					})
@@ -202,7 +192,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		showOnMapItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setCompoundButtonColorId(activeColorRes)
 				.setChecked(showOnMap)
-				.setBackground(getBackground(showOnMap))
+				.setBackground(AndroidUtils.getStrokedBackgroundForSwitch(app, R.color.activity_background_color_light, R.color.list_background_color_dark, showOnMap, nightMode))
 				.setTitle(getString(R.string.shared_string_show_on_map))
 				.setLayoutId(R.layout.bottom_sheet_item_with_switch_and_descr)
 				.setOnClickListener(new View.OnClickListener() {
@@ -210,7 +200,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 					public void onClick(View v) {
 						showOnMap = !showOnMap;
 						showOnMapItem[0].setChecked(showOnMap);
-						AndroidUtils.setBackground(showOnMapItem[0].getView(), getBackground(showOnMap));
+						AndroidUtils.setBackground(showOnMapItem[0].getView(), AndroidUtils.getStrokedBackgroundForSwitch(app, R.color.activity_background_color_light, R.color.list_background_color_dark, showOnMap, nightMode));
 					}
 				})
 				.create();
@@ -221,29 +211,6 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 	private String getSimplifiedTrackDescription() {
 		return simplifiedTrack ? getString(R.string.simplified_track_description) : "";
-	}
-
-	private Drawable getBackground(boolean checked) {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			GradientDrawable background = (GradientDrawable) AppCompatResources.getDrawable(app,
-					R.drawable.bg_select_group_button_outline);
-			if (background != null) {
-				int highlightColor = ContextCompat.getColor(app, nightMode ?
-						R.color.list_background_color_dark : R.color.activity_background_color_light);
-				int strokedColor = AndroidUtils.getColorFromAttr(UiUtilities.getThemedContext(app, nightMode),
-						R.attr.stroked_buttons_and_links_outline);
-				background = (GradientDrawable) background.mutate();
-				if (checked) {
-					background.setStroke(0, Color.TRANSPARENT);
-					background.setColor(highlightColor);
-				} else {
-					background.setStroke(app.getResources().getDimensionPixelSize(R.dimen.map_button_stroke), strokedColor);
-				}
-			}
-			return background;
-		}
-		return null;
 	}
 
 	private FolderListAdapter.FolderListAdapterListener createFolderSelectListener() {
