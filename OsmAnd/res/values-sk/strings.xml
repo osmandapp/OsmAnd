@@ -4482,4 +4482,6 @@
     <string name="use_routing_fallback">Použiť náhradný výpočet trasy</string>
     <string name="created_on">Vytvorené dňa</string>
     <string name="shared_string_size">Veľkosť</string>
+    <string name="turn_arrows">Šípky odbočenia</string>
+    <string name="turn_arrows_descr">Ovláda viditeľnosť šípiek odbočenia na línii trasy.</string>
 </resources>
