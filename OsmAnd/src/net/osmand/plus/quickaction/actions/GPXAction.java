@@ -65,7 +65,7 @@ public class GPXAction extends QuickAction {
 	public static final String KEY_USE_SELECTED_GPX_FILE = "use_selected_gpx_file";
 	public static final String KEY_GPX_FILE_PATH = "gpx_file_path";
 
-	public static final String KEY_USE_PREDEFINED_WPT_APPEARANCE = "use_predefined_appearance";
+	public static final String KEY_USE_PREDEFINED_WPT_APPEARANCE = "dialog";
 	public static final String KEY_WPT_NAME = "name";
 	public static final String KEY_WPT_ADDRESS = "wpt_address";
 	public static final String KEY_WPT_DESCRIPTION = "wpt_description";
@@ -441,7 +441,9 @@ public class GPXAction extends QuickAction {
 	}
 
 	private boolean hasPredefinedWaypointAppearance() {
-		return predefinedWaypoint != null || getParams().containsKey(KEY_WPT_COLOR);
+		return predefinedWaypoint != null || getParams().containsKey(KEY_WPT_COLOR)
+				|| !Algorithms.isBlank(getParams().get(KEY_WPT_NAME))
+				|| !Algorithms.isBlank(getParams().get(KEY_CATEGORY_NAME));
 	}
 
 	@NonNull
