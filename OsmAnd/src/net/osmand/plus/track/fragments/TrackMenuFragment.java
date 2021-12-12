@@ -961,6 +961,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			updateDisplayGroupsWidget();
 			boolean appbarButtonsVisible = getCurrentMenuState() != MenuState.FULL_SCREEN && !shouldShowWidgets();
 			AndroidUiHelper.updateVisibility(backButtonContainer, appbarButtonsVisible);
+			AndroidUiHelper.updateVisibility(displayGroupsWidget, appbarButtonsVisible || !isPortrait());
 
 			boolean topControlsVisible = shouldShowTopControls(menuVisible);
 			boolean bottomControlsVisible = shouldShowBottomControls(menuVisible);
