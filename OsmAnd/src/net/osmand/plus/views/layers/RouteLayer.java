@@ -16,7 +16,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -36,6 +35,7 @@ import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.BaseRouteLayer;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWay;
@@ -201,7 +201,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	}
 
 	private void drawAction(RotatedTileBox tb, Canvas canvas, List<Location> actionPoints) {
-		if (actionPoints.size() > 0) {
+		if (actionPoints.size() > 0 && shouldShowTurnArrows()) {
 			canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 			try {
 				float routeWidth = routeGeometry.getDefaultWayStyle().getWidth(0);
@@ -220,11 +220,9 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 						if (routeWidth != 0) {
 							attrs.paint3.setStrokeWidth(routeWidth / 2);
 						}
-						if (shouldShowTurnArrows()){
-							canvas.drawPath(pth, attrs.paint3);
-							drawTurnArrow(canvas, matrix, x, y, px, py);
-							attrs.paint3.setColor(defaultTurnArrowColor);
-						}
+						canvas.drawPath(pth, attrs.paint3);
+						drawTurnArrow(canvas, matrix, x, y, px, py);
+						attrs.paint3.setColor(defaultTurnArrowColor);
 					} else {
 						px = x;
 						py = y;
