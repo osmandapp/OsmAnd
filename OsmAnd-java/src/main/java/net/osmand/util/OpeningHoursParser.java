@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -24,10 +23,10 @@ import gnu.trove.list.array.TIntArrayList;
  * if the OSM feature is open at a certain time.
  */
 public class OpeningHoursParser {
-	private static final String[] daysStr;
-	private static final String[] localDaysStr;
-	private static final String[] monthsStr;
-	private static final String[] localMothsStr;
+	private static String[] daysStr;
+	private static String[] localDaysStr;
+	private static String[] monthsStr;
+	private static String[] localMothsStr;
 	private static final Map<String, String> additionalStrings = new HashMap<>();
 
 	private static final int LOW_TIME_LIMIT = 120;
@@ -35,14 +34,7 @@ public class OpeningHoursParser {
 	private static final int CURRENT_DAY_TIME_LIMIT = -2;
 
 	static {
-		DateFormatSymbols dateFormatSymbols = DateFormatSymbols.getInstance(Locale.US);
-		monthsStr = dateFormatSymbols.getShortMonths();
-		daysStr = getLettersStringArray(dateFormatSymbols.getShortWeekdays(), 2);
-		
-		dateFormatSymbols = DateFormatSymbols.getInstance();
-		localMothsStr = dateFormatSymbols.getShortMonths();
-		localDaysStr = getLettersStringArray(dateFormatSymbols.getShortWeekdays(), 3);
-
+		initLocale();
 		additionalStrings.put("off", "off");
 		additionalStrings.put("is_open", "Open");
 		additionalStrings.put("is_open_24_7", "Open 24/7");
@@ -52,6 +44,16 @@ public class OpeningHoursParser {
 		additionalStrings.put("open_till", "Open till");
 		additionalStrings.put("will_open_tomorrow_at", "Will open tomorrow at");
 		additionalStrings.put("will_open_on", "Will open on");
+	}
+
+	public static void initLocale() {
+		DateFormatSymbols dateFormatSymbols = DateFormatSymbols.getInstance(Locale.US);
+		monthsStr = dateFormatSymbols.getShortMonths();
+		daysStr = getLettersStringArray(dateFormatSymbols.getShortWeekdays(), 2);
+
+		dateFormatSymbols = DateFormatSymbols.getInstance();
+		localMothsStr = dateFormatSymbols.getShortMonths();
+		localDaysStr = getLettersStringArray(dateFormatSymbols.getShortWeekdays(), 3);
 	}
 
 	/**

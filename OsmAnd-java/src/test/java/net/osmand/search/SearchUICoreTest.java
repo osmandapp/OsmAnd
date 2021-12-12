@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.zip.GZIPInputStream;
@@ -89,6 +90,7 @@ public class SearchUICoreTest {
 
     @Test
 	public void testSearch() throws IOException, JSONException {
+		Locale.setDefault(Locale.US);
 		File jsonFile = testFile;
 		File obfFile = new File(testFile.getParentFile(), testFile.getName().replace(".json", ".obf"));
 		File obfZipFile = new File(testFile.getParentFile(), testFile.getName().replace(".json", ".obf.gz"));

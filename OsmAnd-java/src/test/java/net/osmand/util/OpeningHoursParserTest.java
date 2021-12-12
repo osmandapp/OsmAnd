@@ -2,6 +2,7 @@ package net.osmand.util;
 
 import net.osmand.util.OpeningHoursParser.OpeningHours;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -79,33 +80,31 @@ public class OpeningHoursParserTest {
 		cal.setTime(new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.US).parse(time));
 
 		String description;
-		boolean result;
+		boolean isCorrect;
 		if (sequenceIndex == OpeningHours.ALL_SEQUENCES) {
 			OpeningHours.Info info = hours.getCombinedInfo(cal);
 			description = info.getInfo();
-			result = expected.equalsIgnoreCase(description);
+			isCorrect = expected.equalsIgnoreCase(description);
 		} else {
 			List<OpeningHours.Info> infos = hours.getInfo(cal);
 			OpeningHours.Info info = infos.get(sequenceIndex);
 			description = info.getInfo();
-			result = expected.equalsIgnoreCase(description);
+			isCorrect = expected.equalsIgnoreCase(description);
 		}
 
 		String fmt = String.format("  %sok: Expected %s (%s): %s (rule %s)\n",
-				(!result ? "NOT " : ""), time, expected, description, hours.getCurrentRuleTime(cal, sequenceIndex));
+				(!isCorrect ? "NOT " : ""), time, expected, description, hours.getCurrentRuleTime(cal, sequenceIndex));
 		System.out.println(fmt);
-		org.junit.Assert.assertEquals(fmt, true, result);
-		
+		Assert.assertTrue(fmt, isCorrect);
 	}
-	
+
 	private  void testParsedAndAssembledCorrectly(String timeString, OpeningHours hours) {
 		String assembledString = hours.toString();
 		boolean isCorrect = assembledString.equalsIgnoreCase(timeString);
 		String fmt = String.format("  %sok: Expected: \"%s\" got: \"%s\"\n",
 				(!isCorrect ? "NOT " : ""), timeString, assembledString);
 		System.out.println(fmt);
-		org.junit.Assert.assertEquals(fmt, true, isCorrect);
-
+		Assert.assertTrue(fmt, isCorrect);
 	}
 
 	@Test
@@ -115,7 +114,8 @@ public class OpeningHoursParserTest {
 
 		Locale locale = Locale.getDefault();
 		try {
-			Locale.setDefault(Locale.forLanguageTag("en-US"));
+			Locale.setDefault(Locale.US);
+			OpeningHoursParser.initLocale();
 			OpeningHours hours = parseOpenedHours("Mo 09:00-12:00; We,Sa 13:30-17:00, Apr 01-Oct 31 We,Sa 17:00-18:30; PH off");
 			System.out.println(hours);
 			testInfo("03.10.2020 14:00", hours, "Open till 18:30");
@@ -273,7 +273,6 @@ public class OpeningHoursParserTest {
 			System.out.println(hours);
 			testOpened("09.08.2012 11:00", hours, true);
 			testOpened("09.08.2012 16:00", hours, false);
-			hours = parseOpenedHours("mo-fr 07:00-19:00; sa 12:00-18:00");
 
 			String string = "Mo-Fr 11:30-15:00, 17:30-23:00; Sa, Su, PH 11:30-23:00";
 			hours = parseOpenedHours(string);
@@ -558,7 +557,6 @@ public class OpeningHoursParserTest {
 		} finally {
 			Locale.setDefault(locale);
 		}
-
 	}
 
 	private static OpeningHours parseOpenedHours(String string) {
