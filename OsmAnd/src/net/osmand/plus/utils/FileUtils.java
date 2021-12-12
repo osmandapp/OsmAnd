@@ -106,11 +106,11 @@ public class FileUtils {
 			GpxSelectionHelper helper = app.getSelectedGpxHelper();
 			SelectedGpxFile selected = helper.getSelectedFileByPath(src.getAbsolutePath());
 			app.getGpxDbHelper().rename(src, dest);
+			app.getQuickActionRegistry().onRenameGpxFile(src.getAbsolutePath(), dest.getAbsolutePath());
 			if (selected != null && selected.getGpxFile() != null) {
 				selected.resetSplitProcessed();
 				selected.getGpxFile().path = dest.getAbsolutePath();
 				helper.updateSelectedGpxFile(selected);
-				app.getQuickActionRegistry().onRenameGpxFile(src.getAbsolutePath(), dest.getAbsolutePath());
 			}
 			return dest;
 		}

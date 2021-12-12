@@ -68,11 +68,15 @@ public class SelectTrackFileDialogFragment extends BaseOsmAndDialogFragment {
 		GpxTrackAdapter adapter = new GpxTrackAdapter(context, gpxInfoList, showCurrentGpx, true);
 		adapter.setAdapterListener(position -> {
 			if (onGpxSelectedListener != null) {
-				GPXInfo selectedGpxInfo = gpxInfoList.get(position);
-				String fileName = selectedGpxInfo.getFileName();
-				boolean currentTrack = getString(R.string.current_track).equals(fileName);
-				String gpxFilePath = currentTrack ? "" : gpxRootDir.getAbsolutePath() + "/" + fileName;
-				onGpxSelectedListener.processResult(gpxFilePath);
+				boolean currentTrack = position == 0 && showCurrentGpx;
+				if (currentTrack) {
+					onGpxSelectedListener.processResult("");
+				} else {
+					GPXInfo selectedGpxInfo = gpxInfoList.get(position);
+					String fileName = selectedGpxInfo.getFileName();
+					String gpxFilePath = gpxRootDir.getAbsolutePath() + "/" + fileName;
+					onGpxSelectedListener.processResult(gpxFilePath);
+				}
 			}
 			dismiss();
 		});

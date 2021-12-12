@@ -66,15 +66,15 @@ public class GPXAction extends QuickAction {
 	public static final String KEY_GPX_FILE_PATH = "gpx_file_path";
 
 	public static final String KEY_USE_PREDEFINED_WPT_APPEARANCE = "use_predefined_appearance";
-	public static final String KEY_PREDEFINED_WPT_NAME = "name";
-	public static final String KEY_PREDEFINED_WPT_ADDRESS = "predefined_wpt_address";
-	public static final String KEY_PREDEFINED_WPT_DESCRIPTION = "predefined_wpt_description";
-	public static final String KEY_PREDEFINED_WPT_COLOR = "predefined_wpt_color";
-	public static final String KEY_PREDEFINED_WPT_ICON = "predefined_wpt_icon";
-	public static final String KEY_PREDEFINED_WPT_BACKGROUND_TYPE = "predefined_wpt_background_type";
+	public static final String KEY_WPT_NAME = "name";
+	public static final String KEY_WPT_ADDRESS = "wpt_address";
+	public static final String KEY_WPT_DESCRIPTION = "wpt_description";
+	public static final String KEY_WPT_COLOR = "wpt_color";
+	public static final String KEY_WPT_ICON = "wpt_icon";
+	public static final String KEY_WPT_BACKGROUND_TYPE = "wpt_background_type";
 
-	public static final String KEY_PREDEFINED_CATEGORY_NAME = "category_name";
-	public static final String KEY_PREDEFINED_CATEGORY_COLOR = "category_color";
+	public static final String KEY_CATEGORY_NAME = "category_name";
+	public static final String KEY_CATEGORY_COLOR = "category_color";
 
 	private transient String selectedGpxFilePath;
 	private transient WptPt predefinedWaypoint;
@@ -113,13 +113,13 @@ public class GPXAction extends QuickAction {
 
 		boolean usePredefinedWaypoint = Boolean.parseBoolean(getParams().get(KEY_USE_PREDEFINED_WPT_APPEARANCE));
 		if (usePredefinedWaypoint) {
-			String name = getParams().get(KEY_PREDEFINED_WPT_NAME);
-			String address = getParams().get(KEY_PREDEFINED_WPT_ADDRESS);
-			String description = getParams().get(KEY_PREDEFINED_WPT_DESCRIPTION);
+			String name = getParams().get(KEY_WPT_NAME);
+			String address = getParams().get(KEY_WPT_ADDRESS);
+			String description = getParams().get(KEY_WPT_DESCRIPTION);
 			int color = getWaypointColorFromParams();
 			String backgroundType = getBackgroundTypeFromParams();
-			String categoryName = getParams().get(KEY_PREDEFINED_CATEGORY_NAME);
-			int categoryColor = getColorFromParams(KEY_PREDEFINED_CATEGORY_COLOR, 0);
+			String categoryName = getParams().get(KEY_CATEGORY_NAME);
+			int categoryColor = getColorFromParams(KEY_CATEGORY_COLOR, 0);
 
 			if (Algorithms.isBlank(name) && Algorithms.isBlank(address)) {
 				lookupAddress(latLon, mapActivity, foundAddress -> {
@@ -405,7 +405,7 @@ public class GPXAction extends QuickAction {
 			});
 
 			if (gpxFilePath == null) {
-				int categoryColor = getColorFromParams(KEY_PREDEFINED_CATEGORY_COLOR, 0);
+				int categoryColor = getColorFromParams(KEY_CATEGORY_COLOR, 0);
 				waypointEditor.addWaypointTemplate(source, categoryColor);
 				hideDialog(mapActivity);
 			} else {
@@ -441,16 +441,16 @@ public class GPXAction extends QuickAction {
 	}
 
 	private boolean hasPredefinedWaypointAppearance() {
-		return predefinedWaypoint != null || getParams().containsKey(KEY_PREDEFINED_WPT_COLOR);
+		return predefinedWaypoint != null || getParams().containsKey(KEY_WPT_COLOR);
 	}
 
 	@NonNull
 	private WptPt createWaypoint() {
 		WptPt waypoint = new WptPt();
-		waypoint.name = predefinedWaypoint != null ? predefinedWaypoint.name : getParams().get(KEY_PREDEFINED_WPT_NAME);
-		waypoint.setAddress(predefinedWaypoint != null ? predefinedWaypoint.getAddress() : getParams().get(KEY_PREDEFINED_WPT_ADDRESS));
-		waypoint.desc = predefinedWaypoint != null ? predefinedWaypoint.desc : getParams().get(KEY_PREDEFINED_WPT_DESCRIPTION);
-		waypoint.category = predefinedWaypoint != null ? predefinedWaypoint.category : getParams().get(KEY_PREDEFINED_CATEGORY_NAME);
+		waypoint.name = predefinedWaypoint != null ? predefinedWaypoint.name : getParams().get(KEY_WPT_NAME);
+		waypoint.setAddress(predefinedWaypoint != null ? predefinedWaypoint.getAddress() : getParams().get(KEY_WPT_ADDRESS));
+		waypoint.desc = predefinedWaypoint != null ? predefinedWaypoint.desc : getParams().get(KEY_WPT_DESCRIPTION);
+		waypoint.category = predefinedWaypoint != null ? predefinedWaypoint.category : getParams().get(KEY_CATEGORY_NAME);
 		waypoint.setColor(predefinedWaypoint != null ? predefinedWaypoint.getColor() : getWaypointColorFromParams());
 		waypoint.setIconName(predefinedWaypoint != null ? predefinedWaypoint.getIconName() : getIconNameFromParams());
 		waypoint.setBackgroundType(predefinedWaypoint != null ? predefinedWaypoint.getBackgroundType() : getBackgroundTypeFromParams());
@@ -459,12 +459,12 @@ public class GPXAction extends QuickAction {
 
 	@ColorInt
 	private int getWaypointColorFromParams() {
-		return getColorFromParams(KEY_PREDEFINED_WPT_COLOR, ColorDialogs.pallette[0]);
+		return getColorFromParams(KEY_WPT_COLOR, ColorDialogs.pallette[0]);
 	}
 
 	@NonNull
 	private String getIconNameFromParams() {
-		String iconName = getParams().get(KEY_PREDEFINED_WPT_ICON);
+		String iconName = getParams().get(KEY_WPT_ICON);
 		return Algorithms.isEmpty(iconName) || !RenderingIcons.containsBigIcon(iconName)
 				? GPXUtilities.DEFAULT_ICON_NAME
 				: iconName;
@@ -472,7 +472,7 @@ public class GPXAction extends QuickAction {
 
 	@NonNull
 	private String getBackgroundTypeFromParams() {
-		String backgroundType = getParams().get(KEY_PREDEFINED_WPT_BACKGROUND_TYPE);
+		String backgroundType = getParams().get(KEY_WPT_BACKGROUND_TYPE);
 		return BackgroundType.getByTypeName(backgroundType, BackgroundType.CIRCLE).getTypeName();
 	}
 
@@ -480,7 +480,7 @@ public class GPXAction extends QuickAction {
 	private int getCategoryColor() {
 		return predefinedWaypoint != null
 				? predefinedCategoryColor
-				: getColorFromParams(KEY_PREDEFINED_CATEGORY_COLOR, 0);
+				: getColorFromParams(KEY_CATEGORY_COLOR, 0);
 	}
 
 	@ColorInt
@@ -507,14 +507,14 @@ public class GPXAction extends QuickAction {
 		boolean usePredefinedTemplate = appearanceToggleButton.getSelectedItemIndex() == 1;
 		getParams().put(KEY_USE_PREDEFINED_WPT_APPEARANCE, String.valueOf(usePredefinedTemplate));
 		if (predefinedWaypoint != null) {
-			getParams().put(KEY_PREDEFINED_WPT_NAME, predefinedWaypoint.name);
-			getParams().put(KEY_PREDEFINED_WPT_ADDRESS, predefinedWaypoint.getAddress());
-			getParams().put(KEY_PREDEFINED_WPT_DESCRIPTION, predefinedWaypoint.desc);
-			getParams().put(KEY_PREDEFINED_WPT_COLOR, String.valueOf(predefinedWaypoint.getColor()));
-			getParams().put(KEY_PREDEFINED_WPT_ICON, predefinedWaypoint.getIconName());
-			getParams().put(KEY_PREDEFINED_WPT_BACKGROUND_TYPE, predefinedWaypoint.getBackgroundType());
-			getParams().put(KEY_PREDEFINED_CATEGORY_NAME, predefinedWaypoint.category);
-			getParams().put(KEY_PREDEFINED_CATEGORY_COLOR, String.valueOf(predefinedCategoryColor));
+			getParams().put(KEY_WPT_NAME, predefinedWaypoint.name);
+			getParams().put(KEY_WPT_ADDRESS, predefinedWaypoint.getAddress());
+			getParams().put(KEY_WPT_DESCRIPTION, predefinedWaypoint.desc);
+			getParams().put(KEY_WPT_COLOR, String.valueOf(predefinedWaypoint.getColor()));
+			getParams().put(KEY_WPT_ICON, predefinedWaypoint.getIconName());
+			getParams().put(KEY_WPT_BACKGROUND_TYPE, predefinedWaypoint.getBackgroundType());
+			getParams().put(KEY_CATEGORY_NAME, predefinedWaypoint.category);
+			getParams().put(KEY_CATEGORY_COLOR, String.valueOf(predefinedCategoryColor));
 		}
 
 		return true;

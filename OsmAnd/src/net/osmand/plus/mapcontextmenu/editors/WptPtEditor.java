@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class WptPtEditor extends PointEditor {
 
-	private OnWaypointTemplateAddedListener onWaypointTemplateAddedListener;
+	private OnTemplateAddedListener onTemplateAddedListener;
 	private OnDismissListener onDismissListener;
 
 	private GPXFile gpxFile;
@@ -26,8 +26,15 @@ public class WptPtEditor extends PointEditor {
 	private int categoryColor;
 
 	private boolean gpxSelected;
-	private boolean newGpxPointProcessing;
-	private boolean processingWaypointTemplate;
+
+	private enum ProcessedObject {
+		ORDINARY,
+		NEW_GPX_POINT,
+		WAYPOINT_TEMPLATE
+	}
+
+	@NonNull
+	private ProcessedObject processedObject = ProcessedObject.ORDINARY;
 
 	public static final String TAG = "WptPtEditorFragment";
 
@@ -35,17 +42,21 @@ public class WptPtEditor extends PointEditor {
 		super(mapActivity);
 	}
 
-	public void setNewGpxPointProcessing(boolean newGpxPointProcessing) {
-		this.newGpxPointProcessing = newGpxPointProcessing;
+	public void setProcessingOrdinaryPoint() {
+		processedObject = ProcessedObject.ORDINARY;
+	}
+
+	public void setNewGpxPointProcessing() {
+		processedObject = ProcessedObject.NEW_GPX_POINT;
 	}
 
 	public boolean isNewGpxPointProcessing() {
-		return newGpxPointProcessing;
+		return processedObject == ProcessedObject.NEW_GPX_POINT;
 	}
 
 	@Override
 	public boolean isProcessingTemplate() {
-		return processingWaypointTemplate;
+		return processedObject == ProcessedObject.WAYPOINT_TEMPLATE;
 	}
 
 	public interface OnDismissListener {
@@ -60,12 +71,12 @@ public class WptPtEditor extends PointEditor {
 		return onDismissListener;
 	}
 
-	public void setOnWaypointTemplateAddedListener(OnWaypointTemplateAddedListener listener) {
-		onWaypointTemplateAddedListener = listener;
+	public void setOnWaypointTemplateAddedListener(OnTemplateAddedListener listener) {
+		onTemplateAddedListener = listener;
 	}
 
-	public OnWaypointTemplateAddedListener getOnWaypointTemplateAddedListener() {
-		return onWaypointTemplateAddedListener;
+	public OnTemplateAddedListener getOnWaypointTemplateAddedListener() {
+		return onTemplateAddedListener;
 	}
 
 	@Nullable
@@ -78,7 +89,7 @@ public class WptPtEditor extends PointEditor {
 		if (gpxFile != null) {
 			return gpxFile.getWaypointCategoriesWithColors(false);
 		}
-		if (processingWaypointTemplate && !Algorithms.isEmpty(wpt.category) && categoryColor != 0) {
+		if (isProcessingTemplate() && !Algorithms.isEmpty(wpt.category) && categoryColor != 0) {
 			Map<String, Integer> predefinedCategory = new HashMap<>();
 			predefinedCategory.put(wpt.category, categoryColor);
 			return predefinedCategory;
@@ -110,7 +121,6 @@ public class WptPtEditor extends PointEditor {
 			return;
 		}
 		isNew = true;
-		processingWaypointTemplate = false;
 		categoryColor = 0;
 
 		this.gpxFile = gpxFile;
@@ -135,7 +145,6 @@ public class WptPtEditor extends PointEditor {
 			return;
 		}
 		isNew = true;
-		processingWaypointTemplate = false;
 		this.categoryColor = 0;
 
 		this.gpxFile = gpxFile;
@@ -179,7 +188,6 @@ public class WptPtEditor extends PointEditor {
 			return;
 		}
 		isNew = false;
-		processingWaypointTemplate = false;
 		categoryColor = 0;
 		SelectedGpxFile selectedGpxFile =
 				mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFile(wpt);
@@ -198,7 +206,7 @@ public class WptPtEditor extends PointEditor {
 		}
 
 		this.isNew = true;
-		this.processingWaypointTemplate = true;
+		this.processedObject = ProcessedObject.WAYPOINT_TEMPLATE;
 		this.categoryColor = 0;
 		this.gpxSelected = mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path) != null;
 		this.gpxFile = gpxFile;
@@ -213,7 +221,7 @@ public class WptPtEditor extends PointEditor {
 		}
 
 		this.isNew = true;
-		this.processingWaypointTemplate = true;
+		this.processedObject = ProcessedObject.WAYPOINT_TEMPLATE;
 		this.categoryColor = categoryColor;
 		this.gpxSelected = false;
 		this.gpxFile = null;
@@ -235,7 +243,7 @@ public class WptPtEditor extends PointEditor {
 		}
 	}
 
-	public interface OnWaypointTemplateAddedListener {
+	public interface OnTemplateAddedListener {
 
 		void onAddWaypointTemplate(@NonNull WptPt waypoint, @ColorInt int categoryColor);
 	}

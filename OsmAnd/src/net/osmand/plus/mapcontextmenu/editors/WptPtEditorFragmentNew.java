@@ -134,7 +134,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 			if (listener != null) {
 				listener.onDismiss();
 			}
-			editor.setNewGpxPointProcessing(false);
+			editor.setProcessingOrdinaryPoint();
 			editor.setOnDismissListener(null);
 		}
 	}
