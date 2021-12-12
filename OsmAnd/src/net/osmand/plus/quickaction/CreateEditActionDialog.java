@@ -29,6 +29,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.quickaction.actions.GPXAction;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.utils.ColorUtilities;
@@ -150,7 +151,7 @@ public class CreateEditActionDialog extends DialogFragment
         setupHeader(view, savedInstanceState);
         setupFooter(view);
 
-        action.drawUI((ViewGroup) getView().findViewById(R.id.container), (MapActivity) getActivity());
+        action.drawUI((ViewGroup) getView().findViewById(R.id.container), getMapActivity());
     }
 
     @Override
@@ -313,6 +314,12 @@ public class CreateEditActionDialog extends DialogFragment
     public boolean processResult(Object result) {
         if (action instanceof SwitchableAction) {
             ((SwitchableAction) action).onItemsSelected(getContext(), (List) result);
+        } else if (action instanceof GPXAction) {
+            View container = getView() != null ? getView().findViewById(R.id.container) : null;
+            MapActivity mapActivity = getMapActivity();
+            if (container != null && mapActivity != null && result instanceof String) {
+                ((GPXAction) action).onGpxFileSelected(container, mapActivity, (String) result);
+            }
         }
         return false;
     }
@@ -336,5 +343,10 @@ public class CreateEditActionDialog extends DialogFragment
         if (dialog != null) {
             dialog.show();
         }
+    }
+
+    @Nullable
+    private MapActivity getMapActivity() {
+        return getActivity() == null ? null : ((MapActivity) getActivity());
     }
 }

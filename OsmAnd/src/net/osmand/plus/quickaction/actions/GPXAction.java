@@ -204,7 +204,7 @@ public class GPXAction extends QuickAction {
 				if (shouldUseSelectedGpxFile()) {
 					updateTrackBottomInfo(container, false);
 				} else {
-					showSelectTrackFileDialog(container, mapActivity);
+					showSelectTrackFileDialog(mapActivity);
 					return false;
 				}
 			}
@@ -226,7 +226,7 @@ public class GPXAction extends QuickAction {
 		AndroidUtils.setBackground(container.getContext(), selectAnotherTrackButton, night,
 				R.drawable.btn_solid_border_light, R.drawable.btn_solid_border_light);
 
-		selectAnotherTrackButtonContainer.setOnClickListener(v -> showSelectTrackFileDialog(container, mapActivity));
+		selectAnotherTrackButtonContainer.setOnClickListener(v -> showSelectTrackFileDialog(mapActivity));
 	}
 
 	private void setupGpxTrackInfo(@NonNull final View container, @NonNull final OsmandApplication app) {
@@ -302,13 +302,8 @@ public class GPXAction extends QuickAction {
 		}
 	}
 
-	private void showSelectTrackFileDialog(@NonNull View container, @NonNull MapActivity mapActivity) {
-		CallbackWithObject<String> onGpxFileSelected = gpxFileName -> {
-			selectedGpxFilePath = gpxFileName;
-			setupTrackToggleButton(container, mapActivity);
-			return true;
-		};
-		SelectTrackFileDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), onGpxFileSelected);
+	private void showSelectTrackFileDialog(@NonNull MapActivity mapActivity) {
+		SelectTrackFileDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), getDialog(mapActivity));
 	}
 
 	private void setupWaypointAppearanceToggle(@NonNull View container, @NonNull MapActivity mapActivity) {
@@ -587,6 +582,11 @@ public class GPXAction extends QuickAction {
 				dialog.show();
 			}
 		};
+	}
+
+	public void onGpxFileSelected(@NonNull View container, @NonNull MapActivity mapActivity, @NonNull String gpxFilePath) {
+		selectedGpxFilePath = gpxFilePath;
+		setupTrackToggleButton(container, mapActivity);
 	}
 
 	private boolean isNightMode(@NonNull MapActivity mapActivity) {

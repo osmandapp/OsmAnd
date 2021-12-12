@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,8 +35,6 @@ import java.util.List;
 public class SelectTrackFileDialogFragment extends BaseOsmAndDialogFragment {
 
 	public static final String TAG = SelectTrackFileDialogFragment.class.getSimpleName();
-
-	private CallbackWithObject<String> onGpxSelectedListener;
 
 	@Nullable
 	@Override
@@ -67,15 +66,19 @@ public class SelectTrackFileDialogFragment extends BaseOsmAndDialogFragment {
 		}
 		GpxTrackAdapter adapter = new GpxTrackAdapter(context, gpxInfoList, showCurrentGpx, true);
 		adapter.setAdapterListener(position -> {
-			if (onGpxSelectedListener != null) {
+			Fragment target = getTargetFragment();
+			CallbackWithObject<Object> listener = target instanceof CallbackWithObject<?>
+					? ((CallbackWithObject<Object>) target)
+					: null;
+			if (listener != null) {
 				boolean currentTrack = position == 0 && showCurrentGpx;
 				if (currentTrack) {
-					onGpxSelectedListener.processResult("");
+					listener.processResult("");
 				} else {
 					GPXInfo selectedGpxInfo = gpxInfoList.get(position);
 					String fileName = selectedGpxInfo.getFileName();
 					String gpxFilePath = gpxRootDir.getAbsolutePath() + "/" + fileName;
-					onGpxSelectedListener.processResult(gpxFilePath);
+					listener.processResult(gpxFilePath);
 				}
 			}
 			dismiss();
@@ -91,11 +94,11 @@ public class SelectTrackFileDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager,
-	                                @Nullable CallbackWithObject<String> onGpxSelectedListener) {
+	                                @Nullable Fragment target) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			SelectTrackFileDialogFragment fragment = new SelectTrackFileDialogFragment();
 			fragment.setRetainInstance(true);
-			fragment.onGpxSelectedListener = onGpxSelectedListener;
+			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
 		}
 	}
