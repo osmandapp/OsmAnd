@@ -33,7 +33,7 @@ public class RouteTurnArrowsCard extends MapBaseCard {
 	}
 
 	private boolean showTurnArrows() {
-		return routeLineInfo.showTurnArrows();
+		return routeLineInfo.shouldShowTurnArrows();
 	}
 
 	@Override

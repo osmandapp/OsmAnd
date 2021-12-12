@@ -146,7 +146,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		previewLineGeometry.drawRouteSegment(tileBox, canvas, tx, ty, angles, distances, 0, styles);
 		canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
-		if (previewRouteLineInfo.showTurnArrows()) {
+		if (previewRouteLineInfo.shouldShowTurnArrows()) {
 			Path path = new Path();
 			Matrix matrix = new Matrix();
 			int lineLength = AndroidUtils.dpToPx(view.getContext(), 24);

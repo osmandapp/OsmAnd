@@ -196,9 +196,9 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		return resultValue;
 	}
 
-	protected boolean showTurnArrows() {
+	protected boolean shouldShowTurnArrows() {
 		if (previewRouteLineInfo != null) {
-			return previewRouteLineInfo.showTurnArrows();
+			return previewRouteLineInfo.shouldShowTurnArrows();
 		} else {
 			return view.getSettings().ROUTE_SHOW_TURN_ARROWS.getModeValue(getAppMode());
 		}
