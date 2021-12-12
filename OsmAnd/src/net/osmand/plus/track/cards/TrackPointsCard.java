@@ -21,6 +21,7 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,34 +29,34 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
-import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper;
-import net.osmand.plus.track.helpers.TrackDisplayHelper;
-import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.myplaces.DeletePointsTask;
 import net.osmand.plus.myplaces.DeletePointsTask.OnPointsDeleteListener;
 import net.osmand.plus.myplaces.EditTrackGroupDialogFragment;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper.DisplayGroupsHolder;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.TrackDisplayHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -458,6 +459,12 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 					? getColoredIcon(R.drawable.ic_action_folder_hidden, ColorUtilities.getSecondaryTextColorId(nightMode))
 					: getContentIcon(R.drawable.ic_action_folder);
 			ImageView groupImage = row.findViewById(R.id.icon);
+			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(AndroidUtils.dpToPx(context, 24), AndroidUtils.dpToPx(context, 24));
+			params.leftMargin = AndroidUtils.dpToPx(context, 16);
+			params.rightMargin = AndroidUtils.dpToPx(context, 32);
+			groupImage.setLayoutParams(params);
+			groupImage.invalidate();
+			groupImage.requestLayout();
 			groupImage.setImageDrawable(icon);
 
 			boolean expanded = listView.isGroupExpanded(groupPosition);

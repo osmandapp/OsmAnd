@@ -55,16 +55,16 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginEnd="@dimen/favorites_icon_right_margin"
-				android:layout_marginRight="@dimen/favorites_icon_right_margin"
 				android:focusable="false"
 				android:visibility="gone"
 				tools:visibility="visible" />
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/icon"
+				android:layout_marginStart="@dimen/content_padding_small"
 				android:layout_width="@dimen/favorites_my_places_icon_size"
 				android:layout_height="@dimen/favorites_my_places_icon_size"
-				android:layout_marginEnd="@dimen/favorites_icon_right_margin"
+				android:layout_marginEnd="@dimen/list_content_padding_large"
 				tools:srcCompat="@drawable/ic_action_folder" />
 
 			<LinearLayout
