@@ -11,6 +11,8 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -35,6 +37,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
+import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
 import net.osmand.plus.quickaction.CreateEditActionDialog;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
@@ -162,6 +165,11 @@ public class GPXAction extends QuickAction {
 		unselectGpxFileIfMissing();
 		setupTrackToggleButton(root, mapActivity);
 		setupWaypointAppearanceToggle(root, mapActivity);
+
+		boolean editingWaypointTemplate = mapActivity.getFragment(WptPtEditor.TAG) != null;
+		if (editingWaypointTemplate) {
+			hideDialogWhileEditingTemplate(mapActivity);
+		}
 	}
 
 	private void setupTrackToggleButton(@NonNull View container, @NonNull MapActivity mapActivity) {
@@ -392,12 +400,7 @@ public class GPXAction extends QuickAction {
 					? createWaypoint()
 					: null;
 			String gpxFilePath = getSelectedGpxFilePath(true);
-			waypointEditor.setOnDismissListener(() -> {
-				CreateEditActionDialog dialog = getDialog(mapActivity);
-				if (dialog != null) {
-					dialog.show();
-				}
-			});
+			waypointEditor.setOnDismissListener(showDialogAfterTemplateEditing(mapActivity));
 			waypointEditor.setOnWaypointTemplateAddedListener((waypoint, categoryColor) -> {
 				predefinedWaypoint = waypoint;
 				predefinedCategoryColor = categoryColor;
@@ -556,6 +559,34 @@ public class GPXAction extends QuickAction {
 						null, gpxFileName);
 			}
 		}
+	}
+
+	private void hideDialogWhileEditingTemplate(@NonNull MapActivity mapActivity) {
+		CreateEditActionDialog dialog = getDialog(mapActivity);
+		View view = dialog == null ? null : dialog.getView();
+		if (view != null) {
+			view.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+				@Override
+				public void onGlobalLayout() {
+					view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+					WptPtEditor wptPtEditor = mapActivity.getContextMenu().getWptPtPointEditor();
+					if (wptPtEditor != null) {
+						wptPtEditor.setOnDismissListener(showDialogAfterTemplateEditing(mapActivity));
+						hideDialog(mapActivity);
+					}
+				}
+			});
+		}
+	}
+
+	@NonNull
+	private OnDismissListener showDialogAfterTemplateEditing(@NonNull MapActivity mapActivity) {
+		return () -> {
+			CreateEditActionDialog dialog = getDialog(mapActivity);
+			if (dialog != null) {
+				dialog.show();
+			}
+		};
 	}
 
 	private boolean isNightMode(@NonNull MapActivity mapActivity) {
