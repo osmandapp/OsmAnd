@@ -201,7 +201,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	}
 
 	private void drawAction(RotatedTileBox tb, Canvas canvas, List<Location> actionPoints) {
-		if (actionPoints.size() > 0 && shouldShowTurnArrows()) {
+		if (actionPoints.size() > 0) {
 			canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 			try {
 				float routeWidth = routeGeometry.getDefaultWayStyle().getWidth(0);
@@ -295,7 +295,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			}
 			List<RouteDirectionInfo> rd = helper.getRouteDirections();
 			Iterator<RouteDirectionInfo> it = rd.iterator();
-			if (!directTo && tb.getZoom() >= 14) {
+			if (!directTo && tb.getZoom() >= 14 && shouldShowTurnArrows()) {
 				List<Location> actionPoints = calculateActionPoints(topLatitude, leftLongitude, bottomLatitude, rightLongitude, helper.getLastProjection(),
 						helper.getRoute().getRouteLocations(), helper.getRoute().getCurrentRoute(), it, tb.getZoom());
 				drawAction(tb, canvas, actionPoints);
