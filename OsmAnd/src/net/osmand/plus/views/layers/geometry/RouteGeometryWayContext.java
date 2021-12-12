@@ -22,12 +22,6 @@ public class RouteGeometryWayContext extends MultiColoringGeometryWayContext {
 
 	@NonNull
 	@Override
-	public Paint getDefaultPaint() {
-		return getAttrs().paint;
-	}
-
-	@NonNull
-	@Override
 	protected ColoringType getDefaultColoringType() {
 		return ColoringType.DEFAULT;
 	}
