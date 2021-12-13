@@ -2966,4 +2966,21 @@
     <string name="store_tracks_in_daily_directories">İzləri günlük qovluqlara qeyd et</string>
     <string name="store_tracks_in_daily_directories_descrp">İzləri hər qeyd edildiyi günə görə alt qovluqlarda qeyd et (2018-01-01 kimi).</string>
     <string name="sort_last_modified">Son dəyişiklik</string>
+    <string name="vehicle_parameters_descr">Çəki, hündürlük, uzunluq, sürət</string>
+    <string name="show_warnings_title">Xəbərdarlıqları göstər…</string>
+    <string name="screen_alerts_descr">Xəbərdarlıqlar naviqasiya zamanı aşağı solda göstərilir.</string>
+    <string name="recalculate_route_distance_promo">Marşrutdan indiki yerə qədər olan məsafə seçilmiş dəyərdən çox olarsa, marşrut yenidən hesablanacaq.</string>
+    <string name="routing_attr_prefer_unpaved_name">Asfaltsız yollara üstünlük ver</string>
+    <string name="screen_alerts">Ekran xəbərdarlıqları</string>
+    <string name="temporary_conditional_routing">Müvəqqəti məhdudiyyətləri nəzərə al</string>
+    <string name="in_case_of_reverse_direction">Əks istiqamətdə gəldikdə</string>
+    <string name="routing_attr_prefer_unpaved_description">Asfaltsız yollara üstünlük ver.</string>
+    <string name="shared_string_size">Ölçü</string>
+    <string name="snap_to_road_descr">Hazırkı mövqe ikonu hazırkı naviqasiya marşrutuna bağlanacaq</string>
+    <string name="temporary_conditional_routing_descr">Hazırda xəritədə aktiv olan yol məhdudiyyətlərindən istifadə et</string>
+    <string name="select_distance_route_will_recalc">Marşrutun yenidən hesablanacağı məsafəni seçin.</string>
+    <string name="recalculate_route_in_deviation">Kənarlaşma halında marşrutu yenidən hesabla</string>
+    <string name="route_recalculation_dist_title">Marşrutun yenidən hesablanacağı minimum məsafə</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Asfaltsız yollara üstünlük ver</string>
+    <string name="vehicle_parameters">Nəqliyyat vasitəsi parametrləri</string>
 </resources>
