@@ -15,14 +15,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.plugins.openplacereviews.UploadPhotosAsyncTask.UploadPhotosProgressListener;
+import net.osmand.plus.utils.UiUtilities;
 
 public class UploadPhotoProgressBottomSheet extends MenuBottomSheetDialogFragment implements UploadPhotosProgressListener {
 
@@ -107,18 +106,16 @@ public class UploadPhotoProgressBottomSheet extends MenuBottomSheetDialogFragmen
 		return uploadingFinished ? R.string.shared_string_close : R.string.shared_string_cancel;
 	}
 
-	@Nullable
-	public static UploadPhotosProgressListener showInstance(@NonNull FragmentManager fragmentManager, int maxProgress, OnDismissListener listener) {
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			UploadPhotoProgressBottomSheet fragment = new UploadPhotoProgressBottomSheet();
-			fragment.setRetainInstance(true);
-			fragment.setMaxProgress(maxProgress);
-			fragment.setOnDismissListener(listener);
-			fragmentManager.beginTransaction()
-					.add(fragment, UploadPhotoProgressBottomSheet.TAG)
-					.commitAllowingStateLoss();
-			return fragment;
-		}
-		return null;
+	public static UploadPhotosProgressListener showInstance(@NonNull FragmentManager fragmentManager,
+	                                                        int maxProgress,
+	                                                        @Nullable OnDismissListener listener) {
+		UploadPhotoProgressBottomSheet fragment = new UploadPhotoProgressBottomSheet();
+		fragment.setRetainInstance(true);
+		fragment.setMaxProgress(maxProgress);
+		fragment.setOnDismissListener(listener);
+		fragmentManager.beginTransaction()
+				.add(fragment, UploadPhotoProgressBottomSheet.TAG)
+				.commitAllowingStateLoss();
+		return fragment;
 	}
 }
