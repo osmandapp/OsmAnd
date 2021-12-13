@@ -10,13 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MultipleSelectionBottomSheet;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
 
 import java.util.List;
 
@@ -45,6 +45,22 @@ public class UploadMultipleGPXBottomSheet extends MultipleSelectionBottomSheet {
 			time.setText(formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()));
 		}
 		AndroidUiHelper.setVisibility(View.VISIBLE, distance, pointsCount, time);
+	}
+
+	@Override
+	public void onSelectedItemsChanged() {
+		super.onSelectedItemsChanged();
+		updateTitleDescriptionView();
+	}
+
+	private void updateTitleDescriptionView() {
+		long size = 0;
+		for (SelectableItem item : selectedItems) {
+			size += ((GpxInfo) item.getObject()).getSize();
+		}
+		String total = app.getString(R.string.shared_string_total);
+		titleDescription.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon, total,
+				AndroidUtils.formatSize(app, selectedItems.size() == 0 ? 1 : size)));
 	}
 
 	@Nullable
