@@ -99,7 +99,7 @@ public class GpsFilterHelper {
 			filteredGpxFile = copyGpxFile(app, sourceGpx);
 			filteredGpxFile.tracks.clear();
 
-			int pointsCount = 0;
+			int analysedPointsCount = 0;
 			for (Track track : sourceGpx.tracks) {
 
 				Track filteredTrack = new Track();
@@ -132,13 +132,16 @@ public class GpsFilterHelper {
 									point.lat, point.lon);
 						}
 						boolean firstOrLast = i == 0 || i + 1 == points.size();
+						boolean singlePoint = points.size() == 1;
 
-						if (acceptPoint(point, pointsCount, cumulativeDistance, firstOrLast)) {
+						if (acceptPoint(point, analysedPointsCount, cumulativeDistance, firstOrLast, singlePoint)) {
 							filteredSegment.points.add(new WptPt(point));
 							cumulativeDistance = 0;
 						}
 
-						pointsCount++;
+						if (!singlePoint) {
+							analysedPointsCount++;
+						}
 						previousPoint = point;
 					}
 
@@ -162,16 +165,17 @@ public class GpsFilterHelper {
 			return true;
 		}
 
-		private boolean acceptPoint(@NonNull WptPt point, int pointIndex, double cumulativeDistance, boolean firstOrLast) {
+		private boolean acceptPoint(@NonNull WptPt point, int pointIndex, double cumulativeDistance,
+		                            boolean firstOrLast, boolean singlePoint) {
 			SpeedFilter speedFilter = filteredSelectedGpxFile.getSpeedFilter();
 			AltitudeFilter altitudeFilter = filteredSelectedGpxFile.getAltitudeFilter();
 			HdopFilter hdopFilter = filteredSelectedGpxFile.getHdopFilter();
 			SmoothingFilter smoothingFilter = filteredSelectedGpxFile.getSmoothingFilter();
 
-			return speedFilter.acceptPoint(point, pointIndex, cumulativeDistance)
-					&& altitudeFilter.acceptPoint(point, pointIndex, cumulativeDistance)
-					&& hdopFilter.acceptPoint(point, pointIndex, cumulativeDistance)
-					&& (firstOrLast || smoothingFilter.acceptPoint(point, pointIndex, cumulativeDistance));
+			return speedFilter.acceptPoint(point, pointIndex, cumulativeDistance, singlePoint)
+					&& altitudeFilter.acceptPoint(point, pointIndex, cumulativeDistance, singlePoint)
+					&& hdopFilter.acceptPoint(point, pointIndex, cumulativeDistance, singlePoint)
+					&& (firstOrLast || smoothingFilter.acceptPoint(point, pointIndex, cumulativeDistance, singlePoint));
 		}
 
 		@Nullable
@@ -337,7 +341,8 @@ public class GpsFilterHelper {
 
 		public abstract boolean isRangeSupported();
 
-		public abstract boolean acceptPoint(@NonNull WptPt point, int pointIndex, double distanceToLastSurvivedPoint);
+		public abstract boolean acceptPoint(@NonNull WptPt point, int pointIndex,
+		                                    double distanceToLastSurvivedPoint, boolean singlePoint);
 
 		public abstract double getMinValue();
 
@@ -456,7 +461,8 @@ public class GpsFilterHelper {
 		}
 
 		@Override
-		public boolean acceptPoint(@NonNull WptPt point, int pointIndex, double distanceToLastSurvivedPoint) {
+		public boolean acceptPoint(@NonNull WptPt point, int pointIndex,
+		                           double distanceToLastSurvivedPoint, boolean singlePoint) {
 			return !isNeeded() || getSelectedMaxValue() == 0 || distanceToLastSurvivedPoint > getSelectedMaxValue();
 		}
 
@@ -535,8 +541,9 @@ public class GpsFilterHelper {
 		}
 
 		@Override
-		public boolean acceptPoint(@NonNull WptPt point, int pointIndex, double distanceToLastSurvivedPoint) {
-			float speed = analysis.speedData.get(pointIndex).speed;
+		public boolean acceptPoint(@NonNull WptPt point, int pointIndex,
+		                           double distanceToLastSurvivedPoint, boolean singlePoint) {
+			float speed = singlePoint ? (float) point.speed : analysis.speedData.get(pointIndex).speed;
 			return !isNeeded() || getSelectedMinValue() <= speed && speed <= getSelectedMaxValue();
 		}
 
@@ -625,8 +632,9 @@ public class GpsFilterHelper {
 		}
 
 		@Override
-		public boolean acceptPoint(@NonNull WptPt point, int pointIndex, double distanceToLastSurvivedPoint) {
-			float altitude = analysis.elevationData.get(pointIndex).elevation;
+		public boolean acceptPoint(@NonNull WptPt point, int pointIndex,
+		                           double distanceToLastSurvivedPoint, boolean singlePoint) {
+			float altitude = singlePoint ? (float) point.ele : analysis.elevationData.get(pointIndex).elevation;
 			return !isNeeded() || getSelectedMinValue() <= altitude && altitude <= getSelectedMaxValue();
 		}
 
@@ -713,7 +721,8 @@ public class GpsFilterHelper {
 		}
 
 		@Override
-		public boolean acceptPoint(@NonNull WptPt point, int pointIndex, double distanceToLastSurvivedPoint) {
+		public boolean acceptPoint(@NonNull WptPt point, int pointIndex,
+		                           double distanceToLastSurvivedPoint, boolean singlePoint) {
 			return !isNeeded() || point.hdop <= getSelectedMaxValue();
 		}
 
