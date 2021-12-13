@@ -680,11 +680,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			cardsContainer.removeAllViews();
 			if (menuType == TrackMenuType.TRACK) {
 				if (segmentsCard != null && segmentsCard.getView() != null) {
-					ViewGroup parent = (ViewGroup) segmentsCard.getView().getParent();
-					if (parent != null) {
-						parent.removeAllViews();
-					}
-					cardsContainer.addView(segmentsCard.getView());
+					reattachCard(cardsContainer, segmentsCard);
 				} else {
 					segmentsCard = new SegmentsCard(mapActivity, displayHelper, gpxPoint, this);
 					segmentsCard.setListener(this);
@@ -692,11 +688,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				}
 			} else if (menuType == TrackMenuType.OPTIONS) {
 				if (optionsCard != null && optionsCard.getView() != null) {
-					ViewGroup parent = (ViewGroup) optionsCard.getView().getParent();
-					if (parent != null) {
-						parent.removeAllViews();
-					}
-					cardsContainer.addView(optionsCard.getView());
+					reattachCard(cardsContainer, optionsCard);
 				} else {
 					optionsCard = new OptionsCard(mapActivity, displayHelper, selectedGpxFile);
 					optionsCard.setListener(this);
@@ -704,11 +696,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				}
 			} else if (menuType == TrackMenuType.OVERVIEW) {
 				if (overviewCard != null && overviewCard.getView() != null) {
-					ViewGroup parent = (ViewGroup) overviewCard.getView().getParent();
-					if (parent != null) {
-						parent.removeView(overviewCard.getView());
-					}
-					cardsContainer.addView(overviewCard.getView());
+					reattachCard(cardsContainer, overviewCard);
 				} else {
 					overviewCard = new OverviewCard(mapActivity, this, selectedGpxFile, analyses, this);
 					overviewCard.setListener(this);
@@ -719,32 +707,20 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				}
 
 				if (descriptionCard != null && descriptionCard.getView() != null) {
-					ViewGroup parent = ((ViewGroup) descriptionCard.getView().getParent());
-					if (parent != null) {
-						parent.removeView(descriptionCard.getView());
-					}
-					cardsContainer.addView(descriptionCard.getView());
+					reattachCard(cardsContainer, descriptionCard);
 				} else {
 					descriptionCard = new DescriptionCard(getMapActivity(), this, displayHelper.getGpx());
 					cardsContainer.addView(descriptionCard.build(mapActivity));
 				}
 				if (gpxInfoCard != null && gpxInfoCard.getView() != null) {
-					ViewGroup parent = ((ViewGroup) gpxInfoCard.getView().getParent());
-					if (parent != null) {
-						parent.removeView(gpxInfoCard.getView());
-					}
-					cardsContainer.addView(gpxInfoCard.getView());
+					reattachCard(cardsContainer, gpxInfoCard);
 				} else {
 					gpxInfoCard = new GpxInfoCard(getMapActivity(), displayHelper.getGpx());
 					cardsContainer.addView(gpxInfoCard.build(mapActivity));
 				}
 			} else if (menuType == TrackMenuType.POINTS) {
 				if (pointsCard != null && pointsCard.getView() != null) {
-					ViewGroup parent = (ViewGroup) pointsCard.getView().getParent();
-					if (parent != null) {
-						parent.removeAllViews();
-					}
-					cardsContainer.addView(pointsCard.getView());
+					reattachCard(cardsContainer, pointsCard);
 				} else {
 					pointsCard = new TrackPointsCard(mapActivity, displayHelper, selectedGpxFile);
 					pointsCard.setListener(this);
@@ -752,6 +728,14 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				}
 			}
 		}
+	}
+
+	private void reattachCard(@NonNull ViewGroup cardsContainer, @NonNull BaseCard card) {
+		ViewGroup oldParent = card.getView() == null ? null : (ViewGroup) card.getView().getParent();
+		if (oldParent != null) {
+			oldParent.removeAllViews();
+		}
+		cardsContainer.addView(card.getView());
 	}
 
 	private void updateCardsLayout() {
