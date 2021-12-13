@@ -1,5 +1,6 @@
 package net.osmand.plus.dialogs;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
@@ -21,7 +22,7 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
-import net.osmand.plus.mapcontextmenu.UploadPhotosAsyncTask.UploadPhotosProgressListener;
+import net.osmand.plus.plugins.openplacereviews.UploadPhotosAsyncTask.UploadPhotosProgressListener;
 
 public class UploadPhotoProgressBottomSheet extends MenuBottomSheetDialogFragment implements UploadPhotosProgressListener {
 
@@ -37,6 +38,7 @@ public class UploadPhotoProgressBottomSheet extends MenuBottomSheetDialogFragmen
 	private int maxProgress;
 	private boolean uploadingFinished;
 
+	@SuppressLint("InflateParams")
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		Context context = requireContext();

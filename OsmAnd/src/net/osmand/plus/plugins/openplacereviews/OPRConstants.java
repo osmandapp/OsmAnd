@@ -4,7 +4,6 @@ package net.osmand.plus.plugins.openplacereviews;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.osmedit.opr.OpenDBAPI;
 
 public class OPRConstants {
 	public static final String OPR_OAUTH_PREFIX = "opr-oauth";
