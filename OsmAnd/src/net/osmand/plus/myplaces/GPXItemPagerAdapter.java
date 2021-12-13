@@ -1,5 +1,12 @@
 package net.osmand.plus.myplaces;
 
+import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.ALTITUDE;
+import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SLOPE;
+import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SPEED;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_SPEED;
+
 import android.annotation.SuppressLint;
 import android.graphics.Matrix;
 import android.util.SparseArray;
@@ -10,6 +17,11 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.viewpager.widget.PagerAdapter;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -50,23 +62,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.viewpager.widget.PagerAdapter;
-
-import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.ALTITUDE;
-import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SLOPE;
-import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SPEED;
-import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
-import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
-import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_SPEED;
 
 public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvider, ViewAtPositionInterface {
 
@@ -240,11 +239,20 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		return tabTypes[position].toHumanString(app);
 	}
 
+	@Override
+	public int getItemPosition(@NonNull Object object) {
+		View view = (View) object;
+		GPXTabItemType tabType = (GPXTabItemType) view.getTag();
+		int index = Arrays.asList(tabTypes).indexOf(tabType);
+		return index >= 0 ? index : POSITION_NONE;
+	}
+
 	@NonNull
 	@Override
 	public Object instantiateItem(@NonNull ViewGroup container, int position) {
 		GPXTabItemType tabType = tabTypes[position];
 		View view = getViewForTab(container, tabType);
+		view.setTag(tabType);
 		LineChart chart = view.findViewById(R.id.chart);
 		ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) chart.getLayoutParams();
 		AndroidUtils.setMargins(lp, chartHMargin, lp.topMargin, chartHMargin, lp.bottomMargin);
@@ -803,10 +811,12 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	public void updateGraph(int position) {
 		updateAnalysis();
 		fetchTabTypes();
-		if (getCount() > 0 && views.size() > 0) {
+		notifyDataSetChanged();
+
+		int count = getCount();
+		if (count > 0 && views.size() == count) {
 			updateGraphTab(position);
 		}
-		notifyDataSetChanged();
 	}
 
 	private void updateGraphTab(int position) {
