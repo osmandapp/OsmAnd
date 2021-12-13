@@ -18,9 +18,10 @@ import androidx.core.content.ContextCompat;
 import androidx.core.widget.CompoundButtonCompat;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -97,6 +98,7 @@ public class MultipleSelectionBottomSheet extends SelectionBottomSheet {
 	public void onSelectedItemsChanged() {
 		updateSelectAllButton();
 		updateSelectedSizeView();
+		updateTitleDescriptionView();
 		updateApplyButtonEnable();
 		if (selectionUpdateListener != null) {
 			selectionUpdateListener.onSelectionUpdate();
@@ -121,6 +123,16 @@ public class MultipleSelectionBottomSheet extends SelectionBottomSheet {
 		String selected = String.valueOf(selectedItems.size());
 		String all = String.valueOf(allItems.size());
 		selectedSize.setText(getString(R.string.ltr_or_rtl_combine_via_slash, selected, all));
+	}
+
+	private void updateTitleDescriptionView() {
+		long description = 0;
+		for (SelectableItem item : selectedItems) {
+			description += ((GpxInfo) item.getObject()).getSize();
+		}
+		String total = app.getString(R.string.shared_string_total);
+		titleDescription.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon, total,
+				AndroidUtils.formatSize(app, selectedItems.size() == 0 ? 1 : description)));
 	}
 
 	private void updateApplyButtonEnable() {
