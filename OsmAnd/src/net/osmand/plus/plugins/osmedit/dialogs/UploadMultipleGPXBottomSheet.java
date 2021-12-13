@@ -50,15 +50,15 @@ public class UploadMultipleGPXBottomSheet extends MultipleSelectionBottomSheet {
 	@Override
 	public void onSelectedItemsChanged() {
 		super.onSelectedItemsChanged();
-		updateTitleDescriptionView();
+		updateSizeDescription();
 	}
 
-	private void updateTitleDescriptionView() {
+	private void updateSizeDescription() {
 		long size = 0;
 		for (SelectableItem item : selectedItems) {
 			size += ((GpxInfo) item.getObject()).getSize();
 		}
-		String total = app.getString(R.string.shared_string_total);
+		String total = getString(R.string.shared_string_total);
 		titleDescription.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon, total,
 				AndroidUtils.formatSize(app, selectedItems.size() == 0 ? 1 : size)));
 	}
