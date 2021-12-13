@@ -210,7 +210,7 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 		};
 		try {
 			settingsHelper.collectSettings(RESTORE_ITEMS_KEY, true, collectListener);
-		} catch (IllegalArgumentException e) {
+		} catch (IllegalStateException e) {
 			LOG.error(e.getMessage(), e);
 		}
 	}
