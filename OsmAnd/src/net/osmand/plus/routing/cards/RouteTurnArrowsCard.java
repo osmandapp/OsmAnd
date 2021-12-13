@@ -32,8 +32,8 @@ public class RouteTurnArrowsCard extends MapBaseCard {
 		mapActivity.refreshMap();
 	}
 
-	private boolean showTurnArrows() {
-		return routeLineInfo.showTurnArrows();
+	private boolean shouldShowTurnArrows() {
+		return routeLineInfo.shouldShowTurnArrows();
 	}
 
 	@Override
@@ -44,13 +44,13 @@ public class RouteTurnArrowsCard extends MapBaseCard {
 		Drawable active = AppCompatResources.getDrawable(getMapActivity(), nightMode ? R.drawable.btn_background_inactive_dark : R.drawable.btn_background_inactive_light);
 		Drawable inActive = AppCompatResources.getDrawable(getMapActivity(), nightMode ? R.drawable.btn_border_dark : R.drawable.btn_border_light);
 
-		boolean showTurnArrows = showTurnArrows();
+		boolean showTurnArrows = shouldShowTurnArrows();
 		arrowSwitch.setChecked(showTurnArrows);
 		title.setText(showTurnArrows ? app.getString(R.string.shared_string_visible) : app.getString(R.string.shared_string_hidden));
 		container.setBackground(showTurnArrows ? active : inActive);
 
 		container.setOnClickListener(view -> {
-			setHasTurnArrow(!showTurnArrows());
+			setHasTurnArrow(!shouldShowTurnArrows());
 			updateContent();
 		});
 	}

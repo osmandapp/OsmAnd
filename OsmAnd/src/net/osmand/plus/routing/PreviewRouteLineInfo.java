@@ -129,7 +129,7 @@ public class PreviewRouteLineInfo {
 		return width;
 	}
 
-	public boolean showTurnArrows() {
+	public boolean shouldShowTurnArrows() {
 		return showTurnArrows;
 	}
 

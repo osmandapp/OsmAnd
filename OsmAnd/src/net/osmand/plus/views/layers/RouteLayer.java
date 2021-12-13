@@ -16,7 +16,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -36,6 +35,7 @@ import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.BaseRouteLayer;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWay;
@@ -220,11 +220,9 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 						if (routeWidth != 0) {
 							attrs.paint3.setStrokeWidth(routeWidth / 2);
 						}
-						if (showTurnArrows()){
-							drawTurnArrow(canvas, matrix, x, y, px, py);
-							attrs.paint3.setColor(defaultTurnArrowColor);
-							canvas.drawPath(pth, attrs.paint3);
-						}
+						canvas.drawPath(pth, attrs.paint3);
+						drawTurnArrow(canvas, matrix, x, y, px, py);
+						attrs.paint3.setColor(defaultTurnArrowColor);
 					} else {
 						px = x;
 						py = y;
@@ -297,7 +295,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			}
 			List<RouteDirectionInfo> rd = helper.getRouteDirections();
 			Iterator<RouteDirectionInfo> it = rd.iterator();
-			if (!directTo && tb.getZoom() >= 14) {
+			if (!directTo && tb.getZoom() >= 14 && shouldShowTurnArrows()) {
 				List<Location> actionPoints = calculateActionPoints(topLatitude, leftLongitude, bottomLatitude, rightLongitude, helper.getLastProjection(),
 						helper.getRoute().getRouteLocations(), helper.getRoute().getCurrentRoute(), it, tb.getZoom());
 				drawAction(tb, canvas, actionPoints);
