@@ -460,10 +460,9 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 					: getContentIcon(R.drawable.ic_action_folder);
 			ImageView groupImage = row.findViewById(R.id.icon);
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(AndroidUtils.dpToPx(context, 24), AndroidUtils.dpToPx(context, 24));
-			params.leftMargin = AndroidUtils.dpToPx(context, 16);
-			params.rightMargin = AndroidUtils.dpToPx(context, 32);
+			params.leftMargin = app.getResources().getDimensionPixelSize(R.dimen.list_content_padding);
+			params.rightMargin = app.getResources().getDimensionPixelSize(R.dimen.list_content_padding_large);
 			groupImage.setLayoutParams(params);
-			groupImage.invalidate();
 			groupImage.requestLayout();
 			groupImage.setImageDrawable(icon);
 
