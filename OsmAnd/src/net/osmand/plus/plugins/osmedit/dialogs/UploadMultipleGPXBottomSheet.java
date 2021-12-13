@@ -59,7 +59,7 @@ public class UploadMultipleGPXBottomSheet extends MultipleSelectionBottomSheet {
 			size += ((GpxInfo) item.getObject()).getSize();
 		}
 		String total = getString(R.string.shared_string_total);
-		titleDescription.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon, total,
+		titleDescription.setText(getString(R.string.ltr_or_rtl_combine_via_colon, total,
 				AndroidUtils.formatSize(app, selectedItems.size() == 0 ? 1 : size)));
 	}
 
