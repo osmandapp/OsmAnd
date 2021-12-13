@@ -62,7 +62,7 @@ public class ActionButtonViewHolder extends RecyclerView.ViewHolder {
 					if (!items.isEmpty() || !Algorithms.isEmpty(info.filteredFilesToDelete)) {
 						settingsHelper.exportSettings(BACKUP_ITEMS_KEY, items, info.itemsToDelete, exportListener);
 					}
-				} catch (IllegalArgumentException e) {
+				} catch (IllegalStateException e) {
 					log.error(e.getMessage(), e);
 				}
 			});

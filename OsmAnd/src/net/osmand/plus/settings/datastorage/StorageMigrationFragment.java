@@ -57,6 +57,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	private static final String FILES_SIZE_KEY = "files_size";
 	private static final String ESTIMATED_SIZE_KEY = "estimated_size";
 	private static final String EXISTING_FILES_KEY = "existing_files";
+	private static final String SELECTED_STORAGE_KEY = "selected_storage";
 
 	private OsmandApplication app;
 	private StorageItem selectedStorage;
@@ -91,6 +92,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 			generalProgress = savedInstanceState.getInt(GENERAL_PROGRESS_KEY);
 			copyFinished = savedInstanceState.getBoolean(COPY_FINISHED_KEY);
 			usedOnMap = savedInstanceState.getBoolean(USED_ON_MAP_KEY);
+			selectedStorage = savedInstanceState.getParcelable(SELECTED_STORAGE_KEY);
 
 			long size = savedInstanceState.getLong(FILES_SIZE_KEY);
 			long estimatedSize = savedInstanceState.getLong(ESTIMATED_SIZE_KEY);
@@ -129,6 +131,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 		outState.putBoolean(USED_ON_MAP_KEY, usedOnMap);
 		outState.putLong(FILES_SIZE_KEY, filesSize.first);
 		outState.putLong(ESTIMATED_SIZE_KEY, filesSize.second);
+		outState.putParcelable(SELECTED_STORAGE_KEY, selectedStorage);
 
 		ArrayList<String> filePaths = new ArrayList<>();
 		for (File file : existingFiles) {
