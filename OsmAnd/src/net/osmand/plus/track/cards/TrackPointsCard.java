@@ -93,7 +93,6 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 	private Location lastLocation;
 	private float lastHeading;
 	private boolean locationDataUpdateAllowed = true;
-	private Resources getResources = app.getResources();
 
 	public TrackPointsCard(@NonNull MapActivity mapActivity,
 	                       @NonNull TrackDisplayHelper displayHelper,
@@ -461,9 +460,12 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 					? getColoredIcon(R.drawable.ic_action_folder_hidden, ColorUtilities.getSecondaryTextColorId(nightMode))
 					: getContentIcon(R.drawable.ic_action_folder);
 			ImageView groupImage = row.findViewById(R.id.icon);
-			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(getResources.getDimensionPixelSize(R.dimen.standard_icon_size), getResources.getDimensionPixelSize(R.dimen.standard_icon_size));
-			params.leftMargin = getResources.getDimensionPixelSize(AndroidUtils.isLayoutRtl(context) ? R.dimen.list_content_padding_large : R.dimen.list_content_padding);
-			params.rightMargin = getResources.getDimensionPixelSize(AndroidUtils.isLayoutRtl(context) ? R.dimen.title_padding : R.dimen.list_content_padding_large);
+			Resources resources = app.getResources();
+			int iconSize = resources.getDimensionPixelSize(R.dimen.standard_icon_size);
+			int marginStart = resources.getDimensionPixelSize(R.dimen.list_content_padding);
+			int marginEnd = resources.getDimensionPixelSize(R.dimen.list_content_padding_large);
+			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(iconSize, iconSize);
+			AndroidUtils.setMargins(params,marginStart,0,marginEnd,0);
 			groupImage.setLayoutParams(params);
 			groupImage.requestLayout();
 			groupImage.setImageDrawable(icon);
