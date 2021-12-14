@@ -31,13 +31,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import gnu.trove.list.array.TIntArrayList;
 
@@ -628,9 +622,9 @@ public class NativeLibrary {
 			return isRoute;
 		}
 
-		public List<String> getRouteStringKeys(final String type) {
+		public Map<String,List<String>> getRouteStringKeys(final String type) {
 			List<String> allTagsList = new ArrayList<>(tags.keySet());
-			List<String> routeTagsList = new ArrayList<>();
+			Map<String,List<String>> routeTagsList = new HashMap<>();
 			int routeQuantity;
 			routeQuantity = getRouteQuantity(type, allTagsList);
 			if (routeQuantity != 0) {
@@ -646,7 +640,7 @@ public class NativeLibrary {
 					for (String str : tagValueList) {
 						tagKey.append(str);
 					}
-					routeTagsList.add(tagKey.toString());
+					routeTagsList.put(tagKey.toString(), tagValueList);
 				}
 			}
 			return routeTagsList;
