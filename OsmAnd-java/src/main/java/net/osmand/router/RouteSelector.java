@@ -1,11 +1,15 @@
 package net.osmand.router;
 
 import gnu.trove.list.array.TIntArrayList;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.data.QuadRect;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
 import net.osmand.util.Algorithms;
@@ -22,16 +26,24 @@ public class RouteSelector {
 	public static final String ROUTE_PREFIX = "route_";
 	public static final int DEVIATE = 200;
 	public static final int SPLIT_RADIUS = 50000;
-	String type;
-	String tagKey;
-
-	public List<Way> getRoute(RenderedObject renderedObject, File mapFile, String tagKey, String type) {
-		this.type = type;
-		this.tagKey = tagKey;
-		return getAllSegments(renderedObject, mapFile);
+	final BinaryMapIndexReader[] files;
+	// ROUTE_KEY: {route_bicycle_1=, route_bicycle_1_node_network=rcn, route_bicycle_1_ref=67-68} -> "route_bicycle___node_network_rcn___ref_67-68"
+	private static final String ROUTE_KEY_SEPARATOR = "___";
+	private static final String ROUTE_KEY_VALUE_SEPARATOR = "_";
+	
+	public RouteSelector(BinaryMapIndexReader[] files) {
+		this.files = files;
 	}
 
-	private List<Way> getAllSegments(RenderedObject renderedObject, File mapFile) {
+	public List<GPXFile> getRoutes(RenderedObject renderedObject) {
+		QuadRect qr = new QuadRect();
+		qr.left = qr.right = renderedObject.getLabelX();
+		qr.top = qr.bottom = renderedObject.getLabelY();
+		MapIndex mapIndex = getMapIndexPerObject(renderedObject);
+		return getRoutes(qr, mapIndex, null, null);
+	}
+
+	public List<GPXFile> getRoutes(QuadRect bbox, MapIndex mapIndex, Set<String> routeKeys, Set<String> routePrefixes) {
 		List<Way> wayList = new ArrayList<>();
 		List<BinaryMapDataObject> foundSegmentList = new ArrayList<>();
 		List<BinaryMapDataObject> finalSegmentList = new ArrayList<>();
@@ -44,9 +56,6 @@ public class RouteSelector {
 		long id = renderedObject.getId();
 
 		try {
-			RandomAccessFile raf = new RandomAccessFile(mapFile, "r");
-			BinaryMapIndexReader indexReader = new BinaryMapIndexReader(raf, mapFile);
-			BinaryMapIndexReader.MapIndex mapIndex = indexReader.getMapIndexes().get(0);
 
 			final SearchRequest<BinaryMapDataObject> req = buildSearchRequest(foundSegmentList, x, y, false);
 			foundSegmentList.clear();
@@ -85,6 +94,12 @@ public class RouteSelector {
 		}
 		return wayList;
 	}
+	
+	private MapIndex getMapIndexPerObject(RenderedObject renderedObject) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 	private void getRoutePart(List<BinaryMapDataObject> finalSegmentList, int x, int y,
 	                          BinaryMapIndexReader indexReader, BinaryMapIndexReader.MapIndex mapIndex, boolean split)
