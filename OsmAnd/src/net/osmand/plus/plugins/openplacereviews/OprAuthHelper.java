@@ -3,9 +3,9 @@ package net.osmand.plus.plugins.openplacereviews;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.osmedit.opr.OpenDBAPI;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
@@ -17,6 +17,10 @@ public class OprAuthHelper {
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final Set<OprAuthorizationListener> listeners = new HashSet<>();
+
+	public interface OprAuthorizationListener {
+		void authorizationCompleted();
+	}
 
 	public OprAuthHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -53,11 +57,19 @@ public class OprAuthHelper {
 	}
 
 	public void authorize(final String token, final String username) {
-		CheckOprAuthTask checkOprAuthTask = new CheckOprAuthTask(app, token, username);
+		CheckOprAuthTask checkOprAuthTask = new CheckOprAuthTask(app, token, username, authorized -> {
+			if (authorized) {
+				app.getSettings().OPR_ACCESS_TOKEN.set(token);
+				app.getSettings().OPR_USERNAME.set(username);
+			} else {
+				app.getOprAuthHelper().resetAuthorization();
+			}
+			app.getOprAuthHelper().notifyAndRemoveListeners();
+		});
 		checkOprAuthTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
-	private static class CheckOprAuthTask extends AsyncTask<Void, Void, Boolean> {
+	public static class CheckOprAuthTask extends AsyncTask<Void, Void, Boolean> {
 
 		private final OsmandApplication app;
 		private final OpenDBAPI openDBAPI = new OpenDBAPI();
@@ -65,10 +77,18 @@ public class OprAuthHelper {
 		private final String token;
 		private final String username;
 
-		private CheckOprAuthTask(@NonNull OsmandApplication app, String token, String username) {
+		private final CheckOprAuthTaskListener listener;
+
+		public interface CheckOprAuthTaskListener {
+			void onOprAuthChecked(boolean authorized);
+		}
+
+		public CheckOprAuthTask(@NonNull OsmandApplication app, @NonNull String token,
+		                        @NonNull String username, @Nullable CheckOprAuthTaskListener listener) {
 			this.app = app;
 			this.token = token;
 			this.username = username;
+			this.listener = listener;
 		}
 
 		@Override
@@ -79,17 +99,9 @@ public class OprAuthHelper {
 
 		@Override
 		protected void onPostExecute(Boolean result) {
-			if (result) {
-				app.getSettings().OPR_ACCESS_TOKEN.set(token);
-				app.getSettings().OPR_USERNAME.set(username);
-			} else {
-				app.getOprAuthHelper().resetAuthorization();
+			if (listener != null) {
+				listener.onOprAuthChecked(result);
 			}
-			app.getOprAuthHelper().notifyAndRemoveListeners();
 		}
-	}
-
-	public interface OprAuthorizationListener {
-		void authorizationCompleted();
 	}
 }

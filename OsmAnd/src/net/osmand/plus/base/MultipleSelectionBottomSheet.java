@@ -18,9 +18,9 @@ import androidx.core.content.ContextCompat;
 import androidx.core.widget.CompoundButtonCompat;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class MultipleSelectionBottomSheet extends SelectionBottomSheet {
 	public static final String TAG = MultipleSelectionBottomSheet.class.getSimpleName();
 
 	protected final List<SelectableItem> selectedItems = new ArrayList<>();
-	private SelectionUpdateListener selectionUpdateListener;
+	protected SelectionUpdateListener selectionUpdateListener;
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

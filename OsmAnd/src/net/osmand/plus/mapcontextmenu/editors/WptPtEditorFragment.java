@@ -96,7 +96,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 			WptPt wpt = editor.getWptPt();
 			color = wpt.getColor(0);
 			this.wpt = wpt;
-			categoriesMap = editor.getGpxFile().getWaypointCategoriesWithColors(false);
+			categoriesMap = editor.getColoredWaypointCategories();
 		}
 	}
 
@@ -117,7 +117,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 			if (listener != null) {
 				listener.onDismiss();
 			}
-			editor.setNewGpxPointProcessing(false);
+			editor.setProcessingOrdinaryPoint();
 			editor.setOnDismissListener(null);
 		}
 	}

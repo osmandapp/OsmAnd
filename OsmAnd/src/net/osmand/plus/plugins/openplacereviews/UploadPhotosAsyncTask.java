@@ -1,26 +1,24 @@
-package net.osmand.plus.mapcontextmenu;
+package net.osmand.plus.plugins.openplacereviews;
 
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.UploadPhotoProgressBottomSheet;
-import net.osmand.plus.plugins.openplacereviews.OPRConstants;
-import net.osmand.plus.plugins.openplacereviews.OprStartFragment;
-import net.osmand.plus.plugins.osmedit.opr.OpenDBAPI;
+import net.osmand.plus.plugins.openplacereviews.OpenDBAPI.UploadImageResult;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -41,14 +39,30 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 	private static final int IMAGE_MAX_SIZE = 4096;
 
 	private final OsmandApplication app;
-	private final WeakReference<MapActivity> activityRef;
+	private final WeakReference<FragmentActivity> activityRef;
 	private final OpenDBAPI openDBAPI = new OpenDBAPI();
 	private final List<Uri> data;
 	private final String[] placeId;
 	private final UploadPhotosListener listener;
 	private UploadPhotosProgressListener progressListener;
 
-	public UploadPhotosAsyncTask(MapActivity activity, List<Uri> data, String[] placeId, UploadPhotosListener listener) {
+	public interface UploadPhotosProgressListener {
+
+		@MainThread
+		void uploadPhotosProgressUpdate(int progress);
+
+		@MainThread
+		void uploadPhotosFinished();
+	}
+
+	public interface UploadPhotosListener {
+
+		@WorkerThread
+		void uploadPhotosSuccess(String response);
+	}
+
+	public UploadPhotosAsyncTask(@NonNull FragmentActivity activity, @NonNull List<Uri> data,
+	                             @NonNull String[] placeId, @Nullable UploadPhotosListener listener) {
 		app = (OsmandApplication) activity.getApplicationContext();
 		activityRef = new WeakReference<>(activity);
 		this.data = data;
@@ -61,12 +75,7 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 		FragmentActivity activity = activityRef.get();
 		if (AndroidUtils.isActivityNotDestroyed(activity)) {
 			FragmentManager manager = activity.getSupportFragmentManager();
-			progressListener = UploadPhotoProgressBottomSheet.showInstance(manager, data.size(), new OnDismissListener() {
-				@Override
-				public void onDismiss(DialogInterface dialog) {
-					cancel(false);
-				}
-			});
+			progressListener = UploadPhotoProgressBottomSheet.showInstance(manager, data.size(), dialog -> cancel(false));
 		}
 	}
 
@@ -145,30 +154,23 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 		String url = baseUrl + "api/ipfs/image";
 		String response = NetworkUtils.sendPostDataRequest(url, "file", "compressed.jpeg", serverData);
 		if (response != null) {
-			int res = 0;
+			UploadImageResult result = null;
 			try {
-				StringBuilder error = new StringBuilder();
 				String privateKey = app.getSettings().OPR_ACCESS_TOKEN.get();
 				String name = app.getSettings().OPR_BLOCKCHAIN_NAME.get();
-				res = openDBAPI.uploadImage(
-						placeId,
-						baseUrl,
-						privateKey,
-						name,
-						response, error);
-				if (res != 200) {
-					app.showToastMessage(error.toString());
+				result = openDBAPI.uploadImage(placeId, baseUrl, privateKey, name, response);
+				if (!Algorithms.isEmpty(result.error)) {
+					app.showToastMessage(result.error);
 				}
 			} catch (FailedVerificationException e) {
 				LOG.error(e);
 				checkTokenAndShowScreen();
 			}
-			if (res != 200) {
+			if (result == null || result.responseCode != 200) {
 				//image was uploaded but not added to blockchain
 				checkTokenAndShowScreen();
 			} else {
 				success = true;
-				//refresh the image
 				if (listener != null) {
 					listener.uploadPhotosSuccess(response);
 				}
@@ -187,13 +189,10 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 		if (openDBAPI.checkPrivateKeyValid(app, baseUrl, name, privateKey)) {
 			app.showToastMessage(R.string.cannot_upload_image);
 		} else {
-			app.runInUIThread(new Runnable() {
-				@Override
-				public void run() {
-					MapActivity activity = activityRef.get();
-					if (activity != null) {
-						OprStartFragment.showInstance(activity.getSupportFragmentManager());
-					}
+			app.runInUIThread(() -> {
+				FragmentActivity activity = activityRef.get();
+				if (activity != null) {
+					OprStartFragment.showInstance(activity.getSupportFragmentManager());
 				}
 			});
 		}
@@ -204,7 +203,7 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 		BitmapFactory.Options opts = new BitmapFactory.Options();
 		opts.inJustDecodeBounds = true;
 		BitmapFactory.decodeStream(bufferedInputStream, null, opts);
-		return new int[] { opts.outWidth, opts.outHeight };
+		return new int[]{opts.outWidth, opts.outHeight};
 	}
 
 	@Nullable
@@ -235,19 +234,5 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 		} else {
 			return null;
 		}
-	}
-
-	public interface UploadPhotosProgressListener {
-
-		void uploadPhotosProgressUpdate(int progress);
-
-		void uploadPhotosFinished();
-
-	}
-
-	public interface UploadPhotosListener {
-
-		void uploadPhotosSuccess(String response);
-
 	}
 }
