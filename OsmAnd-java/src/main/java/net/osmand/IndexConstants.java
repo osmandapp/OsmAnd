@@ -29,7 +29,7 @@ public class IndexConstants {
 	public static final String BINARY_SRTM_MAP_INDEX_EXT = ".srtm.obf"; //$NON-NLS-1$
 	public static final String BINARY_SRTM_FEET_MAP_INDEX_EXT = ".srtmf.obf"; //$NON-NLS-1$
 	public static final String BINARY_SRTM_MAP_INDEX_EXT_ZIP = ".srtm.obf.zip"; //$NON-NLS-1$
-	public static final String BINARY_SRTM_FEET_MAP_INDEX_EXT_ZIP  = ".srtmf.obf.zip"; //$NON-NLS-1$
+	public static final String BINARY_SRTM_FEET_MAP_INDEX_EXT_ZIP = ".srtmf.obf.zip"; //$NON-NLS-1$
 	public static final String EXTRA_EXT = ".extra";
 	public static final String EXTRA_ZIP_EXT = ".extra.zip";
 	public static final String OSM_GZ_EXT = ".osm.gz";
@@ -55,19 +55,21 @@ public class IndexConstants {
 	public static final String WPT_CHART_FILE_EXT = ".wpt.chart";
 	public static final String SQLITE_CHART_FILE_EXT = ".3d.chart";
 
+	public static final String AVOID_ROADS_FILE_EXT = ".geojson";
+
 	public final static String POI_TABLE = "poi"; //$NON-NLS-1$
 	
 	public static final String INDEX_DOWNLOAD_DOMAIN = "download.osmand.net";
 	public static final String APP_DIR = "osmand/"; //$NON-NLS-1$
 	public static final String MAPS_PATH = "";
-	public static final String BACKUP_INDEX_DIR= "backup/";
+	public static final String BACKUP_INDEX_DIR = "backup/";
 	public static final String GPX_INDEX_DIR = "tracks/";
 	public static final String MAP_MARKERS_INDEX_DIR = "/map markers";
 	public static final String GPX_RECORDED_INDEX_DIR = GPX_INDEX_DIR + "rec/";
 	public static final String GPX_IMPORT_DIR = GPX_INDEX_DIR + "import/";
-	public static final String TILES_INDEX_DIR= "tiles/";
-	public static final String LIVE_INDEX_DIR= "live/";
-	public static final String TOURS_INDEX_DIR= "tours/";
+	public static final String TILES_INDEX_DIR = "tiles/";
+	public static final String LIVE_INDEX_DIR = "live/";
+	public static final String TOURS_INDEX_DIR = "tours/";
 	public static final String SRTM_INDEX_DIR = "srtm/"; //$NON-NLS-1$
 	public static final String ROADS_INDEX_DIR = "roads/"; //$NON-NLS-1$
 	public static final String WIKI_INDEX_DIR = "wiki/"; //$NON-NLS-1$
