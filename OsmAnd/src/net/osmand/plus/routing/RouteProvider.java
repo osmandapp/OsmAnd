@@ -28,8 +28,8 @@ import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.OnlineRoutingRes
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
@@ -786,18 +786,22 @@ public class RouteProvider {
 		if (maxSpeed > 0) {
 			paramsR.put(GeneralRouter.MAX_SPEED, String.valueOf(maxSpeed));
 		}
+		OsmandApplication app = settings.getContext();
+		AvoidRoadsHelper avoidRoadsHelper = app.getAvoidRoadsHelper();
+		config.setDirectionPoints(avoidRoadsHelper.getDirectionPoints(params.mode));
+
 		float mb = (1 << 20);
 		Runtime rt = Runtime.getRuntime();
 		// make visible
 		int memoryLimitMb = (int) (0.95 * ((rt.maxMemory() - rt.totalMemory()) + rt.freeMemory()) / mb);
 		int nativeMemoryLimitMb = settings.MEMORY_ALLOCATED_FOR_ROUTING.get();
 		RoutingMemoryLimits memoryLimits = new RoutingMemoryLimits(memoryLimitMb, nativeMemoryLimitMb);
-		log.warn("Use " + memoryLimitMb +  " MB Free " + rt.freeMemory() / mb + " of " + rt.totalMemory() / mb + " max " + rt.maxMemory() / mb);
-		log.warn("Use " + nativeMemoryLimitMb +  " MB of native memory ");
-		RoutingConfiguration cf = config.build( params.mode.getRoutingProfile(), params.start.hasBearing() ?
-				params.start.getBearing() / 180d * Math.PI : null, 
+		log.warn("Use " + memoryLimitMb + " MB Free " + rt.freeMemory() / mb + " of " + rt.totalMemory() / mb + " max " + rt.maxMemory() / mb);
+		log.warn("Use " + nativeMemoryLimitMb + " MB of native memory ");
+		RoutingConfiguration cf = config.build(params.mode.getRoutingProfile(), params.start.hasBearing() ?
+						params.start.getBearing() / 180d * Math.PI : null,
 				memoryLimits, paramsR);
-		if(settings.ENABLE_TIME_CONDITIONAL_ROUTING.getModeValue(params.mode)) {
+		if (settings.ENABLE_TIME_CONDITIONAL_ROUTING.getModeValue(params.mode)) {
 			cf.routeCalculationTime = System.currentTimeMillis();
 		}
 		return cf;
