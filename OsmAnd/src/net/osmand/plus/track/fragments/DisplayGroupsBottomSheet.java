@@ -111,7 +111,7 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private void updateStateButton() {
 		TextView title = stateButton.findViewById(R.id.state_button_text);
-		if (isAnyVisible()) {
+		if (isAnyGroupVisible()) {
 			title.setText(R.string.shared_string_hide_all);
 		} else {
 			title.setText(R.string.shared_string_show_all);
@@ -148,7 +148,7 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private void setupStateButton() {
 		stateButton.setOnClickListener(view -> {
-			boolean newState = !isAnyVisible();
+			boolean newState = !isAnyGroupVisible();
 			for (String groupName : getGroupsNames()) {
 				updateGroupVisibility(groupName, newState);
 			}
@@ -178,14 +178,13 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private void fullUpdate() {
 		updateStateButton();
-		updateSizeView();
+		updateGroupsNumberRatio();
 		updateList();
 	}
 
-	private void updateSizeView() {
+	private void updateGroupsNumberRatio() {
+		int visibleCount = getVisibleGroupsNumber();
 		int totalCount = uiItems.size();
-		int hiddenCount = selectedGpxFile.getHiddenGroups().size();
-		int visibleCount = totalCount - hiddenCount;
 		String description = getString(
 				R.string.ltr_or_rtl_combine_via_slash,
 				String.valueOf(visibleCount),
@@ -218,13 +217,21 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 	}
 
-	private boolean isAnyVisible() {
-		for (String groupName : getGroupsNames()) {
-			if (!selectedGpxFile.isGroupHidden(groupName)) {
-				return true;
+	private int getVisibleGroupsNumber() {
+		int visibleGroupsCount = 0;
+		for (SelectableItem selectableItem : uiItems) {
+			GpxDisplayGroup group = selectableItem.getObject() instanceof GpxDisplayGroup
+					? ((GpxDisplayGroup) selectableItem.getObject())
+					: null;
+			if (group != null && !selectedGpxFile.isGroupHidden(group.getName())) {
+				visibleGroupsCount++;
 			}
 		}
-		return false;
+		return visibleGroupsCount;
+	}
+
+	private boolean isAnyGroupVisible() {
+		return getVisibleGroupsNumber() > 0;
 	}
 
 	@Override

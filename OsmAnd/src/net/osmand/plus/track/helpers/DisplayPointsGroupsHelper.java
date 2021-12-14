@@ -9,6 +9,7 @@ import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -166,6 +167,16 @@ public class DisplayPointsGroupsHelper {
 				}
 			}
 			return null;
+		}
+
+		public int getVisibleGroupsNumber(@NonNull SelectedGpxFile selectedGpxFile) {
+			int visibleGroupsNumber = 0;
+			for (GpxDisplayGroup group : itemGroups.keySet()) {
+				if (!selectedGpxFile.isGroupHidden(group.getName())) {
+					visibleGroupsNumber++;
+				}
+			}
+			return visibleGroupsNumber;
 		}
 	}
 }

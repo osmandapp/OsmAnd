@@ -661,9 +661,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (widgetVisible) {
 			DisplayGroupsHolder displayGroupsHolder =
 					DisplayPointsGroupsHelper.getGroups(app, displayHelper.getPointsOriginalGroups(), null);
+			int visible = displayGroupsHolder.getVisibleGroupsNumber(selectedGpxFile);
 			int total = displayGroupsHolder.groups.size();
-			int hidden = selectedGpxFile.getHiddenGroups().size();
-			int visible = total - hidden;
 			TextView indication = displayGroupsWidget.findViewById(R.id.visible_display_groups_size);
 			indication.setText(getString(
 					R.string.ltr_or_rtl_combine_via_slash,
