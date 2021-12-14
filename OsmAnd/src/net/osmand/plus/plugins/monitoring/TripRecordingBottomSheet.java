@@ -291,15 +291,19 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	}
 
 	private void runUpdatingGPS() {
-		updatingGPS = new Runnable() {
-			@Override
-			public void run() {
-				int interval = app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get();
-				updateStatus();
-				handler.postDelayed(this, Math.max(GPS_UPDATE_INTERVAL, interval));
-			}
-		};
-		handler.post(updatingGPS);
+		if (updatingGPS == null) {
+			updatingGPS = new Runnable() {
+				@Override
+				public void run() {
+					int interval = app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get();
+					updateStatus();
+					handler.postDelayed(this, Math.max(GPS_UPDATE_INTERVAL, interval));
+				}
+			};
+		}
+		if (!handler.hasCallbacks(updatingGPS)) {
+			handler.post(updatingGPS);
+		}
 	}
 
 	private void stopUpdatingGraph() {
@@ -307,16 +311,20 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	}
 
 	private void runUpdatingGraph() {
-		updatingGraph = new Runnable() {
-			@Override
-			public void run() {
-				int interval = app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get();
-				graphsAdapter.updateGraph(graphTabPosition);
-				AndroidUiHelper.updateVisibility(segmentsTabs, graphsAdapter.isTabsVisible());
-				handler.postDelayed(this, Math.max(GPS_UPDATE_INTERVAL, interval));
-			}
-		};
-		handler.post(updatingGraph);
+		if (updatingGraph == null) {
+			updatingGraph = new Runnable() {
+				@Override
+				public void run() {
+					int interval = app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get();
+					graphsAdapter.updateGraph(graphTabPosition);
+					AndroidUiHelper.updateVisibility(segmentsTabs, graphsAdapter.isTabsVisible());
+					handler.postDelayed(this, Math.max(GPS_UPDATE_INTERVAL, interval));
+				}
+			};
+		}
+		if (!handler.hasCallbacks(updatingGraph)) {
+			handler.post(updatingGraph);
+		}
 	}
 
 	private void restartUpdatingGraph() {

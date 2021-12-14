@@ -251,12 +251,15 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 
 	public void dismissMenu() {
 		dismissing = true;
-		if (menu.getMapActivity().getContextMenu().isVisible()) {
-			menu.getMapActivity().getContextMenu().hide();
-		} else {
-			FragmentManager fragmentManager = menu.getMapActivity().getSupportFragmentManager();
-			if (!fragmentManager.isStateSaved()) {
-				fragmentManager.popBackStack();
+		MapActivity mapActivity = menu.getMapActivity();
+		if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
+			if (mapActivity.getContextMenu().isVisible()) {
+				mapActivity.getContextMenu().hide();
+			} else {
+				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+				if (!fragmentManager.isStateSaved()) {
+					fragmentManager.popBackStack();
+				}
 			}
 		}
 	}
