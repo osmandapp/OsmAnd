@@ -1,18 +1,20 @@
 package net.osmand.plus.track;
 
+import android.graphics.drawable.Drawable;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.widgets.chips.ChipItem;
+import net.osmand.plus.widgets.chips.ChipsAdapter.OnSelectChipListener;
+import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -46,8 +48,12 @@ public class PointsGroupsCard extends MapBaseCard {
 
 	@Override
 	protected void updateContent() {
-		ArrayList<HorizontalSelectionItem> items = new ArrayList<>();
-		items.add(new HorizontalSelectionItem(app.getString(R.string.shared_string_all), null));
+		HorizontalChipsView chipsView = view.findViewById(R.id.chips_view);
+
+		ArrayList<ChipItem> items = new ArrayList<>();
+		ChipItem categoryAll = new ChipItem(app.getString(R.string.shared_string_all));
+		categoryAll.title = categoryAll.id;
+		items.add(categoryAll);
 
 		int iconSizePx = app.getResources().getDimensionPixelSize(R.dimen.poi_icon_size);
 		int iconColorId = ColorUtilities.getSecondaryIconColorId(nightMode);
@@ -59,41 +65,51 @@ public class PointsGroupsCard extends MapBaseCard {
 			if (Algorithms.isEmpty(categoryName)) {
 				categoryName = app.getString(R.string.shared_string_gpx_points);
 			}
-			HorizontalSelectionItem item = new HorizontalSelectionItem(categoryName, group);
-			if (hidden.contains(categoryName)) {
-				item.setIconId(R.drawable.ic_action_hide_16);
-				item.setIconColorId(iconColorId);
-				item.setIconSizePx(iconSizePx);
-				item.setHorizontalPaddingPx(smallPadding);
-			}
+			ChipItem item = new ChipItem(categoryName);
+			item.title = categoryName;
+			item.tag = group;
+			item.onAfterBindCallback = (chip, holder) -> {
+				if (hidden.contains(chip.id)) {
+					Drawable image = getColoredIcon(R.drawable.ic_action_hide_16, iconColorId);
+					holder.image.setImageDrawable(image);
+					holder.image.setVisibility(View.VISIBLE);
+
+					LayoutParams imgLayoutParams = holder.image.getLayoutParams();
+					imgLayoutParams.height = iconSizePx;
+					imgLayoutParams.width = iconSizePx;
+
+					int top = holder.container.getPaddingTop();
+					int bottom = holder.container.getPaddingBottom();
+					holder.container.setPadding(smallPadding, top, smallPadding, bottom);
+
+					holder.image.requestLayout();
+				}
+			};
 			items.add(item);
 		}
-		final HorizontalSelectionAdapter selectionAdapter = new HorizontalSelectionAdapter(app, nightMode);
-		selectionAdapter.setItems(items);
-		selectionAdapter.setListener(new HorizontalSelectionAdapterListener() {
+		chipsView.setItems(items);
+
+		String selectedId = categoryAll.id;
+		if (selectedGroup != null) {
+			selectedId = selectedGroup.getName();
+			if (Algorithms.isEmpty(selectedId)) {
+				selectedId = app.getString(R.string.shared_string_gpx_points);
+			}
+		}
+		ChipItem selected = chipsView.getChipById(selectedId);
+		chipsView.setSelected(selected);
+
+		chipsView.setOnSelectChipListener(new OnSelectChipListener() {
 			@Override
-			public void onItemSelected(HorizontalSelectionItem item) {
-				selectedGroup = (GpxDisplayGroup) item.getObject();
+			public boolean onSelectChip(ChipItem chip) {
+				selectedGroup = (GpxDisplayGroup) chip.tag;
 				CardListener listener = getListener();
 				if (listener != null) {
 					listener.onCardButtonPressed(PointsGroupsCard.this, SELECT_GROUP_INDEX);
 				}
-				selectionAdapter.notifyDataSetChanged();
+				return true;
 			}
 		});
-		if (selectedGroup != null) {
-			String categoryName = selectedGroup.getName();
-			if (Algorithms.isEmpty(categoryName)) {
-				categoryName = app.getString(R.string.shared_string_gpx_points);
-			}
-			selectionAdapter.setSelectedItemByTitle(categoryName);
-		} else {
-			selectionAdapter.setSelectedItemByTitle(app.getString(R.string.shared_string_all));
-		}
-
-		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-		recyclerView.setAdapter(selectionAdapter);
-		recyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
-		selectionAdapter.notifyDataSetChanged();
+		chipsView.notifyDataSetChanged();
 	}
 }

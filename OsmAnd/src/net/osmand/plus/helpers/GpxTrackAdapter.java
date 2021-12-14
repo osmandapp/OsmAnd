@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
@@ -22,7 +21,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
+import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -39,7 +38,7 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 	private LayoutInflater themedInflater;
 	private UiUtilities iconsCache;
 	private List<GPXInfo> gpxInfoList;
-	private HorizontalSelectionAdapter trackCategoriesAdapter;
+	private HorizontalChipsView categoriesChipView;
 	private OnItemClickListener onItemClickListener;
 
 	private boolean showFolderName;
@@ -70,13 +69,13 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 		this.showFolderName = showFolderName;
 	}
 
-	public void setTrackCategoriesAdapter(HorizontalSelectionAdapter adapter) {
-		this.trackCategoriesAdapter = adapter;
+	public void setCategoriesChipView(HorizontalChipsView chipView) {
+		this.categoriesChipView = chipView;
 	}
 
 	@Override
 	public int getItemViewType(int position) {
-		return trackCategoriesAdapter != null && position == 0 ? TRACK_CATEGORY_VIEW_TYPE : TRACK_INFO_VIEW_TYPE;
+		return categoriesChipView != null && position == 0 ? TRACK_CATEGORY_VIEW_TYPE : TRACK_INFO_VIEW_TYPE;
 	}
 
 	@NonNull
@@ -92,8 +91,7 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 			timeIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_16));
 			return new TrackViewHolder(view);
 		} else {
-			View view = themedInflater.inflate(R.layout.gpx_track_select_category_item, parent, false);
-			return new TrackCategoriesViewHolder(view);
+			return new TrackCategoriesViewHolder(categoriesChipView);
 		}
 	}
 
@@ -125,24 +123,22 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 			});
 		} else {
 			TrackCategoriesViewHolder categoriesViewHolder = (TrackCategoriesViewHolder) holder;
-			categoriesViewHolder.trackCategories.setAdapter(trackCategoriesAdapter);
-			categoriesViewHolder.trackCategories.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
-			trackCategoriesAdapter.notifyDataSetChanged();
+			categoriesViewHolder.trackCategories.notifyDataSetChanged();
 		}
 	}
 
 
 	@Override
 	public int getItemCount() {
-		return gpxInfoList.size() + (trackCategoriesAdapter == null ? 0 : 1);
+		return gpxInfoList.size() + (categoriesChipView == null ? 0 : 1);
 	}
 
 	private int mapToListPosition(int position) {
-		return trackCategoriesAdapter == null ? position : position - 1;
+		return categoriesChipView == null ? position : position - 1;
 	}
 
 	private boolean isFirstListItem(int position) {
-		return position == 0 && trackCategoriesAdapter == null || position == 1 && trackCategoriesAdapter != null;
+		return position == 0 && categoriesChipView == null || position == 1 && categoriesChipView != null;
 	}
 
 	private void updateGpxInfoView(TrackViewHolder holder, String itemTitle, GPXInfo info,
@@ -230,11 +226,11 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 	static class TrackCategoriesViewHolder extends RecyclerView.ViewHolder {
 
-		RecyclerView trackCategories;
+		HorizontalChipsView trackCategories;
 
-		TrackCategoriesViewHolder(View itemView) {
+		TrackCategoriesViewHolder(HorizontalChipsView itemView) {
 			super(itemView);
-			trackCategories = itemView.findViewById(R.id.track_categories);
+			trackCategories = itemView;
 		}
 	}
 

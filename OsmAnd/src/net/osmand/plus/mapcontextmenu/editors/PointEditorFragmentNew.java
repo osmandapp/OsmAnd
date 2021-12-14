@@ -1,13 +1,5 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
-import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
-import static net.osmand.GPXUtilities.log;
-import static net.osmand.data.FavouritePoint.BackgroundType;
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
-import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
-import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.isPersonalCategoryDisplayName;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -59,8 +51,6 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
 import net.osmand.plus.measurementtool.ExitBottomSheetDialogFragment;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
@@ -68,6 +58,8 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.track.ColorsCard;
 import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.widgets.FlowLayout;
+import net.osmand.plus.widgets.chips.ChipItem;
+import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONArray;
@@ -81,6 +73,14 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
+
+import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
+import static net.osmand.GPXUtilities.log;
+import static net.osmand.data.FavouritePoint.BackgroundType;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
+import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
+import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.isPersonalCategoryDisplayName;
 
 public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implements ColorPickerListener, CardListener {
 
@@ -675,29 +675,37 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 
 	private void createIconForCategory() {
 		createIconList();
-		final HorizontalSelectionAdapter horizontalSelectionAdapter = new HorizontalSelectionAdapter(app, nightMode);
 
-		horizontalSelectionAdapter.setTitledItems(new ArrayList<>(iconCategories.keySet()));
-		horizontalSelectionAdapter.setSelectedItemByTitle(selectedIconCategory);
-		horizontalSelectionAdapter.setListener(new HorizontalSelectionAdapter.HorizontalSelectionAdapterListener() {
-			@Override
-			public void onItemSelected(HorizontalSelectionAdapter.HorizontalSelectionItem item) {
-				selectedIconCategory = item.getTitle();
-				createIconList();
-				updateIconSelector(selectedIcon, PointEditorFragmentNew.this.view);
-				horizontalSelectionAdapter.notifyDataSetChanged();
+		List<ChipItem> items = new ArrayList<>();
+		for (String category : iconCategories.keySet()) {
+			ChipItem item = new ChipItem(category);
+			if (!category.equals(LAST_USED_ICONS_KEY)) {
+				item.title = category;
 			}
-		});
-		HorizontalSelectionItem lastUsedCategory = horizontalSelectionAdapter.getItemByTitle(LAST_USED_ICONS_KEY);
-		if (lastUsedCategory != null) {
-			lastUsedCategory.setIconId(R.drawable.ic_action_history);
-			lastUsedCategory.setShowOnlyIcon(true);
-			lastUsedCategory.setTitleColorId(ColorUtilities.getActiveColorId(nightMode));
+			items.add(item);
 		}
-		RecyclerView iconCategoriesRecyclerView = view.findViewById(R.id.group_name_recycler_view);
-		iconCategoriesRecyclerView.setAdapter(horizontalSelectionAdapter);
-		iconCategoriesRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
-		iconCategoriesRecyclerView.scrollToPosition(horizontalSelectionAdapter.getItemPositionByTitle(selectedIconCategory));
+
+		HorizontalChipsView categorySelector = view.findViewById(R.id.icon_category_selector);
+		categorySelector.setItems(items);
+
+		ChipItem selected = categorySelector.getChipById(selectedIconCategory);
+		categorySelector.setSelected(selected);
+
+		categorySelector.setOnSelectChipListener(chip -> {
+			selectedIconCategory = chip.id;
+			createIconList();
+			updateIconSelector(selectedIcon, PointEditorFragmentNew.this.view);
+			categorySelector.notifyDataSetChanged();
+			return true;
+		});
+
+		ChipItem lastUsedCategory = categorySelector.getChipById(LAST_USED_ICONS_KEY);
+		if (lastUsedCategory != null) {
+			lastUsedCategory.icon = getIcon(R.drawable.ic_action_history);
+			lastUsedCategory.iconColor = ColorUtilities.getActiveColor(app, nightMode);
+		}
+		categorySelector.notifyDataSetChanged();
+		categorySelector.scrollTo(selected);
 	}
 
 

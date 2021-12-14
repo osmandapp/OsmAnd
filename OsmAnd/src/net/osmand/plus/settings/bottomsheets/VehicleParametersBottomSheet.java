@@ -20,25 +20,27 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
 import net.osmand.plus.settings.preferences.SizePreference;
+import net.osmand.plus.widgets.chips.ChipItem;
+import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
@@ -66,7 +68,7 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 	private BaseBottomSheetItem createBottomSheetItem(OsmandApplication app) {
 		final SizePreference preference = (SizePreference) getPreference();
 		View mainView = UiUtilities.getInflater(getContext(), nightMode)
-				.inflate(R.layout.bottom_sheet_item_edit_with_recyclerview, null);
+				.inflate(R.layout.bottom_sheet_item_edit_with_chips_view, null);
 		TextView title = mainView.findViewById(R.id.title);
 		title.setText(preference.getTitle().toString());
 		VehicleSizeAssets vehicleSizeAssets = preference.getAssets();
@@ -77,10 +79,9 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 			TextView description = mainView.findViewById(R.id.description);
 			description.setText(app.getString(vehicleSizeAssets.getDescriptionRes()));
 		}
-		final HorizontalSelectionAdapter adapter = new HorizontalSelectionAdapter(app, nightMode);
+		final HorizontalChipsView chipsView = mainView.findViewById(R.id.chips_view);
 		final TextView metric = mainView.findViewById(R.id.metric);
 		metric.setText(app.getString(preference.getAssets().getMetricRes()));
-		final RecyclerView recyclerView = mainView.findViewById(R.id.recycler_view);
 		final DecimalFormat df = new DecimalFormat("#.####", new DecimalFormatSymbols(Locale.US));
 		text = mainView.findViewById(R.id.text_edit);
 		try {
@@ -121,31 +122,33 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 					currentValue = 0.0f;
 				}
 				selectedItem = preference.getEntryFromValue(String.valueOf(currentValue));
-				adapter.setSelectedItemByTitle(selectedItem);
-				int itemPosition = adapter.getItemPositionByTitle(selectedItem);
-				if (itemPosition >= 0) {
-					recyclerView.smoothScrollToPosition(itemPosition);
-				}
+				ChipItem selected = chipsView.getChipById(selectedItem);
+				chipsView.setSelected(selected);
+				chipsView.smoothScrollTo(selected);
 			}
 		});
 
-		adapter.setTitledItems(Arrays.asList(preference.getEntries()));
-		adapter.setListener(new HorizontalSelectionAdapter.HorizontalSelectionAdapterListener() {
-			@Override
-			public void onItemSelected(HorizontalSelectionAdapter.HorizontalSelectionItem item) {
-				selectedItem = item.getTitle();
-				currentValue = preference.getValueFromEntries(selectedItem);
-				String currentValueStr = currentValue == 0.0f
-						? "" : df.format(currentValue + 0.01f);
-				text.setText(currentValueStr);
-				if (text.hasFocus()) {
-					text.setSelection(text.getText().length());
-				}
-				adapter.notifyDataSetChanged();
+		List<ChipItem> chips = new ArrayList<>();
+		for (String entry : Arrays.asList(preference.getEntries())) {
+			ChipItem chip = new ChipItem(entry);
+			chip.title = entry;
+			chips.add(chip);
+		}
+		chipsView.setItems(chips);
+
+		chipsView.setOnSelectChipListener(chip -> {
+			selectedItem = chip.id;
+			currentValue = preference.getValueFromEntries(selectedItem);
+			String currentValueStr1 = currentValue == 0.0f
+					? "" : df.format(currentValue + 0.01f);
+			text.setText(currentValueStr1);
+			if (text.hasFocus()) {
+				text.setSelection(text.getText().length());
 			}
+			return true;
 		});
-		recyclerView.setAdapter(adapter);
-		adapter.setSelectedItemByTitle(selectedItem);
+		ChipItem selected = chipsView.getChipById(selectedItem);
+		chipsView.setSelected(selected);
 		return new BaseBottomSheetItem.Builder()
 				.setCustomView(mainView)
 				.create();
