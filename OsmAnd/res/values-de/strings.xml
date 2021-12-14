@@ -4493,4 +4493,6 @@
     <string name="use_routing_fallback">Alternative Routenführung nutzen</string>
     <string name="created_on">Erstellt am</string>
     <string name="shared_string_size">Größe</string>
+    <string name="turn_arrows_descr">Steuern Sie die Sichtbarkeit der Abbiegepfeile auf der Routenlinie.</string>
+    <string name="turn_arrows">Abbiegepfeile</string>
 </resources>

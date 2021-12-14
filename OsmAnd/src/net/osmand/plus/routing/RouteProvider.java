@@ -20,15 +20,15 @@ import net.osmand.data.LatLon;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.OnlineRoutingResponse;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
@@ -140,8 +140,15 @@ public class RouteProvider {
 				} else if (params.mode.getRouteService() == RouteService.BROUTER) {
 					res = findBROUTERRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.ONLINE) {
-					res = findOnlineRoute(params);
-					if (!res.isCalculated()) {
+					boolean useFallbackRouting = false;
+					try {
+						res = findOnlineRoute(params);
+					} catch (IOException | JSONException e) {
+						res = new RouteCalculationResult(null);
+						params.initialCalculation = false;
+						useFallbackRouting = true;
+					}
+					if (useFallbackRouting || !res.isCalculated()) {
 						OnlineRoutingHelper helper = params.ctx.getOnlineRoutingHelper();
 						String engineKey = params.mode.getRoutingProfile();
 						OnlineRoutingEngine engine = helper.getEngineByKey(engineKey);
@@ -159,7 +166,7 @@ public class RouteProvider {
 					log.info("Finding route contained " + res.getImmutableAllLocations().size() + " points for " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				}
 				return res;
-			} catch (IOException | ParserConfigurationException | SAXException | JSONException e) {
+			} catch (IOException | ParserConfigurationException | SAXException e) {
 				log.error("Failed to find route ", e);
 			}
 		}
@@ -1099,7 +1106,7 @@ public class RouteProvider {
 		OsmandSettings settings = app.getSettings();
 		String engineKey = params.mode.getRoutingProfile();
 		OnlineRoutingResponse response =
-				helper.calculateRouteOnline(engineKey, getPathFromParams(params), params.leftSide, params.initialCalculation);
+				helper.calculateRouteOnline(engineKey, getPathFromParams(params), params.currentHeading, params.leftSide, params.initialCalculation);
 
 		if (response != null) {
 			if (response.getGpxFile() != null) {

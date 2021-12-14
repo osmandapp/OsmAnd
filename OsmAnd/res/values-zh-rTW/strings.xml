@@ -4480,4 +4480,6 @@
     <string name="use_routing_fallback">使用路線規劃汰退</string>
     <string name="use_routing_fallback_description">當無法使用線上路線規劃時，則使用離線路線規劃。</string>
     <string name="created_on">建立於</string>
+    <string name="turn_arrows">轉彎箭頭</string>
+    <string name="turn_arrows_descr">控制路線上轉彎箭頭的能見度。</string>
 </resources>

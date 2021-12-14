@@ -349,7 +349,7 @@
     <string name="process_navigation_service">OsmAnd 내비게이션 서비스</string>
     <string name="network_provider">네트워크</string>
     <string name="gps_provider">GPS</string>
-    <string name="int_seconds">몇 초</string>
+    <string name="int_seconds">초</string>
     <string name="int_min">분.</string>
     <string name="background_service_int_descr">절전모드 서비스를 위해 위치를 찾는 주기를 선택합니다</string>
     <string name="background_service_int">GPS 위치탐색 간격</string>
@@ -1232,7 +1232,7 @@
     <string name="speak_poi">인근 POI</string>
     <string name="rendering_attr_publicTransportMode_name">버스, 무궤도전차, 셔틀 노선</string>
     <string name="save_track_to_gpx_globally_descr">GPX 파일에 기록하는 일반적인 위치는 지도 화면에 GPX 로깅 위젯을 사용하여 켜거나 끌 수 있습니다</string>
-    <string name="save_track_interval_globally">로깅 간격</string>
+    <string name="save_track_interval_globally">기록 간격</string>
     <string name="confirm_every_run">항상 요청</string>
     <string name="save_global_track_interval">일반 로깅 간격</string>
     <string name="traffic_warning_speed_limit">속도 제한</string>
@@ -1757,7 +1757,7 @@
     <string name="included_categories">포함 카테고리</string>
     <string name="gpx_upload_trackable_visibility_descr">\"추적 가능\"은 추적이 공개 목록에 나타나지 않으나, 추적점에서 타임스탬프가 있는 처리된 추적점은 공개 GPS API에서 다운로드를 통해 이루어진다.</string>
     <string name="map_markers_history">지도 마커 기록</string>
-    <string name="shortcut_start_recording">녹음 시작</string>
+    <string name="shortcut_start_recording">기록 시작</string>
     <string name="shortcut_navigate_to">탐색 위치…</string>
     <string name="shortcut_navigate_to_home">\'집\'으로 이동</string>
     <string name="continue_on_phone">전화로 계속하기</string>
@@ -2235,4 +2235,26 @@
     <string name="shared_string_end_time">종료시간</string>
     <string name="average_speed">평균 속도</string>
     <string name="routing_attr_piste_type_sled_description">썰매 사용을 위한 슬로프.</string>
+    <string name="shared_string_add_photo">사진 추가</string>
+    <string name="select_data_to_export">파일로 내보낼 데이터를 선택합니다.</string>
+    <string name="icon_group_travel">여행</string>
+    <string name="icon_group_service">서비스</string>
+    <string name="icon_group_emergency">비상</string>
+    <string name="icon_group_symbols">기호</string>
+    <string name="use_routing_fallback">라우팅 대체 사용</string>
+    <string name="app_mode_light_aircraft">경비행기</string>
+    <string name="file_size_needed_for_import">가져오기에 필요</string>
+    <string name="register_opr_create_new_account">새 계정 만들기</string>
+    <string name="select_groups_for_import">가져올 그룹을 선택하십시오.</string>
+    <string name="approximate_file_size">대략적인 파일 크기</string>
+    <string name="select_picture">사진 선택</string>
+    <string name="enter_text_separated">태그를 쉼표로 구분하여 입력하십시오.</string>
+    <string name="icon_group_sport">스포츠</string>
+    <string name="use_routing_fallback_description">온라인 라우팅에 연결할 수 없는 경우 오프라인 라우팅을 사용합니다.</string>
+    <string name="backup_welcome_back">다시 오신 것을 환영합니다!</string>
+    <string name="map_widget_monitoring">주행 기록</string>
+    <string name="register_opr_have_account">이미 계정이 있다면 로그인</string>
+    <string name="local_backup">로컬 백업</string>
+    <string name="auto_split_recording_title">공백 후 자동 분할 기록</string>
+    <string name="reset_to_original">기본 으로 재설정</string>
 </resources>

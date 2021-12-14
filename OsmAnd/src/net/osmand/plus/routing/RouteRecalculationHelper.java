@@ -147,6 +147,10 @@ class RouteRecalculationHelper {
 		return routingHelper.getLastFixedLocation();
 	}
 
+	private Float getCurrentHeading() {
+		return app.getLocationProvider().getHeading();
+	}
+
 	private boolean isDeviatedFromRoute() {
 		return routingHelper.isDeviatedFromRoute();
 	}
@@ -245,6 +249,7 @@ class RouteRecalculationHelper {
 			}
 			if (getLastProjection() != null) {
 				params.currentLocation = getLastFixedLocation();
+				params.currentHeading = getCurrentHeading();
 			}
 			if (params.mode.getRouteService() == RouteService.ONLINE) {
 				OnlineRoutingEngine engine = app.getOnlineRoutingHelper().getEngineByKey(params.mode.getRoutingProfile());

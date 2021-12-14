@@ -1,6 +1,6 @@
 package net.osmand.plus.backup.ui;
 
-import static net.osmand.plus.UiUtilities.setupDialogButton;
+import static net.osmand.plus.utils.UiUtilities.setupDialogButton;
 import static net.osmand.plus.importfiles.ImportHelper.ImportType.SETTINGS;
 
 import android.os.Build;
@@ -19,10 +19,10 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities.DialogButtonType;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;

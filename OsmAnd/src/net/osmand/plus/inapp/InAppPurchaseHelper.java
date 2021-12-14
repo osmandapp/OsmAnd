@@ -11,11 +11,11 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.AndroidNetworkUtils;
-import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
-import net.osmand.AndroidNetworkUtils.OnSendRequestsListener;
-import net.osmand.AndroidNetworkUtils.Request;
-import net.osmand.AndroidNetworkUtils.RequestResponse;
+import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidNetworkUtils.OnRequestResultListener;
+import net.osmand.plus.utils.AndroidNetworkUtils.OnSendRequestsListener;
+import net.osmand.plus.utils.AndroidNetworkUtils.Request;
+import net.osmand.plus.utils.AndroidNetworkUtils.RequestResponse;
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -36,9 +36,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -58,6 +61,9 @@ public abstract class InAppPurchaseHelper {
 	protected Map<String, SubscriptionStateHolder> subscriptionStateMap = new HashMap<>();
 
 	private static final long PURCHASE_VALIDATION_PERIOD_MSEC = 1000 * 60 * 60 * 24; // daily
+
+	private static final String ANDROID_AUTO_START_DATE = "01.01.2022";
+	private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
 
 	protected boolean isDeveloperVersion;
 	protected String token = "";
@@ -176,7 +182,24 @@ public abstract class InAppPurchaseHelper {
 	}
 
 	public static boolean isAndroidAutoAvailable(@NonNull OsmandApplication ctx) {
-		return Version.isDeveloperBuild(ctx) || Version.isPaidVersion(ctx);
+		long time = System.currentTimeMillis();
+		long calTime = getStartAndroidAutoTime();
+		if (time >= calTime) {
+			return Version.isDeveloperBuild(ctx) || Version.isPaidVersion(ctx);
+		}
+		return true;
+	}
+
+	private static long getStartAndroidAutoTime() {
+		try {
+			Date date = SIMPLE_DATE_FORMAT.parse(ANDROID_AUTO_START_DATE);
+			if (date != null) {
+				return date.getTime();
+			}
+		} catch (ParseException e) {
+			LOG.error(e);
+		}
+		return 0;
 	}
 
 	public static boolean isFullVersionPurchased(@NonNull OsmandApplication ctx) {

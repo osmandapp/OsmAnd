@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MultipleSelectionBottomSheet;
 import net.osmand.plus.base.SelectionBottomSheet.DialogStateListener;

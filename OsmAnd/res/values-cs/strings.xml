@@ -4485,4 +4485,6 @@
     <string name="use_routing_fallback">Použít náhradní plánovač</string>
     <string name="shared_string_size">Velikost</string>
     <string name="created_on">Vytvořeno dne</string>
+    <string name="turn_arrows_descr">Ovládá viditelnost směrových šipek na linii trasy.</string>
+    <string name="turn_arrows">Směrové šipky</string>
 </resources>

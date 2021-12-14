@@ -16,7 +16,7 @@ public class PreviewRouteLineInfo {
 	private static final String CUSTOM_COLOR_NIGHT = "custom_color_night";
 	private static final String ROUTE_COLORING_TYPE = "route_coloring_type";
 	private static final String LINE_WIDTH = "line_width";
-	private static final String HAS_TURN_ARROW = "has_turn_arrow";
+	private static final String SHOW_TURN_ARROWS = "show_turn_arrows";
 	private static final String NAVIGATION_ICON_ID = "navigation_icon_id";
 	private static final String NAVIGATION_ICON_COLOR = "navigation_icon_color";
 	private static final String LINE_BOUNDS = "line_bounds";
@@ -32,7 +32,7 @@ public class PreviewRouteLineInfo {
 	private ColoringType coloringType = ColoringType.DEFAULT;
 	private String routeInfoAttribute;
 	private String width;
-	private boolean hasTurnArrow;
+	private boolean showTurnArrows;
 
 	// temporally parameters to show in preview
 	@ColorInt
@@ -49,13 +49,13 @@ public class PreviewRouteLineInfo {
 	                            @NonNull ColoringType coloringType,
 	                            @Nullable String routeInfoAttribute,
 	                            @Nullable String width,
-	                            boolean hasTurnArrow) {
+	                            boolean showTurnArrows) {
 		this.customColorDay = customColorDay;
 		this.customColorNight = customColorNight;
 		this.coloringType = coloringType;
 		this.routeInfoAttribute = routeInfoAttribute;
 		this.width = width;
-		this.hasTurnArrow = hasTurnArrow;
+		this.showTurnArrows = showTurnArrows;
 	}
 
 	public PreviewRouteLineInfo(@NonNull Bundle bundle) {
@@ -82,8 +82,8 @@ public class PreviewRouteLineInfo {
 		this.width = width;
 	}
 
-	public void setHasTurnArrow(boolean hasTurnArrow) {
-		this.hasTurnArrow = hasTurnArrow;
+	public void setShowTurnArrows(boolean showTurnArrows) {
+		this.showTurnArrows = showTurnArrows;
 	}
 
 	public void setIconId(int iconId) {
@@ -129,8 +129,8 @@ public class PreviewRouteLineInfo {
 		return width;
 	}
 
-	public boolean isHasTurnArrow() {
-		return hasTurnArrow;
+	public boolean shouldShowTurnArrows() {
+		return showTurnArrows;
 	}
 
 	public int getIconId() {
@@ -168,7 +168,7 @@ public class PreviewRouteLineInfo {
 		coloringType = ColoringType.getRouteColoringTypeByName(bundle.getString(ROUTE_COLORING_TYPE));
 		routeInfoAttribute = ColoringType.getRouteInfoAttribute(bundle.getString(ROUTE_COLORING_TYPE));
 		width = bundle.getString(LINE_WIDTH);
-		hasTurnArrow = bundle.getBoolean(HAS_TURN_ARROW);
+		showTurnArrows = bundle.getBoolean(SHOW_TURN_ARROWS);
 		iconId = bundle.getInt(NAVIGATION_ICON_ID);
 		iconColor = bundle.getInt(NAVIGATION_ICON_COLOR);
 		lineBounds = bundle.getParcelable(LINE_BOUNDS);
@@ -184,7 +184,7 @@ public class PreviewRouteLineInfo {
 		if (width != null) {
 			bundle.putString(LINE_WIDTH, width);
 		}
-		bundle.putBoolean(HAS_TURN_ARROW, hasTurnArrow);
+		bundle.putBoolean(SHOW_TURN_ARROWS, showTurnArrows);
 		bundle.putInt(NAVIGATION_ICON_ID, iconId);
 		bundle.putInt(NAVIGATION_ICON_COLOR, iconColor);
 		bundle.putParcelable(LINE_BOUNDS, lineBounds);

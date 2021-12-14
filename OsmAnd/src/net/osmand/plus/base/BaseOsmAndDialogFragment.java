@@ -14,7 +14,7 @@ import androidx.fragment.app.DialogFragment;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 
 public class BaseOsmAndDialogFragment extends DialogFragment {
 

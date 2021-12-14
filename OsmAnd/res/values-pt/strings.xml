@@ -4492,4 +4492,6 @@
     <string name="use_routing_fallback_description">Usar roteamento offline se não for possível usar o roteamento online.</string>
     <string name="shared_string_size">Tamanho</string>
     <string name="created_on">Criado em</string>
+    <string name="turn_arrows">Setas de volta</string>
+    <string name="turn_arrows_descr">Controlar a visibilidade das setas de rotação na linha de rota.</string>
 </resources>

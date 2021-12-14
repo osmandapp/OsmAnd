@@ -1,6 +1,6 @@
 package net.osmand.plus.myplaces;
 
-import static net.osmand.FileUtils.ILLEGAL_PATH_NAME_CHARACTERS;
+import static net.osmand.plus.utils.FileUtils.ILLEGAL_PATH_NAME_CHARACTERS;
 
 import android.content.res.ColorStateList;
 import android.os.Bundle;
@@ -17,13 +17,13 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;

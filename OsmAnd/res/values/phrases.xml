@@ -172,6 +172,9 @@
 	<string name="poi_heating_filter">Heating</string>
 	<string name="poi_fridge_filter">Fridge</string>
 	<string name="poi_faculty_filter">Faculty</string>
+	<string name="poi_computer_sales">Sale of computers</string>
+	<string name="poi_computer_repair">Computer repair</string>
+	<string name="poi_computer_parts">Parts for computers</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -4709,5 +4712,14 @@
 	<string name="poi_tool_hire">Tool hire</string>
 
 	<string name="poi_escape_game">Escape game</string>
+
+	<string name="poi_diet_vegan_limited">Vegan: limited</string>
+	<string name="poi_computer_sales_yes">Yes</string>
+	<string name="poi_computer_sales_used">Used</string>
+	<string name="poi_computer_repair_yes">Yes</string>
+	<string name="poi_computer_sales_no">Sale of computers: no</string>
+	<string name="poi_computer_repair_no">Computer repair: no</string>
+	<string name="poi_computer_parts_yes">Yes</string>
+	<string name="poi_computer_parts_no">Computer parts: no</string>
 
 </resources>

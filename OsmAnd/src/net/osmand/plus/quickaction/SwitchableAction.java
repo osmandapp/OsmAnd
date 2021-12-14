@@ -1,6 +1,6 @@
 package net.osmand.plus.quickaction;
 
-import static net.osmand.AndroidUtils.isLayoutRtl;
+import static net.osmand.plus.utils.AndroidUtils.isLayoutRtl;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -25,7 +25,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;

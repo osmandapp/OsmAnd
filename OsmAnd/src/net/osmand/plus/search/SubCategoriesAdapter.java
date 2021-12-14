@@ -16,7 +16,7 @@ import androidx.core.widget.CompoundButtonCompat;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.render.RenderingIcons;
 
 import java.util.ArrayList;

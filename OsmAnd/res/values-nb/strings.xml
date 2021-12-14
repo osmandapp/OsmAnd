@@ -4391,4 +4391,14 @@
     <string name="gps_filter_precision">GPS-preisisjon</string>
     <string name="shared_string_size">Størrelse</string>
     <string name="created_on">Opprettet</string>
+    <string name="gps_filter_smoothing">Utjevning</string>
+    <string name="gps_filter_speed_altitude_desc">Kun punkter som samsvarer med satt intervall vil vises på diagrammet og kartet. Resten vil bli skjult.</string>
+    <string name="gps_filter_smoothing_desc">Sett terskelavstand mellom punkter.
+\nSporingspunkter som ikke er minst denne avstanden unna sist synlige punkt vil bli skjult.
+\nHusk at høye terskler kan gjøre sporgeometrien for simpel.</string>
+    <string name="turn_arrows_descr">Kontroller synliget for svingpiler langs rutelinjen.</string>
+    <string name="gps_filter_actions_description">OsmAnd vil ta i bruk endringer i sporingsfilen uten å oppdatere filen. Du kan lagre endringer manuelt.</string>
+    <string name="turn_arrows">Svingpiler</string>
+    <string name="gps_filter_hdop_desc">Setter maksimalt akseptert verdi for HDOP.
+\nPunkter med høyere verdi vil bli skjult.</string>
 </resources>

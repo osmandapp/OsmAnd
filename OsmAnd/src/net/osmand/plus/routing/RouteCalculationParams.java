@@ -14,6 +14,7 @@ public class RouteCalculationParams {
 	public LatLon end;
 	public List<LatLon> intermediates;
 	public Location currentLocation;
+	public Float currentHeading;
 
 	public OsmandApplication ctx;
 	public ApplicationMode mode;

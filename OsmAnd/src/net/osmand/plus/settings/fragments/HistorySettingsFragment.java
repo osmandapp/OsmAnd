@@ -10,10 +10,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -213,7 +213,9 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 		try {
 			SearchUICore searchUICore = app.getSearchUICore().getCore();
 			SearchResultCollection res = searchUICore.shallowSearch(SearchHistoryAPI.class, "", null, false, false);
-			searchResults.addAll(res.getCurrentSearchResults());
+			if (res != null) {
+				searchResults.addAll(res.getCurrentSearchResults());
+			}
 		} catch (IOException e) {
 			log.error(e);
 		}

@@ -189,4 +189,7 @@
     <string name="si_m_s">Mètres a la segonda</string>
     <string name="si_min_km">Minutas au quilomètre</string>
     <string name="si_nm_h">Milas nautics a l\'ora (Nos)</string>
+    <string name="shared_string_continue">Continuar</string>
+    <string name="duration_ago">%1$s fach(s)</string>
+    <string name="shared_string_logout">Se deconnectar</string>
 </resources>

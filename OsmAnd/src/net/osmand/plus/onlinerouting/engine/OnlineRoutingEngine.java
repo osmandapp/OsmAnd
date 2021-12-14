@@ -129,14 +129,14 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	}
 
 	@NonNull
-	public String getFullUrl(@NonNull List<LatLon> path) {
+	public String getFullUrl(@NonNull List<LatLon> path, @Nullable Float heading) {
 		StringBuilder sb = new StringBuilder(getBaseUrl());
-		makeFullUrl(sb, path);
+		makeFullUrl(sb, path, heading);
 		return sb.toString();
 	}
 
 	protected abstract void makeFullUrl(@NonNull StringBuilder sb,
-	                                    @NonNull List<LatLon> path);
+	                                    @NonNull List<LatLon> path, @Nullable Float heading);
 
 	@NonNull
 	public String getBaseUrl() {
