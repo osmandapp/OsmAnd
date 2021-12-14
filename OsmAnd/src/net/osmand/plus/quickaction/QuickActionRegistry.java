@@ -50,6 +50,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import androidx.annotation.NonNull;
+
 /**
  * Created by rosty on 12/27/16.
  */
@@ -314,6 +316,16 @@ public class QuickActionRegistry {
 			return quickActionType.createNew();
 		}
 		return null;
+	}
+
+	public void onRenameGpxFile(@NonNull String src, @NonNull String dest) {
+		List<QuickAction> gpxActions = collectQuickActionsByType(GPXAction.TYPE);
+		for (QuickAction action : gpxActions) {
+			String storedPath = action.getParams().get(GPXAction.KEY_GPX_FILE_PATH);
+			if (src.equals(storedPath)) {
+				action.getParams().put(GPXAction.KEY_GPX_FILE_PATH, dest);
+			}
+		}
 	}
 
 	public static QuickAction produceAction(QuickAction quickAction) {

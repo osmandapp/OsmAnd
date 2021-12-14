@@ -42,6 +42,8 @@ public abstract class PointEditor {
 		return isNew;
 	}
 
+	public abstract boolean isProcessingTemplate();
+
 	public boolean isLandscapeLayout() {
 		return !portraitMode;
 	}

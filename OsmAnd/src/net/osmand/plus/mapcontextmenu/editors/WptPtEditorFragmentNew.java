@@ -112,7 +112,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 			this.wpt = wpt;
 			color = wpt.getColor(0);
 			iconName = getInitialIconName(wpt);
-			categoriesMap = editor.getGpxFile().getWaypointCategoriesWithColors(false);
+			categoriesMap = editor.getColoredWaypointCategories();
 			backgroundTypeName = wpt.getBackgroundType();
 		}
 	}
@@ -134,7 +134,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 			if (listener != null) {
 				listener.onDismiss();
 			}
-			editor.setNewGpxPointProcessing(false);
+			editor.setProcessingOrdinaryPoint();
 			editor.setOnDismissListener(null);
 		}
 	}
@@ -167,7 +167,9 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	public String getToolbarTitle() {
 		WptPtEditor editor = getWptPtEditor();
 		if (editor != null) {
-			if (editor.isNewGpxPointProcessing()) {
+			if (editor.isProcessingTemplate()) {
+				return getString(R.string.waypoint_template);
+			} else if (editor.isNewGpxPointProcessing()) {
 				return getString(R.string.save_gpx_waypoint);
 			} else {
 				if (editor.isNew()) {
@@ -217,9 +219,13 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 		WptPt wpt = getWpt();
 		if (mapActivity != null && editor != null && wpt != null) {
 			String name = Algorithms.isEmpty(getNameTextValue()) ? null : getNameTextValue();
+			String address = Algorithms.isEmpty(getAddressTextValue()) ? null : getAddressTextValue();
 			String category = Algorithms.isEmpty(getCategoryTextValue()) ? null : getCategoryTextValue();
 			String description = Algorithms.isEmpty(getDescriptionTextValue()) ? null : getDescriptionTextValue();
-			if (editor.isNew()) {
+
+			if (editor.isProcessingTemplate()) {
+				doAddWaypointTemplate(name, address, category, description);
+			} else if (editor.isNew()) {
 				doAddWpt(name, category, description);
 				wpt = getWpt();
 			} else {
@@ -250,6 +256,34 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 			if (group != null) {
 				helper.runSynchronization(group);
 			}
+		}
+	}
+
+	private void doAddWaypointTemplate(String name, String address, String category, String description) {
+		WptPt wpt = getWpt();
+		WptPtEditor editor = getWptPtEditor();
+		if (wpt != null && editor != null && editor.getOnWaypointTemplateAddedListener() != null) {
+			wpt.name = name;
+			wpt.setAddress(address);
+			wpt.category = category;
+			wpt.desc = description;
+			if (color != 0) {
+				wpt.setColor(color);
+			} else {
+				wpt.removeColor();
+			}
+			wpt.setBackgroundType(backgroundTypeName);
+			wpt.setIconName(iconName);
+
+			int categoryColor;
+			if (categoriesMap == null) {
+				categoryColor = 0;
+			} else {
+				Integer color = categoriesMap.get(category);
+				categoryColor = color != null ? color : 0;
+			}
+
+			editor.getOnWaypointTemplateAddedListener().onAddWaypointTemplate(wpt, categoryColor);
 		}
 	}
 
@@ -488,7 +522,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	public int getCategoryPointsCount(String category) {
 		WptPtEditor editor = getWptPtEditor();
 		if (editor != null) {
-			List<WptPt> points = editor.getGpxFile().getPointsByCategories().get(category);
+			List<WptPt> points = editor.getGpxFile() == null ? null : editor.getGpxFile().getPointsByCategories().get(category);
 			if (points != null) {
 				return points.size();
 			}

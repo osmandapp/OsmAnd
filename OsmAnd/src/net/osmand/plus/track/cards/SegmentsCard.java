@@ -55,12 +55,13 @@ public class SegmentsCard extends MapBaseCard {
 
 			@Override
 			public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-				super.onScrolled(recyclerView, dx, dy);
-				boolean scrollToTopAvailable = recyclerView.canScrollVertically(-1);
-				listener.onScrollToTopAvailable(scrollToTopAvailable);
+				listener.onScrollToTopAvailable(isScrollToTopAvailable());
 			}
-
 		});
+	}
+
+	public boolean isScrollToTopAvailable() {
+		return ((RecyclerView) view).canScrollVertically(-1);
 	}
 
 	public void removeScrollAvailabilityListener() {
