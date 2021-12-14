@@ -190,10 +190,6 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 		return adapter.groups;
 	}
 
-	public void onGroupVisibilityChanged() {
-		adapter.notifyDataSetChanged();
-	}
-
 	public void startListeningLocationUpdates() {
 		OsmAndLocationProvider locationProvider = app.getLocationProvider();
 		locationProvider.resumeAllUpdates();
@@ -253,16 +249,6 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 
 	private List<GpxDisplayGroup> getOriginalGroups() {
 		return displayHelper.getPointsOriginalGroups();
-	}
-
-	private List<GpxDisplayGroup> getDisplayGroups() {
-		if (selectedGroup != null) {
-			List<GpxDisplayGroup> res = new ArrayList<>();
-			res.add(selectedGroup);
-			return res;
-		} else {
-			return getOriginalGroups();
-		}
 	}
 
 	@Override
@@ -447,14 +433,15 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			});
 
 			String groupName = group.getName();
+			boolean groupHidden = selectedGpxFile.isGroupHidden(groupName);
 			String nameToDisplay = Algorithms.isEmpty(groupName)
 					? app.getString(R.string.shared_string_gpx_points)
 					: groupName;
 
 			TextView title = row.findViewById(R.id.label);
-			title.setText(createStyledGroupTitle(context, nameToDisplay, groupPosition));
+			title.setText(createStyledGroupTitle(context, nameToDisplay, groupPosition, groupHidden));
 
-			Drawable icon = selectedGpxFile.isGroupHidden(Algorithms.isEmpty(groupName) ? null : groupName)
+			Drawable icon = groupHidden
 					? getColoredIcon(R.drawable.ic_action_folder_hidden, ColorUtilities.getSecondaryTextColorId(nightMode))
 					: getContentIcon(R.drawable.ic_action_folder);
 			ImageView groupImage = row.findViewById(R.id.icon);
@@ -495,12 +482,13 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			return row;
 		}
 
-		private CharSequence createStyledGroupTitle(Context context, String groupName, int groupPosition) {
-			SpannableStringBuilder spannedName = new SpannableStringBuilder(groupName)
+		private CharSequence createStyledGroupTitle(@NonNull Context context, @NonNull String displayName,
+		                                            int groupPosition, boolean groupHidden) {
+			SpannableStringBuilder spannedName = new SpannableStringBuilder(displayName)
 					.append(" – ")
 					.append(String.valueOf(getChildrenCount(groupPosition)));
 
-			if (selectedGpxFile.isGroupHidden(groupName)) {
+			if (groupHidden) {
 				int secondaryTextColor = ColorUtilities.getSecondaryTextColor(context, nightMode);
 				spannedName.setSpan(new ForegroundColorSpan(secondaryTextColor), 0, spannedName.length(), SPANNED_FLAG);
 				spannedName.setSpan(new StyleSpan(Typeface.ITALIC), 0, spannedName.length(), SPANNED_FLAG);
@@ -508,12 +496,12 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 				int nameColor = AndroidUtils.getColorFromAttr(context, R.attr.wikivoyage_primary_text_color);
 				int countColor = ContextCompat.getColor(context, R.color.wikivoyage_secondary_text);
 
-				spannedName.setSpan(new ForegroundColorSpan(nameColor), 0, groupName.length(), SPANNED_FLAG);
-				spannedName.setSpan(new ForegroundColorSpan(countColor), groupName.length() + 1,
+				spannedName.setSpan(new ForegroundColorSpan(nameColor), 0, displayName.length(), SPANNED_FLAG);
+				spannedName.setSpan(new ForegroundColorSpan(countColor), displayName.length() + 1,
 						spannedName.length(), SPANNED_FLAG);
 			}
 
-			spannedName.setSpan(new StyleSpan(Typeface.BOLD), 0, groupName.length(), SPANNED_FLAG);
+			spannedName.setSpan(new StyleSpan(Typeface.BOLD), 0, displayName.length(), SPANNED_FLAG);
 
 			return spannedName;
 		}

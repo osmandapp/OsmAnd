@@ -133,9 +133,12 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 			UiUtilities.setupCompoundButton(cb, nightMode, CompoundButtonType.GLOBAL);
 
 			view.setOnClickListener(v -> {
-				updateGroupVisibility(item.getTitle(), !cb.isChecked());
-				callback.onPointGroupsVisibilityChanged();
-				fullUpdate();
+				if (item.getObject() instanceof GpxDisplayGroup) {
+					GpxDisplayGroup group = ((GpxDisplayGroup) item.getObject());
+					updateGroupVisibility(group.getName(), !cb.isChecked());
+					callback.onPointGroupsVisibilityChanged();
+					fullUpdate();
+				}
 			});
 
 			listContainer.addView(view);
@@ -165,7 +168,10 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 	private List<String> getGroupsNames() {
 		List<String> names = new ArrayList<>();
 		for (SelectableItem item : uiItems) {
-			names.add(item.getTitle());
+			if (item.getObject() instanceof GpxDisplayGroup) {
+				GpxDisplayGroup group = ((GpxDisplayGroup) item.getObject());
+				names.add(group.getName());
+			}
 		}
 		return names;
 	}
@@ -195,7 +201,11 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 			if (view == null) {
 				continue;
 			}
-			boolean isVisible = isVisible(item.getTitle());
+
+			GpxDisplayGroup group = item.getObject() instanceof GpxDisplayGroup
+					? ((GpxDisplayGroup) item.getObject())
+					: null;
+			boolean isVisible = group != null && !selectedGpxFile.isGroupHidden(group.getName());
 			int iconId = isVisible ? R.drawable.ic_action_folder : R.drawable.ic_action_folder_hidden;
 			int iconColor = item.getColor();
 			if (iconColor == 0 || !isVisible) {
@@ -210,15 +220,11 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private boolean isAnyVisible() {
 		for (String groupName : getGroupsNames()) {
-			if (isVisible(groupName)) {
+			if (!selectedGpxFile.isGroupHidden(groupName)) {
 				return true;
 			}
 		}
 		return false;
-	}
-
-	private boolean isVisible(String groupName) {
-		return !selectedGpxFile.isGroupHidden(groupName);
 	}
 
 	@Override

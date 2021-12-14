@@ -85,7 +85,7 @@ public class DisplayPointsGroupsHelper {
 			if (item.locationStart != null) {
 				if (group.getType() == GpxDisplayItemType.TRACK_POINTS) {
 					category = item.locationStart.category;
-					if (Algorithms.isEmpty(category)) {
+					if (Algorithms.isBlank(category)) {
 						category = "";
 					}
 				} else {
