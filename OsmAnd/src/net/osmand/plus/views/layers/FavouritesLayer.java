@@ -117,8 +117,11 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 								&& lat >= latLonBounds.bottom && lat <= latLonBounds.top
 								&& lon >= latLonBounds.left && lon <= latLonBounds.right) {
 							MapMarker marker = null;
-							if (synced && (marker = mapMarkersHelper.getMapMarker(favoritePoint)) == null) {
-								continue;
+							if (synced) {
+								marker = mapMarkersHelper.getMapMarker(favoritePoint);
+								if (marker == null || marker.history && !view.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
+									continue;
+								}
 							}
 							cache.add(favoritePoint);
 							float x = tileBox.getPixXFromLatLon(lat, lon);

@@ -44,10 +44,15 @@ public class FavouritePointMenuController extends MenuController {
 		super(new FavouritePointMenuBuilder(mapActivity, fav), pointDescription, mapActivity);
 		this.fav = fav;
 
-		final MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
+		OsmandApplication app = mapActivity.getMyApplication();
+		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
+
 		mapMarker = markersHelper.getMapMarker(fav);
 		if (mapMarker == null) {
 			mapMarker = markersHelper.getMapMarker(new LatLon(fav.getLatitude(), fav.getLongitude()));
+		}
+		if (mapMarker != null && mapMarker.history && !app.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
+			mapMarker = null;
 		}
 		if (mapMarker != null) {
 			MapMarkerMenuController markerMenuController =

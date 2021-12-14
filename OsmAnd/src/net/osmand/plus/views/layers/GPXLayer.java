@@ -37,7 +37,6 @@ import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ChartPointsHelper;
 import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.FilteredSelectedGpxFile;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.GpxSelectionHelper;
@@ -535,8 +534,11 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 							&& wpt != contextMenuLayer.getMoveableObject() && !isPointHidden(g, wpt)) {
 						pointFileMap.put(wpt, g);
 						MapMarker marker = null;
-						if (synced && (marker = mapMarkersHelper.getMapMarker(wpt)) == null) {
-							continue;
+						if (synced) {
+							marker = mapMarkersHelper.getMapMarker(wpt);
+							if (marker == null || marker.history && !view.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
+								continue;
+							}
 						}
 						cache.add(wpt);
 						float x = tileBox.getPixXFromLatLon(wpt.lat, wpt.lon);
