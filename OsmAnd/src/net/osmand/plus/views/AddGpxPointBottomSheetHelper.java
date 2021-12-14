@@ -56,14 +56,14 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 				WptPtEditor editor = mapActivity.getContextMenu().getWptPtPointEditor();
 				if (editor != null) {
 					editor.setOnDismissListener(AddGpxPointBottomSheetHelper.this);
-					editor.setNewGpxPointProcessing(true);
+					editor.setNewGpxPointProcessing();
 					editor.add(gpx, latLon, titleText);
 				}
 			} else if (pointDescription.isRte()) {
 				RtePtEditor editor = mapActivity.getContextMenu().getRtePtPointEditor();
 				if (editor != null) {
 					editor.setOnDismissListener(AddGpxPointBottomSheetHelper.this);
-					editor.setNewGpxPointProcessing(true);
+					editor.setNewGpxPointProcessing();
 					editor.add(gpx, latLon, titleText);
 				}
 			}

@@ -33,7 +33,7 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 
 	protected final List<_Radio> items = new ArrayList<>();
 	protected final boolean nightMode;
-	protected RadioItem selectedItem;
+	protected _Radio selectedItem;
 
 	public MultiStateToggleButton(@NonNull OsmandApplication app,
 	                              @NonNull LinearLayout container,
@@ -56,9 +56,13 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		initView();
 	}
 
-	public final void setSelectedItem(@Nullable RadioItem selectedItem) {
+	public final void setSelectedItem(@Nullable _Radio selectedItem) {
 		this.selectedItem = selectedItem;
 		updateView();
+	}
+
+	public int getSelectedItemIndex() {
+		return items.indexOf(selectedItem);
 	}
 
 	private void initView() {

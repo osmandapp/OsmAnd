@@ -234,22 +234,25 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 
 		nameEdit = view.findViewById(R.id.name_edit);
 		nameEdit.setText(getNameInitValue());
-		nameEdit.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			}
+		boolean emptyNameAllowed = editor.isProcessingTemplate();
+		if (!emptyNameAllowed) {
+			nameEdit.addTextChangedListener(new TextWatcher() {
+				@Override
+				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+				}
 
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-			}
+				@Override
+				public void onTextChanged(CharSequence s, int start, int before, int count) {
+				}
 
-			@Override
-			public void afterTextChanged(Editable s) {
-				checkEmptyName(s, nameCaption, saveButton);
-			}
-		});
+				@Override
+				public void afterTextChanged(Editable s) {
+					checkEmptyName(s, nameCaption, saveButton);
+				}
+			});
+			checkEmptyName(nameEdit.getText(), nameCaption, saveButton);
+		}
 
-		checkEmptyName(nameEdit.getText(), nameCaption, saveButton);
 		nameIcon = view.findViewById(R.id.name_icon);
 		TextView categoryEdit = view.findViewById(R.id.groupName);
 		if (categoryEdit != null) {
@@ -345,13 +348,12 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		}
 
 		View deleteButton = view.findViewById(R.id.button_delete_container);
-		deleteButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				deletePressed();
-			}
-		});
+		deleteButton.setOnClickListener(v -> deletePressed());
 
+		if (editor.isProcessingTemplate()) {
+			View replaceButton = view.findViewById(R.id.button_replace_container);
+			AndroidUiHelper.setVisibility(View.GONE, toolbarAction, replaceButton, deleteButton);
+		}
 		if (editor.isNew()) {
 			toolbarAction.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_replace, activeColorResId));
 			deleteButton.setVisibility(View.GONE);
