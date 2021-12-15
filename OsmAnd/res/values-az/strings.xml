@@ -2879,7 +2879,7 @@
 \n
 \n • Xəritədə POI ikonları düzgün düzüldü
 \n
-\n • Xəritəni tənzimləmək etmək üçün Gün çıxır/Gün çıxır məlumatları əlavə edildi
+\n • Xəritəni tənzimlə-yə Gün çıxır/Gün çıxır məlumatları əlavə edildi
 \n
 \n • Xəritədə Ev/İş ikonları əlavə edildi
 \n
@@ -3029,4 +3029,5 @@
     <string name="speak_title">Elan et…</string>
     <string name="routing_attr_length_description">Marşrutlarda icazə veriləcək nəqliyyat vasitəsinin uzunluğunu təyin edin.</string>
     <string name="voice_announcements">Səsli göstərişlər</string>
+    <string name="live_monitoring_descr">Səyahət qeydindən istifadə edərək hazırkı məkanı paylaşmağa imkan verir.</string>
 </resources>
