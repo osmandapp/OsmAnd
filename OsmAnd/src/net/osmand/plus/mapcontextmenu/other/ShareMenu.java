@@ -5,8 +5,6 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
@@ -218,18 +216,16 @@ public class ShareMenu extends BaseMenuController {
 		Intent intent = new Intent();
 		intent.addCategory(Intent.CATEGORY_DEFAULT);
 		intent.setAction(ZXING_BARCODE_SCANNER_ACTIVITY);
-		ResolveInfo resolved = activity.getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
-		if (resolved != null) {
-			intent.putExtra("ENCODE_TYPE", encodeType);
-			if (strEncodeData != null) {
-				intent.putExtra("ENCODE_DATA", strEncodeData);
-			} else {
-				intent.putExtra("ENCODE_DATA", encodeData);
-			}
-			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-			AndroidUtils.startActivityIfSafe(activity, intent);
+		intent.putExtra("ENCODE_TYPE", encodeType);
+		if (strEncodeData != null) {
+			intent.putExtra("ENCODE_DATA", strEncodeData);
 		} else {
+			intent.putExtra("ENCODE_DATA", encodeData);
+		}
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+
+		if (!AndroidUtils.startActivityIfSafe(activity, intent)) {
 			if (Version.isMarketEnabled()) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 				builder.setMessage(activity.getString(R.string.zxing_barcode_scanner_not_found));
