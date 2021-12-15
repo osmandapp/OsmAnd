@@ -1777,7 +1777,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			String size = "";
 
 			if (child.getSize() >= 0) {
-				size = AndroidUtils.formatSize(v.getContext(), child.getSize() * 10L * 1024L);
+				size = AndroidUtils.formatSize(v.getContext(), child.getSize());
 			}
 			DateFormat df = app.getResourceManager().getDateFormat();
 			long fd = child.getFileDate();
