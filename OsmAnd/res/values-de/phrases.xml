@@ -1988,7 +1988,7 @@
     <string name="poi_service_bicycle_retail_no">Fahrradeinzelhandel: nein</string>
     <string name="poi_service_bicycle_repair_yes">Reparatur</string>
     <string name="poi_service_bicycle_repair_no">Fahrradreparatur: nein</string>
-    <string name="poi_service_bicycle_rental_yes">Verleih</string>
+    <string name="poi_service_bicycle_rental_yes">Verleih;Fahrradverleih: ja</string>
     <string name="poi_service_bicycle_rental_no">Fahrradverleih: nein</string>
     <string name="poi_service_bicycle_pump_yes">Fahrradpumpe</string>
     <string name="poi_service_bicycle_pump_no">Fahrradpumpe: nein</string>
