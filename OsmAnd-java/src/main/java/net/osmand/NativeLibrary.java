@@ -473,11 +473,8 @@ public class NativeLibrary {
 		}
 		
 	}
-	
-
 
 	public static class RenderedObject extends MapObject {
-		public static final String ROUTE_PREFIX = "route_";
 		private Map<String, String> tags = new LinkedHashMap<>();
 		private QuadRect bbox = new QuadRect();
 		private TIntArrayList x = new TIntArrayList();

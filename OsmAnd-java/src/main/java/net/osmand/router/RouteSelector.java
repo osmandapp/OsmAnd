@@ -1,6 +1,8 @@
 package net.osmand.router;
 
 import gnu.trove.list.array.TIntArrayList;
+
+import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.ResultMatcher;
@@ -10,17 +12,11 @@ import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.QuadRect;
-import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.Way;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.util.*;
-
-import static net.osmand.NativeLibrary.*;
 
 public class RouteSelector {
 	public static final String ROUTE_PREFIX = "route_";
@@ -30,7 +26,33 @@ public class RouteSelector {
 	// ROUTE_KEY: {route_bicycle_1=, route_bicycle_1_node_network=rcn, route_bicycle_1_ref=67-68} -> "route_bicycle___node_network_rcn___ref_67-68"
 	private static final String ROUTE_KEY_SEPARATOR = "___";
 	private static final String ROUTE_KEY_VALUE_SEPARATOR = "_";
-	
+
+	public enum RouteType {
+
+		HIKING("hiking"),
+		BICYCLE("bicycle"),
+		MTB("mtb"),
+		HORSE("horse");
+		private final String type;
+
+		RouteType(String type) {
+			this.type = type;
+		}
+
+		public String getType() {
+			return type;
+		}
+
+		public static boolean isRoute(String tag) {
+			for (RouteType routeType : values()) {
+				if (tag.startsWith(ROUTE_PREFIX + routeType.type)) {
+					return true;
+				}
+			}
+			return false;
+		}
+	}
+
 	public RouteSelector(BinaryMapIndexReader[] files) {
 		this.files = files;
 	}
@@ -40,63 +62,147 @@ public class RouteSelector {
 		qr.left = qr.right = renderedObject.getLabelX();
 		qr.top = qr.bottom = renderedObject.getLabelY();
 		MapIndex mapIndex = getMapIndexPerObject(renderedObject);
-		return getRoutes(qr, mapIndex, null, null);
+		if (mapIndex == null) {
+			return null;
+		}
+		Set<String> routeKeys = getRouteStringKeys(renderedObject, null);
+		return getRoutes(qr, mapIndex, routeKeys, null);
+	}
+
+	public static Set<String> getRouteStringKeys(RenderedObject o, Set<RouteType> typeSet) {
+		List<String> allTagsList = new ArrayList<>(o.getTags().keySet());
+		Set<String> routeTagsList = new HashSet<>();
+		int routeQuantity;
+		routeQuantity = getRouteQuantity(allTagsList);
+		if (routeQuantity != 0) {
+			if (typeSet == null) {
+				typeSet = new HashSet<>();
+				typeSet.addAll(Arrays.asList(RouteType.values()));
+			}
+			for (RouteType routeType : typeSet) {
+				for (int routeIdx = 1; routeIdx <= routeQuantity; routeIdx++) {
+					StringBuilder tagKey = new StringBuilder();
+					boolean start = true;
+					for (String tag : allTagsList) {
+						if (tag.startsWith(ROUTE_PREFIX + routeType.type + "_" + routeIdx)) {
+							if (start) {
+								start = false;
+								tagKey.append(ROUTE_PREFIX).append(routeType.type);
+							} else {
+								tagKey.append(ROUTE_KEY_SEPARATOR)
+										.append(tag.substring((ROUTE_PREFIX + routeType.type + "_" + routeIdx).length()))
+										.append(ROUTE_KEY_VALUE_SEPARATOR).append(o.getTags().get(tag));
+							}
+						}
+					}
+					routeTagsList.add(tagKey.toString());
+				}
+			}
+		}
+		return routeTagsList;
+	}
+
+	private static int getRouteQuantity(List<String> allTagsList) {
+		Collections.sort(allTagsList);
+		int routeQuantity = 0;
+		for (int i = allTagsList.size() - 1; i > 0; i--) {
+			String tag = allTagsList.get(i);
+			if (tag.startsWith(ROUTE_PREFIX)) {
+				routeQuantity = Algorithms.extractIntegerNumber(tag);
+				break;
+			}
+		}
+		return routeQuantity;
+	}
+
+	private String getRouteStringKeys(BinaryMapDataObject foundSegment) {
+		// TODO:
+		return "";
 	}
 
 	public List<GPXFile> getRoutes(QuadRect bbox, MapIndex mapIndex, Set<String> routeKeys, Set<String> routePrefixes) {
-		List<Way> wayList = new ArrayList<>();
+		List<GPXFile> gpxFileList = new ArrayList<>();
 		List<BinaryMapDataObject> foundSegmentList = new ArrayList<>();
 		List<BinaryMapDataObject> finalSegmentList = new ArrayList<>();
 		BinaryMapDataObject startSegment = null;
+		String routeKey = routeKeys.iterator().next();
+		while (true) {
+			int x = (int) bbox.left;
+			int y = (int) bbox.bottom;
+			int xStart = 0;
+			int yStart = 0;
 
-		int x = renderedObject.getX().get(0);
-		int y = renderedObject.getY().get(0);
-		int xStart = 0;
-		int yStart = 0;
-		long id = renderedObject.getId();
+			try {
+				for (BinaryMapIndexReader indexReader : files) {
+					final SearchRequest<BinaryMapDataObject> req = buildSearchRequest(foundSegmentList, x, y, false);
+					foundSegmentList.clear();
+					indexReader.searchMapIndex(req, mapIndex);
+					if (!foundSegmentList.isEmpty()) {
+						for (BinaryMapDataObject foundSegment : foundSegmentList) {
+							if (routeKey.equals(getRouteStringKeys(foundSegment))) {
+								startSegment = foundSegment;
+								break;
+							}
+						}
+						BinaryMapDataObject segment = startSegment;
+						finalSegmentList.add(segment);
+						xStart = segment.getPoint31XTile(0);
+						yStart = segment.getPoint31YTile(0);
+						x = segment.getPoint31XTile(segment.getPointsLength() - 1);
+						y = segment.getPoint31YTile(segment.getPointsLength() - 1);
+					}
+					getRoutePart(finalSegmentList, x, y, indexReader, mapIndex, false);
+					getRoutePart(finalSegmentList, xStart, yStart, indexReader, mapIndex, false);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			if (!finalSegmentList.isEmpty()) {
+				gpxFileList.add(createGpxFile(finalSegmentList));
+			} else {
+				break;
+			}
+		}
+		return gpxFileList;
+	}
 
-		try {
+	GPXFile createGpxFile(List<BinaryMapDataObject> segmentList) {
+		GPXFile gpxFile = null;
+		if (!segmentList.isEmpty()) {
+			GPXUtilities.Track track = new GPXUtilities.Track();
+			for (BinaryMapDataObject segment : segmentList) {
+				GPXUtilities.TrkSegment trkSegment = new GPXUtilities.TrkSegment();
+				for (int i = 0; i < segment.getPointsLength(); i++) {
+					GPXUtilities.WptPt point = new GPXUtilities.WptPt();
+					point.lat = MapUtils.get31LatitudeY(segment.getPoint31YTile(i));
+					point.lon = MapUtils.get31LongitudeX(segment.getPoint31XTile(i));
+					trkSegment.points.add(point);
+				}
+				track.segments.add(trkSegment);
+			}
+			gpxFile = new GPXFile(null, null, null);
+			gpxFile.tracks = new ArrayList<>();
+			gpxFile.tracks.add(track);
+		}
+		return gpxFile;
+	}
 
-			final SearchRequest<BinaryMapDataObject> req = buildSearchRequest(foundSegmentList, x, y, false);
-			foundSegmentList.clear();
-			indexReader.searchMapIndex(req, mapIndex);
-			if (!foundSegmentList.isEmpty()) {
-				for (BinaryMapDataObject foundSegment : foundSegmentList) {
-					if (id == foundSegment.getId()) {
-						startSegment = foundSegment;
-						break;
+	private MapIndex getMapIndexPerObject(RenderedObject renderedObject) {
+		int zoom = 15;
+		int x31 = renderedObject.getX().get(0);
+		int y31 = renderedObject.getY().get(0);
+		for (BinaryMapIndexReader reader : files) {
+			for (MapIndex mapIndex : reader.getMapIndexes()) {
+				for (BinaryMapIndexReader.MapRoot root : mapIndex.getRoots()) {
+					if (root.getMinZoom() <= zoom && root.getMaxZoom() >= zoom) {
+						if (x31 >= root.getLeft() && x31 <= root.getRight()
+								&& root.getTop() <= y31 && root.getBottom() >= y31) {
+							return mapIndex;
+						}
 					}
 				}
-				BinaryMapDataObject segment = startSegment;
-				finalSegmentList.add(segment);
-				xStart = segment.getPoint31XTile(0);
-				yStart = segment.getPoint31YTile(0);
-				x = segment.getPoint31XTile(segment.getPointsLength() - 1);
-				y = segment.getPoint31YTile(segment.getPointsLength() - 1);
-			}
-			getRoutePart(finalSegmentList, x, y, indexReader, mapIndex, false);
-			getRoutePart(finalSegmentList, xStart, yStart, indexReader, mapIndex, false);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		for (BinaryMapDataObject segment : finalSegmentList) {
-			Way w = new Way(-1);
-			if (segment.getPointsLength() > 1) {
-				for (int i = 0; i < segment.getPointsLength(); i++) {
-					x = segment.getPoint31XTile(i);
-					y = segment.getPoint31YTile(i);
-					Node n = new Node(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x), -1);
-					w.addNode(n);
-				}
-				wayList.add(w);
 			}
 		}
-		return wayList;
-	}
-	
-	private MapIndex getMapIndexPerObject(RenderedObject renderedObject) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -112,14 +218,14 @@ public class RouteSelector {
 			indexReader.searchMapIndex(req, mapIndex);
 			exit = true;
 			Iterator<BinaryMapDataObject> i = foundSegmentList.iterator();
-			while(i.hasNext()){
+			while (i.hasNext()) {
 				BinaryMapDataObject s = i.next();
-				if(!isConnected(s, x, y) && !isRoundabout(s)){
+				if (!isConnected(s, x, y) && !isRoundabout(s)) {
 					i.remove();
 					continue;
 				}
-				for(BinaryMapDataObject fo:finalSegmentList) {
-					if (s.getId() == fo.getId()){
+				for (BinaryMapDataObject fo : finalSegmentList) {
+					if (s.getId() == fo.getId()) {
 						i.remove();
 						break;
 					}
@@ -191,10 +297,10 @@ public class RouteSelector {
 	private void removeExistedSegments(List<BinaryMapDataObject> finalSegmentList,
 	                                   List<BinaryMapDataObject> foundSegmentList) {
 		Iterator<BinaryMapDataObject> it = foundSegmentList.iterator();
-		while(it.hasNext()){
+		while (it.hasNext()) {
 			BinaryMapDataObject o = it.next();
-			for(BinaryMapDataObject fo: finalSegmentList) {
-				if (o.getId() == fo.getId()){
+			for (BinaryMapDataObject fo : finalSegmentList) {
+				if (o.getId() == fo.getId()) {
 					it.remove();
 					break;
 				}
@@ -259,7 +365,8 @@ public class RouteSelector {
 					public boolean publish(BinaryMapDataObject object) {
 						Map<Integer, List<String>> objectTagMap = new HashMap<>();
 						for (int routeIdx = 1; routeIdx <= getRouteQuantity(object); routeIdx++) {
-							String prefix = ROUTE_PREFIX + type + "_" + routeIdx;
+//							String prefix = ROUTE_PREFIX + type + "_" + routeIdx;
+							String prefix = ROUTE_PREFIX + "_" + routeIdx;
 							for (int i = 0; i < object.getObjectNames().keys().length; i++) {
 								TagValuePair tp = object.getMapIndex().decodeType(object.getObjectNames().keys()[i]);
 								if (tp != null && tp.tag != null && (tp.tag).startsWith(prefix)) {
@@ -290,9 +397,9 @@ public class RouteSelector {
 								for (String s : objectTagList) {
 									objectTagKey.append(s);
 								}
-								if (Algorithms.stringsEqual(tagKey, objectTagKey.toString())) {
-									foundSegmentList.add(object);
-								}
+//								if (Algorithms.stringsEqual(tagKey, objectTagKey.toString())) {
+//									foundSegmentList.add(object);
+//								}
 							}
 						}
 						return false;
@@ -313,16 +420,7 @@ public class RouteSelector {
 							TagValuePair tp = object.getMapIndex().decodeType(object.getAdditionalTypes()[i]);
 							tagsList.add(tp.tag);
 						}
-						Collections.sort(tagsList);
-						int routeQuantity = 0;
-						for (int i = tagsList.size() - 1; i > 0; i--) {
-							String tag = tagsList.get(i);
-							if (tag.startsWith(ROUTE_PREFIX + type)) {
-								routeQuantity = Algorithms.extractIntegerNumber(tag);
-								break;
-							}
-						}
-						return routeQuantity;
+						return RouteSelector.getRouteQuantity(tagsList);
 					}
 
 					@Override
@@ -343,5 +441,4 @@ public class RouteSelector {
 		return xc == segment.getPoint31XTile(last) && yc == segment.getPoint31YTile(last)
 				|| xc == segment.getPoint31XTile(0) && yc == segment.getPoint31YTile(0);
 	}
-
 }
