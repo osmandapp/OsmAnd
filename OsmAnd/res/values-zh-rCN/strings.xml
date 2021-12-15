@@ -3643,9 +3643,9 @@
     <string name="configure_profile">更改配置</string>
     <string name="osmand_live">实时OsmAnd</string>
     <string name="contributions_may_calculate_with_delay">计算贡献可能需要几个小时。</string>
-    <string name="map_updates_are_unavailable_yet">地图尚无更新。 :-(</string>
+    <string name="map_updates_are_unavailable_yet">地图尚无更新可用。 :-(</string>
     <string name="connect_track_points_as">连接路线点</string>
-    <string name="pro_features">专业功能</string>
+    <string name="pro_features">专业版功能</string>
     <string name="sit_on_the_stop">在该站上车</string>
     <string name="shared_string_relation">关系</string>
     <string name="use_login_and_password">使用用户名和密码</string>
@@ -3749,7 +3749,7 @@
     <string name="benefits_for_contributors_secondary_descr">登录 OpenStreetMap 以检查您是否有资格获得无限制的每月和每小时地图更新。</string>
     <string name="osm_live_payment_subscription_management_amz">确认购买时，将从您的亚马逊帐户中收取费用。
 \n
-\n除非在选定的续订期之前取消，否则它会续订。
+\n除非在选定的续订期之前取消，否则将续订。
 \n
 \n随时从您的亚马逊设置管理或取消您的订阅。</string>
     <string name="cancel_anytime_in_amazon_app">随时通过亚马逊应用取消</string>
@@ -3758,13 +3758,13 @@
     <string name="reset_to_original">重置为原始状态</string>
     <string name="backup_error_no_subscription">当前无订阅</string>
     <string name="no_items_of_type_message">你没有此类型的项目</string>
-    <string name="routeInfo_tracktype_description">根据道路的表面构成，按照道路的状况给路线或轨道线着色。通常适用于主要道路网由非铺装道路组成的道路。</string>
+    <string name="routeInfo_tracktype_description">根据表面成分给路线或轨道线上色。通常适用于道路网络大部分未铺设的情况。</string>
     <string name="routeInfo_winter_ice_road_description">按冬季道路分类为路线或轨迹线着色。</string>
-    <string name="routeInfo_smoothness_description">提供关于轮式车辆的物理可用性的分类方案，特别是关于表面规则性/平整度。</string>
+    <string name="routeInfo_smoothness_description">轮式车辆的道路/人行道机动性分类，特别是关于路面规则性/平整度的分类。</string>
     <string name="routeInfo_surface_description">提供道路/人行道物理表面信息。</string>
-    <string name="routeInfo_roadClass_description">按道路分类为路线或轨迹线着色。</string>
+    <string name="routeInfo_roadClass_description">按道路分类给路线或轨道线上色。</string>
     <string name="add_group_to_markers">添加组别到标记列表</string>
-    <string name="remove_group_from_markers">在标记列表中删除组</string>
+    <string name="remove_group_from_markers">从标识物列表中移除群组</string>
     <string name="last_intermediate_dest_description">添加中间站</string>
     <string name="more_transport_on_stop_hint">自该站有更多的交通方式。</string>
     <string name="routing_attr_avoid_tunnels_description">避开隧道</string>
@@ -3778,7 +3778,7 @@
     <string name="shared_string_files">文件</string>
     <string name="travel_route_types">路线类型</string>
     <string name="gps_filter_smoothing">平滑</string>
-    <string name="not_enough_contributions_descr">至少需要在过去两个月 %2$s 期间进行 %1$s 次更改才能访问无限制的每小时地图更新。</string>
+    <string name="not_enough_contributions_descr">至少需要在过去两个月期间进行 %1$s 次更改 %2$s 才能获得无限制的每小时地图更新。</string>
     <string name="shared_string_precision">精度</string>
     <string name="shared_string_feet">英尺</string>
     <string name="gps_filter_precision">GPS 精度</string>
@@ -3877,4 +3877,32 @@
     <string name="android_auto_map_placeholder_descr">要在程序中查看地图，请断开设备与 Android Auto 的连接。</string>
     <string name="android_auto_purchase_request_title">要将 OsmAnd 与 Android Auto 搭配使用，请购买 OsmAnd Pro 或 Maps+</string>
     <string name="continue_on_phone">在移动设备上继续</string>
+    <string name="shared_app_storage_description">由于 Android 存储权限变更，共享内存不再可用。</string>
+    <string name="exit_pan_mode_descr">按下“选择”退出平移模式</string>
+    <string name="routing_attr_only_permitted_streets_description">只使用明确允许的街道</string>
+    <string name="routing_attr_only_permitted_ways_description">仅使用明确允许的道路（轨迹、路径等）</string>
+    <string name="routing_attr_prefer_horse_routes_description">偏好马道</string>
+    <string name="shared_string_mini">迷你</string>
+    <string name="sample_wikivoyage">维基导游示例</string>
+    <string name="routing_attr_prefer_tactile_paving_name">偏好触觉铺路</string>
+    <string name="horseback_riding">骑马</string>
+    <string name="shared_string_details">详情</string>
+    <string name="internal_app_storage_description">内部存储，对所有用户和其他应用程序隐藏，所以只有 OsmAnd 可以访问你的数据。</string>
+    <string name="shared_storage_warning_title">存储访问规则变更</string>
+    <string name="purchases_feature_desc_android_auto">将 OsmAnd 离线地图和导航带到您的车辆屏幕，并与您的车辆控制集成。</string>
+    <string name="transparent_status_bar_descr">在状态栏下显示地图</string>
+    <string name="transparent_status_bar">透明状态栏</string>
+    <string name="location_access_request_action">授予权限</string>
+    <string name="routing_attr_prefer_horse_routes_name">偏好马道</string>
+    <string name="routing_attr_only_permitted_streets_name">明确允许的街道</string>
+    <string name="search_title">搜索：%1$s</string>
+    <string name="routing_attr_only_permitted_ways_name">明确允许的道路</string>
+    <string name="location_access_request_result">已授予：%1$s已拒绝：%2$s</string>
+    <string name="shared_string_articles">物品</string>
+    <string name="included_categories">包含的类别</string>
+    <string name="icon_group_nautical">航海</string>
+    <string name="upload_gpx_description_hint">留空，轨迹名称将用作描述。输入的描述将应用于每个轨迹。</string>
+    <string name="routing_attr_prefer_tactile_paving_description">偏好触觉铺路</string>
+    <string name="location_access_request_title">OsmAnd 需要位置权限才能导航。</string>
+    <string name="mapillary_menu_filter_description_new">按日期或类型筛选图片。仅在特写缩放中起作用。</string>
 </resources>

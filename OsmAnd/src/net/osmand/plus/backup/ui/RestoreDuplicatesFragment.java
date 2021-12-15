@@ -69,7 +69,7 @@ public class RestoreDuplicatesFragment extends ImportDuplicatesFragment {
 				try {
 					ImportListener importListener = ((ImportSettingsFragment) target).getImportListener();
 					settingsHelper.importSettings(RESTORE_ITEMS_KEY, settingsItems, false, importListener);
-				} catch (IllegalArgumentException e) {
+				} catch (IllegalStateException e) {
 					LOG.error(e.getMessage(), e);
 				}
 			}

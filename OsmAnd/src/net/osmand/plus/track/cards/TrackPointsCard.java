@@ -2,6 +2,7 @@ package net.osmand.plus.track.cards;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -473,6 +474,14 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 					? getColoredIcon(R.drawable.ic_action_folder_hidden, ColorUtilities.getSecondaryTextColorId(nightMode))
 					: getContentIcon(R.drawable.ic_action_folder);
 			ImageView groupImage = row.findViewById(R.id.icon);
+			Resources resources = app.getResources();
+			int iconSize = resources.getDimensionPixelSize(R.dimen.standard_icon_size);
+			int marginStart = resources.getDimensionPixelSize(R.dimen.list_content_padding);
+			int marginEnd = resources.getDimensionPixelSize(R.dimen.list_content_padding_large);
+			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(iconSize, iconSize);
+			AndroidUtils.setMargins(params,marginStart,0,marginEnd,0);
+			groupImage.setLayoutParams(params);
+			groupImage.requestLayout();
 			groupImage.setImageDrawable(icon);
 
 			boolean expanded = listView.isGroupExpanded(groupPosition);

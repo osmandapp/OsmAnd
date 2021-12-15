@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -25,9 +24,9 @@ import gnu.trove.list.array.TIntArrayList;
  */
 public class OpeningHoursParser {
 	private static final String[] daysStr;
-	private static final String[] localDaysStr;
+	private static String[] localDaysStr;
 	private static final String[] monthsStr;
-	private static final String[] localMothsStr;
+	private static String[] localMothsStr;
 	private static final Map<String, String> additionalStrings = new HashMap<>();
 
 	private static final int LOW_TIME_LIMIT = 120;
@@ -38,10 +37,8 @@ public class OpeningHoursParser {
 		DateFormatSymbols dateFormatSymbols = DateFormatSymbols.getInstance(Locale.US);
 		monthsStr = dateFormatSymbols.getShortMonths();
 		daysStr = getLettersStringArray(dateFormatSymbols.getShortWeekdays(), 2);
-		
-		dateFormatSymbols = DateFormatSymbols.getInstance();
-		localMothsStr = dateFormatSymbols.getShortMonths();
-		localDaysStr = getLettersStringArray(dateFormatSymbols.getShortWeekdays(), 3);
+
+		initLocalStrings();
 
 		additionalStrings.put("off", "off");
 		additionalStrings.put("is_open", "Open");
@@ -52,6 +49,18 @@ public class OpeningHoursParser {
 		additionalStrings.put("open_till", "Open till");
 		additionalStrings.put("will_open_tomorrow_at", "Will open tomorrow at");
 		additionalStrings.put("will_open_on", "Will open on");
+	}
+
+	public static void initLocalStrings() {
+		initLocalStrings(null);
+	}
+
+	public static void initLocalStrings(Locale locale) {
+		DateFormatSymbols dateFormatSymbols = locale == null
+				? DateFormatSymbols.getInstance()
+				: DateFormatSymbols.getInstance(locale);
+		localMothsStr = dateFormatSymbols.getShortMonths();
+		localDaysStr = getLettersStringArray(dateFormatSymbols.getShortWeekdays(), 3);
 	}
 
 	/**

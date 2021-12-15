@@ -1,7 +1,14 @@
-package net.osmand.plus.plugins.osmedit.opr;
+package net.osmand.plus.plugins.openplacereviews;
+
+import static org.openplacereviews.opendb.SecUtils.ALGO_EC;
+import static org.openplacereviews.opendb.SecUtils.JSON_MSG_TYPE;
+import static org.openplacereviews.opendb.SecUtils.signMessageWithKeyBase64;
 
 import android.net.TrafficStats;
 import android.os.Build;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.WorkerThread;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -37,10 +44,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import static org.openplacereviews.opendb.SecUtils.ALGO_EC;
-import static org.openplacereviews.opendb.SecUtils.JSON_MSG_TYPE;
-import static org.openplacereviews.opendb.SecUtils.signMessageWithKeyBase64;
-
 
 public class OpenDBAPI {
 	public static final String PURPOSE = "osmand-android";
@@ -49,25 +52,34 @@ public class OpenDBAPI {
 	private static final String LOGIN_SUCCESS_MESSAGE = "\"result\":\"OK\"";
 	private static final int THREAD_ID = 11200;
 
-	/*
-	 * method for check if user is loggined in blockchain
-	 * params
-	 *  - username: blockchain username in format "openplacereviews"
-	 *  - privatekey: "base64:PKCS#8:actualKey"
-	 * Need to encode key
-	 * Do not call on mainThread
+	public static class UploadImageResult {
+		public int responseCode = -1;
+		public String error;
+	}
+
+	private static class OPRImage {
+		String type;
+		String hash;
+		String cid;
+		String extension;
+	}
+
+	/**
+	 * Method for check if user is logged in into blockchain
+	 *
+	 * @param app        app context
+	 * @param baseUrl    base URL
+	 * @param username   blockchain username in OPR format
+	 * @param privateKey "base64:PKCS#8:actualKey"
+	 * @return false if not logged in or check failed
 	 */
-	public boolean checkPrivateKeyValid(OsmandApplication app, String baseUrl, String username, String privateKey) {
-		String url = null;
+	@WorkerThread
+	public boolean checkPrivateKeyValid(@NonNull OsmandApplication app, @NonNull String baseUrl,
+	                                    @NonNull String username, @NonNull String privateKey) {
+		String url;
 		try {
-			String purposeParam = "purpose=" + PURPOSE;
-			url = baseUrl + checkLoginEndpoint + purposeParam + "&" +
-					"name=" +
-					username +
-					"&" +
-					"privateKey=" +
-					//need to encode the key
-					URLEncoder.encode(privateKey, "UTF-8");
+			url = baseUrl + checkLoginEndpoint + "purpose=" + PURPOSE + "&name=" + username +
+					"&privateKey=" + URLEncoder.encode(privateKey, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			return false;
 		}
@@ -96,7 +108,9 @@ public class OpenDBAPI {
 		}
 	}
 
-	public int uploadImage(String[] placeId, String baseUrl, String privateKey, String username, String image, StringBuilder sb) throws FailedVerificationException {
+	public UploadImageResult uploadImage(@NonNull String[] placeId, @NonNull String baseUrl, @NonNull String privateKey,
+	                                     @NonNull String username, @NonNull String image) throws FailedVerificationException {
+		UploadImageResult res = new UploadImageResult();
 		if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
 			Security.removeProvider("BC");
 			Security.addProvider(new BouncyCastleProvider());
@@ -108,30 +122,31 @@ public class OpenDBAPI {
 		OPRImage oprImage = new GsonBuilder().create().fromJson(image, OPRImage.class);
 		OpOperation opOperation = new OpOperation();
 		opOperation.setType("opr.place");
-		List<Object> edits = new ArrayList<>();
-		Map<String, Object> edit = new TreeMap<>();
-		List<Object> imageResponseList = new ArrayList<>();
+
 		Map<String, Object> imageMap = new TreeMap<>();
 		imageMap.put("cid", oprImage.cid);
 		imageMap.put("hash", oprImage.hash);
 		imageMap.put("extension", oprImage.extension);
 		imageMap.put("type", oprImage.type);
-		imageResponseList.add(imageMap);
+
 		List<String> ids = new ArrayList<>(Arrays.asList(placeId));
 		Map<String, Object> change = new TreeMap<>();
 		Map<String, Object> images = new TreeMap<>();
 		images.put("append", imageMap);
 		change.put("version", "increment");
 		change.put("images.review", images);
+
+		Map<String, Object> edit = new TreeMap<>();
 		edit.put("id", ids);
 		edit.put("change", change);
 		edit.put("current", new Object());
+
+		List<Object> edits = new ArrayList<>();
 		edits.add(edit);
 		opOperation.putObjectValue(OpOperation.F_EDIT, edits);
 		opOperation.setSignedBy(signed);
 		String hash = JSON_MSG_TYPE + ":"
-				+ SecUtils.calculateHashWithAlgo(SecUtils.HASH_SHA256, null,
-				formatter.opToJsonNoHash(opOperation));
+				+ SecUtils.calculateHashWithAlgo(SecUtils.HASH_SHA256, null, formatter.opToJsonNoHash(opOperation));
 		byte[] hashBytes = SecUtils.getHashBytes(hash);
 		String signature = signMessageWithKeyBase64(kp, hashBytes, SecUtils.SIG_ALGO_SHA1_EC, null);
 		opOperation.addOrSetStringValue("hash", hash);
@@ -139,7 +154,6 @@ public class OpenDBAPI {
 		TrafficStats.setThreadStatsTag(THREAD_ID);
 		String url = baseUrl + "api/auth/process-operation?addToQueue=true&dontSignByServer=false";
 		String json = formatter.opToJson(opOperation);
-		System.out.println("JSON: " + json);
 		HttpURLConnection connection;
 		try {
 			connection = (HttpURLConnection) new URL(url).openConnection();
@@ -151,29 +165,26 @@ public class OpenDBAPI {
 				DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
 				wr.write(json.getBytes());
 			} catch (Exception e) {
-				e.printStackTrace();
+				log.error(e.getMessage(), e);
 			}
 			int rc = connection.getResponseCode();
+			res.responseCode = rc;
 			if (rc != 200) {
-				log.error("ERROR HAPPENED");
 				BufferedReader br = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+				StringBuilder sb = new StringBuilder();
 				String strCurrentLine;
 				while ((strCurrentLine = br.readLine()) != null) {
 					log.error(strCurrentLine);
 					sb.append(strCurrentLine);
 				}
+				res.error = sb.toString();
 			}
-			return rc;
 		} catch (IOException e) {
-			log.error(e);
+			log.error(e.getMessage(), e);
 		}
-		return -1;
-	}
-
-	public class OPRImage {
-		public String type;
-		public String hash;
-		public String cid;
-		public String extension;
+		if (!Algorithms.isEmpty(res.error)) {
+			log.debug("OpenDBAPI uploadImage error: " + res.responseCode + " = " + res.error);
+		}
+		return res;
 	}
 }

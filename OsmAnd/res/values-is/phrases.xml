@@ -4181,7 +4181,7 @@
     <string name="poi_generator_source_gasoline">Uppruni orku: bensín</string>
     <string name="poi_generator_source_waste">Uppruni orku: sorp</string>
     <string name="poi_medical_supply_orthotics">Stoðtæki</string>
-    <string name="poi_beauty_salon_spa">Spa</string>
+    <string name="poi_beauty_salon_spa">Spa-böð</string>
     <string name="poi_beauty_salon_skin_care">Húðsnyrting</string>
     <string name="poi_beauty_salon_aesthetic">Lýtalækningar</string>
     <string name="poi_beauty_salon_eyelash">Augnhárameðferð</string>
@@ -4209,4 +4209,17 @@
     <string name="poi_generator_type_reciprocating_engine">Tegund aflgjafa: tvígengishreyfill</string>
     <string name="poi_generator_type_bioreactor">Tegund aflgjafa: lífmassaknúið</string>
     <string name="poi_fumarole">Gufuhver</string>
+    <string name="poi_computer_parts">Íhlutir fyrir tölvur</string>
+    <string name="poi_prep_school">Undirbúningsskóli</string>
+    <string name="poi_escape_game">Flóttaleikur</string>
+    <string name="poi_computer_sales_used">Notað</string>
+    <string name="poi_computer_sales">Sala á tölvum</string>
+    <string name="poi_computer_sales_yes">Já</string>
+    <string name="poi_computer_repair">Tölvuviðgerðir</string>
+    <string name="poi_diet_vegan_limited">Grænkerafæði: takmarkað</string>
+    <string name="poi_computer_repair_yes">Já</string>
+    <string name="poi_computer_sales_no">Sala á tölvum: nei</string>
+    <string name="poi_computer_repair_no">Tölvuviðgerðir: nei</string>
+    <string name="poi_computer_parts_yes">Já</string>
+    <string name="poi_computer_parts_no">Tölvuíhlutir: nei</string>
 </resources>

@@ -2,6 +2,7 @@ package net.osmand.plus.settings.backend.preferences;
 
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -107,7 +108,7 @@ public class ListStringPreference extends StringPreference {
 	}
 
 	public boolean setModeValues(ApplicationMode mode, List<String> values) {
-		if (values == null || values.size() == 0) {
+		if (Algorithms.isEmpty(values)) {
 			setModeValue(mode, null);
 			return false;
 		}

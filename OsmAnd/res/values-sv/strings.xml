@@ -3781,7 +3781,7 @@
     <string name="map_markers_history">Kartmarkörhistorik</string>
     <string name="navigation_history">Navigationshistorik</string>
     <string name="history_preferences_descr">Du kan inaktivera historikloggning individuellt för varje historiktyp.</string>
-    <string name="search_history_is_disabled_descr">Du kan aktivera sökhistorik i Inställningar</string>
+    <string name="search_history_is_disabled_descr">Du kan aktivera sökhistoriken i inställningarna.</string>
     <string name="markers_history_is_disabled_descr">Aktivera historik för att få en lista av besökta kartmarkörer.</string>
     <string name="history_is_disabled_descr">Aktivera historik för att få snabbare tillgång till de senast använda resultaten.</string>
     <string name="shared_string_details">Detaljer</string>

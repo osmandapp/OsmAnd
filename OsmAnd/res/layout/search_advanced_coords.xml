@@ -444,6 +444,104 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/swissGridEastLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="16dp"
+                    android:visibility="gone">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/swissGridEastImage"
+                        android:layout_width="54dp"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_action_coordinates_latitude"/>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginEnd="16dp">
+
+                            <EditText
+                                android:id="@+id/swissGridEastEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="East Coordinate"
+                                android:imeOptions="actionNext"
+                                tools:text="22.12345"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <ImageButton
+                            android:id="@+id/swissGridEastClearButton"
+                            style="@style/Widget.AppCompat.ActionButton"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_gravity="end"
+                            android:layout_marginRight="4dp"
+                            android:contentDescription="@string/shared_string_clear"
+                            app:srcCompat="@drawable/ic_action_remove_dark"
+                            android:layout_marginEnd="4dp" />
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/swissGridNorthLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="16dp"
+                    android:visibility="gone">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/swissGridNorthImage"
+                        android:layout_width="54dp"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_action_coordinates_longitude"/>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginEnd="16dp">
+
+                            <EditText
+                                android:id="@+id/swissGridNorthEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="North Coordinate"
+                                android:imeOptions="actionDone"
+                                tools:text="22.12345"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <ImageButton
+                            android:id="@+id/swissGridNorthClearButton"
+                            style="@style/Widget.AppCompat.ActionButton"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_gravity="end"
+                            android:layout_marginRight="4dp"
+                            android:contentDescription="@string/shared_string_clear"
+                            app:srcCompat="@drawable/ic_action_remove_dark"
+                            android:layout_marginEnd="4dp" />
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/formatLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

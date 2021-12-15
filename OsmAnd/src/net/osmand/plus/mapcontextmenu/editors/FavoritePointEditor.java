@@ -19,6 +19,11 @@ public class FavoritePointEditor extends PointEditor {
 	}
 
 	@Override
+	public boolean isProcessingTemplate() {
+		return false;
+	}
+
+	@Override
 	public String getFragmentTag() {
 		return TAG;
 	}
