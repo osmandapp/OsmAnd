@@ -148,7 +148,7 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 			String fileName = gpxInfoList.get(position).getFileName();
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				MeasurementToolFragment.showInstance(activity.getSupportFragmentManager(), fileName);
+				MeasurementToolFragment.showInstance(activity.getSupportFragmentManager(), fileName, true);
 			}
 		}
 		dismiss();
@@ -199,7 +199,7 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 				dismiss();
 				MapActivity mapActivity = (MapActivity) getActivity();
 				if (mapActivity != null) {
-					MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), gpxFileName);
+					MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), gpxFileName, true);
 				}
 			}
 
