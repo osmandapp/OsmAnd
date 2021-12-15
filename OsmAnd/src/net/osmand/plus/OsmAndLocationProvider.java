@@ -599,8 +599,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			c.updateCompassValue(heading);
 		}
 	}
-
-	@Nullable
+	
 	public Float getHeading() {
 		return heading;
 	}

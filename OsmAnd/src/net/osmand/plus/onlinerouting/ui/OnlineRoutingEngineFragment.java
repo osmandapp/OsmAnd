@@ -492,7 +492,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		List<LatLon> path = new ArrayList<>();
 		path.add(selectedLocation.getCityCenterLatLon());
 		path.add(selectedLocation.getCityAirportLatLon());
-		return engine.getFullUrl(path, 0f);
+		return engine.getFullUrl(path);
 	}
 
 	private void testEngineWork() {

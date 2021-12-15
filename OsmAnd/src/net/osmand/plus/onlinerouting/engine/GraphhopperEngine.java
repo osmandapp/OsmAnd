@@ -85,7 +85,7 @@ public class GraphhopperEngine extends JsonOnlineRoutingEngine {
 
 	@Override
 	protected void makeFullUrl(@NonNull StringBuilder sb,
-	                           @NonNull List<LatLon> path, @Nullable Float heading) {
+	                           @NonNull List<LatLon> path) {
 		sb.append("?");
 		for (int i = 0; i < path.size(); i++) {
 			LatLon point = path.get(i);
