@@ -1,9 +1,9 @@
 package net.osmand.plus.myplaces;
 
-import static net.osmand.plus.track.helpers.GpxSelectionHelper.CURRENT_TRACK;
 import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.openTrack;
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.CURRENT_TRACK;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 import static net.osmand.util.Algorithms.formatDuration;
 import static net.osmand.util.Algorithms.objectEquals;
@@ -17,7 +17,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -47,12 +46,8 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.plugins.osmedit.dialogs.UploadMultipleGPXBottomSheet;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.plus.utils.FileUtils;
-import net.osmand.plus.utils.FileUtils.RenameCallback;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
@@ -61,10 +56,29 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.OsmAndConstants;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.base.OsmandExpandableListFragment;
+import net.osmand.plus.base.SelectionBottomSheet.DialogStateListener;
+import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
+import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
+import net.osmand.plus.myplaces.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.plugins.osmedit.asynctasks.UploadGPXFilesTask.UploadGpxListener;
+import net.osmand.plus.plugins.osmedit.dialogs.UploadMultipleGPXBottomSheet;
+import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -72,28 +86,13 @@ import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectGpxTaskListener;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.OsmAndConstants;
-import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.track.helpers.SavingTrackHelper;
-import net.osmand.plus.base.OsmandExpandableListFragment;
-import net.osmand.plus.base.SelectionBottomSheet.DialogStateListener;
-import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
-import net.osmand.plus.settings.enums.TracksSortByMode;
-import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
-import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.myplaces.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
-import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
-import net.osmand.plus.plugins.osmedit.asynctasks.UploadGPXFilesTask.UploadGpxListener;
-import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.FileUtils.RenameCallback;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
@@ -368,11 +367,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		listView.addFooterView(footerView);
 		emptyView = v.findViewById(android.R.id.empty);
 		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
-		if (Build.VERSION.SDK_INT >= 18) {
-			emptyImageView.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_empty_state_trip_day : R.drawable.ic_empty_state_trip_night);
-		} else {
-			emptyImageView.setVisibility(View.INVISIBLE);
-		}
+		emptyImageView.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_empty_state_trip_day : R.drawable.ic_empty_state_trip_night);
 		Button importButton = (Button) emptyView.findViewById(R.id.import_button);
 		importButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -773,7 +768,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		for (GpxInfo gpxInfo : selectedItems) {
 			SelectableItem item = new SelectableItem();
 			item.setObject(gpxInfo);
-			item.setTitle(gpxInfo.name);
+			item.setTitle(gpxInfo.getName());
 			item.setIconId(R.drawable.ic_notification_track);
 
 			items.add(item);
@@ -1714,7 +1709,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				if (file == null) {
 					return -1;
 				}
-				sz = (int) ((file.length() + 512) >> 10);
+				sz = (int) ((file.length() + 512));
 			}
 			return sz;
 		}
@@ -1782,7 +1777,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			String size = "";
 
 			if (child.getSize() >= 0) {
-				size = AndroidUtils.formatSize(v.getContext(), child.getSize() * 1024l);
+				size = AndroidUtils.formatSize(v.getContext(), child.getSize());
 			}
 			DateFormat df = app.getResourceManager().getDateFormat();
 			long fd = child.getFileDate();
