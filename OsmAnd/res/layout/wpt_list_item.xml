@@ -21,7 +21,8 @@
 		android:id="@+id/container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="?attr/expandable_list_item_background"
+		android:background="?attr/list_background_color"
+		android:foreground="?attr/selectableItemBackground"
 		android:minHeight="@dimen/card_row_min_height">
 
 		<View
