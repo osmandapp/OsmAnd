@@ -452,6 +452,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 					? getColoredIcon(R.drawable.ic_action_folder_hidden, ColorUtilities.getSecondaryTextColorId(nightMode))
 					: getContentIcon(R.drawable.ic_action_folder);
 			ImageView groupImage = row.findViewById(R.id.icon);
+			Resources resources = app.getResources();
 			int iconSize = resources.getDimensionPixelSize(R.dimen.standard_icon_size);
 			int marginStart = resources.getDimensionPixelSize(R.dimen.list_content_padding);
 			int marginEnd = resources.getDimensionPixelSize(R.dimen.list_content_padding_large);
@@ -555,6 +556,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			title.setText(gpxItem.name);
 
 			ImageView pointIcon = row.findViewById(R.id.icon);
+			Resources resources = app.getResources();
 			int iconSize = resources.getDimensionPixelSize(R.dimen.favorites_my_places_icon_size);
 			int marginStart = resources.getDimensionPixelSize(R.dimen.content_padding_small);
 			int marginEnd = resources.getDimensionPixelSize(R.dimen.list_content_padding_large);
