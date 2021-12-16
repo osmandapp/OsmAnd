@@ -2,16 +2,22 @@ package net.osmand.util;
 /* Can be commented out in order to run the main function separately */
 
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.text.DateFormatSymbols;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 import gnu.trove.list.array.TIntArrayList;
 
@@ -33,12 +39,16 @@ public class OpeningHoursParser {
 	private static final int WITHOUT_TIME_LIMIT = -1;
 	private static final int CURRENT_DAY_TIME_LIMIT = -2;
 
+	private static boolean twelveHourFormatting;
+	private static DateFormat twelveHourFormatter;
+	private static DateFormat twelveHourFormatterAmPm;
+
 	static {
 		DateFormatSymbols dateFormatSymbols = DateFormatSymbols.getInstance(Locale.US);
 		monthsStr = dateFormatSymbols.getShortMonths();
 		daysStr = getLettersStringArray(dateFormatSymbols.getShortWeekdays(), 2);
 
-		initLocalStrings();
+		updateLocale();
 
 		additionalStrings.put("off", "off");
 		additionalStrings.put("is_open", "Open");
@@ -51,16 +61,39 @@ public class OpeningHoursParser {
 		additionalStrings.put("will_open_on", "Will open on");
 	}
 
-	public static void initLocalStrings() {
-		initLocalStrings(null);
+	private static void updateLocale() {
+		updateLocale(null);
 	}
 
-	public static void initLocalStrings(Locale locale) {
-		DateFormatSymbols dateFormatSymbols = locale == null
-				? DateFormatSymbols.getInstance()
-				: DateFormatSymbols.getInstance(locale);
+	public static void updateLocale(Locale locale) {
+		Locale selectedLocale = locale != null ? locale : Locale.getDefault();
+		initLocalStrings(selectedLocale);
+		defineFormattingType(selectedLocale);
+		initTwelveHourFormatters(selectedLocale);
+	}
+
+	private static void initLocalStrings(Locale locale) {
+		DateFormatSymbols dateFormatSymbols = DateFormatSymbols.getInstance(locale);
 		localMothsStr = dateFormatSymbols.getShortMonths();
 		localDaysStr = getLettersStringArray(dateFormatSymbols.getShortWeekdays(), 3);
+	}
+
+	private static void defineFormattingType(Locale locale) {
+		DateFormat amPmFormat = new SimpleDateFormat("h:mm", Locale.US);
+		DateFormat localeFormat = SimpleDateFormat.getTimeInstance(DateFormat.SHORT, locale);
+		try {
+			twelveHourFormatting = localeFormat.format(amPmFormat.parse("12:00 AM")).contains("12");
+		} catch (ParseException e) {
+			twelveHourFormatting = false;
+		}
+	}
+
+	private static void initTwelveHourFormatters(Locale locale) {
+		twelveHourFormatter = new SimpleDateFormat("h:mm", locale);
+		twelveHourFormatterAmPm = new SimpleDateFormat("h:mm a", locale);
+		TimeZone timeZone = TimeZone.getTimeZone("UTC");
+		twelveHourFormatter.setTimeZone(timeZone);
+		twelveHourFormatterAmPm.setTimeZone(timeZone);
 	}
 
 	/**
@@ -1221,13 +1254,7 @@ public class OpeningHoursParser {
 						if (i > 0) {
 							b.append(", ");
 						}
-						int stHour = startTime / 60;
-						int stTime = startTime - stHour * 60;
-						int enHour = endTime / 60;
-						int enTime = endTime - enHour * 60;
-						formatTime(stHour, stTime, b);
-						b.append("-"); //$NON-NLS-1$
-						formatTime(enHour, enTime, b);
+						formatRangeTime(startTime, endTime, b);
 					}
 					if (off) {
 						b.append(" ").append(offStr);
@@ -1549,21 +1576,21 @@ public class OpeningHoursParser {
 			if (!thisDay && !previousDay) {
 				return 0;
 			}
-			int time = cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE); // Time in minutes
+			int currentTimeMinutes = cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE);
 			for (i = 0; i < startTimes.size(); i++) {
 				int startTime = this.startTimes.get(i);
 				int endTime = this.endTimes.get(i);
 				if (startTime < endTime || endTime == -1) {
 					// one day working like 10:00-20:00 (not 20:00-04:00)
-					if (time >= startTime && (endTime == -1 || time <= endTime) && thisDay) {
+					if (currentTimeMinutes >= startTime && (endTime == -1 || currentTimeMinutes <= endTime) && thisDay) {
 						return off ? -1 : 1;
 					}
 				} else {
 					// opening_hours includes day wrap like
 					// "We 20:00-03:00" or "We 07:00-07:00"
-					if (time >= startTime && thisDay) {
+					if (currentTimeMinutes >= startTime && thisDay) {
 						return off ? -1 : 1;
-					} else if (time < endTime && previousDay) {
+					} else if (currentTimeMinutes < endTime && previousDay) {
 						return off ? -1 : 1;
 					}
 				}
@@ -2218,23 +2245,46 @@ public class OpeningHoursParser {
 		}
 	}
 
-	private static void formatTime(int h, int t, StringBuilder b) {
-		if (h < 10) {
-			b.append("0"); //$NON-NLS-1$
+	private static void formatRangeTime(int startMinute, int endMinute, StringBuilder stringBuilder) {
+		int startHour = (startMinute / 60) % 24;
+		int endHour = (endMinute / 60) % 24;
+		boolean sameDayPart = Math.max(startHour, endHour) < 12 || Math.min(startHour, endHour) >= 12;
+		if (twelveHourFormatting && sameDayPart) {
+			formatTime(startMinute, stringBuilder, false);
+			stringBuilder.append("–");
+			formatTime(endMinute, stringBuilder, true);
+		} else {
+			formatTime(startMinute, stringBuilder);
+			stringBuilder.append("–");
+			formatTime(endMinute, stringBuilder);
 		}
-		b.append(h).append(":"); //$NON-NLS-1$
-		if (t < 10) {
-			b.append("0"); //$NON-NLS-1$
-		}
-		b.append(t);
 	}
 
 	private static void formatTime(int minutes, StringBuilder sb) {
-		int hour = minutes / 60;
-		int time = minutes - hour * 60;
-		formatTime(hour, time, sb);
+		formatTime(minutes, sb, true);
 	}
 
+	private static void formatTime(int minutes, StringBuilder sb, boolean appendAmPM) {
+		int hour = minutes / 60;
+		int time = minutes - hour * 60;
+		formatTime(hour, time, sb, appendAmPM);
+	}
 
-	
+	private static void formatTime(int hours, int minutes, StringBuilder b, boolean appendAmPm) {
+		if (twelveHourFormatting) {
+			long millis = TimeUnit.HOURS.toMillis(hours) + TimeUnit.MINUTES.toMillis(minutes);
+			Date date = new Date(millis);
+			String time = appendAmPm ? twelveHourFormatterAmPm.format(date) : twelveHourFormatter.format(date);
+			b.append(time);
+		} else {
+			if (hours < 10) {
+				b.append("0"); //$NON-NLS-1$
+			}
+			b.append(hours).append(":"); //$NON-NLS-1$
+			if (minutes < 10) {
+				b.append("0"); //$NON-NLS-1$
+			}
+			b.append(minutes);
+		}
+	}
 }
