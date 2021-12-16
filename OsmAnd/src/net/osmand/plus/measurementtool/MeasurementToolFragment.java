@@ -150,10 +150,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private ImageView undoBtn;
 	private ImageView redoBtn;
 	private ImageView mainIcon;
-	private String fileName;
 	private OnBackPressedCallback onBackPressedCallback;
 	private OnGlobalLayoutListener widgetsLayoutListener;
+
+	private String fileName;
 	private boolean showSnapWarning;
+	private boolean adjustMapPosition = true;
 
 	private InfoType currentInfoType;
 
@@ -747,10 +749,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	public boolean isInEditMode() {
 		return !isPlanRouteMode() && !editingCtx.isNewData() && !isDirectionMode() && !isFollowTrackMode();
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
 	}
 
 	public boolean isShowSnapWarning() {
@@ -1360,11 +1358,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		GpxData gpxData = setupGpxData(gpxFile);
 		initMeasurementMode(gpxData, true);
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && gpxData != null) {
+		if (adjustMapPosition && mapActivity != null && gpxData != null) {
 			QuadRect qr = gpxData.getRect();
 			mapActivity.getMapView().fitRectToMap(qr.left, qr.right, qr.top, qr.bottom,
 					(int) qr.width(), (int) qr.height(), 0);
 		}
+		adjustMapPosition = true;
 	}
 
 	@Nullable
@@ -2081,9 +2080,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return showFragment(fragment, fragmentManager);
 	}
 
-	public static boolean showInstance(FragmentManager fragmentManager, String fileName) {
+	public static boolean showInstance(FragmentManager fragmentManager, String fileName, boolean adjustMapPosition) {
 		MeasurementToolFragment fragment = new MeasurementToolFragment();
-		fragment.setFileName(fileName);
+		fragment.fileName = fileName;
+		fragment.adjustMapPosition = adjustMapPosition;
 		fragment.setMode(PLAN_ROUTE_MODE, true);
 		return showFragment(fragment, fragmentManager);
 	}

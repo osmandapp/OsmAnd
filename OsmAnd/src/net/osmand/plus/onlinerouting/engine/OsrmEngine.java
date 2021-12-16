@@ -80,8 +80,7 @@ public class OsrmEngine extends JsonOnlineRoutingEngine {
 	}
 
 	@Override
-	protected void makeFullUrl(@NonNull StringBuilder sb,
-	                           @NonNull List<LatLon> path, @Nullable Float heading) {
+	protected void makeFullUrl(@NonNull StringBuilder sb, @NonNull List<LatLon> path, @Nullable Float startBearing) {
 		String vehicleKey = getVehicleKeyForUrl();
 		if (!isEmpty(vehicleKey)) {
 			sb.append(vehicleKey).append('/');
