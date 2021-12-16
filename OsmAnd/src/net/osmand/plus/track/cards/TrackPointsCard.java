@@ -2,7 +2,6 @@ package net.osmand.plus.track.cards;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -22,7 +21,6 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -425,7 +423,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			View row = convertView;
 			if (row == null) {
 				LayoutInflater inflater = LayoutInflater.from(context);
-				row = inflater.inflate(R.layout.wpt_list_item, parent, false);
+				row = inflater.inflate(R.layout.track_points_group_item, parent, false);
 			}
 
 			row.setOnClickListener(v -> {
@@ -449,14 +447,6 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 					? getColoredIcon(R.drawable.ic_action_folder_hidden, ColorUtilities.getSecondaryTextColorId(nightMode))
 					: getContentIcon(R.drawable.ic_action_folder);
 			ImageView groupImage = row.findViewById(R.id.icon);
-			Resources resources = app.getResources();
-			int iconSize = resources.getDimensionPixelSize(R.dimen.standard_icon_size);
-			int marginStart = resources.getDimensionPixelSize(R.dimen.list_content_padding);
-			int marginEnd = resources.getDimensionPixelSize(R.dimen.list_content_padding_large);
-			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(iconSize, iconSize);
-			AndroidUtils.setMargins(params,marginStart,0,marginEnd,0);
-			groupImage.setLayoutParams(params);
-			groupImage.requestLayout();
 			groupImage.setImageDrawable(icon);
 
 			boolean expanded = listView.isGroupExpanded(groupPosition);
@@ -481,15 +471,6 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			options.setOnClickListener(v ->
 					EditTrackGroupDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
 							group, mapActivity.getTrackMenuFragment()));
-
-			AndroidUiHelper.updateVisibility(expandImage, true);
-			AndroidUiHelper.updateVisibility(row.findViewById(R.id.divider), true);
-			AndroidUiHelper.updateVisibility(row.findViewById(R.id.waypoint_description), false);
-			AndroidUiHelper.updateVisibility(row.findViewById(R.id.list_divider), false);
-			AndroidUiHelper.updateVisibility(row.findViewById(R.id.group_divider), false);
-			AndroidUiHelper.updateVisibility(row.findViewById(R.id.vertical_divider), true);
-			AndroidUiHelper.updateVisibility(row.findViewById(R.id.location_data), false);
-
 			return row;
 		}
 
@@ -541,7 +522,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			View row = convertView;
 			if (row == null) {
 				LayoutInflater inflater = LayoutInflater.from(view.getContext());
-				row = inflater.inflate(R.layout.wpt_list_item, parent, false);
+				row = inflater.inflate(R.layout.track_points_list_item, parent, false);
 			}
 
 			final GpxDisplayGroup group = getGroup(groupPosition);
@@ -563,27 +544,23 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			if (selectionMode) {
 				checkBox.setVisibility(View.VISIBLE);
 				checkBox.setChecked(selectedItems.get(group.getType()) != null && selectedItems.get(group.getType()).contains(gpxItem));
-				checkBox.setOnClickListener(new View.OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						if (checkBox.isChecked()) {
-							Set<GpxDisplayItem> set = selectedItems.get(group.getType());
-							if (set != null) {
-								set.add(gpxItem);
-							} else {
-								set = new LinkedHashSet<>();
-								set.add(gpxItem);
-								selectedItems.put(group.getType(), set);
-							}
+				checkBox.setOnClickListener(v -> {
+					if (checkBox.isChecked()) {
+						Set<GpxDisplayItem> set = selectedItems.get(group.getType());
+						if (set != null) {
+							set.add(gpxItem);
 						} else {
-							Set<GpxDisplayItem> set = selectedItems.get(group.getType());
-							if (set != null) {
-								set.remove(gpxItem);
-							}
+							set = new LinkedHashSet<>();
+							set.add(gpxItem);
+							selectedItems.put(group.getType(), set);
 						}
-						updateSelectionMode();
+					} else {
+						Set<GpxDisplayItem> set = selectedItems.get(group.getType());
+						if (set != null) {
+							set.remove(gpxItem);
+						}
 					}
+					updateSelectionMode();
 				});
 			}
 			if (GpxDisplayItemType.TRACK_POINTS == group.getType()) {
@@ -600,9 +577,6 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 
 			AndroidUiHelper.updateVisibility(icon, !selectionMode);
 			AndroidUiHelper.updateVisibility(checkBox, selectionMode);
-			AndroidUiHelper.updateVisibility(row.findViewById(R.id.divider), false);
-			AndroidUiHelper.updateVisibility(row.findViewById(R.id.vertical_divider), false);
-			AndroidUiHelper.updateVisibility(row.findViewById(R.id.options), false);
 			AndroidUiHelper.updateVisibility(row.findViewById(R.id.list_divider), childPosition != 0);
 
 			return row;
