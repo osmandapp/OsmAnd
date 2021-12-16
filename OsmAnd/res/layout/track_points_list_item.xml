@@ -6,31 +6,12 @@
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
 
-	<LinearLayout
-		android:id="@+id/group_divider"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:visibility="gone"
-		tools:visibility="visible">
-
-		<include layout="@layout/list_item_divider" />
-
-	</LinearLayout>
-
 	<FrameLayout
-		android:id="@+id/container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="?attr/list_background_color"
 		android:foreground="?attr/selectableItemBackground"
 		android:minHeight="@dimen/card_row_min_height">
-
-		<View
-			android:id="@+id/divider"
-			android:layout_width="match_parent"
-			android:layout_height="1dp"
-			android:background="?attr/dashboard_divider"
-			android:visibility="gone" />
 
 		<View
 			android:id="@+id/list_divider"
@@ -52,7 +33,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginStart="@dimen/content_padding"
-				android:layout_marginEnd="@dimen/favorites_icon_right_margin"
+				android:layout_marginEnd="@dimen/list_content_padding_large"
 				android:focusable="false"
 				android:visibility="gone"
 				tools:visibility="visible" />
@@ -151,11 +132,7 @@
 						tools:text="Frunze street" />
 
 				</LinearLayout>
-
 			</LinearLayout>
-
 		</LinearLayout>
-
 	</FrameLayout>
-
 </LinearLayout>
