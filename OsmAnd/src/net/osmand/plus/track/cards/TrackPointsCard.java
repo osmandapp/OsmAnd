@@ -92,7 +92,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 	private View addActionsView;
 	private View addWaypointActionView;
 	private View deleteWaypointActionView;
-
+	private Resources resources = app.getResources();
 	private Location lastLocation;
 	private float lastHeading;
 	private boolean locationDataUpdateAllowed = true;
@@ -474,7 +474,6 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 					? getColoredIcon(R.drawable.ic_action_folder_hidden, ColorUtilities.getSecondaryTextColorId(nightMode))
 					: getContentIcon(R.drawable.ic_action_folder);
 			ImageView groupImage = row.findViewById(R.id.icon);
-			Resources resources = app.getResources();
 			int iconSize = resources.getDimensionPixelSize(R.dimen.standard_icon_size);
 			int marginStart = resources.getDimensionPixelSize(R.dimen.list_content_padding);
 			int marginEnd = resources.getDimensionPixelSize(R.dimen.list_content_padding_large);
@@ -490,6 +489,9 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 
 			final CheckBox checkBox = row.findViewById(R.id.toggle_item);
 			if (selectionMode) {
+				AndroidUtils.setMargins(params,0,0,marginEnd,0);
+				groupImage.setLayoutParams(params);
+				groupImage.requestLayout();
 				checkBox.setChecked(selectedGroups.contains(groupPosition));
 				checkBox.setOnClickListener(v -> {
 					List<GpxDisplayItem> items = itemGroups.get(group);
@@ -574,6 +576,15 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 
 			TextView title = row.findViewById(R.id.label);
 			title.setText(gpxItem.name);
+
+			ImageView pointIcon = row.findViewById(R.id.icon);
+			int iconSize = resources.getDimensionPixelSize(R.dimen.favorites_my_places_icon_size);
+			int marginStart = resources.getDimensionPixelSize(R.dimen.content_padding_small);
+			int marginEnd = resources.getDimensionPixelSize(R.dimen.list_content_padding_large);
+			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(iconSize, iconSize);
+			AndroidUtils.setMargins(params,marginStart,0,marginEnd,0);
+			pointIcon.setLayoutParams(params);
+			pointIcon.requestLayout();
 
 			TextView description = row.findViewById(R.id.waypoint_description);
 			if (!Algorithms.isEmpty(gpxItem.description)) {

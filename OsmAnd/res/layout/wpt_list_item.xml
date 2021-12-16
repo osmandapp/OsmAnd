@@ -44,16 +44,13 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
 			android:gravity="center_vertical"
-			android:orientation="horizontal"
-			android:paddingStart="@dimen/list_content_padding"
-			android:paddingLeft="@dimen/list_content_padding"
-			android:paddingEnd="0dp"
-			android:paddingRight="0dp">
+			android:orientation="horizontal">
 
 			<androidx.appcompat.widget.AppCompatCheckBox
 				android:id="@+id/toggle_item"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/list_content_padding"
 				android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 				android:focusable="false"
 				android:visibility="gone"
@@ -61,9 +58,9 @@
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/icon"
-				android:layout_marginStart="@dimen/content_padding_small"
 				android:layout_width="@dimen/favorites_my_places_icon_size"
 				android:layout_height="@dimen/favorites_my_places_icon_size"
+				android:layout_marginStart="@dimen/list_content_padding"
 				android:layout_marginEnd="@dimen/list_content_padding_large"
 				tools:srcCompat="@drawable/ic_action_folder" />
 
