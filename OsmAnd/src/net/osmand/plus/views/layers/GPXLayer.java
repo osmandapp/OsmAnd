@@ -829,11 +829,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private boolean isPointHidden(SelectedGpxFile selectedGpxFile, WptPt point) {
-		if (!Algorithms.isEmpty(selectedGpxFile.getHiddenGroups())) {
-			return selectedGpxFile.isGroupHidden(point.category);
-		} else {
-			return false;
-		}
+		return selectedGpxFile.isGroupHidden(point.category);
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
