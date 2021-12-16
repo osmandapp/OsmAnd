@@ -53,7 +53,7 @@
 				android:id="@+id/toggle_item"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginEnd="@dimen/favorites_icon_right_margin"
+				android:layout_marginEnd="@dimen/list_content_padding_large"
 				android:focusable="false"
 				android:visibility="gone"
 				tools:visibility="visible" />
