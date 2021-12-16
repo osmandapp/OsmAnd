@@ -2262,7 +2262,7 @@ public class OpeningHoursParser {
 
 	private static void formatTime(int hours, int minutes, StringBuilder b, boolean appendAmPm) {
 		if (twelveHourFormatting) {
-			int millis = (hours * 60 + minutes) * 60 * 1000;
+			long millis = (hours * 60L + minutes) * 60 * 1000;
 			Date date = new Date(millis);
 			String time = appendAmPm ? twelveHourFormatterAmPm.format(date) : twelveHourFormatter.format(date);
 			b.append(time);
