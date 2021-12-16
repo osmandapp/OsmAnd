@@ -50,7 +50,23 @@
 		android:xlargeScreens="true" android:anyDensity="true" />
 
 	<queries>
+		<package android:name="net.osmand.srtmPlugin" />
+		<package android:name="net.osmand.srtmPlugin.paid" />
+		<package android:name="net.osmand.parkingPlugin" />
+		<package android:name="net.osmand.skimapsPlugin" />
+		<package android:name="net.osmand.nauticalPlugin" />
+
 		<package android:name="btools.routingapp" />
+		<package android:name="com.mapillary.app" />
+
+		<package android:name="org.bruxo.gpsconnected" />
+		<package android:name="com.eclipsim.gpsstatus2" />
+		<package android:name="com.chartcross.gpstest" />
+		<package android:name="com.chartcross.gpstestplus" />
+		<package android:name="com.android.gpstest" />
+		<package android:name="com.vonglasow.michael.satstat" />
+		<package android:name="com.android.gpstest.osmdroid" />
+
 		<intent>
 			<action android:name="android.intent.action.TTS_SERVICE" />
 		</intent>

@@ -57,8 +57,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 	}
 
 	@Override
-	protected void makeFullUrl(@NonNull StringBuilder sb,
-	                           @NonNull List<LatLon> path, @Nullable Float heading) {
+	protected void makeFullUrl(@NonNull StringBuilder sb, @NonNull List<LatLon> path, @Nullable Float startBearing) {
 		sb.append("?");
 		for (int i = 0; i < path.size(); i++) {
 			LatLon point = path.get(i);
@@ -70,11 +69,11 @@ public class GpxEngine extends OnlineRoutingEngine {
 				sb.append('&');
 			}
 		}
-		if (heading != null) {
+		if (startBearing != null) {
 			if (sb.charAt(sb.length() - 1) != '?') {
 				sb.append('&');
 			}
-			sb.append("heading=").append(heading.intValue());
+			sb.append("heading=").append(startBearing.intValue());
 		}
 	}
 

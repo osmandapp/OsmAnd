@@ -981,16 +981,16 @@ public class GpxSelectionHelper {
 			return Collections.unmodifiableSet(hiddenGroups);
 		}
 
-		public void addHiddenGroups(String group) {
-			hiddenGroups.add(group);
+		public void addHiddenGroups(@Nullable String group) {
+			hiddenGroups.add(Algorithms.isBlank(group) ? null : group);
 		}
 
-		public void removeHiddenGroups(String group) {
-			hiddenGroups.remove(group);
+		public void removeHiddenGroups(@Nullable String group) {
+			hiddenGroups.remove(Algorithms.isBlank(group) ? null : group);
 		}
 
-		public boolean isGroupHidden(@Nullable String groupName) {
-			return hiddenGroups.contains(groupName);
+		public boolean isGroupHidden(@Nullable String group) {
+			return hiddenGroups.contains(Algorithms.isBlank(group) ? null : group);
 		}
 
 		public GPXFile getGpxFile() {
@@ -1159,10 +1159,6 @@ public class GpxSelectionHelper {
 
 		public int getSplitTime() {
 			return splitTime;
-		}
-
-		public String getGroupName() {
-			return name;
 		}
 
 		public void noSplit(OsmandApplication app) {

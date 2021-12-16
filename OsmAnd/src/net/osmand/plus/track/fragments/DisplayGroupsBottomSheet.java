@@ -111,7 +111,7 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private void updateStateButton() {
 		TextView title = stateButton.findViewById(R.id.state_button_text);
-		if (isAnyVisible()) {
+		if (isAnyGroupVisible()) {
 			title.setText(R.string.shared_string_hide_all);
 		} else {
 			title.setText(R.string.shared_string_show_all);
@@ -133,9 +133,12 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 			UiUtilities.setupCompoundButton(cb, nightMode, CompoundButtonType.GLOBAL);
 
 			view.setOnClickListener(v -> {
-				updateGroupVisibility(item.getTitle(), !cb.isChecked());
-				callback.onPointGroupsVisibilityChanged();
-				fullUpdate();
+				if (item.getObject() instanceof GpxDisplayGroup) {
+					GpxDisplayGroup group = ((GpxDisplayGroup) item.getObject());
+					updateGroupVisibility(group.getName(), !cb.isChecked());
+					callback.onPointGroupsVisibilityChanged();
+					fullUpdate();
+				}
 			});
 
 			listContainer.addView(view);
@@ -145,7 +148,7 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private void setupStateButton() {
 		stateButton.setOnClickListener(view -> {
-			boolean newState = !isAnyVisible();
+			boolean newState = !isAnyGroupVisible();
 			for (String groupName : getGroupsNames()) {
 				updateGroupVisibility(groupName, newState);
 			}
@@ -165,21 +168,23 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 	private List<String> getGroupsNames() {
 		List<String> names = new ArrayList<>();
 		for (SelectableItem item : uiItems) {
-			names.add(item.getTitle());
+			if (item.getObject() instanceof GpxDisplayGroup) {
+				GpxDisplayGroup group = ((GpxDisplayGroup) item.getObject());
+				names.add(group.getName());
+			}
 		}
 		return names;
 	}
 
 	private void fullUpdate() {
 		updateStateButton();
-		updateSizeView();
+		updateGroupsNumberRatio();
 		updateList();
 	}
 
-	private void updateSizeView() {
+	private void updateGroupsNumberRatio() {
+		int visibleCount = getVisibleGroupsNumber();
 		int totalCount = uiItems.size();
-		int hiddenCount = selectedGpxFile.getHiddenGroups().size();
-		int visibleCount = totalCount - hiddenCount;
 		String description = getString(
 				R.string.ltr_or_rtl_combine_via_slash,
 				String.valueOf(visibleCount),
@@ -195,7 +200,11 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 			if (view == null) {
 				continue;
 			}
-			boolean isVisible = isVisible(item.getTitle());
+
+			GpxDisplayGroup group = item.getObject() instanceof GpxDisplayGroup
+					? ((GpxDisplayGroup) item.getObject())
+					: null;
+			boolean isVisible = group != null && !selectedGpxFile.isGroupHidden(group.getName());
 			int iconId = isVisible ? R.drawable.ic_action_folder : R.drawable.ic_action_folder_hidden;
 			int iconColor = item.getColor();
 			if (iconColor == 0 || !isVisible) {
@@ -208,17 +217,21 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 	}
 
-	private boolean isAnyVisible() {
-		for (String groupName : getGroupsNames()) {
-			if (isVisible(groupName)) {
-				return true;
+	private int getVisibleGroupsNumber() {
+		int visibleGroupsCount = 0;
+		for (SelectableItem selectableItem : uiItems) {
+			GpxDisplayGroup group = selectableItem.getObject() instanceof GpxDisplayGroup
+					? ((GpxDisplayGroup) selectableItem.getObject())
+					: null;
+			if (group != null && !selectedGpxFile.isGroupHidden(group.getName())) {
+				visibleGroupsCount++;
 			}
 		}
-		return false;
+		return visibleGroupsCount;
 	}
 
-	private boolean isVisible(String groupName) {
-		return !selectedGpxFile.isGroupHidden(groupName);
+	private boolean isAnyGroupVisible() {
+		return getVisibleGroupsNumber() > 0;
 	}
 
 	@Override

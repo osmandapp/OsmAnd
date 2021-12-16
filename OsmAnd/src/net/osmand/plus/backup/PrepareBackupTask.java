@@ -173,7 +173,7 @@ public class PrepareBackupTask {
 						onTaskFinished(TaskType.COLLECT_REMOTE_FILES);
 					}
 			);
-		} catch (IllegalArgumentException e) {
+		} catch (IllegalStateException e) {
 			String message = e.getMessage();
 			if (message != null) {
 				onError(message);

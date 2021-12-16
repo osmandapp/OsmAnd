@@ -23,7 +23,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
@@ -36,19 +35,9 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ChartPointsHelper;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxDbHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.PointImageDrawable;
-import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -63,7 +52,18 @@ import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpsFilterHelper;
+import net.osmand.plus.track.helpers.GpxDbHelper;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.Renderable;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IMoveObjectProvider;
@@ -534,8 +534,11 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 							&& wpt != contextMenuLayer.getMoveableObject() && !isPointHidden(g, wpt)) {
 						pointFileMap.put(wpt, g);
 						MapMarker marker = null;
-						if (synced && (marker = mapMarkersHelper.getMapMarker(wpt)) == null) {
-							continue;
+						if (synced) {
+							marker = mapMarkersHelper.getMapMarker(wpt);
+							if (marker == null || marker.history && !view.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
+								continue;
+							}
 						}
 						cache.add(wpt);
 						float x = tileBox.getPixXFromLatLon(wpt.lat, wpt.lon);
@@ -826,11 +829,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private boolean isPointHidden(SelectedGpxFile selectedGpxFile, WptPt point) {
-		if (!Algorithms.isEmpty(selectedGpxFile.getHiddenGroups())) {
-			return selectedGpxFile.isGroupHidden(point.category);
-		} else {
-			return false;
-		}
+		return selectedGpxFile.isGroupHidden(point.category);
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {

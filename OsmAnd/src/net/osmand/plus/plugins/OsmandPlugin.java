@@ -946,7 +946,7 @@ public abstract class OsmandPlugin {
 		return false;
 	}
 
-	public static boolean isPackageInstalled(String packageInfo, Context ctx) {
+	public static boolean isPackageInstalled(@Nullable String packageInfo, @NonNull Context ctx) {
 		if (packageInfo == null) {
 			return false;
 		}
@@ -954,6 +954,7 @@ public abstract class OsmandPlugin {
 		try {
 			installed = ctx.getPackageManager().getPackageInfo(packageInfo, 0) != null;
 		} catch (NameNotFoundException e) {
+			LOG.error("Package not found: " + packageInfo, e);
 		}
 		return installed;
 	}

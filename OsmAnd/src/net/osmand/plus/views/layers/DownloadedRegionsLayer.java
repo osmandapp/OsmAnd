@@ -396,7 +396,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		while (it.hasNext()) {
 			BinaryMapDataObject o = it.next();
 			if (tileBox.getZoom() >= ZOOM_TO_SHOW_SELECTION) {
-				if (!osmandRegions.contain(o, (left + right) / 2, (top + bottom) / 2)) {
+				if (!osmandRegions.contain(o, left / 2 + right / 2, top / 2 + bottom / 2)) {
 					it.remove();
 				}
 			}

@@ -53,14 +53,12 @@ public class PointsGroupsCard extends MapBaseCard {
 		int iconColorId = ColorUtilities.getSecondaryIconColorId(nightMode);
 		int smallPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
 
-		Set<String> hidden = selectedGpxFile.getHiddenGroups();
 		for (GpxDisplayGroup group : displayGroups) {
-			String categoryName = group.getName();
-			if (Algorithms.isEmpty(categoryName)) {
-				categoryName = app.getString(R.string.shared_string_gpx_points);
-			}
-			HorizontalSelectionItem item = new HorizontalSelectionItem(categoryName, group);
-			if (hidden.contains(categoryName)) {
+			String categoryDisplayName = Algorithms.isEmpty(group.getName())
+					? app.getString(R.string.shared_string_gpx_points)
+					: group.getName();
+			HorizontalSelectionItem item = new HorizontalSelectionItem(categoryDisplayName, group);
+			if (selectedGpxFile.isGroupHidden(group.getName())) {
 				item.setIconId(R.drawable.ic_action_hide_16);
 				item.setIconColorId(iconColorId);
 				item.setIconSizePx(iconSizePx);
