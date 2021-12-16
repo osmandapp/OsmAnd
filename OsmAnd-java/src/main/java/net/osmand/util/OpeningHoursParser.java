@@ -4,7 +4,6 @@ package net.osmand.util;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +16,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
 
 import gnu.trove.list.array.TIntArrayList;
 
@@ -48,7 +46,7 @@ public class OpeningHoursParser {
 		monthsStr = dateFormatSymbols.getShortMonths();
 		daysStr = getLettersStringArray(dateFormatSymbols.getShortWeekdays(), 2);
 
-		updateLocale();
+		initLocalStrings();
 
 		additionalStrings.put("off", "off");
 		additionalStrings.put("is_open", "Open");
@@ -61,30 +59,22 @@ public class OpeningHoursParser {
 		additionalStrings.put("will_open_on", "Will open on");
 	}
 
-	private static void updateLocale() {
-		updateLocale(null);
+	private static void initLocalStrings() {
+		initLocalStrings(null);
 	}
 
-	public static void updateLocale(Locale locale) {
-		Locale selectedLocale = locale != null ? locale : Locale.getDefault();
-		initLocalStrings(selectedLocale);
-		defineFormattingType(selectedLocale);
-		initTwelveHourFormatters(selectedLocale);
-	}
-
-	private static void initLocalStrings(Locale locale) {
-		DateFormatSymbols dateFormatSymbols = DateFormatSymbols.getInstance(locale);
+	public static void initLocalStrings(Locale locale) {
+		DateFormatSymbols dateFormatSymbols = locale == null
+				? DateFormatSymbols.getInstance()
+				: DateFormatSymbols.getInstance(locale);
 		localMothsStr = dateFormatSymbols.getShortMonths();
 		localDaysStr = getLettersStringArray(dateFormatSymbols.getShortWeekdays(), 3);
 	}
 
-	private static void defineFormattingType(Locale locale) {
-		DateFormat amPmFormat = new SimpleDateFormat("h:mm", Locale.US);
-		DateFormat localeFormat = SimpleDateFormat.getTimeInstance(DateFormat.SHORT, locale);
-		try {
-			twelveHourFormatting = localeFormat.format(amPmFormat.parse("12:00 AM")).contains("12");
-		} catch (ParseException e) {
-			twelveHourFormatting = false;
+	public static void setTwelveHourFormattingEnabled(boolean enabled, Locale locale) {
+		twelveHourFormatting = enabled;
+		if (enabled) {
+			initTwelveHourFormatters(locale);
 		}
 	}
 
@@ -1254,7 +1244,7 @@ public class OpeningHoursParser {
 						if (i > 0) {
 							b.append(", ");
 						}
-						formatRangeTime(startTime, endTime, b);
+						formatTimeRange(startTime, endTime, b);
 					}
 					if (off) {
 						b.append(" ").append(offStr);
@@ -1576,21 +1566,21 @@ public class OpeningHoursParser {
 			if (!thisDay && !previousDay) {
 				return 0;
 			}
-			int currentTimeMinutes = cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE);
+			int time = cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE); // Time in minutes
 			for (i = 0; i < startTimes.size(); i++) {
 				int startTime = this.startTimes.get(i);
 				int endTime = this.endTimes.get(i);
 				if (startTime < endTime || endTime == -1) {
 					// one day working like 10:00-20:00 (not 20:00-04:00)
-					if (currentTimeMinutes >= startTime && (endTime == -1 || currentTimeMinutes <= endTime) && thisDay) {
+					if (time >= startTime && (endTime == -1 || time <= endTime) && thisDay) {
 						return off ? -1 : 1;
 					}
 				} else {
 					// opening_hours includes day wrap like
 					// "We 20:00-03:00" or "We 07:00-07:00"
-					if (currentTimeMinutes >= startTime && thisDay) {
+					if (time >= startTime && thisDay) {
 						return off ? -1 : 1;
-					} else if (currentTimeMinutes < endTime && previousDay) {
+					} else if (time < endTime && previousDay) {
 						return off ? -1 : 1;
 					}
 				}
@@ -2245,7 +2235,7 @@ public class OpeningHoursParser {
 		}
 	}
 
-	private static void formatRangeTime(int startMinute, int endMinute, StringBuilder stringBuilder) {
+	private static void formatTimeRange(int startMinute, int endMinute, StringBuilder stringBuilder) {
 		int startHour = (startMinute / 60) % 24;
 		int endHour = (endMinute / 60) % 24;
 		boolean sameDayPart = Math.max(startHour, endHour) < 12 || Math.min(startHour, endHour) >= 12;
@@ -2272,7 +2262,7 @@ public class OpeningHoursParser {
 
 	private static void formatTime(int hours, int minutes, StringBuilder b, boolean appendAmPm) {
 		if (twelveHourFormatting) {
-			long millis = TimeUnit.HOURS.toMillis(hours) + TimeUnit.MINUTES.toMillis(minutes);
+			int millis = (hours * 60 + minutes) * 60 * 1000;
 			Date date = new Date(millis);
 			String time = appendAmPm ? twelveHourFormatterAmPm.format(date) : twelveHourFormatter.format(date);
 			b.append(time);

@@ -101,7 +101,8 @@ public class OpeningHoursParserTest {
 		// 0. not properly supported
 		// hours = parseOpenedHours("Mo-Su (sunrise-00:30)-(sunset+00:30)");
 
-		OpeningHoursParser.updateLocale(Locale.UK);
+		OpeningHoursParser.initLocalStrings(Locale.UK);
+		OpeningHoursParser.setTwelveHourFormattingEnabled(false, Locale.UK);
 
 		OpeningHours hours = parseOpenedHours("Mo 09:00-12:00; We,Sa 13:30-17:00, Apr 01-Oct 31 We,Sa 17:00-18:30; PH off");
 		System.out.println(hours);
@@ -547,7 +548,7 @@ public class OpeningHoursParserTest {
 	}
 
 	private void testAmPm() throws ParseException {
-		OpeningHoursParser.updateLocale(Locale.US);
+		OpeningHoursParser.setTwelveHourFormattingEnabled(true, Locale.US);
 
 		OpeningHours hours = parseOpenedHours("Mo-Fr: 9:00-13:00, 14:00-18:00");
 		System.out.println(hours);
