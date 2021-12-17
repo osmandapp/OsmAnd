@@ -688,11 +688,11 @@
     <string name="poi_guest_house">Гостьовий будинок</string>
     <string name="poi_hostel">Хостел</string>
     <string name="poi_motel">Мотель</string>
-    <string name="poi_alpine_hut">Гірський притулок</string>
-    <string name="poi_chalet">Шале</string>
+    <string name="poi_alpine_hut">Альпійська хатина; Притулок</string>
+    <string name="poi_chalet">Шале; Притулок</string>
     <string name="poi_apartment">Квартира</string>
-    <string name="poi_wilderness_hut">Лісовий будиночок</string>
-    <string name="poi_cabin">Зруб</string>
+    <string name="poi_wilderness_hut">Хатина на природі; Притулок</string>
+    <string name="poi_cabin">Кабіна; Укриття</string>
     <string name="poi_lean_to">Укриття</string>
     <string name="poi_hunting_lodge">Мисливський будиночок</string>
     <string name="poi_place_of_worship">Місце поклоніння</string>
