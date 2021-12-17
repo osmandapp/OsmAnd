@@ -1899,9 +1899,9 @@
     <string name="poi_shop_additional_yes">S obchodem</string>
     <string name="poi_service_bicycle_retail_yes">Prodej;Půjčovna kol;Prodej kol</string>
     <string name="poi_service_bicycle_retail_no">Prodej kol: ne</string>
-    <string name="poi_service_bicycle_repair_yes">Oprava</string>
+    <string name="poi_service_bicycle_repair_yes">Opravna;Opravna kol;Servis kol;Cyklistická opravna;Cyklistický servis;Cyklo opravna;Cyklo servis</string>
     <string name="poi_service_bicycle_repair_no">Oprava kol: ne</string>
-    <string name="poi_service_bicycle_rental_yes">Půjčovna</string>
+    <string name="poi_service_bicycle_rental_yes">Půjčovna;Půjčovna kol;Cyklistická půjčovna;Cyklo půjčovna</string>
     <string name="poi_service_bicycle_rental_no">Půjčovna kol: ne</string>
     <string name="poi_service_bicycle_pump_yes">Hustilka</string>
     <string name="poi_service_bicycle_pump_no">Hustilka na kola: ne</string>
