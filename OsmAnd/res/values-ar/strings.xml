@@ -4558,4 +4558,15 @@
     <string name="shared_string_size">الحجم</string>
     <string name="turn_arrows">أسهم الانعطاف</string>
     <string name="turn_arrows_descr">التحكم في رؤية أسهم الانعطاف على خط الطريق.</string>
+    <string name="waypoint_template">قالب إحداثية</string>
+    <string name="predefined_waypoint_appearance_description">سيؤدي النقر فوق الإجراء إلى حفظ نقطة مسار تلقائيًا بمعلمات محددة مسبقًا.</string>
+    <string name="track_file">ملف المسار</string>
+    <string name="shared_string_used">مستخدم</string>
+    <string name="files_with_route_restrictions">ملفات بها قيود الطريق</string>
+    <string name="always_ask_waypoint_appearance_description">سيؤدي الضغط على الإجراء إلى فتح شاشة \"إضافة نقطة مسار\" ، حيث يمكنك تغيير الاسم والمظهر.</string>
+    <string name="waypoint_appearance">مظهر نقطة المسار</string>
+    <string name="track_file_description">سيؤدي النقر فوق الإجراء إلى إظهار حوار مع جميع المسارات المتاحة ليتم تحديدها.</string>
+    <string name="navigate_point_format_swiss_grid">الشبكة السويسرية (CH1903)</string>
+    <string name="shared_string_not_used">غير مستخدم</string>
+    <string name="navigate_point_format_swiss_grid_plus">الشبكة السويسرية (CH1903 +)</string>
 </resources>
