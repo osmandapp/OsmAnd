@@ -1,15 +1,9 @@
 package net.osmand.plus.search;
 
-import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_LOCATION_KEY;
-import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_QUERY_KEY;
-import static net.osmand.search.core.ObjectType.POI_TYPE;
-import static net.osmand.search.core.ObjectType.SEARCH_STARTED;
-import static net.osmand.search.core.SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY;
-
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -39,31 +33,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
-import net.osmand.AndroidUtils;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.access.AccessibilityAssistant;
-import net.osmand.access.NavigationInfo;
+import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
+import net.osmand.plus.plugins.accessibility.NavigationInfo;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.City;
 import net.osmand.data.FavouritePoint;
@@ -75,18 +53,17 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
-import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.LockableViewPager;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.Version;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
@@ -96,13 +73,17 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.poi.RearrangePoiFiltersFragment;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
+import net.osmand.plus.search.ShareHistoryAsyncTask.OnShareHistoryListener;
 import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
+import net.osmand.plus.search.listitems.QuickSearchDisabledHistoryItem;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem.SearchMoreItemOnClickListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.fragments.OnPreferenceChanged;
+import net.osmand.plus.settings.fragments.SearchHistorySettingsFragment;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.search.SearchUICore;
@@ -122,8 +103,27 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
+import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_LOCATION_KEY;
+import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_QUERY_KEY;
+import static net.osmand.search.core.ObjectType.POI_TYPE;
+import static net.osmand.search.core.ObjectType.SEARCH_STARTED;
+import static net.osmand.search.core.SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY;
+
 public class QuickSearchDialogFragment extends DialogFragment implements OsmAndCompassListener,
-		OsmAndLocationListener, DownloadEvents {
+		OsmAndLocationListener, DownloadEvents, OnPreferenceChanged {
 
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(QuickSearchDialogFragment.class);
 
@@ -192,6 +192,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private boolean foundPartialLocation;
 	private String toolbarTitle;
 	private boolean toolbarVisible;
+	private boolean tabBarHidden;
 
 	private boolean newSearch;
 	private boolean interruptedSearch;
@@ -264,24 +265,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		final View view = inflater.inflate(R.layout.search_dialog_fragment, container, false);
 
 		toolbarController = new QuickSearchToolbarController();
-		toolbarController.setOnBackButtonClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mapActivity.showQuickSearch(ShowQuickSearchMode.CURRENT, false);
-			}
-		});
-		toolbarController.setOnTitleClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mapActivity.showQuickSearch(ShowQuickSearchMode.CURRENT, false);
-			}
-		});
-		toolbarController.setOnCloseButtonClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mapActivity.closeQuickSearch();
-			}
-		});
+		toolbarController.setOnBackButtonClickListener(v ->
+				mapActivity.showQuickSearch(ShowQuickSearchMode.CURRENT, false));
+		toolbarController.setOnTitleClickListener(v ->
+				mapActivity.showQuickSearch(ShowQuickSearchMode.CURRENT, false));
+		toolbarController.setOnCloseButtonClickListener(v -> mapActivity.closeQuickSearch());
 
 		Bundle arguments = getArguments();
 		if (savedInstanceState != null) {
@@ -479,28 +467,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		Drawable icBack = iconsCache.getThemedIcon(AndroidUtils.getNavigationIconResId(app));
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setNavigationOnClickListener(
-				new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (!processBackAction()) {
-							dismiss();
-						}
-					}
-				}
-		);
+		toolbar.setNavigationOnClickListener(v -> onBackButtonPressed());
 
 		toolbarEdit = (Toolbar) view.findViewById(R.id.toolbar_edit);
 		toolbarEdit.setNavigationIcon(iconsCache.getIcon(R.drawable.ic_action_remove_dark));
 		toolbarEdit.setNavigationContentDescription(R.string.shared_string_cancel);
-		toolbarEdit.setNavigationOnClickListener(
-				new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						enableSelectionMode(false, -1);
-					}
-				}
-		);
+		toolbarEdit.setNavigationOnClickListener(v -> enableSelectionMode(false, -1));
 
 		titleEdit = (TextView) view.findViewById(R.id.titleEdit);
 		Drawable shareIcon = iconsCache.getIcon(R.drawable.ic_action_gshare_dark, R.color.color_white);
@@ -610,7 +582,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						updateClearButtonAndHint();
 						updateClearButtonVisibility(true);
 						boolean textEmpty = newQueryText.length() == 0;
-						updateTabbarVisibility(textEmpty && !isOnlineSearch());
+						updateTabBarVisibility(textEmpty && !isOnlineSearch());
 						updateSendEmptySearchBottomBar(false);
 						if (textEmpty) {
 							if (addressSearch) {
@@ -671,12 +643,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		);
 
 		fab = view.findViewById(R.id.fab);
-		fab.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				saveCustomFilter();
-			}
-		});
+		fab.setOnClickListener(v -> saveCustomFilter());
 		updateFab();
 
 		setupSearch(mapActivity);
@@ -710,7 +677,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	@Override
-	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
 		updateToolbarButton();
@@ -729,15 +696,26 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		Dialog dialog = new Dialog(getActivity(), getTheme()) {
 			@Override
 			public void onBackPressed() {
-				if (!processBackAction()) {
-					cancel();
-				}
+				onBackButtonPressed();
 			}
 		};
 		if (!getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
 			dialog.getWindow().getAttributes().windowAnimations = R.style.Animations_Alpha;
 		}
 		return dialog;
+	}
+
+	private void onBackButtonPressed() {
+		if (tabBarHidden) {
+			hideKeyboard();
+			searchEditText.setText("");
+			updateTabBarVisibility(true);
+		} else if (!processBackAction()) {
+			Dialog dialog = getDialog();
+			if (dialog != null) {
+				dialog.cancel();
+			}
+		}
 	}
 
 	public void saveCustomFilter() {
@@ -833,8 +811,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void hideKeyboard() {
-		if (searchEditText.hasFocus()) {
-			AndroidUtils.hideSoftKeyboard(getActivity(), searchEditText);
+		Activity activity = getActivity();
+		if (activity != null && searchEditText.hasFocus()) {
+			AndroidUtils.hideSoftKeyboard(activity, searchEditText);
 		}
 	}
 
@@ -1129,7 +1108,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
-	private void updateTabbarVisibility(boolean show) {
+	private void updateTabBarVisibility(boolean show) {
+		tabBarHidden = !show;
 		if (show) {
 			tabToolbarView.setVisibility(View.VISIBLE);
 			buttonToolbarView.setVisibility(View.GONE);
@@ -1243,8 +1223,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			SearchResultCollection res = searchUICore.shallowSearch(SearchAmenityTypesAPI.class, "", null);
 			if (res != null) {
 				List<QuickSearchListItem> rows = new ArrayList<>();
+				PoiCategory routesCategory = app.getPoiTypes().getRoutes();
 				for (SearchResult sr : res.getCurrentSearchResults()) {
-					rows.add(new QuickSearchListItem(app, sr));
+					if (sr.object != routesCategory) {
+						rows.add(new QuickSearchListItem(app, sr));
+					}
 				}
 				rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_world_globe_dark,
 						app.getString(R.string.search_online_address), new OnClickListener() {
@@ -1257,7 +1240,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						}
 						startOnlineSearch();
 						mainSearchFragment.getAdapter().clear();
-						updateTabbarVisibility(false);
+						updateTabBarVisibility(false);
 						openKeyboard();
 					}
 				}));
@@ -1485,7 +1468,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			public void onClick(View v) {
 				searchEditText.setHint(R.string.type_city_town);
 				startCitySearch();
-				updateTabbarVisibility(false);
+				updateTabBarVisibility(false);
 				runCoreSearch("", false, false);
 				openKeyboard();
 			}
@@ -1497,7 +1480,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				searchEditText.setHint(R.string.type_postcode);
 				startPostcodeSearch();
 				mainSearchFragment.getAdapter().clear();
-				updateTabbarVisibility(false);
+				updateTabBarVisibility(false);
 				openKeyboard();
 			}
 		}));
@@ -1557,14 +1540,25 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private void reloadHistoryInternal() {
 		if (historySearchFragment != null) {
 			try {
-				SearchResultCollection res = searchUICore.shallowSearch(SearchHistoryAPI.class, "", null, false, false);
 				List<QuickSearchListItem> rows = new ArrayList<>();
-				if (res != null) {
-					for (SearchResult sr : res.getCurrentSearchResults()) {
-						rows.add(new QuickSearchListItem(app, sr));
+				boolean historyEnabled = app.getSettings().SEARCH_HISTORY.get();
+				if (historyEnabled) {
+					SearchResultCollection res = searchUICore.shallowSearch(SearchHistoryAPI.class, "", null, false, false);
+					if (res != null) {
+						for (SearchResult sr : res.getCurrentSearchResults()) {
+							rows.add(new QuickSearchListItem(app, sr));
+						}
 					}
+				} else {
+					OnClickListener listener = v -> {
+						FragmentManager fragmentManager = getFragmentManager();
+						if (fragmentManager != null) {
+							SearchHistorySettingsFragment.showInstance(getFragmentManager(), QuickSearchDialogFragment.this);
+						}
+					};
+					rows.add(new QuickSearchDisabledHistoryItem(app, listener));
 				}
-				historySearchFragment.updateListAdapter(rows, false);
+				historySearchFragment.updateListAdapter(rows, false, historyEnabled);
 			} catch (Exception e) {
 				e.printStackTrace();
 				app.showToastMessage(e.getMessage());
@@ -2045,7 +2039,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							}
 							startOnlineSearch();
 							mainSearchFragment.getAdapter().clear();
-							updateTabbarVisibility(false);
+							updateTabBarVisibility(false);
 							runCoreSearch(searchQuery, false, true);
 						}
 					});
@@ -2162,6 +2156,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	@Override
+	public void onPreferenceChanged(String prefId) {
+		reloadHistory();
+	}
+
+	@Override
 	public void updateCompassValue(final float value) {
 		// 99 in next line used to one-time initialize arrows (with reference vs. fixed-north direction)
 		// on non-compass devices
@@ -2249,54 +2248,20 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
-	private void shareHistory(final List<HistoryEntry> historyEntries) {
+	private void shareHistory(List<HistoryEntry> historyEntries) {
 		if (!historyEntries.isEmpty()) {
-			final AsyncTask<Void, Void, GPXFile> exportTask = new AsyncTask<Void, Void, GPXFile>() {
+			OnShareHistoryListener listener = new OnShareHistoryListener() {
 				@Override
-				protected GPXFile doInBackground(Void... params) {
-					GPXFile gpx = new GPXFile(Version.getFullVersion(getMyApplication()));
-					for (HistoryEntry h : historyEntries) {
-						WptPt pt = new WptPt();
-						pt.lat = h.getLat();
-						pt.lon = h.getLon();
-						pt.name = h.getName().getName();
-						boolean hasTypeInDescription = !Algorithms.isEmpty(h.getName().getTypeName());
-						if (hasTypeInDescription) {
-							pt.desc = h.getName().getTypeName();
-						}
-						gpx.addPoint(pt);
-					}
-					return gpx;
-				}
-
-				@Override
-				protected void onPreExecute() {
+				public void onShareHistoryStarted() {
 					showProgressBar();
 				}
 
 				@Override
-				protected void onPostExecute(GPXFile gpxFile) {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						hideProgressBar();
-						File dir = new File(activity.getCacheDir(), "share");
-						if (!dir.exists()) {
-							dir.mkdir();
-						}
-						File dst = new File(dir, "History.gpx");
-						GPXUtilities.writeGpxFile(dst, gpxFile);
-
-						final Intent sendIntent = new Intent();
-						sendIntent.setAction(Intent.ACTION_SEND);
-						sendIntent.putExtra(Intent.EXTRA_TEXT, "History.gpx:\n\n\n" + GPXUtilities.asString(gpxFile));
-						sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_history_subject));
-						sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMapActivity(), dst));
-						sendIntent.setType("text/plain");
-						sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-						AndroidUtils.startActivityIfSafe(activity, sendIntent);
-					}
+				public void onShareHistoryFinished() {
+					hideProgressBar();
 				}
 			};
+			ShareHistoryAsyncTask exportTask = new ShareHistoryAsyncTask(app, historyEntries, listener);
 			exportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
@@ -2457,12 +2422,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 				@Override
 				public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-					if (selectionMode) {
-						return false;
-					} else {
-						getDialogFragment().enableSelectionMode(true, position - getListView().getHeaderViewsCount());
-						return true;
+					QuickSearchDialogFragment dialogFragment = getDialogFragment();
+					FragmentManager fragmentManager = dialogFragment.getFragmentManager();
+					if (fragmentManager != null) {
+						SearchHistorySettingsFragment.showInstance(fragmentManager, dialogFragment);
 					}
+					return true;
 				}
 			});
 			getListAdapter().setSelectionListener(new QuickSearchListAdapter.OnSelectionListener() {

@@ -22,10 +22,10 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
 import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 import static net.osmand.plus.ContextMenuItem.INVALID_ID;
-import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_DENSITY_ATTR;
-import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_ATTR;
-import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
-import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_WIDTH_ATTR;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_DENSITY_ATTR;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_ATTR;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_WIDTH_ATTR;
 import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
 import static net.osmand.render.RenderingRuleStorageProperties.A_APP_MODE;
 import static net.osmand.render.RenderingRuleStorageProperties.A_BASE_APP_MODE;
@@ -47,7 +47,7 @@ import androidx.annotation.StyleRes;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ContextMenuAdapter;
@@ -56,16 +56,16 @@ import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.ContextMenuItem.ItemBuilder;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
-import net.osmand.plus.helpers.enums.DayNightMode;
+import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.render.RenderingRuleProperty;
@@ -251,7 +251,8 @@ public class ConfigureMapMenu {
 		}
 		OsmandApplication app = activity.getMyApplication();
 		ResourceManager manager = app.getResourceManager();
-		if (OsmandPlugin.isDevelopment() && !Algorithms.isEmpty(manager.getTravelMapRepositories())) {
+		if (OsmandPlugin.isDevelopment() &&
+				(!Algorithms.isEmpty(manager.getTravelMapRepositories()) || !Algorithms.isEmpty(manager.getTravelRepositories()))) {
 			adapter.addItem(createTravelRoutesItem(activity, nightMode));
 		}
 	}
@@ -277,7 +278,7 @@ public class ConfigureMapMenu {
 						if (property != null) {
 							activity.getDashboard().setDashboardVisibility(true, DashboardType.CYCLE_ROUTES, AndroidUtils.getCenterViewCoordinates(view));
 						} else {
-							showRendererSnackbarForAttr(activity, attrName, nightMode);
+							showRendererSnackbarForAttr(activity, attrName, nightMode, null);
 						}
 						return false;
 					}
@@ -295,7 +296,7 @@ public class ConfigureMapMenu {
 							activity.refreshMap();
 							activity.updateLayers();
 						} else {
-							showRendererSnackbarForAttr(activity, attrName, nightMode);
+							showRendererSnackbarForAttr(activity, attrName, nightMode, null);
 						}
 						return false;
 					}
@@ -758,7 +759,7 @@ public class ConfigureMapMenu {
 							activity.updateLayers();
 						} else {
 							isChecked = pref.get();
-							showRendererSnackbarForAttr(activity, attrName, nightMode);
+							showRendererSnackbarForAttr(activity, attrName, nightMode, pref);
 						}
 						ContextMenuItem item = adapter.getItem(pos);
 						if (item != null) {
@@ -777,7 +778,8 @@ public class ConfigureMapMenu {
 				.createItem();
 	}
 
-	private void showRendererSnackbarForAttr(@NonNull MapActivity activity, @NonNull String attrName, boolean nightMode) {
+	private void showRendererSnackbarForAttr(@NonNull MapActivity activity, @NonNull String attrName, boolean nightMode,
+	                                         @Nullable CommonPreference<Boolean> pref) {
 		String renderer = getRendererForAttr(attrName);
 		if (renderer != null) {
 			OsmandApplication app = activity.getMyApplication();
@@ -790,6 +792,9 @@ public class ConfigureMapMenu {
 							RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(renderer);
 							if (loaded != null) {
 								app.getSettings().RENDERER.set(renderer);
+								if (pref != null) {
+									pref.set(!pref.get());
+								}
 								app.getRendererRegistry().setCurrentSelectedRender(loaded);
 								activity.refreshMapComplete();
 								activity.getDashboard().updateListAdapter(createListAdapter(activity));

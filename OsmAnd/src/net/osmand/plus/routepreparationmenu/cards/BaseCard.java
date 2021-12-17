@@ -14,7 +14,7 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -81,6 +81,12 @@ public abstract class BaseCard {
 
 	public void setListener(CardListener listener) {
 		this.listener = listener;
+	}
+
+	protected void notifyButtonPressed(int buttonIndex) {
+		if (listener != null) {
+			listener.onCardButtonPressed(this, buttonIndex);
+		}
 	}
 
 	public void setLayoutNeeded() {

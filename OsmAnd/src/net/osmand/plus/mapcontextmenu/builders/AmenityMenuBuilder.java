@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
+import static net.osmand.data.Amenity.MAPILLARY;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -16,24 +18,24 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.enums.MetricsConstants;
+import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
-import net.osmand.plus.osmedit.OsmEditingPlugin;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.widgets.TextViewEx;
@@ -837,14 +839,14 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	protected Map<String, String> getAdditionalCardParams() {
 		Map<String, String> params = new HashMap<>();
 		String imageValue = amenity.getAdditionalInfo("image");
-		String mapillaryValue = amenity.getAdditionalInfo("mapillary");
+		String mapillaryValue = amenity.getAdditionalInfo(MAPILLARY);
 		String wikidataValue = amenity.getAdditionalInfo(Amenity.WIKIDATA);
 		String wikimediaValue = amenity.getAdditionalInfo(Amenity.WIKIMEDIA_COMMONS);
 		if (!Algorithms.isEmpty(imageValue)) {
 			params.put("osm_image", getDecodedAdditionalInfo(imageValue));
 		}
 		if (!Algorithms.isEmpty(mapillaryValue)) {
-			params.put("osm_mapillary_key", getDecodedAdditionalInfo(mapillaryValue));
+			params.put(MAPILLARY, getDecodedAdditionalInfo(mapillaryValue));
 		}
 		if (!Algorithms.isEmpty(wikidataValue)) {
 			params.put(Amenity.WIKIDATA, getDecodedAdditionalInfo(wikidataValue));

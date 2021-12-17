@@ -11,10 +11,10 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 
 	protected final List<_Radio> items = new ArrayList<>();
 	protected final boolean nightMode;
-	protected RadioItem selectedItem;
+	protected _Radio selectedItem;
 
 	public MultiStateToggleButton(@NonNull OsmandApplication app,
 	                              @NonNull LinearLayout container,
@@ -56,9 +56,13 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		initView();
 	}
 
-	public final void setSelectedItem(@Nullable RadioItem selectedItem) {
+	public final void setSelectedItem(@Nullable _Radio selectedItem) {
 		this.selectedItem = selectedItem;
 		updateView();
+	}
+
+	public int getSelectedItemIndex() {
+		return items.indexOf(selectedItem);
 	}
 
 	private void initView() {
@@ -123,7 +127,7 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 
 		GradientDrawable background = new GradientDrawable();
 		background.setColor(ColorUtilities.getColorWithAlpha(selectedBgColor, 0.1f));
-		background.setStroke(AndroidUtils.dpToPx(app, 1), ColorUtilities.getColorWithAlpha(selectedBgColor, 0.5f));
+		background.setStroke(AndroidUtils.dpToPx(app, 1.5f), ColorUtilities.getColorWithAlpha(selectedBgColor, 0.5f));
 
 		showAllDividers();
 		for (int i = 0; i < items.size(); i++) {

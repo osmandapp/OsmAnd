@@ -260,6 +260,7 @@
         <item name="bottom_navigation_item_background">@drawable/bottom_navigation_item_bg_light</item>
         <item name="android:forceDarkAllowed">false</item>
         <item name="ic_action_osmand_pro_logo_colored">@drawable/ic_action_osmand_pro_logo_colored</item>
+        <item name="ic_action_android_auto_logo_colored">@drawable/ic_action_android_auto_colored</item>
     </style>
 
     <style name="ToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
@@ -569,6 +570,7 @@
         <item name="bottom_navigation_item_background">@drawable/bottom_navigation_item_bg_dark</item>
         <item name="android:forceDarkAllowed">false</item>
         <item name="ic_action_osmand_pro_logo_colored">@drawable/ic_action_osmand_pro_logo_colored_night</item>
+        <item name="ic_action_android_auto_logo_colored">@drawable/ic_action_android_auto_colored_night</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">
@@ -839,6 +841,48 @@
         <item name="helperTextTextColor">?android:textColorSecondary</item>
         <item name="hintAnimationEnabled">true</item>
         <item name="hintTextColor">?android:textColorSecondary</item>
+    </style>
+
+
+    <!--******************************** Basic text styles ********************************-->
+
+    <!--To apply style for a specific TextView, use TextViewEx and tag "style"-->
+    <!--Don't use tag "textAppearance". It loses font family and line height parameters-->
+
+    <!-- Title -->
+    <style name="TitleStyle">
+        <item name="android:textSize">@dimen/default_list_text_size</item>
+        <item name="lineHeight">@dimen/default_title_line_height</item>
+        <item name="android:letterSpacing">@dimen/text_button_letter_spacing</item>
+        <item name="typeface">@string/font_roboto_regular</item>
+    </style>
+
+    <style name="TitleStyle.Medium">
+        <item name="typeface">@string/font_roboto_medium</item>
+    </style>
+
+    <!-- Description -->
+    <style name="DescStyle">
+        <item name="android:textSize">@dimen/default_desc_text_size</item>
+        <item name="lineHeight">@dimen/default_desc_line_height</item>
+        <item name="android:letterSpacing">@dimen/description_letter_spacing</item>
+        <item name="typeface">@string/font_roboto_regular</item>
+    </style>
+
+    <style name="DescStyle.Medium">
+        <item name="typeface">@string/font_roboto_medium</item>
+    </style>
+
+    <!-- Small Description -->
+    <style name="SmallDescStyle">
+        <item name="android:textSize">@dimen/default_sub_text_size</item>
+        <item name="lineHeight">@dimen/small_desc_line_height</item>
+        <item name="android:letterSpacing">@dimen/text_button_letter_spacing</item>
+        <item name="typeface">@string/font_roboto_regular</item>
+    </style>
+
+    <style name="SmallDescStyle.Medium">
+        <item name="typeface">@string/font_roboto_medium</item>
     </style>
 
 </resources>

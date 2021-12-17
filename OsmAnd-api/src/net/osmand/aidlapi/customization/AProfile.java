@@ -17,6 +17,7 @@ public class AProfile extends AidlParams {
 	public static final String LOC_ICON_KEY = "loc_icon";
 	public static final String NAV_ICON_KEY = "nav_icon";
 	public static final String ORDER_KEY = "order";
+	public static final String VERSION_KEY = "version";
 
 	private String appModeKey;
 	private String userProfileName;
@@ -28,6 +29,7 @@ public class AProfile extends AidlParams {
 	private String locIcon;
 	private String navIcon;
 	private int order = -1;
+	private int version = -1;
 
 	public AProfile(String appModeKey, String userProfileName, String parent, String iconName, String iconColor,
 					String routingProfile, String routeService, String locIcon, String navIcon, int order) {
@@ -99,6 +101,14 @@ public class AProfile extends AidlParams {
 		return order;
 	}
 
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
 	@Override
 	public void writeToBundle(Bundle bundle) {
 		bundle.putString(PROFILE_ID_KEY, appModeKey);
@@ -111,6 +121,7 @@ public class AProfile extends AidlParams {
 		bundle.putString(LOC_ICON_KEY, locIcon);
 		bundle.putString(NAV_ICON_KEY, navIcon);
 		bundle.putInt(ORDER_KEY, order);
+		bundle.putInt(VERSION_KEY, version);
 	}
 
 	@Override
@@ -125,5 +136,6 @@ public class AProfile extends AidlParams {
 		locIcon = bundle.getString(LOC_ICON_KEY);
 		navIcon = bundle.getString(NAV_ICON_KEY);
 		order = bundle.getInt(ORDER_KEY);
+		version = bundle.getInt(VERSION_KEY);
 	}
 }

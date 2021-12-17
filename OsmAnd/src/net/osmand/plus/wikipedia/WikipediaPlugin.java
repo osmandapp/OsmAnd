@@ -1,5 +1,12 @@
 package net.osmand.plus.wikipedia;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WIKIPEDIA;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.WIKIPEDIA_ID;
+import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
+import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
+import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
+import static net.osmand.plus.helpers.FileNameTranslationHelper.WIKI_NAME;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -10,7 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
@@ -22,7 +29,7 @@ import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
@@ -34,8 +41,8 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
+import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.QuickSearchDialogFragment;
@@ -59,15 +66,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.WIKIPEDIA_ID;
-import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
-import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
-import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
-import static net.osmand.plus.helpers.FileNameTranslationHelper.WIKI_NAME;
-
 public class WikipediaPlugin extends OsmandPlugin {
-
-	public static final String ID = "osmand.wikipedia";
 
 	private MapActivity mapActivity;
 	private final OsmandSettings settings;
@@ -81,7 +80,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 
 	@Override
 	public String getId() {
-		return ID;
+		return PLUGIN_WIKIPEDIA;
 	}
 
 	@Override
@@ -193,7 +192,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 			}
 		};
 
-		boolean selected = app.getPoiFilters().isTopWikiFilterSelected();
+		boolean selected = app.getPoiFilters().isPoiFilterSelected(PoiFiltersHelper.getTopWikiPoiFilterId());
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(WIKIPEDIA_ID)
 				.setTitleId(R.string.shared_string_wikipedia, mapActivity)
@@ -331,17 +330,21 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	private void showWikiOnMap() {
-		PoiFiltersHelper ph = app.getPoiFilters();
-		PoiUIFilter wiki = ph.getTopWikiPoiFilter();
-		ph.loadSelectedPoiFilters();
-		ph.addSelectedPoiFilter(wiki);
+		PoiFiltersHelper helper = app.getPoiFilters();
+		PoiUIFilter filter = helper.getTopWikiPoiFilter();
+		if (filter != null) {
+			helper.loadSelectedPoiFilters();
+			helper.addSelectedPoiFilter(filter);
+		}
 	}
 
 	private void hideWikiFromMap() {
-		PoiFiltersHelper ph = app.getPoiFilters();
-		PoiUIFilter wiki = ph.getTopWikiPoiFilter();
-		ph.removePoiFilter(wiki);
-		ph.removeSelectedPoiFilter(wiki);
+		PoiFiltersHelper helper = app.getPoiFilters();
+		PoiUIFilter filter = helper.getTopWikiPoiFilter();
+		if (filter != null) {
+			helper.removePoiFilter(filter);
+			helper.removeSelectedPoiFilter(filter);
+		}
 	}
 
 	public String getLanguagesSummary() {
@@ -498,28 +501,27 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected List<ImageCard> getContextMenuImageCards(@NonNull Map<String, String> params, @Nullable Map<String, String> additionalParams, @Nullable GetImageCardsListener listener) {
-		List<ImageCard> imageCards = new ArrayList<>();
-		if (mapActivity != null) {
-			if (additionalParams != null) {
-				String wikidataId = additionalParams.get(Amenity.WIKIDATA);
-				if (wikidataId != null) {
-					additionalParams.remove(Amenity.WIKIDATA);
-					WikiImageHelper.addWikidataImageCards(mapActivity, wikidataId, imageCards);
-				}
-				String wikimediaContent = additionalParams.get(Amenity.WIKIMEDIA_COMMONS);
-				if (wikimediaContent != null) {
-					additionalParams.remove(Amenity.WIKIMEDIA_COMMONS);
-					WikiImageHelper.addWikimediaImageCards(mapActivity, wikimediaContent, imageCards);
-				}
-				params.putAll(additionalParams);
+	protected void collectContextMenuImageCards(@NonNull ImageCardsHolder holder,
+	                                            @NonNull Map<String, String> params,
+	                                            @Nullable Map<String, String> additionalParams,
+	                                            @Nullable GetImageCardsListener listener) {
+		if (mapActivity != null && additionalParams != null) {
+			String wikidataId = additionalParams.get(Amenity.WIKIDATA);
+			if (wikidataId != null) {
+				additionalParams.remove(Amenity.WIKIDATA);
+				WikiImageHelper.addWikidataImageCards(mapActivity, wikidataId, holder);
 			}
+			String wikimediaContent = additionalParams.get(Amenity.WIKIMEDIA_COMMONS);
+			if (wikimediaContent != null) {
+				additionalParams.remove(Amenity.WIKIMEDIA_COMMONS);
+				WikiImageHelper.addWikimediaImageCards(mapActivity, wikimediaContent, holder);
+			}
+			params.putAll(additionalParams);
 		}
-		return imageCards;
 	}
 
 	public static boolean containsWikipediaExtension(@NonNull String fileName) {
 		return Algorithms.containsAny(fileName,
-				WIKI_NAME , IndexConstants.BINARY_WIKI_MAP_INDEX_EXT);
+				WIKI_NAME, IndexConstants.BINARY_WIKI_MAP_INDEX_EXT);
 	}
 }

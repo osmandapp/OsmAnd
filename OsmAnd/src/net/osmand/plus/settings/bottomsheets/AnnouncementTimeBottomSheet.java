@@ -16,7 +16,7 @@ import com.google.android.material.slider.Slider.OnChangeListener;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem.Builder;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -52,7 +52,7 @@ public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet {
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		app = requiredMyApplication();
-		announceTimeDistances = new AnnounceTimeDistances(getAppMode(), app.getSettings());
+		announceTimeDistances = new AnnounceTimeDistances(getAppMode(), app);
 
 		listPreference = getListPreference();
 		if (listPreference == null || listPreference.getEntries() == null ||

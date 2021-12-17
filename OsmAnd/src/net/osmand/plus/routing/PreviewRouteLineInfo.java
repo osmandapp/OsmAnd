@@ -3,12 +3,12 @@ package net.osmand.plus.routing;
 import android.graphics.Rect;
 import android.os.Bundle;
 
-import net.osmand.util.Algorithms;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import net.osmand.util.Algorithms;
 
 public class PreviewRouteLineInfo {
 
@@ -16,6 +16,7 @@ public class PreviewRouteLineInfo {
 	private static final String CUSTOM_COLOR_NIGHT = "custom_color_night";
 	private static final String ROUTE_COLORING_TYPE = "route_coloring_type";
 	private static final String LINE_WIDTH = "line_width";
+	private static final String SHOW_TURN_ARROWS = "show_turn_arrows";
 	private static final String NAVIGATION_ICON_ID = "navigation_icon_id";
 	private static final String NAVIGATION_ICON_COLOR = "navigation_icon_color";
 	private static final String LINE_BOUNDS = "line_bounds";
@@ -31,6 +32,7 @@ public class PreviewRouteLineInfo {
 	private ColoringType coloringType = ColoringType.DEFAULT;
 	private String routeInfoAttribute;
 	private String width;
+	private boolean showTurnArrows;
 
 	// temporally parameters to show in preview
 	@ColorInt
@@ -46,30 +48,18 @@ public class PreviewRouteLineInfo {
 	                            @ColorInt int customColorNight,
 	                            @NonNull ColoringType coloringType,
 	                            @Nullable String routeInfoAttribute,
-	                            @Nullable String width) {
+	                            @Nullable String width,
+	                            boolean showTurnArrows) {
 		this.customColorDay = customColorDay;
 		this.customColorNight = customColorNight;
 		this.coloringType = coloringType;
 		this.routeInfoAttribute = routeInfoAttribute;
 		this.width = width;
+		this.showTurnArrows = showTurnArrows;
 	}
 
 	public PreviewRouteLineInfo(@NonNull Bundle bundle) {
 		readBundle(bundle);
-	}
-
-	public PreviewRouteLineInfo(@NonNull PreviewRouteLineInfo existed) {
-		this.customColorDay = existed.customColorDay;
-		this.customColorNight = existed.customColorNight;
-		this.coloringType = existed.coloringType;
-		this.routeInfoAttribute = existed.routeInfoAttribute;
-		this.width = existed.width;
-		this.iconId = existed.iconId;
-		this.iconColor = existed.iconColor;
-		this.lineBounds = existed.lineBounds;
-		this.centerX = existed.centerX;
-		this.centerY = existed.centerY;
-		this.screenHeight = existed.screenHeight;
 	}
 
 	public void setCustomColor(@ColorInt int color, boolean nightMode) {
@@ -90,6 +80,10 @@ public class PreviewRouteLineInfo {
 
 	public void setWidth(@Nullable String width) {
 		this.width = width;
+	}
+
+	public void setShowTurnArrows(boolean showTurnArrows) {
+		this.showTurnArrows = showTurnArrows;
 	}
 
 	public void setIconId(int iconId) {
@@ -135,6 +129,10 @@ public class PreviewRouteLineInfo {
 		return width;
 	}
 
+	public boolean shouldShowTurnArrows() {
+		return showTurnArrows;
+	}
+
 	public int getIconId() {
 		return iconId;
 	}
@@ -170,6 +168,7 @@ public class PreviewRouteLineInfo {
 		coloringType = ColoringType.getRouteColoringTypeByName(bundle.getString(ROUTE_COLORING_TYPE));
 		routeInfoAttribute = ColoringType.getRouteInfoAttribute(bundle.getString(ROUTE_COLORING_TYPE));
 		width = bundle.getString(LINE_WIDTH);
+		showTurnArrows = bundle.getBoolean(SHOW_TURN_ARROWS);
 		iconId = bundle.getInt(NAVIGATION_ICON_ID);
 		iconColor = bundle.getInt(NAVIGATION_ICON_COLOR);
 		lineBounds = bundle.getParcelable(LINE_BOUNDS);
@@ -185,6 +184,7 @@ public class PreviewRouteLineInfo {
 		if (width != null) {
 			bundle.putString(LINE_WIDTH, width);
 		}
+		bundle.putBoolean(SHOW_TURN_ARROWS, showTurnArrows);
 		bundle.putInt(NAVIGATION_ICON_ID, iconId);
 		bundle.putInt(NAVIGATION_ICON_COLOR, iconColor);
 		bundle.putParcelable(LINE_BOUNDS, lineBounds);

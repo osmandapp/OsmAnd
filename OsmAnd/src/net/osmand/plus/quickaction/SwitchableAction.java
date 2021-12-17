@@ -1,6 +1,6 @@
 package net.osmand.plus.quickaction;
 
-import static net.osmand.AndroidUtils.isLayoutRtl;
+import static net.osmand.plus.utils.AndroidUtils.isLayoutRtl;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -25,7 +25,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -112,13 +112,15 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	public String getActionText(OsmandApplication app) {
 		String arrowDirection = isLayoutRtl(app) ? "\u25c0" : "\u25b6";
 		String disabledItem = getDisabledItem(app);
+		String selectedItem = getSelectedItem(app);
 		String nextItem = getNextSelectedItem(app);
-		if (Algorithms.stringsEqual(nextItem, disabledItem)) {
-			String item = getSelectedItem(app);
-			return getTranslatedItemName(app, item) + arrowDirection + "\u2026";
-		} else {
-			return getTranslatedItemName(app, nextItem) + arrowDirection + "\u2026";
+
+		boolean disabledNextItem = Algorithms.stringsEqual(nextItem, disabledItem);
+		String itemName = getTranslatedItemName(app, disabledNextItem ? selectedItem : nextItem);
+		if (loadListFromParams().size() > 1) {
+			itemName += arrowDirection + "\u2026";
 		}
+		return itemName;
 	}
 
 	@Override
@@ -158,8 +160,8 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	}
 
 	public String getNextItemFromSources(@NonNull OsmandApplication app,
-										 @NonNull List<Pair<String, String>> sources,
-										 @NonNull String defValue) {
+	                                     @NonNull List<Pair<String, String>> sources,
+	                                     @NonNull String defValue) {
 		if (!Algorithms.isEmpty(sources)) {
 			String currentSource = getSelectedItem(app);
 			if (sources.size() > 1) {

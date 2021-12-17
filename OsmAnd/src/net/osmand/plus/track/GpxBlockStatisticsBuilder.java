@@ -19,14 +19,9 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -35,6 +30,11 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.myplaces.GPXTabItemType;
 import net.osmand.plus.myplaces.SegmentActionsListener;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
@@ -113,7 +113,7 @@ public class GpxBlockStatisticsBuilder {
 	}
 
 	private GPXFile getGPXFile() {
-		return selectedGpxFile.getGpxFile();
+		return selectedGpxFile.getGpxFileToDisplay();
 	}
 
 	public void initStatBlocks(@Nullable SegmentActionsListener actionsListener, @ColorInt int activeColor,
@@ -258,13 +258,13 @@ public class GpxBlockStatisticsBuilder {
 
 	public void prepareDataAscent(String asc) {
 		prepareData(app.getString(R.string.altitude_ascent), asc,
-				R.drawable.ic_action_arrow_up_16, R.color.gpx_chart_red,
+				R.drawable.ic_action_altitude_ascent_16, ColorUtilities.getDefaultIconColorId(nightMode),
 				GPXDataSetType.SLOPE, null, ItemType.ITEM_ALTITUDE);
 	}
 
 	public void prepareDataDescent(String desc) {
 		prepareData(app.getString(R.string.altitude_descent), desc,
-				R.drawable.ic_action_arrow_down_16, R.color.gpx_pale_green,
+				R.drawable.ic_action_altitude_descent_16, ColorUtilities.getDefaultIconColorId(nightMode),
 				GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE, ItemType.ITEM_ALTITUDE);
 	}
 

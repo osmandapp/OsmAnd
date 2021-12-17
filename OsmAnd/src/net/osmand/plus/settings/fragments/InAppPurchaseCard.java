@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,9 +10,10 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -76,6 +78,12 @@ public class InAppPurchaseCard extends MapBaseCard {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), manageVisible && liveVisible);
 	}
 
+	private void setupSelectableBackground(@NonNull View view) {
+		int color = AndroidUtils.getColorFromAttr(view.getContext(), R.attr.active_color_basic);
+		Drawable drawable = UiUtilities.getColoredSelectableDrawable(view.getContext(), color, 0.3f);
+		AndroidUtils.setBackground(view.findViewById(R.id.selectable_list_item), drawable);
+	}
+
 	private void setupManageButton(boolean visible) {
 		View manageSubscription = view.findViewById(R.id.manage_subscription);
 		manageSubscription.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +95,7 @@ public class InAppPurchaseCard extends MapBaseCard {
 				}
 			}
 		});
+		setupSelectableBackground(manageSubscription);
 		ImageView icon = manageSubscription.findViewById(android.R.id.icon);
 		icon.setImageDrawable(getActiveIcon(R.drawable.ic_action_purchases));
 
@@ -103,6 +112,7 @@ public class InAppPurchaseCard extends MapBaseCard {
 				LiveUpdatesFragment.showInstance(activity.getSupportFragmentManager(), null);
 			}
 		});
+		setupSelectableBackground(osmandLive);
 		ImageView icon = osmandLive.findViewById(android.R.id.icon);
 		TextView title = osmandLive.findViewById(android.R.id.title);
 

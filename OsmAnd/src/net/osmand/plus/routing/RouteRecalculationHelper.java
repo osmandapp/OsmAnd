@@ -1,5 +1,7 @@
 package net.osmand.plus.routing;
 
+import static net.osmand.plus.notifications.OsmandNotification.NotificationType.NAVIGATION;
+
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
@@ -9,6 +11,7 @@ import net.osmand.data.LatLon;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -23,8 +26,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-
-import static net.osmand.plus.notifications.OsmandNotification.NotificationType.NAVIGATION;
 
 class RouteRecalculationHelper {
 
@@ -188,6 +189,9 @@ class RouteRecalculationHelper {
 		}
 		app.getWaypointHelper().setNewRoute(res);
 		routingHelper.newRouteCalculated(newRoute, res);
+		if (res.initialCalculation) {
+			app.runInUIThread(() -> routingHelper.recalculateRouteDueToSettingsChange(false));
+		}
 	}
 
 	void startRouteCalculationThread(RouteCalculationParams params, boolean paramsChanged, boolean updateProgress) {
@@ -206,7 +210,8 @@ class RouteRecalculationHelper {
 	}
 
 	public void recalculateRouteInBackground(final Location start, final LatLon end, final List<LatLon> intermediates,
-											 final GPXRouteParamsBuilder gpxRoute, final RouteCalculationResult previousRoute, boolean paramsChanged, boolean onlyStartPointChanged) {
+											 final GPXRouteParamsBuilder gpxRoute, final RouteCalculationResult previousRoute,
+											 boolean paramsChanged, boolean onlyStartPointChanged) {
 		if (start == null || end == null) {
 			return;
 		}
@@ -240,6 +245,12 @@ class RouteRecalculationHelper {
 			}
 			if (getLastProjection() != null) {
 				params.currentLocation = getLastFixedLocation();
+			}
+			if (params.mode.getRouteService() == RouteService.ONLINE) {
+				OnlineRoutingEngine engine = app.getOnlineRoutingHelper().getEngineByKey(params.mode.getRoutingProfile());
+				if (engine != null) {
+					engine.updateRouteParameters(params, paramsChanged ? previousRoute : null);
+				}
 			}
 			startRouteCalculationThread(params, paramsChanged, updateProgress);
 		}
@@ -345,9 +356,8 @@ class RouteRecalculationHelper {
 
 		public boolean startMissingMapsOnlineSearch() {
 			if (missingMapsOnlineSearchTask == null) {
-				missingMapsOnlineSearchTask = new MissingMapsOnlineSearchTask(params, missingMaps -> {
-					RouteRecalculationTask.this.missingMaps = missingMaps;
-				});
+				missingMapsOnlineSearchTask = new MissingMapsOnlineSearchTask(params, missingMaps ->
+						RouteRecalculationTask.this.missingMaps = missingMaps);
 				missingMapsOnlineSearchTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				return true;
 			}
@@ -406,12 +416,7 @@ class RouteRecalculationHelper {
 				}
 			}
 			if (!updateProgress) {
-				routingHelper.getApplication().runInUIThread(new Runnable() {
-					@Override
-					public void run() {
-						routingThreadHelper.finishProgress(params);
-					}
-				});
+				routingHelper.getApplication().runInUIThread(() -> routingThreadHelper.finishProgress(params));
 			}
 			app.getNotificationHelper().refreshNotification(NAVIGATION);
 		}
@@ -420,7 +425,7 @@ class RouteRecalculationHelper {
 	private class RouteRecalculationExecutor extends ThreadPoolExecutor {
 
 		public RouteRecalculationExecutor() {
-			super(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
+			super(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
 		}
 
 		protected void afterExecute(Runnable r, Throwable t) {

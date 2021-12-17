@@ -25,49 +25,78 @@
         tools:listitem="@layout/point_editor_icon_category_item"
         tools:orientation="horizontal" />
 
-    <LinearLayout
-        android:id="@+id/common_graphs_container"
+    <FrameLayout
+        android:id="@+id/scroll_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone"
-        tools:visibility="visible">
+        android:foregroundGravity="fill_horizontal|top"
+        tools:foreground="@drawable/bg_contextmenu_shadow">
 
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/line_chart"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/route_info_line_chart_height"
-            android:layout_gravity="center_vertical" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/custom_graphs_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone"
-        tools:visibility="visible">
-
-        <com.github.mikephil.charting.charts.HorizontalBarChart
-            android:id="@+id/horizontal_chart"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/route_info_chart_height" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?attr/list_divider" />
-
-        <FrameLayout
-            android:id="@+id/route_legend"
+        <ScrollView
+            android:id="@+id/scroll_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="@dimen/route_info_legend_padding"
-            android:paddingBottom="@dimen/route_info_legend_padding" />
+            tools:ignore="UselessParent">
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/common_graphs_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/line_chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/route_info_line_chart_height"
+                        android:layout_gravity="center_vertical" />
+
+                    <FrameLayout
+                        android:id="@+id/statistics_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/custom_graphs_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <com.github.mikephil.charting.charts.HorizontalBarChart
+                        android:id="@+id/horizontal_chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/route_info_chart_height" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?attr/list_divider" />
+
+                    <LinearLayout
+                        android:id="@+id/route_legend"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="@dimen/route_info_legend_padding"
+                        android:paddingBottom="@dimen/route_info_legend_padding" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/message_container"

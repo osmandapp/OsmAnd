@@ -3,7 +3,6 @@ package net.osmand.plus.quickaction.actions;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,21 +20,25 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.util.Algorithms;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
 public class ShowHidePoiAction extends QuickAction {
-
 
 	public static final QuickActionType TYPE = new QuickActionType(5,
 			"poi.showhide", ShowHidePoiAction.class)
@@ -75,33 +78,22 @@ public class ShowHidePoiAction extends QuickAction {
 
 	@Override
 	public int getIconRes(Context context) {
-
-		if (getParams().get(KEY_FILTERS) == null || getParams().get(KEY_FILTERS).isEmpty()) {
-
+		String filtersIdsJson = getParams().get(KEY_FILTERS);
+		List<String> filtersIds = tryParseFiltersIds(filtersIdsJson);
+		if (Algorithms.isEmpty(filtersIds)) {
 			return super.getIconRes();
-
-		} else {
-
-			OsmandApplication app = (OsmandApplication) context.getApplicationContext();
-			List<String> filters = new ArrayList<>();
-
-			String filtersId = getParams().get(KEY_FILTERS);
-			Collections.addAll(filters, filtersId.split(","));
-
-			if (app.getPoiFilters() == null) return super.getIconRes();
-
-			PoiUIFilter filter = app.getPoiFilters().getFilterById(filters.get(0));
-
-			if (filter == null) return super.getIconRes();
-
-			Object res = filter.getIconResource();
-
-			if (res instanceof String && RenderingIcons.containsBigIcon(res.toString())) {
-
-				return RenderingIcons.getBigIconResourceId(res.toString());
-
-			} else return super.getIconRes();
 		}
+
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		PoiUIFilter filter = app.getPoiFilters().getFilterById(filtersIds.get(0));
+		if (filter == null) {
+			return super.getIconRes();
+		}
+
+		Object iconRes = filter.getIconResource();
+		return (iconRes instanceof String && RenderingIcons.containsBigIcon(iconRes.toString()))
+				? RenderingIcons.getBigIconResourceId(iconRes.toString())
+				: super.getIconRes();
 	}
 
 	@Override
@@ -122,8 +114,9 @@ public class ShowHidePoiAction extends QuickAction {
 				}
 				pf.addSelectedPoiFilter(filter);
 			}
-
-		} else pf.clearSelectedPoiFilters();
+		} else {
+			pf.clearSelectedPoiFilters();
+		}
 
 		mapActivity.getMapLayers().updateLayers(mapActivity);
 	}
@@ -137,10 +130,7 @@ public class ShowHidePoiAction extends QuickAction {
 	}
 
 	private boolean isCurrentFilters(Set<PoiUIFilter> currentPoiFilters, List<PoiUIFilter> poiFilters) {
-
-		if (currentPoiFilters.size() != poiFilters.size()) return false;
-
-		return currentPoiFilters.containsAll(poiFilters);
+		return currentPoiFilters.size() == poiFilters.size() && currentPoiFilters.containsAll(poiFilters);
 	}
 
 	@Override
@@ -149,20 +139,12 @@ public class ShowHidePoiAction extends QuickAction {
 		View view = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.quick_action_show_hide_poi, parent, false);
 
 		RecyclerView list = (RecyclerView) view.findViewById(R.id.list);
-		Button addFilter = (Button) view.findViewById(R.id.btnAddCategory);
-
-		final Adapter adapter = new Adapter(!getParams().isEmpty()
-				? loadPoiFilters(mapActivity.getMyApplication().getPoiFilters())
-				: new ArrayList<PoiUIFilter>());
-
+		List<PoiUIFilter> poiFilters = loadPoiFilters(mapActivity.getMyApplication().getPoiFilters());
+		final Adapter adapter = new Adapter(poiFilters);
 		list.setAdapter(adapter);
 
-		addFilter.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				showSingleChoicePoiFilterDialog(mapActivity.getMyApplication(), mapActivity, adapter);
-			}
-		});
+		Button addFilter = (Button) view.findViewById(R.id.btnAddCategory);
+		addFilter.setOnClickListener(v -> showSingleChoicePoiFilterDialog(mapActivity, adapter));
 
 		parent.addView(view);
 	}
@@ -199,11 +181,10 @@ public class ShowHidePoiAction extends QuickAction {
 			final PoiUIFilter filter = filters.get(position);
 
 			Object res = filter.getIconResource();
-
 			if (res instanceof String && RenderingIcons.containsBigIcon(res.toString())) {
 				holder.icon.setImageResource(RenderingIcons.getBigIconResourceId(res.toString()));
 			} else {
-				holder.icon.setImageResource(R.drawable.mx_user_defined);
+				holder.icon.setImageResource(R.drawable.mx_special_custom_category);
 			}
 
 			holder.title.setText(filter.getName());
@@ -218,8 +199,8 @@ public class ShowHidePoiAction extends QuickAction {
 
 					notifyDataSetChanged();
 
-					if (oldTitle.equals(title.getText().toString()) || title.getText().toString().equals(getName(holder.title.getContext()))) {
-
+					String titleContent = title.getText().toString();
+					if (oldTitle.equals(titleContent) || titleContent.equals(getName(holder.title.getContext()))) {
 						String newTitle = getTitle(filters);
 						title.setText(newTitle);
 					}
@@ -249,32 +230,22 @@ public class ShowHidePoiAction extends QuickAction {
 	}
 
 	public void savePoiFilters(List<PoiUIFilter> poiFilters) {
-
 		List<String> filters = new ArrayList<>();
-
 		for (PoiUIFilter f : poiFilters) {
 			filters.add(f.getFilterId());
 		}
 
-		getParams().put(KEY_FILTERS, TextUtils.join(",", filters));
+		JSONArray jsonArray = new JSONArray(filters);
+		getParams().put(KEY_FILTERS, jsonArray.toString());
 	}
 
 	private List<PoiUIFilter> loadPoiFilters(PoiFiltersHelper helper) {
-
-		List<String> filters = new ArrayList<>();
-
-		String filtersId = getParams().get(KEY_FILTERS);
-
-		if (filtersId != null && !filtersId.trim().isEmpty()) {
-			Collections.addAll(filters, filtersId.split(","));
-		}
+		String filtersIds = getParams().get(KEY_FILTERS);
+		List<String> filters = tryParseFiltersIds(filtersIds);
 
 		List<PoiUIFilter> poiFilters = new ArrayList<>();
-
 		for (String f : filters) {
-
 			PoiUIFilter filter = helper.getFilterById(f);
-
 			if (filter != null) {
 				poiFilters.add(filter);
 			}
@@ -283,20 +254,41 @@ public class ShowHidePoiAction extends QuickAction {
 		return poiFilters;
 	}
 
-	private void showSingleChoicePoiFilterDialog(final OsmandApplication app, final MapActivity activity, final Adapter filtersAdapter) {
+	private List<String> tryParseFiltersIds(String filtersIdsString) {
+		if (Algorithms.isBlank(filtersIdsString)) {
+			return Collections.emptyList();
+		}
+		try {
+			List<String> filtersIds = new ArrayList<>();
+			JSONArray jsonArray = new JSONArray(filtersIdsString);
+			for (int i = 0; i < jsonArray.length(); i++) {
+				String filterId = jsonArray.getString(i);
+				if (!Algorithms.isBlank(filterId)) {
+					filtersIds.add(filterId);
+				}
+			}
+			return filtersIds;
+		} catch (JSONException e) {
+			return Arrays.asList(filtersIdsString.split(","));
+		}
+	}
 
+	private void showSingleChoicePoiFilterDialog(final MapActivity mapActivity, final Adapter filtersAdapter) {
+		final OsmandApplication app = mapActivity.getMyApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 
 		final List<PoiUIFilter> list = new ArrayList<>();
 
 		for (PoiUIFilter f : poiFilters.getSortedPoiFilters(true)) {
-			addFilterToList(adapter, list, f);
+			if (!f.isCustomPoiFilter()) {
+				addFilterToList(adapter, list, f);
+			}
 		}
 
-		boolean nightMode = activity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(activity, !nightMode);
-		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(mapActivity, !nightMode);
+		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(mapActivity, nightMode));
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -305,8 +297,8 @@ public class ShowHidePoiAction extends QuickAction {
 
 				filtersAdapter.addItem(list.get(which));
 
-				if (oldTitle.equals(title.getText().toString()) || title.getText().toString().equals(getName(activity))) {
-
+				String titleContent = title.getText().toString();
+				if (oldTitle.equals(titleContent) || titleContent.equals(getName(mapActivity))) {
 					String newTitle = getTitle(filtersAdapter.filters);
 					title.setText(newTitle);
 				}
@@ -350,7 +342,7 @@ public class ShowHidePoiAction extends QuickAction {
 		if (RenderingIcons.containsBigIcon(f.getIconId())) {
 			builder.setIcon(RenderingIcons.getBigIconResourceId(f.getIconId()));
 		} else {
-			builder.setIcon(R.drawable.mx_user_defined);
+			builder.setIcon(R.drawable.mx_special_custom_category);
 		}
 
 		builder.setSkipPaintingWithoutColor(true);

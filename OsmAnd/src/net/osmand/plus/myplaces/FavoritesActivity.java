@@ -1,6 +1,6 @@
 package net.osmand.plus.myplaces;
 
-import static net.osmand.plus.track.TrackMenuFragment.TRACK_DELETED_KEY;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_DELETED_KEY;
 
 import android.app.Activity;
 import android.content.Context;
@@ -21,14 +21,13 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.FavoritesTreeFragment;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -75,7 +74,7 @@ public class FavoritesActivity extends TabActivity {
 
 		app.logEvent("myplaces_open");
 
-		importHelper = new ImportHelper(this, app, null);
+		importHelper = new ImportHelper(this, app);
 
 		//noinspection ConstantConditions
 		getSupportActionBar().setTitle(R.string.shared_string_my_places);

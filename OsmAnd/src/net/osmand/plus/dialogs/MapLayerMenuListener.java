@@ -11,18 +11,18 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
 import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.GpxSelectionHelper;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.MapLayers;
-import net.osmand.plus.activities.PluginsFragment;
+import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.util.Algorithms;
@@ -177,9 +177,9 @@ final class MapLayerMenuListener extends OnRowItemClick {
 					item.setColor(mapActivity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 					adapter.notifyDataSetChanged();
 				};
-		boolean isMultichoose = poiFiltersHelper.getSelectedPoiFilters(wiki).size() > 1;
-		if (isMultichoose) {
-			mapActivity.getMapLayers().showMultichoicePoiFilterDialog(mapActivity, dismissListener);
+		boolean isMultiChoice = poiFiltersHelper.getSelectedPoiFilters(wiki).size() > 1;
+		if (isMultiChoice) {
+			mapActivity.getMapLayers().showMultiChoicePoiFilterDialog(mapActivity, dismissListener);
 		} else {
 			mapActivity.getMapLayers().showSingleChoicePoiFilterDialog(mapActivity, dismissListener);
 		}

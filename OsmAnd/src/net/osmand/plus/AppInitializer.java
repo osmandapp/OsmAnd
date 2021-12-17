@@ -1,5 +1,14 @@
 package net.osmand.plus;
 
+import static net.osmand.plus.AppVersionUpgradeOnInit.LAST_APP_VERSION;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -12,7 +21,13 @@ import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Build;
 
-import net.osmand.AndroidUtils;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
+import androidx.annotation.WorkerThread;
+
+import net.osmand.plus.routing.AvoidRoadsHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -22,26 +37,34 @@ import net.osmand.map.OsmandRegions.RegionTranslation;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
-import net.osmand.plus.activities.LocalIndexHelper;
-import net.osmand.plus.activities.LocalIndexInfo;
-import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.download.LocalIndexHelper;
+import net.osmand.plus.download.LocalIndexInfo;
+import net.osmand.plus.helpers.AnalyticsHelper;
+import net.osmand.plus.helpers.LauncherShortcutsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.DayNightHelper;
+import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelperImpl;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.monitoring.LiveMonitoringHelper;
-import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.notifications.NotificationHelper;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.monitoring.LiveMonitoringHelper;
+import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
-import net.osmand.plus.openplacereviews.OprAuthHelper;
-import net.osmand.plus.osmedit.oauth.OsmOAuthHelper;
+import net.osmand.plus.plugins.openplacereviews.OprAuthHelper;
+import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.render.NativeOsmandLibrary;
@@ -55,6 +78,7 @@ import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
+import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.voice.CommandPlayer;
@@ -82,27 +106,14 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.UiThread;
-import androidx.annotation.WorkerThread;
 import btools.routingapp.IBRouterService;
-
-import static net.osmand.plus.AppVersionUpgradeOnInit.LAST_APP_VERSION;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
 
 /**
  *
  */
 public class AppInitializer implements IProgress {
 
-	public static final String LATEST_CHANGES_URL = "https://osmand.net/blog/osmand-android-4-0-released";
+	public static final String LATEST_CHANGES_URL = "https://osmand.net/blog/osmand-android-4-1-released";
 
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
 	private static final Log LOG = PlatformUtil.getLog(AppInitializer.class);
@@ -122,7 +133,7 @@ public class AppInitializer implements IProgress {
 
 	public enum InitEvents {
 		FAVORITES_INITIALIZED, NATIVE_INITIALIZED,
-		NATIVE_OPEN_GLINITIALIZED,
+		NATIVE_OPEN_GL_INITIALIZED,
 		TASK_CHANGED, MAPS_INITIALIZED, POI_TYPES_INITIALIZED, ASSETS_COPIED, INIT_RENDERERS,
 		RESTORE_BACKUPS, INDEX_REGION_BOUNDARIES, SAVE_GPX_TRACKS, LOAD_GPX_TRACKS, ROUTING_CONFIG_INITIALIZED
 	}
@@ -283,7 +294,13 @@ public class AppInitializer implements IProgress {
 			public String getTranslation(AbstractPoiType type) {
 				AbstractPoiType baseLangType = type.getBaseLangType();
 				if (baseLangType != null) {
-					return getTranslation(baseLangType) + " (" + app.getLangTranslation(type.getLang()).toLowerCase() + ")";
+					String translation = getTranslation(baseLangType);
+					String langTranslation = " (" + app.getLangTranslation(type.getLang()).toLowerCase() + ")";
+					if (translation != null) {
+						return translation + langTranslation;
+					} else {
+						return app.poiTypes.getBasePoiName(baseLangType) + langTranslation;
+					}
 				}
 				return getTranslation(type.getIconKeyName());
 			}
@@ -338,6 +355,11 @@ public class AppInitializer implements IProgress {
 				} catch (Exception e) {
 				}
 				return "";
+			}
+
+			@Override
+			public String getAllLanguagesTranslationSuffix() {
+				return app.getString(R.string.shared_string_all_languages).toLowerCase();
 			}
 
 			@Override
@@ -400,6 +422,7 @@ public class AppInitializer implements IProgress {
 		app.daynightHelper = startupInit(new DayNightHelper(app), DayNightHelper.class);
 		app.locationProvider = startupInit(new OsmAndLocationProvider(app), OsmAndLocationProvider.class);
 		app.avoidSpecificRoads = startupInit(new AvoidSpecificRoads(app), AvoidSpecificRoads.class);
+		app.avoidRoadsHelper = startupInit(new AvoidRoadsHelper(app), AvoidRoadsHelper.class);
 		app.savingTrackHelper = startupInit(new SavingTrackHelper(app), SavingTrackHelper.class);
 		app.analyticsHelper = startupInit(new AnalyticsHelper(app), AnalyticsHelper.class);
 		app.notificationHelper = startupInit(new NotificationHelper(app), NotificationHelper.class);
@@ -435,6 +458,8 @@ public class AppInitializer implements IProgress {
 		app.osmOAuthHelper = startupInit(new OsmOAuthHelper(app), OsmOAuthHelper.class);
 		app.oprAuthHelper = startupInit(new OprAuthHelper(app), OprAuthHelper.class);
 		app.onlineRoutingHelper = startupInit(new OnlineRoutingHelper(app), OnlineRoutingHelper.class);
+		app.launcherShortcutsHelper = startupInit(new LauncherShortcutsHelper(app), LauncherShortcutsHelper.class);
+		app.gpsFilterHelper = startupInit(new GpsFilterHelper(app), GpsFilterHelper.class);
 
 		initOpeningHoursParser();
 	}
@@ -559,15 +584,15 @@ public class AppInitializer implements IProgress {
 	}
 
 
-	public synchronized void initVoiceDataInDifferentThread(@NonNull final Activity uiContext,
+	public synchronized void initVoiceDataInDifferentThread(@NonNull final Context context,
 	                                                        @NonNull final ApplicationMode applicationMode,
 	                                                        @NonNull final String voiceProvider,
 	                                                        @Nullable final Runnable onFinishInitialization,
 	                                                        boolean showProgress) {
 		String progressTitle = app.getString(R.string.loading_data);
 		String progressMessage = app.getString(R.string.voice_data_initializing);
-		final ProgressDialog progressDialog = showProgress
-				? ProgressDialog.show(uiContext, progressTitle, progressMessage)
+		final ProgressDialog progressDialog = showProgress && context instanceof Activity
+				? ProgressDialog.show(context, progressTitle, progressMessage)
 				: null;
 
 		new Thread(() -> {
@@ -585,7 +610,7 @@ public class AppInitializer implements IProgress {
 					progressDialog.dismiss();
 				}
 				if (onFinishInitialization != null) {
-					uiContext.runOnUiThread(onFinishInitialization);
+					((OsmandApplication) context.getApplicationContext()).runInUIThread(onFinishInitialization);
 				}
 			}
 		}).start();
@@ -599,7 +624,7 @@ public class AppInitializer implements IProgress {
 			notifyEvent(InitEvents.INIT_RENDERERS);
 			// native depends on renderers
 			initOpenGl();
-			notifyEvent(InitEvents.NATIVE_OPEN_GLINITIALIZED);
+			notifyEvent(InitEvents.NATIVE_OPEN_GL_INITIALIZED);
 
 			// init poi types before indexes and before POI
 			initPoiTypes();

@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -22,12 +20,11 @@ import com.google.android.material.slider.RangeSlider;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import org.apache.commons.logging.Log;
 

@@ -1,20 +1,6 @@
 package net.osmand.router;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Stack;
-
 import net.osmand.NativeLibrary;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-
-import gnu.trove.list.array.TIntArrayList;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.QuadRect;
@@ -26,9 +12,25 @@ import net.osmand.router.GeneralRouter.RouteDataObjectAttribute;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
+
+import gnu.trove.list.array.TIntArrayList;
+
 public class RoutingConfiguration {
 
 	public static final int DEFAULT_MEMORY_LIMIT = 30;
+	public static final int DEFAULT_NATIVE_MEMORY_LIMIT = 256;
 	public static final float DEVIATION_RADIUS = 3000;
 	public Map<String, String> attributes = new LinkedHashMap<String, String>();
 
@@ -39,6 +41,7 @@ public class RoutingConfiguration {
 	// 1.1 tile load parameters (should not affect routing)
 	public int ZOOM_TO_LOAD_TILES = 16;
 	public long memoryLimitation;
+	public long nativeMemoryLimitation;
 
 	// 1.2 Build A* graph in backward/forward direction (can affect results)
 	// 0 - 2 ways, 1 - direct way, -1 - reverse way
@@ -134,15 +137,20 @@ public class RoutingConfiguration {
 //			impassableRoadLocations.add(23000069L);
 //		}
 
-		public RoutingConfiguration build(String router, int memoryLimitMB) {
-			return build(router, null, memoryLimitMB, null);
+		public RoutingConfiguration build(String router, RoutingMemoryLimits memoryLimits) {
+			return build(router, null, memoryLimits, null);
 		}
 		
-		public RoutingConfiguration build(String router, int memoryLimitMB, Map<String, String> params) {
-			return build(router, null, memoryLimitMB, params);
+		public RoutingConfiguration build(String router,
+		                                  RoutingMemoryLimits memoryLimits,
+		                                  Map<String, String> params) {
+			return build(router, null, memoryLimits, params);
 		}
 		
-		public RoutingConfiguration build(String router, Double direction, int memoryLimitMB, Map<String, String> params) {
+		public RoutingConfiguration build(String router,
+		                                  Double direction,
+		                                  RoutingMemoryLimits memoryLimits,
+		                                  Map<String, String> params) {
 			if (!routers.containsKey(router)) {
 				router = defaultRouter;
 			}
@@ -161,14 +169,21 @@ public class RoutingConfiguration {
 			i.heuristicCoefficient = parseSilentFloat(getAttribute(i.router, "heuristicCoefficient"), i.heuristicCoefficient);
 			i.router.addImpassableRoads(new HashSet<>(impassableRoadLocations));
 			i.ZOOM_TO_LOAD_TILES = parseSilentInt(getAttribute(i.router, "zoomToLoadTiles"), i.ZOOM_TO_LOAD_TILES);
+			int memoryLimitMB = memoryLimits.memoryLimitMb;
 			int desirable = parseSilentInt(getAttribute(i.router, "memoryLimitInMB"), 0);
-			if(desirable != 0) {
+			if (desirable != 0) {
 				i.memoryLimitation = desirable * (1l << 20);
 			} else {
-				if(memoryLimitMB == 0) {
+				if (memoryLimitMB == 0) {
 					memoryLimitMB = DEFAULT_MEMORY_LIMIT;
 				}
 				i.memoryLimitation = memoryLimitMB * (1l << 20);
+			}
+			int desirableNativeLimit = parseSilentInt(getAttribute(i.router, "nativeMemoryLimitInMB"), 0);
+			if (desirableNativeLimit != 0) {
+				i.nativeMemoryLimitation = desirableNativeLimit * (1l << 20);
+			} else {
+				i.nativeMemoryLimitation = memoryLimits.nativeMemoryLimitMb * (1l << 20);
 			}
 			i.planRoadDirection = parseSilentInt(getAttribute(i.router, "planRoadDirection"), i.planRoadDirection);
 			if (directionPointsBuilder != null) {
@@ -195,8 +210,9 @@ public class RoutingConfiguration {
 			return impassableRoadLocations;
 		}
 		
-		public boolean addImpassableRoad(long routeId) {
-			return impassableRoadLocations.add(routeId);
+		public Builder addImpassableRoad(long routeId) {
+			impassableRoadLocations.add(routeId);
+			return this;
 		}
 
 		public Map<String, String> getAttributes() {
@@ -342,6 +358,16 @@ public class RoutingConfiguration {
 		String value1;
 		String value2;
 		String type;
+	}
+
+	public static class RoutingMemoryLimits {
+		public int memoryLimitMb;
+		public int nativeMemoryLimitMb;
+
+		public RoutingMemoryLimits(int memoryLimitMb, int nativeMemoryLimitMb) {
+			this.memoryLimitMb = memoryLimitMb;
+			this.nativeMemoryLimitMb = nativeMemoryLimitMb;
+		}
 	}
 
 	private static void parseRoutingRule(XmlPullParser parser, GeneralRouter currentRouter, RouteDataObjectAttribute attr,

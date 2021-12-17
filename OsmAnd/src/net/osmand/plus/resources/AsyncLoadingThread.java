@@ -6,7 +6,6 @@ import net.osmand.ResultMatcher;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
-import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.resources.ResourceManager.MapTileLayerSize;
 import net.osmand.util.Algorithms;
 

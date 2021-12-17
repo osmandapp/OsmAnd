@@ -144,7 +144,7 @@
     <string name="shared_string_second_short">s</string>
     <string name="shared_string_minute_short">min</string>
     <string name="shared_string_hour_short">h</string>
-    <string name="si_nm_h">Mile marine pe oră (nod)</string>
+    <string name="si_nm_h">Mile nautice pe oră (nod)</string>
     <string name="si_min_m">Minute pe milă</string>
     <string name="si_min_km">Minute pe kilometru</string>
     <string name="si_m_s">Metri pe secundă</string>

@@ -18,8 +18,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
@@ -31,7 +31,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTwoChoicesButton.OnBo
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.render.RenderingRuleProperty;
 

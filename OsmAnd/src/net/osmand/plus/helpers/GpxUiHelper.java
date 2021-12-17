@@ -3,20 +3,21 @@ package net.osmand.plus.helpers;
 import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
-import static net.osmand.plus.OsmAndFormatter.FEET_IN_ONE_METER;
-import static net.osmand.plus.OsmAndFormatter.METERS_IN_KILOMETER;
-import static net.osmand.plus.OsmAndFormatter.METERS_IN_ONE_MILE;
-import static net.osmand.plus.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
-import static net.osmand.plus.OsmAndFormatter.YARDS_IN_ONE_METER;
-import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
+import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
-import static net.osmand.plus.dialogs.GpxAppearanceAdapter.SHOW_START_FINISH_ATTR;
+import static net.osmand.plus.track.GpxAppearanceAdapter.SHOW_START_FINISH_ATTR;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -67,16 +68,14 @@ import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.github.mikephil.charting.formatter.IFillFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.MPPointF;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
-import net.osmand.FileUtils;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.Elevation;
 import net.osmand.GPXUtilities.GPXFile;
@@ -88,36 +87,38 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GpxDbHelper;
-import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
-import net.osmand.plus.GpxSelectionHelper;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDbHelper;
+import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndConstants;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActivityResultListener;
+import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.PluginsFragment;
-import net.osmand.plus.dialogs.GpxAppearanceAdapter;
-import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
-import net.osmand.plus.helpers.enums.MetricsConstants;
-import net.osmand.plus.helpers.enums.SpeedConstants;
+import net.osmand.plus.plugins.PluginsFragment;
+import net.osmand.plus.track.GpxAppearanceAdapter;
+import net.osmand.plus.track.GpxAppearanceAdapter.AppearanceListItem;
+import net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter;
+import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
-import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.SaveCurrentTrackTask;
 import net.osmand.plus.routing.RouteCalculationResult;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SaveGpxAsyncTask;
@@ -183,7 +184,7 @@ public class GpxUiHelper {
 		// OUTPUT:
 		// 1. Total distance, Start time, End time
 		description.append(app.getString(R.string.gpx_info_distance, getColorValue(distanceClr,
-						OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app), html),
+				OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app), html),
 				getColorValue(distanceClr, analysis.points + "", html)));
 		if (analysis.totalTracks > 1) {
 			description.append(nl).append(app.getString(R.string.gpx_info_subtracks, getColorValue(speedClr, analysis.totalTracks + "", html)));
@@ -441,7 +442,17 @@ public class GpxUiHelper {
 				final ContextMenuItem item = contextMenuAdapter.getItem(position);
 				GPXInfo info = gpxInfoList.get(position);
 				boolean currentlyRecordingTrack = showCurrentGpx && position == 0;
-				updateGpxInfoView(v, item.getTitle(), info, currentlyRecordingTrack ? null : getDataItem(info), currentlyRecordingTrack, app);
+
+				GPXTrackAnalysis analysis = null;
+				if (currentlyRecordingTrack) {
+					analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis(app);
+				} else {
+					GpxDataItem dataItem = getDataItem(info);
+					if (dataItem != null) {
+						analysis = dataItem.getAnalysis();
+					}
+				}
+				updateGpxInfoView(v, item.getTitle(), info, analysis, app);
 
 				if (item.getSelected() == null) {
 					v.findViewById(R.id.check_item).setVisibility(View.GONE);
@@ -658,7 +669,7 @@ public class GpxUiHelper {
 						SelectedGpxFile selectedGpxFile =
 								app.getSelectedGpxHelper().getSelectedFileByName(fileName);
 						if (selectedGpxFile != null) {
-							callbackWithObject.processResult(new GPXFile[]{selectedGpxFile.getGpxFile()});
+							callbackWithObject.processResult(new GPXFile[] {selectedGpxFile.getGpxFile()});
 						} else {
 							loadGPXFileInDifferentThread(activity, callbackWithObject, dir, null, fileName);
 						}
@@ -762,7 +773,7 @@ public class GpxUiHelper {
 	                                      @Nullable Drawable iconDrawable,
 	                                      @NonNull GPXInfo info,
 	                                      @NonNull GpxDataItem dataItem) {
-		updateGpxInfoView(v, itemTitle, info, dataItem, false, app);
+		updateGpxInfoView(v, itemTitle, info, dataItem.getAnalysis(), app);
 		if (iconDrawable != null) {
 			ImageView icon = v.findViewById(R.id.icon);
 			icon.setImageDrawable(iconDrawable);
@@ -773,8 +784,7 @@ public class GpxUiHelper {
 	public static void updateGpxInfoView(View v,
 	                                     String itemTitle,
 	                                     GPXInfo info,
-	                                     GpxDataItem dataItem,
-	                                     boolean currentlyRecordingTrack,
+	                                     GPXTrackAnalysis analysis,
 	                                     OsmandApplication app) {
 		TextView viewName = v.findViewById(R.id.name);
 		viewName.setText(itemTitle.replace("/", " • ").trim());
@@ -782,13 +792,6 @@ public class GpxUiHelper {
 		ImageView icon = v.findViewById(R.id.icon);
 		icon.setVisibility(View.GONE);
 		//icon.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_polygom_dark));
-
-		GPXTrackAnalysis analysis = null;
-		if (currentlyRecordingTrack) {
-			analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis(app);
-		} else if (dataItem != null) {
-			analysis = dataItem.getAnalysis();
-		}
 
 		boolean sectionRead = analysis == null;
 		if (sectionRead) {
@@ -853,11 +856,11 @@ public class GpxUiHelper {
 	}
 
 	@TargetApi(Build.VERSION_CODES.KITKAT)
-	private static void addTrack(final Activity activity, ArrayAdapter<String> listAdapter,
+	private static void addTrack(Activity activity, ArrayAdapter<String> listAdapter,
 	                             ContextMenuAdapter contextMenuAdapter, List<GPXInfo> allGpxFiles) {
 		if (activity instanceof MapActivity) {
 			final MapActivity mapActivity = (MapActivity) activity;
-			ActivityResultListener.OnActivityResultListener onActivityResultListener = (resultCode, resultData) -> {
+			OnActivityResultListener listener = (resultCode, resultData) -> {
 				if (resultCode != Activity.RESULT_OK || resultData == null) {
 					return;
 				}
@@ -884,12 +887,11 @@ public class GpxUiHelper {
 
 			Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
 			intent.setType("*/*");
-			if (AndroidUtils.isIntentSafe(mapActivity, intent)) {
-				ActivityResultListener listener = new ActivityResultListener(OPEN_GPX_DOCUMENT_REQUEST, onActivityResultListener);
-				mapActivity.registerActivityResultListener(listener);
+			try {
 				mapActivity.startActivityForResult(intent, OPEN_GPX_DOCUMENT_REQUEST);
-			} else {
-				mapActivity.getMyApplication().showToastMessage(R.string.no_activity_for_intent);
+				mapActivity.registerActivityResultListener(new ActivityResultListener(OPEN_GPX_DOCUMENT_REQUEST, listener));
+			} catch (ActivityNotFoundException e) {
+				Toast.makeText(mapActivity, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
 			}
 		}
 	}
@@ -1106,8 +1108,18 @@ public class GpxUiHelper {
 		setupGPXChart(mChart, yLabelsCount, 24f, 16f, settings.isLightContent(), true);
 	}
 
-	public static void setupGPXChart(LineChart mChart, int yLabelsCount, float topOffset, float bottomOffset, boolean light, boolean useGesturesAndScale) {
-		mChart.setHardwareAccelerationEnabled(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP);
+	public static void setupGPXChart(LineChart mChart, int yLabelsCount, float topOffset, float bottomOffset,
+	                                 boolean light, boolean useGesturesAndScale) {
+		setupGPXChart(mChart, yLabelsCount, topOffset, bottomOffset, light, useGesturesAndScale, null);
+	}
+
+	public static void setupGPXChart(LineChart mChart, int yLabelsCount, float topOffset, float bottomOffset,
+	                                 boolean light, boolean useGesturesAndScale, Drawable markerIcon) {
+		if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+			mChart.setHardwareAccelerationEnabled(false);
+		} else {
+			mChart.setHardwareAccelerationEnabled(true);
+		}
 		mChart.setTouchEnabled(useGesturesAndScale);
 		mChart.setDragEnabled(useGesturesAndScale);
 		mChart.setScaleEnabled(useGesturesAndScale);
@@ -1125,7 +1137,7 @@ public class GpxUiHelper {
 
 		// create a custom MarkerView (extend MarkerView) and specify the layout
 		// to use for it
-		GPXMarkerView mv = new GPXMarkerView(mChart.getContext());
+		GPXMarkerView mv = new GPXMarkerView(mChart.getContext(), markerIcon);
 		mv.setChartView(mChart); // For bounds control
 		mChart.setMarker(mv); // Set the marker to the chart
 		mChart.setDrawMarkers(true);
@@ -1225,14 +1237,14 @@ public class GpxUiHelper {
 		final String mainUnitX = ctx.getString(mainUnitStr);
 
 		axisBase.setGranularity(granularity);
-		axisBase.setValueFormatter(new IAxisValueFormatter() {
+		axisBase.setValueFormatter(new ValueFormatter() {
 
 			@Override
-			public String getFormattedValue(float value, AxisBase axis) {
+			public String getFormattedValue(float value) {
 				if (!Algorithms.isEmpty(formatX)) {
 					return MessageFormat.format(formatX + mainUnitX, value);
 				} else {
-					return (int)value + " " + mainUnitX;
+					return (int) value + " " + mainUnitX;
 				}
 			}
 		});
@@ -1243,10 +1255,10 @@ public class GpxUiHelper {
 	private static float setupXAxisTime(XAxis xAxis, long timeSpan) {
 		final boolean useHours = timeSpan / 3600000 > 0;
 		xAxis.setGranularity(1f);
-		xAxis.setValueFormatter(new IAxisValueFormatter() {
+		xAxis.setValueFormatter(new ValueFormatter() {
 			@Override
-			public String getFormattedValue(float value, AxisBase axis) {
-				int seconds = (int)value;
+			public String getFormattedValue(float value) {
+				int seconds = (int) value;
 				if (useHours) {
 					int hours = seconds / (60 * 60);
 					int minutes = (seconds / 60) % 60;
@@ -1265,10 +1277,10 @@ public class GpxUiHelper {
 
 	private static float setupXAxisTimeOfDay(XAxis xAxis, final long startTime) {
 		xAxis.setGranularity(1f);
-		xAxis.setValueFormatter(new IAxisValueFormatter() {
+		xAxis.setValueFormatter(new ValueFormatter() {
 			@Override
-			public String getFormattedValue(float value, AxisBase axis) {
-				long seconds = (long) (startTime/1000 + value);
+			public String getFormattedValue(float value) {
+				long seconds = (long) (startTime / 1000 + value);
 				return OsmAndFormatter.getFormattedTimeShort(seconds);
 			}
 		});
@@ -1289,7 +1301,7 @@ public class GpxUiHelper {
 		Entry lastEntry = null;
 		float lastXSameY = -1;
 		boolean hasSameY = false;
-		float x;
+		float x = 0f;
 		for (Elevation e : elevationData) {
 			i++;
 			if (axisType == GPXDataSetAxisType.TIME || axisType == GPXDataSetAxisType.TIMEOFDAY) {
@@ -1297,7 +1309,7 @@ public class GpxUiHelper {
 			} else {
 				x = e.distance;
 			}
-			if (x > 0) {
+			if (x >= 0) {
 				if (!(calcWithoutGaps && e.firstPoint && lastEntry != null)) {
 					nextX += x / divX;
 				}
@@ -1305,7 +1317,7 @@ public class GpxUiHelper {
 					elev = e.elevation;
 					if (prevElevOrig != -80000) {
 						if (elev > prevElevOrig) {
-							elev -= 1f;
+							//elev -= 1f;
 						} else if (prevElevOrig == elev && i < lastIndex) {
 							hasSameY = true;
 							lastXSameY = nextX;
@@ -1458,11 +1470,11 @@ public class GpxUiHelper {
 		yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_blue_grid));
 		yAxis.setGranularity(1f);
 		yAxis.resetAxisMinimum();
-		yAxis.setValueFormatter(new IAxisValueFormatter() {
+		yAxis.setValueFormatter(new ValueFormatter() {
 
 			@Override
-			public String getFormattedValue(float value, AxisBase axis) {
-				return (int)value + " " + mainUnitY;
+			public String getFormattedValue(float value) {
+				return (int) value + " " + mainUnitY;
 			}
 		});
 
@@ -1500,12 +1512,7 @@ public class GpxUiHelper {
 
 		//dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
 
-		dataSet.setFillFormatter(new IFillFormatter() {
-			@Override
-			public float getFillLinePosition(ILineDataSet dataSet, LineDataProvider dataProvider) {
-				return dataProvider.getYChartMin();
-			}
-		});
+		dataSet.setFillFormatter((ds, dataProvider) -> dataProvider.getYChartMin());
 		if (useRightAxis) {
 			dataSet.setAxisDependency(YAxis.AxisDependency.RIGHT);
 		}
@@ -1573,7 +1580,7 @@ public class GpxUiHelper {
 		float nextY;
 		float x;
 		for (Speed s : speedData) {
-			switch(axisType) {
+			switch (axisType) {
 				case TIMEOFDAY:
 				case TIME:
 					x = s.time;
@@ -1617,14 +1624,14 @@ public class GpxUiHelper {
 			format = "{0,number,0.#} ";
 		}
 		final String formatY = format;
-		yAxis.setValueFormatter(new IAxisValueFormatter() {
+		yAxis.setValueFormatter(new ValueFormatter() {
 
 			@Override
-			public String getFormattedValue(float value, AxisBase axis) {
+			public String getFormattedValue(float value) {
 				if (!Algorithms.isEmpty(formatY)) {
 					return MessageFormat.format(formatY + mainUnitY, value);
 				} else {
-					return (int)value + " " + mainUnitY;
+					return (int) value + " " + mainUnitY;
 				}
 			}
 		});
@@ -1716,11 +1723,11 @@ public class GpxUiHelper {
 		yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_green_grid));
 		yAxis.setGranularity(1f);
 		yAxis.resetAxisMinimum();
-		yAxis.setValueFormatter(new IAxisValueFormatter() {
+		yAxis.setValueFormatter(new ValueFormatter() {
 
 			@Override
-			public String getFormattedValue(float value, AxisBase axis) {
-				return (int)value + " " + mainUnitY;
+			public String getFormattedValue(float value) {
+				return (int) value + " " + mainUnitY;
 			}
 		});
 
@@ -1779,7 +1786,7 @@ public class GpxUiHelper {
 		int index = (int) ((SLOPE_PROXIMITY / STEP) / 2);
 		for (int k = 0; k < calculatedSlopeDist.length; k++) {
 			calculatedSlopeDist[k] = calculatedDist[index + k];
-			calculatedSlope[k] = (calculatedH[ 2 * index + k] - calculatedH[k]) * 100 / SLOPE_PROXIMITY;
+			calculatedSlope[k] = (calculatedH[2 * index + k] - calculatedH[k]) * 100 / SLOPE_PROXIMITY;
 			if (Double.isNaN(calculatedSlope[k])) {
 				calculatedSlope[k] = 0;
 			}
@@ -1985,25 +1992,57 @@ public class GpxUiHelper {
 		}
 	}
 
+	public static class GPXHighlight extends Highlight {
+
+		private final boolean showIcon;
+
+		public GPXHighlight(float x, int dataSetIndex, boolean showIcon) {
+			super(x, Float.NaN, dataSetIndex);
+			this.showIcon = showIcon;
+		}
+
+		public GPXHighlight(float x, float y, int dataSetIndex, boolean showIcon) {
+			super(x, y, dataSetIndex);
+			this.showIcon = showIcon;
+		}
+
+		public boolean shouldShowIcon() {
+			return showIcon;
+		}
+	}
+
 	@SuppressLint("ViewConstructor")
 	private static class GPXMarkerView extends MarkerView {
 
 		private final View textAltView;
 		private final View textSpdView;
 		private final View textSlpView;
+		private final boolean hasIcon;
 
-		public GPXMarkerView(Context context) {
+		public GPXMarkerView(@NonNull Context context,
+		                     @Nullable Drawable icon) {
 			super(context, R.layout.chart_marker_view);
 			textAltView = findViewById(R.id.text_alt_container);
 			textSpdView = findViewById(R.id.text_spd_container);
 			textSlpView = findViewById(R.id.text_slp_container);
+			if (icon != null) {
+				findViewById(R.id.icon_divider).setVisibility(VISIBLE);
+				findViewById(R.id.icon_container).setVisibility(VISIBLE);
+				((ImageView) findViewById(R.id.icon)).setImageDrawable(icon);
+			}
+			hasIcon = icon != null;
 		}
 
 		// callbacks everytime the MarkerView is redrawn, can be used to update the
 		// content (user-interface)
 		@Override
 		public void refreshContent(Entry e, Highlight highlight) {
-			ChartData chartData = getChartView().getData();
+			ChartData<?> chartData = getChartView().getData();
+			if (hasIcon && highlight instanceof GPXHighlight) {
+				boolean showIcon = ((GPXHighlight) highlight).shouldShowIcon();
+				AndroidUiHelper.setVisibility(showIcon ? VISIBLE : GONE, findViewById(R.id.icon_divider));
+				AndroidUiHelper.setVisibility(showIcon ? VISIBLE : GONE, findViewById(R.id.icon_container));
+			}
 			if (chartData.getDataSetCount() == 1) {
 				OrderedLineDataSet dataSet = (OrderedLineDataSet) chartData.getDataSetByIndex(0);
 				String value = (int) e.getY() + " ";
@@ -2269,8 +2308,8 @@ public class GpxUiHelper {
 		return dataSet;
 	}
 
-	public static GpxDisplayItem makeGpxDisplayItem(OsmandApplication app, GPXFile gpxFile,
-	                                                ChartPointLayer chartPointLayer) {
+	public static GpxDisplayItem makeGpxDisplayItem(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
+	                                                @NonNull ChartPointLayer chartPointLayer) {
 		GpxDisplayGroup group = null;
 		if (!Algorithms.isEmpty(gpxFile.tracks)) {
 			GpxSelectionHelper helper = app.getSelectedGpxHelper();
@@ -2318,7 +2357,7 @@ public class GpxUiHelper {
 			@Override
 			public void gpxSavingFinished(Exception errorMessage) {
 				if (errorMessage == null) {
-					GpxUiHelper.shareGpx(app, new File(gpxFile.path));
+					shareGpx(app, new File(gpxFile.path));
 				}
 			}
 		};
@@ -2368,18 +2407,20 @@ public class GpxUiHelper {
 		if (dataItem.getColoringType() != null) {
 			gpxFile.setColoringType(dataItem.getColoringType());
 		}
+		GpsFilter.writeValidFilterValuesToExtensions(gpxFile.getExtensionsToWrite(), dataItem);
 	}
 
 	public static void shareGpx(@NonNull Context context, @NonNull File file) {
 		Uri fileUri = AndroidUtils.getUriForFile(context, file);
-		Intent sendIntent = new Intent(Intent.ACTION_SEND);
-		sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
-		sendIntent.setType("application/gpx+xml");
-		sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.putExtra(Intent.EXTRA_STREAM, fileUri);
+		intent.setType("application/gpx+xml");
+		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 		if (context instanceof OsmandApplication) {
-			sendIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		}
-		AndroidUtils.startActivityIfSafe(context, sendIntent);
+		Intent chooserIntent = Intent.createChooser(intent, context.getString(R.string.shared_string_share));
+		AndroidUtils.startActivityIfSafe(context, chooserIntent);
 	}
 
 	@NonNull

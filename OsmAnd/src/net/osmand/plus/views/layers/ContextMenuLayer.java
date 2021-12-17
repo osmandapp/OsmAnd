@@ -25,7 +25,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
 import androidx.appcompat.content.res.AppCompatResources;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
@@ -68,7 +68,7 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
-import net.osmand.plus.osmedit.OsmBugsLayer;
+import net.osmand.plus.plugins.osmedit.OsmBugsLayer;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
@@ -76,9 +76,9 @@ import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.MoveMarkerBottomSheetHelper;
-import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -969,7 +969,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		MapActivity mapActivity = getMapActivity();
 		if (mInChangeMarkerPositionMode || mInGpxDetailsMode || mInAddGpxPointMode
 				|| mapActivity == null || mapActivity.getMapRouteInfoMenu().isVisible()
-				|| MapRouteInfoMenu.waypointsVisible || MapRouteInfoMenu.followTrackVisible) {
+				|| MapRouteInfoMenu.waypointsVisible || MapRouteInfoMenu.followTrackVisible
+				|| mapActivity.getGpsFilterFragment() != null) {
 			return true;
 		}
 		boolean res = false;
@@ -1084,7 +1085,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	@Override
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null || menu == null || mInChangeMarkerPositionMode || mInGpxDetailsMode) {
+		if (mapActivity == null || menu == null || mInChangeMarkerPositionMode || mInGpxDetailsMode
+				|| mapActivity.getGpsFilterFragment() != null) {
 			return true;
 		}
 

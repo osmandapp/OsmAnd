@@ -9,6 +9,9 @@ import net.osmand.util.Algorithms;
 
 import java.util.Locale;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 public class LocaleHelper {
 
 	private final OsmandApplication app;
@@ -17,7 +20,7 @@ public class LocaleHelper {
 	private Locale preferredLocale;
 	private Resources localizedResources;
 
-	public LocaleHelper(OsmandApplication app) {
+	public LocaleHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 	}
 
@@ -54,15 +57,13 @@ public class LocaleHelper {
 
 			Resources resources = app.getBaseContext().getResources();
 			resources.updateConfiguration(config, resources.getDisplayMetrics());
-			if (android.os.Build.VERSION.SDK_INT >= 17) {
-				Configuration conf = new Configuration(config);
-				conf.locale = selectedLocale;
-				localizedResources = app.createConfigurationContext(conf).getResources();
-			}
+			Configuration conf = new Configuration(config);
+			conf.locale = selectedLocale;
+			localizedResources = app.createConfigurationContext(conf).getResources();
 		}
 	}
 
-	public void setLanguage(Context context) {
+	public void setLanguage(@NonNull Context context) {
 		if (preferredLocale != null) {
 			Configuration config = context.getResources().getConfiguration();
 			String lang = preferredLocale.getLanguage();
@@ -80,18 +81,22 @@ public class LocaleHelper {
 		}
 	}
 
+	@Nullable
 	public Resources getLocalizedResources() {
 		return localizedResources;
 	}
 
+	@Nullable
 	public Locale getPreferredLocale() {
 		return preferredLocale;
 	}
 
+	@Nullable
 	public Locale getDefaultLocale() {
 		return defaultLocale;
 	}
 
+	@NonNull
 	public String getCountry() {
 		String country;
 		if (preferredLocale != null) {
@@ -102,14 +107,10 @@ public class LocaleHelper {
 		return country;
 	}
 
+	@NonNull
 	public String getLanguage() {
-		String lang;
-		if (preferredLocale != null) {
-			lang = preferredLocale.getLanguage();
-		} else {
-			lang = Locale.getDefault().getLanguage();
-		}
-		if (lang != null && lang.length() > 3) {
+		String lang = preferredLocale != null ? preferredLocale.getLanguage() : Locale.getDefault().getLanguage();
+		if (lang.length() > 3) {
 			lang = lang.substring(0, 2).toLowerCase();
 		}
 		return lang;

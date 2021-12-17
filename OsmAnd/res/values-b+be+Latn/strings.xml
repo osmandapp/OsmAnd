@@ -1276,7 +1276,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="osm_settings_descr">Zadać nalady dlia OpenStreetMap.org (OSM), nieabchodnyja dlia ŭnioska.</string>
     <string name="data_settings_descr">Vybar movy, abnaŭliennie dadzienych.</string>
     <string name="data_settings">Źviestkі</string>
-    <string name="osm_settings">Redahavańnie OSM</string>
+    <string name="osm_editing_plugin_name">Redahavańnie OSM</string>
     <string name="additional_settings">Dadatkovyja nałady</string>
     <string name="shared_string_settings">Nałady</string>
     <string name="update_tile">Abnavіć mapu</string>

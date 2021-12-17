@@ -15,12 +15,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.util.Algorithms;

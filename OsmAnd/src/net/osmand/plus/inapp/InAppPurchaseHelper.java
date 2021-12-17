@@ -11,16 +11,17 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.AndroidNetworkUtils;
-import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
-import net.osmand.AndroidNetworkUtils.OnSendRequestsListener;
-import net.osmand.AndroidNetworkUtils.Request;
-import net.osmand.AndroidNetworkUtils.RequestResponse;
+import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidNetworkUtils.OnRequestResultListener;
+import net.osmand.plus.utils.AndroidNetworkUtils.OnSendRequestsListener;
+import net.osmand.plus.utils.AndroidNetworkUtils.Request;
+import net.osmand.plus.utils.AndroidNetworkUtils.RequestResponse;
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
@@ -35,9 +36,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -57,6 +61,9 @@ public abstract class InAppPurchaseHelper {
 	protected Map<String, SubscriptionStateHolder> subscriptionStateMap = new HashMap<>();
 
 	private static final long PURCHASE_VALIDATION_PERIOD_MSEC = 1000 * 60 * 60 * 24; // daily
+
+	private static final String ANDROID_AUTO_START_DATE = "01.01.2022";
+	private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
 
 	protected boolean isDeveloperVersion;
 	protected String token = "";
@@ -174,6 +181,27 @@ public abstract class InAppPurchaseHelper {
 				|| isSubscribedToOsmAndPro(ctx);
 	}
 
+	public static boolean isAndroidAutoAvailable(@NonNull OsmandApplication ctx) {
+		long time = System.currentTimeMillis();
+		long calTime = getStartAndroidAutoTime();
+		if (time >= calTime) {
+			return Version.isDeveloperBuild(ctx) || Version.isPaidVersion(ctx);
+		}
+		return true;
+	}
+
+	private static long getStartAndroidAutoTime() {
+		try {
+			Date date = SIMPLE_DATE_FORMAT.parse(ANDROID_AUTO_START_DATE);
+			if (date != null) {
+				return date.getTime();
+			}
+		} catch (ParseException e) {
+			LOG.error(e);
+		}
+		return 0;
+	}
+
 	public static boolean isFullVersionPurchased(@NonNull OsmandApplication ctx) {
 		return Version.isDeveloperBuild(ctx) || ctx.getSettings().FULL_VERSION_PURCHASED.get();
 	}
@@ -213,13 +241,13 @@ public abstract class InAppPurchaseHelper {
 		return purchases.getContourLines();
 	}
 
-	public InAppSubscription getMonthlyLiveUpdates() {
-		return purchases.getMonthlyLiveUpdates();
+	public InAppSubscription getMonthlySubscription() {
+		return purchases.getMonthlySubscription();
 	}
 
 	@Nullable
-	public InAppSubscription getPurchasedMonthlyLiveUpdates() {
-		return purchases.getPurchasedMonthlyLiveUpdates();
+	public InAppSubscription getPurchasedMonthlySubscription() {
+		return purchases.getPurchasedMonthlySubscription();
 	}
 
 	@Nullable
@@ -743,9 +771,11 @@ public abstract class InAppPurchaseHelper {
 			subscription.setPurchaseState(PurchaseState.PURCHASED);
 			subscription.setPurchaseInfo(ctx, info);
 			subscription.setState(ctx, SubscriptionState.UNDEFINED);
+			logDebug("Sending tokens...");
 			sendTokens(Collections.singletonList(info), new OnRequestResultListener() {
 				@Override
 				public void onResult(@Nullable String result, @Nullable String error, @Nullable Integer resultCode) {
+					logDebug("Tokens sent");
 					boolean active = false;
 					if (liveUpdates || pro) {
 						active = ctx.getSettings().LIVE_UPDATES_PURCHASED.get();
@@ -763,6 +793,7 @@ public abstract class InAppPurchaseHelper {
 					}
 					notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_SUBSCRIPTION);
 					notifyItemPurchased(sku, active);
+					refreshAndroidAuto();
 					stop(true);
 				}
 			});
@@ -777,6 +808,7 @@ public abstract class InAppPurchaseHelper {
 
 			notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_FULL_VERSION);
 			notifyItemPurchased(fullVersion.getSku(), false);
+			refreshAndroidAuto();
 			stop(true);
 
 		} else if (depthContours != null && info.getSku().equals(depthContours.getSku())) {
@@ -807,6 +839,14 @@ public abstract class InAppPurchaseHelper {
 		} else {
 			notifyDismissProgress(activeTask);
 			stop(true);
+		}
+	}
+
+	private void refreshAndroidAuto() {
+		NavigationSession carNavigationSession = ctx.getCarNavigationSession();
+		if (carNavigationSession != null) {
+			logDebug("Call Android Auto");
+			carNavigationSession.onPurchaseDone();
 		}
 	}
 

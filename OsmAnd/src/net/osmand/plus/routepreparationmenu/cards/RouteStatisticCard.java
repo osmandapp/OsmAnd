@@ -16,11 +16,11 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -28,7 +28,7 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
-import net.osmand.plus.measurementtool.graph.CommonGraphAdapter;
+import net.osmand.plus.measurementtool.graph.CommonChartAdapter;
 import net.osmand.plus.routing.RoutingHelper;
 
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ public class RouteStatisticCard extends MapBaseCard {
 	@Nullable
 	private OrderedLineDataSet elevationDataSet;
 	private OnClickListener onAnalyseClickListener;
-	private CommonGraphAdapter graphAdapter;
+	private CommonChartAdapter graphAdapter;
 
 	public RouteStatisticCard(MapActivity mapActivity, GPXFile gpx,
 							  OnClickListener onAnalyseClickListener) {
@@ -118,36 +118,17 @@ public class RouteStatisticCard extends MapBaseCard {
 	}
 
 	private void updateButtons() {
-		FrameLayout detailsButton = (FrameLayout) view.findViewById(R.id.details_button);
-		TextView detailsButtonDescr = (TextView) view.findViewById(R.id.details_button_descr);
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			AndroidUtils.setBackground(app, detailsButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
-			AndroidUtils.setBackground(app, detailsButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
-		} else {
-			AndroidUtils.setBackground(app, detailsButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
-		}
-		detailsButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardButtonPressed(RouteStatisticCard.this, DETAILS_BUTTON_INDEX);
-				}
-			}
-		});
-		FrameLayout startButton = (FrameLayout) view.findViewById(R.id.start_button);
-		TextView startButtonDescr = (TextView) view.findViewById(R.id.start_button_descr);
+		FrameLayout detailsButton = view.findViewById(R.id.details_button);
+		TextView detailsButtonDescr = view.findViewById(R.id.details_button_descr);
+		AndroidUtils.setBackground(app, detailsButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
+		AndroidUtils.setBackground(app, detailsButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
+		detailsButton.setOnClickListener(v -> notifyButtonPressed(DETAILS_BUTTON_INDEX));
+
+		FrameLayout startButton = view.findViewById(R.id.start_button);
+		TextView startButtonDescr = view.findViewById(R.id.start_button_descr);
 		AndroidUtils.setBackground(app, startButton, nightMode, R.drawable.btn_active_light, R.drawable.btn_active_dark);
 		int color = ContextCompat.getColor(app, R.color.card_and_list_background_light);
-		startButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardButtonPressed(RouteStatisticCard.this, START_BUTTON_INDEX);
-				}
-			}
-		});
+		startButton.setOnClickListener(v -> notifyButtonPressed(START_BUTTON_INDEX));
 		RoutingHelper helper = app.getRoutingHelper();
 		if (helper.isFollowingMode() || helper.isPauseNavigation()) {
 			startButtonDescr.setText(R.string.shared_string_resume);
@@ -206,14 +187,14 @@ public class RouteStatisticCard extends MapBaseCard {
 	}
 
 	@Nullable
-	public CommonGraphAdapter getGraphAdapter() {
+	public CommonChartAdapter getGraphAdapter() {
 		return graphAdapter;
 	}
 
 	private void buildHeader(GPXTrackAnalysis analysis) {
 		LineChart mChart = (LineChart) view.findViewById(R.id.chart);
 		GpxUiHelper.setupGPXChart(mChart, 4, 24f, 16f, !nightMode, true);
-		graphAdapter = new CommonGraphAdapter(app, mChart, true);
+		graphAdapter = new CommonChartAdapter(app, mChart, true);
 
 		if (analysis.hasElevationData) {
 			List<ILineDataSet> dataSets = new ArrayList<>();

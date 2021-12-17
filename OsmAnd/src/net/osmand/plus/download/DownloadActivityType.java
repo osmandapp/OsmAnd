@@ -4,7 +4,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;

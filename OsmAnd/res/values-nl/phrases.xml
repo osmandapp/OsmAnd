@@ -3907,4 +3907,22 @@
     <string name="poi_paintball">Paintball</string>
     <string name="poi_tactile_paving_incorrect">Incorrect</string>
     <string name="poi_tactile_paving_primitive">Primitief</string>
+    <string name="poi_resort_hunting">Jachtbasis</string>
+    <string name="poi_shop_security">Veiligheidswinkel</string>
+    <string name="poi_mountain_rescue">Bergreddingsdienst</string>
+    <string name="poi_piste_ref">Referentienummer van piste</string>
+    <string name="poi_dive_centre">Scubaduikcentrum</string>
+    <string name="poi_butcher_type">Primaire vleessoort</string>
+    <string name="poi_coffee_filter">Koffie</string>
+    <string name="poi_tobacco_filter">Tabak</string>
+    <string name="poi_medical_supply_filter">Categorie medische benodigdheden</string>
+    <string name="poi_fridge_filter">Frigo</string>
+    <string name="poi_ice_cream_filter">Ijs</string>
+    <string name="poi_membership_filter">Lidmaatschap vereist</string>
+    <string name="poi_furniture_filter">Meubels</string>
+    <string name="poi_heating_filter">Verwarming</string>
+    <string name="poi_faculty_filter">Faculteit</string>
+    <string name="poi_agrarian_type">Productiemiddelen voor landbouw</string>
+    <string name="poi_service_fleurop_filter">Diensten voor bloemen</string>
+    <string name="poi_mattress_filter">Matras</string>
 </resources>

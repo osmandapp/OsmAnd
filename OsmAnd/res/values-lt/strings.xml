@@ -607,7 +607,7 @@
     <string name="osm_settings_descr">Nurodyti Openstreetmap.org (OSM) nustatymus, reikalingus informacijai į OSM pateikti.</string>
     <string name="data_settings_descr">Nurodyti kalbą, parsiųsti/atnaujinti duomenis.</string>
     <string name="data_settings">Data</string>
-    <string name="osm_settings">OSM redagavimas</string>
+    <string name="osm_editing_plugin_name">OSM redagavimas</string>
     <string name="auto_zoom_map_descr">Priderinti žemėlapio mastelį pagal jūsų greitį (kai žemėlapis sinchronizuojamas su esama padėtimi).</string>
     <string name="auto_zoom_map">Automatiškai keisti mastelį</string>
     <string name="additional_settings">Papildomi nustatymai</string>
@@ -2893,4 +2893,19 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="activity_type_offroad_name">Bekelė</string>
     <string name="service_is_not_available_please_try_later">Paslauga nepasiekiama, bandykite vėliau</string>
     <string name="shared_string_logout">Atsijungti</string>
+    <string name="search_title">Paieška: %1$s</string>
+    <string name="clear_all_history">Išvalyti visą istoriją</string>
+    <string name="history_actions_descr">Istoriją galite eksportuoti į failą.</string>
+    <string name="shortcut_start_recording">Pradėti įrašinėjimą</string>
+    <string name="android_auto_map_placeholder_descr">Atjunkite įrenginį nuo „Android Auto“, kad galėtumėte peržiūrėti žemėlapį programėle.</string>
+    <string name="included_categories">Įtrauktos kategorijos</string>
+    <string name="shared_string_details">Išsami informacija</string>
+    <string name="map_markers_history">Žemėlapio žymeklių istorija</string>
+    <string name="android_auto_map_placeholder_title">Žemėlapis rodomas transporto priemonės ekrane.</string>
+    <string name="continue_on_phone">Tęsti telefone</string>
+    <string name="location_access_request_action">Suteikti prieigą</string>
+    <string name="location_access_request_result">Patvirtinta: %1$s Atmesta: %2$s</string>
+    <string name="shared_string_articles">Straipsniai</string>
+    <string name="transparent_status_bar_descr">Rodyti žemėlapį būsenos juostoje</string>
+    <string name="transparent_status_bar">Skaidri būsenos juosta</string>
 </resources>

@@ -1,12 +1,15 @@
 package net.osmand.plus.importfiles;
 
+import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
+import static net.osmand.plus.AppInitializer.loadRoutingFiles;
+
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -26,15 +29,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
-import static net.osmand.plus.AppInitializer.loadRoutingFiles;
-
 class XmlImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 
-	private Uri uri;
+	private final Uri uri;
 	private String destFileName;
 	private ImportType importType;
-	private CallbackWithObject routingCallback;
+	private final CallbackWithObject routingCallback;
 
 	public XmlImportTask(@NonNull FragmentActivity activity, @NonNull Uri uri,
 						 @NonNull String fileName, @Nullable CallbackWithObject routingCallback) {
@@ -50,7 +50,7 @@ class XmlImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 		if (importType != null) {
 			File dest = getDestinationFile();
 			if (dest != null) {
-				return ImportHelper.copyFile(app, dest, uri, true);
+				return ImportHelper.copyFile(app, dest, uri, true, false);
 			}
 		}
 		return app.getString(R.string.file_import_error, destFileName, app.getString(R.string.unsupported_type_error));

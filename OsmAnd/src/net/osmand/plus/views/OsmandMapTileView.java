@@ -31,9 +31,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibilityActionsProvider;
+import net.osmand.plus.plugins.accessibility.AccessibilityActionsProvider;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
@@ -45,7 +45,7 @@ import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.OsmAndConstants;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -54,7 +54,9 @@ import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.helpers.TwoFingerTapDetector;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
-import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.layers.base.BaseMapLayer;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRuleStorageProperties;
@@ -69,11 +71,12 @@ import java.util.List;
 import java.util.Map;
 
 public class OsmandMapTileView implements IMapDownloaderCallback {
+
 	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 4;
 	private static final int MAP_FORCE_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 5;
 	private static final int BASE_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 3;
-	protected final static int LOWEST_ZOOM_TO_ROTATE = 9;
 	private static final int MAP_DEFAULT_COLOR = 0xffebe7e4;
+
 	private boolean MEASURE_FPS = false;
 	private final FPSMeasurement main = new FPSMeasurement();
 	private final FPSMeasurement additional = new FPSMeasurement();
@@ -464,9 +467,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (mainLayer != null) {
 			animatedDraggingThread.stopAnimating();
 			currentViewport.setZoomAndAnimation(zoom, 0, 0);
-			if (zoom <= LOWEST_ZOOM_TO_ROTATE) {
-				rotate = 0;
-			}
 			currentViewport.setRotate(rotate);
 			refreshMap();
 		}
@@ -477,25 +477,15 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			animatedDraggingThread.stopAnimating();
 			currentViewport.setZoomAndAnimation(zoom, 0);
 			currentViewport.setMapDensity(mapDensity);
-			if (zoom <= LOWEST_ZOOM_TO_ROTATE) {
-				rotate = 0;
-			}
 			currentViewport.setRotate(rotate);
 			refreshMap();
 		}
 	}
 
-
-	public boolean isMapRotateEnabled() {
-		return getZoom() > LOWEST_ZOOM_TO_ROTATE;
-	}
-
 	public void setRotate(float rotate, boolean force) {
-		if (isMapRotateEnabled()) {
-			float diff = MapUtils.unifyRotationDiff(rotate, getRotate());
-			if (Math.abs(diff) > 5 || force) { // check smallest rotation
-				animatedDraggingThread.startRotate(rotate);
-			}
+		float diff = MapUtils.unifyRotationDiff(rotate, getRotate());
+		if (Math.abs(diff) > 5 || force) { // check smallest rotation
+			animatedDraggingThread.startRotate(rotate);
 		}
 	}
 
@@ -1012,11 +1002,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	protected void rotateToAnimate(float rotate) {
-		if (isMapRotateEnabled()) {
-			this.rotate = MapUtils.unifyRotationTo360(rotate);
-			currentViewport.setRotate(this.rotate);
-			refreshMap();
-		}
+		this.rotate = MapUtils.unifyRotationTo360(rotate);
+		this.currentViewport.setRotate(this.rotate);
+		refreshMap();
 	}
 
 	protected void setLatLonAnimate(double latitude, double longitude, boolean notify) {
@@ -1039,9 +1027,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	protected void zoomToAnimate(int zoom, double zoomToAnimate, boolean notify) {
 		if (mainLayer != null && getMaxZoom() >= zoom && getMinZoom() <= zoom) {
 			currentViewport.setZoomAndAnimation(zoom, zoomToAnimate);
-			if (zoom <= LOWEST_ZOOM_TO_ROTATE) {
-				rotate = 0;
-			}
 			currentViewport.setRotate(rotate);
 			refreshMap();
 			if (notify && locationListener != null) {

@@ -3,7 +3,6 @@ package net.osmand.plus.routepreparationmenu.cards;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.os.Build;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
@@ -17,11 +16,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.TransportRoute;
-import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
@@ -168,28 +167,19 @@ public class PublicTransportCard extends MapBaseCard {
 
 	public void updateButtons() {
 		int color = getActiveColor();
-		FrameLayout detailsButton = (FrameLayout) view.findViewById(R.id.details_button);
-		TextView detailsButtonDescr = (TextView) view.findViewById(R.id.details_button_descr);
+		FrameLayout detailsButton = view.findViewById(R.id.details_button);
+		TextView detailsButtonDescr = view.findViewById(R.id.details_button_descr);
 
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			AndroidUtils.setBackground(app, detailsButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
-			AndroidUtils.setBackground(app, detailsButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
-		} else {
-			AndroidUtils.setBackground(app, detailsButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
-		}
-		detailsButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				app.getTransportRoutingHelper().setCurrentRoute(routeId);
-				getMapActivity().refreshMap();
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardButtonPressed(PublicTransportCard.this, DETAILS_BUTTON_INDEX);
-				}
-			}
+		AndroidUtils.setBackground(app, detailsButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
+		AndroidUtils.setBackground(app, detailsButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
+		detailsButton.setOnClickListener(v -> {
+			app.getTransportRoutingHelper().setCurrentRoute(routeId);
+			getMapActivity().refreshMap();
+			notifyButtonPressed(DETAILS_BUTTON_INDEX);
 		});
-		FrameLayout showButton = (FrameLayout) view.findViewById(R.id.show_button);
-		TextView showButtonDescr = (TextView) view.findViewById(R.id.show_button_descr);
+
+		FrameLayout showButton = view.findViewById(R.id.show_button);
+		TextView showButtonDescr = view.findViewById(R.id.show_button_descr);
 		if (isCurrentRoute()) {
 			color = ContextCompat.getColor(app, R.color.card_and_list_background_light);
 			AndroidUtils.setBackground(app, showButton, nightMode, R.drawable.btn_active_light, R.drawable.btn_active_dark);
@@ -198,37 +188,19 @@ public class PublicTransportCard extends MapBaseCard {
 			} else {
 				showButtonDescr.setText(R.string.shared_string_control_start);
 			}
-			showButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					CardListener listener = getListener();
-					if (listener != null) {
-						listener.onCardButtonPressed(PublicTransportCard.this, SHOW_BUTTON_INDEX);
-					}
-				}
-			});
+			showButton.setOnClickListener(v -> notifyButtonPressed(SHOW_BUTTON_INDEX));
 		} else {
-			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-				AndroidUtils.setBackground(app, showButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
-				AndroidUtils.setBackground(app, showButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
-			} else {
-				AndroidUtils.setBackground(app, showButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
-			}
+			AndroidUtils.setBackground(app, showButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
+			AndroidUtils.setBackground(app, showButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 			if (!Algorithms.isEmpty(showButtonCustomTitle)) {
 				showButtonDescr.setText(showButtonCustomTitle);
 			} else {
 				showButtonDescr.setText(R.string.shared_string_show_on_map);
 			}
-			showButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					app.getTransportRoutingHelper().setCurrentRoute(routeId);
-					getMapActivity().refreshMap();
-					CardListener listener = getListener();
-					if (listener != null) {
-						listener.onCardButtonPressed(PublicTransportCard.this, SHOW_BUTTON_INDEX);
-					}
-				}
+			showButton.setOnClickListener(v -> {
+				app.getTransportRoutingHelper().setCurrentRoute(routeId);
+				getMapActivity().refreshMap();
+				notifyButtonPressed(SHOW_BUTTON_INDEX);
 			});
 		}
 		showButtonDescr.setTextColor(color);

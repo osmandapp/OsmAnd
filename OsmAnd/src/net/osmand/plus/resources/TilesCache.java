@@ -3,7 +3,6 @@ package net.osmand.plus.resources;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
-import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.resources.AsyncLoadingThread.TileLoadDownloadRequest;
 
 import org.apache.commons.logging.Log;
@@ -227,6 +226,11 @@ public abstract class TilesCache<T> {
 		for (int i = 0; i < list.size() / 2; i++) {
 			cache.remove(list.get(i).getKey());
 		}
+	}
+
+	protected synchronized void clearAllTiles() {
+		log.info("Cleaning tiles - size = " + cache.size());
+		cache.clear();
 	}
 
 	public synchronized T get(String key, long accessTime) {

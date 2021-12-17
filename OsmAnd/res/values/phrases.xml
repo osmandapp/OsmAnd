@@ -114,7 +114,6 @@
 	<string name="poi_park_ride">Park and ride</string>
 	<string name="poi_rtsa_scale_filter">Difficulty category</string>
 	<string name="poi_climbing_crag_filter">Climbing crag</string>
-	<string name="poi_climbing_crag">Yes</string>
 	<string name="poi_snowmobile_filter">Snowmobile access</string>
 	<string name="poi_access_bus">Bus access</string>
 	<string name="poi_access_caravan">Caravan access</string>
@@ -159,6 +158,22 @@
 	<string name="poi_permanent_camping">Permanent camping</string>
 	<string name="poi_shelter_filter">Shelter</string>
 	<string name="poi_callable">Callable</string>
+	<string name="poi_butcher_type">Primary meat type</string>
+	<string name="poi_coffee_filter">Coffee</string>
+	<string name="poi_ice_cream_filter">Ice cream</string>
+	<string name="poi_tobacco_filter">Tobacco</string>
+	<string name="poi_membership_filter">Membership required</string>
+	<string name="poi_medical_supply_filter">Medical supply category</string>
+	<string name="poi_agrarian_type">Agricultural inputs</string>
+	<string name="poi_service_fleurop_filter">Fleurop service</string>
+	<string name="poi_mattress_filter">Mattress</string>
+	<string name="poi_furniture_filter">Furniture</string>
+	<string name="poi_heating_filter">Heating</string>
+	<string name="poi_fridge_filter">Fridge</string>
+	<string name="poi_faculty_filter">Faculty</string>
+	<string name="poi_computer_sales">Sale of computers</string>
+	<string name="poi_computer_repair">Computer repair</string>
+	<string name="poi_computer_parts">Parts for computers</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -422,7 +437,7 @@
 	<string name="poi_railway_platform">Railroad platform</string>
 	<string name="poi_halt">Railroad stop</string>
 	<string name="poi_subway_entrance">Subway entrance</string>
-	<string name="poi_subway_station">Yes</string>
+	<string name="poi_subway_station">Yes;Subway station</string>
 	<string name="poi_railway_buffer_stop">Railroad buffer stop</string>
 	<string name="poi_taxi">Taxi stand</string>
 
@@ -805,13 +820,13 @@
 	<string name="poi_guest_house">Guest house</string>
 	<string name="poi_hostel">Hostel</string>
 	<string name="poi_motel">Motel</string>
-	<string name="poi_alpine_hut">Alpine hut</string>
-	<string name="poi_chalet">Chalet</string>
+	<string name="poi_alpine_hut">Alpine hut;Shelter</string>
+	<string name="poi_chalet">Chalet;Shelter</string>
 	<string name="poi_apartment">Apartment</string>
-	<string name="poi_wilderness_hut">Wilderness hut</string>
-	<string name="poi_cabin">Cabin</string>
-	<string name="poi_lean_to">Lean-to</string>
-	<string name="poi_hunting_lodge">Hunting lodge</string>
+	<string name="poi_wilderness_hut">Wilderness hut;Shelter</string>
+	<string name="poi_cabin">Cabin;Shelter</string>
+	<string name="poi_lean_to">Lean-to;Shelter</string>
+	<string name="poi_hunting_lodge">Hunting lodge;Shelter</string>
 
 	<string name="poi_place_of_worship">Place of worship</string>
 	<string name="poi_religion_christian">Christianity</string>
@@ -1871,14 +1886,14 @@
 	<string name="poi_service_repair_no">No repair</string>
 	<string name="poi_service_electrical">Repair of electrical vehicles</string>
 	<string name="poi_motorcycle_repair">Motorcycle repair</string>
-	<string name="poi_self_service_yes">Yes</string>
-	<string name="poi_self_service_no">No</string>
-	<string name="poi_automated_yes">Yes</string>
+	<string name="poi_self_service_yes">Yes;Self service</string>
+	<string name="poi_self_service_no">No;No self service</string>
+	<string name="poi_automated_yes">Yes;Automated</string>
 	<string name="poi_automated_no">Not automated</string>
 	<string name="poi_full_service_yes">Full service</string>
-	<string name="poi_brushless_yes">Yes</string>
+	<string name="poi_brushless_yes">Yes;Brushless</string>
 	<string name="poi_brushless_no">Brushless: no</string>
-	<string name="poi_car_wash_no">No</string>
+	<string name="poi_car_wash_no">No;Car wash: no</string>
 
 
 	<string name="poi_public_bath">Public bath</string>
@@ -2181,25 +2196,25 @@
 	<string name="poi_surveillance_yes">Surveillance: yes</string>
 	<string name="poi_shop_additional_yes">With shop</string>
 
-	<string name="poi_service_bicycle_retail_yes">Retail</string>
+	<string name="poi_service_bicycle_retail_yes">Retail;Bicycle retail;Bike retail</string>
 	<string name="poi_service_bicycle_retail_no">Bicycle retail: no</string>
-	<string name="poi_service_bicycle_repair_yes">Repair</string>
+	<string name="poi_service_bicycle_repair_yes">Repair;Bicycle repair;Bike repair</string>
 	<string name="poi_service_bicycle_repair_no">Bicycle repair: no</string>
-	<string name="poi_service_bicycle_rental_yes">Rental</string>
+	<string name="poi_service_bicycle_rental_yes">Rental;Bicycle rental;Bike rental</string>
 	<string name="poi_service_bicycle_rental_no">Bicycle rental: no</string>
-	<string name="poi_service_bicycle_pump_yes">Pump</string>
+	<string name="poi_service_bicycle_pump_yes">Pump;Bicycle pump;Bike pump</string>
 	<string name="poi_service_bicycle_pump_no">Bicycle pump: no</string>
-	<string name="poi_service_bicycle_diy_yes">Tools for DIY repair</string>
+	<string name="poi_service_bicycle_diy_yes">Tools for DIY repair;Bike DIY tools;Bicycle DIY tools</string>
 	<string name="poi_service_bicycle_diy_no">Bicycle tools for DIY repair: no</string>
-	<string name="poi_service_bicycle_cleaning_yes">Cleaning</string>
+	<string name="poi_service_bicycle_cleaning_yes">Cleaning;Bicycle cleaning;Bike cleaning</string>
 	<string name="poi_service_bicycle_cleaning_no">Bicycle cleaning: no</string>
-	<string name="poi_service_bicycle_chaintool_yes">Chaintool</string>
+	<string name="poi_service_bicycle_chaintool_yes">Chaintool;Bicycle chaintool;Bike chaintool</string>
 	<string name="poi_service_bicycle_chaintool_no">Bicycle chaintool: no</string>
-	<string name="poi_service_bicycle_second_hand_yes">Retail sale of second-hand bicycles</string>
+	<string name="poi_service_bicycle_second_hand_yes">Retail sale of second-hand bicycles;Second hand bicycle;Second hand bike</string>
 	<string name="poi_service_bicycle_second_hand_no">Retail sale of second-hand bicycles: no</string>
-	<string name="poi_service_bicycle_charging_yes">Charging: yes</string>
+	<string name="poi_service_bicycle_charging_yes">Charging: yes;Bicycle charging;Bike charging;Electric bicycle charging;Electric bike charging</string>
 	<string name="poi_service_bicycle_charging_no">Charging: no</string>
-	<string name="poi_bicycle_repair_station">Bicycle repair station;Bicycle self-repair station</string>
+	<string name="poi_bicycle_repair_station">Bicycle repair station;Bicycle self-repair station;Bike repair station;Bike self-repair station</string>
 
 	<string name="poi_wildlife_hide">Place to observe wildlife</string>
 
@@ -2823,12 +2838,12 @@
 
 	<string name="poi_plant_nursery">Plant nursery</string>
 
-	<string name="poi_compressed_air_yes">Yes</string>
+	<string name="poi_compressed_air_yes">Yes;Compressed air</string>
 	<string name="poi_compressed_air_no">Compressed air: no</string>
 
-	<string name="poi_car_wash_yes">Yes</string>
+	<string name="poi_car_wash_yes">Yes;Car wash</string>
 
-	<string name="poi_vacuum_cleaner_yes">Yes</string>
+	<string name="poi_vacuum_cleaner_yes">Yes;Vacuum cleaner</string>
 	<string name="poi_vacuum_cleaner_no">Vacuum cleaner: no</string>
 	<string name="poi_amenity_vacuum_cleaner">Vacuum cleaner</string>
 
@@ -3073,7 +3088,7 @@
 	<string name="poi_crossing_supervision_attendant">Crossing supervision: attendant</string>
 	<string name="poi_crossing_supervision_camera">Crossing supervision: camera</string>
 
-	<string name="poi_dispensing_yes">Yes</string>
+	<string name="poi_dispensing_yes">Yes;Dispensing</string>
 	<string name="poi_dispensing_no">Dispensing: no</string>
 
 	<string name="poi_aerodrome_type_international">International</string>
@@ -4094,35 +4109,35 @@
 
 	<string name="poi_disabled_no">Access for disabled: no</string>
 
-	<string name="poi_snowmobile_yes">Yes</string>
-	<string name="poi_snowmobile_designated">Designated</string>
-	<string name="poi_snowmobile_permissive">Permissive</string>
+	<string name="poi_snowmobile_yes">Yes;Snowmobile</string>
+	<string name="poi_snowmobile_designated">Designated;Designated for snowmobiles</string>
+	<string name="poi_snowmobile_permissive">Permissive;Snowmobiles permissive access</string>
 
-	<string name="poi_bus_yes">Yes</string>
-	<string name="poi_bus_designated">Designated</string>
-	<string name="poi_caravan_yes">Yes</string>
-	<string name="poi_caravan_designated">Designated</string>
-	<string name="poi_motorhome_yes">Yes</string>
-	<string name="poi_motorhome_designated">Designated</string>
-	<string name="poi_trailer_yes">Yes</string>
-	<string name="poi_trailer_designated">Designated</string>
-	<string name="poi_motorcycle_yes">Yes</string>
-	<string name="poi_motorcycle_permissive">Permissive</string>
-	<string name="poi_motorcycle_destination">Destination</string>
-	<string name="poi_motorcycle_designated">Designated</string>
-	<string name="poi_moped_yes">Yes</string>
-	<string name="poi_moped_designated">Designated</string>
-	<string name="poi_mofa_yes">Yes</string>
-	<string name="poi_mofa_designated">Designated</string>
-	<string name="poi_hgv_yes">Yes</string>
-	<string name="poi_hgv_destination">Destination</string>
-	<string name="poi_hgv_permissive">Permissive</string>
-	<string name="poi_hgv_designated">Designated</string>
-	<string name="poi_hgv_delivery">Delivery</string>
-	<string name="poi_goods_yes">Yes</string>
-	<string name="poi_goods_designated">Designated</string>
-	<string name="poi_disabled_yes">Yes</string>
-	<string name="poi_disabled_designated">Designated</string>
+	<string name="poi_bus_yes">Yes;Bus;Buses</string>
+	<string name="poi_bus_designated">Designated;Designated for buses</string>
+	<string name="poi_caravan_yes">Yes;Caravan</string>
+	<string name="poi_caravan_designated">Designated;Designated for caravans</string>
+	<string name="poi_motorhome_yes">Yes;Motorhome</string>
+	<string name="poi_motorhome_designated">Designated;Designated for motorhomes</string>
+	<string name="poi_trailer_yes">Yes;Trailer</string>
+	<string name="poi_trailer_designated">Designated;Designated for trailers</string>
+	<string name="poi_motorcycle_yes">Yes;Motorcycle</string>
+	<string name="poi_motorcycle_permissive">Permissive;Motorcycles permissive access</string>
+	<string name="poi_motorcycle_destination">Destination;Motorcycles destination access</string>
+	<string name="poi_motorcycle_designated">Designated;Designated for motorcycles</string>
+	<string name="poi_moped_yes">Yes;Moped</string>
+	<string name="poi_moped_designated">Designated;Designated for mopeds</string>
+	<string name="poi_mofa_yes">Yes;Mofa</string>
+	<string name="poi_mofa_designated">Designated;Designated for mofas</string>
+	<string name="poi_hgv_yes">Yes;HGV;Truck;Trucks</string>
+	<string name="poi_hgv_destination">Destination;Trucks destination access</string>
+	<string name="poi_hgv_permissive">Permissive;Trucks permissive access</string>
+	<string name="poi_hgv_designated">Designated;Trucks designated access</string>
+	<string name="poi_hgv_delivery">Delivery;Access for delivery trucks</string>
+	<string name="poi_goods_yes">Yes;Light commercial vehicles access</string>
+	<string name="poi_goods_designated">Designated;Light commercial vehicles designated access</string>
+	<string name="poi_disabled_yes">Yes;Disabled</string>
+	<string name="poi_disabled_designated">Designated;Designated access for disabled</string>
 
 	<string name="poi_cellar_entrance">Cellar entrance</string>
 
@@ -4517,5 +4532,195 @@
 	<string name="poi_country_store">Country store</string>
 
 	<string name="poi_prep_school">Tutorial school</string>
+	<string name="poi_ticket_validator">Ticket validator</string>
+
+	<string name="poi_geoglyph">Geoglyph</string>
+
+	<string name="poi_satellite_dish">Satellite dish</string>
+
+	<string name="poi_trailhead">Trailhead</string>
+
+	<string name="poi_hampshire_gate">Hampshire gate</string>
+
+	<string name="poi_driver_training">Driver training place</string>
+	<string name="poi_research_institute">Research institute</string>
+
+	<string name="poi_sports_hall">Sports hall</string>
+	<string name="poi_couplings">Couplings</string>
+
+	<string name="poi_winery">Winery</string>
+	<string name="poi_wine_region">Wine region</string>
+	<string name="poi_wine_grape">Grape</string>
+	<string name="poi_wine_vineyard">Vineyard</string>
+	<string name="poi_wine_type">Type</string>
+	<string name="poi_distillery">Distillery</string>
+	<string name="poi_reusable_packaging_accept_yes">Reusable packaging accept: yes</string>
+	<string name="poi_reusable_packaging_accept_no">Reusable packaging accept: no</string>
+	<string name="poi_reusable_packaging_accept_only">Reusable packaging accept: only</string>
+	<string name="poi_reusable_packaging_offer_yes">Reusable packaging offer: yes</string>
+	<string name="poi_reusable_packaging_offer_no">Reusable packaging offer: no</string>
+	<string name="poi_reusable_packaging_offer_only">Reusable packaging offer: only</string>
+	<string name="poi_zero_waste_yes">Zero waste: yes</string>
+	<string name="poi_zero_waste_no">Zero waste: no</string>
+	<string name="poi_zero_waste_only">Zero waste: only</string>
+	<string name="poi_butcher_poultry">Poultry</string>
+	<string name="poi_butcher_beef">Beef</string>
+	<string name="poi_butcher_horse">Horse</string>
+	<string name="poi_butcher_lamb">Lamb</string>
+	<string name="poi_butcher_pork">Pork</string>
+	<string name="poi_butcher_halal">Halal</string>
+	<string name="poi_coffee_yes">Yes</string>
+	<string name="poi_coffee_no">No</string>
+	<string name="poi_ice_cream_yes">Yes</string>
+	<string name="poi_origin">Origin</string>
+	<string name="poi_tobacco_yes">Yes</string>
+	<string name="poi_membership_yes">Yes</string>
+	<string name="poi_membership_no">No</string>
+	<string name="poi_medical_supply_diabetic">Diabetic</string>
+	<string name="poi_medical_supply_orthopedic">Orthopedic</string>
+	<string name="poi_medical_supply_orthotics">Orthotics</string>
+	<string name="poi_medical_supply_mobility">Mobility</string>
+	<string name="poi_medical_supply_diagnostic">Diagnostic</string>
+	<string name="poi_medical_supply_respiratory">Respiratory</string>
+	<string name="poi_medical_supply_home_care">Home care</string>
+	<string name="poi_lgbtq_primary">LGBTQ: primary</string>
+	<string name="poi_lgbtq_yes">LGBTQ allowed</string>
+	<string name="poi_lgbtq_only">LGBTQ only</string>
+	<string name="poi_lgbtq_no">LGBTQ now allowed</string>
+	<string name="poi_beauty_salon_tanning">Tanning</string>
+	<string name="poi_beauty_salon_cosmetics">Cosmetics</string>
+	<string name="poi_beauty_salon_spa">Spa</string>
+	<string name="poi_beauty_salon_skin_care">Skin care</string>
+	<string name="poi_beauty_salon_waxing">Waxing</string>
+	<string name="poi_beauty_salon_hair_removal">Hair removal</string>
+	<string name="poi_beauty_salon_aesthetic">Aesthetic</string>
+	<string name="poi_beauty_salon_massage">Massage</string>
+	<string name="poi_beauty_salon_eyelash">Eyelash</string>
+	<string name="poi_beauty_salon_pedicure">Pedicure</string>
+	<string name="poi_massage_chiropractic">Chiropractic</string>
+	<string name="poi_massage_shiatsu">Shiatsu</string>
+	<string name="poi_agrarian_yes">Yes</string>
+	<string name="poi_agrarian_pesticide">Pesticide</string>
+	<string name="poi_agrarian_fertilizer">Fertilizer</string>
+	<string name="poi_agrarian_seed">Seed</string>
+	<string name="poi_agrarian_feed">Feed</string>
+	<string name="poi_agrarian_tools">Tools</string>
+	<string name="poi_agrarian_machine_parts">Machine parts</string>
+	<string name="poi_agrarian_agricultural_machinery">Agricultural machinery</string>
+
+	<string name="poi_generator_source_tidal">Energy source: tidal</string>
+	<string name="poi_generator_source_wave">Energy source: wave</string>
+	<string name="poi_generator_source_biofuel">Energy source: biofuel</string>
+	<string name="poi_generator_source_biogas">Energy source: biogas</string>
+	<string name="poi_generator_source_gasoline">Energy source: gasoline</string>
+	<string name="poi_generator_source_waste">Energy source: waste</string>
+	<string name="poi_generator_method_fission">Generator method: fission</string>
+	<string name="poi_generator_method_fusion">Generator method: fusion</string>
+	<string name="poi_generator_method_wind_turbine">Generator method: wind turbine</string>
+	<string name="poi_generator_method_water_storage">Generator method: water storage</string>
+	<string name="poi_generator_method_water_pumped_storage">Generator method: water pumped storage</string>
+	<string name="poi_generator_method_run_of_the_river">Generator method: run-of-the-river</string>
+	<string name="poi_generator_method_barrage">Generator method: barrage</string>
+	<string name="poi_generator_method_stream">Generator method: stream</string>
+	<string name="poi_generator_method_thermal">Generator method: thermal</string>
+	<string name="poi_generator_method_photovoltaic">Generator method: photovoltaic</string>
+	<string name="poi_generator_method_combustion">Generator method: combustion</string>
+	<string name="poi_generator_method_gasification">Generator method: gasification</string>
+	<string name="poi_generator_method_anaerobic_digestion">Generator method: anaerobic digestion</string>
+	<string name="poi_generator_method_battery_storage">Generator method: battery storage</string>
+	<string name="poi_generator_type_pwr">Generator type: PWR</string>
+	<string name="poi_generator_type_bwr_1">Generator type: BWR-1</string>
+	<string name="poi_generator_type_bwr_2">Generator type: BWR-2</string>
+	<string name="poi_generator_type_bwr_3">Generator type: BWR-3</string>
+	<string name="poi_generator_type_bwr_4">Generator type: BWR-4</string>
+	<string name="poi_generator_type_bwr_5">Generator type: BWR-5</string>
+	<string name="poi_generator_type_bwr_6">Generator type: BWR-6</string>
+	<string name="poi_generator_type_phwr">Generator type: PHWR</string>
+	<string name="poi_generator_type_gcr">Generator type: GCR</string>
+	<string name="poi_generator_type_fbr">Generator type: FBR</string>
+	<string name="poi_generator_type_rbmk_1000">Generator type: RBMK-1000</string>
+	<string name="poi_generator_type_rbmk_1500">Generator type: RBMK-1500</string>
+	<string name="poi_generator_type_vver">Generator type: VVER</string>
+	<string name="poi_generator_type_candu">Generator type: CANDU</string>
+	<string name="poi_generator_type_cpr_1000">Generator type: CPR-1000</string>
+	<string name="poi_generator_type_epr">Generator type: EPR</string>
+	<string name="poi_generator_type_tokamak">Generator type: tokamak</string>
+	<string name="poi_generator_type_stellarator">Generator type: stellarator</string>
+	<string name="poi_generator_type_icf">Generator type: ICF</string>
+	<string name="poi_generator_type_cold_fusion">Generator type: cold fusion</string>
+	<string name="poi_generator_type_horizontal_axis">Generator type: horizontal axis</string>
+	<string name="poi_generator_type_vertical_axis">Generator type: vertical axis</string>
+	<string name="poi_generator_type_francis_turbine">Generator type: francis turbine</string>
+	<string name="poi_generator_type_kaplan_turbine">Generator type: kaplan turbine</string>
+	<string name="poi_generator_type_pelton_turbine">Generator type: pelton turbine</string>
+	<string name="poi_generator_type_hydrodynamic_screw">Generator type: hydrodynamic screw</string>
+	<string name="poi_generator_type_steam_turbine">Generator type: steam turbine</string>
+	<string name="poi_generator_type_heat_pump">Generator type: heat pump</string>
+	<string name="poi_generator_type_solar_thermal_collector">Generator type: solar thermal collector</string>
+	<string name="poi_generator_type_solar_photovoltaic_panel">Generator type: solar photovoltaic panel</string>
+	<string name="poi_generator_type_steam_generator">Generator type: steam generator</string>
+	<string name="poi_generator_type_boiler">Generator type: boiler</string>
+	<string name="poi_generator_type_gas_turbine">Generator type: gas turbine</string>
+	<string name="poi_generator_type_combined_cycle">Generator type: combined cycle</string>
+	<string name="poi_generator_type_reciprocating_engine">Generator type: reciprocating engine</string>
+	<string name="poi_generator_type_bioreactor">Generator type: bioreactor</string>
+	<string name="poi_generator_type_lithium_ion">Generator type: lithium-ion</string>
+	<string name="poi_generator_type_lead_acid">Generator type: lead-acid</string>
+	<string name="poi_generator_type_nickel_cadmium">Generator type: nickel-cadmium</string>
+	<string name="poi_generator_type_redox_flow">Generator type: redox flow</string>
+	<string name="poi_generator_type_molten_salt">Generator type: molten-salt</string>
+	<string name="poi_service_fleurop_yes">Yes</string>
+	<string name="poi_mattress_yes">Yes</string>
+	<string name="poi_mattress_no">No</string>
+	<string name="poi_furniture_used">Used</string>
+	<string name="poi_furniture_office">Office</string>
+	<string name="poi_furniture_living_room">Living room</string>
+	<string name="poi_furniture_kitchen">Kitchen</string>
+	<string name="poi_furniture_bedroom">Bedroom</string>
+	<string name="poi_furniture_yes">Yes</string>
+	<string name="poi_furniture_no">No</string>
+	<string name="poi_furniture_bed">Bed</string>
+	<string name="poi_furniture_sofa">Sofa</string>
+	<string name="poi_heating_yes">Yes</string>
+	<string name="poi_heating_no">No</string>
+	<string name="poi_heating_fireplace">Fireplace</string>
+	<string name="poi_heating_stove">Stove</string>
+	<string name="poi_heating_district_heating">District heating</string>
+	<string name="poi_heating_gas">Gas</string>
+	<string name="poi_heating_radiator">Radiator</string>
+	<string name="poi_fridge_yes">Yes</string>
+	<string name="poi_fridge_no">No</string>
+	<string name="poi_fumarole">Fumarole</string>
+
+	<string name="poi_faculty_aerospace">Aerospace</string>
+	<string name="poi_faculty_architecture">Architecture</string>
+	<string name="poi_faculty_arts">Arts</string>
+	<string name="poi_faculty_biology">Biology</string>
+	<string name="poi_faculty_chemistry">Chemistry</string>
+	<string name="poi_faculty_communication">Communication</string>
+	<string name="poi_faculty_economics">Economics</string>
+	<string name="poi_faculty_education">Education</string>
+	<string name="poi_faculty_engineering">Engineering</string>
+	<string name="poi_faculty_geography">Geography</string>
+	<string name="poi_faculty_law">Law</string>
+	<string name="poi_faculty_mathematics">Mathematics</string>
+	<string name="poi_faculty_medicine">Medicine</string>
+	<string name="poi_faculty_nursing">Nursing</string>
+	<string name="poi_faculty_psychology">Psychology</string>
+
+	<string name="poi_tool_hire">Tool hire</string>
+
+	<string name="poi_escape_game">Escape game</string>
+
+	<string name="poi_diet_vegan_limited">Vegan: limited</string>
+	<string name="poi_computer_sales_yes">Yes</string>
+	<string name="poi_computer_sales_used">Used</string>
+	<string name="poi_computer_repair_yes">Yes</string>
+	<string name="poi_computer_sales_no">Sale of computers: no</string>
+	<string name="poi_computer_repair_no">Computer repair: no</string>
+	<string name="poi_computer_parts_yes">Yes</string>
+	<string name="poi_computer_parts_no">Computer parts: no</string>
+
+	<string name="poi_climbing_crag">Yes;Climbing crag</string>
 
 </resources>

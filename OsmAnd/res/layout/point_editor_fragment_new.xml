@@ -6,8 +6,7 @@
 	android:id="@+id/point_edit_layout"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="@android:color/transparent"
-	android:fitsSystemWindows="true">
+	android:background="@android:color/transparent">
 
 	<LinearLayout
 		android:id="@+id/background_layout"
@@ -36,7 +35,7 @@
 				android:layout_marginLeft="@dimen/list_item_button_padding"
 				android:layout_marginEnd="@dimen/list_item_button_padding"
 				android:layout_marginRight="@dimen/list_item_button_padding"
-				android:contentDescription="@string/access_shared_string_navigate_up"
+				android:contentDescription="@string/replace_point_descr"
 				app:srcCompat="@drawable/ic_action_replace" />
 
 		</androidx.appcompat.widget.Toolbar>

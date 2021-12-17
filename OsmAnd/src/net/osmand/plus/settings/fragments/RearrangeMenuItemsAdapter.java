@@ -1,37 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import android.annotation.SuppressLint;
-import android.graphics.drawable.Drawable;
-import android.util.TypedValue;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.RecyclerView;
-
-import net.osmand.AndroidUtils;
-import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
-import net.osmand.plus.settings.fragments.ConfigureMenuRootFragment.ScreenType;
-
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_AV_NOTES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BACKUP_RESTORE_ID;
@@ -63,6 +31,37 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
 import static net.osmand.plus.settings.fragments.ConfigureMenuItemsFragment.MAIN_BUTTONS_QUANTITY;
+
+import android.annotation.SuppressLint;
+import android.graphics.drawable.Drawable;
+import android.util.TypedValue;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
+
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.settings.fragments.ConfigureMenuRootFragment.ScreenType;
+import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 		implements ReorderItemTouchHelperCallback.OnItemMoveCallback {
@@ -171,6 +170,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 					h.icon.setImageDrawable(uiUtilities.getIcon(menuItem.getIcon(), nightMode));
 					h.icon.setVisibility(View.VISIBLE);
 					h.actionIcon.setVisibility(View.VISIBLE);
+					h.actionIcon.setContentDescription(app.getString(R.string.ltr_or_rtl_combine_via_space, app.getString(R.string.quick_action_show_hide_title), menuItem.getTitle()));
 				}
 				h.title.setTypeface(FontCache.getFont(app, app.getString(R.string.font_roboto_regular)));
 				h.title.setText(menuItem.getTitle());
@@ -524,7 +524,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 			case MAP_CONTEXT_MENU_CREATE_POI:
 			case MAP_CONTEXT_MENU_MODIFY_OSM_NOTE:
 			case MAP_CONTEXT_MENU_OPEN_OSM_NOTE:
-				return R.string.osm_settings;
+				return R.string.osm_editing_plugin_name;
 			case MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC:
 				return R.string.parking_positions;
 			default:

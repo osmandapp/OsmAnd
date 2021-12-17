@@ -1,9 +1,10 @@
 package net.osmand.plus.track;
 
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.RouteProvider;
@@ -29,6 +30,7 @@ public class CachedTrack {
 	private final OsmandApplication app;
 
 	private final SelectedGpxFile selectedGpxFile;
+	private boolean useFilteredGpx;
 
 	private final Map<String, List<TrkSegment>> segmentsCache = new HashMap<>();
 	private Set<String> availableColoringTypes = null;
@@ -40,12 +42,22 @@ public class CachedTrack {
 	public CachedTrack(@NonNull OsmandApplication app, @NonNull SelectedGpxFile selectedGpxFile) {
 		this.app = app;
 		this.selectedGpxFile = selectedGpxFile;
+		this.useFilteredGpx = selectedGpxFile.getFilteredSelectedGpxFile() != null;
 	}
 
 	public List<RouteSegmentResult> getCachedRouteSegments(int nonEmptySegmentIdx) {
-		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
+		boolean useFilteredGpx = selectedGpxFile.getFilteredSelectedGpxFile() != null;
 
-		if (prevModifiedTime == gpxFile.modifiedTime) {
+		if (useFilteredGpx != this.useFilteredGpx || prevModifiedTime != gpxFile.modifiedTime) {
+			this.useFilteredGpx = useFilteredGpx;
+			prevModifiedTime = gpxFile.modifiedTime;
+			clearCaches();
+			List<RouteSegmentResult> routeSegments = RouteProvider.parseOsmAndGPXRoute(new ArrayList<>(),
+					gpxFile, new ArrayList<>(), nonEmptySegmentIdx);
+			routeCache.put(nonEmptySegmentIdx, routeSegments);
+			return routeSegments;
+		} else {
 			List<RouteSegmentResult> routeSegments = routeCache.get(nonEmptySegmentIdx);
 			if (routeSegments == null) {
 				routeSegments = RouteProvider.parseOsmAndGPXRoute(new ArrayList<>(), gpxFile,
@@ -53,48 +65,46 @@ public class CachedTrack {
 				routeCache.put(nonEmptySegmentIdx, routeSegments);
 			}
 			return routeSegments;
-		} else {
-			clearCaches();
-			prevModifiedTime = gpxFile.modifiedTime;
-			List<RouteSegmentResult> routeSegments = RouteProvider.parseOsmAndGPXRoute(new ArrayList<>(),
-					gpxFile, new ArrayList<>(), nonEmptySegmentIdx);
-			routeCache.put(nonEmptySegmentIdx, routeSegments);
-			return routeSegments;
 		}
 	}
 
 	public List<TrkSegment> getCachedTrackSegments(int zoom, @NonNull GradientScaleType scaleType) {
-		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
+		boolean useFilteredGpx = selectedGpxFile.getFilteredSelectedGpxFile() != null;
 		String trackId = zoom + "_" + scaleType.toString();
 
-		if (prevModifiedTime == gpxFile.modifiedTime) {
-			List<TrkSegment> segments = segmentsCache.get(trackId);
-			if (segments == null) {
-				segments = calculateGradientTrack(selectedGpxFile, zoom, scaleType);
-				segmentsCache.put(trackId, segments);
-			}
+		if (useFilteredGpx != this.useFilteredGpx || prevModifiedTime != gpxFile.modifiedTime) {
+			this.useFilteredGpx = useFilteredGpx;
+			prevModifiedTime = gpxFile.modifiedTime;
+			clearCaches();
+			List<TrkSegment> segments = calculateGradientTrack(zoom, scaleType);
+			segmentsCache.put(trackId, segments);
 			return segments;
 		} else {
-			clearCaches();
-			prevModifiedTime = gpxFile.modifiedTime;
-			List<TrkSegment> segments = calculateGradientTrack(selectedGpxFile, zoom, scaleType);
-			segmentsCache.put(trackId, segments);
+			List<TrkSegment> segments = segmentsCache.get(trackId);
+			if (segments == null) {
+				segments = calculateGradientTrack(zoom, scaleType);
+				segmentsCache.put(trackId, segments);
+			}
 			return segments;
 		}
 	}
 
-	private List<TrkSegment> calculateGradientTrack(SelectedGpxFile selectedGpxFile, int zoom,
-	                                                GradientScaleType scaleType) {
-		GPXFile gpxFile = selectedGpxFile.getGpxFile();
-		RouteColorize colorize = new RouteColorize(zoom, gpxFile, selectedGpxFile.getTrackAnalysis(app),
-				scaleType.toColorizationType(), app.getSettings().getApplicationMode().getMaxSpeed());
+	@NonNull
+	private List<TrkSegment> calculateGradientTrack(int zoom, @NonNull GradientScaleType scaleType) {
+		GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
+		GPXTrackAnalysis trackAnalysis = selectedGpxFile.getTrackAnalysisToDisplay(app);
+		ColorizationType colorizationType = scaleType.toColorizationType();
+		float maxSpeed = app.getSettings().getApplicationMode().getMaxSpeed();
+		RouteColorize colorize = new RouteColorize(zoom, gpxFile, trackAnalysis, colorizationType, maxSpeed);
 		List<RouteColorizationPoint> colorsOfPoints = colorize.getResult(true);
-		return createSimplifiedSegments(selectedGpxFile.getGpxFile(), colorsOfPoints, scaleType);
+		return createSimplifiedSegments(gpxFile, colorsOfPoints, scaleType);
 	}
 
-	private List<TrkSegment> createSimplifiedSegments(GPXFile gpxFile,
-	                                                  List<RouteColorizationPoint> colorizationPoints,
-	                                                  GradientScaleType scaleType) {
+	@NonNull
+	private List<TrkSegment> createSimplifiedSegments(@NonNull GPXFile gpxFile,
+	                                                  @NonNull List<RouteColorizationPoint> colorizationPoints,
+	                                                  @NonNull GradientScaleType scaleType) {
 		List<TrkSegment> simplifiedSegments = new ArrayList<>();
 		ColorizationType colorizationType = scaleType.toColorizationType();
 		int id = 0;
@@ -121,12 +131,13 @@ public class CachedTrack {
 	}
 
 	public boolean isColoringTypeAvailable(@NonNull ColoringType coloringType, @Nullable String routeInfoAttribute) {
-		if (prevModifiedTime != selectedGpxFile.getGpxFile().modifiedTime || availableColoringTypes == null) {
+		if (prevModifiedTime != selectedGpxFile.getGpxFileToDisplay().modifiedTime || availableColoringTypes == null) {
 			availableColoringTypes = listAvailableColoringTypes();
 		}
 		return availableColoringTypes.contains(coloringType.getName(routeInfoAttribute));
 	}
 
+	@NonNull
 	private Set<String> listAvailableColoringTypes() {
 		Set<String> availableColoringTypes = new HashSet<>();
 		availableColoringTypes.addAll(listAvailableStaticColoringTypes());
@@ -134,6 +145,7 @@ public class CachedTrack {
 		return availableColoringTypes;
 	}
 
+	@NonNull
 	private Set<String> listAvailableStaticColoringTypes() {
 		Set<String> availableStaticTypes = new HashSet<>();
 		for (ColoringType coloringType : ColoringType.getTrackColoringTypes()) {
@@ -145,6 +157,7 @@ public class CachedTrack {
 		return availableStaticTypes;
 	}
 
+	@NonNull
 	private Set<String> listAvailableRouteInfoAttributes() {
 		Set<String> availableRouteInfoAttributes = new HashSet<>();
 		RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();

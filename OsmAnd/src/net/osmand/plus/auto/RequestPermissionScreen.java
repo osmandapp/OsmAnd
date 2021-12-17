@@ -5,7 +5,6 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.car.app.CarContext;
-import androidx.car.app.CarToast;
 import androidx.car.app.Screen;
 import androidx.car.app.model.Action;
 import androidx.car.app.model.CarColor;
@@ -13,6 +12,8 @@ import androidx.car.app.model.MessageTemplate;
 import androidx.car.app.model.OnClickListener;
 import androidx.car.app.model.ParkedOnlyOnClickListener;
 import androidx.car.app.model.Template;
+
+import net.osmand.plus.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +35,8 @@ public class RequestPermissionScreen extends Screen {
 
 	LocationPermissionCheckCallback mLocationPermissionCheckCallback;
 
-	public RequestPermissionScreen(
-			@NonNull CarContext carContext, @Nullable LocationPermissionCheckCallback callback) {
+	public RequestPermissionScreen(@NonNull CarContext carContext,
+	                               @Nullable LocationPermissionCheckCallback callback) {
 		super(carContext);
 		mLocationPermissionCheckCallback = callback;
 	}
@@ -46,27 +47,23 @@ public class RequestPermissionScreen extends Screen {
 		List<String> permissions = new ArrayList<>();
 		permissions.add(ACCESS_FINE_LOCATION);
 
-		String message = "This app needs access to location in order to navigate";
+		String message = getCarContext().getString(R.string.location_access_request_title);
 
 		OnClickListener listener = ParkedOnlyOnClickListener.create(() ->
 				getCarContext().requestPermissions(
 						permissions,
 						(approved, rejected) -> {
-							CarToast.makeText(
-									getCarContext(),
-									String.format("Approved: %s Rejected: %s", approved, rejected),
-									CarToast.LENGTH_LONG).show();
 							if (!approved.isEmpty()) {
 								LocationPermissionCheckCallback locationPermissionCheckCallback = mLocationPermissionCheckCallback;
 								if (locationPermissionCheckCallback != null) {
 									locationPermissionCheckCallback.onPermissionGranted();
 								}
-								finish();
 							}
+							finish();
 						}));
 
 		Action action = new Action.Builder()
-				.setTitle("Grant Access")
+				.setTitle(getCarContext().getString(R.string.location_access_request_action))
 				.setBackgroundColor(CarColor.GREEN)
 				.setOnClickListener(listener)
 				.build();

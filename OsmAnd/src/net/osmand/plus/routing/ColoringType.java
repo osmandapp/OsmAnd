@@ -7,11 +7,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.Location;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -156,10 +157,12 @@ public enum ColoringType {
 	                                          @NonNull SelectedGpxFile selectedGpxFile,
 	                                          @Nullable String attributeName) {
 		if (isGradient()) {
-			return selectedGpxFile.getTrackAnalysis(app)
-					.isColorizationTypeAvailable(toGradientScaleType().toColorizationType());
+			GradientScaleType scaleType = toGradientScaleType();
+			GPXTrackAnalysis analysis = selectedGpxFile.getTrackAnalysisToDisplay(app);
+			if (analysis != null && scaleType != null) {
+				return analysis.isColorizationTypeAvailable(scaleType.toColorizationType());
+			}
 		}
-
 		if (isRouteInfoAttribute()) {
 			List<RouteSegmentResult> routeSegments = getRouteSegmentsInTrack(selectedGpxFile.getGpxFile());
 			if (Algorithms.isEmpty(routeSegments)) {

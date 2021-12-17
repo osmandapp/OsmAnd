@@ -157,6 +157,7 @@
                 android:id="@+id/map_marker_options_button"
                 android:layout_width="@dimen/map_markers_recycler_view_item_height"
                 android:layout_height="@dimen/map_markers_recycler_view_item_height"
+                android:contentDescription="@string/map_marker_options"
                 android:focusableInTouchMode="true"
                 tools:background="@drawable/marker_circle_background_dark_with_inset"
                 tools:src="@drawable/ic_action_marker_passed"/>

@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -25,9 +24,9 @@ import gnu.trove.list.array.TIntArrayList;
  */
 public class OpeningHoursParser {
 	private static final String[] daysStr;
-	private static final String[] localDaysStr;
+	private static String[] localDaysStr;
 	private static final String[] monthsStr;
-	private static final String[] localMothsStr;
+	private static String[] localMothsStr;
 	private static final Map<String, String> additionalStrings = new HashMap<>();
 
 	private static final int LOW_TIME_LIMIT = 120;
@@ -38,10 +37,8 @@ public class OpeningHoursParser {
 		DateFormatSymbols dateFormatSymbols = DateFormatSymbols.getInstance(Locale.US);
 		monthsStr = dateFormatSymbols.getShortMonths();
 		daysStr = getLettersStringArray(dateFormatSymbols.getShortWeekdays(), 2);
-		
-		dateFormatSymbols = DateFormatSymbols.getInstance();
-		localMothsStr = dateFormatSymbols.getShortMonths();
-		localDaysStr = getLettersStringArray(dateFormatSymbols.getShortWeekdays(), 3);
+
+		initLocalStrings();
 
 		additionalStrings.put("off", "off");
 		additionalStrings.put("is_open", "Open");
@@ -52,6 +49,18 @@ public class OpeningHoursParser {
 		additionalStrings.put("open_till", "Open till");
 		additionalStrings.put("will_open_tomorrow_at", "Will open tomorrow at");
 		additionalStrings.put("will_open_on", "Will open on");
+	}
+
+	public static void initLocalStrings() {
+		initLocalStrings(null);
+	}
+
+	public static void initLocalStrings(Locale locale) {
+		DateFormatSymbols dateFormatSymbols = locale == null
+				? DateFormatSymbols.getInstance()
+				: DateFormatSymbols.getInstance(locale);
+		localMothsStr = dateFormatSymbols.getShortMonths();
+		localDaysStr = getLettersStringArray(dateFormatSymbols.getShortWeekdays(), 3);
 	}
 
 	/**
@@ -122,6 +131,7 @@ public class OpeningHoursParser {
 
 			private boolean opened;
 			private boolean opened24_7;
+			private boolean fallback;
 			private String openingTime;
 			private String nearToOpeningTime;
 			private String closingTime;
@@ -138,12 +148,20 @@ public class OpeningHoursParser {
 				return opened24_7;
 			}
 
+			public boolean isFallback() {
+				return fallback;
+			}
+
 			public String getInfo() {
 				if (isOpened24_7()) {
-					if (!Algorithms.isEmpty(ruleString)) {
-						return additionalStrings.get("is_open") + " " + ruleString;
+					if (!isFallback()) {
+						if (!Algorithms.isEmpty(ruleString)) {
+							return additionalStrings.get("is_open") + " " + ruleString;
+						} else {
+							return additionalStrings.get("is_open_24_7");
+						}
 					} else {
-						return additionalStrings.get("is_open_24_7");
+						return !Algorithms.isEmpty(ruleString) ? ruleString : "";
 					}
 				} else if (!Algorithms.isEmpty(nearToOpeningTime)) {
 					return additionalStrings.get("will_open_at") + " " + nearToOpeningTime;
@@ -157,10 +175,8 @@ public class OpeningHoursParser {
 					return additionalStrings.get("will_open_tomorrow_at") + " " + openingTomorrow;
 				} else if (!Algorithms.isEmpty(openingDay)) {
 					return additionalStrings.get("will_open_on") + " " + openingDay + ".";
-				} else if (!Algorithms.isEmpty(ruleString)) {
-					return ruleString;
 				} else {
-					return "";
+					return !Algorithms.isEmpty(ruleString) ? ruleString : "";
 				}
 			}
 		}
@@ -205,6 +221,7 @@ public class OpeningHoursParser {
 		private Info getInfo(Calendar cal, int sequenceIndex) {
 			Info info = new Info();
 			boolean opened = isOpenedForTimeV2(cal, sequenceIndex);
+			info.fallback = isFallBackRule(sequenceIndex);
 			info.opened = opened;
 			info.ruleString = getCurrentRuleTime(cal, sequenceIndex);
 			if (opened) {
@@ -295,7 +312,7 @@ public class OpeningHoursParser {
 				OpeningHoursRule rule = rules.get(i);
 				if (rule.contains(cal)) {
 					if (i > 0) {
-						checkNext = !rule.hasOverlapTimes(cal, rules.get(i - 1));
+						checkNext = !rule.hasOverlapTimes(cal, rules.get(i - 1), false);
 					}
 					boolean open = rule.isOpenedForTime(cal);
 					if (open || (!overlap && !checkNext)) {
@@ -428,7 +445,7 @@ public class OpeningHoursParser {
 			OpeningHoursRule prevRule = null;
 			for (OpeningHoursRule r : rules) {
 				if (r.containsDay(cal) && r.containsMonth(cal)) {
-					if (atTime.length() > 0 && prevRule != null && !r.hasOverlapTimes(cal, prevRule)) {
+					if (atTime.length() > 0 && prevRule != null && !r.hasOverlapTimes(cal, prevRule, true)) {
 						return atTime;
 					} else {
 						atTime = r.getTime(cal, false, limit, opening);
@@ -454,6 +471,14 @@ public class OpeningHoursParser {
 			return getCurrentRuleTime(cal, ALL_SEQUENCES);
 		}
 
+		public boolean isFallBackRule(int sequenceIndex) {
+			if (sequenceIndex != ALL_SEQUENCES) {
+				ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
+				return rules.get(0).isFallbackRule();
+			}
+			return false;
+		}
+
 		public String getCurrentRuleTime(Calendar cal, int sequenceIndex) {
 			// make exception for overlapping times i.e.
 			// (1) Mo 14:00-16:00; Tu off
@@ -475,7 +500,7 @@ public class OpeningHoursParser {
 				OpeningHoursRule rule = rules.get(i);
 				if (rule.contains(cal)) {
 					if (i > 0) {
-						checkNext = !rule.hasOverlapTimes(cal, rules.get(i - 1));
+						checkNext = !rule.hasOverlapTimes(cal, rules.get(i - 1), false);
 					}
 					boolean open = rule.isOpenedForTime(cal);
 					if (open || (!overlap && !checkNext)) {
@@ -625,9 +650,10 @@ public class OpeningHoursParser {
 		 *
 		 * @param cal the date to check
 		 * @param r the rule to check
+		 * @param strictOverlap detect overlap even if r rule time end at rule time start (2:00-5:00, 5:00-7:00)
 		 * @return true if the this rule times overlap with r times
 		 */
-		public boolean hasOverlapTimes(Calendar cal, OpeningHoursRule r);
+		public boolean hasOverlapTimes(Calendar cal, OpeningHoursRule r, boolean strictOverlap);
 
 		/**
 		 * @param cal
@@ -636,6 +662,8 @@ public class OpeningHoursParser {
 		public boolean contains(Calendar cal);
 
 		public int getSequenceIndex();
+
+		boolean isFallbackRule();
 
 		public String toRuleString();
 
@@ -672,6 +700,8 @@ public class OpeningHoursParser {
 		private int[] lastYearMonths = null;
 		private int fullYears = 0;
 		private int year = 0;
+
+		private boolean fallback;
 
 		/**
 		 * represents the list on which day it is open.
@@ -710,6 +740,11 @@ public class OpeningHoursParser {
 
 		public int getSequenceIndex() {
 			return sequenceIndex;
+		}
+
+		@Override
+		public boolean isFallbackRule() {
+			return fallback;
 		}
 
 		/**
@@ -1168,7 +1203,9 @@ public class OpeningHoursParser {
 			if (startTimes == null || startTimes.size() == 0) {
 				if (isOpened24_7()) {
 					b.setLength(0);
-					b.append("24/7 ");
+					if (!isFallbackRule()) {
+						b.append("24/7 ");
+					}
 				}
 				if (off) {
 					b.append(offStr);
@@ -1451,7 +1488,7 @@ public class OpeningHoursParser {
 		}
 
 		@Override
-		public boolean hasOverlapTimes(Calendar cal, OpeningHoursRule r) {
+		public boolean hasOverlapTimes(Calendar cal, OpeningHoursRule r, boolean strictOverlap) {
 			if (off) {
 				return true;
 			}
@@ -1474,8 +1511,8 @@ public class OpeningHoursParser {
 							} else if (rStartTime >= rEndTime) {
 								rEndTime = 24 * 60 + rEndTime;
 							}
-							if ((rStartTime >= startTime && rStartTime < endTime)
-									|| (startTime >= rStartTime && startTime < rEndTime)) {
+							if ((rStartTime >= startTime && (strictOverlap ? rStartTime <= endTime : rStartTime < endTime))
+									|| (startTime >= rStartTime && (strictOverlap ? startTime <= rEndTime : startTime < rEndTime))) {
 								return true;
 							}
 						}
@@ -1563,7 +1600,7 @@ public class OpeningHoursParser {
 		}
 
 		@Override
-		public boolean hasOverlapTimes(Calendar cal, OpeningHoursRule r) {
+		public boolean hasOverlapTimes(Calendar cal, OpeningHoursRule r, boolean strictOverlap) {
 			return false;
 		}
 
@@ -1625,6 +1662,11 @@ public class OpeningHoursParser {
 		@Override
 		public int getSequenceIndex() {
 			return 0;
+		}
+
+		@Override
+		public boolean isFallbackRule() {
+			return false;
 		}
 	}
 	
@@ -1695,9 +1737,13 @@ public class OpeningHoursParser {
 		String endOfDay = "24:00";
 		r = r.replace('(', ' '); // avoid "(mo-su 17:00-20:00"
 		r = r.replace(')', ' ');
+		BasicOpeningHourRule basic = new BasicOpeningHourRule(sequenceIndex);
+		if (r.startsWith("|| ")) {
+			r = r.replace("|| ", "");
+			basic.fallback = true;
+		}
 		String localRuleString = r.replaceAll("(?i)sunset", sunset).replaceAll("(?i)sunrise", sunrise)
 				.replaceAll("\\+", "-" + endOfDay);
-		BasicOpeningHourRule basic = new BasicOpeningHourRule(sequenceIndex);
 		boolean[] days = basic.getDays();
 		boolean[] months = basic.getMonths();
 		//boolean[][] dayMonths = basic.getDayMonths();
@@ -2001,7 +2047,7 @@ public class OpeningHoursParser {
 				!presentTokens.contains(TokenType.TOKEN_DAY_MONTH)) {
 			Arrays.fill(basic.getDays(), true);
 			basic.hasDays = true;
-		} else if (presentTokens.contains(TokenType.TOKEN_DAY_WEEK)) {
+		} else if (presentTokens.contains(TokenType.TOKEN_DAY_WEEK) || presentTokens.contains(TokenType.TOKEN_HOLIDAY)) {
 			basic.hasDays = true;
 		}
 		rules.add(0, basic);
@@ -2038,7 +2084,7 @@ public class OpeningHoursParser {
 			return null;
 		}
 		List<List<String>> res = new ArrayList<>();
-		String[] sequences = format.split("\\|\\|");
+		String[] sequences = format.split("(?= \\|\\| )");
 		for (String seq : sequences) {
 			seq = seq.trim();
 			if (seq.length() == 0) {

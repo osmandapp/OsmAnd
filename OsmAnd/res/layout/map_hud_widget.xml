@@ -61,8 +61,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="4dp"
-            android:layout_marginLeft="@dimen/map_widget_icon_margin"
-            android:layout_marginRight="4dp"
             android:layout_marginStart="@dimen/map_widget_icon_margin">
 
             <RelativeLayout
@@ -74,7 +72,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/map_widget_icon_margin"
-                    android:layout_marginRight="@dimen/map_widget_icon_margin"
                     android:maxLines="1"
                     android:minWidth="10dp"
                     android:textColor="@color/color_white"
@@ -86,10 +83,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/widget_text_shadow"
-                    android:layout_marginLeft="4dp"
                     android:layout_marginStart="4dp"
                     android:layout_toEndOf="@+id/widget_text_shadow"
-                    android:layout_toRightOf="@+id/widget_text_shadow"
                     android:maxLines="1"
                     android:textColor="@color/color_white"
                     android:textSize="@dimen/map_widget_text_size_small"
@@ -105,22 +100,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/map_widget_icon_margin"
-                    android:layout_marginRight="@dimen/map_widget_icon_margin"
                     android:maxLines="1"
                     android:minWidth="10dp"
                     android:textColor="@color/color_black"
                     android:textSize="@dimen/map_widget_text_size"
-                    tools:text="1048"/>
+                    tools:text="1048" />
 
                 <TextView
                     android:id="@+id/widget_text_small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/widget_text"
-                    android:layout_marginLeft="4dp"
                     android:layout_marginStart="4dp"
                     android:layout_toEndOf="@+id/widget_text"
-                    android:layout_toRightOf="@+id/widget_text"
                     android:maxLines="1"
                     android:textColor="@color/color_black"
                     android:textSize="@dimen/map_widget_text_size_small"

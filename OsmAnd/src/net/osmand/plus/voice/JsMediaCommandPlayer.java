@@ -1,9 +1,13 @@
 package net.osmand.plus.voice;
 
+import static android.media.MediaPlayer.OnCompletionListener;
+import static net.osmand.IndexConstants.TTSVOICE_INDEX_EXT_JS;
+
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
 
-import net.osmand.IndexConstants;
+import androidx.annotation.NonNull;
+
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.AudioFocusHelperImpl;
@@ -17,8 +21,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import static android.media.MediaPlayer.OnCompletionListener;
 
 /**
  * That class represents command player.
@@ -40,6 +42,12 @@ public class JsMediaCommandPlayer extends CommandPlayer implements OnCompletionL
 	                               VoiceRouter voiceRouter,
 	                               File voiceProviderDir) throws CommandPlayerException {
 		super(app, applicationMode, voiceRouter, voiceProviderDir);
+	}
+
+	@Override
+	public File getTtsFileFromDir(@NonNull File voiceProviderDir) {
+		String fileName = language + "_" + TTSVOICE_INDEX_EXT_JS;
+		return new File(voiceProviderDir, fileName);
 	}
 
 	@Override
@@ -209,6 +217,6 @@ public class JsMediaCommandPlayer extends CommandPlayer implements OnCompletionL
 		if (voiceDir.getName().contains("tts")) {
 			return false;
 		}
-		return new File(voiceDir, voiceDir.getName() + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS).exists();
+		return new File(voiceDir, voiceDir.getName() + "_" + TTSVOICE_INDEX_EXT_JS).exists();
 	}
 }

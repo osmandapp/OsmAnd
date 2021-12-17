@@ -14,9 +14,10 @@ import com.google.gson.JsonSerializer;
 import com.google.gson.reflect.TypeToken;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.quickaction.actions.DayNightModeAction;
+import net.osmand.plus.quickaction.actions.DisplayPositionAction;
 import net.osmand.plus.quickaction.actions.FavoriteAction;
 import net.osmand.plus.quickaction.actions.GPXAction;
 import net.osmand.plus.quickaction.actions.MapStyleAction;
@@ -49,6 +50,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import androidx.annotation.NonNull;
+
 /**
  * Created by rosty on 12/27/16.
  */
@@ -68,6 +71,8 @@ public class QuickActionRegistry {
 			nameRes(R.string.quick_action_add_navigation).category(QuickActionType.NAVIGATION);
 	public static final QuickActionType TYPE_CONFIGURE_SCREEN = new QuickActionType(0, "").
 			nameRes(R.string.map_widget_config).category(QuickActionType.CONFIGURE_SCREEN);
+	public static final QuickActionType TYPE_SETTINGS = new QuickActionType(0, "").
+			nameRes(R.string.shared_string_settings).category(QuickActionType.SETTINGS);
 
 
 	private final OsmandSettings settings;
@@ -247,6 +252,8 @@ public class QuickActionRegistry {
 		allTypes.add(NavResumePauseAction.TYPE);
 		allTypes.add(SwitchProfileAction.TYPE);
 		allTypes.add(NavRemoveNextDestination.TYPE);
+		// settings
+		allTypes.add(DisplayPositionAction.TYPE);
 
 		List<QuickActionType> enabledTypes = new ArrayList<>(allTypes);
 		OsmandPlugin.registerQuickActionTypesPlugins(allTypes, enabledTypes);
@@ -271,6 +278,7 @@ public class QuickActionRegistry {
 		filterQuickActions(TYPE_CONFIGURE_MAP, result);
 		filterQuickActions(TYPE_NAVIGATION, result);
 		filterQuickActions(TYPE_CONFIGURE_SCREEN, result);
+		filterQuickActions(TYPE_SETTINGS, result);
 		return result;
 	}
 
@@ -308,6 +316,16 @@ public class QuickActionRegistry {
 			return quickActionType.createNew();
 		}
 		return null;
+	}
+
+	public void onRenameGpxFile(@NonNull String src, @NonNull String dest) {
+		List<QuickAction> gpxActions = collectQuickActionsByType(GPXAction.TYPE);
+		for (QuickAction action : gpxActions) {
+			String storedPath = action.getParams().get(GPXAction.KEY_GPX_FILE_PATH);
+			if (src.equals(storedPath)) {
+				action.getParams().put(GPXAction.KEY_GPX_FILE_PATH, dest);
+			}
+		}
 	}
 
 	public static QuickAction produceAction(QuickAction quickAction) {

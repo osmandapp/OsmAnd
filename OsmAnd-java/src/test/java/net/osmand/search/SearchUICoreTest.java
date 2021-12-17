@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.zip.GZIPInputStream;
@@ -39,18 +40,16 @@ public class SearchUICoreTest {
 	private static final String SEARCH_RESOURCES_PATH = "src/test/resources/search/";
 	private static boolean TEST_EXTRA_RESULTS = true;
 	
-	private File testFile;
+	private final File testFile;
 
     public SearchUICoreTest(String name, File file) {
         this.testFile = file;
     }
-	
 
 	@BeforeClass
 	public static void setUp() {
 		defaultSetup();
 	}
-
 
 	static void defaultSetup() {
 		MapPoiTypes.setDefault(new MapPoiTypes("src/test/resources/poi_types.xml"));
@@ -61,16 +60,13 @@ public class SearchUICoreTest {
 			enPhrases = Algorithms.parseStringsXml(new File("src/test/resources/phrases/en/phrases.xml"));
 			//phrases = Algorithms.parseStringsXml(new File("src/test/resources/phrases/ru/phrases.xml"));
 			phrases = enPhrases;
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (XmlPullParserException e) {
+		} catch (IOException | XmlPullParserException e) {
 			e.printStackTrace();
 		}
 
 		poiTypes.setPoiTranslator(new TestSearchTranslator(phrases, enPhrases));
 	}
-	
-	
+
 	@Parameterized.Parameters(name = "{index}: {0}")
     public static Iterable<Object[]> data() throws IOException {
     	final File[] files = new File(SEARCH_RESOURCES_PATH).listFiles();
@@ -89,10 +85,9 @@ public class SearchUICoreTest {
 
     @Test
 	public void testSearch() throws IOException, JSONException {
-		File jsonFile = testFile;
-		File obfFile = new File(testFile.getParentFile(), testFile.getName().replace(".json", ".obf"));
+	    File obfFile = new File(testFile.getParentFile(), testFile.getName().replace(".json", ".obf"));
 		File obfZipFile = new File(testFile.getParentFile(), testFile.getName().replace(".json", ".obf.gz"));
-		String sourceJsonText = Algorithms.getFileAsString(jsonFile);
+		String sourceJsonText = Algorithms.getFileAsString(testFile);
 		Assert.assertNotNull(sourceJsonText);
 		Assert.assertTrue(sourceJsonText.length() > 0);
 
@@ -117,7 +112,7 @@ public class SearchUICoreTest {
 		if (useData) {
 			boolean obfZipFileExists = obfZipFile.exists();
 			if (!obfZipFileExists) {
-				System.out.println(String.format("Could not find obf file: %s", obfZipFile.getPath()));
+				System.out.printf("Could not find obf file: %s%n", obfZipFile.getPath());
 				return;
 			}
 			//Assert.assertTrue(obfZipFileExists);
@@ -208,16 +203,16 @@ public class SearchUICoreTest {
 				// String present = result.toString();
 				String present = res == null ? ("#MISSING " + (i + 1)) : formatResult(simpleTest, res, phrase);
 				if (!Algorithms.stringsEqual(expected, present)) {
-					System.out.println(String.format("Phrase: %s", phrase));
-					System.out.println(String.format("Mismatch for '%s' != '%s'. Result: ", expected, present));
+					System.out.printf("Phrase: %s%n", phrase);
+					System.out.printf("Mismatch for '%s' != '%s'. Result: %n", expected, present);
 					System.out.println("CURRENT RESULTS: ");
 					for (SearchResult r : searchResults) {
-						System.out.println(String.format("\t\"%s\",", formatResult(false, r, phrase)));
+						System.out.printf("\t\"%s\",%n", formatResult(false, r, phrase));
 					
 					}
 					System.out.println("EXPECTED : ");
 					for (String r : result) {
-						System.out.println(String.format("\t\"%s\",", r));
+						System.out.printf("\t\"%s\",%n", r);
 					}
 				}
 				Assert.assertEquals(expected, present);
@@ -232,7 +227,6 @@ public class SearchUICoreTest {
 		core.searchInternal(phrase, matcher);
 		SearchResultCollection collection = new SearchResultCollection(phrase);
 		collection.addSearchResults(matcher.getRequestResults(), true, true);
-
 		return collection.getCurrentSearchResults();
 	}
 
@@ -260,20 +254,19 @@ public class SearchUICoreTest {
 			return r.toString().trim();
 		}
 		double dist = 0;
-		if(r.location != null) {
+		if (r.location != null) {
 			dist = MapUtils.getDistance(r.location, phrase.getLastTokenLocation());
 		}
-		return String.format("%s [[%d, %s, %.3f, %.2f km]]", r.toString(), 
+		return String.format(Locale.US, "%s [[%d, %s, %.3f, %.2f km]]", r.toString(),
 				r.getFoundWordCount(), r.objectType.toString(),
 				r.getUnknownPhraseMatchWeight(),
-				dist / 1000
-				);
+				dist / 1000);
 	}
 
 	static class TestSearchTranslator implements MapPoiTypes.PoiTranslator {
 
-		private Map<String, String> enPhrases;
-		private Map<String, String> phrases;
+		private final Map<String, String> enPhrases;
+		private final Map<String, String> phrases;
 		public TestSearchTranslator(Map<String, String> phrases, Map<String, String> enPhrases) {
 			this.phrases = phrases;
 			this.enPhrases = enPhrases;
@@ -324,6 +317,11 @@ public class SearchUICoreTest {
 		}
 
 		@Override
+		public String getAllLanguagesTranslationSuffix() {
+			return "all languages";
+		}
+
+		@Override
 		public String getEnTranslation(AbstractPoiType type) {
 			AbstractPoiType baseLangType = type.getBaseLangType();
 			if (baseLangType != null) {
@@ -346,5 +344,5 @@ public class SearchUICoreTest {
 			}
 			return val;
 		}
-	};
+	}
 }

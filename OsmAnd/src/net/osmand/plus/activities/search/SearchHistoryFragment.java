@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.view.ViewCompat;
@@ -27,13 +28,13 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.base.OsmAndListFragment;
@@ -287,7 +288,7 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 		}
 	}
 
-	public static int getItemIcon(PointDescription pd) {
+	public static int getItemIcon(@NonNull PointDescription pd) {
 		int iconId;
 		if (pd.isAddress()) {
 			iconId = R.drawable.ic_action_street_name;

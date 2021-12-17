@@ -1,5 +1,12 @@
 package net.osmand.data;
 
+import net.osmand.Location;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
+import net.osmand.util.Algorithms;
+
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -12,13 +19,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.json.JSONObject;
-
 import gnu.trove.list.array.TIntArrayList;
-import net.osmand.Location;
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiCategory;
-import net.osmand.util.Algorithms;
 
 
 public class Amenity extends MapObject {
@@ -35,6 +36,7 @@ public class Amenity extends MapObject {
 	public static final String CUISINE = "cuisine";
 	public static final String WIKIDATA = "wikidata";
 	public static final String WIKIMEDIA_COMMONS = "wikimedia_commons";
+	public static final String MAPILLARY = "mapillary";
 	public static final String DISH = "dish";
 	public static final String REF = "ref";
 	public static final String OSM_DELETE_VALUE = "delete";

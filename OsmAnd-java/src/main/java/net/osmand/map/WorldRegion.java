@@ -213,7 +213,7 @@ public class WorldRegion implements Serializable {
 		return true;
 	}
 
-	private boolean containsBoundingBox(QuadRect rectangle) {
+	public boolean containsBoundingBox(QuadRect rectangle) {
 		return (boundingBox != null && rectangle != null) &&
 				boundingBox.contains(rectangle);
 	}

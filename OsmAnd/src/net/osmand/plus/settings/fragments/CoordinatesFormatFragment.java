@@ -19,7 +19,7 @@ import androidx.preference.PreferenceViewHolder;
 import net.osmand.Location;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
@@ -39,6 +39,8 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 	private static final String UTM_FORMAT = "utm_format";
 	private static final String MGRS_FORMAT = "mgrs_format";
 	private static final String OLC_FORMAT = "olc_format";
+	private static final String SWISS_GRID_FORMAT = "swiss_grid_format";
+	private static final String SWISS_GRID_PLUS_FORMAT = "swiss_grid_plus_format";
 
 	@Override
 	protected void setupPreferences() {
@@ -48,6 +50,8 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 		CheckBoxPreference utmPref = (CheckBoxPreference) findPreference(UTM_FORMAT);
 		CheckBoxPreference mgrsPref = (CheckBoxPreference) findPreference(MGRS_FORMAT);
 		CheckBoxPreference olcPref = (CheckBoxPreference) findPreference(OLC_FORMAT);
+		CheckBoxPreference swissGridPref = (CheckBoxPreference) findPreference(SWISS_GRID_FORMAT);
+		CheckBoxPreference swissGridPlusPref = (CheckBoxPreference) findPreference(SWISS_GRID_PLUS_FORMAT);
 
 		Location loc = app.getLocationProvider().getLastKnownLocation();
 
@@ -57,6 +61,8 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 		utmPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.UTM_FORMAT));
 		mgrsPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.MGRS_FORMAT));
 		olcPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.OLC_FORMAT));
+		swissGridPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.SWISS_GRID_FORMAT));
+		swissGridPlusPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.SWISS_GRID_PLUS_FORMAT));
 
 		int currentFormat = settings.COORDINATES_FORMAT.getModeValue(getSelectedAppMode());
 		String currentPrefKey = getCoordinatesKeyForFormat(currentFormat);
@@ -203,6 +209,10 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 				return PointDescription.MGRS_FORMAT;
 			case OLC_FORMAT:
 				return PointDescription.OLC_FORMAT;
+			case SWISS_GRID_FORMAT:
+				return PointDescription.SWISS_GRID_FORMAT;
+			case SWISS_GRID_PLUS_FORMAT:
+				return PointDescription.SWISS_GRID_PLUS_FORMAT;
 			default:
 				return -1;
 		}
@@ -222,6 +232,10 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 				return MGRS_FORMAT;
 			case PointDescription.OLC_FORMAT:
 				return OLC_FORMAT;
+			case PointDescription.SWISS_GRID_FORMAT:
+				return SWISS_GRID_FORMAT;
+			case PointDescription.SWISS_GRID_PLUS_FORMAT:
+				return SWISS_GRID_PLUS_FORMAT;
 			default:
 				return "Unknown format";
 		}

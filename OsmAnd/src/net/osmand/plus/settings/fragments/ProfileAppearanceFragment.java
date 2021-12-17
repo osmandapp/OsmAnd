@@ -42,13 +42,13 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.DialogButtonType;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.NavigationIcon;
@@ -62,8 +62,8 @@ import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsExportListener;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
-import net.osmand.plus.track.ColorsCard;
-import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
+import net.osmand.plus.track.cards.ColorsCard;
+import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
@@ -994,7 +994,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			fragment.setArguments(args);
 			fragmentManager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, tag)
-					.addToBackStack(DRAWER_SETTINGS_ID + ".new")
+					.addToBackStack(DRAWER_SETTINGS_ID)
 					.commitAllowingStateLoss();
 			return true;
 		}

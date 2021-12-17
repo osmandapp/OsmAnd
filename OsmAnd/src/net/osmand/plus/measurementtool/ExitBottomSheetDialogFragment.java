@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities.DialogButtonType;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
@@ -18,21 +18,22 @@ public class ExitBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
 	public static final int REQUEST_CODE = 1001;
 	public static final int SAVE_RESULT_CODE = 2;
 	public static final int EXIT_RESULT_CODE = 3;
-
+	private static final String DESCRIPTION = "description";
 	public static final String TAG = ExitBottomSheetDialogFragment.class.getSimpleName();
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-
+		Bundle args = getArguments();
+		String description = "";
+		if (args != null) {
+			description = args.getString(DESCRIPTION);
+		}
 		items.add(new ShortDescriptionItem.Builder()
-				.setDescription(getString(R.string.plan_route_exit_dialog_descr))
+				.setDescription(description)
 				.setTitle(getString(R.string.exit_without_saving))
 				.setLayoutId(R.layout.bottom_sheet_item_list_title_with_descr)
 				.create());
-
-		items.add(new DividerSpaceItem(getContext(),
-				getResources().getDimensionPixelSize(R.dimen.bottom_sheet_exit_button_margin)));
-
+		items.add(new DividerSpaceItem(getContext(), getResources().getDimensionPixelSize(R.dimen.bottom_sheet_exit_button_margin)));
 	}
 
 	@Override
@@ -78,9 +79,12 @@ public class ExitBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
 		return (DialogButtonType.SECONDARY);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment targetFragment) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment targetFragment, @NonNull String description) {
 		if (!fragmentManager.isStateSaved()) {
 			ExitBottomSheetDialogFragment fragment = new ExitBottomSheetDialogFragment();
+			Bundle bundle = new Bundle();
+			bundle.putString(DESCRIPTION, description);
+			fragment.setArguments(bundle);
 			fragment.setTargetFragment(targetFragment, REQUEST_CODE);
 			fragment.show(fragmentManager, TAG);
 		}

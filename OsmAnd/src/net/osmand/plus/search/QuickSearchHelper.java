@@ -1,5 +1,7 @@
 package net.osmand.plus.search;
 
+import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
+
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -17,10 +19,10 @@ import net.osmand.data.QuadRect;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
-import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -426,10 +428,12 @@ public class QuickSearchHelper implements ResourceListener {
 	public static class SearchHistoryAPI extends SearchBaseAPI {
 
 		private final OsmandApplication app;
+		private final MapPoiTypes poiTypes;
 
 		public SearchHistoryAPI(OsmandApplication app) {
 			super(ObjectType.RECENT_OBJ);
 			this.app = app;
+			this.poiTypes = app.getPoiTypes();
 		}
 
 		@Override
@@ -452,8 +456,13 @@ public class QuickSearchHelper implements ResourceListener {
 						pt = mapPoiTypes.getAnyPoiAdditionalTypeByKey(name);
 					}
 					if (pt != null) {
-						sr.localeName = pt.getTranslation();
+						if (OSM_WIKI_CATEGORY.equals(pt.getKeyName())) {
+							sr.localeName = pt.getTranslation() + " (" + poiTypes.getAllLanguagesTranslationSuffix() + ")";
+						} else {
+							sr.localeName = pt.getTranslation();
+						}
 						sr.object = pt;
+						sr.relatedObject = point;
 						sr.priorityDistance = 0;
 						sr.objectType = ObjectType.POI_TYPE;
 						publish = true;
@@ -463,6 +472,7 @@ public class QuickSearchHelper implements ResourceListener {
 					if (filter != null) {
 						sr.localeName = filter.getName();
 						sr.object = filter;
+						sr.relatedObject = point;
 						sr.objectType = ObjectType.POI_TYPE;
 						publish = true;
 					}

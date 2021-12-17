@@ -9,12 +9,13 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SimpleDividerItem;
@@ -273,6 +274,8 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 		private String description;
 		private int iconId;
 		private Object object;
+		@ColorInt
+		private int color;
 
 		public String getTitle() {
 			return title;
@@ -304,6 +307,15 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 
 		public void setObject(Object object) {
 			this.object = object;
+		}
+
+		@ColorInt
+		public int getColor() {
+			return color;
+		}
+
+		public void setColor(@ColorInt int color) {
+			this.color = color;
 		}
 	}
 

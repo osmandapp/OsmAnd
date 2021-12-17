@@ -21,7 +21,6 @@ import androidx.car.app.navigation.model.Trip;
 import net.osmand.Location;
 import net.osmand.plus.auto.NavigationScreen;
 import net.osmand.plus.auto.NavigationSession;
-import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.auto.TripHelper;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.LocationServiceHelper.LocationCallback;
@@ -36,6 +35,8 @@ public class NavigationService extends Service {
 
 	public static class NavigationServiceBinder extends Binder {
 	}
+
+	public static final String DEEP_LINK_ACTION_OPEN_ROOT_SCREEN = "net.osmand.plus.navigation.car.OpenRootScreen";
 
 	// global id don't conflict with others
 	public static int USED_BY_NAVIGATION = 1;
@@ -139,7 +140,7 @@ public class NavigationService extends Service {
 					if (!locations.isEmpty()) {
 						Location location = locations.get(locations.size() - 1);
 						NavigationSession carNavigationSession = app.getCarNavigationSession();
-						boolean hasCarSurface = carNavigationSession != null && carNavigationSession.hasSurface();
+						boolean hasCarSurface = carNavigationSession != null && carNavigationSession.hasStarted();
 						if (!settings.MAP_ACTIVITY_ENABLED.get() || hasCarSurface) {
 							locationProvider.setLocationFromService(location);
 						}
@@ -205,12 +206,17 @@ public class NavigationService extends Service {
 					new NavigationManagerCallback() {
 						@Override
 						public void onStopNavigation() {
-							NavigationService.this.stopCarNavigation();
+							getApp().stopNavigation();
 						}
 
 						@Override
 						public void onAutoDriveEnabled() {
 							CarToast.makeText(carContext, "Auto drive enabled", CarToast.LENGTH_LONG).show();
+							OsmAndLocationSimulation sim = getApp().getLocationProvider().getLocationSimulation();
+							RoutingHelper routingHelper = getApp().getRoutingHelper();
+							if (!sim.isRouteAnimating() && routingHelper.isFollowingMode() && routingHelper.isRouteCalculated() && !routingHelper.isRouteBeingCalculated()) {
+								sim.startStopRouteAnimation(null);
+							}
 						}
 					});
 

@@ -25,12 +25,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.chooseplan.button.PriceButton;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
@@ -226,31 +227,30 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 		LinearLayout container = mainView.findViewById(R.id.price_block);
 		container.removeAllViews();
 
-		for (PriceButton<?> btn : priceButtons) {
+		for (PriceButton<?> button : priceButtons) {
 			View itemView = themedInflater.inflate(R.layout.purchase_dialog_btn_payment, container, false);
 			TextView tvTitle = itemView.findViewById(R.id.title);
 			TextView tvPrice = itemView.findViewById(R.id.price);
 			TextView tvDiscount = itemView.findViewById(R.id.discount);
 			TextView tvDesc = itemView.findViewById(R.id.description);
 
-			tvTitle.setText(btn.getTitle());
-			tvPrice.setText(btn.getPrice());
-			if (!Algorithms.isEmpty(btn.getDiscount())) {
-				tvDiscount.setText(btn.getDiscount());
-				tvDiscount.setVisibility(View.VISIBLE);
-				if (!Algorithms.isEmpty(btn.getRegularPrice())) {
-					String pattern = getString(R.string.ltr_or_rtl_combine_via_colon);
-					String regularPrice = String.format(pattern, getString(R.string.regular_price), btn.getRegularPrice());
-					tvDesc.setText(regularPrice);
-					tvDesc.setVisibility(View.VISIBLE);
-				}
-			}
+			tvTitle.setText(button.getTitle());
+			tvPrice.setText(button.getPrice());
+			tvDesc.setText(button.getDescription());
+			tvDiscount.setText(button.getDiscount());
+
+			AndroidUiHelper.updateVisibility(tvDesc, !Algorithms.isEmpty(button.getDescription()));
+			AndroidUiHelper.updateVisibility(tvDiscount, !Algorithms.isEmpty(button.getDiscount()));
+
+			int iconId = button.isDiscountApplied() ? R.drawable.purchase_sc_discount_rectangle : R.drawable.purchase_save_discount_rectangle;
+			AndroidUtils.setBackground(tvDiscount, getIcon(iconId));
+
 			itemView.setOnClickListener(v -> {
-				selectedPriceButton = btn;
+				selectedPriceButton = button;
 				updateButtons();
 			});
 
-			buttonViews.put(btn, itemView);
+			buttonViews.put(button, itemView);
 			container.addView(itemView);
 		}
 

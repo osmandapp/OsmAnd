@@ -9,13 +9,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.util.Algorithms;
@@ -41,7 +40,7 @@ public class MultiSelectPreferencesBottomSheet extends BasePreferenceBottomSheet
 
 	private String[] prefsIds;
 	private CharSequence[] entries;
-	private Set<String> enabledPrefs = new HashSet<>();
+	private final Set<String> enabledPrefs = new HashSet<>();
 
 	private boolean prefChanged;
 
@@ -92,17 +91,6 @@ public class MultiSelectPreferencesBottomSheet extends BasePreferenceBottomSheet
 				item[0].setCompoundButtonColor(getAppMode().getProfileColor(nightMode));
 			}
 			items.add(item[0]);
-		}
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		for (BaseBottomSheetItem item : items) {
-			if (item instanceof BottomSheetItemWithCompoundButton) {
-				String prefId = (String) item.getTag();
-				((BottomSheetItemWithCompoundButton) item).setChecked(enabledPrefs.contains(prefId));
-			}
 		}
 	}
 

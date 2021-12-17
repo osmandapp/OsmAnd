@@ -84,7 +84,7 @@
     <string name="download_roads_only_item">"Nur Straßen"</string>
     <string name="download_regular_maps">Standardkarte</string>
     <string name="download_roads_only_maps">Reine Straßenkarte</string>
-    <string name="safe_mode_description">Anwendung läuft im abgesicherten Modus (durch Verwendung des langsameren Android statt nativem Code).</string>
+    <string name="safe_mode_description">Anwendung im (langsameren) abgesicherten Modus ausführen.</string>
     <string name="safe_mode">Abgesicherter Modus</string>
     <string name="native_library_not_running">Die App läuft im abgesicherten Modus (abschaltbar in \'Einstellungen\').</string>
     <string name="background_service_is_enabled_question">OsmAnd-Hintergrunddienst läuft noch. Ebenfalls beenden?</string>
@@ -514,7 +514,7 @@
     <string name="build_installed">Build {0} installiert ({1}).</string>
     <string name="downloading_build">Lade Build herunter …</string>
     <string name="install_selected_build">OsmAnd ({0} von {1} {2} MB) installieren?</string>
-    <string name="loading_builds_failed">Laden der Liste von OsmAnd-Builds ist fehlgeschlagen</string>
+    <string name="loading_builds_failed">Liste der OsmAnd Builds konnte nicht abgerufen werden</string>
     <string name="loading_builds">Lade OsmAnd-Builds …</string>
     <string name="select_build_to_install">Zu installierenden OsmAnd-Build auswählen</string>
     <string name="contribution_activity">Version installieren</string>
@@ -733,7 +733,7 @@
     <string name="osm_settings_descr">Geben Sie die Einstellungen für OpenStreetMap.org (OSM) an, die für OSM-Übermittlungen erforderlich sind.</string>
     <string name="data_settings_descr">Sprache angeben, Daten herunter- oder neu laden.</string>
     <string name="data_settings">Daten</string>
-    <string name="osm_settings">OpenStreetMap-Bearbeitung</string>
+    <string name="osm_editing_plugin_name">OpenStreetMap-Bearbeitung</string>
     <string name="additional_settings">Weitere Einstellungen</string>
     <string name="shared_string_settings">Einstellungen</string>
     <string name="update_tile">Aktualisieren</string>
@@ -1729,7 +1729,7 @@
     <string name="navigation_item_description">Navigation einrichten.</string>
     <string name="planning_trip_item">Eine Strecke planen</string>
     <string name="faq_item">FAQ</string>
-    <string name="faq_item_description">Häufige Fragen</string>
+    <string name="faq_item_description">Häufige Fragen.</string>
     <string name="map_viewing_item">Kartenansicht</string>
     <string name="search_on_the_map_item">Suche auf der Karte</string>
     <string name="instalation_troubleshooting_item">Installation und Problembehebung</string>
@@ -2167,8 +2167,8 @@
     <string name="rendering_attr_depthContours_name">Nautische Tiefenlinien</string>
     <string name="rendering_attr_depthContours_description">Tiefenlinien und -punkte einblenden.</string>
     <string name="route_altitude">Routenhöhenprofil</string>
-    <string name="altitude_descent">Abstieg</string>
-    <string name="altitude_ascent">Aufstieg</string>
+    <string name="altitude_descent">Bergab</string>
+    <string name="altitude_ascent">Bergauf</string>
     <string name="altitude_range">Höhenbereich</string>
     <string name="average_altitude">Durchschnittliche Höhe</string>
     <string name="shared_string_time">Zeit</string>
@@ -2932,7 +2932,7 @@
     <string name="files_present">%1$d Dateien (%2$s) sind am vorherigen Ort „%3$s“ vorhanden.</string>
     <string name="move_maps">Karten verschieben</string>
     <string name="dont_move_maps">Nicht verschieben</string>
-    <string name="public_transport_ped_route_title">Die Route zu Fuß beträgt ca. %1$s und könnte schneller sein als mit öffentlichen Verkehrsmitteln</string>
+    <string name="public_transport_ped_route_title">Die Route zu Fuß beträgt ca. %1$s und könnte schneller sein, als mit öffentlichen Verkehrsmitteln</string>
     <string name="public_transport_no_route_title">Leider konnte OsmAnd keine für Ihre Einstellungen geeignete Route finden.</string>
     <string name="searching_gps">Suche GPS</string>
     <string name="coordinates_widget">Koordinaten-Widget</string>
@@ -3125,7 +3125,7 @@
     <string name="years_5">Jahre</string>
     <string name="months_3">Drei Monate</string>
     <string name="price_free">Kostenlos</string>
-    <string name="get_discount_second_part">dann %1$s</string>
+    <string name="get_discount_second_part">Dann %1$s</string>
     <string name="cancel_subscription">Abonnement beenden</string>
     <string name="price_and_discount">%1$s • Spare %2$s</string>
     <string name="get_discount_title">Bekommen Sie %1$d %2$s mit %3$s Rabatt.</string>
@@ -3189,7 +3189,6 @@
     <string name="paste_Osmand_data_folder_path">Einfügen des Pfades zum Ordner mit OsmAnd-Daten</string>
     <string name="change_osmand_data_folder_question">OsmAnd-Datenordner ändern\?</string>
     <string name="move_maps_to_new_destination">Zum neuen Ziel verschieben</string>
-    <string name="internal_app_storage_description">Interner Speicher für OsmAnd, versteckt vor Benutzern und anderen Anwendungen.</string>
     <string name="change_data_storage_folder">Speicherordner ändern</string>
     <string name="rendering_attr_piste_type_snow_park_name">Winter-Funpark</string>
     <string name="rendering_attr_piste_type_sleigh_name">Schlitten</string>
@@ -3409,9 +3408,9 @@
     <string name="please_provide_profile_name_message">Bitte geben Sie einen Namen für das Profil an</string>
     <string name="open_settings">Einstellungen öffnen</string>
     <string name="plugin_disabled">Plugin aus</string>
-    <string name="plugin_disabled_descr">Dieses Plugin ist eine separate Anwendung, Sie müssen es separat entfernen, wenn Sie nicht mehr vorhaben, es zu verwenden.
+    <string name="plugin_disabled_descr">Diese Erweiterung ist eine separate App, die durch die Deaktivierung nicht entfernt wird.
 \n
-\nDas Plugin verbleibt nach dem Entfernen von OsmAnd auf dem Gerät.</string>
+\nSie kann in den Android Einstellungen unter \"Apps\" deinstalliert werden.</string>
     <string name="shared_string_menu">Menü</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Routing</string>
@@ -4176,13 +4175,13 @@
     <string name="routing_attr_avoid_tunnels_description">Tunnel vermeiden</string>
     <string name="routing_attr_avoid_tunnels_name">Tunnel vermeiden</string>
     <string name="routing_attr_avoid_highway_description">Schnellstraßen vermeiden</string>
-    <string name="routing_attr_avoid_highway_name">Schnellstraßen vermeiden</string> 
+    <string name="routing_attr_avoid_highway_name">Schnellstraßen vermeiden</string>
     <string name="routing_attr_allow_gate_description">Schranken benutzen</string>
-    <string name="routing_attr_allow_gate_name">Schranken benutzen</string> 
+    <string name="routing_attr_allow_gate_name">Schranken benutzen</string>
     <string name="routing_attr_only_permitted_streets_description">Nur Straßen mit ausdrücklicher Genehmigung nutzen</string>
-    <string name="routing_attr_only_permitted_streets_name">Nur Straßen mit Genehmigung nutzen</string>      
+    <string name="routing_attr_only_permitted_streets_name">Nur Straßen mit Genehmigung nutzen</string>
     <string name="routing_attr_only_permitted_ways_description">Nur Geländewege mit ausdrücklicher Genehmigung nutzen</string>
-    <string name="routing_attr_only_permitted_ways_name">Nur Geländewege mit Genehmigung nutzen</string>      
+    <string name="routing_attr_only_permitted_ways_name">Nur Geländewege mit Genehmigung nutzen</string>
     <string name="routing_attr_prefer_horse_routes_description">Reitrouten bevorzugen</string>
     <string name="routing_attr_prefer_horse_routes_name">Reitrouten bevorzugen</string>
     <string name="send_crash_log">Crash Log senden</string>
@@ -4281,8 +4280,8 @@
     <string name="on_hold_since">Ausgesetzt seit %1$s</string>
     <string name="active_till">Aktiv bis %1$s</string>
     <string name="promo_subscription">Promo Abonnement</string>
-    <string name="track_has_no_needed_data">Der Track enthält keine benötigten Daten.</string>
-    <string name="option_available_only_in_osmand_pro">Diese Option ist im Rahmen des OsmAnd Pro Abonnements verfügbar.</string>
+    <string name="track_has_no_needed_data">Dem Track fehlen die entsprechenden Daten.</string>
+    <string name="option_available_only_in_osmand_pro">Verfügbar im Rahmen des OsmAnd Pro Abonnements.</string>
     <string name="purchases_feature_desc_pro_widgets">Erhalten Sie Zugang zu den Funktionen von OsmAnd Pro: Routeneinfärbung und mehr.</string>
     <string name="explore_osmnad_plans_to_find_suitable">OsmAnd Angebote entdecken, um das Passende für Sie zu finden.</string>
     <string name="routes_color_by_type">Routen einfärben nach…</string>
@@ -4306,41 +4305,194 @@
     <string name="backup_error_no_subscription">Kein Abonnement vorhanden</string>
     <string name="map_updates_for_mappers">Kartenaktualisierungen für Mapper</string>
     <string name="benefits_for_contributors">Vorteile für aktive OSM-Beitragende</string>
-    <string name="benefits_for_contributors_primary_descr">Sie können von stündlichen, unbegrenzten Kartenaktualisierungen profitieren, wenn Sie aktiv zu OpenStreetMap.org beitragen.</string>
+    <string name="benefits_for_contributors_primary_descr">Wer aktiv zu OpenStreetMap.org beiträgt, kann von unbegrenzten stündlichen Kartenaktualisierungen profitieren.</string>
     <string name="benefits_for_contributors_secondary_descr">Bei OpenStreetMap anmelden um zu prüfen, ob Sie berechtigt sind, unbegrenzte monatliche und stündliche Kartenaktualisierungen zu erhalten.</string>
     <string name="use_login_and_password">Benutzername und Passwort verwenden</string>
     <string name="available_until">Verfügbar bis %1$s</string>
     <string name="enough_contributions_descr">Herzlichen Glückwunsch, Sie haben genügend Beiträge zu OpenStreetMap geleistet und können nun unbegrenzte Kartenaktualisierungen genießen!</string>
-    <string name="not_enough_contributions_descr">Mindestens %1$s Kartenbeiträge zu OpenStreetMap müssen innerhalb der letzten %2$s Tage verfasst worden sein.</string>
     <string name="shared_string_contributions">Beiträge</string>
-    <string name="contributions_may_calculate_with_delay">Das Berechnen der Beiträge könnte mehrere Stunden dauern.</string>
+    <string name="contributions_may_calculate_with_delay">Das Berechnen der Beiträge kann mehrere Stunden dauern.</string>
     <string name="map_updates_are_unavailable_yet">Kartenupdates sind noch nicht verfügbar :-(</string>
     <string name="connect_track_points_as">Routenpunkte verbinden</string>
     <string name="pro_features">Pro-Funktionen</string>
     <string name="purchases_restored">Käufe wiederhergestellt</string>
-    <string name="grey_color_undefined">Graue Farbe wird für Bereiche ohne Daten verwendet.</string>
+    <string name="grey_color_undefined">Bereiche ohne Daten werden grau dargestellt.</string>
     <string name="osm_live_payment_subscription_management_amz">Bezahlung wird von Ihrem Amazon-Konto eingezogen, wenn Sie den Kauf bestätigen.
 \n
 \nEs wird erneuert, es sei denn, Sie kündigen, bevor die ausgewählte Erneuerungsperiode beginnt.
 \n
 \nVerwalten und kündigen Sie Ihre Abonnements jederzeit in den Amazon-Einstellungen.</string>
     <string name="cancel_anytime_in_amazon_app">Jederzeit in der Amazon App kündigen</string>
-    <string name="amz_manage_subscription_descr">Um Ihr Abonnement zu verwalten, verwenden Sie die Amazon App auf Ihrem Gerät oder öffnen Sie die Amazon.com Website unter Ihrem Profil.</string>
+    <string name="amz_manage_subscription_descr">Verwalten Sie Ihr Abonnement über die Amazon App oder die Amazon Website.</string>
     <string name="empty_category_name">Leerer Kategoriename</string>
-    <string name="no_activity_for_intent">Es wurden keine geeigneten Anwendungen für diese Aktion gefunden</string>
+    <string name="no_activity_for_intent">Installieren Sie eine Anwendung, die diese Aktion ausführen kann.</string>
     <string name="no_items_of_type_message">Sie haben keine Artikel dieses Typs</string>
-    <string name="routeInfo_tracktype_description">Färbt die Route oder den Track entsprechend dem Zustand der Straßen auf der Grundlage ihrer Oberflächenzusammensetzung. Wird in der Regel auf Straßen angewendet, bei denen das Hauptstraßennetz aus unbefestigten Straßen besteht.</string>
-    <string name="routeInfo_winter_ice_road_description">Färbt die Route oder den Track entsprechend der Winterstraßenklassifizierung, die nur im Winter befahrbar ist.</string>
-    <string name="routeInfo_smoothness_description">Bietet ein Klassifizierungsschema für die physische Nutzbarkeit eines Weges für Radfahrzeuge, insbesondere hinsichtlich der Regelmäßigkeit/Ebenheit der Oberfläche.</string>
-    <string name="routeInfo_surface_description">Zusätzliche Informationen über die Oberfläche von Straßen/Fußwegen anbieten.</string>
-    <string name="routeInfo_roadClass_description">Färbt die Route oder den Track entsprechend der Straßenklassifikation ein.</string>
+    <string name="routeInfo_tracktype_description">Route oder Track nach der Oberflächenzusammensetzung einfärben. Wird in der Regel angewendet, wenn das Straßennetz weitgehend unbefestigt ist.</string>
+    <string name="routeInfo_winter_ice_road_description">Färbt die Route oder den Track entsprechend der Winterstraßenklassifizierung.</string>
+    <string name="routeInfo_smoothness_description">Klassifizierungsschema für die physische Nutzbarkeit eines Weges für Radfahrzeuge, insbesondere hinsichtlich der Regelmäßigkeit/Ebenheit der Oberfläche.</string>
+    <string name="routeInfo_surface_description">Informationen zur physischen Oberfläche von Straßen und Fußwegen angeben.</string>
+    <string name="routeInfo_roadClass_description">Route oder Track entsprechend der Straßenklassifikation einfärben.</string>
     <string name="add_group_to_markers">Gruppe zu Markerliste hinzufügen</string>
     <string name="remove_group_from_markers">Gruppe von Markerliste entfernen</string>
     <string name="start_point">Start</string>
     <string name="mapillary_menu_filter_description_new">Bilder nach Datum oder Typ filtern. Nur hineingezoomt aktiv.</string>
-    <string name="service_is_not_available_please_try_later">Dienst ist nicht verfügbar, bitte versuchen Sie es später</string>
+    <string name="service_is_not_available_please_try_later">Dienst ist nicht verfügbar, bitte versuchen Sie es später.</string>
     <string name="travel_route_types">Routentypen</string>
     <string name="shared_string_files">Dateien</string>
     <string name="sample_wikivoyage">Wikivoyage Beispiel</string>
     <string name="shared_string_mini">mini</string>
+    <string name="search_title">Suche: %1$s</string>
+    <string name="upload_gpx_description_hint">Wenn leer, werden Tracknamen als Beschreibung verwendet. Eingegebene Beschreibungen werden auf alle Tracks angewendet.</string>
+    <string name="routing_attr_prefer_tactile_paving_description">Taktile Oberflächen bevorzugen</string>
+    <string name="horseback_riding">Reiten</string>
+    <string name="routing_attr_prefer_tactile_paving_name">Taktile Oberflächen bevorzugen</string>
+    <string name="exit_pan_mode_descr">Auswählen drücken, um Schwenkmodus zu verlassen</string>
+    <string name="icon_group_nautical">Nautisch</string>
+    <string name="shared_string_articles">Artikel</string>
+    <string name="included_categories">Enthaltene Kategorien</string>
+    <string name="release_4_1">• Erste Unterstützung für Android Auto hinzugefügt
+\n
+\n • Aktualisierung der Benutzeroberfläche für die Suche nach UTM Koordinaten
+\n
+\n • GPS Filter für GPX Tracks
+\n
+\n • Höhen Widget (Pro)
+\n
+\n • Favoriten: Möglichkeit zur Anzeige der zuletzt verwendeten Symbole hinzugefügt
+\n
+\n • Routenplanung: verwendet nach dem Start das ausgewählte Profil
+\n
+\n • Mapillary Ebene korrigiert, das Modul ist nun standardmäßig deaktiviert
+\n
+\n • Anzeige zur Verwaltung des gesamten Verlaufs der App hinzugefügt
+\n
+\n • Die Kartenausrichtung wird nach dem Neustart der App nicht zurückgesetzt
+\n
+\n • Verbesserte Darstellung von SRTM Höhenmarkierungen
+\n
+\n • Arabische Kartenbeschriftungen korrigiert
+\n
+\n • Verschiedene Routingprobleme behoben
+\n
+\n</string>
+    <string name="rendering_attr_natureReserves_name">Naturschutzgebiet</string>
+    <string name="internal_app_storage_description">Interner Speicher, versteckt vor allen Benutzern und anderen Anwendungen, so dass nur OsmAnd auf Ihre Daten zugreifen kann.</string>
+    <string name="shared_string_details">Details</string>
+    <string name="shared_app_storage_description">Gemeinsamer Speicher ist aufgrund des geänderten Android Speicherzugriffs nicht mehr verfügbar.</string>
+    <string name="shared_storage_warning_title">Änderungen der Speicherzugriffsregeln</string>
+    <string name="purchases_feature_desc_android_auto">Bringt OsmAnd Offlinekarten und Navigation auf den Bildschirm Ihres Fahrzeugs und lässt sich in die Bedienelemente Ihres Fahrzeugs integrieren.</string>
+    <string name="location_access_request_action">Zugriff erlauben</string>
+    <string name="location_access_request_result">Zugelassen: %1$s Abgelehnt: %2$s</string>
+    <string name="is_disabled">%1$s ist deaktiviert</string>
+    <string name="shortcut_start_recording">Aufzeichnung starten</string>
+    <string name="shortcut_navigate_to">Navigieren nach…</string>
+    <string name="shortcut_navigate_to_work">Zur \"Arbeit\" navigieren</string>
+    <string name="shortcut_navigate_to_home">\"Nach Hause\" navigieren</string>
+    <string name="android_auto_map_placeholder_title">Die Karte wird auf dem Bildschirm des Fahrzeugs angezeigt.</string>
+    <string name="android_auto_map_placeholder_descr">Trennen Sie Ihr Gerät von Android Auto, um die Karte in der App anzuzeigen.</string>
+    <string name="android_auto_purchase_request_title">Kaufen Sie OsmAnd Pro oder Maps+, um OsmAnd mit Android Auto zu verwenden</string>
+    <string name="location_access_request_title">OsmAnd benötigt die Erlaubnis, auf den Standort zuzugreifen, um zu navigieren.</string>
+    <string name="transparent_status_bar">Transparente Statusleiste</string>
+    <string name="markers_history_is_disabled_descr">Verlauf aktivieren, um eine Liste der besuchten Kartenmarkierungen zu speichern.</string>
+    <string name="history_actions_descr">Sie können den Verlauf in eine Datei exportieren.</string>
+    <string name="navigation_history">Verlauf der Navigation</string>
+    <string name="history_preferences_descr">Sie können die Protokollierung des Verlaufs für jeden Verlaufstyp einzeln deaktivieren.</string>
+    <string name="shared_storage_warning_description">Aufgrund neuer Android-Regeln wird OsmAnd 4.2 ab November 2021 den Zugriff auf den gemeinsamen Speicher verlieren.
+\n
+\nBitte verschieben Sie den Datenordner aus dem gemeinsamen Speicher in den verfügbaren Speicher, andernfalls wird die App den Zugriff auf Ihre Daten wie Offline-Karten, GPX-Tracks usw. verlieren.</string>
+    <string name="search_history_is_disabled_descr">Sie können den Suchverlauf unter Einstellungen aktivieren.</string>
+    <string name="history_is_disabled_descr">Verlauf aktivieren, um einen schnelleren Zugriff auf die zuletzt verwendeten Ergebnisse zu erhalten.</string>
+    <string name="clear_all_history_warning">Alle Einträge im Verlauf löschen, einschließlich Such-, Navigations- und Markierungsverlauf\?</string>
+    <string name="clear_all_history">Gesamten Verlauf löschen</string>
+    <string name="map_markers_history">Verlauf der Kartenmarkierungen</string>
+    <string name="continue_on_phone">Auf dem Mobilgerät fortfahren</string>
+    <string name="transparent_status_bar_descr">Karte unter der Statusleiste anzeigen</string>
+    <string name="approx_safe_mode">Sichere GPX Approximation</string>
+    <string name="approx_safe_mode_description">GPX Näherung mit dem langsameren Android anstelle des nativen Codes durchführen.</string>
+    <string name="use_external_timestamps">Externe Zeitstempel verwenden</string>
+    <string name="use_external_timestamps_description">Zeitstempel des Online Routers verwenden, um die geschätzte Zeit und die durchschnittliche Geschwindigkeit anzupassen</string>
+    <string name="safe_settings">Sicher</string>
+    <string name="no_plugins_enabled">Sie haben keine Erweiterungen aktiviert. Eine Liste der verfügbaren Einweiterungen finden Sie unter \"Menü\" → \"Erweiterungen\".</string>
+    <string name="display_route_tracks">Tracks anzeigen</string>
+    <string name="shared_string_travelbooks">Reiseführer</string>
+    <string name="display_route_tracks_as_poi">Tracks als POI anzeigen</string>
+    <string name="delete_history_items">%1$s Verlaufseinträge löschen\?</string>
+    <string name="quick_action_toggle_preference">Ein Umschalter zum Ändern der Präferenz.</string>
+    <string name="delete_history_items_descr">Ausgewählte Verlaufseinträge löschen\?</string>
+    <string name="copying_file">Kopieren der Datei %1$s…</string>
+    <string name="from_to_with_params">Von %1$s nach %2$s</string>
+    <string name="progress_complete">%1$s abgeschlossen</string>
+    <string name="storage_found_files_descr">Tippen Sie auf \"%1$s\", um %2$s Dateien von \"%3$s\" nach \"%4$s\" zu kopieren. Dies kann einige Zeit dauern.</string>
+    <string name="storage_copied_files_size">%1$s Dateien %2$s kopiert</string>
+    <string name="storage_copying_files_size">Kopieren von %1$s Dateien %2$s</string>
+    <string name="storage_found_files_size">%1$s Dateien %2$s gefunden</string>
+    <string name="shared_storage_last_step">Sie können anschließend einen neuen Datenordner angeben.</string>
+    <string name="shared_storage_third_step">Erteilen Sie die Berechtigung zum Zugriff auf den Ordner. Ohne sie kann OsmAnd keine Dateien kopieren.</string>
+    <string name="shared_storage_first_step">Drücken Sie \"%1$s\".
+\nEs öffnet sich der Dateimanager, in dem Sie den Ordner osmand finden und öffnen müssen.</string>
+    <string name="shared_storage_migration_descr">Aufgrund von Änderungen im Android Speicherzugriff kann OsmAnd nicht mehr %1$s verwenden.
+\n
+\nKopieren Sie alle Ihre Daten in den neuen Ordner.</string>
+    <string name="shared_storage_second_step">Klicken Sie auf \"Diesen Ordner verwenden\".</string>
+    <string name="folder_access_denied">Für den Zugriff auf den ausgewählten Ordner ist eine Berechtigung erforderlich.</string>
+    <string name="copying_completed">Kopiert</string>
+    <string name="skip_confirmation">Ja, überspringen</string>
+    <string name="shared_storage">Gemeinsamer Speicher</string>
+    <string name="shared_storage_migration">Migration des gemeinsamen Speichers</string>
+    <string name="shared_string_migration">Migration</string>
+    <string name="icon_group_education">Bildung</string>
+    <string name="start_copying">Kopieren starten</string>
+    <string name="files_remaining">Verbleibende Dateien: %1$s %2$s</string>
+    <string name="shared_string_skip_warning">Migration überspringen\? OsmAnd hat keinen Zugriff mehr auf Ihre Dateien im gemeinsamen Speicher.
+\n
+\nDie App wird Ihren neuen Datenordner verwenden.</string>
+    <string name="shared_string_copy_to">Kopieren nach</string>
+    <string name="icon_group_industrial">Industriell</string>
+    <string name="rendering_attr_natureReserves_description">Naturreservate, Schutzgebiete und Nationalparks anzeigen.</string>
+    <string name="not_enough_contributions_descr">Ein Minimum von %1$s Änderungen in den letzten zwei Monaten %2$s ist erforderlich, um Zugang zu unbegrenzten stündlichen Kartenaktualisierungen zu erhalten.</string>
+    <string name="show_parameter_seekbar">Parametersuchleiste anzeigen</string>
+    <string name="fold_unfold">zusammenfalten/auffalten</string>
+    <string name="app_profile_type">App Profiltyp</string>
+    <string name="map_marker_options">Optionen für Kartenmarkierungen</string>
+    <string name="add_to_group">Zur Gruppe hinzufügen</string>
+    <string name="app_modes_options">App-Modi auswählen</string>
+    <string name="shared_string_memory">Speicher</string>
+    <string name="memory_allocated_for_routing_ds">Eine höhere Speicherzuweisung beschleunigt die Berechnung langer Routen (über 500 km), kann aber die Leistung anderer Anwendungen beeinträchtigen.
+\nKeine Auswirkung auf die Berechnungsgeschwindigkeit von kurzen Routen.</string>
+    <string name="memory_allocated_for_routing">Für das Routing zugewiesener Speicher</string>
+    <string name="reading_files">Lese Dateien…</string>
+    <string name="no_items_selected_warning">Bitte wählen Sie mindestens einen Artikel</string>
+    <string name="display_groups_visibility_dialog_description">Sie können die Sichtbarkeit von Gruppen auf der Karte steuern. Wenn der Track ausgeblendet ist, werden auch alle Gruppen ausgeblendet.</string>
+    <string name="shared_string_hide_all">Alle ausblenden</string>
+    <string name="migration_files_present">Es gibt %1$d Dateien (%2$s) am ausgewählten Speicherort \'%3$s\'.</string>
+    <string name="exit_without_saving_warning">Beenden, ohne die Änderungen zu speichern\?</string>
+    <string name="shared_string_show_slope">Hangneigung anzeigen</string>
+    <string name="shared_string_hide_slope">Hangneigung ausblenden</string>
+    <string name="shared_string_grade">Grad</string>
+    <string name="shared_string_uphill">Aufstieg</string>
+    <string name="shared_string_downhill">Abstieg</string>
+    <string name="elevation_profile">Höhenprofil</string>
+    <string name="shared_string_precision">Präzision</string>
+    <string name="shared_string_statistics">Statistiken</string>
+    <string name="gps_filter_hdop_desc">Legen Sie den maximal akzeptierten Wert für HDOP fest.
+\nPunkte mit einem höheren Wert werden ausgeblendet.</string>
+    <string name="gps_filter_speed_altitude_desc">Nur Trackpunkte, die dem eingestellten Intervall entsprechen, werden auf dem Diagramm und der Karte dargestellt, der Rest wird ausgeblendet.</string>
+    <string name="gps_filter_smoothing_desc">Legen Sie den Schwellenwert für den Abstand zwischen Punkten fest.
+\nTrackpunkte, die nicht mindestens diesen Abstand vom letzten sichtbaren Punkt entfernt sind, werden ausgeblendet.
+\nBeachten Sie, dass hohe Schwellenwerte die Geometrie des Tracks zu stark vereinfachen können.</string>
+    <string name="distance_between_points">Abstand zwischen Punkten</string>
+    <string name="gps_filter_precision">GPS-Genauigkeit</string>
+    <string name="gps_filter_smoothing">Glättung</string>
+    <string name="save_changes_into_file">Änderungen in Datei speichern</string>
+    <string name="save_as_copy">Als Kopie speichern</string>
+    <string name="gps_filter_actions_description">OsmAnd wendet die Änderungen auf den Track an, ohne die Datei zu aktualisieren. Sie können die Änderungen manuell speichern.</string>
+    <string name="shared_string_gps_filter">GPS Filter</string>
+    <string name="storage_migration_wrong_folder_warning">Keine OsmAnd Daten im ausgewählten Ordner gefunden. Bitte versuchen Sie es erneut.</string>
+    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
+    <string name="use_routing_fallback_description">Offline-Routenführung verwenden, wenn Online-Routenführung nicht erreichbar ist.</string>
+    <string name="use_routing_fallback">Alternative Routenführung nutzen</string>
+    <string name="created_on">Erstellt am</string>
+    <string name="shared_string_size">Größe</string>
+    <string name="turn_arrows_descr">Steuern Sie die Sichtbarkeit der Abbiegepfeile auf der Routenlinie.</string>
+    <string name="turn_arrows">Abbiegepfeile</string>
 </resources>

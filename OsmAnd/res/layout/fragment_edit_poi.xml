@@ -7,7 +7,7 @@
     android:background="?attr/spinnerListBackground"
     android:clickable="true"
     android:orientation="vertical"
-    tools:context="net.osmand.plus.osmedit.EditPoiDialogFragment">
+    tools:context="net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -133,7 +133,7 @@
                 app:tabTextColor="@android:color/darker_gray"/>
         </com.google.android.material.appbar.AppBarLayout>
 
-            <net.osmand.plus.osmedit.EditPoiViewPager
+            <net.osmand.plus.plugins.osmedit.EditPoiViewPager
                 android:id="@+id/viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

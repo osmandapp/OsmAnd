@@ -957,7 +957,7 @@
     <string name="osm_settings_descr">Вызначыць налады для OpenStreetMap.org (OSM), неабходныя для ўнёска.</string>
     <string name="data_settings_descr">Выбар мовы, абнаўленне даных.</string>
     <string name="data_settings">Даныя</string>
-    <string name="osm_settings">Рэдагаванне OpenStreetMap</string>
+    <string name="osm_editing_plugin_name">Рэдагаванне OpenStreetMap</string>
     <string name="additional_settings">Дадатковыя налады</string>
     <string name="save_current_track_descr">Захаваць дзейны след зараз жа як GPX-файл.</string>
     <string name="save_current_track">Захаваць дзейны след</string>
@@ -3319,7 +3319,6 @@
     <string name="select_base_profile_dialog_message">Стварыце свой профіль на аснове аднаго з базавых профіляў - гэта будзе вызначаць асноўныя параметры, такія як віджэты, адзінкі вымярэння хуткасці і адлегласці. Гэта тыповыя профілі праграмы, якія разам з прыкладамі профіляў карыстальніка можна пашырыць да:</string>
     <string name="routing_attr_allow_classic_only_description">Маршруты, падрыхтаваныя толькі для класічнага стылю без канькабежных трас. Сюды ўваходзяць маршруты, падрыхтаваныя невялікім снегаходам з больш свабоднай лыжнёй і трасамі, падрыхтаваныя непасрэдна лыжнікамі.</string>
     <string name="download_detailed_map">Спампаваць падрабязную мапу %s, каб праглядзець гэтую вобласць.</string>
-    <string name="internal_app_storage_description">Унутранае сховішча OsmAnd, схаванае ад карыстальніка і іншых праграм.</string>
     <string name="change_data_storage_folder">Змена каталога сховішча</string>
     <string name="rendering_attr_piste_type_snow_park_name">Ландшафтны парк</string>
     <string name="rendering_attr_piste_type_sleigh_name">Самаходныя і несамаходныя сані (запрэжкі)</string>
@@ -4056,7 +4055,6 @@
     <string name="snap_to_road_descr">Значок бягучага месцазнаходжання будзе прыаязвацца да бягучага маршруту навігацыі</string>
     <string name="routing_attr_height_obstacles_description">Разлік маршруту дапаможа пазбегнуць вялікіх схілаў.</string>
     <string name="purchases">Куплі</string>
-    <string name="not_enough_contributions_descr">У вас павінна быць прынамсі %1$s унёскаў на OpenStreetMap на працягу апошніх %2$s дзён.</string>
     <string name="shared_string_contributions">Унёскі</string>
     <string name="contributions_may_calculate_with_delay">Унёскі могуць разлічвацца з затрымкай у некалькі гадзін.</string>
     <string name="map_updates_are_unavailable_yet">Абнаўленні мапаў пакуль што недаступныя. :-(</string>

@@ -714,7 +714,7 @@
     <string name="osm_settings_descr">Καθορίστε τις ρυθμίσεις OpenStreetMap.org (OSM) που απαιτούνται για τις υποβολές OSM.</string>
     <string name="data_settings_descr">Καθορισμός γλώσσας, λήψη/επαναφόρτωση δεδομένων.</string>
     <string name="data_settings">Δεδομένα</string>
-    <string name="osm_settings">Επεξεργασία OpenStreetMap</string>
+    <string name="osm_editing_plugin_name">Επεξεργασία OpenStreetMap</string>
     <string name="additional_settings">Πρόσθετες ρυθμίσεις</string>
     <string name="save_current_track_descr">Αποθήκευση τρέχοντος ίχνους ως αρχείου GPX τώρα.</string>
     <string name="save_current_track">Αποθήκευση τρέχοντος ίχνους</string>
@@ -3188,7 +3188,6 @@
     <string name="paste_Osmand_data_folder_path">Επικόλληση διαδρομής στον φάκελο με τα δεδομένα OsmAnd</string>
     <string name="change_osmand_data_folder_question">Αλλαγή του φακέλου δεδομένων του OsmAnd;</string>
     <string name="move_maps_to_new_destination">Μετακίνηση στον νέο προορισμό</string>
-    <string name="internal_app_storage_description">Εσωτερική αποθήκευση για το OsmAnd, (κρυφή από τους χρήστες και άλλες εφαρμογές).</string>
     <string name="change_data_storage_folder">Αλλαγή φακέλου αποθήκευσης</string>
     <string name="rendering_attr_piste_type_snow_park_name">Χιονοδρομικό πάρκο</string>
     <string name="rendering_attr_piste_type_sleigh_name">Έλκηθρο</string>

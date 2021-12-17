@@ -3,22 +3,17 @@ package net.osmand.plus.auto;
 import static android.text.Spanned.SPAN_INCLUSIVE_INCLUSIVE;
 
 import android.text.SpannableString;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.car.app.CarContext;
-import androidx.car.app.OnScreenResultListener;
 import androidx.car.app.Screen;
 import androidx.car.app.model.Action;
 import androidx.car.app.model.ActionStrip;
 import androidx.car.app.model.CarIcon;
 import androidx.car.app.model.CarLocation;
-import androidx.car.app.model.Distance;
 import androidx.car.app.model.DistanceSpan;
 import androidx.car.app.model.ItemList;
 import androidx.car.app.model.Metadata;
-import androidx.car.app.model.OnClickListener;
 import androidx.car.app.model.Place;
 import androidx.car.app.model.Row;
 import androidx.car.app.model.Template;
@@ -26,13 +21,14 @@ import androidx.car.app.navigation.model.PlaceListNavigationTemplate;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.IconCompat;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.PointImageDrawable;
-import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -45,23 +41,22 @@ public final class FavoritesScreen extends Screen {
 	private static final String TAG = "NavigationDemo";
 
 	@NonNull
-	private final Action mSettingsAction;
+	private final Action settingsAction;
 	@NonNull
-	private final SurfaceRenderer mSurfaceRenderer;
+	private final SurfaceRenderer surfaceRenderer;
 
 	public FavoritesScreen(
 			@NonNull CarContext carContext,
 			@NonNull Action settingsAction,
 			@NonNull SurfaceRenderer surfaceRenderer) {
 		super(carContext);
-		mSettingsAction = settingsAction;
-		mSurfaceRenderer = surfaceRenderer;
+		this.settingsAction = settingsAction;
+		this.surfaceRenderer = surfaceRenderer;
 	}
 
 	@NonNull
 	@Override
 	public Template onGetTemplate() {
-		Log.i(TAG, "In FavoritesScreen.onGetTemplate()");
 		ItemList.Builder listBuilder = new ItemList.Builder();
 		OsmandApplication app = (OsmandApplication) getCarContext().getApplicationContext();
 		LatLon location = app.getSettings().getLastKnownMapLocation();
@@ -88,23 +83,36 @@ public final class FavoritesScreen extends Screen {
 
 		return new PlaceListNavigationTemplate.Builder()
 				.setItemList(listBuilder.build())
-				.setTitle(app.getString(R.string.app_name))
-				.setActionStrip(new ActionStrip.Builder().addAction(mSettingsAction).build())
+				.setTitle(app.getString(R.string.shared_string_favorites))
+				.setActionStrip(new ActionStrip.Builder().addAction(settingsAction).build())
 				.setHeaderAction(Action.BACK)
 				.build();
 	}
 
 	private void onClickFavorite(@NonNull FavouritePoint point) {
-		OsmandMapTileView mapView = mSurfaceRenderer.getMapView();
-		if (mapView != null) {
-			mapView.setLatLon(point.getLatitude(), point.getLongitude(), true);
-			finish();
-		}
+		SearchResult result = new SearchResult();
+		result.location = new LatLon(point.getLatitude(), point.getLongitude());
+		result.objectType = ObjectType.FAVORITE;
+		result.object = point;
+		result.localeName = point.getAddress();
+		getScreenManager().pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, surfaceRenderer, result),
+				obj -> {
+					if (obj != null) {
+						FavoritesScreen.this.onRouteSelected(result);
+					}
+				});
+		finish();
 	}
 
 	@NonNull
 	private List<FavouritePoint> getFavorites() {
 		OsmandApplication app = (OsmandApplication) getCarContext().getApplicationContext();
 		return app.getFavorites().getFavouritePoints();
+	}
+
+	private void onRouteSelected(@NonNull SearchResult sr) {
+		OsmandApplication app = (OsmandApplication) getCarContext().getApplicationContext();
+		app.getOsmandMap().getMapLayers().getMapControlsLayer().startNavigation();
+		finish();
 	}
 }

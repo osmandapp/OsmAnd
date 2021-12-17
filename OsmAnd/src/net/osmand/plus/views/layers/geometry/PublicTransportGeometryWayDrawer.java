@@ -10,8 +10,8 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
-import net.osmand.plus.views.OsmandMapLayer;
-import net.osmand.plus.views.OsmandMapLayer.RenderingLineAttributes;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.RenderingLineAttributes;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWay.GeometryAnchorWayStyle;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWay.GeometryTransportWayStyle;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
@@ -39,11 +39,11 @@ public class PublicTransportGeometryWayDrawer extends GeometryWayDrawer<PublicTr
 		GeometryWayStyle<?> style = pathData.style;
 		if (style instanceof GeometryTransportWayStyle) {
 			RenderingLineAttributes attrsPT = getContext().getAttrsPT();
-			attrsPT.customColor = style.getStrokeColor();
+			attrsPT.customColor = style.getStrokeColor(0);
 			attrsPT.customColorPaint.setStrokeWidth(attrsPT.paint2.getStrokeWidth());
 			attrsPT.drawPath(canvas, path);
 			attrsPT.customColorPaint.setStrokeWidth(attrsPT.paint.getStrokeWidth());
-			attrsPT.customColor = style.getColor();
+			attrsPT.customColor = style.getColor(0);
 			attrsPT.drawPath(canvas, path);
 		} else {
 			super.drawPath(canvas, pathData);

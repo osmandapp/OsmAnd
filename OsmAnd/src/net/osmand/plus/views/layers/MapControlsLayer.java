@@ -1,5 +1,14 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.COMPASS_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.LAYERS_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MENU_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.QUICK_SEARCH_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTE_PLANNING_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
+
 import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -37,7 +46,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.Slider;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
@@ -46,32 +55,33 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.rastermaps.LayerTransparencySeekbarMode;
-import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode;
+import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
-import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.MapActions;
 import net.osmand.plus.views.OsmandMap;
-import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 import net.osmand.util.Algorithms;
 
@@ -82,15 +92,6 @@ import java.util.List;
 import java.util.Set;
 
 import gnu.trove.list.array.TIntArrayList;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.COMPASS_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.LAYERS_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MENU_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.QUICK_SEARCH_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTE_PLANNING_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
 
 public class MapControlsLayer extends OsmandMapLayer {
 
@@ -105,9 +106,16 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private List<MapHudButton> controls = new ArrayList<>();
 
-	private Slider transparencySlider;
 	private LinearLayout transparencyBarLayout;
+	private Slider transparencySlider;
 	private static CommonPreference<Integer> transparencySetting;
+
+	private LinearLayout parameterBarLayout;
+	private Slider parameterSlider;
+	private static CommonPreference<Float> parameterMinSetting;
+	private static CommonPreference<Float> parameterMaxSetting;
+	private static CommonPreference<Float> parameterStepSetting;
+	private static CommonPreference<Float> parameterValueSetting;
 
 	private MapRouteInfoMenu mapRouteInfoMenu;
 	private MapHudButton backToLocationControl;
@@ -158,6 +166,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 			controls = new ArrayList<>();
 			transparencySlider = null;
 			transparencyBarLayout = null;
+			parameterSlider = null;
+			parameterBarLayout = null;
 			mapRouteInfoMenu = null;
 			backToLocationControl = null;
 			menuControl = null;
@@ -332,12 +342,16 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	public void stopNavigation() {
-		MapActivity mapActivity = requireMapActivity();
-		mapRouteInfoMenu.hide();
-		if (app.getRoutingHelper().isFollowingMode()) {
-			mapActivity.getMapActions().stopNavigationActionConfirm(null);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapRouteInfoMenu.hide();
+			if (app.getRoutingHelper().isFollowingMode()) {
+				mapActivity.getMapActions().stopNavigationActionConfirm(null);
+			} else {
+				mapActivity.getMapActions().stopNavigationWithoutConfirm();
+			}
 		} else {
-			mapActivity.getMapActions().stopNavigationWithoutConfirm();
+			app.getOsmandMap().getMapActions().stopNavigationWithoutConfirm();
 		}
 	}
 
@@ -519,51 +533,58 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private void startRoutePlanningWithDestination(LatLon latLon, PointDescription pointDescription, TargetPointsHelper targets) {
-		MapActivity mapActivity = requireMapActivity();
+		MapActivity mapActivity = getMapActivity();
+		MapActions mapActions = mapActivity != null ? mapActivity.getMapActions() : app.getOsmandMap().getMapActions();
 		boolean hasPointToStart = settings.restorePointToStart();
 		targets.navigateToPoint(latLon, true, -1, pointDescription);
 		if (!hasPointToStart) {
-			mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true, MenuState.HEADER_ONLY);
+			mapActions.enterRoutePlanningModeGivenGpx(null, null, null, true, true, MenuState.HEADER_ONLY);
 		} else {
 			TargetPoint start = targets.getPointToStart();
 			if (start != null) {
-				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, start.point, start.getOriginalPointDescription(), true, true, MenuState.HEADER_ONLY);
+				mapActions.enterRoutePlanningModeGivenGpx(null, start.point, start.getOriginalPointDescription(), true, true, MenuState.HEADER_ONLY);
 			} else {
-				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true, MenuState.HEADER_ONLY);
+				mapActions.enterRoutePlanningModeGivenGpx(null, null, null, true, true, MenuState.HEADER_ONLY);
 			}
 		}
 	}
 
-	private PointDescription getPointDescriptionForTarget(LatLon latLon) {
-		MapActivity mapActivity = requireMapActivity();
-		final MapContextMenu menu = mapActivity.getContextMenu();
-		PointDescription pointDescription;
-		if (menu.isActive() && latLon.equals(menu.getLatLon())) {
-			pointDescription = menu.getPointDescriptionForTarget();
-		} else {
-			pointDescription = new PointDescription(PointDescription.POINT_TYPE_LOCATION, "");
-		}
-		return pointDescription;
+	private PointDescription getPointDescriptionForTarget(@NonNull LatLon latLon) {
+		return getPointDescriptionForTarget(latLon, null);
 	}
 
-	public void addDestination(LatLon latLon) {
-		MapActivity mapActivity = requireMapActivity();
-		if (latLon != null) {
-			if (!OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
-				requestedLatLon = latLon;
-				ActivityCompat.requestPermissions(mapActivity,
-						new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
-						REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION);
-			} else {
-				PointDescription pointDescription = getPointDescriptionForTarget(latLon);
+	private PointDescription getPointDescriptionForTarget(@NonNull LatLon latLon, @Nullable String name) {
+		MapActivity mapActivity = getMapActivity();
+		MapContextMenu menu = mapActivity != null ? mapActivity.getContextMenu() : null;
+		return menu != null && menu.isActive() && latLon.equals(menu.getLatLon())
+				? menu.getPointDescriptionForTarget()
+				: new PointDescription(PointDescription.POINT_TYPE_LOCATION, Algorithms.isEmpty(name) ? "" : name);
+	}
+
+	public void addDestination(@NonNull LatLon latLon) {
+		addDestination(latLon, null);
+	}
+
+	public void addDestination(@NonNull LatLon latLon, @Nullable PointDescription pointDescription) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && !OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
+			requestedLatLon = latLon;
+			ActivityCompat.requestPermissions(mapActivity,
+					new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
+					REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION);
+		} else {
+			if (pointDescription == null) {
+				pointDescription = getPointDescriptionForTarget(latLon, null);
+			}
+			if (mapActivity != null) {
 				mapActivity.getContextMenu().close();
-				final TargetPointsHelper targets = app.getTargetPointsHelper();
-				RoutingHelper routingHelper = app.getRoutingHelper();
-				if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
-					targets.navigateToPoint(latLon, true, targets.getIntermediatePoints().size() + 1, pointDescription);
-				} else if (targets.getIntermediatePoints().isEmpty()) {
-					startRoutePlanningWithDestination(latLon, pointDescription, targets);
-				}
+			}
+			final TargetPointsHelper targets = app.getTargetPointsHelper();
+			RoutingHelper routingHelper = app.getRoutingHelper();
+			if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
+				targets.navigateToPoint(latLon, true, targets.getIntermediatePoints().size() + 1, pointDescription);
+			} else if (targets.getIntermediatePoints().isEmpty()) {
+				startRoutePlanningWithDestination(latLon, pointDescription, targets);
 			}
 		}
 	}
@@ -587,18 +608,24 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
-	public void replaceDestination(LatLon latLon) {
-		MapActivity mapActivity = requireMapActivity();
+	public void replaceDestination(@NonNull LatLon latLon) {
+		replaceDestination(latLon, null);
+	}
+
+	public void replaceDestination(@NonNull LatLon latLon, @Nullable PointDescription pointDescription) {
 		RoutingHelper routingHelper = app.getRoutingHelper();
-		if (latLon != null) {
-			if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
-				PointDescription pointDescription = getPointDescriptionForTarget(latLon);
-				mapActivity.getContextMenu().close();
-				final TargetPointsHelper targets = app.getTargetPointsHelper();
-				targets.navigateToPoint(latLon, true, -1, pointDescription);
-			} else {
-				addDestination(latLon);
+		if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
+			if (pointDescription == null) {
+				pointDescription = getPointDescriptionForTarget(latLon, null);
 			}
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				mapActivity.getContextMenu().close();
+			}
+			final TargetPointsHelper targets = app.getTargetPointsHelper();
+			targets.navigateToPoint(latLon, true, -1, pointDescription);
+		} else {
+			addDestination(latLon, pointDescription);
 		}
 	}
 
@@ -776,7 +803,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	public void startNavigation() {
-		MapActivity mapActivity = requireMapActivity();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (routingHelper.isFollowingMode()) {
 			switchToRouteFollowingLayout();
@@ -801,7 +827,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				} else if (routingHelper.isRouteCalculated() && !routingHelper.isRouteBeingCalculated()) {
 					OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
 					if (!sim.isRouteAnimating()) {
-						sim.startStopRouteAnimation(mapActivity);
+						sim.startStopRouteAnimation(getMapActivity());
 					}
 				}
 			}
@@ -825,9 +851,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 		boolean isNight = isNightModeForMapControls(drawSettings);
 		int textColor = ContextCompat.getColor(mapActivity, isNight ? R.color.widgettext_night : R.color.widgettext_day);
-		// TODO nightMode
-		// updatextColor(textColor, shadw, rulerControl, zoomControls, mapMenuControls);
-		// default buttons
 
 		RoutingHelper rh = app.getRoutingHelper();
 		WidgetsVisibilityHelper vh = mapActivity.getWidgetsVisibilityHelper();
@@ -864,6 +887,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean showTopButtons = !isRouteDialogOpened && vh.shouldShowTopButtons();
 		layersHud.updateVisibility(showTopButtons);
 		quickSearchHud.updateVisibility(showTopButtons);
+
+		updateTransparencySliderUi();
 
 		if (mapView.isZooming()) {
 			lastZoom = System.currentTimeMillis();
@@ -1001,6 +1026,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		MapActivity mapActivity = requireMapActivity();
 		transparencyBarLayout = mapActivity.findViewById(R.id.map_transparency_layout);
 		transparencySlider = mapActivity.findViewById(R.id.map_transparency_slider);
+		parameterBarLayout = mapActivity.findViewById(R.id.layer_param_layout);
+		parameterSlider = mapActivity.findViewById(R.id.layer_param_slider);
 		transparencySlider.setValueTo(255);
 		if (transparencySetting != null) {
 			transparencySlider.setValue(transparencySetting.get());
@@ -1014,18 +1041,46 @@ public class MapControlsLayer extends OsmandMapLayer {
 				mapActivity.refreshMap();
 			}
 		});
+		boolean showParameterSlider = false;
+		if (parameterMinSetting != null && parameterMaxSetting != null
+				&& parameterStepSetting != null && parameterValueSetting != null) {
+			float paramMin = parameterMinSetting.get();
+			float paramMax = parameterMaxSetting.get();
+			float paramStep = parameterStepSetting.get();
+			float paramValue = parameterValueSetting.get();
+			if (paramMin < paramMax && paramStep < Math.abs(paramMax - paramMin) && paramStep > 0
+					&& paramValue >= paramMin && paramValue <= paramMax) {
+				parameterSlider.setValueFrom(paramMin);
+				parameterSlider.setValueTo(paramMax);
+				parameterSlider.setStepSize(paramStep);
+				parameterSlider.setValue(paramValue);
+				showParameterSlider = true;
+			}
+		}
+		parameterSlider.addOnChangeListener((slider, value, fromUser) -> {
+			if (parameterValueSetting != null) {
+				parameterValueSetting.set(value);
+				mapActivity.refreshMap();
+			}
+		});
 
 		LayerTransparencySeekbarMode seekbarMode = settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
 		if (OsmandPlugin.isActive(OsmandRasterMapsPlugin.class)) {
 			if (seekbarMode == LayerTransparencySeekbarMode.OVERLAY && settings.MAP_OVERLAY.get() != null) {
-				showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY, true);
+				if (showParameterSlider) {
+					hideTransparencyBar();
+					parameterBarLayout.setVisibility(View.VISIBLE);
+					updateParameterSliderUi();
+				} else {
+					showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY);
+				}
 			} else if (seekbarMode == LayerTransparencySeekbarMode.UNDERLAY && settings.MAP_UNDERLAY.get() != null) {
-				showTransparencyBar(settings.MAP_TRANSPARENCY, true);
+				showTransparencyBar(settings.MAP_TRANSPARENCY);
 			}
 		}
 	}
 
-	public void updateTransparencySlider() {
+	public void updateTransparencySliderValue() {
 		LayerTransparencySeekbarMode seekbarMode = settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
 		if (OsmandPlugin.isActive(OsmandRasterMapsPlugin.class)) {
 			if (seekbarMode == LayerTransparencySeekbarMode.OVERLAY && settings.MAP_OVERLAY.get() != null) {
@@ -1036,19 +1091,16 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
-	public void showTransparencyBar(CommonPreference<Integer> transparenPreference,
-									boolean isTransparencyBarEnabled) {
-		ApplicationMode appMode = app.getSettings().getApplicationMode();
-		if (MapControlsLayer.transparencySetting != transparenPreference) {
-			MapControlsLayer.transparencySetting = transparenPreference;
+	public void showTransparencyBar(@NonNull CommonPreference<Integer> transparentPreference) {
+		hideParameterBar();
+		transparencySetting = transparentPreference;
+		transparencyBarLayout.setVisibility(View.VISIBLE);
+		transparencySlider.setValue(transparentPreference.get());
+		updateTransparencySliderUi();
+	}
 
-		}
-		if (transparenPreference != null && isTransparencyBarEnabled) {
-			transparencyBarLayout.setVisibility(View.VISIBLE);
-			transparencySlider.setValue(transparenPreference.get());
-		} else {
-			transparencyBarLayout.setVisibility(View.GONE);
-		}
+	private void updateTransparencySliderUi() {
+		ApplicationMode appMode = app.getSettings().getApplicationMode();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		int selectedModeColor = appMode.getProfileColor(nightMode);
 		UiUtilities.setupSlider(transparencySlider, nightMode, selectedModeColor);
@@ -1057,6 +1109,49 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void hideTransparencyBar() {
 		transparencyBarLayout.setVisibility(View.GONE);
 		transparencySetting = null;
+	}
+
+	public void showParameterBar(@NonNull MapTileLayer layer) {
+		CommonPreference<Float> paramMinPref = layer.getParamMinPref();
+		CommonPreference<Float> paramMaxPref = layer.getParamMaxPref();
+		CommonPreference<Float> paramStepPref = layer.getParamStepPref();
+		CommonPreference<Float> paramValuePref = layer.getParamValuePref();
+		parameterMinSetting = paramMinPref;
+		parameterMaxSetting = paramMaxPref;
+		parameterStepSetting = paramStepPref;
+		parameterValueSetting = paramValuePref;
+		if (paramMinPref != null && paramMaxPref != null && paramStepPref != null && paramValuePref != null) {
+			float paramMin = paramMinPref.get();
+			float paramMax = paramMaxPref.get();
+			float paramStep = paramStepPref.get();
+			float paramValue = paramValuePref.get();
+			if (paramMin < paramMax && paramStep < Math.abs(paramMax - paramMin) && paramStep > 0
+					&& paramValue >= paramMin && paramValue <= paramMax) {
+				hideTransparencyBar();
+				parameterBarLayout.setVisibility(View.VISIBLE);
+				parameterSlider.setValueFrom(paramMin);
+				parameterSlider.setValueTo(paramMax);
+				parameterSlider.setStepSize(paramStep);
+				parameterSlider.setValue(paramValue);
+				updateParameterSliderUi();
+				layer.setupParameterListener();
+			}
+		}
+	}
+
+	private void updateParameterSliderUi() {
+		ApplicationMode appMode = app.getSettings().getApplicationMode();
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		int selectedModeColor = appMode.getProfileColor(nightMode);
+		UiUtilities.setupSlider(parameterSlider, nightMode, selectedModeColor);
+	}
+
+	public void hideParameterBar() {
+		parameterBarLayout.setVisibility(View.GONE);
+		parameterMinSetting = null;
+		parameterMaxSetting = null;
+		parameterStepSetting = null;
+		parameterValueSetting = null;
 	}
 
 	public class MapHudButton {
@@ -1394,7 +1489,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 							navigateButton();
 							break;
 						case REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION:
-							addDestination(requestedLatLon);
+							if (requestedLatLon != null) {
+								addDestination(requestedLatLon);
+							}
 							break;
 					}
 				} else if (grantResults[0] == PackageManager.PERMISSION_DENIED) {

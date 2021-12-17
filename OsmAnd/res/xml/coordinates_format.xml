@@ -39,4 +39,16 @@
 		android:persistent="false"
 		android:title="@string/navigate_point_format_olc" />
 
+	<CheckBoxPreference
+		android:key="swiss_grid_format"
+		android:layout="@layout/preference_radio_button"
+		android:persistent="false"
+		android:title="@string/navigate_point_format_swiss_grid" />
+
+	<CheckBoxPreference
+		android:key="swiss_grid_plus_format"
+		android:layout="@layout/preference_radio_button"
+		android:persistent="false"
+		android:title="@string/navigate_point_format_swiss_grid_plus" />
+
 </PreferenceScreen>

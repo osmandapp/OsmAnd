@@ -21,7 +21,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.SearchHelper.SearchHelperListener;
 import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
+import net.osmand.search.core.SearchWord;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -44,6 +46,7 @@ public final class SearchResultsScreen extends Screen implements DefaultLifecycl
 	private ItemList itemList;
 	private boolean loading;
 	private boolean destroyed;
+	private boolean showResult;
 
 	public SearchResultsScreen(@NonNull CarContext carContext, @NonNull Action settingsAction,
 							   @NonNull SurfaceRenderer surfaceRenderer, @NonNull String searchText) {
@@ -127,12 +130,21 @@ public final class SearchResultsScreen extends Screen implements DefaultLifecycl
 				|| sr.objectType == ObjectType.STREET_INTERSECTION
 				|| sr.objectType == ObjectType.GPX_TRACK) {
 
-			getScreenManager().pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, surfaceRenderer, sr),
-					obj -> SearchResultsScreen.this.onRouteSelected(sr));
+			showResult(sr);
 		} else {
 			searchHelper.completeQueryWithObject(sr);
 			invalidate();
 		}
+	}
+
+	private void showResult(SearchResult sr) {
+		showResult = false;
+		getScreenManager().pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, surfaceRenderer, sr),
+				obj -> {
+					if (obj != null) {
+						SearchResultsScreen.this.onRouteSelected(sr);
+					}
+				});
 	}
 
 	@Override
@@ -141,14 +153,22 @@ public final class SearchResultsScreen extends Screen implements DefaultLifecycl
 	}
 
 	@Override
-	public void onSearchDone(@Nullable List<SearchResult> searchResults, @Nullable ItemList itemList) {
-		this.itemList = itemList;
-		invalidate();
+	public void onSearchDone(@NonNull SearchPhrase phrase, @Nullable List<SearchResult> searchResults,
+							 @Nullable ItemList itemList, int resultsCount) {
+		SearchWord lastSelectedWord = phrase.getLastSelectedWord();
+		if (showResult && resultsCount == 0 && lastSelectedWord != null) {
+			showResult(lastSelectedWord.getResult());
+		} else {
+			if (resultsCount > 0) {
+				showResult = false;
+			}
+			this.itemList = itemList;
+			invalidate();
+		}
 	}
 
 	private void onRouteSelected(@NonNull SearchResult sr) {
-		// Start the same demo instructions. More will be added in the future.
-		//setResult(DemoScripts.getNavigateHome(getCarContext()));
+		getApp().getOsmandMap().getMapLayers().getMapControlsLayer().startNavigation();
 		finish();
 	}
 }

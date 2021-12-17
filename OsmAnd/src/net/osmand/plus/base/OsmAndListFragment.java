@@ -5,7 +5,7 @@ import android.widget.ArrayAdapter;
 
 import androidx.fragment.app.ListFragment;
 
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 
 public abstract class OsmAndListFragment extends ListFragment {

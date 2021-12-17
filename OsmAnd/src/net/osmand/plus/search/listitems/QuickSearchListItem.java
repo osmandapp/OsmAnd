@@ -3,15 +3,16 @@ package net.osmand.plus.search.listitems;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
+import android.util.Pair;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.AndroidUtils;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
@@ -20,16 +21,17 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.Street;
+import net.osmand.data.WptLocationPoint;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchHistoryFragment;
-import net.osmand.plus.base.PointImageDrawable;
+import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -37,9 +39,11 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.SearchResult;
+import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.util.List;
 
 public class QuickSearchListItem {
 
@@ -398,20 +402,121 @@ public class QuickSearchListItem {
 		return null;
 	}
 
-	public static int getHistoryIconId(OsmandApplication app, HistoryEntry entry) {
+	public static int getHistoryIconId(@NonNull OsmandApplication app, @NonNull HistoryEntry entry) {
 		int iconId = -1;
-		if (entry.getName() != null && !Algorithms.isEmpty(entry.getName().getIconName())) {
-			String iconName = entry.getName().getIconName();
+		PointDescription name = entry.getName();
+		if (name != null && !Algorithms.isEmpty(name.getIconName())) {
+			String iconName = name.getIconName();
 			if (RenderingIcons.containsBigIcon(iconName)) {
 				iconId = RenderingIcons.getBigIconResourceId(iconName);
 			} else {
 				iconId = app.getResources().getIdentifier(iconName, "drawable", app.getPackageName());
 			}
 		}
-		if (iconId <= 0) {
-			iconId = SearchHistoryFragment.getItemIcon(entry.getName());
+		if (iconId <= 0 && name != null) {
+			iconId = SearchHistoryFragment.getItemIcon(name);
 		}
 		return iconId;
+	}
+
+	@NonNull
+	public static Pair<PointDescription, Object> getPointDescriptionObject(@NonNull OsmandApplication app, @NonNull SearchResult searchResult) {
+		SearchSettings settings = searchResult.requiredSearchPhrase.getSettings();
+		String lang;
+		boolean transliterate;
+		if (settings != null) {
+			lang = settings.getLang();
+			transliterate = settings.isTransliterate();
+		} else {
+			lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+			transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
+		}
+		PointDescription pointDescription = null;
+		Object object = searchResult.object;
+		switch (searchResult.objectType) {
+			case POI:
+				Amenity a = (Amenity) object;
+				String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(a, lang, transliterate);
+				pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI, poiSimpleFormat);
+				pointDescription.setIconName(QuickSearchListItem.getAmenityIconName(a));
+				break;
+			case RECENT_OBJ:
+				HistoryEntry entry = (HistoryEntry) object;
+				pointDescription = entry.getName();
+				if (pointDescription.isPoi()) {
+					Amenity amenity = app.getSearchUICore().findAmenity(entry.getName().getName(), entry.getLat(), entry.getLon(), lang, transliterate);
+					if (amenity != null) {
+						object = amenity;
+						pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI,
+								OsmAndFormatter.getPoiStringWithoutType(amenity, lang, transliterate));
+						pointDescription.setIconName(QuickSearchListItem.getAmenityIconName(amenity));
+					}
+				} else if (pointDescription.isFavorite()) {
+					LatLon entryLatLon = new LatLon(entry.getLat(), entry.getLon());
+					List<FavouritePoint> favs = app.getFavorites().getFavouritePoints();
+					for (FavouritePoint f : favs) {
+						if (entryLatLon.equals(new LatLon(f.getLatitude(), f.getLongitude()))
+								&& (pointDescription.getName().equals(f.getName()) ||
+								pointDescription.getName().equals(f.getDisplayName(app)))) {
+							object = f;
+							pointDescription = f.getPointDescription(app);
+							break;
+						}
+					}
+				}
+				break;
+			case FAVORITE:
+				FavouritePoint fav = (FavouritePoint) object;
+				pointDescription = fav.getPointDescription(app);
+				break;
+			case VILLAGE:
+			case CITY:
+				String cityName = searchResult.localeName;
+				String typeNameCity = QuickSearchListItem.getTypeName(app, searchResult);
+				pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeNameCity, cityName);
+				pointDescription.setIconName("ic_action_building_number");
+				break;
+			case STREET:
+				String streetName = searchResult.localeName;
+				String typeNameStreet = QuickSearchListItem.getTypeName(app, searchResult);
+				pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeNameStreet, streetName);
+				pointDescription.setIconName("ic_action_street_name");
+				break;
+			case HOUSE:
+				String typeNameHouse = null;
+				String name = searchResult.localeName;
+				if (searchResult.relatedObject instanceof City) {
+					name = ((City) searchResult.relatedObject).getName(lang, true) + " " + name;
+				} else if (searchResult.relatedObject instanceof Street) {
+					String s = ((Street) searchResult.relatedObject).getName(lang, true);
+					typeNameHouse = ((Street) searchResult.relatedObject).getCity().getName(lang, true);
+					name = s + " " + name;
+				} else if (searchResult.localeRelatedObjectName != null) {
+					name = searchResult.localeRelatedObjectName + " " + name;
+				}
+				pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeNameHouse, name);
+				pointDescription.setIconName("ic_action_building");
+				break;
+			case LOCATION:
+				pointDescription = new PointDescription(
+						searchResult.location.getLatitude(), searchResult.location.getLongitude());
+				pointDescription.setIconName("ic_action_world_globe");
+				break;
+			case STREET_INTERSECTION:
+				String typeNameIntersection = QuickSearchListItem.getTypeName(app, searchResult);
+				if (Algorithms.isEmpty(typeNameIntersection)) {
+					typeNameIntersection = null;
+				}
+				pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS,
+						typeNameIntersection, QuickSearchListItem.getName(app, searchResult));
+				pointDescription.setIconName("ic_action_intersection");
+				break;
+			case WPT:
+				GPXUtilities.WptPt wpt = (GPXUtilities.WptPt) object;
+				pointDescription = new WptLocationPoint(wpt).getPointDescription(app);
+				break;
+		}
+		return new Pair<>(pointDescription, object);
 	}
 
 	private static Drawable getIcon(OsmandApplication app, int iconId) {

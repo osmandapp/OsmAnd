@@ -42,17 +42,17 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import net.osmand.AndroidUtils;
-import net.osmand.FileUtils;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.LockableViewPager;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -499,8 +499,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 						fileName = FileUtils.createUniqueFileName(app, suggestedName, IndexConstants.GPX_INDEX_DIR, GPX_FILE_EXT);
 					}
 					SaveAsNewTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-							ChooseRouteFragment.this, null, fileName,
-							false, true);
+							ChooseRouteFragment.this, null, fileName, null, false, true);
 				}
 			}
 		};

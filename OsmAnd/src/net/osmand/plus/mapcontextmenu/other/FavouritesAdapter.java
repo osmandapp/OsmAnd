@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
-import net.osmand.plus.base.PointImageDrawable;
+import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.views.PointImageDrawable;
 
 import java.util.List;
 

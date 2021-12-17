@@ -1,5 +1,9 @@
 package net.osmand.plus.base;
 
+import static net.osmand.view.ThreeStateCheckbox.State.CHECKED;
+import static net.osmand.view.ThreeStateCheckbox.State.MISC;
+import static net.osmand.view.ThreeStateCheckbox.State.UNCHECKED;
+
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
@@ -14,24 +18,20 @@ import androidx.core.content.ContextCompat;
 import androidx.core.widget.CompoundButtonCompat;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.view.ThreeStateCheckbox.State.CHECKED;
-import static net.osmand.view.ThreeStateCheckbox.State.MISC;
-import static net.osmand.view.ThreeStateCheckbox.State.UNCHECKED;
-
 public class MultipleSelectionBottomSheet extends SelectionBottomSheet {
 
 	public static final String TAG = MultipleSelectionBottomSheet.class.getSimpleName();
 
-	private final List<SelectableItem> selectedItems = new ArrayList<>();
-	private SelectionUpdateListener selectionUpdateListener;
+	protected final List<SelectableItem> selectedItems = new ArrayList<>();
+	protected SelectionUpdateListener selectionUpdateListener;
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -67,9 +67,9 @@ public class MultipleSelectionBottomSheet extends SelectionBottomSheet {
 		CompoundButtonCompat.setButtonTintList(checkBox, AndroidUtils.createCheckedColorStateList(app, secondaryColorRes, activeColorRes));
 
 		view.setOnClickListener(v -> {
-			boolean chk = !checkBox.isChecked();
-			checkBox.setChecked(chk);
-			if (chk) {
+			boolean selected = !checkBox.isChecked();
+			checkBox.setChecked(selected);
+			if (selected) {
 				selectedItems.add(item);
 			} else {
 				selectedItems.remove(item);
@@ -77,7 +77,9 @@ public class MultipleSelectionBottomSheet extends SelectionBottomSheet {
 			onSelectedItemsChanged();
 		});
 		title.setText(item.getTitle());
-		description.setText(item.getDescription());
+		if (description != null) {
+			description.setText(item.getDescription());
+		}
 		imageView.setImageDrawable(uiUtilities.getIcon(item.getIconId(), activeColorRes));
 	}
 

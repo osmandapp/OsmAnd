@@ -26,23 +26,22 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.FavouritePoint;
-import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.GpxSelectionHelper;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.activities.EditFavoriteGroupDialogFragment.FavoriteColorAdapter;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.myplaces.EditFavoriteGroupDialogFragment.FavoriteColorAdapter;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -55,7 +54,7 @@ import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.OptionsDividerItem;
 import net.osmand.plus.myplaces.DeletePointsTask.OnPointsDeleteListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.track.TrackMenuFragment;
+import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -114,8 +113,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	}
 
 	private BaseBottomSheetItem createShowOnMapItem(final SelectedGpxFile selectedGpxFile) {
-		final String name = Algorithms.isEmpty(group.getName()) ? null : group.getName();
-		boolean checked = !selectedGpxFile.getHiddenGroups().contains(name);
+		boolean checked = !selectedGpxFile.isGroupHidden(group.getName());
 		final ApplicationMode mode = app.getSettings().getApplicationMode();
 		final BottomSheetItemWithCompoundButton[] showOnMapItem = new BottomSheetItemWithCompoundButton[1];
 		showOnMapItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
@@ -128,9 +126,9 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 					public void onClick(View v) {
 						boolean checked = !showOnMapItem[0].isChecked();
 						if (checked) {
-							selectedGpxFile.removeHiddenGroups(name);
+							selectedGpxFile.removeHiddenGroups(group.getName());
 						} else {
-							selectedGpxFile.addHiddenGroups(name);
+							selectedGpxFile.addHiddenGroups(group.getName());
 						}
 						app.getSelectedGpxHelper().updateSelectedGpxFile(selectedGpxFile);
 

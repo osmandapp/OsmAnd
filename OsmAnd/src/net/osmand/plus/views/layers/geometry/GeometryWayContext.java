@@ -13,7 +13,7 @@ import androidx.core.graphics.ColorUtils;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.views.OsmandMapLayer.RenderingLineAttributes;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.RenderingLineAttributes;
 
 public abstract class GeometryWayContext {
 
@@ -31,7 +31,7 @@ public abstract class GeometryWayContext {
 
 	private final Bitmap arrowBitmap;
 
-	public GeometryWayContext(Context ctx, float density) {
+	public GeometryWayContext(@NonNull Context ctx, float density) {
 		this.ctx = ctx;
 		this.density = density;
 
@@ -50,10 +50,12 @@ public abstract class GeometryWayContext {
 		arrowBitmap = RenderingIcons.getBitmapFromVectorDrawable(ctx, getArrowBitmapResId());
 	}
 
+	@NonNull
 	public OsmandApplication getApp() {
 		return (OsmandApplication) ctx.getApplicationContext();
 	}
 
+	@NonNull
 	public Context getCtx() {
 		return ctx;
 	}

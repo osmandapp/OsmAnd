@@ -1,5 +1,9 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.importfiles.ImportHelper.ImportType.SETTINGS;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
+
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -12,10 +16,10 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceViewHolder;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
-import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -36,10 +40,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import static net.osmand.plus.importfiles.ImportHelper.ImportType.SETTINGS;
-import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
-import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
-
 public class MainSettingsFragment extends BaseSettingsFragment implements OnSelectProfileCallback {
 
 	public static final String TAG = MainSettingsFragment.class.getName();
@@ -55,11 +55,6 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 
 	private List<ApplicationMode> allAppModes;
 	private Set<ApplicationMode> availableAppModes;
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-	}
 
 	@Override
 	@ColorRes

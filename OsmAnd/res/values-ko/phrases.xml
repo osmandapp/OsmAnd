@@ -769,4 +769,5 @@
     <string name="poi_traffic_enforcement">트래픽 집행</string>
     <string name="poi_doors">문</string>
     <string name="poi_site_type_fortification">방어시설</string>
+    <string name="facebook">페이스북</string>
 </resources>

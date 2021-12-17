@@ -23,9 +23,10 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ChartPointsHelper;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.measurementtool.MeasurementEditingContext.AdditionMode;
-import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
@@ -263,7 +264,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
-		if (inMeasurementMode) {
+		if (isDrawingEnabled()) {
 			lineAttrs.updatePaints(view.getApplication(), settings, tb);
 
 			if (editingCtx.isInApproximationMode()) {
@@ -308,7 +309,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
-		if (inMeasurementMode) {
+		if (isDrawingEnabled()) {
 			lineAttrs.updatePaints(view.getApplication(), settings, tb);
 			if (!editingCtx.isInApproximationMode()) {
 				drawBeforeAfterPath(canvas, tb);
@@ -348,6 +349,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 				canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 			}
 		}
+	}
+
+	private boolean isDrawingEnabled() {
+		MapActivity mapActivity = getMapActivity();
+		return inMeasurementMode && (mapActivity == null || mapActivity.getGpsFilterFragment() == null);
 	}
 
 	private boolean isInTileBox(RotatedTileBox tb, WptPt point) {

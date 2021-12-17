@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelNeededMapsCard.CardListener;
 
 public class TravelButtonCard extends BaseTravelCard {

@@ -17,7 +17,7 @@ import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.Location;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 
 /**
@@ -51,6 +51,9 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 				public void onSurfaceAvailable(@NonNull SurfaceContainer surfaceContainer) {
 					synchronized (SurfaceRenderer.this) {
 						Log.i(TAG, "Surface available " + surfaceContainer);
+						if (mSurface != null) {
+							mSurface.release();
+						}
 						mSurface = surfaceContainer.getSurface();
 						surfaceView.setSurfaceParams(surfaceContainer.getWidth(), surfaceContainer.getHeight(), surfaceContainer.getDpi());
 						darkMode = mCarContext.isDarkMode();
@@ -86,7 +89,10 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 				public void onSurfaceDestroyed(@NonNull SurfaceContainer surfaceContainer) {
 					synchronized (SurfaceRenderer.this) {
 						Log.i(TAG, "Surface destroyed");
-						mSurface = null;
+						if (mSurface != null) {
+							mSurface.release();
+							mSurface = null;
+						}
 						OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
 						if (mapView != null) {
 							mapView.setupOpenGLView();

@@ -1,17 +1,16 @@
 package net.osmand.plus.auto;
 
-import static net.osmand.plus.OsmAndFormatter.FEET_IN_ONE_METER;
-import static net.osmand.plus.OsmAndFormatter.METERS_IN_KILOMETER;
-import static net.osmand.plus.OsmAndFormatter.METERS_IN_ONE_MILE;
-import static net.osmand.plus.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
-import static net.osmand.plus.OsmAndFormatter.YARDS_IN_ONE_METER;
+import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
+import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
-import android.widget.AbsListView;
 
 import androidx.annotation.NonNull;
 import androidx.car.app.model.CarIcon;
@@ -28,9 +27,9 @@ import androidx.core.graphics.drawable.IconCompat;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.helpers.enums.MetricsConstants;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.routing.CurrentStreetName;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
@@ -242,10 +241,10 @@ public class TripHelper {
 		MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
 		int displayUnit;
 		float mainUnitInMeters;
-		if (mc == net.osmand.plus.helpers.enums.MetricsConstants.KILOMETERS_AND_METERS) {
+		if (mc == net.osmand.plus.settings.enums.MetricsConstants.KILOMETERS_AND_METERS) {
 			displayUnit = Distance.UNIT_KILOMETERS;
 			mainUnitInMeters = METERS_IN_KILOMETER;
-		} else if (mc == net.osmand.plus.helpers.enums.MetricsConstants.NAUTICAL_MILES) {
+		} else if (mc == net.osmand.plus.settings.enums.MetricsConstants.NAUTICAL_MILES) {
 			displayUnit = Distance.UNIT_MILES;
 			mainUnitInMeters = METERS_IN_ONE_NAUTICALMILE;
 		} else {
@@ -258,20 +257,20 @@ public class TripHelper {
 			return Distance.create(meters / mainUnitInMeters, displayUnit);
 		} else if (meters > 0.999f * mainUnitInMeters) {
 			return Distance.create(meters / mainUnitInMeters, displayUnit);
-		} else if (mc == net.osmand.plus.helpers.enums.MetricsConstants.MILES_AND_FEET && meters > 0.249f * mainUnitInMeters) {
+		} else if (mc == net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_FEET && meters > 0.249f * mainUnitInMeters) {
 			return Distance.create(meters / mainUnitInMeters, displayUnit);
-		} else if (mc == net.osmand.plus.helpers.enums.MetricsConstants.MILES_AND_METERS && meters > 0.249f * mainUnitInMeters) {
+		} else if (mc == net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_METERS && meters > 0.249f * mainUnitInMeters) {
 			return Distance.create(meters / mainUnitInMeters, displayUnit);
-		} else if (mc == net.osmand.plus.helpers.enums.MetricsConstants.MILES_AND_YARDS && meters > 0.249f * mainUnitInMeters) {
+		} else if (mc == net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_YARDS && meters > 0.249f * mainUnitInMeters) {
 			return Distance.create(meters / mainUnitInMeters, displayUnit);
-		} else if (mc == net.osmand.plus.helpers.enums.MetricsConstants.NAUTICAL_MILES && meters > 0.99f * mainUnitInMeters) {
+		} else if (mc == net.osmand.plus.settings.enums.MetricsConstants.NAUTICAL_MILES && meters > 0.99f * mainUnitInMeters) {
 			return Distance.create(meters / mainUnitInMeters, displayUnit);
 		} else {
-			if (mc == net.osmand.plus.helpers.enums.MetricsConstants.KILOMETERS_AND_METERS || mc == net.osmand.plus.helpers.enums.MetricsConstants.MILES_AND_METERS) {
+			if (mc == net.osmand.plus.settings.enums.MetricsConstants.KILOMETERS_AND_METERS || mc == net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_METERS) {
 				return Distance.create(meters,  Distance.UNIT_METERS);
-			} else if (mc == net.osmand.plus.helpers.enums.MetricsConstants.MILES_AND_FEET) {
+			} else if (mc == net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_FEET) {
 				return Distance.create(meters * FEET_IN_ONE_METER, Distance.UNIT_FEET);
-			} else if (mc == net.osmand.plus.helpers.enums.MetricsConstants.MILES_AND_YARDS) {
+			} else if (mc == net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_YARDS) {
 				return Distance.create(meters * YARDS_IN_ONE_METER, Distance.UNIT_YARDS);
 			}
 			return Distance.create(meters,  Distance.UNIT_METERS);

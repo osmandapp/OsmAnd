@@ -13,17 +13,17 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.data.WptLocationPoint;
-import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.base.PointImageDrawable;
+import net.osmand.plus.track.helpers.SavingTrackHelper;
+import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
@@ -96,7 +96,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 			WptPt wpt = editor.getWptPt();
 			color = wpt.getColor(0);
 			this.wpt = wpt;
-			categoriesMap = editor.getGpxFile().getWaypointCategoriesWithColors(false);
+			categoriesMap = editor.getColoredWaypointCategories();
 		}
 	}
 
@@ -117,7 +117,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 			if (listener != null) {
 				listener.onDismiss();
 			}
-			editor.setNewGpxPointProcessing(false);
+			editor.setProcessingOrdinaryPoint();
 			editor.setOnDismissListener(null);
 		}
 	}

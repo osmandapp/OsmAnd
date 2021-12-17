@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -81,7 +81,7 @@ public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFrag
 						newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 						newIntent.putExtra(DownloadActivity.REGION_TO_SEARCH, wikiRegion);
 						newIntent.putExtra(SHOW_WIKI_KEY, true);
-						AndroidUtils.startActivityIfSafe(app, newIntent);
+						AndroidUtils.startActivityIfSafe(activity, newIntent);
 						dismiss();
 					}
 				})

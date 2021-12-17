@@ -19,26 +19,29 @@ import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.PlatformUtil;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
-import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.auto.SearchHelper.SearchHelperListener;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
+import net.osmand.search.core.SearchWord;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -66,6 +69,7 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 	private boolean loading;
 	private boolean destroyed;
 	private List<SearchResult> recentResults;
+	private boolean showResult;
 
 	public SearchScreen(@NonNull CarContext carContext, @NonNull Action settingsAction,
 						@NonNull SurfaceRenderer surfaceRenderer) {
@@ -91,7 +95,6 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 	public SearchUICore getSearchUICore() {
 		return getApp().getSearchUICore().getCore();
 	}
-
 
 	@Override
 	public void onDestroy(@NonNull LifecycleOwner owner) {
@@ -159,14 +162,18 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 				|| sr.objectType == ObjectType.LOCATION
 				|| sr.objectType == ObjectType.HOUSE
 				|| sr.objectType == ObjectType.FAVORITE
+				|| sr.objectType == ObjectType.MAP_MARKER
+				|| sr.objectType == ObjectType.ROUTE
 				|| sr.objectType == ObjectType.RECENT_OBJ
 				|| sr.objectType == ObjectType.WPT
 				|| sr.objectType == ObjectType.STREET_INTERSECTION
 				|| sr.objectType == ObjectType.GPX_TRACK) {
 
-			getScreenManager().pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, surfaceRenderer, sr),
-					obj -> SearchScreen.this.onRouteSelected(sr));
+			showResult(sr);
 		} else {
+			if (sr.objectType == ObjectType.CITY || sr.objectType == ObjectType.VILLAGE || sr.objectType == ObjectType.STREET) {
+				showResult = true;
+			}
 			searchHelper.completeQueryWithObject(sr);
 			if (sr.object instanceof AbstractPoiType || sr.object instanceof PoiUIFilter) {
 				reloadHistory();
@@ -175,15 +182,34 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 		}
 	}
 
+	private void showResult(SearchResult sr) {
+		showResult = false;
+		getScreenManager().pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, surfaceRenderer, sr),
+				obj -> {
+					if (obj != null) {
+						SearchScreen.this.onRouteSelected(sr);
+					}
+				});
+	}
+
 	@Override
 	public void onClickSearchMore() {
 		invalidate();
 	}
 
 	@Override
-	public void onSearchDone(@Nullable List<SearchResult> searchResults, @Nullable ItemList itemList) {
-		this.itemList = itemList;
-		invalidate();
+	public void onSearchDone(@NonNull SearchPhrase phrase, @Nullable List<SearchResult> searchResults,
+							 @Nullable ItemList itemList, int resultsCount) {
+		SearchWord lastSelectedWord = phrase.getLastSelectedWord();
+		if (showResult && resultsCount == 0 && lastSelectedWord != null) {
+			showResult(lastSelectedWord.getResult());
+		} else {
+			if (resultsCount > 0) {
+				showResult = false;
+			}
+			this.itemList = itemList;
+			invalidate();
+		}
 	}
 
 	private ItemList.Builder withNoResults(ItemList.Builder builder) {
@@ -205,6 +231,7 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 				List<SearchResult> recentResults = new ArrayList<>();
 
 				// Home / work
+				/* Disable since points exists at favorites screen
 				FavouritesDbHelper favorites = app.getFavorites();
 				FavouritePoint homePoint = favorites.getSpecialPoint(FavouritePoint.SpecialPointType.HOME);
 				FavouritePoint workPoint = favorites.getSpecialPoint(FavouritePoint.SpecialPointType.WORK);
@@ -224,7 +251,7 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 					result.localeName = workPoint.getAddress();
 					recentResults.add(result);
 				}
-
+				*/
 				// Previous route card
 				TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 				TargetPoint startPoint = targetPointsHelper.getPointToStartBackup();
@@ -272,7 +299,9 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 
 				// History
 				SearchResultCollection res = getSearchUICore().shallowSearch(SearchHistoryAPI.class, "", null, false, false);
-				recentResults.addAll(res.getCurrentSearchResults());
+				if (res != null) {
+					recentResults.addAll(res.getCurrentSearchResults());
+				}
 				this.recentResults = recentResults;
 				if (!searchHelper.isSearching() && Algorithms.isEmpty(searchHelper.getSearchQuery())) {
 					showRecents();
@@ -333,12 +362,10 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 
 	@Override
 	public void onStart(AppInitializer init) {
-
 	}
 
 	@Override
 	public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
-
 	}
 
 	@Override
@@ -353,9 +380,31 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 		}
 	}
 
+	private void updateApplicationMode(ApplicationMode mode, ApplicationMode next) {
+		OsmandApplication app = getApp();
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		OsmandPreference<ApplicationMode> appMode = app.getSettings().APPLICATION_MODE;
+		if (routingHelper.isFollowingMode() && appMode.get() == mode) {
+			appMode.set(next);
+		}
+		routingHelper.setAppMode(next);
+		app.initVoiceCommandPlayer(app, next, null, true,
+				false, false, true);
+		routingHelper.onSettingsChanged(true);
+	}
+
 	private void onRouteSelected(@NonNull SearchResult sr) {
-		// Start the same demo instructions. More will be added in the future.
-		//setResult(DemoScripts.getNavigateHome(getCarContext()));
+		OsmandApplication app = getApp();
+		if (sr.objectType == ObjectType.ROUTE) {
+			ApplicationMode lastAppMode = app.getSettings().LAST_ROUTE_APPLICATION_MODE.get();
+			ApplicationMode currentAppMode = app.getRoutingHelper().getAppMode();
+			if (lastAppMode == ApplicationMode.DEFAULT) {
+				lastAppMode = currentAppMode;
+			}
+			updateApplicationMode(currentAppMode, lastAppMode);
+			app.getTargetPointsHelper().restoreTargetPoints(true);
+		}
+		app.getOsmandMap().getMapLayers().getMapControlsLayer().startNavigation();
 		finish();
 	}
 }

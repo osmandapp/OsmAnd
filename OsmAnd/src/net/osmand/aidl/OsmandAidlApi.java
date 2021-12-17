@@ -15,7 +15,7 @@ import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_E
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
-import static net.osmand.plus.FavouritesDbHelper.FILE_TO_SAVE;
+import static net.osmand.plus.myplaces.FavouritesDbHelper.FILE_TO_SAVE;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
 
@@ -41,9 +41,9 @@ import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
-import net.osmand.FileUtils;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
@@ -71,17 +71,17 @@ import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.CustomOsmandPlugin;
-import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GpxSelectionHelper;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.plugins.CustomOsmandPlugin;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.SQLiteTileSource;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.dialogs.GpxAppearanceAdapter;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ExternalApiHelper;
@@ -90,11 +90,11 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.IContextMenuButtonListener;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.TrackBitmapDrawer;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
-import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.IRoutingDataUpdateListener;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
@@ -108,7 +108,7 @@ import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
-import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.AidlMapLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
@@ -1814,6 +1814,7 @@ public class OsmandAidlApi {
 			turnInfo = ExternalApiHelper.getRouteDirectionsInfo(app);
 		}
 		AppInfoParams params = new AppInfoParams(lastKnownLocation, mapLocation, turnInfo, leftTime, leftDistance, arrivalTime, mapVisible);
+		params.setVersionsInfo(ExternalApiHelper.getPluginAndProfileVersions());
 		params.setDestinationLocation(destinationLocation);
 		return params;
 	}
@@ -2385,6 +2386,7 @@ public class OsmandAidlApi {
 			AProfile aProfile = new AProfile(bean.stringKey, bean.userProfileName, bean.parent, bean.iconName,
 					bean.iconColor.name(), bean.routingProfile, bean.routeService.name(), bean.locIcon.name(),
 					bean.navIcon.name(), bean.order);
+			aProfile.setVersion(bean.version);
 
 			profiles.add(aProfile);
 		}

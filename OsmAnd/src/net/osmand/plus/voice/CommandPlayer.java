@@ -3,6 +3,9 @@ package net.osmand.plus.voice;
 import android.content.Context;
 import android.media.AudioManager;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -20,9 +23,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public abstract class CommandPlayer {
 
@@ -100,9 +100,8 @@ public abstract class CommandPlayer {
 		context.setOptimizationLevel(-1);
 		ScriptableObject jsScope = context.initSafeStandardObjects();
 		try {
-			String pathToTtsFile = voiceProviderDir.getAbsolutePath() + "/" + language
-					+ "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS;
-			BufferedReader bufferedReader = new BufferedReader(new FileReader(pathToTtsFile));
+			String ttsFilePath = getTtsFileFromDir(voiceProviderDir).getAbsolutePath();
+			BufferedReader bufferedReader = new BufferedReader(new FileReader(ttsFilePath));
 			context.evaluateReader(jsScope, bufferedReader, "JS", 1, null);
 			bufferedReader.close();
 		} catch (Exception e) {
@@ -120,6 +119,8 @@ public abstract class CommandPlayer {
 	public abstract List<String> playCommands(CommandBuilder builder);
 
 	public abstract void stop();
+
+	public abstract File getTtsFileFromDir(@NonNull File voiceProviderDir);
 
 	public String getLanguage() {
 		return language;

@@ -32,7 +32,7 @@ public class RoutePlannerFrontEnd {
 	// Check issue #8649
 	protected static final double GPS_POSSIBLE_ERROR = 7;
 	public boolean useSmartRouteRecalculation = true;
-	public static final boolean USE_NATIVE_APPROXIMATION = true;
+	public boolean useNativeApproximation = true;
 
 	
 	public RoutePlannerFrontEnd() {
@@ -230,10 +230,14 @@ public class RoutePlannerFrontEnd {
 		useSmartRouteRecalculation = use;
 	}
 
+	public void setUseNativeApproximation(boolean useNativeApproximation) {
+		this.useNativeApproximation = useNativeApproximation;
+	}
+
 	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
 		long timeToCalculate = System.nanoTime();
 		NativeLibrary nativeLib = gctx.ctx.nativeLib;
-		if (nativeLib != null && USE_NATIVE_APPROXIMATION) {
+		if (nativeLib != null && useNativeApproximation) {
 			gctx = nativeLib.runNativeSearchGpxRoute(gctx, gpxPoints);
 		} else {
 			gctx.ctx.keepNativeRoutingContext = true;
@@ -893,10 +897,9 @@ public class RoutePlannerFrontEnd {
 				RouteSegment previous = null;
 				for (int i = 0; i <= rlist.size() - 1; i++) {
 					RouteSegmentResult rr = rlist.get(i);
-					RouteSegment segment = new RouteSegment(rr.getObject(), rr.getEndPointIndex());
+					RouteSegment segment = new RouteSegment(rr.getObject(), rr.getStartPointIndex(), rr.getEndPointIndex());
 					if (previous != null) {
 						previous.setParentRoute(segment);
-						previous.setParentSegmentEnd(rr.getStartPointIndex());
 					} else {
 						recalculationEnd = segment;
 					}
@@ -936,7 +939,7 @@ public class RoutePlannerFrontEnd {
 			RouteSegment current = recalculationEnd;
 			while (current.getParentRoute() != null) {
 				RouteSegment pr = current.getParentRoute();
-				result.add(new RouteSegmentResult(pr.getRoad(), current.getParentSegmentEnd(), pr.getSegmentStart()));
+				result.add(new RouteSegmentResult(pr.getRoad(), pr.getSegmentEnd(), pr.getSegmentStart()));
 				current = pr;
 			}
 		}

@@ -19,8 +19,8 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
-import net.osmand.AndroidUtils;
-import net.osmand.FileUtils;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
@@ -52,6 +52,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 	private static final String EXPORTING_STARTED_KEY = "exporting_started_key";
 	private static final String PROGRESS_MAX_KEY = "progress_max_key";
 	private static final String PROGRESS_VALUE_KEY = "progress_value_key";
+	private static final String SELECTED_TYPES = "selected_types";
 
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yy", Locale.US);
 
@@ -78,8 +79,22 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 		}
 		exportMode = true;
 		dataList = app.getFileSettingsHelper().getSettingsByCategory(true);
-		if (!globalExport && savedInstanceState == null) {
-			updateSelectedProfile();
+
+		if (savedInstanceState == null) {
+			if (!globalExport) {
+				updateSelectedProfile();
+			}
+			Bundle args = getArguments();
+			if (args != null && args.containsKey(SELECTED_TYPES)) {
+				List<String> selectedTypes = args.getStringArrayList(SELECTED_TYPES);
+				if (!Algorithms.isEmpty(selectedTypes)) {
+					for (String type : selectedTypes) {
+						ExportSettingsType settingsType = ExportSettingsType.valueOf(type);
+						List<Object> items = getItemsForType(settingsType);
+						selectedItemsMap.put(settingsType, items);
+					}
+				}
+			}
 		}
 	}
 
@@ -220,9 +235,8 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 					dismissExportProgressDialog();
 					exportingStarted = false;
 					if (succeed) {
-						if (AndroidUtils.isActivityNotDestroyed(getActivity())) {
-							shareProfile(file);
-						}
+						shareProfile(file);
+						dismissFragment();
 					} else {
 						app.showToastMessage(R.string.export_profile_failed);
 					}
@@ -249,13 +263,14 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 			} else if (file.exists()) {
 				dismissExportProgressDialog();
 				shareProfile(file);
+				dismissFragment();
 			}
 		}
 	}
 
 	private void dismissExportProgressDialog() {
 		FragmentActivity activity = getActivity();
-		if (progress != null && activity != null && AndroidUtils.isActivityNotDestroyed(activity)) {
+		if (progress != null && AndroidUtils.isActivityNotDestroyed(activity)) {
 			progress.dismiss();
 		}
 	}
@@ -267,26 +282,36 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 	}
 
 	private void shareProfile(@NonNull File file) {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			Intent sendIntent = new Intent();
-			sendIntent.setAction(Intent.ACTION_SEND);
-			sendIntent.putExtra(Intent.EXTRA_SUBJECT, file.getName());
-			sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, file));
-			sendIntent.setType("*/*");
-			sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-			AndroidUtils.startActivityIfSafe(activity, sendIntent);
-			dismissFragment();
-		}
+		Intent sendIntent = new Intent();
+		sendIntent.setAction(Intent.ACTION_SEND);
+		sendIntent.putExtra(Intent.EXTRA_SUBJECT, file.getName());
+		sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, file));
+		sendIntent.setType("*/*");
+		sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+		Intent chooserIntent = Intent.createChooser(sendIntent, app.getString(R.string.shared_string_share));
+		AndroidUtils.startActivityIfSafe(app, chooserIntent);
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
 	                                   @NonNull ApplicationMode appMode,
+	                                   @Nullable List<ExportSettingsType> selectedTypes,
 	                                   boolean globalExport) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			Bundle args = null;
+			if (!Algorithms.isEmpty(selectedTypes)) {
+				ArrayList<String> types = new ArrayList<>();
+				for (ExportSettingsType type : selectedTypes) {
+					types.add(type.name());
+				}
+				args = new Bundle();
+				args.putStringArrayList(SELECTED_TYPES, types);
+			}
+
 			ExportSettingsFragment fragment = new ExportSettingsFragment();
 			fragment.appMode = appMode;
 			fragment.globalExport = globalExport;
+			fragment.setArguments(args);
 			fragmentManager.beginTransaction().
 					replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(SETTINGS_LIST_TAG)

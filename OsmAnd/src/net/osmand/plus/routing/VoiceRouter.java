@@ -1,11 +1,6 @@
 package net.osmand.plus.routing;
 
 
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PREPARE_TURN;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_PREPARE_TURN;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_IN;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_NOW;
-
 import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -39,6 +34,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PREPARE_TURN;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_PREPARE_TURN;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_IN;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_NOW;
 
 
 public class VoiceRouter {
@@ -179,7 +179,7 @@ public class VoiceRouter {
 
 	public void updateAppMode() {
 		appMode = router.getAppMode() == null ? settings.getApplicationMode() : router.getAppMode();
-		atd = new AnnounceTimeDistances(appMode, settings);
+		atd = new AnnounceTimeDistances(appMode, app);
 	}
 
 	public int calculateImminent(float dist, Location loc) {
@@ -208,7 +208,7 @@ public class VoiceRouter {
 	}
 
 	public void announceOffRoute(double dist) {
-		if (dist > atd.getOffRouteDistance() && !settings.DISABLE_OFFROUTE_RECALC.get()) {
+		if (dist > atd.getOffRouteDistance()) {
 			long ms = System.currentTimeMillis();
 			if (waitAnnouncedOffRoute == 0 || ms - lastAnnouncedOffRoute > waitAnnouncedOffRoute) {
 				CommandBuilder p = getNewCommandPlayerToPlay();

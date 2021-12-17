@@ -1165,7 +1165,7 @@
     <string name="shared_string_logoff">Kirjaudu ulos</string>
     <string name="local_recordings_delete_all_confirm">Haluatko varmasti poistaa %1$d huomautukset\?</string>
     <string name="osmand_parking_plugin_name">Pysäköinnin sijainti</string>
-    <string name="osm_settings">OSM muokkaus</string>
+    <string name="osm_editing_plugin_name">OSM muokkaus</string>
     <string name="share_note">Jaa huomautus</string>
     <string name="location_on_map">Sijainti:
 \nLev %1$s
@@ -3431,7 +3431,6 @@
     <string name="rendering_attr_piste_type_sled_name">Kelkka</string>
     <string name="rendering_attr_piste_type_sleigh_name">Reki</string>
     <string name="change_data_storage_folder">Vaihda tallennuskansio</string>
-    <string name="internal_app_storage_description">Sisäinen tallennustila OsmAndia varten (piilotettu käyttäjiltä ja muilta sovelluksilta).</string>
     <string name="paste_Osmand_data_folder_path">Liitä polku kansioon, jossa on OsmAnd-tiedot</string>
     <string name="change_osmand_data_folder_question">Muuta OsmAnd-tietokansiota\?</string>
     <string name="enter_path_to_folder">Anna kansion polku</string>
@@ -3649,7 +3648,6 @@
     <string name="purchases_feature_desc_monthly_map_updates">Saat käyttöösi säännölliset kuukausittaiset päivitykset offline-karttoihin.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Hanki pääsy käyttämään tiheämpiä karttapäivityksiä. Tuntikohtaiset, päivittäiset tai viikoittaiset päivitykset. Päivitykset ladataan asteittain vain muutetulle alueelle.</string>
     <string name="purchases_feature_desc_osmand_cloud">Hanki OsmAnd Cloud tallentaaksesi kaikki OsmAnd tiedot verkkoon. Et menetä tietoja uudelleenasennuksen jälkeen. Varmuuskopioi ja palauta kaikki tiedot helposti.</string>
-    <string name="not_enough_contributions_descr">Vähintään %1$s OpenStreetMap-julkaisua vaaditaan %2$s päivän kuluessa.</string>
     <string name="voice_prompts_timetable">Äänikehotteiden ajat</string>
     <string name="osmand_plus_extended_description_part5">Turvallisuusominaisuudet
 \n - Valinnainen automaattinen päivä-/yönäkymän vaihto

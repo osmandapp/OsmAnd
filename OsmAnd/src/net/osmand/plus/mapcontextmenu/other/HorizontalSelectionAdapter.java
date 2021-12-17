@@ -1,11 +1,9 @@
 package net.osmand.plus.mapcontextmenu.other;
 
-import static net.osmand.util.Algorithms.capitalizeFirstLetter;
-
 import android.graphics.drawable.GradientDrawable;
-import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,15 +13,17 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 
 public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalSelectionAdapter.ItemViewHolder> {
@@ -31,8 +31,8 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 	public static int INVALID_ID = -1;
 
 	private List<HorizontalSelectionItem> items;
-	private OsmandApplication app;
-	private boolean nightMode;
+	private final OsmandApplication app;
+	private final boolean nightMode;
 	private HorizontalSelectionAdapterListener listener;
 	private HorizontalSelectionItem selectedItem = null;
 
@@ -72,7 +72,7 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 		if (item.equals(selectedItem) && item.isEnabled()) {
 			int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 			AndroidUtils.setBackground(holder.button, UiUtilities.createTintedDrawable(app,
-							R.drawable.bg_select_icon_group_button, activeColor));
+					R.drawable.bg_select_icon_group_button, activeColor));
 			itemColor = ContextCompat.getColor(app, R.color.color_white);
 		} else {
 			if (!item.isEnabled()) {
@@ -93,8 +93,16 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 			AndroidUtils.setBackground(holder.button, buttonBackground);
 		}
 		textView.setTextColor(itemColor);
+
+		int iconColor = item.iconColorId != INVALID_ID ? app.getColor(item.iconColorId) : itemColor;
 		if (item.iconId != INVALID_ID) {
-			imageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(item.iconId, itemColor));
+			imageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(item.iconId, iconColor));
+		}
+		if (item.iconSizePx != INVALID_ID && imageView.getLayoutParams() != null) {
+			LayoutParams imgLayoutParams = imageView.getLayoutParams();
+			imgLayoutParams.height = item.iconSizePx;
+			imgLayoutParams.width = item.iconSizePx;
+			imageView.requestLayout();
 		}
 		AndroidUiHelper.updateVisibility(textView, !item.isShowOnlyIcon());
 		AndroidUiHelper.updateVisibility(imageView, item.iconId != INVALID_ID);
@@ -112,10 +120,14 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 				}
 			}
 		});
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			View buttonContainer = holder.button.findViewById(R.id.button_container);
-			AndroidUtils.setBackground(app, buttonContainer, nightMode, R.drawable.ripple_solid_light_18dp,
-					R.drawable.ripple_solid_dark_18dp);
+		View buttonContainer = holder.button.findViewById(R.id.button_container);
+		int rippleId = nightMode ? R.drawable.ripple_solid_dark_18dp : R.drawable.ripple_solid_light_18dp;
+		AndroidUtils.setBackground(app, buttonContainer, rippleId);
+		if (item.getHorizontalPaddingPx() != INVALID_ID) {
+			int top = buttonContainer.getPaddingTop();
+			int bottom = buttonContainer.getPaddingBottom();
+			int hPadding = item.getHorizontalPaddingPx();
+			buttonContainer.setPadding(hPadding, top, hPadding, bottom);
 		}
 	}
 
@@ -175,12 +187,17 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 	}
 
 	public static class HorizontalSelectionItem {
-		private String title;
-		private boolean enabled = true;
+
+		private final String title;
+		private final Object object;
+
 		private int titleColorId = INVALID_ID;
-		private Object object;
 		private int iconId = INVALID_ID;
+		private int iconColorId = INVALID_ID;
+		private int iconSizePx = INVALID_ID;
+		private int horizontalPaddingPx = INVALID_ID;
 		private boolean showOnlyIcon;
+		private boolean enabled = true;
 
 		public HorizontalSelectionItem(String title) {
 			this(title, null);
@@ -221,6 +238,30 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 
 		public int getIconId() {
 			return iconId;
+		}
+
+		public int getIconColorId() {
+			return iconColorId;
+		}
+
+		public void setIconColorId(int iconColorId) {
+			this.iconColorId = iconColorId;
+		}
+
+		public int getIconSizePx() {
+			return iconSizePx;
+		}
+
+		public void setIconSizePx(int iconSizePx) {
+			this.iconSizePx = iconSizePx;
+		}
+
+		public int getHorizontalPaddingPx() {
+			return horizontalPaddingPx;
+		}
+
+		public void setHorizontalPaddingPx(int horizontalPaddingPx) {
+			this.horizontalPaddingPx = horizontalPaddingPx;
 		}
 
 		public Object getObject() {

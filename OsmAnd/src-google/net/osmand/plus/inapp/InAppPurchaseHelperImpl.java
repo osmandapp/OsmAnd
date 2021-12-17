@@ -16,9 +16,9 @@ import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.SkuDetails;
 import com.android.billingclient.api.SkuDetailsResponseListener;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseState;
@@ -28,7 +28,7 @@ import net.osmand.plus.inapp.InAppPurchases.PurchaseInfo;
 import net.osmand.plus.inapp.InAppPurchasesImpl.InAppPurchaseLiveUpdatesOldSubscription;
 import net.osmand.plus.inapp.util.BillingManager;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.srtmplugin.SRTMPlugin;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
@@ -263,7 +263,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			url += "&sku=" + sku;
 		}
 		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-		AndroidUtils.isIntentSafe(ctx, intent);
+		AndroidUtils.startActivityIfSafe(ctx, intent);
 	}
 
 	@Nullable
@@ -536,9 +536,13 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			inAppPurchase.restorePurchaseInfo(ctx);
 		}
 		inAppPurchase.setPrice(skuDetails.getPrice());
+		inAppPurchase.setOriginalPrice(skuDetails.getOriginalPrice());
 		inAppPurchase.setPriceCurrencyCode(skuDetails.getPriceCurrencyCode());
 		if (skuDetails.getPriceAmountMicros() > 0) {
 			inAppPurchase.setPriceValue(skuDetails.getPriceAmountMicros() / 1000000d);
+		}
+		if (skuDetails.getOriginalPriceAmountMicros() > 0) {
+			inAppPurchase.setOriginalPriceValue(skuDetails.getOriginalPriceAmountMicros() / 1000000d);
 		}
 		String subscriptionPeriod = skuDetails.getSubscriptionPeriod();
 		if (!Algorithms.isEmpty(subscriptionPeriod)) {

@@ -1,5 +1,8 @@
 package net.osmand.plus.settings.backend.backup.items;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.plus.importfiles.ImportHelper.asFavourites;
+
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -8,12 +11,12 @@ import androidx.annotation.Nullable;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.FavouritePoint;
-import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
+import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -28,9 +31,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.plus.importfiles.ImportHelper.asFavourites;
 
 public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup> {
 
@@ -127,6 +127,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 								boolean isTimeRestricted = item.getTimestamp() > 0;
 								plugin.setParkingType(isTimeRestricted);
 								plugin.setParkingTime(isTimeRestricted ? item.getTimestamp() : 0);
+								plugin.setParkingStartTime(item.getCreationDate());
 								plugin.setParkingPosition(item.getLatitude(), item.getLongitude());
 								plugin.addOrRemoveParkingEvent(item.getCalendarEvent());
 								if (item.getCalendarEvent()) {

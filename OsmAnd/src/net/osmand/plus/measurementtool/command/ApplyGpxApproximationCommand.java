@@ -93,7 +93,7 @@ public class ApplyGpxApproximationCommand extends MeasurementModeCommand {
 		for (int i = 0; i < approximations.size(); i++) {
 			GpxRouteApproximation approximation = approximations.get(i);
 			List<WptPt> segmentPoints = segmentPointsList.get(i);
-			List<WptPt> newSegmentPoints = ctx.setPoints(approximation, segmentPoints, mode);
+			List<WptPt> newSegmentPoints = ctx.setPoints(approximation, segmentPoints, mode, false);
 			if (newSegmentPoints != null) {
 				segmentPointsList.set(i, newSegmentPoints);
 			}

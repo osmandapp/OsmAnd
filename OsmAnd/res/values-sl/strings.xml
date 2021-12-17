@@ -517,7 +517,7 @@
     <string name="backToMenu">Nazaj v meni</string>
     <string name="auto_announce_on">Začni s samodejnimi najavami</string>
     <string name="auto_announce_off">Zaustavi samodejne najave</string>
-    <string name="osm_settings">Urejanje točk OSM</string>
+    <string name="osm_editing_plugin_name">Urejanje točk OSM</string>
     <string name="website">Spletna stran</string>
     <string name="osb_comment_dialog_message">Sporočilo</string>
     <string name="osb_comment_dialog_author">Ime avtorja</string>

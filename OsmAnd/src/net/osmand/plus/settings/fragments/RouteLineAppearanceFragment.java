@@ -22,16 +22,16 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.DialogButtonType;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.enums.DayNightMode;
+import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
@@ -40,10 +40,11 @@ import net.osmand.plus.routing.cards.RouteLineColorCard;
 import net.osmand.plus.routing.cards.RouteLineColorCard.OnMapThemeUpdateListener;
 import net.osmand.plus.routing.cards.RouteLineColorCard.OnSelectedColorChangeListener;
 import net.osmand.plus.routing.cards.RouteLineWidthCard;
+import net.osmand.plus.routing.cards.RouteTurnArrowsCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
-import net.osmand.plus.track.TrackAppearanceFragment.OnNeedScrollListener;
+import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
+import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
 
 public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		implements ColorPickerListener, OnMapThemeUpdateListener, OnSelectedColorChangeListener,
@@ -74,6 +75,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 
 	private RouteLineColorCard colorCard;
 	private RouteLineWidthCard widthCard;
+	private RouteTurnArrowsCard turnArrowCard;
 
 	@Override
 	public int getMainLayoutId() {
@@ -156,9 +158,10 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		ColoringType coloringType = settings.ROUTE_COLORING_TYPE.getModeValue(appMode);
 		String routeInfoAttribute = settings.ROUTE_INFO_ATTRIBUTE.getModeValue(appMode);
 		String widthKey = settings.ROUTE_LINE_WIDTH.getModeValue(appMode);
+		boolean showTurnArrows = settings.ROUTE_SHOW_TURN_ARROWS.getModeValue(appMode);
 
 		PreviewRouteLineInfo previewRouteLineInfo =  new PreviewRouteLineInfo(colorDay, colorNight,
-				coloringType, routeInfoAttribute, widthKey);
+				coloringType, routeInfoAttribute, widthKey, showTurnArrows);
 
 		previewRouteLineInfo.setIconId(appMode.getNavigationIcon().getIconId());
 		previewRouteLineInfo.setIconColor(appMode.getProfileColor(isNightMode()));
@@ -219,6 +222,9 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 
 		widthCard = new RouteLineWidthCard(mapActivity, previewRouteLineInfo, createScrollListener(), this);
 		cardsContainer.addView(widthCard.build(mapActivity));
+
+		turnArrowCard = new RouteTurnArrowsCard(mapActivity, previewRouteLineInfo);
+		cardsContainer.addView(turnArrowCard.build(mapActivity));
 	}
 
 	@Override
@@ -318,6 +324,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 			settings.ROUTE_COLORING_TYPE.setModeValue(appMode, previewRouteLineInfo.getRouteColoringType());
 			settings.ROUTE_INFO_ATTRIBUTE.setModeValue(appMode, previewRouteLineInfo.getRouteInfoAttribute());
 			settings.ROUTE_LINE_WIDTH.setModeValue(appMode, previewRouteLineInfo.getWidth());
+			settings.ROUTE_SHOW_TURN_ARROWS.setModeValue(appMode, previewRouteLineInfo.shouldShowTurnArrows());
 		}
 	}
 

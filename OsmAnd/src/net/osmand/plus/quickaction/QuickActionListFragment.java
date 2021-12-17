@@ -1,7 +1,5 @@
 package net.osmand.plus.quickaction;
 
-import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
-
 import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -34,11 +32,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
@@ -52,6 +50,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
 /**
  * Created by okorsun on 20.12.16.
@@ -214,7 +214,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
     private void setUpToolbar() {
         final OsmandApplication app = requireMyApplication();
         TextView tvTitle = toolbar.findViewById(R.id.toolbar_title);
-        tvTitle.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode));
+        tvTitle.setTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode));
         boolean isWidgetVisibleOnMap = app.getQuickActionRegistry().isQuickActionOn();
         updateToolbarTitle();
         updateToolbarNavigationIcon();

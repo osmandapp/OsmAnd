@@ -8,17 +8,17 @@ import net.osmand.Location;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.ValueHolder;
+import net.osmand.data.ValueHolder;
 import net.osmand.data.LatLon;
 import net.osmand.plus.NavigationService;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.auto.NavigationSession;
-import net.osmand.plus.helpers.enums.MetricsConstants;
+import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
@@ -432,7 +432,7 @@ public class RoutingHelper {
 				List<Location> routeNodes = route.getImmutableAllLocations();
 				int currentRoute = route.currentRoute;
 				double allowableDeviation = route.getRouteRecalcDistance();
-				if (allowableDeviation == 0) {
+				if (allowableDeviation <= 0) {
 					allowableDeviation = RoutingHelper.getDefaultAllowedDeviation(settings, route.getAppMode(), posTolerance);
 				}
 
@@ -443,7 +443,7 @@ public class RoutingHelper {
 					if (distOrth > allowableDeviation) {
 						log.info("Recalculate route, because correlation  : " + distOrth); //$NON-NLS-1$
 						isDeviatedFromRoute = true;
-						calculateRoute = true;
+						calculateRoute = !settings.DISABLE_OFFROUTE_RECALC.get();
 					}
 				}
 				// 3. Identify wrong movement direction
@@ -468,7 +468,7 @@ public class RoutingHelper {
 					if (!inRecalc && !wrongMovementDirection) {
 						voiceRouter.updateStatus(currentLocation, false);
 						voiceRouterStopped = false;
-					} else if (isDeviatedFromRoute && !voiceRouterStopped && !settings.DISABLE_OFFROUTE_RECALC.get()) {
+					} else if (isDeviatedFromRoute && !voiceRouterStopped) {
 						voiceRouter.interruptRouteCommands();
 						voiceRouterStopped = true; // Prevents excessive execution of stop() code
 					}
@@ -677,9 +677,7 @@ public class RoutingHelper {
 	}
 
 	private static float getDefaultAllowedDeviation(OsmandSettings settings, ApplicationMode mode, float posTolerance) {
-		if (settings.DISABLE_OFFROUTE_RECALC.getModeValue(mode)) {
-			return -1.0f;
-		} else if (mode.getRouteService() == RouteService.DIRECT_TO) {
+		if (mode.getRouteService() == RouteService.DIRECT_TO) {
 			return -1.0f;
 		} else if (mode.getRouteService() == RouteService.STRAIGHT) {
 			MetricsConstants mc = settings.METRIC_SYSTEM.getModeValue(mode);
@@ -815,13 +813,15 @@ public class RoutingHelper {
 	public void onSettingsChanged(@Nullable ApplicationMode mode, boolean forceRouteRecalculation) {
 		if (forceRouteRecalculation ||
 				((mode == null || mode.equals(this.mode)) && (isRouteCalculated() || isRouteBeingCalculated()))) {
-			recalculateRouteDueToSettingsChange();
+			recalculateRouteDueToSettingsChange(true);
 		}
 		fireRouteSettingsChangedEvent(mode);
 	}
 
-	private void recalculateRouteDueToSettingsChange() {
-		clearCurrentRoute(finalLocation, intermediatePoints);
+	public void recalculateRouteDueToSettingsChange(boolean clearCurrentRoute) {
+		if (clearCurrentRoute) {
+			clearCurrentRoute(finalLocation, intermediatePoints);
+		}
 		if (isPublicTransportMode()) {
 			Location start = lastFixedLocation;
 			LatLon finish = finalLocation;

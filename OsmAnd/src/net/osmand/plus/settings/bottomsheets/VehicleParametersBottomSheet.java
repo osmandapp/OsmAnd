@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.settings.backend.ApplicationMode;

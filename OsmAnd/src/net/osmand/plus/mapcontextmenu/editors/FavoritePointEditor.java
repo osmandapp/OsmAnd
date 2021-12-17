@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
 
@@ -19,6 +19,11 @@ public class FavoritePointEditor extends PointEditor {
 	}
 
 	@Override
+	public boolean isProcessingTemplate() {
+		return false;
+	}
+
+	@Override
 	public String getFragmentTag() {
 		return TAG;
 	}
@@ -27,11 +32,13 @@ public class FavoritePointEditor extends PointEditor {
 		return favorite;
 	}
 
-	public void add(LatLon latLon, String title, String address, String originObjectName, double altitude, long timestamp) {
+	public void add(LatLon latLon, String title, String address, String originObjectName,
+	                int preselectedIconId, double altitude, long timestamp) {
 		MapActivity mapActivity = getMapActivity();
 		if (latLon == null || mapActivity == null) {
 			return;
 		}
+
 		isNew = true;
 		String lastCategory = app.getSettings().LAST_FAV_CATEGORY_ENTERED.get();
 		if (!Algorithms.isEmpty(lastCategory) && !app.getFavorites().groupExists(lastCategory)) {
@@ -41,6 +48,8 @@ public class FavoritePointEditor extends PointEditor {
 		favorite.setDescription("");
 		favorite.setAddress(address.isEmpty() ? title : address);
 		favorite.setOriginObjectName(originObjectName);
+		favorite.setIconId(preselectedIconId);
+
 		FavoritePointEditorFragment.showInstance(mapActivity);
 	}
 

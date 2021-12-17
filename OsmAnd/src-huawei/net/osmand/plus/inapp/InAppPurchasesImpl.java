@@ -62,9 +62,9 @@ public class InAppPurchasesImpl extends InAppPurchases {
 		for (InAppSubscription s : subscriptions.getAllSubscriptions()) {
 			if (s instanceof InAppPurchaseMonthlySubscription) {
 				if (s.isLegacy()) {
-					legacyMonthlyLiveUpdates = s;
+					legacyMonthlySubscription = s;
 				} else {
-					monthlyLiveUpdates = s;
+					monthlySubscription = s;
 				}
 			}
 		}
@@ -426,12 +426,6 @@ public class InAppPurchasesImpl extends InAppPurchases {
 				}
 			}
 			return 0;
-		}
-
-		@Override
-		public String getRegularPrice(@NonNull Context ctx, @NonNull InAppSubscription monthlyLiveUpdates) {
-			double regularPrice = getPriceValue();
-			return getFormattedPrice(ctx, regularPrice, getPriceCurrencyCode());
 		}
 
 		@Nullable

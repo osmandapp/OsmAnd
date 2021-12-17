@@ -612,7 +612,7 @@
   <string name="osm_settings_descr">Spesifiseer Openstreetmap.org (OSM) stellings benodig vir OSM toevoegings</string>
   <string name="data_settings_descr">Spesifiseer taal, aflaai/herlaai inligting</string>
   <string name="data_settings">Inligting</string>
-    <string name="osm_settings">OSM veranderings</string>
+    <string name="osm_editing_plugin_name">OSM veranderings</string>
   <string name="auto_zoom_map_descr">Outo vergroot kaart volgens jou spoed</string>
   <string name="auto_zoom_map">Vergroot kaart outomaties</string>
   <string name="additional_settings">Bykomende stellings</string>
