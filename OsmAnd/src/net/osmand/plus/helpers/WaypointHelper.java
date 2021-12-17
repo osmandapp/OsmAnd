@@ -491,7 +491,7 @@ public class WaypointHelper {
 								AlarmInfo alarmCopy = new AlarmInfo(alarm.getType(), -1);
 
 								// Set actual distance and copy max speed to speed camera
-								if (alarmCopy.getType() == AlarmInfoType.SPEED_CAMERA){
+								if (alarmCopy.getType() == AlarmInfoType.SPEED_CAMERA) {
 									alarmCopy.setFloatValue(route.getDistanceToPoint(alarm.getLocationIndex()));
 									alarmCopy.setIntValue(alarm.getIntValue());
 								}

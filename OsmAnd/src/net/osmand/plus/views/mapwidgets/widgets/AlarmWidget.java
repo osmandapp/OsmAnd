@@ -177,7 +177,7 @@ public class AlarmWidget {
 								widgetText.setLayoutParams(widgetTextLayoutParams);
 								widgetText.setGravity(Gravity.CENTER);
 								widgetText.setTextSize(COMPLEX_UNIT_PX, res.getDimensionPixelSize(R.dimen.map_alarm_speed_camera_speed_info_text_size));
-							} else{
+							} else {
 								FrameLayout.LayoutParams widgetTextLayoutParams = new FrameLayout.LayoutParams(
 										FrameLayout.LayoutParams.WRAP_CONTENT,
 										FrameLayout.LayoutParams.WRAP_CONTENT);
@@ -245,7 +245,7 @@ public class AlarmWidget {
 		locImg.draw(canvas);
 
 		boolean isSpeedLimit = info.alarm.getType() == AlarmInfo.AlarmInfoType.SPEED_LIMIT;
-		boolean isSpeedCamera = info.alarm.getType() == AlarmInfo.AlarmInfoType.SPEED_LIMIT;
+		boolean isSpeedCamera = info.alarm.getType() == AlarmInfo.AlarmInfoType.SPEED_CAMERA;
 
 		if (!Algorithms.isEmpty(info.text)) {
 			TextPaint textPaint = new TextPaint();
