@@ -4483,4 +4483,15 @@
 \nLes points de valeur supérieure seront masqués.</string>
     <string name="turn_arrows_descr">Contrôlez la visibilité des flèches de direction sur la route.</string>
     <string name="turn_arrows">Flèches de direction</string>
+    <string name="track_file">Fichier de trace</string>
+    <string name="shared_string_used">Utilisé</string>
+    <string name="files_with_route_restrictions">Fichiers avec restrictions d\'itinéraire</string>
+    <string name="waypoint_appearance">Apparence du point de passage</string>
+    <string name="track_file_description">Appuyer sur l’action affichera une fenêtre avec toutes les traces disponibles pour sélection.</string>
+    <string name="shared_string_not_used">Non utilisé</string>
+    <string name="waypoint_template">Modèle de point de passage</string>
+    <string name="navigate_point_format_swiss_grid_plus">Grille suisse (CH1903+)</string>
+    <string name="navigate_point_format_swiss_grid">Grille suisse (CH1903)</string>
+    <string name="predefined_waypoint_appearance_description">Appuyer sur l’action enregistrera automatiquement le point de passage avec les paramètres prédéfinis.</string>
+    <string name="always_ask_waypoint_appearance_description">Appuyer sur l’action ouvrira l’écran « Ajouter un point de passage » dans lequel vous pourrez modifier son nom et son apparence.</string>
 </resources>
