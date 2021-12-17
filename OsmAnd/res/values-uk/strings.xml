@@ -4489,4 +4489,15 @@
     <string name="shared_string_size">Розмір</string>
     <string name="created_on">Створено</string>
     <string name="turn_arrows">Стрілки повороту</string>
+    <string name="shared_string_used">Використовується</string>
+    <string name="files_with_route_restrictions">Файли з обмеженнями маршруту</string>
+    <string name="waypoint_template">Шаблон маршрутної точки</string>
+    <string name="predefined_waypoint_appearance_description">Натискання кнопки автоматично збереже маршрутну точку з попередньо визначеними параметрами.</string>
+    <string name="always_ask_waypoint_appearance_description">Натискання кнопки відкриє меню «Додати маршрутну точку», у якому можна змінити її назву та вигляд.</string>
+    <string name="waypoint_appearance">Вигляд маршрутної точки</string>
+    <string name="track_file_description">Натискання кнопки відкриє меню з усіма доступними треками.</string>
+    <string name="track_file">Файл треку</string>
+    <string name="navigate_point_format_swiss_grid">Швейцарська система координат (CH1903)</string>
+    <string name="navigate_point_format_swiss_grid_plus">Швейцарська система координат (CH1903+)</string>
+    <string name="shared_string_not_used">Не використовується</string>
 </resources>
