@@ -820,13 +820,13 @@
 	<string name="poi_guest_house">Guest house</string>
 	<string name="poi_hostel">Hostel</string>
 	<string name="poi_motel">Motel</string>
-	<string name="poi_alpine_hut">Alpine hut</string>
-	<string name="poi_chalet">Chalet</string>
+	<string name="poi_alpine_hut">Alpine hut;Shelter</string>
+	<string name="poi_chalet">Chalet;Shelter</string>
 	<string name="poi_apartment">Apartment</string>
-	<string name="poi_wilderness_hut">Wilderness hut</string>
-	<string name="poi_cabin">Cabin</string>
-	<string name="poi_lean_to">Lean-to</string>
-	<string name="poi_hunting_lodge">Hunting lodge</string>
+	<string name="poi_wilderness_hut">Wilderness hut;Shelter</string>
+	<string name="poi_cabin">Cabin;Shelter</string>
+	<string name="poi_lean_to">Lean-to;Shelter</string>
+	<string name="poi_hunting_lodge">Hunting lodge;Shelter</string>
 
 	<string name="poi_place_of_worship">Place of worship</string>
 	<string name="poi_religion_christian">Christianity</string>
