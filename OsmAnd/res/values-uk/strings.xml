@@ -1882,7 +1882,7 @@
     <string name="osm_live_subscription_settings">Налаштування передплати</string>
     <string name="select_map_marker">Вибрати позначку на мапі</string>
     <string name="upload_anonymously">Надіслати анонімно</string>
-    <string name="show_transparency_seekbar">Показати прозору пошукову панель</string>
+    <string name="show_transparency_seekbar">Показати регулятор прозорості</string>
     <string name="report">Звіт</string>
     <string name="use_osm_live_routing_description">Увімкнути навігацію з урахуванням автооновлень OsmAnd Live.</string>
     <string name="use_osm_live_routing">Навігація OsmAnd Live</string>
