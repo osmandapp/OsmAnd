@@ -1,6 +1,6 @@
 package net.osmand.plus.backup.ui.status;
 
-import static net.osmand.plus.activities.OsmandBaseExpandableListAdapter.adjustIndicator;
+import static net.osmand.plus.base.OsmandBaseExpandableListAdapter.adjustIndicator;
 import static net.osmand.plus.backup.NetworkSettingsHelper.BACKUP_ITEMS_KEY;
 
 import android.graphics.drawable.Drawable;
@@ -13,10 +13,10 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.backup.ExportBackupTask;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.BasicProgressAsyncTask;

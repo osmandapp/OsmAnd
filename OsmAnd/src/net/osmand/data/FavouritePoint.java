@@ -18,13 +18,13 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
+import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.settings.backend.BooleanPreference;
-import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.BooleanPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.util.Algorithms;
 
 import java.io.Serializable;

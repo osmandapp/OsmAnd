@@ -4205,4 +4205,16 @@
     <string name="poi_glacier_debris_cover_partial">Pokrytí materiálem: částečné</string>
     <string name="poi_trailhead">Začátek stezky</string>
     <string name="poi_glacier_debris_cover_none">Pokrytí materiálem: žádné</string>
+    <string name="poi_computer_repair">Servis počítačů</string>
+    <string name="poi_computer_parts">Počítačové komponenty</string>
+    <string name="poi_computer_repair_no">Servis počítačů: ne</string>
+    <string name="poi_computer_parts_no">Počítačové komponenty: ne</string>
+    <string name="poi_computer_repair_yes">Ano</string>
+    <string name="poi_groundskeeping">Údržba zeleně</string>
+    <string name="poi_computer_sales_no">Prodej počítačů: ne</string>
+    <string name="poi_computer_sales">Prodej počítačů</string>
+    <string name="poi_diet_vegan_limited">Veganská: omezeně</string>
+    <string name="poi_computer_sales_yes">Ano</string>
+    <string name="poi_computer_sales_used">Použité</string>
+    <string name="poi_computer_parts_yes">Ano</string>
 </resources>

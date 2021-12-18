@@ -4487,4 +4487,6 @@
     <string name="use_routing_fallback_description">Çevrim içi yönlendirmeye ulaşılamadığında çevrim dışı yönlendirmeyi kullanın.</string>
     <string name="created_on">Oluşturulma tarihi</string>
     <string name="shared_string_size">Boyut</string>
+    <string name="turn_arrows">Dönüş Okları</string>
+    <string name="turn_arrows_descr">Güzergah hattındaki dönüş oklarının görünürlüğünü denetleyin.</string>
 </resources>

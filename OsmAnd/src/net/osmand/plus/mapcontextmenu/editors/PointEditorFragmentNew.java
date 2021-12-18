@@ -5,8 +5,8 @@ import static net.osmand.GPXUtilities.log;
 import static net.osmand.data.FavouritePoint.BackgroundType;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
-import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
-import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.isPersonalCategoryDisplayName;
+import static net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
+import static net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup.isPersonalCategoryDisplayName;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -49,11 +49,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -65,8 +65,8 @@ import net.osmand.plus.measurementtool.ExitBottomSheetDialogFragment;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
-import net.osmand.plus.track.ColorsCard;
-import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
+import net.osmand.plus.track.cards.ColorsCard;
+import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.util.Algorithms;
 
@@ -234,22 +234,25 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 
 		nameEdit = view.findViewById(R.id.name_edit);
 		nameEdit.setText(getNameInitValue());
-		nameEdit.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			}
+		boolean emptyNameAllowed = editor.isProcessingTemplate();
+		if (!emptyNameAllowed) {
+			nameEdit.addTextChangedListener(new TextWatcher() {
+				@Override
+				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+				}
 
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-			}
+				@Override
+				public void onTextChanged(CharSequence s, int start, int before, int count) {
+				}
 
-			@Override
-			public void afterTextChanged(Editable s) {
-				checkEmptyName(s, nameCaption, saveButton);
-			}
-		});
+				@Override
+				public void afterTextChanged(Editable s) {
+					checkEmptyName(s, nameCaption, saveButton);
+				}
+			});
+			checkEmptyName(nameEdit.getText(), nameCaption, saveButton);
+		}
 
-		checkEmptyName(nameEdit.getText(), nameCaption, saveButton);
 		nameIcon = view.findViewById(R.id.name_icon);
 		TextView categoryEdit = view.findViewById(R.id.groupName);
 		if (categoryEdit != null) {
@@ -345,13 +348,12 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		}
 
 		View deleteButton = view.findViewById(R.id.button_delete_container);
-		deleteButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				deletePressed();
-			}
-		});
+		deleteButton.setOnClickListener(v -> deletePressed());
 
+		if (editor.isProcessingTemplate()) {
+			View replaceButton = view.findViewById(R.id.button_replace_container);
+			AndroidUiHelper.setVisibility(View.GONE, toolbarAction, replaceButton, deleteButton);
+		}
 		if (editor.isNew()) {
 			toolbarAction.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_replace, activeColorResId));
 			deleteButton.setVisibility(View.GONE);

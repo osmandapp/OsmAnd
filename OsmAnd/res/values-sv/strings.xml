@@ -3781,7 +3781,7 @@
     <string name="map_markers_history">Kartmarkörhistorik</string>
     <string name="navigation_history">Navigationshistorik</string>
     <string name="history_preferences_descr">Du kan inaktivera historikloggning individuellt för varje historiktyp.</string>
-    <string name="search_history_is_disabled_descr">Du kan aktivera sökhistorik i Inställningar</string>
+    <string name="search_history_is_disabled_descr">Du kan aktivera sökhistoriken i inställningarna.</string>
     <string name="markers_history_is_disabled_descr">Aktivera historik för att få en lista av besökta kartmarkörer.</string>
     <string name="history_is_disabled_descr">Aktivera historik för att få snabbare tillgång till de senast använda resultaten.</string>
     <string name="shared_string_details">Detaljer</string>
@@ -3873,15 +3873,15 @@
     <string name="save_as_copy">Spara som kopia</string>
     <string name="shared_string_gps_filter">GPS-filter</string>
     <string name="ltr_or_rtl_combine">%1$s %2$s</string>
-    <string name="exit_without_saving_warning">Är du säker på att du vill avsluta utan att spara\? Du kommer att förlora alla ändringar.</string>
+    <string name="exit_without_saving_warning">Avsluta utan att spara ändringar\?</string>
     <string name="from_to_with_params">Från %1$s till %2$s</string>
     <string name="storage_copied_files_size">Kopierade %1$s filer %2$s</string>
-    <string name="storage_copying_files_size">Kopierar %1$s filer %2$s ...</string>
-    <string name="storage_found_files_size">Hittade %1$s filer %2$s</string>
+    <string name="storage_copying_files_size">Kopierar %1$s filer, %2$s</string>
+    <string name="storage_found_files_size">Hittade %1$s filer, %2$s</string>
     <string name="shared_storage_last_step">Du kan ange en ny datamapp efteråt.</string>
     <string name="app_modes_options">Välj app-läge</string>
     <string name="shared_string_memory">Minne</string>
-    <string name="migration_files_present">%1$d filer (%2$s) finns i den valda mappen \'%3$s\'.</string>
+    <string name="migration_files_present">Det finns %1$d filer (%2$s) i den valda mappen \'%3$s\'.</string>
     <string name="fold_unfold">fäll ihop/veckla ut</string>
     <string name="app_profile_type">App-profiltyp</string>
     <string name="map_marker_options">Alternativ för kartmarkörer</string>
@@ -3897,18 +3897,21 @@
     <string name="display_groups_visibility_dialog_description">Du kan styra gruppens synlighet på kartan. Om spåret är dolt kommer alla grupper också att vara dolda.</string>
     <string name="gps_filter_hdop_desc">Ställ in det högsta tillåtna värdet för HDOP.
 \nPunkter med högre värde än den inställda parametern kommer att döljas.</string>
-    <string name="gps_filter_speed_altitude_desc">Spårpunkterna som motsvarar det inställda intervallet visas på diagrammet och kartan, övriga kommer att döljas.</string>
+    <string name="gps_filter_speed_altitude_desc">Endast spårpunkter som motsvarar det inställda intervallet visas på diagrammet och kartan, övriga kommer att döljas.</string>
     <string name="gps_filter_precision">GPS-precision</string>
     <string name="gps_filter_smoothing_desc">Ställ in tröskelavstånd mellan punkter.
 \nSpårpunkter som ligger inom X avstånd från den senast synliga punkten döljs.
 \nVar försiktig, ju större avstånd, desto mer förenklad blir spårgeometrin.</string>
     <string name="save_changes_into_file">Spara ändringar till fil</string>
     <string name="gps_filter_actions_description">OsmAnd tillämpar ändringar på spåret utan att spara det i filen. Du kan spara ändringarna manuellt.</string>
-    <string name="storage_migration_wrong_folder_warning">Vi kan inte hitta OsmAnd-data i den valda mappen. Vänligen försök igen.</string>
+    <string name="storage_migration_wrong_folder_warning">Ingen OsmAnd-data hittades i den valda mappen. Vänligen försök igen.</string>
     <string name="files_remaining">Återstående filer: %1$s %2$s</string>
     <string name="progress_complete">%1$s klar</string>
     <string name="storage_found_files_descr">Tryck på \"%1$s\" för att kopiera %2$s filer från \"%3$s\" till \"%4$s\". Det kan ta ett tag.</string>
     <string name="shared_string_skip_warning">Hoppa över migreringen\? OsmAnd har inte längre tillgång till dina filer i delad lagring.
 \n
 \nAppen kommer att börja använda den nya datamappen.</string>
+    <string name="turn_arrows">Svängpilar</string>
+    <string name="shared_string_size">Storlek</string>
+    <string name="created_on">Skapad</string>
 </resources>

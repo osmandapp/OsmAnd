@@ -13,13 +13,13 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
-import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.PointImageDrawable;
+import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.FavouritePointMenuBuilder;
@@ -44,10 +44,15 @@ public class FavouritePointMenuController extends MenuController {
 		super(new FavouritePointMenuBuilder(mapActivity, fav), pointDescription, mapActivity);
 		this.fav = fav;
 
-		final MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
+		OsmandApplication app = mapActivity.getMyApplication();
+		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
+
 		mapMarker = markersHelper.getMapMarker(fav);
 		if (mapMarker == null) {
 			mapMarker = markersHelper.getMapMarker(new LatLon(fav.getLatitude(), fav.getLongitude()));
+		}
+		if (mapMarker != null && mapMarker.history && !app.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
+			mapMarker = null;
 		}
 		if (mapMarker != null) {
 			MapMarkerMenuController markerMenuController =

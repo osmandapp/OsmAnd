@@ -4479,4 +4479,6 @@
     <string name="use_routing_fallback">Útvonaltervezési tartalék használata</string>
     <string name="created_on">Létrehozva:</string>
     <string name="shared_string_size">Méret</string>
+    <string name="turn_arrows_descr">A bekanyarodást jelző nyilak láthatóságának szabályozása az útvonalon.</string>
+    <string name="turn_arrows">Bekanyarodást jelző nyilak</string>
 </resources>

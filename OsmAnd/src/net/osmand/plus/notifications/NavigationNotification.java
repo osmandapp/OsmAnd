@@ -22,14 +22,13 @@ import androidx.car.app.notification.CarPendingIntent;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationCompat.BigTextStyle;
 import androidx.core.app.NotificationCompat.Builder;
-import androidx.core.app.NotificationManagerCompat;
 
 import net.osmand.Location;
 import net.osmand.plus.NavigationService;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.NavigationCarAppService;
 import net.osmand.plus.auto.NavigationSession;

@@ -16,7 +16,7 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.material.appbar.AppBarLayout;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.widgets.WebViewEx;

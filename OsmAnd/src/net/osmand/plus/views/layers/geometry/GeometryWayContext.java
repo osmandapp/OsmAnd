@@ -13,7 +13,7 @@ import androidx.core.graphics.ColorUtils;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.views.OsmandMapLayer.RenderingLineAttributes;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.RenderingLineAttributes;
 
 public abstract class GeometryWayContext {
 

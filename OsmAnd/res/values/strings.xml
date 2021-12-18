@@ -11,6 +11,17 @@
 	Thx - Hardy
 -->
 
+    <string name="shared_string_not_used">Not used</string>
+    <string name="shared_string_used">Used</string>
+    <string name="files_with_route_restrictions">Files with route restrictions</string>
+    <string name="waypoint_template">Waypoint template</string>
+    <string name="predefined_waypoint_appearance_description">Taping on the action will automatically save waypoint with predefined parameters.</string>
+    <string name="always_ask_waypoint_appearance_description">Taping on action will open “Add waypoint” screen, where you can change name and appearance.</string>
+    <string name="waypoint_appearance">Waypoint appearance</string>
+    <string name="track_file_description">Taping on action will show a dialogue with all available tracks to be selected.</string>
+    <string name="track_file">Track file</string>
+    <string name="turn_arrows">Turn Arrows</string>
+    <string name="turn_arrows_descr">Control the visibility of the turn arrows on the route line.</string>
     <string name="shared_string_size">Size</string>
     <string name="created_on">Created on</string>
     <string name="use_routing_fallback">Use routing fallback</string>
@@ -1203,6 +1214,8 @@
     <string name="navigate_point_format_utm">UTM Standard</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="navigate_point_format_olc">Open Location Code</string>
+    <string name="navigate_point_format_swiss_grid">Swiss Grid (CH1903)</string>
+    <string name="navigate_point_format_swiss_grid_plus">Swiss Grid (CH1903+)</string>
     <string name="coordinates_format_info">The selected format will be applied throughout the app.</string>
     <string name="pref_selected_by_default_for_profiles">This setting is selected by default for profiles: %s</string>
     <string name="change_default_settings">Change setting</string>

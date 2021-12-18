@@ -50,13 +50,30 @@
 		android:xlargeScreens="true" android:anyDensity="true" />
 
 	<queries>
+		<package android:name="net.osmand.srtmPlugin" />
+		<package android:name="net.osmand.srtmPlugin.paid" />
+		<package android:name="net.osmand.parkingPlugin" />
+		<package android:name="net.osmand.skimapsPlugin" />
+		<package android:name="net.osmand.nauticalPlugin" />
+
+		<package android:name="btools.routingapp" />
+		<package android:name="com.mapillary.app" />
+
+		<package android:name="org.bruxo.gpsconnected" />
+		<package android:name="com.eclipsim.gpsstatus2" />
+		<package android:name="com.chartcross.gpstest" />
+		<package android:name="com.chartcross.gpstestplus" />
+		<package android:name="com.android.gpstest" />
+		<package android:name="com.vonglasow.michael.satstat" />
+		<package android:name="com.android.gpstest.osmdroid" />
+
 		<intent>
 			<action android:name="android.intent.action.TTS_SERVICE" />
 		</intent>
 	</queries>
 
 	<!-- android:theme="@style/OsmandLightDarkActionBarTheme" -->
-	<application android:allowBackup="true" android:backupAgent="net.osmand.plus.OsmandBackupAgent"
+	<application android:allowBackup="true" android:backupAgent="net.osmand.plus.helpers.OsmandBackupAgent"
 		android:icon="@mipmap/icon" android:label="@string/app_name"
 		android:name="net.osmand.plus.OsmandApplication" android:configChanges="locale"
 		android:theme="@style/OsmandDarkTheme" android:restoreAnyVersion="true" android:largeHeap="true"
@@ -85,7 +102,7 @@
 
 		<receiver android:name="net.osmand.plus.notifications.NotificationDismissReceiver" />
 		<receiver android:name="net.osmand.plus.liveupdates.LiveUpdatesAlarmReceiver" />
-		<receiver android:name="net.osmand.plus.audionotes.MediaRemoteControlReceiver">
+		<receiver android:name="net.osmand.plus.plugins.audionotes.MediaRemoteControlReceiver">
 			<intent-filter>
 				<action android:name="android.intent.action.CAMERA_BUTTON" />
 				<!-- <action android:name="android.intent.action.MEDIA_BUTTON" /> -->
@@ -540,7 +557,7 @@
 		<activity android:name="net.osmand.plus.activities.HelpActivity" />
 		<activity android:name="net.osmand.plus.activities.search.SearchActivity" android:label="@string/search_activity" />
 		<activity android:name="net.osmand.plus.activities.FavoritesListActivity" android:label="@string/favourites_list_activity" />
-		<activity android:name=".myplaces.FavoritesActivity" android:windowSoftInputMode="adjustPan" />
+		<activity android:name="net.osmand.plus.myplaces.FavoritesActivity" android:windowSoftInputMode="adjustPan" />
 		<activity android:name="net.osmand.plus.activities.ContributionVersionActivity" android:configChanges="keyboardHidden|orientation" android:label="@string/contribution_activity" />
 
 		<activity android:name="net.osmand.plus.activities.search.SearchPOIActivity" android:label="@string/searchpoi_activity" />
@@ -1056,11 +1073,29 @@
 			</intent-filter>
 		</activity>
 		<activity android:name="net.osmand.plus.activities.EditPOIFilterActivity" />
+		<activity android:name="net.osmand.plus.activities.PrintDialogActivity" />
 
-		<activity android:name="net.osmand.plus.development.TestVoiceActivity" />
-		<activity android:name="net.osmand.plus.development.LogcatActivity" />
+		<activity android:name="net.osmand.plus.plugins.development.TestVoiceActivity" />
+		<activity android:name="net.osmand.plus.plugins.development.LogcatActivity" />
 		<activity android:name="net.osmand.plus.download.DownloadActivity" android:label="" />
-		<activity android:name=".wikivoyage.explore.WikivoyageExploreActivity">
+		<activity android:name="net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity">
+
+			<intent-filter>
+				<data android:scheme="http" />
+				<data android:scheme="https" />
+				<data android:host="osmand.net" />
+				<data android:pathPrefix="/travel" />
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<category android:name="android.intent.category.APP_MAPS" />
+				<category android:name="android.intent.category.CAR_MODE" />
+				<category android:name="android.intent.category.CAR_DOCK" />
+				<category android:name="android.intent.category.DESK_DOCK" />
+			</intent-filter>
+
+		</activity>
+		<activity android:name="net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity">
 
 			<intent-filter>
 				<data android:scheme="http" />
@@ -1129,31 +1164,8 @@
 
 		<receiver android:name="net.osmand.plus.notifications.NotificationDismissReceiver" />
 
-		<activity android:name="net.osmand.plus.activities.PrintDialogActivity" />
-        <activity android:name=".liveupdates.OsmLiveActivity"
-            android:label="@string/purchases"/>
-		<activity android:name=".wikivoyage.explore.WikivoyageExploreActivity">
-
-			<intent-filter>
-				<data android:scheme="http" />
-				<data android:scheme="https" />
-				<data android:host="osmand.net" />
-				<data android:pathPrefix="/travel" />
-				<action android:name="android.intent.action.VIEW" />
-				<category android:name="android.intent.category.DEFAULT" />
-				<category android:name="android.intent.category.BROWSABLE" />
-				<category android:name="android.intent.category.APP_MAPS" />
-				<category android:name="android.intent.category.CAR_MODE" />
-				<category android:name="android.intent.category.CAR_DOCK" />
-				<category android:name="android.intent.category.DESK_DOCK" />
-			</intent-filter>
-
-		</activity>
-
         <receiver android:name="net.osmand.plus.liveupdates.LiveUpdatesAlarmReceiver"/>
 
-		<activity android:name=".activities.PrivacyAndSecurityActivity"
-			android:configChanges="keyboardHidden|orientation" />
-
 	</application>
+
 </manifest> 

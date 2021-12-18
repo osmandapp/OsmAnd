@@ -5,7 +5,7 @@ import static net.osmand.plus.backup.BackupHelper.INFO_EXT;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.FileUtils;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;

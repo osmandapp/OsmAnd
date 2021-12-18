@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import com.google.openlocationcode.OpenLocationCode;
 
 import net.osmand.LocationConvert;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
@@ -173,6 +173,8 @@ public class PointDescription {
 		String utm = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.UTM_FORMAT);
 		String olc = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.OLC_FORMAT);
 		String mgrs = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.MGRS_FORMAT);
+		String swissGrid = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.SWISS_GRID_FORMAT);
+		String swissGridPlus = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.SWISS_GRID_PLUS_FORMAT);
 
 		try {
 			latLonString = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.FORMAT_DEGREES_SHORT);
@@ -193,6 +195,8 @@ public class PointDescription {
 		results.put(OsmAndFormatter.UTM_FORMAT, utm);
 		results.put(OsmAndFormatter.OLC_FORMAT, olc);
 		results.put(OsmAndFormatter.MGRS_FORMAT, mgrs);
+		results.put(OsmAndFormatter.SWISS_GRID_FORMAT, swissGrid);
+		results.put(OsmAndFormatter.SWISS_GRID_PLUS_FORMAT, swissGridPlus);
 
 		int zoom = 17;
 		if (ctx.getMapView() != null) {
@@ -209,6 +213,10 @@ public class PointDescription {
 			results.put(LOCATION_LIST_HEADER, olc);
 		} else if (f == PointDescription.MGRS_FORMAT) {
 			results.put(LOCATION_LIST_HEADER, mgrs);
+		} else if (f == PointDescription.SWISS_GRID_FORMAT) {
+			results.put(LOCATION_LIST_HEADER, swissGrid);
+		} else if (f == PointDescription.SWISS_GRID_PLUS_FORMAT) {
+			results.put(LOCATION_LIST_HEADER, swissGridPlus);
 		} else if (f == PointDescription.FORMAT_DEGREES) {
 			results.put(LOCATION_LIST_HEADER, latLonDeg);
 		} else if (f == PointDescription.FORMAT_MINUTES) {
@@ -406,6 +414,8 @@ public class PointDescription {
 	public static final int UTM_FORMAT = LocationConvert.UTM_FORMAT;
 	public static final int OLC_FORMAT = LocationConvert.OLC_FORMAT;
 	public static final int MGRS_FORMAT = LocationConvert.MGRS_FORMAT;
+	public static final int SWISS_GRID_FORMAT = LocationConvert.SWISS_GRID_FORMAT;
+	public static final int SWISS_GRID_PLUS_FORMAT = LocationConvert.SWISS_GRID_PLUS_FORMAT;
 
 	public static String formatToHumanString(Context ctx, int format) {
 		switch (format) {
@@ -421,6 +431,10 @@ public class PointDescription {
 				return "OLC";
 			case LocationConvert.MGRS_FORMAT:
 				return "MGRS";
+			case LocationConvert.SWISS_GRID_FORMAT:
+				return ctx.getString(R.string.navigate_point_format_swiss_grid);
+			case LocationConvert.SWISS_GRID_PLUS_FORMAT:
+				return ctx.getString(R.string.navigate_point_format_swiss_grid_plus);
 			default:
 				return "Unknown format";
 		}

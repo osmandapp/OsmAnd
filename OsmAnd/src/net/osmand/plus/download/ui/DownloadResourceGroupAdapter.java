@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.download.CustomIndexItem;
 import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadActivity;

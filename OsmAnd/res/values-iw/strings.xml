@@ -4485,4 +4485,6 @@
 \n</string>
     <string name="created_on">נוצר בתאריך</string>
     <string name="shared_string_size">גודל</string>
+    <string name="turn_arrows">חצי הפנייה</string>
+    <string name="turn_arrows_descr">שליטה בהצגת חצי הפנייה על קו המסלול.</string>
 </resources>

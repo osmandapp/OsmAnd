@@ -4211,4 +4211,15 @@
     <string name="poi_faculty_medicine">醫學</string>
     <string name="poi_tool_hire">工具租用</string>
     <string name="poi_escape_game">密室脫逃遊戲</string>
+    <string name="poi_computer_sales">電腦銷售</string>
+    <string name="poi_diet_vegan_limited">純素主義者：有限制</string>
+    <string name="poi_computer_sales_yes">是</string>
+    <string name="poi_computer_sales_used">已使用</string>
+    <string name="poi_computer_repair_yes">是</string>
+    <string name="poi_computer_sales_no">電腦銷售：否</string>
+    <string name="poi_computer_repair_no">電腦修復：否</string>
+    <string name="poi_computer_parts_yes">是</string>
+    <string name="poi_computer_parts_no">電腦元件：否</string>
+    <string name="poi_computer_repair">電腦修復</string>
+    <string name="poi_computer_parts">電腦零件</string>
 </resources>

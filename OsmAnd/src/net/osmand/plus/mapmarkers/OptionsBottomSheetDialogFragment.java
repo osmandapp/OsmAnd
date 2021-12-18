@@ -13,12 +13,10 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
-import net.osmand.plus.mapmarkers.MapMarkersMode;
 
 public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment {
 

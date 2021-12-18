@@ -11,11 +11,11 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.plus.GpxSelectionHelper;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.helpers.TrackSelectSegmentAdapter.TrackViewHolder;
 import net.osmand.util.MapUtils;
 

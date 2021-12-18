@@ -20,16 +20,16 @@ import net.osmand.data.LatLon;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.OnlineRoutingResponse;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
@@ -140,8 +140,15 @@ public class RouteProvider {
 				} else if (params.mode.getRouteService() == RouteService.BROUTER) {
 					res = findBROUTERRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.ONLINE) {
-					res = findOnlineRoute(params);
-					if (!res.isCalculated()) {
+					boolean useFallbackRouting = false;
+					try {
+						res = findOnlineRoute(params);
+					} catch (IOException | JSONException e) {
+						res = new RouteCalculationResult(null);
+						params.initialCalculation = false;
+						useFallbackRouting = true;
+					}
+					if (useFallbackRouting || !res.isCalculated()) {
 						OnlineRoutingHelper helper = params.ctx.getOnlineRoutingHelper();
 						String engineKey = params.mode.getRoutingProfile();
 						OnlineRoutingEngine engine = helper.getEngineByKey(engineKey);
@@ -159,7 +166,7 @@ public class RouteProvider {
 					log.info("Finding route contained " + res.getImmutableAllLocations().size() + " points for " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				}
 				return res;
-			} catch (IOException | ParserConfigurationException | SAXException | JSONException e) {
+			} catch (IOException | ParserConfigurationException | SAXException e) {
 				log.error("Failed to find route ", e);
 			}
 		}
@@ -779,18 +786,22 @@ public class RouteProvider {
 		if (maxSpeed > 0) {
 			paramsR.put(GeneralRouter.MAX_SPEED, String.valueOf(maxSpeed));
 		}
+		OsmandApplication app = settings.getContext();
+		AvoidRoadsHelper avoidRoadsHelper = app.getAvoidRoadsHelper();
+		config.setDirectionPoints(avoidRoadsHelper.getDirectionPoints(params.mode));
+
 		float mb = (1 << 20);
 		Runtime rt = Runtime.getRuntime();
 		// make visible
 		int memoryLimitMb = (int) (0.95 * ((rt.maxMemory() - rt.totalMemory()) + rt.freeMemory()) / mb);
 		int nativeMemoryLimitMb = settings.MEMORY_ALLOCATED_FOR_ROUTING.get();
 		RoutingMemoryLimits memoryLimits = new RoutingMemoryLimits(memoryLimitMb, nativeMemoryLimitMb);
-		log.warn("Use " + memoryLimitMb +  " MB Free " + rt.freeMemory() / mb + " of " + rt.totalMemory() / mb + " max " + rt.maxMemory() / mb);
-		log.warn("Use " + nativeMemoryLimitMb +  " MB of native memory ");
-		RoutingConfiguration cf = config.build( params.mode.getRoutingProfile(), params.start.hasBearing() ?
-				params.start.getBearing() / 180d * Math.PI : null, 
+		log.warn("Use " + memoryLimitMb + " MB Free " + rt.freeMemory() / mb + " of " + rt.totalMemory() / mb + " max " + rt.maxMemory() / mb);
+		log.warn("Use " + nativeMemoryLimitMb + " MB of native memory ");
+		RoutingConfiguration cf = config.build(params.mode.getRoutingProfile(), params.start.hasBearing() ?
+						params.start.getBearing() / 180d * Math.PI : null,
 				memoryLimits, paramsR);
-		if(settings.ENABLE_TIME_CONDITIONAL_ROUTING.getModeValue(params.mode)) {
+		if (settings.ENABLE_TIME_CONDITIONAL_ROUTING.getModeValue(params.mode)) {
 			cf.routeCalculationTime = System.currentTimeMillis();
 		}
 		return cf;
@@ -1099,7 +1110,9 @@ public class RouteProvider {
 		OsmandSettings settings = app.getSettings();
 		String engineKey = params.mode.getRoutingProfile();
 		OnlineRoutingResponse response =
-				helper.calculateRouteOnline(engineKey, getPathFromParams(params), params.leftSide, params.initialCalculation);
+				helper.calculateRouteOnline(engineKey, getPathFromParams(params),
+						params.start.hasBearing() ? params.start.getBearing() : null,
+						params.leftSide, params.initialCalculation);
 
 		if (response != null) {
 			if (response.getGpxFile() != null) {

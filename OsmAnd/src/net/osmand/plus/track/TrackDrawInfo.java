@@ -1,7 +1,7 @@
 package net.osmand.plus.track;
 
-import static net.osmand.plus.track.TrackMenuFragment.CURRENT_RECORDING;
-import static net.osmand.plus.track.TrackMenuFragment.TRACK_FILE_NAME;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.CURRENT_RECORDING;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
 
 import android.os.Bundle;
 
@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -189,7 +189,7 @@ public class TrackDrawInfo {
 		currentRecording = bundle.getBoolean(CURRENT_RECORDING);
 	}
 
-	protected void saveToBundle(@NonNull Bundle bundle) {
+	public void saveToBundle(@NonNull Bundle bundle) {
 		bundle.putString(TRACK_FILE_NAME, filePath);
 		bundle.putString(TRACK_WIDTH, width);
 		bundle.putString(TRACK_COLORING_TYPE, coloringType != null ? coloringType.getName(routeInfoAttribute) : "");

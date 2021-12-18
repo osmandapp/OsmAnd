@@ -4086,4 +4086,65 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="service_is_not_available_please_try_later">Zerbitzua ez dago erabilgarri, mesedez saiatu geroago</string>
     <string name="shared_string_files">Artxibategiak</string>
     <string name="travel_route_types">Ibilbide motak</string>
+    <string name="shared_string_statistics">Estatistikak</string>
+    <string name="gps_filter_smoothing">Leuntzea</string>
+    <string name="save_as_copy">Gorde kopia gisa</string>
+    <string name="exit_without_saving_warning">Irten datuak gorde gabe\?</string>
+    <string name="shared_string_precision">Zehaztasuna</string>
+    <string name="skip_confirmation">Bai, saltatu</string>
+    <string name="save_changes_into_file">Gorde aldaketan fitxategian</string>
+    <string name="storage_migration_wrong_folder_warning">Ez da OsmAnd daturik aurkitu hautatutako karpetan. Saiatu berriro mesedez.</string>
+    <string name="gps_filter_actions_description">OsmAnd-ek aldaketak arrastoan aplikatuko ditu fitxategia eguneratu gabe. Aldaketak eskuz gorde ditzakezu.</string>
+    <string name="shared_storage_first_step">Sakatu \"%1$s\".
+\nFitxategi-kudeatzailea «osmand» karpeta aurkitu eta ireki behar duzun tokian irekitzen da.</string>
+    <string name="storage_found_files_descr">Sakatu \"%1$s\" kopiatzeko %2$s fitxategiak \"%3$s\"-tik \"%4$s\"-ra. Baliteke denbora pixka bat behar izatea.</string>
+    <string name="copying_completed">Kopiatuta</string>
+    <string name="memory_allocated_for_routing">Nabigazioari esleitutako memoria</string>
+    <string name="display_groups_visibility_dialog_description">Taldeen ikusgarritasuna kontrola dezakezu mapan. Arrastoa ezkutuan badago, talde guztiak ere ezkutatu egingo dira.</string>
+    <string name="shared_string_skip_warning">Migrazioa saltatu\? OsmAnd-ek jada ez du zure fitxategietarako sarbiderik biltegiratze partekatuan.
+\n
+\nAplikazioa zure datu-karpeta berria erabiltzen hasiko da.</string>
+    <string name="shared_storage_last_step">Datuen karpeta berri bat zehaztu dezakezu gero.</string>
+    <string name="shared_storage_third_step">Eman baimena karpetara sartzeko. Hori gabe OsmAnd-ek ezin ditu fitxategiak kopiatu.</string>
+    <string name="shared_storage_migration_descr">Android biltegiratzeko sarbidean aldaketak direla eta, OsmAndek ezin du jada %1$s erabili.
+\n
+\nKopiatu zure datu guztiak karpeta berrira.</string>
+    <string name="folder_access_denied">Hautatutako karpeta atzitzeko baimena behar da.</string>
+    <string name="shared_string_size">Tamaina</string>
+    <string name="created_on">Noiz sortua</string>
+    <string name="gps_filter_precision">GPSaren zehaztasuna</string>
+    <string name="turn_arrows">Biratze geziak</string>
+    <string name="turn_arrows_descr">Ibilbidekok biratze-gezien ikusgarritasuna kontrolatzen du.</string>
+    <string name="gps_filter_hdop_desc">Ezarri HDOP-rako (GPSaren zehaztasun horizontalerako) onartutako gehienezko balioa.
+\nBalio handiagoa duten puntuak ezkutatu egingo dira.</string>
+    <string name="gps_filter_speed_altitude_desc">Ezarritako tartearekin bat datozen bide-puntuak bakarrik agertuko dira taulan eta mapan, gainerakoak ezkutatuta egongo dira.</string>
+    <string name="distance_between_points">Puntuen arteko distantzia</string>
+    <string name="shared_string_gps_filter">GPS iragazkia</string>
+    <string name="migration_files_present">%1$d fitxategi (%2$s) daude hautatutako kokapenean \'%3$s\'.</string>
+    <string name="fold_unfold">tolestu/hedatu</string>
+    <string name="app_profile_type">Aplikazioaren profil mota</string>
+    <string name="map_marker_options">Maka markatzailearen aukerak</string>
+    <string name="add_to_group">Gehitu taldean</string>
+    <string name="app_modes_options">Aukeratu aplikazio moduak</string>
+    <string name="shared_string_memory">Memoria</string>
+    <string name="memory_allocated_for_routing_ds">Memoria-esleipen handiagoak ibilbide luzeen (500 km baino gehiago) kalkulua bizkortuko du, baina beste aplikazioen errendimenduan eragina izan dezake.
+\nIbilbide laburren kalkulu-abiaduran eraginik ez du.</string>
+    <string name="reading_files">Fitxategiak irakurtzen…</string>
+    <string name="no_items_selected_warning">Hautatu gutxienez elementu bat</string>
+    <string name="show_parameter_seekbar">Erakutsi parametroen bilaketa barra</string>
+    <string name="shared_string_hide_all">Ezkutatu dena</string>
+    <string name="files_remaining">Falta diren fitxategiak: %1$s %2$s</string>
+    <string name="copying_file">%1$s fitxategia kopiatzen…</string>
+    <string name="from_to_with_params">%1$s-tik %2$s-ra</string>
+    <string name="progress_complete">%1$s osatuta</string>
+    <string name="storage_copied_files_size">%1$s fitxategi kopiatu dira %2$s</string>
+    <string name="storage_copying_files_size">Kopiatzen %1$s fitxategi %2$s</string>
+    <string name="storage_found_files_size">%1$s fitxategi aurkitu dira %2$s</string>
+    <string name="shared_storage_second_step">Klikatu \"Erabili karpeta hau\".</string>
+    <string name="shared_string_copy_to">Kopiatu hona</string>
+    <string name="start_copying">Hasi kopiatzen</string>
+    <string name="shared_storage">Biltegiratze partekatua</string>
+    <string name="gps_filter_smoothing_desc">Ezarri puntuen arteko gutxieneko distantzia.
+\nAzken puntu ikusgaitik gutxieneko distantziara ez dauden bide-puntuak ezkutuan egongo dira.
+\nKontuan izan atalase altuek pistaren geometria gehiegi sinplifikatu dezaketela.</string>
 </resources>

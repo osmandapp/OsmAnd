@@ -1470,7 +1470,7 @@
     <string name="poi_drive_through_no">Servicio en el automóvil: no</string>
     <string name="poi_brewery_additional">Nombre de la cervecería</string>
     <string name="poi_microbrewery_yes">Sí</string>
-    <string name="poi_microbrewery_no">Cerveza artesanal: no</string>
+    <string name="poi_microbrewery_no">Microcervecería: no</string>
     <string name="poi_takeaway_yes">Comida para llevar: sí</string>
     <string name="poi_takeaway_no">Comida para llevar: no</string>
     <string name="poi_takeaway_only">Comida para llevar: únicamente</string>
@@ -2791,7 +2791,7 @@
     <string name="poi_delivery">Envío a domicilio;Delivery</string>
     <string name="poi_takeaway">Comida para llevar</string>
     <string name="poi_cocktails">Cócteles</string>
-    <string name="poi_microbrewery">Cerveza artesanal</string>
+    <string name="poi_microbrewery">Microcervecería</string>
     <string name="poi_beauty_salon_service">Servicio de belleza</string>
     <string name="poi_recycling_type">Tipo de reciclaje</string>
     <string name="poi_recycling_accepted_waste">Residuo admitido</string>
@@ -4211,4 +4211,15 @@
     <string name="poi_hampshire_gate">Tranquera de alambre;Portón de alambre;Puerta de Hampshire</string>
     <string name="poi_driver_training">Escuela de manejo</string>
     <string name="poi_research_institute">Instituto de investigación</string>
+    <string name="poi_computer_sales_used">Usado</string>
+    <string name="poi_computer_repair_yes">Sí</string>
+    <string name="poi_computer_parts_no">Piezas de ordenador: no</string>
+    <string name="poi_computer_sales_no">Venta de ordenadores: no</string>
+    <string name="poi_computer_sales">Venta de ordenadores</string>
+    <string name="poi_computer_repair">Reparación de ordenadores</string>
+    <string name="poi_computer_parts">Piezas para ordenadores</string>
+    <string name="poi_diet_vegan_limited">Vegano: limitado</string>
+    <string name="poi_computer_sales_yes">Sí</string>
+    <string name="poi_computer_repair_no">Reparación de ordenadores: no</string>
+    <string name="poi_computer_parts_yes">Sí</string>
 </resources>

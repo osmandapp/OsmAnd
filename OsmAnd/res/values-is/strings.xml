@@ -4490,4 +4490,6 @@
 \n</string>
     <string name="created_on">Búið til</string>
     <string name="shared_string_size">Stærð</string>
+    <string name="turn_arrows">Beygjuörvar</string>
+    <string name="turn_arrows_descr">Stjórnaðu sýnileika beygjuörva á leiðarlínunni.</string>
 </resources>

@@ -6,12 +6,12 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.DialogButtonType;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.ExportBackupTask;
 import net.osmand.plus.backup.ImportBackupTask;
@@ -54,7 +54,7 @@ public class ConflictViewHolder extends ItemViewHolder {
 		localVersionButton.setOnClickListener(v -> {
 			try {
 				settingsHelper.exportSettings(fileName, exportListener, item);
-			} catch (IllegalArgumentException e) {
+			} catch (IllegalStateException e) {
 				log.error(e.getMessage(), e);
 			}
 			updateButtonsState(settingsHelper, fileName);
@@ -64,7 +64,7 @@ public class ConflictViewHolder extends ItemViewHolder {
 				SettingsItem settingsItem = pair.second.item;
 				settingsItem.setShouldReplace(true);
 				settingsHelper.importSettings(fileName, Collections.singletonList(settingsItem), true, importListener);
-			} catch (IllegalArgumentException e) {
+			} catch (IllegalStateException e) {
 				log.error(e.getMessage(), e);
 			}
 			updateButtonsState(settingsHelper, fileName);

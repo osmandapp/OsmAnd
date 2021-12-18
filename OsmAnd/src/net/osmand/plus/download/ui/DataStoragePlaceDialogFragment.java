@@ -17,14 +17,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
-import net.osmand.AndroidUtils;
-import net.osmand.FileUtils;
 import net.osmand.IProgress;
 import net.osmand.plus.OnDismissDialogFragmentListener;
 import net.osmand.plus.OsmandApplication;
@@ -36,10 +28,18 @@ import net.osmand.plus.resources.ResourceManager.ReloadIndexesListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.DataStorageHelper;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FileUtils;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 

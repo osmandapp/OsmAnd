@@ -14,10 +14,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupInfo;
 import net.osmand.plus.backup.ImportBackupTask;
@@ -64,7 +64,7 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 			} else if (duplicates.isEmpty() && selectedItems != null) {
 				try {
 					settingsHelper.importSettings(RESTORE_ITEMS_KEY, selectedItems, false, getImportListener());
-				} catch (IllegalArgumentException e) {
+				} catch (IllegalStateException e) {
 					LOG.error(e.getMessage(), e);
 				}
 			}
@@ -120,7 +120,7 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 			}
 			try {
 				settingsHelper.importSettings(RESTORE_ITEMS_KEY, items, false, getImportListener());
-			} catch (IllegalArgumentException e) {
+			} catch (IllegalStateException e) {
 				LOG.error(e.getMessage(), e);
 			}
 		} else if (fragmentManager != null) {
@@ -145,7 +145,7 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 				duplicateStartTime = System.currentTimeMillis();
 				List<SettingsItem> selectedItems = settingsHelper.prepareSettingsItems(adapter.getData(), settingsItems, false);
 				settingsHelper.checkDuplicates(RESTORE_ITEMS_KEY, settingsItems, selectedItems, getDuplicatesListener());
-			} catch (IllegalArgumentException e) {
+			} catch (IllegalStateException e) {
 				LOG.error(e.getMessage(), e);
 			}
 		}
@@ -210,7 +210,7 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 		};
 		try {
 			settingsHelper.collectSettings(RESTORE_ITEMS_KEY, true, collectListener);
-		} catch (IllegalArgumentException e) {
+		} catch (IllegalStateException e) {
 			LOG.error(e.getMessage(), e);
 		}
 	}

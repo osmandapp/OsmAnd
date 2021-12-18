@@ -4,7 +4,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.JsonUtils;
+import net.osmand.plus.utils.JsonUtils;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.ui.DownloadDescriptionInfo;

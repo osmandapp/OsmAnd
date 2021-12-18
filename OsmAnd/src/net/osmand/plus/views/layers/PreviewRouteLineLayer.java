@@ -1,5 +1,9 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.render.RenderingRuleStorageProperties.ADDITIONAL;
+import static net.osmand.render.RenderingRuleStorageProperties.TAG;
+import static net.osmand.render.RenderingRuleStorageProperties.VALUE;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
@@ -11,13 +15,18 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.LayerDrawable;
 
-import net.osmand.AndroidUtils;
+import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.graphics.drawable.DrawableCompat;
+
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.views.layers.base.BaseRouteLayer;
 import net.osmand.plus.views.layers.geometry.GeometryWayStyle;
 import net.osmand.plus.views.layers.geometry.MultiColoringGeometryWay.GeometryGradientWayStyle;
 import net.osmand.plus.views.layers.geometry.MultiColoringGeometryWay.GeometrySolidWayStyle;
@@ -37,14 +46,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.graphics.drawable.DrawableCompat;
-
-import static net.osmand.render.RenderingRuleStorageProperties.ADDITIONAL;
-import static net.osmand.render.RenderingRuleStorageProperties.TAG;
-import static net.osmand.render.RenderingRuleStorageProperties.VALUE;
 
 public class PreviewRouteLineLayer extends BaseRouteLayer {
 
@@ -145,31 +146,35 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		previewLineGeometry.drawRouteSegment(tileBox, canvas, tx, ty, angles, distances, 0, styles);
 		canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
-		Matrix matrix = new Matrix();
-		Path path = new Path();
-		int lineLength = AndroidUtils.dpToPx(view.getContext(), 24);
-		int offset = AndroidUtils.isLayoutRtl(view.getContext()) ? lineLength : -lineLength;
-		int attrsTurnArrowColor = attrs.paint3.getColor();
-		if (customTurnArrowColor != 0) {
-			attrs.paint3.setColor(customTurnArrowColor);
+		if (previewRouteLineInfo.shouldShowTurnArrows()) {
+			Path path = new Path();
+			Matrix matrix = new Matrix();
+			int lineLength = AndroidUtils.dpToPx(view.getContext(), 24);
+			int offset = AndroidUtils.isLayoutRtl(view.getContext()) ? lineLength : -lineLength;
+			int attrsTurnArrowColor = attrs.paint3.getColor();
+			if (customTurnArrowColor != 0) {
+				attrs.paint3.setColor(customTurnArrowColor);
+			}
+			float routeWidth = previewLineGeometry.getDefaultWayStyle().getWidth(0);
+			if (routeWidth != 0) {
+				attrs.paint3.setStrokeWidth(routeWidth / 2);
+				//attrs.paint3.setStrokeWidth(Math.min(previewLineGeometry.getContext().getAttrs().defaultWidth3, routeWidth / 2));
+			}
+			path.moveTo(centerX + offset, startY);
+			path.lineTo(centerX, startY);
+			path.lineTo(centerX, startY - lineLength);
+			drawTurnArrow(canvas, matrix, centerX, startY - lineLength, centerX, startY);
+			canvas.drawPath(path, attrs.paint3);
+
+			path.reset();
+			path.moveTo(centerX, endY + lineLength);
+			path.lineTo(centerX, endY);
+			path.lineTo(centerX - offset, endY);
+
+			canvas.drawPath(path, attrs.paint3);
+			drawTurnArrow(canvas, matrix, centerX - offset, endY, centerX, endY);
+			attrs.paint3.setColor(attrsTurnArrowColor);
 		}
-		float routeWidth = previewLineGeometry.getDefaultWayStyle().getWidth(0);
-		if (routeWidth != 0) {
-			attrs.paint3.setStrokeWidth(routeWidth / 2);
-			//attrs.paint3.setStrokeWidth(Math.min(previewLineGeometry.getContext().getAttrs().defaultWidth3, routeWidth / 2));
-		}
-		path.moveTo(centerX + offset, startY);
-		path.lineTo(centerX, startY);
-		path.lineTo(centerX, startY - lineLength);
-		canvas.drawPath(path, attrs.paint3);
-		drawTurnArrow(canvas, matrix, centerX, startY - lineLength, centerX, startY);
-		path.reset();
-		path.moveTo(centerX, endY + lineLength);
-		path.lineTo(centerX, endY);
-		path.lineTo(centerX - offset, endY);
-		canvas.drawPath(path, attrs.paint3);
-		drawTurnArrow(canvas, matrix, centerX - offset, endY, centerX, endY);
-		attrs.paint3.setColor(attrsTurnArrowColor);
 
 		if (previewIcon == null) {
 			previewIcon = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), previewInfo.getIconId());
@@ -209,7 +214,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 	private void fillAltitudeGradientArrays(List<Double> distances, List<GeometryWayStyle<?>> styles) {
 		int[] colors = RouteColorize.COLORS;
 		for (int i = 1; i < distances.size(); i++) {
-			RouteGeometryWay.GeometryGradientWayStyle style = previewLineGeometry.getGradientWayStyle();
+			GeometryGradientWayStyle<?> style = previewLineGeometry.getGradientWayStyle();
 			styles.add(style);
 			double prevDist = distances.get(i - 1);
 			double currDist = distances.get(i);
@@ -232,11 +237,11 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		fillMultiColorLineArrays(palette, gradientLengthsRatio, tx, ty, angles, distances, colors);
 
 		for (int i = 1; i < tx.size(); i++) {
-			GeometryGradientWayStyle style = previewLineGeometry.getGradientWayStyle();
+			GeometryGradientWayStyle<?> style = previewLineGeometry.getGradientWayStyle();
 			styles.add(style);
 			double currDist = distances.get(i);
 			double nextDist = i + 1 == distances.size() ? 0 : distances.get(i + 1);
-			style.currColor = i == 1 ? colors.get(0) : ((GeometryGradientWayStyle) styles.get(i - 2)).nextColor;
+			style.currColor = i == 1 ? colors.get(0) : ((GeometryGradientWayStyle<?>) styles.get(i - 2)).nextColor;
 			if (colors.get(i) != 0) {
 				style.nextColor = colors.get(i);
 			} else {
@@ -248,7 +253,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 	}
 
 	private boolean fillRouteInfoAttributeArrays(List<Float> tx, List<Float> ty, List<Double> angles,
-	                                          List<Double> distances, List<GeometryWayStyle<?>> styles) {
+	                                             List<Double> distances, List<GeometryWayStyle<?>> styles) {
 		List<Integer> palette = fetchColorsOfRouteInfoAttribute();
 		if (Algorithms.isEmpty(palette)) {
 			return false;
@@ -261,7 +266,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		fillMultiColorLineArrays(palette, attributesLengthsRatio, tx, ty, angles, distances, colors);
 
 		for (int i = 0; i < tx.size() - 1; i++) {
-			GeometrySolidWayStyle style = previewLineGeometry.getSolidWayStyle(colors.get(i));
+			GeometrySolidWayStyle<?> style = previewLineGeometry.getSolidWayStyle(colors.get(i));
 			styles.add(style);
 		}
 		styles.add(styles.get(styles.size() - 1));
@@ -372,7 +377,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		List<RenderingRule> renderingRules = renderer.getRenderingAttributeRule(routeInfoAttribute)
 				.getIfElseChildren();
 		if (Algorithms.isEmpty(renderingRules)) {
-			Collections.emptyList();
+			return Collections.emptyList();
 		}
 
 		List<Integer> colors = new ArrayList<>();

@@ -4469,4 +4469,7 @@
     <string name="shared_string_size">Misura</string>
     <string name="created_on">Cerato su</string>
     <string name="use_routing_fallback_description">Utilizza la navigazione offline quando quella online non è disponibile.</string>
+    <string name="turn_arrows">Frecce di direzione</string>
+    <string name="turn_arrows_descr">Controlla la visibilità delle frecce di direzione nella linea del percorso.</string>
+    <string name="use_routing_fallback">Utilizza il calcolo del percorso di riserva</string>
 </resources>

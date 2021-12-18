@@ -8,8 +8,8 @@ import android.widget.LinearLayout;
 import androidx.annotation.ColorRes;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 

@@ -16,11 +16,11 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.helpers.CustomBarChartRenderer;
 import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
 import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
@@ -33,7 +33,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.core.graphics.ColorUtils;
 
-import static net.osmand.plus.track.ColorsCard.MINIMUM_CONTRAST_RATIO;
+import static net.osmand.plus.track.cards.ColorsCard.MINIMUM_CONTRAST_RATIO;
 
 public class CustomChartAdapter extends BaseChartAdapter<HorizontalBarChart, BarData, RouteStatistics> {
 

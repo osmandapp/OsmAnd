@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
 
@@ -16,6 +16,11 @@ public class FavoritePointEditor extends PointEditor {
 
 	public FavoritePointEditor(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
+	}
+
+	@Override
+	public boolean isProcessingTemplate() {
+		return false;
 	}
 
 	@Override
