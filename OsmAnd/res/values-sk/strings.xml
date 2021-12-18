@@ -4484,4 +4484,15 @@
     <string name="shared_string_size">Veľkosť</string>
     <string name="turn_arrows">Šípky odbočenia</string>
     <string name="turn_arrows_descr">Ovláda viditeľnosť šípiek odbočenia na línii trasy.</string>
+    <string name="waypoint_template">Šablóna pre body trasy</string>
+    <string name="shared_string_used">Použité</string>
+    <string name="files_with_route_restrictions">Súbory s obmedzením trasy</string>
+    <string name="predefined_waypoint_appearance_description">Stlačenie akcie automaticky uloží bod trasy s prednastavenými parametrami.</string>
+    <string name="always_ask_waypoint_appearance_description">Stlačenie akcie otvorí okno \"Pridať bod trasy\", kde môžete zmeniť názov a vzhľad.</string>
+    <string name="waypoint_appearance">Vzhľad bodu trasy</string>
+    <string name="track_file_description">Stlačenie akcie zobrazí okno s trasami dostupnými na výber.</string>
+    <string name="track_file">Súbor stopy</string>
+    <string name="navigate_point_format_swiss_grid">Švajčiarske súradnice (CH1903)</string>
+    <string name="navigate_point_format_swiss_grid_plus">Švajčiarske súradnice (CH1903+)</string>
+    <string name="shared_string_not_used">Nepoužité</string>
 </resources>

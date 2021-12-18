@@ -4447,7 +4447,7 @@
     <string name="memory_allocated_for_routing_ds">Веће вредности меморије убрзавају израчунавање дужих рута (преко 500km), али могу да утичу на перформансе других апликација.
 \nНема утицај на брзину израчунавања краћих рута.</string>
     <string name="shared_string_uphill">Узбрдо</string>
-    <string name="gps_filter_precision">GPS прецизност</string>
+    <string name="gps_filter_precision">Прецизност ГПС-а</string>
     <string name="save_as_copy">Сачувај као копију</string>
     <string name="shared_string_precision">Прецизност</string>
     <string name="distance_between_points">Удаљеност између тачака</string>
@@ -4479,5 +4479,5 @@
 \nБудите пажљиви са великим вредностима удаљености што је геометрија путање простија.</string>
     <string name="display_groups_visibility_dialog_description">Можете контролисати видљивост групе на карти. Ако је путања скривена, све групе ће такође бити скривене.</string>
     <string name="shared_string_size">Величина</string>
-    <string name="created_on">Датум креирања</string>
+    <string name="created_on">Датум стварања</string>
 </resources>

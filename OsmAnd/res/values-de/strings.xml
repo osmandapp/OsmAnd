@@ -4495,4 +4495,15 @@
     <string name="shared_string_size">Größe</string>
     <string name="turn_arrows_descr">Steuern Sie die Sichtbarkeit der Abbiegepfeile auf der Routenlinie.</string>
     <string name="turn_arrows">Abbiegepfeile</string>
+    <string name="waypoint_template">Wegpunktvorlage</string>
+    <string name="waypoint_appearance">Aussehen des Wegpunkts</string>
+    <string name="track_file">Trackdatei</string>
+    <string name="files_with_route_restrictions">Dateien mit Routenbeschränkungen</string>
+    <string name="predefined_waypoint_appearance_description">Wenn Sie auf die Option tippen, wird der Wegpunkt automatisch mit vordefinierten Parametern gespeichert.</string>
+    <string name="track_file_description">Wenn Sie auf die Option tippen, wird ein Dialog mit allen verfügbaren Tracks angezeigt, die Sie auswählen können.</string>
+    <string name="navigate_point_format_swiss_grid">Schweizer Landeskoordinaten (CH1903)</string>
+    <string name="navigate_point_format_swiss_grid_plus">Schweizer Landeskoordinaten (CH1903+)</string>
+    <string name="always_ask_waypoint_appearance_description">Tippen Sie auf die Option, um den Bildschirm \"Wegpunkt hinzufügen\" zu öffnen, in dem Sie Namen und Aussehen ändern können.</string>
+    <string name="shared_string_not_used">Nicht genutzt</string>
+    <string name="shared_string_used">Genutzt</string>
 </resources>

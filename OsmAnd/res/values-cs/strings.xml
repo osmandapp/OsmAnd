@@ -4487,4 +4487,15 @@
     <string name="created_on">Vytvořeno dne</string>
     <string name="turn_arrows_descr">Ovládá viditelnost směrových šipek na linii trasy.</string>
     <string name="turn_arrows">Směrové šipky</string>
+    <string name="track_file">Soubor se stopou</string>
+    <string name="shared_string_used">Použito</string>
+    <string name="files_with_route_restrictions">Soubory s omezeními trasy</string>
+    <string name="predefined_waypoint_appearance_description">Klepnutím na akci uložíte bod trasy s přednastavenými parametry.</string>
+    <string name="always_ask_waypoint_appearance_description">Klepnutím na akci otevřete obrazovku “Přidat bod trasy”, kde můžete změnit jméno a vzhled.</string>
+    <string name="waypoint_appearance">Vzhled bodu trasy</string>
+    <string name="track_file_description">Klepnutím na akci zobrazíte dialog se všemi dostupnými trasami.</string>
+    <string name="navigate_point_format_swiss_grid">Švýcarské souřadnice (CH1903)</string>
+    <string name="navigate_point_format_swiss_grid_plus">Švýcarské souřadnice (CH1903+)</string>
+    <string name="shared_string_not_used">Nepoužito</string>
+    <string name="waypoint_template">Šablona pro body trasy</string>
 </resources>

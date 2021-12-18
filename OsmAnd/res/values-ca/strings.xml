@@ -3885,4 +3885,17 @@
     <string name="gps_filter_hdop_desc">Definiu el valor màxim acceptat per a HDOP.
 \nS\'ocultaran els punts amb un valor més alt.</string>
     <string name="created_on">Creat el</string>
+    <string name="turn_arrows_descr">Controla la visibilitat de les fletxes de gir a la línia de ruta.</string>
+    <string name="shared_string_not_used">No s\'usa</string>
+    <string name="shared_string_used">Usat</string>
+    <string name="turn_arrows">Fletxes de gir</string>
+    <string name="gps_filter_smoothing">Suavitzat</string>
+    <string name="save_changes_into_file">Desa els canvis en un fitxer</string>
+    <string name="save_as_copy">Desa com a còpia</string>
+    <string name="storage_migration_wrong_folder_warning">No s\'han trobat dades d\'OsmAnd a la carpeta triada. Si us plau, reintenteu-ho.</string>
+    <string name="map_marker_options">Opcions del marcador de mapa</string>
+    <string name="app_modes_options">Triar modes d\'aplicació</string>
+    <string name="shared_string_size">Mida</string>
+    <string name="use_routing_fallback_description">Usa el guiatge sense connexió quan el guiatge amb connexió no està disponible.</string>
+    <string name="exit_without_saving_warning">Sortir sense desar els canvis\?</string>
 </resources>
