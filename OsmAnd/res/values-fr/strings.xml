@@ -4476,22 +4476,22 @@
 \nLes points de la trace en dessous de cette distance du dernier point visible seront masqués.
 \nAttention : plus cette distance est élevée, plus la forme de la trace sera simplifiée.</string>
     <string name="use_routing_fallback_description">Utiliser la navigation hors ligne lorsque la navigation en ligne n\'est pas disponible.</string>
-    <string name="use_routing_fallback">Utiliser le routage de secours</string>
+    <string name="use_routing_fallback">Routage de secours hors ligne</string>
     <string name="created_on">Créé le</string>
     <string name="shared_string_size">Taille</string>
     <string name="gps_filter_hdop_desc">Définissez la valeur maximale acceptée pour HDOP.
 \nLes points de valeur supérieure seront masqués.</string>
-    <string name="turn_arrows_descr">Contrôlez la visibilité des flèches de direction sur la route.</string>
+    <string name="turn_arrows_descr">Activer ou non l\'affichage des flèches de direction sur la route.</string>
     <string name="turn_arrows">Flèches de direction</string>
     <string name="track_file">Fichier de trace</string>
     <string name="shared_string_used">Utilisé</string>
     <string name="files_with_route_restrictions">Fichiers avec restrictions d\'itinéraire</string>
     <string name="waypoint_appearance">Apparence du point de passage</string>
-    <string name="track_file_description">Appuyer sur l’action affichera une fenêtre avec toutes les traces disponibles pour sélection.</string>
+    <string name="track_file_description">Appuyer sur cette action affichera un écran de sélection des traces.</string>
     <string name="shared_string_not_used">Non utilisé</string>
     <string name="waypoint_template">Modèle de point de passage</string>
     <string name="navigate_point_format_swiss_grid_plus">Grille suisse (CH1903+)</string>
     <string name="navigate_point_format_swiss_grid">Grille suisse (CH1903)</string>
-    <string name="predefined_waypoint_appearance_description">Appuyer sur l’action enregistrera automatiquement le point de passage avec les paramètres prédéfinis.</string>
-    <string name="always_ask_waypoint_appearance_description">Appuyer sur l’action ouvrira l’écran « Ajouter un point de passage » dans lequel vous pourrez modifier son nom et son apparence.</string>
+    <string name="predefined_waypoint_appearance_description">Appuyer sur cette action enregistrera automatiquement le point de passage avec les paramètres prédéfinis.</string>
+    <string name="always_ask_waypoint_appearance_description">Appuyer sur cette action ouvrira l’écran « Ajouter un point de passage » où vous pourrez définir son nom et son apparence.</string>
 </resources>
