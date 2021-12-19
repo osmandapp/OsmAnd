@@ -1338,7 +1338,7 @@ public class MenuBuilder {
 		if (plugin != null) {
 			if (plugin.isLocked()) {
 				buildGetWikipediaBanner(viewGroup);
-			} else if (showNearestWiki && latLon != null && amenity != null) {
+			} else if (showNearestWiki && latLon != null) {
 				PoiUIFilter filter = app.getPoiFilters().getTopWikiPoiFilter();
 				if (filter != null) {
 					searchSortedAmenities(filter, latLon, listener);
