@@ -4524,7 +4524,7 @@
 \nلا يوجد تأثير على سرعة حساب الطرق القصيرة.</string>
     <string name="memory_allocated_for_routing">الذاكرة المخصصة للتوجيه</string>
     <string name="reading_files">قراءة الملفات …</string>
-    <string name="shared_string_hide_all">إخفاء الكل</string>
+    <string name="shared_string_hide_all">أخف الكل</string>
     <string name="migration_files_present">يوجد %1$d ملف (%2$s) في الموقع المحدد \'%3$s\'.</string>
     <string name="no_items_selected_warning">الرجاء تحديد عنصر واحد على الأقل</string>
     <string name="display_groups_visibility_dialog_description">يمكنك التحكم في رؤية المجموعة على الخريطة. إذا كان المسار مخفيًا ، فسيتم إخفاء جميع المجموعات أيضًا.</string>
