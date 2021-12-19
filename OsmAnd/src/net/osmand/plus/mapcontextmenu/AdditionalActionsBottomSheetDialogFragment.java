@@ -153,8 +153,8 @@ public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialo
 	public void onStart() {
 		super.onStart();
 		if (!portrait) {
-			if (getDialog() !=null){
-				final Window window = getDialog().getWindow();
+			Window window = requireDialog().getWindow();
+			if (window != null){
 				WindowManager.LayoutParams params = window.getAttributes();
 				params.width = getResources().getDisplayMetrics().widthPixels / 2;
 				window.setAttributes(params);
