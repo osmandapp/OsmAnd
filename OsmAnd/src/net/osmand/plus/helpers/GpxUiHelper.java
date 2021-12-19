@@ -1102,23 +1102,18 @@ public class GpxUiHelper {
 		}, "Loading gpx").start(); //$NON-NLS-1$
 	}
 
-	public static void setupGPXChart(OsmandApplication ctx, LineChart mChart, int yLabelsCount) {
-		OsmandSettings settings = ctx.getSettings();
-		setupGPXChart(mChart, yLabelsCount, 24f, 16f, settings.isLightContent(), true);
+	public static void setupGPXChart(@NonNull LineChart mChart) {
+		setupGPXChart(mChart, 24f, 16f, true);
 	}
 
-	public static void setupGPXChart(LineChart mChart, int yLabelsCount, float topOffset, float bottomOffset,
-	                                 boolean light, boolean useGesturesAndScale) {
-		setupGPXChart(mChart, yLabelsCount, topOffset, bottomOffset, light, useGesturesAndScale, null);
+	public static void setupGPXChart(@NonNull LineChart mChart, float topOffset, float bottomOffset,
+	                                 boolean useGesturesAndScale) {
+		setupGPXChart(mChart, topOffset, bottomOffset, useGesturesAndScale, null);
 	}
 
-	public static void setupGPXChart(LineChart mChart, int yLabelsCount, float topOffset, float bottomOffset,
-	                                 boolean light, boolean useGesturesAndScale, Drawable markerIcon) {
-		if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-			mChart.setHardwareAccelerationEnabled(false);
-		} else {
-			mChart.setHardwareAccelerationEnabled(true);
-		}
+	public static void setupGPXChart(@NonNull LineChart mChart, float topOffset, float bottomOffset,
+	                                 boolean useGesturesAndScale, @Nullable Drawable markerIcon) {
+		mChart.setHardwareAccelerationEnabled(true);
 		mChart.setTouchEnabled(useGesturesAndScale);
 		mChart.setDragEnabled(useGesturesAndScale);
 		mChart.setScaleEnabled(useGesturesAndScale);
@@ -1158,8 +1153,7 @@ public class GpxUiHelper {
 		yAxis.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
 		yAxis.setXOffset(16f);
 		yAxis.setYOffset(-6f);
-		yAxis.setLabelCount(yLabelsCount);
-		xAxis.setTextColor(labelsColor);
+		yAxis.setLabelCount(3, true);
 
 		yAxis = mChart.getAxisRight();
 		yAxis.enableGridDashedLine(10f, 5f, 0f);
@@ -1168,8 +1162,7 @@ public class GpxUiHelper {
 		yAxis.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
 		yAxis.setXOffset(16f);
 		yAxis.setYOffset(-6f);
-		yAxis.setLabelCount(yLabelsCount);
-		xAxis.setTextColor(labelsColor);
+		yAxis.setLabelCount(3, true);
 		yAxis.setEnabled(false);
 
 		Legend legend = mChart.getLegend();

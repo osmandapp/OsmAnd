@@ -173,7 +173,7 @@ public class ElevationProfileWidget {
 
 		chart = view.findViewById(R.id.line_chart);
 		Drawable markerIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_location_color);
-		GpxUiHelper.setupGPXChart(chart, 4, 24f, 16f, !isNightMode(), true, markerIcon);
+		GpxUiHelper.setupGPXChart(chart, 24f, 16f, true, markerIcon);
 		chart.setHighlightPerTapEnabled(false);
 		chart.setHighlightPerDragEnabled(false);
 		chartAdapter = new BaseCommonChartAdapter(app, chart, true);
