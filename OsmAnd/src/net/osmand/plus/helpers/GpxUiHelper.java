@@ -61,6 +61,7 @@ import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.components.YAxis.YAxisLabelPosition;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -1113,6 +1114,8 @@ public class GpxUiHelper {
 
 	public static void setupGPXChart(@NonNull LineChart mChart, float topOffset, float bottomOffset,
 	                                 boolean useGesturesAndScale, @Nullable Drawable markerIcon) {
+		Context context = mChart.getContext();
+
 		mChart.setHardwareAccelerationEnabled(true);
 		mChart.setTouchEnabled(useGesturesAndScale);
 		mChart.setDragEnabled(useGesturesAndScale);
@@ -1131,39 +1134,44 @@ public class GpxUiHelper {
 
 		// create a custom MarkerView (extend MarkerView) and specify the layout
 		// to use for it
-		GPXMarkerView mv = new GPXMarkerView(mChart.getContext(), markerIcon);
+		GPXMarkerView mv = new GPXMarkerView(context, markerIcon);
 		mv.setChartView(mChart); // For bounds control
 		mChart.setMarker(mv); // Set the marker to the chart
 		mChart.setDrawMarkers(true);
 
-		int labelsColor = ContextCompat.getColor(mChart.getContext(), R.color.description_font_and_bottom_sheet_icons);
+		int labelsColor = ContextCompat.getColor(context, R.color.description_font_and_bottom_sheet_icons);
 		XAxis xAxis = mChart.getXAxis();
 		xAxis.setDrawAxisLine(false);
 		xAxis.setDrawGridLines(true);
 		xAxis.setGridLineWidth(1.5f);
-		xAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_black_grid));
+		xAxis.setGridColor(ContextCompat.getColor(context, R.color.gpx_chart_black_grid));
 		xAxis.enableGridDashedLine(25f, Float.MAX_VALUE, 0f);
 		xAxis.setPosition(BOTTOM);
 		xAxis.setTextColor(labelsColor);
 
-		YAxis yAxis = mChart.getAxisLeft();
-		yAxis.enableGridDashedLine(10f, 5f, 0f);
-		yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.divider_color));
-		yAxis.setDrawAxisLine(false);
-		yAxis.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
-		yAxis.setXOffset(16f);
-		yAxis.setYOffset(-6f);
-		yAxis.setLabelCount(3, true);
+		int dp4 = AndroidUtils.dpToPx(context, 4);
+		int yAxisGridColor = ContextCompat.getColor(context, R.color.divider_color);
 
-		yAxis = mChart.getAxisRight();
-		yAxis.enableGridDashedLine(10f, 5f, 0f);
-		yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.divider_color));
-		yAxis.setDrawAxisLine(false);
-		yAxis.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
-		yAxis.setXOffset(16f);
-		yAxis.setYOffset(-6f);
-		yAxis.setLabelCount(3, true);
-		yAxis.setEnabled(false);
+		YAxis leftYAxis = mChart.getAxisLeft();
+		leftYAxis.enableGridDashedLine(dp4, dp4, 0f);
+		leftYAxis.setGridColor(yAxisGridColor);
+		leftYAxis.setGridLineWidth(1f);
+		leftYAxis.setDrawAxisLine(false);
+		leftYAxis.setPosition(YAxisLabelPosition.INSIDE_CHART);
+		leftYAxis.setXOffset(16f);
+		leftYAxis.setYOffset(-6f);
+		leftYAxis.setLabelCount(3, true);
+
+		YAxis rightYAxis = mChart.getAxisRight();
+		rightYAxis.enableGridDashedLine(dp4, dp4, 0f);
+		rightYAxis.setGridColor(yAxisGridColor);
+		rightYAxis.setGridLineWidth(1f);
+		rightYAxis.setDrawAxisLine(false);
+		rightYAxis.setPosition(YAxisLabelPosition.INSIDE_CHART);
+		rightYAxis.setXOffset(16f);
+		rightYAxis.setYOffset(-6f);
+		rightYAxis.setLabelCount(3, true);
+		rightYAxis.setEnabled(false);
 
 		Legend legend = mChart.getLegend();
 		legend.setEnabled(false);
@@ -1449,7 +1457,6 @@ public class GpxUiHelper {
 			yAxis = mChart.getAxisLeft();
 		}
 		yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_blue_label));
-		yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_blue_grid));
 		yAxis.setGranularity(1f);
 		yAxis.resetAxisMinimum();
 		yAxis.setValueFormatter((value, axis) -> (int) value + " " + mainUnitY);
@@ -1542,10 +1549,8 @@ public class GpxUiHelper {
 		}
 		if (analysis.hasSpeedInTrack()) {
 			yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange_label));
-			yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange_grid));
 		} else {
 			yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_red_label));
-			yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_red_grid));
 		}
 
 		yAxis.setAxisMinimum(0f);
@@ -1692,7 +1697,6 @@ public class GpxUiHelper {
 			yAxis = mChart.getAxisLeft();
 		}
 		yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_green_label));
-		yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_green_grid));
 		yAxis.setGranularity(1f);
 		yAxis.resetAxisMinimum();
 		yAxis.setValueFormatter((value, axis) -> (int) value + " " + mainUnitY);
