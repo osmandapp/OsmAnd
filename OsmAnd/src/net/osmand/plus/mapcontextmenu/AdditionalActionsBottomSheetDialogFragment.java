@@ -157,6 +157,7 @@ public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialo
 				final Window window = getDialog().getWindow();
 				WindowManager.LayoutParams params = window.getAttributes();
 				params.width = getResources().getDisplayMetrics().widthPixels / 2;
+				window.setAttributes(params);
 			}
 		}
 	}
