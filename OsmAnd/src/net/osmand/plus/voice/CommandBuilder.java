@@ -70,7 +70,7 @@ public abstract class CommandBuilder {
 
 	public abstract CommandBuilder speedAlarm(int maxSpeed, float speed);
 
-	public abstract CommandBuilder speedCameraAlarm(double dist, int maxSpeed);
+	public abstract CommandBuilder speedCameraAlarm(double dist, int maxSpeed, String fallbackAttentionType);
 
 	public abstract CommandBuilder attention(String type);
 

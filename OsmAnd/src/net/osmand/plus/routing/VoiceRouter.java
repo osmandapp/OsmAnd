@@ -374,7 +374,7 @@ public class VoiceRouter {
 		CommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
 			if (dist > 0 && maxSpeed > 0) {
-				p.speedCameraAlarm(dist, maxSpeed);
+				p.speedCameraAlarm(dist, maxSpeed, String.valueOf(AlarmInfoType.SPEED_CAMERA));
 			} else {
 				p.attention(String.valueOf(AlarmInfoType.SPEED_CAMERA));
 			}

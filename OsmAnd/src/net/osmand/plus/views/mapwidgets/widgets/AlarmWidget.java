@@ -144,69 +144,17 @@ public class AlarmWidget {
 						}
 					}
 
-					boolean isRegionChanged = cachedRegion != info.region;
-					if (isRegionChanged) {
-						cachedRegion = info.region;
-					}
-
-					boolean isAlarmTypeChanged = cachedAlarmType != alarm.getType();
-					if (isAlarmTypeChanged) {
-						cachedAlarmType = alarm.getType();
-					}
-
-					if (!Algorithms.objectEquals(info.text, cachedText) || isRegionChanged || isAlarmTypeChanged) {
+					if (!Algorithms.objectEquals(info.text, cachedText) ||
+							!Algorithms.objectEquals(info.bottomText, cachedBottomText) ||
+							cachedRegion != info.region || cachedAlarmType != alarm.getType()) {
 						changed = true;
 						cachedText = info.text;
-						if (layout != null && widgetText != null) {
-							widgetText.setText(cachedText);
-							Resources res = layout.getContext().getResources();
-							if (cachedAlarmType == AlarmInfo.AlarmInfoType.SPEED_LIMIT && info.americanType && !info.isCanadianRegion) {
-								int topPadding = res.getDimensionPixelSize(R.dimen.map_alarm_text_top_padding);
-								widgetText.setPadding(0, topPadding, 0, 0);
-							} else {
-								widgetText.setPadding(0, 0, 0, 0);
-							}
-
-							if (cachedAlarmType == AlarmInfo.AlarmInfoType.SPEED_CAMERA) {
-								FrameLayout.LayoutParams widgetTextLayoutParams = new FrameLayout.LayoutParams(
-										res.getDimensionPixelSize(R.dimen.map_alarm_speed_camera_speed_info_size),
-										res.getDimensionPixelSize(R.dimen.map_alarm_speed_camera_speed_info_size));
-
-								widgetTextLayoutParams.gravity = Gravity.RIGHT | Gravity.TOP;
-
-								widgetText.setLayoutParams(widgetTextLayoutParams);
-								widgetText.setGravity(Gravity.CENTER);
-								widgetText.setTextSize(COMPLEX_UNIT_PX, res.getDimensionPixelSize(R.dimen.map_alarm_speed_camera_speed_info_text_size));
-							} else {
-								FrameLayout.LayoutParams widgetTextLayoutParams = new FrameLayout.LayoutParams(
-										FrameLayout.LayoutParams.WRAP_CONTENT,
-										FrameLayout.LayoutParams.WRAP_CONTENT);
-
-								widgetTextLayoutParams.gravity = Gravity.CENTER;
-
-								widgetText.setLayoutParams(widgetTextLayoutParams);
-								widgetText.setGravity(Gravity.NO_GRAVITY);
-								widgetText.setTextSize(COMPLEX_UNIT_PX, res.getDimensionPixelSize(R.dimen.map_alarm_text_size));
-							}
-						}
-					}
-					if (!Algorithms.objectEquals(info.bottomText, cachedBottomText) || isRegionChanged || isAlarmTypeChanged) {
-						changed = true;
 						cachedBottomText = info.bottomText;
-						if (layout != null && widgetBottomText != null) {
-							widgetBottomText.setText(cachedBottomText);
-							Resources res = layout.getContext().getResources();
-							if (cachedAlarmType == AlarmInfo.AlarmInfoType.SPEED_LIMIT && info.isCanadianRegion) {
-								int bottomPadding = res.getDimensionPixelSize(R.dimen.map_button_margin);
-								widgetBottomText.setPadding(0, 0, 0, bottomPadding);
-								widgetBottomText.setTextSize(COMPLEX_UNIT_PX, res.getDimensionPixelSize(R.dimen.map_alarm_bottom_si_text_size));
-							} else {
-								widgetBottomText.setPadding(0, 0, 0, 0);
-								widgetBottomText.setTextSize(COMPLEX_UNIT_PX, res.getDimensionPixelSize(R.dimen.map_alarm_bottom_text_size));
-							}
-							widgetBottomText.setTextColor(ContextCompat.getColor(layout.getContext(),
-									info.americanType ? R.color.color_black : R.color.color_white));
-						}
+						cachedRegion = info.region;
+						cachedAlarmType = alarm.getType();
+
+						updateTextWidget(info);
+						updateBottomTextWidget(info);
 					}
 				}
 			}
@@ -232,6 +180,64 @@ public class AlarmWidget {
 			widgetBitmap = null;
 		}
 		return true;
+	}
+
+	private void updateTextWidget(@NonNull AlarmWidgetInfo info) {
+		if (layout == null || widgetText == null) {
+			return;
+		}
+
+		widgetText.setText(info.text);
+		Resources res = layout.getContext().getResources();
+
+		if (info.alarm.getType() == AlarmInfo.AlarmInfoType.SPEED_LIMIT && info.americanType && !info.isCanadianRegion) {
+			int topPadding = res.getDimensionPixelSize(R.dimen.map_alarm_text_top_padding);
+			widgetText.setPadding(0, topPadding, 0, 0);
+		} else {
+			widgetText.setPadding(0, 0, 0, 0);
+		}
+
+		if (info.alarm.getType() == AlarmInfo.AlarmInfoType.SPEED_CAMERA) {
+			FrameLayout.LayoutParams widgetTextLayoutParams = new FrameLayout.LayoutParams(
+					res.getDimensionPixelSize(R.dimen.map_alarm_speed_camera_speed_info_size),
+					res.getDimensionPixelSize(R.dimen.map_alarm_speed_camera_speed_info_size));
+
+			widgetTextLayoutParams.gravity = Gravity.RIGHT | Gravity.TOP;
+
+			widgetText.setLayoutParams(widgetTextLayoutParams);
+			widgetText.setGravity(Gravity.CENTER);
+			widgetText.setTextSize(COMPLEX_UNIT_PX, res.getDimensionPixelSize(R.dimen.map_alarm_speed_camera_speed_info_text_size));
+		} else {
+			FrameLayout.LayoutParams widgetTextLayoutParams = new FrameLayout.LayoutParams(
+					FrameLayout.LayoutParams.WRAP_CONTENT,
+					FrameLayout.LayoutParams.WRAP_CONTENT);
+
+			widgetTextLayoutParams.gravity = Gravity.CENTER;
+
+			widgetText.setLayoutParams(widgetTextLayoutParams);
+			widgetText.setGravity(Gravity.NO_GRAVITY);
+			widgetText.setTextSize(COMPLEX_UNIT_PX, res.getDimensionPixelSize(R.dimen.map_alarm_text_size));
+		}
+	}
+
+	private void updateBottomTextWidget(@NonNull AlarmWidgetInfo info) {
+		if (layout == null || widgetBottomText == null) {
+			return;
+		}
+
+		widgetBottomText.setText(info.bottomText);
+		Resources res = layout.getContext().getResources();
+
+		if (info.alarm.getType() == AlarmInfo.AlarmInfoType.SPEED_LIMIT && info.isCanadianRegion) {
+			int bottomPadding = res.getDimensionPixelSize(R.dimen.map_button_margin);
+			widgetBottomText.setPadding(0, 0, 0, bottomPadding);
+			widgetBottomText.setTextSize(COMPLEX_UNIT_PX, res.getDimensionPixelSize(R.dimen.map_alarm_bottom_si_text_size));
+		} else {
+			widgetBottomText.setPadding(0, 0, 0, 0);
+			widgetBottomText.setTextSize(COMPLEX_UNIT_PX, res.getDimensionPixelSize(R.dimen.map_alarm_bottom_text_size));
+		}
+		widgetBottomText.setTextColor(ContextCompat.getColor(layout.getContext(),
+				info.americanType ? R.color.color_black : R.color.color_white));
 	}
 
 	@NonNull

@@ -214,7 +214,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 
 		addButton(ll, "Attention prompts:", builder(p));
 		addButton(ll, "\u25BA (9.1)  You are exceeding the speed limit '50' (18 m/s)", builder(p).speedAlarm(50, 18f));
-		addButton(ll, "\u25BA (9.2)  Attention, speed camera, distance 650m, speed limit '50' (18 m/s)", builder(p).speedCameraAlarm(650f, 50));
+		addButton(ll, "\u25BA (9.2)  Attention, speed camera, distance 650m, speed limit '50' (18 m/s)", builder(p).speedCameraAlarm(650f, 50, "SPEED_CAMERA"));
 		addButton(ll, "\u25BA (9.3)  Attention, speed camera", builder(p).attention("SPEED_CAMERA"));
 		addButton(ll, "\u25BA (9.4)  Attention, border control", builder(p).attention("BORDER_CONTROL"));
 		addButton(ll, "\u25BA (9.5)  Attention, railroad crossing", builder(p).attention("RAILWAY"));
