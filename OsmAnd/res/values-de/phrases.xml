@@ -22,7 +22,7 @@
     <string name="poi_craft_agricultural_engines">Landmaschinen</string>
     <string name="poi_aerodrome">Flughafen</string>
     <string name="poi_alcohol">Spirituosenladen</string>
-    <string name="poi_alpine_hut">Bewirtschaftete Schutzhütte</string>
+    <string name="poi_alpine_hut">Bewirtschaftete Schutzhütte;Unterstand</string>
     <string name="poi_ambulance_station">Rettungswache</string>
     <string name="poi_anime">Anime-Shop</string>
     <string name="poi_antiques">Antiquitätenhändler</string>
@@ -504,7 +504,7 @@
     <string name="poi_studio">Studio</string>
     <string name="poi_suburb">Stadtteil</string>
     <string name="poi_subway_entrance">U-Bahnhofeingang</string>
-    <string name="poi_subway_station">ja</string>
+    <string name="poi_subway_station">Ja;U-Bahnstation</string>
     <string name="poi_craft_sun_protection">Sonnenschutz</string>
     <string name="poi_supermarket">Supermarkt</string>
     <string name="poi_surveillance">Überwachung</string>

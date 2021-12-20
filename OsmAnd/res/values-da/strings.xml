@@ -4489,10 +4489,21 @@
     <string name="shared_string_statistics">Statistikker</string>
     <string name="distance_between_points">Afstand mellem punkter</string>
     <string name="shared_string_gps_filter">GPS-filter</string>
-    <string name="use_routing_fallback_description">Brug offline-ruteberegning, når der ikke er forbindelse til online-ruteberegning.</string>
-    <string name="use_routing_fallback">Brug ruteberegningsalternativ</string>
+    <string name="use_routing_fallback_description">Brug offline-ruteberegning, når online-ruteberegning ikke er tilgængelig.</string>
+    <string name="use_routing_fallback">Offline alternativ til ruteberegning</string>
     <string name="created_on">Oprettet den</string>
     <string name="shared_string_size">Størrelse</string>
-    <string name="turn_arrows_descr">Indstil synligheden af svingpilene på rutelinjen.</string>
+    <string name="turn_arrows_descr">Vælg om svingpile skal vises på rutelinjen.</string>
     <string name="turn_arrows">Svingpile</string>
+    <string name="waypoint_template">Skabelon for rutepunkt</string>
+    <string name="predefined_waypoint_appearance_description">Ved tryk på denne genvej gemmes rutepunktet automatisk med foruddefinerede parametre.</string>
+    <string name="shared_string_used">Brugt</string>
+    <string name="files_with_route_restrictions">Filer med rutebegrænsninger</string>
+    <string name="waypoint_appearance">Udseende af rutepunkt</string>
+    <string name="track_file_description">Ved tryk på denne genvej vises en dialog med spor, der kan vælges.</string>
+    <string name="track_file">Sporfil</string>
+    <string name="navigate_point_format_swiss_grid_plus">Schweizisk koordinatsystem (CH1903+)</string>
+    <string name="always_ask_waypoint_appearance_description">Ved tryk på denne genvej åbnes skærmen \"Tilføj rutepunkt\", hvor du kan ændre navn og udseende.</string>
+    <string name="shared_string_not_used">Ikke anvendt</string>
+    <string name="navigate_point_format_swiss_grid">Schweizisk koordinatsystem (CH1903)</string>
 </resources>
