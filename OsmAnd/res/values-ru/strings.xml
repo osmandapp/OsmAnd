@@ -4494,4 +4494,12 @@
     <string name="use_routing_fallback_description">Использовать офлайн маршрутизацию, если онлайн недоступна.</string>
     <string name="turn_arrows">Стрелки поворота</string>
     <string name="turn_arrows_descr">Управляйте видимостью стрелок поворота на линии маршрута.</string>
+    <string name="waypoint_appearance">Внешний вид путевой точки</string>
+    <string name="track_file">Файл трека</string>
+    <string name="waypoint_template">Шаблон путевой точки</string>
+    <string name="navigate_point_format_swiss_grid">Швейцарская сетка (CH1903)</string>
+    <string name="navigate_point_format_swiss_grid_plus">Швейцарская сетка (CH1903 +)</string>
+    <string name="predefined_waypoint_appearance_description">Нажатие на действие автоматически сохранит путевую точку с предопределенными параметрами.</string>
+    <string name="always_ask_waypoint_appearance_description">Нажатие на действие откроет экран «Добавить путевую точку», где можно изменить её название и внешний вид.</string>
+    <string name="track_file_description">Нажатие на действие откроет диалог выбора доступных треков.</string>
 </resources>

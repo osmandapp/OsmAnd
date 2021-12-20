@@ -187,7 +187,7 @@
     <string name="osm_edits">OSM düzəlişləri</string>
     <string name="osmand_parking_hour">s</string>
     <string name="osmand_parking_minute">dəq</string>
-    <string name="osmand_parking_time_left">sol</string>
+    <string name="osmand_parking_time_left">qalıb</string>
     <string name="your_edits">Düzəlişləriniz</string>
     <string name="waypoint_visit_after">Sonra ziyarət et</string>
     <string name="waypoint_visit_before">Öncə ziyarət et</string>
@@ -324,7 +324,7 @@
     <string name="map_widget_plain_time">Hazırkı vaxt</string>
     <string name="selected_gpx_info_show">"
 \n
-\nXəritədə görmək üçün uzun basın"</string>
+\nXəritədə görmək üçün toxunub saxlayın"</string>
     <string name="local_index_gpx_info_show">"
 \n
 \nSeçimlər üçün basıb saxlayın"</string>
@@ -786,7 +786,7 @@
     <string name="route_calculation">Marşrut hesablanması</string>
     <string name="shared_string_appearance">Görünüş</string>
     <string name="shared_string_paused">Fasilə verildi</string>
-    <string name="shared_string_trip">Səyahət</string>
+    <string name="shared_string_trip">Səfər</string>
     <string name="rendering_attr_contourColorScheme_description">Kontur xətlərinin rəng sxemi</string>
     <string name="rendering_value_light_brown_name">Açıq qəhvəyi</string>
     <string name="rendering_value_dark_brown_name">Tünd qəhvəyi</string>
@@ -884,7 +884,7 @@
     <string name="online_photos">Onlayn şəkillər</string>
     <string name="shared_string_add_photos">Şəkillər əlavə et</string>
     <string name="live_updates">Canlı yeniləmələr</string>
-    <string name="access_from_map_description">Menyu düyməsi menyunun əvəzinə idarəetmə panelini açır</string>
+    <string name="access_from_map_description">Menyu düyməsi menyunun əvəzinə alət panelini açır</string>
     <string name="lang_als">Albanca (Tosk)</string>
     <string name="regions">Regionlar</string>
     <string name="days_behind">gün əvvəl</string>
@@ -944,7 +944,7 @@
     <string name="shared_string_target_points">Təyinat nöqtələri</string>
     <string name="amenity_type_user_defined">İstifadəçi müəyyənləşdirib</string>
     <string name="mapillary">Mapillary</string>
-    <string name="private_access_routing_req">Təyinatınız xüsusi girişi olan ərazidə yerləşir. Bu səyahət üçün şəxsi yollardan istifadə etməyə icazə verilsin\?</string>
+    <string name="private_access_routing_req">Təyinatınız xüsusi girişi olan ərazidə yerləşir. Bu səfər üçün şəxsi yollardan istifadə etməyə icazə verilsin\?</string>
     <string name="shared_string_plugin">Qoşma</string>
     <string name="srtm_purchase_header">Dərəcəli şaquli sahələri göstərmək üçün “Kontur xətləri” qoşmasını alın və quraşdırın.</string>
     <string name="plugin_settings">Qoşmalar</string>
@@ -1074,7 +1074,7 @@
     <string name="router_service">Naviqasiya xidməti</string>
     <string name="download_question_exist">{0} üçün oflayn məlumatlar artıq var ({1}). Yenilənsin ({2})?</string>
     <string name="downloading_list_indexes">Mövcud regionların siyahısı endirilir…</string>
-    <string name="list_index_files_was_not_loaded">Regionların siyahısı https://osmand.net-dən alınmadı.</string>
+    <string name="list_index_files_was_not_loaded">Regionların siyahısını https://osmand.net-dən almaq olmadı.</string>
     <string name="fav_points_edited">Favorit nöqtəyə düzəliş edildi</string>
     <string name="fav_points_not_exist">Favorit nöqtələr yoxdur</string>
     <string name="only_show">Marşrutu göstər</string>
@@ -1258,17 +1258,17 @@
     <string name="access_disable_offroute_recalc">Çıxanda marşrut yenidən hesablanmasın</string>
     <string name="access_disable_wrong_direction_recalc">Əks istiqamət üçün marşrut yenidən hesablanmasın</string>
     <string name="recalculate_route">Marşrutu yenidən hesabla</string>
-    <string name="use_fast_recalculation_desc">Marşrutun yalnız başlanğıc hissəsini yenidən hesablayır, uzun səyahətlər üçün faydalıdır.</string>
-    <string name="planning_trip_item">Səyahət planlaşdırma</string>
+    <string name="use_fast_recalculation_desc">Marşrutun yalnız başlanğıc hissəsini yenidən hesablayır, uzun səfərlər üçün faydalıdır.</string>
+    <string name="planning_trip_item">Səfər planlaşdırma</string>
     <string name="map_viewing_item">Xəritəyə baxış</string>
     <string name="quick_action_map_style_switch">Xəritə stili “%s” olaraq dəyişdirildi.</string>
     <string name="quick_action_add_osm_bug">OSM qeyd əlavə et</string>
     <string name="shared_string_recorded">Qeyd edilən</string>
     <string name="shared_string_record">Qeyd et</string>
-    <string name="shared_string_trip_recording">Səyahət qeydetmə</string>
-    <string name="record_plugin_name">Səyahət qeydetmə</string>
-    <string name="monitoring_settings">Səyahət qeydetmə</string>
-    <string name="monitoring_settings_descr">Səyahətlərinizin necə qeyd ediləcəyini tənzimləyin.</string>
+    <string name="shared_string_trip_recording">Səfər qeydetmə</string>
+    <string name="record_plugin_name">Səfər qeydetmə</string>
+    <string name="monitoring_settings">Səfər qeydetmə</string>
+    <string name="monitoring_settings_descr">Səfərlərinizin necə qeyd ediləcəyini tənzimləyin.</string>
     <string name="av_use_external_recorder_descr">Video çəkmək üçün sistem proqramını istifadə et.</string>
     <string name="av_use_external_recorder">Sistem proqramını istifadə et</string>
     <string name="recording_error">Qeydetmə alınmadı</string>
@@ -1310,9 +1310,9 @@
     <string name="distance_measurement_finish_subtrack">Yeni bir alt iz başlat</string>
     <string name="osmand_background_plugin_description">GPS cihazını vaxtaşırı oyadaraq arxa fon (ekran sönülü) rejimində naviqasiya və izləməni aktivləşdirmək üçün parametrləri göstərir.</string>
     <string name="dropbox_plugin_description">İzləri və səs/video qeydlərini Dropbox hesabınızla sinxronlaşdırın.</string>
-    <string name="enable_plugin_monitoring_services">Mövqe qeydiyyatı xidmətini (GPX qeydiyyatı, onlayn izləmə) istifadə etmək üçün “Səyahət qeydetmə” qoşmasını aktivləşdirin</string>
+    <string name="enable_plugin_monitoring_services">Mövqe qeydiyyatı xidmətini (GPX qeydiyyatı, onlayn izləmə) istifadə etmək üçün “Səfər qeydetmə” qoşmasını aktivləşdirin</string>
     <string name="gpxup_trackable">İzlənə bilən</string>
-    <string name="gpx_monitoring_disabled_warn">GPX widget və ya “Səyahət qeydetmə” parametri ilə izləri qeyd et.</string>
+    <string name="gpx_monitoring_disabled_warn">GPX widget və ya “Səfər qeydetmə” parametri ilə izləri qeyd et.</string>
     <string name="show_current_gpx_title">Hazırkı izi göstər</string>
     <string name="add_waypoint_dialog_title">Qeyd edilən GPX izinə yol nöqtəsi əlavə et</string>
     <string name="gpx_files_not_found">İzlər qovluğunda GPX faylları tapılmadı</string>
@@ -1418,13 +1418,13 @@
     <string name="routing_attr_allow_motorway_name">Avtomagistrallara icazə ver</string>
     <string name="routing_attr_allow_motorway_description">Avtomagistrallara icazə verir.</string>
     <string name="trip_rec_notification_settings">Sürətli qeydetməni yandır</string>
-    <string name="trip_rec_notification_settings_desc">Səyahət qeydini başlatmağa imkan verən sistem bildirişi göstər.</string>
+    <string name="trip_rec_notification_settings_desc">Səfər qeydini başlatmağa imkan verən sistem bildirişi göstər.</string>
     <string name="save_track_min_speed">Minimum qeydiyyat sürəti</string>
     <string name="new_filter_desc">Yeni filtr üçün ad daxil edin. Bu, sizin “Kateqoriyalar” bölmənizə əlavə olunur.</string>
     <string name="donation_to_osm">OSM cəmiyyəti üçün ianə</string>
     <string name="donation_to_osm_desc">İanənizin bir hissəsi OSM töhfə verənlərə göndərilir. Abunə haqqı eyni olaraq qalır.</string>
     <string name="access_expanded_list">Genişlədilmiş siyahı</string>
-    <string name="unit_of_length_descr">Uzunluq vahidlərini dəyişin.</string>
+    <string name="unit_of_length_descr">Məsafə üçün ölçü vahidini dəyiş.</string>
     <string name="unit_of_length">Uzunluq vahidi</string>
     <string name="map_widget_ruler_control">Radius xətkeşi</string>
     <string name="local_index_items_backuped">%1$d / %2$d element qeyri-aktiv edildi.</string>
@@ -1787,7 +1787,7 @@
     <string name="quick_action_map_underlay">Xəritə altlığını dəyiş</string>
     <string name="quick_action_map_underlay_title">Xəritə altlıqları</string>
     <string name="quick_action_map_underlay_action">Altlıq əlavə et</string>
-    <string name="quick_action_btn_tutorial_descr">Ekranda mövqeyini dəyişmək üçün düyməyə uzun basın və sürüşdürün.</string>
+    <string name="quick_action_btn_tutorial_descr">Düyməni basıb saxlayaraq sürüşdürmək onun ekrandakı mövqeyini dəyişir.</string>
     <string name="shared_string_action_name">Fəaliyyət adı</string>
     <string name="save_gpx_waypoint">GPX yol nöqtəsini saxla</string>
     <string name="save_route_point">Marşrut nöqtəsini saxla</string>
@@ -1945,8 +1945,8 @@
     <string name="show_arrows_descr">Aktiv işarələrin istiqamətini bildirən bir və ya iki ox göstər.</string>
     <string name="active_markers_descr">İstiqamət göstəricilərinin sayını göstərin.</string>
     <string name="mark_passed">Keçilmiş işarələ</string>
-    <string name="round_trip">Gediş-gəliş səyahəti</string>
-    <string name="make_round_trip">Gediş-gəliş səyahət et</string>
+    <string name="round_trip">Gediş-gəliş səfər</string>
+    <string name="make_round_trip">Gediş-gəliş səfər et</string>
     <string name="shared_string_finish">Bitir</string>
     <string name="marker_show_distance_descr">Xəritədə xəritə işarələrinə məsafənin və istiqamətin necə göstəriləcəyini seçin:</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd seçilmiş profil üçün nöqtələri marşrut ilə birləşdirəcək.</string>
@@ -2562,7 +2562,7 @@
     <string name="rendering_attr_surface_metal_name">Metal</string>
     <string name="button_rate">Qiymətləndir</string>
     <string name="changes_applied_to_profile">Dəyişikliklər “%1$s” profilinə tətbiq edildi.</string>
-    <string name="gpx_monitoring_start"/>
+    <string name="gpx_monitoring_start">Səfər qeydini davam etdir</string>
     <string name="routing_attr_height_obstacles_description">Marşrut kəskin yoxuşlardan yayına bilər.</string>
     <string name="add_to_opr">OpenPlaceReviews-a əlavə et</string>
     <string name="add_online_source">Onlayn mənbə əlavə et</string>
@@ -2903,7 +2903,7 @@
     <string name="travel_routes">Səyahət marşrutları</string>
     <string name="reset_to_default_category_button_promo">“Standarta sıfırla” sıralama qaydasını quraşdırma standartına bərpa edəcək.</string>
     <string name="routing_attr_short_way_description">Optimallaşdırılmış qısa marşrut (enerjiyə qənaət)</string>
-    <string name="map_widget_monitoring">Səyahət qeydetmə</string>
+    <string name="map_widget_monitoring">Səfər qeydetmə</string>
     <string name="distance_between_points">Nöqtələr arasındakı məsafə</string>
     <string name="storage_migration_wrong_folder_warning">Seçilmiş qovluqda OsmAnd məlumatları tapılmadı. Təkrar cəhd edin.</string>
     <string name="ltr_or_rtl_combine">%1$s %2$s</string>
@@ -3029,5 +3029,52 @@
     <string name="speak_title">Elan et…</string>
     <string name="routing_attr_length_description">Marşrutlarda icazə veriləcək nəqliyyat vasitəsinin uzunluğunu təyin edin.</string>
     <string name="voice_announcements">Səsli göstərişlər</string>
-    <string name="live_monitoring_descr">Səyahət qeydindən istifadə edərək hazırkı məkanı paylaşmağa imkan verir.</string>
+    <string name="live_monitoring_descr">Səfər qeydindən istifadə edərək hazırkı məkanı paylaşmağa imkan verir.</string>
+    <string name="map_orientation_threshold_descr">Sürət hədddən azdırsa, xəritə görünüşünü döndərmə</string>
+    <string name="shared_strings_all_regions">Bütün regionlar</string>
+    <string name="wikivoyage_travel_guide">Səyahət Bələdçiləri</string>
+    <string name="travel_card_update_descr">Yeni Vikisəyahət məlumatları mövcuddur, zövq almaq üçün yeniləyin.</string>
+    <string name="backup_delete_types">Qeyri-aktiv məlumat növlərini sil</string>
+    <string name="shortcut_navigate_to">Naviqasiya…</string>
+    <string name="shortcut_start_recording">Qeydi başlat</string>
+    <string name="shortcut_navigate_to_home">“Ev”ə get</string>
+    <string name="location_access_request_title">Naviqasiya üçün OsmAnd-a Məkan icazəsi lazımdır.</string>
+    <string name="location_access_request_action">Giriş icazəsi ver</string>
+    <string name="shared_string_server_url">Server URL-si</string>
+    <string name="shared_string_api_key">API açarı</string>
+    <string name="map_orientation_portrait">Portret</string>
+    <string name="map_screen_orientation_descr">Portret, landşaft və ya cihaz.</string>
+    <string name="backup_setup">Nüsxələməni tənzimlə</string>
+    <string name="welcome_to_open_beta">Açıq betaya xoş gəlmisiniz</string>
+    <string name="images_cache">Şəkil keşi</string>
+    <string name="shared_string_travel_guides">Səyahət bələdçiləri</string>
+    <string name="copying_completed">Kopyalandı</string>
+    <string name="file_size_needed_for_import">İdxal üçün lazımdır</string>
+    <string name="gpx_monitoring_stop">Səfər qeydinə fasilə ver</string>
+    <string name="hide_compass_ruler">Kompas xətkeşini gizlət</string>
+    <string name="shared_string_discussion">Müzakirə</string>
+    <string name="folder_access_denied">Seçilən qovluğa daxil olmaq üçün icazə tələb olunur.</string>
+    <string name="wikivoyage_travel_guide_descr">İnternet bağlantısı olmadan OsmAnd daxilində planetin ən maraqlı yerlərinə bələdçi.</string>
+    <string name="download_maps_travel">Səyahət bələdçiləri</string>
+    <string name="map_orientation_change_in_accordance_with_speed">Xəritə istiqamətləndirmə həddi</string>
+    <string name="mapillary_menu_title_pano">Yalnız 360° şəkilləri göstər</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="press_again_to_change_the_map_orientation">Xəritənin istiqamətini dəyişmək üçün yenidən toxunun</string>
+    <string name="tap_on_map_to_hide_interface_descr">Xəritəyə toxunmaq idarəetmə düymələrini və vidcetləri dəyişdirir.</string>
+    <string name="wikivoyage_download_pics_descr">Məqalə şəkilləri oflayn istifadə üçün endirilə bilər.
+\n Hər zaman “Kəşf et” → “Seçimlər”də mövcuddur.</string>
+    <string name="map_orientation_landscape">Landşaft</string>
+    <string name="choose_auto_follow_route">Xəritə görünüşünü avtomatik mərkəzləşdir</string>
+    <string name="show_compass_ruler">Kompas xətkeşini göstər</string>
+    <string name="shared_string_explore">Kəşf et</string>
+    <string name="explore_wikipedia_offline">Vikipediyanı oflayn kəşf edin.</string>
+    <string name="welcome_to_open_beta_description">Hazırda səyahət bələdçiləri Vikisəyahət əsasında fəaliyyət göstərir. Açıq beta test zamanı bütün xüsusiyyətləri pulsuz test edin.</string>
+    <string name="purchase_dialog_travel_description">Oflayn səyahət bələdçisi funksiyasını əldə etmək üçün aşağıdakılardan birini alın:</string>
+    <string name="travel_card_download_descr">İnternet bağlantısı olmadan dünyanın müxtəlif yerləri haqqında məqalələrə baxmaq üçün Vikisəyahət bələdçilərini endirin.</string>
+    <string name="start_editing_card_image_text">Pulsuz dünya səyahət bələdçisinə hər kəs düzəliş edə bilər.</string>
+    <string name="shared_storage_third_step">Qovluğa giriş üçün icazə verin. İcazə olmadan OsmAnd faylları kopyalaya bilməz.</string>
+    <string name="shared_storage">Paylaşılan yaddaş</string>
+    <string name="markers_remove_dialog_msg">“%s” xəritə işarəsi silinsin\?</string>
+    <string name="shared_storage_last_step">Daha sonra yeni məlumat qovluğu təyin edə bilərsiniz.</string>
+    <string name="shortcut_navigate_to_work">“iş”ə get</string>
 </resources>

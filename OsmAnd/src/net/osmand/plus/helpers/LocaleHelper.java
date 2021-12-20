@@ -3,9 +3,11 @@ package net.osmand.plus.helpers;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.text.format.DateFormat;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
+import net.osmand.util.OpeningHoursParser;
 
 import java.util.Locale;
 
@@ -52,6 +54,7 @@ public class LocaleHelper {
 		}
 		if (selectedLocale != null) {
 			Locale.setDefault(selectedLocale);
+			updateOpeningHoursParser(selectedLocale);
 			config.locale = selectedLocale;
 			config.setLayoutDirection(selectedLocale);
 
@@ -70,10 +73,12 @@ public class LocaleHelper {
 			if (!Algorithms.isEmpty(lang) && !config.locale.getLanguage().equals(lang)) {
 				preferredLocale = new Locale(lang);
 				Locale.setDefault(preferredLocale);
+				updateOpeningHoursParser(preferredLocale);
 				config.locale = preferredLocale;
 				context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
 			} else if (Algorithms.isEmpty(lang) && defaultLocale != null && Locale.getDefault() != defaultLocale) {
 				Locale.setDefault(defaultLocale);
+				updateOpeningHoursParser(defaultLocale);
 				config.locale = defaultLocale;
 				Resources resources = app.getBaseContext().getResources();
 				resources.updateConfiguration(config, resources.getDisplayMetrics());
@@ -114,5 +119,9 @@ public class LocaleHelper {
 			lang = lang.substring(0, 2).toLowerCase();
 		}
 		return lang;
+	}
+
+	private void updateOpeningHoursParser(@NonNull Locale locale) {
+		OpeningHoursParser.setTwelveHourFormattingEnabled(!DateFormat.is24HourFormat(app), locale);
 	}
 }

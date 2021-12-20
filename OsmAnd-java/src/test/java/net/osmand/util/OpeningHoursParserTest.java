@@ -87,11 +87,11 @@ public class OpeningHoursParserTest {
 		Assert.assertTrue(fmt, result);
 	}
 
-	private void testParsedAndAssembledCorrectly(String timeString, OpeningHours hours) {
+	private void testParsedAndAssembledCorrectly(String expected, OpeningHours hours) {
 		String assembledString = hours.toString();
-		boolean isCorrect = assembledString.equalsIgnoreCase(timeString);
+		boolean isCorrect = assembledString.equalsIgnoreCase(expected);
 		String fmt = String.format("  %sok: Expected: \"%s\" got: \"%s\"\n",
-				(!isCorrect ? "NOT " : ""), timeString, assembledString);
+				(!isCorrect ? "NOT " : ""), expected, assembledString);
 		System.out.println(fmt);
 		Assert.assertTrue(fmt, isCorrect);
 	}
@@ -101,7 +101,8 @@ public class OpeningHoursParserTest {
 		// 0. not properly supported
 		// hours = parseOpenedHours("Mo-Su (sunrise-00:30)-(sunset+00:30)");
 
-		OpeningHoursParser.initLocalStrings(Locale.US);
+		OpeningHoursParser.initLocalStrings(Locale.UK);
+		OpeningHoursParser.setTwelveHourFormattingEnabled(false, Locale.UK);
 
 		OpeningHours hours = parseOpenedHours("Mo 09:00-12:00; We,Sa 13:30-17:00, Apr 01-Oct 31 We,Sa 17:00-18:30; PH off");
 		System.out.println(hours);
@@ -264,7 +265,7 @@ public class OpeningHoursParserTest {
 
 		String string = "Mo-Fr 11:30-15:00, 17:30-23:00; Sa, Su, PH 11:30-23:00";
 		hours = parseOpenedHours(string);
-		testParsedAndAssembledCorrectly(string, hours);
+		testParsedAndAssembledCorrectly("Mo-Fr 11:30–15:00, 17:30–23:00; Sa, Su, PH 11:30–23:00", hours);
 		System.out.println(hours);
 		testOpened("7.09.2015 14:54", hours, true); // monday
 		testOpened("7.09.2015 15:05", hours, false);
@@ -440,7 +441,7 @@ public class OpeningHoursParserTest {
 		// Test holidays
 		String hoursString = "mo-fr 11:00-21:00; PH off";
 		hours = OpeningHoursParser.parseOpenedHoursHandleErrors(hoursString);
-		testParsedAndAssembledCorrectly(hoursString, hours);
+		testParsedAndAssembledCorrectly("mo-fr 11:00–21:00; PH off", hours);
 
 		// test open from/till
 		hours = parseOpenedHours("Mo-Fr 08:30-17:00; 12:00-12:40 off;");
@@ -540,8 +541,33 @@ public class OpeningHoursParserTest {
 		hours = parseOpenedHours(
 				"Mo-Fr 10:00-21:00; Sa 12:00-23:00; PH \"Wird auf der Homepage bekannt gegeben.\"");
 		testParsedAndAssembledCorrectly(
-				"Mo-Fr 10:00-21:00; Sa 12:00-23:00; PH - Wird auf der Homepage bekannt gegeben.", hours);
+				"Mo-Fr 10:00–21:00; Sa 12:00–23:00; PH - Wird auf der Homepage bekannt gegeben.", hours);
 		System.out.println(hours);
+
+		testAmPm();
+	}
+
+	private void testAmPm() throws ParseException {
+		OpeningHoursParser.setTwelveHourFormattingEnabled(true, Locale.US);
+
+		OpeningHours hours = parseOpenedHours("Mo-Fr: 9:00-13:00, 14:00-18:00");
+		System.out.println(hours);
+		testInfo("15.01.2018 08:00", hours, "Will open at 9:00 AM");
+		testInfo("15.01.2018 09:00", hours, "Open till 1:00 PM");
+		testInfo("15.01.2018 12:00", hours, "Will close at 1:00 PM");
+		testInfo("15.01.2018 13:10", hours, "Will open at 2:00 PM");
+		testInfo("15.01.2018 14:00", hours, "Open till 6:00 PM");
+		testInfo("15.01.2018 16:00", hours, "Will close at 6:00 PM");
+		testInfo("15.01.2018 18:10", hours, "Will open tomorrow at 9:00 AM");
+
+		// Don't write AM or PM twice for range
+		String string = "Mo-Fr 04:30-10:00, 07:30-23:00; Sa, Su, PH 13:30-23:00";
+		hours = parseOpenedHours(string);
+		testParsedAndAssembledCorrectly("Mo-Fr 4:30–10:00 AM, 7:30 AM–11:00 PM; Sa, Su, PH 1:30–11:00 PM", hours);
+
+		string = "Mo-Fr 00:00-12:00, 12:00-24:00;";
+		hours = parseOpenedHours(string);
+		testParsedAndAssembledCorrectly("Mo-Fr 12:00 AM–12:00 PM, 12:00 PM–12:00 AM", hours);
 	}
 
 	private static OpeningHours parseOpenedHours(String string) {

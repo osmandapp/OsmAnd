@@ -3649,8 +3649,8 @@
     <string name="sit_on_the_stop">在该站上车</string>
     <string name="shared_string_relation">关系</string>
     <string name="use_login_and_password">使用用户名和密码</string>
-    <string name="available_until">直至%1$s可用</string>
-    <string name="enough_contributions_descr">恭喜你，你已经提供了足够多的 OpenStreetMap 贡献，现在可以享受无限制的 OsmAnd 地图更新了！</string>
+    <string name="available_until">在 %1$s 前可用</string>
+    <string name="enough_contributions_descr">恭喜，你已经提供了足够多的 OpenStreetMap 贡献，现在可以享受无限制的 OsmAnd 地图更新了！</string>
     <string name="shared_string_contributions">贡献</string>
     <string name="purchases_restored">购买已恢复</string>
     <string name="grey_color_undefined">没有数据的部分是灰色的。</string>
@@ -3714,27 +3714,27 @@
     <string name="shared_string_progress">进展</string>
     <string name="backup_do_not_have_any">你还没有在线备份。</string>
     <string name="backup_dont_have_any_descr">安排自动备份，永不丢失数据。</string>
-    <string name="backup_welcome_back">欢迎回来!</string>
-    <string name="backup_welcome_back_descr">使用现有的备份恢复该设备上的数据，或将数据备份到OsmAnd云。</string>
+    <string name="backup_welcome_back">欢迎回来！</string>
+    <string name="backup_welcome_back_descr">使用现有的备份恢复该设备上的数据，或将数据备份到 OsmAnd 云。</string>
     <string name="backup_setup">设置备份</string>
     <string name="backup_restore_now">立即恢复</string>
     <string name="attribute">属性</string>
     <string name="shared_string_purchased">已购买</string>
     <string name="explore_wikipedia_offline">离线浏览维基百科。</string>
     <string name="on_hold_since">自 %1$s 起暂停</string>
-    <string name="active_till">活动至 %1$s</string>
+    <string name="active_till">订阅有效期至 %1$s</string>
     <string name="promo_subscription">优惠订阅</string>
     <string name="track_has_no_needed_data">轨迹缺少相应的数据。</string>
     <string name="option_available_only_in_osmand_pro">作为 OsmAnd Pro 订阅的一部分提供。</string>
     <string name="purchases_feature_desc_pro_widgets">获得 OsmAnd Pro 功能：路线着色等。</string>
-    <string name="explore_osmnad_plans_to_find_suitable">探索 OsmAnd Plans 以找到适合您的产品。</string>
-    <string name="routes_color_by_type">根据 … 对路线着色</string>
-    <string name="rendering_value_walkingRoutesOSMC_description">根据他们各自的本地颜色（如果 OpenStreetMap 上存在）和远足盾牌符号为路线着色。</string>
+    <string name="explore_osmnad_plans_to_find_suitable">探索 OsmAnd 套餐以找到适合您的产品。</string>
+    <string name="routes_color_by_type">路线着色依据…</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">根据路线各自的本地颜色（如果 OpenStreetMap 上存在）和远足盾牌符号为路线着色。</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">按网络从属着色。</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">根据其节点网络类型（国际、区域、本地）对路线进行着色。</string>
-    <string name="walking_route_osmc_description">根据各自的本地颜色（如果在OpenStreetMap上存在）和类型（国际、区域、本地）给路线着色。</string>
+    <string name="walking_route_osmc_description">根据路线各自的本地颜色（如果在OpenStreetMap上存在）和类型（国际、区域、本地）给路线着色。</string>
     <string name="travel_routes">旅行路线</string>
-    <string name="setting_supported_by_style">此设置由地图样式“%1$s”提供</string>
+    <string name="setting_supported_by_style">此设置由地图样式 “%1$s” 提供</string>
     <string name="direct_line_maps_required_descr">路线计算的时间比平时长。
 \n
 \n也许有些地图没有被加载。</string>
@@ -3744,8 +3744,8 @@
 \n
 \n可能有些地图没有加载，您可以在线检查所需的地图。</string>
     <string name="map_updates_for_mappers">为绘图者提供的地图更新</string>
-    <string name="benefits_for_contributors">活跃的 OSM 贡献者的好处</string>
-    <string name="benefits_for_contributors_primary_descr">如果你是OpenStreetMap.org的积极贡献者，你可能有权获得每小时无限次的地图更新。</string>
+    <string name="benefits_for_contributors">活跃 OSM 贡献者的好处</string>
+    <string name="benefits_for_contributors_primary_descr">如果你是 OpenStreetMap.org 的积极贡献者，你可能有权获得无限次的每小时地图更新。</string>
     <string name="benefits_for_contributors_secondary_descr">登录 OpenStreetMap 以检查您是否有资格获得无限制的每月和每小时地图更新。</string>
     <string name="osm_live_payment_subscription_management_amz">确认购买时，将从您的亚马逊帐户中收取费用。
 \n

@@ -3964,7 +3964,7 @@
     <string name="uploaded_count">Opgeladen %1$d van %2$d</string>
     <string name="toast_select_edits_for_upload">Selecteer de op te laden wijzigingen</string>
     <string name="track_recording_description">Stoppen met opnemen\?
-\n(Alle niet opgeslagen gegevens gaan verloren.).</string>
+\nAlle niet-opgeslagen gegevens gaan verloren.</string>
     <string name="select_segments">Selecteer segmenten</string>
     <string name="select_segments_description">%1$s bevat meer dan één segment, je moet het noodzakelijke deel selecteren om te navigeren.</string>
     <string name="segments_count">Segment %1$d</string>
@@ -4198,7 +4198,7 @@
     <string name="download_server_version">Download de serverversie</string>
     <string name="upload_local_version">Load lokale versie op</string>
     <string name="make_backup_descr">Er zijn vele veranderingen op dit apparaat. Maak alsjeblieft een back-up om geen van deze verandering te verliezen.</string>
-    <string name="upload_gpx_description_hint">Indien je dit leeg laat zullen de track namen gebruikt worden als beschrijving. De ingevulde beschrijving word toegepast op iedere track.</string>
+    <string name="upload_gpx_description_hint">Indien je dit leeg laat zullen de track namen gebruikt worden als beschrijving. De ingevulde beschrijving wordt toegepast op iedere track.</string>
     <string name="promo_subscription">Promotie op het abonnement</string>
     <string name="backup_setup">Stel back-ups in</string>
     <string name="on_hold_since">Op pauze gezet sinds %1$s</string>
