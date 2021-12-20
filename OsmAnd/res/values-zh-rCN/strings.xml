@@ -3660,23 +3660,23 @@
     <string name="gpx_monitoring_start">继续旅程记录</string>
     <string name="routing_attr_allow_intermediate_name">允许中转点线路</string>
     <string name="shared_string_includes">包括</string>
-    <string name="complete_purchase">完全购买</string>
+    <string name="complete_purchase">完成购买</string>
     <string name="regular_price">正常价格</string>
     <string name="from_with_param">来自 %1$s</string>
-    <string name="backup_delete_types_descr">从OsmAnd Cloud中删除所有已废弃的数据类型的数据？</string>
+    <string name="backup_delete_types_descr">从 OsmAnd Cloud 中删除所有已废弃的数据类型的数据？</string>
     <string name="backup_delete_types">删除禁用的数据类型</string>
     <string name="shared_string_discussion">讨论</string>
     <string name="shared_string_view_all">查看全部</string>
     <string name="backup_error_user_is_already_registered">此电子邮件地址正被另一个帐户使用</string>
     <string name="backup_error_subscription_was_expired">订阅已过期</string>
     <string name="backup_error_subscription_was_expired_descr">您的 OsmAnd Pro 订阅已过期，请续订以使用备份。您仍然可以从云端恢复数据。</string>
-    <string name="backup_error_subscription_was_used">订阅或促销活动由另一个账户使用%1$s</string>
-    <string name="backup_error_size_is_exceeded">超过了OsmAnd云的最大尺寸 %1$s</string>
-    <string name="backup_error_gzip_only_supported_upload">该文件应以.gzip格式发送</string>
+    <string name="backup_error_subscription_was_used">订阅或促销活动由另一个账户使用 %1$s</string>
+    <string name="backup_error_size_is_exceeded">超过了 OsmAnd 云的最大尺寸 %1$s</string>
+    <string name="backup_error_gzip_only_supported_upload">该文件应以 .gzip 格式发送</string>
     <string name="backup_error_file_not_available">文件不可用</string>
-    <string name="backup_error_token_is_not_valid">所提供的设备ID或令牌有问题</string>
+    <string name="backup_error_token_is_not_valid">所提供的设备 ID 或令牌有问题</string>
     <string name="backup_error_token_is_not_valid_or_expired">无效或过期的令牌</string>
-    <string name="backup_error_user_is_not_registered">没有用户用该电子邮件地址注册</string>
+    <string name="backup_error_user_is_not_registered">不存在用该电子邮件地址注册的用户</string>
     <string name="backup_error_no_valid_subscription">没有有效的订阅</string>
     <string name="contour_lines_hillshades_slope">等高线、丘陵阴影、坡度</string>
     <string name="approximate_route_description">将路线附在地图上的道路上，以获得所有的转弯和附加数据，如平整度、道路类型等。</string>
@@ -3702,16 +3702,16 @@
 \n
 \n</string>
     <string name="duration_moment_ago">刚才</string>
-    <string name="logout_from_osmand_cloud">从 OsmAnd Cloud 注销</string>
-    <string name="logout_from_osmand_cloud_decsr">登出？
-\n您需要重新登录才能备份或恢复数据。</string>
+    <string name="logout_from_osmand_cloud">退出 OsmAnd Cloud 登录</string>
+    <string name="logout_from_osmand_cloud_decsr">退出登录？
+\n您需要再次登录才能备份或恢复数据。</string>
     <string name="backup_deleting_all_data">正在删除所有数据…</string>
     <string name="backup_deleted_all_data">删除了所有数据。</string>
     <string name="backup_deleting_all_data_descr">请等待 OsmAnd 从云端删除您的数据。设备上的所有数据将保持不变。</string>
-    <string name="backup_deleted_all_data_descr">你的所有数据已经成功地从OsmAnd Cloud中删除。</string>
+    <string name="backup_deleted_all_data_descr">你的所有数据已经成功地从 OsmAnd Cloud 中删除。</string>
     <string name="backup_version_history_removed">所有的版本历史已经被删除。</string>
     <string name="backup_data_removed">所有数据已被删除。</string>
-    <string name="shared_string_progress">进展</string>
+    <string name="shared_string_progress">进度</string>
     <string name="backup_do_not_have_any">你还没有在线备份。</string>
     <string name="backup_dont_have_any_descr">安排自动备份，永不丢失数据。</string>
     <string name="backup_welcome_back">欢迎回来！</string>
@@ -3905,4 +3905,80 @@
     <string name="routing_attr_prefer_tactile_paving_description">偏好触觉铺路</string>
     <string name="location_access_request_title">OsmAnd 需要位置权限才能导航。</string>
     <string name="mapillary_menu_filter_description_new">按日期或类型筛选图片。仅在特写缩放中起作用。</string>
+    <string name="backup_storage_taken">已用空间</string>
+    <string name="verification_code_missing_description">可能需要10分钟。如果它不在垃圾邮件文件夹中，请使用下面的按钮。</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s 或 %2$s</string>
+    <string name="you_can_get_feature_as_part_of_pattern">作为 %2$s 套餐的一部分获得 “%1$s”。比较：</string>
+    <string name="nautical_depth">航海深度</string>
+    <string name="unlimited_map_downloads">无限制的地图下载</string>
+    <string name="purchases_feature_desc_osmand_cloud">让 OsmAnd 云在线存储所有 OsmAnd 数据。重新安装后不会丢失数据。轻松备份和恢复所有信息。</string>
+    <string name="purchases_feature_desc_hourly_map_updates">获得更频繁的地图更新。每小时、每天或每周更新。更新是增量下载的，只针对更改的区域。</string>
+    <string name="purchases_feature_desc_monthly_map_updates">获得离线地图的定期月度更新。</string>
+    <string name="purchases_feature_desc_combined_wiki">在没有互联网连接的情况下，探索维基百科上的文章。离线数据按国家划分，提供所有语言版本。</string>
+    <string name="purchases_feature_desc_wikipedia">探索维基百科离线。文章按国家和地区分类，提供所有语言版本。</string>
+    <string name="purchases_feature_desc_wikivoyage">离线探索维基导游内容。文章按国家和地区分类，提供所有语言版本。</string>
+    <string name="purchases_feature_desc_terrain">地形等高线，带深色阴影的完整山体阴影地图与用颜色显示山峰和低地的坡度地图。</string>
+    <string name="purchases_feature_desc_nautical">获得航海深度信息</string>
+    <string name="backup_promocode">促销码</string>
+    <string name="routing_attr_avoid_tunnels_name">避开隧道</string>
+    <string name="delete_version_history">删除版本历史</string>
+    <string name="backup_version_history_delete_descr">删除 OsmAnd 云中已弃用数据类型的更新日志？</string>
+    <string name="backup_version_history">版本历史</string>
+    <string name="receiving_data_from_server">正从服务器接收数据…</string>
+    <string name="restore_selected_data">恢复所选数据</string>
+    <string name="restore_from_osmand_cloud">从 OsmAnd 云恢复</string>
+    <string name="backup_restore_data">恢复数据</string>
+    <string name="backup_restore_data_descr">使用在线备份恢复设备上的数据。</string>
+    <string name="select_backup_data_descr">选择要备份的数据和文件夹。</string>
+    <string name="backup_data">备份数据</string>
+    <string name="backup_delete_old_data_descr">当前版本的数据将保留在 OsmAnd 云上</string>
+    <string name="delete_all_confirmation">是，删除全部</string>
+    <string name="shared_string_logout">退出登录</string>
+    <string name="download_server_version">下载服务器版本</string>
+    <string name="upload_local_version">上传本地版本</string>
+    <string name="backup_pause_all">暂停全部</string>
+    <string name="backup_no_internet_descr">检查你的网络连接，然后再次下载。</string>
+    <string name="backup_view_conflicts">查看冲突</string>
+    <string name="backup_confilcts_descr">有些文件无法上传到服务器，因为服务器上存储了较新的版本。</string>
+    <string name="loading_list_of_routing_services">正在加载可用路线规划服务的列表</string>
+    <string name="select_nav_profile_dialog_message">“导航类型”选择如何计算路线，使用可用的离线和在线路线规划引擎。</string>
+    <string name="backup_conflicts">冲突</string>
+    <string name="backup_danger_zone">危险区域</string>
+    <string name="provided_by">由 %1$s 提供</string>
+    <string name="purchases_feature_desc_unlimited_map_download">获得所有大洲和地区离线地图的无限制下载。</string>
+    <string name="send_logcat_log">发送 logcat 地图</string>
+    <string name="cancel_anytime_in_huawei_appgallery">随时在华为 AppGallery 取消购买</string>
+    <string name="osmand_maps_plus_tagline">获得扩展的功能</string>
+    <string name="backup_delete_old_data">删除旧版本</string>
+    <string name="backup_delete_all_data_descr">OsmAnd 云上的所有数据都将被删除。本地版本将保持不变。</string>
+    <string name="backup_delete_all_data">删除我的所有数据</string>
+    <string name="backup_delete_all_data_warning">你将删除之前上传至 OsmAnd 云的所有数据，包括版本历史记录。
+\n
+\n你将无法恢复已删除的数据。</string>
+    <string name="shared_string_predefined">预定义</string>
+    <string name="failed_loading_predefined_engines">无法加载预定义模板列表。
+\n请检查你的互联网连接。</string>
+    <string name="make_backup">进行备份</string>
+    <string name="backup_now">立即备份</string>
+    <string name="backup_complete">完整备份</string>
+    <string name="shared_string_external">外部</string>
+    <string name="osmand_online_routing_promo">使用预定义模板，或者添加 OSRM、GraphHopper、openrouteserservice、GPX 在线路线规划。</string>
+    <string name="shared_string_online">在线</string>
+    <string name="shared_string_offline">离线</string>
+    <string name="resend_verification_code">重新发送</string>
+    <string name="cloud_email_not_registered">OsmAnd 云没有用这个电子邮件地址注册的账户</string>
+    <string name="choose_what_to_restore">选择要恢复的数据。</string>
+    <string name="cloud_email_already_registered">这个电子邮件地址已经注册过了。</string>
+    <string name="make_backup_descr">这台设备上有很多更改，请将这些数据备份以免丢失。</string>
+    <string name="verification_code_missing">我没有收到验证码</string>
+    <string name="shared_string_not_included">不包括</string>
+    <string name="terrain_maps">地形图</string>
+    <string name="offline_wikivoyage">离线维基导游</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">地形图：等高线、山体阴影、斜坡</string>
+    <string name="wikipedia_and_wikivoyage_offline">离线维基百科和维基导游</string>
+    <string name="osmand_pro_tagline">获得最多功能</string>
+    <string name="restore_complete">已恢复</string>
+    <string name="backup_delete_old_data_warning">您将删除先前加载的数据的更改历史。
+\n
+\n当前版本的数据将保存在服务器上，但您将无法恢复到以前所做的更改。</string>
 </resources>
