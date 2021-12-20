@@ -10,14 +10,14 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributions/translating-osmand
 	Thx - Hardy
 -->
-    <string name="rendering_attr_osmAssistantFixme_name">Fixme tags</string>
-    <string name="rendering_attr_osmAssistantFixme_description">Show fixme tags</string>
-    <string name="rendering_attr_osmAssistantNote_name">Note tags</string>
-    <string name="rendering_attr_osmAssistantNote_description">Show note tags</string>
-    <string name="rendering_attr_osmAssistantIconsLowZooms_name">Icons at low zooms</string>
-    <string name="rendering_attr_osmAssistantIconsLowZooms_description">Schematic display of icons at low zooms</string>
-    <string name="rendering_attr_osmAssistantWaterwayTunnels_name">Waterway tunnels</string>
-    <string name="rendering_attr_osmAssistantWaterwayTunnels_description">Don't hide waterway tunnels</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme tags</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Show fixme tags</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Note tags</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Show note tags</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icons at low zooms</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematic display of icons at low zooms</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Waterway tunnels</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Don't hide waterway tunnels</string>
     <string name="shared_string_not_used">Not used</string>
     <string name="shared_string_used">Used</string>
     <string name="files_with_route_restrictions">Files with route restrictions</string>
