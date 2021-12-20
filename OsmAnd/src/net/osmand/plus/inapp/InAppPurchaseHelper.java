@@ -176,10 +176,9 @@ public abstract class InAppPurchaseHelper {
 	}
 
 	public static boolean isOsmAndProAvailable(@NonNull OsmandApplication ctx) {
-		return true;
-		/*Version.isDeveloperBuild(ctx)
+		return Version.isDeveloperBuild(ctx)
 				|| isSubscribedToPromo(ctx)
-				|| isSubscribedToOsmAndPro(ctx);*/
+				|| isSubscribedToOsmAndPro(ctx);
 	}
 
 	public static boolean isAndroidAutoAvailable(@NonNull OsmandApplication ctx) {
