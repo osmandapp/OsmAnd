@@ -1156,6 +1156,7 @@ public class GpxUiHelper {
 		leftYAxis.enableGridDashedLine(dp4, dp4, 0f);
 		leftYAxis.setGridColor(yAxisGridColor);
 		leftYAxis.setGridLineWidth(1f);
+		leftYAxis.setDrawBottomYGridLine(false);
 		leftYAxis.setDrawAxisLine(false);
 		leftYAxis.setPosition(YAxisLabelPosition.INSIDE_CHART);
 		leftYAxis.setXOffset(16f);
@@ -1166,6 +1167,7 @@ public class GpxUiHelper {
 		rightYAxis.enableGridDashedLine(dp4, dp4, 0f);
 		rightYAxis.setGridColor(yAxisGridColor);
 		rightYAxis.setGridLineWidth(1f);
+		rightYAxis.setDrawBottomYGridLine(false);
 		rightYAxis.setDrawAxisLine(false);
 		rightYAxis.setPosition(YAxisLabelPosition.INSIDE_CHART);
 		rightYAxis.setXOffset(16f);
