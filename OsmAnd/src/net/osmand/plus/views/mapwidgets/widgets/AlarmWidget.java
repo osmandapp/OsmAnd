@@ -316,9 +316,9 @@ public class AlarmWidget {
 				locImgId = R.drawable.warnings_speed_limit_us;
 				//else case is done by drawing red ring
 			}
-			text = alarm.getIntValue() + "";
+			text = alarm.getMaxSpeed(settings.SPEED_SYSTEM.get()) + "";
 		} else if (alarm.getType() == AlarmInfo.AlarmInfoType.SPEED_CAMERA) {
-			int maxSpeed = alarm.getIntValue();
+			int maxSpeed = alarm.getMaxSpeed(settings.SPEED_SYSTEM.get());
 			if (maxSpeed > 0) {
 				if (americanType) {
 					locImgId = R.drawable.warnings_speed_camera_dist_lim_us;

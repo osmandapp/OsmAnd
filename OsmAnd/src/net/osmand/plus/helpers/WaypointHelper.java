@@ -225,9 +225,9 @@ public class WaypointHelper {
 		Location lastProjection = app.getRoutingHelper().getLastProjection();
 		float mxspeed = route.getCurrentMaxSpeed();
 		float delta = app.getSettings().SPEED_LIMIT_EXCEED_KMH.get() / 3.6f;
-		AlarmInfo speedAlarm = createSpeedAlarm(sc, mxspeed, lastProjection, delta);
+		AlarmInfo speedAlarm = createSpeedAlarm(mxspeed, lastProjection, delta);
 		if (speedAlarm != null) {
-			getVoiceRouter().announceSpeedAlarm(speedAlarm.getIntValue(), lastProjection.getSpeed());
+			getVoiceRouter().announceSpeedAlarm(speedAlarm.getMaxSpeed(sc), lastProjection.getSpeed());
 		}
 		AlarmInfo mostImportant = speedAlarm;
 		int value = speedAlarm != null ? speedAlarm.updateDistanceAndGetPriority(0, 0) : Integer.MAX_VALUE;
@@ -329,9 +329,9 @@ public class WaypointHelper {
 	                                             SpeedConstants sc, boolean showCameras) {
 		float mxspeed = ro.getMaximumSpeed(ro.bearingVsRouteDirection(loc));
 		float delta = app.getSettings().SPEED_LIMIT_EXCEED_KMH.get() / 3.6f;
-		AlarmInfo speedAlarm = createSpeedAlarm(sc, mxspeed, loc, delta);
+		AlarmInfo speedAlarm = createSpeedAlarm(mxspeed, loc, delta);
 		if (speedAlarm != null) {
-			getVoiceRouter().announceSpeedAlarm(speedAlarm.getIntValue(), loc.getSpeed());
+			getVoiceRouter().announceSpeedAlarm(speedAlarm.getMaxSpeed(sc), loc.getSpeed());
 			return speedAlarm;
 		}
 		for (int i = 0; i < ro.getPointsLength(); i++) {
@@ -366,17 +366,11 @@ public class WaypointHelper {
 		return null;
 	}
 
-	private static AlarmInfo createSpeedAlarm(SpeedConstants sc, float mxspeed, Location loc, float delta) {
+	private static AlarmInfo createSpeedAlarm(float mxspeed, Location loc, float delta) {
 		AlarmInfo speedAlarm = null;
 		if (mxspeed != 0 && loc != null && loc.hasSpeed() && mxspeed != RouteDataObject.NONE_MAX_SPEED) {
 			if (loc.getSpeed() > mxspeed + delta) {
-				int speed;
-				if (sc.imperial) {
-					speed = Math.round(mxspeed * 3.6f / 1.6f);
-				} else {
-					speed = Math.round(mxspeed * 3.6f);
-				}
-				speedAlarm = AlarmInfo.createSpeedLimit(speed, loc);
+				speedAlarm = AlarmInfo.createSpeedLimit(mxspeed, loc);
 			}
 		}
 		return speedAlarm;
@@ -493,7 +487,7 @@ public class WaypointHelper {
 								// Set actual distance and copy max speed to speed camera
 								if (alarmCopy.getType() == AlarmInfoType.SPEED_CAMERA) {
 									alarmCopy.setFloatValue(route.getDistanceToPoint(alarm.getLocationIndex()));
-									alarmCopy.setIntValue(alarm.getIntValue());
+									alarmCopy.setMaxSpeed(alarm.getMaxSpeed());
 								}
 
 								voiceRouter.announceAlarm(alarmCopy, lastKnownLocation.getSpeed());

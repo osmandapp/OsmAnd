@@ -319,15 +319,15 @@ public class VoiceRouter {
 
 	public void announceAlarm(AlarmInfo info, float speed) {
 		AlarmInfoType type = info.getType();
+		OsmandSettings settings = router.getSettings();
+
 		if (type == AlarmInfoType.SPEED_LIMIT) {
-			announceSpeedAlarm(info.getIntValue(), speed);
+			announceSpeedAlarm(info.getMaxSpeed(settings.SPEED_SYSTEM.get()), speed);
 		} else if (type == AlarmInfoType.SPEED_CAMERA) {
-			OsmandSettings settings = router.getSettings();
 			if (settings.SPEAK_SPEED_CAMERA.get()) {
-				announceSpeedCameraAlarm(info.getFloatValue(), info.getIntValue());
+				announceSpeedCameraAlarm(info.getFloatValue(), info.getMaxSpeed(settings.SPEED_SYSTEM.get()));
 			}
 		} else {
-			OsmandSettings settings = router.getSettings();
 			boolean speakTrafficWarnings = settings.SPEAK_TRAFFIC_WARNINGS.get();
 			boolean speakTunnels = type == AlarmInfoType.TUNNEL && settings.SPEAK_TUNNELS.get();
 			boolean speakPedestrian = type == AlarmInfoType.PEDESTRIAN && settings.SPEAK_PEDESTRIAN.get();

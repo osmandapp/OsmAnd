@@ -273,7 +273,7 @@ public class RouteCalculationResult {
 				locations.get(currentLocation).getLatitude(), locations.get(currentLocation).getLongitude());
 	}
 
-	private static void attachAlarmInfo(List<AlarmInfo> alarms, RouteSegmentResult res, int intId, int locInd, SpeedConstants sc) {
+	private static void attachAlarmInfo(List<AlarmInfo> alarms, RouteSegmentResult res, int intId, int locInd) {
 		int[] pointTypes = res.getObject().getPointTypes(intId);
 		if (pointTypes != null) {
 			RouteRegion reg = res.getObject().region;
@@ -308,11 +308,7 @@ public class RouteCalculationResult {
 				}
 
 				if (maxSpeed > 0 && maxSpeed != RouteDataObject.NONE_MAX_SPEED) {
-					if (sc.imperial) {
-						speedCameraAlarmInfo.setIntValue(Math.round(maxSpeed * 3.6f / 1.6f));
-					} else {
-						speedCameraAlarmInfo.setIntValue(Math.round(maxSpeed * 3.6f));
-					}
+					speedCameraAlarmInfo.setMaxSpeed(maxSpeed);
 				}
 			}
 		}
@@ -416,7 +412,7 @@ public class RouteCalculationResult {
 					lastHeight = h;
 				}
 				locations.add(n);
-				attachAlarmInfo(alarms, s, i, locations.size(), ctx.getSettings().SPEED_SYSTEM.get());
+				attachAlarmInfo(alarms, s, i, locations.size());
 				segmentsToPopulate.add(s);
 				if (i == s.getEndPointIndex()) {
 					break;
