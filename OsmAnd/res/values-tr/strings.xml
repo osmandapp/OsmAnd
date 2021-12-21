@@ -4500,4 +4500,12 @@
     <string name="navigate_point_format_swiss_grid_plus">İsviçre Izgarası (CH1903+)</string>
     <string name="shared_string_not_used">Kullanılmamış</string>
     <string name="track_file_description">Bu eyleme dokunmak, kullanılabilir yolları seçebileceğiniz bir iletişim kutusu gösterecektir.</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Beni-düzelt etiketlerini göster</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Not etiketleri</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Not etiketlerini göster</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Düşük yakınlaştırmalarda simgeler</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Düşük yakınlaştırmalarda simgelerin şematik gösterimi</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Beni-düzelt etiketleri</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Su yolu tünelleri</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Su yolu tünellerini gizleme</string>
 </resources>
