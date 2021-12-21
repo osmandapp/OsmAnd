@@ -4488,7 +4488,7 @@
 \nТочки трека, находящиеся на расстоянии менее заданного от последней видимой точки, будут скрыты.
 \nИмейте в виду, что высокие пороговые значения могут чрезмерно упростить геометрию трека.</string>
     <string name="storage_migration_wrong_folder_warning">В выбранной папке данные OsmAnd не найдены. Повторите попытку.</string>
-    <string name="created_on">Создано на</string>
+    <string name="created_on">Создан</string>
     <string name="use_routing_fallback">Использовать резервную маршрутизацию</string>
     <string name="shared_string_size">Размер</string>
     <string name="use_routing_fallback_description">Использовать офлайн маршрутизацию, если онлайн недоступна.</string>
@@ -4502,4 +4502,12 @@
     <string name="predefined_waypoint_appearance_description">Нажатие на действие автоматически сохранит путевую точку с предопределенными параметрами.</string>
     <string name="always_ask_waypoint_appearance_description">Нажатие на действие откроет экран «Добавить путевую точку», где можно изменить её название и внешний вид.</string>
     <string name="track_file_description">Нажатие на действие откроет диалог выбора доступных треков.</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Показать теги fixme</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Теги note</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Показать теги note</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Значки на мелком масштабе</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Схематическое отображение значков на мелком масштабе</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Не скрывать водные туннели</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Водные туннели</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Теги fixme</string>
 </resources>
