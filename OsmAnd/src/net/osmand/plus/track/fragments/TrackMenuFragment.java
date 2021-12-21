@@ -428,10 +428,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	private void shiftMapControls(int shift) {
-		boolean isLayoutRtl = AndroidUtils.isLayoutRtl(getContext());
 		AndroidUtils.setMargins(
 				(MarginLayoutParams) backButtonContainer.getLayoutParams(),
-				isLayoutRtl ? shift : 0, 0, isLayoutRtl ? 0 : shift, 0);
+				shift, 0, 0, 0);
 	}
 
 	private void initContent(@NonNull View view) {
