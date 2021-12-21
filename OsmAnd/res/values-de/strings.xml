@@ -4506,4 +4506,7 @@
     <string name="always_ask_waypoint_appearance_description">Tippen Sie auf die Option, um den Bildschirm \"Wegpunkt hinzufügen\" zu öffnen, in dem Sie Namen und Aussehen ändern können.</string>
     <string name="shared_string_not_used">Nicht genutzt</string>
     <string name="shared_string_used">Genutzt</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Notiz-Tags</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Hinweis-Tags anzeigen</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">fixme-Tags anzeigen</string>
 </resources>
