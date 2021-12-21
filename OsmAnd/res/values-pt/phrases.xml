@@ -368,7 +368,7 @@
     <string name="poi_railway_platform">Plataforma ferroviária</string>
     <string name="poi_halt">Apeadeiro ferroviário</string>
     <string name="poi_subway_entrance">Entrada de metropolitano</string>
-    <string name="poi_subway_station">Sim</string>
+    <string name="poi_subway_station">Sim;Estação de subterrâneo</string>
     <string name="poi_railway_buffer_stop">Pára-choques de via férrea</string>
     <string name="poi_taxi">Praça de táxis</string>
     <string name="poi_aerodrome">Aeroporto</string>
@@ -721,10 +721,10 @@
     <string name="poi_hostel">Hostel</string>
     <string name="poi_motel">Hotel de estrada</string>
     <string name="poi_alpine_hut">Abrigo de montanha</string>
-    <string name="poi_chalet">Chalé</string>
+    <string name="poi_chalet">Chalé;Abrigo</string>
     <string name="poi_apartment">Apartamento</string>
     <string name="poi_wilderness_hut">Cabana isolada em meio selvagem</string>
-    <string name="poi_cabin">Cabana</string>
+    <string name="poi_cabin">Cabine;Abrigo</string>
     <string name="poi_lean_to">Galpão</string>
     <string name="poi_hunting_lodge">Cabana de caça</string>
     <string name="poi_place_of_worship">Local de culto; Igreja; Capela; Capelinha</string>
@@ -1707,12 +1707,12 @@
     <string name="poi_motorcycle_repair">Reparação de motos</string>
     <string name="poi_self_service_yes">Sim</string>
     <string name="poi_self_service_no">Não</string>
-    <string name="poi_automated_yes">Sim</string>
+    <string name="poi_automated_yes">Sim;Automatizado</string>
     <string name="poi_automated_no">Não automatizado</string>
     <string name="poi_full_service_yes">Serviço completo</string>
     <string name="poi_brushless_yes">Sim</string>
     <string name="poi_brushless_no">Sem escova: não</string>
-    <string name="poi_car_wash_no">Não</string>
+    <string name="poi_car_wash_no">Não;Lavagem de carro: não</string>
     <string name="poi_public_bath">Banhos públicos</string>
     <string name="poi_male_yes">Masculino</string>
     <string name="poi_male_no">Proibido para homens</string>
@@ -1990,9 +1990,9 @@
     <string name="poi_shop_additional_yes">Com loja</string>
     <string name="poi_service_bicycle_retail_yes">Venda</string>
     <string name="poi_service_bicycle_retail_no">Venda de bicicletas: não</string>
-    <string name="poi_service_bicycle_repair_yes">Reparação</string>
+    <string name="poi_service_bicycle_repair_yes">Conserto;Conserto de bicicletas;Conserto de bicicletas</string>
     <string name="poi_service_bicycle_repair_no">Reparação de bicicletas: não</string>
-    <string name="poi_service_bicycle_rental_yes">Aluguer</string>
+    <string name="poi_service_bicycle_rental_yes">Aluguer;Aluguer de bicicletas</string>
     <string name="poi_service_bicycle_rental_no">Aluguer de bicicletas: não</string>
     <string name="poi_service_bicycle_pump_yes">Bomba de encher pneus</string>
     <string name="poi_service_bicycle_pump_no">Bomba de encher pneus: não</string>
@@ -4211,4 +4211,7 @@
     <string name="poi_faculty_psychology">Psicologia</string>
     <string name="poi_tool_hire">Aluguer de ferramentas</string>
     <string name="poi_escape_game">Escapada do quarto (escape room)</string>
+    <string name="poi_computer_sales">Venda de computadores</string>
+    <string name="poi_computer_repair">Conserto de computadores</string>
+    <string name="poi_computer_parts">Peças para computadores</string>
 </resources>

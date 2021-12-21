@@ -16,15 +16,15 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
-import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.R;
-import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IMoveObjectProvider;
@@ -117,8 +117,11 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 								&& lat >= latLonBounds.bottom && lat <= latLonBounds.top
 								&& lon >= latLonBounds.left && lon <= latLonBounds.right) {
 							MapMarker marker = null;
-							if (synced && (marker = mapMarkersHelper.getMapMarker(favoritePoint)) == null) {
-								continue;
+							if (synced) {
+								marker = mapMarkersHelper.getMapMarker(favoritePoint);
+								if (marker == null || marker.history && !view.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
+									continue;
+								}
 							}
 							cache.add(favoritePoint);
 							float x = tileBox.getPixXFromLatLon(lat, lon);

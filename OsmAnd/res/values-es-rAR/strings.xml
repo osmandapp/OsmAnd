@@ -4483,10 +4483,21 @@
     <string name="save_as_copy">Guardar como copia</string>
     <string name="gps_filter_actions_description">OsmAnd aplicará los cambios a la traza, sin actualizar el archivo. Puedes guardar los cambios manualmente.</string>
     <string name="shared_string_gps_filter">Filtro del GPS</string>
-    <string name="use_routing_fallback">Usar navegación alternativa</string>
+    <string name="use_routing_fallback">Navegación sin conexión alternativa</string>
     <string name="created_on">Creado el</string>
     <string name="shared_string_size">Tamaño</string>
-    <string name="use_routing_fallback_description">Usar la navegación sin conexión cuando la navegación en línea no pueda conseguirse.</string>
+    <string name="use_routing_fallback_description">Usar la navegación sin conexión cuando la navegación en línea no esté disponible.</string>
     <string name="turn_arrows">Flechas de giro</string>
-    <string name="turn_arrows_descr">Controla la visibilidad de las flechas de giro en la línea de ruta.</string>
+    <string name="turn_arrows_descr">Elige si se indican las flechas de giro en la línea de ruta.</string>
+    <string name="shared_string_used">Usado</string>
+    <string name="waypoint_template">Plantilla de punto de referencia</string>
+    <string name="always_ask_waypoint_appearance_description">Al pulsar en la acción se abrirá la pantalla «Añadir punto de referencia», en la que se podrá cambiar el nombre y la aspecto.</string>
+    <string name="waypoint_appearance">Aspecto del punto de referencia</string>
+    <string name="track_file">Archivo de la traza</string>
+    <string name="navigate_point_format_swiss_grid">Sistema suizo (CH1903)</string>
+    <string name="navigate_point_format_swiss_grid_plus">Sistema suizo (CH1903+)</string>
+    <string name="shared_string_not_used">Sin uso</string>
+    <string name="files_with_route_restrictions">Archivos con restricciones de ruta</string>
+    <string name="predefined_waypoint_appearance_description">Al pulsar en la acción se guardará automáticamente el punto de referencia con los parámetros predefinidos.</string>
+    <string name="track_file_description">Al pulsar en la acción se mostrará un diálogo para marcar entre todas las trazas disponibles.</string>
 </resources>

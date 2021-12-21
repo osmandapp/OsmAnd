@@ -4211,4 +4211,14 @@
     <string name="poi_faculty_education">Éducation</string>
     <string name="poi_tool_hire">Location d\'outils</string>
     <string name="poi_escape_game">Jeu d’évasion</string>
+    <string name="poi_computer_sales">Vente d\'ordinateurs</string>
+    <string name="poi_computer_repair">Réparation d\'ordinateurs</string>
+    <string name="poi_computer_parts">Pièces pour ordinateurs</string>
+    <string name="poi_computer_sales_yes">Oui</string>
+    <string name="poi_computer_sales_used">Utilisé</string>
+    <string name="poi_computer_repair_yes">Oui</string>
+    <string name="poi_computer_sales_no">Vente d\'ordinateurs : non</string>
+    <string name="poi_computer_repair_no">Réparation d\'ordinateurs : non</string>
+    <string name="poi_computer_parts_yes">Oui</string>
+    <string name="poi_computer_parts_no">Pièces d’ordinateurs : non</string>
 </resources>

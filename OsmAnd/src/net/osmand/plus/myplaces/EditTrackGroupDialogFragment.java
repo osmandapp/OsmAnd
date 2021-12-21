@@ -113,8 +113,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	}
 
 	private BaseBottomSheetItem createShowOnMapItem(final SelectedGpxFile selectedGpxFile) {
-		final String groupName = Algorithms.isEmpty(group.getName()) ? null : group.getName();
-		boolean checked = !selectedGpxFile.isGroupHidden(groupName);
+		boolean checked = !selectedGpxFile.isGroupHidden(group.getName());
 		final ApplicationMode mode = app.getSettings().getApplicationMode();
 		final BottomSheetItemWithCompoundButton[] showOnMapItem = new BottomSheetItemWithCompoundButton[1];
 		showOnMapItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
@@ -127,9 +126,9 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 					public void onClick(View v) {
 						boolean checked = !showOnMapItem[0].isChecked();
 						if (checked) {
-							selectedGpxFile.removeHiddenGroups(groupName);
+							selectedGpxFile.removeHiddenGroups(group.getName());
 						} else {
-							selectedGpxFile.addHiddenGroups(groupName);
+							selectedGpxFile.addHiddenGroups(group.getName());
 						}
 						app.getSelectedGpxHelper().updateSelectedGpxFile(selectedGpxFile);
 

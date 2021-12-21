@@ -4490,4 +4490,19 @@
     <string name="shared_string_grade">Grad</string>
     <string name="use_routing_fallback_description">Utilizați rutarea offline atunci când nu se poate ajunge la rutarea online.</string>
     <string name="use_routing_fallback">Folosiți funcția de rutare de rezervă</string>
+    <string name="waypoint_template">Șablon de punct de reper</string>
+    <string name="shared_string_used">Folosit</string>
+    <string name="files_with_route_restrictions">Fișiere cu restricții de traseu</string>
+    <string name="predefined_waypoint_appearance_description">Atingerea acțiunii va salva automat punctul de trecere cu parametrii predefiniți.</string>
+    <string name="waypoint_appearance">Apariția punctului de reper</string>
+    <string name="track_file">Fișier de urmărire</string>
+    <string name="turn_arrows">Săgeți de întoarcere</string>
+    <string name="turn_arrows_descr">Controlați vizibilitatea săgeților de viraj pe linia de traseu.</string>
+    <string name="navigate_point_format_swiss_grid_plus">Grilă elvețiană (CH1903)</string>
+    <string name="created_on">Creat pe</string>
+    <string name="shared_string_size">Dimensiune</string>
+    <string name="shared_string_not_used">Neutilizat</string>
+    <string name="always_ask_waypoint_appearance_description">Atingând această acțiune se va deschide ecranul \" Adăugare punct de reper\", unde puteți modifica numele și aspectul.</string>
+    <string name="track_file_description">Atingerea acțiunii va afișa un dialog cu toate piesele disponibile pentru a fi selectate.</string>
+    <string name="navigate_point_format_swiss_grid">Grilă elvețiană (CH1903)</string>
 </resources>

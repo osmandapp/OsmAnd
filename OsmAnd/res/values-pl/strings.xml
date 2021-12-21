@@ -4476,4 +4476,11 @@
     <string name="memory_allocated_for_routing_ds">Wyższy przydział pamięci przyspiesza obliczanie długich tras (ponad 500 km), ale może mieć wpływ na działanie innych aplikacji.
 \nNie ma wpływu na szybkość obliczania tras krótkich.</string>
     <string name="not_enough_contributions_descr">Co najmniej %1$s zmian w ciągu ostatnich dwóch miesięcy %2$s jest wymagane, aby uzyskać dostęp do nieograniczonych godzinowych aktualizacji map.</string>
+    <string name="waypoint_template">Szablon punktu trasy</string>
+    <string name="predefined_waypoint_appearance_description">Stuknięcie w akcję spowoduje automatyczne zapisanie punktu trasy o zdefiniowanych wcześniej parametrach.</string>
+    <string name="always_ask_waypoint_appearance_description">Dotknięcie akcji otworzy ekran \"Dodaj punkt trasy\", na którym możesz zmienić nazwę i wygląd.</string>
+    <string name="waypoint_appearance">Wygląd punktu trasy</string>
+    <string name="track_file_description">Kliknięcie akcji spowoduje wyświetlenie dialogu ze wszystkimi dostępnymi ścieżkami do wybrania.</string>
+    <string name="shared_string_not_used">Nieużywane</string>
+    <string name="shared_string_used">Używane</string>
 </resources>

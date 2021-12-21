@@ -1,7 +1,5 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
-import static net.osmand.GPXUtilities.GPXTrackAnalysis.ElevationDiffsCalculator.CALCULATED_GPX_WINDOW_LENGTH;
-
 import android.graphics.Matrix;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -51,6 +49,8 @@ import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.GPXUtilities.GPXTrackAnalysis.ElevationDiffsCalculator.CALCULATED_GPX_WINDOW_LENGTH;
 
 public class ElevationProfileWidget {
 
@@ -184,12 +184,14 @@ public class ElevationProfileWidget {
 					GPXDataSetAxisType.DISTANCE, false, true, false);
 			dataSets.add(elevationDataSet);
 
-			OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart, analysis,
-					GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true, false);
-			if (showSlopes && slopeDataSet != null) {
-				dataSets.add(slopeDataSet);
+			if (showSlopes) {
+				OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart, analysis,
+						GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true, false);
+				if (slopeDataSet != null) {
+					dataSets.add(slopeDataSet);
+				}
+				this.slopeDataSet = slopeDataSet;
 			}
-			this.slopeDataSet = slopeDataSet;
 
 			chartAdapter.updateContent(new LineData(dataSets), gpxItem);
 			toMetersMultiplier = ((OrderedLineDataSet) dataSets.get(0)).getDivX();

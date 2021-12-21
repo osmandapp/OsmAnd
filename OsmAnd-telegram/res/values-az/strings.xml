@@ -6,4 +6,5 @@
     <string name="si_mi_feet">Mil/fut</string>
     <string name="si_mi_yard">Mil/yard</string>
     <string name="si_nm_h">Saatda dəniz mili (düyünlər)</string>
+    <string name="unit_of_length_descr">Məsafə üçün ölçü vahidini dəyiş.</string>
 </resources>

@@ -54,7 +54,7 @@ public class ConflictViewHolder extends ItemViewHolder {
 		localVersionButton.setOnClickListener(v -> {
 			try {
 				settingsHelper.exportSettings(fileName, exportListener, item);
-			} catch (IllegalArgumentException e) {
+			} catch (IllegalStateException e) {
 				log.error(e.getMessage(), e);
 			}
 			updateButtonsState(settingsHelper, fileName);
@@ -64,7 +64,7 @@ public class ConflictViewHolder extends ItemViewHolder {
 				SettingsItem settingsItem = pair.second.item;
 				settingsItem.setShouldReplace(true);
 				settingsHelper.importSettings(fileName, Collections.singletonList(settingsItem), true, importListener);
-			} catch (IllegalArgumentException e) {
+			} catch (IllegalStateException e) {
 				log.error(e.getMessage(), e);
 			}
 			updateButtonsState(settingsHelper, fileName);

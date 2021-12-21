@@ -33,6 +33,7 @@ import androidx.car.app.CarToast;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
+import net.osmand.plus.routing.AvoidRoadsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.IndexConstants;
@@ -170,6 +171,7 @@ public class OsmandApplication extends MultiDexApplication {
 	RoutingOptionsHelper routingOptionsHelper;
 	DownloadIndexesThread downloadIndexesThread;
 	AvoidSpecificRoads avoidSpecificRoads;
+	AvoidRoadsHelper avoidRoadsHelper;
 	BRouterServiceConnection bRouterServiceConnection;
 	OsmandRegions regions;
 	GeocodingLookupService geocodingLookupService;
@@ -329,6 +331,10 @@ public class OsmandApplication extends MultiDexApplication {
 	
 	public AvoidSpecificRoads getAvoidSpecificRoads() {
 		return avoidSpecificRoads;
+	}
+
+	public AvoidRoadsHelper getAvoidRoadsHelper() {
+		return avoidRoadsHelper;
 	}
 
 	public OsmAndLocationProvider getLocationProvider() {

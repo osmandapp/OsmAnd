@@ -4472,4 +4472,8 @@
     <string name="turn_arrows">Frecce di direzione</string>
     <string name="turn_arrows_descr">Controlla la visibilità delle frecce di direzione nella linea del percorso.</string>
     <string name="use_routing_fallback">Utilizza il calcolo del percorso di riserva</string>
+    <string name="track_file">File traccia</string>
+    <string name="shared_string_used">In uso</string>
+    <string name="files_with_route_restrictions">File con limitazioni del percorso</string>
+    <string name="shared_string_not_used">Non in uso</string>
 </resources>

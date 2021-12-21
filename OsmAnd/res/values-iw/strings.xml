@@ -4487,4 +4487,11 @@
     <string name="shared_string_size">גודל</string>
     <string name="turn_arrows">חצי הפנייה</string>
     <string name="turn_arrows_descr">שליטה בהצגת חצי הפנייה על קו המסלול.</string>
+    <string name="waypoint_template">תבנית נקודות דרך</string>
+    <string name="predefined_waypoint_appearance_description">נגיעה בפעולה הזאת תשמור את נקודת הדרך עם משתנים שהוגדרו מראש אוטומטית.</string>
+    <string name="waypoint_appearance">מראה של נקודת דרך</string>
+    <string name="shared_string_used">בשימוש</string>
+    <string name="files_with_route_restrictions">קבצים עם הגבלות מסלול</string>
+    <string name="always_ask_waypoint_appearance_description">נגיעה בפעולה הזאת תפתח את מסך „הוספת נקודת דרך”, בו ניתן לשנות את השם ואת המראה.</string>
+    <string name="shared_string_not_used">לא בשימוש</string>
 </resources>

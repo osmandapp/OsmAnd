@@ -20,6 +20,41 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 
+import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.data.ValueHolder;
+import net.osmand.map.ITileSource;
+import net.osmand.map.TileSourceManager;
+import net.osmand.map.TileSourceManager.TileSourceTemplate;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.io.NetworkUtils;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.api.SettingsAPI;
+import net.osmand.plus.api.SettingsAPI.SettingsEditor;
+import net.osmand.plus.api.SettingsAPIImpl;
+import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.helpers.ColorDialogs;
+import net.osmand.plus.helpers.RateUsHelper.RateUsState;
+import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
+import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
+import net.osmand.plus.mapmarkers.MapMarkersMode;
+import net.osmand.plus.plugins.accessibility.AccessibilityMode;
+import net.osmand.plus.plugins.accessibility.RelativeDirectionStyle;
+import net.osmand.plus.plugins.audionotes.NotesSortByMode;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin.UploadVisibility;
+import net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode;
+import net.osmand.plus.plugins.srtm.TerrainMode;
+import net.osmand.plus.profiles.LocationIcon;
+import net.osmand.plus.profiles.NavigationIcon;
+import net.osmand.plus.profiles.ProfileIconColors;
+import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.resources.SQLiteTileSource;
+import net.osmand.plus.routing.ColoringType;
+import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.menuitems.ContextMenuItemsSettings;
 import net.osmand.plus.settings.backend.menuitems.DrawerMenuItemsSettings;
 import net.osmand.plus.settings.backend.menuitems.MainContextMenuItemsSettings;
@@ -38,31 +73,6 @@ import net.osmand.plus.settings.backend.preferences.PreferenceWithListener;
 import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
 import net.osmand.plus.settings.backend.storages.IntermediatePointsStorage;
-import net.osmand.plus.utils.FileUtils;
-import net.osmand.IndexConstants;
-import net.osmand.PlatformUtil;
-import net.osmand.data.ValueHolder;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.map.ITileSource;
-import net.osmand.map.TileSourceManager;
-import net.osmand.map.TileSourceManager.TileSourceTemplate;
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.io.NetworkUtils;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.resources.SQLiteTileSource;
-import net.osmand.plus.plugins.accessibility.AccessibilityMode;
-import net.osmand.plus.plugins.accessibility.RelativeDirectionStyle;
-import net.osmand.plus.api.SettingsAPI;
-import net.osmand.plus.api.SettingsAPI.SettingsEditor;
-import net.osmand.plus.api.SettingsAPIImpl;
-import net.osmand.plus.plugins.audionotes.NotesSortByMode;
-import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
-import net.osmand.plus.helpers.ColorDialogs;
-import net.osmand.plus.helpers.RateUsHelper.RateUsState;
-import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.AutoZoomMap;
 import net.osmand.plus.settings.enums.DayNightMode;
@@ -70,18 +80,8 @@ import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.enums.TracksSortByMode;
-import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
-import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
-import net.osmand.plus.mapmarkers.MapMarkersMode;
-import net.osmand.plus.plugins.osmedit.OsmEditingPlugin.UploadVisibility;
-import net.osmand.plus.profiles.LocationIcon;
-import net.osmand.plus.profiles.NavigationIcon;
-import net.osmand.plus.profiles.ProfileIconColors;
-import net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode;
-import net.osmand.plus.render.RendererRegistry;
-import net.osmand.plus.routing.ColoringType;
-import net.osmand.plus.routing.RouteService;
-import net.osmand.plus.plugins.srtm.TerrainMode;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
@@ -669,6 +669,15 @@ public class OsmandSettings {
 		return p;
 	}
 
+	public ListStringPreference registerStringListPreference(@NonNull String id, @Nullable String defValue, @NonNull String delimiter) {
+		if (registeredPreferences.containsKey(id)) {
+			return (ListStringPreference) registeredPreferences.get(id);
+		}
+		ListStringPreference preference = new ListStringPreference(this, id, defValue, delimiter);
+		registeredPreferences.put(id, preference);
+		return preference;
+	}
+
 	@SuppressWarnings("unchecked")
 	public CommonPreference<Integer> registerIntPreference(String id, int defValue) {
 		if (registeredPreferences.containsKey(id)) {
@@ -886,7 +895,7 @@ public class OsmandSettings {
 	public final OsmandPreference<ApplicationMode> LAST_ROUTE_APPLICATION_MODE = new CommonPreference<ApplicationMode>(this, "last_route_application_mode_backup_string", ApplicationMode.DEFAULT) {
 
 		@Override
-		 public ApplicationMode getValue(Object prefs, ApplicationMode defaultValue) {
+		public ApplicationMode getValue(Object prefs, ApplicationMode defaultValue) {
 			String key = settingsAPI.getString(prefs, getId(), defaultValue.getStringKey());
 			return ApplicationMode.valueOfStringKey(key, defaultValue);
 		}

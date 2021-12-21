@@ -2,7 +2,6 @@ package net.osmand.plus.track.cards;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -22,7 +21,6 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -86,9 +84,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 
 	private final PointGPXAdapter adapter;
 	private ExpandableListView listView;
-	private View addActionsView;
-	private View addWaypointActionView;
-	private View deleteWaypointActionView;
+	private View actionsView;
 
 	private Location lastLocation;
 	private float lastHeading;
@@ -139,20 +135,8 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 			}
 		});
-
-		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
-		if (addActionsView == null && addWaypointActionView == null) {
-			listView.addFooterView(inflater.inflate(R.layout.list_shadow_footer, listView, false));
-			addActions(inflater);
-			addWaypointAction(inflater);
-		}
-		if (!adapter.isEmpty() && deleteWaypointActionView == null) {
-			AndroidUiHelper.updateVisibility(addWaypointActionView.findViewById(R.id.divider), true);
-			deleteWaypointAction(inflater);
-		} else if (adapter.isEmpty() && deleteWaypointActionView != null) {
-			AndroidUiHelper.updateVisibility(addWaypointActionView.findViewById(R.id.divider), false);
-			listView.removeFooterView(deleteWaypointActionView);
-			deleteWaypointActionView = null;
+		if (actionsView == null) {
+			addActions();
 		}
 		expandAllGroups();
 	}
@@ -192,10 +176,6 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 		return adapter.groups;
 	}
 
-	public void onGroupVisibilityChanged() {
-		adapter.notifyDataSetChanged();
-	}
-
 	public void startListeningLocationUpdates() {
 		OsmAndLocationProvider locationProvider = app.getLocationProvider();
 		locationProvider.resumeAllUpdates();
@@ -212,39 +192,55 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 		locationProvider.addCompassListener(locationProvider.getNavigationInfo());
 	}
 
-	private void addActions(LayoutInflater inflater) {
-		addActionsView = inflater.inflate(R.layout.preference_category_with_descr, listView, false);
-		TextView title = addActionsView.findViewById(android.R.id.title);
+	private void addActions() {
+		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
+		actionsView = inflater.inflate(R.layout.track_points_actions, listView, false);
+		listView.addFooterView(actionsView);
+
+		setupActionsHeader();
+		setupAddWaypointAction();
+		setupDeleteWaypointAction();
+
+		View bottomMarginView = actionsView.findViewById(R.id.bottomMarginView);
+		bottomMarginView.getLayoutParams().height = app.getResources().getDimensionPixelSize(R.dimen.card_row_min_height);
+	}
+
+	private void setupActionsHeader() {
+		View header = actionsView.findViewById(R.id.header);
+		TextView title = header.findViewById(android.R.id.title);
 		title.setText(R.string.shared_string_actions);
 
-		AndroidUiHelper.updateVisibility(addActionsView.findViewById(android.R.id.icon), false);
-		AndroidUiHelper.updateVisibility(addActionsView.findViewById(android.R.id.summary), false);
-		listView.addFooterView(addActionsView);
+		AndroidUiHelper.updateVisibility(header.findViewById(android.R.id.icon), false);
+		AndroidUiHelper.updateVisibility(header.findViewById(android.R.id.summary), false);
 	}
 
-	private void addWaypointAction(LayoutInflater inflater) {
-		addWaypointActionView = inflater.inflate(R.layout.preference_button, listView, false);
-		TextView addWaypointTitle = addWaypointActionView.findViewById(android.R.id.title);
-		ImageView addWaypointIcon = addWaypointActionView.findViewById(android.R.id.icon);
+	private void setupAddWaypointAction() {
+		View container = actionsView.findViewById(R.id.add_waypoint_button);
+		TextView title = container.findViewById(android.R.id.title);
+		ImageView icon = container.findViewById(android.R.id.icon);
 
-		addWaypointTitle.setText(R.string.add_waypoint);
-		addWaypointIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_name_field));
+		title.setText(R.string.add_waypoint);
+		icon.setImageDrawable(getContentIcon(R.drawable.ic_action_name_field));
+		container.setOnClickListener(v -> notifyButtonPressed(ADD_WAYPOINT_INDEX));
 
-
-		addWaypointActionView.setOnClickListener(v -> notifyButtonPressed(ADD_WAYPOINT_INDEX));
-		listView.addFooterView(addWaypointActionView);
+		setupSelectableBackground(container);
+		AndroidUiHelper.updateVisibility(container.findViewById(R.id.divider), !adapter.isEmpty());
 	}
 
-	private void deleteWaypointAction(LayoutInflater inflater) {
-		deleteWaypointActionView = inflater.inflate(R.layout.preference_button, listView, false);
-		TextView deleteWaypointsTitle = deleteWaypointActionView.findViewById(android.R.id.title);
-		ImageView deleteWaypointsIcon = deleteWaypointActionView.findViewById(android.R.id.icon);
+	private void setupDeleteWaypointAction() {
+		View container = actionsView.findViewById(R.id.delete_waypoint_button);
+		TextView title = container.findViewById(android.R.id.title);
+		ImageView icon = container.findViewById(android.R.id.icon);
 
-		deleteWaypointsTitle.setText(R.string.delete_waypoints);
-		deleteWaypointsIcon.setImageDrawable(getColoredIcon(R.drawable.ic_action_delete_dark, R.color.color_osm_edit_delete));
+		title.setText(R.string.delete_waypoints);
+		icon.setImageDrawable(getColoredIcon(R.drawable.ic_action_delete_dark, R.color.color_osm_edit_delete));
+		container.setOnClickListener(v -> notifyButtonPressed(DELETE_WAYPOINTS_INDEX));
+		setupSelectableBackground(container);
+	}
 
-		deleteWaypointActionView.setOnClickListener(v -> notifyButtonPressed(DELETE_WAYPOINTS_INDEX));
-		listView.addFooterView(deleteWaypointActionView);
+	private void setupSelectableBackground(@NonNull View view) {
+		Drawable drawable = UiUtilities.getSelectableDrawable(view.getContext());
+		AndroidUtils.setBackground(view.findViewById(R.id.selectable_list_item), drawable);
 	}
 
 	private void expandAllGroups() {
@@ -255,16 +251,6 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 
 	private List<GpxDisplayGroup> getOriginalGroups() {
 		return displayHelper.getPointsOriginalGroups();
-	}
-
-	private List<GpxDisplayGroup> getDisplayGroups() {
-		if (selectedGroup != null) {
-			List<GpxDisplayGroup> res = new ArrayList<>();
-			res.add(selectedGroup);
-			return res;
-		} else {
-			return getOriginalGroups();
-		}
 	}
 
 	@Override
@@ -437,7 +423,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			View row = convertView;
 			if (row == null) {
 				LayoutInflater inflater = LayoutInflater.from(context);
-				row = inflater.inflate(R.layout.wpt_list_item, parent, false);
+				row = inflater.inflate(R.layout.track_points_group_item, parent, false);
 			}
 
 			row.setOnClickListener(v -> {
@@ -449,25 +435,18 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			});
 
 			String groupName = group.getName();
+			boolean groupHidden = selectedGpxFile.isGroupHidden(groupName);
 			String nameToDisplay = Algorithms.isEmpty(groupName)
 					? app.getString(R.string.shared_string_gpx_points)
 					: groupName;
 
 			TextView title = row.findViewById(R.id.label);
-			title.setText(createStyledGroupTitle(context, nameToDisplay, groupPosition));
+			title.setText(createStyledGroupTitle(context, nameToDisplay, groupPosition, groupHidden));
 
-			Drawable icon = selectedGpxFile.isGroupHidden(Algorithms.isEmpty(groupName) ? null : groupName)
+			Drawable icon = groupHidden
 					? getColoredIcon(R.drawable.ic_action_folder_hidden, ColorUtilities.getSecondaryTextColorId(nightMode))
 					: getContentIcon(R.drawable.ic_action_folder);
 			ImageView groupImage = row.findViewById(R.id.icon);
-			Resources resources = app.getResources();
-			int iconSize = resources.getDimensionPixelSize(R.dimen.standard_icon_size);
-			int marginStart = resources.getDimensionPixelSize(R.dimen.list_content_padding);
-			int marginEnd = resources.getDimensionPixelSize(R.dimen.list_content_padding_large);
-			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(iconSize, iconSize);
-			AndroidUtils.setMargins(params,marginStart,0,marginEnd,0);
-			groupImage.setLayoutParams(params);
-			groupImage.requestLayout();
 			groupImage.setImageDrawable(icon);
 
 			boolean expanded = listView.isGroupExpanded(groupPosition);
@@ -483,34 +462,25 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 					adapter.notifyDataSetInvalidated();
 					updateSelectionMode();
 				});
-				AndroidUiHelper.updateVisibility(checkBox, true);
-			} else {
-				AndroidUiHelper.updateVisibility(checkBox, false);
 			}
+			AndroidUiHelper.updateVisibility(checkBox, selectionMode);
+			AndroidUiHelper.updateVisibility(groupImage, !selectionMode);
 
 			ImageView options = row.findViewById(R.id.options);
 			options.setImageDrawable(getContentIcon(R.drawable.ic_overflow_menu_with_background));
 			options.setOnClickListener(v ->
 					EditTrackGroupDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
 							group, mapActivity.getTrackMenuFragment()));
-
-			AndroidUiHelper.updateVisibility(expandImage, true);
-			AndroidUiHelper.updateVisibility(row.findViewById(R.id.divider), true);
-			AndroidUiHelper.updateVisibility(row.findViewById(R.id.waypoint_description), false);
-			AndroidUiHelper.updateVisibility(row.findViewById(R.id.list_divider), false);
-			AndroidUiHelper.updateVisibility(row.findViewById(R.id.group_divider), false);
-			AndroidUiHelper.updateVisibility(row.findViewById(R.id.vertical_divider), true);
-			AndroidUiHelper.updateVisibility(row.findViewById(R.id.location_data), false);
-
 			return row;
 		}
 
-		private CharSequence createStyledGroupTitle(Context context, String groupName, int groupPosition) {
-			SpannableStringBuilder spannedName = new SpannableStringBuilder(groupName)
+		private CharSequence createStyledGroupTitle(@NonNull Context context, @NonNull String displayName,
+		                                            int groupPosition, boolean groupHidden) {
+			SpannableStringBuilder spannedName = new SpannableStringBuilder(displayName)
 					.append(" – ")
 					.append(String.valueOf(getChildrenCount(groupPosition)));
 
-			if (selectedGpxFile.isGroupHidden(groupName)) {
+			if (groupHidden) {
 				int secondaryTextColor = ColorUtilities.getSecondaryTextColor(context, nightMode);
 				spannedName.setSpan(new ForegroundColorSpan(secondaryTextColor), 0, spannedName.length(), SPANNED_FLAG);
 				spannedName.setSpan(new StyleSpan(Typeface.ITALIC), 0, spannedName.length(), SPANNED_FLAG);
@@ -518,12 +488,12 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 				int nameColor = AndroidUtils.getColorFromAttr(context, R.attr.wikivoyage_primary_text_color);
 				int countColor = ContextCompat.getColor(context, R.color.wikivoyage_secondary_text);
 
-				spannedName.setSpan(new ForegroundColorSpan(nameColor), 0, groupName.length(), SPANNED_FLAG);
-				spannedName.setSpan(new ForegroundColorSpan(countColor), groupName.length() + 1,
+				spannedName.setSpan(new ForegroundColorSpan(nameColor), 0, displayName.length(), SPANNED_FLAG);
+				spannedName.setSpan(new ForegroundColorSpan(countColor), displayName.length() + 1,
 						spannedName.length(), SPANNED_FLAG);
 			}
 
-			spannedName.setSpan(new StyleSpan(Typeface.BOLD), 0, groupName.length(), SPANNED_FLAG);
+			spannedName.setSpan(new StyleSpan(Typeface.BOLD), 0, displayName.length(), SPANNED_FLAG);
 
 			return spannedName;
 		}
@@ -552,7 +522,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			View row = convertView;
 			if (row == null) {
 				LayoutInflater inflater = LayoutInflater.from(view.getContext());
-				row = inflater.inflate(R.layout.wpt_list_item, parent, false);
+				row = inflater.inflate(R.layout.track_points_list_item, parent, false);
 			}
 
 			final GpxDisplayGroup group = getGroup(groupPosition);
@@ -569,55 +539,44 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 				AndroidUiHelper.updateVisibility(description, false);
 			}
 
+			ImageView icon = row.findViewById(R.id.icon);
 			final CheckBox checkBox = row.findViewById(R.id.toggle_item);
 			if (selectionMode) {
 				checkBox.setVisibility(View.VISIBLE);
 				checkBox.setChecked(selectedItems.get(group.getType()) != null && selectedItems.get(group.getType()).contains(gpxItem));
-				checkBox.setOnClickListener(new View.OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						if (checkBox.isChecked()) {
-							Set<GpxDisplayItem> set = selectedItems.get(group.getType());
-							if (set != null) {
-								set.add(gpxItem);
-							} else {
-								set = new LinkedHashSet<>();
-								set.add(gpxItem);
-								selectedItems.put(group.getType(), set);
-							}
+				checkBox.setOnClickListener(v -> {
+					if (checkBox.isChecked()) {
+						Set<GpxDisplayItem> set = selectedItems.get(group.getType());
+						if (set != null) {
+							set.add(gpxItem);
 						} else {
-							Set<GpxDisplayItem> set = selectedItems.get(group.getType());
-							if (set != null) {
-								set.remove(gpxItem);
-							}
+							set = new LinkedHashSet<>();
+							set.add(gpxItem);
+							selectedItems.put(group.getType(), set);
 						}
-						updateSelectionMode();
+					} else {
+						Set<GpxDisplayItem> set = selectedItems.get(group.getType());
+						if (set != null) {
+							set.remove(gpxItem);
+						}
 					}
+					updateSelectionMode();
 				});
-				AndroidUiHelper.updateVisibility(checkBox, true);
-				AndroidUiHelper.updateVisibility(row.findViewById(R.id.icon), false);
-			} else {
-				ImageView icon = row.findViewById(R.id.icon);
-				if (GpxDisplayItemType.TRACK_POINTS == group.getType()) {
-					WptPt wpt = gpxItem.locationStart;
-					int groupColor = wpt.getColor(group.getColor());
-					if (groupColor == 0) {
-						groupColor = ContextCompat.getColor(app, R.color.gpx_color_point);
-					}
-					icon.setImageDrawable(PointImageDrawable.getFromWpt(app, groupColor, false, wpt));
-				} else {
-					icon.setImageDrawable(getContentIcon(R.drawable.ic_action_marker_dark));
-				}
-				AndroidUiHelper.updateVisibility(icon, true);
-				AndroidUiHelper.updateVisibility(checkBox, false);
 			}
-
+			if (GpxDisplayItemType.TRACK_POINTS == group.getType()) {
+				WptPt wpt = gpxItem.locationStart;
+				int groupColor = wpt.getColor(group.getColor());
+				if (groupColor == 0) {
+					groupColor = ContextCompat.getColor(app, R.color.gpx_color_point);
+				}
+				icon.setImageDrawable(PointImageDrawable.getFromWpt(app, groupColor, false, wpt));
+			} else {
+				icon.setImageDrawable(getContentIcon(R.drawable.ic_action_marker_dark));
+			}
 			setupLocationData(row, gpxItem.locationStart);
 
-			AndroidUiHelper.updateVisibility(row.findViewById(R.id.divider), false);
-			AndroidUiHelper.updateVisibility(row.findViewById(R.id.vertical_divider), false);
-			AndroidUiHelper.updateVisibility(row.findViewById(R.id.options), false);
+			AndroidUiHelper.updateVisibility(icon, !selectionMode);
+			AndroidUiHelper.updateVisibility(checkBox, selectionMode);
 			AndroidUiHelper.updateVisibility(row.findViewById(R.id.list_divider), childPosition != 0);
 
 			return row;
