@@ -28,7 +28,9 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
@@ -56,6 +58,8 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.LineChart.LabelDisplayData;
+import com.github.mikephil.charting.charts.LineChart.YAxisLabelView;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.MarkerView;
@@ -1138,6 +1142,35 @@ public class GpxUiHelper {
 		mv.setChartView(mChart); // For bounds control
 		mChart.setMarker(mv); // Set the marker to the chart
 		mChart.setDrawMarkers(true);
+		mChart.setYAxisLabelView(new YAxisLabelView(context, R.layout.chart_label) {
+
+			private static final int SPAN_FLAG = Spannable.SPAN_EXCLUSIVE_EXCLUSIVE;
+
+			private final TextView label = findViewById(R.id.label);
+
+			@Override
+			public void updateLabel(@NonNull LabelDisplayData leftYAxisData, @Nullable LabelDisplayData rightYAxisData) {
+				if (rightYAxisData == null) {
+					SpannableString displayText = new SpannableString(leftYAxisData.getText());
+					displayText.setSpan(new ForegroundColorSpan(leftYAxisData.getColor()), 0,
+							displayText.length(), SPAN_FLAG);
+					label.setText(displayText);
+				} else {
+					String combinedPlainText = context.getString(R.string.ltr_or_rtl_combine_via_comma,
+							leftYAxisData.getText(), rightYAxisData.getText());
+					SpannableString displayText = new SpannableString(combinedPlainText);
+
+					boolean rtl = AndroidUtils.isLayoutRtl(context);
+					LabelDisplayData first = rtl ? rightYAxisData : leftYAxisData;
+					int edge = rtl ? first.getText().length() : first.getText().length() + 1;
+					displayText.setSpan(new ForegroundColorSpan(leftYAxisData.getColor()), 0, edge, SPAN_FLAG);
+					displayText.setSpan(new ForegroundColorSpan(rightYAxisData.getColor()), edge,
+							displayText.length(), SPAN_FLAG);
+
+					label.setText(displayText);
+				}
+			}
+		});
 
 		int labelsColor = ContextCompat.getColor(context, R.color.description_font_and_bottom_sheet_icons);
 		XAxis xAxis = mChart.getXAxis();
