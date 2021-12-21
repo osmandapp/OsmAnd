@@ -427,13 +427,11 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		return view;
 	}
 
-	private void shiftMapControls(int viewWidth) {
+	private void shiftMapControls(int shift) {
 		boolean isLayoutRtl = AndroidUtils.isLayoutRtl(getContext());
-		int shiftPosition = viewWidth;
-		int start = isLayoutRtl ? 0 : shiftPosition;
-		int end = isLayoutRtl ? shiftPosition : 0;
-		AndroidUtils.setMargins((MarginLayoutParams) backButtonContainer.getLayoutParams(), start, 0, end, 0);
-		AndroidUtils.setMargins((MarginLayoutParams) displayGroupsWidget.getLayoutParams(), start, 0, end, 0);
+		AndroidUtils.setMargins(
+				(MarginLayoutParams) backButtonContainer.getLayoutParams(),
+				isLayoutRtl ? shift : 0, 0, isLayoutRtl ? 0 : shift, 0);
 	}
 
 	private void initContent(@NonNull View view) {
@@ -940,9 +938,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			updateDisplayGroupsWidget();
-			boolean appbarButtonsVisible = getCurrentMenuState() != MenuState.FULL_SCREEN && !shouldShowWidgets();
+			boolean appbarButtonsVisible = (getCurrentMenuState() != MenuState.FULL_SCREEN && !shouldShowWidgets()) || !isPortrait();
 			AndroidUiHelper.updateVisibility(backButtonContainer, appbarButtonsVisible);
-			AndroidUiHelper.updateVisibility(displayGroupsWidget, appbarButtonsVisible || !isPortrait());
+			AndroidUiHelper.updateVisibility(displayGroupsWidget, hasPointsGroups() && appbarButtonsVisible);
 
 			boolean topControlsVisible = shouldShowTopControls(menuVisible);
 			boolean bottomControlsVisible = shouldShowBottomControls(menuVisible);
