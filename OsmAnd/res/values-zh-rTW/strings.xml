@@ -4477,9 +4477,20 @@
     <string name="shared_string_precision">精確</string>
     <string name="shared_string_statistics">統計</string>
     <string name="shared_string_size">大小</string>
-    <string name="use_routing_fallback">使用路線規劃汰退</string>
+    <string name="use_routing_fallback">離線路線規劃汰退</string>
     <string name="use_routing_fallback_description">當無法使用線上路線規劃時，則使用離線路線規劃。</string>
     <string name="created_on">建立於</string>
     <string name="turn_arrows">轉彎箭頭</string>
-    <string name="turn_arrows_descr">控制路線上轉彎箭頭的能見度。</string>
+    <string name="turn_arrows_descr">選取是否要在路線上指示轉彎箭頭。</string>
+    <string name="shared_string_not_used">未使用</string>
+    <string name="shared_string_used">已使用</string>
+    <string name="navigate_point_format_swiss_grid">瑞士座標系統 (CH1903)</string>
+    <string name="navigate_point_format_swiss_grid_plus">瑞士座標系統 (CH1903+)</string>
+    <string name="track_file">軌跡檔案</string>
+    <string name="predefined_waypoint_appearance_description">點擊此動作將會使用預先定義好的參數自動儲存航點。</string>
+    <string name="track_file_description">點擊此動作將會顯示可用軌跡的選取對話方塊。</string>
+    <string name="files_with_route_restrictions">有路徑限制的檔案</string>
+    <string name="always_ask_waypoint_appearance_description">點擊此動作將會開啟「新增航點」畫面，您可以在其中變更名稱與外觀。</string>
+    <string name="waypoint_appearance">航點外觀</string>
+    <string name="waypoint_template">航點範本</string>
 </resources>

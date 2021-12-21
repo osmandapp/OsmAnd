@@ -4483,10 +4483,21 @@
     <string name="routing_attr_only_permitted_ways_description">Yalnızca açıkça izin verilen yolları (izler, patikalar vb.) kullanın</string>
     <string name="shared_string_details">Ayrıntılar</string>
     <string name="is_disabled">%1$s devre dışı</string>
-    <string name="use_routing_fallback">Yönlendirme yedeği kullan</string>
-    <string name="use_routing_fallback_description">Çevrim içi yönlendirmeye ulaşılamadığında çevrim dışı yönlendirmeyi kullanın.</string>
+    <string name="use_routing_fallback">Çevrim dışı yönlendirme yedeği</string>
+    <string name="use_routing_fallback_description">Çevrim içi yönlendirme kullanılamadığında çevrim dışı yönlendirmeyi kullanın.</string>
     <string name="created_on">Oluşturulma tarihi</string>
     <string name="shared_string_size">Boyut</string>
     <string name="turn_arrows">Dönüş Okları</string>
-    <string name="turn_arrows_descr">Güzergah hattındaki dönüş oklarının görünürlüğünü denetleyin.</string>
+    <string name="turn_arrows_descr">Güzergah hattında dönüş oklarının gösterilip gösterilmeyeceğini seçin.</string>
+    <string name="waypoint_template">Ara nokta şablonu</string>
+    <string name="shared_string_used">Kullanılmış</string>
+    <string name="files_with_route_restrictions">Güzergah kısıtlaması olan dosyalar</string>
+    <string name="predefined_waypoint_appearance_description">Bu eyleme dokunmak, ara noktayı önceden tanımlanmış parametrelerle otomatik olarak kaydedecektir.</string>
+    <string name="always_ask_waypoint_appearance_description">Bu eyleme dokunmak, adı ve görünümü değiştirebileceğiniz “Ara nokta ekle” ekranını açacaktır.</string>
+    <string name="waypoint_appearance">Ara nokta görünümü</string>
+    <string name="track_file">Yol dosyası</string>
+    <string name="navigate_point_format_swiss_grid">İsviçre Izgarası (CH1903)</string>
+    <string name="navigate_point_format_swiss_grid_plus">İsviçre Izgarası (CH1903+)</string>
+    <string name="shared_string_not_used">Kullanılmamış</string>
+    <string name="track_file_description">Bu eyleme dokunmak, kullanılabilir yolları seçebileceğiniz bir iletişim kutusu gösterecektir.</string>
 </resources>
