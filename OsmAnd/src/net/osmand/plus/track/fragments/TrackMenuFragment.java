@@ -1188,30 +1188,33 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	public void updateToolbar(int y, boolean animated) {
-		final MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			if (toolbarContainer != null && isPortrait()) {
-				if (animated) {
-					final float toolbarAlpha = getToolbarAlpha(y);
-					if (toolbarAlpha > 0) {
-						updateVisibility(toolbarContainer, true);
-					}
-					toolbarContainer.animate().alpha(toolbarAlpha)
-							.setDuration(ContextMenuFragment.ANIMATION_DURATION)
-							.setInterpolator(new DecelerateInterpolator())
-							.setListener(new AnimatorListenerAdapter() {
-								@Override
-								public void onAnimationEnd(Animator animation) {
-									updateVisibility(toolbarContainer, toolbarAlpha);
-									mapActivity.updateStatusBarColor();
-								}
-							})
-							.start();
-				} else {
-					updateToolbarVisibility(toolbarContainer, y);
-					mapActivity.updateStatusBarColor();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null || toolbarContainer == null) {
+			return;
+		}
+		if (isPortrait()) {
+			if (animated) {
+				final float toolbarAlpha = getToolbarAlpha(y);
+				if (toolbarAlpha > 0) {
+					updateVisibility(toolbarContainer, true);
 				}
+				toolbarContainer.animate().alpha(toolbarAlpha)
+						.setDuration(ContextMenuFragment.ANIMATION_DURATION)
+						.setInterpolator(new DecelerateInterpolator())
+						.setListener(new AnimatorListenerAdapter() {
+							@Override
+							public void onAnimationEnd(Animator animation) {
+								updateVisibility(toolbarContainer, toolbarAlpha);
+								mapActivity.updateStatusBarColor();
+							}
+						})
+						.start();
+			} else {
+				updateToolbarVisibility(toolbarContainer, y);
+				mapActivity.updateStatusBarColor();
 			}
+		} else {
+			updateVisibility(toolbarContainer, false);
 		}
 	}
 
