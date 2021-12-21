@@ -480,7 +480,7 @@
     <string name="south_west">cənub-qərb</string>
     <string name="west">qərb</string>
     <string name="north_west">şimal-qərb</string>
-    <string name="north_north_west">şimal-şimal-qərb</string>
+    <string name="north_north_west">şimal–şimal-qərb</string>
     <string name="accuracy">Dəqiqlik</string>
     <string name="no_info">Məlumat yoxdur</string>
     <string name="i_am_here">Buradayam</string>
@@ -765,7 +765,7 @@
     <string name="type_postcode">Poçt kodu yazın</string>
     <string name="nearest_cities">Yaxındakı şəhərlər</string>
     <string name="select_city">Şəhər seçin</string>
-    <string name="select_postcode">Poçt kodu axtarışı</string>
+    <string name="select_postcode">Poçt kodu axtar</string>
     <string name="quick_action_add_destination">Təyinat seç</string>
     <string name="quick_action_replace_destination">Təyinatı əvəz et</string>
     <string name="average_speed">Ortalama sürət</string>
@@ -793,7 +793,7 @@
     <string name="rendering_attr_contourColorScheme_name">Kontur xətlərinin rəng sxemi</string>
     <string name="search_hint">Şəhər, ünvan, POI adı yazın</string>
     <string name="subcategories">Altkateqoriyalar</string>
-    <string name="osm_live_payment_desc">Abunə haqqı hər ay tutulur. İstədiyiniz vaxt Google Play-dən ləğv edin.</string>
+    <string name="osm_live_payment_desc">Abunəlik seçilən dövr üçün ödənilir. İstədiyiniz vaxt Google Play-dən ləğv edin.</string>
     <string name="osm_live_subscription_desc">Abunəlik bütün qlobal xəritələr üçün saatlıq, günlük, həftəlik yenilənmələri və limitsiz endirmələri təmin edir.</string>
     <string name="get_for">%1$s-a al</string>
     <string name="osmand_plus_banner_desc">Limitsiz xəritə endirmələri, yenilənmələri və Vikipediya qoşması.</string>
@@ -951,7 +951,7 @@
     <string name="srtm_paid_version_title">Kontur xətləri qoşması</string>
     <string name="osmand_srtm_short_description_80_chars">Oflayn kontur xətləri üçün OsmAnd qoşması</string>
     <string name="dropbox_plugin_name">Dropbox qoşması</string>
-    <string name="srtm_paid_version_msg">Zəhmət olmasa inkişafları dəstəkləmək üçün Marketdəki Kontur xətləri qoşmasını almaq haqda düşünün.</string>
+    <string name="srtm_paid_version_msg">Zəhmət olmasa, gələcək inkişafı dəstəkləmək üçün “Kontur xətləri” qoşması üçün ödəniş etməyi düşünün.</string>
     <string name="map_online_plugin_is_not_installed">Müxtəlif xəritə mənbələrini seçmək üçün “Onlayn xəritələr” qoşmasını aktivləşdirin</string>
     <string name="plugins_screen">Qoşmalar</string>
     <string name="prefs_plugins_descr">Qoşmalar təkmil parametrləri və əlavə funksionallığı aktivləşdirir.</string>
@@ -978,15 +978,15 @@
     <string name="starting_point_too_far">Çıxış nöqtəsi ən yaxın yoldan çox uzaqdır.</string>
     <string name="roads">Yollar</string>
     <string name="confirm_download_roadmaps">Standart (tam) xəritəyə sahib olduğunuzdan yalnız yollar xəritəsinə ehtiyac yoxdur. Hər halda endirilsin?</string>
-    <string name="north_north_east">şimal-şimal-şərq</string>
-    <string name="east_north_east">şərq-şimal-şərq</string>
+    <string name="north_north_east">şimal–şimal-şərq</string>
+    <string name="east_north_east">şərq–şimal-şərq</string>
     <string name="east">şərq</string>
-    <string name="east_south_east">şərq-cənub-şərq</string>
-    <string name="south_east">cənub-şərq</string>
-    <string name="south_south_east">cənub-cənub-şərq</string>
-    <string name="south_south_west">cənub-cənub-qərb</string>
-    <string name="west_south_west">qərb-cənub-qərb</string>
-    <string name="west_north_west">qərb-şimal-qərb</string>
+    <string name="east_south_east">şərq–cənub-şərq</string>
+    <string name="south_east">cənub–şərq</string>
+    <string name="south_south_east">cənub–cənub-şərq</string>
+    <string name="south_south_west">cənub–cənub-qərb</string>
+    <string name="west_south_west">qərb–cənub-qərb</string>
+    <string name="west_north_west">qərb–şimal-qərb</string>
     <string name="front">irəli</string>
     <string name="modify_transparency">Şəffaflığı seç (0 - şəffaf, 255 - qeyri-şəffaf)</string>
     <string name="gpx_visibility_txt">Görünüş</string>
@@ -1048,7 +1048,7 @@
     <string name="show_from_zoom_level">Göstərilməyə başlanacaq miqyas səviyyəsi</string>
     <string name="display_zoom_level">Görüntünün miqyası: %1$s</string>
     <string name="quick_action_auto_zoom">Avtomatik miqyası yandır/söndür</string>
-    <string name="quick_action_auto_zoom_desc">Bu fəaliyyət düyməsinə toxunulduqda sürətinizə görə avtomatik xəritə miqyası yandırılır/söndürülür.</string>
+    <string name="quick_action_auto_zoom_desc">Sürətə görə avtomatik miqyası yandırmaq və ya söndürmək üçün düymə.</string>
     <string name="quick_action_auto_zoom_on">Avtomatik miqyası yandır</string>
     <string name="quick_action_auto_zoom_off">Avtomatik miqyası söndür</string>
     <string name="auto_zoom_none">Avto-miqyas yoxdur</string>
@@ -1067,7 +1067,7 @@
     <string name="update_poi_error_local">Yerli POI siyahısı yenilənə bilmədi.</string>
     <string name="update_poi_error_loading">Serverdən məlumatlar yüklənə bilmədi.</string>
     <string name="update_poi_no_offline_poi_index">Bu ərazi üçün oflayn POI məlumatları yoxdur</string>
-    <string name="update_poi_is_not_available_for_zoom">Kiçik miqyas səviyyələrində POI-ləri yeniləmək mümkün deyil</string>
+    <string name="update_poi_is_not_available_for_zoom">Yaxınlaşdırmaq POI-ləri yeniləməyə imkan verir</string>
     <string name="search_osm_nominatim">OSM Nominatim istifadə etməklə onlayn axtarış</string>
     <string name="route_general_information">Ümumi məsafə %1$s, səyahət vaxtı %2$d s %3$d dəq.</string>
     <string name="router_service_descr">Onlayn və ya oflayn naviqasiya xidməti.</string>
@@ -1124,7 +1124,7 @@
     <string name="routing_settings">Naviqasiya</string>
     <string name="routing_settings_descr">Naviqasiya üçün seçimlər təyin edin.</string>
     <string name="global_settings">Ümumi parametrlər</string>
-    <string name="osmand_service_descr">Ekran sönülü olduqda OsmAnd arxa fonda işləməyə davam edir.</string>
+    <string name="osmand_service_descr">OsmAnd ekran sönülü olanda arxa fonda işləyir.</string>
     <string name="download_files_not_enough_space">%1$s MB endirmək üçün kifayət qədər yaddaş yoxdur (boş: %2$s).</string>
     <string name="keep_informing_never">Yalnız əl ilə (oxa toxun)</string>
     <string name="city_type_hamlet">Kənd</string>
@@ -1251,7 +1251,7 @@
     <string name="distance_moving">Məsafə dəqiqləşdirildi</string>
     <string name="route_altitude">Marşrut yüksəkliyi</string>
     <string name="translit_names">Adları transliterasiya et</string>
-    <string name="osm_live_banner_desc">Limitsiz xəritə endirmələri və xəritələri ayda bir dəfədən çox yeniləmək imkanı əldə edin: həftəlik, günlük və ya saatlıq.</string>
+    <string name="osm_live_banner_desc">Həftəlik, günlük və hətta saatlıq yeniləmələr əlavə edən limitsiz xəritə endirmələri əldə edin.</string>
     <string name="first_usage_wizard_desc">OsmAnd-a məkanınızı müəyyənləşdirmək və həmin region üçün xəritə endirməsi təklif etmək icazəsi verin.</string>
     <string name="give_permission">İcazə ver</string>
     <string name="first_usage_greeting">İnternet bağlantısı olmadan istiqamətlər alın və yeni yerlər kəşf edin</string>
@@ -1272,7 +1272,7 @@
     <string name="av_use_external_recorder_descr">Video çəkmək üçün sistem proqramını istifadə et.</string>
     <string name="av_use_external_recorder">Sistem proqramını istifadə et</string>
     <string name="recording_error">Qeydetmə alınmadı</string>
-    <string name="recording_is_recorded">Səs/video qeyd edilir. Dayandırmaq üçün AV widget-inə toxunun.</string>
+    <string name="recording_is_recorded">Səs/video qeyd edilir. AV vidcetinə toxunaraq dayandırın.</string>
     <string name="building_number">Bina nömrəsi</string>
     <string name="shared_string_permissions">İcazələr</string>
     <string name="import_gpx_failed_descr">Faylı idxal etmək olmadı. Zəhmə olmasa, OsmAnd-ın oxumağa icazəsi olduğundan əmin olun.</string>
@@ -1298,7 +1298,7 @@
     <string name="save_current_track_descr">Hazırkı izi indi GPX faylı olaraq saxla.</string>
     <string name="save_current_track">Hazırkı izi saxla</string>
     <string name="save_track_to_gpx_descrp">Naviqasiya zamanı iz GPX formatında izlər qovluğunda avtomatik saxlanacaq.</string>
-    <string name="none_selected_gpx">GPX faylı seçilməyib. Toxunub saxlayaraq birini seçin.</string>
+    <string name="none_selected_gpx">Əvvəlcə toxunub saxlamaqla GPX faylını təyin edin.</string>
     <string name="gpx_info_subtracks">Alt izlər: %1$s</string>
     <string name="gpx_selection_track">%1$s
 \nİz %2$s</string>
@@ -1831,7 +1831,7 @@
     <string name="last_intermediate_dest_description">Ara dayanacaq əlavə edir</string>
     <string name="first_intermediate_dest_description">İlk dayanacaq əlavə edir</string>
     <string name="subsequent_dest_description">Təyinat nöqtəsini yuxarı daşı və yarat</string>
-    <string name="empty_state_av_notes">Qeydlər yaradın!</string>
+    <string name="empty_state_av_notes">Qeydlər yarat!</string>
     <string name="empty_state_av_notes_desc">Widget-lər və ya kontekst menyularını istifadə edərək xəritədəki istənilən nöqtəyə səs, video və ya şəkil qeydləri əlavə edin.</string>
     <string name="import_gpx_file_description">Favoritlər və ya GPX faylı kimi idxal edilə bilər.</string>
     <string name="plan_route_no_markers_toast">Bu funksiyanı istifadə etmək üçün ən azı bir işarə əlavə etməlisiniz.</string>
@@ -1909,7 +1909,8 @@
     <string name="route_updated_loc_found">Marşrutun hesablanması üçün mövqe gözlənilir</string>
     <string name="global_app_allocated_memory_descr">Ayrılan yaddaş %1$s MB (Android limiti %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Ayrılan yaddaş</string>
-    <string name="native_app_allocated_memory_descr">Proqram tərəfindən ayrılan ümumi yaddaş %1$s MB (Dalvik %2$s MB, digər %3$s MB). Proporsional yaddaş %4$s MB (Android limiti %5$s MB, Dalvik %6$s MB).</string>
+    <string name="native_app_allocated_memory_descr">Proqram tərəfindən ayrılan ümumi yaddaş %1$s MB (Dalvik %2$s MB, digər %3$s MB).
+\nProporsional yaddaş %4$s MB (Android limiti %5$s MB, Dalvik %6$s MB).</string>
     <string name="native_app_allocated_memory">Ümumi yerli yaddaş</string>
     <string name="transport_nearby_routes_within">Yaxında marşrutlar</string>
     <string name="transport_nearby_routes">Ərazi:</string>
@@ -1923,7 +1924,7 @@
     <string name="lang_hsb">Yuxarı Sorbca</string>
     <string name="use_kalman_filter_compass_descr">Kompasın “səs-küyünü” azaldır, lakin ətalət əlavə edir.</string>
     <string name="use_magnetic_sensor_descr">Kompasın oxunması üçün istiqamət sensoru əvəzinə maqnit sensorunu istifadə et.</string>
-    <string name="safe_mode_description">Proqramı təhlükəsiz rejimdə işlət (Yerli kod əvəzinə daha yavaş Android istifadə edir).</string>
+    <string name="safe_mode_description">Proqramı təhlükəsiz (daha yavaş) rejimdə işlət.</string>
     <string name="use_compass_navigation_descr">Başqa bir başlıq aşkar edilmədikdə kompasdan istifadə et.</string>
     <string name="rotate_map_to_bearing_descr">Xəritənin düzülüşü:</string>
     <string name="map_screen_orientation">Ekran istiqaməti</string>
@@ -1955,9 +1956,9 @@
     <string name="plugin_mapillary_descr">Hər kəs üçün küçə səviyyəli şəkillər. Yerləri kəşf edin, əməkdaşlıq edin, dünyanı çəkin.</string>
     <string name="auto_split_recording_descr">6 dəqiqə fasilədən sonra yeni seqment, 2 saat fasilədən sonra yeni iz, ya da tarix dəyişdiyində uzun fasilədən sonra yeni fayl başlat.</string>
     <string name="save_track_min_distance">Qeydiyyatın minimum yerdəyişməsi</string>
-    <string name="save_track_min_distance_descr">Filtr: Nöqtənin qeydiyyatı üçün son mövqedən minimum məsafəni seçin.</string>
+    <string name="save_track_min_distance_descr">Filtr: Yenisini daxil etmək üçün bir nöqtədən minimum məsafəni təyin edin.</string>
     <string name="save_track_precision">Qeydiyyatın minimum dəqiqliyi</string>
-    <string name="save_track_precision_descr">Filtr: Nöqtənin qeydiyyatı üçün minimum dəqiqlik seçin.</string>
+    <string name="save_track_precision_descr">Filtr: Bu dəqiqliyə çatmayana qədər qeyd edilmir.</string>
     <string name="rendering_attr_surfaceIntegrity_name">Yol səthinin keyfiyyəti</string>
     <string name="routing_attr_short_way_name">Yanacağa qənaətli yol</string>
     <string name="access_direction_haptic_feedback_descr">Hədəf nöqtənin istiqamətini titrəmə ilə göstər.</string>
@@ -3013,7 +3014,7 @@
     <string name="access_smart_autoannounce">Ağıllı avtomatik elan</string>
     <string name="voice_provider_descr">Naviqasiya üçün səsli bələdçini seçin.</string>
     <string name="show_along_the_route">Marşrut boyunca göstər</string>
-    <string name="turn_arrows_descr">Marşrut xəttində dönmə oxlarının görünməsini idarə edin.</string>
+    <string name="turn_arrows_descr">Marşrut xəttində dönmə oxlarının göstərilib-göstərilməyəcəyini seçin.</string>
     <string name="language_description">Üstünlük verilən dili və səsli bələdçinin növünü seçin.</string>
     <string name="announcement_time_intervals">Vaxt və məsafə intervalları</string>
     <string name="announcement_time_arrive">Təyinata çatmaq</string>
@@ -3077,4 +3078,95 @@
     <string name="markers_remove_dialog_msg">“%s” xəritə işarəsi silinsin\?</string>
     <string name="shared_storage_last_step">Daha sonra yeni məlumat qovluğu təyin edə bilərsiniz.</string>
     <string name="shortcut_navigate_to_work">“iş”ə get</string>
+    <string name="register_on_openplacereviews">OpenPlaceReviews.org-da
+\nqeydiyyatdan keç</string>
+    <string name="shared_string_quick_actions">Sürətli fəaliyyətlər</string>
+    <string name="vector_data_missing">Xəritələri oflayn istifadə etmək üçün (“oflayn”) məlumatları endirin.</string>
+    <string name="sd_unmounted">Yaddaş kartına giriş yoxdur.
+\nXəritələri görə və ya heç nə tapa bilməyəcəksiniz.</string>
+    <string name="shared_string_card_was_hidden">Kart gizlədilib</string>
+    <string name="poi_filter_emergency">Təcili</string>
+    <string name="btn_advanced_mode">Qabaqcıl rejim…</string>
+    <string name="shared_string_copy_to">Bura kopyala:</string>
+    <string name="storage_found_files_size">%1$s fayl tapıldı %2$s</string>
+    <string name="storage_copied_files_size">%1$s fayl kopyalandı %2$s</string>
+    <string name="files_remaining">Qalan fayllar: %1$s %2$s</string>
+    <string name="edit_profiles_descr">OsmAnd standart profilləri silinə bilməz, lakin qeyri-aktiv edilə bilər (əvvəlki ekranda) və ya aşağıda sıralana bilər.</string>
+    <string name="gps_filter_speed_altitude_desc">Yalnız müəyyən edilmiş intervala uyğun iz nöqtələri qrafikdə və xəritədə görünəcək, qalanları gizlədiləcək.</string>
+    <string name="progress_complete">%1$s tamamlandı</string>
+    <string name="shared_storage_first_step">“%1$s”ə toxunun.
+\nFayl meneceri osmand qovluğunu tapmaq və açmaq üçün lazım olan yeri açır.</string>
+    <string name="shared_string_skip_warning">Köçürmə keçilsin\? OsmAnd artıq paylaşılan yaddaşdakı fayllarınıza daxil ola bilməz.
+\n
+\nProqram yeni məlumat qovluğunuzdan istifadə etməyə başlayacaq.</string>
+    <string name="quick_action_coordinates_widget_descr">Xəritədə Koordinatlar vidcetini göstərmək və ya gizlətmək üçün düymə.</string>
+    <string name="shared_string_turn">Döngə</string>
+    <string name="next_segment">Növbəti seqment</string>
+    <string name="osmand_settings_descr">Bütün proqram üçün təsirlidir</string>
+    <string name="test_voice_prompts">Səsli göstərişləri test et</string>
+    <string name="sd_dir_not_accessible">Yaddaş kartındakı saxlama qovluğuna daxil olmaq olmur!</string>
+    <string name="voice_prompts_timetable">Səsli göstəriş vaxtları</string>
+    <string name="av_video_format">Video çıxış formatı</string>
+    <string name="vessel_height_warning_link">Gəmi hündürlüyünü seç</string>
+    <string name="voice_data_unavailable">Seçilən səsli göstəriş paketi mövcud deyil</string>
+    <string name="add_to_a_track">İzə əlavə et</string>
+    <string name="copying_file">%1$s faylı kopyalanır…</string>
+    <string name="vessel_width_limit_description">Dar körpülərdən yayınmaq üçün gəminin enini təyin edin</string>
+    <string name="route_between_points_desc">Nöqtələrin düz xəttlə və ya onlar arasında aşağıda göstərildiyi kimi marşrut hesablanaraq birləşəcəyini seçin.</string>
+    <string name="whole_track">Bütün iz</string>
+    <string name="track_coloring_solid">Bütöv</string>
+    <string name="vessel_height_limit_description">Alçaq körpülərdən yayınmaq üçün gəminin hündürlüyünü təyin edin. Nəzərə alın ki, körpü hərəkətlidirsə, biz onun açıq vəziyyətdəki hündürlüyünü istifadə edəcəyik.</string>
+    <string name="storage_found_files_descr">%2$s faylı “%3$s”dan “%4$s” təyinatına kopyalamaq üçün “%1$s”a toxunun. Bir qədər vaxt tələb oluna bilər.</string>
+    <string name="migration_files_present">Seçilmiş “%3$s” yerində %1$d fayl (%2$s) var.</string>
+    <string name="route_between_points_next_segment_button_desc">Seçilmiş profildən istifadə etməklə yalnız növbəti seqment yenidən hesablanacaq.</string>
+    <string name="amenity_type_transportation">Nəqliyyat</string>
+    <string name="osmand_routing_experimental">OsmAnd oflayn naviqasiya eksperimental xüsusiyyətdir və təxminən 20 km-dən daha uzun məsafələr üçün işləmir.
+\n
+\nNaviqasiya müvəqqəti olaraq onlayn CloudMade xidmətinə keçdi.</string>
+    <string name="voice_is_not_available_msg">Səsli bələdçi yoxdur, zəhmət olmasa, “Parametrlər”→ “Naviqasiya parametrləri”nə gedin, profili seçin → “Səsli bələdçi” seçin və səsli göstəriş paketini seçin və ya endirin.</string>
+    <string name="voice_is_not_available_title">Səsli göstəriş paketi seçin</string>
+    <string name="voice_data_corrupted">Seçilən səs məlumatları korlanıb</string>
+    <string name="sd_mounted_ro">Yaddaş kartı yalnız oxunur.
+\nİndi yalnız əvvəlcədən endirilmiş xəritəni görmək mümkündür, yeni sahələri endirmək yox.</string>
+    <string name="first_time_download">Regionları endir</string>
+    <string name="shared_string_interval">İnterval</string>
+    <string name="gpx_split_interval_descr">İzdə məsafə və ya vaxt işarələrinin göstəriləcəyi intervalı seçin.</string>
+    <string name="gpx_split_interval_none_descr">İstədiyiniz bölmə variantını seçin: vaxta və ya məsafəyə görə.</string>
+    <string name="osmand_plus_short_description_80_chars">Oflayn və onlayn OSM xəritələri üçün qlobal mobil xəritəyə baxış və naviqasiya</string>
+    <string name="accessibility_default">Android sistem parametrlərinə əsasən</string>
+    <string name="index_name_antarctica">Antarktida</string>
+    <string name="local_index_upload_gpx_description">GPX fayllarını OSM icmasına yükləyin, xəritələri təkmilləşdirin.</string>
+    <string name="storage_copying_files_size">%1$s fayl kopyalanır %2$s</string>
+    <string name="shared_string_restart">Proqramı yenidən başlat</string>
+    <string name="av_video_format_descr">Video çıxış formatı:</string>
+    <string name="osmand_short_description_80_chars">Oflayn və onlayn OSM xəritələri üçün qlobal mobil xəritəyə baxış və naviqasiya</string>
+    <string name="voices">Səsli göstərişlər</string>
+    <string name="shared_storage_migration_descr">Android yaddaş girişindəki dəyişikliklərə görə OsmAnd artıq %1$sı istifadə edə bilməz.
+\n
+\nBütün məlumatlarınızı yeni qovluğa kopyalayın.</string>
+    <string name="shared_storage_second_step">“Bu qovluğu istifadə et” düyməsinə toxunun.</string>
+    <string name="shared_storage_migration">Paylaşılan yaddaşı köçürmə</string>
+    <string name="shared_string_migration">Köçür</string>
+    <string name="start_copying">Kopyalamanı başlat</string>
+    <string name="reverse_route">Əks marşrut</string>
+    <string name="overwrite_track">İzin üzərinə yaz</string>
+    <string name="download_detailed_map">Bu əraziyə baxmaq üçün ətraflı %s xəritəsini endirin.</string>
+    <string name="turn_screen_on_info">Naviqasiya zamanı xəritəni kilid ekranında göstər.</string>
+    <string name="shared_string_launch">Başlat</string>
+    <string name="quick_action_need_to_add_item_to_list">“Sürətli fəaliyyət” parametrlərində siyahıya ən azı bir element əlavə edin</string>
+    <string name="wiki_article_search_text">Uyğun olan viki məqaləsi axtarılır</string>
+    <string name="save_poi_value_exceed_length_title">“%s” dəyərinin uzunluğu</string>
+    <string name="from_to_with_params">%1$sdan %2$s təyinatına</string>
+    <string name="shared_string_show_slope">Yamacı göstər</string>
+    <string name="shared_string_hide_slope">Yamacı gizlət</string>
+    <string name="update_poi_does_not_change_indexes">Proqram daxilində POI dəyişiklikləri endirilmiş xəritə fayllarına təsir göstərmir, dəyişikliklər cihazınızda fayl kimi saxlanılır.</string>
+    <string name="route_between_points_whole_track_button_desc">Seçilmiş profildən istifadə etməklə bütün iz yenidən hesablanacaq.</string>
+    <string name="open_saved_track">Yadda saxlanan izi aç</string>
+    <string name="gps_filter_actions_description">OsmAnd faylı yeniləmədən dəyişiklikləri izə tətbiq edəcək. Dəyişiklikləri əl ilə yadda saxlaya bilərsiniz.</string>
+    <string name="gps_filter_hdop_desc">HDOP üçün qəbul edilən maksimum dəyəri seçin.
+\nDaha yüksək dəyəri olan nöqtələr gizlədiləcək.</string>
+    <string name="simplified_track_description">Yalnız marşrut xətti yadda saxlanacaq, yol nöqtələri silinəcək.</string>
+    <string name="quick_action_showhide_mapillary_descr">Xəritədə Mapillary qatını göstərmək və ya gizlətmək üçün düymə.</string>
+    <string name="vessel_height_warning">Alçaq körpülərdən yayınmaq üçün gəmi hündürlüyünü təyin edin. Körpü hərəkətlidirsə, açıq vəziyyətdəki hündürlüyü istifadə olunur.</string>
+    <string name="start_editing_card_description">Siz Vikisəyahət-də istənilən məqaləyə düzəliş edə bilərsiniz və etməlisiniz. Bilik, təcrübə, istedad və diqqətinizi paylaşın.</string>
 </resources>
