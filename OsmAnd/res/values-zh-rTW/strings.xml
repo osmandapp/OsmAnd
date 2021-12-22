@@ -4493,4 +4493,12 @@
     <string name="always_ask_waypoint_appearance_description">點擊此動作將會開啟「新增航點」畫面，您可以在其中變更名稱與外觀。</string>
     <string name="waypoint_appearance">航點外觀</string>
     <string name="waypoint_template">航點範本</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">顯示 fixme 標籤</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">註記標籤</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">顯示註記標籤</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">低縮放程度的圖示</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">低縮放程度圖示的示意圖</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">水路隧道</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">不要隱藏水路隧道</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme 標籤</string>
 </resources>

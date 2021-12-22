@@ -3809,7 +3809,7 @@
     <string name="osm_edit_logout_success">Sesión finalizada</string>
     <string name="development">Desarrollo</string>
     <string name="complex_routing_descr">Navegación bifásica en automóvil.</string>
-    <string name="clear_osm_token">Vaciar llave OAuth de OpenStreetMap</string>
+    <string name="clear_osm_token">Vaciar clave OAuth de OpenStreetMap</string>
     <string name="use_two_phase_routing">Usar el algoritmo de navegación A* bifásica</string>
     <string name="snowmobile_render_descr">Para caminos y senderos exclusivos de motos de nieve.</string>
     <string name="shared_string_local_maps">Mapas locales</string>
@@ -4213,8 +4213,8 @@
     <string name="backup_error_size_is_exceeded">Tamaño máximo de OsmAnd Cloud excedido %1$s</string>
     <string name="backup_error_gzip_only_supported_upload">El archivo debe enviarse en formato «.gzip»</string>
     <string name="backup_error_file_not_available">Archivo no disponible</string>
-    <string name="backup_error_token_is_not_valid">Algo está mal con el ID del dispositivo o la clave token proporcionada</string>
-    <string name="backup_error_token_is_not_valid_or_expired">Clave token inválida o vencida</string>
+    <string name="backup_error_token_is_not_valid">Algo está mal con el ID del dispositivo o la clave proporcionada</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Clave inválida o vencida</string>
     <string name="backup_error_user_is_not_registered">Ningún usuario se encuentra registrado con ese correo electrónico</string>
     <string name="enter_verification_code">Ingresa la contraseña de un solo uso</string>
     <string name="approximate_route_description">Adjuntar la ruta a los caminos en el mapa para obtener todos los giros y datos adicionales, como la suavidad, los tipos de caminos, etc.</string>
@@ -4435,7 +4435,7 @@
 \n
 \nLa aplicación cargará los datos usando la nueva carpeta.</string>
     <string name="shared_storage_last_step">Puedes definir una nueva carpeta de datos después.</string>
-    <string name="shared_storage_third_step">Permite acceder a la carpeta. Sin esto, OsmAnd no puede copiar archivos.</string>
+    <string name="shared_storage_third_step">Concede acceso a la carpeta. Sin esto, OsmAnd no puede copiar archivos.</string>
     <string name="shared_storage_first_step">Pulsa «%1$s».
 \nEl gestor de archivos se abrirá donde debería encontrar y abrir la carpeta «osmand».</string>
     <string name="shared_storage_second_step">Pulsa en «Usar esta carpeta».</string>
@@ -4482,4 +4482,29 @@
     <string name="distance_between_points">Distancia entre puntos</string>
     <string name="gps_filter_actions_description">OsmAnd aplicará los cambios a la traza, sin actualizar el archivo. Puedes guardar los cambios manualmente.</string>
     <string name="storage_migration_wrong_folder_warning">No se han encontrado datos de OsmAnd en la carpeta elegida. Inténtalo de nuevo.</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Etiquetas «fixme» (arréglame)</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Mostrar etiquetas «fixme» (arréglame)</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetas «note» (nota)</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Mostrar etiquetas «note» (nota)</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Iconos en zums bajos</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualización esquemática de iconos en zums bajos</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Túneles fluviales</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Mostrar los túneles fluviales</string>
+    <string name="shared_string_used">Usados</string>
+    <string name="waypoint_template">Plantilla de punto de referencia</string>
+    <string name="turn_arrows_descr">Elige si se indican las flechas de giro en la línea de ruta.</string>
+    <string name="navigate_point_format_swiss_grid">Sistema suizo (CH1903)</string>
+    <string name="shared_string_not_used">Sin uso</string>
+    <string name="waypoint_appearance">Aspecto del punto de referencia</string>
+    <string name="files_with_route_restrictions">Archivos con restricciones de ruta</string>
+    <string name="track_file">Archivo de la traza</string>
+    <string name="turn_arrows">Flechas de giro</string>
+    <string name="use_routing_fallback_description">Usar la navegación sin conexión cuando la navegación en línea no esté disponible.</string>
+    <string name="shared_string_size">Tamaño</string>
+    <string name="created_on">Creado el</string>
+    <string name="navigate_point_format_swiss_grid_plus">Sistema suizo (CH1903+)</string>
+    <string name="predefined_waypoint_appearance_description">Al pulsar esta acción se guardará automáticamente el punto de referencia con los parámetros predefinidos.</string>
+    <string name="always_ask_waypoint_appearance_description">Al pulsar esta acción se abrirá la pantalla «Añadir punto de referencia», en la que se podrá cambiar el nombre y el aspecto.</string>
+    <string name="track_file_description">Al pulsar esta acción se mostrará un diálogo para marcar entre todas las trazas disponibles.</string>
+    <string name="use_routing_fallback">Navegación alternativa (sin conexión)</string>
 </resources>

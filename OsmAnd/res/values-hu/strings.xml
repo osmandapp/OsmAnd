@@ -4479,7 +4479,7 @@
     <string name="use_routing_fallback">Offline útvonaltervezési tartalék</string>
     <string name="created_on">Létrehozva:</string>
     <string name="shared_string_size">Méret</string>
-    <string name="turn_arrows_descr">Adja meg, hogy a bekanyarodást jelző nyilak látszódjanak-e az útvonalon.</string>
+    <string name="turn_arrows_descr">Adja meg, hogy a kanyarodást jelző nyilak látszódjanak-e az útvonalon.</string>
     <string name="turn_arrows">Bekanyarodást jelző nyilak</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Fixme címkék (javítandó objektumok) megjelenítése</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Note (térképészeknek szóló megjegyzés) címkék megjelenítése</string>

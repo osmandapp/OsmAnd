@@ -4495,4 +4495,12 @@
     <string name="navigate_point_format_swiss_grid">Švajčiarske súradnice (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">Švajčiarske súradnice (CH1903+)</string>
     <string name="shared_string_not_used">Nepoužité</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Zobraziť značky \'fixme\' (chyby v údajoch na opravu)</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Značky poznámok</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Zobraziť značky poznámok od maperov</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematické zobrazenie ikon pri nízkom priblížení</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Značky chýb</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikony pri nízkom priblížení</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tunely vodných ciest</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Neskrývať vodné cesty v tuneloch</string>
 </resources>

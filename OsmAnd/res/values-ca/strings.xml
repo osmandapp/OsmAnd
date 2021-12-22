@@ -3898,4 +3898,9 @@
     <string name="shared_string_size">Mida</string>
     <string name="use_routing_fallback_description">Usa el guiatge sense connexió quan el guiatge amb connexió no està disponible.</string>
     <string name="exit_without_saving_warning">Sortir sense desar els canvis\?</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Etiquetes d\'errors</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Mostra les etiquetes d\'errors</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetes de notes</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Mostra les etiquetes de notes</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icones si zooms baixos</string>
 </resources>

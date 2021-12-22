@@ -4500,4 +4500,12 @@
     <string name="navigate_point_format_swiss_grid">Швейцарська система координат (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">Швейцарська система координат (CH1903+)</string>
     <string name="shared_string_not_used">Не використовується</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Показувати теґи fixme</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Теґи note</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Показувати теґи note</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Піктограми на мапі малого масштабу</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Схематичний вигляд піктограм на мапі малого масштабу</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Тунелі на водних шляхах</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Не приховати тунелі на водних шляхах</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Теґи fixme</string>
 </resources>
