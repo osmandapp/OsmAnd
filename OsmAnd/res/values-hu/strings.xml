@@ -4475,10 +4475,29 @@
 \nVegye figyelembe, hogy a túl magas korlát túlságosan leegyszerűsítheti a nyomvonalat.</string>
     <string name="gps_filter_actions_description">Az OsmAnd a fájl frissítése nélkül fogja alkalmazni a nyomvonal változásait. Kézileg mentheti a módosításokat.</string>
     <string name="storage_migration_wrong_folder_warning">Nem találhatók OsmAnd adatok a kiválasztott mappában. Próbálja meg újra.</string>
-    <string name="use_routing_fallback_description">Offline útvonaltervezés használata, ha az online útvonaltervezés nem érhető el.</string>
-    <string name="use_routing_fallback">Útvonaltervezési tartalék használata</string>
+    <string name="use_routing_fallback_description">Offline útvonaltervezés használata, ha az online útvonaltervezés nem áll rendelkezésre.</string>
+    <string name="use_routing_fallback">Offline útvonaltervezési tartalék</string>
     <string name="created_on">Létrehozva:</string>
     <string name="shared_string_size">Méret</string>
-    <string name="turn_arrows_descr">A bekanyarodást jelző nyilak láthatóságának szabályozása az útvonalon.</string>
+    <string name="turn_arrows_descr">Adja meg, hogy a bekanyarodást jelző nyilak látszódjanak-e az útvonalon.</string>
     <string name="turn_arrows">Bekanyarodást jelző nyilak</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Fixme címkék (javítandó objektumok) megjelenítése</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Note (térképészeknek szóló megjegyzés) címkék megjelenítése</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikonok kis nagyításnál</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Ikonok sematikus megjelenítése kis nagyításnál</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Vízi alagutak</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Ne rejtse el a vízi alagutakat</string>
+    <string name="navigate_point_format_swiss_grid_plus">Svájci koordináták (CH1903+)</string>
+    <string name="shared_string_not_used">Használaton kívül</string>
+    <string name="shared_string_used">Használatban</string>
+    <string name="waypoint_template">Útpontsablon</string>
+    <string name="files_with_route_restrictions">Útvonal-korlátozásokat tartalmazó fájlok</string>
+    <string name="predefined_waypoint_appearance_description">Ha erre a műveletre koppint, az útpont automatikusan elmentődik előre meghatározott paraméterekkel.</string>
+    <string name="navigate_point_format_swiss_grid">Svájci koordináták (CH1903+)</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Note címkék</string>
+    <string name="track_file">Nyomvonalfájl</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme címkék</string>
+    <string name="waypoint_appearance">Útpont megjelenése</string>
+    <string name="always_ask_waypoint_appearance_description">Ha erre a műveletre koppint, megnyílik az „Útpont hozzáadása” képernyő, ahol módosíthatja a nevet és a megjelenést.</string>
+    <string name="track_file_description">Ha erre a műveletre koppint, megjelenik egy kijelölési párbeszédpanel az elérhető nyomvonalakkal.</string>
 </resources>

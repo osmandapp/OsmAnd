@@ -1,26 +1,5 @@
 package net.osmand.plus.track.fragments;
 
-import static net.osmand.GPXUtilities.GPXTrackAnalysis;
-import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
-import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
-import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
-import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_BY_INTERVALS_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.CHANGE_FOLDER_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.DELETE_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.DIRECTIONS_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.GPS_FILTER_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.JOIN_GAPS_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.RENAME_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.SHARE_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.UPLOAD_OSM_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.TrackPointsCard.ADD_WAYPOINT_INDEX;
-import static net.osmand.plus.track.cards.TrackPointsCard.DELETE_WAYPOINTS_INDEX;
-import static net.osmand.plus.track.cards.TrackPointsCard.OPEN_WAYPOINT_INDEX;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.ProgressDialog;
@@ -57,10 +36,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
-import net.osmand.plus.utils.FileUtils;
-import net.osmand.plus.utils.FileUtils.RenameCallback;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
@@ -72,20 +48,10 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxFileLoaderTask;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.activities.MapActivityActions;
@@ -108,20 +74,15 @@ import net.osmand.plus.myplaces.MoveGpxFileBottomSheet;
 import net.osmand.plus.myplaces.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.SegmentActionsListener;
 import net.osmand.plus.myplaces.SplitSegmentDialogFragment;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.search.QuickSearchDialogFragment;
-import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper;
 import net.osmand.plus.track.SaveGpxAsyncTask;
-import net.osmand.plus.track.helpers.TrackDisplayHelper;
-import net.osmand.plus.track.fragments.DisplayGroupsBottomSheet.DisplayPointGroupsCallback;
-import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper.DisplayGroupsHolder;
-import net.osmand.plus.track.fragments.GpsFilterFragment.GpsFilterFragmentLister;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
-import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.track.cards.DescriptionCard;
 import net.osmand.plus.track.cards.GpxInfoCard;
 import net.osmand.plus.track.cards.OptionsCard;
@@ -129,6 +90,24 @@ import net.osmand.plus.track.cards.OverviewCard;
 import net.osmand.plus.track.cards.PointsGroupsCard;
 import net.osmand.plus.track.cards.SegmentsCard;
 import net.osmand.plus.track.cards.TrackPointsCard;
+import net.osmand.plus.track.fragments.DisplayGroupsBottomSheet.DisplayPointGroupsCallback;
+import net.osmand.plus.track.fragments.GpsFilterFragment.GpsFilterFragmentLister;
+import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
+import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper;
+import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper.DisplayGroupsHolder;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxFileLoaderTask;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.TrackDisplayHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.FileUtils.RenameCallback;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.widgets.IconPopupMenu;
 import net.osmand.util.Algorithms;
@@ -139,6 +118,27 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.List;
+
+import static net.osmand.GPXUtilities.GPXTrackAnalysis;
+import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
+import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
+import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_BY_INTERVALS_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.CHANGE_FOLDER_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.DELETE_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.DIRECTIONS_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.GPS_FILTER_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.JOIN_GAPS_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.RENAME_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.SHARE_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.UPLOAD_OSM_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.TrackPointsCard.ADD_WAYPOINT_INDEX;
+import static net.osmand.plus.track.cards.TrackPointsCard.DELETE_WAYPOINTS_INDEX;
+import static net.osmand.plus.track.cards.TrackPointsCard.OPEN_WAYPOINT_INDEX;
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
 
 public class TrackMenuFragment extends ContextMenuScrollFragment implements CardListener,
 		SegmentActionsListener, RenameCallback, OnTrackFileMoveListener, OnPointsDeleteListener,
@@ -427,13 +427,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		return view;
 	}
 
-	private void shiftMapControls(int viewWidth) {
-		boolean isLayoutRtl = AndroidUtils.isLayoutRtl(getContext());
-		int shiftPosition = viewWidth;
-		int start = isLayoutRtl ? 0 : shiftPosition;
-		int end = isLayoutRtl ? shiftPosition : 0;
-		AndroidUtils.setMargins((MarginLayoutParams) backButtonContainer.getLayoutParams(), start, 0, end, 0);
-		AndroidUtils.setMargins((MarginLayoutParams) displayGroupsWidget.getLayoutParams(), start, 0, end, 0);
+	private void shiftMapControls(int shift) {
+		AndroidUtils.setMargins(
+				(MarginLayoutParams) backButtonContainer.getLayoutParams(),
+				shift, 0, 0, 0);
 	}
 
 	private void initContent(@NonNull View view) {
@@ -784,7 +781,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (menuStateChanged) {
 			updateControlsVisibility(true);
 		}
-		if (currentMenuState != MenuState.FULL_SCREEN 
+		if ((!isPortrait() || currentMenuState != MenuState.FULL_SCREEN)
 				&& (menuStateChanged || adjustMapPosition) && !menuTypeChanged) {
 			fitTrackOnMap();
 		}
@@ -940,9 +937,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			updateDisplayGroupsWidget();
-			boolean appbarButtonsVisible = getCurrentMenuState() != MenuState.FULL_SCREEN && !shouldShowWidgets();
+			boolean appbarButtonsVisible = (getCurrentMenuState() != MenuState.FULL_SCREEN && !shouldShowWidgets()) || !isPortrait();
 			AndroidUiHelper.updateVisibility(backButtonContainer, appbarButtonsVisible);
-			AndroidUiHelper.updateVisibility(displayGroupsWidget, appbarButtonsVisible || !isPortrait());
+			AndroidUiHelper.updateVisibility(displayGroupsWidget, hasPointsGroups() && appbarButtonsVisible);
 
 			boolean topControlsVisible = shouldShowTopControls(menuVisible);
 			boolean bottomControlsVisible = shouldShowBottomControls(menuVisible);
@@ -1191,30 +1188,33 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	public void updateToolbar(int y, boolean animated) {
-		final MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			if (toolbarContainer != null && isPortrait()) {
-				if (animated) {
-					final float toolbarAlpha = getToolbarAlpha(y);
-					if (toolbarAlpha > 0) {
-						updateVisibility(toolbarContainer, true);
-					}
-					toolbarContainer.animate().alpha(toolbarAlpha)
-							.setDuration(ContextMenuFragment.ANIMATION_DURATION)
-							.setInterpolator(new DecelerateInterpolator())
-							.setListener(new AnimatorListenerAdapter() {
-								@Override
-								public void onAnimationEnd(Animator animation) {
-									updateVisibility(toolbarContainer, toolbarAlpha);
-									mapActivity.updateStatusBarColor();
-								}
-							})
-							.start();
-				} else {
-					updateToolbarVisibility(toolbarContainer, y);
-					mapActivity.updateStatusBarColor();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null || toolbarContainer == null) {
+			return;
+		}
+		if (isPortrait()) {
+			if (animated) {
+				final float toolbarAlpha = getToolbarAlpha(y);
+				if (toolbarAlpha > 0) {
+					updateVisibility(toolbarContainer, true);
 				}
+				toolbarContainer.animate().alpha(toolbarAlpha)
+						.setDuration(ContextMenuFragment.ANIMATION_DURATION)
+						.setInterpolator(new DecelerateInterpolator())
+						.setListener(new AnimatorListenerAdapter() {
+							@Override
+							public void onAnimationEnd(Animator animation) {
+								updateVisibility(toolbarContainer, toolbarAlpha);
+								mapActivity.updateStatusBarColor();
+							}
+						})
+						.start();
+			} else {
+				updateToolbarVisibility(toolbarContainer, y);
+				mapActivity.updateStatusBarColor();
 			}
+		} else {
+			updateVisibility(toolbarContainer, false);
 		}
 	}
 
@@ -1233,15 +1233,17 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
 			int tileBoxWidthPx = 0;
 			int tileBoxHeightPx = 0;
+			int marginStartPx = 0;
 
 			if (!isPortrait()) {
 				tileBoxWidthPx = tb.getPixWidth() - getWidth();
+				marginStartPx = getWidth();
 			} else {
 				int fHeight = getViewHeight() - y - AndroidUtils.getStatusBarHeight(mapActivity);
 				tileBoxHeightPx = tb.getPixHeight() - fHeight;
 			}
 			if (r.left != 0 && r.right != 0) {
-				mapActivity.getMapView().fitRectToMap(r.left, r.right, r.top, r.bottom, tileBoxWidthPx, tileBoxHeightPx, 0);
+				mapActivity.getMapView().fitRectToMap(r.left, r.right, r.top, r.bottom, tileBoxWidthPx, tileBoxHeightPx, 0, marginStartPx);
 			}
 			adjustMapPosition = false;
 		}

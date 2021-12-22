@@ -105,7 +105,9 @@ public class WidgetsVisibilityHelper {
 				&& !isInWaypointsChoosingMode()
 				&& !isInRouteLineAppearanceMode()
 				&& !isInGpsFilteringMode();
-		return !mapActivity.shouldHideTopControls()
+		boolean showTopControls = !mapActivity.shouldHideTopControls()
+				|| (isInTrackMenuMode() && !isPortrait());
+		return showTopControls
 				&& !isInFollowTrackMode()
 				&& (additionalDialogsHide || !isPortrait());
 	}
@@ -142,7 +144,9 @@ public class WidgetsVisibilityHelper {
 				&& !isInFollowTrackMode()
 				&& !isInRouteLineAppearanceMode()
 				&& !isInGpsFilteringMode();
-		return !mapActivity.shouldHideTopControls()
+		boolean showTopControls = !mapActivity.shouldHideTopControls()
+				|| (isInTrackMenuMode() && !isPortrait());
+		return showTopControls
 				&& !isInPlanRouteMode()
 				&& !(isMapLinkedToLocation() && routingHelper.isFollowingMode())
 				&& (additionalDialogsHide || !isPortrait());
