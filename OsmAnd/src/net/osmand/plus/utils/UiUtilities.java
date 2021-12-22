@@ -522,7 +522,7 @@ public class UiUtilities {
 		setupCompoundButton(compoundButton, activeColor, inactiveColorPrimary, inactiveColorSecondary);
 	}
 
-	public static Drawable getStrokedBackgroundForCompoundButton (@NonNull OsmandApplication app, int highlightColorDay, int highlightColorNight, boolean checked, boolean nightMode) {
+	public static Drawable getStrokedBackgroundForCompoundButton(@NonNull OsmandApplication app, int highlightColorDay, int highlightColorNight, boolean checked, boolean nightMode) {
 		GradientDrawable background = (GradientDrawable) AppCompatResources.getDrawable(app,
 				R.drawable.bg_select_group_button_outline);
 		if (background != null) {

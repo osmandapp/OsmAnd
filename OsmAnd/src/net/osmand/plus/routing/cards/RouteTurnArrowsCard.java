@@ -40,7 +40,9 @@ public class RouteTurnArrowsCard extends MapBaseCard {
 		TextView title = view.findViewById(R.id.title);
 		LinearLayout container = view.findViewById(R.id.turn_arrow_switch_container);
 		SwitchCompat arrowSwitch = view.findViewById(R.id.compound_button);
-		container.setBackground(UiUtilities.getStrokedBackgroundForCompoundButton(app, R.color.inactive_buttons_and_links_bg_light, R.color.inactive_buttons_and_links_bg_dark, shouldShowTurnArrows(), nightMode));
+		boolean showTurnArrows = shouldShowTurnArrows();
+		container.setBackground(UiUtilities.getStrokedBackgroundForCompoundButton(app, R.color.inactive_buttons_and_links_bg_light,
+				R.color.inactive_buttons_and_links_bg_dark, showTurnArrows, nightMode));
 		arrowSwitch.setChecked(shouldShowTurnArrows());
 		title.setText(shouldShowTurnArrows() ? app.getString(R.string.shared_string_visible) : app.getString(R.string.shared_string_hidden));
 
