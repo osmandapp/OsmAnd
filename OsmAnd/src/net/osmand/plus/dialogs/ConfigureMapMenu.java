@@ -24,7 +24,8 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
 import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 import static net.osmand.plus.ContextMenuItem.INVALID_ID;
 import static net.osmand.plus.plugins.OsmandPlugin.getEnabledPlugins;
-import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.OSM_ASSISTANT;
+import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.RENDERING_CATEGORY_OSM_ASSISTANT;
+import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.createOsmAttributeItems2;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_DENSITY_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
@@ -51,6 +52,7 @@ import androidx.annotation.StyleRes;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
@@ -76,6 +78,8 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.SunriseSunset;
 
+import org.apache.commons.logging.Log;
+
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -87,6 +91,8 @@ import java.util.Locale;
 import java.util.Map;
 
 public class ConfigureMapMenu {
+
+	private static final Log LOG = PlatformUtil.getLog(ConfigureMapMenu.class);
 
 	public static final String HORSE_ROUTES_ATTR = "horseRoutes";
 	public static final String PISTE_ROUTES_ATTR = "pisteRoutes";
@@ -123,7 +129,8 @@ public class ConfigureMapMenu {
 		adapter.setProfileDependent(true);
 		adapter.setNightMode(nightMode);
 		createLayersItems(mapActivity, adapter, nightMode);
-		createOsmAttributeItems(customRules, mapActivity, adapter);
+//		createOsmAttributeItems(customRules, mapActivity, adapter);
+		createOsmAttributeItems2(customRules, mapActivity, adapter, nightMode);
 		createRouteAttributeItems(customRules, adapter, mapActivity, nightMode);
 		createRenderingAttributeItems(customRules, adapter, mapActivity, nightMode);
 		return adapter;
@@ -222,7 +229,9 @@ public class ConfigureMapMenu {
 				.setListener(listener).createItem());
 
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			if (!(plugin instanceof OsmEditingPlugin)) plugin.registerLayerContextMenuActions(adapter, activity);
+			if (!(plugin instanceof OsmEditingPlugin)){
+				plugin.registerLayerContextMenuActions(adapter, activity);
+			}
 		}
 		app.getAidlApi().registerLayerContextMenu(adapter, activity);
 	}
@@ -235,9 +244,11 @@ public class ConfigureMapMenu {
 					.setLayout(R.layout.list_group_title_with_switch)
 					.setCategory(true).createItem());
 
-			for (OsmandPlugin plugin : getEnabledPlugins()) {
-				if ((plugin instanceof OsmEditingPlugin)) plugin.registerLayerContextMenuActions(adapter, activity);
+			OsmEditingPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+			if (plugin != null){
+				plugin.registerLayerContextMenuActions(adapter, activity);
 			}
+
 			OsmandApplication app = activity.getMyApplication();
 			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 			addOsmAssistantItems(customRules, adapter, activity, nightMode);
@@ -452,7 +463,7 @@ public class ConfigureMapMenu {
 
 		List<RenderingRuleProperty> osmCustomRules = new ArrayList<>();
 		for (RenderingRuleProperty property: customRules) {
-			if (OSM_ASSISTANT.equals(property.getCategory())) osmCustomRules.add(property);
+			if (RENDERING_CATEGORY_OSM_ASSISTANT.equals(property.getCategory())) osmCustomRules.add(property);
 		}
 		createCustomRenderingProperties(adapter, activity, osmCustomRules, nightMode);
 	}
@@ -467,7 +478,7 @@ public class ConfigureMapMenu {
 
 		ListIterator<RenderingRuleProperty> iterator = customRules.listIterator();
 		while (iterator.hasNext()){
-			if (OSM_ASSISTANT.equals(iterator.next().getCategory())) iterator.remove();
+			if (RENDERING_CATEGORY_OSM_ASSISTANT.equals(iterator.next().getCategory())) iterator.remove();
 		}
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_map_rendering, activity)
@@ -679,7 +690,7 @@ public class ConfigureMapMenu {
 		return null;
 	}
 
-	private boolean isPropertyAccepted(RenderingRuleProperty property) {
+	private static boolean isPropertyAccepted(RenderingRuleProperty property) {
 		String attrName = property.getAttrName();
 		return !(A_APP_MODE.equals(attrName)
 				|| A_BASE_APP_MODE.equals(attrName)
@@ -696,9 +707,9 @@ public class ConfigureMapMenu {
 		);
 	}
 
-	private void createCustomRenderingProperties(ContextMenuAdapter adapter, MapActivity activity,
-	                                             List<RenderingRuleProperty> customRules,
-	                                             boolean nightMode) {
+	public static void createCustomRenderingProperties(ContextMenuAdapter adapter, MapActivity activity,
+	                                                   List<RenderingRuleProperty> customRules,
+	                                                   boolean nightMode) {
 		for (RenderingRuleProperty p : customRules) {
 			if (isPropertyAccepted(p)) {
 				adapter.addItem(createRenderingProperty(adapter, activity, INVALID_ID, p, CUSTOM_RENDERING_ITEMS_ID_SCHEME + p.getName(), nightMode));
