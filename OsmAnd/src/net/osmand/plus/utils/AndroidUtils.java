@@ -70,8 +70,8 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -455,11 +455,7 @@ public class AndroidUtils {
 	}
 
 	public static void setBackground(View view, Drawable drawable) {
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			view.setBackground(drawable);
-		} else {
-			view.setBackgroundDrawable(drawable);
-		}
+		view.setBackground(drawable);
 	}
 
 	public static void setForeground(Context ctx, View view, boolean night, int lightResId, int darkResId) {

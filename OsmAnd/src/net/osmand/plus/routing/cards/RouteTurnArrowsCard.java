@@ -1,17 +1,16 @@
 package net.osmand.plus.routing.cards;
 
-import android.graphics.drawable.Drawable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.SwitchCompat;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
+import net.osmand.plus.utils.UiUtilities;
 
 public class RouteTurnArrowsCard extends MapBaseCard {
 
@@ -41,13 +40,11 @@ public class RouteTurnArrowsCard extends MapBaseCard {
 		TextView title = view.findViewById(R.id.title);
 		LinearLayout container = view.findViewById(R.id.turn_arrow_switch_container);
 		SwitchCompat arrowSwitch = view.findViewById(R.id.compound_button);
-		Drawable active = AppCompatResources.getDrawable(getMapActivity(), nightMode ? R.drawable.btn_background_inactive_dark : R.drawable.btn_background_inactive_light);
-		Drawable inActive = AppCompatResources.getDrawable(getMapActivity(), nightMode ? R.drawable.btn_border_dark : R.drawable.btn_border_light);
-
 		boolean showTurnArrows = shouldShowTurnArrows();
-		arrowSwitch.setChecked(showTurnArrows);
-		title.setText(showTurnArrows ? app.getString(R.string.shared_string_visible) : app.getString(R.string.shared_string_hidden));
-		container.setBackground(showTurnArrows ? active : inActive);
+		container.setBackground(UiUtilities.getStrokedBackgroundForCompoundButton(app, R.color.inactive_buttons_and_links_bg_light,
+				R.color.inactive_buttons_and_links_bg_dark, showTurnArrows, nightMode));
+		arrowSwitch.setChecked(shouldShowTurnArrows());
+		title.setText(shouldShowTurnArrows() ? app.getString(R.string.shared_string_visible) : app.getString(R.string.shared_string_hidden));
 
 		container.setOnClickListener(view -> {
 			setHasTurnArrow(!shouldShowTurnArrows());
