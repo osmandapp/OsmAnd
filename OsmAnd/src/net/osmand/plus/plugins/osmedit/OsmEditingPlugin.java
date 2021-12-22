@@ -2,6 +2,7 @@ package net.osmand.plus.plugins.osmedit;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CREATE_POI;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OPEN_STREET_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_EDITING;
@@ -32,12 +33,14 @@ import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.ContextMenuItem.ItemBuilder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
@@ -66,6 +69,7 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -78,7 +82,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	private static final Log LOG = PlatformUtil.getLog(OsmEditingPlugin.class);
 	public static final int OSM_EDIT_TAB = R.string.osm_edits;
-	public static final String OSM_ASSISTANT = "osm_assistant";
+	public static final String RENDERING_CATEGORY_OSM_ASSISTANT = "osm_assistant";
 
 	// Constants for determining the order of items in the additional actions context menu
 	private static final int CREATE_POI_ITEM_ORDER = 7300;
@@ -339,6 +343,27 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		mTabs.add(favoritesActivity.getTabIndicator(OSM_EDIT_TAB, OsmEditsFragment.class));
 		if (intent != null && "OSM".equals(intent.getStringExtra("TAB"))) {
 			app.getSettings().FAVORITES_TAB.set(OSM_EDIT_TAB);
+		}
+	}
+
+	public static void createOsmAttributeItems2(List<RenderingRuleProperty> customRules, @NonNull MapActivity activity, @NonNull ContextMenuAdapter adapter, boolean nightMode){
+		if (OsmandPlugin.isEnabled(OsmEditingPlugin.class)){
+			adapter.addItem(new ItemBuilder()
+					.setTitleId(R.string.shared_string_open_street_map, activity)
+					.setId(OPEN_STREET_MAP)
+					.setLayout(R.layout.list_group_title_with_switch)
+					.setCategory(true).createItem());
+
+			OsmEditingPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+			if (plugin != null){
+				plugin.registerLayerContextMenuActions(adapter, activity);
+			}
+
+			List<RenderingRuleProperty> osmCustomRules = new ArrayList<>();
+			for (RenderingRuleProperty property: customRules) {
+				if (RENDERING_CATEGORY_OSM_ASSISTANT.equals(property.getCategory())) osmCustomRules.add(property);
+			}
+			ConfigureMapMenu.createCustomRenderingProperties(adapter, activity, osmCustomRules, nightMode);
 		}
 	}
 
