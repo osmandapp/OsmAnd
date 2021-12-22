@@ -4507,6 +4507,6 @@
     <string name="shared_string_not_used">Nicht genutzt</string>
     <string name="shared_string_used">Genutzt</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Notiz-Tags</string>
-    <string name="rendering_attr_OSMMapperAssistantNote_description">Hinweis-Tags anzeigen</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Notiz-Tags anzeigen</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">fixme-Tags anzeigen</string>
 </resources>
