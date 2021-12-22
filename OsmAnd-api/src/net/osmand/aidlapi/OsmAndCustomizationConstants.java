@@ -51,6 +51,7 @@ public interface OsmAndCustomizationConstants {
 	String MAPILLARY = SHOW_ITEMS_ID_SCHEME + "mapillary";
 	String OSM_NOTES = SHOW_ITEMS_ID_SCHEME + "osm_notes";
 	String OSM_EDITS = SHOW_ITEMS_ID_SCHEME + "osm_edits";
+	String OPEN_STREET_MAP = SHOW_ITEMS_ID_SCHEME + "open_street_map";
 	String OVERLAY_MAP = SHOW_ITEMS_ID_SCHEME + "overlay_map";
 	String UNDERLAY_MAP = SHOW_ITEMS_ID_SCHEME + "underlay_map";
 	String CONTOUR_LINES = SHOW_ITEMS_ID_SCHEME + "contour_lines";

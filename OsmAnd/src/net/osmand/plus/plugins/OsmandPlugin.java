@@ -20,22 +20,19 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.download.CustomRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.api.SettingsAPI;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.download.CustomRegion;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
@@ -43,24 +40,28 @@ import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
+import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.plugins.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
+import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.plugins.skimaps.SkiMapsPlugin;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
-import net.osmand.plus.plugins.skimaps.SkiMapsPlugin;
-import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
+import net.osmand.render.RenderingRuleProperty;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
 
@@ -558,6 +559,9 @@ public abstract class OsmandPlugin {
 	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
 	}
 
+	protected void registerConfigureMapCategoryActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
+	}
+
 	protected void registerMapContextMenuActions(@NonNull MapActivity mapActivity, double latitude, double longitude,
 	                                             ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 	}
@@ -573,9 +577,6 @@ public abstract class OsmandPlugin {
 	}
 
 	protected void addMyPlacesTab(FavoritesActivity favoritesActivity, List<TabItem> mTabs, Intent intent) {
-	}
-
-	protected void contextMenuFragment(FragmentActivity activity, Fragment fragment, Object info, ContextMenuAdapter adapter) {
 	}
 
 	protected void optionsMenuFragment(FragmentActivity activity, Fragment fragment, ContextMenuAdapter optionsMenuAdapter) {
@@ -851,15 +852,15 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	public static void registerOptionsMenu(MapActivity map, ContextMenuAdapter helper) {
+	public static void registerConfigureMapCategory(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, List<RenderingRuleProperty> customRules) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			plugin.registerOptionsMenuItems(map, helper);
+			plugin.registerConfigureMapCategoryActions(adapter, mapActivity, customRules);
 		}
 	}
 
-	public static void onContextMenuActivity(FragmentActivity activity, Fragment fragment, Object info, ContextMenuAdapter adapter) {
+	public static void registerOptionsMenu(MapActivity map, ContextMenuAdapter helper) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			plugin.contextMenuFragment(activity, fragment, info, adapter);
+			plugin.registerOptionsMenuItems(map, helper);
 		}
 	}
 
@@ -932,7 +933,7 @@ public abstract class OsmandPlugin {
 	}
 
 	/**
-	 * @param holder an object to collect results
+	 * @param holder      an object to collect results
 	 * @param imageObject json object that contains data for create an image card
 	 * @return 'true' if an image card was created
 	 */
