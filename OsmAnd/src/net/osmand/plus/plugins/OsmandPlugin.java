@@ -555,7 +555,7 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
+	public void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
 	}
 
 	protected void registerMapContextMenuActions(@NonNull MapActivity mapActivity, double latitude, double longitude,
@@ -842,16 +842,6 @@ public abstract class OsmandPlugin {
 	                                          ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.registerMapContextMenuActions(mapActivity, latitude, longitude, adapter, selectedObj, configureMenu);
-		}
-	}
-
-	public static void registerLayerContextMenu(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, boolean isOsmEditPlugin) {
-		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			if (isOsmEditPlugin && plugin instanceof OsmEditingPlugin){
-				plugin.registerLayerContextMenuActions(adapter, mapActivity);
-			} else if (!isOsmEditPlugin && !(plugin instanceof OsmEditingPlugin)){
-				plugin.registerLayerContextMenuActions(adapter, mapActivity);
-			}
 		}
 	}
 

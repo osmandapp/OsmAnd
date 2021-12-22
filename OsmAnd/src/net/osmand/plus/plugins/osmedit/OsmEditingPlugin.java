@@ -24,7 +24,6 @@ import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.MapObject;
@@ -34,7 +33,6 @@ import net.osmand.osm.edit.Entity;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
@@ -44,6 +42,7 @@ import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
@@ -52,19 +51,20 @@ import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.SendGpxBottomSheetFragment;
 import net.osmand.plus.plugins.osmedit.fragments.DashOsmEditsFragment;
 import net.osmand.plus.plugins.osmedit.fragments.OsmEditsFragment;
+import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapLocalUtil;
+import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapRemoteUtil;
 import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapsDbHelper;
 import net.osmand.plus.plugins.osmedit.helpers.OsmBugsDbHelper;
+import net.osmand.plus.plugins.osmedit.helpers.OsmBugsLocalUtil;
+import net.osmand.plus.plugins.osmedit.helpers.OsmBugsRemoteUtil;
 import net.osmand.plus.plugins.osmedit.quickactions.AddOSMBugAction;
 import net.osmand.plus.plugins.osmedit.quickactions.AddPOIAction;
 import net.osmand.plus.plugins.osmedit.quickactions.ShowHideOSMBugAction;
-import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapLocalUtil;
-import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapRemoteUtil;
-import net.osmand.plus.plugins.osmedit.helpers.OsmBugsLocalUtil;
-import net.osmand.plus.plugins.osmedit.helpers.OsmBugsRemoteUtil;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
 
@@ -78,6 +78,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	private static final Log LOG = PlatformUtil.getLog(OsmEditingPlugin.class);
 	public static final int OSM_EDIT_TAB = R.string.osm_edits;
+	public static final String OSM_ASSISTANT = "osm_assistant";
 
 	// Constants for determining the order of items in the additional actions context menu
 	private static final int CREATE_POI_ITEM_ORDER = 7300;
@@ -342,7 +343,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
+	public void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(OSM_NOTES)
 				.setTitleId(R.string.layer_osm_bugs, mapActivity)
