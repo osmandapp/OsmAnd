@@ -116,6 +116,8 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	private int layoutHeightPrevious = 0;
 	private ColorsCard colorsCard;
 
+	protected boolean addPointWithoutDialog;
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -396,6 +398,14 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 				layoutHeightPrevious = layoutHeight;
 			}
 		};
+	}
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		if (addPointWithoutDialog) {
+			save(true);
+		}
 	}
 
 	@Override
@@ -803,7 +813,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 
 	private void showKeyboard() {
 		FragmentActivity activity = getActivity();
-		if (activity != null) {
+		if (!addPointWithoutDialog && activity != null) {
 			InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
 			if (inputMethodManager != null) {
 				inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);

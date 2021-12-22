@@ -1,15 +1,38 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
+
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
+import net.osmand.data.FavouritePoint.BackgroundType;
+import net.osmand.data.LatLon;
+import net.osmand.data.WptLocationPoint;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.track.SaveGpxAsyncTask;
+import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SavingTrackHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.util.Algorithms;
+
+import java.io.File;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -18,32 +41,8 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
-import net.osmand.data.FavouritePoint.BackgroundType;
-import net.osmand.data.LatLon;
-import net.osmand.data.WptLocationPoint;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.track.helpers.SavingTrackHelper;
-import net.osmand.plus.views.PointImageDrawable;
-import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
-import net.osmand.plus.mapmarkers.MapMarkersGroup;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.track.SaveGpxAsyncTask;
-import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
-import net.osmand.util.Algorithms;
-
-import java.io.File;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 
 public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 
@@ -59,7 +58,6 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	private boolean saved;
 	private int color;
 	private int defaultColor;
-	protected boolean skipDialog;
 	private String iconName;
 	@NonNull
 	private String backgroundTypeName = DEFAULT_BACKGROUND_TYPE.getTypeName();
@@ -114,14 +112,6 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 			iconName = getInitialIconName(wpt);
 			categoriesMap = editor.getColoredWaypointCategories();
 			backgroundTypeName = wpt.getBackgroundType();
-		}
-	}
-
-	@Override
-	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-		if (skipDialog) {
-			save(true);
 		}
 	}
 
@@ -191,14 +181,14 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 		showInstance(mapActivity, false);
 	}
 
-	public static void showInstance(@NonNull MapActivity mapActivity, boolean skipDialog) {
+	public static void showInstance(@NonNull MapActivity mapActivity, boolean addPointWithoutDialog) {
 		WptPtEditor editor = mapActivity.getContextMenu().getWptPtPointEditor();
 		if (editor != null) {
 			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 			String tag = editor.getFragmentTag();
 			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 				WptPtEditorFragmentNew fragment = new WptPtEditorFragmentNew();
-				fragment.skipDialog = skipDialog;
+				fragment.addPointWithoutDialog = addPointWithoutDialog;
 				fragmentManager.beginTransaction()
 						.add(R.id.fragmentContainer, fragment, tag)
 						.addToBackStack(null)
