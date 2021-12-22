@@ -4510,4 +4510,8 @@
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Не скрывать водные туннели</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Водные туннели</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Теги fixme</string>
+    <string name="shared_string_used">Используется</string>
+    <string name="files_with_route_restrictions">Файлы с ограничениями маршрута</string>
+    <string name="shared_string_not_used">Не используется</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
 </resources>
