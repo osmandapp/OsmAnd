@@ -170,7 +170,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 					.setChecked(simplifiedTrack)
 					.setCompoundButtonColorId(activeColorRes)
 					.setDescription(getSimplifiedTrackDescription())
-					.setBackground(AndroidUtils.getStrokedBackgroundForSwitch(app, R.color.activity_background_color_light, R.color.list_background_color_dark, simplifiedTrack, nightMode))
+					.setBackground(UiUtilities.getStrokedBackgroundForCompoundButton(app, R.color.activity_background_color_light, R.color.list_background_color_dark, simplifiedTrack, nightMode))
 					.setTitle(getString(R.string.simplified_track))
 					.setLayoutId(R.layout.bottom_sheet_item_with_switch_and_descr)
 					.setOnClickListener(new View.OnClickListener() {
@@ -178,7 +178,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 						public void onClick(View v) {
 							simplifiedTrack = !simplifiedTrack;
 							simplifiedTrackItem[0].setChecked(simplifiedTrack);
-							AndroidUtils.setBackground(simplifiedTrackItem[0].getView(), AndroidUtils.getStrokedBackgroundForSwitch(app, R.color.activity_background_color_light, R.color.list_background_color_dark, simplifiedTrack, nightMode));
+							AndroidUtils.setBackground(simplifiedTrackItem[0].getView(), UiUtilities.getStrokedBackgroundForCompoundButton(app, R.color.activity_background_color_light, R.color.list_background_color_dark, simplifiedTrack, nightMode));
 							simplifiedTrackItem[0].setDescription(getSimplifiedTrackDescription());
 						}
 					})
@@ -192,7 +192,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		showOnMapItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setCompoundButtonColorId(activeColorRes)
 				.setChecked(showOnMap)
-				.setBackground(AndroidUtils.getStrokedBackgroundForSwitch(app, R.color.activity_background_color_light, R.color.list_background_color_dark, showOnMap, nightMode))
+				.setBackground(UiUtilities.getStrokedBackgroundForCompoundButton(app, R.color.activity_background_color_light, R.color.list_background_color_dark, showOnMap, nightMode))
 				.setTitle(getString(R.string.shared_string_show_on_map))
 				.setLayoutId(R.layout.bottom_sheet_item_with_switch_and_descr)
 				.setOnClickListener(new View.OnClickListener() {
@@ -200,7 +200,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 					public void onClick(View v) {
 						showOnMap = !showOnMap;
 						showOnMapItem[0].setChecked(showOnMap);
-						AndroidUtils.setBackground(showOnMapItem[0].getView(), AndroidUtils.getStrokedBackgroundForSwitch(app, R.color.activity_background_color_light, R.color.list_background_color_dark, showOnMap, nightMode));
+						AndroidUtils.setBackground(showOnMapItem[0].getView(), UiUtilities.getStrokedBackgroundForCompoundButton(app, R.color.activity_background_color_light, R.color.list_background_color_dark, showOnMap, nightMode));
 					}
 				})
 				.create();

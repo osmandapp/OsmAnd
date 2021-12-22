@@ -46,11 +46,11 @@ import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.snackbar.SnackbarContentLayout;
 
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.DirectionDrawable;
@@ -520,6 +520,25 @@ public class UiUtilities {
 				break;
 		}
 		setupCompoundButton(compoundButton, activeColor, inactiveColorPrimary, inactiveColorSecondary);
+	}
+
+	public static Drawable getStrokedBackgroundForCompoundButton (@NonNull OsmandApplication app, int highlightColorDay, int highlightColorNight, boolean checked, boolean nightMode) {
+		GradientDrawable background = (GradientDrawable) AppCompatResources.getDrawable(app,
+				R.drawable.bg_select_group_button_outline);
+		if (background != null) {
+			int highlightColor = ContextCompat.getColor(app, nightMode ?
+					highlightColorNight : highlightColorDay);
+			int strokedColor = AndroidUtils.getColorFromAttr(UiUtilities.getThemedContext(app, nightMode),
+					R.attr.stroked_buttons_and_links_outline);
+			background = (GradientDrawable) background.mutate();
+			if (checked) {
+				background.setStroke(0, Color.TRANSPARENT);
+				background.setColor(highlightColor);
+			} else {
+				background.setStroke(app.getResources().getDimensionPixelSize(R.dimen.map_button_stroke), strokedColor);
+			}
+		}
+		return background;
 	}
 
 	public static void setupCompoundButton(CompoundButton compoundButton,

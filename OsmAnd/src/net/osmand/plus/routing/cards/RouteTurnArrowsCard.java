@@ -10,7 +10,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
-import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 
 public class RouteTurnArrowsCard extends MapBaseCard {
 
@@ -40,7 +40,7 @@ public class RouteTurnArrowsCard extends MapBaseCard {
 		TextView title = view.findViewById(R.id.title);
 		LinearLayout container = view.findViewById(R.id.turn_arrow_switch_container);
 		SwitchCompat arrowSwitch = view.findViewById(R.id.compound_button);
-		container.setBackground(AndroidUtils.getStrokedBackgroundForSwitch(app, R.color.inactive_buttons_and_links_bg_light, R.color.inactive_buttons_and_links_bg_dark, shouldShowTurnArrows(), nightMode));
+		container.setBackground(UiUtilities.getStrokedBackgroundForCompoundButton(app, R.color.inactive_buttons_and_links_bg_light, R.color.inactive_buttons_and_links_bg_dark, shouldShowTurnArrows(), nightMode));
 		arrowSwitch.setChecked(shouldShowTurnArrows());
 		title.setText(shouldShowTurnArrows() ? app.getString(R.string.shared_string_visible) : app.getString(R.string.shared_string_hidden));
 
