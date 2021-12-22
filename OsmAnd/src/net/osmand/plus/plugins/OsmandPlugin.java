@@ -61,6 +61,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
+import net.osmand.render.RenderingRuleProperty;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
 
@@ -555,7 +556,10 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	public void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
+	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
+	}
+
+	protected void registerConfigureMapCategoryActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
 	}
 
 	protected void registerMapContextMenuActions(@NonNull MapActivity mapActivity, double latitude, double longitude,
@@ -573,9 +577,6 @@ public abstract class OsmandPlugin {
 	}
 
 	protected void addMyPlacesTab(FavoritesActivity favoritesActivity, List<TabItem> mTabs, Intent intent) {
-	}
-
-	protected void contextMenuFragment(FragmentActivity activity, Fragment fragment, Object info, ContextMenuAdapter adapter) {
 	}
 
 	protected void optionsMenuFragment(FragmentActivity activity, Fragment fragment, ContextMenuAdapter optionsMenuAdapter) {
@@ -845,15 +846,21 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	public static void registerOptionsMenu(MapActivity map, ContextMenuAdapter helper) {
+	public static void registerLayerContextMenu(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			plugin.registerOptionsMenuItems(map, helper);
+			plugin.registerLayerContextMenuActions(adapter, mapActivity);
 		}
 	}
 
-	public static void onContextMenuActivity(FragmentActivity activity, Fragment fragment, Object info, ContextMenuAdapter adapter) {
+	public static void registerConfigureMapCategory(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, List<RenderingRuleProperty> customRules) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			plugin.contextMenuFragment(activity, fragment, info, adapter);
+			plugin.registerConfigureMapCategoryActions(adapter, mapActivity, customRules);
+		}
+	}
+
+	public static void registerOptionsMenu(MapActivity map, ContextMenuAdapter helper) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			plugin.registerOptionsMenuItems(map, helper);
 		}
 	}
 
@@ -926,7 +933,7 @@ public abstract class OsmandPlugin {
 	}
 
 	/**
-	 * @param holder an object to collect results
+	 * @param holder      an object to collect results
 	 * @param imageObject json object that contains data for create an image card
 	 * @return 'true' if an image card was created
 	 */
