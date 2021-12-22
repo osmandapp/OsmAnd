@@ -37,6 +37,7 @@
 	<asset source="voice/ko/ko_tts.js" destination="voice/ko-tts/ko_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/lv/lv_tts.js" destination="voice/lv-tts/lv_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/nl/nl_tts.js" destination="voice/nl-tts/nl_tts.js" mode="alwaysOverwriteOrCopy" />
+	<asset source="voice/nl-be/nl-be_tts.js" destination="voice/nl-be-tts/nl-be_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/pl/pl_tts.js" destination="voice/pl-tts/pl_tts.js" mode="alwaysOverwriteOrCopy" />
 	<asset source="voice/pt/pt_tts.js" destination="voice/pt-tts/pt_tts.js" mode="alwaysOverwriteOrCopy" />
 	<asset source="voice/pt-br/pt-br_tts.js" destination="voice/pt-br-tts/pt-br_tts.js" mode="overwriteOnlyIfExists" />
