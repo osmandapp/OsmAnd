@@ -74,8 +74,8 @@
     <string name="fav_export_confirmation">이전에 익스포트한 즐겨찾기에 대한 파일이 이미 존재합니다. 이 파일을 대체하시겠습니까?</string>
     <string name="profile_settings">특정 설정 프로필</string>
     <string name="settings_preset">기본 프로필</string>
-    <string name="settings_preset_descr">각 프로필마다 맵뷰어 와 운행 설정을 기억합니다. 여기에 기본 프로필을 설정합니다.</string>
-    <string name="routing_settings">운행</string>
+    <string name="settings_preset_descr">각 프로필마다 맵 뷰어와 운행 설정을 기억합니다. 여기에 기본 프로필을 설정합니다.</string>
+    <string name="routing_settings">내비게이션</string>
     <string name="routing_settings_descr">운행을 위한 옵션을 설정합니다</string>
     <string name="global_settings">일반 설정</string>
     <string name="index_settings">지도 관리</string>
@@ -1638,7 +1638,7 @@
     <string name="min_km">분/km</string>
     <string name="m_s">m/s</string>
     <string name="shared_string_trip_recording">여행 기록</string>
-    <string name="shared_string_navigation">운행</string>
+    <string name="shared_string_navigation">내비게이션</string>
     <string name="osmand_running_in_background">백그라운드에서 실행</string>
     <string name="favourites_edit_dialog_title">즐겨 찾는 정보</string>
     <string name="simulate_your_location_stop_descr">위치 시뮬레이션 중지</string>
@@ -1709,14 +1709,14 @@
     <string name="wikivoyage_download_pics">이미지 다운로드</string>
     <string name="shared_string_wifi_only">Wi-Fi에서만 사용</string>
     <string name="download_images">이미지 다운로드</string>
-    <string name="gpx_upload_public_visibility_descr">\"공개\"란 추적이 사용자의 GPS 추적 목록과 공개 GPS 추적 목록, 그리고 공개 추적 목록에 원시 형태의 타임스탬프와 함께 공개적으로 표시됨을 의미한다. API를 통해 제공되는 데이터는 추적 페이지를 참조하지 않는다. 추적점 타임스탬프는 공개 GPS API를 통해 사용할 수 없으며, 추적점은 연대순으로 정렬되지 않는다.</string>
+    <string name="gpx_upload_public_visibility_descr">\"공개\"란 추적이 사용자의 GPS 추적 목록과 공개 GPS 추적 목록, 그리고 공개 추적 목록에 원시 형태의 타임스탬프와 함께 공개적으로 표시됨을 의미합니다. API를 통해 제공되는 데이터는 추적 페이지를 참조하지 않습니다. 추적점 타임스탬프는 공개 GPS API를 통해 사용할 수 없으며, 추적점은 연대순으로 정렬되지 않습니다.</string>
     <string name="search_download_wikipedia_maps">위키백과 지도 다운로드</string>
     <string name="shared_string_done">끝</string>
     <string name="shared_string_uninstall">제거</string>
-    <string name="wiki_menu_download_descr">지도에서 위키피디아 POI를 보려면 추가 지도가 필요하다.</string>
+    <string name="wiki_menu_download_descr">지도에서 위키피디아 POI를 보려면 추가 지도가 필요합니다.</string>
     <string name="download_slope_maps">경사</string>
     <string name="select_group">그룹선택</string>
-    <string name="personal_category_name">개인적인</string>
+    <string name="personal_category_name">개인</string>
     <string name="rendering_attr_piste_type_downhill_name">내리막</string>
     <string name="vehicle_parameters">차량 매개변수</string>
     <string name="map_during_navigation">탐색 중 맵</string>
@@ -1795,7 +1795,7 @@
     <string name="shared_string_width">폭</string>
     <string name="gpx_parse_error">오스만드 GPX가 제대로 형성되지 않았으므로 지원팀에 문의하여 추가 조사를 진행하십시오.</string>
     <string name="restart">다시 시작</string>
-    <string name="gpx_upload_private_visibility_descr">\"Private\"는 추적이 공개 목록에 나타나지 않음을 의미하지만, 그 추적이 비동기적 순서로 된 추적점은 타임스탬프 없이 공개 GPS API를 통해 이용할 수 있다.</string>
+    <string name="gpx_upload_private_visibility_descr">\"Private\"는 추적이 공개 목록에 나타나지 않음을 의미하지만, 그 추적이 비동기적 순서로 된 추적점은 타임스탬프 없이 공개 GPS API를 통해 이용할 수 있습니다.</string>
     <string name="route_between_points_add_track_desc">새 세그먼트를 추가할 트랙 파일을 선택하십시오.</string>
     <string name="app_mode_offroad">오프로드</string>
     <string name="shared_string_widgets">위젯</string>
@@ -1855,7 +1855,7 @@
     <string name="empty_state_markers_active">지도 마커가 작성됨!</string>
     <string name="map_markers">지도 마커</string>
     <string name="osmand_settings">OsmAnd 설정</string>
-    <string name="purchases">구입내역</string>
+    <string name="purchases">구입 내역</string>
     <string name="app_profile_type">앱 프로파일 유형</string>
     <string name="plugins_settings">플러그인 설정</string>
     <string name="monitoring_notification">알림</string>
@@ -2305,7 +2305,7 @@
     <string name="routing_attr_only_permitted_ways_description">명시적으로 허용된 방법(트랙, 경로 등)만 사용됨</string>
     <string name="show_start_dialog">시작 대화상자 표시</string>
     <string name="gpx_direction_arrows">방향 화살표</string>
-    <string name="rendering_attr_piste_type_skitour_name">스키투어</string>
+    <string name="rendering_attr_piste_type_skitour_name">스키 투어</string>
     <string name="update_time">업데이트 시간</string>
     <string name="no_items_of_type_message">이 유형의 품목이 없음</string>
     <string name="contributions_may_calculate_with_delay">기여도를 계산하는 데 몇 시간이 걸릴 수 있습니다.</string>
@@ -2380,4 +2380,8 @@
     <string name="mapillary_menu_filter_description_new">날짜 또는 유형별로 이미지를 필터링합니다. 클로즈업 줌에서만 활성화됩니다.</string>
     <string name="on_hold_since">해당일 이후 보류 중 %1$s</string>
     <string name="live_update">실시간 업데이트</string>
+    <string name="plan_route_create_new_route">새 경로 만들기</string>
+    <string name="plan_route_open_existing_track">기존 트랙 열기</string>
+    <string name="shared_string_resources">리소스</string>
+    <string name="profile_type_custom_string">커스텀 프로필</string>
 </resources>
