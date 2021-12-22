@@ -1930,7 +1930,7 @@
     <string name="show_warnings_descr">设置交通警告（限速、强制停车、减速带、隧道）、测速摄像头警告和车道信息。</string>
     <string name="use_compass_navigation_descr">没有检测到朝向的时候使用罗盘。</string>
     <string name="auto_zoom_map_descr">根据你的速度（地图与当前的位置同步）自动缩放地图。</string>
-    <string name="snap_to_road_descr">当前位置的图标将被锁定在当前导航路线上</string>
+    <string name="snap_to_road_descr">当前位置图标将与当前导航路径对齐</string>
     <string name="osmand_long_description_1000_chars">OsmAnd(OSM自动导航方向)
 \n
 \n OsmAnd是一款开源软件导航应用，可以访问各种全球OSM数据。所有的地图数据（矢量图或磁贴图）都可以存储在手机存储卡上，供离线使用。还提供离线和在线路线功能，包括逐个转弯的语音引导。
@@ -3501,7 +3501,7 @@
     <string name="routing_attr_allow_intermittent_name">允许间歇性水路</string>
     <string name="analyze_by_intervals">分析分割区间</string>
     <string name="activity_type_car_name">汽车</string>
-    <string name="temporary_conditional_routing_descr">在地图上使用现在有效的道路限制</string>
+    <string name="temporary_conditional_routing_descr">使用地图上有效的道路限制</string>
     <string name="routing_attr_short_way_description">优化的更短路线（节能）</string>
     <string name="routing_attr_driving_style_description">选择驾驶目的，以获得更短、更快或更安全的路线</string>
     <string name="map_orientation_threshold_descr">如果速度低于阈值，不要旋转地图视图</string>
@@ -3512,16 +3512,16 @@
     <string name="track_recording_save_and_stop">保存并停止录制</string>
     <string name="track_recording_description">停止录制？
 \n所有未保存的数据都将丢失。</string>
-    <string name="on_pause">暂停</string>
-    <string name="app_restart_required">应用需要重新启动以应用某些设置。</string>
+    <string name="on_pause">暂停中</string>
+    <string name="app_restart_required">程序需要重新启动以应用某些设置。</string>
     <string name="routing_attr_height_obstacles_description">路线可以避开陡上坡。</string>
-    <string name="quick_action_coordinates_widget_descr">显示或隐藏地图上的坐标小部件。</string>
+    <string name="quick_action_coordinates_widget_descr">显示或隐藏地图上坐标小部件的开关。</string>
     <string name="map_widget_distance_by_tap">点击测距</string>
     <string name="latest_openstreetmap_update">最新的 OpenStreetMap 更新可用：</string>
     <string name="last_time_checked">上次检查： %s</string>
     <string name="update_frequency">更新频率</string>
-    <string name="live_update_frequency_week_variant">地图更新将每周检查一次。下次 %1$s 在 %2$s 。</string>
-    <string name="live_update_frequency_day_variant">地图更新将每天检查。下次 %1$s 在 %2$s 。</string>
+    <string name="live_update_frequency_week_variant">将每周检查一次地图更新。下次 %1$s 在 %2$s 。</string>
+    <string name="live_update_frequency_day_variant">将每天检查地图更新。下次 %1$s 在 %2$s 。</string>
     <string name="live_update_frequency_hour_variant">将每小时检查一次地图更新。下次 %1$s 在 %2$s 。</string>
     <string name="purchases">购买</string>
     <string name="select_category_descr">选择类别或添加新类别</string>
@@ -3532,7 +3532,7 @@
     <string name="rendering_attr_noNatureReserveBoundaries_description">隐藏自然保护区、保护区和国家公园边界。</string>
     <string name="track_has_no_altitude">轨迹不包含高度数据。</string>
     <string name="track_has_no_speed">轨迹不包含速度数据。</string>
-    <string name="select_another_colorization">请选择另一类颜色。</string>
+    <string name="select_another_colorization">请选择另一种着色类型。</string>
     <string name="delete_updates">删除更新</string>
     <string name="live_update_delete_updates_msg">删除所有 %s 实时更新？</string>
     <string name="keep_both_desc">导入的项目将添加前缀</string>
@@ -3641,7 +3641,7 @@
     <string name="map_look_descr">地图显示</string>
     <string name="configure_profile_info">配置选项：</string>
     <string name="configure_profile">更改配置</string>
-    <string name="osmand_live">实时OsmAnd</string>
+    <string name="osmand_live">OsmAnd 实况</string>
     <string name="contributions_may_calculate_with_delay">计算贡献可能需要几个小时。</string>
     <string name="map_updates_are_unavailable_yet">地图尚无更新可用。 :-(</string>
     <string name="connect_track_points_as">连接路线点</string>
@@ -3960,7 +3960,7 @@
 \n请检查你的互联网连接。</string>
     <string name="make_backup">进行备份</string>
     <string name="backup_now">立即备份</string>
-    <string name="backup_complete">完整备份</string>
+    <string name="backup_complete">备份完毕</string>
     <string name="shared_string_external">外部</string>
     <string name="osmand_online_routing_promo">使用预定义模板，或者添加 OSRM、GraphHopper、openrouteserservice、GPX 在线路线规划。</string>
     <string name="shared_string_online">在线</string>
@@ -3981,4 +3981,77 @@
     <string name="backup_delete_old_data_warning">您将删除先前加载的数据的更改历史。
 \n
 \n当前版本的数据将保存在服务器上，但您将无法恢复到以前所做的更改。</string>
+    <string name="shared_string_min_height">最低高度</string>
+    <string name="restore_from_file">从文件恢复</string>
+    <string name="local_backup">本地备份</string>
+    <string name="osmand_cloud_authorize_descr">永不丢失你的数据。轻易备份和恢复所有信息。</string>
+    <string name="shared_string_show_slope">显示斜坡</string>
+    <string name="shared_string_hide_slope">隐藏斜坡</string>
+    <string name="shared_string_grade">斜坡</string>
+    <string name="shared_string_uphill">上坡</string>
+    <string name="shared_string_downhill">下坡</string>
+    <string name="elevation_profile">海拔剖面</string>
+    <string name="language_description">选择语音指引的首选语言和类型。</string>
+    <string name="route_line_use_gradient_coloring">路径线按海拔斜率着色。</string>
+    <string name="output">输出</string>
+    <string name="user_points">用户点</string>
+    <string name="srtm_unit_format">等高线单位变体</string>
+    <string name="update_all_maps_added">更新所有添加到 %1$s 的地图？</string>
+    <string name="on_hold">保留</string>
+    <string name="renew_subscription">续订</string>
+    <string name="osmand_live_cancelled">已取消</string>
+    <string name="troubleshooting">故障排除</string>
+    <string name="contact_support">联系支持</string>
+    <string name="no_purchases">你没有任何购买</string>
+    <string name="specify_color_for_map_mode">指定地图模式 %1$s 的颜色。</string>
+    <string name="customize_route_line">自定义路径线</string>
+    <string name="trip_recording_show_start_dialog_setting">如禁用，录制将在点击小部件或菜单项后立即开始，跳过确认对话框。</string>
+    <string name="lost_data_warning">所有未保存的数据将丢失。</string>
+    <string name="trip_recording_save_and_continue">保存并继续</string>
+    <string name="trip_recording_logging_interval_info">日志间隔设置 OsmAnd 请求当前位置数据的时间周期。</string>
+    <string name="rendering_attr_natureReserves_name">自然保护区</string>
+    <string name="rendering_attr_natureReserves_description">展示自然保护区、保护区和国家公园。</string>
+    <string name="osmand_cloud_create_account_descr">请输入您的电子邮件地址，我们会发送一个验证码到这个地址，
+\n你所有的数据都将与其相链接。</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">避开低排放区</string>
+    <string name="tts_description">文本转语音 (TTS) 可以读出所有类型的指令：街道名称、转弯指令、兴趣点名称等。</string>
+    <string name="empty_purchases_description">如果您的购买没有显示在这里，轻按“%1$s”，或联系我们的支持团队。</string>
+    <string name="contact_support_description">如您有任何问题，请通过 %1$s 联系我们。</string>
+    <string name="new_device_account">新设备/新账户</string>
+    <string name="osmand_cloud_login_descr">请输入您注册时的电子邮件地址。下一步所用的一次性密码将被发送到此地址。</string>
+    <string name="backup_into_file">备份为文件</string>
+    <string name="local_backup_descr">从本地文件备份或恢复数据。</string>
+    <string name="osmand_cloud">OsmAnd 云</string>
+    <string name="duration_ago">%1$s 前</string>
+    <string name="last_backup">上次备份</string>
+    <string name="shared_string_route_line">路径线</string>
+    <string name="search_more">搜索更多…</string>
+    <string name="enter_verification_code">输入一次性密码</string>
+    <string name="verify_email_address_descr">验证码已发送至 %1$s。请在下方字段输入它。</string>
+    <string name="verify_email_address">验证电子邮件地址</string>
+    <string name="osmand_cloud_help_descr">需要帮助？请通过 %1$s 联系我们</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">避开低排放区</string>
+    <string name="route_line_use_map_style_color">使用地图样式 (%1$s) 默认颜色。</string>
+    <string name="route_line_use_map_style_width">使用地图样式 (%1$s) 默认宽度。</string>
+    <string name="recorded_description">录制的声音听起来更佳，但只能发出预录制的短语：转向指示。发不出街道名称或兴趣点名称。</string>
+    <string name="tts_title">文本转语音</string>
+    <string name="shared_string_max_height">最大高度</string>
+    <string name="exit_number">出口编号</string>
+    <string name="srtm_download_single_help_message">请选择变体。您需要重新下载文件以更改格式。</string>
+    <string name="srtm_download_list_help_message">OsmAnd 提供以米和英尺为单位的等高线数据。您需要重新下载文件以更改格式。</string>
+    <string name="expired">已过期</string>
+    <string name="next_billing_date">下一账单日：%1$s</string>
+    <string name="monthly_subscription">月度订阅</string>
+    <string name="annual_subscription">年度订阅</string>
+    <string name="three_months_subscription">季度订阅</string>
+    <string name="show_start_dialog">显示“开始”对话框</string>
+    <string name="track_recording_title">已停止录制轨迹</string>
+    <string name="backup_and_restore">备份和恢复</string>
+    <string name="poi_routes">路线</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="shared_string_itinerary">旅行路线</string>
+    <string name="announce_when_exceeded">超出时播报</string>
+    <string name="troubleshooting_description">如果您购买时有任何问题，请点击此链接。</string>
+    <string name="activity_type_water_name">水</string>
+    <string name="in_grace_period">在宽限期内</string>
 </resources>
