@@ -22,7 +22,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
 import net.osmand.map.ITileSource;
@@ -33,18 +32,19 @@ import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.MapLayers;
-import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
@@ -193,8 +193,12 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		if (!Algorithms.objectEquals(overlay, layer.getMap())) {
 			if (overlay == null) {
 				mapView.removeLayer(layer);
-			} else if (!mapView.isLayerVisible(layer) && mapView.getMapRenderer() == null) {
-				mapView.addLayer(layer, layerOrder);
+			} else if (!mapView.isLayerVisible(layer)) {
+				if (mapView.getMapRenderer() == null) {
+					mapView.addLayer(layer, layerOrder);
+				} else {
+					layer.initLayer(mapView);
+				}
 			}
 			layer.setMap(overlay);
 			mapView.refreshMap();
