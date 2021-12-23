@@ -3254,13 +3254,13 @@
     <string name="routing_engine_vehicle_type_hgv">重型货车</string>
     <string name="routing_engine_vehicle_type_small_truck">小型卡车</string>
     <string name="routing_engine_vehicle_type_truck">卡车</string>
-    <string name="routing_engine_vehicle_type_scooter">踏板车</string>
+    <string name="routing_engine_vehicle_type_scooter">小型摩托车</string>
     <string name="routing_engine_vehicle_type_racingbike">竞速自行车</string>
     <string name="routing_engine_vehicle_type_mtb">山地车</string>
     <string name="message_server_error">服务器错误：%1$s</string>
     <string name="delete_online_routing_engine">删除这个在线路线引擎？</string>
     <string name="message_name_is_already_exists">名字已经存在</string>
-    <string name="context_menu_read_full">阅读全文</string>
+    <string name="context_menu_read_full">读取全部</string>
     <string name="context_menu_edit_descr">编辑描述</string>
     <string name="delete_waypoints">删除航点</string>
     <string name="copy_to_map_markers">复制到地图标记</string>
@@ -3499,7 +3499,7 @@
     <string name="routing_attr_allow_streams_name">允许溪流和水沟</string>
     <string name="routing_attr_allow_intermittent_description">允许间歇性水路</string>
     <string name="routing_attr_allow_intermittent_name">允许间歇性水路</string>
-    <string name="analyze_by_intervals">分析分割区间</string>
+    <string name="analyze_by_intervals">分析分割间隔</string>
     <string name="activity_type_car_name">汽车</string>
     <string name="temporary_conditional_routing_descr">使用地图上有效的道路限制</string>
     <string name="routing_attr_short_way_description">优化的更短路线（节能）</string>
@@ -4054,4 +4054,7 @@
     <string name="troubleshooting_description">如果您购买时有任何问题，请点击此链接。</string>
     <string name="activity_type_water_name">水</string>
     <string name="in_grace_period">在宽限期内</string>
+    <string name="select_segments">选择路段</string>
+    <string name="segments_count">路段 %1$d</string>
+    <string name="select_segments_description">%1$s 包含超过一个路段，你需要指定导航的部分。</string>
 </resources>
