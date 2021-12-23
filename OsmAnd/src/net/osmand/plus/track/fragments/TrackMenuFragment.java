@@ -1334,11 +1334,12 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 		updatePointGroupsCard();
 		setupCards();
+		updateDisplayGroupsWidget();
 	}
 
 	private void updatePointGroupsCard() {
 		if (groupsCard != null) {
-			groupsCard.updateContent();
+			groupsCard.updateContent(pointsCard.getGroups());
 		}
 	}
 

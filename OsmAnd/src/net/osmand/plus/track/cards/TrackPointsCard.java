@@ -44,6 +44,7 @@ import net.osmand.plus.myplaces.DeletePointsTask;
 import net.osmand.plus.myplaces.DeletePointsTask.OnPointsDeleteListener;
 import net.osmand.plus.myplaces.EditTrackGroupDialogFragment;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.track.fragments.DisplayGroupsBottomSheet.DisplayPointGroupsCallback;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper.DisplayGroupsHolder;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
@@ -324,6 +325,10 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 	public void onPointsDeleted() {
 		updateGroups();
 		update();
+		CardListener listener = getListener();
+		if (listener instanceof DisplayPointGroupsCallback) {
+			((DisplayPointGroupsCallback) listener).onPointGroupsVisibilityChanged();
+		}
 	}
 
 	public void filter(String text) {
