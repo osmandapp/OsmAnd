@@ -559,10 +559,7 @@ public class MenuBuilder {
 	public View buildRow(final View view, Drawable icon, final String buttonText, final String textPrefix, final String text,
 	                     int textColor, String secondaryText, boolean collapsable, final CollapsableView collapsableView, boolean needLinks,
 	                     int textLinesLimit, boolean isUrl, boolean isNumber, boolean isEmail, OnClickListener onClickListener, boolean matchWidthDivider) {
-
-		if (!isFirstRow()) {
-			buildRowDivider(view);
-		}
+		buildRowDivider(view);
 
 		LinearLayout baseView = new LinearLayout(view.getContext());
 		baseView.setOrientation(LinearLayout.VERTICAL);
