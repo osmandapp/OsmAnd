@@ -655,7 +655,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	private boolean hasPointsGroups() {
-		return displayHelper.getPointsOriginalGroups().size() > 0;
+		List<GpxDisplayGroup> originalGroups = displayHelper.getPointsOriginalGroups();
+		return DisplayPointsGroupsHelper.getGroups(app, originalGroups, null).groups.size() > 0;
 	}
 
 	@Override
