@@ -31,7 +31,7 @@
     <string name="base_profile_descr_aircraft">Avion, Planador</string>
     <string name="routing_profile_geocoding">Geocodatge</string>
     <string name="routing_profile_straightline">Endrechiera</string>
-    <string name="routing_profile_broutrer">Navigacion fòra-linha</string>
+    <string name="routing_profile_broutrer">Navigacion fòra de linha</string>
     <string name="osmand_default_routing">Navigacion OsmAnd</string>
     <string name="custom_routing">Perfiu de navigacion personalizat</string>
     <string name="special_routing_type">Navigacion particulara</string>
@@ -928,7 +928,7 @@
     <string name="osmand_srtm_short_description_80_chars">Ajust OsmAnd per lei corbas de nivèu fòra de linha</string>
     <string name="srtm_plugin_name">Corbas de nivèu</string>
     <string name="stop_navigation_service">Arrestar</string>
-    <string name="osmand_short_description_80_chars">Visualizacion e navigacion per mobile dei mapas mondialas OSM</string>
+    <string name="osmand_short_description_80_chars">Visualizacion e navigacion dei mapas mondialas mobilas OSM</string>
     <string name="index_settings">Gestion de fichiers de mapas</string>
     <string name="general_settings">Paramètres generaus</string>
     <string name="general_settings_descr">Configuratz lei paramètres generaus e de visualizacion de l\'aplicacion.</string>
@@ -1450,7 +1450,7 @@
     <string name="shared_string_start_time">Ora de començament</string>
     <string name="shared_string_time_span">Durada de temps</string>
     <string name="shared_string_end_time">Ora de fin</string>
-    <string name="wikivoyage_offline">Wikiviatge sensa connexion</string>
+    <string name="wikivoyage_offline">Wikiviatge fòra de linha</string>
     <string name="edit_filter">Modificar lei categorias</string>
     <string name="save_filter">Sauvagardar lo filtre</string>
     <string name="shared_string_preparing">A se preparar</string>
@@ -1774,4 +1774,52 @@
     <string name="open_saved_track">Dobrir una traça enregistrada</string>
     <string name="nearest_point">Ponch pus pròche</string>
     <string name="edit_online_routing_engine">Modificar lo calcul de la navigacion en linha</string>
+    <string name="calculate_osmand_route_gpx">Calcul d\'un percors OsmAnd fòra de linha</string>
+    <string name="osmand_extended_description_part7">Collaboratz amb Openstreetmap (OSM)
+\n• Informant d\'errors
+\n• Telecargant de traças GPX vèrs OSM directament de l\'aplicacion
+\n• Ajustant de PDIs e lei telecargant vèrs OSM directament (ò pus tard se siatz pas connectats)
+\n</string>
+    <string name="wikivoyage_download_pics_descr">Leis imatges deis articles se pòdon teledescargar per l\'us sensa connexion.
+\nLa modificacion dei reglatges se fa dins \'Exploracion → \'Opcions\'.</string>
+    <string name="skip_map_downloading_desc">Avètz ges de mapa locala d\'installada. Podètz chausir una mapa de la lista ò teledescargar de mapas pus tard per «Menut - %1$s».</string>
+    <string name="offline_navigation_not_available">La navigacion fòra de linha OsmAnd es pas disponibla temporariament.</string>
+    <string name="first_time_msg">Grandmercé d\'emplegar OsmAnd. Teledescargatz lei donadas regionalas per un us fòra de linha dins \'Configuracion\' → \'Gestion de fichiers de mapas\' per visualizar lei mapas, localizar leis adreiças, recercar de PDIs, trobar lo transpòrt public e mai.</string>
+    <string name="index_settings_descr">Teledesgargatz e administratz lei mapas fòra de linha archivadas sus vòstre aparelh.</string>
+    <string name="switch_to_raster_map_to_see">Teledescargatz una mapa vectoriala locala per aquesta localizacion dins \'Configuracion\' (\'Gestion de fichiers de mapas\') ò modificatz l\'ajuston \'Mapas en linhas\'.</string>
+    <string name="offline_edition_descr">Sensa connexion, la modificacion es activada, mai lei cambis se devon sauvagardar localament en premier, se telecargaràn au besonh; autrament s\'actualizan immediatament.</string>
+    <string name="amenity_type_osmwiki">Wikipèdia (fòra de linha)</string>
+    <string name="data_to_search_poi_not_available">Teledescargatz lei donadas localas per recercar de PDIs.</string>
+    <string name="dash_download_msg_none">Teledescargar de mapas fòra de linha \?</string>
+    <string name="offline_edition">Modificar fòra de linha</string>
+    <string name="world_ski_missing">Teledescargatz la mapa locala particulara ais installacions d\'esquí.</string>
+    <string name="calculate_osmand_route_without_internet">Calcul fòra de linha d\'un segment de percors OsmAnd</string>
+    <string name="osmand_plus_extended_description_part4">Utiliza lei donadas OSM e de la Wikipèdia
+\n• Informacion de qualitat dei melhors projèctes collaboratius dau monde
+\n• Lei donadas OSM son disponiblas per país ò region
+\n• Lei PDI\'s de la Wikipèdia son perfèctas per far torisme
+\n• Teledescargaments illimitats e a gratis, directament de l\'aplicacion
+\n• De mapas vectorialas compactas en locau actualizadas amb una escasença mesadiera garantida
+\n
+\n• Chausida entre lei donadas completas d\'una region ò ren que lo malhum viari (Exemple: tot lo Japon ocupa 700 MB mai 200 MB solament per lei rotas soletas)</string>
+    <string name="nautical_maps_missing">Teledescargatz la mapa particulara ai donadas nauticas per un us fòra de linha.</string>
+    <string name="osm_save_offline">Sauvagardar fòra de linha</string>
+    <string name="read_wikipedia_offline">Legir Wikipèdia fòra de linha</string>
+    <string name="osmand_plus_short_description_80_chars">Visualizacion e navigacion mobila amb lei mapas mondialas OSM en linha e fòra de linha</string>
+    <string name="osmand_plus_extended_description_part2">Navigacion
+\n• Foncciona en linha (rapid) ò sensa connexion (sensa cargas de roaming quand siatz a l\'estrangier)
+\n• Indicacions de votz a cada virament (amb messatges enregistrats e sintetizats)
+\n• Orientacion opcionala dau percors, visualizacion dau nom de la via e dau temps estimat d\'arribada
+\n• Admet lei ponchs d\'etapa intermediaris
+\n• Revision automatica dau percors quand desviatz de l\'itinerari prepausat
+\n• Recèrca de luòcs per adreiça, mena(per exemple: restaurant, ostalariá, gasoliniera, musèu) ò coordenades geograficas
+\n</string>
+    <string name="osmand_plus_extended_description_part7">Collaboratz directament a OSM
+\n• Senhalatz leis errors de donadas
+\n• Telecargatz de traças GPX de l\'aplicacion directament vèrs OSM
+\n• Ajustatz de PDIs e telecargatz-lei vèrs OSM (ò faguètz-o pus tard se siatz pas connectats)
+\n• Enregistrament opcionau dau percors, emai en segon plan (mentre que l\'aparelh es inactiu)
+\nOsmAnd es un programa de còdi dobèrt que se desvelopa activament. Cadun pòt contribuir a l\'aplicacion en informant d\'errors, melhorant la traduccion ò programant de caracteristicas nòvas. Lo projècte se fondamenta tanben sus lei contribucions financiàrias per ajudar lo desvelopament de la programacion e la validacion de fonccionalitats novèlas.
+\n</string>
+    <string name="vector_data_missing">Teledescargatz (\'fòra de linha\') lei donadas per emplegar de mapas sensa connexion.</string>
 </resources>
