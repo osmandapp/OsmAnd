@@ -41,6 +41,7 @@ public class TextToggleButton extends MultiStateToggleButton<TextRadioItem> {
 	public static class TextRadioItem extends RadioItem {
 
 		private final String title;
+		private boolean isEnabled = true;
 
 		public TextRadioItem(String title) {
 			this.title = title;
@@ -48,6 +49,14 @@ public class TextToggleButton extends MultiStateToggleButton<TextRadioItem> {
 
 		public String getTitle() {
 			return title;
+		}
+
+		public boolean isEnabled() {
+			return isEnabled;
+		}
+
+		public void setEnabled(boolean enabled) {
+			isEnabled = enabled;
 		}
 	}
 
