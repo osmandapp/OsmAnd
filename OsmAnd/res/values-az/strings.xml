@@ -3194,4 +3194,5 @@
     <string name="contour_lines_hillshade_maps">Kontur xətləri və təpə kölgəsi xəritələri</string>
     <string name="download_hillshade_maps">Təpə kölgələri</string>
     <string name="terrain_empty_state_text">Xəritədə təpə kölgələrini və ya yamacları göstərir. Saytımızda bu xəritə növləri haqqında daha ətraflı oxuyun.</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
 </resources>
