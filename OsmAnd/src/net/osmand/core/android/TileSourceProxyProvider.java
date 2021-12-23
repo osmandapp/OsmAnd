@@ -48,7 +48,7 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 	}
 
 	@Override
-	public SWIGTYPE_p_QByteArray obtainImage(IMapTiledDataProvider.Request request) {
+	public SWIGTYPE_p_QByteArray obtainImageData(IMapTiledDataProvider.Request request) {
 		byte[] image;
 		try {
 			long requestTimestamp = System.currentTimeMillis();
@@ -92,7 +92,7 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 	}
 
 	@Override
-	public void obtainImageAsync(IMapTiledDataProvider.Request request, ImageMapLayerProvider.AsyncImage asyncImage) {
+	public void obtainImageAsync(IMapTiledDataProvider.Request request, ImageMapLayerProvider.AsyncImageData asyncImage) {
 		//TODO: Launch the request via manager and after image is ready (or error is ready)
 		// call asyncImage.submit()
 	}
