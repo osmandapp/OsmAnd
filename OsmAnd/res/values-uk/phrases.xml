@@ -3554,7 +3554,7 @@
     <string name="poi_health_specialty_radiotherapy_yes">Променева терапія</string>
     <string name="poi_climbing_crag_filter">Місце для скелелазіння</string>
     <string name="poi_rescue_box">Рятувальний ящик</string>
-    <string name="poi_climbing_crag">Так</string>
+    <string name="poi_climbing_crag">Так;Скеля для скелелазіння</string>
     <string name="reddit">Reddit</string>
     <string name="poi_hazard_additional_erosion">Небезпека: ерозія</string>
     <string name="poi_hazard_additional_rockfall">Небезпека: каменепад</string>
@@ -3607,11 +3607,11 @@
     <string name="poi_caravan_designated">Призначено;Призначено для будинків-автопричепів</string>
     <string name="poi_motorhome_yes">Так;Автодім</string>
     <string name="poi_motorhome_designated">Призначено;Призначено для автодомів</string>
-    <string name="poi_trailer_yes">Так</string>
-    <string name="poi_trailer_designated">Позначений</string>
+    <string name="poi_trailer_yes">Так;Причіп</string>
+    <string name="poi_trailer_designated">Призначений;Призначений для причепів</string>
     <string name="poi_motorcycle_yes">Так;Мотоцикл</string>
     <string name="poi_moped_yes">Так;Мопед</string>
-    <string name="poi_mofa_yes">Так</string>
+    <string name="poi_mofa_yes">Так;Мотовелосипед</string>
     <string name="poi_atm_yes">Банкомат: є</string>
     <string name="poi_cash_withdrawal_bank_card">Зняття готівки</string>
     <string name="poi_bath_type">Вид</string>
@@ -3685,7 +3685,7 @@
     <string name="poi_motorcycle_destination">Пункт призначення;Доступ до пункту призначення мотоциклам</string>
     <string name="poi_motorcycle_designated">Призначено;Призначено для мотоциклів</string>
     <string name="poi_moped_designated">Призначено;Призначено для мопедів</string>
-    <string name="poi_mofa_designated">Призначено</string>
+    <string name="poi_mofa_designated">Призначено;Призначено для мотовелосипедів</string>
     <string name="poi_hgv_yes">Так;Вантажівка;Вантажівки</string>
     <string name="poi_hgv_destination">Пункт призначення;Доступ до пункту призначення вантажівкам</string>
     <string name="poi_hgv_permissive">Дозвільний;Дозвільний доступ вантажівкам</string>
