@@ -1511,7 +1511,7 @@
     <string name="verify_email_address">Verificar l\'adreiça electronica</string>
     <string name="shared_string_size">Mesura</string>
     <string name="created_on">Creat lo</string>
-    <string name="use_routing_fallback">Emplegar lo rotatge de secors</string>
+    <string name="use_routing_fallback">Emplegar lo rotatge de secors fòra de linha</string>
     <string name="use_routing_fallback_description">Emplegar lo rotatge fòra de linha quand lo rotatge en linha es pas disponible.</string>
     <string name="receiving_data_from_server">A recebre lei donadas dau servidor…</string>
     <string name="backup_restore_data_descr">Restaurar lei donadas sus l\'aparelh amb l\'ajuda de sauvagardas en linha.</string>
@@ -1822,4 +1822,97 @@
 \nOsmAnd es un programa de còdi dobèrt que se desvelopa activament. Cadun pòt contribuir a l\'aplicacion en informant d\'errors, melhorant la traduccion ò programant de caracteristicas nòvas. Lo projècte se fondamenta tanben sus lei contribucions financiàrias per ajudar lo desvelopament de la programacion e la validacion de fonccionalitats novèlas.
 \n</string>
     <string name="vector_data_missing">Teledescargatz (\'fòra de linha\') lei donadas per emplegar de mapas sensa connexion.</string>
+    <string name="send_logcat_log">Mandar lo jornau logcat</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualizacion simplificada deis icònas a zoom feble</string>
+    <string name="in_grace_period">En periòde de gràcia</string>
+    <string name="announcement_time_passing">A passar</string>
+    <string name="message_need_calculate_route_before_show_graph">%1$s donadas disponiblas ren que sus lei rotas, calcular un percors en emplegant \'Percors entre ponchs\' per visualizar lo grafic.</string>
+    <string name="shared_string_graph">Grafic</string>
+    <string name="start_finish_icons">Icònas de partença e d\'arribada</string>
+    <string name="sort_name_ascending">Nom: A - Z</string>
+    <string name="sort_name_descending">Nom: Z - A</string>
+    <string name="shared_string_add_photo">Ajustar de fòtos</string>
+    <string name="shared_string_sec"></string>
+    <string name="enter_text_separated">Marcatz lei balisas separadas d\'una virgula.</string>
+    <string name="complex_routing_descr">Calcul dau percors en doas fasis per la navigacion en automobila.</string>
+    <string name="add_photos_descr">OsmAnd mòstra de fòtos de fònts divèrsas :
+\nOpenPlaceReviews - fòtos de PDIs;
+\nMapillary: imatges de carrieras ;
+\nWeb / Wikimedia: fòtos dei PDIs d\'OpenStreetMap.</string>
+    <string name="use_dev_url_descr">Per lo telecargament dei Nòtas OSM / PDI / GPX, assajatz dev.openstreetmap.org en plaça de openstreetmap.org.</string>
+    <string name="osm_edit_close_note">Clacar la nòta d\'OSM</string>
+    <string name="gpx_upload_trackable_visibility_descr">« Traçable » vòu dire que la traça pareisse pas dins ges de lista publica, mai solament lei ponchs intermediaris e son informacion temporala (que se pòdon pas associar directament amb vos) per lei teledescargaments de l\'API GPS publica.</string>
+    <string name="gpx_upload_private_visibility_descr">\"Privada\" vòu dire que la traça es pas visibla en ges de lista publica, mai lei ponchs que contèn seràn disponibles per l\'API publica GPS, desordenadas e sensa informacion temporala.</string>
+    <string name="clear_osm_token">Escafar lo testimòni OAuth d\'OpenStreetMap</string>
+    <string name="use_native_pt_desc">Bascular lo calcul dau percors de Transpòrt Public sus Java (segur)</string>
+    <string name="use_fast_recalculation_desc">Actualizar la premiera partida dau percors solament. Utile per lei viatges lòngs.</string>
+    <string name="user_password">Senhau</string>
+    <string name="approximate_file_size">Mesura aproximativa dau fichier</string>
+    <string name="select_picture">Seleccionatz l\'imatge</string>
+    <string name="backup_storage_taken">Resèrva occupada</string>
+    <string name="routing_attr_allow_intermittent_name">Permetre lei vias navigablas non permanentas</string>
+    <string name="routing_attr_allow_intermittent_description">Permetre lei vias navigablas non permanentas</string>
+    <string name="routing_attr_allow_streams_description">Permetre rius e vabres</string>
+    <string name="routing_attr_allow_streams_name">Permetre rius e vabres</string>
+    <string name="add_to_opr">Ajustar a OpenPlaceReviews</string>
+    <string name="export_not_enough_space">Pas pron d\'espaci</string>
+    <string name="select_items_for_import">Seleccionatz leis elements que s\'importaràn.</string>
+    <string name="export_not_enough_space_descr">Vòstre aparelh contèn ren que %1$s de liures. Aliberatz d\'espaci ò desseleccionatz d\'uneis articles per exportar.</string>
+    <string name="file_size_needed_for_import">Necessari per l\'importacion</string>
+    <string name="select_data_to_export">Seleccionatz lei donadas d\'exportar vèrs lo fichier.</string>
+    <string name="cannot_upload_image">L\'imatge se pòt pas telecargar, tornatz assajar pus tard</string>
+    <string name="select_groups_for_import">Seleccionatz lei grops que s\'importaràn.</string>
+    <string name="osm_login_descr">Connectatz-vos amb lo metòde OAuth ò vòstre nom d\'utilizator e lo senhau OSM.</string>
+    <string name="osm_edit_comment_note">Comentari de la nòta d\'OSM</string>
+    <string name="register_on_openplacereviews_desc">Lei fòtos son fornidas per lo projècte de donadas dobèrtas OpenPlaceReviews.org. Per poder telecargar vòstrei fòtos, vos devètz marcar sus son sit oèb.</string>
+    <string name="register_on_openplacereviews">Registratz-vos sus
+\nOpenPlaceReviews.org</string>
+    <string name="send_files_to_openstreetmap">Mandar lo fichier GPX a OpenStreetMap</string>
+    <string name="gpx_upload_public_visibility_descr">\"Public\" vòu dire que la traça se visualiza publicament dins vòstrei traças GPS, dins lei listas publicas de traças GPS amb seis informacions temporalas en forma grassa. Lei donadas fornidas per l\'API menan pas a vòstra pagina de traças. Leis informacions temporalas dei ponchs de traça son pas disponibles per l\'API GPS publica, e lei ponchs de la traça son pas ordenats segon lo temps.</string>
+    <string name="user_login">Identificant</string>
+    <string name="login_account">Còmpte</string>
+    <string name="use_login_password">Emplegar lo nom d\'utilizator e son senhau</string>
+    <string name="open_street_map_login_mode">Connectatz-vos per telecargar premier lei modificacions novèlas.
+\n
+\nEmplegatz lo metòde OAuth ò vòstre nom d\'utilizator e lo senhau OSM.</string>
+    <string name="osm_edits_view_descr">Consultatz totei leis modificacions ò errors OSM qu\'avètz pas encar telecargadas vèrs %1$s. Lei cambiaments ja mandats se veiràn plus.</string>
+    <string name="sign_in_with_open_street_map">Accès per OpenStreetMap</string>
+    <string name="login_open_street_map_org">Se connectar a OpenStreetMap.org</string>
+    <string name="login_open_street_map">Se connectar a OpenStreetMap</string>
+    <string name="plugin_global_prefs_info">La configuracion de l\'ajust es globala e afècta totei lei perfius</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Ajustatz au mens dos ponchs</string>
+    <string name="icon_group_service">Servici</string>
+    <string name="icon_group_special">Especiau</string>
+    <string name="icon_group_amenity">Equipament</string>
+    <string name="development">Desvelopament</string>
+    <string name="file_already_imported">Lo fichier es ja importat in OsmAnd</string>
+    <string name="routing_attr_avoid_footways_name">Evitar lei camins pedoniers</string>
+    <string name="use_two_phase_routing">Utiliza l\'algoritme de calcul a 2-fasi A*</string>
+    <string name="osm_edit_logout_success">Session clavada</string>
+    <string name="use_live_public_transport">Donadas d\'OsmAnd Live</string>
+    <string name="contour_lines_thanks">Grandmercé per aver crompat l\'ajuston \'Corbas de nivèu\'</string>
+    <string name="send_crash_log">Mandar lo jornau dei malacapitadas</string>
+    <string name="register_opr_create_new_account">Crear un còmpte nòu</string>
+    <string name="icon_group_transport">Transpòrt</string>
+    <string name="one_point_error">Ajustatz au mens dos ponchs.</string>
+    <string name="shared_string_is_saved">es sauvagardat</string>
+    <string name="sort_last_modified">Darriera modificacion</string>
+    <string name="shared_string_redo">Tornar far</string>
+    <string name="shared_string_search_history">Istoric de la recèrca</string>
+    <string name="register_opr_have_account">Avètz ja un còmpte</string>
+    <string name="app_mode_motorboat">Barca de motor</string>
+    <string name="use_native_pt">Desvelopament locau de Transpòrt Public</string>
+    <string name="perform_oauth_authorization">Iniciar la session per OAuth</string>
+    <string name="perform_oauth_authorization_description">Iniciatz la session per lo mejan d\'OAuth per emplegar lei fonccionalitats osmedit</string>
+    <string name="app_mode_kayak">Caiac</string>
+    <string name="icon_group_travel">Viatge</string>
+    <string name="icon_group_symbols">Simbòl</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="message_graph_will_be_available_after_recalculation">Esperatz.
+\nLo grafic serà disponible après lo recalcul dau percors.</string>
+    <string name="use_live_routing">Donadas d\'OsmAnd Live</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Identificable\" vòu dire que la traça se visualiza publicament dins vòstrei traças GPS e sus la lista publica de traças GPS, valent a dire, que leis autreis utilizators la podràn teledescargar en forma grassa e l\'associar amb vòstre nom d\'utilizator. Lei donadas temporalas e lei ponchs de la traça servits per l’API GPS faràn referéncia a la pagina de vòstra traça originala.</string>
+    <string name="icon_group_emergency">Urgéncia</string>
+    <string name="icon_group_sport">Espòrt</string>
 </resources>
