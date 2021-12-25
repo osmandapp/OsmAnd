@@ -4496,4 +4496,5 @@
     <string name="shared_string_used">Usado</string>
     <string name="files_with_route_restrictions">Arquivos com restrições de rota</string>
     <string name="shared_string_not_used">Não usado</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
 </resources>
