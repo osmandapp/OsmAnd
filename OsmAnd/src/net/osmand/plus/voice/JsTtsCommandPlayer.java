@@ -125,6 +125,8 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 				region = param;
 			}
 		}
+		region = defineActualRegion(ttsLanguage, region);
+
 		try {
 			return new Locale.Builder()
 					.setLanguage(language)
@@ -136,6 +138,12 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 			log.error("Trying to build locale with ill-formed param", e);
 			return new Locale(language, region);
 		}
+	}
+
+	@NonNull
+	private String defineActualRegion(@NonNull String ttsLanguage, @NonNull String regionFromTtsLanguage) {
+		boolean forcePortuguesePronunciation = ttsLanguage.equals("pt"); // Fix #10232
+		return forcePortuguesePronunciation ? "PT" : regionFromTtsLanguage;
 	}
 
 	private void onSuccessfulTtsInit(@NonNull Locale locale, float speechRate) {
