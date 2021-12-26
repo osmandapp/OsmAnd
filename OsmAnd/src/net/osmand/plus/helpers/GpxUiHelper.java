@@ -1183,7 +1183,7 @@ public class GpxUiHelper {
 		xAxis.setTextColor(labelsColor);
 
 		int dp4 = AndroidUtils.dpToPx(context, 4);
-		int yAxisGridColor = ContextCompat.getColor(context, R.color.divider_color);
+		int yAxisGridColor = AndroidUtils.getColorFromAttr(context, R.attr.chart_grid_line_color);
 
 		YAxis leftYAxis = mChart.getAxisLeft();
 		leftYAxis.enableGridDashedLine(dp4, dp4, 0f);
@@ -1191,17 +1191,15 @@ public class GpxUiHelper {
 		leftYAxis.setGridLineWidth(1f);
 		leftYAxis.setDrawBottomYGridLine(false);
 		leftYAxis.setDrawAxisLine(false);
+		leftYAxis.setDrawGridLinesBehindData(false);
 		leftYAxis.setPosition(YAxisLabelPosition.INSIDE_CHART);
 		leftYAxis.setXOffset(16f);
 		leftYAxis.setYOffset(-6f);
 		leftYAxis.setLabelCount(3, true);
 
 		YAxis rightYAxis = mChart.getAxisRight();
-		rightYAxis.enableGridDashedLine(dp4, dp4, 0f);
-		rightYAxis.setGridColor(yAxisGridColor);
-		rightYAxis.setGridLineWidth(1f);
-		rightYAxis.setDrawBottomYGridLine(false);
 		rightYAxis.setDrawAxisLine(false);
+		rightYAxis.setDrawGridLines(false);
 		rightYAxis.setPosition(YAxisLabelPosition.INSIDE_CHART);
 		rightYAxis.setXOffset(16f);
 		rightYAxis.setYOffset(-6f);
