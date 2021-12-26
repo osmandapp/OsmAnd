@@ -89,7 +89,10 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 					internalClear();
 					app.showToastMessage(app.getString(R.string.tts_initialization_error));
 				} else if (mTts != null) {
-					onSuccessfulTtsInit(getLocaleForLanguage(language), cSpeechRate);
+					LocaleBuilder.buildLocale(app, language, locale -> {
+						onSuccessfulTtsInit(locale, cSpeechRate);
+						return true;
+					});
 				}
 			});
 			mTts.setOnUtteranceCompletedListener(new OnUtteranceCompletedListener() {
@@ -106,44 +109,6 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 				}
 			});
 		}
-	}
-
-	@NonNull
-	private Locale getLocaleForLanguage(@NonNull String ttsLanguage) {
-		final String[] localeParams = (ttsLanguage + "____.").split("[\\_\\-]");
-		String language = localeParams[0];
-		String region = "";     // [a-zA-Z]{2} | [0-9]{3}
-		String variant = "";    // [0-9][0-9a-zA-Z]{3} | [0-9a-zA-Z]{5,8}
-		String script = "";     // [a-zA-Z]{4}
-		for (int i = 3; i > 0; i--) {
-			String param = localeParams[i];
-			if (param.matches("[a-zA-Z]{4}")) {
-				script = param;
-			} else if (param.length() >= 4) {
-				variant = param;
-			} else {
-				region = param;
-			}
-		}
-		region = defineActualRegion(ttsLanguage, region);
-
-		try {
-			return new Locale.Builder()
-					.setLanguage(language)
-					.setRegion(region)
-					.setVariant(variant)
-					.setScript(script)
-					.build();
-		} catch (RuntimeException e) {
-			log.error("Trying to build locale with ill-formed param", e);
-			return new Locale(language, region);
-		}
-	}
-
-	@NonNull
-	private String defineActualRegion(@NonNull String ttsLanguage, @NonNull String regionFromTtsLanguage) {
-		boolean forcePortuguesePronunciation = ttsLanguage.equals("pt"); // Fix #10232
-		return forcePortuguesePronunciation ? "PT" : regionFromTtsLanguage;
 	}
 
 	private void onSuccessfulTtsInit(@NonNull Locale locale, float speechRate) {
