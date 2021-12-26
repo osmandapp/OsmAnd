@@ -4476,4 +4476,13 @@
     <string name="shared_string_used">In uso</string>
     <string name="files_with_route_restrictions">File con limitazioni del percorso</string>
     <string name="shared_string_not_used">Non in uso</string>
+    <string name="predefined_waypoint_appearance_description">Toccando questa azione salverà automaticamente il punto intermedio con i parametri predefiniti.</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Etichette Fixme</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Mostra etichette Fixme</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Etichette Note</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Mostra etichette Note</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icone a zomm bassi</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schema della visualizzazione delle icone a bassi zoom</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tunnel per canali</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Non nascondere i tunnel per canali</string>
 </resources>
