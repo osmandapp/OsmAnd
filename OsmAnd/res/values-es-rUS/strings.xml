@@ -4507,4 +4507,5 @@
     <string name="always_ask_waypoint_appearance_description">Al pulsar esta acción se abrirá la pantalla «Añadir punto de referencia», en la que se podrá cambiar el nombre y el aspecto.</string>
     <string name="track_file_description">Al pulsar esta acción se mostrará un diálogo para marcar entre todas las trazas disponibles.</string>
     <string name="use_routing_fallback">Navegación alternativa (sin conexión)</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
 </resources>
