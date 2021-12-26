@@ -628,7 +628,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private void setupDisplayGroupsWidget() {
 		OnClickListener listener = view -> {
 			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
+			if (mapActivity != null && getDisplayGroupsHolder().getTotalTrackGroupsNumber() > 0) {
 				DisplayGroupsBottomSheet.showInstance(mapActivity, TrackMenuFragment.this, true);
 			}
 		};
@@ -640,23 +640,26 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public void updateDisplayGroupsWidget() {
 		boolean widgetVisible = hasPointsGroups() && !shouldShowWidgets();
 		if (widgetVisible) {
-			DisplayGroupsHolder displayGroupsHolder =
-					DisplayPointsGroupsHelper.getGroups(app, displayHelper.getPointsOriginalGroups(), null);
-			int visible = displayGroupsHolder.getVisibleGroupsNumber(selectedGpxFile);
-			int total = displayGroupsHolder.groups.size();
+			DisplayGroupsHolder displayGroupsHolder = getDisplayGroupsHolder();
+			int visible = displayGroupsHolder.getVisibleTrackGroupsNumber(selectedGpxFile);
+			int total = displayGroupsHolder.getTotalTrackGroupsNumber();
 			TextView indication = displayGroupsWidget.findViewById(R.id.visible_display_groups_size);
-			indication.setText(getString(
-					R.string.ltr_or_rtl_combine_via_slash,
-					String.valueOf(visible),
-					String.valueOf(total)
-			));
+			boolean hasRouteGroupsOnly = total == 0;
+			if (hasRouteGroupsOnly) {
+				indication.setText("0");
+			} else {
+				indication.setText(getString(
+						R.string.ltr_or_rtl_combine_via_slash,
+						String.valueOf(visible),
+						String.valueOf(total)
+				));
+			}
 		}
 		AndroidUiHelper.updateVisibility(displayGroupsWidget, widgetVisible);
 	}
 
 	private boolean hasPointsGroups() {
-		List<GpxDisplayGroup> originalGroups = displayHelper.getPointsOriginalGroups();
-		return DisplayPointsGroupsHelper.getGroups(app, originalGroups, null).groups.size() > 0;
+		return getDisplayGroupsHolder().groups.size() > 0;
 	}
 
 	@Override
@@ -1156,8 +1159,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	private void fitSelectedPointsGroupOnMap(GpxDisplayGroup group) {
-		DisplayGroupsHolder groupsHolder =
-				DisplayPointsGroupsHelper.getGroups(app, displayHelper.getPointsOriginalGroups(), null);
+		DisplayGroupsHolder groupsHolder = getDisplayGroupsHolder();
 		List<GpxDisplayItem> points = groupsHolder.getItemsByGroupName(group.getName());
 		if (points != null) {
 			QuadRect pointsRect = new QuadRect();
@@ -1166,6 +1168,11 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			}
 			adjustMapPosition(pointsRect);
 		}
+	}
+
+	@NonNull
+	private DisplayGroupsHolder getDisplayGroupsHolder() {
+		return DisplayPointsGroupsHelper.getGroups(app, displayHelper.getPointsOriginalGroups(), null);
 	}
 
 	public static void startNavigationForGPX(final GPXFile gpxFile, MapActivityActions mapActions, final MapActivity mapActivity) {
