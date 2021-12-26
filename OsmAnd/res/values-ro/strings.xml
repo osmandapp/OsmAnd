@@ -4513,4 +4513,5 @@
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Nu ascundeți tunelurile căilor navigabile</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etichete pentru note</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Etichetele Fixme</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
 </resources>
