@@ -3195,4 +3195,5 @@
     <string name="download_hillshade_maps">Təpə kölgələri</string>
     <string name="terrain_empty_state_text">Xəritədə təpə kölgələrini və ya yamacları göstərir. Saytımızda bu xəritə növləri haqqında daha ətraflı oxuyun.</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="select_base_profile_dialog_message">Xüsusi profilinizi standart proqram profillərindən birinə əsaslandırın, bu, vidcetlərin standart görünüşü, sürət və məsafə vahidləri kimi əsas quraşdırmanı müəyyən edir. Bunlar, genişləndirilə bilən xüsusi profillərin nümunələri ilə birlikdə standart proqram profilləridir:</string>
 </resources>
