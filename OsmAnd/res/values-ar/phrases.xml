@@ -2327,7 +2327,7 @@
     <string name="poi_aerodrome_type_regional">إقليمي</string>
     <string name="poi_aerodrome_type_international">دولي</string>
     <string name="poi_dispensing_no">الأدوية الموصوفة: لا</string>
-    <string name="poi_dispensing_yes">نعم</string>
+    <string name="poi_dispensing_yes">نعم؛ الصرف</string>
     <string name="poi_crossing_supervision_camera">مراقبة العبور: الكاميرا</string>
     <string name="poi_crossing_supervision_attendant">مراقبة العبور: ميداني</string>
     <string name="poi_crossing_supervision_no">مراقبة العبور: لا</string>

@@ -2389,7 +2389,7 @@
     <string name="restart">Yenidən başlat</string>
     <string name="activity_type_running_name">Qaçış</string>
     <string name="opr_use_dev_url">test.openplacereviews.org istifadə et</string>
-    <string name="latest_openstreetmap_update">Ən son OpenStreetMap yeniləməsi mövcuddur:</string>
+    <string name="latest_openstreetmap_update">Mövcud ən son OpenStreetMap yeniləməsi:</string>
     <string name="on_pause">Fasilədə</string>
     <string name="track_recording_stop_without_saving">Yadda saxlamadan dayandır</string>
     <string name="app_restart_required">Bəzi parametrləri tətbiq etmək üçün proqramın yenidən başlaması tələb olunur.</string>
@@ -3194,4 +3194,5 @@
     <string name="contour_lines_hillshade_maps">Kontur xətləri və təpə kölgəsi xəritələri</string>
     <string name="download_hillshade_maps">Təpə kölgələri</string>
     <string name="terrain_empty_state_text">Xəritədə təpə kölgələrini və ya yamacları göstərir. Saytımızda bu xəritə növləri haqqında daha ətraflı oxuyun.</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
 </resources>

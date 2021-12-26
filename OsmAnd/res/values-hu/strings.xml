@@ -4500,4 +4500,5 @@
     <string name="waypoint_appearance">Útpont megjelenése</string>
     <string name="always_ask_waypoint_appearance_description">Ha erre a műveletre koppint, megnyílik az „Útpont hozzáadása” képernyő, ahol módosíthatja a nevet és a megjelenést.</string>
     <string name="track_file_description">Ha erre a műveletre koppint, megjelenik egy kijelölési párbeszédpanel az elérhető nyomvonalakkal.</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
 </resources>

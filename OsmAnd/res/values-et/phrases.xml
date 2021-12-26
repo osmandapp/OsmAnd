@@ -342,7 +342,7 @@
     <string name="poi_railway_station">Raudteejaam</string>
     <string name="poi_railway_platform">Raudteeplatvorm</string>
     <string name="poi_halt">Raudtee peatus</string>
-    <string name="poi_subway_station">Jah</string>
+    <string name="poi_subway_station">Jah;Metroojaam</string>
     <string name="poi_railway_buffer_stop">Raudtee puhverpeatus</string>
     <string name="poi_taxi">Takso ootepeatus</string>
     <string name="poi_helipad">Helikopteri maandumiskoht</string>
@@ -717,8 +717,8 @@
     <string name="poi_guest_house">Külalistemaja</string>
     <string name="poi_hostel">Hostel</string>
     <string name="poi_motel">Motell</string>
-    <string name="poi_alpine_hut">Alpimaja</string>
-    <string name="poi_chalet">Mägimajake</string>
+    <string name="poi_alpine_hut">Alpimaja;Varjualune</string>
+    <string name="poi_chalet">Mägimajake;Varjualune</string>
     <string name="poi_apartment">Korter</string>
     <string name="poi_place_of_worship">Jumalateenistuse koht</string>
     <string name="poi_internet_access_wlan">Internet: traadita</string>
@@ -4211,4 +4211,15 @@
     <string name="poi_faculty_communication">Kommunikatsiooniteaduskond</string>
     <string name="poi_tool_hire">Tööriistarent</string>
     <string name="poi_escape_game">Põgenemistuba</string>
+    <string name="poi_computer_sales_yes">Jah</string>
+    <string name="poi_computer_repair_yes">Jah</string>
+    <string name="poi_computer_sales_no">Arvutimüük:ei</string>
+    <string name="poi_computer_repair_no">Arvutiparandus: ei</string>
+    <string name="poi_computer_parts_yes">Jah</string>
+    <string name="poi_computer_parts_no">Arvutiosad: ei</string>
+    <string name="poi_computer_sales">Arvutimüük</string>
+    <string name="poi_computer_repair">Arvutiparandus</string>
+    <string name="poi_computer_parts">Arvutiosad</string>
+    <string name="poi_diet_vegan_limited">Vegan: piiratult</string>
+    <string name="poi_computer_sales_used">Kasutatud</string>
 </resources>

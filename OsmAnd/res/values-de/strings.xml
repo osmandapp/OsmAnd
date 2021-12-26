@@ -4506,7 +4506,13 @@
     <string name="always_ask_waypoint_appearance_description">Tippen Sie auf die Option, um den Bildschirm \"Wegpunkt hinzufügen\" zu öffnen, in dem Sie Namen und Aussehen ändern können.</string>
     <string name="shared_string_not_used">Nicht genutzt</string>
     <string name="shared_string_used">Genutzt</string>
-    <string name="rendering_attr_OSMMapperAssistantNote_name">Notiz-Tags</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Note-Tags</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Notiz-Tags anzeigen</string>
-    <string name="rendering_attr_OSMMapperAssistantFixme_description">fixme-Tags anzeigen</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Fixme-Tags anzeigen</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icons bei niedrigen Zoomstufen</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme-Tags</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematische Darstellung von Symbolen bei niedrigen Zoomstufen</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Wasserstraßentunnel</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Wasserstraßentunnel nicht ausblenden</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
 </resources>

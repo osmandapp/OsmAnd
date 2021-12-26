@@ -4501,4 +4501,5 @@
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">水路隧道</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">不要隱藏水路隧道</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme 標籤</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
 </resources>

@@ -3412,7 +3412,7 @@
     <string name="login_and_pass">Имя пользователя и пароль</string>
     <string name="plugin_global_prefs_info">Эти настройки плагина применяются ко всем профилям</string>
     <string name="osm_editing">Редактирование OSM</string>
-    <string name="osm_edits_view_descr">Здесь отображаются ваши правки и ошибки OSM, ещё не отправленные в %1$s. Отправленные изменения не отображаются.</string>
+    <string name="osm_edits_view_descr">Посмотреть свои ещё незагруженные правки или ошибки OSM можно в %1$s. Отправленные изменения не отображаются.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Значок, отображаемый во время навигации или движения.</string>
     <string name="select_map_icon_descr">Значок, отображаемый в состоянии покоя.</string>
@@ -4510,4 +4510,8 @@
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Не скрывать водные туннели</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Водные туннели</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Теги fixme</string>
+    <string name="shared_string_used">Используется</string>
+    <string name="files_with_route_restrictions">Файлы с ограничениями маршрута</string>
+    <string name="shared_string_not_used">Не используется</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
 </resources>
