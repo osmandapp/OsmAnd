@@ -49,9 +49,9 @@ public class PointsGroupsCard extends MapBaseCard {
 		ArrayList<HorizontalSelectionItem> items = new ArrayList<>();
 		items.add(new HorizontalSelectionItem(app.getString(R.string.shared_string_all), null));
 
-		int iconSizePx = app.getResources().getDimensionPixelSize(R.dimen.poi_icon_size);
+		int iconSizePx = getDimen(R.dimen.poi_icon_size);
 		int iconColorId = ColorUtilities.getSecondaryIconColorId(nightMode);
-		int smallPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+		int smallPadding = getDimen(R.dimen.content_padding_small);
 
 		for (GpxDisplayGroup group : displayGroups) {
 			String categoryDisplayName = Algorithms.isEmpty(group.getName())

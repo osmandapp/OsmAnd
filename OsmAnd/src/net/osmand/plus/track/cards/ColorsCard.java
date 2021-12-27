@@ -110,7 +110,7 @@ public class ColorsCard extends MapBaseCard implements ColorPickerListener {
 		FlowLayout selectCustomColor = view.findViewById(R.id.select_custom_color);
 		selectCustomColor.removeAllViews();
 		selectCustomColor.setHorizontalAutoSpacing(true);
-		int minimalPaddingBetweenIcon = app.getResources().getDimensionPixelSize(R.dimen.favorites_select_icon_button_right_padding);
+		int minimalPaddingBetweenIcon = getDimen(R.dimen.favorites_select_icon_button_right_padding);
 
 		for (int color : customColors) {
 			selectCustomColor.addView(createColorItemView(color, selectCustomColor, true), new LayoutParams(minimalPaddingBetweenIcon, 0));

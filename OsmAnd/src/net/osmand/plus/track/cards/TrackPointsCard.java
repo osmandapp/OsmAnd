@@ -202,7 +202,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 		setupDeleteWaypointAction();
 
 		View bottomMarginView = actionsView.findViewById(R.id.bottomMarginView);
-		bottomMarginView.getLayoutParams().height = app.getResources().getDimensionPixelSize(R.dimen.card_row_min_height);
+		bottomMarginView.getLayoutParams().height = getDimen(R.dimen.card_row_min_height);
 	}
 
 	private void setupActionsHeader() {

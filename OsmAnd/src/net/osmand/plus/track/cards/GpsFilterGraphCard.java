@@ -87,7 +87,7 @@ public class GpsFilterGraphCard extends GpsFilterBaseCard {
 
 		GPXItemPagerAdapter pagerAdapter = new GPXItemPagerAdapter(app, displayItem, displayHelper, nightMode,
 				getSegmentActionsListener(), false, true);
-		pagerAdapter.setChartHMargin(app.getResources().getDimensionPixelSize(R.dimen.content_padding));
+		pagerAdapter.setChartHMargin(getDimen(R.dimen.content_padding));
 		pager.setAdapter(pagerAdapter);
 		slidingTabs.setViewPager(pager);
 	}

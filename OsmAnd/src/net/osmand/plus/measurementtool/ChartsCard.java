@@ -141,7 +141,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 	private void updateTopPadding() {
 		int topPadding = AndroidUiHelper.isOrientationPortrait(mapActivity) ?
-				0 : app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+				0 : getDimen(R.dimen.content_padding_small);
 		view.setPadding(0, topPadding, 0, 0);
 	}
 

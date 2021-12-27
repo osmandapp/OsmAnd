@@ -115,7 +115,7 @@ public class OptionsCard extends MapBaseCard {
 
 	private BaseBottomSheetItem createDividerItem() {
 		DividerItem dividerItem = new DividerItem(mapActivity);
-		int start = app.getResources().getDimensionPixelSize(R.dimen.measurement_tool_options_divider_margin_start);
+		int start = getDimen(R.dimen.measurement_tool_options_divider_margin_start);
 		int verticalMargin = AndroidUtils.dpToPx(app, 6);
 		dividerItem.setMargins(start, verticalMargin, 0, verticalMargin);
 
@@ -251,7 +251,7 @@ public class OptionsCard extends MapBaseCard {
 		Drawable changeFolderIcon = getActiveIcon(R.drawable.ic_action_folder_move);
 
 		return new BottomSheetItemWithDescriptionDifHeight.Builder()
-				.setMinHeight(app.getResources().getDimensionPixelSize(R.dimen.setting_list_item_group_height))
+				.setMinHeight(getDimen(R.dimen.setting_list_item_group_height))
 				.setDescriptionColorId(ColorUtilities.getSecondaryTextColorId(nightMode))
 				.setDescription(capitalizeFirstLetter(folder))
 				.setIcon(AndroidUtils.getDrawableForDirection(app, changeFolderIcon))

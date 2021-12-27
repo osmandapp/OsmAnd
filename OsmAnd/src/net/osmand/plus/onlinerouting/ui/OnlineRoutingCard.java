@@ -151,7 +151,7 @@ public class OnlineRoutingCard extends MapBaseCard {
 
 	private void updateBottomMarginSelectionMenu() {
 		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) rvSelectionMenu.getLayoutParams();
-		int contentPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
+		int contentPadding = getDimen(R.dimen.content_padding);
 		params.bottomMargin = isVisibleViewsBelowSelectionMenu() ? contentPadding : 0;
 	}
 
