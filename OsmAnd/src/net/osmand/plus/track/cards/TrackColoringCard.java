@@ -203,23 +203,18 @@ public class TrackColoringCard extends MapBaseCard {
 			updateTextAndIconColor(holder, item);
 
 			holder.title.setText(item.getLocalizedValue());
-			holder.itemView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					if (!item.isActive()) {
-						showSnackbar(view, item.getAttrName());
-						return;
-					}
-
-					int prevSelectedPosition = getItemPosition(getSelectedAppearanceItem());
-					selectedAppearanceItem = items.get(holder.getAdapterPosition());
-					notifyItemChanged(holder.getAdapterPosition());
-					notifyItemChanged(prevSelectedPosition);
-					setColoringType(selectedAppearanceItem);
-					if (getListener() != null) {
-						getListener().onCardPressed(TrackColoringCard.this);
-					}
+			holder.itemView.setOnClickListener(view -> {
+				if (!item.isActive()) {
+					showSnackbar(view, item.getAttrName());
+					return;
 				}
+
+				int prevSelectedPosition = getItemPosition(getSelectedAppearanceItem());
+				selectedAppearanceItem = items.get(holder.getAdapterPosition());
+				notifyItemChanged(holder.getAdapterPosition());
+				notifyItemChanged(prevSelectedPosition);
+				setColoringType(selectedAppearanceItem);
+				notifyCardPressed();
 			});
 		}
 

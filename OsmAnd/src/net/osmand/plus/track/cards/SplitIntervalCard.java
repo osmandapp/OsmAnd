@@ -52,15 +52,7 @@ public class SplitIntervalCard extends MapBaseCard {
 		TextView descriptionView = view.findViewById(R.id.description);
 		descriptionView.setText(spannableSplitInterval);
 
-		view.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardPressed(SplitIntervalCard.this);
-				}
-			}
-		});
+		view.setOnClickListener(v -> notifyCardPressed());
 	}
 
 	private String getSplitInterval() {

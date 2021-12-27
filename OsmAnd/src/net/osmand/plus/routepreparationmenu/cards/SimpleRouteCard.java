@@ -47,39 +47,21 @@ public class SimpleRouteCard extends MapBaseCard {
 		view.findViewById(R.id.route_info_details_card).setVisibility(View.VISIBLE);
 
 		View info = view.findViewById(R.id.info_container);
-		info.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardPressed(SimpleRouteCard.this);
-				}
-			}
-		});
+		info.setOnClickListener(v -> notifyCardPressed());
 
 		ImageView infoIcon = (ImageView) view.findViewById(R.id.InfoIcon);
 		ImageView durationIcon = (ImageView) view.findViewById(R.id.DurationIcon);
 		View infoDistanceView = view.findViewById(R.id.InfoDistance);
 		View infoDurationView = view.findViewById(R.id.InfoDuration);
-//		if (directionInfo >= 0) {
-//			infoIcon.setVisibility(View.GONE);
-//			durationIcon.setVisibility(View.GONE);
-//			infoDistanceView.setVisibility(View.GONE);
-//			infoDurationView.setVisibility(View.GONE);
-//		} else {
+
 		infoIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_route_distance));
 		infoIcon.setVisibility(View.VISIBLE);
 		durationIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_time_span));
 		durationIcon.setVisibility(View.VISIBLE);
 		infoDistanceView.setVisibility(View.VISIBLE);
 		infoDurationView.setVisibility(View.VISIBLE);
-//		}
-//		if (directionInfo >= 0 && routingHelper.getRouteDirections() != null
-//				&& directionInfo < routingHelper.getRouteDirections().size()) {
-//			RouteDirectionInfo ri = routingHelper.getRouteDirections().get(directionInfo);
-//		} else {
+
 		TextView distanceText = (TextView) view.findViewById(R.id.DistanceText);
-		TextView distanceTitle = (TextView) view.findViewById(R.id.DistanceTitle);
 		TextView durationText = (TextView) view.findViewById(R.id.DurationText);
 		TextView durationTitle = (TextView) view.findViewById(R.id.DurationTitle);
 

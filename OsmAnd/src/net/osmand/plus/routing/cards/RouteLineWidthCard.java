@@ -255,11 +255,7 @@ public class RouteLineWidthCard extends MapBaseCard implements HeaderInfo {
 						setRouteLineWidth(selectedMode.widthKey);
 					}
 					modeChanged();
-
-					CardListener listener = getListener();
-					if (listener != null) {
-						listener.onCardPressed(RouteLineWidthCard.this);
-					}
+					notifyCardPressed();
 				}
 			});
 		}

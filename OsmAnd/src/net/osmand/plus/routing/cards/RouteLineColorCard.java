@@ -351,11 +351,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 				notifyItemRangeChanged(0, getItemCount());
 
 				modeChanged();
-
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardPressed(RouteLineColorCard.this);
-				}
+				notifyCardPressed();
 			});
 		}
 

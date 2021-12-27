@@ -227,10 +227,7 @@ public class TrackWidthCard extends MapBaseCard {
 					updateCustomWidthSlider();
 					scrollMenuToSelectedItem();
 
-					CardListener listener = getListener();
-					if (listener != null) {
-						listener.onCardPressed(TrackWidthCard.this);
-					}
+					notifyCardPressed();
 				}
 			});
 		}

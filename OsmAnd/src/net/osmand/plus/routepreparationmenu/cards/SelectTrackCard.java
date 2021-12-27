@@ -42,11 +42,6 @@ public class SelectTrackCard extends MapBaseCard {
 
 		int minHeight = getDimen(R.dimen.route_info_list_text_padding);
 		view.setMinimumHeight(minHeight);
-		view.setOnClickListener(v -> {
-			CardListener listener = getListener();
-			if (listener != null) {
-				listener.onCardPressed(SelectTrackCard.this);
-			}
-		});
+		view.setOnClickListener(v -> notifyCardPressed());
 	}
 }

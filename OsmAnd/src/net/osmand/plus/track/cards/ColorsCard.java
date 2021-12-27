@@ -160,17 +160,10 @@ public class ColorsCard extends MapBaseCard implements ColorPickerListener {
 			backgroundCircle.setBackgroundResource(nightMode ? R.drawable.circle_contour_bg_dark : R.drawable.circle_contour_bg_light);
 		}
 		backgroundCircle.setImageDrawable(layeredIcon);
-		backgroundCircle.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				updateColorSelector(color);
-				selectedColor = color;
-
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardPressed(ColorsCard.this);
-				}
-			}
+		backgroundCircle.setOnClickListener(v -> {
+			updateColorSelector(color);
+			selectedColor = color;
+			notifyCardPressed();
 		});
 		if (customColor) {
 			backgroundCircle.setOnLongClickListener(new View.OnLongClickListener() {
