@@ -7,6 +7,7 @@ import android.view.View;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
+import androidx.annotation.DimenRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,8 +22,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 
 public abstract class BaseCard {
 
-	protected OsmandApplication app;
-	protected FragmentActivity activity;
+	protected final OsmandApplication app;
+	protected final FragmentActivity activity;
 
 	protected View view;
 
@@ -148,6 +149,10 @@ public abstract class BaseCard {
 
 	protected Drawable getPaintedIcon(@DrawableRes int id, @ColorInt int color) {
 		return app.getUIUtilities().getPaintedIcon(id, color);
+	}
+
+	protected int getDimen(@DimenRes int dimenId) {
+		return app.getResources().getDimensionPixelSize(dimenId);
 	}
 
 	public void setShowTopShadow(boolean showTopShadow) {

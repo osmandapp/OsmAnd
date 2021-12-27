@@ -127,8 +127,8 @@ public class TrackEditCard extends MapBaseCard {
 			}
 		});
 
-		int minCardHeight = app.getResources().getDimensionPixelSize(R.dimen.setting_list_item_large_height);
-		int listContentPadding = app.getResources().getDimensionPixelSize(R.dimen.list_content_padding);
+		int minCardHeight = getDimen(R.dimen.setting_list_item_large_height);
+		int listContentPadding = getDimen(R.dimen.list_content_padding);
 
 		LinearLayout container = view.findViewById(R.id.container);
 		container.setMinimumHeight(minCardHeight);

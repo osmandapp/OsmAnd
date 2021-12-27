@@ -78,9 +78,9 @@ public class TracksCard extends MapBaseCard {
 		LinearLayout tracks = view.findViewById(R.id.items);
 		tracks.removeAllViews();
 
-		int minCardHeight = app.getResources().getDimensionPixelSize(R.dimen.route_info_card_item_height);
-		int listContentPadding = app.getResources().getDimensionPixelSize(R.dimen.list_content_padding);
-		int listTextPadding = app.getResources().getDimensionPixelSize(R.dimen.route_info_list_text_padding);
+		int minCardHeight = getDimen(R.dimen.route_info_card_item_height);
+		int listContentPadding = getDimen(R.dimen.list_content_padding);
+		int listTextPadding = getDimen(R.dimen.route_info_list_text_padding);
 
 		int mainFontColor = getMainFontColor();
 		int descriptionColor = getSecondaryColor();
