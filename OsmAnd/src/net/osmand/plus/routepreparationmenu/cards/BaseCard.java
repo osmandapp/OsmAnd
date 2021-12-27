@@ -84,6 +84,12 @@ public abstract class BaseCard {
 		this.listener = listener;
 	}
 
+	protected void notifyCardPressed() {
+		if (listener != null) {
+			listener.onCardPressed(this);
+		}
+	}
+
 	protected void notifyButtonPressed(int buttonIndex) {
 		if (listener != null) {
 			listener.onCardButtonPressed(this, buttonIndex);
