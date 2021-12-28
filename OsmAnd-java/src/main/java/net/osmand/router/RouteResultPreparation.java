@@ -1323,8 +1323,8 @@ public class RouteResultPreparation {
 		// Maybe going straight at a 90-degree intersection
 		TurnType t = TurnType.valueOf(TurnType.C, leftSide);
 		int[] rawLanes = calculateRawTurnLanes(turnLanes, TurnType.C);
-		boolean possiblyLeftTurn = rs.roadsOnLeft == 0;
-		boolean possiblyRightTurn = rs.roadsOnRight == 0;
+		boolean possiblyLeftTurn = rs.roadsOnLeft == 0 || (rawLanes.length > 1 && TurnType.isLeftTurn(rawLanes[0]));
+		boolean possiblyRightTurn = rs.roadsOnRight == 0 || (rawLanes.length > 1 && TurnType.isRightTurn(rawLanes[rawLanes.length - 1]));
 		for (int k = 0; k < rawLanes.length; k++) {
 			int turn = TurnType.getPrimaryTurn(rawLanes[k]);
 			int sturn = TurnType.getSecondaryTurn(rawLanes[k]);
