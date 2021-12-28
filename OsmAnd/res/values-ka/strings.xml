@@ -2898,4 +2898,8 @@
     <string name="output">გამოტანა</string>
     <string name="tts_title">TTS ხმა</string>
     <string name="shared_string_turn">მოხვევა</string>
+    <string name="touring_view_renderer">მოგზაურობის ხედი</string>
+    <string name="waypoint_template">გზის სანიშნის ნიმუში</string>
+    <string name="waypoint_appearance">გზის სანიშნის გარეგნობა</string>
+    <string name="osm_recipients_label">OSM მიმღებები</string>
 </resources>
