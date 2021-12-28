@@ -16,7 +16,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
-import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -111,7 +110,7 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		updateView(true);
 	}
 
-	public void updateView(boolean isEnabled) {
+	public void updateView(boolean isGroupEnabled) {
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		int defaultColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		int textColorPrimary = ColorUtilities.getPrimaryTextColor(app, nightMode);
@@ -128,10 +127,10 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		for (int i = 0; i < items.size(); i++) {
 			_Radio item = items.get(i);
 			ViewGroup button = buttons.get(i);
-			isEnabled = ((TextRadioItem) item).isEnabled();
-			button.setEnabled(isEnabled);
-			int textColor = isEnabled ? textColorPrimary : textColorSecondary;
-			int selectedBgColor = isEnabled ? activeColor : defaultColor;
+			boolean isButtonEnabled = isGroupEnabled && item.isEnabled();
+			button.setEnabled(isButtonEnabled);
+			int textColor = isButtonEnabled ? textColorPrimary : textColorSecondary;
+			int selectedBgColor = isButtonEnabled ? activeColor : defaultColor;
 			GradientDrawable background = new GradientDrawable();
 			background.setColor(ColorUtilities.getColorWithAlpha(selectedBgColor, 0.1f));
 			background.setStroke(AndroidUtils.dpToPx(app, 1.5f), ColorUtilities.getColorWithAlpha(selectedBgColor, 0.5f));
