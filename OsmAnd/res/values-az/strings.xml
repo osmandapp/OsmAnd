@@ -3196,4 +3196,13 @@
     <string name="terrain_empty_state_text">Xəritədə təpə kölgələrini və ya yamacları göstərir. Saytımızda bu xəritə növləri haqqında daha ətraflı oxuyun.</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="select_base_profile_dialog_message">Xüsusi profilinizi standart proqram profillərindən birinə əsaslandırın, bu, vidcetlərin standart görünüşü, sürət və məsafə vahidləri kimi əsas quraşdırmanı müəyyən edir. Bunlar, genişləndirilə bilən xüsusi profillərin nümunələri ilə birlikdə standart proqram profilləridir:</string>
+    <string name="rendering_attr_surface_ground_name">Torpaq</string>
+    <string name="rendering_attr_surface_stone_name">Daş</string>
+    <string name="rendering_attr_surface_mud_name">Palçıq</string>
+    <string name="rendering_attr_surface_ice_name">Buz</string>
+    <string name="rendering_attr_surface_salt_name">Duz</string>
+    <string name="rendering_attr_surface_snow_name">Qar</string>
+    <string name="rendering_attr_surface_concrete_name">Beton</string>
+    <string name="save_poi_value_exceed_length">“%s” etiketinin uzunluğunu 255 simvoldan az olmamaqla qısaldın.</string>
+    <string name="avoid_pt_types_descr">Naviqasiyada yayınmaq üçün ictimai nəqliyyat növlərini seçin:</string>
 </resources>
