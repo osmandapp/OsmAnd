@@ -115,7 +115,9 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	private EditText descriptionEdit;
 	private EditText addressEdit;
 	private int layoutHeightPrevious = 0;
+
 	private ColorsCard colorsCard;
+	private ShapesCard shapesCard;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -381,7 +383,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		createColorSelector();
 		createShapeSelector();
 		updateColorSelector(selectedColor, view);
-		updateShapeSelector(selectedShape, view);
 		scrollView.setOnTouchListener(new View.OnTouchListener() {
 
 			@Override
@@ -501,6 +502,11 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		if (card instanceof ColorsCard) {
 			int color = ((ColorsCard) card).getSelectedColor();
 			updateColorSelector(color, view);
+		} else if (card instanceof ShapesCard) {
+			selectedShape = shapesCard.getSelectedShape();
+			setBackgroundType(selectedShape);
+			updateNameIcon();
+			((TextView) view.findViewById(R.id.shape_name)).setText(selectedShape.getNameId());
 		}
 	}
 
@@ -514,69 +520,18 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		selectedColor = color;
 		setColor(color);
 		updateNameIcon();
-		updateShapeSelector(selectedShape, view);
 		updateIconSelector(selectedIcon, view);
+		shapesCard.updateSelectedColor(color);
 	}
 
 	private void createShapeSelector() {
-		FlowLayout selectShape = view.findViewById(R.id.select_shape);
-		for (BackgroundType backgroundType : BackgroundType.values()) {
-			if (backgroundType.isSelected()) {
-				int minimalPaddingBetweenIcon = app.getResources().getDimensionPixelSize(R.dimen.favorites_select_icon_button_right_padding);
-				selectShape.addView(createShapeItemView(backgroundType, selectShape),
-						new FlowLayout.LayoutParams(minimalPaddingBetweenIcon, 0));
-				selectShape.setHorizontalAutoSpacing(true);
-			}
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			shapesCard = new ShapesCard(mapActivity, selectedShape, selectedColor);
+			shapesCard.setListener(this);
+			ViewGroup shapesCardContainer = view.findViewById(R.id.shapes_card);
+			shapesCardContainer.addView(shapesCard.build(mapActivity));
 		}
-	}
-
-	private View createShapeItemView(final BackgroundType backgroundType, final FlowLayout rootView) {
-		FrameLayout shapeItemView = (FrameLayout) UiUtilities.getInflater(getContext(), nightMode)
-				.inflate(R.layout.point_editor_button, rootView, false);
-		ImageView background = shapeItemView.findViewById(R.id.background);
-		setShapeSelectorBackground(backgroundType, background);
-		ImageView outline = shapeItemView.findViewById(R.id.outline);
-		outline.setImageDrawable(getOutlineDrawable(backgroundType.getIconId()));
-		background.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				updateShapeSelector(backgroundType, view);
-			}
-		});
-		shapeItemView.setTag(backgroundType);
-		return shapeItemView;
-	}
-
-	private Drawable getOutlineDrawable(int iconId) {
-		String iconName = app.getResources().getResourceName(iconId);
-		int iconRes = app.getResources().getIdentifier(iconName + "_contour", "drawable", app.getPackageName());
-		return app.getUIUtilities().getIcon(iconRes,
-				nightMode ? R.color.stroked_buttons_and_links_outline_dark : R.color.stroked_buttons_and_links_outline_light);
-	}
-
-	private void updateShapeSelector(BackgroundType backgroundType, View rootView) {
-		View oldShape = rootView.findViewWithTag(selectedShape);
-		if (oldShape != null) {
-			oldShape.findViewById(R.id.outline).setVisibility(View.INVISIBLE);
-			ImageView background = oldShape.findViewById(R.id.background);
-			setShapeSelectorBackground(selectedShape, background);
-		}
-		View newShape = rootView.findViewWithTag(backgroundType);
-		newShape.findViewById(R.id.outline).setVisibility(View.VISIBLE);
-		((TextView) rootView.findViewById(R.id.shape_name)).setText(backgroundType.getNameId());
-		ImageView background = newShape.findViewById(R.id.background);
-		background.setImageDrawable(UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, backgroundType.getIconId()),
-				selectedColor));
-		selectedShape = backgroundType;
-		setBackgroundType(backgroundType);
-		updateNameIcon();
-	}
-
-	private void setShapeSelectorBackground(BackgroundType backgroundType, ImageView background) {
-		background.setImageDrawable(UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, backgroundType.getIconId()),
-				ContextCompat.getColor(app,
-						nightMode ? R.color.inactive_buttons_and_links_bg_dark
-								: R.color.inactive_buttons_and_links_bg_light)));
 	}
 
 	private String getInitCategory() {

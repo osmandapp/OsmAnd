@@ -29,6 +29,7 @@ import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 
@@ -108,10 +109,8 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 			updateDescription(descriptionView);
 		}
 		final ImageButton sortButton = mainView.findViewById(R.id.sort_button);
-		Drawable background = app.getUIUtilities().getIcon(R.drawable.bg_dash_line_dark,
-				nightMode
-						? R.color.inactive_buttons_and_links_bg_dark
-						: R.color.inactive_buttons_and_links_bg_light);
+		int backgroundColorId = ColorUtilities.getInactiveButtonsAndLinksColorId(nightMode);
+		Drawable background = app.getUIUtilities().getIcon(R.drawable.bg_dash_line_dark, backgroundColorId);
 		AndroidUtils.setBackground(sortButton, background);
 		sortButton.setImageResource(sortByMode.getIconId());
 		sortButton.setVisibility(View.VISIBLE);
