@@ -368,6 +368,7 @@ public class MenuBuilder {
 				View amenitiesRow = createRowContainer(viewGroup.getContext(), NEAREST_WIKI_KEY);
 
 				buildNearestRow(amenitiesRow, amenities, R.drawable.ic_action_wikipedia, app.getString(R.string.wiki_around), NEAREST_WIKI_KEY);
+				buildRowDivider(amenitiesRow);
 				viewGroup.addView(amenitiesRow, position);
 			}
 		});
@@ -559,7 +560,10 @@ public class MenuBuilder {
 	public View buildRow(final View view, Drawable icon, final String buttonText, final String textPrefix, final String text,
 	                     int textColor, String secondaryText, boolean collapsable, final CollapsableView collapsableView, boolean needLinks,
 	                     int textLinesLimit, boolean isUrl, boolean isNumber, boolean isEmail, OnClickListener onClickListener, boolean matchWidthDivider) {
-		buildRowDivider(view);
+
+		if (((ViewGroup)view).getChildCount() > 0) {
+			buildRowDivider(view);
+		}
 
 		LinearLayout baseView = new LinearLayout(view.getContext());
 		baseView.setOrientation(LinearLayout.VERTICAL);
@@ -936,13 +940,13 @@ public class MenuBuilder {
 
 	public void buildRowDivider(View view) {
 		View horizontalLine = new View(view.getContext());
-		LinearLayout.LayoutParams llHorLineParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(1f));
+		LinearLayout.LayoutParams llHorLineParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(10f));
 		llHorLineParams.gravity = Gravity.BOTTOM;
 		if (!matchWidthDivider) {
 			AndroidUtils.setMargins(llHorLineParams, dpToPx(64f), 0, 0, 0);
 		}
 		horizontalLine.setLayoutParams(llHorLineParams);
-		horizontalLine.setBackgroundColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_divider_light : R.color.ctx_menu_bottom_view_divider_dark));
+		horizontalLine.setBackgroundColor(app.getResources().getColor(light ? R.color.gpx_chart_red : R.color.gpx_chart_red));
 		((LinearLayout) view).addView(horizontalLine);
 	}
 
