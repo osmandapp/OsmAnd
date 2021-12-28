@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="gpx_no_routes_descr">You can use “Plan a Route” tool to add route into file.</string>
+    <string name="gpx_no_routes_title">There are no routes</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme tags</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Show fixme tags</string>
