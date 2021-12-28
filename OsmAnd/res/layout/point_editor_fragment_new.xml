@@ -507,17 +507,14 @@
 						android:paddingEnd="@dimen/content_padding" />
 				</LinearLayout>
 
-				<net.osmand.plus.widgets.FlowLayout
-					android:id="@+id/select_shape"
+				<FrameLayout
+					android:id="@+id/shapes_card"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginStart="@dimen/content_padding"
-					android:layout_marginLeft="@dimen/content_padding"
-					android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
+					android:layout_marginTop="@dimen/content_padding_small_half"
 					android:layout_marginEnd="@dimen/content_padding"
-					android:layout_marginRight="@dimen/content_padding"
-					android:layout_marginBottom="@dimen/content_padding_half"
-					android:gravity="start" />
+					android:layout_marginBottom="@dimen/content_padding_half" />
 
 				<View
 					android:layout_width="match_parent"
