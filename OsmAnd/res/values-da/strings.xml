@@ -4515,4 +4515,8 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Skematisk visning af ikoner ved lave zoomniveauer</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Skjul ikke vandvejstunneller</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_value_category_name">Kategori</string>
+    <string name="rendering_value_all_name">Alle</string>
+    <string name="rendering_value_omit_name">Undlad</string>
+    <string name="rendering_attr_seabedDetail_name">Havbundsdetaljer</string>
 </resources>
