@@ -4578,4 +4578,9 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">عرض تخطيطي للأيقونات عند التكبيرات المنخفضة</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">لا تخفي أنفاق الممرات المائية</string>
     <string name="shared_string_open_street_map">خريطة الشارع المفتوح</string>
+    <string name="rendering_value_all_name">الكل</string>
+    <string name="rendering_attr_seabedDetail_name">تفاصيل قاع البحر</string>
+    <string name="rendering_value_category_name">الفئة</string>
+    <string name="rendering_value_omit_name">حذف</string>
+    <string name="rendering_attr_seabedDetail_description">معلومات نصية إضافية حول تأهيل سطح قاع البحر ، أنواع الأسطح المدمجة ، وفئة وتصنيف الحشائش أو الأعشاب البحرية</string>
 </resources>
