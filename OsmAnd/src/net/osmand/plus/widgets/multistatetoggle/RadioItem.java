@@ -4,7 +4,7 @@ import android.view.View;
 
 public class RadioItem {
 
-	private boolean isEnabled = true;
+	private boolean isEnabled;
 
 	public boolean isEnabled() {
 		return isEnabled;

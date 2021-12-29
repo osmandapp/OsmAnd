@@ -106,11 +106,14 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		container.addView(divider);
 	}
 
-	private void updateView() {
-		updateView(true);
+	public void setItemsEnabled(boolean enable) {
+		for (_Radio item: items) {
+			item.setEnabled(enable);
+		}
+		updateView();
 	}
 
-	public void updateView(boolean isGroupEnabled) {
+	private void updateView() {
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		int defaultColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		int textColorPrimary = ColorUtilities.getPrimaryTextColor(app, nightMode);
@@ -124,10 +127,11 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 
 		showAllDividers();
 
+		boolean isButtonEnabled;
 		for (int i = 0; i < items.size(); i++) {
 			_Radio item = items.get(i);
 			ViewGroup button = buttons.get(i);
-			boolean isButtonEnabled = isGroupEnabled && item.isEnabled();
+			isButtonEnabled = item.isEnabled();
 			button.setEnabled(isButtonEnabled);
 			int textColor = isButtonEnabled ? textColorPrimary : textColorSecondary;
 			int selectedBgColor = isButtonEnabled ? activeColor : defaultColor;
