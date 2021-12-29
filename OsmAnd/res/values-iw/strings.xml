@@ -4501,4 +4501,5 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">תגיות הערה</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">תצוגה סכמתית של סלים ברמות תקריב נמוכות</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">תעלות דרכי מים</string>
+    <string name="rendering_attr_seabedDetail_name">פרט קרקעית הים</string>
 </resources>
