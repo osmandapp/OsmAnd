@@ -495,11 +495,14 @@ public class OpeningHoursParser {
 		}
 
 		public boolean isFallBackRule(int sequenceIndex) {
+			boolean isFallback = false;
 			if (sequenceIndex != ALL_SEQUENCES) {
 				ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
-				return rules.get(0).isFallbackRule();
+				for (OpeningHoursRule r : rules) {
+					isFallback = r.isFallbackRule();
+				}
 			}
-			return false;
+			return isFallback;
 		}
 
 		public String getCurrentRuleTime(Calendar cal, int sequenceIndex) {
