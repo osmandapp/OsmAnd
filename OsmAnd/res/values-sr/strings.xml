@@ -1621,7 +1621,7 @@
     <string name="lang_pt_br">Португалски (бразилски)</string>
     <string name="lang_en">Енглески</string>
     <string name="lang_en_gb">Енглески (британски)</string>
-    <string name="lang_af">Африканс</string>
+    <string name="lang_af">Африкаанс</string>
     <string name="lang_hy">Арменијски</string>
     <string name="lang_be_by">Белоруски (латинични)</string>
     <string name="lang_ca">Каталонски</string>
@@ -4255,7 +4255,7 @@
     <string name="connect_track_points_as">Повежите тачке пута</string>
     <string name="pro_features">Плаћене могућности</string>
     <string name="purchases_restored">Куповина је повраћена</string>
-    <string name="grey_color_undefined">Делови без података су обојени сиво.</string>
+    <string name="grey_color_undefined">Делови без података су сиви.</string>
     <string name="cancel_anytime_in_amazon_app">Откажите било када кроз Амазон апликацију</string>
     <string name="amz_manage_subscription_descr">Управљајте својом претплатом користећи Амазон апликацију или Амазон веб сајт.</string>
     <string name="empty_category_name">Име категорије је празно</string>
@@ -4480,4 +4480,28 @@
     <string name="display_groups_visibility_dialog_description">Можете контролисати видљивост групе на карти. Ако је путања скривена, све групе ће такође бити скривене.</string>
     <string name="shared_string_size">Величина</string>
     <string name="created_on">Датум стварања</string>
+    <string name="waypoint_appearance">Изглед путне тачке</string>
+    <string name="track_file_description">Додиром на ову радњу приказаће се дијалог за избор доступних путања.</string>
+    <string name="track_file">Датотека путање</string>
+    <string name="use_routing_fallback_description">Користите офлајн рутирање док онлајн рутирање није доступно.</string>
+    <string name="navigate_point_format_swiss_grid">Швајцарска мрежа (CH1903)</string>
+    <string name="navigate_point_format_swiss_grid_plus">Швајцарска мрежа (CH1903+)</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Иконе при малом зумирању</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Шематски приказ икона при малим зумовима</string>
+    <string name="always_ask_waypoint_appearance_description">Додиром на ову радњу отвориће се екран „Додај тачку пута“, где можете променити име и изглед.</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Ознаке поправке</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Тунели пловних путева</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Не скривај тунеле за водене путеве</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Прикажи ознаке поправке</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Ознаке за белешке</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Прикажи ознаке за белешке</string>
+    <string name="shared_string_not_used">Не користи се</string>
+    <string name="shared_string_used">Користи се</string>
+    <string name="files_with_route_restrictions">Датотеке са ограничењима руте</string>
+    <string name="waypoint_template">Шаблон путне тачке</string>
+    <string name="predefined_waypoint_appearance_description">Додиром на ову радњу аутоматски ће се сачувати путна тачка са унапред дефинисаним параметрима.</string>
+    <string name="turn_arrows">Стрелице скретања</string>
+    <string name="turn_arrows_descr">Изаберите да ли су стрелице за скретање приказане на линији руте.</string>
+    <string name="use_routing_fallback">Замена за ванмрежно рутирање</string>
 </resources>

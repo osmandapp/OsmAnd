@@ -387,7 +387,7 @@
     <string name="poi_traffic_signals">Feu de circulation</string>
     <string name="poi_service_tyres">Pneus</string>
     <string name="poi_public_transport_platform_bus">Arrêt de bus</string>
-    <string name="poi_subway_station">Oui</string>
+    <string name="poi_subway_station">Oui ; station de métro</string>
     <string name="poi_tunnel">Tunnel</string>
     <string name="poi_register_office">Bureau d\'état civil</string>
     <string name="poi_customs">Douanes</string>
@@ -1241,8 +1241,8 @@
     <string name="poi_service_repair">Réparation</string>
     <string name="poi_service_electrical">Réparation de véhicules électriques</string>
     <string name="poi_motorcycle_repair">Atelier de réparation de motos</string>
-    <string name="poi_self_service_yes">Oui</string>
-    <string name="poi_self_service_no">Non</string>
+    <string name="poi_self_service_yes">Oui ; self service</string>
+    <string name="poi_self_service_no">Non ; pas de self service</string>
     <string name="poi_automated_yes">Oui</string>
     <string name="poi_automated_no">Non automatisé</string>
     <string name="poi_public_bath">Bains publics</string>
