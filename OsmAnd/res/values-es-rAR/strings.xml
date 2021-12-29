@@ -4509,4 +4509,9 @@
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Mostrar los túneles fluviales</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Etiquetas «fixme» (arréglame)</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_attr_seabedDetail_name">Detalle del fondo marino</string>
+    <string name="rendering_attr_seabedDetail_description">Información de texto adicional sobre la calificación de la superficie del fondo marino, los tipos de superficie combinados, la categoría y el taxón de la maleza o la hierba marina</string>
+    <string name="rendering_value_category_name">Categoría</string>
+    <string name="rendering_value_all_name">Todos</string>
+    <string name="rendering_value_omit_name">Omitir</string>
 </resources>
