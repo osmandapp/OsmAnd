@@ -127,14 +127,13 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 
 		showAllDividers();
 
-		boolean isButtonEnabled;
 		for (int i = 0; i < items.size(); i++) {
 			_Radio item = items.get(i);
 			ViewGroup button = buttons.get(i);
-			isButtonEnabled = item.isEnabled();
-			button.setEnabled(isButtonEnabled);
-			int textColor = isButtonEnabled ? textColorPrimary : textColorSecondary;
-			int selectedBgColor = isButtonEnabled ? activeColor : defaultColor;
+			boolean enabled = item.isEnabled();
+			button.setEnabled(enabled);
+			int textColor = enabled ? textColorPrimary : textColorSecondary;
+			int selectedBgColor = enabled ? activeColor : defaultColor;
 			GradientDrawable background = new GradientDrawable();
 			background.setColor(ColorUtilities.getColorWithAlpha(selectedBgColor, 0.1f));
 			background.setStroke(AndroidUtils.dpToPx(app, 1.5f), ColorUtilities.getColorWithAlpha(selectedBgColor, 0.5f));
