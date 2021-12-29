@@ -4508,4 +4508,9 @@
     <string name="track_file_description">Al pulsar esta acción se mostrará un diálogo para marcar entre todas las trazas disponibles.</string>
     <string name="use_routing_fallback">Navegación alternativa (sin conexión)</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_attr_seabedDetail_description">Información de texto adicional sobre la calificación de la superficie del fondo marino, los tipos de superficie combinados, la categoría y el taxón de la maleza o la hierba marina</string>
+    <string name="rendering_value_category_name">Categoría</string>
+    <string name="rendering_value_all_name">Todos</string>
+    <string name="rendering_value_omit_name">Omitir</string>
+    <string name="rendering_attr_seabedDetail_name">Detalle del fondo marino</string>
 </resources>
