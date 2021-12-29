@@ -4507,4 +4507,9 @@
     <string name="track_file">Dosiero de spuro</string>
     <string name="turn_arrows_descr">Montri sagetojn de turniĝoj sur la linio de kurso.</string>
     <string name="turn_arrows">Sagetoj de turniĝoj</string>
+    <string name="rendering_attr_seabedDetail_description">Pliaj tekstaj informoj pri mara fundo: kvalifo, margrundo, kategorio kaj taksono de algoj kaj akvoplantoj</string>
+    <string name="rendering_value_category_name">Kategorio</string>
+    <string name="rendering_value_all_name">Ĉiuj</string>
+    <string name="rendering_value_omit_name">Ignori</string>
+    <string name="rendering_attr_seabedDetail_name">Marfundo</string>
 </resources>
