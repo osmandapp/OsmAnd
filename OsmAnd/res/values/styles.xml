@@ -889,4 +889,9 @@
         <item name="typeface">@string/font_roboto_medium</item>
     </style>
 
+    <style name="ToolbarTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textColor">?attr/app_bar_primary_item_color</item>
+        <item name="android:textSize">@dimen/bottom_sheet_title_big</item>
+    </style>
+
 </resources>
