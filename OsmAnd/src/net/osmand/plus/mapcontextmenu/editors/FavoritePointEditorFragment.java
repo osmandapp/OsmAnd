@@ -218,14 +218,14 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		showAutoFillInstance(mapActivity, false);
 	}
 
-	public static void showAutoFillInstance(final MapActivity mapActivity, boolean addPointWithoutDialog) {
+	public static void showAutoFillInstance(final MapActivity mapActivity, boolean skipConfirmationDialog) {
 		FavoritePointEditor editor = mapActivity.getContextMenu().getFavoritePointEditor();
 		if (editor != null) {
 			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 			String tag = editor.getFragmentTag();
 			if (fragmentManager.findFragmentByTag(tag) == null) {
 				FavoritePointEditorFragment fragment = new FavoritePointEditorFragment();
-				fragment.addPointWithoutDialog = addPointWithoutDialog;
+				fragment.skipConfirmationDialog = skipConfirmationDialog;
 				fragmentManager.beginTransaction()
 						.add(R.id.fragmentContainer, fragment, tag)
 						.addToBackStack(null)
@@ -271,7 +271,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 				return;
 			}
 
-			if (builder != null && !addPointWithoutDialog) {
+			if (builder != null && !skipConfirmationDialog) {
 				builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {

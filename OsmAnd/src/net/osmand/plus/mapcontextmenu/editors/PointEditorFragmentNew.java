@@ -53,7 +53,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -116,7 +115,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	private int layoutHeightPrevious = 0;
 	private ColorsCard colorsCard;
 
-	protected boolean addPointWithoutDialog;
+	protected boolean skipConfirmationDialog;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -403,7 +402,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		if (addPointWithoutDialog) {
+		if (skipConfirmationDialog) {
 			save(true);
 		}
 	}
@@ -570,18 +569,21 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		}
 
 		// update categories from json
-		try {
-			JSONObject obj = new JSONObject(loadJSONFromAsset());
-			JSONObject categories = obj.getJSONObject("categories");
-			for (int i = 0; i < categories.length(); i++) {
-				JSONArray names = categories.names();
-				String name = names.get(i).toString();
-				JSONObject icons = categories.getJSONObject(name);
-				String translatedName = AndroidUtils.getIconStringPropertyName(app, name);
-				iconCategories.put(translatedName, icons.getJSONArray("icons"));
+		String categoriesJson = loadJSONFromAsset();
+		if (categoriesJson != null) {
+			try {
+				JSONObject obj = new JSONObject(categoriesJson);
+				JSONObject categories = obj.getJSONObject("categories");
+				for (int i = 0; i < categories.length(); i++) {
+					JSONArray names = categories.names();
+					String name = names.get(i).toString();
+					JSONObject icons = categories.getJSONObject(name);
+					String translatedName = AndroidUtils.getIconStringPropertyName(app, name);
+					iconCategories.put(translatedName, icons.getJSONArray("icons"));
+				}
+			} catch (JSONException e) {
+				log.error(e.getMessage());
 			}
-		} catch (JSONException e) {
-			log.error(e.getMessage());
 		}
 
 		selectedIconCategory = getInitCategory();
@@ -746,14 +748,11 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		}
 	}
 
+	@Nullable
 	private String loadJSONFromAsset() {
 		try {
 			InputStream is = app.getAssets().open("poi_categories.json");
-			int size = is.available();
-			byte[] buffer = new byte[size];
-			is.read(buffer);
-			is.close();
-			return new String(buffer, StandardCharsets.UTF_8);
+			return Algorithms.readFromInputStream(is).toString();
 		} catch (IOException ex) {
 			log.error("Failed to load JSON from asset", ex);
 			return null;
@@ -813,7 +812,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 
 	private void showKeyboard() {
 		FragmentActivity activity = getActivity();
-		if (!addPointWithoutDialog && activity != null) {
+		if (!skipConfirmationDialog && activity != null) {
 			InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
 			if (inputMethodManager != null) {
 				inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
@@ -1041,10 +1040,9 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		@Override
 		public GroupsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 			Context context = parent.getContext();
-			View view;
-			int activeColor = ColorUtilities.getActiveColor(context, nightMode);
-			view = LayoutInflater.from(context)
+			View view = LayoutInflater.from(context)
 					.inflate(R.layout.point_editor_group_select_item, parent, false);
+			int activeColor = ColorUtilities.getActiveColor(context, nightMode);
 			if (viewType != VIEW_TYPE_CELL) {
 				Drawable iconAdd = getPaintedIcon(R.drawable.ic_action_add, activeColor);
 				((ImageView) view.findViewById(R.id.groupIcon)).setImageDrawable(iconAdd);
@@ -1052,10 +1050,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 				GradientDrawable rectContourDrawable = (GradientDrawable) AppCompatResources.getDrawable(app,
 						R.drawable.bg_select_group_button_outline);
 				if (rectContourDrawable != null) {
-					int strokeColorId = nightMode
-							? R.color.stroked_buttons_and_links_outline_dark
-							: R.color.stroked_buttons_and_links_outline_light;
-					int strokeColor = ContextCompat.getColor(app, strokeColorId);
+					int strokeColor = ColorUtilities.getStrokedButtonsOutlineColor(context, nightMode);
 					rectContourDrawable.setStroke(AndroidUtils.dpToPx(app, 1), strokeColor);
 					((ImageView) view.findViewById(R.id.outlineRect)).setImageDrawable(rectContourDrawable);
 				}

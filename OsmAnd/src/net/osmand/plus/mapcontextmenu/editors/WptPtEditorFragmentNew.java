@@ -181,14 +181,14 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 		showInstance(mapActivity, false);
 	}
 
-	public static void showInstance(@NonNull MapActivity mapActivity, boolean addPointWithoutDialog) {
+	public static void showInstance(@NonNull MapActivity mapActivity, boolean skipConfirmationDialog) {
 		WptPtEditor editor = mapActivity.getContextMenu().getWptPtPointEditor();
 		if (editor != null) {
 			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 			String tag = editor.getFragmentTag();
 			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 				WptPtEditorFragmentNew fragment = new WptPtEditorFragmentNew();
-				fragment.addPointWithoutDialog = addPointWithoutDialog;
+				fragment.skipConfirmationDialog = skipConfirmationDialog;
 				fragmentManager.beginTransaction()
 						.add(R.id.fragmentContainer, fragment, tag)
 						.addToBackStack(null)
