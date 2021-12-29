@@ -4509,4 +4509,9 @@
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Не приховати тунелі на водних шляхах</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Теґи fixme</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_attr_seabedDetail_description">Додаткові текстові відомості про поверхню (surface_qualification) морського дна, комбіновані типи поверхні, категорію та тип рослинності</string>
+    <string name="rendering_value_category_name">Категорія</string>
+    <string name="rendering_value_all_name">Усі</string>
+    <string name="rendering_value_omit_name">Пропустити</string>
+    <string name="rendering_attr_seabedDetail_name">Подробиці про морське дно</string>
 </resources>
