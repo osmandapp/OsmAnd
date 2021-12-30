@@ -4515,4 +4515,9 @@
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Wasserstraßentunnel</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Wasserstraßentunnel nicht ausblenden</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_attr_seabedDetail_name">Meeresbodendetail</string>
+    <string name="rendering_attr_seabedDetail_description">Zusätzliche Textinformationen zur Oberflächenbeschaffenheit des Meeresbodens, kombinierte Oberflächentypen, Kategorie und Art des Seegrases</string>
+    <string name="rendering_value_category_name">Kategorie</string>
+    <string name="rendering_value_all_name">Alle</string>
+    <string name="rendering_value_omit_name">Weglassen</string>
 </resources>
