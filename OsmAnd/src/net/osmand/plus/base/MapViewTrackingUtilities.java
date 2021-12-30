@@ -22,6 +22,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.resources.DetectRegionTask;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
@@ -512,38 +513,5 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public void setZoomTime(long time) {
 		lastTimeAutoZooming = time;
 		isUserZoomed = true;
-	}
-
-	@SuppressWarnings("deprecation")
-	private static class DetectRegionTask extends AsyncTask<LatLon, Void, WorldRegion> {
-
-		private final OsmandApplication app;
-		private final CallbackWithObject<WorldRegion> callback;
-
-		DetectRegionTask(@NonNull OsmandApplication app, @NonNull CallbackWithObject<WorldRegion> callback) {
-			this.app = app;
-			this.callback = callback;
-		}
-
-		@Override
-		protected WorldRegion doInBackground(LatLon... latLons) {
-			try {
-				if (latLons != null && latLons.length > 0) {
-					Map.Entry<WorldRegion, BinaryMapDataObject> reg = app.getRegions()
-							.getSmallestBinaryMapDataObjectAt(latLons[0]);
-					if (reg != null) {
-						return reg.getKey();
-					}
-				}
-			} catch (IOException e) {
-				// ignore
-			}
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(WorldRegion worldRegion) {
-			callback.processResult(worldRegion);
-		}
 	}
 }
