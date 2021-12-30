@@ -437,8 +437,8 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 	}
 
-	private fun addGrayPhoto(userId: Int, originalPhotoPath: String) {
-		if (userId != 0 && !app.telegramHelper.hasGrayscaleUserPhoto(userId)) {
+	private fun addGrayPhoto(userId: Long, originalPhotoPath: String) {
+		if (userId != 0L && !app.telegramHelper.hasGrayscaleUserPhoto(userId)) {
 			app.uiUtils.convertAndSaveGrayPhoto(
 				originalPhotoPath,
 				"${app.filesDir.absolutePath}/$GRAYSCALE_PHOTOS_DIR$userId$GRAYSCALE_PHOTOS_EXT"
