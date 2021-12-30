@@ -4514,4 +4514,8 @@
     <string name="files_with_route_restrictions">Файлы с ограничениями маршрута</string>
     <string name="shared_string_not_used">Не используется</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_attr_seabedDetail_description">Дополнительная текстовая информация о классификации поверхности морского дна, комбинированных типах поверхности, категории и таксоне сорняков или морских водорослей</string>
+    <string name="rendering_value_category_name">Категория</string>
+    <string name="rendering_attr_seabedDetail_name">Детали морского дна</string>
+    <string name="rendering_value_all_name">Все</string>
 </resources>
