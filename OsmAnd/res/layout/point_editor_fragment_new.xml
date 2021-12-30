@@ -390,25 +390,11 @@
 					android:paddingEnd="@dimen/content_padding"
 					android:paddingStart="@dimen/content_padding" />
 
-				<net.osmand.plus.widgets.chips.HorizontalChipsView
-					android:id="@+id/icon_category_selector"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:paddingHorizontal="@dimen/content_padding"
-					android:paddingTop="@dimen/context_menu_first_line_top_margin"
-					android:paddingBottom="@dimen/context_menu_padding_margin_tiny"
-					tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-					tools:listitem="@layout/custom_chip_view"
-					tools:orientation="horizontal" />
-
-				<net.osmand.plus.widgets.FlowLayout
-					android:id="@+id/select_icon"
+				<FrameLayout
+					android:id="@+id/icons_card"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginStart="@dimen/content_padding"
-					android:layout_marginLeft="@dimen/content_padding"
-					android:layout_marginEnd="@dimen/content_padding"
-					android:layout_marginRight="@dimen/content_padding"
+					android:layout_marginTop="@dimen/content_padding_small"
 					android:layout_marginBottom="@dimen/content_padding_half" />
 
 				<View
