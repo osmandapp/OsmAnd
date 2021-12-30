@@ -518,11 +518,11 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private static class DetectRegionTask extends AsyncTask<LatLon, Void, WorldRegion> {
 
 		private final OsmandApplication app;
-		private final CallbackWithObject<WorldRegion> onRegionDetected;
+		private final CallbackWithObject<WorldRegion> callback;
 
-		DetectRegionTask(@NonNull OsmandApplication app, @NonNull CallbackWithObject<WorldRegion> onRegionDetected) {
+		DetectRegionTask(@NonNull OsmandApplication app, @NonNull CallbackWithObject<WorldRegion> callback) {
 			this.app = app;
-			this.onRegionDetected = onRegionDetected;
+			this.callback = callback;
 		}
 
 		@Override
@@ -543,7 +543,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 		@Override
 		protected void onPostExecute(WorldRegion worldRegion) {
-			onRegionDetected.processResult(worldRegion);
+			callback.processResult(worldRegion);
 		}
 	}
 }

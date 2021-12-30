@@ -47,6 +47,7 @@ public class LocaleBuilder {
 	private void buildLocale() {
 		final String[] params = (localeParams + "____.").split("[\\_\\-]");
 		String language = params[0];
+		                        // As per BCP 47:
 		String region = "";     // [a-zA-Z]{2} | [0-9]{3}
 		String variant = "";    // [0-9][0-9a-zA-Z]{3} | [0-9a-zA-Z]{5,8}
 		String script = "";     // [a-zA-Z]{4}
@@ -80,12 +81,8 @@ public class LocaleBuilder {
 		} else if (detectPronunciationForNl) {
 			LatLon latLon = new LatLon(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
 			app.getMapViewTrackingUtilities().detectCurrentRegion(latLon, worldRegion -> {
-				while (worldRegion != null && !isBelgium(worldRegion)) {
-					worldRegion = worldRegion.getSuperregion();
-				}
-				String region = worldRegion != null && isBelgium(worldRegion)
-						? REGION_BELGIUM
-						: regionFromParams;
+				String region = getSpecialOrDefaultRegion(worldRegion, WORLD_REGION_ID_BELGIUM,
+						REGION_BELGIUM, regionFromParams);
 				regionCallback.processResult(region);
 				return true;
 			});
@@ -94,8 +91,17 @@ public class LocaleBuilder {
 		}
 	}
 
-	private boolean isBelgium(@NonNull WorldRegion worldRegion) {
-		return WORLD_REGION_ID_BELGIUM.equals(worldRegion.getRegionId());
+	@NonNull
+	private String getSpecialOrDefaultRegion(@NonNull WorldRegion worldRegion, @NonNull String specialRegionId,
+	                                         @NonNull String specialRegion, @NonNull String defaultRegion) {
+		return hasRegionWithId(worldRegion, specialRegionId) ? specialRegion : defaultRegion;
+	}
+
+	private boolean hasRegionWithId(@NonNull WorldRegion worldRegion, @NonNull String regionId) {
+		while (worldRegion != null && !regionId.equals(worldRegion.getRegionId())) {
+			worldRegion = worldRegion.getSuperregion();
+		}
+		return worldRegion != null && regionId.equals(worldRegion.getRegionId());
 	}
 
 	@NonNull
@@ -110,7 +116,7 @@ public class LocaleBuilder {
 					.build();
 		} catch (RuntimeException e) {
 			log.error("Trying to build locale with ill-formed param", e);
-			return new Locale(language, region);
+			return new Locale(language, region); // Variant not passed to prevent errors on some devices
 		}
 	}
 }
