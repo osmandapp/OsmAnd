@@ -677,7 +677,7 @@ public class TrackDetailsMenu {
 			}
 		});
 
-		GpxUiHelper.setupGPXChart(app, chart, 4);
+		GpxUiHelper.setupGPXChart(chart);
 
 		List<ILineDataSet> dataSets = new ArrayList<>();
 		if (gpxItem.chartTypes != null && gpxItem.chartTypes.length > 0) {

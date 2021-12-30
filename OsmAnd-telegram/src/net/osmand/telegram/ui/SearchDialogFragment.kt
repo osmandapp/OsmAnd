@@ -46,7 +46,7 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 
 	private var searchedChatsIds = mutableSetOf<Long>()
 	private var searchedPublicChatsIds = mutableSetOf<Long>()
-	private var searchedContactsIds = mutableSetOf<Int>()
+	private var searchedContactsIds = mutableSetOf<Long>()
 
 	private val selectedChats = HashSet<Long>()
 	private val selectedUsers = HashSet<Long>()
@@ -245,12 +245,12 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 			}
 		}
 		selectedUsers.forEach {
-			val user = telegramHelper.getUser(it.toInt())
+			val user = telegramHelper.getUser(it)
 			if (user != null) {
 				if (user.id != currentUserId)
 					items.add(user)
 			} else {
-				telegramHelper.requestUser(it.toInt())
+				telegramHelper.requestUser(it)
 			}
 		}
 		searchedChatsIds.forEach {
@@ -426,7 +426,7 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 						} else {
 							selectedUsers.remove(itemId)
 						}
-						if (!(searchedChatsIds.contains(itemId) || searchedPublicChatsIds.contains(itemId) || searchedContactsIds.contains(itemId.toInt()))) {
+						if (!(searchedChatsIds.contains(itemId) || searchedPublicChatsIds.contains(itemId) || searchedContactsIds.contains(itemId))) {
 							updateList()
 						}
 					}

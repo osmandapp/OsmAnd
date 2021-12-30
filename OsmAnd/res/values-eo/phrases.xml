@@ -4211,4 +4211,6 @@
     <string name="poi_faculty_psychology">psiĥologio</string>
     <string name="poi_tool_hire">Pruntejo de iloj</string>
     <string name="poi_escape_game">Ĉambro de enigmoj</string>
+    <string name="poi_computer_sales">Vendo de komputiloj</string>
+    <string name="poi_computer_repair">Riparo de komputiloj</string>
 </resources>

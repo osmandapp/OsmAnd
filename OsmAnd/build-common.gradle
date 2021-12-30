@@ -379,7 +379,10 @@ dependencies {
 	implementation("com.getkeepsafe.taptargetview:taptargetview:1.13.2") {
 		exclude group: 'com.android.support'
 	}
-	implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+	debugImplementation "net.osmand:MPAndroidChart:custom-snapshot-debug@aar"
+	releaseImplementation "net.osmand:MPAndroidChart:custom-snapshot-release@aar"
+
 	implementation("com.github.HITGIF:TextFieldBoxes:1.4.5") {
 		exclude group: 'com.android.support'
 	}

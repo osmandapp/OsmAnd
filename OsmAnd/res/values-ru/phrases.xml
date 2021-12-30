@@ -4150,4 +4150,9 @@
     <string name="poi_generator_type_boiler">Тип генератора: котел</string>
     <string name="poi_generator_source_waste">Источник энергии: отходы</string>
     <string name="poi_generator_method_fission">Метод генерации: деление</string>
+    <string name="poi_generator_type_bwr_2">Тип генератора: кипящий водо-водяной реактор BWR-2</string>
+    <string name="poi_generator_type_bwr_3">Тип генератора: кипящий водо-водяной реактор BWR-3</string>
+    <string name="poi_generator_type_bwr_4">Тип генератора: кипящий водо-водяной реактор BWR-4</string>
+    <string name="poi_generator_type_bwr_5">Тип генератора: кипящий водо-водяной реактор BWR-5</string>
+    <string name="poi_generator_type_bwr_6">Тип генератора: кипящий водо-водяной реактор BWR-6</string>
 </resources>

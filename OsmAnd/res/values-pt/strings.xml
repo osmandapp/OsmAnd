@@ -4505,4 +4505,13 @@
     <string name="shared_string_not_used">Não usado</string>
     <string name="files_with_route_restrictions">Ficheiros com restrições de rota</string>
     <string name="navigate_point_format_swiss_grid">Rede Suíça (CH1903)</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Marcacões corrigeMe</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Mostrar marcações corrigeMe</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Marcações de anotação</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Mostrar marcações de anotação</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ícones em aumentos baixos</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Exibição esquemática de ícones em aumentos baixos</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Túneis fluviais</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Não esconder túneis hidrovias</string>
 </resources>

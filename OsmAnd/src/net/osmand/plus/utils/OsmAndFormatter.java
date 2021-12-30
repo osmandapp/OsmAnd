@@ -1,7 +1,18 @@
 package net.osmand.plus.utils;
 
+import static net.osmand.data.PointDescription.getLocationOlcName;
+import static java.util.Calendar.DAY_OF_YEAR;
+import static java.util.Calendar.ERA;
+import static java.util.Calendar.YEAR;
+
 import android.content.Context;
 import android.text.format.DateUtils;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.core.text.TextUtilsCompat;
+import androidx.core.view.ViewCompat;
 
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.MGRSPoint;
@@ -18,11 +29,11 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SwissGridApproximation;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SpeedConstants;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormatSymbols;
@@ -36,17 +47,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.core.text.TextUtilsCompat;
-import androidx.core.view.ViewCompat;
-
-import static java.util.Calendar.DAY_OF_YEAR;
-import static java.util.Calendar.ERA;
-import static java.util.Calendar.YEAR;
-import static net.osmand.data.PointDescription.getLocationOlcName;
 
 public class OsmAndFormatter {
 	public final static float METERS_IN_KILOMETER = 1000f;
@@ -177,9 +177,9 @@ public class OsmAndFormatter {
 		return formattedInterval + " " + unitsStr;
 	}
 
-	public static String getFormattedDistanceInterval(OsmandApplication app, double interval) {
+	public static String getFormattedDistanceInterval(OsmandApplication app, double interval, boolean forceTrailingZeros) {
 		double roundedDist = OsmAndFormatter.calculateRoundedDist(interval, app);
-		return OsmAndFormatter.getFormattedDistance((float) roundedDist, app);
+		return OsmAndFormatter.getFormattedDistance((float) roundedDist, app, forceTrailingZeros);
 	}
 
 	public static double calculateRoundedDist(double distInMeters, OsmandApplication ctx) {

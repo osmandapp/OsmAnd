@@ -4494,4 +4494,11 @@
     <string name="files_with_route_restrictions">קבצים עם הגבלות מסלול</string>
     <string name="always_ask_waypoint_appearance_description">נגיעה בפעולה הזאת תפתח את מסך „הוספת נקודת דרך”, בו ניתן לשנות את השם ואת המראה.</string>
     <string name="shared_string_not_used">לא בשימוש</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">הצגת תגיות לתיקון</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">סמלים ברמות תקריב נמוכות</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">הצגת תגיות הערה</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">לא להסתיר תעלות דרכי מים</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">תגיות הערה</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">תצוגה סכמתית של סלים ברמות תקריב נמוכות</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">תעלות דרכי מים</string>
 </resources>

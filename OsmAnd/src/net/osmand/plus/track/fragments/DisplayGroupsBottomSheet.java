@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
@@ -91,6 +92,10 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 		DisplayGroupsHolder groupsHolder = DisplayPointsGroupsHelper.getGroups(app, displayGroups, null);
 		uiItems.clear();
 		for (GpxDisplayGroup group : groupsHolder.groups) {
+			if (group.getType() != GpxDisplayItemType.TRACK_POINTS) {
+				continue;
+			}
+
 			SelectableItem uiItem = new SelectableItem();
 			List<GpxDisplayItem> groupItems = groupsHolder.itemGroups.get(group);
 

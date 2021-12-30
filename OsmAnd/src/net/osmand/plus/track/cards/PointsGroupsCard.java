@@ -44,6 +44,12 @@ public class PointsGroupsCard extends MapBaseCard {
 		return selectedGroup;
 	}
 
+	public void updateContent(@NonNull List<GpxDisplayGroup> updatedGroups) {
+		displayGroups.clear();
+		displayGroups.addAll(updatedGroups);
+		updateContent();
+	}
+
 	@Override
 	public void updateContent() {
 		ArrayList<HorizontalSelectionItem> items = new ArrayList<>();

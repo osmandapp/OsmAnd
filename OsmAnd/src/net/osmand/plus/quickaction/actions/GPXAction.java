@@ -224,7 +224,7 @@ public class GPXAction extends QuickAction {
 		AndroidUtils.setBackground(container.getContext(), selectAnotherTrackButtonContainer, night,
 				R.drawable.ripple_light, R.drawable.ripple_dark);
 		AndroidUtils.setBackground(container.getContext(), selectAnotherTrackButton, night,
-				R.drawable.btn_solid_border_light, R.drawable.btn_solid_border_light);
+				R.drawable.btn_solid_border_light, R.drawable.btn_solid_border_dark);
 
 		selectAnotherTrackButtonContainer.setOnClickListener(v -> showSelectTrackFileDialog(mapActivity));
 	}
