@@ -192,4 +192,6 @@
     <string name="shared_string_continue">Contuniar</string>
     <string name="duration_ago">%1$s fach(s)</string>
     <string name="shared_string_logout">Se deconnectar</string>
+    <string name="foot">ft</string>
+    <string name="m">m</string>
 </resources>
