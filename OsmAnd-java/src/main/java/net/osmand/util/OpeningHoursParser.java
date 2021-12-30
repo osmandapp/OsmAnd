@@ -499,7 +499,10 @@ public class OpeningHoursParser {
 			if (sequenceIndex != ALL_SEQUENCES) {
 				ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
 				for (OpeningHoursRule r : rules) {
-					isFallback = r.isFallbackRule();
+					if (r.isFallbackRule()) {
+						isFallback = true;
+						break;
+					}
 				}
 			}
 			return isFallback;
