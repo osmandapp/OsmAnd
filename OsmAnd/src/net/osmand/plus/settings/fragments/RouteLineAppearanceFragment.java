@@ -273,8 +273,6 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 			}
 		});
 		closeButton.setImageResource(AndroidUtils.getNavigationIconResId(toolbarContainer.getContext()));
-		int bgColorId = isNightMode() ? R.color.app_bar_color_dark : R.color.list_background_color_light;
-		toolbarContainer.setBackgroundColor(ContextCompat.getColor(requireContext(), bgColorId));
 		updateToolbarVisibility(toolbarContainer);
 	}
 

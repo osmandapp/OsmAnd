@@ -152,15 +152,14 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		return helper;
 	}
 
+	@NonNull
 	@Override
 	public String getToolbarTitle() {
 		FavoritePointEditor editor = getFavoritePointEditor();
 		if (editor != null) {
-			if (editor.isNew()) {
-				return getString(R.string.favourites_context_menu_add);
-			} else {
-				return getString(R.string.favourites_context_menu_edit);
-			}
+			return editor.isNew
+					? getString(R.string.favourites_context_menu_add)
+					: getString(R.string.favourites_context_menu_edit);
 		}
 		return "";
 	}
@@ -389,6 +388,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		}
 	}
 
+	@Nullable
 	@Override
 	public String getNameInitValue() {
 		FavouritePoint favorite = getFavorite();
@@ -427,15 +427,11 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 	}
 
 	@Override
-	public Drawable getCategoryIcon() {
-		return getPaintedIcon(R.drawable.ic_action_folder_stroke, getPointColor());
-	}
-
-	@Override
 	public int getDefaultColor() {
 		return defaultColor;
 	}
 
+	@ColorInt
 	@Override
 	public int getPointColor() {
 		FavouritePoint favorite = getFavorite();

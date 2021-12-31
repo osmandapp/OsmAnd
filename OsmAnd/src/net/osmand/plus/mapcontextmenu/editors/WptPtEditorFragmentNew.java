@@ -153,6 +153,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 		return wpt;
 	}
 
+	@NonNull
 	@Override
 	public String getToolbarTitle() {
 		WptPtEditor editor = getWptPtEditor();
@@ -403,7 +404,6 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	@Override
 	public void setColor(int color) {
 		this.color = color;
-
 	}
 
 	@Override
@@ -425,6 +425,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 		return getString(R.string.shared_string_favorites);
 	}
 
+	@Nullable
 	@Override
 	public String getNameInitValue() {
 		return wpt != null ? wpt.name : "";
@@ -459,15 +460,11 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	}
 
 	@Override
-	public Drawable getCategoryIcon() {
-		return getPaintedIcon(R.drawable.ic_action_folder_stroke, getPointColor());
-	}
-
-	@Override
 	public int getDefaultColor() {
 		return defaultColor;
 	}
 
+	@ColorInt
 	@Override
 	public int getPointColor() {
 		if (color != 0) {
