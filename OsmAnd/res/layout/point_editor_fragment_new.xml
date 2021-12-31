@@ -9,21 +9,21 @@
 	android:background="@android:color/transparent">
 
 	<LinearLayout
-		android:id="@+id/background_layout"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:background="?attr/activity_background_color"
+		android:background="?attr/appbar_and_list_background_color"
 		android:orientation="vertical">
 
 		<androidx.appcompat.widget.Toolbar
 			android:id="@+id/toolbar"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/toolbar_height"
-			android:background="?attr/card_and_list_background_basic"
+			android:background="?attr/appbar_and_list_background_color"
 			app:contentInsetStartWithNavigation="@dimen/toolbar_inset_start_with_navigation"
+			app:titleTextAppearance="@style/ToolbarTitle"
+			osmand:titleTextColor="?android:textColorPrimary"
 			osmand:subtitleTextColor="?android:textColorPrimary"
-			osmand:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-			osmand:titleTextColor="?android:textColorPrimary">
+			osmand:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
 			<ImageButton
 				android:id="@+id/toolbar_action"
@@ -392,7 +392,7 @@
 					android:paddingStart="@dimen/content_padding" />
 
 				<FrameLayout
-					android:id="@+id/icons_card"
+					android:id="@+id/icons_card_container"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginStart="@dimen/content_padding"
@@ -444,7 +444,7 @@
 				</LinearLayout>
 
 				<LinearLayout
-					android:id="@+id/select_color"
+					android:id="@+id/colors_card_container"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
@@ -496,7 +496,7 @@
 				</LinearLayout>
 
 				<FrameLayout
-					android:id="@+id/shapes_card"
+					android:id="@+id/shapes_card_container"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginStart="@dimen/content_padding"

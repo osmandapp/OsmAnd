@@ -152,6 +152,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		return helper;
 	}
 
+	@NonNull
 	@Override
 	public String getToolbarTitle() {
 		FavoritePointEditor editor = getFavoritePointEditor();
@@ -389,6 +390,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		}
 	}
 
+	@Nullable
 	@Override
 	public String getNameInitValue() {
 		FavouritePoint favorite = getFavorite();
@@ -431,6 +433,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		return defaultColor;
 	}
 
+	@ColorInt
 	@Override
 	public int getPointColor() {
 		FavouritePoint favorite = getFavorite();
