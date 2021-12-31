@@ -4504,4 +4504,9 @@
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tunely vodných ciest</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Neskrývať vodné cesty v tuneloch</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_value_all_name">Všetky</string>
+    <string name="rendering_value_omit_name">Vynechať</string>
+    <string name="rendering_attr_seabedDetail_name">Detaily morského dna</string>
+    <string name="rendering_attr_seabedDetail_description">Ďalšie textové informácie o povrchu morského dna, kategórii a druhu morského porastu</string>
+    <string name="rendering_value_category_name">Kategória</string>
 </resources>

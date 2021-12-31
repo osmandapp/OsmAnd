@@ -4502,4 +4502,9 @@
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">不要隱藏水路隧道</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme 標籤</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_value_category_name">類別</string>
+    <string name="rendering_value_omit_name">忽略</string>
+    <string name="rendering_attr_seabedDetail_name">海底詳細資訊</string>
+    <string name="rendering_attr_seabedDetail_description">關於海床表面狀況、雜草或海草的組合表面類型、類別和分類群的額外文字資訊</string>
+    <string name="rendering_value_all_name">所有</string>
 </resources>

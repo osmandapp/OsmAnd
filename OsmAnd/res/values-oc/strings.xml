@@ -797,7 +797,7 @@
     <string name="towards">vèrs</string>
     <string name="si_mi_feet">Milas/pè</string>
     <string name="route_tslr">Viratz leugierament a drecha e contuniatz</string>
-    <string name="route_tu">Viratz lo pè e contuniatz</string>
+    <string name="route_tu">Viratz lo pè e continuatz</string>
     <string name="in_app_purchase_desc_ex">Un còp crompada, restarà de lònga a vòstra disposicion.</string>
     <string name="favorite">Preferit</string>
     <string name="choose_auto_follow_route">Centrar automaticament la mapa</string>
@@ -971,7 +971,7 @@
     <string name="add_group_to_markers">Ajustar un marcador a la lista</string>
     <string name="no_items_of_type_message">I a ges d\'element d\'aquesta mena</string>
     <string name="no_activity_for_intent">Installatz una aplicacion que pòsque completar l\'accion.</string>
-    <string name="shared_string_contributions">Contributions</string>
+    <string name="shared_string_contributions">Contribucions</string>
     <string name="available_until">Disponible fins a %1$s</string>
     <string name="use_login_and_password">Emplegatz vòstre nom d\'utilizator e lo senhau</string>
     <string name="copy_to_map_markers">Ajustar ai marcadors</string>
@@ -1319,7 +1319,7 @@
     <string name="rendering_attr_appMode_description">Optimizar la mapa per</string>
     <string name="rendering_attr_appMode_name">Mòde de representacion</string>
     <string name="rendering_attr_contourLines_name">Mostrar lei corbas de nivèu</string>
-    <string name="rendering_attr_hmRendered_description">Augmenta la quantitat de detalhs mostrats sus la mapa.</string>
+    <string name="rendering_attr_hmRendered_description">Augmenta la quantitat de detalhs visibles sus la mapa.</string>
     <string name="quick_action_map_style">Modificar la representacion de la mapa</string>
     <string name="quick_action_map_style_switch">Representacion de la mapa modificada en \"%s\".</string>
     <string name="quick_action_map_style_action">Ajustatz un mòde de representacion de la mapa</string>
@@ -1476,7 +1476,7 @@
     <string name="get_started">Començar</string>
     <string name="fav_point_dublicate">Avètz indicat un nom de Preferit duplicat</string>
     <string name="city_type_suburb">Quartier</string>
-    <string name="shared_string_is_open">Dobèrt desenant</string>
+    <string name="shared_string_is_open">Ara dobèrt</string>
     <string name="index_item_depth_contours_osmand_ext">Isobates</string>
     <string name="try_again">Tornatz assajar</string>
     <string name="get_unlimited_access">Obtenètz un accès illimitat</string>
@@ -1832,7 +1832,7 @@
     <string name="sort_name_ascending">Nom: A - Z</string>
     <string name="sort_name_descending">Nom: Z - A</string>
     <string name="shared_string_add_photo">Ajustar de fòtos</string>
-    <string name="shared_string_sec"></string>
+    <string name="shared_string_sec">sec</string>
     <string name="enter_text_separated">Marcatz lei balisas separadas d\'una virgula.</string>
     <string name="complex_routing_descr">Calcul dau percors en doas fasis per la navigacion en automobila.</string>
     <string name="add_photos_descr">OsmAnd mòstra de fòtos de fònts divèrsas :
@@ -1915,4 +1915,26 @@
     <string name="gpx_upload_identifiable_visibility_descr">\"Identificable\" vòu dire que la traça se visualiza publicament dins vòstrei traças GPS e sus la lista publica de traças GPS, valent a dire, que leis autreis utilizators la podràn teledescargar en forma grassa e l\'associar amb vòstre nom d\'utilizator. Lei donadas temporalas e lei ponchs de la traça servits per l’API GPS faràn referéncia a la pagina de vòstra traça originala.</string>
     <string name="icon_group_emergency">Urgéncia</string>
     <string name="icon_group_sport">Espòrt</string>
+    <string name="routing_engine_vehicle_type_hgv">Mieg-pesant</string>
+    <string name="foot">ft</string>
+    <string name="routing_attr_avoid_footways_description">Evitar lei camins pedoniers</string>
+    <string name="lang_vo">Volapuk</string>
+    <string name="filter_poi_hint">Filtrar per nom</string>
+    <string name="access_hint_enter_address">Intratz l\'adreiça</string>
+    <string name="shared_string_disabled">Desactivat</string>
+    <string name="rendering_attr_seabedDetail_name">Detalh dei fons marins</string>
+    <string name="rendering_attr_seabedDetail_description">Informacions textualas suplementàrias sus la qualitat dei fons de la mar, la descripcion, la natura deis augas</string>
+    <string name="rendering_value_category_name">Categoria</string>
+    <string name="rendering_value_all_name">Tot</string>
+    <string name="routing_engine_vehicle_type_cycling_regular">Ciclisme regular</string>
+    <string name="shared_string_meters">mètres</string>
+    <string name="rearrange_categories">Reorganizar lei categorias</string>
+    <string name="add_custom_category">Ajustar una categoria personalizada</string>
+    <string name="lang_zh_hk">Chinés (Hong Kong)</string>
+    <string name="favorite_friends_category">Amic-ga-s</string>
+    <string name="lang_pnb">Punjabi</string>
+    <string name="all_next_segments_will_be_recalc">Totei lei segments seguents se tornaràn calcular segon lo perfiu chausit.</string>
+    <string name="all_previous_segments_will_be_recalc">Totei lei segments anteriors se tornaràn calcular segon lo perfiu chausit.</string>
+    <string name="m">m</string>
+    <string name="shared_string_filters">Filtres</string>
 </resources>

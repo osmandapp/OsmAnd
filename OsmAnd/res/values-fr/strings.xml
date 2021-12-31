@@ -2047,7 +2047,7 @@
     <string name="trip_rec_notification_settings_desc">Afficher une notification système permettant de démarrer l\'enregistrement de l\'itinéraire.</string>
     <string name="gpx_no_tracks_title">Vous n\'avez aucun fichier de trace pour l\'instant</string>
     <string name="gpx_no_tracks_title_folder">Vous pouvez aussi ajouter des fichiers de trace GPX dans le dossier</string>
-    <string name="gpx_add_track">Autre GPX …</string>
+    <string name="gpx_add_track">GPX…</string>
     <string name="shared_string_appearance">Apparence</string>
     <string name="rendering_value_fine_name">Bien</string>
     <string name="translit_name_if_miss">Translittérer si le nom %1$s est absent</string>
@@ -4503,4 +4503,9 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Afficher les étiquettes de note</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Étiquettes fixme</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_value_category_name">Catégorie</string>
+    <string name="rendering_value_omit_name">Ignorer</string>
+    <string name="rendering_attr_seabedDetail_description">Informations textuelles supplémentaires sur la nature des fonds marins</string>
+    <string name="rendering_attr_seabedDetail_name">Détails des fonds marins</string>
+    <string name="rendering_value_all_name">Tout</string>
 </resources>

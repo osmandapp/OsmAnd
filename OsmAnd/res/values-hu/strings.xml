@@ -186,7 +186,7 @@
     <string name="local_index_items_deleted">%2$d elemből %1$d törölve.</string>
     <string name="local_index_items_restored">%2$d elemből %1$d aktiválva.</string>
     <string name="local_index_no_items_to_do">Nincs elem ehhez: %1$s</string>
-    <string name="local_index_action_do">%2$s elem %1$sére készül. Folytatja\?</string>
+    <string name="local_index_action_do">%2$s elem: %1$s. Folytatja\?</string>
     <string name="local_index_descr_title">Térképfájlok kezelése.</string>
     <string name="local_index_mi_restore">Aktiválás</string>
     <string name="local_index_mi_backup">Inaktiválás</string>
@@ -2123,7 +2123,7 @@
     <string name="quick_action_poi_list">POI lista</string>
     <string name="quick_action_sh_poi_descr">Adjon hozzá egy vagy több a térképen megjelenítendő érdekespont-kategóriát.</string>
     <string name="quick_action_map_style_action">Térképstílus hozzáadása</string>
-    <string name="quick_action_empty_param_error">Töltsd ki az összes paramétert</string>
+    <string name="quick_action_empty_param_error">Töltse ki az összes paramétert</string>
     <string name="quick_action_map_styles">Térképstílusok</string>
     <string name="quick_action_map_overlay">Térképrátét módosítása</string>
     <string name="quick_action_map_overlay_title">Térképrátétek</string>
@@ -3033,13 +3033,13 @@
     <string name="map_during_navigation">Térkép navigáció közben</string>
     <string name="shared_string_other">Egyéb</string>
     <string name="vehicle_parameters_descr">Tömeg, magasság, hossz, sebesség</string>
-    <string name="vehicle_parameters">Jármű paraméterek</string>
+    <string name="vehicle_parameters">Jármű paraméterei</string>
     <string name="voice_announces_info">A hangbemondások csak navigáció közben kerülnek lejátszásra.</string>
     <string name="voice_announces_descr">Navigációs utasítások és bemondások</string>
     <string name="voice_announces">Hangutasítások</string>
     <string name="screen_alerts">Képernyő riasztások</string>
-    <string name="route_parameters_descr">Útvonal paraméterek testreszabása</string>
-    <string name="route_parameters">Útvonal paraméterek</string>
+    <string name="route_parameters_descr">Útvonal paramétereinek testreszabása</string>
+    <string name="route_parameters">Útvonal paraméterei</string>
     <string name="plugins_settings">Bővítménybeállítások</string>
     <string name="download_detailed_map">Töltsd le a részletes %s térképet a terület megtekintéséhez.</string>
     <string name="change_data_storage_folder">Tároló mappa módosítása</string>
@@ -4501,4 +4501,9 @@
     <string name="always_ask_waypoint_appearance_description">Ha erre a műveletre koppint, megnyílik az „Útpont hozzáadása” képernyő, ahol módosíthatja a nevet és a megjelenést.</string>
     <string name="track_file_description">Ha erre a műveletre koppint, megjelenik egy kijelölési párbeszédpanel az elérhető nyomvonalakkal.</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_value_category_name">Kategória</string>
+    <string name="rendering_value_all_name">Minden</string>
+    <string name="rendering_value_omit_name">Kihagyás</string>
+    <string name="rendering_attr_seabedDetail_description">További szöveges információ a tengerfenék felszínének minősítéséről, kombinált felszíntípusokról, valamint a növényzet és a tengeri füvek kategóriájáról és taxonjáról</string>
+    <string name="rendering_attr_seabedDetail_name">Tengerfenék részletei</string>
 </resources>
