@@ -4499,4 +4499,8 @@
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Nie ukrywaj tuneli dróg wodnych</string>
     <string name="turn_arrows">Strzałki skrętu</string>
     <string name="turn_arrows_descr">Wybierz, czy strzałki skrętu mają być wskazywane na linii trasy.</string>
+    <string name="rendering_attr_seabedDetail_description">Dodatkowe informacje tekstowe dotyczące powierzchni dna morskiego_kwalifikacja, połączone rodzaje powierzchni, kategoria i takson chwastów lub trawy morskiej</string>
+    <string name="rendering_value_category_name">Kategoria</string>
+    <string name="rendering_value_all_name">Wszystkie</string>
+    <string name="rendering_attr_seabedDetail_name">Szczegóły dotyczące dna morskiego</string>
 </resources>
