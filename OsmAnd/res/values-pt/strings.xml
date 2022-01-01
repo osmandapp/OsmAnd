@@ -4489,15 +4489,15 @@
     <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="storage_migration_wrong_folder_warning">Não foram encontrados dados do OsmAnd na pasta selecionada. Tente novamente.</string>
     <string name="use_routing_fallback">Usar alternativa de roteamento</string>
-    <string name="use_routing_fallback_description">Usar roteamento offline se não for possível usar o roteamento online.</string>
+    <string name="use_routing_fallback_description">Usar roteamento offline enquanto o roteamento online não estiver disponível.</string>
     <string name="shared_string_size">Tamanho</string>
     <string name="created_on">Criado em</string>
     <string name="turn_arrows">Setas de volta</string>
-    <string name="turn_arrows_descr">Controlar a visibilidade das setas de rotação na linha de rota.</string>
-    <string name="predefined_waypoint_appearance_description">Ao tocar na ação, o ponto de passagem será gravado automaticamente com parâmetros pré-definidos.</string>
-    <string name="always_ask_waypoint_appearance_description">Ao tocar na ação, abre-se o ecrã \"Adicionar ponto de passagem\", onde pode alterar o nome e a aparência.</string>
+    <string name="turn_arrows_descr">Selecione se as setas de direção estão indicadas na linha de rota.</string>
+    <string name="predefined_waypoint_appearance_description">Ao tocar nesta ação, o ponto de passagem será gravado automaticamente com parâmetros pré-definidos.</string>
+    <string name="always_ask_waypoint_appearance_description">Ao tocar nesta ação, abre-se o ecrã \"Adicionar ponto de passagem\", onde pode alterar o nome e a aparência.</string>
     <string name="waypoint_appearance">Aparência do ponto de passagem</string>
-    <string name="track_file_description">Ao tocar na ação, será mostrado um diálogo com todas as faixas disponíveis a serem selecionadas.</string>
+    <string name="track_file_description">Ao tocar nesta ação, será mostrado um diálogo de seleção das faixas disponíveis.</string>
     <string name="track_file">Ficheiro de trilho</string>
     <string name="waypoint_template">Modelo de pontos de passagem</string>
     <string name="shared_string_used">Usado</string>
@@ -4514,4 +4514,7 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Exibição esquemática de ícones em aumentos baixos</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Túneis fluviais</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Não esconder túneis hidrovias</string>
+    <string name="rendering_value_category_name">Categoria</string>
+    <string name="rendering_value_all_name">Todos</string>
+    <string name="rendering_value_omit_name">Omissão</string>
 </resources>
