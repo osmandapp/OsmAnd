@@ -174,6 +174,8 @@
 	<string name="poi_computer_sales">Sale of computers</string>
 	<string name="poi_computer_repair">Computer repair</string>
 	<string name="poi_computer_parts">Parts for computers</string>
+	<string name="poi_museum_type">Museum topic</string>
+	<string name="poi_post_office_type">Type</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -4722,5 +4724,62 @@
 	<string name="poi_computer_parts_no">Computer parts: no</string>
 
 	<string name="poi_climbing_crag">Yes;Climbing crag</string>
+
+	<string name="poi_museum_art">Art</string>
+	<string name="poi_museum_gallery">Gallery</string>
+	<string name="poi_museum_transport">Transport</string>
+	<string name="poi_museum_railway">Railway</string>
+	<string name="poi_museum_aviation">Aviation</string>
+	<string name="poi_museum_aerospace">Aerospace</string>
+	<string name="poi_museum_maritime">Maritime</string>
+	<string name="poi_museum_science">Science</string>
+	<string name="poi_museum_apis_mellifera">Honeybees</string>
+	<string name="poi_museum_nature">Nature</string>
+	<string name="poi_museum_technology">Technology</string>
+	<string name="poi_museum_agriculture">Agriculture</string>
+	<string name="poi_museum_paleontology">Paleontology</string>
+	<string name="poi_museum_history">History</string>
+	<string name="poi_museum_living_history">Living history</string>
+	<string name="poi_museum_military">Military</string>
+	<string name="poi_museum_war">War</string>
+	<string name="poi_museum_archaeological">Archaeological</string>
+	<string name="poi_museum_open_air">Open air</string>
+	<string name="poi_museum_local">Local</string>
+	<string name="poi_museum_children">Children</string>
+	<string name="poi_museum_ethnography">Ethnography</string>
+	<string name="poi_museum_person">Person</string>
+	<string name="poi_museum_language">Language</string>
+	<string name="poi_museum_health">Health</string>
+
+	<string name="poi_toilets_disposal_dry_toilet">Toilets disposal: dry toilet</string>
+	<string name="poi_toilets_position_seated">Toilets position: seated</string>
+	<string name="poi_toilets_position_urinal">Toilets position: urinal</string>
+	<string name="poi_toilets_position_squat">Toilets position: squat</string>
+	<string name="poi_gender_segregated_yes">Gender segregated: yes</string>
+	<string name="poi_gender_segregated_no">Gender segregated: no</string>
+	<string name="poi_toilets_paper_supplied_yes">Paper supplied: yes</string>
+	<string name="poi_toilets_paper_supplied_no">Paper supplied: no</string>
+	<string name="poi_toilets_hands_drying_yes">Hands drying: yes</string>
+	<string name="poi_toilets_hands_drying_no">Hands drying: no</string>
+	<string name="poi_toilets_handwashing_yes">Handwashing: yes</string>
+	<string name="poi_toilets_handwashing_no">Handwashing: no</string>
+	<string name="poi_handwashing_soap_yes">Soap: yes</string>
+	<string name="poi_handwashing_soap_no">Soap: no</string>
+	<string name="poi_handwashing_hand_disinfection_yes">Hand disinfection: yes</string>
+	<string name="poi_handwashing_hand_disinfection_no">Hand disinfection: no</string>
+	<string name="poi_handwashing_hand_cleaning_paste_yes">Hand cleaning paste: yes</string>
+	<string name="poi_handwashing_hand_cleaning_paste_no">Hand cleaning paste: no</string>
+	<string name="poi_handwashing_creme_yes">Creme: yes</string>
+	<string name="poi_handwashing_creme_no">Creme: no</string>
+	<string name="poi_hot_water_yes">Hot water: yes</string>
+	<string name="poi_hot_water_no">Hot water: no</string>
+
+	<string name="poi_post_office_bureau">Bureau</string>
+	<string name="poi_post_office_post_annex">Post annex</string>
+	<string name="poi_post_office_post_partner">Post partner</string>
+	<string name="poi_post_office_service_provider">Post office service provider</string>
+	<string name="poi_post_office_service_brand">Post office brand</string>
+	<string name="poi_post_office_collection_times">Post office collection times</string>
+	<string name="poi_post_office_opening_hours">Post office opening hours</string>
 
 </resources>
