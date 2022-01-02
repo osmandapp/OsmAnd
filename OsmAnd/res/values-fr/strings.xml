@@ -200,7 +200,7 @@
     <string name="send_location">Envoyer le point</string>
     <string name="context_menu_item_share_location">Partager ce point</string>
     <string name="add_waypoint_dialog_added">Point GPX \'\'{0}\'\' ajouté</string>
-    <string name="add_waypoint_dialog_title">Ajouter une étape à la trace GPX enregistrée</string>
+    <string name="add_waypoint_dialog_title">Ajouter un point de passage à la trace GPX enregistrée</string>
     <string name="amenity_type_administrative">Territoire</string>
     <string name="amenity_type_barrier">Obstacle</string>
     <string name="amenity_type_education">Éducation</string>
@@ -324,7 +324,7 @@
     <string name="layer_route">Route</string>
     <string name="shared_string_favorites">Favoris</string>
     <string name="layer_osm_bugs">Notes OSM (en ligne)</string>
-    <string name="layer_poi">Sur-couche des points d\'intérêt…</string>
+    <string name="layer_poi">Points d\'intérêt</string>
     <string name="layer_map">Source de la carte…</string>
     <string name="menu_layers">Couches</string>
     <string name="context_menu_item_search_poi">Rechercher un Point d\'Intérêt</string>
@@ -1725,7 +1725,7 @@
     <string name="feedback">Sondage</string>
     <string name="contact_us">Nous contacter</string>
     <string name="osm_edit_created_poi">Point d\'intérêt créé sur OSM</string>
-    <string name="map_legend">Légende</string>
+    <string name="map_legend">Légende de la carte</string>
     <string name="shared_string_upload">Téléverser</string>
     <string name="shared_string_update">Mettre à jour</string>
     <string name="read_more">En savoir +</string>
@@ -2040,7 +2040,7 @@
     <string name="shared_string_pause">Pause</string>
     <string name="shared_string_trip">Itinéraire</string>
     <string name="shared_string_recorded">Enregistré</string>
-    <string name="shared_string_record">Enregistrer</string>
+    <string name="shared_string_record">Terminer</string>
     <string name="gpx_logging_no_data">Aucune donnée</string>
     <string name="shared_string_notifications">Notifications</string>
     <string name="trip_rec_notification_settings">Activer le démarrage rapide d\'enregistrement d\'itinéraire</string>
@@ -2251,7 +2251,7 @@
     <string name="depth_contour_descr">Lignes de profondeur, balisage maritime.</string>
     <string name="subscribe_email_error">Erreur</string>
     <string name="subscribe_email_desc">Inscrivez-vous à notre lettre d\'information et téléchargez 3 cartes supplémentaires gratuitement !</string>
-    <string name="no_overlay">Sans sur-couche</string>
+    <string name="no_overlay">Aucune sur-couche</string>
     <string name="no_underlay">Sans sous-couche</string>
     <string name="quick_action_add_destination">Définir la destination</string>
     <string name="quick_action_replace_destination">Remplacer l\'arrivée</string>
@@ -2388,7 +2388,7 @@
     <string name="enter_gpx_name">Nom du fichier GPX :</string>
     <string name="waypoint_one">Étape 1</string>
     <string name="save_route_point">Enregistrer le point d\'itinéraire</string>
-    <string name="add_waypoint">Ajouter une étape</string>
+    <string name="add_waypoint">Ajouter un point de passage</string>
     <string name="save_gpx_waypoint">Enregistrer le point GPX</string>
     <string name="live_monitoring_max_interval_to_send">Durée de mémorisation pour le suivi en ligne</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Indiquez une durée de mémorisation des positions en l\'absence de connexion</string>
@@ -3719,7 +3719,7 @@
     <string name="access_hint_enter_address">Saisissez l\'adresse</string>
     <string name="add_segment_to_the_track">Ajouter à un fichier de trace</string>
     <string name="empty_state_my_tracks">Ajouter des fichiers de trace</string>
-    <string name="context_menu_item_add_waypoint">Ajouter une étape</string>
+    <string name="context_menu_item_add_waypoint">Ajouter un point de passage</string>
     <string name="quick_action_add_gpx">Ajouter un point de passage à la trace</string>
     <string name="start_of_the_track">Début de la trace</string>
     <string name="attach_to_the_roads">Déplacer sur les routes</string>
@@ -3896,8 +3896,8 @@
     <string name="reverse_all_points">Inverser tous les points</string>
     <string name="profile_by_default_description">Sélectionnez le profil utilisé au démarrage de l\'application.</string>
     <string name="shared_string_last_used">Dernier utilisé</string>
-    <string name="routing_attr_prefer_hiking_routes_name">Pirivilégier les itinéraires de randonnée</string>
-    <string name="routing_attr_prefer_hiking_routes_description">Pirivilégier les itinéraires de randonnée</string>
+    <string name="routing_attr_prefer_hiking_routes_name">Privilégier les itinéraires de randonnée</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Privilégier les itinéraires de randonnée</string>
     <string name="routing_attr_allow_intermittent_description">Autoriser les voies navigables intermittentes</string>
     <string name="routing_attr_allow_intermittent_name">Autoriser les voies navigables intermittentes</string>
     <string name="routing_attr_allow_streams_description">Autoriser les cours d’eau et les drains</string>
