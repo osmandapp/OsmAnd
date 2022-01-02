@@ -4123,7 +4123,7 @@
     <string name="poi_generator_method_gasification">Метод генерации: газификация</string>
     <string name="poi_generator_method_anaerobic_digestion">Метод генерации: анаэробное (метановое) сбраживание</string>
     <string name="poi_generator_method_battery_storage">Метод генерации: аккумуляторная батарея</string>
-    <string name="poi_generator_type_pwr">Тип генератора: ВВЭР (PWR)</string>
+    <string name="poi_generator_type_pwr">Тип генератора: водо-водяной ядерный реактор ВВЭР (PWR)</string>
     <string name="poi_generator_type_bwr_1">Тип генератора: кипящий водо-водяной реактор BWR-1</string>
     <string name="poi_generator_type_lithium_ion">Тип генератора: литий-ионный</string>
     <string name="poi_generator_method_wind_turbine">Метод генерации: ветрогенератор</string>
@@ -4155,4 +4155,28 @@
     <string name="poi_generator_type_bwr_4">Тип генератора: кипящий водо-водяной реактор BWR-4</string>
     <string name="poi_generator_type_bwr_5">Тип генератора: кипящий водо-водяной реактор BWR-5</string>
     <string name="poi_generator_type_bwr_6">Тип генератора: кипящий водо-водяной реактор BWR-6</string>
+    <string name="poi_generator_method_barrage">Метод генерации: энергия прилива</string>
+    <string name="poi_computer_sales_used">Б/у</string>
+    <string name="poi_generator_type_phwr">Тип генератора: тяжеловодный ядерный реактор (PHWR)</string>
+    <string name="poi_computer_sales">Продажа компьютеров</string>
+    <string name="poi_computer_repair">Ремонт компьютеров</string>
+    <string name="poi_computer_parts">Комплектующие для ПК</string>
+    <string name="poi_generator_type_rbmk_1500">Тип генератора: РБМК-1500</string>
+    <string name="poi_generator_type_tokamak">Тип генератора: токамак</string>
+    <string name="poi_generator_type_candu">Тип генератора: тяжеловодный водо-водяной ядерный реактор CANDU</string>
+    <string name="poi_generator_type_cpr_1000">Тип генератора: водо-водяной ядерный реактор CPR-1000</string>
+    <string name="poi_generator_type_vver">Тип генератора: водо-водяной корпусной энергетический ядерный реактор ВВЭР</string>
+    <string name="poi_generator_type_epr">Тип генератора: водо-водяной ядерный реактор EPR</string>
+    <string name="poi_generator_type_icf">Тип генератора: инерциальный управляемый термоядерный синтез ICF</string>
+    <string name="poi_service_fleurop_yes">Есть</string>
+    <string name="poi_furniture_used">Б/у</string>
+    <string name="poi_medical_supply_filter">Категории медицинского снабжения</string>
+    <string name="poi_mattress_filter">Матрас</string>
+    <string name="poi_furniture_filter">Мебель</string>
+    <string name="poi_service_fleurop_filter">Сервисное обслуживание</string>
+    <string name="poi_medical_supply_diagnostic">Диагностика</string>
+    <string name="poi_medical_supply_home_care">Уход на дому</string>
+    <string name="poi_generator_type_rbmk_1000">Тип генератора: РБМК-1000</string>
+    <string name="poi_generator_type_gcr">Тип генератора: газоохлаждаемый реактор (GCR)</string>
+    <string name="poi_generator_type_fbr">Тип генератора: реактор-размножитель на быстрых нейтронах (FBR)</string>
 </resources>
