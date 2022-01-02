@@ -55,6 +55,7 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -504,7 +505,12 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 				StringBuilder errorMessage = new StringBuilder();
 				boolean resultOk = false;
 				try {
-					String response = helper.makeRequest(exampleCard.getEditedText());
+					String method = engine.getHTTPMethod();
+					List<LatLon> path = Arrays.asList(location.getCityAirportLatLon(),
+													  location.getCityCenterLatLon());
+					String body = engine.getRequestBody(path, null);
+					Map<String, String> headers = engine.getRequestHeaders();
+					String response = helper.makeRequest(exampleCard.getEditedText(), method, body, headers);
 					resultOk = requestedEngine.isResultOk(errorMessage, response);
 				} catch (IOException | JSONException e) {
 					errorMessage.append(e.toString());

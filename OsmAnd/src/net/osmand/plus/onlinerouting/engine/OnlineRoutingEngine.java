@@ -149,6 +149,21 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	@NonNull
 	public abstract String getStandardUrl();
 
+	@NonNull
+	public String getHTTPMethod() {
+		return "GET";
+	}
+
+	@Nullable
+	public Map<String, String> getRequestHeaders() {
+		return null;
+	}
+
+	@Nullable
+	public String getRequestBody(@NonNull List<LatLon> path, @Nullable Float startBearing) throws JSONException {
+		return null;
+	}
+
 	@Nullable
 	public abstract OnlineRoutingResponse parseResponse(@NonNull String content, @NonNull OsmandApplication app,
 	                                                    boolean leftSideNavigation, boolean initialCalculation) throws JSONException;
