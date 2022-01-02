@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_shop">Butikk</string>
     <string name="poi_attraction">Turistattraksjon</string>
@@ -36,7 +36,7 @@
     <string name="poi_bus_station">Busstasjon</string>
     <string name="poi_railway_station">Jernbanestasjon</string>
     <string name="poi_railway_platform">Jernbaneperrong</string>
-    <string name="poi_subway_station">Ja</string>
+    <string name="poi_subway_station">Ja;T-banestasjon</string>
     <string name="poi_taxi">Taxiholdeplass</string>
     <string name="poi_aerodrome">Flyplass</string>
     <string name="poi_ferry_terminal">Fergeterminal</string>
@@ -281,11 +281,11 @@
     <string name="poi_aerialway_bicycle_yes">Tillatt</string>
     <string name="poi_aerialway_bicycle_no">Sykkel: ikke tillatt</string>
     <string name="poi_aerialway_bicycle_summer">Tillatt bare om sommeren</string>
-    <string name="poi_service_bicycle_retail_yes">Salg</string>
+    <string name="poi_service_bicycle_retail_yes">Salg;Sykkelsalg;Sykkelforretning</string>
     <string name="poi_service_bicycle_retail_no">Sykkelsalg: nei</string>
-    <string name="poi_service_bicycle_repair_yes">Reparasjon</string>
+    <string name="poi_service_bicycle_repair_yes">Reparasjon;Sykkelreparasjon</string>
     <string name="poi_service_bicycle_repair_no">Sykkelreparasjon: nei</string>
-    <string name="poi_service_bicycle_rental_yes">Utleie</string>
+    <string name="poi_service_bicycle_rental_yes">Utleie;Sykkelutleie;Sykkelleie</string>
     <string name="poi_service_bicycle_rental_no">Sykkelutleie: nei</string>
     <string name="poi_landuse">Arealbruk</string>
     <string name="poi_toll_booth">Bomstasjon</string>
@@ -478,8 +478,8 @@
     <string name="poi_outdoor_seating_yes">Utendørs sitteplasser: ja</string>
     <string name="poi_outdoor_seating_no">Ingen utendørs sitteplasser</string>
     <string name="poi_cocktails_yes">Ja</string>
-    <string name="poi_self_service_yes">Ja</string>
-    <string name="poi_automated_yes">Ja</string>
+    <string name="poi_self_service_yes">Ja;Selvbetjening</string>
+    <string name="poi_automated_yes">Ja;Automatisert</string>
     <string name="poi_brushless_yes">Ja</string>
     <string name="poi_bench_yes">Ja</string>
     <string name="poi_internet_access_type_wired">Kablet</string>
@@ -685,7 +685,6 @@
     <string name="poi_doityourself">Byggemarked</string>
     <string name="poi_doors">Dører</string>
     <string name="poi_erotic">Erotisk butikk</string>
-    
     <string name="poi_frame">Rammeverksted</string>
     <string name="poi_furniture">Møbelbutikk</string>
     <string name="poi_hardware">Jernvareforretning</string>
@@ -1262,7 +1261,6 @@
     <string name="poi_glacier_type">Isbretype</string>
     <string name="poi_substation_type">Type</string>
     <string name="poi_books_type">Bøker</string>
-    
     <string name="poi_estate_agent">Eiendomsmegler</string>
     <string name="poi_attraction_big_wheel">Pariserhjul</string>
     <string name="poi_attraction_roller_coaster">Berg og dalbane</string>
@@ -1328,7 +1326,6 @@
     <string name="poi_beauty_salon_nails">Manikyr</string>
     <string name="poi_atm">Minibank</string>
     <string name="poi_rapids">Stryk</string>
-    
     <string name="poi_recycling_animal_waste">Animalsk avfall</string>
     <string name="poi_waste_basket">Søppelkurv</string>
     <string name="poi_orchard">Frukthage</string>
@@ -1508,7 +1505,7 @@
     <string name="poi_hazard_additional_flood">Fare: Oversvømmelse</string>
     <string name="poi_generator_source_biomass">Energikilde: Biomasse</string>
     <string name="poi_motorhome_yes">Ja</string>
-    <string name="poi_bus_yes">Ja</string>
+    <string name="poi_bus_yes">Ja;Buss;Busser</string>
     <string name="poi_snowmobile_yes">Ja</string>
     <string name="poi_taxi_no">Drosjetilgang: Nei</string>
     <string name="poi_taxi_designated">Drosjetilgang: Anvist plass</string>
@@ -1520,14 +1517,14 @@
     <string name="poi_horse_destination">Hestetilgang: Mål</string>
     <string name="poi_bicycle_customers">Sykkeltilgang: Kunder</string>
     <string name="poi_bicycle_destination">Sykkeltilgang: Mål</string>
-    <string name="poi_bicycle_dismount">Sykkeltilgang: Tre av</string>
+    <string name="poi_bicycle_dismount">Sykkeltilgang: avstigning</string>
     <string name="poi_bicycle_private">Sykkeltilgang: Privat</string>
     <string name="poi_moped_no">Mopedtilgang: Nei</string>
     <string name="poi_motorcycle_no">Motorsykkeltilgang: Nei</string>
     <string name="poi_craft_bakery">Bakeri</string>
     <string name="poi_hgv_yes">Ja</string>
     <string name="poi_mofa_yes">Ja</string>
-    <string name="poi_moped_yes">Ja</string>
+    <string name="poi_moped_yes">Ja;Moped</string>
     <string name="poi_motorcycle_destination">Mål</string>
     <string name="poi_atm_yes">Minibank: Ja</string>
     <string name="poi_cash_withdrawal_bank_card">Kontantuttak</string>
@@ -1685,4 +1682,24 @@
     <string name="poi_barrier_entrance">Passasje i en mur eller et gjerde</string>
     <string name="poi_shelter">Ly</string>
     <string name="poi_boundary_stone">Grensestein</string>
+    <string name="poi_cargo_bicycle">Sykler</string>
+    <string name="poi_service_bicycle_pump_no">Sykkelpumpe: nei</string>
+    <string name="poi_automated_no">Ikke automatisert</string>
+    <string name="poi_service_bicycle_charging_no">Lading: nei</string>
+    <string name="poi_water_source_water_works">Vannverk</string>
+    <string name="poi_service_bicycle_chaintool_yes">Kjedeverktøy;Sykkelkjedeverktøy</string>
+    <string name="poi_service_bicycle_chaintool_no">Sykkelkjedeverktøy: nei</string>
+    <string name="poi_service_bicycle_cleaning_no">Sykkelrengjøring: nei</string>
+    <string name="poi_service_bicycle_charging_yes">Lading: ja;Sykkellading;El-sykkellading;Elsykkellading</string>
+    <string name="poi_water_source_well">Brønn</string>
+    <string name="poi_water_polo">Vannpolo</string>
+    <string name="poi_water_ski">Vannski</string>
+    <string name="poi_service_bicycle_pump_yes">Pumpe;Sykkelpumpe</string>
+    <string name="poi_service_bicycle_cleaning_yes">Rengjøring;Sykkelrengjøring</string>
+    <string name="poi_water_source_water_tank">Vanntank</string>
+    <string name="poi_water_source_powered_pump">Motordrevet pumpe</string>
+    <string name="poi_water_source_river">Elv</string>
+    <string name="poi_water_source_lake">Innsjø</string>
+    <string name="poi_water_source_tube_well">Rørbrønn</string>
+    <string name="poi_water_source_tap">Vannkran</string>
 </resources>
