@@ -581,7 +581,7 @@
     <string name="poi_tax_inspection">مفتشية الضرائب</string>
     <string name="poi_customs">الجمارك</string>
     <string name="poi_country">البلد</string>
-    <string name="poi_capital">نعم</string>
+    <string name="poi_capital">نعم، عاصمة</string>
     <string name="poi_hamlet">قرية صغيرة - هجرة</string>
     <string name="poi_isolated_dwelling">بيت معزول</string>
     <string name="poi_suburb">ضاحية</string>
@@ -1006,11 +1006,11 @@
     <string name="poi_height">الارتفاع</string>
     <string name="poi_ele">الارتفاع عن مستوى سطح البحر</string>
     <string name="poi_brand">علامة تجارية</string>
-    <string name="poi_fee_yes">نعم</string>
+    <string name="poi_fee_yes">نعم ، رسوم</string>
     <string name="poi_fee_no">لا</string>
-    <string name="poi_drinking_water_yes">نعم</string>
+    <string name="poi_drinking_water_yes">نعم ، مياه الشرب</string>
     <string name="poi_drinking_water_no">لا</string>
-    <string name="poi_seasonal_yes">نعم</string>
+    <string name="poi_seasonal_yes">نعم ، موسمي</string>
     <string name="poi_seasonal_no">لا</string>
     <string name="poi_seasonal_dry_season">موسم الجفاف</string>
     <string name="poi_seasonal_wet_season">موسم الرطوبة</string>
@@ -1019,7 +1019,7 @@
     <string name="poi_crossing_traffic_signals">مع إشارات التوقف</string>
     <string name="poi_crossing_uncontrolled">بعلامات مرورية وبدون إشارات</string>
     <string name="poi_start_date">تاريخ البدء</string>
-    <string name="poi_wheelchair_yes">نعم</string>
+    <string name="poi_wheelchair_yes">نعم ، كرسي متحرك</string>
     <string name="poi_wheelchair_no">لا</string>
     <string name="poi_wheelchair_limited">محدود</string>
     <string name="poi_wholesale">تجارة بالجملة</string>
@@ -1081,7 +1081,7 @@
     <string name="poi_generator_source_oil">مصدر الطاقة : النفط</string>
     <string name="poi_generator_source_diesel">مصدر الطاقة : الديزل</string>
     <string name="poi_pump_no">لا توجد مضخة</string>
-    <string name="poi_pump_yes">نعم</string>
+    <string name="poi_pump_yes">نعم ، مضخة</string>
     <string name="poi_water_characteristic_sulfuric">الكبريتيك</string>
     <string name="poi_water_point">نقطة ماء</string>
     <string name="poi_information_map">خريطة</string>
@@ -1096,8 +1096,8 @@
     <string name="poi_board_type_public_transport">نقل عام</string>
     <string name="poi_board_type_technology">تقنية</string>
     <string name="poi_board_type_astronomy">الفلك</string>
-    <string name="poi_fireplace_yes">نعم</string>
-    <string name="poi_covered_yes">نعم</string>
+    <string name="poi_fireplace_yes">نعم ؛ مدفأة</string>
+    <string name="poi_covered_yes">نعم ؛ مغطى</string>
     <string name="poi_covered_no">غير مغطاة</string>
     <string name="poi_smoking_no">غير مسموح به</string>
     <string name="poi_smoking_yes">مسموح</string>
@@ -1105,7 +1105,7 @@
     <string name="poi_smoking_isolated">في غرفة معزولة</string>
     <string name="poi_smoking_dedicated">مخصص للمدخنين</string>
     <string name="poi_tactile_paving_yes">نعم</string>
-    <string name="poi_traffic_signals_sound_yes">نعم</string>
+    <string name="poi_traffic_signals_sound_yes">نعم ؛ صوت إشارات المرور</string>
     <string name="poi_traffic_signals_sound_no">الصوت: لا</string>
     <string name="poi_traffic_signals_sound_walk">مسموح فقط عند المشي</string>
     <string name="poi_rescue_station">محطة الانقاذ</string>
@@ -1125,7 +1125,7 @@
     <string name="poi_piste_grooming_skating">التزحلق على الجليد</string>
     <string name="poi_piste_grooming_no">لا</string>
     <string name="poi_capacity">السعة</string>
-    <string name="poi_capacity_disabled_yes">نعم</string>
+    <string name="poi_capacity_disabled_yes">نعم ، مساحة للمعاقين</string>
     <string name="poi_capacity_disabled_no">لا توجد أماكن مخصصة للمعاقين</string>
     <string name="poi_capacity_disabled">أماكن مخصصة للمعاقين</string>
     <string name="poi_capacity_women_yes">أماكن مخصصة للنساء</string>
@@ -4222,4 +4222,6 @@
     <string name="poi_computer_sales_yes">نعم</string>
     <string name="poi_computer_sales_used">مستعمل</string>
     <string name="poi_computer_parts_no">قطع الكمبيوتر: لا</string>
+    <string name="poi_museum_type">موضوع المتحف</string>
+    <string name="poi_post_office_type">النوع</string>
 </resources>

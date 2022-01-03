@@ -188,7 +188,7 @@
     <string name="poi_embassy">Ambassade</string>
     <string name="poi_prison">Fengsel</string>
     <string name="poi_customs">Toll</string>
-    <string name="poi_capital">Ja</string>
+    <string name="poi_capital">Ja;Hovedstad</string>
     <string name="poi_residential">Boligområde</string>
     <string name="poi_historic_farm">Historisk gårdsbruk</string>
     <string name="poi_historic_railway_station">Historisk jernbanestasjon</string>
@@ -202,7 +202,7 @@
     <string name="poi_seasonal_autumn">Høst</string>
     <string name="poi_seasonal_winter">Vinter</string>
     <string name="poi_start_date">Startdato</string>
-    <string name="poi_wheelchair_yes">Ja</string>
+    <string name="poi_wheelchair_yes">Ja;Rullestol</string>
     <string name="poi_wheelchair_no">Nei</string>
     <string name="poi_wheelchair_limited">Begrenset</string>
     <string name="poi_building_type_shrine">Bygningstype: helligdom</string>
@@ -430,22 +430,22 @@
     <string name="poi_dish">Rett</string>
     <string name="poi_payment_transport_type">Betalingstype (transport)</string>
     <string name="poi_social_facility_for">Målgruppe</string>
-    <string name="poi_fee_yes">Ja</string>
-    <string name="poi_drinking_water_yes">Ja</string>
+    <string name="poi_fee_yes">Ja;Gebyr</string>
+    <string name="poi_drinking_water_yes">Ja;Drikkevann</string>
     <string name="poi_drinking_water_no">Nei</string>
-    <string name="poi_seasonal_yes">Ja</string>
+    <string name="poi_seasonal_yes">Ja;Sesongbestemt</string>
     <string name="poi_seasonal_no">Nei</string>
     <string name="poi_wheelchair_accessibility">Rullestoltilgjengelighet</string>
-    <string name="poi_pump_yes">Ja</string>
-    <string name="poi_fireplace_yes">Ja</string>
-    <string name="poi_covered_yes">Ja</string>
+    <string name="poi_pump_yes">Ja;Pumpe</string>
+    <string name="poi_fireplace_yes">Ja;Ildsted</string>
+    <string name="poi_covered_yes">Ja;Tak over</string>
     <string name="poi_smoking_no">Ikke tillatt</string>
     <string name="poi_smoking_outside">Bare utendørs</string>
     <string name="poi_smoking_yes">Tillatt</string>
     <string name="poi_smoking_separated">I et eget rom</string>
     <string name="poi_smoking_isolated">I et isolert rom</string>
     <string name="poi_smoking_dedicated">Dedikert til røykere</string>
-    <string name="poi_tactile_paving_yes">Ja</string>
+    <string name="poi_tactile_paving_yes">Ja;Ledelinjer</string>
     <string name="poi_traffic_signals_sound_yes">Ja</string>
     <string name="poi_traffic_signals_sound_no">Lyd: nei</string>
     <string name="poi_piste_grooming_no">Nei</string>
@@ -1101,7 +1101,7 @@
     <string name="poi_information_sign">Skilt</string>
     <string name="poi_information_tactile_model">Taktil modell</string>
     <string name="poi_information_tactile_map">Taktilt kart</string>
-    <string name="poi_fireplace_no">Inget ildsted</string>
+    <string name="poi_fireplace_no">Ikke noe ildsted</string>
     <string name="poi_grass">Gress</string>
     <string name="poi_farmland">Landbruksjord</string>
     <string name="poi_logging">Tømmerhugst</string>
@@ -1551,7 +1551,7 @@
     <string name="poi_fire_hydrant_type_pipe">Rør</string>
     <string name="poi_drinking_water_refill_network">Nettverk for påfyll av drikkevann</string>
     <string name="poi_drinking_water_refill_no">Drikkevannspåfylling: Nei</string>
-    <string name="poi_drinking_water_refill_yes">Ja</string>
+    <string name="poi_drinking_water_refill_yes">Ja;Drikkevannspåfylling;Påfylling</string>
     <string name="poi_seamark_water_level_submerged">Vann-nivå: Nedsenket</string>
     <string name="poi_seamark_obstruction">Hindring</string>
     <string name="poi_seamark_water_level_below_mwl">Vann-nivå: Under vanlig vann-nivå</string>
@@ -1702,4 +1702,5 @@
     <string name="poi_water_source_lake">Innsjø</string>
     <string name="poi_water_source_tube_well">Rørbrønn</string>
     <string name="poi_water_source_tap">Vannkran</string>
+    <string name="poi_tactile_paving_no">Uten ledelinjer</string>
 </resources>
