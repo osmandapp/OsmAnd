@@ -3210,7 +3210,7 @@
     <string name="overwrite_profile_q">“%1$s” artıq mövcuddur. Üzərinə yazılsın\?</string>
     <string name="osmand_parking_warning_text">Avtomobilinizi götürmək üçün bildiriş təqviminizə əlavə edildi, orada düzəliş edilə və ya silinə bilər.</string>
     <string name="quick_action_add_parking">Parkinq yeri əlavə et</string>
-    <string name="quick_action_add_parking_descr">Ekranın mərkəzində parking məkanı əlavə etmək üçün düymə.</string>
+    <string name="quick_action_add_parking_descr">Ekranın mərkəzində parkinq məkanı əlavə etmək üçün düymə.</string>
     <string name="poi_filter_parking">Parkinq</string>
     <string name="map_widget_parking">Parkinq</string>
     <string name="mapillary_widget_descr">Mapillary-ə sürətli töhfələr verməyə imkan verir.</string>
