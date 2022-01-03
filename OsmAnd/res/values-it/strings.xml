@@ -4485,4 +4485,9 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schema della visualizzazione delle icone a bassi zoom</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tunnel per canali</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Non nascondere i tunnel per canali</string>
+    <string name="rendering_value_omit_name">Ometti</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_value_category_name">Categoria</string>
+    <string name="rendering_value_all_name">Tutto</string>
+    <string name="waypoint_appearance">Aspetto del punto intermedio</string>
 </resources>

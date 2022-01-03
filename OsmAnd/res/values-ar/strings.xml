@@ -3295,7 +3295,7 @@
     <string name="base_profile_descr_aircraft">طائرة, مدرج</string>
     <string name="routing_profile_geocoding">الترميز الجغرافي</string>
     <string name="routing_profile_straightline">خط مستقيم</string>
-    <string name="routing_profile_broutrer">إعادة التوجيه (غير متصل)</string>
+    <string name="routing_profile_broutrer">التوجيه عبر BRouter (بدون اتصال)</string>
     <string name="osmand_default_routing">توجيه أوسماند</string>
     <string name="custom_routing">وضع توجيه مخصص</string>
     <string name="special_routing_type">توجيه خاص</string>

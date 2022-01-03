@@ -2902,4 +2902,10 @@
     <string name="waypoint_template">გზის სანიშნის ნიმუში</string>
     <string name="waypoint_appearance">გზის სანიშნის გარეგნობა</string>
     <string name="osm_recipients_label">OSM მიმღებები</string>
+    <string name="rendering_value_category_name">კატეგორია</string>
+    <string name="rendering_value_all_name">ყველა</string>
+    <string name="rendering_value_omit_name">გამოტოვება</string>
+    <string name="files_with_route_restrictions">გზებზე აკრძალვების არსებობის შემცველი ფაილები</string>
+    <string name="rendering_attr_seabedDetail_name">ზღვის ფსკერის დეტალები</string>
+    <string name="shared_string_open_street_map">OSM</string>
 </resources>

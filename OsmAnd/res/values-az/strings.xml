@@ -3205,4 +3205,8 @@
     <string name="rendering_attr_surface_concrete_name">Beton</string>
     <string name="save_poi_value_exceed_length">“%s” etiketinin uzunluğunu 255 simvoldan az olmamaqla qısaldın.</string>
     <string name="avoid_pt_types_descr">Naviqasiyada yayınmaq üçün ictimai nəqliyyat növlərini seçin:</string>
+    <string name="rendering_value_all_name">Hamısı</string>
+    <string name="rendering_value_category_name">Kateqoriya</string>
+    <string name="overwrite_profile_q">“%1$s” artıq mövcuddur. Üzərinə yazılsın\?</string>
+    <string name="osmand_parking_warning_text">Avtomobilinizi götürmək üçün bildiriş təqviminizə əlavə edildi, orada düzəliş edilə və ya silinə bilər.</string>
 </resources>
