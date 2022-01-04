@@ -9,13 +9,11 @@ import android.text.TextWatcher;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -38,6 +36,7 @@ import net.osmand.plus.plugins.osmedit.data.EditPoiData.TagsChangedListener;
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment.OnFragmentActivatedListener;
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment.OnSaveButtonClickListener;
+import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -46,6 +45,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+
+import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
 import static net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment.AMENITY_TEXT_LENGTH;
 
@@ -216,20 +217,24 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 			editPoiData.setIsInEdit(false);
 		}
 
-		public void addTagView(String tg, String vl) {
+		public void addTagView(@NonNull String tg, @NonNull String vl) {
 			View convertView = LayoutInflater.from(linearLayout.getContext())
-					.inflate(R.layout.poi_tag_list_item, null, false);
-			final AutoCompleteTextView tagEditText = convertView.findViewById(R.id.tagEditText);
-			ImageButton deleteItemImageButton =
-					(ImageButton) convertView.findViewById(R.id.deleteItemImageButton);
-			deleteItemImageButton.setImageDrawable(deleteDrawable);
+					.inflate(R.layout.list_item_poi_tag, null, false);
+
+			OsmandTextFieldBoxes tagFB = convertView.findViewById(R.id.tag_fb);
+			tagFB.setClearButton(deleteDrawable);
+			tagFB.hideClearButton();
+
+			OsmandTextFieldBoxes valueFB = convertView.findViewById(R.id.value_fb);
+			valueFB.setClearButton(deleteDrawable);
+			valueFB.hideClearButton();
+
+			ExtendedEditText tagEditText = convertView.findViewById(R.id.tagEditText);
+			View deleteButton = convertView.findViewById(R.id.delete_button);
 			final String[] previousTag = new String[]{tg};
-			deleteItemImageButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					linearLayout.removeView((View) v.getParent());
-					editPoiData.removeTag(tagEditText.getText().toString());
-				}
+			deleteButton.setOnClickListener(v -> {
+				linearLayout.removeView(convertView);
+				editPoiData.removeTag(tagEditText.getText().toString());
 			});
 			final AutoCompleteTextView valueEditText = convertView.findViewById(R.id.valueEditText);
 			valueEditText.setFilters(new InputFilter[]{
@@ -238,24 +243,23 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 			tagEditText.setText(tg);
 			tagEditText.setAdapter(tagAdapter);
 			tagEditText.setThreshold(1);
-			tagEditText.setOnFocusChangeListener(new OnFocusChangeListener() {
-				@Override
-				public void onFocusChange(View v, boolean hasFocus) {
-					if (!hasFocus) {
-						if (!editPoiData.isInEdit()) {
-							String s = tagEditText.getText().toString();
-							if (!previousTag[0].equals(s)) {
-								editPoiData.removeTag(previousTag[0]);
-								editPoiData.putTag(s, valueEditText.getText().toString());
-								previousTag[0] = s;
-							}
+			tagEditText.setOnFocusChangeListener((v, hasFocus) -> {
+				if (!hasFocus) {
+					tagFB.hideClearButton();
+					if (!editPoiData.isInEdit()) {
+						String s = tagEditText.getText().toString();
+						if (!previousTag[0].equals(s)) {
+							editPoiData.removeTag(previousTag[0]);
+							editPoiData.putTag(s, valueEditText.getText().toString());
+							previousTag[0] = s;
 						}
-					} else {
-						currentTagEditText = tagEditText;
-						tagAdapter.getFilter().filter(tagEditText.getText());
 					}
+				} else {
+					tagFB.showClearButton();
+					currentTagEditText = tagEditText;
+					tagAdapter.getFilter().filter(tagEditText.getText());
 				}
-			 });
+			});
 
 			valueEditText.setText(vl);
 			valueEditText.setAdapter(valueAdapter);
@@ -277,7 +281,14 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 				}
 			});
 
-			initAutocompleteTextView(valueEditText, valueAdapter);
+			valueEditText.setOnFocusChangeListener((v, hasFocus) -> {
+				if (hasFocus) {
+					valueFB.showClearButton();
+					valueAdapter.getFilter().filter(valueEditText.getText());
+				} else {
+					valueFB.hideClearButton();
+				}
+			});
 
 			linearLayout.addView(convertView);
 		}
@@ -299,19 +310,6 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 			valueAdapter.sort(String.CASE_INSENSITIVE_ORDER);
 			valueAdapter.notifyDataSetChanged();
 		}
-	}
-
-	private static void initAutocompleteTextView(final AutoCompleteTextView textView,
-												 final ArrayAdapter<String> adapter) {
-		
-		textView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				if (hasFocus) {
-					adapter.getFilter().filter(textView.getText());
-				}
-			}
-		});
 	}
 
 	public static void addPoiToStringSet(AbstractPoiType abstractPoiType, Set<String> stringSet,
