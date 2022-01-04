@@ -18,8 +18,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
@@ -33,6 +31,8 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.render.RenderingRuleProperty;
 
 import java.util.ArrayList;
@@ -46,6 +46,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 	public static final String MORE_DETAILED = "moreDetailed";
 	public static final String SHOW_SURFACE_GRADE = "showSurfaceGrade";
 	public static final String COLORED_BUILDINGS = "coloredBuildings";
+	public static final String DEPTH_CONTOURS = "depthContours";
 	private OsmandApplication app;
 	private List<RenderingRuleProperty> properties;
 	private List<CommonPreference<Boolean>> preferences;
@@ -157,7 +158,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 							})
 							.create();
 					items.add(item[0]);
-				} else if (!STREET_LIGHTING_NIGHT.equals(property.getAttrName())) {
+				} else if (!STREET_LIGHTING_NIGHT.equals(property.getAttrName()) && !DEPTH_CONTOURS.equals(property.getAttrName())) {
 					final BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
 					item[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 							.setCompoundButtonColor(selectedProfileColor)
