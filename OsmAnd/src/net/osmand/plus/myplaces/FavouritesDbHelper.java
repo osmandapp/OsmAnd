@@ -14,6 +14,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.FavouritePoint.SpecialPointType;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
@@ -77,10 +78,16 @@ public class FavouritesDbHelper {
 	}
 
 	public static class FavoriteGroup {
+
 		public static final String PERSONAL_CATEGORY = "personal";
+
 		private String name;
-		private boolean visible = true;
 		private int color;
+		private String iconName;
+		private BackgroundType shape;
+
+		private boolean visible = true;
+
 		private List<FavouritePoint> points = new ArrayList<>();
 
 		public FavoriteGroup() {
@@ -135,6 +142,16 @@ public class FavouritesDbHelper {
 
 		public String getName() {
 			return name;
+		}
+
+		@NonNull
+		public String getIconName() {
+			return Algorithms.isEmpty(iconName) ? GPXUtilities.DEFAULT_ICON_NAME : iconName;
+		}
+
+		@NonNull
+		public BackgroundType getShape() {
+			return shape == null ? BackgroundType.CIRCLE : shape;
 		}
 
 		public String getDisplayName(Context ctx) {
@@ -736,18 +753,20 @@ public class FavouritesDbHelper {
 		return gpx;
 	}
 
-	private void addEmptyCategory(String name) {
-		addEmptyCategory(name, 0, true);
-	}
-
 	public void addEmptyCategory(String name, int color) {
 		addEmptyCategory(name, color, true);
 	}
 
 	public void addEmptyCategory(String name, int color, boolean visible) {
+		addEmptyCategory(name, color, null, null, visible);
+	}
+
+	public void addEmptyCategory(String name, int color, String iconName, BackgroundType shape, boolean visible) {
 		FavoriteGroup group = new FavoriteGroup();
 		group.name = FavoriteGroup.convertDisplayNameToGroupIdName(context, name);
 		group.color = color;
+		group.iconName = iconName;
+		group.shape = shape;
 		group.visible = visible;
 		favoriteGroups.add(group);
 		flatGroups.put(group.name, group);

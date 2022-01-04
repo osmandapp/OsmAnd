@@ -111,6 +111,12 @@ public class WptPtEditor extends PointEditor {
 		return TAG;
 	}
 
+	@Nullable
+	@Override
+	public String getPreselectedIconName() {
+		return isNew && wpt != null ? wpt.getIconName() : null;
+	}
+
 	public void add(GPXFile gpxFile, LatLon latLon, String title) {
 		add(gpxFile, latLon, title, null);
 	}

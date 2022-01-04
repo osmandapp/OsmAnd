@@ -10,6 +10,11 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="edit_category">Edit category</string>
+    <string name="shared_string_shape">Shape</string>
+    <string name="default_appearance_desc">Default color, icon and shape will apply to the added favorite points into the group.</string>
+    <string name="default_appearance">Default appearance</string>
     <string name="rendering_attr_seabedDetail_name">Seabed detail</string>
     <string name="rendering_attr_seabedDetail_description">Additional text information on seabed surface_qualification, combined surface types, category and taxon of weed or seagrass</string>
     <string name="rendering_value_category_name">Category</string>

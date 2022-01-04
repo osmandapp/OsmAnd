@@ -1,11 +1,13 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
 
 public class FavoritePointEditor extends PointEditor {
@@ -30,6 +32,12 @@ public class FavoritePointEditor extends PointEditor {
 
 	public FavouritePoint getFavorite() {
 		return favorite;
+	}
+
+	@Nullable
+	@Override
+	public String getPreselectedIconName() {
+		return isNew && favorite != null ? RenderingIcons.getBigIconName(favorite.getIconId()) : null;
 	}
 
 	public void add(LatLon latLon, String title, String address, String originObjectName,

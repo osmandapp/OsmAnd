@@ -443,13 +443,12 @@
 						android:paddingEnd="@dimen/content_padding" />
 				</LinearLayout>
 
-				<LinearLayout
+				<FrameLayout
 					android:id="@+id/colors_card_container"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
-					android:layout_marginBottom="@dimen/content_padding_half"
-					android:orientation="horizontal" />
+					android:layout_marginBottom="@dimen/content_padding_half" />
 
 				<View
 					android:layout_width="match_parent"

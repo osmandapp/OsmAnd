@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
+import net.osmand.GPXUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -306,6 +307,12 @@ public class IconsCard extends MapBaseCard {
 	@DrawableRes
 	public int getSelectedIconId() {
 		return selectedIconId;
+	}
+
+	@NonNull
+	public String getSelectedIconName() {
+		String iconName = RenderingIcons.getBigIconName(selectedIconId);
+		return Algorithms.isEmpty(iconName) ? GPXUtilities.DEFAULT_ICON_NAME : iconName;
 	}
 
 	@Nullable

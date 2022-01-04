@@ -2,14 +2,14 @@ package net.osmand.plus.mapcontextmenu.editors;
 
 import android.app.Activity;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 public abstract class PointEditor {
 
@@ -58,6 +58,11 @@ public abstract class PointEditor {
 
 	public void updateNightMode() {
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
+	}
+
+	@Nullable
+	public String getPreselectedIconName() {
+		return null;
 	}
 
 	public int getSlideInAnimation() {

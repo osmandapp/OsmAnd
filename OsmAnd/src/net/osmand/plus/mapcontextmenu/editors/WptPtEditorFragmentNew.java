@@ -407,7 +407,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	}
 
 	@Override
-	public void setBackgroundType(BackgroundType backgroundType) {
+	public void setBackgroundType(@NonNull BackgroundType backgroundType) {
 		this.backgroundTypeName = backgroundType.getTypeName();
 	}
 
@@ -474,6 +474,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 		}
 	}
 
+	@NonNull
 	@Override
 	public BackgroundType getBackgroundType() {
 		return BackgroundType.getByTypeName(backgroundTypeName, DEFAULT_BACKGROUND_TYPE);
@@ -483,13 +484,6 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	public int getIconId() {
 		int iconId = getIconIdByName(iconName);
 		return iconId != 0 ? iconId : DEFAULT_UI_ICON_ID;
-	}
-
-	@Nullable
-	@Override
-	public String getPreselectedIconName() {
-		PointEditor editor = getEditor();
-		return editor == null || !editor.isNew ? null : iconName;
 	}
 
 	@Override

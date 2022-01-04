@@ -15,10 +15,10 @@ import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.track.cards.ColorsCard;
@@ -93,9 +93,6 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 
 		editor.updateLandscapePortrait(requireActivity());
 		editor.updateNightMode();
-
-		selectedColor = getPointColor();
-		selectedShape = getBackgroundType();
 
 		int activeColor = ColorUtilities.getActiveColor(context, nightMode);
 		ImageView toolbarAction = view.findViewById(R.id.toolbar_action);
@@ -323,10 +320,10 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 			int color = ((ColorsCard) card).getSelectedColor();
 			updateColorSelector(color);
 		} else if (card instanceof ShapesCard) {
-			selectedShape = shapesCard.getSelectedShape();
+			BackgroundType selectedShape = shapesCard.getSelectedShape();
 			setBackgroundType(selectedShape);
 			updateNameIcon();
-			((TextView) view.findViewById(R.id.shape_name)).setText(selectedShape.getNameId());
+			updateSelectedShapeText();
 		}
 	}
 
@@ -337,7 +334,6 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 	@Override
 	protected void updateColorSelector(int color) {
 		super.updateColorSelector(color);
-		((TextView) view.findViewById(R.id.color_name)).setText(ColorDialogs.getColorName(color));
 		updateNameIcon();
 	}
 
@@ -443,15 +439,14 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 		}
 	}
 
-	@Nullable
-	public abstract PointEditor getEditor();
-
 	protected abstract void delete(boolean needDismiss);
 
 	protected abstract Set<String> getCategories();
 
 	@ColorInt
 	protected abstract int getCategoryColor(String category);
+
+	protected abstract int getDefaultColor();
 
 	protected abstract int getCategoryPointsCount(String category);
 
