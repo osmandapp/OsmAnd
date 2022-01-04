@@ -177,7 +177,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 				fragment.skipConfirmationDialog = skipConfirmationDialog;
 				fragmentManager.beginTransaction()
 						.add(R.id.fragmentContainer, fragment, tag)
-						.addToBackStack(null)
+						.addToBackStack(tag)
 						.commitAllowingStateLoss();
 			}
 		}
@@ -470,6 +470,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 		return iconId != 0 ? iconId : DEFAULT_UI_ICON_ID;
 	}
 
+	@NonNull
 	@Override
 	public Set<String> getCategories() {
 		return categoriesMap.keySet();

@@ -11,6 +11,10 @@
 	Thx - Hardy
 -->
 
+    <string name="edit_category">Edit category</string>
+    <string name="shared_string_shape">Shape</string>
+    <string name="default_appearance_desc">Default color, icon and shape will apply to the added favorite points into the group.</string>
+    <string name="default_appearance">Default appearance</string>
     <string name="select_suggested_points">Select suggested points</string>
     <string name="selected_waypoints_descr">Selected waypoints will be added to the \"%1$s\" track</string>
     <string name="shared_string_reading_file">Reading file…</string>

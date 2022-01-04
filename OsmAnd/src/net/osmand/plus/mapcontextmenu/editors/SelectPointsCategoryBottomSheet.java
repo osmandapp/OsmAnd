@@ -127,11 +127,9 @@ public class SelectPointsCategoryBottomSheet extends MenuBottomSheetDialogFragme
 	private void showAddNewCategoryFragment() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			Set<String> categories = gpxCategories != null ? gpxCategories.keySet() : null;
-			AddNewFavoriteCategoryBottomSheet fragment =
-					AddNewFavoriteCategoryBottomSheet.createInstance(editorTag, categories, isWaypointCategories());
-			fragment.setSelectionListener(selectionListener);
-			fragment.show(mapActivity.getSupportFragmentManager(), AddNewFavoriteCategoryBottomSheet.TAG);
+			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+			Set<String> categories = isWaypointCategories() && gpxCategories != null ? gpxCategories.keySet() : null;
+			CategoryEditorFragment.showAddCategoryFragment(fragmentManager, selectionListener, editorTag, categories);
 		}
 		dismiss();
 	}

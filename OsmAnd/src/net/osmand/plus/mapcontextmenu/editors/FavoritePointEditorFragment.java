@@ -222,7 +222,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 				fragment.skipConfirmationDialog = skipConfirmationDialog;
 				fragmentManager.beginTransaction()
 						.add(R.id.fragmentContainer, fragment, tag)
-						.addToBackStack(null)
+						.addToBackStack(tag)
 						.commitAllowingStateLoss();
 			}
 		}
@@ -457,6 +457,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		return iconId;
 	}
 
+	@NonNull
 	@Override
 	public Set<String> getCategories() {
 		Set<String> categories = new LinkedHashSet<>();

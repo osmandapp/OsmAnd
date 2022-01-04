@@ -307,7 +307,6 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 			setBackgroundType(selectedShape);
 			updateNameIcon();
 			updateSelectedShapeText();
-			((TextView) view.findViewById(R.id.shape_name)).setText(selectedShape.getNameId());
 		}
 	}
 
@@ -330,17 +329,6 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 			return groupListAdapter.getSelectedItem();
 		}
 		return getCategoryInitValue();
-	}
-
-	@Nullable
-	protected AddNewFavoriteCategoryBottomSheet createAddCategoryDialog() {
-		PointEditor editor = getEditor();
-		if (editor != null) {
-			return AddNewFavoriteCategoryBottomSheet.createInstance(editor.getFragmentTag(), getCategories(),
-					!editor.getFragmentTag().equals(FavoritePointEditor.TAG));
-		} else {
-			return null;
-		}
 	}
 
 	@Override
@@ -416,6 +404,7 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 	@ColorInt
 	protected abstract int getDefaultColor();
 
+	@NonNull
 	protected abstract Set<String> getCategories();
 
 	@ColorInt
@@ -512,13 +501,7 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 		@Override
 		public void onBindViewHolder(@NonNull final GroupsViewHolder holder, int position) {
 			if (position == items.size()) {
-				holder.groupButton.setOnClickListener(view -> {
-					FragmentManager fragmentManager = getFragmentManager();
-					DialogFragment dialogFragment = createAddCategoryDialog();
-					if (fragmentManager != null && dialogFragment != null) {
-						dialogFragment.show(fragmentManager, AddNewFavoriteCategoryBottomSheet.TAG);
-					}
-				});
+				holder.groupButton.setOnClickListener(view -> showAddCategoryFragment());
 			} else {
 				holder.groupButton.setOnClickListener(view -> {
 					int previousSelectedPosition = getItemPosition(selectedItemName);
@@ -576,12 +559,23 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 			return items == null ? 0 : items.size() + 1;
 		}
 
-		String getSelectedItem() {
+		private String getSelectedItem() {
 			return selectedItemName;
 		}
 
-		int getItemPosition(String name) {
+		private int getItemPosition(String name) {
 			return items.indexOf(name);
+		}
+
+		private void showAddCategoryFragment() {
+			MapActivity mapActivity = getMapActivity();
+			PointEditor editor = getEditor();
+			if (mapActivity != null && editor != null) {
+				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+				String tag = editor.getFragmentTag();
+				Set<String> categories = WptPtEditor.TAG.equals(tag) ? getCategories() : null;
+				CategoryEditorFragment.showAddCategoryFragment(fragmentManager, null, tag, categories);
+			}
 		}
 	}
 

@@ -40,6 +40,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
 import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 
 public class IconsCard extends MapBaseCard {
@@ -313,6 +314,12 @@ public class IconsCard extends MapBaseCard {
 	@DrawableRes
 	public int getSelectedIconId() {
 		return selectedIconId;
+	}
+
+	@NonNull
+	public String getSelectedIconName() {
+		String iconName = RenderingIcons.getBigIconName(selectedIconId);
+		return Algorithms.isEmpty(iconName) ? DEFAULT_ICON_NAME : iconName;
 	}
 
 	@Nullable
