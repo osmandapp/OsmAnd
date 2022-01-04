@@ -4401,4 +4401,16 @@
     <string name="turn_arrows">Svingpiler</string>
     <string name="gps_filter_hdop_desc">Setter maksimalt akseptert verdi for HDOP.
 \nPunkter med høyere verdi vil bli skjult.</string>
+    <string name="navigate_point_format_swiss_grid">Sveitsisk koordinatsystem (CH1903)</string>
+    <string name="rendering_value_category_name">Kategori</string>
+    <string name="rendering_value_all_name">Alle</string>
+    <string name="rendering_value_omit_name">Unnlat</string>
+    <string name="rendering_attr_seabedDetail_name">Havbunnsdetalj</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="shared_string_used">Anvendt</string>
+    <string name="files_with_route_restrictions">Filer med rutebegrensninger</string>
+    <string name="track_file">Sporfil</string>
+    <string name="shared_string_not_used">Ikke i bruk</string>
+    <string name="waypoint_template">Veipunktsmal</string>
+    <string name="navigate_point_format_swiss_grid_plus">Sveitsisk koordinatsystem (CH1903+)</string>
 </resources>
