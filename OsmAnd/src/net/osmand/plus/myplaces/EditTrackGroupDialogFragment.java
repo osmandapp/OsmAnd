@@ -5,7 +5,6 @@ import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,11 +12,8 @@ import android.text.TextUtils;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -26,35 +22,35 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.data.FavouritePoint;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.myplaces.EditFavoriteGroupDialogFragment.FavoriteColorAdapter;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.dialogs.TrackWayPointsBottomSheet;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.OptionsDividerItem;
 import net.osmand.plus.myplaces.DeletePointsTask.OnPointsDeleteListener;
+import net.osmand.plus.myplaces.EditFavoriteGroupDialogFragment.FavoriteColorAdapter;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SavingTrackHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -160,31 +156,8 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 					public void onClick(View v) {
 						final FragmentActivity activity = getActivity();
 						if (activity != null) {
-							AlertDialog.Builder b = new AlertDialog.Builder(activity);
-							b.setTitle(R.string.favorite_group_name);
-							final EditText nameEditText = new EditText(activity);
-							nameEditText.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-							nameEditText.setText(group.getName());
-							LinearLayout container = new LinearLayout(activity);
-							int sidePadding = AndroidUtils.dpToPx(activity, 24f);
-							int topPadding = AndroidUtils.dpToPx(activity, 4f);
-							container.setPadding(sidePadding, topPadding, sidePadding, topPadding);
-							container.addView(nameEditText);
-							b.setView(container);
-							b.setNegativeButton(R.string.shared_string_cancel, null);
-							b.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									String name = nameEditText.getText().toString();
-									boolean nameChanged = !Algorithms.objectEquals(group.getName(), name);
-									if (nameChanged) {
-										new UpdateGpxCategoryTask(activity, group, name)
-												.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-									}
-									dismiss();
-								}
-							});
-							b.show();
+							FragmentManager fragmentManager = activity.getSupportFragmentManager();
+							TrackWayPointsBottomSheet.showInstance(fragmentManager, EditTrackGroupDialogFragment.this, group, true);
 						}
 					}
 				})
@@ -250,49 +223,14 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						saveGroupToFavorites();
+						final FragmentActivity activity = getActivity();
+						if (activity != null) {
+							FragmentManager fragmentManager = activity.getSupportFragmentManager();
+							TrackWayPointsBottomSheet.showInstance(fragmentManager, EditTrackGroupDialogFragment.this, group, false);
+						}
 					}
 				})
 				.create();
-	}
-
-	private void saveGroupToFavorites() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			AlertDialog.Builder b = new AlertDialog.Builder(activity);
-			final EditText editText = new EditText(activity);
-			String name = group.getModifiableList().iterator().next().group.getName();
-			if (name.indexOf('\n') > 0) {
-				name = name.substring(0, name.indexOf('\n'));
-			}
-			editText.setText(name);
-			int leftMargin = AndroidUtils.dpToPx(activity, 16f);
-			int topMargin = AndroidUtils.dpToPx(activity, 8f);
-			editText.setPadding(leftMargin, topMargin, leftMargin, topMargin);
-			b.setTitle(R.string.save_as_favorites_points);
-			b.setView(editText);
-			b.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					String category = editText.getText().toString();
-					FavouritesDbHelper favouritesDbHelper = app.getFavorites();
-					for (GpxDisplayItem item : group.getModifiableList()) {
-						if (item.locationStart != null) {
-							FavouritePoint fp = FavouritePoint.fromWpt(item.locationStart, app, category);
-							if (!Algorithms.isEmpty(item.description)) {
-								fp.setDescription(item.description);
-							}
-							favouritesDbHelper.addFavourite(fp, false);
-						}
-					}
-					favouritesDbHelper.saveCurrentPointsIntoFile();
-					dismiss();
-				}
-			});
-			b.setNegativeButton(R.string.shared_string_cancel, null);
-			b.show();
-		}
 	}
 
 	private BaseBottomSheetItem createDeleteGroupItem() {
@@ -422,7 +360,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		dismiss();
 	}
 
-	private static class UpdateGpxCategoryTask extends AsyncTask<Void, Void, Void> {
+	public static class UpdateGpxCategoryTask extends AsyncTask<Void, Void, Void> {
 
 		private OsmandApplication app;
 		private WeakReference<FragmentActivity> activityRef;
@@ -434,7 +372,6 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 
 		private ProgressDialog progressDialog;
 		private boolean wasUpdated = false;
-
 		private UpdateGpxCategoryTask(@NonNull FragmentActivity activity, @NonNull GpxDisplayGroup group) {
 			this.app = (OsmandApplication) activity.getApplication();
 			activityRef = new WeakReference<>(activity);
@@ -442,14 +379,14 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 			this.group = group;
 		}
 
-		UpdateGpxCategoryTask(@NonNull FragmentActivity activity, @NonNull GpxDisplayGroup group,
-							  @NonNull String newCategory) {
+		public UpdateGpxCategoryTask(@NonNull FragmentActivity activity, @NonNull GpxDisplayGroup group,
+		                             @NonNull String newCategory) {
 			this(activity, group);
 			this.newCategory = newCategory;
 		}
 
 		UpdateGpxCategoryTask(@NonNull FragmentActivity activity, @NonNull GpxDisplayGroup group,
-							  @NonNull Integer newColor) {
+		                      @NonNull Integer newColor) {
 			this(activity, group);
 			this.newColor = newColor;
 		}

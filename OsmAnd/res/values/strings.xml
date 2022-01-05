@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="please_provide_group_name_message">Please provide a name for the group.</string>
     <string name="rendering_attr_seabedDetail_name">Seabed detail</string>
     <string name="rendering_attr_seabedDetail_description">Additional text information on seabed surface_qualification, combined surface types, category and taxon of weed or seagrass</string>
     <string name="rendering_value_category_name">Category</string>
