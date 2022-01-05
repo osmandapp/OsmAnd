@@ -17,7 +17,7 @@
 		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/shared_string_navigation" />
 
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+	<SwitchPreferenceCompat
 		android:key="save_track_to_gpx"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"
@@ -28,9 +28,16 @@
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="save_track_interval"
 		android:layout="@layout/preference_with_descr"
-		android:title="@string/save_track_interval"
+		android:title="@string/save_track_interval_globally"
 		tools:icon="@drawable/ic_action_time_span"
 		tools:summary="3 seconds" />
+
+	<Preference
+		android:key="save_track_to_gpx_description"
+		android:layout="@layout/preference_category_with_descr"
+		android:persistent="false"
+		android:selectable="false"
+		android:summary="@string/save_track_to_gpx_descrp"/>
 
 	<Preference
 		android:layout="@layout/simple_divider_item"
