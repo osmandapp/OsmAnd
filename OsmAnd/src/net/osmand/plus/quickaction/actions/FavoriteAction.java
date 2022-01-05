@@ -19,9 +19,7 @@ import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.GeocodingLookupService.OnAddressLookupResult;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.editors.EditCategoryDialogFragment;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
-import net.osmand.plus.mapcontextmenu.editors.SelectCategoryDialogFragment;
 import net.osmand.plus.mapcontextmenu.editors.SelectFavoriteCategoryBottomSheet;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
@@ -172,54 +170,17 @@ public class FavoriteAction extends QuickAction {
 			getParams().put(KEY_CATEGORY_COLOR, "0");
 		}
 
-		categoryEdit.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(final View view) {
-
-				SelectFavoriteCategoryBottomSheet dialogFragment = SelectFavoriteCategoryBottomSheet.createInstance("", "");
-
-				dialogFragment.show(
-						mapActivity.getSupportFragmentManager(),
-						SelectCategoryDialogFragment.TAG);
-
-				dialogFragment.setSelectionListener(new SelectFavoriteCategoryBottomSheet.CategorySelectionListener() {
-					@Override
-					public void onCategorySelected(String category, int color) {
-
-						fillGroupParams(root, category, color);
-					}
-				});
-			}
+		categoryEdit.setOnClickListener(view -> {
+			SelectFavoriteCategoryBottomSheet dialogFragment =
+					SelectFavoriteCategoryBottomSheet.createInstance("", "");
+			dialogFragment.setSelectionListener((category, color) -> fillGroupParams(root, category, color));
+			dialogFragment.show(mapActivity.getSupportFragmentManager(), SelectFavoriteCategoryBottomSheet.TAG);
 		});
 
 		SelectFavoriteCategoryBottomSheet dialogFragment = (SelectFavoriteCategoryBottomSheet)
-				mapActivity.getSupportFragmentManager().findFragmentByTag(SelectCategoryDialogFragment.TAG);
-
+				mapActivity.getSupportFragmentManager().findFragmentByTag(SelectFavoriteCategoryBottomSheet.TAG);
 		if (dialogFragment != null) {
-
-			dialogFragment.setSelectionListener(new SelectFavoriteCategoryBottomSheet.CategorySelectionListener() {
-				@Override
-				public void onCategorySelected(String category, int color) {
-
-					fillGroupParams(root, category, color);
-				}
-			});
-
-		} else {
-
-			EditCategoryDialogFragment dialog = (EditCategoryDialogFragment)
-					mapActivity.getSupportFragmentManager().findFragmentByTag(EditCategoryDialogFragment.TAG);
-
-			if (dialog != null) {
-
-				dialogFragment.setSelectionListener(new SelectFavoriteCategoryBottomSheet.CategorySelectionListener() {
-					@Override
-					public void onCategorySelected(String category, int color) {
-
-						fillGroupParams(root, category, color);
-					}
-				});
-			}
+			dialogFragment.setSelectionListener((category, color) -> fillGroupParams(root, category, color));
 		}
 	}
 
