@@ -18,7 +18,7 @@
     <string name="get_discount_title">Получите %1$d %2$s со скидкой %3$s.</string>
     <string name="get_discount_first_part">%1$s за первый %2$s</string>
     <string name="get_discount_first_few_part">%1$s за первые %2$s</string>
-    <string name="get_discount_second_part">затем %1$s</string>
+    <string name="get_discount_second_part">Затем %1$s</string>
     <string name="cancel_subscription">Отменить подписку</string>
     <string name="price_and_discount">%1$s • Экономия %2$s</string>
     <string name="rendering_attr_winter_road_name">Автозимник</string>
@@ -4438,7 +4438,7 @@
     <string name="skip_confirmation">Да, пропустить</string>
     <string name="icon_group_industrial">Промышленность</string>
     <string name="files_remaining">Осталось файлов: %1$s %2$s</string>
-    <string name="copying_file">Копирование файла %1$s</string>
+    <string name="copying_file">Копирование файла %1$s…</string>
     <string name="storage_found_files_descr">Нажмите «%1$s», чтобы скопировать файлы (%2$s шт.) из «%3$s» в «%4$s». Это может занять некоторое время.</string>
     <string name="shared_storage_third_step">Предоставьте разрешение на доступ к папке. Без этого OsmAnd не cможет копировать файлы.</string>
     <string name="shared_string_skip_warning">Вы уверены, что хотите пропустить миграцию\? OsmAnd больше не имеет доступа к вашим файлам в общем хранилище.
@@ -4493,7 +4493,7 @@
     <string name="shared_string_size">Размер</string>
     <string name="use_routing_fallback_description">Использовать офлайн маршрутизацию, если онлайн недоступна.</string>
     <string name="turn_arrows">Стрелки поворота</string>
-    <string name="turn_arrows_descr">Управляйте видимостью стрелок поворота на линии маршрута.</string>
+    <string name="turn_arrows_descr">Выберите, будут ли на линии маршрута указаны стрелки поворотов.</string>
     <string name="waypoint_appearance">Внешний вид путевой точки</string>
     <string name="track_file">Файл трека</string>
     <string name="waypoint_template">Шаблон путевой точки</string>
