@@ -4223,4 +4223,5 @@
     <string name="poi_computer_parts_yes">jes</string>
     <string name="poi_computer_parts_no">Komputilaj partoj: ne</string>
     <string name="poi_post_office_type">Speco de poŝtoficejo</string>
+    <string name="poi_museum_type">Museumsthema</string>
 </resources>
