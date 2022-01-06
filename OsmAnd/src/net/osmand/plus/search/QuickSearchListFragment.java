@@ -12,10 +12,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.DownloadValidationManager;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -97,7 +101,8 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 							|| sr.objectType == ObjectType.RECENT_OBJ
 							|| sr.objectType == ObjectType.WPT
 							|| sr.objectType == ObjectType.STREET_INTERSECTION
-							|| sr.objectType == ObjectType.GPX_TRACK) {
+							|| sr.objectType == ObjectType.GPX_TRACK
+							|| sr.objectType == ObjectType.INDEX_ITEM) {
 
 						showResult(sr);
 					} else {
@@ -169,6 +174,17 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		showResult = false;
 		if (searchResult.objectType == ObjectType.GPX_TRACK) {
 			showTrackMenuFragment((GPXInfo) searchResult.relatedObject);
+		} else if (searchResult.objectType == ObjectType.INDEX_ITEM) {
+			OsmandApplication app = getMyApplication();
+			FragmentActivity activity = getMapActivity();
+			DownloadIndexesThread thread = app.getDownloadThread();
+			DownloadValidationManager manager = new DownloadValidationManager(app);
+			IndexItem indexItem = (IndexItem) searchResult.relatedObject;
+			if (thread.isDownloading(indexItem)) {
+				manager.makeSureUserCancelDownload(activity, indexItem);
+			} else {
+				manager.startDownload(activity, indexItem);
+			}
 		} else if (searchResult.location != null) {
 			Pair<PointDescription, Object> pointDescriptionObject =
 					QuickSearchListItem.getPointDescriptionObject(getMyApplication(), searchResult);

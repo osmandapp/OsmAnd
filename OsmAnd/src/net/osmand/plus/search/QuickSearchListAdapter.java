@@ -1,21 +1,19 @@
 package net.osmand.plus.search;
 
-import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.ButtonItem;
-import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.INVALID_ID;
-import static net.osmand.search.core.ObjectType.POI_TYPE;
-
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,24 +22,22 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CollatorStringMatcher;
-import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.DownloadValidationManager;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.plus.search.listitems.QuickSearchBannerListItem;
 import net.osmand.plus.search.listitems.QuickSearchDisabledHistoryItem;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
@@ -49,6 +45,11 @@ import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchSelectAllListItem;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
@@ -58,9 +59,14 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.ButtonItem;
+import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.INVALID_ID;
+import static net.osmand.search.core.ObjectType.POI_TYPE;
 
 public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
@@ -433,7 +439,10 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	private LinearLayout bindSearchResultItem(int position, @Nullable View convertView, @NonNull QuickSearchListItem listItem) {
 		LinearLayout view;
 		SearchResult searchResult = listItem.getSearchResult();
-		if (searchResult != null && searchResult.objectType == ObjectType.GPX_TRACK) {
+		if (searchResult != null && searchResult.objectType == ObjectType.INDEX_ITEM) {
+			view = getLinearLayout(convertView, R.layout.search_download_map_list_item);
+			bindIndexItem(view, (IndexItem) searchResult.relatedObject, activity, isNightMode());
+		} else if (searchResult != null && searchResult.objectType == ObjectType.GPX_TRACK) {
 			view = getLinearLayout(convertView, R.layout.search_gpx_list_item);
 			bindGpxTrack(view, listItem, (GPXInfo) searchResult.relatedObject);
 		} else {
@@ -443,6 +452,60 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		}
 		setupCheckBox(position, view, listItem);
 		return view;
+	}
+
+	public static void bindIndexItem(@NonNull View view,
+	                                 @NonNull IndexItem indexItem,
+	                                 FragmentActivity activity,
+	                                 boolean nightMode) {
+		OsmandApplication app = (OsmandApplication) view.getContext().getApplicationContext();
+		UiUtilities iconsCache = app.getUIUtilities();
+		DownloadIndexesThread thread = app.getDownloadThread();
+		DownloadValidationManager manager = new DownloadValidationManager(app);
+
+		DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(app);
+		TextView tvName = (TextView) view.findViewById(R.id.title);
+		TextView tvDesc = (TextView) view.findViewById(R.id.description);
+		ImageView ivButton = (ImageView) view.findViewById(R.id.secondaryIcon);
+		ProgressBar pbProgress = (ProgressBar) view.findViewById(R.id.progressBar);
+
+		int activeColorId = ColorUtilities.getActiveColorId(nightMode);
+		int defaultIconColorId = ColorUtilities.getDefaultIconColorId(nightMode);
+
+		String name = indexItem.getVisibleName(app, app.getRegions(), false);
+		tvName.setText(name);
+
+		OnClickListener action = null;
+		Drawable buttonDrawable = null;
+		boolean isDownloading = indexItem.isDownloading(thread);
+		if (!isDownloading) {
+			pbProgress.setVisibility(View.GONE);
+			tvDesc.setVisibility(View.VISIBLE);
+
+			String pattern = app.getString(R.string.ltr_or_rtl_combine_via_bold_point);
+			String size = indexItem.getSizeDescription(app);
+			String type = indexItem.getType().getString(app);
+			String date = indexItem.getDate(dateFormat, true);
+			String description = String.format(pattern, type, date);
+			description = String.format(pattern, size, description);
+			tvDesc.setText(description);
+			buttonDrawable = iconsCache.getIcon(R.drawable.ic_action_gsave_dark, activeColorId);
+			action = v -> manager.startDownload(activity, indexItem);
+		} else {
+			pbProgress.setVisibility(View.VISIBLE);
+			tvDesc.setVisibility(View.GONE);
+
+			int progress = -1;
+			if (thread.getCurrentDownloadingItem() == indexItem) {
+				progress = thread.getCurrentDownloadingItemProgress();
+			}
+			pbProgress.setIndeterminate(progress == -1);
+			pbProgress.setProgress(progress);
+			buttonDrawable = iconsCache.getIcon(R.drawable.ic_action_remove_dark, defaultIconColorId);
+			action = v -> manager.makeSureUserCancelDownload(activity, indexItem);
+		}
+		ivButton.setOnClickListener(action);
+		ivButton.setImageDrawable(buttonDrawable);
 	}
 
 	public static void bindGpxTrack(@NonNull View view, @NonNull QuickSearchListItem listItem, @NonNull GPXInfo gpxInfo) {
@@ -558,16 +621,12 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 							   @NonNull View rootView,
 							   @NonNull QuickSearchListItem listItem) {
 		final CheckBox ch = (CheckBox) rootView.findViewById(R.id.toggle_item);
+		if (ch == null) return;
+
 		if (selectionMode) {
 			ch.setVisibility(View.VISIBLE);
 			ch.setChecked(selectedItems.contains(listItem));
-			ch.setOnClickListener(new View.OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					toggleCheckbox(position, ch);
-				}
-			});
+			ch.setOnClickListener(v -> toggleCheckbox(position, ch));
 		} else {
 			ch.setVisibility(View.GONE);
 		}
