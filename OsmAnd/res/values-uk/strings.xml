@@ -715,12 +715,12 @@
     <string name="osmand_parking_plugin_description">Дозволяє записувати, де ви залишили вашу автівку, а також, скільки часу залишилось до кінця стоянки.
 \n Місце розташування та час видно на приладовій панелі, а також у віджеті мапи. Нагадування можна додати в календар Android.</string>
     <string name="osmand_parking_plugin_name">Місце стоянки</string>
-    <string name="context_menu_item_add_parking_point">Місце стоянки</string>
+    <string name="context_menu_item_add_parking_point">Позначити як місце паркування</string>
     <string name="context_menu_item_delete_parking_point">Вилучити позначку місця стоянки</string>
     <string name="starting_point_too_far">Початок маршруту далеко від найближчої дороги.</string>
     <string name="shared_location">Загальні місця</string>
-    <string name="global_app_allocated_memory_descr">Зайнято пам’яті %1$s MB (Обмеження Android %2$s MB, Dalvik %3$s MB).</string>
-    <string name="global_app_allocated_memory">Зайнято пам’яті</string>
+    <string name="global_app_allocated_memory_descr">Виділено пам’яті %1$s MB (Обмеження Android %2$s MB, Dalvik %3$s MB).</string>
+    <string name="global_app_allocated_memory">Виділена пам\'ять</string>
     <string name="native_app_allocated_memory_descr">Всього фізичної пам’яті зайнятої застосунком %1$s Мб (dalvik %2$s MB, інше %3$s Мб).
 \nПропорційно пам’яті %4$s MB (Обмеження Android %5$s Мб, dalvik %6$s Мб).</string>
     <string name="native_app_allocated_memory">Всього фізичної пам’яті</string>
