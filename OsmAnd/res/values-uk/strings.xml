@@ -794,7 +794,7 @@
     <string name="av_use_external_camera_descr">Використовувати системний застосунок для світлин.</string>
     <string name="recording_unavailable">недоступно</string>
     <string name="shared_string_control_stop">Зупинити</string>
-    <string name="shared_string_control_start">Запис</string>
+    <string name="shared_string_control_start">Почати</string>
     <string name="map_widget_av_notes">Аудіо/відео примітки</string>
     <string name="osmand_srtm_short_description_80_chars">Втулок OsmAnd для показу ізоліній</string>
     <string name="av_use_external_camera">Використовувати програму Камера</string>
