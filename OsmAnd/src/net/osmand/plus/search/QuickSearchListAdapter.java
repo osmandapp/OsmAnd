@@ -441,7 +441,12 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		SearchResult searchResult = listItem.getSearchResult();
 		if (searchResult != null && searchResult.objectType == ObjectType.INDEX_ITEM) {
 			view = getLinearLayout(convertView, R.layout.search_download_map_list_item);
-			bindIndexItem(view, (IndexItem) searchResult.relatedObject, activity, isNightMode());
+			IndexItem indexItem = (IndexItem) searchResult.relatedObject;
+			if (indexItem.isDownloaded()) {
+				remove(listItem);
+			} else {
+				bindIndexItem(view, indexItem, activity, isNightMode());
+			}
 		} else if (searchResult != null && searchResult.objectType == ObjectType.GPX_TRACK) {
 			view = getLinearLayout(convertView, R.layout.search_gpx_list_item);
 			bindGpxTrack(view, listItem, (GPXInfo) searchResult.relatedObject);
