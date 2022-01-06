@@ -93,7 +93,7 @@
     <string name="poi_aerodrome">Aerodromo</string>
     <string name="poi_country">Lando</string>
     <string name="poi_city">Urbego</string>
-    <string name="poi_capital">jes</string>
+    <string name="poi_capital">jes;ĉefurbo</string>
     <string name="poi_town">Urbo</string>
     <string name="poi_village">Vilaĝo</string>
     <string name="poi_hamlet">Vilaĝeto</string>
@@ -1057,13 +1057,13 @@
     <string name="poi_abandoned_poi">Forlasita objekto</string>
     <string name="poi_disused">Neuzata</string>
     <string name="poi_operator">Administranto</string>
-    <string name="poi_fee_yes">jes</string>
+    <string name="poi_fee_yes">jes;pagenda</string>
     <string name="poi_fee_no">ne</string>
-    <string name="poi_drinking_water_yes">jes</string>
+    <string name="poi_drinking_water_yes">jes;trinkebla</string>
     <string name="poi_drinking_water_no">ne</string>
     <string name="poi_supervised_yes">Gardata</string>
     <string name="poi_supervised_no">Negardata</string>
-    <string name="poi_seasonal_yes">jes</string>
+    <string name="poi_seasonal_yes">jes;sezona</string>
     <string name="poi_seasonal_no">ne</string>
     <string name="poi_seasonal_dry_season">seka sezono</string>
     <string name="poi_seasonal_wet_season">pluva sezono</string>
@@ -1075,7 +1075,7 @@
     <string name="poi_crossing_uncontrolled">sen trafiklumoj</string>
     <string name="poi_crossing_unmarked">nemarkita</string>
     <string name="poi_start_date">Ekestis je</string>
-    <string name="poi_wheelchair_yes">jes</string>
+    <string name="poi_wheelchair_yes">jes;rulseĝo</string>
     <string name="poi_wheelchair_no">ne</string>
     <string name="poi_wheelchair_limited">parta</string>
     <string name="poi_wholesale">Pogranda komerco</string>
@@ -1152,7 +1152,7 @@
     <string name="poi_trees_pomegranate">Granatujoj</string>
     <string name="poi_urban">Urba</string>
     <string name="poi_rural">Vilaĝa</string>
-    <string name="poi_fireplace_yes">jes</string>
+    <string name="poi_fireplace_yes">jes;kameno</string>
     <string name="poi_fireplace_no">Sen kameno</string>
     <string name="poi_enforcement_traffic_signals">Kontrolo: trafiklumoj</string>
     <string name="poi_enforcement_maxspeed">Kontrolo: rapido</string>
@@ -1182,7 +1182,7 @@
     <string name="poi_pump_manual">permana</string>
     <string name="poi_pump_powered">maŝina</string>
     <string name="poi_pump_no">sen pumpilo</string>
-    <string name="poi_pump_yes">jes</string>
+    <string name="poi_pump_yes">jes;pumpilo</string>
     <string name="poi_water_characteristic_mineral">minerala</string>
     <string name="poi_water_characteristic_mud">sediment-riĉa</string>
     <string name="poi_water_characteristic_sulfuric">sulfat(VI)-oza</string>
@@ -1209,7 +1209,7 @@
     <string name="poi_board_type_technology">teĥnologio</string>
     <string name="poi_board_type_astronomy">astroscienco</string>
     <string name="poi_commercial">Oficeja tereno</string>
-    <string name="poi_covered_yes">jes</string>
+    <string name="poi_covered_yes">jes;kovrita</string>
     <string name="poi_covered_no">Sentegmenta</string>
     <string name="poi_smoking_no">malpermesata</string>
     <string name="poi_smoking_outside">permesata nur ekstere</string>
@@ -1220,9 +1220,9 @@
     <string name="poi_toll_yes">Vojimposto</string>
     <string name="poi_toll_no">Sen vojimposto</string>
     <string name="poi_toll_hgv_yes">Vojimposto por kamionoj</string>
-    <string name="poi_tactile_paving_yes">jes</string>
+    <string name="poi_tactile_paving_yes">jes,reliefo</string>
     <string name="poi_tactile_paving_no">sen reliefo por blinduloj</string>
-    <string name="poi_traffic_signals_sound_yes">jes</string>
+    <string name="poi_traffic_signals_sound_yes">jes,sono</string>
     <string name="poi_traffic_signals_sound_no">Sono: ne</string>
     <string name="poi_traffic_signals_sound_walk">tiam, kiam irado permesata</string>
     <string name="poi_leisure_common">Publika ripoza tereno</string>
@@ -1269,7 +1269,7 @@
     <string name="poi_garden_style_english">Ĝardena stilo: Angla</string>
     <string name="poi_garden_style_japanese">Ĝardena stilo: Japana</string>
     <string name="poi_capacity">Enhaveco</string>
-    <string name="poi_capacity_disabled_yes">jes</string>
+    <string name="poi_capacity_disabled_yes">jes;dediĉita ejo por handikapulo</string>
     <string name="poi_capacity_disabled_no">Sen dediĉitaj lokoj por malkapabluloj</string>
     <string name="poi_capacity_disabled">Dediĉitaj ejoj por malkapabluloj</string>
     <string name="poi_capacity_women_yes">Kun dediĉitaj ejoj por virinoj</string>
@@ -1285,7 +1285,7 @@
     <string name="poi_aerialway_duration">Mezuma vojaĝ-tempo (en minutoj)</string>
     <string name="poi_aerialway_bubble_yes">Tegmenteto</string>
     <string name="poi_aerialway_bubble_no">Sen tegmenteto</string>
-    <string name="poi_aerialway_heating_yes">jes</string>
+    <string name="poi_aerialway_heating_yes">jes;hejtado</string>
     <string name="poi_aerialway_heating_no">Sen hejtado</string>
     <string name="poi_aerialway_bicycle_yes">jes</string>
     <string name="poi_aerialway_bicycle_no">Bicikloj: malpermesataj</string>
@@ -1469,17 +1469,17 @@
     <string name="poi_diet_lactose_free_yes">sen-laktoza</string>
     <string name="poi_diet_lactose_free_no">Sen-laktoza dieto: ne</string>
     <string name="poi_diet_pescetarian_yes">senvianda (escepte fiŝoj)</string>
-    <string name="poi_drive_in_yes">jes</string>
+    <string name="poi_drive_in_yes">jes;senelaŭtiga servo</string>
     <string name="poi_public_bath">Banejo (distro)</string>
     <string name="poi_male_yes">Viroj</string>
     <string name="poi_male_no">Viroj malpermesataj</string>
     <string name="poi_female_yes">Inoj</string>
     <string name="poi_female_no">Inoj malpermesataj</string>
     <string name="poi_drive_in_no">Sen-elaŭtiĝa servo (aŭtoparko): ne</string>
-    <string name="poi_drive_through_yes">jes</string>
+    <string name="poi_drive_through_yes">jes;senelaŭtiga servo</string>
     <string name="poi_drive_through_no">Sen-elaŭtiĝa servo (transveturo): ne</string>
     <string name="poi_brewery_additional">Nomo de bierfarejo</string>
-    <string name="poi_microbrewery_yes">jes</string>
+    <string name="poi_microbrewery_yes">jes;bierfarejeto</string>
     <string name="poi_microbrewery_no">Sen bierfarejeto-restoracio</string>
     <string name="poi_takeaway_yes">Forporti manĝaĵon</string>
     <string name="poi_takeaway_no">Forporti manĝaĵon: ne</string>
@@ -1494,7 +1494,7 @@
     <string name="poi_outdoor_seating_pedestrian_zone">Seĝoj ekstere: sur irejo</string>
     <string name="poi_outdoor_seating_garden">Seĝoj ekstere: en ĝardeno</string>
     <string name="poi_outdoor_seating_patio">Seĝoj ekstere: en korto</string>
-    <string name="poi_cocktails_yes">jes</string>
+    <string name="poi_cocktails_yes">jes;kokteloj</string>
     <string name="poi_second_hand_yes">Brokantaĵoj</string>
     <string name="poi_second_hand_no">Sen brokantaĵoj</string>
     <string name="poi_second_hand_only">Nur brokantaĵoj</string>
@@ -1515,7 +1515,7 @@
     <string name="poi_aeroway_fuel">Benzinejo por aviadiloj</string>
     <string name="poi_indoor_yes">Ene</string>
     <string name="poi_indoor_no">Ekstere</string>
-    <string name="poi_toilets_yes">jes</string>
+    <string name="poi_toilets_yes">jes;necesejo</string>
     <string name="poi_toilets_no">Sen necesejo</string>
     <string name="poi_toilets_wheelchair_yes">Kun necesejo por malkapabluloj</string>
     <string name="poi_toilets_wheelchair_no">Sen necesejo por malkapabluloj</string>
@@ -1634,9 +1634,9 @@
     <string name="poi_historic_yes">Historia objekto</string>
     <string name="poi_wetland_wet_meadow">Malsekherbejo</string>
     <string name="poi_wetland_bog">Pluvmarĉo (marĉo alta)</string>
-    <string name="poi_wetland_marsh">Aluvia grundo</string>
+    <string name="poi_wetland_marsh">Marĉo (sen arboj)</string>
     <string name="poi_wetland_reedbed">Kareksejo (kanejo)</string>
-    <string name="poi_wetland_swamp">Marĉo</string>
+    <string name="poi_wetland_swamp">Marĉo (kun arboj)</string>
     <string name="poi_wetland_saltern">Salejo</string>
     <string name="poi_wetland_tidalflat">Vado</string>
     <string name="poi_wetland_saltmarsh">Salmarĉo</string>
@@ -1648,7 +1648,7 @@
     <string name="poi_beach_sand">sabla</string>
     <string name="poi_beach_shingle">ŝtoneta</string>
     <string name="poi_beach_rocky">ŝtona</string>
-    <string name="poi_bench_yes">jes</string>
+    <string name="poi_bench_yes">jes;benko</string>
     <string name="poi_bench_no">Sen benko</string>
     <string name="poi_bin_yes">Kun rubujo</string>
     <string name="poi_bin_no">Sen rubujo</string>
@@ -2471,8 +2471,8 @@
     <string name="poi_crossing_barrier_full">Bariero: plen-longa</string>
     <string name="poi_crossing_barrier_half">Bariero: duon-longa</string>
     <string name="poi_crossing_barrier_double_half">Bariero: du duonoj</string>
-    <string name="poi_crossing_bell_yes">Sonorilo</string>
-    <string name="poi_crossing_bell_no">Sen sonorilo</string>
+    <string name="poi_crossing_bell_yes">Sona signalo</string>
+    <string name="poi_crossing_bell_no">Sona signalo: ne</string>
     <string name="poi_crossing_light_yes">Trafiklumoj</string>
     <string name="poi_crossing_light_no">Sen trafiklumoj</string>
     <string name="poi_crossing_on_demand_yes">Pasado nur laŭpete</string>
@@ -2879,10 +2879,10 @@
     <string name="poi_cuisine_fried_food">frititaj manĝaĵoj</string>
     <string name="poi_cuisine_savory_pancakes">akraj patkukoj</string>
     <string name="poi_shower_filter_yes">jes</string>
-    <string name="poi_takeaway_filter_yes">jes</string>
+    <string name="poi_takeaway_filter_yes">jes;forportebla manĝaĵo</string>
     <string name="poi_diet_lactose_free_filter_yes">sen-laktoza</string>
-    <string name="poi_outdoor_seating_filter_yes">jes</string>
-    <string name="poi_delivery_filter_yes">jes</string>
+    <string name="poi_outdoor_seating_filter_yes">jes;seĝoj ekstere;seghoj ekstere;eksteraj seĝoj</string>
+    <string name="poi_delivery_filter_yes">jes;liverado</string>
     <string name="poi_diet_vegetarian_filter_yes">senvianda (vegetara)</string>
     <string name="poi_diet_vegan_filter_yes">senbestaĵa (vegana)</string>
     <string name="poi_diet_gluten_free_filter_yes">sen-glutena</string>
@@ -4222,4 +4222,5 @@
     <string name="poi_computer_repair_no">Riparo de komputiloj: ne</string>
     <string name="poi_computer_parts_yes">jes</string>
     <string name="poi_computer_parts_no">Komputilaj partoj: ne</string>
+    <string name="poi_post_office_type">Speco de poŝtoficejo</string>
 </resources>
