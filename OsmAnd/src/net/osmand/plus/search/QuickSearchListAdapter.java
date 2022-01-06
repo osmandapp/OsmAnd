@@ -443,6 +443,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			view = getLinearLayout(convertView, R.layout.search_download_map_list_item);
 			IndexItem indexItem = (IndexItem) searchResult.relatedObject;
 			if (indexItem.isDownloaded()) {
+				// remove item after downloading
 				remove(listItem);
 			} else {
 				bindIndexItem(view, indexItem, activity, isNightMode());
