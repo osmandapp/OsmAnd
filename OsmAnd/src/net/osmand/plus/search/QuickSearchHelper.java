@@ -22,6 +22,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
 import net.osmand.plus.download.DownloadResources;
@@ -583,7 +584,12 @@ public class QuickSearchHelper implements ResourceListener {
 		public boolean search(SearchPhrase phrase,
 		                      SearchResultMatcher resultMatcher) {
 			DownloadResources indexes = app.getDownloadThread().getIndexes();
-			processGroup(indexes, phrase, resultMatcher);
+			DownloadIndexesThread thread = app.getDownloadThread();
+			if (!indexes.isDownloadedFromInternet && app.getSettings().isInternetConnectionAvailable()) {
+				app.runInUIThread(thread::runReloadIndexFilesSilent);
+			} else {
+				processGroup(indexes, phrase, resultMatcher);
+			}
 			return true;
 		}
 
