@@ -28,7 +28,7 @@
     <string name="confirm_interrupt_download">Скасувати завантаження\?</string>
     <string name="first_time_msg">Дякуємо за користування OsmAnd. Завантажуйте регіональні дані для користування в автономному режимі за допомогою пункту меню \'Налаштування\' → \'Керування мапами\' для перегляду мап, пошуку адрес, POI, громадського транспорту тощо.</string>
     <string name="basemap_was_selected_to_download">Основна мапа, необхідна для забезпечення основних можливостей, перебуває у черзі на завантаження.</string>
-    <string name="select_index_file_to_download">Нічого не знайдено, але ви можете створити його самостійно (див. https://osmand.net).</string>
+    <string name="select_index_file_to_download">Нічого не знайдено, але ви можете створити мапу самостійно (див. https://osmand.net).</string>
     <string name="local_indexes_cat_tile">Онлайн та кешовані растрові мапи</string>
     <string name="local_indexes_cat_map">Стандартні мапи (векторні)</string>
     <string name="index_settings_descr">Завантаження, перегляд подробиць та керування локальними мапами.</string>
@@ -58,7 +58,7 @@
     <string name="send_files_to_osm">Надіслати GPX файли до OSM\?</string>
     <string name="gpx_visibility_txt">Видимість</string>
     <string name="gpx_tags_txt">Теґи</string>
-    <string name="validate_gpx_upload_name_pwd">Для надсилання GPX-файлів вкажіть облікові дані OSM.</string>
+    <string name="validate_gpx_upload_name_pwd">Для надсилання GPX файлів вкажіть облікові дані OSM.</string>
     <string name="default_buttons_support">Підтримка</string>
     <string name="support_new_features">Підтримати розробку нових функцій</string>
     <string name="show_ruler_level">Показувати масштаб</string>
