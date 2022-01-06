@@ -5,6 +5,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -49,6 +50,7 @@ import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
 import net.osmand.search.core.SearchPhrase;
+import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -602,11 +604,11 @@ public class QuickSearchHelper implements ResourceListener {
 			if (region != null) {
 				String searchText = region.getRegionSearchText();
 				if (searchText != null) {
-					name = searchText.toLowerCase();
+					name = searchText;
 				}
 			}
 			if (name == null) {
-				name = group.getName(app).toLowerCase();
+				name = group.getName(app);
 			}
 
 			if (group.getType().isScreen() && group.getParentGroup() != null
@@ -652,7 +654,11 @@ public class QuickSearchHelper implements ResourceListener {
 			if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
 				return true;
 			}
-			return phrase.getFullNameStringMatcher().matches(text);
+			NameStringMatcher matcher = new NameStringMatcher(
+					phrase.getFullSearchPhrase(),
+					StringMatcherMode.CHECK_EQUALS_FROM_SPACE
+			);
+			return matcher.matches(text);
 		}
 
 		@Override
