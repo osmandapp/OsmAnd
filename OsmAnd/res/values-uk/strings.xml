@@ -131,8 +131,8 @@
     <string name="live_monitoring_interval_descr">Вкажіть інтервал надсилання даних.</string>
     <string name="live_monitoring_interval">Інтервал надсилання даних</string>
     <string name="live_monitoring_url_descr">Вкажіть вебадресу з такими параметрами: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
-    <string name="live_monitoring_url">Вебадреса для онлайн-моніторингу</string>
-    <string name="gpx_monitoring_disabled_warn">Записувати треки використовуючи GPX-віджет або вибравши «Записування подорожі» в Налаштуваннях.</string>
+    <string name="live_monitoring_url">Вебадреса для онлайн моніторингу</string>
+    <string name="gpx_monitoring_disabled_warn">Записувати треки використовуючи GPX віджет або вибравши «Запис треку» в Налаштуваннях.</string>
     <string name="show_current_gpx_title">Показувати пройдений шлях</string>
     <string name="free_version_message">%1$s мап для завантаження або оновлення.</string>
     <string name="free_version_title">Безкоштовна версія</string>
@@ -448,7 +448,7 @@
     <string name="process_navigation_service">Сервіс навігації OsmAnd</string>
     <string name="network_provider">Мережа</string>
     <string name="gps_provider">GPS</string>
-    <string name="int_seconds">секунд(и)</string>
+    <string name="int_seconds">сек</string>
     <string name="int_min">хв.</string>
     <string name="background_service_int_descr">Виберіть інтервал увімкнення фонової служби:</string>
     <string name="background_service_int">Інтервал вмикання GPS</string>
@@ -590,8 +590,8 @@
     <string name="shared_string_settings">Налаштування</string>
     <string name="save_current_track_descr">Зберегти поточний трек як GPX-файл.</string>
     <string name="save_current_track">Зберегти поточний трек</string>
-    <string name="save_track_interval">Інтервал збереження під час навігації</string>
-    <string name="save_track_interval_descr">Вказати інтервал збереження точок треку під час навігації</string>
+    <string name="save_track_interval">Інтервал між точками під час навігації</string>
+    <string name="save_track_interval_descr">Оберіть з якою частотою записувати точки треку під час навігації</string>
     <string name="save_track_to_gpx_descrp">Під час навігації треки автоматично зберігатимуться до теки з треками в форматі GPX.</string>
     <string name="save_track_to_gpx">Автоматично записувати трек під час навігації</string>
     <string name="update_tile">Оновити мапу</string>
@@ -1298,7 +1298,7 @@
 \n
 \nЗаписаними треками можна поділитись з вашими друзями або іншими учасниками спільноти OSM. Атлети можуть використовувати записані треки для аналізу власних тренувань. Базові можливості аналізу треків наявні безпосередньо в OsmAnd, наприклад: час проходження кола, середня швидкість тощо, звісно, записані треки, також можна проаналізувати за допомогою сторонніх інструментів.</string>
     <string name="save_track_to_gpx_globally_descr">Загальний запис розташування до файлу GPX можна увімкнути або вимкнути кнопкою запису GPX на екрані з мапою.</string>
-    <string name="save_track_interval_globally">Інтервал записування</string>
+    <string name="save_track_interval_globally">Інтервал запису</string>
     <string name="rendering_attr_publicTransportMode_name">Маршрути автобусів, тролейбусів та маршруток</string>
     <string name="record_plugin_name">Запис подорожі</string>
     <string name="int_hour">г</string>
@@ -1311,7 +1311,7 @@
     <string name="speak_favorites">Закладки поруч</string>
     <string name="speak_poi">Точки інтересу поруч</string>
     <string name="confirm_every_run">Завжди питати</string>
-    <string name="save_global_track_interval">Загальний інтервал запису треку</string>
+    <string name="save_global_track_interval">Загальний інтервал між точками</string>
     <string name="home_button">Дім</string>
     <string name="map_update">Наявні оновлення для %1$s мап</string>
     <string name="search_for">Шукати</string>
@@ -1420,7 +1420,7 @@
     <string name="save_track_to_gpx_globally_headline">Запис треку за вимогою</string>
     <string name="enable_proxy_title">Увімкнути HTTP проксі-сервер</string>
     <string name="enable_proxy_descr">Налаштування HTTP проксі-сервера для усіх мережевих запитів.</string>
-    <string name="proxy_host_title">Адреса проксі-серверу</string>
+    <string name="proxy_host_title">Адреса проксі-сервера</string>
     <string name="proxy_host_descr">Вкажіть назву хосту Вашого проксі-сервера (наприклад, 127.0.0.1).</string>
     <string name="proxy_port_title">Порт проксі-сервера</string>
     <string name="proxy_port_descr">Вкажіть номер порту Вашого проксі-сервера (наприклад, 8118).</string>
@@ -1586,7 +1586,7 @@
     <string name="archive_wikipedia_data">У Вас є старі несумісні дані з Вікіпедії. Заархівувати їх?</string>
     <string name="download_wikipedia_files">Завантажити додаткові дані з Вікіпедії (%1$s Мб)\?</string>
     <string name="gps_network_not_enabled">Служба визначення розташування вимкнена. Увімкнути\?</string>
-    <string name="disable_recording_once_app_killed">Зупиняти запис після виходу з застосунку</string>
+    <string name="disable_recording_once_app_killed">Зупиняти запис після виходу із застосунку</string>
     <string name="shared_string_import2osmand">Імпортувати до OsmAnd</string>
     <string name="read_full_article">Читати повну статтю (онлайн)</string>
     <string name="local_indexes_cat_wiki">Вікіпедія</string>
@@ -1676,7 +1676,7 @@
     <string name="min_mile">хв/м</string>
     <string name="min_km">хв/км</string>
     <string name="m_s">м/с</string>
-    <string name="shared_string_trip_recording">Записування подорожі</string>
+    <string name="shared_string_trip_recording">Запис треку</string>
     <string name="shared_string_navigation">Навігація</string>
     <string name="osmand_running_in_background">Працює у фоновому режимі</string>
     <string name="favourites_edit_dialog_title">Відомості про закладку</string>
@@ -1982,7 +1982,7 @@
     <string name="gpx_add_track">Додати ще…</string>
     <string name="shared_string_appearance">Зовнішній вигляд</string>
     <string name="trip_rec_notification_settings">Ввімкнути швидкий запуск запису</string>
-    <string name="trip_rec_notification_settings_desc">Показ системного сповіщення, яке дозволяє почати записування подорожі.</string>
+    <string name="trip_rec_notification_settings_desc">Показ системного сповіщення, яке дозволяє почати запис треку.</string>
     <string name="shared_string_notifications">Повідомлення</string>
     <string name="shared_string_continue">Продовжити</string>
     <string name="shared_string_pause">Призупинити</string>
@@ -2323,10 +2323,10 @@
 \n• Антарктида: *
 \nБільшість країн по всьому світу доступні для завантаження!
 \nОтримайте надійний навігатор у своїй країні — будь то Україна, Польща, Франція, Німеччина, Мексика, Великобританія, Іспанія, Нідерланди, США, Бразилія чи будь-яка інша.</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) — картографічний навігаційний застосунок з доступом до вільних, всесвітніх та високоякісних даних OSM.
-\nНасолоджуйтесь голосовою та візуальною навігацією, переглядом точок інтересу (англ. POI), створенням та керуванням GPX-треками, використовуючи показ ізоліній та даних про висоту (за допомогою зовнішнього втулка), вибором між режимами автомобіліста, велосипедиста й пішохода, редагуванням OSM та ще багато чим іншим.
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) — картографічний навігаційний застосунок з доступом до вільних та високоякісних даних OSM зі всього світу.
+\nНасолоджуйтесь голосовою та візуальною навігацією, переглядом точок інтересу (англ. POI), створенням та керуванням GPX треками, використовуючи показ ізоліній та даних про висоти, вибором між режимами для авто, вело та пішохідної навігації, редагуванням OSM та ще багато чим іншим.
 \n
-\nOsmAnd+ є платною версією програми. Купуючи її, Ви підтримуєте проєкт, фінансуєте розробку нових можливостей та отримуєте останні оновлення.
+\nOsmAnd+ є платною версією застосунку. Купуючи її, ви підтримуєте проєкт, фінансуєте розробку нових можливостей та отримуєте останні оновлення.
 \n
 \nДеякі з основних можливостей:</string>
     <string name="osmand_plus_extended_description_part2">Навігація
@@ -2368,9 +2368,9 @@
 \n• Показ ізоліній та рельєфу (за допомогою додаткового втулка)</string>
     <string name="osmand_plus_extended_description_part7">Беріть участь в покращені OSM
 \n• Повідомляйте про помилки в даних
-\n• Надсилайте GPX-треки в OSM безпосередньо із застосунку
+\n• Надсилайте GPX треки в OSM безпосередньо із застосунку
 \n• Додавайте POI (точки інтересу) та надсилайте їх в OSM (зараз, або пізніше, якщо офлайн)
-\n• Записування подорожі також у фоновому режимі (коли екран пристрою вимкнений)
+\n• Запис треку також можливий у фоновому режимі (коли екран пристрою вимкнений)
 \nOsmAnd — вільне й відкрите програмне забезпечення, яке активно розвивається. Кожен може допомогти, звітуючи про помилки, поліпшуючи переклад чи розробляючи нові функції. Також проєкт покладається на фінансові внески для оплати розробки та тестування нових функцій.
 \n</string>
     <string name="osmand_plus_extended_description_part8">Приблизне охоплення мап та якість:
@@ -2432,8 +2432,8 @@
     <string name="quick_action_show_navigation_finish_dialog">Показати діалог завершення навігації</string>
     <string name="quick_action_start_stop_navigation">Почати/зупинити навігацію</string>
     <string name="quick_action_start_stop_navigation_descr">Натисніть цю кнопку, щоб почати або закінчити навігацію.</string>
-    <string name="live_monitoring_max_interval_to_send">Час буферизації для онлайн-моніторингу</string>
-    <string name="live_monitoring_max_interval_to_send_desrc">Задає час буферизації для збереження місць для надсилання за відсутності з\'єднання з мережею</string>
+    <string name="live_monitoring_max_interval_to_send">Час буферизації для онлайн моніторингу</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Вкажіть час буферизації для збереження локацій для їх подальшого надсилання за відсутності з\'єднання з мережею</string>
     <string name="mappilary_no_internet_desc">Ви повинні бути підключені до Інтернету для перегляду світлин від Mapillary.</string>
     <string name="retry">Повторити</string>
     <string name="measurement_tool_action_bar">Перегляньте мапу і додайте точки</string>
@@ -2669,7 +2669,7 @@
     <string name="topo_render_descr">Для походів, пішого та вело туризму. Добре читається на вулиці. Контрастні дороги та природні об’єкти, різні типи маршрутів, розширені варіанти ізоліній, більше подробиць. Регулювання цілісності поверхні відрізняє якість дороги. Нічного режиму немає.</string>
     <string name="mapnik_render_descr">Старий типовий стиль \"Mapnik\". Подібні кольори до \'Mapnik\'.</string>
     <string name="touring_view_render_descr">Туристичний стиль з високим контрастом та високою деталізацією. Включає всі типові параметри стилю OsmAnd, показуючи при цьому докладні відомості, зокрема дороги, стежки та інші шляхи для подорожі. \"Туристичний атлас\" чітко показує різницю між типами доріг. Підходить для денного, нічного та використання на природі.</string>
-    <string name="default_render_descr">Стиль загального призначення. Щільно забудовані міста показуються охайно. Містить ізолінії, маршрути, відомості про якість дорожнього покриття, обмеження доступу, дорожні вказівники, показ стежок за шкалою SAC, елементи водних видів спорту.</string>
+    <string name="default_render_descr">Стиль загального призначення. Щільно забудовані міста показуються охайно. Містить ізолінії, маршрути, відомості про якість дорожнього покриття, обмеження доступу, дорожні вказівники, показ стежок за шкалою SAC, елементи сплавних водних видів спорту.</string>
     <string name="open_wikipedia_link_online">Відкрити посилання Вікіпедії з мережі</string>
     <string name="open_wikipedia_link_online_description">Посилання буде відкрите в вебоглядачі.</string>
     <string name="read_wikipedia_offline_description">Передплатіть OsmAnd Live, щоб читати статті з Вікіпедії та Вікімандрів в офлайн режимі.</string>
@@ -2833,7 +2833,7 @@
     <string name="public_transport_warning_title">Навігація громадським транспортом на даний час проходить тестування, можливі помилки та неточності.</string>
     <string name="add_intermediate">Додати проміжну точку</string>
     <string name="transfers_size">%1$d пересадки</string>
-    <string name="add_start_and_end_points">Додати точку відправлення та призначення</string>
+    <string name="add_start_and_end_points">Додати пункти відправлення та призначення</string>
     <string name="route_add_start_point">Додати точку відправлення</string>
     <string name="route_descr_select_start_point">Оберіть точку відправлення</string>
     <string name="rendering_attr_surface_unpaved_name">Без покриття</string>
@@ -3009,7 +3009,7 @@
 \n• Інші виправлення помилок
 \n
 \n</string>
-    <string name="app_mode_personal_transporter">Моноколесо, Сігвей</string>
+    <string name="app_mode_personal_transporter">Моноколесо, Гіроборд</string>
     <string name="app_mode_monowheel">Моноколесо</string>
     <string name="app_mode_scooter">Самокат</string>
     <string name="precision_hdop_and_vdop">Горизонтальна точність: %1$s, вертикальна точність: %2$s</string>
@@ -3034,7 +3034,7 @@
     <string name="quick_action_need_to_add_item_to_list">Потрібно додати принаймні одну річ до списку у налаштуваннях \'Швидкі дії\'</string>
     <string name="routing_attr_piste_type_downhill_name">Альпійські та гірські лижі</string>
     <string name="routing_attr_piste_type_downhill_description">Траси для високогірних і гірських лиж та доступ до витягів.</string>
-    <string name="app_mode_offroad">Бездоріжжя</string>
+    <string name="app_mode_offroad">Всюдихід</string>
     <string name="edit_profile_setup_title">Налаштувати профіль</string>
     <string name="edit_profile_setup_subtitle">Профіль містить власні налаштування</string>
     <string name="edit_profile_setup_map_subtitle">Оберіть налаштування мапи для профілю</string>
@@ -3165,7 +3165,7 @@
     <string name="wake_time">Час очікування після пробудження</string>
     <string name="screen_alerts_descr">Попередження показуються внизу зліва під час навігації.</string>
     <string name="language_and_output">Мова та вивід</string>
-    <string name="osmand_settings_descr">Впливає на весь застосунок</string>
+    <string name="osmand_settings_descr">Впливають на весь застосунок</string>
     <string name="voice_announces_descr">Навігаційні інструкції та оголошення</string>
     <string name="logcat_buffer">Буфер logcat</string>
     <string name="plugins_settings">Налаштування втулків</string>
@@ -3203,7 +3203,7 @@
     <string name="routing_attr_width_name">Обмеження ширини</string>
     <string name="routing_attr_width_description">Задайте дозволену ширину автомобіля для прокладання маршруту.</string>
     <string name="avoid_in_routing_descr_">Уникати певних маршрутів та типів доріг</string>
-    <string name="app_mode_utv">Всюдихід</string>
+    <string name="app_mode_utv">Мотовсюдихід</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Канатна дорога</string>
     <string name="rendering_attr_piste_difficulty_connection_name">З\'єднання</string>
     <string name="shared_string_calculate">Обчислити</string>
@@ -3316,8 +3316,8 @@
     <string name="multimedia_notes_prefs_descr">Розмір зображення, якість звуку та відео</string>
     <string name="osm_editing_prefs_descr">Логін, пароль, редагування в офлайн режимі</string>
     <string name="accessibility_prefs_descr">Оберіть значок, колір та назву</string>
-    <string name="live_monitoring_descr">Дозволяє ділитися поточним розташуванням використовуючи записування подорожі.</string>
-    <string name="live_monitoring">Онлайн-трекінг</string>
+    <string name="live_monitoring_descr">Дозволяє поширювати дані про вашу поточну локацію використовуючи функції запису треків.</string>
+    <string name="live_monitoring">Онлайн моніторинг</string>
     <string name="save_track_logging_accuracy">Точність запису</string>
     <string name="tracks_view_descr">Ви можете знайти всі записи в %1$s або в теці OsmAnd за допомогою файлового провідника.</string>
     <string name="multimedia_notes_view_descr">Ваші Нотатки OSM знаходяться в %1$s.</string>
@@ -3336,18 +3336,18 @@
     <string name="search_offline_geo_error">Не вдалося обробити гео: \'%s\'.</string>
     <string name="permission_is_required">Для використання цього параметра потрібен дозвіл.</string>
     <string name="monitoring_min_speed_descr">Це низькошвидкісний відсічний фільтр, щоб не записувати точки нижче певної швидкості. Це може призвести до плавнішого вигляду записаних треків при перегляді на мапі.</string>
-    <string name="monitoring_min_speed_descr_side_effect">Побічний ефект: у вашому треці будуть відсутні всі ділянки, де не було дотримано критерію найнижчої швидкості (наприклад, коли ви штовхаєте велосипед на крутий пагорб). Також не буде відомостей про проміжки спокою, як-от перерви. Це впливає на будь-який аналіз або подальшу обробку, як, наприклад, під час спроби визначити загальну тривалість вашої поїздки, час у русі або середню швидкість.</string>
-    <string name="monitoring_min_speed_descr_recommendation">Порада: Спробуйте спочатку скористатись виявленням руху через фільтр найменшого переміщення (B), який може здійснюватись, це може дати кращі результати й ви втратите менше даних. Якщо ваші треки залишаються занадто шумними на низькій швидкості, спробуйте тут ненульові значення. Зауважте, що деякі вимірювання можуть взагалі не повідомляти про значення швидкості (деякі мережні методи) і в цьому випадку ви нічого не записуєте.</string>
-    <string name="monitoring_min_speed_descr_remark">Зауваження: швидкість &gt; 0 перевірка: Більшість наборів чіпів GPS повідомляють про значення швидкості, лише якщо алгоритм визначає, що ви перебуваєте в русі, і жоден, якщо ви цього не робите. Отже, використовуючи налаштування &gt; 0 у цьому фільтрі, в деякому сенсі використовується для виявлення руху GPS-чіпсета. Але навіть якщо не фільтровано під час запису, ми все одно використовуємо цю функцію в нашому аналізі GPX для визначення виправленої відстані, тобто значення, що показується в цьому полі, - це відстань, записана під час руху.</string>
-    <string name="monitoring_min_accuracy_descr">Записує лише значення, виміряні з найменшою точністю (у метрах/футах, як повідомляє Android до Вашого чіпсета). Точність стосується розсіювання повторних вимірювань і не пов\'язана безпосередньо з точністю, яка визначає, наскільки близькі Ваші вимірювання до Вашого справжнього положення.</string>
-    <string name="monitoring_min_accuracy_descr_side_effect">Побічний ефект: внаслідок фільтрування за точністю, значення можуть бути повністю відсутні, наприклад, під мостами, під деревами, між високих будинків, або при певних погодних умовах.</string>
-    <string name="monitoring_min_accuracy_descr_recommendation">Порада: Важко передбачити, що буде записано, а що ні, можливо, найкраще вимкнути цей фільтр.</string>
-    <string name="monitoring_min_accuracy_descr_remark">Зауваження: Якщо GPS був вимкнений безпосередньо перед записом, перша вимірювана точка може мати знижену точність, тому в нашому коді ми можемо зачекати секунду або близько того, перш ніж записати точку (або записати найкраще з 3-х послідовних точок тощо), але це ще не реалізовано.</string>
-    <string name="monitoring_min_distance_descr">Цей фільтр уникає повторюваних точок, які записуються, де фактичний рух майже не відбувається, робить краще просторовий вигляд треків, а не обробляйте їх потім.</string>
-    <string name="monitoring_min_distance_descr_side_effect">Побічний ефект: проміжки спокою не реєструються взагалі або лише по одній точці. Невеликі (справжні) рухи (наприклад, вбік, щоб позначити можливий поворот у Вашій поїздці) можуть бути відфільтровані. Ваш файл містить менше відомостей для післяобробки та має гіршу статистику, фільтруючи очевидно зайві точки під час запису, при цьому потенційно зберігаючи артефакти, спричинені слабим сигналом чи GPS-чіпсетами.</string>
-    <string name="monitoring_min_distance_descr_recommendation">Порада. Налаштування в 5 метрів може вам знадобитися, якщо вам не потрібно буде збирати подробиці тонкіші, ніж ці, і якщо Ви не хочете явно збирати дані, перебуваючи в стані спокою.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Побічний ефект: У вашому треці будуть відсутні всі ділянки, де ваша швидкість була меншою за вказану (наприклад, коли ви штовхали велосипед на крутий пагорб). Також не буде відомостей про проміжки спокою, як-от зупинки. Це впливатиме на будь-який аналіз або подальшу обробку, наприклад, під час спроби визначити загальну відстань вашої поїздки, час у русі або середню швидкість.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Порада: Спробуйте спочатку скористатись виявленням руху через фільтр Мінімальне зміщення (B), це може дати кращі результати й ви втратите менше даних. Якщо ваші треки залишаються занадто шумними на низькій швидкості, спробуйте тут ненульові значення. Зауважте, що деякі вимірювання можуть взагалі не повідомляти про значення швидкості (деякі онлайн методи), в цьому випадку запис не відбуватиметься.</string>
+    <string name="monitoring_min_speed_descr_remark">Зауваження: швидкість &gt; 0: Більшість чіпів GPS повідомляють значення швидкості, лише якщо алгоритм визначає, що ви рухаєтесь, і жоден – якщо ви цього не робите. Тому використання параметра «&gt; 0» у цьому фільтрі в певному сенсі означає використання детектору руху чіпсета GPS. Але навіть якщо дані не фільтровані під час запису, ми все одно використовуємо цю функцію в нашому аналізі даних GPX для визначення скорегованої відстані, тобто значення, що показується в цьому полі, – це відстань, коли ви перебували в русі.</string>
+    <string name="monitoring_min_accuracy_descr">Будуть записані лише точки, виміряні з мінімальною точністю (у метрах/футах, за даними з вашого пристрою, у вигляді як їх повідомляє Android). Точність — це близькість вимірювань до справжнього положення і вона не пов’язана безпосередньо з точністю, яка є розкидом повторних вимірювань.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Побічний ефект: Внаслідок фільтрування за точністю, дані можуть бути повністю відсутні, наприклад, під мостами, під деревами, між високими будинками або за певних погодних умов.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Порада: Важко передбачити, що буде записано, а що ні, можливо, краще взагалі вимкнути цей фільтр.</string>
+    <string name="monitoring_min_accuracy_descr_remark">Зауваження: Якщо GPS був вимкнений безпосередньо перед записом, точність визначення першої точки може бути низькою, тому в нашому коді ми можемо зачекати кілька секунд, перш ніж записати точку (або записати найкраще з 3-х послідовних точок тощо), але це ще не реалізовано.</string>
+    <string name="monitoring_min_distance_descr">Цей фільтр запобігає запису повторюваних точок там, де фактичний рух майже не відбувається, поліпшує вигляд треків, без потреби в їх подальшій обробці.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Побічний ефект: Проміжки спокою не реєструються взагалі або записуються лише однією точкою. Невеликі (справжні) рухи (наприклад, вбік, щоб показати можливий поворот у вашому треку) можуть бути відкинуті. Ваш файл міститиме менше відомостей для подальшої обробки та матиме гірші дані, через відкидання вочевидь зайвих точок під час запису, при цьому потенційно зберігаючи артефакти, спричинені слабим сигналом чи особливостями роботи чипів GPS.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Порада: Можливо вам підійде значення 5 метрів, якщо вам не потрібні більш докладні дані, ніж ці, та якщо ви не хочете явно записувати дані, перебуваючи в стані спокою (не рухаючись).</string>
     <string name="live_monitoring_time_buffer">Буфер часу</string>
-    <string name="live_monitoring_tracking_interval">Проміжок відстеження</string>
+    <string name="live_monitoring_tracking_interval">Інтервал надсилання даних</string>
     <string name="live_monitoring_adress">Вебадреса</string>
     <string name="live_monitoring_adress_descr">Вкажіть вебадресу з такими параметрами: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Сповіщення</string>
@@ -3685,9 +3685,9 @@
     <string name="search_download_wikipedia_maps">Завантажити мапи Вікіпедії</string>
     <string name="plugin_wikipedia_description">Отримайте інформацію про визначні місця з Вікіпедії, кишенькового офлайн-довідника зі статтями про цікаві місця та напрямки.</string>
     <string name="app_mode_motor_scooter">Моторолер</string>
-    <string name="app_mode_enduro_motorcycle">Спортивний мотоцикл</string>
+    <string name="app_mode_enduro_motorcycle">Мотоцикл Ендуро</string>
     <string name="app_mode_wheelchair">Інвалідне крісло</string>
-    <string name="app_mode_wheelchair_forward">Інвалідне крісло попереду</string>
+    <string name="app_mode_wheelchair_forward">Інвалідне крісло (форвард)</string>
     <string name="app_mode_go_cart">Картинг</string>
     <string name="osm_edit_closed_note">Закрита Нотатка OSM</string>
     <string name="shared_string_custom">Власний</string>
@@ -3735,7 +3735,7 @@
     <string name="empty_state_my_tracks_desc">Імпортувати чи записати файли треків</string>
     <string name="context_menu_item_add_waypoint">Додати маршрутну точку</string>
     <string name="quick_action_add_gpx">Додати маршрутну точку треку</string>
-    <string name="map_widget_monitoring">Записування подорожі</string>
+    <string name="map_widget_monitoring">Запис треку</string>
     <string name="marker_save_as_track">Зберегти як файл треку</string>
     <string name="follow_track">Навігація за треком</string>
     <string name="follow_track_descr">Виберіть файл треку для перегляду</string>
@@ -3753,7 +3753,7 @@
     <string name="plan_route_trim_after">Обрізати після</string>
     <string name="plan_route_change_route_type_before">Змінити вид маршруту перед</string>
     <string name="plan_route_change_route_type_after">Змінити вид маршруту після</string>
-    <string name="save_global_track_interval_descr">Зазначте інтервал для загального записування подорожі (увімкнено через віджет «Записування подорожі» на мапі).</string>
+    <string name="save_global_track_interval_descr">Оберіть загальну частоту записування точок треку (вмикається через віджет «Запис треку» на мапі).</string>
     <string name="system_default_theme">Типова системна</string>
     <string name="all_next_segments">Усі наступні відрізки</string>
     <string name="previous_segment">Попередній відрізок</string>
@@ -3762,12 +3762,12 @@
     <string name="all_next_segments_will_be_recalc">Усі попередні відрізки буде обчислено за допомогою вибраного профілю.</string>
     <string name="all_previous_segments_will_be_recalc">Усі попередні відрізки буде обраховано за допомогою вибраного профілю.</string>
     <string name="number_of_gpx_files_selected_pattern">Вибрано %s файлів треків</string>
-    <string name="gpx_monitoring_stop">Зупинити записування подорожі</string>
-    <string name="gpx_monitoring_start">Відновити записування подорожі</string>
+    <string name="gpx_monitoring_stop">Зупинити запис треку</string>
+    <string name="gpx_monitoring_start">Відновити запис треку</string>
     <string name="open_saved_track">Відкрити збережений трек</string>
     <string name="shared_string_is_saved">збережено</string>
     <string name="one_point_error">Додайте принаймні дві точки.</string>
-    <string name="disable_recording_once_app_killed_descrp">Запис треку буде зупинено після припинення роботи застосунку через меню з переліком нещодавно запущених застосунків. (Індикатор, що повідомляє про роботу OsmAnd у тлі зникне з панелі сповіщень Android)</string>
+    <string name="disable_recording_once_app_killed_descrp">Запис треку буде зупинено після примусового припинення роботи застосунку (у нещодавно запущених застосунках). (Індикатор, що повідомляє про роботу OsmAnd у фоні зникне з панелі сповіщень Android).</string>
     <string name="simplified_track">Спрощений трек</string>
     <string name="simplified_track_description">Буде збережено лише лінію маршруту, а проміжні точки буде вилучено.</string>
     <string name="shared_string_file_name">Назва файлу</string>
@@ -4040,8 +4040,8 @@
     <string name="trip_recording_logging_interval_info">Інтервал запису встановлює проміжок часу, впродовж якого OsmAnd запитуватиме дані про поточне розташування.</string>
     <string name="trip_recording_save_and_continue">Зберегти й продовжити</string>
     <string name="lost_data_warning">Усі незбережені дані буде втрачено.</string>
-    <string name="show_start_dialog">Показати діалогове вікно запуску</string>
-    <string name="trip_recording_show_start_dialog_setting">Якщо вимкнено, запис почнеться відразу після торкання до віджета або пункту меню, пропускаючи діалогове вікно підтвердження.</string>
+    <string name="show_start_dialog">Показувати вікно запуску</string>
+    <string name="trip_recording_show_start_dialog_setting">Якщо вимкнено, запис почнеться одразу після торкання віджета або пункту меню, без появи додаткового вікна підтвердження.</string>
     <string name="customize_route_line">Налаштувати лінію маршруту</string>
     <string name="shared_string_route_line">Лінія маршруту</string>
     <string name="specify_color_for_map_mode">Вкажіть колір для режиму мапи %1$s.</string>
@@ -4055,7 +4055,7 @@
 \n
 \n• Додано можливість зміни зовнішнього вигляду лінії навігації маршрутом
 \n
-\n• Оновлено діалогове вікно «Записування подорожі»
+\n• Оновлено діалог «Запису треку»
 \n
 \n</string>
     <string name="no_purchases">У вас немає покупок</string>
