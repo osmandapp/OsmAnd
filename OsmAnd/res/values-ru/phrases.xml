@@ -4219,4 +4219,5 @@
     <string name="poi_climbing_grade_uiaa_min">Самый легкий маршрут (класс UIAA)</string>
     <string name="poi_callable">Можно дозвониться</string>
     <string name="poi_faculty_filter">Факультет</string>
+    <string name="poi_access_general">Общедоступно</string>
 </resources>
