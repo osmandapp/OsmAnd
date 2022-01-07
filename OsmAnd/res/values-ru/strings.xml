@@ -1533,7 +1533,7 @@
     <string name="arrival_distance_factor_late">Позднее</string>
     <string name="arrival_distance_factor_at_last">На последних метрах</string>
     <string name="rendering_attr_alpineHiking_name">Пеший горный туризм по шкале (SAC)</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Туристические маршруты</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Пешеходные маршруты</string>
     <string name="rendering_attr_coloredBuildings_name">Цветовая маркировка зданий по типу</string>
     <string name="rendering_attr_publicTransportMode_name">Маршруты автобусов, троллейбусов и маршрутных такси</string>
     <string name="rendering_value_browse_map_name">Обзор карты</string>
@@ -1851,7 +1851,7 @@
     <string name="lang_bpy">Бишнуприя</string>
     <string name="lang_nv">Навахо</string>
     <string name="lang_ga">Ирландский</string>
-    <string name="lang_la">Латынь</string>
+    <string name="lang_la">Латинский</string>
     <string name="lang_ku">Курдский</string>
     <string name="lang_ta">Тамильский</string>
     <string name="lang_ml">Малаялам</string>
@@ -2684,7 +2684,7 @@
     <string name="use_two_digits_longitude">Использовать двузначную долготу</string>
     <string name="shared_string_travel_guides">Путеводитель</string>
     <string name="waypoints_removed_from_map_markers">Путевые точки удалены из маркеров карты</string>
-    <string name="nothing_found_in_radius">Ничего нет в радиусе:</string>
+    <string name="nothing_found_in_radius">Ничего нет в радиусе</string>
     <string name="select_waypoints_category_description">Добавьте все путевые точки трека или выберите отдельные категории.</string>
     <string name="shared_string_total">Всего</string>
     <string name="shared_string_result">Результат</string>
@@ -3704,7 +3704,7 @@
     <string name="gpx_split_interval_descr">Выберите интервал, через который будут отображаться метки с расстоянием или временем на треке.</string>
     <string name="shared_string_custom">Своё значение</string>
     <string name="add_hidden_group_info">Добавленная точка не будет видна на карте, так как выбранная группа скрыта, найти её можно в «%s».</string>
-    <string name="track_show_start_finish_icons">Показать значки старта и финиша</string>
+    <string name="track_show_start_finish_icons">Значки старта и финиша</string>
     <string name="select_track_width">Толщина линии</string>
     <string name="gpx_direction_arrows">Стрелки направления</string>
     <string name="track_coloring_solid">Сплошной</string>
@@ -4087,7 +4087,7 @@
     <string name="output">Вывод</string>
     <string name="exit_number">Номера съездов</string>
     <string name="srtm_unit_format">Единицы измерения на контурных линиях</string>
-    <string name="srtm_download_single_help_message">Пожалуйста, выберите необходимый формат. Для изменения формата потребуется повторно загрузить файл.</string>
+    <string name="srtm_download_single_help_message">Выберите необходимый вариант. Для изменения формата потребуется повторно загрузить файл.</string>
     <string name="shared_string_feet">футы</string>
     <string name="srtm_download_list_help_message">OsmAnd предоставляет данные изолиний в метрах и футах. Для изменения формата потребуется повторно загрузить файл.</string>
     <string name="route_line_use_gradient_coloring">Линия маршрута окрашена в зависимости от угла подъёма.</string>
