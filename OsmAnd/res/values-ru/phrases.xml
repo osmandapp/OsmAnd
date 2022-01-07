@@ -839,14 +839,14 @@
     <string name="poi_operator">Оператор</string>
     <string name="poi_brand">Торговая марка;Бренд</string>
     <string name="poi_fee">Оплата</string>
-    <string name="poi_fee_yes">Да</string>
+    <string name="poi_fee_yes">Да;Платно</string>
     <string name="poi_fee_no">Нет</string>
     <string name="poi_drinking_water_yes">Да;Питьевая вода</string>
     <string name="poi_drinking_water_no">Нет</string>
     <string name="poi_supervised_yes">Контролируемый объект</string>
     <string name="poi_supervised_no">Неконтролируемый объект</string>
     <string name="poi_seasonal">Сезонность</string>
-    <string name="poi_seasonal_yes">Да</string>
+    <string name="poi_seasonal_yes">Да;В зависимости от сезона</string>
     <string name="poi_seasonal_no">Нет</string>
     <string name="poi_seasonal_dry_season">Сухой сезон</string>
     <string name="poi_seasonal_wet_season">Сезон дождей</string>
@@ -1018,7 +1018,7 @@
     <string name="poi_fireplace_yes">Есть;Камин</string>
     <string name="poi_fireplace_no">Без места для разведения огня</string>
     <string name="poi_covered">Укрытие</string>
-    <string name="poi_covered_yes">Есть</string>
+    <string name="poi_covered_yes">Да;С укрытием</string>
     <string name="poi_covered_no">Без укрытия</string>
     <string name="poi_smoking">Курение</string>
     <string name="poi_smoking_no">Запрещено</string>
@@ -1352,10 +1352,10 @@
     <string name="poi_diet_lactose_free_no">Безлактозные продукты не предлагаются</string>
     <string name="poi_diet_pescetarian_yes">Пескетарианское питание</string>
     <string name="poi_drive_in">Обслуживание на парковке (Drive-in)</string>
-    <string name="poi_drive_in_yes">Да</string>
+    <string name="poi_drive_in_yes">Да; Заезд</string>
     <string name="poi_drive_in_no">Приобрести продукты не покидая авто на парковке (drive-in): нет</string>
     <string name="poi_drive_through">Обслуживание проездом (Drive-through)</string>
-    <string name="poi_drive_through_yes">Да</string>
+    <string name="poi_drive_through_yes">Да; Проезд</string>
     <string name="poi_drive_through_no">Приобрести продукты не покидая авто в окошке (drive-through): нет</string>
     <string name="poi_brewery_additional">Название пивоварни</string>
     <string name="poi_microbrewery">Собственная пивоварня</string>
@@ -1395,11 +1395,11 @@
     <string name="poi_self_service_yes">Да;Самообслуживание</string>
     <string name="poi_self_service_no">Нет;Нет самообслуживания</string>
     <string name="poi_automated">Автоматизация</string>
-    <string name="poi_automated_yes">Есть</string>
+    <string name="poi_automated_yes">Да; Автоматическое</string>
     <string name="poi_automated_no">Без автоматизации</string>
     <string name="poi_full_service_yes">Полный комплекс услуг</string>
     <string name="poi_brushless">Бесконтактная</string>
-    <string name="poi_brushless_yes">Да</string>
+    <string name="poi_brushless_yes">Да;Бесконтактно</string>
     <string name="poi_brushless_no">Контактная</string>
     <string name="poi_car_wash_no">Нет;Автомойка: нет</string>
     <string name="poi_public_bath">Общественная баня</string>
@@ -1967,17 +1967,17 @@
     <string name="poi_openfire_yes">Разведение открытого огня разрешено</string>
     <string name="poi_openfire_no">Разведение открытого огня запрещено</string>
     <string name="poi_backcountry">Место для лагеря на природе без удобств</string>
-    <string name="poi_backcountry_yes">Да</string>
+    <string name="poi_backcountry_yes">Да; Бэккантри</string>
     <string name="poi_backcountry_no">Нет</string>
     <string name="poi_scout_camp">Лагерь скаутов</string>
-    <string name="poi_scout_yes">Да</string>
+    <string name="poi_scout_yes">Да; Скауты</string>
     <string name="poi_scout_no">Лагерь скаутов: нет</string>
     <string name="poi_group_only_yes">Доступно только для групп: да</string>
     <string name="poi_group_only_no">Доступно только для групп: нет</string>
     <string name="poi_washing_machine">Стиральная машина</string>
     <string name="poi_washing_machine_yes">Есть;Стиральная машина</string>
     <string name="poi_washing_machine_no">Стиральная машина: отсутствует</string>
-    <string name="poi_shower_filter_yes">Есть</string>
+    <string name="poi_shower_filter_yes">Есть;Душевой фильтр</string>
     <string name="poi_shower_yes">Душ</string>
     <string name="poi_shower_no">Душ: отсутствует</string>
     <string name="poi_shower_hot">Душ: горячий</string>
@@ -1992,7 +1992,7 @@
     <string name="poi_sanitary_dump_station_yes">Ассенизационная сливная станция: есть</string>
     <string name="poi_sanitary_dump_station_no">Ассенизационная сливная станция: отсутствует</string>
     <string name="poi_power_supply">Источник питания</string>
-    <string name="poi_power_supply_yes">Есть</string>
+    <string name="poi_power_supply_yes">Да;Электроснабжение</string>
     <string name="poi_power_supply_no">Источник питания: отсутствует</string>
     <string name="poi_power_supply_cee_17_blue">Источник питания (разъём): CEE 17 синий</string>
     <string name="poi_power_supply_cee_7_4">Источник питания (разъём): CEE 7/4</string>
@@ -2776,7 +2776,7 @@
     <string name="poi_aquaculture_fish">Разведение рыбы</string>
     <string name="poi_aquaculture_mussels">Разведение моллюсков</string>
     <string name="poi_min_age">Минимальный возраст</string>
-    <string name="poi_organic_yes">Есть</string>
+    <string name="poi_organic_yes">Да;Органическое</string>
     <string name="poi_organic_no">Отсутствуют</string>
     <string name="poi_organic_only">Исключительно; только органические</string>
     <string name="poi_traffic_mirror">Дорожное зеркало</string>
@@ -3696,7 +3696,7 @@
     <string name="poi_motorhome_designated">Выделенный</string>
     <string name="poi_motorhome_yes">Да;Автодом</string>
     <string name="poi_caravan_designated">Выделенный</string>
-    <string name="poi_bus_designated">Выделенный</string>
+    <string name="poi_bus_designated">Выделенный;Выделенный для автобусов</string>
     <string name="poi_disabled_no">Доступ для инвалидов: нет</string>
     <string name="poi_agricultural_no">Доступ для сельскохозяйственных машин: нет</string>
     <string name="poi_agricultural_yes">Доступ для сельскохозяйственных машин: да</string>
@@ -4217,4 +4217,6 @@
     <string name="poi_handwashing_hand_disinfection_no">Дезинфекция рук: нет</string>
     <string name="poi_hot_water_no">Горячая вода: нет</string>
     <string name="poi_climbing_grade_uiaa_min">Самый легкий маршрут (класс UIAA)</string>
+    <string name="poi_callable">Можно дозвониться</string>
+    <string name="poi_faculty_filter">Факультет</string>
 </resources>
