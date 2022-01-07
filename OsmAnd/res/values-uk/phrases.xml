@@ -1425,7 +1425,7 @@
     <string name="poi_board_type_astronomy">Астрономія</string>
     <string name="poi_fireplace_yes">Так;Камін</string>
     <string name="poi_fireplace_no">Без місця для розведення вогню</string>
-    <string name="poi_covered_yes">Так</string>
+    <string name="poi_covered_yes">Так;З укриттям</string>
     <string name="poi_historic_civilization_ancient_greek">Цивілізація: давньогрецька</string>
     <string name="poi_horse_no">Доступ для коней заборонений</string>
     <string name="poi_covered_no">Без укриття</string>
@@ -2363,7 +2363,7 @@
     <string name="poi_shoes_sport">Спортивна</string>
     <string name="poi_firepit">Місце для розведення вогню</string>
     <string name="poi_counselling_type_family_yes">Консультація сімейна: так</string>
-    <string name="poi_organic_yes">Так</string>
+    <string name="poi_organic_yes">Так;Органічні</string>
     <string name="poi_cuisine_bubble_tea">Чай з кульками</string>
     <string name="poi_payment_pro100_no">Картки ПРО100 не приймаються</string>
     <string name="poi_wetland_bog">Торф\'яне болото</string>
@@ -2406,7 +2406,7 @@
     <string name="poi_service_bicycle_repair_yes">Ремонт;Велоремонт</string>
     <string name="poi_tents_yes">Дозволена</string>
     <string name="poi_nuclear_explosion_crater_diameter">Діаметр кратера</string>
-    <string name="poi_organic_only">Виключно</string>
+    <string name="poi_organic_only">Виключно;Виключно органічні</string>
     <string name="poi_cuisine_thai">Тайська</string>
     <string name="poi_payment_yandexmoney_yes">Яндекс.Гроші</string>
     <string name="poi_memorial_koshinto">Кошінто</string>
@@ -2434,7 +2434,7 @@
     <string name="poi_diet_vegetarian_filter_yes">Для вегетаріанців</string>
     <string name="poi_memorial_stolperstein">Камінь перепони</string>
     <string name="poi_service_bicycle_pump_yes">Підкачування шин;Підкачування велошин</string>
-    <string name="poi_backcountry_yes">Так</string>
+    <string name="poi_backcountry_yes">Так;Віддалені райони</string>
     <string name="poi_amenity_vacuum_cleaner">Пилосос</string>
     <string name="poi_diplomatic_honorary_consulate">Почесне консульство</string>
     <string name="poi_cuisine_korean">Корейська</string>
@@ -2448,7 +2448,7 @@
     <string name="poi_diet_vegetarian_only">Лише вегетаріанське харчування</string>
     <string name="poi_memorial_column">Колона</string>
     <string name="poi_service_bicycle_diy_yes">Інструменти для самостійного ремонту;Інструменти для самостійного велоремонту</string>
-    <string name="poi_scout_yes">Так</string>
+    <string name="poi_scout_yes">Так;Скаути</string>
     <string name="poi_water_tap">Водопровідний кран</string>
     <string name="poi_diplomatic_delegation">Делегація</string>
     <string name="poi_cuisine_bavarian">Баварська</string>
@@ -2988,7 +2988,7 @@
     <string name="poi_route_railway_ref">Маршрут залізниці</string>
     <string name="poi_microwave_oven_yes">Мікрохвильова піч: присутня</string>
     <string name="poi_nuclear_explosion_height_of_burst">Висота вибуху (від поверхні)</string>
-    <string name="poi_home_visit_yes">Так</string>
+    <string name="poi_home_visit_yes">Так;Виїзд додому</string>
     <string name="poi_cuisine_fish_and_chips">Риба і чіпси</string>
     <string name="poi_cuisine_german">Німецька</string>
     <string name="poi_coworking_space">Коворкінг</string>
@@ -2998,7 +2998,7 @@
     <string name="poi_industrial_port">Вид: порт</string>
     <string name="poi_microwave_oven_no">Мікрохвильова піч: відсутня</string>
     <string name="poi_free_flying_site_orientation_n">Орієнтація майданчика для вільного польоту: північ (N)</string>
-    <string name="poi_home_visit_no">Виїзд на дім: ні</string>
+    <string name="poi_home_visit_no">Виїзд додому: ні</string>
     <string name="poi_cuisine_seafood">Морепродукти</string>
     <string name="poi_cuisine_indian">Індійська</string>
     <string name="poi_fast_food_cafeteria">Так;Кафетерій</string>
@@ -3522,7 +3522,7 @@
     <string name="poi_books_children">Дитячі</string>
     <string name="poi_denotation_natural_monument">Пам\'ятник природи</string>
     <string name="poi_denotation_landmark">Орієнтир</string>
-    <string name="poi_park_ride_yes">Так</string>
+    <string name="poi_park_ride_yes">Так;Їзда парком</string>
     <string name="poi_park_ride_train">Потяг</string>
     <string name="poi_park_ride_bus">Автобус</string>
     <string name="poi_park_ride_metro">Метро</string>
@@ -3617,7 +3617,7 @@
     <string name="poi_bath_type">Вид</string>
     <string name="poi_bath_open_air">На відкритому повітрі</string>
     <string name="poi_vehicle_forestry">Доступ на автомобілі: лісове господарство</string>
-    <string name="poi_motorcar_yes">Так</string>
+    <string name="poi_motorcar_yes">Так;Автомобіль</string>
     <string name="poi_motorcar_private">Доступ на автомобілі: приватний</string>
     <string name="poi_motorcar_no">Доступ на автомобілі: немає</string>
     <string name="poi_motorcar_destination">Доступ на автомобілі: пункт призначення</string>
@@ -3729,7 +3729,7 @@
     <string name="poi_bath_type_river">Річка</string>
     <string name="poi_bath_type_lake">Озеро</string>
     <string name="poi_bath_type_foot_bath">Лазня для ніг</string>
-    <string name="poi_bath_open_air_yes">Так</string>
+    <string name="poi_bath_open_air_yes">Так;Ванна на відкритому повітрі</string>
     <string name="poi_bath_open_air_no">Ні</string>
     <string name="poi_monastery_type_monastics">Вид монастиря: чернечий</string>
     <string name="poi_monastery_type_convent">Вид монастиря: жіночий</string>
@@ -3789,7 +3789,7 @@
     <string name="poi_seamark_water_level_above_mwl">Рівень води: вище середнього</string>
     <string name="poi_seamark_water_level_below_mwl">Рівень води: нижче середнього</string>
     <string name="poi_seamark_obstruction">Завада</string>
-    <string name="poi_drinking_water_refill_yes">Так</string>
+    <string name="poi_drinking_water_refill_yes">Так;Заправка питною водою;Заправка</string>
     <string name="poi_drinking_water_refill_no">Поповнення питної води: ні</string>
     <string name="poi_drinking_water_refill_network">Мережа поповнення питної води</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">Під тиском</string>
@@ -3798,8 +3798,8 @@
     <string name="poi_fire_hydrant_pressure_filter">Тиск</string>
     <string name="poi_pump_status_missing_beam">Стан насосу: відсутній важіль</string>
     <string name="poi_water_source_groundwater">Підземні води</string>
-    <string name="poi_traffic_signals_arrow_yes">Увімкнено</string>
-    <string name="poi_traffic_signals_vibration_yes">Увімкнено</string>
+    <string name="poi_traffic_signals_arrow_yes">Так;Стрілка сигналів світлофора</string>
+    <string name="poi_traffic_signals_vibration_yes">Так;Вібрація сигналів світлофора</string>
     <string name="poi_traffic_signals_vibration_no">Вібрація: вимкнено</string>
     <string name="poi_traffic_signals_arrow">Стрілка</string>
     <string name="poi_traffic_signals_vibration">Вібрація</string>
@@ -3808,10 +3808,10 @@
     <string name="poi_give_box">Подарункова коробка</string>
     <string name="poi_elevator">Ліфт</string>
     <string name="poi_traffic_signals_arrow_no">Стрілка: ні</string>
-    <string name="poi_departures_board_timetable">Розклад</string>
-    <string name="poi_departures_board_realtime">Реальний час</string>
-    <string name="poi_departures_board_delay">Затримка</string>
-    <string name="poi_departures_board_yes">Так</string>
+    <string name="poi_departures_board_timetable">Розклад;Дошка відправлення</string>
+    <string name="poi_departures_board_realtime">Реальний час;Дошка відправлення</string>
+    <string name="poi_departures_board_delay">Затримка;Дошка відправлення</string>
+    <string name="poi_departures_board_yes">Так;Дошка відправлення</string>
     <string name="poi_departures_board_no">Дошка відправлень: немає</string>
     <string name="poi_departures_board">Дошка відправлень</string>
     <string name="poi_drinking_water_refill">Поповнення питної води</string>
@@ -4096,7 +4096,7 @@
     <string name="poi_beauty_salon_pedicure">Педикюр</string>
     <string name="poi_massage_chiropractic">Мануальна терапія</string>
     <string name="poi_massage_shiatsu">Шіацу</string>
-    <string name="poi_agrarian_yes">Так</string>
+    <string name="poi_agrarian_yes">Так;Аграрний</string>
     <string name="poi_agrarian_pesticide">Пестицид</string>
     <string name="poi_agrarian_fertilizer">Добрива</string>
     <string name="poi_agrarian_seed">Насіння</string>
@@ -4136,7 +4136,7 @@
     <string name="poi_generator_type_lithium_ion">Тип генератора: Літій-іонний</string>
     <string name="poi_generator_type_nickel_cadmium">Тип генератора: Нікель-кадмієвий</string>
     <string name="poi_generator_type_molten_salt">Тип генератора: Розплавно-сольовий</string>
-    <string name="poi_service_fleurop_yes">Так</string>
+    <string name="poi_service_fleurop_yes">Так;Fleurop</string>
     <string name="poi_furniture_living_room">Вітальня;Меблі для вітальні</string>
     <string name="poi_furniture_kitchen">Кухня;Кухонні меблі</string>
     <string name="poi_furniture_yes">Так;Меблі</string>
@@ -4160,7 +4160,7 @@
     <string name="poi_generator_type_gas_turbine">Тип генератора: Газотурбінний</string>
     <string name="poi_generator_type_lead_acid">Тип генератора: Свинцево-кислотний</string>
     <string name="poi_generator_type_redox_flow">Тип генератора: Окисно-відновний потік</string>
-    <string name="poi_mattress_yes">Так</string>
+    <string name="poi_mattress_yes">Так;Матрац</string>
     <string name="poi_furniture_office">Офіс;Офісні меблі</string>
     <string name="poi_generator_type_bioreactor">Тип генератора: Біореактор</string>
     <string name="poi_mattress_no">Ні</string>
@@ -4267,4 +4267,15 @@
     <string name="poi_handwashing_soap_yes">Мило: є</string>
     <string name="poi_handwashing_soap_no">Мило: немає</string>
     <string name="poi_toilets_handwashing_no">Рукомийник: немає</string>
+    <string name="poi_toilets_disposal_dry_toilet">Очищення туалетів: сухий туалет</string>
+    <string name="poi_toilets_position_seated">Положення в туалеті: сидячи</string>
+    <string name="poi_toilets_position_urinal">Положення в туалеті: пісуар</string>
+    <string name="poi_toilets_position_squat">Положення в туалеті: навпочіпки</string>
+    <string name="poi_post_office_bureau">Офіс</string>
+    <string name="poi_post_office_post_partner">Поштовий партнер</string>
+    <string name="poi_post_office_service_provider">Постачальник послуг поштового відділення</string>
+    <string name="poi_post_office_service_brand">Бренд поштового відділення</string>
+    <string name="poi_post_office_collection_times">Час прийняття відправлень</string>
+    <string name="poi_post_office_opening_hours">Розклад роботи відділень</string>
+    <string name="poi_post_office_post_annex">Поштове відділення</string>
 </resources>
