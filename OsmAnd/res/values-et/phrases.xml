@@ -992,7 +992,7 @@
     <string name="poi_ski_resort">Suusakeskus</string>
     <string name="poi_cabin">Kajut</string>
     <string name="poi_lean_to">Nõjatumiskoht</string>
-    <string name="poi_hunting_lodge">Jahimaja</string>
+    <string name="poi_hunting_lodge">Jahimaja; varjualune</string>
     <string name="poi_picnic_table">Piknikulaud</string>
     <string name="poi_hanami">Hanami</string>
     <string name="poi_wine_cellar">Veinikelder</string>
@@ -1111,7 +1111,7 @@
     <string name="poi_access_customers">Kliendi ligipääs</string>
     <string name="poi_access_delivery">Kohaletoimetamise ligipääs</string>
     <string name="poi_access_agricultural">Põllumajanduslik ligipääs</string>
-    <string name="poi_fee_yes">Jah</string>
+    <string name="poi_fee_yes">Jah;tasuline</string>
     <string name="poi_fee_no">Ei</string>
     <string name="poi_email">E-post</string>
     <string name="poi_fax">Faks</string>
@@ -1121,11 +1121,11 @@
     <string name="poi_animal_shelter_dog_cat">Koerad, kassid</string>
     <string name="poi_animal_shelter_bird">Linnud</string>
     <string name="poi_shower">Dušš</string>
-    <string name="poi_drinking_water_yes">Jah</string>
+    <string name="poi_drinking_water_yes">Jah;joogivesi</string>
     <string name="poi_drinking_water_no">Ei</string>
     <string name="poi_supervised_yes">Valvega</string>
     <string name="poi_supervised_no">Ilma valveta</string>
-    <string name="poi_seasonal_yes">Jah</string>
+    <string name="poi_seasonal_yes">Jah;hooajaline</string>
     <string name="poi_seasonal_no">Ei</string>
     <string name="poi_seasonal_dry_season">Kuiv hooaeg</string>
     <string name="poi_seasonal_wet_season">Märg hooaeg</string>
@@ -1333,9 +1333,9 @@
     <string name="poi_board_type_public_transport">Ühistransport</string>
     <string name="poi_board_type_technology">Tehnoloogia</string>
     <string name="poi_board_type_astronomy">Astronoomia</string>
-    <string name="poi_fireplace_yes">Jah</string>
+    <string name="poi_fireplace_yes">Jah;kamin</string>
     <string name="poi_fireplace_no">Kamin puudub</string>
-    <string name="poi_covered_yes">Jah</string>
+    <string name="poi_covered_yes">Jah;kaetud</string>
     <string name="poi_covered_no">Katmata</string>
     <string name="poi_smoking_no">Keelatud</string>
     <string name="poi_smoking_outside">Ainult väljas</string>
@@ -1345,7 +1345,7 @@
     <string name="poi_smoking_dedicated">Pühendatud suitsetajatele</string>
     <string name="poi_toll_yes">Teemaks</string>
     <string name="poi_toll_no">Teemaks puudub</string>
-    <string name="poi_tactile_paving_yes">Jah</string>
+    <string name="poi_tactile_paving_yes">Jah;kombatav sillutis</string>
     <string name="poi_tactile_paving_no">Ilma kombatava sillutiseta</string>
     <string name="poi_traffic_signals_sound_yes">Jah</string>
     <string name="poi_traffic_signals_sound_no">Heli: ei</string>
@@ -2372,7 +2372,7 @@
     <string name="poi_wiki_lang_mn">Mongoolia viki</string>
     <string name="poi_wiki_lang_nap">Napoli viki</string>
     <string name="poi_fireworks">Ilutulestiku pood</string>
-    <string name="poi_pump_yes">Jah</string>
+    <string name="poi_pump_yes">Jah;pump</string>
     <string name="poi_aerialway_length">Pikkus</string>
     <string name="poi_internet_access_type_yes">Internetiühendus olemas</string>
     <string name="poi_health_specialty_general_yes">Perearst</string>
@@ -2869,7 +2869,7 @@
     <string name="poi_service_bicycle_charging_yes">Laadimine: jah</string>
     <string name="poi_service_bicycle_charging_no">Laadimine: ei</string>
     <string name="poi_wheelchair_accessibility">Ligipääs ratastooliga</string>
-    <string name="poi_wheelchair_yes">Jah</string>
+    <string name="poi_wheelchair_yes">Jah;ratastool</string>
     <string name="poi_xmas">Jõulud</string>
     <string name="poi_xmas_event">Jõuluüritus</string>
     <string name="poi_xmas_market">Jõuluturg</string>
@@ -4222,4 +4222,20 @@
     <string name="poi_computer_parts">Arvutiosad</string>
     <string name="poi_diet_vegan_limited">Vegan: piiratult</string>
     <string name="poi_computer_sales_used">Kasutatud</string>
+    <string name="poi_museum_railway">Raudtee</string>
+    <string name="poi_museum_gallery">Galerii</string>
+    <string name="poi_museum_transport">Transpordivahendid</string>
+    <string name="poi_museum_art">Kunst</string>
+    <string name="poi_museum_aviation">Lennundus</string>
+    <string name="poi_museum_technology">Tehnoloogia</string>
+    <string name="poi_museum_agriculture">Põllumajandus</string>
+    <string name="poi_museum_history">Ajalugu</string>
+    <string name="poi_museum_nature">Loodus</string>
+    <string name="poi_museum_paleontology">Paleontoloogia</string>
+    <string name="poi_museum_type">Muuseumi teema</string>
+    <string name="poi_post_office_type">Tüüp</string>
+    <string name="poi_museum_aerospace">Lennundus ja kosmonautika</string>
+    <string name="poi_museum_maritime">Merendus</string>
+    <string name="poi_museum_science">Teadus</string>
+    <string name="poi_museum_apis_mellifera">Mesilased</string>
 </resources>
