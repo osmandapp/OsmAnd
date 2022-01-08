@@ -200,12 +200,12 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
         int rightMargin = fabMargin != null ? fabMargin.first : defRightMargin;
         int bottomMargin = fabMargin != null ? fabMargin.second : defBottomMargin;
         // check limits
-        if (rightMargin < 0) {
+        if (rightMargin <= 0) {
             rightMargin = defRightMargin;
         } else if (rightMargin > maxRightMargin) {
             rightMargin = maxRightMargin;
         }
-        if (bottomMargin < 0) {
+        if (bottomMargin <= 0) {
             bottomMargin = defBottomMargin;
         } else if (bottomMargin > maxBottomMargin) {
             bottomMargin = maxBottomMargin;
