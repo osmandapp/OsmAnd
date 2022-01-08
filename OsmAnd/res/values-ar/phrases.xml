@@ -1605,7 +1605,7 @@
     <string name="poi_childcare">رعاية أطفال</string>
     <string name="poi_denotation_natural_monument">معلم طبيعي</string>
     <string name="poi_denotation_landmark">علامة</string>
-    <string name="poi_park_ride_yes">نعم ، مركبات حديقة التسلية</string>
+    <string name="poi_park_ride_yes">نعم ، جولات المنتزه المسلية</string>
     <string name="poi_park_ride_train">قطار</string>
     <string name="poi_park_ride_bus">باص</string>
     <string name="poi_park_ride_metro">مترو انفاق</string>
@@ -4168,7 +4168,7 @@
     <string name="poi_generator_type_redox_flow">نوع المولد: تدفق الأكسدة والاختزال</string>
     <string name="poi_generator_type_molten_salt">نوع المولد: ملح منصهر</string>
     <string name="poi_service_fleurop_yes">نعم ؛ فلوروب</string>
-    <string name="poi_mattress_yes">نعم</string>
+    <string name="poi_mattress_yes">نعم ؛ مرتبة فراش</string>
     <string name="poi_mattress_no">لا</string>
     <string name="poi_furniture_used">مستعمل ؛ أثاث مستعمل</string>
     <string name="poi_furniture_office">مكتب ، أثاث مكتب</string>
