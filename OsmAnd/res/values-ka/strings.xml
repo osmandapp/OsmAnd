@@ -2908,4 +2908,7 @@
     <string name="files_with_route_restrictions">გზებზე აკრძალვების არსებობის შემცველი ფაილები</string>
     <string name="rendering_attr_seabedDetail_name">ზღვის ფსკერის დეტალები</string>
     <string name="shared_string_open_street_map">OSM</string>
+    <string name="shared_string_move_up">გადაადგილება ↑</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">სალაშქრო გზები</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">ქსელი</string>
 </resources>
