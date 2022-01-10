@@ -4256,9 +4256,9 @@
     <string name="poi_handwashing_creme_no">Crema: no</string>
     <string name="poi_hot_water_yes">Agua caliente: sí</string>
     <string name="poi_hot_water_no">Agua caliente: no</string>
-    <string name="poi_post_office_post_annex">Puesto anexo</string>
+    <string name="poi_post_office_post_annex">Anexo postal</string>
     <string name="poi_post_office_bureau">Oficina</string>
-    <string name="poi_post_office_post_partner">Socio de publicación</string>
+    <string name="poi_post_office_post_partner">Puesto asociado</string>
     <string name="poi_post_office_service_provider">Proveedor de servicios de la oficina postal</string>
     <string name="poi_post_office_collection_times">Horarios de recolección en la oficina de correos</string>
     <string name="poi_post_office_opening_hours">Horarios de atención de la oficina de correos</string>
