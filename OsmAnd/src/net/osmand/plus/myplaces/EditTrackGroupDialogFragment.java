@@ -158,6 +158,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 						if (activity != null) {
 							FragmentManager fragmentManager = activity.getSupportFragmentManager();
 							TrackWayPointsBottomSheet.showInstance(fragmentManager, EditTrackGroupDialogFragment.this, group, true);
+							dismiss();
 						}
 					}
 				})
@@ -227,6 +228,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 						if (activity != null) {
 							FragmentManager fragmentManager = activity.getSupportFragmentManager();
 							TrackWayPointsBottomSheet.showInstance(fragmentManager, EditTrackGroupDialogFragment.this, group, false);
+							dismiss();
 						}
 					}
 				})
