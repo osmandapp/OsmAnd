@@ -568,7 +568,6 @@
     <string name="save_current_track">მიმდინარე დევნის დამახსოვრება</string>
     <string name="save_track_interval">ნავიგაციისას ჟურნალირების ინტერვალი</string>
     <string name="save_track_interval_descr">აირჩიეთ პოზიცირების ინტერვალი დევნისათვის</string>
-    <string name="save_track_to_gpx_descrp">დევნები ჩაიწერება დევნის დასტაში, დალაგდება დღეების მიხედვით.</string>
     <string name="save_track_to_gpx">დევნის GPX-ში ჟურნალირება</string>
     <string name="update_tile">რუკის განახლება</string>
     <string name="reload_tile">ხელახალი ჩატვირთვა</string>

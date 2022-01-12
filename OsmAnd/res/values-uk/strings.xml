@@ -592,7 +592,6 @@
     <string name="save_current_track">Зберегти поточний трек</string>
     <string name="save_track_interval">Інтервал збереження під час навігації</string>
     <string name="save_track_interval_descr">Вказати інтервал збереження точок треку під час навігації</string>
-    <string name="save_track_to_gpx_descrp">Під час навігації треки автоматично зберігатимуться до теки з треками в форматі GPX.</string>
     <string name="save_track_to_gpx">Автоматично записувати трек під час навігації</string>
     <string name="update_tile">Оновити мапу</string>
     <string name="reload_tile">Оновити частину мапи</string>

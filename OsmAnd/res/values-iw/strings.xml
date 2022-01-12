@@ -724,7 +724,6 @@
     <string name="save_current_track">שמירת המסלול הנוכחי</string>
     <string name="save_track_interval">מרווח בין השמירות ליומן במהלך ניווט</string>
     <string name="save_track_interval_descr">נא לציין את ההפרש בין הצבת המיקום בטוויית דרכים</string>
-    <string name="save_track_to_gpx_descrp">מסלול GPX יישמר אוטומטית לתיקיית המסלולים במהלך הניווט.</string>
     <string name="save_track_to_gpx">הקלטת המסלול אוטומטית במהלך הניווט</string>
     <string name="update_tile">עדכון המפה</string>
     <string name="reload_tile">רעניון האריח</string>

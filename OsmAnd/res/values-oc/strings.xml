@@ -1083,7 +1083,6 @@
     <string name="turn_screen_on_navigation_instructions">Indicacions de navigacion</string>
     <string name="shared_string_resources">Ressorsas</string>
     <string name="quick_action_start_stop_navigation_descr">Boton per començar ò arrestar la navigacion.</string>
-    <string name="save_track_to_gpx_descrp">Dau temps de la navigacion, la traça GPX se sauvarà automaticament dins lo dorsier de traças.</string>
     <string name="show_zoom_buttons_navigation_descr">Mostrar lei botons de zoom dau temps de la navigacion.</string>
     <string name="delay_navigation_start">Començar la navigacion pas a pas automaticament</string>
     <string name="show_zoom_buttons_navigation">Mostrar lei botons de zoom</string>
