@@ -23,8 +23,8 @@
 	<string name="osmo">OsMo</string>
     <string name="tag_poi_amenity">amenity</string>
     <string name="tag_poi_name">name</string>
-    <string name="hint_tag">Tag</string>
-    <string name="hint_value">Value</string>
+    <string name="hint_tag">tag</string>
+    <string name="hint_value">value</string>
     <!-- DEVELOPMENT -->
     <string name="osm_live_default_price">€1,49</string>
     <string name="osm_live_monthly_price">€1,99</string>
