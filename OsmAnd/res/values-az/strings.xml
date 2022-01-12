@@ -1801,12 +1801,12 @@
     <string name="shared_string_current">Hazırkı</string>
     <string name="add_location_as_first_point_descr">Mükəmməl marşrut planlaşdırmaq üçün mövqeyinizi çıxış nöqtəsi olaraq əlavə edin.</string>
     <string name="quick_action_add_marker_descr">Ekranın mərkəzində xəritə işarəsi əlavə etmək üçün düymə.</string>
-    <string name="quick_action_add_gpx_descr">Ekranın mərkəzinə GPX yol nöqtəsi əlavə etmək üçün düymə.</string>
-    <string name="quick_action_take_audio_note_descr">Ekranın ortasına səsli qeyd əlavə etmək üçün düymə.</string>
-    <string name="quick_action_take_video_note_descr">Ekranın ortasına video qeydi əlavə etmək üçün düymə.</string>
-    <string name="quick_action_take_photo_note_descr">Ekranın ortasında şəkil qeydi əlavə etmək üçün düymə.</string>
-    <string name="quick_action_add_osm_bug_descr">Ekranın ortasına OSM qeydi əlavə etmək üçün düymə.</string>
-    <string name="quick_action_add_poi_descr">Ekranın mərkəzinə POI əlavə etmək üçün düymə.</string>
+    <string name="quick_action_add_gpx_descr">Ekranın mərkəzində GPX yol nöqtəsi əlavə etmək üçün düymə.</string>
+    <string name="quick_action_take_audio_note_descr">Ekranın mərkəzində səsli qeyd əlavə etmək üçün düymə.</string>
+    <string name="quick_action_take_video_note_descr">Ekranın mərkəzində video qeydi əlavə etmək üçün düymə.</string>
+    <string name="quick_action_take_photo_note_descr">Ekranın mərkəzində şəkil qeydi əlavə etmək üçün düymə.</string>
+    <string name="quick_action_add_osm_bug_descr">Ekranın mərkəzində OSM qeydi əlavə etmək üçün düymə.</string>
+    <string name="quick_action_add_poi_descr">Ekranın mərkəzində POI əlavə etmək üçün düymə.</string>
     <string name="quick_action_showhide_favorites_descr">Xəritədə favorit nöqtələri göstərmək və ya gizlətmək üçün düymə.</string>
     <string name="quick_action_showhide_poi_descr">Xəritədə POI-ləri göstərmək və ya gizlətmək üçün düymə.</string>
     <string name="audionotes_location_not_defined">Məkana qeyd əlavə etmək üçün “Məkanı istifadə et...” düyməsinə toxunun.</string>
@@ -1953,7 +1953,7 @@
     <string name="measurement_tool_snap_to_road_descr">OsmAnd seçilmiş profil üçün nöqtələri marşrut ilə birləşdirəcək.</string>
     <string name="save_track_min_speed_descr">Filtr: Bu sürətdən aşağıda nöqtələri qeyd etmə.</string>
     <string name="access_smart_autoannounce_descr">Yalnız hədəf nöqtəyə istiqamət dəyişilən zaman bildir.</string>
-    <string name="plugin_mapillary_descr">Hər kəs üçün küçə səviyyəli şəkillər. Yerləri kəşf edin, əməkdaşlıq edin, dünyanı çəkin.</string>
+    <string name="plugin_mapillary_descr">Hər kəs üçün küçə səviyyəsində şəkillər. Yerləri kəşf edin, əməkdaşlıq edin, dünyanı çəkin.</string>
     <string name="auto_split_recording_descr">6 dəqiqə fasilədən sonra yeni seqment, 2 saat fasilədən sonra yeni iz, ya da tarix dəyişdiyində uzun fasilədən sonra yeni fayl başlat.</string>
     <string name="save_track_min_distance">Qeydiyyatın minimum yerdəyişməsi</string>
     <string name="save_track_min_distance_descr">Filtr: Yenisini daxil etmək üçün bir nöqtədən minimum məsafəni təyin edin.</string>
@@ -3209,4 +3209,31 @@
     <string name="rendering_value_category_name">Kateqoriya</string>
     <string name="overwrite_profile_q">“%1$s” artıq mövcuddur. Üzərinə yazılsın\?</string>
     <string name="osmand_parking_warning_text">Avtomobilinizi götürmək üçün bildiriş təqviminizə əlavə edildi, orada düzəliş edilə və ya silinə bilər.</string>
+    <string name="quick_action_add_parking">Parkinq yeri əlavə et</string>
+    <string name="quick_action_add_parking_descr">Ekranın mərkəzində parkinq məkanı əlavə etmək üçün düymə.</string>
+    <string name="poi_filter_parking">Parkinq</string>
+    <string name="map_widget_parking">Parkinq</string>
+    <string name="mapillary_widget_descr">Mapillary-ə sürətli töhfələr verməyə imkan verir.</string>
+    <string name="mapillary_descr">Hər kəs üçün küçə səviyyəsində onlayn şəkillər. Yerləri kəşf edin, əməkdaşlıq edin, dünyanı çəkin.</string>
+    <string name="osmand_parking_plugin_name">Parkinq mövqeyi</string>
+    <string name="parking_place">Parkinq yeri</string>
+    <string name="osmand_parking_delete_confirm">Parkinq məkanı işarəsi silinsin\?</string>
+    <string name="osmand_parking_delete">Parkinq işarəsini sil</string>
+    <string name="osmand_parking_choose_type">Parkinq növünü seçin</string>
+    <string name="osmand_parking_time_limit">Vaxt-limitli parkinq</string>
+    <string name="osmand_parking_time_no_limit">Vaxt-limitsiz parkinq</string>
+    <string name="osmand_parking_position_description">Park edilmiş nəqliyyat vasitənizin yeri. %1$s</string>
+    <string name="osmand_parking_position_name">Parkinq yeri</string>
+    <string name="context_menu_item_delete_parking_point">Parkinq işarəsini sil</string>
+    <string name="context_menu_item_add_parking_point">Parkinq məkanı olaraq işarələ</string>
+    <string name="add_photos_descr">OsmAnd bir neçə mənbədən şəkilləri göstərir:
+\nOpenPlaceReviews - POI şəkilləri;
+\nMapillary - küçə səviyyəsində şəkillər;
+\nİnternet / Vikimedia - OpenStreetMap məlumatlarına görə POI şəkilləri.</string>
+    <string name="street_level_imagery">Küçə səviyyəsində şəkillər</string>
+    <string name="parking_positions">Parkinq mövqeləri</string>
+    <string name="osmand_parking_time_limit_title">Parkinq vaxtı limitini təyin edin</string>
+    <string name="mapillary_action_descr">Küçə səviyyəsində baxışınızı Mapillary ilə paylaşın.</string>
+    <string name="parking_options">Parkinq seçimləri</string>
+    <string name="find_parking">Parkinq tap</string>
 </resources>

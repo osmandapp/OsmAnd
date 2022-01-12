@@ -4457,7 +4457,7 @@
     <string name="shared_string_hide_slope">הסתרת שיפוע</string>
     <string name="shared_string_show_slope">הצגת שיפוע</string>
     <string name="use_routing_fallback_description">להשתמש בניווט בלתי מקוון כשאין אפשרות להציע ניווט מקוון.</string>
-    <string name="use_routing_fallback">להשתמש בנסיגה של הניווט</string>
+    <string name="use_routing_fallback">נסיגה של ניווט בלתי מקוון</string>
     <string name="gps_filter_smoothing_desc">הגדרת סף המרחק בין נקודות.
 \nנקודות מסלול שאינן במרחק שכזה מהנקודה הגלויה האחרונה תוסתרנה.
 \nנא לשים לב שסף גבוה יכול לפשט את צורת המסלול יתר על המידה.</string>

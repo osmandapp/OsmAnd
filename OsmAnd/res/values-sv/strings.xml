@@ -3753,7 +3753,7 @@
 \n
 \nNågra kartor har kanske inte laddats.</string>
     <string name="walking_route_osmc_description">Färglägg rutter enligt deras individuella lokala färg (om de finns på OpenStreetMap) och typ (internationell, regional, lokal).</string>
-    <string name="grey_color_undefined">Grå färg används för områden utan data.</string>
+    <string name="grey_color_undefined">Delar utan uppgifter är grå.</string>
     <string name="purchases_restored">Inköp återställda</string>
     <string name="osm_live_payment_subscription_management_amz">Betalningen dras från ditt Amazon-konto när du bekräftar köpet.
 \n

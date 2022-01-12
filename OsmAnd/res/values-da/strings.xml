@@ -4519,4 +4519,5 @@
     <string name="rendering_value_all_name">Alle</string>
     <string name="rendering_value_omit_name">Undlad</string>
     <string name="rendering_attr_seabedDetail_name">Havbundsdetaljer</string>
+    <string name="rendering_attr_seabedDetail_description">Yderligere tekstinformation om havbunds overfladebeskaffenhed, kombinerede overfladetyper og klasser af havgræs</string>
 </resources>
