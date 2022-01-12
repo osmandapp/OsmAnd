@@ -22,6 +22,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
 import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 import static net.osmand.plus.ContextMenuItem.INVALID_ID;
+import static net.osmand.plus.dialogs.DetailsBottomSheet.DEPTH_CONTOURS;
 import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.RENDERING_CATEGORY_OSM_ASSISTANT;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_DENSITY_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_ATTR;
@@ -83,6 +84,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Locale;
 import java.util.Map;
 
@@ -608,6 +610,16 @@ public class ConfigureMapMenu {
 			}
 		}
 		if (prefs.size() > 0) {
+			ListIterator <RenderingRuleProperty> ruleIterator = ps.listIterator();
+			ListIterator <CommonPreference<Boolean>> prefIterator = prefs.listIterator();
+			while (ruleIterator.hasNext() && prefIterator.hasNext()){
+				if (ruleIterator.next().getAttrName().equals(DEPTH_CONTOURS)){
+					ruleIterator.remove();
+				}
+				if (prefIterator.next().getId().contains(DEPTH_CONTOURS)){
+					prefIterator.remove();
+				}
+			}
 			final ItemClickListener clickListener = new ContextMenuAdapter.ItemClickListener() {
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> a, int itemId, int pos,

@@ -158,7 +158,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 							})
 							.create();
 					items.add(item[0]);
-				} else if (!STREET_LIGHTING_NIGHT.equals(property.getAttrName()) && !DEPTH_CONTOURS.equals(property.getAttrName())) {
+				} else if (!STREET_LIGHTING_NIGHT.equals(property.getAttrName())) {
 					final BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
 					item[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 							.setCompoundButtonColor(selectedProfileColor)

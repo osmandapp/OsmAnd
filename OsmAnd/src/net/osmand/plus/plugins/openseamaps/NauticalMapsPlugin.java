@@ -6,7 +6,6 @@ import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +20,7 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.views.OsmandMapTileView;
 
 import java.util.Collections;
 import java.util.List;
@@ -33,7 +33,7 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 
 	public NauticalMapsPlugin(OsmandApplication app) {
 		super(app);
-		SHOW_DEPTH_CONTOURS = registerBooleanPreference(app, "show_depth_contours", true);
+		SHOW_DEPTH_CONTOURS = registerBooleanPreference(app, "nrenderer_depthContours", false);
 	}
 
 	@Override
@@ -95,13 +95,13 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
 		ItemClickListener listener = (adptr, itemId, pos, isChecked, viewCoordinates) -> {
 			if (itemId == R.string.index_item_depth_contours_osmand_ext) {
-				SHOW_DEPTH_CONTOURS.set(!SHOW_DEPTH_CONTOURS.get());
-				Log.i("tag",String.valueOf(SHOW_DEPTH_CONTOURS.get()));
+				boolean checked = !SHOW_DEPTH_CONTOURS.get();
+				SHOW_DEPTH_CONTOURS.set(checked);
 				adptr.getItem(pos).setColor(app, SHOW_DEPTH_CONTOURS.get() ?
 						R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 				adptr.getItem(pos).setDescription(app.getString(SHOW_DEPTH_CONTOURS.get() ? R.string.shared_string_enabled : R.string.shared_string_disabled));
 				adptr.notifyDataSetChanged();
-				NauticalMapsPlugin.this.updateLayers(mapActivity, mapActivity);
+				updateLayers(mapActivity, mapActivity);
 			}
 			return true;
 		};
@@ -120,6 +120,7 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 
 	@Override
 	public void updateLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
-		super.updateLayers(context, mapActivity);
+		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+		mapView.refreshMap(true);
 	}
 }
