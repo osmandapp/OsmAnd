@@ -82,8 +82,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private AlarmWidget alarmControl;
 	private List<RulerWidget> rulerWidgets;
 	private MapWidgetRegistry mapInfoControls;
-
-	private DrawSettings drawSettings;
 	private TopTextView streetNameView;
 	private TopToolbarView topToolbarView;
 	private TopCoordinatesView topCoordinatesView;
@@ -134,7 +132,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 			alarmControl = null;
 			rulerWidgets = null;
 
-			drawSettings = null;
 			streetNameView = null;
 			topToolbarView = null;
 			topCoordinatesView = null;
@@ -213,8 +210,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	private void registerAllControls(@NonNull MapActivity map) {
-		boolean nightMode = view.getApplication().getDaynightHelper().isNightMode();
-		drawSettings = new DrawSettings(nightMode, false);
 		rulerWidgets = new ArrayList<>();
 		RouteInfoWidgetsFactory ric = new RouteInfoWidgetsFactory();
 		MapInfoWidgetsFactory mic = new MapInfoWidgetsFactory();
@@ -323,7 +318,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			rulerWidget.setVisibility(false);
 
 			TextState ts = calculateTextState();
-			boolean nightMode = drawSettings != null && drawSettings.isNightMode();
+			boolean nightMode = getApplication().getDaynightHelper().isNightModeForMapControls();
 			rulerWidget.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, (int) (2 * view.getDensity()));
 
 			rulerWidgets.add(rulerWidget);
@@ -365,7 +360,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			return;
 		}
 		boolean transparent = view.getSettings().TRANSPARENT_MAP_THEME.get();
-		boolean nightMode = drawSettings != null && drawSettings.isNightMode();
+		boolean nightMode = getApplication().getDaynightHelper().isNightModeForMapControls();
 		boolean following = routeLayer.getHelper().isFollowingMode();
 		int calcThemeId = (transparent ? 4 : 0) | (nightMode ? 2 : 0) | (following ? 1 : 0);
 		if (themeId != calcThemeId) {
@@ -422,7 +417,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 	private TextState calculateTextState() {
 		boolean transparent = view.getSettings().TRANSPARENT_MAP_THEME.get();
-		boolean nightMode = drawSettings != null && drawSettings.isNightMode();
+		boolean nightMode = getApplication().getDaynightHelper().isNightModeForMapControls();
 		boolean following = routeLayer.getHelper().isFollowingMode();
 		TextState ts = new TextState();
 		ts.textBold = following;
@@ -461,7 +456,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
-		this.drawSettings = drawSettings;
 		if (getMapActivity() != null) {
 			// update data on draw
 			updateColorShadowsOfText();
