@@ -4782,4 +4782,8 @@
 	<string name="poi_post_office_collection_times">Post office collection times</string>
 	<string name="poi_post_office_opening_hours">Post office opening hours</string>
 
+	<string name="poi_books_adults">Adults</string>
+	<string name="poi_books_academic">Academic</string>
+	<string name="poi_collector">Collector</string>
+
 </resources>
