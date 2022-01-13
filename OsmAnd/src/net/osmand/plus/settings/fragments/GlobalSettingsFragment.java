@@ -16,6 +16,7 @@ import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.dialogs.ConfigureMapUtils;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment.OnSendAnalyticsPrefsUpdate;
@@ -121,7 +122,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 			OsmandApplication app = getMyApplication();
 			if (app != null && activity != null) {
 				app.getLocaleHelper().checkPreferredLocale();
-				app.restartApp(activity);
+				RestartActivity.doRestart(activity);
 			}
 		} else if (prefId.equals(settings.SPEED_CAMERAS_UNINSTALLED.getId())) {
 			setupUninstallSpeedCamerasPref();

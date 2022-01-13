@@ -1,15 +1,15 @@
 package net.osmand.plus.dialogs;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
@@ -54,11 +54,10 @@ public class SpeedCamerasUninstallRestartBottomSheet extends MenuBottomSheetDial
 		settings.SPEED_CAMERAS_UNINSTALLED.set(true);
 		settings.SPEAK_SPEED_CAMERA.set(false);
 		settings.SHOW_CAMERAS.set(false);
-		Activity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			MapActivity.doRestart(activity);
-		} else {
-			android.os.Process.killProcess(android.os.Process.myPid());
+
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			RestartActivity.doRestartSilent(activity);
 		}
 	}
 }
