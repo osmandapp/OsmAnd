@@ -436,7 +436,6 @@
     <string name="save_current_track">Zapisz bieżącą trasę</string>
     <string name="save_track_interval_descr">Określ interwał nagrywania tras podczas nawigacji</string>
     <string name="save_track_interval">Częstość rejestrowania podczas nawigacji</string>
-    <string name="save_track_to_gpx_descrp">Trasa GPX jest automatycznie zapisywana do folderu tras podczas nawigacji.</string>
     <string name="save_track_to_gpx">Automatyczne nagrywanie trasy podczas nawigacji</string>
     <string name="update_tile">Uaktualnij mapę</string>
     <string name="reload_tile">Wczytaj ponownie kafelki</string>

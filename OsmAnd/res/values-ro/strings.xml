@@ -763,7 +763,6 @@
     <string name="save_current_track">Salvează traseul curent</string>
     <string name="save_track_interval">Interval de salvare a poziției in timpul navigării</string>
     <string name="save_track_interval_descr">Alegeți intervalul de logare pentru înregistrarea traseului în timpul navigării</string>
-    <string name="save_track_to_gpx_descrp">Traseele vor fi salvate în directorul traseelor în timpul navigării.</string>
     <string name="save_track_to_gpx">Înregistrează automat traseul în timpul navigării</string>
     <string name="update_tile">Actualizare hartă</string>
     <string name="reload_tile">Reîncarcă porțiunile de hartă raster</string>

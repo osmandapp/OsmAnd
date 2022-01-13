@@ -1094,7 +1094,6 @@
     <string name="background_service_int">الفاصل الزمني لإيقاظ GPS</string>
     <string name="enable_sleep_mode">تفعيل وضع GPS في الخلفية</string>
     <string name="save_current_track_descr">حفظ المسار الحالي إلى الذاكرة الآن.</string>
-    <string name="save_track_to_gpx_descrp">سيتم حفظ المسار إلى مجلد المسارات أثناء الملاحة.</string>
     <string name="save_track_interval_globally">الفاصل الزمني للتسجيل</string>
     <string name="save_track_interval">الفاصل الزمني للتسجيل أثناء الملاحة</string>
     <string name="voice_provider_descr">تحديد التوجيه الصوتي للتنقل.</string>

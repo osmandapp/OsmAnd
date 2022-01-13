@@ -41,7 +41,6 @@
     <string name="save_track_to_gpx_globally_descr">Generelle Positionserfassung kann mit der Schaltfläche \'GPX\' direkt auf dem Kartenbildschirm aktiviert oder deaktiviert werden.</string>
     <string name="save_current_track">Aktuellen Track speichern</string>
     <string name="save_current_track_descr">Aktuellen Track jetzt als GPX-Datei speichern.</string>
-    <string name="save_track_to_gpx_descrp">Während der Navigation wird automatisch ein GPX-Track im Track-Ordner gespeichert.</string>
     <string name="save_track_interval_globally">Aufzeichnungsintervall</string>
     <string name="save_track_interval">Erfassungsintervall während der Navigation</string>
     <string name="save_track_interval_descr">Positionserfassungsintervall für Steckenaufzeichnung während der Navigation festlegen</string>
@@ -3364,7 +3363,7 @@
     <string name="multimedia_use_system_camera">System-App verwenden</string>
     <string name="multimedia_photo_play_sound">Auslöseton der Kamera</string>
     <string name="reset_to_default_category_button_promo">Mit \'Auf Standard zurücksetzen\' wird die Sortierreihenfolge wieder auf den Standard der Installation zurückgesetzt.</string>
-    <string name="accessibility_mode_disabled">Einstellung \'Eingabehilfe\' ist in Ihrem Android System ausgeschaltet.</string>
+    <string name="accessibility_mode_disabled">Einstellung \'Eingabehilfe\' ist in Ihrem Android-System ausgeschaltet.</string>
     <string name="use_system_screen_timeout">Zeitlimit für den Systembildschirm verwenden</string>
     <string name="use_system_screen_timeout_promo">Standardmäßig deaktiviert. Wenn OsmAnd im Vordergrund läuft, wird der Bildschirm nicht ausgeblendet.
 \n
@@ -3410,7 +3409,7 @@
     <string name="plugin_disabled">Plugin aus</string>
     <string name="plugin_disabled_descr">Diese Erweiterung ist eine separate App, die durch die Deaktivierung nicht entfernt wird.
 \n
-\nSie kann in den Android Einstellungen unter \"Apps\" deinstalliert werden.</string>
+\nSie kann in den Android-Einstellungen unter \"Apps\" deinstalliert werden.</string>
     <string name="shared_string_menu">Menü</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Routing</string>
@@ -3856,9 +3855,9 @@
     <string name="send_files_to_openstreetmap">GPX-Datei an OpenStreetMap senden</string>
     <string name="enter_text_separated">Geben Sie durch Komma getrennte Tags ein.</string>
     <string name="gpx_upload_public_visibility_descr">\"Öffentlich\" bedeutet, dass der Track öffentlich in Ihren GPS-Tracks und in öffentlichen GPS-Track Verzeichnissen mit Zeitstempeln in Rohform angezeigt wird. Die über die API bereitgestellten Daten verweisen nicht auf Ihre Track-Seite. Die Zeitstempel der Trackpunkte sind nicht über die öffentliche GPS API verfügbar, und die Trackpunkte sind nicht chronologisch geordnet.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">\"Identifizierbar\" bedeutet, dass der Track in Ihren GPS-Tracks und in öffentlichen GPS-Track Verzeichnissen angezeigt wird, d.h. andere Benutzer können den Track herunterladen und mit Ihrem Benutzernamen verknüpfen. Öffentliche, mit Zeitstempel versehene Trackpunkt-Daten von der GPS API, die über die Trackpunkt API bereitgestellt werden, verweisen auf Ihre ursprüngliche Trackseite.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Identifizierbar\" bedeutet, dass der Track in Ihren GPS-Tracks und in öffentlichen GPS-Trackverzeichnissen angezeigt wird, d. h., andere Benutzer können den Track herunterladen und mit Ihrem Benutzernamen verknüpfen. Öffentliche, mit Zeitstempel versehene Trackpunkt-Daten von der GPS-API, die über die Trackpunkt-API bereitgestellt werden, verweisen auf Ihre ursprüngliche Trackseite.</string>
     <string name="gpx_upload_private_visibility_descr">\"Privat\" bedeutet, dass der Track nicht in öffentlichen Verzeichnissen auftaucht, aber seine Trackpunkte in nicht chronologischer Reihenfolge über die öffentliche GPS API ohne Zeitstempel verfügbar sind.</string>
-    <string name="gpx_upload_trackable_visibility_descr">\"Verfolgbar\" bedeutet, dass die Spur nicht in öffentlichen Auflistungen auftaucht, aber verarbeitete Trackpunkte mit Zeitstempeln davon (die nicht direkt mit Ihnen in Verbindung gebracht werden können) durch Downloads von der öffentlichen GPS API.</string>
+    <string name="gpx_upload_trackable_visibility_descr">\"Verfolgbar\" bedeutet, dass die Spur nicht in öffentlichen Listen auftaucht, aber verarbeitete Trackpunkte mit Zeitstempeln (die nicht direkt mit Ihnen in Verbindung gebracht werden können) werden durch Downloads von der öffentlichen GPS-API angezeigt.</string>
     <string name="osm_edit_close_note">OSM-Hinweis schließen</string>
     <string name="osm_edit_comment_note">OSM-Hinweis kommentieren</string>
     <string name="osm_login_descr">Melden Sie sich mit der OAuth Methode oder mit Ihrem OSM Benutzernamen und Passwort an.</string>
@@ -4279,7 +4278,7 @@
     <string name="explore_wikipedia_offline">Wikipedia offline entdecken.</string>
     <string name="on_hold_since">Ausgesetzt seit %1$s</string>
     <string name="active_till">Aktiv bis %1$s</string>
-    <string name="promo_subscription">Promo Abonnement</string>
+    <string name="promo_subscription">Promo-Abonnement</string>
     <string name="track_has_no_needed_data">Dem Track fehlen die entsprechenden Daten.</string>
     <string name="option_available_only_in_osmand_pro">Verfügbar im Rahmen des OsmAnd Pro Abonnements.</string>
     <string name="purchases_feature_desc_pro_widgets">Erhalten Sie Zugang zu den Funktionen von OsmAnd Pro: Routeneinfärbung und mehr.</string>
@@ -4299,14 +4298,14 @@
     <string name="offline_maps_required_descr">Für die Berechnung der Route werden zusätzliche Offline-Karten benötigt.</string>
     <string name="online_maps_required_descr">Leider konnte OsmAnd keine Route finden (berechnen), die zu Ihren Einstellungen passt.
 \n
-\nVielleicht sind einige Karten nicht geladen, Sie können eine Online Überprüfung der erforderlichen Karten durchführen.</string>
+\nVielleicht sind einige Karten nicht geladen, Sie können eine Online-Überprüfung der erforderlichen Karten durchführen.</string>
     <string name="online_maps_searching_descr">Online-Suche läuft…</string>
     <string name="reset_to_original">Auf Original zurücksetzen</string>
     <string name="backup_error_no_subscription">Kein Abonnement vorhanden</string>
     <string name="map_updates_for_mappers">Kartenaktualisierungen für Mapper</string>
     <string name="benefits_for_contributors">Vorteile für aktive OSM-Beitragende</string>
     <string name="benefits_for_contributors_primary_descr">Wer aktiv zu OpenStreetMap.org beiträgt, kann von unbegrenzten stündlichen Kartenaktualisierungen profitieren.</string>
-    <string name="benefits_for_contributors_secondary_descr">Bei OpenStreetMap anmelden um zu prüfen, ob Sie berechtigt sind, unbegrenzte monatliche und stündliche Kartenaktualisierungen zu erhalten.</string>
+    <string name="benefits_for_contributors_secondary_descr">Bei OpenStreetMap anmelden, um zu prüfen, ob Sie berechtigt sind, unbegrenzte monatliche und stündliche Kartenaktualisierungen zu erhalten.</string>
     <string name="use_login_and_password">Benutzername und Passwort verwenden</string>
     <string name="available_until">Verfügbar bis %1$s</string>
     <string name="enough_contributions_descr">Herzlichen Glückwunsch, Sie haben genügend Beiträge zu OpenStreetMap geleistet und können nun unbegrenzte Kartenaktualisierungen genießen!</string>
@@ -4376,11 +4375,11 @@
 \n
 \n</string>
     <string name="rendering_attr_natureReserves_name">Naturschutzgebiet</string>
-    <string name="internal_app_storage_description">Interner Speicher, versteckt vor allen Benutzern und anderen Anwendungen, so dass nur OsmAnd auf Ihre Daten zugreifen kann.</string>
+    <string name="internal_app_storage_description">Interner Speicher, versteckt vor allen Benutzern und anderen Anwendungen, sodass nur OsmAnd auf Ihre Daten zugreifen kann.</string>
     <string name="shared_string_details">Details</string>
-    <string name="shared_app_storage_description">Gemeinsamer Speicher ist aufgrund des geänderten Android Speicherzugriffs nicht mehr verfügbar.</string>
+    <string name="shared_app_storage_description">Gemeinsamer Speicher ist aufgrund des geänderten Android-Speicherzugriffs nicht mehr verfügbar.</string>
     <string name="shared_storage_warning_title">Änderungen der Speicherzugriffsregeln</string>
-    <string name="purchases_feature_desc_android_auto">Bringt OsmAnd Offlinekarten und Navigation auf den Bildschirm Ihres Fahrzeugs und lässt sich in die Bedienelemente Ihres Fahrzeugs integrieren.</string>
+    <string name="purchases_feature_desc_android_auto">Bringt OsmAnd-Offlinekarten und -Navigation auf den Bildschirm Ihres Fahrzeugs und lässt sich in die Bedienelemente Ihres Fahrzeugs integrieren.</string>
     <string name="location_access_request_action">Zugriff erlauben</string>
     <string name="location_access_request_result">Zugelassen: %1$s Abgelehnt: %2$s</string>
     <string name="is_disabled">%1$s ist deaktiviert</string>
@@ -4408,9 +4407,9 @@
     <string name="continue_on_phone">Auf dem Mobilgerät fortfahren</string>
     <string name="transparent_status_bar_descr">Karte unter der Statusleiste anzeigen</string>
     <string name="approx_safe_mode">Sichere GPX Approximation</string>
-    <string name="approx_safe_mode_description">GPX Näherung mit dem langsameren Android anstelle des nativen Codes durchführen.</string>
+    <string name="approx_safe_mode_description">GPX-Näherung mit dem langsameren Android anstelle des nativen Codes durchführen.</string>
     <string name="use_external_timestamps">Externe Zeitstempel verwenden</string>
-    <string name="use_external_timestamps_description">Zeitstempel des Online Routers verwenden, um die geschätzte Zeit und die durchschnittliche Geschwindigkeit anzupassen</string>
+    <string name="use_external_timestamps_description">Zeitstempel des Online-Routers verwenden, um die geschätzte Zeit und die durchschnittliche Geschwindigkeit anzupassen</string>
     <string name="safe_settings">Sicher</string>
     <string name="no_plugins_enabled">Sie haben keine Erweiterungen aktiviert. Eine Liste der verfügbaren Einweiterungen finden Sie unter \"Menü\" → \"Erweiterungen\".</string>
     <string name="display_route_tracks">Tracks anzeigen</string>
@@ -4430,7 +4429,7 @@
     <string name="shared_storage_third_step">Erteilen Sie die Berechtigung zum Zugriff auf den Ordner. Ohne sie kann OsmAnd keine Dateien kopieren.</string>
     <string name="shared_storage_first_step">Drücken Sie \"%1$s\".
 \nEs öffnet sich der Dateimanager, in dem Sie den Ordner osmand finden und öffnen müssen.</string>
-    <string name="shared_storage_migration_descr">Aufgrund von Änderungen im Android Speicherzugriff kann OsmAnd nicht mehr %1$s verwenden.
+    <string name="shared_storage_migration_descr">Aufgrund von Änderungen im Android-Speicherzugriff kann OsmAnd nicht mehr %1$s verwenden.
 \n
 \nKopieren Sie alle Ihre Daten in den neuen Ordner.</string>
     <string name="shared_storage_second_step">Klicken Sie auf \"Diesen Ordner verwenden\".</string>
@@ -4486,8 +4485,8 @@
     <string name="save_changes_into_file">Änderungen in Datei speichern</string>
     <string name="save_as_copy">Als Kopie speichern</string>
     <string name="gps_filter_actions_description">OsmAnd wendet die Änderungen auf den Track an, ohne die Datei zu aktualisieren. Sie können die Änderungen manuell speichern.</string>
-    <string name="shared_string_gps_filter">GPS Filter</string>
-    <string name="storage_migration_wrong_folder_warning">Keine OsmAnd Daten im ausgewählten Ordner gefunden. Bitte versuchen Sie es erneut.</string>
+    <string name="shared_string_gps_filter">GPS-Filter</string>
+    <string name="storage_migration_wrong_folder_warning">Keine OsmAnd-Daten im ausgewählten Ordner gefunden. Bitte versuchen Sie es erneut.</string>
     <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="use_routing_fallback_description">Offline-Routenführung verwenden, wenn Online-Routenführung nicht erreichbar ist.</string>
     <string name="use_routing_fallback">Alternativ Offline-Routenführung nutzen</string>

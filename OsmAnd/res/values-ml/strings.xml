@@ -2039,7 +2039,6 @@
     <string name="save_track_to_gpx_globally_descr">"ജിപിഎക്സ് ഫയലിലേക്കു്  സ്ഥാനം ലോഗ്ഗിങ് ചെയ്യുന്നത്, ഭൂപടത്തിൽ ജിപിഎക്സ് ലോഗിങ് വിഡ്ജെറ്റ് ഉപയോഗിച്ചു് ഓണാക്കുന്നതാണു്."</string>
     <string name="save_current_track_descr">ഇപ്പോൾ നിലവിലുള്ള ട്രാക്ക് ജിപിഎക്സ് ഫയൽ ആയി സംരക്ഷിക്കുക.</string>
     <string name="save_track_to_gpx">നാവിഗേഷൻ സമയത്ത് ട്രാക്ക് ഓട്ടോമാറ്റിക്കായി റെക്കോർഡ് ചെയ്യുക</string>
-    <string name="save_track_to_gpx_descrp">നാവിഗേഷൻ സമയത്ത് GPX ട്രാക്ക്, ട്രാക്കുകളുടെ ഫോൾഡറിലേക്ക് ഓട്ടോമാറ്റിക്കായി സംരക്ഷിക്കുന്നു.</string>
     <string name="save_track_interval_descr">നാവിഗേഷൻ വേളയിൽ ട്രാക്ക് റെക്കോർഡിംഗിനുള്ള ലോഗിംഗ് ഇടവേള തിരഞ്ഞെടുക്കുക.</string>
     <string name="proxy_host_descr">നിങ്ങളുടെ പ്രോക്സി ഹോസ്റ്റിന്റെ പേര് കോൺഫിഗർ ചെയ്യുക (ഉദാ: 127.0.0.1).</string>
     <string name="proxy_port_title">പ്രോക്സി പോർട്ട്</string>
