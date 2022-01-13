@@ -1628,7 +1628,7 @@
     <string name="poi_wetland_marsh">Marisma;Ciénaga</string>
     <string name="poi_wetland_reedbed">Cañaveral;Juncal</string>
     <string name="poi_wetland_tidalflat">Humedal costero;Llanura de marea</string>
-    <string name="poi_wetland_saltmarsh">Marisma de sal;Salina costera</string>
+    <string name="poi_wetland_saltmarsh">Saladar;Marisma salina;Salina costera</string>
     <string name="poi_wetland_mangrove">Manglar</string>
     <string name="poi_wetland_mud">Lodazal</string>
     <string name="poi_beach_sand">Arena</string>
