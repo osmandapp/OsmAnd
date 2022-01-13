@@ -1,14 +1,11 @@
 package net.osmand.plus.plugins.openseamaps;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DEPTH_CONTOURS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_NAUTICAL;
 import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
@@ -29,11 +26,11 @@ import java.util.List;
 public class NauticalMapsPlugin extends OsmandPlugin {
 
 	public static final String COMPONENT = "net.osmand.nauticalPlugin";
-	public final OsmandPreference<Boolean> SHOW_DEPTH_CONTOURS;
+	public static final String DEPTH_CONTOURS = "depthContours";
+	public OsmandPreference<Boolean> SHOW_DEPTH_CONTOURS;
 
 	public NauticalMapsPlugin(OsmandApplication app) {
 		super(app);
-		SHOW_DEPTH_CONTOURS = registerBooleanPreference(app, "nrenderer_depthContours", false);
 	}
 
 	@Override
@@ -92,21 +89,22 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
-		ItemClickListener listener = (adptr, itemId, pos, isChecked, viewCoordinates) -> {
+	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter menuAdapter, @NonNull MapActivity mapActivity) {
+		SHOW_DEPTH_CONTOURS = registerBooleanPreference(app, "nrenderer_depthContours", false);
+		ItemClickListener listener = (adapter, itemId, pos, isChecked, viewCoordinates) -> {
 			if (itemId == R.string.index_item_depth_contours_osmand_ext) {
 				boolean checked = !SHOW_DEPTH_CONTOURS.get();
 				SHOW_DEPTH_CONTOURS.set(checked);
-				adptr.getItem(pos).setColor(app, SHOW_DEPTH_CONTOURS.get() ?
+				adapter.getItem(pos).setColor(app, SHOW_DEPTH_CONTOURS.get() ?
 						R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-				adptr.getItem(pos).setDescription(app.getString(SHOW_DEPTH_CONTOURS.get() ? R.string.shared_string_enabled : R.string.shared_string_disabled));
-				adptr.notifyDataSetChanged();
-				updateLayers(mapActivity, mapActivity);
+				adapter.getItem(pos).setDescription(app.getString(SHOW_DEPTH_CONTOURS.get() ? R.string.shared_string_enabled : R.string.shared_string_disabled));
+				adapter.notifyDataSetChanged();
+				refreshLayer();
 			}
 			return true;
 		};
 
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
+		menuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.index_item_depth_contours_osmand_ext, app)
 				.setId(DEPTH_CONTOURS)
 				.setSelected(SHOW_DEPTH_CONTOURS.get())
@@ -118,8 +116,7 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 				.createItem());
 	}
 
-	@Override
-	public void updateLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
+	private void refreshLayer() {
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		mapView.refreshMap(true);
 	}

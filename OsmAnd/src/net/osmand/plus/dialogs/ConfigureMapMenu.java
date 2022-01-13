@@ -22,7 +22,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
 import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 import static net.osmand.plus.ContextMenuItem.INVALID_ID;
-import static net.osmand.plus.dialogs.DetailsBottomSheet.DEPTH_CONTOURS;
+import static net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin.DEPTH_CONTOURS;
 import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.RENDERING_CATEGORY_OSM_ASSISTANT;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_DENSITY_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_ATTR;

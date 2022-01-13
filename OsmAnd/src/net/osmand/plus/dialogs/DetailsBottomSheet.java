@@ -46,7 +46,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 	public static final String MORE_DETAILED = "moreDetailed";
 	public static final String SHOW_SURFACE_GRADE = "showSurfaceGrade";
 	public static final String COLORED_BUILDINGS = "coloredBuildings";
-	public static final String DEPTH_CONTOURS = "depthContours";
+
 	private OsmandApplication app;
 	private List<RenderingRuleProperty> properties;
 	private List<CommonPreference<Boolean>> preferences;
