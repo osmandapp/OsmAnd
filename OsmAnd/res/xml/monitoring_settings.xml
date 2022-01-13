@@ -19,7 +19,7 @@
 
 	<SwitchPreferenceCompat
 		android:key="save_track_to_gpx"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:layout="@layout/preference_switch_with_descr"
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/save_track_to_gpx"
