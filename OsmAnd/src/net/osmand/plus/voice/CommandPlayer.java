@@ -55,6 +55,7 @@ public abstract class CommandPlayer {
 	protected final String language;
 	protected int streamType;
 
+	@NonNull
 	public static CommandPlayer createCommandPlayer(@NonNull OsmandApplication app,
 	                                                @NonNull ApplicationMode appMode,
 	                                                @NonNull String voiceProvider) throws CommandPlayerException {
@@ -74,10 +75,10 @@ public abstract class CommandPlayer {
 		throw new CommandPlayerException(app.getString(R.string.voice_data_not_supported));
 	}
 
-	protected CommandPlayer(OsmandApplication app,
-	                        ApplicationMode applicationMode,
-	                        VoiceRouter voiceRouter,
-	                        File voiceProviderDir) throws CommandPlayerException {
+	protected CommandPlayer(@NonNull OsmandApplication app,
+	                        @NonNull ApplicationMode applicationMode,
+	                        @NonNull VoiceRouter voiceRouter,
+	                        @NonNull File voiceProviderDir) throws CommandPlayerException {
 		this.app = app;
 		this.settings = app.getSettings();
 		this.applicationMode = applicationMode;
@@ -85,9 +86,10 @@ public abstract class CommandPlayer {
 		this.streamType = settings.AUDIO_MANAGER_STREAM.getModeValue(applicationMode);
 		this.voiceProviderDir = voiceProviderDir;
 		this.language = defineVoiceProviderLanguage();
-		jsScope = initializeJsScope();
+		this.jsScope = initializeJsScope();
 	}
 
+	@NonNull
 	private String defineVoiceProviderLanguage() {
 		return voiceProviderDir.getName()
 				.replace(IndexConstants.VOICE_PROVIDER_SUFFIX, "")
@@ -95,6 +97,7 @@ public abstract class CommandPlayer {
 				.replace("-casual", "");
 	}
 
+	@NonNull
 	private ScriptableObject initializeJsScope() {
 		org.mozilla.javascript.Context context = org.mozilla.javascript.Context.enter();
 		context.setOptimizationLevel(-1);
@@ -112,20 +115,25 @@ public abstract class CommandPlayer {
 		return jsScope;
 	}
 
+	@NonNull
 	public abstract CommandBuilder newCommandBuilder();
 
 	public abstract boolean supportsStructuredStreetNames();
 
-	public abstract List<String> playCommands(CommandBuilder builder);
+	@NonNull
+	public abstract List<String> playCommands(@NonNull CommandBuilder builder);
 
 	public abstract void stop();
 
+	@NonNull
 	public abstract File getTtsFileFromDir(@NonNull File voiceProviderDir);
 
+	@NonNull
 	public String getLanguage() {
 		return language;
 	}
 
+	@NonNull
 	public String getCurrentVoice() {
 		return voiceProviderDir.getName();
 	}
@@ -209,6 +217,7 @@ public abstract class CommandPlayer {
 		return bluetoothScoRunning;
 	}
 
+	@NonNull
 	public static String getBluetoothScoStatus() {
 		return bluetoothScoStatus;
 	}

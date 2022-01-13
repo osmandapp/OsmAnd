@@ -436,7 +436,6 @@
     <string name="save_current_track">Zapisz bieżącą trasę</string>
     <string name="save_track_interval_descr">Określ interwał nagrywania tras podczas nawigacji</string>
     <string name="save_track_interval">Częstość rejestrowania podczas nawigacji</string>
-    <string name="save_track_to_gpx_descrp">Trasa GPX jest automatycznie zapisywana do folderu tras podczas nawigacji.</string>
     <string name="save_track_to_gpx">Automatyczne nagrywanie trasy podczas nawigacji</string>
     <string name="update_tile">Uaktualnij mapę</string>
     <string name="reload_tile">Wczytaj ponownie kafelki</string>
@@ -4350,7 +4349,7 @@
     <string name="android_auto_map_placeholder_descr">Odłącz urządzenie od Android Auto, aby wyświetlić mapę w aplikacji.</string>
     <string name="release_4_1">"• Dodano początkową obsługę Android Auto
 \n
-\n  • Aktualizacja interfejsu użytkownika dla wyszukiwania współrzędnych UTM
+\n • Aktualizacja interfejsu użytkownika dla wyszukiwania współrzędnych UTM
 \n
 \n  • Ulubione: dodano możliwość przeglądania ostatnio używanych ikon
 \n
@@ -4408,7 +4407,7 @@
     <string name="delete_history_items">Liczba elementów historii do usunięcia %1$s. Usunąć\?</string>
     <string name="display_route_tracks">Wyświetlanie ścieżek</string>
     <string name="display_route_tracks_as_poi">Wyświetlanie ścieżek jako POI</string>
-    <string name="quick_action_toggle_preference">Przełącznik do przełączania wybranego stanu preferencji.</string>
+    <string name="quick_action_toggle_preference">Zmiana preferencji.</string>
     <string name="shared_string_statistics">Statystyki</string>
     <string name="gps_filter_hdop_desc">Ustaw maksymalną akceptowaną wartość dla HDOP.
 \nPunkty z wyższą wartością będą ukrywane.</string>
@@ -4477,10 +4476,30 @@
 \nNie ma wpływu na szybkość obliczania tras krótkich.</string>
     <string name="not_enough_contributions_descr">Co najmniej %1$s zmian w ciągu ostatnich dwóch miesięcy %2$s jest wymagane, aby uzyskać dostęp do nieograniczonych godzinowych aktualizacji map.</string>
     <string name="waypoint_template">Szablon punktu trasy</string>
-    <string name="predefined_waypoint_appearance_description">Stuknięcie w akcję spowoduje automatyczne zapisanie punktu trasy o zdefiniowanych wcześniej parametrach.</string>
-    <string name="always_ask_waypoint_appearance_description">Dotknięcie akcji otworzy ekran \"Dodaj punkt trasy\", na którym możesz zmienić nazwę i wygląd.</string>
+    <string name="predefined_waypoint_appearance_description">Naciśnięcie tej akcji spowoduje automatyczne zapisanie punktu trasy z predefiniowanymi parametrami.</string>
+    <string name="always_ask_waypoint_appearance_description">Dotknięcie tej akcji otworzy ekran „Dodaj punkt trasy”, na którym możesz zmienić nazwę i wygląd.</string>
     <string name="waypoint_appearance">Wygląd punktu trasy</string>
     <string name="track_file_description">Kliknięcie akcji spowoduje wyświetlenie dialogu ze wszystkimi dostępnymi ścieżkami do wybrania.</string>
     <string name="shared_string_not_used">Nieużywane</string>
     <string name="shared_string_used">Używane</string>
+    <string name="track_file">Plik ścieżki</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="files_with_route_restrictions">Pliki z ograniczeniami trasy</string>
+    <string name="storage_copying_files_size">Kopiowanie %1$s plików %2$s.</string>
+    <string name="icon_group_industrial">Przemysłowy</string>
+    <string name="shared_string_migration">Migracja</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Tagi Fixme</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Pokaż tagi fixme</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Tagi notatek</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Pokaż tagi notatek</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikony przy małych powiększeniach</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematyczne wyświetlanie ikon przy małych powiększeniach</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tunele dróg wodnych</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Nie ukrywaj tuneli dróg wodnych</string>
+    <string name="turn_arrows">Strzałki skrętu</string>
+    <string name="turn_arrows_descr">Wybierz, czy strzałki skrętu mają być wskazywane na linii trasy.</string>
+    <string name="rendering_attr_seabedDetail_description">Dodatkowe informacje tekstowe dotyczące powierzchni dna morskiego_kwalifikacja, połączone rodzaje powierzchni, kategoria i takson chwastów lub trawy morskiej</string>
+    <string name="rendering_value_category_name">Kategoria</string>
+    <string name="rendering_value_all_name">Wszystkie</string>
+    <string name="rendering_attr_seabedDetail_name">Szczegóły dotyczące dna morskiego</string>
 </resources>

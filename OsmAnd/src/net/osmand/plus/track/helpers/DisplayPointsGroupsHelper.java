@@ -169,14 +169,25 @@ public class DisplayPointsGroupsHelper {
 			return null;
 		}
 
-		public int getVisibleGroupsNumber(@NonNull SelectedGpxFile selectedGpxFile) {
+		public int getVisibleTrackGroupsNumber(@NonNull SelectedGpxFile selectedGpxFile) {
 			int visibleGroupsNumber = 0;
 			for (GpxDisplayGroup group : itemGroups.keySet()) {
-				if (!selectedGpxFile.isGroupHidden(group.getName())) {
+				if (group.getType() == GpxDisplayItemType.TRACK_POINTS
+						&& !selectedGpxFile.isGroupHidden(group.getName())) {
 					visibleGroupsNumber++;
 				}
 			}
 			return visibleGroupsNumber;
+		}
+
+		public int getTotalTrackGroupsNumber() {
+			int total = 0;
+			for (GpxDisplayGroup group : itemGroups.keySet()) {
+				if (group.getType() == GpxDisplayItemType.TRACK_POINTS) {
+					total++;
+				}
+			}
+			return total;
 		}
 	}
 }

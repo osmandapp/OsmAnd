@@ -28,7 +28,9 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
@@ -56,11 +58,14 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.LineChart.LabelDisplayData;
+import com.github.mikephil.charting.charts.LineChart.YAxisLabelView;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.components.YAxis.YAxisLabelPosition;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -68,7 +73,6 @@ import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.MPPointF;
@@ -1103,23 +1107,20 @@ public class GpxUiHelper {
 		}, "Loading gpx").start(); //$NON-NLS-1$
 	}
 
-	public static void setupGPXChart(OsmandApplication ctx, LineChart mChart, int yLabelsCount) {
-		OsmandSettings settings = ctx.getSettings();
-		setupGPXChart(mChart, yLabelsCount, 24f, 16f, settings.isLightContent(), true);
+	public static void setupGPXChart(@NonNull LineChart mChart) {
+		setupGPXChart(mChart, 24f, 16f, true);
 	}
 
-	public static void setupGPXChart(LineChart mChart, int yLabelsCount, float topOffset, float bottomOffset,
-	                                 boolean light, boolean useGesturesAndScale) {
-		setupGPXChart(mChart, yLabelsCount, topOffset, bottomOffset, light, useGesturesAndScale, null);
+	public static void setupGPXChart(@NonNull LineChart mChart, float topOffset, float bottomOffset,
+	                                 boolean useGesturesAndScale) {
+		setupGPXChart(mChart, topOffset, bottomOffset, useGesturesAndScale, null);
 	}
 
-	public static void setupGPXChart(LineChart mChart, int yLabelsCount, float topOffset, float bottomOffset,
-	                                 boolean light, boolean useGesturesAndScale, Drawable markerIcon) {
-		if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-			mChart.setHardwareAccelerationEnabled(false);
-		} else {
-			mChart.setHardwareAccelerationEnabled(true);
-		}
+	public static void setupGPXChart(@NonNull LineChart mChart, float topOffset, float bottomOffset,
+	                                 boolean useGesturesAndScale, @Nullable Drawable markerIcon) {
+		Context context = mChart.getContext();
+
+		mChart.setHardwareAccelerationEnabled(true);
 		mChart.setTouchEnabled(useGesturesAndScale);
 		mChart.setDragEnabled(useGesturesAndScale);
 		mChart.setScaleEnabled(useGesturesAndScale);
@@ -1137,41 +1138,73 @@ public class GpxUiHelper {
 
 		// create a custom MarkerView (extend MarkerView) and specify the layout
 		// to use for it
-		GPXMarkerView mv = new GPXMarkerView(mChart.getContext(), markerIcon);
+		GPXMarkerView mv = new GPXMarkerView(context, markerIcon);
 		mv.setChartView(mChart); // For bounds control
 		mChart.setMarker(mv); // Set the marker to the chart
 		mChart.setDrawMarkers(true);
+		mChart.setYAxisLabelView(new YAxisLabelView(context, R.layout.chart_label) {
 
-		int labelsColor = ContextCompat.getColor(mChart.getContext(), R.color.description_font_and_bottom_sheet_icons);
+			private static final int SPAN_FLAG = Spannable.SPAN_EXCLUSIVE_EXCLUSIVE;
+
+			private final TextView label = findViewById(R.id.label);
+
+			@Override
+			public void updateLabel(@NonNull LabelDisplayData leftYAxisData, @Nullable LabelDisplayData rightYAxisData) {
+				if (rightYAxisData == null) {
+					SpannableString displayText = new SpannableString(leftYAxisData.getText());
+					displayText.setSpan(new ForegroundColorSpan(leftYAxisData.getColor()), 0,
+							displayText.length(), SPAN_FLAG);
+					label.setText(displayText);
+				} else {
+					String combinedPlainText = context.getString(R.string.ltr_or_rtl_combine_via_comma,
+							leftYAxisData.getText(), rightYAxisData.getText());
+					SpannableString displayText = new SpannableString(combinedPlainText);
+
+					boolean rtl = AndroidUtils.isLayoutRtl(context);
+					LabelDisplayData first = rtl ? rightYAxisData : leftYAxisData;
+					int edge = rtl ? first.getText().length() : first.getText().length() + 1;
+					displayText.setSpan(new ForegroundColorSpan(leftYAxisData.getColor()), 0, edge, SPAN_FLAG);
+					displayText.setSpan(new ForegroundColorSpan(rightYAxisData.getColor()), edge,
+							displayText.length(), SPAN_FLAG);
+
+					label.setText(displayText);
+				}
+			}
+		});
+
+		int labelsColor = ContextCompat.getColor(context, R.color.description_font_and_bottom_sheet_icons);
 		XAxis xAxis = mChart.getXAxis();
 		xAxis.setDrawAxisLine(false);
 		xAxis.setDrawGridLines(true);
 		xAxis.setGridLineWidth(1.5f);
-		xAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_black_grid));
+		xAxis.setGridColor(ContextCompat.getColor(context, R.color.gpx_chart_black_grid));
 		xAxis.enableGridDashedLine(25f, Float.MAX_VALUE, 0f);
 		xAxis.setPosition(BOTTOM);
 		xAxis.setTextColor(labelsColor);
 
-		YAxis yAxis = mChart.getAxisLeft();
-		yAxis.enableGridDashedLine(10f, 5f, 0f);
-		yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.divider_color));
-		yAxis.setDrawAxisLine(false);
-		yAxis.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
-		yAxis.setXOffset(16f);
-		yAxis.setYOffset(-6f);
-		yAxis.setLabelCount(yLabelsCount);
-		xAxis.setTextColor(labelsColor);
+		int dp4 = AndroidUtils.dpToPx(context, 4);
+		int yAxisGridColor = AndroidUtils.getColorFromAttr(context, R.attr.chart_grid_line_color);
 
-		yAxis = mChart.getAxisRight();
-		yAxis.enableGridDashedLine(10f, 5f, 0f);
-		yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.divider_color));
-		yAxis.setDrawAxisLine(false);
-		yAxis.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
-		yAxis.setXOffset(16f);
-		yAxis.setYOffset(-6f);
-		yAxis.setLabelCount(yLabelsCount);
-		xAxis.setTextColor(labelsColor);
-		yAxis.setEnabled(false);
+		YAxis leftYAxis = mChart.getAxisLeft();
+		leftYAxis.enableGridDashedLine(dp4, dp4, 0f);
+		leftYAxis.setGridColor(yAxisGridColor);
+		leftYAxis.setGridLineWidth(1f);
+		leftYAxis.setDrawBottomYGridLine(false);
+		leftYAxis.setDrawAxisLine(false);
+		leftYAxis.setDrawGridLinesBehindData(false);
+		leftYAxis.setPosition(YAxisLabelPosition.INSIDE_CHART);
+		leftYAxis.setXOffset(16f);
+		leftYAxis.setYOffset(-6f);
+		leftYAxis.setLabelCount(3, true);
+
+		YAxis rightYAxis = mChart.getAxisRight();
+		rightYAxis.setDrawAxisLine(false);
+		rightYAxis.setDrawGridLines(false);
+		rightYAxis.setPosition(YAxisLabelPosition.INSIDE_CHART);
+		rightYAxis.setXOffset(16f);
+		rightYAxis.setYOffset(-6f);
+		rightYAxis.setLabelCount(3, true);
+		rightYAxis.setEnabled(false);
 
 		Legend legend = mChart.getLegend();
 		legend.setEnabled(false);
@@ -1237,15 +1270,11 @@ public class GpxUiHelper {
 		final String mainUnitX = ctx.getString(mainUnitStr);
 
 		axisBase.setGranularity(granularity);
-		axisBase.setValueFormatter(new ValueFormatter() {
-
-			@Override
-			public String getFormattedValue(float value) {
-				if (!Algorithms.isEmpty(formatX)) {
-					return MessageFormat.format(formatX + mainUnitX, value);
-				} else {
-					return (int) value + " " + mainUnitX;
-				}
+		axisBase.setValueFormatter((value, axis) -> {
+			if (!Algorithms.isEmpty(formatX)) {
+				return MessageFormat.format(formatX + mainUnitX, value);
+			} else {
+				return (int) value + " " + mainUnitX;
 			}
 		});
 
@@ -1255,20 +1284,17 @@ public class GpxUiHelper {
 	private static float setupXAxisTime(XAxis xAxis, long timeSpan) {
 		final boolean useHours = timeSpan / 3600000 > 0;
 		xAxis.setGranularity(1f);
-		xAxis.setValueFormatter(new ValueFormatter() {
-			@Override
-			public String getFormattedValue(float value) {
-				int seconds = (int) value;
-				if (useHours) {
-					int hours = seconds / (60 * 60);
-					int minutes = (seconds / 60) % 60;
-					int sec = seconds % 60;
-					return hours + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (sec < 10 ? "0" + sec : sec);
-				} else {
-					int minutes = (seconds / 60) % 60;
-					int sec = seconds % 60;
-					return (minutes < 10 ? "0" + minutes : minutes) + ":" + (sec < 10 ? "0" + sec : sec);
-				}
+		xAxis.setValueFormatter((value, axis) -> {
+			int seconds = (int) value;
+			if (useHours) {
+				int hours = seconds / (60 * 60);
+				int minutes = (seconds / 60) % 60;
+				int sec = seconds % 60;
+				return hours + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (sec < 10 ? "0" + sec : sec);
+			} else {
+				int minutes = (seconds / 60) % 60;
+				int sec = seconds % 60;
+				return (minutes < 10 ? "0" + minutes : minutes) + ":" + (sec < 10 ? "0" + sec : sec);
 			}
 		});
 
@@ -1277,12 +1303,9 @@ public class GpxUiHelper {
 
 	private static float setupXAxisTimeOfDay(XAxis xAxis, final long startTime) {
 		xAxis.setGranularity(1f);
-		xAxis.setValueFormatter(new ValueFormatter() {
-			@Override
-			public String getFormattedValue(float value) {
-				long seconds = (long) (startTime / 1000 + value);
-				return OsmAndFormatter.getFormattedTimeShort(seconds);
-			}
+		xAxis.setValueFormatter((value, axis) -> {
+			long seconds = (long) (startTime / 1000 + value);
+			return OsmAndFormatter.getFormattedTimeShort(seconds);
 		});
 		return 1f;
 	}
@@ -1467,16 +1490,9 @@ public class GpxUiHelper {
 			yAxis = mChart.getAxisLeft();
 		}
 		yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_blue_label));
-		yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_blue_grid));
 		yAxis.setGranularity(1f);
 		yAxis.resetAxisMinimum();
-		yAxis.setValueFormatter(new ValueFormatter() {
-
-			@Override
-			public String getFormattedValue(float value) {
-				return (int) value + " " + mainUnitY;
-			}
-		});
+		yAxis.setValueFormatter((value, axis) -> (int) value + " " + mainUnitY);
 
 		List<Entry> values = calculateElevationArray(analysis, axisType, divX, convEle, true, calcWithoutGaps);
 
@@ -1566,10 +1582,8 @@ public class GpxUiHelper {
 		}
 		if (analysis.hasSpeedInTrack()) {
 			yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange_label));
-			yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange_grid));
 		} else {
 			yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_red_label));
-			yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_red_grid));
 		}
 
 		yAxis.setAxisMinimum(0f);
@@ -1624,15 +1638,11 @@ public class GpxUiHelper {
 			format = "{0,number,0.#} ";
 		}
 		final String formatY = format;
-		yAxis.setValueFormatter(new ValueFormatter() {
-
-			@Override
-			public String getFormattedValue(float value) {
-				if (!Algorithms.isEmpty(formatY)) {
-					return MessageFormat.format(formatY + mainUnitY, value);
-				} else {
-					return (int) value + " " + mainUnitY;
-				}
+		yAxis.setValueFormatter((value, axis) -> {
+			if (!Algorithms.isEmpty(formatY)) {
+				return MessageFormat.format(formatY + mainUnitY, value);
+			} else {
+				return (int) value + " " + mainUnitY;
 			}
 		});
 
@@ -1720,16 +1730,9 @@ public class GpxUiHelper {
 			yAxis = mChart.getAxisLeft();
 		}
 		yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_green_label));
-		yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_green_grid));
 		yAxis.setGranularity(1f);
 		yAxis.resetAxisMinimum();
-		yAxis.setValueFormatter(new ValueFormatter() {
-
-			@Override
-			public String getFormattedValue(float value) {
-				return (int) value + " " + mainUnitY;
-			}
-		});
+		yAxis.setValueFormatter((value, axis) -> (int) value + " " + mainUnitY);
 
 		List<Entry> values;
 		if (eleValues == null) {
@@ -1741,7 +1744,7 @@ public class GpxUiHelper {
 			}
 		}
 
-		if (values == null || values.size() == 0) {
+		if (Algorithms.isEmpty(values)) {
 			if (useRightAxis) {
 				yAxis.setEnabled(false);
 			}

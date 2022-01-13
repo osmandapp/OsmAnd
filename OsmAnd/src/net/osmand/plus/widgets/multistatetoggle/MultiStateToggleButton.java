@@ -11,9 +11,9 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 
@@ -106,18 +106,18 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		container.addView(divider);
 	}
 
-	private void updateView() {
-		updateView(true);
+	public void setItemsEnabled(boolean enable) {
+		for (_Radio item: items) {
+			item.setEnabled(enable);
+		}
+		updateView();
 	}
 
-	public void updateView(boolean isEnabled) {
+	private void updateView() {
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		int defaultColor = ColorUtilities.getDefaultIconColor(app, nightMode);
-		int selectedBgColor = isEnabled ? activeColor : defaultColor;
-
 		int textColorPrimary = ColorUtilities.getPrimaryTextColor(app, nightMode);
 		int textColorSecondary = ColorUtilities.getSecondaryTextColor(app, nightMode);
-		int textColor = isEnabled ? textColorPrimary : textColorSecondary;
 
 		int radius = AndroidUtils.dpToPx(app, 4);
 		float[] leftBtnRadii = new float[]{radius, radius, 0, 0, 0, 0, radius, radius};
@@ -125,15 +125,19 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		float[] internalBtnRadii = new float[]{0, 0, 0, 0, 0, 0, 0, 0};
 		boolean isLayoutRtl = AndroidUtils.isLayoutRtl(app);
 
-		GradientDrawable background = new GradientDrawable();
-		background.setColor(ColorUtilities.getColorWithAlpha(selectedBgColor, 0.1f));
-		background.setStroke(AndroidUtils.dpToPx(app, 1.5f), ColorUtilities.getColorWithAlpha(selectedBgColor, 0.5f));
-
 		showAllDividers();
+
 		for (int i = 0; i < items.size(); i++) {
 			_Radio item = items.get(i);
 			ViewGroup button = buttons.get(i);
-			button.setEnabled(isEnabled);
+			boolean enabled = item.isEnabled();
+			button.setEnabled(enabled);
+			int textColor = enabled ? textColorPrimary : textColorSecondary;
+			int selectedBgColor = enabled ? activeColor : defaultColor;
+			GradientDrawable background = new GradientDrawable();
+			background.setColor(ColorUtilities.getColorWithAlpha(selectedBgColor, 0.1f));
+			background.setStroke(AndroidUtils.dpToPx(app, 1.5f), ColorUtilities.getColorWithAlpha(selectedBgColor, 0.5f));
+
 			if (selectedItem == item) {
 				if (i == 0) {
 					background.setCornerRadii(isLayoutRtl ? rightBtnRadii : leftBtnRadii);

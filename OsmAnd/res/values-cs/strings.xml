@@ -544,7 +544,6 @@
     <string name="save_current_track">Uložit aktuální trasu</string>
     <string name="save_track_interval_descr">Zadejte interval pro ukládání trasy během navigace</string>
     <string name="save_track_interval">Interval ukládání trasy během navigace</string>
-    <string name="save_track_to_gpx_descrp">Během navigace budou GPX trasy automaticky ukládány do adresáře s trasami.</string>
     <string name="update_tile">Aktualizovat mapu</string>
     <string name="reload_tile">Načíst znovu dlaždici</string>
     <string name="mark_point">Cíl</string>
@@ -4507,4 +4506,9 @@
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tunely vodních cest</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Neskrývat tunely vodních cest</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_attr_seabedDetail_name">Detaily mořského dna</string>
+    <string name="rendering_value_category_name">Kategorie</string>
+    <string name="rendering_value_all_name">Všechny</string>
+    <string name="rendering_value_omit_name">Vynechat</string>
+    <string name="rendering_attr_seabedDetail_description">Další textové informace o povrchu mořského dna, kategorii a druhu mořského porostu</string>
 </resources>

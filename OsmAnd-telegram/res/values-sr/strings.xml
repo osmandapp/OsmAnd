@@ -62,7 +62,7 @@
     <string name="shared_string_minute_short">мин</string>
     <string name="shared_string_hour_short">ч</string>
     <string name="si_nm_h">Наутичких миља на сат (чворови)</string>
-    <string name="nm_h">нми/ч</string>
+    <string name="nm_h">nmi/h</string>
     <string name="shared_string_welcome">Добродошли</string>
     <string name="shared_string_authorization_descr">Унесите свој телефонски број Телеграма у међународном облику</string>
     <string name="shared_string_authorization">Пријава</string>
@@ -142,7 +142,7 @@
     <string name="time_ago">пре</string>
     <string name="turn_off_all">Искључи све</string>
     <string name="disable_all_sharing">Онемогући свако дељење</string>
-    <string name="disable_all_sharing_desc">Искључује дељење положаја према свим изабраним ћаскањима (%1$).</string>
+    <string name="disable_all_sharing_desc">Искључује дељење локације према свим изабраним ћаскањима (%1$d).</string>
     <string name="choose_osmand">Изаберите издање ОсмАнда за употребу</string>
     <string name="choose_osmand_desc">Изаберите издање ОсмАнда где ће сепознаници приказати на карти.</string>
     <string name="shared_string_sort_by">Разврстај по</string>
@@ -177,7 +177,7 @@
     <string name="successfully_sent_and_updated">Успешно је послато и освежено</string>
     <string name="last_updated_location">Последње освежен положај:</string>
     <string name="share_location_as_description">Ако желите да повежете више уређаја са једним налогом Телеграма, требате користити други уређај да би делили свој положај.</string>
-    <string name="share_location_as_description_second_line">Можете да направити и видети ЛБ уређаја у програму кориснику Телеграма користећи робота за ћаскање %1$. %2$</string>
+    <string name="share_location_as_description_second_line">Можете да направити и видети ЛБ уређаја у Телеграм клијенту користећи робота за ћаскање %1$s. %2$s</string>
     <string name="device_name">Име уређаја</string>
     <string name="device_name_cannot_be_empty">Име уређаја не може бити празно</string>
     <string name="device_name_is_too_long">Име уређаја предуго</string>
@@ -201,11 +201,11 @@
     <string name="shared_string_collected">Прикупљено</string>
     <string name="shared_string_date">Датум</string>
     <string name="points_size">%1$ тачака</string>
-    <string name="gps_points_in_buffer">послато (%1$ у спремнику)</string>
+    <string name="gps_points_in_buffer">послато (%1$d у спремнику)</string>
     <string name="please_update_osmand">Молим, надградите ОсмАнд ради прегледа података на карти</string>
     <string name="show_gps_points_descr">Прикажи количину прикупљених и послатих тачака ГПС-а.</string>
     <string name="show_gps_points">Покажи ГПС-а тачке</string>
-    <string name="received_gps_points">Примљене ГПКС-а тачке: %1$</string>
+    <string name="received_gps_points">Примљене GPX тачке: %1$s</string>
     <string name="how_it_works">Како ради</string>
     <string name="osmand_privacy_policy">Смернице приватности ОсмАнда</string>
     <string name="telegram_privacy_policy">Смернице приватности Телеграма</string>
@@ -263,9 +263,9 @@
     <string name="back_to_osmand">Повратак на ОсмАнд</string>
     <string name="duration_ago">Пре %1$s</string>
     <string name="last_response_duration">Последњи одговор: пре %1$</string>
-    <string name="last_update_from_telegram_duration">Последње освежење из Телеграма: пре %1$</string>
+    <string name="last_update_from_telegram_duration">Последње ажурирање из Телеграма: пре %1$s</string>
     <string name="last_response_date">Последњи одговор: %1$</string>
-    <string name="last_update_from_telegram_date">Последње освежење из Телеграма: %1$</string>
+    <string name="last_update_from_telegram_date">Последње ажурирање из Телеграма: %1$s</string>
     <string name="shared_string_error_short">Грешка</string>
     <string name="shared_string_export">Извези</string>
     <string name="logcat_buffer">Спремник дневника</string>

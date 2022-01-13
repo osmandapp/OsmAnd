@@ -497,7 +497,7 @@ public class OpeningHoursParser {
 		public boolean isFallBackRule(int sequenceIndex) {
 			if (sequenceIndex != ALL_SEQUENCES) {
 				ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
-				return rules.get(0).isFallbackRule();
+				return !rules.isEmpty() && rules.get(0).isFallbackRule();
 			}
 			return false;
 		}

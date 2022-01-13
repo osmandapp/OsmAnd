@@ -51,8 +51,16 @@ public class OsmandTextFieldBoxes extends TextFieldBoxes {
 	}
 
 	public void setClearButton(Drawable clearIcon) {
-		clearButton.setAlpha(1f);
+		showClearButton();
 		clearButton.setColorFilter(null);
 		clearButton.setImageDrawable(clearIcon);
+	}
+
+	public void hideClearButton() {
+		clearButton.setAlpha(0f);
+	}
+
+	public void showClearButton() {
+		clearButton.setAlpha(1f);
 	}
 }

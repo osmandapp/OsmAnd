@@ -239,7 +239,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 	}
 
 
-	private fun shareLocationMessages(location: Location, userId: Int) {
+	private fun shareLocationMessages(location: Location, userId: Long) {
 		val chatsShareInfo = app.settings.getChatsShareInfo()
 		val latitude = location.latitude
 		val longitude = location.longitude
@@ -385,7 +385,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 								shareInfo.lastMapSuccessfulSendTime = System.currentTimeMillis() / 1000
 							}
 							app.locationMessages.removeBufferedMessage(locationMessage)
-							if ((shareInfo.shouldSendViaBotTextMessage || shareInfo.shouldSendViaBotMapMessage) && osmandBotId != -1 && device != null) {
+							if ((shareInfo.shouldSendViaBotTextMessage || shareInfo.shouldSendViaBotMapMessage) && osmandBotId != -1L && device != null) {
 								app.telegramHelper.sendViaBotLocationMessage(osmandBotId, shareInfo, TdApi.Location(locationMessage.lat, locationMessage.lon, locationMessage.hdop), device, shareType)
 								shareInfo.shouldSendViaBotTextMessage = false
 								shareInfo.shouldSendViaBotMapMessage = false

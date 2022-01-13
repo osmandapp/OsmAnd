@@ -740,7 +740,6 @@
     <string name="save_current_track">儲存目前的軌跡</string>
     <string name="save_track_interval">在導航期間的記錄間隔</string>
     <string name="save_track_interval_descr">指定導航時的軌跡記錄間隔</string>
-    <string name="save_track_to_gpx_descrp">在導航期間，GPX 軌跡會自動儲存在 track 資料夾。</string>
     <string name="save_track_to_gpx">導航期間自動記錄軌跡</string>
     <string name="update_tile">更新地圖</string>
     <string name="reload_tile">重新載入圖磚</string>
@@ -4502,4 +4501,9 @@
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">不要隱藏水路隧道</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme 標籤</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_value_category_name">類別</string>
+    <string name="rendering_value_omit_name">忽略</string>
+    <string name="rendering_attr_seabedDetail_name">海底詳細資訊</string>
+    <string name="rendering_attr_seabedDetail_description">關於海床表面狀況、雜草或海草的組合表面類型、類別和分類群的額外文字資訊</string>
+    <string name="rendering_value_all_name">所有</string>
 </resources>

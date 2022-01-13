@@ -19,11 +19,14 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
+
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -31,24 +34,26 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.osmedit.data.EditPoiData;
-import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapLocalUtil;
-import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
-import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapUtil;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.plugins.osmedit.data.EditPoiData;
+import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint.Action;
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.PoiSubTypeDialogFragment;
+import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapLocalUtil;
+import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapUtil;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
 
 import java.lang.reflect.Type;
@@ -59,9 +64,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SwitchCompat;
+import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
 import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 import static net.osmand.plus.plugins.osmedit.fragments.AdvancedEditPoiFragment.addPoiToStringSet;
@@ -402,28 +405,38 @@ public class AddPOIAction extends QuickAction {
 
 		public void addTagView(String tg, String vl) {
 			View convertView = LayoutInflater.from(linearLayout.getContext())
-					.inflate(R.layout.poi_tag_list_item, null, false);
-			final AutoCompleteTextView tagEditText = convertView.findViewById(R.id.tagEditText);
-			ImageButton deleteItemImageButton = convertView.findViewById(R.id.deleteItemImageButton);
-			deleteItemImageButton.setImageDrawable(deleteDrawable);
+					.inflate(R.layout.list_item_poi_tag, null, false);
+
+			OsmandTextFieldBoxes tagFB = convertView.findViewById(R.id.tag_fb);
+			tagFB.setClearButton(deleteDrawable);
+			tagFB.hideClearButton();
+
+			OsmandTextFieldBoxes valueFB = convertView.findViewById(R.id.value_fb);
+			valueFB.setClearButton(deleteDrawable);
+			valueFB.hideClearButton();
+
+			ExtendedEditText tagEditText = convertView.findViewById(R.id.tagEditText);
+			View deleteButton = convertView.findViewById(R.id.delete_button);
 			final String[] previousTag = new String[]{tg};
-			deleteItemImageButton.setOnClickListener(v -> {
-				linearLayout.removeView((View) v.getParent());
+			deleteButton.setOnClickListener(v -> {
+				linearLayout.removeView(convertView);
 				tagsData.remove(tagEditText.getText().toString());
 				setTagsIntoParams(tagsData);
 			});
-			final AutoCompleteTextView valueEditText = convertView.findViewById(R.id.valueEditText);
+			ExtendedEditText valueEditText = convertView.findViewById(R.id.valueEditText);
 			tagEditText.setText(tg);
 			tagEditText.setAdapter(tagAdapter);
 			tagEditText.setThreshold(1);
 			tagEditText.setOnFocusChangeListener((v, hasFocus) -> {
 				if (!hasFocus) {
+					tagFB.hideClearButton();
 					String s = tagEditText.getText().toString();
 					tagsData.remove(previousTag[0]);
 					tagsData.put(s, valueEditText.getText().toString());
 					previousTag[0] = s;
 					setTagsIntoParams(tagsData);
 				} else {
+					tagFB.showClearButton();
 					tagAdapter.getFilter().filter(tagEditText.getText());
 				}
 			});
@@ -445,7 +458,14 @@ public class AddPOIAction extends QuickAction {
 				}
 			});
 
-			initAutocompleteTextView(valueEditText, valueAdapter);
+			valueEditText.setOnFocusChangeListener((v, hasFocus) -> {
+				if (hasFocus) {
+					valueFB.showClearButton();
+					valueAdapter.getFilter().filter(valueEditText.getText());
+				} else {
+					valueFB.hideClearButton();
+				}
+			});
 
 			linearLayout.addView(convertView);
 			tagEditText.requestFocus();
@@ -468,16 +488,6 @@ public class AddPOIAction extends QuickAction {
 			valueAdapter.sort(String.CASE_INSENSITIVE_ORDER);
 			valueAdapter.notifyDataSetChanged();
 		}
-	}
-
-	private static void initAutocompleteTextView(final AutoCompleteTextView textView,
-	                                             final ArrayAdapter<String> adapter) {
-
-		textView.setOnFocusChangeListener((v, hasFocus) -> {
-			if (hasFocus) {
-				adapter.getFilter().filter(textView.getText());
-			}
-		});
 	}
 
 	@Override

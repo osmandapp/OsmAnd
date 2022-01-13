@@ -1761,7 +1761,6 @@
     <string name="save_current_track_descr">Geçerli rotayı şimdi GPX dosyası olarak kaydedin.</string>
     <string name="save_current_track">Mevcut rotayı kaydet</string>
     <string name="save_track_to_gpx">Navigasyon sırasında rotayı otomatik kaydet</string>
-    <string name="save_track_to_gpx_descrp">Navigasyon sırasında GPX rotası otomatik olarak rotalar klasörüne kaydedilir.</string>
     <string name="save_track_interval_globally">Günlük aralığı</string>
     <string name="save_track_interval">Navigasyon sırasında kayıt aralığı</string>
     <string name="save_track_interval_descr">Navigasyon sırasında izlenen yol kaydı için kayıt aralığını belirtin</string>
@@ -4509,4 +4508,9 @@
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Su yolu tünelleri</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Su yolu tünellerini gizleme</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_value_category_name">Kategori</string>
+    <string name="rendering_value_all_name">Tümü</string>
+    <string name="rendering_value_omit_name">Atla</string>
+    <string name="rendering_attr_seabedDetail_name">Deniz dibi ayrıntısı</string>
+    <string name="rendering_attr_seabedDetail_description">Deniz dibi yüzey niteliği, birleşik yüzey türleri, yabani ot veya deniz yosunu kategorisi ve sınıfı hakkında ek metin bilgileri</string>
 </resources>

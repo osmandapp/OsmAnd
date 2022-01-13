@@ -594,7 +594,6 @@
     <string name="save_track_to_gpx_globally_descr">Ĝeneralan registradon de pozicio al GPX‑dosiero oni povas (mal)aktivigi per la GPX‑registrada fenestraĵo sur la map‑ekrano.</string>
     <string name="save_current_track_descr">Konservi aktualan spuron kiel GPX-dosieron.</string>
     <string name="save_current_track">Konservi aktualan spuron</string>
-    <string name="save_track_to_gpx_descrp">GPX-spuro estas aŭtomate konservata al dosierujo de spuroj dum navigado.</string>
     <string name="save_track_interval_globally">Intertempo de registrado</string>
     <string name="save_track_interval">Registrada intertempo dum navigado</string>
     <string name="save_track_interval_descr">Elekti oftecon de registri spuron dum navigado</string>
@@ -1093,7 +1092,7 @@
     <string name="avoid_in_routing_title">Eviti…</string>
     <string name="map_widget_fluorescent">Rebrilaj kursoj</string>
     <string name="map_widget_view_direction">Viddirekto</string>
-    <string name="map_widget_transparent">Diafanaj fenestraĵoj</string>
+    <string name="map_widget_transparent">Travideblaj fenestraĵoj</string>
     <string name="bg_service_sleep_mode_off">Lanĉi\n aplikaĵon fone</string>
     <string name="bg_service_sleep_mode_on">Ĉesigi\n fon-laboradon de aplikaĵo</string>
     <string name="int_continuosly">Konstanta</string>
@@ -1186,7 +1185,7 @@
     <string name="local_index_description">Frapetu ekzistantan elementon por vidi pliajn detalojn, premtenu por malaktivigi aŭ forigi. Datumoj en aparato nuntempe (%1$s malokupiĝa):</string>
     <string name="unknown_location">Pozicio ankoraŭ ne estas konata.</string>
     <string name="unknown_from_location">Komencpunkto ankoraŭ ne estas precizigita.</string>
-    <string name="modify_transparency">Modifi diafanecon (0 - travidebla, 255 - maldiafana)</string>
+    <string name="modify_transparency">Modifi travideblon (0 - travidebla, 255 - maldiafana)</string>
     <string name="confirm_interrupt_download">Ĉu ĉesigi elŝutadon\?</string>
     <string name="first_time_msg">Dankon al vi por uzi OsmAnd. Elŝutu eksterretajn regionajn datumojn en la menuo “administri map-dosierojn” por esplori mapojn, serĉi adresojn, interesejojn, publikan transporton kaj pli.</string>
     <string name="basemap_was_selected_to_download">La fundamenta mapo de mondo – bezonata por provizi bazan funkciadon – estas en la elŝut‑vico.</string>
@@ -1327,7 +1326,7 @@
     <string name="city_type_hamlet">Vilaĝeto</string>
     <string name="city_type_suburb">Suburbo</string>
     <string name="download_files_not_enough_space">Mankas libera loko por elŝuti %1$s MB (disponebla: %2$s).</string>
-    <string name="use_transparent_map_theme">Diafana etoso</string>
+    <string name="use_transparent_map_theme">Travidebla etoso</string>
     <string name="init_native_library">Pravalorizado de indiĝena biblioteko…</string>
     <string name="native_library_not_supported">Indiĝena biblioteko ne estas subtenata per tiu ĉi aparato.</string>
     <string name="choose_auto_follow_route">Aŭtomate centrigi mapon</string>
@@ -4485,4 +4484,31 @@
     <string name="use_routing_fallback">Provi malkonektan navigilon</string>
     <string name="shared_string_size">Grando</string>
     <string name="use_routing_fallback_description">Uzi malkonektan navigilon, se la elektita enerta navigilo ne funkcias.</string>
+    <string name="navigate_point_format_swiss_grid">Svislanda koordinatsistemo (CH1903)</string>
+    <string name="navigate_point_format_swiss_grid_plus">Svislanda koordinatsistemo (CH1903+)</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Etikedoj “Rimarko”</string>
+    <string name="waypoint_template">Ŝablono de navigadpunkto</string>
+    <string name="waypoint_appearance">Aspekto de navigadpunkto</string>
+    <string name="track_file_description">Tiu ĉi ago montros fenestron kun elekto de disponeblaj spuroj.</string>
+    <string name="always_ask_waypoint_appearance_description">Tiu ĉi ago malfermos la fenestron “Aldoni navigadpunkton”, kie vi povas ŝanĝi nomon kaj aspekton de punkto.</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Etikedoj “Riparu min!”</string>
+    <string name="predefined_waypoint_appearance_description">Tiu ĉi ago aŭtomate konservos navigadpunkton kun antaŭagorditaj parametroj.</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Montri etikedojn «fixme»</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Montri etikedojn «note»</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Bildsimboloj je malgrandigo</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Skiza montrado de bildsimboloj je malgrandigo de mapo</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tuneloj de akvovojoj</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Ne kaŝi akvovojojn en tuneloj</string>
+    <string name="shared_string_not_used">Neuzata</string>
+    <string name="shared_string_used">Uzata</string>
+    <string name="files_with_route_restrictions">Dosieroj kun vojaj limigoj</string>
+    <string name="track_file">Dosiero de spuro</string>
+    <string name="turn_arrows_descr">Montri sagetojn de turniĝoj sur la linio de kurso.</string>
+    <string name="turn_arrows">Sagetoj de turniĝoj</string>
+    <string name="rendering_attr_seabedDetail_description">Pliaj tekstaj informoj pri mara fundo: kvalifo, margrundo, kategorio kaj taksono de algoj kaj akvoplantoj</string>
+    <string name="rendering_value_category_name">Kategorio</string>
+    <string name="rendering_value_all_name">Ĉiuj</string>
+    <string name="rendering_value_omit_name">Ignori</string>
+    <string name="rendering_attr_seabedDetail_name">Marfundo</string>
 </resources>

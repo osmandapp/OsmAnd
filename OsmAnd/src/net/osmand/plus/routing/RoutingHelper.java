@@ -321,6 +321,7 @@ public class RoutingHelper {
 		return route.isCalculated();
 	}
 
+	@NonNull
 	public VoiceRouter getVoiceRouter() {
 		return voiceRouter;
 	}

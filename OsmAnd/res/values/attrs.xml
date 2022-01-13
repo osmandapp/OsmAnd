@@ -7,6 +7,8 @@
         <attr name="mapBackground" format="reference"/>
         <attr name="routeParameterTitleColor" format="color"/>
         <attr name="chart_marker_background" format="reference" />
+        <attr name="chart_label_background" format="reference" />
+        <attr name="chart_grid_line_color" format="reference" />
         <attr name="keyboard_controls_divider" format="color"/>
         <!-- list colors -->
         <attr name="ctx_menu_info_divider" format="color"/>
