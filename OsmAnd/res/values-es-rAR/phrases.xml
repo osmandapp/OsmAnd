@@ -1852,7 +1852,7 @@
     <string name="poi_fuel_wood">Combustible: madera</string>
     <string name="poi_fuel_charcoal">Combustible: carbón vegetal</string>
     <string name="poi_fuel_coal">Combustible: carbón</string>
-    <string name="poi_wetland_string_bog">Cadena de humedales;Turberas encadenadas</string>
+    <string name="poi_wetland_string_bog">Turbera de Aapa;Turbera minerotrófica estructurada;Cadena de humedales;Turberas encadenadas</string>
     <string name="poi_street_lamp">Farola</string>
     <string name="poi_escape_lane">Camino de emergencia</string>
     <string name="poi_crop_rice">Cultivo: arroz</string>
