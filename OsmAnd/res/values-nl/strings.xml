@@ -534,7 +534,6 @@
     <string name="save_current_track">Huidige GPX-track opslaan</string>
     <string name="save_track_interval">Registratie-interval bij navigatie</string>
     <string name="save_track_interval_descr">Stel het logging-interval in voor track-opname tijdens navigatie</string>
-    <string name="save_track_to_gpx_descrp">Tijdens het navigeren wordt automatisch een GPX-track opgeslagen in de tracks-map.</string>
     <string name="save_track_to_gpx">GPX-Track automatisch opnemen tijdens navigatie</string>
     <string name="update_tile">Kaart bijwerken</string>
     <string name="reload_tile">Herlaad kaartsegment</string>

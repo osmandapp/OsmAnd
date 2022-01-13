@@ -1689,7 +1689,6 @@
     <string name="enable_sleep_mode">启用 GPS 背景模式</string>
     <string name="save_track_to_gpx_globally_headline">需求轨迹日志记录</string>
     <string name="save_track_to_gpx_globally_descr">通常位置记录到一个 GPX 文件，在地图画面上使用 GPX 记录小工具，可以开启或关闭。</string>
-    <string name="save_track_to_gpx_descrp">导航过程中，GPX 轨迹自动保存到轨道文件夹。</string>
     <string name="save_track_interval_globally">记录间隔</string>
     <string name="int_hour">小时</string>
     <string name="duration">持续时间</string>

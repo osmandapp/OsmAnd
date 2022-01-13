@@ -488,7 +488,6 @@
     <string name="save_current_track">현재 트랙을 GPX 파일로 저장</string>
     <string name="save_track_interval_descr">운행하는 동안 트랙 레코딩을 위한 로깅 간격을 선택합니다</string>
     <string name="save_track_interval">운행중 로깅 간격</string>
-    <string name="save_track_to_gpx_descrp">운행하는 동안 트랙을 트랙폴더에 저장합니다</string>
     <string name="save_track_to_gpx">운행하는 동안 트랙을 GPX파일로 기록</string>
     <string name="update_tile">맵 업데이트</string>
     <string name="reload_tile">타일 재로드</string>

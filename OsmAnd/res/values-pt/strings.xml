@@ -283,7 +283,6 @@
     <string name="save_current_track">Guardar o trilho atual</string>
     <string name="save_track_interval_descr">Escolha o intervalo em que é registada a localização ao gravar trilhos durante a navegação</string>
     <string name="save_track_interval">Intervalo de gravação durante a navegação</string>
-    <string name="save_track_to_gpx_descrp">O trilho GPX é guardado automaticamente na pasta \"tracks\" durante a navegação.</string>
     <string name="save_track_to_gpx">Gravar trilho automaticamente durante a navegação</string>
     <string name="update_tile">Atualizar mapa</string>
     <string name="reload_tile">Atualizar mosaico de imagem</string>

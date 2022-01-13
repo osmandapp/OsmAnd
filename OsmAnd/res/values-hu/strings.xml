@@ -547,7 +547,6 @@
     <string name="save_current_track">Jelenlegi nyomvonal mentése</string>
     <string name="save_track_interval_descr">A navigáció alatti nyomvonalfelvételhez adja meg a naplózási intervallumot</string>
     <string name="save_track_interval">Naplózási intervallum navigáció közben</string>
-    <string name="save_track_to_gpx_descrp">Navigáció közben a GPX útvonal automatikusan mentésre kerül az OsmAnd „tracks” mappájába.</string>
     <string name="reload_tile">Térképcsempe újratöltése</string>
     <string name="mark_point">Célpont</string>
     <string name="shared_string_add_to_favorites">Hozzáadás a „Kedvencek”-hez</string>

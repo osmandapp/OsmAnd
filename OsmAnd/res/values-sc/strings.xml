@@ -1187,7 +1187,6 @@
     <string name="save_current_track">Sarva sa rasta currente</string>
     <string name="save_track_interval">Intervallu de sarvamentu durante sa navigatzione</string>
     <string name="save_track_interval_descr">Dislinda s’intervallu de positzionamentu pro sa registratzione de sas rastas durante sa navigatzione</string>
-    <string name="save_track_to_gpx_descrp">Una rasta GPX at a èssere sarvada in sa cartella apòsita durante sa navigatzione.</string>
     <string name="save_track_to_gpx">Sarva automaticamente sa rasta in GPX durante sa navigatzione</string>
     <string name="update_tile">Agiorna mapa</string>
     <string name="reload_tile">Torra a carrigare tasseddos</string>

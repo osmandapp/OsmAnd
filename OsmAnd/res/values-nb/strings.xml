@@ -426,7 +426,6 @@
     <string name="save_current_track">Lagre gjeldende spor</string>
     <string name="save_track_interval">Loggeintervall under navigering</string>
     <string name="save_track_interval_descr">Angi loggingsintervall for opptak av spor under navigering</string>
-    <string name="save_track_to_gpx_descrp">Et GPX-spor lagres automatisk i spor-mappen under navigering.</string>
     <string name="save_track_to_gpx">Auto-opptak av spor under navigering</string>
     <string name="update_tile">Oppdater kart</string>
     <string name="reload_tile">Last kartdel på nytt</string>
