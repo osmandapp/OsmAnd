@@ -30,6 +30,7 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -637,7 +638,7 @@ public class FavouritesDbHelper {
 	public static void backup(File backupFile, File externalFile) {
 		try {
 			File f = new File(backupFile.getParentFile(), backupFile.getName());
-			BZip2CompressorOutputStream out = new BZip2CompressorOutputStream(new FileOutputStream(f));
+			BZip2CompressorOutputStream out = new BZip2CompressorOutputStream(new BufferedOutputStream(new FileOutputStream(f)));
 			FileInputStream fis = new FileInputStream(externalFile);
 			Algorithms.streamCopy(fis, out);
 			fis.close();
