@@ -1,19 +1,5 @@
 package net.osmand.plus.helpers;
 
-import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
-import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
-import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
-import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
-import static net.osmand.plus.track.GpxAppearanceAdapter.SHOW_START_FINISH_ATTR;
-
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -47,39 +33,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.ListPopupWindow;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.LineChart.LabelDisplayData;
 import com.github.mikephil.charting.charts.LineChart.YAxisLabelView;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.components.YAxis.YAxisLabelPosition;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.ChartData;
-import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.utils.MPPointF;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
-import net.osmand.plus.utils.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.Elevation;
 import net.osmand.GPXUtilities.GPXFile;
@@ -91,42 +62,45 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.OsmAndConstants;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.activities.ActivityResultListener;
+import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
+import net.osmand.plus.myplaces.SaveCurrentTrackTask;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsFragment;
+import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.routing.RouteCalculationResult;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.plus.track.GpxAppearanceAdapter;
+import net.osmand.plus.track.GpxAppearanceAdapter.AppearanceListItem;
+import net.osmand.plus.track.GpxMarkerView;
+import net.osmand.plus.track.GpxSplitType;
+import net.osmand.plus.track.SaveGpxAsyncTask;
+import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.OsmAndConstants;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.Version;
-import net.osmand.plus.activities.ActivityResultListener;
-import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.PluginsFragment;
-import net.osmand.plus.track.GpxAppearanceAdapter;
-import net.osmand.plus.track.GpxAppearanceAdapter.AppearanceListItem;
-import net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter;
-import net.osmand.plus.settings.enums.MetricsConstants;
-import net.osmand.plus.settings.enums.SpeedConstants;
-import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
-import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.myplaces.SaveCurrentTrackTask;
-import net.osmand.plus.routing.RouteCalculationResult;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.track.GpxSplitType;
-import net.osmand.plus.track.SaveGpxAsyncTask;
-import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteStatisticsHelper;
@@ -148,6 +122,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.ListPopupWindow;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+
+import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
+import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
+import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
+import static net.osmand.plus.track.GpxAppearanceAdapter.SHOW_START_FINISH_ATTR;
+import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
+import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 public class GpxUiHelper {
 
@@ -1138,7 +1134,7 @@ public class GpxUiHelper {
 
 		// create a custom MarkerView (extend MarkerView) and specify the layout
 		// to use for it
-		GPXMarkerView mv = new GPXMarkerView(context, markerIcon);
+		GpxMarkerView mv = new GpxMarkerView(context, markerIcon);
 		mv.setChartView(mChart); // For bounds control
 		mChart.setMarker(mv); // Set the marker to the chart
 		mChart.setDrawMarkers(true);
@@ -2011,167 +2007,6 @@ public class GpxUiHelper {
 
 		public boolean shouldShowIcon() {
 			return showIcon;
-		}
-	}
-
-	@SuppressLint("ViewConstructor")
-	private static class GPXMarkerView extends MarkerView {
-
-		private final View textAltView;
-		private final View textSpdView;
-		private final View textSlpView;
-		private final boolean hasIcon;
-
-		public GPXMarkerView(@NonNull Context context,
-		                     @Nullable Drawable icon) {
-			super(context, R.layout.chart_marker_view);
-			textAltView = findViewById(R.id.text_alt_container);
-			textSpdView = findViewById(R.id.text_spd_container);
-			textSlpView = findViewById(R.id.text_slp_container);
-			if (icon != null) {
-				findViewById(R.id.icon_divider).setVisibility(VISIBLE);
-				findViewById(R.id.icon_container).setVisibility(VISIBLE);
-				((ImageView) findViewById(R.id.icon)).setImageDrawable(icon);
-			}
-			hasIcon = icon != null;
-		}
-
-		// callbacks everytime the MarkerView is redrawn, can be used to update the
-		// content (user-interface)
-		@Override
-		public void refreshContent(Entry e, Highlight highlight) {
-			ChartData<?> chartData = getChartView().getData();
-			if (hasIcon && highlight instanceof GPXHighlight) {
-				boolean showIcon = ((GPXHighlight) highlight).shouldShowIcon();
-				AndroidUiHelper.setVisibility(showIcon ? VISIBLE : GONE, findViewById(R.id.icon_divider));
-				AndroidUiHelper.setVisibility(showIcon ? VISIBLE : GONE, findViewById(R.id.icon_container));
-			}
-			if (chartData.getDataSetCount() == 1) {
-				OrderedLineDataSet dataSet = (OrderedLineDataSet) chartData.getDataSetByIndex(0);
-				String value = (int) e.getY() + " ";
-				String units = dataSet.units;
-				switch (dataSet.getDataSetType()) {
-					case ALTITUDE:
-						((TextView) textAltView.findViewById(R.id.text_alt_value)).setText(value);
-						((TextView) textAltView.findViewById(R.id.text_alt_units)).setText(units);
-						textAltView.setVisibility(VISIBLE);
-						textSpdView.setVisibility(GONE);
-						textSlpView.setVisibility(GONE);
-						break;
-					case SPEED:
-						((TextView) textSpdView.findViewById(R.id.text_spd_value)).setTextColor(dataSet.getColor());
-						((TextView) textSpdView.findViewById(R.id.text_spd_value)).setText(value);
-						((TextView) textSpdView.findViewById(R.id.text_spd_units)).setText(units);
-						textAltView.setVisibility(GONE);
-						textSpdView.setVisibility(VISIBLE);
-						textSlpView.setVisibility(GONE);
-						break;
-					case SLOPE:
-						((TextView) textSlpView.findViewById(R.id.text_slp_value)).setText(value);
-						textAltView.setVisibility(GONE);
-						textSpdView.setVisibility(GONE);
-						textSlpView.setVisibility(VISIBLE);
-						break;
-				}
-				findViewById(R.id.divider).setVisibility(GONE);
-			} else if (chartData.getDataSetCount() == 2) {
-				OrderedLineDataSet dataSet1 = (OrderedLineDataSet) chartData.getDataSetByIndex(0);
-				OrderedLineDataSet dataSet2 = (OrderedLineDataSet) chartData.getDataSetByIndex(1);
-				int altSetIndex = -1;
-				int spdSetIndex = -1;
-				int slpSetIndex = -1;
-				switch (dataSet1.getDataSetType()) {
-					case ALTITUDE:
-						altSetIndex = 0;
-						break;
-					case SPEED:
-						spdSetIndex = 0;
-						break;
-					case SLOPE:
-						slpSetIndex = 0;
-						break;
-				}
-				switch (dataSet2.getDataSetType()) {
-					case ALTITUDE:
-						altSetIndex = 1;
-						break;
-					case SPEED:
-						spdSetIndex = 1;
-						break;
-					case SLOPE:
-						slpSetIndex = 1;
-						break;
-				}
-				if (altSetIndex != -1) {
-					float y = getInterpolatedY(altSetIndex == 0 ? dataSet1 : dataSet2, e);
-					((TextView) textAltView.findViewById(R.id.text_alt_value)).setText((int) y + " ");
-					((TextView) textAltView.findViewById(R.id.text_alt_units)).setText((altSetIndex == 0 ? dataSet1.units : dataSet2.units));
-					textAltView.setVisibility(VISIBLE);
-				} else {
-					textAltView.setVisibility(GONE);
-				}
-				if (spdSetIndex != -1) {
-					float y = getInterpolatedY(spdSetIndex == 0 ? dataSet1 : dataSet2, e);
-					((TextView) textSpdView.findViewById(R.id.text_spd_value)).setTextColor((spdSetIndex == 0 ? dataSet1 : dataSet2).getColor());
-					((TextView) textSpdView.findViewById(R.id.text_spd_value)).setText((int) y + " ");
-					((TextView) textSpdView.findViewById(R.id.text_spd_units)).setText(spdSetIndex == 0 ? dataSet1.units : dataSet2.units);
-					textSpdView.setVisibility(VISIBLE);
-				} else {
-					textSpdView.setVisibility(GONE);
-				}
-				if (slpSetIndex != -1) {
-					float y = getInterpolatedY(slpSetIndex == 0 ? dataSet1 : dataSet2, e);
-					((TextView) textSlpView.findViewById(R.id.text_slp_value)).setText((int) y + " ");
-					textSlpView.setVisibility(VISIBLE);
-				} else {
-					textSlpView.setVisibility(GONE);
-				}
-				findViewById(R.id.divider).setVisibility(VISIBLE);
-			} else {
-				textAltView.setVisibility(GONE);
-				textSpdView.setVisibility(GONE);
-				textSlpView.setVisibility(GONE);
-				findViewById(R.id.divider).setVisibility(GONE);
-			}
-			super.refreshContent(e, highlight);
-		}
-
-		private float getInterpolatedY(OrderedLineDataSet ds, Entry e) {
-			if (ds.getEntryIndex(e) == -1) {
-				Entry upEntry = ds.getEntryForXValue(e.getX(), Float.NaN, DataSet.Rounding.UP);
-				Entry downEntry = upEntry;
-				int upIndex = ds.getEntryIndex(upEntry);
-				if (upIndex > 0) {
-					downEntry = ds.getEntryForIndex(upIndex - 1);
-				}
-				return MapUtils.getInterpolatedY(downEntry.getX(), downEntry.getY(), upEntry.getX(), upEntry.getY(), e.getX());
-			} else {
-				return e.getY();
-			}
-		}
-
-		@Override
-		public MPPointF getOffset() {
-			if (getChartView().getData().getDataSetCount() == 2) {
-				int x = findViewById(R.id.divider).getLeft();
-				return new MPPointF(-x - AndroidUtils.dpToPx(getContext(), .5f), 0);
-			} else {
-				return new MPPointF(-getWidth() / 2f, 0);
-			}
-		}
-
-		@Override
-		public MPPointF getOffsetForDrawingAtPoint(float posX, float posY) {
-			int margin = AndroidUtils.dpToPx(getContext(), 3f);
-			MPPointF offset = getOffset();
-			offset.y = -posY;
-			if (posX + offset.x - margin < 0) {
-				offset.x -= (offset.x + posX - margin);
-			}
-			if (posX + offset.x + getWidth() + margin > getChartView().getWidth()) {
-				offset.x -= (getWidth() - (getChartView().getWidth() - posX) + offset.x) + margin;
-			}
-			return offset;
 		}
 	}
 
