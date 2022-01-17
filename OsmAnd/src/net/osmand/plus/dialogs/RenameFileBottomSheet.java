@@ -45,13 +45,13 @@ public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 	private static final String SOURCE_FILE_NAME_KEY = "source_file_name_key";
 	private static final String SELECTED_FILE_NAME_KEY = "selected_file_name_key";
 
-	protected OsmandApplication app;
+	private OsmandApplication app;
 
-	protected TextInputLayout nameTextBox;
-	protected TextInputEditText editText;
+	private TextInputLayout nameTextBox;
+	private TextInputEditText editText;
 
 	private File file;
-	protected String selectedFileName;
+	private String selectedFileName;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -78,7 +78,7 @@ public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 		items.add(editFolderName);
 	}
 
-	protected TextInputLayout setupTextBox(View mainView) {
+	private TextInputLayout setupTextBox(View mainView) {
 		TextInputLayout nameTextBox = mainView.findViewById(R.id.name_text_box);
 		int backgroundId = nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light;
 		nameTextBox.setBoxBackgroundColorResource(backgroundId);
@@ -88,7 +88,7 @@ public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 		return nameTextBox;
 	}
 
-	protected TextInputEditText setupEditText(View mainView) {
+	private TextInputEditText setupEditText(View mainView) {
 		TextInputEditText editText = mainView.findViewById(R.id.name_edit_text);
 		editText.setText(selectedFileName);
 		editText.requestFocus();

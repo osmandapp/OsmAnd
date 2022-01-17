@@ -33,7 +33,8 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.dialogs.TrackWayPointsBottomSheet;
+import net.osmand.plus.dialogs.TrackWayPointsCopyToFavoritesBottomSheet;
+import net.osmand.plus.dialogs.TrackWayPointsRenameBottomSheet;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
@@ -157,7 +158,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 						final FragmentActivity activity = getActivity();
 						if (activity != null) {
 							FragmentManager fragmentManager = activity.getSupportFragmentManager();
-							TrackWayPointsBottomSheet.showInstance(fragmentManager, EditTrackGroupDialogFragment.this, group, true);
+							TrackWayPointsRenameBottomSheet.showInstance(fragmentManager, EditTrackGroupDialogFragment.this, group);
 							dismiss();
 						}
 					}
@@ -227,7 +228,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 						final FragmentActivity activity = getActivity();
 						if (activity != null) {
 							FragmentManager fragmentManager = activity.getSupportFragmentManager();
-							TrackWayPointsBottomSheet.showInstance(fragmentManager, EditTrackGroupDialogFragment.this, group, false);
+							TrackWayPointsCopyToFavoritesBottomSheet.showInstance(fragmentManager, EditTrackGroupDialogFragment.this, group);
 							dismiss();
 						}
 					}

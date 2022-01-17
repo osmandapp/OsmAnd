@@ -7,7 +7,7 @@
 	android:background="?attr/selectableItemBackground"
 	android:minHeight="@dimen/content_padding_small"
 	android:paddingTop="@dimen/content_padding_small"
-	android:paddingBottom="@dimen/measurement_tool_menu_title_padding_top"
+	android:paddingBottom="@dimen/content_padding_small"
 	android:orientation="vertical"
 	android:paddingEnd="@dimen/content_padding"
 	android:paddingStart="@dimen/content_padding">
