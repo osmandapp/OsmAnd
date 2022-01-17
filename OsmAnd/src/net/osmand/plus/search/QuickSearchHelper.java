@@ -1,12 +1,11 @@
 package net.osmand.plus.search;
 
-import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
-
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -16,25 +15,32 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
+import net.osmand.map.WorldRegion;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
-import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.DownloadResourceGroup;
+import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
+import net.osmand.plus.download.DownloadResources;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.poi.NominatimPoiFilter;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.resources.ResourceManager.ResourceListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.search.SearchUICore;
@@ -44,6 +50,7 @@ import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
 import net.osmand.search.core.SearchPhrase;
+import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -53,6 +60,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 
 public class QuickSearchHelper implements ResourceListener {
 
@@ -64,6 +73,8 @@ public class QuickSearchHelper implements ResourceListener {
 	public static final int SEARCH_WPT_OBJECT_PRIORITY = 152;
 	public static final int SEARCH_TRACK_API_PRIORITY = 150;
 	public static final int SEARCH_TRACK_OBJECT_PRIORITY = 153;
+	public static final int SEARCH_INDEX_ITEM_API_PRIORITY = 150;
+	public static final int SEARCH_INDEX_ITEM_PRIORITY = 150;
 	public static final int SEARCH_HISTORY_API_PRIORITY = 150;
 	public static final int SEARCH_HISTORY_OBJECT_PRIORITY = 154;
 	public static final int SEARCH_ONLINE_API_PRIORITY = 500;
@@ -102,6 +113,10 @@ public class QuickSearchHelper implements ResourceListener {
 		mapsIndexed = false;
 		setRepositoriesForSearchUICore(app);
 		core.init();
+
+		// Register index item api
+		core.registerAPI(new SearchIndexItemApi(app));
+
 		// Register favorites search api
 		core.registerAPI(new SearchFavoriteAPI(app));
 
@@ -556,6 +571,109 @@ public class QuickSearchHelper implements ResourceListener {
 		public boolean isSearchMoreAvailable(SearchPhrase phrase) {
 			return false;
 		}
+	}
+
+	public static class SearchIndexItemApi extends SearchBaseAPI {
+
+		private final OsmandApplication app;
+
+		public SearchIndexItemApi(OsmandApplication app) {
+			super(ObjectType.INDEX_ITEM);
+			this.app = app;
+		}
+
+		@Override
+		public boolean search(SearchPhrase phrase,
+		                      SearchResultMatcher resultMatcher) {
+			DownloadResources indexes = app.getDownloadThread().getIndexes();
+			DownloadIndexesThread thread = app.getDownloadThread();
+			if (!indexes.isDownloadedFromInternet && app.getSettings().isInternetConnectionAvailable()) {
+				app.runInUIThread(thread::runReloadIndexFilesSilent);
+			} else {
+				processGroup(indexes, phrase, resultMatcher);
+			}
+			return true;
+		}
+
+		private void processGroup(DownloadResourceGroup group,
+		                          SearchPhrase phrase,
+		                          SearchResultMatcher resultMatcher) {
+			IndexItem indexItem = null;
+			String name = null;
+			WorldRegion region = group.getRegion();
+			if (region != null) {
+				String searchText = region.getRegionSearchText();
+				if (searchText != null) {
+					name = searchText;
+				}
+			}
+			if (name == null) {
+				name = group.getName(app);
+			}
+
+			if (group.getType().isScreen() && group.getParentGroup() != null
+					&& group.getParentGroup().getParentGroup() != null
+					&& group.getParentGroup().getParentGroup().getType() != DownloadResourceGroupType.WORLD
+					&& isMatch(phrase, name)) {
+
+				for (DownloadResourceGroup g : group.getGroups()) {
+					if (g.getType() == DownloadResourceGroupType.REGION_MAPS) {
+						List<IndexItem> res = g.getIndividualResources();
+						if (res != null) {
+							for (IndexItem item : res) {
+								if (DownloadActivityType.NORMAL_FILE == item.getType() && !item.isDownloaded()) {
+									indexItem = item;
+									break;
+								}
+							}
+						}
+						break;
+					}
+				}
+			}
+
+			if (indexItem != null) {
+				SearchResult searchResult = new SearchResult(phrase);
+				searchResult.objectType = ObjectType.INDEX_ITEM;
+				searchResult.localeName = name;
+				searchResult.relatedObject = indexItem;
+				searchResult.priority = SEARCH_INDEX_ITEM_PRIORITY;
+				searchResult.preferredZoom = 17;
+				resultMatcher.publish(searchResult);
+			}
+
+			// process sub groups
+			if (group.getGroups() != null) {
+				for (DownloadResourceGroup g : group.getGroups()) {
+					processGroup(g, phrase, resultMatcher);
+				}
+			}
+		}
+
+		private boolean isMatch(SearchPhrase phrase, String text) {
+			if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
+				return true;
+			}
+			NameStringMatcher matcher = new NameStringMatcher(
+					phrase.getFullSearchPhrase(),
+					StringMatcherMode.CHECK_EQUALS_FROM_SPACE
+			);
+			return matcher.matches(text);
+		}
+
+		@Override
+		public int getSearchPriority(SearchPhrase p) {
+			if (!p.isNoSelectedType()) {
+				return -1;
+			}
+			return SEARCH_INDEX_ITEM_API_PRIORITY;
+		}
+
+		@Override
+		public boolean isSearchMoreAvailable(SearchPhrase phrase) {
+			return false;
+		}
+
 	}
 
 	@Override
