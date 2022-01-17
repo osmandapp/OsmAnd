@@ -50,8 +50,8 @@ public class Algorithms {
 		return c == null || c.size() == 0;
 	}
 	
-	private static char[] CHARS_TO_NORMALIZE_KEY = new char['’'];
-	private static char[] CHARS_TO_NORMALIZE_VALUE = new char['\''];
+	private static final char[] CHARS_TO_NORMALIZE_KEY = {'’'};
+	private static final char[] CHARS_TO_NORMALIZE_VALUE = {'\''};
 
 	public static final int ZIP_FILE_SIGNATURE = 0x504b0304;
 	public static final int XML_FILE_SIGNATURE = 0x3c3f786d;

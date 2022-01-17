@@ -568,7 +568,6 @@
     <string name="save_current_track">მიმდინარე დევნის დამახსოვრება</string>
     <string name="save_track_interval">ნავიგაციისას ჟურნალირების ინტერვალი</string>
     <string name="save_track_interval_descr">აირჩიეთ პოზიცირების ინტერვალი დევნისათვის</string>
-    <string name="save_track_to_gpx_descrp">დევნები ჩაიწერება დევნის დასტაში, დალაგდება დღეების მიხედვით.</string>
     <string name="save_track_to_gpx">დევნის GPX-ში ჟურნალირება</string>
     <string name="update_tile">რუკის განახლება</string>
     <string name="reload_tile">ხელახალი ჩატვირთვა</string>
@@ -2898,4 +2897,17 @@
     <string name="output">გამოტანა</string>
     <string name="tts_title">TTS ხმა</string>
     <string name="shared_string_turn">მოხვევა</string>
+    <string name="touring_view_renderer">მოგზაურობის ხედი</string>
+    <string name="waypoint_template">გზის სანიშნის ნიმუში</string>
+    <string name="waypoint_appearance">გზის სანიშნის გარეგნობა</string>
+    <string name="osm_recipients_label">OSM მიმღებები</string>
+    <string name="rendering_value_category_name">კატეგორია</string>
+    <string name="rendering_value_all_name">ყველა</string>
+    <string name="rendering_value_omit_name">გამოტოვება</string>
+    <string name="files_with_route_restrictions">გზებზე აკრძალვების არსებობის შემცველი ფაილები</string>
+    <string name="rendering_attr_seabedDetail_name">ზღვის ფსკერის დეტალები</string>
+    <string name="shared_string_open_street_map">OSM</string>
+    <string name="shared_string_move_up">გადაადგილება ↑</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">სალაშქრო გზები</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">ქსელი</string>
 </resources>

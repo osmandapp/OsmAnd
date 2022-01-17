@@ -1,8 +1,5 @@
 package net.osmand.plus.download;
 
-import static net.osmand.binary.BinaryMapIndexReader.DETAILED_MAP_MIN_ZOOM;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.REGION_MAPS;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -13,9 +10,9 @@ import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResource;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.util.Algorithms;
@@ -33,6 +30,9 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import static net.osmand.binary.BinaryMapIndexReader.DETAILED_MAP_MIN_ZOOM;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.REGION_MAPS;
 
 public class DownloadResources extends DownloadResourceGroup {
 	private static final String TAG = DownloadResources.class.getSimpleName();
@@ -622,7 +622,8 @@ public class DownloadResources extends DownloadResourceGroup {
 			if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)
 					&& !fileName.startsWith("World_")
 					&& !fileName.endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)
-					&& !fileName.endsWith(IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT)) {
+					&& !fileName.endsWith(IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT)
+					&& !fileName.endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
 				BinaryMapIndexReader shallowReader = reader.getShallowReader();
 				if (shallowReader != null && !shallowReader.isBasemap()) {
 					if (routeData && !shallowReader.containsRouteData()) {

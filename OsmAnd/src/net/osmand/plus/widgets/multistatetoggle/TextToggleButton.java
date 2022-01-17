@@ -50,5 +50,4 @@ public class TextToggleButton extends MultiStateToggleButton<TextRadioItem> {
 			return title;
 		}
 	}
-
 }

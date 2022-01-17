@@ -763,7 +763,6 @@
     <string name="save_current_track">Salvează traseul curent</string>
     <string name="save_track_interval">Interval de salvare a poziției in timpul navigării</string>
     <string name="save_track_interval_descr">Alegeți intervalul de logare pentru înregistrarea traseului în timpul navigării</string>
-    <string name="save_track_to_gpx_descrp">Traseele vor fi salvate în directorul traseelor în timpul navigării.</string>
     <string name="save_track_to_gpx">Înregistrează automat traseul în timpul navigării</string>
     <string name="update_tile">Actualizare hartă</string>
     <string name="reload_tile">Reîncarcă porțiunile de hartă raster</string>
@@ -4514,4 +4513,9 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etichete pentru note</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Etichetele Fixme</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_attr_seabedDetail_description">Informații text suplimentare privind calificarea_calificarea suprafeței fundului mării, tipurile de suprafețe combinate, categoria și taxonul de buruieni sau ierburi marine</string>
+    <string name="rendering_value_category_name">Categoria</string>
+    <string name="rendering_value_all_name">Toate</string>
+    <string name="rendering_value_omit_name">Omiteți</string>
+    <string name="rendering_attr_seabedDetail_name">Detalii privind fundul mării</string>
 </resources>

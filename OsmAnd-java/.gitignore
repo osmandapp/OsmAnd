@@ -8,7 +8,7 @@ result.*
 # Android Studio
 /.idea
 *.iml
-
+src/main/resources/*.lib
 # Gradle
 .gradle
 /local.properties

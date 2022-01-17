@@ -1,5 +1,7 @@
 package net.osmand.plus.track.fragments;
 
+import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,19 +15,20 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.Slider;
 
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.TrackDrawInfo;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
@@ -38,8 +41,6 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
 
 public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -126,6 +127,9 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		TextRadioItem time = createRadioButton(GpxSplitType.TIME, R.string.shared_string_time);
 		TextRadioItem distance = createRadioButton(GpxSplitType.DISTANCE, R.string.distance);
 
+		GPXTrackAnalysis analysis = selectedGpxFile.getTrackAnalysisToDisplay(app);
+		time.setEnabled(analysis.timeSpan > 0);
+
 		TextToggleButton radioGroup = new TextToggleButton(app, buttonsContainer, nightMode);
 		radioGroup.setItems(none, time, distance);
 
@@ -202,7 +206,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 	private void addDistanceOptionSplit(int value, @NonNull List<GpxDisplayGroup> displayGroups) {
 		if (displayGroups.size() > 0) {
 			double dvalue = OsmAndFormatter.calculateRoundedDist(value, app);
-			String formattedDist = OsmAndFormatter.getFormattedDistanceInterval(app, value);
+			String formattedDist = OsmAndFormatter.getFormattedDistanceInterval(app, value, false);
 			distanceSplitOptions.put(formattedDist, dvalue);
 			if (Math.abs(displayGroups.get(0).getSplitDistance() - dvalue) < 1) {
 				selectedDistanceSplitInterval = distanceSplitOptions.size() - 1;

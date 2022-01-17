@@ -7,9 +7,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RATE_US_I
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlarmManager;
 import android.app.Dialog;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -48,14 +46,11 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceFragmentCompat.OnPreferenceStartFragmentCallback;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.SecondSplashScreenFragment;
 import net.osmand.StateChangedListener;
-import net.osmand.data.ValueHolder;
-import net.osmand.plus.plugins.accessibility.MapAccessibilityActions;
 import net.osmand.aidl.AidlMapPointWrapper;
 import net.osmand.aidl.OsmandAidlApi.AMapPointUpdateListener;
 import net.osmand.core.android.AtlasMapRendererView;
@@ -64,20 +59,16 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.data.ValueHolder;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OnDismissDialogFragmentListener;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.auto.NavigationSession;
@@ -106,6 +97,8 @@ import net.osmand.plus.helpers.LockHelper.LockUIAdapter;
 import net.osmand.plus.helpers.RateUsHelper;
 import net.osmand.plus.helpers.ScrollHelper;
 import net.osmand.plus.helpers.ScrollHelper.OnScrollEventListener;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
@@ -122,6 +115,8 @@ import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.SnapTrackWarningFragment;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.accessibility.MapAccessibilityActions;
 import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
@@ -134,10 +129,10 @@ import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.datastorage.DataStorageFragment;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
@@ -146,6 +141,9 @@ import net.osmand.plus.settings.fragments.ConfigureProfileFragment;
 import net.osmand.plus.track.fragments.GpsFilterFragment;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapLayers;
@@ -836,7 +834,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				}
 			} else {
 				if (permissionGranted) {
-					restartApp();
+					RestartActivity.doRestart(this, getString(R.string.storage_permission_restart_is_required));
 				} else if (fragmentManager.findFragmentByTag(DataStoragePlaceDialogFragment.TAG) == null) {
 					DataStoragePlaceDialogFragment.showInstance(fragmentManager, null, true);
 				}
@@ -1049,58 +1047,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		}
 		return false;
-	}
-
-	private void restartApp() {
-		AlertDialog.Builder bld = new AlertDialog.Builder(this);
-		bld.setMessage(R.string.storage_permission_restart_is_required);
-		bld.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
-			doRestart(MapActivity.this);
-			//android.os.Process.killProcess(android.os.Process.myPid());
-		});
-		bld.show();
-	}
-
-	public static void doRestart(Context c) {
-		boolean res = false;
-		try {
-			//check if the context is given
-			if (c != null) {
-				//fetch the packagemanager so we can get the default launch activity
-				// (you can replace this intent with any other activity if you want
-				PackageManager pm = c.getPackageManager();
-				//check if we got the PackageManager
-				if (pm != null) {
-					//create the intent with the default start activity for your application
-					Intent mStartActivity = pm.getLaunchIntentForPackage(c.getPackageName());
-					if (mStartActivity != null) {
-						mStartActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						//create a pending intent so the application is restarted after System.exit(0) was called.
-						// We use an AlarmManager to call this intent in 100ms
-						int mPendingIntentId = 84523443;
-						PendingIntent mPendingIntent = PendingIntent
-								.getActivity(c, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
-						AlarmManager mgr = (AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
-						mgr.setExact(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
-						//kill the application
-						res = true;
-						android.os.Process.killProcess(android.os.Process.myPid());
-						//System.exit(0);
-					} else {
-						LOG.error("Was not able to restart application, mStartActivity null");
-					}
-				} else {
-					LOG.error("Was not able to restart application, PM null");
-				}
-			} else {
-				LOG.error("Was not able to restart application, Context null");
-			}
-		} catch (Exception ex) {
-			LOG.error("Was not able to restart application");
-		}
-		if (!res) {
-			android.os.Process.killProcess(android.os.Process.myPid());
-		}
 	}
 
 	public void readLocationToShow() {

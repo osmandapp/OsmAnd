@@ -43,7 +43,6 @@
     <string name="shared_string_navigation">Merdeiñ</string>
     <string name="welcome_text">Gant OsmAnd eo posubl sellout ouzh kartennoù hep internet, ha merdeiñ hep rouedad er bed a-bezh.</string>
     <string name="routing_settings_2">Arventennoù ar merdeiñ</string>
-    <string name="save_track_to_gpx_descrp">Ur roud GPX a vez enrollet e-pad ar veaj d\'un doare emgefreek e-barzh teuliad ar roudoù.</string>
     <string name="animate_my_location_desc">Gweredekaat heuliañ \'Ma Lec\'hiadur\' war ar gartenn e-pad ar merdeiñ.</string>
     <string name="quick_action_resume_pause_navigation">Ehanañ / Kenderc\'hel gant ar merdeiñ</string>
     <string name="quick_action_resume_pause_navigation_descr">Klikit amañ evit ehanañ pe kenderc\'hel gant ar merdeiñ.</string>
