@@ -720,7 +720,6 @@
     <string name="save_current_track">Αποθήκευση τρέχοντος ίχνους</string>
     <string name="save_track_interval">Διάστημα καταγραφής κατά την πλοήγηση</string>
     <string name="save_track_interval_descr">Προσδιορίστε το διάστημα καταγραφής για την εγγραφή ιχνών κατά την πλοήγηση</string>
-    <string name="save_track_to_gpx_descrp">Το ίχνος GPX αποθηκεύεται αυτόματα στον κατάλογο ιχνών κατά την πλοήγηση.</string>
     <string name="update_tile">Ενημέρωση χάρτη</string>
     <string name="reload_tile">Ανανέωση πλακιδίου</string>
     <string name="mark_point">Στόχος</string>

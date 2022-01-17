@@ -500,7 +500,6 @@
     <string name="save_current_track">Guardar la traza actual</string>
     <string name="save_track_interval">Intervalo de registro durante la navegación</string>
     <string name="save_track_interval_descr">Intervalo de registro de trazas durante la navegación</string>
-    <string name="save_track_to_gpx_descrp">Una traza GPX se guardará automáticamente en la carpeta de trazas durante la navegación.</string>
     <string name="update_tile">Actualizar mapa</string>
     <string name="reload_tile">Recargar tesela</string>
     <string name="mark_point">Objetivo</string>

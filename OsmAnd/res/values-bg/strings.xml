@@ -911,7 +911,6 @@
     <string name="save_current_track">Запиши текущата GPX следа</string>
     <string name="save_track_interval">Интервал за запис по време на навигация</string>
     <string name="save_track_interval_descr">Избор на интервал, през който да се прави запис на следата по време на навигация</string>
-    <string name="save_track_to_gpx_descrp">Следите ще бъдат записвани в папката tracks по време на самата навигация</string>
     <string name="update_tile">Обнови картата</string>
     <string name="reload_tile">Презареждане на картната плочка</string>
     <string name="mark_point">Цел</string>

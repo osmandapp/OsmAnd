@@ -1297,7 +1297,6 @@
     <string name="save_track_to_gpx_globally_headline">Tələbə görə iz qeydiyyatı</string>
     <string name="save_current_track_descr">Hazırkı izi indi GPX faylı olaraq saxla.</string>
     <string name="save_current_track">Hazırkı izi saxla</string>
-    <string name="save_track_to_gpx_descrp">Naviqasiya zamanı iz GPX formatında izlər qovluğunda avtomatik saxlanacaq.</string>
     <string name="none_selected_gpx">Əvvəlcə toxunub saxlamaqla GPX faylını təyin edin.</string>
     <string name="gpx_info_subtracks">Alt izlər: %1$s</string>
     <string name="gpx_selection_track">%1$s
@@ -3210,7 +3209,7 @@
     <string name="overwrite_profile_q">“%1$s” artıq mövcuddur. Üzərinə yazılsın\?</string>
     <string name="osmand_parking_warning_text">Avtomobilinizi götürmək üçün bildiriş təqviminizə əlavə edildi, orada düzəliş edilə və ya silinə bilər.</string>
     <string name="quick_action_add_parking">Parkinq yeri əlavə et</string>
-    <string name="quick_action_add_parking_descr">Ekranın mərkəzində parking məkanı əlavə etmək üçün düymə.</string>
+    <string name="quick_action_add_parking_descr">Ekranın mərkəzində parkinq məkanı əlavə etmək üçün düymə.</string>
     <string name="poi_filter_parking">Parkinq</string>
     <string name="map_widget_parking">Parkinq</string>
     <string name="mapillary_widget_descr">Mapillary-ə sürətli töhfələr verməyə imkan verir.</string>
