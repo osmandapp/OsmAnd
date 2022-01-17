@@ -36,6 +36,7 @@ import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.slider.Slider;
 
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.utils.ColorUtilities;
@@ -153,6 +154,9 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View root = UiUtilities.getInflater(inflater.getContext(), nightMode).inflate(R.layout.fragment_terrain, container, false);
+
+		showHideTopShadow(root);
+
 		TextView emptyStateDescriptionTv = root.findViewById(R.id.empty_state_description);
 		TextView slopeReadMoreTv = root.findViewById(R.id.slope_read_more_tv);
 		TextView titleTv = root.findViewById(R.id.title_tv);
@@ -211,6 +215,11 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 
 		updateUiMode();
 		return root;
+	}
+
+	private void showHideTopShadow(@NonNull View view) {
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(requireActivity());
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.shadow_on_map), portrait);
 	}
 
 	@Override

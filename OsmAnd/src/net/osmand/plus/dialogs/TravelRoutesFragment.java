@@ -105,11 +105,17 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
 		View view = themedInflater.inflate(R.layout.travel_routes_fragment, container, false);
 
+		showHideTopShadow(view);
 		setupHeader(view);
 		setupPrefItems(view);
 		setupTypeRadioGroup(view);
 
 		return view;
+	}
+
+	private void showHideTopShadow(@NonNull View view) {
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(requireActivity());
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.shadow_on_map), portrait);
 	}
 
 	private void updateRouteTypes() {

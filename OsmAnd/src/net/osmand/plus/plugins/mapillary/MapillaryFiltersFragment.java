@@ -22,6 +22,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -58,6 +59,10 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
 
         final View view = UiUtilities.getInflater(mapActivity, nightMode)
                 .inflate(R.layout.fragment_mapillary_filters, container, false);
+
+        boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+        AndroidUiHelper.updateVisibility(view.findViewById(R.id.shadow_on_map), portrait);
+
         view.findViewById(R.id.mapillary_filters_linear_layout).setBackgroundColor(backgroundColor);
 
         final View toggleRow = view.findViewById(R.id.toggle_row);

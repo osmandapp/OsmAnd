@@ -53,10 +53,16 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 		LayoutInflater themedInflater = UiUtilities.getInflater(mapActivity, nightMode);
 		View view = themedInflater.inflate(R.layout.map_route_types_fragment, container, false);
 
+		showHideTopShadow(view);
 		setupHeader(view);
 		setupTypesCard(view);
 
 		return view;
+	}
+
+	private void showHideTopShadow(@NonNull View view) {
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(requireActivity());
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.shadow_on_map), portrait);
 	}
 
 	private void setupHeader(@NonNull View view) {
