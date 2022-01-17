@@ -18,6 +18,7 @@ import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.utils.ColorUtilities;
@@ -101,10 +102,11 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 							|| sr.objectType == ObjectType.RECENT_OBJ
 							|| sr.objectType == ObjectType.WPT
 							|| sr.objectType == ObjectType.STREET_INTERSECTION
-							|| sr.objectType == ObjectType.GPX_TRACK
-							|| sr.objectType == ObjectType.INDEX_ITEM) {
+							|| sr.objectType == ObjectType.GPX_TRACK) {
 
 						showResult(sr);
+					} else if (sr.objectType == ObjectType.INDEX_ITEM) {
+						processIndexItemClick((IndexItem) sr.relatedObject);
 					} else {
 						if (sr.objectType == ObjectType.CITY || sr.objectType == ObjectType.VILLAGE || sr.objectType == ObjectType.STREET) {
 							showResult = true;
@@ -174,17 +176,6 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		showResult = false;
 		if (searchResult.objectType == ObjectType.GPX_TRACK) {
 			showTrackMenuFragment((GPXInfo) searchResult.relatedObject);
-		} else if (searchResult.objectType == ObjectType.INDEX_ITEM) {
-			OsmandApplication app = getMyApplication();
-			FragmentActivity activity = getMapActivity();
-			DownloadIndexesThread thread = app.getDownloadThread();
-			DownloadValidationManager manager = new DownloadValidationManager(app);
-			IndexItem indexItem = (IndexItem) searchResult.relatedObject;
-			if (thread.isDownloading(indexItem)) {
-				manager.makeSureUserCancelDownload(activity, indexItem);
-			} else {
-				manager.startDownload(activity, indexItem);
-			}
 		} else if (searchResult.location != null) {
 			Pair<PointDescription, Object> pointDescriptionObject =
 					QuickSearchListItem.getPointDescriptionObject(getMyApplication(), searchResult);
@@ -234,6 +225,36 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		String path = file.getAbsolutePath();
 		TrackMenuFragment.showInstance(mapActivity, path, false, null, QuickSearchDialogFragment.TAG, null);
 		dialogFragment.dismiss();
+	}
+
+	private void processIndexItemClick(IndexItem indexItem) {
+		OsmandApplication app = getMyApplication();
+		FragmentActivity activity = getMapActivity();
+		DownloadIndexesThread thread = app.getDownloadThread();
+
+		DownloadValidationManager manager = new DownloadValidationManager(app);
+		if (thread.isDownloading(indexItem)) {
+			manager.makeSureUserCancelDownload(activity, indexItem);
+		} else {
+			manager.startDownload(activity, indexItem);
+		}
+
+		thread.setUiActivity(new DownloadEvents() {
+			@Override
+			public void onUpdatedIndexesList() {
+				listAdapter.notifyDataSetChanged();
+			}
+
+			@Override
+			public void downloadInProgress() {
+				listAdapter.notifyDataSetChanged();
+			}
+
+			@Override
+			public void downloadHasFinished() {
+				listAdapter.notifyDataSetChanged();
+			}
+		});
 	}
 
 	public MapActivity getMapActivity() {

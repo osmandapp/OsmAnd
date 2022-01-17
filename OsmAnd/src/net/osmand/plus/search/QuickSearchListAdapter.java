@@ -6,7 +6,6 @@ import android.os.Build;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -31,7 +30,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.DownloadIndexesThread;
-import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -451,12 +449,13 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		} else if (searchResult != null && searchResult.objectType == ObjectType.GPX_TRACK) {
 			view = getLinearLayout(convertView, R.layout.search_gpx_list_item);
 			bindGpxTrack(view, listItem, (GPXInfo) searchResult.relatedObject);
+			setupCheckBox(position, view, listItem);
 		} else {
 			view = getLinearLayout(convertView, R.layout.search_list_item);
 			bindSearchResult(view, listItem);
 			updateCompassVisibility(view, listItem);
+			setupCheckBox(position, view, listItem);
 		}
-		setupCheckBox(position, view, listItem);
 		return view;
 	}
 
@@ -467,7 +466,6 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		OsmandApplication app = (OsmandApplication) view.getContext().getApplicationContext();
 		UiUtilities iconsCache = app.getUIUtilities();
 		DownloadIndexesThread thread = app.getDownloadThread();
-		DownloadValidationManager manager = new DownloadValidationManager(app);
 
 		DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(app);
 		TextView tvName = (TextView) view.findViewById(R.id.title);
@@ -481,7 +479,6 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		String name = indexItem.getVisibleName(app, app.getRegions(), false);
 		tvName.setText(name);
 
-		OnClickListener action = null;
 		Drawable buttonDrawable = null;
 		boolean isDownloading = indexItem.isDownloading(thread);
 		if (!isDownloading) {
@@ -496,7 +493,6 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			description = String.format(pattern, size, description);
 			tvDesc.setText(description);
 			buttonDrawable = iconsCache.getIcon(R.drawable.ic_action_gsave_dark, activeColorId);
-			action = v -> manager.startDownload(activity, indexItem);
 		} else {
 			pbProgress.setVisibility(View.VISIBLE);
 			tvDesc.setVisibility(View.GONE);
@@ -508,9 +504,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			pbProgress.setIndeterminate(progress == -1);
 			pbProgress.setProgress(progress);
 			buttonDrawable = iconsCache.getIcon(R.drawable.ic_action_remove_dark, defaultIconColorId);
-			action = v -> manager.makeSureUserCancelDownload(activity, indexItem);
 		}
-		ivButton.setOnClickListener(action);
 		ivButton.setImageDrawable(buttonDrawable);
 	}
 
@@ -627,8 +621,6 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 							   @NonNull View rootView,
 							   @NonNull QuickSearchListItem listItem) {
 		final CheckBox ch = (CheckBox) rootView.findViewById(R.id.toggle_item);
-		if (ch == null) return;
-
 		if (selectionMode) {
 			ch.setVisibility(View.VISIBLE);
 			ch.setChecked(selectedItems.contains(listItem));

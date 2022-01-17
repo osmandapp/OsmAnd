@@ -79,6 +79,8 @@
 				android:background="?attr/dashboard_button"
 				android:scaleType="center"
 				android:src="@drawable/ic_action_gsave_dark"
+				android:focusable="false"
+				android:clickable="false"
 				android:visibility="visible"
 				tools:tint="?attr/active_color_basic" />
 
