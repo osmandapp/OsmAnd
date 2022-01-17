@@ -100,7 +100,6 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	private Slider transparencySlider;
 	private RangeSlider zoomSlider;
 	private ObservableListView observableListView;
-	private View bottomEmptySpace;
 
 	private ArrayAdapter<ContextMenuItem> listAdapter;
 
@@ -180,7 +179,6 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		downloadTopDivider = root.findViewById(R.id.download_container_top_divider);
 		downloadBottomDivider = root.findViewById(R.id.download_container_bottom_divider);
 		observableListView = root.findViewById(R.id.list_view);
-		bottomEmptySpace = root.findViewById(R.id.bottom_empty_space);
 
 		titleTv.setText(R.string.shared_string_terrain);
 		String wikiString = getString(R.string.shared_string_wikipedia);
@@ -263,7 +261,6 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		adjustGlobalVisibility();
 		adjustLegendVisibility(mode);
 		adjustModeButtons(mode);
-		setupBottomEmptySpace();
 	}
 
 	private void adjustGlobalVisibility() {
@@ -496,13 +493,6 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	@Override
 	public void downloadHasFinished() {
 		updateDownloadSection();
-	}
-
-	private void setupBottomEmptySpace() {
-		int h = terrainEnabled ? AndroidUtils.dpToPx(app, 120) : AndroidUtils.getScreenHeight(requireActivity()) / 3;
-		ViewGroup.LayoutParams params = bottomEmptySpace.getLayoutParams();
-		params.height = h;
-		bottomEmptySpace.setLayoutParams(params);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {

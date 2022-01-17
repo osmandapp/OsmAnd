@@ -18,70 +18,66 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/toggle_row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/bg_color"
-            android:minHeight="60dp"
-            tools:layout_height="60dp">
+            android:minHeight="@dimen/dialog_button_ex_height"
+            tools:layout_height="@dimen/dialog_button_ex_height">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/toggle_row_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_margin="@dimen/content_padding"
+                android:layout_width="@dimen/standard_icon_size"
+                android:layout_height="@dimen/standard_icon_size"
+                android:layout_marginStart="@dimen/content_padding"
+                android:layout_marginTop="@dimen/content_padding"
+                android:layout_marginBottom="@dimen/content_padding"
+                android:layout_gravity="center_vertical"
                 tools:src="@drawable/ic_action_info_dark" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/toggle_row_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/content_padding"
+                android:textAppearance="@style/TextAppearance.ListItemTitle"
+                tools:text="Some title text" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/toggle_row_toggle"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/content_padding"
-                android:layout_marginLeft="@dimen/content_padding"
-                android:layout_marginRight="@dimen/content_padding"
+                android:layout_height="@dimen/dialog_button_ex_height"
                 android:layout_marginStart="@dimen/content_padding"
+                android:layout_marginEnd="@dimen/content_padding"
                 android:focusable="false" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/toggle_row_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/toggle_row_icon"
-                android:layout_toLeftOf="@id/toggle_row_toggle"
-                android:layout_toRightOf="@+id/toggle_row_icon"
-                android:layout_toStartOf="@id/toggle_row_toggle"
-                android:textAppearance="@style/TextAppearance.ListItemTitle"
-                tools:text="Some title text" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/bg_color"
+            android:paddingStart="@dimen/toolbar_height">
 
             <View
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginTop="@dimen/content_padding_small"
-                android:layout_toEndOf="@+id/toggle_row_icon"
-                android:layout_toRightOf="@+id/toggle_row_icon"
                 android:background="?attr/dashboard_divider" />
-        </RelativeLayout>
+
+        </FrameLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/bg_color"
-            android:minHeight="60dp">
+            android:minHeight="@dimen/dialog_button_ex_height">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/mapillary_filters_tile_cache_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_margin="@dimen/content_padding"
                 tools:src="@drawable/ic_layer_top" />
@@ -91,10 +87,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/content_padding"
-                android:layout_marginRight="@dimen/content_padding"
                 android:background="?attr/selectableItemBackground"
                 android:gravity="end|center_vertical"
                 android:minWidth="0dp"
@@ -107,10 +101,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_toEndOf="@+id/mapillary_filters_tile_cache_icon"
-                android:layout_toLeftOf="@id/button_reload_tile"
-                android:layout_toRightOf="@+id/mapillary_filters_tile_cache_icon"
                 android:layout_toStartOf="@id/button_reload_tile"
-                android:minHeight="60dp"
+                android:minHeight="@dimen/dialog_button_ex_height"
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/content_padding_small"
                 android:paddingTop="10dp">
@@ -193,7 +185,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/bg_color"
-            android:minHeight="60dp"
+            android:minHeight="@dimen/dialog_button_ex_height"
             android:visibility="gone">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -208,8 +200,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="@dimen/content_padding"
-                android:layout_marginRight="@dimen/content_padding"
-                android:minHeight="60dp"
+                android:minHeight="@dimen/dialog_button_ex_height"
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/content_padding_small"
                 android:paddingTop="10dp">
@@ -234,11 +225,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/map_button_size"
             android:animateLayoutChanges="true"
             android:background="?attr/bg_color"
             android:orientation="vertical"
-            android:paddingLeft="52dp"
-            android:paddingStart="52dp"
             android:visibility="gone">
 
             <net.osmand.plus.views.controls.DelayAutoCompleteTextView
@@ -246,7 +236,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/content_padding"
-                android:layout_marginRight="@dimen/content_padding"
                 android:completionThreshold="1"
                 android:hint="@string/mapillary_menu_edit_text_hint"
                 android:inputType="text"
@@ -270,7 +259,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/content_padding_half"
                     android:layout_marginStart="@dimen/content_padding_half"
                     android:text="@string/wrong_user_name"
                     android:textColor="?android:textColorSecondary"
@@ -289,7 +277,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/bg_color"
-            android:minHeight="60dp">
+            android:minHeight="@dimen/dialog_button_ex_height">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/mapillary_filters_date_icon"
@@ -303,8 +291,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="@dimen/content_padding"
-                android:layout_marginRight="@dimen/content_padding"
-                android:minHeight="60dp"
+                android:minHeight="@dimen/dialog_button_ex_height"
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/content_padding_small"
                 android:paddingTop="10dp">
@@ -331,20 +318,17 @@
             android:layout_height="wrap_content"
             android:background="?attr/bg_color"
             android:orientation="vertical"
-            android:paddingLeft="52dp"
-            android:paddingStart="52dp">
+            android:paddingStart="@dimen/map_button_size">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/content_padding"
-                android:layout_marginRight="@dimen/content_padding">
+                android:layout_marginEnd="@dimen/content_padding">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/content_padding_small"
-                    android:layout_marginRight="@dimen/content_padding_small"
                     android:layout_weight="1">
 
                     <EditText
@@ -361,7 +345,6 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/content_padding_small"
                     android:layout_marginStart="@dimen/content_padding_small"
                     android:layout_weight="1">
 
@@ -374,7 +357,9 @@
                         android:textColor="?android:textColorPrimary"
                         android:textSize="@dimen/default_list_text_size"
                         tools:text="To" />
+
                 </com.google.android.material.textfield.TextInputLayout>
+
             </LinearLayout>
 
             <View
@@ -384,39 +369,32 @@
                 android:background="?attr/dashboard_divider" />
         </LinearLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/pano_row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/bg_color"
-            android:minHeight="60dp"
-            tools:layout_height="60dp">
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/dialog_button_ex_height">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/pano_row_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/map_button_size"
+                android:text="@string/mapillary_menu_title_pano"
+                android:textAppearance="@style/TextAppearance.ListItemTitle" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/pano_row_toggle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/content_padding"
-                android:layout_marginLeft="@dimen/content_padding"
-                android:layout_marginRight="@dimen/content_padding"
                 android:layout_marginStart="@dimen/content_padding"
+                android:layout_marginEnd="@dimen/content_padding"
                 android:focusable="false" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/pano_row_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:textAppearance="@style/TextAppearance.ListItemTitle"
-                android:text="@string/mapillary_menu_title_pano"
-                android:paddingLeft="52dp"
-	            android:paddingStart="52dp" />
-        </RelativeLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -424,12 +402,13 @@
             android:animateLayoutChanges="true"
             android:background="?attr/bg_color"
             android:orientation="vertical"
-            android:paddingLeft="52dp"
-            android:paddingStart="52dp">
+            android:paddingStart="@dimen/map_button_size">
+
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"
                 android:background="?attr/dashboard_divider" />
+
         </LinearLayout>
 
         <RelativeLayout
@@ -441,9 +420,7 @@
                 android:id="@+id/button_clear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginLeft="56dp"
                 android:layout_marginStart="56dp"
                 android:background="?attr/selectableItemBackground"
                 android:gravity="start|center_vertical"
@@ -457,9 +434,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:layout_marginEnd="@dimen/content_padding"
-                android:layout_marginRight="@dimen/content_padding"
                 android:background="?attr/selectableItemBackground"
                 android:gravity="end|center_vertical"
                 android:minWidth="0dp"
@@ -473,7 +448,9 @@
         <View
             android:id="@+id/bottom_empty_space"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/toolbar_height"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:minHeight="@dimen/toolbar_height"
             android:focusable="false" />
 
     </LinearLayout>

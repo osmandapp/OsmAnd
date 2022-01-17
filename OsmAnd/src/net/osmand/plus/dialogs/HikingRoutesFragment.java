@@ -83,7 +83,6 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 
 		setupHeader(view);
 		setupTypesCard(view);
-		setupBottomEmptySpace(view);
 
 		return view;
 	}
@@ -179,14 +178,6 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 			mapActivity.refreshMap();
 			mapActivity.updateLayers();
 		}
-	}
-
-	private void setupBottomEmptySpace(@NonNull View view) {
-		int height = AndroidUtils.getScreenHeight(requireActivity()) - getResources().getDimensionPixelSize(R.dimen.dashboard_map_top_padding);
-		View bottomView = view.findViewById(R.id.bottom_empty_space);
-		ViewGroup.LayoutParams params = bottomView.getLayoutParams();
-		params.height = height;
-		bottomView.setLayoutParams(params);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {

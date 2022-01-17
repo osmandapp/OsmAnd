@@ -55,7 +55,6 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 
 		setupHeader(view);
 		setupTypesCard(view);
-		setupBottomEmptySpace(view);
 
 		return view;
 	}
@@ -142,14 +141,6 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 			}
 		});
 		return item;
-	}
-
-	private void setupBottomEmptySpace(@NonNull View view) {
-		View bottomView = view.findViewById(R.id.bottom_empty_space);
-		int height = AndroidUtils.getScreenHeight(requireActivity()) - getResources().getDimensionPixelSize(R.dimen.dashboard_map_top_padding);
-		ViewGroup.LayoutParams params = bottomView.getLayoutParams();
-		params.height = height;
-		bottomView.setLayoutParams(params);
 	}
 
 	private CommonPreference<Boolean> getPreference() {

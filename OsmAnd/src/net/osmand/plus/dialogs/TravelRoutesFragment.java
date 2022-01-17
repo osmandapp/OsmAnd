@@ -104,10 +104,11 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
 		View view = themedInflater.inflate(R.layout.travel_routes_fragment, container, false);
+
 		setupHeader(view);
 		setupPrefItems(view);
 		setupTypeRadioGroup(view);
-		setupBottomEmptySpace(view);
+
 		return view;
 	}
 
@@ -433,14 +434,6 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 		emptyView.setGravity(Gravity.CENTER);
 		emptyView.setText(titleId);
 		return emptyView;
-	}
-
-	private void setupBottomEmptySpace(@NonNull View view) {
-		View bottomView = view.findViewById(R.id.bottom_empty_space);
-		int height = AndroidUtils.getScreenHeight(requireActivity()) - getResources().getDimensionPixelSize(R.dimen.dashboard_map_top_padding);
-		ViewGroup.LayoutParams params = bottomView.getLayoutParams();
-		params.height = height;
-		bottomView.setLayoutParams(params);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {
