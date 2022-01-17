@@ -27,9 +27,9 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 	protected final OsmandApplication app;
 	protected final UiUtilities uiUtilities;
 
-	private final LinearLayout container;
-	private final List<ViewGroup> buttons = new ArrayList<>();
-	private final List<View> dividers = new ArrayList<>();
+	protected final LinearLayout container;
+	protected final List<ViewGroup> buttons = new ArrayList<>();
+	protected final List<View> dividers = new ArrayList<>();
 
 	protected final List<_Radio> items = new ArrayList<>();
 	protected final boolean nightMode;

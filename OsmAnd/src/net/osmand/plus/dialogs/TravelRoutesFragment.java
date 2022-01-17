@@ -190,7 +190,7 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 			TextRadioItem files = createRadioButton(TravelType.TRAVEL_FILES);
 			TextRadioItem points = createRadioButton(TravelType.ROUTE_POINTS);
 
-			TextToggleButton radioGroup = new TextToggleButton(app, buttonsContainer, nightMode);
+			TextToggleButton radioGroup = new TextToggleButton(app, buttonsContainer, nightMode, true);
 			radioGroup.setItems(routes, files, points);
 			switch (travelType) {
 				case ROUTE_TYPES:

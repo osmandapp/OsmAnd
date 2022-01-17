@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -141,7 +142,8 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 			title.setText(R.string.routes_color_by_type);
 			description.setText(AndroidUtils.getRenderingStringPropertyDescription(app, pref.get()));
 
-			TextToggleButton radioGroup = new TextToggleButton(app, view.findViewById(R.id.custom_radio_buttons), nightMode);
+			LinearLayout radioButtonsContainer = view.findViewById(R.id.custom_radio_buttons);
+			TextToggleButton radioGroup = new TextToggleButton(app, radioButtonsContainer, nightMode, true);
 			radioGroup.setItems(items);
 			radioGroup.setSelectedItem(selectedItem);
 		}
