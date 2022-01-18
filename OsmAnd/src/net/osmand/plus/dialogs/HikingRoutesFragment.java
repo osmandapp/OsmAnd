@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -81,11 +82,16 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 		LayoutInflater themedInflater = UiUtilities.getInflater(mapActivity, nightMode);
 		View view = themedInflater.inflate(R.layout.map_route_types_fragment, container, false);
 
+		showHideTopShadow(view);
 		setupHeader(view);
 		setupTypesCard(view);
-		setupBottomEmptySpace(view);
 
 		return view;
+	}
+
+	private void showHideTopShadow(@NonNull View view) {
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(requireActivity());
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.shadow_on_map), portrait);
 	}
 
 	private void setupHeader(@NonNull View view) {
@@ -142,7 +148,8 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 			title.setText(R.string.routes_color_by_type);
 			description.setText(AndroidUtils.getRenderingStringPropertyDescription(app, pref.get()));
 
-			TextToggleButton radioGroup = new TextToggleButton(app, view.findViewById(R.id.custom_radio_buttons), nightMode);
+			LinearLayout radioButtonsContainer = view.findViewById(R.id.custom_radio_buttons);
+			TextToggleButton radioGroup = new TextToggleButton(app, radioButtonsContainer, nightMode, true);
 			radioGroup.setItems(items);
 			radioGroup.setSelectedItem(selectedItem);
 		}
@@ -179,14 +186,6 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 			mapActivity.refreshMap();
 			mapActivity.updateLayers();
 		}
-	}
-
-	private void setupBottomEmptySpace(@NonNull View view) {
-		int height = AndroidUtils.getScreenHeight(requireActivity()) - getResources().getDimensionPixelSize(R.dimen.dashboard_map_top_padding);
-		View bottomView = view.findViewById(R.id.bottom_empty_space);
-		ViewGroup.LayoutParams params = bottomView.getLayoutParams();
-		params.height = height;
-		bottomView.setLayoutParams(params);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {
