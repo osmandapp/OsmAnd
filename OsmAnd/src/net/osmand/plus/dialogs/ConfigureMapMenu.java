@@ -71,6 +71,7 @@ import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -228,7 +229,7 @@ public class ConfigureMapMenu {
 				.setItemDeleteAction(makeDeleteAction(settings.MAP_ONLINE_DATA, settings.MAP_TILE_SOURCES))
 				.setListener(listener).createItem());
 
-		OsmandPlugin.registerLayerContextMenu(adapter, activity);
+		OsmandPlugin.registerLayerContextMenu(adapter, activity, customRules);
 		app.getAidlApi().registerLayerContextMenu(adapter, activity);
 	}
 
@@ -784,8 +785,8 @@ public class ConfigureMapMenu {
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						if (property != null) {
 							pref.set(isChecked);
-							activity.refreshMap();
-							activity.updateLayers();
+							OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+							mapView.refreshMap(true);
 						} else {
 							isChecked = pref.get();
 						}
