@@ -852,7 +852,7 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	public static void registerConfigureMapCategory(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, List<RenderingRuleProperty> customRules) {
+	public static void registerConfigureMapCategory(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.registerConfigureMapCategoryActions(adapter, mapActivity, customRules);
 		}
