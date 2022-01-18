@@ -87,7 +87,7 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter menuAdapter, @NonNull MapActivity mapActivity, List<RenderingRuleProperty> customRules) {
+	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter menuAdapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
 		Iterator<RenderingRuleProperty> iterator = customRules.iterator();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		while (iterator.hasNext()) {
