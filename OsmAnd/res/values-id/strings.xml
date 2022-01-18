@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="address_search_desc">Mencari alamat</string>
     <string name="navpoint_search_desc">Koordinat</string>
@@ -122,7 +122,7 @@
     <string name="show_map">Tampilkan peta</string>
     <string name="route_is_calculated">Rute terhitung</string>
     <string name="round_trip">Pulang pergi</string>
-    <string name="plan_route_no_markers_toast">"Anda harus menambahkan setidaknya  satu penanda untuk menggunakan fungsi ini."</string>
+    <string name="plan_route_no_markers_toast">Anda harus menambahkan setidaknya satu penanda untuk menggunakan fungsi ini.</string>
     <string name="osn_modify_dialog_error">Tidak bisa mengubah catatan</string>
     <string name="osn_modify_dialog_title">Ubah catatan</string>
     <string name="context_menu_item_modify_note">Ubah catatan OSM</string>

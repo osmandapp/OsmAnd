@@ -869,7 +869,6 @@
     <string name="save_current_track">Gem det aktuelle spor</string>
     <string name="save_track_interval">Logningsinterval under navigation</string>
     <string name="save_track_interval_descr">Angiv logningsinterval for optagelse af spor under navigation</string>
-    <string name="save_track_to_gpx_descrp">GPX-spor gemmes automatisk i spormappen under navigation.</string>
     <string name="update_tile">Opdater kort</string>
     <string name="reload_tile">Genindlæs kortfliser</string>
     <string name="mark_point">Mål</string>
@@ -4519,4 +4518,5 @@
     <string name="rendering_value_all_name">Alle</string>
     <string name="rendering_value_omit_name">Undlad</string>
     <string name="rendering_attr_seabedDetail_name">Havbundsdetaljer</string>
+    <string name="rendering_attr_seabedDetail_description">Yderligere tekstinformation om havbunds overfladebeskaffenhed, kombinerede overfladetyper og klasser af havgræs</string>
 </resources>

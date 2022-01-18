@@ -328,7 +328,6 @@
     <string name="save_current_track_descr">Tallenna nykyinen reitti GPX tiedostona nyt.</string>
     <string name="save_current_track">Tallenna nykyinen reitti</string>
     <string name="save_track_interval">Kirjausväli suunnistuksen aikana</string>
-    <string name="save_track_to_gpx_descrp">GPX-jälki tallennetaan automaattisesti jälkihakemistoon navigaation aikana.</string>
     <string name="update_tile">Päivitä kartta</string>
     <string name="mark_point">Kohde</string>
     <string name="shared_string_add_to_favorites">Lisää suosikkeihin</string>

@@ -539,7 +539,6 @@
     <string name="reading_indexes">Čitanje lokalnih podataka…</string>
     <string name="save_track_interval">Interval bilježenja</string>
     <string name="save_track_interval_descr">Odaberite interval bilježenja za staze</string>
-    <string name="save_track_to_gpx_descrp">Staze se spremaju u direktorij \'tracks\' grupirane po danima</string>
     <string name="map_view_3d_descr">Omogući 3D prikaz na karti</string>
     <string name="map_view_3d">3D prikaz karte</string>
     <string name="show_poi_over_map_description">Prikaži POI preko karte (koristi zadnji odabrani filtar)</string>

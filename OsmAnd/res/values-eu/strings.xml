@@ -944,7 +944,6 @@
     <string name="save_current_track">Gorde uneko lorratza</string>
     <string name="save_track_interval">Erregistro- tartea nabigazioan zehar</string>
     <string name="save_track_interval_descr">Zehaztu erregistro-tartea nabigazio bitarteko lorratz grabaketarako</string>
-    <string name="save_track_to_gpx_descrp">GPX lorratza automatikoki gordeko da lorratzen direktorioan nabigazioan zehar.</string>
     <string name="update_tile">Mapa eguneratu</string>
     <string name="reload_tile">Tesela birkargatu</string>
     <string name="mark_point">Helmuga</string>

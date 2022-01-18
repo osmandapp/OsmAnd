@@ -1,8 +1,9 @@
 package net.osmand.plus.download;
 
+import static net.osmand.plus.download.ui.SearchDialogFragment.SHOW_WIKI_KEY;
+
 import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
@@ -22,6 +23,16 @@ import android.widget.ProgressBar;
 import android.widget.Space;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
+import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import com.ibm.icu.impl.IllegalIcuArgumentException;
 
 import net.osmand.IProgress;
@@ -34,6 +45,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.base.BottomSheetDialogFragment;
@@ -67,21 +79,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.UiThread;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.viewpager.widget.ViewPager;
-
-import static net.osmand.plus.download.ui.SearchDialogFragment.SHOW_WIKI_KEY;
-
 public class DownloadActivity extends AbstractDownloadActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback {
+
 	private static final Log LOG = PlatformUtil.getLog(DownloadActivity.class);
 
 	public static final int UPDATES_TAB_NUMBER = 2;
@@ -307,17 +307,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			if (f.exists()) {
 				String fileName = f.getName();
 				if (fileName.endsWith(IndexConstants.FONT_INDEX_EXT)) {
-					AlertDialog.Builder bld = new AlertDialog.Builder(this);
-					bld.setMessage(R.string.restart_is_required);
-					bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							android.os.Process.killProcess(android.os.Process.myPid());
-						}
-					});
-					bld.setNegativeButton(R.string.shared_string_cancel, null);
-					bld.show();
+					RestartActivity.doRestart(this);
 				} else if (fileName.startsWith(FileNameTranslationHelper.SEA_DEPTH)) {
 					getMyApplication().getSettings().getCustomRenderBooleanProperty("depthContours").set(true);
 				}

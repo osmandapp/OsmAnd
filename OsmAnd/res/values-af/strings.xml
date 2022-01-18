@@ -621,7 +621,6 @@
   <string name="save_current_track">Berg huidige spoor</string>
   <string name="save_track_interval">Log tussenpose</string>
   <string name="save_track_interval_descr">Kies posisioneringstussenpose vir spore</string>
-  <string name="save_track_to_gpx_descrp">Spore sal geberg word in die spoor bergadres in daaglikse groepe</string>
   <string name="update_tile">Opgradeer kaart</string>
   <string name="reload_tile">Laai teël weer af</string>
   <string name="mark_point">Teiken</string>

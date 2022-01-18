@@ -551,7 +551,6 @@
     <string name="save_current_track">Saglabāt patreizējo GPX trasi</string>
     <string name="save_track_interval">Logošanas intervāls navigācijas laikā</string>
     <string name="save_track_interval_descr">Izvēlieties ceļa logošanas intervālu treka ierakstam</string>
-    <string name="save_track_to_gpx_descrp">Navigācijas laikā gpx treki tiks automātiski saglabāti treku mapē</string>
     <string name="save_track_to_gpx">Navigācijas laikā treku ierakstīt GPX failā</string>
     <string name="update_tile">Atjaunot karti</string>
     <string name="reload_tile">Pārlādēt atēlu</string>

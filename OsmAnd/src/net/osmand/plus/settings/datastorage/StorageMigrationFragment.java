@@ -18,14 +18,10 @@ import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.IndexConstants;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
-import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -35,6 +31,10 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.datastorage.StorageMigrationAsyncTask.StorageMigrationListener;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
@@ -165,10 +165,8 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 		View actionButton = mainView.findViewById(R.id.dismiss_button);
 		actionButton.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
-			if (activity instanceof MapActivity) {
-				MapActivity.doRestart(activity);
-			} else {
-				android.os.Process.killProcess(android.os.Process.myPid());
+			if (activity != null) {
+				RestartActivity.doRestartSilent(activity);
 			}
 		});
 		UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.PRIMARY, R.string.shared_string_restart);

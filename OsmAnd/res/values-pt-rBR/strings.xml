@@ -311,7 +311,6 @@
     <string name="save_current_track_descr">Salvar a trilha atual como arquivo GPX agora.</string>
     <string name="save_current_track">Salvar a trilha atual</string>
     <string name="save_track_to_gpx">Auto-registrar a trilha durante a navegação</string>
-    <string name="save_track_to_gpx_descrp">A trilha GPX será salva automaticamente no diretório de trilhas durante a navegação.</string>
     <string name="save_track_interval_globally">Intervalo de registro</string>
     <string name="save_track_interval">Intervalo de registro durante a navegação</string>
     <string name="save_track_interval_descr">Especifique o intervalo de registro para a gravação de trilha durante a navegação</string>

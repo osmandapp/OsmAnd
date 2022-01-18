@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -104,16 +105,40 @@ public class OnlineRoutingHelper {
 	public OnlineRoutingResponse calculateRouteOnline(@NonNull OnlineRoutingEngine engine, @NonNull List<LatLon> path, @Nullable Float startBearing,
 													  boolean leftSideNavigation, boolean initialCalculation) throws IOException, JSONException {
 		String url = engine.getFullUrl(path, startBearing);
-		String content = makeRequest(url);
+		String method = engine.getHTTPMethod();
+		String body = engine.getRequestBody(path, startBearing);
+		Map<String, String> headers = engine.getRequestHeaders();
+		String content = makeRequest(url, method, body, headers);
 		return engine.parseResponse(content, app, leftSideNavigation, initialCalculation);
 	}
 
 	@NonNull
 	public String makeRequest(@NonNull String url) throws IOException {
+			return makeRequest(url, "GET", null, null);
+	}
+
+	@NonNull
+	public String makeRequest(@NonNull String url, @NonNull String method,
+							  @Nullable String body, @Nullable Map<String, String> headers)
+			throws IOException {
 		HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
 		connection.setRequestProperty("User-Agent", Version.getFullVersion(app));
+		connection.setRequestMethod(method);
+		// set custom headers
+		if (headers != null) {
+			for (String key :  headers.keySet()) {
+				connection.setRequestProperty(key, headers.get(key));
+			}
+		}
+		// send body for non GET requests
+		if (!method.equals("GET") && body != null) {
+			connection.setRequestProperty("Content-Length", String.valueOf(body.length()));
+			connection.setDoOutput(true);
+			connection.getOutputStream().write(body.getBytes(StandardCharsets.UTF_8));
+		}
 		StringBuilder content = new StringBuilder();
 		BufferedReader reader;
+		// .getResponseCode() automatically connects
 		if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
 			reader = new BufferedReader(new InputStreamReader(getInputStream(connection)));
 		} else {
