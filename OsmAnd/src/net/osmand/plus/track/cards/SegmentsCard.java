@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener;
 
-import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -25,6 +24,7 @@ import net.osmand.plus.myplaces.SegmentGPXAdapter;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager;
@@ -38,12 +38,18 @@ public class SegmentsCard extends MapBaseCard {
 	private final TrackDisplayHelper displayHelper;
 	private final GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT};
 	private final SegmentActionsListener listener;
+	private final SelectedGpxFile selectedGpxFile;
 	private final SelectedGpxPoint gpxPoint;
+	private RecyclerView recyclerView;
 
-	public SegmentsCard(@NonNull MapActivity mapActivity, @NonNull TrackDisplayHelper displayHelper,
-	                    @Nullable SelectedGpxPoint gpxPoint, @NonNull SegmentActionsListener listener) {
+	public SegmentsCard(@NonNull MapActivity mapActivity,
+	                    @NonNull TrackDisplayHelper displayHelper,
+	                    @Nullable SelectedGpxPoint gpxPoint,
+	                    @Nullable SelectedGpxFile selectedGpxFile,
+	                    @NonNull SegmentActionsListener listener) {
 		super(mapActivity);
 		this.listener = listener;
+		this.selectedGpxFile = selectedGpxFile;
 		this.displayHelper = displayHelper;
 		this.gpxPoint = gpxPoint;
 	}
@@ -54,7 +60,6 @@ public class SegmentsCard extends MapBaseCard {
 	}
 
 	public void setScrollAvailabilityListener(ScrollAvailabilityListener listener) {
-		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.clearOnScrollListeners();
 		recyclerView.addOnScrollListener(new OnScrollListener() {
 
@@ -66,17 +71,14 @@ public class SegmentsCard extends MapBaseCard {
 	}
 
 	public boolean isScrollToTopAvailable() {
-		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		return recyclerView.canScrollVertically(-1);
 	}
 
 	public void removeScrollAvailabilityListener() {
-		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.clearOnScrollListeners();
 	}
 
 	public void disallowScrollOnChartTouch() {
-		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.requestDisallowInterceptTouchEvent(true);
 	}
 
@@ -85,8 +87,7 @@ public class SegmentsCard extends MapBaseCard {
 		List<GpxDisplayItem> items = TrackDisplayHelper.flatten(displayHelper.getOriginalGroups(filterTypes));
 
 		updateLocationOnMap(items);
-
-		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+		recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(activity));
 		recyclerView.setAdapter(new SegmentsAdapter(items));
 		recyclerView.setHasFixedSize(true);
@@ -97,15 +98,9 @@ public class SegmentsCard extends MapBaseCard {
 		String args = mapActivity.getString(R.string.plan_a_route);
 		String noRoutesDescrText = mapActivity.getString(R.string.gpx_no_routes_descr, args);
 		noRoutesDescr.setText(noRoutesDescrText);
-		GPXFile gpxFile = displayHelper.getGpx();
-		if (gpxFile != null){
-			boolean fileAvailable = gpxFile.path != null && !gpxFile.showCurrentTrack;
-			if (fileAvailable){
-				AndroidUiHelper.updateVisibility(noRoutesContainer, items.isEmpty());
-			} else {
-				AndroidUiHelper.updateVisibility(noRoutesContainer, false);
-			}
-		}
+		boolean noTrackData = items.isEmpty() && !selectedGpxFile.isShowCurrentTrack();
+		AndroidUiHelper.updateVisibility(noRoutesContainer, noTrackData);
+		AndroidUiHelper.updateVisibility(recyclerView, !items.isEmpty());
 		createRoutesButton.setOnClickListener(v -> SegmentsCard.this.notifyButtonPressed(EDIT_BUTTON_INDEX));
 	}
 
