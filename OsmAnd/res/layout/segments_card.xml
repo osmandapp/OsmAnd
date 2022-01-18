@@ -75,11 +75,7 @@
 				android:textSize="@dimen/default_desc_text_size"
 				osmand:typeface="@string/font_roboto_medium" />
 		</androidx.cardview.widget.CardView>
-
-		<View
-			android:layout_width="match_parent"
-			android:layout_height="2dp"
-			android:background="?attr/dashboard_divider"/>
-
 	</LinearLayout>
+
+	<include layout="@layout/card_bottom_divider" />
 </LinearLayout>
