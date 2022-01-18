@@ -15,8 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
 
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
