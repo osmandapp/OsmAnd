@@ -10,21 +10,22 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.GpxSelectionHelper;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.audionotes.AudioVideoNoteMenuController;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
-import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.track.TrackMenuFragment;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.audionotes.AudioVideoNoteMenuController;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.wikivoyage.menu.WikivoyageWptPtMenuBuilder;
 import net.osmand.util.Algorithms;
 
@@ -38,15 +39,20 @@ public class WptPtMenuController extends MenuController {
 	private AudioVideoNoteMenuController audioVideoNoteController;
 
 	public WptPtMenuController(@NonNull MenuBuilder menuBuilder, @NonNull MapActivity mapActivity,
-							   @NonNull PointDescription pointDescription, @NonNull final WptPt wpt) {
+	                           @NonNull PointDescription pointDescription, @NonNull final WptPt wpt) {
 		super(menuBuilder, pointDescription, mapActivity);
 		this.wpt = wpt;
-		MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
+
+		OsmandApplication app = mapActivity.getMyApplication();
+		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
+
 		mapMarker = markersHelper.getMapMarker(wpt);
 		if (mapMarker == null) {
 			mapMarker = markersHelper.getMapMarker(new LatLon(wpt.lat, wpt.lon));
 		}
-
+		if (mapMarker != null && mapMarker.history && !app.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
+			mapMarker = null;
+		}
 		TitleButtonController openTrackButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {

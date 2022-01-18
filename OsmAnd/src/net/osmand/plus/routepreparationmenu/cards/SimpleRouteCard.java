@@ -1,6 +1,5 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
-import android.os.Build;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -10,10 +9,10 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -98,22 +97,20 @@ public class SimpleRouteCard extends MapBaseCard {
 	}
 
 	private void buildHeader(View headerView) {
-		final LineChart mChart = (LineChart) headerView.findViewById(R.id.chart);
+		final LineChart mChart = headerView.findViewById(R.id.chart);
 		final GPXUtilities.GPXTrackAnalysis analysis = gpx.getAnalysis(0);
 
-		GpxUiHelper.setupGPXChart(mChart, 4, 10f, 4f, !nightMode, false);
+		GpxUiHelper.setupGPXChart(mChart, 10f, 4f, false);
 		if (analysis.hasElevationData) {
 			LineData data = this.data;
 			if (data == null) {
 				List<ILineDataSet> dataSets = new ArrayList<>();
-				OrderedLineDataSet slopeDataSet = null;
+				OrderedLineDataSet slopeDataSet;
 				OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, mChart, analysis,
 						GpxUiHelper.GPXDataSetAxisType.DISTANCE, false, true, false);
-				if (elevationDataSet != null) {
-					dataSets.add(elevationDataSet);
-					slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, mChart, analysis,
-							GpxUiHelper.GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true, false);
-				}
+				dataSets.add(elevationDataSet);
+				slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, mChart, analysis,
+						GpxUiHelper.GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true, false);
 				if (slopeDataSet != null) {
 					dataSets.add(slopeDataSet);
 				}

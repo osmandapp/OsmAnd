@@ -1,6 +1,5 @@
 package net.osmand.plus.poi;
 
-import static net.osmand.plus.poi.PoiUIFilter.CUSTOM_FILTER_ID;
 import static net.osmand.plus.poi.PoiUIFilter.USER_PREFIX;
 import static net.osmand.plus.poi.RearrangePoiFiltersFragment.ItemType.DESCRIPTION;
 import static net.osmand.plus.poi.RearrangePoiFiltersFragment.ItemType.POI;
@@ -38,12 +37,12 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.search.listitems.QuickSearchListItem;

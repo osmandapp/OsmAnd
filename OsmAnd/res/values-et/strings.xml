@@ -1289,7 +1289,6 @@
     <string name="save_track_to_gpx_globally_headline">Vajadusel teekonna logimine</string>
     <string name="save_current_track_descr">Salvesta praegune teekond kohe GPX failina.</string>
     <string name="save_current_track">Salvesta praegune teekond</string>
-    <string name="save_track_to_gpx_descrp">GPX teekond salvestatakse navigeerimise ajal automaatselt teekondade kausta.</string>
     <string name="save_track_interval_globally">Logimise ajavahemik</string>
     <string name="save_track_interval">Logimise ajavahemik navigeerimise ajal</string>
     <string name="save_track_interval_descr">Määra teekonna salvestamise logimise ajavahemik navigeerimise ajal</string>

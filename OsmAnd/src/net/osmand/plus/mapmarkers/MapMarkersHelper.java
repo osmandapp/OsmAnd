@@ -16,15 +16,15 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
-import net.osmand.plus.GpxSelectionHelper;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapmarkers.SyncGroupTask.OnGroupSyncedListener;
+import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.util.Algorithms;
@@ -527,7 +527,7 @@ public class MapMarkersHelper {
 
 	@Nullable
 	public MapMarker getMapMarker(WptPt wptPt) {
-		for (MapMarker marker : getMarkers()) {
+		for (MapMarker marker : getAllMarkers()) {
 			if (marker.wptPt == wptPt) {
 				return marker;
 			}
@@ -537,7 +537,7 @@ public class MapMarkersHelper {
 
 	@Nullable
 	public MapMarker getMapMarker(FavouritePoint favouritePoint) {
-		for (MapMarker marker : getMarkers()) {
+		for (MapMarker marker : getAllMarkers()) {
 			if (marker.favouritePoint == favouritePoint) {
 				return marker;
 			}
@@ -547,7 +547,7 @@ public class MapMarkersHelper {
 
 	@Nullable
 	public MapMarker getMapMarker(@NonNull LatLon latLon) {
-		for (MapMarker marker : getMarkers()) {
+		for (MapMarker marker : getAllMarkers()) {
 			if (marker.point != null && marker.point.equals(latLon)) {
 				return marker;
 			}
@@ -557,7 +557,7 @@ public class MapMarkersHelper {
 
 	@Nullable
 	public MapMarker getMapMarker(@NonNull String id) {
-		for (MapMarker marker : getMarkers()) {
+		for (MapMarker marker : getAllMarkers()) {
 			if (Algorithms.stringsEqual(marker.id, id)) {
 				return marker;
 			}
@@ -565,11 +565,9 @@ public class MapMarkersHelper {
 		return null;
 	}
 
-	private List<MapMarker> getMarkers() {
+	private List<MapMarker> getAllMarkers() {
 		List<MapMarker> res = new ArrayList<>(mapMarkers);
-		if (ctx.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
-			res.addAll(mapMarkersHistory);
-		}
+		res.addAll(mapMarkersHistory);
 		return res;
 	}
 

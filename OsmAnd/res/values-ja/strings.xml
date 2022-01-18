@@ -373,7 +373,6 @@ POIの更新は利用できません</string>
     <string name="save_current_track">現在の経路を保存</string>
     <string name="save_track_interval_descr">ナビゲーション中の経路の記録間隔を選択します</string>
     <string name="save_track_interval">ナビゲーション中の経路記録間隔</string>
-    <string name="save_track_to_gpx_descrp">GPX経路はナビゲーション中にtracksフォルダに自動保存されます</string>
     <string name="save_track_to_gpx">ナビゲーション中に経路をGPXに記録</string>
     <string name="update_tile">マップを更新</string>
     <string name="reload_tile">タイルをリロード</string>

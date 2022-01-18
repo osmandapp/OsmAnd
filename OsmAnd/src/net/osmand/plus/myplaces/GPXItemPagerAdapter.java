@@ -1,5 +1,12 @@
 package net.osmand.plus.myplaces;
 
+import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.ALTITUDE;
+import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SLOPE;
+import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SPEED;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_SPEED;
+
 import android.annotation.SuppressLint;
 import android.graphics.Matrix;
 import android.util.SparseArray;
@@ -11,6 +18,11 @@ import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.viewpager.widget.PagerAdapter;
+
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -20,20 +32,20 @@ import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.CustomRadioButtonType;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.CustomRadioButtonType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
@@ -41,7 +53,7 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.LineGraphType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
-import net.osmand.plus.track.TrackDisplayHelper;
+import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip.CustomTabProvider;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager.ViewAtPositionInterface;
 import net.osmand.util.Algorithms;
@@ -54,18 +66,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.viewpager.widget.PagerAdapter;
-
-import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.ALTITUDE;
-import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SLOPE;
-import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SPEED;
-import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
-import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
-import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_SPEED;
 
 public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvider, ViewAtPositionInterface {
 
@@ -239,11 +239,20 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		return tabTypes[position].toHumanString(app);
 	}
 
+	@Override
+	public int getItemPosition(@NonNull Object object) {
+		View view = (View) object;
+		GPXTabItemType tabType = (GPXTabItemType) view.getTag();
+		int index = Arrays.asList(tabTypes).indexOf(tabType);
+		return index >= 0 ? index : POSITION_NONE;
+	}
+
 	@NonNull
 	@Override
 	public Object instantiateItem(@NonNull ViewGroup container, int position) {
 		GPXTabItemType tabType = tabTypes[position];
 		View view = getViewForTab(container, tabType);
+		view.setTag(tabType);
 		LineChart chart = view.findViewById(R.id.chart);
 		ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) chart.getLayoutParams();
 		AndroidUtils.setMargins(lp, chartHMargin, lp.topMargin, chartHMargin, lp.bottomMargin);
@@ -296,7 +305,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private void setupSpeedTab(View view, LineChart chart, int position) {
 		if (analysis != null && analysis.isSpeedSpecified()) {
 			if (analysis.hasSpeedData) {
-				GpxUiHelper.setupGPXChart(app, chart, CHART_LABEL_COUNT);
+				GpxUiHelper.setupGPXChart(chart);
 				chart.setData(new LineData(getDataSets(chart, GPX_TAB_ITEM_SPEED, SPEED, null)));
 				updateChart(chart);
 				chart.setVisibility(View.VISIBLE);
@@ -362,7 +371,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private void setupAltitudeTab(View view, LineChart chart, int position) {
 		if (analysis != null) {
 			if (analysis.hasElevationData) {
-				GpxUiHelper.setupGPXChart(app, chart, CHART_LABEL_COUNT);
+				GpxUiHelper.setupGPXChart(chart);
 				chart.setData(new LineData(getDataSets(chart, GPX_TAB_ITEM_ALTITUDE, ALTITUDE, SLOPE)));
 				updateChart(chart);
 				chart.setVisibility(View.VISIBLE);
@@ -422,7 +431,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private void setupGeneralTab(View view, LineChart chart, int position) {
 		if (analysis != null) {
 			if (analysis.hasElevationData || analysis.hasSpeedData) {
-				GpxUiHelper.setupGPXChart(app, chart, CHART_LABEL_COUNT);
+				GpxUiHelper.setupGPXChart(chart);
 				chart.setData(new LineData(getDataSets(chart, GPXTabItemType.GPX_TAB_ITEM_GENERAL, ALTITUDE, SPEED)));
 				updateChart(chart);
 				chart.setVisibility(View.VISIBLE);
@@ -813,10 +822,12 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	public void updateGraph(int position) {
 		updateAnalysis();
 		fetchTabTypes();
-		if (getCount() > 0 && views.size() > 0) {
+		notifyDataSetChanged();
+
+		int count = getCount();
+		if (count > 0 && views.size() == count) {
 			updateGraphTab(position);
 		}
-		notifyDataSetChanged();
 	}
 
 	private void updateGraphTab(int position) {
@@ -840,7 +851,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		}
 		if (chart.getAxisRight().getLabelCount() != CHART_LABEL_COUNT
 				|| chart.getAxisLeft().getLabelCount() != CHART_LABEL_COUNT) {
-			GpxUiHelper.setupGPXChart(app, chart, CHART_LABEL_COUNT);
+			GpxUiHelper.setupGPXChart(chart);
 		}
 		updateChart(chart);
 

@@ -18,7 +18,7 @@
     <string name="get_discount_title">Получите %1$d %2$s со скидкой %3$s.</string>
     <string name="get_discount_first_part">%1$s за первый %2$s</string>
     <string name="get_discount_first_few_part">%1$s за первые %2$s</string>
-    <string name="get_discount_second_part">затем %1$s</string>
+    <string name="get_discount_second_part">Затем %1$s</string>
     <string name="cancel_subscription">Отменить подписку</string>
     <string name="price_and_discount">%1$s • Экономия %2$s</string>
     <string name="rendering_attr_winter_road_name">Автозимник</string>
@@ -84,7 +84,7 @@
     <string name="shared_string_visible">Видны</string>
     <string name="restore_purchases">Восстановить покупки</string>
     <string name="fonts_header">Шрифты карты</string>
-    <string name="analyze_on_map">Анализ на карте</string>
+    <string name="analyze_on_map">Анализировать на карте</string>
     <string name="nautical_maps">Морские карты</string>
     <string name="download_depth_countours">Контуры морских глубин</string>
     <string name="index_item_depth_contours_osmand_ext">Контуры морских глубин</string>
@@ -836,7 +836,6 @@
     <string name="save_current_track">Сохранить текущий трек</string>
     <string name="save_track_interval_descr">Укажите интервал фиксирования точек для записи трека во время навигации</string>
     <string name="save_track_interval">Интервал записи во время навигации</string>
-    <string name="save_track_to_gpx_descrp">Во время навигации GPX-треки будут автоматически сохранены в папку с треками.</string>
     <string name="save_track_to_gpx">Автозапись трека во время навигации</string>
     <string name="update_tile">Обновить карту</string>
     <string name="reload_tile">Обновить часть карты</string>
@@ -1814,7 +1813,7 @@
     <string name="use_fast_recalculation_desc">Пересчитывается только начальная часть маршрута. Полезно для дальних поездок.</string>
     <string name="osm_edit_context_menu_delete">Удалить правки OSM</string>
     <string name="rendering_value_disabled_name">Выключено</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Сетевая принадлежность</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Принадлежность к сети (маршрутов)</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="shared_string_logoff">Выйти</string>
     <string name="index_name_netherlands">Европа — Нидерланды</string>
@@ -3412,7 +3411,7 @@
     <string name="login_and_pass">Имя пользователя и пароль</string>
     <string name="plugin_global_prefs_info">Эти настройки плагина применяются ко всем профилям</string>
     <string name="osm_editing">Редактирование OSM</string>
-    <string name="osm_edits_view_descr">Здесь отображаются ваши правки и ошибки OSM, ещё не отправленные в %1$s. Отправленные изменения не отображаются.</string>
+    <string name="osm_edits_view_descr">Посмотреть свои ещё незагруженные правки или ошибки OSM можно в %1$s. Отправленные изменения не отображаются.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Значок, отображаемый во время навигации или движения.</string>
     <string name="select_map_icon_descr">Значок, отображаемый в состоянии покоя.</string>
@@ -3701,7 +3700,7 @@
     <string name="route_between_points">Маршрут между точками</string>
     <string name="plan_a_route">Планирование маршрута</string>
     <string name="gpx_split_interval_none_descr">Выберите способ разбиения: по времени или по расстоянию.</string>
-    <string name="gpx_split_interval_descr">Интервал между метками расстояния или времени на треке.</string>
+    <string name="gpx_split_interval_descr">Выберите интервал, через который будут отображаться метки с расстоянием или временем на треке.</string>
     <string name="shared_string_custom">Своё значение</string>
     <string name="add_hidden_group_info">Добавленная точка не будет видна на карте, так как выбранная группа скрыта, найти её можно в «%s».</string>
     <string name="track_show_start_finish_icons">Значки старта и финиша</string>
@@ -4438,7 +4437,7 @@
     <string name="skip_confirmation">Да, пропустить</string>
     <string name="icon_group_industrial">Промышленность</string>
     <string name="files_remaining">Осталось файлов: %1$s %2$s</string>
-    <string name="copying_file">Копирование файла %1$s</string>
+    <string name="copying_file">Копирование файла %1$s…</string>
     <string name="storage_found_files_descr">Нажмите «%1$s», чтобы скопировать файлы (%2$s шт.) из «%3$s» в «%4$s». Это может занять некоторое время.</string>
     <string name="shared_storage_third_step">Предоставьте разрешение на доступ к папке. Без этого OsmAnd не cможет копировать файлы.</string>
     <string name="shared_string_skip_warning">Вы уверены, что хотите пропустить миграцию\? OsmAnd больше не имеет доступа к вашим файлам в общем хранилище.
@@ -4488,8 +4487,35 @@
 \nТочки трека, находящиеся на расстоянии менее заданного от последней видимой точки, будут скрыты.
 \nИмейте в виду, что высокие пороговые значения могут чрезмерно упростить геометрию трека.</string>
     <string name="storage_migration_wrong_folder_warning">В выбранной папке данные OsmAnd не найдены. Повторите попытку.</string>
-    <string name="created_on">Создано на</string>
+    <string name="created_on">Создан</string>
     <string name="use_routing_fallback">Использовать резервную маршрутизацию</string>
     <string name="shared_string_size">Размер</string>
     <string name="use_routing_fallback_description">Использовать офлайн маршрутизацию, если онлайн недоступна.</string>
+    <string name="turn_arrows">Стрелки поворота</string>
+    <string name="turn_arrows_descr">Выберите, будут ли на линии маршрута указаны стрелки поворотов.</string>
+    <string name="waypoint_appearance">Внешний вид путевой точки</string>
+    <string name="track_file">Файл трека</string>
+    <string name="waypoint_template">Шаблон путевой точки</string>
+    <string name="navigate_point_format_swiss_grid">Швейцарская сетка (CH1903)</string>
+    <string name="navigate_point_format_swiss_grid_plus">Швейцарская сетка (CH1903 +)</string>
+    <string name="predefined_waypoint_appearance_description">Нажатие на действие автоматически сохранит путевую точку с предопределенными параметрами.</string>
+    <string name="always_ask_waypoint_appearance_description">Нажатие на действие откроет экран «Добавить путевую точку», где можно изменить её название и внешний вид.</string>
+    <string name="track_file_description">Нажатие на действие откроет диалог выбора доступных треков.</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Показать теги fixme</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Теги note</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Показать теги note</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Значки на мелком масштабе</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Схематическое отображение значков на мелком масштабе</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Не скрывать водные туннели</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Водные туннели</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Теги fixme</string>
+    <string name="shared_string_used">Используется</string>
+    <string name="files_with_route_restrictions">Файлы с ограничениями маршрута</string>
+    <string name="shared_string_not_used">Не используется</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_attr_seabedDetail_description">Дополнительная текстовая информация о классификации поверхности морского дна, комбинированных типах поверхности, категории и таксоне сорняков или морских водорослей</string>
+    <string name="rendering_value_category_name">Категория</string>
+    <string name="rendering_attr_seabedDetail_name">Детали морского дна</string>
+    <string name="rendering_value_all_name">Все</string>
+    <string name="rendering_value_omit_name">Пропустить</string>
 </resources>

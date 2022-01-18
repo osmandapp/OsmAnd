@@ -36,12 +36,12 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.access.AccessibilityAssistant;
-import net.osmand.access.NavigationInfo;
+import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
+import net.osmand.plus.plugins.accessibility.NavigationInfo;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.City;
 import net.osmand.data.FavouritePoint;
@@ -53,17 +53,17 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
-import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.LockableViewPager;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
@@ -836,7 +836,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					new LatLon(mapCenter.getLatitude(), mapCenter.getLongitude()));
 			searchUICore.updateSettings(ss);
 			updateUseMapCenterUI();
-			updateLocationUI(mapCenter, null);
+			updateContent(null);
 		}
 		app.getLocationProvider().removeCompassListener(app.getLocationProvider().getNavigationInfo());
 		dialog.show();
@@ -1180,10 +1180,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				}
 				break;
 		}
-		LatLon mapCenter = getMapActivity().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
 		if (useMapCenter) {
 			updateUseMapCenterUI();
-			searchListFragment.updateLocation(mapCenter, null);
+			searchListFragment.updateLocation(null);
 		}
 	}
 
@@ -2192,23 +2191,19 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void updateLocationUI(Location location, Float heading) {
 		this.location = location;
-		LatLon latLon = null;
-		if (location != null) {
-			latLon = new LatLon(location.getLatitude(), location.getLongitude());
-		}
-		updateLocationUI(latLon, heading);
+		updateContent(heading);
 	}
 
-	private void updateLocationUI(LatLon latLon, Float heading) {
-		if (latLon != null && !paused && !cancelPrev) {
+	private void updateContent(Float heading) {
+		if (!paused && !cancelPrev) {
 			if (mainSearchFragment != null && searchView.getVisibility() == View.VISIBLE) {
-				mainSearchFragment.updateLocation(latLon, heading);
+				mainSearchFragment.updateLocation(heading);
 			} else if (historySearchFragment != null && viewPager.getCurrentItem() == 0) {
-				historySearchFragment.updateLocation(latLon, heading);
+				historySearchFragment.updateLocation(heading);
 			} else if (categoriesSearchFragment != null && viewPager.getCurrentItem() == 1) {
-				categoriesSearchFragment.updateLocation(latLon, heading);
+				categoriesSearchFragment.updateLocation(heading);
 			} else if (addressSearchFragment != null && viewPager.getCurrentItem() == 2) {
-				addressSearchFragment.updateLocation(latLon, heading);
+				addressSearchFragment.updateLocation(heading);
 			}
 		}
 	}
@@ -2335,14 +2330,17 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			hideProgressBar();
 		}
 		OsmandPlugin.onNewDownloadIndexes(this);
+		updateContent(heading);
 	}
 
 	@Override
 	public void downloadInProgress() {
+		updateContent(heading);
 	}
 
 	@Override
 	public void downloadHasFinished() {
+		updateContent(heading);
 	}
 
 	public void reloadIndexFiles() {

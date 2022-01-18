@@ -87,10 +87,10 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			while (dist >= pxStep) {
 				double pdx = (x - px) * percent;
 				double pdy = (y - py) * percent;
-				float iconx = (float) (px + pdx);
-				float icony = (float) (py + pdy);
-				if (GeometryWay.isIn(iconx, icony, left, top, right, bottom)) {
-					arrows.add(getArrowPathPoint(iconx, icony, style, angle));
+				float iconX = (float) (px + pdx);
+				float iconY = (float) (py + pdy);
+				if (GeometryWay.isIn(iconX, iconY, left, top, right, bottom)) {
+					arrows.add(getArrowPathPoint(iconX, iconY, style, angle, percent));
 				}
 				dist -= pxStep;
 				percent -= pxStep / distSegment;
@@ -110,8 +110,9 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 	protected void drawSegmentBorder(Canvas canvas, int zoom, DrawPathData pathData) {
 	}
 
-	protected PathPoint getArrowPathPoint(float iconx, float icony, GeometryWayStyle<?> style, double angle) {
-		return new PathPoint(iconx, icony, angle, style);
+	protected PathPoint getArrowPathPoint(float iconX, float iconY, GeometryWayStyle<?> style,
+	                                      double angle, double percent) {
+		return new PathPoint(iconX, iconY, angle, style);
 	}
 
 	public void drawPath(Canvas canvas, DrawPathData pathData) {

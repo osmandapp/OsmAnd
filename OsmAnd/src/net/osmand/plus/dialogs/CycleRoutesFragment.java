@@ -16,14 +16,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
@@ -53,11 +53,16 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 		LayoutInflater themedInflater = UiUtilities.getInflater(mapActivity, nightMode);
 		View view = themedInflater.inflate(R.layout.map_route_types_fragment, container, false);
 
+		showHideTopShadow(view);
 		setupHeader(view);
 		setupTypesCard(view);
-		setupBottomEmptySpace(view);
 
 		return view;
+	}
+
+	private void showHideTopShadow(@NonNull View view) {
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(requireActivity());
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.shadow_on_map), portrait);
 	}
 
 	private void setupHeader(@NonNull View view) {
@@ -142,14 +147,6 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 			}
 		});
 		return item;
-	}
-
-	private void setupBottomEmptySpace(@NonNull View view) {
-		View bottomView = view.findViewById(R.id.bottom_empty_space);
-		int height = AndroidUtils.getScreenHeight(requireActivity()) - getResources().getDimensionPixelSize(R.dimen.dashboard_map_top_padding);
-		ViewGroup.LayoutParams params = bottomView.getLayoutParams();
-		params.height = height;
-		bottomView.setLayoutParams(params);
 	}
 
 	private CommonPreference<Boolean> getPreference() {

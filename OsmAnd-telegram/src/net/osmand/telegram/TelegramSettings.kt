@@ -178,7 +178,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	fun isSharingLocationToChat(chatId: Long) = shareChatsInfo.containsKey(chatId)
 
-	fun isSharingLocationToUser(userId: Int) = shareChatsInfo.values.any { it.userId == userId }
+	fun isSharingLocationToUser(userId: Long) = shareChatsInfo.values.any { it.userId == userId }
 
 	fun hasAnyChatToShowOnMap() = !hiddenOnMapChats.containsAll(getLiveNowChats())
 
@@ -195,15 +195,15 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	fun getLiveTracksInfo() = liveTracksInfo
 
-	fun getLiveTrackInfo(userId: Int, chatId: Long, deviceName: String) =
+	fun getLiveTrackInfo(userId: Long, chatId: Long, deviceName: String) =
 		liveTracksInfo.firstOrNull { it.userId == userId && it.chatId == chatId && it.deviceName == deviceName }
 
 	fun isShowingChatOnMap(chatId: Long) = !hiddenOnMapChats.contains(chatId)
 
-	fun isLiveTrackEnabled(userId: Int, chatId: Long, deviceName: String) =
+	fun isLiveTrackEnabled(userId: Long, chatId: Long, deviceName: String) =
 		liveTracksInfo.any { (it.chatId == chatId && it.userId == userId && it.deviceName == deviceName) }
 
-	fun updateLiveTrack(userId: Int, chatId: Long, deviceName: String, enable: Boolean) {
+	fun updateLiveTrack(userId: Long, chatId: Long, deviceName: String, enable: Boolean) {
 		val tracksInfo = liveTracksInfo.toMutableList()
 		if (enable) {
 			val colorIndex = if (tracksInfo.size > 0) (tracksInfo.last().colorIndex + 1) % ShowLocationHelper.GPX_COLORS.size else 0
@@ -246,7 +246,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	}
 
 	fun shareLocationToUser(
-		userId: Int,
+		userId: Long,
 		livePeriod: Long = DEFAULT_VISIBLE_TIME_SECONDS,
 		addActiveTime: Long = ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
 	) {
@@ -754,7 +754,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		minLocationSpeed = prefs.getFloat(MIN_LOCATION_SPEED_KEY, minLocationSpeedDef)
 
 		val currentUserId = app.telegramHelper.getCurrentUserId()
-		currentSharingMode = prefs.getString(SHARING_MODE_KEY, if (currentUserId != -1) currentUserId.toString() else "")!!
+		currentSharingMode = prefs.getString(SHARING_MODE_KEY, if (currentUserId != -1L) currentUserId.toString() else "")!!
 
 		val defPackage = if (AppConnect.getInstalledApps(app).size == 1) AppConnect.getInstalledApps(app).first().appPackage else ""
 		appToConnectPackage = prefs.getString(APP_TO_CONNECT_PACKAGE_KEY, defPackage)!!
@@ -900,7 +900,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 			val obj = json.getJSONObject(i)
 			val shareInfo = ShareChatInfo().apply {
 				chatId = obj.optLong(ShareChatInfo.CHAT_ID_KEY)
-				userId = obj.optInt(ShareChatInfo.USER_ID_KEY)
+				userId = obj.optLong(ShareChatInfo.USER_ID_KEY)
 				start = obj.optLong(ShareChatInfo.START_KEY)
 				livePeriod = obj.optLong(ShareChatInfo.LIVE_PERIOD_KEY)
 				currentMessageLimit = obj.optLong(ShareChatInfo.LIMIT_KEY)
@@ -947,7 +947,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		val list = mutableListOf<LiveTrackInfo>()
 		for (i in 0 until json.length()) {
 			val obj = json.getJSONObject(i)
-			val userId = obj.optInt(LiveTrackInfo.USER_ID)
+			val userId = obj.optLong(LiveTrackInfo.USER_ID)
 			val chatId = obj.optLong(LiveTrackInfo.CHAT_ID)
 			val deviceName = obj.optString(LiveTrackInfo.DEVICE_NAME)
 			val colorIndex = obj.optInt(LiveTrackInfo.COLOR_INDEX)
@@ -1354,7 +1354,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		}
 	}
 
-	data class LiveTrackInfo(val userId: Int, val chatId: Long, val deviceName: String, val colorIndex: Int) {
+	data class LiveTrackInfo(val userId: Long, val chatId: Long, val deviceName: String, val colorIndex: Int) {
 		companion object {
 
 			internal const val USER_ID = "userId"
@@ -1437,7 +1437,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	class ShareChatInfo {
 
 		var chatId = -1L
-		var userId = -1
+		var userId = -1L
 		var start = -1L
 		var livePeriod = -1L
 		var updateTextMessageId = 1

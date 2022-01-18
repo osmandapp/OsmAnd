@@ -72,11 +72,9 @@ public class GPXUtilities {
 		GPX_TIME_FORMAT_MILLIS.setTimeZone(TimeZone.getTimeZone("UTC"));
 	}
 
-	private final static NumberFormat LAT_LON_FORMAT = new DecimalFormat("0.00#####",
-			new DecimalFormatSymbols(new Locale("EN", "US")));
+	private final static NumberFormat LAT_LON_FORMAT = new DecimalFormat("0.00#####", new DecimalFormatSymbols(Locale.US));
 	// speed, ele, hdop
-	private final static NumberFormat DECIMAL_FORMAT = new DecimalFormat("#.#",
-			new DecimalFormatSymbols(new Locale("EN", "US")));
+	private final static NumberFormat DECIMAL_FORMAT = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
 
 	public static final int RADIUS_DIVIDER = 5000;
 	public static final double PRIME_MERIDIAN = 179.999991234;
@@ -641,6 +639,8 @@ public class GPXUtilities {
 	}
 
 	public static class GPXTrackAnalysis {
+		public String name;
+		
 		public float totalDistance = 0;
 		public float totalDistanceWithoutGaps = 0;
 		public int totalTracks = 0;
@@ -710,6 +710,7 @@ public class GPXUtilities {
 		public boolean hasElevationData;
 		public boolean hasSpeedData;
 		public boolean hasSpeedInTrack = false;
+		
 
 		public boolean isSpeedSpecified() {
 			return avgSpeed > 0;
@@ -1430,6 +1431,7 @@ public class GPXUtilities {
 		                                    Double toDistance) {
 			GPXTrackAnalysis g = new GPXTrackAnalysis();
 			g.wptPoints = points.size();
+			g.name = path;
 			g.wptCategoryNames = getWaypointCategories(true);
 			List<SplitSegment> segments = getSplitSegments(g, fromDistance, toDistance);
 			g.prepareInformation(fileTimestamp, segments.toArray(new SplitSegment[0]));

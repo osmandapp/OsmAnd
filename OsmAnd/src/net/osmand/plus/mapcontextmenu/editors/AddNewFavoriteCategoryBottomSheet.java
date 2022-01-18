@@ -16,11 +16,11 @@ import androidx.fragment.app.FragmentActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -28,8 +28,8 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.myplaces.AddNewTrackFolderBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.settings.backend.ListStringPreference;
-import net.osmand.plus.track.ColorsCard;
+import net.osmand.plus.settings.backend.preferences.ListStringPreference;
+import net.osmand.plus.track.cards.ColorsCard;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ import java.util.Set;
 
 import static net.osmand.plus.mapcontextmenu.editors.SelectFavoriteCategoryBottomSheet.*;
 import static net.osmand.plus.routepreparationmenu.cards.BaseCard.*;
-import static net.osmand.plus.track.CustomColorBottomSheet.*;
+import static net.osmand.plus.track.fragments.CustomColorBottomSheet.*;
 
 public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFragment implements
 		ColorPickerListener, CardListener {

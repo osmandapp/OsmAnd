@@ -2,8 +2,8 @@ package net.osmand.plus.settings.fragments;
 
 import androidx.preference.Preference;
 
-import net.osmand.plus.helpers.enums.MetricsConstants;
-import net.osmand.plus.helpers.enums.AutoZoomMap;
+import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.settings.enums.AutoZoomMap;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;

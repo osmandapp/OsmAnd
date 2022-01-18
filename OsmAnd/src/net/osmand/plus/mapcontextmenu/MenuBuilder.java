@@ -2,7 +2,6 @@ package net.osmand.plus.mapcontextmenu;
 
 import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -34,7 +33,6 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
-import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -42,38 +40,33 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.DialogButtonType;
-import net.osmand.plus.activities.ActivityResultListener;
-import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.mapcontextmenu.UploadPhotosAsyncTask.UploadPhotosListener;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
-import net.osmand.plus.openplacereviews.OPRConstants;
-import net.osmand.plus.openplacereviews.OprStartFragment;
-import net.osmand.plus.osmedit.opr.OpenDBAPI;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.openplacereviews.UploadPhotosHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchToolbarController;
 import net.osmand.plus.transport.TransportStopRoute;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.views.layers.TransportStopsLayer;
 import net.osmand.plus.widgets.TextViewEx;
@@ -84,8 +77,6 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
 import java.text.DateFormat;
@@ -100,7 +91,6 @@ import java.util.Set;
 public class MenuBuilder {
 
 	private static final Log LOG = PlatformUtil.getLog(MenuBuilder.class);
-	private static final int PICK_IMAGE = 1231;
 	public static final float SHADOW_HEIGHT_TOP_DP = 17f;
 	public static final int TITLE_LIMIT = 60;
 	protected static final String[] arrowChars = new String[] {"=>", " - "};
@@ -139,9 +129,8 @@ public class MenuBuilder {
 	private boolean transliterateNames;
 	private View photoButton;
 
-	private final OpenDBAPI openDBAPI = new OpenDBAPI();
 	private String[] placeId = new String[0];
-	private GetImageCardsListener imageCardListener = new GetImageCardsListener() {
+	private final GetImageCardsListener imageCardListener = new GetImageCardsListener() {
 		@Override
 		public void onPostProcess(List<ImageCard> cardList) {
 			processOnlinePhotosCards(cardList);
@@ -150,12 +139,7 @@ public class MenuBuilder {
 		@Override
 		public void onPlaceIdAcquired(final String[] placeId) {
 			MenuBuilder.this.placeId = placeId;
-			app.runInUIThread(new Runnable() {
-				@Override
-				public void run() {
-					AndroidUiHelper.updateVisibility(photoButton, placeId.length >= 2);
-				}
-			});
+			app.runInUIThread(() -> AndroidUiHelper.updateVisibility(photoButton, placeId.length >= 2));
 		}
 
 		@Override
@@ -482,30 +466,8 @@ public class MenuBuilder {
 		TextView textView = view.findViewById(R.id.button_text);
 		textView.setCompoundDrawablePadding(dp6);
 		button.setOnClickListener(v -> {
-			registerResultListener();
-			final String baseUrl = OPRConstants.getBaseUrl(app);
-			final String name = app.getSettings().OPR_USERNAME.get();
-			final String privateKey = app.getSettings().OPR_ACCESS_TOKEN.get();
-			if (Algorithms.isBlank(privateKey) || Algorithms.isBlank(name)) {
-				OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
-				return;
-			}
-			new Thread(() -> {
-				if (openDBAPI.checkPrivateKeyValid(app, baseUrl, name, privateKey)) {
-					app.runInUIThread(() -> {
-						Intent intent = new Intent()
-								.setAction(Intent.ACTION_GET_CONTENT)
-								.setType("image/*");
-						if (Build.VERSION.SDK_INT > 18) {
-							intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-						}
-						Intent chooserIntent = Intent.createChooser(intent, mapActivity.getString(R.string.select_picture));
-						AndroidUtils.startActivityForResultIfSafe(mapActivity, chooserIntent, PICK_IMAGE);
-					});
-				} else {
-					OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
-				}
-			}).start();
+			UploadPhotosHelper photosHelper = new UploadPhotosHelper(mapActivity, this::addImageCard);
+			photosHelper.chooseAndUploadPhoto(placeId);
 		});
 		AndroidUiHelper.updateVisibility(view, false);
 		photoButton = view;
@@ -519,53 +481,6 @@ public class MenuBuilder {
 		CollapsableView cv = getLocationCollapsableView(locationData);
 		buildRow(view, R.drawable.ic_action_get_my_location, null, title, 0, true, cv, false, 1,
 				false, null, false);
-	}
-
-	private void registerResultListener() {
-		mapActivity.registerActivityResultListener(new ActivityResultListener(PICK_IMAGE, new OnActivityResultListener() {
-			@Override
-			public void onResult(int resultCode, Intent resultData) {
-				if (resultData != null) {
-					List<Uri> imagesUri = new ArrayList<>();
-					Uri data = resultData.getData();
-					if (data != null) {
-						imagesUri.add(data);
-					}
-					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-						ClipData clipData = resultData.getClipData();
-						if (clipData != null) {
-							for (int i = 0; i < clipData.getItemCount(); i++) {
-								Uri uri = resultData.getClipData().getItemAt(i).getUri();
-								if (uri != null) {
-									imagesUri.add(uri);
-								}
-							}
-						}
-					}
-					UploadPhotosListener listener = new UploadPhotosListener() {
-						@Override
-						public void uploadPhotosSuccess(final String response) {
-							app.runInUIThread(new Runnable() {
-								@Override
-								public void run() {
-									if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
-										try {
-											ImageCardsHolder holder = new ImageCardsHolder();
-											if (OsmandPlugin.createImageCardForJson(holder, new JSONObject(response))) {
-												addImageCard(holder.getFirstItem());
-											}
-										} catch (JSONException e) {
-											LOG.error(e);
-										}
-									}
-								}
-							});
-						}
-					};
-					execute(new UploadPhotosAsyncTask(mapActivity, imagesUri, placeId, listener));
-				}
-			}
-		}));
 	}
 
 	private void startLoadingImages() {
@@ -975,21 +890,25 @@ public class MenuBuilder {
 		LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
 		for (final Map.Entry<Integer, String> line : locationData.entrySet()) {
 			final TextViewEx button = buildButtonInCollapsableView(mapActivity, false, false);
-			if (line.getKey() == OsmAndFormatter.UTM_FORMAT || line.getKey() == OsmAndFormatter.OLC_FORMAT || line.getKey() == OsmAndFormatter.MGRS_FORMAT) {
-				SpannableStringBuilder ssb = new SpannableStringBuilder();
-				if (line.getKey() == OsmAndFormatter.UTM_FORMAT) {
-					ssb.append("UTM: ");
-				} else if (line.getKey() == OsmAndFormatter.MGRS_FORMAT) {
-					ssb.append("MGRS: ");
-				} else if (line.getKey() == OsmAndFormatter.OLC_FORMAT) {
-					ssb.append("OLC: ");
-				}
+			SpannableStringBuilder ssb = new SpannableStringBuilder();
+			if (line.getKey() == OsmAndFormatter.UTM_FORMAT) {
+				ssb.append("UTM: ");
 				ssb.setSpan(new ForegroundColorSpan(app.getResources().getColor(R.color.text_color_secondary_light)), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-				ssb.append(line.getValue());
-				button.setText(ssb);
-			} else {
-				button.setText(line.getValue());
+			} else if (line.getKey() == OsmAndFormatter.MGRS_FORMAT) {
+				ssb.append("MGRS: ");
+				ssb.setSpan(new ForegroundColorSpan(app.getResources().getColor(R.color.text_color_secondary_light)), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			} else if (line.getKey() == OsmAndFormatter.OLC_FORMAT) {
+				ssb.append("OLC: ");
+				ssb.setSpan(new ForegroundColorSpan(app.getResources().getColor(R.color.text_color_secondary_light)), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			} else if (line.getKey() == OsmAndFormatter.SWISS_GRID_FORMAT) {
+				ssb.append("CH1903: ");
+				ssb.setSpan(new ForegroundColorSpan(app.getResources().getColor(R.color.text_color_secondary_light)), 0, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			} else if (line.getKey() == OsmAndFormatter.SWISS_GRID_PLUS_FORMAT) {
+				ssb.append("CH1903+: ");
+				ssb.setSpan(new ForegroundColorSpan(app.getResources().getColor(R.color.text_color_secondary_light)), 0, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			}
+			ssb.append(line.getValue());
+			button.setText(ssb);
 			button.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -1419,7 +1338,7 @@ public class MenuBuilder {
 		if (plugin != null) {
 			if (plugin.isLocked()) {
 				buildGetWikipediaBanner(viewGroup);
-			} else if (showNearestWiki && latLon != null && amenity != null) {
+			} else if (showNearestWiki && latLon != null) {
 				PoiUIFilter filter = app.getPoiFilters().getTopWikiPoiFilter();
 				if (filter != null) {
 					searchSortedAmenities(filter, latLon, listener);

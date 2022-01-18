@@ -1,5 +1,9 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
+import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE_PREFIX;
+import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -23,27 +27,28 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.slider.Slider;
 
-import net.osmand.AndroidUtils;
 import net.osmand.StateChangedListener;
-import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.BooleanPreference;
-import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.BooleanPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.bottomsheets.AvoidRoadsPreferencesBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ElevationDateBottomSheet;
 import net.osmand.plus.settings.bottomsheets.RecalculateRouteInDeviationBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
@@ -54,10 +59,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
-import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE_PREFIX;
-import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
 
 public class RouteParametersFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
@@ -404,16 +405,23 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 
 	@Override
 	public void onDisplayPreferenceDialog(Preference preference) {
-		if (preference.getKey().equals(settings.ROUTE_RECALCULATION_DISTANCE.getId())) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				RecalculateRouteInDeviationBottomSheet.showInstance(getFragmentManager(), preference.getKey(), this, false, getSelectedAppMode());
+		String prefId = preference.getKey();
+		if (prefId.equals(settings.ROUTE_RECALCULATION_DISTANCE.getId())) {
+			FragmentManager manager = getFragmentManager();
+			if (manager != null) {
+				RecalculateRouteInDeviationBottomSheet.showInstance(manager, prefId, this, false, getSelectedAppMode());
 			}
-		} else if (!reliefFactorParameters.isEmpty() && preference.getKey().equals(ROUTING_PREFERENCE_PREFIX + USE_HEIGHT_OBSTACLES)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
+		} else if (!reliefFactorParameters.isEmpty() && prefId.equals(ROUTING_PREFERENCE_PREFIX + USE_HEIGHT_OBSTACLES)) {
+			FragmentManager manager = getFragmentManager();
+			if (manager != null) {
 				ApplicationMode appMode = getSelectedAppMode();
-				ElevationDateBottomSheet.showInstance(fragmentManager, appMode, this, false);
+				ElevationDateBottomSheet.showInstance(manager, appMode, this, false);
+			}
+		} else if (AVOID_ROUTING_PARAMETER_PREFIX.equals(prefId)) {
+			FragmentManager manager = getFragmentManager();
+			if (manager != null) {
+				ApplicationMode appMode = getSelectedAppMode();
+				AvoidRoadsPreferencesBottomSheet.showInstance(manager, prefId, this, appMode, false, isProfileDependent());
 			}
 		} else {
 			super.onDisplayPreferenceDialog(preference);
@@ -425,7 +433,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			return;
 		}
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
-		final float[] angleValue = new float[]{mode.getStrAngle()};
+		final float[] angleValue = new float[] {mode.getStrAngle()};
 		boolean nightMode = !app.getSettings().isLightContentForMode(mode);
 		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
@@ -588,7 +596,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	private ListPreferenceEx createRoutingBooleanListPreference(String groupKey, List<RoutingParameter> routingParameters) {
 		String defaultTitle = Algorithms.capitalizeFirstLetterAndLowercase(groupKey.replace('_', ' '));
 		String title = AndroidUtils.getRoutingStringPropertyName(app, groupKey, defaultTitle);
-		String description  = AndroidUtils.getRoutingStringPropertyDescription(app, groupKey, "");
+		String description = AndroidUtils.getRoutingStringPropertyDescription(app, groupKey, "");
 		ApplicationMode am = getSelectedAppMode();
 
 		Object[] entryValues = new Object[routingParameters.size()];

@@ -8,12 +8,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.DialogButtonType;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupInfo;
@@ -62,7 +62,7 @@ public class ActionButtonViewHolder extends RecyclerView.ViewHolder {
 					if (!items.isEmpty() || !Algorithms.isEmpty(info.filteredFilesToDelete)) {
 						settingsHelper.exportSettings(BACKUP_ITEMS_KEY, items, info.itemsToDelete, exportListener);
 					}
-				} catch (IllegalArgumentException e) {
+				} catch (IllegalStateException e) {
 					log.error(e.getMessage(), e);
 				}
 			});

@@ -26,10 +26,10 @@ import androidx.core.util.Pair;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetView;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -42,8 +42,8 @@ import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.quickaction.QuickActionRegistry.QuickActionUpdatesListener;
 import net.osmand.plus.quickaction.QuickActionsWidget;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -200,12 +200,12 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
         int rightMargin = fabMargin != null ? fabMargin.first : defRightMargin;
         int bottomMargin = fabMargin != null ? fabMargin.second : defBottomMargin;
         // check limits
-        if (rightMargin < 0) {
+        if (rightMargin <= 0) {
             rightMargin = defRightMargin;
         } else if (rightMargin > maxRightMargin) {
             rightMargin = maxRightMargin;
         }
-        if (bottomMargin < 0) {
+        if (bottomMargin <= 0) {
             bottomMargin = defBottomMargin;
         } else if (bottomMargin > maxBottomMargin) {
             bottomMargin = maxBottomMargin;

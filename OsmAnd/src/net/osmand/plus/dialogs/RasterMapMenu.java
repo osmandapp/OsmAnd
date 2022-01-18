@@ -11,17 +11,17 @@ import net.osmand.map.ParameterType;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.rastermaps.LayerTransparencySeekbarMode;
-import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
-import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin.OnMapSelectedCallback;
-import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin.RasterMapType;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode;
+import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.OnMapSelectedCallback;
+import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.RasterMapType;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.MapLayers;
-import net.osmand.plus.views.MapTileLayer;
+import net.osmand.plus.views.layers.MapTileLayer;
 
 
 public class RasterMapMenu {

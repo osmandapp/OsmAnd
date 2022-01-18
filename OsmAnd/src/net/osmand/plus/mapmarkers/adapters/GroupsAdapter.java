@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 
 public abstract class GroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

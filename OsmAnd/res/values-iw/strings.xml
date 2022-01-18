@@ -724,7 +724,6 @@
     <string name="save_current_track">שמירת המסלול הנוכחי</string>
     <string name="save_track_interval">מרווח בין השמירות ליומן במהלך ניווט</string>
     <string name="save_track_interval_descr">נא לציין את ההפרש בין הצבת המיקום בטוויית דרכים</string>
-    <string name="save_track_to_gpx_descrp">מסלול GPX יישמר אוטומטית לתיקיית המסלולים במהלך הניווט.</string>
     <string name="save_track_to_gpx">הקלטת המסלול אוטומטית במהלך הניווט</string>
     <string name="update_tile">עדכון המפה</string>
     <string name="reload_tile">רעניון האריח</string>
@@ -4457,7 +4456,7 @@
     <string name="shared_string_hide_slope">הסתרת שיפוע</string>
     <string name="shared_string_show_slope">הצגת שיפוע</string>
     <string name="use_routing_fallback_description">להשתמש בניווט בלתי מקוון כשאין אפשרות להציע ניווט מקוון.</string>
-    <string name="use_routing_fallback">להשתמש בנסיגה של הניווט</string>
+    <string name="use_routing_fallback">נסיגה של ניווט בלתי מקוון</string>
     <string name="gps_filter_smoothing_desc">הגדרת סף המרחק בין נקודות.
 \nנקודות מסלול שאינן במרחק שכזה מהנקודה הגלויה האחרונה תוסתרנה.
 \nנא לשים לב שסף גבוה יכול לפשט את צורת המסלול יתר על המידה.</string>
@@ -4485,4 +4484,21 @@
 \n</string>
     <string name="created_on">נוצר בתאריך</string>
     <string name="shared_string_size">גודל</string>
+    <string name="turn_arrows">חצי הפנייה</string>
+    <string name="turn_arrows_descr">שליטה בהצגת חצי הפנייה על קו המסלול.</string>
+    <string name="waypoint_template">תבנית נקודות דרך</string>
+    <string name="predefined_waypoint_appearance_description">נגיעה בפעולה הזאת תשמור את נקודת הדרך עם משתנים שהוגדרו מראש אוטומטית.</string>
+    <string name="waypoint_appearance">מראה של נקודת דרך</string>
+    <string name="shared_string_used">בשימוש</string>
+    <string name="files_with_route_restrictions">קבצים עם הגבלות מסלול</string>
+    <string name="always_ask_waypoint_appearance_description">נגיעה בפעולה הזאת תפתח את מסך „הוספת נקודת דרך”, בו ניתן לשנות את השם ואת המראה.</string>
+    <string name="shared_string_not_used">לא בשימוש</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">הצגת תגיות לתיקון</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">סמלים ברמות תקריב נמוכות</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">הצגת תגיות הערה</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">לא להסתיר תעלות דרכי מים</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">תגיות הערה</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">תצוגה סכמתית של סלים ברמות תקריב נמוכות</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">תעלות דרכי מים</string>
+    <string name="rendering_attr_seabedDetail_name">פרט קרקעית הים</string>
 </resources>

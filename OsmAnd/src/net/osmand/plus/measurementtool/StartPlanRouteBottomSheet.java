@@ -16,7 +16,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -28,7 +28,7 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.helpers.GpxTrackAdapter;
+import net.osmand.plus.track.GpxTrackAdapter;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.OnGpxImportCompleteListener;
@@ -148,7 +148,7 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 			String fileName = gpxInfoList.get(position).getFileName();
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				MeasurementToolFragment.showInstance(activity.getSupportFragmentManager(), fileName);
+				MeasurementToolFragment.showInstance(activity.getSupportFragmentManager(), fileName, true);
 			}
 		}
 		dismiss();
@@ -199,7 +199,7 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 				dismiss();
 				MapActivity mapActivity = (MapActivity) getActivity();
 				if (mapActivity != null) {
-					MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), gpxFileName);
+					MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), gpxFileName, true);
 				}
 			}
 

@@ -1933,7 +1933,6 @@
     <string name="navigate_point_olc_info_area">Gildur fullur OLC
 \nStendur fyrir svæði: %1$s x %2$s</string>
     <string name="map_widget_appearance_rem">Atriði eftir</string>
-    <string name="save_track_to_gpx_descrp">GPX-ferlar verða sjálfvirkt vistaðir í ferlamöppu á meðan leiðsögn stendur.</string>
     <string name="save_track_interval">Millibil skráninga á meðan leiðsögn stendur</string>
     <string name="voice_provider_descr">Veldu raddleiðsögn fyrir leiðsögukerfið.</string>
     <string name="none_selected_gpx">Veldu GPX-skrá með því að ýta fyrst og halda niðri.</string>
@@ -4490,4 +4489,6 @@
 \n</string>
     <string name="created_on">Búið til</string>
     <string name="shared_string_size">Stærð</string>
+    <string name="turn_arrows">Beygjuörvar</string>
+    <string name="turn_arrows_descr">Stjórnaðu sýnileika beygjuörva á leiðarlínunni.</string>
 </resources>

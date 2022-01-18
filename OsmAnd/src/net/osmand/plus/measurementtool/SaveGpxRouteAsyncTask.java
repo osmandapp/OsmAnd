@@ -6,8 +6,8 @@ import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.AndroidUtils;
-import net.osmand.FileUtils;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Metadata;

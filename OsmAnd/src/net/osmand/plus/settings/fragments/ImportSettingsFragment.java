@@ -1,7 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,19 +8,15 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
+import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.AppInitializer;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.download.ReloadIndexesTask;
-import net.osmand.plus.download.ReloadIndexesTask.ReloadIndexesListener;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.resources.ResourceManager.ReloadIndexesListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CheckDuplicatesListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
@@ -31,8 +25,10 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import org.apache.commons.logging.Log;
 
-import java.lang.ref.WeakReference;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public abstract class ImportSettingsFragment extends BaseSettingsListFragment {
 
@@ -128,26 +124,16 @@ public abstract class ImportSettingsFragment extends BaseSettingsListFragment {
 	protected void reloadIndexes(@NonNull List<SettingsItem> items) {
 		for (SettingsItem item : items) {
 			if (item instanceof FileSettingsItem && ((FileSettingsItem) item).getSubtype().isMap()) {
-				Activity activity = getActivity();
-				if (activity instanceof MapActivity) {
-					final WeakReference<MapActivity> mapActivityRef = new WeakReference<>((MapActivity) activity);
-					ReloadIndexesListener listener = new ReloadIndexesListener() {
-						@Override
-						public void reloadIndexesStarted() {
+				app.getResourceManager().reloadIndexesAsync(IProgress.EMPTY_PROGRESS, new ReloadIndexesListener() {
+					@Override
+					public void reloadIndexesStarted() {
+					}
 
-						}
-
-						@Override
-						public void reloadIndexesFinished(List<String> warnings) {
-							MapActivity mapActivity = mapActivityRef.get();
-							if (mapActivity != null) {
-								mapActivity.refreshMap();
-							}
-						}
-					};
-					ReloadIndexesTask reloadIndexesTask = new ReloadIndexesTask(app, listener);
-					reloadIndexesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-				}
+					@Override
+					public void reloadIndexesFinished(List<String> warnings) {
+						app.getOsmandMap().refreshMap();
+					}
+				});
 				break;
 			}
 		}

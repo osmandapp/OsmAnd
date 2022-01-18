@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import net.osmand.map.ITileSource;
-import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.resources.AsyncLoadingThread.TileLoadDownloadRequest;
 
 import java.io.File;

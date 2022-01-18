@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.GradientScaleType;
@@ -13,9 +13,9 @@ import net.osmand.util.Algorithms;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static net.osmand.plus.helpers.GpsFilterHelper.GpsFilter.*;
-import static net.osmand.plus.helpers.GpsFilterHelper.GpsFilter.TAG_MIN_FILTER_SPEED;
-import static net.osmand.plus.helpers.GpsFilterHelper.GpsFilter.TAG_SMOOTHING_THRESHOLD;
+import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.*;
+import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MIN_FILTER_SPEED;
+import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_SMOOTHING_THRESHOLD;
 
 public class GpxAppearanceInfo {
 

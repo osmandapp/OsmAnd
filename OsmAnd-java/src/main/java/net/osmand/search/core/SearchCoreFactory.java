@@ -37,6 +37,7 @@ import net.osmand.util.MapUtils;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -48,6 +49,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -1477,7 +1479,7 @@ public class SearchCoreFactory {
 		private LatLon olcPhraseLocation;
 		private ParsedOpenLocationCode cachedParsedCode;
 		private final List<String> citySubTypes = Arrays.asList("city", "town", "village");
-		private final DecimalFormat latLonFormatter = new DecimalFormat("#.0####");
+		private final DecimalFormat latLonFormatter = new DecimalFormat("#.0####", new DecimalFormatSymbols(Locale.US));
 
 		public SearchLocationAndUrlAPI() {
 			super(ObjectType.LOCATION, ObjectType.PARTIAL_LOCATION);

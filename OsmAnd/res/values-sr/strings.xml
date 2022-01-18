@@ -375,7 +375,7 @@
     <string name="read_more">Прочитај више</string>
     <string name="whats_new">Шта је ново</string>
     <string name="rendering_attr_hideProposed_name">Предложене објекте</string>
-    <string name="shared_string_update">Ажурирај</string>
+    <string name="shared_string_update">Надгради</string>
     <string name="shared_string_upload">Отпреми</string>
     <string name="world_map_download_descr">Основна карта света (која покрива целу Земљу при погледу издалека) не постоји или је застарела. Преузмите основну карту света за употпуњавање радне средине.</string>
     <string name="shared_string_qr_code">QR код</string>
@@ -534,7 +534,7 @@
     <string name="shared_string_next">Следеће</string>
     <string name="shared_string_enable">Омогући</string>
     <string name="shared_string_disable">Онемогући</string>
-    <string name="shared_string_enabled">Укључен</string>
+    <string name="shared_string_enabled">Омогућено</string>
     <string name="shared_string_disabled">Искључен</string>
     <string name="shared_string_selected">Изабрано</string>
     <string name="shared_string_selected_lowercase">изабрано</string>
@@ -1229,7 +1229,7 @@
     <string name="change_color">Промени боју</string>
     <string name="edit_name">Промени име</string>
     <string name="animate_my_location">Анимирај мој положај</string>
-    <string name="shared_string_install">Инсталирај</string>
+    <string name="shared_string_install">Угради</string>
     <string name="online_photos">Мрежне слике</string>
     <string name="shared_string_add_photos">Додај слике</string>
     <string name="no_photos_descr">Нема слика овде.</string>
@@ -1429,7 +1429,7 @@
     <string name="my_location">Мој положај</string>
     <string name="shared_string_finish">Крај</string>
     <string name="plan_route">План путовања</string>
-    <string name="shared_string_sort">Сортирај</string>
+    <string name="shared_string_sort">Разврстај</string>
     <string name="coordinate_input">Унос координата</string>
     <string name="marker_save_as_track_descr">Извезите ознаке у следећи GPX фајл:</string>
     <string name="move_to_history">Премести у историју</string>
@@ -1591,7 +1591,6 @@
     <string name="navigate_point_olc_info_area">Исправан кôд локације
 \nПредставља површину: %1$s x %2$s</string>
     <string name="save_track_to_gpx">Аутоматски снимај путању за време навођења</string>
-    <string name="save_track_to_gpx_descrp">GPX путања се аутоматски чува у фасциклу са путањама док је навођење укључено.</string>
     <string name="save_track_interval_globally">Интервал бележења</string>
     <string name="save_track_interval">Интервал бележења за време навођења</string>
     <string name="enable_proxy_title">Омогући HTTP прокси</string>
@@ -1621,7 +1620,7 @@
     <string name="lang_pt_br">Португалски (бразилски)</string>
     <string name="lang_en">Енглески</string>
     <string name="lang_en_gb">Енглески (британски)</string>
-    <string name="lang_af">Африканс</string>
+    <string name="lang_af">Африкаанс</string>
     <string name="lang_hy">Арменијски</string>
     <string name="lang_be_by">Белоруски (латинични)</string>
     <string name="lang_ca">Каталонски</string>
@@ -2311,7 +2310,7 @@
     <string name="transport_nearby_routes">Близу</string>
     <string name="speech_rate_descr">Одаберите брзину изговора синтетичког TTS гласа.</string>
     <string name="local_osm_changes_backup">Прави резервну копију како се OSM мења</string>
-    <string name="osmand_service">Позадински режим</string>
+    <string name="osmand_service">Позадински рад</string>
     <string name="osmand_service_descr">OsmAnd ради у позадини док је екран искључен.</string>
     <string name="download_files_not_enough_space">Нема довољно слободног простора да се скине %1$s MB (слободно: %2$s).</string>
     <string name="keep_informing">Понови инструкције навођења</string>
@@ -3133,7 +3132,7 @@
     <string name="turn_screen_on_info">Прикажи карту на закључаном екрану за време навођења.</string>
     <string name="route_parameters_info">Поставке за креирање пута у означеном профилу „%1$s”.</string>
     <string name="wake_time">Тајмаут после буђења</string>
-    <string name="units_and_formats">Мерне јединице &amp; форматирања</string>
+    <string name="units_and_formats">Мерне јединице и облици</string>
     <string name="map_look_descr">Изглед карте</string>
     <string name="map_look">Изглед карте</string>
     <string name="list_of_installed_plugins">Инсталирани додаци</string>
@@ -3162,7 +3161,7 @@
     <string name="route_parameters_descr">Конфигуриши параметре пута</string>
     <string name="route_parameters">Параметри пута</string>
     <string name="application_profile_changed">Апликативни профил промењен на „%s“</string>
-    <string name="logcat_buffer">Logcat бафер</string>
+    <string name="logcat_buffer">Спремник дневника</string>
     <string name="plugins_settings">Поставке додатака</string>
     <string name="shared_string_by_default">Подразумевано</string>
     <string name="download_detailed_map">Преузми детаљну карту места %s, да видите ову област.</string>
@@ -3328,7 +3327,7 @@
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Иконица која се приказује за време навођења или померања.</string>
     <string name="select_map_icon_descr">Иконица која се приказује у мировању.</string>
-    <string name="logcat_buffer_descr">Проверите и поделите детаљне записе апликације</string>
+    <string name="logcat_buffer_descr">Проверите и поделите дневнике са појединостима програма</string>
     <string name="search_offline_geo_error">Не могу да расчланим гео намеру ’%s’.</string>
     <string name="permission_is_required">Потребне су дозволе за коришћење ове опције.</string>
     <string name="monitoring_min_speed_descr">Ово је филтер за одсецање малих брзина који не бележи тачке испод одређене брзине. Овим снимљене стазе изгледају глаткије када се гледају на карти.</string>
@@ -4255,7 +4254,7 @@
     <string name="connect_track_points_as">Повежите тачке пута</string>
     <string name="pro_features">Плаћене могућности</string>
     <string name="purchases_restored">Куповина је повраћена</string>
-    <string name="grey_color_undefined">Делови без података су обојени сиво.</string>
+    <string name="grey_color_undefined">Делови без података су сиви.</string>
     <string name="cancel_anytime_in_amazon_app">Откажите било када кроз Амазон апликацију</string>
     <string name="amz_manage_subscription_descr">Управљајте својом претплатом користећи Амазон апликацију или Амазон веб сајт.</string>
     <string name="empty_category_name">Име категорије је празно</string>
@@ -4447,7 +4446,7 @@
     <string name="memory_allocated_for_routing_ds">Веће вредности меморије убрзавају израчунавање дужих рута (преко 500km), али могу да утичу на перформансе других апликација.
 \nНема утицај на брзину израчунавања краћих рута.</string>
     <string name="shared_string_uphill">Узбрдо</string>
-    <string name="gps_filter_precision">GPS прецизност</string>
+    <string name="gps_filter_precision">Прецизност ГПС-а</string>
     <string name="save_as_copy">Сачувај као копију</string>
     <string name="shared_string_precision">Прецизност</string>
     <string name="distance_between_points">Удаљеност између тачака</string>
@@ -4478,4 +4477,35 @@
 \nТачке путање које су удаљене бар X од последње видљиве тачке ће бити скривене.
 \nБудите пажљиви са великим вредностима удаљености што је геометрија путање простија.</string>
     <string name="display_groups_visibility_dialog_description">Можете контролисати видљивост групе на карти. Ако је путања скривена, све групе ће такође бити скривене.</string>
+    <string name="shared_string_size">Величина</string>
+    <string name="created_on">Датум стварања</string>
+    <string name="waypoint_appearance">Изглед путне тачке</string>
+    <string name="track_file_description">Додиром на ову радњу приказаће се дијалог за избор доступних путања.</string>
+    <string name="track_file">Датотека путање</string>
+    <string name="use_routing_fallback_description">Користите офлајн рутирање док онлајн рутирање није доступно.</string>
+    <string name="navigate_point_format_swiss_grid">Швајцарска мрежа (CH1903)</string>
+    <string name="navigate_point_format_swiss_grid_plus">Швајцарска мрежа (CH1903+)</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Иконе при малом зумирању</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Шематски приказ икона при малим зумовима</string>
+    <string name="always_ask_waypoint_appearance_description">Додиром на ову радњу отвориће се екран „Додај тачку пута“, где можете променити име и изглед.</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Ознаке поправке</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Тунели пловних путева</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Не скривај тунеле за водене путеве</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Прикажи ознаке поправке</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Ознаке за белешке</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Прикажи ознаке за белешке</string>
+    <string name="shared_string_not_used">Не користи се</string>
+    <string name="shared_string_used">Користи се</string>
+    <string name="files_with_route_restrictions">Датотеке са ограничењима руте</string>
+    <string name="waypoint_template">Шаблон путне тачке</string>
+    <string name="predefined_waypoint_appearance_description">Додиром на ову радњу аутоматски ће се сачувати путна тачка са унапред дефинисаним параметрима.</string>
+    <string name="turn_arrows">Стрелице скретања</string>
+    <string name="turn_arrows_descr">Изаберите да ли су стрелице за скретање приказане на линији руте.</string>
+    <string name="use_routing_fallback">Замена за ванмрежно рутирање</string>
+    <string name="rendering_attr_seabedDetail_description">Додатне текстуалне информације о квалификацији површине морског дна, комбинованим типовима површине, категорији и врстама корова или морске траве</string>
+    <string name="rendering_value_category_name">Категорија</string>
+    <string name="rendering_value_all_name">Све</string>
+    <string name="rendering_value_omit_name">Изоставити</string>
+    <string name="rendering_attr_seabedDetail_name">Детаљ морског дна</string>
 </resources>

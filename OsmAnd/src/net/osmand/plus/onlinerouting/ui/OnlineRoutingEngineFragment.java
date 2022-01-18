@@ -28,12 +28,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.CallbackWithObject;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.DialogButtonType;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.onlinerouting.EngineParameter;
@@ -52,6 +53,7 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -489,7 +491,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		List<LatLon> path = new ArrayList<>();
 		path.add(selectedLocation.getCityCenterLatLon());
 		path.add(selectedLocation.getCityAirportLatLon());
-		return engine.getFullUrl(path);
+		return engine.getFullUrl(path, 0f);
 	}
 
 	private void testEngineWork() {
@@ -501,7 +503,12 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 				StringBuilder errorMessage = new StringBuilder();
 				boolean resultOk = false;
 				try {
-					String response = helper.makeRequest(exampleCard.getEditedText());
+					String method = engine.getHTTPMethod();
+					List<LatLon> path = Arrays.asList(location.getCityAirportLatLon(),
+													  location.getCityCenterLatLon());
+					String body = engine.getRequestBody(path, null);
+					Map<String, String> headers = engine.getRequestHeaders();
+					String response = helper.makeRequest(exampleCard.getEditedText(), method, body, headers);
 					resultOk = requestedEngine.isResultOk(errorMessage, response);
 				} catch (IOException | JSONException e) {
 					errorMessage.append(e.toString());

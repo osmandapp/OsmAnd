@@ -10,6 +10,7 @@ import android.view.ViewConfiguration;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
 import org.apache.commons.logging.Log;
 

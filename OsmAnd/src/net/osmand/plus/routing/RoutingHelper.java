@@ -8,17 +8,17 @@ import net.osmand.Location;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.ValueHolder;
+import net.osmand.data.ValueHolder;
 import net.osmand.data.LatLon;
 import net.osmand.plus.NavigationService;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.auto.NavigationSession;
-import net.osmand.plus.helpers.enums.MetricsConstants;
+import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
@@ -321,6 +321,7 @@ public class RoutingHelper {
 		return route.isCalculated();
 	}
 
+	@NonNull
 	public VoiceRouter getVoiceRouter() {
 		return voiceRouter;
 	}

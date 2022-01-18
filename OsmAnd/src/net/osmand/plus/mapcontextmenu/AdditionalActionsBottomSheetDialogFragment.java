@@ -19,12 +19,12 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.tools.ExtendedBottomSheetBehavior;
 import net.osmand.plus.widgets.tools.ExtendedBottomSheetBehavior.BottomSheetCallback;
 
@@ -153,11 +153,12 @@ public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialo
 	public void onStart() {
 		super.onStart();
 		if (!portrait) {
-			final Window window = getDialog().getWindow();
-			WindowManager.LayoutParams params = window.getAttributes();
-			params.width = getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width)
-					+ AndroidUtils.dpToPx(getContext(), 16); // 8 dp is shadow width on each side
-			window.setAttributes(params);
+			Window window = requireDialog().getWindow();
+			if (window != null){
+				WindowManager.LayoutParams params = window.getAttributes();
+				params.width = getResources().getDisplayMetrics().widthPixels / 2;
+				window.setAttributes(params);
+			}
 		}
 	}
 

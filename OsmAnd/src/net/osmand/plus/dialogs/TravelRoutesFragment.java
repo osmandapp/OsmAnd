@@ -1,8 +1,5 @@
 package net.osmand.plus.dialogs;
 
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ACTIVITY_TYPE;
-
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -13,30 +10,24 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.fragment.app.FragmentManager;
-
-import net.osmand.AndroidUtils;
+import net.osmand.IProgress;
 import net.osmand.OsmAndCollator;
 import net.osmand.map.OsmandRegions;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.download.ReloadIndexesTask;
-import net.osmand.plus.download.ReloadIndexesTask.ReloadIndexesListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.render.TravelRendererHelper;
+import net.osmand.plus.resources.ResourceManager.ReloadIndexesListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
@@ -45,6 +36,14 @@ import net.osmand.util.Algorithms;
 
 import java.util.Collections;
 import java.util.List;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.fragment.app.FragmentManager;
+
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ACTIVITY_TYPE;
 
 public class TravelRoutesFragment extends BaseOsmAndFragment {
 
@@ -105,11 +104,18 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
 		View view = themedInflater.inflate(R.layout.travel_routes_fragment, container, false);
+
+		showHideTopShadow(view);
 		setupHeader(view);
 		setupPrefItems(view);
 		setupTypeRadioGroup(view);
-		setupBottomEmptySpace(view);
+
 		return view;
+	}
+
+	private void showHideTopShadow(@NonNull View view) {
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(requireActivity());
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.shadow_on_map), portrait);
 	}
 
 	private void updateRouteTypes() {
@@ -190,7 +196,7 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 			TextRadioItem files = createRadioButton(TravelType.TRAVEL_FILES);
 			TextRadioItem points = createRadioButton(TravelType.ROUTE_POINTS);
 
-			TextToggleButton radioGroup = new TextToggleButton(app, buttonsContainer, nightMode);
+			TextToggleButton radioGroup = new TextToggleButton(app, buttonsContainer, nightMode, true);
 			radioGroup.setItems(routes, files, points);
 			switch (travelType) {
 				case ROUTE_TYPES:
@@ -266,7 +272,8 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 				rendererHelper.updateRouteArticlePointsFilter();
 				updateRouteTypes();
 				updatePointCategories();
-				new ReloadIndexesTask(app, new ReloadIndexesListener() {
+
+				app.getResourceManager().reloadIndexesAsync(IProgress.EMPTY_PROGRESS, new ReloadIndexesListener() {
 					@Override
 					public void reloadIndexesStarted() {
 					}
@@ -276,7 +283,7 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 						app.getOsmandMap().refreshMap(true);
 						app.getOsmandMap().getMapLayers().updateLayers((MapActivity) getMyActivity());
 					}
-				}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				});
 			});
 			container.addView(itemView);
 		}
@@ -433,14 +440,6 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 		emptyView.setGravity(Gravity.CENTER);
 		emptyView.setText(titleId);
 		return emptyView;
-	}
-
-	private void setupBottomEmptySpace(@NonNull View view) {
-		View bottomView = view.findViewById(R.id.bottom_empty_space);
-		int height = AndroidUtils.getScreenHeight(requireActivity()) - getResources().getDimensionPixelSize(R.dimen.dashboard_map_top_padding);
-		ViewGroup.LayoutParams params = bottomView.getLayoutParams();
-		params.height = height;
-		bottomView.setLayoutParams(params);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {

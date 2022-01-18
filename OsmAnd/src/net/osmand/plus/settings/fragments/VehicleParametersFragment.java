@@ -19,14 +19,14 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.google.android.material.slider.Slider;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.helpers.enums.SpeedConstants;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.StringPreference;
+import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.settings.bottomsheets.VehicleParametersBottomSheet;
 import net.osmand.plus.settings.bottomsheets.VehicleSizeAssets;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;

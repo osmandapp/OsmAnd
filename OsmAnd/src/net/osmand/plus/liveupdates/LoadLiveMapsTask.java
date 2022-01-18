@@ -3,8 +3,8 @@ package net.osmand.plus.liveupdates;
 import android.os.AsyncTask;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.activities.LocalIndexHelper;
-import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.download.LocalIndexHelper;
+import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 
 public class LoadLiveMapsTask

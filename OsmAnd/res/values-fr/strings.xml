@@ -200,7 +200,7 @@
     <string name="send_location">Envoyer le point</string>
     <string name="context_menu_item_share_location">Partager ce point</string>
     <string name="add_waypoint_dialog_added">Point GPX \'\'{0}\'\' ajouté</string>
-    <string name="add_waypoint_dialog_title">Ajouter une étape à la trace GPX enregistrée</string>
+    <string name="add_waypoint_dialog_title">Ajouter un point de passage à la trace GPX enregistrée</string>
     <string name="amenity_type_administrative">Territoire</string>
     <string name="amenity_type_barrier">Obstacle</string>
     <string name="amenity_type_education">Éducation</string>
@@ -324,8 +324,8 @@
     <string name="layer_route">Route</string>
     <string name="shared_string_favorites">Favoris</string>
     <string name="layer_osm_bugs">Notes OSM (en ligne)</string>
-    <string name="layer_poi">Sur-couche des points d\'intérêt…</string>
-    <string name="layer_map">Source de la carte…</string>
+    <string name="layer_poi">Points d\'intérêt</string>
+    <string name="layer_map">Sources de la carte</string>
     <string name="menu_layers">Couches</string>
     <string name="context_menu_item_search_poi">Rechercher un Point d\'Intérêt</string>
     <string name="use_trackball_descr">Utiliser le pointeur pour déplacer la carte.</string>
@@ -482,7 +482,6 @@
     <string name="save_current_track">Enregistrer la trace en cours</string>
     <string name="save_track_interval_descr">Indiquez l\'intervalle d\'enregistrement de la trace pendant le guidage</string>
     <string name="save_track_interval">Intervalle d\'enregistrement pendant le guidage</string>
-    <string name="save_track_to_gpx_descrp">Une trace GPX est enregistrée automatiquement dans le dossier des traces pendant l\'itinéraire</string>
     <string name="update_tile">Mettre à jour la carte</string>
     <string name="reload_tile">Actualiser la tuile</string>
     <string name="mark_point">Cible</string>
@@ -1725,7 +1724,7 @@
     <string name="feedback">Sondage</string>
     <string name="contact_us">Nous contacter</string>
     <string name="osm_edit_created_poi">Point d\'intérêt créé sur OSM</string>
-    <string name="map_legend">Légende</string>
+    <string name="map_legend">Légende de la carte</string>
     <string name="shared_string_upload">Téléverser</string>
     <string name="shared_string_update">Mettre à jour</string>
     <string name="read_more">En savoir +</string>
@@ -2040,14 +2039,14 @@
     <string name="shared_string_pause">Pause</string>
     <string name="shared_string_trip">Itinéraire</string>
     <string name="shared_string_recorded">Enregistré</string>
-    <string name="shared_string_record">Enregistrer</string>
+    <string name="shared_string_record">Terminer</string>
     <string name="gpx_logging_no_data">Aucune donnée</string>
     <string name="shared_string_notifications">Notifications</string>
     <string name="trip_rec_notification_settings">Activer le démarrage rapide d\'enregistrement d\'itinéraire</string>
     <string name="trip_rec_notification_settings_desc">Afficher une notification système permettant de démarrer l\'enregistrement de l\'itinéraire.</string>
     <string name="gpx_no_tracks_title">Vous n\'avez aucun fichier de trace pour l\'instant</string>
     <string name="gpx_no_tracks_title_folder">Vous pouvez aussi ajouter des fichiers de trace GPX dans le dossier</string>
-    <string name="gpx_add_track">Autre GPX …</string>
+    <string name="gpx_add_track">GPX…</string>
     <string name="shared_string_appearance">Apparence</string>
     <string name="rendering_value_fine_name">Bien</string>
     <string name="translit_name_if_miss">Translittérer si le nom %1$s est absent</string>
@@ -2251,7 +2250,7 @@
     <string name="depth_contour_descr">Lignes de profondeur, balisage maritime.</string>
     <string name="subscribe_email_error">Erreur</string>
     <string name="subscribe_email_desc">Inscrivez-vous à notre lettre d\'information et téléchargez 3 cartes supplémentaires gratuitement !</string>
-    <string name="no_overlay">Sans sur-couche</string>
+    <string name="no_overlay">Aucune sur-couche</string>
     <string name="no_underlay">Sans sous-couche</string>
     <string name="quick_action_add_destination">Définir la destination</string>
     <string name="quick_action_replace_destination">Remplacer l\'arrivée</string>
@@ -2388,7 +2387,7 @@
     <string name="enter_gpx_name">Nom du fichier GPX :</string>
     <string name="waypoint_one">Étape 1</string>
     <string name="save_route_point">Enregistrer le point d\'itinéraire</string>
-    <string name="add_waypoint">Ajouter une étape</string>
+    <string name="add_waypoint">Ajouter un point de passage</string>
     <string name="save_gpx_waypoint">Enregistrer le point GPX</string>
     <string name="live_monitoring_max_interval_to_send">Durée de mémorisation pour le suivi en ligne</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Indiquez une durée de mémorisation des positions en l\'absence de connexion</string>
@@ -3719,7 +3718,7 @@
     <string name="access_hint_enter_address">Saisissez l\'adresse</string>
     <string name="add_segment_to_the_track">Ajouter à un fichier de trace</string>
     <string name="empty_state_my_tracks">Ajouter des fichiers de trace</string>
-    <string name="context_menu_item_add_waypoint">Ajouter une étape</string>
+    <string name="context_menu_item_add_waypoint">Ajouter un point de passage</string>
     <string name="quick_action_add_gpx">Ajouter un point de passage à la trace</string>
     <string name="start_of_the_track">Début de la trace</string>
     <string name="attach_to_the_roads">Déplacer sur les routes</string>
@@ -3896,8 +3895,8 @@
     <string name="reverse_all_points">Inverser tous les points</string>
     <string name="profile_by_default_description">Sélectionnez le profil utilisé au démarrage de l\'application.</string>
     <string name="shared_string_last_used">Dernier utilisé</string>
-    <string name="routing_attr_prefer_hiking_routes_name">Pirivilégier les itinéraires de randonnée</string>
-    <string name="routing_attr_prefer_hiking_routes_description">Pirivilégier les itinéraires de randonnée</string>
+    <string name="routing_attr_prefer_hiking_routes_name">Privilégier les itinéraires de randonnée</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Privilégier les itinéraires de randonnée</string>
     <string name="routing_attr_allow_intermittent_description">Autoriser les voies navigables intermittentes</string>
     <string name="routing_attr_allow_intermittent_name">Autoriser les voies navigables intermittentes</string>
     <string name="routing_attr_allow_streams_description">Autoriser les cours d’eau et les drains</string>
@@ -4476,7 +4475,36 @@
 \nLes points de la trace en dessous de cette distance du dernier point visible seront masqués.
 \nAttention : plus cette distance est élevée, plus la forme de la trace sera simplifiée.</string>
     <string name="use_routing_fallback_description">Utiliser la navigation hors ligne lorsque la navigation en ligne n\'est pas disponible.</string>
-    <string name="use_routing_fallback">Utiliser le routage de secours</string>
+    <string name="use_routing_fallback">Routage de secours hors ligne</string>
     <string name="created_on">Créé le</string>
     <string name="shared_string_size">Taille</string>
+    <string name="gps_filter_hdop_desc">Définissez la valeur maximale acceptée pour HDOP.
+\nLes points de valeur supérieure seront masqués.</string>
+    <string name="turn_arrows_descr">Activer ou non l\'affichage des flèches de direction sur la route.</string>
+    <string name="turn_arrows">Flèches de direction</string>
+    <string name="track_file">Fichier de trace</string>
+    <string name="shared_string_used">Utilisé</string>
+    <string name="files_with_route_restrictions">Fichiers avec restrictions d\'itinéraire</string>
+    <string name="waypoint_appearance">Apparence du point de passage</string>
+    <string name="track_file_description">Appuyer sur cette action affichera un écran de sélection des traces.</string>
+    <string name="shared_string_not_used">Non utilisé</string>
+    <string name="waypoint_template">Modèle de point de passage</string>
+    <string name="navigate_point_format_swiss_grid_plus">Grille suisse (CH1903+)</string>
+    <string name="navigate_point_format_swiss_grid">Grille suisse (CH1903)</string>
+    <string name="predefined_waypoint_appearance_description">Appuyer sur cette action enregistrera automatiquement le point de passage avec les paramètres prédéfinis.</string>
+    <string name="always_ask_waypoint_appearance_description">Appuyer sur cette action ouvrira l’écran « Ajouter un point de passage » où vous pourrez définir son nom et son apparence.</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icônes à zoom faible</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Représentation schématique des icônes à zoom faible</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Ne pas masquer les tunnels sur voie navigable</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tunnels sur voie navigable</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Étiquettes de note</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Afficher les étiquettes fixme</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Afficher les étiquettes de note</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Étiquettes fixme</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_value_category_name">Catégorie</string>
+    <string name="rendering_value_omit_name">Ignorer</string>
+    <string name="rendering_attr_seabedDetail_description">Informations textuelles supplémentaires sur la nature des fonds marins</string>
+    <string name="rendering_attr_seabedDetail_name">Détails des fonds marins</string>
+    <string name="rendering_value_all_name">Tout</string>
 </resources>

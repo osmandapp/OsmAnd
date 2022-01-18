@@ -19,9 +19,9 @@ import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -438,7 +438,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 		@Override
 		public LineData getChartData() {
-			GpxUiHelper.setupGPXChart(commonGraphAdapter.getChart(), 4, 24f, 16f, !nightMode, true);
+			GpxUiHelper.setupGPXChart(commonGraphAdapter.getChart(), 24f, 16f, true);
 			List<ILineDataSet> dataSets = GpxUiHelper.getDataSets(commonGraphAdapter.getChart(),
 					app, analysis, firstType, secondType, false);
 			return new LineData(dataSets);

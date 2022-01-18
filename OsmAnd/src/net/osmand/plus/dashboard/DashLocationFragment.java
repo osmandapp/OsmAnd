@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.data.LatLon;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
 import android.annotation.SuppressLint;
 import android.widget.ImageView;
 import android.widget.TextView;

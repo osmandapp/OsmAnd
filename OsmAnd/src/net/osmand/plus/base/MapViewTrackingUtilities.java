@@ -4,9 +4,11 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.view.WindowManager;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.LatLon;
@@ -20,7 +22,8 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.dashboard.DashboardOnMap;
-import net.osmand.plus.helpers.enums.DrivingRegion;
+import net.osmand.plus.resources.DetectRegionTask;
+import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -171,8 +174,27 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		return movingToMyLocation;
 	}
 
-	public void detectDrivingRegion(final LatLon latLon) {
-		new DetectDrivingRegionTask(app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, latLon);
+	public void detectDrivingRegion(@NonNull LatLon latLon) {
+		detectCurrentRegion(latLon, detectedRegion -> {
+			if (detectedRegion != null) {
+				DrivingRegion oldRegion = app.getSettings().DRIVING_REGION.get();
+
+				app.setupDrivingRegion(detectedRegion);
+
+				DrivingRegion currentRegion = app.getSettings().DRIVING_REGION.get();
+				if (oldRegion.leftHandDriving != currentRegion.leftHandDriving) {
+					ApplicationMode mode = app.getRoutingHelper().getAppMode();
+					app.getRoutingHelper().onSettingsChanged(mode, true);
+				}
+			}
+			return true;
+		});
+	}
+
+	public void detectCurrentRegion(@NonNull LatLon latLon,
+	                                @NonNull CallbackWithObject<WorldRegion> onRegionDetected) {
+		new DetectRegionTask(app, onRegionDetected)
+				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, latLon);
 	}
 
 	@Override
@@ -491,44 +513,5 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public void setZoomTime(long time) {
 		lastTimeAutoZooming = time;
 		isUserZoomed = true;
-	}
-
-	private static class DetectDrivingRegionTask extends AsyncTask<LatLon, Void, WorldRegion> {
-
-		private final OsmandApplication app;
-
-		DetectDrivingRegionTask(OsmandApplication app) {
-			this.app = app;
-		}
-
-		@Override
-		protected WorldRegion doInBackground(LatLon... latLons) {
-			try {
-				if (latLons != null && latLons.length > 0) {
-					Map.Entry<WorldRegion, BinaryMapDataObject> reg = app.getRegions().getSmallestBinaryMapDataObjectAt(latLons[0]);
-					if(reg != null) {
-						return reg.getKey();
-					}
-				}
-			} catch (IOException e) {
-				// ignore
-			}
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(WorldRegion worldRegion) {
-			if (worldRegion != null) {
-				DrivingRegion oldRegion = app.getSettings().DRIVING_REGION.get();
-
-				app.setupDrivingRegion(worldRegion);
-
-				DrivingRegion currentRegion = app.getSettings().DRIVING_REGION.get();
-				if (oldRegion.leftHandDriving != currentRegion.leftHandDriving) {
-					ApplicationMode mode = app.getRoutingHelper().getAppMode();
-					app.getRoutingHelper().onSettingsChanged(mode, true);
-				}
-			}
-		}
 	}
 }

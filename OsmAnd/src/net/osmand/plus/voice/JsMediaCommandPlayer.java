@@ -37,19 +37,21 @@ public class JsMediaCommandPlayer extends CommandPlayer implements OnCompletionL
 	// indicates that player is ready to play first file
 	private final List<String> filesToPlay = Collections.synchronizedList(new ArrayList<>());
 
-	protected JsMediaCommandPlayer(OsmandApplication app,
-	                               ApplicationMode applicationMode,
-	                               VoiceRouter voiceRouter,
-	                               File voiceProviderDir) throws CommandPlayerException {
+	protected JsMediaCommandPlayer(@NonNull OsmandApplication app,
+	                               @NonNull ApplicationMode applicationMode,
+	                               @NonNull VoiceRouter voiceRouter,
+	                               @NonNull File voiceProviderDir) throws CommandPlayerException {
 		super(app, applicationMode, voiceRouter, voiceProviderDir);
 	}
 
+	@NonNull
 	@Override
 	public File getTtsFileFromDir(@NonNull File voiceProviderDir) {
 		String fileName = language + "_" + TTSVOICE_INDEX_EXT_JS;
 		return new File(voiceProviderDir, fileName);
 	}
 
+	@NonNull
 	@Override
 	public CommandBuilder newCommandBuilder() {
 		JsCommandBuilder commandBuilder = new JsCommandBuilder(this);
@@ -82,8 +84,9 @@ public class JsMediaCommandPlayer extends CommandPlayer implements OnCompletionL
 	}
 
 	//  Called from the calculating route thread.
+	@NonNull
 	@Override
-	public synchronized List<String> playCommands(CommandBuilder builder) {
+	public synchronized List<String> playCommands(@NonNull CommandBuilder builder) {
 		if (voiceRouter.isMute()) {
 			return Collections.emptyList();
 		}
@@ -112,6 +115,7 @@ public class JsMediaCommandPlayer extends CommandPlayer implements OnCompletionL
 		}
 	}
 
+	@NonNull
 	private List<String> splitAnnouncements(List<String> execute) {
 		List<String> result = new ArrayList<>();
 		for (String files : execute) {
@@ -184,7 +188,7 @@ public class JsMediaCommandPlayer extends CommandPlayer implements OnCompletionL
 	 *
 	 * @param file
 	 */
-	private void playFile(File file) {
+	private void playFile(@NonNull File file) {
 		if (!file.exists() || file.isDirectory()) {
 			log.error("Unable to play, does not exist: " + file);
 			playQueue();
@@ -213,7 +217,7 @@ public class JsMediaCommandPlayer extends CommandPlayer implements OnCompletionL
 		return false;
 	}
 
-	public static boolean isMyData(File voiceDir) {
+	public static boolean isMyData(@NonNull File voiceDir) {
 		if (voiceDir.getName().contains("tts")) {
 			return false;
 		}

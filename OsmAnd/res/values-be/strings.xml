@@ -963,7 +963,6 @@
     <string name="save_current_track">Захаваць дзейны след</string>
     <string name="save_track_interval">Інтэрвал захавання падчас навігацыі</string>
     <string name="save_track_interval_descr">Вызгачце інтэрвал захоўвання пунктаў следу падчас навігацыі</string>
-    <string name="save_track_to_gpx_descrp">GPX-след аўтаматычна захаваны ў каталог слядоў падчас навігацыі.</string>
     <string name="update_tile">Абнавіць мапу</string>
     <string name="reload_tile">Абнавіць фрагмент мапы</string>
     <string name="mark_point">Мэта</string>
