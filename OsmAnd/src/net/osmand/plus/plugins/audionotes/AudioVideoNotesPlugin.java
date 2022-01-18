@@ -646,7 +646,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, List<RenderingRuleProperty> customRules) {
+	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
 		ItemClickListener listener = (adptr, itemId, pos, isChecked, viewCoordinates) -> {
 			if (itemId == R.string.layer_recordings) {
 				SHOW_RECORDINGS.set(!SHOW_RECORDINGS.get());

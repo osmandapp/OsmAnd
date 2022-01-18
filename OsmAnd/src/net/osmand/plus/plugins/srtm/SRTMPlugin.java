@@ -268,7 +268,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, List<RenderingRuleProperty> customRules) {
+	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
 		if (isLocked()) {
 			PurchasingUtils.createPromoItem(adapter, mapActivity, OsmAndFeature.TERRAIN,
 					TERRAIN,
