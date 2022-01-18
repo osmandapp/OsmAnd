@@ -4507,4 +4507,5 @@
     <string name="rendering_attr_seabedDetail_description">Informations textuelles supplémentaires sur la nature des fonds marins</string>
     <string name="rendering_attr_seabedDetail_name">Détails des fonds marins</string>
     <string name="rendering_value_all_name">Tout</string>
+    <string name="save_track_to_gpx_descrp">Démarre l\'enregistrement de la trace avec la navigation. Une fois la navigation terminée, la trace sera automatiquement enregistrée.</string>
 </resources>
