@@ -57,8 +57,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 	}
 
 	@Override
-	protected void makeFullUrl(@NonNull StringBuilder sb,
-	                           @NonNull List<LatLon> path) {
+	protected void makeFullUrl(@NonNull StringBuilder sb, @NonNull List<LatLon> path, @Nullable Float startBearing) {
 		sb.append("?");
 		for (int i = 0; i < path.size(); i++) {
 			LatLon point = path.get(i);
@@ -69,6 +68,12 @@ public class GpxEngine extends OnlineRoutingEngine {
 			if (i < path.size() - 1) {
 				sb.append('&');
 			}
+		}
+		if (startBearing != null) {
+			if (sb.charAt(sb.length() - 1) != '?') {
+				sb.append('&');
+			}
+			sb.append("heading=").append(startBearing.intValue());
 		}
 	}
 
@@ -91,6 +96,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 		params.add(EngineParameter.CUSTOM_URL);
 		params.add(EngineParameter.APPROXIMATE_ROUTE);
 		params.add(EngineParameter.USE_EXTERNAL_TIMESTAMPS);
+		params.add(EngineParameter.USE_ROUTING_FALLBACK);
 	}
 
 	@Override
@@ -116,7 +122,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 
 	private OnlineRoutingResponse prepareResponse(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
 	                                              boolean initialCalculation) {
-		boolean calculatedTimeSpeed = false;
+		boolean calculatedTimeSpeed = useExternalTimestamps();
 		if (shouldApproximateRoute() && !initialCalculation) {
 			MeasurementEditingContext ctx = prepareApproximationContext(app, gpxFile);
 			if (ctx != null) {
@@ -161,6 +167,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 		return parseGpx(content) != null;
 	}
 
+	@Nullable
 	private GPXFile parseGpx(@NonNull String content) {
 		InputStream gpxStream;
 		try {

@@ -82,6 +82,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	private OnlineRoutingCard apiKeyCard;
 	private OnlineRoutingCard approximateCard;
 	private OnlineRoutingCard useExternalTimestampsCard;
+	private OnlineRoutingCard routingFallbackCard;
 	private OnlineRoutingCard exampleCard;
 	private View testResultsContainer;
 	private View saveButton;
@@ -138,6 +139,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		setupVehicleCard();
 		setupApproximateCard();
 		setupExternalTimestampsCard();
+		setupRoutingFallbackCard();
 		setupApiKeyCard();
 		setupExampleCard();
 		setupResultsContainer();
@@ -302,6 +304,18 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		});
 		useExternalTimestampsCard.showDivider();
 		segmentsContainer.addView(useExternalTimestampsCard.getView());
+	}
+
+	private void setupRoutingFallbackCard() {
+		routingFallbackCard = new OnlineRoutingCard(mapActivity, isNightMode(), appMode);
+		routingFallbackCard.build(mapActivity);
+		routingFallbackCard.setHeaderTitle(getString(R.string.use_routing_fallback));
+		routingFallbackCard.setCheckBox(getString(R.string.use_routing_fallback_description), engine.useRoutingFallback(), result -> {
+			engine.put(EngineParameter.USE_ROUTING_FALLBACK, String.valueOf(result));
+			return false;
+		});
+		routingFallbackCard.showDivider();
+		segmentsContainer.addView(routingFallbackCard.getView());
 	}
 
 	private void setupApiKeyCard() {
@@ -478,7 +492,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		List<LatLon> path = new ArrayList<>();
 		path.add(selectedLocation.getCityCenterLatLon());
 		path.add(selectedLocation.getCityAirportLatLon());
-		return engine.getFullUrl(path);
+		return engine.getFullUrl(path, 0f);
 	}
 
 	private void testEngineWork() {
@@ -542,6 +556,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 				updateCardVisibility(vehicleCard, EngineParameter.VEHICLE_KEY);
 				updateCardVisibility(approximateCard, EngineParameter.APPROXIMATE_ROUTE);
 				updateCardVisibility(useExternalTimestampsCard, EngineParameter.USE_EXTERNAL_TIMESTAMPS);
+				updateCardVisibility(routingFallbackCard, EngineParameter.USE_ROUTING_FALLBACK);
 
 			} else if (vehicleCard.equals(card)) {
 				VehicleType vt = engine.getSelectedVehicleType();

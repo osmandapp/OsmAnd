@@ -120,15 +120,22 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 		return false;
 	}
 
+	public boolean useRoutingFallback() {
+		String value = get(EngineParameter.USE_ROUTING_FALLBACK);
+		if (!Algorithms.isEmpty(value)) {
+			return Boolean.parseBoolean(value);
+		}
+		return false;
+	}
+
 	@NonNull
-	public String getFullUrl(@NonNull List<LatLon> path) {
+	public String getFullUrl(@NonNull List<LatLon> path, @Nullable Float startBearing) {
 		StringBuilder sb = new StringBuilder(getBaseUrl());
-		makeFullUrl(sb, path);
+		makeFullUrl(sb, path, startBearing);
 		return sb.toString();
 	}
 
-	protected abstract void makeFullUrl(@NonNull StringBuilder sb,
-	                                    @NonNull List<LatLon> path);
+	protected abstract void makeFullUrl(@NonNull StringBuilder sb, @NonNull List<LatLon> path, @Nullable Float startBearing);
 
 	@NonNull
 	public String getBaseUrl() {

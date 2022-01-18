@@ -23,6 +23,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
+import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.OnlineRoutingResponse;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
@@ -139,7 +140,22 @@ public class RouteProvider {
 				} else if (params.mode.getRouteService() == RouteService.BROUTER) {
 					res = findBROUTERRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.ONLINE) {
-					res = findOnlineRoute(params);
+					boolean useFallbackRouting = false;
+					try {
+						res = findOnlineRoute(params);
+					} catch (IOException | JSONException e) {
+						res = new RouteCalculationResult(null);
+						params.initialCalculation = false;
+						useFallbackRouting = true;
+					}
+					if (useFallbackRouting || !res.isCalculated()) {
+						OnlineRoutingHelper helper = params.ctx.getOnlineRoutingHelper();
+						String engineKey = params.mode.getRoutingProfile();
+						OnlineRoutingEngine engine = helper.getEngineByKey(engineKey);
+						if (engine != null && engine.useRoutingFallback()) {
+							res = findVectorMapsRoute(params, calcGPXRoute);
+						}
+					}
 				} else if (params.mode.getRouteService() == RouteService.STRAIGHT ||
 						params.mode.getRouteService() == RouteService.DIRECT_TO) {
 					res = findStraightRoute(params);
@@ -150,7 +166,7 @@ public class RouteProvider {
 					log.info("Finding route contained " + res.getImmutableAllLocations().size() + " points for " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				}
 				return res;
-			} catch (IOException | ParserConfigurationException | SAXException | JSONException e) {
+			} catch (IOException | ParserConfigurationException | SAXException e) {
 				log.error("Failed to find route ", e);
 			}
 		}
@@ -1090,7 +1106,9 @@ public class RouteProvider {
 		OsmandSettings settings = app.getSettings();
 		String engineKey = params.mode.getRoutingProfile();
 		OnlineRoutingResponse response =
-				helper.calculateRouteOnline(engineKey, getPathFromParams(params), params.leftSide, params.initialCalculation);
+				helper.calculateRouteOnline(engineKey, getPathFromParams(params),
+						params.start.hasBearing() ? params.start.getBearing() : null,
+						params.leftSide, params.initialCalculation);
 
 		if (response != null) {
 			if (response.getGpxFile() != null) {
@@ -1105,6 +1123,8 @@ public class RouteProvider {
 				params.intermediates = null;
 				return new RouteCalculationResult(route, directions, params, null, false);
 			}
+		} else {
+			params.initialCalculation = false;
 		}
 
 		return new RouteCalculationResult("Route is empty");
