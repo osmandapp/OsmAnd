@@ -14,6 +14,7 @@ import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.render.RenderingRuleProperty;
 
 import java.util.Collections;
@@ -88,11 +89,16 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	@Override
 	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter menuAdapter, @NonNull MapActivity mapActivity, List<RenderingRuleProperty> customRules) {
 		Iterator<RenderingRuleProperty> iterator = customRules.iterator();
-		while (iterator.hasNext()){
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		while (iterator.hasNext()) {
 			RenderingRuleProperty property = iterator.next();
 			if (DEPTH_CONTOURS.equals(property.getAttrName())) {
-				boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-				menuAdapter.addItem(ConfigureMapMenu.createRenderingProperty(menuAdapter, mapActivity, R.drawable.ic_action_nautical_depth, property, DEPTH_CONTOURS, nightMode));
+				String attrName = property.getAttrName();
+				String name = AndroidUtils.getRenderingStringPropertyName(mapActivity, attrName, property.getName());
+				menuAdapter.addItem(ConfigureMapMenu.createBooleanRenderingProperty(mapActivity, attrName, name, DEPTH_CONTOURS, property, R.drawable.ic_action_nautical_depth, nightMode, result -> {
+					mapActivity.refreshMapComplete();
+					return false;
+				}));
 				iterator.remove();
 			}
 		}

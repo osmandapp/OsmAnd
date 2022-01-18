@@ -22,7 +22,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
 import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 import static net.osmand.plus.ContextMenuItem.INVALID_ID;
-import static net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin.DEPTH_CONTOURS;
 import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.RENDERING_CATEGORY_OSM_ASSISTANT;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_DENSITY_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_ATTR;
@@ -71,7 +70,6 @@ import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -85,7 +83,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Locale;
 import java.util.Map;
 
@@ -611,16 +608,6 @@ public class ConfigureMapMenu {
 			}
 		}
 		if (prefs.size() > 0) {
-			ListIterator <RenderingRuleProperty> ruleIterator = ps.listIterator();
-			ListIterator <CommonPreference<Boolean>> prefIterator = prefs.listIterator();
-			while (ruleIterator.hasNext() && prefIterator.hasNext()){
-				if (ruleIterator.next().getAttrName().equals(DEPTH_CONTOURS)){
-					ruleIterator.remove();
-				}
-				if (prefIterator.next().getId().contains(DEPTH_CONTOURS)){
-					prefIterator.remove();
-				}
-			}
 			final ItemClickListener clickListener = new ContextMenuAdapter.ItemClickListener() {
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> a, int itemId, int pos,
@@ -765,14 +752,14 @@ public class ConfigureMapMenu {
 		}
 	}
 
-	private static ContextMenuItem createBooleanRenderingProperty(@NonNull MapActivity activity,
-	                                                              @NonNull String attrName,
-	                                                              @NonNull String name,
-	                                                              @NonNull String id,
-	                                                              @Nullable RenderingRuleProperty property,
-	                                                              @DrawableRes int icon,
-	                                                              boolean nightMode,
-	                                                              @Nullable CallbackWithObject<Boolean> callback) {
+	public static ContextMenuItem createBooleanRenderingProperty(@NonNull MapActivity activity,
+	                                                             @NonNull String attrName,
+	                                                             @NonNull String name,
+	                                                             @NonNull String id,
+	                                                             @Nullable RenderingRuleProperty property,
+	                                                             @DrawableRes int icon,
+	                                                             boolean nightMode,
+	                                                             @Nullable CallbackWithObject<Boolean> callback) {
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 
@@ -785,8 +772,8 @@ public class ConfigureMapMenu {
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						if (property != null) {
 							pref.set(isChecked);
-							OsmandMapTileView mapView = app.getOsmandMap().getMapView();
-							mapView.refreshMap(true);
+							activity.refreshMap();
+							activity.updateLayers();
 						} else {
 							isChecked = pref.get();
 						}
