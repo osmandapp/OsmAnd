@@ -25,6 +25,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -529,7 +530,7 @@ public class GpsFilterHelper {
 		@NonNull
 		@Override
 		public String getFormattedValue(double value, @NonNull OsmandApplication app) {
-			return OsmAndFormatter.getFormattedSpeed((float) value, app, true);
+			return OsmAndFormatter.getFormattedSpeed((float) value, app);
 		}
 
 		@NonNull
@@ -540,9 +541,16 @@ public class GpsFilterHelper {
 			if (!isNeeded()) {
 				value = app.getString(R.string.gpx_logging_no_data);
 			} else {
-				String min = OsmAndFormatter.getFormattedSpeed((float) getSelectedMinValue(), app, false);
-				String max = OsmAndFormatter.getFormattedSpeed((float) getSelectedMaxValue(), app, false);
-				String range = app.getString(R.string.ltr_or_rtl_combine_via_dash, min, max);
+				FormattedValue min = OsmAndFormatter.getFormattedSpeedValue((float) getSelectedMinValue(), app);
+				FormattedValue max = OsmAndFormatter.getFormattedSpeedValue((float) getSelectedMaxValue(), app);
+				String range;
+				if (min.unit.equals(max.unit)) {
+					range = app.getString(R.string.ltr_or_rtl_combine_via_dash, min.value, max.value);
+				} else {
+					String minFormatted = min.format(app);
+					String maxFormatted = max.format(app);
+					range = app.getString(R.string.ltr_or_rtl_combine_via_dash, minFormatted, maxFormatted);
+				}
 				String unit = app.getSettings().SPEED_SYSTEM.get().toShortString(app);
 				value = app.getString(R.string.ltr_or_rtl_combine_via_space, range, unit);
 			}
