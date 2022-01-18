@@ -95,12 +95,14 @@ public class SegmentsCard extends MapBaseCard {
 		LinearLayout noRoutesContainer = view.findViewById(R.id.no_routes_container);
 		TextViewEx createRoutesButton = view.findViewById(R.id.create_routes_btn);
 		TextViewEx noRoutesDescr = view.findViewById(R.id.gpx_no_routes_descr);
+
 		String args = mapActivity.getString(R.string.plan_a_route);
 		String noRoutesDescrText = mapActivity.getString(R.string.gpx_no_routes_descr, args);
 		noRoutesDescr.setText(noRoutesDescrText);
+
 		boolean showEmptyRoutes = items.isEmpty() && !selectedGpxFile.isShowCurrentTrack();
 		AndroidUiHelper.updateVisibility(noRoutesContainer, showEmptyRoutes);
-		AndroidUiHelper.updateVisibility(recyclerView, !items.isEmpty());
+		AndroidUiHelper.updateVisibility(recyclerView, !showEmptyRoutes);
 		createRoutesButton.setOnClickListener(v -> SegmentsCard.this.notifyButtonPressed(EDIT_BUTTON_INDEX));
 	}
 
