@@ -81,6 +81,8 @@ public class TrackDetailsMenu {
 	private boolean hidding;
 	private Location myLocation;
 
+	private boolean fitTrackOnMapForbidden = false;
+
 	@Nullable
 	public MapActivity getMapActivity() {
 		return mapActivity;
@@ -511,7 +513,7 @@ public class TrackDetailsMenu {
 		if (location != null) {
 			mapActivity.refreshMap();
 		}
-		if (fitTrackOnMap) {
+		if (!fitTrackOnMapForbidden && fitTrackOnMap) {
 			fitTrackOnMap(chart, location, forceFit);
 		}
 	}
@@ -766,9 +768,11 @@ public class TrackDetailsMenu {
 					AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
 						@Override
 						public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+							fitTrackOnMapForbidden = true;
 							GpxDisplayItem gpxItem = getGpxItem();
 							gpxItem.chartTypes = availableTypes.get(position);
 							update();
+							fitTrackOnMapForbidden = false;
 						}
 					};
 					new PopUpMenuHelper.Builder(v, items, nightMode)
@@ -812,6 +816,7 @@ public class TrackDetailsMenu {
 							.setListener(new AdapterView.OnItemClickListener() {
 								@Override
 								public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+									fitTrackOnMapForbidden = true;
 									GpxDisplayItem gpxItem = getGpxItem();
 									if (gpxItem != null) {
 										gpxItem.chartAxisType = GPXDataSetAxisType.values()[position];
@@ -819,6 +824,7 @@ public class TrackDetailsMenu {
 										gpxItem.chartMatrix = null;
 										update();
 									}
+									fitTrackOnMapForbidden = false;
 								}
 							}).show();
 				}
