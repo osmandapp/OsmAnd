@@ -4513,4 +4513,5 @@
     <string name="rendering_value_all_name">Усі</string>
     <string name="rendering_value_omit_name">Пропустити</string>
     <string name="rendering_attr_seabedDetail_name">Подробиці про морське дно</string>
+    <string name="save_track_to_gpx_descrp">Автозапис треків під час навігації. Після завершення запису, трек буде збережено автоматично.</string>
 </resources>
