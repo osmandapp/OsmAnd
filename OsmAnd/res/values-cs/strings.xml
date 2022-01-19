@@ -4511,4 +4511,5 @@
     <string name="rendering_value_all_name">Všechny</string>
     <string name="rendering_value_omit_name">Vynechat</string>
     <string name="rendering_attr_seabedDetail_description">Další textové informace o povrchu mořského dna, kategorii a druhu mořského porostu</string>
+    <string name="save_track_to_gpx_descrp">Spustit záznam stopy automaticky v průběhu navigace. Po jejím dokončení se stopa automaticky uloží.</string>
 </resources>
