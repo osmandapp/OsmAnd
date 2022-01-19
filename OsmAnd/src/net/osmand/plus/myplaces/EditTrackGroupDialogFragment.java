@@ -33,8 +33,9 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.dialogs.TrackWayPointsCopyToFavoritesBottomSheet;
-import net.osmand.plus.dialogs.TrackWayPointsRenameBottomSheet;
+import net.osmand.plus.dialogs.CopyTrackGroupToFavoritesBottomSheet;
+import net.osmand.plus.dialogs.EditTrackGroupBottomSheet.OnGroupNameChangeListener;
+import net.osmand.plus.dialogs.RenameTrackGroupBottomSheet;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
@@ -60,7 +61,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment implements OnPointsDeleteListener {
+public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment implements OnPointsDeleteListener, OnGroupNameChangeListener {
 
 	public static final String TAG = EditTrackGroupDialogFragment.class.getSimpleName();
 
@@ -155,11 +156,10 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						final FragmentActivity activity = getActivity();
+						FragmentActivity activity = getActivity();
 						if (activity != null) {
 							FragmentManager fragmentManager = activity.getSupportFragmentManager();
-							TrackWayPointsRenameBottomSheet.showInstance(fragmentManager, EditTrackGroupDialogFragment.this, group);
-							dismiss();
+							RenameTrackGroupBottomSheet.showInstance(fragmentManager, EditTrackGroupDialogFragment.this, group, EditTrackGroupDialogFragment.this);
 						}
 					}
 				})
@@ -225,11 +225,10 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						final FragmentActivity activity = getActivity();
+						FragmentActivity activity = getActivity();
 						if (activity != null) {
 							FragmentManager fragmentManager = activity.getSupportFragmentManager();
-							TrackWayPointsCopyToFavoritesBottomSheet.showInstance(fragmentManager, EditTrackGroupDialogFragment.this, group);
-							dismiss();
+							CopyTrackGroupToFavoritesBottomSheet.showInstance(fragmentManager, EditTrackGroupDialogFragment.this, group, EditTrackGroupDialogFragment.this);
 						}
 					}
 				})
@@ -360,6 +359,11 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		if (fragment instanceof TrackMenuFragment) {
 			((TrackMenuFragment) fragment).updateContent();
 		}
+		dismiss();
+	}
+
+	@Override
+	public void onGroupNameChanged() {
 		dismiss();
 	}
 

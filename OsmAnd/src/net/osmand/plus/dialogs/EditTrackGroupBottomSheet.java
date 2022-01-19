@@ -3,56 +3,38 @@ package net.osmand.plus.dialogs;
 import static net.osmand.plus.utils.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
 
 import android.content.res.ColorStateList;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
-import net.osmand.plus.myplaces.EditTrackGroupDialogFragment.UpdateGpxCategoryTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
-import org.apache.commons.logging.Log;
+public abstract class EditTrackGroupBottomSheet extends MenuBottomSheetDialogFragment {
 
-public class TrackWayPointsRenameBottomSheet extends MenuBottomSheetDialogFragment {
-
-	private static final Log LOG = PlatformUtil.getLog(TrackWayPointsRenameBottomSheet.class);
-	private static final String TAG = TrackWayPointsRenameBottomSheet.class.getName();
-	private GpxDisplayGroup group;
-	private OsmandApplication app;
-	private TextInputLayout nameTextBox;
-	private String groupName;
+	protected GpxDisplayGroup group;
+	protected OsmandApplication app;
+	protected TextInputLayout nameTextBox;
+	protected TextInputEditText editText;
+	protected String groupName;
+	protected OnGroupNameChangeListener listener;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		app = requiredMyApplication();
 		groupName = Algorithms.isEmpty(group.getName()) ? app.getString(R.string.shared_string_gpx_points) : group.getName();
-		View view = UiUtilities.getInflater(app, nightMode).inflate(R.layout.title_with_desc, null);
-		BaseBottomSheetItem titleWithDescr = new BottomSheetItemWithDescription.Builder()
-				.setTitle(getString(R.string.shared_string_rename))
-				.setCustomView(view)
-				.create();
 
-		items.add(titleWithDescr);
 		View mainView = UiUtilities.getInflater(app, nightMode).inflate(R.layout.track_name_edit_text, null);
 		nameTextBox = setupTextBox(mainView);
 		setupEditText(mainView);
@@ -63,7 +45,7 @@ public class TrackWayPointsRenameBottomSheet extends MenuBottomSheetDialogFragme
 		items.add(editFolderName);
 	}
 
-	private TextInputLayout setupTextBox(View mainView) {
+	protected TextInputLayout setupTextBox(View mainView) {
 		TextInputLayout nameTextBox = mainView.findViewById(R.id.name_text_box);
 		int backgroundId = nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light;
 		nameTextBox.setBoxBackgroundColorResource(backgroundId);
@@ -73,10 +55,9 @@ public class TrackWayPointsRenameBottomSheet extends MenuBottomSheetDialogFragme
 		return nameTextBox;
 	}
 
-	private void setupEditText(View mainView) {
-		TextInputEditText editText = mainView.findViewById(R.id.name_edit_text);
+	protected void setupEditText(View mainView) {
+		editText = mainView.findViewById(R.id.name_edit_text);
 		editText.setText(groupName);
-		editText.requestFocus();
 		editText.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -93,7 +74,7 @@ public class TrackWayPointsRenameBottomSheet extends MenuBottomSheetDialogFragme
 		});
 	}
 
-	private void updateGroupName(String name) {
+	protected void updateGroupName(String name) {
 		if (Algorithms.isBlank(name)) {
 			nameTextBox.setError(getString(R.string.empty_filename));
 		} else if (ILLEGAL_FILE_NAME_CHARACTERS.matcher(name).find()) {
@@ -110,35 +91,7 @@ public class TrackWayPointsRenameBottomSheet extends MenuBottomSheetDialogFragme
 		return nameTextBox.getError() == null;
 	}
 
-	@Override
-	public void onRightBottomButtonClick() {
-		renameGroupName();
-	}
-
-	private void renameGroupName() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			new UpdateGpxCategoryTask(activity, group, groupName)
-					.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-			dismiss();
-		}
-		dismiss();
-	}
-
-	@Override
-	protected int getRightBottomButtonTextId() {
-		return R.string.shared_string_rename;
-	}
-
-	public static void showInstance(@NonNull FragmentManager fragmentManager,
-	                                @Nullable Fragment target,
-	                                @NonNull GpxDisplayGroup group) {
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			TrackWayPointsRenameBottomSheet fragment = new TrackWayPointsRenameBottomSheet();
-			fragment.group = group;
-			fragment.setRetainInstance(true);
-			fragment.setTargetFragment(target, 0);
-			fragment.show(fragmentManager, TrackWayPointsRenameBottomSheet.TAG);
-		}
+	public interface OnGroupNameChangeListener{
+		void onGroupNameChanged();
 	}
 }
