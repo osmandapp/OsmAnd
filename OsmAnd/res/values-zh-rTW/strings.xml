@@ -4506,4 +4506,5 @@
     <string name="rendering_attr_seabedDetail_name">海底詳細資訊</string>
     <string name="rendering_attr_seabedDetail_description">關於海床表面狀況、雜草或海草的組合表面類型、類別和分類群的額外文字資訊</string>
     <string name="rendering_value_all_name">所有</string>
+    <string name="save_track_to_gpx_descrp">在導航過程中自動開始記錄軌跡。完成後，將會自動儲存軌跡。</string>
 </resources>
