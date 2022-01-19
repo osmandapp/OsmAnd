@@ -455,12 +455,6 @@ public class OsmAndFormatter {
 	}
 
 	@NonNull
-	private static FormattedValue formatValue(float value, @StringRes int unitId, boolean forceTrailingZeroes,
-	                                  int decimalPlacesNumber, @NonNull OsmandApplication app) {
-		return formatValue(value, app.getString(unitId), forceTrailingZeroes, decimalPlacesNumber, app);
-	}
-
-	@NonNull
 	public static String formatInteger(int value, @NonNull String unit, @NonNull OsmandApplication app) {
 		return formatIntegerValue(value, unit, app).format(app);
 	}
@@ -471,8 +465,14 @@ public class OsmAndFormatter {
 	}
 
 	@NonNull
+	private static FormattedValue formatValue(float value, @StringRes int unitId, boolean forceTrailingZeroes,
+	                                          int decimalPlacesNumber, @NonNull OsmandApplication app) {
+		return formatValue(value, app.getString(unitId), forceTrailingZeroes, decimalPlacesNumber, app);
+	}
+
+	@NonNull
 	private static FormattedValue formatValue(float value, @NonNull String unit, boolean forceTrailingZeroes,
-	                                  int decimalPlacesNumber, @NonNull OsmandApplication app) {
+	                                          int decimalPlacesNumber, @NonNull OsmandApplication app) {
 		String pattern = "0";
 		if (decimalPlacesNumber > 0) {
 			char fractionDigitPattern = forceTrailingZeroes ? '0' : '#';
