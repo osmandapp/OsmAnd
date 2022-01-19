@@ -1114,6 +1114,12 @@ public class GpxUiHelper {
 
 	public static void setupGPXChart(@NonNull LineChart mChart, float topOffset, float bottomOffset,
 	                                 boolean useGesturesAndScale, @Nullable Drawable markerIcon) {
+		GpxMarkerView markerView = new GpxMarkerView(mChart.getContext(), markerIcon);
+		setupGPXChart(mChart, markerView, topOffset, bottomOffset, useGesturesAndScale);
+	}
+
+	public static void setupGPXChart(@NonNull LineChart mChart, @NonNull GpxMarkerView markerView,
+	                                 float topOffset, float bottomOffset, boolean useGesturesAndScale) {
 		Context context = mChart.getContext();
 
 		mChart.setHardwareAccelerationEnabled(true);
@@ -1134,9 +1140,8 @@ public class GpxUiHelper {
 
 		// create a custom MarkerView (extend MarkerView) and specify the layout
 		// to use for it
-		GpxMarkerView mv = new GpxMarkerView(context, markerIcon);
-		mv.setChartView(mChart); // For bounds control
-		mChart.setMarker(mv); // Set the marker to the chart
+		markerView.setChartView(mChart); // For bounds control
+		mChart.setMarker(markerView); // Set the marker to the chart
 		mChart.setDrawMarkers(true);
 		mChart.setYAxisLabelView(new YAxisLabelView(context, R.layout.chart_label) {
 
@@ -1280,21 +1285,18 @@ public class GpxUiHelper {
 	private static float setupXAxisTime(XAxis xAxis, long timeSpan) {
 		final boolean useHours = timeSpan / 3600000 > 0;
 		xAxis.setGranularity(1f);
-		xAxis.setValueFormatter((value, axis) -> {
-			int seconds = (int) value;
-			if (useHours) {
-				int hours = seconds / (60 * 60);
-				int minutes = (seconds / 60) % 60;
-				int sec = seconds % 60;
-				return hours + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (sec < 10 ? "0" + sec : sec);
-			} else {
-				int minutes = (seconds / 60) % 60;
-				int sec = seconds % 60;
-				return (minutes < 10 ? "0" + minutes : minutes) + ":" + (sec < 10 ? "0" + sec : sec);
-			}
-		});
-
+		xAxis.setValueFormatter((value, axis) -> formatXAxisTime((int) value, useHours));
 		return 1f;
+	}
+
+	public static String formatXAxisTime(int seconds, boolean useHours) {
+		if (useHours) {
+			return OsmAndFormatter.getFormattedDurationShort(seconds);
+		} else {
+			int minutes = (seconds / 60) % 60;
+			int sec = seconds % 60;
+			return (minutes < 10 ? "0" + minutes : minutes) + ":" + (sec < 10 ? "0" + sec : sec);
+		}
 	}
 
 	private static float setupXAxisTimeOfDay(XAxis xAxis, final long startTime) {

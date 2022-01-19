@@ -22,6 +22,7 @@ import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import net.osmand.plus.track.GpxMarkerView;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
@@ -677,7 +678,9 @@ public class TrackDetailsMenu {
 			}
 		});
 
-		GpxUiHelper.setupGPXChart(chart);
+		boolean useHours = analysis.timeSpan != 0 && analysis.timeSpan / (60 * 60 * 1000) > 0;
+		GpxMarkerView markerView = new GpxMarkerView(mapActivity, analysis.startTime, useHours);
+		GpxUiHelper.setupGPXChart(chart, markerView, 24, 16, true);
 
 		List<ILineDataSet> dataSets = new ArrayList<>();
 		if (gpxItem.chartTypes != null && gpxItem.chartTypes.length > 0) {

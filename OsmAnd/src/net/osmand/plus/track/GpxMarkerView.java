@@ -14,12 +14,18 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.utils.MPPointF;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXHighlight;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
+import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.util.MapUtils;
 
 import androidx.annotation.NonNull;
@@ -31,22 +37,45 @@ public class GpxMarkerView extends MarkerView {
 	private final View altitudeContainer;
 	private final View speedContainer;
 	private final View slopeContainer;
+	private final View xAxisContainer;
 
 	private final View divider;
 
 	private final boolean hasIcon;
+	private final long startTimeMillis;
+	private final boolean useHours;
+	private final boolean includeXAxisWithSpeedDataSet;
 
 	public GpxMarkerView(@NonNull Context context, @Nullable Drawable icon) {
+		this(context, icon, 0, false, false);
+	}
+
+	public GpxMarkerView(@NonNull Context context, long startTimeMillis, boolean useHours) {
+		this(context, null, startTimeMillis, useHours, true);
+	}
+
+	private GpxMarkerView(@NonNull Context context,
+	                      @Nullable Drawable icon,
+	                      long startTimeMillis,
+	                      boolean useHours,
+	                      boolean includeXAxisWithSpeedDataSet) {
 		super(context, R.layout.chart_marker_view);
+		this.startTimeMillis = startTimeMillis;
+		this.useHours = useHours;
+		this.includeXAxisWithSpeedDataSet = includeXAxisWithSpeedDataSet;
+
 		altitudeContainer = findViewById(R.id.altitude_container);
 		speedContainer = findViewById(R.id.speed_container);
+		xAxisContainer = findViewById(R.id.x_axis_container);
 		slopeContainer = findViewById(R.id.slope_container);
 		divider = findViewById(R.id.divider);
+
 		if (icon != null) {
 			AndroidUiHelper.updateVisibility(findViewById(R.id.icon_divider), true);
 			AndroidUiHelper.updateVisibility(findViewById(R.id.icon_container), true);
 			((ImageView) findViewById(R.id.icon)).setImageDrawable(icon);
 		}
+
 		hasIcon = icon != null;
 	}
 
@@ -60,47 +89,112 @@ public class GpxMarkerView extends MarkerView {
 		}
 		if (chartData.getDataSetCount() == 1) {
 			OrderedLineDataSet dataSet = (OrderedLineDataSet) chartData.getDataSetByIndex(0);
-			updateOneDataSetMarker(dataSet, entry);
+			updateMarkerWithOneDataSet(dataSet, entry);
 		} else if (chartData.getDataSetCount() == 2) {
 			OrderedLineDataSet firstDataSet = (OrderedLineDataSet) chartData.getDataSetByIndex(0);
 			OrderedLineDataSet secondDataSet = ((OrderedLineDataSet) chartData.getDataSetByIndex(1));
-			updateTwoDataSetsMarker(firstDataSet, secondDataSet, entry);
+			updateMarkerWithTwoDataSets(firstDataSet, secondDataSet, entry);
 		} else {
 			AndroidUiHelper.setVisibility(GONE,
-					altitudeContainer, speedContainer, slopeContainer, divider);
+					altitudeContainer, speedContainer, slopeContainer, xAxisContainer, divider);
 		}
 		super.refreshContent(entry, highlight);
 	}
 
-	private void updateOneDataSetMarker(@NonNull OrderedLineDataSet dataSet, @NonNull Entry entry) {
+	private void updateMarkerWithOneDataSet(@NonNull OrderedLineDataSet dataSet, @NonNull Entry entry) {
 		String value = (int) entry.getY() + " ";
 		String units = dataSet.getUnits();
-		switch (dataSet.getDataSetType()) {
-			case ALTITUDE:
-				((TextView) altitudeContainer.findViewById(R.id.text_alt_value)).setText(value);
-				((TextView) altitudeContainer.findViewById(R.id.text_alt_units)).setText(units);
-				AndroidUiHelper.updateVisibility(altitudeContainer, true);
-				AndroidUiHelper.setVisibility(GONE, speedContainer, slopeContainer);
-				break;
-			case SPEED:
-				((TextView) speedContainer.findViewById(R.id.text_spd_value)).setTextColor(dataSet.getColor());
-				((TextView) speedContainer.findViewById(R.id.text_spd_value)).setText(value);
-				((TextView) speedContainer.findViewById(R.id.text_spd_units)).setText(units);
-				AndroidUiHelper.updateVisibility(speedContainer, true);
-				AndroidUiHelper.setVisibility(GONE, altitudeContainer, slopeContainer);
-				break;
-			case SLOPE:
-				((TextView) slopeContainer.findViewById(R.id.text_slp_value)).setText(value);
-				AndroidUiHelper.updateVisibility(slopeContainer, true);
-				AndroidUiHelper.setVisibility(GONE, altitudeContainer, speedContainer);
-				break;
+		GPXDataSetType dataSetType = dataSet.getDataSetType();
+		if (dataSetType == GPXDataSetType.ALTITUDE) {
+			updateAltitudeMarker(value, units);
+		} else if (dataSetType == GPXDataSetType.SPEED) {
+			updateSpeedMarker(dataSet, entry);
+		} else if (dataSetType == GPXDataSetType.SLOPE) {
+			updateSlopeMarker(value);
 		}
 		AndroidUiHelper.updateVisibility(divider, false);
 	}
 
-	private void updateTwoDataSetsMarker(@NonNull OrderedLineDataSet firstDataSet,
-	                                     @NonNull OrderedLineDataSet secondDataSet,
-	                                     @NonNull Entry entry) {
+	private void updateAltitudeMarker(@NonNull String value, @NonNull String units) {
+		((TextView) altitudeContainer.findViewById(R.id.text_alt_value)).setText(value);
+		((TextView) altitudeContainer.findViewById(R.id.text_alt_units)).setText(units);
+		AndroidUiHelper.updateVisibility(altitudeContainer, true);
+		AndroidUiHelper.setVisibility(GONE, speedContainer, slopeContainer, xAxisContainer);
+	}
+
+	private void updateSpeedMarker(@NonNull OrderedLineDataSet dataSet, @NonNull Entry entry) {
+		String value = ((int) entry.getY()) + " ";
+		String unit = dataSet.getUnits();
+		int textColor = dataSet.getColor();
+
+		((TextView) speedContainer.findViewById(R.id.text_spd_value)).setTextColor(textColor);
+		((TextView) speedContainer.findViewById(R.id.text_spd_value)).setText(value);
+		((TextView) speedContainer.findViewById(R.id.text_spd_units)).setText(unit);
+
+		AndroidUiHelper.updateVisibility(speedContainer, true);
+		AndroidUiHelper.setVisibility(GONE, altitudeContainer, slopeContainer);
+
+		updateXAxisValue(dataSet, entry);
+	}
+
+	private void updateXAxisValue(@NonNull OrderedLineDataSet dataSet, @NonNull Entry entry) {
+		if (includeXAxisWithSpeedDataSet) {
+			GPXDataSetAxisType xAxisType = dataSet.getDataSetAxisType();
+			if (xAxisType == GPXDataSetAxisType.DISTANCE) {
+				updateXAxisValueWithDistance(dataSet, entry);
+			} else {
+				if (xAxisType == GPXDataSetAxisType.TIME) {
+					updateXAxisValueWithTime(entry);
+				} else if (xAxisType == GPXDataSetAxisType.TIMEOFDAY) {
+					updateXAxisValueWithTimeOfDay(entry);
+				}
+				AndroidUiHelper.updateVisibility(xAxisContainer.findViewById(R.id.x_axis_unit), false);
+			}
+			AndroidUiHelper.updateVisibility(xAxisContainer, true);
+		} else {
+			AndroidUiHelper.updateVisibility(xAxisContainer, false);
+		}
+	}
+
+	@SuppressLint("SetTextI18n")
+	private void updateXAxisValueWithDistance(@NonNull OrderedLineDataSet dataSet, @NonNull Entry entry) {
+		OsmandApplication app = getMyApplication();
+		float meters = entry.getX() * dataSet.getDivX();
+		MetricsConstants metricsConstants = app.getSettings().METRIC_SYSTEM.get();
+		FormattedValue formattedDistance = OsmAndFormatter.getFormattedDistanceValue(meters, app,
+				true, metricsConstants);
+
+		TextView xAxisValueText = xAxisContainer.findViewById(R.id.x_axis_value);
+		TextView xAxisUnitText = xAxisContainer.findViewById(R.id.x_axis_unit);
+
+		xAxisValueText.setText(formattedDistance.value + " ");
+		xAxisUnitText.setText(formattedDistance.unit);
+
+		AndroidUiHelper.updateVisibility(xAxisUnitText, true);
+	}
+
+	private void updateXAxisValueWithTime(@NonNull Entry entry) {
+		int seconds = (int) entry.getX();
+		String formattedTime = GpxUiHelper.formatXAxisTime(seconds, useHours);
+		((TextView) xAxisContainer.findViewById(R.id.x_axis_value)).setText(formattedTime);
+	}
+
+	private void updateXAxisValueWithTimeOfDay(@NonNull Entry entry) {
+		long seconds = (long) entry.getX();
+		long timeOfDayInSeconds = startTimeMillis + seconds * 1000;
+		String formattedTimeOfDay = OsmAndFormatter.getFormattedFullTime(timeOfDayInSeconds);
+		((TextView) xAxisContainer.findViewById(R.id.x_axis_value)).setText(formattedTimeOfDay);
+	}
+
+	private void updateSlopeMarker(String value) {
+		((TextView) slopeContainer.findViewById(R.id.text_slp_value)).setText(value);
+		AndroidUiHelper.updateVisibility(slopeContainer, true);
+		AndroidUiHelper.setVisibility(GONE, altitudeContainer, speedContainer, xAxisContainer);
+	}
+
+	private void updateMarkerWithTwoDataSets(@NonNull OrderedLineDataSet firstDataSet,
+	                                         @NonNull OrderedLineDataSet secondDataSet,
+	                                         @NonNull Entry entry) {
 		OrderedLineDataSet altitudeDataSet = getDataSetByType(GPXDataSetType.ALTITUDE, firstDataSet, secondDataSet);
 		OrderedLineDataSet speedDataSet = getDataSetByType(GPXDataSetType.SPEED, firstDataSet, secondDataSet);
 		OrderedLineDataSet slopeDataSet = getDataSetByType(GPXDataSetType.SLOPE, firstDataSet, secondDataSet);
@@ -109,6 +203,7 @@ public class GpxMarkerView extends MarkerView {
 		updateSpeedText(speedDataSet, entry);
 		updateSlopeText(slopeDataSet, entry);
 
+		AndroidUiHelper.updateVisibility(xAxisContainer, false);
 		AndroidUiHelper.updateVisibility(divider, true);
 	}
 
@@ -168,10 +263,20 @@ public class GpxMarkerView extends MarkerView {
 
 	@Override
 	public MPPointF getOffset() {
-		if (getChartView().getData().getDataSetCount() == 2) {
+		ChartData<?> chartData = getChartView().getData();
+		int dataSetsCount = chartData.getDataSetCount();
+		int halfDp = AndroidUtils.dpToPx(getContext(), .5f);
+		if (dataSetsCount == 2) {
 			int x = divider.getLeft();
-			return new MPPointF(-x - AndroidUtils.dpToPx(getContext(), .5f), 0);
+			return new MPPointF(-x - halfDp, 0);
 		} else {
+			if (dataSetsCount == 1) {
+				OrderedLineDataSet dataSet = (OrderedLineDataSet) chartData.getDataSetByIndex(0);
+				if (dataSet.getDataSetType() == GPXDataSetType.SPEED && includeXAxisWithSpeedDataSet) {
+					int x = xAxisContainer.getLeft();
+					return new MPPointF(-x - halfDp, 0);
+				}
+			}
 			return new MPPointF(-getWidth() / 2f, 0);
 		}
 	}
@@ -188,5 +293,10 @@ public class GpxMarkerView extends MarkerView {
 			offset.x -= (getWidth() - (getChartView().getWidth() - posX) + offset.x) + margin;
 		}
 		return offset;
+	}
+
+	@NonNull
+	private OsmandApplication getMyApplication() {
+		return ((OsmandApplication) getContext().getApplicationContext());
 	}
 }

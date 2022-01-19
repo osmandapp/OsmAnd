@@ -58,6 +58,7 @@ public class OsmAndFormatter {
 	private static final int MIN_DURATION_FOR_DATE_FORMAT = 48 * 60 * 60;
 	private static final DecimalFormat fixed2 = new DecimalFormat("0.00");
 	private static final DecimalFormat fixed1 = new DecimalFormat("0.0");
+	private static final SimpleDateFormat FULL_TIME_OF_DAY_FORMAT = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
 	private static final SimpleDateFormat SIMPLE_TIME_OF_DAY_FORMAT = new SimpleDateFormat("HH:mm", Locale.getDefault());
 	private static final String[] localDaysStr = getLettersStringArray(DateFormatSymbols.getInstance().getShortWeekdays(), 3);
 
@@ -131,6 +132,12 @@ public class OsmAndFormatter {
 		int hours = seconds / (60 * 60);
 		int minutes = (seconds / 60) % 60;
 		return hours + ":" + (minutes < 10 ? "0" + minutes : minutes);
+	}
+
+	public static String getFormattedFullTime(long millis) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(millis);
+		return FULL_TIME_OF_DAY_FORMAT.format(calendar.getTime());
 	}
 
 	public static String getFormattedTime(long seconds, boolean useCurrentTime) {
