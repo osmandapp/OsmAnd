@@ -4512,4 +4512,5 @@
     <string name="rendering_value_all_name">Todos</string>
     <string name="rendering_value_omit_name">Omitir</string>
     <string name="rendering_attr_seabedDetail_name">Detalle del fondo marino</string>
+    <string name="save_track_to_gpx_descrp">Inicia la grabación de la traza automáticamente mientras la navegación está en curso. Al finalizar, la pista se guardará automáticamente.</string>
 </resources>
