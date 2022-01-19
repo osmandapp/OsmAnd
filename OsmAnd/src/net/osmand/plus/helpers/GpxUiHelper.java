@@ -1275,7 +1275,7 @@ public class GpxUiHelper {
 			if (!Algorithms.isEmpty(formatX)) {
 				return MessageFormat.format(formatX + mainUnitX, value);
 			} else {
-				return (int) value + " " + mainUnitX;
+				return OsmAndFormatter.formatInteger((int) value, mainUnitX, ctx);
 			}
 		});
 
@@ -1490,7 +1490,7 @@ public class GpxUiHelper {
 		yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_blue_label));
 		yAxis.setGranularity(1f);
 		yAxis.resetAxisMinimum();
-		yAxis.setValueFormatter((value, axis) -> (int) value + " " + mainUnitY);
+		yAxis.setValueFormatter((value, axis) -> OsmAndFormatter.formatInteger((int) value, mainUnitY, ctx));
 
 		List<Entry> values = calculateElevationArray(analysis, axisType, divX, convEle, true, calcWithoutGaps);
 
@@ -1640,7 +1640,7 @@ public class GpxUiHelper {
 			if (!Algorithms.isEmpty(formatY)) {
 				return MessageFormat.format(formatY + mainUnitY, value);
 			} else {
-				return (int) value + " " + mainUnitY;
+				return OsmAndFormatter.formatInteger((int) value, mainUnitY, ctx);
 			}
 		});
 
@@ -1730,7 +1730,7 @@ public class GpxUiHelper {
 		yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_green_label));
 		yAxis.setGranularity(1f);
 		yAxis.resetAxisMinimum();
-		yAxis.setValueFormatter((value, axis) -> (int) value + " " + mainUnitY);
+		yAxis.setValueFormatter((value, axis) -> OsmAndFormatter.formatInteger((int) value, mainUnitY, ctx));
 
 		List<Entry> values;
 		if (eleValues == null) {

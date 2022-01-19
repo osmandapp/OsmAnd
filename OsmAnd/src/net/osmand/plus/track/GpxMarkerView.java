@@ -102,7 +102,7 @@ public class GpxMarkerView extends MarkerView {
 	}
 
 	private void updateMarkerWithOneDataSet(@NonNull OrderedLineDataSet dataSet, @NonNull Entry entry) {
-		String value = (int) entry.getY() + " ";
+		int value = (int) entry.getY();
 		String units = dataSet.getUnits();
 		GPXDataSetType dataSetType = dataSet.getDataSetType();
 		if (dataSetType == GPXDataSetType.ALTITUDE) {
@@ -115,20 +115,22 @@ public class GpxMarkerView extends MarkerView {
 		AndroidUiHelper.updateVisibility(divider, false);
 	}
 
-	private void updateAltitudeMarker(@NonNull String value, @NonNull String units) {
-		((TextView) altitudeContainer.findViewById(R.id.text_alt_value)).setText(value);
+	private void updateAltitudeMarker(int altitude, @NonNull String units) {
+		String formattedAltitude = formatValue(altitude);
+		((TextView) altitudeContainer.findViewById(R.id.text_alt_value)).setText(formattedAltitude);
 		((TextView) altitudeContainer.findViewById(R.id.text_alt_units)).setText(units);
 		AndroidUiHelper.updateVisibility(altitudeContainer, true);
 		AndroidUiHelper.setVisibility(GONE, speedContainer, slopeContainer, xAxisContainer);
 	}
 
 	private void updateSpeedMarker(@NonNull OrderedLineDataSet dataSet, @NonNull Entry entry) {
-		String value = ((int) entry.getY()) + " ";
+		int value = (int) entry.getY();
+		String formattedSpeed = formatValue(value);
 		String unit = dataSet.getUnits();
 		int textColor = dataSet.getColor();
 
 		((TextView) speedContainer.findViewById(R.id.text_spd_value)).setTextColor(textColor);
-		((TextView) speedContainer.findViewById(R.id.text_spd_value)).setText(value);
+		((TextView) speedContainer.findViewById(R.id.text_spd_value)).setText(formattedSpeed);
 		((TextView) speedContainer.findViewById(R.id.text_spd_units)).setText(unit);
 
 		AndroidUiHelper.updateVisibility(speedContainer, true);
@@ -186,8 +188,9 @@ public class GpxMarkerView extends MarkerView {
 		((TextView) xAxisContainer.findViewById(R.id.x_axis_value)).setText(formattedTimeOfDay);
 	}
 
-	private void updateSlopeMarker(String value) {
-		((TextView) slopeContainer.findViewById(R.id.text_slp_value)).setText(value);
+	private void updateSlopeMarker(int slope) {
+		String formattedSlope = formatValue(slope);
+		((TextView) slopeContainer.findViewById(R.id.text_slp_value)).setText(formattedSlope);
 		AndroidUiHelper.updateVisibility(slopeContainer, true);
 		AndroidUiHelper.setVisibility(GONE, altitudeContainer, speedContainer, xAxisContainer);
 	}
@@ -223,7 +226,8 @@ public class GpxMarkerView extends MarkerView {
 	private void updateAltitudeText(@Nullable OrderedLineDataSet altitudeDataSet, @NonNull Entry entry) {
 		if (altitudeDataSet != null) {
 			float y = getInterpolatedY(altitudeDataSet, entry);
-			((TextView) altitudeContainer.findViewById(R.id.text_alt_value)).setText((int) y + " ");
+			String formattedAltitude = formatValue((int) y);
+			((TextView) altitudeContainer.findViewById(R.id.text_alt_value)).setText(formattedAltitude);
 			((TextView) altitudeContainer.findViewById(R.id.text_alt_units)).setText(altitudeDataSet.getUnits());
 		}
 		AndroidUiHelper.updateVisibility(altitudeContainer, altitudeDataSet != null);
@@ -232,8 +236,9 @@ public class GpxMarkerView extends MarkerView {
 	private void updateSpeedText(@Nullable OrderedLineDataSet speedDataSet, @NonNull Entry entry) {
 		if (speedDataSet != null) {
 			float y = getInterpolatedY(speedDataSet, entry);
+			String formattedSpeed = formatValue(((int) y));
 			((TextView) speedContainer.findViewById(R.id.text_spd_value)).setTextColor(speedDataSet.getColor());
-			((TextView) speedContainer.findViewById(R.id.text_spd_value)).setText((int) y + " ");
+			((TextView) speedContainer.findViewById(R.id.text_spd_value)).setText(formattedSpeed);
 			((TextView) speedContainer.findViewById(R.id.text_spd_units)).setText(speedDataSet.getUnits());
 		}
 		AndroidUiHelper.updateVisibility(speedContainer, speedDataSet != null);
@@ -242,7 +247,8 @@ public class GpxMarkerView extends MarkerView {
 	private void updateSlopeText(@Nullable OrderedLineDataSet slopeDataSet, @NonNull Entry entry) {
 		if (slopeDataSet != null) {
 			float y = getInterpolatedY(slopeDataSet, entry);
-			((TextView) slopeContainer.findViewById(R.id.text_slp_value)).setText((int) y + " ");
+			String formattedSlope = formatValue(((int) y));
+			((TextView) slopeContainer.findViewById(R.id.text_slp_value)).setText(formattedSlope);
 		}
 		AndroidUiHelper.updateVisibility(slopeContainer, slopeDataSet != null);
 	}
@@ -293,6 +299,11 @@ public class GpxMarkerView extends MarkerView {
 			offset.x -= (getWidth() - (getChartView().getWidth() - posX) + offset.x) + margin;
 		}
 		return offset;
+	}
+
+	@NonNull
+	private String formatValue(int value) {
+		return OsmAndFormatter.formatIntegerValue(value, "", getMyApplication()).value + " ";
 	}
 
 	@NonNull

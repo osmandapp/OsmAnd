@@ -460,6 +460,17 @@ public class OsmAndFormatter {
 		return formatValue(value, app.getString(unitId), forceTrailingZeroes, decimalPlacesNumber, app);
 	}
 
+	@NonNull
+	public static String formatInteger(int value, @NonNull String unit, @NonNull OsmandApplication app) {
+		return formatIntegerValue(value, unit, app).format(app);
+	}
+
+	@NonNull
+	public static FormattedValue formatIntegerValue(int value, @NonNull String unit, @NonNull OsmandApplication app) {
+		return formatValue(value, unit, false, 0, app);
+	}
+
+	@NonNull
 	private static FormattedValue formatValue(float value, @NonNull String unit, boolean forceTrailingZeroes,
 	                                  int decimalPlacesNumber, @NonNull OsmandApplication app) {
 		String pattern = "0";
