@@ -63,6 +63,14 @@ public class MapTileLayer extends BaseMapLayer {
 	private boolean useSampling;
 	private StateChangedListener<Float> parameterListener;
 
+	private int getLayerId() {
+		if (view == null) {
+			return Integer.MIN_VALUE;  // Must be clarified
+		}
+		float zOrder = view.getZorder(this);
+		return (int)(zOrder * 100.0f);
+	}
+
 	public MapTileLayer(@NonNull Context context, boolean mainMap) {
 		super(context);
 		this.mainMap = mainMap;
@@ -105,13 +113,11 @@ public class MapTileLayer extends BaseMapLayer {
 		}
 
 		if (view != null) {
-			float zOrder = view.getZorder(this);
-			int layerIndex = (int)(zOrder * 100.0f);
 			final MapRendererView mapRenderer = view.getMapRenderer();
 			if (mapRenderer != null) {
 				MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
 				mapLayerConfiguration.setOpacityFactor(((float) alpha) / 255.0f);
-				mapRenderer.setMapLayerConfiguration(layerIndex, mapLayerConfiguration);
+				mapRenderer.setMapLayerConfiguration(getLayerId(), mapLayerConfiguration);
 			}
 		}
 	}
@@ -269,8 +275,7 @@ public class MapTileLayer extends BaseMapLayer {
 		}
 		final MapRendererView mapRenderer = view.getMapRenderer();
 		if (mapRenderer != null) {
-			float zOrder = view.getZorder(this);
-			int layerIndex = (int)(zOrder * 100.0);
+			int layerIndex = getLayerId();
 			if (isSetProvider == false ) {
 				isSetProvider = true;
 				if (map != null) {
@@ -460,6 +465,10 @@ public class MapTileLayer extends BaseMapLayer {
 
 	public void setVisible(boolean visible) {
 		this.visible = visible;
+
+		if (!visible) {
+			//resourceManager.getRenderer().clearCache();
+		}
 	}
 
 	public ITileSource getMap() {
