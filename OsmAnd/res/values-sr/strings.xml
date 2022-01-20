@@ -1591,7 +1591,6 @@
     <string name="navigate_point_olc_info_area">Исправан кôд локације
 \nПредставља површину: %1$s x %2$s</string>
     <string name="save_track_to_gpx">Аутоматски снимај путању за време навођења</string>
-    <string name="save_track_to_gpx_descrp">GPX путања се аутоматски чува у фасциклу са путањама док је навођење укључено.</string>
     <string name="save_track_interval_globally">Интервал бележења</string>
     <string name="save_track_interval">Интервал бележења за време навођења</string>
     <string name="enable_proxy_title">Омогући HTTP прокси</string>
@@ -4504,4 +4503,9 @@
     <string name="turn_arrows">Стрелице скретања</string>
     <string name="turn_arrows_descr">Изаберите да ли су стрелице за скретање приказане на линији руте.</string>
     <string name="use_routing_fallback">Замена за ванмрежно рутирање</string>
+    <string name="rendering_attr_seabedDetail_description">Додатне текстуалне информације о квалификацији површине морског дна, комбинованим типовима површине, категорији и врстама корова или морске траве</string>
+    <string name="rendering_value_category_name">Категорија</string>
+    <string name="rendering_value_all_name">Све</string>
+    <string name="rendering_value_omit_name">Изоставити</string>
+    <string name="rendering_attr_seabedDetail_name">Детаљ морског дна</string>
 </resources>

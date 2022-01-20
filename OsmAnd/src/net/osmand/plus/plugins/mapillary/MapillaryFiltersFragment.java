@@ -1,18 +1,15 @@
 package net.osmand.plus.plugins.mapillary;
 
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -20,17 +17,18 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.map.TileSourceManager;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.DelayAutoCompleteTextView;
 
 import java.text.DateFormat;
@@ -45,11 +43,7 @@ import androidx.fragment.app.FragmentManager;
 
 public class MapillaryFiltersFragment extends BaseOsmAndFragment {
 
-    public static final String TAG = "MAPILLARY_FILTERS_FRAGMENT";
-
-    public MapillaryFiltersFragment() {
-        // Required empty public constructor
-    }
+    public static final String TAG = MapillaryFiltersFragment.class.getSimpleName();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,13 +53,16 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         final MapillaryPlugin plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
 
         final boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-        final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
         final int backgroundColor = ColorUtilities.getActivityBgColor(mapActivity, nightMode);
         final DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
         final int currentModeColor = settings.getApplicationMode().getProfileColor(nightMode);
 
-        final View view = View.inflate(new ContextThemeWrapper(mapActivity, themeRes),
-                R.layout.fragment_mapillary_filters, null);
+        final View view = UiUtilities.getInflater(mapActivity, nightMode)
+                .inflate(R.layout.fragment_mapillary_filters, container, false);
+
+        boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+        AndroidUiHelper.updateVisibility(view.findViewById(R.id.shadow_on_map), portrait);
+
         view.findViewById(R.id.mapillary_filters_linear_layout).setBackgroundColor(backgroundColor);
 
         final View toggleRow = view.findViewById(R.id.toggle_row);
@@ -268,8 +265,6 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
             hideKeyboard();
         });
 
-        setupBottomEmptySpace(view, container);
-
         return view;
     }
 
@@ -292,30 +287,6 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
     private void changeButtonState(Button button, float alpha, boolean enabled) {
         button.setAlpha(alpha);
         button.setEnabled(enabled);
-    }
-
-    private void setupBottomEmptySpace(@NonNull View view, ViewGroup container) {
-        View bottomEmptySpace = view.findViewById(R.id.bottom_empty_space);
-        container.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
-
-            @Override
-            public void onGlobalLayout() {
-                container.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                Activity activity = getActivity();
-                if (activity == null) {
-                    return;
-                }
-
-                int spaceHeight = AndroidUtils.getScreenHeight(activity)
-                        - container.getTop()
-                        - (view.getHeight() - bottomEmptySpace.getHeight());
-                if (spaceHeight > bottomEmptySpace.getHeight()) {
-                    ViewGroup.LayoutParams params = bottomEmptySpace.getLayoutParams();
-                    params.height = spaceHeight;
-                    bottomEmptySpace.setLayoutParams(params);;
-                }
-            }
-        });
     }
 
     public static void showInstance(@NonNull FragmentManager fragmentManager) {

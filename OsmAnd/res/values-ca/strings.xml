@@ -769,7 +769,6 @@
     <string name="reading_indexes">S\'estan llegint les dades locals…</string>
     <string name="use_online_routing_descr">Utilitzeu Internet per calcular una ruta.</string>
     <string name="save_current_track">Desa la traça actual</string>
-    <string name="save_track_to_gpx_descrp">Durant la navegació es desa automàticament una traça GPX a la carpeta de traces.</string>
     <string name="reload_tile">Torna a carregar la tessel·la</string>
     <string name="mark_point">Objectiu</string>
     <string name="edit_filter_delete_message">El filtre \'%1$s\' s\'ha eliminat</string>

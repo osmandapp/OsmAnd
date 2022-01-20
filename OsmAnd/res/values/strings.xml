@@ -15,6 +15,9 @@
     <string name="shared_string_shape">Shape</string>
     <string name="default_appearance_desc">Default color, icon and shape will apply to the added favorite points into the group.</string>
     <string name="default_appearance">Default appearance</string>
+    <string name="gpx_no_routes_descr">You can use \"%1$s\" tool to add route into file.</string>
+    <string name="gpx_no_routes_title">There are no routes</string>
+    <string name="save_track_to_gpx_descrp">Start track recording automatically while navigation is in progress. When it is finished, the track will be saved automatically.</string>
     <string name="rendering_attr_seabedDetail_name">Seabed detail</string>
     <string name="rendering_attr_seabedDetail_description">Additional text information on seabed surface_qualification, combined surface types, category and taxon of weed or seagrass</string>
     <string name="rendering_value_category_name">Category</string>
@@ -2876,7 +2879,6 @@
     <string name="save_current_track_descr">Save current track as GPX file now.</string>
     <string name="save_current_track">Save current track</string>
     <string name="save_track_to_gpx">Auto-record track during navigation</string>
-    <string name="save_track_to_gpx_descrp">A GPX track is automatically saved to the tracks folder during navigation.</string>
     <string name="save_track_interval_globally">Logging interval</string>
     <string name="save_track_interval">Logging interval during navigation</string>
     <string name="save_track_interval_descr">Specify the logging interval for track recording during navigation</string>

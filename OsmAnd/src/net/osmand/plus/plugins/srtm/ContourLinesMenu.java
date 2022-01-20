@@ -270,6 +270,10 @@ public class ContourLinesMenu {
 				}
 			}
 		}
+
+		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setLayout(R.layout.card_bottom_divider)
+				.createItem());
 	}
 
 	private static ContextMenuItem createDownloadSrtmMapsItem(MapActivity mapActivity) {
@@ -303,6 +307,7 @@ public class ContourLinesMenu {
 				.setLayout(R.layout.list_item_icon_and_download)
 				.setTitle(srtmDownloadItem.getVisibleName(app, app.getRegions(), false))
 				.setDescription(DownloadActivityType.SRTM_COUNTRY_FILE.getString(app))
+				.hideDivider(true)
 				.setIcon(DownloadActivityType.SRTM_COUNTRY_FILE.getIconResource())
 				.setListener(getOnSrtmItemClickListener(mapActivity, srtmDownloadItem))
 				.setProgressListener(getSrtmItemProgressListener(srtmDownloadItem, downloadThread));

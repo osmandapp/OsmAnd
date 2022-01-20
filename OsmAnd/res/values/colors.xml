@@ -214,6 +214,8 @@
 	<color name="color_invalid">#EE3232</color>
 	<!-- warning -red, localindex is corrupted, poi closed, osm_delete -->
 	<color name="color_warning">#EE3232</color>
+	<color name="color_warning_alpha_low">#BBEE3232</color>
+	<color name="color_warning_alpha_high">#55EE3232</color>
 	<!-- normal state, localindex unknown, poi unknown, index_unknown  -->
 	<color name="color_unknown">#C8C8C8</color>
 	<!-- good state, localindex loaded, poi_open, osm_create, index_ok   -->

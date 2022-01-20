@@ -8,7 +8,8 @@ public enum ObjectType {
 	// LOCATION
 	LOCATION(true), PARTIAL_LOCATION(false),
 	// UI OBJECTS
-	FAVORITE(true), FAVORITE_GROUP(false), WPT(true), RECENT_OBJ(true), GPX_TRACK(false), ROUTE(false), MAP_MARKER(true),
+	FAVORITE(true), FAVORITE_GROUP(false), WPT(true), RECENT_OBJ(true),
+	GPX_TRACK(false), ROUTE(false), MAP_MARKER(true), INDEX_ITEM(false),
 
 	// ONLINE SEARCH
 	ONLINE_SEARCH(true),
@@ -37,7 +38,7 @@ public enum ObjectType {
 	}
 
 	public static boolean isTopVisible(ObjectType t) {
-		return t == POI_TYPE || t == FAVORITE || t == FAVORITE_GROUP || t == WPT || t == GPX_TRACK || t == LOCATION || t == PARTIAL_LOCATION;
+		return t == POI_TYPE || t == FAVORITE || t == FAVORITE_GROUP || t == WPT || t == GPX_TRACK || t == LOCATION || t == PARTIAL_LOCATION || t == INDEX_ITEM;
 	}
 
 	public static ObjectType getExclusiveSearchType(ObjectType t) {

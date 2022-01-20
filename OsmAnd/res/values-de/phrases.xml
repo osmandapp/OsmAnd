@@ -1636,7 +1636,7 @@
     <string name="poi_payment_girocard_no">Girokarte nicht akzeptiert</string>
     <string name="poi_payment_discover_card_yes">Discover-Karte</string>
     <string name="poi_payment_discover_card_no">Discover-Karte nicht akzeptiert</string>
-    <string name="poi_brushless_yes">ja</string>
+    <string name="poi_brushless_yes">Ja;Bürstenlos</string>
     <string name="poi_parish">Gemeindebüro</string>
     <string name="poi_payment_cheque_yes">Schecks</string>
     <string name="poi_payment_cheque_no">Schecks nicht akzeptiert</string>
@@ -4222,4 +4222,6 @@
     <string name="poi_computer_parts_no">Computerteile: nein</string>
     <string name="poi_computer_sales_used">Gebraucht</string>
     <string name="poi_computer_repair_yes">Ja</string>
+    <string name="poi_museum_type">Thema des Museums</string>
+    <string name="poi_post_office_type">Art</string>
 </resources>

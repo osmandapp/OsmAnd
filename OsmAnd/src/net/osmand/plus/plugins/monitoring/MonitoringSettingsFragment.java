@@ -1,5 +1,12 @@
 package net.osmand.plus.plugins.monitoring;
 
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.plugins.PluginInfoFragment.PLUGIN_INFO;
+import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.MINUTES;
+import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.SECONDS;
+import static net.osmand.plus.settings.backend.OsmandSettings.MONTHLY_DIRECTORY;
+import static net.osmand.plus.settings.backend.OsmandSettings.REC_DIRECTORY;
+
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -13,18 +20,19 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
+import androidx.preference.SwitchPreferenceCompat;
 
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
@@ -36,13 +44,6 @@ import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-
-import static net.osmand.plus.plugins.PluginInfoFragment.PLUGIN_INFO;
-import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.MINUTES;
-import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.SECONDS;
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
-import static net.osmand.plus.settings.backend.OsmandSettings.MONTHLY_DIRECTORY;
-import static net.osmand.plus.settings.backend.OsmandSettings.REC_DIRECTORY;
 
 public class MonitoringSettingsFragment extends BaseSettingsFragment
 		implements CopyAppModePrefsListener, ResetAppModePrefsListener {
@@ -114,8 +115,8 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupSaveTrackToGpxPref() {
-		SwitchPreferenceEx saveTrackToGpx = (SwitchPreferenceEx) findPreference(settings.SAVE_TRACK_TO_GPX.getId());
-		saveTrackToGpx.setDescription(getString(R.string.save_track_to_gpx_descrp));
+		SwitchPreferenceCompat saveTrackToGpx = (SwitchPreferenceCompat) findPreference(settings.SAVE_TRACK_TO_GPX.getId());
+		saveTrackToGpx.setSummary(getString(R.string.save_track_to_gpx_descrp));
 		saveTrackToGpx.setIcon(getPersistentPrefIcon(R.drawable.ic_action_gdirections_dark));
 	}
 
@@ -126,6 +127,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 		saveTrackInterval.setEntryValues(entry.keySet().toArray());
 		saveTrackInterval.setIcon(getActiveIcon(R.drawable.ic_action_time_span));
 		saveTrackInterval.setDescription(R.string.save_track_interval_descr);
+		saveTrackInterval.setVisible(settings.SAVE_TRACK_TO_GPX.getModeValue(getSelectedAppMode()));
 	}
 
 	private void setupSaveGlobalTrackIntervalPref() {

@@ -594,7 +594,6 @@
     <string name="save_track_to_gpx_globally_descr">Ĝeneralan registradon de pozicio al GPX‑dosiero oni povas (mal)aktivigi per la GPX‑registrada fenestraĵo sur la map‑ekrano.</string>
     <string name="save_current_track_descr">Konservi aktualan spuron kiel GPX-dosieron.</string>
     <string name="save_current_track">Konservi aktualan spuron</string>
-    <string name="save_track_to_gpx_descrp">GPX-spuro estas aŭtomate konservata al dosierujo de spuroj dum navigado.</string>
     <string name="save_track_interval_globally">Intertempo de registrado</string>
     <string name="save_track_interval">Registrada intertempo dum navigado</string>
     <string name="save_track_interval_descr">Elekti oftecon de registri spuron dum navigado</string>
@@ -4507,4 +4506,9 @@
     <string name="track_file">Dosiero de spuro</string>
     <string name="turn_arrows_descr">Montri sagetojn de turniĝoj sur la linio de kurso.</string>
     <string name="turn_arrows">Sagetoj de turniĝoj</string>
+    <string name="rendering_attr_seabedDetail_description">Pliaj tekstaj informoj pri mara fundo: kvalifo, margrundo, kategorio kaj taksono de algoj kaj akvoplantoj</string>
+    <string name="rendering_value_category_name">Kategorio</string>
+    <string name="rendering_value_all_name">Ĉiuj</string>
+    <string name="rendering_value_omit_name">Ignori</string>
+    <string name="rendering_attr_seabedDetail_name">Marfundo</string>
 </resources>

@@ -62,7 +62,7 @@
     <string name="shared_string_minute_short">мин</string>
     <string name="shared_string_hour_short">ч</string>
     <string name="si_nm_h">Наутичких миља на сат (чворови)</string>
-    <string name="nm_h">нми/ч</string>
+    <string name="nm_h">nmi/h</string>
     <string name="shared_string_welcome">Добродошли</string>
     <string name="shared_string_authorization_descr">Унесите свој телефонски број Телеграма у међународном облику</string>
     <string name="shared_string_authorization">Пријава</string>

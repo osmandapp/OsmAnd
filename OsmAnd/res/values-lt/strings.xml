@@ -616,7 +616,6 @@
     <string name="save_current_track">Išsaugoti dabartinę judėjimo istoriją</string>
     <string name="save_track_interval">Informacijos išsaugojimo intervalas naviguojant</string>
     <string name="save_track_interval_descr">Pasirinkti judėjimo istorijos išsaugojimo pozicijos intervalą naviguojant.</string>
-    <string name="save_track_to_gpx_descrp">Navigavimo metu judėjimo istorija bus išsaugota į track aplanką automatiškai.</string>
     <string name="save_track_to_gpx">Naviguojant išsaugoti judėjimo istoriją į GPX failą automatiškai</string>
     <string name="update_tile">Atnaujinti žemėlapį</string>
     <string name="reload_tile">Iš naujo įkelti lakštą</string>

@@ -832,7 +832,6 @@
     <string name="save_current_track">Spara aktuellt spår</string>
     <string name="save_track_interval">Loggningsintervall under navigering</string>
     <string name="save_track_interval_descr">Ange loggningsintervallet för spårinspelning under navigering</string>
-    <string name="save_track_to_gpx_descrp">Ett GPX-spår sparas automatiskt i spårmappen under navigering.</string>
     <string name="save_track_to_gpx">Spela in spår automatiskt under navigering</string>
     <string name="update_tile">Uppdatera kartan</string>
     <string name="reload_tile">Läs om kartbit</string>
@@ -3753,7 +3752,7 @@
 \n
 \nNågra kartor har kanske inte laddats.</string>
     <string name="walking_route_osmc_description">Färglägg rutter enligt deras individuella lokala färg (om de finns på OpenStreetMap) och typ (internationell, regional, lokal).</string>
-    <string name="grey_color_undefined">Grå färg används för områden utan data.</string>
+    <string name="grey_color_undefined">Delar utan uppgifter är grå.</string>
     <string name="purchases_restored">Inköp återställda</string>
     <string name="osm_live_payment_subscription_management_amz">Betalningen dras från ditt Amazon-konto när du bekräftar köpet.
 \n

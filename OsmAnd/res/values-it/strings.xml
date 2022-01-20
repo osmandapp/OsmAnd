@@ -451,7 +451,6 @@
     <string name="save_current_track">Salva la traccia corrente</string>
     <string name="save_track_interval_descr">Specifica l\'intervallo di registrazione per la traccia durante la navigazione</string>
     <string name="save_track_interval">Intervallo di registrazione durante la navigazione</string>
-    <string name="save_track_to_gpx_descrp">Durante la navigazione, la traccia GPX, sarà salvata automaticamente nella cartella tracce.</string>
     <string name="update_tile">Aggiorna mappa</string>
     <string name="reload_tile">Ricarica tasselli</string>
     <string name="mark_point">Obiettivo</string>
@@ -4485,4 +4484,9 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schema della visualizzazione delle icone a bassi zoom</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tunnel per canali</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Non nascondere i tunnel per canali</string>
+    <string name="rendering_value_omit_name">Ometti</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_value_category_name">Categoria</string>
+    <string name="rendering_value_all_name">Tutto</string>
+    <string name="waypoint_appearance">Aspetto del punto intermedio</string>
 </resources>
