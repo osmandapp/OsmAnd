@@ -2,14 +2,13 @@ package net.osmand.plus.mapcontextmenu.editors;
 
 import android.app.Activity;
 
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
 
 public abstract class PointEditor {
 
@@ -60,45 +59,15 @@ public abstract class PointEditor {
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
 	}
 
-	public int getSlideInAnimation() {
-		if (isLandscapeLayout()) {
-			return R.anim.slide_in_left;
-		} else {
-			return R.anim.slide_in_bottom;
-		}
-	}
-
-	public int getSlideOutAnimation() {
-		if (isLandscapeLayout()) {
-			return R.anim.slide_out_left;
-		} else {
-			return R.anim.slide_out_bottom;
-		}
-	}
-
 	public abstract String getFragmentTag();
-
-	public void hide() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(getFragmentTag());
-			if (fragment != null)
-				((PointEditorFragment) fragment).dismiss();
-		}
-	}
 
 	public void setCategory(String name, int color) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(getFragmentTag());
-			if (fragment != null) {
-				if (fragment instanceof PointEditorFragment) {
-					PointEditorFragment editorFragment = (PointEditorFragment) fragment;
-					editorFragment.setCategory(name, color);
-				} else if (fragment instanceof PointEditorFragmentNew) {
-					PointEditorFragmentNew editorFragment = (PointEditorFragmentNew) fragment;
-					editorFragment.setCategory(name, color);
-				}
+			if (fragment instanceof PointEditorFragmentNew) {
+				PointEditorFragmentNew editorFragment = (PointEditorFragmentNew) fragment;
+				editorFragment.setCategory(name, color);
 			}
 		}
 	}

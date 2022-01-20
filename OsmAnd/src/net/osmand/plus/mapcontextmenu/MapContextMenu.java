@@ -41,7 +41,6 @@ import net.osmand.plus.mapcontextmenu.controllers.MapDataMenuController;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.MapMarkerEditor;
 import net.osmand.plus.mapcontextmenu.editors.PointEditor;
-import net.osmand.plus.mapcontextmenu.editors.RtePtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
@@ -75,8 +74,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private FavoritePointEditor favoritePointEditor;
 	@Nullable
 	private WptPtEditor wptPtEditor;
-	@Nullable
-	private RtePtEditor rtePtEditor;
 	@Nullable
 	private MapMarkerEditor mapMarkerEditor;
 
@@ -176,9 +173,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (wptPtEditor != null) {
 			wptPtEditor.setMapActivity(mapActivity);
 		}
-		if (rtePtEditor != null) {
-			rtePtEditor.setMapActivity(mapActivity);
-		}
 		if (mapMarkerEditor != null) {
 			mapMarkerEditor.setMapActivity(mapActivity);
 		}
@@ -245,15 +239,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	@Nullable
-	public RtePtEditor getRtePtPointEditor() {
-		MapActivity mapActivity = getMapActivity();
-		if (rtePtEditor == null && mapActivity != null) {
-			rtePtEditor = new RtePtEditor(mapActivity);
-		}
-		return rtePtEditor;
-	}
-
-	@Nullable
 	public MapMarkerEditor getMapMarkerEditor() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapMarkerEditor == null && mapActivity != null) {
@@ -267,8 +252,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			return favoritePointEditor;
 		} else if (wptPtEditor != null && wptPtEditor.getFragmentTag().equals(tag)) {
 			return wptPtEditor;
-		} else if (rtePtEditor != null && rtePtEditor.getFragmentTag().equals(tag)) {
-			return rtePtEditor;
 		} else if (mapMarkerEditor != null && mapMarkerEditor.getFragmentTag().equals(tag)) {
 			return mapMarkerEditor;
 		}
