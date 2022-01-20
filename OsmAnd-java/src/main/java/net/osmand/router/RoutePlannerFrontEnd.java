@@ -272,6 +272,10 @@ public class RoutePlannerFrontEnd {
 									start.routeToTarget = null;
 									routeFound = false;
 									break;
+								} else {
+									if (gctx.ctx.getVisitor() != null) {
+										gctx.ctx.getVisitor().visitApproximatedSegments(start.routeToTarget, start, next);
+									}
 								}
 							}
 						}
@@ -592,6 +596,9 @@ public class RoutePlannerFrontEnd {
 			gctx.routeDistCalculations += (target.cumDist - start.cumDist);
 			gctx.routeCalculations++;
 			res = searchRouteInternalPrepare(gctx.ctx, start.pnt, target.pnt, null);
+			if (gctx.ctx.getVisitor() != null) {
+				gctx.ctx.getVisitor().visitApproximatedSegments(res, start, target);
+			}
 			//BinaryRoutePlanner.printDebugMemoryInformation(gctx.ctx);
 			routeIsCorrect = res != null && !res.isEmpty();
 			for (int k = start.ind + 1; routeIsCorrect && k < target.ind; k++) {
