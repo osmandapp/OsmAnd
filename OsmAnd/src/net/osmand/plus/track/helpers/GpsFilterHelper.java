@@ -537,24 +537,22 @@ public class GpsFilterHelper {
 		@Override
 		public CharSequence getFilterTitle(@NonNull OsmandApplication app) {
 			String speed = app.getString(R.string.map_widget_speed);
-			String value;
+			String titleContent;
 			if (!isNeeded()) {
-				value = app.getString(R.string.gpx_logging_no_data);
+				titleContent = app.getString(R.string.gpx_logging_no_data);
 			} else {
 				FormattedValue min = OsmAndFormatter.getFormattedSpeedValue((float) getSelectedMinValue(), app);
 				FormattedValue max = OsmAndFormatter.getFormattedSpeedValue((float) getSelectedMaxValue(), app);
-				String range;
 				if (min.unit.equals(max.unit)) {
-					range = app.getString(R.string.ltr_or_rtl_combine_via_dash, min.value, max.value);
+					String range = app.getString(R.string.ltr_or_rtl_combine_via_dash, min.value, max.value);
+					titleContent = app.getString(R.string.ltr_or_rtl_combine_via_space, range, min.unit);
 				} else {
 					String minFormatted = min.format(app);
 					String maxFormatted = max.format(app);
-					range = app.getString(R.string.ltr_or_rtl_combine_via_dash, minFormatted, maxFormatted);
+					titleContent = app.getString(R.string.ltr_or_rtl_combine_via_dash, minFormatted, maxFormatted);
 				}
-				String unit = app.getSettings().SPEED_SYSTEM.get().toShortString(app);
-				value = app.getString(R.string.ltr_or_rtl_combine_via_space, range, unit);
 			}
-			String title = app.getString(R.string.ltr_or_rtl_combine_via_colon, speed, value);
+			String title = app.getString(R.string.ltr_or_rtl_combine_via_colon, speed, titleContent);
 
 			return styleFilterTitle(title, speed.length() + 1);
 		}

@@ -147,10 +147,13 @@ import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPEN
 
 public class GpxUiHelper {
 
+	private static final Log LOG = PlatformUtil.getLog(GpxUiHelper.class);
+
 	private static final int OPEN_GPX_DOCUMENT_REQUEST = 1005;
 	private static final int MAX_CHART_DATA_ITEMS = 10000;
-	private static final long SECOND_IN_MILLIS = 1000L;
-	private static final Log LOG = PlatformUtil.getLog(GpxUiHelper.class);
+
+	public static final long SECOND_IN_MILLIS = 1000L;
+	public static final long HOUR_IN_MILLIS = 60 * 60 * SECOND_IN_MILLIS;
 
 	public static String getDescription(OsmandApplication app, GPXFile result, File f, boolean html) {
 		GPXTrackAnalysis analysis = result.getAnalysis(f == null ? 0 : f.lastModified());
@@ -1283,7 +1286,7 @@ public class GpxUiHelper {
 	}
 
 	private static float setupXAxisTime(XAxis xAxis, long timeSpan) {
-		final boolean useHours = timeSpan / 3600000 > 0;
+		final boolean useHours = timeSpan / HOUR_IN_MILLIS > 0;
 		xAxis.setGranularity(1f);
 		xAxis.setValueFormatter((value, axis) -> formatXAxisTime((int) value, useHours));
 		return 1f;

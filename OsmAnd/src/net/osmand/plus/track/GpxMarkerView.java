@@ -31,6 +31,8 @@ import net.osmand.util.MapUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import static net.osmand.plus.helpers.GpxUiHelper.SECOND_IN_MILLIS;
+
 @SuppressLint("ViewConstructor")
 public class GpxMarkerView extends MarkerView {
 
@@ -183,7 +185,7 @@ public class GpxMarkerView extends MarkerView {
 
 	private void updateXAxisValueWithTimeOfDay(@NonNull Entry entry) {
 		long seconds = (long) entry.getX();
-		long timeOfDayInSeconds = startTimeMillis + seconds * 1000;
+		long timeOfDayInSeconds = startTimeMillis + seconds * SECOND_IN_MILLIS;
 		String formattedTimeOfDay = OsmAndFormatter.getFormattedFullTime(timeOfDayInSeconds);
 		((TextView) xAxisContainer.findViewById(R.id.x_axis_value)).setText(formattedTimeOfDay);
 	}

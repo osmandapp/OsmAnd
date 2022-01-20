@@ -58,6 +58,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import static net.osmand.plus.helpers.GpxUiHelper.HOUR_IN_MILLIS;
+
 public class TrackDetailsMenu {
 
 	public static final int MAX_DISTANCE_LOCATION_PROJECTION = 20; // in meters
@@ -680,7 +682,7 @@ public class TrackDetailsMenu {
 			}
 		});
 
-		boolean useHours = analysis.timeSpan != 0 && analysis.timeSpan / (60 * 60 * 1000) > 0;
+		boolean useHours = analysis.timeSpan != 0 && analysis.timeSpan / HOUR_IN_MILLIS > 0;
 		GpxMarkerView markerView = new GpxMarkerView(mapActivity, analysis.startTime, useHours);
 		GpxUiHelper.setupGPXChart(chart, markerView, 24, 16, true);
 
