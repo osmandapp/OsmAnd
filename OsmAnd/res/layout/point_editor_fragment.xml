@@ -53,8 +53,8 @@
                         android:id="@+id/title_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="?attr/bg_color"
-                        android:orientation="vertical">
+						android:orientation="vertical"
+						android:background="?attr/bg_color">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -72,7 +72,6 @@
                                     android:id="@+id/name_image"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/content_padding_small"
                                     android:layout_marginStart="@dimen/content_padding_small"
                                     android:layout_marginTop="2dp"
                                     android:scaleType="centerInside"
@@ -114,130 +113,17 @@
 	                                android:layout_marginStart="@dimen/content_padding_half"
 	                                android:layout_marginEnd="@dimen/content_padding" />
 
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/category_row"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:baselineAligned="false"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="42dp"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal">
-
-                                <androidx.appcompat.widget.AppCompatImageView
-                                    android:id="@+id/category_image"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/content_padding_small"
-                                    android:layout_marginStart="@dimen/content_padding_small"
-                                    android:layout_marginTop="2dp"
-                                    android:scaleType="centerInside"
-                                    app:srcCompat="@drawable/ic_action_building_number"/>
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="@dimen/content_padding"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/category_caption"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/content_padding_small"
-                                    android:layout_marginRight="@dimen/content_padding_small"
-                                    android:text="@string/shared_string_name"
-                                    android:textColor="?android:textColorSecondary"
-                                    android:textSize="@dimen/default_list_text_size"
-	                                android:layout_marginStart="@dimen/content_padding_small"
-	                                android:layout_marginEnd="@dimen/content_padding_small" />
-
-                                <net.osmand.plus.widgets.AutoCompleteTextViewEx
-                                    android:id="@+id/category_edit"
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/content_padding_half"
-                                    android:layout_marginRight="@dimen/content_padding"
-                                    android:layout_marginTop="@dimen/content_padding_half"
-                                    app:drawableRightCompat="@drawable/ic_action_arrow_drop_down"
-                                    app:drawableEndCompat="@drawable/ic_action_arrow_drop_down"
-                                    android:editable="false"
-	                                android:layout_marginEnd="@dimen/content_padding"
-	                                android:layout_marginStart="@dimen/content_padding_half" />
-
                             </LinearLayout>
 
                         </LinearLayout>
 
                     </LinearLayout>
 
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:foreground="@drawable/bg_contextmenu_shadow"
-                        android:foregroundGravity="top|fill_horizontal">
-
-                        <LinearLayout
-                            android:id="@+id/description_info_view"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:baselineAligned="false"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="42dp"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal">
-
-                                <androidx.appcompat.widget.AppCompatImageView
-                                    android:id="@+id/description_image"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/content_padding_small"
-                                    android:layout_marginStart="@dimen/content_padding_small"
-                                    android:layout_marginTop="10dp"
-                                    android:scaleType="center"
-                                    app:srcCompat="@drawable/ic_action_note_dark"/>
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="@dimen/content_padding_half"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <EditText
-                                    android:id="@+id/description_edit"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_marginLeft="@dimen/content_padding_half"
-                                    android:layout_marginRight="@dimen/content_padding"
-                                    android:inputType="textMultiLine"
-                                    android:maxLines="1000"
-                                    android:textColor="?android:textColorPrimary"
-                                    android:textColorHint="?android:textColorSecondary"
-	                                android:layout_marginStart="@dimen/content_padding_half"
-	                                android:layout_marginEnd="@dimen/content_padding" />
-
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-                    </FrameLayout>
+					<View
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:foreground="@drawable/bg_contextmenu_shadow"
+						android:foregroundGravity="fill_horizontal|top" />
 
                 </LinearLayout>
 

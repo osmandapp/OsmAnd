@@ -2,24 +2,20 @@ package net.osmand.plus.mapcontextmenu.editors;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentManager;
-
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.utils.AndroidUtils;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
 
 public class MapMarkerEditorFragment extends PointEditorFragment {
 
@@ -30,16 +26,6 @@ public class MapMarkerEditorFragment extends PointEditorFragment {
 		super.onCreate(savedInstanceState);
 		MapActivity mapActivity = getMapActivity();
 		editor = mapActivity != null ? mapActivity.getContextMenu().getMapMarkerEditor() : null;
-	}
-
-	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View mainView = super.onCreateView(inflater, container, savedInstanceState);
-		if (mainView != null) {
-			mainView.findViewById(R.id.category_row).setVisibility(View.GONE);
-			mainView.findViewById(R.id.description_info_view).setVisibility(View.GONE);
-		}
-		return mainView;
 	}
 
 	@Override
@@ -73,16 +59,13 @@ public class MapMarkerEditorFragment extends PointEditorFragment {
 		new AlertDialog.Builder(ctx)
 				.setMessage(getString(R.string.markers_remove_dialog_msg, marker.getName(ctx)))
 				.setNegativeButton(R.string.shared_string_no, null)
-				.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						OsmandApplication app = getMyApplication();
-						if (app != null) {
-							app.getMapMarkersHelper().removeMarker(marker);
-						}
-						if (needDismiss) {
-							dismiss(true);
-						}
+				.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
+					OsmandApplication app = getMyApplication();
+					if (app != null) {
+						app.getMapMarkersHelper().removeMarker(marker);
+					}
+					if (needDismiss) {
+						dismiss(true);
 					}
 				})
 				.create()
@@ -110,11 +93,6 @@ public class MapMarkerEditorFragment extends PointEditorFragment {
 	}
 
 	@Override
-	public String getCategoryInitValue() {
-		return "";
-	}
-
-	@Override
 	public String getDescriptionInitValue() {
 		return "";
 	}
@@ -122,11 +100,6 @@ public class MapMarkerEditorFragment extends PointEditorFragment {
 	@Override
 	public Drawable getNameIcon() {
 		return requireMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_flag, getPointColor());
-	}
-
-	@Override
-	public Drawable getCategoryIcon() {
-		return null;
 	}
 
 	@Override
