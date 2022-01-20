@@ -17,6 +17,8 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
+import static net.osmand.router.RoutePlannerFrontEnd.*;
+
 public class BinaryRoutePlanner {
 
 	private static final int TEST_ID = 77031244;
@@ -882,6 +884,7 @@ public class BinaryRoutePlanner {
 	public interface RouteSegmentVisitor {
 		
 		public void visitSegment(RouteSegment segment, int segmentEnd, boolean poll);
+		public void visitApproximatedSegments(List<RouteSegmentResult> segment, GpxPoint start, GpxPoint target);
 	}
 	
 	public static class RouteSegmentPoint extends RouteSegment {
