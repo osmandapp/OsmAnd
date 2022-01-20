@@ -127,7 +127,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 		saveTrackInterval.setEntryValues(entry.keySet().toArray());
 		saveTrackInterval.setIcon(getActiveIcon(R.drawable.ic_action_time_span));
 		saveTrackInterval.setDescription(R.string.save_track_interval_descr);
-		saveTrackInterval.setVisible(settings.SAVE_TRACK_TO_GPX.get());
+		saveTrackInterval.setVisible(settings.SAVE_TRACK_TO_GPX.getModeValue(getSelectedAppMode()));
 	}
 
 	private void setupSaveGlobalTrackIntervalPref() {

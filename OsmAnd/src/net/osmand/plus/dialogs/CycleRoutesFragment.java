@@ -53,11 +53,16 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 		LayoutInflater themedInflater = UiUtilities.getInflater(mapActivity, nightMode);
 		View view = themedInflater.inflate(R.layout.map_route_types_fragment, container, false);
 
+		showHideTopShadow(view);
 		setupHeader(view);
 		setupTypesCard(view);
-		setupBottomEmptySpace(view);
 
 		return view;
+	}
+
+	private void showHideTopShadow(@NonNull View view) {
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(requireActivity());
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.shadow_on_map), portrait);
 	}
 
 	private void setupHeader(@NonNull View view) {
@@ -142,14 +147,6 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 			}
 		});
 		return item;
-	}
-
-	private void setupBottomEmptySpace(@NonNull View view) {
-		View bottomView = view.findViewById(R.id.bottom_empty_space);
-		int height = AndroidUtils.getScreenHeight(requireActivity()) - getResources().getDimensionPixelSize(R.dimen.dashboard_map_top_padding);
-		ViewGroup.LayoutParams params = bottomView.getLayoutParams();
-		params.height = height;
-		bottomView.setLayoutParams(params);
 	}
 
 	private CommonPreference<Boolean> getPreference() {

@@ -972,7 +972,7 @@
     <string name="poi_notary">Office de notaire</string>
     <string name="poi_doors">Portes</string>
     <string name="poi_landfill_waste_nuclear">Déchet nucléaire</string>
-    <string name="poi_capital">Oui</string>
+    <string name="poi_capital">Capitale</string>
     <string name="poi_office_religion">Lieu de culte</string>
     <string name="poi_association">Siège d\'association</string>
     <string name="poi_financial">Société financière</string>
@@ -2200,7 +2200,7 @@
     <string name="poi_takeaway_filter_yes">Oui</string>
     <string name="poi_delivery_filter_yes">Oui</string>
     <string name="poi_outdoor_seating_filter_yes">Oui</string>
-    <string name="poi_brushless_yes">Oui ; sans balai</string>
+    <string name="poi_brushless_yes">Oui</string>
     <string name="poi_architecture_stalinist_neoclassicism">Architecture : néoclassicisme stalinien</string>
     <string name="poi_service_bicycle_charging_yes">Recharge : oui</string>
     <string name="poi_service_bicycle_charging_no">Recharge : non</string>

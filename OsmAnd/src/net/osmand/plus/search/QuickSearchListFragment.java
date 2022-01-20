@@ -11,16 +11,19 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.IndexConstants;
-import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.OsmAndListFragment;
+import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.DownloadValidationManager;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
@@ -30,6 +33,7 @@ import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchTopShadowListItem;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
@@ -100,6 +104,8 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 							|| sr.objectType == ObjectType.GPX_TRACK) {
 
 						showResult(sr);
+					} else if (sr.objectType == ObjectType.INDEX_ITEM) {
+						processIndexItemClick((IndexItem) sr.relatedObject);
 					} else {
 						if (sr.objectType == ObjectType.CITY || sr.objectType == ObjectType.VILLAGE || sr.objectType == ObjectType.STREET) {
 							showResult = true;
@@ -220,11 +226,24 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		dialogFragment.dismiss();
 	}
 
+	private void processIndexItemClick(@NonNull IndexItem indexItem) {
+		OsmandApplication app = getMyApplication();
+		FragmentActivity activity = getMapActivity();
+		DownloadIndexesThread thread = app.getDownloadThread();
+
+		DownloadValidationManager manager = new DownloadValidationManager(app);
+		if (thread.isDownloading(indexItem)) {
+			manager.makeSureUserCancelDownload(activity, indexItem);
+		} else {
+			manager.startDownload(activity, indexItem);
+		}
+	}
+
 	public MapActivity getMapActivity() {
 		return (MapActivity) getActivity();
 	}
 
-	public void updateLocation(LatLon latLon, Float heading) {
+	public void updateLocation(Float heading) {
 		if (listAdapter != null && !touching && !scrolling) {
 			dialogFragment.getAccessibilityAssistant().lockEvents();
 			listAdapter.notifyDataSetChanged();

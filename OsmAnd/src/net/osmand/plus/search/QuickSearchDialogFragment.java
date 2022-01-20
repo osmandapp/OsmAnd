@@ -836,7 +836,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					new LatLon(mapCenter.getLatitude(), mapCenter.getLongitude()));
 			searchUICore.updateSettings(ss);
 			updateUseMapCenterUI();
-			updateLocationUI(mapCenter, null);
+			updateContent(null);
 		}
 		app.getLocationProvider().removeCompassListener(app.getLocationProvider().getNavigationInfo());
 		dialog.show();
@@ -1180,10 +1180,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				}
 				break;
 		}
-		LatLon mapCenter = getMapActivity().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
 		if (useMapCenter) {
 			updateUseMapCenterUI();
-			searchListFragment.updateLocation(mapCenter, null);
+			searchListFragment.updateLocation(null);
 		}
 	}
 
@@ -2192,23 +2191,19 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void updateLocationUI(Location location, Float heading) {
 		this.location = location;
-		LatLon latLon = null;
-		if (location != null) {
-			latLon = new LatLon(location.getLatitude(), location.getLongitude());
-		}
-		updateLocationUI(latLon, heading);
+		updateContent(heading);
 	}
 
-	private void updateLocationUI(LatLon latLon, Float heading) {
-		if (latLon != null && !paused && !cancelPrev) {
+	private void updateContent(Float heading) {
+		if (!paused && !cancelPrev) {
 			if (mainSearchFragment != null && searchView.getVisibility() == View.VISIBLE) {
-				mainSearchFragment.updateLocation(latLon, heading);
+				mainSearchFragment.updateLocation(heading);
 			} else if (historySearchFragment != null && viewPager.getCurrentItem() == 0) {
-				historySearchFragment.updateLocation(latLon, heading);
+				historySearchFragment.updateLocation(heading);
 			} else if (categoriesSearchFragment != null && viewPager.getCurrentItem() == 1) {
-				categoriesSearchFragment.updateLocation(latLon, heading);
+				categoriesSearchFragment.updateLocation(heading);
 			} else if (addressSearchFragment != null && viewPager.getCurrentItem() == 2) {
-				addressSearchFragment.updateLocation(latLon, heading);
+				addressSearchFragment.updateLocation(heading);
 			}
 		}
 	}
@@ -2335,14 +2330,17 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			hideProgressBar();
 		}
 		OsmandPlugin.onNewDownloadIndexes(this);
+		updateContent(heading);
 	}
 
 	@Override
 	public void downloadInProgress() {
+		updateContent(heading);
 	}
 
 	@Override
 	public void downloadHasFinished() {
+		updateContent(heading);
 	}
 
 	public void reloadIndexFiles() {

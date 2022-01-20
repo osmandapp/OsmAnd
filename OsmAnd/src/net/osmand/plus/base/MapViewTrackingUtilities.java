@@ -10,7 +10,6 @@ import androidx.core.util.Pair;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
-import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
@@ -22,23 +21,21 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.dashboard.DashboardOnMap;
-import net.osmand.plus.resources.DetectRegionTask;
-import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
+import net.osmand.plus.resources.DetectRegionTask;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.MapUtils;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Map;
 
 public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLocationListener,
 		OsmAndCompassListener, MapMarkerChangedListener {
@@ -238,6 +235,8 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				} else if(currentMapRotation == OsmandSettings.ROTATE_MAP_COMPASS) {
 					showViewAngle = routePlanningMode; // disable compass rotation in that mode
 					pendingRotation = true;
+				} else if (currentMapRotation == OsmandSettings.ROTATE_MAP_NONE) {
+					pendingRotation = true;
 				}
 				registerUnregisterSensor(location, smallSpeedForDirectionOfMovement);
 				if (settings.ANIMATE_MY_LOCATION.get() && !smallSpeedForAnimation && !movingToMyLocation &&
@@ -296,18 +295,15 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public void switchToRoutePlanningMode() {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		routePlanningMode = routingHelper.isRoutePlanningMode();
-		updateSettings(false);
+		updateSettings();
 		if(!routePlanningMode && followingMode) {
 			backToLocationImpl();
 		}
 
 	}
 
-	public void updateSettings(boolean resetMapRotation) {
+	public void updateSettings() {
 		if (mapView != null) {
-			if (resetMapRotation && settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
-				mapView.setRotate(0, true);
-			}
 			if (isMapLinkedToLocation) {
 				boolean trackDetailsVisible = detailsMenu != null && detailsMenu.isVisible();
 				int positionType;
@@ -448,7 +444,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				backToLocationWithDelay(autoFollow);
 			}
 		} else {
-			updateSettings(false);
+			updateSettings();
 		}
 	}
 
@@ -476,7 +472,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private void switchRotateMapModeImpl(){
 		if (mapView != null) {
 			String rotMode = app.getString(R.string.rotate_map_none_opt);
-			if (settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_NONE || mapView.getRotate() == 0) {
+			if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE && mapView.getRotate() != 0) {
+				mapView.resetManualRotation();
+			} else {
 				int vl = (settings.ROTATE_MAP.get() + 1) % 3;
 				settings.ROTATE_MAP.set(vl);
 
@@ -488,7 +486,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			}
 			rotMode = app.getString(R.string.rotate_map_to_bearing) + ":\n" + rotMode;
 			app.showShortToastMessage(rotMode);
-			updateSettings(true);
+			updateSettings();
 			mapView.refreshMap();
 			if (mapView.isCarView()) {
 				app.refreshCarScreen();

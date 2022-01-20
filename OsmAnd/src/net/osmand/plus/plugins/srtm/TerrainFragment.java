@@ -36,6 +36,7 @@ import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.slider.Slider;
 
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.utils.ColorUtilities;
@@ -100,7 +101,6 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	private Slider transparencySlider;
 	private RangeSlider zoomSlider;
 	private ObservableListView observableListView;
-	private View bottomEmptySpace;
 
 	private ArrayAdapter<ContextMenuItem> listAdapter;
 
@@ -154,6 +154,9 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View root = UiUtilities.getInflater(inflater.getContext(), nightMode).inflate(R.layout.fragment_terrain, container, false);
+
+		showHideTopShadow(root);
+
 		TextView emptyStateDescriptionTv = root.findViewById(R.id.empty_state_description);
 		TextView slopeReadMoreTv = root.findViewById(R.id.slope_read_more_tv);
 		TextView titleTv = root.findViewById(R.id.title_tv);
@@ -180,7 +183,6 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		downloadTopDivider = root.findViewById(R.id.download_container_top_divider);
 		downloadBottomDivider = root.findViewById(R.id.download_container_bottom_divider);
 		observableListView = root.findViewById(R.id.list_view);
-		bottomEmptySpace = root.findViewById(R.id.bottom_empty_space);
 
 		titleTv.setText(R.string.shared_string_terrain);
 		String wikiString = getString(R.string.shared_string_wikipedia);
@@ -213,6 +215,11 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 
 		updateUiMode();
 		return root;
+	}
+
+	private void showHideTopShadow(@NonNull View view) {
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(requireActivity());
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.shadow_on_map), portrait);
 	}
 
 	@Override
@@ -263,7 +270,6 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		adjustGlobalVisibility();
 		adjustLegendVisibility(mode);
 		adjustModeButtons(mode);
-		setupBottomEmptySpace();
 	}
 
 	private void adjustGlobalVisibility() {
@@ -496,13 +502,6 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	@Override
 	public void downloadHasFinished() {
 		updateDownloadSection();
-	}
-
-	private void setupBottomEmptySpace() {
-		int h = terrainEnabled ? AndroidUtils.dpToPx(app, 120) : AndroidUtils.getScreenHeight(requireActivity()) / 3;
-		ViewGroup.LayoutParams params = bottomEmptySpace.getLayoutParams();
-		params.height = h;
-		bottomEmptySpace.setLayoutParams(params);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {

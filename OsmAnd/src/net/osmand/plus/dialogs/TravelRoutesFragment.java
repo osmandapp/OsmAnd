@@ -104,11 +104,18 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
 		View view = themedInflater.inflate(R.layout.travel_routes_fragment, container, false);
+
+		showHideTopShadow(view);
 		setupHeader(view);
 		setupPrefItems(view);
 		setupTypeRadioGroup(view);
-		setupBottomEmptySpace(view);
+
 		return view;
+	}
+
+	private void showHideTopShadow(@NonNull View view) {
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(requireActivity());
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.shadow_on_map), portrait);
 	}
 
 	private void updateRouteTypes() {
@@ -189,7 +196,7 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 			TextRadioItem files = createRadioButton(TravelType.TRAVEL_FILES);
 			TextRadioItem points = createRadioButton(TravelType.ROUTE_POINTS);
 
-			TextToggleButton radioGroup = new TextToggleButton(app, buttonsContainer, nightMode);
+			TextToggleButton radioGroup = new TextToggleButton(app, buttonsContainer, nightMode, true);
 			radioGroup.setItems(routes, files, points);
 			switch (travelType) {
 				case ROUTE_TYPES:
@@ -433,14 +440,6 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 		emptyView.setGravity(Gravity.CENTER);
 		emptyView.setText(titleId);
 		return emptyView;
-	}
-
-	private void setupBottomEmptySpace(@NonNull View view) {
-		View bottomView = view.findViewById(R.id.bottom_empty_space);
-		int height = AndroidUtils.getScreenHeight(requireActivity()) - getResources().getDimensionPixelSize(R.dimen.dashboard_map_top_padding);
-		ViewGroup.LayoutParams params = bottomView.getLayoutParams();
-		params.height = height;
-		bottomView.setLayoutParams(params);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {

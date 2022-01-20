@@ -1112,6 +1112,11 @@
 			</intent-filter>
 
 		</activity>
+		<activity
+			android:name="net.osmand.plus.activities.RestartActivity"
+			android:exported="false"
+			android:process=":restart"
+			android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
 		<!-- keep android:process on a separate line !! -->
 		<service
