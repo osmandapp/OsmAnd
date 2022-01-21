@@ -4514,4 +4514,6 @@
     <string name="rendering_value_omit_name">Пропустити</string>
     <string name="rendering_attr_seabedDetail_name">Подробиці про морське дно</string>
     <string name="save_track_to_gpx_descrp">Автозапис треків під час навігації. Після завершення запису, трек буде збережено автоматично.</string>
+    <string name="gpx_no_routes_descr">Ви можете використовувати інструмент «%1$s», щоб записувати маршрут у файл.</string>
+    <string name="gpx_no_routes_title">Маршрути відсутні</string>
 </resources>
