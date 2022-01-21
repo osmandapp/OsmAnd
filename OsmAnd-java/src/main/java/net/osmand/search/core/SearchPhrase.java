@@ -159,9 +159,9 @@ public class SearchPhrase {
 		List<SearchWord> leftWords = this.words;
 		String thisTxt = getText(true);
 		List<SearchWord> foundWords = new ArrayList<>();
-		if (text.startsWith(thisTxt)) {
+		if (textToSearch.startsWith(thisTxt)) {
 			// string is longer
-			textToSearch = text.substring(getText(false).length());
+			textToSearch = textToSearch.substring(getText(false).length());
 			foundWords.addAll(this.words);
 			leftWords = leftWords.subList(leftWords.size(), leftWords.size());
 		}
@@ -173,8 +173,7 @@ public class SearchPhrase {
 				break;
 			}
 		}
-		SearchPhrase sp = createNewSearchPhrase(settings, text, foundWords, textToSearch);
-		return sp;
+		return createNewSearchPhrase(settings, text, foundWords, textToSearch);
 	}
 
 	

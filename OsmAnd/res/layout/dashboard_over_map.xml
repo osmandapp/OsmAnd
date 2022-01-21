@@ -2,10 +2,12 @@
 <FrameLayout
     android:id="@+id/dashboard"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:visibility="gone">
+    android:visibility="gone"
+    tools:visibility="visible" >
 
     <include
         android:id="@+id/init_progress"
@@ -21,7 +23,8 @@
             android:id="@+id/main_scroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fadeScrollbars="true">
+            android:fadeScrollbars="true"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,9 +49,11 @@
                 <LinearLayout
                     android:id="@+id/content"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"/>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" />
+
             </LinearLayout>
+
         </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>
 
         <FrameLayout
