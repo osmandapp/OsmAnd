@@ -36,7 +36,7 @@ public abstract class EditTrackGroupBottomSheet extends MenuBottomSheetDialogFra
 		groupName = Algorithms.isEmpty(group.getName()) ? app.getString(R.string.shared_string_gpx_points) : group.getName();
 
 		View mainView = UiUtilities.getInflater(app, nightMode).inflate(R.layout.track_name_edit_text, null);
-		nameTextBox = setupTextBox(mainView);
+		setupTextBox(mainView);
 		setupEditText(mainView);
 
 		BaseBottomSheetItem editFolderName = new BaseBottomSheetItem.Builder()
@@ -45,14 +45,13 @@ public abstract class EditTrackGroupBottomSheet extends MenuBottomSheetDialogFra
 		items.add(editFolderName);
 	}
 
-	protected TextInputLayout setupTextBox(View mainView) {
-		TextInputLayout nameTextBox = mainView.findViewById(R.id.name_text_box);
+	protected void setupTextBox(View mainView) {
+		nameTextBox = mainView.findViewById(R.id.name_text_box);
 		int backgroundId = nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light;
 		nameTextBox.setBoxBackgroundColorResource(backgroundId);
 		nameTextBox.setHint(AndroidUtils.addColon(app, R.string.shared_string_name));
 		ColorStateList colorStateList = ColorStateList.valueOf(ColorUtilities.getSecondaryTextColor(app, nightMode));
 		nameTextBox.setDefaultHintTextColor(colorStateList);
-		return nameTextBox;
 	}
 
 	protected void setupEditText(View mainView) {
@@ -91,7 +90,7 @@ public abstract class EditTrackGroupBottomSheet extends MenuBottomSheetDialogFra
 		return nameTextBox.getError() == null;
 	}
 
-	public interface OnGroupNameChangeListener{
-		void onGroupNameChanged();
+	public interface OnGroupNameChangeListener {
+		void onTrackGroupChanged();
 	}
 }

@@ -14,7 +14,8 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
-import net.osmand.plus.myplaces.EditTrackGroupDialogFragment.UpdateGpxCategoryTask;
+import net.osmand.plus.myplaces.EditTrackGroupDialogFragment;
+import net.osmand.plus.myplaces.UpdateGpxCategoryTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.utils.AndroidUtils;
 
@@ -52,7 +53,7 @@ public class RenameTrackGroupBottomSheet extends EditTrackGroupBottomSheet {
 			new UpdateGpxCategoryTask(activity, group, groupName)
 					.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
-		listener.onGroupNameChanged();
+		listener.onTrackGroupChanged();
 		dismiss();
 	}
 
@@ -63,14 +64,15 @@ public class RenameTrackGroupBottomSheet extends EditTrackGroupBottomSheet {
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager,
 	                                @Nullable Fragment target,
-	                                @NonNull GpxDisplayGroup group,
-	                                OnGroupNameChangeListener listener) {
+	                                @NonNull GpxDisplayGroup group) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			RenameTrackGroupBottomSheet fragment = new RenameTrackGroupBottomSheet();
 			fragment.group = group;
 			fragment.setRetainInstance(true);
 			fragment.setTargetFragment(target, 0);
-			fragment.listener = listener;
+			if (target instanceof EditTrackGroupDialogFragment) {
+				fragment.listener = (OnGroupNameChangeListener) target;
+			}
 			fragment.show(fragmentManager, RenameTrackGroupBottomSheet.TAG);
 		}
 	}

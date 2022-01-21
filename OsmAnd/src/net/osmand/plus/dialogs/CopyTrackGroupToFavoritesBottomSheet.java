@@ -12,6 +12,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
+import net.osmand.plus.myplaces.EditTrackGroupDialogFragment;
 import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
@@ -54,7 +55,7 @@ public class CopyTrackGroupToFavoritesBottomSheet extends EditTrackGroupBottomSh
 			}
 		}
 		favouritesDbHelper.saveCurrentPointsIntoFile();
-		listener.onGroupNameChanged();
+		listener.onTrackGroupChanged();
 		dismiss();
 	}
 
@@ -65,14 +66,15 @@ public class CopyTrackGroupToFavoritesBottomSheet extends EditTrackGroupBottomSh
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager,
 	                                @Nullable Fragment target,
-	                                @NonNull GpxDisplayGroup group,
-	                                OnGroupNameChangeListener listener) {
+	                                @NonNull GpxDisplayGroup group) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			CopyTrackGroupToFavoritesBottomSheet fragment = new CopyTrackGroupToFavoritesBottomSheet();
 			fragment.group = group;
 			fragment.setRetainInstance(true);
 			fragment.setTargetFragment(target, 0);
-			fragment.listener = listener;
+			if (target instanceof EditTrackGroupDialogFragment) {
+				fragment.listener = (OnGroupNameChangeListener) target;
+			}
 			fragment.show(fragmentManager, CopyTrackGroupToFavoritesBottomSheet.TAG);
 		}
 	}
