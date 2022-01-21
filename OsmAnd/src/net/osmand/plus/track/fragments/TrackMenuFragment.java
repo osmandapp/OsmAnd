@@ -301,7 +301,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			}
 		} else if (selectedGpxFile != null) {
 			onSelectedGpxFileAvailable();
-			updateRegionUi();
 			if (FileUtils.isTempFile(app, getGpx().path)) {
 				app.getSelectedGpxHelper().selectGpxFile(selectedGpxFile.getGpxFile(), true, false);
 			}
@@ -883,36 +882,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				updateDistanceDirection();
 			}
 		});
-	}
-
-	private void updateRegionUi() {
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				updateRegion();
-			}
-		});
-	}
-
-	private void updateRegion() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && overviewCard != null && overviewCard.getView() != null) {
-			View view = overviewCard.getView();
-			TextView regionText = view.findViewById(R.id.region);
-			LatLon start = getLatLon();
-			if (selectedGpxFile.getTrackAnalysis(app).locationStart != null) {
-				double lat = selectedGpxFile.getTrackAnalysis(app).locationStart.getLatitude();
-				double lon = selectedGpxFile.getTrackAnalysis(app).locationStart.getLongitude();
-				start = new LatLon(lat,lon);
-			}
-			app.getMapViewTrackingUtilities().detectCurrentRegion(start, worldRegion -> {
-				if (!selectedGpxFile.isShowCurrentTrack()) {
-					String regionName = worldRegion.getLocaleName();
-					regionText.setText(regionName);
-				}
-				return true;
-			});
-		}
 	}
 
 	private void updateDistanceDirection() {
