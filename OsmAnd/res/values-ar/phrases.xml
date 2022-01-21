@@ -3662,7 +3662,7 @@
     <string name="poi_community_gender_mixed">نوع المجتمع: مختلط</string>
     <string name="poi_lavoir">مكان لغسل الملابس يدويا</string>
     <string name="poi_waste_transfer_station">محطة نقل نفايات</string>
-    <string name="poi_weightbridge">ميزان المركبات</string>
+    <string name="poi_weightbridge">ميزان الجسر؛ميزان شاحنات</string>
     <string name="poi_ranger_station">مكتب الحارس</string>
     <string name="poi_diplomatic_services_citizen_services_filter">خدمات المواطنين</string>
     <string name="poi_diplomatic_services_immigrant_visas_filter">تأشيرات المهاجرين</string>
@@ -4278,4 +4278,8 @@
     <string name="poi_post_office_opening_hours">ساعات عمل مكتب البريد</string>
     <string name="poi_post_office_post_annex">ملحق بريد</string>
     <string name="poi_post_office_post_partner">شريك بريد</string>
+    <string name="poi_blowhole">فوهة انفجارية</string>
+    <string name="poi_skate">متجر تزلج</string>
+    <string name="poi_collector">جامع</string>
+    <string name="poi_books_adults">راشدون</string>
 </resources>
