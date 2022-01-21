@@ -17,9 +17,10 @@ import net.osmand.plus.widgets.chips.ChipsAdapter.OnSelectChipListener;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.util.Algorithms;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class PointsGroupsCard extends MapBaseCard {
 
@@ -72,7 +73,7 @@ public class PointsGroupsCard extends MapBaseCard {
 			ChipItem item = new ChipItem(categoryDisplayName);
 			item.title = categoryDisplayName;
 			item.tag = group;
-			item.onAfterBindCallback = (chip, holder) -> {
+			item.onAfterViewBoundCallback = (chip, holder) -> {
 				if (selectedGpxFile.isGroupHidden(chip.id)) {
 					Drawable image = getColoredIcon(R.drawable.ic_action_hide_16, iconColorId);
 					holder.image.setImageDrawable(image);
@@ -85,8 +86,6 @@ public class PointsGroupsCard extends MapBaseCard {
 					int top = holder.container.getPaddingTop();
 					int bottom = holder.container.getPaddingBottom();
 					holder.container.setPadding(smallPadding, top, smallPadding, bottom);
-
-					holder.image.requestLayout();
 				}
 			};
 			items.add(item);
@@ -105,7 +104,7 @@ public class PointsGroupsCard extends MapBaseCard {
 
 		chipsView.setOnSelectChipListener(new OnSelectChipListener() {
 			@Override
-			public boolean onSelectChip(ChipItem chip) {
+			public boolean onSelectChip(@NotNull ChipItem chip) {
 				selectedGroup = (GpxDisplayGroup) chip.tag;
 				CardListener listener = getListener();
 				if (listener != null) {

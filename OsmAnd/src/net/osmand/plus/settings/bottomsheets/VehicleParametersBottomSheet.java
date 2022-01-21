@@ -24,12 +24,12 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
 import net.osmand.plus.settings.preferences.SizePreference;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.util.Algorithms;
@@ -39,7 +39,6 @@ import org.apache.commons.logging.Log;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -129,7 +128,7 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 		});
 
 		List<ChipItem> chips = new ArrayList<>();
-		for (String entry : Arrays.asList(preference.getEntries())) {
+		for (String entry : preference.getEntries()) {
 			ChipItem chip = new ChipItem(entry);
 			chip.title = entry;
 			chips.add(chip);

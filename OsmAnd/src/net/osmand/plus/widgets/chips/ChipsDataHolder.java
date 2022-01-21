@@ -11,26 +11,31 @@ class ChipsDataHolder {
 	private List<ChipItem> items = new ArrayList<>();
 	private ChipItem selected = null;
 
-	public void setItems(List<ChipItem> items) {
+	public void setItems(@NonNull List<ChipItem> items) {
 		this.items = items;
 	}
 
+	@NonNull
 	public List<ChipItem> getItems() {
 		return items;
 	}
 
-	public void setSelected(ChipItem item) {
+	public void setSelected(@Nullable ChipItem item) {
 		if (selected != null) {
 			selected.isSelected = false;
 		}
-		item.isSelected = true;
+		if (item != null) {
+			item.isSelected = true;
+		}
 		selected = item;
 	}
 
+	@Nullable
 	public ChipItem getSelected() {
 		return selected;
 	}
 
+	@NonNull
 	public ChipItem getItem(int position) {
 		return items.get(position);
 	}

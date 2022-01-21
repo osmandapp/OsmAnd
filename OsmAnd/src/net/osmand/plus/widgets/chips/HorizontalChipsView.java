@@ -43,27 +43,25 @@ public class HorizontalChipsView extends RecyclerView {
 		initDefaultAttrs(context, attrs, defStyleAttr);
 		adapter = new ChipsAdapter(context, holder, defAttrs);
 		setAdapter(adapter);
-
-		invalidate();
 	}
 
-	public void setItems(List<ChipItem> chips) {
+	public void setItems(@NonNull List<ChipItem> chips) {
 		holder.setItems(chips);
 	}
 
-	public void setSelected(ChipItem chip) {
+	public void setSelected(@Nullable ChipItem chip) {
 		holder.setSelected(chip);
 	}
 
-	public void setOnSelectChipListener(OnSelectChipListener listener) {
-		adapter.onSelectChipListener = listener;
+	public void setOnSelectChipListener(@Nullable OnSelectChipListener listener) {
+		adapter.setOnSelectChipListener(listener);
 	}
 
 	public void notifyDataSetChanged() {
 		adapter.notifyDataSetChanged();
 	}
 
-	public ChipItem getChipById(String id) {
+	public ChipItem getChipById(@NonNull String id) {
 		return holder.getItemById(id);
 	}
 
@@ -104,9 +102,6 @@ public class HorizontalChipsView extends RecyclerView {
 		defAttrs.iconDisabledColor = a.getInteger(
 				R.styleable.HorizontalChipsView_chipIconDisabledColor,
 				getColorFromAttr(R.attr.inactive_text_color));
-		defAttrs.useNaturalIconColor = a.getBoolean(
-				R.styleable.HorizontalChipsView_chipUseNaturalIconColor,
-				false);
 
 		defAttrs.bgColor = a.getInteger(
 				R.styleable.HorizontalChipsView_chipBgColor,

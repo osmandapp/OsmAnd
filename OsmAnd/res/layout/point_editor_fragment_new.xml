@@ -397,7 +397,7 @@
 					android:layout_height="wrap_content"
 					android:paddingHorizontal="@dimen/content_padding"
 					tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-					tools:listitem="@layout/point_editor_icon_category_item"
+					tools:listitem="@layout/custom_chip_view"
 					tools:orientation="horizontal" />
 
 				<net.osmand.plus.widgets.FlowLayout

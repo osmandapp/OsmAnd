@@ -27,7 +27,6 @@ public class ChipItem {
 	public Integer iconSelectedColor;
 	@ColorInt
 	public Integer iconDisabledColor;
-	public boolean useNaturalIconColor;
 
 	@ColorInt
 	public Integer bgColor;
@@ -38,23 +37,15 @@ public class ChipItem {
 
 	public Integer drawablePaddingPx;
 
-	public OnBeforeBindCallback onBeforeBindCallback;
-	public OnAfterBindCallback onAfterBindCallback;
 	public Object tag;
 
-	public boolean isSelected() {
-		return isSelected;
-	}
+	public OnAfterViewBoundCallback onAfterViewBoundCallback;
 
 	public ChipItem(@NonNull String id) {
 		this.id = id;
 	}
 
-	public interface OnBeforeBindCallback {
-		void onBeforeViewBound(@NonNull ChipItem chip);
-	}
-
-	public interface OnAfterBindCallback {
+	public interface OnAfterViewBoundCallback {
 		void onAfterViewBound(@NonNull ChipItem chip, @NonNull ChipViewHolder holder);
 	}
 

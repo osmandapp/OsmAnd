@@ -17,7 +17,6 @@ class DefaultAttributes {
 	public int iconSelectedColor;
 	@ColorInt
 	public int iconDisabledColor;
-	public boolean useNaturalIconColor;
 
 	@ColorInt
 	public int bgColor;

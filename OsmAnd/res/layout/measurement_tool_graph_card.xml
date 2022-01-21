@@ -16,7 +16,7 @@
         android:layout_marginBottom="@dimen/content_padding_small"
         android:paddingHorizontal="@dimen/content_padding"
         tools:itemCount="3"
-        tools:listitem="@layout/point_editor_icon_category_item" />
+        tools:listitem="@layout/custom_chip_view" />
 
     <FrameLayout
         android:id="@+id/scroll_container"
