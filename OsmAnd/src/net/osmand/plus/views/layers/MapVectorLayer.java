@@ -39,6 +39,12 @@ public class MapVectorLayer extends BaseMapLayer {
 
 	@Override
 	public void destroyLayer() {
+		if (view != null) {
+			final MapRendererView mapRenderer = view.getMapRenderer();
+			if (mapRenderer != null) {
+				mapRenderer.resetMapLayerProvider(VECTOR_LAYER_ID);
+			}
+		}
 	}
 
 	@Override
@@ -67,6 +73,12 @@ public class MapVectorLayer extends BaseMapLayer {
 		this.visible = visible;
 
 		if (!visible) {
+			if (view != null) {
+				final MapRendererView mapRenderer = view.getMapRenderer();
+				if (mapRenderer != null) {
+					mapRenderer.resetMapLayerProvider(VECTOR_LAYER_ID);
+				}
+			}
 			resourceManager.getRenderer().clearCache();
 		}
 	}

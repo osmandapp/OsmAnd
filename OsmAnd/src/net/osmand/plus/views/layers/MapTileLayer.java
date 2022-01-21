@@ -51,8 +51,7 @@ public class MapTileLayer extends BaseMapLayer {
 	protected MapTileAdapter mapTileAdapter = null;
 
 	private boolean isSetProvider = false;
-	private static final Log LOG = PlatformUtil.getLog(MapTileLayer.class);
-	protected Paint paintBitmap;
+	protected Paint paintBitmap = null;
 	protected RectF bitmapToDraw = new RectF();
 	protected Rect bitmapToZoom = new Rect();
 
@@ -90,15 +89,11 @@ public class MapTileLayer extends BaseMapLayer {
 
 		useSampling = Build.VERSION.SDK_INT < 28;
 
-		if (view.getMapRenderer() == null || paintBitmap == null) {
+		if (paintBitmap == null) {
 			paintBitmap = new Paint();
 			paintBitmap.setFilterBitmap(true);
 			paintBitmap.setAlpha(getAlpha());
 		}
-
-		paintBitmap = new Paint();
-		paintBitmap.setFilterBitmap(true);
-		paintBitmap.setAlpha(getAlpha());
 
 		if (mapTileAdapter != null) {
 			mapTileAdapter.initLayerAdapter(this, view);
@@ -457,6 +452,12 @@ public class MapTileLayer extends BaseMapLayer {
 		if (resourceManager != null) {
 			resourceManager.removeMapTileLayerSize(this);
 		}
+		if (view != null) {
+			final MapRendererView mapRenderer = view.getMapRenderer();
+			if (mapRenderer != null) {
+				mapRenderer.resetMapLayerProvider(getLayerId());
+			}
+		}
 	}
 
 	public boolean isVisible() {
@@ -467,7 +468,13 @@ public class MapTileLayer extends BaseMapLayer {
 		this.visible = visible;
 
 		if (!visible) {
-			//resourceManager.getRenderer().clearCache();
+			if (view != null) {
+				final MapRendererView mapRenderer = view.getMapRenderer();
+				if (mapRenderer != null) {
+					mapRenderer.resetMapLayerProvider(getLayerId());
+				}
+			}
+			resourceManager.getRenderer().clearCache();
 		}
 	}
 
