@@ -4520,4 +4520,6 @@
     <string name="rendering_attr_seabedDetail_name">Havbundsdetaljer</string>
     <string name="rendering_attr_seabedDetail_description">Yderligere tekstinformation om havbunds overfladebeskaffenhed, kombinerede overfladetyper og klasser af havgræs</string>
     <string name="save_track_to_gpx_descrp">Start sporoptagelse automatisk, når navigation er i gang. Når den er færdig, gemmes sporet automatisk.</string>
+    <string name="gpx_no_routes_title">Der er ingen ruter</string>
+    <string name="gpx_no_routes_descr">Du kan bruge værktøjet \"%1$s\" til at tilføje rute til fil.</string>
 </resources>
