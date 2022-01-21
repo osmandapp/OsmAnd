@@ -4518,4 +4518,5 @@
     <string name="rendering_value_omit_name">Omissão</string>
     <string name="rendering_attr_seabedDetail_description">Informações adicionais de texto sobre surface_qualification do fundo marinho, tipos de superfície combinados, categoria e táxon de ervas daninhas ou ervas marinhas</string>
     <string name="rendering_attr_seabedDetail_name">Detalhes do fundo marinho</string>
+    <string name="save_track_to_gpx_descrp">Iniciar a gravação da trilha automaticamente enquanto a navegação estiver em andamento. Quando terminar, a faixa será salva automaticamente.</string>
 </resources>

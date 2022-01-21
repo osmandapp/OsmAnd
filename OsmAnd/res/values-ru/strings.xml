@@ -84,7 +84,7 @@
     <string name="shared_string_visible">Видны</string>
     <string name="restore_purchases">Восстановить покупки</string>
     <string name="fonts_header">Шрифты карты</string>
-    <string name="analyze_on_map">Анализировать на карте</string>
+    <string name="analyze_on_map">Анализ на карте</string>
     <string name="nautical_maps">Морские карты</string>
     <string name="download_depth_countours">Контуры морских глубин</string>
     <string name="index_item_depth_contours_osmand_ext">Контуры морских глубин</string>
@@ -1839,7 +1839,7 @@
     <string name="lang_et">Эстонский</string>
     <string name="lang_ceb">Себуанский</string>
     <string name="archive_wikipedia_data">У вас имеются старые несовместимые данные из Википедии. Заархивировать их?</string>
-    <string name="disable_recording_once_app_killed">Остановить локальную запись</string>
+    <string name="disable_recording_once_app_killed">Остановить автономную запись</string>
     <string name="lang_pms">Пьемонтский</string>
     <string name="lang_tl">Тагальский</string>
     <string name="lang_sh">Сербохорватский</string>
@@ -3773,7 +3773,7 @@
     <string name="all_next_segments_will_be_recalc">Все последующие сегменты будут пересчитаны с использованием выбранного профиля.</string>
     <string name="all_previous_segments_will_be_recalc">Все предыдущие сегменты будут пересчитаны с использованием выбранного профиля.</string>
     <string name="open_saved_track">Открыть сохранённый трек</string>
-    <string name="disable_recording_once_app_killed_descrp">Остановка записи GPX при принудительном закрытии (через последние приложения). (Из панели уведомлений Android исчезнет значок фонового режима.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Приостановка записи трека при принудительном закрытии приложения (через список недавних приложений). (Из панели уведомлений Android исчезнет значок фонового режима.)</string>
     <string name="shared_string_is_saved">сохранён</string>
     <string name="one_point_error">Добавьте хотя бы две точки.</string>
     <string name="shared_string_redo">Повторить</string>
@@ -4518,4 +4518,5 @@
     <string name="rendering_attr_seabedDetail_name">Детали морского дна</string>
     <string name="rendering_value_all_name">Все</string>
     <string name="rendering_value_omit_name">Пропустить</string>
+    <string name="save_track_to_gpx_descrp">Запускать запись трека во время навигации. По завершению трек будет сохранен автоматически.</string>
 </resources>

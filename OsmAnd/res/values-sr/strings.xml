@@ -3432,8 +3432,8 @@
     <string name="replace_all">Замени све</string>
     <string name="keep_both">Задржи обе</string>
     <string name="keep_both_desc">Увежене ставке ће бити додате уз префикс</string>
-    <string name="import_duplicates_description">OsmAnd већ има елементе са истим именом као они који се увозе.
-\n
+    <string name="import_duplicates_description">OsmAnd већ има елементе са истим именом као они који се увозе. 
+\n 
 \nОдаберите радњу.</string>
     <string name="import_duplicates_title">Неке ставке већ постоје</string>
     <string name="select_data_to_import">Одаберите податке за увожење.</string>
@@ -4508,4 +4508,5 @@
     <string name="rendering_value_all_name">Све</string>
     <string name="rendering_value_omit_name">Изоставити</string>
     <string name="rendering_attr_seabedDetail_name">Детаљ морског дна</string>
+    <string name="save_track_to_gpx_descrp">Аутоматски започните снимање путање док је навигација у току. Када се заврши, путања ће бити аутоматски сачувана.</string>
 </resources>
