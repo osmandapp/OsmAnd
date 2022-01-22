@@ -1623,12 +1623,12 @@
     <string name="poi_resource_peat">Turba</string>
     <string name="poi_resource_rutile">Rutilo</string>
     <string name="poi_wetland_wet_meadow">Prado húmedo</string>
-    <string name="poi_wetland_swamp">Ciénaga</string>
-    <string name="poi_wetland_bog">Pantano</string>
-    <string name="poi_wetland_marsh">Marisma</string>
-    <string name="poi_wetland_reedbed">Cañaveral</string>
-    <string name="poi_wetland_tidalflat">Humedal costero</string>
-    <string name="poi_wetland_saltmarsh">Marisma de sal</string>
+    <string name="poi_wetland_swamp">Ciénaga;Marisma</string>
+    <string name="poi_wetland_bog">Pantano;Turbera arbustiva</string>
+    <string name="poi_wetland_marsh">Marisma;Ciénaga</string>
+    <string name="poi_wetland_reedbed">Cañaveral;Juncal</string>
+    <string name="poi_wetland_tidalflat">Humedal costero;Llanura de marea</string>
+    <string name="poi_wetland_saltmarsh">Saladar;Marisma salina;Salina costera</string>
     <string name="poi_wetland_mangrove">Manglar</string>
     <string name="poi_wetland_mud">Lodazal</string>
     <string name="poi_beach_sand">Arena</string>
@@ -1654,7 +1654,7 @@
     <string name="poi_shelter_type_abandoned">Tipo de refugio: abandonado</string>
     <string name="poi_shelter_type_tent">Tipo de refugio: carpa</string>
     <string name="poi_internet_access_type_wlan">Inalámbrico (Wi-Fi)</string>
-    <string name="poi_wetland_fen">Humedal subterráneo</string>
+    <string name="poi_wetland_fen">Humedal subterráneo;Turbera gramínea</string>
     <string name="poi_shelter_type_field_shelter">Refugio rural</string>
     <string name="poi_internet_access_type_terminal">Terminal (PC con Internet)</string>
     <string name="poi_internet_access_type_wired">Cableado</string>
@@ -1852,7 +1852,7 @@
     <string name="poi_fuel_wood">Combustible: madera</string>
     <string name="poi_fuel_charcoal">Combustible: carbón vegetal</string>
     <string name="poi_fuel_coal">Combustible: carbón</string>
-    <string name="poi_wetland_string_bog">Cadena de humedales</string>
+    <string name="poi_wetland_string_bog">Turbera de Aapa;Turbera minerotrófica estructurada;Cadena de humedales;Turberas encadenadas</string>
     <string name="poi_street_lamp">Farola</string>
     <string name="poi_escape_lane">Camino de emergencia</string>
     <string name="poi_crop_rice">Cultivo: arroz</string>
@@ -3862,7 +3862,7 @@
     <string name="poi_health_specialty_vaccination_yes">Vacunación</string>
     <string name="poi_lavoir">Lavadero público de ropa</string>
     <string name="poi_waste_transfer_station">Estación de transferencia de residuos</string>
-    <string name="poi_weightbridge">Báscula puente</string>
+    <string name="poi_weightbridge">Báscula puente;Báscula de camiones;Balanza</string>
     <string name="poi_ranger_station">Estación de guardabosques</string>
     <string name="poi_water_source_lake">Lago</string>
     <string name="poi_water_source_river">Río</string>
@@ -4270,12 +4270,16 @@
     <string name="poi_hot_water_yes">Agua caliente: sí</string>
     <string name="poi_hot_water_no">Agua caliente: no</string>
     <string name="poi_post_office_bureau">Oficina</string>
-    <string name="poi_post_office_post_annex">Puesto anexo</string>
-    <string name="poi_post_office_post_partner">Socio de publicación</string>
+    <string name="poi_post_office_post_annex">Anexo postal</string>
+    <string name="poi_post_office_post_partner">Puesto asociado</string>
     <string name="poi_post_office_service_provider">Proveedor de servicios de la oficina postal</string>
     <string name="poi_post_office_service_brand">Marca de la oficina postal</string>
     <string name="poi_post_office_collection_times">Horarios de recolección en la oficina de correos</string>
     <string name="poi_post_office_opening_hours">Horarios de apertura de la oficina de correos</string>
     <string name="poi_museum_type">Tema del museo</string>
     <string name="poi_post_office_type">Tipo de oficina postal</string>
+    <string name="poi_blowhole">Espiráculo</string>
+    <string name="poi_books_adults">Adultos</string>
+    <string name="poi_collector">Coleccionista</string>
+    <string name="poi_skate">Venta de patinetas</string>
 </resources>
