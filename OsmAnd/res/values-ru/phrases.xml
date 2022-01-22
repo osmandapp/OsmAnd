@@ -4220,4 +4220,19 @@
     <string name="poi_callable">Можно дозвониться</string>
     <string name="poi_faculty_filter">Факультет</string>
     <string name="poi_access_general">Общедоступно</string>
+    <string name="poi_operator_type_private">Тип оператора: частный</string>
+    <string name="poi_operator_type_government">Тип оператора: государственный</string>
+    <string name="poi_operator_type_community">Тип оператора: сообщество</string>
+    <string name="poi_operator_type_consortium">Тип оператора: консорциум</string>
+    <string name="poi_operator_type_cooperative">Тип оператора: кооператив</string>
+    <string name="poi_operator_type_ngo">Тип оператора: неправительственная организация (НПО)</string>
+    <string name="poi_operator_type_religious">Тип оператора: религиозный</string>
+    <string name="poi_zero_waste_yes">Ноль отходов: да</string>
+    <string name="poi_zero_waste_no">Ноль отходов: нет</string>
+    <string name="poi_zero_waste_only">Ноль отходов: исключительно</string>
+    <string name="poi_medical_supply_orthopedic">Ортопедия</string>
+    <string name="poi_medical_supply_orthotics">Ортезы</string>
+    <string name="poi_medical_supply_mobility">Мобильность</string>
+    <string name="poi_operator_type_public">Тип оператора: общественный</string>
+    <string name="poi_wine_region">Винодельческий регион</string>
 </resources>
