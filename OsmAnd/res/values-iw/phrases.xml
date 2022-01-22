@@ -2326,4 +2326,9 @@
     <string name="poi_information_nature">טבע</string>
     <string name="poi_tactile_paving_incorrect">שגוי</string>
     <string name="poi_tactile_paving_primitive">פרימיטיבי</string>
+    <string name="poi_blowhole">חור לוויתן</string>
+    <string name="poi_post_office_opening_hours">שעות פתיחת סניף הדואר</string>
+    <string name="poi_skate">חנות סקייטבורד</string>
+    <string name="poi_books_adults">מבוגרים</string>
+    <string name="poi_collector">אספנות</string>
 </resources>
