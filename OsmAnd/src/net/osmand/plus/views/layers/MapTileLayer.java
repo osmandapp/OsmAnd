@@ -39,8 +39,6 @@ import net.osmand.plus.views.layers.base.BaseMapLayer;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
-import org.apache.commons.logging.Log;
-
 public class MapTileLayer extends BaseMapLayer {
 
 	public static final int OVERZOOM_IN = 2;
