@@ -14,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 
 import net.osmand.data.LatLon;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.GeocodingLookupService.OnAddressLookupResult;
 import net.osmand.plus.R;
@@ -23,6 +22,7 @@ import net.osmand.plus.mapcontextmenu.editors.EditCategoryDialogFragment;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.SelectCategoryDialogFragment;
 import net.osmand.plus.mapcontextmenu.editors.SelectFavoriteCategoryBottomSheet;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
@@ -32,7 +32,7 @@ public class FavoriteAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(3,
 			"fav.add", FavoriteAction.class).
-			nameRes(R.string.quick_action_add_favorite).iconRes(R.drawable.ic_action_favorite).
+			nameRes(R.string.quick_action_add_favorite).iconRes(R.drawable.ic_action_favorite).nonEditable().
 			category(QuickActionType.CREATE_CATEGORY);
 	public static final String KEY_NAME = "name";
 	public static final String KEY_DIALOG = "dialog";

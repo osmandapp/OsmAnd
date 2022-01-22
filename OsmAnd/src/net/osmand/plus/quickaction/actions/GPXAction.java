@@ -11,7 +11,6 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -63,6 +62,7 @@ public class GPXAction extends QuickAction {
 	public static final QuickActionType TYPE = new QuickActionType(6, "gpx.add", GPXAction.class)
 			.nameRes(R.string.quick_action_add_gpx)
 			.iconRes(R.drawable.ic_action_gnew_label_dark)
+			.nonEditable()
 			.category(QuickActionType.CREATE_CATEGORY);
 
 	public static final String KEY_USE_SELECTED_GPX_FILE = "use_selected_gpx_file";
