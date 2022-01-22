@@ -4509,4 +4509,6 @@
     <string name="rendering_value_omit_name">Изоставити</string>
     <string name="rendering_attr_seabedDetail_name">Детаљ морског дна</string>
     <string name="save_track_to_gpx_descrp">Аутоматски започните снимање путање док је навигација у току. Када се заврши, путања ће бити аутоматски сачувана.</string>
+    <string name="gpx_no_routes_title">Нема рута</string>
+    <string name="gpx_no_routes_descr">Можете користити алатку \"%1$s\" да додате руту у датотеку.</string>
 </resources>
