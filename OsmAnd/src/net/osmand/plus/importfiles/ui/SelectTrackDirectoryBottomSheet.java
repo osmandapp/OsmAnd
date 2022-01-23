@@ -107,7 +107,6 @@ public class SelectTrackDirectoryBottomSheet extends MenuBottomSheetDialogFragme
 
 		View view = inflater.inflate(R.layout.favorite_categories_dialog, null);
 		LinearLayout container = view.findViewById(R.id.list_container);
-		AndroidUtils.setPadding(view.findViewById(R.id.scroll_container), 0, 0, 0, 0);
 
 		for (File dir : folders) {
 			container.addView(createFolderView(inflater, dir));

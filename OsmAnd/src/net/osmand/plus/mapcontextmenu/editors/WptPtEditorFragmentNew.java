@@ -37,7 +37,6 @@ import java.util.Set;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -75,22 +74,6 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 			selectedGpxHelper = app.getSelectedGpxHelper();
 			assignEditor();
 			defaultColor = getResources().getColor(R.color.gpx_color_point);
-		}
-	}
-
-	@Override
-	protected DialogFragment createSelectCategoryDialog() {
-		WptPtEditor editor = getWptPtEditor();
-		if (editor != null) {
-			SelectPointsCategoryBottomSheet selectCategoryDialogFragment = SelectPointsCategoryBottomSheet.createInstance(editor.getFragmentTag(), getSelectedCategory());
-			GPXFile gpx = editor.getGpxFile();
-			if (gpx != null) {
-				selectCategoryDialogFragment.setGpxFile(gpx);
-				selectCategoryDialogFragment.setGpxCategories(categoriesMap);
-			}
-			return selectCategoryDialogFragment;
-		} else {
-			return null;
 		}
 	}
 
@@ -431,6 +414,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 		return wpt != null ? wpt.name : "";
 	}
 
+	@NonNull
 	@Override
 	public String getCategoryInitValue() {
 		return wpt == null || Algorithms.isEmpty(wpt.category) ? "" : wpt.category;
@@ -553,5 +537,14 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 				}
 			}
 		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	@Override
+	protected void showSelectCategoryDialog() {
+		FragmentManager fragmentManager = getFragmentManager();
+		if (fragmentManager != null) {
+			SelectPointsCategoryBottomSheet.showSelectWaypointCategoryFragment(fragmentManager,
+					getSelectedCategory(), categoriesMap);
+		}
 	}
 }

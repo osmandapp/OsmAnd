@@ -104,13 +104,7 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 		addToHiddenGroupInfo = view.findViewById(R.id.add_hidden_group_info);
 		addToHiddenGroupInfo.setText(getString(R.string.add_hidden_group_info, getString(R.string.shared_string_my_places)));
 		View groupList = view.findViewById(R.id.group_list_button);
-		groupList.setOnClickListener(v -> {
-			FragmentManager fragmentManager = getFragmentManager();
-			DialogFragment dialogFragment = createSelectCategoryDialog();
-			if (fragmentManager != null && dialogFragment != null) {
-				dialogFragment.show(fragmentManager, SelectPointsCategoryBottomSheet.TAG);
-			}
-		});
+		groupList.setOnClickListener(v -> showSelectCategoryDialog());
 
 		TextInputLayout nameCaption = view.findViewById(R.id.name_caption);
 		nameCaption.setHint(getString(R.string.shared_string_name));
@@ -333,16 +327,7 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 		}
 	}
 
-	@Nullable
-	protected DialogFragment createSelectCategoryDialog() {
-		PointEditor editor = getEditor();
-		if (editor != null) {
-			return SelectPointsCategoryBottomSheet.createInstance(editor.getFragmentTag(), getSelectedCategory());
-		} else {
-			return null;
-		}
-	}
-
+	@NonNull
 	public String getSelectedCategory() {
 		if (groupListAdapter != null && groupListAdapter.getSelectedItem() != null) {
 			return groupListAdapter.getSelectedItem();
@@ -441,6 +426,7 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 
 	protected abstract int getCategoryPointsCount(String category);
 
+	@NonNull
 	protected abstract String getCategoryInitValue();
 
 	protected abstract String getAddressInitValue();
@@ -448,6 +434,8 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 	protected abstract String getDescriptionInitValue();
 
 	protected abstract Drawable getNameIcon();
+
+	protected abstract void showSelectCategoryDialog();
 
 	protected boolean isCategoryVisible(String name) {
 		return true;

@@ -17,6 +17,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet;
+import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
 import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
@@ -24,6 +25,7 @@ import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.FragmentManager;
 
 public class FavoriteAction extends QuickAction {
 
@@ -170,11 +172,10 @@ public class FavoriteAction extends QuickAction {
 			getParams().put(KEY_CATEGORY_COLOR, "0");
 		}
 
-		categoryEdit.setOnClickListener(v -> {
-			SelectPointsCategoryBottomSheet dialogFragment =
-					SelectPointsCategoryBottomSheet.createInstance(FavoritePointEditor.TAG, "");
-			dialogFragment.setSelectionListener((category, color) -> fillGroupParams(root, category, color));
-			dialogFragment.show(mapActivity.getSupportFragmentManager(), SelectPointsCategoryBottomSheet.TAG);
+		categoryEdit.setOnClickListener(view -> {
+			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+			CategorySelectionListener listener = (category, color) -> fillGroupParams(root, category, color);
+			SelectPointsCategoryBottomSheet.showSelectFavoriteCategoryFragment(fragmentManager, listener, "");
 		});
 
 		SelectPointsCategoryBottomSheet dialogFragment = (SelectPointsCategoryBottomSheet)
