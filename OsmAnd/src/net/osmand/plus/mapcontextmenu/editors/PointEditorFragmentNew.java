@@ -108,7 +108,7 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 			FragmentManager fragmentManager = getFragmentManager();
 			DialogFragment dialogFragment = createSelectCategoryDialog();
 			if (fragmentManager != null && dialogFragment != null) {
-				dialogFragment.show(fragmentManager, SelectFavoriteCategoryBottomSheet.class.getSimpleName());
+				dialogFragment.show(fragmentManager, SelectPointsCategoryBottomSheet.TAG);
 			}
 		});
 
@@ -337,7 +337,7 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 	protected DialogFragment createSelectCategoryDialog() {
 		PointEditor editor = getEditor();
 		if (editor != null) {
-			return SelectFavoriteCategoryBottomSheet.createInstance(editor.getFragmentTag(), getSelectedCategory());
+			return SelectPointsCategoryBottomSheet.createInstance(editor.getFragmentTag(), getSelectedCategory());
 		} else {
 			return null;
 		}
@@ -531,7 +531,7 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 					FragmentManager fragmentManager = getFragmentManager();
 					DialogFragment dialogFragment = createAddCategoryDialog();
 					if (fragmentManager != null && dialogFragment != null) {
-						dialogFragment.show(fragmentManager, SelectFavoriteCategoryBottomSheet.class.getSimpleName());
+						dialogFragment.show(fragmentManager, AddNewFavoriteCategoryBottomSheet.TAG);
 					}
 				});
 			} else {
