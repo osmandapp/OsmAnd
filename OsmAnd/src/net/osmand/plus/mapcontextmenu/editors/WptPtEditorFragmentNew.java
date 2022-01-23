@@ -82,7 +82,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	protected DialogFragment createSelectCategoryDialog() {
 		WptPtEditor editor = getWptPtEditor();
 		if (editor != null) {
-			SelectFavoriteCategoryBottomSheet selectCategoryDialogFragment = SelectFavoriteCategoryBottomSheet.createInstance(editor.getFragmentTag(), getSelectedCategory());
+			SelectPointsCategoryBottomSheet selectCategoryDialogFragment = SelectPointsCategoryBottomSheet.createInstance(editor.getFragmentTag(), getSelectedCategory());
 			GPXFile gpx = editor.getGpxFile();
 			if (gpx != null) {
 				selectCategoryDialogFragment.setGpxFile(gpx);

@@ -6,13 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.material.textfield.TextInputLayout;
-
 import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapcontextmenu.editors.SelectFavoriteCategoryBottomSheet.CategorySelectionListener;
+import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
 import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.render.RenderingIcons;

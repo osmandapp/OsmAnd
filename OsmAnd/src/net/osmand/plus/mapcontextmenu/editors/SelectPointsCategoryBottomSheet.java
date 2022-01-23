@@ -40,9 +40,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFragment {
+public class SelectPointsCategoryBottomSheet extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = SelectFavoriteCategoryBottomSheet.class.getSimpleName();
+	public static final String TAG = SelectPointsCategoryBottomSheet.class.getSimpleName();
 	private static final String SELECT_CATEGORY_EDITOR_TAG = "select_category_editor_tag";
 	private static final String SELECT_CURRENT_CATEGORY_EDITOR_TAG = "select_current_category_editor_tag";
 	private static String editorTag;
@@ -50,7 +50,7 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 	private OsmandApplication app;
 	private GPXUtilities.GPXFile gpxFile;
 	private Map<String, Integer> gpxCategories;
-	private SelectFavoriteCategoryBottomSheet.CategorySelectionListener selectionListener;
+	private SelectPointsCategoryBottomSheet.CategorySelectionListener selectionListener;
 
 
 	private static Drawable getIcon(final Activity activity, int resId, int color) {
@@ -63,8 +63,8 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 		return drawable;
 	}
 
-	public static SelectFavoriteCategoryBottomSheet createInstance(String editorTag, String selectedCategory) {
-		SelectFavoriteCategoryBottomSheet fragment = new SelectFavoriteCategoryBottomSheet();
+	public static SelectPointsCategoryBottomSheet createInstance(String editorTag, String selectedCategory) {
+		SelectPointsCategoryBottomSheet fragment = new SelectPointsCategoryBottomSheet();
 		Bundle bundle = new Bundle();
 		bundle.putString(SELECT_CATEGORY_EDITOR_TAG, editorTag);
 		bundle.putString(SELECT_CURRENT_CATEGORY_EDITOR_TAG, selectedCategory);
@@ -73,7 +73,7 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 		return fragment;
 	}
 
-	public void setSelectionListener(SelectFavoriteCategoryBottomSheet.CategorySelectionListener selectionListener) {
+	public void setSelectionListener(SelectPointsCategoryBottomSheet.CategorySelectionListener selectionListener) {
 		this.selectionListener = selectionListener;
 	}
 

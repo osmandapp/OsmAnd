@@ -20,7 +20,7 @@ import net.osmand.plus.GeocodingLookupService.OnAddressLookupResult;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
-import net.osmand.plus.mapcontextmenu.editors.SelectFavoriteCategoryBottomSheet;
+import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
@@ -171,14 +171,14 @@ public class FavoriteAction extends QuickAction {
 		}
 
 		categoryEdit.setOnClickListener(view -> {
-			SelectFavoriteCategoryBottomSheet dialogFragment =
-					SelectFavoriteCategoryBottomSheet.createInstance("", "");
+			SelectPointsCategoryBottomSheet dialogFragment =
+					SelectPointsCategoryBottomSheet.createInstance("", "");
 			dialogFragment.setSelectionListener((category, color) -> fillGroupParams(root, category, color));
-			dialogFragment.show(mapActivity.getSupportFragmentManager(), SelectFavoriteCategoryBottomSheet.TAG);
+			dialogFragment.show(mapActivity.getSupportFragmentManager(), SelectPointsCategoryBottomSheet.TAG);
 		});
 
-		SelectFavoriteCategoryBottomSheet dialogFragment = (SelectFavoriteCategoryBottomSheet)
-				mapActivity.getSupportFragmentManager().findFragmentByTag(SelectFavoriteCategoryBottomSheet.TAG);
+		SelectPointsCategoryBottomSheet dialogFragment = (SelectPointsCategoryBottomSheet)
+				mapActivity.getSupportFragmentManager().findFragmentByTag(SelectPointsCategoryBottomSheet.TAG);
 		if (dialogFragment != null) {
 			dialogFragment.setSelectionListener((category, color) -> fillGroupParams(root, category, color));
 		}
