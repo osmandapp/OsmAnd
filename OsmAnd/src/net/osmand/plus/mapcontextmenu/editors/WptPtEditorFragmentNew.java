@@ -486,6 +486,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 		return iconId != 0 ? iconId : DEFAULT_UI_ICON_ID;
 	}
 
+	@NonNull
 	@Override
 	public Set<String> getCategories() {
 		return categoriesMap.keySet();

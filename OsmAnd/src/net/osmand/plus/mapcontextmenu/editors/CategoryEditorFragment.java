@@ -37,7 +37,6 @@ public class CategoryEditorFragment extends EditorFragment {
 
 	private static final String KEY_EDITOR_TAG = "key_editor_tag";
 	private static final String KEY_EXISTING_FAVORITE_CATEGORY_NAME = "key_existing_favorite_category_name";
-	private static final String KEY_IS_GPX_CATEGORY = "key_is_gpx_category";
 	private static final String KEY_GPX_CATEGORIES_LIST = "key_gpx_categories_list";
 	private static final String KEY_CATEGORY_NAME = "key_category_name";
 	private static final String KEY_CATEGORY_COLOR = "key_category_color";
@@ -49,7 +48,6 @@ public class CategoryEditorFragment extends EditorFragment {
 	private CategorySelectionListener selectionListener;
 
 	private FavoriteGroup favoriteCategory;
-	private boolean isGpxCategory;
 	private ArrayList<String> gpxCategories;
 
 	private String name;
@@ -81,8 +79,9 @@ public class CategoryEditorFragment extends EditorFragment {
 		if (bundle.containsKey(KEY_EXISTING_FAVORITE_CATEGORY_NAME)) {
 			favoriteCategory = favoritesHelper.getGroup(bundle.getString(KEY_EXISTING_FAVORITE_CATEGORY_NAME));
 		}
-		isGpxCategory = bundle.getBoolean(KEY_IS_GPX_CATEGORY, false);
-		gpxCategories = bundle.getStringArrayList(KEY_GPX_CATEGORIES_LIST);
+		if (bundle.containsKey(KEY_GPX_CATEGORIES_LIST)) {
+			gpxCategories = bundle.getStringArrayList(KEY_GPX_CATEGORIES_LIST);
+		}
 	}
 
 	private void restoreCategoryParams(@NonNull Bundle bundle) {
@@ -179,7 +178,7 @@ public class CategoryEditorFragment extends EditorFragment {
 	}
 
 	private boolean isCategoryExists(@NonNull String name) {
-		return isGpxCategory ? isGpxCategoryExists(name) : favoritesHelper.groupExists(name);
+		return isGpxCategory() ? isGpxCategoryExists(name) : favoritesHelper.groupExists(name);
 	}
 
 	private boolean isGpxCategoryExists(@NonNull String name) {
@@ -204,7 +203,6 @@ public class CategoryEditorFragment extends EditorFragment {
 		if (favoriteCategory != null) {
 			bundle.putString(KEY_EXISTING_FAVORITE_CATEGORY_NAME, favoriteCategory.getName());
 		}
-		bundle.putBoolean(KEY_IS_GPX_CATEGORY, isGpxCategory);
 		if (gpxCategories != null) {
 			bundle.putStringArrayList(KEY_GPX_CATEGORIES_LIST, gpxCategories);
 		}
@@ -249,7 +247,7 @@ public class CategoryEditorFragment extends EditorFragment {
 		if (mapActivity != null) {
 			String iconName = iconsCard.getSelectedIconName();
 
-			if (!isGpxCategory) {
+			if (!isGpxCategory()) {
 				favoritesHelper.addEmptyCategory(getNameTextValue(), color, iconName, shape, true);
 			}
 			PointEditor editor = getEditor();
@@ -324,19 +322,28 @@ public class CategoryEditorFragment extends EditorFragment {
 		return mapActivity != null ? mapActivity.getContextMenu().getPointEditor(editorTag) : null;
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager,
-	                                @Nullable CategorySelectionListener categorySelectionListener,
-	                                @NonNull String editorTag,
-	                                @Nullable String favouriteGroupName,
-	                                boolean isGpxCategory,
-	                                @Nullable Set<String> gpxCategories) {
+	private boolean isGpxCategory() {
+		return WptPtEditor.TAG.equals(editorTag);
+	}
+
+	public static boolean showAddCategoryDialog(@NonNull FragmentManager fragmentManager,
+	                                            @Nullable CategorySelectionListener selectionListener,
+	                                            @NonNull String editorTag,
+	                                            @Nullable Set<String> gpxCategories) {
+		return showInstance(fragmentManager, selectionListener, editorTag, null, gpxCategories);
+	}
+
+	private static boolean showInstance(@NonNull FragmentManager fragmentManager,
+	                                    @Nullable CategorySelectionListener categorySelectionListener,
+	                                    @NonNull String editorTag,
+	                                    @Nullable String favouriteGroupName,
+	                                    @Nullable Set<String> gpxCategories) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			CategoryEditorFragment fragment = new CategoryEditorFragment();
 
 			Bundle args = new Bundle();
 			args.putString(KEY_EDITOR_TAG, editorTag);
 			args.putString(KEY_EXISTING_FAVORITE_CATEGORY_NAME, favouriteGroupName);
-			args.putBoolean(KEY_IS_GPX_CATEGORY, isGpxCategory);
 			if (gpxCategories != null) {
 				args.putStringArrayList(KEY_GPX_CATEGORIES_LIST, new ArrayList<>(gpxCategories));
 			}
@@ -349,6 +356,9 @@ public class CategoryEditorFragment extends EditorFragment {
 					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(null)
 					.commitAllowingStateLoss();
+
+			return true;
 		}
+		return false;
 	}
 }

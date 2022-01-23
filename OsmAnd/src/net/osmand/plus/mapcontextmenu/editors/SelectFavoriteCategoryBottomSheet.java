@@ -17,6 +17,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities;
@@ -33,7 +34,6 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.myplaces.AddNewTrackFolderBottomSheet;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -117,19 +117,7 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 				.setTitleColorId(ColorUtilities.getActiveColorId(nightMode))
 				.setIcon(getActiveIcon(R.drawable.ic_action_folder_add))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_64dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						MapActivity mapActivity = (MapActivity) getActivity();
-						Set<String> categories = gpxCategories != null ? gpxCategories.keySet() : null;
-						AddNewFavoriteCategoryBottomSheet fragment = AddNewFavoriteCategoryBottomSheet.createInstance(editorTag, categories, gpxFile != null);
-						if (mapActivity != null) {
-							fragment.show(mapActivity.getSupportFragmentManager(), AddNewTrackFolderBottomSheet.class.getName());
-						}
-						fragment.setSelectionListener(selectionListener);
-						dismiss();
-					}
-				})
+				.setOnClickListener(v -> showAddCategoryDialog())
 				.setCustomView(addNewCategoryView)
 				.create();
 		items.add(addNewFolderItem);
@@ -173,6 +161,22 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(favoriteCategoryList)
 				.create());
+	}
+
+	private void showAddCategoryDialog() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			FragmentManager fragmentManager = activity.getSupportFragmentManager();
+			boolean isWaypointCategory = WptPtEditor.TAG.equals(editorTag);
+			Set<String> gpxCategories = isWaypointCategory && this.gpxCategories != null
+					? this.gpxCategories.keySet()
+					: null;
+			boolean shown = CategoryEditorFragment.showAddCategoryDialog(fragmentManager, selectionListener,
+					editorTag, gpxCategories);
+			if (shown) {
+				dismiss();
+			}
+		}
 	}
 
 	private View createCategoryItem(@NonNull final Activity activity, boolean nightMode, final String categoryName, final int categoryColor, String categoryPointCount, boolean isHidden) {

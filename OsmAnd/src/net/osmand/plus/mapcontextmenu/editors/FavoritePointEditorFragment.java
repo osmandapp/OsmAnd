@@ -459,6 +459,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		return iconId;
 	}
 
+	@NonNull
 	@Override
 	public Set<String> getCategories() {
 		Set<String> categories = new LinkedHashSet<>();
