@@ -19,7 +19,6 @@ import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.util.Algorithms;
@@ -210,6 +209,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		this.iconId = iconId;
 	}
 
+	@NonNull
 	@Override
 	protected String getDefaultCategoryName() {
 		return getString(R.string.shared_string_favorites);
@@ -397,10 +397,13 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		return favorite != null ? favorite.getName() : "";
 	}
 
+	@NonNull
 	@Override
 	public String getCategoryInitValue() {
 		FavouritePoint favorite = getFavorite();
-		return favorite == null || favorite.getCategory().length() == 0 ? getDefaultCategoryName() : favorite.getCategoryDisplayName(requireContext());
+		return favorite == null || favorite.getCategory().length() == 0
+				? getDefaultCategoryName()
+				: favorite.getCategoryDisplayName(requireContext());
 	}
 
 	@Override
@@ -518,5 +521,14 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 			}
 		}
 		return defaultColor;
+	}
+
+	@Override
+	protected void showSelectCategoryDialog() {
+		FragmentManager fragmentManager = getFragmentManager();
+		if (fragmentManager != null) {
+			SelectPointsCategoryBottomSheet.showSelectFavoriteCategoryFragment(fragmentManager, null,
+					getSelectedCategory());
+		}
 	}
 }
