@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -114,16 +115,10 @@ public class OverviewCard extends MapBaseCard {
 		TextView regionText = view.findViewById(R.id.region);
 		LinearLayout regionContainer = view.findViewById(R.id.region_container);
 		LatLon start = null;
-		GPXFile gpxFile = selectedGpxFile.getGpxFile();
-		boolean withSegments = !gpxFile.tracks.isEmpty() && !gpxFile.tracks.get(0).segments.isEmpty();
-		boolean withWpt = gpxFile.tracks.isEmpty() && !gpxFile.getPoints().isEmpty();
-		if (withSegments) {
-			double lat = gpxFile.tracks.get(0).segments.get(0).points.get(0).getLatitude();
-			double lon = gpxFile.tracks.get(0).segments.get(0).points.get(0).getLongitude();
-			start = new LatLon(lat, lon);
-		} else if (withWpt) {
-			double lat = gpxFile.getPoints().get(0).getLatitude();
-			double lon = gpxFile.getPoints().get(0).getLongitude();
+		WptPt point = selectedGpxFile.getGpxFile().findPointToShow();
+		if (point != null) {
+			double lat = point.getLatitude();
+			double lon = point.getLongitude();
 			start = new LatLon(lat, lon);
 		}
 		if (start != null) {
@@ -131,10 +126,10 @@ public class OverviewCard extends MapBaseCard {
 				if (worldRegion != null) {
 					String regionName = worldRegion.getLocaleName();
 					regionText.setText(regionName);
+					AndroidUiHelper.updateVisibility(regionContainer, true);
 				}
 				return true;
 			});
-			AndroidUiHelper.updateVisibility(regionContainer, true);
 		}
 	}
 
