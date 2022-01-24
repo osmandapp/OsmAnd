@@ -315,6 +315,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				}
 				mapView.setMapPosition(positionType);
 			}
+			if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE && mapView.getRotate() != 0) {
+				mapView.resetManualRotation();
+			}
 		}
 		registerUnregisterSensor(app.getLocationProvider().getLastKnownLocation(), false);
 	}
