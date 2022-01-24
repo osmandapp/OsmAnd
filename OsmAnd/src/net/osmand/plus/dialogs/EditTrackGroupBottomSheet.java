@@ -28,7 +28,6 @@ public abstract class EditTrackGroupBottomSheet extends MenuBottomSheetDialogFra
 	protected TextInputLayout nameTextBox;
 	protected TextInputEditText editText;
 	protected String groupName;
-	protected OnGroupNameChangeListener listener;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {

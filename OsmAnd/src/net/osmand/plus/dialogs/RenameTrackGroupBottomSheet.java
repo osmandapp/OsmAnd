@@ -14,7 +14,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
-import net.osmand.plus.myplaces.EditTrackGroupDialogFragment;
 import net.osmand.plus.myplaces.UpdateGpxCategoryTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.utils.AndroidUtils;
@@ -53,7 +52,12 @@ public class RenameTrackGroupBottomSheet extends EditTrackGroupBottomSheet {
 			new UpdateGpxCategoryTask(activity, group, groupName)
 					.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
-		listener.onTrackGroupChanged();
+		Fragment fragment = getTargetFragment();
+		if (fragment instanceof OnGroupNameChangeListener) {
+			OnGroupNameChangeListener listener = (OnGroupNameChangeListener) fragment;
+			listener.onTrackGroupChanged();
+			dismiss();
+		}
 		dismiss();
 	}
 
@@ -70,9 +74,6 @@ public class RenameTrackGroupBottomSheet extends EditTrackGroupBottomSheet {
 			fragment.group = group;
 			fragment.setRetainInstance(true);
 			fragment.setTargetFragment(target, 0);
-			if (target instanceof EditTrackGroupDialogFragment) {
-				fragment.listener = (OnGroupNameChangeListener) target;
-			}
 			fragment.show(fragmentManager, RenameTrackGroupBottomSheet.TAG);
 		}
 	}
