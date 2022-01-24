@@ -1148,14 +1148,17 @@ public class GpxUiHelper {
 		chartLabel.setChart(mChart);
 		mChart.setYAxisLabelView(chartLabel);
 
+		int xAxisRulerColor = ContextCompat.getColor(context, R.color.gpx_chart_black_grid);
 		int labelsColor = ContextCompat.getColor(context, R.color.description_font_and_bottom_sheet_icons);
 		XAxis xAxis = mChart.getXAxis();
 		xAxis.setDrawAxisLine(true);
+		xAxis.setDrawAxisLineBehindData(false);
 		xAxis.setAxisLineWidth(1);
-		xAxis.setAxisLineColor(ContextCompat.getColor(context, R.color.gpx_chart_black_grid));
+		xAxis.setAxisLineColor(xAxisRulerColor);
 		xAxis.setDrawGridLines(true);
+		xAxis.setDrawGridLinesBehindData(false);
 		xAxis.setGridLineWidth(1.5f);
-		xAxis.setGridColor(ContextCompat.getColor(context, R.color.gpx_chart_black_grid));
+		xAxis.setGridColor(xAxisRulerColor);
 		xAxis.enableGridDashedLine(25f, Float.MAX_VALUE, 0f);
 		xAxis.setPosition(BOTTOM);
 		xAxis.setTextColor(labelsColor);
