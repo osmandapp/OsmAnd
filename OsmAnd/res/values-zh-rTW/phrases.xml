@@ -4278,4 +4278,8 @@
     <string name="poi_post_office_collection_times">郵局取件時間</string>
     <string name="poi_post_office_opening_hours">郵局營業時間</string>
     <string name="poi_museum_type">博物館主題</string>
+    <string name="poi_blowhole">吹蝕穴</string>
+    <string name="poi_skate">滑板店</string>
+    <string name="poi_books_adults">成年人</string>
+    <string name="poi_collector">收藏品</string>
 </resources>
