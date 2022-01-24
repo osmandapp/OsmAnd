@@ -196,6 +196,7 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 		folderSelector.setSelected(selected);
 		folderSelector.setOnSelectChipListener(chip -> {
 			selectedFolder = chip.id;
+			folderSelector.smoothScrollTo(chip);
 			updateFileList();
 			return true;
 		});

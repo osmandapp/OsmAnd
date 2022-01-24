@@ -129,6 +129,7 @@ public class TracksToFollowCard extends MapBaseCard {
 		chipsView.setSelected(selected);
 
 		chipsView.setOnSelectChipListener(chip -> {
+			chipsView.smoothScrollTo(chip);
 			selectedCategory = chip.title;
 			tracksAdapter.setShowFolderName(showFoldersName());
 			updateTracksAdapter();

@@ -9,6 +9,8 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:paddingTop="@dimen/measurement_tool_menu_title_padding_top"
+		android:paddingBottom="@dimen/content_padding_half"
 		android:orientation="horizontal">
 
 		<LinearLayout
@@ -23,7 +25,6 @@
 				android:layout_height="wrap_content"
 				android:paddingStart="@dimen/content_padding"
 				android:paddingLeft="@dimen/content_padding"
-				android:paddingTop="@dimen/measurement_tool_menu_title_padding_top"
 				android:paddingEnd="@dimen/content_padding"
 				android:paddingRight="@dimen/content_padding"
 				android:paddingBottom="@dimen/measurement_tool_menu_title_padding_bottom"
@@ -39,7 +40,6 @@
 				android:paddingLeft="@dimen/content_padding"
 				android:paddingEnd="@dimen/content_padding"
 				android:paddingRight="@dimen/content_padding"
-				android:paddingBottom="@dimen/content_padding"
 				android:text="@string/plan_route_select_track_file_for_open"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_desc_text_size"
@@ -66,6 +66,7 @@
 		android:layout_height="wrap_content"
 		android:clipToPadding="false"
 		android:paddingHorizontal="@dimen/content_padding"
+		android:paddingVertical="@dimen/content_padding_half"
 		tools:itemCount="3"
 		tools:listitem="@layout/custom_chip_view" />
 

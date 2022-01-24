@@ -659,6 +659,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 			createIconList();
 			updateIconSelector(selectedIcon, PointEditorFragmentNew.this.view);
 			categorySelector.notifyDataSetChanged();
+			categorySelector.smoothScrollTo(chip);
 			return true;
 		});
 

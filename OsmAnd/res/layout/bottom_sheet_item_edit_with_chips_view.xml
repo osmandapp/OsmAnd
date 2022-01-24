@@ -118,4 +118,5 @@
 		android:paddingHorizontal="@dimen/content_padding"
 		tools:itemCount="3"
 		tools:listitem="@layout/custom_chip_view" />
+
 </LinearLayout>
