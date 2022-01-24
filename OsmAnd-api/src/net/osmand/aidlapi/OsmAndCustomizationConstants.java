@@ -150,6 +150,7 @@ public interface OsmAndCustomizationConstants {
 
 	//Navigation Options:
 	String NAVIGATION_OPTIONS_ID = "navigation.options.";
+	String NAVIGATION_OPTIONS_MENU_ID = NAVIGATION_OPTIONS_ID + "options_menu";
 	String NAVIGATION_SOUND_ID = NAVIGATION_OPTIONS_ID + "mute_sound";
 	String NAVIGATION_ROUTE_SIMULATION_ID = NAVIGATION_OPTIONS_ID + "route_simulation";
 	String NAVIGATION_TIME_CONDITIONAL_ID = NAVIGATION_OPTIONS_ID + "time_conditional";
@@ -170,4 +171,9 @@ public interface OsmAndCustomizationConstants {
 	String FRAGMENT_ID = "fragment.";
 	String FRAGMENT_RATE_US_ID = FRAGMENT_ID + "rate_us";
 	String FRAGMENT_CRASH_ID = FRAGMENT_ID + "crash";
+
+	//Map Context Menu rows:
+	String MAP_CONTEXT_MENU_ROWS = "context.menu.rows.";
+	String CONTEXT_MENU_LINKS_ID = MAP_CONTEXT_MENU_ROWS + "links";
+	String CONTEXT_MENU_PHONE_ID = MAP_CONTEXT_MENU_ROWS + "phone";
 }
