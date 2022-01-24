@@ -1178,7 +1178,9 @@ public class GpxUiHelper {
 
 		int labelsColor = ContextCompat.getColor(context, R.color.description_font_and_bottom_sheet_icons);
 		XAxis xAxis = mChart.getXAxis();
-		xAxis.setDrawAxisLine(false);
+		xAxis.setDrawAxisLine(true);
+		xAxis.setAxisLineWidth(1);
+		xAxis.setAxisLineColor(ContextCompat.getColor(context, R.color.gpx_chart_black_grid));
 		xAxis.setDrawGridLines(true);
 		xAxis.setGridLineWidth(1.5f);
 		xAxis.setGridColor(ContextCompat.getColor(context, R.color.gpx_chart_black_grid));
