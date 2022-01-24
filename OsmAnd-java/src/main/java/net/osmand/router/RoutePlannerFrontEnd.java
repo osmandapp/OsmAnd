@@ -337,7 +337,7 @@ public class RoutePlannerFrontEnd {
 			while (st != end) {
 				LatLon point = r.getPoint(st);
 				boolean pointIsClosed = false;
-				for (int k = Math.max(start.ind, 0); !pointIsClosed && k < next.ind; k++) {
+				for (int k = start.ind; !pointIsClosed && k < next.ind; k++) {
 					pointIsClosed = pointCloseEnough(gctx, point, gpxPoints.get(k), gpxPoints.get(k + 1));
 				}
 				if (!pointIsClosed) {
