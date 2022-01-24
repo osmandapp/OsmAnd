@@ -519,6 +519,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	public void hideDashboard() {
 		setDashboardVisibility(false, visibleType);
+		OsmandMapTileView mapView = getMyApplication().getOsmandMap().getMapView();
+		OsmandSettings settings = getMyApplication().getSettings();
+		if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE && mapView.getRotate() != 0) {
+			mapView.resetManualRotation();
+		}
 	}
 
 	public void hideDashboard(boolean animation) {
@@ -1112,11 +1117,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		} else {
 			hideDashboard();
 			mapActivity.backToConfigureProfileFragment();
-			OsmandMapTileView mapView = getMyApplication().getOsmandMap().getMapView();
-			OsmandSettings settings = getMyApplication().getSettings();
-			if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE && mapView.getRotate() != 0) {
-				mapView.resetManualRotation();
-			}
 		}
 	}
 
