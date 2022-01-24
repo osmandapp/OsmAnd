@@ -4298,7 +4298,7 @@
     <string name="connect_track_points_as">Conectar pontos de rota</string>
     <string name="pro_features">Recursos Pro</string>
     <string name="purchases_restored">Compras restauradas</string>
-    <string name="grey_color_undefined">As partes sem dados ficam cinza.</string>
+    <string name="grey_color_undefined">As partes sem dados são mostradas em cinza.</string>
     <string name="osm_live_payment_subscription_management_amz">O pagamento é cobrado de sua conta Amazon ao confirmar a compra.
 \n
 \nEle renova a menos que seja cancelado antes do período de renovação selecionado.
@@ -4480,16 +4480,16 @@
     <string name="distance_between_points">Distância entre pontos</string>
     <string name="shared_string_size">Tamanho</string>
     <string name="created_on">Criado em</string>
-    <string name="use_routing_fallback_description">Use o roteamento offline quando o roteamento online não puder ser alcançado.</string>
-    <string name="use_routing_fallback">Use fallback de roteamento</string>
+    <string name="use_routing_fallback_description">Use o roteamento offline enquanto o roteamento online não estiver disponível.</string>
+    <string name="use_routing_fallback">Retorno de roteamento offline</string>
     <string name="waypoint_template">Modelo de ponto de trajeto</string>
     <string name="always_ask_waypoint_appearance_description">Gravar a ação abrirá a tela “Adicionar ponto de trajeto”, onde você pode alterar o nome e a aparência.</string>
     <string name="predefined_waypoint_appearance_description">Tocar na ação salvará automaticamente o ponto de trajeto com parâmetros predefinidos.</string>
     <string name="track_file">Arquivo de trilha</string>
     <string name="waypoint_appearance">Aparência do ponto de trajeto</string>
-    <string name="track_file_description">Gravar na ação mostrará um diálogo com todas as trilhas disponíveis para serem selecionadas.</string>
+    <string name="track_file_description">Tocar nesta ação mostrará um diálogo de seleção de trilhas disponíveis.</string>
     <string name="turn_arrows">Setas de volta</string>
-    <string name="turn_arrows_descr">Controle a visibilidade das setas de curva na linha de rota.</string>
+    <string name="turn_arrows_descr">Selecione se as setas de curva são indicadas na linha de rota.</string>
     <string name="navigate_point_format_swiss_grid">Rede Suíça (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">Rede Suíça (CH1903+)</string>
     <string name="shared_string_used">Usado</string>
@@ -4507,4 +4507,7 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Exibição esquemática de ícones em zooms baixos</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Túneis hidroviários</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Não ocultar túneis hidroviários</string>
+    <string name="gpx_no_routes_title">Não há rotas</string>
+    <string name="gpx_no_routes_descr">Pode usar a ferramenta \"%1$s\" para adicionar rota ao arquivo.</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ícones em ampliações baixas</string>
 </resources>
