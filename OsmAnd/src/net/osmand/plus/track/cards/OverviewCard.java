@@ -114,15 +114,10 @@ public class OverviewCard extends MapBaseCard {
 	private void setupRegion() {
 		TextView regionText = view.findViewById(R.id.region);
 		LinearLayout regionContainer = view.findViewById(R.id.region_container);
-		LatLon start = null;
 		WptPt point = selectedGpxFile.getGpxFile().findPointToShow();
 		if (point != null) {
-			double lat = point.getLatitude();
-			double lon = point.getLongitude();
-			start = new LatLon(lat, lon);
-		}
-		if (start != null) {
-			app.getMapViewTrackingUtilities().detectCurrentRegion(start, worldRegion -> {
+			LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
+			app.getMapViewTrackingUtilities().detectCurrentRegion(latLon, worldRegion -> {
 				if (worldRegion != null) {
 					String regionName = worldRegion.getLocaleName();
 					regionText.setText(regionName);
