@@ -71,20 +71,21 @@
 			android:visibility="gone"
 			tools:visibility="visible">
 
-			<androidx.appcompat.widget.AppCompatImageView
-				android:layout_width="@dimen/context_menu_transport_icon_size"
-				android:layout_height="@dimen/context_menu_transport_icon_size"
+			<androidx.appcompat.widget.AppCompatTextView
+				android:id="@+id/map_marker_point_text_view"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="•"
 				android:layout_gravity="center_vertical"
 				android:layout_marginStart="@dimen/content_padding_small"
-				android:padding="@dimen/content_padding_small_half"
-				android:tint="@color/divider_color"
-				osmand:srcCompat="@drawable/ic_dot_position" />
+				android:textColor="?attr/secondary_icon_color"
+				android:textSize="@dimen/default_desc_text_size"/>
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:layout_width="@dimen/context_menu_transport_icon_size"
 				android:layout_height="@dimen/context_menu_transport_icon_size"
 				android:layout_gravity="center_vertical"
-				android:layout_marginStart="@dimen/content_padding_small_half"
+				android:layout_marginStart="@dimen/content_padding_small"
 				android:tint="@color/icon_color_default_light"
 				osmand:srcCompat="@drawable/ic_action_location_16" />
 

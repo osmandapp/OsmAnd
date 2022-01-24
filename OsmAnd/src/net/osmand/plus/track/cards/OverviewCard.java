@@ -114,19 +114,19 @@ public class OverviewCard extends MapBaseCard {
 		TextView regionText = view.findViewById(R.id.region);
 		LinearLayout regionContainer = view.findViewById(R.id.region_container);
 		LatLon start = null;
-		boolean withSegments = selectedGpxFile.getGpxFile().tracks.size() != 0 && selectedGpxFile.getGpxFile().tracks.get(0).segments.size() != 0;
-		boolean withPoi = selectedGpxFile.getGpxFile().tracks.size() == 0 && selectedGpxFile.getGpxFile().getPointsSize() != 0;
+		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		boolean withSegments = !gpxFile.tracks.isEmpty() && !gpxFile.tracks.get(0).segments.isEmpty();
+		boolean withWpt = gpxFile.tracks.isEmpty() && !gpxFile.getPoints().isEmpty();
 		if (withSegments) {
-			double lat = selectedGpxFile.getGpxFile().tracks.get(0).segments.get(0).points.get(0).getLatitude();
-			double lon = selectedGpxFile.getGpxFile().tracks.get(0).segments.get(0).points.get(0).getLongitude();
+			double lat = gpxFile.tracks.get(0).segments.get(0).points.get(0).getLatitude();
+			double lon = gpxFile.tracks.get(0).segments.get(0).points.get(0).getLongitude();
 			start = new LatLon(lat, lon);
-		} else if (withPoi) {
-			double lat = selectedGpxFile.getGpxFile().getPoints().get(0).getLatitude();
-			double lon = selectedGpxFile.getGpxFile().getPoints().get(0).getLongitude();
+		} else if (withWpt) {
+			double lat = gpxFile.getPoints().get(0).getLatitude();
+			double lon = gpxFile.getPoints().get(0).getLongitude();
 			start = new LatLon(lat, lon);
 		}
 		if (start != null) {
-			AndroidUiHelper.updateVisibility(regionContainer, true);
 			app.getMapViewTrackingUtilities().detectCurrentRegion(start, worldRegion -> {
 				if (worldRegion != null) {
 					String regionName = worldRegion.getLocaleName();
@@ -134,6 +134,7 @@ public class OverviewCard extends MapBaseCard {
 				}
 				return true;
 			});
+			AndroidUiHelper.updateVisibility(regionContainer, true);
 		}
 	}
 
