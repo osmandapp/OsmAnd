@@ -62,7 +62,6 @@ public class GPXAction extends QuickAction {
 	public static final QuickActionType TYPE = new QuickActionType(6, "gpx.add", GPXAction.class)
 			.nameRes(R.string.quick_action_add_gpx)
 			.iconRes(R.drawable.ic_action_gnew_label_dark)
-			.nonEditable()
 			.category(QuickActionType.CREATE_CATEGORY);
 
 	public static final String KEY_USE_SELECTED_GPX_FILE = "use_selected_gpx_file";
