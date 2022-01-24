@@ -1,6 +1,8 @@
 package net.osmand.plus.routepreparationmenu;
 
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OPTIONS_MENU_ID;
+
 import android.content.Context;
 import android.content.DialogInterface.OnDismissListener;
 import android.graphics.PointF;
@@ -109,6 +111,7 @@ import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment;
@@ -1078,6 +1081,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 		updateControlButtons(mapActivity, mainView);
 		LinearLayout optionsButton = mainView.findViewById(R.id.map_options_route_button);
+
+		OsmAndAppCustomization customization = app.getAppCustomization();
+		AndroidUiHelper.updateVisibility(optionsButton, customization.isFeatureEnabled(NAVIGATION_OPTIONS_MENU_ID));
+
 		TextView optionsTitle = mainView.findViewById(R.id.map_options_route_button_title);
 		ImageView optionsIcon = mainView.findViewById(R.id.map_options_route_button_icon);
 

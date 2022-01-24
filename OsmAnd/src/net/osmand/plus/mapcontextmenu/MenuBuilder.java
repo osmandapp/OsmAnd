@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
 import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 
 import android.content.ClipData;
@@ -73,6 +75,7 @@ import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchToolbarController;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.views.layers.TransportStopsLayer;
@@ -115,6 +118,8 @@ public class MenuBuilder {
 	protected MapActivity mapActivity;
 	protected MapContextMenu mapContextMenu;
 	protected OsmandApplication app;
+	protected OsmAndAppCustomization customization;
+
 	protected LinkedList<PlainMenuItem> plainMenuItems;
 	private boolean firstRow;
 	protected boolean matchWidthDivider;
@@ -190,6 +195,7 @@ public class MenuBuilder {
 	public MenuBuilder(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
+		this.customization = app.getAppCustomization();
 		this.plainMenuItems = new LinkedList<>();
 
 		preferredMapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
@@ -728,7 +734,7 @@ public class MenuBuilder {
 
 		if (isUrl || isNumber || isEmail) {
 			textView.setTextColor(linkTextColor);
-		} else if (needLinks && Linkify.addLinks(textView, Linkify.ALL)) {
+		} else if (needLinks && customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID) && Linkify.addLinks(textView, Linkify.ALL)) {
 			textView.setMovementMethod(null);
 			textView.setLinkTextColor(linkTextColor);
 			textView.setOnTouchListener(new ClickableSpanTouchListener());
@@ -816,22 +822,25 @@ public class MenuBuilder {
 			ll.setOnClickListener(onClickListener);
 		} else if (isUrl) {
 			ll.setOnClickListener(v -> {
-				Intent intent = new Intent(Intent.ACTION_VIEW);
-				intent.setData(Uri.parse(text));
-				AndroidUtils.startActivityIfSafe(v.getContext(), intent);
+				if (customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID)) {
+					Intent intent = new Intent(Intent.ACTION_VIEW);
+					intent.setData(Uri.parse(text));
+					AndroidUtils.startActivityIfSafe(v.getContext(), intent);
+				}
 			});
 		} else if (isNumber) {
-			ll.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(final View v) {
+			ll.setOnClickListener(v -> {
+				if (customization.isFeatureEnabled(CONTEXT_MENU_PHONE_ID)) {
 					showDialog(text, Intent.ACTION_DIAL, "tel:", v);
 				}
 			});
 		} else if (isEmail) {
 			ll.setOnClickListener(v -> {
-				Intent intent = new Intent(Intent.ACTION_SENDTO);
-				intent.setData(Uri.parse("mailto:" + text));
-				AndroidUtils.startActivityIfSafe(v.getContext(), intent);
+				if (customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID)) {
+					Intent intent = new Intent(Intent.ACTION_SENDTO);
+					intent.setData(Uri.parse("mailto:" + text));
+					AndroidUtils.startActivityIfSafe(v.getContext(), intent);
+				}
 			});
 		}
 
@@ -915,7 +924,7 @@ public class MenuBuilder {
 		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
 		textView.setText(WikiArticleHelper.getPartialContent(description));
 
-		if (Linkify.addLinks(textView, Linkify.ALL)) {
+		if (customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID) && Linkify.addLinks(textView, Linkify.ALL)) {
 			textView.setMovementMethod(null);
 			int linkTextColor = ContextCompat.getColor(view.getContext(), light ?
 					R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);

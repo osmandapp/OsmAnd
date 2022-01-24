@@ -114,4 +114,13 @@ public interface OsmAndCustomizationConstants {
 	String PLUGIN_RASTER_MAPS = "osmand.rastermaps";
 	String PLUGIN_SKI_MAPS = "skimaps.plugin";
 	String PLUGIN_SRTM = "osmand.srtm";
+
+	//Navigation Options:
+	String NAVIGATION_OPTIONS_ID = "navigation.options.";
+	String NAVIGATION_OPTIONS_MENU_ID = NAVIGATION_OPTIONS_ID + "options_menu";
+
+	//Map Context Menu rows:
+	String MAP_CONTEXT_MENU_ROWS = "context.menu.rows.";
+	String CONTEXT_MENU_LINKS_ID = MAP_CONTEXT_MENU_ROWS + "links";
+	String CONTEXT_MENU_PHONE_ID = MAP_CONTEXT_MENU_ROWS + "phone";
 }
