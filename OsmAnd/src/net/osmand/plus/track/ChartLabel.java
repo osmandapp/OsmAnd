@@ -7,11 +7,13 @@ import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-import com.github.mikephil.charting.charts.LineChart.LabelDisplayData;
+import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.LineChart.YAxisLabelView;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import net.osmand.plus.R;
-import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,25 +45,46 @@ public class ChartLabel extends YAxisLabelView {
 	}
 
 	@Override
-	public void updateLabel(@NonNull LabelDisplayData leftYAxisData, @Nullable LabelDisplayData rightYAxisData) {
-		if (rightYAxisData == null) {
-			SpannableString displayText = new SpannableString(leftYAxisData.getText());
-			displayText.setSpan(new ForegroundColorSpan(leftYAxisData.getColor()), 0,
-					displayText.length(), SPAN_FLAG);
+	public void updateLabel(int labelIndex) {
+		LineChart lineChart = getChart();
+		if (lineChart == null) {
+			return;
+		}
+
+		LineData lineData = lineChart.getLineData();
+		if (lineData.getDataSetCount() == 1) {
+			String plainText = lineChart.getAxisLeft().getFormattedLabel(labelIndex);
+			SpannableString displayText = new SpannableString(plainText);
+			int color = lineData.getDataSetByIndex(0).getColor();
+			displayText.setSpan(new ForegroundColorSpan(color), 0, displayText.length(), SPAN_FLAG);
 			label.setText(displayText);
 		} else {
+			String leftText = lineChart.getAxisLeft().getFormattedLabel(labelIndex);
+			String rightText = lineChart.getAxisRight().getFormattedLabel(labelIndex);
 			String combinedPlainText = getContext().getString(R.string.ltr_or_rtl_combine_via_comma,
-					leftYAxisData.getText(), rightYAxisData.getText());
+					leftText, rightText);
 			SpannableString displayText = new SpannableString(combinedPlainText);
 
-			boolean rtl = AndroidUtils.isLayoutRtl(getContext());
-			LabelDisplayData first = rtl ? rightYAxisData : leftYAxisData;
-			int edge = rtl ? first.getText().length() : first.getText().length() + 1;
-			displayText.setSpan(new ForegroundColorSpan(leftYAxisData.getColor()), 0, edge, SPAN_FLAG);
-			displayText.setSpan(new ForegroundColorSpan(rightYAxisData.getColor()), edge,
-					displayText.length(), SPAN_FLAG);
+			ILineDataSet startDataSet = getDataSet(lineData, true);
+			ILineDataSet endDataSet = getDataSet(lineData, false);
+			if (startDataSet != null && endDataSet != null) {
+				int edge = leftText.length() + 1;
+				displayText.setSpan(new ForegroundColorSpan(startDataSet.getColor()), 0, edge, SPAN_FLAG);
+				displayText.setSpan(new ForegroundColorSpan(endDataSet.getColor()), edge,
+						displayText.length(), SPAN_FLAG);
+			}
 
 			label.setText(displayText);
 		}
+	}
+
+	@Nullable
+	private ILineDataSet getDataSet(@NonNull LineData lineData, boolean left) {
+		for (ILineDataSet dataSet : lineData.getDataSets()) {
+			if (((OrderedLineDataSet) dataSet).isLeftAxis() == left) {
+				return dataSet;
+			}
+		}
+		return null;
 	}
 }

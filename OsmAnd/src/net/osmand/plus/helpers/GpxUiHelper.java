@@ -14,9 +14,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
@@ -35,8 +33,6 @@ import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.charts.LineChart.LabelDisplayData;
-import com.github.mikephil.charting.charts.LineChart.YAxisLabelView;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -1147,7 +1143,10 @@ public class GpxUiHelper {
 		markerView.setChartView(mChart); // For bounds control
 		mChart.setMarker(markerView); // Set the marker to the chart
 		mChart.setDrawMarkers(true);
-		mChart.setYAxisLabelView(new ChartLabel(context, R.layout.chart_label));
+
+		ChartLabel chartLabel = new ChartLabel(context, R.layout.chart_label);
+		chartLabel.setChart(mChart);
+		mChart.setYAxisLabelView(chartLabel);
 
 		int labelsColor = ContextCompat.getColor(context, R.color.description_font_and_bottom_sheet_icons);
 		XAxis xAxis = mChart.getXAxis();
@@ -1472,7 +1471,8 @@ public class GpxUiHelper {
 
 		List<Entry> values = calculateElevationArray(analysis, axisType, divX, convEle, true, calcWithoutGaps);
 
-		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.ALTITUDE, axisType);
+		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.ALTITUDE,
+				axisType, !useRightAxis);
 		dataSet.priority = (float) (analysis.avgElevation - analysis.minElevation) * convEle;
 		dataSet.divX = divX;
 		dataSet.mulY = convEle;
@@ -1607,7 +1607,8 @@ public class GpxUiHelper {
 			}
 		}
 
-		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.SPEED, axisType);
+		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.SPEED,
+				axisType, !useRightAxis);
 
 		String format = null;
 		if (dataSet.getYMax() < 3) {
@@ -1798,7 +1799,8 @@ public class GpxUiHelper {
 			slopeValues.add(lastEntry);
 		}
 
-		OrderedLineDataSet dataSet = new OrderedLineDataSet(slopeValues, "", GPXDataSetType.SLOPE, axisType);
+		OrderedLineDataSet dataSet = new OrderedLineDataSet(slopeValues, "", GPXDataSetType.SLOPE,
+				axisType, !useRightAxis);
 		dataSet.divX = divX;
 		dataSet.units = mainUnitY;
 
@@ -1930,16 +1932,20 @@ public class GpxUiHelper {
 		private final GPXDataSetType dataSetType;
 		private final GPXDataSetAxisType dataSetAxisType;
 
+		private final boolean leftAxis;
+
 		float priority;
 		String units;
 		float divX = 1f;
 		float divY = 1f;
 		float mulY = 1f;
 
-		OrderedLineDataSet(List<Entry> yVals, String label, GPXDataSetType dataSetType, GPXDataSetAxisType dataSetAxisType) {
+		OrderedLineDataSet(List<Entry> yVals, String label, GPXDataSetType dataSetType,
+		                   GPXDataSetAxisType dataSetAxisType, boolean leftAxis) {
 			super(yVals, label);
 			this.dataSetType = dataSetType;
 			this.dataSetAxisType = dataSetAxisType;
+			this.leftAxis = leftAxis;
 		}
 
 		public GPXDataSetType getDataSetType() {
@@ -1968,6 +1974,10 @@ public class GpxUiHelper {
 
 		public String getUnits() {
 			return units;
+		}
+
+		public boolean isLeftAxis() {
+			return leftAxis;
 		}
 	}
 
