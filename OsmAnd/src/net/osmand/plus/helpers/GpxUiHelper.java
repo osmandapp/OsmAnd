@@ -82,6 +82,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.plus.track.ChartLabel;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.GpxAppearanceAdapter.AppearanceListItem;
 import net.osmand.plus.track.GpxMarkerView;
@@ -1146,35 +1147,7 @@ public class GpxUiHelper {
 		markerView.setChartView(mChart); // For bounds control
 		mChart.setMarker(markerView); // Set the marker to the chart
 		mChart.setDrawMarkers(true);
-		mChart.setYAxisLabelView(new YAxisLabelView(context, R.layout.chart_label) {
-
-			private static final int SPAN_FLAG = Spannable.SPAN_EXCLUSIVE_EXCLUSIVE;
-
-			private final TextView label = findViewById(R.id.label);
-
-			@Override
-			public void updateLabel(@NonNull LabelDisplayData leftYAxisData, @Nullable LabelDisplayData rightYAxisData) {
-				if (rightYAxisData == null) {
-					SpannableString displayText = new SpannableString(leftYAxisData.getText());
-					displayText.setSpan(new ForegroundColorSpan(leftYAxisData.getColor()), 0,
-							displayText.length(), SPAN_FLAG);
-					label.setText(displayText);
-				} else {
-					String combinedPlainText = context.getString(R.string.ltr_or_rtl_combine_via_comma,
-							leftYAxisData.getText(), rightYAxisData.getText());
-					SpannableString displayText = new SpannableString(combinedPlainText);
-
-					boolean rtl = AndroidUtils.isLayoutRtl(context);
-					LabelDisplayData first = rtl ? rightYAxisData : leftYAxisData;
-					int edge = rtl ? first.getText().length() : first.getText().length() + 1;
-					displayText.setSpan(new ForegroundColorSpan(leftYAxisData.getColor()), 0, edge, SPAN_FLAG);
-					displayText.setSpan(new ForegroundColorSpan(rightYAxisData.getColor()), edge,
-							displayText.length(), SPAN_FLAG);
-
-					label.setText(displayText);
-				}
-			}
-		});
+		mChart.setYAxisLabelView(new ChartLabel(context, R.layout.chart_label));
 
 		int labelsColor = ContextCompat.getColor(context, R.color.description_font_and_bottom_sheet_icons);
 		XAxis xAxis = mChart.getXAxis();
