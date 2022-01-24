@@ -24,40 +24,6 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.google.android.material.textfield.TextInputLayout;
-
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.ColorDialogs;
-import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
-import net.osmand.plus.measurementtool.ExitBottomSheetDialogFragment;
-import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
-import net.osmand.plus.track.cards.ColorsCard;
-import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.FlowLayout;
-import net.osmand.util.Algorithms;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Set;
-
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
@@ -71,6 +37,40 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.textfield.TextInputLayout;
+
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.ColorDialogs;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.measurementtool.ExitBottomSheetDialogFragment;
+import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
+import net.osmand.plus.track.cards.ColorsCard;
+import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.FlowLayout;
+import net.osmand.plus.widgets.chips.ChipItem;
+import net.osmand.plus.widgets.chips.HorizontalChipsView;
+import net.osmand.util.Algorithms;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Set;
 
 import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
 import static net.osmand.GPXUtilities.log;
@@ -638,26 +638,37 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	@SuppressLint("NotifyDataSetChanged")
 	private void createIconForCategory() {
 		createIconList();
-		final HorizontalSelectionAdapter horizontalSelectionAdapter = new HorizontalSelectionAdapter(app, nightMode);
 
-		horizontalSelectionAdapter.setTitledItems(new ArrayList<>(iconCategories.keySet()));
-		horizontalSelectionAdapter.setSelectedItemByTitle(selectedIconCategory);
-		horizontalSelectionAdapter.setListener(item -> {
-			selectedIconCategory = item.getTitle();
+		List<ChipItem> items = new ArrayList<>();
+		for (String category : iconCategories.keySet()) {
+			ChipItem item = new ChipItem(category);
+			if (!category.equals(LAST_USED_ICONS_KEY)) {
+				item.title = category;
+			}
+			items.add(item);
+		}
+
+		HorizontalChipsView categorySelector = view.findViewById(R.id.icon_category_selector);
+		categorySelector.setItems(items);
+
+		ChipItem selected = categorySelector.getChipById(selectedIconCategory);
+		categorySelector.setSelected(selected);
+
+		categorySelector.setOnSelectChipListener(chip -> {
+			selectedIconCategory = chip.id;
 			createIconList();
 			updateIconSelector(selectedIcon, PointEditorFragmentNew.this.view);
-			horizontalSelectionAdapter.notifyDataSetChanged();
+			categorySelector.notifyDataSetChanged();
+			return true;
 		});
-		HorizontalSelectionItem lastUsedCategory = horizontalSelectionAdapter.getItemByTitle(LAST_USED_ICONS_KEY);
+
+		ChipItem lastUsedCategory = categorySelector.getChipById(LAST_USED_ICONS_KEY);
 		if (lastUsedCategory != null) {
-			lastUsedCategory.setIconId(R.drawable.ic_action_history);
-			lastUsedCategory.setShowOnlyIcon(true);
-			lastUsedCategory.setTitleColorId(ColorUtilities.getActiveColorId(nightMode));
+			lastUsedCategory.icon = getIcon(R.drawable.ic_action_history);
+			lastUsedCategory.iconColor = ColorUtilities.getActiveColor(app, nightMode);
 		}
-		RecyclerView iconCategoriesRecyclerView = view.findViewById(R.id.group_name_recycler_view);
-		iconCategoriesRecyclerView.setAdapter(horizontalSelectionAdapter);
-		iconCategoriesRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
-		iconCategoriesRecyclerView.scrollToPosition(horizontalSelectionAdapter.getItemPositionByTitle(selectedIconCategory));
+		categorySelector.notifyDataSetChanged();
+		categorySelector.scrollTo(selected);
 	}
 
 

@@ -1,17 +1,26 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewTreeObserver;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.Collator;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.track.GpxTrackAdapter;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
-import net.osmand.plus.settings.enums.TracksSortByMode;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.routepreparationmenu.FollowTrackFragment;
+import net.osmand.plus.settings.enums.TracksSortByMode;
+import net.osmand.plus.track.GpxTrackAdapter;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.chips.ChipItem;
+import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -21,11 +30,6 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class TracksToFollowCard extends MapBaseCard {
 
@@ -105,24 +109,32 @@ public class TracksToFollowCard extends MapBaseCard {
 				}
 			}
 		});
-		tracksAdapter.setTrackCategoriesAdapter(createTrackCategoriesAdapter());
+		tracksAdapter.setCategoriesChipView(createCategoriesChipsView());
 		filesRecyclerView.setAdapter(tracksAdapter);
 	}
 
-	private HorizontalSelectionAdapter createTrackCategoriesAdapter() {
-		final HorizontalSelectionAdapter selectionAdapter = new HorizontalSelectionAdapter(app, nightMode);
-		selectionAdapter.setTitledItems(new ArrayList<>(gpxInfoCategories.keySet()));
-		selectionAdapter.setSelectedItemByTitle(selectedCategory);
-		selectionAdapter.setListener(new HorizontalSelectionAdapter.HorizontalSelectionAdapterListener() {
-			@Override
-			public void onItemSelected(HorizontalSelectionAdapter.HorizontalSelectionItem item) {
-				selectedCategory = item.getTitle();
-				tracksAdapter.setShowFolderName(showFoldersName());
-				updateTracksAdapter();
-				selectionAdapter.notifyDataSetChanged();
-			}
+	private HorizontalChipsView createCategoriesChipsView() {
+		LayoutInflater inflater = UiUtilities.getInflater(activity, nightMode);
+		View view = inflater.inflate(R.layout.gpx_track_select_category_item, null, false);
+		HorizontalChipsView chipsView = view.findViewById(R.id.track_categories);
+
+		List<ChipItem> items = new ArrayList<>();
+		for (String title : gpxInfoCategories.keySet()) {
+			ChipItem item = new ChipItem(title);
+			item.title = title;
+		}
+		chipsView.setItems(items);
+
+		ChipItem selected = chipsView.getChipById(selectedCategory);
+		chipsView.setSelected(selected);
+
+		chipsView.setOnSelectChipListener(chip -> {
+			selectedCategory = chip.title;
+			tracksAdapter.setShowFolderName(showFoldersName());
+			updateTracksAdapter();
+			return true;
 		});
-		return selectionAdapter;
+		return chipsView;
 	}
 
 	private void updateTracksAdapter() {

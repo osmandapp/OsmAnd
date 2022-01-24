@@ -60,20 +60,14 @@
 			android:layout_marginRight="@dimen/content_padding" />
 	</LinearLayout>
 
-	<androidx.recyclerview.widget.RecyclerView
+	<net.osmand.plus.widgets.chips.HorizontalChipsView
 		android:id="@+id/folder_list"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:clipToPadding="false"
-		android:orientation="horizontal"
-		android:paddingStart="@dimen/content_padding"
-		android:paddingLeft="@dimen/content_padding"
-		android:paddingEnd="@dimen/content_padding"
-		android:paddingRight="@dimen/content_padding"
+		android:paddingHorizontal="@dimen/content_padding"
 		tools:itemCount="3"
-		tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-		tools:listitem="@layout/point_editor_icon_category_item"
-		tools:orientation="horizontal" />
+		tools:listitem="@layout/custom_chip_view" />
 
 	<androidx.recyclerview.widget.RecyclerView
 		android:id="@+id/gpx_track_list"

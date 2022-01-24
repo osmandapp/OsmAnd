@@ -9,21 +9,14 @@
     android:focusable="true"
     android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/graph_types_recycler_view"
+    <net.osmand.plus.widgets.chips.HorizontalChipsView
+        android:id="@+id/graph_types_selector"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/content_padding_small"
-        android:clipToPadding="false"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/content_padding"
-        android:paddingLeft="@dimen/content_padding"
-        android:paddingEnd="@dimen/content_padding"
-        android:paddingRight="@dimen/content_padding"
+        android:paddingHorizontal="@dimen/content_padding"
         tools:itemCount="3"
-        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/point_editor_icon_category_item"
-        tools:orientation="horizontal" />
+        tools:listitem="@layout/custom_chip_view" />
 
     <FrameLayout
         android:id="@+id/scroll_container"

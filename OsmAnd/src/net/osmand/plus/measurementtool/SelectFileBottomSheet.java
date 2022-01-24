@@ -26,9 +26,8 @@ import net.osmand.plus.track.GpxTrackAdapter;
 import net.osmand.plus.track.GpxTrackAdapter.OnItemClickListener;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.settings.enums.TracksSortByMode;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
+import net.osmand.plus.widgets.chips.ChipItem;
+import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 
@@ -46,8 +45,8 @@ import static net.osmand.util.Algorithms.collectDirs;
 public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private List<File> folders;
-	private HorizontalSelectionAdapter folderAdapter;
 	private GPXInfo currentlyRecording;
+	private HorizontalChipsView folderSelector;
 
 	enum Mode {
 		OPEN_TRACK(R.string.shared_string_gpx_tracks, R.string.sort_by),
@@ -130,8 +129,8 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 									sortButton.setImageResource(mode.getIconId());
 									updateDescription(descriptionView);
 									sortFolderList();
-									folderAdapter.setTitledItems(getFolderNames());
-									folderAdapter.notifyDataSetChanged();
+									folderSelector.setItems(getFolderChips());
+									folderSelector.notifyDataSetChanged();
 									sortFileList();
 									adapter.notifyDataSetChanged();
 								}
@@ -188,25 +187,30 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 		});
 		filesRecyclerView.setAdapter(adapter);
 
-		final RecyclerView foldersRecyclerView = mainView.findViewById(R.id.folder_list);
-		foldersRecyclerView.setLayoutManager(new LinearLayoutManager(context,
-				RecyclerView.HORIZONTAL, false));
-		folderAdapter = new HorizontalSelectionAdapter(app, nightMode);
+		folderSelector = mainView.findViewById(R.id.folder_list);
 		folders = new ArrayList<>();
 		collectDirs(gpxDir, folders);
 		sortFolderList();
-		folderAdapter.setTitledItems(getFolderNames());
-		folderAdapter.setSelectedItemByTitle(selectedFolder);
-		foldersRecyclerView.setAdapter(folderAdapter);
-		folderAdapter.setListener(new HorizontalSelectionAdapterListener() {
-			@Override
-			public void onItemSelected(HorizontalSelectionItem item) {
-				selectedFolder = item.getTitle();
-				updateFileList(folderAdapter);
-			}
+		folderSelector.setItems(getFolderChips());
+		ChipItem selected = folderSelector.getChipById(selectedFolder);
+		folderSelector.setSelected(selected);
+		folderSelector.setOnSelectChipListener(chip -> {
+			selectedFolder = chip.id;
+			updateFileList();
+			return true;
 		});
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(mainView).create());
-		updateFileList(folderAdapter);
+		updateFileList();
+	}
+
+	private List<ChipItem> getFolderChips() {
+		List<ChipItem> items = new ArrayList<>();
+		for (String name : getFolderNames()) {
+			ChipItem item = new ChipItem(name);
+			item.title = name;
+			items.add(item);
+		}
+		return items;
 	}
 
 	private List<String> getFolderNames() {
@@ -227,11 +231,11 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 	}
 
-	private void updateFileList(HorizontalSelectionAdapter folderAdapter) {
+	private void updateFileList() {
 		sortFileList();
 		adapter.setShowFolderName(showFoldersName());
 		adapter.notifyDataSetChanged();
-		folderAdapter.notifyDataSetChanged();
+		folderSelector.notifyDataSetChanged();
 	}
 
 	private void sortFolderList() {
