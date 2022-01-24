@@ -90,7 +90,7 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 			itemsVisibility.add(item);
 		}
 
-		HorizontalChipsView chipsView = sendGpxView.findViewById(R.id.description_view);
+		HorizontalChipsView chipsView = sendGpxView.findViewById(R.id.selector_view);
 		chipsView.setItems(itemsVisibility);
 
 		ChipItem selected = chipsView.getChipById(getString(selectedUploadVisibility.getTitleId()));
@@ -101,6 +101,7 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 			settings.OSM_UPLOAD_VISIBILITY.set(selectedUploadVisibility);
 			visibilityName.setText(selectedUploadVisibility.getTitleId());
 			visibilityDescription.setText(selectedUploadVisibility.getDescriptionId());
+			chipsView.smoothScrollTo(chip);
 			return true;
 		});
 		chipsView.notifyDataSetChanged();

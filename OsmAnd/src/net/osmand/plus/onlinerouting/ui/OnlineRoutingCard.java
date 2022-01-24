@@ -132,7 +132,11 @@ public class OnlineRoutingCard extends MapBaseCard {
 		chipsView.setItems(items);
 		ChipItem selected = chipsView.getChipById(selectedId);
 		chipsView.setSelected(selected);
-		chipsView.setOnSelectChipListener(callback::processResult);
+		chipsView.setOnSelectChipListener(chip -> {
+			chipsView.smoothScrollTo(chip);
+			callback.processResult(chip);
+			return true;
+		});
 		chipsView.notifyDataSetChanged();
 	}
 

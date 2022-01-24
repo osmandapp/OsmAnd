@@ -383,7 +383,6 @@
 					android:paddingLeft="@dimen/content_padding"
 					android:paddingTop="@dimen/context_menu_first_line_top_margin"
 					android:paddingRight="@dimen/content_padding"
-					android:paddingBottom="@dimen/context_menu_first_line_top_margin"
 					android:text="@string/select_icon_profile_dialog_title"
 					android:textColor="?android:textColorSecondary"
 					android:textSize="@dimen/default_desc_text_size"
@@ -396,6 +395,8 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:paddingHorizontal="@dimen/content_padding"
+					android:paddingTop="@dimen/context_menu_first_line_top_margin"
+					android:paddingBottom="@dimen/context_menu_padding_margin_tiny"
 					tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 					tools:listitem="@layout/custom_chip_view"
 					tools:orientation="horizontal" />
@@ -406,7 +407,6 @@
 					android:layout_height="wrap_content"
 					android:layout_marginStart="@dimen/content_padding"
 					android:layout_marginLeft="@dimen/content_padding"
-					android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
 					android:layout_marginEnd="@dimen/content_padding"
 					android:layout_marginRight="@dimen/content_padding"
 					android:layout_marginBottom="@dimen/content_padding_half" />

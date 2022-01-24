@@ -197,6 +197,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 			if (!isVisibleType(chosenType)) {
 				changeVisibleType(chosenType);
 			}
+			graphTypesMenu.smoothScrollTo(chip);
 			return true;
 		});
 

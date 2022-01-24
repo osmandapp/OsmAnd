@@ -6,18 +6,15 @@ import android.view.ViewGroup.LayoutParams;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.chips.ChipItem;
-import net.osmand.plus.widgets.chips.ChipsAdapter.OnSelectChipListener;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.util.Algorithms;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,16 +99,14 @@ public class PointsGroupsCard extends MapBaseCard {
 		ChipItem selected = chipsView.getChipById(selectedId);
 		chipsView.setSelected(selected);
 
-		chipsView.setOnSelectChipListener(new OnSelectChipListener() {
-			@Override
-			public boolean onSelectChip(@NotNull ChipItem chip) {
-				selectedGroup = (GpxDisplayGroup) chip.tag;
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardButtonPressed(PointsGroupsCard.this, SELECT_GROUP_INDEX);
-				}
-				return true;
+		chipsView.setOnSelectChipListener(chip -> {
+			selectedGroup = (GpxDisplayGroup) chip.tag;
+			CardListener listener = getListener();
+			if (listener != null) {
+				listener.onCardButtonPressed(PointsGroupsCard.this, SELECT_GROUP_INDEX);
 			}
+			chipsView.smoothScrollTo(chip);
+			return true;
 		});
 		chipsView.notifyDataSetChanged();
 	}
