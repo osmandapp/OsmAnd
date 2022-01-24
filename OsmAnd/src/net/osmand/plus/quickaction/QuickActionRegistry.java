@@ -2,6 +2,8 @@ package net.osmand.plus.quickaction;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
@@ -14,8 +16,8 @@ import com.google.gson.JsonSerializer;
 import com.google.gson.reflect.TypeToken;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.quickaction.actions.DayNightModeAction;
 import net.osmand.plus.quickaction.actions.DisplayPositionAction;
 import net.osmand.plus.quickaction.actions.FavoriteAction;
@@ -31,6 +33,7 @@ import net.osmand.plus.quickaction.actions.NavReplaceDestinationAction;
 import net.osmand.plus.quickaction.actions.NavResumePauseAction;
 import net.osmand.plus.quickaction.actions.NavStartStopAction;
 import net.osmand.plus.quickaction.actions.NavVoiceAction;
+import net.osmand.plus.quickaction.actions.RouteAction;
 import net.osmand.plus.quickaction.actions.ShowHideCoordinatesWidgetAction;
 import net.osmand.plus.quickaction.actions.ShowHideFavoritesAction;
 import net.osmand.plus.quickaction.actions.ShowHideGpxTracksAction;
@@ -49,8 +52,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
-
-import androidx.annotation.NonNull;
 
 /**
  * Created by rosty on 12/27/16.
@@ -232,6 +233,7 @@ public class QuickActionRegistry {
 		allTypes.add(FavoriteAction.TYPE);
 		allTypes.add(GPXAction.TYPE);
 		allTypes.add(MarkerAction.TYPE);
+		allTypes.add(RouteAction.TYPE);
 		// configure map
 		allTypes.add(ShowHideFavoritesAction.TYPE);
 		allTypes.add(ShowHideGpxTracksAction.TYPE);
