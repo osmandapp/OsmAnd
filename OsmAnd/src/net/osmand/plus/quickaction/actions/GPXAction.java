@@ -116,28 +116,32 @@ public class GPXAction extends QuickAction {
 
 		boolean usePredefinedWaypoint = Boolean.parseBoolean(getParams().get(KEY_USE_PREDEFINED_WPT_APPEARANCE));
 		if (usePredefinedWaypoint) {
-			String name = getParams().get(KEY_WPT_NAME);
-			String address = getParams().get(KEY_WPT_ADDRESS);
-			String description = getParams().get(KEY_WPT_DESCRIPTION);
-			int color = getWaypointColorFromParams();
-			String backgroundType = getBackgroundTypeFromParams();
+			WptPt wptPt = createWaypoint();
+			wptPt.lat = latLon.getLatitude();
+			wptPt.lon = latLon.getLongitude();
+			wptPt.time = System.currentTimeMillis();
+
 			String categoryName = getParams().get(KEY_CATEGORY_NAME);
 			int categoryColor = getColorFromParams(KEY_CATEGORY_COLOR, 0);
 
-			if (Algorithms.isBlank(name) && Algorithms.isBlank(address)) {
+			if (Algorithms.isBlank(wptPt.name) && Algorithms.isBlank(wptPt.getAddress())) {
 				lookupAddress(latLon, mapActivity, foundAddress -> {
-
-					mapActivity.getContextMenu().addWptPt(latLon, address, null, description,
-							color, backgroundType, categoryName, categoryColor, true, gpxFile);
+					wptPt.name = foundAddress;
+					mapActivity.getContextMenu().addWptPt(wptPt, categoryName, categoryColor, true, gpxFile);
 					return true;
 				});
 			} else {
-				mapActivity.getContextMenu().addWptPt(latLon, name, address, description, color,
-						backgroundType, categoryName, categoryColor, true, gpxFile);
+				if (Algorithms.isBlank(wptPt.name)) {
+					wptPt.name = wptPt.getAddress();
+					wptPt.setAddress(null);
+				}
+				mapActivity.getContextMenu().addWptPt(wptPt, categoryName, categoryColor, true, gpxFile);
 			}
 		} else {
+			WptPt wptPt = new WptPt(latLon.getLatitude(), latLon.getLongitude(), System.currentTimeMillis(),
+					Double.NaN, 0, Double.NaN);
 			mapActivity.getContextMenu()
-					.addWptPt(latLon, null, null, null, 0, null, null, 0, false, gpxFile);
+					.addWptPt(wptPt, null, 0, false, gpxFile);
 		}
 	}
 
