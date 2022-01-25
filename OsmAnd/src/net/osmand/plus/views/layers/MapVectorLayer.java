@@ -12,6 +12,8 @@ import net.osmand.plus.views.layers.base.BaseMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.MapUtils;
+
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -27,13 +29,11 @@ public class MapVectorLayer extends BaseMapLayer {
 
 	private final int VECTOR_LAYER_ID = 1;
 	private final RectF destImage = new RectF();
-	private final MapTileLayer tileLayer;
 	private boolean visible = false;
 	private boolean oldRender = false;
 
-	public MapVectorLayer(@NonNull MapTileLayer tileLayer, boolean oldRender) {
-		super(tileLayer.getContext());
-		this.tileLayer = tileLayer;
+	public MapVectorLayer(@NonNull Context context, boolean oldRender) {
+		super(context);
 		this.oldRender = oldRender;
 	}
 
@@ -58,7 +58,8 @@ public class MapVectorLayer extends BaseMapLayer {
 		resourceManager = view.getApplication().getResourceManager();
 		paintImg = new Paint();
 		paintImg.setFilterBitmap(true);
-		paintImg.setAlpha(getAlpha());
+
+		setAlpha(getAlpha());
 	}
 
 	public boolean isVectorDataVisible() {
@@ -79,7 +80,6 @@ public class MapVectorLayer extends BaseMapLayer {
 					mapRenderer.resetMapLayerProvider(VECTOR_LAYER_ID);
 				}
 			}
-			resourceManager.getRenderer().clearCache();
 		}
 	}
 
@@ -170,6 +170,10 @@ public class MapVectorLayer extends BaseMapLayer {
 
 	@Override
 	public void setAlpha(int alpha) {
+		if (getAlpha() == alpha){
+			return;
+		}
+
 		super.setAlpha(alpha);
 		if (paintImg != null) {
 			paintImg.setAlpha(alpha);

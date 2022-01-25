@@ -43,12 +43,13 @@ public class MapTileLayer extends BaseMapLayer {
 
 	public static final int OVERZOOM_IN = 2;
 	private static final int ADDITIONAL_TILE_CACHE = 3;
+	private static final int SHOWN_ZOOM_MAX = 20;
+	private static final int SHOWN_ZOOM_MIN = 1;
 
 	protected final boolean mainMap;
 	protected ITileSource map = null;
 	protected MapTileAdapter mapTileAdapter = null;
 
-	private boolean isSetProvider = false;
 	protected Paint paintBitmap = null;
 	protected RectF bitmapToDraw = new RectF();
 	protected Rect bitmapToZoom = new Rect();
@@ -56,6 +57,7 @@ public class MapTileLayer extends BaseMapLayer {
 	protected OsmandMapTileView view;
 	protected ResourceManager resourceManager;
 	protected OsmandSettings settings;
+	private boolean isSetProvider = false;
 	private boolean visible = true;
 	private boolean useSampling;
 	private StateChangedListener<Float> parameterListener;
@@ -87,7 +89,7 @@ public class MapTileLayer extends BaseMapLayer {
 
 		useSampling = Build.VERSION.SDK_INT < 28;
 
-		if (paintBitmap == null) {
+		if (view.getMapRenderer() == null || paintBitmap == null) {
 			paintBitmap = new Paint();
 			paintBitmap.setFilterBitmap(true);
 			paintBitmap.setAlpha(getAlpha());
@@ -100,18 +102,23 @@ public class MapTileLayer extends BaseMapLayer {
 
 	@Override
 	public void setAlpha(int alpha) {
+		if (getAlpha() == alpha){
+			return;
+		}
 		super.setAlpha(alpha);
 		if (paintBitmap != null) {
 			paintBitmap.setAlpha(alpha);
 		}
 
-		if (view != null) {
-			final MapRendererView mapRenderer = view.getMapRenderer();
-			if (mapRenderer != null) {
-				MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
-				mapLayerConfiguration.setOpacityFactor(((float) alpha) / 255.0f);
-				mapRenderer.setMapLayerConfiguration(getLayerId(), mapLayerConfiguration);
-			}
+		if (view == null) {
+			return;
+		}
+
+		final MapRendererView mapRenderer = view.getMapRenderer();
+		if (mapRenderer != null) {
+			MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
+			mapLayerConfiguration.setOpacityFactor(((float) alpha) / 255.0f);
+			mapRenderer.setMapLayerConfiguration(getLayerId(), mapLayerConfiguration);
 		}
 	}
 
@@ -268,9 +275,9 @@ public class MapTileLayer extends BaseMapLayer {
 		}
 		final MapRendererView mapRenderer = view.getMapRenderer();
 		if (mapRenderer != null) {
-			int layerIndex = getLayerId();
 			if (isSetProvider == false ) {
 				isSetProvider = true;
+				int layerIndex = getLayerId();
 				if (map != null) {
 					TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), map);
 					mapRenderer.setMapLayerProvider(layerIndex, prov.instantiateProxy(true));
@@ -436,26 +443,29 @@ public class MapTileLayer extends BaseMapLayer {
 
 	@Override
 	public int getMaximumShownMapZoom() {
-		return map == null ? 20 : map.getMaximumZoomSupported() + OVERZOOM_IN;
+		return map == null ? SHOWN_ZOOM_MAX : map.getMaximumZoomSupported() + OVERZOOM_IN;
 	}
 
 	@Override
 	public int getMinimumShownMapZoom() {
-		return map == null ? 1 : map.getMinimumZoomSupported();
+		return map == null ? SHOWN_ZOOM_MIN : map.getMinimumZoomSupported();
 	}
 
 	@Override
 	public void destroyLayer() {
 		setMapTileAdapter(null);
+		isSetProvider = false;
 		if (resourceManager != null) {
 			resourceManager.removeMapTileLayerSize(this);
 		}
+
 		if (view != null) {
 			final MapRendererView mapRenderer = view.getMapRenderer();
 			if (mapRenderer != null) {
-				mapRenderer.resetMapLayerProvider(getLayerId());
+				//mapRenderer.resetMapLayerProvider(getLayerId());
 			}
 		}
+
 	}
 
 	public boolean isVisible() {
@@ -472,7 +482,7 @@ public class MapTileLayer extends BaseMapLayer {
 					mapRenderer.resetMapLayerProvider(getLayerId());
 				}
 			}
-			resourceManager.getRenderer().clearCache();
+
 		}
 	}
 

@@ -132,7 +132,7 @@ public class MapLayers {
 		mapView.setMainLayer(mapTileLayer);
 
 		// 0.5 layer
-		mapVectorLayer = new MapVectorLayer(mapTileLayer, false);
+		mapVectorLayer = new MapVectorLayer(ctx, false);
 		mapView.addLayer(mapVectorLayer, 0.5f);
 
 		downloadedRegionsLayer = new DownloadedRegionsLayer(ctx);
