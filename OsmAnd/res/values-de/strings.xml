@@ -4519,4 +4519,7 @@
     <string name="rendering_value_category_name">Kategorie</string>
     <string name="rendering_value_all_name">Alle</string>
     <string name="rendering_value_omit_name">Weglassen</string>
+    <string name="gpx_no_routes_title">Es gibt keine Routen</string>
+    <string name="save_track_to_gpx_descrp">Trackaufnahme wird bei Navigation automatisch gestartet. Wenn sie beendet ist, wird der Track automatisch gespeichert.</string>
+    <string name="gpx_no_routes_descr">Sie können das Tool \"%1$s\" nutzen, um die Route in einer Datei hinzuzufügen.</string>
 </resources>
