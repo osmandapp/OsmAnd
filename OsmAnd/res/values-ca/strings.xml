@@ -3902,4 +3902,9 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetes de notes</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Mostra les etiquetes de notes</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icones si zooms baixos</string>
+    <string name="quick_action_add_route_descr">Un botó per a començar una ruta des del mig de la pantalla.</string>
+    <string name="gpx_no_routes_descr">Podeu utilitzar l\'eina \"%1$s\" per afegir una ruta al fitxer.</string>
+    <string name="gpx_no_routes_title">No hi han rutes</string>
+    <string name="save_track_to_gpx_descrp">Comença a gravar la ruta automàticament quan la navegació està en procés. Quan acabe, la ruta serà guardada automàticament.</string>
+    <string name="rendering_attr_seabedDetail_name">Detall del fons marí</string>
 </resources>
