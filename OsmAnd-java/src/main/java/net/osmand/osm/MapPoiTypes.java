@@ -241,7 +241,12 @@ public class MapPoiTypes {
 
 
 	private void addPoiTypesTranslation(boolean skipNonEditable, Map<String, PoiType> translation, PoiFilter pf) {
-		for (PoiType pt : pf.getPoiTypes()) {
+		addPoiTypesTranslation(skipNonEditable, translation, pf.getPoiTypes());
+		addPoiTypesTranslation(skipNonEditable, translation, pf.getPoiAdditionals());
+	}
+
+	private void addPoiTypesTranslation(boolean skipNonEditable, Map<String, PoiType> translation, List<PoiType> poiTypes) {
+		for (PoiType pt : poiTypes) {
 			if (pt.isReference()) {
 				continue;
 			}
@@ -251,8 +256,14 @@ public class MapPoiTypes {
 			if (skipNonEditable && pt.isNotEditableOsm()) {
 				continue;
 			}
-			translation.put(pt.getKeyName().replace('_', ' ').toLowerCase(), pt);
-			translation.put(pt.getTranslation().toLowerCase(), pt);
+			String originalKey = pt.getKeyName().replace('_', ' ').toLowerCase();
+			if (!translation.containsKey(originalKey)) {
+				translation.put(originalKey, pt);
+			}
+			String translatedKey = pt.getTranslation().toLowerCase();
+			if (!translation.containsKey(translatedKey)) {
+				translation.put(pt.getTranslation().toLowerCase(), pt);
+			}
 		}
 	}
 
