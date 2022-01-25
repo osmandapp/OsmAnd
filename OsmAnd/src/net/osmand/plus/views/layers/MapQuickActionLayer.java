@@ -238,8 +238,8 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
             return false;
         }
 		// check if state change is needed
-        boolean quickActionModeEnabled = currentWidgetState != null && currentWidgetState || isWidgetVisible();
-        boolean quickActionModeDisabled = currentWidgetState == null || !currentWidgetState || !isWidgetVisible();
+		boolean quickActionModeEnabled = currentWidgetState != null && currentWidgetState || isWidgetVisible();
+		boolean quickActionModeDisabled = currentWidgetState == null || !currentWidgetState || !isWidgetVisible();
 		if (quickActionModeEnabled == showWidget && quickActionModeDisabled == !showWidget) {
 			return false;
 		}
@@ -247,7 +247,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 
 		updateQuickActionButton(showWidget);
 		if (settings.DO_NOT_USE_ANIMATIONS.get() || !quickActionsWidget.isAttachedToWindow()) {
-            AndroidUiHelper.updateVisibility(quickActionsWidget, showWidget);
+			AndroidUiHelper.updateVisibility(quickActionsWidget, showWidget);
 		} else {
 			animateWidget(showWidget);
 		}
