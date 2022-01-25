@@ -4513,4 +4513,7 @@
     <string name="rendering_value_omit_name">Atla</string>
     <string name="rendering_attr_seabedDetail_name">Deniz dibi ayrıntısı</string>
     <string name="rendering_attr_seabedDetail_description">Deniz dibi yüzey niteliği, birleşik yüzey türleri, yabani ot veya deniz yosunu kategorisi ve sınıfı hakkında ek metin bilgileri</string>
+    <string name="gpx_no_routes_descr">Dosyaya güzergah eklemek için \"%1$s\" aracını kullanabilirsiniz.</string>
+    <string name="gpx_no_routes_title">Güzergah yok</string>
+    <string name="save_track_to_gpx_descrp">Navigasyon devam ederken yol kaydını otomatik olarak başlat. Bittiğinde, izlenen yol otomatik olarak kaydedilecektir.</string>
 </resources>

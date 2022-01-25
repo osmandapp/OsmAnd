@@ -1,11 +1,21 @@
 package net.osmand.plus.track.cards;
 
+import static net.osmand.plus.track.cards.DescriptionCard.getMetadataImageLink;
+import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.DIRECTIONS_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
+import static net.osmand.plus.utils.AndroidUtils.dpToPx;
+import static net.osmand.plus.wikipedia.WikiArticleHelper.getFirstParagraph;
+
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
@@ -16,29 +26,22 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.FileUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.GPXUtilities.WptPt;
+import net.osmand.data.LatLon;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.SegmentActionsListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.track.GpxBlockStatisticsBuilder;
 import net.osmand.plus.track.fragments.GpxReadDescriptionDialogFragment;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
-
-import static net.osmand.plus.utils.AndroidUtils.dpToPx;
-import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
-import static net.osmand.plus.track.cards.DescriptionCard.getMetadataImageLink;
-import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.DIRECTIONS_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.wikipedia.WikiArticleHelper.getFirstParagraph;
 
 public class OverviewCard extends MapBaseCard {
 
@@ -105,6 +108,24 @@ public class OverviewCard extends MapBaseCard {
 		if (blocksView.getVisibility() == View.VISIBLE && description.getVisibility() == View.VISIBLE) {
 			AndroidUtils.setPadding(description, 0, 0, 0, dpToPx(app, 12));
 		}
+		setupRegion();
+	}
+
+	private void setupRegion() {
+		TextView regionText = view.findViewById(R.id.region);
+		LinearLayout regionContainer = view.findViewById(R.id.region_container);
+		WptPt point = selectedGpxFile.getGpxFile().findPointToShow();
+		if (point != null) {
+			LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
+			app.getMapViewTrackingUtilities().detectCurrentRegion(latLon, worldRegion -> {
+				if (worldRegion != null) {
+					String regionName = worldRegion.getLocaleName();
+					regionText.setText(regionName);
+					AndroidUiHelper.updateVisibility(regionContainer, true);
+				}
+				return true;
+			});
+		}
 	}
 
 	private GPXFile getGPXFile() {
@@ -139,7 +160,7 @@ public class OverviewCard extends MapBaseCard {
 	}
 
 	private void initButton(View item, final int buttonIndex, @DrawableRes Integer iconResId,
-							@ColorRes final int iconColorDef, @ColorRes int iconColorPres) {
+	                        @ColorRes final int iconColorDef, @ColorRes int iconColorPres) {
 		final AppCompatImageView icon = item.findViewById(R.id.image);
 		final AppCompatImageView filled = item.findViewById(R.id.filled);
 		filled.setImageResource(nightMode ? R.drawable.bg_plugin_logo_enabled_dark : R.drawable.bg_topbar_shield_exit_ref);

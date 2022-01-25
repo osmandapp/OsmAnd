@@ -9,7 +9,6 @@ import android.content.Context;
 import android.text.format.DateUtils;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.text.TextUtilsCompat;
 import androidx.core.view.ViewCompat;
@@ -59,6 +58,7 @@ public class OsmAndFormatter {
 	private static final int MIN_DURATION_FOR_DATE_FORMAT = 48 * 60 * 60;
 	private static final DecimalFormat fixed2 = new DecimalFormat("0.00");
 	private static final DecimalFormat fixed1 = new DecimalFormat("0.0");
+	private static final SimpleDateFormat FULL_TIME_OF_DAY_FORMAT = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
 	private static final SimpleDateFormat SIMPLE_TIME_OF_DAY_FORMAT = new SimpleDateFormat("HH:mm", Locale.getDefault());
 	private static final String[] localDaysStr = getLettersStringArray(DateFormatSymbols.getInstance().getShortWeekdays(), 3);
 
@@ -132,6 +132,12 @@ public class OsmAndFormatter {
 		int hours = seconds / (60 * 60);
 		int minutes = (seconds / 60) % 60;
 		return hours + ":" + (minutes < 10 ? "0" + minutes : minutes);
+	}
+
+	public static String getFormattedFullTime(long millis) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(millis);
+		return FULL_TIME_OF_DAY_FORMAT.format(calendar.getTime());
 	}
 
 	public static String getFormattedTime(long seconds, boolean useCurrentTime) {
@@ -285,16 +291,30 @@ public class OsmAndFormatter {
 		}
 	}
 
-	public static String getFormattedDistance(float meters, OsmandApplication ctx) {
+	@NonNull
+	public static String getFormattedDistance(float meters, @NonNull OsmandApplication ctx) {
 		return getFormattedDistance(meters, ctx, true);
 	}
 
-	public static String getFormattedDistance(float meters, OsmandApplication ctx, boolean forceTrailingZeros) {
+	@NonNull
+	public static String getFormattedDistance(float meters, @NonNull OsmandApplication ctx, boolean forceTrailingZeros) {
 		MetricsConstants mc = ctx.getSettings().METRIC_SYSTEM.get();
 		return getFormattedDistance(meters, ctx, forceTrailingZeros, mc);
 	}
 
-	public static String getFormattedDistance(float meters, OsmandApplication ctx, boolean forceTrailingZeros, MetricsConstants mc) {
+	@NonNull
+	public static String getFormattedDistance(float meters,
+	                                          @NonNull OsmandApplication ctx,
+	                                          boolean forceTrailingZeros,
+	                                          @NonNull MetricsConstants mc) {
+		return getFormattedDistanceValue(meters, ctx, forceTrailingZeros, mc).format(ctx);
+	}
+
+	@NonNull
+	public static FormattedValue getFormattedDistanceValue(float meters,
+	                                                       @NonNull OsmandApplication ctx,
+	                                                       boolean forceTrailingZeros,
+	                                                       @NonNull MetricsConstants mc) {
 		int mainUnitStr;
 		float mainUnitInMeters;
 		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
@@ -308,7 +328,7 @@ public class OsmAndFormatter {
 			mainUnitInMeters = METERS_IN_ONE_MILE;
 		}
 
-		float floatDistance = ((float) meters) / mainUnitInMeters;
+		float floatDistance = meters / mainUnitInMeters;
 
 		if (meters >= 100 * mainUnitInMeters) {
 			return formatValue((int) (meters / mainUnitInMeters + 0.5), mainUnitStr, forceTrailingZeros,
@@ -339,104 +359,120 @@ public class OsmAndFormatter {
 		}
 	}
 
+	@NonNull
 	public static String getFormattedAlt(double alt, OsmandApplication ctx) {
 		OsmandSettings settings = ctx.getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		return getFormattedAlt(alt, ctx, mc);
 	}
 
+	@NonNull
 	public static String getFormattedAlt(double alt, OsmandApplication ctx, MetricsConstants mc) {
-		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS);
+		boolean useFeet = mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.MILES_AND_YARDS;
+		FormattedValue formattedValue;
 		if (useFeet) {
 			int feet = (int) (alt * FEET_IN_ONE_METER + 0.5);
-			return formatValue(feet, R.string.foot, false, 0, ctx);
+			formattedValue = formatValue(feet, R.string.foot, false, 0, ctx);
 		} else {
 			int meters = (int) (alt + 0.5);
-			return formatValue(meters, R.string.m, false, 0, ctx);
+			formattedValue = formatValue(meters, R.string.m, false, 0, ctx);
 		}
+		return formattedValue.format(ctx);
 	}
 
-	public static String getFormattedSpeed(float metersPerSeconds, OsmandApplication ctx) {
-		return getFormattedSpeed(metersPerSeconds, ctx, true);
+	@NonNull
+	public static String getFormattedSpeed(float metersPerSeconds, @NonNull OsmandApplication ctx) {
+		return getFormattedSpeedValue(metersPerSeconds, ctx).format(ctx);
 	}
 
-	public static String getFormattedSpeed(float metersPerSeconds, OsmandApplication ctx, boolean withUnits) {
+	@NonNull
+	public static FormattedValue getFormattedSpeedValue(float metersPerSeconds, @NonNull OsmandApplication ctx) {
 		OsmandSettings settings = ctx.getSettings();
 		SpeedConstants mc = settings.SPEED_SYSTEM.get();
+		String unit = mc.toShortString(ctx);
 		ApplicationMode am = settings.getApplicationMode();
 		float kmh = metersPerSeconds * 3.6f;
 		if (mc == SpeedConstants.KILOMETERS_PER_HOUR) {
 			// e.g. car case and for high-speeds: Display rounded to 1 km/h (5% precision at 20 km/h)
 			if (kmh >= 20 || am.hasFastSpeed()) {
-				return getFormattedSpeed((int) Math.round(kmh), mc.toShortString(ctx), withUnits, ctx);
+				return getFormattedSpeed(Math.round(kmh), unit, ctx);
 			}
 			// for smaller values display 1 decimal digit x.y km/h, (0.5% precision at 20 km/h)
-			int kmh10 = (int) Math.round(kmh * 10f);
-			return getFormattedSpeed(kmh10 / 10f, mc.toShortString(ctx), withUnits, ctx);
+			int kmh10 = Math.round(kmh * 10f);
+			return getFormattedSpeed(kmh10 / 10f, unit, ctx);
 		} else if (mc == SpeedConstants.MILES_PER_HOUR) {
 			float mph = kmh * METERS_IN_KILOMETER / METERS_IN_ONE_MILE;
 			if (mph >= 20 || am.hasFastSpeed()) {
-				return getFormattedSpeed((int) Math.round(mph), mc.toShortString(ctx), withUnits, ctx);
+				return getFormattedSpeed(Math.round(mph), unit, ctx);
 			} else {
-				int mph10 = (int) Math.round(mph * 10f);
-				return getFormattedSpeed(mph10 / 10f, mc.toShortString(ctx), withUnits, ctx);
+				int mph10 = Math.round(mph * 10f);
+				return getFormattedSpeed(mph10 / 10f, unit, ctx);
 			}
 		} else if (mc == SpeedConstants.NAUTICALMILES_PER_HOUR) {
 			float mph = kmh * METERS_IN_KILOMETER / METERS_IN_ONE_NAUTICALMILE;
 			if (mph >= 20 || am.hasFastSpeed()) {
-				return getFormattedSpeed((int) Math.round(mph), mc.toShortString(ctx), withUnits, ctx);
+				return getFormattedSpeed(Math.round(mph), unit, ctx);
 			} else {
-				int mph10 = (int) Math.round(mph * 10f);
-				return getFormattedSpeed(mph10 / 10f, mc.toShortString(ctx), withUnits, ctx);
+				int mph10 = Math.round(mph * 10f);
+				return getFormattedSpeed(mph10 / 10f, unit, ctx);
 			}
 		} else if (mc == SpeedConstants.MINUTES_PER_KILOMETER) {
 			if (metersPerSeconds < 0.111111111) {
-				return withUnits ? "-" + mc.toShortString(ctx) : "-";
+				return new FormattedValue("-", unit, false);
 			}
 			float minPerKm = METERS_IN_KILOMETER / (metersPerSeconds * 60);
 			if (minPerKm >= 10) {
-				return getFormattedSpeed((int) Math.round(minPerKm), mc.toShortString(ctx), withUnits, ctx);
+				return getFormattedSpeed(Math.round(minPerKm), unit, ctx);
 			} else {
 				int seconds = Math.round(minPerKm * 60);
-				return withUnits
-						? Algorithms.formatDuration(seconds, false) + " " + mc.toShortString(ctx)
-						: Algorithms.formatDuration(seconds, false);
+				return new FormattedValue(Algorithms.formatDuration(seconds, false), unit);
 			}
 		} else if (mc == SpeedConstants.MINUTES_PER_MILE) {
 			if (metersPerSeconds < 0.111111111) {
-				return withUnits ? "-" + mc.toShortString(ctx) : "-";
+				return new FormattedValue("-", unit, false);
 			}
 			float minPerM = (METERS_IN_ONE_MILE) / (metersPerSeconds * 60);
 			if (minPerM >= 10) {
-				return getFormattedSpeed((int) Math.round(minPerM), mc.toShortString(ctx), withUnits, ctx);
+				return getFormattedSpeed(Math.round(minPerM), unit, ctx);
 			} else {
-				int mph10 = (int) Math.round(minPerM * 10f);
-				return getFormattedSpeed(mph10 / 10f, mc.toShortString(ctx), withUnits, ctx);
+				int mph10 = Math.round(minPerM * 10f);
+				return getFormattedSpeed(mph10 / 10f, unit, ctx);
 			}
 		} else {
+			String metersPerSecond = SpeedConstants.METERS_PER_SECOND.toShortString(ctx);
 			if (metersPerSeconds >= 10) {
-				String unit = SpeedConstants.METERS_PER_SECOND.toShortString(ctx);
-				return getFormattedSpeed((int) Math.round(metersPerSeconds), unit, withUnits, ctx);
+				return getFormattedSpeed(Math.round(metersPerSeconds), metersPerSecond, ctx);
 			}
 			// for smaller values display 1 decimal digit x.y km/h, (0.5% precision at 20 km/h)
-			int kmh10 = (int) Math.round(metersPerSeconds * 10f);
-			String unit = SpeedConstants.METERS_PER_SECOND.toShortString(ctx);
-			return getFormattedSpeed(kmh10 / 10f, unit, withUnits, ctx);
+			int kmh10 = Math.round(metersPerSeconds * 10f);
+			return getFormattedSpeed(kmh10 / 10f, metersPerSecond, ctx);
 		}
 	}
 
-	public static String getFormattedSpeed(float speed, @NonNull String unit, boolean withUnits,
-	                                       @NonNull OsmandApplication app) {
-		return formatValue(speed, withUnits ? unit : null, false, 0, app);
+	@NonNull
+	private static FormattedValue getFormattedSpeed(float speed, @NonNull String unit, @NonNull OsmandApplication app) {
+		return formatValue(speed, unit, false, 0, app);
 	}
 
-	private static String formatValue(float value, @StringRes int unitId, boolean forceTrailingZeroes,
-	                                  int decimalPlacesNumber, @NonNull OsmandApplication app) {
+	@NonNull
+	public static String formatInteger(int value, @NonNull String unit, @NonNull OsmandApplication app) {
+		return formatIntegerValue(value, unit, app).format(app);
+	}
+
+	@NonNull
+	public static FormattedValue formatIntegerValue(int value, @NonNull String unit, @NonNull OsmandApplication app) {
+		return formatValue(value, unit, false, 0, app);
+	}
+
+	@NonNull
+	private static FormattedValue formatValue(float value, @StringRes int unitId, boolean forceTrailingZeroes,
+	                                          int decimalPlacesNumber, @NonNull OsmandApplication app) {
 		return formatValue(value, app.getString(unitId), forceTrailingZeroes, decimalPlacesNumber, app);
 	}
 
-	private static String formatValue(float value, @Nullable String unit, boolean forceTrailingZeroes,
-	                                  int decimalPlacesNumber, @NonNull OsmandApplication app) {
+	@NonNull
+	private static FormattedValue formatValue(float value, @NonNull String unit, boolean forceTrailingZeroes,
+	                                          int decimalPlacesNumber, @NonNull OsmandApplication app) {
 		String pattern = "0";
 		if (decimalPlacesNumber > 0) {
 			char fractionDigitPattern = forceTrailingZeroes ? '0' : '#';
@@ -460,11 +496,11 @@ public class OsmAndFormatter {
 			decimalFormat.setGroupingSize(3);
 		}
 
-		MessageFormat messageFormat = new MessageFormat("{0}{1}");
+		MessageFormat messageFormat = new MessageFormat("{0}");
 		messageFormat.setFormatByArgumentIndex(0, decimalFormat);
-		String unitToShow = Algorithms.isEmpty(unit) ? "" : " " + unit;
-		return messageFormat.format(new Object[] {value, unitToShow})
+		String formattedValue = messageFormat.format(new Object[] {value})
 				.replace('\n', ' ');
+		return new FormattedValue(formattedValue, unit);
 	}
 
 	public static boolean isSameDay(@NonNull Date firstDate, @NonNull Date secondDate) {
@@ -706,5 +742,30 @@ public class OsmAndFormatter {
 		coordinate -= deg;
 		coordinate *= 60.0;
 		return coordinate;
+	}
+
+	public static class FormattedValue {
+
+		public final String value;
+		public final String unit;
+
+		private final boolean separateWithSpace;
+
+		public FormattedValue(@NonNull String value, @NonNull String unit) {
+			this(value, unit, true);
+		}
+
+		public FormattedValue(@NonNull String value, @NonNull String unit, boolean separateWithSpace) {
+			this.value = value;
+			this.unit = unit;
+			this.separateWithSpace = separateWithSpace;
+		}
+
+		@NonNull
+		public String format(@NonNull Context context) {
+			return separateWithSpace
+					? context.getString(R.string.ltr_or_rtl_combine_via_space, value, unit)
+					: new MessageFormat("{0}{1}").format(new Object[] {value, unit});
+		}
 	}
 }

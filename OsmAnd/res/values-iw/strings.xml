@@ -4455,7 +4455,7 @@
     <string name="shared_string_grade">ציון</string>
     <string name="shared_string_hide_slope">הסתרת שיפוע</string>
     <string name="shared_string_show_slope">הצגת שיפוע</string>
-    <string name="use_routing_fallback_description">להשתמש בניווט בלתי מקוון כשאין אפשרות להציע ניווט מקוון.</string>
+    <string name="use_routing_fallback_description">להשתמש בניווט בלתי מקוון כאשר ניווט מקוון אינו זמין.</string>
     <string name="use_routing_fallback">נסיגה של ניווט בלתי מקוון</string>
     <string name="gps_filter_smoothing_desc">הגדרת סף המרחק בין נקודות.
 \nנקודות מסלול שאינן במרחק שכזה מהנקודה הגלויה האחרונה תוסתרנה.
@@ -4501,4 +4501,14 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">תצוגה סכמתית של סלים ברמות תקריב נמוכות</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">תעלות דרכי מים</string>
     <string name="rendering_attr_seabedDetail_name">פרט קרקעית הים</string>
+    <string name="track_file">קובץ מסלולים</string>
+    <string name="rendering_value_category_name">קטגוריה</string>
+    <string name="rendering_value_all_name">הכול</string>
+    <string name="rendering_value_omit_name">להשמיט</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">תגיות „לתיקון”</string>
+    <string name="gpx_no_routes_descr">אפשר להשתמש בכלי „%1$s” כדי להוסיף מסלול לקובץ.</string>
+    <string name="gpx_no_routes_title">אין מסלולים</string>
+    <string name="save_track_to_gpx_descrp">להתחיל את הקלטת המסלול אוטומטית כשיש ניווט פעיל. כשהניווט מסתיים, המסלול יישמר אוטומטית.</string>
+    <string name="track_file_description">נגיעה בפעולה זו תציג חלונית לבחירה בין המסלולים הזמינים.</string>
 </resources>

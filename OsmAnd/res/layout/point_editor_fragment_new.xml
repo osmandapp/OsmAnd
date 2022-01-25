@@ -383,7 +383,6 @@
 					android:paddingLeft="@dimen/content_padding"
 					android:paddingTop="@dimen/context_menu_first_line_top_margin"
 					android:paddingRight="@dimen/content_padding"
-					android:paddingBottom="@dimen/context_menu_first_line_top_margin"
 					android:text="@string/select_icon_profile_dialog_title"
 					android:textColor="?android:textColorSecondary"
 					android:textSize="@dimen/default_desc_text_size"
@@ -391,19 +390,15 @@
 					android:paddingEnd="@dimen/content_padding"
 					android:paddingStart="@dimen/content_padding" />
 
-				<androidx.recyclerview.widget.RecyclerView
-					android:id="@+id/group_name_recycler_view"
+				<net.osmand.plus.widgets.chips.HorizontalChipsView
+					android:id="@+id/icon_category_selector"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:clipToPadding="false"
-					android:orientation="horizontal"
-					android:paddingStart="@dimen/content_padding"
-					android:paddingLeft="@dimen/content_padding"
-					android:paddingEnd="@dimen/content_padding"
-					android:paddingRight="@dimen/content_padding"
-					tools:itemCount="3"
+					android:paddingHorizontal="@dimen/content_padding"
+					android:paddingTop="@dimen/context_menu_first_line_top_margin"
+					android:paddingBottom="@dimen/context_menu_padding_margin_tiny"
 					tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-					tools:listitem="@layout/point_editor_icon_category_item"
+					tools:listitem="@layout/custom_chip_view"
 					tools:orientation="horizontal" />
 
 				<net.osmand.plus.widgets.FlowLayout
@@ -412,7 +407,6 @@
 					android:layout_height="wrap_content"
 					android:layout_marginStart="@dimen/content_padding"
 					android:layout_marginLeft="@dimen/content_padding"
-					android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
 					android:layout_marginEnd="@dimen/content_padding"
 					android:layout_marginRight="@dimen/content_padding"
 					android:layout_marginBottom="@dimen/content_padding_half" />

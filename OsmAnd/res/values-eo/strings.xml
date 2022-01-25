@@ -4511,4 +4511,5 @@
     <string name="rendering_value_all_name">Ĉiuj</string>
     <string name="rendering_value_omit_name">Ignori</string>
     <string name="rendering_attr_seabedDetail_name">Marfundo</string>
+    <string name="save_track_to_gpx_descrp">Aŭtomate ekigi registradon de spuro dum navigi. La spuro estos konservita post fini navigadon.</string>
 </resources>

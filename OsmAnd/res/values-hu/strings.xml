@@ -4505,4 +4505,7 @@
     <string name="rendering_value_omit_name">Kihagyás</string>
     <string name="rendering_attr_seabedDetail_description">További szöveges információ a tengerfenék felszínének minősítéséről, kombinált felszíntípusokról, valamint a növényzet és a tengeri füvek kategóriájáról és taxonjáról</string>
     <string name="rendering_attr_seabedDetail_name">Tengerfenék részletei</string>
+    <string name="save_track_to_gpx_descrp">Navigáció közben automatikusan elindítja a nyomvonalrögzítést. Amikor befejeződik, a nyomvonal automatikusan elmentődik.</string>
+    <string name="gpx_no_routes_title">Nincs útvonal</string>
+    <string name="gpx_no_routes_descr">A(z) „%1$s” eszközzel útvonalat adhat hozzá a fájlhoz.</string>
 </resources>

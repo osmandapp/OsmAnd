@@ -14,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 
 import net.osmand.data.LatLon;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.GeocodingLookupService.OnAddressLookupResult;
 import net.osmand.plus.R;
@@ -23,6 +22,7 @@ import net.osmand.plus.mapcontextmenu.editors.EditCategoryDialogFragment;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.SelectCategoryDialogFragment;
 import net.osmand.plus.mapcontextmenu.editors.SelectFavoriteCategoryBottomSheet;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;

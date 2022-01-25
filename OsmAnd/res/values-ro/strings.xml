@@ -4518,4 +4518,5 @@
     <string name="rendering_value_all_name">Toate</string>
     <string name="rendering_value_omit_name">Omiteți</string>
     <string name="rendering_attr_seabedDetail_name">Detalii privind fundul mării</string>
+    <string name="save_track_to_gpx_descrp">Începeți înregistrarea automată a pieselor în timpul navigației. Când se termină, pista va fi salvată automat.</string>
 </resources>

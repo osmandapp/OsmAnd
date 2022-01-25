@@ -368,8 +368,12 @@ public class GPXUtilities {
 			return getExtensionsToRead().get(ADDRESS_EXTENSION);
 		}
 
-		public String setAddress(String address) {
-			return getExtensionsToWrite().put(ADDRESS_EXTENSION, address);
+		public void setAddress(String address) {
+			if (Algorithms.isBlank(address)) {
+				getExtensionsToWrite().remove(ADDRESS_EXTENSION);
+			} else {
+				getExtensionsToWrite().put(ADDRESS_EXTENSION, address);
+			}
 		}
 
 		public void setProfileType(String profileType) {

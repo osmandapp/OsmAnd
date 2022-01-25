@@ -277,8 +277,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		app = requireMyApplication();
 		displayHelper = new TrackDisplayHelper(app);
 		updateLocationViewCache = app.getUIUtilities().getUpdateLocationViewCache();
-		toolbarHeightPx = getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
 
+		toolbarHeightPx = getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
 		if (selectedGpxFile == null && savedInstanceState != null) {
 			String path = savedInstanceState.getString(TRACK_FILE_NAME);
 			boolean showCurrentTrack = savedInstanceState.getBoolean(CURRENT_RECORDING);
@@ -428,9 +428,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	private void shiftMapControls(int shift) {
-		AndroidUtils.setMargins(
-				(MarginLayoutParams) backButtonContainer.getLayoutParams(),
-				shift, 0, 0, 0);
+		MarginLayoutParams params = (MarginLayoutParams) backButtonContainer.getLayoutParams();
+		AndroidUtils.setMargins(params, shift, params.topMargin, params.getMarginEnd(), params.bottomMargin);
 	}
 
 	private void initContent(@NonNull View view) {

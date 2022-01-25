@@ -4513,4 +4513,7 @@
     <string name="rendering_value_category_name">Categoría</string>
     <string name="rendering_value_all_name">Todos</string>
     <string name="rendering_value_omit_name">Omitir</string>
+    <string name="save_track_to_gpx_descrp">Inicia la grabación de la traza automáticamente mientras la navegación está en curso. Al finalizar, la pista se guardará automáticamente.</string>
+    <string name="gpx_no_routes_title">Sin rutas</string>
+    <string name="gpx_no_routes_descr">Puedes usar la herramienta «%1$s» para añadir la ruta al archivo.</string>
 </resources>
