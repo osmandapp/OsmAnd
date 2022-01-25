@@ -238,14 +238,16 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
             return false;
         }
 		// check if state change is needed
-		if (currentWidgetState != null && currentWidgetState == showWidget || isWidgetVisible() == showWidget) {
+        boolean quickActionModeEnabled = currentWidgetState != null && currentWidgetState || isWidgetVisible();
+        boolean quickActionModeDisabled = currentWidgetState == null || !currentWidgetState || !isWidgetVisible();
+		if (quickActionModeEnabled == showWidget && quickActionModeDisabled == !showWidget) {
 			return false;
 		}
 		currentWidgetState = showWidget;
 
 		updateQuickActionButton(showWidget);
-		if (settings.DO_NOT_USE_ANIMATIONS.get()) {
-			quickActionsWidget.setVisibility(!showWidget ? View.GONE : View.VISIBLE);
+		if (settings.DO_NOT_USE_ANIMATIONS.get() || !quickActionsWidget.isAttachedToWindow()) {
+            AndroidUiHelper.updateVisibility(quickActionsWidget, showWidget);
 		} else {
 			animateWidget(showWidget);
 		}
