@@ -4510,4 +4510,5 @@
     <string name="save_track_to_gpx_descrp">Démarre l\'enregistrement de la trace avec la navigation. Une fois la navigation terminée, la trace sera automatiquement enregistrée.</string>
     <string name="gpx_no_routes_title">Il n\'y a aucun itinéraire</string>
     <string name="gpx_no_routes_descr">Vous pouvez utiliser l’outil « %1$s » pour ajouter un itinéraire dans le fichier.</string>
+    <string name="quick_action_add_route_descr">Bouton, au milieu de l\'écran, pour démarrer un itinéraire.</string>
 </resources>
