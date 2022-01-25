@@ -14,7 +14,9 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
@@ -33,6 +35,8 @@ import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.LineChart.LabelDisplayData;
+import com.github.mikephil.charting.charts.LineChart.YAxisLabelView;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -78,7 +82,6 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SpeedConstants;
-import net.osmand.plus.track.ChartLabel;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.GpxAppearanceAdapter.AppearanceListItem;
 import net.osmand.plus.track.GpxMarkerView;
@@ -1143,22 +1146,42 @@ public class GpxUiHelper {
 		markerView.setChartView(mChart); // For bounds control
 		mChart.setMarker(markerView); // Set the marker to the chart
 		mChart.setDrawMarkers(true);
+		mChart.setYAxisLabelView(new YAxisLabelView(context, R.layout.chart_label) {
 
-		ChartLabel chartLabel = new ChartLabel(context, R.layout.chart_label);
-		chartLabel.setChart(mChart);
-		mChart.setYAxisLabelView(chartLabel);
+			private static final int SPAN_FLAG = Spannable.SPAN_EXCLUSIVE_EXCLUSIVE;
 
-		int xAxisRulerColor = ContextCompat.getColor(context, R.color.gpx_chart_black_grid);
+			private final TextView label = findViewById(R.id.label);
+
+			@Override
+			public void updateLabel(@NonNull LabelDisplayData leftYAxisData, @Nullable LabelDisplayData rightYAxisData) {
+				if (rightYAxisData == null) {
+					SpannableString displayText = new SpannableString(leftYAxisData.getText());
+					displayText.setSpan(new ForegroundColorSpan(leftYAxisData.getColor()), 0,
+							displayText.length(), SPAN_FLAG);
+					label.setText(displayText);
+				} else {
+					String combinedPlainText = context.getString(R.string.ltr_or_rtl_combine_via_comma,
+							leftYAxisData.getText(), rightYAxisData.getText());
+					SpannableString displayText = new SpannableString(combinedPlainText);
+
+					boolean rtl = AndroidUtils.isLayoutRtl(context);
+					LabelDisplayData first = rtl ? rightYAxisData : leftYAxisData;
+					int edge = rtl ? first.getText().length() : first.getText().length() + 1;
+					displayText.setSpan(new ForegroundColorSpan(leftYAxisData.getColor()), 0, edge, SPAN_FLAG);
+					displayText.setSpan(new ForegroundColorSpan(rightYAxisData.getColor()), edge,
+							displayText.length(), SPAN_FLAG);
+
+					label.setText(displayText);
+				}
+			}
+		});
+
 		int labelsColor = ContextCompat.getColor(context, R.color.description_font_and_bottom_sheet_icons);
 		XAxis xAxis = mChart.getXAxis();
-		xAxis.setDrawAxisLine(true);
-		xAxis.setDrawAxisLineBehindData(false);
-		xAxis.setAxisLineWidth(1);
-		xAxis.setAxisLineColor(xAxisRulerColor);
+		xAxis.setDrawAxisLine(false);
 		xAxis.setDrawGridLines(true);
-		xAxis.setDrawGridLinesBehindData(false);
 		xAxis.setGridLineWidth(1.5f);
-		xAxis.setGridColor(xAxisRulerColor);
+		xAxis.setGridColor(ContextCompat.getColor(context, R.color.gpx_chart_black_grid));
 		xAxis.enableGridDashedLine(25f, Float.MAX_VALUE, 0f);
 		xAxis.setPosition(BOTTOM);
 		xAxis.setTextColor(labelsColor);
@@ -1474,8 +1497,7 @@ public class GpxUiHelper {
 
 		List<Entry> values = calculateElevationArray(analysis, axisType, divX, convEle, true, calcWithoutGaps);
 
-		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.ALTITUDE,
-				axisType, !useRightAxis);
+		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.ALTITUDE, axisType);
 		dataSet.priority = (float) (analysis.avgElevation - analysis.minElevation) * convEle;
 		dataSet.divX = divX;
 		dataSet.mulY = convEle;
@@ -1610,8 +1632,7 @@ public class GpxUiHelper {
 			}
 		}
 
-		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.SPEED,
-				axisType, !useRightAxis);
+		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.SPEED, axisType);
 
 		String format = null;
 		if (dataSet.getYMax() < 3) {
@@ -1802,8 +1823,7 @@ public class GpxUiHelper {
 			slopeValues.add(lastEntry);
 		}
 
-		OrderedLineDataSet dataSet = new OrderedLineDataSet(slopeValues, "", GPXDataSetType.SLOPE,
-				axisType, !useRightAxis);
+		OrderedLineDataSet dataSet = new OrderedLineDataSet(slopeValues, "", GPXDataSetType.SLOPE, axisType);
 		dataSet.divX = divX;
 		dataSet.units = mainUnitY;
 
@@ -1935,20 +1955,16 @@ public class GpxUiHelper {
 		private final GPXDataSetType dataSetType;
 		private final GPXDataSetAxisType dataSetAxisType;
 
-		private final boolean leftAxis;
-
 		float priority;
 		String units;
 		float divX = 1f;
 		float divY = 1f;
 		float mulY = 1f;
 
-		OrderedLineDataSet(List<Entry> yVals, String label, GPXDataSetType dataSetType,
-		                   GPXDataSetAxisType dataSetAxisType, boolean leftAxis) {
+		OrderedLineDataSet(List<Entry> yVals, String label, GPXDataSetType dataSetType, GPXDataSetAxisType dataSetAxisType) {
 			super(yVals, label);
 			this.dataSetType = dataSetType;
 			this.dataSetAxisType = dataSetAxisType;
-			this.leftAxis = leftAxis;
 		}
 
 		public GPXDataSetType getDataSetType() {
@@ -1977,10 +1993,6 @@ public class GpxUiHelper {
 
 		public String getUnits() {
 			return units;
-		}
-
-		public boolean isLeftAxis() {
-			return leftAxis;
 		}
 	}
 
