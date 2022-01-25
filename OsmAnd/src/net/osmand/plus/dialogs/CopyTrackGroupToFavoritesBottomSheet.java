@@ -58,8 +58,8 @@ public class CopyTrackGroupToFavoritesBottomSheet extends EditTrackGroupBottomSh
 		if (fragment instanceof OnGroupNameChangeListener) {
 			OnGroupNameChangeListener listener = (OnGroupNameChangeListener) fragment;
 			listener.onTrackGroupChanged();
-			dismiss();
 		}
+		dismiss();
 	}
 
 	@Override
