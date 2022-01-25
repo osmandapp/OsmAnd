@@ -3,7 +3,9 @@ package net.osmand.plus.mapcontextmenu.editors;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.GPXUtilities.PointsCategory;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.activities.MapActivity;
@@ -92,5 +94,19 @@ public class FavoritePointEditor extends PointEditor {
 		isNew = false;
 		this.favorite = favorite;
 		FavoritePointEditorFragment.showInstance(mapActivity);
+	}
+
+	@Override
+	public void setCategory(@NonNull PointsCategory category, boolean isNew) {
+		if (mapActivity != null) {
+			FavouritesDbHelper favouritesDbHelper = mapActivity.getMyApplication().getFavorites();
+			if (isNew) {
+				favouritesDbHelper.addEmptyCategory(category.getName(), category.getColor(), category.getIconName(),
+						BackgroundType.getByTypeName(category.getBackgroundType(), BackgroundType.CIRCLE), true);
+			} else {
+				// todo category: update existing category
+			}
+		}
+		super.setCategory(category, isNew);
 	}
 }

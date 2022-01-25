@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.PointsCategory;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.LatLon;
@@ -376,12 +377,11 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	}
 
 	@Override
-	public void setCategory(String name, int color) {
+	public void setCategory(@NonNull PointsCategory category) {
 		if (categoriesMap != null) {
-			categoriesMap.put(name, color);
+			categoriesMap.put(category.getName(), category.getColor());
 		}
-		this.color = this.color == 0 ? color : this.color;
-		super.setCategory(name, color);
+		super.setCategory(category);
 	}
 
 	@Override

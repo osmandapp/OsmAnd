@@ -15,11 +15,13 @@ import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import net.osmand.GPXUtilities.PointsCategory;
 import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.track.cards.ColorsCard;
 import net.osmand.plus.utils.AndroidUtils;
@@ -365,10 +367,22 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 		delete(true);
 	}
 
-	public void setCategory(String name, int color) {
-		setSelectedItemWithScroll(name);
-		updateColorSelector(color);
-		AndroidUiHelper.updateVisibility(addToHiddenGroupInfo, !isCategoryVisible(name));
+	public void setCategory(@NonNull PointsCategory category) {
+		setSelectedItemWithScroll(category.getName());
+		updateColorSelector(category.getColor());
+
+		int categoryIconId = RenderingIcons.getBigIconResourceId(category.getIconName());
+		if (categoryIconId != 0) {
+			iconsCard.updateSelectedIconId(categoryIconId);
+		}
+
+		BackgroundType categoryBackgroundType =
+				BackgroundType.getByTypeName(category.getBackgroundType(), null);
+		if (categoryBackgroundType != null) {
+			shapesCard.updateSelectedShape(categoryBackgroundType);
+		}
+
+		AndroidUiHelper.updateVisibility(addToHiddenGroupInfo, !isCategoryVisible(category.getName()));
 	}
 
 	@SuppressLint("NotifyDataSetChanged")

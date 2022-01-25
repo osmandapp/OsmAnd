@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import net.osmand.GPXUtilities.PointsCategory;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.LatLon;
@@ -171,13 +172,15 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 	}
 
 	@Override
-	public void setCategory(String name, int color) {
+	public void setCategory(@NonNull PointsCategory category) {
 		FavouritesDbHelper helper = getHelper();
 		Context ctx = getContext();
 		if (helper != null && ctx != null) {
-			FavoriteGroup group = helper.getGroup(FavoriteGroup.convertDisplayNameToGroupIdName(ctx, name));
+			// todo category: is name conversion needed?
+			FavoriteGroup group = helper.getGroup(FavoriteGroup.convertDisplayNameToGroupIdName(ctx, category.getName()));
+			// todo category
 			this.group = group;
-			super.setCategory(name, group != null ? group.getColor() : 0);
+			super.setCategory(category);
 		}
 	}
 

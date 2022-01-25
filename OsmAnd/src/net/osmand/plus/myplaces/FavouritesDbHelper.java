@@ -771,6 +771,7 @@ public class FavouritesDbHelper {
 		group.visible = visible;
 		favoriteGroups.add(group);
 		flatGroups.put(group.name, group);
+		saveCurrentPointsIntoFile();
 	}
 
 	public List<FavouritePoint> getFavouritePoints() {

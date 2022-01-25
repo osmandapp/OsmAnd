@@ -1,17 +1,22 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import android.os.AsyncTask;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.PointsCategory;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -247,6 +252,20 @@ public class WptPtEditor extends PointEditor {
 		if (mapActivity != null) {
 			WptPtEditorFragmentNew.showInstance(mapActivity, skipDialog);
 		}
+	}
+
+	@Override
+	public void setCategory(@NonNull PointsCategory category, boolean isNew) {
+		if (gpxFile != null && isNew) {
+			gpxFile.addCategory(category);
+			if (gpxFile.showCurrentTrack) {
+				// todo category
+			} else {
+				new SaveGpxAsyncTask(new File(gpxFile.path), gpxFile, null)
+						.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			}
+		}
+		super.setCategory(category, isNew);
 	}
 
 	public interface OnTemplateAddedListener {
