@@ -1,5 +1,10 @@
 package net.osmand.plus.dialogs;
 
+import static net.osmand.plus.utils.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
+import static net.osmand.plus.utils.FileUtils.renameFile;
+import static net.osmand.plus.utils.FileUtils.renameGpxFile;
+import static net.osmand.plus.utils.FileUtils.renameSQLiteFile;
+
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.text.Editable;
@@ -15,28 +20,23 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.FileUtils.RenameCallback;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.resources.SQLiteTileSource;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.resources.SQLiteTileSource;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FileUtils.RenameCallback;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-
-import static net.osmand.plus.utils.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
-import static net.osmand.plus.utils.FileUtils.renameFile;
-import static net.osmand.plus.utils.FileUtils.renameGpxFile;
-import static net.osmand.plus.utils.FileUtils.renameSQLiteFile;
 
 public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -176,7 +176,7 @@ public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment target,
-									@NonNull File file, boolean usedOnMap) {
+	                                @NonNull File file, boolean usedOnMap) {
 		if (file.exists() && !fragmentManager.isStateSaved()
 				&& fragmentManager.findFragmentByTag(RenameFileBottomSheet.TAG) == null) {
 			RenameFileBottomSheet fragment = new RenameFileBottomSheet();
