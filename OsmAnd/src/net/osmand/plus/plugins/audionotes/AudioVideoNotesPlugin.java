@@ -17,6 +17,7 @@ import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
+import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.Parameters;
 import android.hardware.Camera.PictureCallback;
 import android.media.AudioManager;
@@ -1424,12 +1425,12 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	private void internalShoot() {
 		requireMapActivity().getMyApplication().runInUIThread(() -> {
-			boolean isShatterSound = AV_PHOTO_PLAY_SOUND.get();
-			Camera.CameraInfo info = new Camera.CameraInfo();
-			if (info.canDisableShutterSound) {
-				cam.enableShutterSound(isShatterSound);
-			}
 			if (cam != null) {
+				boolean isShatterSound = AV_PHOTO_PLAY_SOUND.get();
+				CameraInfo info = new Camera.CameraInfo();
+				if (info.canDisableShutterSound) {
+					cam.enableShutterSound(isShatterSound);
+				}
 				if (!autofocus) {
 					cam.takePicture(null, null, new JpegPhotoHandler());
 				} else {
