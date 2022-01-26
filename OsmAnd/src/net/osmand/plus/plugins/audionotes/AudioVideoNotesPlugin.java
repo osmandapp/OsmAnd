@@ -17,6 +17,7 @@ import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
+import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.Parameters;
 import android.hardware.Camera.PictureCallback;
 import android.media.AudioManager;
@@ -1425,6 +1426,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private void internalShoot() {
 		requireMapActivity().getMyApplication().runInUIThread(() -> {
 			if (cam != null) {
+				CameraInfo info = new CameraInfo();
+				if (info.canDisableShutterSound) {
+					cam.enableShutterSound(AV_PHOTO_PLAY_SOUND.get());
+				}
 				if (!autofocus) {
 					cam.takePicture(null, null, new JpegPhotoHandler());
 				} else {
