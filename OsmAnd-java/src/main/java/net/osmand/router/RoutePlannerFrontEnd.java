@@ -911,6 +911,7 @@ public class RoutePlannerFrontEnd {
 			return runNativeRouting(ctx, recalculationEnd);
 		} else {
 			refreshProgressDistance(ctx);
+			refreshSubregions(ctx);
 			// Split into 2 methods to let GC work in between
 			ctx.finalRouteSegment = new BinaryRoutePlanner().searchRouteInternal(ctx, start, end, recalculationEnd);
 			// 4. Route is found : collect all segments and prepare result
@@ -961,7 +962,11 @@ public class RoutePlannerFrontEnd {
 			float speed = 0.9f * ctx.config.router.getMaxSpeed();
 			ctx.calculationProgress.totalEstimatedDistance = (float) (rd / speed);
 		}
-
+	}
+	
+	private void refreshSubregions(RoutingContext ctx) {
+		ctx.subregionTiles.clear();
+		ctx.indexedSubregions.clear();
 	}
 
 	private List<RouteSegmentResult> runNativeRouting(final RoutingContext ctx, RouteSegment recalculationEnd) throws IOException {
