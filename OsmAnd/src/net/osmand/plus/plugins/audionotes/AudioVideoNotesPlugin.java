@@ -1426,10 +1426,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private void internalShoot() {
 		requireMapActivity().getMyApplication().runInUIThread(() -> {
 			if (cam != null) {
-				boolean isShatterSound = AV_PHOTO_PLAY_SOUND.get();
-				CameraInfo info = new Camera.CameraInfo();
+				CameraInfo info = new CameraInfo();
 				if (info.canDisableShutterSound) {
-					cam.enableShutterSound(isShatterSound);
+					cam.enableShutterSound(AV_PHOTO_PLAY_SOUND.get());
 				}
 				if (!autofocus) {
 					cam.takePicture(null, null, new JpegPhotoHandler());
