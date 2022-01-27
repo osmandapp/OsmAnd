@@ -109,22 +109,8 @@ public class RoutingContext {
 		this.leftSideNavigation = cp.leftSideNavigation;
 		this.reverseMap.putAll(cp.reverseMap);
 		this.nativeLib = cp.nativeLib;
-		// copy local data and clear caches
-		for(RoutingSubregionTile tl : subregionTiles) {
-			if(tl.isLoaded()) {
-				subregionTiles.add(tl);
-				for (RouteSegment rs : tl.routes.valueCollection()) {
-					RouteSegment s = rs;
-					while (s != null) {
-						s.parentRoute = null;
-						s.parentSegmentEnd = 0;
-						s.distanceFromStart = 0;
-						s.distanceToEnd = 0;
-						s = s.next;
-					}
-				}
-			}
-		}
+		this.visitor = cp.visitor;
+		this.calculationProgress = cp.calculationProgress;
 	}
 	
 	RoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] map, RouteCalculationMode calcMode) {
