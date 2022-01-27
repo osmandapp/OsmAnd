@@ -109,6 +109,8 @@ public class RoutingContext {
 		this.leftSideNavigation = cp.leftSideNavigation;
 		this.reverseMap.putAll(cp.reverseMap);
 		this.nativeLib = cp.nativeLib;
+		this.visitor = cp.visitor;
+		this.calculationProgress = cp.calculationProgress;
 	}
 	
 	RoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] map, RouteCalculationMode calcMode) {
