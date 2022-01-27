@@ -44,7 +44,7 @@ import java.util.Map;
 public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenuProvider {
 
 	private static final int START_ZOOM = 8;
-	private static final int MIN_POINTS_PERCENTILE = 10;
+	private static final int MIN_POINTS_PERCENTILE = 20;
 	// roughly 10 points per tile
 	private static final double MIN_DISTANCE_TO_SHOW_REF_ZOOM = MapUtils.getTileDistanceWidth(START_ZOOM) / 10;
 
