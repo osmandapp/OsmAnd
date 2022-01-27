@@ -4522,4 +4522,5 @@
     <string name="save_track_to_gpx_descrp">Start sporoptagelse automatisk, når navigation er i gang. Når den er færdig, gemmes sporet automatisk.</string>
     <string name="gpx_no_routes_title">Der er ingen ruter</string>
     <string name="gpx_no_routes_descr">Du kan bruge værktøjet \"%1$s\" til at tilføje rute til fil.</string>
+    <string name="quick_action_add_route_descr">En knap til at starte en rute fra midten af skærmen.</string>
 </resources>

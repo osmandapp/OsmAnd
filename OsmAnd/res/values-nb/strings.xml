@@ -4412,4 +4412,5 @@
     <string name="shared_string_not_used">Ikke i bruk</string>
     <string name="waypoint_template">Veipunktsmal</string>
     <string name="navigate_point_format_swiss_grid_plus">Sveitsisk koordinatsystem (CH1903+)</string>
+    <string name="quick_action_add_route_descr">En knapp for å starte en rute fra midten av skjermen.</string>
 </resources>
