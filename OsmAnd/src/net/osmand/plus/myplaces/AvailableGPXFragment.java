@@ -4,7 +4,6 @@ import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.openTrack;
 import static net.osmand.plus.track.helpers.GpxSelectionHelper.CURRENT_TRACK;
-import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 import static net.osmand.util.Algorithms.formatDuration;
 import static net.osmand.util.Algorithms.objectEquals;
 
@@ -68,6 +67,7 @@ import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.base.SelectionBottomSheet.DialogStateListener;
 import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.myplaces.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
@@ -117,9 +117,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		FavoritesFragmentStateHolder, OsmAuthorizationListener, OnTrackFileMoveListener,
 		RenameCallback, UploadGpxListener {
 
-	public static final int SEARCH_ID = -1;
-	// public static final int ACTION_ID = 0;
-	// protected static final int DELETE_ACTION_ID = 1;
+	private static final int SEARCH_ID = -1;
+
 	private boolean selectionMode = false;
 	private List<GpxInfo> selectedItems = new ArrayList<>();
 	private Set<Integer> selectedGroups = new LinkedHashSet<>();
@@ -139,6 +138,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	private View emptyView;
 	private SelectGpxTaskListener gpxTaskListener;
 	private TracksSortByMode sortByMode;
+	private boolean nightMode;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -166,7 +166,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	@Override
 	public void onAttach(@NonNull Context activity) {
 		super.onAttach(activity);
-		this.app = (OsmandApplication) getActivity().getApplication();
+		this.app = (OsmandApplication) activity.getApplicationContext();
+		nightMode = !app.getSettings().isLightContent();
 		sortByMode = app.getSettings().TRACKS_SORT_BY_MODE.get();
 		currentRecording = new GpxInfo(app.getSavingTrackHelper().getCurrentGpx(), getString(R.string.shared_string_currently_recording_track));
 		currentRecording.currentlyRecordingTrack = true;
@@ -254,10 +255,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.monitoring_rec_big));
 		icon.setVisibility(selectionMode && showOnMapMode ? View.GONE : View.VISIBLE);
 
-		final boolean light = app.getSettings().isLightContent();
 		SavingTrackHelper sth = app.getSavingTrackHelper();
 
-		int activeColorId = ColorUtilities.getActiveColorId(!light);
+		int activeColorId = ColorUtilities.getActiveColorId(nightMode);
 		Button stop = (Button) currentGpxView.findViewById(R.id.action_button);
 		if (isRecording) {
 			currentGpxView.findViewById(R.id.segment_time_div).setVisibility(View.VISIBLE);
@@ -354,20 +354,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				}
 			});
 			listView.addHeaderView(currentGpxView);
-			/*
-			currentTrackView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					openTrack(getActivity(), null);
-				}
-			});
-			*/
 		}
 		footerView = inflater.inflate(R.layout.list_shadow_footer, null, false);
 		listView.addFooterView(footerView);
 		emptyView = v.findViewById(android.R.id.empty);
 		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
-		emptyImageView.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_empty_state_trip_day : R.drawable.ic_empty_state_trip_night);
+		emptyImageView.setImageResource(nightMode ? R.drawable.ic_empty_state_trip_night : R.drawable.ic_empty_state_trip_day);
 		Button importButton = (Button) emptyView.findViewById(R.id.import_button);
 		importButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -401,7 +393,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		boolean nightMode = !app.getSettings().isLightContent();
 		listView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
 	}
 
@@ -530,7 +521,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			}
 			if (contextMenuItem.getIcon() != -1) {
 				OsmandApplication app = requireMyApplication();
-				boolean nightMode = !app.getSettings().isLightContent();
 				int colorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 				Drawable icMenuItem = app.getUIUtilities().getIcon(contextMenuItem.getIcon(), colorId);
 				item.setIcon(icMenuItem);
@@ -563,7 +553,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		if (itemId == R.id.action_sort) {
 			Activity activity = getActivity();
 			if (activity != null) {
-				boolean nightMode = app.getSettings().isLightContent();
 				View menuSortItemView = getActivity().findViewById(R.id.action_sort);
 				final List<PopUpMenuItem> items = new ArrayList<>();
 				for (final TracksSortByMode mode : TracksSortByMode.values()) {
@@ -1231,14 +1220,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			//v.findViewById(R.id.group_divider).setVisibility(groupPosition == 0 ? View.GONE : View.VISIBLE);
 			v.findViewById(R.id.group_divider).setVisibility(View.VISIBLE);
 
-			StringBuilder t = new StringBuilder();
-			String groupName = group.replaceAll("_", " ").replace(IndexConstants.GPX_FILE_EXT, "");
-			if (groupName.length() == 0) {
-				groupName = getString(R.string.shared_string_tracks);
-			}
-			t.append(capitalizeFirstLetter(groupName));
-			boolean light = app.getSettings().isLightContent();
-
 			if (selectionMode) {
 				final CheckBox ch = (CheckBox) v.findViewById(R.id.toggle_item);
 				// Issue 6187: No selection box for Visible group header
@@ -1267,14 +1248,16 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				if (isSelectedGroup(groupPosition)) {
 					setCategoryIcon(app.getUIUtilities().getIcon(R.drawable.ic_map, R.color.osmand_orange), v);
 				} else {
-					setCategoryIcon(app, 0, v, light);
+					setCategoryIcon(app, 0, v, !nightMode);
 				}
 				v.findViewById(R.id.category_icon).setVisibility(View.VISIBLE);
 			}
 
-			adjustIndicator(app, groupPosition, isExpanded, v, light);
+			adjustIndicator(app, groupPosition, isExpanded, v, !nightMode);
+
+			String groupName = GpxUiHelper.getGpxDirTitle(group);
 			TextView nameView = ((TextView) v.findViewById(R.id.category_name));
-			nameView.setText(t.toString());
+			nameView.setText(Algorithms.isEmpty(groupName) ? getString(R.string.shared_string_tracks) : groupName);
 
 			return v;
 		}
@@ -1438,9 +1421,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	private void openPopUpMenu(View v, final GpxInfo gpxInfo) {
-		boolean nightMode = app.getSettings().isLightContent();
+		UiUtilities iconsCache = app.getUIUtilities();
 		final List<PopUpMenuItem> items = new ArrayList<>();
-		UiUtilities iconsCache = getMyApplication().getUIUtilities();
 
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_show_on_map)

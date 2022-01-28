@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/progress_container"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<me.zhanghai.android.materialprogressbar.MaterialProgressBar
+		android:id="@+id/progress_bar"
+		style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="4dp"
+		android:indeterminate="true"
+		osmand:mpb_progressStyle="horizontal"
+		osmand:mpb_setBothDrawables="true"
+		osmand:mpb_useIntrinsicPadding="false" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/title"
+		style="@style/TitleStyle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/list_background_color"
+		android:minHeight="@dimen/bottom_sheet_list_item_height"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingTop="@dimen/content_padding_small"
+		android:paddingRight="@dimen/content_padding"
+		android:paddingBottom="@dimen/content_padding_small"
+		android:text="@string/reading_files" />
+
+	<include layout="@layout/card_bottom_divider" />
+
+</LinearLayout>

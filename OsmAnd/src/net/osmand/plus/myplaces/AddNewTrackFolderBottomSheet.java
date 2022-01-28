@@ -17,16 +17,17 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -86,6 +87,8 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 				.setCustomView(view)
 				.create();
 		items.add(editFolderName);
+
+		items.add(new DividerSpaceItem(app, AndroidUtils.dpToPx(app, 12)));
 	}
 
 	@Override
@@ -151,16 +154,14 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 		void onTrackFolderAdd(String folderName);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment target, boolean usedOnMap) {
-		try {
-			if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(AddNewTrackFolderBottomSheet.TAG) == null) {
-				AddNewTrackFolderBottomSheet fragment = new AddNewTrackFolderBottomSheet();
-				fragment.setUsedOnMap(usedOnMap);
-				fragment.setTargetFragment(target, 0);
-				fragment.show(fragmentManager, AddNewTrackFolderBottomSheet.TAG);
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+	public static void showInstance(@NonNull FragmentManager manager, @Nullable String folderName,
+	                                @Nullable Fragment target, boolean usedOnMap) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			AddNewTrackFolderBottomSheet fragment = new AddNewTrackFolderBottomSheet();
+			fragment.folderName = folderName;
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.setTargetFragment(target, 0);
+			fragment.show(manager, TAG);
 		}
 	}
 }
