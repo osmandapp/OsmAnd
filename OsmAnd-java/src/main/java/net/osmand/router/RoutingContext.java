@@ -41,6 +41,7 @@ import net.osmand.util.MapUtils;
 public class RoutingContext {
 
 	public static boolean SHOW_GC_SIZE = false;
+	public static boolean PRINT_ROUTING_ALERTS = false;
 	 
 	
 	private final static Log log = PlatformUtil.getLog(RoutingContext.class);
@@ -97,8 +98,11 @@ public class RoutingContext {
 	// callback of processing segments
 	RouteSegmentVisitor visitor = null;
 
+	public RoutingAlerts alerts = new RoutingAlerts();
+	
 	// old planner
 	public FinalRouteSegment finalRouteSegment;
+	
 
 
 	
@@ -959,6 +963,25 @@ public class RoutingContext {
 		
 	}
 	
+	public static class RoutingAlerts {
+		
+		public int fasterRoadToVisitedSegments;
+		public int slowerSegmentedWasVisitedEarlier;
+		
+		public boolean noAlerts() {
+			return fasterRoadToVisitedSegments + slowerSegmentedWasVisitedEarlier == 0;
+		}
+		
+		@Override
+		public String toString() {
+			if (noAlerts()) {
+				return "No alerts";
+			}
+			return String.format("Alerts during routing: %d fastRoads, %d slowSegmentsEearlier", fasterRoadToVisitedSegments,
+					slowerSegmentedWasVisitedEarlier);
+		}
+	}
+	
 	public BinaryMapIndexReader[] getMaps() {
 		return map.keySet().toArray(new BinaryMapIndexReader[0]);
 	}
@@ -984,6 +1007,7 @@ public class RoutingContext {
 		nativeRoutingContext = 0;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void finalize() throws Throwable {
 		deleteNativeRoutingContext();
