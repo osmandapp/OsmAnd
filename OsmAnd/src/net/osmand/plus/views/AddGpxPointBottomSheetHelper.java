@@ -13,13 +13,14 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.editors.RtePtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 
 import java.io.File;
@@ -71,6 +72,7 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 		view.findViewById(R.id.cancel_button).setOnClickListener(v -> {
 			hide();
 			contextMenuLayer.cancelAddGpxPoint();
+			AndroidUiHelper.setVisibility(mapActivity,View.INVISIBLE, R.id.map_right_widgets_panel);
 			onClose();
 		});
 	}
