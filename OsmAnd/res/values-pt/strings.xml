@@ -4520,5 +4520,7 @@
     <string name="rendering_attr_seabedDetail_name">Detalhes do fundo marinho</string>
     <string name="save_track_to_gpx_descrp">Iniciar a gravação da trilha automaticamente enquanto a navegação estiver em andamento. Quando terminar, a faixa será salva automaticamente.</string>
     <string name="gpx_no_routes_title">Não há rotas</string>
-    <string name="gpx_no_routes_descr">Pode usar a ferramenta \"%1$s\" para adicionar rota ao ficheiro.</string>
+    <string name="gpx_no_routes_descr">Pode usar a ferramenta \"%1$s\" para adicionar a rota ao ficheiro.</string>
+    <string name="please_provide_group_name_message">Por favor, forneça um nome para o grupo.</string>
+    <string name="quick_action_add_route_descr">Um botão para iniciar uma rota a partir do meio do ecrã.</string>
 </resources>
