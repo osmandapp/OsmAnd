@@ -3,10 +3,7 @@ package net.osmand.plus.importfiles.ui;
 import static net.osmand.plus.utils.ColorUtilities.getActiveColorId;
 import static net.osmand.plus.utils.ColorUtilities.getDefaultIconColorId;
 
-import android.content.Context;
-import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +22,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.importfiles.ui.ImportTracksAdapter.ImportTracksListener;
 import net.osmand.plus.myplaces.TrackBitmapDrawer;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
+import net.osmand.plus.myplaces.TrackBitmapDrawer.TracksDrawParams;
 import net.osmand.plus.track.GpxBlockStatisticsBuilder;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -37,6 +35,7 @@ class TrackViewHolder extends ViewHolder {
 	final OsmandApplication app;
 	final UiUtilities uiUtilities;
 	final ImportTracksListener listener;
+	final TracksDrawParams drawParams;
 
 	final TextView title;
 	final TextView selectedTitle;
@@ -51,10 +50,12 @@ class TrackViewHolder extends ViewHolder {
 
 	final boolean nightMode;
 
-	TrackViewHolder(@NonNull View view, @Nullable ImportTracksListener listener, boolean nightMode) {
+	TrackViewHolder(@NonNull View view, @NonNull TracksDrawParams drawParams,
+	                @Nullable ImportTracksListener listener, boolean nightMode) {
 		super(view);
 		this.app = (OsmandApplication) view.getContext().getApplicationContext();
 		this.uiUtilities = app.getUIUtilities();
+		this.drawParams = drawParams;
 		this.listener = listener;
 		this.nightMode = nightMode;
 
@@ -123,22 +124,16 @@ class TrackViewHolder extends ViewHolder {
 		pointsCounter.setText(app.getString(R.string.ltr_or_rtl_combine_via_slash, selectedPoints, allPoints));
 	}
 
-	private void drawTrackImage(@NonNull TrackItem trackItem, @Nullable TrackBitmapDrawerListener listener) {
-		if (trackItem.bitmapDrawer == null) {
-			WindowManager mgr = (WindowManager) app.getSystemService(Context.WINDOW_SERVICE);
-			DisplayMetrics dm = new DisplayMetrics();
-			mgr.getDefaultDisplay().getMetrics(dm);
-			int height = app.getResources().getDimensionPixelSize(R.dimen.track_image_height);
-
-			GPXFile gpxFile = trackItem.selectedGpxFile.getGpxFile();
-			trackItem.bitmapDrawer = new TrackBitmapDrawer(app, gpxFile, null, gpxFile.getRect(), dm.density, dm.widthPixels, height);
-
-			trackItem.bitmapDrawer.setDrawEnabled(true);
-			trackItem.bitmapDrawer.addListener(listener);
-			trackItem.bitmapDrawer.initAndDraw();
+	private void drawTrackImage(@NonNull TrackItem item, @Nullable TrackBitmapDrawerListener drawerListener) {
+		if (item.bitmapDrawer == null) {
+			GPXFile gpxFile = item.selectedGpxFile.getGpxFile();
+			item.bitmapDrawer = new TrackBitmapDrawer(app, gpxFile, drawParams, null);
+			item.bitmapDrawer.setDrawEnabled(true);
+			item.bitmapDrawer.addListener(drawerListener);
+			item.bitmapDrawer.initAndDraw();
 		} else {
-			image.setImageBitmap(trackItem.bitmap);
+			image.setImageBitmap(item.bitmap);
 		}
-		AndroidUiHelper.updateVisibility(image, trackItem.bitmap != null);
+		AndroidUiHelper.updateVisibility(image, item.bitmap != null);
 	}
 }

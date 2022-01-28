@@ -2,6 +2,7 @@ package net.osmand.plus.importfiles.ui;
 
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
+import net.osmand.plus.myplaces.TrackBitmapDrawer.TracksDrawParams;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ class ImportTracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	private Set<TrackItem> selectedTracks;
 	private ImportTracksListener listener;
+	private TracksDrawParams drawParams;
 
 	private String selectedFolder;
 	private final String fileName;
@@ -54,6 +57,10 @@ class ImportTracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 		this.listener = listener;
 	}
 
+	public void setDrawParams(@NonNull TracksDrawParams drawParams) {
+		this.drawParams = drawParams;
+	}
+
 	public void updateItems(@NonNull List<TrackItem> trackItems, @NonNull Set<TrackItem> selectedTracks) {
 		this.trackItems.clear();
 		this.trackItems.addAll(trackItems);
@@ -73,11 +80,14 @@ class ImportTracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 		LayoutInflater inflater = UiUtilities.getInflater(parent.getContext(), nightMode);
 		switch (viewType) {
 			case TYPE_TRACK:
-				return new TrackViewHolder(inflater.inflate(R.layout.import_track_item, parent, false), listener, nightMode);
+				View view = inflater.inflate(R.layout.import_track_item, parent, false);
+				return new TrackViewHolder(view, drawParams, listener, nightMode);
 			case TYPE_HEADER:
-				return new HeaderViewHolder(inflater.inflate(R.layout.import_tracks_header, parent, false));
+				view = inflater.inflate(R.layout.import_tracks_header, parent, false);
+				return new HeaderViewHolder(view);
 			case TYPE_FOOTER:
-				return new FoldersViewHolder(inflater.inflate(R.layout.select_folder_card, parent, false), listener, nightMode);
+				view = inflater.inflate(R.layout.select_folder_card, parent, false);
+				return new FoldersViewHolder(view, listener, nightMode);
 			default:
 				throw new IllegalArgumentException("Unsupported view type " + viewType);
 		}
@@ -110,6 +120,10 @@ class ImportTracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 		return items.get(position);
 	}
 
+	protected int getItemPosition(@NonNull Object object) {
+		return items.indexOf(object);
+	}
+
 	@Override
 	public int getItemViewType(int position) {
 		Object object = items.get(position);
@@ -134,8 +148,10 @@ class ImportTracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 			}
 
 			@Override
-			public void onTrackBitmapDrawn() {
-
+			public void onTrackBitmapDrawn(boolean success) {
+				if (!success) {
+					item.bitmapDrawer.initAndDraw();
+				}
 			}
 
 			@Override

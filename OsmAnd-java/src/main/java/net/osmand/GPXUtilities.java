@@ -1800,6 +1800,16 @@ public class GPXUtilities {
 			return points.isEmpty() && routes.isEmpty();
 		}
 
+		public int getTracksCount() {
+			int count = 0;
+			for (Track track : tracks) {
+				if (!track.generalTrack) {
+					count++;
+				}
+			}
+			return count;
+		}
+
 		public int getNonEmptyTracksCount() {
 			int count = 0;
 			for (Track track : tracks) {

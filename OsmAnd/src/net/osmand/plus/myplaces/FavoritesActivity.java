@@ -206,7 +206,7 @@ public class FavoritesActivity extends TabActivity {
 	}
 
 	@Override
-	public void onAttachFragment(Fragment fragment) {
+	public void onAttachFragment(@NonNull Fragment fragment) {
 		if (fragment instanceof FavoritesFragmentStateHolder) {
 			fragment.setArguments(intentParams);
 			fragList.add(new WeakReference<>((FavoritesFragmentStateHolder) fragment));

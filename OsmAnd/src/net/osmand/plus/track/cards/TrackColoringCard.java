@@ -22,18 +22,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.AppearanceViewHolder;
-import net.osmand.plus.track.fragments.TrackAppearanceFragment;
+import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.TrackDrawInfo;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteStatisticsHelper;
 
@@ -54,8 +54,8 @@ public class TrackColoringCard extends MapBaseCard {
 	private List<TrackAppearanceItem> appearanceItems;
 
 	public TrackColoringCard(@NonNull MapActivity mapActivity,
-							 @NonNull SelectedGpxFile selectedGpxFile,
-							 @NonNull TrackDrawInfo trackDrawInfo) {
+	                         @NonNull SelectedGpxFile selectedGpxFile,
+	                         @NonNull TrackDrawInfo trackDrawInfo) {
 		super(mapActivity);
 		this.trackDrawInfo = trackDrawInfo;
 		this.selectedGpxFile = selectedGpxFile;
@@ -275,7 +275,7 @@ public class TrackColoringCard extends MapBaseCard {
 				iconColorId = trackDrawInfo.getColor();
 			}
 			if (iconColorId == 0) {
-				iconColorId = TrackAppearanceFragment.getTrackColor(app);
+				iconColorId = GpxAppearanceAdapter.getTrackColor(app);
 			}
 			holder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(item.getIconId(), iconColorId));
 			holder.title.setTextColor(textColorId);

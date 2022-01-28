@@ -281,7 +281,7 @@ public class GpxSelectionHelper {
 		return group;
 	}
 
-	public GpxDisplayGroup buildPointsDisplayGroup(@NonNull GPXFile gpxFile, String name) {
+	public GpxDisplayGroup buildPointsDisplayGroup(@NonNull GPXFile gpxFile, @NonNull List<WptPt> points, String name) {
 		GpxDisplayGroup group = new GpxDisplayGroup(gpxFile);
 		group.gpxName = name;
 		group.setType(GpxDisplayItemType.TRACK_POINTS);
@@ -289,18 +289,18 @@ public class GpxSelectionHelper {
 		group.setName(getString(R.string.gpx_selection_points, name));
 		List<GpxDisplayItem> list = group.getModifiableList();
 		int k = 0;
-		for (WptPt r : gpxFile.getPoints()) {
+		for (WptPt wptPt : points) {
 			GpxDisplayItem item = new GpxDisplayItem();
 			item.group = group;
-			item.description = r.desc;
-			item.name = r.name;
+			item.description = wptPt.desc;
+			item.name = wptPt.name;
 			k++;
 			if (Algorithms.isEmpty(item.name)) {
 				item.name = getString(R.string.gpx_selection_point, k + "");
 			}
 			item.expanded = true;
-			item.locationStart = r;
-			item.locationEnd = r;
+			item.locationStart = wptPt;
+			item.locationEnd = wptPt;
 			list.add(item);
 		}
 		return group;
@@ -329,21 +329,21 @@ public class GpxSelectionHelper {
 		return name;
 	}
 
-	public List<GpxDisplayGroup> collectDisplayGroups(GPXFile g) {
+	public List<GpxDisplayGroup> collectDisplayGroups(GPXFile gpxFile) {
 		List<GpxDisplayGroup> dg = new ArrayList<>();
-		String name = getGroupName(g);
-		if (g.tracks.size() > 0) {
-			for (int i = 0; i < g.tracks.size(); i++) {
-				GpxDisplayGroup group = buildGpxDisplayGroup(g, i, name);
+		String name = getGroupName(gpxFile);
+		if (gpxFile.tracks.size() > 0) {
+			for (int i = 0; i < gpxFile.tracks.size(); i++) {
+				GpxDisplayGroup group = buildGpxDisplayGroup(gpxFile, i, name);
 				if (group.getModifiableList().size() > 0) {
 					dg.add(group);
 				}
 			}
 		}
-		if (g.routes.size() > 0) {
+		if (gpxFile.routes.size() > 0) {
 			int k = 0;
-			for (Route route : g.routes) {
-				GpxDisplayGroup group = new GpxDisplayGroup(g);
+			for (Route route : gpxFile.routes) {
+				GpxDisplayGroup group = new GpxDisplayGroup(gpxFile);
 				group.gpxName = name;
 				group.setType(GpxDisplayItemType.TRACK_ROUTE_POINTS);
 				String d = getString(R.string.gpx_selection_number_of_points, name, route.points.size());
@@ -352,7 +352,7 @@ public class GpxSelectionHelper {
 				}
 				group.setDescription(d);
 				String ks = (k++) + "";
-				group.setName(getString(R.string.gpx_selection_route_points, name, g.routes.size() == 1 ? "" : ks));
+				group.setName(getString(R.string.gpx_selection_route_points, name, gpxFile.routes.size() == 1 ? "" : ks));
 				dg.add(group);
 				List<GpxDisplayItem> list = group.getModifiableList();
 				int t = 0;
@@ -372,8 +372,8 @@ public class GpxSelectionHelper {
 				}
 			}
 		}
-		if (!g.isPointsEmpty()) {
-			GpxDisplayGroup group = buildPointsDisplayGroup(g, name);
+		if (!gpxFile.isPointsEmpty()) {
+			GpxDisplayGroup group = buildPointsDisplayGroup(gpxFile, gpxFile.getPoints(), name);
 			dg.add(group);
 		}
 		return dg;

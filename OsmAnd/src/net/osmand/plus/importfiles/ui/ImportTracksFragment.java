@@ -1,16 +1,22 @@
 package net.osmand.plus.importfiles.ui;
 
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
+import static net.osmand.plus.myplaces.AvailableGPXFragment.SELECTED_FOLDER_KEY;
+import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
@@ -26,22 +32,25 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.importfiles.CollectTracksAsyncTask;
-import net.osmand.plus.importfiles.CollectTracksAsyncTask.CollectTracksListener;
-import net.osmand.plus.importfiles.SaveTracksAsyncTask;
-import net.osmand.plus.importfiles.SaveTracksAsyncTask.SaveGpxListener;
+import net.osmand.plus.importfiles.CollectTracksTask;
+import net.osmand.plus.importfiles.CollectTracksTask.CollectTracksListener;
+import net.osmand.plus.importfiles.SaveTracksTask;
+import net.osmand.plus.importfiles.SaveTracksTask.SaveGpxListener;
 import net.osmand.plus.importfiles.ui.ExitImportBottomSheet.OnExitConfirmedListener;
 import net.osmand.plus.importfiles.ui.ImportTracksAdapter.ImportTracksListener;
+import net.osmand.plus.importfiles.ui.SelectPointsFragment.PointsSelectionListener;
 import net.osmand.plus.importfiles.ui.SelectTrackDirectoryBottomSheet.FolderSelectionListener;
 import net.osmand.plus.myplaces.AddNewTrackFolderBottomSheet;
 import net.osmand.plus.myplaces.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
-import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.myplaces.TrackBitmapDrawer.TracksDrawParams;
+import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -56,8 +65,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ImportTracksFragment extends BaseOsmAndDialogFragment implements SaveGpxListener,
-		OnExitConfirmedListener, FolderSelectionListener, OnTrackFolderAddListener, ImportTracksListener, CollectTracksListener {
+public class ImportTracksFragment extends BaseOsmAndDialogFragment implements OnExitConfirmedListener,
+		FolderSelectionListener, OnTrackFolderAddListener, ImportTracksListener, PointsSelectionListener {
 
 	public static final String TAG = ImportTracksFragment.class.getSimpleName();
 
@@ -74,8 +83,8 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements Sa
 	private String fileName;
 	private String selectedFolder;
 
-	private SaveTracksAsyncTask saveTracksTask;
-	private CollectTracksAsyncTask collectTracksTask;
+	private SaveTracksTask saveTracksTask;
+	private CollectTracksTask collectTracksTask;
 
 	private ImportTracksAdapter adapter;
 
@@ -135,15 +144,16 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements Sa
 		return view;
 	}
 
-	private void setupRecyclerView(@NonNull View view) {
-		adapter = new ImportTracksAdapter(app, gpxFile, fileName, nightMode);
-		adapter.setListener(this);
-		adapter.setSelectedFolder(selectedFolder);
-		adapter.updateItems(trackItems, selectedTracks);
+	protected void setupToolbar(@NonNull View view) {
+		View appbar = view.findViewById(R.id.appbar);
+		ViewCompat.setElevation(appbar, 5.0f);
 
-		recyclerView = view.findViewById(R.id.recycler_view);
-		recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-		recyclerView.setAdapter(adapter);
+		TextView title = appbar.findViewById(R.id.toolbar_title);
+		ImageView closeButton = appbar.findViewById(R.id.close_button);
+
+		title.setText(R.string.import_tracks);
+		closeButton.setOnClickListener(v -> showExitDialog());
+		closeButton.setImageDrawable(getIcon(R.drawable.ic_action_close));
 	}
 
 	private void setupProgress(@NonNull View view) {
@@ -168,38 +178,6 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements Sa
 		AndroidUiHelper.updateVisibility(recyclerView, !progressVisible);
 		AndroidUiHelper.updateVisibility(buttonsContainer, !progressVisible);
 		AndroidUiHelper.updateVisibility(progressContainer, progressVisible);
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.disableDrawer();
-		}
-		app.getOsmandMap().getMapLayers().getMapVectorLayer().setVisible(false);
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.enableDrawer();
-		}
-		app.getOsmandMap().getMapLayers().getMapVectorLayer().setVisible(true);
-	}
-
-	protected void setupToolbar(@NonNull View view) {
-		View appbar = view.findViewById(R.id.appbar);
-		ViewCompat.setElevation(appbar, 5.0f);
-
-		TextView title = appbar.findViewById(R.id.toolbar_title);
-		ImageView closeButton = appbar.findViewById(R.id.close_button);
-
-		title.setText(R.string.import_tracks);
-		closeButton.setOnClickListener(v -> showExitDialog());
-		closeButton.setImageDrawable(getIcon(R.drawable.ic_action_close));
 	}
 
 	private void setupButtons(@NonNull View view) {
@@ -246,6 +224,50 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements Sa
 		textView.setCompoundDrawablePadding(AndroidUtils.dpToPx(app, 12));
 	}
 
+	private void setupRecyclerView(@NonNull View view) {
+		adapter = new ImportTracksAdapter(app, gpxFile, fileName, nightMode);
+		adapter.setListener(this);
+		adapter.setDrawParams(getTracksDrawParams());
+		adapter.setSelectedFolder(selectedFolder);
+		adapter.updateItems(trackItems, selectedTracks);
+
+		recyclerView = view.findViewById(R.id.recycler_view);
+		recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+		recyclerView.setAdapter(adapter);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.disableDrawer();
+		}
+		app.getOsmandMap().getMapLayers().getMapVectorLayer().setVisible(false);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.enableDrawer();
+		}
+		app.getOsmandMap().getMapLayers().getMapVectorLayer().setVisible(true);
+	}
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		for (TrackItem item : trackItems) {
+			if (item.bitmapDrawer != null) {
+				item.bitmapDrawer.setDrawEnabled(false);
+			}
+			item.bitmap = null;
+			item.bitmapDrawer = null;
+		}
+	}
+
 	private boolean isSavingTracks() {
 		return saveTracksTask != null && saveTracksTask.getStatus() == Status.RUNNING;
 	}
@@ -256,13 +278,26 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements Sa
 
 	private void importTracks() {
 		File folder = getFolderFile(selectedFolder);
-		saveTracksTask = new SaveTracksAsyncTask(new ArrayList<>(selectedTracks), folder, this);
+		saveTracksTask = new SaveTracksTask(new ArrayList<>(selectedTracks), folder, getSaveGpxListener());
 		saveTracksTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void collectTracks() {
-		collectTracksTask = new CollectTracksAsyncTask(app, gpxFile, fileName, this);
+		collectTracksTask = new CollectTracksTask(app, gpxFile, fileName, getCollectTracksListener());
 		collectTracksTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	@NonNull
+	private TracksDrawParams getTracksDrawParams() {
+		WindowManager mgr = (WindowManager) app.getSystemService(Context.WINDOW_SERVICE);
+		DisplayMetrics metrics = new DisplayMetrics();
+		mgr.getDefaultDisplay().getMetrics(metrics);
+
+		int color = GpxAppearanceAdapter.getTrackColor(app);
+		int width = metrics.widthPixels - AndroidUtils.dpToPx(app, 32);
+		int height = getResources().getDimensionPixelSize(R.dimen.track_image_height);
+
+		return new TracksDrawParams(metrics.density, width, height, color);
 	}
 
 	@NonNull
@@ -271,20 +306,6 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements Sa
 		return Algorithms.stringsEqual(folderName, gpxDir.getName()) ? gpxDir : new File(gpxDir, folderName);
 	}
 
-	@Override
-	public void tracksCollectionStarted() {
-		updateProgress();
-	}
-
-	@Override
-	public void tracksCollectionFinished(List<TrackItem> items) {
-		collectTracksTask = null;
-		trackItems.addAll(items);
-		adapter.updateItems(trackItems, selectedTracks);
-
-		updateProgress();
-		updateButtonsState();
-	}
 
 	@Override
 	public void onFolderSelected(@NonNull String folderName) {
@@ -306,24 +327,6 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements Sa
 		onFolderSelected(folder);
 	}
 
-	@Override
-	public void gpxSavingStarted() {
-		updateProgress();
-	}
-
-	@Override
-	public void gpxSavingFinished(List<String> warnings) {
-		saveTracksTask = null;
-		updateProgress();
-
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			app.getSettings().FAVORITES_TAB.set(FavoritesActivity.GPX_TAB);
-			Intent intent = new Intent(activity, app.getAppCustomization().getFavoritesActivity());
-			activity.startActivity(intent);
-		}
-		dismiss();
-	}
 
 	@Override
 	public void onAddFolderSelected() {
@@ -349,7 +352,18 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements Sa
 	public void onTrackItemPointsSelected(@NonNull TrackItem item) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			SelectPointsFragment.showInstance(activity.getSupportFragmentManager(), item, gpxFile.getPoints());
+			SelectPointsFragment.showInstance(activity.getSupportFragmentManager(), item, gpxFile.getPoints(), this);
+		}
+	}
+
+	@Override
+	public void onPointsSelected(@NonNull TrackItem trackItem, @NonNull Set<WptPt> selectedPoints) {
+		trackItem.selectedPoints.clear();
+		trackItem.selectedPoints.addAll(selectedPoints);
+
+		int position = adapter.getItemPosition(trackItem);
+		if (position != -1) {
+			adapter.notifyItemChanged(position);
 		}
 	}
 
@@ -373,6 +387,56 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements Sa
 			selectedTracks.remove(item);
 		}
 		updateButtonsState();
+	}
+
+	@NonNull
+	private CollectTracksListener getCollectTracksListener() {
+		return new CollectTracksListener() {
+
+			@Override
+			public void tracksCollectionStarted() {
+				updateProgress();
+			}
+
+			@Override
+			public void tracksCollectionFinished(List<TrackItem> items) {
+				collectTracksTask = null;
+				trackItems.addAll(items);
+				adapter.updateItems(trackItems, selectedTracks);
+
+				updateProgress();
+				updateButtonsState();
+			}
+		};
+	}
+
+	@NonNull
+	private SaveGpxListener getSaveGpxListener() {
+		return new SaveGpxListener() {
+			@Override
+			public void gpxSavingStarted() {
+				updateProgress();
+			}
+
+			@Override
+			public void gpxSavingFinished(List<String> warnings) {
+				saveTracksTask = null;
+				updateProgress();
+
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					String folder = GPX_INDEX_DIR.equals(selectedFolder + "/") ? "" : selectedFolder;
+					Bundle bundle = new Bundle();
+					bundle.putInt(TAB_ID, GPX_TAB);
+					bundle.putString(SELECTED_FOLDER_KEY, folder);
+
+					Intent intent = new Intent(app, app.getAppCustomization().getFavoritesActivity());
+					intent.putExtra(MapActivity.INTENT_PARAMS, bundle);
+					activity.startActivity(intent);
+				}
+				dismiss();
+			}
+		};
 	}
 
 	@Nullable

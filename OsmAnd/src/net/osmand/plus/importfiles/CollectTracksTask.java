@@ -7,6 +7,8 @@ import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Track;
+import net.osmand.GPXUtilities.WptPt;
+import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -17,15 +19,15 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CollectTracksAsyncTask extends AsyncTask<Void, Void, List<TrackItem>> {
+public class CollectTracksTask extends AsyncTask<Void, Void, List<TrackItem>> {
 
 	private final OsmandApplication app;
 	private final GPXFile gpxFile;
 	private final String fileName;
 	private final CollectTracksListener listener;
 
-	public CollectTracksAsyncTask(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
-	                              @NonNull String fileName, @Nullable CollectTracksListener listener) {
+	public CollectTracksTask(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
+	                         @NonNull String fileName, @Nullable CollectTracksListener listener) {
 		this.app = app;
 		this.gpxFile = gpxFile;
 		this.fileName = fileName;
@@ -47,24 +49,41 @@ public class CollectTracksAsyncTask extends AsyncTask<Void, Void, List<TrackItem
 			Track track = gpxFile.tracks.get(i);
 			if (!track.generalTrack) {
 				GPXFile trackFile = new GPXFile(Version.getFullVersion(app));
-				trackFile.modifiedTime = -1;
 				trackFile.tracks.add(track);
-				trackFile.addPoints(gpxFile.getPoints());
+				trackFile.setColor(gpxFile.getColor(0));
+				trackFile.setWidth(gpxFile.getWidth(null));
+				trackFile.setShowArrows(gpxFile.isShowArrows());
+				trackFile.setShowStartFinish(gpxFile.isShowStartFinish());
+				trackFile.setSplitInterval(gpxFile.getSplitInterval());
+				trackFile.setSplitType(gpxFile.getSplitType());
+				trackFile.setColoringType(gpxFile.getColoringType());
 
 				SelectedGpxFile selectedGpxFile = new SelectedGpxFile();
 				selectedGpxFile.setGpxFile(trackFile, app);
 
-				TrackItem trackItem = new TrackItem(selectedGpxFile, i);
-				trackItem.suggestedPoints = gpxFile.getPoints();
-				if (Algorithms.isEmpty(track.name)) {
-					trackItem.name = app.getString(R.string.ltr_or_rtl_combine_via_dash, name, String.valueOf(i));
-				} else {
-					trackItem.name = track.name;
+				String trackName = track.name;
+				if (Algorithms.isEmpty(trackName)) {
+					name = app.getString(R.string.ltr_or_rtl_combine_via_dash, name, String.valueOf(i));
 				}
+
+				TrackItem trackItem = new TrackItem(selectedGpxFile, trackName, i);
+				trackItem.suggestedPoints.addAll(getSuggestedPoints(trackFile));
+
 				items.add(trackItem);
 			}
 		}
 		return items;
+	}
+
+	private List<WptPt> getSuggestedPoints(@NonNull GPXFile trackFile) {
+		List<WptPt> points = new ArrayList<>();
+		QuadRect rect = trackFile.getRect();
+		for (WptPt point : gpxFile.getPoints()) {
+			if (rect.contains(point.getLongitude(), point.getLatitude(), point.getLongitude(), point.getLatitude())) {
+				points.add(point);
+			}
+		}
+		return points;
 	}
 
 	@Override

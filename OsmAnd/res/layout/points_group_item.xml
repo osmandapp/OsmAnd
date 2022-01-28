@@ -6,7 +6,9 @@
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
 
-	<include layout="@layout/list_item_divider" />
+	<include
+		android:id="@+id/card_top_divider"
+		layout="@layout/card_top_divider" />
 
 	<LinearLayout
 		android:id="@+id/container"
@@ -45,6 +47,7 @@
 					style="@style/TitleStyle.Medium"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:maxLines="2"
 					android:textColor="?android:textColorPrimary"
 					tools:text="Point title" />
 
@@ -100,5 +103,11 @@
 		</LinearLayout>
 
 	</LinearLayout>
+
+	<include
+		android:id="@+id/card_bottom_divider"
+		layout="@layout/card_bottom_divider"
+		android:visibility="gone"
+		tools:visibility="visible" />
 
 </LinearLayout>

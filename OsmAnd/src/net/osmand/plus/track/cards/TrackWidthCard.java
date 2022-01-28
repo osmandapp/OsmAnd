@@ -17,20 +17,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.google.android.material.slider.Slider;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.track.AppearanceViewHolder;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.GpxAppearanceAdapter.AppearanceListItem;
 import net.osmand.plus.track.GpxAppearanceAdapter.GpxAppearanceAdapterType;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
-import net.osmand.plus.track.TrackDrawInfo;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -51,7 +51,7 @@ public class TrackWidthCard extends MapBaseCard {
 	private RecyclerView groupRecyclerView;
 
 	public TrackWidthCard(@NonNull MapActivity mapActivity, @NonNull TrackDrawInfo trackDrawInfo,
-						  @NonNull OnNeedScrollListener onNeedScrollListener) {
+	                      @NonNull OnNeedScrollListener onNeedScrollListener) {
 		super(mapActivity);
 		this.trackDrawInfo = trackDrawInfo;
 		this.onNeedScrollListener = onNeedScrollListener;
@@ -248,7 +248,7 @@ public class TrackWidthCard extends MapBaseCard {
 				iconId = TrackAppearanceFragment.getWidthIconId(item.getValue());
 			}
 			if (color == 0) {
-				color = TrackAppearanceFragment.getTrackColor(app);
+				color = GpxAppearanceAdapter.getTrackColor(app);
 			}
 			holder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(iconId, color));
 		}
