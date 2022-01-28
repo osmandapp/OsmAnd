@@ -1218,7 +1218,7 @@
     <string name="loading_smth">Chargement de %1$s…</string>
     <string name="save_as_favorites_points">Enregistrer comme groupe de favoris</string>
     <string name="select_destination_and_intermediate_points">Définissez les étapes</string>
-    <string name="layer_amenity_label">Libellés des points (Favoris, Points d\'Intérêt)</string>
+    <string name="layer_amenity_label">Libellés des Points d\'Intérêt et Favoris</string>
     <string name="route_descr_destination">Arrivée</string>
     <string name="show_zoom_buttons_navigation_descr">Afficher les boutons de zoom pendant le guidage.</string>
     <string name="show_zoom_buttons_navigation">Afficher les boutons de zoom</string>
@@ -1270,7 +1270,7 @@
     <string name="rendering_attr_alpineHiking_description">Afficher la difficulté des sentiers de randonnée selon l\'échelle de cotation du CAS.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Itinéraires de randonnée</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Rendu des itinéraires de randonnée d\'après OSMC.</string>
-    <string name="rendering_attr_coloredBuildings_name">Bâtiments colorés par type</string>
+    <string name="rendering_attr_coloredBuildings_name">Colorer les bâtiments par type</string>
     <string name="arrival_distance_factor_early">Tôt</string>
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Tard</string>
@@ -4511,4 +4511,5 @@
     <string name="gpx_no_routes_title">Il n\'y a aucun itinéraire</string>
     <string name="gpx_no_routes_descr">Vous pouvez utiliser l’outil « %1$s » pour ajouter un itinéraire dans le fichier.</string>
     <string name="quick_action_add_route_descr">Bouton, au milieu de l\'écran, pour démarrer un itinéraire.</string>
+    <string name="please_provide_group_name_message">Veuillez indiquer un nom pour le groupe.</string>
 </resources>
