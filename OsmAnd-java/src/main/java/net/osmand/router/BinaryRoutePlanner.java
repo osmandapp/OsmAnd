@@ -497,8 +497,8 @@ public class BinaryRoutePlanner {
 						if (RoutingContext.PRINT_ROUTING_ALERTS) {
 							System.err.println("! ALERT slower segment was visited earlier " + distFromStartPlusSegmentTime + " > "
 								+ existingSegment.distanceFromStart + ": " + currentSegment + " - " + existingSegment);
-						} else if (ctx.alerts != null) {
-							ctx.alerts.slowerSegmentedWasVisitedEarlier++;
+						} else {
+							ctx.alertSlowerSegmentedWasVisitedEarlier++;
 						}
 					}
 				}
@@ -870,8 +870,8 @@ public class BinaryRoutePlanner {
 							if (RoutingContext.PRINT_ROUTING_ALERTS) {
 								System.err.println("! ALERT new faster path to a visited segment: "
 										+ (distFromStart + routeSegmentTime) + " < " + visIt.distanceFromStart + ": " + next + " - " + visIt);
-							} else if (ctx.alerts != null) {
-								ctx.alerts.fasterRoadToVisitedSegments++;
+							} else {
+								ctx.alertFasterRoadToVisitedSegments++;
 							}
 						}
 						// ??? It's not clear whether this block is needed or not ???

@@ -98,13 +98,12 @@ public class RoutingContext {
 	// callback of processing segments
 	RouteSegmentVisitor visitor = null;
 
-	public RoutingAlerts alerts = new RoutingAlerts();
+	public int alertFasterRoadToVisitedSegments;
+	public int alertSlowerSegmentedWasVisitedEarlier;
 	
 	// old planner
 	public FinalRouteSegment finalRouteSegment;
 	
-
-
 	
 	RoutingContext(RoutingContext cp) {
 		this.config = cp.config;
@@ -963,32 +962,13 @@ public class RoutingContext {
 		
 	}
 	
-	public static class RoutingAlerts {
-		
-		public int fasterRoadToVisitedSegments;
-		public int slowerSegmentedWasVisitedEarlier;
-		
-		public boolean noAlerts() {
-			return fasterRoadToVisitedSegments + slowerSegmentedWasVisitedEarlier == 0;
-		}
-		
-		@Override
-		public String toString() {
-			if (noAlerts()) {
-				return "No alerts";
-			}
-			return String.format("Alerts during routing: %d fastRoads, %d slowSegmentsEearlier", fasterRoadToVisitedSegments,
-					slowerSegmentedWasVisitedEarlier);
-		}
-	}
-	
 	public BinaryMapIndexReader[] getMaps() {
 		return map.keySet().toArray(new BinaryMapIndexReader[0]);
 	}
 
 	public int getVisitedSegments() {
-		if(calculationProgress != null) {
-			return calculationProgress.visitedSegments; 
+		if (calculationProgress != null) {
+			return calculationProgress.visitedSegments;
 		}
 		return 0;
 	}

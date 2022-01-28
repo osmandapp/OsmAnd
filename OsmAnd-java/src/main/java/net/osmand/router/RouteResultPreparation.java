@@ -552,7 +552,12 @@ public class RouteResultPreparation {
 				ctx.getLoadedTiles(), 
 				ctx.getVisitedSegments(), completeDistance, completeTime);
 		log.info(msg);
-		println("ROUTE. " + ctx.alerts.toString());
+		String alerts = String.format("Alerts during routing: %d fastRoads, %d slowSegmentsEearlier",
+				ctx.alertFasterRoadToVisitedSegments, ctx.alertSlowerSegmentedWasVisitedEarlier);
+		if (ctx.alertFasterRoadToVisitedSegments + ctx.alertSlowerSegmentedWasVisitedEarlier == 0) {
+			alerts = "No alerts";
+		}
+		println("ROUTE. " + alerts);
         println(msg);
 		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
 			org.xmlpull.v1.XmlSerializer serializer = null;
