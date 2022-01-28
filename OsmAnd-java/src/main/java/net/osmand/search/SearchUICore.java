@@ -224,9 +224,17 @@ public class SearchUICore {
 		}
 
 		public boolean sameSearchResult(SearchResult r1, SearchResult r2) {
+			boolean isSameType = r1.objectType != null && r1.objectType == r2.objectType;
+			if (isSameType) {
+				ObjectType type = r1.objectType;
+				if (type == ObjectType.INDEX_ITEM
+						|| type == ObjectType.GPX_TRACK) {
+					return Algorithms.objectEquals(r1.localeName, r2.localeName);
+				}
+			}
 			if (r1.location != null && r2.location != null &&
 					!ObjectType.isTopVisible(r1.objectType) && !ObjectType.isTopVisible(r2.objectType)) {
-				if (r1.objectType == r2.objectType) {
+				if (isSameType) {
 					if (r1.objectType == ObjectType.STREET) {
 						Street st1 = (Street) r1.object;
 						Street st2 = (Street) r2.object;
