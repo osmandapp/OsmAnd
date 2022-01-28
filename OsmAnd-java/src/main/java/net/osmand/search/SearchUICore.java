@@ -224,11 +224,10 @@ public class SearchUICore {
 		}
 
 		public boolean sameSearchResult(SearchResult r1, SearchResult r2) {
-			boolean isSameType = r1.objectType != null && r1.objectType == r2.objectType;
+			boolean isSameType = r1.objectType == r2.objectType;
 			if (isSameType) {
 				ObjectType type = r1.objectType;
-				if (type == ObjectType.INDEX_ITEM
-						|| type == ObjectType.GPX_TRACK) {
+				if (type == ObjectType.INDEX_ITEM || type == ObjectType.GPX_TRACK) {
 					return Algorithms.objectEquals(r1.localeName, r2.localeName);
 				}
 			}
