@@ -261,20 +261,22 @@ public class RoutePlannerFrontEnd {
 						if (routeFound) {
 							routeFound = findGpxRouteSegment(gctx, gpxPoints, start, next, prev != null);
 							if (routeFound) {
+								routeFound = isRouteCloseToGpxPoints(gctx, gpxPoints, start, next);
+							}
+							if (routeFound) {
 								// route is found - cut the end of the route and move to next iteration
-//							start.stepBackRoute = new ArrayList<RouteSegmentResult>();
-//							boolean stepBack = true;
+								// start.stepBackRoute = new ArrayList<RouteSegmentResult>();
+								// boolean stepBack = true;
 								boolean stepBack = stepBackAndFindPrevPointInRoute(gctx, gpxPoints, start, next);
 								if (!stepBack) {
 									// not supported case (workaround increase MAXIMUM_STEP_APPROXIMATION)
 									log.info("Consider to increase MAXIMUM_STEP_APPROXIMATION to: " + routeDist * 2);
 									start.routeToTarget = null;
 									routeFound = false;
-									break;
 								} else {
-									routeFound = isRouteCloseToGpxPoints(gctx, gpxPoints, start, next);
 									if (gctx.ctx.getVisitor() != null) {
-										gctx.ctx.getVisitor().visitApproximatedSegments(start.routeToTarget, start, next);
+										gctx.ctx.getVisitor().visitApproximatedSegments(start.routeToTarget, start,
+												next);
 									}
 								}
 							}

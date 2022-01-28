@@ -41,6 +41,7 @@ import net.osmand.util.MapUtils;
 public class RoutingContext {
 
 	public static boolean SHOW_GC_SIZE = false;
+	public static boolean PRINT_ROUTING_ALERTS = false;
 	 
 	
 	private final static Log log = PlatformUtil.getLog(RoutingContext.class);
@@ -97,10 +98,12 @@ public class RoutingContext {
 	// callback of processing segments
 	RouteSegmentVisitor visitor = null;
 
+	public int alertFasterRoadToVisitedSegments;
+	public int alertSlowerSegmentedWasVisitedEarlier;
+	
 	// old planner
 	public FinalRouteSegment finalRouteSegment;
-
-
+	
 	
 	RoutingContext(RoutingContext cp) {
 		this.config = cp.config;
@@ -964,8 +967,8 @@ public class RoutingContext {
 	}
 
 	public int getVisitedSegments() {
-		if(calculationProgress != null) {
-			return calculationProgress.visitedSegments; 
+		if (calculationProgress != null) {
+			return calculationProgress.visitedSegments;
 		}
 		return 0;
 	}
@@ -984,6 +987,7 @@ public class RoutingContext {
 		nativeRoutingContext = 0;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void finalize() throws Throwable {
 		deleteNativeRoutingContext();

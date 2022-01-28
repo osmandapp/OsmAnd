@@ -494,8 +494,12 @@ public class BinaryRoutePlanner {
 					break;
 				} else {
 					if (ctx.config.heuristicCoefficient <= 1) {
-						System.err.println("! ALERT slower segment was visited earlier " + distFromStartPlusSegmentTime + " > "
+						if (RoutingContext.PRINT_ROUTING_ALERTS) {
+							System.err.println("! ALERT slower segment was visited earlier " + distFromStartPlusSegmentTime + " > "
 								+ existingSegment.distanceFromStart + ": " + currentSegment + " - " + existingSegment);
+						} else {
+							ctx.alertSlowerSegmentedWasVisitedEarlier++;
+						}
 					}
 				}
 			}
@@ -863,8 +867,12 @@ public class BinaryRoutePlanner {
 						// so we need to add segment back to the queue & reassign the parent (same as for next.getParentRoute() == null)
 						toAdd = true;
 						if (ctx.config.heuristicCoefficient <= 1) {
-							System.err.println("! ALERT new faster path to a visited segment: " + (distFromStart + routeSegmentTime) + " < "
-									+ visIt.distanceFromStart + ": " + next + " - " + visIt);
+							if (RoutingContext.PRINT_ROUTING_ALERTS) {
+								System.err.println("! ALERT new faster path to a visited segment: "
+										+ (distFromStart + routeSegmentTime) + " < " + visIt.distanceFromStart + ": " + next + " - " + visIt);
+							} else {
+								ctx.alertFasterRoadToVisitedSegments++;
+							}
 						}
 						// ??? It's not clear whether this block is needed or not ???
 						// All Test cases work with and without it
