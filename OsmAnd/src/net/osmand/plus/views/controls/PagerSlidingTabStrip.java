@@ -505,6 +505,12 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 			currentPosition = position;
 			currentPositionOffset = positionOffset;
+
+			if (isDataSetChanged()) {
+				notifyDataSetChanged(false);
+				return;
+			}
+
 			int offset = tabCount > 0 ? (int) (positionOffset * tabsContainer.getChildAt(position).getWidth()) : 0;
 			scrollToChild(position, offset);
 			invalidate();
@@ -515,6 +521,11 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 		@Override
 		public void onPageScrollStateChanged(int state) {
+			if (isDataSetChanged()) {
+				notifyDataSetChanged(false);
+				return;
+			}
+
 			if (state == ViewPager.SCROLL_STATE_IDLE) {
 				scrollToChild(pager.getCurrentItem(), 0);
 			}
@@ -539,6 +550,11 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 		@Override
 		public void onPageSelected(int position) {
+			if (isDataSetChanged()) {
+				notifyDataSetChanged(false);
+				return;
+			}
+
 			updateSelection(position);
 			if (delegatePageListener != null) {
 				delegatePageListener.onPageSelected(position);
@@ -600,6 +616,10 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 				}
 			}
 		}
+	}
+
+	private boolean isDataSetChanged() {
+		return pager.getAdapter() != null && tabCount != pager.getAdapter().getCount();
 	}
 
 	private class PagerAdapterObserver extends DataSetObserver {
