@@ -4512,4 +4512,8 @@
     <string name="rendering_value_omit_name">Vynechat</string>
     <string name="rendering_attr_seabedDetail_description">Další textové informace o povrchu mořského dna, kategorii a druhu mořského porostu</string>
     <string name="save_track_to_gpx_descrp">Spustit záznam stopy automaticky v průběhu navigace. Po jejím dokončení se stopa automaticky uloží.</string>
+    <string name="quick_action_add_route_descr">Tlačítko pro zahájení trasy uprostřed obrazovky.</string>
+    <string name="please_provide_group_name_message">Zadejte prosím název skupiny.</string>
+    <string name="gpx_no_routes_title">Neexistují žádné trasy</string>
+    <string name="gpx_no_routes_descr">Pro přidání cesty do souboru můžete použít nástroj \"%1$s\".</string>
 </resources>
