@@ -4444,8 +4444,8 @@
     <string name="shared_string_hide_all">Nascondi tutto</string>
     <string name="migration_files_present">%1$d file (%2$s) sono presenti nella posizione selezionata \'%3$s\'.</string>
     <string name="exit_without_saving_warning">Confermi di voler uscire senza salvare\? Perderai tutti i cambiamenti.</string>
-    <string name="shared_string_show_slope">Mostra i pendii</string>
-    <string name="shared_string_hide_slope">Nascondi i pendii</string>
+    <string name="shared_string_show_slope">Mostra la pendenza</string>
+    <string name="shared_string_hide_slope">Nascondi la pendenza</string>
     <string name="shared_string_uphill">Salita</string>
     <string name="shared_string_downhill">Discesa</string>
     <string name="elevation_profile">Profilo dell\'altitudine</string>

@@ -4517,4 +4517,5 @@
     <string name="gpx_no_routes_title">Güzergah yok</string>
     <string name="save_track_to_gpx_descrp">Navigasyon devam ederken yol kaydını otomatik olarak başlat. Bittiğinde, izlenen yol otomatik olarak kaydedilecektir.</string>
     <string name="quick_action_add_route_descr">Ekranın ortasından bir güzergah başlatmak için bir düğme.</string>
+    <string name="please_provide_group_name_message">Lütfen grup için bir ad girin.</string>
 </resources>
