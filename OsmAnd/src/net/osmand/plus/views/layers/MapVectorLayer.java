@@ -1,11 +1,15 @@
 package net.osmand.plus.views.layers;
 
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.android.TileSourceProxyProvider;
 import net.osmand.core.jni.MapLayerConfiguration;
+import net.osmand.core.jni.MapRasterLayerProvider_Software;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.map.ITileSource;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.layers.base.BaseMapLayer;
@@ -27,9 +31,9 @@ public class MapVectorLayer extends BaseMapLayer {
 	private ResourceManager resourceManager;
 	private Paint paintImg;
 
-	private final int VECTOR_LAYER_ID = 1;
 	private final RectF destImage = new RectF();
 	private boolean visible = false;
+	private boolean needUpdate = true;
 	private boolean oldRender = false;
 
 	public MapVectorLayer(@NonNull Context context, boolean oldRender) {
@@ -39,12 +43,7 @@ public class MapVectorLayer extends BaseMapLayer {
 
 	@Override
 	public void destroyLayer() {
-		if (view != null) {
-			final MapRendererView mapRenderer = view.getMapRenderer();
-			if (mapRenderer != null) {
-				mapRenderer.resetMapLayerProvider(VECTOR_LAYER_ID);
-			}
-		}
+		resetLayerProvider();
 	}
 
 	@Override
@@ -71,16 +70,15 @@ public class MapVectorLayer extends BaseMapLayer {
 	}
 
 	public void setVisible(boolean visible) {
+		needUpdate = this.visible != visible;
 		this.visible = visible;
-
-		if (!visible) {
-			if (view != null) {
-				final MapRendererView mapRenderer = view.getMapRenderer();
-				if (mapRenderer != null) {
-					mapRenderer.resetMapLayerProvider(VECTOR_LAYER_ID);
-				}
-			}
+/*
+		if (visible) {
+			setLayerProvider();
+		} else {
+			resetLayerProvider();
 		}
+*/
 	}
 
 	@Override
@@ -98,17 +96,57 @@ public class MapVectorLayer extends BaseMapLayer {
 
 	}
 
-	@Override
-	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tilesRect, DrawSettings drawSettings) {
-		if (!visible) {
+	private void setLayerProvider() {
+		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+		if (mapContext != null) {
+			mapContext.recreateRasterAndSymbolsProvider();
+			//mapContext.updateMapPresentationEnvironment();
+			//mapContext.recreateRasterAndSymbolsProvider();
+
+			setAlpha(getAlpha());
+		}
+	}
+
+	private void resetLayerProvider() {
+		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+		if (mapContext != null) {
+			mapContext.resetObfLayout();
+		}
+		/*
+		if (view == null) {
 			return;
 		}
+
+		final MapRendererView mapRenderer = view.getMapRenderer();
+		if (mapRenderer != null) {
+			mapRenderer.resetMapLayerProvider(MapRendererContext.OBF_RASTER_LAYER);
+		}
+		 */
+	}
+
+	@Override
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tilesRect, DrawSettings drawSettings) {
+		if (view == null) {
+			return;
+		}
+
+		if (!oldRender && !isVisible() && needUpdate) {
+			resetLayerProvider();
+			needUpdate = false;
+			return;
+		}
+
 		// if (!isVectorDataVisible() && tileLayer != null) {
 		// tileLayer.drawTileMap(canvas, tilesRect);
 		// resourceManager.getRenderer().interruptLoadingMap();
 		// } else {
 		final MapRendererView mapRenderer = view.getMapRenderer();
 		if (mapRenderer != null && !oldRender) {
+			if (needUpdate) {
+				setLayerProvider();
+				needUpdate = false;
+			}
+
 			NativeCoreContext.getMapRendererContext().setNightMode(drawSettings.isNightMode());
 
 			// opengl renderer
@@ -170,10 +208,6 @@ public class MapVectorLayer extends BaseMapLayer {
 
 	@Override
 	public void setAlpha(int alpha) {
-		if (getAlpha() == alpha){
-			return;
-		}
-
 		super.setAlpha(alpha);
 		if (paintImg != null) {
 			paintImg.setAlpha(alpha);
@@ -187,7 +221,7 @@ public class MapVectorLayer extends BaseMapLayer {
 		if (mapRenderer != null) {
 			MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
 			mapLayerConfiguration.setOpacityFactor(((float) alpha) / 255.0f);
-			mapRenderer.setMapLayerConfiguration(VECTOR_LAYER_ID, mapLayerConfiguration);
+			mapRenderer.setMapLayerConfiguration(MapRendererContext.OBF_RASTER_LAYER, mapLayerConfiguration);
 		}
 	}
 
