@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.monitoring;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_MONITORING;
+import static net.osmand.plus.settings.backend.OsmandSettings.MONTHLY_DIRECTORY;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 import android.app.Activity;
@@ -54,6 +55,7 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -490,24 +492,21 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				app.getNotificationHelper().refreshNotifications();
 				updateControl();
 
-				GPXFile gpxFile = null;
-				File file = null;
-				File dir = app.getAppCustomization().getTracksDir();
-				File[] children = dir.listFiles();
 				Map<String, GPXFile> gpxFilesByName = result.getGpxFilesByName();
-				if (children != null && !Algorithms.isEmpty(gpxFilesByName)) {
-					String filename = gpxFilesByName.keySet().iterator().next();
-					SavingTrackHelper helper = app.getSavingTrackHelper();
-					for (File child : children) {
-						if (child.getName().startsWith(filename)
-								&& child.lastModified() == helper.getLastTimeFileSaved()) {
-							file = child;
-							gpxFile = gpxFilesByName.get(filename);
-							break;
-						}
-					}
+				GPXFile gpxFile;
+				File file;
+				if (Algorithms.isEmpty(gpxFilesByName)) {
+					gpxFile = null;
+					file = null;
+				} else {
+					String gpxFileName = gpxFilesByName.keySet().iterator().next();
+					gpxFile = gpxFilesByName.get(gpxFileName);
+					file = getSavedGpxFile(gpxFileName);
 				}
-				if (file != null && file.exists() && (gpxFile != null && (gpxFile.hasTrkPt() || gpxFile.hasWptPt()))) {
+
+				boolean fileExists = file != null && file.exists();
+				boolean gpxFileNonEmpty = gpxFile != null && (gpxFile.hasTrkPt() || gpxFile.hasWptPt());
+				if (fileExists && gpxFileNonEmpty) {
 					if (!openTrack) {
 						if (activityRef != null) {
 							final Activity a = activityRef.get();
@@ -527,6 +526,55 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				}
 			}
 		}, (Void) null);
+	}
+
+	@Nullable
+	private File getSavedGpxFile(@NonNull String relativeFileName) {
+		File recDir = app.getAppCustomization().getTracksDir();
+		File[] recChildren = recDir.listFiles();
+
+		if (recChildren != null && !Algorithms.isEmpty(relativeFileName)) {
+			Integer trackStorageDir = settings.TRACK_STORAGE_DIRECTORY.get();
+			return MONTHLY_DIRECTORY.equals(trackStorageDir)
+					? getFileByNameFromMonthlyDir(relativeFileName)
+					: getFileByName(recChildren, relativeFileName);
+		}
+
+		return null;
+	}
+
+	@Nullable
+	private File getFileByNameFromMonthlyDir(@NonNull String relativeFileName) {
+		String[] fileNames = relativeFileName.split("/");
+		if (fileNames.length != 2) {
+			return null;
+		}
+		String folderName = fileNames[0];
+		String fileName = fileNames[1];
+
+		File recDir = app.getAppCustomization().getTracksDir();
+		List<File> subFolders = Algorithms.collectDirs(recDir, new ArrayList<>());
+		for (File folder : subFolders) {
+			File[] children = folder.listFiles();
+			if (folder.getAbsolutePath().endsWith(folderName) && children != null) {
+				return getFileByName(children, fileName);
+			}
+		}
+
+		return null;
+	}
+
+	@Nullable
+	private File getFileByName(@NonNull File[] files, @NonNull String fileName) {
+		SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
+		for (File file : files) {
+			if (file.isFile()
+					&& file.getName().startsWith(fileName)
+					&& file.lastModified() == savingTrackHelper.getLastTimeFileSaved()) {
+				return file;
+			}
+		}
+		return null;
 	}
 
 	public void updateControl() {
