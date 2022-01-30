@@ -40,7 +40,7 @@ import net.osmand.util.Algorithms;
 public class MapRendererContext implements RendererRegistry.IRendererLoadedEventListener {
     private static final String TAG = "MapRendererContext";
 
-	private static final int OBF_RASTER_LAYER = 0;
+	public static final int OBF_RASTER_LAYER = 0;
 	private OsmandApplication app;
 	
 	// input parameters
@@ -200,7 +200,7 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 		return convertedStyleSettings;
 	}
 	
-	private void recreateRasterAndSymbolsProvider() {
+	public void recreateRasterAndSymbolsProvider() {
 		// Create new map primitiviser
 		// TODO Victor ask MapPrimitiviser, ObfMapObjectsProvider  
 		MapPrimitiviser mapPrimitiviser = new MapPrimitiviser(mapPresentationEnvironment);
