@@ -295,7 +295,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		monitoringControl.updateInfo(null);
 
 		// monitoringControl.addView(child);
-		monitoringControl.setOnClickListener(v -> controlDialog(map, true));
+		monitoringControl.setOnClickListener(v -> controlDialog(map));
 		return monitoringControl;
 	}
 
@@ -304,7 +304,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		this.mapActivity = activity;
 		if (showDialogWhenActivityResumed) {
 			showDialogWhenActivityResumed = false;
-			controlDialog(mapActivity, true);
+			controlDialog(mapActivity);
 		}
 	}
 
@@ -337,113 +337,13 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		return app.getSavingTrackHelper().hasDataToSave();
 	}
 
-	public void controlDialog(final Activity activity, final boolean showTrackSelection) {
+	public void controlDialog(@NonNull Activity activity) {
 		FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
 		if (hasDataToSave() || wasTrackMonitored()) {
 			TripRecordingBottomSheet.showInstance(fragmentManager);
 		} else {
 			TripRecordingStartingBottomSheet.showTripRecordingDialog(fragmentManager, app);
 		}
-
-		/*final boolean wasTrackMonitored = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
-		final boolean nightMode;
-		if (activity instanceof MapActivity) {
-			nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		} else {
-			nightMode = !app.getSettings().isLightContent();
-		}
-		AlertDialog.Builder bld = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
-		final TIntArrayList items = new TIntArrayList();
-		if (wasTrackMonitored) {
-			items.add(R.string.gpx_monitoring_stop);
-			items.add(R.string.gpx_start_new_segment);
-			if(settings.LIVE_MONITORING.get()) {
-				items.add(R.string.live_monitoring_stop);
-			} else if(!settings.LIVE_MONITORING_URL.getProfileDefaultValue(settings.APPLICATION_MODE.get()).
-					equals(settings.LIVE_MONITORING_URL.get())){
-				items.add(R.string.live_monitoring_start);
-			}
-		} else {
-			items.add(R.string.gpx_monitoring_start);
-		}
-		if (app.getSavingTrackHelper().hasDataToSave()) {
-			items.add(R.string.save_current_track);
-			items.add(R.string.clear_recorded_data);
-		}
-		String[] strings = new String[items.size()];
-		for (int i = 0; i < strings.length; i++) {
-			strings[i] = app.getString(items.get(i));
-		}
-		final int[] holder = new int[] {0};
-		final Runnable run = new Runnable() {
-			public void run() {
-				int which = holder[0];
-				int item = items.get(which);
-				if(item == R.string.save_current_track){
-					saveCurrentTrack(null, activity);
-				} else if(item == R.string.gpx_monitoring_start) {
-					if (!OsmAndLocationProvider.isLocationPermissionAvailable(activity)) {
-						if (mapActivity != null) {
-							ActivityCompat.requestPermissions(mapActivity,
-									new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-									REQUEST_LOCATION_PERMISSION_FOR_GPX_RECORDING);
-						} else {
-							app.showToastMessage(R.string.no_location_permission);
-						}
-					} else if (app.getLocationProvider().checkGPSEnabled(activity)) {
-						startGPXMonitoring(activity, showTrackSelection);
-					}
-				} else if (item == R.string.clear_recorded_data) {
-					if (AndroidUtils.isActivityNotDestroyed(activity)) {
-						AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
-						builder.setTitle(R.string.clear_recorded_data);
-						builder.setMessage(R.string.are_you_sure);
-						builder.setNegativeButton(R.string.shared_string_cancel, null).setPositiveButton(
-								R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-									@Override
-									public void onClick(DialogInterface dialog, int which) {
-										app.getSavingTrackHelper().clearRecordedData(true);
-										app.getNotificationHelper().refreshNotifications();
-									}
-								});
-						builder.show();
-					}
-				} else if(item == R.string.gpx_monitoring_stop) {
-					stopRecording();
-				} else if(item == R.string.gpx_start_new_segment) {
-					app.getSavingTrackHelper().startNewSegment();
-				} else if(item == R.string.live_monitoring_stop) {
-					settings.LIVE_MONITORING.set(false);
-				} else if(item == R.string.live_monitoring_start) {
-					final ValueHolder<Integer> vs = new ValueHolder<Integer>();
-					vs.value = settings.LIVE_MONITORING_INTERVAL.get();
-					showIntervalChooseDialog(activity, app.getString(R.string.live_monitoring_interval) + " : %s",
-							app.getString(R.string.save_track_to_gpx_globally), SECONDS, MINUTES,
-							null, vs, showTrackSelection, new OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									settings.LIVE_MONITORING_INTERVAL.set(vs.value);
-									settings.LIVE_MONITORING.set(true);
-								}
-							});
-				}
-				if (monitoringControl != null) {
-					monitoringControl.updateInfo(null);
-				}
-			}
-		};
-		if(strings.length == 1) {
-			run.run();
-		} else {
-			bld.setItems(strings, new OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					holder[0] = which;
-					run.run();
-				}
-			});
-//			bld.show();
-		}*/
 	}
 
 	public void saveCurrentTrack() {
@@ -454,16 +354,16 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		saveCurrentTrack(onComplete, null, true, false);
 	}
 
-	public void saveCurrentTrack(@Nullable final Runnable onComplete, @Nullable Activity activity) {
+	public void saveCurrentTrack(@Nullable final Runnable onComplete, @Nullable FragmentActivity activity) {
 		saveCurrentTrack(onComplete, activity, true, false);
 	}
 
-	public void saveCurrentTrack(@Nullable final Runnable onComplete, @Nullable Activity activity,
-								 final boolean stopRecording, final boolean openTrack) {
+	public void saveCurrentTrack(@Nullable final Runnable onComplete, @Nullable FragmentActivity activity,
+	                             final boolean stopRecording, final boolean openTrack) {
 		if (stopRecording) {
 			stopRecording();
 		}
-		final WeakReference<Activity> activityRef = activity != null ? new WeakReference<>(activity) : null;
+		final WeakReference<FragmentActivity> activityRef = activity != null ? new WeakReference<>(activity) : null;
 
 		app.getTaskManager().runInBackground(new OsmAndTaskRunnable<Void, Void, SaveGpxResult>() {
 
@@ -507,16 +407,14 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				boolean fileExists = file != null && file.exists();
 				boolean gpxFileNonEmpty = gpxFile != null && (gpxFile.hasTrkPt() || gpxFile.hasWptPt());
 				if (fileExists && gpxFileNonEmpty) {
-					if (!openTrack) {
-						if (activityRef != null) {
-							final Activity a = activityRef.get();
-							if (a instanceof FragmentActivity && !a.isFinishing()) {
-								SaveGPXBottomSheet.showInstance(((FragmentActivity) a)
-										.getSupportFragmentManager(), file.getAbsolutePath());
-							}
-						}
-					} else {
+					if (openTrack) {
 						TrackMenuFragment.openTrack(mapActivity, file, null);
+					} else {
+						FragmentActivity fragmentActivity = activityRef != null ? activityRef.get() : null;
+						if (AndroidUtils.isActivityNotDestroyed(fragmentActivity)) {
+							FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
+							SaveGPXBottomSheet.showInstance(fragmentManager, file.getAbsolutePath());
+						}
 					}
 				}
 
