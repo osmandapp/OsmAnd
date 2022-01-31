@@ -1,9 +1,5 @@
 package net.osmand.plus.plugins.monitoring;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_MONITORING;
-import static net.osmand.plus.settings.backend.OsmandSettings.MONTHLY_DIRECTORY;
-import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
@@ -15,39 +11,34 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.AppCompatCheckBox;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
 import com.google.android.material.slider.Slider;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.ValueHolder;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.NavigationService;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.track.helpers.SavingTrackHelper;
-import net.osmand.plus.track.helpers.SavingTrackHelper.SaveGpxResult;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
-import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SavingTrackHelper;
+import net.osmand.plus.track.helpers.SavingTrackHelper.SaveGpxResult;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
@@ -56,9 +47,19 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatCheckBox;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_MONITORING;
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 public class OsmandMonitoringPlugin extends OsmandPlugin {
 
@@ -401,7 +402,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				} else {
 					String gpxFileName = gpxFilesByName.keySet().iterator().next();
 					gpxFile = gpxFilesByName.get(gpxFileName);
-					file = getSavedGpxFile(gpxFileName);
+					file = getSavedGpxFile(gpxFileName + GPX_FILE_EXT);
 				}
 
 				boolean fileExists = file != null && file.exists();
@@ -426,51 +427,16 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	@Nullable
-	private File getSavedGpxFile(@NonNull String relativeFileName) {
+	private File getSavedGpxFile(@NonNull String relativeFileNameWithExt) {
 		File recDir = app.getAppCustomization().getTracksDir();
-		File[] recChildren = recDir.listFiles();
-
-		if (recChildren != null && !Algorithms.isEmpty(relativeFileName)) {
-			Integer trackStorageDir = settings.TRACK_STORAGE_DIRECTORY.get();
-			return MONTHLY_DIRECTORY.equals(trackStorageDir)
-					? getFileByNameFromMonthlyDir(relativeFileName)
-					: getFileByName(recChildren, relativeFileName);
-		}
-
-		return null;
-	}
-
-	@Nullable
-	private File getFileByNameFromMonthlyDir(@NonNull String relativeFileName) {
-		String[] fileNames = relativeFileName.split("/");
-		if (fileNames.length != 2) {
-			return null;
-		}
-		String folderName = fileNames[0];
-		String fileName = fileNames[1];
-
-		File recDir = app.getAppCustomization().getTracksDir();
-		List<File> subFolders = Algorithms.collectDirs(recDir, new ArrayList<>());
-		for (File folder : subFolders) {
-			File[] children = folder.listFiles();
-			if (folder.getAbsolutePath().endsWith(folderName) && children != null) {
-				return getFileByName(children, fileName);
+		List<GPXInfo> gpxInfoList = new ArrayList<>();
+		GpxUiHelper.readGpxDirectory(recDir, gpxInfoList, "", false);
+		for (GPXInfo gpxInfo : gpxInfoList) {
+			if (relativeFileNameWithExt.equals(gpxInfo.getFileName())) {
+				return new File(recDir, relativeFileNameWithExt);
 			}
 		}
 
-		return null;
-	}
-
-	@Nullable
-	private File getFileByName(@NonNull File[] files, @NonNull String fileName) {
-		SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
-		for (File file : files) {
-			if (file.isFile()
-					&& file.getName().startsWith(fileName)
-					&& file.lastModified() == savingTrackHelper.getLastTimeFileSaved()) {
-				return file;
-			}
-		}
 		return null;
 	}
 

@@ -1052,9 +1052,9 @@ public class GpxUiHelper {
 			File[] files = dir.listFiles();
 			if (files != null) {
 				for (File f : files) {
-					if (f.getName().toLowerCase().endsWith(GPX_FILE_EXT)) {
-						list.add(new GPXInfo(absolutePath ? f.getAbsolutePath() :
-								parent + f.getName(), f.lastModified(), f.length()));
+					if (f.isFile() && f.getName().toLowerCase().endsWith(GPX_FILE_EXT)) {
+						String fileName = absolutePath ? f.getAbsolutePath() : parent + f.getName();
+						list.add(new GPXInfo(fileName, f.lastModified(), f.length()));
 					} else if (f.isDirectory()) {
 						readGpxDirectory(f, list, parent + f.getName() + "/", absolutePath);
 					}
