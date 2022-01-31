@@ -2,6 +2,8 @@ package net.osmand.plus.mapcontextmenu;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_SEARCH_MORE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_SHOW_ON_MAP_ID;
 import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 
 import android.content.Context;
@@ -1231,10 +1233,13 @@ public class MenuBuilder {
 		}
 		PoiUIFilter filter = getPoiFilterForType(nearestPoiType);
 		if (filter != null) {
-			if (nearestAmenities.size() >= NEARBY_MAX_POI_COUNT) {
+			if (customization.isFeatureEnabled(CONTEXT_MENU_SHOW_ON_MAP_ID)
+					&& nearestAmenities.size() >= NEARBY_MAX_POI_COUNT) {
 				view.addView(createShowOnMap(context, filter));
 			}
-			view.addView(createSearchMoreButton(context, filter));
+			if (customization.isFeatureEnabled(CONTEXT_MENU_SEARCH_MORE_ID)) {
+				view.addView(createSearchMoreButton(context, filter));
+			}
 		}
 		return new CollapsableView(view, this, collapsed);
 	}
