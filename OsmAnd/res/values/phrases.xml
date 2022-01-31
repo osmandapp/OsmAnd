@@ -4792,5 +4792,8 @@
 	<string name="poi_hospice">Hospice</string>
 
 	<string name="poi_telecommunication">Telecommunication</string>
+	<string name="poi_avalanche_transceiver">Avalanche Victim Detector;AVD;Avalanche transceiver</string>
+	<string name="poi_avalanche_transceiver_training">Avalanche transceiver training</string>
+	<string name="poi_avalanche_transceiver_checkpoint">Avalanche transceiver checkpoint</string>
 
 </resources>
