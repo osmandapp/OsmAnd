@@ -4235,4 +4235,20 @@
     <string name="poi_medical_supply_mobility">Мобильность</string>
     <string name="poi_operator_type_public">Тип оператора: общественный</string>
     <string name="poi_wine_region">Винодельческий регион</string>
+    <string name="poi_distillery">Ликёро-водочный завод</string>
+    <string name="poi_handwashing_creme_no">Крем: нет</string>
+    <string name="poi_gender_segregated_no">Гендерная сегрегация: нет</string>
+    <string name="poi_gender_segregated_yes">Гендерная сегрегация: есть</string>
+    <string name="poi_toilets_paper_supplied_no">Предоставление бумаги: нет</string>
+    <string name="poi_hospice">Хоспис</string>
+    <string name="poi_blowhole">Дыхало</string>
+    <string name="poi_winery">Винодельня</string>
+    <string name="poi_toilets_paper_supplied_yes">Предоставление бумаги: есть</string>
+    <string name="poi_toilets_hands_drying_yes">Полотенце/сушилка для рук: есть</string>
+    <string name="poi_toilets_hands_drying_no">Полотенце/сушилка для рук: нет</string>
+    <string name="poi_toilets_handwashing_yes">Рукомойник: есть</string>
+    <string name="poi_toilets_handwashing_no">Рукомойник: нет</string>
+    <string name="poi_handwashing_creme_yes">Крем: есть</string>
+    <string name="poi_origin">Происхождение</string>
+    <string name="poi_books_adults">Взрослые</string>
 </resources>
