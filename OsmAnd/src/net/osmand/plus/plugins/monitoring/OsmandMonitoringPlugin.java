@@ -511,9 +511,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 						if (activityRef != null) {
 							final Activity a = activityRef.get();
 							if (a instanceof FragmentActivity && !a.isFinishing()) {
-								List<String> singleName = Collections.singletonList(Algorithms.getFileNameWithoutExtension(file));
 								SaveGPXBottomSheet.showInstance(((FragmentActivity) a)
-										.getSupportFragmentManager(), singleName);
+										.getSupportFragmentManager(), file.getAbsolutePath());
 							}
 						}
 					} else {

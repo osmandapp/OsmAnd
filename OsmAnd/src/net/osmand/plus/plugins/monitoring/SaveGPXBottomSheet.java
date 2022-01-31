@@ -1,7 +1,5 @@
 package net.osmand.plus.plugins.monitoring;
 
-import static net.osmand.plus.utils.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -13,26 +11,20 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
@@ -40,38 +32,43 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
+import static net.osmand.plus.utils.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
 
 public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
+
 	public static final String TAG = "SaveGPXBottomSheetFragment";
-	public static final String SAVED_TRACKS_KEY = "saved_track_filename";
+
 	private static final Log LOG = PlatformUtil.getLog(SaveGPXBottomSheet.class);
 
+	private static final String KEY_FILE_NAME = "file_name";
+
 	private boolean openTrack = false;
-	private File file;
-	private String savedGpxDir = "";
-	private String savedGpxName = "";
+	private File savedGpxFile;
+	private String initialGpxName = "";
 	private String newGpxName = "";
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		final OsmandApplication app = requiredMyApplication();
 		Bundle args = getArguments();
-		if (args != null && args.containsKey(SAVED_TRACKS_KEY)) {
-			ArrayList<String> savedGpxNames = args.getStringArrayList(SAVED_TRACKS_KEY);
-			if (savedGpxNames != null && savedGpxNames.size() > 0) {
-				String fileName = savedGpxNames.get(savedGpxNames.size() - 1);
-				savedGpxDir = new File(fileName).getParent();
-				savedGpxName = new File(fileName).getName();
-				newGpxName = this.savedGpxName;
-			}
+		if (args != null && args.containsKey(KEY_FILE_NAME)) {
+			String fileName = args.getString(KEY_FILE_NAME);
+			savedGpxFile = new File(fileName);
+			initialGpxName = Algorithms.getFileNameWithoutExtension(savedGpxFile);
+			newGpxName = initialGpxName;
 		} else {
 			dismiss();
 		}
 
 		Context ctx = requireContext();
-		file = new File(app.getAppCustomization().getTracksDir(), savedGpxName + IndexConstants.GPX_FILE_EXT);
 		final boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		final int textPrimaryColor = ColorUtilities.getPrimaryTextColorId(nightMode);
 		View mainView = UiUtilities.getInflater(ctx, nightMode).inflate(R.layout.save_gpx_fragment, null);
@@ -84,7 +81,7 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 		textBox.setClearButton(getIcon(R.drawable.ic_action_remove_circle, iconColor));
 
 		final EditText nameEditText = mainView.findViewById(R.id.name_edit_text);
-		nameEditText.setText(savedGpxName);
+		nameEditText.setText(initialGpxName);
 		nameEditText.setTextColor(ContextCompat.getColor(ctx, textPrimaryColor));
 		nameEditText.addTextChangedListener(new TextWatcher() {
 			@Override
@@ -137,8 +134,8 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void doRename(boolean openTrack) {
-		file = renameGpxFile();
-		if (file != null) {
+		savedGpxFile = tryRenameGpxFile();
+		if (savedGpxFile != null) {
 			this.openTrack = openTrack;
 			dismiss();
 		}
@@ -174,32 +171,30 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 	public void onDismiss(@NonNull DialogInterface dialog) {
 		super.onDismiss(dialog);
 		FragmentActivity activity = getActivity();
-		if (file != null && activity != null) {
+		if (savedGpxFile != null && activity != null) {
 			boolean showTrack = requiredMyApplication().getSettings().SHOW_SAVED_TRACK_REMEMBER.get();
 			if (showTrack) {
-				showOnMap(file, !openTrack);
+				showOnMap(savedGpxFile, !openTrack);
 			}
 			if (openTrack) {
-				TrackMenuFragment.openTrack(activity, file, null);
+				TrackMenuFragment.openTrack(activity, savedGpxFile, null);
 			}
 		}
 	}
 
-	private File renameGpxFile() {
-		FragmentActivity activity = getActivity();
-		if (activity == null) {
+	@Nullable
+	private File tryRenameGpxFile() {
+		OsmandApplication app = getMyApplication();
+		if (app == null) {
 			return null;
-		}
-		OsmandApplication app = (OsmandApplication) activity.getApplication();
-		File savedFile = new File(app.getAppCustomization().getTracksDir(), new File(savedGpxDir, savedGpxName + IndexConstants.GPX_FILE_EXT).getPath());
-		if (savedGpxName.equalsIgnoreCase(newGpxName)) {
-			return savedFile;
-		}
-		if (Algorithms.isEmpty(newGpxName)) {
+		} else if (initialGpxName.equalsIgnoreCase(newGpxName)) {
+			return savedGpxFile;
+		} else if (Algorithms.isBlank(newGpxName)) {
 			Toast.makeText(app, R.string.empty_filename, Toast.LENGTH_LONG).show();
 			return null;
 		}
-		return FileUtils.renameGpxFile(app, savedFile, newGpxName + IndexConstants.GPX_FILE_EXT, true, null);
+		return FileUtils.renameGpxFile(app, savedGpxFile, newGpxName + IndexConstants.GPX_FILE_EXT,
+				true, null);
 	}
 
 	private void showOnMap(File f, boolean animated) {
@@ -229,19 +224,13 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 	}
 
-	public static void showInstance(FragmentManager fragmentManager, List<String> filenames) {
-		if (fragmentManager.isStateSaved()) {
-			return;
-		}
-		SaveGPXBottomSheet f = new SaveGPXBottomSheet();
-		Bundle b = new Bundle();
-		b.putStringArrayList(SAVED_TRACKS_KEY, new ArrayList<>(filenames));
-		f.setArguments(b);
-		try {
-			f.show(fragmentManager, TAG);
-		} catch (IllegalStateException ex) {
-			LOG.error("Can not perform this action after onSaveInstanceState");
+	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull String fileName) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			SaveGPXBottomSheet fragment = new SaveGPXBottomSheet();
+			Bundle args = new Bundle();
+			args.putString(KEY_FILE_NAME, fileName);
+			fragment.setArguments(args);
+			fragment.show(fragmentManager, TAG);
 		}
 	}
 }
-
