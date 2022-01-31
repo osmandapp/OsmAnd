@@ -3769,7 +3769,7 @@
     <string name="routing_engine_vehicle_type_racingbike">Racercykel</string>
     <string name="routing_engine_vehicle_type_truck">Lastbil</string>
     <string name="message_server_error">Server fejl: %1$s</string>
-    <string name="context_menu_edit_descr">Redigere beskrivelse</string>
+    <string name="context_menu_edit_descr">Rediger beskrivelse</string>
     <string name="upload_photo_completed">Send afsluttet</string>
     <string name="uploading_count">Sender %1$d af %2$d</string>
     <string name="uploaded_count">Sendt %1$d af %2$d</string>
