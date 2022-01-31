@@ -544,13 +544,21 @@ public class RouteResultPreparation {
 		double endLat = end.getLatitude();
 		double endLon = end.getLongitude();
 		
+		String calcTime = "";
+		int segPerSec = 0;
+		if (ctx.calculationProgress != null && ctx.calculationProgress.timeToCalculate > 0) {
+			calcTime = String.format("%.2f", ctx.calculationProgress.timeToCalculate / 1e9);
+			segPerSec = (int) (ctx.getVisitedSegments() / (ctx.calculationProgress.timeToCalculate / 1e9));
+			
+		}
 		
-		String msg = String.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"%s\" \n"
-				+ "  start_lat=\"%.5f\" start_lon=\"%.5f\" target_lat=\"%.5f\" target_lon=\"%.5f\" "
-				+ " routing_time=\"%.2f\" loadedTiles=\"%d\" visitedSegments=\"%d\" complete_distance=\"%.2f\" complete_time=\"%.2f\" >",
-				ctx.config.routerName, startLat, startLon, endLat, endLon, ctx.routingTime, 
-				ctx.getLoadedTiles(), 
-				ctx.getVisitedSegments(), completeDistance, completeTime);
+		String msg = String.format("<test vehicle=\"%s\" native=\"%s\" "
+				+ " start_lat=\"%.5f\" start_lon=\"%.5f\" target_lat=\"%.5f\" target_lon=\"%.5f\" \n "
+				+ " routing_time=\"%.2f\" complete_distance=\"%.2f\" complete_time=\"%.2f\" " 
+				+ " calc_timems=\"%s\" loaded_tiles=\"%d\" visited_segments=\"%d\" segments_1sec=\"%s\"  >",
+				ctx.config.routerName, ctx.nativeLib != null, startLat, startLon, endLat, endLon,
+				ctx.routingTime, completeDistance, completeTime,
+				calcTime, ctx.getLoadedTiles(), ctx.getVisitedSegments(), segPerSec);
 		log.info(msg);
 		String alerts = String.format("Alerts during routing: %d fastRoads, %d slowSegmentsEearlier",
 				ctx.alertFasterRoadToVisitedSegments, ctx.alertSlowerSegmentedWasVisitedEarlier);
@@ -558,8 +566,8 @@ public class RouteResultPreparation {
 			alerts = "No alerts";
 		}
 		println("ROUTE. " + alerts);
-        println(msg);
 		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
+			println(msg);
 			org.xmlpull.v1.XmlSerializer serializer = null;
 			if (PRINT_TO_GPX_FILE != null) {
 				serializer = PlatformUtil.newSerializer();
@@ -687,9 +695,11 @@ public class RouteResultPreparation {
 					e.printStackTrace();
 				}
 			}
+			println("</test>");
+			// repeat to have infoprint
+			println(msg + "</test>");
 		}
-		println("</test>");
-		println(msg);
+		
 		
 		
 //		calculateStatistics(result);
