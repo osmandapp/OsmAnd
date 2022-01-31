@@ -118,9 +118,14 @@ public interface OsmAndCustomizationConstants {
 	//Navigation Options:
 	String NAVIGATION_OPTIONS_ID = "navigation.options.";
 	String NAVIGATION_OPTIONS_MENU_ID = NAVIGATION_OPTIONS_ID + "options_menu";
+	String NAVIGATION_APP_MODES_OPTIONS_ID = NAVIGATION_OPTIONS_ID + "app_modes_options";
+	String NAVIGATION_ROUTE_DETAILS_OPTIONS_ID = NAVIGATION_OPTIONS_ID + "route_details_options";
 
 	//Map Context Menu rows:
 	String MAP_CONTEXT_MENU_ROWS = "context.menu.rows.";
 	String CONTEXT_MENU_LINKS_ID = MAP_CONTEXT_MENU_ROWS + "links";
 	String CONTEXT_MENU_PHONE_ID = MAP_CONTEXT_MENU_ROWS + "phone";
+	String CONTEXT_MENU_SEARCH_MORE_ID = MAP_CONTEXT_MENU_ROWS + "search_more";
+	String CONTEXT_MENU_SHOW_ON_MAP_ID = MAP_CONTEXT_MENU_ROWS + "show_on_map";
+	String CONTEXT_MENU_AVOID_ROADS_ID = MAP_CONTEXT_MENU_ROWS + "avoid_roads";
 }

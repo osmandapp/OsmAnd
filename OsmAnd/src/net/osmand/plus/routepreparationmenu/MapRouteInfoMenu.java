@@ -1,6 +1,7 @@
 package net.osmand.plus.routepreparationmenu;
 
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_APP_MODES_OPTIONS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OPTIONS_MENU_ID;
 
 import android.content.Context;
@@ -923,7 +924,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					R.drawable.ic_action_arrow_up : R.drawable.ic_action_arrow_down);
 			foldButtonView.setOnClickListener(v -> expandCollapse());
 
-			mainView.findViewById(R.id.app_modes_options).setOnClickListener(v -> showProfileBottomSheetDialog());
+			OsmAndAppCustomization customization = getApp().getAppCustomization();
+			View options = mainView.findViewById(R.id.app_modes_options);
+			options.setOnClickListener(v -> showProfileBottomSheetDialog());
+			AndroidUiHelper.updateVisibility(options, customization.isFeatureEnabled(NAVIGATION_APP_MODES_OPTIONS_ID));
 		}
 	}
 
