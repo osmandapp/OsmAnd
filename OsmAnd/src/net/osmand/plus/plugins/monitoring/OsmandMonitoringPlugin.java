@@ -394,12 +394,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				updateControl();
 
 				Map<String, GPXFile> gpxFilesByName = result.getGpxFilesByName();
-				GPXFile gpxFile;
-				File file;
-				if (Algorithms.isEmpty(gpxFilesByName)) {
-					gpxFile = null;
-					file = null;
-				} else {
+				GPXFile gpxFile = null;
+				File file = null;
+				if (!Algorithms.isEmpty(gpxFilesByName)) {
 					String gpxFileName = gpxFilesByName.keySet().iterator().next();
 					gpxFile = gpxFilesByName.get(gpxFileName);
 					file = getSavedGpxFile(gpxFileName + GPX_FILE_EXT);
