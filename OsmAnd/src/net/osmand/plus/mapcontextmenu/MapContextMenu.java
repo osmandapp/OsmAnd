@@ -583,8 +583,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public void updateWidgetsVisibility(boolean widgetsVisible) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			boolean bottomControlsVisible = shouldShowBottomControls(widgetsVisible);
-			mapActivity.getWidgetsVisibilityHelper().updateControlsVisibility(widgetsVisible, bottomControlsVisible);
+			mapActivity.getWidgetsVisibilityHelper().updateControlsVisibility(widgetsVisible, widgetsVisible);
 			mapActivity.refreshMap();
 		}
 	}

@@ -1412,7 +1412,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				if (!wasDrawerDisabled) {
 					mapActivity.enableDrawer();
 				}
-				menu.updateWidgetsVisibility(false);
+				menu.updateWidgetsVisibility(!wasDrawerDisabled);
 			}
 		}
 		super.onPause();
