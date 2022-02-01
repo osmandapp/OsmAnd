@@ -2,6 +2,7 @@ package net.osmand.plus.routepreparationmenu;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_DETAILS_OPTIONS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
 import static net.osmand.plus.activities.MapActivityActions.SaveDirectionsAsyncTask;
@@ -70,6 +71,7 @@ import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapControlsLayer;
@@ -549,10 +551,12 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		shareRoute.setOnClickListener(shareOnClick);
 		shareRouteFlow.setOnClickListener(shareOnClick);
 
-		if (publicTransportMode) {
+		OsmAndAppCustomization customization = app.getAppCustomization();
+		boolean featureEnabled = customization.isFeatureEnabled(NAVIGATION_ROUTE_DETAILS_OPTIONS_ID);
+		if (publicTransportMode || !featureEnabled) {
 			view.findViewById(R.id.toolbar_options).setVisibility(View.GONE);
 		}
-		if (publicTransportMode || !portrait) {
+		if (publicTransportMode || !portrait || !featureEnabled) {
 			view.findViewById(R.id.toolbar_options_flow).setVisibility(View.GONE);
 			view.findViewById(R.id.toolbar_options_flow_bg).setVisibility(View.GONE);
 		}
