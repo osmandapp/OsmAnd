@@ -23,6 +23,14 @@ public class ExportProfileParams extends AidlParams {
 		}
 	}
 
+	public ExportProfileParams(String profile, List<String> settingsTypeList) {
+
+		this.profile = profile;
+		if (settingsTypeList != null) {
+			settingsTypeKeyList.addAll(settingsTypeList);
+		}
+	}
+
 	public ExportProfileParams(Parcel in) {
 		readFromParcel(in);
 	}
