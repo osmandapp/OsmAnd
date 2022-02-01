@@ -776,15 +776,17 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		private final List<String> warnings;
 		private final Map<String, GPXFile> gpxFilesByName;
 
-		public SaveGpxResult(List<String> warnings, Map<String, GPXFile> gpxFilesByName) {
+		public SaveGpxResult(@NonNull List<String> warnings, @NonNull Map<String, GPXFile> gpxFilesByName) {
 			this.warnings = warnings;
 			this.gpxFilesByName = gpxFilesByName;
 		}
 
+		@NonNull
 		public List<String> getWarnings() {
 			return warnings;
 		}
 
+		@NonNull
 		public Map<String, GPXFile> getGpxFilesByName() {
 			return gpxFilesByName;
 		}
