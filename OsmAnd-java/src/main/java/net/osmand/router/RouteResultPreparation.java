@@ -791,7 +791,7 @@ public class RouteResultPreparation {
 					result.get(prevSegment).setDescription(
 							turn + MessageFormat.format(" and go {0,number,#.##} meters", dist));
 					if (result.get(prevSegment).getTurnType().isSkipToSpeak()) {
-						result.get(prevSegment).setDescription("-*" + result.get(prevSegment).getDescription());
+						result.get(prevSegment).setDescription("[MUTE] " + result.get(prevSegment).getDescription());
 					}
 				}
 				prevSegment = i;
