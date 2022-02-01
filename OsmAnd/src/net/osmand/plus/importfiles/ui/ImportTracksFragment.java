@@ -402,6 +402,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 			public void tracksCollectionFinished(List<TrackItem> items) {
 				collectTracksTask = null;
 				trackItems.addAll(items);
+				selectedTracks.addAll(items);
 				adapter.updateItems(trackItems, selectedTracks);
 
 				updateProgress();

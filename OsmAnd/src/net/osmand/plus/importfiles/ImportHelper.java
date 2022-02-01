@@ -428,7 +428,8 @@ public class ImportHelper {
 				}
 			} else {
 				if (save) {
-					if (result.getTracksCount() > 1) {
+					int tracksCount = result.getTracksCount();
+					if (tracksCount > 1 && tracksCount < 50) {
 						ImportTracksFragment.showInstance(activity.getSupportFragmentManager(), result, name);
 					} else {
 						String existingFilePath = getExistingFilePath(name, fileSize);
