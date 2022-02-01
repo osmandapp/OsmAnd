@@ -15,7 +15,7 @@
     <string name="map_widget_altitude">Höjd</string>
     <string name="map_widget_next_turn">Nästa sväng</string>
     <string name="show_warnings_title">Visa varningar …</string>
-    <string name="show_warnings_descr">Konfigurera trafikvarningar (hastighetsbegränsningar, stopp, vägbulor), varning för fartkameror samt körfältsinformation.</string>
+    <string name="show_warnings_descr">Ställ in trafikvarningar (hastighetsbegränsningar, tvångsstopp, farthinder, tunnlar), varningar för fartkameror och information om körfält.</string>
     <string name="use_compass_navigation_descr">Använd kompassen när ingen riktning upptäcks på annat sätt.</string>
     <string name="use_compass_navigation">Använd kompass</string>
     <string name="avoid_motorway">Undvik motorvägar</string>
@@ -495,7 +495,7 @@
     <string name="target_point">Destination %1$s</string>
     <string name="shared_string_target_points">Destinationer</string>
     <string name="intermediate_point_too_far">Den mellanliggande destinationen %1$s ligger för långt från närmaste väg.</string>
-    <string name="arrived_at_intermediate_point">Du har anlänt till din mellanliggande destination</string>
+    <string name="arrived_at_intermediate_point">Uppnådd mellanliggande destination</string>
     <string name="context_menu_item_intermediate_point">Lägg till som mellanliggande destination</string>
     <string name="map_widget_intermediate_distance">Mellanliggande destination</string>
     <string name="ending_point_too_far">Slutpunkten för långt från närmaste väg.</string>
@@ -791,7 +791,7 @@
     <string name="av_widget_action">Standardåtgärd för widget</string>
     <string name="av_video_format_descr">Videoformat:</string>
     <string name="av_video_format">Videoformat</string>
-    <string name="av_use_external_recorder_descr">Använd systemets inspelare för video.</string>
+    <string name="av_use_external_recorder_descr">Använd systeminspelare för video.</string>
     <string name="av_use_external_recorder">Använd systemets inspelare</string>
     <string name="av_settings_descr">Gör inställningar för ljud och video.</string>
     <string name="av_settings">Inställningar för ljud och video </string>
@@ -923,7 +923,7 @@
     <string name="route_head">Riktning</string>
     <string name="wait_current_task_finished">Vänta tills aktuell uppgift är slutförd</string>
     <string name="search_street_in_neighborhood_cities">Sök efter gata i grannstäder</string>
-    <string name="intermediate_items_sort_return">Mellanliggande mål ordnade för att optimera deras ordning från aktuell position till destinationen.</string>
+    <string name="intermediate_items_sort_return">Optimerad ordning för mellanliggande destinationer på vägen till destinationen.</string>
     <string name="intermediate_items_sort_by_distance">Sortera dörr-till-dörr</string>
     <string name="local_osm_changes_backup_failed">Det gick inte att säkerhetskopiera OSM-ändringar.</string>
     <string name="local_osm_changes_backup">Säkerhetskopiera som OSM-förändring</string>
@@ -1022,13 +1022,13 @@
     <string name="speech_rate_descr">Ange talhastighet för text-till-tal.</string>
     <string name="speech_rate">Talhastighet</string>
     <string name="complex_route_calculation_failed">Snabbberäkning av rutt misslyckades (%s), går tillbaka till långsam beräkning.</string>
-    <string name="disable_complex_routing_descr">Inaktivera 2-fasruttning för bilnavigering.</string>
+    <string name="disable_complex_routing_descr">Inaktivera tvåfasig routing för bilnavigering.</string>
     <string name="disable_complex_routing">Inaktivera komplex ruttning</string>
     <string name="guidance_preferences_descr">Navigationsinställningar</string>
     <string name="routing_preferences_descr">Ruttningsinställningar</string>
-    <string name="android_19_location_disabled">Efter Androidversion 4.4 (KitKat) går det inte att hämta och uppdatera kartor till den tidigare lagringsmappen (%s). Vill du byta till en tillåten plats och kopiera alla OsmAnd-filerna dit?
-\n OBS: Gamla filer berörs inte (men kan tas bort manuellt).
-\n OBS: På den nya lagringsplatsen kommer det inte att vara möjligt att dela filer mellan OsmAnd och OsmAnd+.</string>
+    <string name="android_19_location_disabled">Från och med Android 4.4 (KitKat) är den gamla lagringsmappen (%s) föråldrad. Kopiera alla OsmAnd-filer till den nya lagringsplatsen\?
+\n Anmärkning 1: Dina gamla filer kommer att förbli orörda (men kan tas bort manuellt).
+\n Anmärkning 2: På den nya lagringsplatsen kommer det inte att vara möjligt att dela filer mellan OsmAnd och OsmAnd+.</string>
     <string name="copying_osmand_one_file_descr">Kopierar filen (%s) till den nya platsen …</string>
     <string name="copying_osmand_files_descr">Kopierar OsmAnd-datafiler till den nya platsen (%s) …</string>
     <string name="copying_osmand_files">Kopierar OsmAnd-datafiler …</string>
@@ -1045,7 +1045,7 @@
     <string name="routing_attr_avoid_motorway_name">Inga motorvägar</string>
     <string name="routing_attr_avoid_motorway_description">Undviker motorvägar</string>
     <string name="routing_attr_weight_name">Viktgräns</string>
-    <string name="routing_attr_weight_description">Ange fordonsvikt tillåten på rutter.</string>
+    <string name="routing_attr_weight_description">Ange tillåten viktgräns för fordon på sträckorna.</string>
     <string name="select_gpx">Välj GPX …</string>
     <string name="route_descr_select_destination">Ställ in destination</string>
     <string name="route_preferences">Ruttinställningar</string>
@@ -1098,7 +1098,7 @@
     <string name="lang_zh">Kinesiska</string>
     <string name="lang_pt_br">Portugisiska (Brasilien)</string>
     <string name="index_name_canada">Nordamerika - Kanada</string>
-    <string name="app_modes_choose_descr">Välj vilka profiler som ska visas i appen.</string>
+    <string name="app_modes_choose_descr">Välj visade profiler.</string>
     <string name="index_item_nation_addresses">adresser (hela landet)</string>
     <string name="index_item_world_altitude_correction">Rättning av höjd (världen)</string>
     <string name="index_item_world_seamarks">Sjömärken (världen)</string>
@@ -1164,7 +1164,7 @@
     <string name="import_file_favourites">Spara data som GPX-fil eller importera waypoints till \"Favoriter\"?</string>
     <string name="share_fav_subject">Favoriter utdelade via OsmAnd</string>
     <string name="commiting_node">Skickar nod…</string>
-    <string name="none_selected_gpx">Inga GPX-filer markerade. För att markera tryck och håll ned ett tillgängligt spår.</string>
+    <string name="none_selected_gpx">Ange en GPX-fil genom att först trycka länge.</string>
     <string name="local_index_select_gpx_file">Markera ett spår</string>
     <string name="no_index_file_to_download">Hämtningar hittades inte, kontrollera din anslutning till Internet.</string>
     <string name="keep_navigation_service">Behåll</string>
@@ -1246,7 +1246,7 @@
     <string name="traffic_warning_stop">Stopptecken</string>
     <string name="traffic_warning">Trafikskylt</string>
     <string name="traffic_warning_speed_camera">Fartkamera</string>
-    <string name="traffic_warning_calming">Farthinder</string>
+    <string name="traffic_warning_calming">Trafiksänkning</string>
     <string name="local_index_description">Tryck på en post för att se fler detaljer, tryck och håll för att inaktivera eller ta bort. Data på enheten (%1$s ledigt):</string>
     <string name="text_size_descr">Ange textstorlek på kartan.</string>
     <string name="text_size">Textstorlek</string>
@@ -1354,7 +1354,7 @@
     <string name="device_memory">Intern lagring</string>
     <string name="rendering_attr_pisteRoutes_name">Skidbackar</string>
     <string name="roads_only">Endast vägar</string>
-    <string name="notes">Anteckningar</string>
+    <string name="notes">A/V anteckningar</string>
     <string name="online_map">Online-karta</string>
     <string name="share_note">Dela anteckning</string>
     <string name="plugin_nautical_descr">Denna insticksmodul berikar OsmAnds kart- och navigationsapp för att också producera nautiska kartor för båtliv, segling och andra typer av vattensporter.
@@ -3772,9 +3772,7 @@
     <string name="routing_attr_difficulty_preference_description">Prioritera rutter av denna svårighetsgrad, även om rutter över svårare eller lättare pister är tillåtna om de är kortare.</string>
     <string name="routing_attr_freeride_policy_name">Offpist</string>
     <string name="quick_action_need_to_add_item_to_list">Lägg till minst ett objekt i listan bland inställningarna för \'Snabbhandlingar\'</string>
-    <string name="clear_all_history_warning">Är du säker på att du vill radera all historik i appen\?
-\n
-\nSök-, navigations- och markörhistoriken kommer att raderas.</string>
+    <string name="clear_all_history_warning">Rensa alla poster i appens historik, inklusive sök-, navigerings- och markeringshistorik\?</string>
     <string name="clear_all_history">Radera all historik</string>
     <string name="history_actions_descr">Du kan exportera historiken till en fil.</string>
     <string name="map_markers_history">Kartmarkörhistorik</string>
@@ -3913,4 +3911,5 @@
     <string name="turn_arrows">Svängpilar</string>
     <string name="shared_string_size">Storlek</string>
     <string name="created_on">Skapad</string>
+    <string name="save_track_to_gpx_descrp">Starta spårinspelning automatiskt när navigering pågår. När den är klar sparas spåret automatiskt.</string>
 </resources>
