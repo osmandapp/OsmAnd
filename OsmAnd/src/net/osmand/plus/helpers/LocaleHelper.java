@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
 
@@ -113,5 +115,16 @@ public class LocaleHelper {
 			lang = lang.substring(0, 2).toLowerCase();
 		}
 		return lang;
+	}
+
+	public Resources getLocalizedResources(@NonNull String language) {
+		return getLocalizedContext(new Locale(language)).getResources();
+	}
+
+	public Context getLocalizedContext(@NonNull Locale locale) {
+		Configuration configuration = app.getResources().getConfiguration();
+		configuration = new Configuration(configuration);
+		configuration.setLocale(locale);
+		return app.createConfigurationContext(configuration);
 	}
 }

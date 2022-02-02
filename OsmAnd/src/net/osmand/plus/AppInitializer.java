@@ -16,10 +16,8 @@ import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.AsyncTask;
-import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -93,7 +91,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
@@ -257,18 +254,6 @@ public class AppInitializer implements IProgress {
 		}
 	}
 
-	Resources getLocalizedResources(String loc) {
-		if (Build.VERSION.SDK_INT < 17) {
-			return null;
-		}
-		Locale desiredLocale = new Locale(loc);
-		Configuration conf = app.getResources().getConfiguration();
-		conf = new Configuration(conf);
-		conf.setLocale(desiredLocale);
-		Context localizedContext = app.createConfigurationContext(conf);
-		return localizedContext.getResources();
-	}
-
 	private void initPoiTypes() {
 		app.poiTypes.setForbiddenTypes(app.osmandSettings.getForbiddenTypes());
 		if (app.getAppPath(IndexConstants.SETTINGS_DIR + "poi_types.xml").exists()) {
@@ -277,7 +262,7 @@ public class AppInitializer implements IProgress {
 			app.poiTypes.init();
 		}
 
-		final Resources en = getLocalizedResources("en");
+		final Resources resources = app.getLocaleHelper().getLocalizedResources("en");
 
 		app.poiTypes.setPoiTranslator(new MapPoiTypes.PoiTranslator() {
 
@@ -364,7 +349,7 @@ public class AppInitializer implements IProgress {
 
 			@Override
 			public String getEnTranslation(String keyName) {
-				if (en == null) {
+				if (resources == null) {
 					return Algorithms.capitalizeFirstLetter(
 							keyName.replace('_', ' '));
 				}
@@ -372,7 +357,7 @@ public class AppInitializer implements IProgress {
 					Field f = R.string.class.getField("poi_" + keyName);
 					if (f != null) {
 						Integer in = (Integer) f.get(null);
-						String val = en.getString(in);
+						String val = resources.getString(in);
 						if (val != null) {
 							int ind = val.indexOf(';');
 							if (ind > 0) {

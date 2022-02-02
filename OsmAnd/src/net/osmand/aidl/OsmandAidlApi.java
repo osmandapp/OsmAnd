@@ -61,6 +61,7 @@ import net.osmand.aidl.tiles.ASqliteDbFile;
 import net.osmand.aidlapi.customization.AProfile;
 import net.osmand.aidlapi.exit.ExitAppParams;
 import net.osmand.aidlapi.info.AppInfoParams;
+import net.osmand.aidlapi.info.GetTextParams;
 import net.osmand.aidlapi.map.ALatLon;
 import net.osmand.aidlapi.map.ALocation;
 import net.osmand.aidlapi.navigation.ABlockedRoad;
@@ -941,6 +942,7 @@ public class OsmandAidlApi {
 				if (restart) {
 					MapActivity.doRestart(mapActivity);
 				} else {
+					mapActivity.finishAndRemoveTask();
 					android.os.Process.killProcess(android.os.Process.myPid());
 				}
 			}
@@ -1710,8 +1712,8 @@ public class OsmandAidlApi {
 	}
 
 	boolean navigate(String startName, double startLat, double startLon,
-					 String destName, double destLat, double destLon,
-					 String profile, boolean force, boolean requestLocationPermission) {
+	                 String destName, double destLat, double destLon,
+	                 String profile, boolean force, boolean requestLocationPermission) {
 		Intent intent = new Intent();
 		intent.setAction(AIDL_NAVIGATE);
 		intent.putExtra(AIDL_START_NAME, startName);
@@ -1728,8 +1730,8 @@ public class OsmandAidlApi {
 	}
 
 	boolean navigateSearch(String startName, double startLat, double startLon,
-						   String searchQuery, double searchLat, double searchLon,
-						   String profile, boolean force, boolean requestLocationPermission) {
+	                       String searchQuery, double searchLat, double searchLon,
+	                       String profile, boolean force, boolean requestLocationPermission) {
 		Intent intent = new Intent();
 		intent.setAction(AIDL_NAVIGATE_SEARCH);
 		intent.putExtra(AIDL_START_NAME, startName);
@@ -1838,7 +1840,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean search(final String searchQuery, final int searchType, final double latitude, final double longitude,
-				   final int radiusLevel, final int totalLimit, final SearchCompleteCallback callback) {
+	               final int radiusLevel, final int totalLimit, final SearchCompleteCallback callback) {
 		if (Algorithms.isEmpty(searchQuery) || latitude == 0 || longitude == 0 || callback == null) {
 			return false;
 		}
@@ -2209,7 +2211,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean getBitmapForGpx(final Uri gpxUri, final float density, final int widthPixels,
-							final int heightPixels, final int color, final GpxBitmapCreatedCallback callback) {
+	                        final int heightPixels, final int color, final GpxBitmapCreatedCallback callback) {
 		if (gpxUri == null || callback == null) {
 			return false;
 		}
@@ -2444,6 +2446,12 @@ public class OsmandAidlApi {
 		intent.setAction(AIDL_EXIT_APP);
 		intent.putExtra(AIDL_EXIT_APP_RESTART, params.shouldRestart());
 		app.sendBroadcast(intent);
+		return true;
+	}
+
+	public boolean getText(GetTextParams params) {
+		Context context = app.getLocaleHelper().getLocalizedContext(params.getLocale());
+		params.setValue(AndroidUtils.getStringByProperty(context, params.getKey()));
 		return true;
 	}
 
