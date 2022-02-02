@@ -25,10 +25,10 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
+import net.osmand.plus.track.helpers.GpxNavigationHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.util.Algorithms;
 
@@ -145,7 +145,7 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 			TrackSelectSegmentBottomSheet.showInstance(fragmentManager, gpxFile, this);
 		} else {
-			TrackMenuFragment.startNavigationForGPX(gpxFile, mapActivity.getMapActions(), mapActivity);
+			GpxNavigationHelper.startNavigationForGpx(gpxFile, mapActivity);
 			closeDashboard();
 		}
 	}
@@ -214,18 +214,10 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 	}
 
 	@Override
-	public void onSegmentSelect(GPXFile gpxFile, int selectedSegment) {
+	public void onSegmentSelect(@NonNull GPXFile gpxFile, int selectedSegment) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
-			app.getSettings().GPX_ROUTE_SEGMENT.set(selectedSegment);
-			TrackMenuFragment.startNavigationForGPX(gpxFile, mapActivity.getMapActions(), mapActivity);
-			GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
-			if (paramsBuilder != null) {
-				paramsBuilder.setSelectedSegment(selectedSegment);
-				app.getRoutingHelper().onSettingsChanged(true);
-			}
-			closeDashboard();
+			GpxNavigationHelper.startNavigationForSegment(gpxFile, selectedSegment, mapActivity, this::closeDashboard);
 		}
 	}
 }
