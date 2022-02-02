@@ -4283,4 +4283,8 @@
     <string name="poi_collector">Gyűjthető cikkek boltja</string>
     <string name="poi_books_adults">felnőttkönyv</string>
     <string name="poi_hospice">Hospice</string>
+    <string name="poi_avalanche_transceiver_training">Lavnia-adóvevő gyakorlóterület</string>
+    <string name="poi_avalanche_transceiver_checkpoint">Lavina-adóvevő kipróbálási hely</string>
+    <string name="poi_telecommunication">Távközlés</string>
+    <string name="poi_avalanche_transceiver">Lavinaáldozat-észlelő;AVD;Lavina-adóvevő</string>
 </resources>
