@@ -39,7 +39,7 @@ public class ExitAppParams extends AidlParams {
 
 	@Override
 	public void writeToBundle(Bundle bundle) {
-		bundle.putBoolean("shouldRestart", this.shouldRestart);
+		bundle.putBoolean("shouldRestart", shouldRestart);
 	}
 
 	@Override

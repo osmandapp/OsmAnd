@@ -5,14 +5,14 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.text.format.DateFormat;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
 import java.util.Locale;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class LocaleHelper {
 
@@ -126,5 +126,16 @@ public class LocaleHelper {
 
 	private void updateOpeningHoursParser(@NonNull Locale locale) {
 		OpeningHoursParser.setTwelveHourFormattingEnabled(!DateFormat.is24HourFormat(app), locale);
+	}
+
+	public Resources getLocalizedResources(@NonNull String language) {
+		return getLocalizedContext(new Locale(language)).getResources();
+	}
+
+	public Context getLocalizedContext(@NonNull Locale locale) {
+		Configuration configuration = app.getResources().getConfiguration();
+		configuration = new Configuration(configuration);
+		configuration.setLocale(locale);
+		return app.createConfigurationContext(configuration);
 	}
 }

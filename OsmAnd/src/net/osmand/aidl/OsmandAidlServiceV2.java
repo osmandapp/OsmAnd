@@ -62,6 +62,7 @@ import net.osmand.aidlapi.gpx.ShowGpxParams;
 import net.osmand.aidlapi.gpx.StartGpxRecordingParams;
 import net.osmand.aidlapi.gpx.StopGpxRecordingParams;
 import net.osmand.aidlapi.info.AppInfoParams;
+import net.osmand.aidlapi.info.GetTextParams;
 import net.osmand.aidlapi.lock.SetLockStateParams;
 import net.osmand.aidlapi.map.ALatLon;
 import net.osmand.aidlapi.map.SetLocationParams;
@@ -1465,6 +1466,17 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 			try {
 				OsmandAidlApi api = getApi("exitApp");
 				return api != null && api.exitApp(params);
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean getText(GetTextParams params) {
+			try {
+				OsmandAidlApi api = getApi("getText");
+				return api != null && api.getText(params);
 			} catch (Exception e) {
 				handleException(e);
 				return false;

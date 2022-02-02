@@ -111,6 +111,7 @@ import net.osmand.aidlapi.lock.SetLockStateParams;
 import net.osmand.aidlapi.events.AKeyEventsParams;
 
 import net.osmand.aidlapi.info.AppInfoParams;
+import net.osmand.aidlapi.info.GetTextParams;
 
 import net.osmand.aidlapi.profile.ExportProfileParams;
 
@@ -908,4 +909,6 @@ interface IOsmAndAidlInterface {
     boolean setLocation(in SetLocationParams params);
 
     boolean exitApp(in ExitAppParams params);
+
+    boolean getText(inout GetTextParams params);
 }

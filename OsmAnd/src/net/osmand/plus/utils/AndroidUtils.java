@@ -1083,7 +1083,7 @@ public class AndroidUtils {
 	}
 
 	@Nullable
-	private static String getStringByProperty(@NonNull Context ctx, @NonNull String property) {
+	public static String getStringByProperty(@NonNull Context ctx, @NonNull String property) {
 		try {
 			Field field = R.string.class.getField(property);
 			return getStringForField(ctx, field);
