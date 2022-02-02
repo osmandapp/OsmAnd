@@ -4517,4 +4517,5 @@
     <string name="gpx_no_routes_descr">Ви можете використовувати інструмент «%1$s», щоб записувати маршрут у файл.</string>
     <string name="gpx_no_routes_title">Маршрути відсутні</string>
     <string name="quick_action_add_route_descr">Кнопка запуску маршруту з середини екрана.</string>
+    <string name="please_provide_group_name_message">Укажіть назву групи.</string>
 </resources>

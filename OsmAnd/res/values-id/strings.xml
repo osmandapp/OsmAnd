@@ -35,7 +35,7 @@
     <string name="prefer_in_routing_title">Utamakan…</string>
     <string name="prefer_in_routing_descr">Utamakan jalan raya</string>
     <string name="max_speed_none">tidak ada</string>
-    <string name="download_hillshade_maps">Overlay Hillshade</string>
+    <string name="download_hillshade_maps">Hillshade</string>
     <string name="local_indexes_cat_av">Data Audio/Video</string>
     <string name="about_version">Versi:</string>
     <string name="shared_string_about">Tentang</string>
@@ -1999,4 +1999,21 @@
     <string name="explore_wikipedia_offline">Jelajahi Wikipedia luring.</string>
     <string name="on_hold_since">Ditahan sejak %1$s</string>
     <string name="active_till">Aktif hingga %1$s</string>
+    <string name="poi_filter_parking">Parkir</string>
+    <string name="recording_context_menu_play">Mainkan</string>
+    <string name="poi_filter_entertainment">Hiburan</string>
+    <string name="maps_define_edit">Definisikan/Edit…</string>
+    <string name="plugin_distance_point">Titik</string>
+    <string name="plugin_distance_point_ele">ketinggian</string>
+    <string name="logcat_buffer_descr">Periksa dan bagikan log aplikasi yang berdetail</string>
+    <string name="recording_default_name">Merekam</string>
+    <string name="recording_context_menu_show">Tampilkan</string>
+    <string name="monitoring_control_start">REC</string>
+    <string name="item_unchecked">tidak dicentang</string>
+    <string name="item_checked">dicentang</string>
+    <string name="recording_unavailable">tidak tersedia</string>
+    <string name="rendering_attr_noAdminboundaries_name">Batasan</string>
+    <string name="poi_filter_emergency">Darurat</string>
+    <string name="logcat_buffer">Buffer logcat</string>
+    <string name="index_srtm_parts">bagian</string>
 </resources>

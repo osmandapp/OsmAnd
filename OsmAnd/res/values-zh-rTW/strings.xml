@@ -4510,4 +4510,5 @@
     <string name="gpx_no_routes_descr">您可以使用「%1$s」工具將路線新增至檔案中。</string>
     <string name="gpx_no_routes_title">沒有路線</string>
     <string name="quick_action_add_route_descr">從畫面中央開始路線的按鈕。</string>
+    <string name="please_provide_group_name_message">請提供群組名稱。</string>
 </resources>

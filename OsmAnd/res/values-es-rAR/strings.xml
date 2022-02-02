@@ -4517,4 +4517,5 @@
     <string name="gpx_no_routes_title">Sin rutas</string>
     <string name="gpx_no_routes_descr">Puedes usar la herramienta «%1$s» para añadir la ruta al archivo.</string>
     <string name="quick_action_add_route_descr">Un botón que inicia una ruta desde el centro de la pantalla.</string>
+    <string name="please_provide_group_name_message">Indica un nombre para el grupo.</string>
 </resources>

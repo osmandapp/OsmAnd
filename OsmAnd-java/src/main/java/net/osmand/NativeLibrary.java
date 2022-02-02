@@ -63,6 +63,7 @@ public class NativeLibrary {
 			this.nativeHandler = nativeHandler;
 		}
 
+		@SuppressWarnings("deprecation")
 		@Override
 		protected void finalize() throws Throwable {
 			deleteNativeResult();
@@ -88,6 +89,7 @@ public class NativeLibrary {
 			this.objects = objects;
 		}
 
+		@SuppressWarnings("deprecation")
 		@Override
 		protected void finalize() throws Throwable {
 			deleteNativeResult();

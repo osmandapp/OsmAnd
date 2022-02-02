@@ -667,7 +667,7 @@ public class GpxUiHelper {
 							confirm.setMessage(activity.getString(R.string.enable_plugin_monitoring_services));
 							confirm.show();
 						} else if (!app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
-							monitoringPlugin.controlDialog(activity, false);
+							monitoringPlugin.controlDialog(activity);
 						}
 					}
 				} else {
@@ -1063,9 +1063,9 @@ public class GpxUiHelper {
 			if (files != null) {
 				for (File file : files) {
 					String name = file.getName();
-					if (name.toLowerCase().endsWith(GPX_FILE_EXT)) {
-						list.add(new GPXInfo(absolutePath ? file.getAbsolutePath() :
-								parent + name, file.lastModified(), file.length()));
+					if (file.isFile() && name.toLowerCase().endsWith(GPX_FILE_EXT)) {
+						String fileName = absolutePath ? file.getAbsolutePath() : parent + name;
+						list.add(new GPXInfo(fileName, file.lastModified(), file.length()));
 					} else if (file.isDirectory()) {
 						readGpxDirectory(file, list, parent + name + "/", absolutePath);
 					}

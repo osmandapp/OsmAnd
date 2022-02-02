@@ -4512,4 +4512,5 @@
     <string name="gpx_no_routes_title">Нема рута</string>
     <string name="gpx_no_routes_descr">Можете користити алатку \"%1$s\" да додате руту у датотеку.</string>
     <string name="quick_action_add_route_descr">Дугме за покретање руте од средине екрана.</string>
+    <string name="please_provide_group_name_message">Наведите име за групу.</string>
 </resources>
