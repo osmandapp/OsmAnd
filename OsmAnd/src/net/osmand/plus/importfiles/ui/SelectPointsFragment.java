@@ -212,8 +212,8 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 	protected void updateButtonsState() {
 		boolean allSelected = selectedPoints.containsAll(points);
 		String selectAllText = getString(allSelected ? R.string.shared_string_deselect_all : R.string.shared_string_select_all);
-		UiUtilities.setupDialogButton(nightMode, selectAllButton, DialogButtonType.SECONDARY, selectAllText, R.drawable.ic_action_deselect_all);
 		UiUtilities.setupDialogButton(nightMode, applyButton, DialogButtonType.PRIMARY, getString(R.string.shared_string_apply));
+		UiUtilities.setupDialogButton(nightMode, selectAllButton, DialogButtonType.SECONDARY_ACTIVE, selectAllText, R.drawable.ic_action_deselect_all);
 
 		TextView textView = selectAllButton.findViewById(R.id.button_text);
 		textView.setCompoundDrawablePadding(AndroidUtils.dpToPx(app, 12));
@@ -259,19 +259,6 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 	@Override
 	public void onExitConfirmed() {
 		dismiss();
-	}
-
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull TrackItem trackItem,
-	                                @NonNull List<WptPt> points, @Nullable Fragment target) {
-		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			SelectPointsFragment fragment = new SelectPointsFragment();
-			fragment.trackItem = trackItem;
-			fragment.points.addAll(points);
-			fragment.selectedPoints.addAll(trackItem.selectedPoints);
-			fragment.setRetainInstance(true);
-			fragment.setTargetFragment(target, 0);
-			fragment.show(manager, TAG);
-		}
 	}
 
 	@Override
@@ -338,6 +325,19 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 			locationProvider.removeLocationListener(this);
 			locationProvider.removeCompassListener(this);
 			locationProvider.addCompassListener(locationProvider.getNavigationInfo());
+		}
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull TrackItem trackItem,
+	                                @NonNull List<WptPt> points, @Nullable Fragment target) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			SelectPointsFragment fragment = new SelectPointsFragment();
+			fragment.trackItem = trackItem;
+			fragment.points.addAll(points);
+			fragment.selectedPoints.addAll(trackItem.selectedPoints);
+			fragment.setRetainInstance(true);
+			fragment.setTargetFragment(target, 0);
+			fragment.show(manager, TAG);
 		}
 	}
 

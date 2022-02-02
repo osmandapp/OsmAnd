@@ -132,6 +132,7 @@ class TrackViewHolder extends ViewHolder {
 			item.bitmapDrawer.addListener(drawerListener);
 			item.bitmapDrawer.initAndDraw();
 		} else {
+			image.setClipToOutline(true);
 			image.setImageBitmap(item.bitmap);
 		}
 		AndroidUiHelper.updateVisibility(image, item.bitmap != null);

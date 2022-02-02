@@ -3,12 +3,12 @@ package net.osmand.plus.utils;
 import android.content.Context;
 import android.graphics.Color;
 
-import net.osmand.plus.R;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+
+import net.osmand.plus.R;
 
 public class ColorUtilities {
 
@@ -200,6 +200,16 @@ public class ColorUtilities {
 	@ColorRes
 	public static int getActiveButtonsAndLinksTextColorId(boolean nightMode) {
 		return nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light;
+	}
+
+	@ColorRes
+	public static int getActiveTransparentColor(@NonNull Context ctx, boolean nightMode) {
+		return ContextCompat.getColor(ctx, getActiveTransparentColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getActiveTransparentColorId(boolean nightMode) {
+		return nightMode ? R.color.switch_button_active_dark : R.color.switch_button_active_light;
 	}
 
 	@ColorInt

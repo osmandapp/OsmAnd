@@ -218,7 +218,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 
 		boolean allSelected = selectedTracks.containsAll(trackItems);
 		String selectAllText = getString(allSelected ? R.string.shared_string_deselect_all : R.string.shared_string_select_all);
-		UiUtilities.setupDialogButton(nightMode, selectAllButton, DialogButtonType.SECONDARY, selectAllText, R.drawable.ic_action_deselect_all);
+		UiUtilities.setupDialogButton(nightMode, selectAllButton, DialogButtonType.SECONDARY_ACTIVE, selectAllText, R.drawable.ic_action_deselect_all);
 
 		TextView textView = selectAllButton.findViewById(R.id.button_text);
 		textView.setCompoundDrawablePadding(AndroidUtils.dpToPx(app, 12));
