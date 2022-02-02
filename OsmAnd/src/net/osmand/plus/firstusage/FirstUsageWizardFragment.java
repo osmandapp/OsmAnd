@@ -1,5 +1,7 @@
 package net.osmand.plus.firstusage;
 
+import static net.osmand.plus.settings.datastorage.SharedStorageWarningFragment.STORAGE_MIGRATION;
+
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,13 +25,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidNetworkUtils;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.data.ValueHolder;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.LatLon;
+import net.osmand.data.ValueHolder;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.AppInitializer;
@@ -47,10 +47,13 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -71,9 +74,9 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 
 	public static final String TAG = "FirstUsageWizardFrag";
 	public static final int FIRST_USAGE_LOCATION_PERMISSION = 300;
-	public static final int FIRST_USAGE_REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION = 400;
 	public static final String WIZARD_TYPE_KEY = "wizard_type_key";
 	public static final String SEARCH_LOCATION_BY_IP_KEY = "search_location_by_ip_key";
+	public static final String FIRST_USAGE = "first_usage";
 
 	private View view;
 	private DownloadIndexesThread downloadThread;
@@ -649,7 +652,13 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 
 	public void processStoragePermission(boolean granted) {
 		if (granted) {
-			DataStoragePlaceDialogFragment.showInstance(getActivity().getSupportFragmentManager(), null, false);
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				Bundle args = new Bundle();
+				args.putBoolean(FIRST_USAGE, true);
+				args.putBoolean(STORAGE_MIGRATION, true);
+				BaseSettingsFragment.showInstance(getActivity(), SettingsScreenType.DATA_STORAGE, null, args, FirstUsageWizardFragment.this);
+			}
 		}
 	}
 
@@ -708,13 +717,12 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 				changeStorageButton.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						if (!DownloadActivity.hasPermissionToWriteExternalStorage(getContext())) {
-							ActivityCompat.requestPermissions(getActivity(),
-									new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
-									FIRST_USAGE_REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION);
-
-						} else {
-							DataStoragePlaceDialogFragment.showInstance(getActivity().getSupportFragmentManager(), null, false);
+						FragmentActivity activity = getActivity();
+						if (activity != null) {
+							Bundle args = new Bundle();
+							args.putBoolean(FIRST_USAGE, true);
+							args.putBoolean(STORAGE_MIGRATION, true);
+							BaseSettingsFragment.showInstance(getActivity(), SettingsScreenType.DATA_STORAGE, null, args, FirstUsageWizardFragment.this);
 						}
 					}
 				});

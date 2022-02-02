@@ -1,5 +1,10 @@
 package net.osmand.plus.activities;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_CRASH_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RATE_US_ID;
+import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -167,10 +172,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_CRASH_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RATE_US_ID;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
@@ -823,9 +824,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (!permissionAsked) {
 				if (app.isExternalStorageDirectoryReadOnly() && !showStorageMigrationScreen
 						&& fragmentManager.findFragmentByTag(SharedStorageWarningFragment.TAG) == null
-						&& fragmentManager.findFragmentByTag(DataStoragePlaceDialogFragment.TAG) == null) {
+						&& fragmentManager.findFragmentByTag(DataStorageFragment.TAG) == null) {
 					if (DownloadActivity.hasPermissionToWriteExternalStorage(this)) {
-						DataStoragePlaceDialogFragment.showInstance(fragmentManager, null, true);
+						Bundle args = new Bundle();
+						args.putBoolean(FIRST_USAGE, true);
+						BaseSettingsFragment.showInstance(this, SettingsScreenType.DATA_STORAGE, null, args, null);
 					} else {
 						ActivityCompat.requestPermissions(this,
 								new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
@@ -835,8 +838,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			} else {
 				if (permissionGranted) {
 					RestartActivity.doRestart(this, getString(R.string.storage_permission_restart_is_required));
-				} else if (fragmentManager.findFragmentByTag(DataStoragePlaceDialogFragment.TAG) == null) {
-					DataStoragePlaceDialogFragment.showInstance(fragmentManager, null, true);
+				} else if (fragmentManager.findFragmentByTag(DataStorageFragment.TAG) == null) {
+					Bundle args = new Bundle();
+					args.putBoolean(FIRST_USAGE, true);
+					BaseSettingsFragment.showInstance(this, SettingsScreenType.DATA_STORAGE, null, args, null);
+
 				}
 				permissionAsked = false;
 				permissionGranted = false;
@@ -1473,9 +1479,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public static void launchMapActivityMoveToTop(@NonNull Context activity,
-												  @Nullable Bundle prevIntentParams,
-												  @Nullable Uri intentData,
-												  @Nullable Bundle intentParams) {
+	                                              @Nullable Bundle prevIntentParams,
+	                                              @Nullable Uri intentData,
+	                                              @Nullable Bundle intentParams) {
 		if (activity instanceof MapActivity) {
 			if (((MapActivity) activity).getDashboard().isVisible()) {
 				((MapActivity) activity).getDashboard().hideDashboard();
@@ -1714,6 +1720,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (requestCode == DataStorageFragment.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
 					&& permissions.length > 0
 					&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
+				app.runInUIThread(() -> {
+					FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
+					if (wizardFragment != null) {
+						wizardFragment.processStoragePermission(grantResults[0] == PackageManager.PERMISSION_GRANTED);
+					}
+				}, 1);
 				if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
 					Toast.makeText(this,
 							R.string.missing_write_external_storage_permission,
@@ -1724,15 +1736,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
 				permissionAsked = true;
 				permissionGranted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-			} else if (requestCode == FirstUsageWizardFragment.FIRST_USAGE_REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION
-					&& permissions.length > 0
-					&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
-				app.runInUIThread(() -> {
-					FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
-					if (wizardFragment != null) {
-						wizardFragment.processStoragePermission(grantResults[0] == PackageManager.PERMISSION_GRANTED);
-					}
-				}, 1);
 			} else if (requestCode == FirstUsageWizardFragment.FIRST_USAGE_LOCATION_PERMISSION) {
 				app.runInUIThread(() -> {
 					FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
@@ -1980,7 +1983,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void showQuickSearch(@NonNull ShowQuickSearchMode mode, boolean showCategories,
-								@NonNull String searchQuery, @Nullable LatLon searchLocation) {
+	                            @NonNull String searchQuery, @Nullable LatLon searchLocation) {
 		if (mode == ShowQuickSearchMode.CURRENT) {
 			mapContextMenu.close();
 		} else {
@@ -2033,7 +2036,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void showQuickSearch(@NonNull ShowQuickSearchMode mode, QuickSearchTab showSearchTab,
-								@NonNull String searchQuery, @Nullable LatLon searchLocation) {
+	                            @NonNull String searchQuery, @Nullable LatLon searchLocation) {
 		if (mode == ShowQuickSearchMode.CURRENT) {
 			mapContextMenu.close();
 		} else {
