@@ -1,7 +1,5 @@
 package net.osmand.plus.firstusage;
 
-import static net.osmand.plus.settings.datastorage.SharedStorageWarningFragment.STORAGE_MIGRATION;
-
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -656,7 +654,6 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 			if (activity != null) {
 				Bundle args = new Bundle();
 				args.putBoolean(FIRST_USAGE, true);
-				args.putBoolean(STORAGE_MIGRATION, true);
 				BaseSettingsFragment.showInstance(getActivity(), SettingsScreenType.DATA_STORAGE, null, args, FirstUsageWizardFragment.this);
 			}
 		}
@@ -721,7 +718,6 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 						if (activity != null) {
 							Bundle args = new Bundle();
 							args.putBoolean(FIRST_USAGE, true);
-							args.putBoolean(STORAGE_MIGRATION, true);
 							BaseSettingsFragment.showInstance(getActivity(), SettingsScreenType.DATA_STORAGE, null, args, FirstUsageWizardFragment.this);
 						}
 					}

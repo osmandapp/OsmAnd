@@ -39,7 +39,6 @@ import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentManager.BackStackEntry;
@@ -65,7 +64,6 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
-import net.osmand.plus.OnDismissDialogFragmentListener;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
@@ -86,7 +84,6 @@ import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.dialogs.XMasDialogFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
-import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
 import net.osmand.plus.firstusage.FirstUsageWelcomeFragment;
 import net.osmand.plus.firstusage.FirstUsageWizardFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -175,7 +172,7 @@ import java.util.concurrent.Executors;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
-		MapMarkerChangedListener, OnDismissDialogFragmentListener, OnDrawMapListener,
+		MapMarkerChangedListener, OnDrawMapListener,
 		OsmAndAppCustomizationListener, LockUIAdapter, OnPreferenceStartFragmentCallback,
 		OnScrollEventListener, OsmandMapListener {
 
@@ -1020,16 +1017,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		if (!fragmentManager.isStateSaved()) {
 			fragmentManager.popBackStack(ContextMenuCardDialogFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-		}
-	}
-
-	@Override
-	public void onDismissDialogFragment(DialogFragment dialogFragment) {
-		if (dialogFragment instanceof DataStoragePlaceDialogFragment) {
-			FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
-			if (wizardFragment != null) {
-				wizardFragment.updateStorageView();
-			}
 		}
 	}
 

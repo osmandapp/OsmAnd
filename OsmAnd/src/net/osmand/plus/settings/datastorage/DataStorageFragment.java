@@ -384,7 +384,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 
 	private void setupDetailsButton(StorageItem item, View detailsButton) {
 		boolean sharedStorage = item.getKey().equals(SHARED_STORAGE);
-		AndroidUiHelper.updateVisibility(detailsButton, sharedStorage && !storageMigration);
+		AndroidUiHelper.updateVisibility(detailsButton, sharedStorage && !storageMigration && !firstUsage);
 
 		if (item.getKey().equals(SHARED_STORAGE)) {
 			detailsButton.setClickable(true);
