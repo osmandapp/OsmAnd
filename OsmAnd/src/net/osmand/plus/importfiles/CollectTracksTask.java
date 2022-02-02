@@ -8,13 +8,13 @@ import androidx.annotation.Nullable;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.importfiles.ui.TrackItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,25 +65,33 @@ public class CollectTracksTask extends AsyncTask<Void, Void, List<TrackItem>> {
 				if (Algorithms.isEmpty(trackName)) {
 					name = app.getString(R.string.ltr_or_rtl_combine_via_dash, name, String.valueOf(i));
 				}
-
-				TrackItem trackItem = new TrackItem(selectedGpxFile, trackName, i);
-				trackItem.suggestedPoints.addAll(getSuggestedPoints(trackFile));
-
-				items.add(trackItem);
+				items.add(new TrackItem(selectedGpxFile, trackName, i));
+			}
+		}
+		for (WptPt point : gpxFile.getPoints()) {
+			TrackItem item = findNearestTrack(point, items);
+			if (item != null) {
+				item.selectedPoints.add(point);
+				item.suggestedPoints.add(point);
 			}
 		}
 		return items;
 	}
 
-	private List<WptPt> getSuggestedPoints(@NonNull GPXFile trackFile) {
-		List<WptPt> points = new ArrayList<>();
-		QuadRect rect = trackFile.getRect();
-		for (WptPt point : gpxFile.getPoints()) {
-			if (rect.contains(point.getLongitude(), point.getLatitude(), point.getLongitude(), point.getLatitude())) {
-				points.add(point);
+	private TrackItem findNearestTrack(@NonNull WptPt point, @NonNull List<TrackItem> items) {
+		TrackItem trackItem = null;
+		double minDistance = Double.MAX_VALUE;
+		for (TrackItem item : items) {
+			GPXFile gpxFile = item.selectedGpxFile.getGpxFile();
+			for (WptPt wptPt : gpxFile.getAllSegmentsPoints()) {
+				double distance = MapUtils.getDistance(point.lat, point.lon, wptPt.lat, wptPt.lon);
+				if (distance < minDistance) {
+					minDistance = distance;
+					trackItem = item;
+				}
 			}
 		}
-		return points;
+		return trackItem;
 	}
 
 	@Override
