@@ -123,14 +123,15 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	}
 
 	private void createLayers(@NonNull Context context) {
+		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		if (underlayLayer != null) {
-			app.getOsmandMap().getMapView().removeLayer(underlayLayer);
+			mapView.removeLayer(underlayLayer);
 		}
 		if (overlayLayer != null) {
-			app.getOsmandMap().getMapView().removeLayer(overlayLayer);
+			mapView.removeLayer(overlayLayer);
 		}
 		underlayLayer = new MapTileLayer(context, false);
-		// mapView.addLayer(underlayLayer, -0.5f);
+		mapView.addLayer(underlayLayer, -0.01f);
 		overlayLayer = new MapTileLayer(context, false);
 		overlayLayerListener = new StateChangedListener<Integer>() {
 			@Override
@@ -138,7 +139,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				app.runInUIThread(() -> overlayLayer.setAlpha(change));
 			}
 		};
-		// mapView.addLayer(overlayLayer, 0.7f);
+		mapView.addLayer(overlayLayer, 0.01f);
 		settings.MAP_OVERLAY_TRANSPARENCY.addListener(overlayLayerListener);
 	}
 
