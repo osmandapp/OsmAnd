@@ -12,7 +12,7 @@ import net.osmand.plus.widgets.multistatetoggle.RadioItem;
 
 import java.util.List;
 
-public class MultipleSelectionWithModeBottomSheet extends MultipleSelectionBottomSheet {
+public class MultipleSelectionWithModeBottomSheet<T> extends MultipleSelectionBottomSheet<T> {
 
 	public static final String TAG = MultipleSelectionWithModeBottomSheet.class.getSimpleName();
 
@@ -23,12 +23,12 @@ public class MultipleSelectionWithModeBottomSheet extends MultipleSelectionBotto
 				checkBoxTitle, titleDescription, selectedSize, selectAllButton);
 	}
 
-	public static MultipleSelectionWithModeBottomSheet showInstance(@NonNull AppCompatActivity activity,
-	                                                                @NonNull List<SelectableItem> items,
-	                                                                @Nullable List<SelectableItem> selected,
-	                                                                @NonNull List<RadioItem> modes,
-	                                                                boolean usedOnMap) {
-		MultipleSelectionWithModeBottomSheet fragment = new MultipleSelectionWithModeBottomSheet();
+	public static <T> MultipleSelectionWithModeBottomSheet<T> showInstance(@NonNull AppCompatActivity activity,
+	                                                                       @NonNull List<SelectableItem<T>> items,
+	                                                                       @Nullable List<SelectableItem<T>> selected,
+	                                                                       @NonNull List<RadioItem> modes,
+	                                                                       boolean usedOnMap) {
+		MultipleSelectionWithModeBottomSheet<T> fragment = new MultipleSelectionWithModeBottomSheet<>();
 		fragment.setUsedOnMap(usedOnMap);
 		fragment.setItems(items);
 		fragment.setSelectedItems(selected);
@@ -37,5 +37,4 @@ public class MultipleSelectionWithModeBottomSheet extends MultipleSelectionBotto
 		fragment.show(fm, TAG);
 		return fragment;
 	}
-
 }

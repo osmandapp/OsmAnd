@@ -31,7 +31,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment {
+public abstract class SelectionBottomSheet<T> extends MenuBottomSheetDialogFragment {
 
 	protected OsmandApplication app;
 	protected LayoutInflater inflater;
@@ -54,10 +54,10 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 	protected int secondaryColorRes;
 
 	private DialogStateListener dialogStateListener;
-	private OnApplySelectionListener onApplySelectionListener;
+	private OnApplySelectionListener<T> onApplySelectionListener;
 
-	protected List<SelectableItem> allItems = new ArrayList<>();
-	protected Map<SelectableItem, View> listViews = new HashMap<>();
+	protected List<SelectableItem<T>> allItems = new ArrayList<>();
+	protected Map<SelectableItem<T>, View> listViews = new HashMap<>();
 	private List<RadioItem> modes;
 
 	@Nullable
@@ -146,7 +146,7 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 		radioGroup.setSelectedItem(mode);
 	}
 
-	public void setItems(List<SelectableItem> allItems) {
+	public void setItems(List<SelectableItem<T>> allItems) {
 		this.allItems.clear();
 		if (!Algorithms.isEmpty(allItems)) {
 			this.allItems.addAll(allItems);
@@ -169,7 +169,7 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 		this.dialogStateListener = dialogStateListener;
 	}
 
-	public void setOnApplySelectionListener(OnApplySelectionListener onApplySelectionListener) {
+	public void setOnApplySelectionListener(OnApplySelectionListener<T> onApplySelectionListener) {
 		this.onApplySelectionListener = onApplySelectionListener;
 	}
 
@@ -182,25 +182,25 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 	private void recreateList() {
 		listViews.clear();
 		listContainer.removeAllViews();
-		for (SelectableItem item : allItems) {
+		for (SelectableItem<T> item : allItems) {
 			setupItemView(item, inflater.inflate(getItemLayoutId(), null));
 		}
 	}
 
-	private void setupItemView(SelectableItem item, View view) {
+	private void setupItemView(SelectableItem<T> item, View view) {
 		updateItemView(item, view);
 		listViews.put(item, view);
 		listContainer.addView(view);
 	}
 
-	public List<SelectableItem> getAllItems() {
+	public List<SelectableItem<T>> getAllItems() {
 		return allItems;
 	}
 
 	@NonNull
-	public abstract List<SelectableItem> getSelectedItems();
+	public abstract List<SelectableItem<T>> getSelectedItems();
 
-	protected abstract void updateItemView(SelectableItem item, View view);
+	protected abstract void updateItemView(SelectableItem<T> item, View view);
 
 	protected abstract int getItemLayoutId();
 
@@ -265,15 +265,15 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 		void onCloseDialog();
 	}
 
-	public interface OnApplySelectionListener {
-		void onSelectionApplied(List<SelectableItem> selectedItems);
+	public interface OnApplySelectionListener<T> {
+		void onSelectionApplied(List<SelectableItem<T>> selectedItems);
 	}
 
-	public static class SelectableItem {
+	public static class SelectableItem<T> {
 		private String title;
 		private String description;
 		private int iconId;
-		private Object object;
+		private T object;
 		@ColorInt
 		private int color;
 
@@ -289,7 +289,7 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 			return iconId;
 		}
 
-		public Object getObject() {
+		public T getObject() {
 			return object;
 		}
 
@@ -305,7 +305,7 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 			this.iconId = iconId;
 		}
 
-		public void setObject(Object object) {
+		public void setObject(T object) {
 			this.object = object;
 		}
 
@@ -318,5 +318,4 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 			this.color = color;
 		}
 	}
-
 }
