@@ -3000,4 +3000,13 @@
     <string name="poi_wiki_lang_ml">Wiki malayalam</string>
     <string name="poi_wiki_lang_fy">Wiki frisone occidentale</string>
     <string name="poi_memorial_ghost_bike">Bici fantasma</string>
+    <string name="poi_hospice">Ospizio</string>
+    <string name="poi_handwashing_soap_yes">Sapone: si</string>
+    <string name="poi_handwashing_soap_no">Sapone: no</string>
+    <string name="poi_hot_water_no">Acqua calda: no</string>
+    <string name="poi_hot_water_yes">Acqua calda: si</string>
+    <string name="poi_handwashing_hand_disinfection_yes">Disinfettante per mani: si</string>
+    <string name="poi_telecommunication">Telecomunicazioni</string>
+    <string name="poi_authentication_app">Autenticazione tramite applicazione</string>
+    <string name="poi_handwashing_hand_disinfection_no">Disinfettante per mani: no</string>
 </resources>
