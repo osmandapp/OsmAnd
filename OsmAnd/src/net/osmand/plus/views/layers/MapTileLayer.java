@@ -82,6 +82,7 @@ public class MapTileLayer extends BaseMapLayer {
 
 		paintBitmap = new Paint();
 		paintBitmap.setFilterBitmap(true);
+		paintBitmap.setAlpha(getAlpha());
 
 		if (mapTileAdapter != null) {
 			mapTileAdapter.initLayerAdapter(this, view);
@@ -93,8 +94,14 @@ public class MapTileLayer extends BaseMapLayer {
 
 	@Override
 	public void setAlpha(int alpha) {
-		needUpdateAlpha = !needUpdateAlpha && super.getAlpha() != alpha;
+		needUpdateAlpha = true;
 		super.setAlpha(alpha);
+
+		if (paintBitmap != null) {
+			paintBitmap.setAlpha(alpha);
+		}
+
+		//updateAlpha();
 	}
 
 	public void setupParameterListener() {
@@ -264,21 +271,15 @@ public class MapTileLayer extends BaseMapLayer {
 	}
 
 	private void updateAlpha() {
-		if (view != null && needUpdateAlpha) {
+		if (view != null) {
 			int alpha = this.getAlpha();
-			if (paintBitmap != null) {
-				paintBitmap.setAlpha(alpha);
-			}
 
-			if (view != null) {
-				final MapRendererView mapRenderer = view.getMapRenderer();
-				if (mapRenderer != null) {
-					MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
-					mapLayerConfiguration.setOpacityFactor(((float) alpha) / 255.0f);
-					mapRenderer.setMapLayerConfiguration(view.getLayerIndex(this), mapLayerConfiguration);
-				}
+			final MapRendererView mapRenderer = view.getMapRenderer();
+			if (mapRenderer != null) {
+				MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
+				mapLayerConfiguration.setOpacityFactor(((float) alpha) / 255.0f);
+				mapRenderer.setMapLayerConfiguration(view.getLayerIndex(this), mapLayerConfiguration);
 			}
-			needUpdateAlpha = false;
 		}
 	}
 
@@ -308,10 +309,14 @@ public class MapTileLayer extends BaseMapLayer {
 				}
 				needUpdateProvider = false;
 			}
+
+			if (needUpdateAlpha) {
+				updateAlpha();
+				needUpdateAlpha = false;
+			}
 		} else {
 			drawTileMap(canvas, tileBox, drawSettings);
 		}
-		//updateAlpha();
 	}
 
 	@Override
@@ -489,9 +494,9 @@ public class MapTileLayer extends BaseMapLayer {
 	}
 
 	public void setVisible(boolean visible) {
-		needUpdateProvider = !needUpdateProvider && this.visible != visible;
+		needUpdateProvider = true;
 		this.visible = visible;
-		updateAlpha();
+		//updateAlpha();
 	}
 
 	public ITileSource getMap() {

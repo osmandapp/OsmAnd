@@ -53,6 +53,7 @@ public class MapVectorLayer extends BaseMapLayer {
 		this.view = view;
 		paintImg = new Paint();
 		paintImg.setFilterBitmap(true);
+		paintImg.setAlpha(getAlpha());
 
 		needUpdateProvider = true;
 		needUpdateAlpha = true;
@@ -67,13 +68,14 @@ public class MapVectorLayer extends BaseMapLayer {
 	}
 
 	public void setVisible(boolean visible) {
-		needUpdateProvider = !needUpdateProvider && this.visible != visible;
+		needUpdateProvider = true;
 		this.visible = visible;
+/*
 		if (this.visible) {
 			setLayerProvider();
 		} else {
 			resetLayerProvider();
-		}
+		}*/
 	}
 
 	@Override
@@ -92,50 +94,31 @@ public class MapVectorLayer extends BaseMapLayer {
 	}
 
 	private void setLayerProvider() {
-		if (needUpdateProvider) {
-			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
-			if (mapContext != null) {
-				//mapContext.updateMapPresentationEnvironment();
-				mapContext.recreateRasterAndSymbolsProvider();
-			}
-			needUpdateProvider = false;
+		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+		if (mapContext != null) {
+			//mapContext.updateMapPresentationEnvironment();
+			//mapContext.recreateRasterAndSymbolsProvider();
+			mapContext.updateMapSettings();
 		}
 	}
 
 	private void resetLayerProvider() {
-		if (needUpdateProvider) {
-			//resourceManager.getRenderer().clearCache();
-
 			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 			if (mapContext != null) {
 				mapContext.resetObfLayout();
 			}
-			needUpdateProvider = false;
-/*
-		if (view == null) {
-			return;
-		}
-		final MapRendererView mapRenderer = view.getMapRenderer();
-		if (mapRenderer != null) {
-			mapRenderer.resetMapLayerProvider(MapRendererContext.OBF_RASTER_LAYER);
-		}
- */
-		}
 	}
 
 	private void updateAlpha() {
-		if (view != null && needUpdateAlpha) {
+		if (view != null) {
 			int alpha = this.getAlpha();
-			if (paintImg != null) {
-				paintImg.setAlpha(alpha);
-			}
 
 			final MapRendererView mapRenderer = view.getMapRenderer();
-			MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
-			mapLayerConfiguration.setOpacityFactor(((float) alpha) / 255.0f);
-			mapRenderer.setMapLayerConfiguration(MapRendererContext.OBF_RASTER_LAYER, mapLayerConfiguration);
-
-			needUpdateAlpha = false;
+			if (mapRenderer != null) {
+				MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
+				mapLayerConfiguration.setOpacityFactor(((float) alpha) / 255.0f);
+				mapRenderer.setMapLayerConfiguration(MapRendererContext.OBF_RASTER_LAYER, mapLayerConfiguration);
+			}
 		}
 	}
 
@@ -145,8 +128,10 @@ public class MapVectorLayer extends BaseMapLayer {
 			return;
 		}
 
-		if (!isVisible()) {
+		if (!isVisible() && needUpdateProvider) {
 			resetLayerProvider();
+			resourceManager.getRenderer().clearCache();
+			needUpdateProvider = false;
 			return;
 		}
 
@@ -156,11 +141,19 @@ public class MapVectorLayer extends BaseMapLayer {
 		// } else {
 		final MapRendererView mapRenderer = view.getMapRenderer();
 		if (mapRenderer != null) {
-			setLayerProvider();
-
+			// opengl renderer
 			NativeCoreContext.getMapRendererContext().setNightMode(drawSettings.isNightMode());
 
-			// opengl renderer
+			if (needUpdateProvider) {
+				setLayerProvider();
+				needUpdateProvider = false;
+			}
+
+			if (needUpdateAlpha) {
+				updateAlpha();
+				needUpdateAlpha = false;
+			}
+
 			LatLon ll = tilesRect.getLatLonFromPixel(tilesRect.getPixWidth() / 2, tilesRect.getPixHeight() / 2);
 			mapRenderer.setTarget(new PointI(MapUtils.get31TileNumberX(ll.getLongitude()), MapUtils.get31TileNumberY(ll
 					.getLatitude())));
@@ -185,7 +178,6 @@ public class MapVectorLayer extends BaseMapLayer {
 			drawRenderedMap(canvas, renderer.getBitmap(), renderer.getBitmapLocation(), tilesRect);
 			drawRenderedMap(canvas, renderer.getPrevBitmap(), renderer.getPrevBmpLocation(), tilesRect);
 		}
-		//updateAlpha();
 	}
 
 	private boolean drawRenderedMap(Canvas canvas, Bitmap bmp, RotatedTileBox bmpLoc, RotatedTileBox currentViewport) {
@@ -220,9 +212,12 @@ public class MapVectorLayer extends BaseMapLayer {
 
 	@Override
 	public void setAlpha(int alpha) {
-		needUpdateAlpha = !needUpdateAlpha && super.getAlpha() != alpha;
+		needUpdateAlpha = true;
 		super.setAlpha(alpha);
-		updateAlpha();
+
+		if (paintImg != null) {
+			paintImg.setAlpha(alpha);
+		}
 	}
 
 	@Override

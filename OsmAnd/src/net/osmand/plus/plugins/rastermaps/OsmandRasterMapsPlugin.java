@@ -131,7 +131,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			mapView.removeLayer(overlayLayer);
 		}
 		underlayLayer = new MapTileLayer(context, false);
-		mapView.addLayer(underlayLayer, -0.01f);
+		mapView.addLayer(underlayLayer, -0.5f);
 		overlayLayer = new MapTileLayer(context, false);
 		overlayLayerListener = new StateChangedListener<Integer>() {
 			@Override
@@ -139,7 +139,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				app.runInUIThread(() -> overlayLayer.setAlpha(change));
 			}
 		};
-		mapView.addLayer(overlayLayer, 0.01f);
+		mapView.addLayer(overlayLayer, 0.7f);
 		settings.MAP_OVERLAY_TRANSPARENCY.addListener(overlayLayerListener);
 	}
 
