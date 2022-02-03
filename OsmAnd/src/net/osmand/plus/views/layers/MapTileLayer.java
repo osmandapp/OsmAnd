@@ -14,7 +14,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.TileSourceProxyProvider;
@@ -57,7 +56,8 @@ public class MapTileLayer extends BaseMapLayer {
 	protected OsmandMapTileView view;
 	protected ResourceManager resourceManager;
 	protected OsmandSettings settings;
-	private boolean needUpdate = true;
+	private boolean needUpdateProvider = true;
+	private boolean needUpdateAlpha = true;
 	private boolean visible = true;
 	private boolean useSampling;
 	private StateChangedListener<Float> parameterListener;
@@ -78,35 +78,23 @@ public class MapTileLayer extends BaseMapLayer {
 		settings = view.getSettings();
 		resourceManager = view.getApplication().getResourceManager();
 		parameterListener = change -> getApplication().runInUIThread(() -> updateParameter(change));
-
 		useSampling = Build.VERSION.SDK_INT < 28;
 
 		paintBitmap = new Paint();
 		paintBitmap.setFilterBitmap(true);
-		paintBitmap.setAlpha(getAlpha());
 
 		if (mapTileAdapter != null) {
 			mapTileAdapter.initLayerAdapter(this, view);
 		}
+
+		needUpdateProvider = true;
+		needUpdateAlpha = true;
 	}
 
 	@Override
 	public void setAlpha(int alpha) {
+		needUpdateAlpha = !needUpdateAlpha && super.getAlpha() != alpha;
 		super.setAlpha(alpha);
-		if (paintBitmap != null) {
-			paintBitmap.setAlpha(alpha);
-		}
-
-		if (view == null) {
-			return;
-		}
-
-		final MapRendererView mapRenderer = view.getMapRenderer();
-		if (mapRenderer != null) {
-			MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
-			mapLayerConfiguration.setOpacityFactor(((float) alpha) / 255.0f);
-			mapRenderer.setMapLayerConfiguration(view.getLayerIndex(this), mapLayerConfiguration);
-		}
 	}
 
 	public void setupParameterListener() {
@@ -208,7 +196,7 @@ public class MapTileLayer extends BaseMapLayer {
 		}
 		this.map = map;
 		setMapTileAdapter(target);
-		needUpdate = true;
+		needUpdateProvider = true;
 	}
 
 	public MapTileAdapter getMapTileAdapter() {
@@ -261,8 +249,6 @@ public class MapTileLayer extends BaseMapLayer {
 			TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), mapSrc);
 			mapRenderer.setMapLayerProvider(view.getLayerIndex(this), prov.instantiateProxy(true));
 			prov.swigReleaseOwnership();
-
-			setAlpha(getAlpha());
 		}
 	}
 
@@ -277,16 +263,35 @@ public class MapTileLayer extends BaseMapLayer {
 		}
 	}
 
+	private void updateAlpha() {
+		if (view != null && needUpdateAlpha) {
+			int alpha = this.getAlpha();
+			if (paintBitmap != null) {
+				paintBitmap.setAlpha(alpha);
+			}
+
+			if (view != null) {
+				final MapRendererView mapRenderer = view.getMapRenderer();
+				if (mapRenderer != null) {
+					MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
+					mapLayerConfiguration.setOpacityFactor(((float) alpha) / 255.0f);
+					mapRenderer.setMapLayerConfiguration(view.getLayerIndex(this), mapLayerConfiguration);
+				}
+			}
+			needUpdateAlpha = false;
+		}
+	}
+
 	@SuppressLint("WrongCall")
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
-		if (!isVisible() && needUpdate) {
-			resetLayerProvider();
-			needUpdate = false;
+		if (view == null) {
 			return;
 		}
 
-		if (map == null && mapTileAdapter == null) {
+		if (!isVisible() && needUpdateProvider) {
+			resetLayerProvider();
+			needUpdateProvider = false;
 			return;
 		}
 
@@ -294,18 +299,19 @@ public class MapTileLayer extends BaseMapLayer {
 			mapTileAdapter.onDraw(canvas, tileBox, drawSettings);
 		}
 
-		if (view != null && view.getMapRenderer() != null) {
-			if (needUpdate) {
-				needUpdate = false;
+		if (view.getMapRenderer() != null) {
+			if (needUpdateProvider) {
 				if (map != null) {
 					setLayerProvider(map);
 				} else {
 					resetLayerProvider();
 				}
+				needUpdateProvider = false;
 			}
 		} else {
 			drawTileMap(canvas, tileBox, drawSettings);
 		}
+		//updateAlpha();
 	}
 
 	@Override
@@ -483,8 +489,9 @@ public class MapTileLayer extends BaseMapLayer {
 	}
 
 	public void setVisible(boolean visible) {
-		needUpdate = this.visible != visible;
+		needUpdateProvider = !needUpdateProvider && this.visible != visible;
 		this.visible = visible;
+		updateAlpha();
 	}
 
 	public ITileSource getMap() {
