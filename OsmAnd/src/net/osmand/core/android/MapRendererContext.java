@@ -211,7 +211,16 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 		updateObfMapRasterLayerProvider(mapPrimitivesProvider);
 		updateObfMapSymbolsProvider(mapPrimitivesProvider);
 	}
-	
+
+	public void resetObfLayout() {
+		if (mapRendererView != null) {
+			mapRendererView.resetMapLayerProvider(OBF_RASTER_LAYER);
+		}
+		if (obfMapSymbolsProvider != null && mapRendererView != null) {
+			mapRendererView.removeSymbolsProvider(obfMapSymbolsProvider);
+		}
+	}
+
 	private void updateObfMapRasterLayerProvider(MapPrimitivesProvider mapPrimitivesProvider) {
 		// Create new OBF map raster layer provider
 		obfMapRasterLayerProvider = new MapRasterLayerProvider_Software(mapPrimitivesProvider);
