@@ -4349,7 +4349,7 @@
     <string name="upload_gpx_description_hint">Оставьте поле пустым, в качестве описания будут использованы названия треков. Введенное описание будет применено к каждому треку.</string>
     <string name="exit_pan_mode_descr">Нажмите «Выбрать», чтобы выйти из режима панорамирования</string>
     <string name="sample_wikivoyage">Викигид (образец)</string>
-    <string name="icon_group_nautical">Морские</string>
+    <string name="icon_group_nautical">Море</string>
     <string name="shared_storage_warning_title">Изменения в правилах доступа к хранилищу</string>
     <string name="purchases_feature_desc_android_auto">Выводит локальные карты и навигацию OsmAnd на экран вашего автомобиля и интегрируется с его элементами управления.</string>
     <string name="shared_app_storage_description">Общая память больше не доступна из-за изменения доступа к хранилищу в Android.</string>
