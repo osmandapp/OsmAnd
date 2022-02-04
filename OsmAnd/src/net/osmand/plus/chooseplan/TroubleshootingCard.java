@@ -49,10 +49,7 @@ public class TroubleshootingCard extends BaseCard {
 	protected void setupRedeemPromoCodeBtn() {
 		View redeemPromoCode = view.findViewById(R.id.redeem_promo_code);
 		redeemPromoCode.setOnClickListener(v -> {
-			CardListener listener = getListener();
-			if (listener != null) {
-				listener.onCardPressed(this);
-			}
+			notifyCardPressed();
 			AuthorizeFragment.showInstance(activity.getSupportFragmentManager(), true);
 		});
 		boolean showPromoCodeBtn = !Version.isGooglePlayEnabled();

@@ -7,14 +7,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import androidx.annotation.StringRes;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Collator;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
@@ -22,10 +14,12 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
-import net.osmand.plus.track.GpxTrackAdapter;
-import net.osmand.plus.track.GpxTrackAdapter.OnItemClickListener;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.settings.enums.TracksSortByMode;
+import net.osmand.plus.track.GpxTrackAdapter;
+import net.osmand.plus.track.GpxTrackAdapter.OnItemClickListener;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
@@ -38,6 +32,13 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.StringRes;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static net.osmand.plus.helpers.GpxUiHelper.getSortedGPXFilesInfo;
 import static net.osmand.util.Algorithms.collectDirs;
@@ -107,10 +108,8 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 			updateDescription(descriptionView);
 		}
 		final ImageButton sortButton = mainView.findViewById(R.id.sort_button);
-		Drawable background = app.getUIUtilities().getIcon(R.drawable.bg_dash_line_dark,
-				nightMode
-						? R.color.inactive_buttons_and_links_bg_dark
-						: R.color.inactive_buttons_and_links_bg_light);
+		int backgroundColorId = ColorUtilities.getInactiveButtonsAndLinksColorId(nightMode);
+		Drawable background = app.getUIUtilities().getIcon(R.drawable.bg_dash_line_dark, backgroundColorId);
 		AndroidUtils.setBackground(sortButton, background);
 		sortButton.setImageResource(sortByMode.getIconId());
 		sortButton.setVisibility(View.VISIBLE);
