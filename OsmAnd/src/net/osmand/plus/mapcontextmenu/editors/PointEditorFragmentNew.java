@@ -321,8 +321,9 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 
 	@Override
 	protected void updateColorSelector(@ColorInt int color) {
-		super.updateColorSelector(color);
-		((TextView) view.findViewById(R.id.color_name)).setText(ColorDialogs.getColorName(color));
+		int newColor = color == 0 ? getDefaultColor() : color;
+		super.updateColorSelector(newColor);
+		((TextView) view.findViewById(R.id.color_name)).setText(ColorDialogs.getColorName(newColor));
 		updateNameIcon();
 	}
 

@@ -782,7 +782,7 @@ public class FavouritesDbHelper {
 		return favoriteGroups;
 	}
 
-	public boolean isGroupVisible(String name) {
+	public boolean isGroupVisible(@NonNull String name) {
 		String nameLowercase = name.toLowerCase();
 		for (Map.Entry<String, FavoriteGroup> entry : flatGroups.entrySet()) {
 			String groupName = entry.getKey();
