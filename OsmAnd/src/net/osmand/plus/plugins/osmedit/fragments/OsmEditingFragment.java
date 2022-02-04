@@ -1,8 +1,5 @@
 package net.osmand.plus.plugins.osmedit.fragments;
 
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
-import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
-
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -19,13 +16,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
-import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.asynctasks.ValidateOsmLoginDetailsTask.ValidateOsmLoginListener;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
@@ -33,8 +30,12 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
+
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
 
 public class OsmEditingFragment extends BaseSettingsFragment implements OnPreferenceChanged, ValidateOsmLoginListener,
 		OsmAuthorizationListener {
@@ -46,11 +47,13 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	private static final String MAP_UPDATES_FOR_MAPPERS = "map_updates_for_mappers";
 
 	private OsmOAuthHelper authHelper;
+	private OsmEditingPlugin plugin;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		authHelper = app.getOsmOAuthHelper();
+		plugin = OsmEditingPlugin.getPlugin(OsmEditingPlugin.class);
 
 		FragmentActivity activity = requireMyActivity();
 		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -116,7 +119,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 		boolean validToken = isValidToken();
 		Preference nameAndPasswordPref = findPreference(OSM_LOGOUT);
 		if (validToken || isLoginExists()) {
-			String userName = validToken ? settings.OSM_USER_DISPLAY_NAME.get() : settings.OSM_USER_NAME_OR_EMAIL.get();
+			String userName = validToken ? plugin.OSM_USER_DISPLAY_NAME.get() : plugin.OSM_USER_NAME_OR_EMAIL.get();
 			nameAndPasswordPref.setVisible(true);
 			nameAndPasswordPref.setSummary(userName);
 			nameAndPasswordPref.setIcon(getContentIcon(R.drawable.ic_action_user_account));
@@ -130,7 +133,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	}
 
 	private boolean isLoginExists() {
-		return !Algorithms.isEmpty(settings.OSM_USER_NAME_OR_EMAIL.get()) && !Algorithms.isEmpty(settings.OSM_USER_PASSWORD.get());
+		return !Algorithms.isEmpty(plugin.OSM_USER_NAME_OR_EMAIL.get()) && !Algorithms.isEmpty(plugin.OSM_USER_PASSWORD.get());
 	}
 
 	private void setupOfflineEditingPref() {
@@ -138,13 +141,13 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 		Drawable enabled = getActiveIcon(R.drawable.ic_world_globe_dark);
 		Drawable icon = getPersistentPrefIcon(enabled, disabled);
 
-		SwitchPreferenceEx offlineEditingPref = findPreference(settings.OFFLINE_EDITION.getId());
+		SwitchPreferenceEx offlineEditingPref = findPreference(plugin.OFFLINE_EDITION.getId());
 		offlineEditingPref.setDescription(getString(R.string.offline_edition_descr));
 		offlineEditingPref.setIcon(icon);
 	}
 
 	private void setupUseDevUrlPref() {
-		SwitchPreferenceEx useDevUrlPref = findPreference(settings.OSM_USE_DEV_URL.getId());
+		SwitchPreferenceEx useDevUrlPref = findPreference(plugin.OSM_USE_DEV_URL.getId());
 		if (OsmandPlugin.isDevelopment()) {
 			Drawable icon = getPersistentPrefIcon(R.drawable.ic_action_laptop);
 			useDevUrlPref.setDescription(getString(R.string.use_dev_url_descr));
@@ -160,7 +163,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 			mapsForMappersPref.setSummary(R.string.shared_string_learn_more);
 			mapsForMappersPref.setIcon(getContentIcon(R.drawable.ic_action_map_update));
 		} else {
-			long expireTime = settings.MAPPER_LIVE_UPDATES_EXPIRE_TIME.get();
+			long expireTime = plugin.MAPPER_LIVE_UPDATES_EXPIRE_TIME.get();
 			if (expireTime > System.currentTimeMillis()) {
 				String date = OsmAndFormatter.getFormattedDate(app, expireTime);
 				mapsForMappersPref.setSummary(getString(R.string.available_until, date));
@@ -198,8 +201,8 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String prefId = preference.getKey();
-		if (settings.OSM_USE_DEV_URL.getId().equals(prefId) && newValue instanceof Boolean) {
-			settings.OSM_USE_DEV_URL.set((Boolean) newValue);
+		if (plugin.OSM_USE_DEV_URL.getId().equals(prefId) && newValue instanceof Boolean) {
+			plugin.OSM_USE_DEV_URL.set((Boolean) newValue);
 			osmLogout();
 			return true;
 		}
@@ -252,7 +255,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 
 	@Override
 	public void onPreferenceChanged(String prefId) {
-		if (settings.OSM_USE_DEV_URL.getId().equals(prefId)) {
+		if (plugin.OSM_USE_DEV_URL.getId().equals(prefId)) {
 			osmLogout();
 		}
 		updateAllSettings();

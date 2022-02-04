@@ -3,12 +3,12 @@ package net.osmand.plus.plugins.audionotes;
 import android.os.Bundle;
 import android.view.View;
 
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.plugins.OsmandPlugin;
 
 public class SortByMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -52,9 +52,9 @@ public class SortByMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	}
 
 	private void selectSortByMode(NotesSortByMode mode) {
-		final CommonPreference<NotesSortByMode> sortByMode = getMyApplication().getSettings().NOTES_SORT_BY_MODE;
-		if (sortByMode.get() != mode) {
-			sortByMode.set(mode);
+		AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
+		if (plugin != null && plugin.NOTES_SORT_BY_MODE.get() != mode) {
+			plugin.NOTES_SORT_BY_MODE.set(mode);
 			if (listener != null) {
 				listener.onSortModeChanged();
 			}

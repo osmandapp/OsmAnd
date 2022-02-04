@@ -58,6 +58,7 @@ import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
@@ -995,44 +996,51 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	protected CommonPreference<Boolean> registerBooleanPreference(OsmandApplication app, String prefId, boolean defValue) {
+	protected CommonPreference<Boolean> registerBooleanPreference(@NonNull String prefId, boolean defValue) {
 		CommonPreference<Boolean> preference = app.getSettings().registerBooleanPreference(prefId, defValue);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
-	private CommonPreference<Boolean> registerBooleanAccessibilityPreference(OsmandApplication app, String prefId, boolean defValue) {
+	protected CommonPreference<Boolean> registerBooleanAccessibilityPreference(@NonNull String prefId, boolean defValue) {
 		CommonPreference<Boolean> preference = app.getSettings().registerBooleanAccessibilityPreference(prefId, defValue);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
-	protected CommonPreference<String> registerStringPreference(OsmandApplication app, String prefId, String defValue) {
+	protected CommonPreference<String> registerStringPreference(@NonNull String prefId, @Nullable String defValue) {
 		CommonPreference<String> preference = app.getSettings().registerStringPreference(prefId, defValue);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
-	protected CommonPreference<Integer> registerIntPreference(OsmandApplication app, String prefId, int defValue) {
+	protected CommonPreference<Integer> registerIntPreference(@NonNull String prefId, int defValue) {
 		CommonPreference<Integer> preference = app.getSettings().registerIntPreference(prefId, defValue);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
-	protected CommonPreference<Long> registerLongPreference(OsmandApplication app, String prefId, long defValue) {
+	protected CommonPreference<Long> registerLongPreference(@NonNull String prefId, long defValue) {
 		CommonPreference<Long> preference = app.getSettings().registerLongPreference(prefId, defValue);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
-	protected CommonPreference<Float> registerFloatPreference(OsmandApplication app, String prefId, float defValue) {
+	protected CommonPreference<Float> registerFloatPreference(@NonNull String prefId, float defValue) {
 		CommonPreference<Float> preference = app.getSettings().registerFloatPreference(prefId, defValue);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
-	protected <T extends Enum> CommonPreference<T> registerEnumIntPreference(OsmandApplication app, String prefId, Enum defaultValue, Enum[] values, Class<T> clz) {
+	protected <T extends Enum<?>> CommonPreference<T> registerEnumIntPreference(@NonNull String prefId, @NonNull Enum<?> defaultValue,
+	                                                                            @NonNull Enum<?>[] values, @NonNull Class<T> clz) {
 		CommonPreference<T> preference = app.getSettings().registerEnumIntPreference(prefId, defaultValue, values, clz);
+		pluginPreferences.add(preference);
+		return preference;
+	}
+
+	protected ListStringPreference registerListStringPreference(@NonNull String prefId, @Nullable String defValue, @NonNull String delimiter) {
+		ListStringPreference preference = app.getSettings().registerStringListPreference(prefId, defValue, delimiter);
 		pluginPreferences.add(preference);
 		return preference;
 	}

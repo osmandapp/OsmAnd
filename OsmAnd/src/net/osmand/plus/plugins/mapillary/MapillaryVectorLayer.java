@@ -7,13 +7,16 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.LineString;
 import com.vividsolutions.jts.geom.MultiLineString;
 import com.vividsolutions.jts.geom.Point;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.GeometryTile;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -21,24 +24,21 @@ import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.GeometryTilesCache;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.views.layers.MapTileLayer;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.util.MapUtils;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 import static net.osmand.plus.plugins.mapillary.MapillaryImage.CAPTURED_AT_KEY;
 import static net.osmand.plus.plugins.mapillary.MapillaryImage.IS_PANORAMIC_KEY;
@@ -49,6 +49,8 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 	public static final int MIN_IMAGE_LAYER_ZOOM = 14;
 	public static final int MIN_POINTS_ZOOM = 17;
 	public static final double EXTENT = 4096.0;
+
+	private final MapillaryPlugin plugin;
 
 	private LatLon selectedImageLocation;
 	private Float selectedImageCameraAngle;
@@ -61,6 +63,7 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 
 	MapillaryVectorLayer(@NonNull Context context) {
 		super(context, false);
+		plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
 	}
 
 	@Override
@@ -289,15 +292,15 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 	}
 
 	private boolean filtered(Object data) {
-		if (data == null) {
+		if (data == null || plugin == null) {
 			return true;
 		}
 
-		boolean shouldFilter = settings.USE_MAPILLARY_FILTER.get();
-//		String userKey = settings.MAPILLARY_FILTER_USER_KEY.get();
-		long from = settings.MAPILLARY_FILTER_FROM_DATE.get();
-		long to = settings.MAPILLARY_FILTER_TO_DATE.get();
-		boolean pano = settings.MAPILLARY_FILTER_PANO.get();
+		boolean shouldFilter = plugin.USE_MAPILLARY_FILTER.get();
+//		String userKey = plugin.MAPILLARY_FILTER_USER_KEY.get();
+		long from = plugin.MAPILLARY_FILTER_FROM_DATE.get();
+		long to = plugin.MAPILLARY_FILTER_TO_DATE.get();
+		boolean pano = plugin.MAPILLARY_FILTER_PANO.get();
 
 		HashMap<String, Object> userData = (HashMap<String, Object>) data;
 		long capturedAt = ((Number) userData.get(CAPTURED_AT_KEY)).longValue();

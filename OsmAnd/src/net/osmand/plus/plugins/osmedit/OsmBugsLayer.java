@@ -1,7 +1,5 @@
 package net.osmand.plus.plugins.osmedit;
 
-import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.PointF;
@@ -26,19 +24,19 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.osmedit.asynctasks.HandleOsmNoteAsyncTask;
+import net.osmand.plus.plugins.osmedit.asynctasks.HandleOsmNoteAsyncTask.HandleBugListener;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
-import net.osmand.plus.plugins.osmedit.helpers.OsmBugsLocalUtil;
-import net.osmand.plus.plugins.osmedit.helpers.OsmBugsUtil;
-import net.osmand.plus.views.PointImageDrawable;
-import net.osmand.plus.plugins.osmedit.asynctasks.HandleOsmNoteAsyncTask.HandleBugListener;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint.Action;
 import net.osmand.plus.plugins.osmedit.dialogs.BugBottomSheetDialog;
 import net.osmand.plus.plugins.osmedit.dialogs.SendOsmNoteBottomSheetFragment;
+import net.osmand.plus.plugins.osmedit.helpers.OsmBugsLocalUtil;
+import net.osmand.plus.plugins.osmedit.helpers.OsmBugsUtil;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -51,6 +49,8 @@ import java.io.Serializable;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 
 public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider {
 
@@ -74,7 +74,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	public OsmBugsUtil getOsmbugsUtil(OpenStreetNote bug) {
 		OsmandSettings settings = getApplication().getSettings();
-		if ((bug != null && bug.isLocal()) || settings.OFFLINE_EDITION.get()
+		if ((bug != null && bug.isLocal()) || plugin.OFFLINE_EDITION.get()
 				|| !settings.isInternetConnectionAvailable(true)) {
 			return local;
 		} else {
@@ -111,7 +111,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		OsmandApplication app = getApplication();
-		startZoom = app.getSettings().SHOW_OSM_BUGS_MIN_ZOOM.get();
+		startZoom = plugin.SHOW_OSM_BUGS_MIN_ZOOM.get();
 		if (tileBox.getZoom() >= startZoom) {
 			// request to load
 			data.queryNewData(tileBox);
@@ -124,7 +124,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 				List<OpenStreetNote> fullObjects = new ArrayList<>();
 				List<LatLon> fullObjectsLatLon = new ArrayList<>();
 				List<LatLon> smallObjectsLatLon = new ArrayList<>();
-				boolean showClosed = app.getSettings().SHOW_CLOSED_OSM_BUGS.get();
+				boolean showClosed = plugin.SHOW_CLOSED_OSM_BUGS.get();
 				for (OpenStreetNote o : objects) {
 					if (!o.isOpened() && !showClosed) {
 						continue;
@@ -213,7 +213,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			final int rad = getScaledTouchRadius(getApplication(), getRadiusBug(tb));
 			int radius = rad * 3;
 			int small = rad * 3 / 4;
-			boolean showClosed = getApplication().getSettings().SHOW_CLOSED_OSM_BUGS.get();
+			boolean showClosed = plugin.SHOW_CLOSED_OSM_BUGS.get();
 			try {
 				for (int i = 0; i < objects.size(); i++) {
 					OpenStreetNote n = objects.get(i);
@@ -255,7 +255,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	protected List<OpenStreetNote> loadingBugs(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
 
-		String SITE_API = getApplication().getSettings().getOsmUrl();
+		String SITE_API = plugin.getOsmUrl();
 
 		List<OpenStreetNote> bugs = new ArrayList<>();
 		StringBuilder b = new StringBuilder();

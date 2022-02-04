@@ -1,21 +1,5 @@
 package net.osmand.plus.views.layers;
 
-import net.osmand.core.android.MapRendererView;
-import net.osmand.core.android.TileSourceProxyProvider;
-import net.osmand.core.jni.MapLayerConfiguration;
-import net.osmand.core.jni.PointI;
-import net.osmand.data.LatLon;
-import net.osmand.data.QuadPointDouble;
-import net.osmand.data.RotatedTileBox;
-import net.osmand.map.ITileSource;
-import net.osmand.plus.render.MapRenderRepositories;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.views.layers.base.BaseMapLayer;
-import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.corenative.NativeCoreContext;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -24,6 +8,25 @@ import android.graphics.RectF;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.android.TileSourceProxyProvider;
+import net.osmand.core.jni.MapLayerConfiguration;
+import net.osmand.core.jni.PointI;
+import net.osmand.data.LatLon;
+import net.osmand.data.QuadPointDouble;
+import net.osmand.data.RotatedTileBox;
+import net.osmand.map.ITileSource;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.plus.views.layers.base.BaseMapLayer;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
+
 public class MapVectorLayer extends BaseMapLayer {
 
 	private OsmandMapTileView view;
@@ -31,7 +34,6 @@ public class MapVectorLayer extends BaseMapLayer {
 	private Paint paintImg;
 
 	private final RectF destImage = new RectF();
-	private final MapTileLayer tileLayer;
 	private boolean visible = false;
 	private boolean oldRender = false;
 	private String cachedUnderlay;
@@ -41,7 +43,6 @@ public class MapVectorLayer extends BaseMapLayer {
 
 	public MapVectorLayer(@NonNull MapTileLayer tileLayer, boolean oldRender) {
 		super(tileLayer.getContext());
-		this.tileLayer = tileLayer;
 		this.oldRender = oldRender;
 	}
 
@@ -98,56 +99,16 @@ public class MapVectorLayer extends BaseMapLayer {
 		if (!visible) {
 			return;
 		}
-		// if (!isVectorDataVisible() && tileLayer != null) {
-		// tileLayer.drawTileMap(canvas, tilesRect);
-		// resourceManager.getRenderer().interruptLoadingMap();
-		// } else {
+
 		final MapRendererView mapRenderer = view.getMapRenderer();
 		if (mapRenderer != null && !oldRender) {
 			NativeCoreContext.getMapRendererContext().setNightMode(drawSettings.isNightMode());
-			OsmandSettings st = view.getApplication().getSettings();
-			if (!Algorithms.objectEquals(st.MAP_UNDERLAY.get(), cachedUnderlay)) {
-				cachedUnderlay = st.MAP_UNDERLAY.get();
-				ITileSource tileSource = st.getTileSourceByName(cachedUnderlay, false);
-				if (tileSource != null) {
-					TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), tileSource);
-					mapRenderer.setMapLayerProvider(-1, prov.instantiateProxy(true));
-					prov.swigReleaseOwnership();
-					// mapRenderer.setMapLayerProvider(-1,
-					// net.osmand.core.jni.OnlineTileSources.getBuiltIn().createProviderFor("Mapnik (OsmAnd)"));
-				} else {
-					mapRenderer.resetMapLayerProvider(-1);
-				}
-			}
-			if (!Algorithms.objectEquals(st.MAP_TRANSPARENCY.get(), cachedMapTransparency)) {
-				cachedMapTransparency = st.MAP_TRANSPARENCY.get();
-				MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
-				mapLayerConfiguration.setOpacityFactor(((float) cachedMapTransparency) / 255.0f);
-				mapRenderer.setMapLayerConfiguration(0, mapLayerConfiguration);
-			}
-			if (!Algorithms.objectEquals(st.MAP_OVERLAY.get(), cachedOverlay)) {
-				cachedOverlay = st.MAP_OVERLAY.get();
-				ITileSource tileSource = st.getTileSourceByName(cachedOverlay, false);
-				if (tileSource != null) {
-					TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), tileSource);
-					mapRenderer.setMapLayerProvider(1, prov.instantiateProxy(true));
-					prov.swigReleaseOwnership();
-					// mapRenderer.setMapLayerProvider(1,
-					// net.osmand.core.jni.OnlineTileSources.getBuiltIn().createProviderFor("Mapnik (OsmAnd)"));
-				} else {
-					mapRenderer.resetMapLayerProvider(1);
-				}
-			}
-			if (!Algorithms.objectEquals(st.MAP_OVERLAY_TRANSPARENCY.get(), cachedOverlayTransparency)) {
-				cachedOverlayTransparency = st.MAP_OVERLAY_TRANSPARENCY.get();
-				MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
-				mapLayerConfiguration.setOpacityFactor(((float) cachedOverlayTransparency) / 255.0f);
-				mapRenderer.setMapLayerConfiguration(1, mapLayerConfiguration);
-			}
+			configureMapSources(mapRenderer);
 			// opengl renderer
 			LatLon ll = tilesRect.getLatLonFromPixel(tilesRect.getPixWidth() / 2, tilesRect.getPixHeight() / 2);
-			mapRenderer.setTarget(new PointI(MapUtils.get31TileNumberX(ll.getLongitude()), MapUtils.get31TileNumberY(ll
-					.getLatitude())));
+			int x = MapUtils.get31TileNumberX(ll.getLongitude());
+			int y = MapUtils.get31TileNumberY(ll.getLatitude());
+			mapRenderer.setTarget(new PointI(x, y));
 			mapRenderer.setAzimuth(-tilesRect.getRotate());
 			mapRenderer.setZoom((float) (tilesRect.getZoom() + tilesRect.getZoomAnimation() + tilesRect
 					.getZoomFloatPart()));
@@ -168,6 +129,54 @@ public class MapVectorLayer extends BaseMapLayer {
 			MapRenderRepositories renderer = resourceManager.getRenderer();
 			drawRenderedMap(canvas, renderer.getBitmap(), renderer.getBitmapLocation(), tilesRect);
 			drawRenderedMap(canvas, renderer.getPrevBitmap(), renderer.getPrevBmpLocation(), tilesRect);
+		}
+	}
+
+	private void configureMapSources(MapRendererView mapRenderer) {
+		OsmandSettings settings = view.getApplication().getSettings();
+		OsmandRasterMapsPlugin plugin = OsmandPlugin.getPlugin(OsmandRasterMapsPlugin.class);
+		if (plugin == null) return;
+
+		if (!Algorithms.objectEquals(plugin.MAP_UNDERLAY.get(), cachedUnderlay)) {
+			cachedUnderlay = plugin.MAP_UNDERLAY.get();
+			ITileSource tileSource = settings.getTileSourceByName(cachedUnderlay, false);
+			if (tileSource != null) {
+				TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), tileSource);
+				mapRenderer.setMapLayerProvider(-1, prov.instantiateProxy(true));
+				prov.swigReleaseOwnership();
+				// mapRenderer.setMapLayerProvider(-1,
+				// net.osmand.core.jni.OnlineTileSources.getBuiltIn().createProviderFor("Mapnik (OsmAnd)"));
+			} else {
+				mapRenderer.resetMapLayerProvider(-1);
+			}
+		}
+
+		if (!Algorithms.objectEquals(plugin.MAP_TRANSPARENCY.get(), cachedMapTransparency)) {
+			cachedMapTransparency = plugin.MAP_TRANSPARENCY.get();
+			MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
+			mapLayerConfiguration.setOpacityFactor(((float) cachedMapTransparency) / 255.0f);
+			mapRenderer.setMapLayerConfiguration(0, mapLayerConfiguration);
+		}
+
+		if (!Algorithms.objectEquals(plugin.MAP_OVERLAY.get(), cachedOverlay)) {
+			cachedOverlay = plugin.MAP_OVERLAY.get();
+			ITileSource tileSource = settings.getTileSourceByName(cachedOverlay, false);
+			if (tileSource != null) {
+				TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), tileSource);
+				mapRenderer.setMapLayerProvider(1, prov.instantiateProxy(true));
+				prov.swigReleaseOwnership();
+				// mapRenderer.setMapLayerProvider(1,
+				// net.osmand.core.jni.OnlineTileSources.getBuiltIn().createProviderFor("Mapnik (OsmAnd)"));
+			} else {
+				mapRenderer.resetMapLayerProvider(1);
+			}
+		}
+
+		if (!Algorithms.objectEquals(plugin.MAP_OVERLAY_TRANSPARENCY.get(), cachedOverlayTransparency)) {
+			cachedOverlayTransparency = plugin.MAP_OVERLAY_TRANSPARENCY.get();
+			MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
+			mapLayerConfiguration.setOpacityFactor(((float) cachedOverlayTransparency) / 255.0f);
+			mapRenderer.setMapLayerConfiguration(1, mapLayerConfiguration);
 		}
 	}
 

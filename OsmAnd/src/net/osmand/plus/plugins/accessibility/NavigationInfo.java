@@ -10,17 +10,17 @@ import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.OsmAndFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,20 +46,20 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 		private int value;
 
 		public RelativeDirection() {
-			style = settings.DIRECTION_STYLE.get();
+			style = getCachedDirectionStyle();
 			clear();
 		}
 
 		// The argument must be not null as well as the currentLocation
 		// and currentLocation must have bearing.
 		public RelativeDirection(final Location point) {
-			style = settings.DIRECTION_STYLE.get();
+			style = getCachedDirectionStyle();
 			value = directionTo(point, currentLocation.getBearing());
 		}
 
 		// The first argument must be not null as well as the currentLocation.
 		public RelativeDirection(final Location point, float heading) {
-			style = settings.DIRECTION_STYLE.get();
+			style = getCachedDirectionStyle();
 			value = directionTo(point, heading);
 		}
 
@@ -70,7 +70,7 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 		// The first argument must be not null as well as the currentLocation.
 		public boolean update(final Location point, float heading) {
 			boolean result = false;
-			final RelativeDirectionStyle newStyle = settings.DIRECTION_STYLE.get();
+			final RelativeDirectionStyle newStyle = getCachedDirectionStyle();
 			if (style != newStyle) {
 				style = newStyle;
 				result = true;
@@ -116,6 +116,11 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 
 		protected int getValue() {
 			return value;
+		}
+
+		private RelativeDirectionStyle getCachedDirectionStyle() {
+			AccessibilityPlugin plugin = OsmandPlugin.getPlugin(AccessibilityPlugin.class);
+			return plugin != null ? plugin.DIRECTION_STYLE.get() : RelativeDirectionStyle.SIDEWISE;
 		}
 
 		// The first argument must be not null as well as the currentLocation.
@@ -252,20 +257,16 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 			final TargetPoint point = app.getTargetPointsHelper().getPointToNavigate();
 			if (point != null) {
 				if ((currentLocation != null) && currentLocation.hasBearing() && !MapViewTrackingUtilities.isSmallSpeedForCompass(currentLocation)) {
+					AccessibilityPlugin plugin = OsmandPlugin.getActivePlugin(AccessibilityPlugin.class);
 					final long now = SystemClock.uptimeMillis();
-					if ((now - lastNotificationTime) >= settings.ACCESSIBILITY_AUTOANNOUNCE_PERIOD.get()) {
+					if (plugin != null && (now - lastNotificationTime) >= plugin.ACCESSIBILITY_AUTOANNOUNCE_PERIOD.get()) {
 						Location destination = new Location("map"); //$NON-NLS-1$
 						destination.setLatitude(point.getLatitude());
 						destination.setLongitude(point.getLongitude());
-						if (lastDirection.update(destination) || !settings.ACCESSIBILITY_SMART_AUTOANNOUNCE.get()) {
+						if (lastDirection.update(destination) || !plugin.ACCESSIBILITY_SMART_AUTOANNOUNCE.get()) {
 							final String notification = distanceString(destination) + " " + lastDirection.getString(); //$NON-NLS-1$
 							lastNotificationTime = now;
-							app.runInUIThread(new Runnable() {
-								@Override
-								public void run() {
-									app.showToastMessage(notification);
-								}
-							});
+							app.runInUIThread(() -> app.showToastMessage(notification));
 						}
 					}
 				} else {
@@ -281,19 +282,18 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 			Integer inclination = direction.getInclination();
 			if (targetDirectionFlag && ((inclination == null) || (inclination != 0))) {
 				targetDirectionFlag = false;
-				if (settings.DIRECTION_AUDIO_FEEDBACK.get()) {
-					AccessibilityPlugin accessibilityPlugin = OsmandPlugin.getActivePlugin(AccessibilityPlugin.class);
-					if (accessibilityPlugin != null) {
-						if (inclination == null) {
-							accessibilityPlugin.playSoundIcon(AccessibilityPlugin.DIRECTION_NOTIFICATION);
-						} else if (inclination > 0) {
-							accessibilityPlugin.playSoundIcon(AccessibilityPlugin.INCLINATION_LEFT);
-						} else {
-							accessibilityPlugin.playSoundIcon(AccessibilityPlugin.INCLINATION_RIGHT);
-						}
+				AccessibilityPlugin plugin = OsmandPlugin.getActivePlugin(AccessibilityPlugin.class);
+				if (plugin == null) return;
+				if (plugin.DIRECTION_AUDIO_FEEDBACK.get()) {
+					if (inclination == null) {
+						plugin.playSoundIcon(AccessibilityPlugin.DIRECTION_NOTIFICATION);
+					} else if (inclination > 0) {
+						plugin.playSoundIcon(AccessibilityPlugin.INCLINATION_LEFT);
+					} else {
+						plugin.playSoundIcon(AccessibilityPlugin.INCLINATION_RIGHT);
 					}
 				}
-				if (settings.DIRECTION_HAPTIC_FEEDBACK.get()) {
+				if (plugin.DIRECTION_HAPTIC_FEEDBACK.get()) {
 					Vibrator haptic = (Vibrator)app.getSystemService(Context.VIBRATOR_SERVICE);
 					if ((haptic != null) && haptic.hasVibrator()) {
 						if (inclination == null) {

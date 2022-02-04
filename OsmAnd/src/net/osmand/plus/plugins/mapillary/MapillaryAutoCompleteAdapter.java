@@ -23,8 +23,8 @@ import androidx.annotation.Nullable;
 
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,12 +46,15 @@ public class MapillaryAutoCompleteAdapter extends ArrayAdapter<String> implement
     private final String NO_INTERNET_CONNECTION;
     private final ArrayList<String> names;
     private final OsmandApplication app;
+    private final MapillaryPlugin plugin;
     private boolean wrong;
 
-    public MapillaryAutoCompleteAdapter(@NonNull Context context, @LayoutRes int resource, OsmandApplication app) {
+    public MapillaryAutoCompleteAdapter(@NonNull Context context, @LayoutRes int resource,
+                                        @NonNull OsmandApplication app, @NonNull MapillaryPlugin plugin) {
         super(context, resource);
-        names = new ArrayList<>();
         this.app = app;
+        this.plugin = plugin;
+        names = new ArrayList<>();
         WRONG_USER_NAME = app.getString(R.string.wrong_user_name);
         NO_INTERNET_CONNECTION = app.getString(R.string.no_inet_connection);
     }
@@ -93,13 +96,13 @@ public class MapillaryAutoCompleteAdapter extends ArrayAdapter<String> implement
                         } else {
                             Pair<String, String> user = new GetMapillaryUserAsyncTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, constraint.toString()).get();
                             if (user != null) {
-                                settings.MAPILLARY_FILTER_USER_KEY.set(user.first);
-                                settings.MAPILLARY_FILTER_USERNAME.set(user.second);
+                                plugin.MAPILLARY_FILTER_USER_KEY.set(user.first);
+                                plugin.MAPILLARY_FILTER_USERNAME.set(user.second);
                                 names.add(user.second);
                                 wrong = false;
                             } else {
-                                settings.MAPILLARY_FILTER_USER_KEY.set("");
-                                settings.MAPILLARY_FILTER_USERNAME.set("");
+                                plugin.MAPILLARY_FILTER_USER_KEY.set("");
+                                plugin.MAPILLARY_FILTER_USERNAME.set("");
                                 names.add(WRONG_USER_NAME);
                                 wrong = true;
                             }

@@ -21,6 +21,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
@@ -65,7 +67,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 	private static final int DAYS_FOR_MAPPER_PROMO_CHECK = 60;
 
 	private OsmandApplication app;
-	private OsmandSettings settings;
+	private OsmEditingPlugin plugin;
 	private Map<String, Contribution> changesInfo = new LinkedHashMap<>();
 
 	private View mainView;
@@ -92,7 +94,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
-		settings = app.getSettings();
+		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 		nightMode = !app.getSettings().isLightContent();
 
 		requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -148,7 +150,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 		button.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				String userName = settings.OSM_USER_DISPLAY_NAME.get();
+				String userName = plugin.OSM_USER_DISPLAY_NAME.get();
 				String url = CONTRIBUTIONS_URL + userName + "/history";
 				Intent intent = new Intent(Intent.ACTION_VIEW);
 				intent.setData(Uri.parse(url));
@@ -167,7 +169,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 		int titleColor;
 		String title;
 		String description;
-		long expireTime = settings.MAPPER_LIVE_UPDATES_EXPIRE_TIME.get();
+		long expireTime = plugin.MAPPER_LIVE_UPDATES_EXPIRE_TIME.get();
 		boolean isAvailable = expireTime > System.currentTimeMillis();
 		if (isAvailable) {
 			titleColor = ColorUtilities.getActiveColor(app, nightMode);
@@ -274,9 +276,9 @@ public class MappersFragment extends BaseOsmAndFragment {
 			calendar.set(Calendar.HOUR_OF_DAY, 0);
 			calendar.set(Calendar.MINUTE, 0);
 			calendar.set(Calendar.SECOND, 0);
-			settings.MAPPER_LIVE_UPDATES_EXPIRE_TIME.set(calendar.getTimeInMillis());
+			plugin.MAPPER_LIVE_UPDATES_EXPIRE_TIME.set(calendar.getTimeInMillis());
 		} else {
-			settings.MAPPER_LIVE_UPDATES_EXPIRE_TIME.resetToDefault();
+			plugin.MAPPER_LIVE_UPDATES_EXPIRE_TIME.resetToDefault();
 		}
 	}
 
@@ -298,7 +300,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 	}
 
 	public void downloadChangesInfo(@NonNull CallbackWithObject<Map<String, Contribution>> callback) {
-		String userName = settings.OSM_USER_DISPLAY_NAME.get();
+		String userName = plugin.OSM_USER_DISPLAY_NAME.get();
 		Map<String, String> params = new HashMap<>();
 		params.put("name", userName);
 		AndroidNetworkUtils.sendRequestAsync(app, USER_CHANGES_URL, params, "Download object changes list", false, false,

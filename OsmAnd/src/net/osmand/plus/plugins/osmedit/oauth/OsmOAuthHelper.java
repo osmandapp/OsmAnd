@@ -5,7 +5,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.util.Algorithms;
 
 import java.util.HashSet;
@@ -16,12 +17,9 @@ public class OsmOAuthHelper {
 	private final OsmandApplication app;
 	private OsmOAuthAuthorizationAdapter authorizationAdapter;
 	private final Set<OsmAuthorizationListener> listeners = new HashSet<>();
-	private final OsmandSettings settings;
 
 	public OsmOAuthHelper(@NonNull OsmandApplication app) {
 		this.app = app;
-		settings = app.getSettings();
-		authorizationAdapter = new OsmOAuthAuthorizationAdapter(app);
 	}
 
 	public void addListener(OsmAuthorizationListener listener) {
@@ -37,32 +35,38 @@ public class OsmOAuthHelper {
 	}
 
 	public OsmOAuthAuthorizationAdapter getAuthorizationAdapter() {
+		if (authorizationAdapter == null) {
+			authorizationAdapter = new OsmOAuthAuthorizationAdapter(app);
+		}
 		return authorizationAdapter;
 	}
 
 	public void startOAuth(@NonNull ViewGroup view, boolean nightMode) {
-		authorizationAdapter.startOAuth(view, nightMode);
+		getAuthorizationAdapter().startOAuth(view, nightMode);
 	}
 
 	public void authorize(@NonNull String oauthVerifier) {
-		authorizationAdapter.authorize(oauthVerifier, this);
+		getAuthorizationAdapter().authorize(oauthVerifier, this);
 	}
 
 	public void resetAuthorization() {
+		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		if (plugin == null) return;
+
 		if (isValidToken()) {
-			settings.OSM_USER_ACCESS_TOKEN.resetToDefault();
-			settings.OSM_USER_ACCESS_TOKEN_SECRET.resetToDefault();
-			authorizationAdapter.resetToken();
-		} else if (isLoginExists()) {
-			settings.OSM_USER_NAME_OR_EMAIL.resetToDefault();
-			settings.OSM_USER_PASSWORD.resetToDefault();
+			plugin.OSM_USER_ACCESS_TOKEN.resetToDefault();
+			plugin.OSM_USER_ACCESS_TOKEN_SECRET.resetToDefault();
+			getAuthorizationAdapter().resetToken();
+		} else if (isLoginExists(plugin)) {
+			plugin.OSM_USER_NAME_OR_EMAIL.resetToDefault();
+			plugin.OSM_USER_PASSWORD.resetToDefault();
 		}
-		settings.MAPPER_LIVE_UPDATES_EXPIRE_TIME.resetToDefault();
+		plugin.MAPPER_LIVE_UPDATES_EXPIRE_TIME.resetToDefault();
 		updateAdapter();
 	}
 
-	private boolean isLoginExists() {
-		return !Algorithms.isEmpty(settings.OSM_USER_NAME_OR_EMAIL.get()) && !Algorithms.isEmpty(settings.OSM_USER_PASSWORD.get());
+	private boolean isLoginExists(OsmEditingPlugin plugin) {
+		return !Algorithms.isEmpty(plugin.OSM_USER_NAME_OR_EMAIL.get()) && !Algorithms.isEmpty(plugin.OSM_USER_PASSWORD.get());
 	}
 
 	public void notifyAndRemoveListeners() {
@@ -73,11 +77,11 @@ public class OsmOAuthHelper {
 	}
 
 	public boolean isValidToken() {
-		return authorizationAdapter.isValidToken();
+		return getAuthorizationAdapter().isValidToken();
 	}
 
-	public boolean isLogged() {
-		return isValidToken() || isLoginExists();
+	public boolean isLogged(OsmEditingPlugin plugin) {
+		return isValidToken() || isLoginExists(plugin);
 	}
 
 	public interface OsmAuthorizationListener {

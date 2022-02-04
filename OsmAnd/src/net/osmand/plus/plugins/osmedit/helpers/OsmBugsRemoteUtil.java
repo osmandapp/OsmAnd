@@ -1,6 +1,8 @@
 package net.osmand.plus.plugins.osmedit.helpers;
 
 
+import androidx.annotation.NonNull;
+
 import com.github.scribejava.core.model.Response;
 
 import net.osmand.PlatformUtil;
@@ -9,11 +11,12 @@ import net.osmand.osm.io.NetworkUtils;
 import net.osmand.osm.oauth.OsmOAuthAuthorizationClient;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint.Action;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthAuthorizationAdapter;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -29,8 +32,6 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ExecutionException;
 
-import androidx.annotation.NonNull;
-
 public class OsmBugsRemoteUtil implements OsmBugsUtil {
 
 	private static final Log log = PlatformUtil.getLog(OsmBugsRemoteUtil.class);
@@ -41,20 +42,20 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 	private static final String OSM_USER = "user";
 	public static final String DISPLAY_NAME = "display_name";
 
-	String getNotesApi() {
-		return settings.getOsmUrl() + "api/0.6/notes";
-	}
-
-	String getUserDetailsApi() {
-		return settings.getOsmUrl() + "api/0.6/user/details";
-	}
-
 	private final OsmandApplication app;
-	private final OsmandSettings settings;
+	private final OsmEditingPlugin plugin;
 
 	public OsmBugsRemoteUtil(OsmandApplication app) {
 		this.app = app;
-		settings = app.getSettings();
+		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+	}
+
+	String getNotesApi() {
+		return plugin.getOsmUrl() + "api/0.6/notes";
+	}
+
+	String getUserDetailsApi() {
+		return plugin.getOsmUrl() + "api/0.6/user/details";
 	}
 
 	@Override
@@ -138,7 +139,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 		connection.setRequestMethod(requestMethod);
 		connection.setRequestProperty("User-Agent", Version.getFullVersion(app));
 		if (!anonymous) {
-			String token = settings.OSM_USER_NAME_OR_EMAIL.get() + ":" + settings.OSM_USER_PASSWORD.get();
+			String token = plugin.OSM_USER_NAME_OR_EMAIL.get() + ":" + plugin.OSM_USER_PASSWORD.get();
 			connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes(StandardCharsets.UTF_8)));
 		}
 		connection.setDoInput(true);

@@ -1,15 +1,5 @@
 package net.osmand.plus.plugins.osmedit;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CREATE_POI;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OPEN_STREET_MAP;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_EDITING;
-import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
-import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
-import static net.osmand.plus.ContextMenuItem.INVALID_ID;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -65,7 +55,7 @@ import net.osmand.plus.plugins.osmedit.quickactions.AddOSMBugAction;
 import net.osmand.plus.plugins.osmedit.quickactions.AddPOIAction;
 import net.osmand.plus.plugins.osmedit.quickactions.ShowHideOSMBugAction;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
@@ -79,12 +69,40 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CREATE_POI;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OPEN_STREET_MAP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_EDITING;
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
+import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
+import static net.osmand.plus.ContextMenuItem.INVALID_ID;
+
 
 public class OsmEditingPlugin extends OsmandPlugin {
 
 	private static final Log LOG = PlatformUtil.getLog(OsmEditingPlugin.class);
 	public static final int OSM_EDIT_TAB = R.string.osm_edits;
 	public static final String RENDERING_CATEGORY_OSM_ASSISTANT = "osm_assistant";
+
+	public final OsmandPreference<String> OSM_USER_NAME_OR_EMAIL;
+	public final OsmandPreference<String> OSM_USER_DISPLAY_NAME;
+	public final CommonPreference<UploadVisibility> OSM_UPLOAD_VISIBILITY;
+
+	public final OsmandPreference<String> USER_OSM_BUG_NAME;
+	public final OsmandPreference<String> OSM_USER_PASSWORD;
+	public final OsmandPreference<String> OSM_USER_ACCESS_TOKEN;
+	public final OsmandPreference<String> OSM_USER_ACCESS_TOKEN_SECRET;
+
+	public final OsmandPreference<Long> MAPPER_LIVE_UPDATES_EXPIRE_TIME;
+	public final OsmandPreference<Boolean> OFFLINE_EDITION;
+	public final OsmandPreference<Boolean> OSM_USE_DEV_URL;
+
+	public final OsmandPreference<Boolean> SHOW_OSM_BUGS;
+	public final OsmandPreference<Boolean> SHOW_OSM_EDITS;
+	public final CommonPreference<Boolean> SHOW_CLOSED_OSM_BUGS;
+	public final CommonPreference<Integer> SHOW_OSM_BUGS_MIN_ZOOM;
 
 	// Constants for determining the order of items in the additional actions context menu
 	private static final int CREATE_POI_ITEM_ORDER = 7300;
@@ -93,7 +111,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	private static final int OPEN_OSM_NOTE_ITEM_ORDER = 7600;
 	private static final int MODIFY_OSM_NOTE_ITEM_ORDER = 7600;
 
-	private final OsmandSettings settings;
 	private OpenstreetmapsDbHelper dbpoi;
 	private OsmBugsDbHelper dbbug;
 	private OpenstreetmapLocalUtil localUtil;
@@ -103,7 +120,24 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	public OsmEditingPlugin(OsmandApplication app) {
 		super(app);
-		settings = app.getSettings();
+
+		OSM_USER_NAME_OR_EMAIL = registerStringPreference("user_name", "").makeGlobal().makeShared();
+		OSM_USER_DISPLAY_NAME = registerStringPreference("user_display_name", "").makeGlobal().makeShared();
+		OSM_UPLOAD_VISIBILITY = registerEnumIntPreference("upload_visibility", UploadVisibility.PUBLIC, UploadVisibility.values(), UploadVisibility.class).makeGlobal().makeShared();
+
+		USER_OSM_BUG_NAME = registerStringPreference("user_osm_bug_name", "NoName/OsmAnd").makeGlobal().makeShared();
+		OSM_USER_PASSWORD = registerStringPreference("user_password", "").makeGlobal().makeShared();
+		OSM_USER_ACCESS_TOKEN = registerStringPreference("user_access_token", "").makeGlobal();
+		OSM_USER_ACCESS_TOKEN_SECRET = registerStringPreference("user_access_token_secret", "").makeGlobal();
+
+		MAPPER_LIVE_UPDATES_EXPIRE_TIME = registerLongPreference("mapper_live_updates_expire_time", 0L).makeGlobal();
+		OFFLINE_EDITION = registerBooleanPreference("offline_osm_editing", true).makeGlobal().makeShared();
+		OSM_USE_DEV_URL = registerBooleanPreference("use_dev_url", false).makeGlobal().makeShared();
+
+		SHOW_OSM_BUGS = registerBooleanPreference("show_osm_bugs", false).makeProfile().cache();
+		SHOW_OSM_EDITS = registerBooleanPreference("show_osm_edits", true).makeProfile().cache();
+		SHOW_CLOSED_OSM_BUGS = registerBooleanPreference("show_closed_osm_bugs", false).makeProfile().cache();
+		SHOW_OSM_BUGS_MIN_ZOOM = registerIntPreference("show_osm_bugs_min_zoom", 8).makeProfile().cache();
 	}
 
 	@Override
@@ -130,7 +164,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	@NonNull
 	public OpenstreetmapRemoteUtil getPoiModificationRemoteUtil() {
 		if (remoteUtil == null) {
-			remoteUtil = new OpenstreetmapRemoteUtil(app);
+			remoteUtil = new OpenstreetmapRemoteUtil(app, this);
 		}
 		return remoteUtil;
 	}
@@ -149,6 +183,16 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			localNotesUtil = new OsmBugsLocalUtil(app, getDBBug());
 		}
 		return localNotesUtil;
+	}
+
+	public String getOsmUrl() {
+		String osmUrl;
+		if (OSM_USE_DEV_URL.get()) {
+			osmUrl = "https://master.apis.dev.openstreetmap.org/";
+		} else {
+			osmUrl = "https://api.openstreetmap.org/";
+		}
+		return osmUrl;
 	}
 
 	@NonNull
@@ -180,15 +224,15 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			if (osmBugsLayer == null) {
 				registerLayers(context, mapActivity);
 			}
-			if (mapView.getLayers().contains(osmEditsLayer) != settings.SHOW_OSM_EDITS.get()) {
-				if (settings.SHOW_OSM_EDITS.get()) {
+			if (mapView.getLayers().contains(osmEditsLayer) != SHOW_OSM_EDITS.get()) {
+				if (SHOW_OSM_EDITS.get()) {
 					mapView.addLayer(osmEditsLayer, 3.5f);
 				} else {
 					mapView.removeLayer(osmEditsLayer);
 				}
 			}
-			if (mapView.getLayers().contains(osmBugsLayer) != settings.SHOW_OSM_BUGS.get()) {
-				if (settings.SHOW_OSM_BUGS.get()) {
+			if (mapView.getLayers().contains(osmBugsLayer) != SHOW_OSM_BUGS.get()) {
+				if (SHOW_OSM_BUGS.get()) {
 					mapView.addLayer(osmBugsLayer, 2);
 				} else {
 					mapView.removeLayer(osmBugsLayer);
@@ -361,9 +405,9 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(OSM_NOTES)
 				.setTitleId(R.string.layer_osm_bugs, mapActivity)
-				.setSelected(settings.SHOW_OSM_BUGS.get())
+				.setSelected(SHOW_OSM_BUGS.get())
 				.setIcon(R.drawable.ic_action_osm_note)
-				.setColor(app, settings.SHOW_OSM_BUGS.get() ? R.color.osmand_orange : INVALID_ID)
+				.setColor(app, SHOW_OSM_BUGS.get() ? R.color.osmand_orange : INVALID_ID)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(new ContextMenuAdapter.OnRowItemClick() {
 
@@ -380,29 +424,28 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						if (itemId == R.string.layer_osm_bugs) {
-							OsmandPreference<Boolean> showOsmBugs = settings.SHOW_OSM_BUGS;
-							showOsmBugs.set(isChecked);
-							adapter.getItem(pos).setColor(app, showOsmBugs.get() ? R.color.osmand_orange : INVALID_ID);
+							SHOW_OSM_BUGS.set(isChecked);
+							adapter.getItem(pos).setColor(app, SHOW_OSM_BUGS.get() ? R.color.osmand_orange : INVALID_ID);
 							adapter.notifyDataSetChanged();
 							updateLayers(mapActivity, mapActivity);
 						}
 						return true;
 					}
 				})
-				.setItemDeleteAction(makeDeleteAction(settings.SHOW_OSM_BUGS))
+				.setItemDeleteAction(makeDeleteAction(SHOW_OSM_BUGS))
 				.createItem());
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(OSM_EDITS)
 				.setTitleId(R.string.layer_osm_edits, mapActivity)
-				.setSelected(settings.SHOW_OSM_EDITS.get())
+				.setSelected(SHOW_OSM_EDITS.get())
 				.setIcon(R.drawable.ic_action_openstreetmap_logo)
-				.setColor(app, settings.SHOW_OSM_EDITS.get() ? R.color.osmand_orange : INVALID_ID)
+				.setColor(app, SHOW_OSM_EDITS.get() ? R.color.osmand_orange : INVALID_ID)
 				.setListener(new ContextMenuAdapter.OnRowItemClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						if (itemId == R.string.layer_osm_edits) {
-							OsmandPreference<Boolean> showOsmEdits = settings.SHOW_OSM_EDITS;
+							OsmandPreference<Boolean> showOsmEdits = SHOW_OSM_EDITS;
 							showOsmEdits.set(isChecked);
 							adapter.getItem(pos).setColor(app, showOsmEdits.get() ? R.color.osmand_orange : INVALID_ID);
 							adapter.notifyDataSetChanged();
@@ -411,7 +454,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 						return true;
 					}
 				})
-				.setItemDeleteAction(makeDeleteAction(settings.SHOW_OSM_EDITS))
+				.setItemDeleteAction(makeDeleteAction(SHOW_OSM_EDITS))
 				.createItem());
 
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
@@ -481,9 +524,9 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	public boolean sendGPXFiles(final FragmentActivity activity, Fragment fragment, GpxInfo... info) {
-		String name = settings.OSM_USER_NAME_OR_EMAIL.get();
-		String pwd = settings.OSM_USER_PASSWORD.get();
-		String authToken = settings.OSM_USER_ACCESS_TOKEN.get();
+		String name = OSM_USER_NAME_OR_EMAIL.get();
+		String pwd = OSM_USER_PASSWORD.get();
+		String authToken = OSM_USER_ACCESS_TOKEN.get();
 		if ((Algorithms.isEmpty(name) || Algorithms.isEmpty(pwd)) && Algorithms.isEmpty(authToken)) {
 			LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), fragment);
 			return false;

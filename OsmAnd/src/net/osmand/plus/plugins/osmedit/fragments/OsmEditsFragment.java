@@ -1,8 +1,5 @@
 package net.osmand.plus.plugins.osmedit.fragments;
 
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
-import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
-
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -33,12 +30,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.edit.Entity;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.MapActivity;
@@ -49,30 +43,33 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.myplaces.FavoritesFragmentStateHolder;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.plugins.osmedit.OsmEditsAdapter;
+import net.osmand.plus.plugins.osmedit.OsmEditsUploadListener;
+import net.osmand.plus.plugins.osmedit.asynctasks.ShareOsmPointsAsyncTask;
+import net.osmand.plus.plugins.osmedit.asynctasks.ShareOsmPointsAsyncTask.ShareOsmPointsListener;
+import net.osmand.plus.plugins.osmedit.asynctasks.UploadOpenstreetmapPointAsyncTask;
+import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
+import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
+import net.osmand.plus.plugins.osmedit.data.OsmPoint;
+import net.osmand.plus.plugins.osmedit.data.OsmPoint.Group;
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.ExportOptionsBottomSheetDialogFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.ExportOptionsBottomSheetDialogFragment.ExportOptionsFragmentListener;
 import net.osmand.plus.plugins.osmedit.dialogs.FileTypeBottomSheetDialogFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.FileTypeBottomSheetDialogFragment.FileTypeFragmentListener;
-import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapLocalUtil.OnNodeCommittedListener;
-import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.dialogs.OsmEditOptionsBottomSheetDialogFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.OsmEditOptionsBottomSheetDialogFragment.OsmEditOptionsFragmentListener;
-import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
-import net.osmand.plus.plugins.osmedit.OsmEditsAdapter;
-import net.osmand.plus.plugins.osmedit.OsmEditsUploadListener;
-import net.osmand.plus.plugins.osmedit.helpers.OsmEditsUploadListenerHelper;
-import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
-import net.osmand.plus.plugins.osmedit.data.OsmPoint;
-import net.osmand.plus.plugins.osmedit.data.OsmPoint.Group;
-import net.osmand.plus.plugins.osmedit.asynctasks.ShareOsmPointsAsyncTask;
-import net.osmand.plus.plugins.osmedit.asynctasks.ShareOsmPointsAsyncTask.ShareOsmPointsListener;
-import net.osmand.plus.plugins.osmedit.asynctasks.UploadOpenstreetmapPointAsyncTask;
 import net.osmand.plus.plugins.osmedit.dialogs.ProgressDialogPoiUploader;
 import net.osmand.plus.plugins.osmedit.dialogs.SendOsmNoteBottomSheetFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.SendPoiBottomSheetFragment;
+import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapLocalUtil.OnNodeCommittedListener;
+import net.osmand.plus.plugins.osmedit.helpers.OsmEditsUploadListenerHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
 
 import java.lang.annotation.Retention;
@@ -81,6 +78,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
 
 public class OsmEditsFragment extends OsmAndListFragment implements ProgressDialogPoiUploader,
 		OnNodeCommittedListener, FavoritesFragmentStateHolder, OsmAuthorizationListener, ShareOsmPointsListener {
@@ -651,7 +651,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			if (hasPoiGroup(points)) {
-				if (getMyApplication().getOsmOAuthHelper().isLogged()) {
+				if (getMyApplication().getOsmOAuthHelper().isLogged(plugin)) {
 					SendPoiBottomSheetFragment.showInstance(getChildFragmentManager(), points);
 				} else {
 					LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), this);

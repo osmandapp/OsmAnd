@@ -15,14 +15,14 @@ import com.google.gson.reflect.TypeToken;
 
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.util.Algorithms;
 
 import java.lang.reflect.Type;
@@ -35,6 +35,7 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 
 	private final static String KEY_UNDERLAYS = "underlays";
 	private final static String KEY_NO_UNDERLAY = "no_underlay";
+
 	public static final QuickActionType TYPE = new QuickActionType(16,
 			"mapunderlay.change", MapUnderlayAction.class).
 			nameRes(R.string.quick_action_map_underlay).iconRes(R.drawable.ic_layer_bottom).
@@ -66,7 +67,8 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 
 	@Override
 	public String getSelectedItem(OsmandApplication app) {
-		String mapUnderlay = app.getSettings().MAP_UNDERLAY.get();
+		OsmandRasterMapsPlugin plugin = OsmandPlugin.getPlugin(OsmandRasterMapsPlugin.class);
+		String mapUnderlay = plugin != null ? plugin.MAP_UNDERLAY.get() : KEY_NO_UNDERLAY;
 		return mapUnderlay != null ? mapUnderlay : KEY_NO_UNDERLAY;
 	}
 
@@ -118,23 +120,23 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 	public void executeWithParams(@NonNull MapActivity mapActivity, String params) {
 		OsmandRasterMapsPlugin plugin = OsmandPlugin.getActivePlugin(OsmandRasterMapsPlugin.class);
 		if (plugin != null) {
-			OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+			MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
 			boolean hasUnderlay = !params.equals(KEY_NO_UNDERLAY);
 			if (hasUnderlay) {
-				settings.MAP_UNDERLAY.set(params);
-				settings.MAP_UNDERLAY_PREVIOUS.set(params);
-				if (settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.UNDEFINED) {
-					settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(LayerTransparencySeekbarMode.UNDERLAY);
+				plugin.MAP_UNDERLAY.set(params);
+				plugin.MAP_UNDERLAY_PREVIOUS.set(params);
+				if (plugin.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.UNDEFINED) {
+					plugin.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(LayerTransparencySeekbarMode.UNDERLAY);
 				}
-				if (settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.UNDERLAY) {
-					mapActivity.getMapLayers().getMapControlsLayer().showTransparencyBar(settings.MAP_TRANSPARENCY);
+				if (plugin.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.UNDERLAY) {
+					mapControlsLayer.showTransparencyBar(plugin.MAP_TRANSPARENCY);
 				}
 			} else {
-				settings.MAP_UNDERLAY.set(null);
-				mapActivity.getMapLayers().getMapControlsLayer().hideTransparencyBar();
-				settings.MAP_UNDERLAY_PREVIOUS.set(null);
+				plugin.MAP_UNDERLAY.set(null);
+				mapControlsLayer.hideTransparencyBar();
+				plugin.MAP_UNDERLAY_PREVIOUS.set(null);
 			}
-			plugin.updateMapLayers(mapActivity, mapActivity, settings.MAP_UNDERLAY);
+			plugin.updateMapLayers(mapActivity, mapActivity, plugin.MAP_UNDERLAY);
 			mapActivity.refreshMapComplete();
 			Toast.makeText(mapActivity, mapActivity.getString(R.string.quick_action_map_underlay_switch,
 					getTranslatedItemName(mapActivity, params)), Toast.LENGTH_SHORT).show();

@@ -45,6 +45,7 @@ import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
 
+import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.ValueHolder;
@@ -73,7 +74,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
 import net.osmand.plus.plugins.mapillary.MapillaryFiltersFragment;
-import net.osmand.plus.plugins.mapillary.MapillaryPlugin.MapillaryFirstDialogFragment;
+import net.osmand.plus.plugins.mapillary.MapillaryFirstDialogFragment;
 import net.osmand.plus.plugins.osmedit.menu.OsmNotesMenu;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
@@ -651,11 +652,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				}
 			}
 
-			OsmandSettings settings = getMyApplication().getSettings();
-			if (settings.SHOW_MAPILLARY.get() && !settings.MAPILLARY_FIRST_DIALOG_SHOWN.get()) {
+			MapillaryPlugin plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
+			if (plugin != null && plugin.SHOW_MAPILLARY.get() && !plugin.MAPILLARY_FIRST_DIALOG_SHOWN.get()) {
 				MapillaryFirstDialogFragment fragment = new MapillaryFirstDialogFragment();
 				fragment.show(mapActivity.getSupportFragmentManager(), MapillaryFirstDialogFragment.TAG);
-				settings.MAPILLARY_FIRST_DIALOG_SHOWN.set(true);
+				plugin.MAPILLARY_FIRST_DIALOG_SHOWN.set(true);
 			}
 		}
 		mapActivity.updateStatusBarColor();

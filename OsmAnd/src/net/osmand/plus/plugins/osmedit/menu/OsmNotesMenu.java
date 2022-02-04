@@ -41,10 +41,7 @@ public class OsmNotesMenu {
 		final OsmandApplication app = mapActivity.getMyApplication();
 		final OsmandSettings settings = app.getSettings();
 		final OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
-
-		if (plugin == null) {
-			return;
-		}
+		if (plugin == null) return;
 
 		final boolean nightMode = isNightMode(app);
 		final int themeRes = getThemeRes(app);
@@ -54,9 +51,9 @@ public class OsmNotesMenu {
 		final int showZoomLevelStringId = R.string.show_from_zoom_level;
 		final int showClosedNotesStringId = R.string.show_closed_notes;
 
-		final OsmandPreference<Boolean> showOsmBugsPref = settings.SHOW_OSM_BUGS;
-		final CommonPreference<Boolean> showClosedOsmBugsPref = settings.SHOW_CLOSED_OSM_BUGS;
-		final CommonPreference<Integer> showOsmBugsZoomPref = settings.SHOW_OSM_BUGS_MIN_ZOOM;
+		final OsmandPreference<Boolean> showOsmBugsPref = plugin.SHOW_OSM_BUGS;
+		final CommonPreference<Boolean> showClosedOsmBugsPref = plugin.SHOW_CLOSED_OSM_BUGS;
+		final CommonPreference<Integer> showOsmBugsZoomPref = plugin.SHOW_OSM_BUGS_MIN_ZOOM;
 
 		final String[] zoomStrings = getZoomStrings(mapActivity);
 

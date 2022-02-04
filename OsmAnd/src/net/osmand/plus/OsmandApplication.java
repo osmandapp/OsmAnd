@@ -1,7 +1,5 @@
 package net.osmand.plus;
 
-import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
-
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -124,6 +122,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
+
+import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
 
 public class OsmandApplication extends MultiDexApplication {
 
@@ -933,10 +933,10 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public boolean accessibilityEnabledForMode(ApplicationMode appMode) {
-		final AccessibilityMode mode = getSettings().ACCESSIBILITY_MODE.getModeValue(appMode);
-		if (!OsmandPlugin.isActive(AccessibilityPlugin.class)) {
-			return false;
-		}
+		AccessibilityPlugin plugin = OsmandPlugin.getActivePlugin(AccessibilityPlugin.class);
+		if (plugin == null) return false;
+
+		final AccessibilityMode mode = plugin.ACCESSIBILITY_MODE.getModeValue(appMode);
 		if (mode == AccessibilityMode.ON) {
 			return true;
 		} else if (mode == AccessibilityMode.OFF) {

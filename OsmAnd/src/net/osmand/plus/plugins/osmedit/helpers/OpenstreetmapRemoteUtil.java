@@ -3,6 +3,8 @@ package net.osmand.plus.plugins.osmedit.helpers;
 import android.util.Xml;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.github.scribejava.core.model.Response;
 
 import net.osmand.NativeLibrary;
@@ -25,10 +27,10 @@ import net.osmand.osm.io.OsmBaseStorage;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint.Action;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthAuthorizationAdapter;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -62,6 +64,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	private static final long NO_CHANGESET_ID = -1;
 
 	private final OsmandApplication ctx;
+	private OsmEditingPlugin plugin;
 	private EntityInfo entityInfo;
 	private EntityId entityInfoId;
 
@@ -71,12 +74,10 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 	public final static Log log = PlatformUtil.getLog(OpenstreetmapRemoteUtil.class);
 
-	private OsmandSettings settings;
 
-
-	public OpenstreetmapRemoteUtil(OsmandApplication app) {
+	public OpenstreetmapRemoteUtil(@NonNull OsmandApplication app, @NonNull OsmEditingPlugin plugin) {
 		this.ctx = app;
-		settings = ctx.getSettings();
+		this.plugin = plugin;
 	}
 
 	@Override
@@ -88,7 +89,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	}
 
 	private String getSiteApi() {
-		return settings.getOsmUrl();
+		return plugin.getOsmUrl();
 	}
 
 	public String uploadGPXFile(String tagstring, String description, String visibility, File f) {
@@ -99,7 +100,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		additionalData.put("tags", tagstring);
 		additionalData.put("visibility", visibility);
 		return NetworkUtils.uploadFile(url, f,
-				settings.OSM_USER_NAME_OR_EMAIL.get() + ":" + settings.OSM_USER_PASSWORD.get(),
+				plugin.OSM_USER_NAME_OR_EMAIL.get() + ":" + plugin.OSM_USER_PASSWORD.get(),
 				adapter.getClient(),
 				"file",
 				true, additionalData);
@@ -153,7 +154,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		connection.setRequestMethod(requestMethod);
 		connection.setRequestProperty("User-Agent", Version.getFullVersion(ctx)); //$NON-NLS-1$
 		StringBuilder responseBody = new StringBuilder();
-		String token = settings.OSM_USER_NAME_OR_EMAIL.get() + ":" + settings.OSM_USER_PASSWORD.get(); //$NON-NLS-1$
+		String token = plugin.OSM_USER_NAME_OR_EMAIL.get() + ":" + plugin.OSM_USER_PASSWORD.get(); //$NON-NLS-1$
 		connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes("UTF-8"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		connection.setDoInput(true);
 		if (requestMethod.equals("PUT") || requestMethod.equals("POST") || requestMethod.equals("DELETE")) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -337,9 +338,9 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				ser.attribute(null, "version", "0.6"); //$NON-NLS-1$ //$NON-NLS-2$
 				ser.attribute(null, "generator", Version.getAppName(ctx)); //$NON-NLS-1$
 				if (n instanceof Node) {
-					writeNode((Node) n, info, ser, changeSetId, settings.OSM_USER_NAME_OR_EMAIL.get());
+					writeNode((Node) n, info, ser, changeSetId, plugin.OSM_USER_NAME_OR_EMAIL.get());
 				} else if (n instanceof Way) {
-					writeWay((Way) n, info, ser, changeSetId, settings.OSM_USER_NAME_OR_EMAIL.get());
+					writeWay((Way) n, info, ser, changeSetId, plugin.OSM_USER_NAME_OR_EMAIL.get());
 				}
 				ser.endTag(null, OsmPoint.stringAction.get(action));
 				ser.endTag(null, "osmChange"); //$NON-NLS-1$

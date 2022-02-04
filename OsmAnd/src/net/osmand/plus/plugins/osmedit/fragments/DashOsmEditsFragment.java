@@ -120,7 +120,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 				public void onClick(View v) {
 					if (point.getGroup() == OsmPoint.Group.POI) {
 						selectedPoint = point;
-						if (getMyApplication().getOsmOAuthHelper().isLogged()) {
+						if (getMyApplication().getOsmOAuthHelper().isLogged(plugin)) {
 							SendPoiBottomSheetFragment.showInstance(getChildFragmentManager(), new OsmPoint[]{point});
 						} else {
 							LoginBottomSheetFragment.showInstance(getActivity().getSupportFragmentManager(),

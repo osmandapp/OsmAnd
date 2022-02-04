@@ -1,8 +1,5 @@
 package net.osmand.plus.plugins.audionotes;
 
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -34,28 +31,28 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.base.OsmAndListFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.myplaces.FavoritesFragmentStateHolder;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.plugins.audionotes.ItemMenuBottomSheetDialogFragment.ItemMenuFragmentListener;
 import net.osmand.plus.plugins.audionotes.SortByMenuBottomSheetDialogFragment.SortFragmentListener;
 import net.osmand.plus.plugins.audionotes.adapters.NotesAdapter;
 import net.osmand.plus.plugins.audionotes.adapters.NotesAdapter.NotesAdapterListener;
-import net.osmand.plus.base.OsmAndListFragment;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.myplaces.FavoritesActivity;
-import net.osmand.plus.myplaces.FavoritesFragmentStateHolder;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 
 import org.apache.commons.logging.Log;
 
@@ -68,6 +65,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
 
 public class NotesFragment extends OsmAndListFragment implements FavoritesFragmentStateHolder {
 
@@ -226,7 +226,7 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 		List<Recording> recs = new LinkedList<>(plugin.getAllRecordings());
 		List<Object> res = new LinkedList<>();
 		if (!recs.isEmpty()) {
-			NotesSortByMode sortByMode = getMyApplication().getSettings().NOTES_SORT_BY_MODE.get();
+			NotesSortByMode sortByMode = plugin.NOTES_SORT_BY_MODE.get();
 			if (sortByMode.isByDate()) {
 				res.add(NotesAdapter.TYPE_DATE_HEADER);
 				res.addAll(sortRecsByDateDescending(recs));
