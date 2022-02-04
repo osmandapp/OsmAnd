@@ -8,6 +8,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.BarData;
@@ -23,7 +27,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.LineGraphType;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.MeasurementToolFragment.OnUpdateInfoListener;
@@ -35,6 +38,8 @@ import net.osmand.plus.measurementtool.graph.CustomChartAdapter.LegendViewType;
 import net.osmand.plus.myplaces.GPXTabItemType;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.widgets.chips.ChipItem;
+import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.Algorithms;
 
@@ -42,18 +47,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import static net.osmand.GPXUtilities.GPXFile;
 import static net.osmand.GPXUtilities.GPXTrackAnalysis;
 import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.ALTITUDE;
 import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SLOPE;
 import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SPEED;
-import static net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
 import static net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 
 public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
@@ -75,7 +73,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 	private View messageContainer;
 	private CommonChartAdapter commonGraphAdapter;
 	private CustomChartAdapter customGraphAdapter;
-	private RecyclerView graphTypesMenu;
+	private HorizontalChipsView graphTypesMenu;
 
 	private ChartType<?> visibleType;
 	private final List<ChartType<?>> chartTypes = new ArrayList<>();
@@ -97,8 +95,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 	protected void updateContent() {
 		editingCtx = fragment.getEditingCtx();
 
-		graphTypesMenu = view.findViewById(R.id.graph_types_recycler_view);
-		graphTypesMenu.setLayoutManager(new LinearLayoutManager(mapActivity, RecyclerView.HORIZONTAL, false));
+		graphTypesMenu = view.findViewById(R.id.graph_types_selector);
 
 		setupScrollListener();
 
@@ -141,7 +138,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 	private void updateTopPadding() {
 		int topPadding = AndroidUiHelper.isOrientationPortrait(mapActivity) ?
-				0 : app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+				0 : getDimen(R.dimen.content_padding_small);
 		view.setPadding(0, topPadding, 0, 0);
 	}
 
@@ -174,31 +171,37 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 	@SuppressLint("NotifyDataSetChanged")
 	private void fillInMenu() {
-		int activeColorId = ColorUtilities.getActiveColorId(nightMode);
-		final HorizontalSelectionAdapter adapter = new HorizontalSelectionAdapter(app, nightMode);
-		final ArrayList<HorizontalSelectionItem> items = new ArrayList<>();
+		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+
+		List<ChipItem> items = new ArrayList<>();
 		for (ChartType<?> type : chartTypes) {
-			HorizontalSelectionItem item = new HorizontalSelectionItem(type.getTitle(), type);
+			if (!type.isAvailable()) {
+				continue;
+			}
+			String title = type.getTitle();
+			ChipItem item = new ChipItem(title);
+			item.title = title;
+			item.tag = type;
 			if (type.isCustom()) {
-				item.setTitleColorId(activeColorId);
+				item.titleColor = activeColor;
 			}
-			if (type.isAvailable()) {
-				items.add(item);
-			}
+			items.add(item);
 		}
-		adapter.setItems(items);
-		String selectedItemKey = visibleType.getTitle();
-		adapter.setSelectedItemByTitle(selectedItemKey);
-		adapter.setListener(item -> {
-			adapter.setItems(items);
-			adapter.setSelectedItem(item);
-			ChartType<?> chosenType = (ChartType<?>) item.getObject();
+		graphTypesMenu.setItems(items);
+
+		ChipItem selected = graphTypesMenu.getChipById(visibleType.getTitle());
+		graphTypesMenu.setSelected(selected);
+
+		graphTypesMenu.setOnSelectChipListener(chip -> {
+			ChartType<?> chosenType = (ChartType<?>) chip.tag;
 			if (!isVisibleType(chosenType)) {
 				changeVisibleType(chosenType);
 			}
+			graphTypesMenu.smoothScrollTo(chip);
+			return true;
 		});
-		graphTypesMenu.setAdapter(adapter);
-		adapter.notifyDataSetChanged();
+
+		graphTypesMenu.notifyDataSetChanged();
 	}
 
 	private void changeVisibleType(ChartType<?> type) {

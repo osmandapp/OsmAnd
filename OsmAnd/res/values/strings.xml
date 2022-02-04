@@ -10,6 +10,19 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="select_suggested_points">Select suggested points</string>
+    <string name="selected_waypoints_descr">Selected waypoints will be added to the \"%1$s\" track</string>
+    <string name="shared_string_reading_file">Reading file…</string>
+    <string name="all_groups">All groups</string>
+    <string name="list_of_groups">List of groups</string>
+    <string name="points_selection_descr">Are you sure you want to close ? You will lost all changes.</string>
+    <string name="exit_import_descr">Are you sure you want to exit without saving? You will lost all changes.</string>
+    <string name="exit_import">Exit import?</string>
+    <string name="import_tracks">Import tracks</string>
+    <string name="import_tracks_descr">%1$s, contains %2$s separate tracks. Choose tracks you want to import.</string>
+    <string name="please_provide_group_name_message">Please provide a name for the group.</string>
+    <string name="quick_action_add_route_descr">A button to start a route from the middle of the screen.</string>
     <string name="gpx_no_routes_descr">You can use \"%1$s\" tool to add route into file.</string>
     <string name="gpx_no_routes_title">There are no routes</string>
     <string name="save_track_to_gpx_descrp">Start track recording automatically while navigation is in progress. When it is finished, the track will be saved automatically.</string>

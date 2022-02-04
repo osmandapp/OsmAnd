@@ -63,6 +63,7 @@ public class NativeLibrary {
 			this.nativeHandler = nativeHandler;
 		}
 
+		@SuppressWarnings("deprecation")
 		@Override
 		protected void finalize() throws Throwable {
 			deleteNativeResult();
@@ -88,6 +89,7 @@ public class NativeLibrary {
 			this.objects = objects;
 		}
 
+		@SuppressWarnings("deprecation")
 		@Override
 		protected void finalize() throws Throwable {
 			deleteNativeResult();
@@ -228,7 +230,6 @@ public class NativeLibrary {
 	}
 
 	public RouteSegmentResult[] runNativeRouting(RoutingContext c, RouteRegion[] regions, boolean basemap) {
-//		config.router.printRules(System.out);
 		return nativeRouting(c, c.config.initialDirection == null ? -360 : c.config.initialDirection.floatValue(),
 				regions, basemap);
 	}

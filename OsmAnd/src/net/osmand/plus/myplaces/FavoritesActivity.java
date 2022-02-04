@@ -145,7 +145,7 @@ public class FavoritesActivity extends TabActivity {
 			}
 		} else if (requestCode == IMPORT_FAVOURITES_REQUEST && resultCode == Activity.RESULT_OK) {
 			if (data != null && data.getData() != null) {
-				importHelper.handleGpxOrFavouritesImport(data.getData());
+				importHelper.handleFavouritesImport(data.getData());
 			}
 		} else if (requestCode == OPEN_GPX_REQUEST && resultCode == Activity.RESULT_OK) {
 			if (data != null && data.getBooleanExtra(TRACK_DELETED_KEY, false)) {
@@ -206,7 +206,7 @@ public class FavoritesActivity extends TabActivity {
 	}
 
 	@Override
-	public void onAttachFragment(Fragment fragment) {
+	public void onAttachFragment(@NonNull Fragment fragment) {
 		if (fragment instanceof FavoritesFragmentStateHolder) {
 			fragment.setArguments(intentParams);
 			fragList.add(new WeakReference<>((FavoritesFragmentStateHolder) fragment));

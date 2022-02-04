@@ -15,7 +15,6 @@
 		android:id="@+id/button_container"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-
 		android:duplicateParentState="true"
 		tools:ignore="UselessParent">
 

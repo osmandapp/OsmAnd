@@ -138,10 +138,8 @@ public class WptPtEditor extends PointEditor {
 		showEditorFragment();
 	}
 
-	public void add(GPXFile gpxFile, LatLon latLon, String title, String address, String description,
-	                int color, String backgroundType, String categoryName, int categoryColor, boolean skipDialog) {
-		MapActivity mapActivity = getMapActivity();
-		if (latLon == null || mapActivity == null) {
+	public void add(@NonNull GPXFile gpxFile, @NonNull WptPt wpt, String categoryName, int categoryColor, boolean skipDialog) {
+		if (mapActivity == null) {
 			return;
 		}
 		isNew = true;
@@ -152,16 +150,7 @@ public class WptPtEditor extends PointEditor {
 				mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
 		gpxSelected = selectedGpxFile != null;
 
-		WptPt wpt = new WptPt(latLon.getLatitude(), latLon.getLongitude(),
-				System.currentTimeMillis(), Double.NaN, 0, Double.NaN);
-
-		wpt.name = title;
-		wpt.setAddress(address);
-		wpt.desc = description;
-		wpt.setColor(color);
-		wpt.setBackgroundType(backgroundType);
-
-		if (categoryName != null && !categoryName.isEmpty()) {
+		if (!Algorithms.isEmpty(categoryName)) {
 			FavouritesDbHelper.FavoriteGroup category = mapActivity.getMyApplication()
 					.getFavorites()
 					.getGroup(categoryName);

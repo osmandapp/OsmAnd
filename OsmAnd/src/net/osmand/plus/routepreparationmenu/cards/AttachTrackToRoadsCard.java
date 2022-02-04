@@ -1,13 +1,12 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+
+import androidx.annotation.NonNull;
 
 
 public class AttachTrackToRoadsCard extends MapBaseCard {
@@ -29,14 +28,6 @@ public class AttachTrackToRoadsCard extends MapBaseCard {
 		ImageView icon = view.findViewById(R.id.icon);
 		icon.setImageDrawable(getContentIcon(R.drawable.ic_action_snap_to_road));
 
-		view.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardPressed(AttachTrackToRoadsCard.this);
-				}
-			}
-		});
+		view.setOnClickListener(v -> notifyCardPressed());
 	}
 }

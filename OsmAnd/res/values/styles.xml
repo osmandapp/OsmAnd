@@ -162,6 +162,7 @@
         <item name="text_color_tab_active">@color/text_color_tab_active_light</item>
         <item name="text_color_tab_active_white">@color/text_color_secondary_light</item>
         <item name="app_bar_primary_item_color">@color/active_buttons_and_links_text_light</item>
+        <item name="inactive_text_color">@color/icon_color_secondary_light</item>
 
         <item name="appbar_layout_theme">@style/OsmandLightTheme.DarkActionbar</item>
         <item name="search_tabbar_layout_theme">@style/OsmandLightTheme.SearchTabbar</item>
@@ -263,6 +264,8 @@
         <item name="android:forceDarkAllowed">false</item>
         <item name="ic_action_osmand_pro_logo_colored">@drawable/ic_action_osmand_pro_logo_colored</item>
         <item name="ic_action_android_auto_logo_colored">@drawable/ic_action_android_auto_colored</item>
+        <item name="chip_ripple">@drawable/ripple_solid_light_18dp</item>
+        <item name="chip_content_color">@color/preference_category_title</item>
     </style>
 
     <style name="ToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
@@ -469,6 +472,7 @@
         <item name="text_color_tab_active">@color/text_color_tab_active_dark</item>
         <item name="text_color_tab_active_white">@color/text_color_tab_active_dark</item>
         <item name="app_bar_primary_item_color">@color/active_buttons_and_links_text_dark</item>
+        <item name="inactive_text_color">@color/icon_color_default_dark</item>
 
         <item name="appbar_layout_theme">@style/OsmandDarkTheme.DarkActionbar</item>
         <item name="search_tabbar_layout_theme">@style/OsmandDarkTheme.SearchTabbar</item>
@@ -575,6 +579,8 @@
         <item name="android:forceDarkAllowed">false</item>
         <item name="ic_action_osmand_pro_logo_colored">@drawable/ic_action_osmand_pro_logo_colored_night</item>
         <item name="ic_action_android_auto_logo_colored">@drawable/ic_action_android_auto_colored_night</item>
+        <item name="chip_ripple">@drawable/ripple_solid_dark_18dp</item>
+        <item name="chip_content_color">@color/active_color_primary_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">

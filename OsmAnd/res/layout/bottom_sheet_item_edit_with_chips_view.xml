@@ -109,19 +109,14 @@
 			android:text="@string/shared_string_meters" />
 	</FrameLayout>
 
-	<androidx.recyclerview.widget.RecyclerView
-		android:id="@+id/recycler_view"
+	<net.osmand.plus.widgets.chips.HorizontalChipsView
+		android:id="@+id/chips_view"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:paddingTop="@dimen/content_padding_small"
 		android:paddingBottom="@dimen/content_padding_small"
-		android:paddingLeft="@dimen/content_padding"
-		android:paddingRight="@dimen/content_padding"
-		android:paddingStart="@dimen/content_padding"
-		android:paddingEnd="@dimen/content_padding"
-		android:clipToPadding="false"
-		android:orientation="horizontal"
-		osmand:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+		android:paddingHorizontal="@dimen/content_padding"
 		tools:itemCount="3"
-		tools:listitem="@layout/point_editor_icon_category_item" />
+		tools:listitem="@layout/custom_chip_view" />
+
 </LinearLayout>

@@ -368,8 +368,12 @@ public class GPXUtilities {
 			return getExtensionsToRead().get(ADDRESS_EXTENSION);
 		}
 
-		public String setAddress(String address) {
-			return getExtensionsToWrite().put(ADDRESS_EXTENSION, address);
+		public void setAddress(String address) {
+			if (Algorithms.isBlank(address)) {
+				getExtensionsToWrite().remove(ADDRESS_EXTENSION);
+			} else {
+				getExtensionsToWrite().put(ADDRESS_EXTENSION, address);
+			}
 		}
 
 		public void setProfileType(String profileType) {
@@ -1557,28 +1561,6 @@ public class GPXUtilities {
 			return pt;
 		}
 
-		public WptPt addRtePt(double lat, double lon, long time, String description, String name, String category, int color) {
-			double latAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lat));
-			double lonAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lon));
-			final WptPt pt = new WptPt(latAdjusted, lonAdjusted, time, Double.NaN, 0, Double.NaN);
-			pt.name = name;
-			pt.category = category;
-			pt.desc = description;
-			if (color != 0) {
-				pt.setColor(color);
-			}
-
-			if (routes.size() == 0) {
-				routes.add(new Route());
-			}
-			Route currentRoute = routes.get(routes.size() - 1);
-			currentRoute.points.add(pt);
-
-			modifiedTime = System.currentTimeMillis();
-
-			return pt;
-		}
-
 		public List<TrkSegment> getNonEmptyTrkSegments(boolean routesOnly) {
 			List<TrkSegment> segments = new ArrayList<>();
 			for (Track t : tracks) {
@@ -1794,6 +1776,16 @@ public class GPXUtilities {
 				}
 			}
 			return points.isEmpty() && routes.isEmpty();
+		}
+
+		public int getTracksCount() {
+			int count = 0;
+			for (Track track : tracks) {
+				if (!track.generalTrack) {
+					count++;
+				}
+			}
+			return count;
 		}
 
 		public int getNonEmptyTracksCount() {

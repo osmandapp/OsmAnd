@@ -859,7 +859,7 @@
     <string name="poi_bus_trap">Passe à bus</string>
     <string name="poi_rwn_ref">Nœud d\'un réseau régional de randonnée pédestre</string>
     <string name="poi_country">Pays</string>
-    <string name="poi_fee_yes">Oui</string>
+    <string name="poi_fee_yes">Oui ; avec frais</string>
     <string name="poi_abandoned_poi">Structure à l\'abandon</string>
     <string name="poi_access_private">Propriété privée</string>
     <string name="poi_access_no">Accès interdit</string>
@@ -899,7 +899,7 @@
     <string name="poi_email">Courriel</string>
     <string name="poi_fax">Fax</string>
     <string name="facebook">Facebook</string>
-    <string name="poi_drinking_water_yes">Oui</string>
+    <string name="poi_drinking_water_yes">Oui ; eau potable</string>
     <string name="poi_drinking_water_no">Non</string>
     <string name="poi_seasonal_no">Permanent</string>
     <string name="poi_seasonal_yes">Oui</string>
@@ -972,7 +972,7 @@
     <string name="poi_notary">Office de notaire</string>
     <string name="poi_doors">Portes</string>
     <string name="poi_landfill_waste_nuclear">Déchet nucléaire</string>
-    <string name="poi_capital">Capitale</string>
+    <string name="poi_capital">Oui ; Capitale</string>
     <string name="poi_office_religion">Lieu de culte</string>
     <string name="poi_association">Siège d\'association</string>
     <string name="poi_financial">Société financière</string>
@@ -1020,7 +1020,7 @@
     <string name="poi_height">Hauteur</string>
     <string name="poi_ele">Hauteur au dessus du niveau de la mer</string>
     <string name="poi_start_date">Date de début</string>
-    <string name="poi_wheelchair_yes">Oui</string>
+    <string name="poi_wheelchair_yes">Oui ; fauteuil roulant</string>
     <string name="poi_wheelchair_no">Non</string>
     <string name="poi_wheelchair_limited">Limitée</string>
     <string name="poi_wholesale">Vente en gros</string>
@@ -1145,7 +1145,7 @@
     <string name="poi_bicycle_parking_wall_loops">Boucles murales</string>
     <string name="poi_species">Espèces</string>
     <string name="poi_information_sign">Panneau</string>
-    <string name="poi_covered_yes">Oui</string>
+    <string name="poi_covered_yes">Oui ; couvert</string>
     <string name="poi_covered_no">Non couvert</string>
     <string name="poi_smoking_outside">À l\'extérieur uniquement</string>
     <string name="poi_services">Aire de services</string>
@@ -1252,7 +1252,7 @@
     <string name="poi_female_no">Interdit aux femmes</string>
     <string name="poi_indoor_yes">Intérieur</string>
     <string name="poi_indoor_no">Extérieur</string>
-    <string name="poi_toilets_yes">Oui</string>
+    <string name="poi_toilets_yes">Oui ; toilettes</string>
     <string name="poi_toilets_no">Sans toilettes</string>
     <string name="poi_toilets_wheelchair_yes">Accès aux toilettes en fauteuil roulant : oui</string>
     <string name="poi_toilets_wheelchair_no">Accès aux toilettes en fauteuil roulant : non</string>
@@ -1444,7 +1444,7 @@
     <string name="poi_monument_yes">Objet monumental</string>
     <string name="poi_payment_cheque_yes">Chèques</string>
     <string name="poi_payment_cheque_no">Chèques non acceptés</string>
-    <string name="poi_microbrewery_yes">Oui</string>
+    <string name="poi_microbrewery_yes">Oui ; microbrasserie</string>
     <string name="poi_microbrewery_no">Pas de microbrasserie</string>
     <string name="poi_takeaway_no">Pas de vente à emporter</string>
     <string name="poi_outdoor_seating_yes">Terrasse : oui</string>
@@ -1655,7 +1655,7 @@
     <string name="poi_sauna_yes">Sauna</string>
     <string name="poi_solarium_yes">Solarium</string>
     <string name="poi_dojo">Dojo</string>
-    <string name="poi_bench_yes">Oui</string>
+    <string name="poi_bench_yes">Oui ; banc</string>
     <string name="poi_bench_no">Sans banc</string>
     <string name="poi_bin_yes">Avec poubelle</string>
     <string name="poi_bin_no">Sans poubelle</string>
@@ -2142,7 +2142,7 @@
     <string name="poi_board_type_technology">Technologie</string>
     <string name="poi_board_type_astronomy">Astronomie</string>
     <string name="poi_toll_hgv_yes">Péage poids lourd</string>
-    <string name="poi_tactile_paving_yes">Oui</string>
+    <string name="poi_tactile_paving_yes">Oui ; bande podotactile</string>
     <string name="poi_tactile_paving_no">Sans surface podotactile</string>
     <string name="poi_railway_level_crossing">Passage à niveau</string>
     <string name="poi_xmas">Noël</string>
@@ -2197,8 +2197,8 @@
     <string name="poi_diet_lactose_free_filter_yes">Sans lactose</string>
     <string name="poi_drive_in_yes">Oui</string>
     <string name="poi_drive_through_yes">Oui</string>
-    <string name="poi_takeaway_filter_yes">Oui</string>
-    <string name="poi_delivery_filter_yes">Oui</string>
+    <string name="poi_takeaway_filter_yes">Oui ; à emporter</string>
+    <string name="poi_delivery_filter_yes">Oui ; livraison</string>
     <string name="poi_outdoor_seating_filter_yes">Oui</string>
     <string name="poi_brushless_yes">Oui</string>
     <string name="poi_architecture_stalinist_neoclassicism">Architecture : néoclassicisme stalinien</string>
@@ -4221,4 +4221,11 @@
     <string name="poi_computer_repair_no">Réparation d\'ordinateurs : non</string>
     <string name="poi_computer_parts_yes">Oui</string>
     <string name="poi_computer_parts_no">Pièces d’ordinateurs : non</string>
+    <string name="poi_hot_water_no">Eau chaude : non</string>
+    <string name="poi_post_office_opening_hours">Horaire d\'ouverture de la poste</string>
+    <string name="poi_post_office_collection_times">Heure de levée</string>
+    <string name="poi_post_office_type">Type</string>
+    <string name="poi_avalanche_transceiver_training">Zone d\'entraînement au DVA</string>
+    <string name="poi_avalanche_transceiver_checkpoint">Point de contrôle DVA</string>
+    <string name="poi_avalanche_transceiver">Détecteur de victime d\'avalanches ; DVA ; Appareil de recherche de victimes d\'avalanche ; ARVA</string>
 </resources>

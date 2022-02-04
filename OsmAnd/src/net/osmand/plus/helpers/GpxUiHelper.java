@@ -1,5 +1,19 @@
 package net.osmand.plus.helpers;
 
+import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
+import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
+import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
+import static net.osmand.plus.track.GpxAppearanceAdapter.SHOW_START_FINISH_ATTR;
+import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
+import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+import static net.osmand.util.Algorithms.capitalizeFirstLetter;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -14,9 +28,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
@@ -33,10 +45,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.ListPopupWindow;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.charts.LineChart.LabelDisplayData;
-import com.github.mikephil.charting.charts.LineChart.YAxisLabelView;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -82,6 +101,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.plus.track.ChartLabel;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.GpxAppearanceAdapter.AppearanceListItem;
 import net.osmand.plus.track.GpxMarkerView;
@@ -122,28 +142,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.ListPopupWindow;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-
-import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
-import static net.osmand.plus.track.GpxAppearanceAdapter.SHOW_START_FINISH_ATTR;
-import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
-import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
-import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 public class GpxUiHelper {
 
@@ -331,15 +329,24 @@ public class GpxUiHelper {
 	}
 
 	@NonNull
-	public static String getGpxTitle(String fileName) {
-		if (fileName == null) {
+	public static String getGpxTitle(@Nullable String name) {
+		if (Algorithms.isEmpty(name)) {
 			return "";
 		}
-		String gpxTitle = fileName;
+		String gpxTitle = name;
 		if (gpxTitle.toLowerCase().endsWith(GPX_FILE_EXT)) {
 			gpxTitle = gpxTitle.substring(0, gpxTitle.length() - GPX_FILE_EXT.length());
 		}
 		return gpxTitle.replace('_', ' ');
+	}
+
+	@NonNull
+	public static String getGpxDirTitle(@Nullable String name) {
+		if (Algorithms.isEmpty(name)) {
+			return "";
+		}
+		String groupName = name.replaceAll("_", " ").replace(IndexConstants.GPX_FILE_EXT, "");
+		return capitalizeFirstLetter(groupName);
 	}
 
 	private static class DialogGpxDataItemCallback implements GpxDataItemCallback {
@@ -660,7 +667,7 @@ public class GpxUiHelper {
 							confirm.setMessage(activity.getString(R.string.enable_plugin_monitoring_services));
 							confirm.show();
 						} else if (!app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
-							monitoringPlugin.controlDialog(activity, false);
+							monitoringPlugin.controlDialog(activity);
 						}
 					}
 				} else {
@@ -1049,17 +1056,18 @@ public class GpxUiHelper {
 		return allGpxFiles;
 	}
 
-	public static void readGpxDirectory(File dir, final List<GPXInfo> list, String parent,
-										 boolean absolutePath) {
+	public static void readGpxDirectory(@Nullable File dir, @NonNull List<GPXInfo> list,
+	                                    @NonNull String parent, boolean absolutePath) {
 		if (dir != null && dir.canRead()) {
 			File[] files = dir.listFiles();
 			if (files != null) {
-				for (File f : files) {
-					if (f.getName().toLowerCase().endsWith(GPX_FILE_EXT)) {
-						list.add(new GPXInfo(absolutePath ? f.getAbsolutePath() :
-								parent + f.getName(), f.lastModified(), f.length()));
-					} else if (f.isDirectory()) {
-						readGpxDirectory(f, list, parent + f.getName() + "/", absolutePath);
+				for (File file : files) {
+					String name = file.getName();
+					if (file.isFile() && name.toLowerCase().endsWith(GPX_FILE_EXT)) {
+						String fileName = absolutePath ? file.getAbsolutePath() : parent + name;
+						list.add(new GPXInfo(fileName, file.lastModified(), file.length()));
+					} else if (file.isDirectory()) {
+						readGpxDirectory(file, list, parent + name + "/", absolutePath);
 					}
 				}
 			}
@@ -1146,42 +1154,22 @@ public class GpxUiHelper {
 		markerView.setChartView(mChart); // For bounds control
 		mChart.setMarker(markerView); // Set the marker to the chart
 		mChart.setDrawMarkers(true);
-		mChart.setYAxisLabelView(new YAxisLabelView(context, R.layout.chart_label) {
 
-			private static final int SPAN_FLAG = Spannable.SPAN_EXCLUSIVE_EXCLUSIVE;
+		ChartLabel chartLabel = new ChartLabel(context, R.layout.chart_label);
+		chartLabel.setChart(mChart);
+		mChart.setYAxisLabelView(chartLabel);
 
-			private final TextView label = findViewById(R.id.label);
-
-			@Override
-			public void updateLabel(@NonNull LabelDisplayData leftYAxisData, @Nullable LabelDisplayData rightYAxisData) {
-				if (rightYAxisData == null) {
-					SpannableString displayText = new SpannableString(leftYAxisData.getText());
-					displayText.setSpan(new ForegroundColorSpan(leftYAxisData.getColor()), 0,
-							displayText.length(), SPAN_FLAG);
-					label.setText(displayText);
-				} else {
-					String combinedPlainText = context.getString(R.string.ltr_or_rtl_combine_via_comma,
-							leftYAxisData.getText(), rightYAxisData.getText());
-					SpannableString displayText = new SpannableString(combinedPlainText);
-
-					boolean rtl = AndroidUtils.isLayoutRtl(context);
-					LabelDisplayData first = rtl ? rightYAxisData : leftYAxisData;
-					int edge = rtl ? first.getText().length() : first.getText().length() + 1;
-					displayText.setSpan(new ForegroundColorSpan(leftYAxisData.getColor()), 0, edge, SPAN_FLAG);
-					displayText.setSpan(new ForegroundColorSpan(rightYAxisData.getColor()), edge,
-							displayText.length(), SPAN_FLAG);
-
-					label.setText(displayText);
-				}
-			}
-		});
-
+		int xAxisRulerColor = ContextCompat.getColor(context, R.color.gpx_chart_black_grid);
 		int labelsColor = ContextCompat.getColor(context, R.color.description_font_and_bottom_sheet_icons);
 		XAxis xAxis = mChart.getXAxis();
-		xAxis.setDrawAxisLine(false);
+		xAxis.setDrawAxisLine(true);
+		xAxis.setDrawAxisLineBehindData(false);
+		xAxis.setAxisLineWidth(1);
+		xAxis.setAxisLineColor(xAxisRulerColor);
 		xAxis.setDrawGridLines(true);
+		xAxis.setDrawGridLinesBehindData(false);
 		xAxis.setGridLineWidth(1.5f);
-		xAxis.setGridColor(ContextCompat.getColor(context, R.color.gpx_chart_black_grid));
+		xAxis.setGridColor(xAxisRulerColor);
 		xAxis.enableGridDashedLine(25f, Float.MAX_VALUE, 0f);
 		xAxis.setPosition(BOTTOM);
 		xAxis.setTextColor(labelsColor);
@@ -1497,7 +1485,8 @@ public class GpxUiHelper {
 
 		List<Entry> values = calculateElevationArray(analysis, axisType, divX, convEle, true, calcWithoutGaps);
 
-		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.ALTITUDE, axisType);
+		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.ALTITUDE,
+				axisType, !useRightAxis);
 		dataSet.priority = (float) (analysis.avgElevation - analysis.minElevation) * convEle;
 		dataSet.divX = divX;
 		dataSet.mulY = convEle;
@@ -1632,7 +1621,8 @@ public class GpxUiHelper {
 			}
 		}
 
-		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.SPEED, axisType);
+		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.SPEED,
+				axisType, !useRightAxis);
 
 		String format = null;
 		if (dataSet.getYMax() < 3) {
@@ -1823,7 +1813,8 @@ public class GpxUiHelper {
 			slopeValues.add(lastEntry);
 		}
 
-		OrderedLineDataSet dataSet = new OrderedLineDataSet(slopeValues, "", GPXDataSetType.SLOPE, axisType);
+		OrderedLineDataSet dataSet = new OrderedLineDataSet(slopeValues, "", GPXDataSetType.SLOPE,
+				axisType, !useRightAxis);
 		dataSet.divX = divX;
 		dataSet.units = mainUnitY;
 
@@ -1955,16 +1946,20 @@ public class GpxUiHelper {
 		private final GPXDataSetType dataSetType;
 		private final GPXDataSetAxisType dataSetAxisType;
 
+		private final boolean leftAxis;
+
 		float priority;
 		String units;
 		float divX = 1f;
 		float divY = 1f;
 		float mulY = 1f;
 
-		OrderedLineDataSet(List<Entry> yVals, String label, GPXDataSetType dataSetType, GPXDataSetAxisType dataSetAxisType) {
+		OrderedLineDataSet(List<Entry> yVals, String label, GPXDataSetType dataSetType,
+		                   GPXDataSetAxisType dataSetAxisType, boolean leftAxis) {
 			super(yVals, label);
 			this.dataSetType = dataSetType;
 			this.dataSetAxisType = dataSetAxisType;
+			this.leftAxis = leftAxis;
 		}
 
 		public GPXDataSetType getDataSetType() {
@@ -1993,6 +1988,10 @@ public class GpxUiHelper {
 
 		public String getUnits() {
 			return units;
+		}
+
+		public boolean isLeftAxis() {
+			return leftAxis;
 		}
 	}
 

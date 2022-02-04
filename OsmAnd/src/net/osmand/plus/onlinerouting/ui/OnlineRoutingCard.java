@@ -13,8 +13,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
@@ -24,12 +22,11 @@ import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
+import net.osmand.plus.widgets.chips.ChipItem;
+import net.osmand.plus.widgets.chips.HorizontalChipsView;
 
 import java.util.List;
 
@@ -38,8 +35,7 @@ public class OnlineRoutingCard extends MapBaseCard {
 	private View headerContainer;
 	private TextView tvHeaderTitle;
 	private TextView tvHeaderSubtitle;
-	private RecyclerView rvSelectionMenu;
-	private HorizontalSelectionAdapter adapter;
+	private HorizontalChipsView chipsView;
 	private TextView tvDescription;
 	private View checkBoxContainer;
 	private CheckBox checkBox;
@@ -72,7 +68,7 @@ public class OnlineRoutingCard extends MapBaseCard {
 		headerContainer = view.findViewById(R.id.header);
 		tvHeaderTitle = view.findViewById(R.id.title);
 		tvHeaderSubtitle = view.findViewById(R.id.subtitle);
-		rvSelectionMenu = view.findViewById(R.id.selection_menu);
+		chipsView = view.findViewById(R.id.selection_menu);
 		tvDescription = view.findViewById(R.id.description);
 		checkBoxContainer = view.findViewById(R.id.checkbox_container);
 		checkBox = view.findViewById(R.id.checkbox);
@@ -129,29 +125,24 @@ public class OnlineRoutingCard extends MapBaseCard {
 		tvHeaderSubtitle.setText(subtitle);
 	}
 
-	public void setSelectionMenu(@NonNull List<HorizontalSelectionItem> items,
-								 @NonNull String selectedItemTitle,
-								 @NonNull final CallbackWithObject<HorizontalSelectionItem> callback) {
-		showElements(rvSelectionMenu);
-		rvSelectionMenu.setLayoutManager(
-				new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
-		adapter = new HorizontalSelectionAdapter(app, nightMode);
-		adapter.setItems(items);
-		adapter.setSelectedItemByTitle(selectedItemTitle);
-		adapter.setListener(new HorizontalSelectionAdapterListener() {
-			@Override
-			public void onItemSelected(HorizontalSelectionItem item) {
-				if (callback.processResult(item)) {
-					adapter.setSelectedItem(item);
-				}
-			}
+	public void setSelectionMenu(@NonNull List<ChipItem> items,
+								 @NonNull String selectedId,
+								 @NonNull final CallbackWithObject<ChipItem> callback) {
+		showElements(chipsView);
+		chipsView.setItems(items);
+		ChipItem selected = chipsView.getChipById(selectedId);
+		chipsView.setSelected(selected);
+		chipsView.setOnSelectChipListener(chip -> {
+			chipsView.smoothScrollTo(chip);
+			callback.processResult(chip);
+			return true;
 		});
-		rvSelectionMenu.setAdapter(adapter);
+		chipsView.notifyDataSetChanged();
 	}
 
 	private void updateBottomMarginSelectionMenu() {
-		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) rvSelectionMenu.getLayoutParams();
-		int contentPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
+		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) chipsView.getLayoutParams();
+		int contentPadding = getDimen(R.dimen.content_padding);
 		params.bottomMargin = isVisibleViewsBelowSelectionMenu() ? contentPadding : 0;
 	}
 

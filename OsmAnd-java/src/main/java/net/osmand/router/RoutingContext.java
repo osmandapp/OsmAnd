@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -41,6 +40,7 @@ import net.osmand.util.MapUtils;
 public class RoutingContext {
 
 	public static boolean SHOW_GC_SIZE = false;
+	public static boolean PRINT_ROUTING_ALERTS = false;
 	 
 	
 	private final static Log log = PlatformUtil.getLog(RoutingContext.class);
@@ -97,10 +97,12 @@ public class RoutingContext {
 	// callback of processing segments
 	RouteSegmentVisitor visitor = null;
 
+	public int alertFasterRoadToVisitedSegments;
+	public int alertSlowerSegmentedWasVisitedEarlier;
+	
 	// old planner
 	public FinalRouteSegment finalRouteSegment;
-
-
+	
 	
 	RoutingContext(RoutingContext cp) {
 		this.config = cp.config;
@@ -109,6 +111,8 @@ public class RoutingContext {
 		this.leftSideNavigation = cp.leftSideNavigation;
 		this.reverseMap.putAll(cp.reverseMap);
 		this.nativeLib = cp.nativeLib;
+		this.visitor = cp.visitor;
+		this.calculationProgress = cp.calculationProgress;
 	}
 	
 	RoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] map, RouteCalculationMode calcMode) {
@@ -361,28 +365,9 @@ public class RoutingContext {
 		return loadTileHeaders(zoomToLoad, tileX, tileY);
 	}
 	
-	public void checkOldRoutingFiles(BinaryMapIndexReader key) {
-		if(calculationMode == RouteCalculationMode.BASE && key.getDateCreated() < 1390172400000l) { // new SimpleDateFormat("dd-MM-yyyy").parse("20-01-2014").getTime()
-			System.err.println("Old routing file : " + key.getDateCreated() + " " + new Date(key.getDateCreated()));
-			String map = "";
-			for (RouteRegion r : key.getRoutingIndexes()) {
-				map = r.getName();
-			}
- 			throw new RuntimeException("Update map '"+map+ "' !");
-		}		
-	}
 	
-	public void checkOldRoutingFiles(int x31, int y31) {
-		for (Entry<BinaryMapIndexReader, List<RouteSubregion>> r : map.entrySet()) {
-			BinaryMapIndexReader reader = r.getKey();
-			for(RouteRegion reg : reader.getRoutingIndexes()) {
-				if(reg.contains(x31, y31)) {
-					checkOldRoutingFiles(reader);
-					break;
-				}
-			}
-		}
-	}
+	
+	
 	
 	public List<RoutingSubregionTile> loadAllSubregionTiles(BinaryMapIndexReader reader, RouteSubregion reg) throws IOException {
 		List<RoutingSubregionTile> list = new ArrayList<RoutingContext.RoutingSubregionTile>();
@@ -406,9 +391,6 @@ public class RoutingContext {
 					long now = System.nanoTime();
 					// int rg = r.getValue().get(0).routeReg.regionsRead;
 					List<RouteSubregion> subregs = r.getKey().searchRouteIndexTree(request, r.getValue());
-					if(subregs.size() > 0) {
-						checkOldRoutingFiles(r.getKey());
-					}
 					for (RouteSubregion sr : subregs) {
 						int ind = searchSubregionTile(sr);
 						RoutingSubregionTile found;
@@ -962,8 +944,8 @@ public class RoutingContext {
 	}
 
 	public int getVisitedSegments() {
-		if(calculationProgress != null) {
-			return calculationProgress.visitedSegments; 
+		if (calculationProgress != null) {
+			return calculationProgress.visitedSegments;
 		}
 		return 0;
 	}
@@ -982,6 +964,7 @@ public class RoutingContext {
 		nativeRoutingContext = 0;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void finalize() throws Throwable {
 		deleteNativeRoutingContext();

@@ -1838,13 +1838,13 @@
     <string name="poi_service_bicycle_chaintool_no">عربة دراجة: لا</string>
     <string name="poi_service_bicycle_chaintool_yes">أداة ضبط سلسلة الدراجة؛ أداة ضبط السلسلة للدراجة الهوائية؛ أداة ضبط السلسلة للدراجة النارية</string>
     <string name="poi_service_bicycle_cleaning_no">تنظيف الدراجة: لا</string>
-    <string name="poi_service_bicycle_cleaning_yes">تنظيف؛تنظيف الدراجات؛تنظيف الدراجات النارية</string>
+    <string name="poi_service_bicycle_cleaning_yes">تنظيف؛الدراجات؛الدراجات النارية</string>
     <string name="poi_service_bicycle_diy_no">أدوات دراجة لإصلاح DIY: لا</string>
     <string name="poi_service_bicycle_diy_yes">أدوات لإصلاح DIY؛أدوات DIY للدراجات؛أدوات DIY للدراجات النارية</string>
     <string name="poi_service_bicycle_pump_no">مضخة دراجة: لا</string>
-    <string name="poi_service_bicycle_pump_yes">مضخة؛مضخة دراجات؛مضخة دراجات نارية</string>
+    <string name="poi_service_bicycle_pump_yes">مضخة؛دراجات؛دراجات نارية</string>
     <string name="poi_service_bicycle_rental_no">تأجير دراجات: لا</string>
-    <string name="poi_service_bicycle_rental_yes">تأجير؛تأجير دراجات هوائية؛تأجير دراجات نارية</string>
+    <string name="poi_service_bicycle_rental_yes">تأجير؛دراجات هوائية؛دراجات نارية</string>
     <string name="poi_service_bicycle_repair_no">إصلاح الدراجات: لا</string>
     <string name="poi_service_bicycle_repair_yes">تصليح؛إصلاح الدراجات ؛ إصلاح الدراجات النارية</string>
     <string name="poi_service_bicycle_retail_no">بيع الدراجات بالتجزئة: لا</string>
@@ -4278,8 +4278,9 @@
     <string name="poi_post_office_opening_hours">ساعات عمل مكتب البريد</string>
     <string name="poi_post_office_post_annex">ملحق بريد</string>
     <string name="poi_post_office_post_partner">شريك بريد</string>
-    <string name="poi_blowhole">فوهة انفجارية</string>
+    <string name="poi_blowhole">فتحة نفث</string>
     <string name="poi_skate">متجر تزلج</string>
-    <string name="poi_collector">جامع</string>
-    <string name="poi_books_adults">راشدون</string>
+    <string name="poi_collector">محل أشياء مجمعة</string>
+    <string name="poi_books_adults">الكبار</string>
+    <string name="poi_hospice">رعاية المرضى المسنين</string>
 </resources>

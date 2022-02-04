@@ -4519,4 +4519,8 @@
     <string name="rendering_value_all_name">Все</string>
     <string name="rendering_value_omit_name">Пропустить</string>
     <string name="save_track_to_gpx_descrp">Запускать запись трека во время навигации. По завершению трек будет сохранен автоматически.</string>
+    <string name="gpx_no_routes_title">Нет маршрутов</string>
+    <string name="gpx_no_routes_descr">Для добавления маршрута в файл вы можете воспользоваться инструментом «%1$s».</string>
+    <string name="please_provide_group_name_message">Укажите название группы.</string>
+    <string name="quick_action_add_route_descr">Кнопка для начала построения маршрута из центра экрана.</string>
 </resources>

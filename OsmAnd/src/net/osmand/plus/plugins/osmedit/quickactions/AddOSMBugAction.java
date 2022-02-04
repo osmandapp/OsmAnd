@@ -9,9 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 
 import net.osmand.data.LatLon;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
@@ -24,8 +24,8 @@ public class AddOSMBugAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(12,
 			"osmbug.add", AddOSMBugAction.class).
-			nameRes(R.string.quick_action_add_osm_bug).iconRes(R.drawable.ic_action_osm_note_add).
-			category(QuickActionType.CREATE_CATEGORY);
+			nameRes(R.string.quick_action_add_osm_bug).iconRes(R.drawable.ic_action_osm_note_add)
+			.category(QuickActionType.CREATE_CATEGORY);
 
 	public AddOSMBugAction() {
 		super(TYPE);

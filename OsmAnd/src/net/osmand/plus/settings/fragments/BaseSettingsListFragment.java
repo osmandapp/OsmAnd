@@ -207,12 +207,7 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 			View emptyView = new View(context);
 			emptyView.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, padding));
 			listView.addFooterView(emptyView);
-			ScrollUtils.addOnGlobalLayoutListener(listView, new Runnable() {
-				@Override
-				public void run() {
-					listView.requestLayout();
-				}
-			});
+			ScrollUtils.addOnGlobalLayoutListener(listView, listView::requestLayout);
 		}
 	}
 

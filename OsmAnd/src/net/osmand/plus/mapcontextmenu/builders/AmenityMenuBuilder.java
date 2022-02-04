@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
 import static net.osmand.data.Amenity.MAPILLARY;
 
 import android.content.Context;
@@ -190,7 +192,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			needLinks = false;
 		}
 		textView.setText(text);
-		if (needLinks && Linkify.addLinks(textView, Linkify.ALL)) {
+		if (needLinks && customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID) && Linkify.addLinks(textView, Linkify.ALL)) {
 			textView.setMovementMethod(null);
 			textView.setLinkTextColor(linkTextColor);
 			textView.setOnTouchListener(new ClickableSpanTouchListener());
@@ -270,16 +272,14 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		((LinearLayout) view).addView(baseView);
 
 		if (isPhoneNumber) {
-			ll.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(final View v) {
+			ll.setOnClickListener(v -> {
+				if (customization.isFeatureEnabled(CONTEXT_MENU_PHONE_ID)) {
 					showDialog(text, Intent.ACTION_DIAL, "tel:", v);
 				}
 			});
 		} else if (isUrl) {
-			ll.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
+			ll.setOnClickListener(v -> {
+				if (customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID)) {
 					if (text.contains(WIKI_LINK)) {
 						if (Version.isPaidVersion(app)) {
 							WikiArticleHelper wikiArticleHelper = new WikiArticleHelper(mapActivity, !light);

@@ -41,7 +41,6 @@ import net.osmand.plus.mapcontextmenu.controllers.MapDataMenuController;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.MapMarkerEditor;
 import net.osmand.plus.mapcontextmenu.editors.PointEditor;
-import net.osmand.plus.mapcontextmenu.editors.RtePtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
@@ -75,8 +74,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private FavoritePointEditor favoritePointEditor;
 	@Nullable
 	private WptPtEditor wptPtEditor;
-	@Nullable
-	private RtePtEditor rtePtEditor;
 	@Nullable
 	private MapMarkerEditor mapMarkerEditor;
 
@@ -176,9 +173,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (wptPtEditor != null) {
 			wptPtEditor.setMapActivity(mapActivity);
 		}
-		if (rtePtEditor != null) {
-			rtePtEditor.setMapActivity(mapActivity);
-		}
 		if (mapMarkerEditor != null) {
 			mapMarkerEditor.setMapActivity(mapActivity);
 		}
@@ -245,15 +239,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	@Nullable
-	public RtePtEditor getRtePtPointEditor() {
-		MapActivity mapActivity = getMapActivity();
-		if (rtePtEditor == null && mapActivity != null) {
-			rtePtEditor = new RtePtEditor(mapActivity);
-		}
-		return rtePtEditor;
-	}
-
-	@Nullable
 	public MapMarkerEditor getMapMarkerEditor() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapMarkerEditor == null && mapActivity != null) {
@@ -267,8 +252,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			return favoritePointEditor;
 		} else if (wptPtEditor != null && wptPtEditor.getFragmentTag().equals(tag)) {
 			return wptPtEditor;
-		} else if (rtePtEditor != null && rtePtEditor.getFragmentTag().equals(tag)) {
-			return rtePtEditor;
 		} else if (mapMarkerEditor != null && mapMarkerEditor.getFragmentTag().equals(tag)) {
 			return mapMarkerEditor;
 		}
@@ -1209,9 +1192,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				: RenderingIcons.getBigIconResourceId(preselectedIconName);
 	}
 
-	public void addWptPt(@NonNull LatLon latLon, @Nullable String title, @Nullable String address,
-	                     @Nullable String description, int color, @Nullable String backgroundType,
-	                     @Nullable String categoryName, int categoryColor, boolean skipDialog, @Nullable GPXFile gpxFile) {
+	public void addWptPt(@NonNull WptPt wptPt, @Nullable String categoryName, int categoryColor,
+	                     boolean skipDialog, @Nullable GPXFile gpxFile) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			WptPtEditor wptPtPointEditor = getWptPtPointEditor();
@@ -1220,17 +1202,15 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			}
 
 			if (gpxFile != null) {
-				wptPtPointEditor.add(gpxFile, latLon, title, address, description, color, backgroundType, categoryName, categoryColor, skipDialog);
+				wptPtPointEditor.add(gpxFile, wptPt, categoryName, categoryColor, skipDialog);
 			} else {
 				final List<SelectedGpxFile> list
 						= mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
 				if (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().showCurrentTrack)) {
 					GPXFile currentGpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
-					wptPtPointEditor.add(currentGpxFile, latLon, title, address, description, color,
-							backgroundType, categoryName, categoryColor, skipDialog);
+					wptPtPointEditor.add(currentGpxFile, wptPt, categoryName, categoryColor, skipDialog);
 				} else {
-					addNewWptToGPXFile(latLon, title, address, description, color, backgroundType,
-							categoryName, categoryColor, skipDialog);
+					addNewWptToGPXFile(wptPt, categoryName, categoryColor, skipDialog);
 				}
 			}
 		}
@@ -1246,8 +1226,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public void addNewWptToGPXFile(LatLon latLon, String title, String address, String description,
-	                               int color, String backgroundType, String categoryName, int categoryColor, boolean skipDialog) {
+	public void addNewWptToGPXFile(@NonNull WptPt wptPt, @Nullable String categoryName, int categoryColor, boolean skipDialog) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
@@ -1255,16 +1234,12 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				public boolean processResult(GPXFile[] result) {
 					MapActivity mapActivity = getMapActivity();
 					if (mapActivity != null) {
-						GPXFile gpxFile;
-						if (result != null && result.length > 0) {
-							gpxFile = result[0];
-						} else {
-							gpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
-						}
+						GPXFile gpxFile = result != null && result.length > 0
+								? result[0]
+								: mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
 						WptPtEditor wptPtPointEditor = getWptPtPointEditor();
 						if (wptPtPointEditor != null) {
-							wptPtPointEditor.add(gpxFile, latLon, title, address, description,
-									color, backgroundType, categoryName, categoryColor, skipDialog);
+							wptPtPointEditor.add(gpxFile, wptPt, categoryName, categoryColor, skipDialog);
 						}
 					}
 					return true;

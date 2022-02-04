@@ -14,7 +14,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -535,48 +534,58 @@ public class RouteResultPreparation {
 	void printResults(RoutingContext ctx, LatLon start, LatLon end, List<RouteSegmentResult> result) {
 		float completeTime = 0;
 		float completeDistance = 0;
-		for(RouteSegmentResult r : result) {
+		for (RouteSegmentResult r : result) {
 			completeTime += r.getSegmentTime();
 			completeDistance += r.getDistance();
 		}
 
-		println("ROUTE : ");
 		double startLat = start.getLatitude();
 		double startLon = start.getLongitude();
 		double endLat = end.getLatitude();
 		double endLon = end.getLongitude();
 		
-		String msg = String.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"%s\" \n"
-				+ "  start_lat=\"%.5f\" start_lon=\"%.5f\" target_lat=\"%.5f\" target_lon=\"%.5f\" "
-				+ " routing_time=\"%.2f\" loadedTiles=\"%d\" visitedSegments=\"%d\" complete_distance=\"%.2f\" complete_time=\"%.2f\" >",
-				ctx.config.routerName, startLat, startLon, endLat, endLon, ctx.routingTime, 
-				ctx.getLoadedTiles(), 
-				ctx.getVisitedSegments(), completeDistance, completeTime);
-//		String msg = MessageFormat.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"{4}\" \n"
-//				+ "    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\" {5} >", 
-//				startLat + "", startLon + "", endLat + "", endLon + "", ctx.config.routerName, 
-//				"loadedTiles = \"" + ctx.loadedTiles + "\" " + "visitedSegments = \"" + ctx.visitedSegments + "\" " +
-//				"complete_distance = \"" + completeDistance + "\" " + "complete_time = \"" + completeTime + "\" " +
-//				"routing_time = \"" + ctx.routingTime + "\" ");
+		String calcTime = "";
+		int segPerSec = 0;
+		if (ctx.calculationProgress != null && ctx.calculationProgress.timeToCalculate > 0) {
+			calcTime = String.format("%.2f", ctx.calculationProgress.timeToCalculate / 1e9);
+			segPerSec = (int) (ctx.getVisitedSegments() / (ctx.calculationProgress.timeToCalculate / 1e9));
+			
+		}
+		
+		String msg = String.format("<test vehicle=\"%s\" native=\"%s\" "
+				+ " start_lat=\"%.5f\" start_lon=\"%.5f\" target_lat=\"%.5f\" target_lon=\"%.5f\" \n "
+				+ " routing_time=\"%.2f\" complete_distance=\"%.2f\" complete_time=\"%.2f\" " 
+				+ " calc_timems=\"%s\" loaded_tiles=\"%d\" visited_segments=\"%d\" segments_1sec=\"%s\"  >",
+				ctx.config.routerName, ctx.nativeLib != null, startLat, startLon, endLat, endLon,
+				ctx.routingTime, completeDistance, completeTime,
+				calcTime, ctx.getLoadedTiles(), ctx.getVisitedSegments(), segPerSec);
 		log.info(msg);
-        println(msg);
+		String alerts = String.format("Alerts during routing: %d fastRoads, %d slowSegmentsEearlier",
+				ctx.alertFasterRoadToVisitedSegments, ctx.alertSlowerSegmentedWasVisitedEarlier);
+		if (ctx.alertFasterRoadToVisitedSegments + ctx.alertSlowerSegmentedWasVisitedEarlier == 0) {
+			alerts = "No alerts";
+		}
+		println("ROUTE. " + alerts);
 		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
+			println(msg);
 			org.xmlpull.v1.XmlSerializer serializer = null;
-			if(PRINT_TO_GPX_FILE != null) {
+			if (PRINT_TO_GPX_FILE != null) {
 				serializer = PlatformUtil.newSerializer();
 				try {
 					serializer.setOutput(new FileWriter(PRINT_TO_GPX_FILE));
 					serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
 					// indentation as 3 spaces
-//					serializer.setProperty("http://xmlpull.org/v1/doc/properties.html#serializer-indentation", "   ");
-//					// also set the line separator
-//					serializer.setProperty("http://xmlpull.org/v1/doc/properties.html#serializer-line-separator", "\n");
+					// serializer.setProperty("http://xmlpull.org/v1/doc/properties.html#serializer-indentation", " ");
+					// // also set the line separator
+					// serializer.setProperty("http://xmlpull.org/v1/doc/properties.html#serializer-line-separator",
+					// "\n");
 					serializer.startDocument("UTF-8", true);
 					serializer.startTag("", "gpx");
 					serializer.attribute("", "version", "1.1");
 					serializer.attribute("", "xmlns", "http://www.topografix.com/GPX/1/1");
 					serializer.attribute("", "xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
-					serializer.attribute("", "xmlns:schemaLocation", "http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
+					serializer.attribute("", "xmlns:schemaLocation",
+							"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
 					serializer.startTag("", "trk");
 					serializer.startTag("", "trkseg");
 				} catch (IOException e) {
@@ -686,9 +695,11 @@ public class RouteResultPreparation {
 					e.printStackTrace();
 				}
 			}
+			println("</test>");
+			// repeat to have infoprint
+			println(msg + "</test>");
 		}
-		println("</test>");
-		println(msg);
+		
 		
 		
 //		calculateStatistics(result);
@@ -780,7 +791,7 @@ public class RouteResultPreparation {
 					result.get(prevSegment).setDescription(
 							turn + MessageFormat.format(" and go {0,number,#.##} meters", dist));
 					if (result.get(prevSegment).getTurnType().isSkipToSpeak()) {
-						result.get(prevSegment).setDescription("-*" + result.get(prevSegment).getDescription());
+						result.get(prevSegment).setDescription("[MUTE] " + result.get(prevSegment).getDescription());
 					}
 				}
 				prevSegment = i;

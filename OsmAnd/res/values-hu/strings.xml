@@ -61,7 +61,7 @@
     <string name="accessibility_preferences_descr">Akadálymentességgel kapcsolatos beállítások.</string>
     <string name="shared_string_accessibility">Kisegítő lehetőségek</string>
     <string name="rendering_out_of_memory">Nincs elég folyamatmemória a kijelölt terület megjelenítéséhez</string>
-    <string name="use_fluorescent_overlays">Fluoreszkáló rátétrétegek</string>
+    <string name="use_fluorescent_overlays">Fluoreszkáló fedőrétegek</string>
     <string name="use_fluorescent_overlays_descr">Élénk színek használata az útvonalak megjelenítéséhez.</string>
     <string name="offline_edition">Offline szerkesztés</string>
     <string name="offline_edition_descr">Ha az offline szerkesztés engedélyezve van, akkor az alkalmazás a módosításokat először helyben menti és kérésre tölti fel, egyébként azonnal feltölti a módosításokat.</string>
@@ -130,7 +130,7 @@
     <string name="auto_follow_route_navigation_descr">Csak navigáció közben követi automatikusan a pozíciódat a térkép.</string>
     <string name="auto_follow_location_enabled">Automatikus követés.</string>
     <string name="pref_vector_rendering">Vektoros megjelenítés sajátos beállításai</string>
-    <string name="pref_overlay">Rátétréteg / alátétréteg</string>
+    <string name="pref_overlay">Fedőréteg / alátétréteg</string>
     <string name="pref_raster_map">Térképforrás beállítások</string>
     <string name="pref_vector_map">Vektoros térkép beállítások</string>
     <string name="delete_confirmation_msg">Biztosan törli: %1$s\?</string>
@@ -225,18 +225,18 @@
     <string name="voice_stream_notification">Üzenetjel hangcsatorna</string>
     <string name="voice_stream_music">Média/navigáció hangcsatorna</string>
     <string name="warning_tile_layer_not_downloadable">Az alkalmazás nem tudja letölteni a(z) %1$s térképréteget; az újratelepítés segíthet.</string>
-    <string name="overlay_transparency_descr">Rátétréteg átlátszóságának beállítása.</string>
-    <string name="overlay_transparency">Rátétréteg átlátszósága</string>
+    <string name="overlay_transparency_descr">Fedőréteg átlátszóságának beállítása.</string>
+    <string name="overlay_transparency">Fedőréteg átlátszósága</string>
     <string name="map_transparency_descr">Alaptérkép átlátszóságának beállítása.</string>
     <string name="map_transparency">Alaptérkép átlátszósága</string>
     <string name="modify_transparency">Átlátszóság beállítása (0 - átlátszó, 255 - átlátszatlan)</string>
     <string name="layer_underlay">Alátéttérkép…</string>
     <string name="map_underlay">Alátéttérkép</string>
     <string name="map_underlay_descr">Alátéttérkép kiválasztása</string>
-    <string name="layer_overlay">Rátéttérkép…</string>
+    <string name="layer_overlay">Fedőrétegtérkép…</string>
     <string name="shared_string_none">Nincs</string>
-    <string name="map_overlay">Rátéttérkép</string>
-    <string name="map_overlay_descr">Rátéttérkép kiválasztása</string>
+    <string name="map_overlay">Fedőrétegtérkép</string>
+    <string name="map_overlay_descr">Fedőrétegtérkép kiválasztása</string>
     <string name="tile_source_already_installed">A térkép már telepítve van, a beállítások frissülnek.</string>
     <string name="select_tile_source_to_install">(Csempés) térkép kiválasztása telepítéshez vagy frissítéshez.</string>
     <string name="internet_not_available">A műveletet nem lehetséges internetkapcsolat nélkül végrehajtani.</string>
@@ -389,7 +389,7 @@
     <string name="layer_route">Útvonal</string>
     <string name="shared_string_favorites">Kedvencek</string>
     <string name="layer_osm_bugs">OSM-jegyzetek (online)</string>
-    <string name="layer_poi">POI-rátétréteg…</string>
+    <string name="layer_poi">POI-fedőréteg…</string>
     <string name="layer_map">Térképforrás…</string>
     <string name="menu_layers">Térképrétegek</string>
     <string name="context_menu_item_search_poi">Érdekes pont (POI) keresése</string>
@@ -561,8 +561,8 @@
     <string name="show_view_angle">Látómező megjelenítése</string>
     <string name="map_view_3d_descr">A térkép 3D megjelenítésének engedélyezése.</string>
     <string name="map_view_3d">3D térképnézet</string>
-    <string name="show_poi_over_map_description">Utoljára használt POI-rátétréteg megjelenítése.</string>
-    <string name="show_poi_over_map">POI-rátétréteg megjelenítése</string>
+    <string name="show_poi_over_map_description">Utoljára használt POI-fedőréteg megjelenítése.</string>
+    <string name="show_poi_over_map">POI-fedőréteg megjelenítése</string>
     <string name="map_tile_source_descr">Online vagy gyorsítótárazott térképcsempék kiválasztása.</string>
     <string name="map_tile_source">Csempés térkép forrása</string>
     <string name="map_source">Térkép forrása</string>
@@ -880,7 +880,7 @@
     <string name="audionotes_location_not_defined">Ha szeretne jegyzetet adni a helyhez, koppintson a „Hely használata…” gombra.</string>
     <string name="map_widget_audionotes">Hangjegyzetek</string>
     <string name="audionotes_plugin_name">Hang- és videojegyzetek</string>
-    <string name="srtm_plugin_description">Ez a bővítmény egy szintvonal-fedvényt és egy domborzatárnyékolás réteget biztosít, amelyek az OsmAnd normál térképein jelennek meg. Ezt a funkcionalitást nagyon fogják értékelni a sportolók, túrázók, utazók és mindenki, akiket a táj domborzati szerkezete érdekel. (Vegye figyelembe, hogy a szintvonalak és a domborzatárnyékolás külön, további letöltés után érhető el a bővítmény engedélyezése után.) 
+    <string name="srtm_plugin_description">Ez a bővítmény egy szintvonal-fedvényt és egy domborzatárnyékolás fedőréteget biztosít, amelyek az OsmAnd normál térképein jelennek meg. Ezt a funkcionalitást nagyon fogják értékelni a sportolók, túrázók, utazók és mindenki, akiket a táj domborzati szerkezete érdekel. (Vegye figyelembe, hogy a szintvonalak és a domborzatárnyékolás külön, további letöltés után érhető el a bővítmény engedélyezése után.)
 \n
 \nA globális adatok (az északi 70° és déli 70° szélesség között) az SRTM (Shuttle Radar Topography Mission) és az ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mérésein alapulnak, amely a NASA Earsh Observing System zászlóshajójának, a Terra műholdnak a képalkotó berendezése. Az ASTER a NASA, a Japán Gazdasági, Kereskedelmi és Ipari Minisztérium (METI), valamint a Japán Űrügynökség (J-spacesystems) közös projektje.</string>
     <string name="recording_is_recorded">Hang-/videofelvétel. Leállításhoz koppintson az A/V widgetre.</string>
@@ -2124,10 +2124,10 @@
     <string name="quick_action_map_style_action">Térképstílus hozzáadása</string>
     <string name="quick_action_empty_param_error">Töltse ki az összes paramétert</string>
     <string name="quick_action_map_styles">Térképstílusok</string>
-    <string name="quick_action_map_overlay">Térképrátét módosítása</string>
-    <string name="quick_action_map_overlay_title">Térképrátétek</string>
-    <string name="quick_action_map_overlay_action">Rátétréteg hozzáadása</string>
-    <string name="quick_action_map_overlay_switch">A térképrátét erre módosult: %s.</string>
+    <string name="quick_action_map_overlay">Térképfedőréteg módosítása</string>
+    <string name="quick_action_map_overlay_title">Térképfedőrétegek</string>
+    <string name="quick_action_map_overlay_action">Fedőréteg hozzáadása</string>
+    <string name="quick_action_map_overlay_switch">A térképfedőréteg erre módosult: %s.</string>
     <string name="quick_action_map_underlay_switch">A térképalátét erre módosult: %s.</string>
     <string name="quick_action_map_underlay">Térképalátét módosítása</string>
     <string name="quick_action_map_underlay_title">Térképalátétek</string>
@@ -2233,7 +2233,7 @@
     <string name="quick_action_showhide_osmbugs_descr">Gomb, amely a térképen megjeleníti vagy elrejti az OSM-jegyzeteket.</string>
     <string name="sorted_by_distance">Távolság szerinti sorrendben</string>
     <string name="search_favorites">Keresés a Kedvencekben</string>
-    <string name="hillshade_menu_download_descr">A függőleges árnyékolás megjelenítéséhez töltse le a „Domborzatárnyékolás” térképet.</string>
+    <string name="hillshade_menu_download_descr">A függőleges árnyékolás megjelenítéséhez töltse le a „Domborzatárnyékolás” fedőrétegtérképet.</string>
     <string name="hillshade_purchase_header">A fokozatos függőleges területek megjelenítéséhez telepítse a „Szintvonalak” bővítményt.</string>
     <string name="hide_from_zoom_level">Elrejtés a következő nagyítási szinttől:</string>
     <string name="srtm_menu_download_descr">Töltse le a régió szintvonaltérképét.</string>
@@ -2723,7 +2723,7 @@
 \n • A pozíciód megosztása, hogy a barátaid megtalálhassanak
 \n • A legfontosabb helyeid „Kedvencként” tárolása
 \n • Kiválaszthatod hogyan jelenítsd meg a neveket a térképen: angolul, helyi nyelven, vagy fonetikus átírással
-\n • Speciális online csempék megjelenítése, műholdnézet (a Bingről), különböző rátétrétegek, mint túra/navigációs GPX sávok, és további állítható átlátszóságú rétegek
+\n • Speciális online csempék megjelenítése, műholdnézet (a Bingről), különböző fedőrétegek, mint túra/navigációs GPX sávok, és további állítható átlátszóságú rétegek
 \n</string>
     <string name="osmand_extended_description_part6">Séta, túra, városnézés
 \n • A térkép megjeleníti a séta- és túraútvonalakat
@@ -3221,7 +3221,7 @@
 \n • Választható térképigazítás az iránytű vagy a mozgás iránya alapján
 \n • Mentse el legfontosabb helyeit a Kedvencek közé
 \n • Jelenítse meg az Önhöz közeli érdekes pontokat (POI-kat)
-\n • Jelenítsen meg speciális online térképcsempéket, műholdképeket (Bing), különböző rátétrétegeket, például turisztikai/navigációs GPX-nyomvonalakat és további rátétrétegeket és állítsa be átlátszóságukat
+\n • Jelenítsen meg speciális online térképcsempéket, műholdképeket (Bing), különböző fedőrétegeket, például turisztikai/navigációs GPX-nyomvonalakat és további fedőrétegeket és állítsa be átlátszóságukat
 \n • Tetszés szerint megjelenítheti a helyneveket magyarul, angolul, a helyi nyelven vagy fonetikus átírással
 \n</string>
     <string name="osmand_plus_extended_description_part4">Az OSM és a Wikipédia adatainak használata
@@ -4505,4 +4505,7 @@
     <string name="rendering_value_omit_name">Kihagyás</string>
     <string name="rendering_attr_seabedDetail_description">További szöveges információ a tengerfenék felszínének minősítéséről, kombinált felszíntípusokról, valamint a növényzet és a tengeri füvek kategóriájáról és taxonjáról</string>
     <string name="rendering_attr_seabedDetail_name">Tengerfenék részletei</string>
+    <string name="save_track_to_gpx_descrp">Navigáció közben automatikusan elindítja a nyomvonalrögzítést. Amikor befejeződik, a nyomvonal automatikusan elmentődik.</string>
+    <string name="gpx_no_routes_title">Nincs útvonal</string>
+    <string name="gpx_no_routes_descr">A(z) „%1$s” eszközzel útvonalat adhat hozzá a fájlhoz.</string>
 </resources>
