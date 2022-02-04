@@ -522,7 +522,9 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 
 	public static void setItemBackground(Context context, boolean nightMode, View view, boolean enabled) {
 		if (view instanceof CardView) {
-			int colorId = enabled ? getActiveTransparentColorId(nightMode) : getInactiveButtonColorId(nightMode);
+			int colorId = enabled
+					? getActiveTransparentColorId(nightMode)
+					: ColorUtilities.getInactiveButtonsAndLinksColorId(nightMode);
 			((CardView) view).setCardBackgroundColor(AndroidUtils.createPressedColorStateList(
 					context, colorId, ColorUtilities.getActiveColorId(nightMode)
 			));
@@ -530,11 +532,12 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		}
 		Drawable background = AppCompatResources.getDrawable(context, getInactiveButtonBackgroundId(nightMode));
 		if (background != null && enabled) {
+			int inactiveColorId = ColorUtilities.getInactiveButtonsAndLinksColorId(nightMode);
+			int activeColorId = ColorUtilities.getActiveColorId(nightMode);
 			DrawableCompat.setTintList(background, AndroidUtils.createPressedColorStateList(
-					context, getInactiveButtonColorId(nightMode), ColorUtilities.getActiveColorId(nightMode)
-			));
+					context, inactiveColorId, activeColorId));
 		} else {
-			UiUtilities.tintDrawable(background, ContextCompat.getColor(context, getInactiveButtonColorId(nightMode)));
+			UiUtilities.tintDrawable(background, ColorUtilities.getInactiveButtonsAndLinksColor(context, nightMode));
 		}
 		view.setBackgroundDrawable(background);
 	}
@@ -694,11 +697,6 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	@ColorRes
 	public static int getSecondaryIconColorId(boolean nightMode) {
 		return nightMode ? R.color.icon_color_secondary_dark : R.color.icon_color_secondary_light;
-	}
-
-	@ColorRes
-	public static int getInactiveButtonColorId(boolean nightMode) {
-		return nightMode ? R.color.inactive_buttons_and_links_bg_dark : R.color.inactive_buttons_and_links_bg_light;
 	}
 
 	@ColorRes

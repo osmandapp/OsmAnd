@@ -235,6 +235,16 @@ public class ColorUtilities {
 	}
 
 	@ColorInt
+	public static int getInactiveButtonsAndLinksColor(@NonNull Context ctx, boolean nightMode) {
+		return ContextCompat.getColor(ctx, getInactiveButtonsAndLinksColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getInactiveButtonsAndLinksColorId(boolean nightMode) {
+		return nightMode ? R.color.inactive_buttons_and_links_bg_dark : R.color.inactive_buttons_and_links_bg_light;
+	}
+
+	@ColorInt
 	public static int getMapButtonIconColor(@NonNull Context ctx, boolean nightMode) {
 		return ContextCompat.getColor(ctx, getMapButtonIconColorId(nightMode));
 	}

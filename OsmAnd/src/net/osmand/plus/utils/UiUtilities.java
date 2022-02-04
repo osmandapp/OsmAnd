@@ -186,7 +186,7 @@ public class UiUtilities {
 		return drawable;
 	}
 
-	public static Drawable createTintedDrawable(Context context, @DrawableRes int resId, int color) {
+	public static Drawable createTintedDrawable(Context context, @DrawableRes int resId, @ColorInt int color) {
 		return tintDrawable(AppCompatResources.getDrawable(context, resId), color);
 	}
 

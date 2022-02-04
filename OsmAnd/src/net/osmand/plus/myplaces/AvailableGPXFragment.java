@@ -757,9 +757,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	                                          @NonNull String actionButton,
 	                                          @Nullable SelectionModeListener listener) {
 		long[] size = new long[1];
-		List<SelectableItem> items = new ArrayList<>();
+		List<SelectableItem<GpxInfo>> items = new ArrayList<>();
 		for (GpxInfo gpxInfo : selectedItems) {
-			SelectableItem item = new SelectableItem();
+			SelectableItem<GpxInfo> item = new SelectableItem<>();
 			item.setObject(gpxInfo);
 			item.setTitle(gpxInfo.getName());
 			item.setIconId(R.drawable.ic_notification_track);
@@ -767,7 +767,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			items.add(item);
 			size[0] += gpxInfo.getSize();
 		}
-		List<SelectableItem> selectedItems = new ArrayList<>(items);
+		List<SelectableItem<GpxInfo>> selectedItems = new ArrayList<>(items);
 		FragmentManager manager = activity.getSupportFragmentManager();
 		UploadMultipleGPXBottomSheet dialog = UploadMultipleGPXBottomSheet.showInstance(manager, items, selectedItems);
 		if (dialog != null) {
@@ -775,9 +775,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				@Override
 				public void onDialogCreated() {
 					dialog.setTitle(actionButton);
-					dialog.setApplyButtonTitle(app.getString(R.string.shared_string_continue));
-					String total = app.getString(R.string.shared_string_total);
-					dialog.setTitleDescription(app.getString(R.string.ltr_or_rtl_combine_via_colon, total,
+					dialog.setApplyButtonTitle(getString(R.string.shared_string_continue));
+					String total = getString(R.string.shared_string_total);
+					dialog.setTitleDescription(getString(R.string.ltr_or_rtl_combine_via_colon, total,
 							AndroidUtils.formatSize(app, size[0])));
 				}
 
@@ -787,8 +787,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			});
 			dialog.setOnApplySelectionListener(selItems -> {
 				List<GpxInfo> gpxInfos = new ArrayList<>();
-				for (SelectableItem item : selItems) {
-					gpxInfos.add((GpxInfo) item.getObject());
+				for (SelectableItem<GpxInfo> item : selItems) {
+					gpxInfos.add(item.getObject());
 				}
 				if (listener != null) {
 					listener.onItemsSelected(gpxInfos);

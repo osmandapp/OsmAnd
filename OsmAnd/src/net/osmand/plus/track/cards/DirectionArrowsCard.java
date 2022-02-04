@@ -36,19 +36,12 @@ public class DirectionArrowsCard extends MapBaseCard {
 		final CompoundButton compoundButton = view.findViewById(R.id.compound_button);
 		compoundButton.setChecked(trackDrawInfo.isShowArrows());
 
-		view.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				boolean checked = !compoundButton.isChecked();
-				compoundButton.setChecked(checked);
-				trackDrawInfo.setShowArrows(checked);
-				mapActivity.refreshMap();
-
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardPressed(DirectionArrowsCard.this);
-				}
-			}
+		view.setOnClickListener(v -> {
+			boolean checked = !compoundButton.isChecked();
+			compoundButton.setChecked(checked);
+			trackDrawInfo.setShowArrows(checked);
+			mapActivity.refreshMap();
+			notifyCardPressed();
 		});
 	}
 }

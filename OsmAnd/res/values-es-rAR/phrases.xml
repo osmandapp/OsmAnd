@@ -4283,4 +4283,8 @@
     <string name="poi_books_adults">Adultos</string>
     <string name="poi_collector">Coleccionista</string>
     <string name="poi_hospice">Hospicio;Residencia para desvalidos</string>
+    <string name="poi_telecommunication">Telecomunicaciones</string>
+    <string name="poi_avalanche_transceiver_training">Entrenamiento de transceptor de avalancha</string>
+    <string name="poi_avalanche_transceiver_checkpoint">Punto de control del transceptor de avalancha</string>
+    <string name="poi_avalanche_transceiver">Detector de víctimas de avalanchas; AVD;ARBA; Transceptor de avalanchas</string>
 </resources>

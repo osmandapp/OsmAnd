@@ -221,7 +221,11 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 			} else {
 				doUpdateWpt(name, category, description);
 			}
-			addLastUsedIcon(wpt.getIconName());
+
+			if (!Algorithms.isEmpty(wpt.getIconName())) {
+				addLastUsedIcon(wpt.getIconName());
+			}
+
 			mapActivity.refreshMap();
 			if (needDismiss) {
 				dismiss(false);

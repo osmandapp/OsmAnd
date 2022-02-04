@@ -40,20 +40,13 @@ public class ShowStartFinishCard extends MapBaseCard {
 		//compoundButton.setChecked(trackDrawInfo.isShowStartFinish());
 		compoundButton.setChecked(showStartFinishPreference.get());
 
-		view.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				boolean checked = !compoundButton.isChecked();
-				compoundButton.setChecked(checked);
-				//trackDrawInfo.setShowStartFinish(checked);
-				showStartFinishPreference.set(checked);
-				mapActivity.refreshMap();
-
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardPressed(ShowStartFinishCard.this);
-				}
-			}
+		view.setOnClickListener(v -> {
+			boolean checked = !compoundButton.isChecked();
+			compoundButton.setChecked(checked);
+			//trackDrawInfo.setShowStartFinish(checked);
+			showStartFinishPreference.set(checked);
+			mapActivity.refreshMap();
+			notifyCardPressed();
 		});
 	}
 }
