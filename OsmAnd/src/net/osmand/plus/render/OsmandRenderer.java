@@ -84,6 +84,7 @@ public class OsmandRenderer {
 		double order;
 		double area;
 		int objectType;
+		int orderByDenisty;
 	};
 
 	private static class IconDrawInfo {
@@ -421,7 +422,7 @@ public class OsmandRenderer {
 
 		};
 	}
-	
+
 	Comparator<MapDataObjectPrimitive> sortPolygonsOrder() {
 		return new Comparator<MapDataObjectPrimitive>() {
 
@@ -468,6 +469,7 @@ public class OsmandRenderer {
 							mapObj.order = order;
 							mapObj.typeInd = j;
 							mapObj.obj = o;
+							mapObj.orderByDenisty = render.getIntPropertyValue(render.ALL.R_ORDER_BY_DENSITY);
 							if(objectType == 3) {
 								MapDataObjectPrimitive pointObj = new MapDataObjectPrimitive();
 								pointObj.order = order;

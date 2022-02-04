@@ -20,7 +20,7 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -281,7 +281,9 @@ public class ShowHidePoiAction extends QuickAction {
 		final List<PoiUIFilter> list = new ArrayList<>();
 
 		for (PoiUIFilter f : poiFilters.getSortedPoiFilters(true)) {
-			addFilterToList(adapter, list, f);
+			if (!f.isCustomPoiFilter()) {
+				addFilterToList(adapter, list, f);
+			}
 		}
 
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();

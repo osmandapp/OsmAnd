@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.data.BarData;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -44,7 +44,7 @@ public class RouteInfoCard extends MapBaseCard {
 		GpxUiHelper.setupHorizontalGPXChart(getMyApplication(), chart, 5, 9, 24, true, nightMode);
 		BarData barData = GpxUiHelper.buildStatisticChart(app, chart, statistics, analysis, true, nightMode);
 		graphAdapter = new CustomChartAdapter(app, chart, true);
-		graphAdapter.setLegendContainer(container);
+		graphAdapter.setBottomInfoContainer(container);
 		graphAdapter.updateData(barData, statistics);
 		updateView();
 

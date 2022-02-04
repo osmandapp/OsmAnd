@@ -66,7 +66,7 @@ class LocationMessages(val app: TelegramApplication) {
 		return bufferedMessages.filter { it.chatId == chatId && it.type == TYPE_MAP }.sortedBy { it.time }
 	}
 
-	fun getIngoingMessages(currentUserId: Int, start: Long, end: Long): List<LocationMessage> {
+	fun getIngoingMessages(currentUserId: Long, start: Long, end: Long): List<LocationMessage> {
 		return dbHelper.getIngoingMessages(currentUserId, start, end)
 	}
 
@@ -74,19 +74,19 @@ class LocationMessages(val app: TelegramApplication) {
 		return dbHelper.getIngoingUserLocations(start, end)
 	}
 
-	fun getIngoingUserLocationsInChat(userId: Int, chatId: Long, deviceName: String, start: Long, end: Long): UserLocations? {
+	fun getIngoingUserLocationsInChat(userId: Long, chatId: Long, deviceName: String, start: Long, end: Long): UserLocations? {
 		return dbHelper.getIngoingUserLocationsInChat(userId, chatId, deviceName, start, end)
 	}
 
-	fun getMessagesForUserInChat(userId: Int, chatId: Long, deviceName: String, start: Long, end: Long): List<LocationMessage> {
+	fun getMessagesForUserInChat(userId: Long, chatId: Long, deviceName: String, start: Long, end: Long): List<LocationMessage> {
 		return dbHelper.getMessagesForUserInChat(userId, chatId, deviceName, start, end)
 	}
 
-	fun getMessagesForUser(userId: Int, start: Long, end: Long): List<LocationMessage> {
+	fun getMessagesForUser(userId: Long, start: Long, end: Long): List<LocationMessage> {
 		return dbHelper.getMessagesForUser(userId, start, end)
 	}
 
-	fun getLastLocationInfoForUserInChat(userId: Int, chatId: Long, deviceName: String) =
+	fun getLastLocationInfoForUserInChat(userId: Long, chatId: Long, deviceName: String) =
 		lastLocationPoints.sortedByDescending { it.time }.firstOrNull { it.userId == userId && it.chatId == chatId && it.deviceName == deviceName }
 
 	fun getLastLocationMessagesSinceTime(time: Long) = lastLocationPoints.filter { it.time > time }
@@ -210,7 +210,7 @@ class LocationMessages(val app: TelegramApplication) {
 					message.hdop, message.bearing, message.time, message.type, message.messageId, message.distanceFromPrev, message.deviceName))
 		}
 
-		internal fun getMessagesForUser(userId: Int, start: Long, end: Long): List<LocationMessage> {
+		internal fun getMessagesForUser(userId: Long, start: Long, end: Long): List<LocationMessage> {
 			val res = arrayListOf<LocationMessage>()
 			readableDatabase?.rawQuery(
 				"$TIMELINE_TABLE_SELECT WHERE $COL_USER_ID = ? AND $COL_TIME BETWEEN $start AND $end ORDER BY $COL_CHAT_ID ASC, $COL_TYPE DESC, $COL_TIME ASC ",
@@ -225,7 +225,7 @@ class LocationMessages(val app: TelegramApplication) {
 			return res
 		}
 
-		internal fun getIngoingMessages(currentUserId: Int, start: Long, end: Long): List<LocationMessage> {
+		internal fun getIngoingMessages(currentUserId: Long, start: Long, end: Long): List<LocationMessage> {
 			val res = arrayListOf<LocationMessage>()
 			readableDatabase?.rawQuery(
 				"$TIMELINE_TABLE_SELECT WHERE $COL_USER_ID != ? AND $COL_TIME BETWEEN $start AND $end ORDER BY $COL_USER_ID, $COL_CHAT_ID, $COL_TYPE DESC, $COL_TIME ",
@@ -244,7 +244,7 @@ class LocationMessages(val app: TelegramApplication) {
 			val res = arrayListOf<UserLocations>()
 			readableDatabase?.rawQuery("$TIMELINE_TABLE_SELECT WHERE $COL_TIME BETWEEN $start AND $end ORDER BY $COL_USER_ID, $COL_CHAT_ID, $COL_DEVICE_NAME, $COL_TYPE DESC, $COL_TIME ", null)?.apply {
 				if (moveToFirst()) {
-					var userId: Int
+					var userId: Long
 					var chatId: Long
 					var deviceName: String
 					var userLocations: UserLocations? = null
@@ -281,7 +281,7 @@ class LocationMessages(val app: TelegramApplication) {
 			return res
 		}
 
-		internal fun getIngoingUserLocationsInChat(userId: Int, chatId: Long, deviceName: String,start: Long, end: Long): UserLocations? {
+		internal fun getIngoingUserLocationsInChat(userId: Long, chatId: Long, deviceName: String,start: Long, end: Long): UserLocations? {
 			val userLocationsMap: MutableMap<Int, MutableList<UserTrkSegment>> = mutableMapOf()
 			val userLocations = UserLocations(userId,chatId,deviceName,userLocationsMap)
 			val whereDeviceQuery = if (deviceName.isNotEmpty()) "AND $COL_DEVICE_NAME = ?" else ""
@@ -310,7 +310,7 @@ class LocationMessages(val app: TelegramApplication) {
 			return userLocations
 		}
 
-		internal fun getMessagesForUserInChat(userId: Int, chatId: Long, deviceName: String, start: Long, end: Long): List<LocationMessage> {
+		internal fun getMessagesForUserInChat(userId: Long, chatId: Long, deviceName: String, start: Long, end: Long): List<LocationMessage> {
 			val res = arrayListOf<LocationMessage>()
 			val whereDeviceQuery = if (deviceName.isNotEmpty()) "AND $COL_DEVICE_NAME = ?" else ""
 			val args = if (deviceName.isNotEmpty()) arrayOf(userId.toString(), chatId.toString(), deviceName) else arrayOf(userId.toString(), chatId.toString())
@@ -355,7 +355,7 @@ class LocationMessages(val app: TelegramApplication) {
 		}
 
 		internal fun readLocationMessage(cursor: Cursor): LocationMessage {
-			val userId = cursor.getInt(0)
+			val userId = cursor.getLong(0)
 			val chatId = cursor.getLong(1)
 			val lat = cursor.getDouble(2)
 			val lon = cursor.getDouble(3)
@@ -470,7 +470,7 @@ class LocationMessages(val app: TelegramApplication) {
 	}
 
 	data class LocationMessage(
-		val userId: Int,
+		val userId: Long,
 		val chatId: Long,
 		val lat: Double,
 		val lon: Double,
@@ -497,7 +497,7 @@ class LocationMessages(val app: TelegramApplication) {
 		val deviceName: String)
 
 	data class UserLocations(
-		val userId: Int,
+		val userId: Long,
 		val chatId: Long,
 		val deviceName: String,
 		val locationsByType: Map<Int, List<UserTrkSegment>>

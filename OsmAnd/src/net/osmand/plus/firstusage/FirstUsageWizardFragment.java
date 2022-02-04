@@ -23,11 +23,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidNetworkUtils;
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.ValueHolder;
+import net.osmand.data.ValueHolder;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
@@ -275,59 +275,57 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	public void onStart() {
 		super.onStart();
 
-		final OsmandApplication app = getMyApplication();
-
+		final OsmandApplication app = requireMyApplication();
 		switch (wizardType) {
 			case SEARCH_LOCATION:
-			if (searchLocationByIp) {
-				final Map<String, String> pms = new LinkedHashMap<>();
-				pms.put("version", Version.getFullVersion(app));
-				try {
-					pms.put("aid", Secure.getString(app.getContentResolver(), Secure.ANDROID_ID));
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				new AsyncTask<Void, Void, String>() {
-
-					@Override
-					protected String doInBackground(Void... params) {
-						try {
-							return AndroidNetworkUtils.sendRequest(app, "https://osmand.net/api/geo-ip", pms,
-									"Requesting location by IP...", false, false);
-
-						} catch (Exception e) {
-							logError("Requesting location by IP error: ", e);
-							return null;
-						}
+				if (searchLocationByIp) {
+					final Map<String, String> pms = new LinkedHashMap<>();
+					pms.put("version", Version.getFullVersion(app));
+					try {
+						pms.put("aid", Secure.getString(app.getContentResolver(), Secure.ANDROID_ID));
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
+					new AsyncTask<Void, Void, String>() {
 
-					@Override
-					protected void onPostExecute(String response) {
-						if (response != null) {
+						@Override
+						protected String doInBackground(Void... params) {
 							try {
-								JSONObject obj = new JSONObject(response);
-								double latitude = obj.getDouble("latitude");
-								double longitude = obj.getDouble("longitude");
-								if (latitude == 0 && longitude == 0) {
-									showNoLocationFragment(getActivity());
-								} else {
-									location = new Location("geo-ip");
-									location.setLatitude(latitude);
-									location.setLongitude(longitude);
-									showSearchMapFragment(getActivity());
-								}
+								return AndroidNetworkUtils.sendRequest(app, "https://osmand.net/api/geo-ip", pms,
+										"Requesting location by IP...", false, false);
+
 							} catch (Exception e) {
-								logError("JSON parsing error: ", e);
+								logError("Requesting location by IP error: ", e);
+								return null;
+							}
+						}
+
+						@Override
+						protected void onPostExecute(String response) {
+							if (response != null) {
+								try {
+									JSONObject obj = new JSONObject(response);
+									double latitude = obj.getDouble("latitude");
+									double longitude = obj.getDouble("longitude");
+									if (latitude == 0 && longitude == 0) {
+										showNoLocationFragment(getActivity());
+									} else {
+										location = new Location("geo-ip");
+										location.setLatitude(latitude);
+										location.setLongitude(longitude);
+										showSearchMapFragment(getActivity());
+									}
+								} catch (Exception e) {
+									logError("JSON parsing error: ", e);
+									showNoLocationFragment(getActivity());
+								}
+							} else {
 								showNoLocationFragment(getActivity());
 							}
-						} else {
-							showNoLocationFragment(getActivity());
 						}
-					}
-				}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
-			} else {
-					FragmentActivity activity = getActivity();
+					}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				} else {
+					FragmentActivity activity = requireActivity();
 					if (!OsmAndLocationProvider.isLocationPermissionAvailable(activity)) {
 						ActivityCompat.requestPermissions(activity,
 								new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
@@ -338,10 +336,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 						locationSearchTimer.schedule(new TimerTask() {
 							@Override
 							public void run() {
-								FragmentActivity a = getActivity();
-								if (a != null) {
-									showNoLocationFragment(a);
-								}
+								app.runInUIThread(() -> showNoLocationFragment(activity));
 							}
 						}, 1000 * 10);
 					}

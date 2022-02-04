@@ -5,24 +5,23 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.mapcontextmenu.editors.RtePtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
-import net.osmand.plus.track.TrackMenuFragment;
+import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 
 import java.io.File;
+
+import androidx.annotation.NonNull;
 
 public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 	private final View view;
@@ -56,14 +55,7 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 				WptPtEditor editor = mapActivity.getContextMenu().getWptPtPointEditor();
 				if (editor != null) {
 					editor.setOnDismissListener(AddGpxPointBottomSheetHelper.this);
-					editor.setNewGpxPointProcessing(true);
-					editor.add(gpx, latLon, titleText);
-				}
-			} else if (pointDescription.isRte()) {
-				RtePtEditor editor = mapActivity.getContextMenu().getRtePtPointEditor();
-				if (editor != null) {
-					editor.setOnDismissListener(AddGpxPointBottomSheetHelper.this);
-					editor.setNewGpxPointProcessing(true);
+					editor.setNewGpxPointProcessing();
 					editor.add(gpx, latLon, titleText);
 				}
 			}
@@ -86,8 +78,6 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 		if (title.isEmpty()) {
 			if (pointDescription.isWpt()) {
 				title = mapActivity.getString(R.string.waypoint_one);
-			} else if (pointDescription.isRte()) {
-				title = mapActivity.getString(R.string.route_point_one);
 			}
 		}
 		titleText = title;
@@ -104,9 +94,6 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 		if (pointDescription.isWpt()) {
 			setTitle(mapActivity.getString(R.string.waypoint_one));
 			icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_marker_dark));
-		} else if (pointDescription.isRte()) {
-			setTitle(mapActivity.getString(R.string.route_point_one));
-			icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_markers_dark));
 		}
 		exitApplyPositionMode();
 		view.setVisibility(View.VISIBLE);

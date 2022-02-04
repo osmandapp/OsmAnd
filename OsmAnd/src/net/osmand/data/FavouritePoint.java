@@ -18,13 +18,13 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
+import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.settings.backend.BooleanPreference;
-import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.BooleanPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.util.Algorithms;
 
 import java.io.Serializable;
@@ -34,7 +34,6 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	private static final long serialVersionUID = 729654300829771466L;
 
 	private static final String HIDDEN = "hidden";
-	private static final String ADDRESS_EXTENSION = "address";
 	private static final String CALENDAR_EXTENSION = "calendar_event";
 	public static final BackgroundType DEFAULT_BACKGROUND_TYPE = BackgroundType.CIRCLE;
 	public static final int DEFAULT_UI_ICON_ID = R.drawable.mx_special_star;
@@ -522,7 +521,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		}
 		fp.setColor(pt.getColor(0));
 		fp.setVisible(!pt.getExtensionsToRead().containsKey(HIDDEN));
-		fp.setAddress(pt.getExtensionsToRead().get(ADDRESS_EXTENSION));
+		fp.setAddress(pt.getAddress());
 		String iconName = pt.getIconName();
 		if (iconName != null) {
 			fp.setIconIdFromName(iconName);
@@ -542,7 +541,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 			pt.getExtensionsToWrite().put(HIDDEN, "true");
 		}
 		if (isAddressSpecified()) {
-			pt.getExtensionsToWrite().put(ADDRESS_EXTENSION, getAddress());
+			pt.setAddress(getAddress());
 		}
 		if (getVisitedDate() != 0) {
 			pt.getExtensionsToWrite().put(VISITED_DATE, GPXUtilities.formatTime(getVisitedDate()));

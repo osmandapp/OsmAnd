@@ -1235,7 +1235,7 @@
     <string name="shared_string_collapse">Daralt</string>
     <string name="shared_string_tracks">İzlenen yollar</string>
     <string name="shared_string_currently_recording_track">Şu anda kaydedilen yol</string>
-    <string name="route_points">Rota noktaları</string>
+    <string name="route_points">Güzergah noktaları</string>
     <string name="track_segments">İz bölümü</string>
     <string name="track_points">İz noktası</string>
     <string name="record_plugin_name">Seyahat kaydetme</string>
@@ -1280,7 +1280,7 @@
     <string name="shared_string_location">Konum</string>
     <string name="share_osm_edits_subject">Osmand üzerinden paylaşılan OSM düzenlemeler</string>
     <string name="lang_nds">Aşağı Almanca</string>
-    <string name="lang_mk">Makedonyaca</string>
+    <string name="lang_mk">Makedonca</string>
     <string name="lang_fy">Frizce</string>
     <string name="lang_als">Arnavutça (Tosk)</string>
     <string name="read_more">Devamını oku</string>
@@ -1557,7 +1557,7 @@
     <string name="lang_fa">Farsça</string>
     <string name="lang_pl">Lehçe</string>
     <string name="lang_pt">Portekizce</string>
-    <string name="lang_ro">Romence</string>
+    <string name="lang_ro">Rumence</string>
     <string name="lang_ru">Rusça</string>
     <string name="lang_sc">Sardunyaca</string>
     <string name="lang_sr">Sırpça (kiril)</string>
@@ -1761,7 +1761,6 @@
     <string name="save_current_track_descr">Geçerli rotayı şimdi GPX dosyası olarak kaydedin.</string>
     <string name="save_current_track">Mevcut rotayı kaydet</string>
     <string name="save_track_to_gpx">Navigasyon sırasında rotayı otomatik kaydet</string>
-    <string name="save_track_to_gpx_descrp">Navigasyon sırasında GPX rotası otomatik olarak rotalar klasörüne kaydedilir.</string>
     <string name="save_track_interval_globally">Günlük aralığı</string>
     <string name="save_track_interval">Navigasyon sırasında kayıt aralığı</string>
     <string name="save_track_interval_descr">Navigasyon sırasında izlenen yol kaydı için kayıt aralığını belirtin</string>
@@ -4331,16 +4330,16 @@
     <string name="shared_string_precision">Hassasiyet</string>
     <string name="shared_string_statistics">İstatistikler</string>
     <string name="save_changes_into_file">Değişiklikleri dosyaya kaydet</string>
-    <string name="gps_filter_actions_description">OsmAnd, değişiklikleri dosyaya kaydetmeden yola uyguluyor. Değişiklikleri el ile kaydedebilirsiniz.</string>
+    <string name="gps_filter_actions_description">OsmAnd, değişiklikleri dosyayı güncellemeden yola uygulayacaktır. Değişiklikleri el ile kaydedebilirsiniz.</string>
     <string name="gps_filter_smoothing_desc">Noktalar arasındaki eşik mesafesini ayarlayın.
-\nSon görünür noktadan en az X uzaklıkta olan yol noktaları gizlenecektir.
-\nMesafe ne kadar büyükse, yol geometrisi o kadar basittir, dikkatli olun.</string>
+\nSon görünür noktadan en az bu uzaklıkta olmayan yol noktaları gizlenecektir.
+\nYüksek eşiklerin yol geometrisini aşırı basitleştirebileceğini unutmayın.</string>
     <string name="distance_between_points">Noktalar arasındaki mesafe</string>
-    <string name="gps_filter_precision">Asgari GPS Hassasiyeti</string>
+    <string name="gps_filter_precision">GPS hassasiyeti</string>
     <string name="gps_filter_smoothing">Düzeltme</string>
     <string name="save_as_copy">Kopya olarak kaydet</string>
     <string name="shared_string_gps_filter">GPS filtresi</string>
-    <string name="exit_without_saving_warning">Kaydetmeden çıkmak istediğinize emin misiniz\? Tüm değişiklikleri kaybedeceksiniz.</string>
+    <string name="exit_without_saving_warning">Değişiklikleri kaydetmeden çıkılsın mı\?</string>
     <string name="icon_group_industrial">Sanayi</string>
     <string name="delete_history_items">%1$s geçmiş ögesi silinsin mi\?</string>
     <string name="quick_action_toggle_preference">Tercihi değiştirmek için bir geçiş.</string>
@@ -4360,10 +4359,10 @@
     <string name="shared_string_hide_slope">Yamacı gizle</string>
     <string name="shared_string_uphill">Yokuş yukarı</string>
     <string name="elevation_profile">Yükseklik profili</string>
-    <string name="gps_filter_speed_altitude_desc">Belirlenen aralığa uyan yol noktaları grafikte ve haritada görünecek, geri kalanı gizlenecektir.</string>
-    <string name="gps_filter_hdop_desc">HDOP için izin verilen azami değeri ayarlayın.
-\nAyarlanan parametreden daha büyük olan noktalar gizlenecektir.</string>
-    <string name="storage_migration_wrong_folder_warning">Seçilen klasörde OsmAnd verilerini bulamıyoruz. Lütfen tekrar deneyin.</string>
+    <string name="gps_filter_speed_altitude_desc">Yalnızca belirlenen aralığa uyan yol noktaları grafikte ve haritada görünecek, geri kalanı gizlenecektir.</string>
+    <string name="gps_filter_hdop_desc">HDOP için kabul edilen azami değeri ayarlayın.
+\nDaha yüksek değere sahip noktalar gizlenecektir.</string>
+    <string name="storage_migration_wrong_folder_warning">Seçilen klasörde OsmAnd verileri bulunamadı. Lütfen tekrar deneyin.</string>
     <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="storage_found_files_size">%1$s dosya bulundu %2$s</string>
     <string name="history_actions_descr">Geçmişi bir dosyaya aktarabilirsiniz.</string>
@@ -4374,7 +4373,7 @@
     <string name="shared_string_grade">Derece</string>
     <string name="shared_string_downhill">Yokuş aşağı</string>
     <string name="rendering_attr_natureReserves_description">Doğa koruma alanı, korunan alanlar ve milli parkları göster.</string>
-    <string name="migration_files_present">%1$d dosyaları (%2$s) seçilen \'%3$s\' konumunda mevcut.</string>
+    <string name="migration_files_present">Seçilen \'%3$s\' konumunda %1$d dosya (%2$s) var.</string>
     <string name="storage_found_files_descr">%2$s dosyayı \"%3$s\"den \"%4$s\"e kopyalamak için \"%1$s\" düğmesine dokunun. Biraz zaman alabilir.</string>
     <string name="storage_copied_files_size">%1$s dosya kopyalandı %2$s</string>
     <string name="storage_copying_files_size">%1$s dosya kopyalanıyor %2$s</string>
@@ -4410,8 +4409,8 @@
     <string name="add_to_group">Gruba ekle</string>
     <string name="app_modes_options">Uygulama modlarını seç</string>
     <string name="shared_string_memory">Bellek</string>
-    <string name="memory_allocated_for_routing_ds">Daha yüksek bellek değeri, uzun güzergahların (500 km\'den fazla) hesaplanmasını hızlandırır, ancak diğer uygulamaların performansını etkileyebilir.
-\nKısa güzergahların hesaplanma hızını etkilemez.</string>
+    <string name="memory_allocated_for_routing_ds">Daha yüksek bellek ayrılması, uzun güzergahların (500 km\'den fazla) hesaplanmasını hızlandıracaktır, ancak diğer uygulamaların performansını etkileyebilir.
+\nKısa güzergahların hesaplanma hızı üzerinde etkisi yoktur.</string>
     <string name="reading_files">Dosyalar okunuyor…</string>
     <string name="shared_storage_second_step">\"Bu klasörü kullan\" seçeneğine tıklayın.</string>
     <string name="icon_group_education">Eğitim</string>
@@ -4444,6 +4443,10 @@
     <string name="release_4_1">• Android Auto için ilk destek eklendi
 \n
 \n • UTM koordinat araması için kullanıcı arayüzü güncellemesi
+\n
+\n • GPX yolları için GPS filtresi
+\n
+\n • Yükseklik widget\'ı (Pro)
 \n
 \n • Sık kullanılanlar: son kullanılan simgeleri görüntüleme özelliği eklendi
 \n
@@ -4479,4 +4482,40 @@
     <string name="routing_attr_only_permitted_ways_description">Yalnızca açıkça izin verilen yolları (izler, patikalar vb.) kullanın</string>
     <string name="shared_string_details">Ayrıntılar</string>
     <string name="is_disabled">%1$s devre dışı</string>
+    <string name="use_routing_fallback">Çevrim dışı yönlendirme yedeği</string>
+    <string name="use_routing_fallback_description">Çevrim içi yönlendirme kullanılamadığında çevrim dışı yönlendirmeyi kullanın.</string>
+    <string name="created_on">Oluşturulma tarihi</string>
+    <string name="shared_string_size">Boyut</string>
+    <string name="turn_arrows">Dönüş Okları</string>
+    <string name="turn_arrows_descr">Güzergah hattında dönüş oklarının gösterilip gösterilmeyeceğini seçin.</string>
+    <string name="waypoint_template">Ara nokta şablonu</string>
+    <string name="shared_string_used">Kullanılmış</string>
+    <string name="files_with_route_restrictions">Güzergah kısıtlaması olan dosyalar</string>
+    <string name="predefined_waypoint_appearance_description">Bu eyleme dokunmak, ara noktayı önceden tanımlanmış parametrelerle otomatik olarak kaydedecektir.</string>
+    <string name="always_ask_waypoint_appearance_description">Bu eyleme dokunmak, adı ve görünümü değiştirebileceğiniz “Ara nokta ekle” ekranını açacaktır.</string>
+    <string name="waypoint_appearance">Ara nokta görünümü</string>
+    <string name="track_file">Yol dosyası</string>
+    <string name="navigate_point_format_swiss_grid">İsviçre Izgarası (CH1903)</string>
+    <string name="navigate_point_format_swiss_grid_plus">İsviçre Izgarası (CH1903+)</string>
+    <string name="shared_string_not_used">Kullanılmamış</string>
+    <string name="track_file_description">Bu eyleme dokunmak, kullanılabilir yolları seçebileceğiniz bir iletişim kutusu gösterecektir.</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Beni-düzelt etiketlerini göster</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Not etiketleri</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Not etiketlerini göster</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Düşük yakınlaştırmalarda simgeler</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Düşük yakınlaştırmalarda simgelerin şematik gösterimi</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Beni-düzelt etiketleri</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Su yolu tünelleri</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Su yolu tünellerini gizleme</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_value_category_name">Kategori</string>
+    <string name="rendering_value_all_name">Tümü</string>
+    <string name="rendering_value_omit_name">Atla</string>
+    <string name="rendering_attr_seabedDetail_name">Deniz dibi ayrıntısı</string>
+    <string name="rendering_attr_seabedDetail_description">Deniz dibi yüzey niteliği, birleşik yüzey türleri, yabani ot veya deniz yosunu kategorisi ve sınıfı hakkında ek metin bilgileri</string>
+    <string name="gpx_no_routes_descr">Dosyaya güzergah eklemek için \"%1$s\" aracını kullanabilirsiniz.</string>
+    <string name="gpx_no_routes_title">Güzergah yok</string>
+    <string name="save_track_to_gpx_descrp">Navigasyon devam ederken yol kaydını otomatik olarak başlat. Bittiğinde, izlenen yol otomatik olarak kaydedilecektir.</string>
+    <string name="quick_action_add_route_descr">Ekranın ortasından bir güzergah başlatmak için bir düğme.</string>
+    <string name="please_provide_group_name_message">Lütfen grup için bir ad girin.</string>
 </resources>

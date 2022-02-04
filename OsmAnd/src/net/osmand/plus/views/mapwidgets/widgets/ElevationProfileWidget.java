@@ -28,8 +28,9 @@ import net.osmand.GPXUtilities.GPXTrackAnalysis.ElevationDiffsCalculator;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.StateChangedListener;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -48,6 +49,8 @@ import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.GPXUtilities.GPXTrackAnalysis.ElevationDiffsCalculator.CALCULATED_GPX_WINDOW_LENGTH;
 
 public class ElevationProfileWidget {
 
@@ -78,17 +81,28 @@ public class ElevationProfileWidget {
 	private int lastVisiblePointIndex = -1;
 	private OrderedLineDataSet slopeDataSet;
 
+	private boolean movedToLocation = false;
+
+	private final StateChangedListener<Boolean> linkedToLocationListener = change -> {
+		if (change) {
+			movedToLocation = true;
+		}
+	};
+
 	public ElevationProfileWidget(MapActivity map) {
 		this.map = map;
 		app = map.getMyApplication();
 		settings = app.getSettings();
 		initView();
+		settings.MAP_LINKED_TO_LOCATION.addListener(linkedToLocationListener);
 	}
 
 	private void initView() {
 		this.view = map.findViewById(R.id.elevation_profile_widget_layout);
 		setupStatisticBlocks();
 	}
+
+
 
 	private void setupStatisticBlocks() {
 		uphillView = setupStatisticBlock(R.id.uphill_widget,
@@ -159,7 +173,7 @@ public class ElevationProfileWidget {
 
 		chart = view.findViewById(R.id.line_chart);
 		Drawable markerIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_location_color);
-		GpxUiHelper.setupGPXChart(chart, 4, 24f, 16f, !isNightMode(), true, markerIcon);
+		GpxUiHelper.setupGPXChart(chart, 24f, 16f, true, markerIcon);
 		chart.setHighlightPerTapEnabled(false);
 		chart.setHighlightPerDragEnabled(false);
 		chartAdapter = new BaseCommonChartAdapter(app, chart, true);
@@ -170,12 +184,14 @@ public class ElevationProfileWidget {
 					GPXDataSetAxisType.DISTANCE, false, true, false);
 			dataSets.add(elevationDataSet);
 
-			OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart, analysis,
-					GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true, false);
-			if (showSlopes && slopeDataSet != null) {
-				dataSets.add(slopeDataSet);
+			if (showSlopes) {
+				OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart, analysis,
+						GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true, false);
+				if (slopeDataSet != null) {
+					dataSets.add(slopeDataSet);
+				}
+				this.slopeDataSet = slopeDataSet;
 			}
-			this.slopeDataSet = slopeDataSet;
 
 			chartAdapter.updateContent(new LineData(dataSets), gpxItem);
 			toMetersMultiplier = ((OrderedLineDataSet) dataSets.get(0)).getDivX();
@@ -295,10 +311,16 @@ public class ElevationProfileWidget {
 		float startMoveChartPosition = minVisibleX + twentyPercent;
 		float pos = distanceFromStart / ((OrderedLineDataSet) ds.get(0)).getDivX();
 
-		if (pos >= minVisibleX && pos <= maxVisibleX) {
+		boolean movedToLocation = this.movedToLocation;
+		if (pos >= minVisibleX && pos <= maxVisibleX || movedToLocation) {
 			if (pos >= startMoveChartPosition) {
 				float nextVisibleX = pos - twentyPercent;
 				moveViewToX(chart, nextVisibleX);
+			} else if (movedToLocation) {
+				moveViewToX(chart, Math.max(pos - twentyPercent, chart.getXChartMin()));
+			}
+			if (movedToLocation) {
+				this.movedToLocation = false;
 			}
 			gpxItem.chartHighlightPos = pos;
 			Highlight newLocationHighlight = createHighlight(pos, true);
@@ -367,8 +389,11 @@ public class ElevationProfileWidget {
 		}
 		firstVisiblePointIndex = firstPointIndex;
 		lastVisiblePointIndex = lastPointIndex;
-		if (firstPointIndex >= 0 && lastPointIndex > firstPointIndex) {
-			ElevationDiffsCalculator elevationDiffsCalc = new ElevationDiffsCalculator(firstPointIndex, lastPointIndex - firstPointIndex + 1) {
+		firstPointIndex = Math.max(0, firstPointIndex - 1);
+		lastPointIndex = Math.min(points.size() - 1, lastPointIndex + 1);
+		if (lastPointIndex > firstPointIndex) {
+			ElevationDiffsCalculator elevationDiffsCalc = new ElevationDiffsCalculator(
+					CALCULATED_GPX_WINDOW_LENGTH, firstPointIndex, lastPointIndex - firstPointIndex + 1) {
 				@Override
 				public WptPt getPoint(int index) {
 					return points.get(index);

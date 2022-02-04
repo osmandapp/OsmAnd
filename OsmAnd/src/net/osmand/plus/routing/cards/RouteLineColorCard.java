@@ -9,27 +9,27 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
-import net.osmand.plus.helpers.enums.DayNightMode;
+import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.routing.ColoringType;
-import net.osmand.plus.settings.backend.ListStringPreference;
+import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.fragments.HeaderInfo;
 import net.osmand.plus.settings.fragments.HeaderUiAdapter;
 import net.osmand.plus.track.AppearanceViewHolder;
-import net.osmand.plus.track.ColorsCard;
-import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
-import net.osmand.plus.track.ColoringTypeCard;
+import net.osmand.plus.track.cards.ColorsCard;
+import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
+import net.osmand.plus.track.cards.ColoringTypeCard;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
@@ -326,15 +326,13 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 		public AppearanceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 			LayoutInflater themedInflater = UiUtilities.getInflater(parent.getContext(), nightMode);
 			View view = themedInflater.inflate(R.layout.point_editor_group_select_item, parent, false);
-			view.getLayoutParams().width = app.getResources().getDimensionPixelSize(R.dimen.gpx_group_button_width);
-			view.getLayoutParams().height = app.getResources().getDimensionPixelSize(R.dimen.gpx_group_button_height);
+			view.getLayoutParams().width = getDimen(R.dimen.gpx_group_button_width);
+			view.getLayoutParams().height = getDimen(R.dimen.gpx_group_button_height);
 			((TextView) view.findViewById(R.id.groupName)).setMaxLines(1);
 
 			AppearanceViewHolder holder = new AppearanceViewHolder(view);
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-				AndroidUtils.setBackground(app, holder.button, nightMode, R.drawable.ripple_solid_light_6dp,
-						R.drawable.ripple_solid_dark_6dp);
-			}
+			AndroidUtils.setBackground(app, holder.button, nightMode, R.drawable.ripple_solid_light_6dp,
+					R.drawable.ripple_solid_dark_6dp);
 			return holder;
 		}
 
@@ -353,11 +351,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 				notifyItemRangeChanged(0, getItemCount());
 
 				modeChanged();
-
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardPressed(RouteLineColorCard.this);
-				}
+				notifyCardPressed();
 			});
 		}
 

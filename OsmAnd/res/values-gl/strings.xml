@@ -26,7 +26,6 @@
     <string name="save_track_to_gpx_globally_descr">Rexistra a posición nun ficheiro GPX, e podes activalo ou desactivalo empregando o trebello de gravación GPX no mapa.</string>
     <string name="save_current_track_descr">Garda a pista actual coma ficheiro GPX agora.</string>
     <string name="save_current_track">Gardar a pista actual</string>
-    <string name="save_track_to_gpx_descrp">Unha pista do GPX gárdarase de xeito automático no cartafol das pistas durante a navegación.</string>
     <string name="save_track_interval_globally">Intre de rexistro</string>
     <string name="save_track_interval">Intre de rexistro durante a navegación</string>
     <string name="save_track_interval_descr">Especifica o intre de rexistro de pistas durante a navegación</string>

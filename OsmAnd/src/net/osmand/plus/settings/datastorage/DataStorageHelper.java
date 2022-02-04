@@ -3,7 +3,7 @@ package net.osmand.plus.settings.datastorage;
 import android.os.Environment;
 
 import net.osmand.IndexConstants;
-import net.osmand.ValueHolder;
+import net.osmand.data.ValueHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.OsmandSettings;

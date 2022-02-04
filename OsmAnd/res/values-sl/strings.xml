@@ -646,7 +646,6 @@
     <string name="save_track_interval">Interval beleženja med navigacijo</string>
     <string name="save_track_interval_descr">Določite časovni razmik beleženja za shranjevanje sledi med navigacijo</string>
     <string name="save_track_to_gpx">Samodejno beleži sled med navigacijo</string>
-    <string name="save_track_to_gpx_descrp">Sledi GPX se med navigacijo samodejno shranjujejo v mapo za sledi.</string>
     <string name="mark_point">Cilj</string>
     <string name="int_seconds">sek</string>
     <string name="int_min">min</string>

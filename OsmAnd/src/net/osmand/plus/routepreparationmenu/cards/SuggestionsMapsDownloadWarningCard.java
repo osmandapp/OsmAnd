@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MultipleSelectionBottomSheet;
 import net.osmand.plus.base.SelectionBottomSheet.DialogStateListener;
@@ -24,6 +23,7 @@ import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormat;
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SuggestionsMapsDownloadWarningCard extends WarningCard implements DownloadEvents {
-	private MultipleSelectionBottomSheet dialog;
+	private MultipleSelectionBottomSheet<DownloadItem> dialog;
 	private final List<WorldRegion> suggestedMaps;
 	private final boolean hasPrecalculatedMissingMaps;
 	private final boolean suggestedMapsOnlineSearch;
@@ -75,14 +75,14 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard implements D
 				downloadIndexes = true;
 			}
 		}
-		List<SelectableItem> allItems = new ArrayList<>();
-		List<SelectableItem> selectedItems = new ArrayList<>();
+		List<SelectableItem<DownloadItem>> allItems = new ArrayList<>();
+		List<SelectableItem<DownloadItem>> selectedItems = new ArrayList<>();
 		if (!downloadIndexes) {
-			List<SelectableItem> mapItems = getSelectableMaps();
+			List<SelectableItem<DownloadItem>> mapItems = getSelectableMaps();
 			allItems.addAll(mapItems);
 			selectedItems.addAll(mapItems);
 		}
-		MultipleSelectionBottomSheet msDialog =
+		MultipleSelectionBottomSheet<DownloadItem> msDialog =
 				MultipleSelectionBottomSheet.showInstance(mapActivity, allItems, selectedItems, true);
 		this.dialog = msDialog;
 		boolean downloadingIndexes = downloadIndexes;
@@ -135,8 +135,8 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard implements D
 			mapActivity.getMapRouteInfoMenu().resetRouteCalculation();
 
 			List<IndexItem> indexes = new ArrayList<>();
-			for (SelectableItem item : selItems) {
-				IndexItem index = getIndexItem((DownloadItem) item.getObject());
+			for (SelectableItem<DownloadItem> item : selItems) {
+				IndexItem index = getIndexItem(item.getObject());
 				if (index != null) {
 					indexes.add(index);
 				}
@@ -151,13 +151,13 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard implements D
 	}
 
 	@NonNull
-	private List<SelectableItem> getSelectableMaps() {
-		List<SelectableItem> res = new ArrayList<>();
+	private List<SelectableItem<DownloadItem>> getSelectableMaps() {
+		List<SelectableItem<DownloadItem>> res = new ArrayList<>();
 		List<DownloadItem> downloadItems;
 		downloadItems = getSuggestedMapDownloadItems();
 		for (DownloadItem di : downloadItems) {
 			boolean isMap = di.getType().getTag().equals("map");
-			SelectableItem si = createSelectableItem(di);
+			SelectableItem<DownloadItem> si = createSelectableItem(di);
 			if (isMap) {
 				res.add(si);
 			}
@@ -178,11 +178,11 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard implements D
 		dialog.setApplyButtonTitle(btnTitle);
 	}
 
-	private double getDownloadSizeInMb(@NonNull List<SelectableItem> selectableItems) {
+	private double getDownloadSizeInMb(@NonNull List<SelectableItem<DownloadItem>> selectableItems) {
 		double totalSizeMb = 0.0d;
-		for (SelectableItem i : selectableItems) {
-			Object obj = i.getObject();
-			totalSizeMb += ((DownloadItem) obj).getSizeToDownloadInMb();
+		for (SelectableItem<DownloadItem> i : selectableItems) {
+			DownloadItem downloadItem = i.getObject();
+			totalSizeMb += downloadItem.getSizeToDownloadInMb();
 		}
 		return totalSizeMb;
 	}
@@ -199,15 +199,15 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard implements D
 	}
 
 	@NonNull
-	private SelectableItem createSelectableItem(@NonNull DownloadItem item) {
-		SelectableItem selectableItem = new SelectableItem();
+	private SelectableItem<DownloadItem> createSelectableItem(@NonNull DownloadItem item) {
+		SelectableItem<DownloadItem> selectableItem = new SelectableItem<>();
 		updateSelectableItem(selectableItem, item);
 		selectableItem.setObject(item);
 		return selectableItem;
 	}
 
-	private void updateSelectableItem(@NonNull SelectableItem selectableItem,
-									  @NonNull DownloadItem downloadItem) {
+	private void updateSelectableItem(@NonNull SelectableItem<DownloadItem> selectableItem,
+	                                  @NonNull DownloadItem downloadItem) {
 		selectableItem.setTitle(app.getRegions().getLocaleName(downloadItem.getBasename(), true, true));
 		DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(app);
 		String size = downloadItem.getSizeDescription(app);
@@ -238,9 +238,9 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard implements D
 
 	@Override
 	public void onUpdatedIndexesList() {
-		List<SelectableItem> allItems = new ArrayList<>();
+		List<SelectableItem<DownloadItem>> allItems = new ArrayList<>();
 		if (!app.getDownloadThread().shouldDownloadIndexes()) {
-			List<SelectableItem> mapItems = getSelectableMaps();
+			List<SelectableItem<DownloadItem>> mapItems = getSelectableMaps();
 			allItems.addAll(mapItems);
 		}
 		if (dialog != null && dialog.isAdded()) {
@@ -254,12 +254,9 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard implements D
 
 	@Override
 	public void downloadInProgress() {
-
 	}
 
 	@Override
 	public void downloadHasFinished() {
-
 	}
 }
-

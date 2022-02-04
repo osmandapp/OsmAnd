@@ -102,7 +102,7 @@
     <string name="last_available_location">Darriera posicion disponibla</string>
     <string name="sharing_status">Estat dau partatge</string>
     <string name="location_sharing_status">Partatge: %1$s</string>
-    <string name="shared_string_enabled">activat</string>
+    <string name="shared_string_enabled">Activat</string>
     <string name="shared_string_status">Estat</string>
     <string name="no_gps_connection">Ges de connexion GPS</string>
     <string name="no_internet_connection">Ges de connexion a l\'Internet</string>
@@ -173,4 +173,25 @@
     <string name="my_location_search_hint">Recercar: Grop ò contacte</string>
     <string name="start_location_sharing">Parteja la posicion</string>
     <string name="show_on_map">Monstrar sus la mapa</string>
+    <string name="shared_string_export">Exportar</string>
+    <string name="shared_string_cancel">Anullar</string>
+    <string name="shared_string_apply">Aplicar</string>
+    <string name="si_mi_meters">Milas/mètres</string>
+    <string name="si_km_m">Quilomètres/mètres</string>
+    <string name="si_kmh">Quilomètres a l\'ora</string>
+    <string name="nm">MN</string>
+    <string name="nm_h">nos</string>
+    <string name="unit_of_length">Unitats de longitud</string>
+    <string name="si_mi_yard">Milas/iards</string>
+    <string name="si_mph">Milas a l\'ora</string>
+    <string name="si_mi_feet">Milas/pè</string>
+    <string name="si_nm">Milas nautic</string>
+    <string name="si_m_s">Mètres a la segonda</string>
+    <string name="si_min_km">Minutas au quilomètre</string>
+    <string name="si_nm_h">Milas nautics a l\'ora (Nos)</string>
+    <string name="shared_string_continue">Contuniar</string>
+    <string name="duration_ago">%1$s fach(s)</string>
+    <string name="shared_string_logout">Se deconnectar</string>
+    <string name="foot">ft</string>
+    <string name="m">m</string>
 </resources>

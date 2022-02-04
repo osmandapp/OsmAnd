@@ -14,6 +14,7 @@ import static net.osmand.plus.settings.datastorage.SharedStorageWarningFragment.
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
@@ -37,17 +38,16 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.AndroidUtils;
-import net.osmand.FileUtils;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.IProgress;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.resources.ResourceManager.ReloadIndexesListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet;
@@ -55,12 +55,17 @@ import net.osmand.plus.settings.datastorage.item.MemoryItem;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.settings.datastorage.task.MoveFilesTask;
 import net.osmand.plus.settings.datastorage.task.RefreshUsedMemoryTask;
-import net.osmand.plus.settings.datastorage.task.ReloadDataTask;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 
 import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DataStorageFragment extends BaseSettingsFragment implements UpdateMemoryInfoUIAdapter {
 
@@ -509,9 +514,9 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 				app.setExternalStorageDirectory(type, newDirectory);
 				reloadData();
 				if (silentRestart) {
-					MapActivity.doRestart(activity);
+					RestartActivity.doRestartSilent(activity);
 				} else {
-					app.restartApp(activity);
+					RestartActivity.doRestart(activity);
 				}
 			}
 		} else {
@@ -531,7 +536,27 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 	}
 
 	protected void reloadData() {
-		new ReloadDataTask(activity, app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		app.getResourceManager().reloadIndexesAsync(IProgress.EMPTY_PROGRESS, new ReloadIndexesListener() {
+
+			private ProgressImplementation progress;
+
+			@Override
+			public void reloadIndexesStarted() {
+				progress = ProgressImplementation.createProgressDialog(activity, getString(R.string.loading_data),
+						getString(R.string.loading_data), ProgressDialog.STYLE_HORIZONTAL);
+			}
+
+			@Override
+			public void reloadIndexesFinished(List<String> warnings) {
+				try {
+					if (progress.getDialog().isShowing()) {
+						progress.getDialog().dismiss();
+					}
+				} catch (Exception e) {
+					//ignored
+				}
+			}
+		});
 	}
 
 	@Override

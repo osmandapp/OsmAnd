@@ -28,7 +28,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.OsmAndCollator;
@@ -39,7 +39,7 @@ import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.Amenity;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.CityItem;
@@ -159,7 +159,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 
 		searchEditText = (EditText) view.findViewById(R.id.searchEditText);
 		searchEditText.setHint(R.string.search_map_hint);
-		searchEditText.setTextColor(ColorUtilities.getPrimaryTextColor(activity, !nightMode));
+		searchEditText.setTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(activity, nightMode));
 		searchEditText.setHintTextColor(ContextCompat.getColor(activity, nightMode ? R.color.searchbar_tab_inactive_dark : R.color.inactive_item_orange));
 
 		progressBar = (ProgressBar) view.findViewById(R.id.searchProgressBar);

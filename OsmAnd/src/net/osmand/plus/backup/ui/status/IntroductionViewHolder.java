@@ -10,11 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.DialogButtonType;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.ui.AuthorizeFragment.LoginDialogType;
 import net.osmand.plus.backup.ui.BackupTypesFragment;
@@ -93,8 +93,7 @@ public class IntroductionViewHolder extends RecyclerView.ViewHolder {
 				fragment.removeDialogType();
 			});
 			AndroidUiHelper.updateVisibility(backupButton, true);
-			UiUtilities.setupDialogButton(nightMode, backupButton, DialogButtonType.SECONDARY, R.string.backup_setup);
-			AndroidUtils.setBackground(activity, backupButton, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
+			UiUtilities.setupDialogButton(nightMode, backupButton, DialogButtonType.SECONDARY_ACTIVE, R.string.backup_setup);
 		} else {
 			AndroidUiHelper.updateVisibility(backupButton, false);
 		}

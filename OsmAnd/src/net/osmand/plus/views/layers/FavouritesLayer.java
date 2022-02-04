@@ -16,20 +16,20 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.R;
-import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IMoveObjectProvider;
 import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +37,7 @@ import java.util.List;
 public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvider,
 		IMoveObjectProvider, MapTextProvider<FavouritePoint> {
 
-	protected int startZoom = 6;
+	private static final int START_ZOOM = 6;
 
 	protected OsmandMapTileView view;
 	private FavouritesDbHelper favouritesDbHelper;
@@ -98,7 +98,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		cache.clear();
 		if (this.settings.SHOW_FAVORITES.get() && favouritesDbHelper.isFavoritesLoaded()) {
-			if (tileBox.getZoom() >= startZoom) {
+			if (tileBox.getZoom() >= START_ZOOM) {
 				float textScale = getTextScale();
 				float iconSize = getIconSize(view.getApplication());
 				QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
@@ -117,8 +117,11 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 								&& lat >= latLonBounds.bottom && lat <= latLonBounds.top
 								&& lon >= latLonBounds.left && lon <= latLonBounds.right) {
 							MapMarker marker = null;
-							if (synced && (marker = mapMarkersHelper.getMapMarker(favoritePoint)) == null) {
-								continue;
+							if (synced) {
+								marker = mapMarkersHelper.getMapMarker(favoritePoint);
+								if (marker == null || marker.history && !view.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
+									continue;
+								}
 							}
 							cache.add(favoritePoint);
 							float x = tileBox.getPixXFromLatLon(lat, lon);
@@ -240,7 +243,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res, boolean unknownLocation) {
-		if (this.settings.SHOW_FAVORITES.get() && tileBox.getZoom() >= startZoom) {
+		if (this.settings.SHOW_FAVORITES.get() && tileBox.getZoom() >= START_ZOOM) {
 			getFavoriteFromPoint(tileBox, point, res);
 		}
 	}

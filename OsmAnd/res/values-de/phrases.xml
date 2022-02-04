@@ -22,7 +22,7 @@
     <string name="poi_craft_agricultural_engines">Landmaschinen</string>
     <string name="poi_aerodrome">Flughafen</string>
     <string name="poi_alcohol">Spirituosenladen</string>
-    <string name="poi_alpine_hut">Bewirtschaftete Schutzhütte</string>
+    <string name="poi_alpine_hut">Bewirtschaftete Schutzhütte;Unterstand</string>
     <string name="poi_ambulance_station">Rettungswache</string>
     <string name="poi_anime">Anime-Shop</string>
     <string name="poi_antiques">Antiquitätenhändler</string>
@@ -504,7 +504,7 @@
     <string name="poi_studio">Studio</string>
     <string name="poi_suburb">Stadtteil</string>
     <string name="poi_subway_entrance">U-Bahnhofeingang</string>
-    <string name="poi_subway_station">ja</string>
+    <string name="poi_subway_station">Ja;U-Bahnstation</string>
     <string name="poi_craft_sun_protection">Sonnenschutz</string>
     <string name="poi_supermarket">Supermarkt</string>
     <string name="poi_surveillance">Überwachung</string>
@@ -916,14 +916,14 @@
     <string name="poi_recycling_car_batteries">Autobatterien</string>
     <string name="poi_recycling_cars">Autos</string>
     <string name="poi_recycling_bicycles">Fahrräder</string>
-    <string name="poi_capital">ja</string>
+    <string name="poi_capital">Ja;Hauptstadt</string>
     <string name="poi_shower">Dusche</string>
     <string name="poi_email">E-Mail</string>
     <string name="poi_fax">Fax</string>
     <string name="facebook">Facebook</string>
     <string name="poi_mobile">Handy</string>
     <string name="poi_fee_no">nein</string>
-    <string name="poi_drinking_water_yes">ja</string>
+    <string name="poi_drinking_water_yes">Ja;Trinkwasser</string>
     <string name="poi_drinking_water_no">nein</string>
     <string name="poi_supervised_yes">Beaufsichtigt</string>
     <string name="poi_supervised_no">Ohne Aufsicht</string>
@@ -1014,7 +1014,7 @@
     <string name="poi_height">Höhe</string>
     <string name="poi_ele">Meereshöhe</string>
     <string name="poi_start_date">Anfangsdatum</string>
-    <string name="poi_wheelchair_yes">ja</string>
+    <string name="poi_wheelchair_yes">Ja;Rollstuhl</string>
     <string name="poi_wheelchair_no">nein</string>
     <string name="poi_wheelchair_limited">eingeschränkt</string>
     <string name="poi_wholesale">Großhandel</string>
@@ -1429,7 +1429,7 @@
     <string name="poi_service_dealer">Händler</string>
     <string name="poi_service_repair">Reparatur</string>
     <string name="poi_service_repair_no">Keine Reparatur</string>
-    <string name="poi_automated_yes">ja</string>
+    <string name="poi_automated_yes">Ja;Automatisiert</string>
     <string name="poi_automated_no">Nicht automatisiert</string>
     <string name="poi_brushless_no">Bürstenlos: nein</string>
     <string name="poi_car_wash_no">Nein</string>
@@ -1636,7 +1636,7 @@
     <string name="poi_payment_girocard_no">Girokarte nicht akzeptiert</string>
     <string name="poi_payment_discover_card_yes">Discover-Karte</string>
     <string name="poi_payment_discover_card_no">Discover-Karte nicht akzeptiert</string>
-    <string name="poi_brushless_yes">ja</string>
+    <string name="poi_brushless_yes">Ja;Bürstenlos</string>
     <string name="poi_parish">Gemeindebüro</string>
     <string name="poi_payment_cheque_yes">Schecks</string>
     <string name="poi_payment_cheque_no">Schecks nicht akzeptiert</string>
@@ -1776,8 +1776,8 @@
     <string name="poi_service_parts">Teile</string>
     <string name="poi_service_electrical">Reparatur von elektrischen Fahrzeugen</string>
     <string name="poi_motorcycle_repair">Motorradreparatur</string>
-    <string name="poi_self_service_yes">ja</string>
-    <string name="poi_self_service_no">Nein</string>
+    <string name="poi_self_service_yes">Ja;Selbstbedienung</string>
+    <string name="poi_self_service_no">Nein;Keine Selbstbedienung</string>
     <string name="poi_full_service_yes">Rundumservice</string>
     <string name="poi_aeroway_fuel">Flugzeugtankstelle</string>
     <string name="poi_public_bath">Öffentliches Bad</string>
@@ -1988,7 +1988,7 @@
     <string name="poi_service_bicycle_retail_no">Fahrradeinzelhandel: nein</string>
     <string name="poi_service_bicycle_repair_yes">Reparatur</string>
     <string name="poi_service_bicycle_repair_no">Fahrradreparatur: nein</string>
-    <string name="poi_service_bicycle_rental_yes">Verleih</string>
+    <string name="poi_service_bicycle_rental_yes">Verleih;Fahrradverleih: ja</string>
     <string name="poi_service_bicycle_rental_no">Fahrradverleih: nein</string>
     <string name="poi_service_bicycle_pump_yes">Fahrradpumpe</string>
     <string name="poi_service_bicycle_pump_no">Fahrradpumpe: nein</string>
@@ -4211,4 +4211,17 @@
     <string name="poi_couplings">Kopplungen</string>
     <string name="poi_lgbtq_yes">LGBTQ erlaubt</string>
     <string name="poi_lgbtq_no">LGBTQ jetzt erlaubt</string>
+    <string name="poi_computer_parts">Computerteile</string>
+    <string name="poi_diet_vegan_limited">Vegan: eingeschränkt</string>
+    <string name="poi_computer_sales_yes">Ja</string>
+    <string name="poi_computer_sales">Computerverkauf</string>
+    <string name="poi_computer_repair">Computerreparatur</string>
+    <string name="poi_computer_sales_no">Computerverkauf: nein</string>
+    <string name="poi_computer_repair_no">Computerreparatur: nein</string>
+    <string name="poi_computer_parts_yes">Ja</string>
+    <string name="poi_computer_parts_no">Computerteile: nein</string>
+    <string name="poi_computer_sales_used">Gebraucht;Gebrauchte Computer</string>
+    <string name="poi_computer_repair_yes">Ja</string>
+    <string name="poi_museum_type">Thema des Museums</string>
+    <string name="poi_post_office_type">Art</string>
 </resources>

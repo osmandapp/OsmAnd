@@ -2,22 +2,29 @@ package net.osmand.plus;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+
+import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 public class Version {
-	
-	private final String appVersion; 
+
+	private static final Log log = PlatformUtil.getLog(Version.class);
+
+	private static final String FREE_VERSION_NAME = "net.osmand";
+	private static final String FREE_DEV_VERSION_NAME = "net.osmand.dev";
+	private static final String UTM_REF = "&referrer=utm_source%3Dosmand";
+
 	private final String appName;
-	private final static String FREE_VERSION_NAME = "net.osmand";
-	private final static String FREE_DEV_VERSION_NAME = "net.osmand.dev";
-	private final static String UTM_REF = "&referrer=utm_source%3Dosmand";
+	private final String appVersion;
 
 	public static boolean isHuawei() {
 		return getBuildFlavor().contains("huawei");
@@ -70,8 +77,8 @@ public class Version {
 		try {
 			PackageInfo packageInfo = ctx.getPackageManager().getPackageInfo(ctx.getPackageName(), 0);
 			appVersion = packageInfo.versionName;  //Version suffix  ctx.getString(R.string.app_version_suffix)  already appended in build.gradle
-		} catch (PackageManager.NameNotFoundException e) {
-			e.printStackTrace();
+		} catch (NameNotFoundException e) {
+			log.error(e);
 		}
 		this.appVersion = appVersion;
 		appName = ctx.getString(R.string.app_name);

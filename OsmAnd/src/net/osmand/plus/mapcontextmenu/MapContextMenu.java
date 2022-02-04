@@ -23,12 +23,12 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.TargetPointsHelper.TargetPointChangedListener;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPointChangedListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
@@ -41,18 +41,17 @@ import net.osmand.plus.mapcontextmenu.controllers.MapDataMenuController;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.MapMarkerEditor;
 import net.osmand.plus.mapcontextmenu.editors.PointEditor;
-import net.osmand.plus.mapcontextmenu.editors.RtePtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
-import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.transport.TransportStopRoute;
-import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
@@ -75,8 +74,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private FavoritePointEditor favoritePointEditor;
 	@Nullable
 	private WptPtEditor wptPtEditor;
-	@Nullable
-	private RtePtEditor rtePtEditor;
 	@Nullable
 	private MapMarkerEditor mapMarkerEditor;
 
@@ -176,9 +173,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (wptPtEditor != null) {
 			wptPtEditor.setMapActivity(mapActivity);
 		}
-		if (rtePtEditor != null) {
-			rtePtEditor.setMapActivity(mapActivity);
-		}
 		if (mapMarkerEditor != null) {
 			mapMarkerEditor.setMapActivity(mapActivity);
 		}
@@ -245,15 +239,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	@Nullable
-	public RtePtEditor getRtePtPointEditor() {
-		MapActivity mapActivity = getMapActivity();
-		if (rtePtEditor == null && mapActivity != null) {
-			rtePtEditor = new RtePtEditor(mapActivity);
-		}
-		return rtePtEditor;
-	}
-
-	@Nullable
 	public MapMarkerEditor getMapMarkerEditor() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapMarkerEditor == null && mapActivity != null) {
@@ -267,8 +252,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			return favoritePointEditor;
 		} else if (wptPtEditor != null && wptPtEditor.getFragmentTag().equals(tag)) {
 			return wptPtEditor;
-		} else if (rtePtEditor != null && rtePtEditor.getFragmentTag().equals(tag)) {
-			return rtePtEditor;
 		} else if (mapMarkerEditor != null && mapMarkerEditor.getFragmentTag().equals(tag)) {
 			return mapMarkerEditor;
 		}
@@ -1209,19 +1192,26 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				: RenderingIcons.getBigIconResourceId(preselectedIconName);
 	}
 
-	public void addWptPt(LatLon latLon, String title, String categoryName, int categoryColor, boolean skipDialog) {
+	public void addWptPt(@NonNull WptPt wptPt, @Nullable String categoryName, int categoryColor,
+	                     boolean skipDialog, @Nullable GPXFile gpxFile) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			final List<SelectedGpxFile> list
-					= mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
-			if (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().showCurrentTrack)) {
-				GPXFile gpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
-				WptPtEditor wptPtPointEditor = getWptPtPointEditor();
-				if (wptPtPointEditor != null) {
-					wptPtPointEditor.add(gpxFile, latLon, title, categoryName, categoryColor, skipDialog);
-				}
+			WptPtEditor wptPtPointEditor = getWptPtPointEditor();
+			if (wptPtPointEditor == null) {
+				return;
+			}
+
+			if (gpxFile != null) {
+				wptPtPointEditor.add(gpxFile, wptPt, categoryName, categoryColor, skipDialog);
 			} else {
-				addNewWptToGPXFile(latLon, title, categoryName, categoryColor, skipDialog);
+				final List<SelectedGpxFile> list
+						= mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
+				if (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().showCurrentTrack)) {
+					GPXFile currentGpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
+					wptPtPointEditor.add(currentGpxFile, wptPt, categoryName, categoryColor, skipDialog);
+				} else {
+					addNewWptToGPXFile(wptPt, categoryName, categoryColor, skipDialog);
+				}
 			}
 		}
 	}
@@ -1236,9 +1226,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public void addNewWptToGPXFile(final LatLon latLon, final String title,
-								   final String categoryName,
-								   final int categoryColor, final boolean skipDialog) {
+	public void addNewWptToGPXFile(@NonNull WptPt wptPt, @Nullable String categoryName, int categoryColor, boolean skipDialog) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
@@ -1246,15 +1234,12 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				public boolean processResult(GPXFile[] result) {
 					MapActivity mapActivity = getMapActivity();
 					if (mapActivity != null) {
-						GPXFile gpxFile;
-						if (result != null && result.length > 0) {
-							gpxFile = result[0];
-						} else {
-							gpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
-						}
+						GPXFile gpxFile = result != null && result.length > 0
+								? result[0]
+								: mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
 						WptPtEditor wptPtPointEditor = getWptPtPointEditor();
 						if (wptPtPointEditor != null) {
-							wptPtPointEditor.add(gpxFile, latLon, title, categoryName, categoryColor, skipDialog);
+							wptPtPointEditor.add(gpxFile, wptPt, categoryName, categoryColor, skipDialog);
 						}
 					}
 					return true;

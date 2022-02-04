@@ -1462,7 +1462,6 @@
     <string name="save_track_interval_descr">Navedite interval logovanja snimanja putanje prilikom navođenja</string>
     <string name="save_track_interval">Interval beleženja za vreme navođenja</string>
     <string name="save_track_interval_globally">Interval beleženja</string>
-    <string name="save_track_to_gpx_descrp">GPX putanja se automatski čuva u fasciklu sa putanjama dok je navođenje uključeno.</string>
     <string name="save_track_to_gpx">Automatski snimaj putanju za vreme navođenja</string>
     <string name="save_current_track">Sačuvaj trenutnu putanju</string>
     <string name="save_current_track_descr">Sačuvaj odmah trenutnu putanju kao GPX fajl.</string>

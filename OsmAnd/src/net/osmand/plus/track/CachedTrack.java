@@ -1,9 +1,10 @@
 package net.osmand.plus.track;
 
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.RouteProvider;
@@ -76,13 +77,13 @@ public class CachedTrack {
 			this.useFilteredGpx = useFilteredGpx;
 			prevModifiedTime = gpxFile.modifiedTime;
 			clearCaches();
-			List<TrkSegment> segments = calculateGradientTrack(selectedGpxFile, zoom, scaleType);
+			List<TrkSegment> segments = calculateGradientTrack(zoom, scaleType);
 			segmentsCache.put(trackId, segments);
 			return segments;
 		} else {
 			List<TrkSegment> segments = segmentsCache.get(trackId);
 			if (segments == null) {
-				segments = calculateGradientTrack(selectedGpxFile, zoom, scaleType);
+				segments = calculateGradientTrack(zoom, scaleType);
 				segmentsCache.put(trackId, segments);
 			}
 			return segments;
@@ -90,19 +91,20 @@ public class CachedTrack {
 	}
 
 	@NonNull
-	private List<TrkSegment> calculateGradientTrack(SelectedGpxFile selectedGpxFile, int zoom,
-	                                                GradientScaleType scaleType) {
-		GPXFile gpxFile = selectedGpxFile.getGpxFile();
-		RouteColorize colorize = new RouteColorize(zoom, gpxFile, selectedGpxFile.getTrackAnalysisToDisplay(app),
-				scaleType.toColorizationType(), app.getSettings().getApplicationMode().getMaxSpeed());
+	private List<TrkSegment> calculateGradientTrack(int zoom, @NonNull GradientScaleType scaleType) {
+		GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
+		GPXTrackAnalysis trackAnalysis = selectedGpxFile.getTrackAnalysisToDisplay(app);
+		ColorizationType colorizationType = scaleType.toColorizationType();
+		float maxSpeed = app.getSettings().getApplicationMode().getMaxSpeed();
+		RouteColorize colorize = new RouteColorize(zoom, gpxFile, trackAnalysis, colorizationType, maxSpeed);
 		List<RouteColorizationPoint> colorsOfPoints = colorize.getResult(true);
-		return createSimplifiedSegments(selectedGpxFile.getGpxFile(), colorsOfPoints, scaleType);
+		return createSimplifiedSegments(gpxFile, colorsOfPoints, scaleType);
 	}
 
 	@NonNull
-	private List<TrkSegment> createSimplifiedSegments(GPXFile gpxFile,
-	                                                  List<RouteColorizationPoint> colorizationPoints,
-	                                                  GradientScaleType scaleType) {
+	private List<TrkSegment> createSimplifiedSegments(@NonNull GPXFile gpxFile,
+	                                                  @NonNull List<RouteColorizationPoint> colorizationPoints,
+	                                                  @NonNull GradientScaleType scaleType) {
 		List<TrkSegment> simplifiedSegments = new ArrayList<>();
 		ColorizationType colorizationType = scaleType.toColorizationType();
 		int id = 0;
@@ -129,7 +131,7 @@ public class CachedTrack {
 	}
 
 	public boolean isColoringTypeAvailable(@NonNull ColoringType coloringType, @Nullable String routeInfoAttribute) {
-		if (prevModifiedTime != selectedGpxFile.getGpxFile().modifiedTime || availableColoringTypes == null) {
+		if (prevModifiedTime != selectedGpxFile.getGpxFileToDisplay().modifiedTime || availableColoringTypes == null) {
 			availableColoringTypes = listAvailableColoringTypes();
 		}
 		return availableColoringTypes.contains(coloringType.getName(routeInfoAttribute));

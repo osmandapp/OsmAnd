@@ -78,16 +78,23 @@ public class RouteGeometryWay extends
 	@NonNull
 	@Override
 	public GeometryWayStyle<?> getDefaultWayStyle() {
-		if (coloringType.isGradient()) {
-			return new GeometryGradientWayStyle(getContext(), customColor, customWidth);
-		}
-		return new GeometrySolidWayStyle<>(getContext(), customColor, customWidth, customDirectionArrowColor);
+		return coloringType.isGradient()
+				? super.getGradientWayStyle()
+				: getArrowWayStyle(customColor);
 	}
 
 	@NonNull
 	@Override
 	public GeometrySolidWayStyle<RouteGeometryWayContext> getSolidWayStyle(int lineColor) {
-		return new GeometrySolidWayStyle<>(getContext(), lineColor, customWidth, customDirectionArrowColor);
+		return getArrowWayStyle(lineColor);
+	}
+
+	@NonNull
+	private GeometrySolidWayStyle<RouteGeometryWayContext> getArrowWayStyle(int lineColor) {
+		int directionArrowColor = customDirectionArrowColor != null
+				? customDirectionArrowColor
+				: getContext().getPaintIcon().getColor();
+		return new GeometrySolidWayStyle<>(getContext(), lineColor, customWidth, directionArrowColor, true);
 	}
 
 	@Override

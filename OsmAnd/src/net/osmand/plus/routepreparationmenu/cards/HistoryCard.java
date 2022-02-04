@@ -12,13 +12,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -123,9 +123,9 @@ public class HistoryCard extends MapBaseCard {
 			}
 			View itemContainer = view.findViewById(R.id.searchListItemLayout);
 			itemContainer.setBackground(UiUtilities.getSelectableDrawable(themedContext));
-			itemContainer.setMinimumHeight(app.getResources().getDimensionPixelSize(R.dimen.route_info_card_item_height));
+			itemContainer.setMinimumHeight(getDimen(R.dimen.route_info_card_item_height));
 
-			int margin = app.getResources().getDimensionPixelSize(R.dimen.route_info_list_text_padding);
+			int margin = getDimen(R.dimen.route_info_list_text_padding);
 			LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, AndroidUtils.dpToPx(app, 1));
 			AndroidUtils.setMargins(params, margin, 0, 0, 0);
 			View divider = view.findViewById(R.id.divider);

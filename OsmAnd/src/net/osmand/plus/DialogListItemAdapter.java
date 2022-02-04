@@ -7,6 +7,8 @@ import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import net.osmand.plus.utils.UiUtilities;
+
 import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ContextThemeWrapper;

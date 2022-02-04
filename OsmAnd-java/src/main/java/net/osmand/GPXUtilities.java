@@ -54,9 +54,11 @@ public class GPXUtilities {
 	private static final String ICON_NAME_EXTENSION = "icon";
 	private static final String BACKGROUND_TYPE_EXTENSION = "background";
 	private static final String PROFILE_TYPE_EXTENSION = "profile";
+	private static final String ADDRESS_EXTENSION = "address";
 	private static final String GAP_PROFILE_TYPE = "gap";
 	private static final String TRKPT_INDEX_EXTENSION = "trkpt_idx";
 	public static final String DEFAULT_ICON_NAME = "special_star";
+
 	public static final char TRAVEL_GPX_CONVERT_FIRST_LETTER = 'A';
 	public static final int TRAVEL_GPX_CONVERT_FIRST_DIST = 5000;
 	public static final int TRAVEL_GPX_CONVERT_MULT_1 = 2;
@@ -70,11 +72,9 @@ public class GPXUtilities {
 		GPX_TIME_FORMAT_MILLIS.setTimeZone(TimeZone.getTimeZone("UTC"));
 	}
 
-	private final static NumberFormat LAT_LON_FORMAT = new DecimalFormat("0.00#####",
-			new DecimalFormatSymbols(new Locale("EN", "US")));
+	private final static NumberFormat LAT_LON_FORMAT = new DecimalFormat("0.00#####", new DecimalFormatSymbols(Locale.US));
 	// speed, ele, hdop
-	private final static NumberFormat DECIMAL_FORMAT = new DecimalFormat("#.#",
-			new DecimalFormatSymbols(new Locale("EN", "US")));
+	private final static NumberFormat DECIMAL_FORMAT = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
 
 	public static final int RADIUS_DIVIDER = 5000;
 	public static final double PRIME_MERIDIAN = 179.999991234;
@@ -364,6 +364,18 @@ public class GPXUtilities {
 			return getExtensionsToRead().get(PROFILE_TYPE_EXTENSION);
 		}
 
+		public String getAddress() {
+			return getExtensionsToRead().get(ADDRESS_EXTENSION);
+		}
+
+		public void setAddress(String address) {
+			if (Algorithms.isBlank(address)) {
+				getExtensionsToWrite().remove(ADDRESS_EXTENSION);
+			} else {
+				getExtensionsToWrite().put(ADDRESS_EXTENSION, address);
+			}
+		}
+
 		public void setProfileType(String profileType) {
 			getExtensionsToWrite().put(PROFILE_TYPE_EXTENSION, profileType);
 		}
@@ -486,6 +498,30 @@ public class GPXUtilities {
 		public Copyright copyright = null;
 		public Bounds bounds = null;
 
+		public Metadata() { }
+
+		public Metadata(Metadata source) {
+			name = source.name;
+			desc = source.desc;
+			link = source.link;
+			keywords = source.keywords;
+			time = source.time;
+
+			if (source.author != null) {
+				author = new Author(source.author);
+			}
+
+			if (source.copyright != null) {
+				copyright = new Copyright(source.copyright);
+			}
+
+			if (source.bounds != null) {
+				bounds = new Bounds(source.bounds);
+			}
+
+			copyExtensions(source);
+		}
+
 		public String getArticleTitle() {
 			return getExtensionsToRead().get("article_title");
 		}
@@ -503,12 +539,30 @@ public class GPXUtilities {
 		public String name;
 		public String email;
 		public String link;
+
+		public Author() { }
+
+		public Author(Author author) {
+			name = author.name;
+			email = author.email;
+			link = author.link;
+			copyExtensions(author);
+		}
 	}
 
 	public static class Copyright extends GPXExtensions {
 		public String author;
 		public String year;
 		public String license;
+
+		public Copyright() { }
+
+		public Copyright(Copyright copyright) {
+			author = copyright.author;
+			year = copyright.year;
+			license = copyright.license;
+			copyExtensions(copyright);
+		}
 	}
 
 	public static class Bounds extends GPXExtensions {
@@ -516,6 +570,17 @@ public class GPXUtilities {
 		public double minlon;
 		public double maxlat;
 		public double maxlon;
+
+		public Bounds() { }
+
+		public Bounds(Bounds source) {
+			minlat = source.minlat;
+			minlon = source.minlon;
+			maxlat = source.maxlat;
+			maxlon = source.maxlon;
+			copyExtensions(source);
+		}
+
 	}
 
 	public static class RouteSegment {
@@ -578,6 +643,8 @@ public class GPXUtilities {
 	}
 
 	public static class GPXTrackAnalysis {
+		public String name;
+		
 		public float totalDistance = 0;
 		public float totalDistanceWithoutGaps = 0;
 		public int totalTracks = 0;
@@ -647,6 +714,7 @@ public class GPXUtilities {
 		public boolean hasElevationData;
 		public boolean hasSpeedData;
 		public boolean hasSpeedInTrack = false;
+		
 
 		public boolean isSpeedSpecified() {
 			return avgSpeed > 0;
@@ -908,6 +976,8 @@ public class GPXUtilities {
 
 		public abstract static class ElevationDiffsCalculator {
 
+			public static final double CALCULATED_GPX_WINDOW_LENGTH = 10d;
+
 			private double windowLength;
 			private final int startIndex;
 			private final int numberOfPoints;
@@ -919,7 +989,7 @@ public class GPXUtilities {
 				this.startIndex = startIndex;
 				this.numberOfPoints = numberOfPoints;
 				WptPt lastPoint = getPoint(startIndex + numberOfPoints - 1);
-				this.windowLength = Math.max(20d, lastPoint.distance / numberOfPoints * 4);
+				this.windowLength = lastPoint.time == 0 ? CALCULATED_GPX_WINDOW_LENGTH : Math.max(20d, lastPoint.distance / numberOfPoints * 4);
 			}
 
 			public ElevationDiffsCalculator(double windowLength, int startIndex, int numberOfPoints) {
@@ -940,7 +1010,8 @@ public class GPXUtilities {
 			public void calculateElevationDiffs() {
 				WptPt initialPoint = getPoint(startIndex);
 				double eleSumm = initialPoint.ele;
-				int pointsCount = 1;
+				double prevEle = initialPoint.ele;
+				int pointsCount = Double.isNaN(eleSumm) ? 0 : 1;
 				double eleAvg = Double.NaN;
 				double nextWindowPos = initialPoint.distance + windowLength;
 				int pointIndex = startIndex + 1;
@@ -948,30 +1019,49 @@ public class GPXUtilities {
 					WptPt point = getPoint(pointIndex);
 					if (point.distance > nextWindowPos) {
 						eleAvg = calcAvg(eleSumm, pointsCount, eleAvg);
-						eleSumm = point.ele;
-						pointsCount = 1;
+						if (!Double.isNaN(point.ele)) {
+							eleSumm = point.ele;
+							prevEle = point.ele;
+							pointsCount = 1;
+						} else if (!Double.isNaN(prevEle)) {
+							eleSumm = prevEle;
+							pointsCount = 1;
+						} else {
+							eleSumm = Double.NaN;
+							pointsCount = 0;
+						}
 						while (nextWindowPos < point.distance) {
 							nextWindowPos += windowLength;
 						}
 					} else {
-						eleSumm += point.ele;
-						pointsCount++;
+						if (!Double.isNaN(point.ele)) {
+							eleSumm += point.ele;
+							prevEle = point.ele;
+							pointsCount++;
+						} else if (!Double.isNaN(prevEle)) {
+							eleSumm += prevEle;
+							pointsCount++;
+						}
 					}
 					pointIndex++;
 				}
 				if (pointsCount > 1) {
 					calcAvg(eleSumm, pointsCount, eleAvg);
 				}
+				diffElevationUp = Math.round(diffElevationUp + 0.3f);
 			}
 
 			private double calcAvg(double eleSumm, int pointsCount, double eleAvg) {
+				if (Double.isNaN(eleSumm) || pointsCount == 0) {
+					return Double.NaN;
+				}
 				double avg = eleSumm / pointsCount;
 				if (!Double.isNaN(eleAvg)) {
 					double diff = avg - eleAvg;
 					if (diff > 0) {
 						diffElevationUp += diff;
 					} else {
-						diffElevationDown += diff;
+						diffElevationDown -= diff;
 					}
 				}
 				return avg;
@@ -1181,7 +1271,7 @@ public class GPXUtilities {
 
 	public static class GPXFile extends GPXExtensions {
 		public String author;
-		public Metadata metadata;
+		public Metadata metadata = new Metadata();
 		public List<Track> tracks = new ArrayList<>();
 		private List<WptPt> points = new ArrayList<>();
 		public List<Route> routes = new ArrayList<>();
@@ -1196,11 +1286,12 @@ public class GPXUtilities {
 		private TrkSegment generalSegment;
 
 		public GPXFile(String author) {
+			metadata.time = System.currentTimeMillis();
 			this.author = author;
 		}
 
 		public GPXFile(String title, String lang, String description) {
-			this.metadata = new Metadata();
+			metadata.time = System.currentTimeMillis();
 			if(description != null) {
 				metadata.getExtensionsToWrite().put("desc", description);
 			}
@@ -1344,6 +1435,7 @@ public class GPXUtilities {
 		                                    Double toDistance) {
 			GPXTrackAnalysis g = new GPXTrackAnalysis();
 			g.wptPoints = points.size();
+			g.name = path;
 			g.wptCategoryNames = getWaypointCategories(true);
 			List<SplitSegment> segments = getSplitSegments(g, fromDistance, toDistance);
 			g.prepareInformation(fileTimestamp, segments.toArray(new SplitSegment[0]));
@@ -1463,28 +1555,6 @@ public class GPXUtilities {
 			}
 
 			points.add(pt);
-
-			modifiedTime = System.currentTimeMillis();
-
-			return pt;
-		}
-
-		public WptPt addRtePt(double lat, double lon, long time, String description, String name, String category, int color) {
-			double latAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lat));
-			double lonAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lon));
-			final WptPt pt = new WptPt(latAdjusted, lonAdjusted, time, Double.NaN, 0, Double.NaN);
-			pt.name = name;
-			pt.category = category;
-			pt.desc = description;
-			if (color != 0) {
-				pt.setColor(color);
-			}
-
-			if (routes.size() == 0) {
-				routes.add(new Route());
-			}
-			Route currentRoute = routes.get(routes.size() - 1);
-			currentRoute.points.add(pt);
 
 			modifiedTime = System.currentTimeMillis();
 
@@ -1708,6 +1778,16 @@ public class GPXUtilities {
 			return points.isEmpty() && routes.isEmpty();
 		}
 
+		public int getTracksCount() {
+			int count = 0;
+			for (Track track : tracks) {
+				if (!track.generalTrack) {
+					count++;
+				}
+			}
+			return count;
+		}
+
 		public int getNonEmptyTracksCount() {
 			int count = 0;
 			for (Track track : tracks) {
@@ -1891,7 +1971,7 @@ public class GPXUtilities {
 		}
 
 		public String getArticleTitle() {
-			return metadata != null ? metadata.getArticleTitle() : null;
+			return metadata.getArticleTitle();
 		}
 
 		private int getItemsToWriteSize() {
@@ -1902,9 +1982,19 @@ public class GPXUtilities {
 			for (TrkSegment segment : getNonEmptyTrkSegments(false)) {
 				size += segment.points.size();
 			}
-			if (metadata != null) {
+
+			// metadata
+			size++;
+			if (metadata.author != null) {
 				size++;
 			}
+			if (metadata.copyright != null) {
+				size++;
+			}
+			if (metadata.bounds != null) {
+				size++;
+			}
+
 			if (!getExtensionsToWrite().isEmpty() || getExtensionsWriter() != null) {
 				size++;
 			}
@@ -1928,7 +2018,7 @@ public class GPXUtilities {
 	}
 
 	public static String asString(GPXFile file) {
-		final Writer writer = new StringWriter();
+		Writer writer = new StringWriter();
 		writeGpx(writer, file, null);
 		return writer.toString();
 	}
@@ -1948,13 +2038,7 @@ public class GPXUtilities {
 			log.error("Error saving gpx", e); //$NON-NLS-1$
 			return e;
 		} finally {
-			if (output != null) {
-				try {
-					output.close();
-				} catch (IOException ignore) {
-					// ignore
-				}
-			}
+			Algorithms.closeStream(output);
 		}
 	}
 
@@ -1995,33 +2079,32 @@ public class GPXUtilities {
 	}
 
 	private static void writeMetadata(XmlSerializer serializer, GPXFile file, IProgress progress) throws IOException {
-		String trackName = file.metadata != null ? file.metadata.name : getFilename(file.path);
+		String defName = file.metadata.name;
+		String trackName = !Algorithms.isEmpty(defName) ? defName : getFilename(file.path);
 		serializer.startTag(null, "metadata");
 		writeNotNullText(serializer, "name", trackName);
-		if (file.metadata != null) {
-			writeNotNullText(serializer, "desc", file.metadata.desc);
-			if (file.metadata.author != null) {
-				serializer.startTag(null, "author");
-				writeAuthor(serializer, file.metadata.author);
-				serializer.endTag(null, "author");
-			}
-			if (file.metadata.copyright != null) {
-				serializer.startTag(null, "copyright");
-				writeCopyright(serializer, file.metadata.copyright);
-				serializer.endTag(null, "copyright");
-			}
-			writeNotNullTextWithAttribute(serializer, "link", "href", file.metadata.link);
-			if (file.metadata.time != 0) {
-				writeNotNullText(serializer, "time", GPX_TIME_FORMAT.format(new Date(file.metadata.time)));
-			}
-			writeNotNullText(serializer, "keywords", file.metadata.keywords);
-			if (file.metadata.bounds != null) {
-				writeBounds(serializer, file.metadata.bounds);
-			}
-			writeExtensions(serializer, file.metadata, null);
-			if (progress != null) {
-				progress.progress(1);
-			}
+		writeNotNullText(serializer, "desc", file.metadata.desc);
+		if (file.metadata.author != null) {
+			serializer.startTag(null, "author");
+			writeAuthor(serializer, file.metadata.author);
+			serializer.endTag(null, "author");
+		}
+		if (file.metadata.copyright != null) {
+			serializer.startTag(null, "copyright");
+			writeCopyright(serializer, file.metadata.copyright);
+			serializer.endTag(null, "copyright");
+		}
+		writeNotNullTextWithAttribute(serializer, "link", "href", file.metadata.link);
+		if (file.metadata.time != 0) {
+			writeNotNullText(serializer, "time", GPX_TIME_FORMAT.format(new Date(file.metadata.time)));
+		}
+		writeNotNullText(serializer, "keywords", file.metadata.keywords);
+		if (file.metadata.bounds != null) {
+			writeBounds(serializer, file.metadata.bounds);
+		}
+		writeExtensions(serializer, file.metadata, null);
+		if (progress != null) {
+			progress.progress(1);
 		}
 		serializer.endTag(null, "metadata");
 	}

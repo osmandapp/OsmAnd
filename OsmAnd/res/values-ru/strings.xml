@@ -18,7 +18,7 @@
     <string name="get_discount_title">Получите %1$d %2$s со скидкой %3$s.</string>
     <string name="get_discount_first_part">%1$s за первый %2$s</string>
     <string name="get_discount_first_few_part">%1$s за первые %2$s</string>
-    <string name="get_discount_second_part">затем %1$s</string>
+    <string name="get_discount_second_part">Затем %1$s</string>
     <string name="cancel_subscription">Отменить подписку</string>
     <string name="price_and_discount">%1$s • Экономия %2$s</string>
     <string name="rendering_attr_winter_road_name">Автозимник</string>
@@ -836,7 +836,6 @@
     <string name="save_current_track">Сохранить текущий трек</string>
     <string name="save_track_interval_descr">Укажите интервал фиксирования точек для записи трека во время навигации</string>
     <string name="save_track_interval">Интервал записи во время навигации</string>
-    <string name="save_track_to_gpx_descrp">Во время навигации GPX-треки будут автоматически сохранены в папку с треками.</string>
     <string name="save_track_to_gpx">Автозапись трека во время навигации</string>
     <string name="update_tile">Обновить карту</string>
     <string name="reload_tile">Обновить часть карты</string>
@@ -1814,7 +1813,7 @@
     <string name="use_fast_recalculation_desc">Пересчитывается только начальная часть маршрута. Полезно для дальних поездок.</string>
     <string name="osm_edit_context_menu_delete">Удалить правки OSM</string>
     <string name="rendering_value_disabled_name">Выключено</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Сетевая принадлежность</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Принадлежность к сети (маршрутов)</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="shared_string_logoff">Выйти</string>
     <string name="index_name_netherlands">Европа — Нидерланды</string>
@@ -1840,7 +1839,7 @@
     <string name="lang_et">Эстонский</string>
     <string name="lang_ceb">Себуанский</string>
     <string name="archive_wikipedia_data">У вас имеются старые несовместимые данные из Википедии. Заархивировать их?</string>
-    <string name="disable_recording_once_app_killed">Остановить локальную запись</string>
+    <string name="disable_recording_once_app_killed">Остановить автономную запись</string>
     <string name="lang_pms">Пьемонтский</string>
     <string name="lang_tl">Тагальский</string>
     <string name="lang_sh">Сербохорватский</string>
@@ -3412,7 +3411,7 @@
     <string name="login_and_pass">Имя пользователя и пароль</string>
     <string name="plugin_global_prefs_info">Эти настройки плагина применяются ко всем профилям</string>
     <string name="osm_editing">Редактирование OSM</string>
-    <string name="osm_edits_view_descr">Здесь отображаются ваши правки и ошибки OSM, ещё не отправленные в %1$s. Отправленные изменения не отображаются.</string>
+    <string name="osm_edits_view_descr">Посмотреть свои ещё незагруженные правки или ошибки OSM можно в %1$s. Отправленные изменения не отображаются.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Значок, отображаемый во время навигации или движения.</string>
     <string name="select_map_icon_descr">Значок, отображаемый в состоянии покоя.</string>
@@ -3701,7 +3700,7 @@
     <string name="route_between_points">Маршрут между точками</string>
     <string name="plan_a_route">Планирование маршрута</string>
     <string name="gpx_split_interval_none_descr">Выберите способ разбиения: по времени или по расстоянию.</string>
-    <string name="gpx_split_interval_descr">Интервал между метками расстояния или времени на треке.</string>
+    <string name="gpx_split_interval_descr">Выберите интервал, через который будут отображаться метки с расстоянием или временем на треке.</string>
     <string name="shared_string_custom">Своё значение</string>
     <string name="add_hidden_group_info">Добавленная точка не будет видна на карте, так как выбранная группа скрыта, найти её можно в «%s».</string>
     <string name="track_show_start_finish_icons">Значки старта и финиша</string>
@@ -3774,7 +3773,7 @@
     <string name="all_next_segments_will_be_recalc">Все последующие сегменты будут пересчитаны с использованием выбранного профиля.</string>
     <string name="all_previous_segments_will_be_recalc">Все предыдущие сегменты будут пересчитаны с использованием выбранного профиля.</string>
     <string name="open_saved_track">Открыть сохранённый трек</string>
-    <string name="disable_recording_once_app_killed_descrp">Остановка записи GPX при принудительном закрытии (через последние приложения). (Из панели уведомлений Android исчезнет значок фонового режима.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Приостановка записи трека при принудительном закрытии приложения (через список недавних приложений). (Из панели уведомлений Android исчезнет значок фонового режима.)</string>
     <string name="shared_string_is_saved">сохранён</string>
     <string name="one_point_error">Добавьте хотя бы две точки.</string>
     <string name="shared_string_redo">Повторить</string>
@@ -4362,6 +4361,10 @@
 \n
 \n• Обновление пользовательского интерфейса для поиска координат UTM
 \n
+\n• Фильтр GPS для GPX треков
+\n
+\n• Виджет «Профиль высоты» (Pro)
+\n
 \n• Избранные: добавлена возможность просмотра недавно использованных значков
 \n
 \n• Планирование маршрута: после запуска будет использоваться выбранный профиль
@@ -4434,7 +4437,7 @@
     <string name="skip_confirmation">Да, пропустить</string>
     <string name="icon_group_industrial">Промышленность</string>
     <string name="files_remaining">Осталось файлов: %1$s %2$s</string>
-    <string name="copying_file">Копирование файла %1$s</string>
+    <string name="copying_file">Копирование файла %1$s…</string>
     <string name="storage_found_files_descr">Нажмите «%1$s», чтобы скопировать файлы (%2$s шт.) из «%3$s» в «%4$s». Это может занять некоторое время.</string>
     <string name="shared_storage_third_step">Предоставьте разрешение на доступ к папке. Без этого OsmAnd не cможет копировать файлы.</string>
     <string name="shared_string_skip_warning">Вы уверены, что хотите пропустить миграцию\? OsmAnd больше не имеет доступа к вашим файлам в общем хранилище.
@@ -4460,28 +4463,64 @@
     <string name="migration_files_present">%1$d файлов (%2$s) присутствуют в выбранном местоположении «%3$s».</string>
     <string name="show_parameter_seekbar">Показать параметр ползунка</string>
     <string name="app_modes_options">Выбор режимов приложения</string>
-    <string name="exit_without_saving_warning">Выйти без сохранения\? Все изменения будут потеряны.</string>
+    <string name="exit_without_saving_warning">Выйти без сохранения изменений\?</string>
     <string name="shared_string_hide_slope">Скрыть уклон</string>
     <string name="shared_string_show_slope">Показать уклон</string>
     <string name="shared_string_uphill">Подъём</string>
     <string name="shared_string_downhill">Спуск</string>
     <string name="elevation_profile">Профиль высоты</string>
-    <string name="shared_string_grade">Уклон</string>
+    <string name="shared_string_grade">Макс. уклон</string>
     <string name="shared_string_statistics">Статистика</string>
     <string name="distance_between_points">Расстояние между точками</string>
-    <string name="gps_filter_precision">Мин. точность GPS</string>
+    <string name="gps_filter_precision">Точность GPS</string>
     <string name="gps_filter_smoothing">Сглаживание</string>
-    <string name="gps_filter_actions_description">OsmAnd применяет изменения к треку, не сохраняя их в файл. Вы можете сохранить изменения вручную.</string>
+    <string name="gps_filter_actions_description">OsmAnd применит изменения к треку, не сохраняя их в файл. Вы можете сохранить изменения вручную.</string>
     <string name="shared_string_gps_filter">GPS фильтр</string>
     <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="save_changes_into_file">Сохранить изменения в файл</string>
     <string name="save_as_copy">Сохранить как копию</string>
     <string name="gps_filter_hdop_desc">Установите максимально допустимое значение для HDOP.
-\nТочки, превышающие установленный параметр, будут скрыты.</string>
+\nТочки с более высоким значением будут скрыты.</string>
     <string name="shared_string_precision">Точность</string>
-    <string name="gps_filter_speed_altitude_desc">Точки трека, соответствующие заданному интервалу, будут видны на графике и карте, остальные будут скрыты.</string>
+    <string name="gps_filter_speed_altitude_desc">На графике и карте будут отображаться только точки трека, соответствующие заданному интервалу, остальные будут скрыты.</string>
     <string name="gps_filter_smoothing_desc">Установите пороговое расстояние между точками.
-\nТочки трека, находящиеся на расстоянии не менее X от последней видимой точки, будут скрыты.
-\nБудьте внимательны, чем больше расстояние, тем проще геометрия трека.</string>
-    <string name="storage_migration_wrong_folder_warning">Мы не можем найти данные OsmAnd в выбранной папке. Повторите попытку.</string>
+\nТочки трека, находящиеся на расстоянии менее заданного от последней видимой точки, будут скрыты.
+\nИмейте в виду, что высокие пороговые значения могут чрезмерно упростить геометрию трека.</string>
+    <string name="storage_migration_wrong_folder_warning">В выбранной папке данные OsmAnd не найдены. Повторите попытку.</string>
+    <string name="created_on">Создан</string>
+    <string name="use_routing_fallback">Использовать резервную маршрутизацию</string>
+    <string name="shared_string_size">Размер</string>
+    <string name="use_routing_fallback_description">Использовать офлайн маршрутизацию, если онлайн недоступна.</string>
+    <string name="turn_arrows">Стрелки поворота</string>
+    <string name="turn_arrows_descr">Выберите, будут ли на линии маршрута указаны стрелки поворотов.</string>
+    <string name="waypoint_appearance">Внешний вид путевой точки</string>
+    <string name="track_file">Файл трека</string>
+    <string name="waypoint_template">Шаблон путевой точки</string>
+    <string name="navigate_point_format_swiss_grid">Швейцарская сетка (CH1903)</string>
+    <string name="navigate_point_format_swiss_grid_plus">Швейцарская сетка (CH1903 +)</string>
+    <string name="predefined_waypoint_appearance_description">Нажатие на действие автоматически сохранит путевую точку с предопределенными параметрами.</string>
+    <string name="always_ask_waypoint_appearance_description">Нажатие на действие откроет экран «Добавить путевую точку», где можно изменить её название и внешний вид.</string>
+    <string name="track_file_description">Нажатие на действие откроет диалог выбора доступных треков.</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Показать теги fixme</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Теги note</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Показать теги note</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Значки на мелком масштабе</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Схематическое отображение значков на мелком масштабе</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Не скрывать водные туннели</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Водные туннели</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Теги fixme</string>
+    <string name="shared_string_used">Используется</string>
+    <string name="files_with_route_restrictions">Файлы с ограничениями маршрута</string>
+    <string name="shared_string_not_used">Не используется</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_attr_seabedDetail_description">Дополнительная текстовая информация о классификации поверхности морского дна, комбинированных типах поверхности, категории и таксоне сорняков или морских водорослей</string>
+    <string name="rendering_value_category_name">Категория</string>
+    <string name="rendering_attr_seabedDetail_name">Детали морского дна</string>
+    <string name="rendering_value_all_name">Все</string>
+    <string name="rendering_value_omit_name">Пропустить</string>
+    <string name="save_track_to_gpx_descrp">Запускать запись трека во время навигации. По завершению трек будет сохранен автоматически.</string>
+    <string name="gpx_no_routes_title">Нет маршрутов</string>
+    <string name="gpx_no_routes_descr">Для добавления маршрута в файл вы можете воспользоваться инструментом «%1$s».</string>
+    <string name="please_provide_group_name_message">Укажите название группы.</string>
+    <string name="quick_action_add_route_descr">Кнопка для начала построения маршрута из центра экрана.</string>
 </resources>

@@ -534,7 +534,6 @@
     <string name="save_current_track">Huidige GPX-track opslaan</string>
     <string name="save_track_interval">Registratie-interval bij navigatie</string>
     <string name="save_track_interval_descr">Stel het logging-interval in voor track-opname tijdens navigatie</string>
-    <string name="save_track_to_gpx_descrp">Tijdens het navigeren wordt automatisch een GPX-track opgeslagen in de tracks-map.</string>
     <string name="save_track_to_gpx">GPX-Track automatisch opnemen tijdens navigatie</string>
     <string name="update_tile">Kaart bijwerken</string>
     <string name="reload_tile">Herlaad kaartsegment</string>
@@ -1714,7 +1713,7 @@
     <string name="navigation_item_description">Navigatie-instellingen.</string>
     <string name="planning_trip_item">Een reis plannen</string>
     <string name="faq_item">FAQ</string>
-    <string name="faq_item_description">Veel gestelde vragen</string>
+    <string name="faq_item_description">Veel gestelde vragen.</string>
     <string name="map_viewing_item">De kaart bekijken</string>
     <string name="search_on_the_map_item">Zoeken op de kaart</string>
     <string name="instalation_troubleshooting_item">Installeren en foutoplossen</string>
@@ -2234,7 +2233,7 @@
     <string name="routing_attr_relief_smoothness_factor_name">Selecteer hoogte-schommelingen</string>
     <string name="shared_string_paused">In pauze</string>
     <string name="lang_ber">Berbers</string>
-    <string name="hillshade_menu_download_descr">Download ‘Reliëfschaduwkaarten’ om verticale schaduwen te tonen.</string>
+    <string name="hillshade_menu_download_descr">Download ‘Reliëfschaduwkaarten’ om de verticale schaduwen te tonen.</string>
     <string name="hillshade_purchase_header">Installeer de ‘Hoogtelijnen’-plug-in om hoogteverschillen in het terrein te visualiseren.</string>
     <string name="hide_from_zoom_level">Verberg starten vanaf zoom-niveau</string>
     <string name="srtm_menu_download_descr">Download de Hoogtelijnenkaart voor deze regio.</string>
@@ -2591,7 +2590,7 @@
     <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Onbeperkte downloads</string>
     <string name="wikipedia_offline">Wikipedia offline</string>
-    <string name="contour_lines_hillshade_maps">Hoogtelijnen &amp; Reliëfschaduwkaarten</string>
+    <string name="contour_lines_hillshade_maps">Hoogtelijnen &amp; reliëfschaduwkaarten</string>
     <string name="unlock_all_features">Ontgrendel alle OsmAnd-functies</string>
     <string name="purchase_dialog_title">Abonnementsvorm kiezen</string>
     <string name="purchase_dialog_travel_description">Kies een van onderstaande aankopen om de offline reisgids te kunnen gebruiken:</string>
@@ -3964,11 +3963,11 @@
     <string name="uploaded_count">Opgeladen %1$d van %2$d</string>
     <string name="toast_select_edits_for_upload">Selecteer de op te laden wijzigingen</string>
     <string name="track_recording_description">Stoppen met opnemen\?
-\n(Alle niet opgeslagen gegevens gaan verloren.).</string>
+\nAlle niet-opgeslagen gegevens gaan verloren.</string>
     <string name="select_segments">Selecteer segmenten</string>
     <string name="select_segments_description">%1$s bevat meer dan één segment, je moet het noodzakelijke deel selecteren om te navigeren.</string>
     <string name="segments_count">Segment %1$d</string>
-    <string name="hillshade_slope_contour_lines">Hillshade / Helling / Contourlijnen</string>
+    <string name="hillshade_slope_contour_lines">Reliëfschaduw / Helling / Contourlijnen</string>
     <string name="open_place_reviews_plugin_description">OpenPlaceReviews is een gemeenschaps gestuurd project over openbare plaatsen zoals restaurants, hotels, musea, way-points. Het verzamelt alle openbare informatie over hen, zoals foto\'s, recensies, links naar andere systemen die OpenStreetMap, Wikipedia linken.
 \n
 \nAlle OpenPlaceReview-gegevens zijn open en voor iedereen beschikbaar: http://openplacereviews.org/data.
@@ -4045,7 +4044,7 @@
     <string name="renew_subscription">Abonnement vernieuwen</string>
     <string name="in_grace_period">Uitstelperiode</string>
     <string name="on_hold">In afwachting</string>
-    <string name="expired">Niet meer geldig</string>
+    <string name="expired">Verlopen</string>
     <string name="release_4_0_beta">• Optie toegevoegd om contourlijnen in voet te downloaden
 \n
 \n• Plan Route landschap: tabbladen toegevoegd om te wisselen tussen punten of grafieken
@@ -4061,12 +4060,12 @@
 \n</string>
     <string name="update_all_maps_added">Alle kaarten bijwerken die zijn toegevoegd aan %1$s\?</string>
     <string name="shared_string_feet">voet</string>
-    <string name="srtm_unit_format">Contour lijnen (eenheid) formaat</string>
+    <string name="srtm_unit_format">Eenheid van hoogtelijnen</string>
     <string name="srtm_download_list_help_message">OsmAnd biedt gegevens van contourlijnen in meters en voet aan. Je zal het bestand opnieuw moeten downloaden om het formaat te wijzigen.</string>
     <string name="srtm_download_single_help_message">Selecteer a.u.b. een variant. Je zal het bestand opnieuw moeten downloaden om het formaat te wijzigen.</string>
     <string name="exit_number">Exit nummer</string>
     <string name="announce_when_exceeded">Aankondigen wanneer overschreden</string>
-    <string name="user_points">Gebruiker punten</string>
+    <string name="user_points">Gebruikerspunten</string>
     <string name="output">Output</string>
     <string name="route_line_use_gradient_coloring">De routelijn wordt ingekleurd, afhankelijk van het hoogteprofiel van de route.</string>
     <string name="shared_string_min_height">Min. hoogte</string>
@@ -4130,14 +4129,14 @@
     <string name="benefits_for_contributors_secondary_descr">Log in op OpenStreetMap om te controleren of je recht hebt op onbeperkte maandelijkse en uurlijkse kaart updates.</string>
     <string name="use_login_and_password">Gebruik gebruikersnaam en wachtwoord</string>
     <string name="available_until">Beschikbaar tot %1$s</string>
-    <string name="enough_contributions_descr">Proficiat, je hebt genoeg bijdragen geleverd aan OpenStreetMap en kan nu genieten van onbeperkte OsmAnd kaart updates!</string>
+    <string name="enough_contributions_descr">Proficiat, je hebt genoeg OpenStreetMap bijdragen geleverd en kan nu genieten van onbeperkte OsmAnd kaart updates!</string>
     <string name="shared_string_contributions">Bijdragen</string>
     <string name="contributions_may_calculate_with_delay">Het berekenen van de bijdragen kan enkele uren duren.</string>
     <string name="map_updates_are_unavailable_yet">Kaart updates zijn nog niet beschikbaar. :-(</string>
     <string name="connect_track_points_as">Routepunten verbinden</string>
     <string name="pro_features">Pro functies</string>
     <string name="purchases_restored">Aankoop hersteld</string>
-    <string name="grey_color_undefined">Grijs wordt gebruikt wanneer de nodige gegevens ontbreken voor dat deel.</string>
+    <string name="grey_color_undefined">Delen zonder gegevens zijn grijs gekleurd.</string>
     <string name="backup_deleting_all_data">Verwijderen van alle gegevens…</string>
     <string name="backup_deleted_all_data">Verwijder alle gegevens.</string>
     <string name="backup_data_removed">Alle gegevens zijn verwijderd.</string>
@@ -4147,20 +4146,20 @@
     <string name="backup_welcome_back">Welkom terug!</string>
     <string name="attribute">Eigenschappen</string>
     <string name="shared_string_purchased">Gekocht</string>
-    <string name="routeInfo_surface_description">Vermeld extra informatie over het fysieke oppervlak van wegen en paden.</string>
-    <string name="routeInfo_roadClass_description">Kleur de route volgens de weegclassificatie.</string>
-    <string name="add_group_to_markers">Voeg de groep toe tot je lijst van markeringen</string>
-    <string name="remove_group_from_markers">Verwijder de groep uit lijst van markeringen</string>
+    <string name="routeInfo_surface_description">Vermeld informatie over het fysieke oppervlak van wegen en paden.</string>
+    <string name="routeInfo_roadClass_description">Kleur de route volgens de wegclassificatie.</string>
+    <string name="add_group_to_markers">Groep toevoegen aan markeringslijst</string>
+    <string name="remove_group_from_markers">Groep uit markeringslijst verwijderen</string>
     <string name="start_point">Start</string>
     <string name="mapillary_menu_filter_description_new">Filter afbeelding op basis van tijdstip of type. Enkel beschikbaar in een ingezoomde weergave.</string>
-    <string name="service_is_not_available_please_try_later">De service is niet beschikbaar, gelieve later opnieuw te proberen</string>
+    <string name="service_is_not_available_please_try_later">De service is niet beschikbaar, gelieve later opnieuw te proberen.</string>
     <string name="travel_routes">Reiswegen</string>
     <string name="setting_supported_by_style">Deze instelling is beschikbaar in de \'%1$s\' kaartstijl</string>
     <string name="direct_line_maps_required_descr">De route berekening duurt langer dan gewoonlijk.
 \n
 \nMisschien zijn enkele kaarten niet geladen.</string>
     <string name="cancel_anytime_in_amazon_app">Annuleer het op elk moment via de Amazon app</string>
-    <string name="no_activity_for_intent">Er zijn geen gepaste applicaties zijn gevonden om deze actie uit te voeren</string>
+    <string name="no_activity_for_intent">Installeer een app die deze actie kan uitvoeren.</string>
     <string name="no_items_of_type_message">Je heb geen items van dit type</string>
     <string name="routeInfo_smoothness_description">Voorziet een classificatieschema volgens de bruikbaarheid van een weg voor wielvoertuigen in het bijzonder voor de regelmatigheid en vlakte van de ondergrond.</string>
     <string name="shared_string_files">Bestanden</string>
@@ -4186,8 +4185,8 @@
     <string name="routing_attr_prefer_horse_routes_name">Verkies paardrijroutes</string>
     <string name="empty_category_name">Lege categorie naam</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Kleur in volgens netwerkrelatie.</string>
-    <string name="option_available_only_in_osmand_pro">Deze optie is beschikbaar als onderdeel van het OsmAnd Pro abonnement.</string>
-    <string name="track_has_no_needed_data">Het pad bevat niet de nodige gegevens.</string>
+    <string name="option_available_only_in_osmand_pro">Beschikbaar als onderdeel van het OsmAnd Pro abonnement.</string>
+    <string name="track_has_no_needed_data">Het pad ontbreekt de nodige gegevens.</string>
     <string name="logout_from_osmand_cloud">Log uit bij OsmAnd Cloud</string>
     <string name="explore_wikipedia_offline">Verken Wikipedia offline.</string>
     <string name="backup_version_history_removed">Alle versiehistoriek is verwijderd.</string>
@@ -4198,7 +4197,7 @@
     <string name="download_server_version">Download de serverversie</string>
     <string name="upload_local_version">Load lokale versie op</string>
     <string name="make_backup_descr">Er zijn vele veranderingen op dit apparaat. Maak alsjeblieft een back-up om geen van deze verandering te verliezen.</string>
-    <string name="upload_gpx_description_hint">Indien je dit leeg laat zullen de track namen gebruikt worden als beschrijving. De ingevulde beschrijving word toegepast op iedere track.</string>
+    <string name="upload_gpx_description_hint">Indien je dit leeg laat zullen de track namen gebruikt worden als beschrijving. De ingevulde beschrijving wordt toegepast op iedere track.</string>
     <string name="promo_subscription">Promotie op het abonnement</string>
     <string name="backup_setup">Stel back-ups in</string>
     <string name="on_hold_since">Op pauze gezet sinds %1$s</string>
@@ -4220,7 +4219,7 @@
     <string name="ltr_or_rtl_combine_via_or">%1$s of %2$s</string>
     <string name="icon_group_nautical">Nautisch</string>
     <string name="backup_delete_types_descr">Verwijder alle gegevens waarvan de gegevens zijn verouderd van OsmAnd Cloud\?</string>
-    <string name="osmand_cloud_help_descr">Hulp nodig\? Neem gelieve contact met ons op via %1$s.</string>
+    <string name="osmand_cloud_help_descr">Hulp nodig\? Neem gelieve contact met ons op via %1$s</string>
     <string name="purchases_feature_desc_pro_widgets">Krijg toegang tot OsmAnd Pro functies zoals routekleuringen en meer.</string>
     <string name="backup_welcome_back_descr">Herstel jouw gegevens op dit apparaat gebruikmakend van bestaande back-ups of back-up je gegevens naar OsmAnd Cloud.</string>
     <string name="release_4_0">• Cloud back-ups
@@ -4250,11 +4249,15 @@
     <string name="internal_app_storage_description">Interne opslag, verborgen voor gebruikers en andere apps, dus niemand buiten OsmAnd heeft toegang tot jouw gegevens.</string>
     <string name="shared_string_articles">Artikelen</string>
     <string name="shared_storage_warning_title">Veranderingen in de opslag gebruik regels</string>
-    <string name="purchases_feature_desc_android_auto">OsmAnd offline kaarten en navigatie op het scherm van je wagen met gemakkelijke integratie met de besturing van je wagen.</string>
+    <string name="purchases_feature_desc_android_auto">Brengt OsmAnd offline kaarten en navigatie op het scherm van je wagen en integreert met de bedieningselementen van je wagen.</string>
     <string name="included_categories">Inbegrepen categorieën</string>
     <string name="release_4_1">• Initiële ondersteuning voor Android Auto
 \n
 \n• Geüpdatete gebruikersinterface om UTM coördinaten te zoeken
+\n
+\n• GPS filter voor GPX tracks
+\n
+\n• Hoogte widget (Pro)
 \n
 \n• Mogelijkheid om recent gebruikte iconen te zien bij favorieten
 \n
@@ -4307,20 +4310,20 @@
     <string name="shared_string_statistics">Statistieken</string>
     <string name="gps_filter_hdop_desc">Stel de maximale toegelaten waarde in voor HDOP.
 \nPunten groter dan de ingestelde waarde zullen worden verborgen.</string>
-    <string name="gps_filter_speed_altitude_desc">De track punten die voldoen aan het ingestelde interval zullen zichtbaar zijn op de kaart en de grafiek. De andere punten zullen verborgen worden.</string>
+    <string name="gps_filter_speed_altitude_desc">Enkel track punten die voldoen aan het ingestelde interval zullen zichtbaar zijn op de kaart en de grafiek. De andere punten worden verborgen.</string>
     <string name="distance_between_points">Afstand tussen de punten</string>
-    <string name="gps_filter_precision">Minimum GPS nauwkeurigheid</string>
+    <string name="gps_filter_precision">GPS nauwkeurigheid</string>
     <string name="gps_filter_smoothing">Afvlakking</string>
     <string name="save_changes_into_file">Sla de wijzigingen op in een bestand</string>
     <string name="save_as_copy">Sla op als kopie</string>
-    <string name="gps_filter_actions_description">OsmAnd past de wijziging toe op de track zonder deze op te slaan in het bestand. Je kan de wijziging handmatig opslaan.</string>
+    <string name="gps_filter_actions_description">OsmAnd past de wijziging toe op de track zonder het bestand bij te werken. Je kan de wijzigingen handmatig opslaan.</string>
     <string name="shared_string_gps_filter">GPS filter</string>
-    <string name="storage_migration_wrong_folder_warning">We kunnen geen OsmAnd gegevens vinden in de geselecteerde map. Gelieve opnieuw te proberen.</string>
+    <string name="storage_migration_wrong_folder_warning">Geen OsmAnd gegevens in de geselecteerde map gevonden. Gelieve opnieuw te proberen.</string>
     <string name="ltr_or_rtl_combine">%1$s%2$s</string>
     <string name="icon_group_education">Educatie</string>
     <string name="shared_string_precision">Nauwkeurigheid</string>
     <string name="gps_filter_smoothing_desc">Stel de drempelafstand tussen de punten in.
-\nTrackpunten die zich op een afstand minder dan de drempelafstand bevinden van het laatst zichtbare punt zal worden verborgen.
+\nTrackpunten die zich op een afstand minder dan de drempelafstand bevinden van het laatst zichtbare punt worden verborgen.
 \nLet op, hoe groter de afstand hoe simpeler de track vorm.</string>
     <string name="shared_string_migration">Migratie</string>
     <string name="migration_files_present">%1$d bestanden (%2$s) zijn aanwezig in de geselecteerde locatie \'%3$s\'.</string>
@@ -4331,11 +4334,123 @@
     <string name="add_to_group">Voeg toe aan groep</string>
     <string name="app_profile_type">App profieltype</string>
     <string name="map_marker_options">Kaartmarkeringsopties</string>
-    <string name="app_modes_options">Kies App modus</string>
+    <string name="app_modes_options">Kies app modus</string>
     <string name="shared_string_memory">Geheugen</string>
     <string name="memory_allocated_for_routing_ds">Hoger geheugenwaardes versnellen de berekening van lange routes (meer dan 500 km), maar kunnen de prestaties van andere applicaties beïnvloeden.
 \nDit heeft geen effect op de snelheid voor het berekenen van kortere routes.</string>
     <string name="memory_allocated_for_routing">Geheugen toegewezen voor routeberekeningen</string>
     <string name="show_parameter_seekbar">Toon parameter zoekbalk</string>
-    <string name="exit_without_saving_warning">Ben je zeker dat je dit wil verlaten zonder op te slaan\? Alle wijzigingen zullen verloren gaan.</string>
+    <string name="exit_without_saving_warning">Verlaten zonder de wijzigingen op te slaan\?</string>
+    <string name="backup_error_no_valid_subscription">Geen geldig abonnement aanwezig</string>
+    <string name="from_to_with_params">Van %1$s naar %2$s</string>
+    <string name="progress_complete">%1$s voltooid</string>
+    <string name="storage_copying_files_size">Kopiëren van %1$s bestanden voor %2$s</string>
+    <string name="storage_found_files_size">%1$s bestanden gevonden voor %2$s</string>
+    <string name="storage_copied_files_size">%1$s bestanden gekopieerd voor %2$s</string>
+    <string name="storage_found_files_descr">Tik op \"%1$s\" om %2$s bestanden te kopiëren van \"%3$s\" naar \"%4$s\". Dit kan even duren.</string>
+    <string name="display_groups_visibility_dialog_description">Je kan de zichtbaarheid van de groep op de kaart regelen. Indien de track verborgen is zullen alle groepen ook verborgen zijn.</string>
+    <string name="folder_access_denied">Toestemming is noodzakelijk om toegang te krijgen tot de geselecteerde map.</string>
+    <string name="copying_completed">Gekopieerd</string>
+    <string name="shared_storage_migration">Migratie van gedeeld geheugen</string>
+    <string name="backup_error_gzip_only_supported_upload">Het bestand moet verzonden worden in het .gzip formaat</string>
+    <string name="backup_error_subscription_was_used">Abonnement of promotiecode gebruikt door een andere account %1$s</string>
+    <string name="backup_delete_types">Verwijder alle uitgeschakelde gegevens types</string>
+    <string name="from_with_param">Vanaf %1$s</string>
+    <string name="regular_price">Reguliere prijs</string>
+    <string name="shared_string_includes">Inbegrepen</string>
+    <string name="backup_error_subscription_was_expired_descr">Je OsmAnd Pro abonnement is verlopen, vernieuw dit abonnement om back-ups te gebruiken. Je kan nog steeds je gegevens op OsmAnd Cloud herstellen.</string>
+    <string name="wikipedia_and_wikivoyage_offline">Wikipedia en Wikivoyage offline</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Krijg toegang tot meer regelmatige kaart updates. Updates op uurlijkse, dagelijkse of wekelijkse basis zijn mogelijk. De updates bevatten enkel de veranderingen van de gewijzigde gebieden.</string>
+    <string name="purchases_feature_desc_monthly_map_updates">Krijg toegang tot maandelijkse updates voor offline kaarten.</string>
+    <string name="purchases_feature_desc_wikivoyage">Verken Wikivoyage offline. Artikels zijn verdeeld over de landen en regio\'s en beschikbaar in alle talen.</string>
+    <string name="purchases_feature_desc_nautical">Verkrijg toegang tot zeediepte informatie</string>
+    <string name="delete_version_history">Versiegeschiedenis wissen</string>
+    <string name="backup_storage_taken">Gebruikte opslagruimte</string>
+    <string name="backup_delete_old_data_descr">De huidige versie van je gegevens worden bewaard op OsmAnd Cloud</string>
+    <string name="backup_pause_all">Alles pauzeren</string>
+    <string name="verification_code_missing_description">Dit kan tot 10 minuten duren. Gebruik de knop hieronder indien de e-mail ook niet in uw spam terecht is gekomen.</string>
+    <string name="verify_email_address_descr">De verificatiecode is verzonden naar %1$s. Gelieve deze code in het veld hieronder in te vullen.</string>
+    <string name="restore_from_file">Herstel vanuit een bestand</string>
+    <string name="backup_into_file">Als bestand back-uppen</string>
+    <string name="local_backup_descr">Gegevens via een lokaal bestand back-uppen of herstellen.</string>
+    <string name="local_backup">Lokale back-ups</string>
+    <string name="backup_and_restore">Back-up &amp; Herstel</string>
+    <string name="search_more">Zoek meer…</string>
+    <string name="shared_string_show_slope">Toon hellingen</string>
+    <string name="shared_string_uphill">Stijgen</string>
+    <string name="copying_file">Kopiëren van bestand %1$s…</string>
+    <string name="loading_list_of_routing_services">Laden van lijst van beschikbare routeringsdiensten</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="rendering_attr_natureReserves_description">Toon natuurreservaten, beschermde gebieden en nationale parken.</string>
+    <string name="shared_string_hide_all">Verberg alles</string>
+    <string name="files_remaining">Resterende bestanden: %1$s%2$s</string>
+    <string name="shared_storage_first_step">Duw op \"%1$s\".
+\nDe bestandsbeheer app opent op de locatie waar je de OsmAnd map kan vinden en openen.</string>
+    <string name="shared_string_copy_to">Kopieer naar</string>
+    <string name="skip_confirmation">Ja, sla over</string>
+    <string name="shared_storage_second_step">Klik op \"Gebruik deze map\".</string>
+    <string name="routeInfo_winter_ice_road_description">Kleur de route- of tracklijn volgens de winterse wegcategorieën.</string>
+    <string name="approximate_route_description">Hecht de route vast aan de wegen op de kaart om all richtingsaanwijzingen en extra informatie te verkrijgen zoals effenheid, wegtypes en meer.</string>
+    <string name="unlimited_map_downloads">Onbeperkte kaart downloads</string>
+    <string name="purchases_feature_desc_wikipedia">Verken Wikipedia offline. Artikels zijn verdeeld over de landen en regio\'s en beschikbaar in alle talen.</string>
+    <string name="routing_attr_avoid_tunnels_description">Tunnels vermijden</string>
+    <string name="rendering_attr_natureReserves_name">Natuurreservaat</string>
+    <string name="shared_storage_migration_descr">Wegens veranderingen in Androids opslagtoegang kan OsmAnd niet langer %1$s gebruiken.
+\n
+\nKopieer all je gegevens naar de nieuwe map.</string>
+    <string name="shared_storage_last_step">Je kan achteraf de gegevensmap opgeven.</string>
+    <string name="shared_storage_third_step">Verleen toelating om toegang te hebben tot de map. Zonder deze toestemming kan OsmAnd de bestanden niet kopiëren.</string>
+    <string name="transparent_status_bar">Doorzichtige statusbalk</string>
+    <string name="backup_error_size_is_exceeded">Maximum opslag van OsmAnd Cloud overschreden %1$s</string>
+    <string name="shared_string_not_included">Niet inbegrepen</string>
+    <string name="cancel_anytime_in_gplay">Annuleer het abonnement op elk moment via Google Play.</string>
+    <string name="nautical_depth">Zeediepte</string>
+    <string name="terrain_maps">Terreinkaarten</string>
+    <string name="offline_wikivoyage">Offline Wikivoyage</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">Terreinkaarten: hoogtelijnen, reliëfschaduwen en hellingen</string>
+    <string name="send_crash_log">Crashrapport verzenden</string>
+    <string name="you_can_get_feature_as_part_of_pattern">Verkrijg \"%1$s\" als onderdeel van het %2$s abonnement. Vergelijking:</string>
+    <string name="offline_wikipeadia">Offline Wikipedia</string>
+    <string name="route_line_use_map_style_width">Standaard breedte gebruiken voor kaartstijl (%1$s).</string>
+    <string name="route_line_use_map_style_color">Standaard kleur gebruiken voor kaartstijl (%1$s).</string>
+    <string name="select_nav_profile_dialog_message">Het \'navigatie type\' bepaalt hoe routes worden berekend door de beschikbare offline en online route-engines.</string>
+    <string name="shared_string_skip_warning">Sla de migratie over\? OsmAnd zal niet langer toegang hebben tot je bestanden in je gedeelde geheugen.
+\n
+\nDe app zal vanaf nu de nieuwe gegevensmap gebruiken.</string>
+    <string name="start_copying">Start kopiëren</string>
+    <string name="shared_storage">Gedeeld geheugen</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Verken de verschillende OsmAnd abonnementen om diegene te vinden die hebt best bij jouw past.</string>
+    <string name="shared_string_view_all">Bekijk alles</string>
+    <string name="shared_string_discussion">Discussie</string>
+    <string name="complete_purchase">Vervolledig aankoop</string>
+    <string name="purchases_feature_desc_osmand_cloud">Neem OsmAnd Cloud om alle je OsmAnd gegevens online op te slaan. Je verliest geen gegevens na herinstallatie, want je kan alle gegevens gemakkelijk back-uppen en herstellen.</string>
+    <string name="purchases_feature_desc_unlimited_map_download">Krijg onbeperkte offline kaart downloads voor alle continenten en regio\'s.</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Lage emissiezones vermijden</string>
+    <string name="purchases_feature_desc_terrain">Hoogtelijnen van het terrein, volledige reliëfschaduwkaarten met donkere tinten en hellingskaarten waarin kleuren worden gebruikt om toppen en laaglanden te onderscheiden.</string>
+    <string name="failed_loading_predefined_engines">Kon de lijst van voorgedefinieerde profielen niet laden.
+\nGelieve uw internetverbinding te controleren.</string>
+    <string name="osmand_cloud_login_descr">Gelieve het e-mailadres waarmee je geregistreerd bent in te vullen. Er zal een éénmalig wachtwoord nodig voor de volgende stap naar toe worden gestuurd.</string>
+    <string name="elevation_profile">Hoogteprofiel</string>
+    <string name="shared_string_hide_slope">Hellingen verbergen</string>
+    <string name="shared_string_downhill">Dalen</string>
+    <string name="transparent_status_bar_descr">Geef de kaart weer onder de statusbalk</string>
+    <string name="contour_lines_hillshades_slope">Hoogtelijnen, reliëfschaduwen en hellingen</string>
+    <string name="backup_error_file_not_available">Bestand onbeschikbaar</string>
+    <string name="backup_error_user_is_not_registered">Er is geen gebruiker geregistreerd met het opgegeven e-mailadres</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Ongeldig of verlopen code</string>
+    <string name="backup_error_token_is_not_valid">Er is iets verkeerd met de opgegeven apparaat ID of code</string>
+    <string name="purchases_feature_desc_combined_wiki">Verken Wikipedia artikelen onderweg zonder een internet connectie. De offline gegevens zijn verdeeld over de landen en zijn beschikbaar in alle talen.</string>
+    <string name="backup_promocode">Promotiecode</string>
+    <string name="routing_attr_avoid_tunnels_name">Tunnels vermijden</string>
+    <string name="backup_version_history">Versiegeschiedenis</string>
+    <string name="restore_complete">Hersteld</string>
+    <string name="select_backup_data_descr">Kies mappen en gegevens om te back-uppen.</string>
+    <string name="provided_by">Verschaft door %1$s</string>
+    <string name="osmand_cloud_authorize_descr">Verlies nooit meer uw gegevens. Maak een back-up en herstel alle info gemakkelijk.</string>
+    <string name="duration_ago">%1$s geleden</string>
+    <string name="last_backup">Laatste back-up</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="send_logcat_log">Logcat log verzenden</string>
+    <string name="shared_string_grade">Helling</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
 </resources>

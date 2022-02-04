@@ -1,15 +1,23 @@
 package net.osmand.plus.views.layers.geometry;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.Shader;
 
 import net.osmand.plus.routing.ColoringType;
-import net.osmand.plus.views.MapTileLayer;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.layers.geometry.MultiColoringGeometryWay.GeometryGradientWayStyle;
+import net.osmand.plus.views.layers.geometry.MultiColoringGeometryWay.GeometrySolidWayStyle;
+import net.osmand.router.RouteColorize;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -87,21 +95,65 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 	}
 
 	@Override
-	protected PathPoint getArrowPathPoint(float iconx, float icony, GeometryWayStyle<?> style, double angle) {
-		return new ColorDependentArrowPathPoint(iconx, icony, angle, style);
+	protected PathPoint getArrowPathPoint(float iconX, float iconY, GeometryWayStyle<?> style, double angle, double percent) {
+		return new ArrowPathPoint(iconX, iconY, angle, style, percent);
 	}
 
-	protected static class ColorDependentArrowPathPoint extends PathPoint {
+	private static class ArrowPathPoint extends PathPoint {
 
-		public ColorDependentArrowPathPoint(float x, float y, double angle, GeometryWayStyle<?> style) {
+		private final double percent;
+
+		ArrowPathPoint(float x, float y, double angle, GeometryWayStyle<?> style, double percent) {
 			super(x, y, angle, style);
+			this.percent = percent;
 		}
 
 		@Override
 		void draw(Canvas canvas, GeometryWayContext context) {
-			if (shouldDrawArrow()) {
-				super.draw(canvas, context);
+			if (style instanceof GeometrySolidWayStyle && shouldDrawArrow()) {
+				Context ctx = style.getCtx();
+				GeometrySolidWayStyle<?> arrowsWayStyle = (GeometrySolidWayStyle<?>) style;
+				Bitmap bitmap = style.getPointBitmap();
+				boolean useSpecialArrow = arrowsWayStyle.useSpecialArrow();
+
+				float newWidth = useSpecialArrow
+						? AndroidUtils.dpToPx(ctx, 12)
+						: arrowsWayStyle.getWidth(0) == 0 ? 0 : arrowsWayStyle.getWidth(0) / 2f;
+				float paintH2 = bitmap.getHeight() / 2f;
+				float paintW2 = newWidth == 0 ? 0 : newWidth / 2f;
+
+				Matrix matrix = getMatrix();
+				matrix.reset();
+				float sy = useSpecialArrow ? newWidth / bitmap.getHeight() : 1;
+				matrix.postScale(newWidth / bitmap.getWidth(), sy);
+				matrix.postRotate((float) angle, paintW2, paintH2);
+				matrix.postTranslate(x - paintW2, y - paintH2);
+
+				if (useSpecialArrow) {
+					drawCircle(canvas, arrowsWayStyle);
+				}
+
+				Paint paint = context.getPaintIconCustom();
+				int arrowColor = arrowsWayStyle.getPointColor();
+				paint.setColorFilter(new PorterDuffColorFilter(arrowColor, PorterDuff.Mode.SRC_IN));
+				canvas.drawBitmap(bitmap, matrix, paint);
 			}
+		}
+
+		private void drawCircle(Canvas canvas, GeometrySolidWayStyle<?> style) {
+			Paint paint = style.getContext().getCirclePaint();
+			paint.setColor(GeometrySolidWayStyle.OUTER_CIRCLE_COLOR);
+			canvas.drawCircle(x, y, style.getOuterCircleRadius(), paint);
+			paint.setColor(getCircleColor(style));
+			canvas.drawCircle(x, y, style.getInnerCircleRadius(), paint);
+		}
+
+		private int getCircleColor(@NonNull GeometrySolidWayStyle<?> style) {
+			if (style instanceof GeometryGradientWayStyle<?>) {
+				GeometryGradientWayStyle<?> gradientStyle = ((GeometryGradientWayStyle<?>) style);
+				return RouteColorize.getIntermediateColor(gradientStyle.currColor, gradientStyle.nextColor, percent);
+			}
+			return style.getColor(0);
 		}
 
 		protected boolean shouldDrawArrow() {

@@ -1,26 +1,40 @@
 package net.osmand.plus.measurementtool.graph;
 
 import android.graphics.Matrix;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.View;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.myplaces.GPXItemPagerAdapter;
+import net.osmand.plus.myplaces.GPXTabItemType;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class CommonChartAdapter extends BaseCommonChartAdapter {
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+public class CommonChartAdapter extends BaseChartAdapter<LineChart, LineData, GpxDisplayItem> {
 
 	private Highlight highlight;
 	private final Map<String, ExternalValueSelectedListener> externalValueSelectedListeners = new HashMap<>();
 	private ExternalGestureListener externalGestureListener;
+
+	private GPXTabItemType gpxGraphType;
 
 	public CommonChartAdapter(OsmandApplication app, LineChart chart, boolean usedOnMap) {
 		super(app, chart, usedOnMap);
@@ -110,6 +124,65 @@ public class CommonChartAdapter extends BaseCommonChartAdapter {
 				}
 			}
 		});
+	}
+
+	@Override
+	protected void attachBottomInfo() {
+		if (additionalData == null || additionalData.analysis == null || gpxGraphType == null) {
+			AndroidUiHelper.updateVisibility(bottomInfoContainer, false);
+			return;
+		}
+		AndroidUiHelper.updateVisibility(bottomInfoContainer, true);
+
+		GPXTrackAnalysis analysis = additionalData.analysis;
+
+		if (gpxGraphType == GPXTabItemType.GPX_TAB_ITEM_GENERAL) {
+			attachGeneralStatistics(analysis);
+		} else if (gpxGraphType == GPXTabItemType.GPX_TAB_ITEM_ALTITUDE) {
+			attachAltitudeStatistics(analysis);
+		} else if (gpxGraphType == GPXTabItemType.GPX_TAB_ITEM_SPEED) {
+			attachSpeedStatistics(analysis);
+		}
+	}
+
+	private void attachGeneralStatistics(@NonNull GPXTrackAnalysis analysis) {
+		LayoutInflater inflater = createThemedInflater();
+		View generalStatistics = inflater.inflate(R.layout.gpx_item_general_statistics, bottomInfoContainer, false);
+		GPXItemPagerAdapter.updateGeneralTabInfo(generalStatistics, app, analysis, false, false);
+		GPXItemPagerAdapter.setupGeneralStatisticsIcons(generalStatistics, app.getUIUtilities());
+
+		boolean timeDefined = analysis.timeSpan > 0;
+		AndroidUiHelper.updateVisibility(generalStatistics.findViewById(R.id.list_divider), timeDefined);
+		AndroidUiHelper.updateVisibility(generalStatistics.findViewById(R.id.bottom_line_blocks), timeDefined);
+		if (timeDefined) {
+			GPXItemPagerAdapter.setupTimeSpanStatistics(generalStatistics, analysis);
+		}
+
+		bottomInfoContainer.addView(generalStatistics);
+	}
+
+	private void attachAltitudeStatistics(@NonNull GPXTrackAnalysis analysis) {
+		LayoutInflater inflater = createThemedInflater();
+		View altitudeStatistics = inflater.inflate(R.layout.gpx_item_altitude_statistics, bottomInfoContainer, false);
+		GPXItemPagerAdapter.updateAltitudeTabInfo(altitudeStatistics, app, analysis);
+		GPXItemPagerAdapter.setupAltitudeStatisticsIcons(altitudeStatistics, app.getUIUtilities());
+		bottomInfoContainer.addView(altitudeStatistics);
+	}
+
+	private void attachSpeedStatistics(@NonNull GPXTrackAnalysis analysis) {
+		LayoutInflater inflater = createThemedInflater();
+		View speedStatistics = inflater.inflate(R.layout.gpx_item_speed_statistics, bottomInfoContainer, false);
+		GPXItemPagerAdapter.updateSpeedTabInfo(speedStatistics, app, analysis, false, false);
+		GPXItemPagerAdapter.setupSpeedStatisticsIcons(speedStatistics, app.getUIUtilities());
+		bottomInfoContainer.addView(speedStatistics);
+	}
+
+	private LayoutInflater createThemedInflater() {
+		return LayoutInflater.from(UiUtilities.getThemedContext(app, isNightMode()));
+	}
+
+	public void setGpxGraphType(@Nullable GPXTabItemType gpxGraphType) {
+		this.gpxGraphType = gpxGraphType;
 	}
 
 	public void addValueSelectedListener(String key, ExternalValueSelectedListener listener) {

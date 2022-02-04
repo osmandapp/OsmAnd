@@ -3921,4 +3921,8 @@
     <string name="poi_membership_filter">Lidmaatschap vereist</string>
     <string name="poi_furniture_filter">Meubels</string>
     <string name="poi_heating_filter">Verwarming</string>
+    <string name="poi_faculty_filter">Faculteit</string>
+    <string name="poi_agrarian_type">Productiemiddelen voor landbouw</string>
+    <string name="poi_service_fleurop_filter">Diensten voor bloemen</string>
+    <string name="poi_mattress_filter">Matras</string>
 </resources>

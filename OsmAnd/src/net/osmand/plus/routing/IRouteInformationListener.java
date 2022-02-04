@@ -1,6 +1,6 @@
 package net.osmand.plus.routing;
 
-import net.osmand.ValueHolder;
+import net.osmand.data.ValueHolder;
 
 public interface IRouteInformationListener {
 

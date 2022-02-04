@@ -105,7 +105,9 @@ public class WidgetsVisibilityHelper {
 				&& !isInWaypointsChoosingMode()
 				&& !isInRouteLineAppearanceMode()
 				&& !isInGpsFilteringMode();
-		return !mapActivity.shouldHideTopControls()
+		boolean showTopControls = !mapActivity.shouldHideTopControls()
+				|| (isInTrackMenuMode() && !isPortrait());
+		return showTopControls
 				&& !isInFollowTrackMode()
 				&& (additionalDialogsHide || !isPortrait());
 	}
@@ -142,7 +144,9 @@ public class WidgetsVisibilityHelper {
 				&& !isInFollowTrackMode()
 				&& !isInRouteLineAppearanceMode()
 				&& !isInGpsFilteringMode();
-		return !mapActivity.shouldHideTopControls()
+		boolean showTopControls = !mapActivity.shouldHideTopControls()
+				|| (isInTrackMenuMode() && !isPortrait());
+		return showTopControls
 				&& !isInPlanRouteMode()
 				&& !(isMapLinkedToLocation() && routingHelper.isFollowingMode())
 				&& (additionalDialogsHide || !isPortrait());
@@ -150,21 +154,23 @@ public class WidgetsVisibilityHelper {
 
 	public boolean shouldShowElevationProfileWidget() {
 		return proVersionAvailable && settings.SHOW_ELEVATION_PROFILE_WIDGET.get()
-				&& isRouteCalculated()
-				&& !isDashboardVisible()
 				&& !isInChangeMarkerPositionMode()
-				&& !isInGpxDetailsMode()
 				&& !isInMeasurementToolMode()
-				&& !isInPlanRouteMode()
-				&& !isInTrackAppearanceMode()
-				&& !isInTrackMenuMode()
-				&& !isInRouteLineAppearanceMode()
-				&& !isMapRouteInfoMenuVisible()
 				&& !isInChoosingRoutesMode()
 				&& !isInWaypointsChoosingMode()
+				&& !isInPlanRouteMode()
+				&& isRouteCalculated();
+		/*
+				&& !isDashboardVisible()
+				&& !isInGpxDetailsMode()
+				&& !isInTrackAppearanceMode()
+				&& !isInTrackMenuMode()
+				&& !isMapRouteInfoMenuVisible()
+				&& !isInRouteLineAppearanceMode()
 				&& !isInFollowTrackMode()
 				&& !isContextMenuFragmentVisible()
 				&& !isMultiSelectionMenuFragmentVisible();
+		 */
 	}
 
 	public boolean shouldShowDownloadMapWidget() {

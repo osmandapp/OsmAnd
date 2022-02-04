@@ -1088,7 +1088,6 @@
     <string name="save_track_to_gpx_globally_descr">Ընդհանուր դիրքի գրանցումը GPX ֆայլի տեսքով կարող եք միացնել կամ անջատել GPX վիջետի միջոցով քարտեզի վրա։</string>
     <string name="save_current_track_descr">Պահպանել ընթացիկ տրեկը որպես GPX ֆայլ։</string>
     <string name="save_current_track">Պահպանել ընթացիկ տրեկը</string>
-    <string name="save_track_to_gpx_descrp">Նավիգացիայի ընթացքում GPX տրեկները ինքնաբերաբար կպահպանվեն տրեկների թղթապանակում։</string>
     <string name="save_track_interval_globally">Մուտքագրման ժամանակի ընդմիջումը</string>
     <string name="save_track_interval">Նավիգացիայի ընթացքում մուտքագրման ժամանակի ընդմիջումը</string>
     <string name="save_track_interval_descr">Ընտրեք մուտքագրման ժամանակի ընդմիջումը նավիգացիայի ընթացքում</string>

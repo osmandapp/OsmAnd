@@ -62,7 +62,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 	private var startCalendar = Calendar.getInstance()
 	private var endCalendar = Calendar.getInstance()
 
-	private var userId = -1
+	private var userId = -1L
 	private var chatId = -1L
 	private var deviceName = ""
 
@@ -214,7 +214,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 
 	override fun onSaveInstanceState(outState: Bundle) {
 		super.onSaveInstanceState(outState)
-		outState.putInt(USER_ID_KEY, userId)
+		outState.putLong(USER_ID_KEY, userId)
 		outState.putLong(CHAT_ID_KEY, chatId)
 		outState.putString(DEVICE_NAME_KEY, deviceName)
 		outState.putLong(START_KEY, startCalendar.timeInMillis)
@@ -285,7 +285,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 
 	private fun readFromBundle(bundle: Bundle?) {
 		bundle?.also {
-			userId = it.getInt(USER_ID_KEY)
+			userId = it.getLong(USER_ID_KEY)
 			chatId = it.getLong(CHAT_ID_KEY)
 			deviceName = it.getString(DEVICE_NAME_KEY, "")
 			startCalendar.timeInMillis = it.getLong(START_KEY)
@@ -428,7 +428,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 
 	private class LoadGpxAsyncTask internal constructor(
 		private val app: TelegramApplication,
-		private val userId: Int,
+		private val userId: Long,
 		private val chatId: Long,
 		private val deviceName: String,
 		private val start: Long,
@@ -489,11 +489,11 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		private const val UPDATE_TRACK_INTERVAL_MS = 30 * 1000L // 30 sec
 		private const val TRACK_UPDATE_MSG_ID = 1001
 
-		fun showInstance(fm: androidx.fragment.app.FragmentManager, userId: Int, chatId: Long, deviceName: String, start: Long, end: Long): Boolean {
+		fun showInstance(fm: androidx.fragment.app.FragmentManager, userId: Long, chatId: Long, deviceName: String, start: Long, end: Long): Boolean {
 			return try {
 				val fragment = UserGpxInfoFragment().apply {
 					arguments = Bundle().apply {
-						putInt(USER_ID_KEY, userId)
+						putLong(USER_ID_KEY, userId)
 						putLong(CHAT_ID_KEY, chatId)
 						putString(DEVICE_NAME_KEY, deviceName)
 						putLong(START_KEY, start)

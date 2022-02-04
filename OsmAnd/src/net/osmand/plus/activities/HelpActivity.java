@@ -1,5 +1,7 @@
 package net.osmand.plus.activities;
 
+import static net.osmand.plus.AppInitializer.LATEST_CHANGES_URL;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -20,24 +22,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.ContextMenuItem.ItemBuilder;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.development.BaseLogcatActivity;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.development.BaseLogcatActivity;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 import java.io.File;
-
-import static net.osmand.plus.AppInitializer.LATEST_CHANGES_URL;
 
 public class HelpActivity extends BaseLogcatActivity implements OnItemClickListener, OnItemLongClickListener {
 
@@ -266,7 +266,7 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 				"feature_articles/navigation-profiles.html"));
 		contextMenuAdapter.addItem(createItem(R.string.osmand_purchases_item, NULL_ID,
 				"feature_articles/osmand_purchases.html"));
-		contextMenuAdapter.addItem(createItem(R.string.subscription_osmandlive_item, NULL_ID,
+		contextMenuAdapter.addItem(createItem(R.string.osm_live_subscriptions, NULL_ID,
 				"feature_articles/subscription.html"));
 		contextMenuAdapter.addItem(createItem(R.string.favorites_item, NULL_ID,
 				"feature_articles/favourites.html"));

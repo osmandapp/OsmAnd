@@ -7,7 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;

@@ -26,7 +26,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.measurementtool.MeasurementEditingContext.AdditionMode;
-import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
@@ -44,7 +44,9 @@ import java.util.Map;
 public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenuProvider {
 
 	private static final int START_ZOOM = 8;
-	private static final int MIN_POINTS_PERCENTILE = 5;
+	private static final int MIN_POINTS_PERCENTILE = 20;
+	// roughly 10 points per tile
+	private static final double MIN_DISTANCE_TO_SHOW_REF_ZOOM = MapUtils.getTileDistanceWidth(START_ZOOM) / 10;
 
 	private OsmandMapTileView view;
 	private boolean inMeasurementMode;
@@ -75,7 +77,9 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	private boolean tapsDisabled;
 	private MeasurementEditingContext editingCtx;
 
-	private Integer pointsStartZoom = null;
+	private boolean showPointsMinZoom;
+	private int showPointsZoomCache = 0;
+
 	private TrackChartPoints trackChartPoints;
 	private ChartPointsHelper chartPointsHelper;
 
@@ -155,8 +159,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	@Override
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		if (inMeasurementMode && !tapsDisabled && editingCtx.getSelectedPointPosition() == -1) {
-			int startZoom = getPointsStartZoom();
-			boolean pointSelected = tileBox.getZoom() >= startZoom && selectPoint(point.x, point.y, true);
+			boolean pointSelected = showPointsMinZoom && selectPoint(point.x, point.y, true);
 			boolean profileIconSelected = !pointSelected && selectPointForAppModeChange(point, tileBox);
 			if (!pointSelected && !profileIconSelected) {
 				pressedPointLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
@@ -211,8 +214,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	@Override
 	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 		if (inMeasurementMode && !tapsDisabled) {
-			int startZoom = getPointsStartZoom();
-			if (tileBox.getZoom() >= startZoom
+			if (showPointsMinZoom
 					&& editingCtx.getSelectedPointPosition() == -1
 					&& editingCtx.getPointsCount() > 0) {
 				selectPoint(point.x, point.y, false);
@@ -375,29 +377,35 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	private void drawPoints(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
-		List<WptPt> points = new ArrayList<>(editingCtx.getBeforePoints());
-		points.addAll(editingCtx.getAfterPoints());
-
-		if (pointsStartZoom == null && points.size() > 100) {
-			double percentile = getPointsDensity();
-			pointsStartZoom = getStartZoom(percentile);
+		if (showPointsZoomCache != tileBox.getZoom()) {
+			List<WptPt> points = new ArrayList<>(editingCtx.getBeforePoints());
+			points.addAll(editingCtx.getAfterPoints());
+			showPointsZoomCache = tileBox.getZoom();
+			showPointsMinZoom = points.size() > 0 && calcZoomToShowPoints(points, showPointsZoomCache);
 		}
-		int startZoom = getPointsStartZoom();
-		if (tileBox.getZoom() >= startZoom) {
-			for (int i = 0; i < points.size(); i++) {
-				WptPt point = points.get(i);
-				if (isInTileBox(tileBox, point)) {
-					drawPointIcon(canvas, tileBox, point, false);
-				}
+		if (showPointsMinZoom) {
+			drawPoints(canvas, tileBox, editingCtx.getBeforePoints());
+			drawPoints(canvas, tileBox, editingCtx.getAfterPoints());
+		}
+	}
+
+	private void drawPoints(Canvas canvas, RotatedTileBox tileBox, List<WptPt> points) {
+		for (int i = 0; i < points.size(); i++) {
+			WptPt point = points.get(i);
+			if (isInTileBox(tileBox, point)) {
+				drawPointIcon(canvas, tileBox, point, false);
 			}
 		}
 	}
 
-	private double getPointsDensity() {
-		List<WptPt> points = new ArrayList<>(editingCtx.getBeforePoints());
-		points.addAll(editingCtx.getAfterPoints());
-
+	private boolean calcZoomToShowPoints(List<WptPt> points, int currentZoom) {
 		List<Double> distances = new ArrayList<>();
+		if (currentZoom >= 21) {
+			return true;
+		}
+		if(currentZoom < START_ZOOM) {
+			return false;
+		}
 		WptPt prev = null;
 		for (WptPt wptPt : points) {
 			if (prev != null) {
@@ -407,40 +415,9 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			prev = wptPt;
 		}
 		Collections.sort(distances);
-		return Algorithms.getPercentile(distances, MIN_POINTS_PERCENTILE);
-	}
-
-	private int getPointsStartZoom() {
-		return pointsStartZoom != null ? pointsStartZoom : START_ZOOM;
-	}
-
-	private int getStartZoom(double density) {
-		if (density < 2) {
-			return 21;
-		} else if (density < 5) {
-			return 20;
-		} else if (density < 10) {
-			return 19;
-		} else if (density < 20) {
-			return 18;
-		} else if (density < 50) {
-			return 17;
-		} else if (density < 100) {
-			return 16;
-		} else if (density < 200) {
-			return 15;
-		} else if (density < 500) {
-			return 14;
-		} else if (density < 1000) {
-			return 13;
-		} else if (density < 2000) {
-			return 11;
-		} else if (density < 5000) {
-			return 10;
-		} else if (density < 10000) {
-			return 9;
-		}
-		return START_ZOOM;
+		double dist = Algorithms.getPercentile(distances, MIN_POINTS_PERCENTILE);
+		int zoomMultiplier = (1 << (currentZoom - START_ZOOM));
+		return dist > (MIN_DISTANCE_TO_SHOW_REF_ZOOM / zoomMultiplier);
 	}
 
 	private void drawBeforeAfterPath(Canvas canvas, RotatedTileBox tb) {
@@ -577,7 +554,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	public void refreshMap() {
-		pointsStartZoom = null;
+		showPointsZoomCache = 0;
+		showPointsMinZoom = false;
 		view.refreshMap();
 	}
 

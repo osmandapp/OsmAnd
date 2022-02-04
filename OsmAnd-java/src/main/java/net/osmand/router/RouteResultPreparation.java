@@ -465,54 +465,38 @@ public class RouteResultPreparation {
 			ctx.routingTime += finalSegment.distanceFromStart;
 			// println("Routing calculated time distance " + finalSegment.distanceFromStart);
 			// Get results from opposite direction roads
-			RouteSegment segment = finalSegment.reverseWaySearch ? finalSegment : 
-				finalSegment.opposite.getParentRoute();
-			int parentSegmentStart = finalSegment.reverseWaySearch ? finalSegment.opposite.getSegmentStart() : 
-				finalSegment.opposite.getParentSegmentEnd();
-			float parentRoutingTime = -1;
+			RouteSegment segment = finalSegment.reverseWaySearch ? finalSegment.parentRoute : finalSegment.opposite;
 			while (segment != null) {
-				RouteSegmentResult res = new RouteSegmentResult(segment.road, parentSegmentStart, segment.getSegmentStart());
-				parentRoutingTime = calcRoutingTime(parentRoutingTime, finalSegment, segment, res);
-				parentSegmentStart = segment.getParentSegmentEnd();
+				RouteSegmentResult res = new RouteSegmentResult(segment.road, segment.getSegmentEnd(), segment.getSegmentStart());
+				float parentRoutingTime = segment.getParentRoute() != null ? segment.getParentRoute().distanceFromStart : 0;
+				res.setRoutingTime(segment.distanceFromStart - parentRoutingTime);
 				segment = segment.getParentRoute();
 				addRouteSegmentToResult(ctx, result, res, false);
+				
 			}
 			// reverse it just to attach good direction roads
 			Collections.reverse(result);
-			segment = finalSegment.reverseWaySearch ? finalSegment.opposite.getParentRoute() : finalSegment;
-			int parentSegmentEnd = finalSegment.reverseWaySearch ? finalSegment.opposite.getParentSegmentEnd() : finalSegment.opposite.getSegmentStart();
-			parentRoutingTime = -1;
+			segment = finalSegment.reverseWaySearch ? finalSegment.opposite : finalSegment.parentRoute;
 			while (segment != null) {
-				RouteSegmentResult res = new RouteSegmentResult(segment.road, segment.getSegmentStart(), parentSegmentEnd);
-				parentRoutingTime = calcRoutingTime(parentRoutingTime, finalSegment, segment, res);
-				parentSegmentEnd = segment.getParentSegmentEnd();
+				RouteSegmentResult res = new RouteSegmentResult(segment.road, segment.getSegmentStart(), segment.getSegmentEnd());
+				float parentRoutingTime = segment.getParentRoute() != null ? segment.getParentRoute().distanceFromStart : 0;
+				res.setRoutingTime(segment.distanceFromStart - parentRoutingTime);
 				segment = segment.getParentRoute();
 				// happens in smart recalculation
 				addRouteSegmentToResult(ctx, result, res, true);
 			}
 			Collections.reverse(result);
-			// checkTotalRoutingTime(result);
+			checkTotalRoutingTime(result, finalSegment.distanceFromStart);
 		}
 		return result;
 	}
 
-	protected void checkTotalRoutingTime(List<RouteSegmentResult> result) {
+	protected void checkTotalRoutingTime(List<RouteSegmentResult> result, float cmp) {
 		float totalRoutingTime = 0;
-		for(RouteSegmentResult r : result) {
+		for (RouteSegmentResult r : result) {
 			totalRoutingTime += r.getRoutingTime();
 		}
-		println("Total routing time ! " + totalRoutingTime);
-	}
-
-	private float calcRoutingTime(float parentRoutingTime, RouteSegment finalSegment, RouteSegment segment,
-			RouteSegmentResult res) {
-		if(segment != finalSegment) {
-			if(parentRoutingTime != -1) {
-				res.setRoutingTime(parentRoutingTime - segment.distanceFromStart);
-			}
-			parentRoutingTime = segment.distanceFromStart;
-		}
-		return parentRoutingTime;
+		println("Total sum routing time ! " + totalRoutingTime + " == " + cmp );
 	}
 	
 	private void addRouteSegmentToResult(RoutingContext ctx, List<RouteSegmentResult> result, RouteSegmentResult res, boolean reverse) {
@@ -550,48 +534,58 @@ public class RouteResultPreparation {
 	void printResults(RoutingContext ctx, LatLon start, LatLon end, List<RouteSegmentResult> result) {
 		float completeTime = 0;
 		float completeDistance = 0;
-		for(RouteSegmentResult r : result) {
+		for (RouteSegmentResult r : result) {
 			completeTime += r.getSegmentTime();
 			completeDistance += r.getDistance();
 		}
 
-		println("ROUTE : ");
 		double startLat = start.getLatitude();
 		double startLon = start.getLongitude();
 		double endLat = end.getLatitude();
 		double endLon = end.getLongitude();
 		
-		String msg = String.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"%s\" \n"
-				+ "  start_lat=\"%.5f\" start_lon=\"%.5f\" target_lat=\"%.5f\" target_lon=\"%.5f\" "
-				+ " routing_time=\"%.2f\" loadedTiles=\"%d\" visitedSegments=\"%d\" complete_distance=\"%.2f\" complete_time=\"%.2f\" >",
-				ctx.config.routerName, startLat, startLon, endLat, endLon, ctx.routingTime, 
-				ctx.getLoadedTiles(), 
-				ctx.getVisitedSegments(), completeDistance, completeTime);
-//		String msg = MessageFormat.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"{4}\" \n"
-//				+ "    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\" {5} >", 
-//				startLat + "", startLon + "", endLat + "", endLon + "", ctx.config.routerName, 
-//				"loadedTiles = \"" + ctx.loadedTiles + "\" " + "visitedSegments = \"" + ctx.visitedSegments + "\" " +
-//				"complete_distance = \"" + completeDistance + "\" " + "complete_time = \"" + completeTime + "\" " +
-//				"routing_time = \"" + ctx.routingTime + "\" ");
+		String calcTime = "";
+		int segPerSec = 0;
+		if (ctx.calculationProgress != null && ctx.calculationProgress.timeToCalculate > 0) {
+			calcTime = String.format("%.2f", ctx.calculationProgress.timeToCalculate / 1e9);
+			segPerSec = (int) (ctx.getVisitedSegments() / (ctx.calculationProgress.timeToCalculate / 1e9));
+			
+		}
+		
+		String msg = String.format("<test vehicle=\"%s\" native=\"%s\" "
+				+ " start_lat=\"%.5f\" start_lon=\"%.5f\" target_lat=\"%.5f\" target_lon=\"%.5f\" \n "
+				+ " routing_time=\"%.2f\" complete_distance=\"%.2f\" complete_time=\"%.2f\" " 
+				+ " calc_timems=\"%s\" loaded_tiles=\"%d\" visited_segments=\"%d\" segments_1sec=\"%s\"  >",
+				ctx.config.routerName, ctx.nativeLib != null, startLat, startLon, endLat, endLon,
+				ctx.routingTime, completeDistance, completeTime,
+				calcTime, ctx.getLoadedTiles(), ctx.getVisitedSegments(), segPerSec);
 		log.info(msg);
-        println(msg);
+		String alerts = String.format("Alerts during routing: %d fastRoads, %d slowSegmentsEearlier",
+				ctx.alertFasterRoadToVisitedSegments, ctx.alertSlowerSegmentedWasVisitedEarlier);
+		if (ctx.alertFasterRoadToVisitedSegments + ctx.alertSlowerSegmentedWasVisitedEarlier == 0) {
+			alerts = "No alerts";
+		}
+		println("ROUTE. " + alerts);
 		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
+			println(msg);
 			org.xmlpull.v1.XmlSerializer serializer = null;
-			if(PRINT_TO_GPX_FILE != null) {
+			if (PRINT_TO_GPX_FILE != null) {
 				serializer = PlatformUtil.newSerializer();
 				try {
 					serializer.setOutput(new FileWriter(PRINT_TO_GPX_FILE));
 					serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
 					// indentation as 3 spaces
-//					serializer.setProperty("http://xmlpull.org/v1/doc/properties.html#serializer-indentation", "   ");
-//					// also set the line separator
-//					serializer.setProperty("http://xmlpull.org/v1/doc/properties.html#serializer-line-separator", "\n");
+					// serializer.setProperty("http://xmlpull.org/v1/doc/properties.html#serializer-indentation", " ");
+					// // also set the line separator
+					// serializer.setProperty("http://xmlpull.org/v1/doc/properties.html#serializer-line-separator",
+					// "\n");
 					serializer.startDocument("UTF-8", true);
 					serializer.startTag("", "gpx");
 					serializer.attribute("", "version", "1.1");
 					serializer.attribute("", "xmlns", "http://www.topografix.com/GPX/1/1");
 					serializer.attribute("", "xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
-					serializer.attribute("", "xmlns:schemaLocation", "http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
+					serializer.attribute("", "xmlns:schemaLocation",
+							"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
 					serializer.startTag("", "trk");
 					serializer.startTag("", "trkseg");
 				} catch (IOException e) {
@@ -611,10 +605,12 @@ public class RouteResultPreparation {
 					name += " (" + ref + ") ";
 				}
 				StringBuilder additional = new StringBuilder();
-				additional.append("time = \"").append(res.getSegmentTime()).append("\" ");
+				additional.append("time = \"").append(((int)res.getSegmentTime()*100)/100.0f).append("\" ");
 				if (res.getRoutingTime() > 0) {
-					additional.append("rspeed = \"")
-							.append((int) Math.round(res.getDistance() / res.getRoutingTime() * 3.6)).append("\" ");
+//					additional.append("rspeed = \"")
+//							.append((int) Math.round(res.getDistance() / res.getRoutingTime() * 3.6)).append("\" ");
+					additional.append("rtime = \"")
+						.append(((int)res.getRoutingTime()*100)/100.0f).append("\" ");
 				}
 				
 //				additional.append("rtime = \"").append(res.getRoutingTime()).append("\" ");
@@ -622,9 +618,10 @@ public class RouteResultPreparation {
 //				float ms = res.getSegmentSpeed();
 				float ms = res.getObject().getMaximumSpeed(res.isForwardDirection());
 				if(ms > 0) {
-					additional.append("maxspeed = \"").append((int) Math.round(ms * 3.6f)).append("\" ").append(res.getObject().getHighway()).append(" ");
+					additional.append("maxspeed = \"").append((int) Math.round(ms * 3.6f)).append("\" ");
 				}
-				additional.append("distance = \"").append(res.getDistance()).append("\" ");
+				additional.append("distance = \"").append(((int)res.getDistance()*100)/100.0f).append("\" ");
+				additional.append(res.getObject().getHighway()).append(" ");
 				if (res.getTurnType() != null) {
 					additional.append("turn = \"").append(res.getTurnType()).append("\" ");
 					additional.append("turn_angle = \"").append(res.getTurnType().getTurnAngle()).append("\" ");
@@ -698,9 +695,11 @@ public class RouteResultPreparation {
 					e.printStackTrace();
 				}
 			}
+			println("</test>");
+			// repeat to have infoprint
+			println(msg + "</test>");
 		}
-		println("</test>");
-		println(msg);
+		
 		
 		
 //		calculateStatistics(result);
@@ -792,7 +791,7 @@ public class RouteResultPreparation {
 					result.get(prevSegment).setDescription(
 							turn + MessageFormat.format(" and go {0,number,#.##} meters", dist));
 					if (result.get(prevSegment).getTurnType().isSkipToSpeak()) {
-						result.get(prevSegment).setDescription("-*" + result.get(prevSegment).getDescription());
+						result.get(prevSegment).setDescription("[MUTE] " + result.get(prevSegment).getDescription());
 					}
 				}
 				prevSegment = i;
@@ -1397,7 +1396,6 @@ public class RouteResultPreparation {
 			} else if (possibleTurns.length == 3) {
 				if ((!possiblyLeftTurn || !possiblyRightTurn) && TurnType.isSlightTurn(possibleTurns[1])) {
 					tp = possibleTurns[1];
-					rawLanes[1] |= 1;
 					t = TurnType.valueOf(tp, leftSide);
 				}
 			}
@@ -1415,9 +1413,7 @@ public class RouteResultPreparation {
 						|| (TurnType.isLeftTurn(sturn) && possiblyLeftTurn)) {
 					// we can't predict here whether it will be a left turn or straight on,
 					// it could be done during 2nd pass
-					if ((rawLanes[k] & 1) == 0) {
 						TurnType.setSecondaryToPrimary(rawLanes, k);
-					}
 					active = true;
 				} else if ((TurnType.isRightTurn(tturn) && possiblyRightTurn)
 						|| (TurnType.isLeftTurn(tturn) && possiblyLeftTurn)) {
@@ -1859,7 +1855,7 @@ public class RouteResultPreparation {
 				@Override
 				public RouteSegment next() {
 					RouteSegmentResult r = list[i++];
-					return new RouteSegment(r.getObject(), r.getStartPointIndex());
+					return new RouteSegment(r.getObject(), r.getStartPointIndex(), r.getEndPointIndex());
 				}
 
 				@Override

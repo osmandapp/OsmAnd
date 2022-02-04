@@ -8,7 +8,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.GPXRouteParams;
@@ -84,7 +84,7 @@ public class MapActions {
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 
 		ApplicationMode mode = appMode != null ? appMode : getRouteMode();
-		//app.getSettings().setApplicationMode(mode, false);
+		app.getSettings().setApplicationMode(mode, false);
 		app.getRoutingHelper().setAppMode(mode);
 		initVoiceCommandPlayer(mode, showMenu);
 		// save application mode controls

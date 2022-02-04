@@ -1,7 +1,5 @@
 package net.osmand.plus.onlinerouting.ui;
 
-import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.CUSTOM_VEHICLE;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -30,16 +28,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.DialogButtonType;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingUtils;
@@ -49,15 +46,19 @@ import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.ui.OnlineRoutingCard.OnTextChangedListener;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.CUSTOM_VEHICLE;
 
 public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 
@@ -82,6 +83,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	private OnlineRoutingCard apiKeyCard;
 	private OnlineRoutingCard approximateCard;
 	private OnlineRoutingCard useExternalTimestampsCard;
+	private OnlineRoutingCard routingFallbackCard;
 	private OnlineRoutingCard exampleCard;
 	private View testResultsContainer;
 	private View saveButton;
@@ -138,6 +140,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		setupVehicleCard();
 		setupApproximateCard();
 		setupExternalTimestampsCard();
+		setupRoutingFallbackCard();
 		setupApiKeyCard();
 		setupExampleCard();
 		setupResultsContainer();
@@ -206,21 +209,22 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		typeCard = new OnlineRoutingCard(mapActivity, isNightMode(), appMode);
 		typeCard.build(mapActivity);
 		typeCard.setHeaderTitle(getString(R.string.shared_string_type));
-		List<HorizontalSelectionItem> typeItems = new ArrayList<>();
+		List<net.osmand.plus.widgets.chips.ChipItem> typeItems = new ArrayList<>();
 		for (OnlineRoutingEngine type : EngineType.values()) {
-			typeItems.add(new HorizontalSelectionItem(type.getTitle(), type));
+			String title = type.getTitle();
+			ChipItem item = new ChipItem(title);
+			item.title = title;
+			item.tag = type;
+			typeItems.add(item);
 		}
 		typeCard.setSelectionMenu(typeItems, engine.getType().getTitle(),
-				new CallbackWithObject<HorizontalSelectionItem>() {
-					@Override
-					public boolean processResult(HorizontalSelectionItem result) {
-						OnlineRoutingEngine type = (OnlineRoutingEngine) result.getObject();
-						if (engine.getType() != type) {
-							changeEngineType(type);
-							return true;
-						}
-						return false;
+				result -> {
+					OnlineRoutingEngine type = (OnlineRoutingEngine) result.tag;
+					if (engine.getType() != type) {
+						changeEngineType(type);
+						return true;
 					}
+					return false;
 				});
 		typeCard.setOnTextChangedListener(new OnTextChangedListener() {
 			@Override
@@ -259,24 +263,25 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupVehicleTypes() {
-		List<HorizontalSelectionItem> vehicleItems = new ArrayList<>();
+		List<ChipItem> vehicleItems = new ArrayList<>();
 		for (VehicleType vehicle : engine.getAllowedVehicles()) {
-			vehicleItems.add(new HorizontalSelectionItem(vehicle.getTitle(app), vehicle));
+			String title = vehicle.getTitle(app);
+			ChipItem item = new ChipItem(title);
+			item.title = title;
+			item.tag = vehicle;
+			vehicleItems.add(item);
 		}
 		vehicleCard.setSelectionMenu(vehicleItems, engine.getSelectedVehicleType().getTitle(app),
-				new CallbackWithObject<HorizontalSelectionItem>() {
-					@Override
-					public boolean processResult(HorizontalSelectionItem result) {
-						VehicleType vehicle = (VehicleType) result.getObject();
-						if (!Algorithms.objectEquals(engine.getSelectedVehicleType(), vehicle)) {
-							String vehicleKey = vehicle.equals(CUSTOM_VEHICLE) ? customVehicleKey : vehicle.getKey();
-							engine.put(EngineParameter.VEHICLE_KEY, vehicleKey);
-							generateUniqueNameIfNeeded();
-							updateCardViews(nameCard, vehicleCard, exampleCard);
-							return true;
-						}
-						return false;
+				result -> {
+					VehicleType vehicle = (VehicleType) result.tag;
+					if (!Algorithms.objectEquals(engine.getSelectedVehicleType(), vehicle)) {
+						String vehicleKey = vehicle.equals(CUSTOM_VEHICLE) ? customVehicleKey : vehicle.getKey();
+						engine.put(EngineParameter.VEHICLE_KEY, vehicleKey);
+						generateUniqueNameIfNeeded();
+						updateCardViews(nameCard, vehicleCard, exampleCard);
+						return true;
 					}
+					return false;
 				});
 	}
 
@@ -302,6 +307,18 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		});
 		useExternalTimestampsCard.showDivider();
 		segmentsContainer.addView(useExternalTimestampsCard.getView());
+	}
+
+	private void setupRoutingFallbackCard() {
+		routingFallbackCard = new OnlineRoutingCard(mapActivity, isNightMode(), appMode);
+		routingFallbackCard.build(mapActivity);
+		routingFallbackCard.setHeaderTitle(getString(R.string.use_routing_fallback));
+		routingFallbackCard.setCheckBox(getString(R.string.use_routing_fallback_description), engine.useRoutingFallback(), result -> {
+			engine.put(EngineParameter.USE_ROUTING_FALLBACK, String.valueOf(result));
+			return false;
+		});
+		routingFallbackCard.showDivider();
+		segmentsContainer.addView(routingFallbackCard.getView());
 	}
 
 	private void setupApiKeyCard() {
@@ -333,31 +350,27 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		exampleCard.build(mapActivity);
 		exampleCard.setHeaderTitle(getString(R.string.shared_string_example));
 		exampleCard.hideFieldBoxLabel();
-		List<HorizontalSelectionItem> locationItems = new ArrayList<>();
+		List<ChipItem> locationItems = new ArrayList<>();
 		for (ExampleLocation location : ExampleLocation.values()) {
-			locationItems.add(new HorizontalSelectionItem(location.getName(), location));
+			String title = location.getName();
+			ChipItem item = new ChipItem(title);
+			item.title = title;
+			item.tag = location;
+			locationItems.add(item);
 		}
 		exampleCard.setSelectionMenu(locationItems, selectedLocation.getName(),
-				new CallbackWithObject<HorizontalSelectionItem>() {
-					@Override
-					public boolean processResult(HorizontalSelectionItem result) {
-						ExampleLocation location = (ExampleLocation) result.getObject();
-						if (selectedLocation != location) {
-							selectedLocation = location;
-							updateCardViews(exampleCard);
-							return true;
-						}
-						return false;
+				result -> {
+					ExampleLocation location = (ExampleLocation) result.tag;
+					if (selectedLocation != location) {
+						selectedLocation = location;
+						updateCardViews(exampleCard);
+						return true;
 					}
+					return false;
 				});
 		exampleCard.setDescription(getString(R.string.online_routing_example_hint));
 		exampleCard.showFieldBox();
-		exampleCard.setButton(getString(R.string.test_route_calculation), new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				testEngineWork();
-			}
-		});
+		exampleCard.setButton(getString(R.string.test_route_calculation), v -> testEngineWork());
 		segmentsContainer.addView(exampleCard.getView());
 	}
 
@@ -478,7 +491,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		List<LatLon> path = new ArrayList<>();
 		path.add(selectedLocation.getCityCenterLatLon());
 		path.add(selectedLocation.getCityAirportLatLon());
-		return engine.getFullUrl(path);
+		return engine.getFullUrl(path, 0f);
 	}
 
 	private void testEngineWork() {
@@ -490,7 +503,12 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 				StringBuilder errorMessage = new StringBuilder();
 				boolean resultOk = false;
 				try {
-					String response = helper.makeRequest(exampleCard.getEditedText());
+					String method = engine.getHTTPMethod();
+					List<LatLon> path = Arrays.asList(location.getCityAirportLatLon(),
+													  location.getCityCenterLatLon());
+					String body = engine.getRequestBody(path, null);
+					Map<String, String> headers = engine.getRequestHeaders();
+					String response = helper.makeRequest(exampleCard.getEditedText(), method, body, headers);
 					resultOk = requestedEngine.isResultOk(errorMessage, response);
 				} catch (IOException | JSONException e) {
 					errorMessage.append(e.toString());
@@ -542,6 +560,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 				updateCardVisibility(vehicleCard, EngineParameter.VEHICLE_KEY);
 				updateCardVisibility(approximateCard, EngineParameter.APPROXIMATE_ROUTE);
 				updateCardVisibility(useExternalTimestampsCard, EngineParameter.USE_EXTERNAL_TIMESTAMPS);
+				updateCardVisibility(routingFallbackCard, EngineParameter.USE_ROUTING_FALLBACK);
 
 			} else if (vehicleCard.equals(card)) {
 				VehicleType vt = engine.getSelectedVehicleType();

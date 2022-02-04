@@ -30,7 +30,7 @@ import androidx.core.graphics.drawable.IconCompat;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
-import net.osmand.ValueHolder;
+import net.osmand.data.ValueHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.SurfaceRenderer.SurfaceRendererCallback;
@@ -38,7 +38,7 @@ import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMap;
-import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.util.Algorithms;
@@ -66,6 +66,7 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 	 * A listener for navigation start and stop signals.
 	 */
 	public interface Listener {
+		boolean requestLocationNavigation();
 		void updateNavigation(boolean navigating);
 		void stopNavigation();
 	}
@@ -254,7 +255,11 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 														getCarContext(),
 														R.drawable.ic_my_location))
 												.build())
-								.setOnClickListener(surfaceRenderer::handleRecenter)
+								.setOnClickListener(() -> {
+									if (!listener.requestLocationNavigation()) {
+										surfaceRenderer.handleRecenter();
+									}
+								})
 								.build())
 				.addAction(
 						new Action.Builder()

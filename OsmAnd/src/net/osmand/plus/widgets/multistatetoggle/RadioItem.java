@@ -4,7 +4,16 @@ import android.view.View;
 
 public class RadioItem {
 
+	private boolean enabled = true;
 	private OnRadioItemClickListener listener;
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 
 	public void setOnClickListener(OnRadioItemClickListener listener) {
 		this.listener = listener;

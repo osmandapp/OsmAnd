@@ -1,5 +1,14 @@
 package net.osmand.plus.helpers;
 
+import static net.osmand.search.core.ObjectType.CITY;
+import static net.osmand.search.core.ObjectType.HOUSE;
+import static net.osmand.search.core.ObjectType.POI;
+import static net.osmand.search.core.ObjectType.POSTCODE;
+import static net.osmand.search.core.ObjectType.STREET;
+import static net.osmand.search.core.ObjectType.STREET_INTERSECTION;
+import static net.osmand.search.core.ObjectType.VILLAGE;
+import static net.osmand.search.core.SearchCoreFactory.MAX_DEFAULT_SEARCH_RADIUS;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -16,7 +25,7 @@ import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
@@ -28,21 +37,21 @@ import net.osmand.aidl.search.SearchParams;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.GpxSelectionHelper;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.plugins.CustomOsmandPlugin;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
@@ -70,16 +79,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import static net.osmand.search.core.ObjectType.CITY;
-import static net.osmand.search.core.ObjectType.HOUSE;
-import static net.osmand.search.core.ObjectType.POI;
-import static net.osmand.search.core.ObjectType.POSTCODE;
-import static net.osmand.search.core.ObjectType.STREET;
-import static net.osmand.search.core.ObjectType.STREET_INTERSECTION;
-import static net.osmand.search.core.ObjectType.VILLAGE;
-import static net.osmand.search.core.SearchCoreFactory.MAX_DEFAULT_SEARCH_RADIUS;
-
 public class ExternalApiHelper {
+
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(ExternalApiHelper.class);
 
 	public static final String API_CMD_SHOW_GPX = "show_gpx";
@@ -167,6 +168,9 @@ public class ExternalApiHelper {
 	public static final String PARAM_QUICK_ACTION_TYPE = "quick_action_type";
 	public static final String PARAM_QUICK_ACTION_PARAMS = "quick_action_params";
 	public static final String PARAM_QUICK_ACTION_NUMBER = "quick_action_number";
+
+	public static final String PARAM_PLUGINS_VERSIONS = "plugins_versions";
+	public static final String PARAM_PROFILES_VERSIONS = "profiles_versions";
 
 	// RESULT_OK == -1
 	// RESULT_CANCELED == 0
@@ -696,7 +700,27 @@ public class ExternalApiHelper {
 		}
 	}
 
-	public static Bundle getRouteDirectionsInfo(OsmandApplication app) {
+	@NonNull
+	public static Bundle getPluginAndProfileVersions() {
+		Bundle bundle = new Bundle();
+		List<CustomOsmandPlugin> plugins = OsmandPlugin.getCustomPlugins();
+		if (!Algorithms.isEmpty(plugins)) {
+			HashMap<String, Integer> map = new HashMap<>();
+			for (CustomOsmandPlugin plugin : plugins) {
+				map.put(plugin.getId(), plugin.getVersion());
+			}
+			bundle.putSerializable(PARAM_PLUGINS_VERSIONS, map);
+		}
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			HashMap<String, Integer> map = new HashMap<>();
+			map.put(mode.getStringKey(), mode.getVersion());
+			bundle.putSerializable(PARAM_PROFILES_VERSIONS, map);
+		}
+		return bundle;
+	}
+
+	@NonNull
+	public static Bundle getRouteDirectionsInfo(@NonNull OsmandApplication app) {
 		Bundle bundle = new Bundle();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		RouteDirectionInfo directionInfo = routingHelper.getRoute().getCurrentDirection();

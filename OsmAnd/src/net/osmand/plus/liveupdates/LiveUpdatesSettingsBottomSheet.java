@@ -1,5 +1,18 @@
 package net.osmand.plus.liveupdates;
 
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatHelpDateTime;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatShortDateTime;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceDownloadViaWiFi;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLatestUpdateAvailable;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
+import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
+import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
@@ -15,12 +28,16 @@ import android.widget.FrameLayout.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
+import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -35,8 +52,11 @@ import net.osmand.plus.liveupdates.LiveUpdatesClearBottomSheet.RefreshLiveUpdate
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import net.osmand.plus.resources.IncrementalChangesManager;
-import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
@@ -48,26 +68,6 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.util.Arrays;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
-import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatHelpDateTime;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatShortDateTime;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceDownloadViaWiFi;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLatestUpdateAvailable;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
-import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
-import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
 
 public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragment implements RefreshLiveUpdates {
 
@@ -170,8 +170,8 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 							item.setTitle(getStateText(!checked));
 							updateCustomButtonView(app, null, item.getView(), !checked, nightMode);
 							CommonPreference<Boolean> localUpdatePreference = preferenceForLocalIndex(fileName, settings);
-							frequencyToggleButton.updateView(localUpdatePreference.get());
-							timeOfDayToggleButton.updateView(localUpdatePreference.get());
+							frequencyToggleButton.setItemsEnabled(localUpdatePreference.get());
+							timeOfDayToggleButton.setItemsEnabled(localUpdatePreference.get());
 							setStateViaWiFiButton(localUpdatePreference);
 						}
 					}
@@ -207,7 +207,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		frequencyToggleButton = new TextToggleButton(app, itemFrequencyButtons, nightMode);
 		frequencyToggleButton.setItems(hourlyButton, dailyButton, weeklyButton);
 		setSelectedRadioItem(frequencyToggleButton, frequencyPreference.get(), hourlyButton, dailyButton, weeklyButton);
-		frequencyToggleButton.updateView(localUpdatePreference.get());
+		frequencyToggleButton.setItemsEnabled(localUpdatePreference.get());
 
 		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(itemFrequencyButtons)
@@ -237,7 +237,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		timeOfDayToggleButton = new TextToggleButton(app, itemTimeOfDayButtons, nightMode);
 		timeOfDayToggleButton.setItems(morningButton, nightButton);
 		setSelectedRadioItem(timeOfDayToggleButton, timeOfDayPreference.get(), morningButton, nightButton);
-		timeOfDayToggleButton.updateView(localUpdatePreference.get());
+		timeOfDayToggleButton.setItemsEnabled(localUpdatePreference.get());
 		refreshTimeOfDayLayout(frequencyPreference.get(), itemTimeOfDayButtons, timeOfDayTitle);
 
 		morningButton.setOnClickListener(getTimeOfDayButtonListener(TimeOfDay.MORNING));

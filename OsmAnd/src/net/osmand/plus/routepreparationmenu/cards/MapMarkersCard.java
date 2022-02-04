@@ -12,9 +12,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.ContextThemeWrapper;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.LatLon;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -70,8 +70,8 @@ public class MapMarkersCard extends MapBaseCard {
 		LinearLayout root = (LinearLayout) view.findViewById(R.id.items);
 		root.removeAllViews();
 
-		int minCardHeight = app.getResources().getDimensionPixelSize(R.dimen.route_info_card_item_height);
-		int listTextPadding = app.getResources().getDimensionPixelSize(R.dimen.route_info_list_text_padding);
+		int minCardHeight = getDimen(R.dimen.route_info_card_item_height);
+		int listTextPadding = getDimen(R.dimen.route_info_list_text_padding);
 
 		List<MapMarker> markers = getMarkers();
 		int i = 0;

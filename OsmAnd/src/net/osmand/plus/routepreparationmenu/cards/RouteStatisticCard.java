@@ -16,11 +16,11 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -192,20 +192,18 @@ public class RouteStatisticCard extends MapBaseCard {
 	}
 
 	private void buildHeader(GPXTrackAnalysis analysis) {
-		LineChart mChart = (LineChart) view.findViewById(R.id.chart);
-		GpxUiHelper.setupGPXChart(mChart, 4, 24f, 16f, !nightMode, true);
+		LineChart mChart = view.findViewById(R.id.chart);
+		GpxUiHelper.setupGPXChart(mChart, 24f, 16f, true);
 		graphAdapter = new CommonChartAdapter(app, mChart, true);
 
 		if (analysis.hasElevationData) {
 			List<ILineDataSet> dataSets = new ArrayList<>();
-			OrderedLineDataSet slopeDataSet = null;
+			OrderedLineDataSet slopeDataSet;
 			OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, mChart, analysis,
 					GPXDataSetAxisType.DISTANCE, false, true, false);
-			if (elevationDataSet != null) {
-				dataSets.add(elevationDataSet);
-				slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, mChart, analysis,
-						GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true, false);
-			}
+			dataSets.add(elevationDataSet);
+			slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, mChart, analysis,
+					GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true, false);
 			if (slopeDataSet != null) {
 				dataSets.add(slopeDataSet);
 			}

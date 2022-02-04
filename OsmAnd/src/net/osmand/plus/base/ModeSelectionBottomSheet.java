@@ -12,14 +12,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem;
 
 import java.util.Collections;
 import java.util.List;
 
-public class ModeSelectionBottomSheet extends SelectionBottomSheet {
+public class ModeSelectionBottomSheet<T> extends SelectionBottomSheet<T> {
 
 	public static final String TAG = ModeSelectionBottomSheet.class.getSimpleName();
 
@@ -32,7 +32,7 @@ public class ModeSelectionBottomSheet extends SelectionBottomSheet {
 	}
 
 	@Override
-	protected void updateItemView(SelectableItem item, View view) {
+	protected void updateItemView(SelectableItem<T> item, View view) {
 		ImageView ivIcon = view.findViewById(R.id.icon);
 		TextView tvTitle = view.findViewById(R.id.title);
 		TextView tvDescr = view.findViewById(R.id.description);
@@ -49,13 +49,13 @@ public class ModeSelectionBottomSheet extends SelectionBottomSheet {
 		return R.layout.bottom_sheet_item_with_descr_56dp;
 	}
 
-	public void setItem(SelectableItem item) {
+	public void setItem(SelectableItem<T> item) {
 		setItems(Collections.singletonList(item));
 	}
 
 	@NonNull
 	@Override
-	public List<SelectableItem> getSelectedItems() {
+	public List<SelectableItem<T>> getSelectedItems() {
 		return allItems;
 	}
 
@@ -64,11 +64,11 @@ public class ModeSelectionBottomSheet extends SelectionBottomSheet {
 		return false;
 	}
 
-	public static ModeSelectionBottomSheet showInstance(@NonNull AppCompatActivity activity,
-	                                                    @NonNull SelectableItem previewItem,
-	                                                    @NonNull List<RadioItem> radioItems,
-	                                                    boolean usedOnMap) {
-		ModeSelectionBottomSheet fragment = new ModeSelectionBottomSheet();
+	public static <T> ModeSelectionBottomSheet<T> showInstance(@NonNull AppCompatActivity activity,
+	                                                           @NonNull SelectableItem<T> previewItem,
+	                                                           @NonNull List<RadioItem> radioItems,
+	                                                           boolean usedOnMap) {
+		ModeSelectionBottomSheet<T> fragment = new ModeSelectionBottomSheet<>();
 		fragment.setUsedOnMap(usedOnMap);
 		fragment.setModes(radioItems);
 		fragment.setItems(Collections.singletonList(previewItem));
@@ -76,5 +76,4 @@ public class ModeSelectionBottomSheet extends SelectionBottomSheet {
 		fragment.show(fm, TAG);
 		return fragment;
 	}
-
 }

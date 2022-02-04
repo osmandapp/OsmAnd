@@ -22,12 +22,12 @@ import androidx.fragment.app.FragmentManager;
 
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.DialogButtonType;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -207,12 +207,7 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 			View emptyView = new View(context);
 			emptyView.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, padding));
 			listView.addFooterView(emptyView);
-			ScrollUtils.addOnGlobalLayoutListener(listView, new Runnable() {
-				@Override
-				public void run() {
-					listView.requestLayout();
-				}
-			});
+			ScrollUtils.addOnGlobalLayoutListener(listView, listView::requestLayout);
 		}
 	}
 

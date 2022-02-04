@@ -664,7 +664,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			val itemId = if (isChat) {
 				(item as TdApi.Chat).id
 			} else if (item is TdApi.User) {
-				item.id.toLong()
+				item.id
 			} else {
 				-1
 			}
@@ -766,7 +766,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 							)
 						} else {
 							settings.shareLocationToUser(
-								itemId.toInt(),
+								itemId,
 								newLivePeriod,
 								nextAdditionalActiveTime
 							)

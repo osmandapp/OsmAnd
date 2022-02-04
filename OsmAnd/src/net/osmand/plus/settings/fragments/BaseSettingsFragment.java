@@ -1,6 +1,7 @@
 package net.osmand.plus.settings.fragments;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.SETTINGS_ID;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -50,27 +51,28 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibilitySettingsFragment;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.plugins.accessibility.AccessibilitySettingsFragment;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
-import net.osmand.plus.audionotes.MultimediaNotesFragment;
+import net.osmand.plus.plugins.audionotes.MultimediaNotesFragment;
 import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
-import net.osmand.plus.development.DevelopmentSettingsFragment;
-import net.osmand.plus.monitoring.MonitoringSettingsFragment;
-import net.osmand.plus.openplacereviews.OprSettingsFragment;
-import net.osmand.plus.osmedit.OsmEditingFragment;
+import net.osmand.plus.plugins.development.DevelopmentSettingsFragment;
+import net.osmand.plus.plugins.monitoring.MonitoringSettingsFragment;
+import net.osmand.plus.plugins.openplacereviews.OprSettingsFragment;
+import net.osmand.plus.plugins.osmedit.fragments.OsmEditingFragment;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment.AppModeChangedListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
@@ -81,6 +83,7 @@ import net.osmand.plus.settings.datastorage.DataStorageFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -101,6 +104,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
+	protected OsmAndAppCustomization appCustomization;
 	protected UiUtilities iconsCache;
 
 	protected int themeRes;
@@ -159,6 +163,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public void onCreate(Bundle savedInstanceState) {
 		app = requireMyApplication();
 		settings = app.getSettings();
+		appCustomization = app.getAppCustomization();
 		Bundle args = getArguments();
 		if (savedInstanceState != null) {
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
@@ -411,7 +416,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			fm.popBackStack();
 			fm.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, fragment.getClass().getName())
-					.addToBackStack(DRAWER_SETTINGS_ID + ".new")
+					.addToBackStack(DRAWER_SETTINGS_ID)
 					.commit();
 		}
 	}
@@ -714,6 +719,11 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			preference.setOnPreferenceChangeListener(this);
 			preference.setOnPreferenceClickListener(this);
 
+			String prefId = preference.getKey();
+			if (!Algorithms.isEmpty(prefId)) {
+				boolean featureEnabled = appCustomization.isFeatureEnabled(SETTINGS_ID + prefId);
+				preference.setVisible(featureEnabled && preference.isVisible());
+			}
 			if (preference instanceof ListPreference) {
 				ListPreference listPreference = (ListPreference) preference;
 				assert listPreference.getEntryValues().length == listPreference.getEntries().length;
@@ -892,16 +902,21 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		return listPreference;
 	}
 
-	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType) {
+	public static boolean showInstance(@NonNull FragmentActivity activity, @NonNull SettingsScreenType screenType) {
 		return showInstance(activity, screenType, null);
 	}
 
-	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType, @Nullable ApplicationMode appMode) {
+	public static boolean showInstance(@NonNull FragmentActivity activity,
+	                                   @NonNull SettingsScreenType screenType,
+	                                   @Nullable ApplicationMode appMode) {
 		return showInstance(activity, screenType, appMode, new Bundle(), null);
 	}
 
-	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType,
-									   @Nullable ApplicationMode appMode, @NonNull Bundle args, @Nullable Fragment target) {
+	public static boolean showInstance(@NonNull FragmentActivity activity,
+	                                   @NonNull SettingsScreenType screenType,
+	                                   @Nullable ApplicationMode appMode,
+	                                   @NonNull Bundle args,
+	                                   @Nullable Fragment target) {
 		try {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
 			String tag = screenType.fragmentName;
@@ -914,7 +929,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 				fragment.setTargetFragment(target, 0);
 				fragmentManager.beginTransaction()
 						.replace(R.id.fragmentContainer, fragment, tag)
-						.addToBackStack(DRAWER_SETTINGS_ID + ".new")
+						.addToBackStack(DRAWER_SETTINGS_ID)
 						.commitAllowingStateLoss();
 				return true;
 			}
@@ -956,8 +971,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 	}
 
-	protected void applyPreferenceWithSnackBar(final String prefId,
-											   final Serializable newValue) {
+	protected void applyPreferenceWithSnackBar(final String prefId, final Serializable newValue) {
 		onApplyPreferenceChange(prefId, false, newValue);
 		updateSetting(prefId);
 		View containerView = getView();

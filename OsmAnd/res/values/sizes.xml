@@ -105,6 +105,7 @@
 	<dimen name="gpx_group_button_width">96dp</dimen>
 	<dimen name="chart_marker_horizontal_padding">6dp</dimen>
 	<dimen name="chart_marker_vertical_padding">2dp</dimen>
+	<dimen name="track_image_height">96dp</dimen>
 
 	<dimen name="dashboard_parking_left_margin">16dp</dimen>
 	<dimen name="dashboard_parking_icon_size">48dp</dimen>
@@ -221,6 +222,7 @@
 	<dimen name="travel_card_primary_text_size">15sp</dimen>
 	<dimen name="default_title_line_height">24sp</dimen>
 	<dimen name="default_desc_line_height">20sp</dimen>
+	<dimen name="small_desc_line_height">14sp</dimen>
 
 	<dimen name="default_split_segments_overview">13sp</dimen>
 	<dimen name="default_split_segments_data">13sp</dimen>

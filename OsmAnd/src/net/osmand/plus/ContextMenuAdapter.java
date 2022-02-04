@@ -31,7 +31,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.material.slider.Slider;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.activities.HelpActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
@@ -39,9 +39,11 @@ import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.ContextMenuItemsPreference;
+import net.osmand.plus.settings.backend.preferences.ContextMenuItemsPreference;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
-import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -62,13 +64,14 @@ public class ContextMenuAdapter {
 	public static final int PROFILES_CONTROL_BUTTON_TAG = 2;
 	private static final int ITEMS_ORDER_STEP = 10;
 
+	private final OsmandApplication app;
+	private final List<ContextMenuItem> items = new ArrayList<>();
+
 	@LayoutRes
 	private int DEFAULT_LAYOUT_ID = R.layout.list_menu_item_native;
-	List<ContextMenuItem> items = new ArrayList<>();
 	private boolean profileDependent = false;
 	private boolean nightMode;
 	private ConfigureMapMenu.OnClickListener changeAppModeListener = null;
-	private OsmandApplication app;
 
 	public ContextMenuAdapter(OsmandApplication app) {
 		this.app = app;
@@ -108,7 +111,9 @@ public class ContextMenuAdapter {
 		items.remove(position);
 	}
 
-	public void clearAdapter() { items.clear(); }
+	public void clearAdapter() {
+		items.clear();
+	}
 
 	public boolean isProfileDependent() {
 		return profileDependent;
@@ -159,20 +164,24 @@ public class ContextMenuAdapter {
 		});
 	}
 
-    private boolean isItemHidden(@NonNull String id) {
-        ContextMenuItemsPreference contextMenuItemsPreference = app.getSettings().getContextMenuItemsPreference(id);
-        if (contextMenuItemsPreference == null) {
-            return false;
-        }
-        List<String> hiddenIds = contextMenuItemsPreference.get().getHiddenIds();
-        if (!Algorithms.isEmpty(hiddenIds)) {
-            return hiddenIds.contains(id);
-        }
-        return false;
-    }
+	private boolean isItemHidden(@NonNull String id) {
+		OsmAndAppCustomization customization = app.getAppCustomization();
+		if (!customization.isFeatureEnabled(id)) {
+			return true;
+		}
+		ContextMenuItemsPreference contextMenuItemsPreference = app.getSettings().getContextMenuItemsPreference(id);
+		if (contextMenuItemsPreference == null) {
+			return false;
+		}
+		List<String> hiddenIds = contextMenuItemsPreference.get().getHiddenIds();
+		if (!Algorithms.isEmpty(hiddenIds)) {
+			return hiddenIds.contains(id);
+		}
+		return false;
+	}
 
-    private int getItemOrder(@NonNull String id, int defaultOrder) {
-        ContextMenuItemsPreference contextMenuItemsPreference = app.getSettings().getContextMenuItemsPreference(id);
+	private int getItemOrder(@NonNull String id, int defaultOrder) {
+		ContextMenuItemsPreference contextMenuItemsPreference = app.getSettings().getContextMenuItemsPreference(id);
 		if (contextMenuItemsPreference != null) {
 			List<String> orderIds = contextMenuItemsPreference.get().getOrderIds();
 			if (!Algorithms.isEmpty(orderIds)) {
@@ -210,12 +219,13 @@ public class ContextMenuAdapter {
 	}
 
 	public class ContextMenuArrayAdapter extends ArrayAdapter<ContextMenuItem> {
-		private OsmandApplication app;
-		private boolean lightTheme;
-		@LayoutRes
-		private int layoutId;
-		private final ConfigureMapMenu.OnClickListener changeAppModeListener;
+
+		private final OsmandApplication app;
 		private final UiUtilities mIconsCache;
+		private final boolean lightTheme;
+		@LayoutRes
+		private final int layoutId;
+		private final ConfigureMapMenu.OnClickListener changeAppModeListener;
 
 		public ContextMenuArrayAdapter(Activity context,
 									   @LayoutRes int layoutRes,

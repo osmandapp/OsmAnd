@@ -2,11 +2,12 @@ package net.osmand.plus.wikipedia;
 
 import android.widget.ArrayAdapter;
 
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -39,7 +40,7 @@ public class WikipediaPoiMenu {
 		final int toggleActionStringId = R.string.shared_string_wikipedia;
 		final int languageActionStringId = R.string.shared_string_language;
 		final int spaceHeight = app.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_big_item_height);
-		final boolean enabled = app.getPoiFilters().isTopWikiFilterSelected();
+		final boolean enabled = app.getPoiFilters().isPoiFilterSelected(PoiFiltersHelper.getTopWikiPoiFilterId());
 		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 		adapter.setDefaultLayoutId(R.layout.dash_item_with_description_72dp);
 		adapter.setProfileDependent(true);

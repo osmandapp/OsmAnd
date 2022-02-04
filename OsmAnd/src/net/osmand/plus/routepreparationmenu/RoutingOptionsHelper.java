@@ -1,5 +1,21 @@
 package net.osmand.plus.routepreparationmenu;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_AVOID_PT_TYPES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_AVOID_ROADS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_CUSTOMIZE_ROUTE_LINE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_DIVIDER_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_FOLLOW_TRACK_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_INTERRUPT_MUSIC_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_LOCAL_ROUTING_GROUP_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_LOCAL_ROUTING_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OTHER_LOCAL_ROUTING_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OTHER_SETTINGS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_SIMULATION_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_SHOW_ALONG_THE_ROUTE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_SOUND_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_TIME_CONDITIONAL_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_VOICE_GUIDANCE_ID;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,7 +31,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
@@ -25,9 +41,9 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.download.DownloadActivity;
@@ -37,12 +53,13 @@ import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.voice.JsMediaCommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
 import net.osmand.router.GeneralRouter;
+import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -61,9 +78,9 @@ public class RoutingOptionsHelper {
 	public static final String MORE_VALUE = "MORE_VALUE";
 	public static final String DRIVING_STYLE = "driving_style";
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 
-	private Map<ApplicationMode, RouteMenuAppModes> modes = new HashMap<>();
+	private final Map<ApplicationMode, RouteMenuAppModes> modes = new HashMap<>();
 
 	public RoutingOptionsHelper(OsmandApplication application) {
 		app = application;
@@ -631,11 +648,11 @@ public class RoutingOptionsHelper {
 
 	public static class LocalRoutingParameter {
 
-		public static final String KEY = "LocalRoutingParameter";
+		public static final String KEY = NAVIGATION_LOCAL_ROUTING_ID;
 
-		public GeneralRouter.RoutingParameter routingParameter;
+		public RoutingParameter routingParameter;
 
-		private ApplicationMode am;
+		private final ApplicationMode mode;
 
 		@DrawableRes
 		public
@@ -663,8 +680,8 @@ public class RoutingOptionsHelper {
 			return disabledIconId;
 		}
 
-		public LocalRoutingParameter(ApplicationMode am) {
-			this.am = am;
+		public LocalRoutingParameter(ApplicationMode mode) {
+			this.mode = mode;
 		}
 
 		public String getText(MapActivity mapActivity) {
@@ -675,8 +692,8 @@ public class RoutingOptionsHelper {
 		public boolean isSelected(OsmandSettings settings) {
 			final CommonPreference<Boolean> property =
 					settings.getCustomRoutingBooleanProperty(routingParameter.getId(), routingParameter.getDefaultBoolean());
-			if (am != null) {
-				return property.getModeValue(am);
+			if (mode != null) {
+				return property.getModeValue(mode);
 			} else {
 				return property.get();
 			}
@@ -685,24 +702,24 @@ public class RoutingOptionsHelper {
 		public void setSelected(OsmandSettings settings, boolean isChecked) {
 			final CommonPreference<Boolean> property =
 					settings.getCustomRoutingBooleanProperty(routingParameter.getId(), routingParameter.getDefaultBoolean());
-			if (am != null) {
-				property.setModeValue(am, isChecked);
+			if (mode != null) {
+				property.setModeValue(mode, isChecked);
 			} else {
 				property.set(isChecked);
 			}
 		}
 
 		public ApplicationMode getApplicationMode() {
-			return am;
+			return mode;
 		}
 	}
 
 	public static class LocalRoutingParameterGroup extends LocalRoutingParameter {
 
-		public static final String KEY = "LocalRoutingParameterGroup";
+		public static final String KEY = NAVIGATION_LOCAL_ROUTING_GROUP_ID;
 
-		private String groupName;
-		private List<LocalRoutingParameter> routingParameters = new ArrayList<>();
+		private final String groupName;
+		private final List<LocalRoutingParameter> routingParameters = new ArrayList<>();
 
 		public String getKey() {
 			if (groupName != null) {
@@ -757,7 +774,7 @@ public class RoutingOptionsHelper {
 
 	public static class MuteSoundRoutingParameter extends LocalRoutingParameter {
 
-		public static final String KEY = "MuteSoundRoutingParameter";
+		public static final String KEY = NAVIGATION_SOUND_ID;
 
 		public MuteSoundRoutingParameter() {
 			super(null);
@@ -780,7 +797,7 @@ public class RoutingOptionsHelper {
 
 	public static class DividerItem extends LocalRoutingParameter {
 
-		public static final String KEY = "DividerItem";
+		public static final String KEY = NAVIGATION_DIVIDER_ID;
 
 		public String getKey() {
 			return KEY;
@@ -797,7 +814,7 @@ public class RoutingOptionsHelper {
 
 	public static class RouteSimulationItem extends LocalRoutingParameter {
 
-		public static final String KEY = "RouteSimulationItem";
+		public static final String KEY = NAVIGATION_ROUTE_SIMULATION_ID;
 
 		public String getKey() {
 			return KEY;
@@ -814,7 +831,7 @@ public class RoutingOptionsHelper {
 
 	public static class TimeConditionalRoutingItem extends LocalRoutingParameter {
 
-		public static final String KEY = "TimeConditionalRoutingItem";
+		public static final String KEY = NAVIGATION_TIME_CONDITIONAL_ID;
 
 		public String getKey() {
 			return KEY;
@@ -841,7 +858,7 @@ public class RoutingOptionsHelper {
 
 	public static class ShowAlongTheRouteItem extends LocalRoutingParameter {
 
-		public static final String KEY = "ShowAlongTheRouteItem";
+		public static final String KEY = NAVIGATION_SHOW_ALONG_THE_ROUTE_ID;
 
 		public ShowAlongTheRouteItem() {
 			super(null);
@@ -864,7 +881,7 @@ public class RoutingOptionsHelper {
 
 	public static class AvoidRoadsRoutingParameter extends LocalRoutingParameter {
 
-		public static final String KEY = "AvoidRoadsRoutingParameter";
+		public static final String KEY = NAVIGATION_AVOID_ROADS_ID;
 
 		public AvoidRoadsRoutingParameter() {
 			super(null);
@@ -887,7 +904,7 @@ public class RoutingOptionsHelper {
 
 	public static class AvoidPTTypesRoutingParameter extends LocalRoutingParameter {
 
-		public static final String KEY = "AvoidPTTypesRoutingParameter";
+		public static final String KEY = NAVIGATION_AVOID_PT_TYPES_ID;
 
 		public AvoidPTTypesRoutingParameter() {
 			super(null);
@@ -910,7 +927,7 @@ public class RoutingOptionsHelper {
 
 	public static class GpxLocalRoutingParameter extends LocalRoutingParameter {
 
-		public static final String KEY = "FollowTrackRoutingParameter";
+		public static final String KEY = NAVIGATION_FOLLOW_TRACK_ID;
 
 		public String getKey() {
 			return KEY;
@@ -937,7 +954,7 @@ public class RoutingOptionsHelper {
 
 	public static class OtherSettingsRoutingParameter extends LocalRoutingParameter {
 
-		public static final String KEY = "OtherSettingsRoutingParameter";
+		public static final String KEY = NAVIGATION_OTHER_SETTINGS_ID;
 
 		public OtherSettingsRoutingParameter() {
 			super(null);
@@ -964,7 +981,7 @@ public class RoutingOptionsHelper {
 
 	public static class CustomizeRouteLineRoutingParameter extends LocalRoutingParameter {
 
-		public static final String KEY = "CustomizeRouteLineRoutingParameter";
+		public static final String KEY = NAVIGATION_CUSTOMIZE_ROUTE_LINE_ID;
 
 		public CustomizeRouteLineRoutingParameter() {
 			super(null);
@@ -993,7 +1010,7 @@ public class RoutingOptionsHelper {
 
 	public static class OtherLocalRoutingParameter extends LocalRoutingParameter {
 
-		public static final String KEY = "OtherLocalRoutingParameter";
+		public static final String KEY = NAVIGATION_OTHER_LOCAL_ROUTING_ID;
 
 		public String getKey() {
 			return KEY;
@@ -1032,7 +1049,7 @@ public class RoutingOptionsHelper {
 
 	public static class InterruptMusicRoutingParameter extends LocalRoutingParameter {
 
-		public static final String KEY = "InterruptMusicRoutingParameter";
+		public static final String KEY = NAVIGATION_INTERRUPT_MUSIC_ID;
 
 		public String getKey() {
 			return KEY;
@@ -1045,7 +1062,7 @@ public class RoutingOptionsHelper {
 
 	public static class VoiceGuidanceRoutingParameter extends LocalRoutingParameter {
 
-		public static final String KEY = "VoiceGuidanceRoutingParameter";
+		public static final String KEY = NAVIGATION_VOICE_GUIDANCE_ID;
 
 		public String getKey() {
 			return KEY;

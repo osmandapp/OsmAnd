@@ -197,11 +197,11 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 	override fun updateLocationMessages() {}
 
-	override fun onBasicGroupFullInfoUpdated(groupId: Int, info: TdApi.BasicGroupFullInfo) {
+	override fun onBasicGroupFullInfoUpdated(groupId: Long, info: TdApi.BasicGroupFullInfo) {
 		app.runInUIThread { updateList() }
 	}
 
-	override fun onSupergroupFullInfoUpdated(groupId: Int, info: TdApi.SupergroupFullInfo) {
+	override fun onSupergroupFullInfoUpdated(groupId: Long, info: TdApi.SupergroupFullInfo) {
 		app.runInUIThread { updateList() }
 	}
 
@@ -288,7 +288,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				} else if (type is TdApi.ChatTypePrivate) {
 					when {
 						telegramHelper.isOsmAndBot(type.userId) -> res.addAll(convertToListItems(chat, messages))
-						messages.firstOrNull { it.viaBotUserId != 0 } != null -> res.addAll(convertToListItems(chat, messages, true))
+						messages.firstOrNull { it.viaBotUserId != 0L } != null -> res.addAll(convertToListItems(chat, messages, true))
 						!settings.liveNowSortType.isSortByGroup() -> res.add(TelegramUiHelper.chatToChatItem(telegramHelper, chat, messages))
 					}
 				}
@@ -345,7 +345,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	): List<LocationItem> {
 		val res = mutableListOf<LocationItem>()
 		messages.forEach { message ->
-			if (!addOnlyViaBotMessages || message.viaBotUserId != 0) {
+			if (!addOnlyViaBotMessages || message.viaBotUserId != 0L) {
 				TelegramUiHelper.messageToLocationItem(telegramHelper, chat, message)?.also {
 					res.add(it)
 				}
@@ -361,7 +361,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	): List<ChatItem> {
 		val res = mutableListOf<ChatItem>()
 		messages.forEach { message ->
-			if (!addOnlyViaBotMessages || message.viaBotUserId != 0) {
+			if (!addOnlyViaBotMessages || message.viaBotUserId != 0L) {
 				TelegramUiHelper.messageToChatItem(telegramHelper, chat, message)?.also {
 					res.add(it)
 				}

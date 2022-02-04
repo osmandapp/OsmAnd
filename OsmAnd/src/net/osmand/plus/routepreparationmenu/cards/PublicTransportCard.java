@@ -3,7 +3,6 @@ package net.osmand.plus.routepreparationmenu.cards;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.os.Build;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
@@ -17,11 +16,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.TransportRoute;
-import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
@@ -123,15 +122,7 @@ public class PublicTransportCard extends MapBaseCard {
 			int paddingBottom = info.getPaddingBottom();
 			info.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
 			info.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
-			info.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					CardListener listener = getListener();
-					if (listener != null) {
-						listener.onCardPressed(PublicTransportCard.this);
-					}
-				}
-			});
+			info.setOnClickListener(v -> notifyCardPressed());
 		} else {
 			view.findViewById(R.id.badges_padding).setVisibility(View.GONE);
 		}

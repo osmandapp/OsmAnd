@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.OtherLocalRoutingParameter;
@@ -41,18 +41,11 @@ public class ReverseTrackCard extends MapBaseCard {
 		compoundButton.setChecked(parameter.isSelected(app.getSettings()));
 		UiUtilities.setupCompoundButton(nightMode, getActiveColor(), compoundButton);
 
-		view.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				boolean selected = !parameter.isSelected(app.getSettings());
-				compoundButton.setChecked(selected);
-				app.getRoutingOptionsHelper().applyRoutingParameter(parameter, selected);
-
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardPressed(ReverseTrackCard.this);
-				}
-			}
+		view.setOnClickListener(v -> {
+			boolean selected = !parameter.isSelected(app.getSettings());
+			compoundButton.setChecked(selected);
+			app.getRoutingOptionsHelper().applyRoutingParameter(parameter, selected);
+			notifyCardPressed();
 		});
 	}
 }

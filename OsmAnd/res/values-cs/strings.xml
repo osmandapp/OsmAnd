@@ -544,7 +544,6 @@
     <string name="save_current_track">Uložit aktuální trasu</string>
     <string name="save_track_interval_descr">Zadejte interval pro ukládání trasy během navigace</string>
     <string name="save_track_interval">Interval ukládání trasy během navigace</string>
-    <string name="save_track_to_gpx_descrp">Během navigace budou GPX trasy automaticky ukládány do adresáře s trasami.</string>
     <string name="update_tile">Aktualizovat mapu</string>
     <string name="reload_tile">Načíst znovu dlaždici</string>
     <string name="mark_point">Cíl</string>
@@ -1439,7 +1438,7 @@
     <string name="shared_string_disable">Zakázat</string>
     <string name="plugin_install_needs_network">Pro instalaci tohoto modulu musíte být online.</string>
     <string name="get_plugin">Získat</string>
-    <string name="route_points">Body cesty</string>
+    <string name="route_points">Body trasy</string>
     <string name="simulate_your_location">Simulovat polohu</string>
     <string name="short_location_on_map">Šířka %1$s
 \nDélka %2$s</string>
@@ -1620,7 +1619,7 @@
     <string name="lang_bn">Bengálština</string>
     <string name="lang_tl">Tagalština</string>
     <string name="lang_sh">Srbochorvatština</string>
-    <string name="lang_az">Ázerbájdžánsky</string>
+    <string name="lang_az">Ázerbájdžánština</string>
     <string name="lang_br">Bretonština</string>
     <string name="lang_sq">Albánština</string>
     <string name="lang_is">Islandština</string>
@@ -2057,7 +2056,7 @@
     <string name="new_filter">Nový filtr</string>
     <string name="new_filter_desc">Zadejte prosím název pro nový filtr, který bude přidán na záložku \"Kategorie“.</string>
     <string name="rendering_value_fine_name">Jemné</string>
-    <string name="lang_kab">Kabylsky</string>
+    <string name="lang_kab">Kabylština</string>
     <string name="driving_region_australia">Austrálie</string>
     <string name="route_calculation">Výpočet trasy</string>
     <string name="route_roundabout_short">Použijte %1$d. výjezd a pokračujte</string>
@@ -2066,8 +2065,8 @@
     <string name="routing_attr_allow_motorway_description">Povolí jízdu po dálnicích.</string>
     <string name="wiki_around">Články Wikipedie v okolí</string>
     <string name="search_map_hint">Město nebo oblast</string>
-    <string name="lang_sr_latn">Srbsky (latinka)</string>
-    <string name="lang_zh_hk">Čínsky (Hong Kong)</string>
+    <string name="lang_sr_latn">Srbština (latinka)</string>
+    <string name="lang_zh_hk">Čínština (Hong Kong)</string>
     <string name="rendering_attr_contourDensity_description">Hustota vrstevnic</string>
     <string name="rendering_attr_contourDensity_name">Hustota vrstevnic</string>
     <string name="rendering_value_high_name">Velká</string>
@@ -2194,7 +2193,7 @@
     <string name="routing_attr_driving_style_safety_name">Preferovat vedlejší silnice</string>
     <string name="relief_smoothness_factor_descr">Preferovaný terén: rovinatý nebo kopcovitý.</string>
     <string name="shared_string_slope">Svah</string>
-    <string name="lang_ber">Berbersky</string>
+    <string name="lang_ber">Berberština</string>
     <string name="do_not_send_anonymous_app_usage">Neposílat anonymní statistiky používání aplikace</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd sbírá anonymní informace o tom, které části aplikace používáte. Nikdy se neodesílá poloha, nic co je zapisováno do aplikace nebo detaily prohlížených oblastí, hledání nebo stahování.</string>
     <string name="do_not_show_startup_messages">Nezobrazovat zprávy při spuštění</string>
@@ -2478,7 +2477,7 @@
     <string name="will_open_tomorrow_at">Otevírá zítra v</string>
     <string name="shared_string_marker">Značka</string>
     <string name="osm_recipient_stat">Počet úprav %1$s, součet %2$s mBTC</string>
-    <string name="lang_lo">Laosky</string>
+    <string name="lang_lo">Laoština</string>
     <string name="show_closed_notes">Zobrazit zavřené poznámky</string>
     <string name="switch_osm_notes_visibility_desc">Zobrazit nebo skrýt OpenStreetMap poznámky na mapě.</string>
     <string name="gpx_file_desc">GPX - vhodné pro export do JOSM nebo jiných editorů OSM.</string>
@@ -3071,7 +3070,7 @@
     <string name="shared_string_default">Výchozí</string>
     <string name="new_route_calculated_dist_dbg">Trasa: vzdálenost %1$s, potřebný čas %2$s
 \nVýpočet: %3$.1f sekund, %4$d cest, %5$d dlaždic)</string>
-    <string name="lang_oc">Okcitánsky</string>
+    <string name="lang_oc">Okcitánština</string>
     <string name="app_mode_wagon">Dodávkové auto</string>
     <string name="app_mode_pickup_truck">Pickup auto</string>
     <string name="day">Den</string>
@@ -3817,7 +3816,7 @@
 \nPoužijte metodu OAuth nebo své jméno a heslo v OSM.</string>
     <string name="use_login_password">Použít jméno a heslo</string>
     <string name="login_account">Účet</string>
-    <string name="user_login">Uživatelské jméno</string>
+    <string name="user_login">Přihlásit se</string>
     <string name="markers_history">Historie značek</string>
     <string name="gpx_upload_public_visibility_descr">„Veřejná“ znamená, že trasa je veřejně dostupná ve vašich GPS trasách, ve veřejných seznamech GPS tras a také ve veřejném seznamu stop s nezpracovanými časovými razítky. Data poskytnutá prostřednictvím API nebudou odkazovat na vaši stránku s trasou. Časová razítka bodů trasy nebudou dostupná prostřednictvím veřejného GPS API a body nebudou chronologicky seřazeny.</string>
     <string name="gpx_upload_private_visibility_descr">„Soukromá“ znamená, že trasa se neobjeví v žádném veřejném seznamu, ale body trasy budou dostupné prostřednictvím veřejného GPS API, bez časových razítek a nebudou chronologicky seřazeny.</string>
@@ -4291,6 +4290,10 @@
 \n
 \n• Aktualizace uživatelského rozhraní pro vyhledávání souřadnic UTM
 \n
+\n• Filtr GPS pro GPX stopy
+\n
+\n• Nástroj nadmořské výšky (Pro)
+\n
 \n• Oblíbené: přidána možnost zobrazit naposledy použité ikony
 \n
 \n• Plánování cesty: po spuštění použije právě vybraný profil
@@ -4446,13 +4449,71 @@
     <string name="add_to_group">Přidat do skupiny</string>
     <string name="app_modes_options">Vybrat režimy aplikace</string>
     <string name="shared_string_memory">Paměť</string>
-    <string name="memory_allocated_for_routing_ds">Vyšší hodnota paměti zrychluje výpočet dlouhých tras (více než 500 km), ale může ovlivnit výkonnost jiných aplikací.
+    <string name="memory_allocated_for_routing_ds">Větší množství vyhrazené paměti zrychlí výpočet dlouhých tras (nad 500 km), ale může ovlivnit výkonnost jiných aplikací.
 \nNeovlivňuje rychlost výpočtu krátkých tras.</string>
     <string name="memory_allocated_for_routing">Paměť vyhrazená pro plánování trasy</string>
     <string name="reading_files">Načítám soubory…</string>
     <string name="no_items_selected_warning">Vyberte prosím aspoň jednu položku</string>
     <string name="display_groups_visibility_dialog_description">Můžete nastavit viditelnost skupin na mapě. Je-li stopa skrytá, všechny skupiny budou také skryté.</string>
     <string name="shared_string_hide_all">Skrýt vše</string>
-    <string name="migration_files_present">%1$d souborů (%2$s) se nachází ve vybraném umístění \'%3$s\'.</string>
-    <string name="exit_without_saving_warning">Opravdu chcete odejít bez uložení\? Ztratíte tak všechny změny.</string>
+    <string name="migration_files_present">Ve vybraném umístění \'%3$s\' se nachází %1$d souborů (%2$s).</string>
+    <string name="exit_without_saving_warning">Ukončit bez uložení změn\?</string>
+    <string name="shared_string_precision">Přesnost</string>
+    <string name="gps_filter_hdop_desc">Zadejte maximální přípustnou hodnotu pro HDOP.
+\nBody s vyšší hodnotou budou skryté.</string>
+    <string name="distance_between_points">Vzdálenost mezi body</string>
+    <string name="gps_filter_smoothing">Vyhlazování</string>
+    <string name="save_as_copy">Uložit jako kopii</string>
+    <string name="gps_filter_actions_description">OsmAnd aplikuje změny na stopu, aniž by aktualizoval soubor. Změny můžete uložit manuálně.</string>
+    <string name="shared_string_gps_filter">Filtr GPS</string>
+    <string name="storage_migration_wrong_folder_warning">Ve vybrané složce nebyla nalezena žádná OsmAnd data. Zkuste to prosím znovu.</string>
+    <string name="shared_string_statistics">Statistiky</string>
+    <string name="gps_filter_speed_altitude_desc">Pouze body stopy splňující zadaný interval budou viditelné v grafu a na mapě, ostatní budou skryté.</string>
+    <string name="shared_string_show_slope">Zobrazit sklon</string>
+    <string name="shared_string_uphill">Stoupání</string>
+    <string name="gps_filter_smoothing_desc">Zadejte hraniční vzdálenost mezi body.
+\nBody stopy, jejichž vzdálenost od posledního viditelného bodu je menší než tato hodnota, budou skryté.
+\nBerte na vědomí, že vysoké hodnoty mohou příliš zjednodušit geometrii stopy.</string>
+    <string name="gps_filter_precision">Přesnost GPS</string>
+    <string name="save_changes_into_file">Uložit změny do souboru</string>
+    <string name="elevation_profile">Výškový profil</string>
+    <string name="shared_string_downhill">Klesání</string>
+    <string name="shared_string_hide_slope">Skrýt sklon</string>
+    <string name="shared_string_grade">Stupeň</string>
+    <string name="use_routing_fallback_description">Použít offline plánování, pokud je online služba nedostupná.</string>
+    <string name="use_routing_fallback">Offline náhradní plánovač</string>
+    <string name="shared_string_size">Velikost</string>
+    <string name="created_on">Vytvořeno dne</string>
+    <string name="turn_arrows_descr">Zvolte, zda budou šipky pro odbočení zobrazené na linii trasy.</string>
+    <string name="turn_arrows">Směrové šipky</string>
+    <string name="track_file">Soubor se stopou</string>
+    <string name="shared_string_used">Použito</string>
+    <string name="files_with_route_restrictions">Soubory s omezeními trasy</string>
+    <string name="predefined_waypoint_appearance_description">Klepnutím na akci se automaticky uloží bod trasy s přednastavenými parametry.</string>
+    <string name="always_ask_waypoint_appearance_description">Klepnutím na tuto akci otevřete obrazovku “Přidat bod trasy”, kde můžete změnit jméno a vzhled.</string>
+    <string name="waypoint_appearance">Vzhled bodu trasy</string>
+    <string name="track_file_description">Klepnutím na tuto akci zobrazíte dialog se všemi dostupnými trasami.</string>
+    <string name="navigate_point_format_swiss_grid">Švýcarské souřadnice (CH1903)</string>
+    <string name="navigate_point_format_swiss_grid_plus">Švýcarské souřadnice (CH1903+)</string>
+    <string name="shared_string_not_used">Nepoužito</string>
+    <string name="waypoint_template">Šablona pro body trasy</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Značky chyb</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Zobrazit značky chyb (\'fixme\')</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Značky poznámek</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Zobrazit značky poznámek</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikony při malém přiblížení</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematické zobrazení ikon při malém přiblížení</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tunely vodních cest</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Neskrývat tunely vodních cest</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_attr_seabedDetail_name">Detaily mořského dna</string>
+    <string name="rendering_value_category_name">Kategorie</string>
+    <string name="rendering_value_all_name">Všechny</string>
+    <string name="rendering_value_omit_name">Vynechat</string>
+    <string name="rendering_attr_seabedDetail_description">Další textové informace o povrchu mořského dna, kategorii a druhu mořského porostu</string>
+    <string name="save_track_to_gpx_descrp">Spustit záznam stopy automaticky v průběhu navigace. Po jejím dokončení se stopa automaticky uloží.</string>
+    <string name="quick_action_add_route_descr">Tlačítko pro zahájení trasy uprostřed obrazovky.</string>
+    <string name="please_provide_group_name_message">Zadejte prosím název skupiny.</string>
+    <string name="gpx_no_routes_title">Neexistují žádné trasy</string>
+    <string name="gpx_no_routes_descr">Pro přidání cesty do souboru můžete použít nástroj \"%1$s\".</string>
 </resources>

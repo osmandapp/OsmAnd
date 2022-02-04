@@ -451,7 +451,6 @@
     <string name="save_current_track">Salva la traccia corrente</string>
     <string name="save_track_interval_descr">Specifica l\'intervallo di registrazione per la traccia durante la navigazione</string>
     <string name="save_track_interval">Intervallo di registrazione durante la navigazione</string>
-    <string name="save_track_to_gpx_descrp">Durante la navigazione, la traccia GPX, sarà salvata automaticamente nella cartella tracce.</string>
     <string name="update_tile">Aggiorna mappa</string>
     <string name="reload_tile">Ricarica tasselli</string>
     <string name="mark_point">Obiettivo</string>
@@ -4445,9 +4444,49 @@
     <string name="shared_string_hide_all">Nascondi tutto</string>
     <string name="migration_files_present">%1$d file (%2$s) sono presenti nella posizione selezionata \'%3$s\'.</string>
     <string name="exit_without_saving_warning">Confermi di voler uscire senza salvare\? Perderai tutti i cambiamenti.</string>
-    <string name="shared_string_show_slope">Mostra i pendii</string>
-    <string name="shared_string_hide_slope">Nascondi i pendii</string>
+    <string name="shared_string_show_slope">Mostra la pendenza</string>
+    <string name="shared_string_hide_slope">Nascondi la pendenza</string>
     <string name="shared_string_uphill">Salita</string>
     <string name="shared_string_downhill">Discesa</string>
     <string name="elevation_profile">Profilo dell\'altitudine</string>
+    <string name="shared_string_precision">Precisione</string>
+    <string name="shared_string_statistics">Statistiche</string>
+    <string name="gps_filter_hdop_desc">Imposta il valore massimo accettato di HDOP.
+\nI punti con valori maggiori saranno nascosti.</string>
+    <string name="gps_filter_speed_altitude_desc">Solo i punti della traccia nell\'intervallo impostato saranno visibili sulla mappa, gli altri nascosti.</string>
+    <string name="gps_filter_precision">Precisione GPS</string>
+    <string name="distance_between_points">Distanza tra i punti</string>
+    <string name="gps_filter_smoothing">Smussatura</string>
+    <string name="save_changes_into_file">Salva le modifiche al file</string>
+    <string name="save_as_copy">Salva una copia</string>
+    <string name="shared_string_gps_filter">Filtro GPS</string>
+    <string name="storage_migration_wrong_folder_warning">Nessun dato OsmAnd trovato nella cartella selezionata. Riprova.</string>
+    <string name="gps_filter_smoothing_desc">Imposta la soglia della distanza tra i punti.
+\nI punti della traccia a una distanza maggiore dall\'ultimi punto visibile non saranno visualizzati.
+\nRicordate che soglie elevate possono semplificare eccessivamente la geometria della traccia.</string>
+    <string name="gps_filter_actions_description">OsmAnd applicherà le modifiche alla traccia senza aggiornare il file. Puoi salvare le modifiche manualmente.</string>
+    <string name="shared_string_size">Misura</string>
+    <string name="created_on">Cerato su</string>
+    <string name="use_routing_fallback_description">Utilizza la navigazione offline quando quella online non è disponibile.</string>
+    <string name="turn_arrows">Frecce di direzione</string>
+    <string name="turn_arrows_descr">Controlla la visibilità delle frecce di direzione nella linea del percorso.</string>
+    <string name="use_routing_fallback">Utilizza il calcolo del percorso di riserva</string>
+    <string name="track_file">File traccia</string>
+    <string name="shared_string_used">In uso</string>
+    <string name="files_with_route_restrictions">File con limitazioni del percorso</string>
+    <string name="shared_string_not_used">Non in uso</string>
+    <string name="predefined_waypoint_appearance_description">Toccando questa azione salverà automaticamente il punto intermedio con i parametri predefiniti.</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Etichette Fixme</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Mostra etichette Fixme</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Etichette Note</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Mostra etichette Note</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icone a zomm bassi</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schema della visualizzazione delle icone a bassi zoom</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tunnel per canali</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Non nascondere i tunnel per canali</string>
+    <string name="rendering_value_omit_name">Ometti</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_value_category_name">Categoria</string>
+    <string name="rendering_value_all_name">Tutto</string>
+    <string name="waypoint_appearance">Aspetto del punto intermedio</string>
 </resources>

@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
 import static net.osmand.data.Amenity.MAPILLARY;
 
 import android.content.Context;
@@ -18,24 +20,24 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.enums.MetricsConstants;
+import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
-import net.osmand.plus.osmedit.OsmEditingPlugin;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.widgets.TextViewEx;
@@ -190,7 +192,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			needLinks = false;
 		}
 		textView.setText(text);
-		if (needLinks && Linkify.addLinks(textView, Linkify.ALL)) {
+		if (needLinks && customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID) && Linkify.addLinks(textView, Linkify.ALL)) {
 			textView.setMovementMethod(null);
 			textView.setLinkTextColor(linkTextColor);
 			textView.setOnTouchListener(new ClickableSpanTouchListener());
@@ -270,16 +272,14 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		((LinearLayout) view).addView(baseView);
 
 		if (isPhoneNumber) {
-			ll.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(final View v) {
+			ll.setOnClickListener(v -> {
+				if (customization.isFeatureEnabled(CONTEXT_MENU_PHONE_ID)) {
 					showDialog(text, Intent.ACTION_DIAL, "tel:", v);
 				}
 			});
 		} else if (isUrl) {
-			ll.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
+			ll.setOnClickListener(v -> {
+				if (customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID)) {
 					if (text.contains(WIKI_LINK)) {
 						if (Version.isPaidVersion(app)) {
 							WikiArticleHelper wikiArticleHelper = new WikiArticleHelper(mapActivity, !light);

@@ -25,8 +25,8 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.LocalIndexHelper;
-import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.download.LocalIndexHelper;
+import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
@@ -36,11 +36,10 @@ import net.osmand.plus.download.ui.DownloadMapToolbarController;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.views.MapTileLayer;
-import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelection;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.util.Algorithms;
@@ -397,7 +396,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		while (it.hasNext()) {
 			BinaryMapDataObject o = it.next();
 			if (tileBox.getZoom() >= ZOOM_TO_SHOW_SELECTION) {
-				if (!osmandRegions.contain(o, (left + right) / 2, (top + bottom) / 2)) {
+				if (!osmandRegions.contain(o, left / 2 + right / 2, top / 2 + bottom / 2)) {
 					it.remove();
 				}
 			}

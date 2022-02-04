@@ -1,6 +1,6 @@
 package net.osmand.plus.myplaces;
 
-import static net.osmand.plus.track.TrackMenuFragment.TRACK_DELETED_KEY;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_DELETED_KEY;
 
 import android.app.Activity;
 import android.content.Context;
@@ -21,14 +21,13 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.FavoritesTreeFragment;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -146,7 +145,7 @@ public class FavoritesActivity extends TabActivity {
 			}
 		} else if (requestCode == IMPORT_FAVOURITES_REQUEST && resultCode == Activity.RESULT_OK) {
 			if (data != null && data.getData() != null) {
-				importHelper.handleGpxOrFavouritesImport(data.getData());
+				importHelper.handleFavouritesImport(data.getData());
 			}
 		} else if (requestCode == OPEN_GPX_REQUEST && resultCode == Activity.RESULT_OK) {
 			if (data != null && data.getBooleanExtra(TRACK_DELETED_KEY, false)) {
@@ -207,7 +206,7 @@ public class FavoritesActivity extends TabActivity {
 	}
 
 	@Override
-	public void onAttachFragment(Fragment fragment) {
+	public void onAttachFragment(@NonNull Fragment fragment) {
 		if (fragment instanceof FavoritesFragmentStateHolder) {
 			fragment.setArguments(intentParams);
 			fragList.add(new WeakReference<>((FavoritesFragmentStateHolder) fragment));

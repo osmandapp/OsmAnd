@@ -10,10 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 
@@ -138,7 +138,7 @@ public class ImportedSettingsItemsAdapter extends
 				break;
 			case GLOBAL:
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_settings, activeColorRes));
-				holder.title.setText(R.string.general_settings_2);
+				holder.title.setText(R.string.osmand_settings);
 				break;
 			case ACTIVE_MARKERS:
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_flag, activeColorRes));

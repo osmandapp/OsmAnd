@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_bakery">Пякарня</string>
     <string name="poi_alcohol">Вінна-гарэлкавая крама</string>
@@ -74,7 +74,6 @@
     <string name="poi_ship_chandler">Яхты, запчасткі, абсталяванне</string>
     <string name="poi_sports">Спорттавары</string>
     <string name="poi_stationery">Канцылярскія тавары</string>
-    
     <string name="poi_ticket">Продаж квіткоў</string>
     <string name="poi_tobacco">Тытунь</string>
     <string name="poi_toys">Цацкі</string>
@@ -226,7 +225,6 @@
     <string name="poi_pension_fund">Пенсіённы фонд</string>
     <string name="poi_migration">Міграцыйная служба</string>
     <string name="poi_tax_inspection">Падатковая</string>
-    
     <string name="poi_customs">Мытны пункт</string>
     <string name="poi_city">Горад</string>
     <string name="poi_town">Мястэчка</string>
@@ -684,17 +682,17 @@
     <string name="poi_wood">Лес</string>
     <string name="poi_landuse">Землекарыстанне</string>
     <string name="poi_fuel_diesel">Дызель</string>
-    <string name="poi_fuel_gtl_diesel">GTL-дызель</string>
-    <string name="poi_fuel_hgv_diesel">HGV-дызель</string>
+    <string name="poi_fuel_gtl_diesel">Сінтэтычны дызель GTL</string>
+    <string name="poi_fuel_hgv_diesel">Хуткасная дызельная ТРК для грузавікоў</string>
     <string name="poi_fuel_biodiesel">Біядызель</string>
-    <string name="poi_fuel_lpg">Звадкаваны газ</string>
+    <string name="poi_fuel_lpg">Звадкаваны газ (LPG)</string>
     <string name="poi_fuel_octane_80">Актан 80</string>
     <string name="poi_fuel_octane_91">Актан 91</string>
     <string name="poi_fuel_octane_92">Актан 92</string>
     <string name="poi_fuel_octane_95">Актан 95</string>
     <string name="poi_fuel_octane_98">Актан 98</string>
     <string name="poi_fuel_octane_100">Актан 100</string>
-    <string name="poi_fuel_cng">Сціснуты прыродны газ</string>
+    <string name="poi_fuel_cng">Сціснуты прыродны газ (CNG)</string>
     <string name="poi_fuel_1_25">Паліва 1:25</string>
     <string name="poi_fuel_1_50">Паліва 1:50</string>
     <string name="poi_fuel_ethanol">Этанол</string>
@@ -801,7 +799,6 @@
     <string name="poi_leather">Скураныя вырабы</string>
     <string name="poi_swimming_pool_shop">Тавары для басейна</string>
     <string name="poi_model">Мадэлістам</string>
-    
     <string name="poi_scuba_diving_shop">Крама тавараў для дайвінгу</string>
     <string name="poi_trophy">Узнагароды, прызы</string>
     <string name="poi_height_restrictor">Абмежавальнік вышыні</string>
@@ -837,7 +834,6 @@
     <string name="poi_website">Вэб-сайт</string>
     <string name="poi_operator">Аператар</string>
     <string name="poi_brand">Брэнд</string>
-    
     <string name="poi_basin">Штучны вадаём</string>
     <string name="poi_crane">Кран</string>
     <string name="poi_country">Краіна</string>
@@ -1851,7 +1847,7 @@
     <string name="poi_fuel_91ul">Паліва 91UL</string>
     <string name="poi_fuel_100ll">Паліва 100LL</string>
     <string name="poi_fuel_jeta1">Паліва Jet A-1</string>
-    <string name="poi_fuel_adblue">Дызельная выцяжная вадкасць</string>
+    <string name="poi_fuel_adblue">AdBlue (Дызельная выцяжная вадкасць)</string>
     <string name="poi_fuel_wood">Паліва: дровы</string>
     <string name="poi_fuel_charcoal">Паліва: драўняны вугаль</string>
     <string name="poi_fuel_coal">Паліва: каменны вугаль</string>
@@ -2704,7 +2700,6 @@
     <string name="poi_aquaculture_shrimp">Гадоўля крэветак</string>
     <string name="poi_aquaculture_fish">Гадоўля рыбы</string>
     <string name="poi_aquaculture_mussels">Гадоўля малюскаў</string>
-    
     <string name="poi_min_age">Мінімальны ўзрост</string>
     <string name="poi_organic_yes">Так</string>
     <string name="poi_organic_no">Не</string>

@@ -1,13 +1,12 @@
 package net.osmand.plus;
 
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
+import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -28,16 +27,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.car.app.CarToast;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
-import net.osmand.AndroidUtils;
-import net.osmand.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibilityPlugin;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
@@ -46,9 +41,8 @@ import net.osmand.map.WorldRegion;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
-import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
@@ -61,30 +55,36 @@ import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadService;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.helpers.AnalyticsHelper;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.DayNightHelper;
-import net.osmand.plus.helpers.GpsFilterHelper;
+import net.osmand.plus.helpers.LauncherShortcutsHelper;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.RateUsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
-import net.osmand.plus.helpers.enums.DrivingRegion;
-import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
-import net.osmand.plus.monitoring.LiveMonitoringHelper;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
-import net.osmand.plus.openplacereviews.OprAuthHelper;
-import net.osmand.plus.osmedit.oauth.OsmOAuthHelper;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.accessibility.AccessibilityMode;
+import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
+import net.osmand.plus.plugins.monitoring.LiveMonitoringHelper;
+import net.osmand.plus.plugins.openplacereviews.OprAuthHelper;
+import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.render.TravelRendererHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
+import net.osmand.plus.routing.AvoidRoadsHelper;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
@@ -92,6 +92,15 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
+import net.osmand.plus.settings.enums.DrivingRegion;
+import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.track.helpers.GpsFilterHelper;
+import net.osmand.plus.track.helpers.GpxDbHelper;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.SavingTrackHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
@@ -118,6 +127,7 @@ import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
 
 public class OsmandApplication extends MultiDexApplication {
+
 	public static final String EXCEPTION_PATH = "exception.log";
 	public static final String OSMAND_PRIVACY_POLICY_URL = "https://osmand.net/help-online/privacy-policy";
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
@@ -161,6 +171,7 @@ public class OsmandApplication extends MultiDexApplication {
 	RoutingOptionsHelper routingOptionsHelper;
 	DownloadIndexesThread downloadIndexesThread;
 	AvoidSpecificRoads avoidSpecificRoads;
+	AvoidRoadsHelper avoidRoadsHelper;
 	BRouterServiceConnection bRouterServiceConnection;
 	OsmandRegions regions;
 	GeocodingLookupService geocodingLookupService;
@@ -191,6 +202,9 @@ public class OsmandApplication extends MultiDexApplication {
 	
 	@Override
 	public void onCreate() {
+		if (RestartActivity.isRestartProcess(this)) {
+			return;
+		}
 		long timeToStart = System.currentTimeMillis();
 		if (Version.isDeveloperVersion(this)) {
 			try {
@@ -322,6 +336,10 @@ public class OsmandApplication extends MultiDexApplication {
 		return avoidSpecificRoads;
 	}
 
+	public AvoidRoadsHelper getAvoidRoadsHelper() {
+		return avoidRoadsHelper;
+	}
+
 	public OsmAndLocationProvider getLocationProvider() {
 		return locationProvider;
 	}
@@ -356,7 +374,6 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void setOsmandSettings(OsmandSettings osmandSettings) {
-		//android.os.Process.killProcess(android.os.Process.myPid());
 		this.osmandSettings = osmandSettings;
 		OsmandPlugin.initPlugins(this);
 	}
@@ -632,7 +649,7 @@ public class OsmandApplication extends MultiDexApplication {
 		routingHelper.clearCurrentRoute(null, new ArrayList<LatLon>());
 		routingHelper.setRoutePlanningMode(false);
 		osmandSettings.LAST_ROUTING_APPLICATION_MODE = osmandSettings.APPLICATION_MODE.get();
-		osmandSettings.setApplicationMode(osmandSettings.DEFAULT_APPLICATION_MODE.get());
+		osmandSettings.setApplicationMode(valueOfStringKey(osmandSettings.LAST_USED_APPLICATION_MODE.get(), ApplicationMode.DEFAULT));
 		targetPointsHelper.removeAllWayPoints(false, false);
 	}
 
@@ -1052,23 +1069,6 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 	}
 
-	public void restartApp(final Context ctx) {
-		AlertDialog.Builder bld = new AlertDialog.Builder(ctx);
-		bld.setMessage(R.string.restart_is_required);
-		bld.setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				if (ctx instanceof MapActivity) {
-					MapActivity.doRestart(ctx);
-				} else {
-					android.os.Process.killProcess(android.os.Process.myPid());
-				}
-			}
-		});
-		bld.show();
-	}
-	
 	public MapViewTrackingUtilities getMapViewTrackingUtilities() {
 		return mapViewTrackingUtilities;
 	}

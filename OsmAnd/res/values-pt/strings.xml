@@ -283,7 +283,6 @@
     <string name="save_current_track">Guardar o trilho atual</string>
     <string name="save_track_interval_descr">Escolha o intervalo em que é registada a localização ao gravar trilhos durante a navegação</string>
     <string name="save_track_interval">Intervalo de gravação durante a navegação</string>
-    <string name="save_track_to_gpx_descrp">O trilho GPX é guardado automaticamente na pasta \"tracks\" durante a navegação.</string>
     <string name="save_track_to_gpx">Gravar trilho automaticamente durante a navegação</string>
     <string name="update_tile">Atualizar mapa</string>
     <string name="reload_tile">Atualizar mosaico de imagem</string>
@@ -1171,7 +1170,7 @@
     <string name="lang_ka">Georgiano</string>
     <string name="lang_de">Alemão</string>
     <string name="lang_el">Grego</string>
-    <string name="lang_iw">Hebreu</string>
+    <string name="lang_iw">Hebraico</string>
     <string name="lang_hi">Hindi</string>
     <string name="lang_hu">Húngaro</string>
     <string name="lang_id">Indonésio</string>
@@ -1396,7 +1395,7 @@
     <string name="shared_string_audio">Áudio</string>
     <string name="shared_string_video">Vídeo</string>
     <string name="shared_string_photo">Fotografia</string>
-    <string name="route_points">Pontos de rota</string>
+    <string name="route_points">Pontos da rota</string>
     <string name="track_segments">Segmentos do trajeto</string>
     <string name="track_points">Pontos do trajeto</string>
     <string name="plugin_touringview_name">Ver mapa de turismo</string>
@@ -2381,7 +2380,7 @@
     <string name="lang_bn">Bengali</string>
     <string name="lang_tl">Tagalo</string>
     <string name="lang_az">Azerbaijano</string>
-    <string name="lang_bpy">Bishnupriya Manipuri</string>
+    <string name="lang_bpy">Bishnupriya</string>
     <string name="lang_nv">Navajo</string>
     <string name="lang_ku">Curdo</string>
     <string name="lang_ml">Malaiala</string>
@@ -2389,12 +2388,12 @@
     <string name="lang_os">Osseta</string>
     <string name="lang_es_us">Espanhol (americano)</string>
     <string name="lang_es_ar">Espanhol (argentino)</string>
-    <string name="lang_nb">Norueguês Bokmål</string>
+    <string name="lang_nb">Bokmål norueguês</string>
     <string name="lang_vo">Volapuque</string>
     <string name="lang_th">Tailandês</string>
     <string name="lang_te">Telugu</string>
     <string name="lang_nn">Novo norueguês</string>
-    <string name="lang_new">Neuari</string>
+    <string name="lang_new">Neuari / Nepal bhasa</string>
     <string name="lang_ms">Malásio</string>
     <string name="lang_ht">Haitiano</string>
     <string name="lang_gl">Galego</string>
@@ -4366,6 +4365,10 @@
 \n
 \n - Atualização da interface do utilizador para pesquisa de coordenadas UTM
 \n
+\n • Filtro GPS para trilhos GPX
+\n
+\n • Widget de elevação (Pro)
+\n
 \n - Favoritos: agora pode-se ver os ícones usados recentemente
 \n
 \n - Planeamento de rotas: agora usa o perfil selecionado ao abrir a aplicação
@@ -4445,7 +4448,7 @@
     <string name="icon_group_education">Educação</string>
     <string name="icon_group_industrial">Industrial</string>
     <string name="not_enough_contributions_descr">É necessário um mínimo de %1$s alterações nos últimos dois meses %2$s para ter acesso a atualizações de mapas a cada hora ilimitadas.</string>
-    <string name="migration_files_present">%1$d ficheiros (%2$s) estão presentes no local selecionado \"%3$s\".</string>
+    <string name="migration_files_present">Existem %1$d ficheiros (%2$s) no local selecionado \"%3$s\".</string>
     <string name="fold_unfold">ocultar/mostrar</string>
     <string name="app_profile_type">Tipo de perfil da aplicação</string>
     <string name="map_marker_options">Opções de marcador de mapa</string>
@@ -4460,7 +4463,7 @@
     <string name="show_parameter_seekbar">Mostrar barra de procura de parâmetros</string>
     <string name="display_groups_visibility_dialog_description">Pode controlar a visibilidade do grupo no mapa. Se o trilho estiver oculto, também todos os grupos ficarão ocultos.</string>
     <string name="shared_string_hide_all">Ocultar tudo</string>
-    <string name="exit_without_saving_warning">Quer sair sem guardar\? Irá perder todas as alterações.</string>
+    <string name="exit_without_saving_warning">Sair sem guardar as alterações\?</string>
     <string name="shared_string_show_slope">Mostrar declive</string>
     <string name="shared_string_hide_slope">Ocultar declive</string>
     <string name="shared_string_grade">Grau</string>
@@ -4469,19 +4472,55 @@
     <string name="shared_string_downhill">Descida</string>
     <string name="gps_filter_smoothing">Suavização</string>
     <string name="gps_filter_smoothing_desc">Defina a distância limite entre os pontos.
-\nOs pontos do trilho que estejam pelo menos a X distância do último ponto visível serão ocultados.
-\nTenha cuidado, quanto maior for a distância, mais simples será a geometria do trilho.</string>
+\nOs pontos do trilho que estejam dentro desta distância do último ponto visível serão ocultados.
+\nTenha cuidado, quanto maior for a distância, mais simples será a geometria do trilho resultando numa simplificação exagerada.</string>
     <string name="distance_between_points">Distância entre os pontos</string>
     <string name="shared_string_statistics">Estatísticas</string>
     <string name="shared_string_precision">Precisão</string>
-    <string name="gps_filter_hdop_desc">Defina o valor máximo permitido para o HDOP.
-\nOs pontos maiores do que o parâmetro definido serão ocultados.</string>
-    <string name="gps_filter_speed_altitude_desc">Os pontos do trilho correspondentes ao intervalo definido serão visíveis no gráfico e no mapa, o resto será ocultado.</string>
-    <string name="gps_filter_precision">Precisão mínima do GPS</string>
-    <string name="save_changes_into_file">Guardar alterações num ficheiro</string>
+    <string name="gps_filter_hdop_desc">Defina o valor máximo aceite para HDOP.
+\nOs pontos com valores superiores a este serão ocultados.</string>
+    <string name="gps_filter_speed_altitude_desc">Apenas os pontos do trilho correspondentes ao intervalo definido aparecerão no gráfico e no mapa, o resto será ocultado.</string>
+    <string name="gps_filter_precision">Precisão do GPS</string>
+    <string name="save_changes_into_file">Guardar alterações no ficheiro</string>
     <string name="save_as_copy">Guardar como cópia</string>
-    <string name="gps_filter_actions_description">OsmAnd aplicando alterações no trilho sem o guardar no ficheiro. Pode guardar as alterações manualmente.</string>
+    <string name="gps_filter_actions_description">OsmAnd irá aplicar as alterações no trilho sem as guardar no ficheiro. Pode guardar as alterações manualmente.</string>
     <string name="shared_string_gps_filter">Filtro GPS</string>
     <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="storage_migration_wrong_folder_warning">Não foram encontrados dados do OsmAnd na pasta selecionada. Tente novamente.</string>
+    <string name="use_routing_fallback">Usar alternativa de roteamento offline</string>
+    <string name="use_routing_fallback_description">Usar roteamento offline enquanto o roteamento online não estiver disponível.</string>
+    <string name="shared_string_size">Tamanho</string>
+    <string name="created_on">Criado em</string>
+    <string name="turn_arrows">Setas de viragem</string>
+    <string name="turn_arrows_descr">Selecione se as setas de viragem estão indicadas na linha de rota.</string>
+    <string name="predefined_waypoint_appearance_description">Ao tocar nesta ação, o ponto de passagem será guardado automaticamente com parâmetros pré-definidos.</string>
+    <string name="always_ask_waypoint_appearance_description">Ao tocar nesta ação, abre-se o ecrã \"Adicionar ponto de passagem\", onde pode alterar o nome e a aparência.</string>
+    <string name="waypoint_appearance">Aparência do ponto de passagem</string>
+    <string name="track_file_description">Ao tocar nesta ação, será mostrada uma lista de trilhos disponíveis para selecionar.</string>
+    <string name="track_file">Ficheiro de trilho</string>
+    <string name="waypoint_template">Modelo de pontos de passagem</string>
+    <string name="shared_string_used">Usado</string>
+    <string name="navigate_point_format_swiss_grid_plus">Rede Suíça (CH1903+)</string>
+    <string name="shared_string_not_used">Não usado</string>
+    <string name="files_with_route_restrictions">Ficheiros com restrições de rota</string>
+    <string name="navigate_point_format_swiss_grid">Rede Suíça (CH1903)</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Etiquetas fixme</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Mostrar etiquetas fixme</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetas de notas</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Mostrar etiquetas de notas</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ícones em ampliações baixas</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualização esquemática de ícones em ampliações baixas</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Túneis de cursos de água</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Não esconder túneis de cursos de água</string>
+    <string name="rendering_value_category_name">Categoria</string>
+    <string name="rendering_value_all_name">Todos</string>
+    <string name="rendering_value_omit_name">Omissão</string>
+    <string name="rendering_attr_seabedDetail_description">Informações adicionais de texto sobre surface_qualification do fundo marinho, tipos de superfície combinados, categoria e táxon de ervas daninhas ou ervas marinhas</string>
+    <string name="rendering_attr_seabedDetail_name">Detalhes do fundo marinho</string>
+    <string name="save_track_to_gpx_descrp">Iniciar a gravação da trilha automaticamente enquanto a navegação estiver em andamento. Quando terminar, a faixa será salva automaticamente.</string>
+    <string name="gpx_no_routes_title">Não há rotas</string>
+    <string name="gpx_no_routes_descr">Pode usar a ferramenta \"%1$s\" para adicionar a rota ao ficheiro.</string>
+    <string name="please_provide_group_name_message">Por favor, forneça um nome para o grupo.</string>
+    <string name="quick_action_add_route_descr">Um botão para iniciar uma rota a partir do meio do ecrã.</string>
 </resources>

@@ -740,7 +740,6 @@
     <string name="save_current_track">儲存目前的軌跡</string>
     <string name="save_track_interval">在導航期間的記錄間隔</string>
     <string name="save_track_interval_descr">指定導航時的軌跡記錄間隔</string>
-    <string name="save_track_to_gpx_descrp">在導航期間，GPX 軌跡會自動儲存在 track 資料夾。</string>
     <string name="save_track_to_gpx">導航期間自動記錄軌跡</string>
     <string name="update_tile">更新地圖</string>
     <string name="reload_tile">重新載入圖磚</string>
@@ -4347,6 +4346,10 @@
 \n
 \n • UTM 座標搜尋的使用者介面
 \n
+\n • GPX 軌跡的 GPS 過濾條件
+\n
+\n • 海拔小工具 (Pro)
+\n
 \n • 最愛：新增檢視最近使用圖示的功能
 \n
 \n • 路線規劃：啟動後將使用選定的設定檔
@@ -4440,19 +4443,72 @@
     <string name="add_to_group">新增至群組</string>
     <string name="app_modes_options">選擇應用程式模式</string>
     <string name="shared_string_memory">記憶體</string>
-    <string name="memory_allocated_for_routing_ds">較高的記憶體值可加速長路線（超過 500 公里）的計算速度，但可能會影響其他應用程式的效能。
-\n不會影響短路線的計算速度。</string>
+    <string name="memory_allocated_for_routing_ds">較高的記憶體分配會加速長路線（超過 500 公里）的計算速度，但可能會影響其他應用程式的效能。
+\n對短路線的計算速度沒有影響。</string>
     <string name="memory_allocated_for_routing">為計算路線分配的記憶體</string>
     <string name="reading_files">正在讀取檔案……</string>
     <string name="no_items_selected_warning">請選取至少一個項目</string>
     <string name="display_groups_visibility_dialog_description">您可以在地圖上控制群組能見度。若隱藏軌跡，也將會隱藏所有的群組。</string>
     <string name="shared_string_hide_all">隱藏全部</string>
     <string name="migration_files_present">%1$d 個檔案 (%2$s) 位於選定的位置「%3$s」。</string>
-    <string name="exit_without_saving_warning">您確定不儲存就退出？您將會遺失所有變動。</string>
+    <string name="exit_without_saving_warning">不儲存變更就退出？</string>
     <string name="shared_string_uphill">上坡</string>
     <string name="shared_string_downhill">下坡</string>
     <string name="shared_string_show_slope">顯示斜率</string>
     <string name="shared_string_hide_slope">隱藏斜率</string>
     <string name="shared_string_grade">漸層</string>
     <string name="elevation_profile">海拔剖面</string>
+    <string name="gps_filter_hdop_desc">設定 HDOP 的最大接受值。
+\n有較高值的點將會被隱藏。</string>
+    <string name="gps_filter_speed_altitude_desc">僅與設定間隔相符的軌跡點才會出現在圖表與地圖上，其餘的將隱藏。</string>
+    <string name="gps_filter_smoothing_desc">設定點之間的距離閾值。
+\n距離最後一個可見點不超過這個距離的軌跡點將被隱藏。
+\n請注意，較高的閾值可能會過度簡化軌跡的幾何形狀。</string>
+    <string name="distance_between_points">點之間的距離</string>
+    <string name="gps_filter_precision">GPS 精度</string>
+    <string name="gps_filter_smoothing">平滑</string>
+    <string name="save_changes_into_file">將變更儲存至檔案</string>
+    <string name="save_as_copy">另存為副本</string>
+    <string name="gps_filter_actions_description">OsmAnd 將套用變更至軌跡而不更新檔案。您可以手動儲存變更。</string>
+    <string name="shared_string_gps_filter">GPS 過濾條件</string>
+    <string name="storage_migration_wrong_folder_warning">在選定的資料夾中找不到 OsmAnd 資料。請再試一次。</string>
+    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
+    <string name="shared_string_precision">精確</string>
+    <string name="shared_string_statistics">統計</string>
+    <string name="shared_string_size">大小</string>
+    <string name="use_routing_fallback">離線路線規劃汰退</string>
+    <string name="use_routing_fallback_description">當無法使用線上路線規劃時，則使用離線路線規劃。</string>
+    <string name="created_on">建立於</string>
+    <string name="turn_arrows">轉彎箭頭</string>
+    <string name="turn_arrows_descr">選取是否要在路線上指示轉彎箭頭。</string>
+    <string name="shared_string_not_used">未使用</string>
+    <string name="shared_string_used">已使用</string>
+    <string name="navigate_point_format_swiss_grid">瑞士座標系統 (CH1903)</string>
+    <string name="navigate_point_format_swiss_grid_plus">瑞士座標系統 (CH1903+)</string>
+    <string name="track_file">軌跡檔案</string>
+    <string name="predefined_waypoint_appearance_description">點擊此動作將會使用預先定義好的參數自動儲存航點。</string>
+    <string name="track_file_description">點擊此動作將會顯示可用軌跡的選取對話方塊。</string>
+    <string name="files_with_route_restrictions">有路徑限制的檔案</string>
+    <string name="always_ask_waypoint_appearance_description">點擊此動作將會開啟「新增航點」畫面，您可以在其中變更名稱與外觀。</string>
+    <string name="waypoint_appearance">航點外觀</string>
+    <string name="waypoint_template">航點範本</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">顯示 fixme 標籤</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">註記標籤</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">顯示註記標籤</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">低縮放程度的圖示</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">低縮放程度圖示的示意圖</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">水路隧道</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">不要隱藏水路隧道</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme 標籤</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_value_category_name">類別</string>
+    <string name="rendering_value_omit_name">忽略</string>
+    <string name="rendering_attr_seabedDetail_name">海底詳細資訊</string>
+    <string name="rendering_attr_seabedDetail_description">關於海床表面狀況、雜草或海草的組合表面類型、類別和分類群的額外文字資訊</string>
+    <string name="rendering_value_all_name">所有</string>
+    <string name="save_track_to_gpx_descrp">在導航過程中自動開始記錄軌跡。完成後，將會自動儲存軌跡。</string>
+    <string name="gpx_no_routes_descr">您可以使用「%1$s」工具將路線新增至檔案中。</string>
+    <string name="gpx_no_routes_title">沒有路線</string>
+    <string name="quick_action_add_route_descr">從畫面中央開始路線的按鈕。</string>
+    <string name="please_provide_group_name_message">請提供群組名稱。</string>
 </resources>

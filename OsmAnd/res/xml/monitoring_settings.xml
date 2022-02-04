@@ -17,9 +17,9 @@
 		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/shared_string_navigation" />
 
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+	<SwitchPreferenceCompat
 		android:key="save_track_to_gpx"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:layout="@layout/preference_switch_with_descr"
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/save_track_to_gpx"
@@ -28,11 +28,19 @@
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="save_track_interval"
 		android:layout="@layout/preference_with_descr"
-		android:title="@string/save_track_interval"
+		android:title="@string/save_track_interval_globally"
 		tools:icon="@drawable/ic_action_time_span"
 		tools:summary="3 seconds" />
 
 	<Preference
+		android:key="save_track_to_gpx_description"
+		android:layout="@layout/preference_category_with_descr"
+		android:persistent="false"
+		android:selectable="false"
+		android:summary="@string/save_track_to_gpx_descrp"/>
+
+	<Preference
+		android:key="navigation_divider"
 		android:layout="@layout/simple_divider_item"
 		android:selectable="false" />
 
@@ -89,6 +97,7 @@
 		android:title="@string/save_heading" />
 
 	<Preference
+		android:key="logging_accuracy_divider"
 		android:layout="@layout/simple_divider_item"
 		android:selectable="false" />
 
@@ -108,6 +117,7 @@
 		tools:icon="@drawable/ic_action_notification" />
 
 	<Preference
+		android:key="notification_divider"
 		android:layout="@layout/simple_divider_item"
 		android:selectable="false" />
 
@@ -121,6 +131,7 @@
 		tools:icon="@drawable/ic_world_globe_dark" />
 
 	<Preference
+		android:key="online_tracking_divider"
 		android:layout="@layout/simple_divider_item"
 		android:selectable="false" />
 
@@ -139,6 +150,7 @@
 		tools:icon="@drawable/ic_action_folder" />
 
 	<Preference
+		android:key="tracks_divider"
 		android:layout="@layout/divider_half_item"
 		android:selectable="false" />
 

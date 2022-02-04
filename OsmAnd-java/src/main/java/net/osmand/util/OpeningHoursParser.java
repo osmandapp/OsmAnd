@@ -2,17 +2,20 @@ package net.osmand.util;
 /* Can be commented out in order to run the main function separately */
 
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
 
 import gnu.trove.list.array.TIntArrayList;
 
@@ -25,23 +28,25 @@ import gnu.trove.list.array.TIntArrayList;
  */
 public class OpeningHoursParser {
 	private static final String[] daysStr;
-	private static final String[] localDaysStr;
+	private static String[] localDaysStr;
 	private static final String[] monthsStr;
-	private static final String[] localMothsStr;
+	private static String[] localMothsStr;
 	private static final Map<String, String> additionalStrings = new HashMap<>();
 
 	private static final int LOW_TIME_LIMIT = 120;
 	private static final int WITHOUT_TIME_LIMIT = -1;
 	private static final int CURRENT_DAY_TIME_LIMIT = -2;
 
+	private static boolean twelveHourFormatting;
+	private static DateFormat twelveHourFormatter;
+	private static DateFormat twelveHourFormatterAmPm;
+
 	static {
 		DateFormatSymbols dateFormatSymbols = DateFormatSymbols.getInstance(Locale.US);
 		monthsStr = dateFormatSymbols.getShortMonths();
 		daysStr = getLettersStringArray(dateFormatSymbols.getShortWeekdays(), 2);
-		
-		dateFormatSymbols = DateFormatSymbols.getInstance();
-		localMothsStr = dateFormatSymbols.getShortMonths();
-		localDaysStr = getLettersStringArray(dateFormatSymbols.getShortWeekdays(), 3);
+
+		initLocalStrings();
 
 		additionalStrings.put("off", "off");
 		additionalStrings.put("is_open", "Open");
@@ -52,6 +57,33 @@ public class OpeningHoursParser {
 		additionalStrings.put("open_till", "Open till");
 		additionalStrings.put("will_open_tomorrow_at", "Will open tomorrow at");
 		additionalStrings.put("will_open_on", "Will open on");
+	}
+
+	private static void initLocalStrings() {
+		initLocalStrings(null);
+	}
+
+	public static void initLocalStrings(Locale locale) {
+		DateFormatSymbols dateFormatSymbols = locale == null
+				? DateFormatSymbols.getInstance()
+				: DateFormatSymbols.getInstance(locale);
+		localMothsStr = dateFormatSymbols.getShortMonths();
+		localDaysStr = getLettersStringArray(dateFormatSymbols.getShortWeekdays(), 3);
+	}
+
+	public static void setTwelveHourFormattingEnabled(boolean enabled, Locale locale) {
+		twelveHourFormatting = enabled;
+		if (enabled) {
+			initTwelveHourFormatters(locale);
+		}
+	}
+
+	private static void initTwelveHourFormatters(Locale locale) {
+		twelveHourFormatter = new SimpleDateFormat("h:mm", locale);
+		twelveHourFormatterAmPm = new SimpleDateFormat("h:mm a", locale);
+		TimeZone timeZone = TimeZone.getTimeZone("UTC");
+		twelveHourFormatter.setTimeZone(timeZone);
+		twelveHourFormatterAmPm.setTimeZone(timeZone);
 	}
 
 	/**
@@ -122,6 +154,7 @@ public class OpeningHoursParser {
 
 			private boolean opened;
 			private boolean opened24_7;
+			private boolean fallback;
 			private String openingTime;
 			private String nearToOpeningTime;
 			private String closingTime;
@@ -138,12 +171,20 @@ public class OpeningHoursParser {
 				return opened24_7;
 			}
 
+			public boolean isFallback() {
+				return fallback;
+			}
+
 			public String getInfo() {
 				if (isOpened24_7()) {
-					if (!Algorithms.isEmpty(ruleString)) {
-						return additionalStrings.get("is_open") + " " + ruleString;
+					if (!isFallback()) {
+						if (!Algorithms.isEmpty(ruleString)) {
+							return additionalStrings.get("is_open") + " " + ruleString;
+						} else {
+							return additionalStrings.get("is_open_24_7");
+						}
 					} else {
-						return additionalStrings.get("is_open_24_7");
+						return !Algorithms.isEmpty(ruleString) ? ruleString : "";
 					}
 				} else if (!Algorithms.isEmpty(nearToOpeningTime)) {
 					return additionalStrings.get("will_open_at") + " " + nearToOpeningTime;
@@ -157,10 +198,8 @@ public class OpeningHoursParser {
 					return additionalStrings.get("will_open_tomorrow_at") + " " + openingTomorrow;
 				} else if (!Algorithms.isEmpty(openingDay)) {
 					return additionalStrings.get("will_open_on") + " " + openingDay + ".";
-				} else if (!Algorithms.isEmpty(ruleString)) {
-					return ruleString;
 				} else {
-					return "";
+					return !Algorithms.isEmpty(ruleString) ? ruleString : "";
 				}
 			}
 		}
@@ -205,6 +244,7 @@ public class OpeningHoursParser {
 		private Info getInfo(Calendar cal, int sequenceIndex) {
 			Info info = new Info();
 			boolean opened = isOpenedForTimeV2(cal, sequenceIndex);
+			info.fallback = isFallBackRule(sequenceIndex);
 			info.opened = opened;
 			info.ruleString = getCurrentRuleTime(cal, sequenceIndex);
 			if (opened) {
@@ -454,6 +494,14 @@ public class OpeningHoursParser {
 			return getCurrentRuleTime(cal, ALL_SEQUENCES);
 		}
 
+		public boolean isFallBackRule(int sequenceIndex) {
+			if (sequenceIndex != ALL_SEQUENCES) {
+				ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
+				return !rules.isEmpty() && rules.get(0).isFallbackRule();
+			}
+			return false;
+		}
+
 		public String getCurrentRuleTime(Calendar cal, int sequenceIndex) {
 			// make exception for overlapping times i.e.
 			// (1) Mo 14:00-16:00; Tu off
@@ -638,6 +686,8 @@ public class OpeningHoursParser {
 
 		public int getSequenceIndex();
 
+		boolean isFallbackRule();
+
 		public String toRuleString();
 
 		public String toLocalRuleString();
@@ -673,6 +723,8 @@ public class OpeningHoursParser {
 		private int[] lastYearMonths = null;
 		private int fullYears = 0;
 		private int year = 0;
+
+		private boolean fallback;
 
 		/**
 		 * represents the list on which day it is open.
@@ -711,6 +763,11 @@ public class OpeningHoursParser {
 
 		public int getSequenceIndex() {
 			return sequenceIndex;
+		}
+
+		@Override
+		public boolean isFallbackRule() {
+			return fallback;
 		}
 
 		/**
@@ -1169,7 +1226,9 @@ public class OpeningHoursParser {
 			if (startTimes == null || startTimes.size() == 0) {
 				if (isOpened24_7()) {
 					b.setLength(0);
-					b.append("24/7 ");
+					if (!isFallbackRule()) {
+						b.append("24/7 ");
+					}
 				}
 				if (off) {
 					b.append(offStr);
@@ -1185,13 +1244,7 @@ public class OpeningHoursParser {
 						if (i > 0) {
 							b.append(", ");
 						}
-						int stHour = startTime / 60;
-						int stTime = startTime - stHour * 60;
-						int enHour = endTime / 60;
-						int enTime = endTime - enHour * 60;
-						formatTime(stHour, stTime, b);
-						b.append("-"); //$NON-NLS-1$
-						formatTime(enHour, enTime, b);
+						formatTimeRange(startTime, endTime, b);
 					}
 					if (off) {
 						b.append(" ").append(offStr);
@@ -1627,6 +1680,11 @@ public class OpeningHoursParser {
 		public int getSequenceIndex() {
 			return 0;
 		}
+
+		@Override
+		public boolean isFallbackRule() {
+			return false;
+		}
 	}
 	
 	private enum TokenType { 
@@ -1696,9 +1754,13 @@ public class OpeningHoursParser {
 		String endOfDay = "24:00";
 		r = r.replace('(', ' '); // avoid "(mo-su 17:00-20:00"
 		r = r.replace(')', ' ');
+		BasicOpeningHourRule basic = new BasicOpeningHourRule(sequenceIndex);
+		if (r.startsWith("|| ")) {
+			r = r.replace("|| ", "");
+			basic.fallback = true;
+		}
 		String localRuleString = r.replaceAll("(?i)sunset", sunset).replaceAll("(?i)sunrise", sunrise)
 				.replaceAll("\\+", "-" + endOfDay);
-		BasicOpeningHourRule basic = new BasicOpeningHourRule(sequenceIndex);
 		boolean[] days = basic.getDays();
 		boolean[] months = basic.getMonths();
 		//boolean[][] dayMonths = basic.getDayMonths();
@@ -2039,7 +2101,7 @@ public class OpeningHoursParser {
 			return null;
 		}
 		List<List<String>> res = new ArrayList<>();
-		String[] sequences = format.split("\\|\\|");
+		String[] sequences = format.split("(?= \\|\\| )");
 		for (String seq : sequences) {
 			seq = seq.trim();
 			if (seq.length() == 0) {
@@ -2173,23 +2235,46 @@ public class OpeningHoursParser {
 		}
 	}
 
-	private static void formatTime(int h, int t, StringBuilder b) {
-		if (h < 10) {
-			b.append("0"); //$NON-NLS-1$
+	private static void formatTimeRange(int startMinute, int endMinute, StringBuilder stringBuilder) {
+		int startHour = (startMinute / 60) % 24;
+		int endHour = (endMinute / 60) % 24;
+		boolean sameDayPart = Math.max(startHour, endHour) < 12 || Math.min(startHour, endHour) >= 12;
+		if (twelveHourFormatting && sameDayPart) {
+			formatTime(startMinute, stringBuilder, false);
+			stringBuilder.append("–");
+			formatTime(endMinute, stringBuilder, true);
+		} else {
+			formatTime(startMinute, stringBuilder);
+			stringBuilder.append("–");
+			formatTime(endMinute, stringBuilder);
 		}
-		b.append(h).append(":"); //$NON-NLS-1$
-		if (t < 10) {
-			b.append("0"); //$NON-NLS-1$
-		}
-		b.append(t);
 	}
 
 	private static void formatTime(int minutes, StringBuilder sb) {
-		int hour = minutes / 60;
-		int time = minutes - hour * 60;
-		formatTime(hour, time, sb);
+		formatTime(minutes, sb, true);
 	}
 
+	private static void formatTime(int minutes, StringBuilder sb, boolean appendAmPM) {
+		int hour = minutes / 60;
+		int time = minutes - hour * 60;
+		formatTime(hour, time, sb, appendAmPM);
+	}
 
-	
+	private static void formatTime(int hours, int minutes, StringBuilder b, boolean appendAmPm) {
+		if (twelveHourFormatting) {
+			long millis = (hours * 60L + minutes) * 60 * 1000;
+			Date date = new Date(millis);
+			String time = appendAmPm ? twelveHourFormatterAmPm.format(date) : twelveHourFormatter.format(date);
+			b.append(time);
+		} else {
+			if (hours < 10) {
+				b.append("0"); //$NON-NLS-1$
+			}
+			b.append(hours).append(":"); //$NON-NLS-1$
+			if (minutes < 10) {
+				b.append("0"); //$NON-NLS-1$
+			}
+			b.append(minutes);
+		}
+	}
 }

@@ -158,8 +158,7 @@
 	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="@dimen/context_menu_padding_margin_small"
-		android:background="?attr/activity_background_basic">
+		android:layout_marginTop="@dimen/context_menu_padding_margin_small">
 
 		<include
 			android:id="@+id/shadow"

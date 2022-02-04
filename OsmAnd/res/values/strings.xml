@@ -11,29 +11,72 @@
 	Thx - Hardy
 -->
 
+    <string name="select_suggested_points">Select suggested points</string>
+    <string name="selected_waypoints_descr">Selected waypoints will be added to the \"%1$s\" track</string>
+    <string name="shared_string_reading_file">Reading file…</string>
+    <string name="all_groups">All groups</string>
+    <string name="list_of_groups">List of groups</string>
+    <string name="points_selection_descr">Are you sure you want to close ? You will lost all changes.</string>
+    <string name="exit_import_descr">Are you sure you want to exit without saving? You will lost all changes.</string>
+    <string name="exit_import">Exit import?</string>
+    <string name="import_tracks">Import tracks</string>
+    <string name="import_tracks_descr">%1$s, contains %2$s separate tracks. Choose tracks you want to import.</string>
+    <string name="please_provide_group_name_message">Please provide a name for the group.</string>
+    <string name="quick_action_add_route_descr">A button to start a route from the middle of the screen.</string>
+    <string name="gpx_no_routes_descr">You can use \"%1$s\" tool to add route into file.</string>
+    <string name="gpx_no_routes_title">There are no routes</string>
+    <string name="save_track_to_gpx_descrp">Start track recording automatically while navigation is in progress. When it is finished, the track will be saved automatically.</string>
+    <string name="rendering_attr_seabedDetail_name">Seabed detail</string>
+    <string name="rendering_attr_seabedDetail_description">Additional text information on seabed surface_qualification, combined surface types, category and taxon of weed or seagrass</string>
+    <string name="rendering_value_category_name">Category</string>
+    <string name="rendering_value_all_name">All</string>
+    <string name="rendering_value_omit_name">Omit</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme tags</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Show fixme tags</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Note tags</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Show note tags</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icons at low zooms</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematic display of icons at low zooms</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Waterway tunnels</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Don\'t hide waterway tunnels</string>
+    <string name="shared_string_not_used">Not used</string>
+    <string name="shared_string_used">Used</string>
+    <string name="files_with_route_restrictions">Files with route restrictions</string>
+    <string name="waypoint_template">Waypoint template</string>
+    <string name="predefined_waypoint_appearance_description">Tapping this action will auto-save the waypoint with predefined parameters.</string>
+    <string name="always_ask_waypoint_appearance_description">Tapping this action will open the “Add waypoint” screen, where you can change name and appearance.</string>
+    <string name="waypoint_appearance">Waypoint appearance</string>
+    <string name="track_file_description">Tapping this action will show a selection dialogue of available tracks.</string>
+    <string name="track_file">Track file</string>
+    <string name="turn_arrows">Turn Arrows</string>
+    <string name="turn_arrows_descr">Select whether turn arrows are indicated on the route line.</string>
+    <string name="shared_string_size">Size</string>
+    <string name="created_on">Created on</string>
+    <string name="use_routing_fallback">Offline routing fallback</string>
+    <string name="use_routing_fallback_description">Use offline routing while online routing is not available.</string>
+    <string name="gps_filter_precision">GPS precision</string>
     <string name="shared_string_precision">Precision</string>
     <string name="shared_string_statistics">Statistics</string>
-    <string name="gps_filter_hdop_desc">Set the maximum allowable value for HDOP.\nPoints greater than the set parameter will be hidden.</string>
-    <string name="gps_filter_speed_altitude_desc">The track points matching the set interval will be visible on the chart and map, the rest will be hidden.</string>
-    <string name="gps_filter_smoothing_desc">Set the threshold distance between points.\nTrack points that are at least X distance from the last visible point will be hidden.\nBe careful the greater the distance, the simpler the track geometry.</string>
+    <string name="gps_filter_hdop_desc">Set the maximum accepted value for HDOP.\nPoints with higher value will be hidden.</string>
+    <string name="gps_filter_speed_altitude_desc">Only track points matching the set interval will appear on the chart and map, the rest will be hidden.</string>
+    <string name="gps_filter_smoothing_desc">Set the threshold distance between points.\nTrack points not at least this distance away from the last visible point will be hidden.\nBe aware that high thresholds may oversimplify the track geometry.</string>
     <string name="distance_between_points">Distance between points</string>
-    <string name="gps_filter_precision">Min GPS Precision</string>
     <string name="gps_filter_smoothing">Smoothing</string>
-    <string name="save_changes_into_file">Save changes into file</string>
+    <string name="save_changes_into_file">Save changes to file</string>
     <string name="save_as_copy">Save as copy</string>
-    <string name="gps_filter_actions_description">OsmAnd applying changes to the track without saving it to the file. You can save changes manually.</string>
+    <string name="gps_filter_actions_description">OsmAnd will apply the changes to the track without updating the file. You can save changes manually.</string>
     <string name="shared_string_gps_filter">GPS filter</string>
-    <string name="storage_migration_wrong_folder_warning">We can\'t find OsmAnd data in the selected folder. Please try again.</string>
-    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
-    <string name="exit_without_saving_warning">Are you sure you exit without saving? You will lost all changes.</string>
-    <string name="migration_files_present">%1$d files (%2$s) are present in the selected location \'%3$s\'.</string>
+    <string name="storage_migration_wrong_folder_warning">No OsmAnd data found in the selected folder. Please try again.</string>
+    <string name="exit_without_saving_warning">Exit without saving changes?</string>
+    <string name="migration_files_present">There are %1$d files (%2$s) in the selected location \'%3$s\'.</string>
     <string name="fold_unfold">fold/unfold</string>
     <string name="app_profile_type">App profile type</string>
     <string name="map_marker_options">Map marker options</string>
     <string name="add_to_group">Add to group</string>
-    <string name="app_modes_options">Choose App modes</string>
+    <string name="app_modes_options">Choose app modes</string>
     <string name="shared_string_memory">Memory</string>
-    <string name="memory_allocated_for_routing_ds">Higher memory value speeds up the calculation of long routes (more than 500 km), but may affect the performance of other applications.\nDoes not affect calculation speed of short routes.</string>
+    <string name="memory_allocated_for_routing_ds">Higher memory allocation will speed up the calculation of long routes (over 500 km), but may impact the performance of other apps.\nNo impact on the calculation speed of short routes.</string>
     <string name="memory_allocated_for_routing">Memory allocated for routing</string>
     <string name="reading_files">Reading files…</string>
     <string name="no_items_selected_warning">Please select at least one item</string>
@@ -103,6 +146,8 @@
     <string name="release_4_1">
     • Added initial support for Android Auto\n\n
     • User interface update for UTM coordinate search\n\n
+    • GPS Filter for GPX Tracks\n\n
+    • Elevation Widget (Pro)\n\n
     • Favorites: added ability to view recently used icons\n\n
     • Route planning: will use the selected profile after launch\n\n
     • Fixed Mapillary layer, the plugin is now disabled by default\n\n
@@ -1198,6 +1243,8 @@
     <string name="navigate_point_format_utm">UTM Standard</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="navigate_point_format_olc">Open Location Code</string>
+    <string name="navigate_point_format_swiss_grid">Swiss Grid (CH1903)</string>
+    <string name="navigate_point_format_swiss_grid_plus">Swiss Grid (CH1903+)</string>
     <string name="coordinates_format_info">The selected format will be applied throughout the app.</string>
     <string name="pref_selected_by_default_for_profiles">This setting is selected by default for profiles: %s</string>
     <string name="change_default_settings">Change setting</string>
@@ -2840,7 +2887,6 @@
     <string name="save_current_track_descr">Save current track as GPX file now.</string>
     <string name="save_current_track">Save current track</string>
     <string name="save_track_to_gpx">Auto-record track during navigation</string>
-    <string name="save_track_to_gpx_descrp">A GPX track is automatically saved to the tracks folder during navigation.</string>
     <string name="save_track_interval_globally">Logging interval</string>
     <string name="save_track_interval">Logging interval during navigation</string>
     <string name="save_track_interval_descr">Specify the logging interval for track recording during navigation</string>

@@ -25,7 +25,7 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.render.RenderingIcons;
@@ -619,8 +619,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	}
 
 	public String getGeneratedName(int chars) {
-		if (!filterId.equals(CUSTOM_FILTER_ID) ||
-				areAllTypesAccepted() || acceptedTypes.isEmpty()) {
+		if (!isCustomPoiFilter() || areAllTypesAccepted() || acceptedTypes.isEmpty()) {
 			return getName();
 		}
 		StringBuilder res = new StringBuilder();
@@ -828,7 +827,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		Set<PoiUIFilter> standardFilters = new TreeSet<>();
 		for (PoiUIFilter filter : filters) {
 			if (((filter.isStandardFilter() && filter.filterId.startsWith(PoiUIFilter.STD_PREFIX))
-					|| filter.filterId.startsWith(PoiUIFilter.CUSTOM_FILTER_ID))
+					|| filter.isCustomPoiFilter())
 					&& (filter.getFilterByName() == null)
 					&& (filter.getSavedFilterByName() == null)) {
 				standardFilters.add(filter);
@@ -933,6 +932,10 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 
 	public void setStandardFilter(boolean isStandardFilter) {
 		this.isStandardFilter = isStandardFilter;
+	}
+
+	public boolean isCustomPoiFilter() {
+		return CUSTOM_FILTER_ID.equals(filterId);
 	}
 
 	public int getOrder() {

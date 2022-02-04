@@ -7,14 +7,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -117,18 +117,10 @@ public class TrackEditCard extends MapBaseCard {
 		ImageButton editButton = view.findViewById(R.id.show_on_map);
 		editButton.setVisibility(View.VISIBLE);
 		editButton.setImageDrawable(getContentIcon(R.drawable.ic_action_edit_dark));
-		editButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardPressed(TrackEditCard.this);
-				}
-			}
-		});
+		editButton.setOnClickListener(v -> notifyCardPressed());
 
-		int minCardHeight = app.getResources().getDimensionPixelSize(R.dimen.setting_list_item_large_height);
-		int listContentPadding = app.getResources().getDimensionPixelSize(R.dimen.list_content_padding);
+		int minCardHeight = getDimen(R.dimen.setting_list_item_large_height);
+		int listContentPadding = getDimen(R.dimen.list_content_padding);
 
 		LinearLayout container = view.findViewById(R.id.container);
 		container.setMinimumHeight(minCardHeight);

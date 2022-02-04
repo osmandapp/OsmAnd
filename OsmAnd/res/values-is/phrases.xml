@@ -42,7 +42,7 @@
     <string name="poi_customs">Tollafgreiðsla</string>
     <string name="poi_country">Land</string>
     <string name="poi_city">Borg</string>
-    <string name="poi_capital">Já</string>
+    <string name="poi_capital">Já;Höfuðborg</string>
     <string name="poi_town">Bær</string>
     <string name="poi_village">Þorp</string>
     <string name="poi_hamlet">Byggðakjarni</string>
@@ -1690,7 +1690,7 @@
     <string name="poi_railway_station">Járnbrautarstöð</string>
     <string name="poi_halt">Járnbrautarpallur</string>
     <string name="poi_subway_entrance">Inngangur í neðanjarðarlest</string>
-    <string name="poi_subway_station">Já</string>
+    <string name="poi_subway_station">Já;neðanjarðarlestarstöð</string>
     <string name="poi_taxi">Leigubílastaur</string>
     <string name="poi_bicycle_rental">Reiðhjólaleiga</string>
     <string name="poi_bicycle_parking">Reiðhjólastæði</string>
@@ -4181,7 +4181,7 @@
     <string name="poi_generator_source_gasoline">Uppruni orku: bensín</string>
     <string name="poi_generator_source_waste">Uppruni orku: sorp</string>
     <string name="poi_medical_supply_orthotics">Stoðtæki</string>
-    <string name="poi_beauty_salon_spa">Spa</string>
+    <string name="poi_beauty_salon_spa">Spa-böð</string>
     <string name="poi_beauty_salon_skin_care">Húðsnyrting</string>
     <string name="poi_beauty_salon_aesthetic">Lýtalækningar</string>
     <string name="poi_beauty_salon_eyelash">Augnhárameðferð</string>
@@ -4209,4 +4209,18 @@
     <string name="poi_generator_type_reciprocating_engine">Tegund aflgjafa: tvígengishreyfill</string>
     <string name="poi_generator_type_bioreactor">Tegund aflgjafa: lífmassaknúið</string>
     <string name="poi_fumarole">Gufuhver</string>
+    <string name="poi_computer_parts">Íhlutir fyrir tölvur</string>
+    <string name="poi_prep_school">Undirbúningsskóli</string>
+    <string name="poi_escape_game">Flóttaleikur</string>
+    <string name="poi_computer_sales_used">Notað</string>
+    <string name="poi_computer_sales">Sala á tölvum</string>
+    <string name="poi_computer_sales_yes">Já</string>
+    <string name="poi_computer_repair">Tölvuviðgerðir</string>
+    <string name="poi_diet_vegan_limited">Grænkerafæði: takmarkað</string>
+    <string name="poi_computer_repair_yes">Já</string>
+    <string name="poi_computer_sales_no">Sala á tölvum: nei</string>
+    <string name="poi_computer_repair_no">Tölvuviðgerðir: nei</string>
+    <string name="poi_computer_parts_yes">Já</string>
+    <string name="poi_computer_parts_no">Tölvuíhlutir: nei</string>
+    <string name="poi_post_office_type">Tegund</string>
 </resources>

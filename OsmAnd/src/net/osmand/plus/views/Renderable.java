@@ -13,6 +13,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GradientScaleType;
+import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWay;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.Algorithms;

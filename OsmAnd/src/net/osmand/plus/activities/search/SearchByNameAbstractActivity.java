@@ -49,7 +49,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.OsmandListActivity;
+import net.osmand.plus.base.OsmandListActivity;
 import net.osmand.plus.activities.search.SearchAddressFragment.AddressInformation;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.dialogs.FavoriteDialogs;

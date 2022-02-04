@@ -1,7 +1,5 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
@@ -11,6 +9,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import net.osmand.data.FavouritePoint;
+import net.osmand.data.FavouritePoint.BackgroundType;
+import net.osmand.data.LatLon;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dialogs.FavoriteDialogs;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.util.Algorithms;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -19,23 +35,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.data.FavouritePoint;
-import net.osmand.data.FavouritePoint.BackgroundType;
-import net.osmand.data.LatLon;
-import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.PointImageDrawable;
-import net.osmand.plus.dialogs.FavoriteDialogs;
-import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.render.RenderingIcons;
-import net.osmand.util.Algorithms;
-
-import java.util.LinkedHashSet;
-import java.util.Set;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 
 public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 
@@ -53,7 +53,6 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 	@Nullable
 	private FavouritesDbHelper helper;
 
-	private boolean autoFill;
 	private boolean saved;
 	private int defaultColor;
 
@@ -126,14 +125,6 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			FavoriteDialogs.createReplaceFavouriteDialog(activity, args);
-		}
-	}
-
-	@Override
-	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-		if (autoFill) {
-			save(true);
 		}
 	}
 
@@ -227,14 +218,14 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		showAutoFillInstance(mapActivity, false);
 	}
 
-	public static void showAutoFillInstance(final MapActivity mapActivity, boolean autoFill) {
+	public static void showAutoFillInstance(final MapActivity mapActivity, boolean skipConfirmationDialog) {
 		FavoritePointEditor editor = mapActivity.getContextMenu().getFavoritePointEditor();
 		if (editor != null) {
 			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 			String tag = editor.getFragmentTag();
 			if (fragmentManager.findFragmentByTag(tag) == null) {
 				FavoritePointEditorFragment fragment = new FavoritePointEditorFragment();
-				fragment.autoFill = autoFill;
+				fragment.skipConfirmationDialog = skipConfirmationDialog;
 				fragmentManager.beginTransaction()
 						.add(R.id.fragmentContainer, fragment, tag)
 						.addToBackStack(null)
@@ -280,7 +271,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 				return;
 			}
 
-			if (builder != null && !autoFill) {
+			if (builder != null && !skipConfirmationDialog) {
 				builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {

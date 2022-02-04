@@ -553,7 +553,7 @@
     <string name="live_monitoring_url">Adreça web de seguiment en viu</string>
     <string name="gpx_monitoring_disabled_warn">Registreu traces amb el giny GPX o amb la configuració «Enregistrament del trajecte».</string>
     <string name="pref_overlay">Capa de fons/Cap superposada</string>
-    <string name="map_version_changed_info">Baixeu la nova versió de l\'aplicació per poder obrir els nous arxius de mapes.</string>
+    <string name="map_version_changed_info">Baixeu la nova versió de l\'aplicació per poder obrir els nous fitxers de mapes.</string>
     <string name="local_index_action_do">Estas a punt de %1$s %2$s element(s). Continuar?</string>
     <string name="warning_tile_layer_not_downloadable">L\'aplicació no pot baixar la capa del mapa %1$s, si la reinstal·leu es podria arreglar.</string>
     <string name="layer_overlay">Mapa sobreposat…</string>
@@ -769,7 +769,6 @@
     <string name="reading_indexes">S\'estan llegint les dades locals…</string>
     <string name="use_online_routing_descr">Utilitzeu Internet per calcular una ruta.</string>
     <string name="save_current_track">Desa la traça actual</string>
-    <string name="save_track_to_gpx_descrp">Durant la navegació es desa automàticament una traça GPX a la carpeta de traces.</string>
     <string name="reload_tile">Torna a carregar la tessel·la</string>
     <string name="mark_point">Objectiu</string>
     <string name="edit_filter_delete_message">El filtre \'%1$s\' s\'ha eliminat</string>
@@ -2165,7 +2164,7 @@
     <string name="routing_attr_driving_style_name">Estil de conducció</string>
     <string name="shared_string_gpx_tracks">Pistes</string>
     <string name="select_gpx_folder">Seleccioneu la carpeta fitxers GPX</string>
-    <string name="file_can_not_be_moved">No s\'ha pogut moure l\'arxiu.</string>
+    <string name="file_can_not_be_moved">No s\'ha pogut moure el fitxer.</string>
     <string name="shared_string_move">Mou</string>
     <string name="shared_string_time_moving">Temps en moviment</string>
     <string name="shared_string_time_span">Lapse temporal</string>
@@ -2524,7 +2523,7 @@
     <string name="shared_string_view">Visualització</string>
     <string name="waypoints_added_to_map_markers">Fites afegides als marcadors</string>
     <string name="import_gpx_file_description">es poden importar com a Preferits o un fitxer GPX.</string>
-    <string name="import_as_gpx">Importa com un arxiu GPX</string>
+    <string name="import_as_gpx">Importa com un fitxer GPX</string>
     <string name="import_as_favorites">Importa com Preferits</string>
     <string name="import_file">Importa fitxer</string>
     <string name="tap_on_map_to_hide_interface_descr">Prement el mapa canvien els botons de control i els ginys.</string>
@@ -2584,7 +2583,7 @@
     <string name="will_open_at">Obre a les</string>
     <string name="will_open_on">Obre a les</string>
     <string name="additional_actions">Accions addicionals</string>
-    <string name="av_locations_selected_desc">Arxiu GPX amb coordenades i dades de les notes seleccionades.</string>
+    <string name="av_locations_selected_desc">Fitxer GPX amb coordenades i dades de les notes seleccionades.</string>
     <string name="av_locations_all_desc">Fitxer GPX amb coordenades i dades de totes les notes.</string>
     <string name="shared_string_actions">Accions</string>
     <string name="shared_string_marker">Marcador</string>
@@ -2605,8 +2604,8 @@
     <string name="switch_osm_notes_visibility_desc">Mostra o amaga notes OSM en el mapa.</string>
     <string name="gpx_file_desc">GPX - adient per exportar-lo a JOSM o a altres editors d\'OSM.</string>
     <string name="osc_file_desc">OSC - adient per exportar-lo a OSM.</string>
-    <string name="shared_string_gpx_file">Arxiu GPX</string>
-    <string name="osc_file">Arxiu OSC</string>
+    <string name="shared_string_gpx_file">Fitxer GPX</string>
+    <string name="osc_file">Fitxer OSC</string>
     <string name="choose_file_type">Seleccioneu el tipus de fitxer</string>
     <string name="osm_edits_export_desc">Exportació com notes d\'OSM, PDIs o les dues coses.</string>
     <string name="all_data">Totes les dades</string>
@@ -2802,7 +2801,7 @@
     <string name="avoid_roads_descr">Seleccioneu una carretera que volgueu evitar en la navegació, tant des del mapa com des de la llista de sota:</string>
     <string name="show_along_the_route">Mostra al llarg de la ruta</string>
     <string name="simulate_navigation">Simula la navegació</string>
-    <string name="choose_track_file_to_follow">Seleccioneu l\'arxiu de la traça a seguir</string>
+    <string name="choose_track_file_to_follow">Seleccioneu el fitxer de la traça a seguir</string>
     <string name="voice_announcements">Indicacions per veu</string>
     <string name="intermediate_destinations">Destinacions intermèdies</string>
     <string name="arrive_at_time">Arribada a %1$s</string>
@@ -2907,10 +2906,10 @@
     <string name="routing_attr_avoid_ferry_name">Sense ferris</string>
     <string name="routing_attr_avoid_ferry_description">Evita els ferris</string>
     <string name="send_log">Envia el registre</string>
-    <string name="files_moved">S\'han mogut %1$d arxius (%2$s).</string>
-    <string name="files_copied">S\'han copiat %1$d arxius (%2$s).</string>
-    <string name="files_failed">No ha pogut copiar %1$d arxius (%2$s).</string>
-    <string name="files_present">Ja hi ha %1$d arxius (%2$s) a la localització prèvia \'%3$s\'.</string>
+    <string name="files_moved">S\'han mogut %1$d fitxers (%2$s).</string>
+    <string name="files_copied">S\'han copiat %1$d fitxers (%2$s).</string>
+    <string name="files_failed">No ha pogut copiar %1$d fitxers (%2$s).</string>
+    <string name="files_present">Ja hi ha %1$d fitxers (%2$s) a la localització prèvia \'%3$s\'.</string>
     <string name="move_maps">Mou els mapes</string>
     <string name="dont_move_maps">No moguis</string>
     <string name="public_transport_ped_route_title">La ruta a peu triga aproximadament %1$s i es pot escurçar utilitzant transport públic</string>
@@ -3124,7 +3123,7 @@
     <string name="plugins_settings">Configuració del connector</string>
     <string name="shared_string_by_default">Predeterminat</string>
     <string name="route_parameters">Paràmetres de la ruta</string>
-    <string name="change_data_storage_full_description">Voleu moure els arxius de dades OsmAnd a una nova destinació\?
+    <string name="change_data_storage_full_description">Voleu moure els fitxers de dades OsmAnd a una nova destinació\?
 \n%1$s &gt; %2$s</string>
     <string name="enter_path_to_folder">Introduïu el camí a la carpeta</string>
     <string name="shared_string_select_folder">Carpeta…</string>
@@ -3296,10 +3295,10 @@
     <string name="reset_all_profile_settings">Voleu restablir la configuració de tots els perfils\?</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
-    <string name="file_does_not_contain_routing_rules">No hi ha normes de navegació a \'%1$s\' . Trieu un altre arxiu.</string>
+    <string name="file_does_not_contain_routing_rules">No hi ha normes de navegació a \'%1$s\' . Trieu un altre fitxer.</string>
     <string name="not_support_file_type_with_ext">Seleccioneu un fitxer amb a l\'extensió admesa %1$s.</string>
-    <string name="import_from_file">Importar des d\'arxiu</string>
-    <string name="import_routing_file">Importar arxiu de rutejament</string>
+    <string name="import_from_file">Importar des de fitxer</string>
+    <string name="import_routing_file">Importa fitxer de ruta</string>
     <string name="import_profile">Importar perfil</string>
     <string name="monitoring_prefs_descr">Navegació, precisió de registre</string>
     <string name="multimedia_notes_prefs_descr">Mida d\'imatge, àudio i qualitat de vídeo</string>
@@ -3399,7 +3398,7 @@
     <string name="shared_string_quick_actions">Accions directes</string>
     <string name="shared_string_profiles">Perfils</string>
     <string name="listed_exist">Els llistats %1$s ja existeixen a OsmAnd.</string>
-    <string name="replace_all_desc">Els elements actuals es substituiran amb elements de l\'arxiu</string>
+    <string name="replace_all_desc">Els elements actuals es substituiran amb elements del fitxer</string>
     <string name="replace_all">Reemplaça-ho tot</string>
     <string name="keep_both">Manté tots dos</string>
     <string name="keep_both_desc">Els elements importats s\'afegiran amb prefix</string>
@@ -3581,7 +3580,7 @@
     <string name="add_to_a_track">Afegeix a una ruta</string>
     <string name="track_show_start_finish_icons">Mostra icones d\'inici i final</string>
     <string name="select_track_width">Triar amplària</string>
-    <string name="route_between_points_add_track_desc">Trieu un arxiu de ruta al qual s\'afegirà un nou segment.</string>
+    <string name="route_between_points_add_track_desc">Trieu un fitxer de ruta al qual s\'afegirà un nou segment.</string>
     <string name="route_between_points_warning_desc">Desprès, ajusteu la traçada a la carretera permesa més propera amb un dels vostres perfils de navegació per utilitzar aquesta opció.</string>
     <string name="route_between_points_desc">Trieu com connectar els punts, amb una línia recta, o calcular la ruta entre ells segons s\'indica a continuació.</string>
     <string name="gpx_split_interval_descr">Trieu l\'interval a què les marques de distància o temps sobre la ruta es mostraran.</string>
@@ -3640,7 +3639,7 @@
     <string name="map_widget_monitoring">Enregistrament del trajecte</string>
     <string name="marker_save_as_track">Desa com un fitxer de traçats</string>
     <string name="follow_track">Segueix el trajecte</string>
-    <string name="follow_track_descr">Seleccioneu l\'arxiu de la traça a seguir</string>
+    <string name="follow_track_descr">Seleccioneu el fitxer de la traça a seguir</string>
     <string name="select_another_track">Seleccioneu un altre traçat</string>
     <string name="start_of_the_track">Inici de la traça</string>
     <string name="nearest_point">El punt més proper</string>
@@ -3678,7 +3677,7 @@
     <string name="save_global_track_interval_descr">Trieu l\'interval d\'enregistrament general dels desplaçaments (s\'activa mitjançant el giny del mapa \'Enregistrament de ruta\').</string>
     <string name="simplified_track">Traça simplificada</string>
     <string name="simplified_track_description">Només es desarà la línia del trajecte, les fites s\'esborraran.</string>
-    <string name="number_of_gpx_files_selected_pattern">%s arxius de traces seleccionats</string>
+    <string name="number_of_gpx_files_selected_pattern">%s fitxers de traces seleccionats</string>
     <string name="shared_string_save_as_gpx">Desa en un nou fitxer de traces</string>
     <string name="show_gpx">Traces</string>
     <string name="empty_state_my_tracks_desc">Importa o enregistra fitxers de traces</string>
@@ -3744,7 +3743,7 @@
     <string name="icon_group_emergency">Emergència</string>
     <string name="use_native_pt">Desenvolupament local de Transport Public</string>
     <string name="lenght_limit_description">Proporcioneu la llargada del vostre vehicle, pot haver-hi rutes restringides als vehicles llargs.</string>
-    <string name="gpx_parse_error">No s\'ha generat correctament l\'arxiu GPX. Indiqueu-ho a l\'equip de suport per continuar investigant.</string>
+    <string name="gpx_parse_error">No s\'ha generat correctament el fitxer GPX. Indiqueu-ho a l\'equip de suport per continuar investigant.</string>
     <string name="save_track_to_gpx">Enregistra automàticament la traça durant la navegació</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Afegiu almenys dos punts</string>
     <string name="use_dev_url_descr">Canvieu per utilitzar dev.openstreetmap.org en lloc d\'openstreetmap.org en provar la pujada de nota OSM / PDI / GPX.</string>
@@ -3866,4 +3865,46 @@
 \n • S\'han solucionat diferents problemes d\'encaminament
 \n
 \n</string>
+    <string name="shared_string_statistics">Estadístiques</string>
+    <string name="distance_between_points">Distància entre punts</string>
+    <string name="shared_string_gps_filter">Filtre del GPS</string>
+    <string name="storage_copied_files_size">S\'han copiat %1$s fitxers (%2$s)</string>
+    <string name="storage_copying_files_size">Copiant %1$s fitxers (%2$s)</string>
+    <string name="add_to_group">Afegeix al grup</string>
+    <string name="shared_string_memory">Memòria</string>
+    <string name="from_to_with_params">De %1$s a %2$s</string>
+    <string name="shared_string_precision">Precisió</string>
+    <string name="gps_filter_precision">Precisió mínima del GPS</string>
+    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
+    <string name="shared_string_hide_all">Amaga-ho tot</string>
+    <string name="files_remaining">Fitxers restants: %1$s %2$s</string>
+    <string name="copying_file">Copiant fitxer %1$s…</string>
+    <string name="progress_complete">%1$s complet</string>
+    <string name="reading_files">Llegint fitxers…</string>
+    <string name="gps_filter_hdop_desc">Definiu el valor màxim acceptat per a HDOP.
+\nS\'ocultaran els punts amb un valor més alt.</string>
+    <string name="created_on">Creat el</string>
+    <string name="turn_arrows_descr">Controla la visibilitat de les fletxes de gir a la línia de ruta.</string>
+    <string name="shared_string_not_used">No s\'usa</string>
+    <string name="shared_string_used">Usat</string>
+    <string name="turn_arrows">Fletxes de gir</string>
+    <string name="gps_filter_smoothing">Suavitzat</string>
+    <string name="save_changes_into_file">Desa els canvis en un fitxer</string>
+    <string name="save_as_copy">Desa com a còpia</string>
+    <string name="storage_migration_wrong_folder_warning">No s\'han trobat dades d\'OsmAnd a la carpeta triada. Si us plau, reintenteu-ho.</string>
+    <string name="map_marker_options">Opcions del marcador de mapa</string>
+    <string name="app_modes_options">Triar modes d\'aplicació</string>
+    <string name="shared_string_size">Mida</string>
+    <string name="use_routing_fallback_description">Usa el guiatge sense connexió quan el guiatge amb connexió no està disponible.</string>
+    <string name="exit_without_saving_warning">Sortir sense desar els canvis\?</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Etiquetes d\'errors</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Mostra les etiquetes d\'errors</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetes de notes</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Mostra les etiquetes de notes</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icones si zooms baixos</string>
+    <string name="quick_action_add_route_descr">Un botó per a començar una ruta des del mig de la pantalla.</string>
+    <string name="gpx_no_routes_descr">Podeu utilitzar l\'eina \"%1$s\" per afegir una ruta al fitxer.</string>
+    <string name="gpx_no_routes_title">No hi han rutes</string>
+    <string name="save_track_to_gpx_descrp">Comença a gravar la ruta automàticament quan la navegació està en procés. Quan acabe, la ruta serà guardada automàticament.</string>
+    <string name="rendering_attr_seabedDetail_name">Detall del fons marí</string>
 </resources>
