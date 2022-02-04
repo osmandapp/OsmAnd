@@ -33,20 +33,21 @@ public class MapMarkerEditorFragment extends BaseOsmAndFragment {
 
 	@Nullable
 	private MapMarkerEditor editor;
+	private boolean nightMode;
+	private boolean cancelled;
 
 	private EditText nameEdit;
-	private boolean cancelled;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		editor = ((MapActivity) requireActivity()).getContextMenu().getMapMarkerEditor();
+		nightMode = isNightMode(true);
 	}
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		Context context = requireContext();
-		boolean nightMode = !requireSettings().isLightContent();
 		View view = UiUtilities.getInflater(context, nightMode)
 				.inflate(R.layout.map_marker_editor_fragment, container, false);
 
@@ -55,21 +56,18 @@ public class MapMarkerEditorFragment extends BaseOsmAndFragment {
 			return view;
 		}
 
-		editor.updateLandscapePortrait(requireActivity());
-		editor.updateNightMode();
-
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
-		toolbar.setBackgroundColor(ColorUtilities.getAppBarColor(context, !editor.isLight()));
+		toolbar.setBackgroundColor(ColorUtilities.getAppBarColor(context, nightMode));
 		toolbar.setTitle(R.string.edit_map_marker);
 
 		Drawable icBack = getIcon(AndroidUtils.getNavigationIconResId(context),
-				ColorUtilities.getActiveButtonsAndLinksTextColorId(!editor.isLight()));
+				ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode));
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setTitleTextColor(ColorUtilities.getActiveTabTextColor(context, nightMode));
 		toolbar.setNavigationOnClickListener(v -> dismiss());
 
-		int activeColor = ColorUtilities.getActiveColor(context, !editor.isLight());
+		int activeColor = ColorUtilities.getActiveColor(context, nightMode);
 
 		Button saveButton = view.findViewById(R.id.save_button);
 		saveButton.setTextColor(activeColor);
@@ -87,19 +85,19 @@ public class MapMarkerEditorFragment extends BaseOsmAndFragment {
 		deleteButton.setOnClickListener(v -> delete());
 		AndroidUiHelper.updateVisibility(deleteButton, !editor.isNew());
 
-		int activityBgColorId = ColorUtilities.getActivityBgColorId(!editor.isLight());
-		int listBgColorId = ColorUtilities.getListBgColorId(!editor.isLight());
+		int activityBgColorId = ColorUtilities.getActivityBgColorId(nightMode);
+		int listBgColorId = ColorUtilities.getListBgColorId(nightMode);
 		view.findViewById(R.id.background_layout).setBackgroundResource(activityBgColorId);
 		view.findViewById(R.id.buttons_layout).setBackgroundResource(activityBgColorId);
 		view.findViewById(R.id.title_view).setBackgroundResource(listBgColorId);
 
 		TextView nameCaption = view.findViewById(R.id.name_caption);
-		AndroidUtils.setTextSecondaryColor(context, nameCaption, !editor.isLight());
+		AndroidUtils.setTextSecondaryColor(context, nameCaption, nightMode);
 		nameCaption.setText(R.string.shared_string_name);
 
 		nameEdit = view.findViewById(R.id.name_edit);
-		AndroidUtils.setTextPrimaryColor(context, nameEdit, !editor.isLight());
-		AndroidUtils.setHintTextSecondaryColor(context, nameEdit, !editor.isLight());
+		AndroidUtils.setTextPrimaryColor(context, nameEdit, nightMode);
+		AndroidUtils.setHintTextSecondaryColor(context, nameEdit, nightMode);
 		nameEdit.setText(editor.getMarker().getName(context));
 
 		ImageView nameImage = view.findViewById(R.id.name_image);

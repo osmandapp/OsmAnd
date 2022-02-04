@@ -1,10 +1,7 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
-import android.app.Activity;
-
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,14 +15,9 @@ public abstract class PointEditor {
 
 	protected boolean isNew;
 
-	private boolean portraitMode;
-	private boolean nightMode;
-
 	public PointEditor(@NonNull MapActivity mapActivity) {
 		this.app = mapActivity.getMyApplication();
 		this.mapActivity = mapActivity;
-		updateLandscapePortrait(mapActivity);
-		updateNightMode();
 	}
 
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
@@ -42,22 +34,6 @@ public abstract class PointEditor {
 	}
 
 	public abstract boolean isProcessingTemplate();
-
-	public boolean isLandscapeLayout() {
-		return !portraitMode;
-	}
-
-	public boolean isLight() {
-		return !nightMode;
-	}
-
-	public void updateLandscapePortrait(@NonNull Activity activity) {
-		portraitMode = AndroidUiHelper.isOrientationPortrait(activity);
-	}
-
-	public void updateNightMode() {
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-	}
 
 	public abstract String getFragmentTag();
 
