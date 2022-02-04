@@ -4796,4 +4796,8 @@
 	<string name="poi_avalanche_transceiver_training">Avalanche transceiver training</string>
 	<string name="poi_avalanche_transceiver_checkpoint">Avalanche transceiver checkpoint</string>
 
+	<string name="poi_access_permit">Permit required</string>
+
+	<string name="poi_parcel_locker">Parcel locker</string>
+
 </resources>
