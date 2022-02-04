@@ -132,9 +132,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 			return view;
 		}
 
-		editor.updateLandscapePortrait(requireActivity());
-		editor.updateNightMode();
-
 		selectedColor = getPointColor();
 		selectedShape = getBackgroundType();
 
