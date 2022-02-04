@@ -1,5 +1,9 @@
 package net.osmand.plus.activities;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_CRASH_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RATE_US_ID;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -75,7 +79,6 @@ import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
-import net.osmand.plus.dialogs.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.dialogs.XMasDialogFragment;
@@ -96,6 +99,7 @@ import net.osmand.plus.helpers.ScrollHelper.OnScrollEventListener;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.importfiles.ui.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -167,10 +171,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_CRASH_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RATE_US_ID;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
@@ -1315,9 +1315,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		changeKeyguardFlags();
 		updateMapSettings();
 		app.getPoiFilters().loadSelectedPoiFilters();
-		getMapViewTrackingUtilities().updateSettings();
-		getMapViewTrackingUtilities().resetDrivingRegionUpdate();
-		//app.getRoutingHelper().setAppMode(settings.getApplicationMode());
+		getMapViewTrackingUtilities().appModeChanged();
+
 		OsmandMapTileView mapView = getMapView();
 		MapLayers mapLayers = getMapLayers();
 		if (mapLayers.getMapInfoLayer() != null) {
