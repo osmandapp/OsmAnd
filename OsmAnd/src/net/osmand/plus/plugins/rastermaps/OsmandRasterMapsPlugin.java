@@ -57,6 +57,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	// Constants for determining the order of items in the additional actions context menu
 	private static final int UPDATE_MAP_ITEM_ORDER = 12300;
 	private static final int DOWNLOAD_MAP_ITEM_ORDER = 12600;
+	private static final float ZORDER_UNDERLAY = -0.5f;
+	private static final float ZORDER_OVERLAY = 0.7f;
 
 	private final OsmandSettings settings;
 
@@ -131,7 +133,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			mapView.removeLayer(overlayLayer);
 		}
 		underlayLayer = new MapTileLayer(context, false);
-		mapView.addLayer(underlayLayer, -0.5f);
+		mapView.addLayer(underlayLayer, ZORDER_UNDERLAY);
 		overlayLayer = new MapTileLayer(context, false);
 		overlayLayerListener = new StateChangedListener<Integer>() {
 			@Override
@@ -139,7 +141,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				app.runInUIThread(() -> overlayLayer.setAlpha(change));
 			}
 		};
-		mapView.addLayer(overlayLayer, 0.7f);
+		mapView.addLayer(overlayLayer, ZORDER_OVERLAY);
 		settings.MAP_OVERLAY_TRANSPARENCY.addListener(overlayLayerListener);
 	}
 
@@ -159,14 +161,16 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		if (isActive()) {
 			updateLayer(mapView, settings, overlayLayer, settings.MAP_OVERLAY, 0.7f, settings.MAP_OVERLAY == settingsToWarnAboutMap);
 		} else {
-			mapView.removeLayer(overlayLayer);
-			overlayLayer.setMap(null);
+//			mapView.removeLayer(overlayLayer);
+//			overlayLayer.setMap(null);
+			overlayLayer.setVisible(false);
 		}
 		if (isActive()) {
 			updateLayer(mapView, settings, underlayLayer, settings.MAP_UNDERLAY, -0.5f, settings.MAP_UNDERLAY == settingsToWarnAboutMap);
 		} else {
-			mapView.removeLayer(underlayLayer);
-			underlayLayer.setMap(null);
+//			mapView.removeLayer(underlayLayer);
+//			underlayLayer.setMap(null);
+			underlayLayer.setVisible(false);
 		}
 		if (mapActivity != null) {
 			MapLayers layers = mapActivity.getMapLayers();
@@ -195,10 +199,11 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			if (overlay == null) {
 				mapView.removeLayer(layer);
 			} else if (!mapView.isLayerVisible(layer)) {
-				if (mapView.getMapRenderer() == null) {
-					mapView.addLayer(layer, layerOrder);
-				} else {
+				//if (mapView.getMapRenderer() == null) {  // ???
+				if (mapView.isLayerExist(layer)) {
 					layer.initLayer(mapView);
+				} else {
+					mapView.addLayer(layer, layerOrder);
 				}
 			}
 			layer.setMap(overlay);

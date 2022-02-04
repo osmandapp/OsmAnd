@@ -100,8 +100,6 @@ public class MapTileLayer extends BaseMapLayer {
 		if (paintBitmap != null) {
 			paintBitmap.setAlpha(alpha);
 		}
-
-		//updateAlpha();
 	}
 
 	public void setupParameterListener() {
@@ -494,9 +492,13 @@ public class MapTileLayer extends BaseMapLayer {
 	}
 
 	public void setVisible(boolean visible) {
-		needUpdateProvider = true;
 		this.visible = visible;
-		//updateAlpha();
+
+		if (isVisible() && map != null) {
+			setLayerProvider(map);
+		} else {
+			resetLayerProvider();
+		}
 	}
 
 	public ITileSource getMap() {

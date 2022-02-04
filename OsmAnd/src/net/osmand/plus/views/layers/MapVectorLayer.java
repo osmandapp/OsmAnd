@@ -40,6 +40,7 @@ public class MapVectorLayer extends BaseMapLayer {
 
 	@Override
 	public void destroyLayer() {
+		resourceManager.getRenderer().clearCache();
 		resetLayerProvider();
 	}
 
@@ -51,6 +52,7 @@ public class MapVectorLayer extends BaseMapLayer {
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
 		this.view = view;
+
 		paintImg = new Paint();
 		paintImg.setFilterBitmap(true);
 		paintImg.setAlpha(getAlpha());
@@ -70,12 +72,10 @@ public class MapVectorLayer extends BaseMapLayer {
 	public void setVisible(boolean visible) {
 		needUpdateProvider = true;
 		this.visible = visible;
-/*
-		if (this.visible) {
-			setLayerProvider();
-		} else {
-			resetLayerProvider();
-		}*/
+
+		if (!visible) {
+			resourceManager.getRenderer().clearCache();
+		}
 	}
 
 	@Override
@@ -103,10 +103,10 @@ public class MapVectorLayer extends BaseMapLayer {
 	}
 
 	private void resetLayerProvider() {
-			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
-			if (mapContext != null) {
-				mapContext.resetObfLayout();
-			}
+		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+		if (mapContext != null) {
+			mapContext.resetObfLayout();
+		}
 	}
 
 	private void updateAlpha() {
@@ -128,9 +128,8 @@ public class MapVectorLayer extends BaseMapLayer {
 			return;
 		}
 
-		if (!isVisible() && needUpdateProvider) {
+		if (!isVectorDataVisible() && needUpdateProvider) {
 			resetLayerProvider();
-			resourceManager.getRenderer().clearCache();
 			needUpdateProvider = false;
 			return;
 		}

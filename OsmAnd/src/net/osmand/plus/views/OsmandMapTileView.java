@@ -382,6 +382,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return (int)(zOrder * 100.0f);
 	}
 
+	public synchronized boolean isLayerExist(OsmandMapLayer layer) {
+		return layers.contains(layer);
+	}
+
 	public synchronized void addLayer(OsmandMapLayer layer, float zOrder) {
 		int i = 0;
 		for (i = 0; i < layers.size(); i++) {
