@@ -1,5 +1,8 @@
 package net.osmand.plus.measurementtool;
 
+import static net.osmand.plus.measurementtool.adapter.FolderListAdapter.VIEW_TYPE_ADD;
+import static net.osmand.plus.measurementtool.adapter.FolderListAdapter.getFolders;
+
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
@@ -32,6 +35,7 @@ import net.osmand.plus.base.bottomsheetmenu.HorizontalRecyclerBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.measurementtool.adapter.FolderListAdapter;
+import net.osmand.plus.measurementtool.adapter.FolderListAdapter.FolderListAdapterListener;
 import net.osmand.plus.myplaces.AddNewTrackFolderBottomSheet;
 import net.osmand.plus.myplaces.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
 import net.osmand.plus.myplaces.MoveGpxFileBottomSheet;
@@ -146,8 +150,8 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 				.create();
 		items.add(selectFolderItem);
 
-		adapter = new FolderListAdapter(app, nightMode, folderName);
-		adapter.setFolders(getFolders());
+		adapter = new FolderListAdapter(app, folderName, nightMode);
+		adapter.setItems(getAdapterItems());
 		if (adapter.getItemCount() > 0) {
 			adapter.setListener(createFolderSelectListener());
 			View view = View.inflate(themedCtx, R.layout.bottom_sheet_item_recyclerview, null);
@@ -213,12 +217,22 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		items.add(new DividerSpaceItem(app, contentPaddingSmall));
 	}
 
+	@NonNull
+	private List<Object> getAdapterItems() {
+		File gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		List<Object> items = new ArrayList<>(getFolders(gpxDir));
+		items.add(VIEW_TYPE_ADD);
+		return items;
+	}
+
+	@NonNull
 	private String getSimplifiedTrackDescription() {
 		return simplifiedTrack ? getString(R.string.simplified_track_description) : "";
 	}
 
-	private FolderListAdapter.FolderListAdapterListener createFolderSelectListener() {
-		return new FolderListAdapter.FolderListAdapterListener() {
+	@NonNull
+	private FolderListAdapterListener createFolderSelectListener() {
+		return new FolderListAdapterListener() {
 			@Override
 			public void onItemSelected(String item) {
 				folderName = item;
@@ -233,7 +247,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
 					AddNewTrackFolderBottomSheet.showInstance(activity.getSupportFragmentManager(),
-							SaveAsNewTrackBottomSheetDialogFragment.this, usedOnMap);
+							null, SaveAsNewTrackBottomSheetDialogFragment.this, usedOnMap);
 				}
 			}
 		};
@@ -332,32 +346,20 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		return false;
 	}
 
-	private List<String> getFolders() {
-		List<File> dirs = new ArrayList<>();
-		File gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-		dirs.add(gpxDir);
-		Algorithms.collectDirs(gpxDir, dirs);
-		List<String> dirItems = new ArrayList<>();
-		for (File dir : dirs) {
-			dirItems.add(dir.getName());
-		}
-		return dirItems;
-	}
-
 	@Override
 	public void onFileMove(@NonNull File src, @NonNull File dest) {
 		File destFolder = dest.getParentFile();
 		if (destFolder != null) {
 			folderName = destFolder.getName();
 			boolean newFolder = destFolder.mkdirs();
-			List<String> folders = getFolders();
+			List<Object> items = getAdapterItems();
 			if (newFolder) {
-				adapter.setFolders(folders);
+				adapter.setItems(items);
 			}
-			adapter.setSelectedFolderName(folderName);
+			adapter.setSelectedItem(folderName);
 			adapter.notifyDataSetChanged();
 
-			int position = folders.indexOf(folderName);
+			int position = items.indexOf(folderName);
 			if (position != -1) {
 				recyclerView.scrollToPosition(position);
 			}

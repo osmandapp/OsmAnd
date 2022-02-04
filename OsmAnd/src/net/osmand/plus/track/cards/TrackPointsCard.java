@@ -25,7 +25,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.GPXUtilities.WptPt;
@@ -35,6 +34,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
@@ -578,24 +578,13 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			} else {
 				icon.setImageDrawable(getContentIcon(R.drawable.ic_action_marker_dark));
 			}
-			setupLocationData(row, gpxItem.locationStart);
+			setupLocationData(locationViewCache, row, gpxItem.locationStart);
 
 			AndroidUiHelper.updateVisibility(icon, !selectionMode);
 			AndroidUiHelper.updateVisibility(checkBox, selectionMode);
 			AndroidUiHelper.updateVisibility(row.findViewById(R.id.list_divider), childPosition != 0);
 
 			return row;
-		}
-
-		private void setupLocationData(@NonNull View container, @NonNull WptPt point) {
-			AppCompatImageView directionArrow = container.findViewById(R.id.direction_arrow);
-			TextView distanceText = container.findViewById(R.id.distance);
-			app.getUIUtilities().updateLocationView(locationViewCache, directionArrow, distanceText, point.lat, point.lon);
-
-			String address = point.getAddress();
-			TextView addressContainer = container.findViewById(R.id.address);
-			addressContainer.setText(address);
-			AndroidUiHelper.updateVisibility(container.findViewById(R.id.bullet_icon), !Algorithms.isEmpty(address));
 		}
 
 		public int getGroupIndex(@NonNull GpxDisplayGroup group) {
@@ -619,6 +608,19 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 		public void setFilterResults(Set<?> values) {
 			this.filteredItems = values;
 		}
+	}
+
+	public static void setupLocationData(@NonNull UpdateLocationViewCache cache, @NonNull View container, @NonNull WptPt point) {
+		TextView text = container.findViewById(R.id.distance);
+		ImageView arrow = container.findViewById(R.id.direction_arrow);
+
+		OsmandApplication app = (OsmandApplication) container.getContext().getApplicationContext();
+		app.getUIUtilities().updateLocationView(cache, arrow, text, point.lat, point.lon);
+
+		String address = point.getAddress();
+		TextView addressContainer = container.findViewById(R.id.address);
+		addressContainer.setText(address);
+		AndroidUiHelper.updateVisibility(container.findViewById(R.id.bullet_icon), !Algorithms.isEmpty(address));
 	}
 
 	public class PointsFilter extends Filter {

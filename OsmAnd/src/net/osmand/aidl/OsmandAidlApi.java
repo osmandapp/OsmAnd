@@ -84,6 +84,15 @@ import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.myplaces.TrackBitmapDrawer;
+import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
+import net.osmand.plus.myplaces.TrackBitmapDrawer.TracksDrawParams;
+import net.osmand.plus.plugins.CustomOsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.myplaces.TrackBitmapDrawer;
 import net.osmand.plus.plugins.CustomOsmandPlugin;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
@@ -2217,13 +2226,14 @@ public class OsmandAidlApi {
 		if (gpxUri == null || callback == null) {
 			return false;
 		}
-		final TrackBitmapDrawer.TrackBitmapDrawerListener drawerListener = new TrackBitmapDrawer.TrackBitmapDrawerListener() {
+		final TrackBitmapDrawerListener drawerListener = new TrackBitmapDrawerListener() {
 			@Override
 			public void onTrackBitmapDrawing() {
 			}
 
 			@Override
-			public void onTrackBitmapDrawn() {
+			public void onTrackBitmapDrawn(boolean success) {
+
 			}
 
 			@Override
@@ -2259,12 +2269,13 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	private void createGpxBitmapFromUri(final Uri gpxUri, final float density, final int widthPixels, final int heightPixels, final int color, final TrackBitmapDrawer.TrackBitmapDrawerListener drawerListener) {
+	private void createGpxBitmapFromUri(final Uri gpxUri, final float density, final int widthPixels,
+	                                    final int heightPixels, final int color, final TrackBitmapDrawerListener drawerListener) {
 		GpxAsyncLoaderTask gpxAsyncLoaderTask = new GpxAsyncLoaderTask(app, gpxUri, result -> {
-			TrackBitmapDrawer trackBitmapDrawer = new TrackBitmapDrawer(app, result, null, result.getRect(), density, widthPixels, heightPixels);
+			TracksDrawParams drawParams = new TracksDrawParams(density, widthPixels, heightPixels, color);
+			TrackBitmapDrawer trackBitmapDrawer = new TrackBitmapDrawer(app, result, drawParams, null);
 			trackBitmapDrawer.addListener(drawerListener);
 			trackBitmapDrawer.setDrawEnabled(true);
-			trackBitmapDrawer.setTrackColor(color);
 			trackBitmapDrawer.initAndDraw();
 			return false;
 		});
