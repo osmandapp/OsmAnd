@@ -3808,10 +3808,10 @@
     <string name="poi_give_box">Caixa livre/de donativos;Give-box;Caixa livre;Caixa de donativos</string>
     <string name="poi_traffic_signals_arrow_no">Seta: não</string>
     <string name="poi_elevator">Elevador</string>
-    <string name="poi_departures_board_timetable">Horário</string>
-    <string name="poi_departures_board_realtime">Em tempo real;Quadro de partidas</string>
-    <string name="poi_departures_board_delay">Atraso;Quadro de partidas</string>
-    <string name="poi_departures_board_yes">Sim;Quadro de partidas</string>
+    <string name="poi_departures_board_timetable">Horário;Painel de partidas</string>
+    <string name="poi_departures_board_realtime">Em tempo real;Painel de partidas</string>
+    <string name="poi_departures_board_delay">Com atraso;Painel de partidas</string>
+    <string name="poi_departures_board_yes">Sim;Painel de partidas</string>
     <string name="poi_departures_board_no">Quadro de partidas: não</string>
     <string name="poi_departures_board">Quadro de partidas</string>
     <string name="poi_drinking_water_refill">Reabastecimento de água potável</string>
@@ -4064,7 +4064,7 @@
     <string name="poi_beauty_salon_pedicure">Pedicura</string>
     <string name="poi_massage_chiropractic">Quiropraxia</string>
     <string name="poi_massage_shiatsu">Shiatsu</string>
-    <string name="poi_agrarian_yes">Sim;Argarian</string>
+    <string name="poi_agrarian_yes">Sim;Loja de produtos agrícolas</string>
     <string name="poi_agrarian_pesticide">Pesticidas</string>
     <string name="poi_agrarian_fertilizer">Fertilizantes</string>
     <string name="poi_medical_supply_home_care">Cuidados da casa</string>
@@ -4098,7 +4098,7 @@
     <string name="poi_generator_type_redox_flow">Tipo gerador: fluxo de redox</string>
     <string name="poi_generator_type_molten_salt">Tipo de gerador: sal fundido</string>
     <string name="poi_service_fleurop_yes">Sim;Fleurop</string>
-    <string name="poi_mattress_yes">Sim;Matress</string>
+    <string name="poi_mattress_yes">Sim;Colchão</string>
     <string name="poi_mattress_no">Não</string>
     <string name="poi_furniture_used">Usados;Móveis usados</string>
     <string name="poi_furniture_office">Escritório;Móveis de escritório</string>
@@ -4216,7 +4216,7 @@
     <string name="poi_computer_parts">Peças para computadores</string>
     <string name="poi_post_office_type">Tipo</string>
     <string name="poi_museum_type">Tópico do museu</string>
-    <string name="poi_skate">Loja de skate</string>
+    <string name="poi_skate">Loja de skates</string>
     <string name="poi_computer_sales_no">Venda de computadores: não</string>
     <string name="poi_computer_repair_no">Conserto de computadores: não</string>
     <string name="poi_computer_parts_no">Peças de computadores: não</string>
@@ -4242,8 +4242,8 @@
     <string name="poi_museum_person">Pessoa</string>
     <string name="poi_museum_language">Idioma</string>
     <string name="poi_museum_health">Saúde</string>
-    <string name="poi_toilets_paper_supplied_yes">Papel fornecido: sim</string>
-    <string name="poi_toilets_paper_supplied_no">Papel fornecido: não</string>
+    <string name="poi_toilets_paper_supplied_yes">Papel higiénico fornecido: sim</string>
+    <string name="poi_toilets_paper_supplied_no">Papel higiénico fornecido: não</string>
     <string name="poi_toilets_hands_drying_yes">Secagem das mãos: sim</string>
     <string name="poi_toilets_hands_drying_no">Secagem das mãos: não</string>
     <string name="poi_toilets_handwashing_no">Lavagem das mãos: não</string>
@@ -4260,7 +4260,7 @@
     <string name="poi_computer_sales_used">Usados;Computadores usados</string>
     <string name="poi_diet_vegan_limited">Vegano: limitado</string>
     <string name="poi_computer_sales_yes">Sim;Vendas de computadores</string>
-    <string name="poi_computer_repair_yes">Sim;Conserto de computadores</string>
+    <string name="poi_computer_repair_yes">Sim;Reparação de computadores</string>
     <string name="poi_museum_maritime">Marítimo</string>
     <string name="poi_computer_parts_yes">Sim;Peças de computadores</string>
     <string name="poi_museum_transport">Transportes</string>
@@ -4268,6 +4268,12 @@
     <string name="poi_toilets_handwashing_yes">Lavagem das mãos: sim</string>
     <string name="poi_handwashing_soap_yes">Sabonete: sim</string>
     <string name="poi_books_adults">Adultos</string>
-    <string name="poi_post_office_bureau">Escritório</string>
+    <string name="poi_post_office_bureau">Estação de correios</string>
     <string name="poi_post_office_service_brand">Marca dos correios</string>
+    <string name="poi_hospice">Hospital psiquiátrico</string>
+    <string name="poi_post_office_post_annex">Estação de correios parceira</string>
+    <string name="poi_post_office_post_partner">Agente/posto dos correios</string>
+    <string name="poi_post_office_service_provider">Empresa dos serviços postais</string>
+    <string name="poi_post_office_collection_times">Horários de recolha</string>
+    <string name="poi_telecommunication">Telecomunicações</string>
 </resources>
