@@ -4429,4 +4429,11 @@
     <string name="always_ask_waypoint_appearance_description">Trykk åpner «Legg til veipunkt», der du kan endre navn og utseende.</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Ikke skjul vannveistunneler</string>
     <string name="not_enough_contributions_descr">Minst %1$s endringer de siste to månedene %2$s kreves for ubegrenset tilgang til timevise kartoppdateringer.</string>
+    <string name="shared_string_reading_file">Leser fil …</string>
+    <string name="exit_import">Avslutt import\?</string>
+    <string name="select_suggested_points">Velg foreslåtte punkter</string>
+    <string name="selected_waypoints_descr">Valgte veipunkter vil bli lagt til «%1$s»-sporet</string>
+    <string name="all_groups">Alle grupper</string>
+    <string name="list_of_groups">Liste over grupper</string>
+    <string name="import_tracks">Importer spor</string>
 </resources>
