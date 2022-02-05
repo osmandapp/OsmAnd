@@ -24,6 +24,9 @@ import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.map.WorldRegion;
+import net.osmand.plus.AppInitializer;
+import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -63,6 +66,7 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.render.RenderingRuleProperty;
+import net.osmand.render.RenderingRulesStorage;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
 
@@ -76,6 +80,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -311,6 +316,7 @@ public abstract class OsmandPlugin {
 		allPlugins.add(new OsmandDevelopmentPlugin(app));
 
 		loadCustomPlugins(app);
+		registerAppInitializingDependedProperties(app);
 		enablePluginsByDefault(app, enabledPlugins);
 		activatePlugins(app, enabledPlugins);
 	}
@@ -512,6 +518,22 @@ public abstract class OsmandPlugin {
 		return true;
 	}
 
+	private static void registerAppInitializingDependedProperties(@NonNull OsmandApplication app) {
+		app.getAppInitializer().addListener(new AppInitializeListener() {
+
+			@Override
+			public void onStart(AppInitializer init) { }
+
+			@Override
+			public void onProgress(AppInitializer init, InitEvents event) { }
+
+			@Override
+			public void onFinish(AppInitializer init) {
+				registerRenderingPreferences(app);
+			}
+		});
+	}
+
 	protected List<IndexItem> getMapsForType(@NonNull LatLon latLon, @NonNull DownloadActivityType type) {
 		try {
 			return DownloadResources.findIndexItemsAt(app, latLon, type);
@@ -561,6 +583,11 @@ public abstract class OsmandPlugin {
 	}
 
 	protected void registerConfigureMapCategoryActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
+	}
+
+	@Nullable
+	protected String getRenderPropertyPrefix() {
+		return null;
 	}
 
 	protected void registerMapContextMenuActions(@NonNull MapActivity mapActivity, double latitude, double longitude,
@@ -859,6 +886,30 @@ public abstract class OsmandPlugin {
 		}
 	}
 
+	public static void registerRenderingPreferences(@NonNull OsmandApplication app) {
+		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+		if (renderer == null) return;
+
+		List<RenderingRuleProperty> customRules = new ArrayList<>(renderer.PROPS.getCustomRules());
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
+			String prefix = plugin.getRenderPropertyPrefix();
+			if (prefix != null) {
+				Iterator<RenderingRuleProperty> it = customRules.iterator();
+				while (it.hasNext()) {
+					RenderingRuleProperty rule = it.next();
+					if (rule.getAttrName().startsWith(prefix)) {
+						it.remove();
+						if (rule.isBoolean()) {
+							plugin.registerBooleanRenderingPreference(rule.getAttrName(), false);
+						} else {
+							plugin.registerRenderingPreference(rule.getAttrName(), "");
+						}
+					}
+				}
+			}
+		}
+	}
+
 	public static void registerOptionsMenu(MapActivity map, ContextMenuAdapter helper) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.registerOptionsMenuItems(map, helper);
@@ -998,36 +1049,42 @@ public abstract class OsmandPlugin {
 
 	protected CommonPreference<Boolean> registerBooleanPreference(@NonNull String prefId, boolean defValue) {
 		CommonPreference<Boolean> preference = app.getSettings().registerBooleanPreference(prefId, defValue);
+		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
 	protected CommonPreference<Boolean> registerBooleanAccessibilityPreference(@NonNull String prefId, boolean defValue) {
 		CommonPreference<Boolean> preference = app.getSettings().registerBooleanAccessibilityPreference(prefId, defValue);
+		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
 	protected CommonPreference<String> registerStringPreference(@NonNull String prefId, @Nullable String defValue) {
 		CommonPreference<String> preference = app.getSettings().registerStringPreference(prefId, defValue);
+		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
 	protected CommonPreference<Integer> registerIntPreference(@NonNull String prefId, int defValue) {
 		CommonPreference<Integer> preference = app.getSettings().registerIntPreference(prefId, defValue);
+		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
 	protected CommonPreference<Long> registerLongPreference(@NonNull String prefId, long defValue) {
 		CommonPreference<Long> preference = app.getSettings().registerLongPreference(prefId, defValue);
+		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
 	protected CommonPreference<Float> registerFloatPreference(@NonNull String prefId, float defValue) {
 		CommonPreference<Float> preference = app.getSettings().registerFloatPreference(prefId, defValue);
+		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
@@ -1035,12 +1092,28 @@ public abstract class OsmandPlugin {
 	protected <T extends Enum<?>> CommonPreference<T> registerEnumIntPreference(@NonNull String prefId, @NonNull Enum<?> defaultValue,
 	                                                                            @NonNull Enum<?>[] values, @NonNull Class<T> clz) {
 		CommonPreference<T> preference = app.getSettings().registerEnumIntPreference(prefId, defaultValue, values, clz);
+		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
 	protected ListStringPreference registerListStringPreference(@NonNull String prefId, @Nullable String defValue, @NonNull String delimiter) {
 		ListStringPreference preference = app.getSettings().registerStringListPreference(prefId, defValue, delimiter);
+		preference.setRelatedPlugin(this);
+		pluginPreferences.add(preference);
+		return preference;
+	}
+
+	protected CommonPreference<Boolean> registerBooleanRenderingPreference(@NonNull String prefId, boolean defValue) {
+		CommonPreference<Boolean> preference = app.getSettings().registerCustomRenderBooleanProperty(prefId, defValue);
+		preference.setRelatedPlugin(this);
+		pluginPreferences.add(preference);
+		return preference;
+	}
+
+	protected CommonPreference<String> registerRenderingPreference(@NonNull String prefId, @Nullable String defValue) {
+		CommonPreference<String> preference = app.getSettings().registerCustomRenderProperty(prefId, defValue);
+		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}

@@ -2681,9 +2681,15 @@ public class OsmandSettings {
 
 	public CommonPreference<String> getCustomRenderProperty(@NonNull String attrName) {
 		if (!customRendersProps.containsKey(attrName)) {
-			customRendersProps.put(attrName, new StringPreference(this, RENDERER_PREFERENCE_PREFIX + attrName, "").makeProfile());
+			registerCustomRenderProperty(attrName, "");
 		}
 		return customRendersProps.get(attrName);
+	}
+
+	public CommonPreference<String> registerCustomRenderProperty(@NonNull String attrName, @Nullable String defaultValue) {
+		CommonPreference<String> preference = new StringPreference(this, RENDERER_PREFERENCE_PREFIX + attrName, defaultValue).makeProfile();
+		customRendersProps.put(attrName, preference);
+		return preference;
 	}
 
 	{
@@ -2693,9 +2699,15 @@ public class OsmandSettings {
 
 	public CommonPreference<Boolean> getCustomRenderBooleanProperty(@NonNull String attrName) {
 		if (!customBooleanRendersProps.containsKey(attrName)) {
-			customBooleanRendersProps.put(attrName, new BooleanPreference(this, RENDERER_PREFERENCE_PREFIX + attrName, false).makeProfile());
+			registerCustomRenderBooleanProperty(attrName, false);
 		}
 		return customBooleanRendersProps.get(attrName);
+	}
+
+	public CommonPreference<Boolean> registerCustomRenderBooleanProperty(@NonNull String attrName, boolean defaultValue) {
+		CommonPreference<Boolean> preference = new BooleanPreference(this, RENDERER_PREFERENCE_PREFIX + attrName, defaultValue).makeProfile();
+		customBooleanRendersProps.put(attrName, preference);
+		return preference;
 	}
 
 	public CommonPreference<String> getCustomRoutingProperty(@NonNull String attrName, String defValue) {

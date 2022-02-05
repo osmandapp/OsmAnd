@@ -52,6 +52,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	private static final String SRTM_PLUGIN_COMPONENT_PAID = "net.osmand.srtmPlugin.paid";
 	private static final String SRTM_PLUGIN_COMPONENT = "net.osmand.srtmPlugin";
 
+	public static final String CONTOUR_PREFIX = "contour";
 	public static final String CONTOUR_LINES_ATTR = "contourLines";
 	public static final String CONTOUR_LINES_SCHEME_ATTR = "contourColorScheme";
 	public static final String CONTOUR_LINES_DISABLED_VALUE = "disabled";
@@ -409,6 +410,12 @@ public class SRTMPlugin extends OsmandPlugin {
 		);
 	}
 
+	@Nullable
+	@Override
+	protected String getRenderPropertyPrefix() {
+		return CONTOUR_PREFIX;
+	}
+
 	@Override
 	public List<IndexItem> getSuggestedMaps() {
 		List<IndexItem> suggestedMaps = new ArrayList<>();
@@ -550,5 +557,13 @@ public class SRTMPlugin extends OsmandPlugin {
 		quickActionTypes.add(ContourLinesAction.TYPE);
 		quickActionTypes.add(TerrainAction.TYPE);
 		return quickActionTypes;
+	}
+
+	@Override
+	protected CommonPreference<String> registerRenderingPreference(@NonNull String prefId, @Nullable String defValue) {
+		if (prefId.equals(CONTOUR_LINES_ATTR)) {
+			defValue = CONTOUR_LINES_DISABLED_VALUE;
+		}
+		return super.registerRenderingPreference(prefId, defValue);
 	}
 }

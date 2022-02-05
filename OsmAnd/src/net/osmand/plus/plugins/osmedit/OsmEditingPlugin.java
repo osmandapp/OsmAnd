@@ -84,6 +84,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	private static final Log LOG = PlatformUtil.getLog(OsmEditingPlugin.class);
 	public static final int OSM_EDIT_TAB = R.string.osm_edits;
+	public static final String OSM_MAPPER_PREFIX = "OSMMapper";
 	public static final String RENDERING_CATEGORY_OSM_ASSISTANT = "osm_assistant";
 
 	public final OsmandPreference<String> OSM_USER_NAME_OR_EMAIL;
@@ -467,6 +468,12 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				adapter.addItem(ConfigureMapMenu.createRenderingProperty(adapter, mapActivity, INVALID_ID, property, id, nightMode));
 			}
 		}
+	}
+
+	@Nullable
+	@Override
+	protected String getRenderPropertyPrefix() {
+		return OSM_MAPPER_PREFIX;
 	}
 
 	@Override
