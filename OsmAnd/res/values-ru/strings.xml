@@ -4523,4 +4523,5 @@
     <string name="gpx_no_routes_descr">Для добавления маршрута в файл вы можете воспользоваться инструментом «%1$s».</string>
     <string name="please_provide_group_name_message">Укажите название группы.</string>
     <string name="quick_action_add_route_descr">Кнопка для начала построения маршрута из центра экрана.</string>
+    <string name="import_tracks_descr">%1$s содержит отдельные треки: %2$s шт. Выберите треки, которые вы хотите импортировать.</string>
 </resources>
