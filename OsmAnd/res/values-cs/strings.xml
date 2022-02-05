@@ -4516,4 +4516,14 @@
     <string name="please_provide_group_name_message">Zadejte prosím název skupiny.</string>
     <string name="gpx_no_routes_title">Neexistují žádné trasy</string>
     <string name="gpx_no_routes_descr">Pro přidání cesty do souboru můžete použít nástroj \"%1$s\".</string>
+    <string name="selected_waypoints_descr">Vybrané body budou přidány do stopy \"%1$s\"</string>
+    <string name="shared_string_reading_file">Načítání souboru…</string>
+    <string name="all_groups">Všechny skupiny</string>
+    <string name="list_of_groups">Seznam skupin</string>
+    <string name="points_selection_descr">Opravdu chcete zavřít\? Ztratíte tím všechny změny.</string>
+    <string name="exit_import_descr">Opravdu chcete ukončit bez uložení\? Ztratíte tím všechny změny.</string>
+    <string name="exit_import">Ukončit import\?</string>
+    <string name="import_tracks">Importovat stopy</string>
+    <string name="import_tracks_descr">%1$s, obsahuje %2$s jednotlivých stop. Vyberte ty, které chcete importovat.</string>
+    <string name="select_suggested_points">Vyberte navrhované body</string>
 </resources>
