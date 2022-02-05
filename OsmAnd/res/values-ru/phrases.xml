@@ -3710,7 +3710,7 @@
     <string name="poi_piste_ref">Номер ссылки на трассу</string>
     <string name="poi_bowling_alley">Боулинг-центр</string>
     <string name="poi_video_no">Нет</string>
-    <string name="poi_video_yes">Да</string>
+    <string name="poi_video_yes">Да;Видео</string>
     <string name="poi_sms_no">Нет</string>
     <string name="poi_sms_yes">Да</string>
     <string name="poi_traffic_signals_sound_locate">Только если разрешена ходьба</string>
@@ -3808,13 +3808,13 @@
     <string name="poi_give_box">Подарочная коробка</string>
     <string name="poi_traffic_signals_arrow_no">Стрелка: нет</string>
     <string name="poi_elevator">Лифт</string>
-    <string name="poi_departures_board_yes">Да</string>
+    <string name="poi_departures_board_yes">Да;Табло отправления</string>
     <string name="poi_departures_board_no">Расписание отправлений: нет</string>
     <string name="poi_departures_board">Расписание отправлений</string>
     <string name="poi_drinking_water_refill">Заправка питьевой воды</string>
     <string name="poi_departures_board_realtime">Реальное время</string>
-    <string name="poi_departures_board_delay">Задержка</string>
-    <string name="poi_departures_board_timetable">Расписание</string>
+    <string name="poi_departures_board_delay">Задержка;Табло отправления</string>
+    <string name="poi_departures_board_timetable">Расписание;Табло отправления</string>
     <string name="poi_recycling_small_electrical_appliances">Малые электроприборы</string>
     <string name="poi_nuts">Магазин орехов</string>
     <string name="poi_beehive">Улей</string>
@@ -3868,7 +3868,7 @@
     <string name="poi_water_source_water_works">Водозабор</string>
     <string name="poi_water_source_tube_well">Трубчатый колодец</string>
     <string name="poi_mobile_money_agent">Мобильный платёжный офис</string>
-    <string name="poi_weightbridge">Весовая платформа</string>
+    <string name="poi_weightbridge">Весовая платформа;Автомобильные весы</string>
     <string name="poi_lavoir">Умывальник</string>
     <string name="poi_waste_transfer_station">Станция перекачки отходов</string>
     <string name="poi_ranger_station">Станция рейнджеров</string>
