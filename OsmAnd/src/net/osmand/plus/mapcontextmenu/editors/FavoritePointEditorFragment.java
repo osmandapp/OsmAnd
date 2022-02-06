@@ -198,7 +198,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 	}
 
 	@Override
-	public void setIcon(int iconId) {
+	public void setIcon(@DrawableRes int iconId) {
 		this.iconId = iconId;
 	}
 
@@ -424,6 +424,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		return PointImageDrawable.getFromFavorite(getMapActivity(), getPointColor(), false, point);
 	}
 
+	@ColorInt
 	@Override
 	public int getDefaultColor() {
 		return defaultColor;
@@ -433,9 +434,9 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 	@Override
 	public int getPointColor() {
 		FavouritePoint favorite = getFavorite();
-		int color = favorite != null ? getColor() : 0;
+		int color = favorite != null ? this.color : 0;
 		FavoriteGroup group = getGroup();
-		if (group != null && (color == 0)) {
+		if (group != null && color == 0) {
 			color = group.getColor();
 		}
 		if (color == 0) {
@@ -450,22 +451,10 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		return backgroundType;
 	}
 
+	@DrawableRes
 	@Override
 	public int getIconId() {
 		return iconId;
-	}
-
-	@Nullable
-	@Override
-	public String getPreselectedIconName() {
-		PointEditor editor = getEditor();
-		return editor == null || !editor.isNew || favorite == null
-				? null
-				: RenderingIcons.getBigIconName(favorite.getIconId());
-	}
-
-	private int getColor() {
-		return color;
 	}
 
 	@Override

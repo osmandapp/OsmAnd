@@ -19,6 +19,7 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -35,6 +36,7 @@ import java.util.Map;
 import java.util.Set;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -65,7 +67,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	private OsmandApplication app;
 
 	@Override
-	public void onAttach(Context context) {
+	public void onAttach(@NonNull Context context) {
 		super.onAttach(context);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
@@ -390,17 +392,13 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	}
 
 	@Override
-	public void setBackgroundType(BackgroundType backgroundType) {
+	public void setBackgroundType(@NonNull BackgroundType backgroundType) {
 		this.backgroundTypeName = backgroundType.getTypeName();
 	}
 
 	@Override
-	public void setIcon(int iconId) {
-		this.iconName = getIconNameFromID(iconId).substring(3);
-	}
-
-	private String getIconNameFromID(int iconId) {
-		return app.getResources().getResourceEntryName(iconId);
+	public void setIcon(@DrawableRes int iconId) {
+		iconName = RenderingIcons.getBigIconName(iconId);
 	}
 
 	@Override
@@ -443,6 +441,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 		return PointImageDrawable.getFromWpt(getMapActivity(), getPointColor(), false, point);
 	}
 
+	@ColorInt
 	@Override
 	public int getDefaultColor() {
 		return defaultColor;
@@ -458,22 +457,17 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 		}
 	}
 
+	@NonNull
 	@Override
 	public BackgroundType getBackgroundType() {
 		return BackgroundType.getByTypeName(backgroundTypeName, DEFAULT_BACKGROUND_TYPE);
 	}
 
+	@DrawableRes
 	@Override
 	public int getIconId() {
 		int iconId = getIconIdByName(iconName);
 		return iconId != 0 ? iconId : DEFAULT_UI_ICON_ID;
-	}
-
-	@Nullable
-	@Override
-	public String getPreselectedIconName() {
-		PointEditor editor = getEditor();
-		return editor == null || !editor.isNew ? null : iconName;
 	}
 
 	@Override
