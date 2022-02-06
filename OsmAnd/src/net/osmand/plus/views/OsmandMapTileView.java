@@ -399,9 +399,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public synchronized void removeLayer(OsmandMapLayer layer) {
-		layer.destroyLayer();
 		while (layers.remove(layer)) ;
 		zOrders.remove(layer);
+		layer.destroyLayer();
 	}
 
 	public synchronized void removeAllLayers() {
