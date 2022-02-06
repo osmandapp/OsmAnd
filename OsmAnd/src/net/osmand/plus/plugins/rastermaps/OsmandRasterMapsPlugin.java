@@ -161,16 +161,14 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		if (isActive()) {
 			updateLayer(mapView, settings, overlayLayer, settings.MAP_OVERLAY, 0.7f, settings.MAP_OVERLAY == settingsToWarnAboutMap);
 		} else {
-//			mapView.removeLayer(overlayLayer);
-//			overlayLayer.setMap(null);
-			overlayLayer.setVisible(false);
+			overlayLayer.setMap(null);
+//			overlayLayer.setVisible(false);
 		}
 		if (isActive()) {
 			updateLayer(mapView, settings, underlayLayer, settings.MAP_UNDERLAY, -0.5f, settings.MAP_UNDERLAY == settingsToWarnAboutMap);
 		} else {
-//			mapView.removeLayer(underlayLayer);
-//			underlayLayer.setMap(null);
-			underlayLayer.setVisible(false);
+			underlayLayer.setMap(null);
+//			underlayLayer.setVisible(false);
 		}
 		if (mapActivity != null) {
 			MapLayers layers = mapActivity.getMapLayers();
@@ -199,7 +197,6 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			if (overlay == null) {
 				mapView.removeLayer(layer);
 			} else if (!mapView.isLayerVisible(layer)) {
-				//if (mapView.getMapRenderer() == null) {  // ???
 				if (mapView.isLayerExist(layer)) {
 					layer.initLayer(mapView);
 				} else {

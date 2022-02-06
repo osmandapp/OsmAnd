@@ -97,8 +97,8 @@ public class MapVectorLayer extends BaseMapLayer {
 		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 		if (mapContext != null) {
 			//mapContext.updateMapPresentationEnvironment();
-			//mapContext.recreateRasterAndSymbolsProvider();
-			mapContext.updateMapSettings();
+			mapContext.recreateRasterAndSymbolsProvider();
+			//mapContext.updateMapSettings();
 		}
 	}
 
@@ -124,11 +124,11 @@ public class MapVectorLayer extends BaseMapLayer {
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tilesRect, DrawSettings drawSettings) {
-		if (view == null) {
+		if ((!isVisible() && !needUpdateProvider) || view == null) {
 			return;
 		}
 
-		if (!isVectorDataVisible() && needUpdateProvider) {
+		if (!isVisible() && needUpdateProvider) {
 			resetLayerProvider();
 			needUpdateProvider = false;
 			return;

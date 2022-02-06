@@ -284,7 +284,7 @@ public class MapTileLayer extends BaseMapLayer {
 	@SuppressLint("WrongCall")
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
-		if (view == null) {
+		if ((!isVisible() && !needUpdateProvider) || view == null) {
 			return;
 		}
 
@@ -493,12 +493,7 @@ public class MapTileLayer extends BaseMapLayer {
 
 	public void setVisible(boolean visible) {
 		this.visible = visible;
-
-		if (isVisible() && map != null) {
-			setLayerProvider(map);
-		} else {
-			resetLayerProvider();
-		}
+		needUpdateProvider = true;
 	}
 
 	public ITileSource getMap() {
