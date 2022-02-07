@@ -52,12 +52,12 @@
     <string name="poi_hearing_aids">لوازم پزشکی سمعک</string>
     <string name="poi_herbalist">عطاری</string>
     <string name="poi_hifi">فروشگاه لوازم صوتی</string>
-    <string name="poi_houseware">فروشگاه لوازم خانگی</string>
+    <string name="poi_houseware">لوازم خانگی خرد</string>
     <string name="poi_hunting">تجهیزات شکار</string>
     <string name="poi_interior_decoration">فروشگاه دکوراسیون داخلی</string>
     <string name="poi_jewelry">طلا فروشی</string>
     <string name="poi_kiosk">دکه</string>
-    <string name="poi_kitchen">ظروف اشپزخانه</string>
+    <string name="poi_kitchen">لوازم و مبلمان آشپزخانه</string>
     <string name="poi_mobile_phone">فروشگاه موبایل</string>
     <string name="poi_motorcycle">فروشگاه موتورسیکلت</string>
     <string name="poi_musical_instrument">فروشگاه لوزم موسیقی</string>
@@ -1275,7 +1275,7 @@
     <string name="poi_toilets_access_permissive">دسترسی سرویس بهداشتی: با اجازه</string>
     <string name="poi_toilets_access_community">دسترسی سرویس بهداشتی: هموَندان</string>
     <string name="poi_toilets_access_public">دسترسی سرویس بهداشتی: همگانی</string>
-    <string name="poi_service_bicycle_charging_yes">شارژ: بله</string>
+    <string name="poi_service_bicycle_charging_yes">شارژ: بله; شارژ دوچرخه; شارژ دوچرخه برقی</string>
     <string name="poi_service_bicycle_charging_no">شارژ: خیر</string>
     <string name="poi_training_language">آموزش: زبان</string>
     <string name="poi_language_school">آموزشگاه زبان</string>
@@ -1531,4 +1531,20 @@
     <string name="poi_bulk_purchase">سفارش عمده</string>
     <string name="poi_public_transport_stop_position">ایستگاه حمل و نقل عمومی</string>
     <string name="poi_services">مجتمع خدماتی و رفاهی</string>
+    <string name="poi_bridge_pedestrian">پل عابر پیاده</string>
+    <string name="poi_bridge_railway">پل راه‌آهن</string>
+    <string name="poi_bridge_bicycle">پل دوچرخه</string>
+    <string name="poi_bridge_car">پل جاده</string>
+    <string name="poi_service_vehicle_electrical_yes">برق خودرو</string>
+    <string name="poi_furniture_used">دست دوم; اثاث دست دو</string>
+    <string name="poi_furniture_living_room">اتاق پذیرایی; مبلمان اتاق پذیرایی</string>
+    <string name="poi_furniture_bedroom">اتاق خواب; مبلمان اتاق خواب; اثاث اتاق خواب</string>
+    <string name="poi_furniture_yes">بله; مبلمان</string>
+    <string name="poi_furniture_filter">مبلمان</string>
+    <string name="poi_furniture_no">خیر</string>
+    <string name="poi_furniture_bed">تخت خواب; مبلمان</string>
+    <string name="poi_furniture_kitchen">آشپزخانه; اثاث آشپزخانه</string>
+    <string name="poi_furniture_office">اداره; مبلمان اداری</string>
+    <string name="poi_recycling_furniture">مبلمان</string>
+    <string name="poi_electrical">فروشگاه الکتریکی; کالای برق; الکتریکی</string>
 </resources>

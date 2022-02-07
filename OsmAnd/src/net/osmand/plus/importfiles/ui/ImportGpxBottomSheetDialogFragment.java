@@ -1,4 +1,4 @@
-package net.osmand.plus.dialogs;
+package net.osmand.plus.importfiles.ui;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,9 +8,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -19,10 +17,12 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 
 public class ImportGpxBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = "ImportGpxBottomSheetDialogFragment";
+	public static final String TAG = ImportGpxBottomSheetDialogFragment.class.getSimpleName();
 
 	private ImportHelper importHelper;
 

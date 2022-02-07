@@ -3432,8 +3432,8 @@
     <string name="replace_all">Замени све</string>
     <string name="keep_both">Задржи обе</string>
     <string name="keep_both_desc">Увежене ставке ће бити додате уз префикс</string>
-    <string name="import_duplicates_description">OsmAnd већ има елементе са истим именом као они који се увозе.
-\n
+    <string name="import_duplicates_description">OsmAnd већ има елементе са истим именом као они који се увозе. 
+\n 
 \nОдаберите радњу.</string>
     <string name="import_duplicates_title">Неке ставке већ постоје</string>
     <string name="select_data_to_import">Одаберите податке за увожење.</string>
@@ -4508,4 +4508,19 @@
     <string name="rendering_value_all_name">Све</string>
     <string name="rendering_value_omit_name">Изоставити</string>
     <string name="rendering_attr_seabedDetail_name">Детаљ морског дна</string>
+    <string name="save_track_to_gpx_descrp">Аутоматски започните снимање путање док је навигација у току. Када се заврши, путања ће бити аутоматски сачувана.</string>
+    <string name="gpx_no_routes_title">Нема рута</string>
+    <string name="gpx_no_routes_descr">Можете користити алатку \"%1$s\" да додате руту у датотеку.</string>
+    <string name="quick_action_add_route_descr">Дугме за покретање руте од средине екрана.</string>
+    <string name="please_provide_group_name_message">Наведите име за групу.</string>
+    <string name="selected_waypoints_descr">Одабране пролазне тачке биће додате путањи \"%1$s\"</string>
+    <string name="shared_string_reading_file">Читање датотеке…</string>
+    <string name="all_groups">Све групе</string>
+    <string name="list_of_groups">Списак група</string>
+    <string name="points_selection_descr">Да ли сте сигурни да желите да затворите\? Изгубићете све промене.</string>
+    <string name="exit_import_descr">Да ли сте сигурни да желите да изађете без чувања\? Изгубићете све промене.</string>
+    <string name="exit_import">Изаћи из увоза\?</string>
+    <string name="import_tracks">Увези путање</string>
+    <string name="import_tracks_descr">%1$s, садржи %2$s засебне путање. Изаберите путање које желите да увезете.</string>
+    <string name="select_suggested_points">Изаберите предложене тачке</string>
 </resources>

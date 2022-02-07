@@ -4508,4 +4508,8 @@
     <string name="rendering_attr_seabedDetail_name">Detaily morského dna</string>
     <string name="rendering_attr_seabedDetail_description">Ďalšie textové informácie o povrchu morského dna, kategórii a druhu morského porastu</string>
     <string name="rendering_value_category_name">Kategória</string>
+    <string name="save_track_to_gpx_descrp">Spustiť nahrávanie stopy automaticky keď prebieha navigácia. Po jej ukončení sa stopa automaticky uloží.</string>
+    <string name="gpx_no_routes_title">Neexistujú žiadne trasy</string>
+    <string name="gpx_no_routes_descr">Na pridanie cesty do súboru môžete použiť nástroj \"%1$s\".</string>
+    <string name="quick_action_add_route_descr">Tlačidlo na začatie trasy v strede obrazovky.</string>
 </resources>

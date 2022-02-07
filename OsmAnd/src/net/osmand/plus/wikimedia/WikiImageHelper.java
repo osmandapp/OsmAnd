@@ -29,7 +29,7 @@ public class WikiImageHelper {
 	private static final String WIKIMEDIA_ACTION = "?action=query&list=categorymembers&cmtitle=";
 	private static final String CM_LIMIT = "&cmlimit=500";
 	private static final String FORMAT_JSON = "&format=json";
-	private static final String IMAGE_BASE_URL = "https://upload.wikimedia.org/wikipedia/commons/";
+	private static final String IMAGE_BASE_URL = "https://commons.wikimedia.org/wiki/Special:FilePath/";
 
 	private static final String WIKIDATA_PREFIX = "Q";
 	private static final String WIKIMEDIA_FILE = "File:";
@@ -116,14 +116,9 @@ public class WikiImageHelper {
 			imageName = imageName.substring(0, imageName.lastIndexOf("."));
 			String[] urlHashParts = getHash(imageFileName);
 
-			String imageHiResUrl = IMAGE_BASE_URL +
-					urlHashParts[0] + "/" + urlHashParts[1] + "/" +
-					imageFileName;
+			String imageHiResUrl = IMAGE_BASE_URL + imageFileName;
 
-			String imageStubUrl = IMAGE_BASE_URL + "thumb/" +
-					urlHashParts[0] + "/" + urlHashParts[1] + "/" +
-					imageFileName + "/" + THUMB_SIZE + "px-" +
-					imageFileName;
+			String imageStubUrl = IMAGE_BASE_URL + imageFileName + "?width=" + THUMB_SIZE;
 
 			return new WikiImage(imageFileName, imageName, imageStubUrl, imageHiResUrl);
 

@@ -4513,4 +4513,19 @@
     <string name="rendering_value_category_name">Categoría</string>
     <string name="rendering_value_all_name">Todos</string>
     <string name="rendering_value_omit_name">Omitir</string>
+    <string name="save_track_to_gpx_descrp">Inicia la grabación de la traza automáticamente mientras la navegación está en curso. Al finalizar, la pista se guardará automáticamente.</string>
+    <string name="gpx_no_routes_title">Sin rutas</string>
+    <string name="gpx_no_routes_descr">Puedes usar la herramienta «%1$s» para añadir la ruta al archivo.</string>
+    <string name="quick_action_add_route_descr">Un botón que inicia una ruta desde el centro de la pantalla.</string>
+    <string name="please_provide_group_name_message">Indica un nombre para el grupo.</string>
+    <string name="selected_waypoints_descr">Los puntos de referencia marcados serán añadidos a la traza «%1$s»</string>
+    <string name="shared_string_reading_file">Leyendo archivo…</string>
+    <string name="all_groups">Todos los grupos</string>
+    <string name="list_of_groups">Lista de grupos</string>
+    <string name="points_selection_descr">¿Quieres cerrar\? Se perderán todos los cambios.</string>
+    <string name="exit_import_descr">¿Salir sin guardar\? Se perderán todos los cambios.</string>
+    <string name="exit_import">¿Salir de la importación\?</string>
+    <string name="import_tracks">Importar trazas</string>
+    <string name="import_tracks_descr">En «%1$s» existen %2$s trazas separadas. Elige las trazas a importar.</string>
+    <string name="select_suggested_points">Marcar los puntos sugeridos</string>
 </resources>

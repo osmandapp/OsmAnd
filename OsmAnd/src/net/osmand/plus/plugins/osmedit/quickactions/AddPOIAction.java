@@ -1,5 +1,8 @@
 package net.osmand.plus.plugins.osmedit.quickactions;
 
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
+import static net.osmand.plus.plugins.osmedit.fragments.AdvancedEditPoiFragment.addPoiToStringSet;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -65,9 +68,6 @@ import java.util.List;
 import java.util.Map;
 
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
-
-import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
-import static net.osmand.plus.plugins.osmedit.fragments.AdvancedEditPoiFragment.addPoiToStringSet;
 
 public class AddPOIAction extends QuickAction {
 

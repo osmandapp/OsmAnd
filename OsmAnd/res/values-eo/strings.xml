@@ -156,7 +156,7 @@
     <string name="rendering_attr_hideProposed_name">Proponitaj objektoj</string>
     <string name="share_menu_location">Kunhavigi lokon</string>
     <string name="shared_string_send">Sendi</string>
-    <string name="world_map_download_descr">Fundamenta mapo de mondo (kiu kovras tutan mondon ĉe etaj skaloj) mankas aŭ estas neĝisdata. Bonvolu konsideri elŝuti ĝin por havi vidon al la tuta mondo.</string>
+    <string name="world_map_download_descr">La fundamenta mapo de mondo (kiu kovras tutan mondon ĉe etaj skaloj) mankas aŭ estas neĝisdata. Konsideru elŝuti ĝin por havi vidon al la tuta mondo.</string>
     <string name="map_downloaded">Mapo elŝutita</string>
     <string name="map_downloaded_descr">La mapo de %1$s pretas por uzi.</string>
     <string name="go_to_map">Montri mapon</string>
@@ -4511,4 +4511,9 @@
     <string name="rendering_value_all_name">Ĉiuj</string>
     <string name="rendering_value_omit_name">Ignori</string>
     <string name="rendering_attr_seabedDetail_name">Marfundo</string>
+    <string name="save_track_to_gpx_descrp">Aŭtomate ekigi registradon de spuro dum navigi. La spuro estos konservita post fini navigadon.</string>
+    <string name="gpx_no_routes_title">Neniu kurso</string>
+    <string name="please_provide_group_name_message">Enigu nomon por la grupo.</string>
+    <string name="quick_action_add_route_descr">Butono por ekigi kurson de la centro de la ekrano.</string>
+    <string name="gpx_no_routes_descr">Uzu la ilon “%1$s” por konservi kurson al dosiero.</string>
 </resources>

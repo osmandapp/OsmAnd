@@ -226,7 +226,7 @@ public class ConfigureMapMenu {
 				.setItemDeleteAction(makeDeleteAction(settings.MAP_ONLINE_DATA, settings.MAP_TILE_SOURCES))
 				.setListener(listener).createItem());
 
-		OsmandPlugin.registerLayerContextMenu(adapter, activity);
+		OsmandPlugin.registerLayerContextMenu(adapter, activity, customRules);
 		app.getAidlApi().registerLayerContextMenu(adapter, activity);
 	}
 
@@ -752,14 +752,14 @@ public class ConfigureMapMenu {
 		}
 	}
 
-	private static ContextMenuItem createBooleanRenderingProperty(@NonNull MapActivity activity,
-	                                                              @NonNull String attrName,
-	                                                              @NonNull String name,
-	                                                              @NonNull String id,
-	                                                              @Nullable RenderingRuleProperty property,
-	                                                              @DrawableRes int icon,
-	                                                              boolean nightMode,
-	                                                              @Nullable CallbackWithObject<Boolean> callback) {
+	public static ContextMenuItem createBooleanRenderingProperty(@NonNull MapActivity activity,
+	                                                             @NonNull String attrName,
+	                                                             @NonNull String name,
+	                                                             @NonNull String id,
+	                                                             @Nullable RenderingRuleProperty property,
+	                                                             @DrawableRes int icon,
+	                                                             boolean nightMode,
+	                                                             @Nullable CallbackWithObject<Boolean> callback) {
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 

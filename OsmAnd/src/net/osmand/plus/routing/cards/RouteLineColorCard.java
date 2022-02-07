@@ -326,15 +326,13 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 		public AppearanceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 			LayoutInflater themedInflater = UiUtilities.getInflater(parent.getContext(), nightMode);
 			View view = themedInflater.inflate(R.layout.point_editor_group_select_item, parent, false);
-			view.getLayoutParams().width = app.getResources().getDimensionPixelSize(R.dimen.gpx_group_button_width);
-			view.getLayoutParams().height = app.getResources().getDimensionPixelSize(R.dimen.gpx_group_button_height);
+			view.getLayoutParams().width = getDimen(R.dimen.gpx_group_button_width);
+			view.getLayoutParams().height = getDimen(R.dimen.gpx_group_button_height);
 			((TextView) view.findViewById(R.id.groupName)).setMaxLines(1);
 
 			AppearanceViewHolder holder = new AppearanceViewHolder(view);
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-				AndroidUtils.setBackground(app, holder.button, nightMode, R.drawable.ripple_solid_light_6dp,
-						R.drawable.ripple_solid_dark_6dp);
-			}
+			AndroidUtils.setBackground(app, holder.button, nightMode, R.drawable.ripple_solid_light_6dp,
+					R.drawable.ripple_solid_dark_6dp);
 			return holder;
 		}
 
@@ -353,11 +351,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 				notifyItemRangeChanged(0, getItemCount());
 
 				modeChanged();
-
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardPressed(RouteLineColorCard.this);
-				}
+				notifyCardPressed();
 			});
 		}
 

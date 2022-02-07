@@ -110,7 +110,7 @@ public class ColorsCard extends MapBaseCard implements ColorPickerListener {
 		FlowLayout selectCustomColor = view.findViewById(R.id.select_custom_color);
 		selectCustomColor.removeAllViews();
 		selectCustomColor.setHorizontalAutoSpacing(true);
-		int minimalPaddingBetweenIcon = app.getResources().getDimensionPixelSize(R.dimen.favorites_select_icon_button_right_padding);
+		int minimalPaddingBetweenIcon = getDimen(R.dimen.favorites_select_icon_button_right_padding);
 
 		for (int color : customColors) {
 			selectCustomColor.addView(createColorItemView(color, selectCustomColor, true), new LayoutParams(minimalPaddingBetweenIcon, 0));
@@ -160,17 +160,10 @@ public class ColorsCard extends MapBaseCard implements ColorPickerListener {
 			backgroundCircle.setBackgroundResource(nightMode ? R.drawable.circle_contour_bg_dark : R.drawable.circle_contour_bg_light);
 		}
 		backgroundCircle.setImageDrawable(layeredIcon);
-		backgroundCircle.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				updateColorSelector(color);
-				selectedColor = color;
-
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardPressed(ColorsCard.this);
-				}
-			}
+		backgroundCircle.setOnClickListener(v -> {
+			updateColorSelector(color);
+			selectedColor = color;
+			notifyCardPressed();
 		});
 		if (customColor) {
 			backgroundCircle.setOnLongClickListener(new View.OnLongClickListener() {

@@ -3869,7 +3869,7 @@
     <string name="poi_water_source_lake">Озеро</string>
     <string name="poi_water_source_river">Річка</string>
     <string name="poi_ranger_station">Лісництво</string>
-    <string name="poi_weightbridge">Автомобільні ваги</string>
+    <string name="poi_weightbridge">Автомобільні ваги;Зважування вантажівок</string>
     <string name="poi_lavoir">Громадська пральня</string>
     <string name="poi_waste_transfer_station">Станція перевезення відходів</string>
     <string name="poi_swimming_area">Плавальний майданчик</string>
@@ -4278,4 +4278,13 @@
     <string name="poi_post_office_collection_times">Час прийняття відправлень</string>
     <string name="poi_post_office_opening_hours">Розклад роботи відділень</string>
     <string name="poi_post_office_post_annex">Поштове відділення</string>
+    <string name="poi_blowhole">Дихало</string>
+    <string name="poi_skate">Скейтшоп</string>
+    <string name="poi_collector">Колектор</string>
+    <string name="poi_books_adults">Дорослі</string>
+    <string name="poi_hospice">Госпис</string>
+    <string name="poi_telecommunication">Телекомунікації</string>
+    <string name="poi_avalanche_transceiver_training">Навчання лавинного радіопередавача</string>
+    <string name="poi_avalanche_transceiver">Детектор жертв лавин;AVD;Радіопередавач про сходження лавин</string>
+    <string name="poi_avalanche_transceiver_checkpoint">Контрольний радіопередавач про сходження лавин</string>
 </resources>

@@ -183,6 +183,7 @@ public class RenderingIcons {
 		return d;
 	}
 
+	@Nullable
 	public static String getBigIconName(@NonNull Integer iconId) {
 		for (String key : bigIcons.keySet()) {
 			if (iconId.equals(bigIcons.get(key))) {

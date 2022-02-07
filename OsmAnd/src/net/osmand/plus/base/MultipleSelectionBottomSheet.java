@@ -26,11 +26,11 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MultipleSelectionBottomSheet extends SelectionBottomSheet {
+public class MultipleSelectionBottomSheet<T> extends SelectionBottomSheet<T> {
 
 	public static final String TAG = MultipleSelectionBottomSheet.class.getSimpleName();
 
-	protected final List<SelectableItem> selectedItems = new ArrayList<>();
+	protected final List<SelectableItem<T>> selectedItems = new ArrayList<>();
 	protected SelectionUpdateListener selectionUpdateListener;
 
 	@Override
@@ -55,7 +55,7 @@ public class MultipleSelectionBottomSheet extends SelectionBottomSheet {
 	}
 
 	@Override
-	protected void updateItemView(final SelectableItem item, View view) {
+	protected void updateItemView(final SelectableItem<T> item, View view) {
 		boolean checked = selectedItems.contains(item);
 		ImageView imageView = view.findViewById(R.id.icon);
 		TextView title = view.findViewById(R.id.title);
@@ -129,7 +129,7 @@ public class MultipleSelectionBottomSheet extends SelectionBottomSheet {
 	}
 
 	private void updateItemsSelection(boolean checked) {
-		for (SelectableItem item : allItems) {
+		for (SelectableItem<T> item : allItems) {
 			View v = listViews.get(item);
 			CheckBox checkBox = v != null ? (CheckBox) v.findViewById(R.id.compound_button) : null;
 			if (checkBox != null) {
@@ -138,7 +138,7 @@ public class MultipleSelectionBottomSheet extends SelectionBottomSheet {
 		}
 	}
 
-	public void setSelectedItems(List<SelectableItem> selected) {
+	public void setSelectedItems(List<SelectableItem<T>> selected) {
 		selectedItems.clear();
 		if (!Algorithms.isEmpty(selected)) {
 			selectedItems.addAll(selected);
@@ -147,7 +147,7 @@ public class MultipleSelectionBottomSheet extends SelectionBottomSheet {
 
 	@NonNull
 	@Override
-	public List<SelectableItem> getSelectedItems() {
+	public List<SelectableItem<T>> getSelectedItems() {
 		return selectedItems;
 	}
 
@@ -155,11 +155,11 @@ public class MultipleSelectionBottomSheet extends SelectionBottomSheet {
 		this.selectionUpdateListener = selectionUpdateListener;
 	}
 
-	public static MultipleSelectionBottomSheet showInstance(@NonNull AppCompatActivity activity,
-	                                                        @NonNull List<SelectableItem> items,
-	                                                        @Nullable List<SelectableItem> selected,
-	                                                        boolean usedOnMap) {
-		MultipleSelectionBottomSheet fragment = new MultipleSelectionBottomSheet();
+	public static <T> MultipleSelectionBottomSheet<T> showInstance(@NonNull AppCompatActivity activity,
+	                                                               @NonNull List<SelectableItem<T>> items,
+	                                                               @Nullable List<SelectableItem<T>> selected,
+	                                                               boolean usedOnMap) {
+		MultipleSelectionBottomSheet<T> fragment = new MultipleSelectionBottomSheet<>();
 		fragment.setUsedOnMap(usedOnMap);
 		fragment.setItems(items);
 		fragment.setSelectedItems(selected);
@@ -171,5 +171,4 @@ public class MultipleSelectionBottomSheet extends SelectionBottomSheet {
 	public interface SelectionUpdateListener {
 		void onSelectionUpdate();
 	}
-
 }

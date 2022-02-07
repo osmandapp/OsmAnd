@@ -4582,4 +4582,9 @@
     <string name="rendering_value_category_name">الفئة</string>
     <string name="rendering_value_omit_name">حذف</string>
     <string name="rendering_attr_seabedDetail_description">معلومات نصية إضافية حول تأهيل سطح قاع البحر ، أنواع الأسطح المدمجة ، وفئة وتصنيف الحشائش أو الأعشاب البحرية</string>
+    <string name="save_track_to_gpx_descrp">ابدأ تسجيل المسار تلقائيًا أثناء التنقل. عند الانتهاء ، سيتم حفظ المسار تلقائيًا.</string>
+    <string name="gpx_no_routes_title">لا توجد طرق</string>
+    <string name="gpx_no_routes_descr">يمكنك استخدام أداة \"%1$s\" لإضافة مسار إلى الملف.</string>
+    <string name="quick_action_add_route_descr">زر لبدء المسار من منتصف الشاشة.</string>
+    <string name="please_provide_group_name_message">يرجى تقديم اسم للمجموعة.</string>
 </resources>

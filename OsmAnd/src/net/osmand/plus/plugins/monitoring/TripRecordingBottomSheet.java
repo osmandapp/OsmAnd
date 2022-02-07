@@ -1,10 +1,11 @@
 package net.osmand.plus.plugins.monitoring;
 
-import static net.osmand.plus.utils.AndroidUtils.setPadding;
-import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.GLOBAL;
 import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
 import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
 import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_SPEED;
+import static net.osmand.plus.utils.AndroidUtils.setPadding;
+import static net.osmand.plus.utils.ColorUtilities.getActiveTransparentColorId;
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.GLOBAL;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -38,22 +39,14 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.base.SideMenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -62,10 +55,18 @@ import net.osmand.plus.myplaces.GPXItemPagerAdapter;
 import net.osmand.plus.myplaces.GPXTabItemType;
 import net.osmand.plus.myplaces.SegmentActionsListener;
 import net.osmand.plus.myplaces.SegmentGPXAdapter;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxBlockStatisticsBuilder;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager;
 import net.osmand.plus.widgets.TextViewEx;
@@ -403,8 +404,8 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	}
 
 	public static void createShowTrackItem(LinearLayout showTrackContainer, AppCompatImageView trackAppearanceIcon,
-										   Integer showTrackId, final Fragment target,
-										   final boolean nightMode, final Runnable hideOnClickButtonAppearance) {
+	                                       Integer showTrackId, final Fragment target,
+	                                       final boolean nightMode, final Runnable hideOnClickButtonAppearance) {
 		FragmentActivity activity = target.getActivity();
 		if (activity == null) {
 			AndroidUiHelper.updateVisibility(showTrackContainer, false);
@@ -521,7 +522,9 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 
 	public static void setItemBackground(Context context, boolean nightMode, View view, boolean enabled) {
 		if (view instanceof CardView) {
-			int colorId = enabled ? getActiveTransparentColorId(nightMode) : getInactiveButtonColorId(nightMode);
+			int colorId = enabled
+					? getActiveTransparentColorId(nightMode)
+					: ColorUtilities.getInactiveButtonsAndLinksColorId(nightMode);
 			((CardView) view).setCardBackgroundColor(AndroidUtils.createPressedColorStateList(
 					context, colorId, ColorUtilities.getActiveColorId(nightMode)
 			));
@@ -529,11 +532,12 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		}
 		Drawable background = AppCompatResources.getDrawable(context, getInactiveButtonBackgroundId(nightMode));
 		if (background != null && enabled) {
+			int inactiveColorId = ColorUtilities.getInactiveButtonsAndLinksColorId(nightMode);
+			int activeColorId = ColorUtilities.getActiveColorId(nightMode);
 			DrawableCompat.setTintList(background, AndroidUtils.createPressedColorStateList(
-					context, getInactiveButtonColorId(nightMode), ColorUtilities.getActiveColorId(nightMode)
-			));
+					context, inactiveColorId, activeColorId));
 		} else {
-			UiUtilities.tintDrawable(background, ContextCompat.getColor(context, getInactiveButtonColorId(nightMode)));
+			UiUtilities.tintDrawable(background, ColorUtilities.getInactiveButtonsAndLinksColor(context, nightMode));
 		}
 		view.setBackgroundDrawable(background);
 	}
@@ -696,18 +700,8 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	}
 
 	@ColorRes
-	public static int getInactiveButtonColorId(boolean nightMode) {
-		return nightMode ? R.color.inactive_buttons_and_links_bg_dark : R.color.inactive_buttons_and_links_bg_light;
-	}
-
-	@ColorRes
 	public static int getOsmandIconColorId(boolean nightMode) {
 		return nightMode ? R.color.icon_color_osmand_dark : R.color.icon_color_osmand_light;
-	}
-
-	@ColorRes
-	public static int getActiveTransparentColorId(boolean nightMode) {
-		return nightMode ? R.color.switch_button_active_dark : R.color.switch_button_active_light;
 	}
 
 	@ColorRes

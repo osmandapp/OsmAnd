@@ -33,8 +33,6 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
 import net.osmand.plus.measurementtool.ExitBottomSheetDialogFragment;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
@@ -44,17 +42,9 @@ import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListene
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.util.Algorithms;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -73,7 +63,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
-import static net.osmand.GPXUtilities.log;
 import static net.osmand.data.FavouritePoint.BackgroundType;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
@@ -84,9 +73,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 
 	public static final String TAG = PointEditorFragmentNew.class.getSimpleName();
 
-	private static final int LAST_USED_ICONS_LIMIT = 20;
-	private static final String LAST_USED_ICONS_KEY = "last used icons";
-
 	private View view;
 	private EditText nameEdit;
 	private TextView addDelDescription;
@@ -95,8 +81,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	private ImageView deleteAddressIcon;
 	private boolean cancelled;
 	private boolean nightMode;
-	@DrawableRes
-	private int selectedIcon;
 	@ColorInt
 	private int selectedColor;
 	private BackgroundType selectedShape = DEFAULT_BACKGROUND_TYPE;
@@ -104,16 +88,16 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	private GroupAdapter groupListAdapter;
 	private int scrollViewY;
 	private RecyclerView groupRecyclerView;
-	private String selectedIconCategory;
-	private LinkedHashMap<String, JSONArray> iconCategories;
-	private List<String> lastUsedIcons;
 	private OsmandApplication app;
 	private View descriptionCaption;
 	private View addressCaption;
 	private EditText descriptionEdit;
 	private EditText addressEdit;
 	private int layoutHeightPrevious = 0;
+
+	private IconsCard iconsCard;
 	private ColorsCard colorsCard;
+	private ShapesCard shapesCard;
 
 	protected boolean skipConfirmationDialog;
 
@@ -121,7 +105,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
-		initLastUsedIcons();
 
 		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
@@ -149,12 +132,8 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 			return view;
 		}
 
-		editor.updateLandscapePortrait(requireActivity());
-		editor.updateNightMode();
-
 		selectedColor = getPointColor();
 		selectedShape = getBackgroundType();
-		selectedIcon = getIconId();
 
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
 		toolbar.setBackgroundColor(ContextCompat.getColor(requireContext(),
@@ -349,7 +328,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		createColorSelector();
 		createShapeSelector();
 		updateColorSelector(selectedColor);
-		updateShapeSelector(selectedShape, view);
 		scrollView.setOnTouchListener((v, event) -> {
 			descriptionEdit.getParent().requestDisallowInterceptTouchEvent(false);
 			return false;
@@ -428,6 +406,16 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		setSelectedItemWithScroll(getCategoryInitValue());
 	}
 
+	private void createIconSelector() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			iconsCard = new IconsCard(mapActivity, getIconId(), getPreselectedIconName(), selectedColor);
+			iconsCard.setListener(this);
+			ViewGroup shapesCardContainer = view.findViewById(R.id.icons_card);
+			shapesCardContainer.addView(iconsCard.build(mapActivity));
+		}
+	}
+
 	private void createColorSelector() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
@@ -461,9 +449,17 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 
 	@Override
 	public void onCardPressed(@NonNull BaseCard card) {
-		if (card instanceof ColorsCard) {
+		if (card instanceof IconsCard) {
+			setIcon(iconsCard.getSelectedIconId());
+			updateNameIcon();
+		} else if (card instanceof ColorsCard) {
 			int color = ((ColorsCard) card).getSelectedColor();
 			updateColorSelector(color);
+		} else if (card instanceof ShapesCard) {
+			selectedShape = shapesCard.getSelectedShape();
+			setBackgroundType(selectedShape);
+			updateNameIcon();
+			((TextView) view.findViewById(R.id.shape_name)).setText(selectedShape.getNameId());
 		}
 	}
 
@@ -475,127 +471,28 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		((TextView) view.findViewById(R.id.color_name)).setText(ColorDialogs.getColorName(color));
 		selectedColor = color;
 		setColor(color);
+		iconsCard.updateSelectedColor(color);
+		shapesCard.updateSelectedColor(color);
 		updateNameIcon();
-		updateShapeSelector(selectedShape, view);
-		updateIconSelector(selectedIcon, view);
 	}
 
 	private void createShapeSelector() {
-		FlowLayout selectShape = view.findViewById(R.id.select_shape);
-		for (BackgroundType backgroundType : BackgroundType.values()) {
-			if (backgroundType.isSelected()) {
-				int minimalPaddingBetweenIcon = app.getResources().getDimensionPixelSize(R.dimen.favorites_select_icon_button_right_padding);
-				selectShape.addView(createShapeItemView(backgroundType, selectShape),
-						new FlowLayout.LayoutParams(minimalPaddingBetweenIcon, 0));
-				selectShape.setHorizontalAutoSpacing(true);
-			}
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			shapesCard = new ShapesCard(mapActivity, selectedShape, selectedColor);
+			shapesCard.setListener(this);
+			ViewGroup shapesCardContainer = view.findViewById(R.id.shapes_card);
+			shapesCardContainer.addView(shapesCard.build(mapActivity));
 		}
 	}
 
-	private View createShapeItemView(final BackgroundType backgroundType, final FlowLayout rootView) {
-		FrameLayout shapeItemView = (FrameLayout) UiUtilities.getInflater(getContext(), nightMode)
-				.inflate(R.layout.point_editor_button, rootView, false);
-		ImageView background = shapeItemView.findViewById(R.id.background);
-		setShapeSelectorBackground(backgroundType, background);
-		ImageView outline = shapeItemView.findViewById(R.id.outline);
-		outline.setImageDrawable(getOutlineDrawable(backgroundType.getIconId()));
-		background.setOnClickListener(v -> updateShapeSelector(backgroundType, view));
-		shapeItemView.setTag(backgroundType);
-		return shapeItemView;
-	}
-
-	private Drawable getOutlineDrawable(int iconId) {
-		String iconName = app.getResources().getResourceName(iconId);
-		int iconRes = app.getResources().getIdentifier(iconName + "_contour", "drawable", app.getPackageName());
-		return app.getUIUtilities().getIcon(iconRes,
-				nightMode ? R.color.stroked_buttons_and_links_outline_dark : R.color.stroked_buttons_and_links_outline_light);
-	}
-
-	private void updateShapeSelector(BackgroundType backgroundType, View rootView) {
-		View oldShape = rootView.findViewWithTag(selectedShape);
-		if (oldShape != null) {
-			oldShape.findViewById(R.id.outline).setVisibility(View.INVISIBLE);
-			ImageView background = oldShape.findViewById(R.id.background);
-			setShapeSelectorBackground(selectedShape, background);
-		}
-		View newShape = rootView.findViewWithTag(backgroundType);
-		newShape.findViewById(R.id.outline).setVisibility(View.VISIBLE);
-		((TextView) rootView.findViewById(R.id.shape_name)).setText(backgroundType.getNameId());
-		ImageView background = newShape.findViewById(R.id.background);
-		background.setImageDrawable(UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, backgroundType.getIconId()),
-				selectedColor));
-		selectedShape = backgroundType;
-		setBackgroundType(backgroundType);
-		updateNameIcon();
-	}
-
-	private void setShapeSelectorBackground(BackgroundType backgroundType, ImageView background) {
-		background.setImageDrawable(UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, backgroundType.getIconId()),
-				ContextCompat.getColor(app,
-						nightMode ? R.color.inactive_buttons_and_links_bg_dark
-								: R.color.inactive_buttons_and_links_bg_light)));
-	}
-
-	private String getInitCategory() {
-		for (int j = 0; j < iconCategories.values().size(); j++) {
-			JSONArray iconJsonArray = (JSONArray) iconCategories.values().toArray()[j];
-			for (int i = 0; i < iconJsonArray.length(); i++) {
-				try {
-					if (iconJsonArray.getString(i).equals(getNameFromIconId(getIconId()))) {
-						return (String) iconCategories.keySet().toArray()[j];
-					}
-				} catch (JSONException e) {
-					log.error(e.getMessage());
-				}
-			}
-		}
-		return iconCategories.keySet().iterator().next();
-	}
-
+	@Nullable
 	protected String getNameFromIconId(int iconId) {
 		return RenderingIcons.getBigIconName(iconId);
 	}
 
 	protected int getIconIdByName(String iconName) {
 		return RenderingIcons.getBigIconResourceId(iconName);
-	}
-
-	private void createIconSelector() {
-		iconCategories = new LinkedHashMap<>();
-
-		// update last used icons
-		if (!Algorithms.isEmpty(lastUsedIcons)) {
-			iconCategories.put(LAST_USED_ICONS_KEY, new JSONArray(lastUsedIcons));
-		}
-
-		// update categories from json
-		String categoriesJson = loadJSONFromAsset();
-		if (categoriesJson != null) {
-			try {
-				JSONObject obj = new JSONObject(categoriesJson);
-				JSONObject categories = obj.getJSONObject("categories");
-				for (int i = 0; i < categories.length(); i++) {
-					JSONArray names = categories.names();
-					String name = names.get(i).toString();
-					JSONObject icons = categories.getJSONObject(name);
-					String translatedName = AndroidUtils.getIconStringPropertyName(app, name);
-					iconCategories.put(translatedName, icons.getJSONArray("icons"));
-				}
-			} catch (JSONException e) {
-				log.error(e.getMessage());
-			}
-		}
-
-		selectedIconCategory = getInitCategory();
-		createIconForCategory();
-	}
-
-	protected void initLastUsedIcons() {
-		lastUsedIcons = new ArrayList<>();
-		List<String> fromPref = app.getSettings().LAST_USED_FAV_ICONS.getStringsList();
-		if (fromPref != null) {
-			lastUsedIcons.addAll(fromPref);
-		}
 	}
 
 	protected int getDefaultIconId() {
@@ -609,6 +506,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 
 	protected String getDefaultIconName() {
 		String preselectedIconName = getPreselectedIconName();
+		List<String> lastUsedIcons = app.getSettings().LAST_USED_FAV_ICONS.getStringsList();
 		if (!Algorithms.isEmpty(preselectedIconName)) {
 			return preselectedIconName;
 		} else if (!Algorithms.isEmpty(lastUsedIcons)) {
@@ -617,145 +515,20 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		return DEFAULT_ICON_NAME;
 	}
 
-	protected void addLastUsedIcon(int iconId) {
-		try {
-			String iconName = getNameFromIconId(iconId);
+	protected void addLastUsedIcon(@DrawableRes int iconId) {
+		String iconName = RenderingIcons.getBigIconName(iconId);
+		if (!Algorithms.isEmpty(iconName)) {
 			addLastUsedIcon(iconName);
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 
-	protected void addLastUsedIcon(String iconName) {
-		lastUsedIcons.remove(iconName);
-		if (lastUsedIcons.size() >= LAST_USED_ICONS_LIMIT) {
-			lastUsedIcons = lastUsedIcons.subList(0, LAST_USED_ICONS_LIMIT - 1);
-		}
-		lastUsedIcons.add(0, iconName);
-		app.getSettings().LAST_USED_FAV_ICONS.setStringsList(lastUsedIcons);
-	}
-
-	@SuppressLint("NotifyDataSetChanged")
-	private void createIconForCategory() {
-		createIconList();
-		final HorizontalSelectionAdapter horizontalSelectionAdapter = new HorizontalSelectionAdapter(app, nightMode);
-
-		horizontalSelectionAdapter.setTitledItems(new ArrayList<>(iconCategories.keySet()));
-		horizontalSelectionAdapter.setSelectedItemByTitle(selectedIconCategory);
-		horizontalSelectionAdapter.setListener(item -> {
-			selectedIconCategory = item.getTitle();
-			createIconList();
-			updateIconSelector(selectedIcon, PointEditorFragmentNew.this.view);
-			horizontalSelectionAdapter.notifyDataSetChanged();
-		});
-		HorizontalSelectionItem lastUsedCategory = horizontalSelectionAdapter.getItemByTitle(LAST_USED_ICONS_KEY);
-		if (lastUsedCategory != null) {
-			lastUsedCategory.setIconId(R.drawable.ic_action_history);
-			lastUsedCategory.setShowOnlyIcon(true);
-			lastUsedCategory.setTitleColorId(ColorUtilities.getActiveColorId(nightMode));
-		}
-		RecyclerView iconCategoriesRecyclerView = view.findViewById(R.id.group_name_recycler_view);
-		iconCategoriesRecyclerView.setAdapter(horizontalSelectionAdapter);
-		iconCategoriesRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
-		iconCategoriesRecyclerView.scrollToPosition(horizontalSelectionAdapter.getItemPositionByTitle(selectedIconCategory));
-	}
-
-
-	private void createIconList() {
-		FlowLayout selectIcon = view.findViewById(R.id.select_icon);
-		selectIcon.removeAllViews();
-		JSONArray iconJsonArray = iconCategories.get(selectedIconCategory);
-		if (iconJsonArray != null) {
-			List<String> iconNameList = new ArrayList<>();
-			for (int i = 0; i < iconJsonArray.length(); i++) {
-				try {
-					iconNameList.add(iconJsonArray.getString(i));
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-			}
-
-			String preselectedIconName = getPreselectedIconName();
-			if (!Algorithms.isEmpty(preselectedIconName)) {
-				iconNameList.remove(preselectedIconName);
-				iconNameList.add(0, preselectedIconName);
-			}
-
-			for (String name : iconNameList) {
-				int minimalPaddingBetweenIcon = app.getResources().getDimensionPixelSize(R.dimen.favorites_select_icon_button_right_padding);
-				selectIcon.addView(createIconItemView(name, selectIcon), new FlowLayout.LayoutParams(minimalPaddingBetweenIcon, 0));
-				selectIcon.setHorizontalAutoSpacing(true);
-			}
-		}
-	}
-
-	private View createIconItemView(final String iconName, final ViewGroup rootView) {
-		FrameLayout iconItemView = (FrameLayout) UiUtilities.getInflater(getContext(), nightMode)
-				.inflate(R.layout.point_editor_button, rootView, false);
-		ImageView outline = iconItemView.findViewById(R.id.outline);
-		outline.setImageDrawable(
-				UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.bg_point_circle_contour),
-						ContextCompat.getColor(app,
-								nightMode ? R.color.stroked_buttons_and_links_outline_dark
-										: R.color.stroked_buttons_and_links_outline_light)));
-		ImageView backgroundCircle = iconItemView.findViewById(R.id.background);
-		setIconSelectorBackground(backgroundCircle);
-		ImageView icon = iconItemView.findViewById(R.id.icon);
-		icon.setVisibility(View.VISIBLE);
-		int validIconId = getIconIdByName(iconName);
-		final int iconRes = validIconId != 0 ? validIconId : DEFAULT_UI_ICON_ID;
-		icon.setImageDrawable(getIcon(iconRes, R.color.icon_color_default_light));
-		backgroundCircle.setOnClickListener(v -> updateIconSelector(iconRes, rootView));
-		iconItemView.setTag(iconRes);
-		return iconItemView;
-	}
-
-	private void updateIconSelector(int iconRes, View rootView) {
-		View oldIcon = rootView.findViewWithTag(selectedIcon);
-		if (oldIcon != null) {
-			oldIcon.findViewById(R.id.outline).setVisibility(View.INVISIBLE);
-			ImageView background = oldIcon.findViewById(R.id.background);
-			setIconSelectorBackground(background);
-			ImageView iconView = oldIcon.findViewById(R.id.icon);
-			iconView.setImageDrawable(UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, selectedIcon),
-					ContextCompat.getColor(app, R.color.icon_color_default_light)));
-		}
-		View icon = rootView.findViewWithTag(iconRes);
-		if (icon != null) {
-			ImageView iconView = icon.findViewById(R.id.icon);
-			iconView.setImageDrawable(UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, iconRes),
-					ContextCompat.getColor(app, R.color.color_white)));
-			icon.findViewById(R.id.outline).setVisibility(View.VISIBLE);
-			ImageView backgroundCircle = icon.findViewById(R.id.background);
-			backgroundCircle.setImageDrawable(
-					UiUtilities.tintDrawable(AppCompatResources.getDrawable(view.getContext(), R.drawable.bg_point_circle), selectedColor));
-		}
-		selectedIcon = iconRes;
-		setIcon(iconRes);
-		updateNameIcon();
-	}
-
-	private void setIconSelectorBackground(ImageView backgroundCircle) {
-		backgroundCircle.setImageDrawable(UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.bg_point_circle),
-				ContextCompat.getColor(app, nightMode
-						? R.color.inactive_buttons_and_links_bg_dark
-						: R.color.inactive_buttons_and_links_bg_light)));
+	protected void addLastUsedIcon(@NonNull String iconName) {
+		iconsCard.addLastUsedIcon(iconName);
 	}
 
 	private void updateNameIcon() {
 		if (nameIcon != null) {
 			nameIcon.setImageDrawable(getNameIcon());
-		}
-	}
-
-	@Nullable
-	private String loadJSONFromAsset() {
-		try {
-			InputStream is = app.getAssets().open("poi_categories.json");
-			return Algorithms.readFromInputStream(is).toString();
-		} catch (IOException ex) {
-			log.error("Failed to load JSON from asset", ex);
-			return null;
 		}
 	}
 

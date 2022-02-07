@@ -1,11 +1,10 @@
 package net.osmand.data;
 
-import gnu.trove.map.hash.TLongObjectHashMap;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.util.MapUtils;
 
 /**
@@ -51,10 +50,20 @@ public class DataTileManager<T> {
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public List<T> getAllObjects(){
+	public List<T> getAllObjects() {
 		List<T> l = new ArrayList<T>();
-		for(List s : objects.valueCollection()){
+		for (List s : objects.valueCollection()) {
 			l.addAll(s);
+		}
+		return l;
+	}
+	
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public List<List<T>> getAllEditObjects() {
+		List<List<T>> l = new ArrayList<>();
+		for (List s : objects.valueCollection()) {
+			l.add(s);
 		}
 		return l;
 	}

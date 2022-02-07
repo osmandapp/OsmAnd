@@ -65,6 +65,8 @@ public class MapTileLayer extends BaseMapLayer {
 	public MapTileLayer(@NonNull Context context, boolean mainMap) {
 		super(context);
 		this.mainMap = mainMap;
+		settings = getApplication().getSettings();
+		resourceManager = getApplication().getResourceManager();
 	}
 
 	@Override
@@ -75,8 +77,6 @@ public class MapTileLayer extends BaseMapLayer {
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
 		this.view = view;
-		settings = view.getSettings();
-		resourceManager = view.getApplication().getResourceManager();
 		parameterListener = change -> getApplication().runInUIThread(() -> updateParameter(change));
 		useSampling = Build.VERSION.SDK_INT < 28;
 

@@ -37,7 +37,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
@@ -53,15 +52,17 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dialogs.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.importfiles.ui.ImportGpxBottomSheetDialogFragment;
+import net.osmand.plus.importfiles.ui.ImportTracksFragment;
 import net.osmand.plus.mapmarkers.ItineraryDataHelper;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -172,7 +173,7 @@ public class ImportHelper {
 		return false;
 	}
 
-	public void handleGpxOrFavouritesImport(@NonNull Uri uri) {
+	public void handleFavouritesImport(@NonNull Uri uri) {
 		String scheme = uri.getScheme();
 		boolean isFileIntent = "file".equals(scheme);
 		boolean isContentIntent = "content".equals(scheme);
@@ -427,16 +428,21 @@ public class ImportHelper {
 				}
 			} else {
 				if (save) {
-					String existingFilePath = getExistingFilePath(name, fileSize);
-					if (existingFilePath != null) {
-						app.showToastMessage(R.string.file_already_imported);
-						if (onGpxImport == OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU) {
-							showGpxContextMenu(existingFilePath);
-						} else if (onGpxImport == OnSuccessfulGpxImport.OPEN_PLAN_ROUTE_FRAGMENT) {
-							showPlanRouteFragment(result);
-						}
+					int tracksCount = result.getTracksCount();
+					if (tracksCount > 1 && tracksCount < 50) {
+						ImportTracksFragment.showInstance(activity.getSupportFragmentManager(), result, name);
 					} else {
-						executeImportTask(new SaveGpxAsyncTask(app, this, result, name, onGpxImport, useImportDir));
+						String existingFilePath = getExistingFilePath(name, fileSize);
+						if (existingFilePath != null) {
+							app.showToastMessage(R.string.file_already_imported);
+							if (onGpxImport == OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU) {
+								showGpxContextMenu(existingFilePath);
+							} else if (onGpxImport == OnSuccessfulGpxImport.OPEN_PLAN_ROUTE_FRAGMENT) {
+								showPlanRouteFragment(result);
+							}
+						} else {
+							executeImportTask(new SaveGpxAsyncTask(app, this, result, name, onGpxImport, useImportDir));
+						}
 					}
 				} else {
 					showNeededScreen(onGpxImport, result);
@@ -445,34 +451,32 @@ public class ImportHelper {
 					gpxImportCompleteListener.onImportComplete(true);
 				}
 			}
-		} else {
-			if (AndroidUtils.isActivityNotDestroyed(activity)) {
-				new AlertDialog.Builder(activity)
-						.setTitle(R.string.shared_string_import2osmand)
-						.setMessage(R.string.import_gpx_failed_descr)
-						.setNeutralButton(R.string.shared_string_permissions, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-								intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-								Uri uri = Uri.fromParts("package", app.getPackageName(), null);
-								intent.setData(uri);
-								app.startActivity(intent);
-								if (gpxImportCompleteListener != null) {
-									gpxImportCompleteListener.onImportComplete(false);
-								}
+		} else if (AndroidUtils.isActivityNotDestroyed(activity)) {
+			new AlertDialog.Builder(activity)
+					.setTitle(R.string.shared_string_import2osmand)
+					.setMessage(R.string.import_gpx_failed_descr)
+					.setNeutralButton(R.string.shared_string_permissions, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+							intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+							Uri uri = Uri.fromParts("package", app.getPackageName(), null);
+							intent.setData(uri);
+							app.startActivity(intent);
+							if (gpxImportCompleteListener != null) {
+								gpxImportCompleteListener.onImportComplete(false);
 							}
-						})
-						.setNegativeButton(R.string.shared_string_cancel, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								if (gpxImportCompleteListener != null) {
-									gpxImportCompleteListener.onImportComplete(false);
-								}
+						}
+					})
+					.setNegativeButton(R.string.shared_string_cancel, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							if (gpxImportCompleteListener != null) {
+								gpxImportCompleteListener.onImportComplete(false);
 							}
-						})
-						.show();
-			}
+						}
+					})
+					.show();
 		}
 		if (forceImportFavourites) {
 			Intent newIntent = new Intent(activity, app.getAppCustomization().getFavoritesActivity());

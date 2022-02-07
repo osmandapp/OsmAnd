@@ -491,6 +491,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
+	public void resetManualRotation() {
+		setRotate(0, true);
+	}
+
 	public void setRotate(float rotate, boolean force) {
 		float diff = MapUtils.unifyRotationDiff(rotate, getRotate());
 		if (Math.abs(diff) > 5 || force) { // check smallest rotation
