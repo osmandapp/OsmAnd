@@ -1382,9 +1382,10 @@ public class RouteResultPreparation {
 				//use keepRight and keepLeft turns when attached road doesn't have lanes
 				//or prev segment has more then 1 turn to the active lane
 				if (rs.keepRight) {
-					t = getTurnByCurrentTurns(rs.leftLanesInfo, rawLanes, TurnType.KR, leftSide);
+					
+					t = getTurnByCurrentTurns(rs.leftLanesInfo, rs.rightLanesInfo, rawLanes, TurnType.KR, leftSide);
 				} else if (rs.keepLeft ) {
-					t = getTurnByCurrentTurns(rs.rightLanesInfo, rawLanes, TurnType.KL, leftSide);
+					t = getTurnByCurrentTurns(rs.rightLanesInfo, rs.leftLanesInfo, rawLanes, TurnType.KL, leftSide);
 				}
 			}
 		} else {
@@ -1439,13 +1440,23 @@ public class RouteResultPreparation {
 		return t;
 	}
 
-	private TurnType getTurnByCurrentTurns(List<int[]> lanesInfo, int[] rawLanes, int keepTurnType, boolean leftSide) {
-		TIntHashSet followTurns = new TIntHashSet();
-		if (lanesInfo != null) {
-			for (int[] li : lanesInfo) {
+	private TurnType getTurnByCurrentTurns(List<int[]> nonVisitLanesInfo, List<int[]> nextLanesInfo, int[] rawLanes, int keepTurnType, boolean leftSide) {
+		TIntHashSet skippedTurns = new TIntHashSet();
+		if (nonVisitLanesInfo != null) {
+			for (int[] li : nonVisitLanesInfo) {
 				if (li != null) {
 					for (int i : li) {
-						TurnType.collectTurnTypes(i, followTurns);
+						TurnType.collectTurnTypes(i, skippedTurns);
+					}
+				}
+			}
+		}
+		TIntHashSet nextTurns = new TIntHashSet();
+		if (nextLanesInfo != null) {
+			for (int[] li : nextLanesInfo) {
+				if (li != null) {
+					for (int i : li) {
+						TurnType.collectTurnTypes(i, nextTurns);
 					}
 				}
 			}
@@ -1454,8 +1465,9 @@ public class RouteResultPreparation {
 		for (int ln : rawLanes) {
 			TurnType.collectTurnTypes(ln, currentTurns);
 		}
-		currentTurns.removeAll(followTurns);
-		if (currentTurns.size() == 1) {
+		currentTurns.removeAll(skippedTurns);
+		
+		if (currentTurns.size() == 1 && nextTurns.size() <= 1) {
 			return TurnType.valueOf(currentTurns.iterator().next(), leftSide);
 		}
 		return TurnType.valueOf(keepTurnType, leftSide);
