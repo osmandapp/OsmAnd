@@ -268,7 +268,7 @@ public class MapTileLayer extends BaseMapLayer {
 		}
 	}
 
-	private void updateAlpha() {
+	private void updateLayerProviderAlpha() {
 		if (view != null) {
 			int alpha = this.getAlpha();
 
@@ -309,7 +309,7 @@ public class MapTileLayer extends BaseMapLayer {
 			}
 
 			if (needUpdateAlpha) {
-				updateAlpha();
+				updateLayerProviderAlpha();
 				needUpdateAlpha = false;
 			}
 		} else {

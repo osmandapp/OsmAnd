@@ -105,11 +105,11 @@ public class MapVectorLayer extends BaseMapLayer {
 	private void resetLayerProvider() {
 		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 		if (mapContext != null) {
-			mapContext.resetObfLayout();
+			mapContext.resetRasterAndSymbolsProvider();
 		}
 	}
 
-	private void updateAlpha() {
+	private void updateLayerProviderAlpha() {
 		if (view != null) {
 			int alpha = this.getAlpha();
 
@@ -149,7 +149,7 @@ public class MapVectorLayer extends BaseMapLayer {
 			}
 
 			if (needUpdateAlpha) {
-				updateAlpha();
+				updateLayerProviderAlpha();
 				needUpdateAlpha = false;
 			}
 

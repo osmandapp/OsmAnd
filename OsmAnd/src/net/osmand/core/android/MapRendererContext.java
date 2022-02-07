@@ -212,7 +212,7 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 		updateObfMapSymbolsProvider(mapPrimitivesProvider);
 	}
 
-	public void resetObfLayout() {
+	public void resetRasterAndSymbolsProvider() {
 		if (mapRendererView != null) {
 			mapRendererView.resetMapLayerProvider(OBF_RASTER_LAYER);
 		}
