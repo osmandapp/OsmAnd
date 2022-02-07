@@ -1454,6 +1454,7 @@ public class RouteResultPreparation {
 		for (int ln : rawLanes) {
 			TurnType.collectTurnTypes(ln, currentTurns);
 		}
+		// Here we detect single case when turn lane continues on 1 road / single sign and all other lane turns continue on the other side roads  
 		if (currentTurns.containsAll(otherSideTurns)) {
 			currentTurns.removeAll(otherSideTurns);
 			if (currentTurns.size() == 1) {
