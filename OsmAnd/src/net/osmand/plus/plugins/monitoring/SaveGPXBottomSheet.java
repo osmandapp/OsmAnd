@@ -11,6 +11,13 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -21,6 +28,7 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
@@ -33,13 +41,6 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
 import static net.osmand.plus.utils.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
 
 public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
@@ -51,6 +52,7 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 	private static final String KEY_FILE_NAME = "file_name";
 
 	private boolean openTrack = false;
+	private boolean showOnMap = false;
 	private File savedGpxFile;
 	private String initialGpxName = "";
 	private String newGpxName = "";
@@ -123,9 +125,10 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 		});
 
 		SwitchCompat showOnMapButton = mainView.findViewById(R.id.btn_show_on_map);
-		showOnMapButton.setChecked(app.getSettings().SHOW_SAVED_TRACK_REMEMBER.get());
-		showOnMapButton.setOnCheckedChangeListener((buttonView, isChecked) ->
-				app.getSettings().SHOW_SAVED_TRACK_REMEMBER.set(isChecked));
+		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
+		showOnMap = gpxSelectionHelper.getSelectedCurrentRecordingTrack() != null;
+		showOnMapButton.setChecked(showOnMap);
+		showOnMapButton.setOnCheckedChangeListener((buttonView, isChecked) -> showOnMap = !showOnMap);
 
 		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 				.setCustomView(mainView)
@@ -172,8 +175,7 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 		super.onDismiss(dialog);
 		FragmentActivity activity = getActivity();
 		if (savedGpxFile != null && activity != null) {
-			boolean showTrack = requiredMyApplication().getSettings().SHOW_SAVED_TRACK_REMEMBER.get();
-			if (showTrack) {
+			if (showOnMap) {
 				showOnMap(savedGpxFile, !openTrack);
 			}
 			if (openTrack) {
