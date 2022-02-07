@@ -4527,8 +4527,8 @@
     <string name="shared_string_reading_file">A ler o ficheiro…</string>
     <string name="all_groups">Todos os grupos</string>
     <string name="list_of_groups">Lista de grupos</string>
-    <string name="points_selection_descr">Quer mesmo fechar\? Irá perder todas as alterações.</string>
-    <string name="exit_import_descr">Quer mesmo sair sem guardar\? Irá perder todas as alterações.</string>
+    <string name="points_selection_descr">Fechar e perder todas as alterações\?</string>
+    <string name="exit_import_descr">Sair sem guardar nenhuma alteração\?</string>
     <string name="exit_import">Sair\?</string>
     <string name="import_tracks">Importar trilhos</string>
     <string name="import_tracks_descr">%1$s contém %2$s trilhos separados. Escolha os trilhos a importar.</string>
