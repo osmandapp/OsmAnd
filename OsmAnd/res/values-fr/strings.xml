@@ -4492,7 +4492,7 @@
     <string name="navigate_point_format_swiss_grid_plus">Grille suisse (CH1903+)</string>
     <string name="navigate_point_format_swiss_grid">Grille suisse (CH1903)</string>
     <string name="predefined_waypoint_appearance_description">Appuyer sur cette action enregistrera automatiquement le point de passage avec les paramètres prédéfinis.</string>
-    <string name="always_ask_waypoint_appearance_description">Appuyer sur cette action ouvrira l’écran « Ajouter un point de passage » où vous pourrez définir son nom et son apparence.</string>
+    <string name="always_ask_waypoint_appearance_description">Appuyer sur cette action ouvrira l’écran \"Ajouter un point de passage\" dans lequel vous pourrez définir son nom et son apparence.</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icônes à zoom faible</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Représentation schématique des icônes à zoom faible</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Ne pas masquer les tunnels sur voie navigable</string>
@@ -4507,19 +4507,19 @@
     <string name="rendering_attr_seabedDetail_description">Informations textuelles supplémentaires sur la nature des fonds marins</string>
     <string name="rendering_attr_seabedDetail_name">Détails des fonds marins</string>
     <string name="rendering_value_all_name">Tout</string>
-    <string name="save_track_to_gpx_descrp">Démarre l\'enregistrement de la trace avec la navigation. Une fois la navigation terminée, la trace sera automatiquement enregistrée.</string>
+    <string name="save_track_to_gpx_descrp">Enregistre automatiquement la trace lors de la navigation.</string>
     <string name="gpx_no_routes_title">Il n\'y a aucun itinéraire</string>
-    <string name="gpx_no_routes_descr">Vous pouvez utiliser l’outil « %1$s » pour ajouter un itinéraire dans le fichier.</string>
+    <string name="gpx_no_routes_descr">Vous pouvez utiliser l’outil « %1$s » pour enregistrer l\'itinéraire dans un fichier.</string>
     <string name="quick_action_add_route_descr">Bouton, au milieu de l\'écran, pour démarrer un itinéraire.</string>
-    <string name="please_provide_group_name_message">Veuillez indiquer un nom pour le groupe.</string>
+    <string name="please_provide_group_name_message">Veuillez saisir le nom du groupe.</string>
     <string name="selected_waypoints_descr">Les points sélectionnés seront ajoutés à la trace \"%1$s\".</string>
     <string name="shared_string_reading_file">Lecture du fichier…</string>
     <string name="all_groups">Tous les groupes</string>
     <string name="list_of_groups">Liste des groupes</string>
-    <string name="points_selection_descr">Êtes-vous certains de vouloir fermer \? Toutes les modifications seront perdues.</string>
-    <string name="exit_import_descr">Êtes-vous certains de vouloir quitter \? Toutes les modifications seront perdues.</string>
-    <string name="exit_import">Quitter l\'import \?</string>
+    <string name="points_selection_descr">Fermer \? (vos modifications seront perdues)</string>
+    <string name="exit_import_descr">Quitter \? (vos modifications ne seront pas enregistrées)</string>
+    <string name="exit_import">Quitter \?</string>
     <string name="import_tracks">Importer des traces</string>
-    <string name="import_tracks_descr">%1$s contient %2$s traces. Sélectionnez les traces que vous souhaitez importer.</string>
+    <string name="import_tracks_descr">%1$s contient %2$s traces. Sélectionnez les traces à importer.</string>
     <string name="select_suggested_points">Sélectionner les points suggérés</string>
 </resources>
