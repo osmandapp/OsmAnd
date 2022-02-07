@@ -4319,7 +4319,7 @@
 \n</string>
     <string name="no_items_of_type_message">Du har ikke ingen elementer af denne type</string>
     <string name="routeInfo_tracktype_description">Farvelæg ruten eller sporlinjen i henhold overfladesammensætning. Anvendes typisk, når vejnettet er overvejende ikke-asfalteret.</string>
-    <string name="routeInfo_winter_ice_road_description">Farvelæg ruten eller sporlinjen i henhold til dens vintervejsklassificering.</string>
+    <string name="routeInfo_winter_ice_road_description">Farvelæg ruten eller sporlinjen efter dens vintervejklassificering.</string>
     <string name="routeInfo_smoothness_description">Klassificering af vej- og gangstiers fremkommelighed for hjulkøretøjer, navnligt med hensyn til overfladens regelmæssighed/fladhed.</string>
     <string name="routeInfo_surface_description">Giv oplysninger om veje/gangstiers fysiske overflade.</string>
     <string name="routeInfo_roadClass_description">Farvelæg ruten eller sporlinjen i henhold til vejklassificering.</string>

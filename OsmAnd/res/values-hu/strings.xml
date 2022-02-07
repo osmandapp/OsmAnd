@@ -4508,4 +4508,16 @@
     <string name="save_track_to_gpx_descrp">Navigáció közben automatikusan elindítja a nyomvonalrögzítést. Amikor befejeződik, a nyomvonal automatikusan elmentődik.</string>
     <string name="gpx_no_routes_title">Nincs útvonal</string>
     <string name="gpx_no_routes_descr">A(z) „%1$s” eszközzel útvonalat adhat hozzá a fájlhoz.</string>
+    <string name="import_tracks">Nyomvonalak importálása</string>
+    <string name="select_suggested_points">Javasolt pontok kijelölése</string>
+    <string name="please_provide_group_name_message">Kérjük, adjon nevet a csoportnak.</string>
+    <string name="selected_waypoints_descr">A kijelölt útpontok hozzáadódnak a következő nyomvonalhoz: %1$s</string>
+    <string name="shared_string_reading_file">Fájl olvasása…</string>
+    <string name="all_groups">Minden csoport</string>
+    <string name="list_of_groups">Csoportok listája</string>
+    <string name="points_selection_descr">Biztosan be akarja zárni\? Minden változtatás el fog veszni.</string>
+    <string name="exit_import_descr">Biztosan mentés nélkül akar kilépni\? Minden változtatás el fog veszni.</string>
+    <string name="exit_import">Kilép az importálásból\?</string>
+    <string name="import_tracks_descr">„%1$s” %2$s különálló nyomvonalat tartalmaz. Válassza ki, hogy melyeket szeretné importálni.</string>
+    <string name="quick_action_add_route_descr">Gomb, amellyel a képernyő közepéről lehet útvonalat indítani.</string>
 </resources>
