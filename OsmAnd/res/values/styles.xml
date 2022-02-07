@@ -266,6 +266,7 @@
         <item name="ic_action_android_auto_logo_colored">@drawable/ic_action_android_auto_colored</item>
         <item name="chip_ripple">@drawable/ripple_solid_light_18dp</item>
         <item name="chip_content_color">@color/preference_category_title</item>
+        <item name="appbar_and_list_background_color">@color/list_background_color_light</item>
     </style>
 
     <style name="ToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
@@ -581,6 +582,7 @@
         <item name="ic_action_android_auto_logo_colored">@drawable/ic_action_android_auto_colored_night</item>
         <item name="chip_ripple">@drawable/ripple_solid_dark_18dp</item>
         <item name="chip_content_color">@color/active_color_primary_dark</item>
+        <item name="appbar_and_list_background_color">@color/app_bar_color_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">
