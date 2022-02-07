@@ -1136,31 +1136,27 @@ public class RouteResultPreparation {
 			if (UNMATCHED_HIGHWAY_TYPE.equals(rr.getObject().getHighway())) {
 				bearingDist = RouteSegmentResult.DIST_BEARING_DETECT_UNMATCHED;
 			}
-
-			//get turn between the previous road and the starting of the current road
-			double turnStart = MapUtils.degreesDiff(prev.getBearingEnd(prev.getEndPointIndex(), Math.min(prev.getDistance(), bearingDist)),
+			double mpi = MapUtils.degreesDiff(prev.getBearingEnd(prev.getEndPointIndex(), Math.min(prev.getDistance(), bearingDist)), 
 					rr.getBearingBegin(rr.getStartPointIndex(), Math.min(rr.getDistance(), bearingDist)));
-			//get turn between the previous road and the end of the current road
-			double turnEnd = MapUtils.degreesDiff(prev.getBearingEnd(prev.getEndPointIndex(), Math.min(prev.getDistance(), bearingDist)),
-					rr.getBearingEnd(rr.getEndPointIndex(), Math.min(rr.getDistance(), bearingDist)));
-
-			//check https://www.openstreetmap.org/#map=19/43.54359/-79.59424
-			if (Math.abs(turnEnd) < Math.abs(turnStart)) turnStart = turnEnd;
-
-			if (turnStart >= TURN_DEGREE_MIN) {
-				if (turnStart < 120) {
+			if (mpi >= TURN_DEGREE_MIN) {
+				if (mpi < TURN_DEGREE_MIN) {
+					// Slight turn detection here causes many false positives where drivers would expect a "normal" TL. Best use limit-angle=TURN_DEGREE_MIN, this reduces TSL to the turn-lanes cases.
+					t = TurnType.valueOf(TurnType.TSLL, leftSide);
+				} else if (mpi < 120) {
 					t = TurnType.valueOf(TurnType.TL, leftSide);
-				} else if (turnStart < 150 || leftSide) {
+				} else if (mpi < 150 || leftSide) {
 					t = TurnType.valueOf(TurnType.TSHL, leftSide);
 				} else {
 					t = TurnType.valueOf(TurnType.TU, leftSide);
 				}
 				int[] lanes = getTurnLanesInfo(prev, t.getValue());
 				t.setLanes(lanes);
-			} else if (turnStart < -TURN_DEGREE_MIN) {
-				if (turnStart > -120) {
+			} else if (mpi < -TURN_DEGREE_MIN) {
+				if (mpi > -TURN_DEGREE_MIN) {
+					t = TurnType.valueOf(TurnType.TSLR, leftSide);
+				} else if (mpi > -120) {
 					t = TurnType.valueOf(TurnType.TR, leftSide);
-				} else if (turnStart > -150 || !leftSide) {
+				} else if (mpi > -150 || !leftSide) {
 					t = TurnType.valueOf(TurnType.TSHR, leftSide);
 				} else {
 					t = TurnType.valueOf(TurnType.TRU, leftSide);
@@ -1171,7 +1167,7 @@ public class RouteResultPreparation {
 				t = attachKeepLeftInfoAndLanes(leftSide, prev, rr);
 			}
 			if (t != null) {
-				t.setTurnAngle((float) - turnStart);
+				t.setTurnAngle((float) - mpi);
 			}
 		}
 		return t;
