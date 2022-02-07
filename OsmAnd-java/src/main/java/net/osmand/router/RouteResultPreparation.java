@@ -1382,10 +1382,9 @@ public class RouteResultPreparation {
 				//use keepRight and keepLeft turns when attached road doesn't have lanes
 				//or prev segment has more then 1 turn to the active lane
 				if (rs.keepRight) {
-					
-					t = getTurnByCurrentTurns(rs.leftLanesInfo, rs.rightLanesInfo, rawLanes, TurnType.KR, leftSide);
+					t = getTurnByCurrentTurns(rs.leftLanesInfo, currentSegm, rawLanes, TurnType.KR, leftSide);
 				} else if (rs.keepLeft ) {
-					t = getTurnByCurrentTurns(rs.rightLanesInfo, rs.leftLanesInfo, rawLanes, TurnType.KL, leftSide);
+					t = getTurnByCurrentTurns(rs.rightLanesInfo, currentSegm, rawLanes, TurnType.KL, leftSide);
 				}
 			}
 		} else {
@@ -1440,23 +1439,13 @@ public class RouteResultPreparation {
 		return t;
 	}
 
-	private TurnType getTurnByCurrentTurns(List<int[]> nonVisitLanesInfo, List<int[]> nextLanesInfo, int[] rawLanes, int keepTurnType, boolean leftSide) {
-		TIntHashSet skippedTurns = new TIntHashSet();
-		if (nonVisitLanesInfo != null) {
-			for (int[] li : nonVisitLanesInfo) {
+	private TurnType getTurnByCurrentTurns(List<int[]> otherSideLanesInfo, RouteSegmentResult currentSegm, int[] rawLanes, int keepTurnType, boolean leftSide) {
+		TIntHashSet otherSideTurns = new TIntHashSet();
+		if (otherSideLanesInfo != null) {
+			for (int[] li : otherSideLanesInfo) {
 				if (li != null) {
 					for (int i : li) {
-						TurnType.collectTurnTypes(i, skippedTurns);
-					}
-				}
-			}
-		}
-		TIntHashSet nextTurns = new TIntHashSet();
-		if (nextLanesInfo != null) {
-			for (int[] li : nextLanesInfo) {
-				if (li != null) {
-					for (int i : li) {
-						TurnType.collectTurnTypes(i, nextTurns);
+						TurnType.collectTurnTypes(i, otherSideTurns);
 					}
 				}
 			}
@@ -1465,11 +1454,14 @@ public class RouteResultPreparation {
 		for (int ln : rawLanes) {
 			TurnType.collectTurnTypes(ln, currentTurns);
 		}
-		currentTurns.removeAll(skippedTurns);
-		
-		if (currentTurns.size() == 1 && nextTurns.size() <= 1) {
-			return TurnType.valueOf(currentTurns.iterator().next(), leftSide);
+		if (currentTurns.containsAll(otherSideTurns)) {
+			currentTurns.removeAll(otherSideTurns);
+			if (currentTurns.size() == 1) {
+				return TurnType.valueOf(currentTurns.iterator().next(), leftSide);
+			}
 		}
+
+		
 		return TurnType.valueOf(keepTurnType, leftSide);
 	}
 
