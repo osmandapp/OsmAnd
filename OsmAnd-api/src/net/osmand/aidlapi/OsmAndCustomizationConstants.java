@@ -166,6 +166,8 @@ public interface OsmAndCustomizationConstants {
 	String NAVIGATION_LOCAL_ROUTING_GROUP_ID = NAVIGATION_OPTIONS_ID + "local_routing_group";
 	String NAVIGATION_LOCAL_ROUTING_ID = NAVIGATION_OPTIONS_ID + "local_routing";
 	String NAVIGATION_DIVIDER_ID = NAVIGATION_OPTIONS_ID + "divider";
+	String NAVIGATION_APP_MODES_OPTIONS_ID = NAVIGATION_OPTIONS_ID + "app_modes_options";
+	String NAVIGATION_ROUTE_DETAILS_OPTIONS_ID = NAVIGATION_OPTIONS_ID + "route_details_options";
 
 	//Dialogs IDs:
 	String FRAGMENT_ID = "fragment.";
@@ -176,4 +178,7 @@ public interface OsmAndCustomizationConstants {
 	String MAP_CONTEXT_MENU_ROWS = "context.menu.rows.";
 	String CONTEXT_MENU_LINKS_ID = MAP_CONTEXT_MENU_ROWS + "links";
 	String CONTEXT_MENU_PHONE_ID = MAP_CONTEXT_MENU_ROWS + "phone";
+	String CONTEXT_MENU_SEARCH_MORE_ID = MAP_CONTEXT_MENU_ROWS + "search_more";
+	String CONTEXT_MENU_SHOW_ON_MAP_ID = MAP_CONTEXT_MENU_ROWS + "show_on_map";
+	String CONTEXT_MENU_AVOID_ROADS_ID = MAP_CONTEXT_MENU_ROWS + "avoid_roads";
 }

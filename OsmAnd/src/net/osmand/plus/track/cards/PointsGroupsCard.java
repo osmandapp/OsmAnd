@@ -59,9 +59,9 @@ public class PointsGroupsCard extends MapBaseCard {
 		categoryAll.title = categoryAll.id;
 		items.add(categoryAll);
 
-		int iconSizePx = app.getResources().getDimensionPixelSize(R.dimen.poi_icon_size);
+		int iconSizePx = getDimen(R.dimen.poi_icon_size);
 		int iconColorId = ColorUtilities.getSecondaryIconColorId(nightMode);
-		int smallPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+		int smallPadding = getDimen(R.dimen.content_padding_small);
 
 		for (GpxDisplayGroup group : displayGroups) {
 			String categoryDisplayName = Algorithms.isEmpty(group.getName())

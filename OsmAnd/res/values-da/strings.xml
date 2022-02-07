@@ -3769,7 +3769,7 @@
     <string name="routing_engine_vehicle_type_racingbike">Racercykel</string>
     <string name="routing_engine_vehicle_type_truck">Lastbil</string>
     <string name="message_server_error">Server fejl: %1$s</string>
-    <string name="context_menu_edit_descr">Redigere beskrivelse</string>
+    <string name="context_menu_edit_descr">Rediger beskrivelse</string>
     <string name="upload_photo_completed">Send afsluttet</string>
     <string name="uploading_count">Sender %1$d af %2$d</string>
     <string name="uploaded_count">Sendt %1$d af %2$d</string>
@@ -4319,7 +4319,7 @@
 \n</string>
     <string name="no_items_of_type_message">Du har ikke ingen elementer af denne type</string>
     <string name="routeInfo_tracktype_description">Farvelæg ruten eller sporlinjen i henhold overfladesammensætning. Anvendes typisk, når vejnettet er overvejende ikke-asfalteret.</string>
-    <string name="routeInfo_winter_ice_road_description">Farvelæg ruten eller sporlinjen i henhold til dens vintervejsklassificering.</string>
+    <string name="routeInfo_winter_ice_road_description">Farvelæg ruten eller sporlinjen efter dens vintervejklassificering.</string>
     <string name="routeInfo_smoothness_description">Klassificering af vej- og gangstiers fremkommelighed for hjulkøretøjer, navnligt med hensyn til overfladens regelmæssighed/fladhed.</string>
     <string name="routeInfo_surface_description">Giv oplysninger om veje/gangstiers fysiske overflade.</string>
     <string name="routeInfo_roadClass_description">Farvelæg ruten eller sporlinjen i henhold til vejklassificering.</string>
@@ -4524,4 +4524,14 @@
     <string name="gpx_no_routes_descr">Du kan bruge værktøjet \"%1$s\" til at tilføje rute til fil.</string>
     <string name="quick_action_add_route_descr">En knap til at starte en rute fra midten af skærmen.</string>
     <string name="please_provide_group_name_message">Angiv venligst et navn for gruppen.</string>
+    <string name="selected_waypoints_descr">Valgte rutepunkter føjes til sporet \"%1$s\"</string>
+    <string name="shared_string_reading_file">Læser fil …</string>
+    <string name="all_groups">Alle grupper</string>
+    <string name="list_of_groups">Liste over grupper</string>
+    <string name="points_selection_descr">Er du sikker på, at du ønsker at lukke\? Du vil miste alle ændringer.</string>
+    <string name="exit_import_descr">Er du sikker på, at du vil afslutte uden at gemme\? Du vil miste alle ændringer.</string>
+    <string name="exit_import">Afslut import\?</string>
+    <string name="import_tracks">Importer spor</string>
+    <string name="import_tracks_descr">%1$s, indeholder %2$s separate spor. Vælg de spor, du ønsker at importere.</string>
+    <string name="select_suggested_points">Vælg foreslåede punkter</string>
 </resources>

@@ -313,7 +313,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					req.setStringFilter(rrs.PROPS.R_ADDITIONAL, additional);
 				}
 				if (req.searchRenderingAttribute("gpx")) {
-					RenderingContext rc = new OsmandRenderer.RenderingContext(view.getContext());
+					RenderingContext rc = new RenderingContext(view.getContext());
 					rc.setDensityValue((float) tileBox.getMapDensity());
 					cachedColor = req.getIntPropertyValue(rrs.PROPS.R_COLOR);
 					defaultTrackWidth = rc.getComplexValue(req, req.ALL.R_STROKE_WIDTH);

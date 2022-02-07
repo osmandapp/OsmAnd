@@ -158,6 +158,7 @@
 	    <attr name="chip_ripple" format="reference" />
 	    <attr name="chip_content_color" format="reference" />
 	    <attr name="inactive_text_color" format="reference" />
+	    <attr name="appbar_and_list_background_color" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">

@@ -29,7 +29,7 @@
     <string name="poi_emergency_phone">Nødtelefon</string>
     <string name="poi_fire_hydrant">Brannhydrant</string>
     <string name="poi_fire_extinguisher">Brannslokningsapparat</string>
-    <string name="poi_electricity_combined_charging">Ladestasjon</string>
+    <string name="poi_electricity_combined_charging">Ladestasjon;Ladestasjon for elektriske kjøretøy;Ladepunkt</string>
     <string name="poi_parking">Parkering</string>
     <string name="poi_public_transport_platform_bus">Bussholdeplass</string>
     <string name="poi_bus_stop">Bussholdeplass</string>
@@ -319,11 +319,11 @@
     <string name="poi_route_hiking_lwn_poi">Lokal vandrerute</string>
     <string name="poi_crossing_traffic_signals">Med trafikklys</string>
     <string name="poi_building">Bygning</string>
-    <string name="poi_car_wash_no">Nei</string>
+    <string name="poi_car_wash_no">Nei;Bilvask: nei</string>
     <string name="poi_highway_steps">Trapp</string>
     <string name="poi_square">Torg</string>
     <string name="poi_building_type_pyramid">Bygningstype: pyramide</string>
-    <string name="poi_car_wash_yes">Ja</string>
+    <string name="poi_car_wash_yes">Ja;Bilvask</string>
     <string name="poi_organic_yes">Ja;Økologisk</string>
     <string name="poi_organic_no">Nei</string>
     <string name="poi_organic_only">Bare;Bare økologisk</string>
@@ -857,9 +857,9 @@
     <string name="poi_attraction_carousel">Karusell</string>
     <string name="poi_attraction_maze">Labyrint</string>
     <string name="poi_apartment">Leilighet</string>
-    <string name="poi_wilderness_hut">Villmarkshytte</string>
-    <string name="poi_cabin">Hytte</string>
-    <string name="poi_hunting_lodge">Jakthytte</string>
+    <string name="poi_wilderness_hut">Villmarkshytte;Husly</string>
+    <string name="poi_cabin">Hytte;Husly</string>
+    <string name="poi_hunting_lodge">Jakthytte;Husly</string>
     <string name="poi_religion_jewish">Jødedom</string>
     <string name="poi_religion_muslim">Islam</string>
     <string name="poi_religion_buddhist">Buddhisme</string>
@@ -1271,7 +1271,7 @@
     <string name="poi_attraction_water_slide">Vannrutsjebane</string>
     <string name="poi_hostel">Vandrehjem</string>
     <string name="poi_motel">Motell</string>
-    <string name="poi_alpine_hut">Alpehytte</string>
+    <string name="poi_alpine_hut">Fjellhytte;Husly</string>
     <string name="poi_religion_sikh">Sikhisme</string>
     <string name="poi_religion_shinto">Shintōisme</string>
     <string name="poi_religion_jain">Jainisme</string>

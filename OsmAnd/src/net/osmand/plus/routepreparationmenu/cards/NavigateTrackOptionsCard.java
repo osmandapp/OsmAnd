@@ -144,11 +144,7 @@ public class NavigateTrackOptionsCard extends MapBaseCard {
 	private void applyParameter(View parameterView, LocalRoutingParameter parameter, CustomRadioButtonType buttonType, boolean isChecked) {
 		updateModeButtons(parameterView, buttonType);
 		app.getRoutingOptionsHelper().applyRoutingParameter(parameter, isChecked);
-
-		CardListener listener = getListener();
-		if (listener != null) {
-			listener.onCardPressed(NavigateTrackOptionsCard.this);
-		}
+		notifyCardPressed();
 	}
 
 	private void updateModeButtons(View customRadioButton, CustomRadioButtonType buttonType) {

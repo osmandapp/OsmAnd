@@ -4280,4 +4280,11 @@
     <string name="poi_blowhole">Gură de aer</string>
     <string name="poi_skate">Magazin de patine</string>
     <string name="poi_collector">Colector</string>
+    <string name="poi_hospice">Ospiciu</string>
+    <string name="poi_telecommunication">Telecomunicații</string>
+    <string name="poi_avalanche_transceiver">Detector de victime de avalanșă; AVD; emițător-receptor de avalanșă</string>
+    <string name="poi_avalanche_transceiver_training">Antrenament de emisie-recepție în avalanșă</string>
+    <string name="poi_avalanche_transceiver_checkpoint">Punct de control al emițătorului de avalanșă</string>
+    <string name="poi_access_permit">Autorizație necesară</string>
+    <string name="poi_parcel_locker">Dulap pentru colete</string>
 </resources>

@@ -806,16 +806,16 @@ public class MapControlsLayer extends OsmandMapLayer {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (routingHelper.isFollowingMode()) {
 			switchToRouteFollowingLayout();
-			if (settings.getApplicationMode() != routingHelper.getAppMode()) {
-				settings.setApplicationMode(routingHelper.getAppMode(), false);
-			}
+//			if (settings.getApplicationMode() != routingHelper.getAppMode()) {
+//				settings.setApplicationMode(routingHelper.getAppMode(), false);
+//			}
 		} else {
 			if (!app.getTargetPointsHelper().checkPointToNavigateShort()) {
 				mapRouteInfoMenu.show();
 			} else {
 				touchEvent = 0;
 				app.logEvent("start_navigation");
-				settings.setApplicationMode(routingHelper.getAppMode(), false);
+//				settings.setApplicationMode(routingHelper.getAppMode(), false);
 				app.getMapViewTrackingUtilities().backToLocationImpl(17, true);
 				settings.FOLLOW_THE_ROUTE.set(true);
 				routingHelper.setFollowingMode(true);

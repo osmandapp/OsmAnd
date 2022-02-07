@@ -1,5 +1,8 @@
 package net.osmand.plus;
 
+import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
+import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
+
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -648,7 +651,7 @@ public class OsmandApplication extends MultiDexApplication {
 		routingHelper.clearCurrentRoute(null, new ArrayList<LatLon>());
 		routingHelper.setRoutePlanningMode(false);
 		osmandSettings.LAST_ROUTING_APPLICATION_MODE = osmandSettings.APPLICATION_MODE.get();
-		osmandSettings.setApplicationMode(osmandSettings.DEFAULT_APPLICATION_MODE.get());
+		osmandSettings.setApplicationMode(valueOfStringKey(osmandSettings.LAST_USED_APPLICATION_MODE.get(), ApplicationMode.DEFAULT));
 		targetPointsHelper.removeAllWayPoints(false, false);
 	}
 

@@ -10,22 +10,22 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SwitchCompat;
-
 import net.osmand.data.LatLon;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.GeocodingLookupService.OnAddressLookupResult;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.editors.EditCategoryDialogFragment;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
-import net.osmand.plus.mapcontextmenu.editors.SelectCategoryDialogFragment;
-import net.osmand.plus.mapcontextmenu.editors.SelectFavoriteCategoryBottomSheet;
+import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet;
+import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
 import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.FragmentManager;
 
 public class FavoriteAction extends QuickAction {
 
@@ -172,54 +172,16 @@ public class FavoriteAction extends QuickAction {
 			getParams().put(KEY_CATEGORY_COLOR, "0");
 		}
 
-		categoryEdit.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(final View view) {
-
-				SelectFavoriteCategoryBottomSheet dialogFragment = SelectFavoriteCategoryBottomSheet.createInstance("", "");
-
-				dialogFragment.show(
-						mapActivity.getSupportFragmentManager(),
-						SelectCategoryDialogFragment.TAG);
-
-				dialogFragment.setSelectionListener(new SelectFavoriteCategoryBottomSheet.CategorySelectionListener() {
-					@Override
-					public void onCategorySelected(String category, int color) {
-
-						fillGroupParams(root, category, color);
-					}
-				});
-			}
+		categoryEdit.setOnClickListener(view -> {
+			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+			CategorySelectionListener listener = (category, color) -> fillGroupParams(root, category, color);
+			SelectPointsCategoryBottomSheet.showSelectFavoriteCategoryFragment(fragmentManager, listener, "");
 		});
 
-		SelectFavoriteCategoryBottomSheet dialogFragment = (SelectFavoriteCategoryBottomSheet)
-				mapActivity.getSupportFragmentManager().findFragmentByTag(SelectCategoryDialogFragment.TAG);
-
+		SelectPointsCategoryBottomSheet dialogFragment = (SelectPointsCategoryBottomSheet)
+				mapActivity.getSupportFragmentManager().findFragmentByTag(SelectPointsCategoryBottomSheet.TAG);
 		if (dialogFragment != null) {
-
-			dialogFragment.setSelectionListener(new SelectFavoriteCategoryBottomSheet.CategorySelectionListener() {
-				@Override
-				public void onCategorySelected(String category, int color) {
-
-					fillGroupParams(root, category, color);
-				}
-			});
-
-		} else {
-
-			EditCategoryDialogFragment dialog = (EditCategoryDialogFragment)
-					mapActivity.getSupportFragmentManager().findFragmentByTag(EditCategoryDialogFragment.TAG);
-
-			if (dialog != null) {
-
-				dialogFragment.setSelectionListener(new SelectFavoriteCategoryBottomSheet.CategorySelectionListener() {
-					@Override
-					public void onCategorySelected(String category, int color) {
-
-						fillGroupParams(root, category, color);
-					}
-				});
-			}
+			dialogFragment.setSelectionListener((category, color) -> fillGroupParams(root, category, color));
 		}
 	}
 
