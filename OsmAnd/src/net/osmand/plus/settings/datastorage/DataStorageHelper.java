@@ -315,6 +315,7 @@ public class DataStorageHelper {
 		DataStorageHelper dataStorageHelper = new DataStorageHelper(app);
 		return SHARED_STORAGE.equals(dataStorageHelper.getCurrentStorage().getKey());
 	}
+
 	public static boolean saveFilesLocation(@NonNull OsmandApplication app, @NonNull FragmentActivity activity, int type, @NonNull File selectedFile) {
 		boolean writable = FileUtils.isWritable(selectedFile);
 		if (writable) {
@@ -326,7 +327,7 @@ public class DataStorageHelper {
 		return writable;
 	}
 
-	private static void reloadData(@NonNull OsmandApplication app, @NonNull FragmentActivity activity) {
+	public static void reloadData(@NonNull OsmandApplication app, @NonNull FragmentActivity activity) {
 		final WeakReference<FragmentActivity> activityRef = new WeakReference<>((FragmentActivity) activity);
 		app.getResourceManager().reloadIndexesAsync(IProgress.EMPTY_PROGRESS, new ReloadIndexesListener() {
 

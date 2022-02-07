@@ -654,7 +654,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 			if (activity != null) {
 				Bundle args = new Bundle();
 				args.putBoolean(FIRST_USAGE, true);
-				BaseSettingsFragment.showInstance(getActivity(), SettingsScreenType.DATA_STORAGE, null, args, FirstUsageWizardFragment.this);
+				BaseSettingsFragment.showInstance(activity, SettingsScreenType.DATA_STORAGE, null, args, FirstUsageWizardFragment.this);
 			}
 		}
 	}
@@ -718,7 +718,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 						if (activity != null) {
 							Bundle args = new Bundle();
 							args.putBoolean(FIRST_USAGE, true);
-							BaseSettingsFragment.showInstance(getActivity(), SettingsScreenType.DATA_STORAGE, null, args, FirstUsageWizardFragment.this);
+							BaseSettingsFragment.showInstance(activity, SettingsScreenType.DATA_STORAGE, null, args, FirstUsageWizardFragment.this);
 						}
 					}
 				});

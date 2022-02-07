@@ -15,7 +15,6 @@ import static net.osmand.plus.settings.datastorage.SharedStorageWarningFragment.
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
@@ -39,16 +38,13 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.IProgress;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.resources.ResourceManager.ReloadIndexesListener;
 import net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet;
 import net.osmand.plus.settings.datastorage.item.MemoryItem;
@@ -65,7 +61,6 @@ import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 public class DataStorageFragment extends BaseSettingsFragment implements UpdateMemoryInfoUIAdapter {
 
@@ -74,7 +69,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 
 	private final static String CHANGE_DIRECTORY_BUTTON = "change_directory";
 	private final static String OSMAND_USAGE = "osmand_usage";
-	public static final String TAG = "DataStorageFragment";
+	public static String TAG;
 
 	private OsmandApplication app;
 	private ArrayList<MemoryItem> memoryItems;
@@ -94,6 +89,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		TAG = this.getTag();
 		app = getMyApplication();
 		activity = getMyActivity();
 		Bundle args = getArguments();
@@ -517,11 +513,13 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 				return;
 			} else {
 				app.setExternalStorageDirectory(type, newDirectory);
-				reloadData();
-				if (silentRestart) {
-					RestartActivity.doRestartSilent(activity);
-				} else {
-					RestartActivity.doRestart(activity);
+				DataStorageHelper.reloadData(app, activity);
+				if (!firstUsage) {
+					if (silentRestart) {
+						RestartActivity.doRestartSilent(activity);
+					} else {
+						RestartActivity.doRestart(activity);
+					}
 				}
 			}
 		} else {
@@ -538,30 +536,6 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 		if (!storageMigration || !firstUsage) {
 			calculateMemoryTask = dataStorageHelper.calculateMemoryUsedInfo(this);
 		}
-	}
-
-	protected void reloadData() {
-		app.getResourceManager().reloadIndexesAsync(IProgress.EMPTY_PROGRESS, new ReloadIndexesListener() {
-
-			private ProgressImplementation progress;
-
-			@Override
-			public void reloadIndexesStarted() {
-				progress = ProgressImplementation.createProgressDialog(activity, getString(R.string.loading_data),
-						getString(R.string.loading_data), ProgressDialog.STYLE_HORIZONTAL);
-			}
-
-			@Override
-			public void reloadIndexesFinished(List<String> warnings) {
-				try {
-					if (progress.getDialog().isShowing()) {
-						progress.getDialog().dismiss();
-					}
-				} catch (Exception e) {
-					//ignored
-				}
-			}
-		});
 	}
 
 	@Override
