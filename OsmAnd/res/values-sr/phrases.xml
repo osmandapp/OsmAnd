@@ -4282,4 +4282,11 @@
     <string name="poi_skate">Клизачка радња</string>
     <string name="poi_books_adults">Одрасли</string>
     <string name="poi_collector">Колектор</string>
+    <string name="poi_hospice">Уточиште</string>
+    <string name="poi_telecommunication">Телекомуникације</string>
+    <string name="poi_avalanche_transceiver">Детектор жртава лавине;AVD;Примопредајник лавине</string>
+    <string name="poi_avalanche_transceiver_checkpoint">Контролни пункт примопредајника лавине</string>
+    <string name="poi_avalanche_transceiver_training">Обука за примопредајник лавине</string>
+    <string name="poi_access_permit">Потребна је дозвола</string>
+    <string name="poi_parcel_locker">Ормарић за пакете</string>
 </resources>

@@ -3968,4 +3968,9 @@
     <string name="poi_mobile_money_agent">Mobilpengeagent</string>
     <string name="poi_cliff_diving">Klippeudspring</string>
     <string name="poi_ultralight_aviation">Ultralet luftfart</string>
+    <string name="poi_post_office_type">Type</string>
+    <string name="poi_computer_repair">Computerreparation</string>
+    <string name="poi_computer_parts">Dele til computere</string>
+    <string name="poi_computer_sales">Salg af computere</string>
+    <string name="poi_museum_type">Museum-emne</string>
 </resources>

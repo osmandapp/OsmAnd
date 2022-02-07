@@ -4518,4 +4518,14 @@
     <string name="save_track_to_gpx_descrp">Navigasyon devam ederken yol kaydını otomatik olarak başlat. Bittiğinde, izlenen yol otomatik olarak kaydedilecektir.</string>
     <string name="quick_action_add_route_descr">Ekranın ortasından bir güzergah başlatmak için bir düğme.</string>
     <string name="please_provide_group_name_message">Lütfen grup için bir ad girin.</string>
+    <string name="selected_waypoints_descr">Seçilen ara noktalar \"%1$s\" yoluna eklenecektir</string>
+    <string name="shared_string_reading_file">Dosya okunuyor…</string>
+    <string name="all_groups">Tüm gruplar</string>
+    <string name="list_of_groups">Grup listesi</string>
+    <string name="points_selection_descr">Kapatmak istediğinizden emin misiniz\? Tüm değişiklikleri kaybedeceksiniz.</string>
+    <string name="exit_import">İçe aktarmadan çıkılsın mı\?</string>
+    <string name="import_tracks">Yolları içe aktar</string>
+    <string name="import_tracks_descr">%1$s, %2$s ayrı yol içerir. İçe aktarmak istediğiniz yolları seçin.</string>
+    <string name="select_suggested_points">Önerilen noktaları seç</string>
+    <string name="exit_import_descr">Kaydetmeden çıkmak istediğinizden emin misiniz\? Tüm değişiklikleri kaybedeceksiniz.</string>
 </resources>

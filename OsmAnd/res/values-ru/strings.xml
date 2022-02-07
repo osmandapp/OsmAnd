@@ -4349,7 +4349,7 @@
     <string name="upload_gpx_description_hint">Оставьте поле пустым, в качестве описания будут использованы названия треков. Введенное описание будет применено к каждому треку.</string>
     <string name="exit_pan_mode_descr">Нажмите «Выбрать», чтобы выйти из режима панорамирования</string>
     <string name="sample_wikivoyage">Викигид (образец)</string>
-    <string name="icon_group_nautical">Морские</string>
+    <string name="icon_group_nautical">Море</string>
     <string name="shared_storage_warning_title">Изменения в правилах доступа к хранилищу</string>
     <string name="purchases_feature_desc_android_auto">Выводит локальные карты и навигацию OsmAnd на экран вашего автомобиля и интегрируется с его элементами управления.</string>
     <string name="shared_app_storage_description">Общая память больше не доступна из-за изменения доступа к хранилищу в Android.</string>
@@ -4523,4 +4523,5 @@
     <string name="gpx_no_routes_descr">Для добавления маршрута в файл вы можете воспользоваться инструментом «%1$s».</string>
     <string name="please_provide_group_name_message">Укажите название группы.</string>
     <string name="quick_action_add_route_descr">Кнопка для начала построения маршрута из центра экрана.</string>
+    <string name="import_tracks_descr">%1$s содержит отдельные треки: %2$s шт. Выберите треки, которые вы хотите импортировать.</string>
 </resources>

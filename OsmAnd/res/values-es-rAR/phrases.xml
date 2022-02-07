@@ -4287,4 +4287,6 @@
     <string name="poi_avalanche_transceiver_training">Entrenamiento de transceptor de avalancha</string>
     <string name="poi_avalanche_transceiver_checkpoint">Punto de control del transceptor de avalancha</string>
     <string name="poi_avalanche_transceiver">Detector de víctimas de avalanchas; AVD;ARBA; Transceptor de avalanchas</string>
+    <string name="poi_parcel_locker">Casillero de paquetería</string>
+    <string name="poi_access_permit">Sólo con permiso</string>
 </resources>

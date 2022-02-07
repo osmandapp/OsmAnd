@@ -4512,4 +4512,14 @@
     <string name="gpx_no_routes_descr">Vous pouvez utiliser l’outil « %1$s » pour ajouter un itinéraire dans le fichier.</string>
     <string name="quick_action_add_route_descr">Bouton, au milieu de l\'écran, pour démarrer un itinéraire.</string>
     <string name="please_provide_group_name_message">Veuillez indiquer un nom pour le groupe.</string>
+    <string name="selected_waypoints_descr">Les points sélectionnés seront ajoutés à la trace \"%1$s\".</string>
+    <string name="shared_string_reading_file">Lecture du fichier…</string>
+    <string name="all_groups">Tous les groupes</string>
+    <string name="list_of_groups">Liste des groupes</string>
+    <string name="points_selection_descr">Êtes-vous certains de vouloir fermer \? Toutes les modifications seront perdues.</string>
+    <string name="exit_import_descr">Êtes-vous certains de vouloir quitter \? Toutes les modifications seront perdues.</string>
+    <string name="exit_import">Quitter l\'import \?</string>
+    <string name="import_tracks">Importer des traces</string>
+    <string name="import_tracks_descr">%1$s contient %2$s traces. Sélectionnez les traces que vous souhaitez importer.</string>
+    <string name="select_suggested_points">Sélectionner les points suggérés</string>
 </resources>
