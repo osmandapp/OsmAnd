@@ -1439,25 +1439,32 @@ public class RouteResultPreparation {
 		return t;
 	}
 
-	private TurnType getTurnByCurrentTurns(List<int[]> lanesInfo, int[] rawLanes, int keepTurnType, boolean leftSide) {
-		TIntHashSet followTurns = new TIntHashSet();
-		if (lanesInfo != null) {
-			for (int[] li : lanesInfo) {
+	private TurnType getTurnByCurrentTurns(List<int[]> attachedLanes, int[] currentLanes, int keepTurnType, boolean leftSide) {
+		ArrayList<Integer> followTurns = new ArrayList<>();
+		ArrayList<Integer> currentTurns = new ArrayList<>();
+
+		//get turns by attached road
+		if (attachedLanes != null) {
+			for (int[] li : attachedLanes) {
 				if (li != null) {
 					for (int i : li) {
-						TurnType.collectTurnTypes(i, followTurns);
+						TurnType.collectTurnTypesToList(i, followTurns);
 					}
 				}
 			}
 		}
-		TIntHashSet currentTurns = new TIntHashSet();
-		for (int ln : rawLanes) {
-			TurnType.collectTurnTypes(ln, currentTurns);
+
+		//get turns by current road
+		for (int ln : currentLanes) {
+			TurnType.collectTurnTypesToList(ln, currentTurns);
 		}
+
+		//check current road has only one available lane
 		currentTurns.removeAll(followTurns);
 		if (currentTurns.size() == 1) {
 			return TurnType.valueOf(currentTurns.iterator().next(), leftSide);
 		}
+
 		return TurnType.valueOf(keepTurnType, leftSide);
 	}
 
@@ -1473,7 +1480,7 @@ public class RouteResultPreparation {
 			TIntHashSet set = new TIntHashSet();
 			if(li != null) {
 				for (int i : li) {
-					TurnType.collectTurnTypes(i, set);
+					TurnType.collectTurnTypesToSet(i, set);
 				}
 			}
 			increaseTurnRoads = Math.max(set.size() - 1, 0);

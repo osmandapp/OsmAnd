@@ -4,6 +4,8 @@ import net.osmand.util.Algorithms;
 
 import gnu.trove.set.hash.TIntHashSet;
 
+import java.util.ArrayList;
+
 public class TurnType {
 	public static final int C = 1;//"C"; // continue (go straight) //$NON-NLS-1$
 	public static final int TL = 2; // turn left //$NON-NLS-1$
@@ -436,7 +438,7 @@ public class TurnType {
 				|| TurnType.getTertiaryTurn(type) == turn;
 	}
 
-	public static void collectTurnTypes(int lane, TIntHashSet set) {
+	public static void collectTurnTypesToSet(int lane, TIntHashSet set) {
 		int pt = TurnType.getPrimaryTurn(lane);
 		if(pt != 0) {
 			set.add(pt);
@@ -449,6 +451,21 @@ public class TurnType {
 		if(pt != 0) {
 			set.add(pt);
 		}		
+	}
+
+	public static void collectTurnTypesToList(int lane, ArrayList<Integer> list) {
+		int pt = TurnType.getPrimaryTurn(lane);
+		if(pt != 0) {
+			list.add(pt);
+		}
+		pt = TurnType.getSecondaryTurn(lane);
+		if(pt != 0) {
+			list.add(pt);
+		}
+		pt = TurnType.getTertiaryTurn(lane);
+		if(pt != 0) {
+			list.add(pt);
+		}
 	}
 	
 	public static int orderFromLeftToRight(int type) {
