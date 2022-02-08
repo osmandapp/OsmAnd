@@ -70,7 +70,7 @@ public class MapTextLayer extends OsmandMapLayer {
 		for (Map.Entry<OsmandMapLayer, Collection<?>> entry : textObjects.entrySet()) {
 			OsmandMapLayer l = entry.getKey();
 			MapTextProvider provider = (MapTextProvider) l;
-			if (!view.isLayerVisible(l) || !provider.isTextVisible()) {
+			if (!view.isLayerExists(l) || !provider.isTextVisible()) {
 				continue;
 			}
 

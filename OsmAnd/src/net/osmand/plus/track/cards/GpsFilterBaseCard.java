@@ -177,7 +177,7 @@ public abstract class GpsFilterBaseCard extends MapBaseCard {
 		actionButtonsContainer.removeAllViews();
 		for (BaseBottomSheetItem actionButton : actionButtonsItems) {
 			actionButton.inflate(mapActivity, actionButtonsContainer, nightMode);
-			int dp20 = view.getResources().getDimensionPixelSize(R.dimen.title_padding);
+			int dp20 = getDimen(R.dimen.title_padding);
 			AndroidUtils.setPadding(actionButton.getView(), dp20, 0, 0, 0);
 
 			boolean disableSaveAsCopy = !isSourceFileSaved()

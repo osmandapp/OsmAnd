@@ -20,7 +20,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 
 import java.util.List;
 
-public class UploadMultipleGPXBottomSheet extends MultipleSelectionBottomSheet {
+public class UploadMultipleGPXBottomSheet extends MultipleSelectionBottomSheet<GpxInfo> {
 
 	public static final String TAG = UploadMultipleGPXBottomSheet.class.getSimpleName();
 
@@ -30,14 +30,14 @@ public class UploadMultipleGPXBottomSheet extends MultipleSelectionBottomSheet {
 	}
 
 	@Override
-	protected void updateItemView(SelectableItem item, View view) {
+	protected void updateItemView(SelectableItem<GpxInfo> item, View view) {
 		super.updateItemView(item, view);
 
 		TextView time = view.findViewById(R.id.time);
 		TextView distance = view.findViewById(R.id.distance);
 		TextView pointsCount = view.findViewById(R.id.points_count);
 
-		GpxInfo info = (GpxInfo) item.getObject();
+		GpxInfo info = item.getObject();
 		GPXTrackAnalysis analysis = getGpxTrackAnalysis(info, app, null);
 		if (analysis != null) {
 			pointsCount.setText(String.valueOf(analysis.wptPoints));
@@ -55,8 +55,8 @@ public class UploadMultipleGPXBottomSheet extends MultipleSelectionBottomSheet {
 
 	private void updateSizeDescription() {
 		long size = 0;
-		for (SelectableItem item : selectedItems) {
-			size += ((GpxInfo) item.getObject()).getSize();
+		for (SelectableItem<GpxInfo> item : selectedItems) {
+			size += item.getObject().getSize();
 		}
 		String total = getString(R.string.shared_string_total);
 		titleDescription.setText(getString(R.string.ltr_or_rtl_combine_via_colon, total,
@@ -65,8 +65,8 @@ public class UploadMultipleGPXBottomSheet extends MultipleSelectionBottomSheet {
 
 	@Nullable
 	public static UploadMultipleGPXBottomSheet showInstance(@NonNull FragmentManager manager,
-	                                                        @NonNull List<SelectableItem> items,
-	                                                        @Nullable List<SelectableItem> selected) {
+	                                                        @NonNull List<SelectableItem<GpxInfo>> items,
+	                                                        @Nullable List<SelectableItem<GpxInfo>> selected) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			UploadMultipleGPXBottomSheet fragment = new UploadMultipleGPXBottomSheet();
 			fragment.setItems(items);

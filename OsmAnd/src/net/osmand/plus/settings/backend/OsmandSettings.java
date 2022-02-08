@@ -1403,18 +1403,6 @@ public class OsmandSettings {
 		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
 	}
 
-	public final CommonPreference<Boolean> SHOW_SAVED_TRACK_REMEMBER = new BooleanPreference(this, "show_saved_track_remember", false) {
-		@Override
-		public Boolean getDefaultValue() {
-			for (SelectedGpxFile selectedGpxFile : ctx.getSelectedGpxHelper().getSelectedGPXFiles()) {
-				if (!selectedGpxFile.isShowCurrentTrack()) {
-					return true;
-				}
-			}
-			return false;
-		}
-	}.makeGlobal().makeShared();
-
 	public static final Integer REC_DIRECTORY = 0;
 	public static final Integer MONTHLY_DIRECTORY = 1;
 //	public static final Integer DAILY_DIRECTORY = 2;

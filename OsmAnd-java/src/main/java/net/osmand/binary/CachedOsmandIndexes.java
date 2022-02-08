@@ -34,7 +34,8 @@ public class CachedOsmandIndexes {
 	private OsmAndStoredIndex storedIndex;
 	private OsmAndStoredIndex.Builder storedIndexBuilder;
 	private Log log = PlatformUtil.getLog(CachedOsmandIndexes.class);
-	private boolean hasChanged = true;
+	private boolean hasChanged = false;
+	public static final String INDEXES_DEFAULT_FILENAME = "indexes.cache";
 
 	public static final int VERSION = 2;
 

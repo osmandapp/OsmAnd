@@ -1713,7 +1713,7 @@
     <string name="navigation_item_description">Navigatie-instellingen.</string>
     <string name="planning_trip_item">Een reis plannen</string>
     <string name="faq_item">FAQ</string>
-    <string name="faq_item_description">Veel gestelde vragen</string>
+    <string name="faq_item_description">Veel gestelde vragen.</string>
     <string name="map_viewing_item">De kaart bekijken</string>
     <string name="search_on_the_map_item">Zoeken op de kaart</string>
     <string name="instalation_troubleshooting_item">Installeren en foutoplossen</string>
@@ -4219,7 +4219,7 @@
     <string name="ltr_or_rtl_combine_via_or">%1$s of %2$s</string>
     <string name="icon_group_nautical">Nautisch</string>
     <string name="backup_delete_types_descr">Verwijder alle gegevens waarvan de gegevens zijn verouderd van OsmAnd Cloud\?</string>
-    <string name="osmand_cloud_help_descr">Hulp nodig\? Neem gelieve contact met ons op via %1$s.</string>
+    <string name="osmand_cloud_help_descr">Hulp nodig\? Neem gelieve contact met ons op via %1$s</string>
     <string name="purchases_feature_desc_pro_widgets">Krijg toegang tot OsmAnd Pro functies zoals routekleuringen en meer.</string>
     <string name="backup_welcome_back_descr">Herstel jouw gegevens op dit apparaat gebruikmakend van bestaande back-ups of back-up je gegevens naar OsmAnd Cloud.</string>
     <string name="release_4_0">• Cloud back-ups

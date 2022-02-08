@@ -916,14 +916,14 @@
     <string name="poi_recycling_car_batteries">Autobatterien</string>
     <string name="poi_recycling_cars">Autos</string>
     <string name="poi_recycling_bicycles">Fahrräder</string>
-    <string name="poi_capital">ja</string>
+    <string name="poi_capital">Ja;Hauptstadt</string>
     <string name="poi_shower">Dusche</string>
     <string name="poi_email">E-Mail</string>
     <string name="poi_fax">Fax</string>
     <string name="facebook">Facebook</string>
     <string name="poi_mobile">Handy</string>
     <string name="poi_fee_no">nein</string>
-    <string name="poi_drinking_water_yes">ja</string>
+    <string name="poi_drinking_water_yes">Ja;Trinkwasser</string>
     <string name="poi_drinking_water_no">nein</string>
     <string name="poi_supervised_yes">Beaufsichtigt</string>
     <string name="poi_supervised_no">Ohne Aufsicht</string>
@@ -1014,7 +1014,7 @@
     <string name="poi_height">Höhe</string>
     <string name="poi_ele">Meereshöhe</string>
     <string name="poi_start_date">Anfangsdatum</string>
-    <string name="poi_wheelchair_yes">ja</string>
+    <string name="poi_wheelchair_yes">Ja;Rollstuhl</string>
     <string name="poi_wheelchair_no">nein</string>
     <string name="poi_wheelchair_limited">eingeschränkt</string>
     <string name="poi_wholesale">Großhandel</string>
@@ -4220,7 +4220,7 @@
     <string name="poi_computer_repair_no">Computerreparatur: nein</string>
     <string name="poi_computer_parts_yes">Ja</string>
     <string name="poi_computer_parts_no">Computerteile: nein</string>
-    <string name="poi_computer_sales_used">Gebraucht</string>
+    <string name="poi_computer_sales_used">Gebraucht;Gebrauchte Computer</string>
     <string name="poi_computer_repair_yes">Ja</string>
     <string name="poi_museum_type">Thema des Museums</string>
     <string name="poi_post_office_type">Art</string>

@@ -106,6 +106,12 @@ public class WptPtEditor extends PointEditor {
 		return wpt;
 	}
 
+	@Nullable
+	@Override
+	public String getPreselectedIconName() {
+		return isNew && wpt != null ? wpt.getIconName() : null;
+	}
+
 	@Override
 	public String getFragmentTag() {
 		return TAG;

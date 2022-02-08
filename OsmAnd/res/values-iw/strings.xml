@@ -4045,7 +4045,7 @@
     <string name="lost_data_warning">כל הנתונים שלא נשמרו יאבדו.</string>
     <string name="show_start_dialog">להציג חלונית פתיחה</string>
     <string name="trip_recording_show_start_dialog_setting">אם האפשרות מושבתת, ההקלטה תתחיל מיד לאחר הנגיעה בווידג׳ט או בפריט שבתפריט תוך דילוג על חלונית האישור.</string>
-    <string name="customize_route_line">להתאים קו מסלול אישית</string>
+    <string name="customize_route_line">התאמת קו המסלול</string>
     <string name="shared_string_route_line">קו מסלול</string>
     <string name="specify_color_for_map_mode">לציין צבע למצב מפה %1$s.</string>
     <string name="release_4_0_beta">• נוספה אפשרות להוריד קווי מתאר ברגל
@@ -4507,7 +4507,7 @@
     <string name="rendering_value_omit_name">להשמיט</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">תגיות „לתיקון”</string>
-    <string name="gpx_no_routes_descr">אפשר להשתמש בכלי „%1$s” כדי להוסיף מסלול לקובץ.</string>
+    <string name="gpx_no_routes_descr">אפשר להשתמש בכלי „%1$s” כדי לשמור את המסלול כקובץ.</string>
     <string name="gpx_no_routes_title">אין מסלולים</string>
     <string name="save_track_to_gpx_descrp">להתחיל את הקלטת המסלול אוטומטית כשיש ניווט פעיל. כשהניווט מסתיים, המסלול יישמר אוטומטית.</string>
     <string name="track_file_description">נגיעה בפעולה זו תציג חלונית לבחירה בין המסלולים הזמינים.</string>
@@ -4516,4 +4516,16 @@
     <string name="purchases_feature_desc_terrain">קווי מתאר של פני שטח, מפת הצללות מלאה עם הצללות כהות ומפות שיפועים עם צבעים להצגת אזורי הפסגה והשפל.</string>
     <string name="approximate_route_description">לצרף את המסלול לדרכים במפה כדי לקבל את כל הפניות ונתונים נוספים כגון, חלקלקות, סוגי הדרכים וכן הלאה.</string>
     <string name="routeInfo_tracktype_description">לצבוע את הנתיב או קו המסלול לפי הרכב המשטח. בדרך כלל תקף כאשר רשת הכבישים אינה סלולה ברובה.</string>
+    <string name="please_provide_group_name_message">נא לספק שם לקבוצה.</string>
+    <string name="navigate_point_format_swiss_grid_plus">הרשת השווייצרית (CH1903+‎)</string>
+    <string name="navigate_point_format_swiss_grid">הרשת השווייצרית (CH1903)</string>
+    <string name="select_suggested_points">בחירת נקודות מוצעות</string>
+    <string name="selected_waypoints_descr">נקודות הדרך יתווספו למסלול „%1$s”</string>
+    <string name="shared_string_reading_file">הקובץ נקרא…</string>
+    <string name="all_groups">כל הקבוצות</string>
+    <string name="list_of_groups">רשימה של קבוצות</string>
+    <string name="points_selection_descr">לסגור ולאבד את כל השינויים\?</string>
+    <string name="exit_import_descr">לסגור בלי לשמור את השינויים\?</string>
+    <string name="exit_import">לצאת\?</string>
+    <string name="import_tracks">ייבוא מסלולים</string>
 </resources>

@@ -243,8 +243,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 			setDialogType(nextType);
 			updateContent();
 		});
-		UiUtilities.setupDialogButton(nightMode, buttonAuthorize, DialogButtonType.SECONDARY, nextType.titleId);
-		AndroidUtils.setBackground(app, buttonAuthorize, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
+		UiUtilities.setupDialogButton(nightMode, buttonAuthorize, DialogButtonType.SECONDARY_ACTIVE, nextType.titleId);
 
 		buttonChoosePlan.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
@@ -296,8 +295,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 				AndroidUiHelper.updateVisibility(codeMissingDescription, true);
 			}
 		});
-		UiUtilities.setupDialogButton(nightMode, resendButton, DialogButtonType.SECONDARY, R.string.resend_verification_code);
-		AndroidUtils.setBackground(app, resendButton, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
+		UiUtilities.setupDialogButton(nightMode, resendButton, DialogButtonType.SECONDARY_ACTIVE, R.string.resend_verification_code);
 
 		buttonContinue.setEnabled(!Algorithms.isEmpty(editText.getText()));
 		buttonContinue.setOnClickListener(v -> {

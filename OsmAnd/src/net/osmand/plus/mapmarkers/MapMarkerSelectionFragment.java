@@ -155,8 +155,4 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 			return null;
 		}
 	}
-
-	public OsmandApplication getMyApplication() {
-		return (OsmandApplication) getContext().getApplicationContext();
-	}
 }

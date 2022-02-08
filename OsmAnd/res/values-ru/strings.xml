@@ -4349,7 +4349,7 @@
     <string name="upload_gpx_description_hint">Оставьте поле пустым, в качестве описания будут использованы названия треков. Введенное описание будет применено к каждому треку.</string>
     <string name="exit_pan_mode_descr">Нажмите «Выбрать», чтобы выйти из режима панорамирования</string>
     <string name="sample_wikivoyage">Викигид (образец)</string>
-    <string name="icon_group_nautical">Морские</string>
+    <string name="icon_group_nautical">Море</string>
     <string name="shared_storage_warning_title">Изменения в правилах доступа к хранилищу</string>
     <string name="purchases_feature_desc_android_auto">Выводит локальные карты и навигацию OsmAnd на экран вашего автомобиля и интегрируется с его элементами управления.</string>
     <string name="shared_app_storage_description">Общая память больше не доступна из-за изменения доступа к хранилищу в Android.</string>
@@ -4518,7 +4518,18 @@
     <string name="rendering_attr_seabedDetail_name">Детали морского дна</string>
     <string name="rendering_value_all_name">Все</string>
     <string name="rendering_value_omit_name">Пропустить</string>
-    <string name="save_track_to_gpx_descrp">Запускать запись трека во время навигации. По завершению трек будет сохранен автоматически.</string>
+    <string name="save_track_to_gpx_descrp">Автозапуск записи трека во время навигации и автосохранение по окончании.</string>
     <string name="gpx_no_routes_title">Нет маршрутов</string>
-    <string name="gpx_no_routes_descr">Для добавления маршрута в файл вы можете воспользоваться инструментом «%1$s».</string>
+    <string name="gpx_no_routes_descr">Для сохранения маршрута в файл вы можете воспользоваться инструментом «%1$s».</string>
+    <string name="please_provide_group_name_message">Укажите название группы.</string>
+    <string name="quick_action_add_route_descr">Кнопка для начала построения маршрута из центра экрана.</string>
+    <string name="import_tracks_descr">%1$s содержит отдельные треки: %2$s шт. Выберите треки для импорта.</string>
+    <string name="exit_import">Выйти\?</string>
+    <string name="list_of_groups">Список групп</string>
+    <string name="points_selection_descr">Закрыть и потерять все изменения\?</string>
+    <string name="selected_waypoints_descr">Выбранные путевые точки будут добавлены в трек «%1$s».</string>
+    <string name="shared_string_reading_file">Чтение файла…</string>
+    <string name="all_groups">Все группы</string>
+    <string name="exit_import_descr">Выйти без сохранения изменений\?</string>
+    <string name="import_tracks">Импорт треков</string>
 </resources>

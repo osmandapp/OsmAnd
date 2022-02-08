@@ -902,7 +902,7 @@
     <string name="poi_drinking_water_yes">Oui ; eau potable</string>
     <string name="poi_drinking_water_no">Non</string>
     <string name="poi_seasonal_no">Permanent</string>
-    <string name="poi_seasonal_yes">Oui</string>
+    <string name="poi_seasonal_yes">Oui, saisonnier</string>
     <string name="poi_seasonal_wet_season">Saison humide</string>
     <string name="poi_seasonal_dry_season">Saison sèche</string>
     <string name="poi_seasonal_spring">Printemps</string>
@@ -1073,7 +1073,7 @@
     <string name="poi_alt_name">Autre dénomination</string>
     <string name="poi_pump_manual">Pompe manuelle</string>
     <string name="poi_pump_no">Sans pompe</string>
-    <string name="poi_pump_yes">Oui</string>
+    <string name="poi_pump_yes">Oui ; Pompe</string>
     <string name="poi_pump_powered">Pompe automatique</string>
     <string name="poi_water_point">Point d\'eau (pour caravane, camping car)</string>
     <string name="poi_cuisine">Cuisine</string>
@@ -1104,7 +1104,7 @@
     <string name="poi_aerialway_duration">Durée moyenne du trajet (minutes)</string>
     <string name="poi_aerialway_bubble_yes">Fermé</string>
     <string name="poi_aerialway_bubble_no">Non fermé</string>
-    <string name="poi_aerialway_heating_yes">Oui</string>
+    <string name="poi_aerialway_heating_yes">Oui; Chauffage</string>
     <string name="poi_aerialway_heating_no">Non chauffé</string>
     <string name="poi_aerialway_bicycle_yes">Autorisés</string>
     <string name="poi_aerialway_bicycle_no">Vélos : interdits</string>
@@ -1160,7 +1160,7 @@
     <string name="poi_garden_style_french">Type de jardin : français</string>
     <string name="poi_garden_style_english">Type de jardin : anglais</string>
     <string name="poi_garden_style_japanese">Type de jardin : japonais</string>
-    <string name="poi_capacity_disabled_yes">Oui</string>
+    <string name="poi_capacity_disabled_yes">Oui ; espace pour les personnes handicapées</string>
     <string name="poi_capacity_disabled">Places réservées aux handicapés</string>
     <string name="poi_capacity_women_yes">Places réservées aux femmes</string>
     <string name="poi_capacity_women">Places réservées aux femmes</string>
@@ -1232,7 +1232,7 @@
     <string name="poi_diet_halal_no">Régime halal : non</string>
     <string name="poi_takeaway_yes">À emporter</string>
     <string name="poi_takeaway_only">À emporter uniquement</string>
-    <string name="poi_cocktails_yes">Oui</string>
+    <string name="poi_cocktails_yes">Oui ; Cocktails</string>
     <string name="poi_second_hand_yes">Biens d\'occasion</string>
     <string name="poi_second_hand_no">Pas de biens d\'occasion</string>
     <string name="poi_second_hand_only">Biens d\'occasion uniquement</string>
@@ -1418,7 +1418,7 @@
     <string name="poi_route_monorail_ref">Monorail</string>
     <string name="poi_service_bicycle_retail_no">Vente de vélos : non</string>
     <string name="poi_service_bicycle_repair_yes">Réparation; Réparation de bicyclettes; Réparation de vélo</string>
-    <string name="poi_service_bicycle_retail_yes">Vente</string>
+    <string name="poi_service_bicycle_retail_yes">Vente; Vente au détail de bicyclettes; Vente au détail de vélos</string>
     <string name="poi_service_bicycle_repair_no">Réparation de vélos : non</string>
     <string name="poi_service_bicycle_rental_yes">Location;Location de bicyclettes/vélos</string>
     <string name="poi_service_bicycle_rental_no">Location de vélos : non</string>
@@ -1745,12 +1745,12 @@
     <string name="poi_information_terminal">Terminal d\'informations</string>
     <string name="poi_information_tactile_map">Carte tactile</string>
     <string name="poi_board_type_notice">Tableau d\'affichage</string>
-    <string name="poi_fireplace_yes">Oui</string>
+    <string name="poi_fireplace_yes">Oui ; Cheminée</string>
     <string name="poi_fireplace_no">Aucune cheminée</string>
     <string name="poi_smoking_yes">Autorisé</string>
     <string name="poi_smoking_separated">Dans une pièce séparée</string>
     <string name="poi_smoking_isolated">Dans une pièce isolée</string>
-    <string name="poi_traffic_signals_sound_yes">Oui</string>
+    <string name="poi_traffic_signals_sound_yes">Oui ; les signaux de circulation sont sonores</string>
     <string name="poi_traffic_signals_sound_no">Son : non</string>
     <string name="poi_grassland">Prairie</string>
     <string name="poi_farmland">Zone agricole</string>
@@ -2195,12 +2195,12 @@
     <string name="poi_diet_vegetarian_filter_yes">Végétarien</string>
     <string name="poi_diet_halal_filter_yes">Halal</string>
     <string name="poi_diet_lactose_free_filter_yes">Sans lactose</string>
-    <string name="poi_drive_in_yes">Oui</string>
-    <string name="poi_drive_through_yes">Oui</string>
+    <string name="poi_drive_in_yes">Oui ; Drive-in</string>
+    <string name="poi_drive_through_yes">Oui ; passage en voiture</string>
     <string name="poi_takeaway_filter_yes">Oui ; à emporter</string>
     <string name="poi_delivery_filter_yes">Oui ; livraison</string>
-    <string name="poi_outdoor_seating_filter_yes">Oui</string>
-    <string name="poi_brushless_yes">Oui</string>
+    <string name="poi_outdoor_seating_filter_yes">Oui ; sièges extérieurs</string>
+    <string name="poi_brushless_yes">Oui ; sans balai</string>
     <string name="poi_architecture_stalinist_neoclassicism">Architecture : néoclassicisme stalinien</string>
     <string name="poi_service_bicycle_charging_yes">Recharge : oui</string>
     <string name="poi_service_bicycle_charging_no">Recharge : non</string>
@@ -4225,4 +4225,8 @@
     <string name="poi_post_office_opening_hours">Horaire d\'ouverture de la poste</string>
     <string name="poi_post_office_collection_times">Heure de levée</string>
     <string name="poi_post_office_type">Type</string>
+    <string name="poi_avalanche_transceiver_training">Zone d\'entraînement au DVA</string>
+    <string name="poi_avalanche_transceiver_checkpoint">Point de contrôle DVA</string>
+    <string name="poi_avalanche_transceiver">Détecteur de victime d\'avalanches ; DVA ; Appareil de recherche de victimes d\'avalanche ; ARVA</string>
+    <string name="poi_museum_type">Thème du musée</string>
 </resources>

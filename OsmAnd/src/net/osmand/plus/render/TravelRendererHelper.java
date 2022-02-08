@@ -264,17 +264,22 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 
 	@Nullable
 	public PoiUIFilter getRouteTrackFilter() {
-		if (routeTrackFilter == null) {
+		if (routeTrackFilter == null && app.getPoiTypes().isInit()) {
 			updateRouteTrackFilter();
 		}
 		return routeTrackFilter;
 	}
 
 	public void updateRouteArticleFilter() {
-		routeArticleFilter = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + ROUTE_ARTICLE);
+		if (app.getPoiTypes().isInit()) {
+			routeArticleFilter = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + ROUTE_ARTICLE);
+		}
 	}
 
 	public void updateRouteArticlePointsFilter() {
+		if (!app.getPoiTypes().isInit()) {
+			return;
+		}
 		PoiUIFilter routeArticlePointsFilter = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + ROUTE_ARTICLE_POINT);
 		if (routeArticlePointsFilter != null) {
 			Set<String> selectedCategories = new HashSet<>();

@@ -969,13 +969,10 @@ public class RoutePlannerFrontEnd {
 	private List<RouteSegmentResult> runNativeRouting(final RoutingContext ctx, RouteSegment recalculationEnd) throws IOException {
 		refreshProgressDistance(ctx);
 		RouteRegion[] regions = ctx.reverseMap.keySet().toArray(new RouteRegion[0]);
-		ctx.checkOldRoutingFiles(ctx.startX, ctx.startY);
-		ctx.checkOldRoutingFiles(ctx.targetX, ctx.targetY);
-
 		// long time = System.currentTimeMillis();
 		RouteSegmentResult[] res = ctx.nativeLib.runNativeRouting(ctx, regions, ctx.calculationMode == RouteCalculationMode.BASE);
 		//	log.info("Native routing took " + (System.currentTimeMillis() - time) / 1000f + " seconds");
-		ArrayList<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>(Arrays.asList(res));
+		List<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>(Arrays.asList(res));
 		if (recalculationEnd != null) {
 			log.info("Native routing use precalculated route");
 			RouteSegment current = recalculationEnd;

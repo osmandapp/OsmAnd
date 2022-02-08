@@ -3,12 +3,12 @@ package net.osmand.plus.utils;
 import android.content.Context;
 import android.graphics.Color;
 
-import net.osmand.plus.R;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+
+import net.osmand.plus.R;
 
 public class ColorUtilities {
 
@@ -202,6 +202,16 @@ public class ColorUtilities {
 		return nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light;
 	}
 
+	@ColorRes
+	public static int getActiveTransparentColor(@NonNull Context ctx, boolean nightMode) {
+		return ContextCompat.getColor(ctx, getActiveTransparentColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getActiveTransparentColorId(boolean nightMode) {
+		return nightMode ? R.color.switch_button_active_dark : R.color.switch_button_active_light;
+	}
+
 	@ColorInt
 	public static int getCardAndListBackgroundColor(@NonNull Context ctx, boolean nightMode) {
 		return ContextCompat.getColor(ctx, getCardAndListBackgroundColorId(nightMode));
@@ -222,6 +232,16 @@ public class ColorUtilities {
 		return nightMode ?
 				R.color.stroked_buttons_and_links_outline_dark :
 				R.color.stroked_buttons_and_links_outline_light;
+	}
+
+	@ColorInt
+	public static int getInactiveButtonsAndLinksColor(@NonNull Context ctx, boolean nightMode) {
+		return ContextCompat.getColor(ctx, getInactiveButtonsAndLinksColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getInactiveButtonsAndLinksColorId(boolean nightMode) {
+		return nightMode ? R.color.inactive_buttons_and_links_bg_dark : R.color.inactive_buttons_and_links_bg_light;
 	}
 
 	@ColorInt

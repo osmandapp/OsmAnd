@@ -4282,4 +4282,11 @@
     <string name="poi_skate">滑板店</string>
     <string name="poi_books_adults">成年人</string>
     <string name="poi_collector">收藏品</string>
+    <string name="poi_hospice">臨終關懷</string>
+    <string name="poi_telecommunication">電信</string>
+    <string name="poi_avalanche_transceiver">雪崩受害者偵測器;AVD;雪崩收發器</string>
+    <string name="poi_avalanche_transceiver_training">雪崩收發器培訓</string>
+    <string name="poi_avalanche_transceiver_checkpoint">雪崩收發器檢查點</string>
+    <string name="poi_access_permit">需要許可</string>
+    <string name="poi_parcel_locker">包裹儲存櫃</string>
 </resources>

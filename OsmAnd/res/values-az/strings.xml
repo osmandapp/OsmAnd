@@ -3235,4 +3235,7 @@
     <string name="mapillary_action_descr">Küçə səviyyəsində baxışınızı Mapillary ilə paylaşın.</string>
     <string name="parking_options">Parkinq seçimləri</string>
     <string name="find_parking">Parkinq tap</string>
+    <string name="quick_action_add_route_descr">Ekranın mərkəzindən marşrut başlatmaq üçün düymə.</string>
+    <string name="please_provide_group_name_message">Zəhmət olmasa, qrup üçün ad daxil edin.</string>
+    <string name="gpx_no_routes_title">Marşrut yoxdur</string>
 </resources>
