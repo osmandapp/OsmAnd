@@ -33,6 +33,11 @@ public abstract class PointEditor {
 		return isNew;
 	}
 
+	@Nullable
+	public String getPreselectedIconName() {
+		return null;
+	}
+
 	public abstract boolean isProcessingTemplate();
 
 	public abstract String getFragmentTag();

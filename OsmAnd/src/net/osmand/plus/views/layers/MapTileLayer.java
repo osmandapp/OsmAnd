@@ -15,6 +15,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.StateChangedListener;
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.android.TileSourceProxyProvider;
+import net.osmand.core.jni.MapLayerConfiguration;
+import net.osmand.core.jni.PointI;
+import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
@@ -39,20 +44,25 @@ public class MapTileLayer extends BaseMapLayer {
 
 	public static final int OVERZOOM_IN = 2;
 	private static final int ADDITIONAL_TILE_CACHE = 3;
+	private static final int SHOWN_MAP_ZOOM_MAX = 20;
+	private static final int SHOWN_MAP_ZOOM_MIN = 1;
 
 	protected final boolean mainMap;
 	protected ITileSource map = null;
 	protected MapTileAdapter mapTileAdapter = null;
 
-	protected Paint paintBitmap;
+	protected Paint paintBitmap = null;
 	protected RectF bitmapToDraw = new RectF();
 	protected Rect bitmapToZoom = new Rect();
 
 	protected OsmandMapTileView view;
 	protected ResourceManager resourceManager;
 	protected OsmandSettings settings;
-	private boolean visible = true;
 	private boolean useSampling;
+	private boolean needUpdateProvider = true;
+	private boolean visible = true;
+	private boolean cachedVisible = true;
+	private int cachedAlpha = -1;
 	private StateChangedListener<Float> parameterListener;
 
 	public MapTileLayer(@NonNull Context context, boolean mainMap) {
@@ -61,7 +71,7 @@ public class MapTileLayer extends BaseMapLayer {
 		settings = getApplication().getSettings();
 		resourceManager = getApplication().getResourceManager();
 	}
-	
+
 	@Override
 	public boolean drawInScreenPixels() {
 		return false;
@@ -71,21 +81,23 @@ public class MapTileLayer extends BaseMapLayer {
 	public void initLayer(@NonNull OsmandMapTileView view) {
 		this.view = view;
 		parameterListener = change -> getApplication().runInUIThread(() -> updateParameter(change));
-
 		useSampling = Build.VERSION.SDK_INT < 28;
 
 		paintBitmap = new Paint();
 		paintBitmap.setFilterBitmap(true);
 		paintBitmap.setAlpha(getAlpha());
-		
+
 		if (mapTileAdapter != null) {
 			mapTileAdapter.initLayerAdapter(this, view);
 		}
+
+		needUpdateProvider = true;
 	}
-	
+
 	@Override
 	public void setAlpha(int alpha) {
 		super.setAlpha(alpha);
+
 		if (paintBitmap != null) {
 			paintBitmap.setAlpha(alpha);
 		}
@@ -159,13 +171,13 @@ public class MapTileLayer extends BaseMapLayer {
 			mapTileAdapter.onInit();
 		}
 	}
-	
+
 	public void setMapForMapTileAdapter(ITileSource map, MapTileAdapter mapTileAdapter) {
 		if (mapTileAdapter == this.mapTileAdapter) {
 			this.map = map;
 		}
 	}
-	
+
 	public void setMap(ITileSource map) {
 		MapTileAdapter target = null;
 		if (map instanceof TileSourceTemplate) {
@@ -190,8 +202,9 @@ public class MapTileLayer extends BaseMapLayer {
 		}
 		this.map = map;
 		setMapTileAdapter(target);
+		needUpdateProvider = true;
 	}
-	
+
 	public MapTileAdapter getMapTileAdapter() {
 		return mapTileAdapter;
 	}
@@ -232,25 +245,110 @@ public class MapTileLayer extends BaseMapLayer {
 		return null;
 	}
 
-	@SuppressLint("WrongCall")
-	@Override
-	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
-		if ((map == null && mapTileAdapter == null) || !visible) {
+	private void setLayerProvider(@NonNull ITileSource mapSrc) {
+		if (view == null) {
 			return;
 		}
-		if (mapTileAdapter != null) {
-			mapTileAdapter.onDraw(canvas, tileBox, drawSettings);
+
+		final MapRendererView mapRenderer = view.getMapRenderer();
+		if (mapRenderer != null) {
+			TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), mapSrc);
+			mapRenderer.setMapLayerProvider(view.getLayerIndex(this), prov.instantiateProxy(true));
+			prov.swigReleaseOwnership();
 		}
-		drawTileMap(canvas, tileBox, drawSettings);
+	}
+
+	private void resetLayerProvider() {
+		if (view == null) {
+			return;
+		}
+
+		final MapRendererView mapRenderer = view.getMapRenderer();
+		if (mapRenderer != null) {
+			mapRenderer.resetMapLayerProvider(view.getLayerIndex(this));
+		}
+	}
+
+	private void updateLayerProvider(@Nullable ITileSource mapSrc) {
+		if (mapSrc != null) {
+			setLayerProvider(mapSrc);
+		} else {
+			resetLayerProvider();
+		}
+	}
+
+	private void updateLayerProviderAlpha(int alpha) {
+		final MapRendererView mapRenderer = view.getMapRenderer();
+		if (mapRenderer != null) {
+			MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
+			mapLayerConfiguration.setOpacityFactor(((float) alpha) / 255.0f);
+			mapRenderer.setMapLayerConfiguration(view.getLayerIndex(this), mapLayerConfiguration);
+		}
+	}
+
+	@SuppressLint("WrongCall")
+	@Override
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tilesRect, DrawSettings drawSettings) {
+		if ((map == null && mapTileAdapter == null) || view == null ||
+				(!isVisible() && !needUpdateProvider)) {
+			return;
+		}
+
+		final MapRendererView mapRenderer = view.getMapRenderer();
+		if (!isVisible() && mapRenderer == null) {
+			return;
+		}
+
+		if (mapTileAdapter != null) {
+			mapTileAdapter.onDraw(canvas, tilesRect, drawSettings);
+		}
+
+		if (mapRenderer != null) {
+			boolean currentVisible = isVisible();
+			boolean visibleChanged = cachedVisible != currentVisible;
+			if (!visibleChanged && !currentVisible) {
+				return;
+			}
+
+			if (visibleChanged && !currentVisible) {
+				updateLayerProvider(null);
+				needUpdateProvider = false;
+				cachedVisible = currentVisible;
+				return;
+			}
+
+			if (needUpdateProvider || (visibleChanged && currentVisible)) {
+				updateLayerProvider(map);
+				needUpdateProvider = false;
+				cachedVisible = currentVisible;
+			}
+
+			int alpha = getAlpha();
+			if (alpha != cachedAlpha) {
+				updateLayerProviderAlpha(alpha);
+				cachedAlpha = alpha;
+			}
+
+			LatLon ll = tilesRect.getLatLonFromPixel(tilesRect.getPixWidth() / 2, tilesRect.getPixHeight() / 2);
+			mapRenderer.setTarget(new PointI(MapUtils.get31TileNumberX(ll.getLongitude()), MapUtils.get31TileNumberY(ll
+					.getLatitude())));
+			mapRenderer.setAzimuth(-tilesRect.getRotate());
+			mapRenderer.setZoom((float) (tilesRect.getZoom() + tilesRect.getZoomAnimation() + tilesRect
+					.getZoomFloatPart()));
+			float zoomMagnifier = getMapDensity();
+			mapRenderer.setVisualZoomShift(zoomMagnifier - 1.0f);
+		} else {
+			drawTileMap(canvas, tilesRect, drawSettings);
+		}
 	}
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
-		
+
 	}
 
 	public void drawTileMap(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
-		ITileSource map = this.map; 
+		ITileSource map = this.map;
 		if (map == null) {
 			return;
 		}
@@ -289,7 +387,7 @@ public class MapTileLayer extends BaseMapLayer {
 				int y1 = tileBox.getPixYFromTileYNoRot(tileY - ellipticTileCorrection);
 				int y2 = tileBox.getPixYFromTileYNoRot(tileY + 1 - ellipticTileCorrection);
 				bitmapToDraw.set(x1, y1, x2 , y2);
-				
+
 				Bitmap bmp = null;
 				String ordImgTile = mgr.calculateTileId(map, tileX, tileY, nzoom);
 				// asking tile image async
@@ -335,8 +433,8 @@ public class MapTileLayer extends BaseMapLayer {
 						int yZoom = (tileY % div) * tileSize / div;
 						// nice scale
 						boolean useSampling = this.useSampling && kzoom > 3;
-						bitmapToZoom.set(Math.max(xZoom, 0), Math.max(yZoom, 0), 
-								Math.min(xZoom + tileSize / div, tileSize), 
+						bitmapToZoom.set(Math.max(xZoom, 0), Math.max(yZoom, 0),
+								Math.min(xZoom + tileSize / div, tileSize),
 								Math.min(yZoom + tileSize / div, tileSize));
 						if (!useSampling) {
 							canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
@@ -366,8 +464,8 @@ public class MapTileLayer extends BaseMapLayer {
 							Matrix m = new Matrix();
 							RectF dest = new RectF(0, 0, tileSize, tileSize);
 							m.setRectToRect(src, dest, Matrix.ScaleToFit.FILL);
-							Bitmap sampled = Bitmap.createBitmap(bmp, 
-									bitmapToZoom.left, bitmapToZoom.top, 
+							Bitmap sampled = Bitmap.createBitmap(bmp,
+									bitmapToZoom.left, bitmapToZoom.top,
 									bitmapToZoom.width(), bitmapToZoom.height(), m, true);
 							bitmapToZoom.set(0, 0, tileSize, tileSize);
 							// very expensive that's why put in the cache
@@ -384,7 +482,7 @@ public class MapTileLayer extends BaseMapLayer {
 				}
 			}
 		}
-		
+
 		if (mainMap && !oneTileShown && !useInternet && warningToSwitchMapShown < 3) {
 			if (resourceManager.getRenderer().containsLatLonMapData(view.getLatitude(), view.getLongitude(), nzoom)) {
 				Toast.makeText(view.getContext(), R.string.switch_to_vector_map_to_see, Toast.LENGTH_LONG).show();
@@ -392,34 +490,36 @@ public class MapTileLayer extends BaseMapLayer {
 			}
 		}
 	}
-	
+
 
 	@Override
 	public int getMaximumShownMapZoom() {
-		return map == null ? 20 : map.getMaximumZoomSupported() + OVERZOOM_IN;
+		return map == null ? SHOWN_MAP_ZOOM_MAX : map.getMaximumZoomSupported() + OVERZOOM_IN;
 	}
-	
+
 	@Override
 	public int getMinimumShownMapZoom() {
-		return map == null ? 1 : map.getMinimumZoomSupported();
+		return map == null ? SHOWN_MAP_ZOOM_MIN : map.getMinimumZoomSupported();
 	}
-		
+
 	@Override
 	public void destroyLayer() {
 		setMapTileAdapter(null);
 		if (resourceManager != null) {
 			resourceManager.removeMapTileLayerSize(this);
 		}
+
+		resetLayerProvider();
 	}
 
 	public boolean isVisible() {
 		return visible;
 	}
-	
+
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
-	
+
 	public ITileSource getMap() {
 		return map;
 	}

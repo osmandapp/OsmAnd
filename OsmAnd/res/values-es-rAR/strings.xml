@@ -985,7 +985,7 @@
     <string name="local_openstreetmap_uploading">Subiendo…</string>
     <string name="local_openstreetmap_were_uploaded">{0} PDI/notas de OSM subidos</string>
     <string name="local_openstreetmap_uploadall">Enviar todos</string>
-    <string name="local_openstreetmap_upload">Subir edición a OSM</string>
+    <string name="local_openstreetmap_upload">Subir a OpenStreetMap</string>
     <string name="local_openstreetmap_delete">Borrar edición</string>
     <string name="local_openstreetmap_descr_title">Edición asíncrona OSM:</string>
     <string name="local_openstreetmap_settings">PDI/notas de OSM guardados en el dispositivo</string>
@@ -1743,7 +1743,7 @@
     <string name="lang_als">Albano (Tosk)</string>
     <string name="save_poi_without_poi_type_message">¿Guardar el PDI sin especificar el tipo\?</string>
     <string name="shared_string_location">Ubicación</string>
-    <string name="poi_context_menu_modify_osm_change">Modificar cambio OSM</string>
+    <string name="poi_context_menu_modify_osm_change">Editar cambio de OpenStreetMap</string>
     <string name="osm_edit_modified_poi">PDI de OSM modificado</string>
     <string name="osm_edit_deleted_poi">PDI de OSM borrado</string>
     <string name="context_menu_item_open_note">Abrir nota de OSM</string>

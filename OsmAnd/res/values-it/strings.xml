@@ -4160,7 +4160,7 @@
     <string name="nautical_depth">Linee batimetriche</string>
     <string name="backup_error_token_is_not_valid">C\'è qualcosa di errato con l\'ID del dispositivo o con il token forniti</string>
     <string name="on_hold_since">Sospeso dal %1$s</string>
-    <string name="available_until">Disponibile dal %1$s</string>
+    <string name="available_until">Disponibile fino al %1$s</string>
     <string name="direct_line_maps_required_descr">Il calcolo del percorso sta richiedendo un tempo più lungo del consueto.
 \n
 \nAlcune mappe potrebbero non essere state caricate.</string>
@@ -4341,6 +4341,10 @@
 \n
 \n • Interfaccia utente aggiornata per la ricerca con coordinate UTM
 \n
+\n • Filtro GPS per le tracce GPX
+\n
+\n • Profilo altimetrico (Pro)
+\n
 \n • Preferiti: aggiunta la capacità di visualizzare le icone usate recenti
 \n
 \n • Pianificazione del percorso: utilizzerà il profilo scelto dopo l\'avvio
@@ -4397,7 +4401,7 @@
 \n
 \nSposta i dati dalla Memoria condivisa alla memoria disponibile oppure l\'app perderà l\'accesso a dati quali mappe offline, tracce GPX, ecc.</string>
     <string name="horseback_riding">A cavallo</string>
-    <string name="copying_file">Copia dei file %1$s</string>
+    <string name="copying_file">Copia dei file %1$s…</string>
     <string name="storage_copied_files_size">Copiati %1$s file %2$s</string>
     <string name="storage_copying_files_size">In copia %1$s file %2$s</string>
     <string name="storage_found_files_size">Trovati %1$s file %2$s</string>
@@ -4443,7 +4447,7 @@
     <string name="display_groups_visibility_dialog_description">Puoi gestire la visibilità dei gruppi nella mappa. Se la traccia è nascosta anche tutti i gruppi lo saranno.</string>
     <string name="shared_string_hide_all">Nascondi tutto</string>
     <string name="migration_files_present">%1$d file (%2$s) sono presenti nella posizione selezionata \'%3$s\'.</string>
-    <string name="exit_without_saving_warning">Confermi di voler uscire senza salvare\? Perderai tutti i cambiamenti.</string>
+    <string name="exit_without_saving_warning">Uscire senza salvare le modifiche\?</string>
     <string name="shared_string_show_slope">Mostra la pendenza</string>
     <string name="shared_string_hide_slope">Nascondi la pendenza</string>
     <string name="shared_string_uphill">Salita</string>
@@ -4489,4 +4493,26 @@
     <string name="rendering_value_category_name">Categoria</string>
     <string name="rendering_value_all_name">Tutto</string>
     <string name="waypoint_appearance">Aspetto del punto intermedio</string>
+    <string name="select_suggested_points">Seleziona i punti suggeriti</string>
+    <string name="shared_string_mini">mini</string>
+    <string name="selected_waypoints_descr">I punti di passaggio selezionati saranno aggiunti alla \"%1$s\" traccia</string>
+    <string name="shared_string_reading_file">Lettura del file…</string>
+    <string name="all_groups">Tutti i gruppi</string>
+    <string name="list_of_groups">Lista dei gruppi</string>
+    <string name="points_selection_descr">Sei sicuro di voler chiudere\? Perderai le modifiche.</string>
+    <string name="exit_import_descr">Sei sicuro di voler uscire senza salvare\? Perderai tutte le modifiche.</string>
+    <string name="exit_import">Uscire dall\'importazione\?</string>
+    <string name="import_tracks">Importa tracce</string>
+    <string name="import_tracks_descr">%1$s, contiene %2$s tracce separate. Scegli le tracce che vuoi importare.</string>
+    <string name="please_provide_group_name_message">Fornisci un nome per il gruppo.</string>
+    <string name="quick_action_add_route_descr">Un pulsante per avviare un percorso dal centro dello schermo.</string>
+    <string name="gpx_no_routes_descr">Per aggiungere il percorso al file puoi usare lo strumento \"%1$s\".</string>
+    <string name="gpx_no_routes_title">Non ci sono percorsi</string>
+    <string name="save_track_to_gpx_descrp">Avvia automaticamente la registrazione mentre si sta navigando. Al termine la traccia sarà salvata automaticamente.</string>
+    <string name="rendering_attr_seabedDetail_name">Dettagli fondale marino</string>
+    <string name="rendering_attr_seabedDetail_description">Informazioni testuali sulla superficie del fondale marino tipi di superfici combinate, categorie e tassonomie delle alghe marine.</string>
+    <string name="waypoint_template">Modello dei punti di passaggio</string>
+    <string name="always_ask_waypoint_appearance_description">Toccando quest\'azione si aprirà la schermata \"Aggiungi punto intermedio\" dove puoi cambiare nome e aspetto.</string>
+    <string name="track_file_description">Toccando questa azione verrà mostrato una finestra di dialogo di scelta delle tracce disponibili.</string>
+    <string name="shared_string_grade">Grado</string>
 </resources>

@@ -40,7 +40,7 @@ import net.osmand.util.Algorithms;
 public class MapRendererContext implements RendererRegistry.IRendererLoadedEventListener {
     private static final String TAG = "MapRendererContext";
 
-	private static final int OBF_RASTER_LAYER = 0;
+	public static final int OBF_RASTER_LAYER = 0;
 	private OsmandApplication app;
 	
 	// input parameters
@@ -165,7 +165,8 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 		QStringStringHash convertedStyleSettings = getMapStyleSettings();
 		mapPresentationEnvironment.setSettings(convertedStyleSettings);
 
-		if (obfMapRasterLayerProvider != null || obfMapSymbolsProvider != null) {
+		boolean vectorData = !app.getSettings().MAP_ONLINE_DATA.get();
+		if ((obfMapRasterLayerProvider != null || obfMapSymbolsProvider != null) && vectorData) {
 			recreateRasterAndSymbolsProvider();
 		}
 	}
@@ -200,7 +201,7 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 		return convertedStyleSettings;
 	}
 	
-	private void recreateRasterAndSymbolsProvider() {
+	public void recreateRasterAndSymbolsProvider() {
 		// Create new map primitiviser
 		// TODO Victor ask MapPrimitiviser, ObfMapObjectsProvider  
 		MapPrimitiviser mapPrimitiviser = new MapPrimitiviser(mapPresentationEnvironment);
@@ -211,7 +212,16 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 		updateObfMapRasterLayerProvider(mapPrimitivesProvider);
 		updateObfMapSymbolsProvider(mapPrimitivesProvider);
 	}
-	
+
+	public void resetRasterAndSymbolsProvider() {
+		if (mapRendererView != null) {
+			mapRendererView.resetMapLayerProvider(OBF_RASTER_LAYER);
+		}
+		if (obfMapSymbolsProvider != null && mapRendererView != null) {
+			mapRendererView.removeSymbolsProvider(obfMapSymbolsProvider);
+		}
+	}
+
 	private void updateObfMapRasterLayerProvider(MapPrimitivesProvider mapPrimitivesProvider) {
 		// Create new OBF map raster layer provider
 		obfMapRasterLayerProvider = new MapRasterLayerProvider_Software(mapPrimitivesProvider);
@@ -248,13 +258,17 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 			cachedReferenceTileSize = getReferenceTileSize();
 			((AtlasMapRendererView)mapRendererView).setReferenceTileSizeOnScreenInPixels(cachedReferenceTileSize);
 		}
-		// Layers
-		if (obfMapRasterLayerProvider != null) {
-			mapRendererView.setMapLayerProvider(OBF_RASTER_LAYER, obfMapRasterLayerProvider);
-		}
-		// Symbols
-		if (obfMapSymbolsProvider != null) {
-			mapRendererView.addSymbolsProvider(obfMapSymbolsProvider);
+
+		boolean vectorData = !app.getSettings().MAP_ONLINE_DATA.get();
+		if (vectorData) {
+			// Layers
+			if (obfMapRasterLayerProvider != null) {
+				mapRendererView.setMapLayerProvider(OBF_RASTER_LAYER, obfMapRasterLayerProvider);
+			}
+			// Symbols
+			if (obfMapSymbolsProvider != null) {
+				mapRendererView.addSymbolsProvider(obfMapSymbolsProvider);
+			}
 		}
 	}
 
