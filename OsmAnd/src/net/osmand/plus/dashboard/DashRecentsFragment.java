@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -22,14 +21,13 @@ import net.osmand.plus.activities.search.SearchHistoryFragment;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.track.helpers.GpxNavigationHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -124,13 +122,15 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 		if (mapActivity == null) {
 			return;
 		}
+		OsmandApplication app = mapActivity.getMyApplication();
 
 		PointDescription pointDescription = historyEntry.getName();
 		if (pointDescription.isGpxFile()) {
-			getGpxFile(pointDescription.getName(), gpxFile -> {
-				MapActivity mapActivity1 = getMapActivity();
-				if (mapActivity1 != null) {
-					navigateGpxFile(gpxFile, mapActivity1);
+			File file = new File(app.getAppPath(GPX_INDEX_DIR), pointDescription.getName());
+			GpxSelectionHelper.getGpxFile(mapActivity, file, true, gpxFile -> {
+				MapActivity activity = getMapActivity();
+				if (activity != null) {
+					navigateGpxFile(gpxFile, activity);
 				}
 				return false;
 			});
@@ -175,12 +175,16 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 	}
 
 	private void setupDistanceAndDirection(@NonNull HistoryEntry historyEntry, @NonNull View itemView) {
+		MapActivity mapActivity = requireMapActivity();
+		OsmandApplication app = mapActivity.getMyApplication();
+
 		ImageView directionArrow = itemView.findViewById(R.id.direction);
 		TextView distanceText = itemView.findViewById(R.id.distance);
 		PointDescription pointDescription = historyEntry.getName();
 		if (pointDescription.isGpxFile()) {
 			String relativeGpxPath = pointDescription.getName();
-			getGpxFile(relativeGpxPath, gpxFile -> {
+			File file = new File(app.getAppPath(GPX_INDEX_DIR), relativeGpxPath);
+			GpxSelectionHelper.getGpxFile(mapActivity, file, false, gpxFile -> {
 				QuadRect gpxRect = gpxFile.getRect();
 				LatLon latLon = new LatLon(gpxRect.centerY(), gpxRect.centerX());
 				DashLocationView locationView = new DashLocationView(directionArrow, distanceText, latLon);
@@ -195,29 +199,12 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 		}
 	}
 
-	private void getGpxFile(@NonNull String relativeGpxPath, @NonNull CallbackWithObject<GPXFile> callback) {
-		MapActivity mapActivity = requireMapActivity();
-		OsmandApplication app = mapActivity.getMyApplication();
-		File tracksPath = app.getAppPath(GPX_INDEX_DIR);
-		String gpxPath = new File(tracksPath, relativeGpxPath).getAbsolutePath();
-		SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxPath);
-		if (selectedGpxFile != null) {
-			callback.processResult(selectedGpxFile.getGpxFileToDisplay());
-		} else {
-			CallbackWithObject<GPXFile[]> onGpxLoaded = gpxFiles -> {
-				callback.processResult(gpxFiles[0]);
-				return false;
-			};
-			GpxUiHelper.loadGPXFileInDifferentThread(mapActivity, onGpxLoaded, tracksPath,
-					null, relativeGpxPath);
-		}
-	}
-
 	@Override
 	public void onSegmentSelect(@NonNull GPXFile gpxFile, int selectedSegment) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			GpxNavigationHelper.startNavigationForSegment(gpxFile, selectedSegment, mapActivity, this::closeDashboard);
+			GpxNavigationHelper.startNavigationForSegment(gpxFile, selectedSegment, mapActivity);
+			closeDashboard();
 		}
 	}
 }

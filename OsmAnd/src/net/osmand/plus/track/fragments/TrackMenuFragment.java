@@ -1440,7 +1440,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public void onSegmentSelect(@NonNull GPXFile gpxFile, int selectedSegment) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			GpxNavigationHelper.startNavigationForSegment(gpxFile, selectedSegment, mapActivity, this::dismiss);
+			GpxNavigationHelper.startNavigationForSegment(gpxFile, selectedSegment, mapActivity);
+			dismiss();
 		}
 	}
 

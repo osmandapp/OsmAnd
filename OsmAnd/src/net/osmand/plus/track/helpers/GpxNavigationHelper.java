@@ -16,8 +16,7 @@ public class GpxNavigationHelper {
 
 	public static void startNavigationForSegment(@NonNull GPXFile gpxFile,
 	                                             int selectedSegment,
-	                                             @NonNull MapActivity mapActivity,
-	                                             @Nullable Runnable dismissAction) {
+	                                             @NonNull MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		app.getSettings().GPX_ROUTE_SEGMENT.set(selectedSegment);
 		startNavigationForGpx(gpxFile, mapActivity);
@@ -25,9 +24,6 @@ public class GpxNavigationHelper {
 		if (paramsBuilder != null) {
 			paramsBuilder.setSelectedSegment(selectedSegment);
 			app.getRoutingHelper().onSettingsChanged(true);
-		}
-		if (dismissAction != null) {
-			dismissAction.run();
 		}
 	}
 

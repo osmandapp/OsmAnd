@@ -1,6 +1,8 @@
 package net.osmand.plus.track.helpers;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.os.AsyncTask;
@@ -17,6 +19,7 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -872,6 +875,37 @@ public class GpxSelectionHelper {
 		MapMarkersGroup group = mapMarkersHelper.getMarkersGroup(gpxFile);
 		if (group != null) {
 			mapMarkersHelper.runSynchronization(group);
+		}
+	}
+
+	/**
+	 * @param file null if current track
+	 */
+	public static void getGpxFile(@NonNull Activity activity,
+	                              @Nullable File file,
+	                              boolean showProgress,
+	                              @NonNull CallbackWithObject<GPXFile> callback) {
+		OsmandApplication app = ((OsmandApplication) activity.getApplication());
+		SelectedGpxFile selectedGpxFile = file == null
+				? app.getSavingTrackHelper().getCurrentTrack()
+				: app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath());
+		if (selectedGpxFile != null) {
+			callback.processResult(selectedGpxFile.getGpxFileToDisplay());
+		} else {
+			String dialogTitle = app.getString(R.string.loading_smth, "");
+			String dialogMessage = app.getString(R.string.loading_data);
+			ProgressDialog progressDialog = showProgress && AndroidUtils.isActivityNotDestroyed(activity)
+					? ProgressDialog.show(activity, dialogTitle, dialogMessage)
+					: null;
+
+			GpxFileLoaderTask loadGpxTask = new GpxFileLoaderTask(file, gpxFile -> {
+				if (progressDialog != null) {
+					progressDialog.dismiss();
+				}
+				callback.processResult(gpxFile);
+				return true;
+			});
+			loadGpxTask.execute();
 		}
 	}
 

@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
@@ -501,10 +501,11 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 	}
 
 	@Override
-	public void onSegmentSelect(@NonNull GPXUtilities.GPXFile gpxFile, int selectedSegment) {
+	public void onSegmentSelect(@NonNull GPXFile gpxFile, int selectedSegment) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			GpxNavigationHelper.startNavigationForSegment(gpxFile, selectedSegment, mapActivity, this::dismiss);
+			GpxNavigationHelper.startNavigationForSegment(gpxFile, selectedSegment, mapActivity);
+			dismiss();
 		}
 	}
 
