@@ -29,7 +29,6 @@ public class MapVectorLayer extends BaseMapLayer {
 	private Paint paintImg;
 
 	private final RectF destImage = new RectF();
-	private boolean needUpdateProvider = true;
 	private boolean visible = false;
 	private boolean cachedVisible = true;
 	private int cachedAlpha = -1;
@@ -56,12 +55,10 @@ public class MapVectorLayer extends BaseMapLayer {
 		paintImg = new Paint();
 		paintImg.setFilterBitmap(true);
 		paintImg.setAlpha(getAlpha());
-
-		needUpdateProvider = true;
 	}
 
 	public boolean isVectorDataVisible() {
-		return visible && view.getZoom() >= view.getSettings().LEVEL_TO_SWITCH_VECTOR_RASTER.get();
+		return visible && view != null && view.getZoom() >= view.getSettings().LEVEL_TO_SWITCH_VECTOR_RASTER.get();
 	}
 
 	public boolean isVisible() {
@@ -88,10 +85,9 @@ public class MapVectorLayer extends BaseMapLayer {
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tilesRect, DrawSettings drawSettings) {
-
 	}
 
-	private void setLayerProvider() {
+	private void recreateLayerProvider() {
 		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 		if (mapContext != null) {
 			mapContext.recreateRasterAndSymbolsProvider();
@@ -116,30 +112,32 @@ public class MapVectorLayer extends BaseMapLayer {
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tilesRect, DrawSettings drawSettings) {
-		boolean currentVisible = isVisible();
-		boolean visibleChanged = cachedVisible != currentVisible;
-		if (view == null || (!currentVisible && !visibleChanged)) {
-			cachedVisible = currentVisible;
+		if (view == null) {
 			return;
 		}
+		boolean visible = isVisible();
+		boolean visibleChanged = cachedVisible != visible;
+		cachedVisible = visible;
+
+		int alpha = getAlpha();
+		boolean alphaChanged = cachedAlpha != alpha;
+		cachedAlpha = alpha;
 
 		final MapRendererView mapRenderer = view.getMapRenderer();
 		if (mapRenderer != null) {
 			// opengl renderer
-			if (visibleChanged && !currentVisible) {
-				resetLayerProvider();
-				//return;
-			} else if (needUpdateProvider || (visibleChanged && currentVisible)) {
-				setLayerProvider();
+			if (visibleChanged) {
+				if (visible) {
+					recreateLayerProvider();
+				} else {
+					resetLayerProvider();
+				}
 			}
-			needUpdateProvider = false;
-			cachedVisible = currentVisible;
-
-			NativeCoreContext.getMapRendererContext().setNightMode(drawSettings.isNightMode());
-			int alpha = getAlpha();
-			if (alpha != cachedAlpha) {
+			if (visible) {
+				NativeCoreContext.getMapRendererContext().setNightMode(drawSettings.isNightMode());
+			}
+			if ((alphaChanged || visibleChanged) && visible) {
 				updateLayerProviderAlpha(alpha);
-				cachedAlpha = alpha;
 			}
 
 			LatLon ll = tilesRect.getLatLonFromPixel(tilesRect.getPixWidth() / 2, tilesRect.getPixHeight() / 2);
@@ -150,7 +148,7 @@ public class MapVectorLayer extends BaseMapLayer {
 					.getZoomFloatPart()));
 			float zoomMagnifier = getMapDensity();
 			mapRenderer.setVisualZoomShift(zoomMagnifier - 1.0f);
-		} else if (currentVisible) {
+		} else if (visible) {
 			if (!view.isZooming()) {
 				if (resourceManager.updateRenderedMapNeeded(tilesRect, drawSettings)) {
 					// pixRect.set(-view.getWidth(), -view.getHeight() / 2, 2 * view.getWidth(), 3 *

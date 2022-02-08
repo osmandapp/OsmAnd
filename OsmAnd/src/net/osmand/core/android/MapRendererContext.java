@@ -81,6 +81,10 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 		}
 	}
 
+	public boolean isVectorLayerEnabled() {
+		return !app.getSettings().MAP_ONLINE_DATA.get();
+	}
+
 	public void setNightMode(boolean nightMode) {
 		if (nightMode != this.nightMode) {
 			this.nightMode = nightMode;
@@ -105,7 +109,9 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 		this.obfsCollection = obfsCollection;
 		this.mapStylesCollection = mapStylesCollection;
 		updateMapPresentationEnvironment();
-		recreateRasterAndSymbolsProvider();
+		if (isVectorLayerEnabled()) {
+			recreateRasterAndSymbolsProvider();
+		}
 	}
 
 	protected int getRasterTileSize() {
@@ -165,8 +171,7 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 		QStringStringHash convertedStyleSettings = getMapStyleSettings();
 		mapPresentationEnvironment.setSettings(convertedStyleSettings);
 
-		boolean vectorData = !app.getSettings().MAP_ONLINE_DATA.get();
-		if ((obfMapRasterLayerProvider != null || obfMapSymbolsProvider != null) && vectorData) {
+		if ((obfMapRasterLayerProvider != null || obfMapSymbolsProvider != null) && isVectorLayerEnabled()) {
 			recreateRasterAndSymbolsProvider();
 		}
 	}
@@ -259,8 +264,7 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 			((AtlasMapRendererView)mapRendererView).setReferenceTileSizeOnScreenInPixels(cachedReferenceTileSize);
 		}
 
-		boolean vectorData = !app.getSettings().MAP_ONLINE_DATA.get();
-		if (vectorData) {
+		if (isVectorLayerEnabled()) {
 			// Layers
 			if (obfMapRasterLayerProvider != null) {
 				mapRendererView.setMapLayerProvider(OBF_RASTER_LAYER, obfMapRasterLayerProvider);
