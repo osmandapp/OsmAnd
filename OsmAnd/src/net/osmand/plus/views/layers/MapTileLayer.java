@@ -18,6 +18,8 @@ import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.TileSourceProxyProvider;
 import net.osmand.core.jni.MapLayerConfiguration;
+import net.osmand.core.jni.PointI;
+import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
@@ -56,10 +58,11 @@ public class MapTileLayer extends BaseMapLayer {
 	protected OsmandMapTileView view;
 	protected ResourceManager resourceManager;
 	protected OsmandSettings settings;
-	private boolean needUpdateProvider = true;
-	private boolean needUpdateAlpha = true;
-	private boolean visible = true;
 	private boolean useSampling;
+	private boolean needUpdateProvider = true;
+	private boolean visible = true;
+	private boolean cachedVisible = true;
+	private int cachedAlpha = -1;
 	private StateChangedListener<Float> parameterListener;
 
 	public MapTileLayer(@NonNull Context context, boolean mainMap) {
@@ -89,12 +92,10 @@ public class MapTileLayer extends BaseMapLayer {
 		}
 
 		needUpdateProvider = true;
-		needUpdateAlpha = true;
 	}
 
 	@Override
 	public void setAlpha(int alpha) {
-		needUpdateAlpha = true;
 		super.setAlpha(alpha);
 
 		if (paintBitmap != null) {
@@ -244,8 +245,8 @@ public class MapTileLayer extends BaseMapLayer {
 		return null;
 	}
 
-	private void setLayerProvider(ITileSource mapSrc) {
-		if (view == null || mapSrc == null) {
+	private void setLayerProvider(@NonNull ITileSource mapSrc) {
+		if (view == null) {
 			return;
 		}
 
@@ -268,52 +269,72 @@ public class MapTileLayer extends BaseMapLayer {
 		}
 	}
 
-	private void updateLayerProviderAlpha() {
-		if (view != null) {
-			int alpha = this.getAlpha();
+	private void updateLayerProvider(@Nullable ITileSource mapSrc) {
+		if (mapSrc != null) {
+			setLayerProvider(mapSrc);
+		} else {
+			resetLayerProvider();
+		}
+	}
 
-			final MapRendererView mapRenderer = view.getMapRenderer();
-			if (mapRenderer != null) {
-				MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
-				mapLayerConfiguration.setOpacityFactor(((float) alpha) / 255.0f);
-				mapRenderer.setMapLayerConfiguration(view.getLayerIndex(this), mapLayerConfiguration);
-			}
+	private void updateLayerProviderAlpha(int alpha) {
+		final MapRendererView mapRenderer = view.getMapRenderer();
+		if (mapRenderer != null) {
+			MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
+			mapLayerConfiguration.setOpacityFactor(((float) alpha) / 255.0f);
+			mapRenderer.setMapLayerConfiguration(view.getLayerIndex(this), mapLayerConfiguration);
 		}
 	}
 
 	@SuppressLint("WrongCall")
 	@Override
-	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
-		if ((!isVisible() && !needUpdateProvider) || view == null) {
-			return;
-		}
-
-		if (!isVisible() && needUpdateProvider) {
-			resetLayerProvider();
-			needUpdateProvider = false;
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tilesRect, DrawSettings drawSettings) {
+		if ((map == null && mapTileAdapter == null) || view == null ||
+				(!isVisible() && !needUpdateProvider)) {
 			return;
 		}
 
 		if (mapTileAdapter != null) {
-			mapTileAdapter.onDraw(canvas, tileBox, drawSettings);
+			mapTileAdapter.onDraw(canvas, tilesRect, drawSettings);
 		}
 
-		if (view.getMapRenderer() != null) {
-			if (needUpdateProvider) {
-				if (map != null) {
-					setLayerProvider(map);
-				} else {
-					resetLayerProvider();
-				}
-				needUpdateProvider = false;
+		final MapRendererView mapRenderer = view.getMapRenderer();
+		if (mapRenderer != null) {
+			boolean currentVisible = isVisible();
+			boolean visibleChanged = cachedVisible != currentVisible;
+			if (!visibleChanged && !currentVisible) {
+				return;
 			}
 
-			if (needUpdateAlpha) {
-				updateLayerProviderAlpha();
-				needUpdateAlpha = false;
+			if (visibleChanged && !currentVisible) {
+				updateLayerProvider(null);
+				needUpdateProvider = false;
+				cachedVisible = currentVisible;
+				return;
 			}
+
+			if (needUpdateProvider || (visibleChanged && currentVisible)) {
+				updateLayerProvider(map);
+				needUpdateProvider = false;
+				cachedVisible = currentVisible;
+			}
+
+			int alpha = getAlpha();
+			if (alpha != cachedAlpha) {
+				updateLayerProviderAlpha(alpha);
+				cachedAlpha = alpha;
+			}
+
+			LatLon ll = tilesRect.getLatLonFromPixel(tilesRect.getPixWidth() / 2, tilesRect.getPixHeight() / 2);
+			mapRenderer.setTarget(new PointI(MapUtils.get31TileNumberX(ll.getLongitude()), MapUtils.get31TileNumberY(ll
+					.getLatitude())));
+			mapRenderer.setAzimuth(-tilesRect.getRotate());
+			mapRenderer.setZoom((float) (tilesRect.getZoom() + tilesRect.getZoomAnimation() + tilesRect
+					.getZoomFloatPart()));
+			float zoomMagnifier = getMapDensity();
+			mapRenderer.setVisualZoomShift(zoomMagnifier - 1.0f);
 		} else {
-			drawTileMap(canvas, tileBox, drawSettings);
+			drawTileMap(canvas, tilesRect, drawSettings);
 		}
 	}
 
@@ -493,7 +514,6 @@ public class MapTileLayer extends BaseMapLayer {
 
 	public void setVisible(boolean visible) {
 		this.visible = visible;
-		needUpdateProvider = true;
 	}
 
 	public ITileSource getMap() {
