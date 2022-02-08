@@ -1,12 +1,5 @@
 package net.osmand.plus.plugins.monitoring;
 
-import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
-import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
-import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_SPEED;
-import static net.osmand.plus.utils.AndroidUtils.setPadding;
-import static net.osmand.plus.utils.ColorUtilities.getActiveTransparentColorId;
-import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.GLOBAL;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -77,6 +70,13 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_SPEED;
+import static net.osmand.plus.utils.AndroidUtils.setPadding;
+import static net.osmand.plus.utils.ColorUtilities.getActiveTransparentColorId;
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.GLOBAL;
 
 public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment implements SegmentActionsListener {
 
@@ -422,8 +422,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		}
 
 		SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
-		boolean showCurrentTrack = app.getSettings().SHOW_SAVED_TRACK_REMEMBER.get();
-		gpxSelectionHelper.selectGpxFile(selectedGpxFile.getGpxFile(), showCurrentTrack, false);
+		boolean showCurrentTrack = gpxSelectionHelper.getSelectedCurrentRecordingTrack() != null;
 
 		final CompoundButton showTrackCompound = buttonShowTrack.findViewById(R.id.compound_button);
 		showTrackCompound.setChecked(showCurrentTrack);
@@ -433,7 +432,6 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		buttonShowTrack.setOnClickListener(v -> {
 			boolean checked = !showTrackCompound.isChecked();
 			showTrackCompound.setChecked(checked);
-			app.getSettings().SHOW_SAVED_TRACK_REMEMBER.set(checked);
 			gpxSelectionHelper.selectGpxFile(selectedGpxFile.getGpxFile(), checked, false);
 			setShowTrackItemBackground(buttonShowTrack, checked, nightMode);
 			createItem(app, nightMode, buttonAppearance, ItemType.APPEARANCE, checked, null);
