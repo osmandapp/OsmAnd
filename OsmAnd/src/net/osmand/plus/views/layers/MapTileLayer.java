@@ -294,11 +294,15 @@ public class MapTileLayer extends BaseMapLayer {
 			return;
 		}
 
+		final MapRendererView mapRenderer = view.getMapRenderer();
+		if (!isVisible() && mapRenderer == null) {
+			return;
+		}
+
 		if (mapTileAdapter != null) {
 			mapTileAdapter.onDraw(canvas, tilesRect, drawSettings);
 		}
 
-		final MapRendererView mapRenderer = view.getMapRenderer();
 		if (mapRenderer != null) {
 			boolean currentVisible = isVisible();
 			boolean visibleChanged = cachedVisible != currentVisible;

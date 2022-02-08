@@ -41,7 +41,6 @@ public class MapVectorLayer extends BaseMapLayer {
 
 	@Override
 	public void destroyLayer() {
-		resourceManager.getRenderer().clearCache();
 		resetLayerProvider();
 	}
 
@@ -120,6 +119,7 @@ public class MapVectorLayer extends BaseMapLayer {
 		boolean currentVisible = isVisible();
 		boolean visibleChanged = cachedVisible != currentVisible;
 		if (view == null || (!currentVisible && !visibleChanged)) {
+			cachedVisible = currentVisible;
 			return;
 		}
 
@@ -150,7 +150,7 @@ public class MapVectorLayer extends BaseMapLayer {
 					.getZoomFloatPart()));
 			float zoomMagnifier = getMapDensity();
 			mapRenderer.setVisualZoomShift(zoomMagnifier - 1.0f);
-		} else {
+		} else if (currentVisible) {
 			if (!view.isZooming()) {
 				if (resourceManager.updateRenderedMapNeeded(tilesRect, drawSettings)) {
 					// pixRect.set(-view.getWidth(), -view.getHeight() / 2, 2 * view.getWidth(), 3 *
