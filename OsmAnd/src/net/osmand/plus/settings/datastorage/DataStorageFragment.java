@@ -69,7 +69,6 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 
 	private final static String CHANGE_DIRECTORY_BUTTON = "change_directory";
 	private final static String OSMAND_USAGE = "osmand_usage";
-	public static String TAG;
 
 	private OsmandApplication app;
 	private ArrayList<MemoryItem> memoryItems;
@@ -89,7 +88,6 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		TAG = this.getTag();
 		app = getMyApplication();
 		activity = getMyActivity();
 		Bundle args = getArguments();
@@ -514,6 +512,8 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 			} else {
 				app.setExternalStorageDirectory(type, newDirectory);
 				DataStorageHelper.reloadData(app, activity);
+				DataStorageHelper.checkAssets(app);
+				DataStorageHelper.updateDownloadIndexes(app);
 				if (!firstUsage) {
 					if (silentRestart) {
 						RestartActivity.doRestartSilent(activity);

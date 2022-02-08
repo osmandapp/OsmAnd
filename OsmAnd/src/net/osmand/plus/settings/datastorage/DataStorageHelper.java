@@ -327,6 +327,14 @@ public class DataStorageHelper {
 		return writable;
 	}
 
+	public static void checkAssets(@NonNull OsmandApplication app) {
+		app.getResourceManager().checkAssets(IProgress.EMPTY_PROGRESS, true, false);
+	}
+
+	public static void updateDownloadIndexes(@NonNull OsmandApplication app) {
+		app.getDownloadThread().runReloadIndexFilesSilent();
+	}
+
 	public static void reloadData(@NonNull OsmandApplication app, @NonNull FragmentActivity activity) {
 		final WeakReference<FragmentActivity> activityRef = new WeakReference<>((FragmentActivity) activity);
 		app.getResourceManager().reloadIndexesAsync(IProgress.EMPTY_PROGRESS, new ReloadIndexesListener() {

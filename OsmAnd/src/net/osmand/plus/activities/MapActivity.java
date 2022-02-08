@@ -821,7 +821,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (!permissionAsked) {
 				if (app.isExternalStorageDirectoryReadOnly() && !showStorageMigrationScreen
 						&& fragmentManager.findFragmentByTag(SharedStorageWarningFragment.TAG) == null
-						&& fragmentManager.findFragmentByTag(DataStorageFragment.TAG) == null) {
+						&& fragmentManager.findFragmentByTag(SettingsScreenType.DATA_STORAGE.fragmentName) == null) {
 					if (DownloadActivity.hasPermissionToWriteExternalStorage(this)) {
 						Bundle args = new Bundle();
 						args.putBoolean(FIRST_USAGE, true);
@@ -835,7 +835,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			} else {
 				if (permissionGranted) {
 					RestartActivity.doRestart(this, getString(R.string.storage_permission_restart_is_required));
-				} else if (fragmentManager.findFragmentByTag(DataStorageFragment.TAG) == null) {
+				} else if (fragmentManager.findFragmentByTag(SettingsScreenType.DATA_STORAGE.fragmentName) == null) {
 					Bundle args = new Bundle();
 					args.putBoolean(FIRST_USAGE, true);
 					BaseSettingsFragment.showInstance(this, SettingsScreenType.DATA_STORAGE, null, args, null);
