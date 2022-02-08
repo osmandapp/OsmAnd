@@ -158,16 +158,16 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		overlayLayer.updateParameter();
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		if (isActive()) {
-			updateLayer(mapView, settings, overlayLayer, settings.MAP_OVERLAY, 0.7f, settings.MAP_OVERLAY == settingsToWarnAboutMap);
+			updateLayer(mapView, settings, overlayLayer, settings.MAP_OVERLAY, ZORDER_OVERLAY, settings.MAP_OVERLAY == settingsToWarnAboutMap);
 		} else {
+			mapView.removeLayer(overlayLayer);
 			overlayLayer.setMap(null);
-//			overlayLayer.setVisible(false);
 		}
 		if (isActive()) {
-			updateLayer(mapView, settings, underlayLayer, settings.MAP_UNDERLAY, -0.5f, settings.MAP_UNDERLAY == settingsToWarnAboutMap);
+			updateLayer(mapView, settings, underlayLayer, settings.MAP_UNDERLAY, ZORDER_UNDERLAY, settings.MAP_UNDERLAY == settingsToWarnAboutMap);
 		} else {
+			mapView.removeLayer(underlayLayer);
 			underlayLayer.setMap(null);
-//			underlayLayer.setVisible(false);
 		}
 		if (mapActivity != null) {
 			MapLayers layers = mapActivity.getMapLayers();
