@@ -1,21 +1,20 @@
 package net.osmand.plus.views.layers;
 
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.android.TileSourceProxyProvider;
 import net.osmand.core.jni.MapLayerConfiguration;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.map.ITileSource;
 import net.osmand.plus.render.MapRenderRepositories;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.layers.base.BaseMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -25,28 +24,24 @@ import android.graphics.RectF;
 import androidx.annotation.NonNull;
 
 public class MapVectorLayer extends BaseMapLayer {
-
 	private OsmandMapTileView view;
 	private ResourceManager resourceManager;
 	private Paint paintImg;
 
 	private final RectF destImage = new RectF();
-	private final MapTileLayer tileLayer;
+	private boolean needUpdateProvider = true;
 	private boolean visible = false;
-	private boolean oldRender = false;
-	private String cachedUnderlay;
-	private Integer cachedMapTransparency;
-	private String cachedOverlay;
-	private Integer cachedOverlayTransparency;
+	private boolean cachedVisible = true;
+	private int cachedAlpha = -1;
 
-	public MapVectorLayer(@NonNull MapTileLayer tileLayer, boolean oldRender) {
-		super(tileLayer.getContext());
-		this.tileLayer = tileLayer;
-		this.oldRender = oldRender;
+	public MapVectorLayer(@NonNull Context context) {
+		super(context);
+		resourceManager = getApplication().getResourceManager();
 	}
 
 	@Override
 	public void destroyLayer() {
+		resetLayerProvider();
 	}
 
 	@Override
@@ -57,10 +52,12 @@ public class MapVectorLayer extends BaseMapLayer {
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
 		this.view = view;
-		resourceManager = view.getApplication().getResourceManager();
+
 		paintImg = new Paint();
 		paintImg.setFilterBitmap(true);
 		paintImg.setAlpha(getAlpha());
+
+		needUpdateProvider = true;
 	}
 
 	public boolean isVectorDataVisible() {
@@ -73,6 +70,7 @@ public class MapVectorLayer extends BaseMapLayer {
 
 	public void setVisible(boolean visible) {
 		this.visible = visible;
+
 		if (!visible) {
 			resourceManager.getRenderer().clearCache();
 		}
@@ -93,58 +91,57 @@ public class MapVectorLayer extends BaseMapLayer {
 
 	}
 
+	private void setLayerProvider() {
+		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+		if (mapContext != null) {
+			mapContext.recreateRasterAndSymbolsProvider();
+		}
+	}
+
+	private void resetLayerProvider() {
+		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+		if (mapContext != null) {
+			mapContext.resetRasterAndSymbolsProvider();
+		}
+	}
+
+	private void updateLayerProviderAlpha(int alpha) {
+		final MapRendererView mapRenderer = view.getMapRenderer();
+		if (mapRenderer != null) {
+			MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
+			mapLayerConfiguration.setOpacityFactor(((float) alpha) / 255.0f);
+			mapRenderer.setMapLayerConfiguration(MapRendererContext.OBF_RASTER_LAYER, mapLayerConfiguration);
+		}
+	}
+
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tilesRect, DrawSettings drawSettings) {
-		if (!visible) {
+		boolean currentVisible = isVisible();
+		boolean visibleChanged = cachedVisible != currentVisible;
+		if (view == null || (!currentVisible && !visibleChanged)) {
+			cachedVisible = currentVisible;
 			return;
 		}
-		// if (!isVectorDataVisible() && tileLayer != null) {
-		// tileLayer.drawTileMap(canvas, tilesRect);
-		// resourceManager.getRenderer().interruptLoadingMap();
-		// } else {
+
 		final MapRendererView mapRenderer = view.getMapRenderer();
-		if (mapRenderer != null && !oldRender) {
-			NativeCoreContext.getMapRendererContext().setNightMode(drawSettings.isNightMode());
-			OsmandSettings st = view.getApplication().getSettings();
-			if (!Algorithms.objectEquals(st.MAP_UNDERLAY.get(), cachedUnderlay)) {
-				cachedUnderlay = st.MAP_UNDERLAY.get();
-				ITileSource tileSource = st.getTileSourceByName(cachedUnderlay, false);
-				if (tileSource != null) {
-					TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), tileSource);
-					mapRenderer.setMapLayerProvider(-1, prov.instantiateProxy(true));
-					prov.swigReleaseOwnership();
-					// mapRenderer.setMapLayerProvider(-1,
-					// net.osmand.core.jni.OnlineTileSources.getBuiltIn().createProviderFor("Mapnik (OsmAnd)"));
-				} else {
-					mapRenderer.resetMapLayerProvider(-1);
-				}
-			}
-			if (!Algorithms.objectEquals(st.MAP_TRANSPARENCY.get(), cachedMapTransparency)) {
-				cachedMapTransparency = st.MAP_TRANSPARENCY.get();
-				MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
-				mapLayerConfiguration.setOpacityFactor(((float) cachedMapTransparency) / 255.0f);
-				mapRenderer.setMapLayerConfiguration(0, mapLayerConfiguration);
-			}
-			if (!Algorithms.objectEquals(st.MAP_OVERLAY.get(), cachedOverlay)) {
-				cachedOverlay = st.MAP_OVERLAY.get();
-				ITileSource tileSource = st.getTileSourceByName(cachedOverlay, false);
-				if (tileSource != null) {
-					TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), tileSource);
-					mapRenderer.setMapLayerProvider(1, prov.instantiateProxy(true));
-					prov.swigReleaseOwnership();
-					// mapRenderer.setMapLayerProvider(1,
-					// net.osmand.core.jni.OnlineTileSources.getBuiltIn().createProviderFor("Mapnik (OsmAnd)"));
-				} else {
-					mapRenderer.resetMapLayerProvider(1);
-				}
-			}
-			if (!Algorithms.objectEquals(st.MAP_OVERLAY_TRANSPARENCY.get(), cachedOverlayTransparency)) {
-				cachedOverlayTransparency = st.MAP_OVERLAY_TRANSPARENCY.get();
-				MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
-				mapLayerConfiguration.setOpacityFactor(((float) cachedOverlayTransparency) / 255.0f);
-				mapRenderer.setMapLayerConfiguration(1, mapLayerConfiguration);
-			}
+		if (mapRenderer != null) {
 			// opengl renderer
+			if (visibleChanged && !currentVisible) {
+				resetLayerProvider();
+				//return;
+			} else if (needUpdateProvider || (visibleChanged && currentVisible)) {
+				setLayerProvider();
+			}
+			needUpdateProvider = false;
+			cachedVisible = currentVisible;
+
+			NativeCoreContext.getMapRendererContext().setNightMode(drawSettings.isNightMode());
+			int alpha = getAlpha();
+			if (alpha != cachedAlpha) {
+				updateLayerProviderAlpha(alpha);
+				cachedAlpha = alpha;
+			}
+
 			LatLon ll = tilesRect.getLatLonFromPixel(tilesRect.getPixWidth() / 2, tilesRect.getPixHeight() / 2);
 			mapRenderer.setTarget(new PointI(MapUtils.get31TileNumberX(ll.getLongitude()), MapUtils.get31TileNumberY(ll
 					.getLatitude())));
@@ -153,7 +150,7 @@ public class MapVectorLayer extends BaseMapLayer {
 					.getZoomFloatPart()));
 			float zoomMagnifier = getMapDensity();
 			mapRenderer.setVisualZoomShift(zoomMagnifier - 1.0f);
-		} else {
+		} else if (currentVisible) {
 			if (!view.isZooming()) {
 				if (resourceManager.updateRenderedMapNeeded(tilesRect, drawSettings)) {
 					// pixRect.set(-view.getWidth(), -view.getHeight() / 2, 2 * view.getWidth(), 3 *
@@ -184,7 +181,7 @@ public class MapVectorLayer extends BaseMapLayer {
 			final float x2 = calc.getPixXFromTile(rb.x, rb.y, bmpLoc.getZoom());
 			final float y1 = calc.getPixYFromTile(lt.x, lt.y, bmpLoc.getZoom());
 			final float y2 = calc.getPixYFromTile(rb.x, rb.y, bmpLoc.getZoom());
-			
+
 //			LatLon lt = bmpLoc.getLeftTopLatLon();
 //			LatLon rb = bmpLoc.getRightBottomLatLon();
 //			final float x1 = calc.getPixXFromLatLon(lt.getLatitude(), lt.getLongitude());
@@ -204,6 +201,7 @@ public class MapVectorLayer extends BaseMapLayer {
 	@Override
 	public void setAlpha(int alpha) {
 		super.setAlpha(alpha);
+
 		if (paintImg != null) {
 			paintImg.setAlpha(alpha);
 		}

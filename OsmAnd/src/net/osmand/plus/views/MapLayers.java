@@ -128,12 +128,12 @@ public class MapLayers {
 		mapView.addLayer(contextMenuLayer, 8);
 		// mapView.addLayer(underlayLayer, -0.5f);
 		mapTileLayer = new MapTileLayer(ctx, true);
-		mapView.addLayer(mapTileLayer, 0.0f);
+		mapView.addLayer(mapTileLayer, 0.05f);
 		mapView.setMainLayer(mapTileLayer);
 
 		// 0.5 layer
-		mapVectorLayer = new MapVectorLayer(mapTileLayer, false);
-		mapView.addLayer(mapVectorLayer, 0.5f);
+		mapVectorLayer = new MapVectorLayer(ctx);
+		mapView.addLayer(mapVectorLayer, 0.0f);
 
 		downloadedRegionsLayer = new DownloadedRegionsLayer(ctx);
 		mapView.addLayer(downloadedRegionsLayer, 0.5f);
