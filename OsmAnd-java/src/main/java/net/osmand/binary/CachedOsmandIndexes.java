@@ -220,7 +220,7 @@ public class CachedOsmandIndexes {
  		return found;
 	}
 
-	private BinaryMapIndexReader initReaderFromFileIndex(FileIndex found, RandomAccessFile mf, File f) throws IOException {
+	public static BinaryMapIndexReader initReaderFromFileIndex(FileIndex found, RandomAccessFile mf, File f) throws IOException {
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(mf, f, false);
 		reader.version = found.getVersion();
 		reader.dateCreated = found.getDateModified();
