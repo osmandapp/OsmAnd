@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.helpers;
 
 import android.location.Location;
 import android.os.Looper;
@@ -15,14 +15,14 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.helpers.DayNightHelper;
-import net.osmand.plus.helpers.LocationServiceHelper;
+import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.OsmandApplication;
 
 import org.apache.commons.logging.Log;
 
 import java.util.Collections;
 
-public class LocationServiceHelperImpl extends LocationServiceHelper {
+public class GmsLocationServiceHelper extends LocationServiceHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(DayNightHelper.class);
 
@@ -40,7 +40,7 @@ public class LocationServiceHelperImpl extends LocationServiceHelper {
 
 	private LocationCallback locationCallback;
 
-	public LocationServiceHelperImpl(@NonNull OsmandApplication app) {
+	public GmsLocationServiceHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 
 		fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(app);
@@ -70,20 +70,18 @@ public class LocationServiceHelperImpl extends LocationServiceHelper {
 		fusedLocationCallback = new com.google.android.gms.location.LocationCallback() {
 			@Override
 			public void onLocationResult(LocationResult locationResult) {
-				LocationCallback locationCallback = LocationServiceHelperImpl.this.locationCallback;
+				LocationCallback locationCallback = GmsLocationServiceHelper.this.locationCallback;
 				if (locationCallback != null) {
 					Location location = locationResult != null ? locationResult.getLastLocation() : null;
 					net.osmand.Location l = convertLocation(location);
-					locationCallback.onLocationResult(l == null
-							? Collections.<net.osmand.Location>emptyList() : Collections.singletonList(l));
+					locationCallback.onLocationResult(l == null ? Collections.emptyList() : Collections.singletonList(l));
 				}
-
 			}
 
 			@Override
 			public void onLocationAvailability(LocationAvailability locationAvailability) {
-				LocationCallback locationCallback = LocationServiceHelperImpl.this.locationCallback;
-				if (locationAvailability != null &&  locationCallback != null) {
+				LocationCallback locationCallback = GmsLocationServiceHelper.this.locationCallback;
+				if (locationAvailability != null && locationCallback != null) {
 					locationCallback.onLocationAvailability(locationAvailability.isLocationAvailable());
 				}
 			}
@@ -137,7 +135,7 @@ public class LocationServiceHelperImpl extends LocationServiceHelper {
 				@Override
 				public void onSuccess(Location loc) {
 					locationCallback.onLocationResult(loc != null
-							? Collections.singletonList(convertLocation(loc)) : Collections.<net.osmand.Location>emptyList() );
+							? Collections.singletonList(convertLocation(loc)) : Collections.emptyList() );
 				}
 			});
 		} catch (SecurityException e) {

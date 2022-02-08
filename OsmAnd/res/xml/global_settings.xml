@@ -44,14 +44,6 @@
 		android:title="@string/analytics_pref_title" />
 
 	<Preference
-		android:key="dialogs_and_notifications"
-		android:layout="@layout/preference_with_descr"
-		android:persistent="false"
-		android:title="@string/dialogs_and_notifications_title"
-		app:fragment="net.osmand.plus.settings.fragments.DialogsAndNotificationsSettingsFragment"
-		tools:icon="@drawable/ic_action_notification" />
-
-	<Preference
 		android:key="history"
 		android:layout="@layout/preference_with_descr"
 		android:persistent="false"
@@ -67,6 +59,30 @@
 		android:title="@string/proxy_pref_title"
 		app:fragment="net.osmand.plus.settings.fragments.ProxySettingsFragment"
 		tools:icon="@drawable/ic_action_proxy" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<PreferenceCategory
+		android:key="other"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/shared_string_other" />
+
+	<Preference
+		android:key="dialogs_and_notifications"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/dialogs_and_notifications_title"
+		app:fragment="net.osmand.plus.settings.fragments.DialogsAndNotificationsSettingsFragment"
+		tools:icon="@drawable/ic_action_notification" />
+
+	<Preference
+		android:key="location_source"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/location_source"
+		tools:icon="@drawable/ic_action_device_location" />
 
 	<Preference
 		android:layout="@layout/simple_divider_item"
