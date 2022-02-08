@@ -29,9 +29,10 @@ public class MapVectorLayer extends BaseMapLayer {
 	private Paint paintImg;
 
 	private final RectF destImage = new RectF();
-	private boolean visible = false;
 	private boolean needUpdateProvider = true;
-	private boolean needUpdateAlpha = true;
+	private boolean visible = false;
+	private boolean cachedVisible = true;
+	private int cachedAlpha = -1;
 
 	public MapVectorLayer(@NonNull Context context) {
 		super(context);
@@ -58,7 +59,6 @@ public class MapVectorLayer extends BaseMapLayer {
 		paintImg.setAlpha(getAlpha());
 
 		needUpdateProvider = true;
-		needUpdateAlpha = true;
 	}
 
 	public boolean isVectorDataVisible() {
@@ -70,7 +70,6 @@ public class MapVectorLayer extends BaseMapLayer {
 	}
 
 	public void setVisible(boolean visible) {
-		needUpdateProvider = true;
 		this.visible = visible;
 
 		if (!visible) {
@@ -96,9 +95,7 @@ public class MapVectorLayer extends BaseMapLayer {
 	private void setLayerProvider() {
 		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 		if (mapContext != null) {
-			//mapContext.updateMapPresentationEnvironment();
 			mapContext.recreateRasterAndSymbolsProvider();
-			//mapContext.updateMapSettings();
 		}
 	}
 
@@ -106,51 +103,44 @@ public class MapVectorLayer extends BaseMapLayer {
 		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 		if (mapContext != null) {
 			mapContext.resetRasterAndSymbolsProvider();
+			//mapContext.updateMapSettings();
 		}
 	}
 
-	private void updateLayerProviderAlpha() {
-		if (view != null) {
-			int alpha = this.getAlpha();
-
-			final MapRendererView mapRenderer = view.getMapRenderer();
-			if (mapRenderer != null) {
-				MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
-				mapLayerConfiguration.setOpacityFactor(((float) alpha) / 255.0f);
-				mapRenderer.setMapLayerConfiguration(MapRendererContext.OBF_RASTER_LAYER, mapLayerConfiguration);
-			}
+	private void updateLayerProviderAlpha(int alpha) {
+		final MapRendererView mapRenderer = view.getMapRenderer();
+		if (mapRenderer != null) {
+			MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
+			mapLayerConfiguration.setOpacityFactor(((float) alpha) / 255.0f);
+			mapRenderer.setMapLayerConfiguration(MapRendererContext.OBF_RASTER_LAYER, mapLayerConfiguration);
 		}
 	}
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tilesRect, DrawSettings drawSettings) {
-		if ((!isVisible() && !needUpdateProvider) || view == null) {
+		boolean currentVisible = isVisible();
+		boolean visibleChanged = cachedVisible != currentVisible;
+		if (view == null || (!currentVisible && !visibleChanged)) {
 			return;
 		}
 
-		if (!isVisible() && needUpdateProvider) {
-			resetLayerProvider();
-			needUpdateProvider = false;
-			return;
-		}
-
-		// if (!isVectorDataVisible() && tileLayer != null) {
-		// tileLayer.drawTileMap(canvas, tilesRect);
-		// resourceManager.getRenderer().interruptLoadingMap();
-		// } else {
 		final MapRendererView mapRenderer = view.getMapRenderer();
 		if (mapRenderer != null) {
 			// opengl renderer
-			NativeCoreContext.getMapRendererContext().setNightMode(drawSettings.isNightMode());
-
-			if (needUpdateProvider) {
+			if (visibleChanged && !currentVisible) {
+				resetLayerProvider();
+				//return;
+			} else if (needUpdateProvider || (visibleChanged && currentVisible)) {
 				setLayerProvider();
-				needUpdateProvider = false;
 			}
+			needUpdateProvider = false;
+			cachedVisible = currentVisible;
 
-			if (needUpdateAlpha) {
-				updateLayerProviderAlpha();
-				needUpdateAlpha = false;
+			NativeCoreContext.getMapRendererContext().setNightMode(drawSettings.isNightMode());
+			int alpha = getAlpha();
+			if (alpha != cachedAlpha) {
+				updateLayerProviderAlpha(alpha);
+				cachedAlpha = alpha;
 			}
 
 			LatLon ll = tilesRect.getLatLonFromPixel(tilesRect.getPixWidth() / 2, tilesRect.getPixHeight() / 2);
@@ -192,7 +182,7 @@ public class MapVectorLayer extends BaseMapLayer {
 			final float x2 = calc.getPixXFromTile(rb.x, rb.y, bmpLoc.getZoom());
 			final float y1 = calc.getPixYFromTile(lt.x, lt.y, bmpLoc.getZoom());
 			final float y2 = calc.getPixYFromTile(rb.x, rb.y, bmpLoc.getZoom());
-			
+
 //			LatLon lt = bmpLoc.getLeftTopLatLon();
 //			LatLon rb = bmpLoc.getRightBottomLatLon();
 //			final float x1 = calc.getPixXFromLatLon(lt.getLatitude(), lt.getLongitude());
@@ -211,7 +201,6 @@ public class MapVectorLayer extends BaseMapLayer {
 
 	@Override
 	public void setAlpha(int alpha) {
-		needUpdateAlpha = true;
 		super.setAlpha(alpha);
 
 		if (paintImg != null) {
