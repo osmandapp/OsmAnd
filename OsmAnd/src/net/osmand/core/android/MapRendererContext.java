@@ -165,7 +165,8 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 		QStringStringHash convertedStyleSettings = getMapStyleSettings();
 		mapPresentationEnvironment.setSettings(convertedStyleSettings);
 
-		if (obfMapRasterLayerProvider != null || obfMapSymbolsProvider != null) {
+		boolean vectorData = !app.getSettings().MAP_ONLINE_DATA.get();
+		if ((obfMapRasterLayerProvider != null || obfMapSymbolsProvider != null) && vectorData) {
 			recreateRasterAndSymbolsProvider();
 		}
 	}
@@ -257,13 +258,17 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 			cachedReferenceTileSize = getReferenceTileSize();
 			((AtlasMapRendererView)mapRendererView).setReferenceTileSizeOnScreenInPixels(cachedReferenceTileSize);
 		}
-		// Layers
-		if (obfMapRasterLayerProvider != null) {
-			mapRendererView.setMapLayerProvider(OBF_RASTER_LAYER, obfMapRasterLayerProvider);
-		}
-		// Symbols
-		if (obfMapSymbolsProvider != null) {
-			mapRendererView.addSymbolsProvider(obfMapSymbolsProvider);
+
+		boolean vectorData = !app.getSettings().MAP_ONLINE_DATA.get();
+		if (vectorData) {
+			// Layers
+			if (obfMapRasterLayerProvider != null) {
+				mapRendererView.setMapLayerProvider(OBF_RASTER_LAYER, obfMapRasterLayerProvider);
+			}
+			// Symbols
+			if (obfMapSymbolsProvider != null) {
+				mapRendererView.addSymbolsProvider(obfMapSymbolsProvider);
+			}
 		}
 	}
 
