@@ -11,7 +11,6 @@ import com.google.android.gms.location.LocationAvailability;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import net.osmand.PlatformUtil;
@@ -69,19 +68,19 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 
 		fusedLocationCallback = new com.google.android.gms.location.LocationCallback() {
 			@Override
-			public void onLocationResult(LocationResult locationResult) {
+			public void onLocationResult(@NonNull LocationResult locationResult) {
 				LocationCallback locationCallback = GmsLocationServiceHelper.this.locationCallback;
 				if (locationCallback != null) {
-					Location location = locationResult != null ? locationResult.getLastLocation() : null;
+					Location location = locationResult.getLastLocation();
 					net.osmand.Location l = convertLocation(location);
 					locationCallback.onLocationResult(l == null ? Collections.emptyList() : Collections.singletonList(l));
 				}
 			}
 
 			@Override
-			public void onLocationAvailability(LocationAvailability locationAvailability) {
+			public void onLocationAvailability(@NonNull LocationAvailability locationAvailability) {
 				LocationCallback locationCallback = GmsLocationServiceHelper.this.locationCallback;
-				if (locationAvailability != null && locationCallback != null) {
+				if (locationCallback != null) {
 					locationCallback.onLocationAvailability(locationAvailability.isLocationAvailable());
 				}
 			}
@@ -131,13 +130,8 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 		}
 		try {
 			Task<Location> lastLocation = fusedLocationProviderClient.getLastLocation();
-			lastLocation.addOnSuccessListener(new OnSuccessListener<Location>() {
-				@Override
-				public void onSuccess(Location loc) {
-					locationCallback.onLocationResult(loc != null
-							? Collections.singletonList(convertLocation(loc)) : Collections.emptyList() );
-				}
-			});
+			lastLocation.addOnSuccessListener(loc -> locationCallback.onLocationResult(loc != null
+					? Collections.singletonList(convertLocation(loc)) : Collections.emptyList() ));
 		} catch (SecurityException e) {
 			LOG.debug("Location service permission not granted");
 		} catch (IllegalArgumentException e) {
