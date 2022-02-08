@@ -909,7 +909,7 @@ public class GpxSelectionHelper {
 				callback.processResult(gpxFile);
 				return true;
 			});
-			loadGpxTask.execute();
+			loadGpxTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
 

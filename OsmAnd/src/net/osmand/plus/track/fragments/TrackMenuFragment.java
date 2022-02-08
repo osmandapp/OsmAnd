@@ -1595,7 +1595,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					return true;
 				}
 			});
-			gpxFileLoaderTask.execute();
+			gpxFileLoaderTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
 
