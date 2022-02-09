@@ -4506,19 +4506,19 @@
     <string name="rendering_attr_seabedDetail_name">海底詳細資訊</string>
     <string name="rendering_attr_seabedDetail_description">關於海床表面狀況、雜草或海草的組合表面類型、類別和分類群的額外文字資訊</string>
     <string name="rendering_value_all_name">所有</string>
-    <string name="save_track_to_gpx_descrp">在導航過程中自動開始記錄軌跡。完成後，將會自動儲存軌跡。</string>
-    <string name="gpx_no_routes_descr">您可以使用「%1$s」工具將路線新增至檔案中。</string>
+    <string name="save_track_to_gpx_descrp">在導航時自動開始紀錄軌跡，並在之後自動儲存。</string>
+    <string name="gpx_no_routes_descr">您可以使用「%1$s」工具來儲存路線為檔案。</string>
     <string name="gpx_no_routes_title">沒有路線</string>
     <string name="quick_action_add_route_descr">從畫面中央開始路線的按鈕。</string>
-    <string name="please_provide_group_name_message">請提供群組名稱。</string>
+    <string name="please_provide_group_name_message">請為群組命名。</string>
     <string name="list_of_groups">群組清單</string>
-    <string name="points_selection_descr">您確定您想要關閉？您將會遺失所有變動。</string>
+    <string name="points_selection_descr">關閉並遺失所有變動？</string>
     <string name="select_suggested_points">選取建議的點</string>
     <string name="import_tracks">匯入軌跡</string>
     <string name="selected_waypoints_descr">已選取的航點將會新增至「%1$s」軌跡</string>
     <string name="shared_string_reading_file">正在讀取檔案……</string>
     <string name="all_groups">所有群組</string>
-    <string name="exit_import_descr">您確定您想要不儲存就離開嗎？您將會遺失所有變動。</string>
-    <string name="exit_import">結束匯入？</string>
-    <string name="import_tracks_descr">%1$s，包含 %2$s 個分離軌跡。選擇您想要匯入的軌跡。</string>
+    <string name="exit_import_descr">離開且不儲存任何變動？</string>
+    <string name="exit_import">離開？</string>
+    <string name="import_tracks_descr">%1$s，包含 %2$s 個分離軌跡。選擇要匯入的軌跡。</string>
 </resources>

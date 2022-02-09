@@ -2287,10 +2287,10 @@
     <string name="shared_string_paste">Lim inn</string>
     <string name="go_to_next_field">Neste felt</string>
     <string name="rename_marker">Gi nytt navn til markør</string>
-    <string name="empty_state_osm_edits_descr">Opprett eller endre OSM-interessepunkter, åpne eller kommenter OSM-notater, og send inn innspilte GPX-filer.</string>
+    <string name="empty_state_osm_edits_descr">Opprett eller endre OpenStreetMap-interessepunkter, åpne eller kommenter OSM-notater og bidra med innspilte GPX-filer.</string>
     <string name="shared_string_deleted">Slettet</string>
     <string name="shared_string_edited">Redigert</string>
-    <string name="empty_state_osm_edits">Opprett eller endre OSM-objekter</string>
+    <string name="empty_state_osm_edits">Opprett eller endre OpenStreetMap-objekter</string>
     <string name="shared_string_added">Lagt til</string>
     <string name="marker_activated">Markøren %s er aktivert.</string>
     <string name="one_tap_active_descr">Trykk en markør på kartet for å flytte den til toppen av de aktive markørene uten å åpne lokalmenyen.</string>
@@ -2724,10 +2724,10 @@
     <string name="show_full_description">Vis full beskrivelse</string>
     <string name="nautical_render_descr">Nautisk navigasjonsstil. Har bøyer, fyr, vannveier, skipsleder og merker, havner, sjømerketjenester, dybdekonturer.</string>
     <string name="ski_map_render_descr">Skistil. Har bakker, heiser og andre skifunksjoner osv. Demper sekundære kartobjekter.</string>
-    <string name="light_rs_render_descr">Enkel kjørestil. Skånsomt nattmodus. Koter, kontrasterende oransje veier, dempede sekundære kartobjekter.</string>
-    <string name="topo_render_descr">For turgåing, vandring og sykling i naturen. Lesbar utendørs. Kontrasterende veier og naturlige objekter, forskjellige rutetyper, avanserte kotealternativer, flere detaljer. Justering av overflate gjør det mulig å skjelne veikvalitet. Inget nattmodus.</string>
+    <string name="light_rs_render_descr">Enkel kjørestil. Skånsom nattmodus, koter, kontrastrike oransjefargede veier, dempede sekundære kartobjekter.</string>
+    <string name="topo_render_descr">For turgåing, vandring og sykling i naturen. Lesbar utendørs. Kontrasterende veier og naturlige objekter, forskjellige rutetyper, avanserte kotealternativer, flere detaljer. Justering av overflate gjør det mulig å skjelne veikvalitet. Ingen nattmodus.</string>
     <string name="mapnik_render_descr">Gammel forvalgt \'Mapnik\'-stil. Lignende farger som \"Mapnik\".</string>
-    <string name="touring_view_render_descr">Høydetaljert kontraststil for turformål. Alle innstillingsmulighetene til forvalgsstilen med så høy detaljvisning som mulig, i særdeleshet veier, stier og andre måter å reise på. Klar \"reiseatlas\"-forskjell mellom alle ulike typer veier. Egnet for utendørs bruk, dag- og nattmodus.</string>
+    <string name="touring_view_render_descr">Turstil med høy kontrast og maksimalt med detaljer. Inkluderer alle alternativene til standardstilen til OsmAnd, med visning av så mange detaljer som mulig, i særdeleshet veier, stier og andre måter å reise på. Tydelig \"reiseatlas\"-skille mellom veityper. Egnet for dag, natt og utendørs bruk.</string>
     <string name="default_render_descr">Stil for generell bruk. Renere opptegning i tett befolkede byer. Har koter, ruter, overflatekvalitet, tilgangsbegrensninger, veinummer, stiopptegning i henhold til SAC-skala, raftingsfunksjoner.</string>
     <string name="open_wikipedia_link_online">Åpne Wikipedia-lenke på nett</string>
     <string name="open_wikipedia_link_online_description">Lenken vil åpnes i en nettleser.</string>
@@ -3891,7 +3891,7 @@
     <string name="delete_waypoints">Slett rutepunkter</string>
     <string name="login_open_street_map">Logg inn på OpenStreetMap</string>
     <string name="user_login">Logg inn</string>
-    <string name="announcement_time_passing">Tidsforbruk</string>
+    <string name="announcement_time_passing">Ved passering</string>
     <string name="announcement_time_approach">Ankomst</string>
     <string name="context_menu_edit_descr">Rediger beskrivelse</string>
     <string name="copy_to_map_markers">Kopier til kartmarkører</string>
@@ -4157,9 +4157,9 @@
     <string name="shared_string_contributions">Bidrag</string>
     <string name="connect_track_points_as">Forbind rutepunkter</string>
     <string name="offline_maps_required_descr">Noen frakoblede kart mangler for denne ruten.</string>
-    <string name="online_maps_required_descr">Osman kan ikke finne en rute som passer med innstillingene dine.
+    <string name="online_maps_required_descr">OsmAnd kan ikke finne en rute som passer med innstillingene dine.
 \n
-\nKanskje noen kart ikke er innlastet. Du kan se etter nødvendige kart på nett.</string>
+\nKanskje noen kart ikke er innlastet. Du kan kjøre en nettbasert sjekk for nødvendige kart.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Utforsk OsmAnd abonnementer for å finne et som passer deg.</string>
     <string name="option_available_only_in_osmand_pro">Dette er tilgjengelig som del av OsmAnd Pro-abonnementet.</string>
     <string name="purchases_feature_desc_pro_widgets">Få tilgang til OsmAnd Pro-funksjoner. Rutefargelegging med mer.</string>
@@ -4419,21 +4419,24 @@
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Vannveistunneler</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Skjematisk visning av ikoner ved lav forstørrelse</string>
     <string name="gpx_no_routes_title">Det finnes ingen ruter</string>
-    <string name="gpx_no_routes_descr">Du kan bruke «%1$s»-verktøyet for å legge til ruteinfo i en fil.</string>
+    <string name="gpx_no_routes_descr">Du kan bruke \"%1$s\"-verktøyet for å lagre ruten som en fil.</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Vis fiksmeg-etiketter</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Fiksmeg-etiketter</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Notis-etiketter</string>
-    <string name="save_track_to_gpx_descrp">Start sporopptak under navigasjon og lagre når det er slitt.</string>
+    <string name="save_track_to_gpx_descrp">Auto-start sporopptak under navigasjon og auto-lagre etterpå.</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikoner ved lav forstørrelse</string>
     <string name="predefined_waypoint_appearance_description">Trykk lagrer veipunktet med forhåndsdefinerte parameter.</string>
     <string name="always_ask_waypoint_appearance_description">Trykk åpner «Legg til veipunkt», der du kan endre navn og utseende.</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Ikke skjul vannveistunneler</string>
     <string name="not_enough_contributions_descr">Minst %1$s endringer de siste to månedene %2$s kreves for ubegrenset tilgang til timevise kartoppdateringer.</string>
     <string name="shared_string_reading_file">Leser fil …</string>
-    <string name="exit_import">Avslutt import\?</string>
+    <string name="exit_import">Avslutte\?</string>
     <string name="select_suggested_points">Velg foreslåtte punkter</string>
     <string name="selected_waypoints_descr">Valgte veipunkter vil bli lagt til «%1$s»-sporet</string>
     <string name="all_groups">Alle grupper</string>
     <string name="list_of_groups">Liste over grupper</string>
     <string name="import_tracks">Importer spor</string>
+    <string name="exit_import_descr">Avslutte uten å lagre endringer\?</string>
+    <string name="points_selection_descr">Lukke og miste alle endringer\?</string>
+    <string name="import_tracks_descr">%1$s, inneholder %2$s separate spor. Velg spor å importere.</string>
 </resources>

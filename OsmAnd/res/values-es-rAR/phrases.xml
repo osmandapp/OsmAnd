@@ -4289,4 +4289,5 @@
     <string name="poi_avalanche_transceiver">Detector de víctimas de avalanchas; AVD;ARBA; Transceptor de avalanchas</string>
     <string name="poi_parcel_locker">Casillero de paquetería</string>
     <string name="poi_access_permit">Sólo con permiso</string>
+    <string name="poi_tiles">Venta de azulejos</string>
 </resources>
