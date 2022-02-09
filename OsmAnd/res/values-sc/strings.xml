@@ -4510,4 +4510,10 @@
     <string name="shared_string_show_slope">Ammustra sa pendèntzia</string>
     <string name="elevation_profile">Profilu de artària</string>
     <string name="navigate_point_format_swiss_grid_plus">Grìllia isvìtzera (CH1903+)</string>
+    <string name="quick_action_add_route_descr">Unu butone pro incumintzare un\'àndala dae su tzentru de s\'ischermu.</string>
+    <string name="please_provide_group_name_message">Issèbera unu nùmene pro su grupu.</string>
+    <string name="gpx_no_routes_descr">Podes impreare s\'aina \"%1$s\" pro annànghere un\'àndala a intro de su documentu.</string>
+    <string name="gpx_no_routes_title">Non bi sunt àndalas</string>
+    <string name="rendering_attr_seabedDetail_description">Informatziones additzionales subra de sas caraterìsticas de sa superfìtzie de su fundu marinu (surface_qualification), sas castas de superfìtzies cumbinadas, sas categorias e sa tassonomia de s\'erba o de sas algas</string>
+    <string name="save_track_to_gpx_descrp">Incumintza sa registratzione in manera automàtica cando sa navigatzione est in cursu. Cando at a agabbare sa rasta s\'at a sarvare in automàticu.</string>
 </resources>

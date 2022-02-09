@@ -4511,4 +4511,16 @@
     <string name="save_track_to_gpx_descrp">Spustiť nahrávanie stopy automaticky keď prebieha navigácia. Po jej ukončení sa stopa automaticky uloží.</string>
     <string name="gpx_no_routes_title">Neexistujú žiadne trasy</string>
     <string name="gpx_no_routes_descr">Na pridanie cesty do súboru môžete použiť nástroj \"%1$s\".</string>
+    <string name="quick_action_add_route_descr">Tlačidlo na začatie trasy v strede obrazovky.</string>
+    <string name="select_suggested_points">Zvoľte navrhované body</string>
+    <string name="selected_waypoints_descr">Zvolené body trasy budú pridané do stopy \"%1$s\"</string>
+    <string name="shared_string_reading_file">Načítava sa súbor…</string>
+    <string name="all_groups">Všetky skupiny</string>
+    <string name="list_of_groups">Zoznam skupín</string>
+    <string name="points_selection_descr">Naozaj chcete zatvoriť\? Stratíte všetky zmeny.</string>
+    <string name="exit_import_descr">Naozaj chcete skončiť bez uloženia\? Stratíte všetky zmeny.</string>
+    <string name="exit_import">Ukončiť import\?</string>
+    <string name="import_tracks">Importovať stopy</string>
+    <string name="import_tracks_descr">%1$s, obsahuje %2$s samostatných stôp. Zvoľte stopy na importovanie.</string>
+    <string name="please_provide_group_name_message">Prosím zadajte názov pre skupinu.</string>
 </resources>

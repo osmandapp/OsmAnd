@@ -4456,7 +4456,7 @@
     <string name="gps_filter_precision">Dokładność GPS</string>
     <string name="gps_filter_actions_description">OsmAnd zastosuje zmiany do ścieżki bez aktualizowania pliku. Zmiany można zapisywać ręcznie.</string>
     <string name="storage_migration_wrong_folder_warning">W wybranym folderze nie znaleziono danych OsmAnd. Proszę spróbuj ponownie.</string>
-    <string name="fold_unfold">złóż/rozłóż</string>
+    <string name="fold_unfold">zwiń/rozwiń</string>
     <string name="app_profile_type">Typ profilu aplikacji</string>
     <string name="storage_copied_files_size">Skopiowane %1$s pliki %2$s</string>
     <string name="rendering_attr_natureReserves_description">Pokaż rezerwat przyrody, obszary chronione i parki narodowe.</string>
@@ -4501,5 +4501,11 @@
     <string name="rendering_attr_seabedDetail_description">Dodatkowe informacje tekstowe dotyczące powierzchni dna morskiego_kwalifikacja, połączone rodzaje powierzchni, kategoria i takson chwastów lub trawy morskiej</string>
     <string name="rendering_value_category_name">Kategoria</string>
     <string name="rendering_value_all_name">Wszystkie</string>
-    <string name="rendering_attr_seabedDetail_name">Szczegóły dotyczące dna morskiego</string>
+    <string name="rendering_attr_seabedDetail_name">Szczegóły dna morskiego</string>
+    <string name="please_provide_group_name_message">Podaj nazwę grupy.</string>
+    <string name="quick_action_add_route_descr">Przycisk rozpoczęcia trasy od środka ekranu.</string>
+    <string name="gpx_no_routes_descr">Możesz użyć narzędzia \"%1$s\", aby dodać trasę do pliku.</string>
+    <string name="gpx_no_routes_title">Brak tras</string>
+    <string name="save_track_to_gpx_descrp">Rozpocznij nagrywanie śladu automatycznie, gdy nawigacja jest w toku. Po zakończeniu ścieżka zostanie automatycznie zapisana.</string>
+    <string name="rendering_value_omit_name">Pomijać</string>
 </resources>

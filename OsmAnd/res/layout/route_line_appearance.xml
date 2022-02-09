@@ -65,6 +65,7 @@
         android:id="@+id/context_menu_toolbar_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?attr/appbar_and_list_background_color"
         android:alpha="0">
 
         <androidx.appcompat.widget.Toolbar

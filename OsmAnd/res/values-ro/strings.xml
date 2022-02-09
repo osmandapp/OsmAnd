@@ -4519,4 +4519,18 @@
     <string name="rendering_value_omit_name">Omiteți</string>
     <string name="rendering_attr_seabedDetail_name">Detalii privind fundul mării</string>
     <string name="save_track_to_gpx_descrp">Începeți înregistrarea automată a pieselor în timpul navigației. Când se termină, pista va fi salvată automat.</string>
+    <string name="quick_action_add_route_descr">Un buton pentru a începe un traseu din mijlocul ecranului.</string>
+    <string name="gpx_no_routes_descr">Puteți utiliza instrumentul \"%1$s\" pentru a adăuga traseul în fișier.</string>
+    <string name="gpx_no_routes_title">Nu există rute</string>
+    <string name="please_provide_group_name_message">Vă rugăm să furnizați un nume pentru grup.</string>
+    <string name="selected_waypoints_descr">Punctele de parcurs selectate vor fi adăugate la traseul \"%1$s\"</string>
+    <string name="shared_string_reading_file">Citirea fișierului…</string>
+    <string name="all_groups">Toate grupurile</string>
+    <string name="list_of_groups">Lista de grupuri</string>
+    <string name="points_selection_descr">Ești sigur că vrei să închizi\? Veți pierde toate modificările.</string>
+    <string name="exit_import_descr">Sunteți sigur că doriți să ieșiți fără a salva\? Veți pierde toate modificările.</string>
+    <string name="exit_import">Ieșiți din import\?</string>
+    <string name="import_tracks">Importați piese</string>
+    <string name="select_suggested_points">Selectați punctele propuse</string>
+    <string name="import_tracks_descr">%1$s, conține %2$s piese separate. Alegeți piesele pe care doriți să le importați.</string>
 </resources>

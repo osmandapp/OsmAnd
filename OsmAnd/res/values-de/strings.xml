@@ -4522,4 +4522,6 @@
     <string name="gpx_no_routes_title">Es gibt keine Routen</string>
     <string name="save_track_to_gpx_descrp">Trackaufnahme wird bei Navigation automatisch gestartet. Wenn sie beendet ist, wird der Track automatisch gespeichert.</string>
     <string name="gpx_no_routes_descr">Sie können das Tool \"%1$s\" nutzen, um die Route in einer Datei hinzuzufügen.</string>
+    <string name="quick_action_add_route_descr">Eine Schaltfläche zum Starten einer Route in der Mitte des Bildschirms.</string>
+    <string name="please_provide_group_name_message">Bitte geben Sie einen Namen für die Gruppe an.</string>
 </resources>

@@ -15,7 +15,7 @@ import androidx.core.view.ViewCompat;
 
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.MGRSPoint;
-import com.jwetherell.openmap.common.UTMPoint;
+import com.jwetherell.openmap.common.ZonedUTMPoint;
 
 import net.osmand.LocationConvert;
 import net.osmand.data.Amenity;
@@ -655,9 +655,8 @@ public class OsmAndFormatter {
 					.append(formatCoordinate(lon, outputFormat)).append(rtlCoordinates).append(" ").append(rtlCoordinates)
 					.append(lon > 0 ? EAST : WEST);
 		} else if (outputFormat == UTM_FORMAT) {
-			UTMPoint pnt = new UTMPoint(new LatLonPoint(lat, lon));
-			result
-					.append(pnt.zone_number)
+			ZonedUTMPoint pnt = new ZonedUTMPoint(new LatLonPoint(lat, lon));
+			result.append(pnt.zone_number)
 					.append(pnt.zone_letter).append(" ")
 					.append((long) pnt.easting).append(" ")
 					.append((long) pnt.northing);

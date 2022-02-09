@@ -4513,7 +4513,19 @@
     <string name="rendering_value_all_name">Усі</string>
     <string name="rendering_value_omit_name">Пропустити</string>
     <string name="rendering_attr_seabedDetail_name">Подробиці про морське дно</string>
-    <string name="save_track_to_gpx_descrp">Автозапис треків під час навігації. Після завершення запису, трек буде збережено автоматично.</string>
-    <string name="gpx_no_routes_descr">Ви можете використовувати інструмент «%1$s», щоб записувати маршрут у файл.</string>
+    <string name="save_track_to_gpx_descrp">Автозапуск запису треку під час навігації та автоматичне збереження після завершення.</string>
+    <string name="gpx_no_routes_descr">Ви можете використовувати інструмент «%1$s», щоб зберегти маршрут як файл.</string>
     <string name="gpx_no_routes_title">Маршрути відсутні</string>
+    <string name="quick_action_add_route_descr">Кнопка запуску маршруту з середини екрана.</string>
+    <string name="please_provide_group_name_message">Назвіть групу.</string>
+    <string name="list_of_groups">Список груп</string>
+    <string name="select_suggested_points">Виберіть запропоновані точки</string>
+    <string name="selected_waypoints_descr">Вибрані маршрутні точки будуть додані до треку \"%1$s\"</string>
+    <string name="all_groups">Усі групи</string>
+    <string name="exit_import_descr">Вийти без збереження змін\?</string>
+    <string name="shared_string_reading_file">Читання файлу…</string>
+    <string name="points_selection_descr">Закрити й відкинути всі зміни\?</string>
+    <string name="exit_import">Вийти\?</string>
+    <string name="import_tracks">Імпорт треків</string>
+    <string name="import_tracks_descr">%1$s, містить %2$s окремі треки. Виберіть треки, які потрібно імпортувати.</string>
 </resources>

@@ -3854,7 +3854,7 @@
     <string name="manage_subscription">Sýsla með áskrift</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="gpx_upload_public_visibility_descr">\"Opinbert\" þýðir að ferillinn birtist í GPS-ferlunum þínum og á opinberum listum yfir GPS-ferla, þar sem ferilpunktar eru með tímamerkjum á frumsniði. Gögn sem eru sótt í gegnum opinbert GPS API-forritsviðmót vísa ekki í ferlasíðuna þína. Tímamerki ferilpunkta eru ekki tiltæk í gegnum opinbera GPS API-forritsviðmótið og er ekki raðað í tímaröð.</string>
-    <string name="app_mode_kayak">Kayak</string>
+    <string name="app_mode_kayak">Kajak</string>
     <string name="shared_string_add_photo">Bæta við mynd</string>
     <string name="gpx_upload_identifiable_visibility_descr">\"Auðkennanlegt\" þýðir að ferillinn birtist í GPS-ferlunum þínum og á opinberum listum yfir GPS-ferla, sem þýðir að aðrir notendur geta sútt frumferilinn og tengt þær upplýsingar við notandanafnið þitt. Opinberir ferilpunktar með tímamerkjum sem eru sóttir í gegnum opinbera GPS API-forritsviðmótið vísa í ferlasíðuna þína.</string>
     <string name="shared_string_search_history">Leitarferill</string>
@@ -4329,7 +4329,7 @@
     <string name="shared_string_hide_all">Fela allt</string>
     <string name="storage_found_files_descr">Ýttu á \"%1$s\" til að afrita %2$s skrár úr \"%3$s\" yfir í \"%4$s\". Þetta gæti tekið nokkra stund.</string>
     <string name="continue_on_phone">Halda áfram á snjalltæki</string>
-    <string name="shared_string_travelbooks">Travelbooks</string>
+    <string name="shared_string_travelbooks">Ferðabækur</string>
     <string name="show_parameter_seekbar">Birta leitarstiku fyrir breytur</string>
     <string name="display_groups_visibility_dialog_description">Þú getur stýrt sýnileika hópa á landakortinu. Ef ferill er falinn, verða allir hópar einnig faldir.</string>
     <string name="no_plugins_enabled">Þú ert ekki með neinar virkar viðbætur. Þú getur sótt lista yfir tiltækar forritsviðbætur með því að fara í \'Valmynd\' → \'Viðbætur\'.</string>
@@ -4517,4 +4517,8 @@
     <string name="rendering_value_all_name">Allt</string>
     <string name="rendering_value_category_name">Flokkur</string>
     <string name="navigate_point_format_swiss_grid_plus">Svissneska hnitanetið (CH1903+)</string>
+    <string name="please_provide_group_name_message">Gefðu hópnum eitthvað heiti.</string>
+    <string name="quick_action_add_route_descr">Hnappur til að byrja leið af miðjum skjánum.</string>
+    <string name="gpx_no_routes_descr">Þú getur notað \"%1$s\" verkfærið til að bæta leið inn í skrá.</string>
+    <string name="gpx_no_routes_title">Það eru engar leiðir</string>
 </resources>

@@ -5,14 +5,14 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.text.format.DateFormat;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
 import java.util.Locale;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class LocaleHelper {
 
@@ -52,9 +52,10 @@ public class LocaleHelper {
 			selectedLocale = defaultLocale;
 			preferredLocale = null;
 		}
+
+		updateOpeningHoursParser(selectedLocale != null ? selectedLocale : Locale.getDefault());
 		if (selectedLocale != null) {
 			Locale.setDefault(selectedLocale);
-			updateOpeningHoursParser(selectedLocale);
 			config.locale = selectedLocale;
 			config.setLayoutDirection(selectedLocale);
 
@@ -67,23 +68,25 @@ public class LocaleHelper {
 	}
 
 	public void setLanguage(@NonNull Context context) {
+		Locale newLocale = null;
 		if (preferredLocale != null) {
 			Configuration config = context.getResources().getConfiguration();
 			String lang = preferredLocale.getLanguage();
 			if (!Algorithms.isEmpty(lang) && !config.locale.getLanguage().equals(lang)) {
-				preferredLocale = new Locale(lang);
+				newLocale = new Locale(lang);
+				preferredLocale = newLocale;
 				Locale.setDefault(preferredLocale);
-				updateOpeningHoursParser(preferredLocale);
 				config.locale = preferredLocale;
 				context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
 			} else if (Algorithms.isEmpty(lang) && defaultLocale != null && Locale.getDefault() != defaultLocale) {
+				newLocale = defaultLocale;
 				Locale.setDefault(defaultLocale);
-				updateOpeningHoursParser(defaultLocale);
 				config.locale = defaultLocale;
 				Resources resources = app.getBaseContext().getResources();
 				resources.updateConfiguration(config, resources.getDisplayMetrics());
 			}
 		}
+		updateOpeningHoursParser(newLocale != null ? newLocale : Locale.getDefault());
 	}
 
 	@Nullable
@@ -123,5 +126,16 @@ public class LocaleHelper {
 
 	private void updateOpeningHoursParser(@NonNull Locale locale) {
 		OpeningHoursParser.setTwelveHourFormattingEnabled(!DateFormat.is24HourFormat(app), locale);
+	}
+
+	public Resources getLocalizedResources(@NonNull String language) {
+		return getLocalizedContext(new Locale(language)).getResources();
+	}
+
+	public Context getLocalizedContext(@NonNull Locale locale) {
+		Configuration configuration = app.getResources().getConfiguration();
+		configuration = new Configuration(configuration);
+		configuration.setLocale(locale);
+		return app.createConfigurationContext(configuration);
 	}
 }

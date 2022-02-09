@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-	android:shape="rectangle">
-	<solid android:color="@color/switch_button_active_light" />
-	<corners android:radius="3dp" />
-</shape>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:state_enabled="false">
+		<shape android:shape="rectangle">
+			<solid android:color="@color/inactive_buttons_and_links_bg_light" />
+			<corners android:radius="@dimen/dlg_button_rect_rad" />
+		</shape>
+	</item>
+	<item>
+		<shape android:shape="rectangle">
+			<solid android:color="@color/switch_button_active_light" />
+			<corners android:radius="3dp" />
+		</shape>
+	</item>
+</selector>

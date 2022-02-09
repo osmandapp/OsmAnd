@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
@@ -36,7 +37,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static net.osmand.plus.mapcontextmenu.editors.SelectFavoriteCategoryBottomSheet.*;
 import static net.osmand.plus.routepreparationmenu.cards.BaseCard.*;
 import static net.osmand.plus.track.fragments.CustomColorBottomSheet.*;
 

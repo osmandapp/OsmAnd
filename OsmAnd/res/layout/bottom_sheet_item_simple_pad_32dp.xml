@@ -6,12 +6,12 @@
 	android:background="?attr/selectableItemBackground"
 	android:gravity="center_vertical"
 	android:minHeight="@dimen/bottom_sheet_list_item_height"
-	android:paddingBottom="@dimen/content_padding_half"
-	android:paddingTop="@dimen/content_padding_half"
-	android:paddingLeft="@dimen/content_padding"
-	android:paddingRight="@dimen/content_padding"
 	android:paddingStart="@dimen/content_padding"
-	android:paddingEnd="@dimen/content_padding">
+	android:paddingLeft="@dimen/content_padding"
+	android:paddingTop="@dimen/content_padding_half"
+	android:paddingEnd="@dimen/content_padding"
+	android:paddingRight="@dimen/content_padding"
+	android:paddingBottom="@dimen/content_padding_half">
 
 	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/icon"
@@ -22,7 +22,7 @@
 		android:layout_marginRight="@dimen/bottom_sheet_icon_margin_large"
 		tools:src="@drawable/ic_action_info_dark" />
 
-	<TextView
+	<net.osmand.plus.widgets.TextViewEx
 		android:id="@+id/title"
 		android:layout_width="0dp"
 		android:layout_height="wrap_content"
