@@ -138,4 +138,8 @@
     <string name="shared_string_error_short">ERR</string>
     <string name="last_update_from_telegram_duration">Pembaruan terakhir dari Telegram: %1$s yang lalu</string>
     <string name="status_widget_title">Status</string>
+    <string name="altitude">Ketinggian</string>
+    <string name="si_mi_yard">Mil/yard</string>
+    <string name="km">km</string>
+    <string name="m">m</string>
 </resources>

@@ -4282,4 +4282,9 @@
     <string name="poi_post_office_opening_hours">Oràrios de abertura de s\'ufìtziu postale</string>
     <string name="poi_books_adults">Adultos</string>
     <string name="poi_collector">Pro colletzionistas</string>
+    <string name="poi_hospice">Tzentru de curas palliativas (hospice)</string>
+    <string name="poi_telecommunication">Telecomunicatzione</string>
+    <string name="poi_avalanche_transceiver">Rilevadore de vìtimas de valangas;AVD</string>
+    <string name="poi_avalanche_transceiver_training">Annestru de su ritzetrasmetidore de valangas</string>
+    <string name="poi_avalanche_transceiver_checkpoint">Puntu de controllu de ritzetrasmissione de valangas</string>
 </resources>

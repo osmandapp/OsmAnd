@@ -4516,4 +4516,14 @@
     <string name="please_provide_group_name_message">Enigu nomon por la grupo.</string>
     <string name="quick_action_add_route_descr">Butono por ekigi kurson de la centro de la ekrano.</string>
     <string name="gpx_no_routes_descr">Uzu la ilon “%1$s” por konservi kurson al dosiero.</string>
+    <string name="select_suggested_points">Elekti proponatajn punktojn</string>
+    <string name="selected_waypoints_descr">La elektitaj punktoj aldoniĝos al la spuro “%1$s”</string>
+    <string name="shared_string_reading_file">Enlegado de dosiero…</string>
+    <string name="all_groups">Ĉiuj grupoj</string>
+    <string name="list_of_groups">Listo de grupoj</string>
+    <string name="points_selection_descr">Ĉu vi certe volas rezigni\? Ĉiuj viaj ŝanĝoj perdiĝos.</string>
+    <string name="exit_import_descr">Ĉu vi certe volas eliri sen konservi\? Ĉiuj viaj ŝanĝoj perdiĝos.</string>
+    <string name="exit_import">Ĉu eliri enportadon\?</string>
+    <string name="import_tracks">Enporti spurojn</string>
+    <string name="import_tracks_descr">La dosiero “%1$s” enhavas %2$s apartajn spurojn. Elektu spurojn por enporti.</string>
 </resources>

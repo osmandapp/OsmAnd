@@ -133,6 +133,16 @@ public class ColorUtilities {
 	}
 
 	@ColorInt
+	public static int getActiveIconColor(@NonNull Context ctx, boolean nightMode) {
+		return ContextCompat.getColor(ctx, getActiveIconColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getActiveIconColorId(boolean nightMode) {
+		return nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light;
+	}
+
+	@ColorInt
 	public static int getDefaultIconColor(@NonNull Context ctx, boolean nightMode) {
 		return ContextCompat.getColor(ctx, getDefaultIconColorId(nightMode));
 	}

@@ -1,4 +1,6 @@
-package net.osmand.plus;
+package net.osmand.plus.helpers;
+
+import static android.content.Context.LOCATION_SERVICE;
 
 import android.content.Context;
 import android.location.Location;
@@ -10,8 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.helpers.DayNightHelper;
-import net.osmand.plus.helpers.LocationServiceHelper;
+import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.OsmandApplication;
 
 import org.apache.commons.logging.Log;
 
@@ -20,9 +22,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import static android.content.Context.LOCATION_SERVICE;
-
-public class LocationServiceHelperImpl extends LocationServiceHelper implements LocationListener {
+public class AndroidApiLocationServiceHelper extends LocationServiceHelper implements LocationListener {
 
 	private static final Log LOG = PlatformUtil.getLog(DayNightHelper.class);
 
@@ -36,21 +36,20 @@ public class LocationServiceHelperImpl extends LocationServiceHelper implements 
 	private class NetworkListener implements LocationListener {
 
 		@Override
-		public void onLocationChanged(Location location) {
-			LocationCallback locationCallback = LocationServiceHelperImpl.this.networkLocationCallback;
+		public void onLocationChanged(@NonNull Location location) {
+			LocationCallback locationCallback = AndroidApiLocationServiceHelper.this.networkLocationCallback;
 			if (locationCallback != null) {
 				net.osmand.Location l = convertLocation(location);
-				locationCallback.onLocationResult(l == null
-						? Collections.<net.osmand.Location>emptyList() : Collections.singletonList(l));
+				locationCallback.onLocationResult(l == null ? Collections.emptyList() : Collections.singletonList(l));
 			}
 		}
 
 		@Override
-		public void onProviderDisabled(String provider) {
+		public void onProviderDisabled(@NonNull String provider) {
 		}
 
 		@Override
-		public void onProviderEnabled(String provider) {
+		public void onProviderEnabled(@NonNull String provider) {
 		}
 
 		@Override
@@ -58,7 +57,7 @@ public class LocationServiceHelperImpl extends LocationServiceHelper implements 
 		}
 	}
 
-	public LocationServiceHelperImpl(@NonNull OsmandApplication app) {
+	public AndroidApiLocationServiceHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 	}
 
@@ -157,12 +156,11 @@ public class LocationServiceHelperImpl extends LocationServiceHelper implements 
 	}
 
 	@Override
-	public void onLocationChanged(Location location) {
+	public void onLocationChanged(@NonNull Location location) {
 		LocationCallback locationCallback = this.locationCallback;
 		if (locationCallback != null) {
 			net.osmand.Location l = convertLocation(location);
-			locationCallback.onLocationResult(l == null
-					? Collections.<net.osmand.Location>emptyList() : Collections.singletonList(l));
+			locationCallback.onLocationResult(l == null ? Collections.emptyList() : Collections.singletonList(l));
 		}
 	}
 
@@ -171,7 +169,7 @@ public class LocationServiceHelperImpl extends LocationServiceHelper implements 
 	}
 
 	@Override
-	public void onProviderEnabled(String provider) {
+	public void onProviderEnabled(@NonNull String provider) {
 		LocationCallback locationCallback = this.locationCallback;
 		if (locationCallback != null) {
 			locationCallback.onLocationAvailability(true);
@@ -179,7 +177,7 @@ public class LocationServiceHelperImpl extends LocationServiceHelper implements 
 	}
 
 	@Override
-	public void onProviderDisabled(String provider) {
+	public void onProviderDisabled(@NonNull String provider) {
 		LocationCallback locationCallback = this.locationCallback;
 		if (locationCallback != null) {
 			locationCallback.onLocationAvailability(false);
