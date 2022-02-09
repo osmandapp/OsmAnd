@@ -59,6 +59,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	// Constants for determining the order of items in the additional actions context menu
 	private static final int UPDATE_MAP_ITEM_ORDER = 12300;
 	private static final int DOWNLOAD_MAP_ITEM_ORDER = 12600;
+	private static final float ZORDER_UNDERLAY = -0.5f;
+	private static final float ZORDER_OVERLAY = 0.7f;
 
 	public final CommonPreference<String> MAP_OVERLAY;
 	public final CommonPreference<String> MAP_UNDERLAY;
@@ -161,14 +163,14 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	}
 
 	private void createLayers(@NonNull Context context) {
+		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		if (underlayLayer != null) {
-			app.getOsmandMap().getMapView().removeLayer(underlayLayer);
+			mapView.removeLayer(underlayLayer);
 		}
 		if (overlayLayer != null) {
-			app.getOsmandMap().getMapView().removeLayer(overlayLayer);
+			mapView.removeLayer(overlayLayer);
 		}
 		underlayLayer = new MapTileLayer(context, false);
-		// mapView.addLayer(underlayLayer, -0.5f);
 		overlayLayer = new MapTileLayer(context, false);
 		overlayLayerListener = new StateChangedListener<Integer>() {
 			@Override
@@ -176,7 +178,6 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				app.runInUIThread(() -> overlayLayer.setAlpha(change));
 			}
 		};
-		// mapView.addLayer(overlayLayer, 0.7f);
 		MAP_OVERLAY_TRANSPARENCY.addListener(overlayLayerListener);
 	}
 
@@ -194,13 +195,13 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		overlayLayer.updateParameter();
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		if (isActive()) {
-			updateLayer(mapView, overlayLayer, MAP_OVERLAY, 0.7f, MAP_OVERLAY == settingsToWarnAboutMap);
+			updateLayer(mapView, overlayLayer, MAP_OVERLAY, ZORDER_OVERLAY, MAP_OVERLAY == settingsToWarnAboutMap);
 		} else {
 			mapView.removeLayer(overlayLayer);
 			overlayLayer.setMap(null);
 		}
 		if (isActive()) {
-			updateLayer(mapView, underlayLayer, MAP_UNDERLAY, -0.5f, MAP_UNDERLAY == settingsToWarnAboutMap);
+			updateLayer(mapView, underlayLayer, MAP_UNDERLAY, ZORDER_UNDERLAY, MAP_UNDERLAY == settingsToWarnAboutMap);
 		} else {
 			mapView.removeLayer(underlayLayer);
 			underlayLayer.setMap(null);
@@ -231,12 +232,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		if (!Algorithms.objectEquals(overlay, layer.getMap())) {
 			if (overlay == null) {
 				mapView.removeLayer(layer);
-			} else if (!mapView.isLayerVisible(layer)) {
-				if (mapView.getMapRenderer() == null) {
-					mapView.addLayer(layer, layerOrder);
-				} else {
-					layer.initLayer(mapView);
-				}
+			} else if (!mapView.isLayerExists(layer)) {
+				mapView.addLayer(layer, layerOrder);
 			}
 			layer.setMap(overlay);
 			mapView.refreshMap();

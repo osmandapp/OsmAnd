@@ -4289,4 +4289,5 @@
     <string name="poi_avalanche_transceiver_checkpoint">雪崩收發器檢查點</string>
     <string name="poi_access_permit">需要許可</string>
     <string name="poi_parcel_locker">包裹儲存櫃</string>
+    <string name="poi_tiles">磁磚店</string>
 </resources>

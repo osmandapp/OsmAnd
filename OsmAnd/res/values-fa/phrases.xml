@@ -115,7 +115,7 @@
     <string name="poi_traffic_calming_table">سرعتکاه تخت</string>
     <string name="poi_traffic_calming_choker">نقطهٔ گازانبری</string>
     <string name="poi_traffic_signals">چراغ راهنما</string>
-    <string name="poi_car_repair">میکانیکی</string>
+    <string name="poi_car_repair">تعمیر خودرو</string>
     <string name="poi_service_tyres">پنچرگیری</string>
     <string name="poi_vehicle_inspection">معاینه فنی خودرو</string>
     <string name="poi_car_wash">کارواش</string>
@@ -475,8 +475,8 @@
     <string name="poi_craft_hvac">تهویه</string>
     <string name="poi_craft_insulation">عایق</string>
     <string name="poi_craft_jeweller">جواهر سازی</string>
-    <string name="poi_craft_locksmith">کلید سازی</string>
-    <string name="poi_craft_key_cutter">برش</string>
+    <string name="poi_craft_locksmith">قفل و کلید سازی</string>
+    <string name="poi_craft_key_cutter">کلیدسازی</string>
     <string name="poi_craft_metal_construction">سازه های فلزی</string>
     <string name="poi_craft_optician">عینک ساز</string>
     <string name="poi_craft_painter">نقاش</string>
@@ -500,7 +500,7 @@
     <string name="poi_craft_sweep">رفته گر</string>
     <string name="poi_craft_tailor">خیاط</string>
     <string name="poi_craft_tiler">اجر پزی</string>
-    <string name="poi_craft_tinsmith">تراشکار</string>
+    <string name="poi_craft_tinsmith">حلبی‌ساز</string>
     <string name="poi_craft_upholsterer">پرده دوزی</string>
     <string name="poi_craft_watchmaker">ساعت ساز</string>
     <string name="poi_craft_window_construction">ساخت و ساز پنجره</string>
@@ -633,7 +633,7 @@
     <string name="poi_parking_type">نوع</string>
     <string name="poi_covered">سرپوشیده</string>
     <string name="poi_bicycle_parking_type">نوع</string>
-    <string name="poi_service_general">میکانیکی</string>
+    <string name="poi_service_general">خدمت</string>
     <string name="poi_brushless">بدون برس</string>
     <string name="poi_self_service">سلف سرویس</string>
     <string name="poi_subway_station_filter">ایستگاه مترو</string>
@@ -1547,4 +1547,6 @@
     <string name="poi_furniture_office">اداره; مبلمان اداری</string>
     <string name="poi_recycling_furniture">مبلمان</string>
     <string name="poi_electrical">فروشگاه الکتریکی; کالای برق; الکتریکی</string>
+    <string name="poi_service_vehicle_body_repair_yes">تعمیرات بدنه خودرو</string>
+    <string name="poi_locksmith">قفل و کلید فروشی</string>
 </resources>

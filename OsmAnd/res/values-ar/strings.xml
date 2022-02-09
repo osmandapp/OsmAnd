@@ -4581,10 +4581,20 @@
     <string name="rendering_attr_seabedDetail_name">تفاصيل قاع البحر</string>
     <string name="rendering_value_category_name">الفئة</string>
     <string name="rendering_value_omit_name">حذف</string>
-    <string name="rendering_attr_seabedDetail_description">معلومات نصية إضافية حول تأهيل سطح قاع البحر ، أنواع الأسطح المدمجة ، وفئة وتصنيف الحشائش أو الأعشاب البحرية</string>
-    <string name="save_track_to_gpx_descrp">ابدأ تسجيل المسار تلقائيًا أثناء التنقل. عند الانتهاء ، سيتم حفظ المسار تلقائيًا.</string>
+    <string name="rendering_attr_seabedDetail_description">معلومات نصية إضافية عن أهلية سطح قاع البحر وأنواع الأسطح المدمجة والفئة وتصنيف الأعشاب أو الأعشاب البحرية</string>
+    <string name="save_track_to_gpx_descrp">بدء تسجيل المسار تلقائيًا أثناء التنقل والحفظ التلقائي بعد ذلك.</string>
     <string name="gpx_no_routes_title">لا توجد طرق</string>
-    <string name="gpx_no_routes_descr">يمكنك استخدام أداة \"%1$s\" لإضافة مسار إلى الملف.</string>
+    <string name="gpx_no_routes_descr">يمكنك استخدام أداة \"%1$s\" لحفظ المسار كملف.</string>
     <string name="quick_action_add_route_descr">زر لبدء المسار من منتصف الشاشة.</string>
-    <string name="please_provide_group_name_message">يرجى تقديم اسم للمجموعة.</string>
+    <string name="please_provide_group_name_message">يرجى تسمية المجموعة.</string>
+    <string name="exit_import">خروج؟</string>
+    <string name="import_tracks_descr">%1$s، يحتوي على %2$s مسارات منفصلة. اختر المسارات للاستيراد.</string>
+    <string name="exit_import_descr">الخروج دون حفظ أي تغييرات؟</string>
+    <string name="select_suggested_points">تحديد النقاط المقترحة</string>
+    <string name="points_selection_descr">إغلاق وفقد كل التغييرات؟</string>
+    <string name="selected_waypoints_descr">ستتم إضافة نقاط المسار المحددة إلى المسار \"%1$s\"</string>
+    <string name="shared_string_reading_file">قراءة الملف…</string>
+    <string name="all_groups">كل المجموعات</string>
+    <string name="list_of_groups">قائمة المجموعات</string>
+    <string name="import_tracks">استيراد مسارات</string>
 </resources>

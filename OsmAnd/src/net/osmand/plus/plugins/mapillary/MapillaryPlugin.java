@@ -188,8 +188,8 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	private void updateLayer(OsmandMapTileView mapView, ITileSource mapillarySource, MapTileLayer layer, float layerOrder) {
-		if (!Algorithms.objectEquals(mapillarySource, layer.getMap()) || !mapView.isLayerVisible(layer)) {
-			if (mapView.getMapRenderer() == null && !mapView.isLayerVisible(layer)) {
+		if (!Algorithms.objectEquals(mapillarySource, layer.getMap()) || !mapView.isLayerExists(layer)) {
+			if (mapView.getMapRenderer() == null && !mapView.isLayerExists(layer)) {
 				mapView.addLayer(layer, layerOrder);
 			}
 			layer.setMap(mapillarySource);

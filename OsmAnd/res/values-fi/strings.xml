@@ -3935,7 +3935,7 @@
     <string name="shared_string_hide_all">Piilota kaikki</string>
     <string name="shared_string_statistics">Tilastot</string>
     <string name="rendering_value_all_name">Kaikki</string>
-    <string name="shared_string_open_street_map">AvoinTiekartta</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikonit matalalla tarkkuudella</string>
     <string name="copying_file">Kopioidaan tiedostoa %1$s…</string>
     <string name="from_to_with_params">Sijainnista %1$s sijaintiin %2$s</string>
@@ -3962,4 +3962,11 @@
     <string name="delete_history_items_descr">Poistetaanko valitut historiasta\?</string>
     <string name="delete_history_items">Poistetaanko %1$s kohtia historiasta\?</string>
     <string name="display_route_tracks_as_poi">Näytä reitit kuten KP</string>
+    <string name="exit_import_descr">Poistu tallentamatta muutoksia\?</string>
+    <string name="list_of_groups">Lista ryhmistä</string>
+    <string name="exit_import">Poistu\?</string>
+    <string name="shared_string_reading_file">Luetaan tiedostoa…</string>
+    <string name="all_groups">Kaikki ryhmät</string>
+    <string name="points_selection_descr">Sulje ja menetä tekemäsi muutokset\?</string>
+    <string name="import_tracks">Tuo jäljet</string>
 </resources>

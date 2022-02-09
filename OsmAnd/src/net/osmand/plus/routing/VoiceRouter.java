@@ -203,6 +203,10 @@ public class VoiceRouter {
 		return atd;
 	}
 
+	public RouteDirectionInfo getNextRouteDirection() {
+		return nextRouteDirection;
+	}
+
 	public float getArrivalDistance() {
 		return atd.getArrivalDistance();
 	}

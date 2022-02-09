@@ -75,7 +75,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
-import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -100,7 +99,6 @@ import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
-import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
@@ -116,6 +114,7 @@ import net.osmand.plus.track.fragments.GpsFilterFragment.GpsFilterFragmentLister
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper.DisplayGroupsHolder;
+import net.osmand.plus.track.helpers.GpxNavigationHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
@@ -812,34 +811,26 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	@Override
 	public void onResume() {
 		super.onResume();
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && trackChartPoints != null) {
-			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(trackChartPoints);
-		}
-		updateControlsVisibility(true);
-		startLocationUpdate();
-		if (overviewCard != null && menuType == TrackMenuType.OVERVIEW && isCurrentRecordingTrack()) {
-			overviewCard.getBlockStatisticsBuilder().runUpdatingStatBlocksIfNeeded();
-		}
-		if (pointsCard != null) {
-			pointsCard.startListeningLocationUpdates();
-		}
+		onHiddenChanged(false);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
+		onHiddenChanged(true);
+	}
+
+	@Override
+	public void onHiddenChanged(boolean hidden) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(null);
+			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(hidden ? null : trackChartPoints);
 		}
-		updateControlsVisibility(false);
-		stopLocationUpdate();
-		if (overviewCard != null) {
-			overviewCard.getBlockStatisticsBuilder().stopUpdatingStatBlocks();
-		}
-		if (pointsCard != null) {
-			pointsCard.stopListeningLocationUpdates();
+		updateControlsVisibility(!hidden);
+		if (hidden) {
+			stopLocationUpdate();
+		} else {
+			startLocationUpdate();
 		}
 	}
 
@@ -894,21 +885,31 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	private void startLocationUpdate() {
-		OsmandApplication app = getMyApplication();
-		if (app != null && !locationUpdateStarted) {
+		if (!locationUpdateStarted) {
 			locationUpdateStarted = true;
 			app.getLocationProvider().addCompassListener(this);
 			app.getLocationProvider().addLocationListener(this);
 			updateLocationUi();
 		}
+		if (overviewCard != null && menuType == TrackMenuType.OVERVIEW && isCurrentRecordingTrack()) {
+			overviewCard.getBlockStatisticsBuilder().runUpdatingStatBlocksIfNeeded();
+		}
+		if (pointsCard != null) {
+			pointsCard.startListeningLocationUpdates();
+		}
 	}
 
 	private void stopLocationUpdate() {
-		OsmandApplication app = getMyApplication();
-		if (app != null && locationUpdateStarted) {
+		if (locationUpdateStarted) {
 			locationUpdateStarted = false;
 			app.getLocationProvider().removeLocationListener(this);
 			app.getLocationProvider().removeCompassListener(this);
+		}
+		if (overviewCard != null) {
+			overviewCard.getBlockStatisticsBuilder().stopUpdatingStatBlocks();
+		}
+		if (pointsCard != null) {
+			pointsCard.stopListeningLocationUpdates();
 		}
 	}
 
@@ -1036,13 +1037,12 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			} else if (buttonIndex == APPEARANCE_BUTTON_INDEX) {
 				TrackAppearanceFragment.showInstance(mapActivity, selectedGpxFile, this);
 			} else if (buttonIndex == DIRECTIONS_BUTTON_INDEX) {
-				MapActivityActions mapActions = mapActivity.getMapActions();
 				GPXFile gpxFileToDisplay = displayHelper.getGpxFileToDisplay();
 				if (gpxFileToDisplay != null) {
 					if (gpxFileToDisplay.getNonEmptySegmentsCount() > 1) {
 						TrackSelectSegmentBottomSheet.showInstance(fragmentManager, gpxFileToDisplay, this);
 					} else {
-						startNavigationForGPX(gpxFileToDisplay, mapActions, mapActivity);
+						GpxNavigationHelper.startNavigationForGpx(gpxFileToDisplay, mapActivity);
 						dismiss();
 					}
 				}
@@ -1172,26 +1172,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	@NonNull
 	private DisplayGroupsHolder getDisplayGroupsHolder() {
 		return DisplayPointsGroupsHelper.getGroups(app, displayHelper.getPointsOriginalGroups(), null);
-	}
-
-	public static void startNavigationForGPX(final GPXFile gpxFile, MapActivityActions mapActions, final MapActivity mapActivity) {
-		if (mapActivity.getMyApplication().getRoutingHelper().isFollowingMode()) {
-			final WeakReference<MapActivity> activityRef = new WeakReference<>(mapActivity);
-			mapActions.stopNavigationActionConfirm(null, new Runnable() {
-				@Override
-				public void run() {
-					MapActivity activity = activityRef.get();
-					if (activity != null) {
-						activity.getMapActions().enterRoutePlanningModeGivenGpx(gpxFile, null,
-								null, null, true, true, MenuState.HEADER_ONLY);
-					}
-				}
-			});
-		} else {
-			mapActions.stopNavigationWithoutConfirm();
-			mapActions.enterRoutePlanningModeGivenGpx(gpxFile, null, null,
-					null, true, true, MenuState.HEADER_ONLY);
-		}
 	}
 
 	public void updateToolbar(int y, boolean animated) {
@@ -1459,16 +1439,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	@Override
-	public void onSegmentSelect(GPXFile gpxFile, int selectedSegment) {
-		app.getSettings().GPX_ROUTE_SEGMENT.set(selectedSegment);
+	public void onSegmentSelect(@NonNull GPXFile gpxFile, int selectedSegment) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			startNavigationForGPX(gpxFile, mapActivity.getMapActions(), mapActivity);
-			GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
-			if (paramsBuilder != null) {
-				paramsBuilder.setSelectedSegment(selectedSegment);
-				app.getRoutingHelper().onSettingsChanged(true);
-			}
+			GpxNavigationHelper.startNavigationForSegment(gpxFile, selectedSegment, mapActivity);
 			dismiss();
 		}
 	}
@@ -1564,7 +1538,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 	}
 
-	public static void openTrack(@NonNull Context context, @Nullable File file, Bundle prevIntentParams) {
+	public static void openTrack(@NonNull Context context, @Nullable File file, @Nullable Bundle prevIntentParams) {
 		openTrack(context, file, prevIntentParams, null);
 	}
 
@@ -1574,7 +1548,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	public static void openTrack(@NonNull Context context, @Nullable File file, @Nullable Bundle prevIntentParams,
-	                             @Nullable String returnScreenName, TrackMenuType tabToOpen) {
+	                             @Nullable String returnScreenName, @NonNull TrackMenuType tabToOpen) {
 		boolean currentRecording = file == null;
 		String path = file != null ? file.getAbsolutePath() : null;
 		if (context instanceof MapActivity) {
@@ -1623,7 +1597,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					return true;
 				}
 			});
-			gpxFileLoaderTask.execute();
+			gpxFileLoaderTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
 

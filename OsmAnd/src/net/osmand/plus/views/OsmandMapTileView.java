@@ -365,7 +365,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return application.accessibilityEnabled() ? false : null;
 	}
 
-	public boolean isLayerVisible(OsmandMapLayer layer) {
+	public synchronized boolean isLayerExists(OsmandMapLayer layer) {
 		return layers.contains(layer);
 	}
 
@@ -375,6 +375,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			return 10;
 		}
 		return z;
+	}
+
+	public int getLayerIndex(OsmandMapLayer layer) {
+		float zOrder = getZorder(layer);
+		return (int)(zOrder * 100.0f);
 	}
 
 	public synchronized void addLayer(OsmandMapLayer layer, float zOrder) {
@@ -390,9 +395,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public synchronized void removeLayer(OsmandMapLayer layer) {
+		layer.destroyLayer();
 		while (layers.remove(layer)) ;
 		zOrders.remove(layer);
-		layer.destroyLayer();
 	}
 
 	public synchronized void removeAllLayers() {
