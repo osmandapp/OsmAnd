@@ -1535,11 +1535,17 @@ public class RouteResultPreparation {
 			boolean smallStraightVariation = mpi < TURN_DEGREE_MIN;
 			boolean smallTargetVariation = Math.abs(ex) < TURN_DEGREE_MIN;
 			boolean attachedOnTheRight = ex >= 0;
-			if (attachedOnTheRight) {
-				rs.roadsOnRight++;
-			} else {
-				rs.roadsOnLeft++;
+			boolean verySharpTurn = Math.abs(ex) > 150;
+			boolean prevSegmHasTU = hasTU(turnLanesPrevSegm, attachedOnTheRight);
+
+			if (!verySharpTurn && !prevSegmHasTU) {
+				if (attachedOnTheRight) {
+					rs.roadsOnRight++;
+				} else {
+					rs.roadsOnLeft++;
+				}
 			}
+
 			if (turnLanesPrevSegm != null || rsSpeakPriority != MAX_SPEAK_PRIORITY || speakPriority == MAX_SPEAK_PRIORITY) {
 				if (smallTargetVariation || smallStraightVariation) {
 					if (attachedOnTheRight) {
@@ -1566,6 +1572,22 @@ public class RouteResultPreparation {
 			}
 		}
 		return rs;
+	}
+
+	private boolean hasTU(String turnLanesPrevSegm, boolean attachedOnTheRight) {
+		if (turnLanesPrevSegm != null) {
+			String[] laneTurns = turnLanesPrevSegm.split("\\|");
+			int type;
+			if (attachedOnTheRight) {
+				String[] rightLine = laneTurns[laneTurns.length - 1].split(";");
+				type = TurnType.convertType(rightLine[rightLine.length - 1]);
+			} else {
+				String[] leftLine = laneTurns[0].split(";");
+				type = TurnType.convertType(leftLine[0]);
+			}
+			return type == TurnType.TU;
+		}
+		return false;
 	}
 
 	protected TurnType createSimpleKeepLeftRightTurn(boolean leftSide, RouteSegmentResult prevSegm,
