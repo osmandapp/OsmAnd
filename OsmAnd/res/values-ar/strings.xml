@@ -4597,4 +4597,10 @@
     <string name="all_groups">كل المجموعات</string>
     <string name="list_of_groups">قائمة المجموعات</string>
     <string name="import_tracks">استيراد مسارات</string>
+    <string name="google_play_services">خدمات جوجل بلاي</string>
+    <string name="location_source_descr">بشكل افتراضي ، يستخدم OsmAnd المثبت من متجر بلاي %1$s لتحديد الموقع.
+\n
+\nإذا تحصلت على معلومات غير دقيقة عن الموقع أو استخدمت جهازًا بدون %2$s ، فحاول التبديل إلى \"%3$s\"</string>
+    <string name="location_source">مصدر الموقع</string>
+    <string name="android_api">واجهة برمجة تطبيقات أندرويد</string>
 </resources>
