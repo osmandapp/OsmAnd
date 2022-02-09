@@ -5,54 +5,57 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.ContextMenuLayer;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 
-import androidx.annotation.NonNull;
-
 public class AddGpxPointBottomSheetHelper implements OnDismissListener {
+
+	private final OsmandApplication app;
+
+	private final MapActivity mapActivity;
+	private final ContextMenuLayer menuLayer;
+
 	private final View view;
 	private final TextView title;
 	private final TextView description;
 	private final ImageView icon;
-	private final MapActivity mapActivity;
-	private final MapContextMenu contextMenu;
-	private final ContextMenuLayer contextMenuLayer;
-	private final UiUtilities iconsCache;
+
 	private String titleText;
-	private boolean applyingPositionMode;
 	private NewGpxPoint newGpxPoint;
 	private PointDescription pointDescription;
+	private boolean applyingPositionMode;
 
-	public AddGpxPointBottomSheetHelper(@NonNull MapActivity mapActivity, @NonNull ContextMenuLayer ctxMenuLayer) {
-		this.contextMenuLayer = ctxMenuLayer;
-		iconsCache = mapActivity.getMyApplication().getUIUtilities();
+	public AddGpxPointBottomSheetHelper(@NonNull MapActivity mapActivity, @NonNull ContextMenuLayer layer) {
 		this.mapActivity = mapActivity;
-		contextMenu = mapActivity.getContextMenu();
+		menuLayer = layer;
+		app = mapActivity.getMyApplication();
+
 		view = mapActivity.findViewById(R.id.add_gpx_point_bottom_sheet);
 		title = view.findViewById(R.id.add_gpx_point_bottom_sheet_title);
 		description = view.findViewById(R.id.description);
 		icon = view.findViewById(R.id.icon);
 
 		view.findViewById(R.id.create_button).setOnClickListener(v -> {
-			contextMenuLayer.createGpxPoint();
-			GPXFile gpx = newGpxPoint.getGpx();
-			LatLon latLon = contextMenu.getLatLon();
+			menuLayer.createGpxPoint();
 			if (pointDescription.isWpt()) {
+				GPXFile gpx = newGpxPoint.getGpx();
+				LatLon latLon = getSelectedLatLon();
 				WptPtEditor editor = mapActivity.getContextMenu().getWptPtPointEditor();
 				if (editor != null) {
 					editor.setOnDismissListener(AddGpxPointBottomSheetHelper.this);
@@ -63,24 +66,28 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 		});
 		view.findViewById(R.id.cancel_button).setOnClickListener(v -> {
 			hide();
-			contextMenuLayer.cancelAddGpxPoint();
-			AndroidUiHelper.setVisibility(mapActivity,View.INVISIBLE, R.id.map_right_widgets_panel);
+			menuLayer.cancelAddGpxPoint();
 			onClose();
 		});
 	}
 
-	public void onDraw(@NonNull RotatedTileBox rt) {
-		PointF point = contextMenuLayer.getMovableCenterPoint(rt);
-		double lat = rt.getLatFromPixel(point.x, point.y);
-		double lon = rt.getLonFromPixel(point.x, point.y);
+	@NonNull
+	private LatLon getSelectedLatLon() {
+		RotatedTileBox tileBox = mapActivity.getMapView().getCurrentRotatedTileBox();
+		PointF point = menuLayer.getMovableCenterPoint(tileBox);
+		return tileBox.getLatLonFromPixel(point.x, point.y);
+	}
+
+	public void onDraw(@NonNull RotatedTileBox tileBox) {
+		PointF point = menuLayer.getMovableCenterPoint(tileBox);
+		double lat = tileBox.getLatFromPixel(point.x, point.y);
+		double lon = tileBox.getLonFromPixel(point.x, point.y);
 		description.setText(PointDescription.getLocationName(mapActivity, lat, lon, true));
 	}
 
 	public void setTitle(@NonNull String title) {
-		if (title.isEmpty()) {
-			if (pointDescription.isWpt()) {
-				title = mapActivity.getString(R.string.waypoint_one);
-			}
+		if (Algorithms.isEmpty(title) && pointDescription.isWpt()) {
+			title = mapActivity.getString(R.string.waypoint_one);
 		}
 		titleText = title;
 		this.title.setText(titleText);
@@ -95,7 +102,7 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 		pointDescription = newPoint.getPointDescription();
 		if (pointDescription.isWpt()) {
 			setTitle(mapActivity.getString(R.string.waypoint_one));
-			icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_marker_dark));
+			icon.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_marker_dark));
 		}
 		exitApplyPositionMode();
 		view.setVisibility(View.VISIBLE);

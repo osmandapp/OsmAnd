@@ -468,12 +468,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				if (success && !cancelApplyingNewMarkerPosition) {
 					mAddGpxPointBottomSheetHelper.hide();
 					quitAddGpxPoint();
-
-					PointDescription pointDescription = null;
-					if (selectedObjectContextMenuProvider != null) {
-						pointDescription = selectedObjectContextMenuProvider.getObjectName(newObject);
-					}
-					menu.show(ll, pointDescription, newObject);
 					view.refreshMap();
 				}
 				selectedObjectContextMenuProvider = null;
