@@ -21,6 +21,8 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
@@ -66,7 +68,7 @@ class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
 	protected Void doInBackground(Void... params) {
 		List<FavoriteGroup> groups;
 		if (group != null) {
-			helper.saveFile(group.getPoints(), destFile);
+			helper.saveFile(Collections.singletonList(group.toPointsCategory()), group.getPoints(), destFile);
 			groups = new ArrayList<>();
 			groups.add(group);
 		} else {

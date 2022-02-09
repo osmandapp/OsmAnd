@@ -7,6 +7,7 @@ import android.text.format.DateFormat;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.GPXUtilities.PointsCategory;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
@@ -670,6 +671,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		}
 
 		execWithClose(sb.toString(), params.toArray());
+	}
+
+	public void insertCategoryData(@NonNull PointsCategory category) {
+		// todo category: insert data into database for waypoint categories
 	}
 
 	private synchronized void execWithClose(@NonNull String script, @NonNull Object[] objects) {

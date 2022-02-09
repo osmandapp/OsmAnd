@@ -1,18 +1,24 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import android.os.AsyncTask;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.PointsCategory;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class WptPtEditor extends PointEditor {
@@ -22,8 +28,7 @@ public class WptPtEditor extends PointEditor {
 
 	private GPXFile gpxFile;
 	private WptPt wpt;
-	@ColorInt
-	private int categoryColor;
+	private PointsCategory predefinedCategory;
 
 	private boolean gpxSelected;
 
@@ -84,19 +89,19 @@ public class WptPtEditor extends PointEditor {
 		return gpxFile;
 	}
 
-	@NonNull
-	public Map<String, Integer> getColoredWaypointCategories() {
+	@NonNull Map<String, PointsCategory> getWaypointCategories() {
 		if (gpxFile != null) {
-			return gpxFile.getWaypointCategoriesWithColors(false);
+			Map<String, PointsCategory> categories = new LinkedHashMap<>(gpxFile.getCategories());
+			categories.remove("");
+			return categories;
 		}
-		if (isProcessingTemplate() && !Algorithms.isEmpty(wpt.category) && categoryColor != 0) {
-			Map<String, Integer> predefinedCategory = new HashMap<>();
-			predefinedCategory.put(wpt.category, categoryColor);
-			return predefinedCategory;
+		if (isProcessingTemplate() && predefinedCategory != null) {
+			Map<String, PointsCategory> categories = new LinkedHashMap<>();
+			categories.put(predefinedCategory.getName(), predefinedCategory);
+			return categories;
 		}
 		return new HashMap<>();
 	}
-
 
 	public boolean isGpxSelected() {
 		return gpxSelected;
@@ -127,7 +132,7 @@ public class WptPtEditor extends PointEditor {
 			return;
 		}
 		isNew = true;
-		categoryColor = 0;
+		predefinedCategory = null;
 
 		this.gpxFile = gpxFile;
 		SelectedGpxFile selectedGpxFile =
@@ -144,34 +149,23 @@ public class WptPtEditor extends PointEditor {
 		showEditorFragment();
 	}
 
-	public void add(@NonNull GPXFile gpxFile, @NonNull WptPt wpt, String categoryName, int categoryColor, boolean skipDialog) {
+	public void add(@NonNull GPXFile gpxFile, @NonNull WptPt wpt, @Nullable PointsCategory category, boolean skipDialog) {
 		if (mapActivity == null) {
 			return;
 		}
 		isNew = true;
-		this.categoryColor = 0;
+		predefinedCategory = null;
 
 		this.gpxFile = gpxFile;
 		SelectedGpxFile selectedGpxFile =
 				mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
 		gpxSelected = selectedGpxFile != null;
 
-		if (!Algorithms.isEmpty(categoryName)) {
-			FavouritesDbHelper.FavoriteGroup category = mapActivity.getMyApplication()
-					.getFavorites()
-					.getGroup(categoryName);
-
-			if (category == null) {
-				mapActivity.getMyApplication()
-						.getFavorites()
-						.addEmptyCategory(categoryName, categoryColor);
-			}
-
-		} else {
-			categoryName = "";
+		boolean categoryMissing = category != null && !gpxFile.getCategories().containsKey(category.getName());
+		if (categoryMissing) {
+			setCategory(category, true);
 		}
 
-		wpt.category = categoryName;
 		this.wpt = wpt;
 
 		showEditorFragment(skipDialog);
@@ -182,8 +176,10 @@ public class WptPtEditor extends PointEditor {
 		if (mapActivity == null) {
 			return;
 		}
+
 		isNew = false;
-		categoryColor = 0;
+		predefinedCategory = null;
+
 		SelectedGpxFile selectedGpxFile =
 				mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFile(wpt);
 		if (selectedGpxFile != null) {
@@ -202,14 +198,14 @@ public class WptPtEditor extends PointEditor {
 
 		this.isNew = true;
 		this.processedObject = ProcessedObject.WAYPOINT_TEMPLATE;
-		this.categoryColor = 0;
+		this.predefinedCategory = null;
 		this.gpxSelected = mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path) != null;
 		this.gpxFile = gpxFile;
 		this.wpt = from != null ? from : new WptPt();
 		showEditorFragment();
 	}
 
-	public void addWaypointTemplate(@Nullable WptPt from, @ColorInt int categoryColor) {
+	public void addWaypointTemplate(@Nullable WptPt from, @Nullable PointsCategory category) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return;
@@ -217,7 +213,7 @@ public class WptPtEditor extends PointEditor {
 
 		this.isNew = true;
 		this.processedObject = ProcessedObject.WAYPOINT_TEMPLATE;
-		this.categoryColor = categoryColor;
+		this.predefinedCategory = category;
 		this.gpxSelected = false;
 		this.gpxFile = null;
 		this.wpt = from != null ? from : new WptPt();
@@ -238,8 +234,26 @@ public class WptPtEditor extends PointEditor {
 		}
 	}
 
+	@Override
+	public void setCategory(@NonNull PointsCategory category, boolean isNew) {
+		if (gpxFile != null && isNew) {
+			saveNewCategory(gpxFile, category);
+		}
+		super.setCategory(category, isNew);
+	}
+
+	private void saveNewCategory(@NonNull GPXFile gpxFile, @NonNull PointsCategory category) {
+		gpxFile.addCategory(category);
+		if (gpxFile.showCurrentTrack) {
+			app.getSavingTrackHelper().insertCategoryData(category);
+		} else {
+			new SaveGpxAsyncTask(new File(gpxFile.path), gpxFile, null)
+					.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}
+	}
+
 	public interface OnTemplateAddedListener {
 
-		void onAddWaypointTemplate(@NonNull WptPt waypoint, @ColorInt int categoryColor);
+		void onAddWaypointTemplate(@NonNull WptPt waypoint, @Nullable PointsCategory category);
 	}
 }

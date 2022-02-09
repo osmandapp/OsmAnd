@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import net.osmand.GPXUtilities.PointsCategory;
+import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.GeocodingLookupService.OnAddressLookupResult;
@@ -21,23 +23,30 @@ import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.Ca
 import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
-public class FavoriteAction extends QuickAction {
+import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
 
+public class FavoriteAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(3,
 			"fav.add", FavoriteAction.class).
 			nameRes(R.string.quick_action_add_favorite).iconRes(R.drawable.ic_action_favorite).
 			category(QuickActionType.CREATE_CATEGORY);
+
 	public static final String KEY_NAME = "name";
 	public static final String KEY_DIALOG = "dialog";
+
 	public static final String KEY_CATEGORY_NAME = "category_name";
 	public static final String KEY_CATEGORY_COLOR = "category_color";
+	public static final String KEY_CATEGORY_ICON_NAME = "category_icon_name";
+	public static final String KEY_CATEGORY_BACKGROUND_TYPE = "category_background_type";
 
 	private transient AddressLookupRequest lookupRequest;
 	private transient ProgressDialog progressDialog;
@@ -116,11 +125,16 @@ public class FavoriteAction extends QuickAction {
 		}
 	}
 
-	private void addFavorite(MapActivity mapActivity, LatLon latLon, String title, boolean autoFill) {
+	private void addFavorite(@NonNull MapActivity mapActivity, @NonNull LatLon latLon, @NonNull String title, boolean autoFill) {
 		FavoritePointEditor favoritePointEditor = mapActivity.getContextMenu().getFavoritePointEditor();
 		if (favoritePointEditor != null) {
-			favoritePointEditor.add(latLon, title, "", getParams().get(KEY_CATEGORY_NAME),
-					Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)), autoFill);
+			PointsCategory category = new PointsCategory(
+					getParams().get(KEY_CATEGORY_NAME),
+					Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)),
+					getParams().get(KEY_CATEGORY_ICON_NAME),
+					getParams().get(KEY_CATEGORY_BACKGROUND_TYPE)
+			);
+			favoritePointEditor.add(latLon, title, category, autoFill);
 		}
 	}
 
@@ -162,6 +176,9 @@ public class FavoriteAction extends QuickAction {
 
 			getParams().put(KEY_CATEGORY_NAME, group.getName());
 			getParams().put(KEY_CATEGORY_COLOR, String.valueOf(group.getColor()));
+			getParams().put(KEY_CATEGORY_ICON_NAME, group.getIconName(null));
+			BackgroundType backgroundType = group.getShape(null);
+			getParams().put(KEY_CATEGORY_BACKGROUND_TYPE, backgroundType == null ? null : backgroundType.getTypeName());
 
 		} else {
 
@@ -170,18 +187,20 @@ public class FavoriteAction extends QuickAction {
 
 			getParams().put(KEY_CATEGORY_NAME, "");
 			getParams().put(KEY_CATEGORY_COLOR, "0");
+			getParams().put(KEY_CATEGORY_ICON_NAME, null);
+			getParams().put(KEY_CATEGORY_BACKGROUND_TYPE, null);
 		}
 
 		categoryEdit.setOnClickListener(view -> {
 			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-			CategorySelectionListener listener = (category, color) -> fillGroupParams(root, category, color);
+			CategorySelectionListener listener = (category) -> fillGroupParams(root, category);
 			SelectPointsCategoryBottomSheet.showSelectFavoriteCategoryFragment(fragmentManager, listener, "");
 		});
 
 		SelectPointsCategoryBottomSheet dialogFragment = (SelectPointsCategoryBottomSheet)
 				mapActivity.getSupportFragmentManager().findFragmentByTag(SelectPointsCategoryBottomSheet.TAG);
 		if (dialogFragment != null) {
-			dialogFragment.setSelectionListener((category, color) -> fillGroupParams(root, category, color));
+			dialogFragment.setSelectionListener((category) -> fillGroupParams(root, category));
 		}
 	}
 
@@ -194,16 +213,23 @@ public class FavoriteAction extends QuickAction {
 		return true;
 	}
 
-	private void fillGroupParams(View root, String name, int color) {
+	private void fillGroupParams(@NonNull View root, @NonNull PointsCategory category) {
 
-		if (color == 0)
-			color = root.getContext().getResources().getColor(R.color.color_favorite);
+		int color = category.getColor() == 0 ?
+				ContextCompat.getColor(root.getContext(), R.color.color_favorite)
+				: category.getColor();
+		String iconName = RenderingIcons.containsBigIcon(category.getIconName())
+				? category.getIconName()
+				: DEFAULT_ICON_NAME;
+		BackgroundType backgroundType = BackgroundType.getByTypeName(category.getBackgroundType(), BackgroundType.CIRCLE);
 
-		((AutoCompleteTextViewEx) root.findViewById(R.id.category_edit)).setText(name);
+		((AutoCompleteTextViewEx) root.findViewById(R.id.category_edit)).setText(category.getName());
 		((ImageView) root.findViewById(R.id.category_image)).setColorFilter(color);
 
-		getParams().put(KEY_CATEGORY_NAME, name);
+		getParams().put(KEY_CATEGORY_NAME, category.getName());
 		getParams().put(KEY_CATEGORY_COLOR, String.valueOf(color));
+		getParams().put(KEY_CATEGORY_ICON_NAME, iconName);
+		getParams().put(KEY_CATEGORY_BACKGROUND_TYPE, backgroundType.getTypeName());
 	}
 
 	private interface DialogOnClickListener {

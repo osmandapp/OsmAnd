@@ -3,10 +3,12 @@ package net.osmand.plus.mapcontextmenu.editors;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.GPXUtilities.PointsCategory;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
 
@@ -61,17 +63,18 @@ public class FavoritePointEditor extends PointEditor {
 		FavoritePointEditorFragment.showInstance(mapActivity);
 	}
 
-	public void add(LatLon latLon, String title, String originObjectName, String categoryName, int categoryColor, boolean autoFill) {
-		MapActivity mapActivity = getMapActivity();
-		if (latLon == null || mapActivity == null) {
+	public void add(@NonNull LatLon latLon, @NonNull String title, @Nullable PointsCategory category, boolean autoFill) {
+		if (mapActivity == null) {
 			return;
 		}
 		isNew = true;
-		if (categoryName != null && !categoryName.isEmpty()) {
-			FavouritesDbHelper.FavoriteGroup category = mapActivity.getMyApplication().getFavorites()
-					.getGroup(categoryName);
-			if (category == null) {
-				mapActivity.getMyApplication().getFavorites().addEmptyCategory(categoryName, categoryColor);
+
+		String categoryName;
+		if (category != null) {
+			categoryName = category.getName();
+			FavoriteGroup group = app.getFavorites().getGroup(categoryName);
+			if (group == null) {
+				mapActivity.getMyApplication().getFavorites().addEmptyCategory(category);
 			}
 		} else {
 			categoryName = "";
@@ -80,7 +83,6 @@ public class FavoritePointEditor extends PointEditor {
 		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, categoryName);
 		favorite.setDescription("");
 		favorite.setAddress("");
-		favorite.setOriginObjectName(originObjectName);
 		FavoritePointEditorFragment.showAutoFillInstance(mapActivity, autoFill);
 	}
 
@@ -92,5 +94,18 @@ public class FavoritePointEditor extends PointEditor {
 		isNew = false;
 		this.favorite = favorite;
 		FavoritePointEditorFragment.showInstance(mapActivity);
+	}
+
+	@Override
+	public void setCategory(@NonNull PointsCategory category, boolean isNew) {
+		if (mapActivity != null) {
+			FavouritesDbHelper favouritesDbHelper = mapActivity.getMyApplication().getFavorites();
+			if (isNew) {
+				favouritesDbHelper.addEmptyCategory(category);
+			} else {
+				favouritesDbHelper.updateCategoryAppearance(category);
+			}
+		}
+		super.setCategory(category, isNew);
 	}
 }

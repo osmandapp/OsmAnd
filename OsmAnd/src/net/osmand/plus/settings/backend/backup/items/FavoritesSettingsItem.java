@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.PointsCategory;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
@@ -138,9 +139,9 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 					}
 				}
 			}
-			List<FavouritePoint> favourites = getPointsFromGroups(appliedItems);
-			for (FavouritePoint favourite : favourites) {
-				favoritesHelper.addFavourite(favourite, false, false);
+
+			for (FavoriteGroup group : appliedItems) {
+				favoritesHelper.addCategory(group);
 			}
 			favoritesHelper.sortAll();
 			favoritesHelper.saveCurrentPointsIntoFile();
@@ -213,19 +214,30 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		};
 	}
 
-	private List<FavouritePoint> getPointsFromGroups(List<FavoriteGroup> groups) {
+	@Nullable
+	@Override
+	public SettingsItemWriter<? extends SettingsItem> getWriter() {
+		List<PointsCategory> groupsAppearance = getGroupsAppearance(items);
+		List<FavouritePoint> favourites = getPointsFromGroups(items);
+		GPXFile gpxFile = favoritesHelper.asGpxFile(groupsAppearance, favourites);
+		return getGpxWriter(gpxFile);
+	}
+
+	@NonNull
+	private List<PointsCategory> getGroupsAppearance(@NonNull List<FavoriteGroup> groups) {
+		List<PointsCategory> groupsAppearance = new ArrayList<>();
+		for (FavoriteGroup group : groups) {
+			groupsAppearance.add(group.toPointsCategory());
+		}
+		return groupsAppearance;
+	}
+
+	@NonNull
+	private List<FavouritePoint> getPointsFromGroups(@NonNull List<FavoriteGroup> groups) {
 		List<FavouritePoint> favouritePoints = new ArrayList<>();
 		for (FavoriteGroup group : groups) {
 			favouritePoints.addAll(group.getPoints());
 		}
 		return favouritePoints;
-	}
-
-	@Nullable
-	@Override
-	public SettingsItemWriter<? extends SettingsItem> getWriter() {
-		List<FavouritePoint> favourites = getPointsFromGroups(items);
-		GPXFile gpxFile = favoritesHelper.asGpxFile(favourites);
-		return getGpxWriter(gpxFile);
 	}
 }

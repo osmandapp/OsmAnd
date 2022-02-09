@@ -37,7 +37,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -639,6 +638,56 @@ public class GPXUtilities {
 			bundle.putString("t", tag);
 			bundle.putString("v", value);
 			return bundle;
+		}
+	}
+
+	public static class PointsCategory {
+
+		private String name;
+		private int color;
+		private String iconName;
+		private String backgroundType;
+
+		public PointsCategory() {}
+
+		public PointsCategory(String name, int color, String iconName, String backgroundType) {
+			this.name = name;
+			this.color = color;
+			this.iconName = iconName;
+			this.backgroundType = backgroundType;
+		}
+
+		public StringBundle toStringBundle() {
+			StringBundle bundle = new StringBundle();
+			if (!Algorithms.isEmpty(name)) {
+				bundle.putString("name", name);
+			}
+			if (color != 0) {
+				bundle.putString("color", Algorithms.colorToString(color));
+			}
+			if (!Algorithms.isEmpty(iconName)) {
+				bundle.putString(ICON_NAME_EXTENSION, iconName);
+			}
+			if (!Algorithms.isEmpty(backgroundType)) {
+				bundle.putString(BACKGROUND_TYPE_EXTENSION, backgroundType);
+			}
+			return bundle;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public int getColor() {
+			return color;
+		}
+
+		public String getIconName() {
+			return iconName;
+		}
+
+		public String getBackgroundType() {
+			return backgroundType;
 		}
 	}
 
@@ -1273,8 +1322,10 @@ public class GPXUtilities {
 		public String author;
 		public Metadata metadata = new Metadata();
 		public List<Track> tracks = new ArrayList<>();
-		private List<WptPt> points = new ArrayList<>();
 		public List<Route> routes = new ArrayList<>();
+
+		private final List<WptPt> points = new ArrayList<>();
+		private final Map<String, PointsCategory> pointsCategories = new LinkedHashMap<>();
 
 		public Exception error = null;
 		public String path = "";
@@ -1323,17 +1374,25 @@ public class GPXUtilities {
 			return points;
 		}
 
+		public Map<String, PointsCategory> getCategories() {
+			return new LinkedHashMap<>(pointsCategories);
+		}
+
+		public void addCategory(PointsCategory category) {
+			pointsCategories.put(category.getName(), category);
+			modifiedTime = System.currentTimeMillis();
+		}
+
 		public Map<String, List<WptPt>> getPointsByCategories() {
-			Map<String, List<WptPt>> res = new HashMap<>();
+			Map<String, List<WptPt>> res = new LinkedHashMap<>();
+			for (String categoryName : pointsCategories.keySet()) {
+				res.put(categoryName, new ArrayList<WptPt>());
+			}
 			for (WptPt pt : points) {
 				String category = pt.category == null ? "" : pt.category;
 				List<WptPt> list = res.get(category);
 				if (list != null) {
 					list.add(pt);
-				} else {
-					list = new ArrayList<>();
-					list.add(pt);
-					res.put(category, list);
 				}
 			}
 			return res;
@@ -1353,6 +1412,7 @@ public class GPXUtilities {
 
 		public void clearPoints() {
 			points.clear();
+			pointsCategories.clear();
 			modifiedTime = System.currentTimeMillis();
 		}
 
@@ -1436,7 +1496,7 @@ public class GPXUtilities {
 			GPXTrackAnalysis g = new GPXTrackAnalysis();
 			g.wptPoints = points.size();
 			g.name = path;
-			g.wptCategoryNames = getWaypointCategories(true);
+			g.wptCategoryNames = pointsCategories.keySet();
 			List<SplitSegment> segments = getSplitSegments(g, fromDistance, toDistance);
 			g.prepareInformation(fileTimestamp, segments.toArray(new SplitSegment[0]));
 			return g;
@@ -1687,7 +1747,12 @@ public class GPXUtilities {
 
 		public boolean deleteWptPt(WptPt pt) {
 			modifiedTime = System.currentTimeMillis();
-			return points.remove(pt);
+			boolean res = points.remove(pt);
+			boolean noPointsForCategory = !getPointsByCategories().containsKey(pt.category);
+			if (noPointsForCategory) {
+				pointsCategories.remove(pt.category);
+			}
+			return res;
 		}
 
 		public boolean deleteRtePt(WptPt pt) {
@@ -1811,35 +1876,6 @@ public class GPXUtilities {
 				}
 			}
 			return count;
-		}
-
-		public Set<String> getWaypointCategories(boolean withDefaultCategory) {
-			Set<String> categories = new HashSet<>();
-			for (WptPt pt : points) {
-				String category = pt.category == null ? "" : pt.category;
-				if (withDefaultCategory || !Algorithms.isEmpty(category)) {
-					categories.add(category);
-				}
-			}
-			return categories;
-		}
-
-		public Map<String, Integer> getWaypointCategoriesWithColors(boolean withDefaultCategory) {
-			Map<String, Integer> categories = new HashMap<>();
-			for (WptPt pt : points) {
-				String category = pt.category == null ? "" : pt.category;
-				int color = pt.category == null ? 0 : pt.getColor();
-				boolean emptyCategory = Algorithms.isEmpty(category);
-				if (!emptyCategory) {
-					Integer existingColor = categories.get(category);
-					if (existingColor == null || (existingColor == 0 && color != 0)) {
-						categories.put(category, color);
-					}
-				} else if (withDefaultCategory) {
-					categories.put(category, 0);
-				}
-			}
-			return categories;
 		}
 
 		public QuadRect getRect() {
@@ -2061,6 +2097,29 @@ public class GPXUtilities {
 			serializer.attribute(null, "xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
 			serializer.attribute(null, "xsi:schemaLocation",
 					"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
+
+			if (!Algorithms.isEmpty(file.pointsCategories)) {
+				final List<PointsCategory> pointsCategories = new ArrayList<>(file.pointsCategories.values());
+				file.setExtensionsWriter(new GPXExtensionsWriter() {
+					@Override
+					public void writeExtensions(XmlSerializer serializer) {
+						try {
+							StringBundle bundle = new StringBundle();
+
+							List<StringBundle> bundledGroups = new ArrayList<>();
+							for (PointsCategory group : pointsCategories) {
+								bundledGroups.add(group.toStringBundle());
+							}
+							bundle.putBundleList("osmand:types", "osmand:type", bundledGroups);
+
+							StringBundleWriter bundleWriter = new StringBundleXmlWriter(bundle, serializer);
+							bundleWriter.writeBundle();
+						} catch (Exception e) {
+							log.error("Failed to write points groups", e);
+						}
+					}
+				});
+			}
 
 			writeMetadata(serializer, file, progress);
 			writePoints(serializer, file, progress);
@@ -2446,6 +2505,7 @@ public class GPXUtilities {
 			boolean routePointExtension = false;
 			List<RouteSegment> routeSegments = new ArrayList<>();
 			List<RouteType> routeTypes = new ArrayList<>();
+			List<PointsCategory> pointsCategories = new ArrayList<>();
 			boolean routeExtension = false;
 			boolean typesExtension = false;
 			parserState.push(gpxFile);
@@ -2463,8 +2523,12 @@ public class GPXUtilities {
 							}
 						} else if (typesExtension) {
 							if (tagName.equals("type")) {
-								RouteType type = parseRouteTypeAttributes(parser);
-								routeTypes.add(type);
+								if (parse instanceof GPXFile) {
+									pointsCategories.add(parsePointsCategoryAttributes(parser));
+								} else {
+									RouteType type = parseRouteTypeAttributes(parser);
+									routeTypes.add(type);
+								}
 							}
 						}
 						switch (tagName) {
@@ -2774,7 +2838,10 @@ public class GPXUtilities {
 				firstSegment.routeSegments = routeSegments;
 				firstSegment.routeTypes = routeTypes;
 			}
-		gpxFile.addGeneralTrack();
+			if (!pointsCategories.isEmpty() || !gpxFile.points.isEmpty()) {
+				gpxFile.pointsCategories.putAll(mergeCategories(pointsCategories, gpxFile.points));
+			}
+			gpxFile.addGeneralTrack();
 		} catch (Exception e) {
 			gpxFile.error = e;
 			log.error("Error reading gpx", e); //$NON-NLS-1$
@@ -2831,6 +2898,20 @@ public class GPXUtilities {
 		type.tag = parser.getAttributeValue("", "t");
 		type.value = parser.getAttributeValue("", "v");
 		return type;
+	}
+
+	private static PointsCategory parsePointsCategoryAttributes(XmlPullParser parser) {
+		PointsCategory category = new PointsCategory();
+		String name = parser.getAttributeValue("", "name");
+		category.name = name == null ? "" : name;
+		try {
+			category.color = Algorithms.parseColor(parser.getAttributeValue("", "color"));
+		} catch (IllegalArgumentException e) {
+			log.error("Invalid hex color string", e);
+		}
+		category.iconName = parser.getAttributeValue("", ICON_NAME_EXTENSION);
+		category.backgroundType = parser.getAttributeValue("", BACKGROUND_TYPE_EXTENSION);
+		return category;
 	}
 
 	private static Bounds parseBoundsAttributes(XmlPullParser parser) {
@@ -2891,6 +2972,26 @@ public class GPXUtilities {
 		if (from.error != null) {
 			to.error = from.error;
 		}
+	}
+
+	private static Map<String, PointsCategory> mergeCategories(List<PointsCategory> configuredCategories,
+	                                                           List<WptPt> waypoints) {
+		Map<String, PointsCategory> allCategories = new LinkedHashMap<>();
+		for (WptPt waypoint : waypoints) {
+			String categoryName = waypoint.category == null ? "" : waypoint.category;
+			if (!allCategories.containsKey(categoryName)) {
+				PointsCategory category =
+						new PointsCategory(categoryName, waypoint.getColor(), null, null);
+				allCategories.put(categoryName, category);
+			}
+		}
+		// Add the rest categories without any points
+		for (PointsCategory category : configuredCategories) {
+			if (!allCategories.containsKey(category.name)) {
+				allCategories.put(category.name, category);
+			}
+		}
+		return allCategories;
 	}
 
 	public static void createArtificialPrimeMeridianPoints(GPXFile gpxFile) {

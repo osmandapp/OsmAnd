@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import net.osmand.GPXUtilities.PointsCategory;
 import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -248,25 +249,20 @@ public class CategoryEditorFragment extends EditorFragment {
 	protected void save(boolean needDismiss) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			String iconName = iconsCard.getSelectedIconName();
+			String categoryName = getNameTextValue();
+			PointsCategory category = new PointsCategory(categoryName, color, iconName, shape.getTypeName());
 
-			if (!isGpxCategory()) {
-				favoritesHelper.addEmptyCategory(getNameTextValue(), color, iconName, shape, true);
-			}
 			PointEditor editor = getEditor();
-
 			if (editor != null) {
-				// todo category
-				editor.setCategory(getNameTextValue(), color);
+				editor.setCategory(category, !wasSaved());
 			}
 
 			if (selectionListener != null) {
-				// todo category
-				selectionListener.onCategorySelected(getNameTextValue(), color);
+				selectionListener.onCategorySelected(category);
 			}
 
 			if (favoriteCategory != null) {
-				// todo category
+				// todo category: update existing category
 			}
 
 			if (needDismiss) {

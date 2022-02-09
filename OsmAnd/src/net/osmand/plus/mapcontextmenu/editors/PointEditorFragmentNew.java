@@ -15,11 +15,13 @@ import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import net.osmand.GPXUtilities.PointsCategory;
 import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.track.cards.ColorsCard;
 import net.osmand.plus.utils.AndroidUtils;
@@ -38,11 +40,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 import static net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
 import static net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup.isPersonalCategoryDisplayName;
 
@@ -351,10 +353,22 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 		delete(true);
 	}
 
-	public void setCategory(String name, int color) {
-		setSelectedItemWithScroll(name);
-		updateColorSelector(color);
-		AndroidUiHelper.updateVisibility(addToHiddenGroupInfo, !isCategoryVisible(name));
+	public void setCategory(@NonNull PointsCategory category, boolean isNew) {
+		setSelectedItemWithScroll(category.getName());
+		updateColorSelector(category.getColor());
+
+		int categoryIconId = RenderingIcons.getBigIconResourceId(category.getIconName());
+		if (RenderingIcons.containsBigIcon(category.getIconName())) {
+			iconsCard.updateSelectedIconId(categoryIconId);
+		}
+
+		BackgroundType categoryBackgroundType =
+				BackgroundType.getByTypeName(category.getBackgroundType(), null);
+		if (categoryBackgroundType != null) {
+			shapesCard.updateSelectedShape(categoryBackgroundType);
+		}
+
+		AndroidUiHelper.updateVisibility(addToHiddenGroupInfo, !isCategoryVisible(category.getName()));
 	}
 
 	@SuppressLint("NotifyDataSetChanged")
@@ -407,8 +421,8 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 	@NonNull
 	protected abstract Set<String> getCategories();
 
-	@ColorInt
-	protected abstract int getCategoryColor(String category);
+	@NonNull
+	protected abstract PointsCategory getCategoryParams(String category);
 
 	protected abstract int getCategoryPointsCount(String category);
 
@@ -506,7 +520,16 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 				holder.groupButton.setOnClickListener(view -> {
 					int previousSelectedPosition = getItemPosition(selectedItemName);
 					selectedItemName = items.get(holder.getAdapterPosition());
-					updateColorSelector(getCategoryColor(selectedItemName));
+
+					PointsCategory category = getCategoryParams(selectedItemName);
+					int iconId = RenderingIcons.containsBigIcon(category.getIconName())
+							? RenderingIcons.getBigIconResourceId(category.getIconName())
+							: DEFAULT_UI_ICON_ID;
+					BackgroundType shape = BackgroundType.getByTypeName(category.getBackgroundType(), BackgroundType.CIRCLE);
+					updateColorSelector(category.getColor());
+					iconsCard.updateSelectedIconId(iconId);
+					shapesCard.updateSelectedShape(shape);
+
 					AndroidUiHelper.updateVisibility(addToHiddenGroupInfo, !isCategoryVisible(selectedItemName));
 					notifyItemChanged(holder.getAdapterPosition());
 					notifyItemChanged(previousSelectedPosition);
@@ -533,7 +556,7 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 				int color;
 				int iconID;
 				if (isCategoryVisible(group)) {
-					int categoryColor = getCategoryColor(group);
+					int categoryColor = getCategoryParams(group).getColor();
 					color = categoryColor == 0 ? getDefaultColor() : categoryColor;
 					iconID = R.drawable.ic_action_folder;
 					holder.groupName.setTypeface(null, Typeface.NORMAL);

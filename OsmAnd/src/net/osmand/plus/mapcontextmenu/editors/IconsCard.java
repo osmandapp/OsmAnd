@@ -306,6 +306,10 @@ public class IconsCard extends MapBaseCard {
 		icon.setImageDrawable(UiUtilities.createTintedDrawable(mapActivity, iconId, ContextCompat.getColor(mapActivity, R.color.icon_color_default_light)));
 	}
 
+	public void updateSelectedIconId(@DrawableRes int iconId) {
+		reselectIcon(iconId, true);
+	}
+
 	public void updateSelectedColor(@ColorInt int newColor) {
 		selectedColor = newColor;
 		reselectIcon(selectedIconId, false);

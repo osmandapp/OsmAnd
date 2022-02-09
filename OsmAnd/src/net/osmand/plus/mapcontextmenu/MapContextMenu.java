@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.PointsCategory;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
@@ -1193,7 +1194,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				: RenderingIcons.getBigIconResourceId(preselectedIconName);
 	}
 
-	public void addWptPt(@NonNull WptPt wptPt, @Nullable String categoryName, int categoryColor,
+	public void addWptPt(@NonNull WptPt wptPt, @Nullable PointsCategory category,
 	                     boolean skipDialog, @Nullable GPXFile gpxFile) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
@@ -1203,15 +1204,15 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			}
 
 			if (gpxFile != null) {
-				wptPtPointEditor.add(gpxFile, wptPt, categoryName, categoryColor, skipDialog);
+				wptPtPointEditor.add(gpxFile, wptPt, category, skipDialog);
 			} else {
 				final List<SelectedGpxFile> list
 						= mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
 				if (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().showCurrentTrack)) {
 					GPXFile currentGpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
-					wptPtPointEditor.add(currentGpxFile, wptPt, categoryName, categoryColor, skipDialog);
+					wptPtPointEditor.add(currentGpxFile, wptPt, category, skipDialog);
 				} else {
-					addNewWptToGPXFile(wptPt, categoryName, categoryColor, skipDialog);
+					addNewWptToGPXFile(wptPt, category, skipDialog);
 				}
 			}
 		}
@@ -1227,7 +1228,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public void addNewWptToGPXFile(@NonNull WptPt wptPt, @Nullable String categoryName, int categoryColor, boolean skipDialog) {
+	public void addNewWptToGPXFile(@NonNull WptPt wptPt, @Nullable PointsCategory category, boolean skipDialog) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
@@ -1240,7 +1241,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 								: mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
 						WptPtEditor wptPtPointEditor = getWptPtPointEditor();
 						if (wptPtPointEditor != null) {
-							wptPtPointEditor.add(gpxFile, wptPt, categoryName, categoryColor, skipDialog);
+							wptPtPointEditor.add(gpxFile, wptPt, category, skipDialog);
 						}
 					}
 					return true;

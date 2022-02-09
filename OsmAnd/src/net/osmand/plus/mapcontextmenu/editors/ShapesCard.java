@@ -44,6 +44,10 @@ public class ShapesCard extends MapBaseCard {
 		return selectedShape;
 	}
 
+	public void updateSelectedShape(@NonNull BackgroundType shape) {
+		reselectShape(shape, true);
+	}
+
 	public void updateSelectedColor(@ColorInt int color) {
 		selectedColor = color;
 		reselectShape(selectedShape, false);

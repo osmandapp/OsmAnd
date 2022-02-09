@@ -26,6 +26,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.GPXUtilities.PointsCategory;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.LatLon;
@@ -77,11 +78,12 @@ public class GPXAction extends QuickAction {
 
 	public static final String KEY_CATEGORY_NAME = "category_name";
 	public static final String KEY_CATEGORY_COLOR = "category_color";
+	public static final String KEY_CATEGORY_ICON_NAME = "category_icon_name";
+	public static final String KEY_CATEGORY_BACKGROUND_TYPE = "category_background_type";
 
 	private transient String selectedGpxFilePath;
 	private transient WptPt predefinedWaypoint;
-	@ColorInt
-	private transient int predefinedCategoryColor;
+	private transient PointsCategory predefinedCategory;
 
 	private transient TextToggleButton trackToggleButton;
 	private transient TextToggleButton appearanceToggleButton;
@@ -120,13 +122,12 @@ public class GPXAction extends QuickAction {
 			wptPt.lon = latLon.getLongitude();
 			wptPt.time = System.currentTimeMillis();
 
-			String categoryName = getParams().get(KEY_CATEGORY_NAME);
-			int categoryColor = getColorFromParams(KEY_CATEGORY_COLOR, 0);
+			PointsCategory category = createCategory(wptPt);
 
 			if (Algorithms.isBlank(wptPt.name) && Algorithms.isBlank(wptPt.getAddress())) {
 				lookupAddress(latLon, mapActivity, foundAddress -> {
 					wptPt.name = foundAddress;
-					mapActivity.getContextMenu().addWptPt(wptPt, categoryName, categoryColor, true, gpxFile);
+					mapActivity.getContextMenu().addWptPt(wptPt, category, true, gpxFile);
 					return true;
 				});
 			} else {
@@ -134,13 +135,13 @@ public class GPXAction extends QuickAction {
 					wptPt.name = wptPt.getAddress();
 					wptPt.setAddress(null);
 				}
-				mapActivity.getContextMenu().addWptPt(wptPt, categoryName, categoryColor, true, gpxFile);
+				mapActivity.getContextMenu().addWptPt(wptPt, category, true, gpxFile);
 			}
 		} else {
 			WptPt wptPt = new WptPt(latLon.getLatitude(), latLon.getLongitude(), System.currentTimeMillis(),
 					Double.NaN, 0, Double.NaN);
 			mapActivity.getContextMenu()
-					.addWptPt(wptPt, null, 0, false, gpxFile);
+					.addWptPt(wptPt, null, false, gpxFile);
 		}
 	}
 
@@ -399,15 +400,14 @@ public class GPXAction extends QuickAction {
 					: null;
 			String gpxFilePath = getSelectedGpxFilePath(true);
 			waypointEditor.setOnDismissListener(showDialogAfterTemplateEditing(mapActivity));
-			waypointEditor.setOnWaypointTemplateAddedListener((waypoint, categoryColor) -> {
+			waypointEditor.setOnWaypointTemplateAddedListener((waypoint, category) -> {
 				predefinedWaypoint = waypoint;
-				predefinedCategoryColor = categoryColor;
+				predefinedCategory = category;
 				setupWaypointAppearanceToggle(container, mapActivity);
 			});
 
 			if (gpxFilePath == null) {
-				int categoryColor = getColorFromParams(KEY_CATEGORY_COLOR, 0);
-				waypointEditor.addWaypointTemplate(source, categoryColor);
+				waypointEditor.addWaypointTemplate(source, createCategory(source));
 				hideDialog(mapActivity);
 			} else {
 				getGpxFile(gpxFilePath, mapActivity, gpxFile -> {
@@ -460,6 +460,19 @@ public class GPXAction extends QuickAction {
 		return waypoint;
 	}
 
+	@Nullable
+	private PointsCategory createCategory(@Nullable WptPt wptPt) {
+		String categoryName = wptPt != null ? wptPt.category : getParams().get(KEY_CATEGORY_NAME);
+		if (categoryName == null) {
+			return null;
+		} else {
+			int color = getColorFromParams(KEY_CATEGORY_COLOR, 0);
+			String iconName = getParams().get(KEY_CATEGORY_ICON_NAME);
+			String backgroundType = getParams().get(KEY_CATEGORY_BACKGROUND_TYPE);
+			return new PointsCategory(categoryName, color, iconName, backgroundType);
+		}
+	}
+
 	@ColorInt
 	private int getWaypointColorFromParams() {
 		return getColorFromParams(KEY_WPT_COLOR, ColorDialogs.pallette[0]);
@@ -481,8 +494,8 @@ public class GPXAction extends QuickAction {
 
 	@ColorInt
 	private int getCategoryColor() {
-		return predefinedWaypoint != null
-				? predefinedCategoryColor
+		return predefinedCategory != null
+				? predefinedCategory.getColor()
 				: getColorFromParams(KEY_CATEGORY_COLOR, 0);
 	}
 
@@ -517,7 +530,11 @@ public class GPXAction extends QuickAction {
 			getParams().put(KEY_WPT_ICON, predefinedWaypoint.getIconName());
 			getParams().put(KEY_WPT_BACKGROUND_TYPE, predefinedWaypoint.getBackgroundType());
 			getParams().put(KEY_CATEGORY_NAME, predefinedWaypoint.category);
-			getParams().put(KEY_CATEGORY_COLOR, String.valueOf(predefinedCategoryColor));
+			if (predefinedCategory != null) {
+				getParams().put(KEY_CATEGORY_COLOR, String.valueOf(predefinedCategory.getColor()));
+				getParams().put(KEY_CATEGORY_ICON_NAME, predefinedCategory.getIconName());
+				getParams().put(KEY_CATEGORY_BACKGROUND_TYPE, predefinedCategory.getBackgroundType());
+			}
 		}
 
 		return true;

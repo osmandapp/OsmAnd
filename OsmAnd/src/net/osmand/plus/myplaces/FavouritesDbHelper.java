@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.PointsCategory;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
@@ -30,6 +31,7 @@ import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream;
+import org.apache.commons.logging.Log;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -56,7 +58,7 @@ public class FavouritesDbHelper {
 		void onFavoriteDataUpdated(@NonNull FavouritePoint favouritePoint);
 	}
 
-	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(FavouritesDbHelper.class);
+	private static final Log log = PlatformUtil.getLog(FavouritesDbHelper.class);
 
 	public static final String FILE_TO_SAVE = "favourites.gpx"; //$NON-NLS-1$
 	public static final String BACKUP_FOLDER = "backup"; //$NON-NLS-1$
@@ -119,7 +121,7 @@ public class FavouritesDbHelper {
 			return name.equals(ctx.getString(R.string.personal_category_name));
 		}
 
-		public static String getDisplayName(Context ctx, String name) {
+		public static String getDisplayName(@NonNull Context ctx, @NonNull String name) {
 			if (isPersonal(name)) {
 				return ctx.getString(R.string.personal_category_name);
 			} else if (name.isEmpty()) {
@@ -155,6 +157,11 @@ public class FavouritesDbHelper {
 
 		public String getDisplayName(Context ctx) {
 			return getDisplayName(ctx, name);
+		}
+
+		@NonNull
+		public PointsCategory toPointsCategory() {
+			return new PointsCategory(name, color, iconName, shape == null ? null : shape.getTypeName());
 		}
 
 		public static String convertDisplayNameToGroupIdName(Context context, String name) {
@@ -215,18 +222,22 @@ public class FavouritesDbHelper {
 				loadAndCheckDatabasePoints();
 				saveCurrentPointsIntoFile();
 			}
-			//createDefaultCategories();
 		}
-		Map<String, FavouritePoint> points = new LinkedHashMap<String, FavouritePoint>();
-		Map<String, FavouritePoint> extPoints = new LinkedHashMap<String, FavouritePoint>();
-		loadGPXFile(internalFile, points);
-		loadGPXFile(getExternalFile(), extPoints);
-		boolean changed = merge(extPoints, points);
 
-		for (FavouritePoint pns : points.values()) {
-			FavoriteGroup group = getOrCreateGroup(pns, 0);
-			group.points.add(pns);
+		Map<String, PointsCategory> categories = new LinkedHashMap<>();
+		Map<String, PointsCategory> extCategories = new LinkedHashMap<>();
+		Map<String, FavouritePoint> points = new LinkedHashMap<>();
+		Map<String, FavouritePoint> extPoints = new LinkedHashMap<>();
+		loadGPXFile(internalFile, categories, points);
+		loadGPXFile(getExternalFile(), extCategories, extPoints);
+		boolean changed = merge(extCategories, extPoints, categories, points);
+
+		for (FavouritePoint point : points.values()) {
+			PointsCategory categoryAppearance = categories.get(point.getCategory());
+			FavoriteGroup group = getOrCreateGroup(point, categoryAppearance);
+			group.points.add(point);
 		}
+
 		sortAll();
 		recalculateCachedFavPoints();
 		if (changed || !getExternalFile().exists()) {
@@ -249,7 +260,7 @@ public class FavouritesDbHelper {
 			if (fp.getIconIdOrDefault() == FavouritePoint.DEFAULT_UI_ICON_ID) {
 				fp.setIconId(0);
 			}
-			FavoriteGroup group = getOrCreateGroup(fp, 0);
+			FavoriteGroup group = getOrCreateGroup(fp, null);
 			group.points.add(fp);
 		}
 		sortAll();
@@ -258,16 +269,14 @@ public class FavouritesDbHelper {
 	}
 
 	private void notifyListeners() {
-		context.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				for (FavoritesListener listener : listeners) {
-					listener.onFavoritesLoaded();
-				}
+		context.runInUIThread(() -> {
+			for (FavoritesListener listener : listeners) {
+				listener.onFavoritesLoaded();
 			}
 		});
 	}
 
+	@Nullable
 	public FavouritePoint getSpecialPoint(SpecialPointType pointType) {
 		for (FavouritePoint fp : cachedFavoritePoints) {
 			if (fp.getSpecialPointType() == pointType) {
@@ -281,21 +290,31 @@ public class FavouritesDbHelper {
 		return favoritesLoaded;
 	}
 
-	public void addListener(FavoritesListener listener) {
+	public void addListener(@NonNull FavoritesListener listener) {
 		listeners.add(listener);
 	}
 
-	public void removeListener(FavoritesListener listener) {
+	public void removeListener(@NonNull FavoritesListener listener) {
 		listeners.remove(listener);
 	}
 
-	private boolean merge(Map<String, FavouritePoint> source, Map<String, FavouritePoint> destination) {
+	private boolean merge(@NonNull Map<String, PointsCategory> sourceCategories,
+	                      @NonNull Map<String, FavouritePoint> sourcePoints,
+	                      @NonNull Map<String, PointsCategory> destinationCategories,
+	                      @NonNull Map<String, FavouritePoint> destinationPoints) {
 		boolean changed = false;
-		for (Map.Entry<String, FavouritePoint> entry : source.entrySet()) {
-			String ks = entry.getKey();
-			if (!destination.containsKey(ks)) {
+		for (Map.Entry<String, PointsCategory> entry : sourceCategories.entrySet()) {
+			String categoryName = entry.getKey();
+			if (!destinationCategories.containsKey(categoryName)) {
 				changed = true;
-				destination.put(ks, entry.getValue());
+				destinationCategories.put(categoryName, entry.getValue());
+			}
+		}
+		for (Map.Entry<String, FavouritePoint> entry : sourcePoints.entrySet()) {
+			String ks = entry.getKey();
+			if (!destinationPoints.containsKey(ks)) {
+				changed = true;
+				destinationPoints.put(ks, entry.getValue());
 			}
 		}
 		return changed;
@@ -435,7 +454,7 @@ public class FavouritesDbHelper {
 			lookupAddress(p);
 		}
 		context.getSettings().SHOW_FAVORITES.set(true);
-		FavoriteGroup group = getOrCreateGroup(p, 0);
+		FavoriteGroup group = getOrCreateGroup(p, null);
 
 		if (!p.getName().isEmpty()) {
 			p.setVisible(group.visible);
@@ -585,7 +604,7 @@ public class FavouritesDbHelper {
 			if (old != null) {
 				old.points.remove(p);
 			}
-			FavoriteGroup pg = getOrCreateGroup(p, 0);
+			FavoriteGroup pg = getOrCreateGroup(p, null);
 			p.setVisible(pg.visible);
 			if (SpecialPointType.PARKING == p.getSpecialPointType()) {
 				p.setColor(ContextCompat.getColor(context, R.color.parking_icon_background));
@@ -598,14 +617,14 @@ public class FavouritesDbHelper {
 		}
 		sortAll();
 		saveCurrentPointsIntoFile();
-		runSyncWithMarkers(getOrCreateGroup(p, 0));
+		runSyncWithMarkers(getOrCreateGroup(p, null));
 		return true;
 	}
 
 	private void editAddressDescription(@NonNull FavouritePoint p, @Nullable String address) {
 		p.setAddress(address);
 		saveCurrentPointsIntoFile();
-		runSyncWithMarkers(getOrCreateGroup(p, 0));
+		runSyncWithMarkers(getOrCreateGroup(p, null));
 	}
 
 	public boolean editFavourite(@NonNull FavouritePoint p, double lat, double lon) {
@@ -617,7 +636,7 @@ public class FavouritesDbHelper {
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile();
 		}
-		FavoriteGroup group = getOrCreateGroup(point, 0);
+		FavoriteGroup group = getOrCreateGroup(point, null);
 		runSyncWithMarkers(group);
 		return true;
 	}
@@ -631,19 +650,29 @@ public class FavouritesDbHelper {
 			p.setDescription(description);
 		}
 		saveCurrentPointsIntoFile();
-		runSyncWithMarkers(getOrCreateGroup(p, 0));
+		runSyncWithMarkers(getOrCreateGroup(p, null));
 		return true;
 	}
 
 	public void saveCurrentPointsIntoFile() {
 		try {
-			Map<String, FavouritePoint> deletedInMemory = new LinkedHashMap<String, FavouritePoint>();
-			loadGPXFile(getInternalFile(), deletedInMemory);
-			for (FavouritePoint fp : cachedFavoritePoints) {
-				deletedInMemory.remove(getKey(fp));
+			Map<String, PointsCategory> deletedInMemoryCategories = new LinkedHashMap<>();
+			Map<String, FavouritePoint> deletedInMemoryPoints = new LinkedHashMap<>();
+			loadGPXFile(getInternalFile(), deletedInMemoryCategories, deletedInMemoryPoints);
+			for (FavoriteGroup group : favoriteGroups) {
+				deletedInMemoryCategories.remove(group.name);
 			}
-			saveFile(cachedFavoritePoints, getInternalFile());
-			saveExternalFile(deletedInMemory.keySet());
+			for (FavouritePoint fp : cachedFavoritePoints) {
+				deletedInMemoryPoints.remove(getKey(fp));
+			}
+
+			List<PointsCategory> categoriesAppearance = new ArrayList<>();
+			for (FavoriteGroup group : favoriteGroups) {
+				categoriesAppearance.add(group.toPointsCategory());
+			}
+
+			saveFile(categoriesAppearance, cachedFavoritePoints, getInternalFile());
+			saveExternalFile(deletedInMemoryCategories.keySet(), deletedInMemoryPoints.keySet());
 			backup(getBackupFile(), getExternalFile());
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
@@ -664,25 +693,33 @@ public class FavouritesDbHelper {
 	}
 
 	public Exception exportFavorites() {
-		return saveExternalFile(null);
+		return saveExternalFile(null, null);
 	}
 
-	private Exception saveExternalFile(Set<String> deleted) {
-		Map<String, FavouritePoint> all = new LinkedHashMap<String, FavouritePoint>();
-		loadGPXFile(getExternalFile(), all);
-		List<FavouritePoint> favoritePoints = new ArrayList<FavouritePoint>(cachedFavoritePoints);
-		if (deleted != null) {
-			for (String key : deleted) {
-				all.remove(key);
+	private Exception saveExternalFile(@Nullable Set<String> deletedCategories, @Nullable Set<String> deletedPoints) {
+		Map<String, PointsCategory> allCategories = new LinkedHashMap<>();
+		Map<String, FavouritePoint> allPoints = new LinkedHashMap<>();
+		loadGPXFile(getExternalFile(), allCategories, allPoints);
+
+		if (deletedCategories != null) {
+			for (String categoryName : deletedCategories) {
+				allCategories.remove(categoryName);
 			}
 		}
+		if (deletedPoints != null) {
+			for (String pointName : deletedPoints) {
+				allPoints.remove(pointName);
+			}
+		}
+
+		List<FavouritePoint> favoritePoints = new ArrayList<>(cachedFavoritePoints);
 		// remove already existing in memory
 		for (FavouritePoint p : favoritePoints) {
-			all.remove(getKey(p));
+			allPoints.remove(getKey(p));
 		}
 		// save favoritePoints from memory in order to update existing
-		favoritePoints.addAll(all.values());
-		return saveFile(favoritePoints, getExternalFile());
+		favoritePoints.addAll(allPoints.values());
+		return saveFile(new ArrayList<>(allCategories.values()), favoritePoints, getExternalFile());
 	}
 
 	private String getKey(FavouritePoint p) {
@@ -734,30 +771,44 @@ public class FavouritesDbHelper {
 		return firstModified;
 	}
 
-	public Exception saveFile(List<FavouritePoint> favoritePoints, File f) {
-		GPXFile gpx = asGpxFile(favoritePoints);
+	public Exception saveFile(@NonNull List<PointsCategory> categoriesAppearance,
+	                          @NonNull List<FavouritePoint> favoritePoints,
+	                          @NonNull File f) {
+		GPXFile gpx = asGpxFile(categoriesAppearance, favoritePoints);
 		return GPXUtilities.writeGpxFile(f, gpx);
 	}
 
-
-	public GPXFile asGpxFile() {
-		return asGpxFile(cachedFavoritePoints);
-	}
-
-	public GPXFile asGpxFile(List<FavouritePoint> favoritePoints) {
+	@NonNull
+	public GPXFile asGpxFile(@NonNull List<PointsCategory> categoriesAppearance,
+	                         @NonNull List<FavouritePoint> favoritePoints) {
 		GPXFile gpx = new GPXFile(Version.getFullVersion(context));
+		for (PointsCategory category : categoriesAppearance) {
+			gpx.addCategory(category);
+		}
 		for (FavouritePoint p : favoritePoints) {
 			context.getSelectedGpxHelper().addPoint(p.toWpt(context), gpx);
 		}
 		return gpx;
 	}
 
-	public void addEmptyCategory(String name, int color) {
-		addEmptyCategory(name, color, true);
+	public void addCategory(@NonNull FavoriteGroup newGroup) {
+		if (flatGroups.containsKey(newGroup.name)) {
+			for (FavouritePoint point : newGroup.getPoints()) {
+				addFavourite(point);
+			}
+		} else {
+			favoriteGroups.add(newGroup);
+			flatGroups.put(newGroup.name, newGroup);
+		}
 	}
 
 	public void addEmptyCategory(String name, int color, boolean visible) {
 		addEmptyCategory(name, color, null, null, visible);
+	}
+
+	public void addEmptyCategory(@NonNull PointsCategory category) {
+		BackgroundType backgroundType = BackgroundType.getByTypeName(category.getBackgroundType(), null);
+		addEmptyCategory(category.getName(), category.getColor(), category.getIconName(), backgroundType, true);
 	}
 
 	public void addEmptyCategory(String name, int color, String iconName, BackgroundType shape, boolean visible) {
@@ -769,12 +820,25 @@ public class FavouritesDbHelper {
 		group.visible = visible;
 		favoriteGroups.add(group);
 		flatGroups.put(group.name, group);
+		saveCurrentPointsIntoFile();
+	}
+
+	public void updateCategoryAppearance(@NonNull PointsCategory category) {
+		String id = FavoriteGroup.convertDisplayNameToGroupIdName(context, category.getName());
+		FavoriteGroup favoriteGroup = flatGroups.get(id);
+		if (favoriteGroup != null) {
+			favoriteGroup.color = category.getColor();
+			favoriteGroup.iconName = category.getIconName();
+			favoriteGroup.shape = BackgroundType.getByTypeName(category.getBackgroundType(), null);
+			saveCurrentPointsIntoFile();
+		}
 	}
 
 	public List<FavouritePoint> getFavouritePoints() {
 		return cachedFavoritePoints;
 	}
 
+	@NonNull
 	public List<FavouritePoint> getVisibleFavouritePoints() {
 		List<FavouritePoint> fp = new ArrayList<>();
 		for (FavouritePoint p : cachedFavoritePoints) {
@@ -838,19 +902,6 @@ public class FavouritesDbHelper {
 		}
 	}
 
-	@Nullable
-	private FavouritePoint findFavoriteByAllProperties(String category, String name, double lat, double lon) {
-		if (flatGroups.containsKey(category)) {
-			FavoriteGroup fg = flatGroups.get(category);
-			for (FavouritePoint fv : fg.points) {
-				if (name.equals(fv.getName()) && (lat == fv.getLatitude()) && (lon == fv.getLongitude())) {
-					return fv;
-				}
-			}
-		}
-		return null;
-	}
-
 	public void recalculateCachedFavPoints() {
 		List<FavouritePoint> allPoints = new ArrayList<>();
 		for (FavoriteGroup f : favoriteGroups) {
@@ -911,7 +962,9 @@ public class FavouritesDbHelper {
 		};
 	}
 
-	private boolean loadGPXFile(File file, Map<String, FavouritePoint> points) {
+	private boolean loadGPXFile(@NonNull File file,
+	                            @NonNull Map<String, PointsCategory> categories,
+	                            @NonNull Map<String, FavouritePoint> points) {
 		if (!file.exists()) {
 			return false;
 		}
@@ -923,6 +976,7 @@ public class FavouritesDbHelper {
 			FavouritePoint favouritePoint = FavouritePoint.fromWpt(wptPt, context);
 			points.put(getKey(favouritePoint), favouritePoint);
 		}
+		categories.putAll(res.getCategories());
 		return true;
 	}
 
@@ -970,19 +1024,24 @@ public class FavouritesDbHelper {
 		saveCurrentPointsIntoFile();
 	}
 
-	private FavoriteGroup getOrCreateGroup(FavouritePoint p, int defColor) {
-		if (flatGroups.containsKey(p.getCategory())) {
-			return flatGroups.get(p.getCategory());
+	@NonNull
+	private FavoriteGroup getOrCreateGroup(@NonNull FavouritePoint p, @Nullable PointsCategory categoryAppearance) {
+		FavoriteGroup group = flatGroups.get(p.getCategory());
+		if (group != null) {
+			return group;
 		}
-		FavoriteGroup group = new FavoriteGroup();
+
+		group = new FavoriteGroup();
 		group.name = p.getCategory();
 		group.visible = p.isVisible();
-		group.color = p.getColor();
+		group.color = categoryAppearance != null ? categoryAppearance.getColor() : p.getColor();
+		group.iconName = categoryAppearance != null ? categoryAppearance.getIconName() : null;
+		group.shape = categoryAppearance != null
+				? BackgroundType.getByTypeName(categoryAppearance.getBackgroundType(), null)
+				: null;
+
 		flatGroups.put(group.name, group);
 		favoriteGroups.add(group);
-		if (group.color == 0) {
-			group.color = defColor;
-		}
 		return group;
 	}
 
@@ -1048,7 +1107,7 @@ public class FavouritesDbHelper {
 							FavouritePoint p = new FavouritePoint();
 							p.setName(name);
 							p.setCategory(cat);
-							FavoriteGroup group = getOrCreateGroup(p, 0);
+							FavoriteGroup group = getOrCreateGroup(p, null);
 							if (!name.isEmpty()) {
 								p.setLatitude(query.getDouble(2));
 								p.setLongitude(query.getDouble(3));

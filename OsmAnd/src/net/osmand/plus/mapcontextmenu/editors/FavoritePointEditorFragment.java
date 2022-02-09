@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.PointsCategory;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.LatLon;
@@ -36,7 +38,9 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 
 public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 
@@ -164,14 +168,13 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 	}
 
 	@Override
-	public void setCategory(String name, int color) {
+	public void setCategory(@NonNull PointsCategory category, boolean isNew) {
 		FavouritesDbHelper helper = getHelper();
 		Context ctx = getContext();
 		if (helper != null && ctx != null) {
-			FavoriteGroup group = helper.getGroup(FavoriteGroup.convertDisplayNameToGroupIdName(ctx, name));
-			this.group = group;
-			super.setCategory(name, group != null ? group.getColor() : 0);
+			this.group = helper.getGroup(FavoriteGroup.convertDisplayNameToGroupIdName(ctx, category.getName()));
 		}
+		super.setCategory(category, isNew);
 	}
 
 	@Override
@@ -488,6 +491,20 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		return getHelper() == null || getHelper().isGroupVisible(name);
 	}
 
+	@NonNull
+	@Override
+	protected PointsCategory getCategoryParams(String category) {
+		FavouritesDbHelper helper = getHelper();
+		if (helper != null) {
+			for (FavoriteGroup group : helper.getFavoriteGroups()) {
+				if (group.getDisplayName(getMyApplication()).equals(category)) {
+					return group.toPointsCategory();
+				}
+			}
+		}
+		return new PointsCategory(category, defaultColor, DEFAULT_ICON_NAME, DEFAULT_BACKGROUND_TYPE.getTypeName());
+	}
+
 	@Override
 	public int getCategoryPointsCount(String category) {
 		FavouritesDbHelper helper = getHelper();
@@ -499,20 +516,6 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 			}
 		}
 		return 0;
-	}
-
-	@Override
-	@ColorInt
-	public int getCategoryColor(String category) {
-		FavouritesDbHelper helper = getHelper();
-		if (helper != null) {
-			for (FavoriteGroup group : helper.getFavoriteGroups()) {
-				if (group.getDisplayName(getMyApplication()).equals(category)) {
-					return group.getColor();
-				}
-			}
-		}
-		return defaultColor;
 	}
 
 	@Override
