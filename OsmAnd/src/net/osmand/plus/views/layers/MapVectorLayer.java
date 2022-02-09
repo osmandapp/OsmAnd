@@ -1,23 +1,5 @@
 package net.osmand.plus.views.layers;
 
-import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.MapLayerConfiguration;
-import net.osmand.core.jni.PointI;
-import net.osmand.data.LatLon;
-import net.osmand.data.QuadPointDouble;
-import net.osmand.data.RotatedTileBox;
-import net.osmand.map.ITileSource;
-import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
-import net.osmand.plus.render.MapRenderRepositories;
-import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.views.layers.base.BaseMapLayer;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.corenative.NativeCoreContext;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -26,6 +8,20 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 
 import androidx.annotation.NonNull;
+
+import net.osmand.core.android.MapRendererContext;
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.MapLayerConfiguration;
+import net.osmand.core.jni.PointI;
+import net.osmand.data.LatLon;
+import net.osmand.data.QuadPointDouble;
+import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.plus.views.layers.base.BaseMapLayer;
+import net.osmand.util.MapUtils;
 
 public class MapVectorLayer extends BaseMapLayer {
 	private OsmandMapTileView view;
