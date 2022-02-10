@@ -781,7 +781,7 @@ public class RouteResultPreparation {
 	}
 
 
-	protected void addTurnInfoDescriptions(List<RouteSegmentResult> result) {
+	public void addTurnInfoDescriptions(List<RouteSegmentResult> result) {
 		int prevSegment = -1;
 		float dist = 0;
 		for (int i = 0; i <= result.size(); i++) {
