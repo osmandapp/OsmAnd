@@ -4330,7 +4330,7 @@
     <string name="horseback_riding">Верхова їзда</string>
     <string name="routing_attr_prefer_horse_routes_description">Надавати перевагу кінним маршрутам</string>
     <string name="routing_attr_prefer_horse_routes_name">Надавати перевагу кінним маршрутам</string>
-    <string name="routing_attr_only_permitted_ways_description">Використовуйте лише явно дозволені шляхи (доріжки, просіки тощо)</string>
+    <string name="routing_attr_only_permitted_ways_description">Використовувати лише явно дозволені шляхи (доріжки, просіки тощо)</string>
     <string name="routing_attr_only_permitted_ways_name">Явний дозвіл використання вулиць</string>
     <string name="routing_attr_only_permitted_streets_description">Використовувати лише явно дозволені вулиці</string>
     <string name="routing_attr_only_permitted_streets_name">Явний дозвіл використання вулиць</string>
