@@ -3,6 +3,7 @@ package net.osmand.router;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
@@ -36,6 +37,7 @@ public class RouteResultPreparationTest {
     
     private static RoutePlannerFrontEnd fe;
     private static RoutingContext ctx;
+    private static final boolean NATIVE_LIB = false;
 
     private LatLon startPoint;
     private LatLon endPoint;
@@ -78,12 +80,24 @@ public class RouteResultPreparationTest {
 
     @Test
     public void testLanes() throws Exception {
+        NativeLibrary nativeLibrary;
+        if (NATIVE_LIB) {
+            boolean old = NativeLibrary.loadOldLib("/Users/plotva/work/osmand/core-legacy/binaries/darwin/intel");
+            nativeLibrary = new NativeLibrary();
+            if (!old) {
+                throw new UnsupportedOperationException("Not supported");
+            }
+        }
+        
         String fileName = "src/test/resources/Turn_lanes_test.obf";
         File fl = new File(fileName);
     
         RandomAccessFile raf = new RandomAccessFile(fl, "r");
         fe = new RoutePlannerFrontEnd();
         RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
+        if (NATIVE_LIB) {
+            nativeLibrary.initMapFile(fl.getAbsolutePath(), true);
+        }
         if (params == null) {
             params = new HashMap<>();
         }
@@ -94,8 +108,14 @@ public class RouteResultPreparationTest {
         );
         RoutingConfiguration config = builder.build("car", memoryLimit, params);
         BinaryMapIndexReader[] binaryMapIndexReaders = {new BinaryMapIndexReader(raf, fl)};
-        ctx = fe.buildRoutingContext(config, null, binaryMapIndexReaders,
-                RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
+        
+        if (NATIVE_LIB) {
+            ctx = fe.buildRoutingContext(config, nativeLibrary, binaryMapIndexReaders,
+                    RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
+        } else {
+            ctx = fe.buildRoutingContext(config, null, binaryMapIndexReaders,
+                    RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
+        }
         ctx.leftSideNavigation = false;
         
         List<RouteSegmentResult> routeSegments = fe.searchRoute(ctx, startPoint, endPoint, null);
