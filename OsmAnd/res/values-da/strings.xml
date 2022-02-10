@@ -4534,4 +4534,10 @@
     <string name="import_tracks">Importer spor</string>
     <string name="import_tracks_descr">%1$s, indeholder %2$s separate spor. Vælg spor til import.</string>
     <string name="select_suggested_points">Vælg foreslåede punkter</string>
+    <string name="location_source_descr">Som standard bruger OsmAnd, der er installeret fra Google Play, %1$s til at bestemme placeringen.
+\n
+\nHvis du får unøjagtige placeringsoplysninger eller bruger en enhed uden %2$s, kan du prøve at skifte til \"%3$s\"</string>
+    <string name="location_source">Placeringskilde</string>
+    <string name="google_play_services">Google Play Services</string>
+    <string name="android_api">Android API</string>
 </resources>
