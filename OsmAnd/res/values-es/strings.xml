@@ -4462,7 +4462,7 @@
     <string name="approx_safe_mode">Aproximación de GPX segura</string>
     <string name="approx_safe_mode_description">Realiza una aproximación de GPX usando un código Android más lento en lugar del nativo.</string>
     <string name="use_external_timestamps">Usar sellos de tiempo externos</string>
-    <string name="use_external_timestamps_description">Usa sellos de tiempo del navegador en línea para ajustar el tiempo estimado y la velocidad media</string>
+    <string name="use_external_timestamps_description">Utilizar sellos de tiempo del enrutador en línea para ajustar la hora estimada de llegada y la velocidad media</string>
     <string name="no_plugins_enabled">No tienes ningún complemento activado. Puedes encontrar una lista de los complementos disponibles en \'Menú\' → \'Complementos\'.</string>
     <string name="rendering_attr_natureReserves_description">Mostrar reservas naturales, áreas protegidas y parques nacionales.</string>
     <string name="gps_filter_smoothing">Suavizado</string>
@@ -4499,8 +4499,8 @@
     <string name="always_ask_waypoint_appearance_description">Al pulsar esta acción se abrirá la pantalla \"Añadir punto de ruta\", en la que podrá cambiar el nombre y la apariencia.</string>
     <string name="navigate_point_format_swiss_grid">Red Suiza (CH1903)</string>
     <string name="rendering_attr_seabedDetail_name">Detalle del fondo marino</string>
-    <string name="save_track_to_gpx_descrp">Inicia la grabación de la traza automáticamente mientras la navegación está en curso. Cuando termine, la traza se guardará automáticamente.</string>
-    <string name="gpx_no_routes_descr">Puedes usar la herramienta «%1$s» para agregar la ruta al archivo.</string>
+    <string name="save_track_to_gpx_descrp">Inicia automáticamente la grabación de trazas mientras navega y las guarda automáticamente después.</string>
+    <string name="gpx_no_routes_descr">Puedes usar la herramienta «%1$s» para guardar la ruta como un archivo.</string>
     <string name="rendering_value_omit_name">Omitir</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">No esconde los túneles de las vías fluviales</string>
     <string name="rendering_attr_seabedDetail_description">Información adicional de texto sobre la calificación de la superficie del fondo marino, tipos de superficies combinados, categoría y taxón de plantas o praderas submarinas</string>
@@ -4510,12 +4510,12 @@
     <string name="shared_string_reading_file">Leyendo archivo…</string>
     <string name="all_groups">Todos los grupos</string>
     <string name="list_of_groups">Lista de grupos</string>
-    <string name="points_selection_descr">¿Estás seguro de que quieres cerrar\? Perderás todos los cambios.</string>
-    <string name="exit_import_descr">¿Estás seguro de que quieres salir sin guardar\? Perderás todos los cambios.</string>
-    <string name="exit_import">¿Salir de la importación\?</string>
+    <string name="points_selection_descr">¿Cerrar y perder todos los cambios\?</string>
+    <string name="exit_import_descr">¿Salir sin guardar los cambios\?</string>
+    <string name="exit_import">¿Salir\?</string>
     <string name="import_tracks">Importar trazas</string>
-    <string name="import_tracks_descr">%1$s contiene %2$s trazas separadas. Elige las trazas que quieres importar.</string>
-    <string name="please_provide_group_name_message">Por favor, indica un nombre para el grupo.</string>
+    <string name="import_tracks_descr">%1$s, contiene %2$s pistas separadas. Elige pistas a importar.</string>
+    <string name="please_provide_group_name_message">Por favor, nombra el grupo.</string>
     <string name="gpx_no_routes_title">No hay rutas</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Etiquetas fixme</string>
@@ -4527,4 +4527,10 @@
     <string name="quick_action_add_route_descr">Un botón para iniciar una ruta desde el centro de la pantalla.</string>
     <string name="select_suggested_points">Selecciona puntos sugeridos</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Mostrar etiquetas de nota</string>
+    <string name="google_play_services">Servicios de Google Play</string>
+    <string name="location_source_descr">Por defecto, OsmAnd instalado desde Google Play utiliza %1$s para determinar la ubicación.
+\n
+\nSi obtienes información de ubicación imprecisa o utilizas un dispositivo sin %2$s, intenta cambiar a \"%3$s\"</string>
+    <string name="location_source">Fuente de la ubicación</string>
+    <string name="android_api">API de Android</string>
 </resources>
