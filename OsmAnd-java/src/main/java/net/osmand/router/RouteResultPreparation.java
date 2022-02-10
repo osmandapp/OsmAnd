@@ -1573,19 +1573,28 @@ public class RouteResultPreparation {
 		}
 		return rs;
 	}
-
+	
 	private boolean hasTU(String turnLanesPrevSegm, boolean attachedOnTheRight) {
 		if (turnLanesPrevSegm != null) {
-			String[] laneTurns = turnLanesPrevSegm.split("\\|");
-			int type;
+			int[] turns = calculateRawTurnLanes(turnLanesPrevSegm, TurnType.C);
+			int lane = attachedOnTheRight ? turns[turns.length - 1] : turns[0];
+			List<Integer> turnList = new ArrayList<>();
+			turnList.add(TurnType.getPrimaryTurn(lane));
+			turnList.add(TurnType.getSecondaryTurn(lane));
+			turnList.add(TurnType.getTertiaryTurn(lane));
 			if (attachedOnTheRight) {
-				String[] rightLine = laneTurns[laneTurns.length - 1].split(";");
-				type = TurnType.convertType(rightLine[rightLine.length - 1]);
-			} else {
-				String[] leftLine = laneTurns[0].split(";");
-				type = TurnType.convertType(leftLine[0]);
+				Collections.reverse(turnList);
 			}
-			return type == TurnType.TU;
+			return foundTUturn(turnList);
+		}
+		return false;
+	}
+	
+	private boolean foundTUturn(List<Integer> turnList) {
+		for (int t : turnList) {
+			if (t != 0) {
+				return t == TurnType.TU;
+			}
 		}
 		return false;
 	}

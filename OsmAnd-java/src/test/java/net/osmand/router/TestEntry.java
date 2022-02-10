@@ -18,7 +18,7 @@ public class TestEntry {
     private LatLon transitPoint2;
     private LatLon transitPoint3;
     private boolean ignore;
-    private Map<Long, String> expectedResults;
+    private Map<String, String> expectedResults;
     private Map<String, String> params;
     private int planRoadDirection;
     private boolean shortWay;
@@ -81,11 +81,11 @@ public class TestEntry {
         this.endPoint = endPoint;
     }
 
-    public Map<Long, String> getExpectedResults() {
+    public Map<String, String> getExpectedResults() {
         return expectedResults;
     }
 
-    public void setExpectedResults(Map<Long, String> expectedResults) {
+    public void setExpectedResults(Map<String, String> expectedResults) {
         this.expectedResults = expectedResults;
     }
     
@@ -101,7 +101,7 @@ public class TestEntry {
         return testName;
     }
 
-    public TestEntry(String testName, LatLon startPoint, LatLon endPoint, Map<Long, String> expectedResults) {
+    public TestEntry(String testName, LatLon startPoint, LatLon endPoint, Map<String, String> expectedResults) {
         this.testName = testName;
         this.startPoint = startPoint;
         this.endPoint = endPoint;

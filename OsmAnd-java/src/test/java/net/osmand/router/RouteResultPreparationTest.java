@@ -9,6 +9,7 @@ import net.osmand.data.LatLon;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.util.Algorithms;
 
+import net.osmand.util.RouterUtilTest;
 import org.apache.commons.logging.Log;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -17,11 +18,14 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.io.File;
+import java.util.Map.Entry;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.io.Reader;
 import java.util.*;
+
+import static net.osmand.util.RouterUtilTest.*;
 
 /**
  * Created by yurkiss on 04.03.16.
@@ -35,12 +39,12 @@ public class RouteResultPreparationTest {
 
     private LatLon startPoint;
     private LatLon endPoint;
-    private Map<Long, String> expectedResults;
+    private Map<String, String> expectedResults;
     private Map<String, String> params;
 
     protected Log log = PlatformUtil.getLog(RouteResultPreparationTest.class);
 
-    public RouteResultPreparationTest(LatLon startPoint, LatLon endPoint, Map<Long, String> expectedResults, Map<String, String> params) {
+    public RouteResultPreparationTest(LatLon startPoint, LatLon endPoint, Map<String, String> expectedResults, Map<String, String> params) {
         this.startPoint = startPoint;
         this.endPoint = endPoint;
         this.expectedResults = expectedResults;
@@ -108,11 +112,17 @@ public class RouteResultPreparationTest {
                     String name = segment.getDescription();
                     boolean skipToSpeak = segment.getTurnType().isSkipToSpeak();
                     long segmentId = segment.getObject().getId() >> (RouteResultPreparation.SHIFT_ID);
-                    String expectedResult = expectedResults.get(segmentId);
+                    String expectedResult = null;
                     int startPoint = -1;
-                    if (params.containsKey("startPoint")) {
-                        startPoint = Integer.parseInt(params.get("startPoint"));
+                    for (Entry<String, String> er : expectedResults.entrySet()) {
+                        String roadInfo = er.getKey();
+                        long id = getRoadId(roadInfo);
+                        if (id == segmentId) {
+                            expectedResult = er.getValue();
+                            startPoint = getRoadStartPoint(roadInfo);
+                        }
                     }
+                    
                     if (expectedResult != null) {
                         if (startPoint < 0 || startPoint > 0 && segment.getStartPointIndex() == startPoint) {
                             if ("skipToSpeak".equals(expectedResult)) {
@@ -133,10 +143,9 @@ public class RouteResultPreparationTest {
                 reachedSegments.add(routeSegments.get(i).getObject().getId() >> (RouteResultPreparation.SHIFT_ID ));
             }
         }
-        Set<Long> expectedSegments = expectedResults.keySet();
-        for (Long expSegId : expectedSegments){
-            Assert.assertTrue("Expected segment " + (expSegId ) + 
-            		" weren't reached in route segments " + reachedSegments.toString(), reachedSegments.contains(expSegId));
+        for (Long expSegId : getExpectedIdSet(expectedResults)) {
+            Assert.assertTrue("Expected segment " + (expSegId) +
+                    " weren't reached in route segments " + reachedSegments, reachedSegments.contains(expSegId));
         }
     }
 
