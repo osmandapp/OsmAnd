@@ -4528,10 +4528,8 @@
     <string name="import_tracks_descr">%1$s, %2$s ayrı yol içerir. İçe aktarılacak yolları seçin.</string>
     <string name="select_suggested_points">Önerilen noktaları seç</string>
     <string name="exit_import_descr">Değişiklikleri kaydetmeden çıkılsın mı\?</string>
-    <string name="google_play_services">Google Play Hizmetleri</string>
     <string name="location_source">Konum kaynağı</string>
     <string name="location_source_descr">OsmAnd\'ı Google Play\'den kurduğunuzda, konumu belirlemek için öntanımlı olarak %1$s kullanılır.
 \n
 \nHatalı konum bilgisi alırsanız veya aygıtınızı %2$s olmadan kullanıyorsanız, \"%3$s\" kullanmayı deneyin.</string>
-    <string name="android_api">Android API\'si</string>
 </resources>

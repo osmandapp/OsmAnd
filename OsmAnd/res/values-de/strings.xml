@@ -4524,6 +4524,4 @@
     <string name="gpx_no_routes_descr">Sie können das Tool \"%1$s\" nutzen, um die Route in einer Datei hinzuzufügen.</string>
     <string name="quick_action_add_route_descr">Eine Schaltfläche zum Starten einer Route in der Mitte des Bildschirms.</string>
     <string name="please_provide_group_name_message">Bitte geben Sie einen Namen für die Gruppe an.</string>
-    <string name="google_play_services">Google Play Services</string>
-    <string name="android_api">Android API</string>
 </resources>

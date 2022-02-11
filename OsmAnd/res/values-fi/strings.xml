@@ -3978,8 +3978,6 @@
     <string name="select_suggested_points">Valitse ehdotetut pisteet</string>
     <string name="selected_waypoints_descr">Valitut väyläpisteet lisätään \"%1$s\" jäljelle</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Ikonien yksinkertaistettu esittäminen matalilla tarkkuuksilla</string>
-    <string name="google_play_services">Google Play Palvelut</string>
-    <string name="android_api">Android API</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme tunnisteet</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Näytä huomautustunnisteet</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Näytä fixme tunnisteet</string>

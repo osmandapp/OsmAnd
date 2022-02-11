@@ -4523,10 +4523,8 @@
     <string name="import_tracks">Importovať stopy</string>
     <string name="import_tracks_descr">%1$s, obsahuje %2$s samostatných stôp. Zvoľte stopy na importovanie.</string>
     <string name="please_provide_group_name_message">Prosím pomenujte skupinu.</string>
-    <string name="google_play_services">Služby Google Play</string>
     <string name="location_source_descr">OsmAnd inštalovaný z Google Play používa predvolene službu %1$s na určenie polohy.
 \n
 \nAk dostávate nepresnú informáciu o polohe alebo používate zariadenie bez %2$s, skúste prepnúť na \"%3$s\"</string>
     <string name="location_source">Zdroj polohy</string>
-    <string name="android_api">API Android</string>
 </resources>

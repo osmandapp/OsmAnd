@@ -4520,6 +4520,4 @@
     <string name="exit_import">Kilép\?</string>
     <string name="import_tracks_descr">„%1$s” %2$s különálló nyomvonalat tartalmaz. Válassza ki, hogy melyeket szeretné importálni.</string>
     <string name="quick_action_add_route_descr">Gomb, amellyel a képernyő közepéről lehet útvonalat indítani.</string>
-    <string name="google_play_services">Google Play Services</string>
-    <string name="android_api">Android API</string>
 </resources>

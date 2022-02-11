@@ -4527,10 +4527,8 @@
     <string name="quick_action_add_route_descr">Un botón para iniciar una ruta desde el centro de la pantalla.</string>
     <string name="select_suggested_points">Selecciona puntos sugeridos</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Mostrar etiquetas de nota</string>
-    <string name="google_play_services">Servicios de Google Play</string>
     <string name="location_source_descr">Por defecto, OsmAnd instalado desde Google Play utiliza %1$s para determinar la ubicación.
 \n
 \nSi obtienes información de ubicación imprecisa o utilizas un dispositivo sin %2$s, intenta cambiar a \"%3$s\"</string>
     <string name="location_source">Fuente de la ubicación</string>
-    <string name="android_api">API de Android</string>
 </resources>

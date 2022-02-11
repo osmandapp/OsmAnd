@@ -4524,8 +4524,6 @@
     <string name="import_tracks_descr">%1$s, садржи %2$s засебне путање. Изаберите путање за увоз.</string>
     <string name="select_suggested_points">Изаберите предложене тачке</string>
     <string name="location_source">Извор локације</string>
-    <string name="android_api">Андроид АПИ</string>
-    <string name="google_play_services">Гугле Плеј услуге</string>
     <string name="location_source_descr">Подразумевано, ОсмАнд инсталиран са Гугле Плеја користи %1$s за одређивање локације.
 \n
 \nАко добијете нетачне информације о локацији или користите уређај без %2$s, покушајте да пређете на „%3$s“</string>

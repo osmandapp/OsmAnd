@@ -4528,7 +4528,5 @@
     <string name="exit_import_descr">לסגור בלי לשמור את השינויים\?</string>
     <string name="exit_import">לצאת\?</string>
     <string name="import_tracks">ייבוא מסלולים</string>
-    <string name="android_api">ה־API של Android</string>
-    <string name="google_play_services">שירותי Google Play</string>
     <string name="location_source">מקור מיקום</string>
 </resources>
