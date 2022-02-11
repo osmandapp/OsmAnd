@@ -41,7 +41,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesHelper.FavoriteGroup;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
@@ -301,7 +301,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 		private OsmandApplication app;
 		private Activity activity;
 		private AccessibilityAssistant accessibilityAssistant;
-		private FavouritesDbHelper helper;
+		private FavouritesHelper helper;
 
 		private LatLon location;
 
@@ -317,7 +317,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 			super(app, R.layout.search_list_item);
 			this.app = app;
 			this.activity = activity;
-			this.helper = app.getFavorites();
+			this.helper = app.getFavoritesHelper();
 			location = app.getSettings().getLastKnownMapLocation();
 			boolean light = app.getSettings().isLightContent();
 			enabledColor = ColorUtilities.getPrimaryTextColorId(!light);
@@ -464,7 +464,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 					TextView title = (TextView) view.findViewById(R.id.title);
 					TextView subtitle = (TextView) view.findViewById(R.id.subtitle);
 					int color = visible
-							? app.getFavorites().getColorWithCategory(point, getResources().getColor(R.color.color_favorite))
+							? app.getFavoritesHelper().getColorWithCategory(point, getResources().getColor(R.color.color_favorite))
 							: ContextCompat.getColor(app, disabledIconColor);
 					imageView.setImageDrawable(PointImageDrawable.getFromFavorite(activity, color, false, point));
 					title.setText(point.getDisplayName(app));
@@ -510,10 +510,10 @@ public class FavoritesSearchFragment extends DialogFragment {
 
 	class FavoritesFilter extends Filter {
 
-		FavouritesDbHelper helper;
+		FavouritesHelper helper;
 
 		FavoritesFilter() {
-			helper = app.getFavorites();
+			helper = app.getFavoritesHelper();
 		}
 
 		@Override

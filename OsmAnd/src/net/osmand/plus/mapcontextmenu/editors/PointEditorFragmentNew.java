@@ -43,8 +43,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import static net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
-import static net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup.isPersonalCategoryDisplayName;
+import static net.osmand.plus.myplaces.FavouritesHelper.FavoriteGroup.PERSONAL_CATEGORY;
+import static net.osmand.plus.myplaces.FavouritesHelper.FavoriteGroup.isPersonalCategoryDisplayName;
 
 public abstract class PointEditorFragmentNew extends EditorFragment {
 

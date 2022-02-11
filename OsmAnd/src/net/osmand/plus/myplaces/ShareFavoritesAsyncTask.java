@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
-import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
@@ -30,7 +30,7 @@ class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
 	private static final int MAX_CHARS_IN_DESCRIPTION = 100000;
 
 	private final OsmandApplication app;
-	private final FavouritesDbHelper helper;
+	private final FavouritesHelper helper;
 
 	private final FavoriteGroup group;
 	private final File srcFile;
@@ -45,14 +45,14 @@ class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
 		this.app = app;
 		this.group = group;
 		this.listener = listener;
-		helper = app.getFavorites();
+		helper = app.getFavoritesHelper();
 
 		File dir = new File(app.getCacheDir(), "share");
 		if (!dir.exists()) {
 			dir.mkdir();
 		}
 		srcFile = group == null ? helper.getExternalFile() : null;
-		destFile = new File(dir, srcFile != null ? srcFile.getName() : FavouritesDbHelper.FILE_TO_SAVE);
+		destFile = new File(dir, srcFile != null ? srcFile.getName() : FavouritesHelper.FILE_TO_SAVE);
 	}
 
 	@Override
@@ -70,7 +70,7 @@ class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
 			groups = new ArrayList<>();
 			groups.add(group);
 		} else {
-			groups = app.getFavorites().getFavoriteGroups();
+			groups = app.getFavoritesHelper().getFavoriteGroups();
 		}
 		pointsDescription = Html.fromHtml(generateHtmlPrint(groups));
 		try {

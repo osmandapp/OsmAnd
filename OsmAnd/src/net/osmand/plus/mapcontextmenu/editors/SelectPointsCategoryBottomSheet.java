@@ -19,8 +19,8 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
-import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.FavouritesHelper.FavoriteGroup;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -172,7 +172,7 @@ public class SelectPointsCategoryBottomSheet extends MenuBottomSheetDialogFragme
 	}
 
 	private void attachFavoriteCategories(@NonNull ViewGroup container) {
-		FavouritesDbHelper favoritesHelper = requiredMyApplication().getFavorites();
+		FavouritesHelper favoritesHelper = requiredMyApplication().getFavoritesHelper();
 		List<FavoriteGroup> favoriteGroups = favoritesHelper.getFavoriteGroups();
 		for (FavoriteGroup category : favoriteGroups) {
 			String displayName = category.getDisplayName(getContext());

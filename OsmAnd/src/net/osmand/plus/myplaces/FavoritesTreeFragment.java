@@ -44,8 +44,8 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.myplaces.FavouritesDbHelper.FavoritesListener;
+import net.osmand.plus.myplaces.FavouritesHelper.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesHelper.FavoritesListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
@@ -85,7 +85,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	public static final String GROUP_EXPANDED_POSTFIX = "_group_expanded";
 
 	private OsmandApplication app;
-	private FavouritesDbHelper helper;
+	private FavouritesHelper helper;
 	private FavouritesAdapter favouritesAdapter;
 
 	private boolean selectionMode = false;
@@ -113,7 +113,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		this.app = (OsmandApplication) context.getApplicationContext();
 		favouritesAdapter = new FavouritesAdapter();
 
-		helper = app.getFavorites();
+		helper = app.getFavoritesHelper();
 		if (helper.isFavoritesLoaded()) {
 			favouritesAdapter.synchronizeGroups();
 		} else {
@@ -904,7 +904,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			name.setTextColor(getResources().getColor(visible ? enabledColor : disabledColor));
 			addressText.setText(model.isAddressSpecified() ? model.getAddress() : null);
 			int color = visible
-					? app.getFavorites().getColorWithCategory(model, getResources().getColor(R.color.color_favorite))
+					? app.getFavoritesHelper().getColorWithCategory(model, getResources().getColor(R.color.color_favorite))
 					: ContextCompat.getColor(app, disabledIconColor);
 			icon.setImageDrawable(PointImageDrawable.getFromFavorite(getActivity(), color, false, model));
 			int iconSize = (int) getResources().getDimension(R.dimen.favorites_my_places_icon_size);

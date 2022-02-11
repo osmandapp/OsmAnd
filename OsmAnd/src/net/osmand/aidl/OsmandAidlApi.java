@@ -15,7 +15,7 @@ import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_E
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
-import static net.osmand.plus.myplaces.FavouritesDbHelper.FILE_TO_SAVE;
+import static net.osmand.plus.myplaces.FavouritesHelper.FILE_TO_SAVE;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
 
@@ -82,7 +82,7 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.IContextMenuButtonListener;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.myplaces.TrackBitmapDrawer;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TracksDrawParams;
@@ -971,9 +971,9 @@ public class OsmandAidlApi {
 	}
 
 	boolean addFavoriteGroup(String name, String colorTag, boolean visible) {
-		FavouritesDbHelper favoritesHelper = app.getFavorites();
-		List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
-		for (FavouritesDbHelper.FavoriteGroup g : groups) {
+		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
+		List<FavouritesHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
+		for (FavouritesHelper.FavoriteGroup g : groups) {
 			if (g.getName().equals(name)) {
 				return false;
 			}
@@ -987,9 +987,9 @@ public class OsmandAidlApi {
 	}
 
 	boolean removeFavoriteGroup(String name) {
-		FavouritesDbHelper favoritesHelper = app.getFavorites();
-		List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
-		for (FavouritesDbHelper.FavoriteGroup g : groups) {
+		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
+		List<FavouritesHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
+		for (FavouritesHelper.FavoriteGroup g : groups) {
 			if (g.getName().equals(name)) {
 				favoritesHelper.deleteGroup(g);
 				return true;
@@ -999,9 +999,9 @@ public class OsmandAidlApi {
 	}
 
 	boolean updateFavoriteGroup(String prevGroupName, String newGroupName, String colorTag, boolean visible) {
-		FavouritesDbHelper favoritesHelper = app.getFavorites();
-		List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
-		for (FavouritesDbHelper.FavoriteGroup g : groups) {
+		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
+		List<FavouritesHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
+		for (FavouritesHelper.FavoriteGroup g : groups) {
 			if (g.getName().equals(prevGroupName)) {
 				int color = 0;
 				if (!Algorithms.isEmpty(colorTag)) {
@@ -1015,7 +1015,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean addFavorite(double latitude, double longitude, String name, String category, String description, String colorTag, boolean visible) {
-		FavouritesDbHelper favoritesHelper = app.getFavorites();
+		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
 		FavouritePoint point = new FavouritePoint(latitude, longitude, name, category);
 		point.setDescription(description);
 		int color = 0;
@@ -1030,7 +1030,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean removeFavorite(String name, String category, double latitude, double longitude) {
-		FavouritesDbHelper favoritesHelper = app.getFavorites();
+		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
 		List<FavouritePoint> favorites = favoritesHelper.getFavouritePoints();
 		for (FavouritePoint f : favorites) {
 			if (f.getName().equals(name) && f.getCategory().equals(category) &&
@@ -1044,7 +1044,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean updateFavorite(String prevName, String prevCategory, double prevLat, double prevLon, String newName, String newCategory, String newDescription, String newAddress, double newLat, double newLon) {
-		FavouritesDbHelper favoritesHelper = app.getFavorites();
+		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
 		List<FavouritePoint> favorites = favoritesHelper.getFavouritePoints();
 		for (FavouritePoint f : favorites) {
 			if (f.getName().equals(prevName) && f.getCategory().equals(prevCategory) &&
@@ -2506,7 +2506,7 @@ public class OsmandAidlApi {
 					destinationDir = destinationDir.replaceFirst(IndexConstants.GPX_INDEX_DIR, "");
 					showGpx(new File(destinationDir, fileName).getPath());
 				} else if (destinationDir.isEmpty() && FILE_TO_SAVE.equals(fileName)) {
-					app.getFavorites().loadFavorites();
+					app.getFavoritesHelper().loadFavorites();
 				}
 			}
 		}

@@ -16,8 +16,8 @@ import androidx.annotation.Nullable;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
-import net.osmand.plus.myplaces.FavouritesDbHelper.FavoritesListener;
+import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.FavouritesHelper.FavoritesListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -67,7 +67,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 
 	@Override
 	public void onOpenDash() {
-		FavouritesDbHelper helper = getMyApplication().getFavorites();
+		FavouritesHelper helper = getMyApplication().getFavoritesHelper();
 		if (helper.isFavoritesLoaded()) {
 			setupFavorites();
 		} else {
@@ -88,7 +88,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 	public void onCloseDash() {
 		super.onCloseDash();
 		if (favoritesListener != null) {
-			getMyApplication().getFavorites().removeListener(favoritesListener);
+			getMyApplication().getFavoritesHelper().removeListener(favoritesListener);
 			favoritesListener = null;
 		}
 	}
@@ -100,7 +100,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 			return;
 		}
 
-		List<FavouritePoint> favouritePoints = new ArrayList<>(app.getFavorites().getFavouritePoints());
+		List<FavouritePoint> favouritePoints = new ArrayList<>(app.getFavoritesHelper().getFavouritePoints());
 		if (Algorithms.isEmpty(favouritePoints)) {
 			AndroidUiHelper.updateVisibility(mainView.findViewById(R.id.main_fav), false);
 			return;
@@ -138,7 +138,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 				groupImage.setVisibility(View.GONE);
 			}
 
-			int iconColor = app.getFavorites().getColorWithCategory(point, getResources().getColor(R.color.color_favorite));
+			int iconColor = app.getFavoritesHelper().getColorWithCategory(point, getResources().getColor(R.color.color_favorite));
 			Drawable favoriteIcon = PointImageDrawable.getFromFavorite(app, iconColor, false, point);
 			((ImageView) view.findViewById(R.id.favourite_icon)).setImageDrawable(favoriteIcon);
 			DashLocationView dv = new DashLocationView(direction, label, new LatLon(point.getLatitude(),

@@ -13,7 +13,7 @@ import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.mapmarkers.MarkersDb39HelperLegacy;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
@@ -136,7 +136,7 @@ class AppVersionUpgradeOnInit {
 						@Override
 						public void onProgress(AppInitializer init, InitEvents event) {
 							if (event.equals(InitEvents.FAVORITES_INITIALIZED)) {
-								app.getFavorites().fixBlackBackground();
+								app.getFavoritesHelper().fixBlackBackground();
 							}
 						}
 
@@ -312,7 +312,7 @@ class AppVersionUpgradeOnInit {
 
 	public void migrateHomeWorkParkingToFavorites() {
 		OsmandSettings settings = app.getSettings();
-		FavouritesDbHelper favorites = app.getFavorites();
+		FavouritesHelper favorites = app.getFavoritesHelper();
 		SettingsAPI settingsAPI = settings.getSettingsAPI();
 		Object globalPreferences = settings.getGlobalPreferences();
 

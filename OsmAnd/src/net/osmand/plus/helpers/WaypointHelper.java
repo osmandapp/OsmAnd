@@ -575,7 +575,7 @@ public class WaypointHelper {
 			if ((type == FAVORITES || all)) {
 				final List<LocationPointWrapper> array = clearAndGetArray(locationPoints, FAVORITES);
 				if (showFavorites) {
-					findLocationPoints(route, FAVORITES, array, app.getFavorites().getVisibleFavouritePoints(),
+					findLocationPoints(route, FAVORITES, array, app.getFavoritesHelper().getVisibleFavouritePoints(),
 							announceFavorites);
 					sortList(array);
 				}
@@ -826,7 +826,7 @@ public class WaypointHelper {
 
 			} else if (type == FAVORITES ) {
 				return PointImageDrawable.getFromFavorite(uiCtx,
-						app.getFavorites().getColorWithCategory((FavouritePoint) point,
+						app.getFavoritesHelper().getColorWithCategory((FavouritePoint) point,
 								app.getResources().getColor(R.color.color_favorite)), false, (FavouritePoint) point);
 			} else if (type == WAYPOINTS) {
 				if (point instanceof WptLocationPoint) {

@@ -18,7 +18,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet;
 import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
@@ -127,7 +127,7 @@ public class FavoriteAction extends QuickAction {
 	@Override
 	public void drawUI(@NonNull final ViewGroup parent, @NonNull final MapActivity mapActivity) {
 
-		FavouritesDbHelper helper = mapActivity.getMyApplication().getFavorites();
+		FavouritesHelper helper = mapActivity.getMyApplication().getFavoritesHelper();
 
 		final View root = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_add_favorite, parent, false);
@@ -154,7 +154,7 @@ public class FavoriteAction extends QuickAction {
 
 		} else if (helper.getFavoriteGroups().size() > 0) {
 
-			FavouritesDbHelper.FavoriteGroup group = helper.getFavoriteGroups().get(0);
+			FavouritesHelper.FavoriteGroup group = helper.getFavoriteGroups().get(0);
 
 			int color = group.getColor() == 0 ? mapActivity.getResources().getColor(R.color.color_favorite) : group.getColor();
 			categoryEdit.setText(group.getDisplayName(mapActivity));

@@ -14,7 +14,7 @@ import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
-import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesHelper.FavoriteGroup;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -217,7 +217,7 @@ public abstract class SettingsHelper {
 		Map<ExportSettingsType, List<?>> myPlacesItems = new LinkedHashMap<>();
 
 		List<FavoriteGroup> favoriteGroups = settingsTypes == null || settingsTypes.contains(ExportSettingsType.FAVORITES)
-				? app.getFavorites().getFavoriteGroups()
+				? app.getFavoritesHelper().getFavoriteGroups()
 				: Collections.emptyList();
 		if (!favoriteGroups.isEmpty() || addEmptyItems) {
 			myPlacesItems.put(ExportSettingsType.FAVORITES, favoriteGroups);

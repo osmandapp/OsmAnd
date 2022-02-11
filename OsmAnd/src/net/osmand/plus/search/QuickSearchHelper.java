@@ -32,8 +32,8 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
-import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.FavouritesHelper.FavoriteGroup;
 import net.osmand.plus.poi.NominatimPoiFilter;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -254,12 +254,12 @@ public class QuickSearchHelper implements ResourceListener {
 	public static class SearchFavoriteCategoryAPI extends SearchBaseAPI {
 
 		private final OsmandApplication app;
-		private final FavouritesDbHelper helper;
+		private final FavouritesHelper helper;
 
 		public SearchFavoriteCategoryAPI(OsmandApplication app) {
 			super(ObjectType.FAVORITE_GROUP);
 			this.app = app;
-			this.helper = app.getFavorites();
+			this.helper = app.getFavoritesHelper();
 		}
 
 		@Override
@@ -270,7 +270,7 @@ public class QuickSearchHelper implements ResourceListener {
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
 			String baseGroupName = app.getString(R.string.shared_string_favorites);
-			List<FavoriteGroup> groups = app.getFavorites().getFavoriteGroups();
+			List<FavoriteGroup> groups = app.getFavoritesHelper().getFavoriteGroups();
 			for (FavoriteGroup group : groups) {
 				if (group.isVisible()) {
 					SearchResult sr = new SearchResult(phrase);
@@ -325,7 +325,7 @@ public class QuickSearchHelper implements ResourceListener {
 
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
-			List<FavouritePoint> favList = app.getFavorites().getFavouritePoints();
+			List<FavouritePoint> favList = app.getFavoritesHelper().getFavouritePoints();
 			for (FavouritePoint point : favList) {
 				if (!point.isVisible()) {
 					continue;

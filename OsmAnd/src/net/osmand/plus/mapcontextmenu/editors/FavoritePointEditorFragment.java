@@ -17,9 +17,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
-import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.FavouritesHelper.FavoriteGroup;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.util.Algorithms;
@@ -52,7 +51,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 	private BackgroundType backgroundType = DEFAULT_BACKGROUND_TYPE;
 
 	@Nullable
-	private FavouritesDbHelper helper;
+	private FavouritesHelper helper;
 
 	private boolean saved;
 	private int defaultColor;
@@ -62,7 +61,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		super.onAttach(context);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			helper = mapActivity.getMyApplication().getFavorites();
+			helper = mapActivity.getMyApplication().getFavoritesHelper();
 			editor = mapActivity.getContextMenu().getFavoritePointEditor();
 		}
 	}
@@ -74,7 +73,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		defaultColor = ContextCompat.getColor(requireContext(), R.color.color_favorite);
 
 		FavoritePointEditor editor = getFavoritePointEditor();
-		FavouritesDbHelper helper = getHelper();
+		FavouritesHelper helper = getHelper();
 		if (editor != null && helper != null) {
 			FavouritePoint favorite = editor.getFavorite();
 			if (favorite == null && savedInstanceState != null) {
@@ -141,7 +140,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 	}
 
 	@Nullable
-	public FavouritesDbHelper getHelper() {
+	public FavouritesHelper getHelper() {
 		return helper;
 	}
 
@@ -165,7 +164,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 
 	@Override
 	public void setCategory(String name, int color) {
-		FavouritesDbHelper helper = getHelper();
+		FavouritesHelper helper = getHelper();
 		Context ctx = getContext();
 		if (helper != null && ctx != null) {
 			FavoriteGroup group = helper.getGroup(FavoriteGroup.convertDisplayNameToGroupIdName(ctx, name));
@@ -180,7 +179,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
 			lastCategory = app.getSettings().LAST_FAV_CATEGORY_ENTERED.get();
-			if (!Algorithms.isEmpty(lastCategory) && !app.getFavorites().groupExists(lastCategory)) {
+			if (!Algorithms.isEmpty(lastCategory) && !app.getFavoritesHelper().groupExists(lastCategory)) {
 				lastCategory = "";
 			}
 		}
@@ -255,7 +254,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 			point.setColor(color);
 			point.setBackgroundType(backgroundType);
 			point.setIconId(iconId);
-			AlertDialog.Builder builder = FavouritesDbHelper.checkDuplicates(point, helper, getMapActivity());
+			AlertDialog.Builder builder = FavouritesHelper.checkDuplicates(point, helper, getMapActivity());
 
 			if (isChanged(favorite, point)) {
 
@@ -294,7 +293,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 
 	private void doSave(FavouritePoint favorite, String name, String category, String description, String address,
 						@ColorInt int color, BackgroundType backgroundType, @DrawableRes int iconId, boolean needDismiss) {
-		FavouritesDbHelper helper = getHelper();
+		FavouritesHelper helper = getHelper();
 		FavoritePointEditor editor = getFavoritePointEditor();
 		if (editor != null && helper != null) {
 			if (editor.isNew()) {
@@ -322,7 +321,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 
 	private void doEditFavorite(FavouritePoint favorite, String name, String category, String description, String address,
 								@ColorInt int color, BackgroundType backgroundType, @DrawableRes int iconId,
-								FavouritesDbHelper helper) {
+								FavouritesHelper helper) {
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
 			app.getSettings().LAST_FAV_CATEGORY_ENTERED.set(category);
@@ -336,7 +335,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 	private void doAddFavorite(String name, String category, String description, String address, @ColorInt int color,
 							   BackgroundType backgroundType, @DrawableRes int iconId) {
 		OsmandApplication app = getMyApplication();
-		FavouritesDbHelper helper = getHelper();
+		FavouritesHelper helper = getHelper();
 		FavouritePoint favorite = getFavorite();
 		if (app != null && favorite != null && helper != null) {
 			favorite.setName(name);
@@ -364,7 +363,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 			builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					FavouritesDbHelper helper = getHelper();
+					FavouritesHelper helper = getHelper();
 					if (helper != null) {
 						helper.deleteFavourite(favorite);
 						saved = true;
@@ -461,7 +460,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 	public Set<String> getCategories() {
 		Set<String> categories = new LinkedHashSet<>();
 		Set<String> categoriesHidden = new LinkedHashSet<>();
-		FavouritesDbHelper helper = getHelper();
+		FavouritesHelper helper = getHelper();
 		if (helper != null && editor != null) {
 			OsmandApplication app = getMyApplication();
 			FavoriteGroup lastUsedGroup = helper.getGroup(getLastUsedGroup());
@@ -489,7 +488,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 
 	@Override
 	public int getCategoryPointsCount(String category) {
-		FavouritesDbHelper helper = getHelper();
+		FavouritesHelper helper = getHelper();
 		if (helper != null) {
 			for (FavoriteGroup fg : helper.getFavoriteGroups()) {
 				if (fg.getDisplayName(getMyApplication()).equals(category)) {
@@ -503,7 +502,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 	@Override
 	@ColorInt
 	public int getCategoryColor(String category) {
-		FavouritesDbHelper helper = getHelper();
+		FavouritesHelper helper = getHelper();
 		if (helper != null) {
 			for (FavoriteGroup group : helper.getFavoriteGroups()) {
 				if (group.getDisplayName(getMyApplication()).equals(category)) {

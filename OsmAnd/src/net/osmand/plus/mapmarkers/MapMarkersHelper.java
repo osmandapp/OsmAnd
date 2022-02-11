@@ -21,7 +21,7 @@ import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapmarkers.SyncGroupTask.OnGroupSyncedListener;
-import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesHelper.FavoriteGroup;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
@@ -895,7 +895,7 @@ public class MapMarkersHelper {
 		shouldSaveFavourites |= syncPassedPoints(mapMarkersHistory, gpxFiles);
 
 		if (shouldSaveFavourites) {
-			ctx.getFavorites().saveCurrentPointsIntoFile();
+			ctx.getFavoritesHelper().saveCurrentPointsIntoFile();
 		}
 		for (GPXFile gpxFile : gpxFiles) {
 			GpxUiHelper.saveGpx(gpxFile, null);
@@ -917,9 +917,9 @@ public class MapMarkersHelper {
 	private boolean syncFavouritesPassedPoints(MapMarker marker) {
 		boolean passedPoint = marker.favouritePoint.getVisitedDate() != 0;
 		if (marker.history && !passedPoint) {
-			return ctx.getFavorites().favouritePassed(marker.favouritePoint, true, false);
+			return ctx.getFavoritesHelper().favouritePassed(marker.favouritePoint, true, false);
 		} else if (!marker.history && passedPoint) {
-			return ctx.getFavorites().favouritePassed(marker.favouritePoint, false, false);
+			return ctx.getFavoritesHelper().favouritePassed(marker.favouritePoint, false, false);
 		}
 		return false;
 	}
@@ -1044,7 +1044,7 @@ public class MapMarkersHelper {
 	}
 
 	private void syncFavouriteGroup(@NonNull MapMarkersGroup group, @NonNull List<MapMarker> existingMarkers) {
-		FavoriteGroup favGroup = ctx.getFavorites().getGroup(group.getId());
+		FavoriteGroup favGroup = ctx.getFavoritesHelper().getGroup(group.getId());
 		if (favGroup == null) {
 			removeFromGroupsList(group);
 			return;

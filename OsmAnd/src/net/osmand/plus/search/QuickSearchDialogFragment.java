@@ -54,7 +54,7 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -424,7 +424,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 									reloadHistory();
 									hide();
 								} else if (word.getType() == ObjectType.FAVORITE_GROUP) {
-									FavouritesDbHelper.FavoriteGroup group = (FavouritesDbHelper.FavoriteGroup) word.getResult().object;
+									FavouritesHelper.FavoriteGroup group = (FavouritesHelper.FavoriteGroup) word.getResult().object;
 									if (group.getPoints().size() > 1) {
 										double left = 0, right = 0;
 										double top = 0, bottom = 0;

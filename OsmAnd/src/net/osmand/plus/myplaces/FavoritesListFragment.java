@@ -60,7 +60,7 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 		super.onAttach(activity);
 		Intent intent = activity.getIntent();
 		OsmandApplication app = getApplication();
-		favouritesAdapter = new FavouritesAdapter(activity, app.getFavorites().getFavouritePoints(),
+		favouritesAdapter = new FavouritesAdapter(activity, app.getFavoritesHelper().getFavouritePoints(),
 				false);
 		setListAdapter(favouritesAdapter);
 		setHasOptionsMenu(true);
@@ -233,7 +233,7 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 			}
 			((TextView) row.findViewById(R.id.group_name)).setText(favorite.getCategory());
 
-			icon.setImageDrawable(PointImageDrawable.getFromFavorite(activity, app.getFavorites().getColorWithCategory(favorite,
+			icon.setImageDrawable(PointImageDrawable.getFromFavorite(activity, app.getFavoritesHelper().getColorWithCategory(favorite,
 					app.getResources().getColor(R.color.color_favorite)), false, favorite));
 			 
 			app.getUIUtilities().updateLocationView(cache, direction, distanceText, 

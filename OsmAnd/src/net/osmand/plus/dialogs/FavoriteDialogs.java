@@ -26,8 +26,8 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
-import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.FavouritesHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
@@ -47,7 +47,7 @@ public class FavoriteDialogs {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
-		final FavouritesDbHelper helper = app.getFavorites();
+		final FavouritesHelper helper = app.getFavoritesHelper();
 		final List<FavouritePoint> points = new ArrayList<FavouritePoint>(helper.getFavouritePoints());
 		final FavouritesAdapter favouritesAdapter = new FavouritesAdapter(activity, points,false);
 		final Dialog[] dlgHolder = new Dialog[1];
@@ -68,7 +68,7 @@ public class FavoriteDialogs {
 		return showFavoritesDialog(themedContext, favouritesAdapter, click, null, dlgHolder, true);
 	}
 	
-	private static void confirmReplace(final Activity activity, final Bundle args, final FavouritesDbHelper helper,
+	private static void confirmReplace(final Activity activity, final Bundle args, final FavouritesHelper helper,
 			final FavouritesAdapter favouritesAdapter, final Dialog[] dlgHolder, int position) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
@@ -130,7 +130,7 @@ public class FavoriteDialogs {
 		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 		builder.setTitle(R.string.favourites_context_menu_edit);
 		final View v = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.favorite_edit_dialog, null, false);
-		final FavouritesDbHelper helper = app.getFavorites();
+		final FavouritesHelper helper = app.getFavoritesHelper();
 		builder.setView(v);
 		final EditText editText =  (EditText) v.findViewById(R.id.Name);
 		final EditText description = (EditText) v.findViewById(R.id.description);
@@ -181,12 +181,12 @@ public class FavoriteDialogs {
 			public void onClick(DialogInterface dialog, int which) {
 				final FavouritePoint point = (FavouritePoint) args.getSerializable(KEY_FAVORITE);
 				String categoryStr = cat.getText().toString().trim();
-				final FavouritesDbHelper helper = app.getFavorites();
+				final FavouritesHelper helper = app.getFavoritesHelper();
 				app.getSettings().LAST_FAV_CATEGORY_ENTERED.set(categoryStr);
 				point.setName(editText.getText().toString().trim());
 				point.setDescription(description.getText().toString().trim());
 				point.setCategory(categoryStr);
-				AlertDialog.Builder bld = FavouritesDbHelper.checkDuplicates(point, helper, activity);
+				AlertDialog.Builder bld = FavouritesHelper.checkDuplicates(point, helper, activity);
 				if(bld != null) {
 					bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 						@Override
@@ -200,7 +200,7 @@ public class FavoriteDialogs {
 				}
 			}
 
-			protected void addFavorite(final Activity activity, FavouritePoint point, final FavouritesDbHelper helper) {
+			protected void addFavorite(final Activity activity, FavouritePoint point, final FavouritesHelper helper) {
 				boolean added = helper.addFavourite(point);
 				if (added) {
 					Toast.makeText(activity, MessageFormat.format(

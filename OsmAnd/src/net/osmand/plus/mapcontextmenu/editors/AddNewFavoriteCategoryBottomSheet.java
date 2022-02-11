@@ -18,7 +18,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
@@ -51,7 +51,7 @@ public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 	private static final String KEY_CTX_EDIT_CAT_NAME = "key_ctx_edit_cat_name";
 	private static final String KEY_CTX_EDIT_CAT_COLOR = "key_ctx_edit_cat_color";
 
-	FavouritesDbHelper favoritesHelper;
+	FavouritesHelper favoritesHelper;
 	private String editorTag;
 
 	private String categoryName = "";
@@ -93,7 +93,7 @@ public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 		} else if (getArguments() != null) {
 			restoreState(getArguments());
 		}
-		favoritesHelper = requiredMyApplication().getFavorites();
+		favoritesHelper = requiredMyApplication().getFavoritesHelper();
 	}
 
 	private void restoreState(Bundle bundle) {

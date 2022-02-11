@@ -11,8 +11,8 @@ import androidx.annotation.Nullable;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.FavouritePoint;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
-import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.FavouritesHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
@@ -36,7 +36,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 
 	private static final int APPROXIMATE_FAVOURITE_SIZE_BYTES = 470;
 
-	private FavouritesDbHelper favoritesHelper;
+	private FavouritesHelper favoritesHelper;
 	private FavoriteGroup personalGroup;
 
 	public FavoritesSettingsItem(@NonNull OsmandApplication app, @NonNull List<FavoriteGroup> items) {
@@ -54,7 +54,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 	@Override
 	protected void init() {
 		super.init();
-		favoritesHelper = app.getFavorites();
+		favoritesHelper = app.getFavoritesHelper();
 		existingItems = new ArrayList<>(favoritesHelper.getFavoriteGroups());
 	}
 
