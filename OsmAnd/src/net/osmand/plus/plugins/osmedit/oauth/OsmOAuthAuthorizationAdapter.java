@@ -44,7 +44,7 @@ public class OsmOAuthAuthorizationAdapter {
         TrafficStats.setThreadStatsTag(THREAD_ID);
         this.app = app;
         this.plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
-        assert plugin != null;
+
         DefaultApi10a api10a;
         String key;
         String secret;

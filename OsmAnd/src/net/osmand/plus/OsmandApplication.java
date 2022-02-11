@@ -129,8 +129,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
 
-import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
-
 public class OsmandApplication extends MultiDexApplication {
 
 	public static final String EXCEPTION_PATH = "exception.log";
@@ -943,10 +941,10 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public boolean accessibilityEnabledForMode(ApplicationMode appMode) {
-		AccessibilityPlugin plugin = OsmandPlugin.getActivePlugin(AccessibilityPlugin.class);
-		if (plugin == null) return false;
-
-		final AccessibilityMode mode = plugin.ACCESSIBILITY_MODE.getModeValue(appMode);
+		final AccessibilityMode mode = getSettings().ACCESSIBILITY_MODE.getModeValue(appMode);
+		if (!OsmandPlugin.isActive(AccessibilityPlugin.class)) {
+			return false;
+		}
 		if (mode == AccessibilityMode.ON) {
 			return true;
 		} else if (mode == AccessibilityMode.OFF) {

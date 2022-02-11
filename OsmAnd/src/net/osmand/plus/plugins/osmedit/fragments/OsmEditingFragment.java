@@ -1,5 +1,8 @@
 package net.osmand.plus.plugins.osmedit.fragments;
 
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
+
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -33,9 +36,6 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
-
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
-import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
 
 public class OsmEditingFragment extends BaseSettingsFragment implements OnPreferenceChanged, ValidateOsmLoginListener,
 		OsmAuthorizationListener {
@@ -163,7 +163,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 			mapsForMappersPref.setSummary(R.string.shared_string_learn_more);
 			mapsForMappersPref.setIcon(getContentIcon(R.drawable.ic_action_map_update));
 		} else {
-			long expireTime = plugin.MAPPER_LIVE_UPDATES_EXPIRE_TIME.get();
+			long expireTime = app.getSettings().MAPPER_LIVE_UPDATES_EXPIRE_TIME.get();
 			if (expireTime > System.currentTimeMillis()) {
 				String date = OsmAndFormatter.getFormattedDate(app, expireTime);
 				mapsForMappersPref.setSummary(getString(R.string.available_until, date));

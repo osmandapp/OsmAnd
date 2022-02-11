@@ -16,9 +16,10 @@ import net.osmand.plus.plugins.OsmandPlugin;
 
 public class MapillaryFirstDialogFragment extends BottomSheetDialogFragment {
 
-	public static final String TAG = "MapillaryFirstDialogFragment";
+	public static final String TAG = MapillaryFirstDialogFragment.class.getSimpleName();
 
 	private static final String KEY_SHOW_WIDGET = "key_show_widget";
+
 	private boolean showWidget = true;
 
 	@Override
@@ -51,5 +52,4 @@ public class MapillaryFirstDialogFragment extends BottomSheetDialogFragment {
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putBoolean(KEY_SHOW_WIDGET, showWidget);
 	}
-
 }

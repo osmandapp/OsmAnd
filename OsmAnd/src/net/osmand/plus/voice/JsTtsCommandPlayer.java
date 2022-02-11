@@ -1,5 +1,8 @@
 package net.osmand.plus.voice;
 
+import static net.osmand.IndexConstants.TTSVOICE_INDEX_EXT_JS;
+import static net.osmand.IndexConstants.VOICE_PROVIDER_SUFFIX;
+
 import android.content.Intent;
 import android.media.AudioAttributes;
 import android.os.Build;
@@ -12,8 +15,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.api.AudioFocusHelperImpl;
-import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
 import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
@@ -27,9 +28,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
-import static net.osmand.IndexConstants.TTSVOICE_INDEX_EXT_JS;
-import static net.osmand.IndexConstants.VOICE_PROVIDER_SUFFIX;
 
 public class JsTtsCommandPlayer extends CommandPlayer {
 
@@ -62,9 +60,8 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 	                             @NonNull File voiceProviderDir) throws CommandPlayerException {
 		super(app, applicationMode, voiceRouter, voiceProviderDir);
 
-		AccessibilityPlugin plugin = OsmandPlugin.getPlugin(AccessibilityPlugin.class);
-		if (plugin != null && app.accessibilityEnabled()) {
-			cSpeechRate = plugin.SPEECH_RATE.get();
+		if (app.accessibilityEnabled()) {
+			cSpeechRate = settings.SPEECH_RATE.get();
 		}
 		initializeEngine();
 		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, settings.AUDIO_MANAGER_STREAM

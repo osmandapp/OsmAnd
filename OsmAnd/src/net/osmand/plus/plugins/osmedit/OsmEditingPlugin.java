@@ -1,5 +1,15 @@
 package net.osmand.plus.plugins.osmedit;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CREATE_POI;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OPEN_STREET_MAP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_EDITING;
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
+import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
+import static net.osmand.plus.ContextMenuItem.INVALID_ID;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -69,16 +79,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CREATE_POI;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OPEN_STREET_MAP;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_EDITING;
-import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
-import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
-import static net.osmand.plus.ContextMenuItem.INVALID_ID;
-
 
 public class OsmEditingPlugin extends OsmandPlugin {
 
@@ -96,7 +96,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	public final OsmandPreference<String> OSM_USER_ACCESS_TOKEN;
 	public final OsmandPreference<String> OSM_USER_ACCESS_TOKEN_SECRET;
 
-	public final OsmandPreference<Long> MAPPER_LIVE_UPDATES_EXPIRE_TIME;
 	public final OsmandPreference<Boolean> OFFLINE_EDITION;
 	public final OsmandPreference<Boolean> OSM_USE_DEV_URL;
 
@@ -131,7 +130,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		OSM_USER_ACCESS_TOKEN = registerStringPreference("user_access_token", "").makeGlobal();
 		OSM_USER_ACCESS_TOKEN_SECRET = registerStringPreference("user_access_token_secret", "").makeGlobal();
 
-		MAPPER_LIVE_UPDATES_EXPIRE_TIME = registerLongPreference("mapper_live_updates_expire_time", 0L).makeGlobal();
 		OFFLINE_EDITION = registerBooleanPreference("offline_osm_editing", true).makeGlobal().makeShared();
 		OSM_USE_DEV_URL = registerBooleanPreference("use_dev_url", false).makeGlobal().makeShared();
 
@@ -165,7 +163,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	@NonNull
 	public OpenstreetmapRemoteUtil getPoiModificationRemoteUtil() {
 		if (remoteUtil == null) {
-			remoteUtil = new OpenstreetmapRemoteUtil(app, this);
+			remoteUtil = new OpenstreetmapRemoteUtil(app);
 		}
 		return remoteUtil;
 	}

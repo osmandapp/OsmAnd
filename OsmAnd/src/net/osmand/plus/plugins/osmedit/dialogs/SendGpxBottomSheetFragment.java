@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.osmedit.dialogs;
 
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType.OPEN_STREET_MAP_EDITING;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -38,8 +40,6 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType.OPEN_STREET_MAP_EDITING;
 
 public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment implements UploadGpxListener {
 
@@ -162,8 +162,8 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 			String commonDescription = descrText != null ? descrText.toString() : "";
 			String tags = tagsText != null ? tagsText.toString() : "";
 
-			UploadGPXFilesTask uploadGPXFilesTask = new UploadGPXFilesTask(activity, plugin,
-					commonDescription, tags, selectedUploadVisibility, this);
+			UploadGPXFilesTask uploadGPXFilesTask = new UploadGPXFilesTask(activity, commonDescription,
+					tags, selectedUploadVisibility, this);
 			uploadGPXFilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, gpxInfos);
 		}
 		dismiss();

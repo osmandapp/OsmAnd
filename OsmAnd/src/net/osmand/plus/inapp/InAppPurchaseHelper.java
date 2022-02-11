@@ -11,6 +11,11 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidNetworkUtils.OnRequestResultListener;
+import net.osmand.plus.utils.AndroidNetworkUtils.OnSendRequestsListener;
+import net.osmand.plus.utils.AndroidNetworkUtils.Request;
+import net.osmand.plus.utils.AndroidNetworkUtils.RequestResponse;
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -23,14 +28,7 @@ import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionList;
 import net.osmand.plus.inapp.InAppPurchases.PurchaseInfo;
-import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.utils.AndroidNetworkUtils;
-import net.osmand.plus.utils.AndroidNetworkUtils.OnRequestResultListener;
-import net.osmand.plus.utils.AndroidNetworkUtils.OnSendRequestsListener;
-import net.osmand.plus.utils.AndroidNetworkUtils.Request;
-import net.osmand.plus.utils.AndroidNetworkUtils.RequestResponse;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONArray;
@@ -148,7 +146,7 @@ public abstract class InAppPurchaseHelper {
 		return Version.isDeveloperBuild(ctx)
 				|| isSubscribedToMaps(ctx)
 				|| isOsmAndProAvailable(ctx)
-				|| isSubscribedToMapperUpdates()
+				|| isSubscribedToMapperUpdates(ctx)
 				|| ctx.getSettings().LIVE_UPDATES_PURCHASED.get();
 	}
 
@@ -160,7 +158,7 @@ public abstract class InAppPurchaseHelper {
 	public static boolean isSubscribedToLiveUpdates(@NonNull OsmandApplication ctx) {
 		return Version.isDeveloperBuild(ctx)
 				|| ctx.getSettings().LIVE_UPDATES_PURCHASED.get()
-				|| isSubscribedToMapperUpdates()
+				|| isSubscribedToMapperUpdates(ctx)
 				|| isOsmAndProAvailable(ctx);
 	}
 
@@ -169,9 +167,8 @@ public abstract class InAppPurchaseHelper {
 				|| ctx.getSettings().OSMAND_PRO_PURCHASED.get();
 	}
 
-	private static boolean isSubscribedToMapperUpdates() {
-		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
-		return plugin != null && plugin.MAPPER_LIVE_UPDATES_EXPIRE_TIME.get() > System.currentTimeMillis();
+	private static boolean isSubscribedToMapperUpdates(@NonNull OsmandApplication ctx) {
+		return ctx.getSettings().MAPPER_LIVE_UPDATES_EXPIRE_TIME.get() > System.currentTimeMillis();
 	}
 
 	public static boolean isSubscribedToPromo(@NonNull OsmandApplication ctx) {

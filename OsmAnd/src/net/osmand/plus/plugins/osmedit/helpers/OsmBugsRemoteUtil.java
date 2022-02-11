@@ -40,22 +40,27 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 	private static final String POST = "POST";
 
 	private static final String OSM_USER = "user";
-	public static final String DISPLAY_NAME = "display_name";
+	private static final String DISPLAY_NAME = "display_name";
+
+	private static final String NOTES_URL = "api/0.6/notes";
+	private static final String USER_DETAILS_URL = "api/0.6/user/details";
 
 	private final OsmandApplication app;
 	private final OsmEditingPlugin plugin;
 
-	public OsmBugsRemoteUtil(OsmandApplication app) {
+	public OsmBugsRemoteUtil(@NonNull OsmandApplication app) {
 		this.app = app;
 		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 	}
 
+	@NonNull
 	String getNotesApi() {
-		return plugin.getOsmUrl() + "api/0.6/notes";
+		return plugin.getOsmUrl() + NOTES_URL;
 	}
 
+	@NonNull
 	String getUserDetailsApi() {
-		return plugin.getOsmUrl() + "api/0.6/user/details";
+		return plugin.getOsmUrl() + USER_DETAILS_URL;
 	}
 
 	@Override

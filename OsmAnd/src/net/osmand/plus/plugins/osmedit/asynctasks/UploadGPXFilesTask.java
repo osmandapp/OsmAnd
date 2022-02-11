@@ -6,13 +6,12 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
-import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapRemoteUtil;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin.UploadVisibility;
+import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapRemoteUtil;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -21,7 +20,6 @@ import java.lang.ref.WeakReference;
 public class UploadGPXFilesTask extends AsyncTask<GpxInfo, String, String> {
 
 	private final OsmandApplication app;
-	private final OsmEditingPlugin plugin;
 	private final WeakReference<Activity> activityRef;
 
 	private final String tags;
@@ -30,13 +28,11 @@ public class UploadGPXFilesTask extends AsyncTask<GpxInfo, String, String> {
 	private final UploadGpxListener listener;
 
 	public UploadGPXFilesTask(@NonNull Activity activity,
-	                          @NonNull OsmEditingPlugin plugin,
 	                          @NonNull String commonDescription,
 	                          @NonNull String tags,
 	                          @Nullable UploadVisibility visibility,
 	                          @Nullable UploadGpxListener listener) {
 		app = (OsmandApplication) activity.getApplication();
-		this.plugin = plugin;
 		this.activityRef = new WeakReference<>(activity);
 		this.commonDescription = commonDescription;
 		this.tags = tags;
@@ -51,7 +47,7 @@ public class UploadGPXFilesTask extends AsyncTask<GpxInfo, String, String> {
 		for (GpxInfo info : params) {
 			if (!isCancelled() && info.file != null) {
 				File file = info.file;
-				OpenstreetmapRemoteUtil remoteUtil = new OpenstreetmapRemoteUtil(app, plugin);
+				OpenstreetmapRemoteUtil remoteUtil = new OpenstreetmapRemoteUtil(app);
 				String gpxDescription = Algorithms.isEmpty(commonDescription.trim())
 						? Algorithms.getFileNameWithoutExtension(info.getFileName())
 						: commonDescription;

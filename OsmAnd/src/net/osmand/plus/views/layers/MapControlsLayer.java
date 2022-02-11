@@ -1,5 +1,14 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.COMPASS_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.LAYERS_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MENU_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.QUICK_SEARCH_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTE_PLANNING_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
+
 import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -37,6 +46,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.Slider;
 
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
@@ -45,16 +55,17 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
@@ -62,12 +73,10 @@ import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmAndAppCustomization;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.MapActions;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -83,15 +92,6 @@ import java.util.List;
 import java.util.Set;
 
 import gnu.trove.list.array.TIntArrayList;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.COMPASS_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.LAYERS_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MENU_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.QUICK_SEARCH_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTE_PLANNING_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
 
 public class MapControlsLayer extends OsmandMapLayer {
 
@@ -1064,31 +1064,29 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 		});
 
-		OsmandRasterMapsPlugin plugin = OsmandPlugin.getActivePlugin(OsmandRasterMapsPlugin.class);
-		if (plugin != null) {
-			LayerTransparencySeekbarMode seekbarMode = plugin.LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
-			if (seekbarMode == LayerTransparencySeekbarMode.OVERLAY && plugin.MAP_OVERLAY.get() != null) {
+		LayerTransparencySeekbarMode seekbarMode = settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
+		if (OsmandPlugin.isActive(OsmandRasterMapsPlugin.class)) {
+			if (seekbarMode == LayerTransparencySeekbarMode.OVERLAY && settings.MAP_OVERLAY.get() != null) {
 				if (showParameterSlider) {
 					hideTransparencyBar();
 					parameterBarLayout.setVisibility(View.VISIBLE);
 					updateParameterSliderUi();
 				} else {
-					showTransparencyBar(plugin.MAP_OVERLAY_TRANSPARENCY);
+					showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY);
 				}
-			} else if (seekbarMode == LayerTransparencySeekbarMode.UNDERLAY && plugin.MAP_UNDERLAY.get() != null) {
-				showTransparencyBar(plugin.MAP_TRANSPARENCY);
+			} else if (seekbarMode == LayerTransparencySeekbarMode.UNDERLAY && settings.MAP_UNDERLAY.get() != null) {
+				showTransparencyBar(settings.MAP_TRANSPARENCY);
 			}
 		}
 	}
 
 	public void updateTransparencySliderValue() {
-		OsmandRasterMapsPlugin plugin = OsmandPlugin.getActivePlugin(OsmandRasterMapsPlugin.class);
-		if (plugin != null) {
-			LayerTransparencySeekbarMode seekbarMode = plugin.LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
-			if (seekbarMode == LayerTransparencySeekbarMode.OVERLAY && plugin.MAP_OVERLAY.get() != null) {
-				transparencySlider.setValue(plugin.MAP_OVERLAY_TRANSPARENCY.get());
-			} else if (seekbarMode == LayerTransparencySeekbarMode.UNDERLAY && plugin.MAP_UNDERLAY.get() != null) {
-				transparencySlider.setValue(plugin.MAP_TRANSPARENCY.get());
+		LayerTransparencySeekbarMode seekbarMode = settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
+		if (OsmandPlugin.isActive(OsmandRasterMapsPlugin.class)) {
+			if (seekbarMode == LayerTransparencySeekbarMode.OVERLAY && settings.MAP_OVERLAY.get() != null) {
+				transparencySlider.setValue(settings.MAP_OVERLAY_TRANSPARENCY.get());
+			} else if (seekbarMode == LayerTransparencySeekbarMode.UNDERLAY && settings.MAP_UNDERLAY.get() != null) {
+				transparencySlider.setValue(settings.MAP_TRANSPARENCY.get());
 			}
 		}
 	}

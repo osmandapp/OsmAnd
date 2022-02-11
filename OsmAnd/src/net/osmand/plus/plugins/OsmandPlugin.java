@@ -432,11 +432,9 @@ public abstract class OsmandPlugin {
 		if (available || (!marketEnabled && !paid)) {
 			plugin.setInstallURL(null);
 			processed = true;
-		} else {
-			if (marketEnabled) {
-				plugin.setInstallURL(Version.getUrlWithUtmRef(app, plugin.getComponentId1()));
-				processed = true;
-			}
+		} else if (marketEnabled) {
+			plugin.setInstallURL(Version.getUrlWithUtmRef(app, plugin.getComponentId1()));
+			processed = true;
 		}
 		return processed;
 	}
@@ -522,10 +520,12 @@ public abstract class OsmandPlugin {
 		app.getAppInitializer().addListener(new AppInitializeListener() {
 
 			@Override
-			public void onStart(AppInitializer init) { }
+			public void onStart(AppInitializer init) {
+			}
 
 			@Override
-			public void onProgress(AppInitializer init, InitEvents event) { }
+			public void onProgress(AppInitializer init, InitEvents event) {
+			}
 
 			@Override
 			public void onFinish(AppInitializer init) {

@@ -1,5 +1,9 @@
 package net.osmand.plus.plugins.monitoring;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_MONITORING;
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
@@ -35,7 +39,6 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
@@ -58,17 +61,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_MONITORING;
-import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
-
 public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	private static final Log LOG = PlatformUtil.getLog(OsmandMonitoringPlugin.class);
 	public static final String OSMAND_SAVE_SERVICE_ACTION = "OSMAND_SAVE_SERVICE_ACTION";
 	public static final int REQUEST_LOCATION_PERMISSION_FOR_GPX_RECORDING = 208;
-
-	public final CommonPreference<Boolean> SAVE_TRACK_TO_GPX;
 
 	private final OsmandSettings settings;
 	private final LiveMonitoringHelper liveMonitoringHelper;
@@ -84,12 +81,6 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		final List<ApplicationMode> am = ApplicationMode.allPossibleValues();
 		ApplicationMode.regWidgetVisibility("monitoring", am.toArray(new ApplicationMode[0]));
 		settings = app.getSettings();
-
-		SAVE_TRACK_TO_GPX = registerBooleanPreference("save_track_to_gpx", false).makeProfile().cache();
-		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.CAR, false);
-		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.BICYCLE, false);
-		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
-
 		pluginPreferences.add(settings.SAVE_TRACK_TO_GPX);
 		pluginPreferences.add(settings.SAVE_TRACK_INTERVAL);
 		pluginPreferences.add(settings.SAVE_TRACK_MIN_DISTANCE);

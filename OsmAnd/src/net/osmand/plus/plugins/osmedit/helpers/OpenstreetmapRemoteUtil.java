@@ -1,9 +1,9 @@
 package net.osmand.plus.plugins.osmedit.helpers;
 
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
+
 import android.util.Xml;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 
 import com.github.scribejava.core.model.Response;
 
@@ -27,6 +27,7 @@ import net.osmand.osm.io.OsmBaseStorage;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint.Action;
@@ -57,14 +58,15 @@ import java.util.Set;
 
 import gnu.trove.list.array.TLongArrayList;
 
-import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
-
 public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
+
+	private final static Log log = PlatformUtil.getLog(OpenstreetmapRemoteUtil.class);
 
 	private static final long NO_CHANGESET_ID = -1;
 
 	private final OsmandApplication ctx;
-	private OsmEditingPlugin plugin;
+	private final OsmEditingPlugin plugin;
+
 	private EntityInfo entityInfo;
 	private EntityId entityInfoId;
 
@@ -72,12 +74,9 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	private long changeSetId = NO_CHANGESET_ID;
 	private long changeSetTimeStamp = NO_CHANGESET_ID;
 
-	public final static Log log = PlatformUtil.getLog(OpenstreetmapRemoteUtil.class);
-
-
-	public OpenstreetmapRemoteUtil(@NonNull OsmandApplication app, @NonNull OsmEditingPlugin plugin) {
+	public OpenstreetmapRemoteUtil(OsmandApplication app) {
 		this.ctx = app;
-		this.plugin = plugin;
+		this.plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 	}
 
 	@Override
@@ -107,7 +106,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	}
 
 	private String sendRequest(String url, String requestMethod, String requestBody, String userOperation,
-			boolean doAuthenticate) {
+	                           boolean doAuthenticate) {
 		log.info("Sending request " + url); //$NON-NLS-1$
 		try {
 			OsmOAuthAuthorizationAdapter client = new OsmOAuthAuthorizationAdapter(ctx);
@@ -207,7 +206,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			ser.startTag(null, "osm"); //$NON-NLS-1$
 			ser.startTag(null, "changeset"); //$NON-NLS-1$
 
-			if(comment != null) {
+			if (comment != null) {
 				ser.startTag(null, "tag"); //$NON-NLS-1$
 				ser.attribute(null, "k", "comment"); //$NON-NLS-1$ //$NON-NLS-2$
 				ser.attribute(null, "v", comment); //$NON-NLS-1$
@@ -225,8 +224,8 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		} catch (IOException e) {
 			log.error("Unhandled exception", e); //$NON-NLS-1$
 		}
-        String response = sendRequest(
-                getSiteApi() + "api/0.6/changeset/create/", "PUT", writer.getBuffer().toString(), ctx.getString(R.string.opening_changeset), true); //$NON-NLS-1$ //$NON-NLS-2$
+		String response = sendRequest(
+				getSiteApi() + "api/0.6/changeset/create/", "PUT", writer.getBuffer().toString(), ctx.getString(R.string.opening_changeset), true); //$NON-NLS-1$ //$NON-NLS-2$
 		try {
 			if (response != null && response.length() > 0) {
 				log.debug(response);
@@ -315,7 +314,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 	@Override
 	public Entity commitEntityImpl(Action action, final Entity n, EntityInfo info, String comment,
-							   boolean closeChangeSet, Set<String> changedTags) {
+	                               boolean closeChangeSet, Set<String> changedTags) {
 		if (isNewChangesetRequired()) {
 			changeSetId = openChangeSet(comment);
 			changeSetTimeStamp = System.currentTimeMillis();
@@ -433,8 +432,8 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 							}
 						}
 					}
-				} else if (MapUtils.getDistance(n.getLatLon(), entity.getLatLon()) < 10 || 
-					  MapUtils.getDistance(n.getLatLon(), entity.getLatLon()) > 10000) {
+				} else if (MapUtils.getDistance(n.getLatLon(), entity.getLatLon()) < 10 ||
+						MapUtils.getDistance(n.getLatLon(), entity.getLatLon()) > 10000) {
 					// avoid shifting due to round error and avoid moving to more than 10 km
 					n.setLatitude(entity.getLatitude());
 					n.setLongitude(entity.getLongitude());

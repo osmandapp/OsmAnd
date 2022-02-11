@@ -45,6 +45,9 @@ import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.mapmarkers.MapMarkersMode;
+import net.osmand.plus.plugins.accessibility.AccessibilityMode;
+import net.osmand.plus.plugins.accessibility.RelativeDirectionStyle;
+import net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
@@ -78,7 +81,6 @@ import net.osmand.plus.settings.enums.LocationSource;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.enums.TracksSortByMode;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.voice.CommandPlayer;
@@ -105,11 +107,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
-import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 
 public class OsmandSettings {
 
@@ -1013,6 +1010,20 @@ public class OsmandSettings {
 	}.makeProfile();
 
 
+	// this value string is synchronized with settings_pref.xml preference name
+	// cache of metrics constants as they are used very often
+	public final OsmandPreference<RelativeDirectionStyle> DIRECTION_STYLE = new EnumStringPreference<RelativeDirectionStyle>(this,
+			"direction_style", RelativeDirectionStyle.SIDEWISE, RelativeDirectionStyle.values()).makeProfile().cache();
+
+	// this value string is synchronized with settings_pref.xml preference name
+	// cache of metrics constants as they are used very often
+	public final OsmandPreference<AccessibilityMode> ACCESSIBILITY_MODE = new EnumStringPreference<AccessibilityMode>(this,
+			"accessibility_mode", AccessibilityMode.DEFAULT, AccessibilityMode.values()).makeProfile().cache();
+
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Float> SPEECH_RATE =
+			new FloatPreference(this, "speech_rate", 1f).makeProfile();
+
 	public final OsmandPreference<Float> ARRIVAL_DISTANCE_FACTOR =
 			new FloatPreference(this, "arrival_distance_factor", 1f).makeProfile();
 
@@ -1131,12 +1142,28 @@ public class OsmandSettings {
 			new BooleanPreference(this, "use_trackball_for_movements", true).makeProfile();
 
 	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> ACCESSIBILITY_SMART_AUTOANNOUNCE =
+			new BooleanAccessibilityPreference(this, "accessibility_smart_autoannounce", true).makeProfile();
+
+	// this value string is synchronized with settings_pref.xml preference name
+	// cache of metrics constants as they are used very often
+	public final OsmandPreference<Integer> ACCESSIBILITY_AUTOANNOUNCE_PERIOD = new IntPreference(this, "accessibility_autoannounce_period", 10000).makeProfile().cache();
+
+	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> DISABLE_OFFROUTE_RECALC =
 			new BooleanPreference(this, "disable_offroute_recalc", false).makeProfile();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> DISABLE_WRONG_DIRECTION_RECALC =
 			new BooleanPreference(this, "disable_wrong_direction_recalc", false).makeProfile();
+
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> DIRECTION_AUDIO_FEEDBACK =
+			new BooleanAccessibilityPreference(this, "direction_audio_feedback", false).makeProfile();
+
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> DIRECTION_HAPTIC_FEEDBACK =
+			new BooleanAccessibilityPreference(this, "direction_haptic_feedback", false).makeProfile();
 
 	// magnetic field doesn'torkmost of the time on some phones
 	public final OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS = new BooleanPreference(this, "use_magnetic_field_sensor_compass", false).makeProfile().cache();
@@ -1216,6 +1243,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> EMAIL_SUBSCRIBED = new BooleanPreference(this, "email_subscribed", false).makeGlobal();
 	public final OsmandPreference<Boolean> OSMAND_PRO_PURCHASED = new BooleanPreference(this, "billing_osmand_pro_purchased", false).makeGlobal();
 	public final OsmandPreference<Boolean> OSMAND_MAPS_PURCHASED = new BooleanPreference(this, "billing_osmand_maps_purchased", false).makeGlobal();
+	public final OsmandPreference<Long> MAPPER_LIVE_UPDATES_EXPIRE_TIME = new LongPreference(this, "mapper_live_updates_expire_time", 0L).makeGlobal();
 
 	public final OsmandPreference<Integer> DISCOUNT_ID = new IntPreference(this, "discount_id", 0).makeGlobal();
 	public final OsmandPreference<Integer> DISCOUNT_SHOW_NUMBER_OF_STARTS = new IntPreference(this, "number_of_starts_on_discount_show", 0).makeGlobal();
@@ -1662,8 +1690,29 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> MAP_ONLINE_DATA = new BooleanPreference(this, "map_online_data", false).makeProfile();
 
 	// this value string is synchronized with settings_pref.xml preference name
+	public final CommonPreference<String> MAP_OVERLAY = new StringPreference(this, "map_overlay", null).makeProfile().cache();
+
+	// this value string is synchronized with settings_pref.xml preference name
+	public final CommonPreference<String> MAP_UNDERLAY = new StringPreference(this, "map_underlay", null).makeProfile().cache();
+
+	// this value string is synchronized with settings_pref.xml preference name
+	public final CommonPreference<Integer> MAP_OVERLAY_TRANSPARENCY = new IntPreference(this, "overlay_transparency", 100).makeProfile().cache();
+
+	// this value string is synchronized with settings_pref.xml preference name
+	public final CommonPreference<Integer> MAP_TRANSPARENCY = new IntPreference(this, "map_transparency", 255).makeProfile().cache();
+
+	public final CommonPreference<Boolean> SHOW_MAP_LAYER_PARAMETER = new BooleanPreference(this, "show_map_layer_parameter", false).makeProfile().cache();
+
+	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> MAP_TILE_SOURCES = new StringPreference(this, "map_tile_sources",
 			TileSourceManager.getMapnikSource().getName()).makeProfile();
+
+	public final CommonPreference<LayerTransparencySeekbarMode> LAYER_TRANSPARENCY_SEEKBAR_MODE =
+			new EnumStringPreference<>(this, "layer_transparency_seekbar_mode", LayerTransparencySeekbarMode.UNDEFINED, LayerTransparencySeekbarMode.values());
+
+	public final CommonPreference<String> MAP_OVERLAY_PREVIOUS = new StringPreference(this, "map_overlay_previous", null).makeGlobal().cache();
+
+	public final CommonPreference<String> MAP_UNDERLAY_PREVIOUS = new StringPreference(this, "map_underlay_previous", null).makeGlobal().cache();
 
 	public CommonPreference<String> PREVIOUS_INSTALLED_VERSION = new StringPreference(this, "previous_installed_version", "").makeGlobal();
 
