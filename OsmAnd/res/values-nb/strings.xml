@@ -4439,4 +4439,10 @@
     <string name="exit_import_descr">Avslutte uten å lagre endringer\?</string>
     <string name="points_selection_descr">Lukke og miste alle endringer\?</string>
     <string name="import_tracks_descr">%1$s, inneholder %2$s separate spor. Velg spor å importere.</string>
+    <string name="android_api">Android-API</string>
+    <string name="google_play_services">Google Play-tjenester</string>
+    <string name="location_source">Posisjoneringskilde</string>
+    <string name="location_source_descr">Som forvalg bruker OsmAnd installert fra Google Play %1$s for å fastsette posisjon.
+\n
+\nHvis du får upresis posisjoneringsinfo eller bruker en enheten uten %2$s kan du prøve å bytte til «%3$s».</string>
 </resources>
