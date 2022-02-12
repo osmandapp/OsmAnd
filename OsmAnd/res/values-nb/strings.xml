@@ -4441,7 +4441,7 @@
     <string name="android_api">Android-API</string>
     <string name="google_play_services">Google Play-tjenester</string>
     <string name="location_source">Posisjoneringskilde</string>
-    <string name="location_source_descr">Som forvalg bruker OsmAnd installert fra Google Play %1$s for å fastsette posisjon.
+    <string name="location_source_descr">Som forvalg bruker OsmAnd installert fra Google Play, %1$s for å fastsette posisjon.
 \n
-\nHvis du får upresis posisjoneringsinfo eller bruker en enheten uten %2$s kan du prøve å bytte til «%3$s».</string>
+\nHvis du får upresis posisjonsinfo eller bruker en enhet uten %2$s, kan du prøve å bytte til «%3$s».</string>
 </resources>
