@@ -3,13 +3,13 @@ package net.osmand.router;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.util.Algorithms;
 
-import net.osmand.util.RouterUtilTest;
 import org.apache.commons.logging.Log;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -37,9 +37,9 @@ public class RouteResultPreparationTest {
     private static RoutePlannerFrontEnd fe;
     private static RoutingContext ctx;
 
-    private LatLon startPoint;
-    private LatLon endPoint;
-    private Map<String, String> expectedResults;
+    private final LatLon startPoint;
+    private final LatLon endPoint;
+    private final Map<String, String> expectedResults;
     private Map<String, String> params;
 
     protected Log log = PlatformUtil.getLog(RouteResultPreparationTest.class);
@@ -50,22 +50,25 @@ public class RouteResultPreparationTest {
         this.expectedResults = expectedResults;
         this.params = params;
     }
-
     @BeforeClass
     public static void setUp() throws Exception {
         RouteResultPreparation.PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
 
     }
+    
+    boolean isNative() {
+        return false;
+    }
 
     @Parameterized.Parameters(name = "{index}: {0}")
     public static Collection<Object[]> data() throws IOException {
         String fileName = "/test_turn_lanes.json";
-        Reader reader = new InputStreamReader(RouteResultPreparationTest.class.getResourceAsStream(fileName));
+        Reader reader = new InputStreamReader(Objects.requireNonNull(RouteResultPreparationTest.class.getResourceAsStream(fileName)));
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         TestEntry[] testEntries = gson.fromJson(reader, TestEntry[].class);
         ArrayList<Object[]> twoDArray = new ArrayList<>();
         for (TestEntry testEntry : testEntries) {
-            if (!testEntry.isIgnore()) {
+            if (!testEntry.isIgnore() || testEntry.isIgnoreNative()) {
                 Object[] arr = new Object[]{testEntry.getStartPoint(),
                         testEntry.getEndPoint(), testEntry.getExpectedResults(), testEntry.getParams()};
                 twoDArray.add(arr);
@@ -78,12 +81,24 @@ public class RouteResultPreparationTest {
 
     @Test
     public void testLanes() throws Exception {
+        NativeLibrary nativeLibrary = null;
+        if (isNative()) {
+            boolean old = NativeLibrary.loadOldLib(getNativeLibPath());
+            nativeLibrary = new NativeLibrary();
+            if (!old) {
+                throw new UnsupportedOperationException("Not supported");
+            }
+        }
+        
         String fileName = "src/test/resources/Turn_lanes_test.obf";
         File fl = new File(fileName);
     
         RandomAccessFile raf = new RandomAccessFile(fl, "r");
         fe = new RoutePlannerFrontEnd();
         RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
+        if (isNative()) {
+            Objects.requireNonNull(nativeLibrary).initMapFile(fl.getAbsolutePath(), true);
+        }
         if (params == null) {
             params = new HashMap<>();
         }
@@ -94,8 +109,14 @@ public class RouteResultPreparationTest {
         );
         RoutingConfiguration config = builder.build("car", memoryLimit, params);
         BinaryMapIndexReader[] binaryMapIndexReaders = {new BinaryMapIndexReader(raf, fl)};
-        ctx = fe.buildRoutingContext(config, null, binaryMapIndexReaders,
-                RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
+        
+        if (isNative()) {
+            ctx = fe.buildRoutingContext(config, nativeLibrary, binaryMapIndexReaders,
+                    RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
+        } else {
+            ctx = fe.buildRoutingContext(config, null, binaryMapIndexReaders,
+                    RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
+        }
         ctx.leftSideNavigation = false;
         
         List<RouteSegmentResult> routeSegments = fe.searchRoute(ctx, startPoint, endPoint, null);
