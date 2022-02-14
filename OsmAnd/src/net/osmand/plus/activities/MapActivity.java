@@ -1,7 +1,10 @@
 package net.osmand.plus.activities;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_CRASH_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RATE_US_ID;
+
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
@@ -165,10 +168,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_CRASH_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RATE_US_ID;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
@@ -1347,22 +1346,20 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
-	@SuppressLint("StaticFieldLeak")
 	public void updateMapSettings() {
-		if (app.isApplicationInitializing()) {
-			return;
+		if (!app.isApplicationInitializing()) {
+			UpdateVectorRendererAsyncTask task = new UpdateVectorRendererAsyncTask(app, changed -> {
+				if (changed) {
+					OsmandPlugin.registerRenderingPreferences(app);
+				}
+				DashboardOnMap dashboard = getDashboard();
+				if (dashboard != null) {
+					dashboard.onMapSettingsUpdated();
+				}
+				return true;
+			});
+			task.executeOnExecutor(singleThreadExecutor);
 		}
-		// update vector renderer
-		UpdateVectorRendererAsyncTask.execute(getMapView(), singleThreadExecutor, changed -> {
-			if (changed) {
-				OsmandPlugin.registerRenderingPreferences(app);
-			}
-			DashboardOnMap dashboard = getDashboard();
-			if (dashboard != null) {
-				dashboard.onMapSettingsUpdated();
-			}
-			return true;
-		});
 	}
 
 	public ScrollHelper getMapScrollHelper() {
@@ -1447,9 +1444,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public static void launchMapActivityMoveToTop(@NonNull Context activity,
-												  @Nullable Bundle prevIntentParams,
-												  @Nullable Uri intentData,
-												  @Nullable Bundle intentParams) {
+	                                              @Nullable Bundle prevIntentParams,
+	                                              @Nullable Uri intentData,
+	                                              @Nullable Bundle intentParams) {
 		if (activity instanceof MapActivity) {
 			if (((MapActivity) activity).getDashboard().isVisible()) {
 				((MapActivity) activity).getDashboard().hideDashboard();
@@ -1954,7 +1951,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void showQuickSearch(@NonNull ShowQuickSearchMode mode, boolean showCategories,
-								@NonNull String searchQuery, @Nullable LatLon searchLocation) {
+	                            @NonNull String searchQuery, @Nullable LatLon searchLocation) {
 		if (mode == ShowQuickSearchMode.CURRENT) {
 			mapContextMenu.close();
 		} else {
@@ -2007,7 +2004,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void showQuickSearch(@NonNull ShowQuickSearchMode mode, QuickSearchTab showSearchTab,
-								@NonNull String searchQuery, @Nullable LatLon searchLocation) {
+	                            @NonNull String searchQuery, @Nullable LatLon searchLocation) {
 		if (mode == ShowQuickSearchMode.CURRENT) {
 			mapContextMenu.close();
 		} else {

@@ -11,26 +11,23 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.render.RenderingRulesStorage;
 
-import java.util.concurrent.ExecutorService;
-
 public class UpdateVectorRendererAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
 	private final OsmandApplication app;
-	private final OsmandSettings settings;
-	private final OsmandMapTileView mapView;
+
 	private final CallbackWithObject<Boolean> callback;
 
-	public UpdateVectorRendererAsyncTask(@NonNull OsmandMapTileView mapView,
-	                                     @NonNull CallbackWithObject<Boolean> callback) {
-		this.mapView = mapView;
-		this.app = mapView.getApplication();
-		this.settings = app.getSettings();
+	public UpdateVectorRendererAsyncTask(@NonNull OsmandApplication app, @NonNull CallbackWithObject<Boolean> callback) {
+		this.app = app;
 		this.callback = callback;
 	}
 
 	@Override
 	protected Boolean doInBackground(Void... params) {
+		OsmandSettings settings = app.getSettings();
 		RendererRegistry registry = app.getRendererRegistry();
+		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+
 		RenderingRulesStorage newRenderer = registry.getRenderer(settings.RENDERER.get());
 		if (newRenderer == null) {
 			newRenderer = registry.defaultRender();
@@ -55,13 +52,4 @@ public class UpdateVectorRendererAsyncTask extends AsyncTask<Void, Void, Boolean
 			callback.processResult(changed);
 		}
 	}
-
-	public static void execute(@NonNull OsmandMapTileView mapView,
-	                           @NonNull ExecutorService executor,
-	                           @NonNull CallbackWithObject<Boolean> callback) {
-		UpdateVectorRendererAsyncTask task = new UpdateVectorRendererAsyncTask(mapView, callback);
-		task.executeOnExecutor(executor, (Void) null);
-	}
-
-
 }
