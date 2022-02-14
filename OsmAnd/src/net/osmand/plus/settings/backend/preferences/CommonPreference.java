@@ -30,7 +30,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	private boolean global;
 	private boolean shared;
 	private boolean lastModifiedTimeStored;
-	private OsmandPlugin relatedPlugin;
+	private String pluginId;
 
 	public CommonPreference(OsmandSettings settings, String id, T defaultValue) {
 		this.settings = settings;
@@ -108,8 +108,8 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		return this;
 	}
 
-	public final void setRelatedPlugin(OsmandPlugin relatedPlugin) {
-		this.relatedPlugin = relatedPlugin;
+	public final void setRelatedPlugin(OsmandPlugin plugin) {
+		this.pluginId = plugin != null ? plugin.getId() : null;
 	}
 
 	protected final Object getPreferences() {
@@ -181,12 +181,17 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		if (global) {
 			return get();
 		}
+		OsmandPlugin relatedPlugin = getRelatedPlugin();
+		if (relatedPlugin != null && !relatedPlugin.isActive()) {
+			return getProfileDefaultValue(mode);
+		}
 		T defaultV = getProfileDefaultValue(mode);
 		return getValue(settings.getProfilePreferences(mode), defaultV);
 	}
 
 	@Override
 	public T get() {
+		OsmandPlugin relatedPlugin = getRelatedPlugin();
 		if (relatedPlugin != null && !relatedPlugin.isActive()) {
 			return getDefaultValue();
 		}
@@ -274,7 +279,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	}
 
 	public OsmandPlugin getRelatedPlugin() {
-		return relatedPlugin;
+		return pluginId != null ? OsmandPlugin.getPlugin(pluginId) : null;
 	}
 
 	protected String getLastModifiedTimeId() {
