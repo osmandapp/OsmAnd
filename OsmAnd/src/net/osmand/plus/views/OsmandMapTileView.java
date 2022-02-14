@@ -1207,6 +1207,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return mapRenderer;
 	}
 
+	public boolean hasGpuRenderer() {
+		return mapRenderer != null;
+	}
+
 	public Boolean onTrackballEvent(MotionEvent event) {
 		if (trackBallDelegate != null) {
 			return trackBallDelegate.onTrackBallEvent(event);

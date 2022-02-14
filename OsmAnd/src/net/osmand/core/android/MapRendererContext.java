@@ -2,6 +2,8 @@ package net.osmand.core.android;
 
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,6 +26,7 @@ import net.osmand.core.jni.QStringStringHash;
 import net.osmand.core.jni.ResolvedMapStyle;
 import net.osmand.core.jni.SwigUtilities;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.render.RendererRegistry;
@@ -60,7 +63,16 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 	private MapRendererView mapRendererView;
 	
 	private float cachedReferenceTileSize;
-	
+
+	public interface MapRendererContextListener {
+		void onMapSettingsUpdated();
+	}
+
+	private MapRendererContext.MapRendererContextListener mapRendererContextListener;
+	public void setMapRendererContextListener(@Nullable MapRendererContext.MapRendererContextListener aMapRendererContextListener) {
+		this.mapRendererContextListener = aMapRendererContextListener;
+	}
+
 	public MapRendererContext(OsmandApplication app, float density) {
 		this.app = app;
 		this.density = density;
@@ -98,6 +110,10 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 		}
 		if(mapPresentationEnvironment != null) {
 			updateMapPresentationEnvironment();
+		}
+
+		if (mapRendererContextListener != null) {
+			mapRendererContextListener.onMapSettingsUpdated();
 		}
 	}
 	
