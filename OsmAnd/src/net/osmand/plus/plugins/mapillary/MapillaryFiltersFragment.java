@@ -17,6 +17,11 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -25,7 +30,7 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -36,11 +41,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.AppCompatTextView;
-import androidx.fragment.app.FragmentManager;
-
 public class MapillaryFiltersFragment extends BaseOsmAndFragment {
 
     public static final String TAG = MapillaryFiltersFragment.class.getSimpleName();
@@ -49,13 +49,13 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final MapActivity mapActivity = (MapActivity) requireActivity();
         final OsmandApplication app = requireMyApplication();
-        final OsmandSettings settings = requireSettings();
+        final ApplicationMode appMode = app.getSettings().getApplicationMode();
         final MapillaryPlugin plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
 
         final boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
         final int backgroundColor = ColorUtilities.getActivityBgColor(mapActivity, nightMode);
         final DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
-        final int currentModeColor = settings.getApplicationMode().getProfileColor(nightMode);
+        final int currentModeColor = appMode.getProfileColor(nightMode);
 
         final View view = UiUtilities.getInflater(mapActivity, nightMode)
                 .inflate(R.layout.fragment_mapillary_filters, container, false);
@@ -66,7 +66,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         view.findViewById(R.id.mapillary_filters_linear_layout).setBackgroundColor(backgroundColor);
 
         final View toggleRow = view.findViewById(R.id.toggle_row);
-        final boolean selected = settings.SHOW_MAPILLARY.get();
+        final boolean selected = plugin.SHOW_MAPILLARY.get();
         final int toggleActionStringId = selected ? R.string.shared_string_on : R.string.shared_string_off;
         int toggleIconColor;
         int toggleIconId;
@@ -83,13 +83,10 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         final CompoundButton toggle = toggleRow.findViewById(R.id.toggle_row_toggle);
 		toggle.setOnCheckedChangeListener(null);
         toggle.setChecked(selected);
-        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                settings.SHOW_MAPILLARY.set(!settings.SHOW_MAPILLARY.get());
-                plugin.updateLayers(mapActivity, mapActivity);
-                mapActivity.getDashboard().refreshContent(true);
-            }
+        toggle.setOnCheckedChangeListener((compoundButton, b) -> {
+            plugin.SHOW_MAPILLARY.set(!plugin.SHOW_MAPILLARY.get());
+            plugin.updateLayers(mapActivity, mapActivity);
+            mapActivity.getDashboard().refreshContent(true);
         });
         toggleRow.setOnClickListener(v -> toggle.setChecked(!toggle.isChecked()));
         UiUtilities.setupCompoundButton(nightMode, currentModeColor, toggle);
@@ -112,9 +109,9 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
 
         final DelayAutoCompleteTextView textView =
                 (DelayAutoCompleteTextView) view.findViewById(R.id.auto_complete_text_view);
-        textView.setAdapter(new MapillaryAutoCompleteAdapter(mapActivity, R.layout.auto_complete_suggestion, app));
-        String selectedUsername = settings.MAPILLARY_FILTER_USERNAME.get();
-        if (!selectedUsername.isEmpty() && settings.USE_MAPILLARY_FILTER.get()) {
+        textView.setAdapter(new MapillaryAutoCompleteAdapter(mapActivity, R.layout.auto_complete_suggestion));
+        String selectedUsername = plugin.MAPILLARY_FILTER_USERNAME.get();
+        if (!selectedUsername.isEmpty() && plugin.USE_MAPILLARY_FILTER.get()) {
             textView.setText(selectedUsername);
             textView.setSelection(selectedUsername.length());
         }
@@ -157,7 +154,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
             from.set(Calendar.MONTH, monthOfYear);
             from.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             dateFromEt.setText(dateFormat.format(from.getTime()));
-            settings.MAPILLARY_FILTER_FROM_DATE.set(from.getTimeInMillis());
+            plugin.MAPILLARY_FILTER_FROM_DATE.set(from.getTimeInMillis());
             enableButtonApply(view);
             mapActivity.getDashboard().refreshContent(true);
         };
@@ -178,7 +175,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
             to.set(Calendar.MONTH, monthOfYear);
             to.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             dateToEt.setText(dateFormat.format(to.getTime()));
-            settings.MAPILLARY_FILTER_TO_DATE.set(to.getTimeInMillis());
+            plugin.MAPILLARY_FILTER_TO_DATE.set(to.getTimeInMillis());
             enableButtonApply(view);
             mapActivity.getDashboard().refreshContent(true);
         };
@@ -191,12 +188,12 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         });
         dateToEt.setCompoundDrawablesWithIntrinsicBounds(null, null, getContentIcon(R.drawable.ic_action_arrow_drop_down), null);
 
-        if (settings.USE_MAPILLARY_FILTER.get()) {
-            long to = settings.MAPILLARY_FILTER_TO_DATE.get();
+        if (plugin.USE_MAPILLARY_FILTER.get()) {
+            long to = plugin.MAPILLARY_FILTER_TO_DATE.get();
             if (to != 0) {
                 dateToEt.setText(dateFormat.format(new Date(to)));
             }
-            long from = settings.MAPILLARY_FILTER_FROM_DATE.get();
+            long from = plugin.MAPILLARY_FILTER_FROM_DATE.get();
             if (from != 0) {
                 dateFromEt.setText(dateFormat.format(new Date(from)));
             }
@@ -205,9 +202,9 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         final View rowPano = view.findViewById(R.id.pano_row);
         final CompoundButton pano = rowPano.findViewById(R.id.pano_row_toggle);
         pano.setOnCheckedChangeListener(null);
-        pano.setChecked(settings.MAPILLARY_FILTER_PANO.get());
+        pano.setChecked(plugin.MAPILLARY_FILTER_PANO.get());
         pano.setOnCheckedChangeListener((compoundButton, b) -> {
-            settings.MAPILLARY_FILTER_PANO.set(!settings.MAPILLARY_FILTER_PANO.get());
+            plugin.MAPILLARY_FILTER_PANO.set(!plugin.MAPILLARY_FILTER_PANO.get());
             enableButtonApply(view);
             mapActivity.getDashboard().refreshContent(true);
         });
@@ -222,25 +219,23 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
             String dateFrom = dateFromEt.getText().toString();
             String dateTo = dateToEt.getText().toString();
 
-            if (!settings.MAPILLARY_FILTER_USERNAME.get().isEmpty() || !dateFrom.isEmpty() || !dateTo.isEmpty() || settings.MAPILLARY_FILTER_PANO.get()) {
-                settings.USE_MAPILLARY_FILTER.set(true);
+            if (!plugin.MAPILLARY_FILTER_USERNAME.get().isEmpty() || !dateFrom.isEmpty() || !dateTo.isEmpty() || plugin.MAPILLARY_FILTER_PANO.get()) {
+                plugin.USE_MAPILLARY_FILTER.set(true);
             }
             if (dateFrom.isEmpty()) {
-                settings.MAPILLARY_FILTER_FROM_DATE.set(0L);
+                plugin.MAPILLARY_FILTER_FROM_DATE.set(0L);
             }
             if (dateTo.isEmpty()) {
-                settings.MAPILLARY_FILTER_TO_DATE.set(0L);
+                plugin.MAPILLARY_FILTER_TO_DATE.set(0L);
             }
-            if (!username.isEmpty() && settings.MAPILLARY_FILTER_USERNAME.get().isEmpty()) {
+            if (!username.isEmpty() && plugin.MAPILLARY_FILTER_USERNAME.get().isEmpty()) {
                 view.findViewById(R.id.warning_linear_layout).setVisibility(View.VISIBLE);
             } else {
                 mapActivity.getDashboard().hideDashboard();
             }
 
             changeButtonState(apply, .5f, false);
-            if (plugin != null) {
-                plugin.updateLayers(mapActivity, mapActivity);
-            }
+            plugin.updateLayers(mapActivity, mapActivity);
             hideKeyboard();
         });
 
@@ -252,16 +247,14 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
             dateToEt.setText("");
             pano.setChecked(false);
 
-            settings.USE_MAPILLARY_FILTER.set(false);
-            settings.MAPILLARY_FILTER_USER_KEY.set("");
-            settings.MAPILLARY_FILTER_USERNAME.set("");
-            settings.MAPILLARY_FILTER_FROM_DATE.set(0L);
-            settings.MAPILLARY_FILTER_TO_DATE.set(0L);
-            settings.MAPILLARY_FILTER_PANO.set(false);
+            plugin.USE_MAPILLARY_FILTER.set(false);
+            plugin.MAPILLARY_FILTER_USER_KEY.set("");
+            plugin.MAPILLARY_FILTER_USERNAME.set("");
+            plugin.MAPILLARY_FILTER_FROM_DATE.set(0L);
+            plugin.MAPILLARY_FILTER_TO_DATE.set(0L);
+            plugin.MAPILLARY_FILTER_PANO.set(false);
+            plugin.updateLayers(mapActivity, mapActivity);
 
-            if (plugin != null) {
-                plugin.updateLayers(mapActivity, mapActivity);
-            }
             hideKeyboard();
         });
 
