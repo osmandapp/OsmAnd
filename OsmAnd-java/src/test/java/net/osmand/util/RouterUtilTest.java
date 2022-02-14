@@ -2,6 +2,8 @@ package net.osmand.util;
 
 import java.io.File;
 import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
@@ -34,21 +36,23 @@ public class RouterUtilTest {
     }
     
     public static String getNativeLibPath() {
-        String nativeLibPath = FileSystems.getDefault().getPath("../../core-legacy/binaries").normalize().toAbsolutePath().toString();
-        
-        for (final File fileEntry : Objects.requireNonNull(new File(nativeLibPath).listFiles())) {
-            if (fileEntry.isDirectory()) {
-                File[] f = fileEntry.listFiles();
-                for (final File f2 : Objects.requireNonNull(f)) {
-                    if (f2.isDirectory()) {
-                        File[] f3 = f2.listFiles();
-                        for (File f4 : Objects.requireNonNull(f3)) {
-                            if (f4.isDirectory() && f4.getName().equals("Release")
-                                    || f4.isDirectory() && f4.getName().equals("Debug") ) {
-                                return f4.getAbsolutePath();
+        Path path = FileSystems.getDefault().getPath("../../core-legacy/binaries");
+        if (Files.exists(path)) {
+            String nativeLibPath = FileSystems.getDefault().getPath("../../core-legacy/binaries").normalize().toAbsolutePath().toString();
+            for (final File fileEntry : Objects.requireNonNull(new File(nativeLibPath).listFiles())) {
+                if (fileEntry.isDirectory()) {
+                    File[] f = fileEntry.listFiles();
+                    for (final File f2 : Objects.requireNonNull(f)) {
+                        if (f2.isDirectory()) {
+                            File[] f3 = f2.listFiles();
+                            for (File f4 : Objects.requireNonNull(f3)) {
+                                if (f4.isDirectory() && f4.getName().equals("Release")
+                                        || f4.isDirectory() && f4.getName().equals("Debug") ) {
+                                    return f4.getAbsolutePath();
+                                }
                             }
+                            return f2.getAbsolutePath();
                         }
-                        return f2.getAbsolutePath();
                     }
                 }
             }
