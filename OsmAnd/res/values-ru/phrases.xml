@@ -4255,4 +4255,11 @@
     <string name="poi_avalanche_transceiver">Лавинный датчик;Лавинный трансивер;Лавинный маячок</string>
     <string name="poi_avalanche_transceiver_checkpoint">Контрольный пункт лавинного датчика</string>
     <string name="poi_avalanche_transceiver_training">Обучение работе с лавинным датчиком</string>
+    <string name="poi_tiles">Магазин плитки</string>
+    <string name="poi_skate">Магазин скейтов</string>
+    <string name="poi_parcel_locker">Постамат</string>
+    <string name="poi_access_permit">Требуется разрешение</string>
+    <string name="poi_toilets_disposal_dry_toilet">Утилизация: обезвоживание</string>
+    <string name="poi_post_office_opening_hours">Часы работы почтового отделения</string>
+    <string name="poi_collector">Коллекционный магазин</string>
 </resources>

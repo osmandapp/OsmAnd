@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.osmedit.menu;
 
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
+
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 
@@ -28,14 +30,13 @@ import net.osmand.util.Algorithms;
 
 import java.util.Map;
 
-import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
-
 public class EditPOIMenuController extends MenuController {
 
+	private final OsmEditingPlugin plugin;
+
 	private OsmPoint osmPoint;
-	private OsmEditingPlugin plugin;
-	private String categoryDescr;
-	private String actionStr;
+	private final String categoryDescr;
+	private final String actionStr;
 
 	public EditPOIMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull OsmPoint osmPoint) {
 		super(new EditPOIMenuBuilder(mapActivity, osmPoint), pointDescription, mapActivity);

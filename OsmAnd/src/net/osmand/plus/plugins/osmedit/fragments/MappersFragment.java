@@ -21,20 +21,19 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.CallbackWithObject;
+import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.chooseplan.BasePurchaseDialogFragment.ButtonBackground;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.CallbackWithObject;
-import net.osmand.PlatformUtil;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.chooseplan.BasePurchaseDialogFragment.ButtonBackground;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -169,7 +168,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 		int titleColor;
 		String title;
 		String description;
-		long expireTime = plugin.MAPPER_LIVE_UPDATES_EXPIRE_TIME.get();
+		long expireTime = app.getSettings().MAPPER_LIVE_UPDATES_EXPIRE_TIME.get();
 		boolean isAvailable = expireTime > System.currentTimeMillis();
 		if (isAvailable) {
 			titleColor = ColorUtilities.getActiveColor(app, nightMode);
@@ -276,9 +275,9 @@ public class MappersFragment extends BaseOsmAndFragment {
 			calendar.set(Calendar.HOUR_OF_DAY, 0);
 			calendar.set(Calendar.MINUTE, 0);
 			calendar.set(Calendar.SECOND, 0);
-			plugin.MAPPER_LIVE_UPDATES_EXPIRE_TIME.set(calendar.getTimeInMillis());
+			app.getSettings().MAPPER_LIVE_UPDATES_EXPIRE_TIME.set(calendar.getTimeInMillis());
 		} else {
-			plugin.MAPPER_LIVE_UPDATES_EXPIRE_TIME.resetToDefault();
+			app.getSettings().MAPPER_LIVE_UPDATES_EXPIRE_TIME.resetToDefault();
 		}
 	}
 

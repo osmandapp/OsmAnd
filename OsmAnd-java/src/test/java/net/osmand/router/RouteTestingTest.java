@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 
+import net.osmand.util.RouterUtilTest;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -20,15 +21,6 @@ import java.io.Reader;
 import java.util.*;
 import java.util.Map.Entry;
 import net.osmand.NativeLibrary;
-import net.osmand.binary.BinaryMapIndexReader;
-
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 @RunWith(Parameterized.class)
 public class RouteTestingTest {
@@ -147,24 +139,25 @@ public class RouteTestingTest {
 					reachedSegments.add(routeSegments.get(i).getObject().getId() >> (RouteResultPreparation.SHIFT_ID));
 				}
 			}
-			Map<Long, String> expectedResults = te.getExpectedResults();
+			Map<String, String> expectedResults = te.getExpectedResults();
 			if (expectedResults == null) {
 				System.out.println("This is test on hanging routing");
 				break;
 			}
-			for (Entry<Long, String> es : expectedResults.entrySet()) {
+			for (Entry<String, String> es : expectedResults.entrySet()) {
+				long id = RouterUtilTest.getRoadId(es.getKey());
 				switch (es.getValue()) {
 					case "false":
-						Assert.assertFalse("Expected segment " + (es.getKey()) + " was wrongly reached in route segments "
-								+ reachedSegments, reachedSegments.contains(es.getKey()));
+						Assert.assertFalse("Expected segment " + id + " was wrongly reached in route segments "
+								+ reachedSegments, reachedSegments.contains(id));
 						break;
 					case "true":
-						Assert.assertTrue("Expected segment " + (es.getKey()) + " weren't reached in route segments "
-								+ reachedSegments, reachedSegments.contains(es.getKey()));
+						Assert.assertTrue("Expected segment " + id + " weren't reached in route segments "
+								+ reachedSegments, reachedSegments.contains(id));
 						break;
 					case "visitedSegments":
-						Assert.assertTrue("Expected segments visit " + (es.getKey()) + " less then actually visited segments "
-								+ ctx.getVisitedSegments(), ctx.getVisitedSegments() < es.getKey());
+						Assert.assertTrue("Expected segments visit " + id + " less then actually visited segments "
+								+ ctx.getVisitedSegments(), ctx.getVisitedSegments() < id);
 						break;
 				}
 			}

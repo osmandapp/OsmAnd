@@ -1,5 +1,10 @@
 package net.osmand.plus.plugins.srtm;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_SRTM;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
+import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -41,11 +46,6 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_SRTM;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
-import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 
 public class SRTMPlugin extends OsmandPlugin {
 
@@ -436,8 +436,8 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public void toggleContourLines(final MapActivity activity,
-								   final boolean isChecked,
-								   final Runnable callback) {
+	                               final boolean isChecked,
+	                               final Runnable callback) {
 		RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
 		if (contourLinesProp != null) {
 			final CommonPreference<String> pref = settings.getCustomRenderProperty(contourLinesProp.getAttrName());
@@ -477,9 +477,9 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public void selectPropertyValue(final MapActivity activity,
-									final RenderingRuleProperty p,
-									final CommonPreference<String> pref,
-									final Runnable callback) {
+	                                final RenderingRuleProperty p,
+	                                final CommonPreference<String> pref,
+	                                final Runnable callback) {
 		final String propertyDescr = AndroidUtils.getRenderingStringPropertyDescription(activity,
 				p.getAttrName(), p.getName());
 		boolean nightMode = isNightMode(activity, app);
@@ -561,7 +561,7 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	@Override
 	protected CommonPreference<String> registerRenderingPreference(@NonNull String prefId, @Nullable String defValue) {
-		if (prefId.equals(CONTOUR_LINES_ATTR)) {
+		if (CONTOUR_LINES_ATTR.equals(prefId)) {
 			defValue = CONTOUR_LINES_DISABLED_VALUE;
 		}
 		return super.registerRenderingPreference(prefId, defValue);

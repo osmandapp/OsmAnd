@@ -1,5 +1,8 @@
 package net.osmand.plus.plugins.osmedit.fragments;
 
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
+
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -78,9 +81,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
-import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
 
 public class OsmEditsFragment extends OsmAndListFragment implements ProgressDialogPoiUploader,
 		OnNodeCommittedListener, FavoritesFragmentStateHolder, OsmAuthorizationListener, ShareOsmPointsListener {
@@ -651,7 +651,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			if (hasPoiGroup(points)) {
-				if (getMyApplication().getOsmOAuthHelper().isLogged(plugin)) {
+				if (app.getOsmOAuthHelper().isLogged()) {
 					SendPoiBottomSheetFragment.showInstance(getChildFragmentManager(), points);
 				} else {
 					LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), this);

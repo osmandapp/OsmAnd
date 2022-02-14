@@ -21,8 +21,8 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.util.Algorithms;
 
 import java.lang.reflect.Type;
@@ -66,8 +66,7 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 
 	@Override
 	public String getSelectedItem(OsmandApplication app) {
-		OsmandRasterMapsPlugin plugin = OsmandPlugin.getPlugin(OsmandRasterMapsPlugin.class);
-		String mapOverlay = plugin != null ? plugin.MAP_OVERLAY.get() : KEY_NO_OVERLAY;
+		String mapOverlay = app.getSettings().MAP_OVERLAY.get();
 		return mapOverlay != null ? mapOverlay : KEY_NO_OVERLAY;
 	}
 
@@ -119,23 +118,23 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 	public void executeWithParams(@NonNull MapActivity mapActivity, String params) {
 		OsmandRasterMapsPlugin plugin = OsmandPlugin.getActivePlugin(OsmandRasterMapsPlugin.class);
 		if (plugin != null) {
-			MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
+			OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 			boolean hasOverlay = !params.equals(KEY_NO_OVERLAY);
 			if (hasOverlay) {
-				plugin.MAP_OVERLAY.set(params);
-				plugin.MAP_OVERLAY_PREVIOUS.set(params);
-				if (plugin.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.UNDEFINED) {
-					plugin.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(LayerTransparencySeekbarMode.OVERLAY);
+				settings.MAP_OVERLAY.set(params);
+				settings.MAP_OVERLAY_PREVIOUS.set(params);
+				if (settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.UNDEFINED) {
+					settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(LayerTransparencySeekbarMode.OVERLAY);
 				}
-				if (plugin.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.OVERLAY) {
-					mapControlsLayer.showTransparencyBar(plugin.MAP_OVERLAY_TRANSPARENCY);
+				if (settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.OVERLAY) {
+					mapActivity.getMapLayers().getMapControlsLayer().showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY);
 				}
 			} else {
-				plugin.MAP_OVERLAY.set(null);
-				mapControlsLayer.hideTransparencyBar();
-				plugin.MAP_OVERLAY_PREVIOUS.set(null);
+				settings.MAP_OVERLAY.set(null);
+				mapActivity.getMapLayers().getMapControlsLayer().hideTransparencyBar();
+				settings.MAP_OVERLAY_PREVIOUS.set(null);
 			}
-			plugin.updateMapLayers(mapActivity, mapActivity, plugin.MAP_OVERLAY);
+			plugin.updateMapLayers(mapActivity, mapActivity, settings.MAP_OVERLAY);
 			Toast.makeText(mapActivity, mapActivity.getString(R.string.quick_action_map_overlay_switch,
 					getTranslatedItemName(mapActivity, params)), Toast.LENGTH_SHORT).show();
 		}

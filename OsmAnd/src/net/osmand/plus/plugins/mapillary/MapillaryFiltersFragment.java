@@ -51,7 +51,6 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         final OsmandApplication app = requireMyApplication();
         final ApplicationMode appMode = app.getSettings().getApplicationMode();
         final MapillaryPlugin plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
-        assert plugin != null;
 
         final boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
         final int backgroundColor = ColorUtilities.getActivityBgColor(mapActivity, nightMode);
@@ -110,7 +109,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
 
         final DelayAutoCompleteTextView textView =
                 (DelayAutoCompleteTextView) view.findViewById(R.id.auto_complete_text_view);
-        textView.setAdapter(new MapillaryAutoCompleteAdapter(mapActivity, R.layout.auto_complete_suggestion, app, plugin));
+        textView.setAdapter(new MapillaryAutoCompleteAdapter(mapActivity, R.layout.auto_complete_suggestion));
         String selectedUsername = plugin.MAPILLARY_FILTER_USERNAME.get();
         if (!selectedUsername.isEmpty() && plugin.USE_MAPILLARY_FILTER.get()) {
             textView.setText(selectedUsername);

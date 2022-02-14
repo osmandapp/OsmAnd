@@ -1,6 +1,7 @@
 package net.osmand.plus.settings.bottomsheets;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,14 +16,14 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.asynctasks.ValidateOsmLoginDetailsTask;
 import net.osmand.plus.plugins.osmedit.asynctasks.ValidateOsmLoginDetailsTask.ValidateOsmLoginListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.utils.UiUtilities;
 
 public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 
@@ -97,17 +98,22 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 
 	@Override
 	protected void onRightBottomButtonClick() {
+		OsmandApplication app = requiredMyApplication();
 		plugin.OSM_USER_NAME_OR_EMAIL.set(userNameEditText.getText().toString());
 		plugin.OSM_USER_PASSWORD.set(passwordEditText.getText().toString());
-		if (getTargetFragment() instanceof ValidateOsmLoginListener) {
+
+		Fragment targetFragment = getTargetFragment();
+		if (targetFragment instanceof ValidateOsmLoginListener) {
 			ValidateOsmLoginListener listener = (ValidateOsmLoginListener) getTargetFragment();
-			ValidateOsmLoginDetailsTask.execute(requiredMyApplication(), plugin, listener);
+			ValidateOsmLoginDetailsTask validateTask = new ValidateOsmLoginDetailsTask(app, listener);
+			validateTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
+
 		dismiss();
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String key, Fragment target,
-									   boolean usedOnMap, @Nullable ApplicationMode appMode) {
+	                                   boolean usedOnMap, @Nullable ApplicationMode appMode) {
 		try {
 			Bundle args = new Bundle();
 			args.putString(PREFERENCE_ID, key);

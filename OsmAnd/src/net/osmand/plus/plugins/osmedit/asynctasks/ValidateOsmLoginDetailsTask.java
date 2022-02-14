@@ -11,20 +11,15 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.helpers.OsmBugsRemoteUtil;
 import net.osmand.plus.plugins.osmedit.helpers.OsmBugsUtil.OsmBugResult;
-import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class ValidateOsmLoginDetailsTask extends AsyncTask<Void, Void, OsmBugResult> {
 
 	private final OsmandApplication app;
-	private final OsmEditingPlugin plugin;
-	private final ValidateOsmLoginListener validateListener;
+	private final ValidateOsmLoginListener listener;
 
-	private ValidateOsmLoginDetailsTask(@NonNull OsmandApplication app,
-	                                    @NonNull OsmEditingPlugin plugin,
-	                                    @Nullable ValidateOsmLoginListener validateListener) {
+	public ValidateOsmLoginDetailsTask(@NonNull OsmandApplication app, @Nullable ValidateOsmLoginListener listener) {
 		this.app = app;
-		this.plugin = plugin;
-		this.validateListener = validateListener;
+		this.listener = listener;
 	}
 
 	@Override
@@ -37,27 +32,23 @@ public class ValidateOsmLoginDetailsTask extends AsyncTask<Void, Void, OsmBugRes
 
 	@Override
 	protected void onPostExecute(OsmBugResult osmBugResult) {
-		OsmandSettings settings = app.getSettings();
-		if (osmBugResult.warning != null) {
-			plugin.OSM_USER_NAME_OR_EMAIL.resetToDefault();
-			plugin.OSM_USER_DISPLAY_NAME.resetToDefault();
-			plugin.OSM_USER_PASSWORD.resetToDefault();
-			plugin.MAPPER_LIVE_UPDATES_EXPIRE_TIME.resetToDefault();
-			app.showToastMessage(osmBugResult.warning);
-		} else {
-			plugin.OSM_USER_DISPLAY_NAME.set(osmBugResult.userName);
-			app.showToastMessage(R.string.osm_authorization_success);
+		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		if (plugin != null) {
+			if (osmBugResult.warning != null) {
+				plugin.OSM_USER_NAME_OR_EMAIL.resetToDefault();
+				plugin.OSM_USER_DISPLAY_NAME.resetToDefault();
+				plugin.OSM_USER_PASSWORD.resetToDefault();
+				app.getSettings().MAPPER_LIVE_UPDATES_EXPIRE_TIME.resetToDefault();
+				app.showToastMessage(osmBugResult.warning);
+			} else {
+				plugin.OSM_USER_DISPLAY_NAME.set(osmBugResult.userName);
+				app.showToastMessage(R.string.osm_authorization_success);
+			}
 		}
-		if (validateListener != null) {
-			validateListener.loginValidationFinished(osmBugResult.warning);
-		}
-	}
 
-	public static void execute(@NonNull OsmandApplication app,
-	                           @NonNull OsmEditingPlugin plugin,
-	                           @Nullable ValidateOsmLoginListener validateListener) {
-		ValidateOsmLoginDetailsTask task = new ValidateOsmLoginDetailsTask(app, plugin, validateListener);
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		if (listener != null) {
+			listener.loginValidationFinished(osmBugResult.warning);
+		}
 	}
 
 	public interface ValidateOsmLoginListener {

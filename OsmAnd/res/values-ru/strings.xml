@@ -4532,4 +4532,11 @@
     <string name="all_groups">Все группы</string>
     <string name="exit_import_descr">Выйти без сохранения изменений\?</string>
     <string name="import_tracks">Импорт треков</string>
+    <string name="google_play_services">Google Play Services</string>
+    <string name="location_source">Источник местоположения</string>
+    <string name="select_suggested_points">Выберите предлагаемые точки</string>
+    <string name="location_source_descr">По умолчанию OsmAnd, установленный из Google Play, использует %1$s для определения местоположения.
+\n
+\nЕсли вы получаете неточную информацию о местоположении или используете устройство без %2$s, попробуйте переключиться на «%3$s»</string>
+    <string name="android_api">Android API</string>
 </resources>

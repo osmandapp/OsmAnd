@@ -1,5 +1,24 @@
 package net.osmand.aidl;
 
+import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_LAYER;
+import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_WIDGET;
+import static net.osmand.aidl.ConnectedApp.AIDL_OBJECT_ID;
+import static net.osmand.aidl.ConnectedApp.AIDL_PACKAGE_NAME;
+import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_LAYER;
+import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_WIDGET;
+import static net.osmand.aidlapi.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_IO_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_MAX_LOCK_TIME_MS;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PARAMS_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
+import static net.osmand.plus.myplaces.FavouritesDbHelper.FILE_TO_SAVE;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -70,11 +89,6 @@ import net.osmand.plus.myplaces.TrackBitmapDrawer.TracksDrawParams;
 import net.osmand.plus.plugins.CustomOsmandPlugin;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
-import net.osmand.plus.myplaces.TrackBitmapDrawer;
-import net.osmand.plus.plugins.CustomOsmandPlugin;
-import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.quickaction.QuickAction;
@@ -88,6 +102,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
@@ -131,25 +146,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
-
-import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_LAYER;
-import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_WIDGET;
-import static net.osmand.aidl.ConnectedApp.AIDL_OBJECT_ID;
-import static net.osmand.aidl.ConnectedApp.AIDL_PACKAGE_NAME;
-import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_LAYER;
-import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_WIDGET;
-import static net.osmand.aidlapi.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_IO_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_MAX_LOCK_TIME_MS;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PARAMS_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
-import static net.osmand.plus.myplaces.FavouritesDbHelper.FILE_TO_SAVE;
-import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
-import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
 
 public class OsmandAidlApi {
 
@@ -830,14 +826,17 @@ public class OsmandAidlApi {
 		BroadcastReceiver showSqliteDbFileReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
-				OsmandRasterMapsPlugin plugin = OsmandPlugin.getPlugin(OsmandRasterMapsPlugin.class);
+				OsmandSettings settings = app.getSettings();
 				String fileName = intent.getStringExtra(AIDL_FILE_NAME);
-				if (plugin != null && !Algorithms.isEmpty(fileName)) {
-					plugin.MAP_OVERLAY.set(fileName);
-					plugin.MAP_OVERLAY_PREVIOUS.set(fileName);
+				if (!Algorithms.isEmpty(fileName)) {
+					settings.MAP_OVERLAY.set(fileName);
+					settings.MAP_OVERLAY_PREVIOUS.set(fileName);
 					MapActivity mapActivity = mapActivityRef.get();
-					if (mapActivity != null && plugin.isActive()) {
-						plugin.updateMapLayers(mapActivity, mapActivity, plugin.MAP_OVERLAY);
+					if (mapActivity != null) {
+						OsmandRasterMapsPlugin plugin = OsmandPlugin.getActivePlugin(OsmandRasterMapsPlugin.class);
+						if (plugin != null) {
+							plugin.updateMapLayers(mapActivity, mapActivity, settings.MAP_OVERLAY);
+						}
 					}
 				}
 			}
@@ -850,14 +849,17 @@ public class OsmandAidlApi {
 		BroadcastReceiver hideSqliteDbFileReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
-				OsmandRasterMapsPlugin plugin = OsmandPlugin.getPlugin(OsmandRasterMapsPlugin.class);
+				OsmandSettings settings = app.getSettings();
 				String fileName = intent.getStringExtra(AIDL_FILE_NAME);
-				if (plugin != null && !Algorithms.isEmpty(fileName) && fileName.equals(plugin.MAP_OVERLAY.get())) {
-					plugin.MAP_OVERLAY.set(null);
-					plugin.MAP_OVERLAY_PREVIOUS.set(null);
+				if (!Algorithms.isEmpty(fileName) && fileName.equals(settings.MAP_OVERLAY.get())) {
+					settings.MAP_OVERLAY.set(null);
+					settings.MAP_OVERLAY_PREVIOUS.set(null);
 					MapActivity mapActivity = mapActivityRef.get();
-					if (mapActivity != null && plugin.isActive()) {
-						plugin.updateMapLayers(mapActivity, mapActivity, plugin.MAP_OVERLAY);
+					if (mapActivity != null) {
+						OsmandRasterMapsPlugin plugin = OsmandPlugin.getActivePlugin(OsmandRasterMapsPlugin.class);
+						if (plugin != null) {
+							plugin.updateMapLayers(mapActivity, mapActivity, settings.MAP_OVERLAY);
+						}
 					}
 				}
 			}
@@ -1555,10 +1557,9 @@ public class OsmandAidlApi {
 	private boolean getSqliteDbFiles(List<ASqliteDbFile> fileNames, boolean activeOnly) {
 		File tilesPath = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
 		if (tilesPath.canRead()) {
-			OsmandRasterMapsPlugin plugin = OsmandPlugin.getPlugin(OsmandRasterMapsPlugin.class);
 			File[] files = tilesPath.listFiles();
-			if (plugin != null && files != null) {
-				String activeFile = plugin.MAP_OVERLAY.get();
+			if (files != null) {
+				String activeFile = app.getSettings().MAP_OVERLAY.get();
 				for (File tileFile : files) {
 					String fileName = tileFile.getName();
 					String fileNameLC = fileName.toLowerCase();
@@ -1577,10 +1578,9 @@ public class OsmandAidlApi {
 	private boolean getSqliteDbFilesV2(List<net.osmand.aidlapi.tiles.ASqliteDbFile> fileNames, boolean activeOnly) {
 		File tilesPath = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
 		if (tilesPath.canRead()) {
-			OsmandRasterMapsPlugin plugin = OsmandPlugin.getPlugin(OsmandRasterMapsPlugin.class);
 			File[] files = tilesPath.listFiles();
-			if (plugin != null && files != null) {
-				String activeFile = plugin.MAP_OVERLAY.get();
+			if (files != null) {
+				String activeFile = app.getSettings().MAP_OVERLAY.get();
 				for (File tileFile : files) {
 					String fileName = tileFile.getName();
 					String fileNameLC = fileName.toLowerCase();
@@ -1613,13 +1613,14 @@ public class OsmandAidlApi {
 	}
 
 	boolean showSqliteDbFile(String fileName) {
-		OsmandRasterMapsPlugin plugin = OsmandPlugin.getPlugin(OsmandRasterMapsPlugin.class);
-		if (plugin != null && !Algorithms.isEmpty(fileName)) {
+		if (!Algorithms.isEmpty(fileName)) {
 			File tileFile = new File(app.getAppPath(IndexConstants.TILES_INDEX_DIR), fileName);
 			String fileNameLC = fileName.toLowerCase();
 			if (tileFile.isFile() && !fileNameLC.startsWith("hillshade") && fileNameLC.endsWith(SQLiteTileSource.EXT)) {
-				plugin.MAP_OVERLAY.set(fileName);
-				plugin.MAP_OVERLAY_PREVIOUS.set(fileName);
+				OsmandSettings settings = app.getSettings();
+				settings.MAP_OVERLAY.set(fileName);
+				settings.MAP_OVERLAY_PREVIOUS.set(fileName);
+
 				Intent intent = new Intent();
 				intent.setAction(AIDL_SHOW_SQLITEDB_FILE);
 				intent.putExtra(AIDL_FILE_NAME, fileName);
@@ -1631,11 +1632,12 @@ public class OsmandAidlApi {
 	}
 
 	boolean hideSqliteDbFile(String fileName) {
-		OsmandRasterMapsPlugin plugin = OsmandPlugin.getPlugin(OsmandRasterMapsPlugin.class);
-		if (plugin != null && !Algorithms.isEmpty(fileName)) {
-			if (fileName.equals(plugin.MAP_OVERLAY.get())) {
-				plugin.MAP_OVERLAY.set(null);
-				plugin.MAP_OVERLAY_PREVIOUS.set(null);
+		if (!Algorithms.isEmpty(fileName)) {
+			if (fileName.equals(app.getSettings().MAP_OVERLAY.get())) {
+				OsmandSettings settings = app.getSettings();
+				settings.MAP_OVERLAY.set(null);
+				settings.MAP_OVERLAY_PREVIOUS.set(null);
+
 				Intent intent = new Intent();
 				intent.setAction(AIDL_HIDE_SQLITEDB_FILE);
 				intent.putExtra(AIDL_FILE_NAME, fileName);

@@ -19,6 +19,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.ResultMatcher;
+import net.osmand.StateChangedListener;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.ContextMenuAdapter;
@@ -26,22 +27,23 @@ import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
-import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.views.layers.MapVectorLayer;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.DistanceRulerControlLayer;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer;
@@ -54,7 +56,7 @@ import net.osmand.plus.views.layers.MapMarkersLayer;
 import net.osmand.plus.views.layers.MapQuickActionLayer;
 import net.osmand.plus.views.layers.MapTextLayer;
 import net.osmand.plus.views.layers.MapTileLayer;
-import net.osmand.plus.views.layers.MapVectorLayer;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.views.layers.PointLocationLayer;
 import net.osmand.plus.views.layers.PointNavigationLayer;
@@ -62,7 +64,6 @@ import net.osmand.plus.views.layers.PreviewRouteLineLayer;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer;
 import net.osmand.plus.views.layers.RouteLayer;
 import net.osmand.plus.views.layers.TransportStopsLayer;
-import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 
 import java.util.ArrayList;
@@ -100,6 +101,8 @@ public class MapLayers {
 	private DownloadedRegionsLayer downloadedRegionsLayer;
 	private MapWidgetRegistry mapWidgetRegistry;
 	private MeasurementToolLayer measurementToolLayer;
+
+	private StateChangedListener<Integer> transparencyListener;
 
 	public MapLayers(@NonNull Context ctx) {
 		this.ctx = ctx;
@@ -191,6 +194,13 @@ public class MapLayers {
 		mapView.addLayer(mapQuickActionLayer, 12);
 		contextMenuLayer.setMapQuickActionLayer(mapQuickActionLayer);
 
+		transparencyListener = change -> app.runInUIThread(() -> {
+			mapTileLayer.setAlpha(change);
+			mapVectorLayer.setAlpha(change);
+			mapView.refreshMap();
+		});
+		app.getSettings().MAP_TRANSPARENCY.addListener(transparencyListener);
+
 		createAdditionalLayers();
 	}
 
@@ -231,15 +241,13 @@ public class MapLayers {
 
 	public void updateMapSource(@NonNull OsmandMapTileView mapView, CommonPreference<String> settingsToWarnAboutMap) {
 		OsmandSettings settings = getApplication().getSettings();
-		OsmandRasterMapsPlugin plugin = OsmandPlugin.getPlugin(OsmandRasterMapsPlugin.class);
-		if (plugin == null) return;
 
 		// update transparency
-		int mapTransparency = plugin.MAP_UNDERLAY.get() == null ? 255 : plugin.MAP_TRANSPARENCY.get();
+		int mapTransparency = settings.MAP_UNDERLAY.get() == null ? 255 : settings.MAP_TRANSPARENCY.get();
 		mapTileLayer.setAlpha(mapTransparency);
 		mapVectorLayer.setAlpha(mapTransparency);
 
-		ITileSource newSource = settings.getMapTileSource(plugin.MAP_TILE_SOURCES == settingsToWarnAboutMap);
+		ITileSource newSource = settings.getMapTileSource(settings.MAP_TILE_SOURCES == settingsToWarnAboutMap);
 		ITileSource oldMap = mapTileLayer.getMap();
 		if (newSource != oldMap) {
 			if (oldMap instanceof SQLiteTileSource) {

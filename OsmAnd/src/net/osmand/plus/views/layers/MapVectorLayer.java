@@ -1,14 +1,5 @@
 package net.osmand.plus.views.layers;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PointF;
-import android.graphics.RectF;
-
-import androidx.annotation.NonNull;
-
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapLayerConfiguration;
@@ -18,10 +9,19 @@ import net.osmand.data.QuadPointDouble;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.views.layers.base.BaseMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
-import net.osmand.plus.views.layers.base.BaseMapLayer;
 import net.osmand.util.MapUtils;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PointF;
+import android.graphics.RectF;
+
+import androidx.annotation.NonNull;
 
 public class MapVectorLayer extends BaseMapLayer {
 	private OsmandMapTileView view;
@@ -115,7 +115,6 @@ public class MapVectorLayer extends BaseMapLayer {
 		if (view == null) {
 			return;
 		}
-
 		boolean visible = isVisible();
 		boolean visibleChanged = cachedVisible != visible;
 		cachedVisible = visible;

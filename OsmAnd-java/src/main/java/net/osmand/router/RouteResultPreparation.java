@@ -781,7 +781,7 @@ public class RouteResultPreparation {
 	}
 
 
-	protected void addTurnInfoDescriptions(List<RouteSegmentResult> result) {
+	public void addTurnInfoDescriptions(List<RouteSegmentResult> result) {
 		int prevSegment = -1;
 		float dist = 0;
 		for (int i = 0; i <= result.size(); i++) {
@@ -1535,11 +1535,17 @@ public class RouteResultPreparation {
 			boolean smallStraightVariation = mpi < TURN_DEGREE_MIN;
 			boolean smallTargetVariation = Math.abs(ex) < TURN_DEGREE_MIN;
 			boolean attachedOnTheRight = ex >= 0;
-			if (attachedOnTheRight) {
-				rs.roadsOnRight++;
-			} else {
-				rs.roadsOnLeft++;
+			boolean verySharpTurn = Math.abs(ex) > 150;
+			boolean prevSegmHasTU = hasTU(turnLanesPrevSegm, attachedOnTheRight);
+
+			if (!verySharpTurn && !prevSegmHasTU) {
+				if (attachedOnTheRight) {
+					rs.roadsOnRight++;
+				} else {
+					rs.roadsOnLeft++;
+				}
 			}
+
 			if (turnLanesPrevSegm != null || rsSpeakPriority != MAX_SPEAK_PRIORITY || speakPriority == MAX_SPEAK_PRIORITY) {
 				if (smallTargetVariation || smallStraightVariation) {
 					if (attachedOnTheRight) {
@@ -1566,6 +1572,31 @@ public class RouteResultPreparation {
 			}
 		}
 		return rs;
+	}
+	
+	private boolean hasTU(String turnLanesPrevSegm, boolean attachedOnTheRight) {
+		if (turnLanesPrevSegm != null) {
+			int[] turns = calculateRawTurnLanes(turnLanesPrevSegm, TurnType.C);
+			int lane = attachedOnTheRight ? turns[turns.length - 1] : turns[0];
+			List<Integer> turnList = new ArrayList<>();
+			turnList.add(TurnType.getPrimaryTurn(lane));
+			turnList.add(TurnType.getSecondaryTurn(lane));
+			turnList.add(TurnType.getTertiaryTurn(lane));
+			if (attachedOnTheRight) {
+				Collections.reverse(turnList);
+			}
+			return foundTUturn(turnList);
+		}
+		return false;
+	}
+	
+	private boolean foundTUturn(List<Integer> turnList) {
+		for (int t : turnList) {
+			if (t != 0) {
+				return t == TurnType.TU;
+			}
+		}
+		return false;
 	}
 
 	protected TurnType createSimpleKeepLeftRightTurn(boolean leftSide, RouteSegmentResult prevSegm,

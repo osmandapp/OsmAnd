@@ -45,8 +45,6 @@ import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
 
-import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.ValueHolder;
@@ -74,6 +72,7 @@ import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryFiltersFragment;
 import net.osmand.plus.plugins.mapillary.MapillaryFirstDialogFragment;
+import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.osmedit.menu.OsmNotesMenu;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.plugins.srtm.ContourLinesMenu;
