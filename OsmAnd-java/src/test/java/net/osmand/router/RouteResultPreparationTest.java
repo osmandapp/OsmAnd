@@ -82,7 +82,8 @@ public class RouteResultPreparationTest {
     @Test
     public void testLanes() throws Exception {
         NativeLibrary nativeLibrary = null;
-        if (isNative()) {
+        boolean useNative = isNative() && getNativeLibPath() != null;
+        if (useNative) {
             boolean old = NativeLibrary.loadOldLib(getNativeLibPath());
             nativeLibrary = new NativeLibrary();
             if (!old) {
@@ -96,7 +97,7 @@ public class RouteResultPreparationTest {
         RandomAccessFile raf = new RandomAccessFile(fl, "r");
         fe = new RoutePlannerFrontEnd();
         RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
-        if (isNative()) {
+        if (useNative) {
             Objects.requireNonNull(nativeLibrary).initMapFile(fl.getAbsolutePath(), true);
         }
         if (params == null) {
@@ -110,7 +111,7 @@ public class RouteResultPreparationTest {
         RoutingConfiguration config = builder.build("car", memoryLimit, params);
         BinaryMapIndexReader[] binaryMapIndexReaders = {new BinaryMapIndexReader(raf, fl)};
         
-        if (isNative()) {
+        if (useNative) {
             ctx = fe.buildRoutingContext(config, nativeLibrary, binaryMapIndexReaders,
                     RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
         } else {
