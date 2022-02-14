@@ -51,7 +51,7 @@ public class RouteTestingTest {
 		TestEntry[] testEntries = gson.fromJson(reader, TestEntry[].class);
 		ArrayList<Object[]> arrayList = new ArrayList<>();
 		for (TestEntry te : testEntries) {
-			if (te.isIgnore() || te.isIgnoreNative()) {
+			if (te.isIgnore()) {
 				continue;
 			}
 			arrayList.add(new Object[]{te.getTestName(), te});
@@ -64,7 +64,7 @@ public class RouteTestingTest {
 	@Test(timeout = TIMEOUT)
 	public void testRouting() throws Exception {
 		NativeLibrary nativeLibrary = null;
-		boolean useNative = isNative() && getNativeLibPath() != null;
+		boolean useNative = isNative() && getNativeLibPath() != null && !te.isIgnoreNative();
 		if (useNative) {
 			boolean old = NativeLibrary.loadOldLib(getNativeLibPath());
 			nativeLibrary = new NativeLibrary();
