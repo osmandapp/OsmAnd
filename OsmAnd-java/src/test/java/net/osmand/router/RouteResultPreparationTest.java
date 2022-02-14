@@ -34,30 +34,25 @@ import static net.osmand.util.RouterUtilTest.*;
 @RunWith(Parameterized.class)
 public class RouteResultPreparationTest {
     
+    private final TestEntry te;
     private static RoutePlannerFrontEnd fe;
     private static RoutingContext ctx;
-
-    private final LatLon startPoint;
-    private final LatLon endPoint;
-    private final Map<String, String> expectedResults;
-    private Map<String, String> params;
+    
 
     protected Log log = PlatformUtil.getLog(RouteResultPreparationTest.class);
 
-    public RouteResultPreparationTest(LatLon startPoint, LatLon endPoint, Map<String, String> expectedResults, Map<String, String> params) {
-        this.startPoint = startPoint;
-        this.endPoint = endPoint;
-        this.expectedResults = expectedResults;
-        this.params = params;
-    }
-    @BeforeClass
-    public static void setUp() throws Exception {
-        RouteResultPreparation.PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
-
+    public RouteResultPreparationTest(String name, TestEntry te) {
+        this.te = te;
     }
     
     boolean isNative() {
         return false;
+    }
+    
+    @BeforeClass
+    public static void setUp() throws Exception {
+        RouteResultPreparation.PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
+
     }
 
     @Parameterized.Parameters(name = "{index}: {0}")
@@ -68,11 +63,10 @@ public class RouteResultPreparationTest {
         TestEntry[] testEntries = gson.fromJson(reader, TestEntry[].class);
         ArrayList<Object[]> twoDArray = new ArrayList<>();
         for (TestEntry testEntry : testEntries) {
-            if (!testEntry.isIgnore() || testEntry.isIgnoreNative()) {
-                Object[] arr = new Object[]{testEntry.getStartPoint(),
-                        testEntry.getEndPoint(), testEntry.getExpectedResults(), testEntry.getParams()};
-                twoDArray.add(arr);
+            if (testEntry.isIgnore() || testEntry.isIgnoreNative()) {
+                continue;
             }
+            twoDArray.add(new Object[]{testEntry.getTestName(), testEntry});
         }
         reader.close();
         return twoDArray;
@@ -100,6 +94,7 @@ public class RouteResultPreparationTest {
         if (useNative) {
             Objects.requireNonNull(nativeLibrary).initMapFile(fl.getAbsolutePath(), true);
         }
+        Map<String, String> params = te.getParams();
         if (params == null) {
             params = new HashMap<>();
         }
@@ -120,7 +115,7 @@ public class RouteResultPreparationTest {
         }
         ctx.leftSideNavigation = false;
         
-        List<RouteSegmentResult> routeSegments = fe.searchRoute(ctx, startPoint, endPoint, null);
+        List<RouteSegmentResult> routeSegments = fe.searchRoute(ctx, te.getStartPoint(), te.getEndPoint(), null);
         Set<Long> reachedSegments = new TreeSet<Long>();
         Assert.assertNotNull(routeSegments);
         int prevSegment = -1;
@@ -136,7 +131,7 @@ public class RouteResultPreparationTest {
                     long segmentId = segment.getObject().getId() >> (RouteResultPreparation.SHIFT_ID);
                     String expectedResult = null;
                     int startPoint = -1;
-                    for (Entry<String, String> er : expectedResults.entrySet()) {
+                    for (Entry<String, String> er : te.getExpectedResults().entrySet()) {
                         String roadInfo = er.getKey();
                         long id = getRoadId(roadInfo);
                         if (id == segmentId) {
@@ -165,7 +160,7 @@ public class RouteResultPreparationTest {
                 reachedSegments.add(routeSegments.get(i).getObject().getId() >> (RouteResultPreparation.SHIFT_ID ));
             }
         }
-        for (Long expSegId : getExpectedIdSet(expectedResults)) {
+        for (Long expSegId : getExpectedIdSet(te.getExpectedResults())) {
             Assert.assertTrue("Expected segment " + (expSegId) +
                     " weren't reached in route segments " + reachedSegments, reachedSegments.contains(expSegId));
         }

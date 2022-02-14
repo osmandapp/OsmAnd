@@ -1,13 +1,9 @@
 package net.osmand.router;
 
-import net.osmand.data.LatLon;
-
-import java.util.Map;
-
 public class RouteResultPreparationNativeTest extends RouteResultPreparationTest {
     
-    public RouteResultPreparationNativeTest(LatLon startPoint, LatLon endPoint, Map<String, String> expectedResults, Map<String, String> params) {
-        super(startPoint, endPoint, expectedResults, params);
+    public RouteResultPreparationNativeTest(String name, TestEntry te) {
+        super(name, te);
     }
     
     @Override
