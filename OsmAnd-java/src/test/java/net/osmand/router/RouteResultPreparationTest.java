@@ -25,7 +25,6 @@ import java.io.RandomAccessFile;
 import java.io.Reader;
 import java.util.*;
 
-import static net.osmand.router.NativeLibraryTest.nativeLibPath;
 import static net.osmand.util.RouterUtilTest.*;
 
 /**
@@ -84,7 +83,7 @@ public class RouteResultPreparationTest {
     public void testLanes() throws Exception {
         NativeLibrary nativeLibrary = null;
         if (isNative()) {
-            boolean old = NativeLibrary.loadOldLib(nativeLibPath);
+            boolean old = NativeLibrary.loadOldLib(getNativeLibPath());
             nativeLibrary = new NativeLibrary();
             if (!old) {
                 throw new UnsupportedOperationException("Not supported");

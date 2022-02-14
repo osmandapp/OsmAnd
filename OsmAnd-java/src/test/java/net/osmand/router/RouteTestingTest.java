@@ -22,7 +22,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import net.osmand.NativeLibrary;
 
-import static net.osmand.router.NativeLibraryTest.nativeLibPath;
+import static net.osmand.util.RouterUtilTest.getNativeLibPath;
 
 @RunWith(Parameterized.class)
 public class RouteTestingTest {
@@ -65,7 +65,7 @@ public class RouteTestingTest {
 	public void testRouting() throws Exception {
 		NativeLibrary nativeLibrary = null;
 		if (isNative()) {
-			boolean old = NativeLibrary.loadOldLib(nativeLibPath);
+			boolean old = NativeLibrary.loadOldLib(getNativeLibPath());
 			nativeLibrary = new NativeLibrary();
 			if (!old) {
 				throw new UnsupportedOperationException("Not supported");
