@@ -5,7 +5,6 @@ import static android.graphics.Paint.FILTER_BITMAP_FLAG;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
@@ -13,7 +12,6 @@ import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.RectF;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 
@@ -35,8 +33,6 @@ import net.osmand.core.jni.SWIGTYPE_p_sk_spT_SkImage_const_t;
 import net.osmand.core.jni.SWIGTYPE_p_void;
 import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.Utilities;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -106,6 +102,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		MarkerStateOutdatedLocation
 	}
 	private State currentMarkerState = State.MarkerStateOutdatedLocation;
+
 	private void setMarkerState(State markerState) {
 		if (currentMarkerState == markerState) {
 			return;
@@ -119,33 +116,6 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		ByteBuffer byteBuffer = ByteBuffer.allocate(size);
 		bitmap.copyPixelsToBuffer(byteBuffer);
 		return byteBuffer.array();
-	}
-
-	private Bitmap setTint2Bmp(@Nullable Bitmap bmp, int tintColor) {
-		if(bmp == null) {
-			return null;
-		}
-		// Source image size
-		int width = bmp.getWidth();
-		int height = bmp.getHeight();
-		@ColorInt int[] pixels = new int[width * height];
-		//get pixels
-//		bmp.getPixels(pixels, 0, width, 0, 0, width, height);
-//		float tintR = (tintColor >> 16 & 0xff)/255.0f;
-//		float tintG = (tintColor >> 8 & 0xff)/255.0f;
-//		float tintB = (tintColor & 0xff)/255.0f;
-//		for(int x = 0; x < pixels.length; ++x) {
-//			int pixel = pixels[x];
-//			pixel = (int)((pixel & 0xff) * tintB);
-//			pixel |= (int)((pixel >> 8 & 0xff) * tintG);
-//			pixel |= (int)((pixel >> 16 & 0xff) * tintR);
-//			pixels[x] = pixel;
-//		}
-		// create result bitmap output
-		Bitmap result = Bitmap.createBitmap(width, height, bmp.getConfig());
-		result.setPixels(pixels, 0, width, 0, 0, width, height);
-
-		return result;
 	}
 
 	private MapMarker recreateMarker(MapMarker oldMarker, LayerDrawable icon, int id, int baseColor) {
@@ -179,7 +149,6 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		myLocMarkerBuilder.setBaseOrder(-206000);
 		myLocMarkerBuilder.setIsHidden(true);
 
-		//Bitmap myLocationBitmap = getScaledBitmapWithTint(iconId, 1.0f, baseColor);
 		Bitmap myLocationBitmap = AndroidUtils.createScaledBitmap(icon, icon.getIntrinsicWidth(), icon.getIntrinsicHeight());
 		if (myLocationBitmap != null) {
 			SWIGTYPE_p_sk_spT_SkImage_const_t swigImg = SwigUtilities.createSkImageARGB888With(
@@ -542,10 +511,6 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			if (locationIcon != null) {
 				DrawableCompat.setTint(DrawableCompat.wrap(locationIcon.getDrawable(1)), color);
 			}
-//			outdatedLocationIcon = (LayerDrawable) AppCompatResources.getDrawable(ctx, locationIconId);
-//			if (outdatedLocationIcon != null) {
-//				DrawableCompat.setTint(DrawableCompat.wrap(outdatedLocationIcon.getDrawable(1)), OUTDATED_COLOR);
-//			}
 			area.setColor(ColorUtilities.getColorWithAlpha(color, 0.16f));
 			aroundArea.setColor(color);
 
