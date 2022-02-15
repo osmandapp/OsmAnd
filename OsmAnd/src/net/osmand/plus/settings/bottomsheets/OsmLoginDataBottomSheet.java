@@ -16,12 +16,14 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.asynctasks.ValidateOsmLoginDetailsTask;
 import net.osmand.plus.plugins.osmedit.asynctasks.ValidateOsmLoginDetailsTask.ValidateOsmLoginListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.utils.UiUtilities;
 
 public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 
@@ -33,10 +35,13 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 	private EditText userNameEditText;
 	private EditText passwordEditText;
 
+	private OsmEditingPlugin plugin;
+
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		Context context = getContext();
-		if (context == null) {
+		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		if (plugin == null || context == null) {
 			return;
 		}
 		OsmandApplication app = requiredMyApplication();
@@ -48,8 +53,8 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 		userNameEditText = view.findViewById(R.id.name_edit_text);
 		passwordEditText = view.findViewById(R.id.password_edit_text);
 
-		String name = app.getSettings().OSM_USER_NAME_OR_EMAIL.get();
-		String password = app.getSettings().OSM_USER_PASSWORD.get();
+		String name = plugin.OSM_USER_NAME_OR_EMAIL.get();
+		String password = plugin.OSM_USER_PASSWORD.get();
 
 		if (savedInstanceState != null) {
 			name = savedInstanceState.getString(USER_NAME_KEY, null);
@@ -94,13 +99,13 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 	@Override
 	protected void onRightBottomButtonClick() {
 		OsmandApplication app = requiredMyApplication();
-
-		app.getSettings().OSM_USER_NAME_OR_EMAIL.set(userNameEditText.getText().toString());
-		app.getSettings().OSM_USER_PASSWORD.set(passwordEditText.getText().toString());
+		plugin.OSM_USER_NAME_OR_EMAIL.set(userNameEditText.getText().toString());
+		plugin.OSM_USER_PASSWORD.set(passwordEditText.getText().toString());
 
 		Fragment targetFragment = getTargetFragment();
 		if (targetFragment instanceof ValidateOsmLoginListener) {
-			ValidateOsmLoginDetailsTask validateTask = new ValidateOsmLoginDetailsTask(app, (ValidateOsmLoginListener) targetFragment);
+			ValidateOsmLoginListener listener = (ValidateOsmLoginListener) getTargetFragment();
+			ValidateOsmLoginDetailsTask validateTask = new ValidateOsmLoginDetailsTask(app, listener);
 			validateTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 
@@ -108,7 +113,7 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String key, Fragment target,
-									   boolean usedOnMap, @Nullable ApplicationMode appMode) {
+	                                   boolean usedOnMap, @Nullable ApplicationMode appMode) {
 		try {
 			Bundle args = new Bundle();
 			args.putString(PREFERENCE_ID, key);

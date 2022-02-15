@@ -697,8 +697,14 @@ public class AmenityMenuBuilder extends MenuBuilder {
 						0, false, false, false, 1000, null, false, false, false, 0);
 
 				View amenitiesRow = createRowContainer(context, NEAREST_WIKI_KEY);
+
+				int insertIndex = position == 0 ? 0 : position + 1;
+
+				firstRow = insertIndex == 0 || isDividerAtPosition(viewGroup, insertIndex - 1);
 				buildAmenityRow(amenitiesRow, wikiInfo);
-				viewGroup.addView(amenitiesRow, position);
+				viewGroup.addView(amenitiesRow, insertIndex);
+
+				buildNearestRowDividerIfMissing(viewGroup, insertIndex);
 			}
 		});
 	}
@@ -724,16 +730,17 @@ public class AmenityMenuBuilder extends MenuBuilder {
 						null, true, getCollapsableView(context, true, amenities, NEAREST_POI_KEY),
 						0, false, false, false, 1000, null, false, false, false, 0);
 
-				View amenitiesRow = createRowContainer(context, NEAREST_POI_KEY);
-				buildAmenityRow(amenitiesRow, poiInfo);
-
 				View wikiRow = viewGroup.findViewWithTag(NEAREST_WIKI_KEY);
-				if (wikiRow != null) {
-					int index = viewGroup.indexOfChild(wikiRow);
-					viewGroup.addView(amenitiesRow, index + 1);
-				} else {
-					viewGroup.addView(amenitiesRow, position);
-				}
+				int insertIndex = wikiRow != null
+						? viewGroup.indexOfChild(wikiRow) + 1
+						: position == 0 ? 0 : position + 1;
+
+				View amenitiesRow = createRowContainer(context, NEAREST_POI_KEY);
+				firstRow = insertIndex == 0 || isDividerAtPosition(viewGroup, insertIndex - 1);
+				buildAmenityRow(amenitiesRow, poiInfo);
+				viewGroup.addView(amenitiesRow, insertIndex);
+
+				buildNearestRowDividerIfMissing(viewGroup, insertIndex);
 			}
 		});
 	}

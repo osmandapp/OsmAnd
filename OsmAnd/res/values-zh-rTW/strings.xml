@@ -4521,10 +4521,8 @@
     <string name="exit_import_descr">離開且不儲存任何變動？</string>
     <string name="exit_import">離開？</string>
     <string name="import_tracks_descr">%1$s，包含 %2$s 個分離軌跡。選擇要匯入的軌跡。</string>
-    <string name="google_play_services">Google Play 服務</string>
     <string name="location_source_descr">預設情況下，從 Google Play 安裝的 OsmAnd 會使用 %1$s 來確認位置。
 \n
 \n若您得到了不準確的位置資訊，或是使用沒有 %2$s 的裝置，請嘗試切換至「%3$s」</string>
     <string name="location_source">位置來源</string>
-    <string name="android_api">Android API</string>
 </resources>

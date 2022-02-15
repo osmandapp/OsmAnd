@@ -6,6 +6,8 @@
     <!-- string name="app_version_suffix"></string -->
 
     <!-- Not translatable -->
+    <string name="google_play_services">Google Play Services</string>
+    <string name="android_api">Android API</string>
     <string name="github">GitHub</string>
     <string name="telegram">Telegram</string>
     <string name="full_version_price">€24,99</string>

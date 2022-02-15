@@ -11,8 +11,6 @@
 	Thx - Hardy
 -->
 
-    <string name="android_api">Android API</string>
-    <string name="google_play_services">Google Play Services</string>
     <string name="location_source_descr">By default, OsmAnd installed from Google Play uses %1$s to determine location.\n\nIf you get inaccurate location information or using device without %2$s, try to switch to \"%3$s\"</string>
     <string name="location_source">Location source</string>
     <string name="select_suggested_points">Select suggested points</string>

@@ -4533,4 +4533,8 @@
     <string name="import_tracks">Importar trilhos</string>
     <string name="import_tracks_descr">%1$s contém %2$s trilhos separados. Escolha os trilhos a importar.</string>
     <string name="select_suggested_points">Selecionar pontos sugeridos</string>
+    <string name="location_source_descr">Por padrão, o OsmAnd instalado do Google Play usa %1$s para determinar a localização.
+\n
+\nSe obtiver informações de localização imprecisas ou usar um aparelho sem %2$s, tente mudar para \"%3$s\"</string>
+    <string name="location_source">Fonte de localização</string>
 </resources>

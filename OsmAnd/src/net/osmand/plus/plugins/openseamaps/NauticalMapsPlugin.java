@@ -1,10 +1,9 @@
 package net.osmand.plus.plugins.openseamaps;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_NAUTICAL;
-
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmandApplication;
@@ -20,6 +19,8 @@ import net.osmand.render.RenderingRuleProperty;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_NAUTICAL;
 
 
 public class NauticalMapsPlugin extends OsmandPlugin {
@@ -102,5 +103,11 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 				iterator.remove();
 			}
 		}
+	}
+
+	@Nullable
+	@Override
+	protected String getRenderPropertyPrefix() {
+		return DEPTH_CONTOURS;
 	}
 }

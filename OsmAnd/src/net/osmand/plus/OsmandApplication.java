@@ -238,9 +238,7 @@ public class OsmandApplication extends MultiDexApplication {
 		if (appInitializer.isAppVersionChanged()) {
 			// Reset mapillary tile sources
 			File tilesPath = getAppPath(IndexConstants.TILES_INDEX_DIR);
-			File mapillaryRasterTilesPath = new File(tilesPath, TileSourceManager.getMapillaryRasterSource().getName());
 			File mapillaryVectorTilesPath = new File(tilesPath, TileSourceManager.getMapillaryVectorSource().getName());
-			Algorithms.removeAllFiles(mapillaryRasterTilesPath);
 			Algorithms.removeAllFiles(mapillaryVectorTilesPath);
 			// Remove travel sqlite db files
 			removeSqliteDbTravelFiles();
