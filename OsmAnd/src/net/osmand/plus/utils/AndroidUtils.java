@@ -804,7 +804,11 @@ public class AndroidUtils {
 	}
 
 	public static Bitmap drawableToBitmap(Drawable drawable) {
-		if (drawable instanceof BitmapDrawable) {
+		return drawableToBitmap(drawable, false);
+	}
+
+	public static Bitmap drawableToBitmap(Drawable drawable, boolean noOptimization) {
+		if (drawable instanceof BitmapDrawable && !noOptimization) {
 			BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
 			if (bitmapDrawable.getBitmap() != null) {
 				return bitmapDrawable.getBitmap();
