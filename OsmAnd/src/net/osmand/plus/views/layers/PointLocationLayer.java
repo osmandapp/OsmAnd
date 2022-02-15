@@ -157,7 +157,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 
 		MapMarkerBuilder myLocMarkerBuilder = new MapMarkerBuilder();
 		myLocMarkerBuilder.setMarkerId(id);
-		myLocMarkerBuilder.setIsAccuracyCircleSupported(false);
+		myLocMarkerBuilder.setIsAccuracyCircleSupported(true);
 		myLocMarkerBuilder.setAccuracyCircleBaseColor(new FColorRGB((color >> 16 & 0xff)/255.0f,
 																	((color >> 8) & 0xff)/255.0f,
 																	((color) & 0xff)/255.0f));
@@ -213,7 +213,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		outdatedLocationMarker.setIsAccuracyCircleVisible(false);
 	}
 
-	private void updateMarkerState(boolean hasAccuracy) {
+	private void updateMarkerState() {
 		if (view == null) {
 			return;
 		}
@@ -224,7 +224,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			switch (currentMarkerState) {
 				case MarkerStateMove:
 					navigationMarker.setIsHidden(false);
-					navigationMarker.setIsAccuracyCircleVisible(hasAccuracy);
+					navigationMarker.setIsAccuracyCircleVisible(false);
 					myLocationMarker.setIsHidden(true);
 					myLocationMarker.setIsAccuracyCircleVisible(false);
 					outdatedLocationMarker.setIsHidden(true);
@@ -234,7 +234,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 					navigationMarker.setIsHidden(true);
 					navigationMarker.setIsAccuracyCircleVisible(false);
 					myLocationMarker.setIsHidden(false);
-					myLocationMarker.setIsAccuracyCircleVisible(hasAccuracy);
+					myLocationMarker.setIsAccuracyCircleVisible(false);
 					outdatedLocationMarker.setIsHidden(true);
 					outdatedLocationMarker.setIsAccuracyCircleVisible(false);
 					break;
@@ -244,7 +244,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 					myLocationMarker.setIsHidden(true);
 					myLocationMarker.setIsAccuracyCircleVisible(false);
 					outdatedLocationMarker.setIsHidden(false);
-					outdatedLocationMarker.setIsAccuracyCircleVisible(hasAccuracy);
+					outdatedLocationMarker.setIsAccuracyCircleVisible(false);
 					break;
 			}
 			mapGpuRenderer.resumeSymbolsUpdate();
@@ -280,6 +280,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 						new net.osmand.core.jni.LatLon(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()));
 				mapGpuRenderer.suspendSymbolsUpdate();
 				marker.setPosition(target31);
+				marker.setIsAccuracyCircleVisible(true);
 				marker.setAccuracyCircleRadius(lastKnownLocation.getAccuracy());
 				if (iconKey != null) {
 					marker.setOnMapSurfaceIconDirection(iconKey, heading);
@@ -312,7 +313,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);
 		if (mapActivity != null) {
-			initUI();
+			//initUI();
 			invalidateMarkers();
 		} else {
 			hideMarkers();
@@ -353,23 +354,25 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 				boolean isBearing = lastKnownLocation.hasBearing() && (lastKnownLocation.getBearing() != 0.0f)
 						&& (!lastKnownLocation.hasSpeed() || lastKnownLocation.getSpeed() > BEARING_SPEED_THRESHOLD);
 				float orientation = 0.0f;
-				if (!locationOutdated && isBearing) {
-					// ToDo navigation
-					currentMarkerState = State.MarkerStateMove;
-					orientation = lastKnownLocation.getBearing();
-				} else {
-					// ToDo location
-					currentMarkerState = State.MarkerStateStay;
-				}
-				Float heading = locationProvider.getHeading();
-				if (!locationOutdated && heading != null && mapViewTrackingUtilities.isShowViewAngle()) {
-					if (mapViewTrackingUtilities.isShowViewAngle()) {
+				if (!locationOutdated) {
+					if (isBearing) {
+						// ToDo navigation
+						currentMarkerState = State.MarkerStateMove;
+						orientation = lastKnownLocation.getBearing();
+					} else {
+						// ToDo location
+						currentMarkerState = State.MarkerStateStay;
+					}
+					Float heading = locationProvider.getHeading();
+					if (heading != null && mapViewTrackingUtilities.isShowViewAngle()) {
 						// ToDo heading
 						orientation = heading - 90.0f;
 					}
+				} else {
+					currentMarkerState = State.MarkerStateOutdatedLocation;
 				}
 
-				updateMarkerState(lastKnownLocation.hasAccuracy());
+				updateMarkerState();
 				updateMarkerLocation(lastKnownLocation, orientation);
 			}
 		} else {
