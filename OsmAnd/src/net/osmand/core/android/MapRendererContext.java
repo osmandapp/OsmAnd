@@ -64,15 +64,6 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 	
 	private float cachedReferenceTileSize;
 
-	public interface MapRendererContextListener {
-		void onMapSettingsUpdated();
-	}
-
-	private MapRendererContext.MapRendererContextListener mapRendererContextListener;
-	public void setMapRendererContextListener(@Nullable MapRendererContext.MapRendererContextListener aMapRendererContextListener) {
-		this.mapRendererContextListener = aMapRendererContextListener;
-	}
-
 	public MapRendererContext(OsmandApplication app, float density) {
 		this.app = app;
 		this.density = density;
@@ -110,10 +101,6 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 		}
 		if(mapPresentationEnvironment != null) {
 			updateMapPresentationEnvironment();
-		}
-
-		if (mapRendererContextListener != null) {
-			mapRendererContextListener.onMapSettingsUpdated();
 		}
 	}
 	
