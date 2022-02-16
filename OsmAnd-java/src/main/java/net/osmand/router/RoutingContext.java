@@ -72,6 +72,7 @@ public class RoutingContext {
 	
 	
 	public RouteCalculationProgress calculationProgress;
+	public RouteCalculationProgress calculationProgressFirstPhase;
 	public boolean leftSideNavigation;
 	public List<RouteSegmentResult> previouslyCalculatedRoute;
 	public PrecalculatedRouteDirection precalculatedRouteDirection;
