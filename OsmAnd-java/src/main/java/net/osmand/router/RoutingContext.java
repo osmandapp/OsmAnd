@@ -377,8 +377,12 @@ public class RoutingContext {
 			// NOTE: load headers same as we do in non-native (it is not native optimized)
 			try {
 				if (r.getValue().size() > 0) {
+//					long now = System.nanoTime();
 					// int rg = r.getValue().get(0).routeReg.regionsRead;
 					List<RouteSubregion> subregs = r.getKey().searchRouteIndexTree(request, r.getValue());
+//					if (calculationProgress != null) {
+//						calculationProgress.timeToLoadHeaders += (System.nanoTime() - now);
+//					}
 					for (RouteSubregion sr : subregs) {
 						int ind = searchSubregionTile(sr);
 						RoutingSubregionTile found;
@@ -393,6 +397,8 @@ public class RoutingContext {
 						}
 						collection.add(found);
 					}
+					
+					
 				}
 			} catch (IOException e) {
 				throw new RuntimeException("Loading data exception", e);
@@ -401,6 +407,7 @@ public class RoutingContext {
 		if (calculationProgress != null) {
 			calculationProgress.timeToLoadHeaders += (System.nanoTime() - now);
 		}
+	
 		return collection;
 	}
 

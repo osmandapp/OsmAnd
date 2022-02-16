@@ -85,6 +85,7 @@ public class RouteCalculationProgress {
 		tiles.put("loadedTilesDistinct", this.distinctLoadedTiles - firstPhase.distinctLoadedTiles);
 		tiles.put("loadedTilesPrevUnloaded", this.loadedPrevUnloadedTiles - firstPhase.loadedPrevUnloadedTiles);
 		tiles.put("loadedTilesMax", Math.max(this.maxLoadedTiles, this.distinctLoadedTiles));
+		tiles.put("unloadedTiles", this.unloadedTiles - firstPhase.unloadedTiles);
 		Map<String, Object> segms = new LinkedHashMap<String, Object>();
 		map.put("segments", segms);
 		segms.put("visited", this.visitedSegments - firstPhase.visitedSegments);
