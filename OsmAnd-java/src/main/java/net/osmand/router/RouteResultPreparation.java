@@ -533,7 +533,6 @@ public class RouteResultPreparation {
 		return false;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static void printResults(RoutingContext ctx, LatLon start, LatLon end, List<RouteSegmentResult> result) {
 		Map<String, Object> info =  new LinkedHashMap<String, Object>();
 		Map<String, Object> route =  new LinkedHashMap<String, Object>();

@@ -70,6 +70,7 @@ public class RouteCalculationProgress {
 		p.distinctLoadedTiles = cp.distinctLoadedTiles;
 		p.maxLoadedTiles = cp.maxLoadedTiles;
 		p.loadedPrevUnloadedTiles = cp.loadedPrevUnloadedTiles;
+		cp.maxLoadedTiles = 0;
 		return p;
 	}
 	
@@ -81,10 +82,9 @@ public class RouteCalculationProgress {
 		}
 		map.put("tiles", tiles);
 		tiles.put("loadedTiles", this.loadedTiles - firstPhase.loadedTiles);
-		// TODO implement minus first phase correctly
-		tiles.put("loadedTilesDistinct", this.distinctLoadedTiles);
-		tiles.put("loadedTilesPrevUnloaded", this.loadedPrevUnloadedTiles);
-		tiles.put("loadedTilesMax", this.maxLoadedTiles);
+		tiles.put("loadedTilesDistinct", this.distinctLoadedTiles - firstPhase.distinctLoadedTiles);
+		tiles.put("loadedTilesPrevUnloaded", this.loadedPrevUnloadedTiles - firstPhase.loadedPrevUnloadedTiles);
+		tiles.put("loadedTilesMax", Math.max(this.maxLoadedTiles, this.distinctLoadedTiles));
 		Map<String, Object> segms = new LinkedHashMap<String, Object>();
 		map.put("segments", segms);
 		segms.put("visited", this.visitedSegments - firstPhase.visitedSegments);
