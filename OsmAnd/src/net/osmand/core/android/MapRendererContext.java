@@ -2,7 +2,6 @@ package net.osmand.core.android;
 
 import android.util.Log;
 
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -61,7 +60,7 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 	private MapRendererView mapRendererView;
 	
 	private float cachedReferenceTileSize;
-
+	
 	public MapRendererContext(OsmandApplication app, float density) {
 		this.app = app;
 		this.density = density;
