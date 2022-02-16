@@ -558,15 +558,46 @@ public class RouteResultPreparation {
 			
 		}
 		route.put("native", ctx.nativeLib != null);
-		List<String> routeMessages = new ArrayList<String>();
+		
 		if (ctx.calculationProgress != null && ctx.calculationProgress.timeToCalculate > 0) {
 			info.putAll(ctx.calculationProgress.getInfo(ctx.calculationProgressFirstPhase));
 		}
 		
+		String alerts = String.format("Alerts during routing: %d fastRoads, %d slowSegmentsEearlier",
+				ctx.alertFasterRoadToVisitedSegments, ctx.alertSlowerSegmentedWasVisitedEarlier);
+		if (ctx.alertFasterRoadToVisitedSegments + ctx.alertSlowerSegmentedWasVisitedEarlier == 0) {
+			alerts = "No alerts";
+		}
+		println("ROUTE. " + alerts);
+		List<String> routeInfo = new ArrayList<String>();
+		StringBuilder extraInfo = buildRouteMessagesFromInfo(info, routeInfo);
+		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST && result != null) {
+			println(String.format("<test %s>",extraInfo.toString()));
+			printRouteInfoSegments(result);
+			println("</test>");
+			// duplicate base info
+			if (ctx.calculationProgressFirstPhase != null) {
+				println("<<<1st Phase>>>>");
+				List<String> baseRouteInfo = new ArrayList<String>();
+				buildRouteMessagesFromInfo(ctx.calculationProgressFirstPhase.getInfo(null), baseRouteInfo);
+				for (String msg : baseRouteInfo) {
+					println(msg);
+				}
+				println("<<<2nd Phase>>>>");
+			}
+		}
+		for (String msg : routeInfo) {
+			println(msg);
+		}
+//		calculateStatistics(result);
+	}
+
+	private static StringBuilder buildRouteMessagesFromInfo(Map<String, Object> info, List<String> routeMessages) {
 		StringBuilder extraInfo = new StringBuilder(); 
 		for (String key : info.keySet()) {
 			// // GeneralRouter.TIMER = 0;
 			if (info.get(key) instanceof Map) {
+				@SuppressWarnings("unchecked")
 				Map<String, Object> mp = (Map<String, Object>) info.get(key);
 				StringBuilder msg = new StringBuilder("Route <" + key + ">");
 				int i = 0;
@@ -580,27 +611,12 @@ public class RouteResultPreparation {
 					msg.append(mkey).append("=").append(valueString);
 					extraInfo.append(" ").append(key + "_" + mkey).append("=\"").append(valueString).append("\"");
 				}
-				routeMessages.add(msg.toString());
+				if (routeMessages != null) {
+					routeMessages.add(msg.toString());
+				}
 			}
 		}
-
-		String alerts = String.format("Alerts during routing: %d fastRoads, %d slowSegmentsEearlier",
-				ctx.alertFasterRoadToVisitedSegments, ctx.alertSlowerSegmentedWasVisitedEarlier);
-		if (ctx.alertFasterRoadToVisitedSegments + ctx.alertSlowerSegmentedWasVisitedEarlier == 0) {
-			alerts = "No alerts";
-		}
-		println("ROUTE. " + alerts);
-		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST && result != null) {
-			println(String.format("<test %s>",extraInfo.toString()));
-			printRouteInfoSegments(result);
-			println("</test>");
-		}
-		for (String msg : routeMessages) {
-			println(msg);
-		}
-		
-		
-//		calculateStatistics(result);
+		return extraInfo;
 	}
 
 	private static void printRouteInfoSegments(List<RouteSegmentResult> result) {
