@@ -25,6 +25,7 @@ import net.osmand.map.ParameterType;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
@@ -73,6 +74,14 @@ public class MapTileLayer extends BaseMapLayer {
 	@Override
 	public boolean drawInScreenPixels() {
 		return false;
+	}
+
+	@Override
+	public boolean isMapGestureAllowed(MapGestureType type) {
+		MapActivity mapActivity = getMapActivity();
+		boolean downloadingTiles = mapActivity != null && mapActivity.getDownloadTilesFragment() != null;
+		boolean rotatingOrTiltingMap = type == MapGestureType.TWO_POINTERS_ROTATION || type == MapGestureType.TWO_POINTERS_TILT;
+		return !(downloadingTiles && rotatingOrTiltingMap);
 	}
 
 	@Override

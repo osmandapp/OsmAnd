@@ -17,7 +17,9 @@ import com.google.android.material.slider.RangeSlider;
 import net.osmand.IndexConstants;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.map.IMapLocationListener;
 import net.osmand.map.ITileSource;
+import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -28,7 +30,6 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
-import net.osmand.plus.views.OsmandMap.OsmandMapListener;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.MapUtils;
@@ -40,11 +41,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-public class DownloadTilesFragment extends BaseOsmAndFragment implements OsmandMapListener {
+public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLocationListener {
 
 	public static final String TAG = DownloadTilesFragment.class.getSimpleName();
 
 	private static final Uri HELP_URI = Uri.parse("https://docs.osmand.net/en/main@latest/osmand/map/raster-maps#download--update-tiles");
+
+	private static final int UPDATE_CONTENT_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 7;
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -69,13 +72,21 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements OsmandM
 		LayoutInflater themedInflater = UiUtilities.getInflater(mapActivity, nightMode);
 		View view = themedInflater.inflate(R.layout.download_tiles_fragment, container, false);
 
+		mapView.addMapLocationListener(this);
+		mapView.rotateToAnimate(0);
+
 		setupToolbar(view);
-		updateContent(view);
+		view.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+				moveMapCenterToMapWindow(view);
+				updateContent(view);
+			}
+		});
+		setupDownloadButton(view);
 		showHideMapControls(false);
 		restrictMapMovableArea(view);
-
-		app.getOsmandMap().addListener(this);
-		mapView.rotateToAnimate(0);
 
 		return view;
 	}
@@ -97,6 +108,19 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements OsmandM
 		});
 	}
 
+	private void moveMapCenterToMapWindow(@NonNull View view) {
+		RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox();
+		double lat = tileBox.getCenterLatLon().getLatitude();
+		double lon = tileBox.getCenterLatLon().getLongitude();
+		View mapWindow = view.findViewById(R.id.map_window);
+		int[] xy = new int[2];
+		mapWindow.getLocationOnScreen(xy);
+		int marginTop = xy[1];
+
+		mapView.fitLocationToMap(lat, lon, tileBox.getZoom(), mapWindow.getWidth(), mapWindow.getHeight(),
+				marginTop, true);
+	}
+
 	private void updateContent(@NonNull View view) {
 		ITileSource tileSource = settings.getMapTileSource(false);
 		int currentZoom = mapView.getZoom();
@@ -107,14 +131,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements OsmandM
 		setupTilesPreview(view);
 		setupMinMaxZoom(view, minZoom, maxZoom);
 		setupSlider(view, tileSource);
-		view.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-				setupTilesDownloadInfo(view, tileSource, minZoom, maxZoom);
-			}
-		});
-		setupDownloadButton(view);
+		setupTilesDownloadInfo(view, tileSource, minZoom, maxZoom);
 	}
 
 	private void setupMapSourceSetting(@NonNull View view, @NonNull ITileSource tileSource) {
@@ -194,27 +211,6 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements OsmandM
 		estimatedDownloadSizeText.setText(formattedDownloadSize);
 	}
 
-	@NonNull
-	private QuadRect getLatLonRectOfMapWindow(@NonNull View view) {
-		View mapWindow = view.findViewById(R.id.map_window);
-
-		int[] xy = new int[2];
-		mapWindow.getLocationOnScreen(xy);
-
-		int left = xy[0];
-		int top = xy[1];
-		int right = left + mapWindow.getWidth();
-		int bottom = top + mapWindow.getHeight();
-
-		RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox();
-		double leftLon = tileBox.getLonFromPixel(left, top);
-		double topLat = tileBox.getLatFromPixel(left, top);
-		double rightLon = tileBox.getLonFromPixel(right, bottom);
-		double bottomLat = tileBox.getLatFromPixel(right, bottom);
-
-		return new QuadRect(leftLon, topLat, rightLon, bottomLat);
-	}
-
 	private int getTilesNumber(int minZoom, int maxZoom, @NonNull QuadRect latLonRect, boolean ellipticYTile) {
 		int tilesNumber = 0;
 		for (int zoom = minZoom; zoom <= maxZoom; zoom++) {
@@ -262,8 +258,13 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements OsmandM
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
+		mapView.removeMapLocationListener(this);
 		showHideMapControls(true);
-		app.getOsmandMap().removeListener(this);
+		returnMapCenterToInitialPosition();
+	}
+
+	private void returnMapCenterToInitialPosition() {
+		// todo
 	}
 
 	private void dismiss() {
@@ -276,6 +277,27 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements OsmandM
 		}
 	}
 
+	@NonNull
+	private QuadRect getLatLonRectOfMapWindow(@NonNull View view) {
+		View mapWindow = view.findViewById(R.id.map_window);
+
+		int[] xy = new int[2];
+		mapWindow.getLocationOnScreen(xy);
+
+		int left = xy[0];
+		int top = xy[1];
+		int right = left + mapWindow.getWidth();
+		int bottom = top + mapWindow.getHeight();
+
+		RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox();
+		double leftLon = tileBox.getLonFromPixel(left, top);
+		double topLat = tileBox.getLatFromPixel(left, top);
+		double rightLon = tileBox.getLonFromPixel(right, bottom);
+		double bottomLat = tileBox.getLatFromPixel(right, bottom);
+
+		return new QuadRect(leftLon, topLat, rightLon, bottomLat);
+	}
+
 	private void showHideMapControls(boolean show) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
@@ -284,16 +306,13 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements OsmandM
 	}
 
 	@Override
-	public void onChangeZoom(int stp) {
-		// todo
-	}
-
-	@Override
-	public void onSetMapElevation(float angle) {
-	}
-
-	@Override
-	public void onSetupOpenGLView(boolean init) {
+	public void locationChanged(double newLatitude, double newLongitude, Object source) {
+		app.runMessageInUIThreadAndCancelPrevious(UPDATE_CONTENT_MESSAGE, () -> {
+			View view = getView();
+			if (view != null) {
+				updateContent(view);
+			}
+		}, 100);
 	}
 
 	@Override
