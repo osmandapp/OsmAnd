@@ -58,12 +58,14 @@ import android.widget.Toast;
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.text.TextUtilsCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentManager;
@@ -78,6 +80,7 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.lang.reflect.Field;
+import java.nio.ByteBuffer;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -152,6 +155,36 @@ public class AndroidUtils {
 			bm.recycle();
 		}
 		return resizedBitmap;
+	}
+
+	public static byte[] getByteArrayFromBitmap(@NonNull Bitmap bitmap) {
+		int size = bitmap.getRowBytes() * bitmap.getHeight();
+		ByteBuffer byteBuffer = ByteBuffer.allocate(size);
+		bitmap.copyPixelsToBuffer(byteBuffer);
+		return byteBuffer.array();
+	}
+
+	public static Bitmap createScaledBitmapWithTint(final Context ctx, @DrawableRes int drawableId, float scale, int tint) {
+		Drawable drawableIcon = AppCompatResources.getDrawable(ctx, drawableId);
+		if (drawableIcon != null) {
+			DrawableCompat.setTint(DrawableCompat.wrap(drawableIcon), tint);
+		}
+		Bitmap bitmap = drawableToBitmap(drawableIcon, true);
+		if (bitmap != null && scale != 1f && scale > 0.0f) {
+			bitmap = scaleBitmap(bitmap,
+					(int) (bitmap.getWidth() * scale), (int) (bitmap.getHeight() * scale), false);
+		}
+
+		return bitmap;
+	}
+
+	public static Bitmap createScaledBitmap(Drawable drawable, float scale) {
+		int width = (int) (drawable.getIntrinsicWidth() * scale);
+		int height = (int) (drawable.getIntrinsicHeight() * scale);
+		width += width % 2 == 1 ? 1 : 0;
+		height += height % 2 == 1 ? 1 : 0;
+
+		return createScaledBitmap(drawable, width, height);
 	}
 
 	public static Bitmap createScaledBitmap(Drawable drawable, int width, int height) {

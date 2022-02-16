@@ -12,11 +12,9 @@ import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.RectF;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -24,7 +22,6 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.FColorRGB;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
@@ -46,13 +43,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
 import org.apache.commons.logging.Log;
 
-import java.nio.ByteBuffer;
 import java.util.List;
 
 public class PointLocationLayer extends OsmandMapLayer implements IContextMenuProvider {
@@ -96,28 +93,22 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	private MapMarker outdatedLocationMarker;
 	private SWIGTYPE_p_void onSurfaceIconKey = null;
 	private SWIGTYPE_p_void onSurfaceHeadingIconKey = null;
-	private boolean dirty = true;
+	private boolean markersNeedInvalidate = true;
 
-	private enum State {
-		MarkerStateStay,
-		MarkerStateMove,
-		MarkerStateOutdatedLocation
+	private enum MarkerState {
+		Stay,
+		Move,
+		OutdatedLocation
 	}
-	private State currentMarkerState = State.MarkerStateOutdatedLocation;
 
-	private void setMarkerState(State markerState) {
+	private MarkerState currentMarkerState = MarkerState.OutdatedLocation;
+
+	private void setMarkerState(MarkerState markerState) {
 		if (currentMarkerState == markerState) {
 			return;
 		}
 		currentMarkerState = markerState;
 		updateMarkerState();
-	}
-
-	private byte[] getBitmapAsByteArray(@NonNull Bitmap bitmap) {
-		int size = bitmap.getRowBytes() * bitmap.getHeight();
-		ByteBuffer byteBuffer = ByteBuffer.allocate(size);
-		bitmap.copyPixelsToBuffer(byteBuffer);
-		return byteBuffer.array();
 	}
 
 	private MapMarker recreateMarker(MapMarker oldMarker, LayerDrawable icon, int id, int baseColor) {
@@ -143,26 +134,23 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		MapMarkerBuilder myLocMarkerBuilder = new MapMarkerBuilder();
 		myLocMarkerBuilder.setMarkerId(id);
 		myLocMarkerBuilder.setIsAccuracyCircleSupported(true);
-		myLocMarkerBuilder.setAccuracyCircleBaseColor(new FColorRGB((baseColor >> 16 & 0xff)/255.0f,
-				((baseColor >> 8) & 0xff)/255.0f,
-				((baseColor) & 0xff)/255.0f));
+		myLocMarkerBuilder.setAccuracyCircleBaseColor(NativeUtilities.createFColorRGB(baseColor));
 		myLocMarkerBuilder.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical);
 		myLocMarkerBuilder.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal);
 		myLocMarkerBuilder.setIsHidden(true);
 
-		Bitmap markerBitmap = AndroidUtils.createScaledBitmap(icon, icon.getIntrinsicWidth(), icon.getIntrinsicHeight());
+		float scale = getTextScale();
+		Bitmap markerBitmap = AndroidUtils.createScaledBitmap(icon, scale);
 		if (markerBitmap != null) {
-			SWIGTYPE_p_sk_spT_SkImage_const_t swigImg = SwigUtilities.createSkImageARGB888With(
-					markerBitmap.getWidth(), markerBitmap.getHeight(), getBitmapAsByteArray(markerBitmap));
+			SWIGTYPE_p_sk_spT_SkImage_const_t swigImg = NativeUtilities.createSkImageFromBitmap(markerBitmap);
 			onSurfaceIconKey = SwigUtilities.getOnSurfaceIconKey(1);
 			myLocMarkerBuilder.addOnMapSurfaceIcon(onSurfaceIconKey, swigImg);
 		}
 
 		if (id != MARKER_ID_OUTDATED_LOCATION) {
-			Bitmap headingBitmap = getScaledBitmapWithTint(headingIconId, getTextScale(), baseColor);
+			Bitmap headingBitmap = AndroidUtils.createScaledBitmapWithTint(view.getContext(), headingIconId, scale, baseColor);
 			if (headingBitmap != null) {
-				SWIGTYPE_p_sk_spT_SkImage_const_t swigImg = SwigUtilities.createSkImageARGB888With(
-						headingBitmap.getWidth(), headingBitmap.getHeight(), getBitmapAsByteArray(headingBitmap));
+				SWIGTYPE_p_sk_spT_SkImage_const_t swigImg = NativeUtilities.createSkImageFromBitmap(headingBitmap);
 				onSurfaceHeadingIconKey = SwigUtilities.getOnSurfaceIconKey(2);
 				myLocMarkerBuilder.addOnMapSurfaceIcon(onSurfaceHeadingIconKey, swigImg);
 			}
@@ -202,7 +190,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		}
 
 		switch (currentMarkerState) {
-			case MarkerStateMove:
+			case Move:
 				navigationMarker.setIsHidden(false);
 				navigationMarker.setIsAccuracyCircleVisible(false);
 				myLocationMarker.setIsHidden(true);
@@ -210,7 +198,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 				outdatedLocationMarker.setIsHidden(true);
 				outdatedLocationMarker.setIsAccuracyCircleVisible(false);
 				break;
-			case MarkerStateStay:
+			case Stay:
 				navigationMarker.setIsHidden(true);
 				navigationMarker.setIsAccuracyCircleVisible(false);
 				myLocationMarker.setIsHidden(false);
@@ -218,7 +206,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 				outdatedLocationMarker.setIsHidden(true);
 				outdatedLocationMarker.setIsAccuracyCircleVisible(false);
 				break;
-			case MarkerStateOutdatedLocation:
+			case OutdatedLocation:
 				navigationMarker.setIsHidden(true);
 				navigationMarker.setIsAccuracyCircleVisible(false);
 				myLocationMarker.setIsHidden(true);
@@ -234,16 +222,16 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		SWIGTYPE_p_void bearingIconKey = null;
 		SWIGTYPE_p_void headingIconKey = null;
 		switch (currentMarkerState) {
-			case MarkerStateMove:
+			case Move:
 				marker = navigationMarker;
 				bearingIconKey = onSurfaceIconKey;
 				headingIconKey = onSurfaceHeadingIconKey;
 				break;
-			case MarkerStateStay:
+			case Stay:
 				marker = myLocationMarker;
 				headingIconKey = onSurfaceHeadingIconKey;
 				break;
-			case MarkerStateOutdatedLocation:
+			case OutdatedLocation:
 				marker = outdatedLocationMarker;
 				break;
 		}
@@ -254,7 +242,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			marker.setPosition(target31);
 			marker.setIsAccuracyCircleVisible(true);
 			marker.setAccuracyCircleRadius(lastKnownLocation.getAccuracy());
-			if (headingIconKey != null || hasHeading) {
+			if (headingIconKey != null && hasHeading) {
 				marker.setOnMapSurfaceIconDirection(headingIconKey, locationProvider.getHeading());
 			}
 			if (bearingIconKey != null) {
@@ -280,18 +268,20 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		aroundArea.setStrokeWidth(1);
 		aroundArea.setAntiAlias(true);
 		locationProvider = view.getApplication().getLocationProvider();
-		updateIcons(view.getSettings().getApplicationMode(), false, locationProvider.getLastKnownLocation() == null);
+		updateIcons(view.getSettings().getApplicationMode(),
+				false, locationProvider.getLastKnownLocation() == null);
 	}
 
 	@Override
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);
 		if (mapActivity != null) {
-			//invalidateMarkers();
-			dirty = true;
+//			invalidateMarkers();
+			markersNeedInvalidate = true;
 		} else {
+//			hideMarkers();
 			hideMarkers();
-			//destroyLayer();
+//			destroyLayer();
 		}
 	}
 
@@ -299,19 +289,23 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	public void initLayer(@NonNull OsmandMapTileView view) {
 		this.view = view;
 		initUI();
-		dirty = true;
+		//dirty = true;
 	}
 
-	private RectF getHeadingRect(int locationX, int locationY){
+	private RectF getHeadingRect(int locationX, int locationY) {
 		int rad = (int) (view.getDensity() * 60);
 		return new RectF(locationX - rad, locationY - rad, locationX + rad, locationY + rad);
 	}
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		if (dirty) {
+		boolean nm = settings != null && settings.isNightMode();
+		updateIcons(view.getSettings().getApplicationMode(), nm,
+				view.getApplication().getLocationProvider().getLastKnownLocation() == null);
+
+		if (markersNeedInvalidate) {
 			invalidateMarkers();
-			dirty = false;
+			markersNeedInvalidate = false;
 		}
 	}
 
@@ -321,10 +315,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			return;
 		}
 		// draw
-		boolean nm = nightMode != null && nightMode.isNightMode();
 		Location lastKnownLocation = locationProvider.getLastStaleKnownLocation();
-		updateIcons(view.getSettings().getApplicationMode(), nm,
-				view.getApplication().getLocationProvider().getLastKnownLocation() == null);
 		if (lastKnownLocation == null) {
 			return;
 		}
@@ -335,16 +326,18 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			if (isLocationVisible(box, lastKnownLocation)) {
 				if (!locationOutdated) {
 					boolean isBearing = lastKnownLocation.hasBearing() && (lastKnownLocation.getBearing() != 0.0f)
-							&& (!lastKnownLocation.hasSpeed() || lastKnownLocation.getSpeed() > BEARING_SPEED_THRESHOLD);
+							&& (!lastKnownLocation.hasSpeed()
+							|| lastKnownLocation.getSpeed() > BEARING_SPEED_THRESHOLD);
 					if (isBearing) {  // navigation
-						setMarkerState(State.MarkerStateMove);
+						setMarkerState(MarkerState.Move);
 					} else {  // location
-						setMarkerState(State.MarkerStateStay);
+						setMarkerState(MarkerState.Stay);
 					}
 				} else {  // outdated location
-					setMarkerState(State.MarkerStateOutdatedLocation);
+					setMarkerState(MarkerState.OutdatedLocation);
 				}
-				boolean hasHeading = !locationOutdated && locationProvider.getHeading() != null && mapViewTrackingUtilities.isShowViewAngle();
+				boolean hasHeading = !locationOutdated && locationProvider.getHeading() != null
+						&& mapViewTrackingUtilities.isShowViewAngle();
 				updateMarkerLocation(lastKnownLocation, hasHeading);
 			}
 		} else {
@@ -429,25 +422,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		final MapRendererView mapRenderer = view.getMapRenderer();
 		if (mapRenderer != null) {
 			mapRenderer.removeSymbolsProvider(markersCollection);
-			markersCollection = null;
-			myLocationMarker = null;
-			navigationMarker = null;
-			outdatedLocationMarker = null;
 		}
-	}
-
-	protected Bitmap getScaledBitmapWithTint(@DrawableRes int drawableId, float scale, int tint) {
-		Drawable drawableIcon = AppCompatResources.getDrawable(view.getContext(), drawableId);
-		if (drawableIcon != null) {
-			DrawableCompat.setTint(DrawableCompat.wrap(drawableIcon), tint);
-		}
-		Bitmap bitmap = AndroidUtils.drawableToBitmap(drawableIcon, true);
-		if (bitmap != null && scale != 1f && scale > 0.0f) {
-			bitmap = AndroidUtils.scaleBitmap(bitmap,
-					(int) (bitmap.getWidth() * scale), (int) (bitmap.getHeight() * scale), false);
-		}
-
-		return bitmap;
 	}
 
 	private void updateIcons(ApplicationMode appMode, boolean nighMode, boolean locationOutdated) {
@@ -489,7 +464,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			area.setColor(ColorUtilities.getColorWithAlpha(color, 0.16f));
 			aroundArea.setColor(color);
 
-			invalidateMarkers();
+			markersNeedInvalidate = true;
 		}
 	}
 
