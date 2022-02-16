@@ -885,7 +885,7 @@
     <string name="navigate_point_zone">Sone</string>
     <string name="download_tab_local">Lokale</string>
     <string name="dash_download_msg_none">Last ned frakoblede kart\?</string>
-    <string name="dash_download_msg">%1$s kart er lastet ned</string>
+    <string name="dash_download_msg">Du har lastet ned %1$s kart</string>
     <string name="dash_download_new_one">Last ned nytt kart</string>
     <string name="dash_download_manage">Administrer</string>
     <string name="traffic_warning_calming">Trafikkdemping</string>
@@ -1773,7 +1773,7 @@
 \nRepresenterer område: %1$s x %2$s</string>
     <string name="navigate_point_northing">Nordverdi</string>
     <string name="navigate_point_easting">Østverdi</string>
-    <string name="fav_point_emoticons_message">Favorittnavn endret til \"%1$s\" for å muliggjøre lagring av streng med uttrykksikoner til en fil.</string>
+    <string name="fav_point_emoticons_message">Favorittnavn endret til \"%1$s\" for å lagre strengen med uttrykksikoner til en fil.</string>
     <string name="save_track_to_gpx_globally_headline">Sporingslogging på etterspørsel</string>
     <string name="proxy_port_descr">Angi din mellomtjeners portnummer (f.eks. 8118).</string>
     <string name="live_monitoring_m_descr">Send sporingsdata til en angitt nettjeneste hvis GPX-logging er påslått.</string>
@@ -2954,7 +2954,7 @@
     <string name="app_mode_taxi">Drosje</string>
     <string name="app_mode_horse">Hest</string>
     <string name="app_mode_helicopter">Helikopter</string>
-    <string name="osmand_routing_promo">Du kan legge til din egen endrede versjon av filen routing.xml til i ..osmand/routing</string>
+    <string name="osmand_routing_promo">Legg til din egen endrede versjon av filen routing.xml i ..osmand/routing</string>
     <string name="app_mode_skiing">Stå på ski</string>
     <string name="base_profile_descr_ski">Ski</string>
     <string name="show_compass_ruler">Vis kompasslinjal</string>
@@ -4173,7 +4173,7 @@
     <string name="shared_string_relation">Relasjon</string>
     <string name="online_direct_line_maps_link">Sjekk de nødvendige kartene.</string>
     <string name="online_maps_searching_descr">Søker på nett …</string>
-    <string name="reset_to_original">Tilbakestill til forvalg</string>
+    <string name="reset_to_original">Tilbakestill til original</string>
     <string name="backup_error_no_subscription">Mangler abonnement</string>
     <string name="map_updates_for_mappers">Kartoppdateringer for kartografer</string>
     <string name="benefits_for_contributors_primary_descr">Aktive bidragsytere gjør seg fortjent til timevise kartoppdateringer.</string>
@@ -4246,10 +4246,10 @@
 \n • Støtte for egendefinerte farger for favoritter og spor-veipunkter.
 \n
 \n</string>
-    <string name="routeInfo_tracktype_description">Fargelegging av rute eller spor i henhold til innhold av veier basert på overflatesammensetning. Typisk brukt på veier der hovedveinettet består av uasfalterte veier.</string>
-    <string name="routeInfo_winter_ice_road_description">Fargelegging av rute eller sporlinje i henhold til vinterveiklassifisering, som kun brukes om vinteren.</string>
-    <string name="routeInfo_smoothness_description">Angir en klassifiseringsklasse for fysisk anvendbarhet av vei for hjul-kjøretøy, spesielt mtp. overflategjevnhet.</string>
-    <string name="routeInfo_surface_description">Angi ytterligere info om fysisk overflate for veier/stier.</string>
+    <string name="routeInfo_tracktype_description">Fargelegg rute eller sporlinje etter overflatesammensetning. Brukes typisk når veinettet stort sett er uten fast dekke.</string>
+    <string name="routeInfo_winter_ice_road_description">Fargelegg rute eller sporlinje etter vinterveiklassifisering.</string>
+    <string name="routeInfo_smoothness_description">Klassifisering av manøvrerbarhet på vei/gangvei for kjøretøy med hjul, spesielt når det gjelder overflateregelmessighet/planhet.</string>
+    <string name="routeInfo_surface_description">Angi informasjon om fysisk overflate for veier/gangstier.</string>
     <string name="routeInfo_roadClass_description">Fargelegging av ruten eller rutelinje i henhold til veiklassifisering.</string>
     <string name="no_items_of_type_message">Du har ingen elementer av denne typen</string>
     <string name="add_group_to_markers">Legg til gruppe i markørliste</string>
