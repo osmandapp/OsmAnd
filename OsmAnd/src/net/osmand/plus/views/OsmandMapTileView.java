@@ -1207,7 +1207,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return mapRenderer;
 	}
 
-	public boolean hasRenderer() {
+	public boolean hasMapRenderer() {
 		return mapRenderer != null;
 	}
 

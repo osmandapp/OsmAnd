@@ -176,7 +176,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	}
 
 	private void invalidateMarkers() {
-		if (view != null && view.hasRenderer()) {
+		if (view != null && view.hasMapRenderer()) {
 			myLocationMarker = recreateMarker(myLocationMarker, locationIcon, MARKER_ID_MY_LOCATION, color);
 			navigationMarker = recreateMarker(navigationMarker, navigationIcon, MARKER_ID_NAVIGATION, color);
 			outdatedLocationMarker = recreateMarker(outdatedLocationMarker, locationIcon, MARKER_ID_OUTDATED_LOCATION, OUTDATED_COLOR);
@@ -334,7 +334,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		}
 
 		// rendering
-		if (view.hasRenderer()) {
+		if (view.hasMapRenderer()) {
 /////////////////////////////////////////////////GPU////////////////////////////////////////////////
 			if (isLocationVisible(box, lastKnownLocation)) {
 				boolean isBearing = lastKnownLocation.hasBearing() && (lastKnownLocation.getBearing() != 0.0f)
