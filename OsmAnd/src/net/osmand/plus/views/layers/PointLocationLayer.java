@@ -230,10 +230,6 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	}
 
 	private void updateMarkerLocation(@NonNull Location lastKnownLocation, boolean hasHeading) {
-		if (lastKnownLocation == null) {
-			return;
-		}
-
 		MapMarker marker = null;
 		SWIGTYPE_p_void bearingIconKey = null;
 		SWIGTYPE_p_void headingIconKey = null;
@@ -339,11 +335,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			if (isLocationVisible(box, lastKnownLocation)) {
 				boolean isBearing = lastKnownLocation.hasBearing() && (lastKnownLocation.getBearing() != 0.0f)
 						&& (!lastKnownLocation.hasSpeed() || lastKnownLocation.getSpeed() > BEARING_SPEED_THRESHOLD);
-				float orientation = 0.0f;
-				boolean hasHeading = false;
-				if (!locationOutdated && locationProvider.getHeading() != null && mapViewTrackingUtilities.isShowViewAngle()) {
-					hasHeading = true;
-				}
+				boolean hasHeading = !locationOutdated && locationProvider.getHeading() != null && mapViewTrackingUtilities.isShowViewAngle();
 				if (!locationOutdated) {
 					if (isBearing) {  // navigation
 						setMarkerState(State.MarkerStateMove);
