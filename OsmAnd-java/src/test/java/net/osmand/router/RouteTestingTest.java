@@ -22,15 +22,20 @@ import java.util.*;
 import java.util.Map.Entry;
 import net.osmand.NativeLibrary;
 
+import static net.osmand.util.RouterUtilTest.getNativeLibPath;
+
 @RunWith(Parameterized.class)
 public class RouteTestingTest {
 	private final TestEntry te;
 
 	private static final int TIMEOUT = 1500;
-	private static final boolean NATIVE_LIB = false;
 
 	public RouteTestingTest(String name, TestEntry te) {
 		this.te = te;
+	}
+	
+	boolean isNative() {
+		return false;
 	}
 
 	@BeforeClass
@@ -58,9 +63,10 @@ public class RouteTestingTest {
 
 	@Test(timeout = TIMEOUT)
 	public void testRouting() throws Exception {
-		NativeLibrary nativeLibrary;
-		if (NATIVE_LIB) {
-			boolean old = NativeLibrary.loadOldLib("/Users/plotva/work/osmand/core-legacy/binaries/darwin/intel/Release");
+		NativeLibrary nativeLibrary = null;
+		boolean useNative = isNative() && getNativeLibPath() != null && !te.isIgnoreNative();
+		if (useNative) {
+			boolean old = NativeLibrary.loadOldLib(getNativeLibPath());
 			nativeLibrary = new NativeLibrary();
 			if (!old) {
 				throw new UnsupportedOperationException("Not supported");
@@ -81,14 +87,14 @@ public class RouteTestingTest {
 					new BinaryMapIndexReader(raf1, new File(fl1)),
 					new BinaryMapIndexReader(raf, new File(fl))
 			};
-			if (NATIVE_LIB) {
-				nativeLibrary.initMapFile(new File(fl1).getAbsolutePath(), true);
+			if (useNative) {
+				Objects.requireNonNull(nativeLibrary).initMapFile(new File(fl1).getAbsolutePath(), true);
 			}
 		} else {
 			binaryMapIndexReaders = new BinaryMapIndexReader[]{new BinaryMapIndexReader(raf, new File(fl))};
 		}
-		if (NATIVE_LIB) {
-			nativeLibrary.initMapFile(new File(fl).getAbsolutePath(), true);
+		if (useNative) {
+			Objects.requireNonNull(nativeLibrary).initMapFile(new File(fl).getAbsolutePath(), true);
 		}
 		for (int planRoadDirection = -1; planRoadDirection <= 1; planRoadDirection++) {
 			if (params.containsKey("wrongPlanRoadDirection")) {
@@ -111,7 +117,7 @@ public class RouteTestingTest {
 
 			config.planRoadDirection = planRoadDirection;
 			RoutingContext ctx;
-			if (NATIVE_LIB) {
+			if (useNative) {
 				ctx = fe.buildRoutingContext(config, nativeLibrary, binaryMapIndexReaders,
 						RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
 			} else {

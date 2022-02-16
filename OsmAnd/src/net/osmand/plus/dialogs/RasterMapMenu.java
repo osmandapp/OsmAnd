@@ -1,5 +1,8 @@
 package net.osmand.plus.dialogs;
 
+import static net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode.OVERLAY;
+import static net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode.UNDERLAY;
+
 import android.view.View;
 import android.widget.ArrayAdapter;
 
@@ -11,23 +14,24 @@ import net.osmand.map.ParameterType;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.OnMapSelectedCallback;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.RasterMapType;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapTileLayer;
 
 
 public class RasterMapMenu {
 	private static final String TAG = "RasterMapMenu";
+
 	public static ContextMenuAdapter createListAdapter(final MapActivity mapActivity,
-													   final RasterMapType type) {
+	                                                   final RasterMapType type) {
 		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity.getMyApplication());
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
@@ -38,17 +42,16 @@ public class RasterMapMenu {
 	}
 
 	private static void createLayersItems(final ContextMenuAdapter contextMenuAdapter,
-										  final MapActivity mapActivity,
-										  final RasterMapType type) {
+	                                      final MapActivity mapActivity,
+	                                      final RasterMapType type) {
 		final OsmandApplication app = mapActivity.getMyApplication();
 		final OsmandSettings settings = app.getSettings();
-		final OsmandRasterMapsPlugin plugin = OsmandPlugin.getActivePlugin(OsmandRasterMapsPlugin.class);
+		final OsmandRasterMapsPlugin plugin = OsmandPlugin.getPlugin(OsmandRasterMapsPlugin.class);
 		assert plugin != null;
 		final CommonPreference<Integer> mapTransparencyPreference;
 		final CommonPreference<String> mapTypePreference;
 		final CommonPreference<String> exMapTypePreference;
-		final LayerTransparencySeekbarMode currentMapTypeSeekbarMode =
-				type == RasterMapType.OVERLAY ? LayerTransparencySeekbarMode.OVERLAY : LayerTransparencySeekbarMode.UNDERLAY;
+		final LayerTransparencySeekbarMode currentMode = type == RasterMapType.OVERLAY ? OVERLAY : UNDERLAY;
 		@StringRes final int mapTypeString;
 		@StringRes final int mapTypeStringTransparency;
 		if (type == RasterMapType.OVERLAY) {
@@ -67,14 +70,11 @@ public class RasterMapMenu {
 			throw new RuntimeException("Unexpected raster map type");
 		}
 
-		final CommonPreference<Boolean> hidePolygonsPref =
-				mapActivity.getMyApplication().getSettings().getCustomRenderBooleanProperty("noPolygons");
-		final CommonPreference<Boolean> hideWaterPolygonsPref =
-				mapActivity.getMyApplication().getSettings().getCustomRenderBooleanProperty("hideWaterPolygons");
-
+		CommonPreference<Boolean> hidePolygonsPref = settings.getCustomRenderBooleanProperty("noPolygons");
+		CommonPreference<Boolean> hideWaterPolygonsPref = settings.getCustomRenderBooleanProperty("hideWaterPolygons");
 
 		String mapTypeDescr = mapTypePreference.get();
-		if (mapTypeDescr!=null && mapTypeDescr.contains(".sqlitedb")) {
+		if (mapTypeDescr != null && mapTypeDescr.contains(".sqlitedb")) {
 			mapTypeDescr = mapTypeDescr.replaceFirst(".sqlitedb", "");
 		}
 
@@ -97,7 +97,7 @@ public class RasterMapMenu {
 		ContextMenuAdapter.OnRowItemClick l = new ContextMenuAdapter.OnRowItemClick() {
 			@Override
 			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter,
-										  View view, int itemId, int pos) {
+			                              View view, int itemId, int pos) {
 				if (itemId == mapTypeString) {
 					if (mapSelected) {
 						plugin.selectMapOverlayLayer(mapTypePreference,
@@ -110,7 +110,7 @@ public class RasterMapMenu {
 
 			@Override
 			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter,
-											  final int itemId, final int pos, final boolean isChecked, int[] viewCoordinates) {
+			                                  final int itemId, final int pos, final boolean isChecked, int[] viewCoordinates) {
 				if (itemId == toggleActionStringId) {
 					app.runInUIThread(() -> {
 						plugin.toggleUnderlayState(mapActivity, type, onMapSelectedCallback);
@@ -140,9 +140,9 @@ public class RasterMapMenu {
 
 			private void updateTransparencyBarVisibility(boolean visible) {
 				if (visible) {
-					settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(currentMapTypeSeekbarMode);
+					settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(currentMode);
 					mapLayers.getMapControlsLayer().showTransparencyBar(mapTransparencyPreference);
-				} else // if(settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == currentMapTypeSeekbarMode)
+				} else // if(settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == currentMode)
 				{
 					settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(LayerTransparencySeekbarMode.OFF);
 					mapLayers.getMapControlsLayer().hideTransparencyBar();
@@ -207,10 +207,9 @@ public class RasterMapMenu {
 	}
 
 	@NonNull
-	public static Boolean isSeekbarVisible(OsmandApplication app, RasterMapType type) {
-		final LayerTransparencySeekbarMode currentMapTypeSeekbarMode =
-				type == RasterMapType.OVERLAY ? LayerTransparencySeekbarMode.OVERLAY : LayerTransparencySeekbarMode.UNDERLAY;
+	public static Boolean isSeekbarVisible(@NonNull OsmandApplication app, @NonNull RasterMapType type) {
+		LayerTransparencySeekbarMode currentMode = type == RasterMapType.OVERLAY ? OVERLAY : UNDERLAY;
 		LayerTransparencySeekbarMode seekbarMode = app.getSettings().LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
-		return seekbarMode == LayerTransparencySeekbarMode.UNDEFINED || seekbarMode == currentMapTypeSeekbarMode;
+		return seekbarMode == LayerTransparencySeekbarMode.UNDEFINED || seekbarMode == currentMode;
 	}
 }

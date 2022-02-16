@@ -5,7 +5,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_CRASH_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RATE_US_ID;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
@@ -15,7 +14,6 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -98,8 +96,8 @@ import net.osmand.plus.helpers.ScrollHelper;
 import net.osmand.plus.helpers.ScrollHelper.OnScrollEventListener;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.importfiles.ui.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.importfiles.ui.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -118,7 +116,7 @@ import net.osmand.plus.measurementtool.SnapTrackWarningFragment;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.accessibility.MapAccessibilityActions;
 import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
-import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.render.UpdateVectorRendererAsyncTask;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.IRouteInformationListener;
@@ -158,7 +156,6 @@ import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
-import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
 
@@ -1349,45 +1346,20 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
-	@SuppressLint("StaticFieldLeak")
 	public void updateMapSettings() {
-		if (app.isApplicationInitializing()) {
-			return;
-		}
-		// update vector renderer
-		new AsyncTask<Void, Void, Void>() {
-
-			@Override
-			protected Void doInBackground(Void... params) {
-				RendererRegistry registry = app.getRendererRegistry();
-				RenderingRulesStorage newRenderer = registry.getRenderer(settings.RENDERER.get());
-				if (newRenderer == null) {
-					newRenderer = registry.defaultRender();
+		if (!app.isApplicationInitializing()) {
+			UpdateVectorRendererAsyncTask task = new UpdateVectorRendererAsyncTask(app, changed -> {
+				if (changed) {
+					OsmandPlugin.registerRenderingPreferences(app);
 				}
-				OsmandMapTileView mapView = getMapView();
-				if (mapView.getMapRenderer() != null) {
-					NativeCoreContext.getMapRendererContext().updateMapSettings();
-				}
-				if (registry.getCurrentSelectedRenderer() != newRenderer) {
-					registry.setCurrentSelectedRender(newRenderer);
-					app.getResourceManager().getRenderer().clearCache();
-					mapView.resetDefaultColor();
-					mapView.refreshMap(true);
-				} else {
-					mapView.resetDefaultColor();
-				}
-
-				return null;
-			}
-
-			protected void onPostExecute(Void result) {
 				DashboardOnMap dashboard = getDashboard();
 				if (dashboard != null) {
 					dashboard.onMapSettingsUpdated();
 				}
-			}
-		}.executeOnExecutor(singleThreadExecutor, (Void) null);
-
+				return true;
+			});
+			task.executeOnExecutor(singleThreadExecutor);
+		}
 	}
 
 	public ScrollHelper getMapScrollHelper() {
@@ -1472,9 +1444,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public static void launchMapActivityMoveToTop(@NonNull Context activity,
-												  @Nullable Bundle prevIntentParams,
-												  @Nullable Uri intentData,
-												  @Nullable Bundle intentParams) {
+	                                              @Nullable Bundle prevIntentParams,
+	                                              @Nullable Uri intentData,
+	                                              @Nullable Bundle intentParams) {
 		if (activity instanceof MapActivity) {
 			if (((MapActivity) activity).getDashboard().isVisible()) {
 				((MapActivity) activity).getDashboard().hideDashboard();
@@ -1979,7 +1951,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void showQuickSearch(@NonNull ShowQuickSearchMode mode, boolean showCategories,
-								@NonNull String searchQuery, @Nullable LatLon searchLocation) {
+	                            @NonNull String searchQuery, @Nullable LatLon searchLocation) {
 		if (mode == ShowQuickSearchMode.CURRENT) {
 			mapContextMenu.close();
 		} else {
@@ -2032,7 +2004,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void showQuickSearch(@NonNull ShowQuickSearchMode mode, QuickSearchTab showSearchTab,
-								@NonNull String searchQuery, @Nullable LatLon searchLocation) {
+	                            @NonNull String searchQuery, @Nullable LatLon searchLocation) {
 		if (mode == ShowQuickSearchMode.CURRENT) {
 			mapContextMenu.close();
 		} else {

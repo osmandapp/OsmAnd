@@ -18,6 +18,7 @@ public class TestEntry {
     private LatLon transitPoint2;
     private LatLon transitPoint3;
     private boolean ignore;
+    private boolean ignoreNative;
     private Map<String, String> expectedResults;
     private Map<String, String> params;
     private int planRoadDirection;
@@ -71,6 +72,14 @@ public class TestEntry {
     
     public boolean isIgnore() {
     	return ignore;
+    }
+    
+    public void setIgnoreNative(boolean ignoreNative) {
+        this.ignoreNative = ignoreNative;
+    }
+    
+    public boolean isIgnoreNative() {
+        return ignoreNative;
     }
 
     public LatLon getEndPoint() {

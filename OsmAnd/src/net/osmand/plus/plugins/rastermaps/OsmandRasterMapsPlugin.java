@@ -107,15 +107,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	public boolean init(@NonNull final OsmandApplication app, Activity activity) {
 		final CommonPreference<Boolean> hidePolygonsPref = settings.getCustomRenderBooleanProperty("noPolygons");
 		final CommonPreference<Boolean> hideWaterPolygonsPref = settings.getCustomRenderBooleanProperty("hideWaterPolygons");
-		underlayListener = new StateChangedListener<String>() {
-			@Override
-			public void stateChanged(String change) {
-				app.runInUIThread(() -> {
-					hidePolygonsPref.set(settings.MAP_UNDERLAY.get() != null);
-					hideWaterPolygonsPref.set(settings.MAP_UNDERLAY.get() != null);
-				});
-			}
-		};
+		underlayListener = change -> app.runInUIThread(() -> {
+			hidePolygonsPref.set(settings.MAP_UNDERLAY.get() != null);
+			hideWaterPolygonsPref.set(settings.MAP_UNDERLAY.get() != null);
+		});
 		settings.MAP_UNDERLAY.addListener(underlayListener);
 		return true;
 	}
@@ -135,12 +130,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		}
 		underlayLayer = new MapTileLayer(context, false);
 		overlayLayer = new MapTileLayer(context, false);
-		overlayLayerListener = new StateChangedListener<Integer>() {
-			@Override
-			public void stateChanged(Integer change) {
-				app.runInUIThread(() -> overlayLayer.setAlpha(change));
-			}
-		};
+		overlayLayerListener = change -> app.runInUIThread(() -> overlayLayer.setAlpha(change));
 		settings.MAP_OVERLAY_TRANSPARENCY.addListener(overlayLayerListener);
 	}
 

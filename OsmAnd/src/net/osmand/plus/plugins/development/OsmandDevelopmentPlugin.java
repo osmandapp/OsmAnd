@@ -1,8 +1,5 @@
 package net.osmand.plus.plugins.development;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_DEV;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -15,17 +12,22 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.ContributionVersionActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.openplacereviews.OpenPlaceReviewsPlugin;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
-import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_DEV;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
@@ -151,9 +153,15 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 	@Override
 	public void disable(OsmandApplication app) {
-		if (app.getSettings().OSM_USE_DEV_URL.get()) {
-			app.getSettings().OSM_USE_DEV_URL.set(false);
+		OsmEditingPlugin osmPlugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		if (osmPlugin != null && osmPlugin.OSM_USE_DEV_URL.get()) {
+			osmPlugin.OSM_USE_DEV_URL.set(false);
 			app.getOsmOAuthHelper().resetAuthorization();
+		}
+		OpenPlaceReviewsPlugin oprPlugin = OsmandPlugin.getPlugin(OpenPlaceReviewsPlugin.class);
+		if (oprPlugin != null && oprPlugin.OPR_USE_DEV_URL.get()) {
+			oprPlugin.OPR_USE_DEV_URL.set(false);
+			app.getOprAuthHelper().resetAuthorization();
 		}
 		super.disable(app);
 	}

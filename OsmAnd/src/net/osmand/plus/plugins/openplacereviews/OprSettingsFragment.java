@@ -7,9 +7,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.openplacereviews.OprAuthHelper.OprAuthorizationListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
@@ -21,12 +21,14 @@ public class OprSettingsFragment extends BaseSettingsFragment implements OnPrefe
 	public static final String OPR_LOGIN_DATA = "opr_login_data";
 
 	private OprAuthHelper authHelper;
+	private OpenPlaceReviewsPlugin plugin;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		authHelper = app.getOprAuthHelper();
+		plugin = OsmandPlugin.getPlugin(OpenPlaceReviewsPlugin.class);
 
 		FragmentActivity activity = requireMyActivity();
 		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -59,12 +61,12 @@ public class OprSettingsFragment extends BaseSettingsFragment implements OnPrefe
 	private void setupLogoutPref() {
 		Preference nameAndPasswordPref = findPreference(OPR_LOGOUT);
 		nameAndPasswordPref.setVisible(authHelper.isLoginExists());
-		nameAndPasswordPref.setSummary(settings.OPR_USERNAME.get());
+		nameAndPasswordPref.setSummary(plugin.OPR_USERNAME.get());
 		nameAndPasswordPref.setIcon(getContentIcon(R.drawable.ic_action_user_account));
 	}
 
 	private void setupUseDevUrlPref() {
-		SwitchPreferenceEx useDevUrlPref = findPreference(settings.OPR_USE_DEV_URL.getId());
+		SwitchPreferenceEx useDevUrlPref = findPreference(plugin.OPR_USE_DEV_URL.getId());
 		useDevUrlPref.setVisible(OsmandPlugin.isDevelopment());
 		useDevUrlPref.setIcon(getPersistentPrefIcon(R.drawable.ic_plugin_developer));
 	}
@@ -88,8 +90,8 @@ public class OprSettingsFragment extends BaseSettingsFragment implements OnPrefe
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String prefId = preference.getKey();
-		if (settings.OPR_USE_DEV_URL.getId().equals(prefId) && newValue instanceof Boolean) {
-			settings.OPR_USE_DEV_URL.set((Boolean) newValue);
+		if (plugin.OPR_USE_DEV_URL.getId().equals(prefId) && newValue instanceof Boolean) {
+			plugin.OPR_USE_DEV_URL.set((Boolean) newValue);
 			oprLogout();
 			return true;
 		}
@@ -104,7 +106,7 @@ public class OprSettingsFragment extends BaseSettingsFragment implements OnPrefe
 
 	@Override
 	public void onPreferenceChanged(String prefId) {
-		if (settings.OPR_USE_DEV_URL.getId().equals(prefId)) {
+		if (plugin.OPR_USE_DEV_URL.getId().equals(prefId)) {
 			oprLogout();
 		}
 		updateAllSettings();
