@@ -333,10 +333,9 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		if (view.hasMapRenderer()) {
 /////////////////////////////////////////////////GPU////////////////////////////////////////////////
 			if (isLocationVisible(box, lastKnownLocation)) {
-				boolean isBearing = lastKnownLocation.hasBearing() && (lastKnownLocation.getBearing() != 0.0f)
-						&& (!lastKnownLocation.hasSpeed() || lastKnownLocation.getSpeed() > BEARING_SPEED_THRESHOLD);
-				boolean hasHeading = !locationOutdated && locationProvider.getHeading() != null && mapViewTrackingUtilities.isShowViewAngle();
 				if (!locationOutdated) {
+					boolean isBearing = lastKnownLocation.hasBearing() && (lastKnownLocation.getBearing() != 0.0f)
+							&& (!lastKnownLocation.hasSpeed() || lastKnownLocation.getSpeed() > BEARING_SPEED_THRESHOLD);
 					if (isBearing) {  // navigation
 						setMarkerState(State.MarkerStateMove);
 					} else {  // location
@@ -345,6 +344,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 				} else {  // outdated location
 					setMarkerState(State.MarkerStateOutdatedLocation);
 				}
+				boolean hasHeading = !locationOutdated && locationProvider.getHeading() != null && mapViewTrackingUtilities.isShowViewAngle();
 				updateMarkerLocation(lastKnownLocation, hasHeading);
 			}
 		} else {
@@ -422,7 +422,9 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 
 	@Override
 	public void destroyLayer() {
-		if (view == null) { return; }
+		if (view == null) {
+			return;
+		}
 
 		final MapRendererView mapRenderer = view.getMapRenderer();
 		if (mapRenderer != null) {
