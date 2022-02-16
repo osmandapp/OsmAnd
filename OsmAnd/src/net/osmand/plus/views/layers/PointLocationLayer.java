@@ -33,6 +33,7 @@ import net.osmand.core.jni.SWIGTYPE_p_sk_spT_SkImage_const_t;
 import net.osmand.core.jni.SWIGTYPE_p_void;
 import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.Utilities;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -95,6 +96,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	private MapMarker outdatedLocationMarker;
 	private SWIGTYPE_p_void onSurfaceIconKey = null;
 	private SWIGTYPE_p_void onSurfaceHeadingIconKey = null;
+	private boolean dirty = true;
 
 	private enum State {
 		MarkerStateStay,
@@ -131,11 +133,9 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			markersCollection = new MapMarkersCollection();
 			newCollection = true;
 		} else if (oldMarker != null) {
-			mapGpuRenderer.suspendSymbolsUpdate();
 			oldMarker.setIsHidden(true);
 			oldMarker.setIsAccuracyCircleVisible(false);
 			markersCollection.removeMarker(oldMarker);
-			mapGpuRenderer.resumeSymbolsUpdate();
 		}
 
 		MapMarkerBuilder myLocMarkerBuilder = new MapMarkerBuilder();
@@ -146,7 +146,6 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 																	((baseColor) & 0xff)/255.0f));
 		myLocMarkerBuilder.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical);
 		myLocMarkerBuilder.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal);
-		myLocMarkerBuilder.setBaseOrder(-206000);
 		myLocMarkerBuilder.setIsHidden(true);
 
 		Bitmap myLocationBitmap = AndroidUtils.createScaledBitmap(icon, icon.getIntrinsicWidth(), icon.getIntrinsicHeight());
@@ -169,9 +168,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 
 		MapMarker marker = myLocMarkerBuilder.buildAndAddToCollection(markersCollection);
 		if (newCollection) {
-			mapGpuRenderer.suspendSymbolsUpdate();
 			mapGpuRenderer.addSymbolsProvider(markersCollection);
-			mapGpuRenderer.resumeSymbolsUpdate();
 		}
 		return marker;
 	}
@@ -194,14 +191,12 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 
 		final MapRendererView mapGpuRenderer = view.getMapRenderer();
 		if (mapGpuRenderer != null) {
-			mapGpuRenderer.suspendSymbolsUpdate();
 			navigationMarker.setIsHidden(true);
 			navigationMarker.setIsAccuracyCircleVisible(false);
 			myLocationMarker.setIsHidden(true);
 			myLocationMarker.setIsAccuracyCircleVisible(false);
 			outdatedLocationMarker.setIsHidden(true);
 			outdatedLocationMarker.setIsAccuracyCircleVisible(false);
-			mapGpuRenderer.resumeSymbolsUpdate();
 		}
 	}
 
@@ -215,7 +210,6 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 
 		final MapRendererView mapGpuRenderer = view.getMapRenderer();
 		if (mapGpuRenderer != null) {
-			mapGpuRenderer.suspendSymbolsUpdate();
 			switch (currentMarkerState) {
 				case MarkerStateMove:
 					navigationMarker.setIsHidden(false);
@@ -242,7 +236,6 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 					outdatedLocationMarker.setIsAccuracyCircleVisible(false);
 					break;
 			}
-			mapGpuRenderer.resumeSymbolsUpdate();
 		}
 	}
 
@@ -274,7 +267,6 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			if (marker != null) {
 				final PointI target31 = Utilities.convertLatLonTo31(
 						new net.osmand.core.jni.LatLon(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()));
-				mapGpuRenderer.suspendSymbolsUpdate();
 				marker.setPosition(target31);
 				marker.setIsAccuracyCircleVisible(true);
 				marker.setAccuracyCircleRadius(lastKnownLocation.getAccuracy());
@@ -287,7 +279,6 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 				if (marker.isHidden()) {
 					marker.setIsHidden(false);
 				}
-				mapGpuRenderer.resumeSymbolsUpdate();
 			}
 		}
 	}
@@ -309,26 +300,37 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		updateIcons(view.getSettings().getApplicationMode(), false, locationProvider.getLastKnownLocation() == null);
 	}
 
-//	public void setMapActivity(@Nullable MapActivity mapActivity) {
-//		super.setMapActivity(mapActivity);
-//		if (mapActivity != null) {
-//			//initUI();
-//			invalidateMarkers();
-//		} else {
-//			//hideMarkers();
-//			//destroyLayer();
-//		}
-//	}
+	@Override
+	public void setMapActivity(@Nullable MapActivity mapActivity) {
+		super.setMapActivity(mapActivity);
+		if (mapActivity != null) {
+			//initUI();
+			//invalidateMarkers();
+			dirty = true;
+		} else {
+			hideMarkers();
+			//destroyLayer();
+		}
+	}
 
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
 		this.view = view;
 		initUI();
+		dirty = true;
 	}
 
 	private RectF getHeadingRect(int locationX, int locationY){
 		int rad = (int) (view.getDensity() * 60);
 		return new RectF(locationX - rad, locationY - rad, locationX + rad, locationY + rad);
+	}
+
+	@Override
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		if (dirty) {
+			invalidateMarkers();
+			dirty = false;
+		}
 	}
 
 	@Override
@@ -451,9 +453,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 
 		final MapRendererView mapGpuRenderer = view.getMapRenderer();
 		if (mapGpuRenderer != null) {
-			mapGpuRenderer.suspendSymbolsUpdate();
 			mapGpuRenderer.removeSymbolsProvider(markersCollection);
-			mapGpuRenderer.resumeSymbolsUpdate();
 			markersCollection = null;
 			myLocationMarker = null;
 			navigationMarker = null;
