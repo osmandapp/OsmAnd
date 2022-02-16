@@ -148,10 +148,10 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		myLocMarkerBuilder.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal);
 		myLocMarkerBuilder.setIsHidden(true);
 
-		Bitmap myLocationBitmap = AndroidUtils.createScaledBitmap(icon, icon.getIntrinsicWidth(), icon.getIntrinsicHeight());
-		if (myLocationBitmap != null) {
+		Bitmap markerBitmap = AndroidUtils.createScaledBitmap(icon, icon.getIntrinsicWidth(), icon.getIntrinsicHeight());
+		if (markerBitmap != null) {
 			SWIGTYPE_p_sk_spT_SkImage_const_t swigImg = SwigUtilities.createSkImageARGB888With(
-					myLocationBitmap.getWidth(), myLocationBitmap.getHeight(), getBitmapAsByteArray(myLocationBitmap));
+					markerBitmap.getWidth(), markerBitmap.getHeight(), getBitmapAsByteArray(markerBitmap));
 			onSurfaceIconKey = SwigUtilities.getOnSurfaceIconKey(1);
 			myLocMarkerBuilder.addOnMapSurfaceIcon(onSurfaceIconKey, swigImg);
 		}
