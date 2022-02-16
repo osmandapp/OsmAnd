@@ -2354,7 +2354,7 @@
     <string name="type_postcode">Escribe el código postal</string>
     <string name="nearest_cities">Ciudades cercanas</string>
     <string name="select_city">Elegir la ciudad o pueblo</string>
-    <string name="select_postcode">Búsqueda por código postal</string>
+    <string name="select_postcode">Buscar por código postal</string>
     <string name="type_address">Escribe la dirección</string>
     <string name="select_street">Elegir la calle</string>
     <string name="shared_string_in_name">en %1$s</string>
@@ -4528,8 +4528,8 @@
     <string name="import_tracks">Importar trazas</string>
     <string name="import_tracks_descr">En «%1$s» existen %2$s trazas separadas. Elige las trazas a importar.</string>
     <string name="select_suggested_points">Marcar los puntos sugeridos</string>
-    <string name="location_source_descr">De forma predefinida, OsmAnd instalado desde Google Play usa «%1$s» para definir la ubicación.
+    <string name="location_source_descr">Si se instala OsmAnd desde Google Play, de forma predefinida se usa «%1$s» para definir la ubicación.
 \n
 \nSi obtienes información inexacta de la ubicación o usas un dispositivo sin «%2$s», intenta cambiar a «%3$s»</string>
-    <string name="location_source">Origen de la ubicación</string>
+    <string name="location_source">Proveedor de ubicación</string>
 </resources>
