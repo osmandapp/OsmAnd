@@ -4528,8 +4528,8 @@
     <string name="exit_import">Вийти\?</string>
     <string name="import_tracks">Імпорт треків</string>
     <string name="import_tracks_descr">%1$s, містить %2$s окремі треки. Виберіть треки, які потрібно імпортувати.</string>
-    <string name="location_source_descr">Усталено OsmAnd, встановлений з Google Play, використовує %1$s для визначення розташування.
+    <string name="location_source_descr">Зазвичай OsmAnd, встановлений з Google Play, використовує %1$s для визначення місцеположення.
 \n
-\nЯкщо дані про розташування не точні або ви користуєтеся пристроєм без %2$s, спробуйте перейти до «%3$s»</string>
+\nЯкщо дані про місцеположення не точні або ви користуєтеся пристроєм без %2$s, спробуйте перемикнутися на «%3$s»</string>
     <string name="location_source">Джерело визначення розташування</string>
 </resources>
