@@ -33,7 +33,7 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.myplaces.FavouritesHelper;
-import net.osmand.plus.myplaces.FavouritesHelper.FavoriteGroup;
+import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.poi.NominatimPoiFilter;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;

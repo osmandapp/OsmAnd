@@ -1,5 +1,8 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import static net.osmand.plus.myplaces.FavoriteGroup.PERSONAL_CATEGORY;
+import static net.osmand.plus.myplaces.FavoriteGroup.isPersonalCategoryDisplayName;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
@@ -12,6 +15,17 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -31,20 +45,6 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import static net.osmand.plus.myplaces.FavouritesHelper.FavoriteGroup.PERSONAL_CATEGORY;
-import static net.osmand.plus.myplaces.FavouritesHelper.FavoriteGroup.isPersonalCategoryDisplayName;
 
 public abstract class PointEditorFragmentNew extends EditorFragment {
 
@@ -416,6 +416,7 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 	@ColorInt
 	protected abstract int getDefaultColor();
 
+	@NonNull
 	protected abstract Set<String> getCategories();
 
 	@ColorInt

@@ -18,7 +18,7 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
@@ -104,7 +104,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	private void initPersonalType() {
-		if (FavouritesHelper.FavoriteGroup.PERSONAL_CATEGORY.equals(category)) {
+		if (FavoriteGroup.PERSONAL_CATEGORY.equals(category)) {
 			for (SpecialPointType p : SpecialPointType.values()) {
 				if (p.typeName.equals(this.name)) {
 					this.specialPointType = p;
@@ -284,7 +284,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	public String getCategoryDisplayName(@NonNull Context ctx) {
-		return FavouritesHelper.FavoriteGroup.getDisplayName(ctx, category);
+		return FavoriteGroup.getDisplayName(ctx, category);
 	}
 
 	public void setCategory(String category) {
@@ -407,7 +407,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		}
 
 		public String getCategory() {
-			return FavouritesHelper.FavoriteGroup.PERSONAL_CATEGORY;
+			return FavoriteGroup.PERSONAL_CATEGORY;
 		}
 
 		public String getName() {

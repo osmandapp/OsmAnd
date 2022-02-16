@@ -1,7 +1,7 @@
 /**
  *
  */
-package net.osmand.plus.myplaces;
+package net.osmand.plus.myplaces.ui;
 
 import android.app.Activity;
 import android.content.Intent;

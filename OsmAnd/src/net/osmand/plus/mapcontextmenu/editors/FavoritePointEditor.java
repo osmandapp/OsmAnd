@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
@@ -68,7 +68,7 @@ public class FavoritePointEditor extends PointEditor {
 		}
 		isNew = true;
 		if (categoryName != null && !categoryName.isEmpty()) {
-			FavouritesHelper.FavoriteGroup category = mapActivity.getMyApplication().getFavoritesHelper()
+			FavoriteGroup category = mapActivity.getMyApplication().getFavoritesHelper()
 					.getGroup(categoryName);
 			if (category == null) {
 				mapActivity.getMyApplication().getFavoritesHelper().addEmptyCategory(categoryName, categoryColor);

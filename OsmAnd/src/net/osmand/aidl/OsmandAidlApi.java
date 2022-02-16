@@ -15,7 +15,7 @@ import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_E
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
-import static net.osmand.plus.myplaces.FavouritesHelper.FILE_TO_SAVE;
+import static net.osmand.plus.myplaces.FavouritesFileHelper.FILE_TO_SAVE;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
 
@@ -82,6 +82,7 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.IContextMenuButtonListener;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.myplaces.TrackBitmapDrawer;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
@@ -972,8 +973,8 @@ public class OsmandAidlApi {
 
 	boolean addFavoriteGroup(String name, String colorTag, boolean visible) {
 		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
-		List<FavouritesHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
-		for (FavouritesHelper.FavoriteGroup g : groups) {
+		List<FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
+		for (FavoriteGroup g : groups) {
 			if (g.getName().equals(name)) {
 				return false;
 			}
@@ -988,8 +989,8 @@ public class OsmandAidlApi {
 
 	boolean removeFavoriteGroup(String name) {
 		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
-		List<FavouritesHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
-		for (FavouritesHelper.FavoriteGroup g : groups) {
+		List<FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
+		for (FavoriteGroup g : groups) {
 			if (g.getName().equals(name)) {
 				favoritesHelper.deleteGroup(g);
 				return true;
@@ -1000,8 +1001,8 @@ public class OsmandAidlApi {
 
 	boolean updateFavoriteGroup(String prevGroupName, String newGroupName, String colorTag, boolean visible) {
 		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
-		List<FavouritesHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
-		for (FavouritesHelper.FavoriteGroup g : groups) {
+		List<FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
+		for (FavoriteGroup g : groups) {
 			if (g.getName().equals(prevGroupName)) {
 				int color = 0;
 				if (!Algorithms.isEmpty(colorTag)) {

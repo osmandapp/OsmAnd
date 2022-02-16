@@ -25,7 +25,7 @@ import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.myplaces.ui.FavoritesActivity;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 

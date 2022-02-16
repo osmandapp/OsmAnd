@@ -12,7 +12,7 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.myplaces.FavouritesHelper;
-import net.osmand.plus.myplaces.FavouritesHelper.FavoriteGroup;
+import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
@@ -66,13 +66,13 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 
 	@Override
 	public long getLocalModifiedTime() {
-		File favoritesFile = favoritesHelper.getExternalFile();
+		File favoritesFile = favoritesHelper.getFileHelper().getExternalFile();
 		return favoritesFile.exists() ? favoritesFile.lastModified() : 0;
 	}
 
 	@Override
 	public void setLocalModifiedTime(long lastModifiedTime) {
-		File favoritesFile = favoritesHelper.getExternalFile();
+		File favoritesFile = favoritesHelper.getFileHelper().getExternalFile();
 		if (favoritesFile.exists()) {
 			favoritesFile.setLastModified(lastModifiedTime);
 		}
@@ -225,7 +225,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 	@Override
 	public SettingsItemWriter<? extends SettingsItem> getWriter() {
 		List<FavouritePoint> favourites = getPointsFromGroups(items);
-		GPXFile gpxFile = favoritesHelper.asGpxFile(favourites);
+		GPXFile gpxFile = favoritesHelper.getFileHelper().asGpxFile(favourites);
 		return getGpxWriter(gpxFile);
 	}
 }

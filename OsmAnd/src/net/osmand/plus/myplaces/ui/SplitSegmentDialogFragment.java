@@ -1,4 +1,4 @@
-package net.osmand.plus.myplaces;
+package net.osmand.plus.myplaces.ui;
 
 import android.app.Dialog;
 import android.content.res.ColorStateList;

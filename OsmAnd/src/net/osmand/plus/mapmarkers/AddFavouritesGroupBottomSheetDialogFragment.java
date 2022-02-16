@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.myplaces.FavouritesHelper;
-import net.osmand.plus.myplaces.FavouritesHelper.FavoriteGroup;
+import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.myplaces.FavouritesHelper.FavoritesListener;
 import net.osmand.plus.mapmarkers.adapters.FavouritesGroupsAdapter;
 import net.osmand.plus.mapmarkers.adapters.GroupsAdapter;

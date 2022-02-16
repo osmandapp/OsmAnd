@@ -51,6 +51,7 @@ import net.osmand.plus.liveupdates.LiveUpdatesHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.FavouritesFileHelper;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -685,8 +686,8 @@ public class AppInitializer implements IProgress {
 
 	private void restoreBackupForFavoritesFiles() {
 		final File appDir = app.getAppPath(null);
-		File save = new File(appDir, FavouritesHelper.FILE_TO_SAVE);
-		File bak = new File(appDir, FavouritesHelper.FILE_TO_BACKUP);
+		File save = new File(appDir, FavouritesFileHelper.FILE_TO_SAVE);
+		File bak = new File(appDir, FavouritesFileHelper.FILE_TO_BACKUP);
 		if (bak.exists() && (!save.exists() || bak.lastModified() > save.lastModified())) {
 			if (save.exists()) {
 				save.delete();

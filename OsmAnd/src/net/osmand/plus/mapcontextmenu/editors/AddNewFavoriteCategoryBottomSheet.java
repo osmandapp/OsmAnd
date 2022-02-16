@@ -1,5 +1,8 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import static net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
+import static net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
+
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,29 +19,26 @@ import androidx.fragment.app.FragmentActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.ColorDialogs;
-import net.osmand.plus.myplaces.AddNewTrackFolderBottomSheet;
+import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
+import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.ui.AddNewTrackFolderBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.track.cards.ColorsCard;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
-import static net.osmand.plus.routepreparationmenu.cards.BaseCard.*;
-import static net.osmand.plus.track.fragments.CustomColorBottomSheet.*;
 
 public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFragment implements
 		ColorPickerListener, CardListener {

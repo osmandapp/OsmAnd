@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
@@ -8,23 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
-import net.osmand.data.FavouritePoint;
-import net.osmand.data.FavouritePoint.BackgroundType;
-import net.osmand.data.LatLon;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dialogs.FavoriteDialogs;
-import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.myplaces.FavouritesHelper;
-import net.osmand.plus.myplaces.FavouritesHelper.FavoriteGroup;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.PointImageDrawable;
-import net.osmand.util.Algorithms;
-
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
@@ -35,7 +20,22 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import net.osmand.data.FavouritePoint;
+import net.osmand.data.FavouritePoint.BackgroundType;
+import net.osmand.data.LatLon;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dialogs.FavoriteDialogs;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.myplaces.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.util.Algorithms;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 
@@ -254,7 +254,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 			point.setColor(color);
 			point.setBackgroundType(backgroundType);
 			point.setIconId(iconId);
-			AlertDialog.Builder builder = FavouritesHelper.checkDuplicates(point, helper, getMapActivity());
+			AlertDialog.Builder builder = FavoriteDialogs.checkDuplicates(point, requireActivity());
 
 			if (isChanged(favorite, point)) {
 
@@ -456,6 +456,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		return iconId;
 	}
 
+	@NonNull
 	@Override
 	public Set<String> getCategories() {
 		Set<String> categories = new LinkedHashSet<>();

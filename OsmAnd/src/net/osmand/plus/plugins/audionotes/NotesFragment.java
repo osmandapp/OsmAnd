@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.audionotes;
 
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
 
 import android.app.Activity;
@@ -46,8 +46,8 @@ import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.myplaces.FavoritesActivity;
-import net.osmand.plus.myplaces.FavoritesFragmentStateHolder;
+import net.osmand.plus.myplaces.ui.FavoritesActivity;
+import net.osmand.plus.myplaces.ui.FavoritesFragmentStateHolder;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.plugins.audionotes.ItemMenuBottomSheetDialogFragment.ItemMenuFragmentListener;
