@@ -125,8 +125,10 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			return null;
 		}
 
-		final MapRendererView mapGpuRenderer = view.getMapRenderer();
-		if (mapGpuRenderer == null) { return null; }
+		final MapRendererView mapRenderer = view.getMapRenderer();
+		if (mapRenderer == null) {
+			return null;
+		}
 
 		boolean newCollection = false;
 		if (markersCollection == null) {
@@ -142,8 +144,8 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		myLocMarkerBuilder.setMarkerId(id);
 		myLocMarkerBuilder.setIsAccuracyCircleSupported(true);
 		myLocMarkerBuilder.setAccuracyCircleBaseColor(new FColorRGB((baseColor >> 16 & 0xff)/255.0f,
-																	((baseColor >> 8) & 0xff)/255.0f,
-																	((baseColor) & 0xff)/255.0f));
+				((baseColor >> 8) & 0xff)/255.0f,
+				((baseColor) & 0xff)/255.0f));
 		myLocMarkerBuilder.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical);
 		myLocMarkerBuilder.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal);
 		myLocMarkerBuilder.setIsHidden(true);
@@ -168,13 +170,13 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 
 		MapMarker marker = myLocMarkerBuilder.buildAndAddToCollection(markersCollection);
 		if (newCollection) {
-			mapGpuRenderer.addSymbolsProvider(markersCollection);
+			mapRenderer.addSymbolsProvider(markersCollection);
 		}
 		return marker;
 	}
 
 	private void invalidateMarkers() {
-		if (view != null && view.hasGpuRenderer()) {
+		if (view != null && view.hasRenderer()) {
 			myLocationMarker = recreateMarker(myLocationMarker, locationIcon, MARKER_ID_MY_LOCATION, color);
 			navigationMarker = recreateMarker(navigationMarker, navigationIcon, MARKER_ID_NAVIGATION, color);
 			outdatedLocationMarker = recreateMarker(outdatedLocationMarker, locationIcon, MARKER_ID_OUTDATED_LOCATION, OUTDATED_COLOR);
@@ -289,7 +291,6 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);
 		if (mapActivity != null) {
-			//initUI();
 			//invalidateMarkers();
 			dirty = true;
 		} else {
@@ -333,7 +334,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		}
 
 		// rendering
-		if (view.hasGpuRenderer()) {
+		if (view.hasRenderer()) {
 /////////////////////////////////////////////////GPU////////////////////////////////////////////////
 			if (isLocationVisible(box, lastKnownLocation)) {
 				boolean isBearing = lastKnownLocation.hasBearing() && (lastKnownLocation.getBearing() != 0.0f)
@@ -431,9 +432,9 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	public void destroyLayer() {
 		if (view == null) { return; }
 
-		final MapRendererView mapGpuRenderer = view.getMapRenderer();
-		if (mapGpuRenderer != null) {
-			mapGpuRenderer.removeSymbolsProvider(markersCollection);
+		final MapRendererView mapRenderer = view.getMapRenderer();
+		if (mapRenderer != null) {
+			mapRenderer.removeSymbolsProvider(markersCollection);
 			markersCollection = null;
 			myLocationMarker = null;
 			navigationMarker = null;
