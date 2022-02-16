@@ -1,2 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="shared_string_error_short">错误</string>
+    <string name="last_response_date">最后应答：%1$s</string>
+    <string name="last_update_from_telegram_duration">Telegram最后更新：%1$s之前</string>
+    <string name="last_response_duration">最后应答：%1$s之前</string>
+    <string name="duration_ago">%1$s之前</string>
+    <string name="back_to_osmand">返回OsmAnd</string>
+    <string name="time_zone">时区</string>
+    <string name="send_report">发送报告</string>
+    <string name="shared_string_export">导出</string>
+    <string name="last_update_from_telegram_date">Telegram最后一次更新：%1$s</string>
+    <string name="logcat_buffer_descr">检查并分享APP的日志细节</string>
+    <string name="logcat_buffer">Logcat 缓冲区</string>
+    <string name="shared_string_suggested">建议的</string>
+    <string name="status_widget_title">OsmAnd追踪器状态</string>
+</resources>
