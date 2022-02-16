@@ -70,8 +70,6 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	private float textScale = 1f;
 	@ColorInt
 	private int color;
-	@ColorInt
-	private final static int OUTDATED_COLOR = 0xff777777;
 	private LayerDrawable navigationIcon;
 	private int navigationIconId;
 	private LayerDrawable locationIcon;
@@ -86,11 +84,9 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	// location pin marker
 	private static final int MARKER_ID_MY_LOCATION = 1;
 	private static final int MARKER_ID_NAVIGATION = 2;
-	private static final int MARKER_ID_OUTDATED_LOCATION = 3;
 	private MapMarkersCollection markersCollection;
 	private MapMarker myLocationMarker;
 	private MapMarker navigationMarker;
-	private MapMarker outdatedLocationMarker;
 	private SWIGTYPE_p_void onSurfaceIconKey = null;
 	private SWIGTYPE_p_void onSurfaceHeadingIconKey = null;
 	private boolean markersNeedInvalidate = true;
@@ -98,10 +94,9 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	private enum MarkerState {
 		Stay,
 		Move,
-		OutdatedLocation
 	}
 
-	private MarkerState currentMarkerState = MarkerState.OutdatedLocation;
+	private MarkerState currentMarkerState = MarkerState.Stay;
 
 	private void setMarkerState(MarkerState markerState) {
 		if (currentMarkerState == markerState) {
@@ -147,7 +142,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			myLocMarkerBuilder.addOnMapSurfaceIcon(onSurfaceIconKey, swigImg);
 		}
 
-		if (id != MARKER_ID_OUTDATED_LOCATION) {
+		if (!locationOutdated) {
 			Bitmap headingBitmap = AndroidUtils.createScaledBitmapWithTint(view.getContext(), headingIconId, scale, baseColor);
 			if (headingBitmap != null) {
 				SWIGTYPE_p_sk_spT_SkImage_const_t swigImg = NativeUtilities.createSkImageFromBitmap(headingBitmap);
@@ -167,12 +162,11 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		if (view != null && view.hasMapRenderer()) {
 			myLocationMarker = recreateMarker(myLocationMarker, locationIcon, MARKER_ID_MY_LOCATION, color);
 			navigationMarker = recreateMarker(navigationMarker, navigationIcon, MARKER_ID_NAVIGATION, color);
-			outdatedLocationMarker = recreateMarker(outdatedLocationMarker, locationIcon, MARKER_ID_OUTDATED_LOCATION, OUTDATED_COLOR);
 		}
 	}
 
 	private void hideMarkers() {
-		if (navigationMarker == null || myLocationMarker == null || outdatedLocationMarker == null) {
+		if (navigationMarker == null || myLocationMarker == null) {
 			return;
 		}
 
@@ -180,12 +174,10 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		navigationMarker.setIsAccuracyCircleVisible(false);
 		myLocationMarker.setIsHidden(true);
 		myLocationMarker.setIsAccuracyCircleVisible(false);
-		outdatedLocationMarker.setIsHidden(true);
-		outdatedLocationMarker.setIsAccuracyCircleVisible(false);
 	}
 
 	private void updateMarkerState() {
-		if (navigationMarker == null || myLocationMarker == null || outdatedLocationMarker == null) {
+		if (navigationMarker == null || myLocationMarker == null) {
 			return;
 		}
 
@@ -195,24 +187,12 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 				navigationMarker.setIsAccuracyCircleVisible(false);
 				myLocationMarker.setIsHidden(true);
 				myLocationMarker.setIsAccuracyCircleVisible(false);
-				outdatedLocationMarker.setIsHidden(true);
-				outdatedLocationMarker.setIsAccuracyCircleVisible(false);
 				break;
 			case Stay:
 				navigationMarker.setIsHidden(true);
 				navigationMarker.setIsAccuracyCircleVisible(false);
 				myLocationMarker.setIsHidden(false);
 				myLocationMarker.setIsAccuracyCircleVisible(false);
-				outdatedLocationMarker.setIsHidden(true);
-				outdatedLocationMarker.setIsAccuracyCircleVisible(false);
-				break;
-			case OutdatedLocation:
-				navigationMarker.setIsHidden(true);
-				navigationMarker.setIsAccuracyCircleVisible(false);
-				myLocationMarker.setIsHidden(true);
-				myLocationMarker.setIsAccuracyCircleVisible(false);
-				outdatedLocationMarker.setIsHidden(false);
-				outdatedLocationMarker.setIsAccuracyCircleVisible(false);
 				break;
 		}
 	}
@@ -230,9 +210,6 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			case Stay:
 				marker = myLocationMarker;
 				headingIconKey = onSurfaceHeadingIconKey;
-				break;
-			case OutdatedLocation:
-				marker = outdatedLocationMarker;
 				break;
 		}
 
@@ -333,9 +310,8 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 					} else {  // location
 						setMarkerState(MarkerState.Stay);
 					}
-				} else {  // outdated location
-					setMarkerState(MarkerState.OutdatedLocation);
 				}
+
 				boolean hasHeading = !locationOutdated && locationProvider.getHeading() != null
 						&& mapViewTrackingUtilities.isShowViewAngle();
 				updateMarkerLocation(lastKnownLocation, hasHeading);
