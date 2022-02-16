@@ -273,8 +273,11 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			canvas.drawBitmap(pressedBitmap, null, destRect, paint);
 		}
 
-		if (mapQuickActionLayer != null && mapQuickActionLayer.isInMovingMarkerMode())
+		boolean movingMarker = mapQuickActionLayer != null && mapQuickActionLayer.isInMovingMarkerMode();
+		boolean downloadingTiles = mapActivity.getDownloadTilesFragment() != null;
+		if (movingMarker || downloadingTiles) {
 			return;
+		}
 
 		if (mInChangeMarkerPositionMode) {
 			if (menu != null && menu.getObject() == null) {
@@ -964,7 +967,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (mInChangeMarkerPositionMode || mInGpxDetailsMode || mInAddGpxPointMode
 				|| mapActivity == null || mapActivity.getMapRouteInfoMenu().isVisible()
 				|| MapRouteInfoMenu.waypointsVisible || MapRouteInfoMenu.followTrackVisible
-				|| mapActivity.getGpsFilterFragment() != null) {
+				|| mapActivity.getGpsFilterFragment() != null
+				|| mapActivity.getDownloadTilesFragment() != null) {
 			return true;
 		}
 		boolean res = false;
@@ -1080,7 +1084,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null || menu == null || mInChangeMarkerPositionMode || mInGpxDetailsMode
-				|| mapActivity.getGpsFilterFragment() != null) {
+				|| mapActivity.getGpsFilterFragment() != null
+				|| mapActivity.getDownloadTilesFragment() != null) {
 			return true;
 		}
 

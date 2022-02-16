@@ -39,7 +39,7 @@ class SqliteTileImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 			OsmandPlugin.enablePluginIfNeeded(activity, app, plugin, true);
 			if (activity instanceof MapActivity) {
 				MapActivity mapActivity = (MapActivity) activity;
-				mapActivity.getMapLayers().selectMapLayer(mapActivity, null);
+				mapActivity.getMapLayers().selectMapLayer(mapActivity, true, null);
 			}
 			Toast.makeText(app, app.getString(R.string.map_imported_successfully), Toast.LENGTH_SHORT).show();
 		} else {

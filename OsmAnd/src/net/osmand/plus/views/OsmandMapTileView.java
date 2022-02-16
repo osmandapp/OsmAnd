@@ -1010,7 +1010,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	protected void rotateToAnimate(float rotate) {
+	public void rotateToAnimate(float rotate) {
 		this.rotate = MapUtils.unifyRotationTo360(rotate);
 		this.currentViewport.setRotate(this.rotate);
 		refreshMap();

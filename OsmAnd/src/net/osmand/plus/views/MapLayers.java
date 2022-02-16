@@ -440,7 +440,7 @@ public class MapLayers {
 	public void selectMapLayer(@NonNull MapActivity mapActivity,
 	                           @NonNull ContextMenuItem item,
 	                           @NonNull ArrayAdapter<ContextMenuItem> adapter) {
-		selectMapLayer(mapActivity, mapSourceName -> {
+		selectMapLayer(mapActivity, true, mapSourceName -> {
 			item.setDescription(mapSourceName);
 			adapter.notifyDataSetChanged();
 			return true;
@@ -448,6 +448,7 @@ public class MapLayers {
 	}
 
 	public void selectMapLayer(@NonNull MapActivity mapActivity,
+	                           boolean includeOfflineMaps,
 	                           @Nullable CallbackWithObject<String> callback) {
 		if (!OsmandPlugin.isActive(OsmandRasterMapsPlugin.class)) {
 			app.showToastMessage(R.string.map_online_plugin_is_not_installed);
@@ -462,7 +463,9 @@ public class MapLayers {
 		final String layerInstallMore = "LAYER_INSTALL_MORE";
 		final String layerAdd = "LAYER_ADD";
 
-		entriesMap.put(layerOsmVector, getString(R.string.vector_data));
+		if (includeOfflineMaps) {
+			entriesMap.put(layerOsmVector, getString(R.string.vector_data));
+		}
 		entriesMap.putAll(settings.getTileSourceEntries());
 		entriesMap.put(layerInstallMore, getString(R.string.install_more));
 		entriesMap.put(layerAdd, getString(R.string.shared_string_add));
@@ -530,7 +533,7 @@ public class MapLayers {
 												callback.processResult(template.getName());
 											}
 										} else {
-											selectMapLayer(mapActivity, callback);
+											selectMapLayer(mapActivity, includeOfflineMaps, callback);
 										}
 									} else {
 										count++;
