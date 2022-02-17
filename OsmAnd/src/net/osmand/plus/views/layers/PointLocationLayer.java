@@ -90,7 +90,6 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	private SWIGTYPE_p_void onSurfaceIconKey = null;
 	private SWIGTYPE_p_void onSurfaceHeadingIconKey = null;
 	private boolean markersNeedInvalidate = true;
-	private boolean markersProviderNeedAdd = true;
 
 	private enum MarkerState {
 		Stay,
@@ -115,7 +114,6 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 
 		if (markersCollection == null) {
 			markersCollection = new MapMarkersCollection();
-			markersProviderNeedAdd = true;
 		} else if (oldMarker != null) {
 			oldMarker.setIsHidden(true);
 			oldMarker.setIsAccuracyCircleVisible(false);
@@ -151,6 +149,15 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		return marker;
 	}
 
+	private void resetMarkerProvider() {
+		final MapRendererView mapRenderer = view.getMapRenderer();
+		if (mapRenderer != null && markersCollection != null) {
+			mapRenderer.removeSymbolsProvider(markersCollection);
+			markersCollection.delete();
+			markersCollection = null;
+		}
+	}
+
 	private void setMarkerProvider() {
 		final MapRendererView mapRenderer = view.getMapRenderer();
 		if (mapRenderer != null && markersCollection != null) {
@@ -159,13 +166,10 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	}
 
 	private void invalidateMarkerCollection() {
+		resetMarkerProvider();
 		myLocationMarker = recreateMarker(myLocationMarker, locationIcon, MARKER_ID_MY_LOCATION, color);
 		navigationMarker = recreateMarker(navigationMarker, navigationIcon, MARKER_ID_NAVIGATION, color);
-
-		if (markersProviderNeedAdd) {
-			setMarkerProvider();
-			markersProviderNeedAdd = false;
-		}
+		setMarkerProvider();
 	}
 
 	private void updateMarkerState() {
@@ -253,7 +257,6 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		super.setMapActivity(mapActivity);
 		if (mapActivity != null) {
 			markersNeedInvalidate = true;
-			markersProviderNeedAdd = true;
 		} else {
 			setMarkerState(MarkerState.None);
 		}
@@ -264,7 +267,6 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		this.view = view;
 		initUI();
 		markersNeedInvalidate = true;
-		markersProviderNeedAdd = true;
 	}
 
 	private RectF getHeadingRect(int locationX, int locationY) {
@@ -363,8 +365,11 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		updateIcons(view.getSettings().getApplicationMode(), nm,
 				view.getApplication().getLocationProvider().getLastKnownLocation() == null);
 
-		if (view.hasMapRenderer() && markersNeedInvalidate) {
+		final MapRendererView mapRenderer = view.getMapRenderer();
+		if (mapRenderer != null && markersNeedInvalidate) {
+			mapRenderer.suspendSymbolsUpdate();
 			invalidateMarkerCollection();
+			mapRenderer.resumeSymbolsUpdate();
 			markersNeedInvalidate = false;
 		}
 	}
