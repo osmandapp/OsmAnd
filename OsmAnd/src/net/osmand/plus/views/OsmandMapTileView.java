@@ -1164,14 +1164,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public boolean onTouchEvent(MotionEvent event) {
-//		if (mapRenderer != null) {
-//			if (event.getAction() == MotionEvent.ACTION_DOWN) {
-//				mapRenderer.suspendSymbolsUpdate();
-//			} else if (event.getAction() == MotionEvent.ACTION_UP
-//					|| event.getAction() == MotionEvent.ACTION_CANCEL) {
-//				mapRenderer.resumeSymbolsUpdate();
-//			}
-//		}
+		if (mapRenderer != null) {
+			if (event.getAction() == MotionEvent.ACTION_DOWN) {
+				mapRenderer.suspendSymbolsUpdate();
+			} else if (event.getAction() == MotionEvent.ACTION_UP
+					|| event.getAction() == MotionEvent.ACTION_CANCEL) {
+				mapRenderer.resumeSymbolsUpdate();
+			}
+		}
 		if (twoFingersTapDetector != null && twoFingersTapDetector.onTouchEvent(event)) {
 			ContextMenuLayer contextMenuLayer = getLayerByClass(ContextMenuLayer.class);
 			if (contextMenuLayer != null) {
