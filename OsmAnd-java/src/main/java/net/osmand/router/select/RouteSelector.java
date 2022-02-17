@@ -29,7 +29,7 @@ public class RouteSelector {
 	public static final String ROUTE_KEY_VALUE_SEPARATOR = "_";
 	OsmcRouteContext rCtx;
 	Set<String> routeKeys;
-	String tagKey;
+	String routeKey;
 
 	public enum RouteType {
 
@@ -62,7 +62,8 @@ public class RouteSelector {
 		rCtx = new OsmcRouteContext();
 	}
 
-	public List<GPXFile> getRoutes(RenderedObject renderedObject) {
+	public List<GPXFile> getRoutes(RenderedObject renderedObject, String routeKey) {
+		this.routeKey = routeKey;
 		QuadRect qr = new QuadRect();
 		qr.left = qr.right = renderedObject.getX().get(0);
 		qr.top = qr.bottom = renderedObject.getY().get(0);
@@ -70,9 +71,8 @@ public class RouteSelector {
 		if (mapIndex == null) {
 			return null;
 		}
-
 		routeKeys = getRouteStringKeys(renderedObject, null);
-		return getRoutes(qr, routeKeys, null);
+		return getRoutes(qr, null);
 	}
 
 	public static Set<String> getRouteStringKeys(RenderedObject o, Set<RouteType> typeSet) {
@@ -115,8 +115,10 @@ public class RouteSelector {
 		for (int i = allTagsList.size() - 1; i > 0; i--) {
 			String tag = allTagsList.get(i);
 			if (tag.startsWith(ROUTE_PREFIX)) {
-				routeQuantity = Algorithms.extractIntegerNumber(tag);
-				break;
+				int number = Algorithms.extractIntegerNumber(tag);
+				if (routeQuantity < number) {
+					routeQuantity = number;
+				}
 			}
 		}
 		return routeQuantity;
@@ -147,49 +149,40 @@ public class RouteSelector {
 		return null;
 	}
 
-	public List<GPXFile> getRoutes(QuadRect bbox, Set<String> routeKeys, Set<String> routePrefixes) {
+	public List<GPXFile> getRoutes(QuadRect bbox, Set<String> routePrefixes) {
 		List<GPXFile> gpxFileList = new ArrayList<>();
 		List<BinaryMapDataObject> foundSegmentList = new ArrayList<>();
 		List<BinaryMapDataObject> finalSegmentList = new ArrayList<>();
-		tagKey = routeKeys.iterator().next();
 		RouteType routeType = RouteType.HIKING;
-		while (true) {
-			int x = (int) bbox.left;
-			int y = (int) bbox.bottom;
-			int xStart = 0;
-			int yStart = 0;
+		int x = (int) bbox.left;
+		int y = (int) bbox.bottom;
+		int xStart = 0;
+		int yStart = 0;
 
-			try {
-				for (BinaryMapIndexReader indexReader : files) {
-					final SearchRequest<BinaryMapDataObject> req = buildSearchRequest(foundSegmentList, x, y, false, routeType);
-					foundSegmentList.clear();
-					rCtx.setReader(indexReader);
-					BinaryMapDataObject startSegmentBin = getSegment(x, y, routeType);
-					indexReader.searchMapIndex(req);
-					if (!foundSegmentList.isEmpty()) {
-						BinaryMapDataObject segment = foundSegmentList.get(0);
-						finalSegmentList.add(segment);
-						xStart = segment.getPoint31XTile(0);
-						yStart = segment.getPoint31YTile(0);
-						x = segment.getPoint31XTile(segment.getPointsLength() - 1);
-						y = segment.getPoint31YTile(segment.getPointsLength() - 1);
-					}
-					getRoutePart(finalSegmentList, x, y, indexReader, false, routeType);
-					getRoutePart(finalSegmentList, xStart, yStart, indexReader, false, routeType);
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
+		try {
+			for (BinaryMapIndexReader indexReader : files) {
+				rCtx.setReader(indexReader);
+				OsmcRouteSegment routeSegment = getSegment(x, y, routeType);
+				BinaryMapDataObject segment = routeSegment.getObjectsByRouteKey(routeKey).get(0);
+				finalSegmentList.add(segment);
+				xStart = segment.getPoint31XTile(0);
+				yStart = segment.getPoint31YTile(0);
+				x = segment.getPoint31XTile(segment.getPointsLength() - 1);
+				y = segment.getPoint31YTile(segment.getPointsLength() - 1);
+				getRoutePart(finalSegmentList, x, y, indexReader, false, routeType);
+				getRoutePart(finalSegmentList, xStart, yStart, indexReader, false, routeType);
 			}
-			if (!finalSegmentList.isEmpty()) {
-				gpxFileList.add(createGpxFile(finalSegmentList));
-				finalSegmentList.clear();
-			}
-			break;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if (!finalSegmentList.isEmpty()) {
+			gpxFileList.add(createGpxFile(finalSegmentList));
+			finalSegmentList.clear();
 		}
 		return gpxFileList;
 	}
 
-	private BinaryMapDataObject getSegment(int x, int y, RouteType routeType) {
+	private OsmcRouteSegment getSegment(int x, int y, RouteType routeType) {
 		return rCtx.loadRouteSegment(x, y);
 	}
 
@@ -425,7 +418,7 @@ public class RouteSelector {
 								List<String> objectTagList = entry.getValue();
 								Collections.sort(objectTagList);
 								String objectTagKey = getRouteStringKeys(objectTagList, routeType);
-								if (Algorithms.stringsEqual(tagKey, objectTagKey)) {
+								if (Algorithms.stringsEqual(routeKey, objectTagKey)) {
 									foundSegmentList.add(object);
 								}
 							}
