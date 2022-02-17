@@ -90,29 +90,31 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	private SWIGTYPE_p_void onSurfaceIconKey = null;
 	private SWIGTYPE_p_void onSurfaceHeadingIconKey = null;
 	private boolean markersNeedInvalidate = true;
+	private boolean hasHeading = false;
+	private boolean hasHeadingCached = true;
 	private Location lastKnownLocation;
 	private Location lastKnownLocationCached;
 
-//	private void runMarkerInvalidation() {
-//		markersNeedInvalidate = true;
-//		if (view == null || !view.hasMapRenderer()) {
-//			return;
-//		}
-//
-//		view.getApplication().runInUIThread(new Runnable() {
-//			@Override
-//			public void run() {
-//			if (!lastKnownLocation.equals(lastKnownLocationCached)) {
-//				updateMarkerLocation(lastKnownLocation);
-//				lastKnownLocationCached = lastKnownLocation;
-//	}
-//			}
-//		}, 0);
-//	}
+	private void runMarkerInvalidation() {
+		if (view == null || !view.hasMapRenderer()) {
+			return;
+		}
+
+		view.getApplication().runInUIThread(new Runnable() {
+			@Override
+			public void run() {
+				if (lastKnownLocation != null && !lastKnownLocation.equals(lastKnownLocationCached)) {
+					updateMarkerLocation(lastKnownLocation);
+					lastKnownLocationCached = lastKnownLocation;
+				}
+			}
+		}, 0);
+	}
+
 	@Override
 	public void updateLocation(Location location) {
-//		runMarkerInvalidation();
 		lastKnownLocation = location;
+		runMarkerInvalidation();
 	}
 
 	private enum MarkerState {
@@ -150,7 +152,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		myLocMarkerBuilder.setAccuracyCircleBaseColor(NativeUtilities.createFColorRGB(baseColor));
 		myLocMarkerBuilder.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical);
 		myLocMarkerBuilder.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal);
-		myLocMarkerBuilder.setIsHidden(true);
+		//myLocMarkerBuilder.setIsHidden(true);
 
 		float scale = getTextScale();
 		Bitmap markerBitmap = AndroidUtils.createScaledBitmap(icon, scale);
@@ -160,7 +162,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 					NativeUtilities.createSkImageFromBitmap(markerBitmap));
 		}
 
-		if (!locationOutdated) {
+		if (!locationOutdated && hasHeading) {
 			Bitmap headingBitmap = AndroidUtils.createScaledBitmapWithTint(view.getContext(), headingIconId, scale, baseColor);
 			if (headingBitmap != null) {
 				onSurfaceHeadingIconKey = SwigUtilities.getOnSurfaceIconKey(2);
@@ -250,10 +252,8 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 					new net.osmand.core.jni.LatLon(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()));
 			marker.setPosition(target31);
 			marker.setAccuracyCircleRadius(lastKnownLocation.getAccuracy());
-			Float heading = locationProvider.getHeading();
-			boolean hasHeading = !locationOutdated && heading != null && mapViewTrackingUtilities.isShowViewAngle();
 			if (headingIconKey != null && hasHeading) {
-				marker.setOnMapSurfaceIconDirection(headingIconKey, heading);
+				marker.setOnMapSurfaceIconDirection(headingIconKey, locationProvider.getHeading());
 			}
 			if (bearingIconKey != null) {
 				marker.setOnMapSurfaceIconDirection(bearingIconKey, lastKnownLocation.getBearing() - 90.0f);
@@ -281,11 +281,21 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 				false, locationProvider.getLastKnownLocation() == null);
 	}
 
+	private void initRenderer() {
+		if (view == null || !view.hasMapRenderer()) {
+			return;
+		}
+
+		hasHeading = !locationOutdated && locationProvider.getHeading() != null && mapViewTrackingUtilities.isShowViewAngle();
+		hasHeadingCached = !hasHeading;
+		markersNeedInvalidate = true;
+	}
+
 	@Override
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);
 		if (mapActivity != null) {
-			markersNeedInvalidate = true;
+			initRenderer();
 		}
 	}
 
@@ -293,7 +303,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	public void initLayer(@NonNull OsmandMapTileView view) {
 		this.view = view;
 		initUI();
-		markersNeedInvalidate = true;
+		initRenderer();
 	}
 
 	private RectF getHeadingRect(int locationX, int locationY) {
@@ -390,15 +400,13 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		updateIcons(view.getSettings().getApplicationMode(), nm,lastKnownLocation == null);
 
 		if (view.hasMapRenderer() && lastKnownLocation != null) {
-			if (markersNeedInvalidate) {
+			hasHeading = !locationOutdated && locationProvider.getHeading() != null && mapViewTrackingUtilities.isShowViewAngle();
+			if (markersNeedInvalidate || hasHeadingCached != hasHeading) {
 				invalidateMarkerCollection();
 				markersNeedInvalidate = false;
+				hasHeadingCached = hasHeading;
 			}
 			updateMarkersGpu(tileBox);
-			if (!lastKnownLocation.equals(lastKnownLocationCached)) {
-				updateMarkerLocation(lastKnownLocation);
-				lastKnownLocationCached = lastKnownLocation;
-			}
 		}
 	}
 
@@ -490,7 +498,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
-		if (tileBox.getZoom() >= 3) {
+		if (tileBox.getZoom() >= MIN_ZOOM_MARKER_VISIBILITY) {
 			getMyLocationFromPoint(tileBox, point, o);
 		}
 	}
