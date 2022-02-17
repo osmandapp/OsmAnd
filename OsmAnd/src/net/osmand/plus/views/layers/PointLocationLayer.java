@@ -101,7 +101,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	private MarkerState currentMarkerState = MarkerState.Stay;
 
 	private void setMarkerState(MarkerState markerState) {
-		if (currentMarkerState == markerState) {
+		if (view == null || !view.hasMapRenderer() || currentMarkerState == markerState) {
 			return;
 		}
 		currentMarkerState = markerState;
@@ -154,9 +154,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	private void setMarkerProvider() {
 		final MapRendererView mapRenderer = view.getMapRenderer();
 		if (mapRenderer != null && markersCollection != null) {
-			mapRenderer.suspendSymbolsUpdate();
 			mapRenderer.addSymbolsProvider(markersCollection);
-			mapRenderer.resumeSymbolsUpdate();
 		}
 	}
 
@@ -275,10 +273,10 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	}
 
 	private void drawMarkersGpu(RotatedTileBox box, Location lastKnownLocation) {
-		if (isLocationVisible(box, lastKnownLocation) && !locationOutdated) {
+		if (isLocationVisible(box, lastKnownLocation)) {
 			boolean isBearing = lastKnownLocation.hasBearing() && (lastKnownLocation.getBearing() != 0.0f)
 					&& (!lastKnownLocation.hasSpeed() || lastKnownLocation.getSpeed() > BEARING_SPEED_THRESHOLD);
-			if (isBearing) {  // navigation
+			if (!locationOutdated && isBearing) {  // navigation
 				setMarkerState(MarkerState.Move);
 			} else {  // location
 				setMarkerState(MarkerState.Stay);
@@ -357,11 +355,15 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		if (view == null || tileBox.getZoom() < MIN_ZOOM_MARKER_VISIBILITY) {
+			return;
+		}
+
 		boolean nm = settings != null && settings.isNightMode();
 		updateIcons(view.getSettings().getApplicationMode(), nm,
 				view.getApplication().getLocationProvider().getLastKnownLocation() == null);
 
-		if (markersNeedInvalidate) {
+		if (view.hasMapRenderer() && markersNeedInvalidate) {
 			invalidateMarkerCollection();
 			markersNeedInvalidate = false;
 		}
