@@ -3,7 +3,7 @@
     <string name="poi_shop">商店</string>
     <string name="poi_shop_food">食品商店</string>
     <string name="poi_emergency">緊急救助</string>
-    <string name="poi_transportation">交通工具</string>
+    <string name="poi_transportation">交通</string>
     <string name="poi_road_obstacle">道路阻礙</string>
     <string name="poi_filling_station">加油站</string>
     <string name="poi_personal_transport">個人交通工具</string>
@@ -289,7 +289,7 @@
     <string name="poi_survey_point">人工基石</string>
     <string name="poi_windmill">風車</string>
     <string name="poi_salt_pond">鹽田</string>
-    <string name="poi_reservoir">蓄水池</string>
+    <string name="poi_reservoir">水庫</string>
     <string name="poi_cricket_nets">板球網</string>
     <string name="poi_gasometer">儲氣槽</string>
     <string name="poi_silo">圓榖倉</string>
@@ -2292,7 +2292,7 @@
     <string name="poi_power_supply">電源供應</string>
     <string name="poi_medical_system">醫療系統</string>
     <string name="poi_home_visit">出診</string>
-    <string name="poi_dish">碗盤</string>
+    <string name="poi_dish">菜品</string>
     <string name="poi_social_facility_for">目標群體</string>
     <string name="poi_compressed_air_filter">壓縮空氣</string>
     <string name="poi_vacuum_cleaner_filter">真空吸塵器</string>
@@ -2729,8 +2729,8 @@
     <string name="poi_treat_inpatient_only">住院護理：只有</string>
     <string name="poi_counselling_yes">諮詢︰有</string>
     <string name="poi_counselling_no">諮詢︰無</string>
-    <string name="poi_emergency_yes">緊急情況︰有</string>
-    <string name="poi_emergency_no">緊急情況︰無</string>
+    <string name="poi_emergency_yes">急救︰有</string>
+    <string name="poi_emergency_no">急救︰無</string>
     <string name="poi_home_visit_yes">是;出診</string>
     <string name="poi_home_visit_no">出診︰無</string>
     <string name="poi_disease_malaria_yes">瘧疾︰有</string>
@@ -3053,7 +3053,7 @@
     <string name="poi_animal_keeping">動物飼養</string>
     <string name="poi_animal_keeping_horse">動物飼養：馬</string>
     <string name="poi_animal_keeping_sheep">動物飼養：羊</string>
-    <string name="poi_tower_construction_lattice">施工：格構式</string>
+    <string name="poi_tower_construction_lattice">構造：格構式</string>
     <string name="poi_motorcycle_type_offroad">越野型機車</string>
     <string name="poi_motorcycle_type_dualsport">多功能型機車</string>
     <string name="poi_motorcycle_type_scooter">踏板機車</string>
@@ -3072,10 +3072,10 @@
     <string name="poi_motorcycle_tyres_no">輪胎：無</string>
     <string name="poi_feeding_place">動物飼養的地方</string>
     <string name="poi_e_cigarette">電子香煙商店</string>
-    <string name="poi_tower_construction_freestanding">施工：獨立式</string>
-    <string name="poi_tower_construction_dish">施工：碟形</string>
-    <string name="poi_tower_construction_dome">施工：圓頂</string>
-    <string name="poi_tower_construction_concealed">施工：隱藏</string>
+    <string name="poi_tower_construction_freestanding">構造：獨立式</string>
+    <string name="poi_tower_construction_dish">構造：碟形</string>
+    <string name="poi_tower_construction_dome">構造：圓頂</string>
+    <string name="poi_tower_construction_concealed">構造：隱藏</string>
     <string name="poi_zoo_petting_zoo">可愛動物園</string>
     <string name="poi_zoo_wildlife_park">野生動物公園</string>
     <string name="poi_zoo_enclosure">圍場</string>
