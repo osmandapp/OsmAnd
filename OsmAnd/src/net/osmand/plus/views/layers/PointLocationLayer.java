@@ -152,7 +152,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		myLocMarkerBuilder.setAccuracyCircleBaseColor(NativeUtilities.createFColorRGB(baseColor));
 		myLocMarkerBuilder.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical);
 		myLocMarkerBuilder.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal);
-		//myLocMarkerBuilder.setIsHidden(true);
+		myLocMarkerBuilder.setIsHidden(true);
 
 		float scale = getTextScale();
 		Bitmap markerBitmap = AndroidUtils.createScaledBitmap(icon, scale);
@@ -180,7 +180,11 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		if (mapRenderer != null && markersCollection != null) {
 			mapRenderer.removeSymbolsProvider(markersCollection);
 			markersCollection.delete();
+			myLocationMarker.delete();
+			navigationMarker.delete();
 			markersCollection = null;
+			myLocationMarker = null;
+			navigationMarker = null;
 		}
 	}
 
@@ -296,6 +300,10 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		super.setMapActivity(mapActivity);
 		if (mapActivity != null) {
 			initRenderer();
+			markersNeedInvalidate = true;
+			updateMarkerState();
+		} else {
+			resetMarkerProvider();
 		}
 	}
 
@@ -432,17 +440,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			return;
 		}
 
-		final MapRendererView mapRenderer = view.getMapRenderer();
-		if (mapRenderer != null) {
-			mapRenderer.removeSymbolsProvider(markersCollection);
-			markersCollection.delete();
-			myLocationMarker.delete();
-			navigationMarker.delete();
-			markersCollection = null;
-			myLocationMarker = null;
-			navigationMarker = null;
-		}
-
+		resetMarkerProvider();
 		if (locationProvider != null) {
 			locationProvider.removeLocationListener(this);
 		}
