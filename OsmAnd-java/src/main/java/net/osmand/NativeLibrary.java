@@ -31,13 +31,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import gnu.trove.list.array.TIntArrayList;
 
@@ -480,8 +474,6 @@ public class NativeLibrary {
 		}
 		
 	}
-	
-
 
 	public static class RenderedObject extends MapObject {
 		private Map<String, String> tags = new LinkedHashMap<>();
