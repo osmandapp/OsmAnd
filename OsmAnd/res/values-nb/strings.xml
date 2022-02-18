@@ -749,7 +749,7 @@
     <string name="safe_mode">Sikker modus</string>
     <string name="native_library_not_running">Programmet kjører i sikker modus (skru det av i \'Innstillinger\').</string>
     <string name="interrupt_music_descr">Talemeldinger stopper midlertidig musikkavspilling.</string>
-    <string name="interrupt_music">Sett musikk på pause</string>
+    <string name="interrupt_music">Stopp musikk midlertidig</string>
     <string name="gpxup_public">Offentlig</string>
     <string name="rendering_attr_appMode_description">Optimaliser kart for</string>
     <string name="rendering_attr_contourLines_description">Vis fra zoom-nivå (krever kotedata):</string>
@@ -2357,7 +2357,7 @@
     <string name="search_osm_nominatim">Nettbasert søk med OSM Nominatim</string>
     <string name="opening_changeset">Åpner endringssett…</string>
     <string name="closing_changeset">Lukker endringssett…</string>
-    <string name="downloading_number_of_files">Laster ned - %1$d fil</string>
+    <string name="downloading_number_of_files">Laster ned %1$d fil …</string>
     <string name="activate_seamarks_plugin">Aktiver \"sjøkartvisning\" -tillegget</string>
     <string name="save_poi_too_many_uppercase">Navnet inneholder for mange store bokstaver. Fortsett\?</string>
     <string name="quick_action_add_poi">Legg til interessepunkt</string>
@@ -4335,9 +4335,9 @@
     <string name="skip_confirmation">Ja, hopp over</string>
     <string name="shared_storage">Delt lagring</string>
     <string name="show_parameter_seekbar">Vis parametersøkefelt</string>
-    <string name="shared_string_skip_warning">Start flyttingen\? OsmAnd vil ikke lenger ha tilgang til filene dine i delt lagring\?
+    <string name="shared_string_skip_warning">Start flyttingen\? OsmAnd vil ikke lenger ha tilgang til filene dine i delt lagring.
 \n
-\nProgrammet vil starte i den nye mappen med din data.</string>
+\nProgrammet vil begynne å bruke den nye datamappen.</string>
     <string name="shared_storage_last_step">Du vil kunne angi ny datalagring etter å ha valgt delt lagring.</string>
     <string name="shared_storage_third_step">Innvilg tilgang til mappen. Uten dette kan ikke OsmAnd kopiere filer.</string>
     <string name="shared_storage_first_step">Trykk «%1$s».
@@ -4366,7 +4366,7 @@
     <string name="shared_string_hide_all">Skjul alle</string>
     <string name="memory_allocated_for_routing">Minnetildelning for ruting</string>
     <string name="display_groups_visibility_dialog_description">Du kan kontrollere gryppesynlighet på kartet. Hvis et spor er skjult vil alle grupper også være det.</string>
-    <string name="migration_files_present">%1$d filer (%2$s) i valgt mappe «%3$s».</string>
+    <string name="migration_files_present">Det er %1$d filer (%2$s) i valgt mappe «%3$s».</string>
     <string name="shared_string_memory">Minne</string>
     <string name="save_changes_into_file">Lagre endringer til fil</string>
     <string name="save_as_copy">Lagre som kopi</string>
@@ -4400,7 +4400,7 @@
     <string name="navigate_point_format_swiss_grid">Sveitsisk koordinatsystem (CH1903)</string>
     <string name="rendering_value_category_name">Kategori</string>
     <string name="rendering_value_all_name">Alle</string>
-    <string name="rendering_value_omit_name">Unnlat</string>
+    <string name="rendering_value_omit_name">Utelat</string>
     <string name="rendering_attr_seabedDetail_name">Havbunnsdetalj</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="shared_string_used">Anvendt</string>
@@ -4444,4 +4444,92 @@
     <string name="location_source_descr">Som forvalg bruker OsmAnd installert fra Google Play, %1$s for å fastsette posisjon.
 \n
 \nHvis du får upresis posisjonsinfo eller bruker en enhet uten %2$s, kan du prøve å bytte til «%3$s».</string>
+    <string name="edit_category">Rediger kategori</string>
+    <string name="shared_string_shape">Form</string>
+    <string name="default_appearance_desc">Forvalgt, farge, ikon og form vil bli brukt for favorittpunkter i gruppen</string>
+    <string name="default_appearance">Forvalgt utseende</string>
+    <string name="release_3_8">- Oppdatert Planlegg en rute-funksjon: gjør det mulig å bruke forskjellige navigatsjonstyper pr. segment og inkludere spor
+\n
+\n - Ny Utseende-menu for spor: velg farve, tykkelse, visning av retningspil, start- og målikoner
+\n
+\n - Forbedret synlighet for sykkelknutepunkter.
+\n
+\n - Spor kan nå trykkes på, har bindeleddsmeny med grunnleggende opplysninger.
+\n
+\n - Forbedrede søkealgoritmer
+\n
+\n - Forbedrede «Følg spor»-mulighet i navigasjon
+\n
+\n - Rettet problemer med import/eksport av profilinnstillinger
+\n
+\n</string>
+    <string name="release_3_6">- Profiler: Nå kan du endre rekkefølge, stille inn ikoner for kartet, endre innstillinger for basisprofiler og gjenopprette dem til forvalg
+\n
+\n - Tillagt avkjørselsnummer i navigasjonen
+\n
+\n - Oppdaterte utvidelsesinnstillinger
+\n
+\n - Oppdatert Innstillinger-skjerm for hurtigere adgang til alle profiler
+\n
+\n - Tillagt mulighet for at kopiere innstillinger fra en annen profil
+\n
+\n - Tillagt mulighet for å endre en rekkefølge eller skjule IP-kategorier i søk
+\n
+\n - Korrekt justerte IP-ikoner på kartet
+\n
+\n - Tillagt solnedgang/soloppgangsdata for å sette opp kartet
+\n
+\n - Tillagt ikoner for hjem/arbeid på kartet
+\n
+\n - Tillagt støtte for flerlinjebeskrivelse i Innstillinger
+\n
+\n - Tillagt korrekt translitterasjon i det japanske kartet
+\n
+\n - Tillagt kart over Antarktis
+\n
+\n</string>
+    <string name="release_3_7">- Nye frakoblede kart med hellinger
+\n
+\n - Full tilpassning av favoritter og GPX-rutepunkter - brukerdefinerte farver, ikoner og former
+\n
+\n - Tilpass emners rekkefølge i «Bindeleddsmeny», «Sett opp kart» og \"Skuff\"
+\n
+\n - Wikipedia som et eget lag i «Sett opp kart», velg kun nødvendige språk
+\n
+\n - Opprett ditt eget IP-filter/kart med total fleksibilitet
+\n
+\n - Tillagt mulighet for å gjenopprette innstillinger for brukerdefinerte profiler
+\n
+\n - Komplette GPX-ruter fra navigasjon støtter veibaner og komplette svingveiledninger
+\n
+\n - Rettet brukerflatestørrelse på nettbrett
+\n
+\n - Rettet fejl i høyre-til-venstre -tekst
+\n
+\n</string>
+    <string name="release_4_1">• Tillagt innledende støtte for Android Auto
+\n
+\n • Oppdatering av brukergrensesnitt for søking etter UTM-koordinater
+\n
+\n • GPS-filter for GPS-spor
+\n
+\n •Høyde-modul (Pro)
+\n
+\n • Favoritter: tillagt mulighet for at få viste sist anvendte ikoner
+\n
+\n • Ruteplanlegging: bruker valgt profil etter start
+\n
+\n • Fikset programtillegg for Mapillary-lag, som nå er slått av som forvalg
+\n
+\n • Tillagt skjerm for administrasjon av all historikk i programmet
+\n
+\n • Kortets orientering nullstilles ikke etter omstart av programmet
+\n
+\n • Forbedret gjengivelse av SRTM-høydemarkører
+\n
+\n • Rettet Arabiske korttekster
+\n
+\n • Rettet forskjellige problemer med ruteføring
+\n
+\n</string>
 </resources>
