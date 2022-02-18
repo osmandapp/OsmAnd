@@ -3425,4 +3425,24 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="turn_screen_on_power_button">Barošanas poga</string>
     <string name="shared_string_uninstall_and_restart">Atinstalēt un restartēt</string>
     <string name="purchases">Pirkumi</string>
+    <string name="exit_import_descr">Iziet bez izmaiņu saglabāšanas\?</string>
+    <string name="exit_import">Iziet\?</string>
+    <string name="import_tracks_descr">%1$s, satur %2$s atsevišķus trekus. Izvēlieties trekus, ko importēt.</string>
+    <string name="please_provide_group_name_message">Lūdzu, dodiet vārdu grupai.</string>
+    <string name="points_selection_descr">Aizvērt un pazaudēt izmaiņas\?</string>
+    <string name="gpx_no_routes_descr">Jūs varat lietot %1$s rīku, lai saglabātu maršrutu failā.</string>
+    <string name="gpx_no_routes_title">Nav maršrutu</string>
+    <string name="save_track_to_gpx_descrp">Automātiski ierakstīt treku navigācijas laikā un pēc tam to saglabāt.</string>
+    <string name="rendering_attr_seabedDetail_name">Jūras dibena detaļas</string>
+    <string name="rendering_attr_seabedDetail_description">Paplašināts teksts ar dibena klasifikāciju, apvienotiem reljefu tipiem, jūraszāļu kategorijas un taksoni</string>
+    <string name="rendering_value_category_name">Kategorija</string>
+    <string name="rendering_value_all_name">Visu</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme tagi</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Rādīt fixme tagus</string>
+    <string name="quick_action_add_route_descr">Poga ekrāna vidū jauna maršruta sākšanai.</string>
+    <string name="shared_string_reading_file">Lasa failu…</string>
+    <string name="all_groups">Visas grupas</string>
+    <string name="list_of_groups">Grupu saraksts</string>
+    <string name="import_tracks">Importēt trekus</string>
 </resources>

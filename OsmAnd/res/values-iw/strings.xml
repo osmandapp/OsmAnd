@@ -4484,7 +4484,7 @@
 \n</string>
     <string name="created_on">נוצר בתאריך</string>
     <string name="shared_string_size">גודל</string>
-    <string name="turn_arrows">חצי הפנייה</string>
+    <string name="turn_arrows">חצי פנייה</string>
     <string name="turn_arrows_descr">בחירה האם חצי הפנייה מופיעים על גבי קו המסלול.</string>
     <string name="waypoint_template">תבנית נקודות דרך</string>
     <string name="predefined_waypoint_appearance_description">נגיעה בפעולה הזאת תשמור את נקודת הדרך עם משתנים שהוגדרו מראש אוטומטית.</string>
@@ -4528,4 +4528,5 @@
     <string name="exit_import_descr">לסגור בלי לשמור את השינויים\?</string>
     <string name="exit_import">לצאת\?</string>
     <string name="import_tracks">ייבוא מסלולים</string>
+    <string name="location_source">מקור מיקום</string>
 </resources>

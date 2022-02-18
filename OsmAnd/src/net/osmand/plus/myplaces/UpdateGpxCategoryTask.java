@@ -14,6 +14,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.myplaces.ui.EditTrackGroupDialogFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
@@ -49,7 +50,7 @@ public class UpdateGpxCategoryTask extends AsyncTask<Void, Void, Void> {
 		this.newCategory = newCategory;
 	}
 
-	UpdateGpxCategoryTask(@NonNull FragmentActivity activity, @NonNull GpxDisplayGroup group,
+	public UpdateGpxCategoryTask(@NonNull FragmentActivity activity, @NonNull GpxDisplayGroup group,
 	                      @NonNull Integer newColor) {
 		this(activity, group);
 		this.newColor = newColor;

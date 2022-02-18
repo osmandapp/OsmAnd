@@ -253,7 +253,7 @@ public class AndroidUtils {
 			while (i < text.length() && i != -1) {
 				ImageSpan span = new ImageSpan(icon) {
 					public void draw(Canvas canvas, CharSequence text, int start, int end,
-									 float x, int top, int y, int bottom, Paint paint) {
+					                 float x, int top, int y, int bottom, Paint paint) {
 						Drawable drawable = getDrawable();
 						canvas.save();
 						int transY = bottom - drawable.getBounds().bottom;
@@ -821,19 +821,13 @@ public class AndroidUtils {
 		return isLayoutRtl(ctx) ? R.drawable.ic_arrow_forward : R.drawable.ic_arrow_back;
 	}
 
-	public static Drawable getDrawableForDirection(@NonNull Context ctx,
-												   @NonNull Drawable drawable) {
-		return isLayoutRtl(ctx) ? getMirroredDrawable(ctx, drawable) : drawable;
+	public static Drawable getDrawableForDirection(@NonNull Context ctx, @NonNull Drawable drawable) {
+		return isLayoutRtl(ctx) ? getMirroredDrawable(drawable) : drawable;
 	}
 
-	public static Drawable getMirroredDrawable(@NonNull Context ctx,
-											   @NonNull Drawable drawable) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			drawable.setAutoMirrored(true);
-			return drawable;
-		}
-		Bitmap bitmap = drawableToBitmap(drawable);
-		return new BitmapDrawable(ctx.getResources(), flipBitmapHorizontally(bitmap));
+	public static Drawable getMirroredDrawable(@NonNull Drawable drawable) {
+		drawable.setAutoMirrored(true);
+		return drawable;
 	}
 
 	public static Bitmap drawableToBitmap(Drawable drawable) {
@@ -956,7 +950,7 @@ public class AndroidUtils {
 	}
 
 	public static CharSequence getStyledString(CharSequence baseString, CharSequence stringToInsertAndStyle,
-											   CharacterStyle baseStyle, CharacterStyle replaceStyle) {
+	                                           CharacterStyle baseStyle, CharacterStyle replaceStyle) {
 		int indexOfPlaceholder = baseString.toString().indexOf(STRING_PLACEHOLDER);
 		if (replaceStyle != null || baseStyle != null || indexOfPlaceholder != -1) {
 			String nStr = baseString.toString().replace(STRING_PLACEHOLDER, stringToInsertAndStyle);
@@ -1029,6 +1023,36 @@ public class AndroidUtils {
 			builder.append(w);
 		}
 		return builder;
+	}
+
+	@NonNull
+	public static String checkEmoticons(@NonNull String name) {
+		char[] chars = name.toCharArray();
+		char ch1;
+		char ch2;
+
+		int index = 0;
+		StringBuilder builder = new StringBuilder();
+		while (index < chars.length) {
+			ch1 = chars[index];
+			if ((int) ch1 == 0xD83C) {
+				ch2 = chars[index + 1];
+				if ((int) ch2 >= 0xDF00 && (int) ch2 <= 0xDFFF) {
+					index += 2;
+					continue;
+				}
+			} else if ((int) ch1 == 0xD83D) {
+				ch2 = chars[index + 1];
+				if ((int) ch2 >= 0xDC00 && (int) ch2 <= 0xDDFF) {
+					index += 2;
+					continue;
+				}
+			}
+			builder.append(ch1);
+			++index;
+		}
+		builder.trimToSize(); // remove trailing null characters
+		return builder.toString();
 	}
 
 	@NonNull

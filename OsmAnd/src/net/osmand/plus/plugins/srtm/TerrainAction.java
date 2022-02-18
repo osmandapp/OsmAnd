@@ -33,7 +33,7 @@ public class TerrainAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull final MapActivity mapActivity) {
-		final SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
+		SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
 		if (plugin != null) {
 			plugin.toggleTerrain(mapActivity, !plugin.isTerrainLayerEnabled(), () -> {
 				if (plugin.isTerrainLayerEnabled()) {
@@ -68,6 +68,7 @@ public class TerrainAction extends QuickAction {
 
 	@Override
 	public boolean isActionWithSlash(OsmandApplication application) {
-		return application.getSettings().TERRAIN.get();
+		SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
+		return plugin != null && plugin.TERRAIN.get();
 	}
 }

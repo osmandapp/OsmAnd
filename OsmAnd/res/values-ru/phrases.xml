@@ -4255,4 +4255,23 @@
     <string name="poi_avalanche_transceiver">Лавинный датчик;Лавинный трансивер;Лавинный маячок</string>
     <string name="poi_avalanche_transceiver_checkpoint">Контрольный пункт лавинного датчика</string>
     <string name="poi_avalanche_transceiver_training">Обучение работе с лавинным датчиком</string>
+    <string name="poi_tiles">Магазин плитки</string>
+    <string name="poi_skate">Магазин скейтов</string>
+    <string name="poi_parcel_locker">Постамат</string>
+    <string name="poi_access_permit">Требуется разрешение</string>
+    <string name="poi_toilets_disposal_dry_toilet">Утилизация: обезвоживание</string>
+    <string name="poi_post_office_opening_hours">Часы работы почтового отделения</string>
+    <string name="poi_collector">Коллекционный магазин</string>
+    <string name="poi_board_type_sight">Достопримечательность</string>
+    <string name="poi_board_type_sport">Спорт</string>
+    <string name="poi_board_type_welcome_sign">Приветствие</string>
+    <string name="poi_board_type_art">Искусство</string>
+    <string name="poi_toilets_position_seated">Положение в туалете: сидя</string>
+    <string name="poi_toilets_position_urinal">Положение в туалете: писсуар</string>
+    <string name="poi_toilets_position_squat">Положение в туалете: на корточках</string>
+    <string name="poi_handwashing_hand_cleaning_paste_no">Паста для очистки рук: нет</string>
+    <string name="poi_post_office_post_partner">Почтовый партнер</string>
+    <string name="poi_post_office_service_provider">Поставщик услуг почтового отделения</string>
+    <string name="poi_post_office_service_brand">Бренд почтового отделения</string>
+    <string name="poi_post_office_collection_times">Время выемки/отправки в почтовом отделении</string>
 </resources>

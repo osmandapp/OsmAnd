@@ -50,13 +50,15 @@ public class SQLiteTileSource implements ITileSource {
 	private static final String BIG_PLANET_TILE_NUMBERING = "BigPlanet";
 	private static final String TILESIZE = "tilesize";
 
+	private final OsmandApplication app;
+
 	private ITileSource base;
 	private String urlTemplate = null;
 	private String name;
 	private SQLiteConnection db = null;
 	private File file = null;
 	private int minZoom = 1;
-	private int maxZoom = 17; 
+	private int maxZoom = 17;
 	private boolean inversiveZoom = true; // BigPlanet
 	private boolean timeSupported = false;
 	private long expirationTimeMillis = -1; // never
@@ -67,15 +69,13 @@ public class SQLiteTileSource implements ITileSource {
 	private String rule = null;
 	private String referer = null;
 	private String userAgent = null;
-	
-	int tileSize = 256;
-	boolean tileSizeSpecified = false;
-	private OsmandApplication ctx;
+
+	private int tileSize = 256;
+	private boolean tileSizeSpecified = false;
 	private boolean onlyReadonlyAvailable = false;
 
-
-	public SQLiteTileSource(OsmandApplication ctx, File f, List<TileSourceTemplate> toFindUrl){
-		this.ctx = ctx;
+	public SQLiteTileSource(OsmandApplication app, File f, List<TileSourceTemplate> toFindUrl){
+		this.app = app;
 		this.file = f;
 		if (f != null) {
 			int i = f.getName().lastIndexOf('.');
@@ -94,13 +94,12 @@ public class SQLiteTileSource implements ITileSource {
 				}
 			}
 		}
-		
 	}
 
-	public SQLiteTileSource(OsmandApplication ctx, String name, int minZoom, int maxZoom, String urlTemplate,
-							String randoms, boolean isEllipsoid, boolean invertedY, String referer, String userAgent,
-							boolean timeSupported, long expirationTimeMillis, boolean inversiveZoom, String rule) {
-		this.ctx = ctx;
+	public SQLiteTileSource(OsmandApplication app, String name, int minZoom, int maxZoom, String urlTemplate,
+	                        String randoms, boolean isEllipsoid, boolean invertedY, String referer, String userAgent,
+	                        boolean timeSupported, long expirationTimeMillis, boolean inversiveZoom, String rule) {
+		this.app = app;
 		this.name = name;
 		this.urlTemplate = urlTemplate;
 		this.maxZoom = maxZoom;
@@ -116,8 +115,8 @@ public class SQLiteTileSource implements ITileSource {
 		this.inversiveZoom = inversiveZoom;
 	}
 
-	public SQLiteTileSource(SQLiteTileSource tileSource, String name, OsmandApplication ctx) {
-		this.ctx = ctx;
+	public SQLiteTileSource(SQLiteTileSource tileSource, String name, OsmandApplication app) {
+		this.app = app;
 		this.name = name;
 		this.urlTemplate = tileSource.getUrlTemplate();
 		this.maxZoom = tileSource.getMaximumZoomSupported();
@@ -133,8 +132,8 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	public void createDataBase() {
-		SQLiteConnection db = ctx.getSQLiteAPI().getOrCreateDatabase(
-				ctx.getAppPath(TILES_INDEX_DIR).getAbsolutePath() + "/" + name + SQLITE_EXT, true);
+		SQLiteConnection db = app.getSQLiteAPI().getOrCreateDatabase(
+				app.getAppPath(TILES_INDEX_DIR).getAbsolutePath() + "/" + name + SQLITE_EXT, true);
 
 		db.execSQL("CREATE TABLE IF NOT EXISTS tiles (x int, y int, z int, s int, image blob, time long, PRIMARY KEY (x,y,z,s))");
 		db.execSQL("CREATE INDEX IF NOT EXISTS IND on tiles (x,y,z,s)");
@@ -234,23 +233,15 @@ public class SQLiteTileSource implements ITileSource {
 				return false;
 		} else if (!base.equals(other.base))
 			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		return true;
+		return Algorithms.stringsEqual(name, other.name);
 	}
-	
-	protected SQLiteConnection getDatabase(){
-		if((db == null || db.isClosed()) && file.exists() ){
+
+	protected SQLiteConnection getDatabase() {
+		if ((db == null || db.isClosed()) && file.exists()) {
 			LOG.debug("Open " + file.getAbsolutePath());
-			try {
-				onlyReadonlyAvailable = false;
-				db = ctx.getSQLiteAPI().openByAbsolutePath(file.getAbsolutePath(), false);
-			} catch(RuntimeException e) {
-				onlyReadonlyAvailable = true;
-				db = ctx.getSQLiteAPI().openByAbsolutePath(file.getAbsolutePath(), true);
+			db = openDatabase(false);
+			if (db == null) {
+				db = openDatabase(true);
 			}
 			try {
 				SQLiteCursor cursor = db.rawQuery("SELECT * FROM info", null);
@@ -342,10 +333,20 @@ public class SQLiteTileSource implements ITileSource {
 				}
 				cursor.close();
 			} catch (RuntimeException e) {
-				e.printStackTrace();
+				LOG.error(e);
 			}
 		}
 		return db;
+	}
+
+	private SQLiteConnection openDatabase(boolean readOnly) {
+		try {
+			onlyReadonlyAvailable = readOnly;
+			return app.getSQLiteAPI().openByAbsolutePath(file.getAbsolutePath(), readOnly);
+		} catch (RuntimeException e) {
+			LOG.error(e);
+		}
+		return null;
 	}
 
 	public void updateFromTileSourceTemplate(TileSourceTemplate r) {
@@ -496,9 +497,8 @@ public class SQLiteTileSource implements ITileSource {
 			return null;
 		}
 		if (blob != null) {
-			Bitmap bmp = null;
-			bmp = BitmapFactory.decodeByteArray(blob, 0, blob.length);
-			if(bmp == null) {
+			Bitmap bmp = BitmapFactory.decodeByteArray(blob, 0, blob.length);
+			if (bmp == null) {
 				// broken image delete it
 				db.execSQL("DELETE FROM tiles WHERE x = ? AND y = ? AND z = ?", params); 
 			} else if(!tileSizeSpecified &&
@@ -566,7 +566,6 @@ public class SQLiteTileSource implements ITileSource {
 		insertImage(x, y, zoom, buf.array());
 		is.close();
 	}
-	
 
 	@Override
 	public void deleteTiles(String path) {

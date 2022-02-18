@@ -2162,7 +2162,7 @@
     <string name="rendering_attr_depthContours_name">Izobaty</string>
     <string name="routing_attr_height_obstacles_name">Używanie danych wysokościowych</string>
     <string name="route_altitude">Wysokość trasy</string>
-    <string name="altitude_descent">Spadek</string>
+    <string name="altitude_descent">Zjazd</string>
     <string name="altitude_ascent">Pod górę</string>
     <string name="altitude_range">Zakres wysokości</string>
     <string name="average_altitude">Średnia wysokość</string>
@@ -4396,10 +4396,10 @@
     <string name="routing_attr_prefer_tactile_paving_description">Preferuj nawierzchnię brukową</string>
     <string name="routing_attr_allow_gate_description">Zezwalaj na korzystanie z bram</string>
     <string name="routing_attr_only_permitted_streets_name">Celowo dozwolone ulice</string>
-    <string name="shared_string_travelbooks">Książki podróżnicze</string>
-    <string name="safe_settings">Bezpieczny</string>
-    <string name="approx_safe_mode">Bezpieczne przybliżenie gpx</string>
-    <string name="approx_safe_mode_description">Wykonaj przybliżenie gpx przy użyciu wolniejszego Androida zamiast kodu natywnego.</string>
+    <string name="shared_string_travelbooks">Książki podróży</string>
+    <string name="safe_settings">Bezpieczeństwo</string>
+    <string name="approx_safe_mode">Bezpieczne przybliżenie GPX</string>
+    <string name="approx_safe_mode_description">Wykonaj przybliżenie GPX przy użyciu wolniejszego Androida zamiast kodu natywnego.</string>
     <string name="use_external_timestamps">Użyj zewnętrznych znaczników czasu</string>
     <string name="use_external_timestamps_description">Użyj znaczników czasu routera online, aby dostosować szacowany czas i średnią prędkość</string>
     <string name="no_plugins_enabled">Nie masz włączonych wtyczek. Listę dostępnych wtyczek znajdziesz w \'Menu\' → \'Wtyczki\'.</string>
@@ -4432,7 +4432,7 @@
     <string name="folder_access_denied">Wymagane uprawnienia dostępu do wybranego folderu.</string>
     <string name="copying_completed">Skopiowano</string>
     <string name="add_to_group">Dodaj do grupy</string>
-    <string name="app_modes_options">Wybierz tryby pracy aplikacji</string>
+    <string name="app_modes_options">Wybierz tryb pracy aplikacji</string>
     <string name="reading_files">Czytanie plików…</string>
     <string name="no_items_selected_warning">Wybierz co najmniej jedną pozycję</string>
     <string name="shared_storage_third_step">Przyznaj uprawnienia dostępu do folderu. Bez tego OsmAnd nie może kopiować plików.</string>
@@ -4470,7 +4470,7 @@
     <string name="shared_string_show_slope">Pokaż nachylenie</string>
     <string name="shared_string_hide_slope">Ukryj nachylenie</string>
     <string name="shared_string_uphill">Pod górę</string>
-    <string name="shared_string_downhill">Spadek</string>
+    <string name="shared_string_downhill">Zjazd</string>
     <string name="elevation_profile">Profil wysokościowy</string>
     <string name="memory_allocated_for_routing_ds">Wyższy przydział pamięci przyspiesza obliczanie długich tras (ponad 500 km), ale może mieć wpływ na działanie innych aplikacji.
 \nNie ma wpływu na szybkość obliczania tras krótkich.</string>
@@ -4492,20 +4492,30 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Pokaż tagi fixme</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Tagi notatek</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Pokaż tagi notatek</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikony przy małych powiększeniach</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikony przy małym zbliżeniu</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematyczne wyświetlanie ikon przy małych powiększeniach</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tunele dróg wodnych</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Nie ukrywaj tuneli dróg wodnych</string>
     <string name="turn_arrows">Strzałki skrętu</string>
     <string name="turn_arrows_descr">Wybierz, czy strzałki skrętu mają być wskazywane na linii trasy.</string>
-    <string name="rendering_attr_seabedDetail_description">Dodatkowe informacje tekstowe dotyczące powierzchni dna morskiego_kwalifikacja, połączone rodzaje powierzchni, kategoria i takson chwastów lub trawy morskiej</string>
+    <string name="rendering_attr_seabedDetail_description">Dodatkowe informacje tekstowe na temat powierzchni dna morskiego_kwalifikacja, połączone typy powierzchni, kategoria i takson chwastów lub trawy morskiej</string>
     <string name="rendering_value_category_name">Kategoria</string>
     <string name="rendering_value_all_name">Wszystkie</string>
     <string name="rendering_attr_seabedDetail_name">Szczegóły dna morskiego</string>
     <string name="please_provide_group_name_message">Podaj nazwę grupy.</string>
     <string name="quick_action_add_route_descr">Przycisk rozpoczęcia trasy od środka ekranu.</string>
-    <string name="gpx_no_routes_descr">Możesz użyć narzędzia \"%1$s\", aby dodać trasę do pliku.</string>
+    <string name="gpx_no_routes_descr">Możesz użyć narzędzia „%1$s”, aby zapisać trasę w pliku.</string>
     <string name="gpx_no_routes_title">Brak tras</string>
     <string name="save_track_to_gpx_descrp">Rozpocznij nagrywanie śladu automatycznie, gdy nawigacja jest w toku. Po zakończeniu ścieżka zostanie automatycznie zapisana.</string>
-    <string name="rendering_value_omit_name">Pomijać</string>
+    <string name="rendering_value_omit_name">Pomiń</string>
+    <string name="google_play_services">Usługi Google Play</string>
+    <string name="location_source">Źródło lokalizacji</string>
+    <string name="select_suggested_points">Wybierz sugerowane punkty</string>
+    <string name="shared_string_reading_file">Odczyt pliku…</string>
+    <string name="all_groups">Wszystkie grupy</string>
+    <string name="list_of_groups">Lista grup</string>
+    <string name="exit_import_descr">Wyjść bez zapisywania zmian\?</string>
+    <string name="exit_import">Wyjść\?</string>
+    <string name="import_tracks">Importuj trasy</string>
+    <string name="memory_allocated_for_routing">Pamięć została przydzielona do routingu.</string>
 </resources>

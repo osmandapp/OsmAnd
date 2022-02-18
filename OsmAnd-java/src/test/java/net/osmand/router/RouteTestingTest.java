@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 
+import net.osmand.util.RouterUtilTest;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -20,25 +21,21 @@ import java.io.Reader;
 import java.util.*;
 import java.util.Map.Entry;
 import net.osmand.NativeLibrary;
-import net.osmand.binary.BinaryMapIndexReader;
 
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import static net.osmand.util.RouterUtilTest.getNativeLibPath;
 
 @RunWith(Parameterized.class)
 public class RouteTestingTest {
 	private final TestEntry te;
 
 	private static final int TIMEOUT = 1500;
-	private static final boolean NATIVE_LIB = false;
 
 	public RouteTestingTest(String name, TestEntry te) {
 		this.te = te;
+	}
+	
+	boolean isNative() {
+		return false;
 	}
 
 	@BeforeClass
@@ -66,9 +63,10 @@ public class RouteTestingTest {
 
 	@Test(timeout = TIMEOUT)
 	public void testRouting() throws Exception {
-		NativeLibrary nativeLibrary;
-		if (NATIVE_LIB) {
-			boolean old = NativeLibrary.loadOldLib("/Users/plotva/work/osmand/core-legacy/binaries/darwin/intel/Release");
+		NativeLibrary nativeLibrary = null;
+		boolean useNative = isNative() && getNativeLibPath() != null && !te.isIgnoreNative();
+		if (useNative) {
+			boolean old = NativeLibrary.loadOldLib(getNativeLibPath());
 			nativeLibrary = new NativeLibrary();
 			if (!old) {
 				throw new UnsupportedOperationException("Not supported");
@@ -89,14 +87,14 @@ public class RouteTestingTest {
 					new BinaryMapIndexReader(raf1, new File(fl1)),
 					new BinaryMapIndexReader(raf, new File(fl))
 			};
-			if (NATIVE_LIB) {
-				nativeLibrary.initMapFile(new File(fl1).getAbsolutePath(), true);
+			if (useNative) {
+				Objects.requireNonNull(nativeLibrary).initMapFile(new File(fl1).getAbsolutePath(), true);
 			}
 		} else {
 			binaryMapIndexReaders = new BinaryMapIndexReader[]{new BinaryMapIndexReader(raf, new File(fl))};
 		}
-		if (NATIVE_LIB) {
-			nativeLibrary.initMapFile(new File(fl).getAbsolutePath(), true);
+		if (useNative) {
+			Objects.requireNonNull(nativeLibrary).initMapFile(new File(fl).getAbsolutePath(), true);
 		}
 		for (int planRoadDirection = -1; planRoadDirection <= 1; planRoadDirection++) {
 			if (params.containsKey("wrongPlanRoadDirection")) {
@@ -119,7 +117,7 @@ public class RouteTestingTest {
 
 			config.planRoadDirection = planRoadDirection;
 			RoutingContext ctx;
-			if (NATIVE_LIB) {
+			if (useNative) {
 				ctx = fe.buildRoutingContext(config, nativeLibrary, binaryMapIndexReaders,
 						RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
 			} else {
@@ -147,24 +145,25 @@ public class RouteTestingTest {
 					reachedSegments.add(routeSegments.get(i).getObject().getId() >> (RouteResultPreparation.SHIFT_ID));
 				}
 			}
-			Map<Long, String> expectedResults = te.getExpectedResults();
+			Map<String, String> expectedResults = te.getExpectedResults();
 			if (expectedResults == null) {
 				System.out.println("This is test on hanging routing");
 				break;
 			}
-			for (Entry<Long, String> es : expectedResults.entrySet()) {
+			for (Entry<String, String> es : expectedResults.entrySet()) {
+				long id = RouterUtilTest.getRoadId(es.getKey());
 				switch (es.getValue()) {
 					case "false":
-						Assert.assertFalse("Expected segment " + (es.getKey()) + " was wrongly reached in route segments "
-								+ reachedSegments, reachedSegments.contains(es.getKey()));
+						Assert.assertFalse("Expected segment " + id + " was wrongly reached in route segments "
+								+ reachedSegments, reachedSegments.contains(id));
 						break;
 					case "true":
-						Assert.assertTrue("Expected segment " + (es.getKey()) + " weren't reached in route segments "
-								+ reachedSegments, reachedSegments.contains(es.getKey()));
+						Assert.assertTrue("Expected segment " + id + " weren't reached in route segments "
+								+ reachedSegments, reachedSegments.contains(id));
 						break;
 					case "visitedSegments":
-						Assert.assertTrue("Expected segments visit " + (es.getKey()) + " less then actually visited segments "
-								+ ctx.getVisitedSegments(), ctx.getVisitedSegments() < es.getKey());
+						Assert.assertTrue("Expected segments visit " + id + " less then actually visited segments "
+								+ ctx.getVisitedSegments(), ctx.getVisitedSegments() < id);
 						break;
 				}
 			}
