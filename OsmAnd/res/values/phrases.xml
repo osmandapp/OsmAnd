@@ -4588,7 +4588,7 @@
 	<string name="poi_lgbtq_primary">LGBTQ: primary</string>
 	<string name="poi_lgbtq_yes">LGBTQ allowed</string>
 	<string name="poi_lgbtq_only">LGBTQ only</string>
-	<string name="poi_lgbtq_no">LGBTQ now allowed</string>
+	<string name="poi_lgbtq_no">LGBTQ not allowed</string>
 	<string name="poi_beauty_salon_tanning">Tanning</string>
 	<string name="poi_beauty_salon_cosmetics">Cosmetics</string>
 	<string name="poi_beauty_salon_spa">Spa</string>
