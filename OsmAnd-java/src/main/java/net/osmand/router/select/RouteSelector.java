@@ -28,7 +28,6 @@ public class RouteSelector {
 	public static final String ROUTE_KEY_SEPARATOR = "___";
 	public static final String ROUTE_KEY_VALUE_SEPARATOR = "_";
 	OsmcRouteContext rCtx;
-	Set<String> routeKeys;
 	String routeKey;
 
 	public enum RouteType {
@@ -46,6 +45,11 @@ public class RouteSelector {
 		public String getType() {
 			return type;
 		}
+
+		public String getTypeWithPrefix() {
+			return ROUTE_PREFIX + type;
+		}
+
 
 		public static boolean isRoute(String tag) {
 			for (RouteType routeType : values()) {
@@ -71,7 +75,6 @@ public class RouteSelector {
 		if (mapIndex == null) {
 			return null;
 		}
-		routeKeys = getRouteStringKeys(renderedObject, null);
 		return getRoutes(qr, null);
 	}
 
@@ -109,7 +112,7 @@ public class RouteSelector {
 		return routeTagsList;
 	}
 
-	private static int getRouteQuantity(List<String> allTagsList) {
+	static int getRouteQuantity(List<String> allTagsList) {
 		Collections.sort(allTagsList);
 		int routeQuantity = 0;
 		for (int i = allTagsList.size() - 1; i > 0; i--) {
@@ -124,20 +127,20 @@ public class RouteSelector {
 		return routeQuantity;
 	}
 
-	private String getRouteStringKeys(List<String> allTagsList, RouteType routeType) {
+	public static String getRouteStringKey(List<String> allTagsList, String routeTypeWithPrefix) {
 		int routeQuantity = getRouteQuantity(allTagsList);
 		if (routeQuantity != 0) {
 			for (int routeIdx = 1; routeIdx <= routeQuantity; routeIdx++) {
 				StringBuilder tagKey = new StringBuilder();
 				boolean start = true;
 				for (String tag : allTagsList) {
-					if (tag.startsWith(ROUTE_PREFIX + routeType.type + "_" + routeIdx)) {
+					if (tag.startsWith(routeTypeWithPrefix + "_" + routeIdx)) {
 						if (start) {
 							start = false;
-							tagKey.append(ROUTE_PREFIX).append(routeType.type);
+							tagKey.append(routeTypeWithPrefix);
 						} else {
 							tagKey.append(ROUTE_KEY_SEPARATOR)
-									.append(tag.substring((ROUTE_PREFIX + routeType.type + "_" + routeIdx).length() + 1));
+									.append(tag.substring((routeTypeWithPrefix + "_" + routeIdx).length() + 1));
 						}
 					}
 				}
@@ -235,9 +238,12 @@ public class RouteSelector {
 		List<BinaryMapDataObject> foundSegmentList = new ArrayList<>();
 		boolean exit = false;
 		while (!exit) {
-			SearchRequest<BinaryMapDataObject> req = buildSearchRequest(foundSegmentList, x, y, split, routeType);
-			foundSegmentList.clear();
-			indexReader.searchMapIndex(req);
+//			SearchRequest<BinaryMapDataObject> req = buildSearchRequest(foundSegmentList, x, y, split, routeType);
+//			foundSegmentList.clear();
+//			indexReader.searchMapIndex(req);
+
+			OsmcRouteSegment routeSegment = rCtx.loadRouteSegment(x,y);
+			foundSegmentList.addAll(routeSegment.getObjectsByRouteKey(routeKey));
 			exit = true;
 			Iterator<BinaryMapDataObject> i = foundSegmentList.iterator();
 			while (i.hasNext()) {
@@ -255,9 +261,10 @@ public class RouteSelector {
 			}
 
 			if (foundSegmentList.isEmpty()) {
-				req = buildSearchRequest(foundSegmentList, x, y, true, routeType);
+//				req = buildSearchRequest(foundSegmentList, x, y, true, routeType);
 				foundSegmentList.clear();
-				indexReader.searchMapIndex(req);
+//				indexReader.searchMapIndex(req);
+				foundSegmentList.addAll(rCtx.loadRouteSegment(x,y).getObjectsByRouteKey(routeKey));
 				removeExistedSegments(finalSegmentList, foundSegmentList);
 
 				if (!foundSegmentList.isEmpty()) {
@@ -354,10 +361,12 @@ public class RouteSelector {
 	                                              RouteType routeType) throws IOException {
 		List<BinaryMapDataObject> foundSegmentList = new ArrayList<>();
 		for (int i = 0; i < foundSegment.getPointsLength(); i++) {
-			final SearchRequest<BinaryMapDataObject> req = buildSearchRequest(foundSegmentList,
-					foundSegment.getPoint31XTile(i), foundSegment.getPoint31YTile(i), false, routeType);
+//			final SearchRequest<BinaryMapDataObject> req = buildSearchRequest(foundSegmentList,
+//					foundSegment.getPoint31XTile(i), foundSegment.getPoint31YTile(i), false, routeType);
 			foundSegmentList.clear();
-			indexReader.searchMapIndex(req);
+//			indexReader.searchMapIndex(req);
+			foundSegmentList.addAll(rCtx.loadRouteSegment(foundSegment.getPoint31XTile(i), foundSegment.getPoint31YTile(i))
+					.getObjectsByRouteKey(routeKey));
 			if (!foundSegmentList.isEmpty()) {
 				removeExistedSegments(finalSegmentList, foundSegmentList);
 				if (!foundSegmentList.isEmpty()) {
@@ -417,7 +426,7 @@ public class RouteSelector {
 							for (Map.Entry<Integer, List<String>> entry : objectTagMap.entrySet()) {
 								List<String> objectTagList = entry.getValue();
 								Collections.sort(objectTagList);
-								String objectTagKey = getRouteStringKeys(objectTagList, routeType);
+								String objectTagKey = getRouteStringKey(objectTagList, routeType.getTypeWithPrefix());
 								if (Algorithms.stringsEqual(routeKey, objectTagKey)) {
 									foundSegmentList.add(object);
 								}
