@@ -28,7 +28,7 @@ public class NetworkRouteContext {
 		NetworkRoutesTile osmcRoutesTile = getMapRouteTile(x31, y31);
 		double sqrRadius = radius * radius;
 		for (NetworkRoutePoint segment : osmcRoutesTile.getRoutes().values()) {
-			if (MapUtils.squareDist31TileMetric(segment.getX(), segment.getY(), x31, y31) < sqrRadius) {
+			if (MapUtils.squareDist31TileMetric(segment.x31, segment.y31, x31, y31) < sqrRadius) {
 				nearSegments.add(segment);
 			}
 		}
@@ -39,9 +39,13 @@ public class NetworkRouteContext {
 		return readers;
 	}
 
-	public NetworkRoutePoint loadRouteSegment(int x31, int y31) throws IOException {
+	public List<BinaryMapDataObject> loadRouteSegment(int x31, int y31) throws IOException {
 		NetworkRoutesTile osmcRoutesTile = getMapRouteTile(x31, y31);
-		return osmcRoutesTile.getRouteSegment(x31, y31);
+		NetworkRoutePoint point = osmcRoutesTile.getRouteSegment(x31, y31);
+		if (point == null) {
+			return Collections.emptyList();
+		}
+		return point.binaryMapDataObjects;
 	}
 
 	public NetworkRoutesTile getMapRouteTile(int x31, int y31) throws IOException {
@@ -109,6 +113,31 @@ public class NetworkRouteContext {
 		int zmShift = 31 - ZOOM_TO_LOAD_TILES;
 		return (long) (x31 >> zmShift) << ZOOM_TO_LOAD_TILES + ((long) (y31 >> zmShift));
 	}
+	
+	public class NetworkRoutePoint {
+		public final int x31;
+		public final int y31;
+		public final List<BinaryMapDataObject> binaryMapDataObjects = new ArrayList<>();
+		
+		public NetworkRoutePoint(int x31, int y31) {
+			this.x31 = x31;
+			this.y31 = y31;
+		}
+
+
+		public void addObject(BinaryMapDataObject bMdo) {
+			if (bMdo.getId() > 0) {
+				for (BinaryMapDataObject obj : binaryMapDataObjects) {
+					if (obj.getId() == bMdo.getId()) {
+						return;
+					}
+				}
+			}
+			binaryMapDataObjects.add(bMdo);
+		}
+
+	}
+
 
 	private class NetworkRoutesTile {
 		private final TLongObjectMap<NetworkRoutePoint> routes = new TLongObjectHashMap<>();
