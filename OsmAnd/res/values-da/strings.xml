@@ -4538,4 +4538,8 @@
 \n
 \nHvis du får unøjagtige placeringsoplysninger eller bruger en enhed uden %2$s, kan du prøve at skifte til \"%3$s\"</string>
     <string name="location_source">Placeringskilde</string>
+    <string name="shared_string_shape">Form</string>
+    <string name="default_appearance_desc">Standardfarve, ikon og form gælder for de tilføjede favoritpunkter i gruppen.</string>
+    <string name="default_appearance">Standardudseende</string>
+    <string name="edit_category">Rediger kategori</string>
 </resources>
