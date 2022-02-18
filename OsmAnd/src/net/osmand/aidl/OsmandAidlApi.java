@@ -2462,6 +2462,11 @@ public class OsmandAidlApi {
 		return true;
 	}
 
+	public boolean reloadIndexes() {
+		app.getResourceManager().reloadIndexesAsync(null, null);
+		return true;
+	}
+
 	private static class FileCopyInfo {
 		long startTime;
 		long lastAccessTime;
