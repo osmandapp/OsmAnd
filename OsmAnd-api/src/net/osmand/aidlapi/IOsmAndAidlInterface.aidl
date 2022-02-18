@@ -904,4 +904,6 @@ interface IOsmAndAidlInterface {
     boolean removeRoadBlock(in RemoveBlockedRoadParams params);
 
     boolean setLocation(in SetLocationParams params);
+
+    boolean reloadIndexes();
 }
