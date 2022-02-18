@@ -9,9 +9,13 @@ import static net.osmand.binary.BinaryMapIndexReader.*;
 import static net.osmand.router.select.RouteSelector.*;
 
 public class OsmcRouteSegment {
+	int x31;
+	int y31;
 	private final List<BinaryMapDataObject> binaryMapDataObjects = new ArrayList<>();
 
-	public OsmcRouteSegment(BinaryMapDataObject bMdo) {
+	public OsmcRouteSegment(BinaryMapDataObject bMdo, int x31, int y31) {
+		this.x31 = x31;
+		this.y31 = y31;
 		addObject(bMdo);
 	}
 

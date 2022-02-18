@@ -5,6 +5,7 @@ import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.util.MapUtils;
 
 import java.io.IOException;
 import java.util.*;
@@ -15,6 +16,18 @@ public class OsmcRouteContext {
 	public int ZOOM_TO_LOAD_TILES = 16;
 	TLongObjectHashMap<OsmcRoutesTile> indexedSubregions = new TLongObjectHashMap<>();
 	private BinaryMapIndexReader reader;
+
+	List<OsmcRouteSegment> loadNearRouteSegment(int x31, int y31, int radius) {
+		List<OsmcRouteSegment> nearSegments = new ArrayList<>();
+		OsmcRoutesTile osmcRoutesTile = getMapRouteTile(x31, y31);
+		double sqrRadius = radius * radius;
+		for (OsmcRouteSegment segment : osmcRoutesTile.getRoutes().values()) {
+			if (MapUtils.squareDist31TileMetric(segment.x31, segment.y31, x31, y31) < sqrRadius) {
+				nearSegments.add(segment);
+			}
+		}
+		return nearSegments;
+	}
 
 	OsmcRouteSegment loadRouteSegment(int x31, int y31) {
 		OsmcRoutesTile osmcRoutesTile = getMapRouteTile(x31, y31);
@@ -31,7 +44,6 @@ public class OsmcRouteContext {
 	}
 
 	private OsmcRoutesTile loadTile(int x31, int y31) {
-		// TODO: 09.02.22
 		final BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> req = buildTileRequest(x31, y31);
 		OsmcRoutesTile osmcRoutesTile = new OsmcRoutesTile();
 		try {

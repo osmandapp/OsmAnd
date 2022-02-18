@@ -12,7 +12,7 @@ class OsmcRoutesTile {
 			int x31 = bMdo.getPoint31XTile(i);
 			int y31 = bMdo.getPoint31YTile(i);
 			long id = getPointId(x31, y31);
-			OsmcRouteSegment segment = new OsmcRouteSegment(bMdo);
+			OsmcRouteSegment segment = new OsmcRouteSegment(bMdo, x31, y31);
 			if (!routes.containsKey(id)) {
 				routes.put(id, segment);
 			} else {
@@ -20,6 +20,10 @@ class OsmcRoutesTile {
 				routeSegment.addObject(bMdo);
 			}
 		}
+	}
+
+	public TLongObjectMap<OsmcRouteSegment> getRoutes() {
+		return routes;
 	}
 
 	public OsmcRouteSegment getRouteSegment(int x31, int y31) {

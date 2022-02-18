@@ -1,16 +1,11 @@
 package net.osmand.router.select;
 
-import gnu.trove.list.array.TIntArrayList;
-
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.NativeLibrary.RenderedObject;
-import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
-import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
-import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.QuadRect;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -75,7 +70,7 @@ public class RouteSelector {
 		if (mapIndex == null) {
 			return null;
 		}
-		return getRoutes(qr, null);
+		return getRoutes(qr);
 	}
 
 	public static Set<String> getRouteStringKeys(RenderedObject o, Set<RouteType> typeSet) {
@@ -152,28 +147,27 @@ public class RouteSelector {
 		return null;
 	}
 
-	public List<GPXFile> getRoutes(QuadRect bbox, Set<String> routePrefixes) {
+	public List<GPXFile> getRoutes(QuadRect bBox) {
 		List<GPXFile> gpxFileList = new ArrayList<>();
-		List<BinaryMapDataObject> foundSegmentList = new ArrayList<>();
 		List<BinaryMapDataObject> finalSegmentList = new ArrayList<>();
-		RouteType routeType = RouteType.HIKING;
-		int x = (int) bbox.left;
-		int y = (int) bbox.bottom;
-		int xStart = 0;
-		int yStart = 0;
+		int x = (int) bBox.left;
+		int y = (int) bBox.bottom;
+		int xStart;
+		int yStart;
 
 		try {
 			for (BinaryMapIndexReader indexReader : files) {
 				rCtx.setReader(indexReader);
-				OsmcRouteSegment routeSegment = getSegment(x, y, routeType);
-				BinaryMapDataObject segment = routeSegment.getObjectsByRouteKey(routeKey).get(0);
-				finalSegmentList.add(segment);
-				xStart = segment.getPoint31XTile(0);
-				yStart = segment.getPoint31YTile(0);
-				x = segment.getPoint31XTile(segment.getPointsLength() - 1);
-				y = segment.getPoint31YTile(segment.getPointsLength() - 1);
-				getRoutePart(finalSegmentList, x, y, indexReader, false, routeType);
-				getRoutePart(finalSegmentList, xStart, yStart, indexReader, false, routeType);
+				OsmcRouteSegment routeSegment = getSegment(x, y);
+				for (BinaryMapDataObject segment : routeSegment.getObjectsByRouteKey(routeKey)) {
+					finalSegmentList.add(segment);
+					xStart = segment.getPoint31XTile(0);
+					yStart = segment.getPoint31YTile(0);
+					x = segment.getPoint31XTile(segment.getPointsLength() - 1);
+					y = segment.getPoint31YTile(segment.getPointsLength() - 1);
+					getRoutePart(finalSegmentList, x, y);
+					getRoutePart(finalSegmentList, xStart, yStart);
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -185,10 +179,9 @@ public class RouteSelector {
 		return gpxFileList;
 	}
 
-	private OsmcRouteSegment getSegment(int x, int y, RouteType routeType) {
+	private OsmcRouteSegment getSegment(int x, int y) {
 		return rCtx.loadRouteSegment(x, y);
 	}
-
 
 	GPXFile createGpxFile(List<BinaryMapDataObject> segmentList) {
 		GPXFile gpxFile = null;
@@ -230,19 +223,12 @@ public class RouteSelector {
 		return null;
 	}
 
-
-	private void getRoutePart(List<BinaryMapDataObject> finalSegmentList, int x, int y,
-	                          BinaryMapIndexReader indexReader, boolean split,
-	                          RouteType routeType)
+	private void getRoutePart(List<BinaryMapDataObject> finalSegmentList, int x, int y)
 			throws IOException {
 		List<BinaryMapDataObject> foundSegmentList = new ArrayList<>();
 		boolean exit = false;
 		while (!exit) {
-//			SearchRequest<BinaryMapDataObject> req = buildSearchRequest(foundSegmentList, x, y, split, routeType);
-//			foundSegmentList.clear();
-//			indexReader.searchMapIndex(req);
-
-			OsmcRouteSegment routeSegment = rCtx.loadRouteSegment(x,y);
+			OsmcRouteSegment routeSegment = rCtx.loadRouteSegment(x, y);
 			foundSegmentList.addAll(routeSegment.getObjectsByRouteKey(routeKey));
 			exit = true;
 			Iterator<BinaryMapDataObject> i = foundSegmentList.iterator();
@@ -261,9 +247,7 @@ public class RouteSelector {
 			}
 
 			if (foundSegmentList.isEmpty()) {
-//				req = buildSearchRequest(foundSegmentList, x, y, true, routeType);
-				foundSegmentList.clear();
-//				indexReader.searchMapIndex(req);
+				// TODO: find split segment
 				foundSegmentList.addAll(rCtx.loadRouteSegment(x,y).getObjectsByRouteKey(routeKey));
 				removeExistedSegments(finalSegmentList, foundSegmentList);
 
@@ -277,33 +261,23 @@ public class RouteSelector {
 					int ye = foundSegment.getPoint31YTile(foundSegment.getPointsLength() - 1);
 					double distBegin = MapUtils.squareDist31TileMetric(x, y, xb, yb);
 					double distEnd = MapUtils.squareDist31TileMetric(x, y, xe, ye);
-					if (distBegin < distEnd) {
-						x = xb;
-						y = yb;
-					} else {
-						x = xe;
-						y = ye;
-					}
+					x = distBegin < distEnd ? xb : xe;
+					y = distBegin < distEnd ? yb : ye;
 				}
 			}
 
 			for (BinaryMapDataObject foundSegment : foundSegmentList) {
 				if (isRoundabout(foundSegment)) {
 					finalSegmentList.add(foundSegment);
-					foundSegment = processRoundabout(foundSegment, finalSegmentList, indexReader, routeType);
+					foundSegment = processRoundabout(foundSegment, finalSegmentList);
 					int xb = foundSegment.getPoint31XTile(0);
 					int yb = foundSegment.getPoint31YTile(0);
 					int xe = foundSegment.getPoint31XTile(foundSegment.getPointsLength() - 1);
 					int ye = foundSegment.getPoint31YTile(foundSegment.getPointsLength() - 1);
 					double distBegin = MapUtils.squareDist31TileMetric(x, y, xb, yb);
 					double distEnd = MapUtils.squareDist31TileMetric(x, y, xe, ye);
-					if (distBegin < distEnd) {
-						x = xb;
-						y = yb;
-					} else {
-						x = xe;
-						y = ye;
-					}
+					x = distBegin < distEnd ? xb : xe;
+					y = distBegin < distEnd ? yb : ye;
 				}
 				finalSegmentList.add(foundSegment);
 				int xNext = foundSegment.getPoint31XTile(foundSegment.getPointsLength() - 1);
@@ -313,7 +287,7 @@ public class RouteSelector {
 					yNext = foundSegment.getPoint31YTile(0);
 				}
 				if (foundSegmentList.size() > 1) {
-					getRoutePart(finalSegmentList, xNext, yNext, indexReader, split, routeType);
+					getRoutePart(finalSegmentList, xNext, yNext);
 				} else {
 					exit = false;
 					x = xNext;
@@ -356,15 +330,11 @@ public class RouteSelector {
 				MapUtils.squareDist31TileMetric(x, y, segment.getPoint31XTile(last), segment.getPoint31YTile(last)));
 	}
 
-	private BinaryMapDataObject processRoundabout(BinaryMapDataObject foundSegment, List<BinaryMapDataObject> finalSegmentList,
-	                                              BinaryMapIndexReader indexReader,
-	                                              RouteType routeType) throws IOException {
+	private BinaryMapDataObject processRoundabout(BinaryMapDataObject foundSegment,
+	                                              List<BinaryMapDataObject> finalSegmentList) {
 		List<BinaryMapDataObject> foundSegmentList = new ArrayList<>();
 		for (int i = 0; i < foundSegment.getPointsLength(); i++) {
-//			final SearchRequest<BinaryMapDataObject> req = buildSearchRequest(foundSegmentList,
-//					foundSegment.getPoint31XTile(i), foundSegment.getPoint31YTile(i), false, routeType);
 			foundSegmentList.clear();
-//			indexReader.searchMapIndex(req);
 			foundSegmentList.addAll(rCtx.loadRouteSegment(foundSegment.getPoint31XTile(i), foundSegment.getPoint31YTile(i))
 					.getObjectsByRouteKey(routeKey));
 			if (!foundSegmentList.isEmpty()) {
@@ -378,86 +348,6 @@ public class RouteSelector {
 			return foundSegmentList.get(0);
 		}
 		return foundSegment;
-	}
-
-
-	private SearchRequest<BinaryMapDataObject> buildSearchRequest(final List<BinaryMapDataObject> foundSegmentList,
-	                                                              int xc, int yc, boolean split,
-	                                                              final RouteType routeType) {
-		int deviate = split ? SPLIT_RADIUS : DEVIATE;
-		return BinaryMapIndexReader.buildSearchRequest(xc - deviate, xc + deviate,
-				yc - deviate, yc + deviate,
-				ZOOM, new BinaryMapIndexReader.SearchFilter() {
-					@Override
-					public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex index) {
-						return true;
-					}
-				},
-				new ResultMatcher<BinaryMapDataObject>() {
-					@Override
-					public boolean publish(BinaryMapDataObject object) {
-						Map<Integer, List<String>> objectTagMap = new HashMap<>();
-						for (int routeIdx = 1; routeIdx <= getRouteQuantity(object); routeIdx++) {
-							String prefix = ROUTE_PREFIX + routeType.getType() + "_" + routeIdx;
-							for (int i = 0; i < object.getObjectNames().keys().length; i++) {
-								TagValuePair tp = object.getMapIndex().decodeType(object.getObjectNames().keys()[i]);
-								if (tp != null && tp.tag != null && (tp.tag).startsWith(prefix)) {
-									String tagWoPrefix = tp.tag;
-									String value = tagWoPrefix + ROUTE_KEY_VALUE_SEPARATOR
-											+ object.getObjectNames().get(object.getObjectNames().keys()[i]);
-									putTag(objectTagMap, routeIdx, value);
-								}
-							}
-							int[] allTypes = Arrays.copyOf(object.getTypes(), object.getTypes().length
-									+ object.getAdditionalTypes().length);
-							System.arraycopy(object.getAdditionalTypes(), 0, allTypes, object.getTypes().length,
-									object.getAdditionalTypes().length);
-							for (int allType : allTypes) {
-								TagValuePair tp = object.getMapIndex().decodeType(allType);
-								if (tp != null && tp.tag != null && (tp.tag).startsWith(prefix)) {
-									String tagWoPrefix = tp.tag;
-									String value = tagWoPrefix
-											+ (Algorithms.isEmpty(tp.value) ? "" : ROUTE_KEY_VALUE_SEPARATOR + tp.value);
-									putTag(objectTagMap, routeIdx, value);
-								}
-							}
-						}
-						if (!objectTagMap.isEmpty()) {
-							for (Map.Entry<Integer, List<String>> entry : objectTagMap.entrySet()) {
-								List<String> objectTagList = entry.getValue();
-								Collections.sort(objectTagList);
-								String objectTagKey = getRouteStringKey(objectTagList, routeType.getTypeWithPrefix());
-								if (Algorithms.stringsEqual(routeKey, objectTagKey)) {
-									foundSegmentList.add(object);
-								}
-							}
-						}
-						return false;
-					}
-
-					private void putTag(Map<Integer, List<String>> objectTagMap, int routeIdx, String value) {
-						List<String> tagList = objectTagMap.get(routeIdx);
-						if (tagList == null) {
-							tagList = new ArrayList<>();
-						}
-						tagList.add(value);
-						objectTagMap.put(routeIdx, tagList);
-					}
-
-					private int getRouteQuantity(BinaryMapDataObject object) {
-						List<String> tagsList = new ArrayList<>();
-						for (int i = 0; i < object.getAdditionalTypes().length; i++) {
-							TagValuePair tp = object.getMapIndex().decodeType(object.getAdditionalTypes()[i]);
-							tagsList.add(tp.tag);
-						}
-						return RouteSelector.getRouteQuantity(tagsList);
-					}
-
-					@Override
-					public boolean isCancelled() {
-						return false;
-					}
-				});
 	}
 
 	private boolean isRoundabout(BinaryMapDataObject segment) {
