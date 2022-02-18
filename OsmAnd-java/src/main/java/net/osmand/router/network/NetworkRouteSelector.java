@@ -1,5 +1,14 @@
 package net.osmand.router.network;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.NativeLibrary.RenderedObject;
@@ -10,58 +19,26 @@ import net.osmand.data.QuadRect;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
-import java.io.IOException;
-import java.util.*;
-
 public class NetworkRouteSelector {
+	
 	public static final int ZOOM = 15;
 	public static final String ROUTE_PREFIX = "route_";
 	public static final int DEVIATE = 200;
 	public static final int SPLIT_RADIUS = 50000;
-	final BinaryMapIndexReader[] files;
-	// ROUTE_KEY: {route_bicycle_1=, route_bicycle_1_node_network=rcn, route_bicycle_1_ref=67-68} -> "route_bicycle___node_network_rcn___ref_67-68"
 	public static final String ROUTE_KEY_SEPARATOR = "___";
 	public static final String ROUTE_KEY_VALUE_SEPARATOR = "_";
-	NetworkRouteContext rCtx;
+	
+	
+	private final NetworkRouteContext rCtx;
+	// TODO
+	// ROUTE_KEY: {route_bicycle_1=, route_bicycle_1_node_network=rcn, route_bicycle_1_ref=67-68} -> "route_bicycle___node_network_rcn___ref_67-68"
 	String routeKey;
-
-	public enum RouteType {
-
-		HIKING("hiking"),
-		BICYCLE("bicycle"),
-		MTB("mtb"),
-		HORSE("horse");
-		private final String type;
-
-		RouteType(String type) {
-			this.type = type;
-		}
-
-		public String getType() {
-			return type;
-		}
-
-		public String getTypeWithPrefix() {
-			return ROUTE_PREFIX + type;
-		}
-
-
-		public static boolean isRoute(String tag) {
-			for (RouteType routeType : values()) {
-				if (tag.startsWith(ROUTE_PREFIX + routeType.type)) {
-					return true;
-				}
-			}
-			return false;
-		}
-	}
-
+	
 	public NetworkRouteSelector(BinaryMapIndexReader[] files) {
-		this.files = files;
-		rCtx = new NetworkRouteContext();
+		rCtx = new NetworkRouteContext(files);
 	}
 
-	public List<GPXFile> getRoutes(RenderedObject renderedObject, String routeKey) {
+	public List<GPXFile> getRoutes(RenderedObject renderedObject, String routeKey) throws IOException {
 		this.routeKey = routeKey;
 		QuadRect qr = new QuadRect();
 		qr.left = qr.right = renderedObject.getX().get(0);
@@ -147,30 +124,22 @@ public class NetworkRouteSelector {
 		return null;
 	}
 
-	public List<GPXFile> getRoutes(QuadRect bBox) {
+	public List<GPXFile> getRoutes(QuadRect bBox) throws IOException {
 		List<GPXFile> gpxFileList = new ArrayList<>();
 		List<BinaryMapDataObject> finalSegmentList = new ArrayList<>();
 		int x = (int) bBox.left;
 		int y = (int) bBox.bottom;
 		int xStart;
 		int yStart;
-
-		try {
-			for (BinaryMapIndexReader indexReader : files) {
-				rCtx.setReader(indexReader);
-				NetworkRouteSegment routeSegment = getSegment(x, y);
-				for (BinaryMapDataObject segment : routeSegment.getObjectsByRouteKey(routeKey)) {
-					finalSegmentList.add(segment);
-					xStart = segment.getPoint31XTile(0);
-					yStart = segment.getPoint31YTile(0);
-					x = segment.getPoint31XTile(segment.getPointsLength() - 1);
-					y = segment.getPoint31YTile(segment.getPointsLength() - 1);
-					getRoutePart(finalSegmentList, x, y);
-					getRoutePart(finalSegmentList, xStart, yStart);
-				}
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		NetworkRoutePoint routeSegment = getSegment(x, y);
+		for (BinaryMapDataObject segment : routeSegment.getObjectsByRouteKey(routeKey)) {
+			finalSegmentList.add(segment);
+			xStart = segment.getPoint31XTile(0);
+			yStart = segment.getPoint31YTile(0);
+			x = segment.getPoint31XTile(segment.getPointsLength() - 1);
+			y = segment.getPoint31YTile(segment.getPointsLength() - 1);
+			getRoutePart(finalSegmentList, x, y);
+			getRoutePart(finalSegmentList, xStart, yStart);
 		}
 		if (!finalSegmentList.isEmpty()) {
 			gpxFileList.add(createGpxFile(finalSegmentList));
@@ -179,7 +148,7 @@ public class NetworkRouteSelector {
 		return gpxFileList;
 	}
 
-	private NetworkRouteSegment getSegment(int x, int y) throws IOException {
+	private NetworkRoutePoint getSegment(int x, int y) throws IOException {
 		return rCtx.loadRouteSegment(x, y);
 	}
 
@@ -208,7 +177,7 @@ public class NetworkRouteSelector {
 		int zoom = ZOOM;
 		int x31 = renderedObject.getX().get(0);
 		int y31 = renderedObject.getY().get(0);
-		for (BinaryMapIndexReader reader : files) {
+		for (BinaryMapIndexReader reader : rCtx.getReaders()) {
 			for (MapIndex mapIndex : reader.getMapIndexes()) {
 				for (BinaryMapIndexReader.MapRoot root : mapIndex.getRoots()) {
 					if (root.getMinZoom() <= zoom && root.getMaxZoom() >= zoom) {
@@ -228,7 +197,7 @@ public class NetworkRouteSelector {
 		List<BinaryMapDataObject> foundSegmentList = new ArrayList<>();
 		boolean exit = false;
 		while (!exit) {
-			NetworkRouteSegment routeSegment = rCtx.loadRouteSegment(x, y);
+			NetworkRoutePoint routeSegment = rCtx.loadRouteSegment(x, y);
 			foundSegmentList.addAll(routeSegment.getObjectsByRouteKey(routeKey));
 			exit = true;
 			Iterator<BinaryMapDataObject> i = foundSegmentList.iterator();
@@ -360,5 +329,41 @@ public class NetworkRouteSelector {
 		int last = segment.getPointsLength() - 1;
 		return xc == segment.getPoint31XTile(last) && yc == segment.getPoint31YTile(last)
 				|| xc == segment.getPoint31XTile(0) && yc == segment.getPoint31YTile(0);
+	}
+	
+	
+
+	public enum RouteType {
+
+		HIKING("hiking"),
+		BICYCLE("bicycle"),
+		MTB("mtb"),
+		HORSE("horse");
+		private final String type;
+
+		RouteType(String type) {
+			this.type = type;
+		}
+
+		public String getType() {
+			return type;
+		}
+
+		public String getTypeWithPrefix() {
+			return ROUTE_PREFIX + type;
+		}
+
+
+		public static boolean isRoute(String tag) {
+			if (tag == null || tag.length() == 0) {
+				return false;
+			}
+			for (RouteType routeType : values()) {
+				if (tag.startsWith(ROUTE_PREFIX + routeType.type)) {
+					return true;
+				}
+			}
+			return false;
+		}
 	}
 }

@@ -15,28 +15,36 @@ import java.util.*;
 
 public class NetworkRouteContext {
 	private static final int ZOOM_TO_LOAD_TILES = 16;
-	
-	TLongObjectHashMap<NetworkRoutesTile> indexedSubregions = new TLongObjectHashMap<>();
-	private BinaryMapIndexReader reader;
 
-	List<NetworkRouteSegment> loadNearRouteSegment(int x31, int y31, int radius) throws IOException {
-		List<NetworkRouteSegment> nearSegments = new ArrayList<>();
+	private TLongObjectHashMap<NetworkRoutesTile> indexedSubregions = new TLongObjectHashMap<>();
+	private final BinaryMapIndexReader[] readers;
+
+	public NetworkRouteContext(BinaryMapIndexReader[] readers) {
+		this.readers = readers;
+	}
+
+	public List<NetworkRoutePoint> loadNearRouteSegment(int x31, int y31, int radius) throws IOException {
+		List<NetworkRoutePoint> nearSegments = new ArrayList<>();
 		NetworkRoutesTile osmcRoutesTile = getMapRouteTile(x31, y31);
 		double sqrRadius = radius * radius;
-		for (NetworkRouteSegment segment : osmcRoutesTile.getRoutes().values()) {
-			if (MapUtils.squareDist31TileMetric(segment.x31, segment.y31, x31, y31) < sqrRadius) {
+		for (NetworkRoutePoint segment : osmcRoutesTile.getRoutes().values()) {
+			if (MapUtils.squareDist31TileMetric(segment.getX(), segment.getY(), x31, y31) < sqrRadius) {
 				nearSegments.add(segment);
 			}
 		}
 		return nearSegments;
 	}
+	
+	public BinaryMapIndexReader[] getReaders() {
+		return readers;
+	}
 
-	NetworkRouteSegment loadRouteSegment(int x31, int y31) throws IOException {
+	public NetworkRoutePoint loadRouteSegment(int x31, int y31) throws IOException {
 		NetworkRoutesTile osmcRoutesTile = getMapRouteTile(x31, y31);
 		return osmcRoutesTile.getRouteSegment(x31, y31);
 	}
 
-	NetworkRoutesTile getMapRouteTile(int x31, int y31) throws IOException {
+	public NetworkRoutesTile getMapRouteTile(int x31, int y31) throws IOException {
 		long tileId = getTileId(x31, y31);
 		if (!indexedSubregions.containsKey(tileId)) {
 			NetworkRoutesTile osmcRoutesTile = loadTile(x31, y31);
@@ -48,17 +56,13 @@ public class NetworkRouteContext {
 	private NetworkRoutesTile loadTile(int x31, int y31) throws IOException {
 		final BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> req = buildTileRequest(x31, y31);
 		NetworkRoutesTile osmcRoutesTile = new NetworkRoutesTile();
-		List<BinaryMapDataObject> objects = reader.searchMapIndex(req);
-		if (!objects.isEmpty()) {
+		for (BinaryMapIndexReader reader : readers) {
+			List<BinaryMapDataObject> objects = reader.searchMapIndex(req);
 			for (BinaryMapDataObject bMdo : objects) {
 				osmcRoutesTile.add(bMdo);
 			}
 		}
 		return osmcRoutesTile;
-	}
-
-	public void setReader(BinaryMapIndexReader reader) {
-		this.reader = reader;
 	}
 
 	private BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> buildTileRequest(int x, int y) {
@@ -68,39 +72,30 @@ public class NetworkRouteContext {
 		int tileTop = tileY << ZOOM;
 		int tileRight = (tileX + 1) << ZOOM;
 		int tileBottom = (tileY + 1) << ZOOM;
-		return BinaryMapIndexReader.buildSearchRequest(tileLeft, tileRight,
-				tileTop, tileBottom,
-				ZOOM, new BinaryMapIndexReader.SearchFilter() {
+		return BinaryMapIndexReader.buildSearchRequest(tileLeft, tileRight, tileTop, tileBottom, ZOOM,
+				new BinaryMapIndexReader.SearchFilter() {
 					@Override
 					public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex index) {
 						return true;
 					}
-				},
-				new ResultMatcher<BinaryMapDataObject>() {
+				}, new ResultMatcher<BinaryMapDataObject>() {
 					@Override
 					public boolean publish(BinaryMapDataObject object) {
 						boolean publish = false;
-						for (RouteType routeType : RouteType.values()) {
-							String prefix = ROUTE_PREFIX + routeType.getType() + "_";
-							for (int i = 0; i < object.getObjectNames().keys().length; i++) {
-								BinaryMapIndexReader.TagValuePair tp = object.getMapIndex()
-										.decodeType(object.getObjectNames().keys()[i]);
-								if (tp != null && tp.tag != null && (tp.tag).startsWith(prefix)) {
-									publish = true;
-								}
-							}
-							int[] allTypes = Arrays.copyOf(object.getTypes(), object.getTypes().length
-									+ object.getAdditionalTypes().length);
-							System.arraycopy(object.getAdditionalTypes(), 0, allTypes, object.getTypes().length,
-									object.getAdditionalTypes().length);
-							for (int allType : allTypes) {
-								BinaryMapIndexReader.TagValuePair tp = object.getMapIndex().decodeType(allType);
-								if (tp != null && tp.tag != null && (tp.tag).startsWith(prefix)) {
-									publish = true;
-								}
+						publish = publish || checkObject(object, object.getObjectNames().keys());
+						publish = publish || checkObject(object, object.getAdditionalTypes());
+						publish = publish || checkObject(object, object.getTypes());
+						return publish;
+					}
+
+					private boolean checkObject(BinaryMapDataObject object, int[] allTypes) {
+						for (int allType : allTypes) {
+							BinaryMapIndexReader.TagValuePair tp = object.getMapIndex().decodeType(allType);
+							if (tp != null && RouteType.isRoute(tp.tag)) {
+								return true;
 							}
 						}
-						return publish;
+						return false;
 					}
 
 					@Override
@@ -114,30 +109,29 @@ public class NetworkRouteContext {
 		int zmShift = 31 - ZOOM_TO_LOAD_TILES;
 		return (long) (x31 >> zmShift) << ZOOM_TO_LOAD_TILES + ((long) (y31 >> zmShift));
 	}
-	
-	class NetworkRoutesTile {
-		private final TLongObjectMap<NetworkRouteSegment> routes = new TLongObjectHashMap<>();
+
+	private class NetworkRoutesTile {
+		private final TLongObjectMap<NetworkRoutePoint> routes = new TLongObjectHashMap<>();
 
 		public void add(BinaryMapDataObject bMdo) {
 			for (int i = 0; i < bMdo.getPointsLength(); i++) {
 				int x31 = bMdo.getPoint31XTile(i);
 				int y31 = bMdo.getPoint31YTile(i);
 				long id = getPointId(x31, y31);
-				NetworkRouteSegment segment = new NetworkRouteSegment(bMdo, x31, y31);
-				if (!routes.containsKey(id)) {
-					routes.put(id, segment);
-				} else {
-					NetworkRouteSegment routeSegment = routes.get(id);
-					routeSegment.addObject(bMdo);
+				NetworkRoutePoint point = routes.get(id);
+				if (point == null) {
+					point = new NetworkRoutePoint(x31, y31);
+					routes.put(id, point);
 				}
+				point.addObject(bMdo);
 			}
 		}
 
-		public TLongObjectMap<NetworkRouteSegment> getRoutes() {
+		public TLongObjectMap<NetworkRoutePoint> getRoutes() {
 			return routes;
 		}
 
-		public NetworkRouteSegment getRouteSegment(int x31, int y31) {
+		public NetworkRoutePoint getRouteSegment(int x31, int y31) {
 			return routes.get(getPointId(x31, y31));
 		}
 

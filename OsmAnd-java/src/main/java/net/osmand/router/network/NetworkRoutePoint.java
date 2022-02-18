@@ -12,18 +12,32 @@ import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.router.network.NetworkRouteSelector.RouteType;
 import net.osmand.util.Algorithms;
 
-public class NetworkRouteSegment {
-	int x31;
-	int y31;
+public class NetworkRoutePoint {
+	private final int x31;
+	private final int y31;
 	private final List<BinaryMapDataObject> binaryMapDataObjects = new ArrayList<>();
 
-	public NetworkRouteSegment(BinaryMapDataObject bMdo, int x31, int y31) {
+	public NetworkRoutePoint(int x31, int y31) {
 		this.x31 = x31;
 		this.y31 = y31;
-		addObject(bMdo);
 	}
-
-	void addObject(BinaryMapDataObject bMdo) {
+	
+	public int getX() {
+		return x31;
+	}
+	
+	public int getY() {
+		return y31;
+	}
+	
+	public void addObject(BinaryMapDataObject bMdo) {
+		if (bMdo.getId() > 0) {
+			for (BinaryMapDataObject obj : binaryMapDataObjects) {
+				if (obj.getId() == bMdo.getId()) {
+					return;
+				}
+			}
+		}
 		binaryMapDataObjects.add(bMdo);
 	}
 
