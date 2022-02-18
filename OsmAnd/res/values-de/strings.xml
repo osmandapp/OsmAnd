@@ -4515,13 +4515,27 @@
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Wasserstraßentunnel nicht ausblenden</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_attr_seabedDetail_name">Meeresbodendetail</string>
-    <string name="rendering_attr_seabedDetail_description">Zusätzliche Textinformationen zur Oberflächenbeschaffenheit des Meeresbodens, kombinierte Oberflächentypen, Kategorie und Art des Seegrases</string>
+    <string name="rendering_attr_seabedDetail_description">Zusätzliche Textinfo zur Oberflächenbeschaffenheit des Meeresbodens, kombinierte Oberflächentypen, Kategorie und Art des Seegrases</string>
     <string name="rendering_value_category_name">Kategorie</string>
     <string name="rendering_value_all_name">Alle</string>
     <string name="rendering_value_omit_name">Weglassen</string>
     <string name="gpx_no_routes_title">Es gibt keine Routen</string>
-    <string name="save_track_to_gpx_descrp">Trackaufnahme wird bei Navigation automatisch gestartet. Wenn sie beendet ist, wird der Track automatisch gespeichert.</string>
-    <string name="gpx_no_routes_descr">Sie können das Tool \"%1$s\" nutzen, um die Route in einer Datei hinzuzufügen.</string>
+    <string name="save_track_to_gpx_descrp">Automatisches Starten der Trackaufzeichnung während der Navigation und anschließendes automatisches Speichern.</string>
+    <string name="gpx_no_routes_descr">Sie können das Werkzeug \"%1$s\" verwenden, um die Route als Datei zu speichern.</string>
     <string name="quick_action_add_route_descr">Eine Schaltfläche zum Starten einer Route in der Mitte des Bildschirms.</string>
-    <string name="please_provide_group_name_message">Bitte geben Sie einen Namen für die Gruppe an.</string>
+    <string name="please_provide_group_name_message">Bitte benennen Sie die Gruppe.</string>
+    <string name="exit_import">Beenden\?</string>
+    <string name="import_tracks_descr">%1$s, enthält %2$s separate Tracks. Wählen Sie die zu importierenden Tracks aus.</string>
+    <string name="location_source_descr">Standardmäßig verwendet OsmAnd, wenn es von Google Play installiert wurde, %1$s zur Standortbestimmung.
+\n
+\nWenn Sie ungenaue Standortinformationen erhalten oder ein Gerät ohne %2$s verwenden, versuchen Sie, zu \"%3$s\" zu wechseln</string>
+    <string name="location_source">Standortquelle</string>
+    <string name="points_selection_descr">Schließen und alle Änderungen verwerfen\?</string>
+    <string name="exit_import_descr">Beenden, ohne die Änderungen zu speichern\?</string>
+    <string name="select_suggested_points">Vorgeschlagene Punkte auswählen</string>
+    <string name="selected_waypoints_descr">Ausgewählte Wegpunkte werden dem Track \"%1$s\" hinzugefügt</string>
+    <string name="shared_string_reading_file">Datei wird gelesen…</string>
+    <string name="all_groups">Alle Gruppen</string>
+    <string name="list_of_groups">Gruppenliste</string>
+    <string name="import_tracks">Tracks importieren</string>
 </resources>

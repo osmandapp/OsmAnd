@@ -4274,4 +4274,16 @@
     <string name="poi_post_office_service_provider">Поставщик услуг почтового отделения</string>
     <string name="poi_post_office_service_brand">Бренд почтового отделения</string>
     <string name="poi_post_office_collection_times">Время выемки/отправки в почтовом отделении</string>
+    <string name="poi_board_type_planet_walk">Прогулка по планетам</string>
+    <string name="poi_reusable_packaging_accept_only">Принимаются многоразовые контейнеры: исключительно</string>
+    <string name="poi_reusable_packaging_offer_no">Предлагают многоразовые контейнеры: нет</string>
+    <string name="poi_reusable_packaging_accept_yes">Принимаются многоразовые контейнеры: да</string>
+    <string name="poi_medical_supply_diabetic">Диабетические препараты</string>
+    <string name="poi_ultimate">Фрисби</string>
+    <string name="poi_reusable_packaging_accept_no">Принимаются многоразовые контейнеры: нет</string>
+    <string name="poi_reusable_packaging_offer_yes">Предлагают многоразовые контейнеры: да</string>
+    <string name="poi_handwashing_hand_cleaning_paste_yes">Паста для чистки рук: есть</string>
+    <string name="poi_post_office_post_annex">Частное почтовое отделение</string>
+    <string name="poi_reusable_packaging_offer_only">Предлагают многоразовые контейнеры: исключительно</string>
+    <string name="poi_medical_supply_respiratory">Респираторные средства</string>
 </resources>

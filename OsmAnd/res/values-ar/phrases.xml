@@ -4290,4 +4290,6 @@
     <string name="poi_avalanche_transceiver_checkpoint">نقطة تفتيش جهاز الإرسال والاستقبال الخاص بالانهيار الجليدي</string>
     <string name="poi_access_permit">التصريح مطلوب</string>
     <string name="poi_parcel_locker">خزانة الطرود</string>
+    <string name="poi_board_type_art">فن</string>
+    <string name="poi_board_type_welcome_sign">لافتة ترحيب</string>
 </resources>
