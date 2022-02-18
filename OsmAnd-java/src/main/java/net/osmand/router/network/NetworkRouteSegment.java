@@ -1,19 +1,23 @@
-package net.osmand.router.select;
+package net.osmand.router.network;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.router.network.NetworkRouteSelector.RouteType;
 import net.osmand.util.Algorithms;
 
-import java.util.*;
-
-import static net.osmand.binary.BinaryMapIndexReader.*;
-import static net.osmand.router.select.RouteSelector.*;
-
-public class OsmcRouteSegment {
+public class NetworkRouteSegment {
 	int x31;
 	int y31;
 	private final List<BinaryMapDataObject> binaryMapDataObjects = new ArrayList<>();
 
-	public OsmcRouteSegment(BinaryMapDataObject bMdo, int x31, int y31) {
+	public NetworkRouteSegment(BinaryMapDataObject bMdo, int x31, int y31) {
 		this.x31 = x31;
 		this.y31 = y31;
 		addObject(bMdo);
@@ -46,7 +50,7 @@ public class OsmcRouteSegment {
 					TagValuePair tp = bMdo.getMapIndex().decodeType(bMdo.getObjectNames().keys()[i]);
 					if (tp != null && tp.tag != null && (tp.tag).startsWith(prefix)) {
 						String tagWoPrefix = tp.tag;
-						String value = tagWoPrefix + ROUTE_KEY_VALUE_SEPARATOR
+						String value = tagWoPrefix + NetworkRouteSelector.ROUTE_KEY_VALUE_SEPARATOR
 								+ bMdo.getObjectNames().get(bMdo.getObjectNames().keys()[i]);
 						putTag(objectTagMap, routeIdx, value);
 					}
@@ -60,7 +64,7 @@ public class OsmcRouteSegment {
 					if (tp != null && tp.tag != null && (tp.tag).startsWith(prefix)) {
 						String tagWoPrefix = tp.tag;
 						String value = tagWoPrefix
-								+ (Algorithms.isEmpty(tp.value) ? "" : ROUTE_KEY_VALUE_SEPARATOR + tp.value);
+								+ (Algorithms.isEmpty(tp.value) ? "" : NetworkRouteSelector.ROUTE_KEY_VALUE_SEPARATOR + tp.value);
 						putTag(objectTagMap, routeIdx, value);
 					}
 				}
@@ -69,7 +73,7 @@ public class OsmcRouteSegment {
 				for (Map.Entry<Integer, List<String>> entry : objectTagMap.entrySet()) {
 					List<String> objectTagList = entry.getValue();
 					Collections.sort(objectTagList);
-					String objectTagKey = getRouteStringKey(objectTagList, routeType.getTypeWithPrefix());
+					String objectTagKey = NetworkRouteSelector.getRouteStringKey(objectTagList, routeType.getTypeWithPrefix());
 					if (Algorithms.stringsEqual(routeKey, objectTagKey)) {
 						return true;
 					}
@@ -94,6 +98,6 @@ public class OsmcRouteSegment {
 			TagValuePair tp = object.getMapIndex().decodeType(object.getAdditionalTypes()[i]);
 			tagsList.add(tp.tag);
 		}
-		return RouteSelector.getRouteQuantity(tagsList);
+		return NetworkRouteSelector.getRouteQuantity(tagsList);
 	}
 }

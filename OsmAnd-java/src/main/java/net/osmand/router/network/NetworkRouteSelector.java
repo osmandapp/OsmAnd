@@ -1,4 +1,4 @@
-package net.osmand.router.select;
+package net.osmand.router.network;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
@@ -13,7 +13,7 @@ import net.osmand.util.MapUtils;
 import java.io.IOException;
 import java.util.*;
 
-public class RouteSelector {
+public class NetworkRouteSelector {
 	public static final int ZOOM = 15;
 	public static final String ROUTE_PREFIX = "route_";
 	public static final int DEVIATE = 200;
@@ -22,7 +22,7 @@ public class RouteSelector {
 	// ROUTE_KEY: {route_bicycle_1=, route_bicycle_1_node_network=rcn, route_bicycle_1_ref=67-68} -> "route_bicycle___node_network_rcn___ref_67-68"
 	public static final String ROUTE_KEY_SEPARATOR = "___";
 	public static final String ROUTE_KEY_VALUE_SEPARATOR = "_";
-	OsmcRouteContext rCtx;
+	NetworkRouteContext rCtx;
 	String routeKey;
 
 	public enum RouteType {
@@ -56,9 +56,9 @@ public class RouteSelector {
 		}
 	}
 
-	public RouteSelector(BinaryMapIndexReader[] files) {
+	public NetworkRouteSelector(BinaryMapIndexReader[] files) {
 		this.files = files;
-		rCtx = new OsmcRouteContext();
+		rCtx = new NetworkRouteContext();
 	}
 
 	public List<GPXFile> getRoutes(RenderedObject renderedObject, String routeKey) {
@@ -158,7 +158,7 @@ public class RouteSelector {
 		try {
 			for (BinaryMapIndexReader indexReader : files) {
 				rCtx.setReader(indexReader);
-				OsmcRouteSegment routeSegment = getSegment(x, y);
+				NetworkRouteSegment routeSegment = getSegment(x, y);
 				for (BinaryMapDataObject segment : routeSegment.getObjectsByRouteKey(routeKey)) {
 					finalSegmentList.add(segment);
 					xStart = segment.getPoint31XTile(0);
@@ -179,7 +179,7 @@ public class RouteSelector {
 		return gpxFileList;
 	}
 
-	private OsmcRouteSegment getSegment(int x, int y) {
+	private NetworkRouteSegment getSegment(int x, int y) throws IOException {
 		return rCtx.loadRouteSegment(x, y);
 	}
 
@@ -228,7 +228,7 @@ public class RouteSelector {
 		List<BinaryMapDataObject> foundSegmentList = new ArrayList<>();
 		boolean exit = false;
 		while (!exit) {
-			OsmcRouteSegment routeSegment = rCtx.loadRouteSegment(x, y);
+			NetworkRouteSegment routeSegment = rCtx.loadRouteSegment(x, y);
 			foundSegmentList.addAll(routeSegment.getObjectsByRouteKey(routeKey));
 			exit = true;
 			Iterator<BinaryMapDataObject> i = foundSegmentList.iterator();
@@ -331,7 +331,7 @@ public class RouteSelector {
 	}
 
 	private BinaryMapDataObject processRoundabout(BinaryMapDataObject foundSegment,
-	                                              List<BinaryMapDataObject> finalSegmentList) {
+	                                              List<BinaryMapDataObject> finalSegmentList) throws IOException {
 		List<BinaryMapDataObject> foundSegmentList = new ArrayList<>();
 		for (int i = 0; i < foundSegment.getPointsLength(); i++) {
 			foundSegmentList.clear();

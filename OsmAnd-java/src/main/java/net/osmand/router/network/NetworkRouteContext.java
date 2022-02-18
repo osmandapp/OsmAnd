@@ -1,27 +1,29 @@
-package net.osmand.router.select;
+package net.osmand.router.network;
 
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.TLongObjectMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.util.MapUtils;
 
+import static net.osmand.router.network.NetworkRouteSelector.*;
+
 import java.io.IOException;
 import java.util.*;
 
-import static net.osmand.router.select.RouteSelector.*;
-
-public class OsmcRouteContext {
-	public int ZOOM_TO_LOAD_TILES = 16;
-	TLongObjectHashMap<OsmcRoutesTile> indexedSubregions = new TLongObjectHashMap<>();
+public class NetworkRouteContext {
+	private static final int ZOOM_TO_LOAD_TILES = 16;
+	
+	TLongObjectHashMap<NetworkRoutesTile> indexedSubregions = new TLongObjectHashMap<>();
 	private BinaryMapIndexReader reader;
 
-	List<OsmcRouteSegment> loadNearRouteSegment(int x31, int y31, int radius) {
-		List<OsmcRouteSegment> nearSegments = new ArrayList<>();
-		OsmcRoutesTile osmcRoutesTile = getMapRouteTile(x31, y31);
+	List<NetworkRouteSegment> loadNearRouteSegment(int x31, int y31, int radius) throws IOException {
+		List<NetworkRouteSegment> nearSegments = new ArrayList<>();
+		NetworkRoutesTile osmcRoutesTile = getMapRouteTile(x31, y31);
 		double sqrRadius = radius * radius;
-		for (OsmcRouteSegment segment : osmcRoutesTile.getRoutes().values()) {
+		for (NetworkRouteSegment segment : osmcRoutesTile.getRoutes().values()) {
 			if (MapUtils.squareDist31TileMetric(segment.x31, segment.y31, x31, y31) < sqrRadius) {
 				nearSegments.add(segment);
 			}
@@ -29,32 +31,28 @@ public class OsmcRouteContext {
 		return nearSegments;
 	}
 
-	OsmcRouteSegment loadRouteSegment(int x31, int y31) {
-		OsmcRoutesTile osmcRoutesTile = getMapRouteTile(x31, y31);
+	NetworkRouteSegment loadRouteSegment(int x31, int y31) throws IOException {
+		NetworkRoutesTile osmcRoutesTile = getMapRouteTile(x31, y31);
 		return osmcRoutesTile.getRouteSegment(x31, y31);
 	}
 
-	OsmcRoutesTile getMapRouteTile(int x31, int y31) {
+	NetworkRoutesTile getMapRouteTile(int x31, int y31) throws IOException {
 		long tileId = getTileId(x31, y31);
 		if (!indexedSubregions.containsKey(tileId)) {
-			OsmcRoutesTile osmcRoutesTile = loadTile(x31, y31);
+			NetworkRoutesTile osmcRoutesTile = loadTile(x31, y31);
 			indexedSubregions.put(tileId, osmcRoutesTile);
 		}
 		return indexedSubregions.get(tileId);
 	}
 
-	private OsmcRoutesTile loadTile(int x31, int y31) {
+	private NetworkRoutesTile loadTile(int x31, int y31) throws IOException {
 		final BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> req = buildTileRequest(x31, y31);
-		OsmcRoutesTile osmcRoutesTile = new OsmcRoutesTile();
-		try {
-			List<BinaryMapDataObject> objects = reader.searchMapIndex(req);
-			if (!objects.isEmpty()) {
-				for (BinaryMapDataObject bMdo : objects) {
-					osmcRoutesTile.add(bMdo);
-				}
+		NetworkRoutesTile osmcRoutesTile = new NetworkRoutesTile();
+		List<BinaryMapDataObject> objects = reader.searchMapIndex(req);
+		if (!objects.isEmpty()) {
+			for (BinaryMapDataObject bMdo : objects) {
+				osmcRoutesTile.add(bMdo);
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 		return osmcRoutesTile;
 	}
@@ -116,4 +114,36 @@ public class OsmcRouteContext {
 		int zmShift = 31 - ZOOM_TO_LOAD_TILES;
 		return (long) (x31 >> zmShift) << ZOOM_TO_LOAD_TILES + ((long) (y31 >> zmShift));
 	}
+	
+	class NetworkRoutesTile {
+		private final TLongObjectMap<NetworkRouteSegment> routes = new TLongObjectHashMap<>();
+
+		public void add(BinaryMapDataObject bMdo) {
+			for (int i = 0; i < bMdo.getPointsLength(); i++) {
+				int x31 = bMdo.getPoint31XTile(i);
+				int y31 = bMdo.getPoint31YTile(i);
+				long id = getPointId(x31, y31);
+				NetworkRouteSegment segment = new NetworkRouteSegment(bMdo, x31, y31);
+				if (!routes.containsKey(id)) {
+					routes.put(id, segment);
+				} else {
+					NetworkRouteSegment routeSegment = routes.get(id);
+					routeSegment.addObject(bMdo);
+				}
+			}
+		}
+
+		public TLongObjectMap<NetworkRouteSegment> getRoutes() {
+			return routes;
+		}
+
+		public NetworkRouteSegment getRouteSegment(int x31, int y31) {
+			return routes.get(getPointId(x31, y31));
+		}
+
+		private long getPointId(long x31, long y31) {
+			return (x31 << 31) + y31;
+		}
+	}
+
 }
