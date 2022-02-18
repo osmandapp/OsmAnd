@@ -1549,4 +1549,7 @@
     <string name="poi_electrical">فروشگاه الکتریکی; کالای برق; الکتریکی</string>
     <string name="poi_service_vehicle_body_repair_yes">تعمیرات بدنه خودرو</string>
     <string name="poi_locksmith">قفل و کلید فروشی</string>
+    <string name="poi_railway_crossing">گذرگاه راه‌آهن</string>
+    <string name="poi_highway_crossing">گذرگاه خیابان</string>
+    <string name="poi_railway_level_crossing">تقاطع خیابان و راه‌آهن</string>
 </resources>
