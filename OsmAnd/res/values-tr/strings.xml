@@ -4532,4 +4532,8 @@
     <string name="location_source_descr">OsmAnd\'ı Google Play\'den kurduğunuzda, konumu belirlemek için öntanımlı olarak %1$s kullanılır.
 \n
 \nHatalı konum bilgisi alırsanız veya aygıtınızı %2$s olmadan kullanıyorsanız, \"%3$s\" kullanmayı deneyin.</string>
+    <string name="default_appearance_desc">Öntanımlı renk, simge ve şekil, gruba eklenen favori noktalara uygulanacaktır.</string>
+    <string name="default_appearance">Öntanımlı görünüm</string>
+    <string name="edit_category">Kategoriyi düzenle</string>
+    <string name="shared_string_shape">Şekil</string>
 </resources>
