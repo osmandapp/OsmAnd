@@ -32,6 +32,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -70,7 +71,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		defaultColor = getResources().getColor(R.color.color_favorite);
+		defaultColor = ContextCompat.getColor(requireContext(), R.color.color_favorite);
 
 		FavoritePointEditor editor = getFavoritePointEditor();
 		FavouritesDbHelper helper = getHelper();
@@ -94,20 +95,10 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		if (view != null) {
 			View replaceButton = view.findViewById(R.id.button_replace_container);
 			replaceButton.setVisibility(View.VISIBLE);
-			replaceButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					replacePressed();
-				}
-			});
+			replaceButton.setOnClickListener(v -> replacePressed());
 			if (editor != null && editor.isNew()) {
 				ImageView toolbarAction = view.findViewById(R.id.toolbar_action);
-				toolbarAction.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						replacePressed();
-					}
-				});
+				toolbarAction.setOnClickListener(v -> replacePressed());
 			}
 		}
 		return view;
@@ -128,11 +119,13 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		}
 	}
 
+	@Nullable
 	@Override
 	public PointEditor getEditor() {
 		return editor;
 	}
 
+	@Nullable
 	private FavoritePointEditor getFavoritePointEditor() {
 		return editor;
 	}
@@ -152,22 +145,22 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		return helper;
 	}
 
+	@NonNull
 	@Override
 	public String getToolbarTitle() {
 		FavoritePointEditor editor = getFavoritePointEditor();
 		if (editor != null) {
-			if (editor.isNew()) {
-				return getString(R.string.favourites_context_menu_add);
-			} else {
-				return getString(R.string.favourites_context_menu_edit);
-			}
+			return editor.isNew
+					? getString(R.string.favourites_context_menu_add)
+					: getString(R.string.favourites_context_menu_edit);
 		}
 		return "";
 	}
 
+	@DrawableRes
 	private int getInitialIconId(FavouritePoint favorite) {
 		int iconId = favorite.getIconId();
-		return iconId > 0 ? iconId : getDefaultIconId();
+		return iconId != 0 ? iconId : getDefaultIconId();
 	}
 
 	@Override
@@ -205,10 +198,11 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 	}
 
 	@Override
-	public void setIcon(int iconId) {
+	public void setIcon(@DrawableRes int iconId) {
 		this.iconId = iconId;
 	}
 
+	@NonNull
 	@Override
 	protected String getDefaultCategoryName() {
 		return getString(R.string.shared_string_favorites);
@@ -389,16 +383,20 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		}
 	}
 
+	@Nullable
 	@Override
 	public String getNameInitValue() {
 		FavouritePoint favorite = getFavorite();
 		return favorite != null ? favorite.getName() : "";
 	}
 
+	@NonNull
 	@Override
 	public String getCategoryInitValue() {
 		FavouritePoint favorite = getFavorite();
-		return favorite == null || favorite.getCategory().length() == 0 ? getDefaultCategoryName() : favorite.getCategoryDisplayName(requireContext());
+		return favorite == null || favorite.getCategory().length() == 0
+				? getDefaultCategoryName()
+				: favorite.getCategoryDisplayName(requireContext());
 	}
 
 	@Override
@@ -426,22 +424,19 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		return PointImageDrawable.getFromFavorite(getMapActivity(), getPointColor(), false, point);
 	}
 
-	@Override
-	public Drawable getCategoryIcon() {
-		return getPaintedIcon(R.drawable.ic_action_folder_stroke, getPointColor());
-	}
-
+	@ColorInt
 	@Override
 	public int getDefaultColor() {
 		return defaultColor;
 	}
 
+	@ColorInt
 	@Override
 	public int getPointColor() {
 		FavouritePoint favorite = getFavorite();
-		int color = favorite != null ? getColor() : 0;
+		int color = favorite != null ? this.color : 0;
 		FavoriteGroup group = getGroup();
-		if (group != null && (color == 0)) {
+		if (group != null && color == 0) {
 			color = group.getColor();
 		}
 		if (color == 0) {
@@ -456,22 +451,10 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 		return backgroundType;
 	}
 
+	@DrawableRes
 	@Override
 	public int getIconId() {
 		return iconId;
-	}
-
-	@Nullable
-	@Override
-	public String getPreselectedIconName() {
-		PointEditor editor = getEditor();
-		return editor == null || !editor.isNew || favorite == null
-				? null
-				: RenderingIcons.getBigIconName(favorite.getIconId());
-	}
-
-	private int getColor() {
-		return color;
 	}
 
 	@Override
@@ -485,7 +468,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 			if (lastUsedGroup != null) {
 				categories.add(lastUsedGroup.getDisplayName(app));
 			}
-			for (FavouritesDbHelper.FavoriteGroup fg : helper.getFavoriteGroups()) {
+			for (FavoriteGroup fg : helper.getFavoriteGroups()) {
 				if (!fg.equals(lastUsedGroup)) {
 					if (fg.isVisible()) {
 						categories.add(fg.getDisplayName(app));
@@ -500,18 +483,15 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 	}
 
 	@Override
-	public boolean isCategoryVisible(String name) {
-		if (getHelper() != null) {
-			return getHelper().isGroupVisible(name);
-		}
-		return true;
+	public boolean isCategoryVisible(@NonNull String name) {
+		return getHelper() == null || getHelper().isGroupVisible(name);
 	}
 
 	@Override
 	public int getCategoryPointsCount(String category) {
 		FavouritesDbHelper helper = getHelper();
 		if (helper != null) {
-			for (FavouritesDbHelper.FavoriteGroup fg : getHelper().getFavoriteGroups()) {
+			for (FavoriteGroup fg : helper.getFavoriteGroups()) {
 				if (fg.getDisplayName(getMyApplication()).equals(category)) {
 					return fg.getPoints().size();
 				}
@@ -525,12 +505,21 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 	public int getCategoryColor(String category) {
 		FavouritesDbHelper helper = getHelper();
 		if (helper != null) {
-			for (FavouritesDbHelper.FavoriteGroup fg : getHelper().getFavoriteGroups()) {
-				if (fg.getDisplayName(getMyApplication()).equals(category)) {
-					return fg.getColor();
+			for (FavoriteGroup group : helper.getFavoriteGroups()) {
+				if (group.getDisplayName(getMyApplication()).equals(category)) {
+					return group.getColor();
 				}
 			}
 		}
 		return defaultColor;
+	}
+
+	@Override
+	protected void showSelectCategoryDialog() {
+		FragmentManager fragmentManager = getFragmentManager();
+		if (fragmentManager != null) {
+			SelectPointsCategoryBottomSheet.showSelectFavoriteCategoryFragment(fragmentManager, null,
+					getSelectedCategory());
+		}
 	}
 }

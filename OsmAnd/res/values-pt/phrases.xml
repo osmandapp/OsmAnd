@@ -4289,4 +4289,5 @@
     <string name="poi_avalanche_transceiver_checkpoint">Ponto de controlo de transcetor para avalanchas</string>
     <string name="poi_collector">Loja de coleções</string>
     <string name="poi_parcel_locker">Cacifo de encomendas postais</string>
+    <string name="poi_tiles">Loja de tijoleiras e azulejos</string>
 </resources>

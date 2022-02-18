@@ -16,7 +16,8 @@ import net.osmand.plus.GeocodingLookupService.OnAddressLookupResult;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
-import net.osmand.plus.mapcontextmenu.editors.SelectFavoriteCategoryBottomSheet;
+import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet;
+import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
 import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
@@ -24,6 +25,7 @@ import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.FragmentManager;
 
 public class FavoriteAction extends QuickAction {
 
@@ -171,15 +173,13 @@ public class FavoriteAction extends QuickAction {
 		}
 
 		categoryEdit.setOnClickListener(view -> {
-			SelectFavoriteCategoryBottomSheet dialogFragment =
-					SelectFavoriteCategoryBottomSheet.createInstance(FavoritePointEditor.TAG, "");
-			dialogFragment.show(mapActivity.getSupportFragmentManager(), SelectFavoriteCategoryBottomSheet.TAG);
-			dialogFragment.setSelectionListener((category, color) -> fillGroupParams(root, category, color));
+			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+			CategorySelectionListener listener = (category, color) -> fillGroupParams(root, category, color);
+			SelectPointsCategoryBottomSheet.showSelectFavoriteCategoryFragment(fragmentManager, listener, "");
 		});
 
-		SelectFavoriteCategoryBottomSheet dialogFragment = (SelectFavoriteCategoryBottomSheet)
-				mapActivity.getSupportFragmentManager().findFragmentByTag(SelectFavoriteCategoryBottomSheet.TAG);
-
+		SelectPointsCategoryBottomSheet dialogFragment = (SelectPointsCategoryBottomSheet)
+				mapActivity.getSupportFragmentManager().findFragmentByTag(SelectPointsCategoryBottomSheet.TAG);
 		if (dialogFragment != null) {
 			dialogFragment.setSelectionListener((category, color) -> fillGroupParams(root, category, color));
 		}

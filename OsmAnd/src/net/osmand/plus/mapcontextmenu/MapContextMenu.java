@@ -247,6 +247,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return mapMarkerEditor;
 	}
 
+	@Nullable
 	public PointEditor getPointEditor(String tag) {
 		if (favoritePointEditor != null && favoritePointEditor.getFragmentTag().equals(tag)) {
 			return favoritePointEditor;
