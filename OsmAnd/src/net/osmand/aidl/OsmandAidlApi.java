@@ -79,6 +79,8 @@ import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.activities.MapActivity;
@@ -1835,7 +1837,11 @@ public class OsmandAidlApi {
 			turnInfo = ExternalApiHelper.getRouteDirectionsInfo(app);
 		}
 		AppInfoParams params = new AppInfoParams(lastKnownLocation, mapLocation, turnInfo, leftTime, leftDistance, arrivalTime, mapVisible);
+		params.setVersionsInfo(ExternalApiHelper.getPluginAndProfileVersions());
 		params.setDestinationLocation(destinationLocation);
+		params.setOsmAndVersion(Version.getFullVersion(app));
+		String releaseDate = app.getString(R.string.app_edition);
+		params.setReleaseDate(releaseDate.isEmpty() ? null : releaseDate);
 		return params;
 	}
 
@@ -2406,6 +2412,7 @@ public class OsmandAidlApi {
 			AProfile aProfile = new AProfile(bean.stringKey, bean.userProfileName, bean.parent, bean.iconName,
 					bean.iconColor.name(), bean.routingProfile, bean.routeService.name(), bean.locIcon.name(),
 					bean.navIcon.name(), bean.order);
+			aProfile.setVersion(bean.version);
 
 			profiles.add(aProfile);
 		}
