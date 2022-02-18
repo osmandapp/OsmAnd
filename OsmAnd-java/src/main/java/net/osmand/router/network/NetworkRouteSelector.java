@@ -15,7 +15,6 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.QuadRect;
 import net.osmand.util.Algorithms;
@@ -40,7 +39,7 @@ public class NetworkRouteSelector {
 		
 		
 		public boolean accept(BinaryMapDataObject bMdo) {
-			if (keyFilter == null || typeFilter == null) {
+			if (keyFilter == null && typeFilter == null) {
 				return true;
 			}
 			List<RouteKey> keys = RouteType.getRouteKeys(bMdo);
@@ -61,10 +60,6 @@ public class NetworkRouteSelector {
 		QuadRect qr = new QuadRect();
 		qr.left = qr.right = renderedObject.getX().get(0);
 		qr.top = qr.bottom = renderedObject.getY().get(0);
-		MapIndex mapIndex = rCtx.getMapIndexPerObject(renderedObject);
-		if (mapIndex == null) {
-			return null;
-		}
 		return getRoutes(qr);
 	}
 	

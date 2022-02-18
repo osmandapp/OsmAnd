@@ -1,20 +1,18 @@
 package net.osmand.router.network;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.TLongObjectMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.ResultMatcher;
-import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
 import net.osmand.util.MapUtils;
-
-import static net.osmand.router.network.NetworkRouteSelector.*;
-
-import java.io.IOException;
-import java.util.*;
 
 public class NetworkRouteContext {
 	
@@ -69,7 +67,8 @@ public class NetworkRouteContext {
 		for (BinaryMapIndexReader reader : readers) {
 			List<BinaryMapDataObject> objects = reader.searchMapIndex(req);
 			for (BinaryMapDataObject bMdo : objects) {
-				if (filter.accept(bMdo)) {
+				if (filter == null || filter.accept(bMdo)) {
+					System.out.println(bMdo.getId() >> 7);
 					osmcRoutesTile.add(bMdo);
 				}
 			}
@@ -77,9 +76,9 @@ public class NetworkRouteContext {
 		return osmcRoutesTile;
 	}
 
-	private BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> buildTileRequest(int x, int y) {
-		int tileX = x >> ZOOM_TO_LOAD_TILES;
-		int tileY = y >> ZOOM_TO_LOAD_TILES;
+	private BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> buildTileRequest(int x31, int y31) {
+		int tileX = x31 >> ZOOM_TO_LOAD_TILES;
+		int tileY = y31 >> ZOOM_TO_LOAD_TILES;
 		int tileLeft = tileX << ZOOM_TO_LOAD_TILES;
 		int tileTop = tileY << ZOOM_TO_LOAD_TILES;
 		int tileRight = (tileX + 1) << ZOOM_TO_LOAD_TILES;
@@ -93,21 +92,7 @@ public class NetworkRouteContext {
 				}, new ResultMatcher<BinaryMapDataObject>() {
 					@Override
 					public boolean publish(BinaryMapDataObject object) {
-						boolean publish = false;
-						publish = publish || checkObject(object, object.getObjectNames().keys());
-						publish = publish || checkObject(object, object.getAdditionalTypes());
-						publish = publish || checkObject(object, object.getTypes());
-						return publish;
-					}
-
-					private boolean checkObject(BinaryMapDataObject object, int[] allTypes) {
-						for (int allType : allTypes) {
-							BinaryMapIndexReader.TagValuePair tp = object.getMapIndex().decodeType(allType);
-							if (tp != null && RouteType.isRoute(tp.tag)) {
-								return true;
-							}
-						}
-						return false;
+						return true;
 					}
 
 					@Override
@@ -118,24 +103,6 @@ public class NetworkRouteContext {
 	}
 	
 	
-	public MapIndex getMapIndexPerObject(RenderedObject renderedObject) {
-		int x31 = renderedObject.getX().get(0);
-		int y31 = renderedObject.getY().get(0);
-		for (BinaryMapIndexReader reader : readers) {
-			for (MapIndex mapIndex : reader.getMapIndexes()) {
-				for (BinaryMapIndexReader.MapRoot root : mapIndex.getRoots()) {
-					if (root.getMinZoom() <= ZOOM_TO_LOAD_TILES && root.getMaxZoom() >= ZOOM_TO_LOAD_TILES) {
-						if (x31 >= root.getLeft() && x31 <= root.getRight() && root.getTop() <= y31
-								&& root.getBottom() >= y31) {
-							return mapIndex;
-						}
-					}
-				}
-			}
-		}
-		return null;
-	}
-
 	private long getTileId(int x31, int y31) {
 		int zmShift = (31 - ZOOM_TO_LOAD_TILES);
 		return (long) (x31 >> zmShift) << (ZOOM_TO_LOAD_TILES + 1) + ((long) (y31 >> zmShift));
