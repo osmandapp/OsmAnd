@@ -404,12 +404,6 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 											  ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 		boolean mapTileLayer = mapActivity.getMapView().getMainLayer() instanceof MapTileLayer;
 		if (configureMenu || mapTileLayer) {
-			ContextMenuItem.ItemBuilder updateMapItemBuilder = new ContextMenuItem.ItemBuilder()
-					.setTitleId(R.string.context_menu_item_update_map, mapActivity)
-					.setId(MAP_CONTEXT_MENU_UPDATE_MAP)
-					.setIcon(R.drawable.ic_action_refresh_dark)
-					.setOrder(UPDATE_MAP_ITEM_ORDER);
-
 			ContextMenuItem.ItemBuilder downloadMapItemBuilder = new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.shared_string_download_map, mapActivity)
 					.setId(MAP_CONTEXT_MENU_DOWNLOAD_MAP)
@@ -420,22 +414,16 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 				ItemClickListener listener = (adptr, resId, pos, isChecked, viewCoordinates) -> {
 					MapActivity mapActivity1 = mapActivityRef.get();
-					if (mapActivity1 != null && !mapActivity1.isFinishing()) {
+					if (AndroidUtils.isActivityNotDestroyed(mapActivity1)) {
 						OsmandMapTileView mapView = mapActivity1.getMapView();
-						if (resId == R.string.context_menu_item_update_map) {
-							mapActivity1.getMapActions().reloadTile(mapView.getZoom(), latitude, longitude);
-						} else if (resId == R.string.shared_string_download_map) {
-							DownloadTilesDialog dlg = new DownloadTilesDialog(mapActivity1, (OsmandApplication) mapActivity1.getApplication(), mapView);
-							dlg.openDialog();
-						}
+						DownloadTilesDialog dlg = new DownloadTilesDialog(mapActivity1, app, mapView);
+						dlg.openDialog();
 					}
 					return true;
 				};
-				updateMapItemBuilder.setListener(listener);
 				downloadMapItemBuilder.setListener(listener);
 			}
 
-			adapter.addItem(updateMapItemBuilder.createItem());
 			adapter.addItem(downloadMapItemBuilder.createItem());
 		}
 	}
