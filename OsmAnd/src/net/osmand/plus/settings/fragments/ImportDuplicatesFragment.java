@@ -14,7 +14,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;

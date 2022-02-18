@@ -71,7 +71,7 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -160,7 +160,7 @@ public class OsmandApplication extends MultiDexApplication {
 	MapPoiTypes poiTypes;
 	RoutingHelper routingHelper;
 	TransportRoutingHelper transportRoutingHelper;
-	FavouritesDbHelper favorites;
+	FavouritesHelper favoritesHelper;
 	CommandPlayer player;
 	GpxSelectionHelper selectedGpxHelper;
 	SavingTrackHelper savingTrackHelper;
@@ -411,8 +411,8 @@ public class OsmandApplication extends MultiDexApplication {
 		return gpxDbHelper;
 	}
 
-	public FavouritesDbHelper getFavorites() {
-		return favorites;
+	public FavouritesHelper getFavoritesHelper() {
+		return favoritesHelper;
 	}
 
 	public ResourceManager getResourceManager() {

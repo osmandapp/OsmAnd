@@ -19,8 +19,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.myplaces.GPXItemPagerAdapter;
-import net.osmand.plus.myplaces.GPXTabItemType;
+import net.osmand.plus.myplaces.ui.GPXItemPagerAdapter;
+import net.osmand.plus.myplaces.ui.GPXTabItemType;
 
 import java.util.HashMap;
 import java.util.Map;

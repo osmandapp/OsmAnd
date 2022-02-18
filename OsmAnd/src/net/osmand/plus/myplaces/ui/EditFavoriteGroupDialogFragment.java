@@ -1,4 +1,4 @@
-package net.osmand.plus.myplaces;
+package net.osmand.plus.myplaces.ui;
 
 import android.app.Activity;
 import android.content.Context;
@@ -24,8 +24,9 @@ import androidx.appcompat.widget.ListPopupWindow;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.myplaces.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
@@ -52,7 +53,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		final OsmandApplication app = getMyApplication();
-		FavouritesDbHelper helper = app.getFavorites();
+		FavouritesHelper helper = app.getFavoritesHelper();
 		Bundle args = getArguments();
 		if (args != null) {
 			String groupName = args.getString(GROUP_NAME_KEY);
@@ -93,7 +94,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 									String name = nameEditText.getText().toString();
 									boolean nameChanged = !Algorithms.objectEquals(group.getName(), name);
 									if (nameChanged) {
-										app.getFavorites()
+										app.getFavoritesHelper()
 												.editFavouriteGroup(group, name, group.getColor(), group.isVisible());
 										updateParentFragment();
 									}
@@ -140,7 +141,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 									Integer color = colorAdapter.getItem(position);
 									if (color != null) {
 										if (color != group.getColor()) {
-											app.getFavorites()
+											app.getFavoritesHelper()
 													.editFavouriteGroup(group, group.getName(), color, group.isVisible());
 											updateParentFragment();
 										}
@@ -165,7 +166,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 					@Override
 					public void onClick(View v) {
 						boolean visible = !group.isVisible();
-						app.getFavorites()
+						app.getFavoritesHelper()
 								.editFavouriteGroup(group, group.getName(), group.getColor(), visible);
 						updateParentFragment();
 						dismiss();

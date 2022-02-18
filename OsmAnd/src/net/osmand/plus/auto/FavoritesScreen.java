@@ -62,7 +62,7 @@ public final class FavoritesScreen extends Screen {
 		LatLon location = app.getSettings().getLastKnownMapLocation();
 		for (FavouritePoint point : getFavorites()) {
 			String title = point.getDisplayName(app);
-			int color = app.getFavorites().getColorWithCategory(point, ContextCompat.getColor(app, R.color.color_favorite));
+			int color = app.getFavoritesHelper().getColorWithCategory(point, ContextCompat.getColor(app, R.color.color_favorite));
 			CarIcon icon = new CarIcon.Builder(IconCompat.createWithBitmap(
 					AndroidUtils.drawableToBitmap(PointImageDrawable.getFromFavorite(app, color, false, point)))).build();
 			String description = point.getSpecialPointType() != null ? point.getDescription() : point.getCategory();
@@ -107,7 +107,7 @@ public final class FavoritesScreen extends Screen {
 	@NonNull
 	private List<FavouritePoint> getFavorites() {
 		OsmandApplication app = (OsmandApplication) getCarContext().getApplicationContext();
-		return app.getFavorites().getFavouritePoints();
+		return app.getFavoritesHelper().getFavouritePoints();
 	}
 
 	private void onRouteSelected(@NonNull SearchResult sr) {

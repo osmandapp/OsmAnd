@@ -1,4 +1,4 @@
-package net.osmand.plus.myplaces;
+package net.osmand.plus.myplaces.ui;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;

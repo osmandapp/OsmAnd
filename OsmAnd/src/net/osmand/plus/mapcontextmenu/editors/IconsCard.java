@@ -1,10 +1,19 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
+import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
+
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
@@ -33,14 +42,6 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
-import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 
 public class IconsCard extends MapBaseCard {
 
@@ -305,6 +306,10 @@ public class IconsCard extends MapBaseCard {
 		icon.setImageDrawable(UiUtilities.createTintedDrawable(mapActivity, iconId, ContextCompat.getColor(mapActivity, R.color.icon_color_default_light)));
 	}
 
+	public void updateSelectedIconId(@DrawableRes int iconId) {
+		reselectIcon(iconId, true);
+	}
+
 	public void updateSelectedColor(@ColorInt int newColor) {
 		selectedColor = newColor;
 		reselectIcon(selectedIconId, false);
@@ -313,6 +318,12 @@ public class IconsCard extends MapBaseCard {
 	@DrawableRes
 	public int getSelectedIconId() {
 		return selectedIconId;
+	}
+
+	@NonNull
+	public String getSelectedIconName() {
+		String iconName = RenderingIcons.getBigIconName(selectedIconId);
+		return Algorithms.isEmpty(iconName) ? DEFAULT_ICON_NAME : iconName;
 	}
 
 	@Nullable
