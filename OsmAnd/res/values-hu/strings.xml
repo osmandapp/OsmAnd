@@ -37,7 +37,7 @@
     <string name="north_west">északnyugat</string>
     <string name="north_north_west">észak-északnyugat</string>
     <string name="front">előre</string>
-    <string name="front_right">jobb előre</string>
+    <string name="front_right">jobbra előre</string>
     <string name="right">jobbra</string>
     <string name="back_right">jobb hátra</string>
     <string name="back">hátra</string>
@@ -426,12 +426,12 @@
     <string name="sd_mounted_ro">A memóriakártya csak olvasható.
 \nJelenleg csak a betöltött térkép nézegethető, nem lehet új területeket letölteni.</string>
     <string name="unzipping_file">Fájl kitömörítése (unzip)…</string>
-    <string name="route_tr">Fordulj jobbra és menj</string>
-    <string name="route_tshr">Fordulj élesen jobbra és menj</string>
-    <string name="route_tslr">Fordulj enyhén jobbra és menj</string>
-    <string name="route_tl">Fordulj balra és menj</string>
-    <string name="route_tshl">Fordulj élesen balra és menj</string>
-    <string name="route_tsll">Fordulj enyhén balra és menj</string>
+    <string name="route_tr">Forduljon jobbra és haladjon tovább itt</string>
+    <string name="route_tshr">Forduljon élesen jobbra és haladjon tovább itt</string>
+    <string name="route_tslr">Forduljon enyhén jobbra és haladjon tovább itt</string>
+    <string name="route_tl">Forduljon balra és haladjon tovább itt</string>
+    <string name="route_tshl">Forduljon élesen balra és haladjon tovább itt</string>
+    <string name="route_tsll">Forduljon enyhén balra és haladjon tovább itt</string>
     <string name="route_tu">Forduljon meg, és menjen tovább</string>
     <string name="route_head">Előre</string>
     <string name="first_time_continue">Tovább</string>
@@ -686,9 +686,9 @@
     <string name="rendering_attr_contourLines_name">Szintvonalak megjelenítése</string>
     <string name="rendering_attr_hmRendered_description">Megnöveli a megjelenített térképrészletek mennyiségét.</string>
     <string name="rendering_attr_hmRendered_name">Több térképrészlet megjelenítése</string>
-    <string name="route_roundabout">Körforgalom: %1$d. kijárat, majd menj</string>
-    <string name="route_kl">Tarts balra és menj</string>
-    <string name="route_kr">Tarts jobbra és menj</string>
+    <string name="route_roundabout">Körforgalom: hajtson ki a(z) %1$d kijáraton és haladjon tovább itt</string>
+    <string name="route_kl">Tartson balra és haladjon tovább itt</string>
+    <string name="route_kr">Tartson jobbra és haladjon tovább itt</string>
     <string name="asap">MOST</string>
     <string name="gpxup_public">Nyilvános</string>
     <string name="gpxup_identifiable">Azonosítható</string>
@@ -1200,7 +1200,7 @@
     <string name="gpx_info_average_speed">Átlagsebesség: %1$s</string>
     <string name="gpx_info_maximum_speed">Legnagyobb sebesség: %1$s </string>
     <string name="gpx_info_avg_altitude">Átlagmagasság: %1$s</string>
-    <string name="gpx_info_diff_altitude">Magasság tartomány: %1$s</string>
+    <string name="gpx_info_diff_altitude">Magasságtartomány: %1$s</string>
     <string name="gpx_info_asc_altitude">Le/fel: %1$s</string>
     <string name="gpx_timespan">Eltelt idő: %1$s</string>
     <string name="gpx_timemoving">Mozgási idő: %1$s</string>
@@ -1237,7 +1237,7 @@
     <string name="local_map_names">Helyi név</string>
     <string name="lang_sw">szuahéli</string>
     <string name="lang_he">héber</string>
-    <string name="forward">előre</string>
+    <string name="forward">Haladjon előre itt</string>
     <string name="live_monitoring_m_descr">Nyomvonaladatok küldése egy megadott webes szolgáltatásnak, ha a GPX-naplózás be van kapcsolva.</string>
     <string name="live_monitoring_m">Online útvonalrögzítés (GPX szükséges)</string>
     <string name="live_monitoring_start">Online útvonalrögzítés indítása</string>
@@ -2023,7 +2023,7 @@
     <string name="shared_string_continue">Folytatás</string>
     <string name="gpx_logging_no_data">Nincs adat</string>
     <string name="rendering_attr_contourColorScheme_description">Szintvonalak színsémája</string>
-    <string name="route_roundabout_short">Hajts ki a(z) %1$d kijáraton és menj</string>
+    <string name="route_roundabout_short">Hajtson ki a(z) %1$d kijáraton és haladjon itt</string>
     <string name="upload_poi">POI feltöltése</string>
     <string name="route_calculation">Útvonalszámítás</string>
     <string name="gpx_no_tracks_title">Még nincsenek nyomvonalfájljai</string>
@@ -2158,7 +2158,7 @@
     <string name="altitude_range">Magasságtartomány</string>
     <string name="average_altitude">Átlagos magasság</string>
     <string name="shared_string_time">Idő</string>
-    <string name="total_distance">Teljes táv</string>
+    <string name="total_distance">Teljes távolság</string>
     <string name="routing_attr_height_obstacles_name">Magasságadatok használata</string>
     <string name="rendering_attr_depthContours_description">Mélységvonalak és pontok megjelenítése.</string>
     <string name="rendering_attr_depthContours_name">Tengeri mélységvonalak</string>
@@ -2267,7 +2267,7 @@
     <string name="mapillary_widget">Mapillary-widget</string>
     <string name="mapillary_widget_descr">Gyors Mapillary közreműködést tesz lehetővé.</string>
     <string name="mapillary_descr">Online utcaszintű fényképek mindenkinek. Fedezzen fel helyeket, dolgozzon együtt másokkal, örökítse meg a világot.</string>
-    <string name="plugin_mapillary_descr">Utcaszintű fényképek mindenkinek. Fedezz fel helyeket, vegyél benne részt, fényképezd le a világot.</string>
+    <string name="plugin_mapillary_descr">Utcaszintű fényképek mindenkinek. Fedezzen fel helyeket, vegyen benne részt, fényképezze le a világot.</string>
     <string name="osmand_extended_description_part4">Síelés
 \nAz OsmAnd sítérkép bővítménye lehetővé teszi a sípályák megjelenítését nehézség szerint, valamint további információkat, mint például a felvonók helyét, és más berendezéseket.</string>
     <string name="online_photos">Online fényképek</string>
@@ -2500,7 +2500,7 @@
     <string name="will_open_tomorrow_at">Holnap ekkor nyit:</string>
     <string name="rendering_attr_hidePOILabels_name">POI-feliratok</string>
     <string name="shared_string_without_name">Névtelen</string>
-    <string name="empty_state_markers_history_desc">Ezen a képernyőn az elvégzett térképjelölők fognak megjelenni.</string>
+    <string name="empty_state_markers_history_desc">Ezen a képernyőn az elhagyott térképjelölők fognak megjelenni.</string>
     <string name="mark_passed">Megjelölés elhagyottként</string>
     <string name="lang_lo">laoszi</string>
     <string name="day_off_label">zárva</string>
@@ -2690,7 +2690,7 @@
     <string name="waiting_for_route_calculation">Útvonal tervezése…</string>
     <string name="app_mode_public_transport">Tömegközlekedés</string>
     <string name="avoid_roads_descr">A térképen vagy a lenti listából jelöljön ki egy utat, amelyet a navigáció során el kíván kerülni:</string>
-    <string name="show_along_the_route">Megjelenítés az útvonal mellett</string>
+    <string name="show_along_the_route">Megjelenítés az útvonal mentén</string>
     <string name="simulate_navigation">Navigáció szimulálása</string>
     <string name="choose_track_file_to_follow">Követendő nyomvonalfájl kijelölése</string>
     <string name="voice_announcements">Hangutasítások</string>
@@ -2927,7 +2927,7 @@
     <string name="profile_alert_need_save_title">Módosítások mentése</string>
     <string name="profile_alert_need_save_msg">A módosítások mentése először a profilba</string>
     <string name="profile_alert_delete_title">Profil törlése</string>
-    <string name="profile_alert_delete_msg">Törli ezt a profilt: „%s”\?</string>
+    <string name="profile_alert_delete_msg">A profil törlése: „%s”</string>
     <string name="select_base_profile_dialog_title">Kiinduló profil kijelölése</string>
     <string name="process_downloading_service">OsmAnd letöltési szolgáltatás</string>
     <string name="shared_string_color_magenta">Magenta</string>
@@ -4524,4 +4524,8 @@
 \n
 \nHa ez nem elég pontos, vagy az eszközt %2$s nélkül használja, próbáljon meg átváltani erre: \"%3$s\"</string>
     <string name="location_source">Helyadat forrás</string>
+    <string name="shared_string_shape">Alak</string>
+    <string name="default_appearance_desc">Az alapértelmezett szín, ikon és alak a csoporthoz hozzáadott kedvenc pontokra lesz érvényes.</string>
+    <string name="default_appearance">Alapértelmezett megjelenés</string>
+    <string name="edit_category">Kategória szerkesztése</string>
 </resources>

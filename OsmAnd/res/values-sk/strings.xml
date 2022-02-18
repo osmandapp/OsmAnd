@@ -4527,4 +4527,8 @@
 \n
 \nAk dostávate nepresnú informáciu o polohe alebo používate zariadenie bez %2$s, skúste prepnúť na \"%3$s\"</string>
     <string name="location_source">Zdroj polohy</string>
+    <string name="shared_string_shape">Tvar</string>
+    <string name="default_appearance_desc">Predvolená farba, ikona a tvar sa aplikujú na pridané obľúbené body v skupine.</string>
+    <string name="default_appearance">Predvolený vzhľad</string>
+    <string name="edit_category">Upraviť kategóriu</string>
 </resources>

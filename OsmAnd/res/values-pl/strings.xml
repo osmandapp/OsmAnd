@@ -4347,27 +4347,27 @@
     <string name="history_preferences_descr">Rejestrowanie historii można wyłączyć indywidualnie dla każdego typu historii.</string>
     <string name="shortcut_navigate_to_home">Nawiguj do domu</string>
     <string name="android_auto_map_placeholder_descr">Odłącz urządzenie od Android Auto, aby wyświetlić mapę w aplikacji.</string>
-    <string name="release_4_1">"• Dodano początkową obsługę Android Auto
+    <string name="release_4_1">• Dodano początkową obsługę Android Auto
 \n
 \n • Aktualizacja interfejsu użytkownika dla wyszukiwania współrzędnych UTM
 \n
-\n  • Ulubione: dodano możliwość przeglądania ostatnio używanych ikon
+\n • Ulubione: dodano możliwość przeglądania ostatnio używanych ikon
 \n
-\n  • Planowanie trasy: użyje wybranego profilu po uruchomieniu
+\n • Planowanie trasy: użyje wybranego profilu po uruchomieniu
 \n
-\n  • Naprawiono warstwę Mapillary, wtyczka jest teraz domyślnie wyłączona
+\n • Naprawiono warstwę Mapillary, wtyczka jest teraz domyślnie wyłączona
 \n
-\n  • Dodano ekran do zarządzania całą historią w aplikacji
+\n • Dodano ekran do zarządzania całą historią w aplikacji
 \n
-\n  • Orientacja mapy nie jest resetowana po ponownym uruchomieniu aplikacji
+\n • Orientacja mapy nie jest resetowana po ponownym uruchomieniu aplikacji
 \n
-\n  • Ulepszone renderowanie znaczników wysokości SRTM
+\n • Ulepszone renderowanie znaczników wysokości SRTM
 \n
-\n  • Poprawiono arabskie podpisy pod mapami
+\n • Poprawiono arabskie podpisy pod mapami
 \n
-\n  • Naprawiono różne problemy z routingiem
+\n • Naprawiono różne problemy z routingiem
 \n
-\n"</string>
+\n</string>
     <string name="routing_attr_allow_gate_name">Zezwól na użycie bramy</string>
     <string name="routing_attr_only_permitted_ways_name">Celowo dozwolone ulice</string>
     <string name="purchases_feature_desc_android_auto">Przenosi mapy offline i nawigację OsmAnd na ekran pojazdu i integruje się z urządzeniami sterującymi pojazdu.</string>

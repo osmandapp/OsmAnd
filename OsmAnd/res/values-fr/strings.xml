@@ -4526,4 +4526,7 @@
     <string name="location_source_descr">Lorsqu\'OsmAnd est installé depuis Google Play, la localisation utilisée par défaut est %1$s .
 \n
 \nSi votre localisation est imprécise ou si vous utilisez un appareil sans %2$s, essayez de basculer vers \"%3$s\".</string>
+    <string name="shared_string_shape">Forme</string>
+    <string name="edit_category">Modifier la catégorie</string>
+    <string name="default_appearance">Apparence par défaut</string>
 </resources>
