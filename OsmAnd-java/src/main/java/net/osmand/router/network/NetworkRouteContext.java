@@ -18,7 +18,7 @@ public class NetworkRouteContext {
 	
 	private static final int ZOOM_TO_LOAD_TILES = 15;
 	
-	private TLongObjectHashMap<NetworkRoutesTile> indexedSubregions = new TLongObjectHashMap<>();
+	private TLongObjectHashMap<NetworkRoutesTile> indexedTiles = new TLongObjectHashMap<>();
 	private final BinaryMapIndexReader[] readers;
 	final NetworkRouteSelectorFilter filter;
 
@@ -54,21 +54,22 @@ public class NetworkRouteContext {
 
 	public NetworkRoutesTile getMapRouteTile(int x31, int y31) throws IOException {
 		long tileId = getTileId(x31, y31);
-		if (!indexedSubregions.containsKey(tileId)) {
-			NetworkRoutesTile osmcRoutesTile = loadTile(x31, y31);
-			indexedSubregions.put(tileId, osmcRoutesTile);
+		NetworkRoutesTile tile = indexedTiles.get(tileId);
+		if (tile == null) {
+			tile = loadTile(x31, y31);
+			indexedTiles.put(tileId, tile);
 		}
-		return indexedSubregions.get(tileId);
+		return tile;
 	}
 
 	private NetworkRoutesTile loadTile(int x31, int y31) throws IOException {
 		final BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> req = buildTileRequest(x31, y31);
 		NetworkRoutesTile osmcRoutesTile = new NetworkRoutesTile();
 		for (BinaryMapIndexReader reader : readers) {
+			req.clearSearchResults();
 			List<BinaryMapDataObject> objects = reader.searchMapIndex(req);
 			for (BinaryMapDataObject bMdo : objects) {
 				if (filter == null || filter.accept(bMdo)) {
-					System.out.println(bMdo.getId() >> 7);
 					osmcRoutesTile.add(bMdo);
 				}
 			}
@@ -77,12 +78,14 @@ public class NetworkRouteContext {
 	}
 
 	private BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> buildTileRequest(int x31, int y31) {
-		int tileX = x31 >> ZOOM_TO_LOAD_TILES;
-		int tileY = y31 >> ZOOM_TO_LOAD_TILES;
-		int tileLeft = tileX << ZOOM_TO_LOAD_TILES;
-		int tileTop = tileY << ZOOM_TO_LOAD_TILES;
-		int tileRight = (tileX + 1) << ZOOM_TO_LOAD_TILES;
-		int tileBottom = (tileY + 1) << ZOOM_TO_LOAD_TILES;
+		int zm = (31 - ZOOM_TO_LOAD_TILES);
+		int tileX = x31 >> zm;
+		int tileY = y31 >> zm;
+		int tileLeft = tileX << zm;
+		int tileTop = tileY << zm;
+		int tileRight = (tileX + 1) << zm;
+		int tileBottom = (tileY + 1) << zm;
+		System.out.println(String.format("Load tile %d %d", tileX, tileY));
 		return BinaryMapIndexReader.buildSearchRequest(tileLeft, tileRight, tileTop, tileBottom, ZOOM_TO_LOAD_TILES,
 				new BinaryMapIndexReader.SearchFilter() {
 					@Override
