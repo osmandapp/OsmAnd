@@ -77,7 +77,6 @@ public class NetworkRouteSelector {
 				growEnd = grow(lst, false);
 			}
 			res.put(segment.routeKey, createGpxFile(lst));
-			
 		}
 		return res;
 	}
@@ -100,20 +99,13 @@ public class NetworkRouteSelector {
 			// TODO 2. growth in the middle (cut)
 			// TODO 3. roundabout ??
 			if (ld.routeKey.equals(obj.routeKey) && ld.getId() != obj.getId() && lastObj.getId() != ld.getId()) {
-				if (pnt == ld.getStartPointLong()) {
-					if (toFirst) {
+				if (pnt == ld.getStartPointLong() || pnt == ld.getEndPointLong()) {
+					if ((pnt == ld.getEndPointLong()) != toFirst) {
 						ld.inverse();
-						lst.addFirst(ld);
-					} else {
-						lst.addLast(ld);
 					}
-					return true;
-				}
-				if (pnt == ld.getEndPointLong()) {
 					if (toFirst) {
 						lst.addFirst(ld);
 					} else {
-						ld.inverse();
 						lst.addLast(ld);
 					}
 					return true;
