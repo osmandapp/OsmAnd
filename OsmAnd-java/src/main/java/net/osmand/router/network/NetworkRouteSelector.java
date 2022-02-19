@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,6 +18,7 @@ import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.QuadRect;
+import net.osmand.router.network.NetworkRouteContext.NetworkRouteObject;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -30,6 +32,9 @@ public class NetworkRouteSelector {
 	private final NetworkRouteContext rCtx;
 	
 	public NetworkRouteSelector(BinaryMapIndexReader[] files, NetworkRouteSelectorFilter filter) {
+		if (filter == null) {
+			filter = new NetworkRouteSelectorFilter();
+		}
 		rCtx = new NetworkRouteContext(files, filter);
 	}
 	
@@ -37,174 +42,93 @@ public class NetworkRouteSelector {
 		public Set<RouteKey> keyFilter = null; // null - all
 		public Set<RouteType> typeFilter = null; // null -  all
 		
-		
-		public boolean accept(BinaryMapDataObject bMdo) {
-			if (keyFilter == null && typeFilter == null) {
-				return true;
-			}
+		public List<RouteKey> convert(BinaryMapDataObject bMdo) {
 			List<RouteKey> keys = RouteType.getRouteKeys(bMdo);
-			for (RouteKey k : keys) {
-				if (keyFilter != null && keyFilter.contains(k)) {
-					return true;
-				}
-				if (typeFilter != null && typeFilter.contains(k.type)) {
-					return true;
+			if (keyFilter == null && typeFilter == null) {
+				return keys;
+			}
+			Iterator<RouteKey> it = keys.iterator();
+			while (it.hasNext()) {
+				RouteKey key = it.next();
+				if (keyFilter != null && !keyFilter.contains(key)) {
+					it.remove();
+				} else if (typeFilter != null && !typeFilter.contains(key.type)) {
+					it.remove();
 				}
 			}
-			return false;
+			return keys;
 		}
 	}
 	
 
 	public Map<RouteKey, GPXFile> getRoutes(RenderedObject renderedObject) throws IOException {
-		QuadRect qr = new QuadRect();
-		qr.left = qr.right = renderedObject.getX().get(0);
-		qr.top = qr.bottom = renderedObject.getY().get(0);
-		return getRoutes(qr);
-	}
-	
-	public Map<RouteKey, GPXFile> getRoutes(QuadRect bBox) throws IOException {
+		int x = renderedObject.getX().get(0);
+		int y = renderedObject.getY().get(0);
 		Map<RouteKey, GPXFile> res = new LinkedHashMap<RouteKey, GPXUtilities.GPXFile>();
-		List<BinaryMapDataObject> finalSegmentList = new ArrayList<>();
-		int x = (int) bBox.left;
-		int y = (int) bBox.bottom;
-		int xStart;
-		int yStart;
-		for (BinaryMapDataObject segment : getRouteSegments(x, y)) {
-			finalSegmentList.add(segment);
-			xStart = segment.getPoint31XTile(0);
-			yStart = segment.getPoint31YTile(0);
-			x = segment.getPoint31XTile(segment.getPointsLength() - 1);
-			y = segment.getPoint31YTile(segment.getPointsLength() - 1);
-			getRoutePart(finalSegmentList, x, y);
-			getRoutePart(finalSegmentList, xStart, yStart);
-		}
-		if (!finalSegmentList.isEmpty()) {
-			// TODO
-			res.put(rCtx.filter.keyFilter.iterator().next(), createGpxFile(finalSegmentList));
-			finalSegmentList.clear();
+		for (NetworkRouteObject segment : getRouteSegments(x, y)) {
+			LinkedList<NetworkRouteObject> lst = new LinkedList<>();
+			lst.add(segment);
+			boolean growStart = true;
+			while (growStart) {
+				growStart = grow(lst, true);
+			}
+			boolean growEnd = true;
+			while (growEnd) {
+				growEnd = grow(lst, false);
+			}
+			res.put(segment.routeKey, createGpxFile(lst));
+			
 		}
 		return res;
 	}
+	
+	public Map<RouteKey, GPXFile> getRoutes(QuadRect bBox) throws IOException {
+		// TODO search by bbox
+		return null;
+	}
 
-	private List<BinaryMapDataObject> getRouteSegments(int x, int y) throws IOException {
+	private List<NetworkRouteObject> getRouteSegments(int x, int y) throws IOException {
 		return rCtx.loadRouteSegment(x, y);
 	}
 	
-	private void getRoutePart(List<BinaryMapDataObject> finalSegmentList, int x, int y) throws IOException {
-		List<BinaryMapDataObject> foundSegmentList = new ArrayList<>();
-		boolean exit = false;
-		while (!exit) {
-			foundSegmentList.addAll(getRouteSegments(x, y));
-			exit = true;
-			Iterator<BinaryMapDataObject> i = foundSegmentList.iterator();
-			while (i.hasNext()) {
-				BinaryMapDataObject s = i.next();
-				if (!isConnected(s, x, y) && !isRoundabout(s)) {
-					i.remove();
-					continue;
-				}
-				for (BinaryMapDataObject fs : finalSegmentList) {
-					if (s.getId() == fs.getId()) {
-						i.remove();
-						break;
+	private boolean grow(LinkedList<NetworkRouteObject> lst, boolean toFirst) throws IOException {
+		NetworkRouteObject obj = toFirst ? lst.getFirst() : lst.getLast();
+		NetworkRouteObject lastObj = !toFirst ? lst.getFirst() : lst.getLast();
+		long pnt = toFirst ? obj.getStartPointLong() : obj.getEndPointLong();
+		for (NetworkRouteObject ld : rCtx.loadRouteSegment(pnt)) {
+			// TODO 1. approximate growth (with hole)
+			// TODO 2. growth in the middle (cut)
+			// TODO 3. roundabout ??
+			if (ld.routeKey.equals(obj.routeKey) && ld.getId() != obj.getId() && lastObj.getId() != ld.getId()) {
+				if (pnt == ld.getStartPointLong()) {
+					if (toFirst) {
+						ld.inverse();
+						lst.addFirst(ld);
+					} else {
+						lst.addLast(ld);
 					}
+					return true;
 				}
-			}
-
-			if (foundSegmentList.isEmpty()) {
-				// TODO: find split segment
-				foundSegmentList.addAll(getRouteSegments(x, y));
-				removeExistedSegments(finalSegmentList, foundSegmentList);
-
-				if (!foundSegmentList.isEmpty()) {
-					BinaryMapDataObject foundSegment = getNearestSegment(foundSegmentList, x, y);
-					foundSegmentList.clear();
-					foundSegmentList.add(foundSegment);
-					int xb = foundSegment.getPoint31XTile(0);
-					int yb = foundSegment.getPoint31YTile(0);
-					int xe = foundSegment.getPoint31XTile(foundSegment.getPointsLength() - 1);
-					int ye = foundSegment.getPoint31YTile(foundSegment.getPointsLength() - 1);
-					double distBegin = MapUtils.squareDist31TileMetric(x, y, xb, yb);
-					double distEnd = MapUtils.squareDist31TileMetric(x, y, xe, ye);
-					x = distBegin < distEnd ? xb : xe;
-					y = distBegin < distEnd ? yb : ye;
-				}
-			}
-
-			for (BinaryMapDataObject foundSegment : foundSegmentList) {
-				if (isRoundabout(foundSegment)) {
-					finalSegmentList.add(foundSegment);
-					foundSegment = processRoundabout(foundSegment, finalSegmentList);
-					int xb = foundSegment.getPoint31XTile(0);
-					int yb = foundSegment.getPoint31YTile(0);
-					int xe = foundSegment.getPoint31XTile(foundSegment.getPointsLength() - 1);
-					int ye = foundSegment.getPoint31YTile(foundSegment.getPointsLength() - 1);
-					double distBegin = MapUtils.squareDist31TileMetric(x, y, xb, yb);
-					double distEnd = MapUtils.squareDist31TileMetric(x, y, xe, ye);
-					x = distBegin < distEnd ? xb : xe;
-					y = distBegin < distEnd ? yb : ye;
-				}
-				finalSegmentList.add(foundSegment);
-				int xNext = foundSegment.getPoint31XTile(foundSegment.getPointsLength() - 1);
-				int yNext = foundSegment.getPoint31YTile(foundSegment.getPointsLength() - 1);
-				if (xNext == x && yNext == y) {
-					xNext = foundSegment.getPoint31XTile(0);
-					yNext = foundSegment.getPoint31YTile(0);
-				}
-				if (foundSegmentList.size() > 1) {
-					getRoutePart(finalSegmentList, xNext, yNext);
-				} else {
-					exit = false;
-					x = xNext;
-					y = yNext;
+				if (pnt == ld.getEndPointLong()) {
+					if (toFirst) {
+						lst.addFirst(ld);
+					} else {
+						ld.inverse();
+						lst.addLast(ld);
+					}
+					return true;
 				}
 			}
 		}
+		return false;
+		
 	}
 
-	private BinaryMapDataObject processRoundabout(BinaryMapDataObject foundSegment,
-			List<BinaryMapDataObject> finalSegmentList) throws IOException {
-		List<BinaryMapDataObject> foundSegmentList = new ArrayList<>();
-		for (int i = 0; i < foundSegment.getPointsLength(); i++) {
-			foundSegmentList.clear();
-			for (BinaryMapDataObject o : rCtx.loadRouteSegment(foundSegment.getPoint31XTile(i),
-					foundSegment.getPoint31YTile(i))) {
-				foundSegmentList.add(o);
-			}
-			List<BinaryMapDataObject> segments = rCtx.loadRouteSegment(foundSegment.getPoint31XTile(i), foundSegment.getPoint31YTile(i));
-			foundSegmentList.addAll(segments);
-			if (!foundSegmentList.isEmpty()) {
-				removeExistedSegments(finalSegmentList, foundSegmentList);
-				if (!foundSegmentList.isEmpty()) {
-					break;
-				}
-			}
-		}
-		if (!foundSegmentList.isEmpty()) {
-			return foundSegmentList.get(0);
-		}
-		return foundSegment;
-	}
 
-	private void removeExistedSegments(List<BinaryMapDataObject> finalSegmentList,
-			List<BinaryMapDataObject> foundSegmentList) {
-		Iterator<BinaryMapDataObject> it = foundSegmentList.iterator();
-		while (it.hasNext()) {
-			BinaryMapDataObject o = it.next();
-			for (BinaryMapDataObject fo : finalSegmentList) {
-				if (o.getId() == fo.getId()) {
-					it.remove();
-					break;
-				}
-			}
-		}
-	}
-
-	private BinaryMapDataObject getNearestSegment(List<BinaryMapDataObject> foundSegmentList, int x, int y) {
-		BinaryMapDataObject nearestSegment = foundSegmentList.get(0);
+	private NetworkRouteObject getNearestSegment(List<NetworkRouteObject> foundSegmentList, int x, int y) {
+		NetworkRouteObject nearestSegment = foundSegmentList.get(0);
 		double minDistance = getMinDistance(x, y, nearestSegment);
-		for (BinaryMapDataObject segment : foundSegmentList) {
+		for (NetworkRouteObject segment : foundSegmentList) {
 			double segmentDistance = getMinDistance(x, y, segment);
 			if (segmentDistance < minDistance) {
 				minDistance = segmentDistance;
@@ -214,36 +138,27 @@ public class NetworkRouteSelector {
 		return nearestSegment;
 	}
 	
-	private double getMinDistance(int x, int y, BinaryMapDataObject segment) {
+	private double getMinDistance(int x, int y, NetworkRouteObject segment) {
 		int last = segment.getPointsLength() - 1;
 		return Math.min(MapUtils.squareDist31TileMetric(x, y, segment.getPoint31XTile(0), segment.getPoint31YTile(0)),
 				MapUtils.squareDist31TileMetric(x, y, segment.getPoint31XTile(last), segment.getPoint31YTile(last)));
 	}
 
-
-	private boolean isRoundabout(BinaryMapDataObject segment) {
-		int last = segment.getPointsLength() - 1;
-		return last != 0 && segment.getPoint31XTile(last) == segment.getPoint31XTile(0)
-				&& segment.getPoint31YTile(last) == segment.getPoint31YTile(0);
-	}
-
-	private boolean isConnected(BinaryMapDataObject segment, int xc, int yc) {
-		int last = segment.getPointsLength() - 1;
-		return (xc == segment.getPoint31XTile(last) && yc == segment.getPoint31YTile(last))
-				|| (xc == segment.getPoint31XTile(0) && yc == segment.getPoint31YTile(0));
-	}
-
 	
-	private GPXFile createGpxFile(List<BinaryMapDataObject> segmentList) {
+	private GPXFile createGpxFile(List<NetworkRouteObject> segmentList) {
 		GPXFile gpxFile = new GPXFile(null, null, null);
 		GPXUtilities.Track track = new GPXUtilities.Track();
-		for (BinaryMapDataObject segment : segmentList) {
+		for (NetworkRouteObject segment : segmentList) {
 			GPXUtilities.TrkSegment trkSegment = new GPXUtilities.TrkSegment();
-			for (int i = 0; i < segment.getPointsLength(); i++) {
+			int inc = segment.start < segment.end ? 1 : -1;
+			for (int i = segment.start;; i += inc) {
 				GPXUtilities.WptPt point = new GPXUtilities.WptPt();
 				point.lat = MapUtils.get31LatitudeY(segment.getPoint31YTile(i));
 				point.lon = MapUtils.get31LongitudeX(segment.getPoint31XTile(i));
 				trkSegment.points.add(point);
+				if (i == segment.end) {
+					break;
+				}
 			}
 			track.segments.add(trkSegment);
 		}
