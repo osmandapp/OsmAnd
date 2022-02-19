@@ -20,7 +20,7 @@ import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.QuadRect;
-import net.osmand.router.network.NetworkRouteContext.NetworkRouteObject;
+import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -29,8 +29,21 @@ public class NetworkRouteSelector {
 	private static final String ROUTE_KEY_VALUE_SEPARATOR = "__";
 
 	private static final int MAX_ITERATIONS = 8192;
+	// works only if road in same tile
+	private static final double MAX_RADIUS_HOLE = 30;
 	
 	private final NetworkRouteContext rCtx;
+	
+	// TODO 0. search by bbox
+	// TODO 1. Fix routing tags
+	// TODO 2. growth in the middle (cut) 
+	// TODO 3. roundabout ?? 
+	// TODO 4. round routes
+	// TODO 5. step back technique 
+	// TO test:
+	// https://www.openstreetmap.org/way/23246638 
+	// https://www.openstreetmap.org/relation/138401#map=19/51.06795/7.37955
+	// https://www.openstreetmap.org/relation/145490#map=16/51.0607/7.3596
 	
 	public NetworkRouteSelector(BinaryMapIndexReader[] files, NetworkRouteSelectorFilter filter) {
 		this(files, filter, false);
@@ -51,24 +64,27 @@ public class NetworkRouteSelector {
 		int x = renderedObject.getX().get(0);
 		int y = renderedObject.getY().get(0);
 		Map<RouteKey, GPXFile> res = new LinkedHashMap<RouteKey, GPXUtilities.GPXFile>();
-		for (NetworkRouteObject segment : getRouteSegments(x, y)) {
-			LinkedList<NetworkRouteObject> lst = new LinkedList<>();
+		for (NetworkRouteSegment segment : getRouteSegments(x, y)) {
+			LinkedList<NetworkRouteSegment> lst = new LinkedList<>();
 			lst.add(segment);
 			int it = 0;
 			while (it++ < MAX_ITERATIONS) {
-				if (!grow(lst, true)) {
-					it = 0;
-					break;
+				if (!grow(lst, true, false)) {
+					if (!grow(lst, true, true)) {
+						it = 0;
+						break;
+					}
 				}
 			}
 			while (it++ < MAX_ITERATIONS) {
-				if(!grow(lst, false)) {
-					it = 0;
-					break;
+				if(!grow(lst, false, false)) {
+					if(!grow(lst, false, true)) {
+						it = 0;
+						break;
+					}
 				}
 			}
 			if (it != 0) {
-				
 				throw new IllegalStateException("Route likely has a loop: " + lst.subList(lst.size() - 20, lst.size() - 1));
 			}
 			res.put(segment.routeKey, createGpxFile(lst));
@@ -77,66 +93,38 @@ public class NetworkRouteSelector {
 	}
 	
 	public Map<RouteKey, GPXFile> getRoutes(QuadRect bBox) throws IOException {
-		// TODO search by bbox
 		return null;
 	}
 
-	private List<NetworkRouteObject> getRouteSegments(int x, int y) throws IOException {
+	private List<NetworkRouteSegment> getRouteSegments(int x, int y) throws IOException {
 		return rCtx.loadRouteSegment(x, y);
 	}
 	
-	private boolean grow(LinkedList<NetworkRouteObject> lst, boolean toFirst) throws IOException {
-		NetworkRouteObject obj = toFirst ? lst.getFirst() : lst.getLast();
-		NetworkRouteObject lastObj = !toFirst ? lst.getFirst() : lst.getLast();
-		long pnt = toFirst ? obj.getStartPointLong() : obj.getEndPointLong();
-		for (NetworkRouteObject ld : rCtx.loadRouteSegment(pnt)) {
-			// TODO 1. approximate growth (with hole) https://www.openstreetmap.org/relation/138401#map=19/51.06795/7.37955
-			// TODO 2. growth in the middle (cut) https://www.openstreetmap.org/relation/145490#map=16/51.0607/7.3596
-			// TODO 3. roundabout ?? https://www.openstreetmap.org/way/23246638
-			// TODO 4. round routes
-//			System.out.println(ld.getId() >> 7);
+	private boolean grow(LinkedList<NetworkRouteSegment> lst, boolean toFirst, boolean approximate) throws IOException {
+		NetworkRouteSegment obj = toFirst ? lst.getFirst() : lst.getLast();
+		NetworkRouteSegment lastObj = !toFirst ? lst.getFirst() : lst.getLast();
+		int x31 = toFirst ? obj.getStartPointX() : obj.getEndPointX();
+		int y31 = toFirst ? obj.getStartPointY() : obj.getEndPointY();
+		List<NetworkRouteSegment> objs = approximate ? rCtx.loadNearRouteSegment(x31, y31, MAX_RADIUS_HOLE) : 
+			rCtx.loadRouteSegment(x31, y31);
+		for (NetworkRouteSegment ld : objs) {
+			// System.out.println(ld.getId() >> 7);
 			if (ld.routeKey.equals(obj.routeKey) && ld.getId() != obj.getId() && lastObj.getId() != ld.getId()) {
-				if (pnt == ld.getStartPointLong() || pnt == ld.getEndPointLong()) {
-					if ((pnt == ld.getEndPointLong()) != toFirst) {
-						ld.inverse();
-					}
-					if (toFirst) {
-						lst.addFirst(ld);
-					} else {
-						lst.addLast(ld);
-					}
-					return true;
+				if (toFirst) {
+					lst.addFirst(ld);
+				} else {
+					lst.addLast(ld);
 				}
+				return true;
 			}
 		}
 		return false;
 	}
 
-
-	private NetworkRouteObject getNearestSegment(List<NetworkRouteObject> foundSegmentList, int x, int y) {
-		NetworkRouteObject nearestSegment = foundSegmentList.get(0);
-		double minDistance = getMinDistance(x, y, nearestSegment);
-		for (NetworkRouteObject segment : foundSegmentList) {
-			double segmentDistance = getMinDistance(x, y, segment);
-			if (segmentDistance < minDistance) {
-				minDistance = segmentDistance;
-				nearestSegment = segment;
-			}
-		}
-		return nearestSegment;
-	}
-	
-	private double getMinDistance(int x, int y, NetworkRouteObject segment) {
-		int last = segment.getPointsLength() - 1;
-		return Math.min(MapUtils.squareDist31TileMetric(x, y, segment.getPoint31XTile(0), segment.getPoint31YTile(0)),
-				MapUtils.squareDist31TileMetric(x, y, segment.getPoint31XTile(last), segment.getPoint31YTile(last)));
-	}
-
-	
-	private GPXFile createGpxFile(List<NetworkRouteObject> segmentList) {
+	private GPXFile createGpxFile(List<NetworkRouteSegment> segmentList) {
 		GPXFile gpxFile = new GPXFile(null, null, null);
 		GPXUtilities.Track track = new GPXUtilities.Track();
-		for (NetworkRouteObject segment : segmentList) {
+		for (NetworkRouteSegment segment : segmentList) {
 			GPXUtilities.TrkSegment trkSegment = new GPXUtilities.TrkSegment();
 			int inc = segment.start < segment.end ? 1 : -1;
 			for (int i = segment.start;; i += inc) {

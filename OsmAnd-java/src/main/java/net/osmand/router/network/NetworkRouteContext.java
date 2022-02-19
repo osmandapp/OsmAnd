@@ -3,6 +3,7 @@ package net.osmand.router.network;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -68,23 +69,39 @@ public class NetworkRouteContext {
 	}
 	
 	
-	public List<NetworkRoutePoint> loadNearRouteSegment(int x31, int y31, int radius) throws IOException {
-		List<NetworkRoutePoint> nearSegments = new ArrayList<>();
+	public List<NetworkRouteSegment> loadNearRouteSegment(int x31, int y31, double radius) throws IOException {
+		List<NetworkRoutePoint> nearPoints = new ArrayList<>();
 		NetworkRoutesTile osmcRoutesTile = getMapRouteTile(x31, y31);
 		double sqrRadius = radius * radius;
-		for (NetworkRoutePoint segment : osmcRoutesTile.getRoutes().values()) {
-			if (MapUtils.squareDist31TileMetric(segment.x31, segment.y31, x31, y31) < sqrRadius) {
-				nearSegments.add(segment);
+		for (NetworkRoutePoint pnt : osmcRoutesTile.getRoutes().valueCollection()) {
+			double dist = MapUtils.squareDist31TileMetric(pnt.x31, pnt.y31, x31, y31);
+			if (dist < sqrRadius) {
+				// use as single thread cache
+				pnt.localVar = dist;
+				nearPoints.add(pnt);
 			}
 		}
-		return nearSegments;
+		Collections.sort(nearPoints, new Comparator<NetworkRoutePoint>() {
+			@Override
+			public int compare(NetworkRoutePoint o1, NetworkRoutePoint o2) {
+				return Double.compare(o1.localVar, o2.localVar);
+			}
+		});
+		if (nearPoints.size() == 0) {
+			return Collections.emptyList();
+		}
+		List<NetworkRouteSegment> objs = new ArrayList<>();
+		for (NetworkRoutePoint pnt : nearPoints) {
+			objs.addAll(pnt.objects);
+		}
+		return objs;
 	}
 	
-	public List<NetworkRouteObject> loadRouteSegment(long pnt) throws IOException {
+	public List<NetworkRouteSegment> loadRouteSegment(long pnt) throws IOException {
 		return loadRouteSegment(getXFromLong(pnt), getYFromLong(pnt));
 	}
 	
-	public List<NetworkRouteObject> loadRouteSegment(int x31, int y31) throws IOException {
+	public List<NetworkRouteSegment> loadRouteSegment(int x31, int y31) throws IOException {
 		NetworkRoutesTile osmcRoutesTile = getMapRouteTile(x31, y31);
 		NetworkRoutePoint point = osmcRoutesTile.getRouteSegment(x31, y31);
 		if (point == null) {
@@ -205,7 +222,8 @@ public class NetworkRouteContext {
 		public final int x31;
 		public final int y31;
 		public final long id;
-		public final List<NetworkRouteObject> objects = new ArrayList<>();
+		public final List<NetworkRouteSegment> objects = new ArrayList<>();
+		public double localVar;
 		
 		public NetworkRoutePoint(int x31, int y31, long id) {
 			this.x31 = x31;
@@ -213,9 +231,9 @@ public class NetworkRouteContext {
 			this.id = id;
 		}
 
-		public void addObject(NetworkRouteObject obj) {
+		public void addObject(NetworkRouteSegment obj) {
 			if (obj.getId() > 0) {
-				for (NetworkRouteObject obj2 : objects) {
+				for (NetworkRouteSegment obj2 : objects) {
 					if (obj.getId() == obj2.getId()) {
 						return;
 					}
@@ -234,21 +252,21 @@ public class NetworkRouteContext {
 	}
 	
 	
-	public static class NetworkRouteObject {
+	public static class NetworkRouteSegment {
 		public int start;
 		public int end;
 		public BinaryMapDataObject obj;
 		public RouteDataObject robj;
 		public RouteKey routeKey;
 		
-		public NetworkRouteObject(BinaryMapDataObject obj, RouteKey routeKey, int start, int end) {
+		public NetworkRouteSegment(BinaryMapDataObject obj, RouteKey routeKey, int start, int end) {
 			this.obj = obj;
 			this.end = end;
 			this.start = start;
 			this.routeKey = routeKey;
 		}
 		
-		public NetworkRouteObject(RouteDataObject obj, RouteKey routeKey, int start, int end) {
+		public NetworkRouteSegment(RouteDataObject obj, RouteKey routeKey, int start, int end) {
 			this.robj = obj;
 			this.end = end;
 			this.start = start;
@@ -287,6 +305,22 @@ public class NetworkRouteContext {
 		public long getStartPointLong() {
 			return convertPontToLong(getPoint31XTile(start), getPoint31YTile(start));
 		}
+		
+		public int getStartPointX() {
+			return getPoint31XTile(start);
+		}
+		
+		public int getStartPointY() {
+			return getPoint31YTile(start);
+		}
+		
+		public int getEndPointX() {
+			return getPoint31XTile(end);
+		}
+		
+		public int getEndPointY() {
+			return getPoint31YTile(end);
+		}
 
 		public void inverse() {
 			int t = start;
@@ -318,10 +352,10 @@ public class NetworkRouteContext {
 					routes.put(id, point);
 				}
 				if (i > 0) {
-					point.addObject(new NetworkRouteObject(obj, rk, i, 0));
+					point.addObject(new NetworkRouteSegment(obj, rk, i, 0));
 				}
 				if (i < len - 1) {
-					point.addObject(new NetworkRouteObject(obj, rk, i, len - 1));
+					point.addObject(new NetworkRouteSegment(obj, rk, i, len - 1));
 				}
 			}			
 		}
@@ -339,10 +373,10 @@ public class NetworkRouteContext {
 					routes.put(id, point);
 				}
 				if (i > 0) {
-					point.addObject(new NetworkRouteObject(obj, rk, i, 0));
+					point.addObject(new NetworkRouteSegment(obj, rk, i, 0));
 				}
 				if (i < len - 1) {
-					point.addObject(new NetworkRouteObject(obj, rk, i, len - 1));
+					point.addObject(new NetworkRouteSegment(obj, rk, i, len - 1));
 				}
 			}			
 		}
