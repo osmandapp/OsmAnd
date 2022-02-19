@@ -308,14 +308,6 @@ public class NetworkRouteContext {
 			return obj.getPoint31YTile(i);
 		}
 
-		public long getEndPointLong() {
-			return convertPontToLong(getPoint31XTile(end), getPoint31YTile(end));
-		}
-		
-		public long getStartPointLong() {
-			return convertPontToLong(getPoint31XTile(start), getPoint31YTile(start));
-		}
-		
 		public int getStartPointX() {
 			return getPoint31XTile(start);
 		}

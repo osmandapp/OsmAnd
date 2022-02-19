@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
@@ -30,7 +31,7 @@ public class NetworkRouteSelector {
 	
 	private static final String ROUTE_KEY_VALUE_SEPARATOR = "__";
 
-	private static final int MAX_ITERATIONS = 8192;
+	private static final int MAX_ITERATIONS = 16000;
 	// works only if road in same tile
 	private static final double MAX_RADIUS_HOLE = 30;
 	private static final int DEPTH_TO_STEPBACK_AND_LOOPS = 5;
@@ -39,16 +40,17 @@ public class NetworkRouteSelector {
 	
 	private final NetworkRouteContext rCtx;
 	
-	// TODO 0. search by bbox
-	// TODO 1. Fix routing tags
-	// TODO 2. growth in the middle (cut) 
-	// TODO 3. roundabout ?? 
-	// TODO 4. round routes
-	// TODO 5. step back technique 
-	// TO test:
-	// https://www.openstreetmap.org/way/23246638 
-	// https://www.openstreetmap.org/relation/138401#map=19/51.06795/7.37955
-	// https://www.openstreetmap.org/relation/145490#map=16/51.0607/7.3596
+	// TODO 0. Search by bbox
+	// TODO 1. FIX & implement work with routing tags
+	// TODO TEST 2.1 growth in the middle - Test 1 
+	// TODO      2.2 roundabout 
+	// TODO      2.3 step back technique 
+	// TEST:
+	// 1. Round routes
+	// 2. Loop & middle & roundabout: https://www.openstreetmap.org/way/23246638
+	//    Lots deviations https://www.openstreetmap.org/relation/1075081#map=8/47.656/10.456
+	// 3. + https://www.openstreetmap.org/relation/138401#map=19/51.06795/7.37955
+	// 4. + https://www.openstreetmap.org/relation/145490#map=16/51.0607/7.3596
 	
 	public NetworkRouteSelector(BinaryMapIndexReader[] files, NetworkRouteSelectorFilter filter) {
 		this(files, filter, false);
@@ -71,12 +73,13 @@ public class NetworkRouteSelector {
 		Map<RouteKey, GPXFile> res = new LinkedHashMap<RouteKey, GPXUtilities.GPXFile>();
 		for (NetworkRouteSegment segment : getRouteSegments(x, y)) {
 			List<NetworkRouteSegment> lst = new ArrayList<>();
+			TLongHashSet visitedIds = new TLongHashSet();
 			lst.add(segment.inverse());
 			debug("START ", null, segment);
 			int it = 0;
 			while (it++ < MAX_ITERATIONS) {
-				if (!grow(lst, true, false)) {
-					if (!grow(lst, true, true)) {
+				if (!grow(lst, visitedIds, true, false)) {
+					if (!grow(lst, visitedIds, true, true)) {
 						it = 0;
 						break;
 					}
@@ -87,15 +90,22 @@ public class NetworkRouteSelector {
 				lst.set(i, lst.get(i).inverse());
 			}
 			while (it++ < MAX_ITERATIONS) {
-				if(!grow(lst, false, false)) {
-					if (!grow(lst, false, true)) {
+				if(!grow(lst, visitedIds, false, false)) {
+					if (!grow(lst, visitedIds, false, true)) {
 						it = 0;
 						break;
 					}
 				}
 			}
 			if (it != 0) {
-				throw new IllegalStateException("Route likely has a loop: " + lst.subList(lst.size() - 20, lst.size() - 1));
+				RouteKey rkey = segment.routeKey;
+				TIntArrayList ids = new TIntArrayList();
+				for (int i = lst.size() - 1; i > 0 && i > lst.size() - 50; i--) {
+					ids.add((int) (lst.get(i).getId() >> 7));
+				}
+				String msg = "Route likely has a loop: " + rkey + " iterations " + it + " ids " + ids;
+				System.err.println(msg);
+//				throw new IllegalStateException();
 			}
 			res.put(segment.routeKey, createGpxFile(lst));
 			debug("FINISH " + lst.size(), null, segment);
@@ -112,10 +122,10 @@ public class NetworkRouteSelector {
 	}
 	
 	private void debug(String msg, Boolean reverse, NetworkRouteSegment ld) {
-		System.out.println(msg + (reverse == null ? "" : (reverse ? '-' : '+')) + " " + ld);
+//		System.out.println(msg + (reverse == null ? "" : (reverse ? '-' : '+')) + " " + ld);
 	}
 	
-	private boolean grow(List<NetworkRouteSegment> lst, boolean reverse, boolean approximate) throws IOException {
+	private boolean grow(List<NetworkRouteSegment> lst, TLongHashSet visitedIds, boolean reverse, boolean approximate) throws IOException {
 		int lastInd = lst.size() - 1;
 		NetworkRouteSegment obj = lst.get(lastInd);
 		NetworkRouteSegment otherSide = lst.get(0);
@@ -123,14 +133,16 @@ public class NetworkRouteSelector {
 			rCtx.loadRouteSegment(obj.getEndPointX(), obj.getEndPointY());
 		for (NetworkRouteSegment ld : objs) {
 			debug("  CHECK", reverse, ld);
-			boolean accept = ld.routeKey.equals(obj.routeKey) && ld.getId() != obj.getId() && otherSide.getId() != ld.getId();
-			for (int i = lastInd; accept && i > 0 && i > lastInd - DEPTH_TO_STEPBACK_AND_LOOPS; i--) {
-				accept = lst.get(i).getId() != ld.getId();
-			}
-			if (accept) {
-				debug(">ACCEPT", reverse, ld);
-				lst.add(ld);
-				return true;
+			if (ld.routeKey.equals(obj.routeKey) && ld.getId() != obj.getId() && otherSide.getId() != ld.getId()) {
+				// visitedIds.add((ld.getId() << 14) + (reverse ? ld.end : ld.start))
+				if (visitedIds.add(ld.getId())) { // forbid visiting 2 directions
+					debug(">ACCEPT", reverse, ld);
+					lst.add(ld);
+					return true;
+				} else {
+					// loop
+					return false;
+				}
 			}
 		}
 		return false;
