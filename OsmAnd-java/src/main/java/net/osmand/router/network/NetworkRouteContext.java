@@ -19,13 +19,15 @@ public class NetworkRouteContext {
 	
 	private static final int ZOOM_TO_LOAD_TILES = 15;
 	
-	private TLongObjectHashMap<NetworkRoutesTile> indexedTiles = new TLongObjectHashMap<>();
+	private final TLongObjectHashMap<NetworkRoutesTile> indexedTiles = new TLongObjectHashMap<>();
+	private final NetworkRouteSelectorFilter filter;
 	private final BinaryMapIndexReader[] readers;
-	final NetworkRouteSelectorFilter filter;
+	private NetworkRouteContextStats stats;
 
 	public NetworkRouteContext(BinaryMapIndexReader[] readers, NetworkRouteSelectorFilter filter) {
 		this.readers = readers;
 		this.filter = filter;
+		this.stats = new NetworkRouteContextStats();
 	}
 	
 	public static long convertPontToLong(int x31, int y31) {
@@ -77,15 +79,20 @@ public class NetworkRouteContext {
 
 	private NetworkRoutesTile loadTile(int x31, int y31) throws IOException {
 		// TODO load routing tiles
+		stats.loadedTiles++;
 		final BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> req = buildTileRequest(x31, y31);
 		NetworkRoutesTile osmcRoutesTile = new NetworkRoutesTile();
 		for (BinaryMapIndexReader reader : readers) {
 			req.clearSearchResults();
+			long nt = System.nanoTime();
 			List<BinaryMapDataObject> objects = reader.searchMapIndex(req);
+			stats.loadTimeNs += (System.nanoTime() - nt);
 			for (BinaryMapDataObject obj : objects) {
+				stats.loadedObjects++;
 				List<RouteKey> keys = filter.convert(obj);
-				for(RouteKey rk : keys) {
-					osmcRoutesTile.add(new NetworkRouteObject(obj, rk));
+				for (RouteKey rk : keys) {
+					stats.loadedRoutes++;
+					osmcRoutesTile.add(obj, rk);
 				}
 			}
 		}
@@ -124,9 +131,21 @@ public class NetworkRouteContext {
 		int zmShift = (31 - ZOOM_TO_LOAD_TILES);
 		return (long) (x31 >> zmShift) << (ZOOM_TO_LOAD_TILES + 1) + ((long) (y31 >> zmShift));
 	}
+
+	public NetworkRouteContextStats getStats() {
+		return stats;
+	}
 	
+	public void clearData() {
+		indexedTiles.clear();
+		stats = new NetworkRouteContextStats();
+	}
 	
-	public class NetworkRoutePoint {
+	public void clearStats() {
+		stats = new NetworkRouteContextStats();
+	}
+	
+	public static class NetworkRoutePoint {
 		public final int x31;
 		public final int y31;
 		public final long id;
@@ -148,8 +167,16 @@ public class NetworkRouteContext {
 			}
 			objects.add(obj);
 		}
-
 	}
+	
+	public static class NetworkRouteContextStats {
+		
+		public int loadedTiles;
+		public int loadedObjects;
+		public int loadedRoutes;
+		public long loadTimeNs;
+	}
+	
 	
 	public static class NetworkRouteObject {
 		public int start;
@@ -157,13 +184,10 @@ public class NetworkRouteContext {
 		public BinaryMapDataObject obj;
 		public RouteKey routeKey;
 		
-		public NetworkRouteObject next;
-		public NetworkRouteObject prev;
-		
-		public NetworkRouteObject(BinaryMapDataObject obj, RouteKey routeKey) {
+		public NetworkRouteObject(BinaryMapDataObject obj, RouteKey routeKey, int start, int end) {
 			this.obj = obj;
-			this.end = obj.getPointsLength() - 1;
-			this.start = 0;
+			this.end = end;
+			this.start = start;
 			this.routeKey = routeKey;
 		}
 		
@@ -198,11 +222,12 @@ public class NetworkRouteContext {
 		}
 	}
 
-	private class NetworkRoutesTile {
+	private static class NetworkRoutesTile {
 		private final TLongObjectMap<NetworkRoutePoint> routes = new TLongObjectHashMap<>();
 
-		public void add(NetworkRouteObject obj) {
-			for (int i = 0; i < obj.getPointsLength(); i++) {
+		public void add(BinaryMapDataObject obj, RouteKey rk) {
+			int len = obj.getPointsLength();
+			for (int i = 0; i < len; i++) {
 				int x31 = obj.getPoint31XTile(i);
 				int y31 = obj.getPoint31YTile(i);
 				long id = convertPontToLong(x31, y31);
@@ -211,8 +236,13 @@ public class NetworkRouteContext {
 					point = new NetworkRoutePoint(x31, y31, id);
 					routes.put(id, point);
 				}
-				point.addObject(obj);
-			}
+				if (i > 0) {
+					point.addObject(new NetworkRouteObject(obj, rk, i, 0));
+				}
+				if (i < len - 1) {
+					point.addObject(new NetworkRouteObject(obj, rk, i, len - 1));
+				}
+			}			
 		}
 
 		public TLongObjectMap<NetworkRoutePoint> getRoutes() {
