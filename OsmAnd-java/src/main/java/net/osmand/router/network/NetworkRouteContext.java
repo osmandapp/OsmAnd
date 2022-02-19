@@ -3,14 +3,21 @@ package net.osmand.router.network;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.TLongObjectMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
-import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.binary.BinaryMapRouteReaderAdapter;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
+import net.osmand.binary.RouteDataObject;
 import net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
 import net.osmand.router.network.NetworkRouteSelector.RouteKey;
 import net.osmand.util.MapUtils;
@@ -21,13 +28,31 @@ public class NetworkRouteContext {
 	
 	private final TLongObjectHashMap<NetworkRoutesTile> indexedTiles = new TLongObjectHashMap<>();
 	private final NetworkRouteSelectorFilter filter;
-	private final BinaryMapIndexReader[] readers;
+	private final Map<BinaryMapIndexReader, List<RouteSubregion>> readers = new LinkedHashMap<>();
+	private final Map<RouteSubregion, List<RouteDataObject>> loadedSubregions = new HashMap<>();
+	private final boolean routing;
 	private NetworkRouteContextStats stats;
 
-	public NetworkRouteContext(BinaryMapIndexReader[] readers, NetworkRouteSelectorFilter filter) {
-		this.readers = readers;
+
+	public NetworkRouteContext(BinaryMapIndexReader[] readers, NetworkRouteSelectorFilter filter, boolean routing) {
 		this.filter = filter;
+		this.routing = routing;
 		this.stats = new NetworkRouteContextStats();
+		for(BinaryMapIndexReader r : readers) {
+			if (!routing) {
+				this.readers.put(r, null);
+			} else {
+				List<RouteSubregion> subregions = new ArrayList<BinaryMapRouteReaderAdapter.RouteSubregion>();
+				for (RouteRegion rInd : r.getRoutingIndexes()) {
+					List<RouteSubregion> subregs = rInd.getSubregions();
+					// create copy to avoid leaks to original structure
+					for (RouteSubregion rs : subregs) {
+						subregions.add(new RouteSubregion(rs));
+					}
+				}
+				this.readers.put(r, subregions);
+			}
+		}
 	}
 	
 	public static long convertPontToLong(int x31, int y31) {
@@ -41,6 +66,7 @@ public class NetworkRouteContext {
 	public static int getYFromLong(long l) {
 		return (int) (l - ((l >> 32) << 32));
 	}
+	
 	
 	public List<NetworkRoutePoint> loadNearRouteSegment(int x31, int y31, int radius) throws IOException {
 		List<NetworkRoutePoint> nearSegments = new ArrayList<>();
@@ -76,13 +102,68 @@ public class NetworkRouteContext {
 		}
 		return tile;
 	}
+	
+	public boolean isRouting() {
+		return routing;
+	}
+	
 
 	private NetworkRoutesTile loadTile(int x31, int y31) throws IOException {
-		// TODO load routing tiles
 		stats.loadedTiles++;
-		final BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> req = buildTileRequest(x31, y31);
+		int zm = (31 - ZOOM_TO_LOAD_TILES);
+		int tileX = x31 >> zm;
+		int tileY = y31 >> zm;
+		int tileLeft = tileX << zm;
+		int tileTop = tileY << zm;
+		int tileRight = (tileX + 1) << zm;
+		int tileBottom = (tileY + 1) << zm;
+		if (routing) {
+			SearchRequest<RouteDataObject> req = BinaryMapIndexReader.buildSearchRouteRequest(tileLeft, tileRight,
+					tileTop, tileBottom, null);
+			return loadRoutingDataTile(req);
+		} else {
+			SearchRequest<BinaryMapDataObject> req = BinaryMapIndexReader.buildSearchRequest(tileLeft, tileRight,
+					tileTop, tileBottom, ZOOM_TO_LOAD_TILES, new BinaryMapIndexReader.SearchFilter() {
+						@Override
+						public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex index) {
+							return true;
+						}
+					}, null);
+			return loadMapDataTile(req);
+		}
+	}
+	
+	private NetworkRoutesTile loadRoutingDataTile(SearchRequest<RouteDataObject> req ) throws IOException {
 		NetworkRoutesTile osmcRoutesTile = new NetworkRoutesTile();
-		for (BinaryMapIndexReader reader : readers) {
+		for (Map.Entry<BinaryMapIndexReader, List<RouteSubregion>> reader : readers.entrySet()) {
+			req.clearSearchResults();
+			long nt = System.nanoTime();
+			List<RouteSubregion> subregions = reader.getKey().searchRouteIndexTree(req, reader.getValue());
+			stats.loadTimeNs += (System.nanoTime() - nt);
+			for (RouteSubregion sub : subregions) {
+				List<RouteDataObject> objects = loadedSubregions.get(sub);
+				if (objects == null) {
+					nt = System.nanoTime();
+					objects = reader.getKey().loadRouteIndexData(sub);
+					loadedSubregions.put(sub, objects);
+					stats.loadTimeNs += (System.nanoTime() - nt);
+				}
+				for (RouteDataObject obj : objects) {
+					stats.loadedObjects++;
+					List<RouteKey> keys = filter.convert(obj);
+					for (RouteKey rk : keys) {
+						stats.loadedRoutes++;
+						osmcRoutesTile.add(obj, rk);
+					}
+				}
+			}
+		}
+		return osmcRoutesTile;
+	}
+
+	private NetworkRoutesTile loadMapDataTile(BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> req ) throws IOException {
+		NetworkRoutesTile osmcRoutesTile = new NetworkRoutesTile();
+		for (BinaryMapIndexReader reader : readers.keySet()) {
 			req.clearSearchResults();
 			long nt = System.nanoTime();
 			List<BinaryMapDataObject> objects = reader.searchMapIndex(req);
@@ -99,32 +180,6 @@ public class NetworkRouteContext {
 		return osmcRoutesTile;
 	}
 
-	private BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> buildTileRequest(int x31, int y31) {
-		int zm = (31 - ZOOM_TO_LOAD_TILES);
-		int tileX = x31 >> zm;
-		int tileY = y31 >> zm;
-		int tileLeft = tileX << zm;
-		int tileTop = tileY << zm;
-		int tileRight = (tileX + 1) << zm;
-		int tileBottom = (tileY + 1) << zm;
-		return BinaryMapIndexReader.buildSearchRequest(tileLeft, tileRight, tileTop, tileBottom, ZOOM_TO_LOAD_TILES,
-				new BinaryMapIndexReader.SearchFilter() {
-					@Override
-					public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex index) {
-						return true;
-					}
-				}, new ResultMatcher<BinaryMapDataObject>() {
-					@Override
-					public boolean publish(BinaryMapDataObject object) {
-						return true;
-					}
-
-					@Override
-					public boolean isCancelled() {
-						return false;
-					}
-				});
-	}
 	
 	
 	private long getTileId(int x31, int y31) {
@@ -138,6 +193,7 @@ public class NetworkRouteContext {
 	
 	public void clearData() {
 		indexedTiles.clear();
+		loadedSubregions.clear();
 		stats = new NetworkRouteContextStats();
 	}
 	
@@ -182,10 +238,18 @@ public class NetworkRouteContext {
 		public int start;
 		public int end;
 		public BinaryMapDataObject obj;
+		public RouteDataObject robj;
 		public RouteKey routeKey;
 		
 		public NetworkRouteObject(BinaryMapDataObject obj, RouteKey routeKey, int start, int end) {
 			this.obj = obj;
+			this.end = end;
+			this.start = start;
+			this.routeKey = routeKey;
+		}
+		
+		public NetworkRouteObject(RouteDataObject obj, RouteKey routeKey, int start, int end) {
+			this.robj = obj;
 			this.end = end;
 			this.start = start;
 			this.routeKey = routeKey;
@@ -196,14 +260,23 @@ public class NetworkRouteContext {
 		}
 
 		public int getPointsLength() {
+			if (robj != null) {
+				return robj.getPointsLength();
+			}
 			return obj.getPointsLength();
 		}
 
 		public int getPoint31XTile(int i) {
+			if (robj != null) {
+				return robj.getPoint31XTile(i);
+			}
 			return obj.getPoint31XTile(i);
 		}
 
 		public int getPoint31YTile(int i) {
+			if (robj != null) {
+				return robj.getPoint31YTile(i);
+			}
 			return obj.getPoint31YTile(i);
 		}
 
@@ -223,8 +296,8 @@ public class NetworkRouteContext {
 
 		@Override
 		public String toString() {
-			return "NetworkRouteObject [start=" + start + ", end=" + end + ", obj=" + obj + ", routeKey=" + routeKey
-					+ "]";
+			return "NetworkRouteObject [start=" + start + ", end=" + end + ", obj=" + (robj != null ? robj : obj)
+					+ ", routeKey=" + routeKey + "]";
 		}
 		
 		
@@ -234,6 +307,27 @@ public class NetworkRouteContext {
 		private final TLongObjectMap<NetworkRoutePoint> routes = new TLongObjectHashMap<>();
 
 		public void add(BinaryMapDataObject obj, RouteKey rk) {
+			int len = obj.getPointsLength();
+			for (int i = 0; i < len; i++) {
+				int x31 = obj.getPoint31XTile(i);
+				int y31 = obj.getPoint31YTile(i);
+				long id = convertPontToLong(x31, y31);
+				NetworkRoutePoint point = routes.get(id);
+				if (point == null) {
+					point = new NetworkRoutePoint(x31, y31, id);
+					routes.put(id, point);
+				}
+				if (i > 0) {
+					point.addObject(new NetworkRouteObject(obj, rk, i, 0));
+				}
+				if (i < len - 1) {
+					point.addObject(new NetworkRouteObject(obj, rk, i, len - 1));
+				}
+			}			
+		}
+		
+		
+		public void add(RouteDataObject obj, RouteKey rk) {
 			int len = obj.getPointsLength();
 			for (int i = 0; i < len; i++) {
 				int x31 = obj.getPoint31XTile(i);

@@ -17,6 +17,8 @@ import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
+import net.osmand.binary.RouteDataObject;
 import net.osmand.data.QuadRect;
 import net.osmand.router.network.NetworkRouteContext.NetworkRouteObject;
 import net.osmand.util.Algorithms;
@@ -31,10 +33,14 @@ public class NetworkRouteSelector {
 	private final NetworkRouteContext rCtx;
 	
 	public NetworkRouteSelector(BinaryMapIndexReader[] files, NetworkRouteSelectorFilter filter) {
+		this(files, filter, false);
+	}
+	
+	public NetworkRouteSelector(BinaryMapIndexReader[] files, NetworkRouteSelectorFilter filter, boolean routing) {
 		if (filter == null) {
 			filter = new NetworkRouteSelectorFilter();
 		}
-		rCtx = new NetworkRouteContext(files, filter);
+		rCtx = new NetworkRouteContext(files, filter, routing);
 	}
 	
 	public NetworkRouteContext getNetworkRouteContext() {
@@ -153,8 +159,16 @@ public class NetworkRouteSelector {
 		public Set<RouteKey> keyFilter = null; // null - all
 		public Set<RouteType> typeFilter = null; // null -  all
 		
-		public List<RouteKey> convert(BinaryMapDataObject bMdo) {
-			List<RouteKey> keys = RouteType.getRouteKeys(bMdo);
+		public List<RouteKey> convert(BinaryMapDataObject obj) {
+			return filterKeys(RouteType.getRouteKeys(obj));
+		}
+
+		public List<RouteKey> convert(RouteDataObject obj) {
+			return filterKeys(RouteType.getRouteKeys(obj));
+		}
+
+
+		private List<RouteKey> filterKeys(List<RouteKey> keys) {
 			if (keyFilter == null && typeFilter == null) {
 				return keys;
 			}
@@ -169,6 +183,7 @@ public class NetworkRouteSelector {
 			}
 			return keys;
 		}
+
 	}
 	
 	public static class RouteKey {
@@ -225,6 +240,26 @@ public class NetworkRouteSelector {
 
 		RouteType(String tag) {
 			this.tagPrefix = "route_" + tag + "_";
+		}
+
+
+		public static List<RouteKey> getRouteKeys(RouteDataObject obj) {
+			Map<String, String> tags = new TreeMap<>();
+			for (int i = 0; obj.nameIds != null && i < obj.nameIds.length; i++) {
+				int nameId = obj.nameIds[i];
+				String value = obj.names.get(nameId);
+				RouteTypeRule rt = obj.region.quickGetEncodingRule(nameId);
+				if (rt != null) {
+					tags.put(rt.getTag(), value);
+				}
+			}
+			for (int i = 0; obj.types != null && i < obj.types.length; i++) {
+				RouteTypeRule rt = obj.region.quickGetEncodingRule(obj.types[i]);
+				if (rt != null) {
+					tags.put(rt.getTag(), rt.getValue());
+				}
+			}
+			return getRouteKeys(tags);
 		}
 
 
