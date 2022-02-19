@@ -97,10 +97,6 @@ public class NetworkRouteContext {
 		return objs;
 	}
 	
-	public List<NetworkRouteSegment> loadRouteSegment(long pnt) throws IOException {
-		return loadRouteSegment(getXFromLong(pnt), getYFromLong(pnt));
-	}
-	
 	public List<NetworkRouteSegment> loadRouteSegment(int x31, int y31) throws IOException {
 		NetworkRoutesTile osmcRoutesTile = getMapRouteTile(x31, y31);
 		NetworkRoutePoint point = osmcRoutesTile.getRouteSegment(x31, y31);
@@ -234,7 +230,7 @@ public class NetworkRouteContext {
 		public void addObject(NetworkRouteSegment obj) {
 			if (obj.getId() > 0) {
 				for (NetworkRouteSegment obj2 : objects) {
-					if (obj.getId() == obj2.getId()) {
+					if (obj.getId() == obj2.getId() && obj.direction() == obj2.direction()) {
 						return;
 					}
 				}
@@ -253,26 +249,40 @@ public class NetworkRouteContext {
 	
 	
 	public static class NetworkRouteSegment {
-		public int start;
-		public int end;
-		public BinaryMapDataObject obj;
-		public RouteDataObject robj;
-		public RouteKey routeKey;
+		public final int start;
+		public final int end;
+		public final BinaryMapDataObject obj;
+		public final RouteDataObject robj;
+		public final RouteKey routeKey;
 		
 		public NetworkRouteSegment(BinaryMapDataObject obj, RouteKey routeKey, int start, int end) {
+			this.robj = null;
 			this.obj = obj;
-			this.end = end;
 			this.start = start;
+			this.end = end;
 			this.routeKey = routeKey;
+		}
+		
+		public NetworkRouteSegment(NetworkRouteSegment segment, int start, int end) {
+			this.robj = segment.robj;
+			this.obj = segment.obj;
+			this.start = start;
+			this.end = end;
+			this.routeKey = segment.routeKey;
 		}
 		
 		public NetworkRouteSegment(RouteDataObject obj, RouteKey routeKey, int start, int end) {
 			this.robj = obj;
-			this.end = end;
+			this.obj = null;
 			this.start = start;
+			this.end = end;
 			this.routeKey = routeKey;
 		}
 		
+		public boolean direction() {
+			return end > start;
+		}
+
 		public long getId() {
 			return obj.getId();
 		}
@@ -322,16 +332,14 @@ public class NetworkRouteContext {
 			return getPoint31YTile(end);
 		}
 
-		public void inverse() {
-			int t = start;
-			start = end;
-			end = t;
-		}
-
 		@Override
 		public String toString() {
 			return "NetworkRouteObject [start=" + start + ", end=" + end + ", obj=" + (robj != null ? robj : obj)
 					+ ", routeKey=" + routeKey + "]";
+		}
+
+		public NetworkRouteSegment inverse() {
+			return new NetworkRouteSegment(this, end, start);
 		}
 		
 		

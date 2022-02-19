@@ -2,6 +2,7 @@ package net.osmand.router.network;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -13,6 +14,7 @@ import java.util.TreeSet;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -31,6 +33,9 @@ public class NetworkRouteSelector {
 	private static final int MAX_ITERATIONS = 8192;
 	// works only if road in same tile
 	private static final double MAX_RADIUS_HOLE = 30;
+	private static final int DEPTH_TO_STEPBACK_AND_LOOPS = 5;
+	private static final double CONNECT_POINTS_DISTANCE = 20;
+
 	
 	private final NetworkRouteContext rCtx;
 	
@@ -65,8 +70,9 @@ public class NetworkRouteSelector {
 		int y = renderedObject.getY().get(0);
 		Map<RouteKey, GPXFile> res = new LinkedHashMap<RouteKey, GPXUtilities.GPXFile>();
 		for (NetworkRouteSegment segment : getRouteSegments(x, y)) {
-			LinkedList<NetworkRouteSegment> lst = new LinkedList<>();
-			lst.add(segment);
+			List<NetworkRouteSegment> lst = new ArrayList<>();
+			lst.add(segment.inverse());
+			debug("START ", null, segment);
 			int it = 0;
 			while (it++ < MAX_ITERATIONS) {
 				if (!grow(lst, true, false)) {
@@ -76,9 +82,13 @@ public class NetworkRouteSelector {
 					}
 				}
 			}
+			Collections.reverse(lst);
+			for (int i = 0; i < lst.size(); i++) {
+				lst.set(i, lst.get(i).inverse());
+			}
 			while (it++ < MAX_ITERATIONS) {
 				if(!grow(lst, false, false)) {
-					if(!grow(lst, false, true)) {
+					if (!grow(lst, false, true)) {
 						it = 0;
 						break;
 					}
@@ -88,6 +98,7 @@ public class NetworkRouteSelector {
 				throw new IllegalStateException("Route likely has a loop: " + lst.subList(lst.size() - 20, lst.size() - 1));
 			}
 			res.put(segment.routeKey, createGpxFile(lst));
+			debug("FINISH " + lst.size(), null, segment);
 		}
 		return res;
 	}
@@ -100,44 +111,62 @@ public class NetworkRouteSelector {
 		return rCtx.loadRouteSegment(x, y);
 	}
 	
-	private boolean grow(LinkedList<NetworkRouteSegment> lst, boolean toFirst, boolean approximate) throws IOException {
-		NetworkRouteSegment obj = toFirst ? lst.getFirst() : lst.getLast();
-		NetworkRouteSegment lastObj = !toFirst ? lst.getFirst() : lst.getLast();
-		int x31 = toFirst ? obj.getStartPointX() : obj.getEndPointX();
-		int y31 = toFirst ? obj.getStartPointY() : obj.getEndPointY();
-		List<NetworkRouteSegment> objs = approximate ? rCtx.loadNearRouteSegment(x31, y31, MAX_RADIUS_HOLE) : 
-			rCtx.loadRouteSegment(x31, y31);
+	private void debug(String msg, Boolean reverse, NetworkRouteSegment ld) {
+		System.out.println(msg + (reverse == null ? "" : (reverse ? '-' : '+')) + " " + ld);
+	}
+	
+	private boolean grow(List<NetworkRouteSegment> lst, boolean reverse, boolean approximate) throws IOException {
+		int lastInd = lst.size() - 1;
+		NetworkRouteSegment obj = lst.get(lastInd);
+		NetworkRouteSegment otherSide = lst.get(0);
+		List<NetworkRouteSegment> objs = approximate ? rCtx.loadNearRouteSegment(obj.getEndPointX(), obj.getEndPointY(), MAX_RADIUS_HOLE) : 
+			rCtx.loadRouteSegment(obj.getEndPointX(), obj.getEndPointY());
 		for (NetworkRouteSegment ld : objs) {
-			// System.out.println(ld.getId() >> 7);
-			if (ld.routeKey.equals(obj.routeKey) && ld.getId() != obj.getId() && lastObj.getId() != ld.getId()) {
-				if (toFirst) {
-					lst.addFirst(ld);
-				} else {
-					lst.addLast(ld);
-				}
+			debug("  CHECK", reverse, ld);
+			boolean accept = ld.routeKey.equals(obj.routeKey) && ld.getId() != obj.getId() && otherSide.getId() != ld.getId();
+			for (int i = lastInd; accept && i > 0 && i > lastInd - DEPTH_TO_STEPBACK_AND_LOOPS; i--) {
+				accept = lst.get(i).getId() != ld.getId();
+			}
+			if (accept) {
+				debug(">ACCEPT", reverse, ld);
+				lst.add(ld);
 				return true;
 			}
 		}
 		return false;
 	}
 
+	
+
 	private GPXFile createGpxFile(List<NetworkRouteSegment> segmentList) {
 		GPXFile gpxFile = new GPXFile(null, null, null);
 		GPXUtilities.Track track = new GPXUtilities.Track();
+		GPXUtilities.TrkSegment trkSegment = new GPXUtilities.TrkSegment();
 		for (NetworkRouteSegment segment : segmentList) {
-			GPXUtilities.TrkSegment trkSegment = new GPXUtilities.TrkSegment();
 			int inc = segment.start < segment.end ? 1 : -1;
 			for (int i = segment.start;; i += inc) {
 				GPXUtilities.WptPt point = new GPXUtilities.WptPt();
 				point.lat = MapUtils.get31LatitudeY(segment.getPoint31YTile(i));
 				point.lon = MapUtils.get31LongitudeX(segment.getPoint31XTile(i));
-				trkSegment.points.add(point);
+				if (i == segment.start && trkSegment.points.size() > 0) {
+					WptPt lst = trkSegment.points.get(trkSegment.points.size() - 1);
+					double dst = MapUtils.getDistance(lst.lat, lst.lon, point.lat, point.lon);
+					if (dst > 1) {
+						if (dst > CONNECT_POINTS_DISTANCE) {
+							track.segments.add(trkSegment);
+							trkSegment = new GPXUtilities.TrkSegment();
+						}
+						trkSegment.points.add(point);
+					}
+				} else {
+					trkSegment.points.add(point);
+				}
 				if (i == segment.end) {
 					break;
 				}
 			}
-			track.segments.add(trkSegment);
 		}
+		track.segments.add(trkSegment);
 		gpxFile.tracks.add(track);
 		return gpxFile;
 	}
