@@ -220,6 +220,14 @@ public class NetworkRouteContext {
 			start = end;
 			end = t;
 		}
+
+		@Override
+		public String toString() {
+			return "NetworkRouteObject [start=" + start + ", end=" + end + ", obj=" + obj + ", routeKey=" + routeKey
+					+ "]";
+		}
+		
+		
 	}
 
 	private static class NetworkRoutesTile {

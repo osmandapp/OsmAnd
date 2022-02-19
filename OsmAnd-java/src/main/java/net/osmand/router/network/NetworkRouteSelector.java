@@ -62,7 +62,8 @@ public class NetworkRouteSelector {
 				}
 			}
 			if (it != 0) {
-				throw new IllegalStateException("ROute likely has a loop.");
+				
+				throw new IllegalStateException("Route likely has a loop: " + lst.subList(lst.size() - 20, lst.size() - 1));
 			}
 			res.put(segment.routeKey, createGpxFile(lst));
 		}
@@ -206,6 +207,12 @@ public class NetworkRouteSelector {
 				return false;
 			return true;
 		}
+
+		@Override
+		public String toString() {
+			return "Route [type=" + type + ", set=" + set + "]";
+		}
+		
 	}
 	
 	public enum RouteType {

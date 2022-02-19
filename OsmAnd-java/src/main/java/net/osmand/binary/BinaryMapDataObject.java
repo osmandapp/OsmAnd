@@ -22,6 +22,7 @@ public class BinaryMapDataObject {
 	protected int objectType = RenderingRulesStorage.POINT_RULES;
 	protected int labelX;
 	protected int labelY;
+	private static final int SHIFT_ID = 7;
 	
 	protected TIntObjectHashMap<String> objectNames = null;
 	protected TIntArrayList namesOrder = null;
@@ -423,5 +424,16 @@ public class BinaryMapDataObject {
 			}
 		}
 		return "";
+	}
+	
+	@Override
+	public String toString() {
+		String obj = "Point";
+		if(objectType == RenderingRulesStorage.LINE_RULES) {
+			obj = "Line";
+		} else if(objectType == RenderingRulesStorage.POLYGON_RULES) {
+			obj = "Polygon";
+		}
+		return obj + " " + (getId() >> SHIFT_ID);
 	}
 }
