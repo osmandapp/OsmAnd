@@ -40,6 +40,7 @@ import java.text.SimpleDateFormat;
 public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLocationListener,
 		OsmAndCompassListener, MapMarkerChangedListener {
 
+	public static final float COMPASS_HEADING_THRESHOLD = 1.0f;
 	private static final int MAP_LINKED_LOCATION_TIME_MS = 60 * 60 * 1000;
 	private static final int COMPASS_REQUEST_TIME_INTERVAL_MS = 5000;
 	private static final int AUTO_FOLLOW_MSG_ID = OsmAndConstants.UI_HANDLER_LOCATION_SERVICE + 4;
@@ -130,7 +131,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		heading = val;
 		boolean headingChanged = prevHeading == null;
 		if (!headingChanged) {
-			headingChanged = Math.abs(MapUtils.degreesDiff(prevHeading, heading)) > 1.0;
+			headingChanged = Math.abs(MapUtils.degreesDiff(prevHeading, heading)) > COMPASS_HEADING_THRESHOLD;
 		}
 		if (mapView != null) {
 			float speedForDirectionOfMovement = settings.SWITCH_MAP_DIRECTION_TO_COMPASS_KMH.get() / 3.6f;
