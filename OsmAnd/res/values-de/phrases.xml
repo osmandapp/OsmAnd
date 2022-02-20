@@ -1425,7 +1425,7 @@
     <string name="poi_delivery_yes">Lieferung</string>
     <string name="poi_delivery_no">Kein Lieferservice</string>
     <string name="poi_delivery_only">Nur Lieferung</string>
-    <string name="poi_cocktails_yes">ja</string>
+    <string name="poi_cocktails_yes">Ja;Cocktails</string>
     <string name="poi_service_dealer">Händler</string>
     <string name="poi_service_repair">Reparatur</string>
     <string name="poi_service_repair_no">Keine Reparatur</string>
@@ -2991,8 +2991,8 @@
     <string name="poi_cuisine_yakitori">Yakitori</string>
     <string name="poi_cuisine_teriyaki">Teriyaki</string>
     <string name="poi_payment_transport_type">Zahlungsart (Transport)</string>
-    <string name="poi_outdoor_seating_filter_yes">ja</string>
-    <string name="poi_delivery_filter_yes">ja</string>
+    <string name="poi_outdoor_seating_filter_yes">Ja;Sitzplätze im Freien</string>
+    <string name="poi_delivery_filter_yes">Ja;Lieferung</string>
     <string name="poi_diet_vegetarian_filter_yes">Vegetarisch</string>
     <string name="poi_diet_vegan_filter_yes">Vegan</string>
     <string name="poi_diet_gluten_free_filter_yes">Glutenfrei</string>
@@ -4287,4 +4287,12 @@
     <string name="poi_collector">Sammler</string>
     <string name="poi_access_permit">Genehmigung erforderlich</string>
     <string name="poi_parcel_locker">Paketschließfach</string>
+    <string name="poi_museum_open_air">Freilicht</string>
+    <string name="poi_museum_living_history">Reenactment</string>
+    <string name="poi_handwashing_creme_yes">Handwaschcreme: ja</string>
+    <string name="poi_handwashing_creme_no">Handwaschcreme: nein</string>
+    <string name="poi_post_office_post_annex">Postfiliale - Privat betrieben im Auftrag des Postdienstleisters</string>
+    <string name="poi_post_office_post_partner">Bietet eingeschränkte Dienstleistungen im Auftrag des Postdienstleisters an</string>
+    <string name="poi_post_office_service_provider">Name des Postdienstleisters</string>
+    <string name="poi_post_office_service_brand">Markenname der Postdienstleistungen</string>
 </resources>
