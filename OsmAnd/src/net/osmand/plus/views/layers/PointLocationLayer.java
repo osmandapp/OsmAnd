@@ -93,10 +93,10 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	private boolean markersNeedInvalidate = true;
 	private boolean hasHeading = false;
 	private boolean hasHeadingCached = true;
-	private boolean locationUpdated = false;
+	private boolean locationNeedUpdate = false;
+	private boolean headingNeedUpdate = false;
 	private Location lastKnownLocation;
 	private float lastHeading = 0.0f;
-	private float lastHeadingCached = 0.0f;
 	private float accuracyCached = 0.0f;
 
 	private enum MarkerState {
@@ -118,19 +118,18 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	@Override
 	public void updateLocation(Location location) {
 		lastKnownLocation = location;
-		locationUpdated = true;
-//		long currentTime = System.currentTimeMillis();
-//		if ((currentTime - lastLocationTime) >= 1000) {
-//			lastLocationTime = currentTime;
-//			LOG.warn("loction updated[" + locationUpdateCont + "] per 1000ms");
-//			locationUpdateCont = 0;
-//		}
-//		++locationUpdateCont;
+		locationNeedUpdate = true;
 	}
 
 	@Override
 	public void updateCompassValue(float value) {
-		lastHeading = value;
+		if (Math.abs(MapUtils.degreesDiff(value, lastHeading)) > MapViewTrackingUtilities.COMPASS_HEADING_THRESHOLD) {
+			headingNeedUpdate = true;
+			lastHeading = value;
+//				if (view != null && view.hasMapRenderer()) {
+//					view.getApplication().runInUIThread(() -> updateMarkerData(null, null, lastHeading), 0);
+//				}
+		}
 	}
 
 
@@ -341,7 +340,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 
 		hasHeadingCached = false;
 		markersNeedInvalidate = true;
-		locationUpdated = false;
+		locationNeedUpdate = false;
 		lastKnownLocation = locationProvider.getLastStaleKnownLocation();
 		setMarkerState(MarkerState.Stay);
 		updateIcons(view.getSettings().getApplicationMode(), getApplication().getDaynightHelper().isNightMode(),
@@ -376,13 +375,6 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	}
 
 	private void invalidateMarkersGpu(RotatedTileBox box, Location lastKnownLocation) {
-		hasHeading = !locationOutdated && locationProvider.getHeading() != null && mapViewTrackingUtilities.isShowViewAngle();
-		if (markersNeedInvalidate || hasHeading != hasHeadingCached) {
-			invalidateMarkerCollection();
-			markersNeedInvalidate = false;
-			hasHeadingCached = hasHeading;
-		}
-
 		if (isLocationVisible(box, lastKnownLocation)) {
 			boolean isBearing = lastKnownLocation.hasBearing() && (lastKnownLocation.getBearing() != 0.0f)
 					&& (!lastKnownLocation.hasSpeed() || lastKnownLocation.getSpeed() > BEARING_SPEED_THRESHOLD);
@@ -392,14 +384,14 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 				setMarkerState(MarkerState.Stay);
 			}
 
-			if (locationUpdated) {
+			if (locationNeedUpdate) {
 				updateMarkerData(lastKnownLocation, null, null);
-				locationUpdated = false;
+				locationNeedUpdate = false;
 			}
 
-			if (Math.abs(MapUtils.degreesDiff(lastHeadingCached, lastHeading)) > MapViewTrackingUtilities.COMPASS_HEADING_THRESHOLD) {
+			if (headingNeedUpdate) {
 				updateMarkerData(null, null, lastHeading);
-				lastHeadingCached = lastHeading;
+				headingNeedUpdate = false;
 			}
 
 			float accuracy = lastKnownLocation.getAccuracy();
@@ -479,7 +471,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		if (view == null || tileBox.getZoom() < MIN_ZOOM_MARKER_VISIBILITY || locationProvider == null || lastKnownLocation == null) {
+		if (view == null || tileBox.getZoom() < MIN_ZOOM_MARKER_VISIBILITY || locationProvider == null) {
 			return;
 		}
 
@@ -487,19 +479,29 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		updateIcons(view.getSettings().getApplicationMode(), nm, locationProvider.getLastKnownLocation() == null);
 
 		if (view.hasMapRenderer()) {
-			invalidateMarkersGpu(tileBox, lastKnownLocation);
+			hasHeading = !locationOutdated && locationProvider.getHeading() != null && mapViewTrackingUtilities.isShowViewAngle();
+			if (markersNeedInvalidate || hasHeading != hasHeadingCached) {
+				invalidateMarkerCollection();
+				markersNeedInvalidate = false;
+				hasHeadingCached = hasHeading;
+				locationNeedUpdate = true;
+				headingNeedUpdate = true;
+				accuracyCached = -lastKnownLocation.getAccuracy();
+			}
 		}
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings nightMode) {
-		if (view == null || box.getZoom() < MIN_ZOOM_MARKER_VISIBILITY || lastKnownLocation == null) {
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		if (view == null || tileBox.getZoom() < MIN_ZOOM_MARKER_VISIBILITY || lastKnownLocation == null) {
 			return;
 		}
 
 		// rendering
-		if (!view.hasMapRenderer()) {
-			drawMarkersCpu(canvas, box, lastKnownLocation);
+		if (view.hasMapRenderer()) {
+			invalidateMarkersGpu(tileBox, lastKnownLocation);
+		} else {
+			drawMarkersCpu(canvas, tileBox, lastKnownLocation);
 		}
 	}
 
