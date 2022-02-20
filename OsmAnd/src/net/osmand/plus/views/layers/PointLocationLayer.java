@@ -124,8 +124,8 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	@Override
 	public void updateCompassValue(float value) {
 		if (Math.abs(MapUtils.degreesDiff(value, lastHeading)) > MapViewTrackingUtilities.COMPASS_HEADING_THRESHOLD) {
-			headingNeedUpdate = true;
 			lastHeading = value;
+			headingNeedUpdate = true;
 //				if (view != null && view.hasMapRenderer()) {
 //					view.getApplication().runInUIThread(() -> updateMarkerData(null, null, lastHeading), 0);
 //				}
@@ -204,6 +204,11 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		navigationMarker = recreateMarker(navigationMarker, navigationIcon, MARKER_ID_NAVIGATION, color);
 		setMarkerProvider();
 		updateMarkerState();
+
+		locationNeedUpdate = true;
+		headingNeedUpdate = true;
+		lastHeading = locationProvider.getHeading();
+		accuracyCached = lastKnownLocation.getAccuracy() - 1.0f;
 	}
 
 	private void updateMarkerState() {
@@ -338,10 +343,11 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			return;
 		}
 
-		hasHeadingCached = false;
-		markersNeedInvalidate = true;
-		locationNeedUpdate = false;
 		lastKnownLocation = locationProvider.getLastStaleKnownLocation();
+		markersNeedInvalidate = true;
+		hasHeadingCached = false;
+		locationNeedUpdate = true;
+		headingNeedUpdate = false;
 		setMarkerState(MarkerState.Stay);
 		updateIcons(view.getSettings().getApplicationMode(), getApplication().getDaynightHelper().isNightMode(),
 				locationProvider.getLastKnownLocation() == null);
@@ -484,9 +490,6 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 				invalidateMarkerCollection();
 				markersNeedInvalidate = false;
 				hasHeadingCached = hasHeading;
-				locationNeedUpdate = true;
-				headingNeedUpdate = true;
-				accuracyCached = -lastKnownLocation.getAccuracy();
 			}
 		}
 	}
