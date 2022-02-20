@@ -4529,4 +4529,5 @@
     <string name="shared_string_shape">Forme</string>
     <string name="edit_category">Modifier la catégorie</string>
     <string name="default_appearance">Apparence par défaut</string>
+    <string name="default_appearance_desc">Couleur par défaut qui sera appliquée aux favoris du groupe.</string>
 </resources>
