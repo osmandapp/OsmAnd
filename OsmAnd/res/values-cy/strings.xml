@@ -461,7 +461,7 @@
     <string name="shared_string_dont">Peidio</string>
     <string name="gpx_no_routes_descr">Gellir defnyddio\'r offeryn \"%1$s\" i gadw\'r daith fel ffeil.</string>
     <string name="gpx_no_routes_title">Does dim teithiau</string>
-    <string name="save_track_to_gpx_descrp">Dechrau recordio\'n awtomatig wrth lywio a chadw\'n awtomatig wedyn.</string>
+    <string name="save_track_to_gpx_descrp">Dechrau recordio\'r trac yn awtomatig wrth lywio a chadw\'n awtomatig wedyn.</string>
     <string name="rendering_attr_seabedDetail_name">Manylder gwely\'r môr</string>
     <string name="shared_string_gps_filter">Hidlydd GPS</string>
     <string name="add_to_group">Ychwanegu at grŵp</string>
@@ -514,7 +514,7 @@
     <string name="shared_string_travelbooks">Llyfrau teithio</string>
     <string name="shared_storage_warning_description">Oherwydd rheolau newydd Android, ers Tachwedd 2021 mae OsmAnd 4.2 wedi colli mynediad at storfa sy\'n cael ei rannu.
 \n
-\nSymuda\'r ffolder data o\'r storfa sy\'n cael ei rannu i storfa sydd ar gael. Fel arall, bydd yr ap yn colli mynediad at dy ddata megis mapiau all-lein, llwybrau GPX, ayyb.</string>
+\nSymudwch y ffolder data o\'r storfa sy\'n cael ei rannu i storfa sydd ar gael. Fel arall, bydd yr ap yn colli mynediad at eich data megis mapiau all-lein, traciau GPX, ayyb.</string>
     <string name="clear_all_history_warning">Clirio pob cofnod hanes yr ap, gan gynnwys chwilio, llywio a hanes nodwyr\?</string>
     <string name="clear_all_history">Clirio\'r holl hanes</string>
     <string name="navigation_history">Hanes llywio</string>
@@ -612,9 +612,9 @@
     <string name="shared_string_resources">Adnoddau</string>
     <string name="monitoring_control_start">REC</string>
     <string name="shared_string_file_name">Enw ffeil</string>
-    <string name="shared_string_gpx_files">Llwybrau</string>
-    <string name="layer_gpx_layer">Llwybrau</string>
-    <string name="show_gpx">Llwybrau</string>
+    <string name="shared_string_gpx_files">Traciau</string>
+    <string name="layer_gpx_layer">Traciau</string>
+    <string name="show_gpx">Traciau</string>
     <string name="app_mode_go_cart">Cartio</string>
     <string name="shared_string_always">O hyd</string>
     <string name="shared_string_divider">Gwahanydd</string>
@@ -637,8 +637,8 @@
     <string name="rendering_attr_highway_class_cycleway_name">Llwybr beicio</string>
     <string name="shared_string_color">Lliw</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Gwastad</string>
-    <string name="shared_string_gpx_tracks">Llwybrau</string>
-    <string name="shared_string_gpx_track">Llwybr</string>
+    <string name="shared_string_gpx_tracks">Traciau</string>
+    <string name="shared_string_gpx_track">Trac</string>
     <string name="rendering_value_low_name">Isel</string>
     <string name="shared_string_trip">Taith</string>
     <string name="shared_string_recorded">Wedi\'i recordio</string>
@@ -756,7 +756,7 @@
     <string name="local_osm_changes_backup_failed">Methwyd creu copi wrth gefn o newidiadau OSM.</string>
     <string name="local_osm_changes_backup">Copi wrth gefn fel newid OSM</string>
     <string name="settings_preset_descr">Mae gosodiadau llywio a golwg map yn cael eu cofio yn ôl proffil defnyddwyr. Gosodwch broffil fan hyn.</string>
-    <string name="distance_measurement_finish_subtrack">Dechrau is-lwybr newydd</string>
+    <string name="distance_measurement_finish_subtrack">Dechrau is-drac newydd</string>
     <string name="select_address_activity">Rhowch gyfeiriad</string>
     <string name="sett_no_ext_input">Dim</string>
     <string name="sett_generic_ext_input">Bysellfwrdd</string>
@@ -846,8 +846,8 @@
     <string name="map_widget_audionotes">Nodiadau sain</string>
     <string name="arrival_distance_factor_early">Cynnar</string>
     <string name="layer_route">Llwybr</string>
-    <string name="import_tracks">Mewnforio llwybrau</string>
-    <string name="import_tracks_descr">Mae %1$s yn cynnwys %2$s llwybr gwahanol. Dewisa lwybrau i\'w mewnforio.</string>
+    <string name="import_tracks">Mewnforio traciau</string>
+    <string name="import_tracks_descr">Mae %1$s yn cynnwys %2$s trac gwahanol. Dewiswch draciau i\'w mewnforio.</string>
     <string name="edit_category">Golygu categori</string>
     <string name="location_source_descr">Fel rhagosodiad, mae OsmAnd wedi\'i osod o Google Play yn defnyddio %1$s i adnabod lleoliad.
 \n
@@ -884,7 +884,7 @@
     <string name="android_auto_map_placeholder_descr">Datgysyllta dy ddyfais o Android Auto i weld y map yn yr ap.</string>
     <string name="android_auto_map_placeholder_title">Dangosir y map ar sgrin y cerbyd.</string>
     <string name="search_title">Chwilio: %1$s</string>
-    <string name="routeInfo_roadClass_description">Lliwio\'r daith neu linell y llwybr yn ôl y math o ffordd.</string>
+    <string name="routeInfo_roadClass_description">Lliwio llinell y llwybr neu drac yn ôl y math o ffordd.</string>
     <string name="routeInfo_surface_description">Dangos gwybodaeth arwyneb ffyrdd/palmentydd.</string>
     <string name="purchases_restored">Pryniannau wedi\'u hadfer</string>
     <string name="amz_manage_subscription_descr">Rheol dy danysgrifiad gan ddefnyddio ap Amazon neu wefan Amazon.</string>
@@ -1010,7 +1010,7 @@
 \n - Nodweddion cyflawn all-lein (cadw mapiau teils neu fector yn storfa\'r ddyfais)
 \n - Mapiau fector cyflawn ar gael ar gyfer yr holl fyd
 \n - Llwytho mapiau gwledydd neu ranbarthau yn uniongyrchol o\'r ap
-\n - Posib troshaenu sawl map, megis GPX neu lwybrau llywio, mannau o ddiddordeb, ffefrynnau, cyfuchlinau, mannau dal trafnidiaeth gyhoeddus, mapiau ychwanegol gyda thryloywder addasedig
+\n - Posib troshaenu sawl map, megis traciau llywio neu GPX, mannau o ddiddordeb, ffefrynnau, cyfuchlinau, mannau dal trafnidiaeth gyhoeddus, mapiau ychwanegol gyda thryloywder addasedig
 \n - Chwilio all-lein am gyfeiriadau a mannau o ddiddordeb (MODdau)
 \n - Llwybro all-lein ar gyfer pellteroedd cymedrol
 \n - Moddau gyrru, beicio a cherdded gyda dewisiadau:
@@ -1134,7 +1134,7 @@
 \n - Mapiau fector cyflawn ar gael ar gyfer yr holl fyd
 \n - Llwytho mapiau gwledydd neu ranbarthau yn uniongyrchol o\'r ap heb rwystrau
 \n - Nodwedd Wicipedia all-lein (lawrlwytho MODdau Wicipedia), yn wych i weld llefydd newydd
-\n - Posib troshaenu sawl map, megis GPX neu lwybrau llywio, mannau o ddiddordeb, ffefrynnau, cyfuchlinau, mannau dal trafnidiaeth gyhoeddus, mapiau ychwanegol gyda thryloywder addasedig
+\n - Posib troshaenu sawl map, megis traciau llywio neu GPX, mannau o ddiddordeb, ffefrynnau, cyfuchlinau, mannau dal trafnidiaeth gyhoeddus, mapiau ychwanegol gyda thryloywder addasedig
 \n
 \n - Chwilio all-lein am gyfeiriadau a mannau o ddiddordeb (MODdau)
 \n - Llwybro all-lein ar gyfer pellteroedd cymedrol
@@ -1187,7 +1187,7 @@
     <string name="lang_gl">Galisieg</string>
     <string name="lang_et">Estoneg</string>
     <string name="lang_bn">Bengaleg</string>
-    <string name="lang_is"></string>
+    <string name="lang_is"/>
     <string name="lang_ga">Gwyddeleg</string>
     <string name="shared_string_select">Dewis</string>
     <string name="day">Diwrnod</string>
@@ -1269,7 +1269,7 @@
     <string name="m_s">m/e</string>
     <string name="osmand_parking_minute">mun</string>
     <string name="shared_string_deselect">Dad-ddewis</string>
-    <string name="animate_routing_gpx">Dynwared gan ddefnyddio llwybr GPX</string>
+    <string name="animate_routing_gpx">Dynwared gan ddefnyddio trac GPX</string>
     <string name="route_descr_lat_lon">Lled %1$.3f, hyd %2$.3f</string>
     <string name="download_wikipedia_maps">Wicipedia</string>
     <string name="recording_open_external_player">Agor chwaraeydd allanol</string>
@@ -1342,7 +1342,7 @@
     <string name="shared_string_articles">Erthyglau</string>
     <string name="location_access_request_result">Cymeradwywyd: %1$s Gwrthodwyd: %2$s</string>
     <string name="add_group_to_markers">Ychwanegu grŵp i\'r rhestr nodau</string>
-    <string name="routeInfo_winter_ice_road_description">Lliwio\'r daith neu linell llwybr yn ôl ei gyflwr yn y gaeaf.</string>
+    <string name="routeInfo_winter_ice_road_description">Lliwio llinell y llwybr neu drac yn ôl cyflwr y ffyrdd yn y gaeaf.</string>
     <string name="osm_live_payment_subscription_management_amz">Daw\'r taliad o\'r cyfrif Amazon pan fyddi\'n cadarnhau\'r pryniant.
 \n
 \nMae\'n adnewyddu oni bai dy fod yn ei ganslo cyn y cyfnod adnewyddu.
@@ -1363,7 +1363,7 @@
     <string name="shared_string_precision">Cywirdeb</string>
     <string name="shared_string_statistics">Ystadegau</string>
     <string name="distance_between_points">Pellter rhwng pwyntiau</string>
-    <string name="display_groups_visibility_dialog_description">Gellir rheoli gwelededd grwpiau ar y map. Os yw\'r llwybr wedi\'i guddio, caiff yr holl grwpiau eu cuddio hefyd.</string>
+    <string name="display_groups_visibility_dialog_description">Gellir rheoli gwelededd grwpiau ar y map. Os yw trac wedi\'i guddio, caiff yr holl grwpiau eu cuddio hefyd.</string>
     <string name="shared_string_hide_all">Cuddio\'r cwbl</string>
     <string name="files_remaining">Ffeiliau\'n weddill: %1$s %2$s</string>
     <string name="start_copying">Dechrau copïo</string>
@@ -1426,7 +1426,7 @@
     <string name="shared_string_map">Map</string>
     <string name="shared_string_favorite">Ffefryn</string>
     <string name="shared_string_favorites">Ffefrynnau</string>
-    <string name="shared_string_tracks">Llwybrau</string>
+    <string name="shared_string_tracks">Traciau</string>
     <string name="osmand_srtm_short_description_80_chars">Ategyn OsmAnd ar gyfer cyfuchliniau all-lein</string>
     <string name="audionotes_plugin_description">Gwnewch nodiadau sain/llun/fideo yn ystod taith, naill ai gyda botwm map neu ddewislen cyd-destun lleoliad.</string>
     <string name="watch">Gwylio</string>
@@ -1513,13 +1513,13 @@
     <string name="poi">MODd</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="quick_action_add_navigation">Llywio</string>
-    <string name="selected_waypoints_descr">Caiff y pwyntiau a awgrymir eu hychwanegu at lwybr \"%1$s\".</string>
+    <string name="selected_waypoints_descr">Caiff y pwyntiau a awgrymir eu hychwanegu at drac \"%1$s\".</string>
     <string name="shared_string_reading_file">Yn darllen ffeil…</string>
     <string name="all_groups">Pob grŵp</string>
     <string name="list_of_groups">Rhestr grwpiau</string>
     <string name="app_mode_helicopter">Hofrennydd</string>
     <string name="app_mode_skiing">Sgïo</string>
-    <string name="dropbox_plugin_description">Cysoni traciau a nodiau sain/fideo gyda dy gyfrif Dropbox.</string>
+    <string name="dropbox_plugin_description">Cysoni traciau a nodiadau sain/fideo gyda\'ch cyfrif Dropbox.</string>
     <string name="dropbox_plugin_name">Ategyn Dropbox</string>
     <string name="av_def_action_video">Recordio fideo</string>
     <string name="av_def_action_audio">Recordio sain</string>
@@ -1537,7 +1537,7 @@
     <string name="backup_welcome_back_descr">Adfer data ar y ddyfais hon gan ddefnyddio copïau wrth gefn neu gadw data wrth gefn ar OsmAnd Cloud.</string>
     <string name="routing_engine_vehicle_type_hiking">Heicio</string>
     <string name="routing_engine_vehicle_type_wheelchair">Cadair olwyn</string>
-    <string name="show_track_on_map">Dangos llwybr ar fap</string>
+    <string name="show_track_on_map">Dangos y trac ar fap</string>
     <string name="start_recording">Dechrau recordio</string>
     <string name="shared_string_graph">Graff</string>
     <string name="development">Datblygiad</string>
@@ -1568,4 +1568,69 @@
     <string name="recording_context_menu_play">Chwarae</string>
     <string name="failed_op">methiant</string>
     <string name="voice_prompts_timetable">Amseroedd cyfarwyddiadau llais</string>
+    <string name="upload_local_version">Uwchlwytho\'r fersiwn lleol</string>
+    <string name="gps_filter_actions_description">Bydd OsmAnd yn rhoi\'r newidiadau ar waith ar y trac heb ddiweddaru\'r ffeil. Gallwch gadw newidiadau eich hunain.</string>
+    <string name="shared_storage_last_step">Gellir gosod ffolder data newydd wedyn.</string>
+    <string name="backup_delete_all_data">Dileu fy nata</string>
+    <string name="backup_view_conflicts">Gweld gwrthdrawiadau</string>
+    <string name="track_has_no_altitude">Dyw\'r trac ddim yn cynnwys data uchder.</string>
+    <string name="navigate_to_track_descr">Llywio o\'m lleoliad i\'r trac</string>
+    <string name="pass_whole_track_descr">Pwynt o\'r trac i lywio ato</string>
+    <string name="track_file_description">Bydd tapio\'r weithred hon yn dangos dewis o draciau ar gael.</string>
+    <string name="track_file">Ffeil trac</string>
+    <string name="upload_gpx_description_hint">Os yn wag, defnyddir enwau traciau fel disgrifiadau. Os rowch ddisgrifiad, caiff ei roi ar gyfer pob trac.</string>
+    <string name="backup_delete_types">Dileu mathau data wedi\'i analluogi</string>
+    <string name="backup_delete_types_descr">Dileu holl ddata mathau o ddata wedi\'i anghymeradwyo o OsmAnd Cloud\?</string>
+    <string name="unlimited_map_downloads">Dim cyfyngiad ar lawrlwytho mapiau</string>
+    <string name="delete_version_history">Dileu hanes fersiynau</string>
+    <string name="backup_version_history_delete_descr">Dileu\'r log newidiadau ar gyfer mathau o ddata wedi\'i anghymeradwyo o OsmAnd Cloud\?</string>
+    <string name="restore_selected_data">Adfer y data dewiswyd</string>
+    <string name="restore_from_osmand_cloud">Adfer o OsmAnd Cloud</string>
+    <string name="backup_restore_data">Adfer data</string>
+    <string name="backup_restore_data_descr">Adfer data ar y ddyfais, o gopïau wrth gefn arlein.</string>
+    <string name="backup_data">Cadw data wrth gefn</string>
+    <string name="backup_delete_old_data_descr">Caiff fersiynau cyfredol o\'ch data eu cadw ar OsmAnd Cloud</string>
+    <string name="backup_delete_old_data">Wedi tynnu hen fersiynau</string>
+    <string name="delete_all_confirmation">Ie, dileu\'r cwbl</string>
+    <string name="backup_delete_all_data_descr">Caiff yr holl ddata ar OsmAnd Cloud ei ddileu. Bydd fersiynau lleol yn aros fel y maen nhw.</string>
+    <string name="shared_string_logout">Allgofnodi</string>
+    <string name="download_server_version">Lawrlwytho\'r fersiwn ar y gweinydd</string>
+    <string name="backup_no_internet_descr">Gwiriwch eich cysylltiad â\'r rhyngrwyd a cheisio lawrlwytho eto.</string>
+    <string name="track_has_no_speed">Dyw\'r trac ddim yn cynnwys data cyflymder.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">Golyga \"canfyddadwy\" y bydd y trywydd yn ymddangos yn gyhoeddus yn eich trywyddau GPS a chofnodion cyhoeddus trywyddau GPS, h.y. bydd defnyddwyr eraill yn gallu lawrlwytho\'r trywydd craidd a\'i gysylltu â\'ch enw defnyddiwr. Bydd data pwyntiau trac gyda stampiau amser o API cyhoeddus y GPS sy\'n cael ei weini trwy API pwyntiau traciau yn cyfeirio at dy dudalen trywydd gwreiddiol.</string>
+    <string name="number_of_gpx_files_selected_pattern">%s trac wedi\'u dewis</string>
+    <string name="track_has_no_needed_data">Mae\'r trac ar goll o\'r data priodol.</string>
+    <string name="display_route_tracks">Dangos traciau</string>
+    <string name="open_saved_track">Agor trac wedi\'i gadw</string>
+    <string name="gps_filter_speed_altitude_desc">Dim ond pwyntiau trac sy\'n cyd-fynd â\'r cyfyngau a gosodir bydd yn ymddangos ar y siart a\'r map. Caiff y gweddill eu cuddio.</string>
+    <string name="start_of_the_track">Dechrau\'r trac</string>
+    <string name="gpx_upload_private_visibility_descr">Golyga \"preifat\" nad yw eich trywydd yn ymddangos mewn unrhyw gofrestri cyhoeddus, ond bydd pwyntiau trac ohono ar gael mewn trefn anghronolegol ar gael trwy API cyhoeddus y GPS heb stampiau amser.</string>
+    <string name="routing_attr_avoid_tunnels_description">Osgoi twneli</string>
+    <string name="backup_version_history">Hanes fersiynau</string>
+    <string name="routing_attr_avoid_tunnels_name">Osgoi twneli</string>
+    <string name="backup_delete_all_data_warning">Rwyt ar fin dileu\'r holl ddata a uwchlwythwyd yn flaenorol i OsmAnd Cloud, gan gynnwys hanes fersiynau.
+\n
+\nNi fydd yn bosib adfer y data pan fydd wedi\'i ddileu.</string>
+    <string name="gps_filter_smoothing_desc">Gosodwch drothwy pellter rhwng pwyntiau.
+\nBydd pwyntiau trac na sydd o leiaf y pellter hwn o\'r pwynt gweladwy diwethaf yn cael eu cuddio.
+\nByddwch yn ymwybodol y gall trothwyon uchel gor-symleiddio geometreg y trac.</string>
+    <string name="track_recording_title">Recordio trac wedi stopio</string>
+    <string name="select_another_track">Dewis drac arall</string>
+    <string name="marker_save_as_track">Cadw fel ffeil trac</string>
+    <string name="follow_track">Dilyn trac</string>
+    <string name="routeInfo_tracktype_description">Lliwio llinell y llwybr neu drac yn ôl y mathau o wyneb. Mwyaf defnyddiol pan fo\'r ffyrdd yn bennaf heb wynebau caled.</string>
+    <string name="select_backup_data_descr">Dewiswch ddata a ffolderi i\'w cadw wrth gefn.</string>
+    <string name="display_route_tracks_as_poi">Dangos traciau fel MODd</string>
+    <string name="contour_lines_hillshades_slope">Cyfuchliniau, cysgodion bryniau, llethrau</string>
+    <string name="backup_delete_old_data_warning">Rydych ar fin dileu hanes newid y data a lwythwyd yn flaenorol.
+\n
+\nBydd y fersiwn cyfredol o ddata yn cael ei gadw ar y gweinydd, ond ni fydd yn bosib troi nôl i\'r newidiadau a gwnaed yn flaenorol.</string>
+    <string name="track_recording_will_be_continued">Bydd y recordio yn parhau.</string>
+    <string name="gpx_upload_trackable_visibility_descr">Golyga \"traciadwy\" nad yw\'r trywydd yn ymddangos mewn unrhyw gofnodion cyhoeddus, ond mae pwyntiau trac wedi\'u prosesu a gyda stampiau amser (na ellir eu cysylltu gyda chi\'n uniongyrchol) yn mynd trwy lwythi o API cyhoeddus y GPS.</string>
+    <string name="simplified_track">Trac wedi\'i symleiddio</string>
+    <string name="receiving_data_from_server">Yn derbyn data o\'r gweinydd…</string>
+    <string name="choose_what_to_restore">Dewiswch beth i\'w adfer.</string>
+    <string name="routing_attr_only_permitted_ways_description">Defnyddio dim ond llwybrau (traciau, llwybrau, ayyb) y\'i caniateir yn benodol</string>
+    <string name="follow_track_descr">Dewiswch ffeil trac i\'w ddilyn</string>
+    <string name="import_track_descr">Dewiswch ffeil trac i\'w ddilyn neu fewnforio un o\'ch dyfais.</string>
 </resources>
