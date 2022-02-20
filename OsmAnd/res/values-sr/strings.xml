@@ -4527,4 +4527,8 @@
     <string name="location_source_descr">Подразумевано, ОсмАнд инсталиран са Гугле Плеја користи %1$s за одређивање локације.
 \n
 \nАко добијете нетачне информације о локацији или користите уређај без %2$s, покушајте да пређете на „%3$s“</string>
+    <string name="default_appearance_desc">Подразумевана боја, икона и облик ће се применити на додане омиљене тачке у групи.</string>
+    <string name="default_appearance">Подразумевани изглед</string>
+    <string name="edit_category">Уреди категорију</string>
+    <string name="shared_string_shape">Облик</string>
 </resources>
