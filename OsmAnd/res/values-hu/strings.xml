@@ -2927,7 +2927,7 @@
     <string name="profile_alert_need_save_title">Módosítások mentése</string>
     <string name="profile_alert_need_save_msg">A módosítások mentése először a profilba</string>
     <string name="profile_alert_delete_title">Profil törlése</string>
-    <string name="profile_alert_delete_msg">„%s” profil törlése</string>
+    <string name="profile_alert_delete_msg">„%s” profil törlése\?</string>
     <string name="select_base_profile_dialog_title">Kiinduló profil kijelölése</string>
     <string name="process_downloading_service">OsmAnd letöltési szolgáltatás</string>
     <string name="shared_string_color_magenta">Magenta</string>
@@ -3153,8 +3153,8 @@
     <string name="lang_oc">okcitán</string>
     <string name="app_mode_pickup_truck">Kisteherautó</string>
     <string name="day">nappal</string>
-    <string name="days_2_4">Napok</string>
-    <string name="days_5">Napok</string>
+    <string name="days_2_4">nap</string>
+    <string name="days_5">nap</string>
     <string name="week">hétre</string>
     <string name="weeks_2_4">hétre</string>
     <string name="weeks_5">hétre</string>

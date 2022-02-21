@@ -4539,4 +4539,7 @@
 \n
 \nDacă primiți informații inexacte despre locație sau dacă utilizați un dispozitiv fără %2$s, încercați să treceți la \"%3$s\"</string>
     <string name="android_api">API Android</string>
+    <string name="shared_string_shape">Formă</string>
+    <string name="edit_category">Editați categoria</string>
+    <string name="default_appearance_desc">Culoarea, pictograma și forma implicite se vor aplica punctelor favorite adăugate în grup.</string>
 </resources>
