@@ -95,7 +95,6 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	private boolean hasHeadingCached = true;
 	private Location lastKnownLocation;
 	private float lastHeading = 0.0f;
-	private float accuracyCached = 0.0f;
 
 	private enum MarkerState {
 		Stay,
@@ -117,7 +116,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	public void updateLocation(Location location) {
 		lastKnownLocation = location;
 		if (view != null && view.hasMapRenderer()) {
-			view.getApplication().runInUIThread(() -> updateMarkerData(lastKnownLocation, null, null), 0);
+			view.getApplication().runInUIThread(() -> updateMarkerData(lastKnownLocation, lastKnownLocation.getAccuracy(), null), 0);
 		}
 	}
 
@@ -198,14 +197,22 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	}
 
 	private void invalidateMarkerCollection() {
+		if (view == null || !view.hasMapRenderer()) {
+			return;
+		}
+
 		resetMarkerProvider();
 		myLocationMarker = recreateMarker(myLocationMarker, locationIcon, MARKER_ID_MY_LOCATION, color);
 		navigationMarker = recreateMarker(navigationMarker, navigationIcon, MARKER_ID_NAVIGATION, color);
 		setMarkerProvider();
 		updateMarkerState();
 
-		lastHeading = locationProvider.getHeading();
-		accuracyCached = lastKnownLocation.getAccuracy() - 1.0f;
+		if (lastKnownLocation != null) {
+			view.getApplication().runInUIThread(() -> updateMarkerData(lastKnownLocation, lastKnownLocation.getAccuracy(), lastHeading), 0);
+		}
+		if (locationProvider != null) {
+			view.getApplication().runInUIThread(() -> updateMarkerData(null, null, locationProvider.getHeading()), 0);
+		}
 	}
 
 	private void updateMarkerState() {
@@ -275,49 +282,6 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		}
 	}
 
-	private void updateMarkerAccuracy(float accuracy) {
-		MapMarker marker = null;
-		switch (currentMarkerState) {
-			case Move:
-				marker = navigationMarker;
-				break;
-			case Stay:
-				marker = myLocationMarker;
-				break;
-			case None:
-			default:
-				return;
-		}
-
-		if (marker != null) {
-			marker.setAccuracyCircleRadius(accuracy);
-		}
-	}
-
-	private void updateMarkerHeading(float heading) {
-		MapMarker marker = null;
-		SWIGTYPE_p_void headingIconKey = null;
-		switch (currentMarkerState) {
-			case Move:
-				marker = navigationMarker;
-				headingIconKey = onSurfaceHeadingIconKey;
-				break;
-			case Stay:
-				marker = myLocationMarker;
-				headingIconKey = onSurfaceHeadingIconKey;
-				break;
-			case None:
-			default:
-				return;
-		}
-
-		if (marker != null) {
-			if (headingIconKey != null && hasHeading) {
-				marker.setOnMapSurfaceIconDirection(headingIconKey, heading);
-			}
-		}
-	}
-
 	public PointLocationLayer(@NonNull Context context) {
 		super(context);
 		this.mapViewTrackingUtilities = getApplication().getMapViewTrackingUtilities();
@@ -375,20 +339,13 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		return new RectF(locationX - rad, locationY - rad, locationX + rad, locationY + rad);
 	}
 
-	private void invalidateMarkersGpu(@NonNull Location lastKnownLocation) {
+	private void invalidateMarkerState(@NonNull Location lastKnownLocation) {
 		boolean isBearing = lastKnownLocation.hasBearing() && (lastKnownLocation.getBearing() != 0.0f)
 				&& (!lastKnownLocation.hasSpeed() || lastKnownLocation.getSpeed() > BEARING_SPEED_THRESHOLD);
 		if (isBearing && !locationOutdated) {  // navigation
 			setMarkerState(MarkerState.Move);
 		} else {  // location
 			setMarkerState(MarkerState.Stay);
-		}
-
-
-		float accuracy = lastKnownLocation.getAccuracy();
-		if (accuracy != accuracyCached) {
-			updateMarkerData(null, accuracy, null);
-			accuracyCached = accuracy;
 		}
 	}
 
@@ -461,7 +418,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		if (view == null || tileBox.getZoom() < MIN_ZOOM_MARKER_VISIBILITY || locationProvider == null) {
+		if (view == null || tileBox.getZoom() < MIN_ZOOM_MARKER_VISIBILITY || locationProvider == null || lastKnownLocation == null) {
 			return;
 		}
 
@@ -475,6 +432,8 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 				markersNeedInvalidate = false;
 				hasHeadingCached = hasHeading;
 			}
+
+			invalidateMarkerState(lastKnownLocation);
 		}
 	}
 
@@ -484,10 +443,8 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			return;
 		}
 
-		// rendering
-		if (view.hasMapRenderer()) {
-			invalidateMarkersGpu(lastKnownLocation);
-		} else {
+		// legacy rendering
+		if (!view.hasMapRenderer()) {
 			drawMarkersCpu(canvas, tileBox, lastKnownLocation);
 		}
 	}
