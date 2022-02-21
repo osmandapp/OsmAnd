@@ -11,7 +11,7 @@
 	Thx - Hardy
 -->
 
-    <string name="shared_sting_megabyte">MB</string>
+    <string name="shared_string_complete">complete</string>
     <string name="zoom_levels_difference_description">The big difference between zoom levels can increase the size of the downloaded data.</string>
     <string name="estimated_download_size">Estimated download size</string>
     <string name="number_of_tiles">Number of tiles</string>
