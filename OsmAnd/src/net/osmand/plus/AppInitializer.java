@@ -16,18 +16,14 @@ import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.AsyncTask;
-import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;
 
-import net.osmand.plus.routing.AvoidRoadsHelper;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -37,32 +33,30 @@ import net.osmand.map.OsmandRegions.RegionTranslation;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
-import net.osmand.plus.download.LocalIndexHelper;
-import net.osmand.plus.download.LocalIndexInfo;
-import net.osmand.plus.helpers.AnalyticsHelper;
-import net.osmand.plus.helpers.LauncherShortcutsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.download.LocalIndexHelper;
+import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
+import net.osmand.plus.helpers.AnalyticsHelper;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.DayNightHelper;
-import net.osmand.plus.track.helpers.GpsFilterHelper;
+import net.osmand.plus.helpers.LauncherShortcutsHelper;
 import net.osmand.plus.helpers.LockHelper;
+import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelperImpl;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.FavouritesFileHelper;
 import net.osmand.plus.notifications.NotificationHelper;
+import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.plugins.openplacereviews.OprAuthHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
@@ -72,13 +66,18 @@ import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.render.TravelRendererHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
+import net.osmand.plus.routing.AvoidRoadsHelper;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
+import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.SavingTrackHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.voice.CommandPlayer;
@@ -102,7 +101,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
@@ -266,18 +264,6 @@ public class AppInitializer implements IProgress {
 		}
 	}
 
-	Resources getLocalizedResources(String loc) {
-		if (Build.VERSION.SDK_INT < 17) {
-			return null;
-		}
-		Locale desiredLocale = new Locale(loc);
-		Configuration conf = app.getResources().getConfiguration();
-		conf = new Configuration(conf);
-		conf.setLocale(desiredLocale);
-		Context localizedContext = app.createConfigurationContext(conf);
-		return localizedContext.getResources();
-	}
-
 	private void initPoiTypes() {
 		app.poiTypes.setForbiddenTypes(app.osmandSettings.getForbiddenTypes());
 		if (app.getAppPath(IndexConstants.SETTINGS_DIR + "poi_types.xml").exists()) {
@@ -286,7 +272,7 @@ public class AppInitializer implements IProgress {
 			app.poiTypes.init();
 		}
 
-		final Resources en = getLocalizedResources("en");
+		final Resources resources = app.getLocaleHelper().getLocalizedResources("en");
 
 		app.poiTypes.setPoiTranslator(new MapPoiTypes.PoiTranslator() {
 
@@ -373,7 +359,7 @@ public class AppInitializer implements IProgress {
 
 			@Override
 			public String getEnTranslation(String keyName) {
-				if (en == null) {
+				if (resources == null) {
 					return Algorithms.capitalizeFirstLetter(
 							keyName.replace('_', ' '));
 				}
@@ -381,7 +367,7 @@ public class AppInitializer implements IProgress {
 					Field f = R.string.class.getField("poi_" + keyName);
 					if (f != null) {
 						Integer in = (Integer) f.get(null);
-						String val = en.getString(in);
+						String val = resources.getString(in);
 						if (val != null) {
 							int ind = val.indexOf(';');
 							if (ind > 0) {
@@ -429,7 +415,7 @@ public class AppInitializer implements IProgress {
 		app.liveMonitoringHelper = startupInit(new LiveMonitoringHelper(app), LiveMonitoringHelper.class);
 		app.selectedGpxHelper = startupInit(new GpxSelectionHelper(app, app.savingTrackHelper), GpxSelectionHelper.class);
 		app.gpxDbHelper = startupInit(new GpxDbHelper(app), GpxDbHelper.class);
-		app.favorites = startupInit(new FavouritesDbHelper(app), FavouritesDbHelper.class);
+		app.favoritesHelper = startupInit(new FavouritesHelper(app), FavouritesHelper.class);
 		app.waypointHelper = startupInit(new WaypointHelper(app), WaypointHelper.class);
 		app.aidlApi = startupInit(new OsmandAidlApi(app), OsmandAidlApi.class);
 
@@ -634,7 +620,7 @@ public class AppInitializer implements IProgress {
 			// native depends on renderers
 			initNativeCore();
 			notifyEvent(InitEvents.NATIVE_INITIALIZED);
-			app.favorites.loadFavorites();
+			app.favoritesHelper.loadFavorites();
 			app.gpxDbHelper.loadGpxItems();
 			notifyEvent(InitEvents.FAVORITES_INITIALIZED);
 			app.poiFilters.reloadAllPoiFilters();
@@ -700,8 +686,8 @@ public class AppInitializer implements IProgress {
 
 	private void restoreBackupForFavoritesFiles() {
 		final File appDir = app.getAppPath(null);
-		File save = new File(appDir, FavouritesDbHelper.FILE_TO_SAVE);
-		File bak = new File(appDir, FavouritesDbHelper.FILE_TO_BACKUP);
+		File save = new File(appDir, FavouritesFileHelper.FILE_TO_SAVE);
+		File bak = new File(appDir, FavouritesFileHelper.FILE_TO_BACKUP);
 		if (bak.exists() && (!save.exists() || bak.lastModified() > save.lastModified())) {
 			if (save.exists()) {
 				save.delete();

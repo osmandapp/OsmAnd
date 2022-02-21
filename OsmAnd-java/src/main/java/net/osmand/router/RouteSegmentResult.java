@@ -22,7 +22,7 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 
 public class RouteSegmentResult implements StringExternalizable<RouteDataBundle> {
 	// this should be bigger (50-80m) but tests need to be fixed first
-	public static final float DIST_BEARING_DETECT = 5;
+	public static final float DIST_BEARING_DETECT = 15;
 	
 	public static final float DIST_BEARING_DETECT_UNMATCHED = 50;
 	

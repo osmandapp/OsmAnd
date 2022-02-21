@@ -4492,7 +4492,7 @@
     <string name="shared_string_used">Kullanılmış</string>
     <string name="files_with_route_restrictions">Güzergah kısıtlaması olan dosyalar</string>
     <string name="predefined_waypoint_appearance_description">Bu eyleme dokunmak, ara noktayı önceden tanımlanmış parametrelerle otomatik olarak kaydedecektir.</string>
-    <string name="always_ask_waypoint_appearance_description">Bu eyleme dokunmak, adı ve görünümü değiştirebileceğiniz “Ara nokta ekle” ekranını açacaktır.</string>
+    <string name="always_ask_waypoint_appearance_description">Bu eyleme dokunmak, adı ve görünümü değiştirebileceğiniz \"Ara nokta ekle\" ekranını açacaktır.</string>
     <string name="waypoint_appearance">Ara nokta görünümü</string>
     <string name="track_file">Yol dosyası</string>
     <string name="navigate_point_format_swiss_grid">İsviçre Izgarası (CH1903)</string>
@@ -4513,8 +4513,27 @@
     <string name="rendering_value_omit_name">Atla</string>
     <string name="rendering_attr_seabedDetail_name">Deniz dibi ayrıntısı</string>
     <string name="rendering_attr_seabedDetail_description">Deniz dibi yüzey niteliği, birleşik yüzey türleri, yabani ot veya deniz yosunu kategorisi ve sınıfı hakkında ek metin bilgileri</string>
-    <string name="gpx_no_routes_descr">Dosyaya güzergah eklemek için \"%1$s\" aracını kullanabilirsiniz.</string>
+    <string name="gpx_no_routes_descr">Güzergahı dosya olarak kaydetmek için \"%1$s\" aracını kullanabilirsiniz.</string>
     <string name="gpx_no_routes_title">Güzergah yok</string>
-    <string name="save_track_to_gpx_descrp">Navigasyon devam ederken yol kaydını otomatik olarak başlat. Bittiğinde, izlenen yol otomatik olarak kaydedilecektir.</string>
+    <string name="save_track_to_gpx_descrp">Navigasyon sırasında yol kaydını otomatik olarak başlatın ve bittiğinde otomatik olarak kaydedin.</string>
     <string name="quick_action_add_route_descr">Ekranın ortasından bir güzergah başlatmak için bir düğme.</string>
+    <string name="please_provide_group_name_message">Lütfen gruba bir ad verin.</string>
+    <string name="selected_waypoints_descr">Seçilen ara noktalar \"%1$s\" yoluna eklenecektir</string>
+    <string name="shared_string_reading_file">Dosya okunuyor…</string>
+    <string name="all_groups">Tüm gruplar</string>
+    <string name="list_of_groups">Grup listesi</string>
+    <string name="points_selection_descr">Kapatılsın ve tüm değişiklikler kaybedilsin mi\?</string>
+    <string name="exit_import">Çıkılsın mı\?</string>
+    <string name="import_tracks">Yolları içe aktar</string>
+    <string name="import_tracks_descr">%1$s, %2$s ayrı yol içerir. İçe aktarılacak yolları seçin.</string>
+    <string name="select_suggested_points">Önerilen noktaları seç</string>
+    <string name="exit_import_descr">Değişiklikleri kaydetmeden çıkılsın mı\?</string>
+    <string name="location_source">Konum kaynağı</string>
+    <string name="location_source_descr">OsmAnd\'ı Google Play\'den kurduğunuzda, konumu belirlemek için öntanımlı olarak %1$s kullanılır.
+\n
+\nHatalı konum bilgisi alırsanız veya aygıtınızı %2$s olmadan kullanıyorsanız, \"%3$s\" kullanmayı deneyin.</string>
+    <string name="default_appearance_desc">Öntanımlı renk, simge ve şekil, gruba eklenen favori noktalara uygulanacaktır.</string>
+    <string name="default_appearance">Öntanımlı görünüm</string>
+    <string name="edit_category">Kategoriyi düzenle</string>
+    <string name="shared_string_shape">Şekil</string>
 </resources>

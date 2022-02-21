@@ -19,13 +19,14 @@ import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -40,22 +41,23 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 	public static final String TAG = SendPoiBottomSheetFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(SendPoiBottomSheetFragment.class);
 	public static final String OPENSTREETMAP_POINT = "openstreetmap_point";
-	private OsmPoint[] poi;
 
 	private SwitchCompat closeChangeSet;
 	private EditText messageEditText;
 
+	private OsmEditingPlugin plugin;
+	private OsmPoint[] poi;
 
-	private boolean isLoginOAuth(OsmandSettings settings) {
-		return !Algorithms.isEmpty(settings.OSM_USER_DISPLAY_NAME.get());
+	private boolean isLoginOAuth() {
+		return !Algorithms.isEmpty(plugin.OSM_USER_DISPLAY_NAME.get());
 	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		OsmandApplication app = getMyApplication();
-		if (app == null) {
-			return;
-		}
+		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		if (app == null || plugin == null) return;
+
 		poi = (OsmPoint[]) getArguments().getSerializable(OPENSTREETMAP_POINT);
 		final boolean isNightMode = app.getDaynightHelper().isNightModeForMapControls();
 		final View sendOsmPoiView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
@@ -67,10 +69,10 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		messageEditText.setText(defaultChangeSet);
 		messageEditText.setSelection(messageEditText.getText().length());
 		final TextView accountName = sendOsmPoiView.findViewById(R.id.user_name);
-		OsmandSettings settings = app.getSettings();
-		String userNameOAuth = settings.OSM_USER_DISPLAY_NAME.get();
-		String userNameOpenID = settings.OSM_USER_NAME_OR_EMAIL.get();
-		String userName = isLoginOAuth(settings) ? userNameOAuth : userNameOpenID;
+
+		String userNameOAuth = plugin.OSM_USER_DISPLAY_NAME.get();
+		String userNameOpenID = plugin.OSM_USER_NAME_OR_EMAIL.get();
+		String userName = isLoginOAuth() ? userNameOAuth : userNameOpenID;
 		accountName.setText(userName);
 		final int paddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
 		closeChangeSet.setChecked(true);
@@ -82,15 +84,12 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 			}
 		});
 		LinearLayout account = sendOsmPoiView.findViewById(R.id.account_container);
-		account.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					showOpenStreetMapScreen(activity);
-				}
-				dismiss();
+		account.setOnClickListener(v -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				showOpenStreetMapScreen(activity);
 			}
+			dismiss();
 		});
 		final SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 				.setCustomView(sendOsmPoiView)

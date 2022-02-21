@@ -1,7 +1,6 @@
 package net.osmand.plus.plugins.rastermaps;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
@@ -16,14 +15,14 @@ import com.google.gson.reflect.TypeToken;
 
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import java.lang.reflect.Type;
@@ -193,18 +192,10 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 
 				final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(themedContext, R.layout.dialog_text_item);
 				arrayAdapter.addAll(items);
-				builder.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int i) {
-
-						Pair<String, String> layer = new Pair<>(
-								keys.get(i), items[i]);
-
-						adapter.addItem(layer, activity);
-
-						dialog.dismiss();
-
-					}
+				builder.setAdapter(arrayAdapter, (dialog, index) -> {
+					Pair<String, String> layer = new Pair<>(keys.get(index), items[index]);
+					adapter.addItem(layer, activity);
+					dialog.dismiss();
 				}).setNegativeButton(R.string.shared_string_cancel, null);
 
 				builder.show();

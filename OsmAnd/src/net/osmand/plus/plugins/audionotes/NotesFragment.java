@@ -1,7 +1,7 @@
 package net.osmand.plus.plugins.audionotes;
 
+import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
 import android.app.Activity;
 import android.content.Context;
@@ -34,28 +34,27 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
-import net.osmand.plus.plugins.audionotes.ItemMenuBottomSheetDialogFragment.ItemMenuFragmentListener;
-import net.osmand.plus.plugins.audionotes.SortByMenuBottomSheetDialogFragment.SortFragmentListener;
-import net.osmand.plus.plugins.audionotes.adapters.NotesAdapter;
-import net.osmand.plus.plugins.audionotes.adapters.NotesAdapter.NotesAdapterListener;
 import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.myplaces.FavoritesActivity;
-import net.osmand.plus.myplaces.FavoritesFragmentStateHolder;
+import net.osmand.plus.myplaces.ui.FavoritesActivity;
+import net.osmand.plus.myplaces.ui.FavoritesFragmentStateHolder;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.plugins.audionotes.ItemMenuBottomSheetDialogFragment.ItemMenuFragmentListener;
+import net.osmand.plus.plugins.audionotes.adapters.NotesAdapter;
+import net.osmand.plus.plugins.audionotes.adapters.NotesAdapter.NotesAdapterListener;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 
 import org.apache.commons.logging.Log;
 
@@ -79,7 +78,7 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 
 	private AudioVideoNotesPlugin plugin;
 	private NotesAdapter listAdapter;
-	private Set<Recording> selected = new HashSet<>();
+	private final Set<Recording> selected = new HashSet<>();
 
 	private View footerView;
 	private View emptyView;
@@ -90,13 +89,8 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 	private ActionMode actionMode;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		// Handle screen rotation:
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		FragmentManager fm = getChildFragmentManager();
-		Fragment sortByMenu = fm.findFragmentByTag(SortByMenuBottomSheetDialogFragment.TAG);
-		if (sortByMenu != null) {
-			((SortByMenuBottomSheetDialogFragment) sortByMenu).setListener(createSortFragmentListener());
-		}
 		Fragment itemMenu = fm.findFragmentByTag(ItemMenuBottomSheetDialogFragment.TAG);
 		if (itemMenu != null) {
 			((ItemMenuBottomSheetDialogFragment) itemMenu).setListener(createItemMenuFragmentListener());
@@ -107,20 +101,17 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 
 		OsmandApplication app = getMyApplication();
 		boolean nightMode = !app.getSettings().isLightContent();
-		View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);
+		View view = inflater.inflate(R.layout.update_index, container, false);
 		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
-		ViewStub emptyStub = (ViewStub) view.findViewById(R.id.empty_view_stub);
+		ViewStub emptyStub = view.findViewById(R.id.empty_view_stub);
 		emptyStub.setLayoutResource(R.layout.empty_state_av_notes);
 		emptyView = emptyStub.inflate();
 		emptyView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
-		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
+		ImageView emptyImageView = emptyView.findViewById(R.id.empty_state_image_view);
 
-		if (Build.VERSION.SDK_INT >= 18) {
-			int icRes = !nightMode ? R.drawable.ic_empty_state_av_notes_day : R.drawable.ic_empty_state_av_notes_night;
-			emptyImageView.setImageResource(icRes);
-		} else {
-			emptyImageView.setVisibility(View.INVISIBLE);
-		}
+		int icRes = !nightMode ? R.drawable.ic_empty_state_av_notes_day : R.drawable.ic_empty_state_av_notes_night;
+		emptyImageView.setImageResource(icRes);
+
 		return view;
 	}
 
@@ -183,34 +174,25 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 		((ActionBarProgressActivity) activity).updateListViewFooter(footerView);
 
 		MenuItem item = menu.add(R.string.shared_string_sort).setIcon(R.drawable.ic_action_list_sort);
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				showSortMenuFragment();
-				return true;
-			}
+		item.setOnMenuItemClickListener(item13 -> {
+			SortByMenuBottomSheetDialogFragment.showInstance(activity.getSupportFragmentManager(), NotesFragment.this);
+			return true;
 		});
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
 		Drawable shareIcon = AndroidUtils.getDrawableForDirection(activity,
 				getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_gshare_dark));
 		item = menu.add(R.string.shared_string_share).setIcon(shareIcon);
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				enterSelectionMode(MODE_SHARE);
-				return true;
-			}
+		item.setOnMenuItemClickListener(item1 -> {
+			enterSelectionMode(MODE_SHARE);
+			return true;
 		});
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
 		item = menu.add(R.string.shared_string_delete_all).setIcon(R.drawable.ic_action_delete_dark);
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				enterSelectionMode(MODE_DELETE);
-				return true;
-			}
+		item.setOnMenuItemClickListener(item12 -> {
+			enterSelectionMode(MODE_DELETE);
+			return true;
 		});
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 	}
@@ -226,7 +208,7 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 		List<Recording> recs = new LinkedList<>(plugin.getAllRecordings());
 		List<Object> res = new LinkedList<>();
 		if (!recs.isEmpty()) {
-			NotesSortByMode sortByMode = getMyApplication().getSettings().NOTES_SORT_BY_MODE.get();
+			NotesSortByMode sortByMode = plugin.NOTES_SORT_BY_MODE.get();
 			if (sortByMode.isByDate()) {
 				res.add(NotesAdapter.TYPE_DATE_HEADER);
 				res.addAll(sortRecsByDateDescending(recs));
@@ -300,13 +282,6 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 		};
 	}
 
-	private void showSortMenuFragment() {
-		SortByMenuBottomSheetDialogFragment fragment = new SortByMenuBottomSheetDialogFragment();
-		fragment.setUsedOnMap(false);
-		fragment.setListener(createSortFragmentListener());
-		fragment.show(getChildFragmentManager(), SortByMenuBottomSheetDialogFragment.TAG);
-	}
-
 	private List<Recording> getRecordingsByType(int type) {
 		List<Recording> allRecs = new LinkedList<>(plugin.getAllRecordings());
 		List<Recording> res = new LinkedList<>();
@@ -368,16 +343,7 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 		return recs;
 	}
 
-	private SortFragmentListener createSortFragmentListener() {
-		return new SortFragmentListener() {
-			@Override
-			public void onSortModeChanged() {
-				recreateAdapterData();
-			}
-		};
-	}
-
-	private void recreateAdapterData() {
+	protected void recreateAdapterData() {
 		listAdapter.clear();
 		listAdapter.addAll(createItemsList());
 		listAdapter.notifyDataSetChanged();
@@ -603,7 +569,7 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle(R.string.shared_string_rename);
 		final View v = getActivity().getLayoutInflater().inflate(R.layout.note_edit_dialog, getListView(), false);
-		final EditText editText = (EditText) v.findViewById(R.id.name);
+		final EditText editText = v.findViewById(R.id.name);
 		builder.setView(v);
 		editText.setText(recording.getName(getActivity(), true));
 		InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -643,7 +609,7 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 		bundle.putInt(ITEM_POSITION, selectedItemPosition);
 		return bundle;
 	}
-	
+
 	@Override
 	public void restoreState(Bundle bundle) {
 		if (bundle != null && bundle.containsKey(TAB_ID) && bundle.containsKey(ITEM_POSITION)) {

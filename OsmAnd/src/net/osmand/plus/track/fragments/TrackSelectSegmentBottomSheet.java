@@ -137,7 +137,7 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 	}
 
 	public interface OnSegmentSelectedListener {
-		void onSegmentSelect(GPXFile gpxFile, int selectedSegment);
+		void onSegmentSelect(@NonNull GPXFile gpxFile, int selectedSegment);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull GPXFile gpxFile, @Nullable Fragment target) {

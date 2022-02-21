@@ -590,6 +590,7 @@ public class GPXUtilities {
 		public String speed;
 		public String turnType;
 		public String turnAngle;
+		public String skipTurn;
 		public String types;
 		public String pointTypes;
 		public String names;
@@ -602,6 +603,7 @@ public class GPXUtilities {
 			s.speed = bundle.getString("speed", null);
 			s.turnType = bundle.getString("turnType", null);
 			s.turnAngle = bundle.getString("turnAngle", null);
+			s.skipTurn = bundle.getString("skipTurn", null);
 			s.types = bundle.getString("types", null);
 			s.pointTypes = bundle.getString("pointTypes", null);
 			s.names = bundle.getString("names", null);
@@ -616,6 +618,7 @@ public class GPXUtilities {
 			bundle.putString("speed", speed);
 			bundle.putString("turnType", turnType);
 			bundle.putString("turnAngle", turnAngle);
+			bundle.putString("skipTurn", skipTurn);
 			bundle.putString("types", types);
 			bundle.putString("pointTypes", pointTypes);
 			bundle.putString("names", names);
@@ -1561,28 +1564,6 @@ public class GPXUtilities {
 			return pt;
 		}
 
-		public WptPt addRtePt(double lat, double lon, long time, String description, String name, String category, int color) {
-			double latAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lat));
-			double lonAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lon));
-			final WptPt pt = new WptPt(latAdjusted, lonAdjusted, time, Double.NaN, 0, Double.NaN);
-			pt.name = name;
-			pt.category = category;
-			pt.desc = description;
-			if (color != 0) {
-				pt.setColor(color);
-			}
-
-			if (routes.size() == 0) {
-				routes.add(new Route());
-			}
-			Route currentRoute = routes.get(routes.size() - 1);
-			currentRoute.points.add(pt);
-
-			modifiedTime = System.currentTimeMillis();
-
-			return pt;
-		}
-
 		public List<TrkSegment> getNonEmptyTrkSegments(boolean routesOnly) {
 			List<TrkSegment> segments = new ArrayList<>();
 			for (Track t : tracks) {
@@ -1798,6 +1779,16 @@ public class GPXUtilities {
 				}
 			}
 			return points.isEmpty() && routes.isEmpty();
+		}
+
+		public int getTracksCount() {
+			int count = 0;
+			for (Track track : tracks) {
+				if (!track.generalTrack) {
+					count++;
+				}
+			}
+			return count;
 		}
 
 		public int getNonEmptyTracksCount() {
@@ -2832,6 +2823,7 @@ public class GPXUtilities {
 		segment.speed = parser.getAttributeValue("", "speed");
 		segment.turnType = parser.getAttributeValue("", "turnType");
 		segment.turnAngle = parser.getAttributeValue("", "turnAngle");
+		segment.skipTurn = parser.getAttributeValue("", "skipTurn");
 		segment.types = parser.getAttributeValue("", "types");
 		segment.pointTypes = parser.getAttributeValue("", "pointTypes");
 		segment.names = parser.getAttributeValue("", "names");

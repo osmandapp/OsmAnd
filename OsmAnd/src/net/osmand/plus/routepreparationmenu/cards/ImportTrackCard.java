@@ -42,14 +42,6 @@ public class ImportTrackCard extends MapBaseCard {
 		ImageView icon = view.findViewById(R.id.icon);
 		icon.setImageDrawable(getContentIcon(R.drawable.ic_action_import_to));
 
-		view.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardPressed(ImportTrackCard.this);
-				}
-			}
-		});
+		view.setOnClickListener(v -> notifyCardPressed());
 	}
 }

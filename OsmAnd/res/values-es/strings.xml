@@ -3689,7 +3689,7 @@
     <string name="delete_address">Borrar dirección</string>
     <string name="add_address">Añadir dirección</string>
     <string name="access_hint_enter_address">Ingresar dirección</string>
-    <string name="shared_string_done">Listo</string>
+    <string name="shared_string_done">Hecho</string>
     <string name="simplified_track">Traza simplificada</string>
     <string name="simplified_track_description">Sólo se guardará la línea de la ruta, los puntos de referencia serán borrados.</string>
     <string name="shared_string_file_name">Nombre del archivo</string>
@@ -4417,14 +4417,14 @@
     <string name="fold_unfold">contraer/expandir</string>
     <string name="copying_completed">Copiado</string>
     <string name="shared_string_copy_to">Copiar a</string>
-    <string name="start_copying">Iniciar copia</string>
-    <string name="shared_storage_migration_descr">Debido a los cambios en el acceso al almacenamiento en Android, OsmAnd ya no puede usar «%1$s».
+    <string name="start_copying">Empezar a copiar</string>
+    <string name="shared_storage_migration_descr">Debido a cambios en el acceso al almacenamiento en dispositivos Android, OsmAnd ya no puede utilizar %1$s.
 \n
-\nCopia todos los datos a la nueva carpeta.</string>
+\nCopia todos tus datos a la nueva carpeta.</string>
     <string name="shared_storage_second_step">Pulsa en «Usar esta carpeta».</string>
-    <string name="folder_access_denied">Se necesitan permisos para acceder a la carpeta elegida.</string>
+    <string name="folder_access_denied">Se necesita permiso para acceder a la carpeta seleccionada.</string>
     <string name="display_route_tracks">Mostrar trazas</string>
-    <string name="shared_string_travelbooks">Libro de viajes</string>
+    <string name="shared_string_travelbooks">Libros de viaje</string>
     <string name="shared_storage_last_step">Puedes definir una nueva carpeta de datos después.</string>
     <string name="shared_storage_third_step">Permite acceder a la carpeta. Sin esto, OsmAnd no puede copiar archivos.</string>
     <string name="delete_history_items_descr">¿Borrar los elementos marcados en el historial\?</string>
@@ -4439,7 +4439,7 @@
     <string name="reading_files">Leyendo archivos…</string>
     <string name="no_items_selected_warning">Marca al menos un elemento</string>
     <string name="shared_string_hide_all">Ocultar todo</string>
-    <string name="safe_settings">Modo seguro</string>
+    <string name="safe_settings">Seguro</string>
     <string name="shared_string_show_slope">Mostrar pendiente</string>
     <string name="shared_string_hide_slope">Ocultar pendiente</string>
     <string name="shared_string_grade">Calificación</string>
@@ -4459,15 +4459,15 @@
     <string name="delete_history_items">¿Borrar %1$s elementos del historial\?</string>
     <string name="quick_action_toggle_preference">Un botón que cambia las preferencias.</string>
     <string name="display_route_tracks_as_poi">Mostrar trazas como PDI</string>
-    <string name="approx_safe_mode">Aproximación segura de GPX</string>
-    <string name="approx_safe_mode_description">Realiza una aproximación GPX usando un Android más lento en lugar del código nativo.</string>
-    <string name="use_external_timestamps">Usar marcas de tiempo externas</string>
-    <string name="use_external_timestamps_description">Usa las marcas de tiempo del navegador en línea para ajustar el tiempo estimado y la velocidad media</string>
-    <string name="no_plugins_enabled">No tienes ningún complemento activado. Puedes encontrar una lista de los complementos disponibles en «Menú → Complementos».</string>
+    <string name="approx_safe_mode">Aproximación de GPX segura</string>
+    <string name="approx_safe_mode_description">Realiza una aproximación de GPX usando un código Android más lento en lugar del nativo.</string>
+    <string name="use_external_timestamps">Usar sellos de tiempo externos</string>
+    <string name="use_external_timestamps_description">Utilizar sellos de tiempo del enrutador en línea para ajustar la hora estimada de llegada y la velocidad media</string>
+    <string name="no_plugins_enabled">No tienes ningún complemento activado. Puedes encontrar una lista de los complementos disponibles en \'Menú\' → \'Complementos\'.</string>
     <string name="rendering_attr_natureReserves_description">Mostrar reservas naturales, áreas protegidas y parques nacionales.</string>
     <string name="gps_filter_smoothing">Suavizado</string>
     <string name="save_changes_into_file">Guardar cambios en archivo</string>
-    <string name="shared_string_gps_filter">Filtro del GPS</string>
+    <string name="shared_string_gps_filter">Filtro GPS</string>
     <string name="storage_migration_wrong_folder_warning">No se han encontrado datos de OsmAnd en la carpeta seleccionada. Por favor, inténtalo de nuevo.</string>
     <string name="shared_string_precision">Precisión</string>
     <string name="save_as_copy">Guardar como copia</string>
@@ -4498,4 +4498,37 @@
     <string name="track_file_description">Al pulsar esta acción se mostrará un diálogo de selección de pistas disponibles.</string>
     <string name="always_ask_waypoint_appearance_description">Al pulsar esta acción se abrirá la pantalla \"Añadir punto de ruta\", en la que podrá cambiar el nombre y la apariencia.</string>
     <string name="navigate_point_format_swiss_grid">Red Suiza (CH1903)</string>
+    <string name="rendering_attr_seabedDetail_name">Detalle del fondo marino</string>
+    <string name="save_track_to_gpx_descrp">Inicia automáticamente la grabación de trazas mientras navega y las guarda automáticamente después.</string>
+    <string name="gpx_no_routes_descr">Puedes usar la herramienta «%1$s» para guardar la ruta como un archivo.</string>
+    <string name="rendering_value_omit_name">Omitir</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">No esconde los túneles de las vías fluviales</string>
+    <string name="rendering_attr_seabedDetail_description">Información adicional de texto sobre la calificación de la superficie del fondo marino, tipos de superficies combinados, categoría y taxón de plantas o praderas submarinas</string>
+    <string name="rendering_value_category_name">Categoría</string>
+    <string name="rendering_value_all_name">Todo</string>
+    <string name="selected_waypoints_descr">Los puntos de ruta seleccionados se añadirán a la traza «%1$s»</string>
+    <string name="shared_string_reading_file">Leyendo archivo…</string>
+    <string name="all_groups">Todos los grupos</string>
+    <string name="list_of_groups">Lista de grupos</string>
+    <string name="points_selection_descr">¿Cerrar y perder todos los cambios\?</string>
+    <string name="exit_import_descr">¿Salir sin guardar los cambios\?</string>
+    <string name="exit_import">¿Salir\?</string>
+    <string name="import_tracks">Importar trazas</string>
+    <string name="import_tracks_descr">%1$s, contiene %2$s pistas separadas. Elige pistas a importar.</string>
+    <string name="please_provide_group_name_message">Por favor, nombra el grupo.</string>
+    <string name="gpx_no_routes_title">No hay rutas</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Etiquetas fixme</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Muestra etiquetas de solicitud de arreglo (fixme)</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetas de nota</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Iconos en zooms bajos</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualización esquemática de los iconos en los zooms bajos</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Túneles fluviales</string>
+    <string name="quick_action_add_route_descr">Un botón para iniciar una ruta desde el centro de la pantalla.</string>
+    <string name="select_suggested_points">Selecciona puntos sugeridos</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Mostrar etiquetas de nota</string>
+    <string name="location_source_descr">Por defecto, OsmAnd instalado desde Google Play utiliza %1$s para determinar la ubicación.
+\n
+\nSi obtienes información de ubicación imprecisa o utilizas un dispositivo sin %2$s, intenta cambiar a \"%3$s\"</string>
+    <string name="location_source">Fuente de la ubicación</string>
 </resources>

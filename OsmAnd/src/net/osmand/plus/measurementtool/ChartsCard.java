@@ -35,7 +35,7 @@ import net.osmand.plus.measurementtool.graph.ChartAdapterHelper.RefreshMapCallba
 import net.osmand.plus.measurementtool.graph.CommonChartAdapter;
 import net.osmand.plus.measurementtool.graph.CustomChartAdapter;
 import net.osmand.plus.measurementtool.graph.CustomChartAdapter.LegendViewType;
-import net.osmand.plus.myplaces.GPXTabItemType;
+import net.osmand.plus.myplaces.ui.GPXTabItemType;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.widgets.chips.ChipItem;
@@ -138,7 +138,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 	private void updateTopPadding() {
 		int topPadding = AndroidUiHelper.isOrientationPortrait(mapActivity) ?
-				0 : app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+				0 : getDimen(R.dimen.content_padding_small);
 		view.setPadding(0, topPadding, 0, 0);
 	}
 

@@ -77,7 +77,7 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 			rm.getMapTileDownloader().removeDownloaderCallback(tileReadyCallback);
 
 			image = tileSource.getBytes(tileX, tileY, zoom, app.getAppPath(IndexConstants.TILES_INDEX_DIR).getAbsolutePath());
-		} catch (IOException e) {
+		} catch (Exception e) {
 			return SwigUtilities.emptyQByteArray();
 		}
 		if (image == null)

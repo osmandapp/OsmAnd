@@ -1,8 +1,5 @@
 package net.osmand.plus.plugins.osmedit.quickactions;
 
-import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
-import static net.osmand.plus.plugins.osmedit.fragments.AdvancedEditPoiFragment.addPoiToStringSet;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -54,6 +51,7 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
@@ -68,6 +66,9 @@ import java.util.List;
 import java.util.Map;
 
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
+
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
+import static net.osmand.plus.plugins.osmedit.fragments.AdvancedEditPoiFragment.addPoiToStringSet;
 
 public class AddPOIAction extends QuickAction {
 
@@ -128,12 +129,15 @@ public class AddPOIAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull final MapActivity mapActivity) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandSettings settings = app.getSettings();
+		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		if (plugin == null) return;
+
 		LatLon latLon = mapActivity.getMapView()
 				.getCurrentRotatedTileBox()
 				.getCenterLatLon();
 
-		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
-		if (plugin == null) return;
 		Node node = new Node(latLon.getLatitude(), latLon.getLongitude(), -1);
 		node.replaceTags(getTagsFromParams());
 		EditPoiData editPoiData = new EditPoiData(node, mapActivity.getMyApplication());
@@ -145,8 +149,7 @@ public class AddPOIAction extends QuickAction {
 					EditPoiDialogFragment.TAG);
 		} else {
 			OpenstreetmapUtil mOpenstreetmapUtil;
-			if (mapActivity.getMyApplication().getSettings().OFFLINE_EDITION.get()
-					|| !mapActivity.getMyApplication().getSettings().isInternetConnectionAvailable(true)) {
+			if (plugin.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {
 				mOpenstreetmapUtil = plugin.getPoiModificationLocalUtil();
 			} else {
 				mOpenstreetmapUtil = plugin.getPoiModificationRemoteUtil();

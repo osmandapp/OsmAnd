@@ -13,7 +13,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.OsmandApplication;
@@ -133,7 +133,7 @@ public class FavouritePointMenuController extends MenuController {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			return PointImageDrawable.getFromFavorite(mapActivity.getMyApplication(),
-					mapActivity.getMyApplication().getFavorites().getColorWithCategory(fav,
+					mapActivity.getMyApplication().getFavoritesHelper().getColorWithCategory(fav,
 							ContextCompat.getColor(mapActivity, R.color.color_favorite)), false, fav);
 		} else {
 			return null;
@@ -176,7 +176,7 @@ public class FavouritePointMenuController extends MenuController {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
-			FavouritesDbHelper helper = app.getFavorites();
+			FavouritesHelper helper = app.getFavoritesHelper();
 			String group = fav.getCategory();
 			Drawable line2icon = helper.getGroup(group) != null ? helper.getColoredIconForGroup(group) : null;
 			if (line2icon != null) {

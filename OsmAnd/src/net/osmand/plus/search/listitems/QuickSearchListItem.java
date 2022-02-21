@@ -26,7 +26,7 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -368,7 +368,7 @@ public class QuickSearchListItem {
 				return getIcon(app, R.drawable.ic_action_world_globe);
 			case FAVORITE:
 				FavouritePoint fav = (FavouritePoint) searchResult.object;
-				int color = app.getFavorites().getColorWithCategory(fav, ContextCompat.getColor(app, R.color.color_favorite));
+				int color = app.getFavoritesHelper().getColorWithCategory(fav, ContextCompat.getColor(app, R.color.color_favorite));
 				return PointImageDrawable.getFromFavorite(app, color, false, fav);
 			case FAVORITE_GROUP:
 				FavoriteGroup group = (FavoriteGroup) searchResult.object;
@@ -453,7 +453,7 @@ public class QuickSearchListItem {
 					}
 				} else if (pointDescription.isFavorite()) {
 					LatLon entryLatLon = new LatLon(entry.getLat(), entry.getLon());
-					List<FavouritePoint> favs = app.getFavorites().getFavouritePoints();
+					List<FavouritePoint> favs = app.getFavoritesHelper().getFavouritePoints();
 					for (FavouritePoint f : favs) {
 						if (entryLatLon.equals(new LatLon(f.getLatitude(), f.getLongitude()))
 								&& (pointDescription.getName().equals(f.getName()) ||

@@ -6,12 +6,9 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.ExportBackupTask;
 import net.osmand.plus.backup.ImportBackupTask;
@@ -22,6 +19,8 @@ import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 
 import org.apache.commons.logging.Log;
 
@@ -71,10 +70,8 @@ public class ConflictViewHolder extends ItemViewHolder {
 		});
 		AndroidUiHelper.updateVisibility(serverButton, true);
 		AndroidUiHelper.updateVisibility(localVersionButton, true);
-		UiUtilities.setupDialogButton(nightMode, localVersionButton, DialogButtonType.SECONDARY, R.string.upload_local_version);
-		UiUtilities.setupDialogButton(nightMode, serverButton, DialogButtonType.SECONDARY, R.string.download_server_version);
-		AndroidUtils.setBackground(app, localVersionButton, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
-		AndroidUtils.setBackground(app, serverButton, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
+		UiUtilities.setupDialogButton(nightMode, localVersionButton, DialogButtonType.SECONDARY_ACTIVE, R.string.upload_local_version);
+		UiUtilities.setupDialogButton(nightMode, serverButton, DialogButtonType.SECONDARY_ACTIVE, R.string.download_server_version);
 	}
 
 	private void updateButtonsState(@NonNull NetworkSettingsHelper helper, @NonNull String fileName) {

@@ -4282,4 +4282,17 @@
     <string name="poi_skate">Скейтшоп</string>
     <string name="poi_collector">Колектор</string>
     <string name="poi_books_adults">Дорослі</string>
+    <string name="poi_hospice">Госпис</string>
+    <string name="poi_telecommunication">Телекомунікації</string>
+    <string name="poi_avalanche_transceiver_training">Навчання лавинного радіопередавача</string>
+    <string name="poi_avalanche_transceiver">Детектор жертв лавин;AVD;Радіопередавач про сходження лавин</string>
+    <string name="poi_avalanche_transceiver_checkpoint">Контрольний радіопередавач про сходження лавин</string>
+    <string name="poi_parcel_locker">Шафка для посилок</string>
+    <string name="poi_access_permit">Потрібен дозвіл</string>
+    <string name="poi_tiles">Магазин плиток</string>
+    <string name="poi_board_type_planet_walk">Огляд планет</string>
+    <string name="poi_board_type_art">Мистецтво</string>
+    <string name="poi_board_type_sport">Спорт</string>
+    <string name="poi_board_type_welcome_sign">Вітання</string>
+    <string name="poi_board_type_sight">Визначні місця</string>
 </resources>

@@ -78,6 +78,7 @@ public class UiUtilities {
 		PRIMARY_HARMFUL,
 		SECONDARY,
 		SECONDARY_HARMFUL,
+		SECONDARY_ACTIVE,
 		STROKED
 	}
 
@@ -185,7 +186,7 @@ public class UiUtilities {
 		return drawable;
 	}
 
-	public static Drawable createTintedDrawable(Context context, @DrawableRes int resId, int color) {
+	public static Drawable createTintedDrawable(Context context, @DrawableRes int resId, @ColorInt int color) {
 		return tintDrawable(AppCompatResources.getDrawable(context, resId), color);
 	}
 
@@ -714,6 +715,13 @@ public class UiUtilities {
 				}
 				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_secondary_light, R.drawable.dlg_btn_secondary_dark);
 				textAndIconColorResId = R.color.color_osm_edit_delete;
+				break;
+			case SECONDARY_ACTIVE:
+				if (v21) {
+					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
+				}
+				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
+				textAndIconColorResId = nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light;
 				break;
 			case STROKED:
 				if (v21) {

@@ -90,4 +90,8 @@ public class RestartActivity extends AppCompatActivity {
 		builder.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> doRestartSilent(ctx));
 		builder.show();
 	}
+
+	public static void exitApp() {
+		Process.killProcess(Process.myPid());
+	}
 }

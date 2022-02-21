@@ -3769,7 +3769,7 @@
     <string name="routing_engine_vehicle_type_racingbike">Racercykel</string>
     <string name="routing_engine_vehicle_type_truck">Lastbil</string>
     <string name="message_server_error">Server fejl: %1$s</string>
-    <string name="context_menu_edit_descr">Redigere beskrivelse</string>
+    <string name="context_menu_edit_descr">Rediger beskrivelse</string>
     <string name="upload_photo_completed">Send afsluttet</string>
     <string name="uploading_count">Sender %1$d af %2$d</string>
     <string name="uploaded_count">Sendt %1$d af %2$d</string>
@@ -4319,7 +4319,7 @@
 \n</string>
     <string name="no_items_of_type_message">Du har ikke ingen elementer af denne type</string>
     <string name="routeInfo_tracktype_description">Farvelæg ruten eller sporlinjen i henhold overfladesammensætning. Anvendes typisk, når vejnettet er overvejende ikke-asfalteret.</string>
-    <string name="routeInfo_winter_ice_road_description">Farvelæg ruten eller sporlinjen i henhold til dens vintervejsklassificering.</string>
+    <string name="routeInfo_winter_ice_road_description">Farvelæg ruten eller sporlinjen efter dens vintervejklassificering.</string>
     <string name="routeInfo_smoothness_description">Klassificering af vej- og gangstiers fremkommelighed for hjulkøretøjer, navnligt med hensyn til overfladens regelmæssighed/fladhed.</string>
     <string name="routeInfo_surface_description">Giv oplysninger om veje/gangstiers fysiske overflade.</string>
     <string name="routeInfo_roadClass_description">Farvelæg ruten eller sporlinjen i henhold til vejklassificering.</string>
@@ -4334,13 +4334,13 @@
     <string name="shared_string_mini">mini</string>
     <string name="horseback_riding">Ridning</string>
     <string name="routing_attr_prefer_horse_routes_description">Foretræk hesteruter</string>
-    <string name="routing_attr_prefer_horse_routes_name">Foretræk hesteruter</string>
-    <string name="routing_attr_only_permitted_ways_description">Brug kun passager (spor, stier, osv.), som er udtrykkeligt tilladte</string>
-    <string name="routing_attr_only_permitted_ways_name">Udtrykkeligt tilladte passager</string>
-    <string name="routing_attr_only_permitted_streets_description">Brug kun gader, der er udtrykkeligt tilladte</string>
+    <string name="routing_attr_prefer_horse_routes_name">Foretræk hesteveje</string>
+    <string name="routing_attr_only_permitted_ways_description">Brug kun veje (spor, stier osv.), som er udtrykkeligt tilladte</string>
+    <string name="routing_attr_only_permitted_ways_name">Udtrykkeligt tilladte veje</string>
+    <string name="routing_attr_only_permitted_streets_description">Brug kun gader, som er udtrykkeligt tilladte</string>
     <string name="routing_attr_only_permitted_streets_name">Udtrykkeligt tilladte gader</string>
-    <string name="routing_attr_allow_gate_description">Tillad brug af låger og porte</string>
-    <string name="routing_attr_allow_gate_name">Tillad brug af låger</string>
+    <string name="routing_attr_allow_gate_description">Tillad brug af porte</string>
+    <string name="routing_attr_allow_gate_name">Tillad brug af porte</string>
     <string name="routing_attr_prefer_tactile_paving_description">Foretræk taktil belægning</string>
     <string name="routing_attr_prefer_tactile_paving_name">Foretræk taktil belægning</string>
     <string name="search_title">Søg: %1$s</string>
@@ -4519,8 +4519,27 @@
     <string name="rendering_value_omit_name">Undlad</string>
     <string name="rendering_attr_seabedDetail_name">Havbundsdetaljer</string>
     <string name="rendering_attr_seabedDetail_description">Yderligere tekstinformation om havbunds overfladebeskaffenhed, kombinerede overfladetyper og klasser af havgræs</string>
-    <string name="save_track_to_gpx_descrp">Start sporoptagelse automatisk, når navigation er i gang. Når den er færdig, gemmes sporet automatisk.</string>
+    <string name="save_track_to_gpx_descrp">Auto-start sporoptagelse ved navigation og auto-gem bagefter.</string>
     <string name="gpx_no_routes_title">Der er ingen ruter</string>
-    <string name="gpx_no_routes_descr">Du kan bruge værktøjet \"%1$s\" til at tilføje rute til fil.</string>
+    <string name="gpx_no_routes_descr">Du kan bruge værktøjet \"%1$s\" til at gemme ruten som en fil.</string>
     <string name="quick_action_add_route_descr">En knap til at starte en rute fra midten af skærmen.</string>
+    <string name="please_provide_group_name_message">Navngiv gruppen.</string>
+    <string name="selected_waypoints_descr">Valgte rutepunkter føjes til sporet \"%1$s\"</string>
+    <string name="shared_string_reading_file">Læser fil …</string>
+    <string name="all_groups">Alle grupper</string>
+    <string name="list_of_groups">Liste over grupper</string>
+    <string name="points_selection_descr">Luk og mist alle ændringer\?</string>
+    <string name="exit_import_descr">Afslut uden at gemme eventuelle ændringer\?</string>
+    <string name="exit_import">Afslut\?</string>
+    <string name="import_tracks">Importer spor</string>
+    <string name="import_tracks_descr">%1$s, indeholder %2$s separate spor. Vælg spor til import.</string>
+    <string name="select_suggested_points">Vælg foreslåede punkter</string>
+    <string name="location_source_descr">Som standard bruger OsmAnd, der er installeret fra Google Play, %1$s til at bestemme placeringen.
+\n
+\nHvis du får unøjagtige placeringsoplysninger eller bruger en enhed uden %2$s, kan du prøve at skifte til \"%3$s\"</string>
+    <string name="location_source">Placeringskilde</string>
+    <string name="shared_string_shape">Form</string>
+    <string name="default_appearance_desc">Standardfarve, ikon og form gælder for de tilføjede favoritpunkter i gruppen.</string>
+    <string name="default_appearance">Standardudseende</string>
+    <string name="edit_category">Rediger kategori</string>
 </resources>

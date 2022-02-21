@@ -29,8 +29,8 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
-import net.osmand.plus.myplaces.AvailableGPXFragment;
-import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.myplaces.ui.AvailableGPXFragment;
+import net.osmand.plus.myplaces.ui.FavoritesActivity;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
@@ -38,6 +38,8 @@ import net.osmand.plus.track.fragments.TrackMenuFragment;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.Nullable;
 
 /**
  * Created by Denis
@@ -150,36 +152,26 @@ public class DashTrackFragment extends DashBaseFragment {
 			createCurrentTrackView(view);
 			((TextView) view.findViewById(R.id.name)).setText(R.string.shared_string_currently_recording_track);
 			updateCurrentTrack(view, getActivity(), app);
-			view.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					TrackMenuFragment.openTrack(getActivity(), null, null);
-				}
-			});
+			view.setOnClickListener(v -> openGpxContextMenu(null));
 			view.findViewById(R.id.divider_dash).setVisibility(View.VISIBLE);
 			tracks.addView(view);
 			startHandler(view);
 		}
 
 		for (String filename : list) {
-			final File f = new File(filename);
+			File file = new File(filename);
 			AvailableGPXFragment.GpxInfo info = new AvailableGPXFragment.GpxInfo();
 			info.subfolder = "";
-			info.file = f;
-			View v = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
-			AvailableGPXFragment.updateGpxInfoView(v, info, app, true, null);
+			info.file = file;
+			View itemView = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
+			AvailableGPXFragment.updateGpxInfoView(itemView, info, app, true, null);
 			
-			v.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					TrackMenuFragment.openTrack(getActivity(), f, null);
-				}
-			});
-			ImageButton showOnMap = ((ImageButton) v.findViewById(R.id.show_on_map));
+			itemView.setOnClickListener(v -> openGpxContextMenu(file));
+			ImageButton showOnMap = itemView.findViewById(R.id.show_on_map);
 			showOnMap.setVisibility(View.VISIBLE);
 			showOnMap.setContentDescription(getString(R.string.shared_string_show_on_map));
-			updateShowOnMap(app, f, v, showOnMap);
-			tracks.addView(v);
+			updateShowOnMap(app, file, itemView, showOnMap);
+			tracks.addView(itemView);
 		}
 	}
 
@@ -245,6 +237,14 @@ public class DashTrackFragment extends DashBaseFragment {
 		ImageView pointsCount = (ImageView) v.findViewById(R.id.points_icon);
 		pointsCount.setVisibility(View.VISIBLE);
 		pointsCount.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_waypoint_16));
+	}
+
+	private void openGpxContextMenu(@Nullable File gpxFile) {
+		Activity activity = getActivity();
+		if (activity != null) {
+			TrackMenuFragment.openTrack(activity, gpxFile, null);
+			closeDashboard();
+		}
 	}
 
 	private void updateShowOnMap(final OsmandApplication app, final File f, final View pView, final ImageButton showOnMap) {

@@ -3799,7 +3799,7 @@
     <string name="poi_swimming_area">Zona de înot</string>
     <string name="poi_lavoir">Lavoar</string>
     <string name="poi_waste_transfer_station">Stație de transfer a deșeurilor</string>
-    <string name="poi_weightbridge">Podul de greutate</string>
+    <string name="poi_weightbridge">Pod de greutate; Cântar pentru camioane</string>
     <string name="poi_ranger_station">Stația Ranger</string>
     <string name="poi_water_source_lake">Lacul</string>
     <string name="poi_water_source_river">Râul</string>
@@ -4276,4 +4276,16 @@
     <string name="poi_toilets_hands_drying_no">Uscarea mâinilor: nu</string>
     <string name="poi_hot_water_yes">Apă caldă: da</string>
     <string name="poi_post_office_service_provider">Furnizor de servicii poștale</string>
+    <string name="poi_books_adults">Adulți</string>
+    <string name="poi_blowhole">Gură de aer</string>
+    <string name="poi_skate">Magazin de patine</string>
+    <string name="poi_collector">Colector</string>
+    <string name="poi_hospice">Ospiciu</string>
+    <string name="poi_telecommunication">Telecomunicații</string>
+    <string name="poi_avalanche_transceiver">Detector de victime de avalanșă; AVD; emițător-receptor de avalanșă</string>
+    <string name="poi_avalanche_transceiver_training">Antrenament de emisie-recepție în avalanșă</string>
+    <string name="poi_avalanche_transceiver_checkpoint">Punct de control al emițătorului de avalanșă</string>
+    <string name="poi_access_permit">Autorizație necesară</string>
+    <string name="poi_parcel_locker">Dulap pentru colete</string>
+    <string name="poi_tiles">Magazin de gresie și faianță</string>
 </resources>

@@ -22,18 +22,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.AppearanceViewHolder;
-import net.osmand.plus.track.fragments.TrackAppearanceFragment;
+import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.TrackDrawInfo;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteStatisticsHelper;
 
@@ -54,8 +54,8 @@ public class TrackColoringCard extends MapBaseCard {
 	private List<TrackAppearanceItem> appearanceItems;
 
 	public TrackColoringCard(@NonNull MapActivity mapActivity,
-							 @NonNull SelectedGpxFile selectedGpxFile,
-							 @NonNull TrackDrawInfo trackDrawInfo) {
+	                         @NonNull SelectedGpxFile selectedGpxFile,
+	                         @NonNull TrackDrawInfo trackDrawInfo) {
 		super(mapActivity);
 		this.trackDrawInfo = trackDrawInfo;
 		this.selectedGpxFile = selectedGpxFile;
@@ -184,8 +184,8 @@ public class TrackColoringCard extends MapBaseCard {
 		public AppearanceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 			LayoutInflater themedInflater = UiUtilities.getInflater(parent.getContext(), nightMode);
 			View view = themedInflater.inflate(R.layout.point_editor_group_select_item, parent, false);
-			view.getLayoutParams().width = app.getResources().getDimensionPixelSize(R.dimen.gpx_group_button_width);
-			view.getLayoutParams().height = app.getResources().getDimensionPixelSize(R.dimen.gpx_group_button_height);
+			view.getLayoutParams().width = getDimen(R.dimen.gpx_group_button_width);
+			view.getLayoutParams().height = getDimen(R.dimen.gpx_group_button_height);
 			((TextView) view.findViewById(R.id.groupName)).setMaxLines(1);
 			return new AppearanceViewHolder(view);
 		}
@@ -194,7 +194,7 @@ public class TrackColoringCard extends MapBaseCard {
 		public void onBindViewHolder(@NonNull final AppearanceViewHolder holder, int position) {
 			final TrackAppearanceItem item = items.get(position);
 
-			if (item.isActive() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			if (item.isActive()) {
 				AndroidUtils.setBackground(app, holder.button, nightMode, R.drawable.ripple_solid_light_6dp,
 						R.drawable.ripple_solid_dark_6dp);
 			}
@@ -203,23 +203,18 @@ public class TrackColoringCard extends MapBaseCard {
 			updateTextAndIconColor(holder, item);
 
 			holder.title.setText(item.getLocalizedValue());
-			holder.itemView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					if (!item.isActive()) {
-						showSnackbar(view, item.getAttrName());
-						return;
-					}
-
-					int prevSelectedPosition = getItemPosition(getSelectedAppearanceItem());
-					selectedAppearanceItem = items.get(holder.getAdapterPosition());
-					notifyItemChanged(holder.getAdapterPosition());
-					notifyItemChanged(prevSelectedPosition);
-					setColoringType(selectedAppearanceItem);
-					if (getListener() != null) {
-						getListener().onCardPressed(TrackColoringCard.this);
-					}
+			holder.itemView.setOnClickListener(view -> {
+				if (!item.isActive()) {
+					showSnackbar(view, item.getAttrName());
+					return;
 				}
+
+				int prevSelectedPosition = getItemPosition(getSelectedAppearanceItem());
+				selectedAppearanceItem = items.get(holder.getAdapterPosition());
+				notifyItemChanged(holder.getAdapterPosition());
+				notifyItemChanged(prevSelectedPosition);
+				setColoringType(selectedAppearanceItem);
+				notifyCardPressed();
 			});
 		}
 
@@ -275,7 +270,7 @@ public class TrackColoringCard extends MapBaseCard {
 				iconColorId = trackDrawInfo.getColor();
 			}
 			if (iconColorId == 0) {
-				iconColorId = TrackAppearanceFragment.getTrackColor(app);
+				iconColorId = GpxAppearanceAdapter.getTrackColor(app);
 			}
 			holder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(item.getIconId(), iconColorId));
 			holder.title.setTextColor(textColorId);

@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.accessibility;
 
+import static net.osmand.plus.plugins.PluginInfoFragment.PLUGIN_INFO;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,9 +17,9 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
@@ -28,8 +30,6 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
-
-import static net.osmand.plus.plugins.PluginInfoFragment.PLUGIN_INFO;
 
 public class AccessibilitySettingsFragment extends BaseSettingsFragment implements OnPreferenceChanged, CopyAppModePrefsListener, ResetAppModePrefsListener {
 
@@ -44,12 +44,9 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		accessibilityListener = new AccessibilityStateChangeListener() {
-			@Override
-			public void onAccessibilityStateChanged(boolean b) {
-				if (isResumed() && useSystemAccessibility()) {
-					updateAllSettings();
-				}
+		accessibilityListener = enabled -> {
+			if (isResumed() && useSystemAccessibility()) {
+				updateAllSettings();
 			}
 		};
 
@@ -192,7 +189,6 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 		autoAnnouncePeriod.setEntryValues(entryValues);
 		autoAnnouncePeriod.setDescription(R.string.access_autoannounce_period_descr);
 	}
-
 
 	private void setupDirectionStylePref() {
 		RelativeDirectionStyle[] relativeDirectionStyles = RelativeDirectionStyle.values();

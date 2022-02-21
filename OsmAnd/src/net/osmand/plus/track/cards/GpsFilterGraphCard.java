@@ -12,9 +12,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
-import net.osmand.plus.myplaces.GPXItemPagerAdapter;
-import net.osmand.plus.myplaces.SegmentActionsListener;
-import net.osmand.plus.myplaces.SegmentGPXAdapter;
+import net.osmand.plus.myplaces.ui.GPXItemPagerAdapter;
+import net.osmand.plus.myplaces.ui.SegmentActionsListener;
+import net.osmand.plus.myplaces.ui.SegmentGPXAdapter;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager;
@@ -87,7 +87,7 @@ public class GpsFilterGraphCard extends GpsFilterBaseCard {
 
 		GPXItemPagerAdapter pagerAdapter = new GPXItemPagerAdapter(app, displayItem, displayHelper, nightMode,
 				getSegmentActionsListener(), false, true);
-		pagerAdapter.setChartHMargin(app.getResources().getDimensionPixelSize(R.dimen.content_padding));
+		pagerAdapter.setChartHMargin(getDimen(R.dimen.content_padding));
 		pager.setAdapter(pagerAdapter);
 		slidingTabs.setViewPager(pager);
 	}

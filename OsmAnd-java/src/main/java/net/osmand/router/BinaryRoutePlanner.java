@@ -380,29 +380,6 @@ public class BinaryRoutePlanner {
 		System.out.println(logMsg);
 	}
 
-	private static void printInfo(String logMsg) {
-		log.warn(logMsg);
-	}
-	
-	public static void printDebugMemoryInformation(RoutingContext ctx) {
-		if (ctx.calculationProgress != null) {
-			RouteCalculationProgress p = ctx.calculationProgress;
-			printInfo(String.format("Time. Total: %.2f, to load: %.2f, to load headers: %.2f, to find start/end: %.2f, extra: %.2f ",
-					p.timeToCalculate / 1e6, p.timeToLoad / 1e6, p.timeToLoadHeaders / 1e6,
-					p.timeToFindInitialSegments / 1e6, p.timeNanoToCalcDeviation / 1e6));
-			// GeneralRouter.TIMER = 0;
-			int maxLoadedTiles = Math.max(p.maxLoadedTiles, ctx.getCurrentlyLoadedTiles());
-			printInfo("Current loaded tiles : " + ctx.getCurrentlyLoadedTiles() + ", maximum loaded tiles "
-					+ maxLoadedTiles);
-			printInfo("Loaded tiles " + p.loadedTiles + " (distinct " + p.distinctLoadedTiles + "), unloaded tiles "
-					+ p.unloadedTiles + ", loaded more than once same tiles " + p.loadedPrevUnloadedTiles);
-			printInfo("Visited segments: " + ctx.getVisitedSegments() + ", relaxed roads " + p.relaxedSegments);
-			printInfo("Priority queues sizes : " + p.directQueueSize + "/" + p.oppositeQueueSize);
-			printInfo("Visited interval sizes: " + p.visitedDirectSegments + "/" + p.visitedOppositeSegments);
-		}
-
-	}
-	
 	private double calculateRouteSegmentTime(RoutingContext ctx, boolean reverseWaySearch, RouteSegment segment) {
 		final RouteDataObject road = segment.road;
 		// store <segment> in order to not have unique <segment, direction> in visitedSegments

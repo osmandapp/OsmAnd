@@ -15,6 +15,7 @@ import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -400,6 +401,7 @@ public class WaypointHelper {
 
 					VoiceRouter voiceRouter = getVoiceRouter();
 					AnnounceTimeDistances atd = voiceRouter.getAnnounceTimeDistances();
+					RouteDirectionInfo nextRoute = voiceRouter.getNextRouteDirection();
 					float atdSpeed = atd.getSpeed(lastKnownLocation);
 					while (kIterator < lp.size()) {
 						LocationPointWrapper lwp = lp.get(kIterator);
@@ -433,6 +435,11 @@ public class WaypointHelper {
 									case TRAFFIC_CALMING:
 										announceRadius = STATE_SHORT_ALARM_ANNOUNCE;
 										filterCloseAlarms = true;
+										break;
+									case PEDESTRIAN:
+										announceRadius = nextRoute.getTurnType().isRoundAbout() && kIterator != 0
+												? STATE_SHORT_ALARM_ANNOUNCE
+												: STATE_LONG_ALARM_ANNOUNCE;
 										break;
 									default:
 										announceRadius = STATE_LONG_ALARM_ANNOUNCE;
@@ -568,7 +575,7 @@ public class WaypointHelper {
 			if ((type == FAVORITES || all)) {
 				final List<LocationPointWrapper> array = clearAndGetArray(locationPoints, FAVORITES);
 				if (showFavorites) {
-					findLocationPoints(route, FAVORITES, array, app.getFavorites().getVisibleFavouritePoints(),
+					findLocationPoints(route, FAVORITES, array, app.getFavoritesHelper().getVisibleFavouritePoints(),
 							announceFavorites);
 					sortList(array);
 				}
@@ -819,7 +826,7 @@ public class WaypointHelper {
 
 			} else if (type == FAVORITES ) {
 				return PointImageDrawable.getFromFavorite(uiCtx,
-						app.getFavorites().getColorWithCategory((FavouritePoint) point,
+						app.getFavoritesHelper().getColorWithCategory((FavouritePoint) point,
 								app.getResources().getColor(R.color.color_favorite)), false, (FavouritePoint) point);
 			} else if (type == WAYPOINTS) {
 				if (point instanceof WptLocationPoint) {

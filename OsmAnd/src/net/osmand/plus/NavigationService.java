@@ -19,6 +19,7 @@ import androidx.car.app.navigation.model.TravelEstimate;
 import androidx.car.app.navigation.model.Trip;
 
 import net.osmand.Location;
+import net.osmand.StateChangedListener;
 import net.osmand.plus.auto.NavigationScreen;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.TripHelper;
@@ -27,6 +28,7 @@ import net.osmand.plus.helpers.LocationServiceHelper.LocationCallback;
 import net.osmand.plus.notifications.OsmandNotification;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.LocationSource;
 
 import java.util.Collections;
 import java.util.List;
@@ -51,6 +53,7 @@ public class NavigationService extends Service {
 	protected int usedBy = 0;
 	private OsmAndLocationProvider locationProvider;
 	private LocationServiceHelper locationServiceHelper;
+	private StateChangedListener<LocationSource> locationSourceListener;
 
 	// Android Auto
 	private CarContext carContext;
@@ -131,8 +134,59 @@ public class NavigationService extends Service {
 			stopSelf();
 			return START_NOT_STICKY;
 		}
+		requestLocationUpdates();
 
-		// request location updates
+		return START_REDELIVER_INTENT;
+	}
+
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		addLocationSourceListener();
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		final OsmandApplication app = getApp();
+		setCarContext(null);
+		app.setNavigationService(null);
+		usedBy = 0;
+		removeLocationUpdates();
+		removeLocationSourceListener();
+
+		// remove notification
+		stopForeground(Boolean.TRUE);
+		app.getNotificationHelper().updateTopNotification();
+		app.runInUIThread(() -> app.getNotificationHelper().refreshNotifications(), 500);
+	}
+
+	@Override
+	public void onTaskRemoved(Intent rootIntent) {
+		OsmandApplication app = getApp();
+		app.getNotificationHelper().removeNotifications(false);
+		if (app.getNavigationService() != null &&
+				app.getSettings().DISABLE_RECORDING_ONCE_APP_KILLED.get()) {
+			NavigationService.this.stopSelf();
+		}
+	}
+
+	private void addLocationSourceListener() {
+		OsmandApplication app = getApp();
+		locationSourceListener = change -> {
+			removeLocationUpdates();
+			locationServiceHelper = app.createLocationServiceHelper();
+			requestLocationUpdates();
+		};
+		app.getSettings().LOCATION_SOURCE.addListener(locationSourceListener);
+	}
+
+	private void removeLocationSourceListener() {
+		settings.LOCATION_SOURCE.removeListener(locationSourceListener);
+	}
+
+	private void requestLocationUpdates() {
+		OsmandApplication app = getApp();
 		try {
 			locationServiceHelper.requestLocationUpdates(new LocationCallback() {
 				@Override
@@ -156,43 +210,15 @@ public class NavigationService extends Service {
 		} catch (IllegalArgumentException e) {
 			Toast.makeText(this, R.string.gps_not_available, Toast.LENGTH_LONG).show();
 		}
-		return START_REDELIVER_INTENT;
 	}
 
-	@Override
-	public void onCreate() {
-		super.onCreate();
-		// initializing variables
-	}
-
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		final OsmandApplication app = getApp();
-		setCarContext(null);
-		app.setNavigationService(null);
-		usedBy = 0;
-		// remove updates
+	private void removeLocationUpdates() {
 		if (locationServiceHelper != null) {
 			try {
 				locationServiceHelper.removeLocationUpdates();
 			} catch (SecurityException e) {
 				// Location service permission not granted
 			}
-		}
-		// remove notification
-		stopForeground(Boolean.TRUE);
-		app.getNotificationHelper().updateTopNotification();
-		app.runInUIThread(() -> app.getNotificationHelper().refreshNotifications(), 500);
-	}
-
-	@Override
-	public void onTaskRemoved(Intent rootIntent) {
-		OsmandApplication app = getApp();
-		app.getNotificationHelper().removeNotifications(false);
-		if (app.getNavigationService() != null &&
-				app.getSettings().DISABLE_RECORDING_ONCE_APP_KILLED.get()) {
-			NavigationService.this.stopSelf();
 		}
 	}
 
