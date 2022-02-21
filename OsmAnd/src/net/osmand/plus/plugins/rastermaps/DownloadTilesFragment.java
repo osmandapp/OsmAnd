@@ -24,6 +24,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -204,7 +205,12 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	private void setupTilesPreview() {
 		View minZoomPreviewContainer = view.findViewById(R.id.min_zoom_tile_preview);
 		View maxZoomPreviewContainer = view.findViewById(R.id.max_zoom_tile_preview);
-		// todo
+		// Temporary
+		AndroidUiHelper.setVisibility(View.GONE,
+				minZoomPreviewContainer.findViewById(R.id.tile_image),
+				minZoomPreviewContainer.findViewById(R.id.tile_zoom),
+				maxZoomPreviewContainer.findViewById(R.id.tile_image),
+				maxZoomPreviewContainer.findViewById(R.id.tile_zoom));
 	}
 
 	private void setupMinMaxZoom() {

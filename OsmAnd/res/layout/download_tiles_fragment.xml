@@ -163,7 +163,6 @@
 					<include
 						android:id="@+id/min_zoom_tile_preview"
 						layout="@layout/map_tile_preview"
-						android:visibility="gone"
 						tools:visibility="visible" />
 
 					<include
@@ -172,7 +171,6 @@
 						android:layout_width="@dimen/bottom_sheet_big_item_height"
 						android:layout_height="@dimen/bottom_sheet_big_item_height"
 						android:layout_marginStart="@dimen/content_padding"
-						android:visibility="gone"
 						tools:visibility="visible" />
 
 				</LinearLayout>
