@@ -267,7 +267,7 @@
         <item name="chip_ripple">@drawable/ripple_solid_light_18dp</item>
         <item name="chip_content_color">@color/preference_category_title</item>
         <item name="appbar_and_list_background_color">@color/list_background_color_light</item>
-		<item name="image_tile_placeholder">@drawable/img_placeholder_tile_day</item>
+        <item name="image_tile_placeholder">@drawable/img_placeholder_tile_day</item>
         <item name="toolbar_back_button_color">@color/list_background_color_light</item>
         <item name="toolbar_title_color">@color/list_background_color_light</item>
     </style>
