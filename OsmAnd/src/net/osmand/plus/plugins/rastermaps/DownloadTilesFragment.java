@@ -31,6 +31,8 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.MapTileLayer;
+import net.osmand.plus.views.layers.base.BaseMapLayer;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 import java.util.List;
@@ -152,11 +154,16 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				mapActivity.getMapLayers().selectMapLayer(mapActivity, false, mapSourceName -> {
-					ITileSource newTileSource = settings.getMapTileSource(false);
-					int currentZoom = mapView.getZoom();
-					selectedMaxZoom = newTileSource.getMaximumZoomSupported();
-					selectedMinZoom = Math.min(currentZoom, selectedMaxZoom);
-					updateContent();
+					if (shouldShowDialog(app)) {
+						ITileSource newTileSource = settings.getMapTileSource(false);
+						int currentZoom = mapView.getZoom();
+						selectedMaxZoom = newTileSource.getMaximumZoomSupported();
+						selectedMinZoom = Math.min(currentZoom, selectedMaxZoom);
+						updateContent();
+					} else {
+						app.showToastMessage(R.string.maps_could_not_be_downloaded);
+						dismiss();
+					}
 					return true;
 				});
 			}
@@ -341,6 +348,13 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	private MapActivity getMapActivity() {
 		Activity activity = getActivity();
 		return activity == null ? null : ((MapActivity) activity);
+	}
+
+	public static boolean shouldShowDialog(@NonNull OsmandApplication app) {
+		BaseMapLayer mainLayer = app.getOsmandMap().getMapView().getMainLayer();
+		MapTileLayer mapTileLayer = mainLayer instanceof MapTileLayer ? ((MapTileLayer) mainLayer) : null;
+		ITileSource tileSource = app.getSettings().getMapTileSource(false);
+		return mapTileLayer != null && mapTileLayer.isVisible() && tileSource.couldBeDownloadedFromInternet();
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {

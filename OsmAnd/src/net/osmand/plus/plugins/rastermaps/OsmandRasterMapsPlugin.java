@@ -1,12 +1,5 @@
 package net.osmand.plus.plugins.rastermaps;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DOWNLOAD_MAP;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_UPDATE_MAP;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_RASTER_MAPS;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
-import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -15,12 +8,6 @@ import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
@@ -45,6 +32,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapTileLayer;
+import net.osmand.plus.views.layers.base.BaseMapLayer;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
@@ -52,6 +40,18 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DOWNLOAD_MAP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_RASTER_MAPS;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
+import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
@@ -415,9 +415,12 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				ItemClickListener listener = (adptr, resId, pos, isChecked, viewCoordinates) -> {
 					MapActivity mapActivity1 = mapActivityRef.get();
 					if (AndroidUtils.isActivityNotDestroyed(mapActivity1)) {
-						OsmandMapTileView mapView = mapActivity1.getMapView();
-						DownloadTilesDialog dlg = new DownloadTilesDialog(mapActivity1, app, mapView);
-						dlg.openDialog();
+						OsmandApplication app = mapActivity1.getMyApplication();
+						if (DownloadTilesFragment.shouldShowDialog(app)) {
+							DownloadTilesFragment.showInstance(mapActivity1.getSupportFragmentManager());
+						} else {
+							app.showShortToastMessage(R.string.maps_could_not_be_downloaded);
+						}
 					}
 					return true;
 				};
