@@ -114,9 +114,11 @@ public class DownloadTilesHelper implements TilesDownloadListener {
 			resourceManager = app.getResourceManager();
 			tileDownloader = MapTileDownloader.getInstance(Version.getAppVersion(app));
 			tileDownloadCallback = request -> {
-				long tileSize = request.fileToSave.length();
-				totalTilesBytes += tileSize;
-				app.runInUIThread(() -> this.listener.onTileDownloaded(downloadedTiles++, totalTilesBytes));
+				if (request != null) {
+					long tileSize = request.fileToSave.length();
+					totalTilesBytes += tileSize;
+					app.runInUIThread(() -> listener.onTileDownloaded(downloadedTiles++, totalTilesBytes));
+				}
 			};
 		}
 
@@ -169,22 +171,31 @@ public class DownloadTilesHelper implements TilesDownloadListener {
 				throws InterruptedException {
 			for (int x = leftX; x <= rightY && !cancelled; x++) {
 				for (int y = topY; y <= bottomY && !cancelled; y++) {
+					waitOutDownloadErrors();
 					downloadTile(zoom, x, y);
 					waitForDownloads(false);
 				}
 			}
 		}
 
+		private void waitOutDownloadErrors() throws InterruptedException {
+			while (!cancelled && tileDownloader.shouldSkipRequests()) {
+				Thread.sleep(500);
+			}
+		}
+
 		private void downloadTile(int zoom, int x, int y) {
-			String tileId = resourceManager.calculateTileId(tileSource, x, y, zoom);
-			if (resourceManager.isTileDownloaded(tileId, tileSource, x, y, zoom)) {
-				long tileSize = resourceManager.getTileBytesOnFileSystem(tileId, tileSource, x, y, zoom);
-				totalTilesBytes += tileSize;
-				app.runInUIThread(() -> listener.onTileDownloaded(downloadedTiles++, totalTilesBytes));
-			} else {
-				long time = System.currentTimeMillis();
-				resourceManager.getTileForMapSync(tileId, tileSource, x, y, zoom, true, time);
-				activeRequests++;
+			if (!cancelled) {
+				String tileId = resourceManager.calculateTileId(tileSource, x, y, zoom);
+				if (resourceManager.isTileDownloaded(tileId, tileSource, x, y, zoom)) {
+					long tileSize = resourceManager.getTileBytesOnFileSystem(tileId, tileSource, x, y, zoom);
+					totalTilesBytes += tileSize;
+					app.runInUIThread(() -> listener.onTileDownloaded(downloadedTiles++, totalTilesBytes));
+				} else {
+					long time = System.currentTimeMillis();
+					resourceManager.getTileForMapSync(tileId, tileSource, x, y, zoom, true, time);
+					activeRequests++;
+				}
 			}
 		}
 
