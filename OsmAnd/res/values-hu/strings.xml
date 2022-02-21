@@ -660,7 +660,7 @@
 \n 
 \nA csempés térképek letölthetők internetes forrásokból, vagy előkészíthetők kapcsolat nélküli használathoz (kézzel átmásolva az OsmAnd adatmappájába) SQLite adatbázisként, amely különféle harmadik féltől származó térkép-előkészítő eszközökkel állítható elő.</string>
     <string name="osmand_background_plugin_description">Megjeleníti a háttérben futó nyomvonalrögzítés és navigáció beállításait, ami periodikusan felébreszti a GPS modult (kikapcsolt képernyőnél).</string>
-    <string name="osmand_accessibility_description">Elérhetővé teszi az eszköz akadálymentesítési lehetőségeit közvetlenül az OsmAndban. Ez megkönnyíti például a szövegfelolvasó (TTS) hangok beszédsebességének állítását, az irányító gombok képernyő navigációjának beállítását, egy görgető használatát a nagyítás vezérléséhez, vagy szövegfelolvasó visszajelzés használatát, például a pozíció automatikus bemondásánál.</string>
+    <string name="osmand_accessibility_description">Elérhetővé teszi az eszköz akadálymentesítési lehetőségeit közvetlenül az OsmAndban. Ez megkönnyíti például a szövegfelolvasó (TTS) hangok beszédsebességének állítását, az irányító gombok konfigurálását, egy görgető használatát a nagyítás vezérléséhez, vagy szövegfelolvasó visszajelzés használatát, például a pozíció automatikus bemondásánál.</string>
     <string name="osmand_development_plugin_description">Beállítások fejlesztői és hibakeresési szolgáltatásokhoz, mint például navigáció szimulálása, a megjelenítés teljesítménye vagy hangutasítások. Fejlesztőknek szánt funkciók, nem szükségesek a normál használathoz.</string>
     <string name="plugins_screen">Bővítmények</string>
     <string name="prefs_plugins_descr">A bővítmények speciális beállításokat és kiegészítő funkciókat aktiválnak.</string>
@@ -780,7 +780,7 @@
 \n
 \n Az OsmAnd nyílt forráskódú navigációs alkalmazás, amely a globális OSM adatok széles skáláját használja. Az alkalmazás internetkapcsolat nélkül is használható, mert minden (vektoros és csempés) térképadat tárolható a telefon memóriájában. Az alkalmazás továbbá offline és online útvonaltervezést is tartalmaz, részletes, hangvezérléses navigációval.
 \n
-\n Néhány fontos funkció: 
+\n Néhány fontos funkció:
 \n - Teljesen offline működés (letöltött vektoros és csempés térképek tárolása a készülék tárhelyén)
 \n - kompakt vektoros térképek az egész világról
 \n - Ország- és régiótérképek letöltése közvetlenül az alkalmazásból
@@ -792,12 +792,12 @@
 \n - sebességfüggő térképnagyítás
 \n - térképigazítás iránytű vagy mozgásirány szerint
 \n - sávnavigáció, sebességkorlátozás kijelzése, rögzített és hangfelolvasásos (TTS) hangok
-\n 
+\n
 \n Az OsmAnd ezen ingyenes verziójának korlátozásai:
 \n - letölthető térképek számának korlátozása
 \n - wikipédia-POI offline elérés nélkül
 \n
-\n Az OsmAndot aktívan fejlesztjük. Projektünk és a folyamatos előrelépés az új funkciók kifejlesztésére és tesztelésére kapott adományoktól függ. Kérjük, fontolja meg az OsmAnd+ megvásárlását vagy konkrét új funkciók finanszírozását vagy egy álalános adományt a https://osmand.net oldalon.</string>
+\n Az OsmAndot aktívan fejlesztjük. Projektünk és a folyamatos előrelépés az új funkciók kifejlesztésére és tesztelésére kapott adományoktól függ. Kérjük, fontolja meg az OsmAnd+ megvásárlását vagy konkrét új funkciók finanszírozását vagy egy általános adományt a https://osmand.net oldalon.</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) 
 \n 
 \n Az OsmAnd+ nyílt forráskódú navigációs alkalmazás, amely a globális OSM adatok széles skáláját használja. Az alkalmazás internetkapcsolat nélkül is használható, mert minden (vektoros és csempés) térképadat tárolható a telefon memóriájában. Az alkalmazás továbbá offline és online útvonaltervezést is tartalmaz, részletes, hangvezérléses navigációval. 
@@ -1331,7 +1331,7 @@
     <string name="map_widget_appearance_rem">További elemek</string>
     <string name="map_widget_top">Állapotsáv</string>
     <string name="map_widget_right">Jobb panel</string>
-    <string name="map_widget_left">Bal oldali panel</string>
+    <string name="map_widget_left">Bal panel</string>
     <string name="shared_string_show">Megjelenítés</string>
     <string name="configure_map">Térkép beállítása</string>
     <string name="search_radius_proximity">Ezen belül</string>
@@ -2880,7 +2880,7 @@
     <string name="public_transport_type">Közlekedési mód</string>
     <string name="send_log">Napló küldése</string>
     <string name="searching_gps">Műholdak keresése</string>
-    <string name="coordinates_widget">Koordináta-widget</string>
+    <string name="coordinates_widget">Koordináta sáv</string>
     <string name="keep_passed_markers_descr">Az Kedvencek vagy GPX-útpontok csoportjaként hozzáadott és elhagyottként megjelölt jelölők a térképen maradnak. A jelölők akkor tűnnek el a térképről, ha a csoport nem aktív (ki van kapcsolva).</string>
     <string name="rate_dialog_descr">Kérjük, ossza meg visszajelzését, és értékelje munkánkat a Google Playen.</string>
     <string name="shared_string_privacy_policy">Adatvédelmi irányelvek</string>
@@ -3410,9 +3410,9 @@
     <string name="settings_item_import_error">Sikertelen importálás innen: \'%1$s\'.</string>
     <string name="ui_customization">Felhasználói felület testreszabása</string>
     <string name="shared_string_drawer">Menü</string>
-    <string name="reorder_or_hide_from">%1$s: elemek átrendezése vagy elrejtése.</string>
+    <string name="reorder_or_hide_from">%1$selemek átrendezése vagy elrejtése.</string>
     <string name="shared_string_divider">Elválasztó</string>
-    <string name="divider_descr">Az ez alatti elemek elválasztásra kerülnek egy elválasztóval.</string>
+    <string name="divider_descr">Ezek az elemek egy elválasztó vonal alatt fognak megjelenni.</string>
     <string name="hidden_items_descr">Ezek az elemek a menüből elrejtésre kerültek, azonban az általuk képviselt beállítások vagy bővítmények továbbra is érvényben maradnak.</string>
     <string name="main_actions_descr">Csak 4 elemet tartalmaz.</string>
     <string name="multimedia_use_system_camera">Rendszeralkalmazás használata</string>
@@ -3994,8 +3994,8 @@
     <string name="update_frequency">Frissítés gyakorisága</string>
     <string name="updated">Frissítve: %s</string>
     <string name="last_time_checked">Legutóbb ellenőrizve: %s</string>
-    <string name="latest_openstreetmap_update">Legutóbbi elérhető OpenStreetMap-frissítés:</string>
-    <string name="quick_action_coordinates_widget_descr">A térképen lévő koordináta-widgetet megjelenítő vagy elrejtő kapcsoló.</string>
+    <string name="latest_openstreetmap_update">Legújabb elérhető OpenStreetMap-frissítés:</string>
+    <string name="quick_action_coordinates_widget_descr">A koordináta információkat megjelenítő sáv ki/bekapcsolója.</string>
     <string name="routing_attr_height_obstacles_description">Az útvonaltervezés elkerülhetné a meredek emelkedőket.</string>
     <string name="app_restart_required">Egyes beállítások alkalmazásához újra kell indítani az alkalmazást.</string>
     <string name="on_pause">Szüneteltetve</string>
