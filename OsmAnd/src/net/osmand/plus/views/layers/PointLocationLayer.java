@@ -93,8 +93,6 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	private boolean markersNeedInvalidate = true;
 	private boolean hasHeading = false;
 	private boolean hasHeadingCached = true;
-	private boolean locationNeedUpdate = false;
-	private boolean headingNeedUpdate = false;
 	private Location lastKnownLocation;
 	private float lastHeading = 0.0f;
 	private float accuracyCached = 0.0f;
@@ -118,17 +116,18 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	@Override
 	public void updateLocation(Location location) {
 		lastKnownLocation = location;
-		locationNeedUpdate = true;
+		if (view != null && view.hasMapRenderer()) {
+			view.getApplication().runInUIThread(() -> updateMarkerData(lastKnownLocation, null, null), 0);
+		}
 	}
 
 	@Override
 	public void updateCompassValue(float value) {
 		if (Math.abs(MapUtils.degreesDiff(value, lastHeading)) > MapViewTrackingUtilities.COMPASS_HEADING_THRESHOLD) {
 			lastHeading = value;
-			headingNeedUpdate = true;
-//				if (view != null && view.hasMapRenderer()) {
-//					view.getApplication().runInUIThread(() -> updateMarkerData(null, null, lastHeading), 0);
-//				}
+			if (view != null && view.hasMapRenderer()) {
+				view.getApplication().runInUIThread(() -> updateMarkerData(null, null, lastHeading), 0);
+			}
 		}
 	}
 
@@ -205,8 +204,6 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		setMarkerProvider();
 		updateMarkerState();
 
-		locationNeedUpdate = true;
-		headingNeedUpdate = true;
 		lastHeading = locationProvider.getHeading();
 		accuracyCached = lastKnownLocation.getAccuracy() - 1.0f;
 	}
@@ -346,8 +343,6 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		lastKnownLocation = locationProvider.getLastStaleKnownLocation();
 		markersNeedInvalidate = true;
 		hasHeadingCached = false;
-		locationNeedUpdate = true;
-		headingNeedUpdate = false;
 		setMarkerState(MarkerState.Stay);
 		updateIcons(view.getSettings().getApplicationMode(), getApplication().getDaynightHelper().isNightMode(),
 				locationProvider.getLastKnownLocation() == null);
@@ -380,31 +375,20 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		return new RectF(locationX - rad, locationY - rad, locationX + rad, locationY + rad);
 	}
 
-	private void invalidateMarkersGpu(RotatedTileBox box, Location lastKnownLocation) {
-		if (isLocationVisible(box, lastKnownLocation)) {
-			boolean isBearing = lastKnownLocation.hasBearing() && (lastKnownLocation.getBearing() != 0.0f)
-					&& (!lastKnownLocation.hasSpeed() || lastKnownLocation.getSpeed() > BEARING_SPEED_THRESHOLD);
-			if (isBearing && !locationOutdated) {  // navigation
-				setMarkerState(MarkerState.Move);
-			} else {  // location
-				setMarkerState(MarkerState.Stay);
-			}
+	private void invalidateMarkersGpu(@NonNull Location lastKnownLocation) {
+		boolean isBearing = lastKnownLocation.hasBearing() && (lastKnownLocation.getBearing() != 0.0f)
+				&& (!lastKnownLocation.hasSpeed() || lastKnownLocation.getSpeed() > BEARING_SPEED_THRESHOLD);
+		if (isBearing && !locationOutdated) {  // navigation
+			setMarkerState(MarkerState.Move);
+		} else {  // location
+			setMarkerState(MarkerState.Stay);
+		}
 
-			if (locationNeedUpdate) {
-				updateMarkerData(lastKnownLocation, null, null);
-				locationNeedUpdate = false;
-			}
 
-			if (headingNeedUpdate) {
-				updateMarkerData(null, null, lastHeading);
-				headingNeedUpdate = false;
-			}
-
-			float accuracy = lastKnownLocation.getAccuracy();
-			if (accuracy != accuracyCached) {
-				updateMarkerData(null, accuracy, null);
-				accuracyCached = accuracy;
-			}
+		float accuracy = lastKnownLocation.getAccuracy();
+		if (accuracy != accuracyCached) {
+			updateMarkerData(null, accuracy, null);
+			accuracyCached = accuracy;
 		}
 	}
 
@@ -502,7 +486,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 
 		// rendering
 		if (view.hasMapRenderer()) {
-			invalidateMarkersGpu(tileBox, lastKnownLocation);
+			invalidateMarkersGpu(lastKnownLocation);
 		} else {
 			drawMarkersCpu(canvas, tileBox, lastKnownLocation);
 		}
