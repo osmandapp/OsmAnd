@@ -362,7 +362,7 @@ public class MapTileLayer extends BaseMapLayer {
 				Bitmap bmp = null;
 				String ordImgTile = mgr.calculateTileId(map, tileX, tileY, nzoom);
 				// asking tile image async
-				boolean imgExist = mgr.tileExistOnFileSystem(ordImgTile, map, tileX, tileY, nzoom);
+				boolean imgExist = mgr.isTileDownloaded(ordImgTile, map, tileX, tileY, nzoom);
 				boolean originalWillBeLoaded = useInternet && nzoom <= maxLevel;
 				if (imgExist || originalWillBeLoaded) {
 					bmp = mgr.getBitmapTilesCache().getTileForMapAsync(ordImgTile, map, tileX, tileY,
@@ -387,7 +387,7 @@ public class MapTileLayer extends BaseMapLayer {
 								break;
 							}
 						} else if (loadIfExists) {
-							if (mgr.tileExistOnFileSystem(imgTileId, map, x, y, zoom)
+							if (mgr.isTileDownloaded(imgTileId, map, x, y, zoom)
 									|| (useInternet && zoom <= maxLevel)) {
 								bmp = mgr.getBitmapTilesCache().getTileForMapAsync(imgTileId, map, x, y,
 										zoom, useInternet, drawSettings.mapRefreshTimestamp);

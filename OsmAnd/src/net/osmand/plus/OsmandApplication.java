@@ -80,6 +80,7 @@ import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
 import net.osmand.plus.plugins.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.plugins.openplacereviews.OprAuthHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper;
+import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.render.RendererRegistry;
@@ -196,6 +197,7 @@ public class OsmandApplication extends MultiDexApplication {
 	TravelRendererHelper travelRendererHelper;
 	LauncherShortcutsHelper launcherShortcutsHelper;
 	GpsFilterHelper gpsFilterHelper;
+	DownloadTilesHelper downloadTilesHelper;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -548,6 +550,11 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public GpsFilterHelper getGpsFilterHelper() {
 		return gpsFilterHelper;
+	}
+
+	@NonNull
+	public DownloadTilesHelper getDownloadTilesHelper() {
+		return downloadTilesHelper;
 	}
 
 	public CommandPlayer getPlayer() {

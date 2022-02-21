@@ -58,6 +58,7 @@ import net.osmand.plus.plugins.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.openplacereviews.OprAuthHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper;
+import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.render.NativeOsmandLibrary;
@@ -445,6 +446,7 @@ public class AppInitializer implements IProgress {
 		app.onlineRoutingHelper = startupInit(new OnlineRoutingHelper(app), OnlineRoutingHelper.class);
 		app.launcherShortcutsHelper = startupInit(new LauncherShortcutsHelper(app), LauncherShortcutsHelper.class);
 		app.gpsFilterHelper = startupInit(new GpsFilterHelper(app), GpsFilterHelper.class);
+		app.downloadTilesHelper = startupInit(new DownloadTilesHelper(app), DownloadTilesHelper.class);
 
 		initOpeningHoursParser();
 	}
