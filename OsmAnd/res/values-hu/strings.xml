@@ -3153,8 +3153,8 @@
     <string name="lang_oc">okcitán</string>
     <string name="app_mode_pickup_truck">Kisteherautó</string>
     <string name="day">nappal</string>
-    <string name="days_2_4">nap</string>
-    <string name="days_5">nap</string>
+    <string name="days_2_4">napra</string>
+    <string name="days_5">napra</string>
     <string name="week">hétre</string>
     <string name="weeks_2_4">hétre</string>
     <string name="weeks_5">hétre</string>
@@ -3412,7 +3412,7 @@
     <string name="shared_string_drawer">Menü</string>
     <string name="reorder_or_hide_from">%1$selemek átrendezése vagy elrejtése.</string>
     <string name="shared_string_divider">Elválasztó</string>
-    <string name="divider_descr">Ezek az elemek egy elválasztó vonal alatt fognak megjelenni.</string>
+    <string name="divider_descr">Az e pont alatti elemek el vannak különítve egy elválasztóval.</string>
     <string name="hidden_items_descr">Ezek az elemek a menüből elrejtésre kerültek, azonban az általuk képviselt beállítások vagy bővítmények továbbra is érvényben maradnak.</string>
     <string name="main_actions_descr">Csak 4 elemet tartalmaz.</string>
     <string name="multimedia_use_system_camera">Rendszeralkalmazás használata</string>
@@ -3995,7 +3995,7 @@
     <string name="updated">Frissítve: %s</string>
     <string name="last_time_checked">Legutóbb ellenőrizve: %s</string>
     <string name="latest_openstreetmap_update">Legújabb elérhető OpenStreetMap-frissítés:</string>
-    <string name="quick_action_coordinates_widget_descr">A koordináta információkat megjelenítő sáv ki/bekapcsolója.</string>
+    <string name="quick_action_coordinates_widget_descr">A koordináta információkat megjelenítő sáv ki-/bekapcsolója.</string>
     <string name="routing_attr_height_obstacles_description">Az útvonaltervezés elkerülhetné a meredek emelkedőket.</string>
     <string name="app_restart_required">Egyes beállítások alkalmazásához újra kell indítani az alkalmazást.</string>
     <string name="on_pause">Szüneteltetve</string>
@@ -4505,9 +4505,9 @@
     <string name="rendering_value_omit_name">Kihagyás</string>
     <string name="rendering_attr_seabedDetail_description">További szöveges információ a tengerfenék felszínének minősítéséről, kombinált felszíntípusokról, valamint a növényzet és a tengeri füvek kategóriájáról és taxonjáról</string>
     <string name="rendering_attr_seabedDetail_name">Tengerfenék részletei</string>
-    <string name="save_track_to_gpx_descrp">Navigáció közben automatikusan rögzíti a nyomvonalat és automatikusan elmenti később.</string>
+    <string name="save_track_to_gpx_descrp">Navigáció közben automatikusan rögzíti a nyomvonalat, utána pedig automatikusan elmenti.</string>
     <string name="gpx_no_routes_title">Nincs útvonal</string>
-    <string name="gpx_no_routes_descr">A(z) „%1$s” eszközzel útvonalat menthet el fájlként.</string>
+    <string name="gpx_no_routes_descr">A(z) „%1$s” eszközzel fájlként menthet el útvonalakat.</string>
     <string name="import_tracks">Nyomvonalak importálása</string>
     <string name="select_suggested_points">Javasolt pontok kijelölése</string>
     <string name="please_provide_group_name_message">Kérjük, nevezze el a csoportot.</string>
@@ -4523,7 +4523,7 @@
     <string name="location_source_descr">Alapértelmezés szerint a Google Playről telepített OsmAnd a(z) %1$s segítségével határozza meg a pozíciót.
 \n
 \nHa ez nem elég pontos, vagy az eszközt %2$s nélkül használja, próbáljon meg átváltani erre: \"%3$s\"</string>
-    <string name="location_source">Helyadat forrás</string>
+    <string name="location_source">Helyadatok forrása</string>
     <string name="shared_string_shape">Alak</string>
     <string name="default_appearance_desc">Az alapértelmezett szín, ikon és alak a csoporthoz hozzáadott kedvenc pontokra lesz érvényes.</string>
     <string name="default_appearance">Alapértelmezett megjelenés</string>
