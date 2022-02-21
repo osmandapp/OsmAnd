@@ -1,24 +1,5 @@
 package net.osmand.aidl;
 
-import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_LAYER;
-import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_WIDGET;
-import static net.osmand.aidl.ConnectedApp.AIDL_OBJECT_ID;
-import static net.osmand.aidl.ConnectedApp.AIDL_PACKAGE_NAME;
-import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_LAYER;
-import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_WIDGET;
-import static net.osmand.aidlapi.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_IO_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_MAX_LOCK_TIME_MS;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PARAMS_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
-import static net.osmand.plus.myplaces.FavouritesDbHelper.FILE_TO_SAVE;
-import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
-import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -34,9 +15,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.view.KeyEvent;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -72,6 +50,8 @@ import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
@@ -82,7 +62,8 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.IContextMenuButtonListener;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.myplaces.TrackBitmapDrawer;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TracksDrawParams;
@@ -146,6 +127,28 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_LAYER;
+import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_WIDGET;
+import static net.osmand.aidl.ConnectedApp.AIDL_OBJECT_ID;
+import static net.osmand.aidl.ConnectedApp.AIDL_PACKAGE_NAME;
+import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_LAYER;
+import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_WIDGET;
+import static net.osmand.aidlapi.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_IO_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_MAX_LOCK_TIME_MS;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PARAMS_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
+import static net.osmand.plus.myplaces.FavouritesFileHelper.FILE_TO_SAVE;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
 
 public class OsmandAidlApi {
 
@@ -971,9 +974,9 @@ public class OsmandAidlApi {
 	}
 
 	boolean addFavoriteGroup(String name, String colorTag, boolean visible) {
-		FavouritesDbHelper favoritesHelper = app.getFavorites();
-		List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
-		for (FavouritesDbHelper.FavoriteGroup g : groups) {
+		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
+		List<FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
+		for (FavoriteGroup g : groups) {
 			if (g.getName().equals(name)) {
 				return false;
 			}
@@ -987,9 +990,9 @@ public class OsmandAidlApi {
 	}
 
 	boolean removeFavoriteGroup(String name) {
-		FavouritesDbHelper favoritesHelper = app.getFavorites();
-		List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
-		for (FavouritesDbHelper.FavoriteGroup g : groups) {
+		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
+		List<FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
+		for (FavoriteGroup g : groups) {
 			if (g.getName().equals(name)) {
 				favoritesHelper.deleteGroup(g);
 				return true;
@@ -999,9 +1002,9 @@ public class OsmandAidlApi {
 	}
 
 	boolean updateFavoriteGroup(String prevGroupName, String newGroupName, String colorTag, boolean visible) {
-		FavouritesDbHelper favoritesHelper = app.getFavorites();
-		List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
-		for (FavouritesDbHelper.FavoriteGroup g : groups) {
+		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
+		List<FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
+		for (FavoriteGroup g : groups) {
 			if (g.getName().equals(prevGroupName)) {
 				int color = 0;
 				if (!Algorithms.isEmpty(colorTag)) {
@@ -1015,7 +1018,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean addFavorite(double latitude, double longitude, String name, String category, String description, String colorTag, boolean visible) {
-		FavouritesDbHelper favoritesHelper = app.getFavorites();
+		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
 		FavouritePoint point = new FavouritePoint(latitude, longitude, name, category);
 		point.setDescription(description);
 		int color = 0;
@@ -1030,7 +1033,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean removeFavorite(String name, String category, double latitude, double longitude) {
-		FavouritesDbHelper favoritesHelper = app.getFavorites();
+		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
 		List<FavouritePoint> favorites = favoritesHelper.getFavouritePoints();
 		for (FavouritePoint f : favorites) {
 			if (f.getName().equals(name) && f.getCategory().equals(category) &&
@@ -1044,7 +1047,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean updateFavorite(String prevName, String prevCategory, double prevLat, double prevLon, String newName, String newCategory, String newDescription, String newAddress, double newLat, double newLon) {
-		FavouritesDbHelper favoritesHelper = app.getFavorites();
+		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
 		List<FavouritePoint> favorites = favoritesHelper.getFavouritePoints();
 		for (FavouritePoint f : favorites) {
 			if (f.getName().equals(prevName) && f.getCategory().equals(prevCategory) &&
@@ -1840,6 +1843,9 @@ public class OsmandAidlApi {
 		AppInfoParams params = new AppInfoParams(lastKnownLocation, mapLocation, turnInfo, leftTime, leftDistance, arrivalTime, mapVisible);
 		params.setVersionsInfo(ExternalApiHelper.getPluginAndProfileVersions());
 		params.setDestinationLocation(destinationLocation);
+		params.setOsmAndVersion(Version.getFullVersion(app));
+		String releaseDate = app.getString(R.string.app_edition);
+		params.setReleaseDate(releaseDate.isEmpty() ? null : releaseDate);
 		return params;
 	}
 
@@ -2462,6 +2468,11 @@ public class OsmandAidlApi {
 		return true;
 	}
 
+	public boolean reloadIndexes() {
+		app.getResourceManager().reloadIndexesAsync(null, null);
+		return true;
+	}
+
 	private static class FileCopyInfo {
 		long startTime;
 		long lastAccessTime;
@@ -2506,7 +2517,7 @@ public class OsmandAidlApi {
 					destinationDir = destinationDir.replaceFirst(IndexConstants.GPX_INDEX_DIR, "");
 					showGpx(new File(destinationDir, fileName).getPath());
 				} else if (destinationDir.isEmpty() && FILE_TO_SAVE.equals(fileName)) {
-					app.getFavorites().loadFavorites();
+					app.getFavoritesHelper().loadFavorites();
 				}
 			}
 		}

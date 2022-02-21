@@ -316,11 +316,10 @@ public class RoutePlannerFrontEnd {
 				gctx.ctx.calculationProgress.timeToCalculate = System.nanoTime() - timeToCalculate;
 			}
 			gctx.ctx.deleteNativeRoutingContext();
-			BinaryRoutePlanner.printDebugMemoryInformation(gctx.ctx);
 			calculateGpxRoute(gctx, gpxPoints);
 			if (!gctx.result.isEmpty() && !gctx.ctx.calculationProgress.isCancelled) {
-				new RouteResultPreparation().printResults(gctx.ctx, gpxPoints.get(0).loc, gpxPoints.get(gpxPoints.size() - 1).loc, gctx.result);
-				System.out.println(gctx);
+				RouteResultPreparation.printResults(gctx.ctx, gpxPoints.get(0).loc, gpxPoints.get(gpxPoints.size() - 1).loc, gctx.result);
+				log.info(gctx);
 			}
 		}
 		if (resultMatcher != null) {
@@ -749,6 +748,7 @@ public class RoutePlannerFrontEnd {
 				return null;
 			}
 			routeDirection = PrecalculatedRouteDirection.build(ls, RoutingConfiguration.DEVIATION_RADIUS, ctx.getRouter().getMaxSpeed());
+			ctx.calculationProgressFirstPhase = RouteCalculationProgress.capture(ctx.calculationProgress);
 		}
 		List<RouteSegmentResult> res ;
 		if (intermediatesEmpty && ctx.nativeLib != null) {
@@ -786,13 +786,8 @@ public class RoutePlannerFrontEnd {
 			ctx.calculationProgress.nextIteration();
 			res = searchRouteImpl(ctx, points, routeDirection);
 		}
-		if (ctx.calculationProgress != null) {
-			ctx.calculationProgress.timeToCalculate = (System.nanoTime() - timeToCalculate);
-		}
-		BinaryRoutePlanner.printDebugMemoryInformation(ctx);
-		if (res != null) {
-			new RouteResultPreparation().printResults(ctx, start, end, res);
-		}
+		ctx.calculationProgress.timeToCalculate = (System.nanoTime() - timeToCalculate);
+		RouteResultPreparation.printResults(ctx, start, end, res);
 		return res;
 	}
 

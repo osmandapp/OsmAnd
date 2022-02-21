@@ -47,7 +47,7 @@ public class RouteResultPreparation {
 	private static final float UNMATCHED_TURN_DEGREE_MINIMUM = 45;
 	private static final float SPLIT_TURN_DEGREE_NOT_STRAIGHT = 100;
 	public static final int SHIFT_ID = 6;
-	private Log log = PlatformUtil.getLog(RouteResultPreparation.class);
+	protected static final Log LOG = PlatformUtil.getLog(RouteResultPreparation.class);
 	public static final String UNMATCHED_HIGHWAY_TYPE = "unmatched";
 	/**
 	 * Helper method to prepare final result 
@@ -496,7 +496,9 @@ public class RouteResultPreparation {
 		for (RouteSegmentResult r : result) {
 			totalRoutingTime += r.getRoutingTime();
 		}
-		println("Total sum routing time ! " + totalRoutingTime + " == " + cmp );
+		if (Math.abs(totalRoutingTime - cmp) > 1) {
+			println("Total sum routing time ! " + totalRoutingTime + " == " + cmp);
+		}
 	}
 	
 	private void addRouteSegmentToResult(RoutingContext ctx, List<RouteSegmentResult> result, RouteSegmentResult res, boolean reverse) {
@@ -531,178 +533,219 @@ public class RouteResultPreparation {
 		return false;
 	}
 	
-	void printResults(RoutingContext ctx, LatLon start, LatLon end, List<RouteSegmentResult> result) {
-		float completeTime = 0;
-		float completeDistance = 0;
-		for (RouteSegmentResult r : result) {
-			completeTime += r.getSegmentTime();
-			completeDistance += r.getDistance();
-		}
-
-		double startLat = start.getLatitude();
-		double startLon = start.getLongitude();
-		double endLat = end.getLatitude();
-		double endLon = end.getLongitude();
+	public static void printResults(RoutingContext ctx, LatLon start, LatLon end, List<RouteSegmentResult> result) {
+		Map<String, Object> info =  new LinkedHashMap<String, Object>();
+		Map<String, Object> route =  new LinkedHashMap<String, Object>();
+		info.put("route", route);
 		
-		String calcTime = "";
-		int segPerSec = 0;
-		if (ctx.calculationProgress != null && ctx.calculationProgress.timeToCalculate > 0) {
-			calcTime = String.format("%.2f", ctx.calculationProgress.timeToCalculate / 1e9);
-			segPerSec = (int) (ctx.getVisitedSegments() / (ctx.calculationProgress.timeToCalculate / 1e9));
+		route.put("routing_time", String.format("%.1f", ctx.routingTime));
+		route.put("vehicle", ctx.config.routerName);
+		route.put("base", ctx.calculationMode == RouteCalculationMode.BASE);
+		route.put("start_lat", String.format("%.5f", start.getLatitude()));
+		route.put("start_lon", String.format("%.5f", start.getLongitude()));
+		route.put("target_lat", String.format("%.5f", end.getLatitude()));
+		route.put("target_lon", String.format("%.5f", end.getLongitude()));
+		if (result != null) {
+			float completeTime = 0;
+			float completeDistance = 0;
+			for (RouteSegmentResult r : result) {
+				completeTime += r.getSegmentTime();
+				completeDistance += r.getDistance();
+			}
+			route.put("complete_distance", String.format("%.1f", completeDistance));
+			route.put("complete_time", String.format("%.1f", completeTime));
 			
 		}
+		route.put("native", ctx.nativeLib != null);
 		
-		String msg = String.format("<test vehicle=\"%s\" native=\"%s\" "
-				+ " start_lat=\"%.5f\" start_lon=\"%.5f\" target_lat=\"%.5f\" target_lon=\"%.5f\" \n "
-				+ " routing_time=\"%.2f\" complete_distance=\"%.2f\" complete_time=\"%.2f\" " 
-				+ " calc_timems=\"%s\" loaded_tiles=\"%d\" visited_segments=\"%d\" segments_1sec=\"%s\"  >",
-				ctx.config.routerName, ctx.nativeLib != null, startLat, startLon, endLat, endLon,
-				ctx.routingTime, completeDistance, completeTime,
-				calcTime, ctx.getLoadedTiles(), ctx.getVisitedSegments(), segPerSec);
-		log.info(msg);
+		if (ctx.calculationProgress != null && ctx.calculationProgress.timeToCalculate > 0) {
+			info.putAll(ctx.calculationProgress.getInfo(ctx.calculationProgressFirstPhase));
+		}
+		
 		String alerts = String.format("Alerts during routing: %d fastRoads, %d slowSegmentsEearlier",
 				ctx.alertFasterRoadToVisitedSegments, ctx.alertSlowerSegmentedWasVisitedEarlier);
 		if (ctx.alertFasterRoadToVisitedSegments + ctx.alertSlowerSegmentedWasVisitedEarlier == 0) {
 			alerts = "No alerts";
 		}
 		println("ROUTE. " + alerts);
-		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
+		List<String> routeInfo = new ArrayList<String>();
+		StringBuilder extraInfo = buildRouteMessagesFromInfo(info, routeInfo);
+		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST && result != null) {
+			println(String.format("<test %s>",extraInfo.toString()));
+			printRouteInfoSegments(result);
+			println("</test>");
+			// duplicate base info
+			if (ctx.calculationProgressFirstPhase != null) {
+				println("<<<1st Phase>>>>");
+				List<String> baseRouteInfo = new ArrayList<String>();
+				buildRouteMessagesFromInfo(ctx.calculationProgressFirstPhase.getInfo(null), baseRouteInfo);
+				for (String msg : baseRouteInfo) {
+					println(msg);
+				}
+				println("<<<2nd Phase>>>>");
+			}
+		}
+		for (String msg : routeInfo) {
 			println(msg);
-			org.xmlpull.v1.XmlSerializer serializer = null;
-			if (PRINT_TO_GPX_FILE != null) {
-				serializer = PlatformUtil.newSerializer();
-				try {
-					serializer.setOutput(new FileWriter(PRINT_TO_GPX_FILE));
-					serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
-					// indentation as 3 spaces
-					// serializer.setProperty("http://xmlpull.org/v1/doc/properties.html#serializer-indentation", " ");
-					// // also set the line separator
-					// serializer.setProperty("http://xmlpull.org/v1/doc/properties.html#serializer-line-separator",
-					// "\n");
-					serializer.startDocument("UTF-8", true);
-					serializer.startTag("", "gpx");
-					serializer.attribute("", "version", "1.1");
-					serializer.attribute("", "xmlns", "http://www.topografix.com/GPX/1/1");
-					serializer.attribute("", "xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
-					serializer.attribute("", "xmlns:schemaLocation",
-							"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
-					serializer.startTag("", "trk");
-					serializer.startTag("", "trkseg");
-				} catch (IOException e) {
-					e.printStackTrace();
-					serializer = null;
+		}
+//		calculateStatistics(result);
+	}
+
+	private static StringBuilder buildRouteMessagesFromInfo(Map<String, Object> info, List<String> routeMessages) {
+		StringBuilder extraInfo = new StringBuilder(); 
+		for (String key : info.keySet()) {
+			// // GeneralRouter.TIMER = 0;
+			if (info.get(key) instanceof Map) {
+				@SuppressWarnings("unchecked")
+				Map<String, Object> mp = (Map<String, Object>) info.get(key);
+				StringBuilder msg = new StringBuilder("Route <" + key + ">");
+				int i = 0;
+				for (String mkey : mp.keySet()) {
+					msg.append((i++ == 0) ? ": " : ", ");
+					Object obj = mp.get(mkey);
+					String valueString = obj.toString();
+					if (obj instanceof Double || obj instanceof Float) {
+						valueString = String.format("%.1f", ((Number) obj).doubleValue());
+					}
+					msg.append(mkey).append("=").append(valueString);
+					extraInfo.append(" ").append(key + "_" + mkey).append("=\"").append(valueString).append("\"");
+				}
+				if (routeMessages != null) {
+					routeMessages.add(msg.toString());
 				}
 			}
-					
-			double lastHeight = -180;		
-			for (RouteSegmentResult res : result) {
-				String name = res.getObject().getName();
-				String ref = res.getObject().getRef("", false, res.isForwardDirection());
-				if (name == null) {
-					name = "";
-				}
-				if (ref != null) {
-					name += " (" + ref + ") ";
-				}
-				StringBuilder additional = new StringBuilder();
-				additional.append("time = \"").append(((int)res.getSegmentTime()*100)/100.0f).append("\" ");
-				if (res.getRoutingTime() > 0) {
+		}
+		return extraInfo;
+	}
+
+	private static void printRouteInfoSegments(List<RouteSegmentResult> result) {
+		org.xmlpull.v1.XmlSerializer serializer = null;
+		if (PRINT_TO_GPX_FILE != null) {
+			serializer = PlatformUtil.newSerializer();
+			try {
+				serializer.setOutput(new FileWriter(PRINT_TO_GPX_FILE));
+				serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+				// indentation as 3 spaces
+				// serializer.setProperty("http://xmlpull.org/v1/doc/properties.html#serializer-indentation", " ");
+				// // also set the line separator
+				// serializer.setProperty("http://xmlpull.org/v1/doc/properties.html#serializer-line-separator",
+				// "\n");
+				serializer.startDocument("UTF-8", true);
+				serializer.startTag("", "gpx");
+				serializer.attribute("", "version", "1.1");
+				serializer.attribute("", "xmlns", "http://www.topografix.com/GPX/1/1");
+				serializer.attribute("", "xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+				serializer.attribute("", "xmlns:schemaLocation",
+						"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
+				serializer.startTag("", "trk");
+				serializer.startTag("", "trkseg");
+			} catch (IOException e) {
+				e.printStackTrace();
+				serializer = null;
+			}
+		}
+				
+		double lastHeight = -180;		
+		for (RouteSegmentResult res : result) {
+			String name = res.getObject().getName();
+			String ref = res.getObject().getRef("", false, res.isForwardDirection());
+			if (name == null) {
+				name = "";
+			}
+			if (ref != null) {
+				name += " (" + ref + ") ";
+			}
+			StringBuilder additional = new StringBuilder();
+			additional.append("time = \"").append(((int)res.getSegmentTime()*100)/100.0f).append("\" ");
+			if (res.getRoutingTime() > 0) {
 //					additional.append("rspeed = \"")
 //							.append((int) Math.round(res.getDistance() / res.getRoutingTime() * 3.6)).append("\" ");
-					additional.append("rtime = \"")
-						.append(((int)res.getRoutingTime()*100)/100.0f).append("\" ");
-				}
-				
+				additional.append("rtime = \"")
+					.append(((int)res.getRoutingTime()*100)/100.0f).append("\" ");
+			}
+			
 //				additional.append("rtime = \"").append(res.getRoutingTime()).append("\" ");
-				additional.append("name = \"").append(name).append("\" ");
+			additional.append("name = \"").append(name).append("\" ");
 //				float ms = res.getSegmentSpeed();
-				float ms = res.getObject().getMaximumSpeed(res.isForwardDirection());
-				if(ms > 0) {
-					additional.append("maxspeed = \"").append((int) Math.round(ms * 3.6f)).append("\" ");
+			float ms = res.getObject().getMaximumSpeed(res.isForwardDirection());
+			if(ms > 0) {
+				additional.append("maxspeed = \"").append((int) Math.round(ms * 3.6f)).append("\" ");
+			}
+			additional.append("distance = \"").append(((int)res.getDistance()*100)/100.0f).append("\" ");
+			additional.append(res.getObject().getHighway()).append(" ");
+			if (res.getTurnType() != null) {
+				additional.append("turn = \"").append(res.getTurnType()).append("\" ");
+				additional.append("turn_angle = \"").append(res.getTurnType().getTurnAngle()).append("\" ");
+				if (res.getTurnType().getLanes() != null) {
+					additional.append("lanes = \"").append(Arrays.toString(res.getTurnType().getLanes())).append("\" ");
 				}
-				additional.append("distance = \"").append(((int)res.getDistance()*100)/100.0f).append("\" ");
-				additional.append(res.getObject().getHighway()).append(" ");
-				if (res.getTurnType() != null) {
-					additional.append("turn = \"").append(res.getTurnType()).append("\" ");
-					additional.append("turn_angle = \"").append(res.getTurnType().getTurnAngle()).append("\" ");
-					if (res.getTurnType().getLanes() != null) {
-						additional.append("lanes = \"").append(Arrays.toString(res.getTurnType().getLanes())).append("\" ");
-					}
-				}
-				additional.append("start_bearing = \"").append(res.getBearingBegin()).append("\" ");
-				additional.append("end_bearing = \"").append(res.getBearingEnd()).append("\" ");
-				additional.append("height = \"").append(Arrays.toString(res.getHeightValues())).append("\" ");
-				additional.append("description = \"").append(res.getDescription()).append("\" ");
-				println(MessageFormat.format("\t<segment id=\"{0}\" oid=\"{1}\" start=\"{2}\" end=\"{3}\" {4}/>",
-						(res.getObject().getId() >> (SHIFT_ID )) + "", res.getObject().getId() + "", 
-						res.getStartPointIndex() + "", res.getEndPointIndex() + "", additional.toString()));
-				int inc = res.getStartPointIndex() < res.getEndPointIndex() ? 1 : -1;
-				int indexnext = res.getStartPointIndex();
-				LatLon prev = null;
-				for (int index = res.getStartPointIndex() ; index != res.getEndPointIndex(); ) {
-					index = indexnext;
-					indexnext += inc; 
-					if (serializer != null) {
-						try {
-							LatLon l = res.getPoint(index);
-							serializer.startTag("","trkpt");
-							serializer.attribute("", "lat",  l.getLatitude() + "");
-							serializer.attribute("", "lon",  l.getLongitude() + "");
-							float[] vls = res.getObject().heightDistanceArray;
-							double dist = prev == null ? 0 : MapUtils.getDistance(prev, l);
-							if(index * 2 + 1 < vls.length) {
-								double h = vls[2*index + 1];
-								serializer.startTag("","ele");
-								serializer.text(h +"");
-								serializer.endTag("","ele");
-								if(lastHeight != -180 && dist > 0) {
-									serializer.startTag("","cmt");
-									serializer.text((float) ((h -lastHeight)/ dist*100) + "% " +
-									" degree " + (float) Math.atan(((h -lastHeight)/ dist)) / Math.PI * 180 +  
-									" asc " + (float) (h -lastHeight) + " dist "
-											+ (float) dist);
-									serializer.endTag("","cmt");
-									serializer.startTag("","slope");
-									serializer.text((h -lastHeight)/ dist*100 + "");
-									serializer.endTag("","slope");
-								}
-								serializer.startTag("","desc");
-								serializer.text((res.getObject().getId() >> (SHIFT_ID )) + " " + index);
-								serializer.endTag("","desc");
-								lastHeight = h;
-							} else if(lastHeight != -180){
+			}
+			additional.append("start_bearing = \"").append(res.getBearingBegin()).append("\" ");
+			additional.append("end_bearing = \"").append(res.getBearingEnd()).append("\" ");
+			additional.append("height = \"").append(Arrays.toString(res.getHeightValues())).append("\" ");
+			additional.append("description = \"").append(res.getDescription()).append("\" ");
+			println(MessageFormat.format("\t<segment id=\"{0}\" oid=\"{1}\" start=\"{2}\" end=\"{3}\" {4}/>",
+					(res.getObject().getId() >> (SHIFT_ID )) + "", res.getObject().getId() + "", 
+					res.getStartPointIndex() + "", res.getEndPointIndex() + "", additional.toString()));
+			int inc = res.getStartPointIndex() < res.getEndPointIndex() ? 1 : -1;
+			int indexnext = res.getStartPointIndex();
+			LatLon prev = null;
+			for (int index = res.getStartPointIndex() ; index != res.getEndPointIndex(); ) {
+				index = indexnext;
+				indexnext += inc; 
+				if (serializer != null) {
+					try {
+						LatLon l = res.getPoint(index);
+						serializer.startTag("","trkpt");
+						serializer.attribute("", "lat",  l.getLatitude() + "");
+						serializer.attribute("", "lon",  l.getLongitude() + "");
+						float[] vls = res.getObject().heightDistanceArray;
+						double dist = prev == null ? 0 : MapUtils.getDistance(prev, l);
+						if(index * 2 + 1 < vls.length) {
+							double h = vls[2*index + 1];
+							serializer.startTag("","ele");
+							serializer.text(h +"");
+							serializer.endTag("","ele");
+							if(lastHeight != -180 && dist > 0) {
+								serializer.startTag("","cmt");
+								serializer.text((float) ((h -lastHeight)/ dist*100) + "% " +
+								" degree " + (float) Math.atan(((h -lastHeight)/ dist)) / Math.PI * 180 +  
+								" asc " + (float) (h -lastHeight) + " dist "
+										+ (float) dist);
+								serializer.endTag("","cmt");
+								serializer.startTag("","slope");
+								serializer.text((h -lastHeight)/ dist*100 + "");
+								serializer.endTag("","slope");
+							}
+							serializer.startTag("","desc");
+							serializer.text((res.getObject().getId() >> (SHIFT_ID )) + " " + index);
+							serializer.endTag("","desc");
+							lastHeight = h;
+						} else if(lastHeight != -180){
 //								serializer.startTag("","ele");
 //								serializer.text(lastHeight +"");
 //								serializer.endTag("","ele");
-							}
-							serializer.endTag("", "trkpt");
-							prev = l;
-						} catch (IOException e) {
-							e.printStackTrace();
 						}
+						serializer.endTag("", "trkpt");
+						prev = l;
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
 				}
-				printAdditionalPointInfo(res);
 			}
-			if(serializer != null) {
-				try {
-					serializer.endTag("", "trkseg");
-					serializer.endTag("", "trk");
-					serializer.endTag("", "gpx");
-					serializer.endDocument();
-					serializer.flush();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			println("</test>");
-			// repeat to have infoprint
-			println(msg + "</test>");
+			printAdditionalPointInfo(res);
 		}
-		
-		
-		
-//		calculateStatistics(result);
+		if (serializer != null) {
+			try {
+				serializer.endTag("", "trkseg");
+				serializer.endTag("", "trk");
+				serializer.endTag("", "gpx");
+				serializer.endDocument();
+				serializer.flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	protected void calculateStatistics(List<RouteSegmentResult> result) {
@@ -748,7 +791,7 @@ public class RouteResultPreparation {
 		
 	}
 
-	private void printAdditionalPointInfo(RouteSegmentResult res) {
+	private static void printAdditionalPointInfo(RouteSegmentResult res) {
 		boolean plus = res.getStartPointIndex() < res.getEndPointIndex();
 		for(int k = res.getStartPointIndex(); k != res.getEndPointIndex(); ) {
 			int[] tp = res.getObject().getPointTypes(k);

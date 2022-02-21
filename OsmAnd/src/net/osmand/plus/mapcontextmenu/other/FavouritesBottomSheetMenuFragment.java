@@ -15,8 +15,8 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
-import net.osmand.plus.myplaces.FavouritesDbHelper.FavoritesListener;
+import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.FavouritesHelper.FavoritesListener;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -72,7 +72,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 			sortByDist = savedInstanceState.getInt(SORTED_BY_TYPE);
 		}
 		adapter = new FavouritesAdapter(getMyApplication(), favouritePoints);
-		FavouritesDbHelper helper = getMyApplication().getFavorites();
+		FavouritesHelper helper = getMyApplication().getFavoritesHelper();
 		if (helper.isFavoritesLoaded()) {
 			loadFavorites();
 		} else {
@@ -140,9 +140,9 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 
 	private void loadFavorites() {
 		favouritePoints.clear();
-		favouritePoints.addAll(getMyApplication().getFavorites().getVisibleFavouritePoints());
+		favouritePoints.addAll(getMyApplication().getFavoritesHelper().getVisibleFavouritePoints());
 		if (favouritePoints.isEmpty()) {
-			favouritePoints.addAll(getMyApplication().getFavorites().getFavouritePoints());
+			favouritePoints.addAll(getMyApplication().getFavoritesHelper().getFavouritePoints());
 		}
 	}
 
@@ -164,7 +164,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	private void selectFavorite(FavouritePoint point) {
 		OsmandApplication app = getMyApplication();
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-		FavouritesDbHelper favorites = app.getFavorites();
+		FavouritesHelper favorites = app.getFavoritesHelper();
 		LatLon ll = new LatLon(point.getLatitude(), point.getLongitude());
 		switch (pointType) {
 			case START:
@@ -232,7 +232,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		stopLocationUpdate();
 		setupMapRouteInfoMenuSpinners(getMapRouteInfoMenu());
 		if (favoritesListener != null) {
-			getMyApplication().getFavorites().removeListener(favoritesListener);
+			getMyApplication().getFavoritesHelper().removeListener(favoritesListener);
 			favoritesListener = null;
 		}
 	}

@@ -4290,4 +4290,9 @@
     <string name="poi_access_permit">Потребна је дозвола</string>
     <string name="poi_parcel_locker">Ормарић за пакете</string>
     <string name="poi_tiles">Продавница плочица</string>
+    <string name="poi_board_type_sight">Поглед</string>
+    <string name="poi_board_type_sport">Спорт</string>
+    <string name="poi_board_type_welcome_sign">Знак добродошлице</string>
+    <string name="poi_board_type_art">Уметност</string>
+    <string name="poi_board_type_planet_walk">Шетња по планети</string>
 </resources>

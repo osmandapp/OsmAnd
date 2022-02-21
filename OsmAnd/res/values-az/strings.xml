@@ -3238,4 +3238,6 @@
     <string name="quick_action_add_route_descr">Ekranın mərkəzindən marşrut başlatmaq üçün düymə.</string>
     <string name="please_provide_group_name_message">Zəhmət olmasa, qrup üçün ad daxil edin.</string>
     <string name="gpx_no_routes_title">Marşrut yoxdur</string>
+    <string name="default_appearance">Standart görünüş</string>
+    <string name="edit_category">Kateqoriyaya düzəliş et</string>
 </resources>

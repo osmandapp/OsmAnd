@@ -7,6 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+
 import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -14,10 +18,6 @@ import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.FlowLayout;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
 
 public class ShapesCard extends MapBaseCard {
 
@@ -42,6 +42,10 @@ public class ShapesCard extends MapBaseCard {
 	@NonNull
 	public BackgroundType getSelectedShape() {
 		return selectedShape;
+	}
+
+	public void updateSelectedShape(@NonNull BackgroundType shape) {
+		reselectShape(shape, true);
 	}
 
 	public void updateSelectedColor(@ColorInt int color) {

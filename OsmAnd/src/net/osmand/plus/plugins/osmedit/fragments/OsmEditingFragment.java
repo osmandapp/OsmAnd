@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.osmedit.fragments;
 
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
 import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
 
 import android.content.Intent;

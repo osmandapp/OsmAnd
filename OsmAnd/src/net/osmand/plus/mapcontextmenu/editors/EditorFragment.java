@@ -1,5 +1,8 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
+import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +20,16 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -40,19 +53,6 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
-import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
-import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 
 public abstract class EditorFragment extends BaseOsmAndFragment implements ColorPickerListener, CardListener {
 
@@ -152,6 +152,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 		AndroidUiHelper.updateVisibility(saveButton, true);
 		saveButton.setOnClickListener(v -> savePressed());
 		UiUtilities.setupDialogButton(nightMode, saveButton, UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_save);
+		AndroidUtils.setBackgroundColor(app, view.findViewById(R.id.buttons_container), ColorUtilities.getListBgColorId(nightMode));
 	}
 
 	protected void setupNameChangeListener() {
@@ -401,8 +402,8 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		if (requestCode == ExitBottomSheetDialogFragment.REQUEST_CODE){
-			if (resultCode == ExitBottomSheetDialogFragment.EXIT_RESULT_CODE){
+		if (requestCode == ExitBottomSheetDialogFragment.REQUEST_CODE) {
+			if (resultCode == ExitBottomSheetDialogFragment.EXIT_RESULT_CODE) {
 				exitEditing();
 			} else if (resultCode == ExitBottomSheetDialogFragment.SAVE_RESULT_CODE) {
 				savePressed();

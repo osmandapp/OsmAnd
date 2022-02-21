@@ -12,7 +12,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.utils.AndroidUtils;
@@ -43,17 +43,17 @@ public class CopyTrackGroupToFavoritesBottomSheet extends EditTrackGroupBottomSh
 	}
 
 	private void copyToFavorites() {
-		FavouritesDbHelper favouritesDbHelper = app.getFavorites();
+		FavouritesHelper favouritesHelper = app.getFavoritesHelper();
 		for (GpxDisplayItem item : group.getModifiableList()) {
 			if (item.locationStart != null) {
 				FavouritePoint fp = FavouritePoint.fromWpt(item.locationStart, app, groupName);
 				if (!Algorithms.isEmpty(item.description)) {
 					fp.setDescription(item.description);
 				}
-				favouritesDbHelper.addFavourite(fp, false);
+				favouritesHelper.addFavourite(fp, false);
 			}
 		}
-		favouritesDbHelper.saveCurrentPointsIntoFile();
+		favouritesHelper.saveCurrentPointsIntoFile();
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof OnGroupNameChangeListener) {
 			OnGroupNameChangeListener listener = (OnGroupNameChangeListener) fragment;

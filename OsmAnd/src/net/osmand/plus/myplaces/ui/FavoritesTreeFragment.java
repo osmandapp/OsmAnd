@@ -1,10 +1,10 @@
-package net.osmand.plus.myplaces;
+package net.osmand.plus.myplaces.ui;
 
 import static android.view.Gravity.CENTER;
 import static net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import static net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import static net.osmand.plus.myplaces.FavoritesActivity.FAV_TAB;
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.myplaces.ui.FavoritesActivity.FAV_TAB;
+import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -38,14 +38,16 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ActionMode;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.plus.myplaces.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.ShareFavoritesAsyncTask;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.myplaces.FavouritesDbHelper.FavoritesListener;
+import net.osmand.plus.myplaces.FavouritesHelper.FavoritesListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
@@ -85,7 +87,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	public static final String GROUP_EXPANDED_POSTFIX = "_group_expanded";
 
 	private OsmandApplication app;
-	private FavouritesDbHelper helper;
+	private FavouritesHelper helper;
 	private FavouritesAdapter favouritesAdapter;
 
 	private boolean selectionMode = false;
@@ -113,7 +115,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		this.app = (OsmandApplication) context.getApplicationContext();
 		favouritesAdapter = new FavouritesAdapter();
 
-		helper = app.getFavorites();
+		helper = app.getFavoritesHelper();
 		if (helper.isFavoritesLoaded()) {
 			favouritesAdapter.synchronizeGroups();
 		} else {
@@ -904,7 +906,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			name.setTextColor(getResources().getColor(visible ? enabledColor : disabledColor));
 			addressText.setText(model.isAddressSpecified() ? model.getAddress() : null);
 			int color = visible
-					? app.getFavorites().getColorWithCategory(model, getResources().getColor(R.color.color_favorite))
+					? app.getFavoritesHelper().getColorWithCategory(model, getResources().getColor(R.color.color_favorite))
 					: ContextCompat.getColor(app, disabledIconColor);
 			icon.setImageDrawable(PointImageDrawable.getFromFavorite(getActivity(), color, false, model));
 			int iconSize = (int) getResources().getDimension(R.dimen.favorites_my_places_icon_size);

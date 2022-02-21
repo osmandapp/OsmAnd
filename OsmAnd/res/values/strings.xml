@@ -19,6 +19,10 @@
     <string name="estimated_download_size">Estimated download size</string>
     <string name="number_of_tiles">Number of tiles</string>
     <string name="move_map_to_select_area">Move map to select needed area.</string>
+    <string name="edit_category">Edit category</string>
+    <string name="shared_string_shape">Shape</string>
+    <string name="default_appearance_desc">Default color, icon and shape will apply to the added favorite points into the group.</string>
+    <string name="default_appearance">Default appearance</string>
     <string name="location_source_descr">By default, OsmAnd installed from Google Play uses %1$s to determine location.\n\nIf you get inaccurate location information or using device without %2$s, try to switch to \"%3$s\"</string>
     <string name="location_source">Location source</string>
     <string name="select_suggested_points">Select suggested points</string>

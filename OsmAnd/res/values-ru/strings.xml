@@ -4523,7 +4523,7 @@
     <string name="gpx_no_routes_descr">Для сохранения маршрута в файл вы можете воспользоваться инструментом «%1$s».</string>
     <string name="please_provide_group_name_message">Укажите название группы.</string>
     <string name="quick_action_add_route_descr">Кнопка для начала построения маршрута из центра экрана.</string>
-    <string name="import_tracks_descr">%1$s содержит отдельные треки: %2$s шт. Выберите треки для импорта.</string>
+    <string name="import_tracks_descr">%1$s содержит отдельные треки (%2$s шт.). Выберите треки для импорта.</string>
     <string name="exit_import">Выйти\?</string>
     <string name="list_of_groups">Список групп</string>
     <string name="points_selection_descr">Закрыть и потерять все изменения\?</string>
@@ -4537,4 +4537,8 @@
     <string name="location_source_descr">По умолчанию OsmAnd, установленный из Google Play, использует %1$s для определения местоположения.
 \n
 \nЕсли вы получаете неточную информацию о местоположении или используете устройство без %2$s, попробуйте переключиться на «%3$s»</string>
+    <string name="shared_string_shape">Форма</string>
+    <string name="default_appearance_desc">К добавленным в группу избранным точкам будут применяться цвет, значок и форма по умолчанию.</string>
+    <string name="default_appearance">Внешний вид по умолчанию</string>
+    <string name="edit_category">Редактировать категорию</string>
 </resources>

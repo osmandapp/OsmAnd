@@ -1,4 +1,4 @@
-package net.osmand.plus.myplaces;
+package net.osmand.plus.myplaces.ui;
 
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_DELETED_KEY;
 

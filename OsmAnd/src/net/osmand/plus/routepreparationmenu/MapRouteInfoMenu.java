@@ -71,8 +71,8 @@ import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenuFragment;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
-import net.osmand.plus.myplaces.FavouritesDbHelper.FavoritesListener;
+import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.FavouritesHelper.FavoritesListener;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ConfigureAppModesBottomSheetDialogFragment;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidPTTypesRoutingParameter;
@@ -344,7 +344,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	private void choosePointTypeAction(LatLon latLon, PointType pointType, PointDescription pd, String address) {
 		OsmandApplication app = getApp();
-		FavouritesDbHelper favorites = app.getFavorites();
+		FavouritesHelper favorites = app.getFavoritesHelper();
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		switch (pointType) {
 			case START:
@@ -2335,7 +2335,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			currentMuteState = settings.VOICE_MUTE.getModeValue(mode);
 
 			routingHelper.addListener(this);
-			app.getFavorites().addListener(this);
+			app.getFavoritesHelper().addListener(this);
 			settings.VOICE_MUTE.addListener(voiceMuteChangeListener);
 			app.getTargetPointsHelper().addListener(onStateChangedListener);
 		}
@@ -2345,7 +2345,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		OsmandApplication app = getApp();
 		if (app != null) {
 			app.getRoutingHelper().removeListener(this);
-			app.getFavorites().removeListener(this);
+			app.getFavoritesHelper().removeListener(this);
 			app.getTargetPointsHelper().removeListener(onStateChangedListener);
 			app.getSettings().VOICE_MUTE.removeListener(voiceMuteChangeListener);
 		}

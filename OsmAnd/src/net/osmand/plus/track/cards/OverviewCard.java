@@ -33,7 +33,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.myplaces.SegmentActionsListener;
+import net.osmand.plus.myplaces.ui.SegmentActionsListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.track.GpxBlockStatisticsBuilder;
 import net.osmand.plus.track.fragments.GpxReadDescriptionDialogFragment;

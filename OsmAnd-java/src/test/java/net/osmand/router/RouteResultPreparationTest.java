@@ -81,7 +81,8 @@ public class RouteResultPreparationTest {
             boolean old = NativeLibrary.loadOldLib(getNativeLibPath());
             nativeLibrary = new NativeLibrary();
             if (!old) {
-                throw new UnsupportedOperationException("Not supported");
+                //throw new UnsupportedOperationException("Not supported");
+                useNative = false;
             }
         }
         
