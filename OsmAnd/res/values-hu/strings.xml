@@ -3153,8 +3153,8 @@
     <string name="lang_oc">okcitán</string>
     <string name="app_mode_pickup_truck">Kisteherautó</string>
     <string name="day">nappal</string>
-    <string name="days_2_4">napra</string>
-    <string name="days_5">napra</string>
+    <string name="days_2_4">Napok</string>
+    <string name="days_5">Napok</string>
     <string name="week">hétre</string>
     <string name="weeks_2_4">hétre</string>
     <string name="weeks_5">hétre</string>
