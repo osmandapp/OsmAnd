@@ -10,6 +10,7 @@ import android.view.View;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 
@@ -81,7 +82,7 @@ public class AndroidUiHelper {
         return orientation;
     }
     
-    public static boolean updateVisibility(View view, boolean visible) {
+    public static boolean updateVisibility(@Nullable View view, boolean visible) {
 		if (view != null && visible != (view.getVisibility() == View.VISIBLE)) {
 			if (visible) {
 				view.setVisibility(View.VISIBLE);
