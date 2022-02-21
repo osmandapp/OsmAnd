@@ -380,7 +380,8 @@ public class OsmandSettings {
 
 	private boolean prefCanBeCopiedOrReset(OsmandPreference pref) {
 		return pref instanceof CommonPreference && !((CommonPreference) pref).isGlobal()
-				&& !APP_MODE_ORDER.getId().equals(pref.getId());
+				&& !APP_MODE_ORDER.getId().equals(pref.getId())
+				&& !APP_MODE_VERSION.getId().equals(pref.getId());
 	}
 
 	public ApplicationMode LAST_ROUTING_APPLICATION_MODE = null;
@@ -1113,6 +1114,7 @@ public class OsmandSettings {
 	}
 
 	public final CommonPreference<Integer> APP_MODE_ORDER = new IntPreference(this, "app_mode_order", 0).makeProfile().cache();
+	public final CommonPreference<Integer> APP_MODE_VERSION = new IntPreference(this, "app_mode_version", 0).makeProfile().cache();
 
 	public final OsmandPreference<Float> SWITCH_MAP_DIRECTION_TO_COMPASS_KMH =
 			new FloatPreference(this, "speed_for_map_to_direction_of_movement", 0f).makeProfile();

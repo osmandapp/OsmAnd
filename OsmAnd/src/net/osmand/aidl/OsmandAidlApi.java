@@ -59,7 +59,9 @@ import net.osmand.aidl.navigation.OnVoiceNavigationParams;
 import net.osmand.aidl.quickaction.QuickActionInfoParams;
 import net.osmand.aidl.tiles.ASqliteDbFile;
 import net.osmand.aidlapi.customization.AProfile;
+import net.osmand.aidlapi.exit.ExitAppParams;
 import net.osmand.aidlapi.info.AppInfoParams;
+import net.osmand.aidlapi.info.GetTextParams;
 import net.osmand.aidlapi.map.ALatLon;
 import net.osmand.aidlapi.map.ALocation;
 import net.osmand.aidlapi.navigation.ABlockedRoad;
@@ -77,6 +79,8 @@ import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.activities.MapActivity;
@@ -205,6 +209,8 @@ public class OsmandAidlApi {
 	private static final String AIDL_EXECUTE_QUICK_ACTION = "aidl_execute_quick_action";
 	private static final String AIDL_QUICK_ACTION_NUMBER = "aidl_quick_action_number";
 	private static final String AIDL_LOCK_STATE = "lock_state";
+	private static final String AIDL_EXIT_APP = "exit_app";
+	private static final String AIDL_EXIT_APP_RESTART = "exit_app_restart";
 
 	private static final ApplicationMode DEFAULT_PROFILE = ApplicationMode.CAR;
 
@@ -226,12 +232,12 @@ public class OsmandAidlApi {
 
 	private boolean mapActivityActive = false;
 
-	public OsmandAidlApi(OsmandApplication app) {
+	public OsmandAidlApi(@NonNull OsmandApplication app) {
 		this.app = app;
 		loadConnectedApps();
 	}
 
-	public void onCreateMapActivity(MapActivity mapActivity) {
+	public void onCreateMapActivity(@NonNull MapActivity mapActivity) {
 		mapActivityActive = true;
 		registerRefreshMapReceiver(mapActivity);
 		registerSetMapLocationReceiver(mapActivity);
@@ -257,6 +263,7 @@ public class OsmandAidlApi {
 		registerExecuteQuickActionReceiver(mapActivity);
 		registerLockStateReceiver(mapActivity);
 		registerSetLocationReceiver(mapActivity);
+		registerExitAppReceiver(mapActivity);
 		initOsmandTelegram();
 		app.getAppCustomization().addListener(mapActivity);
 		this.mapActivity = mapActivity;
@@ -296,7 +303,7 @@ public class OsmandAidlApi {
 		}
 	}
 
-	private void registerRefreshMapReceiver(MapActivity mapActivity) {
+	private void registerRefreshMapReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver refreshMapReceiver = new BroadcastReceiver() {
 			@Override
@@ -310,7 +317,7 @@ public class OsmandAidlApi {
 		registerReceiver(refreshMapReceiver, mapActivity, AIDL_REFRESH_MAP);
 	}
 
-	private void registerSetMapLocationReceiver(MapActivity mapActivity) {
+	private void registerSetMapLocationReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver setMapLocationReceiver = new BroadcastReceiver() {
 			@Override
@@ -347,7 +354,7 @@ public class OsmandAidlApi {
 		registerReceiver(setMapLocationReceiver, mapActivity, AIDL_SET_MAP_LOCATION);
 	}
 
-	private void registerAddMapWidgetReceiver(MapActivity mapActivity) {
+	private void registerAddMapWidgetReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver addMapWidgetReceiver = new BroadcastReceiver() {
 			@Override
@@ -384,7 +391,7 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	private void registerAddContextMenuButtonsReceiver(MapActivity mapActivity) {
+	private void registerAddContextMenuButtonsReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver addContextMenuButtonsParamsReceiver = new BroadcastReceiver() {
 			@Override
@@ -414,7 +421,7 @@ public class OsmandAidlApi {
 		}
 	}
 
-	private void registerRemoveMapWidgetReceiver(MapActivity mapActivity) {
+	private void registerRemoveMapWidgetReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver removeMapWidgetReceiver = new BroadcastReceiver() {
 			@Override
@@ -445,7 +452,7 @@ public class OsmandAidlApi {
 		}
 	}
 
-	private void registerAddMapLayerReceiver(MapActivity mapActivity) {
+	private void registerAddMapLayerReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver addMapLayerReceiver = new BroadcastReceiver() {
 			@Override
@@ -473,7 +480,7 @@ public class OsmandAidlApi {
 		registerReceiver(addMapLayerReceiver, mapActivity, AIDL_ADD_MAP_LAYER);
 	}
 
-	private void registerRemoveMapLayerReceiver(MapActivity mapActivity) {
+	private void registerRemoveMapLayerReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver removeMapLayerReceiver = new BroadcastReceiver() {
 			@Override
@@ -496,7 +503,7 @@ public class OsmandAidlApi {
 		registerReceiver(removeMapLayerReceiver, mapActivity, AIDL_REMOVE_MAP_LAYER);
 	}
 
-	private void registerTakePhotoNoteReceiver(MapActivity mapActivity) {
+	private void registerTakePhotoNoteReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver takePhotoNoteReceiver = new BroadcastReceiver() {
 			@Override
@@ -513,7 +520,7 @@ public class OsmandAidlApi {
 		registerReceiver(takePhotoNoteReceiver, mapActivity, AIDL_TAKE_PHOTO_NOTE);
 	}
 
-	private void registerStartVideoRecordingReceiver(MapActivity mapActivity) {
+	private void registerStartVideoRecordingReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver startVideoRecordingReceiver = new BroadcastReceiver() {
 			@Override
@@ -530,7 +537,7 @@ public class OsmandAidlApi {
 		registerReceiver(startVideoRecordingReceiver, mapActivity, AIDL_START_VIDEO_RECORDING);
 	}
 
-	private void registerStartAudioRecordingReceiver(MapActivity mapActivity) {
+	private void registerStartAudioRecordingReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver startAudioRecordingReceiver = new BroadcastReceiver() {
 			@Override
@@ -547,7 +554,7 @@ public class OsmandAidlApi {
 		registerReceiver(startAudioRecordingReceiver, mapActivity, AIDL_START_AUDIO_RECORDING);
 	}
 
-	private void registerStopRecordingReceiver(MapActivity mapActivity) {
+	private void registerStopRecordingReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver stopRecordingReceiver = new BroadcastReceiver() {
 			@Override
@@ -562,7 +569,7 @@ public class OsmandAidlApi {
 		registerReceiver(stopRecordingReceiver, mapActivity, AIDL_STOP_RECORDING);
 	}
 
-	private void registerNavigateReceiver(MapActivity mapActivity) {
+	private void registerNavigateReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver navigateReceiver = new BroadcastReceiver() {
 			@Override
@@ -623,7 +630,7 @@ public class OsmandAidlApi {
 		registerReceiver(navigateReceiver, mapActivity, AIDL_NAVIGATE);
 	}
 
-	private void registerNavigateSearchReceiver(MapActivity mapActivity) {
+	private void registerNavigateSearchReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver navigateSearchReceiver = new BroadcastReceiver() {
 			@Override
@@ -689,7 +696,7 @@ public class OsmandAidlApi {
 		registerReceiver(navigateSearchReceiver, mapActivity, AIDL_NAVIGATE_SEARCH);
 	}
 
-	private void registerNavigateGpxReceiver(MapActivity mapActivity) {
+	private void registerNavigateGpxReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver navigateGpxReceiver = new BroadcastReceiver() {
 			@Override
@@ -731,7 +738,7 @@ public class OsmandAidlApi {
 		registerReceiver(navigateGpxReceiver, mapActivity, AIDL_NAVIGATE_GPX);
 	}
 
-	private void registerPauseNavigationReceiver(MapActivity mapActivity) {
+	private void registerPauseNavigationReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver pauseNavigationReceiver = new BroadcastReceiver() {
 			@Override
@@ -750,7 +757,7 @@ public class OsmandAidlApi {
 		registerReceiver(pauseNavigationReceiver, mapActivity, AIDL_PAUSE_NAVIGATION);
 	}
 
-	private void registerResumeNavigationReceiver(MapActivity mapActivity) {
+	private void registerResumeNavigationReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver resumeNavigationReceiver = new BroadcastReceiver() {
 			@Override
@@ -768,7 +775,7 @@ public class OsmandAidlApi {
 		registerReceiver(resumeNavigationReceiver, mapActivity, AIDL_RESUME_NAVIGATION);
 	}
 
-	private void registerStopNavigationReceiver(MapActivity mapActivity) {
+	private void registerStopNavigationReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver stopNavigationReceiver = new BroadcastReceiver() {
 			@Override
@@ -785,7 +792,7 @@ public class OsmandAidlApi {
 		registerReceiver(stopNavigationReceiver, mapActivity, AIDL_STOP_NAVIGATION);
 	}
 
-	private void registerMuteNavigationReceiver(MapActivity mapActivity) {
+	private void registerMuteNavigationReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver muteNavigationReceiver = new BroadcastReceiver() {
 			@Override
@@ -799,7 +806,7 @@ public class OsmandAidlApi {
 		registerReceiver(muteNavigationReceiver, mapActivity, AIDL_MUTE_NAVIGATION);
 	}
 
-	private void registerUnmuteNavigationReceiver(MapActivity mapActivity) {
+	private void registerUnmuteNavigationReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver unmuteNavigationReceiver = new BroadcastReceiver() {
 			@Override
@@ -813,7 +820,7 @@ public class OsmandAidlApi {
 		registerReceiver(unmuteNavigationReceiver, mapActivity, AIDL_UNMUTE_NAVIGATION);
 	}
 
-	private void registerShowSqliteDbFileReceiver(MapActivity mapActivity) {
+	private void registerShowSqliteDbFileReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver showSqliteDbFileReceiver = new BroadcastReceiver() {
 			@Override
@@ -836,7 +843,7 @@ public class OsmandAidlApi {
 		registerReceiver(showSqliteDbFileReceiver, mapActivity, AIDL_SHOW_SQLITEDB_FILE);
 	}
 
-	private void registerHideSqliteDbFileReceiver(MapActivity mapActivity) {
+	private void registerHideSqliteDbFileReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver hideSqliteDbFileReceiver = new BroadcastReceiver() {
 			@Override
@@ -859,7 +866,7 @@ public class OsmandAidlApi {
 		registerReceiver(hideSqliteDbFileReceiver, mapActivity, AIDL_HIDE_SQLITEDB_FILE);
 	}
 
-	private void registerExecuteQuickActionReceiver(MapActivity mapActivity) {
+	private void registerExecuteQuickActionReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver executeQuickActionReceiver = new BroadcastReceiver() {
 			@Override
@@ -877,7 +884,7 @@ public class OsmandAidlApi {
 		registerReceiver(executeQuickActionReceiver, mapActivity, AIDL_EXECUTE_QUICK_ACTION);
 	}
 
-	private void registerLockStateReceiver(MapActivity mapActivity) {
+	private void registerLockStateReceiver(@NonNull MapActivity mapActivity) {
 		BroadcastReceiver lockStateReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
@@ -893,7 +900,7 @@ public class OsmandAidlApi {
 		registerReceiver(lockStateReceiver, mapActivity, AIDL_LOCK_STATE);
 	}
 
-	private void registerSetLocationReceiver(MapActivity mapActivity) {
+	private void registerSetLocationReceiver(@NonNull MapActivity mapActivity) {
 		BroadcastReceiver setLocationReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
@@ -927,6 +934,22 @@ public class OsmandAidlApi {
 			}
 		};
 		registerReceiver(setLocationReceiver, mapActivity, AIDL_SET_LOCATION);
+	}
+
+	private void registerExitAppReceiver(@NonNull MapActivity mapActivity) {
+		BroadcastReceiver exitAppReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				boolean restart = intent.getBooleanExtra(AIDL_EXIT_APP_RESTART, false);
+				if (restart) {
+					MapActivity.doRestart(mapActivity);
+				} else {
+					mapActivity.finishAndRemoveTask();
+					android.os.Process.killProcess(android.os.Process.myPid());
+				}
+			}
+		};
+		registerReceiver(exitAppReceiver, mapActivity, AIDL_EXIT_APP);
 	}
 
 	public void registerMapLayers(@NonNull Context context) {
@@ -1691,8 +1714,8 @@ public class OsmandAidlApi {
 	}
 
 	boolean navigate(String startName, double startLat, double startLon,
-					 String destName, double destLat, double destLon,
-					 String profile, boolean force, boolean requestLocationPermission) {
+	                 String destName, double destLat, double destLon,
+	                 String profile, boolean force, boolean requestLocationPermission) {
 		Intent intent = new Intent();
 		intent.setAction(AIDL_NAVIGATE);
 		intent.putExtra(AIDL_START_NAME, startName);
@@ -1709,8 +1732,8 @@ public class OsmandAidlApi {
 	}
 
 	boolean navigateSearch(String startName, double startLat, double startLon,
-						   String searchQuery, double searchLat, double searchLon,
-						   String profile, boolean force, boolean requestLocationPermission) {
+	                       String searchQuery, double searchLat, double searchLon,
+	                       String profile, boolean force, boolean requestLocationPermission) {
 		Intent intent = new Intent();
 		intent.setAction(AIDL_NAVIGATE_SEARCH);
 		intent.putExtra(AIDL_START_NAME, startName);
@@ -1814,12 +1837,16 @@ public class OsmandAidlApi {
 			turnInfo = ExternalApiHelper.getRouteDirectionsInfo(app);
 		}
 		AppInfoParams params = new AppInfoParams(lastKnownLocation, mapLocation, turnInfo, leftTime, leftDistance, arrivalTime, mapVisible);
+		params.setVersionsInfo(ExternalApiHelper.getPluginAndProfileVersions());
 		params.setDestinationLocation(destinationLocation);
+		params.setOsmAndVersion(Version.getFullVersion(app));
+		String releaseDate = app.getString(R.string.app_edition);
+		params.setReleaseDate(releaseDate.isEmpty() ? null : releaseDate);
 		return params;
 	}
 
 	boolean search(final String searchQuery, final int searchType, final double latitude, final double longitude,
-				   final int radiusLevel, final int totalLimit, final SearchCompleteCallback callback) {
+	               final int radiusLevel, final int totalLimit, final SearchCompleteCallback callback) {
 		if (Algorithms.isEmpty(searchQuery) || latitude == 0 || longitude == 0 || callback == null) {
 			return false;
 		}
@@ -2190,7 +2217,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean getBitmapForGpx(final Uri gpxUri, final float density, final int widthPixels,
-							final int heightPixels, final int color, final GpxBitmapCreatedCallback callback) {
+	                        final int heightPixels, final int color, final GpxBitmapCreatedCallback callback) {
 		if (gpxUri == null || callback == null) {
 			return false;
 		}
@@ -2263,7 +2290,7 @@ public class OsmandAidlApi {
 	}
 
 	public boolean importProfileV2(final Uri profileUri, List<String> settingsTypeKeys, boolean replace,
-								   boolean silent, String latestChanges, int version) {
+	                               boolean silent, String latestChanges, int version) {
 		if (profileUri != null) {
 			Bundle bundle = new Bundle();
 			bundle.putStringArrayList(SettingsHelper.SETTINGS_TYPE_LIST_KEY, new ArrayList<>(settingsTypeKeys));
@@ -2385,6 +2412,7 @@ public class OsmandAidlApi {
 			AProfile aProfile = new AProfile(bean.stringKey, bean.userProfileName, bean.parent, bean.iconName,
 					bean.iconColor.name(), bean.routingProfile, bean.routeService.name(), bean.locIcon.name(),
 					bean.navIcon.name(), bean.order);
+			aProfile.setVersion(bean.version);
 
 			profiles.add(aProfile);
 		}
@@ -2417,6 +2445,25 @@ public class OsmandAidlApi {
 		intent.putExtra(AIDL_PACKAGE_NAME, packName);
 		intent.putExtra(AIDL_TIME_TO_NOT_USE_OTHER_GPS, timeToNotUseOtherGPS);
 		app.sendBroadcast(intent);
+		return true;
+	}
+
+	public boolean exitApp(ExitAppParams params) {
+		Intent intent = new Intent();
+		intent.setAction(AIDL_EXIT_APP);
+		intent.putExtra(AIDL_EXIT_APP_RESTART, params.shouldRestart());
+		app.sendBroadcast(intent);
+		return true;
+	}
+
+	public boolean getText(GetTextParams params) {
+		Context context = app.getLocaleHelper().getLocalizedContext(params.getLocale());
+		params.setValue(AndroidUtils.getStringByProperty(context, params.getKey()));
+		return true;
+	}
+
+	public boolean reloadIndexes() {
+		app.getResourceManager().reloadIndexesAsync(null, null);
 		return true;
 	}
 
