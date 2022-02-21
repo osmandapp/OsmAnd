@@ -374,6 +374,18 @@ public class ContextMenuAdapter {
 				});
 				return convertView;
 			}
+			if (layoutId == R.layout.main_menu_drawer_osmand_version) {
+				TextView osmandVersionText = convertView.findViewById(R.id.osmand_version);
+				osmandVersionText.setText(item.getTitle());
+
+				String releaseDate = item.getDescription();
+				if (!Algorithms.isEmpty(releaseDate)) {
+					TextView releaseDateText = convertView.findViewById(R.id.release_date);
+					releaseDateText.setText(releaseDate);
+					AndroidUiHelper.updateVisibility(releaseDateText, true);
+				}
+				return convertView;
+			}
 
 			TextView tv = (TextView) convertView.findViewById(R.id.title);
 			if (tv != null) {
