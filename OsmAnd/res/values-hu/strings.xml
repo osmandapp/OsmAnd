@@ -3037,7 +3037,7 @@
     <string name="voice_announces_descr">Navigációs utasítások és bemondások</string>
     <string name="voice_announces">Hangutasítások</string>
     <string name="screen_alerts">Képernyő riasztások</string>
-    <string name="route_parameters_descr">Útvonaljelző-csík kinézetének testreszabása</string>
+    <string name="route_parameters_descr">Útvonal paraméterek testreszabása</string>
     <string name="route_parameters">Útvonal paraméterei</string>
     <string name="plugins_settings">Bővítménybeállítások</string>
     <string name="download_detailed_map">Töltse le a részletes %s térképet a terület megtekintéséhez.</string>
