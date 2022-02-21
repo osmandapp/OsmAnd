@@ -1174,7 +1174,7 @@
     <string name="share_route_subject">OsmAnd segítségével megosztott útvonal</string>
     <string name="arrival_distance">Érkezés bemondása</string>
     <string name="arrival_distance_descr">Milyen korán szeretné hallani az érkezés bemondását\?</string>
-    <string name="keep_informing_never">Csak kérésre (koppintás a nyílra)</string>
+    <string name="keep_informing_never">Csak manuálisan (koppintson a nyílra)</string>
     <string name="keep_informing_descr">Navigációs utasítások újra bemondása rendszeres időközönként.</string>
     <string name="keep_informing">Navigációs utasítások ismétlése</string>
     <string name="navigation_intent_invalid">Érvénytelen formátum: %s</string>
