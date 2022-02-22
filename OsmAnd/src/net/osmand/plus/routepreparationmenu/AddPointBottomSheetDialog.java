@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
-import net.osmand.data.FavouritePoint.BackgroundType;
+import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.utils.ColorUtilities;

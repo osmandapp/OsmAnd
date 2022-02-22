@@ -22,14 +22,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
-import net.osmand.data.FavouritePoint.BackgroundType;
+import net.osmand.data.BackgroundType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -62,6 +61,7 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 	private EditText descriptionEdit;
 	private EditText addressEdit;
 
+	protected int defaultColor;
 	protected boolean skipConfirmationDialog;
 
 	@Override
@@ -332,17 +332,6 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 		return getCategoryInitValue();
 	}
 
-	@Nullable
-	protected AddNewFavoriteCategoryBottomSheet createAddCategoryDialog() {
-		PointEditor editor = getEditor();
-		if (editor != null) {
-			return AddNewFavoriteCategoryBottomSheet.createInstance(editor.getFragmentTag(), getCategories(),
-					!editor.getFragmentTag().equals(FavoritePointEditor.TAG));
-		} else {
-			return null;
-		}
-	}
-
 	@Override
 	public void onDestroyView() {
 		PointEditor editor = getEditor();
@@ -514,10 +503,10 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 		public void onBindViewHolder(@NonNull final GroupsViewHolder holder, int position) {
 			if (position == items.size()) {
 				holder.groupButton.setOnClickListener(view -> {
-					FragmentManager fragmentManager = getFragmentManager();
-					DialogFragment dialogFragment = createAddCategoryDialog();
-					if (fragmentManager != null && dialogFragment != null) {
-						dialogFragment.show(fragmentManager, AddNewFavoriteCategoryBottomSheet.TAG);
+					PointEditor editor = getEditor();
+					FragmentActivity activity = getActivity();
+					if (activity != null && editor != null) {
+						AddNewFavoriteCategoryBottomSheet.showInstance(activity.getSupportFragmentManager(), editor.getFragmentTag(), null);
 					}
 				});
 			} else {

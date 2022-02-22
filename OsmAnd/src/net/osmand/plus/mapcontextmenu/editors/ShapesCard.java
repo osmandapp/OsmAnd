@@ -11,7 +11,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
-import net.osmand.data.FavouritePoint.BackgroundType;
+import net.osmand.data.BackgroundType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;

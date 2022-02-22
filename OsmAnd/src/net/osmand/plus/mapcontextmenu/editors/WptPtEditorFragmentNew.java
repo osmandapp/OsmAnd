@@ -14,12 +14,14 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.PointsCategory;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.data.FavouritePoint.BackgroundType;
+import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.OsmandApplication;
@@ -41,7 +43,6 @@ import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -58,12 +59,11 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 
 	private boolean saved;
 	private int color;
-	private int defaultColor;
 	private String iconName;
 	@NonNull
 	private String backgroundTypeName = DEFAULT_BACKGROUND_TYPE.getTypeName();
 
-	private Map<String, Integer> categoriesMap;
+	private Map<String, PointsCategory> categoriesMap;
 	private OsmandApplication app;
 
 	@Override
@@ -75,7 +75,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 			savingTrackHelper = app.getSavingTrackHelper();
 			selectedGpxHelper = app.getSelectedGpxHelper();
 			assignEditor();
-			defaultColor = getResources().getColor(R.color.gpx_color_point);
+			defaultColor = ContextCompat.getColor(app, R.color.gpx_color_point);
 		}
 	}
 
@@ -95,7 +95,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 			this.wpt = wpt;
 			color = wpt.getColor(0);
 			iconName = getInitialIconName(wpt);
-			categoriesMap = editor.getColoredWaypointCategories();
+			categoriesMap = editor.getPointsCategories();
 			backgroundTypeName = wpt.getBackgroundType();
 		}
 	}
@@ -208,7 +208,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 				doUpdateWpt(name, category, description);
 			}
 
-			if (!Algorithms.isEmpty(wpt.getIconName())) {
+			if (wpt != null && !Algorithms.isEmpty(wpt.getIconName())) {
 				addLastUsedIcon(wpt.getIconName());
 			}
 
@@ -259,8 +259,8 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 			if (categoriesMap == null) {
 				categoryColor = 0;
 			} else {
-				Integer color = categoriesMap.get(category);
-				categoryColor = color != null ? color : 0;
+				PointsCategory group = categoriesMap.get(category);
+				categoryColor = group != null ? group.getColor() : 0;
 			}
 
 			editor.getOnWaypointTemplateAddedListener().onAddWaypointTemplate(wpt, categoryColor);
@@ -480,9 +480,9 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	@ColorInt
 	public int getCategoryColor(String category) {
 		if (categoriesMap != null) {
-			Integer color = categoriesMap.get(category);
-			if (color != null) {
-				return color;
+			PointsCategory group = categoriesMap.get(category);
+			if (group != null && group.getColor() != 0) {
+				return group.getColor();
 			}
 		}
 		return defaultColor;
@@ -492,9 +492,10 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	public int getCategoryPointsCount(String category) {
 		WptPtEditor editor = getWptPtEditor();
 		if (editor != null) {
-			List<WptPt> points = editor.getGpxFile() == null ? null : editor.getGpxFile().getPointsByCategories().get(category);
-			if (points != null) {
-				return points.size();
+			GPXFile gpxFile = editor.getGpxFile();
+			if (gpxFile != null) {
+				PointsCategory pointsCategory = gpxFile.getPointsCategories().get(category);
+				return pointsCategory != null ? pointsCategory.points.size() : 0;
 			}
 		}
 		return 0;

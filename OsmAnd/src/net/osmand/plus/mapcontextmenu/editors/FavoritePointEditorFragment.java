@@ -21,7 +21,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.FavouritePoint;
-import net.osmand.data.FavouritePoint.BackgroundType;
+import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -54,7 +54,6 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 	private FavouritesHelper helper;
 
 	private boolean saved;
-	private int defaultColor;
 
 	@Override
 	public void onAttach(@NonNull Context context) {

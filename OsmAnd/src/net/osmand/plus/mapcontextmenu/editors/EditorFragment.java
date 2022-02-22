@@ -33,7 +33,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.textfield.TextInputLayout;
 
-import net.osmand.data.FavouritePoint.BackgroundType;
+import net.osmand.data.BackgroundType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -92,8 +92,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 		Context context = requireContext();
-		view = UiUtilities.getInflater(context, nightMode)
-				.inflate(getLayoutId(), container, false);
+		view = UiUtilities.getInflater(context, nightMode).inflate(getLayoutId(), container, false);
 		AndroidUtils.addStatusBarPadding21v(context, view);
 
 		setupToolbar();

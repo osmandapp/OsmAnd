@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.PointsCategory;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.plus.myplaces.FavoriteGroup;
@@ -85,13 +86,16 @@ public class WptPtEditor extends PointEditor {
 	}
 
 	@NonNull
-	public Map<String, Integer> getColoredWaypointCategories() {
+	public Map<String, PointsCategory> getPointsCategories() {
 		if (gpxFile != null) {
-			return gpxFile.getWaypointCategoriesWithColors(false);
+			return gpxFile.getPointsCategories();
 		}
 		if (isProcessingTemplate() && !Algorithms.isEmpty(wpt.category) && categoryColor != 0) {
-			Map<String, Integer> predefinedCategory = new HashMap<>();
-			predefinedCategory.put(wpt.category, categoryColor);
+			PointsCategory category = new PointsCategory(wpt.category, categoryColor,
+					wpt.getIconNameOrDefault(), wpt.getBackgroundType());
+
+			Map<String, PointsCategory> predefinedCategory = new HashMap<>();
+			predefinedCategory.put(wpt.category, category);
 			return predefinedCategory;
 		}
 		return new HashMap<>();

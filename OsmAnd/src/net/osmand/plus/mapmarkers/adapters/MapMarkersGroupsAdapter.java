@@ -205,7 +205,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 					}
 				}
 				if (Algorithms.isEmpty(group.getWptCategories())) {
-					helper.updateGroupWptCategories(group, getGpxFile(group.getGpxPath(app)).getPointsByCategories().keySet());
+					helper.updateGroupWptCategories(group, getGpxFile(group.getGpxPath(app)).getPointsCategories().keySet());
 				}
 				populateAdapterWithGroupMarkers(group, getItemCount());
 			}

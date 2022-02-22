@@ -49,7 +49,7 @@ import net.osmand.core.jni.QStringStringHash;
 import net.osmand.core.jni.Utilities;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
-import net.osmand.data.FavouritePoint.BackgroundType;
+import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;

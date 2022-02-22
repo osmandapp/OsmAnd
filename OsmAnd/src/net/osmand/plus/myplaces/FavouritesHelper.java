@@ -122,7 +122,7 @@ public class FavouritesHelper {
 		boolean changed = merge(extPoints, points);
 
 		for (FavouritePoint pns : points.values()) {
-			FavoriteGroup group = getOrCreateGroup(pns, 0);
+			FavoriteGroup group = getOrCreateGroup(pns);
 			group.getPoints().add(pns);
 		}
 		sortAll();
@@ -147,7 +147,7 @@ public class FavouritesHelper {
 			if (fp.getIconIdOrDefault() == FavouritePoint.DEFAULT_UI_ICON_ID) {
 				fp.setIconId(0);
 			}
-			FavoriteGroup group = getOrCreateGroup(fp, 0);
+			FavoriteGroup group = getOrCreateGroup(fp);
 			group.getPoints().add(fp);
 		}
 		sortAll();
@@ -327,7 +327,7 @@ public class FavouritesHelper {
 			lookupAddress(p);
 		}
 		app.getSettings().SHOW_FAVORITES.set(true);
-		FavoriteGroup group = getOrCreateGroup(p, 0);
+		FavoriteGroup group = getOrCreateGroup(p);
 
 		if (!p.getName().isEmpty()) {
 			p.setVisible(group.isVisible());
@@ -393,7 +393,7 @@ public class FavouritesHelper {
 			if (old != null) {
 				old.getPoints().remove(p);
 			}
-			FavoriteGroup pg = getOrCreateGroup(p, 0);
+			FavoriteGroup pg = getOrCreateGroup(p);
 			p.setVisible(pg.isVisible());
 			if (SpecialPointType.PARKING == p.getSpecialPointType()) {
 				p.setColor(ContextCompat.getColor(app, R.color.parking_icon_background));
@@ -406,14 +406,14 @@ public class FavouritesHelper {
 		}
 		sortAll();
 		saveCurrentPointsIntoFile();
-		runSyncWithMarkers(getOrCreateGroup(p, 0));
+		runSyncWithMarkers(getOrCreateGroup(p));
 		return true;
 	}
 
 	private void editAddressDescription(@NonNull FavouritePoint p, @Nullable String address) {
 		p.setAddress(address);
 		saveCurrentPointsIntoFile();
-		runSyncWithMarkers(getOrCreateGroup(p, 0));
+		runSyncWithMarkers(getOrCreateGroup(p));
 	}
 
 	public boolean editFavourite(@NonNull FavouritePoint p, double lat, double lon) {
@@ -425,7 +425,7 @@ public class FavouritesHelper {
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile();
 		}
-		FavoriteGroup group = getOrCreateGroup(point, 0);
+		FavoriteGroup group = getOrCreateGroup(point);
 		runSyncWithMarkers(group);
 		return true;
 	}
@@ -439,7 +439,7 @@ public class FavouritesHelper {
 			p.setDescription(description);
 		}
 		saveCurrentPointsIntoFile();
-		runSyncWithMarkers(getOrCreateGroup(p, 0));
+		runSyncWithMarkers(getOrCreateGroup(p));
 		return true;
 	}
 
@@ -636,7 +636,7 @@ public class FavouritesHelper {
 		saveCurrentPointsIntoFile();
 	}
 
-	private FavoriteGroup getOrCreateGroup(FavouritePoint p, int defColor) {
+	private FavoriteGroup getOrCreateGroup(FavouritePoint p) {
 		if (flatGroups.containsKey(p.getCategory())) {
 			return flatGroups.get(p.getCategory());
 		}
@@ -647,9 +647,7 @@ public class FavouritesHelper {
 
 		flatGroups.put(group.getName(), group);
 		favoriteGroups.add(group);
-		if (group.getColor() == 0) {
-			group.setColor(defColor);
-		}
+
 		return group;
 	}
 }

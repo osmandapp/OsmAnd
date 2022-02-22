@@ -1,5 +1,6 @@
 package net.osmand.plus.track.helpers;
 
+import net.osmand.GPXUtilities;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
@@ -1011,7 +1012,7 @@ public class GPXDatabase {
 			dir = context.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		}
 		GpxDataItem item = new GpxDataItem(new File(dir, fileName), a);
-		item.color = parseColor(color);
+		item.color = GPXUtilities.parseColor(color, 0);
 		item.fileLastModifiedTime = fileLastModifiedTime;
 		item.fileLastUploadedTime = fileLastUploadedTime;
 		item.splitType = splitType;
@@ -1039,14 +1040,6 @@ public class GPXDatabase {
 		item.maxFilterHdop = maxFilterHdop;
 
 		return item;
-	}
-
-	private int parseColor(String color) {
-		try {
-			return Algorithms.isEmpty(color) ? 0 : Algorithms.parseColor(color);
-		} catch (IllegalArgumentException e) {
-			return 0;
-		}
 	}
 
 	@NonNull
