@@ -1,10 +1,6 @@
 package net.osmand.plus.utils;
 
 
-import static android.content.Context.POWER_SERVICE;
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
-import static android.util.TypedValue.COMPLEX_UNIT_SP;
-
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.ActivityNotFoundException;
@@ -62,6 +58,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.text.TextUtilsCompat;
@@ -90,6 +87,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+
+import static android.content.Context.POWER_SERVICE;
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 public class AndroidUtils {
 	private static final Log LOG = PlatformUtil.getLog(AndroidUtils.class);
@@ -667,6 +668,20 @@ public class AndroidUtils {
 		coordinates[0] += view.getWidth() / 2;
 		coordinates[1] += view.getHeight() / 2;
 		return coordinates;
+	}
+
+	public static int getViewOnScreenX(@NonNull View view) {
+		return getLocationOnScreen(view)[0];
+	}
+
+	public static int getViewOnScreenY(@NonNull View view) {
+		return getLocationOnScreen(view)[1];
+	}
+
+	public static int[] getLocationOnScreen(@NonNull View view) {
+		int[] locationOnScreen = new int[2];
+		view.getLocationOnScreen(locationOnScreen);
+		return locationOnScreen;
 	}
 
 	public static void enterToFullScreen(Activity activity, View view) {
