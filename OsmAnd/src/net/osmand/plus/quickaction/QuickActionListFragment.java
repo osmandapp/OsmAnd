@@ -429,7 +429,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
 
     @Override
     public int getStatusBarColorId() {
-        return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
+        return ColorUtilities.getStatusBarColorId(nightMode);
     }
 
     private MapActivity getMapActivity() {

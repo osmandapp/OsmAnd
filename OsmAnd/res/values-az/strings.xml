@@ -3236,8 +3236,21 @@
     <string name="parking_options">Parkinq seçimləri</string>
     <string name="find_parking">Parkinq tap</string>
     <string name="quick_action_add_route_descr">Ekranın mərkəzindən marşrut başlatmaq üçün düymə.</string>
-    <string name="please_provide_group_name_message">Zəhmət olmasa, qrup üçün ad daxil edin.</string>
+    <string name="please_provide_group_name_message">Zəhmət olmasa, qrupa ad verin.</string>
     <string name="gpx_no_routes_title">Marşrut yoxdur</string>
     <string name="default_appearance">Standart görünüş</string>
     <string name="edit_category">Kateqoriyaya düzəliş et</string>
+    <string name="points_selection_descr">Bağlansın və bütün dəyişikliklər itirilsin\?</string>
+    <string name="exit_import_descr">Dəyişikliklər yadda saxlanmadan çıxılsın\?</string>
+    <string name="all_groups">Bütün qruplar</string>
+    <string name="list_of_groups">Qrupların siyahısı</string>
+    <string name="permission_is_required">Bu seçimdən istifadə etmək üçün icazə tələb olunur.</string>
+    <string name="previous_run_crashed">OsmAnd-ın son çalışması çökdü. Qeyd faylı {0} qovluğundadır. Zəhmət olmasa, problemi bildirin və qeyd faylını əlavə edin.</string>
+    <string name="location_source_descr">Standart olaraq, Google Play-dən quraşdırılmış OsmAnd məkanı müəyyən etmək üçün %1$s istifadə edir.
+\n
+\nYanlış məkan məlumatı alsanız və ya cihazı %2$s olmadan istifadə etsəniz, “%3$s” rejiminə keçməyi yoxlayın.</string>
+    <string name="exit_import">Çıxılsın\?</string>
+    <string name="shared_string_crash">Çökmə</string>
+    <string name="last_launch_crashed">OsmAnd-ın son çalışması çökdü. Zəhmət olmasa, səhv mesajını paylaşaraq OsmAnd-ı təkmilləşdirməyə kömək edin.</string>
+    <string name="shared_string_reading_file">Fayl oxunur…</string>
 </resources>

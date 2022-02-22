@@ -25,6 +25,7 @@ import net.osmand.map.ParameterType;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
@@ -73,6 +74,14 @@ public class MapTileLayer extends BaseMapLayer {
 	@Override
 	public boolean drawInScreenPixels() {
 		return false;
+	}
+
+	@Override
+	public boolean isMapGestureAllowed(MapGestureType type) {
+		MapActivity mapActivity = getMapActivity();
+		boolean downloadingTiles = mapActivity != null && mapActivity.getDownloadTilesFragment() != null;
+		boolean rotatingOrTiltingMap = type == MapGestureType.TWO_POINTERS_ROTATION || type == MapGestureType.TWO_POINTERS_TILT;
+		return !(downloadingTiles && rotatingOrTiltingMap);
 	}
 
 	@Override
@@ -353,7 +362,7 @@ public class MapTileLayer extends BaseMapLayer {
 				Bitmap bmp = null;
 				String ordImgTile = mgr.calculateTileId(map, tileX, tileY, nzoom);
 				// asking tile image async
-				boolean imgExist = mgr.tileExistOnFileSystem(ordImgTile, map, tileX, tileY, nzoom);
+				boolean imgExist = mgr.isTileDownloaded(ordImgTile, map, tileX, tileY, nzoom);
 				boolean originalWillBeLoaded = useInternet && nzoom <= maxLevel;
 				if (imgExist || originalWillBeLoaded) {
 					bmp = mgr.getBitmapTilesCache().getTileForMapAsync(ordImgTile, map, tileX, tileY,
@@ -378,7 +387,7 @@ public class MapTileLayer extends BaseMapLayer {
 								break;
 							}
 						} else if (loadIfExists) {
-							if (mgr.tileExistOnFileSystem(imgTileId, map, x, y, zoom)
+							if (mgr.isTileDownloaded(imgTileId, map, x, y, zoom)
 									|| (useInternet && zoom <= maxLevel)) {
 								bmp = mgr.getBitmapTilesCache().getTileForMapAsync(imgTileId, map, x, y,
 										zoom, useInternet, drawSettings.mapRefreshTimestamp);

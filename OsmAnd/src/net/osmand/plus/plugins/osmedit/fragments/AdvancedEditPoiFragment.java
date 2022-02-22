@@ -1,24 +1,19 @@
 package net.osmand.plus.plugins.osmedit.fragments;
 
-import android.content.Context;
+import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.osm.AbstractPoiType;
@@ -36,6 +31,8 @@ import net.osmand.plus.plugins.osmedit.data.EditPoiData.TagsChangedListener;
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment.OnFragmentActivatedListener;
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment.OnSaveButtonClickListener;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
 
@@ -46,65 +43,63 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
 import static net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment.AMENITY_TEXT_LENGTH;
 
-public class AdvancedEditPoiFragment extends BaseOsmAndFragment
-		implements OnFragmentActivatedListener,
+public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFragmentActivatedListener,
 		OnSaveButtonClickListener {
-	private static final String TAG = "AdvancedEditPoiFragment";
+
 	private static final Log LOG = PlatformUtil.getLog(AdvancedEditPoiFragment.class);
 
 	private TagAdapterLinearLayoutHack mAdapter;
 	private TagsChangedListener mTagsChangedListener;
-	private Drawable deleteDrawable;
+
 	private TextView nameTextView;
 	private TextView amenityTagTextView;
 	private TextView amenityTextView;
 	private EditText currentTagEditText;
 
-	@Override
-	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-
-	}
+	private Drawable deleteDrawable;
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		int themeRes = requireMyApplication().getSettings().isLightActionBar() ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
-		Context themedContext = new ContextThemeWrapper(getContext(), themeRes);
-		final View view = inflater.cloneInContext(themedContext).inflate(R.layout.fragment_edit_poi_advanced, container, false);
-
 		OsmandApplication app = requireMyApplication();
-		deleteDrawable = app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark, app.getSettings().isLightContent());
-		nameTextView = (TextView) view.findViewById(R.id.nameTextView);
-		amenityTagTextView = (TextView) view.findViewById(R.id.amenityTagTextView);
-		amenityTextView = (TextView) view.findViewById(R.id.amenityTextView);
-		LinearLayout editTagsLineaLayout =
-				(LinearLayout) view.findViewById(R.id.editTagsList);
+		boolean night = !requireSettings().isLightContent();
+		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), night);
+		View view = themedInflater.inflate(R.layout.fragment_edit_poi_advanced, container, false);
 
-		final MapPoiTypes mapPoiTypes = app.getPoiTypes();
+		deleteDrawable = app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark, !night);
+
+		nameTextView = view.findViewById(R.id.nameTextView);
+		amenityTagTextView = view.findViewById(R.id.amenityTagTextView);
+		amenityTextView = view.findViewById(R.id.amenityTextView);
+		LinearLayout editTagsLineaLayout = view.findViewById(R.id.editTagsList);
+
+		Set<String> tagKeys = new HashSet<>();
+		Set<String> valueKeys = new HashSet<>();
+		fillKeysValues(tagKeys, valueKeys);
+
 		mAdapter = new TagAdapterLinearLayoutHack(editTagsLineaLayout, getData());
-		// It is possible to not restart initialization every time, and probably move initialization to appInit
+		mAdapter.setTagData(tagKeys.toArray(new String[0]));
+		mAdapter.setValueData(valueKeys.toArray(new String[0]));
+
+		View addTagButton = view.findViewById(R.id.addTagButton);
+		addTagButton.setOnClickListener(v -> mAdapter.addTagView("", ""));
+
+		return view;
+	}
+
+	private void fillKeysValues(@NonNull Set<String> tagKeys, @NonNull Set<String> valueKeys) {
+		MapPoiTypes mapPoiTypes = requireMyApplication().getPoiTypes();
 		Map<String, PoiType> translatedTypes = getData().getAllTranslatedSubTypes();
-		HashSet<String> tagKeys = new HashSet<>();
-		HashSet<String> valueKeys = new HashSet<>();
 		for (AbstractPoiType abstractPoiType : translatedTypes.values()) {
 			addPoiToStringSet(abstractPoiType, tagKeys, valueKeys);
 		}
 		addPoiToStringSet(mapPoiTypes.getOtherMapCategory(), tagKeys, valueKeys);
-		mAdapter.setTagData(tagKeys.toArray(new String[0]));
-		mAdapter.setValueData(valueKeys.toArray(new String[0]));
-		Button addTagButton = (Button) view.findViewById(R.id.addTagButton);
-		addTagButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mAdapter.addTagView("", "");
-			}
-		});
-		return view;
 	}
 
 	@Override
@@ -113,15 +108,12 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 		mAdapter.updateViews();
 		updateName();
 		updatePoiType();
-		mTagsChangedListener = new TagsChangedListener() {
-			@Override
-			public void onTagsChanged(String anyTag) {
-				if (Algorithms.objectEquals(anyTag, OSMSettings.OSMTagKey.NAME.getValue())) {
-					updateName();
-				}
-				if (Algorithms.objectEquals(anyTag, Entity.POI_TYPE_TAG)) {
-					updatePoiType();
-				}
+		mTagsChangedListener = anyTag -> {
+			if (Algorithms.objectEquals(anyTag, OSMSettings.OSMTagKey.NAME.getValue())) {
+				updateName();
+			}
+			if (Algorithms.objectEquals(anyTag, Entity.POI_TYPE_TAG)) {
+				updatePoiType();
 			}
 		};
 		getData().addListener(mTagsChangedListener);
@@ -131,11 +123,6 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 	public void onPause() {
 		super.onPause();
 		getData().deleteListener(mTagsChangedListener);
-	}
-
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
 	}
 
 	private EditPoiDialogFragment getEditPoiFragment() {
@@ -148,7 +135,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 
 	@Override
 	public void onFragmentActivated() {
-		if(mAdapter != null) {
+		if (mAdapter != null) {
 			mAdapter.updateViews();
 		}
 	}
@@ -181,6 +168,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 	}
 
 	public class TagAdapterLinearLayoutHack {
+
 		private final LinearLayout linearLayout;
 		private final EditPoiData editPoiData;
 		private final ArrayAdapter<String> tagAdapter;
@@ -207,8 +195,9 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 				if (tag.getKey().equals(Entity.POI_TYPE_TAG)
 						|| tag.getKey().equals(OSMSettings.OSMTagKey.NAME.getValue())
 						|| tag.getKey().startsWith(Entity.REMOVE_TAG_PREFIX)
-						|| tag.getKey().equals(currentPoiTypeKey))
+						|| tag.getKey().equals(currentPoiTypeKey)) {
 					continue;
+				}
 				addTagView(tag.getKey(), tag.getValue());
 			}
 			if (editPoiData.hasEmptyValue() && linearLayout.findViewById(R.id.valueEditText) != null) {
@@ -217,7 +206,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 			editPoiData.setIsInEdit(false);
 		}
 
-		public void addTagView(@NonNull String tg, @NonNull String vl) {
+		public void addTagView(@NonNull String tag, @NonNull String value) {
 			View convertView = LayoutInflater.from(linearLayout.getContext())
 					.inflate(R.layout.list_item_poi_tag, null, false);
 
@@ -230,19 +219,14 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 			valueFB.hideClearButton();
 
 			ExtendedEditText tagEditText = convertView.findViewById(R.id.tagEditText);
-			View deleteButton = convertView.findViewById(R.id.delete_button);
-			final String[] previousTag = new String[]{tg};
-			deleteButton.setOnClickListener(v -> {
-				linearLayout.removeView(convertView);
-				editPoiData.removeTag(tagEditText.getText().toString());
-			});
-			final AutoCompleteTextView valueEditText = convertView.findViewById(R.id.valueEditText);
-			valueEditText.setFilters(new InputFilter[]{
-					new InputFilter.LengthFilter(AMENITY_TEXT_LENGTH)
-			});
-			tagEditText.setText(tg);
+			AutoCompleteTextView valueEditText = convertView.findViewById(R.id.valueEditText);
+
+			tagEditText.setText(tag);
 			tagEditText.setAdapter(tagAdapter);
 			tagEditText.setThreshold(1);
+			showKeyboard(tagEditText);
+
+			String[] previousTag = new String[] {tag};
 			tagEditText.setOnFocusChangeListener((v, hasFocus) -> {
 				if (!hasFocus) {
 					tagFB.hideClearButton();
@@ -261,7 +245,8 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 				}
 			});
 
-			valueEditText.setText(vl);
+			valueEditText.setFilters(new InputFilter[] {new InputFilter.LengthFilter(AMENITY_TEXT_LENGTH)});
+			valueEditText.setText(value);
 			valueEditText.setAdapter(valueAdapter);
 			valueEditText.setThreshold(3);
 			valueEditText.addTextChangedListener(new TextWatcher() {
@@ -290,10 +275,24 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 				}
 			});
 
+			View deleteButton = convertView.findViewById(R.id.delete_button);
+			deleteButton.setOnClickListener(v -> {
+				linearLayout.removeView(convertView);
+				editPoiData.removeTag(tagEditText.getText().toString());
+			});
+
 			linearLayout.addView(convertView);
 		}
 
-		public void setTagData(String[] tags) {
+		private void showKeyboard(@NonNull View view) {
+			view.requestFocus();
+			Activity activity = getActivity();
+			if (activity != null) {
+				AndroidUtils.softKeyboardDelayed(activity, view);
+			}
+		}
+
+		public void setTagData(@NonNull String[] tags) {
 			tagAdapter.clear();
 			for (String s : tags) {
 				tagAdapter.add(s);
@@ -302,7 +301,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 			tagAdapter.notifyDataSetChanged();
 		}
 
-		public void setValueData(String[] values) {
+		public void setValueData(@NonNull String[] values) {
 			valueAdapter.clear();
 			for (String s : values) {
 				valueAdapter.add(s);
@@ -360,5 +359,4 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 					+ abstractPoiType.getClass());
 		}
 	}
-	
 }

@@ -67,7 +67,9 @@ public abstract class OsmandMapLayer {
 	public enum MapGestureType {
 		DOUBLE_TAP_ZOOM_IN,
 		DOUBLE_TAP_ZOOM_CHANGE,
-		TWO_POINTERS_ZOOM_OUT
+		TWO_POINTERS_ZOOM_OUT,
+		TWO_POINTERS_ROTATION,
+		TWO_POINTERS_TILT
 	}
 
 	protected OsmandMapLayer(@NonNull Context ctx) {

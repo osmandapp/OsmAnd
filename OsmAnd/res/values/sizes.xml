@@ -139,6 +139,7 @@
 	<dimen name="map_button_spacing_land">6dp</dimen>
 	<dimen name="map_button_margin">6dp</dimen>
 	<dimen name="map_routing_progress_width">100dp</dimen>
+	<dimen name="map_window_height">136dp</dimen>
 
 
 	<dimen name="map_button_inset_shadow">2dp</dimen>

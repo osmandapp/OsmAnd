@@ -112,7 +112,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				orientation = wm.getDefaultDisplay().getRotation();
 			}
 			app.getLocationProvider().updateScreenOrientation(orientation);
-			mapView.setMapLocationListener(this);
+			mapView.addMapLocationListener(this);
 		}
 	}
 

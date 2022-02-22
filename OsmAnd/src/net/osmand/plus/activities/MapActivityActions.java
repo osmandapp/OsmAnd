@@ -1,5 +1,97 @@
 package net.osmand.plus.activities;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnDismissListener;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
+import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
+import net.osmand.data.FavouritePoint;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
+import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.ContextMenuItem.ItemBuilder;
+import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.actions.OsmAndDialogs;
+import net.osmand.plus.backup.ui.BackupAndRestoreFragment;
+import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
+import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
+import net.osmand.plus.dialogs.FavoriteDialogs;
+import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
+import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.liveupdates.LiveUpdatesFragment;
+import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
+import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
+import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.measurementtool.MeasurementToolFragment;
+import net.osmand.plus.measurementtool.StartPlanRouteBottomSheet;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsFragment;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet;
+import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.plugins.osmedit.dialogs.DismissRouteBottomSheetFragment;
+import net.osmand.plus.profiles.data.ProfileDataObject;
+import net.osmand.plus.profiles.data.RoutingDataUtils;
+import net.osmand.plus.routepreparationmenu.WaypointsFragment;
+import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.track.helpers.SavingTrackHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.MapActions;
+import net.osmand.plus.views.layers.MapControlsLayer;
+import net.osmand.plus.wikipedia.WikipediaDialogFragment;
+import net.osmand.plus.wikivoyage.WikivoyageWelcomeDialogFragment;
+import net.osmand.plus.wikivoyage.data.TravelHelper;
+import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+
+import java.io.File;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
+
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_AV_NOTES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BACKUP_RESTORE_ID;
@@ -38,104 +130,6 @@ import static net.osmand.plus.ContextMenuAdapter.PROFILES_CHOSEN_PROFILE_TAG;
 import static net.osmand.plus.ContextMenuAdapter.PROFILES_CONTROL_BUTTON_TAG;
 import static net.osmand.plus.ContextMenuAdapter.PROFILES_NORMAL_PROFILE_TAG;
 
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Toast;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AlertDialog;
-
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
-import net.osmand.IndexConstants;
-import net.osmand.PlatformUtil;
-import net.osmand.data.FavouritePoint;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.data.QuadRect;
-import net.osmand.data.RotatedTileBox;
-import net.osmand.map.ITileSource;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
-import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.ContextMenuItem.ItemBuilder;
-import net.osmand.plus.OsmAndLocationProvider;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.activities.actions.OsmAndDialogs;
-import net.osmand.plus.plugins.PluginsFragment;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.backup.ui.BackupAndRestoreFragment;
-import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
-import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
-import net.osmand.plus.dialogs.FavoriteDialogs;
-import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
-import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.liveupdates.LiveUpdatesFragment;
-import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
-import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
-import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.measurementtool.MeasurementToolFragment;
-import net.osmand.plus.measurementtool.StartPlanRouteBottomSheet;
-import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet;
-import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
-import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
-import net.osmand.plus.plugins.osmedit.dialogs.DismissRouteBottomSheetFragment;
-import net.osmand.plus.profiles.data.ProfileDataObject;
-import net.osmand.plus.profiles.data.RoutingDataUtils;
-import net.osmand.plus.routepreparationmenu.WaypointsFragment;
-import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
-import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.track.helpers.SavingTrackHelper;
-import net.osmand.plus.views.layers.base.BaseMapLayer;
-import net.osmand.plus.views.MapActions;
-import net.osmand.plus.views.layers.MapTileLayer;
-import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.layers.MapControlsLayer;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
-import net.osmand.plus.wikivoyage.WikivoyageWelcomeDialogFragment;
-import net.osmand.plus.wikivoyage.data.TravelHelper;
-import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
-
-import java.io.File;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
 
 public class MapActivityActions extends MapActions implements DialogProvider {
 
@@ -144,8 +138,6 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 	public static final String KEY_LONGITUDE = "longitude";
 	public static final String KEY_LATITUDE = "latitude";
 	public static final String KEY_NAME = "name";
-
-	public static final String KEY_ZOOM = "zoom";
 
 	public static final int REQUEST_LOCATION_FOR_DIRECTIONS_NAVIGATION_PERMISSION = 203;
 
@@ -161,7 +153,6 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 	private static final int DIALOG_ADD_FAVORITE = 100;
 	private static final int DIALOG_REPLACE_FAVORITE = 101;
 	private static final int DIALOG_ADD_WAYPOINT = 102;
-	private static final int DIALOG_RELOAD_TITLE = 103;
 
 	private static final int DIALOG_SAVE_DIRECTIONS = 106;
 
@@ -208,20 +199,6 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		openIntermediatePointsDialog();
 	}
 
-	private Bundle enhance(Bundle aBundle, double latitude, double longitude, String name) {
-		aBundle.putDouble(KEY_LATITUDE, latitude);
-		aBundle.putDouble(KEY_LONGITUDE, longitude);
-		aBundle.putString(KEY_NAME, name);
-		return aBundle;
-	}
-
-	private Bundle enhance(Bundle bundle, double latitude, double longitude, final int zoom) {
-		bundle.putDouble(KEY_LATITUDE, latitude);
-		bundle.putDouble(KEY_LONGITUDE, longitude);
-		bundle.putInt(KEY_ZOOM, zoom);
-		return bundle;
-	}
-
 	private Dialog createAddWaypointDialog(final Bundle args) {
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(mapActivity, nightMode));
@@ -254,11 +231,6 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 			}
 		});
 		return alertDialog;
-	}
-
-	public void reloadTile(final int zoom, final double latitude, final double longitude) {
-		enhance(dialogBundle, latitude, longitude, zoom);
-		mapActivity.showDialog(DIALOG_RELOAD_TITLE);
 	}
 
 	protected String getString(int res) {
@@ -559,47 +531,6 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		contextMenuPoint(latitude, longitude, null, null);
 	}
 
-	private Dialog createReloadTitleDialog(final Bundle args) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
-		builder.setMessage(R.string.context_menu_item_update_map_confirm);
-		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		final OsmandMapTileView mapView = mapActivity.getMapView();
-		builder.setPositiveButton(R.string.context_menu_item_update_map, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				int zoom = args.getInt(KEY_ZOOM);
-				BaseMapLayer mainLayer = mapView.getMainLayer();
-				if (!(mainLayer instanceof MapTileLayer) || !((MapTileLayer) mainLayer).isVisible()) {
-					Toast.makeText(mapActivity, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
-					return;
-				}
-				final ITileSource mapSource = ((MapTileLayer) mainLayer).getMap();
-				if (mapSource == null || !mapSource.couldBeDownloadedFromInternet()) {
-					Toast.makeText(mapActivity, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
-					return;
-				}
-				final RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
-				final QuadRect tilesRect = tb.getTileBounds();
-				long requestTimestamp = System.currentTimeMillis();
-				int left = (int) Math.floor(tilesRect.left);
-				int top = (int) Math.floor(tilesRect.top);
-				int width = (int) (Math.ceil(tilesRect.right) - left);
-				int height = (int) (Math.ceil(tilesRect.bottom) - top);
-				for (int i = 0; i < width; i++) {
-					for (int j = 0; j < height; j++) {
-						((OsmandApplication) mapActivity.getApplication()).getResourceManager().
-								clearTileForMap(null, mapSource, i + left, j + top, zoom, requestTimestamp);
-					}
-				}
-
-
-				mapView.refreshMap();
-			}
-		});
-		return builder.create();
-	}
-
-
 	@Override
 	public Dialog onCreateDialog(int id) {
 		Bundle args = dialogBundle;
@@ -610,8 +541,6 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 				return FavoriteDialogs.createReplaceFavouriteDialog(mapActivity, args);
 			case DIALOG_ADD_WAYPOINT:
 				return createAddWaypointDialog(args);
-			case DIALOG_RELOAD_TITLE:
-				return createReloadTitleDialog(args);
 			case DIALOG_SAVE_DIRECTIONS:
 				return createSaveDirections(mapActivity, mapActivity.getRoutingHelper());
 		}
@@ -628,7 +557,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 						new PointDescription(PointDescription.POINT_TYPE_FAVORITE, args.getString(KEY_NAME)));
 				break;
 			case DIALOG_ADD_WAYPOINT:
-				EditText v = (EditText) dialog.getWindow().findViewById(android.R.id.edit);
+				EditText v = dialog.getWindow().findViewById(android.R.id.edit);
 				v.setPadding(5, 0, 5, 0);
 				if (args.getString(KEY_NAME) != null) {
 					v.setText(args.getString(KEY_NAME));
@@ -1086,7 +1015,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 
 	protected void updateDrawerMenu() {
 		final boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		final ListView menuItemsListView = (ListView) mapActivity.findViewById(R.id.menuItems);
+		final ListView menuItemsListView = mapActivity.findViewById(R.id.menuItems);
 		menuItemsListView.setBackgroundColor(ColorUtilities.getListBgColor(mapActivity, nightMode));
 		menuItemsListView.removeHeaderView(drawerLogoHeader);
 		Bitmap navDrawerLogo = app.getAppCustomization().getNavDrawerLogo();

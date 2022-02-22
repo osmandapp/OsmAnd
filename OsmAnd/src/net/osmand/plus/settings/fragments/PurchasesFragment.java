@@ -20,6 +20,7 @@ import com.google.android.material.appbar.AppBarLayout;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
@@ -187,7 +188,7 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 
 	@Override
 	public int getStatusBarColorId() {
-		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
+		return ColorUtilities.getStatusBarColorId(nightMode);
 	}
 
 	private MapActivity getMapActivity() {

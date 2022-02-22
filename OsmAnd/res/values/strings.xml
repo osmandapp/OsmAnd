@@ -11,6 +11,14 @@
 	Thx - Hardy
 -->
 
+    <string name="stop_download_desc">Download is not complete. If you interrupt the download now, only part of the tiles will be available for viewing.</string>
+    <string name="stop_download">Stop download</string>
+    <string name="stop_and_exit">Stop and exit</string>
+    <string name="shared_string_complete">complete</string>
+    <string name="zoom_levels_difference_description">The big difference between zoom levels can increase the size of the downloaded data.</string>
+    <string name="estimated_download_size">Estimated download size</string>
+    <string name="number_of_tiles">Number of tiles</string>
+    <string name="move_map_to_select_area">Move map to select needed area.</string>
     <string name="edit_category">Edit category</string>
     <string name="shared_string_shape">Shape</string>
     <string name="default_appearance_desc">Default color, icon and shape will apply to the added favorite points into the group.</string>

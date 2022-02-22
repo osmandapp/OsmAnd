@@ -200,7 +200,7 @@ public class MapTileDownloader {
 		if ((int) (now - timeForErrorCounter) > TIMEOUT_AFTER_EXCEEDING_LIMIT_ERRORS) {
 			timeForErrorCounter = now;
 			currentErrors = 0;
-		} else if (currentErrors > TILE_DOWNLOAD_MAX_ERRORS_PER_TIMEOUT) {
+		} else if (shouldSkipRequests()) {
 			return;
 		}
 		if (request.url == null) {
@@ -214,6 +214,10 @@ public class MapTileDownloader {
 			pendingToDownload.add(request.fileToSave);
 			threadPoolExecutor.execute(new DownloadMapWorker(request));
 		}
+	}
+
+	public boolean shouldSkipRequests() {
+		return currentErrors > TILE_DOWNLOAD_MAX_ERRORS_PER_TIMEOUT;
 	}
 
 	private class DownloadMapWorker implements Runnable, Comparable<DownloadMapWorker> {

@@ -159,6 +159,9 @@
 	    <attr name="chip_content_color" format="reference" />
 	    <attr name="inactive_text_color" format="reference" />
 	    <attr name="appbar_and_list_background_color" format="reference" />
+	    <attr name="image_tile_placeholder" format="reference" />
+	    <attr name="toolbar_back_button_color" format="reference" />
+	    <attr name="toolbar_title_color" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">
