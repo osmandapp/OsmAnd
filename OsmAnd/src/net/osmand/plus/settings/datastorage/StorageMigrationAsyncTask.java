@@ -12,13 +12,12 @@ import androidx.documentfile.provider.DocumentFile;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -130,7 +129,7 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair
 		StorageItem currentStorage = storageHelper.getCurrentStorage();
 		if (!Algorithms.stringsEqual(currentStorage.getKey(), selectedStorage.getKey())) {
 			File dir = new File(selectedStorage.getDirectory());
-			DataStoragePlaceDialogFragment.saveFilesLocation(app, activityRef.get(), selectedStorage.getType(), dir);
+			DataStorageHelper.saveFilesLocation(app, activityRef.get(), selectedStorage.getType(), dir);
 		}
 		if (migrationListener != null) {
 			migrationListener.onFilesCopyFinished(errors, existingFiles);
