@@ -1752,6 +1752,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> NAVIGATION_HISTORY = new BooleanPreference(this, "navigation_history", true).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> MAP_MARKERS_HISTORY = new BooleanPreference(this, "map_markers_history", true).makeGlobal().makeShared();
 
+	@NonNull
 	public ITileSource getMapTileSource(boolean warnWhenSelected) {
 		String tileName = MAP_TILE_SOURCES.get();
 		if (tileName != null) {
@@ -1780,7 +1781,7 @@ public class OsmandSettings {
 		return null;
 	}
 
-
+	@Nullable
 	public ITileSource getTileSourceByName(String tileName, boolean warnWhenSelected) {
 		if (tileName == null || tileName.length() == 0) {
 			return null;

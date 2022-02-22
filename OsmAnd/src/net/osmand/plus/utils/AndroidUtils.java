@@ -108,7 +108,7 @@ public class AndroidUtils {
 		return context.getResources().getConfiguration().keyboard != Configuration.KEYBOARD_NOKEYS;
 	}
 
-	public static void softKeyboardDelayed(final Activity activity, final View view) {
+	public static void softKeyboardDelayed(@NonNull Activity activity, @NonNull View view) {
 		view.post(() -> {
 			if (!isHardwareKeyboardAvailable(view.getContext())) {
 				showSoftKeyboard(activity, view);
@@ -116,7 +116,7 @@ public class AndroidUtils {
 		});
 	}
 
-	public static void showSoftKeyboard(final Activity activity, final View view) {
+	public static void showSoftKeyboard(@NonNull Activity activity, @NonNull View view) {
 		InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 		if (imm != null) {
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.voice.LocaleBuilder;
+
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
@@ -30,20 +32,28 @@ public class LocaleHelper {
 		Configuration config = app.getBaseContext().getResources().getConfiguration();
 
 		String pl = app.getSettings().PREFERRED_LOCALE.get();
-		String[] split = pl.split("_");
-		String lang = split[0];
-		String country = (split.length > 1) ? split[1] : "";
+		String[] splitScript = pl.split("\\+");
+		String script = (splitScript.length > 1) ? splitScript[1] : "";
+		String[] splitCountry = splitScript[0].split("_");
+		String lang = splitCountry[0];
+		String country = (splitCountry.length > 1) ? splitCountry[1] : "";
 
 		if (defaultLocale == null) {
 			defaultLocale = Locale.getDefault();
 		}
+
 		if (!Algorithms.isEmpty(lang)) {
+			Locale.Builder builder = new Locale.Builder();
+			builder.setLanguage(lang);
 			if (!Algorithms.isEmpty(country)) {
-				preferredLocale = new Locale(lang, country);
-			} else {
-				preferredLocale = new Locale(lang);
+				builder.setRegion(country);
 			}
+			if (!Algorithms.isEmpty(script)) {
+				builder.setScript(script);
+			}
+			preferredLocale = builder.build();
 		}
+
 		Locale selectedLocale = null;
 
 		if (!Algorithms.isEmpty(lang) && !config.locale.equals(preferredLocale)) {
@@ -72,9 +82,8 @@ public class LocaleHelper {
 		if (preferredLocale != null) {
 			Configuration config = context.getResources().getConfiguration();
 			String lang = preferredLocale.getLanguage();
-			if (!Algorithms.isEmpty(lang) && !config.locale.getLanguage().equals(lang)) {
-				newLocale = new Locale(lang);
-				preferredLocale = newLocale;
+			boolean localeChanged = !config.locale.equals(preferredLocale);
+			if (!Algorithms.isEmpty(lang) && localeChanged) {
 				Locale.setDefault(preferredLocale);
 				config.locale = preferredLocale;
 				context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());

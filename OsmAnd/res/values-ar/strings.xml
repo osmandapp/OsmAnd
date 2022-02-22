@@ -4601,4 +4601,8 @@
 \n
 \nإذا تحصلت على معلومات غير دقيقة عن الموقع أو استخدمت جهازًا بدون %2$s ، فحاول التبديل إلى \"%3$s\"</string>
     <string name="location_source">مصدر الموقع</string>
+    <string name="default_appearance_desc">سيتم تطبيق اللون والرمز والشكل الافتراضي على النقاط المفضلة المضافة في المجموعة.</string>
+    <string name="default_appearance">المظهر الافتراضي</string>
+    <string name="shared_string_shape">الشكل</string>
+    <string name="edit_category">تعديل الفئة</string>
 </resources>

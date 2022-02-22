@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupError;
@@ -51,7 +52,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 
 	@Override
 	public int getStatusBarColorId() {
-		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
+		return ColorUtilities.getStatusBarColorId(nightMode);
 	}
 
 	@Override
