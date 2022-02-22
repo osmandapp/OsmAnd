@@ -15,6 +15,12 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.data.QuadRect;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.OsmandApplication;
@@ -28,15 +34,8 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 import java.text.MessageFormat;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.plus.plugins.rastermaps.DownloadTilesFragment.HELP_URI;
 
@@ -144,7 +143,7 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 		helpButton.setOnClickListener(v -> {
 			Context context = getContext();
 			if (context != null) {
-				WikipediaDialogFragment.showFullArticle(context, HELP_URI, nightMode);
+				AndroidUtils.openUrl(context, HELP_URI, nightMode);
 			}
 		});
 	}
