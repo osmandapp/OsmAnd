@@ -1125,4 +1125,19 @@ public class AndroidUtils {
 		}
 		return null;
 	}
+
+	public static void openUrl(@NonNull Context context, @NonNull Uri uri, boolean nightMode) {
+		CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
+				.setToolbarColor(ColorUtilities.getAppBarColor(context, nightMode))
+				.build();
+		customTabsIntent.intent.setData(uri);
+		try {
+			customTabsIntent.launchUrl(context, uri);
+		} catch (ActivityNotFoundException e) {
+			Toast.makeText(context, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
+		}
+	}
+
+
+
 }

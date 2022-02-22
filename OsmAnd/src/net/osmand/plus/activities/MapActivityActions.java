@@ -18,6 +18,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
+
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
@@ -71,7 +77,6 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapActions;
 import net.osmand.plus.views.layers.MapControlsLayer;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageWelcomeDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
@@ -85,12 +90,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AlertDialog;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_AV_NOTES_ID;
@@ -716,7 +715,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 					}
 				}).createItem());
 
-		final OsmandMonitoringPlugin monitoringPlugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
+		OsmandMonitoringPlugin monitoringPlugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 		if (monitoringPlugin != null) {
 			optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.map_widget_monitoring, mapActivity)
 					.setId(DRAWER_TRIP_RECORDING_ID)
@@ -1025,10 +1024,9 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 			menuItemsListView.addHeaderView(drawerLogoHeader);
 		}
 		menuItemsListView.setDivider(null);
-		final ContextMenuAdapter contextMenuAdapter = createMainOptionsMenu();
-		contextMenuAdapter.setDefaultLayoutId(R.layout.simple_list_menu_item);
-		final ArrayAdapter<ContextMenuItem> simpleListAdapter = contextMenuAdapter.createListAdapter(mapActivity,
-				!nightMode);
+		ContextMenuAdapter adapter = createMainOptionsMenu();
+		adapter.setDefaultLayoutId(R.layout.simple_list_menu_item);
+		ArrayAdapter<ContextMenuItem> simpleListAdapter = adapter.createListAdapter(mapActivity, !nightMode);
 		menuItemsListView.setAdapter(simpleListAdapter);
 		menuItemsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
@@ -1039,11 +1037,11 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 				if (hasHeader && position == 0 || (hasFooter && position == menuItemsListView.getCount() - 1)) {
 					String drawerLogoParams = app.getAppCustomization().getNavDrawerLogoUrl();
 					if (!Algorithms.isEmpty(drawerLogoParams)) {
-						WikipediaDialogFragment.showFullArticle(mapActivity, Uri.parse(drawerLogoParams), nightMode);
+						AndroidUtils.openUrl(mapActivity, Uri.parse(drawerLogoParams), nightMode);
 					}
 				} else {
 					position -= menuItemsListView.getHeaderViewsCount();
-					ContextMenuItem item = contextMenuAdapter.getItem(position);
+					ContextMenuItem item = adapter.getItem(position);
 					ItemClickListener click = item.getItemClickListener();
 					if (click != null && click.onContextMenuClick(simpleListAdapter, item.getTitleId(),
 							position, false, AndroidUtils.getCenterViewCoordinates(view))) {

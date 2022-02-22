@@ -33,7 +33,6 @@ import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.liveupdates.CountrySelectionFragment;
 import net.osmand.plus.liveupdates.CountrySelectionFragment.OnFragmentInteractionListener;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -136,7 +135,7 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 			@Override
 			public void onClick(View v) {
 				if (getContext() != null) {
-					WikipediaDialogFragment.showFullArticle(getContext(), Uri.parse(OSMAND_PURCHASES_URL), nightMode);
+					AndroidUtils.openUrl(getContext(), Uri.parse(OSMAND_PURCHASES_URL), nightMode);
 				}
 			}
 		});

@@ -18,6 +18,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleDividerItem;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleWikiLinkFragment;
 
 
@@ -61,7 +62,7 @@ public class WikipediaArticleWikiLinkFragment extends MenuBottomSheetDialogFragm
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						WikipediaDialogFragment.showFullArticle(ctx, Uri.parse(articleUrl), nightMode);
+						AndroidUtils.openUrl(ctx, Uri.parse(articleUrl), nightMode);
 						dismiss();
 					}
 				})

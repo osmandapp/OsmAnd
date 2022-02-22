@@ -1,7 +1,5 @@
 package net.osmand.plus.activities;
 
-import static net.osmand.plus.AppInitializer.LATEST_CHANGES_URL;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -35,9 +33,10 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.development.BaseLogcatActivity;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 import java.io.File;
+
+import static net.osmand.plus.AppInitializer.LATEST_CHANGES_URL;
 
 public class HelpActivity extends BaseLogcatActivity implements OnItemClickListener, OnItemLongClickListener {
 
@@ -417,7 +416,7 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 			if (LATEST_CHANGES_URL.equals(path)) {
 				OsmandApplication app = (OsmandApplication) ctx.getApplication();
 				boolean nightMode = !app.getSettings().isLightContent();
-				WikipediaDialogFragment.showFullArticle(ctx, Uri.parse(LATEST_CHANGES_URL), nightMode);
+				AndroidUtils.openUrl(ctx, Uri.parse(LATEST_CHANGES_URL), nightMode);
 			} else {
 				String title = mTitle == null ? adapter.getItem(position).getTitle() : mTitle;
 				HelpArticleDialogFragment.instantiateWithAsset(path, title)
