@@ -23,7 +23,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.helpers.OsmBugsRemoteUtil;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
+import net.osmand.plus.utils.AndroidUtils;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParserException;
@@ -96,7 +96,7 @@ public class OsmOAuthAuthorizationAdapter {
     private void loadWebView(ViewGroup root, boolean nightMode, String url) {
         Uri uri = Uri.parse(url);
         Context context = root.getContext();
-        WikipediaDialogFragment.showFullArticle(context, uri, nightMode);
+        AndroidUtils.openUrl(context, uri, nightMode);
     }
 
     public void performGetRequest(String url, OAuthAsyncRequestCallback<Response> callback) {

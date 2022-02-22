@@ -19,11 +19,11 @@ import androidx.preference.PreferenceViewHolder;
 import net.osmand.Location;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 
 public class CoordinatesFormatFragment extends BaseSettingsFragment {
@@ -108,7 +108,7 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 				public void onClick(@NonNull View widget) {
 					Context ctx = getContext();
 					if (ctx != null) {
-						WikipediaDialogFragment.showFullArticle(ctx, Uri.parse(UTM_FORMAT_WIKI_LINK), isNightMode());
+						AndroidUtils.openUrl(ctx, Uri.parse(UTM_FORMAT_WIKI_LINK), isNightMode());
 					}
 				}
 
@@ -138,7 +138,7 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 				public void onClick(@NonNull View widget) {
 					Context ctx = getContext();
 					if (ctx != null) {
-						WikipediaDialogFragment.showFullArticle(ctx, Uri.parse(MGRS_FORMAT_WIKI_LINK), isNightMode());
+						AndroidUtils.openUrl(ctx, Uri.parse(MGRS_FORMAT_WIKI_LINK), isNightMode());
 					}
 				}
 
