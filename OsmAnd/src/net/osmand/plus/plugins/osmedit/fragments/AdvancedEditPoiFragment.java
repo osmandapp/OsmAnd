@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.osmedit.fragments;
 
+import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -30,6 +31,7 @@ import net.osmand.plus.plugins.osmedit.data.EditPoiData.TagsChangedListener;
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment.OnFragmentActivatedListener;
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment.OnSaveButtonClickListener;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
@@ -222,6 +224,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 			tagEditText.setText(tag);
 			tagEditText.setAdapter(tagAdapter);
 			tagEditText.setThreshold(1);
+			showKeyboard(tagEditText);
 
 			String[] previousTag = new String[] {tag};
 			tagEditText.setOnFocusChangeListener((v, hasFocus) -> {
@@ -279,6 +282,14 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 			});
 
 			linearLayout.addView(convertView);
+		}
+
+		private void showKeyboard(@NonNull View view) {
+			view.requestFocus();
+			Activity activity = getActivity();
+			if (activity != null) {
+				AndroidUtils.softKeyboardDelayed(activity, view);
+			}
 		}
 
 		public void setTagData(@NonNull String[] tags) {
