@@ -1,4 +1,4 @@
-package net.osmand.plus.backup.ui;
+package net.osmand.plus.widgets;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -19,13 +19,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class BackupAnimatedView extends View {
-	private Paint paint = new Paint();
+public class BackupIconsView extends View {
+	private final Paint paint = new Paint();
 	private final int iconSize = AndroidUtils.dpToPx(getContext(), 36);
 	private final int rowMargin = AndroidUtils.dpToPx(getContext(), 16);
-	OsmandApplication app;
+	private final OsmandApplication app;
 
-	public BackupAnimatedView(Context context, @Nullable AttributeSet attrs) {
+	public BackupIconsView(Context context, @Nullable AttributeSet attrs) {
 		super(context, attrs);
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(AndroidUtils.dpToPx(context, 1));
@@ -106,10 +106,11 @@ public class BackupAnimatedView extends View {
 	}
 
 	enum IconColorType {
-		YELLOW(R.color.purchase_sc_toolbar_active_dark),
+		YELLOW(R.color.backup_restore_icons_yellow),
 		BLUE(R.color.backup_restore_icons_blue),
-		GREEN(R.color.purchase_save_discount);
-		private int color;
+		GREEN(R.color.backup_restore_icons_green);
+
+		private final int color;
 
 		public int getColor() {
 			return color;

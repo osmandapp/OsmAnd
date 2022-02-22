@@ -14,10 +14,10 @@
 		android:layout_gravity="center_horizontal"
 		android:layout_marginTop="@dimen/content_padding_small">
 
-		<net.osmand.plus.backup.ui.BackupAnimatedView
+		<net.osmand.plus.widgets.BackupIconsView
 			android:id="@+id/animatedView"
 			android:layout_width="match_parent"
-			android:layout_height="150dp"/>
+			android:layout_height="@dimen/backup_icons_view_height"/>
 
 		<FrameLayout
 			android:id="@+id/main_image_container"
