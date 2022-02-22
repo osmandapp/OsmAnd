@@ -533,7 +533,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 	private void refreshDataInfo() {
 		calculateTilesBtnPressed = false;
 		dataStorageHelper = new DataStorageHelper(app);
-		if (!storageMigration || !firstUsage) {
+		if (!storageMigration && !firstUsage) {
 			calculateMemoryTask = dataStorageHelper.calculateMemoryUsedInfo(this);
 		}
 	}
