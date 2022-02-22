@@ -15,6 +15,13 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.util.Pair;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import com.google.android.material.slider.RangeSlider;
 
 import net.osmand.IndexConstants;
@@ -36,16 +43,8 @@ import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.layers.base.BaseMapLayer;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.util.Pair;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLocationListener {
 
@@ -167,7 +166,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		helpButton.setOnClickListener(v -> {
 			Context context = getContext();
 			if (context != null) {
-				WikipediaDialogFragment.showFullArticle(context, HELP_URI, nightMode);
+				AndroidUtils.openUrl(context, HELP_URI, nightMode);
 			}
 		});
 	}
