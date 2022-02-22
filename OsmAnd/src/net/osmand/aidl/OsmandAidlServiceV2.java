@@ -1482,6 +1482,17 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 				return false;
 			}
 		}
+
+		@Override
+		public boolean reloadIndexes() {
+			try {
+				OsmandAidlApi api = getApi("reloadIndexes");
+				return api != null && api.reloadIndexes();
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
 	};
 
 	private void setCustomization(OsmandAidlApi api, CustomizationInfoParams params) {

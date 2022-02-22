@@ -4532,4 +4532,8 @@
 \n
 \nЯкщо дані про місцеположення не точні або ви користуєтеся пристроєм без %2$s, спробуйте перемикнутися на «%3$s»</string>
     <string name="location_source">Джерело визначення розташування</string>
+    <string name="shared_string_shape">Форма</string>
+    <string name="default_appearance_desc">Типовий колір, піктограма та форма застосовуватимуться до доданих улюблених точок у групі.</string>
+    <string name="default_appearance">Типовий зовнішній вигляд</string>
+    <string name="edit_category">Редагувати категорію</string>
 </resources>

@@ -4526,4 +4526,8 @@
     <string name="import_tracks">Importovat stopy</string>
     <string name="import_tracks_descr">%1$s, obsahuje %2$s jednotlivých stop. Vyberte ty, které chcete importovat.</string>
     <string name="select_suggested_points">Vyberte navrhované body</string>
+    <string name="shared_string_shape">Tvar</string>
+    <string name="edit_category">Upravit kategorii</string>
+    <string name="default_appearance_desc">Výchozí barva, ikona a tvar se aplikuje na přidané oblíbené body ve skupině.</string>
+    <string name="default_appearance">Výchozí vzhled</string>
 </resources>

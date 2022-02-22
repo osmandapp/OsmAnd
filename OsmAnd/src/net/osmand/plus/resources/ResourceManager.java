@@ -407,9 +407,23 @@ public class ResourceManager {
 		}
 	}
 
-	public synchronized boolean tileExistOnFileSystem(String file, ITileSource map, int x, int y, int zoom) {
+	public synchronized boolean isTileDownloaded(String file, ITileSource map, int x, int y, int zoom) {
 		TilesCache<?> cache = getTilesCache(map);
-		return cache != null && cache.tileExistOnFileSystem(file, map, x, y, zoom);
+		return cache != null && cache.isTileDownloaded(file, map, x, y, zoom);
+	}
+
+	public synchronized boolean isTileSavedOnFileSystem(@NonNull String tileId, @Nullable ITileSource map,
+	                                                    int x, int y, int zoom) {
+		TilesCache<?> cache = getTilesCache(map);
+		return cache != null && cache.isTileSavedOnFileSystem(tileId, map, x, y, zoom);
+	}
+
+	public synchronized long getTileBytesSizeOnFileSystem(@NonNull String tileId, @NonNull ITileSource map,
+	                                                      int x, int y, int zoom) {
+		TilesCache<?> cache = getTilesCache(map);
+		return cache != null
+				? cache.getTileBytesSizeOnFileSystem(tileId, map, x, y, zoom)
+				: 0;
 	}
 
 	public void clearTileForMap(String file, ITileSource map, int x, int y, int zoom, long requestTimestamp) {
@@ -435,11 +449,12 @@ public class ResourceManager {
 		return cache != null && cache.getRequestedTile(req) != null;
 	}
 
-	public boolean hasTileForMapSync(String file, ITileSource map, int x, int y, int zoom,
-									 boolean loadFromInternetIfNeeded, long requestTimestamp) {
+	public void getTileForMapSync(String file, ITileSource map, int x, int y, int zoom,
+	                              boolean loadFromInternetIfNeeded, long requestTimestamp) {
 		TilesCache<?> cache = getTilesCache(map);
-		return cache != null
-				&& cache.getTileForMapSync(file, map, x, y, zoom, loadFromInternetIfNeeded, requestTimestamp) != null;
+		if (cache != null) {
+			cache.getTileForMapSync(file, map, x, y, zoom, loadFromInternetIfNeeded, requestTimestamp);
+		}
 	}
 
 	public void clearCacheAndTiles(@NonNull ITileSource map) {

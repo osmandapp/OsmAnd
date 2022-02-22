@@ -911,4 +911,6 @@ interface IOsmAndAidlInterface {
     boolean exitApp(in ExitAppParams params);
 
     boolean getText(inout GetTextParams params);
+
+    boolean reloadIndexes();
 }

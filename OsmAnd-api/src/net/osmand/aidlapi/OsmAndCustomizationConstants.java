@@ -182,4 +182,5 @@ public interface OsmAndCustomizationConstants {
 	String CONTEXT_MENU_SEARCH_MORE_ID = MAP_CONTEXT_MENU_ROWS + "search_more";
 	String CONTEXT_MENU_SHOW_ON_MAP_ID = MAP_CONTEXT_MENU_ROWS + "show_on_map";
 	String CONTEXT_MENU_AVOID_ROADS_ID = MAP_CONTEXT_MENU_ROWS + "avoid_roads";
+	String CONTEXT_MENU_ONLINE_PHOTOS_ID = MAP_CONTEXT_MENU_ROWS + "online_photos";
 }

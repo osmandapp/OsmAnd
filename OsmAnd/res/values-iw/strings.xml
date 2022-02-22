@@ -4509,7 +4509,7 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_name">תגיות „לתיקון”</string>
     <string name="gpx_no_routes_descr">אפשר להשתמש בכלי „%1$s” כדי לשמור את המסלול כקובץ.</string>
     <string name="gpx_no_routes_title">אין מסלולים</string>
-    <string name="save_track_to_gpx_descrp">להתחיל את הקלטת המסלול אוטומטית כשיש ניווט פעיל. כשהניווט מסתיים, המסלול יישמר אוטומטית.</string>
+    <string name="save_track_to_gpx_descrp">להתחיל את הקלטת המסלול אוטומטית בעת הניווט ולשמור אוטומטית קדימה.</string>
     <string name="track_file_description">נגיעה בפעולה זו תציג חלונית לבחירה בין המסלולים הזמינים.</string>
     <string name="quick_action_add_route_descr">כפתור להתחלת מסלול מאמצע המסך.</string>
     <string name="purchases_feature_desc_osmand_cloud">הצטרפות ל־OsmAnd Cloud מאפשרת לך לאחסן את כל נתוני ה־OsmAnd שלך באופן מקוון. הנתונים שלך לא הולכים לאיבוד לאחר ההתקנה. ניתן לגבות ולשחזר את כל הנתונים בקלות.</string>
@@ -4529,4 +4529,12 @@
     <string name="exit_import">לצאת\?</string>
     <string name="import_tracks">ייבוא מסלולים</string>
     <string name="location_source">מקור מיקום</string>
+    <string name="default_appearance">מראה כברירת מחדל</string>
+    <string name="default_appearance_desc">צבע ברירת מחדל, הסמל והצורה יחולו על הנקודות המועדפות שיתווספו לקבוצה.</string>
+    <string name="location_source_descr">כברירת המחדל, OsmAnd שהותקן מהחנות Google Play משתמשת ב־%1$s כדי לאתר את המיקום.
+\n
+\nאם פרטי המיקום שקיבלת שגויים או שבמכשיר שלך אין %2$s, כדאי לנסות להחליף אל „%3$s”</string>
+    <string name="edit_category">עריכת קטגוריה</string>
+    <string name="shared_string_shape">צורה</string>
+    <string name="import_tracks_descr">%1$s, מכיל %2$s מסלולים נפרדים. נא לבחור מסלולים לייבוא.</string>
 </resources>

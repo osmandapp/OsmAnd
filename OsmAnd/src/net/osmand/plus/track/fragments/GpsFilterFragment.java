@@ -330,7 +330,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 			if (!nightMode) {
 				view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 			}
-			return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
+			return ColorUtilities.getStatusBarColorId(nightMode);
 		}
 		return -1;
 	}

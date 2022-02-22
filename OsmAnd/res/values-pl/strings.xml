@@ -913,7 +913,7 @@
     <string name="recording_description">Nagranie %1$s %3$s %2$s</string>
     <string name="recording_default_name">Nagranie</string>
     <string name="shared_string_control_stop">Zakończ</string>
-    <string name="shared_string_control_start">Rozpocznij</string>
+    <string name="shared_string_control_start">Start</string>
     <string name="map_widget_av_notes">Uwagi audio/wideo</string>
     <string name="osmand_srtm_short_description_80_chars">Wtyczka OsmAnd dla poziomic w trybie offline</string>
     <string name="map_widget_distancemeasurement">Pomiar odległości</string>
@@ -4319,7 +4319,7 @@
     <string name="add_group_to_markers">Dodaj grupę do listy znaczników</string>
     <string name="remove_group_from_markers">Usuń grupę z listy znaczników</string>
     <string name="routeInfo_tracktype_description">Pokoloruj trasę lub linię śladu według składu powierzchni. Zwykle stosuje się, gdy sieć dróg jest w dużej mierze nieutwardzona.</string>
-    <string name="start_point">Uruchom</string>
+    <string name="start_point">Start</string>
     <string name="mapillary_menu_filter_description_new">Filtrowanie obrazów według daty lub typu. Aktywne tylko w zbliżeniu.</string>
     <string name="service_is_not_available_please_try_later">Usługa niedostępna. Spróbuj ponownie później.</string>
     <string name="shared_string_files">Pliki</string>
@@ -4347,27 +4347,27 @@
     <string name="history_preferences_descr">Rejestrowanie historii można wyłączyć indywidualnie dla każdego typu historii.</string>
     <string name="shortcut_navigate_to_home">Nawiguj do domu</string>
     <string name="android_auto_map_placeholder_descr">Odłącz urządzenie od Android Auto, aby wyświetlić mapę w aplikacji.</string>
-    <string name="release_4_1">"• Dodano początkową obsługę Android Auto
+    <string name="release_4_1">• Dodano początkową obsługę Android Auto
 \n
 \n • Aktualizacja interfejsu użytkownika dla wyszukiwania współrzędnych UTM
 \n
-\n  • Ulubione: dodano możliwość przeglądania ostatnio używanych ikon
+\n • Ulubione: dodano możliwość przeglądania ostatnio używanych ikon
 \n
-\n  • Planowanie trasy: użyje wybranego profilu po uruchomieniu
+\n • Planowanie trasy: użyje wybranego profilu po uruchomieniu
 \n
-\n  • Naprawiono warstwę Mapillary, wtyczka jest teraz domyślnie wyłączona
+\n • Naprawiono warstwę Mapillary, wtyczka jest teraz domyślnie wyłączona
 \n
-\n  • Dodano ekran do zarządzania całą historią w aplikacji
+\n • Dodano ekran do zarządzania całą historią w aplikacji
 \n
-\n  • Orientacja mapy nie jest resetowana po ponownym uruchomieniu aplikacji
+\n • Orientacja mapy nie jest resetowana po ponownym uruchomieniu aplikacji
 \n
-\n  • Ulepszone renderowanie znaczników wysokości SRTM
+\n • Ulepszone renderowanie znaczników wysokości SRTM
 \n
-\n  • Poprawiono arabskie podpisy pod mapami
+\n • Poprawiono arabskie podpisy pod mapami
 \n
-\n  • Naprawiono różne problemy z routingiem
+\n • Naprawiono różne problemy z routingiem
 \n
-\n"</string>
+\n</string>
     <string name="routing_attr_allow_gate_name">Zezwól na użycie bramy</string>
     <string name="routing_attr_only_permitted_ways_name">Celowo dozwolone ulice</string>
     <string name="purchases_feature_desc_android_auto">Przenosi mapy offline i nawigację OsmAnd na ekran pojazdu i integruje się z urządzeniami sterującymi pojazdu.</string>
