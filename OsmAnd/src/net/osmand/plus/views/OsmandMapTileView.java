@@ -1349,13 +1349,17 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				// keep only rotating
 				dz = 0;
 			}
+
 			if (mapGestureAllowed(MapGestureType.TWO_POINTERS_ROTATION)) {
 				if (Math.abs(relAngle) < ANGLE_THRESHOLD && !startRotating) {
 					relAngle = 0;
 				} else {
 					startRotating = true;
 				}
+			} else {
+				relAngle = 0;
 			}
+
 			if (dz != 0 || relAngle != 0) {
 				changeZoomPosition((float) dz, relAngle);
 			}
