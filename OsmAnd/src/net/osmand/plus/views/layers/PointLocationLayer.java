@@ -85,9 +85,13 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	// location pin marker
 	private static final int MARKER_ID_MY_LOCATION = 1;
 	private static final int MARKER_ID_NAVIGATION = 2;
+	private static final int MARKER_ID_MY_LOCATION_HEADING = 3;
+	private static final int MARKER_ID_NAVIGATION_HEADING = 4;
 	private MapMarkersCollection markersCollection;
-	private MapMarker myLocationMarker;
-	private MapMarker navigationMarker;
+	private MyLocMapMarker myLocationMarker;
+	private MyLocMapMarker myLocationMarkerWithHeading;
+	private MyLocMapMarker navigationMarker;
+	private MyLocMapMarker navigationMarkerWithHeading;
 	private SWIGTYPE_p_void onSurfaceIconKey = null;
 	private SWIGTYPE_p_void onSurfaceHeadingIconKey = null;
 	private boolean markersNeedInvalidate = true;
@@ -100,6 +104,26 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		Stay,
 		Move,
 		None,
+	}
+
+	private class MyLocMapMarker {
+		public MapMarker marker;
+		public SWIGTYPE_p_void onSurfaceIconKey = null;
+
+		public void reset() {
+			if (marker != null) {
+				marker.delete();
+				marker = null;
+			}
+		}
+
+		public void setVisibility(boolean visible) {
+			if (marker == null) {
+				return;
+			}
+			marker.setIsHidden(!visible);
+			marker.setIsAccuracyCircleVisible(visible);
+		}
 	}
 
 	private MarkerState currentMarkerState = MarkerState.Stay;
@@ -116,7 +140,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	public void updateLocation(Location location) {
 		lastKnownLocation = location;
 		if (view != null && view.hasMapRenderer()) {
-			getApplication().runInUIThread(() -> updateMarkerData(lastKnownLocation, lastKnownLocation.getAccuracy(), null));
+			getApplication().runInUIThread(() -> updateMarkerData(lastKnownLocation, null));
 		}
 	}
 
@@ -125,23 +149,25 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		if (Math.abs(MapUtils.degreesDiff(value, lastHeading)) > MapViewTrackingUtilities.COMPASS_HEADING_THRESHOLD) {
 			lastHeading = value;
 			if (view != null && view.hasMapRenderer()) {
-				getApplication().runInUIThread(() -> updateMarkerData(null, null, lastHeading));
+				getApplication().runInUIThread(() -> updateMarkerData(null, lastHeading));
 			}
 		}
 	}
 
 
-	private MapMarker recreateMarker(MapMarker oldMarker, LayerDrawable icon, int id, int baseColor) {
+	private MyLocMapMarker recreateMarker(MyLocMapMarker currentMarker, LayerDrawable icon, int id, int baseColor, boolean addHeading) {
 		if (view == null || icon == null) {
 			return null;
 		}
 
 		if (markersCollection == null) {
 			markersCollection = new MapMarkersCollection();
-		} else if (oldMarker != null) {
-			markersCollection.removeMarker(oldMarker);
-			oldMarker.delete();
+		} else if (currentMarker != null) {
+			markersCollection.removeMarker(currentMarker.marker);
+			currentMarker.reset();
 		}
+		currentMarker = new MyLocMapMarker();
+
 
 		MapMarkerBuilder myLocMarkerBuilder = new MapMarkerBuilder();
 		myLocMarkerBuilder.setMarkerId(id);
@@ -154,12 +180,12 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		float scale = getTextScale();
 		Bitmap markerBitmap = AndroidUtils.createScaledBitmap(icon, scale);
 		if (markerBitmap != null) {
-			onSurfaceIconKey = SwigUtilities.getOnSurfaceIconKey(1);
-			myLocMarkerBuilder.addOnMapSurfaceIcon(onSurfaceIconKey,
+			currentMarker.onSurfaceIconKey = SwigUtilities.getOnSurfaceIconKey(1);
+			myLocMarkerBuilder.addOnMapSurfaceIcon(currentMarker.onSurfaceIconKey,
 					NativeUtilities.createSkImageFromBitmap(markerBitmap));
 		}
 
-		if (!locationOutdated && hasHeading) {
+		if (addHeading) {
 			Bitmap headingBitmap = AndroidUtils.createScaledBitmapWithTint(view.getContext(), headingIconId, scale, baseColor);
 			if (headingBitmap != null) {
 				onSurfaceHeadingIconKey = SwigUtilities.getOnSurfaceIconKey(2);
@@ -167,9 +193,9 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 						NativeUtilities.createSkImageFromBitmap(headingBitmap));
 			}
 		}
-		MapMarker marker = myLocMarkerBuilder.buildAndAddToCollection(markersCollection);
+		currentMarker.marker = myLocMarkerBuilder.buildAndAddToCollection(markersCollection);
 
-		return marker;
+		return currentMarker;
 	}
 
 	private void resetMarkerProvider() {
@@ -179,12 +205,16 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			markersCollection.delete();
 			markersCollection = null;
 			if (myLocationMarker != null) {
-				myLocationMarker.delete();
-				myLocationMarker = null;
+				myLocationMarker.reset();
 			}
 			if (navigationMarker != null) {
-				navigationMarker.delete();
-				navigationMarker = null;
+				navigationMarker.reset();
+			}
+			if (myLocationMarkerWithHeading != null) {
+				myLocationMarkerWithHeading.reset();
+			}
+			if (navigationMarkerWithHeading != null) {
+				navigationMarkerWithHeading.reset();
 			}
 		}
 	}
@@ -202,80 +232,78 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		}
 
 		resetMarkerProvider();
-		myLocationMarker = recreateMarker(myLocationMarker, locationIcon, MARKER_ID_MY_LOCATION, color);
-		navigationMarker = recreateMarker(navigationMarker, navigationIcon, MARKER_ID_NAVIGATION, color);
+		myLocationMarker = recreateMarker(myLocationMarker, locationIcon, MARKER_ID_MY_LOCATION, color, false);
+		myLocationMarkerWithHeading = recreateMarker(myLocationMarkerWithHeading, locationIcon, MARKER_ID_MY_LOCATION_HEADING, color, true);
+		navigationMarker = recreateMarker(navigationMarker, navigationIcon, MARKER_ID_NAVIGATION, color, false);
+		navigationMarkerWithHeading = recreateMarker(navigationMarkerWithHeading, navigationIcon, MARKER_ID_NAVIGATION_HEADING, color, true);
 		setMarkerProvider();
 		updateMarkerState();
 
 		if (lastKnownLocation != null) {
-			getApplication().runInUIThread(() -> updateMarkerData(lastKnownLocation, lastKnownLocation.getAccuracy(), lastHeading));
+			getApplication().runInUIThread(() -> updateMarkerData(lastKnownLocation, lastHeading));
 		}
-		getApplication().runInUIThread(() -> updateMarkerData(null, null, locationProvider.getHeading()));
+		getApplication().runInUIThread(() -> updateMarkerData(null, locationProvider.getHeading()));
 	}
 
 	private void updateMarkerState() {
-		if (navigationMarker == null || myLocationMarker == null) {
+		if (navigationMarker == null || myLocationMarker == null
+				|| navigationMarkerWithHeading == null || myLocationMarkerWithHeading == null) {
 			return;
 		}
 
 		switch (currentMarkerState) {
 			case Move:
-				navigationMarker.setIsHidden(false);
-				navigationMarker.setIsAccuracyCircleVisible(true);
-				myLocationMarker.setIsHidden(true);
-				myLocationMarker.setIsAccuracyCircleVisible(false);
+				navigationMarker.setVisibility(!hasHeading);
+				myLocationMarker.setVisibility(false);
+				navigationMarkerWithHeading.setVisibility(hasHeading);
+				myLocationMarkerWithHeading.setVisibility(false);
 				break;
 			case Stay:
-				navigationMarker.setIsHidden(true);
-				navigationMarker.setIsAccuracyCircleVisible(false);
-				myLocationMarker.setIsHidden(false);
-				myLocationMarker.setIsAccuracyCircleVisible(true);
+				navigationMarker.setVisibility(false);
+				myLocationMarker.setVisibility(!hasHeading);
+				navigationMarkerWithHeading.setVisibility(false);
+				myLocationMarkerWithHeading.setVisibility(hasHeading);
 				break;
 			case None:
 			default:
-				navigationMarker.setIsHidden(true);
-				navigationMarker.setIsAccuracyCircleVisible(false);
-				myLocationMarker.setIsHidden(true);
-				myLocationMarker.setIsAccuracyCircleVisible(false);
+				navigationMarker.setVisibility(false);
+				myLocationMarker.setVisibility(false);
+				navigationMarkerWithHeading.setVisibility(false);
+				myLocationMarkerWithHeading.setVisibility(false);
 		}
 	}
 
-	private void updateMarkerData(@Nullable Location location, @Nullable Float accuracy, @Nullable Float heading) {
-		MapMarker marker = null;
+	private void updateMarkerData(@Nullable Location location, @Nullable Float heading) {
+		MyLocMapMarker locMarker = null;
 		SWIGTYPE_p_void bearingIconKey = null;
-		SWIGTYPE_p_void headingIconKey = null;
 		switch (currentMarkerState) {
 			case Move:
-				marker = navigationMarker;
-				bearingIconKey = onSurfaceIconKey;
-				headingIconKey = onSurfaceHeadingIconKey;
+				locMarker = hasHeading ? navigationMarkerWithHeading : navigationMarker;
+				bearingIconKey = locMarker.onSurfaceIconKey;
 				break;
 			case Stay:
-				marker = myLocationMarker;
-				headingIconKey = onSurfaceHeadingIconKey;
+				locMarker = hasHeading ? myLocationMarkerWithHeading : myLocationMarker;
 				break;
 			case None:
 			default:
 				return;
 		}
 
-		if (marker != null) {
+		if (locMarker.marker != null) {
 			if (location != null) {  // location
 				final PointI target31 = Utilities.convertLatLonTo31(
 						new net.osmand.core.jni.LatLon(location.getLatitude(), location.getLongitude()));
-				marker.setPosition(target31);
+				locMarker.marker.setPosition(target31);
 				if (bearingIconKey != null) {  // bearing
-					marker.setOnMapSurfaceIconDirection(bearingIconKey, location.getBearing() - 90.0f);
+					locMarker.marker.setOnMapSurfaceIconDirection(bearingIconKey, location.getBearing() - 90.0f);
 				}
+				locMarker.marker.setAccuracyCircleRadius(location.getAccuracy());
 			}
-			if (accuracy != null) {  // accuracy
-				marker.setAccuracyCircleRadius(accuracy);
+			if (heading != null) {  // heading
+				locMarker.marker.setOnMapSurfaceIconDirection(onSurfaceHeadingIconKey, heading);
 			}
-			if (hasHeading && heading != null && headingIconKey != null) {  // heading
-				marker.setOnMapSurfaceIconDirection(headingIconKey, heading);
-			}
-			if (marker.isHidden()) {
-				marker.setIsHidden(false);
+			if (locMarker.marker.isHidden()) {
+				locMarker.marker.setIsHidden(false);
 			}
 		}
 	}
@@ -424,11 +452,15 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		updateIcons(view.getSettings().getApplicationMode(), nm, locationProvider.getLastKnownLocation() == null);
 
 		if (view.hasMapRenderer()) {
-			hasHeading = !locationOutdated && locationProvider.getHeading() != null && mapViewTrackingUtilities.isShowViewAngle();
-			if (markersNeedInvalidate || hasHeading != hasHeadingCached) {
+			if (markersNeedInvalidate) {
 				invalidateMarkerCollection();
 				markersNeedInvalidate = false;
+			}
+
+			hasHeading = !locationOutdated && locationProvider.getHeading() != null && mapViewTrackingUtilities.isShowViewAngle();
+			if (hasHeading != hasHeadingCached) {
 				hasHeadingCached = hasHeading;
+				updateMarkerState();
 			}
 
 			invalidateMarkerState(lastKnownLocation);
