@@ -66,8 +66,9 @@ public abstract class TilesCache<T> {
 		}
 		builder.append(zoom)
 				.append('/').append(x)
-				.append('/').append(y).
-				append(map == null ? ".jpg" : map.getTileFormat()).append(".tile");
+				.append('/').append(y)
+				.append(map == null ? ".jpg" : map.getTileFormat())
+				.append(".tile");
 		return builder.toString();
 	}
 
@@ -93,9 +94,9 @@ public abstract class TilesCache<T> {
 		return tilesOnFS.get(tileId) != null;
 	}
 
-	public synchronized long getTileBytesOnFileSystem(@NonNull String tileId,
-	                                                  @NonNull ITileSource map,
-	                                                  int x, int y, int zoom) {
+	public synchronized long getTileBytesSizeOnFileSystem(@NonNull String tileId,
+	                                                      @NonNull ITileSource map,
+	                                                      int x, int y, int zoom) {
 		if (isTileDownloaded(tileId, map, x, y, zoom)) {
 			try {
 				byte[] bytes = map.getBytes(x, y, zoom, dirWithTiles.getAbsolutePath());
@@ -110,12 +111,12 @@ public abstract class TilesCache<T> {
 	}
 
 	public T getTileForMapAsync(String file, ITileSource map, int x, int y, int zoom,
-								boolean loadFromInternetIfNeeded, long timestamp) {
+	                            boolean loadFromInternetIfNeeded, long timestamp) {
 		return getTileForMap(file, map, x, y, zoom, loadFromInternetIfNeeded, false, true, timestamp);
 	}
 
 	public T getTileForMapSync(String file, ITileSource map, int x, int y, int zoom,
-							   boolean loadFromInternetIfNeeded, long timestamp) {
+	                           boolean loadFromInternetIfNeeded, long timestamp) {
 		return getTileForMap(file, map, x, y, zoom, loadFromInternetIfNeeded, true, true, timestamp);
 	}
 
@@ -123,14 +124,14 @@ public abstract class TilesCache<T> {
 	 * @param file - null could be passed if you do not call very often with that param
 	 */
 	protected T getTileForMap(String file, ITileSource map, int x, int y, int zoom,
-							  boolean loadFromInternetIfNeeded, boolean sync, boolean loadFromFs,
-							  long timestamp) {
+	                          boolean loadFromInternetIfNeeded, boolean sync, boolean loadFromFs,
+	                          long timestamp) {
 		return getTileForMap(file, map, x, y, zoom, loadFromInternetIfNeeded, sync, loadFromFs, false, timestamp);
 	}
 
 	protected synchronized T getTileForMap(String tileId, ITileSource map, int x, int y, int zoom,
-										   boolean loadFromInternetIfNeeded, boolean sync,
-										   boolean loadFromFs, boolean deleteBefore, long timestamp) {
+	                                       boolean loadFromInternetIfNeeded, boolean sync,
+	                                       boolean loadFromFs, boolean deleteBefore, long timestamp) {
 		if (tileId == null) {
 			tileId = calculateTileId(map, x, y, zoom);
 		}

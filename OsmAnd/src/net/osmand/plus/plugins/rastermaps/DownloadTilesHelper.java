@@ -25,6 +25,9 @@ public class DownloadTilesHelper implements TilesDownloadListener {
 	private static final Log log = PlatformUtil.getLog(DownloadTilesHelper.class);
 
 	private static final int BITS_TO_MB = 8 * 1024 * 1024;
+	private static final float DEFAULT_TILE_SIZE_MB = 0.012f;
+
+	private static final long HALF_SECOND = 500;
 
 	private final OsmandApplication app;
 
@@ -180,7 +183,7 @@ public class DownloadTilesHelper implements TilesDownloadListener {
 
 		private void waitOutDownloadErrors() throws InterruptedException {
 			while (!cancelled && tileDownloader.shouldSkipRequests()) {
-				Thread.sleep(500);
+				Thread.sleep(HALF_SECOND);
 			}
 		}
 
@@ -188,7 +191,7 @@ public class DownloadTilesHelper implements TilesDownloadListener {
 			if (!cancelled) {
 				String tileId = resourceManager.calculateTileId(tileSource, x, y, zoom);
 				if (resourceManager.isTileDownloaded(tileId, tileSource, x, y, zoom)) {
-					long tileSize = resourceManager.getTileBytesOnFileSystem(tileId, tileSource, x, y, zoom);
+					long tileSize = resourceManager.getTileBytesSizeOnFileSystem(tileId, tileSource, x, y, zoom);
 					totalTilesBytes += tileSize;
 					app.runInUIThread(() -> listener.onTileDownloaded(downloadedTiles++, totalTilesBytes));
 				} else {
@@ -203,12 +206,12 @@ public class DownloadTilesHelper implements TilesDownloadListener {
 			if (!cancelled) {
 				if (waitForAll) {
 					while (tileDownloader.isSomethingBeingDownloaded()) {
-						Thread.sleep(500);
+						Thread.sleep(HALF_SECOND);
 					}
 				} else if (activeRequests >= REQUESTS_LIMIT) {
 					activeRequests = 0;
 					while (tileDownloader.isSomethingBeingDownloaded()) {
-						Thread.sleep(500);
+						Thread.sleep(HALF_SECOND);
 					}
 				}
 			}
@@ -238,6 +241,6 @@ public class DownloadTilesHelper implements TilesDownloadListener {
 		int averageSize = tileSource.getAvgSize();
 		return averageSize > 0
 				? (float) tilesNumber * averageSize / BITS_TO_MB
-				: (float) tilesNumber * 12 / 1000;
+				: (float) tilesNumber * DEFAULT_TILE_SIZE_MB;
 	}
 }

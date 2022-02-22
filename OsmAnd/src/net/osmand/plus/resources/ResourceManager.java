@@ -418,11 +418,11 @@ public class ResourceManager {
 		return cache != null && cache.isTileSavedOnFileSystem(tileId, map, x, y, zoom);
 	}
 
-	public synchronized long getTileBytesOnFileSystem(@NonNull String tileId, @NonNull ITileSource map,
-	                                                  int x, int y, int zoom) {
+	public synchronized long getTileBytesSizeOnFileSystem(@NonNull String tileId, @NonNull ITileSource map,
+	                                                      int x, int y, int zoom) {
 		TilesCache<?> cache = getTilesCache(map);
 		return cache != null
-				? cache.getTileBytesOnFileSystem(tileId, map, x, y, zoom)
+				? cache.getTileBytesSizeOnFileSystem(tileId, map, x, y, zoom)
 				: 0;
 	}
 
@@ -450,7 +450,7 @@ public class ResourceManager {
 	}
 
 	public void getTileForMapSync(String file, ITileSource map, int x, int y, int zoom,
-									 boolean loadFromInternetIfNeeded, long requestTimestamp) {
+	                              boolean loadFromInternetIfNeeded, long requestTimestamp) {
 		TilesCache<?> cache = getTilesCache(map);
 		if (cache != null) {
 			cache.getTileForMapSync(file, map, x, y, zoom, loadFromInternetIfNeeded, requestTimestamp);
