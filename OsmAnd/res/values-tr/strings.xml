@@ -3282,8 +3282,8 @@
     <string name="new_plugin_added">Yeni eklenti eklendi</string>
     <string name="join_segments">Bölümleri birleştir</string>
     <string name="add_new_profile_q">\'%1$s\' yeni profil eklensin mi\?</string>
-    <string name="save_heading">Başlığı dahil et</string>
-    <string name="save_heading_descr">Kayıt sırasında her izleme noktasına başlığı kaydet.</string>
+    <string name="save_heading">Yönü dahil et</string>
+    <string name="save_heading_descr">Kayıt sırasında her izleme noktasına yönü kaydet.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="personal_category_name">Kişisel</string>
