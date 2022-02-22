@@ -62,6 +62,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 
 	private View view;
 	private boolean mapWindowTouched = false;
+	private boolean wasDrawerDisabled;
 
 	private int selectedMinZoom;
 	private int selectedMaxZoom;
@@ -270,6 +271,27 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 			mapWindowTouched = true;
 			return false;
 		});
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			wasDrawerDisabled = mapActivity.isDrawerDisabled();
+			if (!wasDrawerDisabled) {
+				mapActivity.disableDrawer();
+			}
+		}
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && !wasDrawerDisabled) {
+			mapActivity.enableDrawer();
+		}
 	}
 
 	@Override
