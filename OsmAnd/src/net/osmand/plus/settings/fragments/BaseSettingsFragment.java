@@ -321,7 +321,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			}
 			return ColorUtilities.getListBgColorId(nightMode);
 		} else {
-			return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
+			return ColorUtilities.getStatusBarColorId(nightMode);
 		}
 	}
 
