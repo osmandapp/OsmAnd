@@ -2,60 +2,89 @@ package net.osmand.plus.plugins.rastermaps;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout.LayoutParams;
 
 import net.osmand.plus.R;
-import net.osmand.plus.base.BottomSheetDialogFragment;
+import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-public class StopDownloadBottomSheetDialogFragment extends BottomSheetDialogFragment {
+public class StopDownloadBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = StopDownloadBottomSheetDialogFragment.class.getSimpleName();
 
-	private boolean night;
-
 	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		night = requiredMyApplication().getDaynightHelper().isNightModeForMapControls();
-	}
-
-	@Nullable
-	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public void createMenuItems(Bundle savedInstanceState) {
 		Context context = requireContext();
-		LayoutInflater themedInflater = UiUtilities.getInflater(context, night);
-		View view = themedInflater.inflate(R.layout.stop_download_bottom_sheet_dialog_fragment, container, false);
-		setupExitButton(view);
-		setupBackButton(view);
-		return view;
+
+		items.add(new BottomSheetItemWithDescription.Builder()
+				.setDescription(getString(R.string.stop_download_desc))
+				.setTitle(getString(R.string.stop_download))
+				.setLayoutId(R.layout.bottom_sheet_plain_title_with_description)
+				.create());
+
+		items.add(new DividerSpaceItem(context, AndroidUtils.dpToPx(context, 16)));
 	}
 
-	private void setupExitButton(@NonNull View view) {
-		View exitButton = view.findViewById(R.id.exit_button);
-		UiUtilities.setupDialogButton(night, exitButton, DialogButtonType.SECONDARY, R.string.stop_and_exit);
-		exitButton.setOnClickListener(v -> {
-			Fragment target = getTargetFragment();
-			if (target instanceof TilesDownloadProgressFragment) {
-				((TilesDownloadProgressFragment) target).dismiss(false);
-			}
-			dismiss();
-		});
+	@Override
+	protected int getRightBottomButtonTextId() {
+		return R.string.stop_and_exit;
 	}
 
-	private void setupBackButton(@NonNull View view) {
-		View backButton = view.findViewById(R.id.back_button);
-		UiUtilities.setupDialogButton(night, backButton, DialogButtonType.SECONDARY, R.string.shared_string_back);
-		backButton.setOnClickListener(v -> dismiss());
+	@Override
+	protected void onRightBottomButtonClick() {
+		Fragment target = getTargetFragment();
+		if (target instanceof TilesDownloadProgressFragment) {
+			((TilesDownloadProgressFragment) target).dismiss(false);
+		}
+		dismiss();
+	}
+
+	@Override
+	protected DialogButtonType getRightBottomButtonType() {
+		return DialogButtonType.SECONDARY;
+	}
+
+	@Override
+	protected int getFirstDividerHeight() {
+		return AndroidUtils.dpToPx(requireContext(), 24);
+	}
+
+	@Override
+	protected int getDismissButtonTextId() {
+		return R.string.shared_string_back;
+	}
+
+	@Override
+	protected void onDismissButtonClickAction() {
+		dismiss();
+	}
+
+	@Override
+	protected boolean useScrollableItemsContainer() {
+		return false;
+	}
+
+	@Override
+	protected boolean useVerticalButtons() {
+		return true;
+	}
+
+	@Override
+	protected void setupBottomButtons(ViewGroup view) {
+		super.setupBottomButtons(view);
+		Context context = view.getContext();
+		View space = new View(context);
+		space.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, AndroidUtils.dpToPx(context, 4)));
+		view.addView(space);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target) {
