@@ -11,6 +11,12 @@
 	Thx - Hardy
 -->
 
+    <string name="shared_string_visible_widgets">Visible widgets</string>
+    <string name="top_widgets_panel">Top panel</string>
+    <string name="bottom_widgets_panel">Bottom panel</string>
+    <string name="shared_string_item">Item</string>
+    <string name="shared_string_buttons">Buttons</string>
+    <string name="configure_screen_widgets_descr">Select screen side to add or rearange widgets.</string>
     <string name="stop_download_desc">Download is not complete. If you interrupt the download now, only part of the tiles will be available for viewing.</string>
     <string name="stop_download">Stop download</string>
     <string name="stop_and_exit">Stop and exit</string>
