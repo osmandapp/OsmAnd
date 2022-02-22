@@ -48,6 +48,9 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.datastorage.DataStorageFragment.StorageSelectionListener;
+import net.osmand.plus.settings.datastorage.DataStorageHelper;
+import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.utils.AndroidNetworkUtils;
@@ -67,7 +70,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmAndLocationListener,
-		AppInitializeListener, DownloadEvents {
+		AppInitializeListener, DownloadEvents, StorageSelectionListener {
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(FirstUsageWizardFragment.class);
 
 	public static final String TAG = "FirstUsageWizardFrag";
@@ -508,6 +511,15 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 					}
 				}
 			}
+		}
+	}
+
+	@Override
+	public void onStorageSelected(@NonNull StorageItem storageItem) {
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			DataStorageHelper.checkAssets(app);
+			DataStorageHelper.updateDownloadIndexes(app);
 		}
 	}
 

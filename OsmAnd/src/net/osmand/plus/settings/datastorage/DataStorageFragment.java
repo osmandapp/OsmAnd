@@ -208,15 +208,13 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 						ActivityCompat.requestPermissions(activity,
 								new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
 								DataStorageFragment.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+					} else if (key.equals(MANUALLY_SPECIFIED)) {
+						showFolderSelectionDialog();
+					} else if (storageMigration || firstUsage) {
+						confirm(app, activity, newDataStorage, false);
 					} else {
-						if (key.equals(MANUALLY_SPECIFIED)) {
-							showFolderSelectionDialog();
-						} else if (storageMigration || firstUsage) {
-							confirm(app, activity, newDataStorage, false);
-						} else {
-							ChangeDataStorageBottomSheet.showInstance(getFragmentManager(), key,
-									currentDataStorage, newDataStorage, DataStorageFragment.this, false);
-						}
+						ChangeDataStorageBottomSheet.showInstance(getFragmentManager(), key,
+								currentDataStorage, newDataStorage, DataStorageFragment.this, false);
 					}
 				}
 			}
@@ -378,7 +376,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 
 	private void setupDetailsButton(StorageItem item, View detailsButton) {
 		boolean sharedStorage = item.getKey().equals(SHARED_STORAGE);
-		AndroidUiHelper.updateVisibility(detailsButton, sharedStorage && !storageMigration && !firstUsage);
+		AndroidUiHelper.updateVisibility(detailsButton, sharedStorage && (!storageMigration && !firstUsage));
 
 		if (item.getKey().equals(SHARED_STORAGE)) {
 			detailsButton.setClickable(true);
@@ -502,18 +500,11 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 		File newDirectoryFile = new File(newDirectory);
 		boolean wr = FileUtils.isWritable(newDirectoryFile);
 		if (wr) {
-			if (storageMigration && !firstUsage) {
-				Fragment target = getTargetFragment();
-				if (target instanceof StorageSelectionListener) {
-					((StorageSelectionListener) target).onStorageSelected(newStorageDirectory);
-				}
+			if (storageMigration) {
 				dismiss();
-				return;
 			} else {
 				app.setExternalStorageDirectory(type, newDirectory);
 				DataStorageHelper.reloadData(app, activity);
-				DataStorageHelper.checkAssets(app);
-				DataStorageHelper.updateDownloadIndexes(app);
 				if (!firstUsage) {
 					if (silentRestart) {
 						RestartActivity.doRestartSilent(activity);
@@ -521,6 +512,10 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 						RestartActivity.doRestart(activity);
 					}
 				}
+			}
+			Fragment target = getTargetFragment();
+			if (target instanceof StorageSelectionListener) {
+				((StorageSelectionListener) target).onStorageSelected(newStorageDirectory);
 			}
 		} else {
 			Toast.makeText(activity, R.string.specified_directiory_not_writeable,
