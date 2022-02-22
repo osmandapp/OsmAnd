@@ -20,6 +20,7 @@ import net.osmand.map.ITileSource;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -126,7 +127,7 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 		updateProgress();
 		updateDownloadSize();
 		updateTilesNumber();
-		setupCancelCloseButton();
+		setupCancelCloseButton(downloadTilesHelper.isDownloadFinished());
 
 		return view;
 	}
@@ -210,10 +211,10 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 		downloadedText.setText(spannable);
 	}
 
-	private void setupCancelCloseButton() {
+	private void setupCancelCloseButton(boolean downloadFinished) {
 		View cancelButton = view.findViewById(R.id.cancel_button);
 		cancelButton.setOnClickListener(v -> dismiss(true));
-		int buttonTextId = downloadTilesHelper.isDownloadFinished()
+		int buttonTextId = downloadFinished
 				? R.string.shared_string_close
 				: R.string.shared_string_cancel;
 		UiUtilities.setupDialogButton(nightMode, cancelButton, DialogButtonType.SECONDARY, buttonTextId);
@@ -262,7 +263,7 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 	@Override
 	public void onTileDownloaded(long tileNumber, long cumulativeTilesSize) {
 		downloadedTilesNumber = tileNumber + 1;
-		progress = (int) ((float) downloadedTilesNumber / totalTilesNumber * 100);
+		progress = BasicProgressAsyncTask.normalizeProgress((int) ((float) downloadedTilesNumber / totalTilesNumber * 100));
 		downloadedSizeMb = (float) cumulativeTilesSize / BYTES_TO_MB;
 
 		updateProgress();
@@ -270,7 +271,7 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 		updateTilesNumber();
 
 		if (progress == 100) {
-			setupCancelCloseButton();
+			setupCancelCloseButton(true);
 			app.getOsmandMap().getMapView().refreshMap();
 		}
 	}
