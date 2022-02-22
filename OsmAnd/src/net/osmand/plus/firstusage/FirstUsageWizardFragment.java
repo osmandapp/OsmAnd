@@ -648,17 +648,6 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		}
 	}
 
-	public void processStoragePermission(boolean granted) {
-		if (granted) {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				Bundle args = new Bundle();
-				args.putBoolean(FIRST_USAGE, true);
-				BaseSettingsFragment.showInstance(activity, SettingsScreenType.DATA_STORAGE, null, args, FirstUsageWizardFragment.this);
-			}
-		}
-	}
-
 	private static void findLocation(FragmentActivity activity, boolean searchLocationByIp) {
 		if (activity != null) {
 			OsmandApplication app = (OsmandApplication) activity.getApplication();
