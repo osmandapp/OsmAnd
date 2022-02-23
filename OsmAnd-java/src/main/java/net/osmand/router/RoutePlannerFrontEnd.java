@@ -262,6 +262,9 @@ public class RoutePlannerFrontEnd {
 							routeFound = findGpxRouteSegment(gctx, gpxPoints, start, next, prev != null);
 							if (routeFound) {
 								routeFound = isRouteCloseToGpxPoints(gctx, gpxPoints, start, next);
+								if (!routeFound) {
+									start.routeToTarget = null;
+								}
 							}
 							if (routeFound && next.ind == gpxPoints.size() - 1) {
 								// last point - last route found
