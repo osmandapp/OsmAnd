@@ -178,7 +178,6 @@ public class BinaryRoutePlanner {
 			ctx.calculationProgress.directQueueSize += graphDirectSegments.size(); // Math.max(ctx.directQueueSize,
 																					// graphDirectSegments.size());
 			ctx.calculationProgress.oppositeQueueSize += graphReverseSegments.size();
-			ctx.calculationProgress.visitedOppositeSegments += visitedOppositeSegments.size();
 		}
 		return finalSegment;
 	}
