@@ -280,9 +280,7 @@ public class RoutePlannerFrontEnd {
 									log.info("Consider to increase MAXIMUM_STEP_APPROXIMATION to: " + routeDist * 2);
 									start.routeToTarget = null;
 									routeFound = false;
-									break;
 								} else {
-									routeFound = isRouteCloseToGpxPoints(gctx, gpxPoints, start, next);
 									if (gctx.ctx.getVisitor() != null) {
 										gctx.ctx.getVisitor().visitApproximatedSegments(start.routeToTarget, start, next);
 									}
@@ -304,7 +302,7 @@ public class RoutePlannerFrontEnd {
 					}
 				}
 				// route is not found skip segment and keep it as straight line on display
-				if (!routeFound) {
+				if (!routeFound && next != null) {
 					// route is not found, move start point by
 					next = findNextGpxPointWithin(gpxPoints, start, gctx.MINIMUM_STEP_APPROXIMATION);
 					if (prev != null) {
