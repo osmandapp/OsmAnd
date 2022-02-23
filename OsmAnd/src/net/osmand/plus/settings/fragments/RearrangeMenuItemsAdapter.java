@@ -145,7 +145,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 			final ItemHolder h = (ItemHolder) holder;
 			ContextMenuItem menuItem = (ContextMenuItem) item.value;
 			String id = menuItem.getId();
-			if (DRAWER_DIVIDER_ID.equals(menuItem.getId())) {
+			if (DRAWER_DIVIDER_ID.equals(id)) {
 				h.title.setText(R.string.shared_string_divider);
 				h.title.setTypeface(FontCache.getFont(app, app.getString(R.string.font_roboto_medium)));
 				h.title.setTextColor(app.getResources().getColor(activeColorRes));
@@ -170,8 +170,13 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 				if (menuItem.getIcon() != -1) {
 					h.icon.setImageDrawable(uiUtilities.getIcon(menuItem.getIcon(), nightMode));
 					h.icon.setVisibility(View.VISIBLE);
-					h.actionIcon.setVisibility(View.VISIBLE);
+				} else {
+					h.icon.setVisibility(View.INVISIBLE);
 				}
+				h.actionIcon.setVisibility(View.VISIBLE);
+				h.actionIcon.setContentDescription(app.getString(R.string.ltr_or_rtl_combine_via_space,
+						app.getString(R.string.quick_action_show_hide_title),
+						menuItem.getTitle()));
 				h.title.setTypeface(FontCache.getFont(app, app.getString(R.string.font_roboto_regular)));
 				h.title.setText(menuItem.getTitle());
 				h.title.setTextColor(app.getResources().getColor(textColorRes));
