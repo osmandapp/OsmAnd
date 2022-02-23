@@ -745,9 +745,9 @@
     <string name="map_widget_distance">Célpont</string>
     <string name="map_widget_altitude">Magasság</string>
     <string name="map_widget_time">Hátralévő idő</string>
-    <string name="map_widget_next_turn">Következő lekanyarodás</string>
-    <string name="map_widget_next_turn_small">Következő lekanyarodás (kicsi)</string>
-    <string name="map_widget_next_next_turn">Második lekanyarodás</string>
+    <string name="map_widget_next_turn">Következő kanyarodás</string>
+    <string name="map_widget_next_turn_small">Következő kanyarodás (kicsi)</string>
+    <string name="map_widget_next_next_turn">Második kanyarodás</string>
     <string name="map_widget_mini_route">Kicsi útvonaltérkép</string>
     <string name="bg_service_screen_lock">Képernyőzár</string>
     <string name="bg_service_screen_lock_toast">Képernyő lezárva</string>
