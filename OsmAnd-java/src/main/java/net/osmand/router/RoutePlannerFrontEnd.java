@@ -263,7 +263,11 @@ public class RoutePlannerFrontEnd {
 							if (routeFound) {
 								routeFound = isRouteCloseToGpxPoints(gctx, gpxPoints, start, next);
 							}
-							if (routeFound) {
+							if (routeFound && next.ind == gpxPoints.size() - 1) {
+								// last point - last route found
+								makeSegmentPointPrecise(start.routeToTarget.get(start.routeToTarget.size() - 1),
+										next.loc, false);
+							} else if (routeFound) {
 								// route is found - cut the end of the route and move to next iteration
 								// start.stepBackRoute = new ArrayList<RouteSegmentResult>();
 								// boolean stepBack = true;
@@ -296,7 +300,7 @@ public class RoutePlannerFrontEnd {
 					}
 				}
 				// route is not found skip segment and keep it as straight line on display
-				if (!routeFound) {
+				if (!routeFound && next != null) {
 					// route is not found, move start point by
 					next = findNextGpxPointWithin(gpxPoints, start, gctx.MINIMUM_STEP_APPROXIMATION);
 					if (prev != null) {
