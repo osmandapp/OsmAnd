@@ -4537,4 +4537,8 @@
 \n
 \nSe obtiver informações de localização pouco precisas ou usar um aparelho sem %2$s, tente mudar para \"%3$s\"</string>
     <string name="location_source">Fonte de localização</string>
+    <string name="shared_string_shape">Forma</string>
+    <string name="default_appearance_desc">A cor, ícone e forma predefinidas serão aplicadas aos pontos favoritos adicionados ao grupo.</string>
+    <string name="default_appearance">Aparência predefinida</string>
+    <string name="edit_category">Editar categoria</string>
 </resources>

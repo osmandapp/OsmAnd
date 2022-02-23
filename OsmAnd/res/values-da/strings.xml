@@ -3286,7 +3286,7 @@
     <string name="new_plugin_added">Ny udvidelse tilføjet</string>
     <string name="join_segments">Forbind segmenter</string>
     <string name="add_new_profile_q">Tilføj den nye profil \'%1$s\'\?</string>
-    <string name="save_heading">Medtag retning</string>
+    <string name="save_heading">Inkluder kurs</string>
     <string name="save_heading_descr">Gem retning for hvert sporpunkt under optagelse.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
