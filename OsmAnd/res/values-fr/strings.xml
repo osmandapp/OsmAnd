@@ -4530,4 +4530,12 @@
     <string name="edit_category">Modifier la catégorie</string>
     <string name="default_appearance">Apparence par défaut</string>
     <string name="default_appearance_desc">Couleur par défaut qui sera appliquée aux favoris du groupe.</string>
+    <string name="stop_download">Arrêter le téléchargement</string>
+    <string name="stop_and_exit">Arrêter et quitter</string>
+    <string name="shared_string_complete">terminer</string>
+    <string name="estimated_download_size">Taille estimée du téléchargement</string>
+    <string name="number_of_tiles">Nombre de tuiles</string>
+    <string name="zoom_levels_difference_description">Un niveau de zoom élevé peut augmenter significativement la taille des données téléchargées.</string>
+    <string name="stop_download_desc">Le téléchargement n\'est pas terminé. Si vous arrêtez le téléchargement maintenant, seule une partie des tuiles sera disponible lors de l\'affichage de la carte.</string>
+    <string name="move_map_to_select_area">Déplacez la carte pour sélectionner la zone souhaitée.</string>
 </resources>
