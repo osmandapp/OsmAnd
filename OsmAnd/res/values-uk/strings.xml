@@ -4536,4 +4536,12 @@
     <string name="default_appearance_desc">Типовий колір, піктограма та форма застосовуватимуться до доданих улюблених точок у групі.</string>
     <string name="default_appearance">Типовий зовнішній вигляд</string>
     <string name="edit_category">Редагувати категорію</string>
+    <string name="zoom_levels_difference_description">Значна різниця між масштабами може збільшити розмір завантажених даних.</string>
+    <string name="shared_string_complete">завершено</string>
+    <string name="stop_download">Зупинити завантаження</string>
+    <string name="stop_and_exit">Зупинити й вийти</string>
+    <string name="number_of_tiles">Кількість тайлів</string>
+    <string name="estimated_download_size">Приблизний розмір завантаження</string>
+    <string name="stop_download_desc">Завантаження не завершено. Якщо зараз перервати його, для перегляду буде доступна лише частина тайлів.</string>
+    <string name="move_map_to_select_area">Перемістіть мапу, щоб вибрати потрібну ділянку.</string>
 </resources>
