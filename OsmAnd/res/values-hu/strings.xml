@@ -4535,5 +4535,5 @@
     <string name="estimated_download_size">Becsült letöltési méret</string>
     <string name="number_of_tiles">Csempék száma</string>
     <string name="zoom_levels_difference_description">A nagyítási szintek közötti nagy különbség növelheti a letöltött adatok méretét.</string>
-    <string name="move_map_to_select_area">Mozgassa a térképet a kívánt terület kiválasztásához.</string>
+    <string name="move_map_to_select_area">Mozgassa a térképet a kívánt terület kijelöléséhez.</string>
 </resources>
