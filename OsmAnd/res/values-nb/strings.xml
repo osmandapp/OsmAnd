@@ -4532,4 +4532,12 @@
 \n • Rettet forskjellige problemer med ruteføring
 \n
 \n</string>
+    <string name="stop_and_exit">Stopp og avslutt</string>
+    <string name="zoom_levels_difference_description">Den store forskjellen mellom forstørrelsesnivåene kan øke størrelsen på nedlastet data.</string>
+    <string name="estimated_download_size">Anslått nedlastningsstørrelse</string>
+    <string name="stop_download">Stopp nedlasting</string>
+    <string name="stop_download_desc">Nedlastingen er ikke fullført. Hvis du forstyrrer den nå, vil kun noen av filene kunne vises.</string>
+    <string name="shared_string_complete">fullført</string>
+    <string name="number_of_tiles">Antall flis</string>
+    <string name="move_map_to_select_area">Flytt kartet for å velge ønsket område.</string>
 </resources>
