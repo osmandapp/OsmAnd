@@ -40,13 +40,13 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	private ApplicationMode appMode;
 	private LayoutInflater inflater;
 	private WidgetsPanel panel;
-	private Fragment wrapperFragment;
 	private boolean nightMode;
 
 	private View view;
 	private LinearLayout widgetsList;
 	private NestedScrollView scrollView;
-	private View btnChangeOrder;
+	private View listBtnChangeOrder;
+	private View stickBtnChangeOrder;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,10 +68,23 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		view = inflater.inflate(R.layout.fragment_widgets_list, container, false);
 		widgetsList = view.findViewById(R.id.widgets_list);
 		scrollView = view.findViewById(R.id.scroll_view);
-		btnChangeOrder = view.findViewById(R.id.change_order_button_in_list);
+		listBtnChangeOrder = view.findViewById(R.id.change_order_button_in_list);
+		setupBtnChangeOrder();
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(this);
 		updateContent();
 		return view;
+	}
+
+	private void setupBtnChangeOrder() {
+		Fragment fragment = getParentFragment();
+		if (fragment instanceof ConfigureWidgetsFragment) {
+			ConfigureWidgetsFragment parent = (ConfigureWidgetsFragment) fragment;
+			stickBtnChangeOrder = parent.getBtnChangeOrder();
+			if (stickBtnChangeOrder != null) {
+				parent.setupReorderButton(stickBtnChangeOrder);
+			}
+			parent.setupReorderButton(listBtnChangeOrder);
+		}
 	}
 
 	public void updateContent() {
@@ -147,9 +160,12 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		}
 	}
 
-	@Nullable
-	public View getChangeOrderButton() {
-		return btnChangeOrder;
+	private void updateReorderButtons() {
+		if (stickBtnChangeOrder != null) {
+			int listButtonTop = AndroidUtils.getViewOnScreenY(listBtnChangeOrder);
+			int bottomButtonTop = AndroidUtils.getViewOnScreenY(stickBtnChangeOrder);
+			stickBtnChangeOrder.setVisibility(listButtonTop <= bottomButtonTop ? View.GONE : View.VISIBLE);
+		}
 	}
 
 	@Nullable
@@ -159,13 +175,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 
 	@Override
 	public void onScrollChanged() {
-		if (wrapperFragment instanceof OnScrollChangedListener) {
-			((OnScrollChangedListener) wrapperFragment).onScrollChanged();
-		}
-	}
-
-	public void setWrapperFragment(Fragment wrapperFragment) {
-		this.wrapperFragment = wrapperFragment;
+		updateReorderButtons();
 	}
 
 	public void setPanel(@NonNull WidgetsPanel panel) {

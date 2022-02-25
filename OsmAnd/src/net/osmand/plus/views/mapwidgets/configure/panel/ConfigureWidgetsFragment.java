@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver.OnScrollChangedListener;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,7 +34,7 @@ import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements OnScrollChangedListener {
+public class ConfigureWidgetsFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = ConfigureWidgetsFragment.class.getSimpleName();
 
@@ -55,7 +54,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements OnSc
 	private ViewPager2 viewPager;
 
 	private List<WidgetsPanel> availablePanels;
-	private WidgetsPanel selectedGroup;
+	private WidgetsPanel selectedPanel;
 	private TabAdapter tabAdapter;
 	private boolean nightMode;
 
@@ -126,15 +125,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements OnSc
 		viewPager.registerOnPageChangeCallback(new OnPageChangeCallback() {
 			@Override
 			public void onPageSelected(int position) {
-				selectedGroup = availablePanels.get(position);
-				WidgetsListFragment fragment = tabAdapter.getFragment(position);
-				if (fragment != null) {
-					fragment.setWrapperFragment(ConfigureWidgetsFragment.this);
-					View reorderBtnInList = fragment.getChangeOrderButton();
-					if (reorderBtnInList != null) {
-						setupReorderButton(reorderBtnInList);
-					}
-				}
+				selectedPanel = availablePanels.get(position);
 			}
 		});
 
@@ -150,11 +141,11 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements OnSc
 			}
 		}
 
-		int selectedTabPosition = availablePanels.indexOf(selectedGroup);
+		int selectedTabPosition = availablePanels.indexOf(selectedPanel);
 		viewPager.setCurrentItem(selectedTabPosition, false);
 	}
 
-	private void setupReorderButton(View btnChangeOrder) {
+	public void setupReorderButton(View btnChangeOrder) {
 		btnChangeOrder.setOnClickListener(v -> onReorderButtonClicked());
 		setupListItemBackground(btnChangeOrder);
 	}
@@ -162,46 +153,27 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements OnSc
 	private void onReorderButtonClicked() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			ReorderWidgetsFragment.showInstance(activity, selectedGroup, appMode);
-		}
-	}
-
-	private void updateReorderButtons() {
-		View btnInList = getReorderBtnInList();
-		if (btnInList != null) {
-			int listButtonTop = AndroidUtils.getViewOnScreenY(btnInList);
-			int bottomButtonTop = AndroidUtils.getViewOnScreenY(btnChangeOrder);
-			btnChangeOrder.setVisibility(listButtonTop <= bottomButtonTop ? View.GONE : View.VISIBLE);
+			ReorderWidgetsFragment.showInstance(activity, selectedPanel, appMode);
 		}
 	}
 
 	@Nullable
-	private View getReorderBtnInList() {
-		int selectedTab = tabLayout.getSelectedTabPosition();
-		WidgetsListFragment fragment = tabAdapter.getFragment(selectedTab);
-		if (fragment != null) {
-			return fragment.getChangeOrderButton();
-		}
-		return null;
-	}
-
-	@Override
-	public void onScrollChanged() {
-		updateReorderButtons();
+	public View getBtnChangeOrder() {
+		return btnChangeOrder;
 	}
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(APP_MODE_ATTR, appMode.getStringKey());
-		outState.putString(SELECTED_GROUP_ATTR, selectedGroup.name());
+		outState.putString(SELECTED_GROUP_ATTR, selectedPanel.name());
 	}
 
 	private void restoreData(@NonNull Bundle savedInstanceState) {
 		String appModeKey = savedInstanceState.getString(APP_MODE_ATTR);
 		appMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
 		String groupName = savedInstanceState.getString(SELECTED_GROUP_ATTR);
-		selectedGroup = WidgetsPanel.valueOf(groupName);
+		selectedPanel = WidgetsPanel.valueOf(groupName);
 	}
 
 	private void setupListItemBackground(@NonNull View view) {
@@ -211,8 +183,8 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements OnSc
 		AndroidUtils.setBackground(button, background);
 	}
 
-	public void setSelectedGroup(WidgetsPanel selectedGroup) {
-		this.selectedGroup = selectedGroup;
+	public void setSelectedPanel(WidgetsPanel selectedPanel) {
+		this.selectedPanel = selectedPanel;
 	}
 
 	public void setAppMode(ApplicationMode appMode) {
@@ -225,7 +197,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements OnSc
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			ConfigureWidgetsFragment fragment = new ConfigureWidgetsFragment();
-			fragment.setSelectedGroup(selectedGroup);
+			fragment.setSelectedPanel(selectedGroup);
 			fragment.setAppMode(appMode);
 			fragmentManager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)
