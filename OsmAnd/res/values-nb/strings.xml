@@ -4335,11 +4335,11 @@
     <string name="skip_confirmation">Ja, hopp over</string>
     <string name="shared_storage">Delt lagring</string>
     <string name="show_parameter_seekbar">Vis parametersøkefelt</string>
-    <string name="shared_string_skip_warning">Start flyttingen\? OsmAnd vil ikke lenger ha tilgang til filene dine i delt lagring.
+    <string name="shared_string_skip_warning">Hoppe over flyttingen\? OsmAnd har ikke lenger tilgang til filene dine i delt lagring.
 \n
 \nProgrammet vil begynne å bruke den nye datamappen.</string>
-    <string name="shared_storage_last_step">Du vil kunne angi ny datalagring etter å ha valgt delt lagring.</string>
-    <string name="shared_storage_third_step">Innvilg tilgang til mappen. Uten dette kan ikke OsmAnd kopiere filer.</string>
+    <string name="shared_storage_last_step">Du kan angi en ny datamappe etterpå.</string>
+    <string name="shared_storage_third_step">Gi tillatelse for å få tilgang til mappen. Uten den kan ikke OsmAnd kopiere filer.</string>
     <string name="shared_storage_first_step">Trykk «%1$s».
 \nFilbehandleren åpnes der du trenger å finne og åpne OsmAnd-mappen.</string>
     <string name="storage_copying_files_size">Kopierer %1$s filer %2$s …</string>
@@ -4532,4 +4532,12 @@
 \n • Rettet forskjellige problemer med ruteføring
 \n
 \n</string>
+    <string name="stop_and_exit">Stopp og avslutt</string>
+    <string name="zoom_levels_difference_description">Den store forskjellen mellom forstørrelsesnivåene kan øke størrelsen på nedlastet data.</string>
+    <string name="estimated_download_size">Anslått nedlastningsstørrelse</string>
+    <string name="stop_download">Stopp nedlasting</string>
+    <string name="stop_download_desc">Nedlastingen er ikke fullført. Hvis du avbryter nedlastingen nå, vil kun en del av kartflisene være tilgjengelig for visning.</string>
+    <string name="shared_string_complete">fullført</string>
+    <string name="number_of_tiles">Antall flis</string>
+    <string name="move_map_to_select_area">Flytt kartet for å velge ønsket område.</string>
 </resources>

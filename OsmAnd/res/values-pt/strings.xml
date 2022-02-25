@@ -4541,4 +4541,12 @@
     <string name="default_appearance_desc">A cor, ícone e forma predefinidas serão aplicadas aos pontos favoritos adicionados ao grupo.</string>
     <string name="default_appearance">Aparência predefinida</string>
     <string name="edit_category">Editar categoria</string>
+    <string name="stop_download">Parar o descarregamento</string>
+    <string name="zoom_levels_difference_description">A grande diferença entre níveis de ampliação pode aumentar a quantidade de dados descarregados.</string>
+    <string name="estimated_download_size">Estimativa do tamanho do descarregamento</string>
+    <string name="stop_download_desc">O descarregamento não terminou. Se o interromper agora, apenas parte dos mosaicos estarão disponíveis.</string>
+    <string name="stop_and_exit">Parar e sair</string>
+    <string name="shared_string_complete">completo</string>
+    <string name="number_of_tiles">Número de mosaicos</string>
+    <string name="move_map_to_select_area">Mova o mapa para selecionar a área necessária.</string>
 </resources>
