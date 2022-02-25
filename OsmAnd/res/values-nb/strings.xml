@@ -4446,7 +4446,7 @@
 \nHvis du får upresis posisjonsinfo eller bruker en enhet uten %2$s, kan du prøve å bytte til «%3$s».</string>
     <string name="edit_category">Rediger kategori</string>
     <string name="shared_string_shape">Form</string>
-    <string name="default_appearance_desc">Forvalgt, farge, ikon og form vil bli brukt for favorittpunkter i gruppen</string>
+    <string name="default_appearance_desc">Forvalgt farge, ikon og form vil bli brukt for de tillagte favorittpunktene i gruppen.</string>
     <string name="default_appearance">Forvalgt utseende</string>
     <string name="release_3_8">- Oppdatert Planlegg en rute-funksjon: gjør det mulig å bruke forskjellige navigatsjonstyper pr. segment og inkludere spor
 \n
@@ -4538,6 +4538,6 @@
     <string name="stop_download">Stopp nedlasting</string>
     <string name="stop_download_desc">Nedlastingen er ikke fullført. Hvis du avbryter nedlastingen nå, vil kun en del av kartflisene være tilgjengelig for visning.</string>
     <string name="shared_string_complete">fullført</string>
-    <string name="number_of_tiles">Antall flis</string>
+    <string name="number_of_tiles">Antall kartfliser</string>
     <string name="move_map_to_select_area">Flytt kartet for å velge ønsket område.</string>
 </resources>
