@@ -23,6 +23,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.quickaction.QuickActionListFragment;
+import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
@@ -64,6 +65,13 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment {
 		app = requireMyApplication();
 		settings = app.getSettings();
 		selectedAppMode = settings.getApplicationMode();
+
+		settings.QUICK_ACTION_LIST.addListener(change -> {
+			updateButtonsCard();
+		});
+		settings.QUICK_ACTION.addListener(change -> {
+			updateButtonsCard();
+		});
 	}
 
 	@Nullable
@@ -180,13 +188,17 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment {
 				false,
 				null
 		));
-		String desc = getString(R.string.shared_string_enabled);
+
+		QuickActionRegistry qaRegistry = app.getQuickActionRegistry();
+		int actionsCount = qaRegistry.getQuickActions().size();
+		String actions = getString(R.string.shared_string_actions);
+		String desc = getString(R.string.ltr_or_rtl_combine_via_colon, actions, String.valueOf(actionsCount));
 		buttonsCard.addView(createButtonWithDesc(
 				R.drawable.ic_quick_action,
 				getString(R.string.configure_screen_quick_action),
 				desc,
-				false,
-				v -> QuickActionListFragment.showInstance(requireActivity(), false, true)
+				qaRegistry.isQuickActionOn(),
+				v -> QuickActionListFragment.showInstance(requireActivity(), false)
 		));
 	}
 

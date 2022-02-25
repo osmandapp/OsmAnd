@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.util.Log;
@@ -32,19 +31,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.quickaction.ConfirmationBottomSheet.OnConfirmButtonClickListener;
+import net.osmand.plus.quickaction.QuickActionRegistry.QuickActionUpdatesListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.OnItemMoveCallback;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.UnmovableItem;
 import net.osmand.plus.views.layers.MapQuickActionLayer;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -58,8 +61,7 @@ import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
  */
 
 public class QuickActionListFragment extends BaseOsmAndFragment
-        implements QuickActionRegistry.QuickActionUpdatesListener,
-        ConfirmationBottomSheet.OnConfirmButtonClickListener {
+        implements QuickActionUpdatesListener, OnConfirmButtonClickListener {
 
     public static final String TAG = QuickActionListFragment.class.getSimpleName();
 
@@ -85,15 +87,12 @@ public class QuickActionListFragment extends BaseOsmAndFragment
     private QuickActionRegistry quickActionRegistry;
     private ArrayList<Long> actionsToDelete = new ArrayList<>();
     private int screenType = SCREEN_TYPE_REORDER;
-
-    private boolean fromDashboard;
     private boolean nightMode;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
-            fromDashboard = savedInstanceState.getBoolean(FROM_DASHBOARD_KEY, false);
             long[] array = savedInstanceState.getLongArray(ACTIONS_TO_DELETE_KEY);
             if (array != null) {
                 for (long id : array) {
@@ -106,13 +105,11 @@ public class QuickActionListFragment extends BaseOsmAndFragment
             public void handleOnBackPressed() {
                 MapActivity mapActivity = getMapActivity();
                 if (mapActivity != null) {
+                    OsmandMapTileView mapView = mapActivity.getMapView();
+                    MapQuickActionLayer layer = mapView.getLayerByClass(MapQuickActionLayer.class);
                     if (isVisible()) {
-                        if (fromDashboard()) {
-                            mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.CONFIGURE_SCREEN, null);
-                        } else {
-                            mapActivity.getMapView().getLayerByClass(MapQuickActionLayer.class).onBackPressed();
-                        }
-                    } else if (mapActivity.getMapView().getLayerByClass(MapQuickActionLayer.class).onBackPressed()) {
+                        layer.onBackPressed();
+                    } else if (layer.onBackPressed()) {
                         return;
                     }
                     FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
@@ -136,17 +133,9 @@ public class QuickActionListFragment extends BaseOsmAndFragment
 
         rv = (RecyclerView) view.findViewById(R.id.recycler_view);
         fab = (FloatingActionButton) view.findViewById(R.id.fabButton);
+        fab.setOnClickListener(v -> showAddQuickActionDialog());
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showAddQuickActionDialog();
-            }
-        });
-
-        if (Build.VERSION.SDK_INT >= 21) {
-            AndroidUtils.addStatusBarPadding21v(getContext(), view);
-        }
+        AndroidUtils.addStatusBarPadding21v(requireContext(), view);
 
         bottomPanel = view.findViewById(R.id.bottom_panel);
         View btnSelectAll = bottomPanel.findViewById(R.id.select_all);
@@ -418,7 +407,6 @@ public class QuickActionListFragment extends BaseOsmAndFragment
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putBoolean(FROM_DASHBOARD_KEY, fromDashboard);
         long[] array = new long[actionsToDelete.size()];
         for (int i = 0; i < actionsToDelete.size(); i++) {
             array[i] = actionsToDelete.get(i);
@@ -467,6 +455,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
             this.onStartDragListener = onStartDragListener;
         }
 
+        @NotNull
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             Context themedCtx = UiUtilities.getThemedContext(parent.getContext(), nightMode);
@@ -509,7 +498,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
         }
 
         @Override
-        public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
+        public void onBindViewHolder(@NotNull final RecyclerView.ViewHolder holder, int position) {
             OsmandApplication app = requireMyApplication();
             ListItem item = items.get(position);
             int activeColorResId = ColorUtilities.getActiveColorId(nightMode);
@@ -874,14 +863,6 @@ public class QuickActionListFragment extends BaseOsmAndFragment
         }
     }
 
-    public boolean fromDashboard() {
-        return fromDashboard;
-    }
-
-    public void setFromDashboard(boolean fromDashboard) {
-        this.fromDashboard = fromDashboard;
-    }
-
     public interface OnStartDragListener {
         void onStartDrag(RecyclerView.ViewHolder viewHolder);
     }
@@ -917,7 +898,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
     }
 
     public static void showInstance(@NonNull FragmentActivity activity) {
-        showInstance(activity, false, false);
+        showInstance(activity, false);
     }
 
     public static void showInstance(@NonNull FragmentActivity activity, boolean setFromDashboard, boolean animate) {
@@ -932,8 +913,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
             }
 
             QuickActionListFragment fragment = new QuickActionListFragment();
-            fragment.setFromDashboard(setFromDashboard);
-            fragmentManager.beginTransaction()
+            fm.beginTransaction()
                     .setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
                     .add(R.id.fragmentContainer, fragment, TAG)
                     .addToBackStack(TAG)
