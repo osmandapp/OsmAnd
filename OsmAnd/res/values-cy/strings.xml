@@ -2416,4 +2416,30 @@
     <string name="last_time_checked">Gwiriwyd diwethaf: %s</string>
     <string name="updated">Diweddariwyd: %s</string>
     <string name="copy_poi_name">Copïo enw MODd</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Eiconau ar lefelau chwyddo isel</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Arddangosiad sgematig eiconau ar lefelau chwyddo isel</string>
+    <string name="files_with_route_restrictions">Ffeiliau gyda chyfyngiadau llwybrau</string>
+    <string name="turn_arrows_descr">Dewiswch a ddylid dangos saethau troi ar linell y llwybr.</string>
+    <string name="shared_string_skip_warning">Neidio\'r mudo\? Ni fydd OsmAnd bellach â mynediad at eich ffeiliau yn y storfa sy\'n cael ei rannu.
+\n
+\nBydd yr ap yn dechrau defnyddio\'ch ffolder data newydd.</string>
+    <string name="approx_safe_mode">Brasamcan GPX diogel</string>
+    <string name="approx_safe_mode_description">Perfformio brasamcan GPX gan ddefnyddio cod Android arafach yn hytrach na\'r cod brodorol.</string>
+    <string name="routing_attr_only_permitted_streets_description">Defnyddio dim ond strydoedd wedi\'u caniatáu yn benodol</string>
+    <string name="mapillary_menu_filter_description_new">Hidlo delweddau wrth ddyddiad neu fath. Gweithredol dim ond wedi chwyddo\'n agos.</string>
+    <string name="stop_download_desc">Dyw\'r llwytho heb orffen. Os fyddwch yn ei stopio nawr, dim ond rhan o\'r teils fydd ar gael i\'w gweld.</string>
+    <string name="stop_download">Stopio\'r llwytho</string>
+    <string name="stop_and_exit">Stopio a gadael</string>
+    <string name="shared_string_complete">cyflawn</string>
+    <string name="zoom_levels_difference_description">Gall y gwahaniaeth mawr rhwng lefelau chwyddo gynyddu maint y data sy\'n cael ei lawrlwytho.</string>
+    <string name="estimated_download_size">Amcan o faint y llwyth</string>
+    <string name="number_of_tiles">Nifer teils</string>
+    <string name="move_map_to_select_area">Symudwch y map i ddewis ardal sydd ei angen.</string>
+    <string name="use_routing_fallback">Llwybro all-lein wrth gefn</string>
+    <string name="routing_attr_only_permitted_streets_name">Strydoedd wedi\'u caniatáu yn benodol</string>
+    <string name="use_routing_fallback_description">Defnyddio llwybro all-lein tra bod llwybro ar-lein ddim ar gael.</string>
+    <string name="gps_filter_hdop_desc">Gosodwch y gwerth uchaf i\'w dderbyn ar gyfer HDOP.
+\nCaiff pwyntiau gyda gwerth uwch eu cuddio.</string>
+    <string name="exit_pan_mode_descr">Pwyswch Dewis i adael modd tremio</string>
+    <string name="routing_attr_only_permitted_ways_name">Ffyrdd wedi\'u caniatáu yn benodol</string>
 </resources>
