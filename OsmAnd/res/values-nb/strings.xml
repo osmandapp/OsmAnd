@@ -153,7 +153,7 @@
     <string name="altitude">Høyde</string>
     <string name="no_info">Ingen info</string>
     <string name="direction_style_sidewise">Sideveis (8 sektorer)</string>
-    <string name="direction_style_clockwise">Med klokken (12 sektorer)</string>
+    <string name="direction_style_clockwise">Med urviser (12 sektorer)</string>
     <string name="settings_direction_style">Retningsstil</string>
     <string name="settings_direction_style_descr">Velg stil til å uttrykke relative retninger under bevegelse</string>
     <string name="auto_announce_on">Start auto-annonsering</string>
@@ -772,7 +772,7 @@
     <string name="level_to_switch_vector_raster_descr">Bruk rasterkart for alt utover dette nivået.</string>
     <string name="level_to_switch_vector_raster">Minste vektor-zoomnivå</string>
     <string name="incomplete_locale">ufullstendig</string>
-    <string name="voice_is_not_available_title">Velg en taleveiledningspakke</string>
+    <string name="voice_is_not_available_title">Velg en talemeldingspakke</string>
     <string name="select_max_zoom_preload_area">Maksimal forstørrelse å forhåndslaste</string>
     <string name="voice_data_initializing">Initialiserer taledata…</string>
     <string name="update_poi_is_not_available_for_zoom">Å zoome inn lar deg oppdatere interessepunkter</string>
@@ -2415,7 +2415,7 @@
     <string name="intermediate_items_sort_return">Optimalisert rekkefølge av mellomliggende reisemål underveis til målet.</string>
     <string name="audionotes_location_not_defined">Trykk \'Bruk posisjon…\' for å legge til et notat til stedet.</string>
     <string name="add_waypoint_dialog_title">Legg til rutepunkt i innspilt GPX-spor</string>
-    <string name="voice_is_not_available_msg">Taleveiledning er ikke tilgjengelig, gå til \'Innstillinger\' → \'Navigeringsinnstillinger\' , velg profilen → \'Taleveiledning\' og velg eller last ned en talemeldingspakke.</string>
+    <string name="voice_is_not_available_msg">Taleveiledning er ikke tilgjengelig, gå til \'Innstillinger\' → \'Navigeringsinnstillinger\', velg profilen → \'Taleveiledning\' og velg eller last ned en talemeldingspakke.</string>
     <string name="use_fast_recalculation_desc">Beregner på nytt bare den første delen av ruten, nyttig for lange turer.</string>
     <string name="nautical_renderer">Maritimt</string>
     <string name="day_off_label">stengt (fridag)</string>
