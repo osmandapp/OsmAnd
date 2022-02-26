@@ -4521,9 +4521,25 @@
     <string name="shared_string_reading_file">Enlegado de dosiero…</string>
     <string name="all_groups">Ĉiuj grupoj</string>
     <string name="list_of_groups">Listo de grupoj</string>
-    <string name="points_selection_descr">Ĉu vi certe volas rezigni\? Ĉiuj viaj ŝanĝoj perdiĝos.</string>
-    <string name="exit_import_descr">Ĉu vi certe volas eliri sen konservi\? Ĉiuj viaj ŝanĝoj perdiĝos.</string>
+    <string name="points_selection_descr">Ĉu fermi kaj perdi ĉiujn ŝanĝojn\?</string>
+    <string name="exit_import_descr">Ĉu eliri sen konservi ĉiujn ŝanĝojn\?</string>
     <string name="exit_import">Ĉu eliri enportadon\?</string>
     <string name="import_tracks">Enporti spurojn</string>
     <string name="import_tracks_descr">La dosiero “%1$s” enhavas %2$s apartajn spurojn. Elektu spurojn por enporti.</string>
+    <string name="zoom_levels_difference_description">Ju pli granda amplekso de skal-niveloj, des pli multe da datumoj necesos elŝuti.</string>
+    <string name="default_appearance">Implicita aspekto</string>
+    <string name="location_source_descr">OsmAnd instalita per Google Play implicite uzas %1$s por determini vian pozicion.
+\n
+\nSe via pozicio estas malpreciza aŭ vi uzas aparaton sen %2$s, provu elekti “%3$s”.</string>
+    <string name="location_source">Fonto de pozicio</string>
+    <string name="stop_download_desc">Elŝutado ne kompletiĝis. Se vi ĉesigos la elŝutadon nun, nur parto de la kaheloj estos montrebla.</string>
+    <string name="stop_download">Ĉesigi elŝutadon</string>
+    <string name="stop_and_exit">Ĉesigi kaj eliri</string>
+    <string name="shared_string_complete">kompleta</string>
+    <string name="estimated_download_size">Proksimuma elŝuta grando</string>
+    <string name="number_of_tiles">Nombro da kaheloj</string>
+    <string name="edit_category">Redakti kategorion</string>
+    <string name="move_map_to_select_area">Movu la mapon por elekti deziratan areon.</string>
+    <string name="shared_string_shape">Formo</string>
+    <string name="default_appearance_desc">La implicita koloro, bildsimbolo kaj formo, kiuj aplikiĝos al la punktoj aldonotaj al la grupo.</string>
 </resources>
