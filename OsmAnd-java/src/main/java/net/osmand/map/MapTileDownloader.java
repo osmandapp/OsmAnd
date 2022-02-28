@@ -99,14 +99,6 @@ public class MapTileDownloader {
 			this.zoom = zoom;
 		}
 
-		public DownloadRequest(String url, File fileToSave) {
-			this.url = url;
-			this.fileToSave = fileToSave;
-			xTile = -1;
-			yTile = -1;
-			zoom = -1;
-		}
-
 		public void setError(boolean error) {
 			this.error = error;
 		}
