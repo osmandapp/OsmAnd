@@ -231,7 +231,8 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		boolean ellipticYTile = tileSource.isEllipticYTile();
 
 		long tilesNumber = DownloadTilesHelper.getTilesNumber(selectedMinZoom, selectedMaxZoom, latLonRect, ellipticYTile);
-		float estimatedDownloadSizeMB = DownloadTilesHelper.getApproxTilesSizeMb(tileSource, tilesNumber);
+		float estimatedDownloadSizeMB = DownloadTilesHelper.getApproxTilesSizeMb(selectedMinZoom,
+				selectedMaxZoom, latLonRect, tileSource, app.getResourceManager().getBitmapTilesCache());
 
 		String formattedTilesNumber = OsmAndFormatter.formatValue(tilesNumber, "",
 				false, 0, app).value;
@@ -363,12 +364,12 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 			}
 			updateTilesPreview();
 			updateContent();
-//			app.runMessageInUIThreadAndCancelPrevious(UPDATE_CONTENT_MESSAGE, this::updateContent, 100);
 		});
 	}
 
 	@Override
 	public void updateLocation(Location location) {
+		setupTilesDownloadInfo(settings.getMapTileSource(false));
 		updateTilesPreview();
 	}
 

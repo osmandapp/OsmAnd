@@ -94,9 +94,9 @@ public abstract class TilesCache<T> {
 		return tilesOnFS.get(tileId) != null;
 	}
 
-	public synchronized long getTileBytesSizeOnFileSystem(@NonNull String tileId,
-	                                                      @NonNull ITileSource map,
-	                                                      int x, int y, int zoom) {
+	public synchronized int getTileBytesSizeOnFileSystem(@NonNull String tileId,
+	                                                     @NonNull ITileSource map,
+	                                                     int x, int y, int zoom) {
 		if (isTileDownloaded(tileId, map, x, y, zoom)) {
 			try {
 				byte[] bytes = map.getBytes(x, y, zoom, dirWithTiles.getAbsolutePath());
@@ -213,7 +213,7 @@ public abstract class TilesCache<T> {
 		return get(req.tileId, req.timestamp);
 	}
 
-	protected abstract T getTileObject(TileLoadDownloadRequest req);
+	protected abstract T getTileObject(@NonNull TileLoadDownloadRequest req);
 
 	protected boolean isExpired(TileLoadDownloadRequest req) {
 		if (req.tileSource.getExpirationTimeMillis() != -1 && req.url != null && req.dirWithTiles.canRead()) {
