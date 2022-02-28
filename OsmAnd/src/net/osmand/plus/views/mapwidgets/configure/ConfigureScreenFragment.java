@@ -2,6 +2,7 @@ package net.osmand.plus.views.mapwidgets.configure;
 
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,8 @@ import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.util.Algorithms;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,9 +94,14 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment {
 
 		setupToolbar();
 		setupModesToggle();
-		fullUpdate();
 
 		return view;
+	}
+
+	@Override
+	public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		fullUpdate();
 	}
 
 	private void setupToolbar() {
@@ -144,8 +152,13 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment {
 			}
 			return true;
 		});
+		if (selectedItem != null) {
+			modesToggle.scrollTo(selectedItem);
+		}
 		settings.APPLICATION_MODE.addListener(change -> {
-			fullUpdate();
+			if (getContext() != null) {
+				fullUpdate();
+			}
 		});
 	}
 
@@ -333,6 +346,14 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment {
 		button.setOnClickListener(listener);
 	}
 
+	@Override
+	public int getStatusBarColorId() {
+		View view = getView();
+		if (view != null && Build.VERSION.SDK_INT >= 23 && !nightMode) {
+				view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+		}
+		return ColorUtilities.getListBgColorId(nightMode);
+	}
 
 	public static void showInstance(@NonNull FragmentActivity activity) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();

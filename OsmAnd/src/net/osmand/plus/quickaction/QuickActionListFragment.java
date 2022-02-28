@@ -901,9 +901,10 @@ public class QuickActionListFragment extends BaseOsmAndFragment
         showInstance(activity, false);
     }
 
-    public static void showInstance(@NonNull FragmentActivity activity, boolean setFromDashboard, boolean animate) {
-        FragmentManager fragmentManager = activity.getSupportFragmentManager();
-        if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+    public static void showInstance(@NonNull FragmentActivity activity,
+                                    boolean animate) {
+        FragmentManager fm = activity.getSupportFragmentManager();
+        if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
             int slideInAnim = 0;
             int slideOutAnim = 0;
             OsmandApplication app = ((OsmandApplication) activity.getApplication());

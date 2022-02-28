@@ -2,6 +2,7 @@ package net.osmand.plus.views.mapwidgets.configure.panel;
 
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -189,6 +190,15 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment {
 
 	public void setAppMode(ApplicationMode appMode) {
 		this.appMode = appMode;
+	}
+
+	@Override
+	public int getStatusBarColorId() {
+		View view = getView();
+		if (view != null && Build.VERSION.SDK_INT >= 23 && !nightMode) {
+			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+		}
+		return ColorUtilities.getListBgColorId(nightMode);
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity,

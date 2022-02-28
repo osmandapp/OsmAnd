@@ -1,6 +1,7 @@
 package net.osmand.plus.views.mapwidgets.configure.reorder;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsLis
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
@@ -260,6 +262,15 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 
 	public void setAppMode(ApplicationMode appMode) {
 		this.appMode = appMode;
+	}
+
+	@Override
+	public int getStatusBarColorId() {
+		View view = getView();
+		if (view != null && Build.VERSION.SDK_INT >= 23 && !nightMode) {
+			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+		}
+		return ColorUtilities.getListBgColorId(nightMode);
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity,
