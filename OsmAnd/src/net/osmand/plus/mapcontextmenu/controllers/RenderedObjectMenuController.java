@@ -26,8 +26,8 @@ public class RenderedObjectMenuController extends MenuController {
 	private RenderedObject renderedObject;
 
 	public RenderedObjectMenuController(@NonNull MapActivity mapActivity,
-										@NonNull PointDescription pointDescription,
-										@NonNull RenderedObject renderedObject) {
+	                                    @NonNull PointDescription pointDescription,
+	                                    @NonNull RenderedObject renderedObject) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		builder.setShowNearestWiki(true);
 		this.renderedObject = renderedObject;
@@ -119,7 +119,7 @@ public class RenderedObjectMenuController extends MenuController {
 			Long id = renderedObject.getId();
 			if (osmEditingEnabled && id != null && id > 0 &&
 					(id % 2 == MapObject.AMENITY_ID_RIGHT_SHIFT || (id >> MapObject.NON_AMENITY_ID_RIGHT_SHIFT) < Integer.MAX_VALUE)) {
-				String link = getOsmUrlForId(id);
+				String link = getOsmUrlForId(id, MapObject.NON_AMENITY_ID_RIGHT_SHIFT);
 				addPlainMenuItem(R.drawable.ic_action_info_dark, null, link, true, true, null);
 			}
 		}

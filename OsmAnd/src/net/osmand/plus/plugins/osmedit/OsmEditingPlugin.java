@@ -642,16 +642,16 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return description;
 	}
 
-	public static String getOsmUrlForId(long id) {
-		long relationShift = 1L << 41;
+	public static String getOsmUrlForId(long id, int shift) {
 		long originalId = (id >> 1);
+		long relationShift = 1L << 41;
 		if (originalId > relationShift) {
-			long relationId = (originalId & ~ relationShift) >> 10;
+			long relationId = (originalId & ~relationShift) >> 10;
 			return "https://www.openstreetmap.org/relation/" + relationId;
 		} else if (id % 2 == MapObject.WAY_MODULO_REMAINDER) {
-			return "https://www.openstreetmap.org/way/" + originalId;
+			return "https://www.openstreetmap.org/way/" + (id >> shift);
 		} else {
-			return "https://www.openstreetmap.org/node/" + originalId;
+			return "https://www.openstreetmap.org/node/" + (id >> shift);
 		}
 	}
 
