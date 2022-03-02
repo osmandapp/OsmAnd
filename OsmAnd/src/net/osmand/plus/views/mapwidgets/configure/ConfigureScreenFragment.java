@@ -25,6 +25,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.quickaction.QuickActionRegistry;
+import net.osmand.plus.quickaction.QuickActionRegistry.QuickActionUpdatesListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
@@ -38,12 +39,10 @@ import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.util.Algorithms;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConfigureScreenFragment extends BaseOsmAndFragment {
+public class ConfigureScreenFragment extends BaseOsmAndFragment implements QuickActionUpdatesListener {
 
 	public static final String TAG = ConfigureScreenFragment.class.getSimpleName();
 
@@ -68,13 +67,6 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment {
 		app = requireMyApplication();
 		settings = app.getSettings();
 		selectedAppMode = settings.getApplicationMode();
-
-		settings.QUICK_ACTION_LIST.addListener(change -> {
-			updateButtonsCard();
-		});
-		settings.QUICK_ACTION.addListener(change -> {
-			updateButtonsCard();
-		});
 	}
 
 	@Nullable
@@ -94,14 +86,21 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment {
 
 		setupToolbar();
 		setupModesToggle();
+		fullUpdate();
 
 		return view;
 	}
 
 	@Override
-	public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-		fullUpdate();
+	public void onStart() {
+		super.onStart();
+		app.getQuickActionRegistry().addUpdatesListener(this);
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		app.getQuickActionRegistry().removeUpdatesListener(this);
 	}
 
 	private void setupToolbar() {
@@ -220,6 +219,11 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment {
 		if (activity != null) {
 			ConfigureWidgetsFragment.showInstance(activity, panel, selectedAppMode);
 		}
+	}
+
+	@Override
+	public void onActionsUpdated() {
+		updateButtonsCard();
 	}
 
 	private View createWidgetGroupView(WidgetsPanel panel,

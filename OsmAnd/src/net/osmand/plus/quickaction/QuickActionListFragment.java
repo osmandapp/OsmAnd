@@ -391,17 +391,15 @@ public class QuickActionListFragment extends BaseOsmAndFragment
     @Override
     public void onResume() {
         super.onResume();
-
         getMapActivity().disableDrawer();
-        quickActionRegistry.setUpdatesListener(this);
+        quickActionRegistry.addUpdatesListener(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-
         getMapActivity().enableDrawer();
-        quickActionRegistry.setUpdatesListener(null);
+        quickActionRegistry.removeUpdatesListener(this);
     }
 
     @Override
