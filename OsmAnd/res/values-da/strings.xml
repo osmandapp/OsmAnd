@@ -3286,7 +3286,7 @@
     <string name="new_plugin_added">Ny udvidelse tilføjet</string>
     <string name="join_segments">Forbind segmenter</string>
     <string name="add_new_profile_q">Tilføj den nye profil \'%1$s\'\?</string>
-    <string name="save_heading">Medtag retning</string>
+    <string name="save_heading">Inkluder kurs</string>
     <string name="save_heading_descr">Gem retning for hvert sporpunkt under optagelse.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
@@ -4542,4 +4542,12 @@
     <string name="default_appearance_desc">Standardfarve, ikon og form gælder for de tilføjede favoritpunkter i gruppen.</string>
     <string name="default_appearance">Standardudseende</string>
     <string name="edit_category">Rediger kategori</string>
+    <string name="stop_and_exit">Stop og afslut</string>
+    <string name="shared_string_complete">fuldført</string>
+    <string name="zoom_levels_difference_description">Den store forskel mellem zoomniveauer kan øge størrelsen af de downloadede data.</string>
+    <string name="move_map_to_select_area">Flyt kort for at vælge det ønskede område.</string>
+    <string name="stop_download_desc">Download er ikke afsluttet. Hvis du afbryder downloadet nu, vil kun en del af kortfliserne være tilgængelige til visning.</string>
+    <string name="estimated_download_size">Anslået størrelse af download</string>
+    <string name="stop_download">Stop download</string>
+    <string name="number_of_tiles">Antal kortfliser</string>
 </resources>

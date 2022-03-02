@@ -25,7 +25,7 @@ import androidx.annotation.NonNull;
 
 public class MapVectorLayer extends BaseMapLayer {
 	private OsmandMapTileView view;
-	private ResourceManager resourceManager;
+	private final ResourceManager resourceManager;
 	private Paint paintImg;
 
 	private final RectF destImage = new RectF();
@@ -140,7 +140,7 @@ public class MapVectorLayer extends BaseMapLayer {
 				updateLayerProviderAlpha(alpha);
 			}
 
-			LatLon ll = tilesRect.getLatLonFromPixel(tilesRect.getPixWidth() / 2, tilesRect.getPixHeight() / 2);
+			LatLon ll = tilesRect.getLatLonFromPixel(tilesRect.getPixWidth() / 2f, tilesRect.getPixHeight() / 2f);
 			mapRenderer.setTarget(new PointI(MapUtils.get31TileNumberX(ll.getLongitude()), MapUtils.get31TileNumberY(ll
 					.getLatitude())));
 			mapRenderer.setAzimuth(-tilesRect.getRotate());
@@ -159,7 +159,6 @@ public class MapVectorLayer extends BaseMapLayer {
 				}
 
 			}
-
 			MapRenderRepositories renderer = resourceManager.getRenderer();
 			drawRenderedMap(canvas, renderer.getBitmap(), renderer.getBitmapLocation(), tilesRect);
 			drawRenderedMap(canvas, renderer.getPrevBitmap(), renderer.getPrevBmpLocation(), tilesRect);
