@@ -4541,4 +4541,12 @@
     <string name="default_appearance_desc">К добавленным в группу избранным точкам будут применяться цвет, значок и форма по умолчанию.</string>
     <string name="default_appearance">Внешний вид по умолчанию</string>
     <string name="edit_category">Редактировать категорию</string>
+    <string name="stop_download">Остановить загрузку</string>
+    <string name="stop_and_exit">Остановить и выйти</string>
+    <string name="estimated_download_size">Предполагаемый размер загрузки</string>
+    <string name="number_of_tiles">Количество тайлов</string>
+    <string name="move_map_to_select_area">Переместите карту, чтобы выбрать необходимую область.</string>
+    <string name="shared_string_complete">завершено</string>
+    <string name="stop_download_desc">Загрузка не завершена. Если прервать загрузку сейчас, для просмотра будет доступна только часть тайлов.</string>
+    <string name="zoom_levels_difference_description">Большая разница между уровнями масштабирования может увеличить размер загружаемых данных.</string>
 </resources>

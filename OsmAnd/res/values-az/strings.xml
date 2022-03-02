@@ -3253,4 +3253,7 @@
     <string name="shared_string_crash">Çökmə</string>
     <string name="last_launch_crashed">OsmAnd-ın son çalışması çökdü. Zəhmət olmasa, səhv mesajını paylaşaraq OsmAnd-ı təkmilləşdirməyə kömək edin.</string>
     <string name="shared_string_reading_file">Fayl oxunur…</string>
+    <string name="stop_download">Endirməni dayandır</string>
+    <string name="stop_and_exit">Dayandır və çıx</string>
+    <string name="estimated_download_size">Təxmini endirmə ölçüsü</string>
 </resources>

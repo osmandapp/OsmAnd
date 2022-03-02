@@ -39,6 +39,7 @@ import net.osmand.plus.ContextMenuItem.ItemBuilder;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.backup.ui.BackupAndRestoreFragment;
 import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
@@ -50,6 +51,7 @@ import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.liveupdates.LiveUpdatesFragment;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
+import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
@@ -109,6 +111,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_LIVE_UPDATE
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MAP_MARKERS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MEASURE_DISTANCE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MY_PLACES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_OSMAND_VERSION_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_OSM_EDITS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_PLUGINS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SEARCH_ID;
@@ -885,6 +888,8 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		//////////// Others
 		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);
 
+		optionsMenuHelper.addItem(createOsmAndVersionDrawerItem());
+
 		return optionsMenuHelper;
 	}
 
@@ -964,6 +969,30 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 
 				})
 				.createItem());
+	}
+
+	@NonNull
+	private ContextMenuItem createOsmAndVersionDrawerItem() {
+		String osmAndVersion = Version.getFullVersion(app);
+		String releasedString = getString(R.string.shared_string_release);
+		String releaseDate = getString(R.string.app_edition);
+		String releaseText = Algorithms.isEmpty(releaseDate)
+				? null
+				: app.getString(R.string.ltr_or_rtl_combine_via_colon, releasedString, releaseDate);
+
+		return new ItemBuilder()
+				.setId(DRAWER_OSMAND_VERSION_ID)
+				.setLayout(R.layout.main_menu_drawer_osmand_version)
+				.setTitle(osmAndVersion)
+				.setDescription(releaseText)
+				.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
+					String text = releaseText == null
+							? osmAndVersion
+							: app.getString(R.string.ltr_or_rtl_combine_via_comma, osmAndVersion, releaseText);
+					ShareMenu.copyToClipboardWithToast(app, text, Toast.LENGTH_SHORT);
+					return true;
+				})
+				.createItem();
 	}
 
 	public void openIntermediatePointsDialog() {

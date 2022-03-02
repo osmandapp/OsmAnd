@@ -4542,4 +4542,12 @@
     <string name="default_appearance_desc">Standardfarbe, Symbol und Form gelten für die hinzugefügten Favoritenpunkte in der Gruppe.</string>
     <string name="default_appearance">Standarddarstellung</string>
     <string name="edit_category">Kategorie bearbeiten</string>
+    <string name="stop_download">Download abbrechen</string>
+    <string name="shared_string_complete">komplett</string>
+    <string name="stop_download_desc">Der Download ist noch nicht abgeschlossen. Wenn Sie den Download jetzt unterbrechen, wird nur ein Teil der Kacheln zur Ansicht verfügbar sein.</string>
+    <string name="stop_and_exit">Abbrechen und verlassen</string>
+    <string name="zoom_levels_difference_description">Der große Unterschied zwischen den Zoomstufen kann die Größe der heruntergeladenen Daten erhöhen.</string>
+    <string name="estimated_download_size">Geschätzte Downloadgröße</string>
+    <string name="number_of_tiles">Anzahl der Kacheln</string>
+    <string name="move_map_to_select_area">Bewegen Sie die Karte, um den gewünschten Bereich auszuwählen.</string>
 </resources>

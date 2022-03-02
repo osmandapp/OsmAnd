@@ -376,9 +376,17 @@ public class RoutingContext {
 		for (Entry<BinaryMapIndexReader, List<RouteSubregion>> r : map.entrySet()) {
 			// NOTE: load headers same as we do in non-native (it is not native optimized)
 			try {
-				if (r.getValue().size() > 0) {
+				boolean intersect = false;
+				for (RouteSubregion rs : r.getValue()) {
+					if (request.intersects(rs.left, rs.top, rs.right, rs.bottom)) {
+						intersect = true;
+						break;
+					}
+				}
+				if (intersect) {
 //					long now = System.nanoTime();
 					// int rg = r.getValue().get(0).routeReg.regionsRead;
+					
 					List<RouteSubregion> subregs = r.getKey().searchRouteIndexTree(request, r.getValue());
 //					if (calculationProgress != null) {
 //						calculationProgress.timeToLoadHeaders += (System.nanoTime() - now);

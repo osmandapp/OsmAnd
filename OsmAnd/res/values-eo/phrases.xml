@@ -4289,4 +4289,10 @@
     <string name="poi_avalanche_transceiver_checkpoint">Kontrolilo de loktrovilo de lavanga viktimo</string>
     <string name="poi_access_permit">Paspermeso postulata</string>
     <string name="poi_parcel_locker">Poŝt-aŭtomato</string>
+    <string name="poi_board_type_art">arto</string>
+    <string name="poi_board_type_planet_walk">modelo de Suna sistemo</string>
+    <string name="poi_board_type_sight">nuna vido</string>
+    <string name="poi_board_type_welcome_sign">bonvena signo</string>
+    <string name="poi_tiles">Kahela vendejo</string>
+    <string name="poi_board_type_sport">sporto</string>
 </resources>
