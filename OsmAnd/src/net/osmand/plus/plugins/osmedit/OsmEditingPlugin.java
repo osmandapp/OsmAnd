@@ -642,6 +642,19 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return description;
 	}
 
+	public static String getOsmUrlForId(long id) {
+		long relationShift = 1L << 41;
+		long originalId = (id >> 1);
+		if (originalId > relationShift) {
+			long relationId = (originalId & ~ relationShift) >> 10;
+			return "https://www.openstreetmap.org/relation/" + relationId;
+		} else if (id % 2 == MapObject.WAY_MODULO_REMAINDER) {
+			return "https://www.openstreetmap.org/way/" + originalId;
+		} else {
+			return "https://www.openstreetmap.org/node/" + originalId;
+		}
+	}
+
 	@Override
 	public DashFragmentData getCardFragment() {
 		return DashOsmEditsFragment.FRAGMENT_DATA;

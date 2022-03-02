@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu.builders;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
 import static net.osmand.data.Amenity.MAPILLARY;
+import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.getOsmUrlForId;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,7 +23,6 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
-import net.osmand.data.MapObject;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -660,33 +660,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 		Long id = amenity.getId();
 		if (osmEditingEnabled && id != null && id > 0 && (id % 2 == 0 || (id >> 1) < Integer.MAX_VALUE)) {
-			String link = createLink(id, true);
+			String link = getOsmUrlForId(id);
 			buildRow(view, R.drawable.ic_action_openstreetmap_logo, null, link,
 					0, false, null, true, 0, true, null, false);
 		}
-	}
-
-	public static String createLink(Long id, boolean isAmenity) {
-		long relationShift = 1L << 41;
-		long originalId = (id >> 1);
-		String link;
-		if (originalId > relationShift) {
-			long relationId = (originalId & ~(1L << 41)) >> 10;
-			link = "https://www.openstreetmap.org/relation/" + relationId;
-		} else if (isAmenity) {
-			if (id % 2 == 0) {
-				link = "https://www.openstreetmap.org/node/" + originalId;
-			} else {
-				link = "https://www.openstreetmap.org/way/" + originalId;
-			}
-		} else {
-			if (id % 2 == MapObject.WAY_MODULO_REMAINDER) {
-				link = "https://www.openstreetmap.org/way/" + originalId;
-			} else {
-				link = "https://www.openstreetmap.org/node/" + originalId;
-			}
-		}
-		return link;
 	}
 
 	private void buildNearestRows(ViewGroup viewGroup) {

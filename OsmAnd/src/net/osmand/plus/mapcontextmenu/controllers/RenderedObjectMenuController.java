@@ -1,6 +1,6 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
-import static net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder.createLink;
+import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.getOsmUrlForId;
 
 import androidx.annotation.NonNull;
 
@@ -119,7 +119,7 @@ public class RenderedObjectMenuController extends MenuController {
 			Long id = renderedObject.getId();
 			if (osmEditingEnabled && id != null && id > 0 &&
 					(id % 2 == MapObject.AMENITY_ID_RIGHT_SHIFT || (id >> MapObject.NON_AMENITY_ID_RIGHT_SHIFT) < Integer.MAX_VALUE)) {
-				String link = createLink(id, false);
+				String link = getOsmUrlForId(id);
 				addPlainMenuItem(R.drawable.ic_action_info_dark, null, link, true, true, null);
 			}
 		}
