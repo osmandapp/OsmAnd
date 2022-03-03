@@ -237,7 +237,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		TextView tvTitle = view.findViewById(R.id.title);
 		TextView tvDesc = view.findViewById(R.id.items_count_descr);
 
-		int count = WidgetsRegister.getSortedWidgets(selectedAppMode, panel).size();
+		int count = WidgetsRegister.getSortedWidgets(selectedAppMode, panel, false).size();
 		int iconColor = count > 0 ? activeColor : defColor;
 		Drawable icon = getPaintedContentIcon(panel.getIconId(), iconColor);
 		ivIcon.setImageDrawable(icon);

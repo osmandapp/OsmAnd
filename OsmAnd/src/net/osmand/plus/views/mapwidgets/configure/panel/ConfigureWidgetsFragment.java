@@ -30,12 +30,13 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.configure.reorder.OnNewOrderAppliedCallback;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConfigureWidgetsFragment extends BaseOsmAndFragment {
+public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements OnNewOrderAppliedCallback {
 
 	public static final String TAG = ConfigureWidgetsFragment.class.getSimpleName();
 
@@ -55,8 +56,8 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment {
 	private ViewPager2 viewPager;
 
 	private List<WidgetsPanel> availablePanels;
+	private WidgetsListFragment currentListFragment;
 	private WidgetsPanel selectedPanel;
-	private WidgetsTabAdapter tabAdapter;
 	private boolean nightMode;
 
 	@Override
@@ -120,7 +121,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupTabLayout() {
-		tabAdapter = new WidgetsTabAdapter(this, availablePanels);
+		WidgetsTabAdapter tabAdapter = new WidgetsTabAdapter(this, availablePanels);
 		viewPager.setAdapter(tabAdapter);
 
 		viewPager.registerOnPageChangeCallback(new OnPageChangeCallback() {
@@ -154,7 +155,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment {
 	private void onReorderButtonClicked() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			ReorderWidgetsFragment.showInstance(activity, selectedPanel, appMode);
+			ReorderWidgetsFragment.showInstance(this, activity, selectedPanel, appMode);
 		}
 	}
 
@@ -192,6 +193,10 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment {
 		this.appMode = appMode;
 	}
 
+	public void setCurrentListFragment(WidgetsListFragment currentListFragment) {
+		this.currentListFragment = currentListFragment;
+	}
+
 	@Override
 	public int getStatusBarColorId() {
 		View view = getView();
@@ -199,6 +204,13 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment {
 			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 		}
 		return ColorUtilities.getListBgColorId(nightMode);
+	}
+
+	@Override
+	public void onNewOrderApplied() {
+		if (currentListFragment != null) {
+			currentListFragment.updateContent();
+		}
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity,

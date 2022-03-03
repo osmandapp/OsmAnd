@@ -47,6 +47,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	private NestedScrollView scrollView;
 	private View listBtnChangeOrder;
 	private View stickBtnChangeOrder;
+	private ConfigureWidgetsFragment parentFragment;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +55,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		app = (OsmandApplication) requireContext().getApplicationContext();
 		appMode = app.getSettings().getApplicationMode();
 		nightMode = !app.getSettings().isLightContent();
+		parentFragment = (ConfigureWidgetsFragment) getParentFragment();
 		if (savedInstanceState != null) {
 			restoreData(savedInstanceState);
 		}
@@ -69,22 +71,29 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		widgetsList = view.findViewById(R.id.widgets_list);
 		scrollView = view.findViewById(R.id.scroll_view);
 		listBtnChangeOrder = view.findViewById(R.id.change_order_button_in_list);
+		parentFragment.setCurrentListFragment(this);
 		setupBtnChangeOrder();
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(this);
 		updateContent();
 		return view;
 	}
 
-	private void setupBtnChangeOrder() {
+	@Override
+	public void onStart() {
+		super.onStart();
 		Fragment fragment = getParentFragment();
 		if (fragment instanceof ConfigureWidgetsFragment) {
 			ConfigureWidgetsFragment parent = (ConfigureWidgetsFragment) fragment;
-			stickBtnChangeOrder = parent.getBtnChangeOrder();
-			if (stickBtnChangeOrder != null) {
-				parent.setupReorderButton(stickBtnChangeOrder);
-			}
-			parent.setupReorderButton(listBtnChangeOrder);
+			parent.setCurrentListFragment(this);
 		}
+	}
+
+	private void setupBtnChangeOrder() {
+		stickBtnChangeOrder = parentFragment.getBtnChangeOrder();
+		if (stickBtnChangeOrder != null) {
+			parentFragment.setupReorderButton(stickBtnChangeOrder);
+		}
+		parentFragment.setupReorderButton(listBtnChangeOrder);
 	}
 
 	public void updateContent() {
@@ -99,18 +108,18 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 
 	private void updateWidgetsList() {
 		widgetsList.removeAllViews();
-		List<WidgetItem> widgets = WidgetsRegister.getSortedWidgets(appMode, panel);
+		List<WidgetItem> widgets = WidgetsRegister.getSortedWidgets(appMode, panel, false);
 		for (WidgetItem widget : widgets) {
 			View view = inflater.inflate(R.layout.configure_screen_widget_item, widgetsList, false);
 
-			boolean isEnabled = widget.isActive();
+			boolean isEnabled = widget.isActive;
 
 			ImageView ivIcon = view.findViewById(R.id.icon);
-			ivIcon.setImageResource(widget.getIconId());
+			ivIcon.setImageResource(widget.iconId);
 			setImageFilter(ivIcon, !isEnabled);
 
 			TextView tvTitle = view.findViewById(R.id.title);
-			tvTitle.setText(widget.getTitle());
+			tvTitle.setText(widget.title);
 
 			TextView tvDesc = view.findViewById(R.id.description);
 			tvDesc.setVisibility(View.GONE);
@@ -126,7 +135,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			OnClickListener listener = v -> {
 				boolean isChecked = cb.isChecked();
 				setImageFilter(ivIcon, !isChecked);
-				widget.setActive(isChecked);
+				widget.isActive = isChecked;
 			};
 
 			cb.setOnCheckedChangeListener((buttonView, isChecked) -> listener.onClick(buttonView));

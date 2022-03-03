@@ -43,8 +43,14 @@ public class DataHolder {
 		this.selectedPanel = selectedPanel;
 	}
 
+	@NonNull
 	public HashMap<String, Integer> getOrders() {
 		return orders;
+	}
+
+	public int getOrder(@NonNull String key) {
+		Integer order = orders.get(key);
+		return order != null ? order : -1;
 	}
 
 	public boolean isOrderModified() {
@@ -55,6 +61,12 @@ public class DataHolder {
 		this.orderModified = true;
 	}
 
+	/**
+	 * Clear and fill in the order of widgets.
+	 * Called each time when need to initialize the order data for some profile.
+	 * @param appMode application profile from which to get order.
+	 * @param orderByDefault indicates whether you want to get the default order of widgets for this profile.
+	 */
 	public void initOrders(@NonNull ApplicationMode appMode,
 	                       boolean orderByDefault) {
 		orders.clear();
@@ -63,7 +75,7 @@ public class DataHolder {
 		}
 		List<WidgetItem> widgets = WidgetsRegister.getSortedWidgets(appMode, selectedPanel, orderByDefault);
 		for (WidgetItem widget : widgets) {
-			orders.put(widget.getTitle(), widget.getPriority());
+			orders.put(widget.title, widget.priority);
 		}
 	}
 

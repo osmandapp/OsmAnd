@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -32,13 +33,13 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.WidgetsRegister;
+import net.osmand.plus.views.mapwidgets.configure.WidgetItem;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ItemType;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ListItem;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.WidgetAdapterListener;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.ButtonViewHolder.ButtonUiInfo;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.WidgetViewHolder.WidgetUiInfo;
-import net.osmand.plus.views.mapwidgets.configure.WidgetItem;
-import net.osmand.plus.views.mapwidgets.WidgetsRegister;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -61,6 +62,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 	private RecyclerView rvContentList;
 
 	private final DataHolder dataHolder = new DataHolder();
+	private OnNewOrderAppliedCallback callback;
 	private ReorderWidgetsAdapter adapter;
 
 
@@ -69,7 +71,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
 		settings = app.getSettings();
-
+		callback = (OnNewOrderAppliedCallback) getTargetFragment();
 		if (savedInstanceState != null) {
 			restoreData(savedInstanceState);
 		} else {
@@ -109,12 +111,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 		tvSubtitle.setText(appModeName);
 
 		View backBtn = toolbar.findViewById(R.id.back_button);
-		backBtn.setOnClickListener(view -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				activity.onBackPressed();
-			}
-		});
+		backBtn.setOnClickListener(v -> dismiss());
 
 		View resetBtn = toolbar.findViewById(R.id.reset_button);
 		resetBtn.setOnClickListener(v -> onResetChanges());
@@ -182,12 +179,30 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 	}
 
 	private void onApplyChanges() {
+		applyOrder();
+		callback.onNewOrderApplied();
+		dismiss();
+	}
 
+	private void applyOrder() {
+		WidgetsPanel selectedPanel = dataHolder.getSelectedPanel();
+		for (WidgetItem widget : WidgetsRegister.getWidgets(appMode, selectedPanel)) {
+			String key = widget.title;
+			widget.priority = dataHolder.getOrder(key);
+		}
 	}
 
 	@Override
 	public void copyAppModePrefs(ApplicationMode appMode) {
+		dataHolder.initOrders(appMode, false);
+		updateItems();
+	}
 
+	private void dismiss() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			activity.onBackPressed();
+		}
 	}
 
 	private void updateItems() {
@@ -215,7 +230,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 
 	private List<ListItem> createWidgetsList() {
 		List<ListItem> list = new ArrayList<>();
-		List<WidgetItem> widgets = WidgetsRegister.getSortedWidgets(appMode, dataHolder.getSelectedPanel());
+		List<WidgetItem> widgets = WidgetsRegister.getWidgets(appMode, dataHolder.getSelectedPanel(), false);
 		for (WidgetItem item : widgets) {
 			addWidgetToList(list, item);
 		}
@@ -229,16 +244,16 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 
 	private void addWidgetToList(@NonNull List<ListItem> list,
 	                             @NonNull WidgetItem w) {
-		String id = w.getTitle();
+		String key = w.title;
 		Map<String, Integer> orders = dataHolder.getOrders();
-		Integer order = orders.get(id);
+		Integer order = orders.get(key);
 		if (order == null) {
-			order = w.getPriority();
+			order = w.priority;
 		}
 		WidgetUiInfo wi = new WidgetUiInfo();
-		wi.title = w.getTitle();
-		wi.iconId = w.getIconId();
-		wi.isActive = w.isActive();
+		wi.title = w.title;
+		wi.iconId = w.iconId;
+		wi.isActive = w.isActive;
 		wi.order = order;
 		list.add(new ListItem(ItemType.WIDGET, wi));
 	}
@@ -273,12 +288,14 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 		return ColorUtilities.getListBgColorId(nightMode);
 	}
 
-	public static void showInstance(@NonNull FragmentActivity activity,
+	public static void showInstance(@NonNull Fragment target,
+	                                @NonNull FragmentActivity activity,
 	                                @NonNull WidgetsPanel selectedGroup,
 	                                @NonNull ApplicationMode appMode) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			ReorderWidgetsFragment fragment = new ReorderWidgetsFragment();
+			fragment.setTargetFragment(target, 0);
 			fragment.setSelectedGroup(selectedGroup);
 			fragment.setAppMode(appMode);
 			fragmentManager.beginTransaction()

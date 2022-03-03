@@ -7,6 +7,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.mapwidgets.configure.WidgetItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,21 +65,34 @@ public class WidgetsRegister {
 		}
 
 		WidgetItem widget = new WidgetItem(iconId, title);
-		widget.setActive(enabled);
-		widget.setPriority(list.size());
+		widget.isActive = enabled;
+		widget.priority = list.size();
 		list.add(widget);
 	}
 
 	@NonNull
 	public static List<WidgetItem> getSortedWidgets(@NonNull ApplicationMode appMode,
-	                                                @NonNull WidgetsPanel panel) {
-		return getSortedWidgets(appMode, panel, false);
+	                                                @NonNull WidgetsPanel panel,
+	                                                boolean useDefaultOrder) {
+		List<WidgetItem> widgets = getWidgets(appMode, panel, useDefaultOrder);
+		Collections.sort(widgets, (o1, o2) -> {
+			int order1 = o1.priority;
+			int order2 = o2.priority;
+			return Integer.compare(order1, order2);
+		});
+		return widgets;
 	}
 
 	@NonNull
-	public static List<WidgetItem> getSortedWidgets(@NonNull ApplicationMode appMode,
-	                                                @NonNull WidgetsPanel panel,
-	                                                boolean defaultState) {
+	public static List<WidgetItem> getWidgets(@NonNull ApplicationMode appMode,
+	                                          @NonNull WidgetsPanel panel) {
+		return getWidgets(appMode, panel, false);
+	}
+
+	@NonNull
+	public static List<WidgetItem> getWidgets(@NonNull ApplicationMode appMode,
+	                                          @NonNull WidgetsPanel panel,
+	                                          boolean useDefaultOrder) {
 		List<WidgetItem> widgets = map.get(panel);
 		return widgets != null ? widgets : new ArrayList<>();
 	}
