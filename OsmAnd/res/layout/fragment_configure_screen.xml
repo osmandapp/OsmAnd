@@ -177,6 +177,10 @@
 
 				<include layout="@layout/card_bottom_divider" />
 
+				<Space
+					android:layout_width="match_parent"
+					android:layout_height="@dimen/bottom_space_height" />
+
 			</LinearLayout>
 
 		</androidx.core.widget.NestedScrollView>
