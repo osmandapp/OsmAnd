@@ -57,7 +57,7 @@ public class MapTileLayer extends BaseMapLayer {
 	protected ResourceManager resourceManager;
 	protected OsmandSettings settings;
 
-	private final boolean upscaleAllowed;
+	private boolean upscaleAllowed = true;
 
 	private boolean useSampling;
 	private boolean needUpdateProvider = true;
@@ -67,13 +67,8 @@ public class MapTileLayer extends BaseMapLayer {
 	private StateChangedListener<Float> parameterListener;
 
 	public MapTileLayer(@NonNull Context context, boolean suggestOfflineMap) {
-		this(context, suggestOfflineMap, true);
-	}
-
-	public MapTileLayer(@NonNull Context context, boolean suggestOfflineMap, boolean upscaleAllowed) {
 		super(context);
 		this.suggestOfflineMap = suggestOfflineMap;
-		this.upscaleAllowed = upscaleAllowed;
 		this.settings = getApplication().getSettings();
 		this.resourceManager = getApplication().getResourceManager();
 	}
@@ -115,6 +110,10 @@ public class MapTileLayer extends BaseMapLayer {
 		if (paintBitmap != null) {
 			paintBitmap.setAlpha(alpha);
 		}
+	}
+
+	public void setUpscaleAllowed(boolean upscaleAllowed) {
+		this.upscaleAllowed = upscaleAllowed;
 	}
 
 	public void setupParameterListener() {

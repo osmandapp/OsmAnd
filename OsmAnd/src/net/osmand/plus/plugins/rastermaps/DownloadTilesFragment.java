@@ -5,7 +5,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +19,11 @@ import android.widget.TextView;
 import com.google.android.material.slider.RangeSlider;
 
 import net.osmand.IndexConstants;
-import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.map.ITileSource;
-import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -47,11 +48,13 @@ import androidx.core.util.Pair;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLocationListener, OsmAndLocationListener {
+public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLocationListener {
 
 	public static final String TAG = DownloadTilesFragment.class.getSimpleName();
 
 	public static final Uri HELP_URI = Uri.parse("https://docs.osmand.net/en/main@latest/osmand/map/raster-maps#download--update-tiles");
+
+	private static final long UPDATE_TILES_PREVIEW_INTERVAL = 500;
 
 	private static final String KEY_SELECTED_MIN_ZOOM = "selected_min_zoom";
 	private static final String KEY_SELECTED_MAX_ZOOM = "selected_max_zoom";
@@ -60,12 +63,31 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	private OsmandSettings settings;
 	private boolean nightMode;
 
+	private final Handler handler = new Handler();
+	private Runnable updateTilesTask;
+
 	private OsmandMapTileView mapView;
 	private TilesPreviewDrawer tilesPreviewDrawer;
+	private ITileSource tileSource;
 
 	private View view;
+	private View mapWindow;
 	private boolean mapWindowTouched = false;
 	private boolean wasDrawerDisabled;
+
+	private AppCompatImageView minZoomPreviewImage;
+	private AppCompatImageView maxZoomPreviewImage;
+
+	private TextView minZoomPreviewText;
+	private TextView maxZoomPreviewText;
+
+	private TextView selectedMinZoomText;
+	private TextView selectedMaxZoomText;
+
+	private RangeSlider slider;
+
+	private TextView tilesNumberText;
+	private TextView estimatedDownloadSizeText;
 
 	private int selectedMinZoom;
 	private int selectedMaxZoom;
@@ -78,6 +100,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		nightMode = isNightMode(true);
 		mapView = requireMapActivity().getMapView();
 		tilesPreviewDrawer = new TilesPreviewDrawer(app);
+		tileSource = settings.getMapTileSource(false);
 		if (savedInstanceState != null) {
 			selectedMinZoom = savedInstanceState.getInt(KEY_SELECTED_MIN_ZOOM);
 			selectedMaxZoom = savedInstanceState.getInt(KEY_SELECTED_MAX_ZOOM);
@@ -95,6 +118,23 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		LayoutInflater themedInflater = UiUtilities.getInflater(mapActivity, nightMode);
 		view = themedInflater.inflate(R.layout.download_tiles_fragment, container, false);
 
+		mapWindow = view.findViewById(R.id.map_window);
+
+		View minZoomPreviewContainer = view.findViewById(R.id.min_zoom_tile_preview);
+		View maxZoomPreviewContainer = view.findViewById(R.id.max_zoom_tile_preview);
+		minZoomPreviewImage = minZoomPreviewContainer.findViewById(R.id.tile_image);
+		maxZoomPreviewImage = maxZoomPreviewContainer.findViewById(R.id.tile_image);
+		minZoomPreviewText = minZoomPreviewContainer.findViewById(R.id.tile_zoom);
+		maxZoomPreviewText = maxZoomPreviewContainer.findViewById(R.id.tile_zoom);
+
+		selectedMinZoomText = view.findViewById(R.id.min_zoom);
+		selectedMaxZoomText = view.findViewById(R.id.max_zoom);
+
+		slider = view.findViewById(R.id.zooms_range_slider);
+
+		tilesNumberText = view.findViewById(R.id.tiles_number);
+		estimatedDownloadSizeText = view.findViewById(R.id.estimated_download_size);
+
 		mapView.rotateToAnimate(0);
 
 		setupToolbar();
@@ -103,7 +143,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 			public void onGlobalLayout() {
 				view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 				moveMapCenterToMapWindow();
-				updateContent();
+				updateTileSourceContent();
 			}
 		});
 		setupDownloadButton();
@@ -143,28 +183,30 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 				marginTop, true);
 	}
 
-	private void updateContent() {
-		ITileSource tileSource = settings.getMapTileSource(false);
-
-		setupMapSourceSetting(tileSource);
-		setupTilesPreview();
-		setupMinMaxZoom();
-		setupSlider(tileSource);
-		setupTilesDownloadInfo(tileSource);
+	private void updateTileSourceContent() {
+		setupMapSourceSetting();
+		updateDownloadContent();
 	}
 
-	private void setupMapSourceSetting(@NonNull ITileSource tileSource) {
+	private void updateDownloadContent() {
+		updateTilesPreviewZooms();
+		setupMinMaxZoom();
+		setupSlider();
+		setupTilesDownloadInfo();
+	}
+
+	private void setupMapSourceSetting() {
 		View mapSourceContainer = view.findViewById(R.id.map_source_container);
 		mapSourceContainer.setOnClickListener(v -> {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				mapActivity.getMapLayers().selectMapLayer(mapActivity, false, mapSourceName -> {
 					if (shouldShowDialog(app)) {
-						ITileSource newTileSource = settings.getMapTileSource(false);
+						tileSource = settings.getMapTileSource(false);
 						int currentZoom = mapView.getZoom();
-						selectedMaxZoom = newTileSource.getMaximumZoomSupported();
+						selectedMaxZoom = tileSource.getMaximumZoomSupported();
 						selectedMinZoom = Math.min(currentZoom, selectedMaxZoom);
-						updateContent();
+						updateTileSourceContent();
 					} else {
 						app.showToastMessage(R.string.maps_could_not_be_downloaded);
 						dismiss();
@@ -180,12 +222,11 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		selectedMapSourceText.setText(selectedMapSource);
 	}
 
-	private void setupSlider(@NonNull ITileSource tileSource) {
+	private void setupSlider() {
 		int currentZoom = mapView.getZoom();
 		int maxZoom = tileSource.getMaximumZoomSupported();
 		int minZoom = Math.min(currentZoom, maxZoom);
 
-		RangeSlider slider = view.findViewById(R.id.zooms_range_slider);
 		UiUtilities.setupSlider(slider, nightMode, ColorUtilities.getActiveColor(app, nightMode), true);
 		slider.clearOnChangeListeners();
 		boolean multipleZoomsSupported = minZoom < maxZoom;
@@ -199,34 +240,25 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 				List<Float> minMax = slider.getValues();
 				selectedMinZoom = minMax.get(0).intValue();
 				selectedMaxZoom = minMax.get(1).intValue();
-				setupTilesPreview();
+				updateTilesPreviewZooms();
 				setupMinMaxZoom();
-				setupTilesDownloadInfo(tileSource);
+				setupTilesDownloadInfo();
 			});
 		}
 	}
 
-	private void setupTilesPreview() {
-		TextView minZoomText = view.findViewById(R.id.min_zoom_tile_preview).findViewById(R.id.tile_zoom);
-		TextView maxZoomText = view.findViewById(R.id.max_zoom_tile_preview).findViewById(R.id.tile_zoom);
-
-		minZoomText.setText(String.valueOf(selectedMinZoom));
-		maxZoomText.setText(String.valueOf(selectedMaxZoom));
+	private void updateTilesPreviewZooms() {
+		minZoomPreviewText.setText(String.valueOf(selectedMinZoom));
+		maxZoomPreviewText.setText(String.valueOf(selectedMaxZoom));
 	}
 
 	private void setupMinMaxZoom() {
-		TextView minZoomText = view.findViewById(R.id.min_zoom);
-		TextView maxZoomText = view.findViewById(R.id.max_zoom);
-
-		minZoomText.setText(String.valueOf(selectedMinZoom));
-		maxZoomText.setText(String.valueOf(selectedMaxZoom));
+		selectedMinZoomText.setText(String.valueOf(selectedMinZoom));
+		selectedMaxZoomText.setText(String.valueOf(selectedMaxZoom));
 	}
 
 	@SuppressLint("StringFormatMatches")
-	private void setupTilesDownloadInfo(@NonNull ITileSource tileSource) {
-		TextView tilesNumberText = view.findViewById(R.id.tiles_number);
-		TextView estimatedDownloadSizeText = view.findViewById(R.id.estimated_download_size);
-
+	private void setupTilesDownloadInfo() {
 		QuadRect latLonRect = getLatLonRectOfMapWindow();
 		boolean ellipticYTile = tileSource.isEllipticYTile();
 
@@ -275,13 +307,6 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	}
 
 	@Override
-	public void onStart() {
-		super.onStart();
-		mapView.addMapLocationListener(this);
-		app.getLocationProvider().addLocationListener(this);
-	}
-
-	@Override
 	public void onResume() {
 		super.onResume();
 		MapActivity mapActivity = getMapActivity();
@@ -290,6 +315,21 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 			if (!wasDrawerDisabled) {
 				mapActivity.disableDrawer();
 			}
+		}
+		mapView.addMapLocationListener(this);
+		runUpdatingTiles();
+	}
+
+	public void runUpdatingTiles() {
+		if (updateTilesTask == null) {
+			updateTilesTask = () -> {
+				setupTilesDownloadInfo();
+				updateTilesPreview();
+				handler.postDelayed(updateTilesTask, UPDATE_TILES_PREVIEW_INTERVAL);
+			};
+		}
+		if (VERSION.SDK_INT >= VERSION_CODES.Q && !handler.hasCallbacks(updateTilesTask)) {
+			handler.post(updateTilesTask);
 		}
 	}
 
@@ -300,6 +340,8 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		if (mapActivity != null && !wasDrawerDisabled) {
 			mapActivity.enableDrawer();
 		}
+		mapView.removeMapLocationListener(this);
+		handler.removeCallbacks(updateTilesTask);
 	}
 
 	@Override
@@ -312,8 +354,6 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		mapView.removeMapLocationListener(this);
-		app.getLocationProvider().removeLocationListener(this);
 		showHideMapControls(true);
 	}
 
@@ -329,8 +369,6 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 
 	@NonNull
 	private QuadRect getLatLonRectOfMapWindow() {
-		View mapWindow = view.findViewById(R.id.map_window);
-
 		int[] xy = new int[2];
 		mapWindow.getLocationOnScreen(xy);
 
@@ -363,26 +401,14 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 				selectedMinZoom = currentZoom;
 			}
 			updateTilesPreview();
-			updateContent();
+			updateDownloadContent();
 		});
-	}
-
-	@Override
-	public void updateLocation(Location location) {
-		setupTilesDownloadInfo(settings.getMapTileSource(false));
-		updateTilesPreview();
 	}
 
 	private void updateTilesPreview() {
 		QuadRect latLonRectOfMapWindow = getLatLonRectOfMapWindow();
 		LatLon mapWindowCenter = new LatLon(latLonRectOfMapWindow.centerY(), latLonRectOfMapWindow.centerX());
 		Pair<Bitmap, Bitmap> bitmaps = tilesPreviewDrawer.drawTilesPreview(mapWindowCenter, selectedMinZoom, selectedMaxZoom);
-
-		View minZoomPreviewContainer = view.findViewById(R.id.min_zoom_tile_preview);
-		View maxZoomPreviewContainer = view.findViewById(R.id.max_zoom_tile_preview);
-
-		AppCompatImageView minZoomPreviewImage = minZoomPreviewContainer.findViewById(R.id.tile_image);
-		AppCompatImageView maxZoomPreviewImage = maxZoomPreviewContainer.findViewById(R.id.tile_image);
 
 		minZoomPreviewImage.setImageBitmap(bitmaps.first);
 		maxZoomPreviewImage.setImageBitmap(bitmaps.second);

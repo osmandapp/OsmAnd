@@ -11,7 +11,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapTileLayer;
-import net.osmand.plus.views.layers.base.BaseMapLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 
 import androidx.annotation.NonNull;
@@ -34,7 +33,8 @@ public class TilesPreviewDrawer {
 	public TilesPreviewDrawer(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.mapView = app.getOsmandMap().getMapView();
-		this.previewTilesLayer = new MapTileLayer(app, false, false);
+		this.previewTilesLayer = new MapTileLayer(app, false);
+		this.previewTilesLayer.setUpscaleAllowed(false);
 		this.previewSize = app.getResources().getDimensionPixelSize(R.dimen.map_tile_preview_size);
 
 		minZoomBitmap = Bitmap.createBitmap(previewSize, previewSize, Config.ARGB_8888);
@@ -46,26 +46,19 @@ public class TilesPreviewDrawer {
 
 	@NonNull
 	public Pair<Bitmap, Bitmap> drawTilesPreview(@NonNull LatLon center, int minZoom, int maxZoom) {
+		previewTilesLayer.setMap(app.getSettings().getMapTileSource(false));
+
 		minZoomBitmap.eraseColor(Color.TRANSPARENT);
 		maxZoomBitmap.eraseColor(Color.TRANSPARENT);
-		if (updateTileSource()) {
-			boolean night = app.getDaynightHelper().isNightModeForMapControls();
-			DrawSettings drawSettings = new DrawSettings(night);
-			drawTilePreview(minZoomCanvas, center, minZoom, drawSettings);
-			drawTilePreview(maxZoomCanvas, center, maxZoom, drawSettings);
-		}
+
+		boolean night = app.getDaynightHelper().isNightModeForMapControls();
+		DrawSettings drawSettings = new DrawSettings(night);
+		drawTilePreview(minZoomCanvas, center, minZoom, drawSettings);
+		drawTilePreview(maxZoomCanvas, center, maxZoom, drawSettings);
+
 		return Pair.create(minZoomBitmap, maxZoomBitmap);
 	}
 
-	private boolean updateTileSource() {
-		BaseMapLayer mainLayer = mapView.getMainLayer();
-		MapTileLayer mapTileLayer = mainLayer instanceof MapTileLayer ? ((MapTileLayer) mainLayer) : null;
-		if (mapTileLayer == null) {
-			return false;
-		}
-		previewTilesLayer.setMap(mapTileLayer.getMap());
-		return true;
-	}
 
 	private void drawTilePreview(@NonNull Canvas canvas, @NonNull LatLon center, int zoom, @NonNull DrawSettings drawSettings) {
 		RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox().copy();
