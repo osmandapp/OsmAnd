@@ -162,9 +162,9 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 
 	private void updateReorderButtons() {
 		if (stickBtnChangeOrder != null) {
-			int listButtonTop = AndroidUtils.getViewOnScreenY(listBtnChangeOrder);
-			int bottomButtonTop = AndroidUtils.getViewOnScreenY(stickBtnChangeOrder);
-			stickBtnChangeOrder.setVisibility(listButtonTop <= bottomButtonTop ? View.GONE : View.VISIBLE);
+			int y1 = AndroidUtils.getViewOnScreenY(listBtnChangeOrder);
+			int y2 = AndroidUtils.getViewOnScreenY(stickBtnChangeOrder);
+			stickBtnChangeOrder.setVisibility(y1 <= y2 ? View.GONE : View.VISIBLE);
 		}
 	}
 

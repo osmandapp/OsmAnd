@@ -56,7 +56,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment {
 
 	private List<WidgetsPanel> availablePanels;
 	private WidgetsPanel selectedPanel;
-	private TabAdapter tabAdapter;
+	private WidgetsTabAdapter tabAdapter;
 	private boolean nightMode;
 
 	@Override
@@ -120,7 +120,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupTabLayout() {
-		tabAdapter = new TabAdapter(this, availablePanels);
+		tabAdapter = new WidgetsTabAdapter(this, availablePanels);
 		viewPager.setAdapter(tabAdapter);
 
 		viewPager.registerOnPageChangeCallback(new OnPageChangeCallback() {

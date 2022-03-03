@@ -8,12 +8,12 @@ import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
 import java.util.List;
 
-public class TabAdapter extends FragmentStateAdapter {
+public class WidgetsTabAdapter extends FragmentStateAdapter {
 
 	private final List<WidgetsPanel> widgetsPanels;
 
-	public TabAdapter(@NonNull Fragment fragment,
-	                  @NonNull List<WidgetsPanel> widgetsPanels) {
+	public WidgetsTabAdapter(@NonNull Fragment fragment,
+	                         @NonNull List<WidgetsPanel> widgetsPanels) {
 		super(fragment);
 		this.widgetsPanels = widgetsPanels;
 	}
