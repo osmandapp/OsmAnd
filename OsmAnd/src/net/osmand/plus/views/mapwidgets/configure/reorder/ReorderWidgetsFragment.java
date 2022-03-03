@@ -192,7 +192,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 
 	private void updateItems() {
 		List<ListItem> items = new ArrayList<>();
-		items.add(new ListItem(ItemType.CARD_DIVIDER, 0));
+		items.add(new ListItem(ItemType.CARD_TOP_DIVIDER, 0));
 		items.add(new ListItem(ItemType.HEADER, getString(R.string.shared_string_visible_widgets)));
 		items.addAll(createWidgetsList());
 		items.add(new ListItem(ItemType.CARD_DIVIDER, 0));

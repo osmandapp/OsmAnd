@@ -48,6 +48,7 @@ public class ReorderWidgetsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 		HEADER,
 		WIDGET,
 		CARD_DIVIDER,
+		CARD_TOP_DIVIDER,
 		CARD_BOTTOM_DIVIDER,
 		SPACE,
 		BUTTON
@@ -78,6 +79,11 @@ public class ReorderWidgetsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 				return new HeaderViewHolder(itemView);
 			case CARD_DIVIDER:
 				itemView = inflater.inflate(R.layout.list_item_divider, parent, false);
+				return new DividerViewHolder(itemView);
+			case CARD_TOP_DIVIDER:
+				itemView = inflater.inflate(R.layout.list_item_divider, parent, false);
+				View bottomShadow = itemView.findViewById(R.id.bottomShadowView);
+				bottomShadow.setVisibility(View.INVISIBLE);
 				return new DividerViewHolder(itemView);
 			case CARD_BOTTOM_DIVIDER:
 				itemView = inflater.inflate(R.layout.card_bottom_divider, parent, false);
