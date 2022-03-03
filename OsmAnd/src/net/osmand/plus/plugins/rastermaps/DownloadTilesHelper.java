@@ -225,7 +225,7 @@ public class DownloadTilesHelper implements TilesDownloadListener {
 		float sizeMb = 0;
 		for (int zoom = minZoom; zoom <= maxZoom; zoom++) {
 			long tilesNumber = getTilesNumber(zoom, latLonRect, tileSource.isEllipticYTile());
-			int tileSize = getNearestZoomTileSize(zoom, tileSource, bitmapTilesCache);
+			long tileSize = getNearestZoomTileSize(zoom, tileSource, bitmapTilesCache);
 			sizeMb += (float) tilesNumber * tileSize / BYTES_TO_MB;
 		}
 		return sizeMb > 0
@@ -233,8 +233,8 @@ public class DownloadTilesHelper implements TilesDownloadListener {
 				: getTilesNumber(minZoom, maxZoom, latLonRect, tileSource.isEllipticYTile()) * DEFAULT_TILE_SIZE_MB;
 	}
 
-	private static int getNearestZoomTileSize(int zoom, @NonNull ITileSource tileSource, @NonNull BitmapTilesCache cache) {
-		int size = cache.getTileSize(tileSource, zoom);
+	private static long getNearestZoomTileSize(int zoom, @NonNull ITileSource tileSource, @NonNull BitmapTilesCache cache) {
+		long size = cache.getTileSize(tileSource, zoom);
 		if (size > 0) {
 			return size;
 		}
