@@ -30,7 +30,7 @@ public class WidgetViewHolder extends RecyclerView.ViewHolder
 	public boolean isMovingDisabled() {
 		int position = getAdapterPosition();
 		if (position != RecyclerView.NO_POSITION && checkItemIsMovable != null) {
-			return checkItemIsMovable.isListItemMovable(position);
+			return !checkItemIsMovable.isListItemMovable(position);
 		}
 		return false;
 	}
