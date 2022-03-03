@@ -37,6 +37,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import androidx.fragment.app.FragmentActivity;
+
 /**
  * Created by Denis
  * on 20.01.2015.
@@ -115,20 +117,21 @@ public class DashOsmEditsFragment extends DashBaseFragment
 			OsmEditsFragment.getOsmEditView(view, point, getMyApplication());
 			ImageButton send = (ImageButton) view.findViewById(R.id.play);
 			send.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_export));
-			send.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (point.getGroup() == OsmPoint.Group.POI) {
-						selectedPoint = point;
-						if (getMyApplication().getOsmOAuthHelper().isLogged()) {
-							SendPoiBottomSheetFragment.showInstance(getChildFragmentManager(), new OsmPoint[]{point});
-						} else {
-							LoginBottomSheetFragment.showInstance(getActivity().getSupportFragmentManager(),
-									DashOsmEditsFragment.this);
-						}
+			send.setOnClickListener(v -> {
+				FragmentActivity activity = getActivity();
+				if (activity == null) {
+					return;
+				}
+				if (point.getGroup() == OsmPoint.Group.POI) {
+					selectedPoint = point;
+					if (requireMyApplication().getOsmOAuthHelper().isLogged(plugin)) {
+						SendPoiBottomSheetFragment.showInstance(getChildFragmentManager(), new OsmPoint[] {point});
 					} else {
-						SendOsmNoteBottomSheetFragment.showInstance(getChildFragmentManager(), new OsmPoint[]{point});
+						LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(),
+								DashOsmEditsFragment.this);
 					}
+				} else {
+					SendOsmNoteBottomSheetFragment.showInstance(getChildFragmentManager(), new OsmPoint[]{point});
 				}
 			});
 			view.findViewById(R.id.options).setVisibility(View.GONE);

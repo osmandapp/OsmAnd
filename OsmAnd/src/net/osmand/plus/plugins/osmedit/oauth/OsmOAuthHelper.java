@@ -15,14 +15,11 @@ import java.util.Set;
 public class OsmOAuthHelper {
 
 	private final OsmandApplication app;
-	private final OsmEditingPlugin plugin;
-
 	private OsmOAuthAuthorizationAdapter authorizationAdapter;
 	private final Set<OsmAuthorizationListener> listeners = new HashSet<>();
 
 	public OsmOAuthHelper(@NonNull OsmandApplication app) {
 		this.app = app;
-		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 	}
 
 	public void addListener(OsmAuthorizationListener listener) {
@@ -53,20 +50,21 @@ public class OsmOAuthHelper {
 	}
 
 	public void resetAuthorization() {
+		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		if (plugin == null) {
+			return;
+		}
+
 		if (isValidToken()) {
 			plugin.OSM_USER_ACCESS_TOKEN.resetToDefault();
 			plugin.OSM_USER_ACCESS_TOKEN_SECRET.resetToDefault();
 			getAuthorizationAdapter().resetToken();
-		} else if (isLoginExists()) {
+		} else if (isLoginExists(plugin)) {
 			plugin.OSM_USER_NAME_OR_EMAIL.resetToDefault();
 			plugin.OSM_USER_PASSWORD.resetToDefault();
 		}
 		app.getSettings().MAPPER_LIVE_UPDATES_EXPIRE_TIME.resetToDefault();
 		updateAdapter();
-	}
-
-	private boolean isLoginExists() {
-		return !Algorithms.isEmpty(plugin.OSM_USER_NAME_OR_EMAIL.get()) && !Algorithms.isEmpty(plugin.OSM_USER_PASSWORD.get());
 	}
 
 	public void notifyAndRemoveListeners() {
@@ -80,8 +78,12 @@ public class OsmOAuthHelper {
 		return getAuthorizationAdapter().isValidToken();
 	}
 
-	public boolean isLogged() {
-		return isValidToken() || isLoginExists();
+	public boolean isLogged(@NonNull OsmEditingPlugin plugin) {
+		return isValidToken() || isLoginExists(plugin);
+	}
+
+	private boolean isLoginExists(@NonNull OsmEditingPlugin plugin) {
+		return !Algorithms.isEmpty(plugin.OSM_USER_NAME_OR_EMAIL.get()) && !Algorithms.isEmpty(plugin.OSM_USER_PASSWORD.get());
 	}
 
 	public interface OsmAuthorizationListener {
