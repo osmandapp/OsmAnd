@@ -178,7 +178,6 @@ public class BinaryRoutePlanner {
 			ctx.calculationProgress.directQueueSize += graphDirectSegments.size(); // Math.max(ctx.directQueueSize,
 																					// graphDirectSegments.size());
 			ctx.calculationProgress.oppositeQueueSize += graphReverseSegments.size();
-			ctx.calculationProgress.visitedOppositeSegments += visitedOppositeSegments.size();
 		}
 		return finalSegment;
 	}
@@ -786,8 +785,9 @@ public class BinaryRoutePlanner {
 		
 		if (nextCurrentSegment == null && directionAllowed) {
 			if (ctx.calculationMode != RouteCalculationMode.BASE) {
-				// exception as it should not occur
-				throw new IllegalStateException();
+				// exception as it should not occur 
+				// To do: happens anyway during approximation (should be investigated)
+//				throw new IllegalStateException();
 			} else {
 				//  Issue #13284: we know that bug in data (how we simplify base data and connect between regions), so we workaround it
 				int newEnd = currentSegment.getSegmentEnd() + (currentSegment.isPositive() ? +1 :-1);

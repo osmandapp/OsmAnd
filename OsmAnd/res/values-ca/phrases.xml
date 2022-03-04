@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_palaeontological_site">Jaciment paleontològic</string>
     <string name="poi_bakery">Fleca</string>
@@ -131,7 +131,6 @@
     <string name="poi_bicycle_parking">Aparcament per bicicletes</string>
     <string name="poi_houseware">Complements per la llar</string>
     <string name="poi_stationery">Papereria</string>
-    
     <string name="poi_toys">Botiga de joguines</string>
     <string name="poi_trade">Materials de construcció</string>
     <string name="poi_variety_store">Botiga de descompte</string>
@@ -425,7 +424,6 @@
     <string name="poi_gasometer">Gasòmetre</string>
     <string name="poi_silo">Sitja</string>
     <string name="poi_storage_tank">Dipòsit d\'emmagatzematge</string>
-    
     <string name="poi_quarter">Barri</string>
     <string name="poi_neighbourhood">Veïnatge</string>
     <string name="poi_locality">Assentament</string>
@@ -805,7 +803,6 @@
     <string name="poi_entrance_exit">Sortida</string>
     <string name="poi_coffee">Coffee shop</string>
     <string name="poi_pasta">Botiga de pasta</string>
-    
     <string name="poi_free_flying">Botiga de vol lliure</string>
     <string name="poi_garden_furniture">Mobles de jardí</string>
     <string name="poi_music">Botiga de música</string>
@@ -827,7 +824,6 @@
     <string name="poi_kent_carriage_gap">Pas exclusiu per a carruatges</string>
     <string name="poi_breakwater">Escullera</string>
     <string name="poi_groyne">Espigó</string>
-    
     <string name="poi_crane">Grua</string>
     <string name="poi_cutline">Tallafoc</string>
     <string name="poi_tree">Arbre</string>
@@ -2641,7 +2637,6 @@
     <string name="poi_aquaculture_shrimp">Aqüicultura: gambes</string>
     <string name="poi_aquaculture_fish">Aqüicultura: peix</string>
     <string name="poi_aquaculture_mussels">Aqüicultura: musclos</string>
-    
     <string name="poi_traffic_mirror">Mirall convex</string>
     <string name="poi_fire_operator">Codi de bombers</string>
     <string name="poi_public_bookcase_type_phone_box">Tipus: cabina telefònica</string>
@@ -2877,4 +2872,32 @@
     <string name="poi_motorcycle_tyres_no">Pneumàtics: no</string>
     <string name="poi_motorcycle_tyres_yes">Pneumàtics</string>
     <string name="poi_motorcycle_parts_no">Recanvis: no</string>
+    <string name="poi_fire_hydrant_pressure_filter">Pressió</string>
+    <string name="poi_embassy_filter">Ambaixada</string>
+    <string name="poi_consulate_filter">Consulat</string>
+    <string name="poi_access_bicycle">Accés per a bicicletes</string>
+    <string name="poi_cash_withdrawal_bank_card">Retirada d\'efectiu</string>
+    <string name="poi_traffic_signals_vibration">Vibració</string>
+    <string name="poi_video_telephone">Vídeo</string>
+    <string name="poi_volcano_status">Estat</string>
+    <string name="poi_bath_type">Tipus</string>
+    <string name="poi_access_moped">Accés per a ciclomotors</string>
+    <string name="poi_access_motorcycle">Accés per a motocicletes</string>
+    <string name="poi_access_trailer">Accés per a remolcs (tràilers)</string>
+    <string name="poi_coffee_filter">Cafè</string>
+    <string name="poi_post_office_type">Tipus</string>
+    <string name="poi_sms">SMS</string>
+    <string name="poi_access_general">Accés general</string>
+    <string name="poi_computer_repair">Reparació d\'ordinadors</string>
+    <string name="poi_computer_parts">Peces d\'ordinadors</string>
+    <string name="poi_furniture_filter">Mobles</string>
+    <string name="poi_fridge_filter">Refrigerador</string>
+    <string name="poi_bath_open_air">A l\'aire lliure</string>
+    <string name="poi_volcano_type">Tipus</string>
+    <string name="poi_ice_cream_filter">Gelat</string>
+    <string name="poi_traffic_signals_arrow">Fletxa</string>
+    <string name="poi_tobacco_filter">Tabac</string>
+    <string name="poi_heating_filter">Calefacció</string>
+    <string name="poi_computer_sales">Venda d\'ordinadors</string>
+    <string name="poi_faculty_filter">Facultat</string>
 </resources>

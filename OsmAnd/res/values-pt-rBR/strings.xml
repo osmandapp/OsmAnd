@@ -4510,4 +4510,5 @@
     <string name="gpx_no_routes_title">Não há rotas</string>
     <string name="gpx_no_routes_descr">Pode usar a ferramenta \"%1$s\" para adicionar rota ao arquivo.</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ícones em ampliações baixas</string>
+    <string name="stop_download_desc">O download não está completo. Se você interromper o download agora, apenas parte dos blocos estará disponível para visualização.</string>
 </resources>

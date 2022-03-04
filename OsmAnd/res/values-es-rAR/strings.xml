@@ -4536,4 +4536,12 @@
     <string name="default_appearance_desc">La forma, el color y el icono predefinido serán aplicados a los puntos favoritos añadidos al grupo.</string>
     <string name="default_appearance">Aspecto predefinido</string>
     <string name="edit_category">Editar categoría</string>
+    <string name="stop_download">Parar descarga</string>
+    <string name="estimated_download_size">Tamaño estimado de descarga</string>
+    <string name="stop_and_exit">Parar y salir</string>
+    <string name="shared_string_complete">Completar</string>
+    <string name="stop_download_desc">La descarga está incompleta. Si interrumpes la descarga ahora, sólo podrás ver una parte de las teselas.</string>
+    <string name="number_of_tiles">Número de teselas</string>
+    <string name="move_map_to_select_area">Mover el mapa para elegir el área necesaria.</string>
+    <string name="zoom_levels_difference_description">La gran diferencia entre los niveles de zum, puede aumentar el tamaño de los datos descargados.</string>
 </resources>

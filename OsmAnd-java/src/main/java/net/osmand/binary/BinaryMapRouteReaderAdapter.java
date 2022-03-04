@@ -647,10 +647,28 @@ public class BinaryMapRouteReaderAdapter {
 				subregion.filePointer = codedIS.getTotalBytesRead();
 				int oldLimit = codedIS.pushLimit(subregion.length);
 				readRouteTree(subregion, null, 0, true);
-				if(tag == OsmandOdb.OsmAndRoutingIndex.ROOTBOXES_FIELD_NUMBER) {
-					region.subregions.add(subregion);
+				if (tag == OsmandOdb.OsmAndRoutingIndex.ROOTBOXES_FIELD_NUMBER) {
+					boolean exist = false;
+					for (RouteSubregion s : region.subregions) {
+						if (s.filePointer == subregion.filePointer) {
+							exist = true;
+							break;
+						}
+					}
+					if (!exist) {
+						region.subregions.add(subregion);
+					}
 				} else {
-					region.basesubregions.add(subregion);
+					boolean exist = false;
+					for (RouteSubregion s : region.basesubregions) {
+						if (s.filePointer == subregion.filePointer) {
+							exist = true;
+							break;
+						}
+					}
+					if (!exist) {
+						region.basesubregions.add(subregion);
+					}
 				}
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				codedIS.popLimit(oldLimit);

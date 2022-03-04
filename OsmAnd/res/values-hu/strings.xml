@@ -745,9 +745,9 @@
     <string name="map_widget_distance">Célpont</string>
     <string name="map_widget_altitude">Magasság</string>
     <string name="map_widget_time">Hátralévő idő</string>
-    <string name="map_widget_next_turn">Következő lekanyarodás</string>
-    <string name="map_widget_next_turn_small">Következő lekanyarodás (kicsi)</string>
-    <string name="map_widget_next_next_turn">Második lekanyarodás</string>
+    <string name="map_widget_next_turn">Következő kanyarodás</string>
+    <string name="map_widget_next_turn_small">Következő kanyarodás (kicsi)</string>
+    <string name="map_widget_next_next_turn">Második kanyarodás</string>
     <string name="map_widget_mini_route">Kicsi útvonaltérkép</string>
     <string name="bg_service_screen_lock">Képernyőzár</string>
     <string name="bg_service_screen_lock_toast">Képernyő lezárva</string>
@@ -4528,4 +4528,12 @@
     <string name="default_appearance_desc">Az alapértelmezett szín, ikon és alak a csoporthoz hozzáadott kedvenc pontokra lesz érvényes.</string>
     <string name="default_appearance">Alapértelmezett megjelenés</string>
     <string name="edit_category">Kategória szerkesztése</string>
+    <string name="stop_download_desc">A letöltés nincs kész. Ha most megszakítja azt, csak a csempék egy része lesz megtekinthető.</string>
+    <string name="stop_download">Letöltés leállítása</string>
+    <string name="stop_and_exit">Leállítás és kilépés</string>
+    <string name="shared_string_complete">kész</string>
+    <string name="estimated_download_size">Becsült letöltési méret</string>
+    <string name="number_of_tiles">Csempék száma</string>
+    <string name="zoom_levels_difference_description">A nagyítási szintek közötti nagy különbség növelheti a letöltött adatok méretét.</string>
+    <string name="move_map_to_select_area">Mozgassa a térképet a kívánt terület kijelöléséhez.</string>
 </resources>

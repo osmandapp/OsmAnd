@@ -4531,4 +4531,8 @@
     <string name="shared_string_reading_file">Leyendo archivo…</string>
     <string name="all_groups">Todos los grupos</string>
     <string name="list_of_groups">Lista de grupos</string>
+    <string name="edit_category">Editar categoría</string>
+    <string name="shared_string_shape">Forma</string>
+    <string name="default_appearance_desc">La forma, el color y el icono predefinido serán aplicados a los puntos favoritos añadidos al grupo.</string>
+    <string name="default_appearance">Aspecto predefinido</string>
 </resources>

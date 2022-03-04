@@ -440,6 +440,16 @@ public class SearchUICore {
 		this.phrase = this.phrase.generateNewPhrase(text, searchSettings);
 		return this.phrase;
 	}
+	
+	public SearchResultCollection immediateSearch(final String text, final LatLon loc) {
+		searchSettings = searchSettings.setOriginalLocation(loc);
+		final SearchPhrase phrase = this.phrase.generateNewPhrase(text, searchSettings);
+		final SearchResultMatcher rm = new SearchResultMatcher(null, phrase, requestNumber.get(), requestNumber, totalLimit);
+		searchInternal(phrase, rm);
+		SearchResultCollection collection = new SearchResultCollection(phrase);
+		collection.addSearchResults(rm.getRequestResults(), true, true);
+		return collection;
+	}
 
 	public void search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher) {
 		search(text, delayedExecution, matcher, searchSettings);
