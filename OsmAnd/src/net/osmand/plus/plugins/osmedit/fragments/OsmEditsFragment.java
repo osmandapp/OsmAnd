@@ -651,7 +651,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			if (hasPoiGroup(points)) {
-				if (app.getOsmOAuthHelper().isLogged()) {
+				if (app.getOsmOAuthHelper().isLogged(plugin)) {
 					SendPoiBottomSheetFragment.showInstance(getChildFragmentManager(), points);
 				} else {
 					LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), this);
