@@ -39,10 +39,10 @@ import java.util.List;
 public class RouteInfoWidgetsFactory {
 
 	public NextTurnWidget createNextInfoControl(final Activity activity,
-	                                            final OsmandApplication app, boolean horisontalMini) {
+	                                            final OsmandApplication app, boolean horizontalMini) {
 		final OsmandSettings settings = app.getSettings();
 		final RoutingHelper routingHelper = app.getRoutingHelper();
-		final NextTurnWidget nextTurnInfo = new NextTurnWidget(activity, app, horisontalMini) {
+		final NextTurnWidget nextTurnInfo = new NextTurnWidget(activity, app, horizontalMini) {
 			final NextDirectionInfo calc1 = new NextDirectionInfo();
 
 			@Override

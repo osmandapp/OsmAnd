@@ -172,49 +172,25 @@ public class MapWidgetRegistry {
 		return null;
 	}
 
-	public MapWidgetRegInfo registerSideWidgetInternal(TextInfoWidget widget,
-	                                                   WidgetState widgetState,
-	                                                   String key, boolean left, int priorityOrder) {
-		MapWidgetRegInfo ii = new MapWidgetRegInfo(key, widget, widgetState, priorityOrder, left);
+	public MapWidgetRegInfo registerWidget(@NonNull String key,
+	                                       @Nullable TextInfoWidget widget,
+	                                       @Nullable WidgetState widgetState,
+	                                       @DrawableRes int drawableMenu,
+	                                       @StringRes int messageId,
+	                                       String message,
+	                                       int priorityOrder,
+	                                       boolean left) {
+		MapWidgetRegInfo ii = new MapWidgetRegInfo(key, widget,
+				widgetState, drawableMenu, messageId, message, priorityOrder, left);
 		processVisibleModes(key, ii);
 		if (widget != null) {
-			widget.setContentTitle(widgetState.getMenuTitleId());
-		}
-		if (left) {
-			this.leftWidgetSet.add(ii);
-		} else {
-			this.rightWidgetSet.add(ii);
-		}
-		return ii;
-	}
-
-	public MapWidgetRegInfo registerSideWidgetInternal(TextInfoWidget widget,
-	                                                   @DrawableRes int drawableMenu,
-	                                                   String message,
-	                                                   String key, boolean left, int priorityOrder) {
-		MapWidgetRegInfo ii = new MapWidgetRegInfo(key, widget, drawableMenu,
-				message, priorityOrder, left);
-		processVisibleModes(key, ii);
-		if (widget != null) {
-			widget.setContentTitle(message);
-		}
-		if (left) {
-			this.leftWidgetSet.add(ii);
-		} else {
-			this.rightWidgetSet.add(ii);
-		}
-		return ii;
-	}
-
-	public MapWidgetRegInfo registerSideWidgetInternal(TextInfoWidget widget,
-	                                                   @DrawableRes int drawableMenu,
-	                                                   @StringRes int messageId,
-	                                                   String key, boolean left, int priorityOrder) {
-		MapWidgetRegInfo ii = new MapWidgetRegInfo(key, widget, drawableMenu,
-				messageId, priorityOrder, left);
-		processVisibleModes(key, ii);
-		if (widget != null) {
-			widget.setContentTitle(messageId);
+			if (message != null) {
+				widget.setContentTitle(message);
+			} else if (messageId != MapWidgetRegInfo.INVALID_ID){
+				widget.setContentTitle(messageId);
+			} else if (widgetState != null) {
+				widget.setContentTitle(widgetState.getMenuTitleId());
+			}
 		}
 		if (left) {
 			this.leftWidgetSet.add(ii);

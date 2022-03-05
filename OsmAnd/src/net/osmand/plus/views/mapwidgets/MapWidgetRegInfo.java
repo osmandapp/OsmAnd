@@ -13,46 +13,36 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class MapWidgetRegInfo implements Comparable<MapWidgetRegInfo> {
-	public final TextInfoWidget widget;
-	@DrawableRes
-	private int drawableMenu;
-	@StringRes
-	private int messageId;
-	private String message;
-	private WidgetState widgetState;
+
+	public static final int INVALID_ID = 0;
+
 	public final String key;
+	public final TextInfoWidget widget;
 	public final boolean left;
-	public final int priorityOrder;
+	public final int priority;
+	private final @DrawableRes int drawableMenu;
+	private final @StringRes int messageId;
+	private final String message;
+	private final WidgetState widgetState;
 	private final Set<ApplicationMode> visibleCollapsible = new LinkedHashSet<>();
 	private final Set<ApplicationMode> visibleModes = new LinkedHashSet<>();
 	private Runnable stateChangeListener = null;
 
-	public MapWidgetRegInfo(String key, TextInfoWidget widget, @DrawableRes int drawableMenu,
-	                        @StringRes int messageId, int priorityOrder, boolean left) {
-		this.key = key;
-		this.widget = widget;
-		this.drawableMenu = drawableMenu;
-		this.messageId = messageId;
-		this.priorityOrder = priorityOrder;
-		this.left = left;
-	}
-
-	public MapWidgetRegInfo(String key, TextInfoWidget widget, @DrawableRes int drawableMenu,
-	                        String message, int priorityOrder, boolean left) {
-		this.key = key;
-		this.widget = widget;
-		this.drawableMenu = drawableMenu;
-		this.message = message;
-		this.priorityOrder = priorityOrder;
-		this.left = left;
-	}
-
-	public MapWidgetRegInfo(String key, TextInfoWidget widget, WidgetState widgetState,
-	                        int priorityOrder, boolean left) {
+	public MapWidgetRegInfo(String key,
+	                        TextInfoWidget widget,
+	                        WidgetState widgetState,
+	                        @DrawableRes int drawableMenu,
+	                        @StringRes int messageId,
+	                        String message,
+	                        int priority,
+	                        boolean left) {
 		this.key = key;
 		this.widget = widget;
 		this.widgetState = widgetState;
-		this.priorityOrder = priorityOrder;
+		this.drawableMenu = drawableMenu;
+		this.messageId = messageId;
+		this.message = message;
+		this.priority = priority;
 		this.left = left;
 	}
 
@@ -150,13 +140,13 @@ public class MapWidgetRegInfo implements Comparable<MapWidgetRegInfo> {
 		} else if (getMessageId() == another.getMessageId()) {
 			return 0;
 		}
-		if (priorityOrder == another.priorityOrder) {
+		if (priority == another.priority) {
 			if (getMessageId() == 0 && another.getMessageId() == 0) {
 				return key.compareTo(key);
 			} else {
 				return getMessageId() - another.getMessageId();
 			}
 		}
-		return priorityOrder - another.priorityOrder;
+		return priority - another.priority;
 	}
 }
