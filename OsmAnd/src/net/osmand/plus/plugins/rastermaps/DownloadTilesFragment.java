@@ -5,10 +5,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,8 +53,6 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 
 	public static final Uri HELP_URI = Uri.parse("https://docs.osmand.net/en/main@latest/osmand/map/raster-maps#download--update-tiles");
 
-	private static final long UPDATE_TILES_PREVIEW_INTERVAL = 500;
-
 	private static final String KEY_SELECTED_MIN_ZOOM = "selected_min_zoom";
 	private static final String KEY_SELECTED_MAX_ZOOM = "selected_max_zoom";
 
@@ -63,8 +60,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	private OsmandSettings settings;
 	private boolean nightMode;
 
-	private final Handler handler = new Handler();
-	private Runnable updateTilesTask;
+	private UpdateTilesHandler handler;
 
 	private OsmandMapTileView mapView;
 	private TilesPreviewDrawer tilesPreviewDrawer;
@@ -95,12 +91,18 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		app = requireMyApplication();
 		settings = requireSettings();
 		nightMode = isNightMode(true);
 		mapView = requireMapActivity().getMapView();
 		tilesPreviewDrawer = new TilesPreviewDrawer(app);
 		tileSource = settings.getMapTileSource(false);
+		handler = new UpdateTilesHandler(() -> {
+			setupTilesDownloadInfo();
+			updateTilesPreview();
+		});
+
 		if (savedInstanceState != null) {
 			selectedMinZoom = savedInstanceState.getInt(KEY_SELECTED_MIN_ZOOM);
 			selectedMaxZoom = savedInstanceState.getInt(KEY_SELECTED_MAX_ZOOM);
@@ -317,20 +319,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 			}
 		}
 		mapView.addMapLocationListener(this);
-		runUpdatingTiles();
-	}
-
-	public void runUpdatingTiles() {
-		if (updateTilesTask == null) {
-			updateTilesTask = () -> {
-				setupTilesDownloadInfo();
-				updateTilesPreview();
-				handler.postDelayed(updateTilesTask, UPDATE_TILES_PREVIEW_INTERVAL);
-			};
-		}
-		if (VERSION.SDK_INT >= VERSION_CODES.Q && !handler.hasCallbacks(updateTilesTask)) {
-			handler.post(updateTilesTask);
-		}
+		handler.startUpdatesIfNotRunning();
 	}
 
 	@Override
@@ -341,7 +330,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 			mapActivity.enableDrawer();
 		}
 		mapView.removeMapLocationListener(this);
-		handler.removeCallbacks(updateTilesTask);
+		handler.stopUpdates();
 	}
 
 	@Override
@@ -444,6 +433,37 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	private static class UpdateTilesHandler extends Handler {
+
+		private static final int UPDATE_TILES_MESSAGE_ID = 0;
+		private static final long UPDATE_TILES_PREVIEW_INTERVAL = 500;
+
+		private final Runnable updateTilesTask;
+
+		public UpdateTilesHandler(@NonNull Runnable updateTilesTask) {
+			this.updateTilesTask = updateTilesTask;
+		}
+
+		public void startUpdatesIfNotRunning() {
+			if (!hasMessages(UPDATE_TILES_MESSAGE_ID)) {
+				sendEmptyMessage(UPDATE_TILES_MESSAGE_ID);
+			}
+		}
+
+		public void stopUpdates() {
+			removeMessages(UPDATE_TILES_MESSAGE_ID);
+		}
+
+		@Override
+		public void handleMessage(@NonNull Message message) {
+			if (message.what == UPDATE_TILES_MESSAGE_ID) {
+				updateTilesTask.run();
+				sendEmptyMessageDelayed(UPDATE_TILES_MESSAGE_ID, UPDATE_TILES_PREVIEW_INTERVAL);
+			}
 		}
 	}
 }
