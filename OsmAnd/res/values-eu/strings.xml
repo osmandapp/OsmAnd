@@ -4215,4 +4215,19 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="track_file_description">Ekintza hau sakatzean, erabilgarri dauden arrastoen aukeraketa-elkarrizketa erakutsiko da.</string>
     <string name="delete_history_items_descr">Hautatutako historiako elementuak ezabatu nahi dituzu\?</string>
     <string name="delete_history_items">Ezabatu %1$s elementu historiatik\?</string>
+    <string name="shared_storage_warning_description">Android arau berriak direla eta, 2021eko azarotik aurrera OsmAnd 4.2-k biltegiratze partekaturako sarbidea galduko du.
+\n
+\nMugitu datu-karpeta Biltegiratze partekatutik biltegiratze erabilgarrira; bestela, aplikazioak zure datuetarako sarbidea galduko du, hala nola lineaz kanpoko mapak, GPX arrastoak, etab.</string>
+    <string name="search_history_is_disabled_descr">Ezarpenetan bilaketa-historia gaitu dezakezu.</string>
+    <string name="clear_all_history">Garbitu historia guztia</string>
+    <string name="is_disabled">%1$s desgaituta dago</string>
+    <string name="history_actions_descr">Historia fitxategi batera esportatu dezakezu.</string>
+    <string name="map_markers_history">Mapa markatzaileen historia</string>
+    <string name="history_preferences_descr">Historia-erregistroa banaka desgai dezakezu historia mota bakoitzerako.</string>
+    <string name="shortcut_start_recording">Hasi grabatzen</string>
+    <string name="clear_all_history_warning">Aplikazioaren historiako sarrera guztiak garbitu nahi dituzu bilaketa, nabigazioa eta markatzaileen historia barne\?</string>
+    <string name="no_plugins_enabled">Ez duzu pluginik gaituta. Eskuragarri dauden pluginen zerrenda aurki dezakezu \'Menua\' → \'Pluginak\' atalean.</string>
+    <string name="markers_history_is_disabled_descr">Gaitu historia bisitatutako mapa-markatzaileen zerrenda gogoratzeko.</string>
+    <string name="history_is_disabled_descr">Gaitu historia erabilitako azken emaitzak azkarrago atzitzeko.</string>
+    <string name="navigation_history">Nabigazioaren historia</string>
 </resources>
