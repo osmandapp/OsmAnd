@@ -615,7 +615,7 @@
     <string name="tile_source_already_installed">已经安装了地图，“设置”将被更新。</string>
     <string name="install_more">安装更多…</string>
     <string name="level_to_switch_vector_raster_descr">超出此级别的任何事物都可使用栅格地图。</string>
-    <string name="level_to_switch_vector_raster">最小矢量显示级别</string>
+    <string name="level_to_switch_vector_raster">最小矢量缩放级别</string>
     <string name="error_doing_search">无法进行离线搜索。</string>
     <string name="system_locale">系统</string>
     <string name="preferred_locale_descr">应用程序显示语言（在 OsmAnd 重新启动后使用）。</string>
@@ -687,7 +687,7 @@
     <string name="update_poi_error_local">无法更新本地兴趣点列表。</string>
     <string name="update_poi_error_loading">无法从服务器加载数据。</string>
     <string name="update_poi_no_offline_poi_index">此区域没有可用的离线 POI 数据</string>
-    <string name="update_poi_is_not_available_for_zoom">小比例尺下更新 POI 功能不可用</string>
+    <string name="update_poi_is_not_available_for_zoom">放大以更新 POI</string>
     <string name="context_menu_item_update_poi">更新 POI</string>
     <string name="context_menu_item_update_map_confirm">从互联网更新本地数据？</string>
     <string name="search_history_city">城市：{0}</string>
@@ -2888,7 +2888,7 @@
     <string name="shared_string_circle">圆形</string>
     <string name="shared_string_square">方形</string>
     <string name="shared_string_octagon">八边形</string>
-    <string name="shared_string_min">闽语</string>
+    <string name="shared_string_min">最小</string>
     <string name="developer_plugin">开发者插件</string>
     <string name="replace_point_descr">以此替换另一点。</string>
     <string name="app_mode_ski_snowmobile">雪地车</string>
@@ -3056,7 +3056,7 @@
     <string name="lang_nap">那不勒斯语</string>
     <string name="lang_my">缅甸语</string>
     <string name="lang_mn">蒙古语</string>
-    <string name="lang_min">米南卡保语</string>
+    <string name="lang_min">米南佳保语</string>
     <string name="lang_mg">马达加斯加语</string>
     <string name="lang_ky">柯尔克孜语</string>
     <string name="lang_kk">哈萨克语</string>
@@ -4061,4 +4061,7 @@
 \n除非在指定续订周期之前取消订阅，否则订阅将自动延长。
 \n
 \n您可以随时在 Google Play 设置中管理或取消订阅。</string>
+    <string name="monitoring_min_speed">最低速度</string>
+    <string name="monitoring_min_accuracy">最低精度</string>
+    <string name="monitoring_min_distance">最小位移</string>
 </resources>

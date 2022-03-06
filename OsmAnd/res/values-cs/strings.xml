@@ -4534,4 +4534,12 @@
     <string name="location_source_descr">OsmAnd nainstalovaný z Google Play používá %1$s jako výchozí službu pro určení polohy.
 \n
 \nPokud dostáváte nepřesné informace o poloze nebo používáte zařízení bez %2$s, zkuste přepnout na \"%3$s\"</string>
+    <string name="stop_download">Zastavit stahování</string>
+    <string name="stop_and_exit">Zastavit a ukončit</string>
+    <string name="zoom_levels_difference_description">Velký rozdíl mezi úrovněmi přiblížení může zvýšit objem stahovaných dat.</string>
+    <string name="estimated_download_size">Odhadovaná velikost ke stažení</string>
+    <string name="number_of_tiles">Počet dlaždic</string>
+    <string name="move_map_to_select_area">Posuňte mapu, abyste mohli vybrat potřebnou oblast.</string>
+    <string name="shared_string_complete">hotovo</string>
+    <string name="stop_download_desc">Stahování není dokončeno. Pokud jej teď přerušíte, budete moci prohlížet jen část dlaždic.</string>
 </resources>
