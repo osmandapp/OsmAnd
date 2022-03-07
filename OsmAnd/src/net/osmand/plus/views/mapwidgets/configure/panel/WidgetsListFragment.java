@@ -48,7 +48,6 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	private View listBtnChangeOrder;
 	private View stickBtnChangeOrder;
 	private ConfigureWidgetsFragment parentFragment;
-	private int lastListBtnPos;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
