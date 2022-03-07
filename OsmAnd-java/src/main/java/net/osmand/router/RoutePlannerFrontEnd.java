@@ -262,18 +262,26 @@ public class RoutePlannerFrontEnd {
 						if (routeFound) {
 							routeFound = findGpxRouteSegment(gctx, gpxPoints, start, next, prev != null);
 							if (routeFound) {
+								routeFound = isRouteCloseToGpxPoints(gctx, gpxPoints, start, next);
+								if (!routeFound) {
+									start.routeToTarget = null;
+								}
+							}
+							if (routeFound && next.ind == gpxPoints.size() - 1) {
+								// last point - last route found
+								makeSegmentPointPrecise(start.routeToTarget.get(start.routeToTarget.size() - 1),
+										next.loc, false);
+							} else if (routeFound) {
 								// route is found - cut the end of the route and move to next iteration
-//							start.stepBackRoute = new ArrayList<RouteSegmentResult>();
-//							boolean stepBack = true;
+								// start.stepBackRoute = new ArrayList<RouteSegmentResult>();
+								// boolean stepBack = true;
 								boolean stepBack = stepBackAndFindPrevPointInRoute(gctx, gpxPoints, start, next);
 								if (!stepBack) {
 									// not supported case (workaround increase routing.xml maxStepApproximation)
 									log.info("Consider to increase routing.xml maxStepApproximation to: " + routeDist * 2);
 									start.routeToTarget = null;
 									routeFound = false;
-									break;
 								} else {
-									routeFound = isRouteCloseToGpxPoints(gctx, gpxPoints, start, next);
 									if (gctx.ctx.getVisitor() != null) {
 										gctx.ctx.getVisitor().visitApproximatedSegments(start.routeToTarget, start, next);
 									}
@@ -295,7 +303,7 @@ public class RoutePlannerFrontEnd {
 					}
 				}
 				// route is not found skip segment and keep it as straight line on display
-				if (!routeFound) {
+				if (!routeFound && next != null) {
 					// route is not found, move start point by
 					next = findNextGpxPointWithin(gpxPoints, start, gctx.ctx.config.minStepApproximation);
 					if (prev != null) {
