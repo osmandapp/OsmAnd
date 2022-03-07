@@ -193,6 +193,10 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements OnNe
 		this.selectedPanel = selectedPanel;
 	}
 
+	public WidgetsPanel getSelectedPanel() {
+		return selectedPanel;
+	}
+
 	public void setAppMode(ApplicationMode appMode) {
 		this.appMode = appMode;
 	}
