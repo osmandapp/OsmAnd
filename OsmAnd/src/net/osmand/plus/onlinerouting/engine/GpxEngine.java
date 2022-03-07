@@ -143,10 +143,9 @@ public class GpxEngine extends OnlineRoutingEngine {
 	                                                              @Nullable ApplicationMode appMode) {
 		try {
 			RoutingHelper routingHelper = app.getRoutingHelper();
-			if (appMode != null) {
-				routingHelper.setAppMode(appMode);
+			if (appMode == null) {
+				appMode = routingHelper.getAppMode();
 			}
-			appMode = routingHelper.getAppMode();
 			List<WptPt> points = gpxFile.getAllSegmentsPoints();
 			LocationsHolder holder = new LocationsHolder(points);
 			if (holder.getSize() > 1) {
