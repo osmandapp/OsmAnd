@@ -128,6 +128,10 @@ public class OsmAndLocationSimulation {
 				if (current != null) {
 					current.setProvider(OsmAndLocationProvider.SIMULATED_PROVIDER);
 				}
+				//int simSpeed = app.getSettings().SIMULATION_SPEED;
+				//boolean reality = app.getSettings().CLOSE_TO_REALITY_SIMULATION;
+				int simSpeed = 0;
+				boolean reality = true;
 
 				while (!directions.isEmpty() && routeAnimation != null) {
 					long timeout = (long) (time * 1000);
@@ -141,21 +145,24 @@ public class OsmAndLocationSimulation {
 							prevTime = current.getTime();
 						}
 					} else {
-						if (current.distanceTo(directions.get(0)) > meters) {
-							current = middleLocation(current, directions.get(0), meters);
+						List<Object> result;
+						if (simSpeed != 0) {
+							result = useSimulationConstantSpeed(simSpeed, current, directions, meters, intervalTime, coeff);
 						} else {
-							current = new Location(directions.remove(0));
-							meters = metersToGoInFiveSteps(directions, current);
+							result = useDefaultSimulation(current, directions, meters);
 						}
+						current = (Location) result.get(0);
+						meters = (float) result.get(1);
 					}
+					int speed = (int) (meters / intervalTime * coeff);
 					if (intervalTime != 0) {
 						current.setSpeed(meters / intervalTime * coeff);
 					}
 					current.setTime(System.currentTimeMillis());
-					if (!current.hasAccuracy() || Double.isNaN(current.getAccuracy())) {
+					if (!current.hasAccuracy() || Double.isNaN(current.getAccuracy()) || (reality && speed < 10)) {
 						current.setAccuracy(5);
 					}
-					if (prev != null && prev.distanceTo(current) > 3) {
+					if (prev != null && prev.distanceTo(current) > 3 || (reality && speed >= 3)) {
 						current.setBearing(prev.bearingTo(current));
 					}
 					final Location toset = current;
@@ -172,6 +179,36 @@ public class OsmAndLocationSimulation {
 
 		};
 		routeAnimation.start();
+	}
+
+	private List<Object> useSimulationConstantSpeed(int speed, Location current, List<Location> directions, float meters, float intervalTime, float coeff) {
+		List<Object> result = new ArrayList<>();
+		speed = (int) (speed / 3.6);
+		if (current.distanceTo(directions.get(0)) > meters) {
+			current = middleLocation(current, directions.get(0), meters);
+		} else {
+			current = new Location(directions.remove(0));
+		}
+		meters = speed * intervalTime * coeff;
+
+		result.add(current);
+		result.add(meters);
+
+		return result;
+	}
+
+	private List<Object> useDefaultSimulation(Location current, List<Location> directions, float meters) {
+		List<Object> result = new ArrayList<>();
+		if (current.distanceTo(directions.get(0)) > meters) {
+			current = middleLocation(current, directions.get(0), meters);
+		} else {
+			current = new Location(directions.remove(0));
+			meters = metersToGoInFiveSteps(directions, current);
+		}
+		result.add(current);
+		result.add(meters);
+
+		return result;
 	}
 	
 	private float metersToGoInFiveSteps(List<Location> directions, Location current) {

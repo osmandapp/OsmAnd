@@ -437,31 +437,47 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private BaseBottomSheetItem createRouteSimulationItem(final LocalRoutingParameter optionsItem) {
-		final BottomSheetItemWithCompoundButton[] simulateNavigationItem = new BottomSheetItemWithCompoundButton[1];
-		simulateNavigationItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
-				.setCompoundButtonColor(selectedModeColor)
-				.setChecked(settings.simulateNavigation)
-				.setIcon(getContentIcon(R.drawable.ic_action_start_navigation))
-				.setTitle(getString(R.string.simulate_navigation))
-//				.setDescription(app.getLocationProvider().getLocationSimulation().isRouteAnimating()
-//						? R.string.simulate_your_location_stop_descr : R.string.simulate_your_location_descr)
-				.setLayoutId(R.layout.bottom_sheet_item_with_switch_56dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						boolean enabled = !settings.simulateNavigation;
-						settings.simulateNavigation = enabled;
-						simulateNavigationItem[0].setChecked(enabled);
-						OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
-						if (sim.isRouteAnimating()) {
-							sim.startStopRouteAnimation(getActivity());
-						} else if (routingHelper.isFollowingMode() && routingHelper.isRouteCalculated() && !routingHelper.isRouteBeingCalculated()) {
-							sim.startStopRouteAnimation(getActivity());
-						}
-					}
-				})
+
+		final View itemView = UiUtilities.getInflater(app, nightMode).inflate(
+				R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp, null, false);
+		final ImageView icon = itemView.findViewById(R.id.icon);
+		TextView tvTitle = itemView.findViewById(R.id.title);
+		View basicItem = itemView.findViewById(R.id.basic_item_body);
+		final CompoundButton cb = itemView.findViewById(R.id.compound_button);
+		View settingBtn = itemView.findViewById(R.id.additional_button);
+		ImageView settingBtnImage = itemView.findViewById(R.id.additional_button_icon);
+
+		tvTitle.setText(getString(R.string.simulate_navigation));
+		icon.setImageDrawable(getContentIcon(R.drawable.ic_action_start_navigation));
+		cb.setChecked(settings.simulateNavigation);
+		cb.setFocusable(false);
+		UiUtilities.setupCompoundButton(nightMode, selectedModeColor, cb);
+
+		basicItem.setOnClickListener(v -> {
+			boolean enabled = !settings.simulateNavigation;
+			settings.simulateNavigation = enabled;
+			cb.setChecked(enabled);
+			OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
+			if (sim.isRouteAnimating()) {
+				sim.startStopRouteAnimation(getActivity());
+			} else if (routingHelper.isFollowingMode() && routingHelper.isRouteCalculated() && !routingHelper.isRouteBeingCalculated()) {
+				sim.startStopRouteAnimation(getActivity());
+			}
+		});
+
+		Drawable drawable = app.getUIUtilities().getIcon(R.drawable.ic_action_settings,
+				nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
+		Drawable activeDrawable = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_settings, selectedModeColor);
+		drawable = AndroidUtils.createPressedStateListDrawable(drawable, activeDrawable);
+		settingBtnImage.setImageDrawable(drawable);
+		settingBtn.setOnClickListener(v -> {
+			BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.SIMULATION_NAVIGATION, applicationMode);
+			dismiss();
+		});
+
+		return new BaseBottomSheetItem.Builder()
+				.setCustomView(itemView)
 				.create();
-		return simulateNavigationItem[0];
 	}
 
 
