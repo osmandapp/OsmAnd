@@ -12,7 +12,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="?attr/list_background_color"
-		android:fitsSystemWindows="true"
+		android:layout_marginTop="0dp"
 		osmand:elevation="0dp">
 
 		<com.google.android.material.appbar.CollapsingToolbarLayout
@@ -32,6 +32,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/toolbar_height"
 				android:minHeight="@dimen/toolbar_height"
+				android:layout_marginTop="0dp"
 				osmand:layout_collapseMode="pin"
 				osmand:titleMarginEnd="0dp"
 				osmand:titleMarginStart="0dp">

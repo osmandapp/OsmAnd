@@ -88,7 +88,9 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 		inflater = UiUtilities.getInflater(getContext(), nightMode);
 
 		view = inflater.inflate(R.layout.fragment_reorder_widgets, container, false);
-		AndroidUtils.addStatusBarPadding21v(requireContext(), view);
+		if (Build.VERSION.SDK_INT < 30) {
+			AndroidUtils.addStatusBarPadding21v(app, view);
+		}
 
 		toolbar = view.findViewById(R.id.toolbar);
 		rvContentList = view.findViewById(R.id.content_list);

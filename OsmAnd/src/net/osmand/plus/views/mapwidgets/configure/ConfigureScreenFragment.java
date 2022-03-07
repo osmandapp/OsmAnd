@@ -78,7 +78,9 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		this.inflater = inflater = UiUtilities.getInflater(getContext(), nightMode);
 
 		View view = inflater.inflate(R.layout.fragment_configure_screen, container, false);
-		AndroidUtils.addStatusBarPadding21v(requireContext(), view);
+		if (Build.VERSION.SDK_INT < 30) {
+			AndroidUtils.addStatusBarPadding21v(app, view);
+		}
 
 		toolbar = view.findViewById(R.id.toolbar);
 		modesToggle = view.findViewById(R.id.modes_toggle);

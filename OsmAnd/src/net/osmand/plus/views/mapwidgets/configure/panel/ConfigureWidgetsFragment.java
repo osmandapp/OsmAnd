@@ -87,7 +87,9 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements OnNe
 		inflater = UiUtilities.getInflater(getContext(), nightMode);
 
 		view = inflater.inflate(R.layout.fragment_configure_widgets, container, false);
-		AndroidUtils.addStatusBarPadding21v(requireContext(), view);
+		if (Build.VERSION.SDK_INT < 30) {
+			AndroidUtils.addStatusBarPadding21v(app, view);
+		}
 
 		toolbar = view.findViewById(R.id.toolbar);
 		tabLayout = view.findViewById(R.id.tab_layout);
