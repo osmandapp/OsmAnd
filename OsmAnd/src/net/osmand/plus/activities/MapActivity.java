@@ -187,7 +187,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private static final Log LOG = PlatformUtil.getLog(MapActivity.class);
 
-	private static final MapContextMenu mapContextMenu = new MapContextMenu();
+	public static final MapContextMenu mapContextMenu = new MapContextMenu();
 	private static final MapRouteInfoMenu mapRouteInfoMenu = new MapRouteInfoMenu();
 	private static final TrackDetailsMenu trackDetailsMenu = new TrackDetailsMenu();
 	private static Intent prevActivityIntent = null;
@@ -1977,9 +1977,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				QuickSearchDialogFragment.showInstance(this, searchQuery, null,
 						QuickSearchType.REGULAR, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.HISTORY, searchLocation);
 			}
-			else if (!mapContextMenu.isVisible()) {
-				fragment.dismiss();
-			} else {
+			else {
 				fragment.show();
 			}
 			refreshMap();
