@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -104,13 +105,14 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	private void setupToolbar() {
-		View backBtn = toolbar.findViewById(R.id.back_button);
+		ImageButton backBtn = toolbar.findViewById(R.id.back_button);
 		backBtn.setOnClickListener(view -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				activity.onBackPressed();
 			}
 		});
+		UiUtilities.rotateImageByLayoutDirection(backBtn);
 		View infoBtn = toolbar.findViewById(R.id.info_button);
 		infoBtn.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
@@ -237,7 +239,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		TextView tvTitle = view.findViewById(R.id.title);
 		TextView tvDesc = view.findViewById(R.id.items_count_descr);
 
-		int count = WidgetsRegister.getSortedWidgets(selectedAppMode, panel, false).size();
+		int count = WidgetsRegister.getWidgets(selectedAppMode, panel, false).size();
 		int iconColor = count > 0 ? activeColor : defColor;
 		Drawable icon = getPaintedContentIcon(panel.getIconId(), iconColor);
 		ivIcon.setImageDrawable(icon);

@@ -28,11 +28,10 @@
 
 				<androidx.appcompat.widget.AppCompatImageView
 					android:id="@+id/back_button"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
+					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+					android:layout_width="@dimen/toolbar_height"
+					android:layout_height="@dimen/toolbar_height"
 					android:layout_gravity="center"
-					android:background="?attr/selectableItemBackgroundBorderless"
-					android:padding="@dimen/list_content_padding"
 					android:tint="@color/icon_color_default_light"
 					osmand:srcCompat="@drawable/ic_action_close" />
 
@@ -65,21 +64,19 @@
 
 				<androidx.appcompat.widget.AppCompatImageView
 					android:id="@+id/reset_button"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
+					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+					android:layout_width="@dimen/toolbar_height"
+					android:layout_height="@dimen/toolbar_height"
 					android:layout_gravity="center"
-					android:background="?attr/selectableItemBackgroundBorderless"
-					android:padding="@dimen/list_content_padding"
 					android:tint="?attr/default_icon_color"
 					osmand:srcCompat="@drawable/ic_action_reset" />
 
 				<androidx.appcompat.widget.AppCompatImageView
 					android:id="@+id/copy_button"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
+					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+					android:layout_width="@dimen/toolbar_height"
+					android:layout_height="@dimen/toolbar_height"
 					android:layout_gravity="center"
-					android:background="?attr/selectableItemBackgroundBorderless"
-					android:padding="@dimen/list_content_padding"
 					android:tint="?attr/default_icon_color"
 					osmand:srcCompat="@drawable/ic_action_copy" />
 

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -101,13 +102,14 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements OnNe
 	}
 
 	private void setupToolbar() {
-		View backBtn = toolbar.findViewById(R.id.back_button);
+		ImageButton backBtn = toolbar.findViewById(R.id.back_button);
 		backBtn.setOnClickListener(view -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				activity.onBackPressed();
 			}
 		});
+		UiUtilities.rotateImageByLayoutDirection(backBtn);
 		View infoBtn = toolbar.findViewById(R.id.info_button);
 		infoBtn.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();

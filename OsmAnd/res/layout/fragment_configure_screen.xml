@@ -44,12 +44,11 @@
 					android:minHeight="@dimen/toolbar_height"
 					android:orientation="horizontal">
 
-					<androidx.appcompat.widget.AppCompatImageView
+					<ImageButton
 						android:id="@+id/back_button"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:background="?attr/selectableItemBackgroundBorderless"
-						android:padding="@dimen/list_content_padding"
+						style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+						android:layout_width="@dimen/toolbar_height"
+						android:layout_height="@dimen/toolbar_height"
 						android:tint="@color/icon_color_default_light"
 						osmand:srcCompat="@drawable/ic_arrow_back" />
 
@@ -64,12 +63,11 @@
 						osmand:typeface="@string/font_roboto_medium"
 						android:text="@string/map_widget_config" />
 
-					<androidx.appcompat.widget.AppCompatImageView
+					<ImageButton
 						android:id="@+id/info_button"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:background="?attr/selectableItemBackgroundBorderless"
-						android:padding="@dimen/list_content_padding"
+						style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+						android:layout_width="@dimen/toolbar_height"
+						android:layout_height="@dimen/toolbar_height"
 						osmand:srcCompat="@drawable/ic_action_help_online"
 						android:tint="?attr/default_icon_color" />
 
