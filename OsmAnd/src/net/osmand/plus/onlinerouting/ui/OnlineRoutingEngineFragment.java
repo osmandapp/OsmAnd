@@ -1,6 +1,7 @@
 package net.osmand.plus.onlinerouting.ui;
 
 import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.CUSTOM_VEHICLE;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.*;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -47,6 +48,7 @@ import net.osmand.plus.onlinerouting.VehicleType;
 import net.osmand.plus.onlinerouting.engine.EngineType;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.ui.OnlineRoutingCard.OnTextChangedListener;
+import net.osmand.plus.profiles.SelectOnlineApproxProfileBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.Algorithms;
@@ -59,7 +61,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
+public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements OnSelectProfileCallback {
 
 	public static final String TAG = OnlineRoutingEngineFragment.class.getSimpleName();
 
@@ -71,6 +73,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 
 	private OsmandApplication app;
 	private ApplicationMode appMode;
+	private ApplicationMode approxAppMode;
 	private MapActivity mapActivity;
 	private OnlineRoutingHelper helper;
 
@@ -285,13 +288,25 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	private void setupApproximateCard() {
 		approximateCard = new OnlineRoutingCard(mapActivity, isNightMode(), appMode);
 		approximateCard.build(mapActivity);
-		approximateCard.setHeaderTitle(getString(R.string.attach_to_the_roads));
-		approximateCard.setCheckBox(getString(R.string.approximate_route_description), engine.shouldApproximateRoute(), result -> {
-			engine.put(EngineParameter.APPROXIMATE_ROUTE, String.valueOf(result));
+		setApproximateCardTitle();
+		approximateCard.onClickCheckBox(getString(R.string.approximate_route_description), result -> {
+			if (getActivity() != null) {
+				String selected = approxAppMode != null ? approxAppMode.getDefaultRoutingProfile() : null;
+				SelectOnlineApproxProfileBottomSheet.showInstance(
+						getActivity(), this, approxAppMode, selected, false);
+			}
 			return false;
 		});
 		approximateCard.showDivider();
 		segmentsContainer.addView(approximateCard.getView());
+	}
+
+	private void setApproximateCardTitle() {
+		approxAppMode = engine.getApproximateRouteProfile();
+		String appModeName = approxAppMode != null ? " (" + approxAppMode.toHumanString() + ")" : "";
+		String title = getString(R.string.attach_to_the_roads) + appModeName;
+		approximateCard.setHeaderTitle(title);
+		approximateCard.setCheckBox(approxAppMode != null);
 	}
 
 	private void setupExternalTimestampsCard() {
@@ -849,5 +864,12 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		buttonsShadow.animate()
 				.alpha(0f)
 				.setDuration(200);
+	}
+
+	@Override
+	public void onProfileSelected(Bundle args) {
+		String profileKey = args.getString(PROFILE_KEY_ARG);
+		engine.put(EngineParameter.APPROXIMATE_ROUTE, String.valueOf(profileKey));
+		setApproximateCardTitle();
 	}
 }
