@@ -19,22 +19,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-
 import com.google.android.material.snackbar.Snackbar;
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.MGRSPoint;
 import com.jwetherell.openmap.common.UTMPoint;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.LocationConvert;
 import net.osmand.PlatformUtil;
@@ -42,17 +31,14 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.helpers.CurrentPositionHelper;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.GPSInfo;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.StartGPSStatus;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.CurrentPositionHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
@@ -67,8 +53,12 @@ import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -80,7 +70,26 @@ import org.apache.commons.logging.Log;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+
 public class MapInfoWidgetsFactory {
+
+	private final OsmandApplication app;
+	private final OsmAndLocationProvider locationProvider;
+
+	public MapInfoWidgetsFactory(@NonNull OsmandApplication app) {
+		this.app = app;
+		this.locationProvider = app.getLocationProvider();
+	}
+
 	public enum TopToolbarControllerType {
 		QUICK_SEARCH,
 		CONTEXT_MENU,
@@ -91,33 +100,29 @@ public class MapInfoWidgetsFactory {
 		DOWNLOAD_MAP
 	}
 
-	public TextInfoWidget createAltitudeControl(final MapActivity map) {
-		final TextInfoWidget altitudeControl = new TextInfoWidget(map) {
+	public TextInfoWidget createAltitudeControl(@NonNull MapActivity mapActivity) {
+		TextInfoWidget altitudeControl = new TextInfoWidget(mapActivity) {
 			private int cachedAlt = 0;
 
 			@Override
-			public boolean updateInfo(DrawSettings d) {
-				// draw speed
-				Location loc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
+			public void updateInfo(@Nullable DrawSettings drawSettings) {
+				Location loc = locationProvider.getLastKnownLocation();
 				if (loc != null && loc.hasAltitude()) {
 					double compAlt = loc.getAltitude();
 					if (isUpdateNeeded() || cachedAlt != (int) compAlt) {
 						cachedAlt = (int) compAlt;
-						String ds = OsmAndFormatter.getFormattedAlt(cachedAlt, map.getMyApplication());
+						String ds = OsmAndFormatter.getFormattedAlt(cachedAlt, app);
 						int ls = ds.lastIndexOf(' ');
 						if (ls == -1) {
 							setText(ds, null);
 						} else {
 							setText(ds.substring(0, ls), ds.substring(ls + 1));
 						}
-						return true;
 					}
 				} else if (cachedAlt != 0) {
 					cachedAlt = 0;
 					setText(null, null);
-					return true;
 				}
-				return false;
 			}
 
 			@Override
@@ -130,47 +135,40 @@ public class MapInfoWidgetsFactory {
 		return altitudeControl;
 	}
 
-	public TextInfoWidget createGPSInfoControl(final MapActivity map) {
-		final OsmandApplication app = map.getMyApplication();
-		final OsmAndLocationProvider loc = app.getLocationProvider();
-		final TextInfoWidget gpsInfoControl = new TextInfoWidget(map) {
-			private int u = -1;
-			private int f = -1;
+	public TextInfoWidget createGPSInfoControl(@NonNull MapActivity mapActivity) {
+		TextInfoWidget gpsInfoControl = new TextInfoWidget(mapActivity) {
+			private int usedSatellites = -1;
+			private int foundSatellites = -1;
 
 			@Override
-			public boolean updateInfo(DrawSettings d) {
-				GPSInfo gpsInfo = loc.getGPSInfo();
-				if (isUpdateNeeded() || gpsInfo.usedSatellites != u || gpsInfo.foundSatellites != f) {
-					u = gpsInfo.usedSatellites;
-					f = gpsInfo.foundSatellites;
+			public void updateInfo(@Nullable DrawSettings drawSettings) {
+				GPSInfo gpsInfo = locationProvider.getGPSInfo();
+				if (isUpdateNeeded()
+						|| gpsInfo.usedSatellites != usedSatellites
+						|| gpsInfo.foundSatellites != foundSatellites) {
+					usedSatellites = gpsInfo.usedSatellites;
+					foundSatellites = gpsInfo.foundSatellites;
 					setText(gpsInfo.usedSatellites + "/" + gpsInfo.foundSatellites, "");
-					return true;
 				}
-				return false;
 			}
 		};
 		gpsInfoControl.setIcons(R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night);
 		gpsInfoControl.setText(null, null);
-		gpsInfoControl.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				new StartGPSStatus(map).run();
-			}
-		});
+		gpsInfoControl.setOnClickListener(view -> new StartGPSStatus(mapActivity).run());
 		return gpsInfoControl;
 	}
 
-	public TextInfoWidget createRadiusRulerControl(final MapActivity map) {
+	public TextInfoWidget createRadiusRulerControl(@NonNull MapActivity mapActivity) {
 		final String title = "—";
-		final TextInfoWidget radiusRulerControl = new TextInfoWidget(map) {
+		final TextInfoWidget radiusRulerControl = new TextInfoWidget(mapActivity) {
 
 			@Override
-			public boolean updateInfo(DrawSettings drawSettings) {
-				Location currentLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
-				LatLon centerLoc = map.getMapLocation();
+			public void updateInfo(@Nullable DrawSettings drawSettings) {
+				Location currentLoc = locationProvider.getLastKnownLocation();
+				LatLon centerLoc = mapActivity.getMapLocation();
 
 				if (currentLoc != null && centerLoc != null) {
-					if (map.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
+					if (mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
 						setDistanceText(0);
 					} else {
 						setDistanceText(currentLoc.getLatitude(), currentLoc.getLongitude(),
@@ -179,7 +177,6 @@ public class MapInfoWidgetsFactory {
 				} else {
 					setText(title, null);
 				}
-				return true;
 			}
 
 			private void setDistanceText(float dist) {
@@ -192,18 +189,18 @@ public class MapInfoWidgetsFactory {
 			}
 
 			private void calculateAndSetText(float dist) {
-				String distance = OsmAndFormatter.getFormattedDistance(dist, map.getMyApplication());
+				String distance = OsmAndFormatter.getFormattedDistance(dist, app);
 				int ls = distance.lastIndexOf(' ');
 				setText(distance.substring(0, ls), distance.substring(ls + 1));
 			}
 		};
 
 		radiusRulerControl.setText(title, null);
-		setRulerControlIcon(radiusRulerControl, map.getMyApplication().getSettings().RADIUS_RULER_MODE.get());
+		setRulerControlIcon(radiusRulerControl, app.getSettings().RADIUS_RULER_MODE.get());
 		radiusRulerControl.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				final RadiusRulerMode mode = map.getMyApplication().getSettings().RADIUS_RULER_MODE.get();
+				final RadiusRulerMode mode = app.getSettings().RADIUS_RULER_MODE.get();
 				RadiusRulerMode newMode = RadiusRulerMode.FIRST;
 				if (mode == RadiusRulerMode.FIRST) {
 					newMode = RadiusRulerMode.SECOND;
@@ -211,8 +208,8 @@ public class MapInfoWidgetsFactory {
 					newMode = RadiusRulerMode.EMPTY;
 				}
 				setRulerControlIcon(radiusRulerControl, newMode);
-				map.getMyApplication().getSettings().RADIUS_RULER_MODE.set(newMode);
-				map.refreshMap();
+				app.getSettings().RADIUS_RULER_MODE.set(newMode);
+				mapActivity.refreshMap();
 			}
 		});
 

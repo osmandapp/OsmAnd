@@ -1,15 +1,17 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
-import android.view.View;
-
 import net.osmand.Location;
 import net.osmand.data.LatLon;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.AnimateDraggingMapThread;
-import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public abstract class DistanceToPointWidget extends TextInfoWidget {
 
@@ -17,20 +19,14 @@ public abstract class DistanceToPointWidget extends TextInfoWidget {
 	private float[] calculations = new float[1];
 	private int cachedMeters;
 
-	public DistanceToPointWidget(MapActivity ma, int res, int resNight) {
-		super(ma);
-		this.view = ma.getMapView();
-		if (res != 0 && resNight != 0) {
-			setIcons(res, resNight);
+	public DistanceToPointWidget(@NonNull MapActivity mapActivity, @DrawableRes int dayIconId, @DrawableRes int nightIconId) {
+		super(mapActivity);
+		this.view = mapActivity.getMapView();
+		if (dayIconId != 0 && nightIconId != 0) {
+			setIcons(dayIconId, nightIconId);
 		}
 		setText(null, null);
-		setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				click(view);
-			}
-		});
+		setOnClickListener(v -> click(view));
 	}
 
 	protected void click(final OsmandMapTileView view) {
@@ -43,7 +39,7 @@ public abstract class DistanceToPointWidget extends TextInfoWidget {
 	}
 
 	@Override
-	public boolean updateInfo(OsmandMapLayer.DrawSettings drawSettings) {
+	public void updateInfo(@Nullable DrawSettings drawSettings) {
 		int d = getDistance();
 		if (isUpdateNeeded() || RouteInfoWidgetsFactory.distChanged(cachedMeters, d)) {
 			cachedMeters = d;
@@ -59,9 +55,7 @@ public abstract class DistanceToPointWidget extends TextInfoWidget {
 					setText(ds.substring(0, ls), ds.substring(ls + 1));
 				}
 			}
-			return true;
 		}
-		return false;
 	}
 
 	@Override

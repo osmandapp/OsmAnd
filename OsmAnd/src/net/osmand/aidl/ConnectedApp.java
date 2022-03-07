@@ -1,7 +1,5 @@
 package net.osmand.aidl;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -11,25 +9,28 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.AidlMapLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
 
 public class ConnectedApp implements Comparable<ConnectedApp> {
 
@@ -184,7 +185,7 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 		}
 	}
 
-	TextInfoWidget createWidgetControl(final MapActivity mapActivity, final String widgetId) {
+	TextInfoWidget createWidgetControl(@NonNull MapActivity mapActivity, String widgetId) {
 		TextInfoWidget control = new TextInfoWidget(mapActivity) {
 
 			private boolean init = true;
@@ -194,13 +195,13 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 			private Integer cachedIcon;
 
 			@Override
-			public boolean updateInfo(OsmandMapLayer.DrawSettings drawSettings) {
+			public void updateInfo(@Nullable DrawSettings drawSettings) {
 				AidlMapWidgetWrapper widget = widgets.get(widgetId);
 				if (widget != null) {
 					String txt = widget.getText();
 					String subtext = widget.getDescription();
 					boolean night = drawSettings != null && drawSettings.isNightMode();
-					int icon = AndroidUtils.getDrawableId(mapActivity.getMyApplication(), night ? widget.getDarkIconName() : widget.getLightIconName());
+					int icon = AndroidUtils.getDrawableId(app, night ? widget.getDarkIconName() : widget.getLightIconName());
 					if (init || !Algorithms.objectEquals(txt, cachedTxt) || !Algorithms.objectEquals(subtext, cachedSubtext)
 							|| !Algorithms.objectEquals(night, cachedNight) || !Algorithms.objectEquals(icon, cachedIcon)) {
 						init = false;
@@ -215,13 +216,10 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 						} else {
 							setImageDrawable(null);
 						}
-						return true;
 					}
-					return false;
 				} else {
 					setText(null, null);
 					setImageDrawable(null);
-					return true;
 				}
 			}
 		};

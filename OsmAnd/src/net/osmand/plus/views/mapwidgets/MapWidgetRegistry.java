@@ -95,13 +95,13 @@ public class MapWidgetRegistry {
 	                                 ApplicationMode mode, boolean left, boolean expanded) {
 		Set<MapWidgetRegInfo> s = left ? this.leftWidgetSet : this.rightWidgetSet;
 		for (MapWidgetRegInfo r : s) {
-			if (r.widget != null && (r.isVisible(mode) || r.widget.isExplicitlyVisible())) {
+			if (r.widget != null && r.isVisible(mode)) {
 				stack.addView(r.widget.getView());
 			}
 		}
 		if (expanded) {
 			for (MapWidgetRegInfo r : s) {
-				if (r.widget != null && r.isVisibleCollapsed(mode) && !r.widget.isExplicitlyVisible()) {
+				if (r.widget != null && r.isVisibleCollapsed(mode)) {
 					stack.addView(r.widget.getView());
 				}
 			}

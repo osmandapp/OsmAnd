@@ -22,6 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.FavouritePoint.SpecialPointType;
 import net.osmand.data.LatLon;
@@ -452,28 +453,25 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	 * the current position on the map 
 	 * and the location of the parked car
 	 */
-	private TextInfoWidget createParkingPlaceInfoControl(final MapActivity map) {
-		TextInfoWidget parkingPlaceControl = new TextInfoWidget(map) {
+	private TextInfoWidget createParkingPlaceInfoControl(@NonNull MapActivity mapActivity) {
+		TextInfoWidget parkingPlaceControl = new TextInfoWidget(mapActivity) {
 			private float[] calculations = new float[1];
 			private int cachedMeters = 0;			
 			
 			@Override
-			public boolean updateInfo(DrawSettings drawSettings) {
+			public void updateInfo(@Nullable DrawSettings drawSettings) {
 				LatLon parkingPoint = getParkingPosition();
-					if (parkingPoint != null && !map.getRoutingHelper().isFollowingMode()) {
-						OsmandMapTileView view = map.getMapView();
-						int d = 0;
-						if (d == 0) {
-							net.osmand.Location.distanceBetween(view.getLatitude(), view.getLongitude(), parkingPoint.getLatitude(), parkingPoint.getLongitude(), calculations);
-							d = (int) calculations[0];
-						}
+					if (parkingPoint != null && !app.getRoutingHelper().isFollowingMode()) {
+						OsmandMapTileView view = mapActivity.getMapView();
+						Location.distanceBetween(view.getLatitude(), view.getLongitude(), parkingPoint.getLatitude(), parkingPoint.getLongitude(), calculations);
+						int d = (int) calculations[0];
 						if (isUpdateNeeded() || distChanged(cachedMeters, d)) {
 							cachedMeters = d;
 							if (cachedMeters <= 20) {
 								cachedMeters = 0;
 								setText(null, null);
 							} else {
-								String ds = OsmAndFormatter.getFormattedDistance(cachedMeters, map.getMyApplication());
+								String ds = OsmAndFormatter.getFormattedDistance(cachedMeters, mapActivity.getMyApplication());
 								int ls = ds.lastIndexOf(' ');
 								if (ls == -1) {
 									setText(ds, null);
@@ -481,14 +479,11 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 									setText(ds.substring(0, ls), ds.substring(ls + 1));
 								}
 							}
-							return true;
 						}
 					} else if (cachedMeters != 0) {
 						cachedMeters = 0;
 						setText(null, null);
-						return true;
 					}
-				return false;
 			}
 
 			@Override
@@ -512,7 +507,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		parkingPlaceControl.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				OsmandMapTileView view = map.getMapView();
+				OsmandMapTileView view = mapActivity.getMapView();
 				AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
 				LatLon parkingPoint = parkingPosition;
 				if (parkingPoint != null) {

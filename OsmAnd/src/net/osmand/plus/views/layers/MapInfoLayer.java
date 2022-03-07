@@ -8,10 +8,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -46,6 +42,10 @@ import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_ALTITUDE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BATTERY;
@@ -210,74 +210,74 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return topToolbarView != null && topToolbarView.isTopToolbarViewVisible();
 	}
 
-	private void registerAllControls(@NonNull MapActivity map) {
+	private void registerAllControls(@NonNull MapActivity mapActivity) {
+		OsmandApplication app = mapActivity.getMyApplication();
 		rulerWidgets = new ArrayList<>();
-		RouteInfoWidgetsFactory ric = new RouteInfoWidgetsFactory();
-		MapInfoWidgetsFactory mic = new MapInfoWidgetsFactory();
-		MapMarkersWidgetsFactory mwf = map.getMapLayers().getMapMarkersLayer().getWidgetsFactory();
-		OsmandApplication app = view.getApplication();
-		lanesControl = RouteInfoWidgetsFactory.createLanesControl(map, view);
+		RouteInfoWidgetsFactory ric = new RouteInfoWidgetsFactory(app);
+		MapInfoWidgetsFactory mic = new MapInfoWidgetsFactory(app);
+		MapMarkersWidgetsFactory mwf = mapActivity.getMapLayers().getMapMarkersLayer().getWidgetsFactory();
+		lanesControl = RouteInfoWidgetsFactory.createLanesControl(mapActivity, view);
 
 		TextState ts = calculateTextState();
-		streetNameView = new TopTextView(map.getMyApplication(), map);
+		streetNameView = new TopTextView(app, mapActivity);
 		updateStreetName(false, ts);
 
-		topCoordinatesView = new TopCoordinatesView(map.getMyApplication(), map);
+		topCoordinatesView = new TopCoordinatesView(app, mapActivity);
 		updateTopCoordinates(false, ts);
 
-		topToolbarView = new TopToolbarView(map);
+		topToolbarView = new TopToolbarView(mapActivity);
 		updateTopToolbar(false);
 
-		alarmControl = RouteInfoWidgetsFactory.createAlarmInfoControl(app, map);
+		alarmControl = RouteInfoWidgetsFactory.createAlarmInfoControl(app, mapActivity);
 		alarmControl.setVisibility(false);
 
-		elevationProfileWidget = new ElevationProfileWidget(map);
+		elevationProfileWidget = new ElevationProfileWidget(mapActivity);
 
 		setupRulerWidget(mapRulerLayout);
 
 		// register left stack
 		registerSideWidget(null, R.drawable.ic_action_compass, R.string.map_widget_compass, WIDGET_COMPASS, true, 4);
 
-		NextTurnWidget bigInfoControl = ric.createNextInfoControl(map, app, false);
+		NextTurnWidget bigInfoControl = ric.createNextInfoControl(mapActivity, false);
 		registerSideWidget(bigInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_turn, WIDGET_NEXT_TURN, true, 5);
-		NextTurnWidget smallInfoControl = ric.createNextInfoControl(map, app, true);
+		NextTurnWidget smallInfoControl = ric.createNextInfoControl(mapActivity, true);
 		registerSideWidget(smallInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_turn_small, WIDGET_NEXT_TURN_SMALL, true, 6);
-		NextTurnWidget nextNextInfoControl = ric.createNextNextInfoControl(map, app, true);
+		NextTurnWidget nextNextInfoControl = ric.createNextNextInfoControl(mapActivity, true);
 		registerSideWidget(nextNextInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_next_turn, WIDGET_NEXT_NEXT_TURN, true, 7);
 
 		// register right stack
 		// priorityOrder: 10s navigation-related, 20s position-related, 30s recording- and other plugin-related, 40s general device information, 50s debugging-purpose
-		TextInfoWidget intermediateDist = ric.createIntermediateDistanceControl(map);
+		TextInfoWidget intermediateDist = ric.createIntermediateDistanceControl(mapActivity);
 		registerSideWidget(intermediateDist, R.drawable.ic_action_intermediate, R.string.map_widget_intermediate_distance, WIDGET_INTERMEDIATE_DISTANCE, false, 13);
-		TextInfoWidget intermediateTime = ric.createTimeControl(map, true);
+		TextInfoWidget intermediateTime = ric.createTimeControl(mapActivity, true);
 		registerSideWidget(intermediateTime, new TimeWidgetState(app, true), WIDGET_INTERMEDIATE_TIME, false, 14);
-		TextInfoWidget dist = ric.createDistanceControl(map);
+		TextInfoWidget dist = ric.createDistanceControl(mapActivity);
 		registerSideWidget(dist, R.drawable.ic_action_target, R.string.map_widget_distance, WIDGET_DISTANCE, false, 15);
-		TextInfoWidget time = ric.createTimeControl(map, false);
+		TextInfoWidget time = ric.createTimeControl(mapActivity, false);
 		registerSideWidget(time, new TimeWidgetState(app, false), WIDGET_TIME, false, 16);
 
 
-		TextInfoWidget marker = mwf.createMapMarkerControl(map, true);
+		TextInfoWidget marker = mwf.createMapMarkerControl(mapActivity, true);
 		registerSideWidget(marker, R.drawable.ic_action_flag, R.string.map_marker_1st, WIDGET_MARKER_1, false, 17);
-		TextInfoWidget bearing = ric.createBearingControl(map);
+		TextInfoWidget bearing = ric.createBearingControl(mapActivity);
 		registerSideWidget(bearing, new BearingWidgetState(app), WIDGET_BEARING, false, 18);
-		TextInfoWidget marker2nd = mwf.createMapMarkerControl(map, false);
+		TextInfoWidget marker2nd = mwf.createMapMarkerControl(mapActivity, false);
 		registerSideWidget(marker2nd, R.drawable.ic_action_flag, R.string.map_marker_2nd, WIDGET_MARKER_2, false, 19);
 
-		TextInfoWidget speed = ric.createSpeedControl(map);
+		TextInfoWidget speed = ric.createSpeedControl(mapActivity);
 		registerSideWidget(speed, R.drawable.ic_action_speed, R.string.map_widget_speed, WIDGET_SPEED, false, 20);
-		TextInfoWidget maxspeed = ric.createMaxSpeedControl(map);
+		TextInfoWidget maxspeed = ric.createMaxSpeedControl(mapActivity);
 		registerSideWidget(maxspeed, R.drawable.ic_action_speed_limit, R.string.map_widget_max_speed, WIDGET_MAX_SPEED, false, 21);
-		TextInfoWidget alt = mic.createAltitudeControl(map);
+		TextInfoWidget alt = mic.createAltitudeControl(mapActivity);
 		registerSideWidget(alt, R.drawable.ic_action_altitude, R.string.map_widget_altitude, WIDGET_ALTITUDE, false, 23);
-		TextInfoWidget gpsInfo = mic.createGPSInfoControl(map);
+		TextInfoWidget gpsInfo = mic.createGPSInfoControl(mapActivity);
 
 		registerSideWidget(gpsInfo, R.drawable.ic_action_gps_info, R.string.map_widget_gps_info, WIDGET_GPS_INFO, false, 28);
-		TextInfoWidget plainTime = ric.createPlainTimeControl(map);
+		TextInfoWidget plainTime = ric.createPlainTimeControl(mapActivity);
 		registerSideWidget(plainTime, R.drawable.ic_action_time, R.string.map_widget_plain_time, WIDGET_PLAIN_TIME, false, 41);
-		TextInfoWidget battery = ric.createBatteryControl(map);
+		TextInfoWidget battery = ric.createBatteryControl(mapActivity);
 		registerSideWidget(battery, R.drawable.ic_action_battery, R.string.map_widget_battery, WIDGET_BATTERY, false, 42);
-		TextInfoWidget radiusRuler = mic.createRadiusRulerControl(map);
+		TextInfoWidget radiusRuler = mic.createRadiusRulerControl(mapActivity);
 		registerSideWidget(radiusRuler, new CompassRulerWidgetState(app), WIDGET_RADIUS_RULER, false, 43);
 	}
 
@@ -412,7 +412,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		if (v != null) {
 			v.setBackgroundResource(reg.left ? ts.leftRes : ts.rightRes);
 			reg.widget.updateTextColor(ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius);
-			reg.widget.updateIconMode(ts.night);
+			reg.widget.updateNightMode(ts.night);
 		}
 	}
 

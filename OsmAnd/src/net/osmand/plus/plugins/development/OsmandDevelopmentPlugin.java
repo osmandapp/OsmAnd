@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.development;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -99,31 +98,26 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 	public static class FPSTextInfoWidget extends TextInfoWidget {
 
-		private OsmandMapTileView mv;
+		private final OsmandMapTileView mapView;
 
-		public FPSTextInfoWidget(OsmandMapTileView mv, Activity activity) {
-			super(activity);
-			this.mv = mv;
+		public FPSTextInfoWidget(@NonNull MapActivity mapActivity) {
+			super(mapActivity);
+			this.mapView = mapActivity.getMapView();
 		}
 
 		@Override
-		public boolean updateInfo(DrawSettings drawSettings) {
-			if (!mv.isMeasureFPS()) {
-				mv.setMeasureFPS(true);
+		public void updateInfo(@Nullable DrawSettings drawSettings) {
+			if (!mapView.isMeasureFPS()) {
+				mapView.setMeasureFPS(true);
 			}
-			setText("", Integer.toString((int) mv.getFPS()) + "/"
-					+ Integer.toString((int) mv.getSecondaryFPS())
-					+ " FPS");
-			return true;
+			setText("", (int) mapView.getFPS() + "/" + (int) mapView.getSecondaryFPS() + " FPS");
 		}
 	}
 
-
-	private void registerWidget(@NonNull MapActivity activity) {
-		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
-		final OsmandMapTileView mv = activity.getMapView();
+	private void registerWidget(@NonNull MapActivity mapActivity) {
+		MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null && mapInfoLayer.getSideWidget(FPSTextInfoWidget.class) == null) {
-			FPSTextInfoWidget fps = new FPSTextInfoWidget(mv, activity);
+			FPSTextInfoWidget fps = new FPSTextInfoWidget(mapActivity);
 			fps.setIcons(R.drawable.widget_fps_day, R.drawable.widget_fps_night);
 			mapInfoLayer.registerSideWidget(fps, R.drawable.ic_action_fps,
 					R.string.map_widget_fps_info, "fps", false, 50);

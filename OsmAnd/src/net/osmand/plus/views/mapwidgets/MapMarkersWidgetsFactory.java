@@ -1,11 +1,13 @@
 package net.osmand.plus.views.mapwidgets;
 
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
@@ -239,8 +241,8 @@ public class MapMarkersWidgetsFactory {
 		addressText.setText(descr);
 	}
 
-	public TextInfoWidget createMapMarkerControl(final MapActivity map, final boolean firstMarker) {
-		return new DistanceToMapMarkerControl(map, firstMarker) {
+	public TextInfoWidget createMapMarkerControl(@NonNull MapActivity mapActivity, boolean firstMarker) {
+		return new DistanceToMapMarkerControl(mapActivity, firstMarker) {
 			@Override
 			public LatLon getLatLon() {
 				return loc;
@@ -260,22 +262,20 @@ public class MapMarkersWidgetsFactory {
 	public abstract static class DistanceToMapMarkerControl extends TextInfoWidget {
 
 		private final boolean firstMarker;
-		private final OsmandMapTileView view;
-		private final MapActivity map;
-		private final MapMarkersHelper helper;
+		private final OsmandMapTileView mapView;
+		private final MapMarkersHelper mapMarkersHelper;
 		private final float[] calculations = new float[1];
 		private int cachedMeters;
 		private int cachedMarkerColorIndex = -1;
 		private Boolean cachedNightMode = null;
 
-		public DistanceToMapMarkerControl(MapActivity map, boolean firstMarker) {
-			super(map);
-			this.map = map;
+		public DistanceToMapMarkerControl(@NonNull MapActivity mapActivity, boolean firstMarker) {
+			super(mapActivity);
 			this.firstMarker = firstMarker;
-			this.view = map.getMapView();
-			helper = map.getMyApplication().getMapMarkersHelper();
+			this.mapView = mapActivity.getMapView();
+			this.mapMarkersHelper = app.getMapMarkersHelper();
 			setText(null, null);
-			setOnClickListener(v -> click(view));
+			setOnClickListener(v -> click(mapView));
 		}
 
 		protected abstract void click(OsmandMapTileView view);
@@ -283,42 +283,41 @@ public class MapMarkersWidgetsFactory {
 		public abstract LatLon getLatLon();
 
 		@Override
-		public boolean updateInfo(DrawSettings drawSettings) {
+		public void updateInfo(@Nullable DrawSettings drawSettings) {
 			MapMarker marker = getMarker();
 			if (marker == null
-					|| map.getMyApplication().getRoutingHelper().isRoutePlanningMode()
-					|| map.getMyApplication().getRoutingHelper().isFollowingMode()) {
+					|| app.getRoutingHelper().isRoutePlanningMode()
+					|| app.getRoutingHelper().isFollowingMode()) {
 				cachedMeters = 0;
 				setText(null, null);
-				return false;
+				return;
 			}
-			boolean res = false;
 			int d = getDistance();
 			if (isUpdateNeeded() || cachedMeters != d) {
 				cachedMeters = d;
-				String ds = OsmAndFormatter.getFormattedDistance(cachedMeters, view.getApplication());
+				String ds = OsmAndFormatter.getFormattedDistance(cachedMeters, app);
 				int ls = ds.lastIndexOf(' ');
 				if (ls == -1) {
 					setText(ds, null);
 				} else {
 					setText(ds.substring(0, ls), ds.substring(ls + 1));
 				}
-				res = true;
 			}
 
 			if (marker.colorIndex != -1) {
 				if (marker.colorIndex != cachedMarkerColorIndex
-						|| cachedNightMode == null || cachedNightMode != isNight()) {
-					setImageDrawable(map.getMyApplication().getUIUtilities()
-							.getLayeredIcon(isNight() ? R.drawable.widget_marker_night : R.drawable.widget_marker_day,
-									R.drawable.widget_marker_triangle, 0,
-									MapMarker.getColorId(marker.colorIndex)));
+						|| cachedNightMode == null || cachedNightMode != isNightMode()) {
+					int backgroundIconId = isNightMode()
+							? R.drawable.widget_marker_night
+							: R.drawable.widget_marker_day;
+					int foregroundColorId = MapMarker.getColorId(marker.colorIndex);
+					Drawable drawable = iconsCache.getLayeredIcon(backgroundIconId,
+							R.drawable.widget_marker_triangle, 0, foregroundColorId);
+					setImageDrawable(drawable);
 					cachedMarkerColorIndex = marker.colorIndex;
-					cachedNightMode = isNight();
-					res = true;
+					cachedNightMode = isNightMode();
 				}
 			}
-			return res;
 		}
 
 		@Override
@@ -328,14 +327,12 @@ public class MapMarkersWidgetsFactory {
 
 		public LatLon getPointToNavigate() {
 			MapMarker marker = getMarker();
-			if (marker != null) {
-				return marker.point;
-			}
-			return null;
+			return marker != null ? marker.point : null;
 		}
 
+		@Nullable
 		private MapMarker getMarker() {
-			List<MapMarker> markers = helper.getMapMarkers();
+			List<MapMarker> markers = mapMarkersHelper.getMapMarkers();
 			if (firstMarker) {
 				if (markers.size() > 0) {
 					return markers.get(0);
@@ -350,13 +347,13 @@ public class MapMarkersWidgetsFactory {
 
 		public int getDistance() {
 			int d = 0;
-			LatLon l = getPointToNavigate();
-			if (l != null) {
+			LatLon pointToNavigate = getPointToNavigate();
+			if (pointToNavigate != null) {
 				LatLon loc = getLatLon();
 				if (loc == null) {
-					Location.distanceBetween(view.getLatitude(), view.getLongitude(), l.getLatitude(), l.getLongitude(), calculations);
+					Location.distanceBetween(mapView.getLatitude(), mapView.getLongitude(), pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), calculations);
 				} else {
-					Location.distanceBetween(loc.getLatitude(), loc.getLongitude(), l.getLatitude(), l.getLongitude(), calculations);
+					Location.distanceBetween(loc.getLatitude(), loc.getLongitude(), pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), calculations);
 				}
 				d = (int) calculations[0];
 			}
