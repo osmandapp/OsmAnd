@@ -1976,6 +1976,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				fragment.dismiss();
 				QuickSearchDialogFragment.showInstance(this, searchQuery, null,
 						QuickSearchType.REGULAR, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.HISTORY, searchLocation);
+			}
+			else if (!mapContextMenu.isVisible()) {
+				fragment.dismiss();
 			} else {
 				fragment.show();
 			}
