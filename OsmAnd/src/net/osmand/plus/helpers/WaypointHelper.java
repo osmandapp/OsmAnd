@@ -437,7 +437,9 @@ public class WaypointHelper {
 										filterCloseAlarms = true;
 										break;
 									case PEDESTRIAN:
-										announceRadius = nextRoute.getTurnType().isRoundAbout() && kIterator != 0
+										announceRadius = ((nextRoute != null)
+												&& (nextRoute.getTurnType().isRoundAbout())
+												&& (kIterator != 0))
 												? STATE_SHORT_ALARM_ANNOUNCE
 												: STATE_LONG_ALARM_ANNOUNCE;
 										break;

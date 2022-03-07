@@ -513,6 +513,7 @@ public class ContextMenuAdapter {
 		                         @ColorInt int profileColor) {
 			Boolean selected = item.getSelected();
 			if (selected != null) {
+				toggle.setOnCheckedChangeListener(null); // Removing listener required before checking/unchecking
 				toggle.setChecked(selected);
 				ArrayAdapter<ContextMenuItem> adapter = this;
 				OnCheckedChangeListener listener = (buttonView, isChecked) -> {

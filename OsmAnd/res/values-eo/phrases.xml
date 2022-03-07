@@ -229,7 +229,7 @@
     <string name="poi_tree">Arbo</string>
     <string name="poi_wiki_lang_ar">Vikipedio Araba</string>
     <string name="poi_library">Biblioteko</string>
-    <string name="poi_retail">Komercejo</string>
+    <string name="poi_retail">Komerca tereno</string>
     <string name="poi_atv">Ĉiuterenveturil-vendejo</string>
     <string name="poi_cosmetics">Kosmetikaĵ-vendejo</string>
     <string name="poi_sewing">Kudrilar-vendejo</string>
@@ -4295,4 +4295,6 @@
     <string name="poi_board_type_welcome_sign">bonvena signo</string>
     <string name="poi_tiles">Kahela vendejo</string>
     <string name="poi_board_type_sport">sporto</string>
+    <string name="poi_landuse_education">Edukada institucio</string>
+    <string name="poi_greenery">Vegetaĵa tereno</string>
 </resources>

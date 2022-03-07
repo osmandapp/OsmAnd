@@ -29,6 +29,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 
 public class SQLiteTileSource implements ITileSource {
 
@@ -447,19 +450,21 @@ public class SQLiteTileSource implements ITileSource {
 		return db.isDbLockedByOtherThreads();
 	}
 
+	@Nullable
 	public byte[] getBytes(int x, int y, int zoom, String dirWithTiles, long[] timeHolder) throws IOException {
 		SQLiteConnection db = getDatabase();
-		if(db == null){
+		if (db == null) {
 			return null;
 		}
 		long ts = System.currentTimeMillis();
 		try {
 			if (zoom <= maxZoom) {
 				// return the normal tile if exists
-				String[] params = new String[] { x + "", y + "", getFileZoom(zoom) + "" };
+				String[] params = getTileDbParams(x, y, zoom);
 				boolean queryTime = timeHolder != null && timeHolder.length > 0 && timeSupported;
-				SQLiteCursor cursor = db.rawQuery("SELECT image " +(queryTime?", time":"")+"  FROM tiles WHERE x = ? AND y = ? AND z = ?",
-						params); //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+				SQLiteCursor cursor = db.rawQuery("SELECT image "
+								+ (queryTime ? ", time" : "")
+								+ " FROM tiles WHERE x = ? AND y = ? AND z = ?", params);
 				byte[] blob = null;
 				if (cursor.moveToFirst()) {
 					blob = cursor.getBlob(0);
@@ -472,7 +477,7 @@ public class SQLiteTileSource implements ITileSource {
 			}
 			return null;
 		} finally {
-			if(LOG.isDebugEnabled()) {
+			if (LOG.isDebugEnabled()) {
 				LOG.debug("Load tile " + x + "/" + y + "/" + zoom + " for " + (System.currentTimeMillis() - ts)
 					+ " ms ");
 			}
@@ -485,31 +490,36 @@ public class SQLiteTileSource implements ITileSource {
 	}
 	
 	public Bitmap getImage(int x, int y, int zoom, long[] timeHolder) {
-		SQLiteConnection db = getDatabase();
-		if(db == null){
-			return null;
-		}
-		String[] params = new String[] { x + "", y + "", getFileZoom(zoom) + "" };
 		byte[] blob;
 		try {
 			blob = getBytes(x, y, zoom, null, timeHolder);
 		} catch (IOException e) {
 			return null;
 		}
-		if (blob != null) {
-			Bitmap bmp = BitmapFactory.decodeByteArray(blob, 0, blob.length);
-			if (bmp == null) {
-				// broken image delete it
-				db.execSQL("DELETE FROM tiles WHERE x = ? AND y = ? AND z = ?", params); 
-			} else if(!tileSizeSpecified &&
-					tileSize != bmp.getWidth() && bmp.getWidth() > 0) {
-				tileSize = bmp.getWidth();
-				addInfoColumn(db, "tilesize", tileSize + "");
-				tileSizeSpecified = true;
+		String[] params = getTileDbParams(x, y, zoom);
+		return blob != null ? getImage(blob, params) : null;
+	}
+
+	@Nullable
+	public Bitmap getImage(@NonNull byte[] blob, @NonNull String[] params) {
+		Bitmap bmp = BitmapFactory.decodeByteArray(blob, 0, blob.length);
+		if (bmp == null) {
+			SQLiteConnection db = getDatabase();
+			if (db != null) {
+				// Delete broken image
+				db.execSQL("DELETE FROM tiles WHERE x = ? AND y = ? AND z = ?", params);
 			}
-			return bmp;
+		} else if (!tileSizeSpecified && tileSize != bmp.getWidth() && bmp.getWidth() > 0) {
+			tileSize = bmp.getWidth();
+			addInfoColumn(db, "tilesize", String.valueOf(tileSize));
+			tileSizeSpecified = true;
 		}
-		return null;
+		return bmp;
+	}
+
+	@NonNull
+	public String[] getTileDbParams(int x, int y, int zoom) {
+		return new String[] {String.valueOf(x), String.valueOf(y), String.valueOf(getFileZoom(zoom))};
 	}
 	 
 	public ITileSource getBase() {
