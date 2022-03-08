@@ -17,8 +17,8 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.ButtonViewHolder;
@@ -126,7 +126,9 @@ public class ReorderWidgetsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 			h.buttonView.setOnClickListener(buttonInfo.listener);
 			h.icon.setImageResource(buttonInfo.iconRes);
 			h.title.setText(buttonInfo.title);
-			Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, ColorUtilities.getActiveColor(app, nightMode), 0.3f);
+			ApplicationMode appMode = app.getSettings().getApplicationMode();
+			int profileColor = appMode.getProfileColor(nightMode);
+			Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, profileColor, 0.3f);
 			AndroidUtils.setBackground(h.buttonView, drawable);
 		} else if (holder instanceof SpaceViewHolder) {
 			float space = (float) item.value;
