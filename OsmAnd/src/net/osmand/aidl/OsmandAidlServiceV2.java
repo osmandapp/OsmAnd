@@ -1,5 +1,15 @@
 package net.osmand.aidl;
 
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_CONTEXT_MENU_BUTTONS_CLICK;
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_KEY_EVENT;
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_NAV_DATA_UPDATE;
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_UPDATE;
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_VOICE_MESSAGE;
+import static net.osmand.aidlapi.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.MIN_UPDATE_TIME_MS;
+import static net.osmand.aidlapi.OsmandAidlConstants.MIN_UPDATE_TIME_MS_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.UNKNOWN_API_ERROR;
+
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -32,6 +42,7 @@ import net.osmand.aidlapi.customization.ProfileSettingsParams;
 import net.osmand.aidlapi.customization.SelectProfileParams;
 import net.osmand.aidlapi.customization.SetWidgetsParams;
 import net.osmand.aidlapi.events.AKeyEventsParams;
+import net.osmand.aidlapi.exit.ExitAppParams;
 import net.osmand.aidlapi.favorite.AFavorite;
 import net.osmand.aidlapi.favorite.AddFavoriteParams;
 import net.osmand.aidlapi.favorite.RemoveFavoriteParams;
@@ -51,6 +62,7 @@ import net.osmand.aidlapi.gpx.ShowGpxParams;
 import net.osmand.aidlapi.gpx.StartGpxRecordingParams;
 import net.osmand.aidlapi.gpx.StopGpxRecordingParams;
 import net.osmand.aidlapi.info.AppInfoParams;
+import net.osmand.aidlapi.info.GetTextParams;
 import net.osmand.aidlapi.lock.SetLockStateParams;
 import net.osmand.aidlapi.map.ALatLon;
 import net.osmand.aidlapi.map.SetLocationParams;
@@ -110,16 +122,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
-
-import static net.osmand.aidl.OsmandAidlApi.KEY_ON_CONTEXT_MENU_BUTTONS_CLICK;
-import static net.osmand.aidl.OsmandAidlApi.KEY_ON_KEY_EVENT;
-import static net.osmand.aidl.OsmandAidlApi.KEY_ON_NAV_DATA_UPDATE;
-import static net.osmand.aidl.OsmandAidlApi.KEY_ON_UPDATE;
-import static net.osmand.aidl.OsmandAidlApi.KEY_ON_VOICE_MESSAGE;
-import static net.osmand.aidlapi.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.MIN_UPDATE_TIME_MS;
-import static net.osmand.aidlapi.OsmandAidlConstants.MIN_UPDATE_TIME_MS_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.UNKNOWN_API_ERROR;
 
 public class OsmandAidlServiceV2 extends Service implements AidlCallbackListenerV2 {
 
@@ -1457,6 +1459,39 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 				handleException(e);
 			}
 			return false;
+		}
+
+		@Override
+		public boolean exitApp(ExitAppParams params) {
+			try {
+				OsmandAidlApi api = getApi("exitApp");
+				return api != null && api.exitApp(params);
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean getText(GetTextParams params) {
+			try {
+				OsmandAidlApi api = getApi("getText");
+				return api != null && api.getText(params);
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean reloadIndexes() {
+			try {
+				OsmandAidlApi api = getApi("reloadIndexes");
+				return api != null && api.reloadIndexes();
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
 		}
 	};
 

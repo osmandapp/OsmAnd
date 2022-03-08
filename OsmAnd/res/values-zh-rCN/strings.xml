@@ -615,7 +615,7 @@
     <string name="tile_source_already_installed">已经安装了地图，“设置”将被更新。</string>
     <string name="install_more">安装更多…</string>
     <string name="level_to_switch_vector_raster_descr">超出此级别的任何事物都可使用栅格地图。</string>
-    <string name="level_to_switch_vector_raster">最小矢量显示级别</string>
+    <string name="level_to_switch_vector_raster">最小矢量缩放级别</string>
     <string name="error_doing_search">无法进行离线搜索。</string>
     <string name="system_locale">系统</string>
     <string name="preferred_locale_descr">应用程序显示语言（在 OsmAnd 重新启动后使用）。</string>
@@ -687,7 +687,7 @@
     <string name="update_poi_error_local">无法更新本地兴趣点列表。</string>
     <string name="update_poi_error_loading">无法从服务器加载数据。</string>
     <string name="update_poi_no_offline_poi_index">此区域没有可用的离线 POI 数据</string>
-    <string name="update_poi_is_not_available_for_zoom">小比例尺下更新 POI 功能不可用</string>
+    <string name="update_poi_is_not_available_for_zoom">放大以更新 POI</string>
     <string name="context_menu_item_update_poi">更新 POI</string>
     <string name="context_menu_item_update_map_confirm">从互联网更新本地数据？</string>
     <string name="search_history_city">城市：{0}</string>
@@ -2304,7 +2304,7 @@
     <string name="unsaved_changes_will_be_lost">任何未保存的更改将会丢失。要继续吗？</string>
     <string name="downloads_left_template">剩余 %1$s 次下载</string>
     <string name="roads">道路</string>
-    <string name="downloading_number_of_files">正在下载 - %1$d 个文件</string>
+    <string name="downloading_number_of_files">正在下载 %1$d 个文件……</string>
     <string name="show_free_version_banner">显示免费版标题</string>
     <string name="show_free_version_banner_description">即使你有付费版本你仍然可以看到免费版标题。</string>
     <string name="activate_seamarks_plugin">请激活航线标识插件</string>
@@ -2888,7 +2888,7 @@
     <string name="shared_string_circle">圆形</string>
     <string name="shared_string_square">方形</string>
     <string name="shared_string_octagon">八边形</string>
-    <string name="shared_string_min">闽语</string>
+    <string name="shared_string_min">最小</string>
     <string name="developer_plugin">开发者插件</string>
     <string name="replace_point_descr">以此替换另一点。</string>
     <string name="app_mode_ski_snowmobile">雪地车</string>
@@ -3056,7 +3056,7 @@
     <string name="lang_nap">那不勒斯语</string>
     <string name="lang_my">缅甸语</string>
     <string name="lang_mn">蒙古语</string>
-    <string name="lang_min">米南卡保语</string>
+    <string name="lang_min">米南佳保语</string>
     <string name="lang_mg">马达加斯加语</string>
     <string name="lang_ky">柯尔克孜语</string>
     <string name="lang_kk">哈萨克语</string>
@@ -3156,7 +3156,7 @@
     <string name="keep_screen_on">保持屏幕开启</string>
     <string name="expire_time">到期时间</string>
     <string name="tiles_storage_descr">选择如何储存下载的数据。</string>
-    <string name="export_import_quick_actions_with_profiles_promo">你可以在应用配置中导入导出快捷操作。</string>
+    <string name="export_import_quick_actions_with_profiles_promo">通过应用配置导入导出快捷操作。</string>
     <string name="delete_all_actions_message_q">不可撤销地删除 %d 快捷操作？</string>
     <string name="speed_cameras_legal_descr">在某些国家或地区，使用测速摄像头提示应用是非法的。
 \n
@@ -3171,7 +3171,7 @@
     <string name="quick_action_remove_next_destination_descr">删除路线上的下一个目的地。如果该目的地是最终目的地，导航将停止。</string>
     <string name="search_download_wikipedia_maps">下载维基百科地图</string>
     <string name="plugin_wikipedia_description">从维基百科上获取关于兴趣点的信息，这是一个袖珍的离线指南，提供关于地点和目的地的文章。</string>
-    <string name="add_hidden_group_info">添加的点在地图上不可见，因为选定的组是隐藏的，您可以在\"%s\"中找到它。</string>
+    <string name="add_hidden_group_info">添加的点可以在\"%s\"中被找到。解除指定组的隐藏以在地图上展示它。</string>
     <string name="gpx_split_interval_descr">选择显示轨迹上带有距离或时间标记的间隔。</string>
     <string name="gpx_split_interval_none_descr">选择所需的拆分选项：“按时间”或“按距离”。</string>
     <string name="route_between_points_next_segment_button_desc">仅使用选定的配置文件重新计算下一个部分。</string>
@@ -3187,9 +3187,9 @@
     <string name="plan_route_exit_dialog_descr">放弃计划路线中的所有更改？</string>
     <string name="reverse_route">反转路线</string>
     <string name="route_between_points_whole_track_button_desc">全部路线会以选择的配置文件进行重新计算。</string>
-    <string name="route_between_points_desc">选择以直线或以选择的导航文件来计算路线的方式去连接导航点。</string>
+    <string name="route_between_points_desc">选择如何以直线或按下方指明的方法计算路线以连接导航点。</string>
     <string name="next_segment">下一段</string>
-    <string name="route_between_points_warning_desc">接下来，用你的一个导航配置文件将你的轨迹拍到最近的允许道路上，以使用这个选项。</string>
+    <string name="route_between_points_warning_desc">接下来，用你的一个导航配置文件将你的轨迹贴合到最近的允许道路上，以使用这个选项。</string>
     <string name="threshold_distance">起始距离</string>
     <string name="navigation_profile">导航文件</string>
     <string name="route_between_points_add_track_desc">选择一个要添加新片段的跟踪文件。</string>
@@ -3285,7 +3285,7 @@
     <string name="activity_type_walking_name">步行</string>
     <string name="activity_type_motorbike_name">摩托车</string>
     <string name="show_gpx">轨迹</string>
-    <string name="osm_live_payment_desc_hw">订阅按选定的时间段收费。随时在你的 AppGallery 中将其取消。</string>
+    <string name="osm_live_payment_desc_hw">订阅按选定的每个时间段收费。可随时在你的 AppGallery 中将其取消。</string>
     <string name="add_segment_to_the_track">添加到轨迹文件</string>
     <string name="shared_string_gpx_files">轨迹</string>
     <string name="shared_string_gpx_route">轨迹路线</string>
@@ -3390,7 +3390,7 @@
     <string name="activity_type_racing_name">赛车</string>
     <string name="activity_type_mountainbike_name">山地车</string>
     <string name="activity_type_offroad_name">越野</string>
-    <string name="turn_screen_on_power_button_descr">按下设备电源键，就会在锁屏上方用OsmAnd打开屏幕。</string>
+    <string name="turn_screen_on_power_button_descr">按下设备的电源键将在点亮屏幕的同时在锁屏顶部显示OsmAnd。</string>
     <string name="turn_screen_on_power_button">电源键</string>
     <string name="turn_screen_on_proximity_sensor">接近传感器</string>
     <string name="screen_control">屏幕控制</string>
@@ -3475,11 +3475,11 @@
 \n• 配置文件设置导入/导出的固定问题
 \n
 \n</string>
-    <string name="osm_live_payment_subscription_management_hw">购买确认后，将向您的 AppGallery 帐户收费。
+    <string name="osm_live_payment_subscription_management_hw">购买确认时，将向您的 AppGallery 帐户收费。
 \n
-\n除非在更新日期之前取消订阅，否则订阅将自动延长。仅在续订日期，您的帐户才需要支付续订期（月/三个月/年）。
+\n除非在指定续订周期之前取消订阅，否则订阅将自动延长。
 \n
-\n您可以在 AppGallery 设置中管理和取消订阅。</string>
+\n您可以随时在 AppGallery 设置中管理或取消订阅。</string>
     <string name="development">开发</string>
     <string name="icon_group_symbols">符号</string>
     <string name="icon_group_travel">旅行</string>
@@ -3790,7 +3790,7 @@
     <string name="migration_files_present">在所选位置 \'%3$s\' 中有 %1$d 个文件（%2$s）。</string>
     <string name="memory_allocated_for_routing_ds">更高的内存分配将加速长途线路(超过500公里)的计算，但可能会影响其他应用程序的性能。
 \n对短途线路的计算速度没有影响。</string>
-    <string name="use_routing_fallback">使用路线规划后备</string>
+    <string name="use_routing_fallback">离线后备路线规划</string>
     <string name="shared_string_statistics">统计数字</string>
     <string name="gps_filter_hdop_desc">设置 HDOP 的最大接受值。
 \n值较高的点将被隐藏。</string>
@@ -3802,7 +3802,7 @@
     <string name="shared_string_memory">内存</string>
     <string name="shared_string_size">尺寸</string>
     <string name="distance_between_points">点之间的距离</string>
-    <string name="use_routing_fallback_description">无法使用联网路线规划时，使用离线路线规划。</string>
+    <string name="use_routing_fallback_description">联网路线规划不可用时，使用离线路线规划。</string>
     <string name="gps_filter_smoothing_desc">设置点之间的阈值距离。
 \n离上一个可见点不超过这个距离的轨迹点将被隐藏。
 \n注意，过高的阈值可能会过度简化轨迹的几何形状。</string>
@@ -3870,7 +3870,7 @@
     <string name="quick_action_toggle_preference">更改首选项的开关。</string>
     <string name="approx_safe_mode_description">使用较慢的 Android 而不是原生代码执行 GPX 近似。</string>
     <string name="use_external_timestamps">使用外部时间戳</string>
-    <string name="use_external_timestamps_description">使用在线路径规划服务的时间戳来调整估计时间和平均速度。</string>
+    <string name="use_external_timestamps_description">使用在线路径规划服务的时间戳来调整估计时间和平均速度</string>
     <string name="history_preferences_descr">你可以为每种历史记录类型单独禁用历史日志记录。</string>
     <string name="android_auto_map_placeholder_title">地图显示在车辆屏幕上。</string>
     <string name="android_auto_map_placeholder_descr">要在程序中查看地图，请断开设备与 Android Auto 的连接。</string>
@@ -4056,4 +4056,12 @@
     <string name="select_segments">选择路段</string>
     <string name="segments_count">路段 %1$d</string>
     <string name="select_segments_description">%1$s 包含超过一个路段，你需要指定导航的部分。</string>
+    <string name="osm_live_payment_subscription_management">购买确认时，将向您的 Google Play 帐户收费。
+\n
+\n除非在指定续订周期之前取消订阅，否则订阅将自动延长。
+\n
+\n您可以随时在 Google Play 设置中管理或取消订阅。</string>
+    <string name="monitoring_min_speed">最低速度</string>
+    <string name="monitoring_min_accuracy">最低精度</string>
+    <string name="monitoring_min_distance">最小位移</string>
 </resources>

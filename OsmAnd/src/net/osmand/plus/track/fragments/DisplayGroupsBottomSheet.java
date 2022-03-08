@@ -44,8 +44,8 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 	private TrackDisplayHelper displayHelper;
 	private SelectedGpxFile selectedGpxFile;
 
-	private final List<SelectableItem> uiItems = new ArrayList<>();
-	private final Map<SelectableItem, View> listViews = new HashMap<>();
+	private final List<SelectableItem<GpxDisplayGroup>> uiItems = new ArrayList<>();
+	private final Map<SelectableItem<GpxDisplayGroup>, View> listViews = new HashMap<>();
 	private LayoutInflater inflater;
 	private LinearLayout listContainer;
 	private TextView sizeIndication;
@@ -96,7 +96,7 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 				continue;
 			}
 
-			SelectableItem uiItem = new SelectableItem();
+			SelectableItem<GpxDisplayGroup> uiItem = new SelectableItem<>();
 			List<GpxDisplayItem> groupItems = groupsHolder.itemGroups.get(group);
 
 			String categoryName = group.getName();
@@ -126,7 +126,7 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 	private void updateListItems() {
 		listContainer.removeAllViews();
 		listViews.clear();
-		for (SelectableItem item : uiItems) {
+		for (SelectableItem<GpxDisplayGroup> item : uiItems) {
 			View view = inflater.inflate(R.layout.bottom_sheet_item_with_descr_and_switch_56dp, listContainer, false);
 			TextView title = view.findViewById(R.id.title);
 			title.setText(item.getTitle());
@@ -138,12 +138,10 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 			UiUtilities.setupCompoundButton(cb, nightMode, CompoundButtonType.GLOBAL);
 
 			view.setOnClickListener(v -> {
-				if (item.getObject() instanceof GpxDisplayGroup) {
-					GpxDisplayGroup group = ((GpxDisplayGroup) item.getObject());
-					updateGroupVisibility(group.getName(), !cb.isChecked());
-					callback.onPointGroupsVisibilityChanged();
-					fullUpdate();
-				}
+				GpxDisplayGroup group = item.getObject();
+				updateGroupVisibility(group.getName(), !cb.isChecked());
+				callback.onPointGroupsVisibilityChanged();
+				fullUpdate();
 			});
 
 			listContainer.addView(view);
@@ -172,11 +170,9 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private List<String> getGroupsNames() {
 		List<String> names = new ArrayList<>();
-		for (SelectableItem item : uiItems) {
-			if (item.getObject() instanceof GpxDisplayGroup) {
-				GpxDisplayGroup group = ((GpxDisplayGroup) item.getObject());
-				names.add(group.getName());
-			}
+		for (SelectableItem<GpxDisplayGroup> item : uiItems) {
+			GpxDisplayGroup group = item.getObject();
+			names.add(group.getName());
 		}
 		return names;
 	}
@@ -200,15 +196,13 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private void updateList() {
 		int defaultIconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
-		for (SelectableItem item : uiItems) {
+		for (SelectableItem<GpxDisplayGroup> item : uiItems) {
 			View view = listViews.get(item);
 			if (view == null) {
 				continue;
 			}
 
-			GpxDisplayGroup group = item.getObject() instanceof GpxDisplayGroup
-					? ((GpxDisplayGroup) item.getObject())
-					: null;
+			GpxDisplayGroup group = item.getObject();
 			boolean isVisible = group != null && !selectedGpxFile.isGroupHidden(group.getName());
 			int iconId = isVisible ? R.drawable.ic_action_folder : R.drawable.ic_action_folder_hidden;
 			int iconColor = item.getColor();
@@ -224,10 +218,8 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private int getVisibleGroupsNumber() {
 		int visibleGroupsCount = 0;
-		for (SelectableItem selectableItem : uiItems) {
-			GpxDisplayGroup group = selectableItem.getObject() instanceof GpxDisplayGroup
-					? ((GpxDisplayGroup) selectableItem.getObject())
-					: null;
+		for (SelectableItem<GpxDisplayGroup> selectableItem : uiItems) {
+			GpxDisplayGroup group = selectableItem.getObject();
 			if (group != null && !selectedGpxFile.isGroupHidden(group.getName())) {
 				visibleGroupsCount++;
 			}
@@ -262,6 +254,5 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 		SelectedGpxFile getSelectedGpx();
 
 		TrackDisplayHelper getDisplayHelper();
-
 	}
 }

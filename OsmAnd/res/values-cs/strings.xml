@@ -4490,7 +4490,7 @@
     <string name="shared_string_used">Použito</string>
     <string name="files_with_route_restrictions">Soubory s omezeními trasy</string>
     <string name="predefined_waypoint_appearance_description">Klepnutím na akci se automaticky uloží bod trasy s přednastavenými parametry.</string>
-    <string name="always_ask_waypoint_appearance_description">Klepnutím na tuto akci otevřete obrazovku “Přidat bod trasy”, kde můžete změnit jméno a vzhled.</string>
+    <string name="always_ask_waypoint_appearance_description">Klepnutím na tuto akci otevřete obrazovku \"Přidat bod trasy\", kde můžete změnit jméno a vzhled.</string>
     <string name="waypoint_appearance">Vzhled bodu trasy</string>
     <string name="track_file_description">Klepnutím na tuto akci zobrazíte dialog se všemi dostupnými trasami.</string>
     <string name="navigate_point_format_swiss_grid">Švýcarské souřadnice (CH1903)</string>
@@ -4511,9 +4511,35 @@
     <string name="rendering_value_all_name">Všechny</string>
     <string name="rendering_value_omit_name">Vynechat</string>
     <string name="rendering_attr_seabedDetail_description">Další textové informace o povrchu mořského dna, kategorii a druhu mořského porostu</string>
-    <string name="save_track_to_gpx_descrp">Spustit záznam stopy automaticky v průběhu navigace. Po jejím dokončení se stopa automaticky uloží.</string>
+    <string name="save_track_to_gpx_descrp">Automaticky spustit záznam stopy v průběhu navigace a potom uložit.</string>
     <string name="quick_action_add_route_descr">Tlačítko pro zahájení trasy uprostřed obrazovky.</string>
-    <string name="please_provide_group_name_message">Zadejte prosím název skupiny.</string>
+    <string name="please_provide_group_name_message">Pojmenujte prosím skupinu.</string>
     <string name="gpx_no_routes_title">Neexistují žádné trasy</string>
-    <string name="gpx_no_routes_descr">Pro přidání cesty do souboru můžete použít nástroj \"%1$s\".</string>
+    <string name="gpx_no_routes_descr">Pro uložení cesty do souboru můžete použít nástroj \"%1$s\".</string>
+    <string name="selected_waypoints_descr">Vybrané body budou přidány do stopy \"%1$s\"</string>
+    <string name="shared_string_reading_file">Načítání souboru…</string>
+    <string name="all_groups">Všechny skupiny</string>
+    <string name="list_of_groups">Seznam skupin</string>
+    <string name="points_selection_descr">Zavřít a ztratit všechny změny\?</string>
+    <string name="exit_import_descr">Ukončit bez uložení změn\?</string>
+    <string name="exit_import">Ukončit\?</string>
+    <string name="import_tracks">Importovat stopy</string>
+    <string name="import_tracks_descr">%1$s, obsahuje %2$s jednotlivých stop. Vyberte stopy pro import.</string>
+    <string name="select_suggested_points">Vyberte navrhované body</string>
+    <string name="shared_string_shape">Tvar</string>
+    <string name="edit_category">Upravit kategorii</string>
+    <string name="default_appearance_desc">Výchozí barva, ikona a tvar se aplikuje na přidané oblíbené body ve skupině.</string>
+    <string name="default_appearance">Výchozí vzhled</string>
+    <string name="location_source">Zdroj polohy</string>
+    <string name="location_source_descr">OsmAnd nainstalovaný z Google Play používá %1$s jako výchozí službu pro určení polohy.
+\n
+\nPokud dostáváte nepřesné informace o poloze nebo používáte zařízení bez %2$s, zkuste přepnout na \"%3$s\"</string>
+    <string name="stop_download">Zastavit stahování</string>
+    <string name="stop_and_exit">Zastavit a ukončit</string>
+    <string name="zoom_levels_difference_description">Velký rozdíl mezi úrovněmi přiblížení může zvýšit objem stahovaných dat.</string>
+    <string name="estimated_download_size">Odhadovaná velikost ke stažení</string>
+    <string name="number_of_tiles">Počet dlaždic</string>
+    <string name="move_map_to_select_area">Posuňte mapu, abyste mohli vybrat potřebnou oblast.</string>
+    <string name="shared_string_complete">hotovo</string>
+    <string name="stop_download_desc">Stahování není dokončeno. Pokud jej teď přerušíte, budete moci prohlížet jen část dlaždic.</string>
 </resources>

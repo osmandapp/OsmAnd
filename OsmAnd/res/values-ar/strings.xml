@@ -4035,7 +4035,7 @@
     <string name="message_name_is_already_exists">الاسم موجود بالفعل</string>
     <string name="delete_online_routing_engine">هل تريد حذف محرك التوجيه عبر الإنترنت؟</string>
     <string name="context_menu_read_full">قراءة كاملة</string>
-    <string name="context_menu_edit_descr">تحرير الوصف</string>
+    <string name="context_menu_edit_descr">تعديل الوصف</string>
     <string name="delete_waypoints">احذف الإحداثيات</string>
     <string name="copy_to_map_markers">نسخ لعلامات الخريطة</string>
     <string name="copy_to_map_favorites">نسخ للمفضلة</string>
@@ -4153,8 +4153,8 @@
     <string name="srtm_download_single_help_message">الرجاء تحديد التنسيق المطلوب. ستحتاج إلى إعادة تنزيل الملف لتغيير التنسيق.</string>
     <string name="shared_string_feet">قدم</string>
     <string name="route_line_use_gradient_coloring">خط المسار ملون حسب ارتفاع المنحدر .</string>
-    <string name="shared_string_min_height">أدنى. ارتفاع</string>
-    <string name="shared_string_max_height">اقصى. ارتفاع</string>
+    <string name="shared_string_min_height">أدنى ارتفاع</string>
+    <string name="shared_string_max_height">أقصى ارتفاع</string>
     <string name="language_description">حدد اللغة المفضلة ونوع التوجيه الصوتي.</string>
     <string name="tts_description">يمكن لميزة تحويل النص إلى كلام (TTS) نطق جميع أنواع التعليمات: أسماء الشوارع ، تعليمات الانعطاف ، أسماء نقاط الاهتمام ، إلخ.</string>
     <string name="tts_title">تحويل النص إلى كلام</string>
@@ -4384,7 +4384,7 @@
     <string name="routeInfo_tracktype_description">لون المسار أو خط المسار من خلال تكوين سطحه. يتم تطبيقه عادةً عندما تكون شبكة الطرق غير معبدة إلى حد كبير.</string>
     <string name="routeInfo_winter_ice_road_description">لون الطريق أو خط المسار حسب تصنيف طرق الشتاء.</string>
     <string name="routeInfo_smoothness_description">تصنيف القدرة على المناورة على الطريق/ممر المشاة للمركبات ذات العجلات ، لا سيما فيما يتعلق بانتظام السطح / وتسطيحه.</string>
-    <string name="routeInfo_surface_description">توفير معلومات حول السطح المادي للطرق/ممرات المشاة.</string>
+    <string name="routeInfo_surface_description">توفير معلومات السطح المادي للطريق/ممر المشاة.</string>
     <string name="routeInfo_roadClass_description">لون الطريق أو خط المسار وفقا لتصنيف الطرق.</string>
     <string name="add_group_to_markers">إضافة مجموعة إلى قائمة العلامة</string>
     <string name="remove_group_from_markers">إزالة المجموعة من قائمة العلامة</string>
@@ -4581,10 +4581,36 @@
     <string name="rendering_attr_seabedDetail_name">تفاصيل قاع البحر</string>
     <string name="rendering_value_category_name">الفئة</string>
     <string name="rendering_value_omit_name">حذف</string>
-    <string name="rendering_attr_seabedDetail_description">معلومات نصية إضافية حول تأهيل سطح قاع البحر ، أنواع الأسطح المدمجة ، وفئة وتصنيف الحشائش أو الأعشاب البحرية</string>
-    <string name="save_track_to_gpx_descrp">ابدأ تسجيل المسار تلقائيًا أثناء التنقل. عند الانتهاء ، سيتم حفظ المسار تلقائيًا.</string>
+    <string name="rendering_attr_seabedDetail_description">معلومات نصية إضافية عن أهلية سطح قاع البحر وأنواع الأسطح المدمجة والفئة وتصنيف الأعشاب أو الأعشاب البحرية</string>
+    <string name="save_track_to_gpx_descrp">بدء تسجيل المسار تلقائيًا أثناء التنقل والحفظ التلقائي بعد ذلك.</string>
     <string name="gpx_no_routes_title">لا توجد طرق</string>
-    <string name="gpx_no_routes_descr">يمكنك استخدام أداة \"%1$s\" لإضافة مسار إلى الملف.</string>
+    <string name="gpx_no_routes_descr">يمكنك استخدام أداة \"%1$s\" لحفظ المسار كملف.</string>
     <string name="quick_action_add_route_descr">زر لبدء المسار من منتصف الشاشة.</string>
-    <string name="please_provide_group_name_message">يرجى تقديم اسم للمجموعة.</string>
+    <string name="please_provide_group_name_message">يرجى تسمية المجموعة.</string>
+    <string name="exit_import">خروج؟</string>
+    <string name="import_tracks_descr">%1$s، يحتوي على %2$s مسارات منفصلة. اختر المسارات للاستيراد.</string>
+    <string name="exit_import_descr">الخروج دون حفظ أي تغييرات؟</string>
+    <string name="select_suggested_points">تحديد النقاط المقترحة</string>
+    <string name="points_selection_descr">إغلاق وفقد كل التغييرات؟</string>
+    <string name="selected_waypoints_descr">ستتم إضافة نقاط المسار المحددة إلى المسار \"%1$s\"</string>
+    <string name="shared_string_reading_file">قراءة الملف…</string>
+    <string name="all_groups">كل المجموعات</string>
+    <string name="list_of_groups">قائمة المجموعات</string>
+    <string name="import_tracks">استيراد مسارات</string>
+    <string name="location_source_descr">بشكل افتراضي ، يستخدم OsmAnd المثبت من متجر بلاي %1$s لتحديد الموقع.
+\n
+\nإذا تحصلت على معلومات غير دقيقة عن الموقع أو استخدمت جهازًا بدون %2$s ، فحاول التبديل إلى \"%3$s\"</string>
+    <string name="location_source">مصدر الموقع</string>
+    <string name="default_appearance_desc">سيتم تطبيق اللون والرمز والشكل الافتراضي على النقاط المفضلة المضافة في المجموعة.</string>
+    <string name="default_appearance">المظهر الافتراضي</string>
+    <string name="shared_string_shape">الشكل</string>
+    <string name="edit_category">تعديل الفئة</string>
+    <string name="stop_and_exit">توقف واخرج</string>
+    <string name="shared_string_complete">اكتمل</string>
+    <string name="zoom_levels_difference_description">يمكن أن يؤدي الاختلاف الكبير بين مستويات التكبير / التصغير إلى زيادة حجم البيانات التي تم تنزيلها.</string>
+    <string name="estimated_download_size">الحجم التقديري للتنزيل</string>
+    <string name="number_of_tiles">عدد المربعات</string>
+    <string name="move_map_to_select_area">حرك الخريطة لتحديد المنطقة المطلوبة.</string>
+    <string name="stop_download_desc">التنزيل لم يكتمل. إذا قمت بمقاطعة التنزيل الآن ، فسيكون جزء فقط من المربعات متاحًا للعرض.</string>
+    <string name="stop_download">اوقف التنزيل</string>
 </resources>

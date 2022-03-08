@@ -58,6 +58,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.layers.base.BaseMapLayer;
 import net.osmand.plus.views.layers.ContextMenuLayer;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.MapGestureType;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
@@ -143,7 +144,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private boolean showMapPosition = true;
 
-	private IMapLocationListener locationListener;
+	private List<IMapLocationListener> locationListeners = new ArrayList<>();
 
 	private OnLongClickListener onLongClickListener;
 
@@ -365,7 +366,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return application.accessibilityEnabled() ? false : null;
 	}
 
-	public boolean isLayerVisible(OsmandMapLayer layer) {
+	public synchronized boolean isLayerExists(OsmandMapLayer layer) {
 		return layers.contains(layer);
 	}
 
@@ -375,6 +376,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			return 10;
 		}
 		return z;
+	}
+
+	public int getLayerIndex(OsmandMapLayer layer) {
+		float zOrder = getZorder(layer);
+		return (int)(zOrder * 100.0f);
 	}
 
 	public synchronized void addLayer(OsmandMapLayer layer, float zOrder) {
@@ -390,9 +396,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public synchronized void removeLayer(OsmandMapLayer layer) {
+		layer.destroyLayer();
 		while (layers.remove(layer)) ;
 		zOrders.remove(layer);
-		layer.destroyLayer();
 	}
 
 	public synchronized void removeAllLayers() {
@@ -514,8 +520,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		animatedDraggingThread.stopAnimating();
 		currentViewport.setLatLonCenter(latitude, longitude);
 		refreshMap();
-		if (notify && locationListener != null) {
-			locationListener.locationChanged(getLatitude(), getLongitude(), this);
+		if (notify) {
+			notifyLocationListeners(getLatitude(), getLongitude());
 		}
 	}
 
@@ -550,15 +556,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return currentViewport.isZoomAnimated();
 	}
 
-	public void setMapLocationListener(IMapLocationListener l) {
-		locationListener = l;
+	public void addMapLocationListener(@NonNull IMapLocationListener l) {
+		locationListeners.add(l);
 	}
 
-	/**
-	 * Adds listener to control when map is dragging
-	 */
-	public IMapLocationListener setMapLocationListener() {
-		return locationListener;
+	public void removeMapLocationListener(@NonNull IMapLocationListener listener) {
+		locationListeners.remove(listener);
 	}
 
 	public void setOnDrawMapListener(OnDrawMapListener onDrawMapListener) {
@@ -1000,12 +1003,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		float dx = (fromX - toX);
 		float dy = (fromY - toY);
 		moveTo(dx, dy, false);
-		if (locationListener != null && notify) {
-			locationListener.locationChanged(getLatitude(), getLongitude(), this);
+		if (notify) {
+			notifyLocationListeners(getLatitude(), getLongitude());
 		}
 	}
 
-	protected void rotateToAnimate(float rotate) {
+	public void rotateToAnimate(float rotate) {
 		this.rotate = MapUtils.unifyRotationTo360(rotate);
 		this.currentViewport.setRotate(this.rotate);
 		refreshMap();
@@ -1014,16 +1017,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	protected void setLatLonAnimate(double latitude, double longitude, boolean notify) {
 		currentViewport.setLatLonCenter(latitude, longitude);
 		refreshMap();
-		if (locationListener != null && notify) {
-			locationListener.locationChanged(latitude, longitude, this);
+		if (notify) {
+			notifyLocationListeners(latitude, longitude);
 		}
 	}
 
 	protected void setFractionalZoom(int zoom, double zoomPart, boolean notify) {
 		currentViewport.setZoomAndAnimation(zoom, 0, zoomPart);
 		refreshMap();
-		if (locationListener != null && notify) {
-			locationListener.locationChanged(getLatitude(), getLongitude(), this);
+		if (notify) {
+			notifyLocationListeners(getLatitude(), getLongitude());
 		}
 	}
 
@@ -1033,8 +1036,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			currentViewport.setZoomAndAnimation(zoom, zoomToAnimate);
 			currentViewport.setRotate(rotate);
 			refreshMap();
-			if (notify && locationListener != null) {
-				locationListener.locationChanged(getLatitude(), getLongitude(), this);
+			if (notify) {
+				notifyLocationListeners(getLatitude(), getLongitude());
 			}
 		}
 	}
@@ -1044,8 +1047,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		final LatLon latlon = currentViewport.getLatLonFromPixel(cp.x + dx, cp.y + dy);
 		currentViewport.setLatLonCenter(latlon.getLatitude(), latlon.getLongitude());
 		refreshMap();
-		if (notify && locationListener != null) {
-			locationListener.locationChanged(getLatitude(), getLongitude(), this);
+		if (notify) {
+			notifyLocationListeners(getLatitude(), getLongitude());
 		}
 	}
 
@@ -1121,11 +1124,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		RotatedTileBox tb = currentViewport.copy();
 		int dy = 0;
 
-		int tbw = tb.getPixWidth();
+		int tbw = tileBoxWidthPx > 0 ? tileBoxWidthPx : tb.getPixWidth();
 		int tbh = tb.getPixHeight();
-		if (tileBoxWidthPx > 0) {
-			tbw = tileBoxWidthPx;
-		} else if (tileBoxHeightPx > 0) {
+		if (tileBoxHeightPx > 0) {
 			tbh = tileBoxHeightPx;
 			dy = (tb.getPixHeight() - tileBoxHeightPx) / 2 - marginTopPx;
 		}
@@ -1202,6 +1203,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return mapRenderer;
 	}
 
+	public boolean hasMapRenderer() {
+		return mapRenderer != null;
+	}
+
 	public Boolean onTrackballEvent(MotionEvent event) {
 		if (trackBallDelegate != null) {
 			return trackBallDelegate.onTrackBallEvent(event);
@@ -1251,8 +1256,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			// 1.5 works better even on dm.density=1 devices
 			float dz = (float) (Math.log(relativeToStart) / Math.log(2)) * 1.5f;
 			setIntZoom(Math.round(dz) + initialViewport.getZoom());
-			if (Math.abs(angleRelative) < ANGLE_THRESHOLD * relativeToStart ||
-					Math.abs(angleRelative) < ANGLE_THRESHOLD / relativeToStart) {
+			if (!mapGestureAllowed(MapGestureType.TWO_POINTERS_ROTATION)
+					|| Math.abs(angleRelative) < ANGLE_THRESHOLD * relativeToStart
+					|| Math.abs(angleRelative) < ANGLE_THRESHOLD / relativeToStart) {
 				angleRelative = 0;
 			}
 			rotateToAnimate(initialViewport.getRotate() + angleRelative);
@@ -1319,12 +1325,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public void onChangingViewAngle(float angle) {
-			setElevationAngle(initialElevation - angle);
+			if (mapGestureAllowed(MapGestureType.TWO_POINTERS_TILT)) {
+				setElevationAngle(initialElevation - angle);
+			}
 		}
 
 		@Override
 		public void onChangeViewAngleStarted() {
-			initialElevation = elevationAngle;
+			if (mapGestureAllowed(MapGestureType.TWO_POINTERS_TILT)) {
+				initialElevation = elevationAngle;
+			}
 		}
 
 		@Override
@@ -1343,11 +1353,17 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				// keep only rotating
 				dz = 0;
 			}
-			if (Math.abs(relAngle) < ANGLE_THRESHOLD && !startRotating) {
-				relAngle = 0;
+
+			if (mapGestureAllowed(MapGestureType.TWO_POINTERS_ROTATION)) {
+				if (Math.abs(relAngle) < ANGLE_THRESHOLD && !startRotating) {
+					relAngle = 0;
+				} else {
+					startRotating = true;
+				}
 			} else {
-				startRotating = true;
+				relAngle = 0;
 			}
+
 			if (dz != 0 || relAngle != 0) {
 				changeZoomPosition((float) dz, relAngle);
 			}
@@ -1439,6 +1455,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			return false;
 		}
 		return true;
+	}
+
+	private void notifyLocationListeners(double lat, double lon) {
+		for (IMapLocationListener listener : locationListeners) {
+			listener.locationChanged(lat, lon, this);
+		}
 	}
 
 	private class MapTileViewOnGestureListener extends SimpleOnGestureListener {

@@ -23,14 +23,12 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPointChangedListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPointChangedListener;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
 import net.osmand.plus.mapcontextmenu.MenuController.ContextMenuToolbarController;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
@@ -41,19 +39,20 @@ import net.osmand.plus.mapcontextmenu.controllers.MapDataMenuController;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.MapMarkerEditor;
 import net.osmand.plus.mapcontextmenu.editors.PointEditor;
-import net.osmand.plus.mapcontextmenu.editors.RtePtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.transport.TransportStopRoute;
-import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.ContextMenuLayer;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.util.Algorithms;
@@ -75,8 +74,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private FavoritePointEditor favoritePointEditor;
 	@Nullable
 	private WptPtEditor wptPtEditor;
-	@Nullable
-	private RtePtEditor rtePtEditor;
 	@Nullable
 	private MapMarkerEditor mapMarkerEditor;
 
@@ -176,9 +173,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (wptPtEditor != null) {
 			wptPtEditor.setMapActivity(mapActivity);
 		}
-		if (rtePtEditor != null) {
-			rtePtEditor.setMapActivity(mapActivity);
-		}
 		if (mapMarkerEditor != null) {
 			mapMarkerEditor.setMapActivity(mapActivity);
 		}
@@ -245,15 +239,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	@Nullable
-	public RtePtEditor getRtePtPointEditor() {
-		MapActivity mapActivity = getMapActivity();
-		if (rtePtEditor == null && mapActivity != null) {
-			rtePtEditor = new RtePtEditor(mapActivity);
-		}
-		return rtePtEditor;
-	}
-
-	@Nullable
 	public MapMarkerEditor getMapMarkerEditor() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapMarkerEditor == null && mapActivity != null) {
@@ -262,13 +247,12 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return mapMarkerEditor;
 	}
 
+	@Nullable
 	public PointEditor getPointEditor(String tag) {
 		if (favoritePointEditor != null && favoritePointEditor.getFragmentTag().equals(tag)) {
 			return favoritePointEditor;
 		} else if (wptPtEditor != null && wptPtEditor.getFragmentTag().equals(tag)) {
 			return wptPtEditor;
-		} else if (rtePtEditor != null && rtePtEditor.getFragmentTag().equals(tag)) {
-			return rtePtEditor;
 		} else if (mapMarkerEditor != null && mapMarkerEditor.getFragmentTag().equals(tag)) {
 			return mapMarkerEditor;
 		}

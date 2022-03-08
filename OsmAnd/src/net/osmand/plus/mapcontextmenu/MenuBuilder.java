@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_ONLINE_PHOTOS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_SEARCH_MORE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_SHOW_ON_MAP_ID;
@@ -98,9 +99,11 @@ public class MenuBuilder {
 	private static final Log LOG = PlatformUtil.getLog(MenuBuilder.class);
 	public static final float SHADOW_HEIGHT_TOP_DP = 17f;
 	public static final int TITLE_LIMIT = 60;
+
 	protected static final String[] arrowChars = new String[] {"=>", " - "};
-	protected final String NEAREST_WIKI_KEY = "nearest_wiki_key";
-	protected final String NEAREST_POI_KEY = "nearest_poi_key";
+	protected static final String NEAREST_WIKI_KEY = "nearest_wiki_key";
+	protected static final String NEAREST_POI_KEY = "nearest_poi_key";
+	protected static final String DIVIDER_ROW_KEY = "divider_row_key";
 
 	private static final int NEARBY_MAX_POI_COUNT = 10;
 	private static final int NEARBY_POI_MIN_RADIUS = 250;
@@ -113,7 +116,7 @@ public class MenuBuilder {
 	protected OsmAndAppCustomization customization;
 
 	protected LinkedList<PlainMenuItem> plainMenuItems;
-	private boolean firstRow;
+	protected boolean firstRow;
 	protected boolean matchWidthDivider;
 	protected boolean light;
 	private Amenity amenity;
@@ -164,11 +167,13 @@ public class MenuBuilder {
 		}
 	};
 
-	public void addImageCard(ImageCard card) {
-		if (onlinePhotoCards.size() == 1 && onlinePhotoCards.get(0) instanceof NoImagesCard) {
-			onlinePhotoCards.clear();
+	public void addImageCard(@NonNull ImageCard card) {
+		if (onlinePhotoCards != null) {
+			if (onlinePhotoCards.size() == 1 && onlinePhotoCards.get(0) instanceof NoImagesCard) {
+				onlinePhotoCards.clear();
+			}
+			onlinePhotoCards.add(0, card);
 		}
-		onlinePhotoCards.add(0, card);
 		if (onlinePhotoCardsRow != null) {
 			onlinePhotoCardsRow.setCards(onlinePhotoCards);
 		}
@@ -292,7 +297,7 @@ public class MenuBuilder {
 		if (needBuildCoordinatesRow()) {
 			buildCoordinatesRow(view);
 		}
-		if (showOnlinePhotos) {
+		if (customization.isFeatureEnabled(CONTEXT_MENU_ONLINE_PHOTOS_ID) && showOnlinePhotos) {
 			buildNearestPhotosRow(view);
 		}
 		buildPluginRows(view);
@@ -375,8 +380,14 @@ public class MenuBuilder {
 				}
 				View amenitiesRow = createRowContainer(viewGroup.getContext(), NEAREST_WIKI_KEY);
 
-				buildNearestRow(amenitiesRow, amenities, R.drawable.ic_action_wikipedia, app.getString(R.string.wiki_around), NEAREST_WIKI_KEY);
-				viewGroup.addView(amenitiesRow, position);
+				int insertIndex = position == 0 ? 0 : position + 1;
+
+				firstRow = insertIndex == 0 || isDividerAtPosition(viewGroup, insertIndex - 1);
+				String text = app.getString(R.string.wiki_around);
+				buildNearestRow(amenitiesRow, amenities, R.drawable.ic_action_wikipedia, text, NEAREST_WIKI_KEY);
+				viewGroup.addView(amenitiesRow, insertIndex);
+
+				buildNearestRowDividerIfMissing(viewGroup, insertIndex);
 			}
 		});
 	}
@@ -397,16 +408,17 @@ public class MenuBuilder {
 					String count = "(" + amenities.size() + ")";
 					String text = app.getString(R.string.ltr_or_rtl_triple_combine_via_space, title, type, count);
 
-					View amenitiesRow = createRowContainer(viewGroup.getContext(), NEAREST_POI_KEY);
-					buildNearestRow(amenitiesRow, amenities, AmenityMenuController.getRightIconId(amenity), text, NEAREST_POI_KEY);
-
 					View wikiRow = viewGroup.findViewWithTag(NEAREST_WIKI_KEY);
-					if (wikiRow != null) {
-						int index = viewGroup.indexOfChild(wikiRow);
-						viewGroup.addView(amenitiesRow, index + 1);
-					} else {
-						viewGroup.addView(amenitiesRow, position);
-					}
+					int insertIndex = wikiRow != null
+							? viewGroup.indexOfChild(wikiRow) + 1
+							: position == 0 ? 0 : position + 1;
+
+					View amenitiesRow = createRowContainer(viewGroup.getContext(), NEAREST_POI_KEY);
+					firstRow = insertIndex == 0 || isDividerAtPosition(viewGroup, insertIndex - 1);
+					buildNearestRow(amenitiesRow, amenities, AmenityMenuController.getRightIconId(amenity), text, NEAREST_POI_KEY);
+					viewGroup.addView(amenitiesRow, insertIndex);
+
+					buildNearestRowDividerIfMissing(viewGroup, insertIndex);
 				}
 			});
 		}
@@ -427,6 +439,12 @@ public class MenuBuilder {
 			CollapsableView collapsableView = getCollapsableView(view.getContext(), true, nearestAmenities, amenityKey);
 			buildRow(view, iconId, null, text, 0, true, collapsableView,
 					false, 0, false, null, false);
+		}
+	}
+
+	protected void buildNearestRowDividerIfMissing(@NonNull ViewGroup viewGroup, int nearestRowPosition) {
+		if (!isDividerAtPosition(viewGroup, nearestRowPosition + 1)) {
+			buildRowDivider(viewGroup, nearestRowPosition + 1);
 		}
 	}
 
@@ -948,8 +966,13 @@ public class MenuBuilder {
 		return new CollapsableView(llv, this, true);
 	}
 
-	public void buildRowDivider(View view) {
+	public void buildRowDivider(@NonNull View view) {
+		buildRowDivider(view, -1);
+	}
+
+	public void buildRowDivider(@NonNull View view, int index) {
 		View horizontalLine = new View(view.getContext());
+		horizontalLine.setTag(DIVIDER_ROW_KEY);
 		LinearLayout.LayoutParams llHorLineParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(1f));
 		llHorLineParams.gravity = Gravity.BOTTOM;
 		if (!matchWidthDivider) {
@@ -957,7 +980,12 @@ public class MenuBuilder {
 		}
 		horizontalLine.setLayoutParams(llHorLineParams);
 		horizontalLine.setBackgroundColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_divider_light : R.color.ctx_menu_bottom_view_divider_dark));
-		((LinearLayout) view).addView(horizontalLine);
+		((LinearLayout) view).addView(horizontalLine, index);
+	}
+
+	protected boolean isDividerAtPosition(@NonNull ViewGroup viewGroup, int index) {
+		View child = viewGroup.getChildAt(index);
+		return child != null && DIVIDER_ROW_KEY.equals(child.getTag());
 	}
 
 	protected void buildReadFullButton(LinearLayout container, String btnText, View.OnClickListener onClickListener) {

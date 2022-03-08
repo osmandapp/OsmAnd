@@ -1,12 +1,5 @@
 package net.osmand.plus.plugins.rastermaps;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DOWNLOAD_MAP;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_UPDATE_MAP;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_RASTER_MAPS;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
-import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -15,12 +8,6 @@ import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
@@ -45,6 +32,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapTileLayer;
+import net.osmand.plus.views.layers.base.BaseMapLayer;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
@@ -53,11 +41,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DOWNLOAD_MAP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_RASTER_MAPS;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
+import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
+
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 	// Constants for determining the order of items in the additional actions context menu
 	private static final int UPDATE_MAP_ITEM_ORDER = 12300;
 	private static final int DOWNLOAD_MAP_ITEM_ORDER = 12600;
+	private static final float ZORDER_UNDERLAY = -0.5f;
+	private static final float ZORDER_OVERLAY = 0.7f;
 
 	private final OsmandSettings settings;
 
@@ -105,15 +107,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	public boolean init(@NonNull final OsmandApplication app, Activity activity) {
 		final CommonPreference<Boolean> hidePolygonsPref = settings.getCustomRenderBooleanProperty("noPolygons");
 		final CommonPreference<Boolean> hideWaterPolygonsPref = settings.getCustomRenderBooleanProperty("hideWaterPolygons");
-		underlayListener = new StateChangedListener<String>() {
-			@Override
-			public void stateChanged(String change) {
-				app.runInUIThread(() -> {
-					hidePolygonsPref.set(settings.MAP_UNDERLAY.get() != null);
-					hideWaterPolygonsPref.set(settings.MAP_UNDERLAY.get() != null);
-				});
-			}
-		};
+		underlayListener = change -> app.runInUIThread(() -> {
+			hidePolygonsPref.set(settings.MAP_UNDERLAY.get() != null);
+			hideWaterPolygonsPref.set(settings.MAP_UNDERLAY.get() != null);
+		});
 		settings.MAP_UNDERLAY.addListener(underlayListener);
 		return true;
 	}
@@ -124,22 +121,16 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	}
 
 	private void createLayers(@NonNull Context context) {
+		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		if (underlayLayer != null) {
-			app.getOsmandMap().getMapView().removeLayer(underlayLayer);
+			mapView.removeLayer(underlayLayer);
 		}
 		if (overlayLayer != null) {
-			app.getOsmandMap().getMapView().removeLayer(overlayLayer);
+			mapView.removeLayer(overlayLayer);
 		}
 		underlayLayer = new MapTileLayer(context, false);
-		// mapView.addLayer(underlayLayer, -0.5f);
 		overlayLayer = new MapTileLayer(context, false);
-		overlayLayerListener = new StateChangedListener<Integer>() {
-			@Override
-			public void stateChanged(Integer change) {
-				app.runInUIThread(() -> overlayLayer.setAlpha(change));
-			}
-		};
-		// mapView.addLayer(overlayLayer, 0.7f);
+		overlayLayerListener = change -> app.runInUIThread(() -> overlayLayer.setAlpha(change));
 		settings.MAP_OVERLAY_TRANSPARENCY.addListener(overlayLayerListener);
 	}
 
@@ -157,13 +148,13 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		overlayLayer.updateParameter();
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		if (isActive()) {
-			updateLayer(mapView, settings, overlayLayer, settings.MAP_OVERLAY, 0.7f, settings.MAP_OVERLAY == settingsToWarnAboutMap);
+			updateLayer(mapView, settings, overlayLayer, settings.MAP_OVERLAY, ZORDER_OVERLAY, settings.MAP_OVERLAY == settingsToWarnAboutMap);
 		} else {
 			mapView.removeLayer(overlayLayer);
 			overlayLayer.setMap(null);
 		}
 		if (isActive()) {
-			updateLayer(mapView, settings, underlayLayer, settings.MAP_UNDERLAY, -0.5f, settings.MAP_UNDERLAY == settingsToWarnAboutMap);
+			updateLayer(mapView, settings, underlayLayer, settings.MAP_UNDERLAY, ZORDER_UNDERLAY, settings.MAP_UNDERLAY == settingsToWarnAboutMap);
 		} else {
 			mapView.removeLayer(underlayLayer);
 			underlayLayer.setMap(null);
@@ -194,12 +185,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		if (!Algorithms.objectEquals(overlay, layer.getMap())) {
 			if (overlay == null) {
 				mapView.removeLayer(layer);
-			} else if (!mapView.isLayerVisible(layer)) {
-				if (mapView.getMapRenderer() == null) {
-					mapView.addLayer(layer, layerOrder);
-				} else {
-					layer.initLayer(mapView);
-				}
+			} else if (!mapView.isLayerExists(layer)) {
+				mapView.addLayer(layer, layerOrder);
 			}
 			layer.setMap(overlay);
 			mapView.refreshMap();
@@ -417,12 +404,6 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 											  ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 		boolean mapTileLayer = mapActivity.getMapView().getMainLayer() instanceof MapTileLayer;
 		if (configureMenu || mapTileLayer) {
-			ContextMenuItem.ItemBuilder updateMapItemBuilder = new ContextMenuItem.ItemBuilder()
-					.setTitleId(R.string.context_menu_item_update_map, mapActivity)
-					.setId(MAP_CONTEXT_MENU_UPDATE_MAP)
-					.setIcon(R.drawable.ic_action_refresh_dark)
-					.setOrder(UPDATE_MAP_ITEM_ORDER);
-
 			ContextMenuItem.ItemBuilder downloadMapItemBuilder = new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.shared_string_download_map, mapActivity)
 					.setId(MAP_CONTEXT_MENU_DOWNLOAD_MAP)
@@ -433,22 +414,19 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 				ItemClickListener listener = (adptr, resId, pos, isChecked, viewCoordinates) -> {
 					MapActivity mapActivity1 = mapActivityRef.get();
-					if (mapActivity1 != null && !mapActivity1.isFinishing()) {
-						OsmandMapTileView mapView = mapActivity1.getMapView();
-						if (resId == R.string.context_menu_item_update_map) {
-							mapActivity1.getMapActions().reloadTile(mapView.getZoom(), latitude, longitude);
-						} else if (resId == R.string.shared_string_download_map) {
-							DownloadTilesDialog dlg = new DownloadTilesDialog(mapActivity1, (OsmandApplication) mapActivity1.getApplication(), mapView);
-							dlg.openDialog();
+					if (AndroidUtils.isActivityNotDestroyed(mapActivity1)) {
+						OsmandApplication app = mapActivity1.getMyApplication();
+						if (DownloadTilesFragment.shouldShowDialog(app)) {
+							DownloadTilesFragment.showInstance(mapActivity1.getSupportFragmentManager());
+						} else {
+							app.showShortToastMessage(R.string.maps_could_not_be_downloaded);
 						}
 					}
 					return true;
 				};
-				updateMapItemBuilder.setListener(listener);
 				downloadMapItemBuilder.setListener(listener);
 			}
 
-			adapter.addItem(updateMapItemBuilder.createItem());
 			adapter.addItem(downloadMapItemBuilder.createItem());
 		}
 	}

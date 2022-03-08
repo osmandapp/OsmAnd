@@ -3910,7 +3910,7 @@
     <string name="shared_storage_migration">Jaetun kansion migraatio</string>
     <string name="use_external_timestamps">Käytä ulkoisia aikaleimoja</string>
     <string name="save_track_to_gpx_descrp">Aloita reitin nauhoitus automaattisesti navigoinnin alkaessa. Navigoinnin päättyessä nauhoitus tallennetaan automaattisesti.</string>
-    <string name="please_provide_group_name_message">Anna ryhmälle nimi.</string>
+    <string name="please_provide_group_name_message">Nimeä ryhmä.</string>
     <string name="shared_string_used">Käytössä</string>
     <string name="shared_string_not_used">Ei käytössä</string>
     <string name="storage_migration_wrong_folder_warning">OsmAnd tietoja ei löydetty valitusta kansiosta. Ole hyvä ja yritä uudelleen.</string>
@@ -3935,7 +3935,7 @@
     <string name="shared_string_hide_all">Piilota kaikki</string>
     <string name="shared_string_statistics">Tilastot</string>
     <string name="rendering_value_all_name">Kaikki</string>
-    <string name="shared_string_open_street_map">AvoinTiekartta</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikonit matalalla tarkkuudella</string>
     <string name="copying_file">Kopioidaan tiedostoa %1$s…</string>
     <string name="from_to_with_params">Sijainnista %1$s sijaintiin %2$s</string>
@@ -3962,4 +3962,24 @@
     <string name="delete_history_items_descr">Poistetaanko valitut historiasta\?</string>
     <string name="delete_history_items">Poistetaanko %1$s kohtia historiasta\?</string>
     <string name="display_route_tracks_as_poi">Näytä reitit kuten KP</string>
+    <string name="exit_import_descr">Poistu tallentamatta muutoksia\?</string>
+    <string name="list_of_groups">Lista ryhmistä</string>
+    <string name="exit_import">Poistu\?</string>
+    <string name="shared_string_reading_file">Luetaan tiedostoa…</string>
+    <string name="all_groups">Kaikki ryhmät</string>
+    <string name="points_selection_descr">Sulje ja menetä tekemäsi muutokset\?</string>
+    <string name="import_tracks">Tuo jäljet</string>
+    <string name="import_tracks_descr">%1$s, sisältää %2$s erillistä jälkeä. Valitse tuotavat jäljet.</string>
+    <string name="quick_action_add_route_descr">Painike reitin lisäämiseksi keskeltä ruutua.</string>
+    <string name="location_source_descr">Google Play kaupasta asennettu OsmAnd käyttää oletuksena %1$s päätelläkseen sijainnin.
+\n
+\nJos saat epätarkan sijainnin tai käytät laitetta ilman %2$s, yritä vaihtaa \"%3$s\"</string>
+    <string name="location_source">Sijainnin lähde</string>
+    <string name="select_suggested_points">Valitse ehdotetut pisteet</string>
+    <string name="selected_waypoints_descr">Valitut väyläpisteet lisätään \"%1$s\" jäljelle</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Ikonien yksinkertaistettu esittäminen matalilla tarkkuuksilla</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme tunnisteet</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Näytä huomautustunnisteet</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Näytä fixme tunnisteet</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Huomautustunnisteet</string>
 </resources>

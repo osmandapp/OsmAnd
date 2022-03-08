@@ -1,5 +1,19 @@
 package net.osmand.plus.helpers;
 
+import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
+import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
+import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
+import static net.osmand.plus.track.GpxAppearanceAdapter.SHOW_START_FINISH_ATTR;
+import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
+import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+import static net.osmand.util.Algorithms.capitalizeFirstLetter;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -30,6 +44,15 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.ListPopupWindow;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
@@ -119,28 +142,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.ListPopupWindow;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-
-import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
-import static net.osmand.plus.track.GpxAppearanceAdapter.SHOW_START_FINISH_ATTR;
-import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
-import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
-import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 public class GpxUiHelper {
 
@@ -328,15 +329,24 @@ public class GpxUiHelper {
 	}
 
 	@NonNull
-	public static String getGpxTitle(String fileName) {
-		if (fileName == null) {
+	public static String getGpxTitle(@Nullable String name) {
+		if (Algorithms.isEmpty(name)) {
 			return "";
 		}
-		String gpxTitle = fileName;
+		String gpxTitle = name;
 		if (gpxTitle.toLowerCase().endsWith(GPX_FILE_EXT)) {
 			gpxTitle = gpxTitle.substring(0, gpxTitle.length() - GPX_FILE_EXT.length());
 		}
 		return gpxTitle.replace('_', ' ');
+	}
+
+	@NonNull
+	public static String getGpxDirTitle(@Nullable String name) {
+		if (Algorithms.isEmpty(name)) {
+			return "";
+		}
+		String groupName = name.replaceAll("_", " ").replace(IndexConstants.GPX_FILE_EXT, "");
+		return capitalizeFirstLetter(groupName);
 	}
 
 	private static class DialogGpxDataItemCallback implements GpxDataItemCallback {
@@ -1046,17 +1056,18 @@ public class GpxUiHelper {
 		return allGpxFiles;
 	}
 
-	public static void readGpxDirectory(File dir, final List<GPXInfo> list, String parent,
-										 boolean absolutePath) {
+	public static void readGpxDirectory(@Nullable File dir, @NonNull List<GPXInfo> list,
+	                                    @NonNull String parent, boolean absolutePath) {
 		if (dir != null && dir.canRead()) {
 			File[] files = dir.listFiles();
 			if (files != null) {
-				for (File f : files) {
-					if (f.isFile() && f.getName().toLowerCase().endsWith(GPX_FILE_EXT)) {
-						String fileName = absolutePath ? f.getAbsolutePath() : parent + f.getName();
-						list.add(new GPXInfo(fileName, f.lastModified(), f.length()));
-					} else if (f.isDirectory()) {
-						readGpxDirectory(f, list, parent + f.getName() + "/", absolutePath);
+				for (File file : files) {
+					String name = file.getName();
+					if (file.isFile() && name.toLowerCase().endsWith(GPX_FILE_EXT)) {
+						String fileName = absolutePath ? file.getAbsolutePath() : parent + name;
+						list.add(new GPXInfo(fileName, file.lastModified(), file.length()));
+					} else if (file.isDirectory()) {
+						readGpxDirectory(file, list, parent + name + "/", absolutePath);
 					}
 				}
 			}

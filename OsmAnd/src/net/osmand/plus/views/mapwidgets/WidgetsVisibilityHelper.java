@@ -52,7 +52,8 @@ public class WidgetsVisibilityHelper {
 				&& !isInFollowTrackMode()
 				&& !isContextMenuFragmentVisible()
 				&& !isMultiSelectionMenuFragmentVisible()
-				&& !isInGpsFilteringMode();
+				&& !isInGpsFilteringMode()
+				&& !isSelectingTilesZone();
 	}
 
 	public boolean shouldShowTopCoordinatesWidget() {
@@ -65,7 +66,8 @@ public class WidgetsVisibilityHelper {
 				&& !isInChoosingRoutesMode()
 				&& !isInWaypointsChoosingMode()
 				&& !isInFollowTrackMode()
-				&& !isInGpsFilteringMode();
+				&& !isInGpsFilteringMode()
+				&& !isSelectingTilesZone();
 	}
 
 	public boolean shouldHideMapMarkersWidget() {
@@ -81,7 +83,8 @@ public class WidgetsVisibilityHelper {
 				|| isInTrackAppearanceMode()
 				|| isInPlanRouteMode()
 				|| isInRouteLineAppearanceMode()
-				|| isInGpsFilteringMode();
+				|| isInGpsFilteringMode()
+				|| isSelectingTilesZone();
 	}
 
 	public boolean shouldShowBottomMenuButtons() {
@@ -95,7 +98,8 @@ public class WidgetsVisibilityHelper {
 				&& !isInFollowTrackMode()
 				&& !isInTrackAppearanceMode()
 				&& !isInRouteLineAppearanceMode()
-				&& !isInGpsFilteringMode();
+				&& !isInGpsFilteringMode()
+				&& !isSelectingTilesZone();
 	}
 
 	public boolean shouldShowZoomButtons() {
@@ -104,7 +108,8 @@ public class WidgetsVisibilityHelper {
 				&& !isInChoosingRoutesMode()
 				&& !isInWaypointsChoosingMode()
 				&& !isInRouteLineAppearanceMode()
-				&& !isInGpsFilteringMode();
+				&& !isInGpsFilteringMode()
+				&& !isSelectingTilesZone();
 		boolean showTopControls = !mapActivity.shouldHideTopControls()
 				|| (isInTrackMenuMode() && !isPortrait());
 		return showTopControls
@@ -121,7 +126,8 @@ public class WidgetsVisibilityHelper {
 				|| isInWaypointsChoosingMode()
 				|| isInFollowTrackMode()
 				|| isInRouteLineAppearanceMode()
-				|| isInGpsFilteringMode();
+				|| isInGpsFilteringMode()
+				|| isSelectingTilesZone();
 	}
 
 	public boolean shouldShowTopButtons() {
@@ -133,7 +139,8 @@ public class WidgetsVisibilityHelper {
 				&& !isInWaypointsChoosingMode()
 				&& !isInFollowTrackMode()
 				&& !isInRouteLineAppearanceMode()
-				&& !isInGpsFilteringMode();
+				&& !isInGpsFilteringMode()
+				&& !isSelectingTilesZone();
 	}
 
 	public boolean shouldShowBackToLocationButton() {
@@ -143,7 +150,8 @@ public class WidgetsVisibilityHelper {
 				&& !isInWaypointsChoosingMode()
 				&& !isInFollowTrackMode()
 				&& !isInRouteLineAppearanceMode()
-				&& !isInGpsFilteringMode();
+				&& !isInGpsFilteringMode()
+				&& !isSelectingTilesZone();
 		boolean showTopControls = !mapActivity.shouldHideTopControls()
 				|| (isInTrackMenuMode() && !isPortrait());
 		return showTopControls
@@ -159,7 +167,8 @@ public class WidgetsVisibilityHelper {
 				&& !isInChoosingRoutesMode()
 				&& !isInWaypointsChoosingMode()
 				&& !isInPlanRouteMode()
-				&& isRouteCalculated();
+				&& isRouteCalculated()
+				&& !isSelectingTilesZone();
 		/*
 				&& !isDashboardVisible()
 				&& !isInGpxDetailsMode()
@@ -175,7 +184,8 @@ public class WidgetsVisibilityHelper {
 
 	public boolean shouldShowDownloadMapWidget() {
 		return !isInRouteLineAppearanceMode()
-				&& !isInGpsFilteringMode();
+				&& !isInGpsFilteringMode()
+				&& !isSelectingTilesZone();
 	}
 
 	private boolean isQuickActionLayerOn() {
@@ -266,6 +276,10 @@ public class WidgetsVisibilityHelper {
 
 	private boolean isInGpsFilteringMode() {
 		return mapActivity.getGpsFilterFragment() != null;
+	}
+
+	private boolean isSelectingTilesZone() {
+		return mapActivity.getDownloadTilesFragment() != null;
 	}
 
 	private boolean isMapLinkedToLocation() {

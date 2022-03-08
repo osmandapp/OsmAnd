@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 public class ListStringPreference extends StringPreference {
 
 	private String delimiter;
@@ -72,10 +75,12 @@ public class ListStringPreference extends StringPreference {
 		return false;
 	}
 
+	@Nullable
 	public List<String> getStringsList() {
 		return getStringsListForProfile(getApplicationMode());
 	}
 
+	@Nullable
 	public List<String> getStringsListForProfile(ApplicationMode appMode) {
 		final String listAsString = getModeValue(appMode);
 		if (listAsString != null) {

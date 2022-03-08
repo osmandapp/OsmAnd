@@ -134,9 +134,9 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		parkingEvent.resetToDefault();
 		parkingStartTime.resetToDefault();
 		parkingPosition = null;
-		FavouritePoint pnt = app.getFavorites().getSpecialPoint(SpecialPointType.PARKING);
+		FavouritePoint pnt = app.getFavoritesHelper().getSpecialPoint(SpecialPointType.PARKING);
 		if (pnt != null) {
-			app.getFavorites().deleteFavourite(pnt);
+			app.getFavoritesHelper().deleteFavourite(pnt);
 		}
 		return true;
 	}
@@ -277,7 +277,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 
 	void showContextMenuIfNeeded(final MapActivity mapActivity, boolean animated) {
 		MapContextMenu menu = mapActivity.getContextMenu();
-		FavouritePoint pnt = app.getFavorites().getSpecialPoint(SpecialPointType.PARKING);
+		FavouritePoint pnt = app.getFavoritesHelper().getSpecialPoint(SpecialPointType.PARKING);
 		if (menu.isVisible()) {
 			menu.hide(animated);
 			menu.show(new LatLon(parkingPosition.getLatitude(), parkingPosition.getLongitude()),
@@ -303,9 +303,9 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				showDeleteEventWarning(activity);
 				cancelParking();
 				if (activity instanceof MapActivity) {
-					FavouritePoint pnt = app.getFavorites().getSpecialPoint(SpecialPointType.PARKING);
+					FavouritePoint pnt = app.getFavoritesHelper().getSpecialPoint(SpecialPointType.PARKING);
 					if(pnt != null) {
-						app.getFavorites().deleteFavourite(pnt);
+						app.getFavoritesHelper().deleteFavourite(pnt);
 					}
 					((MapActivity) activity).getContextMenu().close();
 				}
@@ -382,7 +382,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				cal.add(Calendar.HOUR_OF_DAY, timePicker.getCurrentHour());
 				cal.add(Calendar.MINUTE, timePicker.getCurrentMinute());
 				setParkingTime(cal.getTimeInMillis());
-				app.getFavorites().setParkingPoint(getParkingPosition(), null, getParkingTime(), isParkingEventAdded());
+				app.getFavoritesHelper().setParkingPoint(getParkingPosition(), null, getParkingTime(), isParkingEventAdded());
 				CheckBox addCalendarEvent = (CheckBox) setTimeParking.findViewById(R.id.check_event_in_calendar);
 				if (addCalendarEvent.isChecked()) {
 					addCalendarEvent(setTimeParking.getContext());

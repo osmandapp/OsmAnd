@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
@@ -106,6 +106,12 @@ public class WptPtEditor extends PointEditor {
 		return wpt;
 	}
 
+	@Nullable
+	@Override
+	public String getPreselectedIconName() {
+		return isNew && wpt != null ? wpt.getIconName() : null;
+	}
+
 	@Override
 	public String getFragmentTag() {
 		return TAG;
@@ -151,13 +157,13 @@ public class WptPtEditor extends PointEditor {
 		gpxSelected = selectedGpxFile != null;
 
 		if (!Algorithms.isEmpty(categoryName)) {
-			FavouritesDbHelper.FavoriteGroup category = mapActivity.getMyApplication()
-					.getFavorites()
+			FavoriteGroup category = mapActivity.getMyApplication()
+					.getFavoritesHelper()
 					.getGroup(categoryName);
 
 			if (category == null) {
 				mapActivity.getMyApplication()
-						.getFavorites()
+						.getFavoritesHelper()
 						.addEmptyCategory(categoryName, categoryColor);
 			}
 

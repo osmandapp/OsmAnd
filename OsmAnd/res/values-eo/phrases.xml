@@ -229,7 +229,7 @@
     <string name="poi_tree">Arbo</string>
     <string name="poi_wiki_lang_ar">Vikipedio Araba</string>
     <string name="poi_library">Biblioteko</string>
-    <string name="poi_retail">Komercejo</string>
+    <string name="poi_retail">Komerca tereno</string>
     <string name="poi_atv">Ĉiuterenveturil-vendejo</string>
     <string name="poi_cosmetics">Kosmetikaĵ-vendejo</string>
     <string name="poi_sewing">Kudrilar-vendejo</string>
@@ -4283,4 +4283,18 @@
     <string name="poi_blowhole">Blov-truo al mar-kaverno</string>
     <string name="poi_skate">Rultabula vendejo</string>
     <string name="poi_hospice">Hospicio</string>
+    <string name="poi_telecommunication">Oficejo de telekomunikada firmao</string>
+    <string name="poi_avalanche_transceiver">Loktrovilo de lavanga viktimo;lavango;lokalizilo lavanga;detektilo lavanga;Pieps</string>
+    <string name="poi_avalanche_transceiver_training">Ekzercejo pri loktrovilo de lavanga viktimo</string>
+    <string name="poi_avalanche_transceiver_checkpoint">Kontrolilo de loktrovilo de lavanga viktimo</string>
+    <string name="poi_access_permit">Paspermeso postulata</string>
+    <string name="poi_parcel_locker">Poŝt-aŭtomato</string>
+    <string name="poi_board_type_art">arto</string>
+    <string name="poi_board_type_planet_walk">modelo de Suna sistemo</string>
+    <string name="poi_board_type_sight">nuna vido</string>
+    <string name="poi_board_type_welcome_sign">bonvena signo</string>
+    <string name="poi_tiles">Kahela vendejo</string>
+    <string name="poi_board_type_sport">sporto</string>
+    <string name="poi_landuse_education">Edukada institucio</string>
+    <string name="poi_greenery">Vegetaĵa tereno</string>
 </resources>

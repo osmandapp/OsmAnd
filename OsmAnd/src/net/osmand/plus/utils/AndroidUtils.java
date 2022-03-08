@@ -58,12 +58,14 @@ import android.widget.Toast;
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.text.TextUtilsCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentManager;
@@ -78,6 +80,7 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.lang.reflect.Field;
+import java.nio.ByteBuffer;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -108,7 +111,7 @@ public class AndroidUtils {
 		return context.getResources().getConfiguration().keyboard != Configuration.KEYBOARD_NOKEYS;
 	}
 
-	public static void softKeyboardDelayed(final Activity activity, final View view) {
+	public static void softKeyboardDelayed(@NonNull Activity activity, @NonNull View view) {
 		view.post(() -> {
 			if (!isHardwareKeyboardAvailable(view.getContext())) {
 				showSoftKeyboard(activity, view);
@@ -116,7 +119,7 @@ public class AndroidUtils {
 		});
 	}
 
-	public static void showSoftKeyboard(final Activity activity, final View view) {
+	public static void showSoftKeyboard(@NonNull Activity activity, @NonNull View view) {
 		InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 		if (imm != null) {
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -127,7 +130,7 @@ public class AndroidUtils {
 		}
 	}
 
-	public static void hideSoftKeyboard(final Activity activity, final View input) {
+	public static void hideSoftKeyboard(@NonNull Activity activity, @Nullable View input) {
 		InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
 		if (inputMethodManager != null) {
 			if (input != null) {
@@ -152,6 +155,36 @@ public class AndroidUtils {
 			bm.recycle();
 		}
 		return resizedBitmap;
+	}
+
+	public static byte[] getByteArrayFromBitmap(@NonNull Bitmap bitmap) {
+		int size = bitmap.getRowBytes() * bitmap.getHeight();
+		ByteBuffer byteBuffer = ByteBuffer.allocate(size);
+		bitmap.copyPixelsToBuffer(byteBuffer);
+		return byteBuffer.array();
+	}
+
+	public static Bitmap createScaledBitmapWithTint(final Context ctx, @DrawableRes int drawableId, float scale, int tint) {
+		Drawable drawableIcon = AppCompatResources.getDrawable(ctx, drawableId);
+		if (drawableIcon != null) {
+			DrawableCompat.setTint(DrawableCompat.wrap(drawableIcon), tint);
+		}
+		Bitmap bitmap = drawableToBitmap(drawableIcon, true);
+		if (bitmap != null && scale != 1f && scale > 0.0f) {
+			bitmap = scaleBitmap(bitmap,
+					(int) (bitmap.getWidth() * scale), (int) (bitmap.getHeight() * scale), false);
+		}
+
+		return bitmap;
+	}
+
+	public static Bitmap createScaledBitmap(Drawable drawable, float scale) {
+		int width = (int) (drawable.getIntrinsicWidth() * scale);
+		int height = (int) (drawable.getIntrinsicHeight() * scale);
+		width += width % 2 == 1 ? 1 : 0;
+		height += height % 2 == 1 ? 1 : 0;
+
+		return createScaledBitmap(drawable, width, height);
 	}
 
 	public static Bitmap createScaledBitmap(Drawable drawable, int width, int height) {
@@ -220,7 +253,7 @@ public class AndroidUtils {
 			while (i < text.length() && i != -1) {
 				ImageSpan span = new ImageSpan(icon) {
 					public void draw(Canvas canvas, CharSequence text, int start, int end,
-									 float x, int top, int y, int bottom, Paint paint) {
+					                 float x, int top, int y, int bottom, Paint paint) {
 						Drawable drawable = getDrawable();
 						canvas.save();
 						int transY = bottom - drawable.getBounds().bottom;
@@ -788,23 +821,21 @@ public class AndroidUtils {
 		return isLayoutRtl(ctx) ? R.drawable.ic_arrow_forward : R.drawable.ic_arrow_back;
 	}
 
-	public static Drawable getDrawableForDirection(@NonNull Context ctx,
-												   @NonNull Drawable drawable) {
-		return isLayoutRtl(ctx) ? getMirroredDrawable(ctx, drawable) : drawable;
+	public static Drawable getDrawableForDirection(@NonNull Context ctx, @NonNull Drawable drawable) {
+		return isLayoutRtl(ctx) ? getMirroredDrawable(drawable) : drawable;
 	}
 
-	public static Drawable getMirroredDrawable(@NonNull Context ctx,
-											   @NonNull Drawable drawable) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			drawable.setAutoMirrored(true);
-			return drawable;
-		}
-		Bitmap bitmap = drawableToBitmap(drawable);
-		return new BitmapDrawable(ctx.getResources(), flipBitmapHorizontally(bitmap));
+	public static Drawable getMirroredDrawable(@NonNull Drawable drawable) {
+		drawable.setAutoMirrored(true);
+		return drawable;
 	}
 
 	public static Bitmap drawableToBitmap(Drawable drawable) {
-		if (drawable instanceof BitmapDrawable) {
+		return drawableToBitmap(drawable, false);
+	}
+
+	public static Bitmap drawableToBitmap(Drawable drawable, boolean noOptimization) {
+		if (drawable instanceof BitmapDrawable && !noOptimization) {
 			BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
 			if (bitmapDrawable.getBitmap() != null) {
 				return bitmapDrawable.getBitmap();
@@ -919,7 +950,7 @@ public class AndroidUtils {
 	}
 
 	public static CharSequence getStyledString(CharSequence baseString, CharSequence stringToInsertAndStyle,
-											   CharacterStyle baseStyle, CharacterStyle replaceStyle) {
+	                                           CharacterStyle baseStyle, CharacterStyle replaceStyle) {
 		int indexOfPlaceholder = baseString.toString().indexOf(STRING_PLACEHOLDER);
 		if (replaceStyle != null || baseStyle != null || indexOfPlaceholder != -1) {
 			String nStr = baseString.toString().replace(STRING_PLACEHOLDER, stringToInsertAndStyle);
@@ -992,6 +1023,36 @@ public class AndroidUtils {
 			builder.append(w);
 		}
 		return builder;
+	}
+
+	@NonNull
+	public static String checkEmoticons(@NonNull String name) {
+		char[] chars = name.toCharArray();
+		char ch1;
+		char ch2;
+
+		int index = 0;
+		StringBuilder builder = new StringBuilder();
+		while (index < chars.length) {
+			ch1 = chars[index];
+			if ((int) ch1 == 0xD83C) {
+				ch2 = chars[index + 1];
+				if ((int) ch2 >= 0xDF00 && (int) ch2 <= 0xDFFF) {
+					index += 2;
+					continue;
+				}
+			} else if ((int) ch1 == 0xD83D) {
+				ch2 = chars[index + 1];
+				if ((int) ch2 >= 0xDC00 && (int) ch2 <= 0xDDFF) {
+					index += 2;
+					continue;
+				}
+			}
+			builder.append(ch1);
+			++index;
+		}
+		builder.trimToSize(); // remove trailing null characters
+		return builder.toString();
 	}
 
 	@NonNull
@@ -1083,7 +1144,7 @@ public class AndroidUtils {
 	}
 
 	@Nullable
-	private static String getStringByProperty(@NonNull Context ctx, @NonNull String property) {
+	public static String getStringByProperty(@NonNull Context ctx, @NonNull String property) {
 		try {
 			Field field = R.string.class.getField(property);
 			return getStringForField(ctx, field);

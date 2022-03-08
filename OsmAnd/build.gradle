@@ -36,9 +36,9 @@ android {
 
 	defaultConfig {
 		minSdkVersion 23
-		versionCode 410
+		versionCode 421
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
-		versionName "4.1.0"
+		versionName "4.2.0"
 		versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
 		versionName System.getenv("APK_VERSION_SUFFIX")? versionName + System.getenv("APK_VERSION_SUFFIX").toString(): versionName
 	}
@@ -70,29 +70,29 @@ android {
 			manifest.srcFile "AndroidManifest-debug.xml"
 		}
 		androidFull {
-			java.srcDirs = ["src-nogms", "src-google"]
+			java.srcDirs = ["src-google"]
 		}
 		gplayFull {
-			java.srcDirs = ["src-gms", "src-google"]
+			java.srcDirs = ["src-google"]
 		}
 		gplayFree {
-			java.srcDirs = ["src-gms", "src-google"]
+			java.srcDirs = ["src-google"]
 			manifest.srcFile "AndroidManifest-gplayFree.xml"
 		}
 		nightlyFree {
-			java.srcDirs = ["src-nogms", "src-google"]
+			java.srcDirs = ["src-google"]
 			manifest.srcFile "AndroidManifest-nightlyFree.xml"
 		}
 		amazonFree {
-			java.srcDirs = ["src-nogms", "src-amazon"]
+			java.srcDirs = ["src-amazon"]
 			manifest.srcFile "AndroidManifest-amazonFree.xml"
 		}
 		amazonFull {
-			java.srcDirs = ["src-nogms", "src-amazon"]
+			java.srcDirs = ["src-amazon"]
 			manifest.srcFile "AndroidManifest-amazonFull.xml"
 		}
 		huawei {
-			java.srcDirs = ["src-nogms", "src-huawei"]
+			java.srcDirs = ["src-huawei"]
 			manifest.srcFile "AndroidManifest-huawei.xml"
 		}
 
@@ -214,9 +214,6 @@ dependencies {
 
 	huaweiImplementation 'com.huawei.hms:iap:5.0.2.300'
 	huaweiImplementation 'com.huawei.hms:appservice:5.0.4.303'
-
-	gplayFreeImplementation 'com.google.android.gms:play-services-location:18.0.0'
-	gplayFullImplementation 'com.google.android.gms:play-services-location:18.0.0'
 
 	amazonFreeImplementation "com.amazon:in-app-purchasing:2.0.76@jar"
 	amazonFullImplementation "com.amazon:in-app-purchasing:2.0.76@jar"

@@ -4330,7 +4330,7 @@
     <string name="horseback_riding">Верхова їзда</string>
     <string name="routing_attr_prefer_horse_routes_description">Надавати перевагу кінним маршрутам</string>
     <string name="routing_attr_prefer_horse_routes_name">Надавати перевагу кінним маршрутам</string>
-    <string name="routing_attr_only_permitted_ways_description">Використовуйте лише явно дозволені шляхи (доріжки, просіки тощо)</string>
+    <string name="routing_attr_only_permitted_ways_description">Використовувати лише явно дозволені шляхи (доріжки, просіки тощо)</string>
     <string name="routing_attr_only_permitted_ways_name">Явний дозвіл використання вулиць</string>
     <string name="routing_attr_only_permitted_streets_description">Використовувати лише явно дозволені вулиці</string>
     <string name="routing_attr_only_permitted_streets_name">Явний дозвіл використання вулиць</string>
@@ -4513,9 +4513,35 @@
     <string name="rendering_value_all_name">Усі</string>
     <string name="rendering_value_omit_name">Пропустити</string>
     <string name="rendering_attr_seabedDetail_name">Подробиці про морське дно</string>
-    <string name="save_track_to_gpx_descrp">Автозапис треків під час навігації. Після завершення запису, трек буде збережено автоматично.</string>
-    <string name="gpx_no_routes_descr">Ви можете використовувати інструмент «%1$s», щоб записувати маршрут у файл.</string>
+    <string name="save_track_to_gpx_descrp">Автозапуск запису треку під час навігації та автоматичне збереження після завершення.</string>
+    <string name="gpx_no_routes_descr">Ви можете використовувати інструмент «%1$s», щоб зберегти маршрут як файл.</string>
     <string name="gpx_no_routes_title">Маршрути відсутні</string>
     <string name="quick_action_add_route_descr">Кнопка запуску маршруту з середини екрана.</string>
-    <string name="please_provide_group_name_message">Укажіть назву групи.</string>
+    <string name="please_provide_group_name_message">Назвіть групу.</string>
+    <string name="list_of_groups">Список груп</string>
+    <string name="select_suggested_points">Виберіть запропоновані точки</string>
+    <string name="selected_waypoints_descr">Вибрані маршрутні точки будуть додані до треку \"%1$s\"</string>
+    <string name="all_groups">Усі групи</string>
+    <string name="exit_import_descr">Вийти без збереження змін\?</string>
+    <string name="shared_string_reading_file">Читання файлу…</string>
+    <string name="points_selection_descr">Закрити й відкинути всі зміни\?</string>
+    <string name="exit_import">Вийти\?</string>
+    <string name="import_tracks">Імпорт треків</string>
+    <string name="import_tracks_descr">%1$s, містить %2$s окремі треки. Виберіть треки, які потрібно імпортувати.</string>
+    <string name="location_source_descr">Зазвичай OsmAnd, встановлений з Google Play, використовує %1$s для визначення місцеположення.
+\n
+\nЯкщо дані про місцеположення не точні або ви користуєтеся пристроєм без %2$s, спробуйте перемикнутися на «%3$s»</string>
+    <string name="location_source">Джерело визначення розташування</string>
+    <string name="shared_string_shape">Форма</string>
+    <string name="default_appearance_desc">Типовий колір, піктограма та форма застосовуватимуться до доданих улюблених точок у групі.</string>
+    <string name="default_appearance">Типовий зовнішній вигляд</string>
+    <string name="edit_category">Редагувати категорію</string>
+    <string name="zoom_levels_difference_description">Значна різниця між масштабами може збільшити розмір завантажених даних.</string>
+    <string name="shared_string_complete">завершено</string>
+    <string name="stop_download">Зупинити завантаження</string>
+    <string name="stop_and_exit">Зупинити й вийти</string>
+    <string name="number_of_tiles">Кількість тайлів</string>
+    <string name="estimated_download_size">Приблизний розмір завантаження</string>
+    <string name="stop_download_desc">Завантаження не завершено. Якщо зараз перервати його, для перегляду буде доступна лише частина тайлів.</string>
+    <string name="move_map_to_select_area">Перемістіть мапу, щоб вибрати потрібну ділянку.</string>
 </resources>

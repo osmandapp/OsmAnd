@@ -50,9 +50,7 @@ class GpxImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 			}
 		} catch (FileNotFoundException e) {
 			//
-		} catch (IOException e) {
-			ImportHelper.log.error(e.getMessage(), e);
-		} catch (SecurityException e) {
+		} catch (IOException | SecurityException e) {
 			ImportHelper.log.error(e.getMessage(), e);
 		} finally {
 			Algorithms.closeStream(is);

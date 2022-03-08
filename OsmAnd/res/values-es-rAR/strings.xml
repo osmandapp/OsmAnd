@@ -416,7 +416,7 @@
 \n Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú principal y en un widget sobre el mapa. Se puede añadir una alarma de recordatorio al calendario de Android.</string>
     <string name="osmand_distance_planning_plugin_description">Crea caminos pulsando el mapa, usando o modificando archivos GPX existentes, para planificar un viaje y medir la distancia entre puntos. El resultado puede guardarse como un archivo GPX y usarse luego para la orientación.</string>
     <string name="osmand_accessibility_description">Activa las funciones de accesibilidad del dispositivo, directamente en OsmAnd. Facilita por ejemplo, el ajuste de la velocidad de la voz para voces de texto a voz, la configuración de navegación del pad direccional, usando la rueda de desplazamiento para el control del zum, o la retroalimentación de texto a voz, por ejemplo, para anunciar la ubicación automáticamente.</string>
-    <string name="osm_editing_plugin_description">Haz contribuciones en OSM, como el crear o modificar objetos PDI, abrir o comentar notas de OSM y contribuir con archivos de trazas GPX grabados en OsmAnd, proporcionando tu nombre de usuario y contraseña. OpenStreetMap.org es un proyecto de mapeo de dominio público, global, libre e impulsado por la comunidad.</string>
+    <string name="osm_editing_plugin_description">Haz contribuciones en OpenStreetMap, como el crear o modificar objetos PDI, abrir o comentar notas de OSM y contribuir con archivos de trazas GPX grabados en OsmAnd, proporcionando tu nombre de usuario y contraseña. OpenStreetMap.org es un proyecto de mapeo de dominio público, global, libre e impulsado por la comunidad.</string>
     <string name="osmand_development_plugin_description">Ajusta las funciones de desarrollo y depuración, como la simulación de navegación, el rendimiento del renderizado o las indicaciones por voz. Destinado para desarrolladores, no es necesario para el normal uso de la aplicación.</string>
     <string name="world_ski_missing">Descargar el mapa especial sin conexión para mostrar las instalaciones de esquí.</string>
     <string name="nautical_maps_missing">Descargar el mapa especial sin conexión para mostrar los detalles náuticos.</string>
@@ -985,7 +985,7 @@
     <string name="local_openstreetmap_uploading">Subiendo…</string>
     <string name="local_openstreetmap_were_uploaded">{0} PDI/notas de OSM subidos</string>
     <string name="local_openstreetmap_uploadall">Enviar todos</string>
-    <string name="local_openstreetmap_upload">Subir edición a OSM</string>
+    <string name="local_openstreetmap_upload">Subir a OpenStreetMap</string>
     <string name="local_openstreetmap_delete">Borrar edición</string>
     <string name="local_openstreetmap_descr_title">Edición asíncrona OSM:</string>
     <string name="local_openstreetmap_settings">PDI/notas de OSM guardados en el dispositivo</string>
@@ -1263,7 +1263,7 @@
     <string name="error_reading_gpx">No se pudieron leer los datos GPX.</string>
     <string name="vector_data">Mapas vectoriales sin conexión</string>
     <string name="transport_context_menu">Buscar transporte en parada</string>
-    <string name="poi_context_menu_modify">Modificar PDI</string>
+    <string name="poi_context_menu_modify">Editar PDI</string>
     <string name="poi_context_menu_delete">Borrar PDI</string>
     <string name="rotate_map_compass_opt">Dirección de la brújula</string>
     <string name="rotate_map_bearing_opt">Dirección del movimiento</string>
@@ -1743,7 +1743,7 @@
     <string name="lang_als">Albano (Tosk)</string>
     <string name="save_poi_without_poi_type_message">¿Guardar el PDI sin especificar el tipo\?</string>
     <string name="shared_string_location">Ubicación</string>
-    <string name="poi_context_menu_modify_osm_change">Modificar cambio OSM</string>
+    <string name="poi_context_menu_modify_osm_change">Editar cambio de OSM</string>
     <string name="osm_edit_modified_poi">PDI de OSM modificado</string>
     <string name="osm_edit_deleted_poi">PDI de OSM borrado</string>
     <string name="context_menu_item_open_note">Abrir nota de OSM</string>
@@ -2354,7 +2354,7 @@
     <string name="type_postcode">Escribe el código postal</string>
     <string name="nearest_cities">Ciudades cercanas</string>
     <string name="select_city">Elegir la ciudad o pueblo</string>
-    <string name="select_postcode">Búsqueda por código postal</string>
+    <string name="select_postcode">Buscar por código postal</string>
     <string name="type_address">Escribe la dirección</string>
     <string name="select_street">Elegir la calle</string>
     <string name="shared_string_in_name">en %1$s</string>
@@ -2512,8 +2512,8 @@
     <string name="make_round_trip_descr">Duplica el punto de partida y lo añade como destino.</string>
     <string name="make_round_trip">Viaje de ida y vuelta</string>
     <string name="osn_modify_dialog_error">No se pudo modificar la nota.</string>
-    <string name="osn_modify_dialog_title">Modificar nota</string>
-    <string name="context_menu_item_modify_note">Modificar nota de OSM</string>
+    <string name="osn_modify_dialog_title">Editar nota</string>
+    <string name="context_menu_item_modify_note">Editar nota de OSM</string>
     <string name="rendering_value_darkyellow_name">Amarillo oscuro</string>
     <string name="show_map">Mostrar mapa</string>
     <string name="route_is_calculated">Ruta calculada</string>
@@ -3136,7 +3136,7 @@
     <string name="route_parameters_info">Ajustes para la navegación del perfil elegido «%1$s».</string>
     <string name="wake_time">Tiempo de espera al encender</string>
     <string name="units_and_formats">Unidades y formatos</string>
-    <string name="map_look_descr">Apariencia del mapa</string>
+    <string name="map_look_descr">Aspecto del mapa</string>
     <string name="map_look">Aspecto del mapa</string>
     <string name="list_of_installed_plugins">Complementos instalados</string>
     <string name="configure_navigation">Configurar la navegación</string>
@@ -4513,9 +4513,35 @@
     <string name="rendering_value_category_name">Categoría</string>
     <string name="rendering_value_all_name">Todos</string>
     <string name="rendering_value_omit_name">Omitir</string>
-    <string name="save_track_to_gpx_descrp">Inicia la grabación de la traza automáticamente mientras la navegación está en curso. Al finalizar, la pista se guardará automáticamente.</string>
+    <string name="save_track_to_gpx_descrp">Inicia la grabación de la traza automáticamente mientras navegas y al finalizar, la traza se guardará automáticamente.</string>
     <string name="gpx_no_routes_title">Sin rutas</string>
-    <string name="gpx_no_routes_descr">Puedes usar la herramienta «%1$s» para añadir la ruta al archivo.</string>
+    <string name="gpx_no_routes_descr">Usa la herramienta «%1$s» para guardar la ruta como un archivo.</string>
     <string name="quick_action_add_route_descr">Un botón que inicia una ruta desde el centro de la pantalla.</string>
-    <string name="please_provide_group_name_message">Indica un nombre para el grupo.</string>
+    <string name="please_provide_group_name_message">Indica el nombre del grupo.</string>
+    <string name="selected_waypoints_descr">Los puntos de referencia marcados serán añadidos a la traza «%1$s»</string>
+    <string name="shared_string_reading_file">Leyendo archivo…</string>
+    <string name="all_groups">Todos los grupos</string>
+    <string name="list_of_groups">Lista de grupos</string>
+    <string name="points_selection_descr">¿Cerrar y se perder todos los cambios\?</string>
+    <string name="exit_import_descr">¿Salir sin guardar los cambios\?</string>
+    <string name="exit_import">¿Salir\?</string>
+    <string name="import_tracks">Importar trazas</string>
+    <string name="import_tracks_descr">En «%1$s» existen %2$s trazas separadas. Elige las trazas a importar.</string>
+    <string name="select_suggested_points">Marcar los puntos sugeridos</string>
+    <string name="location_source_descr">Si se instala OsmAnd desde Google Play, de forma predefinida se usa «%1$s» para definir la ubicación.
+\n
+\nSi obtienes información inexacta de la ubicación o usas un dispositivo sin «%2$s», intenta cambiar a «%3$s»</string>
+    <string name="location_source">Proveedor de ubicación</string>
+    <string name="shared_string_shape">Forma</string>
+    <string name="default_appearance_desc">La forma, el color y el icono predefinido serán aplicados a los puntos favoritos añadidos al grupo.</string>
+    <string name="default_appearance">Aspecto predefinido</string>
+    <string name="edit_category">Editar categoría</string>
+    <string name="stop_download">Parar descarga</string>
+    <string name="estimated_download_size">Tamaño estimado de descarga</string>
+    <string name="stop_and_exit">Parar y salir</string>
+    <string name="shared_string_complete">Completar</string>
+    <string name="stop_download_desc">La descarga está incompleta. Si interrumpes la descarga ahora, sólo podrás ver una parte de las teselas.</string>
+    <string name="number_of_tiles">Número de teselas</string>
+    <string name="move_map_to_select_area">Mover el mapa para elegir el área necesaria.</string>
+    <string name="zoom_levels_difference_description">La gran diferencia entre los niveles de zum, puede aumentar el tamaño de los datos descargados.</string>
 </resources>
