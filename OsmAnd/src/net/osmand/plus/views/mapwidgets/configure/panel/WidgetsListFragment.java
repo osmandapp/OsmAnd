@@ -69,7 +69,9 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		widgetsList = view.findViewById(R.id.widgets_list);
 		scrollView = view.findViewById(R.id.scroll_view);
 		listBtnChangeOrder = view.findViewById(R.id.change_order_button_in_list);
+		stickBtnChangeOrder = view.findViewById(R.id.change_order_button_in_bottom);
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(this);
+		setupBtnChangeOrder();
 		updateContent();
 		return view;
 	}
@@ -78,14 +80,10 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	public void onResume() {
 		super.onResume();
 		parentFragment.setCurrentListFragment(this);
-		setupBtnChangeOrder();
 	}
 
 	private void setupBtnChangeOrder() {
-		stickBtnChangeOrder = parentFragment.getBtnChangeOrder();
-		if (stickBtnChangeOrder != null) {
-			parentFragment.setupReorderButton(stickBtnChangeOrder);
-		}
+		parentFragment.setupReorderButton(stickBtnChangeOrder);
 		parentFragment.setupReorderButton(listBtnChangeOrder);
 	}
 
@@ -164,15 +162,9 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	}
 
 	private void updateReorderButtons() {
-		if (stickBtnChangeOrder != null && isCurrentTab()) {
-			int y1 = AndroidUtils.getViewOnScreenY(listBtnChangeOrder);
-			int y2 = AndroidUtils.getViewOnScreenY(stickBtnChangeOrder);
-			stickBtnChangeOrder.setVisibility(y1 <= y2 ? View.GONE : View.VISIBLE);
-		}
-	}
-
-	private boolean isCurrentTab() {
-		return parentFragment.getSelectedPanel() == panel;
+		int y1 = AndroidUtils.getViewOnScreenY(listBtnChangeOrder);
+		int y2 = AndroidUtils.getViewOnScreenY(stickBtnChangeOrder);
+		stickBtnChangeOrder.setVisibility(y1 <= y2 ? View.GONE : View.VISIBLE);
 	}
 
 	@Nullable

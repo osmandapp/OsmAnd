@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +21,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback;
 
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener;
 import com.google.android.material.tabs.TabLayout.Tab;
@@ -39,7 +43,8 @@ import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements OnNewOrderAppliedCallback {
+public class ConfigureWidgetsFragment extends BaseOsmAndFragment
+		implements OnNewOrderAppliedCallback, OnOffsetChangedListener {
 
 	public static final String TAG = ConfigureWidgetsFragment.class.getSimpleName();
 
@@ -53,10 +58,11 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements OnNe
 	private ApplicationMode appMode;
 
 	private View view;
+	private AppBarLayout appBar;
 	private Toolbar toolbar;
-	private View btnChangeOrder;
 	private TabLayout tabLayout;
 	private ViewPager2 viewPager;
+	private View compensationView;
 
 	private List<WidgetsPanel> availablePanels;
 	private WidgetsListFragment currentListFragment;
@@ -93,14 +99,15 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements OnNe
 			AndroidUtils.addStatusBarPadding21v(app, view);
 		}
 
+		appBar = view.findViewById(R.id.appbar);
 		toolbar = view.findViewById(R.id.toolbar);
 		tabLayout = view.findViewById(R.id.tab_layout);
-		btnChangeOrder = view.findViewById(R.id.change_order_button_in_bottom);
 		viewPager = view.findViewById(R.id.view_pager);
+		compensationView = view.findViewById(R.id.compensation_view);
+		appBar.addOnOffsetChangedListener(this);
 
 		setupToolbar();
 		setupTabLayout();
-		setupReorderButton(btnChangeOrder);
 
 		return view;
 	}
@@ -191,11 +198,6 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements OnNe
 		}
 	}
 
-	@Nullable
-	public View getBtnChangeOrder() {
-		return btnChangeOrder;
-	}
-
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
@@ -240,6 +242,13 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements OnNe
 			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 		}
 		return ColorUtilities.getListBgColorId(nightMode);
+	}
+
+	@Override
+	public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+		int height = toolbar.getHeight() - Math.abs(verticalOffset);
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, height);
+		compensationView.setLayoutParams(params);
 	}
 
 	@Override
