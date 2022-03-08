@@ -15,6 +15,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -24,6 +25,7 @@ public class BackupIconsView extends View {
 	private final int iconSize = AndroidUtils.dpToPx(getContext(), 36);
 	private final int rowMargin = AndroidUtils.dpToPx(getContext(), 16);
 	private final OsmandApplication app;
+	private final List<List<Integer>> iconsIds = new ArrayList<>(Arrays.asList(new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
 
 	public BackupIconsView(Context context, @Nullable AttributeSet attrs) {
 		super(context, attrs);
@@ -48,10 +50,16 @@ public class BackupIconsView extends View {
 			xOffset = rowMargin;
 		}
 
-		while (screenSize > 0) {
-			drawIcon(canvas, getIconId(), colorType.getColor(), xOffset, rowNumber);
+		if (iconsIds.get(rowNumber).isEmpty()) {
+			iconsIds.add(new ArrayList<>());
+			while (screenSize > 0) {
+				iconsIds.get(rowNumber).add(getIconId());
+				screenSize -= xOffsetStep;
+			}
+		}
+		for (int i = 0; i < iconsIds.get(rowNumber).size(); i++) {
+			drawIcon(canvas, iconsIds.get(rowNumber).get(i), colorType.getColor(), xOffset, rowNumber);
 			xOffset += xOffsetStep;
-			screenSize -= xOffsetStep;
 		}
 	}
 
