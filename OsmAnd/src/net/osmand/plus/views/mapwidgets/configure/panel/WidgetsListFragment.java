@@ -23,9 +23,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.WidgetsRegister;
 import net.osmand.plus.views.mapwidgets.configure.WidgetItem;
@@ -103,6 +101,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 
 	private void updateWidgetsList() {
 		widgetsList.removeAllViews();
+		int profileColor = appMode.getProfileColor(nightMode);
 		List<WidgetItem> widgets = WidgetsRegister.getSortedWidgets(appMode, panel, false);
 		for (WidgetItem widget : widgets) {
 			View view = inflater.inflate(R.layout.configure_screen_widget_item, widgetsList, false);
@@ -125,7 +124,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			CompoundButton cb = view.findViewById(R.id.compound_button);
 			cb.setChecked(isEnabled);
 			cb.setVisibility(View.VISIBLE);
-			UiUtilities.setupCompoundButton(cb, nightMode, CompoundButtonType.GLOBAL);
+			UiUtilities.setupCompoundButton(nightMode, profileColor, cb);
 
 			OnClickListener listener = v -> {
 				boolean isChecked = cb.isChecked();
@@ -148,7 +147,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 
 	private void setupListItemBackground(@NonNull View view) {
 		View button = view.findViewById(R.id.button_container);
-		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+		int activeColor = appMode.getProfileColor(nightMode);
 		Drawable background = UiUtilities.getColoredSelectableDrawable(app, activeColor, 0.3f);
 		AndroidUtils.setBackground(button, background);
 	}

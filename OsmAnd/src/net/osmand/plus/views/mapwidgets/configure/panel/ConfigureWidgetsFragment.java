@@ -1,5 +1,6 @@
 package net.osmand.plus.views.mapwidgets.configure.panel;
 
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -19,6 +20,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener;
 import com.google.android.material.tabs.TabLayout.Tab;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -138,6 +140,26 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements OnNe
 		TabLayoutMediator mediator = new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> { });
 		mediator.attach();
 
+		int profileColor = appMode.getProfileColor(nightMode);
+		int defaultIconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
+		tabLayout.setSelectedTabIndicatorColor(profileColor);
+		tabLayout.addOnTabSelectedListener(new OnTabSelectedListener() {
+			@Override
+			public void onTabSelected(Tab tab) {
+				tab.getIcon().setColorFilter(profileColor, PorterDuff.Mode.SRC_IN);
+			}
+
+			@Override
+			public void onTabUnselected(Tab tab) {
+				tab.getIcon().setColorFilter(defaultIconColor, PorterDuff.Mode.SRC_IN);
+			}
+
+			@Override
+			public void onTabReselected(Tab tab) {
+
+			}
+		});
+
 		for (int i = 0; i < tabLayout.getTabCount(); i++) {
 			Tab tab = tabLayout.getTabAt(i);
 			WidgetsPanel panel = availablePanels.get(i);
@@ -184,7 +206,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements OnNe
 
 	private void setupListItemBackground(@NonNull View view) {
 		View button = view.findViewById(R.id.button_container);
-		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+		int activeColor = appMode.getProfileColor(nightMode);;
 		Drawable background = UiUtilities.getColoredSelectableDrawable(app, activeColor, 0.3f);
 		AndroidUtils.setBackground(button, background);
 	}

@@ -34,7 +34,6 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.WidgetsRegister;
 import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment;
@@ -54,7 +53,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	private OsmandApplication app;
 	private MapActivity mapActivity;
 	private OsmandSettings settings;
-	private ApplicationMode selectedAppMode;
+	private ApplicationMode appMode;
 	private UiUtilities iconsCache;
 	private LayoutInflater inflater;
 
@@ -71,7 +70,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		app = requireMyApplication();
 		settings = app.getSettings();
 		mapActivity = (MapActivity) requireMyActivity();
-		selectedAppMode = settings.getApplicationMode();
+		appMode = settings.getApplicationMode();
 	}
 
 	@Nullable
@@ -143,7 +142,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 			item.rippleColor = profileColor;
 			item.bgSelectedColor = bgSelectedColor;
 			item.tag = am;
-			if (Algorithms.objectEquals(selectedAppMode, am)) {
+			if (Algorithms.objectEquals(appMode, am)) {
 				selectedItem = item;
 			}
 			items.add(item);
@@ -153,20 +152,16 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		modesToggle.setOnSelectChipListener(chip -> {
 			if (chip.tag instanceof ApplicationMode) {
 				ApplicationMode am = (ApplicationMode) chip.tag;
-				settings.setApplicationMode(am);
-				selectedAppMode = am;
+				appMode = am;
 				modesToggle.smoothScrollTo(chip);
+				settings.setApplicationMode(am);
+				fullUpdate();
 			}
 			return true;
 		});
 		if (selectedItem != null) {
 			modesToggle.scrollTo(selectedItem);
 		}
-		settings.APPLICATION_MODE.addListener(change -> {
-			if (getContext() != null) {
-				fullUpdate();
-			}
-		});
 	}
 
 	private void fullUpdate() {
@@ -185,12 +180,12 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		widgetsCard.addView(createButtonWithSwitch(
 				R.drawable.ic_action_appearance,
 				getString(R.string.map_widget_transparent),
-				prefTransparentWidgets.get(),
+				prefTransparentWidgets.getModeValue(appMode),
 				false,
 				false,
 				v -> {
 					boolean enabled = prefTransparentWidgets.get();
-					prefTransparentWidgets.set(!enabled);
+					prefTransparentWidgets.setModeValue(appMode, !enabled);
 					mapActivity.updateApplicationModeSettings();
 				}
 		));
@@ -211,12 +206,12 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		buttonsCard.addView(createButtonWithSwitch(
 				R.drawable.ic_action_ruler_line,
 				getString(R.string.map_widget_distance_by_tap),
-				prefDistanceRuler.get(),
+				prefDistanceRuler.getModeValue(appMode),
 				true,
 				false,
 				v -> {
 					boolean enabled = prefDistanceRuler.get();
-					prefDistanceRuler.set(!enabled);
+					prefDistanceRuler.setModeValue(appMode, !enabled);
 					mapActivity.updateApplicationModeSettings();
 				}
 		));
@@ -229,7 +224,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 				R.drawable.ic_quick_action,
 				getString(R.string.configure_screen_quick_action),
 				desc,
-				qaRegistry.isQuickActionOn(),
+				settings.QUICK_ACTION.getModeValue(appMode),
 				v -> QuickActionListFragment.showInstance(requireActivity(), false)
 		));
 	}
@@ -237,7 +232,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	private void showConfigureWidgetsScreen(WidgetsPanel panel) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			ConfigureWidgetsFragment.showInstance(activity, panel, selectedAppMode);
+			ConfigureWidgetsFragment.showInstance(activity, panel, appMode);
 		}
 	}
 
@@ -249,7 +244,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	private View createWidgetGroupView(WidgetsPanel panel,
 	                                   boolean showShortDivider,
 	                                   boolean showLongDivider) {
-		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+		int activeColor = appMode.getProfileColor(nightMode);
 		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 
 		View view = inflater.inflate(R.layout.configure_screen_list_item, null);
@@ -257,7 +252,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		TextView tvTitle = view.findViewById(R.id.title);
 		TextView tvDesc = view.findViewById(R.id.items_count_descr);
 
-		int count = WidgetsRegister.getWidgets(selectedAppMode, panel, false).size();
+		int count = WidgetsRegister.getWidgets(appMode, panel, false).size();
 		int iconColor = count > 0 ? activeColor : defColor;
 		Drawable icon = getPaintedContentIcon(panel.getIconId(), iconColor);
 		ivIcon.setImageDrawable(icon);
@@ -287,7 +282,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	                                    boolean showShortDivider,
 	                                    boolean showLongDivider,
 	                                    @Nullable OnClickListener listener) {
-		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+		int activeColor = appMode.getProfileColor(nightMode);
 		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		int iconColor = enabled ? activeColor : defColor;
 		View view = inflater.inflate(R.layout.configure_screen_list_item, null);
@@ -303,7 +298,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		CompoundButton cb = view.findViewById(R.id.compound_button);
 		cb.setChecked(enabled);
 		cb.setVisibility(View.VISIBLE);
-		UiUtilities.setupCompoundButton(cb, nightMode, CompoundButtonType.GLOBAL);
+		UiUtilities.setupCompoundButton(nightMode, activeColor, cb);
 
 		if (showShortDivider) {
 			view.findViewById(R.id.short_divider).setVisibility(View.VISIBLE);
@@ -333,7 +328,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	                                  @NonNull String desc,
 	                                  boolean enabled,
 	                                  OnClickListener listener) {
-		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+		int activeColor = appMode.getProfileColor(nightMode);
 		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		int iconColor = enabled ? activeColor : defColor;
 		View view = inflater.inflate(R.layout.configure_screen_list_item, null);
@@ -356,8 +351,8 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 
 	private void setupListItemBackground(@NonNull View view) {
 		View button = view.findViewById(R.id.button_container);
-		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
-		Drawable background = UiUtilities.getColoredSelectableDrawable(app, activeColor, 0.3f);
+		int color = appMode.getProfileColor(nightMode);
+		Drawable background = UiUtilities.getColoredSelectableDrawable(app, color, 0.3f);
 		AndroidUtils.setBackground(button, background);
 	}
 
