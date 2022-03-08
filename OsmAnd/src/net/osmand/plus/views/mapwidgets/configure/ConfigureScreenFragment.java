@@ -101,12 +101,14 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	public void onStart() {
 		super.onStart();
 		app.getQuickActionRegistry().addUpdatesListener(this);
+		mapActivity.disableDrawer();
 	}
 
 	@Override
 	public void onStop() {
 		super.onStop();
 		app.getQuickActionRegistry().removeUpdatesListener(this);
+		mapActivity.enableDrawer();
 	}
 
 	private void setupToolbar() {
