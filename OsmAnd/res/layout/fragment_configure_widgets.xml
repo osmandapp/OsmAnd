@@ -146,6 +146,11 @@
 				android:layout_height="0dp"
 				android:layout_weight="1" />
 
+			<View
+				android:id="@+id/compensation_view"
+				android:layout_width="match_parent"
+				android:layout_height="0dp" />
+
 		</LinearLayout>
 
 		<androidx.appcompat.widget.AppCompatImageView
@@ -156,28 +161,5 @@
 			osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
 
 	</FrameLayout>
-
-	<LinearLayout
-		android:id="@+id/change_order_button_in_bottom"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_gravity="bottom"
-		android:orientation="vertical">
-
-		<View
-			android:layout_width="match_parent"
-			android:layout_height="1dp"
-			android:background="?attr/divider_color_basic" />
-
-		<FrameLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:background="?attr/list_background_color">
-
-			<include layout="@layout/configure_screen_reorder_button" />
-
-		</FrameLayout>
-
-	</LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
