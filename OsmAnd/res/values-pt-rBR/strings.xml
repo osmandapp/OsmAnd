@@ -4037,7 +4037,7 @@
     <string name="trip_recording_logging_interval_info">O intervalo de registro define o período de tempo no qual OsmAnd solicitará os dados da posição atual.</string>
     <string name="show_start_dialog">Mostrar caixa de diálogo inicial</string>
     <string name="trip_recording_show_start_dialog_setting">Se desativado, a gravação começará imediatamente após tocar no widget ou item de menu, pulando a caixa de diálogo de confirmação.</string>
-    <string name="customize_route_line">Personalizar linha de rota</string>
+    <string name="customize_route_line">Customizar linha da rota</string>
     <string name="shared_string_route_line">Linha de rota</string>
     <string name="specify_color_for_map_mode">Especifique a cor para o modo de mapa %1$s.</string>
     <string name="release_4_0_beta">• Adicionada opção para baixar curvas de níveis em pés
@@ -4080,8 +4080,8 @@
     <string name="srtm_download_list_help_message">OsmAnd fornece dados de linhas de contorno em metros e pés. Você precisará baixar novamente o arquivo para alterar o formato.</string>
     <string name="srtm_download_single_help_message">Selecione a variante. Você precisará baixar novamente o arquivo para alterar o formato.</string>
     <string name="route_line_use_gradient_coloring">A linha da rota é colorida pela inclinação da elevação.</string>
-    <string name="shared_string_min_height">Altura mínima</string>
-    <string name="shared_string_max_height">Altura máxima</string>
+    <string name="shared_string_min_height">Altura mín.</string>
+    <string name="shared_string_max_height">Altura máx.</string>
     <string name="language_description">Selecione o idioma preferido e o tipo de orientação por voz.</string>
     <string name="tts_description">Text-to-Speech (TTS) pode pronunciar todos os tipos de instruções: nomes de rua, instrução de volta, nomes de POI etc.</string>
     <string name="tts_title">TTS</string>
@@ -4316,7 +4316,7 @@
     <string name="routeInfo_roadClass_description">Colorir a rota ou a linha da trilha por classificação rodoviária.</string>
     <string name="add_group_to_markers">Adicionar grupo à lista de marcadores</string>
     <string name="remove_group_from_markers">Remover grupo da lista de marcadores</string>
-    <string name="start_point">Iniciar</string>
+    <string name="start_point">Começar</string>
     <string name="mapillary_menu_filter_description_new">Filtre as imagens por data ou tipo. Ativo apenas no zoom de close up.</string>
     <string name="service_is_not_available_please_try_later">O serviço não está disponível. Por favor tente novamente mais tarde.</string>
     <string name="shared_string_files">Arquivos</string>

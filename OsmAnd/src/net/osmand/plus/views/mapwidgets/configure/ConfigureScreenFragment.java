@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,12 +23,14 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.quickaction.QuickActionRegistry.QuickActionUpdatesListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -49,6 +52,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	private static final String INFO_LINK = "https://docs.osmand.net/en/main@latest/osmand/widgets/configure-screen";
 
 	private OsmandApplication app;
+	private MapActivity mapActivity;
 	private OsmandSettings settings;
 	private ApplicationMode selectedAppMode;
 	private UiUtilities iconsCache;
@@ -66,6 +70,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
 		settings = app.getSettings();
+		mapActivity = (MapActivity) requireMyActivity();
 		selectedAppMode = settings.getApplicationMode();
 	}
 
@@ -77,7 +82,9 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		this.inflater = inflater = UiUtilities.getInflater(getContext(), nightMode);
 
 		View view = inflater.inflate(R.layout.fragment_configure_screen, container, false);
-		AndroidUtils.addStatusBarPadding21v(requireContext(), view);
+		if (Build.VERSION.SDK_INT < 30) {
+			AndroidUtils.addStatusBarPadding21v(app, view);
+		}
 
 		toolbar = view.findViewById(R.id.toolbar);
 		modesToggle = view.findViewById(R.id.modes_toggle);
@@ -104,13 +111,14 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	private void setupToolbar() {
-		View backBtn = toolbar.findViewById(R.id.back_button);
+		ImageButton backBtn = toolbar.findViewById(R.id.back_button);
 		backBtn.setOnClickListener(view -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				activity.onBackPressed();
 			}
 		});
+		UiUtilities.rotateImageByLayoutDirection(backBtn);
 		View infoBtn = toolbar.findViewById(R.id.info_button);
 		infoBtn.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
@@ -172,13 +180,19 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		widgetsCard.addView(createWidgetGroupView(WidgetsPanel.RIGHT, true, false));
 		widgetsCard.addView(createWidgetGroupView(WidgetsPanel.TOP, false, false));
 		widgetsCard.addView(createWidgetGroupView(WidgetsPanel.BOTTOM, false, true));
+
+		OsmandPreference<Boolean> prefTransparentWidgets = settings.TRANSPARENT_MAP_THEME;
 		widgetsCard.addView(createButtonWithSwitch(
 				R.drawable.ic_action_appearance,
 				getString(R.string.map_widget_transparent),
+				prefTransparentWidgets.get(),
 				false,
 				false,
-				false,
-				null
+				v -> {
+					boolean enabled = prefTransparentWidgets.get();
+					prefTransparentWidgets.set(!enabled);
+					mapActivity.updateApplicationModeSettings();
+				}
 		));
 	}
 
@@ -192,13 +206,19 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 				false,
 				null
 		));
+
+		OsmandPreference<Boolean> prefDistanceRuler = settings.SHOW_DISTANCE_RULER;
 		buttonsCard.addView(createButtonWithSwitch(
 				R.drawable.ic_action_ruler_line,
 				getString(R.string.map_widget_distance_by_tap),
-				false,
+				prefDistanceRuler.get(),
 				true,
 				false,
-				null
+				v -> {
+					boolean enabled = prefDistanceRuler.get();
+					prefDistanceRuler.set(!enabled);
+					mapActivity.updateApplicationModeSettings();
+				}
 		));
 
 		QuickActionRegistry qaRegistry = app.getQuickActionRegistry();
@@ -237,7 +257,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		TextView tvTitle = view.findViewById(R.id.title);
 		TextView tvDesc = view.findViewById(R.id.items_count_descr);
 
-		int count = WidgetsRegister.getSortedWidgets(selectedAppMode, panel, false).size();
+		int count = WidgetsRegister.getWidgets(selectedAppMode, panel, false).size();
 		int iconColor = count > 0 ? activeColor : defColor;
 		Drawable icon = getPaintedContentIcon(panel.getIconId(), iconColor);
 		ivIcon.setImageDrawable(icon);
@@ -275,6 +295,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		Drawable icon = getPaintedContentIcon(iconId, iconColor);
 		ImageView ivIcon = view.findViewById(R.id.icon);
 		ivIcon.setImageDrawable(icon);
+		ivIcon.setColorFilter(enabled ? activeColor : defColor);
 
 		TextView tvTitle = view.findViewById(R.id.title);
 		tvTitle.setText(title);
@@ -301,10 +322,6 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		setupClickListener(view, v -> {
 			boolean newState = !cb.isChecked();
 			cb.setChecked(newState);
-			ivIcon.setColorFilter(newState ? activeColor : defColor);
-			if (listener != null) {
-				listener.onClick(v);
-			}
 		});
 		setupListItemBackground(view);
 

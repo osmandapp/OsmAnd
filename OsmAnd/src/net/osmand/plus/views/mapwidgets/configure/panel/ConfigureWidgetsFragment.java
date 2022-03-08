@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -86,7 +87,9 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements OnNe
 		inflater = UiUtilities.getInflater(getContext(), nightMode);
 
 		view = inflater.inflate(R.layout.fragment_configure_widgets, container, false);
-		AndroidUtils.addStatusBarPadding21v(requireContext(), view);
+		if (Build.VERSION.SDK_INT < 30) {
+			AndroidUtils.addStatusBarPadding21v(app, view);
+		}
 
 		toolbar = view.findViewById(R.id.toolbar);
 		tabLayout = view.findViewById(R.id.tab_layout);
@@ -101,13 +104,14 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements OnNe
 	}
 
 	private void setupToolbar() {
-		View backBtn = toolbar.findViewById(R.id.back_button);
+		ImageButton backBtn = toolbar.findViewById(R.id.back_button);
 		backBtn.setOnClickListener(view -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				activity.onBackPressed();
 			}
 		});
+		UiUtilities.rotateImageByLayoutDirection(backBtn);
 		View infoBtn = toolbar.findViewById(R.id.info_button);
 		infoBtn.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
@@ -187,6 +191,10 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements OnNe
 
 	public void setSelectedPanel(WidgetsPanel selectedPanel) {
 		this.selectedPanel = selectedPanel;
+	}
+
+	public WidgetsPanel getSelectedPanel() {
+		return selectedPanel;
 	}
 
 	public void setAppMode(ApplicationMode appMode) {

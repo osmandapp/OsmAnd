@@ -2677,7 +2677,7 @@
     <string name="new_plugin_added">A fost adăugat un plugin nou</string>
     <string name="join_segments">Alăturați segmente</string>
     <string name="add_new_profile_q">Adăugați profilul nou \'%1$s\'\?</string>
-    <string name="save_heading">Includeți titlu</string>
+    <string name="save_heading">Includeți titlul</string>
     <string name="save_heading_descr">Salvează direcția la fiecare punct de traseu în timpul înregistrării.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
@@ -4325,7 +4325,7 @@
     <string name="routeInfo_roadClass_description">Colorați traseul sau linia de cale ferată în funcție de clasificarea drumului.</string>
     <string name="add_group_to_markers">Adaugă grupul la lista de markeri</string>
     <string name="remove_group_from_markers">Eliminarea grupului din lista de markeri</string>
-    <string name="start_point">Începe</string>
+    <string name="start_point">Începeți</string>
     <string name="mapillary_menu_filter_description_new">Filtrați imaginile în funcție de dată sau de tip. Activ doar în zoom de apropiere.</string>
     <string name="service_is_not_available_please_try_later">Serviciul nu este disponibil. Vă rugăm să încercați din nou mai târziu.</string>
     <string name="shared_string_files">Fișiere</string>
@@ -4542,4 +4542,13 @@
     <string name="shared_string_shape">Formă</string>
     <string name="edit_category">Editați categoria</string>
     <string name="default_appearance_desc">Culoarea, pictograma și forma implicite se vor aplica punctelor favorite adăugate în grup.</string>
+    <string name="shared_string_complete">complet</string>
+    <string name="stop_download">Opriți descărcarea</string>
+    <string name="stop_and_exit">Oprire și ieșire</string>
+    <string name="move_map_to_select_area">Mutați harta pentru a selecta zona necesară.</string>
+    <string name="default_appearance">Aspectul implicit</string>
+    <string name="stop_download_desc">Descărcarea nu este completă. Dacă întrerupeți descărcarea acum, doar o parte din dale vor fi disponibile pentru vizualizare.</string>
+    <string name="zoom_levels_difference_description">Diferența mare între nivelurile de zoom poate crește dimensiunea datelor descărcate.</string>
+    <string name="estimated_download_size">Dimensiunea estimată a descărcării</string>
+    <string name="number_of_tiles">Număr de plăci</string>
 </resources>

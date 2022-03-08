@@ -435,9 +435,9 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		FragmentActivity activity = getActivity();
+		MapActivity mapActivity = getMapActivity();
 		FragmentManager fragmentManager = getFragmentManager();
-		if (activity != null && fragmentManager != null) {
+		if (mapActivity != null && fragmentManager != null) {
 			String prefId = preference.getKey();
 			ApplicationMode selectedMode = getSelectedAppMode();
 
@@ -449,7 +449,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 						.commitAllowingStateLoss();
 			} else if (CONFIGURE_SCREEN.equals(prefId)) {
 				sepAppModeToSelected();
-				ConfigureScreenFragment.showInstance(activity);
+				ConfigureScreenFragment.showInstance(mapActivity);
 			} else if (COPY_PROFILE_SETTINGS.equals(prefId)) {
 				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, false, selectedMode);
 			} else if (RESET_TO_DEFAULT.equals(prefId)) {

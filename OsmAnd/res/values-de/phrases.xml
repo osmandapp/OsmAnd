@@ -4295,4 +4295,6 @@
     <string name="poi_post_office_post_partner">Bietet eingeschränkte Dienstleistungen im Auftrag des Postdienstleisters an</string>
     <string name="poi_post_office_service_provider">Name des Postdienstleisters</string>
     <string name="poi_post_office_service_brand">Markenname der Postdienstleistungen</string>
+    <string name="poi_landuse_education">Bildung</string>
+    <string name="poi_greenery">Begrünung</string>
 </resources>

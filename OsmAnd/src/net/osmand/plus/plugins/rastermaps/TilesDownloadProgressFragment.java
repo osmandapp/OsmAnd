@@ -90,7 +90,8 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 		ITileSource tileSource = requireSettings().getMapTileSource(false);
 		boolean ellipticYTile = tileSource.isEllipticYTile();
 		totalTilesNumber = DownloadTilesHelper.getTilesNumber(minZoom, maxZoom, latLonRect, ellipticYTile);
-		approxSizeMb = DownloadTilesHelper.getApproxTilesSizeMb(tileSource, totalTilesNumber);
+		approxSizeMb = DownloadTilesHelper.getApproxTilesSizeMb(minZoom, maxZoom, latLonRect, tileSource,
+				app.getResourceManager().getBitmapTilesCache());
 	}
 
 	private void restoreState(@Nullable Bundle savedState) {
