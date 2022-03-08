@@ -146,12 +146,18 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements OnNe
 		tabLayout.addOnTabSelectedListener(new OnTabSelectedListener() {
 			@Override
 			public void onTabSelected(Tab tab) {
-				tab.getIcon().setColorFilter(profileColor, PorterDuff.Mode.SRC_IN);
+				Drawable icon = tab.getIcon();
+				if (icon != null) {
+					icon.setColorFilter(profileColor, PorterDuff.Mode.SRC_IN);
+				}
 			}
 
 			@Override
 			public void onTabUnselected(Tab tab) {
-				tab.getIcon().setColorFilter(defaultIconColor, PorterDuff.Mode.SRC_IN);
+				Drawable icon = tab.getIcon();
+				if (icon != null) {
+					icon.setColorFilter(defaultIconColor, PorterDuff.Mode.SRC_IN);
+				}
 			}
 
 			@Override
