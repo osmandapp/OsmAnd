@@ -1,5 +1,8 @@
 package net.osmand.plus.chooseplan;
 
+import static net.osmand.plus.settings.fragments.PurchasesFragment.OPEN_PURCHASES;
+
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -250,13 +253,21 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 	}
 
 	private void openPurchasesOrPlansFragment(boolean isMapsPurchased) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
 			if (isMapsPurchased) {
-				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-				PurchasesFragment.showInstance(fragmentManager);
+				if (activity instanceof MapActivity) {
+					this.dismiss();
+					FragmentManager fragmentManager = activity.getSupportFragmentManager();
+					PurchasesFragment.showInstance(fragmentManager);
+				} else {
+					Bundle params = new Bundle();
+					params.putBoolean(OPEN_PURCHASES, true);
+					Intent intent = activity.getIntent();
+					MapActivity.launchMapActivityMoveToTop(activity, intent != null ? intent.getExtras() : null, null, params);
+				}
 			} else {
-				MapsPlusPlanFragment.showInstance(mapActivity);
+				MapsPlusPlanFragment.showInstance(activity);
 			}
 		}
 	}
@@ -277,7 +288,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		String description = "";
 		if (isMapsPurchased) {
 			InAppPurchase purchase = purchaseHelper.getFullVersion();
-			if (purchase != null) {
+			if (purchase != null && purchase.getPurchaseInfo() != null) {
 				long purchaseTime = purchase.getPurchaseInfo().getPurchaseTime();
 				SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, yyyy", Locale.getDefault());
 				description = dateFormat.format(purchaseTime);

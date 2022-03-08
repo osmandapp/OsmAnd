@@ -17,11 +17,8 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.appbar.AppBarLayout;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
@@ -33,6 +30,9 @@ import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.liveupdates.CountrySelectionFragment;
 import net.osmand.plus.liveupdates.CountrySelectionFragment.OnFragmentInteractionListener;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
@@ -43,6 +43,7 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 	public static final String TAG = PurchasesFragment.class.getName();
 
 	private static final String OSMAND_PURCHASES_URL = "https://docs.osmand.net/en/main@latest/osmand/purchases";
+	public static final String OPEN_PURCHASES = "open_purchases";
 
 	private OsmandApplication app;
 	private InAppPurchaseHelper purchaseHelper;
