@@ -317,9 +317,11 @@ public class CurrentPositionHelper {
 			return;
 		}
 		Collections.sort(complete, (o1, o2) -> {
-			int projectionCompare = Double.compare(o1.getDistanceP(), o2.getDistanceP());
-			if (projectionCompare != 0) {
-				return projectionCompare;
+			if (o1.building == null && o2.building == null) {
+				int projectionCompare = Double.compare(o1.getDistanceP(), o2.getDistanceP());
+				if (projectionCompare != 0) {
+					return projectionCompare;
+				}
 			}
 			return Double.compare(o1.getDistance(), o2.getDistance());
 		});
