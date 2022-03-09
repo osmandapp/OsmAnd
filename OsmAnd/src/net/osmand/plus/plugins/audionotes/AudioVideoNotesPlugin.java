@@ -2089,7 +2089,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 
 		@Override
-		public int getMenuIconId() {
+		public int getSettingsIconId() {
 			Integer action = defaultActionSetting.get();
 			switch (action) {
 				case AV_DEFAULT_ACTION_AUDIO:

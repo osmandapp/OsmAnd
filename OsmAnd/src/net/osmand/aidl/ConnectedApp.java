@@ -185,6 +185,7 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 		}
 	}
 
+	@NonNull
 	TextInfoWidget createWidgetControl(@NonNull MapActivity mapActivity, String widgetId) {
 		TextInfoWidget control = new TextInfoWidget(mapActivity) {
 

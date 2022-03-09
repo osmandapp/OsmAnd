@@ -291,9 +291,6 @@ public class MapWidgetRegistry {
 			this.visibleElementsFromSettings.get(mode).add(HIDE_PREFIX + m.key);
 		}
 		saveVisibleElementsToSettings(mode);
-		if (m.getStateChangeListener() != null) {
-			m.getStateChangeListener().run();
-		}
 	}
 
 	private void defineDefaultSettingsElement(ApplicationMode mode) {
@@ -483,7 +480,7 @@ public class MapWidgetRegistry {
 			boolean selected = r.isVisibleCollapsed(mode) || r.isVisible(mode);
 			String desc = mapActivity.getString(R.string.shared_string_collapse);
 			ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder()
-					.setIcon(r.getDrawableMenu())
+					.setIcon(r.getSettingsIconId())
 					.setSelected(selected)
 					.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 					.setSecondaryIcon(r.widget != null ? R.drawable.ic_action_additional_option : ContextMenuItem.INVALID_ID)
@@ -655,7 +652,7 @@ public class MapWidgetRegistry {
 									mil.recreateControls();
 								}
 								ContextMenuItem item = adapter.getItem(pos);
-								item.setIcon(widgetState.getMenuIconId());
+								item.setIcon(widgetState.getSettingsIconId());
 								if (message != null) {
 									item.setTitle(message);
 								} else {

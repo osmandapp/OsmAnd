@@ -43,8 +43,10 @@ import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_ALTITUDE;
@@ -152,10 +154,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	@Nullable
-	public MapWidgetRegInfo registerSideWidget(TextInfoWidget widget, int drawableMenu,
-											   String message, String key, boolean left, int priorityOrder) {
+	public MapWidgetRegInfo registerSideWidget(@NonNull TextInfoWidget widget,
+	                                           @DrawableRes int settingsIconId,
+											   @Nullable String message,
+	                                           @NonNull String key,
+	                                           boolean left,
+	                                           int order) {
 		if (mapInfoControls != null) {
-			MapWidgetRegInfo reg = mapInfoControls.registerWidget(key, widget, null, drawableMenu, MapWidgetRegInfo.INVALID_ID, message, priorityOrder, left);
+			MapWidgetRegInfo reg = mapInfoControls.registerWidget(key, widget, null, settingsIconId, MapWidgetRegInfo.INVALID_ID, message, order, left);
 			updateReg(calculateTextState(), reg);
 			return reg;
 		} else {
