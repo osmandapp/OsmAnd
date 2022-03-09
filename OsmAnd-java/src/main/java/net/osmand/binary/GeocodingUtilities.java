@@ -132,9 +132,11 @@ public class GeocodingUtilities {
 			} else if (city != null) {
 				bld.append(" city ").append(city.getName());
 			}
-			if (connectionPoint != null && searchPoint != null) {
-
+			if (getDistance() > 0) {
 				bld.append(" dist=").append((int) getDistance());
+			}
+			if (getDistanceP() > 0) {
+				bld.append(" distP=").append((int) getDistanceP());
 			}
 			return bld.toString();
 		}
