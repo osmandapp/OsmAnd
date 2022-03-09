@@ -143,7 +143,7 @@
 \n - Kartenausrichtung nach Kompass oder Bewegungsrichtung 
 \n - Fahrspuranzeige, Geschwindigkeitswarnung, aufgenommene oder TTS-Sprachansagen
 \n</string>
-    <string name="select_navigation_mode">Nutzerprofil:</string>
+    <string name="select_navigation_mode">Verkehrsmittel:</string>
     <string name="day_night_info_description">Sonnenaufgang: %1$s
 \nSonnenuntergang: %2$s</string>
     <string name="day_night_info">Tag/Nacht-Information</string>
@@ -184,8 +184,8 @@
     <string name="switch_to_raster_map_to_see">Offline-Vektorkarte für diese Position herunterladen (über \'Einstellungen → Kartenverwaltung\') oder schalten Sie auf die Erweiterung \'Online-Karten\' um.</string>
     <string name="send_files_to_osm">GPX-Dateien an OSM senden?</string>
     <string name="validate_gpx_upload_name_pwd">Bitte tragen Sie Ihren OSM-Benutzernamen und Ihr Passwort ein, um GPX-Dateien hochzuladen.</string>
-    <string name="default_buttons_support">Unterstütze OsmAnd</string>
-    <string name="support_new_features">Unterstütze neue Funktionen</string>
+    <string name="default_buttons_support">Unterstützung</string>
+    <string name="support_new_features">Unterstützung neuer Funktionen</string>
     <string name="support_new_features_descr">Unterstützen Sie mit einer Spende die Entwicklung neuer Funktionen für die App.</string>
     <string name="show_ruler_level">Maßstab anzeigen</string>
     <string name="info_button">Info</string>
@@ -698,7 +698,7 @@
     <string name="update_existing">Ersetzen</string>
     <string name="only_show">Route nur anzeigen</string>
     <string name="follow">Zielführung starten</string>
-    <string name="recalculate_route_to_your_location">Nutzerprofil:</string>
+    <string name="recalculate_route_to_your_location">Verkehrsmittel:</string>
     <string name="mark_final_location_first">Bitte zuerst ein Ziel festlegen</string>
     <string name="get_directions">Navigation</string>
     <string name="opening_hours">Öffnungszeiten</string>
@@ -2931,7 +2931,7 @@
     <string name="files_present">%1$d Dateien (%2$s) sind am vorherigen Ort „%3$s“ vorhanden.</string>
     <string name="move_maps">Karten verschieben</string>
     <string name="dont_move_maps">Nicht verschieben</string>
-    <string name="public_transport_ped_route_title">Die Route zu Fuß beträgt ca. %1$s und könnte schneller sein, als mit öffentlichen Verkehrsmitteln</string>
+    <string name="public_transport_ped_route_title">Die Route zu Fuß beträgt ca. %1$s und könnte schneller sein als mit öffentlichen Verkehrsmitteln</string>
     <string name="public_transport_no_route_title">Leider konnte OsmAnd keine für Ihre Einstellungen geeignete Route finden.</string>
     <string name="searching_gps">Suche GPS</string>
     <string name="coordinates_widget">Koordinaten-Widget</string>
@@ -4048,7 +4048,7 @@
     <string name="customize_route_line">Routenlinie anpassen</string>
     <string name="shared_string_route_line">Routenlinie</string>
     <string name="specify_color_for_map_mode">Legen Sie die Farbe für den Kartenmodus fest %1$s.</string>
-    <string name="release_4_0_beta">• Option zum Herunterladen von Höhenlinien in Fuß zugefügt
+    <string name="release_4_0_beta">• Option zum Herunterladen von Höhenlinien in Fuß hinzugefügt
 \n
 \n• Routenplanung im Querformat: Registerkarten zum Umschalten zwischen Punkten oder Diagrammen hinzugefügt
 \n
@@ -4056,15 +4056,15 @@
 \n
 \n• Tracks können nun nach Höhe, Geschwindigkeit oder Steigung eingefärbt werden.
 \n
-\n• Option zugefügt, um das Aussehen der Navigationsroutenlinie zu ändern
+\n• Option hinzugefügt, um das Aussehen der Navigationsroutenlinie zu ändern
 \n
 \n• Dialog \"Streckenaufzeichnung\" aktualisiert
 \n
 \n</string>
-    <string name="no_purchases">Du hast keine Einkäufe</string>
+    <string name="no_purchases">Sie haben keine Einkäufe</string>
     <string name="new_device_account">Neues Gerät / neues Konto</string>
     <string name="contact_support_description">Wenn Sie Fragen haben, kontaktieren Sie uns bitte unter %1$s.</string>
-    <string name="empty_purchases_description">Wenn deine Einkäufe hier nicht angezeigt werden, tippe auf \"%1$s\", oder wende dich an unser Support-Team.</string>
+    <string name="empty_purchases_description">Wenn Ihre Einkäufe hier nicht angezeigt werden, tippen Sie auf \"%1$s\" oder wenden Sie sich an unser Support-Team.</string>
     <string name="contact_support">Support kontaktieren</string>
     <string name="troubleshooting">Problemlösung</string>
     <string name="troubleshooting_description">Bitte folgen Sie diesem Link, wenn Sie Probleme beim Kauf haben.</string>
@@ -4322,7 +4322,7 @@
 \n
 \nVerwalten und kündigen Sie Ihre Abonnements jederzeit in den Amazon-Einstellungen.</string>
     <string name="cancel_anytime_in_amazon_app">Jederzeit in der Amazon App kündigen</string>
-    <string name="amz_manage_subscription_descr">Verwalten Sie Ihr Abonnement über die Amazon App oder die Amazon Website.</string>
+    <string name="amz_manage_subscription_descr">Verwalten Sie Ihr Abonnement über die Amazon-App oder die Amazon-Website.</string>
     <string name="empty_category_name">Leerer Kategoriename</string>
     <string name="no_activity_for_intent">Installieren Sie eine Anwendung, die diese Aktion ausführen kann.</string>
     <string name="no_items_of_type_message">Sie haben keine Artikel dieses Typs</string>
@@ -4331,8 +4331,8 @@
     <string name="routeInfo_smoothness_description">Klassifizierungsschema für die physische Nutzbarkeit eines Weges für Radfahrzeuge, insbesondere hinsichtlich der Regelmäßigkeit/Ebenheit der Oberfläche.</string>
     <string name="routeInfo_surface_description">Informationen zur physischen Oberfläche von Straßen und Fußwegen angeben.</string>
     <string name="routeInfo_roadClass_description">Route oder Track entsprechend der Straßenklassifikation einfärben.</string>
-    <string name="add_group_to_markers">Gruppe zu Markerliste hinzufügen</string>
-    <string name="remove_group_from_markers">Gruppe von Markerliste entfernen</string>
+    <string name="add_group_to_markers">Gruppe zur Markierungsliste hinzufügen</string>
+    <string name="remove_group_from_markers">Gruppe aus der Markierungsliste entfernen</string>
     <string name="start_point">Start</string>
     <string name="mapillary_menu_filter_description_new">Bilder nach Datum oder Typ filtern. Nur hineingezoomt aktiv.</string>
     <string name="service_is_not_available_please_try_later">Dienst ist nicht verfügbar, bitte versuchen Sie es später.</string>
@@ -4351,23 +4351,23 @@
     <string name="included_categories">Enthaltene Kategorien</string>
     <string name="release_4_1">• Erste Unterstützung für Android Auto hinzugefügt
 \n
-\n • Aktualisierung der Benutzeroberfläche für die Suche nach UTM Koordinaten
+\n • Aktualisierung der Benutzeroberfläche für die Suche nach UTM-Koordinaten
 \n
-\n • GPS Filter für GPX Tracks
+\n • GPS-Filter für GPX-Tracks
 \n
-\n • Höhen Widget (Pro)
+\n • Höhen-Widget (Pro)
 \n
 \n • Favoriten: Möglichkeit zur Anzeige der zuletzt verwendeten Symbole hinzugefügt
 \n
 \n • Routenplanung: verwendet nach dem Start das ausgewählte Profil
 \n
-\n • Mapillary Ebene korrigiert, das Modul ist nun standardmäßig deaktiviert
+\n • Mapillary-Ebene korrigiert, das Modul ist nun standardmäßig deaktiviert
 \n
 \n • Anzeige zur Verwaltung des gesamten Verlaufs der App hinzugefügt
 \n
 \n • Die Kartenausrichtung wird nach dem Neustart der App nicht zurückgesetzt
 \n
-\n • Verbesserte Darstellung von SRTM Höhenmarkierungen
+\n • Verbesserte Darstellung von SRTM-Höhenmarkierungen
 \n
 \n • Arabische Kartenbeschriftungen korrigiert
 \n
