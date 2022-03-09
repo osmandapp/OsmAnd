@@ -124,8 +124,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 	                                              boolean initialCalculation) {
 		boolean calculatedTimeSpeed = useExternalTimestamps();
 		if (shouldApproximateRoute() && !initialCalculation) {
-			ApplicationMode appMode = getApproximateRouteProfile();
-			MeasurementEditingContext ctx = prepareApproximationContext(app, gpxFile, appMode);
+			MeasurementEditingContext ctx = prepareApproximationContext(app, gpxFile);
 			if (ctx != null) {
 				GPXFile approximated = ctx.exportGpx(ONLINE_ROUTING_GPX_FILE_NAME);
 				if (approximated != null) {
@@ -139,12 +138,14 @@ public class GpxEngine extends OnlineRoutingEngine {
 
 	@Nullable
 	private MeasurementEditingContext prepareApproximationContext(@NonNull OsmandApplication app,
-	                                                              @NonNull GPXFile gpxFile,
-	                                                              @Nullable ApplicationMode appMode) {
+	                                                              @NonNull GPXFile gpxFile) {
 		try {
 			RoutingHelper routingHelper = app.getRoutingHelper();
-			if (appMode == null) {
-				appMode = routingHelper.getAppMode();
+			ApplicationMode appMode = routingHelper.getAppMode();
+			String routingProfile = getApproximateRouteProfile();
+			String oldRoutingProfile = appMode.getRoutingProfile();
+			if (routingProfile != null) {
+				appMode.setRoutingProfile(routingProfile);
 			}
 			List<WptPt> points = gpxFile.getAllSegmentsPoints();
 			LocationsHolder holder = new LocationsHolder(points);
@@ -157,6 +158,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 				GpxRouteApproximation gpxApproximation = routingHelper.calculateGpxApproximation(env, gctx, gpxPoints, null);
 				MeasurementEditingContext ctx = new MeasurementEditingContext(app);
 				ctx.setPoints(gpxApproximation, points, appMode, useExternalTimestamps());
+				appMode.setRoutingProfile(oldRoutingProfile);
 				return ctx;
 			}
 		} catch (IOException | InterruptedException e) {
