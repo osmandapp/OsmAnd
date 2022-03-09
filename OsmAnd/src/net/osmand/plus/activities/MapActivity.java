@@ -653,7 +653,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			return;
 		}
 		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
-		if (backStackEntryCount == 0 && fragment != null && fragment.isSearchHidden()) {
+		if ((backStackEntryCount == 0 || mapContextMenu.isVisible()) && fragment != null && fragment.isSearchHidden()) {
 			showQuickSearch(ShowQuickSearchMode.CURRENT, false);
 			return;
 		}
