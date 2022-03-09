@@ -124,7 +124,8 @@ public class GpxEngine extends OnlineRoutingEngine {
 	                                              boolean initialCalculation) {
 		boolean calculatedTimeSpeed = useExternalTimestamps();
 		if (shouldApproximateRoute() && !initialCalculation) {
-			MeasurementEditingContext ctx = prepareApproximationContext(app, gpxFile);
+			ApplicationMode appMode = getApproximateRouteProfile();
+			MeasurementEditingContext ctx = prepareApproximationContext(app, gpxFile, appMode);
 			if (ctx != null) {
 				GPXFile approximated = ctx.exportGpx(ONLINE_ROUTING_GPX_FILE_NAME);
 				if (approximated != null) {
@@ -138,10 +139,13 @@ public class GpxEngine extends OnlineRoutingEngine {
 
 	@Nullable
 	private MeasurementEditingContext prepareApproximationContext(@NonNull OsmandApplication app,
-	                                                              @NonNull GPXFile gpxFile) {
+	                                                              @NonNull GPXFile gpxFile,
+	                                                              @Nullable ApplicationMode appMode) {
 		try {
 			RoutingHelper routingHelper = app.getRoutingHelper();
-			ApplicationMode appMode = routingHelper.getAppMode();
+			if (appMode == null) {
+				appMode = routingHelper.getAppMode();
+			}
 			List<WptPt> points = gpxFile.getAllSegmentsPoints();
 			LocationsHolder holder = new LocationsHolder(points);
 			if (holder.getSize() > 1) {
