@@ -316,9 +316,6 @@ public class CurrentPositionHelper {
 			});
 			return;
 		}
-		Collections.sort(complete, (o1, o2) -> {
-			return Double.compare(o1.getDistance(), o2.getDistance());
-		});
 		final GeocodingResult rts = complete.size() > 0 ? complete.get(0) : new GeocodingResult();
 		app.runInUIThread(new Runnable() {
 			public void run() {
