@@ -1,8 +1,8 @@
 package net.osmand.binary;
 
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.data.Building;
@@ -25,13 +25,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
-import gnu.trove.set.hash.TLongHashSet;
 
 public class GeocodingUtilities {
 
@@ -100,19 +96,15 @@ public class GeocodingUtilities {
 		}
 
 		public double getDistance() {
-			if (dist == -1 && connectionPoint != null && searchPoint != null) {
-				dist = MapUtils.getDistance(connectionPoint, searchPoint);
+			if (dist == -1 && searchPoint != null) {
+				if (building == null && point != null) {
+					// Need distance between searchPoint and nearest RouteSegmentPoint here, to approximate distance from nearest named road
+					dist = Math.sqrt(point.distSquare);
+				} else if (connectionPoint != null) {
+					dist = MapUtils.getDistance(connectionPoint, searchPoint);
+				}
 			}
 			return dist;
-		}
-
-		public double getDistanceP() {
-			if (point != null && searchPoint != null) {
-				// Need distance between searchPoint and nearest RouteSegmentPoint here, to approximate distance from neareest named road
-				return Math.sqrt(point.distSquare);
-			} else {
-				return -1;
-			}
 		}
 
 		@Override
@@ -134,9 +126,6 @@ public class GeocodingUtilities {
 			}
 			if (getDistance() > 0) {
 				bld.append(" dist=").append((int) getDistance());
-			}
-			if (getDistanceP() > 0) {
-				bld.append(" distP=").append((int) getDistanceP());
 			}
 			return bld.toString();
 		}

@@ -317,12 +317,6 @@ public class CurrentPositionHelper {
 			return;
 		}
 		Collections.sort(complete, (o1, o2) -> {
-			if (o1.building == null && o2.building == null) {
-				int projectionCompare = Double.compare(o1.getDistanceP(), o2.getDistanceP());
-				if (projectionCompare != 0) {
-					return projectionCompare;
-				}
-			}
 			return Double.compare(o1.getDistance(), o2.getDistance());
 		});
 		final GeocodingResult rts = complete.size() > 0 ? complete.get(0) : new GeocodingResult();
