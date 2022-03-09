@@ -444,8 +444,11 @@ public class GeocodingUtilities {
 				it.remove();
 			}
 		}
-		Collections.sort(complete, (o1, o2) -> {
-			return Double.compare(o1.getDistance(), o2.getDistance());
+		Collections.sort(complete, new Comparator<GeocodingResult>() {
+			@Override
+			public int compare(GeocodingResult o1, GeocodingResult o2) {
+				return Double.compare(o1.getDistance(), o2.getDistance());
+			}
 		});
 		return complete;
 
