@@ -27,7 +27,6 @@ import org.apache.commons.logging.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -264,7 +263,8 @@ public class CurrentPositionHelper {
 		List<GeocodingResult> complete = new ArrayList<>();
 		double minBuildingDistance = 0;
 		if (res != null) {
-			GeocodingUtilities gu = new GeocodingUtilities();
+			List<BinaryMapIndexReader> readers = new ArrayList<>();
+			GeocodingUtilities utilities = new GeocodingUtilities();
 			for (GeocodingResult r : res) {
 				BinaryMapIndexReader foundRepo = null;
 				List<BinaryMapReaderResource> rts  = usedReaders;
@@ -285,9 +285,10 @@ public class CurrentPositionHelper {
 				if (result.isCancelled()) {
 					break;
 				} else if (foundRepo != null) {
+					readers.add(foundRepo);
 					List<GeocodingResult> justified = null;
 					try {
-						justified = gu.justifyReverseGeocodingSearch(r, foundRepo,
+						justified = utilities.justifyReverseGeocodingSearch(r, foundRepo,
 								minBuildingDistance, result);
 					} catch (IOException e) {
 						log.error("Exception happened during reverse geocoding", e);
@@ -305,23 +306,20 @@ public class CurrentPositionHelper {
 					complete.add(r);
 				}
 			}
-			gu.filterDuplicateRegionResults(complete);
+			utilities.filterDuplicateRegionResults(complete);
+			try {
+				utilities.sortGeocodingResults(readers, complete);
+			} catch (IOException e) {
+				log.error("Exception happened during sorting for reverse geocoding", e);
+			}
 		}
 
 		if (result.isCancelled()) {
-			app.runInUIThread(new Runnable() {
-				public void run() {
-					result.publish(null);
-				}
-			});
+			app.runInUIThread(() -> result.publish(null));
 			return;
 		}
 		final GeocodingResult rts = complete.size() > 0 ? complete.get(0) : new GeocodingResult();
-		app.runInUIThread(new Runnable() {
-			public void run() {
-				result.publish(rts);
-			}
-		});
+		app.runInUIThread(() -> result.publish(rts));
 	}
 
 	public static double getOrthogonalDistance(RouteDataObject r, Location loc){
