@@ -236,7 +236,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		setupRulerWidget(mapRulerLayout);
 
 		// register left stack
-		registerSideWidget(null, R.drawable.ic_action_compass, R.string.map_widget_compass, WIDGET_COMPASS, true, 4);
 
 		NextTurnWidget bigInfoControl = ric.createNextInfoControl(mapActivity, false);
 		registerSideWidget(bigInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_turn, WIDGET_NEXT_TURN, true, 5);

@@ -228,7 +228,6 @@ public class ApplicationMode {
 		regWidgetAvailability(WIDGET_ALTITUDE, all);
 
 		// all = null everything
-		regWidgetAvailability(WIDGET_COMPASS, all);
 		regWidgetAvailability(WIDGET_MARKER_1, none);
 		regWidgetAvailability(WIDGET_MARKER_2, none);
 		regWidgetAvailability(WIDGET_GPS_INFO, all);

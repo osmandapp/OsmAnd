@@ -7,6 +7,8 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_A
 import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 import static net.osmand.plus.settings.enums.LocationSource.ANDROID_API;
 import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_COMPASS;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -772,6 +774,19 @@ public class OsmandSettings {
 	}
 
 	public final CommonPreference<RadiusRulerMode> RADIUS_RULER_MODE = new EnumStringPreference<>(this, "ruler_mode", RadiusRulerMode.FIRST, RadiusRulerMode.values()).makeGlobal().makeShared();
+	public final CommonPreference<Boolean> SHOW_COMPASS = new BooleanPreference(this, "show_compass",
+			true) {
+
+		@Override
+		public Boolean getProfileDefaultValue(ApplicationMode mode) {
+			String visibleControlsString = MAP_INFO_CONTROLS.getModeValue(mode);
+			if (Algorithms.isEmpty(visibleControlsString)) {
+				return true;
+			}
+			List<String> visibleControls = Arrays.asList(visibleControlsString.split(SETTINGS_SEPARATOR));
+			return visibleControls.contains(WIDGET_COMPASS);
+		}
+	};
 	public final OsmandPreference<Boolean> SHOW_COMPASS_CONTROL_RULER = new BooleanPreference(this, "show_compass_ruler", true).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> SHOW_DISTANCE_RULER = new BooleanPreference(this, "show_distance_ruler", false).makeProfile();
 	public final OsmandPreference<Boolean> SHOW_ELEVATION_PROFILE_WIDGET = new BooleanPreference(this, "show_elevation_profile_widget", false).makeProfile();

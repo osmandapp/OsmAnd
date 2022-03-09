@@ -52,10 +52,11 @@ public class MapWidgetRegistry {
 	public static final String SHOW_PREFIX = "";
 	public static final String SETTINGS_SEPARATOR = ";";
 
+	public static final String WIDGET_COMPASS = "compass";
+
 	public static String WIDGET_NEXT_TURN = "next_turn";
 	public static String WIDGET_NEXT_TURN_SMALL = "next_turn_small";
 	public static String WIDGET_NEXT_NEXT_TURN = "next_next_turn";
-	public static String WIDGET_COMPASS = "compass";
 	public static String WIDGET_DISTANCE = "distance";
 	public static String WIDGET_INTERMEDIATE_DISTANCE = "intermediate_distance";
 	public static String WIDGET_TIME = "time";
