@@ -648,7 +648,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (getMapLayers().getContextMenuLayer().isInAddGpxPointMode()) {
 			quitAddGpxPointMode();
 		}
-		if (getSupportFragmentManager().getBackStackEntryCount() == 0 && launchPrevActivityIntent()) {
+		int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
+		if (backStackEntryCount == 0 && launchPrevActivityIntent()) {
+			return;
+		}
+		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
+		if (backStackEntryCount == 0 && fragment != null && fragment.isSearchHidden()) {
+			showQuickSearch(ShowQuickSearchMode.CURRENT, false);
 			return;
 		}
 		super.onBackPressed();

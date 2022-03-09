@@ -39,7 +39,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -245,17 +244,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		boolean isLightTheme = app.getSettings().isLightContent();
 		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
-
-		if (!MapActivity.mapContextMenu.isVisible() && !activity.getOnBackPressedDispatcher().hasEnabledCallbacks()) {
-			activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-				public void handleOnBackPressed() {
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null) {
-						mapActivity.showQuickSearch(ShowQuickSearchMode.CURRENT, false);
-					}
-				}
-			});
-		}
 	}
 
 	@Override
