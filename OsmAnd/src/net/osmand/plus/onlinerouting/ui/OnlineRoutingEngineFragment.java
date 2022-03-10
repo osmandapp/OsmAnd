@@ -76,7 +76,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 
 	private OsmandApplication app;
 	private ApplicationMode appMode;
-	private ApplicationMode approxAppMode;
+	private String approxRouteProfile;
 	private MapActivity mapActivity;
 	private OnlineRoutingHelper helper;
 
@@ -296,9 +296,9 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 		setApproximateCardTitle();
 		approximateCard.onClickCheckBox(getString(R.string.approximate_route_description), result -> {
 			if (getActivity() != null) {
-				String selected = approxAppMode != null ? approxAppMode.getDefaultRoutingProfile() : null;
+				String selected = approxRouteProfile;
 				SelectOnlineApproxProfileBottomSheet.showInstance(
-						getActivity(), this, approxAppMode, selected, false);
+						getActivity(), this, appMode, selected, false);
 			}
 			return false;
 		});
@@ -307,11 +307,11 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 	}
 
 	private void setApproximateCardTitle() {
-		approxAppMode = engine.getApproximateRouteProfile();
-		String appModeName = approxAppMode != null ? " (" + approxAppMode.toHumanString() + ")" : "";
+		approxRouteProfile = engine.getApproximateRouteProfile();
+		String appModeName = approxRouteProfile != null ? " (" + approxRouteProfile + ")" : "";
 		String title = getString(R.string.attach_to_the_roads) + appModeName;
 		approximateCard.setHeaderTitle(title);
-		approximateCard.setCheckBox(approxAppMode != null);
+		approximateCard.setCheckBox(approxRouteProfile != null);
 	}
 
 	private void setupExternalTimestampsCard() {
