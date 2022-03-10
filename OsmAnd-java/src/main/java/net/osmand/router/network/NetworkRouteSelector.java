@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -33,7 +34,7 @@ public class NetworkRouteSelector {
 	
 	private static final String ROUTE_KEY_VALUE_SEPARATOR = "__";
 
-	private static final boolean GROW_ALGORITHM = true;
+	private static final boolean GROW_ALGORITHM = false;
 	private static final int MAX_ITERATIONS = 16000;
 	// works only if road in same tile
 	private static final double MAX_RADIUS_HOLE = 30;
@@ -97,14 +98,173 @@ public class NetworkRouteSelector {
 	}
 	
 	
+	private static class NetworkRouteSegmentChain {
+		// simplified linked list (to not create list of chains)
+		NetworkRouteSegmentChain alternatives;
+		
+		NetworkRouteSegment start;
+		List<NetworkRouteSegment> connected;
+		
+		public int getEndPointX() {
+			NetworkRouteSegment s = start;
+			if(connected != null) {
+				s = connected.get(connected.size() - 1);
+			}
+			return s.getEndPointX();
+		}
+		
+		public int getEndPointY() {
+			NetworkRouteSegment s = start;
+			if(connected != null) {
+				s = connected.get(connected.size() - 1);
+			}
+			return s.getEndPointY();
+		}
+		
+		public void addChain(NetworkRouteSegmentChain toAdd) {
+			if (toAdd.alternatives != null) {
+				throw new IllegalArgumentException();
+			}
+			if (connected == null) {
+				connected = new ArrayList<>();
+			}
+			connected.add(toAdd.start);
+			if (toAdd.connected != null) {
+				connected.addAll(toAdd.connected);
+			}
+		}
+	}
 	
 	private void connectAlgorithm(NetworkRouteSegment segment, Map<RouteKey, GPXFile> res) throws IOException {
 		RouteKey rkey = segment.routeKey;
-		List<NetworkRouteSegment> lst = new ArrayList<>();
+		List<NetworkRouteSegment> loaded = new ArrayList<>();
 		debug("START ", null, segment);
-		loadData(segment, rkey, lst);
-		res.put(segment.routeKey, createGpxFile(lst));
+		loadData(segment, rkey, loaded);
+		
+		Map<Long, NetworkRouteSegmentChain> chains = createChainStructure(loaded);
+		
+		// Merged
+		int merged = 1;
+		while (merged > 0) {
+			merged = connectSimpleStraight(chains);
+			System.out.println("Simple merged: " + merged);
+			merged += connectInverseStraight(chains);
+			System.out.println("Inverse merged: " + merged);
+		}
+		
+		List<NetworkRouteSegment> lst = flattenChainStructure(chains);
+		GPXFile fl = createGpxFile(lst);
+		res.put(segment.routeKey, fl);
+		System.out.println("Segments size: " + fl.tracks.get(0).segments.size());
 		debug("FINISH " + lst.size(), null, segment);
+	}
+	
+	private int connectInverseStraight(Map<Long, NetworkRouteSegmentChain> chains) {
+		int merged = 0;
+		boolean changed = true;
+		while (changed) {
+			changed = false;
+			for (Entry<Long, NetworkRouteSegmentChain> e : chains.entrySet()) {
+				NetworkRouteSegmentChain c = e.getValue();
+				if (c.alternatives != null) {
+					long oldpnt = e.getKey();
+					NetworkRouteSegmentChain alt = c.alternatives;
+					long pnt = NetworkRouteContext.convertPontToLong(alt.getEndPointX(), alt.getEndPointY());
+					if (chains.containsKey(pnt) || alt.alternatives != null) {
+						continue;
+					}
+					NetworkRouteSegmentChain newChain = new NetworkRouteSegmentChain();
+					List<NetworkRouteSegment> lst = new ArrayList<>();
+					lst.add(c.start);
+					if(c.connected != null) {
+						lst.addAll(c.connected);
+					}
+					lst.add(0, alt.start.inverse());
+					if (alt.connected != null) {
+						for (NetworkRouteSegment s : alt.connected) {
+							lst.add(0, s.inverse());
+						}
+					}
+					newChain.start = lst.remove(0);
+					newChain.connected = lst;
+					NetworkRouteSegmentChain old = chains.put(pnt, newChain);
+					if (old != null) {
+						throw new IllegalStateException();
+					}
+					chains.remove(oldpnt);
+					changed = true;
+					merged++;
+					break;
+				}
+			}
+		}
+		return merged;
+	}
+
+	private int connectSimpleStraight(Map<Long, NetworkRouteSegmentChain> chains) {
+		int merged = 0;
+		boolean changed = true;
+		while (changed) {
+			changed = false;
+			mainLoop: for (NetworkRouteSegmentChain c : chains.values()) {
+				NetworkRouteSegmentChain it = c;
+				while (it != null) {
+					long pnt = NetworkRouteContext.convertPontToLong(it.getEndPointX(), it.getEndPointY());
+					NetworkRouteSegmentChain endChain = chains.get(pnt);
+					if (endChain != null && endChain != c && endChain.alternatives == null) {
+						it.addChain(endChain);
+						chains.remove(pnt);
+						changed = true;
+						merged++;
+						break mainLoop;
+					}
+					it = it.alternatives;
+				}
+			}
+		}
+		return merged;
+	}
+
+	private List<NetworkRouteSegment> flattenChainStructure(Map<Long, NetworkRouteSegmentChain> chains) {
+		List<NetworkRouteSegment> lst = new ArrayList<>();
+//		int i = 0;
+		for (NetworkRouteSegmentChain c : chains.values()) {
+//			if (i++ > 1) {
+//				break;
+//			}
+			lst.add(c.start);
+			
+			if (c.connected != null) {
+				lst.addAll(c.connected);
+			}
+			while (c.alternatives != null) {
+				c = c.alternatives;
+				lst.add(c.start);
+				if (c.connected != null) {
+					lst.addAll(c.connected);
+				}
+			}
+		}
+		return lst;
+	}
+
+	private Map<Long, NetworkRouteSegmentChain> createChainStructure(List<NetworkRouteSegment> lst) {
+		Map<Long, NetworkRouteSegmentChain> chains = new LinkedHashMap<>();
+		for (NetworkRouteSegment s : lst) {
+			NetworkRouteSegmentChain chain = new NetworkRouteSegmentChain();
+			chain.start = s;
+			long pnt = NetworkRouteContext.convertPontToLong(s.getStartPointX(), s.getStartPointY());
+			NetworkRouteSegmentChain existing = chains.get(pnt);
+			if (existing == null) {
+				chains.put(pnt, chain);
+			} else {
+				while (existing.alternatives != null) {
+					existing = existing.alternatives;
+				}
+				existing.alternatives = chain;
+			}
+		}
+		return chains;
 	}
 
 	private void loadData(NetworkRouteSegment segment, RouteKey rkey, List<NetworkRouteSegment> lst)
