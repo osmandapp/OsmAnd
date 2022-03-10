@@ -26,6 +26,7 @@ import gnu.trove.set.hash.TLongHashSet;
 public class GeneralRouter implements VehicleRouter {
 	
 	private static final float CAR_SHORTEST_DEFAULT_SPEED = 55/3.6f;
+	private static final float BICYCLE_SHORTEST_DEFAULT_SPEED = 15/3.6f;
 	public static final String USE_SHORTEST_WAY = "short_way";
 	public static final String USE_HEIGHT_OBSTACLES = "height_obstacles";
 	public static final String AVOID_FERRIES = "avoid_ferries";
@@ -155,7 +156,11 @@ public class GeneralRouter implements VehicleRouter {
 		}
 		maxVehicleSpeed = maxSpeed;
 		if (shortestRoute) {
-			maxSpeed = Math.min(CAR_SHORTEST_DEFAULT_SPEED, maxSpeed);
+			if (profile == GeneralRouterProfile.BICYCLE) {
+				maxSpeed = Math.min(BICYCLE_SHORTEST_DEFAULT_SPEED, maxSpeed);
+			} else {
+				maxSpeed = Math.min(CAR_SHORTEST_DEFAULT_SPEED, maxSpeed);
+			}
 		}
 		initCaches();
 	}
