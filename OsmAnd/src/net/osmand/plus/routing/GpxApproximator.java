@@ -35,11 +35,11 @@ public class GpxApproximator {
 	private List<GpxPoint> points;
 	private LatLon start;
 	private LatLon end;
-	private double pointApproximation = 50;
+	private float pointApproximation = 50;
 	private Runnable approximationTask;
 
 	private static final ThreadPoolExecutor SINGLE_THREAD_EXECUTOR
-			= new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());;
+			= new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
 
 	private GpxApproximationProgressCallback approximationProgress;
 
@@ -60,7 +60,7 @@ public class GpxApproximator {
 		initEnvironment(mode, locationsHolder);
 	}
 
-	public GpxApproximator(@NonNull OsmandApplication ctx, @NonNull ApplicationMode mode, double pointApproximation, @NonNull LocationsHolder locationsHolder) throws IOException {
+	public GpxApproximator(@NonNull OsmandApplication ctx, @NonNull ApplicationMode mode, float pointApproximation, @NonNull LocationsHolder locationsHolder) throws IOException {
 		this.ctx = ctx;
 		this.locationsHolder = locationsHolder;
 		this.pointApproximation = pointApproximation;
@@ -84,7 +84,7 @@ public class GpxApproximator {
 	private GpxRouteApproximation getNewGpxApproximationContext() {
 		GpxRouteApproximation newContext = new GpxRouteApproximation(env.getCtx());
 		newContext.ctx.calculationProgress = new RouteCalculationProgress();
-		newContext.MINIMUM_POINT_APPROXIMATION = pointApproximation;
+		newContext.ctx.config.minPointApproximation = pointApproximation;
 		return newContext;
 	}
 
@@ -110,11 +110,11 @@ public class GpxApproximator {
 		}
 	}
 
-	public double getPointApproximation() {
+	public float getPointApproximation() {
 		return pointApproximation;
 	}
 
-	public void setPointApproximation(double pointApproximation) {
+	public void setPointApproximation(float pointApproximation) {
 		this.pointApproximation = pointApproximation;
 	}
 

@@ -3997,9 +3997,9 @@
 
 	<string name="poi_defibrillator_location">Location</string>
 
-	<string name="poi_changing_table_yes">Changing table: yes</string>
-	<string name="poi_changing_table_no">Changing table: no</string>
-	<string name="poi_changing_table_limited">Changing table: limited</string>
+	<string name="poi_changing_table_yes">Yes;Changing table: yes</string>
+	<string name="poi_changing_table_no">No;Changing table: no</string>
+	<string name="poi_changing_table_limited">Limited;Changing table: limited</string>
 	<string name="poi_changing_table_location_room">Changing table location: room</string>
 	<string name="poi_changing_table_location_male_toilet">Changing table location: male toilet</string>
 	<string name="poi_changing_table_location_female_toilet">Changing table location: female toilet</string>
@@ -4810,5 +4810,7 @@
 	<string name="poi_greenery">Greenery</string>
 
 	<string name="poi_hairdresser_supply">Hairdresser supply store</string>
+
+	<string name="poi_changing_table_filter">Changing table</string>
 
 </resources>

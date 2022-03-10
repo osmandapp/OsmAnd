@@ -3,6 +3,7 @@ package net.osmand.router.network;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.list.array.TLongArrayList;
 import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
@@ -31,10 +33,10 @@ public class NetworkRouteSelector {
 	
 	private static final String ROUTE_KEY_VALUE_SEPARATOR = "__";
 
+	private static final boolean GROW_ALGORITHM = true;
 	private static final int MAX_ITERATIONS = 16000;
 	// works only if road in same tile
 	private static final double MAX_RADIUS_HOLE = 30;
-	private static final int DEPTH_TO_STEPBACK_AND_LOOPS = 5;
 	private static final double CONNECT_POINTS_DISTANCE = 20;
 
 	
@@ -76,57 +78,118 @@ public class NetworkRouteSelector {
 
 	public Map<RouteKey, GPXFile> getRoutes(int x, int y) throws IOException {
 		Map<RouteKey, GPXFile> res = new LinkedHashMap<RouteKey, GPXUtilities.GPXFile>();
-		for (NetworkRouteSegment segment : getRouteSegments(x, y)) {
+		for (NetworkRouteSegment segment : rCtx.loadRouteSegment(x, y)) {
 			if (res.containsKey(segment.routeKey)) {
 				continue;
 			}
-			List<NetworkRouteSegment> lst = new ArrayList<>();
-			TLongHashSet visitedIds = new TLongHashSet();
-			visitedIds.add(segment.getId());
-			lst.add(segment.inverse());
-			debug("START ", null, segment);
-			int it = 0;
-			while (it++ < MAX_ITERATIONS) {
-				if (!grow(lst, visitedIds, true, false)) {
-					if (!grow(lst, visitedIds, true, true)) {
-						it = 0;
-						break;
-					}
-				}
+			if (GROW_ALGORITHM) {
+				growAlgorithm(segment, res);
+			} else {
+				connectAlgorithm(segment, res);
 			}
-			Collections.reverse(lst);
-			for (int i = 0; i < lst.size(); i++) {
-				lst.set(i, lst.get(i).inverse());
-			}
-			while (it++ < MAX_ITERATIONS) {
-				if(!grow(lst, visitedIds, false, false)) {
-					if (!grow(lst, visitedIds, false, true)) {
-						it = 0;
-						break;
-					}
-				}
-			}
-			if (it != 0) {
-				RouteKey rkey = segment.routeKey;
-				TIntArrayList ids = new TIntArrayList();
-				for (int i = lst.size() - 1; i > 0 && i > lst.size() - 50; i--) {
-					ids.add((int) (lst.get(i).getId() >> 7));
-				}
-				String msg = "Route likely has a loop: " + rkey + " iterations " + it + " ids " + ids;
-				System.err.println(msg); // throw new IllegalStateException();
-			}
-			res.put(segment.routeKey, createGpxFile(lst));
-			debug("FINISH " + lst.size(), null, segment);
 		}
 		return res;
 	}
 	
 	public Map<RouteKey, GPXFile> getRoutes(QuadRect bBox) throws IOException {
-		return null;
+		// TODO
+		throw new UnsupportedOperationException();
+	}
+	
+	
+	
+	private void connectAlgorithm(NetworkRouteSegment segment, Map<RouteKey, GPXFile> res) throws IOException {
+		RouteKey rkey = segment.routeKey;
+		List<NetworkRouteSegment> lst = new ArrayList<>();
+		debug("START ", null, segment);
+		loadData(segment, rkey, lst);
+		res.put(segment.routeKey, createGpxFile(lst));
+		debug("FINISH " + lst.size(), null, segment);
 	}
 
-	private List<NetworkRouteSegment> getRouteSegments(int x, int y) throws IOException {
-		return rCtx.loadRouteSegment(x, y);
+	private void loadData(NetworkRouteSegment segment, RouteKey rkey, List<NetworkRouteSegment> lst)
+			throws IOException {
+		TLongArrayList queue = new TLongArrayList();
+		Set<Long> visitedTiles = new HashSet<>();
+		Set<Long> objIds = new HashSet<>();
+		long start = NetworkRouteContext.getTileId(segment.getStartPointX(), segment.getStartPointY());
+		long end = NetworkRouteContext.getTileId(segment.getEndPointX(), segment.getEndPointY());
+		queue.add(start);
+		queue.add(end);
+		while (!queue.isEmpty()) {
+			long tile = queue.get(queue.size() - 1);
+			queue.remove(queue.size() - 1, 1);
+			if (!visitedTiles.add(tile)) {
+				continue;
+			}
+			int left = NetworkRouteContext.getX31FromTileId(tile, 0);
+			int top = NetworkRouteContext.getY31FromTileId(tile, 0);
+			int right = NetworkRouteContext.getX31FromTileId(tile, 1);
+			int bottom = NetworkRouteContext.getY31FromTileId(tile, 1);
+			Map<RouteKey, List<NetworkRouteSegment>> tiles = rCtx.loadRouteSegmentTile(left, top, right - 1, bottom - 1, rkey);
+			List<NetworkRouteSegment> loaded = tiles.get(rkey);
+			int sz = loaded == null ? 0 : loaded.size();
+			System.out.println(String.format("Load tile %d: %d segments", tile, sz));
+			if (sz == 0) {
+				continue;
+			}
+			for (NetworkRouteSegment s : loaded) {
+				if (objIds.add(s.getId())) {
+					lst.add(s);
+				}
+			}
+			queue.add(NetworkRouteContext.getTileId(right, bottom));
+			queue.add(NetworkRouteContext.getTileId(right, top));
+			queue.add(NetworkRouteContext.getTileId(right, top - 1));
+			queue.add(NetworkRouteContext.getTileId(left - 1, bottom));
+			queue.add(NetworkRouteContext.getTileId(left - 1, top));
+			queue.add(NetworkRouteContext.getTileId(left - 1, top - 1));
+			queue.add(NetworkRouteContext.getTileId(left, bottom));
+			// queue.add(NetworkRouteContext.getTileId(left, top)); // same
+			queue.add(NetworkRouteContext.getTileId(left, top - 1));
+		}
+	}
+	
+	
+	private void growAlgorithm(NetworkRouteSegment segment, Map<RouteKey, GPXFile> res) throws IOException {
+		List<NetworkRouteSegment> lst = new ArrayList<>();
+		TLongHashSet visitedIds = new TLongHashSet();
+		visitedIds.add(segment.getId());
+		lst.add(segment.inverse());
+		debug("START ", null, segment);
+		int it = 0;
+		while (it++ < MAX_ITERATIONS) {
+			if (!grow(lst, visitedIds, true, false)) {
+				if (!grow(lst, visitedIds, true, true)) {
+					it = 0;
+					break;
+				}
+			}
+		}
+		Collections.reverse(lst);
+		for (int i = 0; i < lst.size(); i++) {
+			lst.set(i, lst.get(i).inverse());
+		}
+		while (it++ < MAX_ITERATIONS) {
+			if (!grow(lst, visitedIds, false, false)) {
+				if (!grow(lst, visitedIds, false, true)) {
+					it = 0;
+					break;
+				}
+			}
+		}
+		if (it != 0) {
+			RouteKey rkey = segment.routeKey;
+			TIntArrayList ids = new TIntArrayList();
+			for (int i = lst.size() - 1; i > 0 && i > lst.size() - 50; i--) {
+				ids.add((int) (lst.get(i).getId() >> 7));
+			}
+			String msg = "Route likely has a loop: " + rkey + " iterations " + it + " ids " + ids;
+			System.err.println(msg); // throw new IllegalStateException();
+		}
+		res.put(segment.routeKey, createGpxFile(lst));
+		debug("FINISH " + lst.size(), null, segment);
+
 	}
 	
 	private void debug(String msg, Boolean reverse, NetworkRouteSegment ld) {
