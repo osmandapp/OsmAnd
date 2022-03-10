@@ -3889,13 +3889,13 @@
     <string name="poi_local_ref">Referèntzia locale</string>
     <string name="poi_geodesist">Geodesista</string>
     <string name="poi_conference_centre">Tzentru pro cunferèntzias</string>
-    <string name="poi_wakeboarding">Wakeboard</string>
-    <string name="poi_ultimate">Ultimate</string>
+    <string name="poi_wakeboarding">Wakeboard;Iscì de abba subra de tàulas</string>
+    <string name="poi_ultimate">Ultimate;Discu freesbee (Ultimate);Ultimate Frisbee</string>
     <string name="poi_speedway">Pista pro mototziclismu</string>
     <string name="poi_horseshoes">Tiru de ferros de caddu</string>
     <string name="poi_cycle_polo">Polo in bitzicleta</string>
     <string name="poi_curling">Curling</string>
-    <string name="poi_crossfit">Crossfit</string>
+    <string name="poi_crossfit">Crossfit;Allenamentu a intensidade arta</string>
     <string name="poi_cockfighting">Lutas de puddos</string>
     <string name="poi_cliff_diving">Imbèrghidas dae sos iscameddos</string>
     <string name="poi_bobsleigh">Bob</string>
@@ -4107,7 +4107,7 @@
     <string name="poi_lgbtq_primary">LGBTQ: primàriu</string>
     <string name="poi_lgbtq_yes">LGBTQ permìtidos</string>
     <string name="poi_lgbtq_only">LGBTQ ebbia</string>
-    <string name="poi_lgbtq_no">LGBTQ permìtidos como</string>
+    <string name="poi_lgbtq_no">LGBTQ non permìtidos</string>
     <string name="poi_beauty_salon_tanning">Innieddigadura</string>
     <string name="poi_beauty_salon_cosmetics">Cosmèticos</string>
     <string name="poi_beauty_salon_skin_care">Cura de sa pedde</string>
@@ -4287,4 +4287,14 @@
     <string name="poi_avalanche_transceiver">Rilevadore de vìtimas de valangas;AVD</string>
     <string name="poi_avalanche_transceiver_training">Annestru de su ritzetrasmetidore de valangas</string>
     <string name="poi_avalanche_transceiver_checkpoint">Puntu de controllu de ritzetrasmissione de valangas</string>
+    <string name="poi_board_type_art">Arte</string>
+    <string name="poi_board_type_planet_walk">Àndalas de pranetas</string>
+    <string name="poi_board_type_sight">Vista</string>
+    <string name="poi_board_type_sport">Isport</string>
+    <string name="poi_board_type_welcome_sign">Sinnale de benebènnida</string>
+    <string name="poi_tiles">Butega de pianellas</string>
+    <string name="poi_parcel_locker">Armarieddu pro pacos</string>
+    <string name="poi_access_permit">Permissu netzessàriu</string>
+    <string name="poi_greenery">Vegetatzione</string>
+    <string name="poi_landuse_education">Educatzione</string>
 </resources>

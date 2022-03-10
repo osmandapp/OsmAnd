@@ -4523,7 +4523,7 @@
     <string name="gpx_no_routes_descr">Для сохранения маршрута в файл вы можете воспользоваться инструментом «%1$s».</string>
     <string name="please_provide_group_name_message">Укажите название группы.</string>
     <string name="quick_action_add_route_descr">Кнопка для начала построения маршрута из центра экрана.</string>
-    <string name="import_tracks_descr">%1$s содержит отдельные треки: %2$s шт. Выберите треки для импорта.</string>
+    <string name="import_tracks_descr">%1$s содержит отдельные треки (%2$s шт.). Выберите треки для импорта.</string>
     <string name="exit_import">Выйти\?</string>
     <string name="list_of_groups">Список групп</string>
     <string name="points_selection_descr">Закрыть и потерять все изменения\?</string>
@@ -4532,11 +4532,21 @@
     <string name="all_groups">Все группы</string>
     <string name="exit_import_descr">Выйти без сохранения изменений\?</string>
     <string name="import_tracks">Импорт треков</string>
-    <string name="google_play_services">Сервисы Google Play</string>
     <string name="location_source">Источник местоположения</string>
     <string name="select_suggested_points">Выберите предлагаемые точки</string>
     <string name="location_source_descr">По умолчанию OsmAnd, установленный из Google Play, использует %1$s для определения местоположения.
 \n
 \nЕсли вы получаете неточную информацию о местоположении или используете устройство без %2$s, попробуйте переключиться на «%3$s»</string>
-    <string name="android_api">Android API</string>
+    <string name="shared_string_shape">Форма</string>
+    <string name="default_appearance_desc">К добавленным в группу избранным точкам будут применяться цвет, значок и форма по умолчанию.</string>
+    <string name="default_appearance">Внешний вид по умолчанию</string>
+    <string name="edit_category">Редактировать категорию</string>
+    <string name="stop_download">Остановить загрузку</string>
+    <string name="stop_and_exit">Остановить и выйти</string>
+    <string name="estimated_download_size">Предполагаемый размер загрузки</string>
+    <string name="number_of_tiles">Количество тайлов</string>
+    <string name="move_map_to_select_area">Переместите карту, чтобы выбрать необходимую область.</string>
+    <string name="shared_string_complete">завершено</string>
+    <string name="stop_download_desc">Загрузка не завершена. Если прервать загрузку сейчас, для просмотра будет доступна только часть тайлов.</string>
+    <string name="zoom_levels_difference_description">Большая разница между уровнями масштабирования может увеличить размер загружаемых данных.</string>
 </resources>

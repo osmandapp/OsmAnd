@@ -4521,10 +4521,20 @@
     <string name="exit_import_descr">離開且不儲存任何變動？</string>
     <string name="exit_import">離開？</string>
     <string name="import_tracks_descr">%1$s，包含 %2$s 個分離軌跡。選擇要匯入的軌跡。</string>
-    <string name="google_play_services">Google Play 服務</string>
     <string name="location_source_descr">預設情況下，從 Google Play 安裝的 OsmAnd 會使用 %1$s 來確認位置。
 \n
 \n若您得到了不準確的位置資訊，或是使用沒有 %2$s 的裝置，請嘗試切換至「%3$s」</string>
     <string name="location_source">位置來源</string>
-    <string name="android_api">Android API</string>
+    <string name="shared_string_shape">形狀</string>
+    <string name="default_appearance_desc">預設色彩、圖示與形狀將會套用到新增至群組中的收藏點。</string>
+    <string name="default_appearance">預設外觀</string>
+    <string name="edit_category">編輯分類</string>
+    <string name="zoom_levels_difference_description">縮放等級間的巨大差異可能會增加下載資料的大小。</string>
+    <string name="estimated_download_size">估計下載大小</string>
+    <string name="move_map_to_select_area">移動地圖以選取所需區域。</string>
+    <string name="stop_download_desc">下載未完成。若您現在中斷下載，則僅有部份圖磚可供檢視。</string>
+    <string name="stop_download">停止下載</string>
+    <string name="stop_and_exit">停止並離開</string>
+    <string name="shared_string_complete">完成</string>
+    <string name="number_of_tiles">圖磚數</string>
 </resources>

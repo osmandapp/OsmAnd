@@ -4523,10 +4523,20 @@
     <string name="import_tracks">Importovať stopy</string>
     <string name="import_tracks_descr">%1$s, obsahuje %2$s samostatných stôp. Zvoľte stopy na importovanie.</string>
     <string name="please_provide_group_name_message">Prosím pomenujte skupinu.</string>
-    <string name="google_play_services">Služby Google Play</string>
     <string name="location_source_descr">OsmAnd inštalovaný z Google Play používa predvolene službu %1$s na určenie polohy.
 \n
 \nAk dostávate nepresnú informáciu o polohe alebo používate zariadenie bez %2$s, skúste prepnúť na \"%3$s\"</string>
     <string name="location_source">Zdroj polohy</string>
-    <string name="android_api">API Android</string>
+    <string name="shared_string_shape">Tvar</string>
+    <string name="default_appearance_desc">Predvolená farba, ikona a tvar sa aplikujú na pridané obľúbené body v skupine.</string>
+    <string name="default_appearance">Predvolený vzhľad</string>
+    <string name="edit_category">Upraviť kategóriu</string>
+    <string name="stop_download_desc">Sťahovanie nie je ukončené. Ak teraz prerušíte sťahovanie, na zobrazenie bude dostupná len časť dlaždíc.</string>
+    <string name="stop_download">Zastaviť sťahovanie</string>
+    <string name="stop_and_exit">Zastaviť a opustiť</string>
+    <string name="shared_string_complete">hotovo</string>
+    <string name="zoom_levels_difference_description">Veľký rozdiel medzi úrovňami priblíženia môže zväčšiť veľkosť sťahovaných dát.</string>
+    <string name="estimated_download_size">Odhadovaná veľkosť na stiahnutie</string>
+    <string name="number_of_tiles">Počet dlaždíc</string>
+    <string name="move_map_to_select_area">Posuňte mapu pre zvolenie potrebnej oblasti.</string>
 </resources>

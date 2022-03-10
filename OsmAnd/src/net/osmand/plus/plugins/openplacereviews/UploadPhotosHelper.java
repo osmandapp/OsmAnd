@@ -16,7 +16,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.plugins.openplacereviews.OprAuthHelper.CheckOprAuthTask;
 import net.osmand.plus.plugins.openplacereviews.UploadPhotosAsyncTask.UploadPhotosListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
@@ -56,13 +55,14 @@ public class UploadPhotosHelper {
 
 	public void chooseAndUploadPhoto(@NonNull String[] placeId) {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
+		OpenPlaceReviewsPlugin plugin = OsmandPlugin.getPlugin(OpenPlaceReviewsPlugin.class);
+		if (plugin == null || mapActivity == null) {
 			return;
 		}
 		registerResultListener(placeId);
 
-		String userName = app.getSettings().OPR_USERNAME.get();
-		String token = app.getSettings().OPR_ACCESS_TOKEN.get();
+		String userName = plugin.OPR_USERNAME.get();
+		String token = plugin.OPR_ACCESS_TOKEN.get();
 		if (Algorithms.isBlank(token) || Algorithms.isBlank(userName)) {
 			OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
 			return;

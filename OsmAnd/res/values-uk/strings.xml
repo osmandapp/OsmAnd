@@ -4330,7 +4330,7 @@
     <string name="horseback_riding">Верхова їзда</string>
     <string name="routing_attr_prefer_horse_routes_description">Надавати перевагу кінним маршрутам</string>
     <string name="routing_attr_prefer_horse_routes_name">Надавати перевагу кінним маршрутам</string>
-    <string name="routing_attr_only_permitted_ways_description">Використовуйте лише явно дозволені шляхи (доріжки, просіки тощо)</string>
+    <string name="routing_attr_only_permitted_ways_description">Використовувати лише явно дозволені шляхи (доріжки, просіки тощо)</string>
     <string name="routing_attr_only_permitted_ways_name">Явний дозвіл використання вулиць</string>
     <string name="routing_attr_only_permitted_streets_description">Використовувати лише явно дозволені вулиці</string>
     <string name="routing_attr_only_permitted_streets_name">Явний дозвіл використання вулиць</string>
@@ -4528,10 +4528,20 @@
     <string name="exit_import">Вийти\?</string>
     <string name="import_tracks">Імпорт треків</string>
     <string name="import_tracks_descr">%1$s, містить %2$s окремі треки. Виберіть треки, які потрібно імпортувати.</string>
-    <string name="google_play_services">Сервіси Google Play</string>
-    <string name="android_api">Android API</string>
-    <string name="location_source_descr">Усталено OsmAnd, встановлений з Google Play, використовує %1$s для визначення розташування.
+    <string name="location_source_descr">Зазвичай OsmAnd, встановлений з Google Play, використовує %1$s для визначення місцеположення.
 \n
-\nЯкщо дані про розташування не точні або ви користуєтеся пристроєм без %2$s, спробуйте перейти до «%3$s»</string>
+\nЯкщо дані про місцеположення не точні або ви користуєтеся пристроєм без %2$s, спробуйте перемикнутися на «%3$s»</string>
     <string name="location_source">Джерело визначення розташування</string>
+    <string name="shared_string_shape">Форма</string>
+    <string name="default_appearance_desc">Типовий колір, піктограма та форма застосовуватимуться до доданих улюблених точок у групі.</string>
+    <string name="default_appearance">Типовий зовнішній вигляд</string>
+    <string name="edit_category">Редагувати категорію</string>
+    <string name="zoom_levels_difference_description">Значна різниця між масштабами може збільшити розмір завантажених даних.</string>
+    <string name="shared_string_complete">завершено</string>
+    <string name="stop_download">Зупинити завантаження</string>
+    <string name="stop_and_exit">Зупинити й вийти</string>
+    <string name="number_of_tiles">Кількість тайлів</string>
+    <string name="estimated_download_size">Приблизний розмір завантаження</string>
+    <string name="stop_download_desc">Завантаження не завершено. Якщо зараз перервати його, для перегляду буде доступна лише частина тайлів.</string>
+    <string name="move_map_to_select_area">Перемістіть мапу, щоб вибрати потрібну ділянку.</string>
 </resources>

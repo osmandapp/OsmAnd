@@ -71,7 +71,7 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -80,6 +80,7 @@ import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
 import net.osmand.plus.plugins.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.plugins.openplacereviews.OprAuthHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper;
+import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.render.RendererRegistry;
@@ -160,7 +161,7 @@ public class OsmandApplication extends MultiDexApplication {
 	MapPoiTypes poiTypes;
 	RoutingHelper routingHelper;
 	TransportRoutingHelper transportRoutingHelper;
-	FavouritesDbHelper favorites;
+	FavouritesHelper favoritesHelper;
 	CommandPlayer player;
 	GpxSelectionHelper selectedGpxHelper;
 	SavingTrackHelper savingTrackHelper;
@@ -196,6 +197,7 @@ public class OsmandApplication extends MultiDexApplication {
 	TravelRendererHelper travelRendererHelper;
 	LauncherShortcutsHelper launcherShortcutsHelper;
 	GpsFilterHelper gpsFilterHelper;
+	DownloadTilesHelper downloadTilesHelper;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -238,9 +240,7 @@ public class OsmandApplication extends MultiDexApplication {
 		if (appInitializer.isAppVersionChanged()) {
 			// Reset mapillary tile sources
 			File tilesPath = getAppPath(IndexConstants.TILES_INDEX_DIR);
-			File mapillaryRasterTilesPath = new File(tilesPath, TileSourceManager.getMapillaryRasterSource().getName());
 			File mapillaryVectorTilesPath = new File(tilesPath, TileSourceManager.getMapillaryVectorSource().getName());
-			Algorithms.removeAllFiles(mapillaryRasterTilesPath);
 			Algorithms.removeAllFiles(mapillaryVectorTilesPath);
 			// Remove travel sqlite db files
 			removeSqliteDbTravelFiles();
@@ -413,8 +413,8 @@ public class OsmandApplication extends MultiDexApplication {
 		return gpxDbHelper;
 	}
 
-	public FavouritesDbHelper getFavorites() {
-		return favorites;
+	public FavouritesHelper getFavoritesHelper() {
+		return favoritesHelper;
 	}
 
 	public ResourceManager getResourceManager() {
@@ -550,6 +550,11 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public GpsFilterHelper getGpsFilterHelper() {
 		return gpsFilterHelper;
+	}
+
+	@NonNull
+	public DownloadTilesHelper getDownloadTilesHelper() {
+		return downloadTilesHelper;
 	}
 
 	public CommandPlayer getPlayer() {

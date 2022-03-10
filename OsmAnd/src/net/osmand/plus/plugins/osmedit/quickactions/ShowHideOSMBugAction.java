@@ -33,10 +33,9 @@ public class ShowHideOSMBugAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
-		app.getSettings().SHOW_OSM_BUGS.set(!app.getSettings().SHOW_OSM_BUGS.get());
 		OsmEditingPlugin plugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
 		if (plugin != null) {
+			plugin.SHOW_OSM_BUGS.set(!plugin.SHOW_OSM_BUGS.get());
 			plugin.updateLayers(mapActivity, mapActivity);
 			mapActivity.getMapView().refreshMap(true);
 		}
@@ -63,7 +62,7 @@ public class ShowHideOSMBugAction extends QuickAction {
 
 	@Override
 	public boolean isActionWithSlash(OsmandApplication application) {
-
-		return application.getSettings().SHOW_OSM_BUGS.get();
+		OsmEditingPlugin plugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
+		return plugin != null && plugin.SHOW_OSM_BUGS.get();
 	}
 }

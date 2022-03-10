@@ -1,24 +1,15 @@
 package net.osmand.plus.plugins.mapillary;
 
-import static android.content.Intent.ACTION_VIEW;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAPILLARY;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_MAPILLARY;
-import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.PlatformUtil;
@@ -33,7 +24,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
@@ -43,6 +33,8 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
@@ -60,6 +52,11 @@ import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
 
+import static android.content.Intent.ACTION_VIEW;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAPILLARY;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_MAPILLARY;
+import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
+
 public class MapillaryPlugin extends OsmandPlugin {
 
 	public static final String TYPE_MAPILLARY_PHOTO = "mapillary-photo";
@@ -69,7 +66,15 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	private static final Log LOG = PlatformUtil.getLog(OpenPlaceReviewsPlugin.class);
 
-	private final OsmandSettings settings;
+	public final OsmandPreference<Boolean> SHOW_MAPILLARY;
+	public final OsmandPreference<Boolean> MAPILLARY_FIRST_DIALOG_SHOWN;
+
+	public final CommonPreference<Boolean> USE_MAPILLARY_FILTER;
+	public final CommonPreference<String> MAPILLARY_FILTER_USER_KEY;
+	public final CommonPreference<String> MAPILLARY_FILTER_USERNAME;
+	public final CommonPreference<Long> MAPILLARY_FILTER_FROM_DATE;
+	public final CommonPreference<Long> MAPILLARY_FILTER_TO_DATE;
+	public final CommonPreference<Boolean> MAPILLARY_FILTER_PANO;
 
 	private MapActivity mapActivity;
 
@@ -79,7 +84,16 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	public MapillaryPlugin(OsmandApplication app) {
 		super(app);
-		settings = app.getSettings();
+
+		SHOW_MAPILLARY = registerBooleanPreference("show_mapillary", false).makeProfile();
+		MAPILLARY_FIRST_DIALOG_SHOWN = registerBooleanPreference("mapillary_first_dialog_shown", false).makeGlobal();
+
+		USE_MAPILLARY_FILTER = registerBooleanPreference("use_mapillary_filters", false).makeGlobal().makeShared();
+		MAPILLARY_FILTER_USER_KEY = registerStringPreference("mapillary_filter_user_key", "").makeGlobal().makeShared();
+		MAPILLARY_FILTER_USERNAME = registerStringPreference("mapillary_filter_username", "").makeGlobal().makeShared();
+		MAPILLARY_FILTER_FROM_DATE = registerLongPreference("mapillary_filter_from_date", 0).makeGlobal().makeShared();
+		MAPILLARY_FILTER_TO_DATE = registerLongPreference("mapillary_filter_to_date", 0).makeGlobal().makeShared();
+		MAPILLARY_FILTER_PANO = registerBooleanPreference("mapillary_filter_pano", false).makeGlobal().makeShared();
 	}
 
 	@Override
@@ -146,10 +160,11 @@ public class MapillaryPlugin extends OsmandPlugin {
 			createLayers(context);
 		}
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		OsmandSettings settings = app.getSettings();
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		if (isActive()) {
 			ITileSource vectorSource = null;
-			if (settings.SHOW_MAPILLARY.get() || force) {
+			if (SHOW_MAPILLARY.get() || force) {
 				vectorSource = settings.getTileSourceByName(TileSourceManager.getMapillaryVectorSource().getName(), false);
 			}
 			updateLayer(mapView, vectorSource, vectorLayer, 0.62f);
@@ -197,14 +212,13 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 			@Override
 			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int pos, boolean isChecked, int[] viewCoordinates) {
-				final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 				if (itemId == R.string.street_level_imagery) {
-					settings.SHOW_MAPILLARY.set(!settings.SHOW_MAPILLARY.get());
+					SHOW_MAPILLARY.set(!SHOW_MAPILLARY.get());
 					updateMapLayers(mapActivity, mapActivity, false);
 					ContextMenuItem item = adapter.getItem(pos);
 					if (item != null) {
-						item.setSelected(settings.SHOW_MAPILLARY.get());
-						item.setColor(app, settings.SHOW_MAPILLARY.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+						item.setSelected(SHOW_MAPILLARY.get());
+						item.setColor(app, SHOW_MAPILLARY.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 						adapter.notifyDataSetChanged();
 					}
 				}
@@ -216,11 +230,11 @@ public class MapillaryPlugin extends OsmandPlugin {
 				.setId(MAPILLARY)
 				.setTitleId(R.string.street_level_imagery, mapActivity)
 				.setDescription("Mapillary")
-				.setSelected(settings.SHOW_MAPILLARY.get())
-				.setColor(app, settings.SHOW_MAPILLARY.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setSelected(SHOW_MAPILLARY.get())
+				.setColor(app, SHOW_MAPILLARY.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_mapillary)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
-				.setItemDeleteAction(makeDeleteAction(settings.SHOW_MAPILLARY))
+				.setItemDeleteAction(makeDeleteAction(SHOW_MAPILLARY))
 				.setListener(listener)
 				.createItem());
 	}
@@ -242,7 +256,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 		return mapillaryControl;
 	}
 
-	private void setWidgetVisible(MapActivity mapActivity, boolean visible) {
+	public void setWidgetVisible(MapActivity mapActivity, boolean visible) {
 		if (mapillaryWidgetRegInfo != null) {
 			final List<ApplicationMode> allModes = ApplicationMode.allPossibleValues();
 			for (ApplicationMode mode : allModes) {
@@ -350,41 +364,4 @@ public class MapillaryPlugin extends OsmandPlugin {
 		return AndroidUtils.startActivityIfSafe(app, intent);
 	}
 
-	public static class MapillaryFirstDialogFragment extends BottomSheetDialogFragment {
-		public static final String TAG = "MapillaryFirstDialogFragment";
-
-		private static final String KEY_SHOW_WIDGET = "key_show_widget";
-		private boolean showWidget = true;
-
-		@Override
-		public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-			if (savedInstanceState != null) {
-				showWidget = savedInstanceState.getBoolean(KEY_SHOW_WIDGET, true);
-			}
-
-			View view = inflater.inflate(R.layout.mapillary_first_dialog, container, false);
-			final SwitchCompat widgetSwitch = view.findViewById(R.id.widget_switch);
-			widgetSwitch.setChecked(showWidget);
-			widgetSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> showWidget(isChecked));
-			view.findViewById(R.id.actionButton).setOnClickListener(v -> {
-				showWidget(widgetSwitch.isChecked());
-				dismiss();
-			});
-			showWidget(showWidget);
-			return view;
-		}
-
-		private void showWidget(boolean show) {
-			FragmentActivity activity = getActivity();
-			MapillaryPlugin plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
-			if (plugin != null && activity instanceof MapActivity) {
-				plugin.setWidgetVisible((MapActivity) activity, show);
-			}
-		}
-
-		@Override
-		public void onSaveInstanceState(@NonNull Bundle outState) {
-			outState.putBoolean(KEY_SHOW_WIDGET, showWidget);
-		}
-	}
 }

@@ -1695,7 +1695,7 @@
     <string name="poi_office_psychologist">Pszichológiai rendelő</string>
     <string name="poi_office_midwife">Szülészeti rendelő</string>
     <string name="poi_badminton">Tollaslabda</string>
-    <string name="poi_brushless">Kefétlen</string>
+    <string name="poi_brushless">Kefe nélküli</string>
     <string name="poi_internet_access_type">Internetcsatlakozás típusa</string>
     <string name="poi_fire_hydrant_position">Hely</string>
     <string name="poi_water_source">Vízforrás</string>
@@ -2532,7 +2532,7 @@
     <string name="poi_counselling_type_violence_no">Tanácsadás (erőszak) nincs</string>
     <string name="poi_counselling_yes">Tanácsadás</string>
     <string name="poi_counselling_no">Tanácsadás nincs</string>
-    <string name="poi_home_visit_yes">van</string>
+    <string name="poi_home_visit_yes">Igen;Otthoni beteglátogatás</string>
     <string name="poi_disease_malaria_yes">Malária</string>
     <string name="poi_disease_malaria_no">Malária nincs</string>
     <string name="poi_disease_ebola_yes">Ebola</string>
@@ -2822,7 +2822,7 @@
     <string name="poi_free_flying_paragliding_no">Siklóernyőzés nincs</string>
     <string name="poi_free_flying_hanggliding_no">Sárkányrepülés nincs</string>
     <string name="poi_treat_inpatient_no">Fekvőbeteg-ellátás nincs</string>
-    <string name="poi_home_visit_no">Otthoni látogatás nincs</string>
+    <string name="poi_home_visit_no">Otthoni beteglátogatás nincs</string>
     <string name="poi_dispensing_no">Vény nem váltható be</string>
     <string name="poi_hygrometer_no">Páratartalom-mérő nincs</string>
     <string name="poi_toilets_disposal_flush">WC-kezelés: vízöblítéses</string>
@@ -3390,11 +3390,11 @@
     <string name="poi_socket_bs1363_yes">BS 1363</string>
     <string name="poi_socket_as3112_yes">AS/NZS 3112</string>
     <string name="poi_socket_chademo_output_filter">CHAdeMO – teljesítmény</string>
-    <string name="poi_socket_type2_output_filter">2. típusú – teljesítmény</string>
-    <string name="poi_socket_type2_combo_output_filter">2. típusú kombinált – teljesítmény</string>
-    <string name="poi_socket_type3_output_filter">3. típusú – teljesítmény</string>
-    <string name="poi_socket_cee_blue_output_filter">Kék CEE – teljesítmény</string>
-    <string name="poi_socket_schuko_output_filter">Schuko – teljesítmény</string>
+    <string name="poi_socket_type2_output_filter">Type 2 csatlakozó</string>
+    <string name="poi_socket_type2_combo_output_filter">Type 2 kombinált csatlakozó</string>
+    <string name="poi_socket_type3_output_filter">Type 3 csatlakozó</string>
+    <string name="poi_socket_cee_blue_output_filter">Kék CEE csatlakozó</string>
+    <string name="poi_socket_schuko_output_filter">Schuko csatlakozó</string>
     <string name="poi_socket_chademo_output_high">nagy</string>
     <string name="poi_socket_chademo_output_medium">közepes</string>
     <string name="poi_socket_chademo_output_low">kicsi</string>
@@ -4289,4 +4289,13 @@
     <string name="poi_avalanche_transceiver">Lavinaáldozat-észlelő;AVD;Lavina-adóvevő</string>
     <string name="poi_access_permit">Csak engedéllyel</string>
     <string name="poi_parcel_locker">Csomagfeladó automata</string>
+    <string name="poi_board_type_planet_walk">Bolygóséta</string>
+    <string name="poi_board_type_sight">Helyi látnivaló</string>
+    <string name="poi_tiles">Csempebolt</string>
+    <string name="poi_board_type_art">Művészet</string>
+    <string name="poi_board_type_sport">Tornagyakorlat</string>
+    <string name="poi_board_type_welcome_sign">Üdvözlő tábla</string>
+    <string name="poi_greenery">Zöldterület</string>
+    <string name="poi_landuse_education">Oktatási intézmény területe</string>
+    <string name="poi_hairdresser_supply">Fodrászkellék-szaküzlet</string>
 </resources>

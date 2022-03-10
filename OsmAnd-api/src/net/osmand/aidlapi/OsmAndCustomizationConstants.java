@@ -29,6 +29,7 @@ public interface OsmAndCustomizationConstants {
 	String DRAWER_HELP_ID = DRAWER_ITEM_ID_SCHEME + "help";
 	String DRAWER_BUILDS_ID = DRAWER_ITEM_ID_SCHEME + "builds";
 	String DRAWER_DIVIDER_ID = DRAWER_ITEM_ID_SCHEME + "divider";
+	String DRAWER_OSMAND_VERSION_ID = DRAWER_ITEM_ID_SCHEME + "osmand_version";
 
 	// Configure Map:
 	String CONFIGURE_MAP_ITEM_ID_SCHEME = "map.configure.";
@@ -56,7 +57,7 @@ public interface OsmAndCustomizationConstants {
 	String OVERLAY_MAP = SHOW_ITEMS_ID_SCHEME + "overlay_map";
 	String UNDERLAY_MAP = SHOW_ITEMS_ID_SCHEME + "underlay_map";
 	String CONTOUR_LINES = SHOW_ITEMS_ID_SCHEME + "contour_lines";
-	String TERRAIN = SHOW_ITEMS_ID_SCHEME + "terrain";
+	String TERRAIN_ID = SHOW_ITEMS_ID_SCHEME + "terrain";
 
 	String MAP_RENDERING_CATEGORY_ID = RENDERING_ITEMS_ID_SCHEME + "category";
 	String MAP_STYLE_ID = RENDERING_ITEMS_ID_SCHEME + "map_style";
@@ -181,4 +182,5 @@ public interface OsmAndCustomizationConstants {
 	String CONTEXT_MENU_SEARCH_MORE_ID = MAP_CONTEXT_MENU_ROWS + "search_more";
 	String CONTEXT_MENU_SHOW_ON_MAP_ID = MAP_CONTEXT_MENU_ROWS + "show_on_map";
 	String CONTEXT_MENU_AVOID_ROADS_ID = MAP_CONTEXT_MENU_ROWS + "avoid_roads";
+	String CONTEXT_MENU_ONLINE_PHOTOS_ID = MAP_CONTEXT_MENU_ROWS + "online_photos";
 }

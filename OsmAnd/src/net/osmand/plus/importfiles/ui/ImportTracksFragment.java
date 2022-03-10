@@ -1,9 +1,9 @@
 package net.osmand.plus.importfiles.ui;
 
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.plus.myplaces.AvailableGPXFragment.SELECTED_FOLDER_KEY;
-import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.myplaces.ui.AvailableGPXFragment.SELECTED_FOLDER_KEY;
+import static net.osmand.plus.myplaces.ui.FavoritesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -47,8 +47,8 @@ import net.osmand.plus.importfiles.ui.ExitImportBottomSheet.OnExitConfirmedListe
 import net.osmand.plus.importfiles.ui.ImportTracksAdapter.ImportTracksListener;
 import net.osmand.plus.importfiles.ui.SelectPointsFragment.PointsSelectionListener;
 import net.osmand.plus.importfiles.ui.SelectTrackDirectoryBottomSheet.FolderSelectionListener;
-import net.osmand.plus.myplaces.AddNewTrackFolderBottomSheet;
-import net.osmand.plus.myplaces.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
+import net.osmand.plus.myplaces.ui.AddNewTrackFolderBottomSheet;
+import net.osmand.plus.myplaces.ui.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TracksDrawParams;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.utils.AndroidUtils;

@@ -17,6 +17,7 @@ import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.dialogs.UploadPhotoProgressBottomSheet;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.openplacereviews.OpenDBAPI.UploadImageResult;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
@@ -39,6 +40,7 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 	private static final int IMAGE_MAX_SIZE = 4096;
 
 	private final OsmandApplication app;
+	private final OpenPlaceReviewsPlugin plugin;
 	private final WeakReference<FragmentActivity> activityRef;
 	private final OpenDBAPI openDBAPI = new OpenDBAPI();
 	private final List<Uri> data;
@@ -64,6 +66,7 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 	public UploadPhotosAsyncTask(@NonNull FragmentActivity activity, @NonNull List<Uri> data,
 	                             @NonNull String[] placeId, @Nullable UploadPhotosListener listener) {
 		app = (OsmandApplication) activity.getApplicationContext();
+		plugin = OsmandPlugin.getPlugin(OpenPlaceReviewsPlugin.class);
 		activityRef = new WeakReference<>(activity);
 		this.data = data;
 		this.placeId = placeId;
@@ -156,8 +159,8 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 		if (response != null) {
 			UploadImageResult result = null;
 			try {
-				String privateKey = app.getSettings().OPR_ACCESS_TOKEN.get();
-				String name = app.getSettings().OPR_BLOCKCHAIN_NAME.get();
+				String privateKey = plugin.OPR_ACCESS_TOKEN.get();
+				String name = plugin.OPR_BLOCKCHAIN_NAME.get();
 				result = openDBAPI.uploadImage(placeId, baseUrl, privateKey, name, response);
 				if (!Algorithms.isEmpty(result.error)) {
 					app.showToastMessage(result.error);
@@ -184,8 +187,8 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 	//This method runs on non main thread
 	private void checkTokenAndShowScreen() {
 		String baseUrl = OPRConstants.getBaseUrl(app);
-		String name = app.getSettings().OPR_USERNAME.get();
-		String privateKey = app.getSettings().OPR_ACCESS_TOKEN.get();
+		String name = plugin.OPR_USERNAME.get();
+		String privateKey = plugin.OPR_ACCESS_TOKEN.get();
 		if (openDBAPI.checkPrivateKeyValid(app, baseUrl, name, privateKey)) {
 			app.showToastMessage(R.string.cannot_upload_image);
 		} else {

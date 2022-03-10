@@ -212,7 +212,7 @@ public class ColorUtilities {
 		return nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light;
 	}
 
-	@ColorRes
+	@ColorInt
 	public static int getActiveTransparentColor(@NonNull Context ctx, boolean nightMode) {
 		return ContextCompat.getColor(ctx, getActiveTransparentColorId(nightMode));
 	}
@@ -262,5 +262,10 @@ public class ColorUtilities {
 	@ColorRes
 	public static int getMapButtonIconColorId(boolean nightMode) {
 		return nightMode ? R.color.map_button_icon_color_dark : R.color.map_button_icon_color_light;
+	}
+
+	@ColorRes
+	public static int getStatusBarColorId(boolean nightMode) {
+		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
 	}
 }

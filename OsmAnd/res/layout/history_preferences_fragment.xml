@@ -32,26 +32,6 @@
 
 	</LinearLayout>
 
-	<LinearLayout
-		android:id="@+id/control_buttons"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_gravity="bottom"
-		android:orientation="vertical">
-
-		<androidx.appcompat.widget.AppCompatImageView
-			android:id="@+id/buttons_shadow"
-			android:layout_width="match_parent"
-			android:layout_height="8dp"
-			android:layout_gravity="bottom"
-			android:background="@drawable/shadow" />
-
-		<include
-			layout="@layout/bottom_buttons"
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/dialog_button_ex_height"
-			android:layout_gravity="bottom" />
-
-	</LinearLayout>
+	<include layout="@layout/control_bottom_buttons" />
 
 </FrameLayout>

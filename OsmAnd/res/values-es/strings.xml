@@ -804,25 +804,26 @@
 \n
 \n Los PDI de OsmAnd están siendo desarrollados activamente. Nuestro proyecto y su continuo progreso, se basa en contribuciones económicas para desarrollar y probar nuevas funcionalidades. Por favor, considera comprar OsmAnd+, financiar nuevas funciones o hacer una donación general en https://osmand.net.</string>
     <string name="osmand_plus_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM)
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (Direcciones de navegación automatizadas de OSM)
 \n
-\n OsmAnd+ es un software de navegación de código abierto con acceso a una amplia variedad de datos globales de OSM. Todos los datos del mapa (vectores y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. Ofrece funcionalidades de rutas con y sin conexión, incluyendo guía de giro-a-giro por voz.
+\n OsmAnd+ es una aplicación de navegación de software de código abierto con acceso a una amplia variedad de datos globales de OSM. Todos los datos de mapas (mapas vectoriales o de mosaicos) se pueden almacenar en la tarjeta de memoria del teléfono para usarlos sin conexión. También se ofrece la funcionalidad de enrutamiento fuera de línea y en línea, incluida la guía de voz paso a paso.
 \n
-\n OsmAnd+ es la versión de pago de la aplicación, comprándola ayudas al proyecto, financias el desarrollo de nuevas funciones, y recibes las últimas actualizaciones.
+\n OsmAnd+ es la versión de pago de la aplicación. Al comprarla, respalda el proyecto, financia el desarrollo de nuevas funciones y recibe las últimas actualizaciones.
 \n
-\n Algunas de las funciones fundamentales:
-\n - Completa funcionalidad sin conexión (guarda los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo)
-\n - Mapas mundiales vectoriales compactos disponibles
+\n Algunas de las características principales:
+\n - Funcionalidad sin conexión completa (almacenar mapas vectoriales o mosaicos descargados en el almacenamiento del dispositivo)
+\n - Mapas vectoriales sin conexión compactos para todo el mundo disponibles
 \n - Descarga ilimitada de mapas de países o regiones directamente desde la aplicación
-\n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable
+\n - Función de Wikipedia sin conexión (descargar puntos de interés de Wikipedia), ideal para hacer turismo
+\n - Posibilidad de superposición de varias capas de mapas, como GPX o pistas de navegación, puntos de interés, Favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable
 \n
-\n - Búsqueda sin conexión de direcciones y sitios (PDI)
-\n - Rutas sin conexión para distancias de rango medio
-\n - Modos de automóvil, bicicleta y peatón con opcional:
-\n - Cambio automático de modo diurno/nocturno
-\n - Zum del mapa según la velocidad
-\n - Alineación del mapa, según brújula o dirección del movimiento
-\n - Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas
+\n - Búsqueda sin conexión de direcciones y lugares (PDI)
+\n - Enrutamiento fuera de línea para distancias medias
+\n - Modos coche, bicicleta y peatón con opcional:
+\n - Cambio automático de vista diurna/nocturna
+\n - Zoom de mapa dependiente de la velocidad
+\n - Alineación del mapa según la brújula o la dirección del movimiento
+\n - Indicación de carril, visualización del límite de velocidad, voz grabada y de texto a voz
 \n</string>
     <string name="avoid_motorway">Sin autopistas</string>
     <string name="snap_to_road">Ajustar al camino</string>
@@ -2023,7 +2024,7 @@
     <string name="search_map_hint">Ciudad o región</string>
     <string name="gpx_no_tracks_title">Sin archivos de trazas aún</string>
     <string name="gpx_no_tracks_title_folder">También puedes añadir archivos de trazas a la carpeta</string>
-    <string name="gpx_add_track">Añadir</string>
+    <string name="gpx_add_track">Añadir más…</string>
     <string name="shared_string_appearance">Aspecto</string>
     <string name="shared_string_notifications">Notificaciones</string>
     <string name="shared_string_resume">Reanudar</string>
@@ -2987,8 +2988,8 @@
     <string name="shared_string_icon">Icono</string>
     <string name="collected_data">Datos recopilados</string>
     <string name="press_again_to_change_the_map_orientation">Pulsa de nuevo para cambiar la orientación del mapa</string>
-    <string name="shared_string_min_speed">Velocidad mín.</string>
-    <string name="shared_string_max_speed">Velocidad máx.</string>
+    <string name="shared_string_min_speed">Velocidad mínima</string>
+    <string name="shared_string_max_speed">Velocidad máxima</string>
     <string name="default_speed_setting_title">Velocidad predefinida</string>
     <string name="default_speed_setting_descr">Cambiar los ajustes de la velocidad predefinida</string>
     <string name="minmax_speed_dialog_title">Definir velocidad mín/máx</string>
@@ -3010,7 +3011,7 @@
     <string name="profile_alert_need_save_title">Guardar cambios</string>
     <string name="profile_alert_need_save_msg">Guardar primero los cambios del perfil</string>
     <string name="profile_alert_delete_title">Borrar perfil</string>
-    <string name="profile_alert_delete_msg">¿Borrar el perfil «%s»\?</string>
+    <string name="profile_alert_delete_msg">Borrar el perfil \"%s\"</string>
     <string name="select_base_profile_dialog_title">Elige un perfil para comenzar</string>
     <string name="select_base_profile_dialog_message">El perfil personalizado se basa en uno de los perfiles de aplicación predefinidos, lo que define los ajustes básicos como la visibilidad predefinida de los widgets, las unidades de velocidad y distancia. Estos son los perfiles de aplicación predefinidos, junto con ejemplos de perfiles personalizados a los que se pueden ampliar:</string>
     <string name="select_nav_profile_dialog_title">Elegir el tipo de navegación</string>
@@ -3915,7 +3916,7 @@
     <string name="open_place_reviews_plugin_description">Envía fotos, reseñas y enlaces sobre lugares públicos como restaurantes, hoteles, museos y puntos de referencia. Todos los datos son abiertos: https://openplacereviews.org/data/ .
 \n
 \nMás información en: https://openplacereviews.org</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="open_place_reviews">Reseñas de OpenPlace</string>
     <string name="online_routing_example_hint">La URL con todos los parámetros se verá así:</string>
     <string name="online_routing_engines">Motores de navegación en línea</string>
     <string name="online_routing_engine">Motor de navegación en línea</string>
@@ -4052,7 +4053,7 @@
     <string name="contact_support">Contacto con soporte</string>
     <string name="empty_purchases_description">Si tus compras no aparecen aquí, pulsa sobre «%1$s», o ponte en contacto con nuestro equipo de asistencia.</string>
     <string name="troubleshooting">Solución de problemas</string>
-    <string name="osmand_live">OsmAnd Live</string>
+    <string name="osmand_live">OsmAnd en vivo</string>
     <string name="annual_subscription">Suscripción anual</string>
     <string name="monthly_subscription">Suscripción mensual</string>
     <string name="three_months_subscription">Suscripción trimestral</string>
@@ -4081,8 +4082,8 @@
     <string name="user_points">Puntos de usuario</string>
     <string name="output">Salida</string>
     <string name="shared_string_feet">pies</string>
-    <string name="shared_string_min_height">Altura mín.</string>
-    <string name="shared_string_max_height">Altura máx.</string>
+    <string name="shared_string_min_height">Altura mínima</string>
+    <string name="shared_string_max_height">Altura máxima</string>
     <string name="shared_string_itinerary">Itinerario</string>
     <string name="release_4_0">• Copia de seguridad en la nube.
 \n
@@ -4462,7 +4463,7 @@
     <string name="approx_safe_mode">Aproximación de GPX segura</string>
     <string name="approx_safe_mode_description">Realiza una aproximación de GPX usando un código Android más lento en lugar del nativo.</string>
     <string name="use_external_timestamps">Usar sellos de tiempo externos</string>
-    <string name="use_external_timestamps_description">Usa sellos de tiempo del navegador en línea para ajustar el tiempo estimado y la velocidad media</string>
+    <string name="use_external_timestamps_description">Utilizar sellos de tiempo del enrutador en línea para ajustar la hora estimada de llegada y la velocidad media</string>
     <string name="no_plugins_enabled">No tienes ningún complemento activado. Puedes encontrar una lista de los complementos disponibles en \'Menú\' → \'Complementos\'.</string>
     <string name="rendering_attr_natureReserves_description">Mostrar reservas naturales, áreas protegidas y parques nacionales.</string>
     <string name="gps_filter_smoothing">Suavizado</string>
@@ -4499,8 +4500,8 @@
     <string name="always_ask_waypoint_appearance_description">Al pulsar esta acción se abrirá la pantalla \"Añadir punto de ruta\", en la que podrá cambiar el nombre y la apariencia.</string>
     <string name="navigate_point_format_swiss_grid">Red Suiza (CH1903)</string>
     <string name="rendering_attr_seabedDetail_name">Detalle del fondo marino</string>
-    <string name="save_track_to_gpx_descrp">Inicia la grabación de la traza automáticamente mientras la navegación está en curso. Cuando termine, la traza se guardará automáticamente.</string>
-    <string name="gpx_no_routes_descr">Puedes usar la herramienta «%1$s» para agregar la ruta al archivo.</string>
+    <string name="save_track_to_gpx_descrp">Inicia automáticamente la grabación de trazas mientras navega y las guarda automáticamente después.</string>
+    <string name="gpx_no_routes_descr">Puedes usar la herramienta «%1$s» para guardar la ruta como un archivo.</string>
     <string name="rendering_value_omit_name">Omitir</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">No esconde los túneles de las vías fluviales</string>
     <string name="rendering_attr_seabedDetail_description">Información adicional de texto sobre la calificación de la superficie del fondo marino, tipos de superficies combinados, categoría y taxón de plantas o praderas submarinas</string>
@@ -4510,12 +4511,12 @@
     <string name="shared_string_reading_file">Leyendo archivo…</string>
     <string name="all_groups">Todos los grupos</string>
     <string name="list_of_groups">Lista de grupos</string>
-    <string name="points_selection_descr">¿Estás seguro de que quieres cerrar\? Perderás todos los cambios.</string>
-    <string name="exit_import_descr">¿Estás seguro de que quieres salir sin guardar\? Perderás todos los cambios.</string>
-    <string name="exit_import">¿Salir de la importación\?</string>
+    <string name="points_selection_descr">¿Cerrar y perder todos los cambios\?</string>
+    <string name="exit_import_descr">¿Salir sin guardar los cambios\?</string>
+    <string name="exit_import">¿Salir\?</string>
     <string name="import_tracks">Importar trazas</string>
-    <string name="import_tracks_descr">%1$s contiene %2$s trazas separadas. Elige las trazas que quieres importar.</string>
-    <string name="please_provide_group_name_message">Por favor, indica un nombre para el grupo.</string>
+    <string name="import_tracks_descr">%1$s, contiene %2$s pistas separadas. Elige pistas a importar.</string>
+    <string name="please_provide_group_name_message">Por favor, nombra el grupo.</string>
     <string name="gpx_no_routes_title">No hay rutas</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Etiquetas fixme</string>
@@ -4527,4 +4528,12 @@
     <string name="quick_action_add_route_descr">Un botón para iniciar una ruta desde el centro de la pantalla.</string>
     <string name="select_suggested_points">Selecciona puntos sugeridos</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Mostrar etiquetas de nota</string>
+    <string name="location_source_descr">Por defecto, OsmAnd instalado desde Google Play utiliza %1$s para determinar la ubicación.
+\n
+\nSi obtienes información de ubicación imprecisa o utilizas un dispositivo sin %2$s, intenta cambiar a \"%3$s\"</string>
+    <string name="location_source">Fuente de la ubicación</string>
+    <string name="shared_string_shape">Forma</string>
+    <string name="default_appearance_desc">El color, el icono y la forma predeterminados se aplicarán a los puntos favoritos agregados al grupo.</string>
+    <string name="default_appearance">Apariencia predeterminada</string>
+    <string name="edit_category">Editar categoría</string>
 </resources>

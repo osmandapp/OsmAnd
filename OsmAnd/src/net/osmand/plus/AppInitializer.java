@@ -50,7 +50,8 @@ import net.osmand.plus.inapp.InAppPurchaseHelperImpl;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.FavouritesFileHelper;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -58,6 +59,7 @@ import net.osmand.plus.plugins.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.openplacereviews.OprAuthHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper;
+import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.render.NativeOsmandLibrary;
@@ -414,7 +416,7 @@ public class AppInitializer implements IProgress {
 		app.liveMonitoringHelper = startupInit(new LiveMonitoringHelper(app), LiveMonitoringHelper.class);
 		app.selectedGpxHelper = startupInit(new GpxSelectionHelper(app, app.savingTrackHelper), GpxSelectionHelper.class);
 		app.gpxDbHelper = startupInit(new GpxDbHelper(app), GpxDbHelper.class);
-		app.favorites = startupInit(new FavouritesDbHelper(app), FavouritesDbHelper.class);
+		app.favoritesHelper = startupInit(new FavouritesHelper(app), FavouritesHelper.class);
 		app.waypointHelper = startupInit(new WaypointHelper(app), WaypointHelper.class);
 		app.aidlApi = startupInit(new OsmandAidlApi(app), OsmandAidlApi.class);
 
@@ -445,6 +447,7 @@ public class AppInitializer implements IProgress {
 		app.onlineRoutingHelper = startupInit(new OnlineRoutingHelper(app), OnlineRoutingHelper.class);
 		app.launcherShortcutsHelper = startupInit(new LauncherShortcutsHelper(app), LauncherShortcutsHelper.class);
 		app.gpsFilterHelper = startupInit(new GpsFilterHelper(app), GpsFilterHelper.class);
+		app.downloadTilesHelper = startupInit(new DownloadTilesHelper(app), DownloadTilesHelper.class);
 
 		initOpeningHoursParser();
 	}
@@ -619,7 +622,7 @@ public class AppInitializer implements IProgress {
 			// native depends on renderers
 			initNativeCore();
 			notifyEvent(InitEvents.NATIVE_INITIALIZED);
-			app.favorites.loadFavorites();
+			app.favoritesHelper.loadFavorites();
 			app.gpxDbHelper.loadGpxItems();
 			notifyEvent(InitEvents.FAVORITES_INITIALIZED);
 			app.poiFilters.reloadAllPoiFilters();
@@ -685,8 +688,8 @@ public class AppInitializer implements IProgress {
 
 	private void restoreBackupForFavoritesFiles() {
 		final File appDir = app.getAppPath(null);
-		File save = new File(appDir, FavouritesDbHelper.FILE_TO_SAVE);
-		File bak = new File(appDir, FavouritesDbHelper.FILE_TO_BACKUP);
+		File save = new File(appDir, FavouritesFileHelper.FILE_TO_SAVE);
+		File bak = new File(appDir, FavouritesFileHelper.FILE_TO_BACKUP);
 		if (bak.exists() && (!save.exists() || bak.lastModified() > save.lastModified())) {
 			if (save.exists()) {
 				save.delete();

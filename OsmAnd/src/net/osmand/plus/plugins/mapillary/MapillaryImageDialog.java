@@ -441,7 +441,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 				if (p == null) {
 					GeometryTile tile = null;
 					// asking tile image async
-					boolean imgExist = mgr.tileExistOnFileSystem(tileId, map, tileX, tileY, MIN_IMAGE_LAYER_ZOOM);
+					boolean imgExist = mgr.isTileDownloaded(tileId, map, tileX, tileY, MIN_IMAGE_LAYER_ZOOM);
 					if (imgExist) {
 						if (sync) {
 							tile = mgr.getMapillaryVectorTilesCache().getTileForMapSync(tileId, map,

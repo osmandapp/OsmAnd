@@ -9,7 +9,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Build;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +24,7 @@ import net.osmand.map.ParameterType;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
@@ -45,7 +45,7 @@ public class MapTileLayer extends BaseMapLayer {
 	private static final int SHOWN_MAP_ZOOM_MAX = 20;
 	private static final int SHOWN_MAP_ZOOM_MIN = 1;
 
-	protected final boolean mainMap;
+	protected final boolean suggestOfflineMap;
 	protected ITileSource map = null;
 	protected MapTileAdapter mapTileAdapter = null;
 
@@ -56,6 +56,9 @@ public class MapTileLayer extends BaseMapLayer {
 	protected OsmandMapTileView view;
 	protected ResourceManager resourceManager;
 	protected OsmandSettings settings;
+
+	private boolean upscaleAllowed = true;
+
 	private boolean useSampling;
 	private boolean needUpdateProvider = true;
 	private boolean visible = true;
@@ -63,16 +66,24 @@ public class MapTileLayer extends BaseMapLayer {
 	private int cachedAlpha = -1;
 	private StateChangedListener<Float> parameterListener;
 
-	public MapTileLayer(@NonNull Context context, boolean mainMap) {
+	public MapTileLayer(@NonNull Context context, boolean suggestOfflineMap) {
 		super(context);
-		this.mainMap = mainMap;
-		settings = getApplication().getSettings();
-		resourceManager = getApplication().getResourceManager();
+		this.suggestOfflineMap = suggestOfflineMap;
+		this.settings = getApplication().getSettings();
+		this.resourceManager = getApplication().getResourceManager();
 	}
 
 	@Override
 	public boolean drawInScreenPixels() {
 		return false;
+	}
+
+	@Override
+	public boolean isMapGestureAllowed(MapGestureType type) {
+		MapActivity mapActivity = getMapActivity();
+		boolean downloadingTiles = mapActivity != null && mapActivity.getDownloadTilesFragment() != null;
+		boolean rotatingOrTiltingMap = type == MapGestureType.TWO_POINTERS_ROTATION || type == MapGestureType.TWO_POINTERS_TILT;
+		return !(downloadingTiles && rotatingOrTiltingMap);
 	}
 
 	@Override
@@ -99,6 +110,10 @@ public class MapTileLayer extends BaseMapLayer {
 		if (paintBitmap != null) {
 			paintBitmap.setAlpha(alpha);
 		}
+	}
+
+	public void setUpscaleAllowed(boolean upscaleAllowed) {
+		this.upscaleAllowed = upscaleAllowed;
 	}
 
 	public void setupParameterListener() {
@@ -353,13 +368,13 @@ public class MapTileLayer extends BaseMapLayer {
 				Bitmap bmp = null;
 				String ordImgTile = mgr.calculateTileId(map, tileX, tileY, nzoom);
 				// asking tile image async
-				boolean imgExist = mgr.tileExistOnFileSystem(ordImgTile, map, tileX, tileY, nzoom);
+				boolean imgExist = mgr.isTileDownloaded(ordImgTile, map, tileX, tileY, nzoom);
 				boolean originalWillBeLoaded = useInternet && nzoom <= maxLevel;
 				if (imgExist || originalWillBeLoaded) {
 					bmp = mgr.getBitmapTilesCache().getTileForMapAsync(ordImgTile, map, tileX, tileY,
 							nzoom, useInternet, drawSettings.mapRefreshTimestamp);
 				}
-				if (bmp == null) {
+				if (bmp == null && upscaleAllowed) {
 					int div = 1;
 					boolean readFromCache = originalWillBeLoaded || imgExist;
 					boolean loadIfExists = !readFromCache;
@@ -378,7 +393,7 @@ public class MapTileLayer extends BaseMapLayer {
 								break;
 							}
 						} else if (loadIfExists) {
-							if (mgr.tileExistOnFileSystem(imgTileId, map, x, y, zoom)
+							if (mgr.isTileDownloaded(imgTileId, map, x, y, zoom)
 									|| (useInternet && zoom <= maxLevel)) {
 								bmp = mgr.getBitmapTilesCache().getTileForMapAsync(imgTileId, map, x, y,
 										zoom, useInternet, drawSettings.mapRefreshTimestamp);
@@ -435,7 +450,7 @@ public class MapTileLayer extends BaseMapLayer {
 							canvas.drawBitmap(sampled, bitmapToZoom, bitmapToDraw, paintBitmap);
 						}
 					}
-				} else {
+				} else if (bmp != null) {
 					bitmapToZoom.set(0, 0, tileSize, tileSize);
 					canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
 				}
@@ -445,9 +460,9 @@ public class MapTileLayer extends BaseMapLayer {
 			}
 		}
 
-		if (mainMap && !oneTileShown && !useInternet && warningToSwitchMapShown < 3) {
+		if (suggestOfflineMap && !oneTileShown && !useInternet && warningToSwitchMapShown < 3) {
 			if (resourceManager.getRenderer().containsLatLonMapData(view.getLatitude(), view.getLongitude(), nzoom)) {
-				Toast.makeText(view.getContext(), R.string.switch_to_vector_map_to_see, Toast.LENGTH_LONG).show();
+				getApplication().showToastMessage(R.string.switch_to_vector_map_to_see);
 				warningToSwitchMapShown++;
 			}
 		}

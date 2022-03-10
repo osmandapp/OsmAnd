@@ -20,8 +20,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
-import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
@@ -40,7 +40,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	private static final int START_ZOOM = 6;
 
 	protected OsmandMapTileView view;
-	private FavouritesDbHelper favouritesDbHelper;
+	private FavouritesHelper favouritesHelper;
 	private MapMarkersHelper mapMarkersHelper;
 	protected List<FavouritePoint> cache = new ArrayList<>();
 	private MapTextLayer textLayer;
@@ -59,7 +59,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	public void initLayer(@NonNull OsmandMapTileView view) {
 		this.view = view;
 		settings = view.getApplication().getSettings();
-		favouritesDbHelper = view.getApplication().getFavorites();
+		favouritesHelper = view.getApplication().getFavoritesHelper();
 		mapMarkersHelper = view.getApplication().getMapMarkersHelper();
 		textLayer = view.getLayerByClass(MapTextLayer.class);
 		defaultColor = ContextCompat.getColor(view.getContext(), R.color.color_favorite);
@@ -97,7 +97,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		cache.clear();
-		if (this.settings.SHOW_FAVORITES.get() && favouritesDbHelper.isFavoritesLoaded()) {
+		if (this.settings.SHOW_FAVORITES.get() && favouritesHelper.isFavoritesLoaded()) {
 			if (tileBox.getZoom() >= START_ZOOM) {
 				float textScale = getTextScale();
 				float iconSize = getIconSize(view.getApplication());
@@ -107,7 +107,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 				final QuadRect latLonBounds = tileBox.getLatLonBounds();
 				List<LatLon> fullObjectsLatLon = new ArrayList<>();
 				List<LatLon> smallObjectsLatLon = new ArrayList<>();
-				for (FavoriteGroup group : favouritesDbHelper.getFavoriteGroups()) {
+				for (FavoriteGroup group : favouritesHelper.getFavoriteGroups()) {
 					List<Pair<FavouritePoint, MapMarker>> fullObjects = new ArrayList<>();
 					boolean synced = isSynced(group);
 					for (FavouritePoint favoritePoint : group.getPoints()) {
@@ -133,7 +133,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 								if (marker != null && marker.history) {
 									color = grayColor;
 								} else {
-									color = favouritesDbHelper.getColorWithCategory(favoritePoint, defaultColor);
+									color = favouritesHelper.getColorWithCategory(favoritePoint, defaultColor);
 								}
 								PointImageDrawable pointImageDrawable = PointImageDrawable.getFromFavorite(
 										view.getContext(), color, true, favoritePoint);
@@ -173,11 +173,11 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		boolean history = false;
 		if (marker != null) {
 			pointImageDrawable = PointImageDrawable.getOrCreateSyncedIcon(view.getContext(),
-					favouritesDbHelper.getColorWithCategory(favoritePoint, defaultColor), favoritePoint);
+					favouritesHelper.getColorWithCategory(favoritePoint, defaultColor), favoritePoint);
 			history = marker.history;
 		} else {
 			pointImageDrawable = PointImageDrawable.getFromFavorite(view.getContext(),
-					favouritesDbHelper.getColorWithCategory(favoritePoint, defaultColor), true, favoritePoint);
+					favouritesHelper.getColorWithCategory(favoritePoint, defaultColor), true, favoritePoint);
 		}
 		pointImageDrawable.drawPoint(canvas, x, y, textScale, history);
 	}
@@ -191,7 +191,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		int r = getScaledTouchRadius(view.getApplication(), getDefaultRadiusPoi(tb));
 		int ex = (int) point.x;
 		int ey = (int) point.y;
-		List<FavouritePoint> favouritePoints = new ArrayList<>(favouritesDbHelper.getFavouritePoints());
+		List<FavouritePoint> favouritePoints = new ArrayList<>(favouritesHelper.getFavouritePoints());
 		for (FavouritePoint n : favouritePoints) {
 			getFavFromPoint(tb, res, r, ex, ey, n);
 		}
@@ -292,8 +292,8 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 									   @Nullable ApplyMovedObjectCallback callback) {
 		boolean result = false;
 		if (o instanceof FavouritePoint) {
-			favouritesDbHelper.editFavourite((FavouritePoint) o, position.getLatitude(), position.getLongitude());
-			favouritesDbHelper.lookupAddress((FavouritePoint) o);
+			favouritesHelper.editFavourite((FavouritePoint) o, position.getLatitude(), position.getLongitude());
+			favouritesHelper.lookupAddress((FavouritePoint) o);
 			result = true;
 		}
 		if (callback != null) {
