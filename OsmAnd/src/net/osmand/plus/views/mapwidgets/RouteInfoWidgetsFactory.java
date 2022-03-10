@@ -83,9 +83,30 @@ public class RouteInfoWidgetsFactory {
 				setTurnDistance(nextTurnDistance);
 			}
 		};
-		nextTurnInfo.setOnClickListener(v -> {
-			if (routingHelper.isRouteCalculated() && !routingHelper.isDeviatedFromRoute()) {
-				routingHelper.getVoiceRouter().announceCurrentDirection(null);
+		nextTurnInfo.setOnClickListener(new View.OnClickListener() {
+//			int i = 0;
+//			boolean leftSide = false;
+			@Override
+			public void onClick(View v) {
+				// for test rendering purposes
+//				final int l = TurnType.predefinedTypes.length;
+//				final int exits = 5;
+//				i++;
+//				if (i % (l + exits) >= l ) {
+//					nextTurnInfo.turnType = TurnType.valueOf("EXIT" + (i % (l + exits) - l + 1), leftSide);
+//					float a = leftSide?  -180 + (i % (l + exits) - l + 1) * 50:  180 - (i % (l + exits) - l + 1) * 50;
+//					nextTurnInfo.turnType.setTurnAngle(a < 0 ? a + 360 : a);
+//					nextTurnInfo.exitOut = (i % (l + exits) - l + 1)+"";
+//				} else {
+//					nextTurnInfo.turnType = TurnType.valueOf(TurnType.predefinedTypes[i % (TurnType.predefinedTypes.length + exits)], leftSide);
+//					nextTurnInfo.exitOut = "";
+//				}
+//				nextTurnInfo.turnImminent = (nextTurnInfo.turnImminent + 1) % 3;
+//				nextTurnInfo.nextTurnDirection = 580;
+//				TurnPathHelper.calcTurnPath(nextTurnInfo.pathForTurn, nextTurnInfo.turnType,nextTurnInfo.pathTransform);
+				if (routingHelper.isRouteCalculated() && !routingHelper.isDeviatedFromRoute()) {
+					routingHelper.getVoiceRouter().announceCurrentDirection(null);
+				}
 			}
 		});
 		return nextTurnInfo;
@@ -120,6 +141,30 @@ public class RouteInfoWidgetsFactory {
 				setTurnDistance(nextTurnDistance);
 			}
 		};
+		// Do not delete listener to have pressed state
+		nextTurnInfo.setOnClickListener(new View.OnClickListener() {
+//			int i = 0;
+			@Override
+			public void onClick(View v) {
+				// uncomment to test turn info rendering
+//				final int l = TurnType.predefinedTypes.length;
+//				final int exits = 5;
+//				i++;
+//				if (i % (l + exits) >= l ) {
+//					nextTurnInfo.turnType = TurnType.valueOf("EXIT" + (i % (l + exits) - l + 1), true);
+//					nextTurnInfo.exitOut = (i % (l + exits) - l + 1)+"";
+//					float a = 180 - (i % (l + exits) - l + 1) * 50;
+//					nextTurnInfo.turnType.setTurnAngle(a < 0 ? a + 360 : a);
+//				} else {
+//					nextTurnInfo.turnType = TurnType.valueOf(TurnType.predefinedTypes[i % (TurnType.predefinedTypes.length + exits)], true);
+//					nextTurnInfo.exitOut = "";
+//				}
+//				nextTurnInfo.turnImminent = (nextTurnInfo.turnImminent + 1) % 3;
+//				nextTurnInfo.nextTurnDirection = 580;
+//				TurnPathHelper.calcTurnPath(nextTurnInfo.pathForTurn, nexsweepAngletTurnInfo.turnType,nextTurnInfo.pathTransform);
+//				showMiniMap = true;
+			}
+		});
 		return nextTurnInfo;
 	}
 
