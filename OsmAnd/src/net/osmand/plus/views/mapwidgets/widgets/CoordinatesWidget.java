@@ -87,8 +87,8 @@ public class CoordinatesWidget extends MapWidget {
 	}
 
 	private void showShareSnackbar(@NonNull String coordinates) {
-		String clipboardText = app.getString(R.string.copied_to_clipboard);
-		String text = app.getString(R.string.ltr_or_rtl_combine_via_colon, clipboardText, "")
+		String clipboardText = getString(R.string.copied_to_clipboard);
+		String text = getString(R.string.ltr_or_rtl_combine_via_colon, clipboardText, "")
 				+ "\n" + coordinates;
 		Snackbar snackbar = Snackbar.make(mapActivity.getLayout(), text, Snackbar.LENGTH_LONG)
 				.setAction(R.string.shared_string_share, view -> {
@@ -96,7 +96,7 @@ public class CoordinatesWidget extends MapWidget {
 					intent.setAction(Intent.ACTION_SEND);
 					intent.putExtra(Intent.EXTRA_TEXT, coordinates);
 					intent.setType("text/plain");
-					Intent chooserIntent = Intent.createChooser(intent, app.getString(R.string.send_location));
+					Intent chooserIntent = Intent.createChooser(intent, getString(R.string.send_location));
 					AndroidUtils.startActivityIfSafe(app, intent, chooserIntent);
 				});
 		UiUtilities.setupSnackbar(snackbar, isNightMode(), 5);
@@ -122,7 +122,7 @@ public class CoordinatesWidget extends MapWidget {
 		AndroidUiHelper.updateVisibility(divider, false);
 		AndroidUiHelper.updateVisibility(secondContainer, false);
 		GPSInfo gpsInfo = locationProvider.getGPSInfo();
-		String message = app.getString(R.string.searching_gps) + "… " + gpsInfo.usedSatellites + "/" + gpsInfo.foundSatellites;
+		String message = getString(R.string.searching_gps) + "… " + gpsInfo.usedSatellites + "/" + gpsInfo.foundSatellites;
 		firstCoordinate.setText(message);
 	}
 

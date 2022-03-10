@@ -203,12 +203,12 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			@Override
 			public void updateInfo(@Nullable DrawSettings drawSettings) {
 				if (isSaving) {
-					setText(mapActivity.getString(R.string.shared_string_save), "");
+					setText(getString(R.string.shared_string_save), "");
 					setIcons(R.drawable.widget_monitoring_rec_big_day, R.drawable.widget_monitoring_rec_big_night);
 					return;
 				}
 
-				String txt = mapActivity.getString(R.string.monitoring_control_start);
+				String txt = getString(R.string.monitoring_control_start);
 				String subtxt = null;
 				int dn;
 				int d;

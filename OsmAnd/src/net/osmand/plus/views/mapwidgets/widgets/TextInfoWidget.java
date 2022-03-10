@@ -96,7 +96,7 @@ public class TextInfoWidget extends MapWidget {
 	}
 
 	public void setContentTitle(int messageId) {
-		setContentTitle(view.getContext().getString(messageId));
+		setContentTitle(getString(messageId));
 	}
 
 	public void setContentTitle(String text) {

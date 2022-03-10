@@ -11,6 +11,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 public abstract class MapWidget {
 
@@ -52,5 +53,10 @@ public abstract class MapWidget {
 
 	protected boolean updateVisibility(boolean visible) {
 		return AndroidUiHelper.updateVisibility(view, visible);
+	}
+
+	@NonNull
+	protected String getString(@StringRes int stringId, Object... args) {
+		return app.getString(stringId, args);
 	}
 }

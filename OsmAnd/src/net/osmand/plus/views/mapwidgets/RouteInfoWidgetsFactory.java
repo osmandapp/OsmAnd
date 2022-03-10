@@ -143,7 +143,7 @@ public class RouteInfoWidgetsFactory {
 							long toFindTime = time * 1000L + System.currentTimeMillis();
 							if (Math.abs(toFindTime - cachedLeftTime) > 30000) {
 								cachedLeftTime = toFindTime;
-								setContentTitle(mapActivity.getString(R.string.access_arrival_time));
+								setContentTitle(getString(R.string.access_arrival_time));
 								if (DateFormat.is24HourFormat(app)) {
 									setText(DateFormat.format("k:mm", toFindTime).toString(), null); //$NON-NLS-1$
 								} else {
@@ -156,7 +156,7 @@ public class RouteInfoWidgetsFactory {
 								cachedLeftTime = time;
 								int hours = time / (60 * 60);
 								int minutes = (time / 60) % 60;
-								setContentTitle(mapActivity.getString(R.string.map_widget_time));
+								setContentTitle(getString(R.string.map_widget_time));
 								setText(String.format("%d:%02d", hours, minutes), null); //$NON-NLS-1$
 							}
 						}
@@ -270,7 +270,7 @@ public class RouteInfoWidgetsFactory {
 					if (cachedSpeed == 0) {
 						setText(null, null);
 					} else if (cachedSpeed == RouteDataObject.NONE_MAX_SPEED) {
-						setText(mapActivity.getString(R.string.max_speed_none), "");
+						setText(getString(R.string.max_speed_none), "");
 					} else {
 						String ds = OsmAndFormatter.getFormattedSpeed(cachedSpeed, app);
 						int ls = ds.lastIndexOf(' ');
