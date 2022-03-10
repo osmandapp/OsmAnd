@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 public abstract class MapWidget {
 
 	protected final OsmandApplication app;
+	protected final MapActivity mapActivity;
 	protected final UiUtilities iconsCache;
 
 	private boolean nightMode;
@@ -22,10 +23,11 @@ public abstract class MapWidget {
 	protected final View view;
 
 	public MapWidget(@NonNull MapActivity mapActivity) {
-		app = mapActivity.getMyApplication();
-		iconsCache = app.getUIUtilities();
-		nightMode = app.getDaynightHelper().isNightMode();
-		view = UiUtilities.getInflater(mapActivity, nightMode).inflate(getLayoutId(), null);
+		this.app = mapActivity.getMyApplication();
+		this.mapActivity = mapActivity;
+		this.iconsCache = app.getUIUtilities();
+		this.nightMode = app.getDaynightHelper().isNightMode();
+		this.view = UiUtilities.getInflater(mapActivity, nightMode).inflate(getLayoutId(), null);
 	}
 
 	@LayoutRes
@@ -36,7 +38,7 @@ public abstract class MapWidget {
 		return view;
 	}
 
-	public void updateNightMode(boolean nightMode) {
+	public void setNightMode(boolean nightMode) {
 		this.nightMode = nightMode;
 	}
 
@@ -49,10 +51,6 @@ public abstract class MapWidget {
 	}
 
 	protected boolean updateVisibility(boolean visible) {
-		boolean updatedVisibility = AndroidUiHelper.updateVisibility(view, visible);
-		if (updatedVisibility && app.accessibilityEnabled()) {
-			view.setFocusable(visible);
-		}
-		return updatedVisibility;
+		return AndroidUiHelper.updateVisibility(view, visible);
 	}
 }

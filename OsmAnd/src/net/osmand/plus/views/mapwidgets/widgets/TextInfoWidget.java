@@ -15,6 +15,7 @@ import net.osmand.plus.activities.MapActivity;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class TextInfoWidget extends MapWidget {
 
@@ -149,13 +150,13 @@ public class TextInfoWidget extends MapWidget {
 		return false;
 	}
 
-	public void setOnClickListener(OnClickListener onClickListener) {
+	public void setOnClickListener(@Nullable OnClickListener onClickListener) {
 		view.setOnClickListener(onClickListener);
 	}
 
 	@Override
-	public void updateNightMode(boolean nightMode) {
-		super.updateNightMode(nightMode);
+	public void setNightMode(boolean nightMode) {
+		super.setNightMode(nightMode);
 		int iconId = getIconId();
 		if (iconId != 0) {
 			setImageDrawable(iconId);
@@ -165,6 +166,15 @@ public class TextInfoWidget extends MapWidget {
 	public void updateTextColor(int textColor, int textShadowColor, boolean bold, int rad) {
 		updateTextColor(smallTextView, smallTextViewShadow, textColor, textShadowColor, bold, rad);
 		updateTextColor(textView, textViewShadow, textColor, textShadowColor, bold, rad);
+	}
+
+	@Override
+	protected boolean updateVisibility(boolean visible) {
+		boolean updatedVisibility = super.updateVisibility(visible);
+		if (updatedVisibility && app.accessibilityEnabled()) {
+			view.setFocusable(visible);
+		}
+		return updatedVisibility;
 	}
 
 	@DrawableRes

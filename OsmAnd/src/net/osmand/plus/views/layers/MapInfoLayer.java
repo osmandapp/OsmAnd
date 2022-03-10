@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
@@ -21,7 +22,6 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.LanesControl;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopCoordinatesView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopTextView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
@@ -31,6 +31,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
+import net.osmand.plus.views.mapwidgets.widgets.CoordinatesWidget;
 import net.osmand.plus.views.mapwidgets.widgets.ElevationProfileWidget;
 import net.osmand.plus.views.mapwidgets.widgets.NextTurnWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
@@ -46,13 +47,11 @@ import java.util.List;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_ALTITUDE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BATTERY;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BEARING;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_COMPASS;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_DISTANCE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_GPS_INFO;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_DISTANCE;
@@ -79,15 +78,17 @@ public class MapInfoLayer extends OsmandMapLayer {
 	// groups
 	private LinearLayout rightStack;
 	private LinearLayout leftStack;
+
 	private ImageButton expandButton;
 	private View mapRulerLayout;
-	private LanesControl lanesControl;
 	private AlarmWidget alarmControl;
 	private List<RulerWidget> rulerWidgets;
 	private MapWidgetRegistry mapInfoControls;
-	private TopTextView streetNameView;
+
+	private CoordinatesWidget topCoordinatesView;
 	private TopToolbarView topToolbarView;
-	private TopCoordinatesView topCoordinatesView;
+	private LanesControl lanesControl;
+	private TopTextView streetNameView;
 	private ElevationProfileWidget elevationProfileWidget;
 
 	public MapInfoLayer(@NonNull Context context, @NonNull RouteLayer layer) {
@@ -228,8 +229,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		streetNameView = new TopTextView(app, mapActivity);
 		updateStreetName(false, ts);
 
-		topCoordinatesView = new TopCoordinatesView(app, mapActivity);
-		updateTopCoordinates(false, ts);
+		topCoordinatesView = new CoordinatesWidget(mapActivity, ts);
+		((ViewGroup) mapActivity.findViewById(R.id.MapHudButtonsOverlayTop)).addView(topCoordinatesView.getView(), 0);
 
 		topToolbarView = new TopToolbarView(mapActivity);
 		updateTopToolbar(false);
@@ -345,17 +346,17 @@ public class MapInfoLayer extends OsmandMapLayer {
 		routeLayer.setTrackChartPoints(trackChartPoints);
 	}
 
-	private static class TextState {
-		boolean textBold;
-		boolean night;
-		int textColor;
-		int textShadowColor;
-		int boxTop;
-		int rightRes;
-		int leftRes;
-		int expand;
-		int boxFree;
-		int textShadowRadius;
+	public static class TextState {
+		public boolean textBold;
+		public boolean night;
+		public int textColor;
+		public int textShadowColor;
+		public int boxTop;
+		public int rightRes;
+		public int leftRes;
+		public int expand;
+		public int boxFree;
+		public int textShadowRadius;
 	}
 
 	private int themeId = -1;
@@ -417,7 +418,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		if (v != null) {
 			v.setBackgroundResource(reg.left ? ts.leftRes : ts.rightRes);
 			reg.widget.updateTextColor(ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius);
-			reg.widget.updateNightMode(ts.night);
+			reg.widget.setNightMode(ts.night);
 		}
 	}
 
@@ -470,7 +471,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 			streetNameView.updateInfo(drawSettings);
 			topToolbarView.updateInfo();
-			topCoordinatesView.updateInfo();
+			topCoordinatesView.updateInfo(drawSettings);
 			elevationProfileWidget.updateInfo();
 			alarmControl.updateInfo(drawSettings, false);
 			lanesControl.updateInfo(drawSettings);
