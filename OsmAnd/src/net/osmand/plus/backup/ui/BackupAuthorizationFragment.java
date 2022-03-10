@@ -3,7 +3,6 @@ package net.osmand.plus.backup.ui;
 import static net.osmand.plus.importfiles.ImportHelper.ImportType.SETTINGS;
 import static net.osmand.plus.utils.UiUtilities.setupDialogButton;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,7 +52,7 @@ public class BackupAuthorizationFragment extends BaseSettingsFragment implements
 	@ColorRes
 	public int getStatusBarColorId() {
 		View view = getView();
-		if (view != null && Build.VERSION.SDK_INT >= 23 && !isNightMode()) {
+		if (view != null && !isNightMode()) {
 			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 		}
 		return ColorUtilities.getActivityBgColorId(isNightMode());

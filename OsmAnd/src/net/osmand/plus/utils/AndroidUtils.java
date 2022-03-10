@@ -559,6 +559,15 @@ public class AndroidUtils {
 		);
 	}
 
+	public static int dimensToPx(Context ctx, float dp) {
+		Resources r = ctx.getResources();
+		return (int) TypedValue.applyDimension(
+				TypedValue.COMPLEX_UNIT_PX,
+				dp,
+				r.getDisplayMetrics()
+		);
+	}
+
 	public static int spToPx(Context ctx, float sp) {
 		Resources r = ctx.getResources();
 		return (int) TypedValue.applyDimension(

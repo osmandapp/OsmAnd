@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -17,15 +18,21 @@ import net.osmand.plus.utils.AndroidUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class BackupIconsView extends View {
 	private final Paint paint = new Paint();
-	private final int iconSize = AndroidUtils.dpToPx(getContext(), 36);
-	private final int rowMargin = AndroidUtils.dpToPx(getContext(), 16);
+	private final int iconSize = AndroidUtils.dimensToPx(getContext(), getContext().getResources().getDimension(R.dimen.big_icon_size));
+	private final int rowMargin = AndroidUtils.dimensToPx(getContext(), getContext().getResources().getDimension(R.dimen.content_padding));
 	private final OsmandApplication app;
-	private final List<List<Integer>> iconsIds = new ArrayList<>(Arrays.asList(new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
+	private final Map<Integer, List<Integer>> iconsMap = new HashMap<Integer, List<Integer>>() {{
+		put(R.color.backup_restore_icons_yellow, new ArrayList<>());
+		put(R.color.backup_restore_icons_blue, new ArrayList<>());
+		put(R.color.backup_restore_icons_green, new ArrayList<>());
+	}};
 
 	public BackupIconsView(Context context, @Nullable AttributeSet attrs) {
 		super(context, attrs);
@@ -37,43 +44,47 @@ public class BackupIconsView extends View {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-		buildRow(canvas, IconColorType.YELLOW, 0);
-		buildRow(canvas, IconColorType.BLUE, 1);
-		buildRow(canvas, IconColorType.GREEN, 2);
+		buildRows(canvas);
 	}
 
-	private void buildRow(Canvas canvas, IconColorType colorType, int rowNumber) {
+	private void buildRows(Canvas canvas) {
 		int screenSize = Resources.getSystem().getDisplayMetrics().widthPixels;
 		int xOffset = 0;
 		int xOffsetStep = iconSize + rowMargin;
-		if (colorType == IconColorType.YELLOW || colorType == IconColorType.GREEN) {
-			xOffset = rowMargin;
-		}
+		int row = 0;
 
-		if (iconsIds.get(rowNumber).isEmpty()) {
-			iconsIds.add(new ArrayList<>());
-			while (screenSize > 0) {
-				iconsIds.get(rowNumber).add(getIconId());
-				screenSize -= xOffsetStep;
+		for (Map.Entry<Integer, List<Integer>> entry: iconsMap.entrySet()) {
+			if (row % 2 == 0) {
+				xOffset = rowMargin;
 			}
-		}
-		for (int i = 0; i < iconsIds.get(rowNumber).size(); i++) {
-			drawIcon(canvas, iconsIds.get(rowNumber).get(i), colorType.getColor(), xOffset, rowNumber);
-			xOffset += xOffsetStep;
+			if (entry.getValue().isEmpty()) {
+				List<Integer> icons = new ArrayList<>();
+				while (screenSize > 0) {
+					icons.add(getIconId());
+					screenSize -= xOffsetStep;
+				}
+				iconsMap.put(entry.getKey(), icons);
+			}
+			for (int i = 0; i < entry.getValue().size(); i++) {
+				drawIcon(canvas, entry.getValue().get(i), entry.getKey(), xOffset, row);
+				xOffset += xOffsetStep;
+			}
+			screenSize = Resources.getSystem().getDisplayMetrics().widthPixels;
+			xOffset = 0;
+			row++;
 		}
 	}
 
 	private void drawIcon(Canvas canvas, int drawableId, int color, int xOffset, int rowNumber) {
 		int rowBottomMargin = iconSize / 4;
 		int center = iconSize / 2;
-		Drawable icon = app.getUIUtilities().getIcon(drawableId);
-		paint.setColor(getResources().getColor(color));
+		Drawable icon = app.getUIUtilities().getIcon(drawableId, color);
+		paint.setColor(ContextCompat.getColor(app, color));
 		paint.setAlpha(51);
 		int x = center + xOffset;
 		int y = center;
 
 		if (icon != null) {
-			icon.setTint(getResources().getColor(color));
 			y += rowNumber * (iconSize + rowBottomMargin);
 			icon.setBounds((x - icon.getIntrinsicWidth() / 2),
 					y - icon.getIntrinsicHeight() / 2,
@@ -111,21 +122,5 @@ public class BackupIconsView extends View {
 				R.drawable.ic_action_ruler_unit);
 		int randomIndex = new Random().nextInt(icons.size());
 		return icons.get(randomIndex);
-	}
-
-	enum IconColorType {
-		YELLOW(R.color.backup_restore_icons_yellow),
-		BLUE(R.color.backup_restore_icons_blue),
-		GREEN(R.color.backup_restore_icons_green);
-
-		private final int color;
-
-		public int getColor() {
-			return color;
-		}
-
-		IconColorType(int color) {
-			this.color = color;
-		}
 	}
 }
