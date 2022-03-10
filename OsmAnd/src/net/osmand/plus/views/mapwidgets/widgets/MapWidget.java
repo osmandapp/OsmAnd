@@ -5,6 +5,7 @@ import android.view.View;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 
@@ -16,6 +17,7 @@ import androidx.annotation.StringRes;
 public abstract class MapWidget {
 
 	protected final OsmandApplication app;
+	protected final OsmandSettings settings;
 	protected final MapActivity mapActivity;
 	protected final UiUtilities iconsCache;
 
@@ -25,6 +27,7 @@ public abstract class MapWidget {
 
 	public MapWidget(@NonNull MapActivity mapActivity) {
 		this.app = mapActivity.getMyApplication();
+		this.settings = app.getSettings();
 		this.mapActivity = mapActivity;
 		this.iconsCache = app.getUIUtilities();
 		this.nightMode = app.getDaynightHelper().isNightMode();

@@ -13,7 +13,6 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.ColorUtilities;
@@ -22,7 +21,6 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.LanesControl;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopTextView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
@@ -35,6 +33,7 @@ import net.osmand.plus.views.mapwidgets.widgets.CoordinatesWidget;
 import net.osmand.plus.views.mapwidgets.widgets.ElevationProfileWidget;
 import net.osmand.plus.views.mapwidgets.widgets.NextTurnWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
+import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.BearingWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.CompassRulerWidgetState;
@@ -85,10 +84,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private List<RulerWidget> rulerWidgets;
 	private MapWidgetRegistry mapInfoControls;
 
-	private CoordinatesWidget topCoordinatesView;
 	private TopToolbarView topToolbarView;
+
+	private CoordinatesWidget topCoordinatesView;
+	private StreetNameWidget streetNameWidget;
 	private LanesControl lanesControl;
-	private TopTextView streetNameView;
 	private ElevationProfileWidget elevationProfileWidget;
 
 	public MapInfoLayer(@NonNull Context context, @NonNull RouteLayer layer) {
@@ -136,7 +136,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			alarmControl = null;
 			rulerWidgets = null;
 
-			streetNameView = null;
+			streetNameWidget = null;
 			topToolbarView = null;
 			topCoordinatesView = null;
 		}
@@ -226,11 +226,18 @@ public class MapInfoLayer extends OsmandMapLayer {
 		lanesControl = RouteInfoWidgetsFactory.createLanesControl(mapActivity, view);
 
 		TextState ts = calculateTextState();
-		streetNameView = new TopTextView(app, mapActivity);
-		updateStreetName(false, ts);
 
 		topCoordinatesView = new CoordinatesWidget(mapActivity, ts);
 		((ViewGroup) mapActivity.findViewById(R.id.MapHudButtonsOverlayTop)).addView(topCoordinatesView.getView(), 0);
+
+		streetNameWidget = new StreetNameWidget(mapActivity, ts);
+		ViewGroup defaultStreetNamePosition = mapActivity.findViewById(R.id.street_name_widget_default_container);
+		if (defaultStreetNamePosition != null) {
+			defaultStreetNamePosition.removeAllViews();
+			defaultStreetNamePosition.addView(streetNameWidget.getView());
+		} else {
+			((ViewGroup) mapActivity.findViewById(R.id.MapHudButtonsOverlayTop)).addView(streetNameWidget.getView(), 1);
+		}
 
 		topToolbarView = new TopToolbarView(mapActivity);
 		updateTopToolbar(false);
@@ -399,10 +406,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	private void updateStreetName(boolean nightMode, TextState ts) {
-		MapActivity mapActivity = getMapActivity();
-		boolean portrait = mapActivity != null && AndroidUiHelper.isOrientationPortrait(mapActivity);
-		streetNameView.setBackgroundResource(portrait ? ts.boxTop : ts.boxFree);
-		streetNameView.updateTextColor(nightMode, ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius);
+		streetNameWidget.updateColors(nightMode, ts);
 	}
 
 	private void updateTopToolbar(boolean nightMode) {
@@ -469,7 +473,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			if (mapInfoControls != null) {
 				mapInfoControls.updateInfo(settings.getApplicationMode(), drawSettings, WIDGETS_EXPANDED);
 			}
-			streetNameView.updateInfo(drawSettings);
+			streetNameWidget.updateInfo(drawSettings);
 			topToolbarView.updateInfo();
 			topCoordinatesView.updateInfo(drawSettings);
 			elevationProfileWidget.updateInfo();
