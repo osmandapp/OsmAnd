@@ -1,6 +1,9 @@
 package net.osmand.plus.resources;
 
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.data.RotatedTileBox;
@@ -46,15 +49,16 @@ public class AsyncLoadingThread extends Thread {
 					cacheCounter++;
 					Object req = requests.pop();
 					if (req instanceof TileLoadDownloadRequest) {
-						TileLoadDownloadRequest r = (TileLoadDownloadRequest) req;
-						tileLoaded |= resourceManger.hasRequestedTile(r);
+						TileLoadDownloadRequest request = (TileLoadDownloadRequest) req;
+						tileLoaded |= resourceManger.hasRequestedTile(request);
 					} else if (req instanceof MapLoadRequest) {
-						MapLoadRequest r = (MapLoadRequest) req;
-						if (!mapLoaded || r.mapLoadedListener != null) {
-							resourceManger.getRenderer().loadMap(r.tileBox, resourceManger.getMapTileDownloader());
+						MapLoadRequest request = (MapLoadRequest) req;
+						if (!mapLoaded || request.forceLoadMap) {
+							resourceManger.getRenderer().loadMap(request.tileBox, resourceManger.getMapTileDownloader());
 							mapLoaded = !resourceManger.getRenderer().wasInterrupted();
-							if (r.mapLoadedListener != null) {
-								r.mapLoadedListener.onMapLoaded(!mapLoaded);
+
+							if (request.listener != null) {
+								request.listener.onMapLoaded(!mapLoaded);
 							}
 						}
 					}
@@ -125,8 +129,8 @@ public class AsyncLoadingThread extends Thread {
 
 		public final long timestamp;
 
-		public TileLoadDownloadRequest(File dirWithTiles, String url, File fileToSave, String tileId, ITileSource source, int tileX,
-				int tileY, int zoom, long timestamp) {
+		public TileLoadDownloadRequest(File dirWithTiles, String url, File fileToSave, String tileId,
+		                               ITileSource source, int tileX, int tileY, int zoom, long timestamp) {
 			super(url, fileToSave, tileX, tileY, zoom);
 			this.dirWithTiles = dirWithTiles;
 			this.tileSource = source;
@@ -162,7 +166,6 @@ public class AsyncLoadingThread extends Thread {
 				super.saveTile(inputStream);
 			}
 		}
-
 	}
 
 	protected class MapObjectLoadRequest<T> implements ResultMatcher<T> {
@@ -174,9 +177,8 @@ public class AsyncLoadingThread extends Thread {
 		protected volatile boolean running = false;
 
 		public boolean isContains(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
-			boolean inside = this.topLatitude >= topLatitude && this.leftLongitude <= leftLongitude
+			return this.topLatitude >= topLatitude && this.leftLongitude <= leftLongitude
 					&& this.rightLongitude >= rightLongitude && this.bottomLatitude <= bottomLatitude;
-			return inside;
 		}
 
 		public void setBoundaries(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
@@ -217,13 +219,19 @@ public class AsyncLoadingThread extends Thread {
 	}
 
 	protected static class MapLoadRequest {
-		public final RotatedTileBox tileBox;
-		public final OnMapLoadedListener mapLoadedListener;
 
-		public MapLoadRequest(RotatedTileBox tileBox, OnMapLoadedListener mapLoadedListener) {
-			super();
+		public final RotatedTileBox tileBox;
+		public final OnMapLoadedListener listener;
+		public final boolean forceLoadMap;
+
+		public MapLoadRequest(@NonNull RotatedTileBox tileBox) {
+			this(tileBox, null, false);
+		}
+
+		public MapLoadRequest(@NonNull RotatedTileBox tileBox, @Nullable OnMapLoadedListener listener, boolean forceLoadMap) {
 			this.tileBox = tileBox;
-			this.mapLoadedListener = mapLoadedListener;
+			this.listener = listener;
+			this.forceLoadMap = forceLoadMap;
 		}
 	}
 }
