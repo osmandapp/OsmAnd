@@ -22,7 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.chooseplan.NoPurchasesCard;
 import net.osmand.plus.chooseplan.TroubleshootingCard;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -31,14 +31,13 @@ import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.liveupdates.CountrySelectionFragment;
 import net.osmand.plus.liveupdates.CountrySelectionFragment.OnFragmentInteractionListener;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurchaseListener, OnFragmentInteractionListener {
+public class PurchasesFragment extends BaseOsmAndDialogFragment implements InAppPurchaseListener, OnFragmentInteractionListener {
 
 	public static final String TAG = PurchasesFragment.class.getName();
 
@@ -65,7 +64,7 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
+		app = getMyApplication();
 		nightMode = !app.getSettings().isLightContent();
 	}
 
@@ -187,10 +186,10 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 
 	}
 
-	@Override
-	public int getStatusBarColorId() {
-		return ColorUtilities.getStatusBarColorId(nightMode);
-	}
+//	@Override
+//	public int getStatusBarColorId() {
+//		return ColorUtilities.getStatusBarColorId(nightMode);
+//	}
 
 	private MapActivity getMapActivity() {
 		return (MapActivity) getActivity();

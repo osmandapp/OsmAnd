@@ -58,6 +58,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 	private LinearLayout listContainer;
 	private OsmAndFeature selectedFeature;
 	private final List<OsmAndFeature> allFeatures = new ArrayList<>();
+	private final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, yyyy", Locale.getDefault());
 
 	@Override
 	protected int getLayoutId() {
@@ -228,74 +229,82 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 				: R.drawable.ic_action_osmand_pro_logo_colored;
 		CharSequence price = priceButtons.size() == 0 ? null : Collections.min(priceButtons).getPrice();
 
-		boolean isMapsPurchased = purchaseHelper.getInAppPurchases().isFullVersion(purchaseHelper.getFullVersion());
 		updateContinueButton(mainView.findViewById(R.id.button_continue_pro),
 				osmAndProIconId,
 				getString(R.string.osmand_pro),
 				price,
 				v -> OsmAndProPlanFragment.showInstance(requireActivity()),
-				Version.isInAppPurchaseSupported(),
-				false);
+				Version.isInAppPurchaseSupported());
 
 		priceButtons = MapsPlusPlanFragment.collectPriceButtons(app, purchaseHelper, nightMode);
 		price = priceButtons.size() == 0 ? null : Collections.min(priceButtons).getPrice();
 		boolean availableInMapsPlus = selectedFeature.isAvailableInMapsPlus();
-		int mapsPlusIconId = availableInMapsPlus && !isMapsPurchased
+		int mapsPlusIconId = availableInMapsPlus
 				? R.drawable.ic_action_osmand_maps_plus
 				: R.drawable.ic_action_osmand_maps_plus_desaturated;
 		updateContinueButton(mainView.findViewById(R.id.button_continue_maps_plus),
 				mapsPlusIconId,
 				getString(R.string.maps_plus),
 				price,
-				v -> openPurchasesOrPlansFragment(isMapsPurchased),
-				availableInMapsPlus && Version.isInAppPurchaseSupported(),
-				isMapsPurchased);
+				v -> MapsPlusPlanFragment.showInstance(requireActivity()),
+				availableInMapsPlus && Version.isInAppPurchaseSupported());
+
+		updateMapsPlusIfPurchased(mainView.findViewById(R.id.button_continue_maps_plus),
+				v -> {
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						if (activity instanceof MapActivity) {
+							this.dismiss();
+							FragmentManager fragmentManager = activity.getSupportFragmentManager();
+							PurchasesFragment.showInstance(fragmentManager);
+						} else {
+							Bundle params = new Bundle();
+							params.putBoolean(OPEN_PURCHASES, true);
+							Intent intent = activity.getIntent();
+							MapActivity.launchMapActivityMoveToTop(activity, intent != null ? intent.getExtras() : null, null, params);
+						}
+					}
+				});
 	}
 
-	private void openPurchasesOrPlansFragment(boolean isMapsPurchased) {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			if (isMapsPurchased) {
-				if (activity instanceof MapActivity) {
-					this.dismiss();
-					FragmentManager fragmentManager = activity.getSupportFragmentManager();
-					PurchasesFragment.showInstance(fragmentManager);
-				} else {
-					Bundle params = new Bundle();
-					params.putBoolean(OPEN_PURCHASES, true);
-					Intent intent = activity.getIntent();
-					MapActivity.launchMapActivityMoveToTop(activity, intent != null ? intent.getExtras() : null, null, params);
-				}
-			} else {
-				MapsPlusPlanFragment.showInstance(activity);
+	private void updateMapsPlusIfPurchased(View view, OnClickListener listener) {
+		boolean hasMapsPlus = app.getSettings().OSMAND_MAPS_PURCHASED.get() || app.getSettings().FULL_VERSION_PURCHASED.get();
+		if (hasMapsPlus) {
+			int colorNoAlpha = ColorUtilities.getDefaultIconColor(app, nightMode);
+			TextView tvTitle = view.findViewById(R.id.title);
+			tvTitle.setText(getString(R.string.shared_string_purchased));
+			tvTitle.setTextColor(colorNoAlpha);
+
+			TextView tvDescription = view.findViewById(R.id.description);
+			InAppPurchase purchase = purchaseHelper.getFullVersion();
+			if (purchase != null && purchase.getPurchaseInfo() != null) {
+				long purchaseTime = purchase.getPurchaseInfo().getPurchaseTime();
+				tvDescription.setText(dateFormat.format(purchaseTime));
+				tvDescription.setTextColor(colorNoAlpha);
 			}
+
+			ImageView ivIcon = view.findViewById(R.id.icon);
+			ivIcon.setImageResource(R.drawable.ic_action_osmand_maps_plus_desaturated);
+
+			setupRoundedBackground(view, colorNoAlpha, ButtonBackground.ROUNDED_SMALL);
+			view.setOnClickListener(listener);
+			view.setEnabled(true);
 		}
 	}
 
-	private void updateContinueButton(View view, int iconId, String plan, CharSequence price, OnClickListener listener, boolean available, boolean isMapsPurchased) {
+	private void updateContinueButton(View view, int iconId, String plan, CharSequence price, OnClickListener listener, boolean available) {
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		int defaultIconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
-		int colorNoAlpha = isMapsPurchased ? defaultIconColor : available ? activeColor : defaultIconColor;
+		int colorNoAlpha = available ? activeColor : defaultIconColor;
 
-		int pattern = isMapsPurchased ? R.string.shared_string_purchased : (available ? R.string.continue_with : R.string.not_available_with);
-
+		int pattern = available ? R.string.continue_with : R.string.not_available_with;
 		TextView tvTitle = view.findViewById(R.id.title);
 		tvTitle.setText(String.format(getString(pattern), plan));
 		tvTitle.setTextColor(colorNoAlpha);
 
 		TextView tvDescription = view.findViewById(R.id.description);
 		String pricePattern = getString(R.string.from_with_param);
-		String description = "";
-		if (isMapsPurchased) {
-			InAppPurchase purchase = purchaseHelper.getFullVersion();
-			if (purchase != null && purchase.getPurchaseInfo() != null) {
-				long purchaseTime = purchase.getPurchaseInfo().getPurchaseTime();
-				SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, yyyy", Locale.getDefault());
-				description = dateFormat.format(purchaseTime);
-			}
-		} else {
-			description = price != null ? String.format(pricePattern, price) : "";
-		}
+		String description = price != null ? String.format(pricePattern, price) : "";
 		tvDescription.setText(description);
 		tvDescription.setTextColor(ColorUtilities.getColorWithAlpha(colorNoAlpha, 0.75f));
 
@@ -304,7 +313,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 
 		setupRoundedBackground(view, colorNoAlpha, ButtonBackground.ROUNDED_SMALL);
 		view.setOnClickListener(listener);
-		view.setEnabled(isMapsPurchased || available);
+		view.setEnabled(available);
 	}
 
 	public static void showDefaultInstance(@NonNull FragmentActivity activity) {
