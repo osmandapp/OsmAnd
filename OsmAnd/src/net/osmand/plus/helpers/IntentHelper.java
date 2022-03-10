@@ -1,7 +1,6 @@
 package net.osmand.plus.helpers;
 
 import static net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
-import static net.osmand.plus.settings.fragments.PurchasesFragment.OPEN_PURCHASES;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.CURRENT_RECORDING;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.OPEN_TAB_NAME;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.RETURN_SCREEN_NAME;
@@ -37,7 +36,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
-import net.osmand.plus.settings.fragments.PurchasesFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.util.Algorithms;
@@ -252,14 +250,6 @@ public class IntentHelper {
 				}
 				mapActivity.setIntent(null);
 			}
-			if (intent.hasExtra(OPEN_PURCHASES)) {
-				boolean openPurchases = intent.getBooleanExtra(OPEN_PURCHASES, false);
-				if (openPurchases) {
-					PurchasesFragment.showInstance(mapActivity.getSupportFragmentManager());
-				}
-				mapActivity.setIntent(null);
-			}
-
 			if (intent.hasExtra(BaseSettingsFragment.OPEN_CONFIG_ON_MAP)) {
 				switch (intent.getStringExtra(BaseSettingsFragment.OPEN_CONFIG_ON_MAP)) {
 					case BaseSettingsFragment.MAP_CONFIG:
