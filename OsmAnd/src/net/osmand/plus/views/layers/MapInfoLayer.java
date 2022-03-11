@@ -24,13 +24,14 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
-import net.osmand.plus.views.mapwidgets.MapMarkersWidgetsFactory;
+import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.plus.views.mapwidgets.widgets.CoordinatesWidget;
 import net.osmand.plus.views.mapwidgets.widgets.ElevationProfileWidget;
+import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
 import net.osmand.plus.views.mapwidgets.widgets.NextTurnWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
@@ -88,6 +89,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 	private CoordinatesWidget topCoordinatesView;
 	private StreetNameWidget streetNameWidget;
+	private MapMarkersBarWidget mapMarkersBarWidget;
 	private LanesControl lanesControl;
 	private ElevationProfileWidget elevationProfileWidget;
 
@@ -137,6 +139,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			rulerWidgets = null;
 
 			streetNameWidget = null;
+			mapMarkersBarWidget = null;
 			topToolbarView = null;
 			topCoordinatesView = null;
 		}
@@ -222,7 +225,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		rulerWidgets = new ArrayList<>();
 		RouteInfoWidgetsFactory ric = new RouteInfoWidgetsFactory(app);
 		MapInfoWidgetsFactory mic = new MapInfoWidgetsFactory(app);
-		MapMarkersWidgetsFactory mwf = mapActivity.getMapLayers().getMapMarkersLayer().getWidgetsFactory();
+		MarkersWidgetsHelper markersWidgetsHelper = mapActivity.getMapLayers().getMapMarkersLayer().getMarkersWidgetsHelper();
 		lanesControl = RouteInfoWidgetsFactory.createLanesControl(mapActivity, view);
 
 		TextState ts = calculateTextState();
@@ -238,6 +241,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 		} else {
 			((ViewGroup) mapActivity.findViewById(R.id.MapHudButtonsOverlayTop)).addView(streetNameWidget.getView(), 1);
 		}
+
+		mapMarkersBarWidget = markersWidgetsHelper.getMapMarkersBarWidget();
+		int insertIndex = defaultStreetNamePosition != null ? 1 : 2;
+		((ViewGroup) mapActivity.findViewById(R.id.MapHudButtonsOverlayTop)).addView(mapMarkersBarWidget.getView(), insertIndex);
 
 		topToolbarView = new TopToolbarView(mapActivity);
 		updateTopToolbar(false);
@@ -270,11 +277,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 		registerSideWidget(time, new TimeWidgetState(app, false), WIDGET_TIME, false, 16);
 
 
-		TextInfoWidget marker = mwf.createMapMarkerControl(mapActivity, true);
+		TextInfoWidget marker = markersWidgetsHelper.getMapMarkerSideWidget(true);
 		registerSideWidget(marker, R.drawable.ic_action_flag, R.string.map_marker_1st, WIDGET_MARKER_1, false, 17);
 		TextInfoWidget bearing = ric.createBearingControl(mapActivity);
 		registerSideWidget(bearing, new BearingWidgetState(app), WIDGET_BEARING, false, 18);
-		TextInfoWidget marker2nd = mwf.createMapMarkerControl(mapActivity, false);
+		TextInfoWidget marker2nd = markersWidgetsHelper.getMapMarkerSideWidget(false);
 		registerSideWidget(marker2nd, R.drawable.ic_action_flag, R.string.map_marker_2nd, WIDGET_MARKER_2, false, 19);
 
 		TextInfoWidget speed = ric.createSpeedControl(mapActivity);
@@ -474,6 +481,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 				mapInfoControls.updateInfo(settings.getApplicationMode(), drawSettings, WIDGETS_EXPANDED);
 			}
 			streetNameWidget.updateInfo(drawSettings);
+			mapMarkersBarWidget.updateInfo(drawSettings);
 			topToolbarView.updateInfo();
 			topCoordinatesView.updateInfo(drawSettings);
 			elevationProfileWidget.updateInfo();

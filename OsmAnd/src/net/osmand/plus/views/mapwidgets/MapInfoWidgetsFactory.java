@@ -636,7 +636,7 @@ public class MapInfoWidgetsFactory {
 				}
 			}
 			controllers.add(controller);
-			map.getMapLayers().getMapMarkersLayer().getWidgetsFactory().updateInfo(null, map.getMapView().getZoom());
+			map.getMapLayers().getMapMarkersLayer().getMarkersWidgetsHelper().setCustomLatLon(null);
 			updateColors();
 			updateInfo();
 		}
