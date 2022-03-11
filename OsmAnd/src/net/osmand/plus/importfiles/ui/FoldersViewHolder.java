@@ -57,9 +57,8 @@ class FoldersViewHolder extends ViewHolder {
 	}
 
 	public void bindView(@Nullable String selectedFolder) {
-		adapter.setItems(getItems());
 		adapter.setSelectedItem(selectedFolder);
-		adapter.notifyDataSetChanged();
+		updateFolderItems();
 
 		buttonTitle.setText(R.string.list_of_groups);
 		button.setOnClickListener(v -> {
@@ -92,6 +91,17 @@ class FoldersViewHolder extends ViewHolder {
 			}
 		});
 		return adapter;
+	}
+
+	private void updateFolderItems() {
+		List<Object> newItems = getItems();
+		List<Object> items = adapter.getItems();
+
+		if (!newItems.equals(items)) {
+			newItems.removeAll(items);
+			items.addAll(1, newItems);
+			adapter.notifyDataSetChanged();
+		}
 	}
 
 	@NonNull
