@@ -4536,6 +4536,6 @@
     <string name="number_of_tiles">Csempék száma</string>
     <string name="zoom_levels_difference_description">A nagyítási szintek közötti nagy különbség növelheti a letöltött adatok méretét.</string>
     <string name="move_map_to_select_area">Mozgassa a térképet a kívánt terület kijelöléséhez.</string>
-    <string name="rendering_attr_showFitnessTrails_description">Fitnesz pályák mutatása</string>
-    <string name="rendering_attr_showFitnessTrails_name">Fitnesz pályák mutatása</string>
+    <string name="rendering_attr_showFitnessTrails_description">Erdei tornapályák megjelenítése</string>
+    <string name="rendering_attr_showFitnessTrails_name">Erdei tornapályák megjelenítése</string>
 </resources>
