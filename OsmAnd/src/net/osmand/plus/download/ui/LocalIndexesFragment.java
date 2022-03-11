@@ -1,7 +1,5 @@
 package net.osmand.plus.download.ui;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_DEV;
-
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Typeface;
@@ -57,6 +55,7 @@ import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment.OnMapSourceUpdateListener;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.plus.resources.SQLiteTileSource;
@@ -242,14 +241,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 		@Override
 		protected void onProgressUpdate(LocalIndexInfo... values) {
-			boolean isDevPluginEnabled = false;
-			for (OsmandPlugin plugin : OsmandPlugin.getEnabledPlugins()) {
-				if (plugin.getId().equals(PLUGIN_OSMAND_DEV)) {
-					isDevPluginEnabled = true;
-				}
-			}
+			boolean isDevPluginEnabled = OsmandPlugin.isEnabled(OsmandDevelopmentPlugin.class);
 			for (LocalIndexInfo v : values) {
-				if ((v.getOriginalType() != LocalIndexType.TTS_VOICE_DATA) || isDevPluginEnabled) {
+				if (v.getOriginalType() != LocalIndexType.TTS_VOICE_DATA || isDevPluginEnabled) {
 					listAdapter.addLocalIndexInfo(v);
 				}
 			}
