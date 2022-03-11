@@ -22,37 +22,48 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmand.plus.utils.AndroidUtils;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ActionMode;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.MenuItemCompat;
+import androidx.fragment.app.FragmentActivity;
+
 import net.osmand.Collator;
-import net.osmand.plus.utils.FileUtils;
-import net.osmand.plus.utils.FileUtils.RenameCallback;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.resources.SQLiteTileSource;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.download.LocalIndexHelper;
-import net.osmand.plus.download.LocalIndexHelper.LocalIndexType;
-import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.LocalIndexHelper;
+import net.osmand.plus.download.LocalIndexHelper.LocalIndexType;
+import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment.OnMapSourceUpdateListener;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.IncrementalChangesManager;
+import net.osmand.plus.resources.SQLiteTileSource;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.FileUtils.RenameCallback;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -66,15 +77,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ActionMode;
-import androidx.appcompat.widget.PopupMenu;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.MenuItemCompat;
-import androidx.fragment.app.FragmentActivity;
 
 
 public class LocalIndexesFragment extends OsmandExpandableListFragment implements DownloadEvents,
@@ -239,8 +241,11 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 		@Override
 		protected void onProgressUpdate(LocalIndexInfo... values) {
+			boolean isDevPluginEnabled = OsmandPlugin.isEnabled(OsmandDevelopmentPlugin.class);
 			for (LocalIndexInfo v : values) {
-				listAdapter.addLocalIndexInfo(v);
+				if (v.getOriginalType() != LocalIndexType.TTS_VOICE_DATA || isDevPluginEnabled) {
+					listAdapter.addLocalIndexInfo(v);
+				}
 			}
 			listAdapter.notifyDataSetChanged();
 			expandAllGroups();
