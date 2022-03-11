@@ -36,9 +36,9 @@ import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
-import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
+import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
@@ -519,7 +519,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		UiUtilities iconsCache = getMyApplication().getUIUtilities();
 		int iconColorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 		optionsMenuAdapter = new ContextMenuAdapter(requireMyApplication());
-		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
+		ItemClickListener listener = new ItemClickListener() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter,
 			                                  int itemId, int pos, boolean isChecked, int[] viewCoordinates) {

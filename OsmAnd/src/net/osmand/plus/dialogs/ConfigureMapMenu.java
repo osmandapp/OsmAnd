@@ -1,41 +1,5 @@
 package net.osmand.plus.dialogs;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CUSTOM_RENDERING_ITEMS_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DETAILS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FAVORITES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.GPX_FILES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.HIDE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_LANGUAGE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MAGNIFIER_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MARKERS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MODE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_RENDERING_CATEGORY_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_SOURCE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_LABELS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROAD_STYLE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
-import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
-import static net.osmand.plus.ContextMenuItem.INVALID_ID;
-import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.RENDERING_CATEGORY_OSM_ASSISTANT;
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_DENSITY_ATTR;
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_ATTR;
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_WIDTH_ATTR;
-import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
-import static net.osmand.render.RenderingRuleStorageProperties.A_APP_MODE;
-import static net.osmand.render.RenderingRuleStorageProperties.A_BASE_APP_MODE;
-import static net.osmand.render.RenderingRuleStorageProperties.A_ENGINE_V1;
-import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAILS;
-import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
-import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDE;
-import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_ROUTES;
-
 import android.view.View;
 import android.widget.ArrayAdapter;
 
@@ -51,11 +15,12 @@ import com.google.android.material.snackbar.Snackbar;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
-import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
-import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.ContextMenuItem.ItemBuilder;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
+import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
+import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.ContextMenuItem.ItemBuilder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -86,6 +51,41 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CUSTOM_RENDERING_ITEMS_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DETAILS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FAVORITES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.GPX_FILES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.HIDE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_LANGUAGE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MAGNIFIER_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MARKERS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MODE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_RENDERING_CATEGORY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_SOURCE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_LABELS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROAD_STYLE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
+import static net.osmand.plus.widgets.cmadapter.ContextMenuItem.INVALID_ID;
+import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.RENDERING_CATEGORY_OSM_ASSISTANT;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_DENSITY_ATTR;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_ATTR;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_WIDTH_ATTR;
+import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
+import static net.osmand.render.RenderingRuleStorageProperties.A_APP_MODE;
+import static net.osmand.render.RenderingRuleStorageProperties.A_BASE_APP_MODE;
+import static net.osmand.render.RenderingRuleStorageProperties.A_ENGINE_V1;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAILS;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDE;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_ROUTES;
+
 public class ConfigureMapMenu {
 
 	private static final Log LOG = PlatformUtil.getLog(ConfigureMapMenu.class);
@@ -115,6 +115,8 @@ public class ConfigureMapMenu {
 
 		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
+		adapter.setProfileDependent(true);
+
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(APP_PROFILES_ID)
 				.setTitleId(R.string.app_modes_choose, mapActivity)
@@ -122,8 +124,6 @@ public class ConfigureMapMenu {
 
 		List<RenderingRuleProperty> customRules = ConfigureMapUtils.getCustomRules(app,
 				UI_CATEGORY_HIDDEN, RENDERING_CATEGORY_TRANSPORT);
-		adapter.setProfileDependent(true);
-		adapter.setNightMode(nightMode);
 		createLayersItems(customRules, adapter, mapActivity, nightMode);
 		OsmandPlugin.registerConfigureMapCategory(adapter, mapActivity, customRules);
 		createRouteAttributeItems(customRules, adapter, mapActivity, nightMode);
@@ -157,7 +157,7 @@ public class ConfigureMapMenu {
 				.setSelected(settings.SHOW_FAVORITES.get())
 				.setColor(app, selected ? R.color.osmand_orange : INVALID_ID)
 				.setIcon(R.drawable.ic_action_favorite)
-				.setItemDeleteAction(makeDeleteAction(settings.SHOW_FAVORITES))
+				.setItemDeleteAction(settings.SHOW_FAVORITES)
 				.setListener(listener)
 				.createItem());
 
@@ -184,7 +184,7 @@ public class ConfigureMapMenu {
 				.setSelected(settings.SHOW_POI_LABEL.get())
 				.setColor(app, selected ? R.color.osmand_orange : INVALID_ID)
 				.setIcon(R.drawable.ic_action_text_dark)
-				.setItemDeleteAction(makeDeleteAction(settings.SHOW_POI_LABEL))
+				.setItemDeleteAction(settings.SHOW_POI_LABEL)
 				.setListener(listener).createItem());
 
 		selected = TransportLinesMenu.isShowLines(app);
@@ -215,7 +215,7 @@ public class ConfigureMapMenu {
 				.setSelected(selected)
 				.setColor(app, selected ? R.color.osmand_orange : INVALID_ID)
 				.setIcon(R.drawable.ic_action_flag)
-				.setItemDeleteAction(makeDeleteAction(settings.SHOW_MAP_MARKERS))
+				.setItemDeleteAction(settings.SHOW_MAP_MARKERS)
 				.setListener(listener).createItem());
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
@@ -223,7 +223,7 @@ public class ConfigureMapMenu {
 				.setTitleId(R.string.layer_map, activity)
 				.setIcon(R.drawable.ic_world_globe_dark)
 				.setDescription(settings.MAP_ONLINE_DATA.get() ? settings.MAP_TILE_SOURCES.get().replace(IndexConstants.SQLITE_EXT, "") : null)
-				.setItemDeleteAction(makeDeleteAction(settings.MAP_ONLINE_DATA, settings.MAP_TILE_SOURCES))
+				.setItemDeleteAction(settings.MAP_ONLINE_DATA, settings.MAP_TILE_SOURCES)
 				.setListener(listener).createItem());
 
 		OsmandPlugin.registerLayerContextMenu(adapter, activity, customRules);
@@ -450,29 +450,23 @@ public class ConfigureMapMenu {
 		final int selectedProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
 		final int themeRes = getThemeRes(nightMode);
 
-		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_map_rendering, activity)
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(MAP_RENDERING_CATEGORY_ID)
+				.setTitleId(R.string.map_widget_map_rendering, activity)
 				.setCategory(true).setLayout(R.layout.list_group_title_with_switch).createItem());
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(MAP_STYLE_ID)
 				.setTitleId(R.string.map_widget_renderer, activity)
 				.setLayout(R.layout.list_item_single_line_descrition_narrow)
 				.setIcon(R.drawable.ic_map)
-				.setListener(new ContextMenuAdapter.ItemClickListener() {
-					@Override
-					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
-													  final int pos, boolean isChecked, int[] viewCoordinates) {
-						SelectMapStyleBottomSheetDialogFragment.showInstance(activity.getSupportFragmentManager());
-						return false;
-					}
+				.setListener((ad, itemId, pos, isChecked, viewCoordinates) -> {
+					SelectMapStyleBottomSheetDialogFragment.showInstance(activity.getSupportFragmentManager());
+					return false;
 				})
-				.setItemDeleteAction(makeDeleteAction(settings.RENDERER))
-				.setOnUpdateCallback(new ContextMenuItem.OnUpdateCallback() {
-					@Override
-					public void onUpdateMenuItem(ContextMenuItem item) {
-						String renderDescr = ConfigureMapUtils.getRenderDescr(app);
-						item.setDescription(renderDescr);
-					}
+				.setItemDeleteAction(settings.RENDERER)
+				.setRefreshCallback(item -> {
+					String renderDesc = ConfigureMapUtils.getRenderDescr(app);
+					item.setDescription(renderDesc);
 				})
 				.createItem());
 
@@ -505,7 +499,7 @@ public class ConfigureMapMenu {
 					}
 					return false;
 				})
-				.setItemDeleteAction(makeDeleteAction(settings.DAYNIGHT_MODE))
+				.setItemDeleteAction(settings.DAYNIGHT_MODE)
 				.createItem());
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
@@ -521,7 +515,7 @@ public class ConfigureMapMenu {
 					}
 					return false;
 				})
-				.setItemDeleteAction(makeDeleteAction(settings.MAP_DENSITY))
+				.setItemDeleteAction(settings.MAP_DENSITY)
 				.createItem());
 
 		ContextMenuItem props = createRenderingProperty(customRules, adapter, activity,
@@ -539,7 +533,7 @@ public class ConfigureMapMenu {
 					}
 					return false;
 				})
-				.setItemDeleteAction(makeDeleteAction(settings.TEXT_SCALE))
+				.setItemDeleteAction(settings.TEXT_SCALE)
 				.createItem());
 
 		String localeDescr = activity.getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get();
@@ -555,7 +549,7 @@ public class ConfigureMapMenu {
 					}
 					return false;
 				})
-				.setItemDeleteAction(makeDeleteAction(settings.MAP_PREFERRED_LOCALE))
+				.setItemDeleteAction(settings.MAP_PREFERRED_LOCALE)
 				.createItem());
 
 		props = createProperties(customRules, R.string.rendering_category_details, R.drawable.ic_action_layers,
@@ -608,7 +602,7 @@ public class ConfigureMapMenu {
 			}
 		}
 		if (prefs.size() > 0) {
-			final ItemClickListener clickListener = new ContextMenuAdapter.ItemClickListener() {
+			ItemClickListener clickListener = new ItemClickListener() {
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> a, int itemId, int pos,
 												  boolean isChecked, int[] viewCoordinates) {
@@ -661,7 +655,8 @@ public class ConfigureMapMenu {
 				builder.setSecondaryIcon(R.drawable.ic_action_additional_option);
 				builder.setSelected(selected);
 			}
-			builder.setItemDeleteAction(makeDeleteAction(prefs));
+			OsmandPreference<?>[] prefArray = new OsmandPreference[prefs.size()];
+			builder.setItemDeleteAction(prefs.toArray(prefArray));
 			return builder.createItem();
 		}
 		return null;
@@ -743,7 +738,7 @@ public class ConfigureMapMenu {
 						return false;
 					})
 					.setDescription(descr)
-					.setItemDeleteAction(makeDeleteAction(pref))
+					.setItemDeleteAction(pref)
 					.setLayout(R.layout.list_item_single_line_descrition_narrow);
 			if (icon != INVALID_ID) {
 				builder.setIcon(icon);

@@ -57,8 +57,8 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -79,6 +79,7 @@ import net.osmand.plus.views.MoveMarkerBottomSheetHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -324,7 +325,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public void populateObjectContextMenu(@NonNull LatLon latLon, @Nullable Object o, @NonNull ContextMenuAdapter adapter) {
-		ContextMenuAdapter.ItemClickListener listener = (adptr, itemId, pos, isChecked, viewCoordinates) -> {
+		ItemClickListener listener = (adptr, itemId, pos, isChecked, viewCoordinates) -> {
 			RotatedTileBox tileBox = getMapView().getCurrentRotatedTileBox();
 			enterMovingMode(tileBox);
 			return true;

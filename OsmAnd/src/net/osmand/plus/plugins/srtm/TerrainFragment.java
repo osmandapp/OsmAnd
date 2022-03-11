@@ -1,14 +1,5 @@
 package net.osmand.plus.plugins.srtm;
 
-import static net.osmand.plus.utils.UiUtilities.CustomRadioButtonType.END;
-import static net.osmand.plus.utils.UiUtilities.CustomRadioButtonType.START;
-import static net.osmand.plus.download.DownloadActivityType.HILLSHADE_FILE;
-import static net.osmand.plus.download.DownloadActivityType.SLOPE_FILE;
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.TERRAIN_MAX_ZOOM;
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.TERRAIN_MIN_ZOOM;
-import static net.osmand.plus.plugins.srtm.TerrainMode.HILLSHADE;
-import static net.osmand.plus.plugins.srtm.TerrainMode.SLOPE;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -36,24 +27,25 @@ import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.slider.Slider;
 
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import org.apache.commons.logging.Log;
@@ -61,6 +53,15 @@ import org.apache.commons.logging.Log;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.List;
+
+import static net.osmand.plus.download.DownloadActivityType.HILLSHADE_FILE;
+import static net.osmand.plus.download.DownloadActivityType.SLOPE_FILE;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.TERRAIN_MAX_ZOOM;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.TERRAIN_MIN_ZOOM;
+import static net.osmand.plus.plugins.srtm.TerrainMode.HILLSHADE;
+import static net.osmand.plus.plugins.srtm.TerrainMode.SLOPE;
+import static net.osmand.plus.utils.UiUtilities.CustomRadioButtonType.END;
+import static net.osmand.plus.utils.UiUtilities.CustomRadioButtonType.START;
 
 
 public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickListener,
@@ -363,10 +364,9 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	}
 
 	private void updateDownloadSection() {
-		final ContextMenuAdapter adapter = new ContextMenuAdapter(app);
+		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
 		adapter.setProfileDependent(true);
-		adapter.setNightMode(nightMode);
 
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
@@ -470,7 +470,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		observableListView.setAdapter(listAdapter);
 		observableListView.setOnItemClickListener((parent, view, position, id) -> {
 			ContextMenuItem item = adapter.getItem(position);
-			ContextMenuAdapter.ItemClickListener click = item.getItemClickListener();
+			ItemClickListener click = item.getItemClickListener();
 			if (click != null) {
 				click.onContextMenuClick(listAdapter, item.getTitleId(), position, false, null);
 			}

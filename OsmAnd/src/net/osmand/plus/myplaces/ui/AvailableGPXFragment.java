@@ -55,9 +55,9 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
-import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
+import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -472,7 +472,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 		// To do Rewrite without ContextMenuAdapter
 		optionsMenuAdapter = new ContextMenuAdapter(app);
-		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
+		ItemClickListener listener = new ItemClickListener() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, final int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 				if (itemId == R.string.shared_string_refresh) {

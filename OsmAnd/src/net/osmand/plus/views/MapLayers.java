@@ -7,7 +7,11 @@ import android.graphics.drawable.Drawable;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
+import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities.GPXFile;
@@ -17,9 +21,6 @@ import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
-import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -61,18 +62,15 @@ import net.osmand.plus.views.layers.RouteLayer;
 import net.osmand.plus.views.layers.TransportStopsLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
+import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StyleRes;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ContextThemeWrapper;
 
 /**
  * Object is responsible to maintain layers using by map activity
@@ -307,7 +305,6 @@ public class MapLayers {
 			}
 		}
 		adapter.setProfileDependent(true);
-		adapter.setNightMode(isNightMode());
 
 		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(mapActivity, !isNightMode());
 		Context themedContext = UiUtilities.getThemedContext(mapActivity, isNightMode());
@@ -433,7 +430,7 @@ public class MapLayers {
 			builder.setIcon(R.drawable.mx_special_custom_category);
 		}
 		builder.setColor(app, ContextMenuItem.INVALID_ID);
-		builder.setSkipPaintingWithoutColor(true);
+		builder.setUseNaturalIconColor(true);
 		adapter.addItem(builder.createItem());
 	}
 

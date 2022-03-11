@@ -16,8 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
@@ -345,7 +345,7 @@ public class ShowHidePoiAction extends QuickAction {
 			builder.setIcon(R.drawable.mx_special_custom_category);
 		}
 
-		builder.setSkipPaintingWithoutColor(true);
+		builder.setUseNaturalIconColor(true);
 		adapter.addItem(builder.createItem());
 	}
 

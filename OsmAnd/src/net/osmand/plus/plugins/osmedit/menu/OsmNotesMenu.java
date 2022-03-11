@@ -7,9 +7,9 @@ import android.widget.ArrayAdapter;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
-import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
+import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -30,7 +30,6 @@ public class OsmNotesMenu {
 		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
 		adapter.setProfileDependent(true);
-		adapter.setNightMode(nightMode);
 		createLayersItems(adapter, mapActivity);
 		return adapter;
 	}

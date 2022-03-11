@@ -1,8 +1,5 @@
 package net.osmand.plus.dialogs;
 
-import static net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode.OVERLAY;
-import static net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode.UNDERLAY;
-
 import android.view.View;
 import android.widget.ArrayAdapter;
 
@@ -11,8 +8,6 @@ import androidx.annotation.StringRes;
 
 import net.osmand.map.ITileSource;
 import net.osmand.map.ParameterType;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -25,6 +20,13 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapTileLayer;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.callback.OnIntegerValueChangedListener;
+import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
+
+import static net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode.OVERLAY;
+import static net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode.UNDERLAY;
 
 
 public class RasterMapMenu {
@@ -36,7 +38,6 @@ public class RasterMapMenu {
 		ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity.getMyApplication());
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
 		adapter.setProfileDependent(true);
-		adapter.setNightMode(nightMode);
 		createLayersItems(adapter, mapActivity, type);
 		return adapter;
 	}
@@ -94,7 +95,7 @@ public class RasterMapMenu {
 					}
 				};
 		final MapLayers mapLayers = mapActivity.getMapLayers();
-		ContextMenuAdapter.OnRowItemClick l = new ContextMenuAdapter.OnRowItemClick() {
+		OnRowItemClick l = new OnRowItemClick() {
 			@Override
 			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter,
 			                              View view, int itemId, int pos) {
@@ -163,8 +164,8 @@ public class RasterMapMenu {
 					.setListener(l)
 					.setLayout(R.layout.list_item_icon_and_menu_wide)
 					.setDescription(mapTypeDescr).createItem());
-			ContextMenuAdapter.OnIntegerValueChangedListener integerListener =
-					new ContextMenuAdapter.OnIntegerValueChangedListener() {
+			OnIntegerValueChangedListener integerListener =
+					new OnIntegerValueChangedListener() {
 						@Override
 						public boolean onIntegerValueChangedListener(int newValue) {
 							mapTransparencyPreference.set(newValue);

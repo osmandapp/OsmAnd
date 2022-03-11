@@ -1,7 +1,5 @@
 package net.osmand.plus.activities;
 
-import static net.osmand.plus.AppInitializer.LATEST_CHANGES_URL;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -22,10 +20,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
-import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.ContextMenuItem.ItemBuilder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -35,9 +29,16 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.development.BaseLogcatActivity;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.ContextMenuItem.ItemBuilder;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
+import net.osmand.plus.widgets.cmadapter.callback.ItemLongClickListener;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 import java.io.File;
+
+import static net.osmand.plus.AppInitializer.LATEST_CHANGES_URL;
 
 public class HelpActivity extends BaseLogcatActivity implements OnItemClickListener, OnItemLongClickListener {
 
@@ -163,7 +164,7 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		ContextMenuAdapter.ItemClickListener listener = mAdapter.getItem(position).getItemClickListener();
+		ItemClickListener listener = mAdapter.getItem(position).getItemClickListener();
 		if (listener != null) {
 			listener.onContextMenuClick(mAdapter, position, position, false, null);
 		}
@@ -171,7 +172,7 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 
 	@Override
 	public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-		ContextMenuAdapter.ItemLongClickListener listener = mAdapter.getItem(position).getItemLongClickListener();
+		ItemLongClickListener listener = mAdapter.getItem(position).getItemLongClickListener();
 		if (listener != null) {
 			listener.onContextMenuLongClick(mAdapter, position, position, false, null);
 			return true;

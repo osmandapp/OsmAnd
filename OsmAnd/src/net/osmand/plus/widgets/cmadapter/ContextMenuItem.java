@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.widgets.cmadapter;
 
 import android.content.Context;
 
@@ -10,8 +10,12 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.plus.ContextMenuAdapter.OnItemDeleteAction;
-import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
+import net.osmand.plus.widgets.cmadapter.callback.ItemLongClickListener;
+import net.osmand.plus.widgets.cmadapter.callback.OnIntegerValueChangedListener;
+import net.osmand.plus.widgets.cmadapter.callback.OnItemDeleteAction;
+import net.osmand.plus.widgets.cmadapter.callback.ProgressListener;
 
 public class ContextMenuItem {
 	public static final int INVALID_ID = -1;
@@ -32,15 +36,15 @@ public class ContextMenuItem {
 	private boolean loading;
 	private final boolean category;
 	private final boolean clickable;
-	private final boolean skipPaintingWithoutColor;
+	private final boolean useNaturalIconColor;
 	private boolean hidden;
 	private int order;
 	private String description;
-	private final OnUpdateCallback onUpdateCallback;
-	private final ContextMenuAdapter.ItemClickListener itemClickListener;
-	private final ContextMenuAdapter.ItemLongClickListener itemLongClickListener;
-	private final ContextMenuAdapter.OnIntegerValueChangedListener integerListener;
-	private final ContextMenuAdapter.ProgressListener progressListener;
+	private final OnRefreshCallback onRefreshCallback;
+	private final ItemClickListener itemClickListener;
+	private final ItemLongClickListener itemLongClickListener;
+	private final OnIntegerValueChangedListener integerListener;
+	private final ProgressListener progressListener;
 	private final OnItemDeleteAction itemDeleteAction;
 	private final boolean hideDivider;
 	private final boolean hideCompoundButton;
@@ -59,14 +63,14 @@ public class ContextMenuItem {
 							boolean loading,
 							boolean category,
 							boolean clickable,
-							boolean skipPaintingWithoutColor,
+							boolean useNaturalIconColor,
 							int order,
 							String description,
-							OnUpdateCallback onUpdateCallback,
-							ContextMenuAdapter.ItemClickListener itemClickListener,
-							ContextMenuAdapter.ItemLongClickListener itemLongClickListener,
-							ContextMenuAdapter.OnIntegerValueChangedListener integerListener,
-							ContextMenuAdapter.ProgressListener progressListener,
+							OnRefreshCallback onRefreshCallback,
+							ItemClickListener itemClickListener,
+							ItemLongClickListener itemLongClickListener,
+							OnIntegerValueChangedListener integerListener,
+							ProgressListener progressListener,
 							OnItemDeleteAction itemDeleteAction,
 							boolean hideDivider,
 							boolean hideCompoundButton,
@@ -84,10 +88,10 @@ public class ContextMenuItem {
 		this.loading = loading;
 		this.category = category;
 		this.clickable = clickable;
-		this.skipPaintingWithoutColor = skipPaintingWithoutColor;
+		this.useNaturalIconColor = useNaturalIconColor;
 		this.order = order;
 		this.description = description;
-		this.onUpdateCallback = onUpdateCallback;
+		this.onRefreshCallback = onRefreshCallback;
 		this.itemClickListener = itemClickListener;
 		this.itemLongClickListener = itemLongClickListener;
 		this.integerListener = integerListener;
@@ -117,16 +121,6 @@ public class ContextMenuItem {
 	@ColorInt
 	public Integer getColor() {
 		return color;
-	}
-
-	@ColorInt
-	public int getThemedColor(Context context) {
-		if (skipPaintingWithoutColor || color != null) {
-			return color;
-		}
-		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
-		boolean nightMode = !app.getSettings().isLightContent();
-		return ColorUtilities.getDefaultIconColor(app, nightMode);
 	}
 
 	@DrawableRes
@@ -176,27 +170,27 @@ public class ContextMenuItem {
 	}
 
 	@Nullable
-	public ContextMenuAdapter.ItemClickListener getItemClickListener() {
+	public ItemClickListener getItemClickListener() {
 		return itemClickListener;
 	}
 
 	@Nullable
-	public ContextMenuAdapter.ItemLongClickListener getItemLongClickListener() {
+	public ItemLongClickListener getItemLongClickListener() {
 		return itemLongClickListener;
 	}
 
 	@Nullable
-	public ContextMenuAdapter.OnIntegerValueChangedListener getIntegerListener() {
+	public OnIntegerValueChangedListener getIntegerListener() {
 		return integerListener;
 	}
 
 	@Nullable
-	public ContextMenuAdapter.ProgressListener getProgressListener() {
+	public ProgressListener getProgressListener() {
 		return progressListener;
 	}
 
-	public boolean shouldSkipPainting() {
-		return skipPaintingWithoutColor;
+	public boolean useNaturalIconColor() {
+		return useNaturalIconColor;
 	}
 
 	public boolean shouldHideDivider() {
@@ -259,14 +253,10 @@ public class ContextMenuItem {
 		return id;
 	}
 
-	public void update() {
-		if (onUpdateCallback != null) {
-			onUpdateCallback.onUpdateMenuItem(this);
+	public void refreshWithActualData() {
+		if (onRefreshCallback != null) {
+			onRefreshCallback.onRefreshMenuItem(this);
 		}
-	}
-
-	public interface OnUpdateCallback {
-		void onUpdateMenuItem(ContextMenuItem item);
 	}
 
 	public static ItemBuilder createBuilder(String title) {
@@ -292,13 +282,13 @@ public class ContextMenuItem {
 		private boolean mIsClickable = true;
 		private int mOrder = 0;
 		private String mDescription = null;
-		private OnUpdateCallback mOnUpdateCallback = null;
-		private ContextMenuAdapter.ItemClickListener mItemClickListener = null;
-		private ContextMenuAdapter.ItemLongClickListener mItemLongClickListener = null;
-		private ContextMenuAdapter.OnIntegerValueChangedListener mIntegerListener = null;
-		private ContextMenuAdapter.ProgressListener mProgressListener = null;
+		private OnRefreshCallback mOnRefreshCallback = null;
+		private ItemClickListener mItemClickListener = null;
+		private ItemLongClickListener mItemLongClickListener = null;
+		private OnIntegerValueChangedListener mIntegerListener = null;
+		private ProgressListener mProgressListener = null;
 		private OnItemDeleteAction mItemDeleteAction = null;
-		private boolean mSkipPaintingWithoutColor;
+		private boolean mUseNaturalIconColor;
 		private boolean mHideDivider;
 		private boolean mHideCompoundButton;
 		private int mMinHeight;
@@ -381,38 +371,38 @@ public class ContextMenuItem {
 			return this;
 		}
 
-		public ItemBuilder setOnUpdateCallback(OnUpdateCallback onUpdateCallback) {
-			mOnUpdateCallback = onUpdateCallback;
+		public ItemBuilder setRefreshCallback(OnRefreshCallback onRefreshCallback) {
+			mOnRefreshCallback = onRefreshCallback;
 			return this;
 		}
 
-		public ItemBuilder setListener(ContextMenuAdapter.ItemClickListener checkBoxListener) {
+		public ItemBuilder setListener(ItemClickListener checkBoxListener) {
 			mItemClickListener = checkBoxListener;
 			return this;
 		}
 
-		public ItemBuilder setLongClickListener(ContextMenuAdapter.ItemLongClickListener longClickListener) {
+		public ItemBuilder setLongClickListener(ItemLongClickListener longClickListener) {
 			mItemLongClickListener = longClickListener;
 			return this;
 		}
 
-		public ItemBuilder setIntegerListener(ContextMenuAdapter.OnIntegerValueChangedListener integerListener) {
+		public ItemBuilder setIntegerListener(OnIntegerValueChangedListener integerListener) {
 			mIntegerListener = integerListener;
 			return this;
 		}
 
-		public ItemBuilder setProgressListener(ContextMenuAdapter.ProgressListener progressListener) {
+		public ItemBuilder setProgressListener(ProgressListener progressListener) {
 			mProgressListener = progressListener;
 			return this;
 		}
 
-		public ItemBuilder setSkipPaintingWithoutColor(boolean skipPaintingWithoutColor) {
-			mSkipPaintingWithoutColor = skipPaintingWithoutColor;
+		public ItemBuilder setUseNaturalIconColor(boolean useNaturalIconColor) {
+			mUseNaturalIconColor = useNaturalIconColor;
 			return this;
 		}
 
-		public ItemBuilder setItemDeleteAction(OnItemDeleteAction itemDeleteAction) {
-			this.mItemDeleteAction = itemDeleteAction;
+		public ItemBuilder setItemDeleteAction(OsmandPreference<?>... prefs) {
+			this.mItemDeleteAction = OnItemDeleteAction.makeDeleteAction(prefs);
 			return this;
 		}
 
@@ -447,11 +437,11 @@ public class ContextMenuItem {
 
 		public ContextMenuItem createItem() {
 			ContextMenuItem item = new ContextMenuItem(mTitleId, mTitle, mIcon, mColor, mSecondaryIcon,
-					mSelected, mProgress, mLayout, mLoading, mIsCategory, mIsClickable, mSkipPaintingWithoutColor,
-					mOrder, mDescription, mOnUpdateCallback, mItemClickListener, mItemLongClickListener,
+					mSelected, mProgress, mLayout, mLoading, mIsCategory, mIsClickable, mUseNaturalIconColor,
+					mOrder, mDescription, mOnRefreshCallback, mItemClickListener, mItemLongClickListener,
 					mIntegerListener, mProgressListener, mItemDeleteAction, mHideDivider, mHideCompoundButton,
 					mMinHeight, mTag, mId);
-			item.update();
+			item.refreshWithActualData();
 			return item;
 		}
 	}

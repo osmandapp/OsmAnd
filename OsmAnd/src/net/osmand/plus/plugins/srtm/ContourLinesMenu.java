@@ -3,28 +3,33 @@ package net.osmand.plus.plugins.srtm;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
-import net.osmand.plus.utils.AndroidUtils;
+import androidx.annotation.Nullable;
+
 import net.osmand.PlatformUtil;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.chooseplan.OsmAndFeature;
-import net.osmand.plus.chooseplan.ChoosePlanFragment;
-import net.osmand.plus.download.DownloadItem;
-import net.osmand.plus.download.SelectIndexesHelper;
-import net.osmand.plus.download.SrtmDownloadItem;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.SelectIndexesHelper;
+import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
+import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
+import net.osmand.plus.widgets.cmadapter.callback.ProgressListener;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
@@ -34,9 +39,6 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.util.List;
 
-import androidx.annotation.Nullable;
-
-import static net.osmand.plus.ContextMenuAdapter.*;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_DENSITY_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_DISABLED_VALUE;
@@ -55,7 +57,6 @@ public class ContourLinesMenu {
 		ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity.getMyApplication());
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
 		adapter.setProfileDependent(true);
-		adapter.setNightMode(nightMode);
 		createLayersItems(adapter, mapActivity);
 		return adapter;
 	}

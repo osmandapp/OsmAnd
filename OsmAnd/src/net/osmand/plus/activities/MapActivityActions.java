@@ -11,12 +11,17 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
@@ -26,10 +31,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
-import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.ContextMenuItem.ItemBuilder;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -73,6 +74,10 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapActions;
 import net.osmand.plus.views.layers.MapControlsLayer;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.ContextMenuItem.ItemBuilder;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageWelcomeDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
@@ -87,12 +92,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AlertDialog;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_AV_NOTES_ID;
@@ -129,9 +128,9 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_M
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_SEARCH_NEARBY;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_SHARE_ID;
-import static net.osmand.plus.ContextMenuAdapter.PROFILES_CHOSEN_PROFILE_TAG;
-import static net.osmand.plus.ContextMenuAdapter.PROFILES_CONTROL_BUTTON_TAG;
-import static net.osmand.plus.ContextMenuAdapter.PROFILES_NORMAL_PROFILE_TAG;
+import static net.osmand.plus.widgets.cmadapter.ContextMenuArrayAdapter.PROFILES_CHOSEN_PROFILE_TAG;
+import static net.osmand.plus.widgets.cmadapter.ContextMenuArrayAdapter.PROFILES_CONTROL_BUTTON_TAG;
+import static net.osmand.plus.widgets.cmadapter.ContextMenuArrayAdapter.PROFILES_NORMAL_PROFILE_TAG;
 
 
 public class MapActivityActions extends MapActions implements DialogProvider {
@@ -574,18 +573,18 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 
 	public ContextMenuAdapter createMainOptionsMenu() {
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter(app);
-		optionsMenuHelper.setNightMode(nightMode);
-
+		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 		if (drawerMode == DRAWER_MODE_SWITCH_PROFILE) {
-			return createSwitchProfileOptionsMenu(app, optionsMenuHelper, nightMode);
+			return createSwitchProfileOptionsMenu(app, adapter, nightMode);
 		}
-		return createNormalOptionsMenu(app, optionsMenuHelper, nightMode);
+		return createNormalOptionsMenu(app, adapter, nightMode);
 	}
 
-	private ContextMenuAdapter createSwitchProfileOptionsMenu(final OsmandApplication app, ContextMenuAdapter optionsMenuHelper, boolean nightMode) {
+	private ContextMenuAdapter createSwitchProfileOptionsMenu(@NonNull OsmandApplication app,
+	                                                          @NonNull ContextMenuAdapter adapter,
+	                                                          boolean nightMode) {
 		drawerMode = DRAWER_MODE_NORMAL;
-		createProfilesController(app, optionsMenuHelper, nightMode, true);
+		createProfilesController(app, adapter, nightMode, true);
 
 		List<ApplicationMode> activeModes = ApplicationMode.values(app);
 		ApplicationMode currentMode = app.getSettings().APPLICATION_MODE.get();
@@ -602,37 +601,31 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 
 			int tag = currentMode.equals(appMode) ? PROFILES_CHOSEN_PROFILE_TAG : PROFILES_NORMAL_PROFILE_TAG;
 
-			optionsMenuHelper.addItem(new ItemBuilder().setLayout(R.layout.profile_list_item)
+			adapter.addItem(new ItemBuilder().setLayout(R.layout.profile_list_item)
 					.setIcon(appMode.getIconRes())
 					.setColor(appMode.getProfileColor(nightMode))
 					.setTag(tag)
 					.setTitle(appMode.toHumanString())
 					.setDescription(modeDescription)
-					.setListener(new ItemClickListener() {
-						@Override
-						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
-							app.getSettings().setApplicationMode(appMode);
-							updateDrawerMenu();
-							return false;
-						}
+					.setListener((arrayAdapter, itemId, position, isChecked, viewCoordinates) -> {
+						app.getSettings().setApplicationMode(appMode);
+						updateDrawerMenu();
+						return false;
 					})
 					.createItem());
 		}
 
-		optionsMenuHelper.addItem(new ItemBuilder().setLayout(R.layout.profile_list_item)
+		adapter.addItem(new ItemBuilder().setLayout(R.layout.profile_list_item)
 				.setColor(ColorUtilities.getActiveColor(app, nightMode))
 				.setTag(PROFILES_CONTROL_BUTTON_TAG)
 				.setTitle(getString(R.string.shared_string_manage))
-				.setListener(new ItemClickListener() {
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
-						BaseSettingsFragment.showInstance(mapActivity, BaseSettingsFragment.SettingsScreenType.MAIN_SETTINGS);
-						return true;
-					}
+				.setListener((arrayAdapter, itemId, position, isChecked, viewCoordinates) -> {
+					BaseSettingsFragment.showInstance(mapActivity, BaseSettingsFragment.SettingsScreenType.MAIN_SETTINGS);
+					return true;
 				})
 				.createItem());
 
-		return optionsMenuHelper;
+		return adapter;
 	}
 
 	private ContextMenuAdapter createNormalOptionsMenu(final OsmandApplication app, ContextMenuAdapter optionsMenuHelper, boolean nightMode) {
@@ -1043,8 +1036,8 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 	}
 
 	protected void updateDrawerMenu() {
-		final boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		final ListView menuItemsListView = mapActivity.findViewById(R.id.menuItems);
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		ListView menuItemsListView = mapActivity.findViewById(R.id.menuItems);
 		menuItemsListView.setBackgroundColor(ColorUtilities.getListBgColor(mapActivity, nightMode));
 		menuItemsListView.removeHeaderView(drawerLogoHeader);
 		Bitmap navDrawerLogo = app.getAppCustomization().getNavDrawerLogo();
@@ -1054,30 +1047,26 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 			menuItemsListView.addHeaderView(drawerLogoHeader);
 		}
 		menuItemsListView.setDivider(null);
-		final ContextMenuAdapter contextMenuAdapter = createMainOptionsMenu();
-		contextMenuAdapter.setDefaultLayoutId(R.layout.simple_list_menu_item);
-		final ArrayAdapter<ContextMenuItem> simpleListAdapter = contextMenuAdapter.createListAdapter(mapActivity,
-				!nightMode);
+		ContextMenuAdapter cma = createMainOptionsMenu();
+		cma.setDefaultLayoutId(R.layout.simple_list_menu_item);
+		ArrayAdapter<ContextMenuItem> simpleListAdapter = cma.createListAdapter(mapActivity, !nightMode);
 		menuItemsListView.setAdapter(simpleListAdapter);
-		menuItemsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				mapActivity.dismissCardDialog();
-				boolean hasHeader = menuItemsListView.getHeaderViewsCount() > 0;
-				boolean hasFooter = menuItemsListView.getFooterViewsCount() > 0;
-				if (hasHeader && position == 0 || (hasFooter && position == menuItemsListView.getCount() - 1)) {
-					String drawerLogoParams = app.getAppCustomization().getNavDrawerLogoUrl();
-					if (!Algorithms.isEmpty(drawerLogoParams)) {
-						WikipediaDialogFragment.showFullArticle(mapActivity, Uri.parse(drawerLogoParams), nightMode);
-					}
-				} else {
-					position -= menuItemsListView.getHeaderViewsCount();
-					ContextMenuItem item = contextMenuAdapter.getItem(position);
-					ItemClickListener click = item.getItemClickListener();
-					if (click != null && click.onContextMenuClick(simpleListAdapter, item.getTitleId(),
-							position, false, AndroidUtils.getCenterViewCoordinates(view))) {
-						mapActivity.closeDrawer();
-					}
+		menuItemsListView.setOnItemClickListener((parent, view, position, id) -> {
+			mapActivity.dismissCardDialog();
+			boolean hasHeader = menuItemsListView.getHeaderViewsCount() > 0;
+			boolean hasFooter = menuItemsListView.getFooterViewsCount() > 0;
+			if (hasHeader && position == 0 || (hasFooter && position == menuItemsListView.getCount() - 1)) {
+				String drawerLogoParams = app.getAppCustomization().getNavDrawerLogoUrl();
+				if (!Algorithms.isEmpty(drawerLogoParams)) {
+					WikipediaDialogFragment.showFullArticle(mapActivity, Uri.parse(drawerLogoParams), nightMode);
+				}
+			} else {
+				position -= menuItemsListView.getHeaderViewsCount();
+				ContextMenuItem item = cma.getItem(position);
+				ItemClickListener click = item.getItemClickListener();
+				if (click != null && click.onContextMenuClick(simpleListAdapter, item.getTitleId(),
+						position, false, AndroidUtils.getCenterViewCoordinates(view))) {
+					mapActivity.closeDrawer();
 				}
 			}
 		});

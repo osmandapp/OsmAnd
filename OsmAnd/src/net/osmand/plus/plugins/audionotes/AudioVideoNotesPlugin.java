@@ -42,9 +42,9 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
-import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
+import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -97,7 +97,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_P
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_VIDEO_NOTE;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_AUDIO_VIDEO_NOTES;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.RECORDING_LAYER;
-import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 
 
 public class AudioVideoNotesPlugin extends OsmandPlugin {
@@ -667,7 +666,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.setSelected(SHOW_RECORDINGS.get())
 				.setIcon(R.drawable.ic_action_micro_dark)
 				.setColor(mapActivity, SHOW_RECORDINGS.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
-				.setItemDeleteAction(makeDeleteAction(SHOW_RECORDINGS))
+				.setItemDeleteAction(SHOW_RECORDINGS)
 				.setListener(listener).createItem());
 	}
 

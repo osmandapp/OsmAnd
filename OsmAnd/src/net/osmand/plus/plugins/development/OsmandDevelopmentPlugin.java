@@ -9,8 +9,8 @@ import android.widget.ArrayAdapter;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -25,6 +25,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_DEV;
@@ -70,7 +71,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 					.setId(DRAWER_BUILDS_ID)
 					.setTitleId(R.string.version_settings, mapActivity)
 					.setIcon(R.drawable.ic_action_apk)
-					.setListener(new ContextMenuAdapter.ItemClickListener() {
+					.setListener(new ItemClickListener() {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 							final Intent mapIntent = new Intent(mapActivity, ContributionVersionActivity.class);

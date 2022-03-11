@@ -14,8 +14,8 @@ import androidx.annotation.StringRes;
 
 import net.osmand.StateChangedListener;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
@@ -32,6 +32,8 @@ import net.osmand.plus.views.layers.MapQuickActionLayer;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.ElevationProfileWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
+import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper.PopUpMenuWidthType;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
@@ -465,7 +467,7 @@ public class MapWidgetRegistry {
 				.setSelected(selected)
 				.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
-				.setListener(new ContextMenuAdapter.OnRowItemClick() {
+				.setListener(new OnRowItemClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
 						setVisibility(adapter, position, isChecked);
@@ -512,7 +514,7 @@ public class MapWidgetRegistry {
 					.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 					.setSecondaryIcon(r.widget != null ? R.drawable.ic_action_additional_option : ContextMenuItem.INVALID_ID)
 					.setDescription(r.isVisibleCollapsed(mode) ? desc : null)
-					.setListener(new ContextMenuAdapter.OnRowItemClick() {
+					.setListener(new OnRowItemClick() {
 						@Override
 						public boolean onRowItemClick(final ArrayAdapter<ContextMenuItem> adapter,
 						                              final View view,
@@ -603,7 +605,7 @@ public class MapWidgetRegistry {
 				.setIcon(R.drawable.ic_action_elevation_profile)
 				.setSelected(pref.get())
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
-				.setListener(new ContextMenuAdapter.OnRowItemClick() {
+				.setListener(new OnRowItemClick() {
 					@Override
 					public boolean onRowItemClick(final ArrayAdapter<ContextMenuItem> adapter,
 					                              final View view,
@@ -728,11 +730,10 @@ public class MapWidgetRegistry {
 		ContextMenuAdapter cm = new ContextMenuAdapter(app);
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		cm.setProfileDependent(true);
-		cm.setNightMode(nightMode);
 		cm.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
 		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.app_modes_choose, mapActivity)
 				.setLayout(R.layout.mode_toggles).createItem());
-		cm.setChangeAppModeListener(() -> mapActivity.getDashboard().updateListAdapter(getViewConfigureMenuAdapter(mapActivity)));
+//		cm.setChangeAppModeListener(() -> mapActivity.getDashboard().updateListAdapter(getViewConfigureMenuAdapter(mapActivity)));
 		ApplicationMode mode = settings.getApplicationMode();
 		addControls(mapActivity, cm, mode);
 		return cm;
@@ -749,7 +750,7 @@ public class MapWidgetRegistry {
 		a.notifyDataSetChanged();
 	}
 
-	static class AppearanceItemClickListener implements ContextMenuAdapter.ItemClickListener {
+	static class AppearanceItemClickListener implements ItemClickListener {
 
 		private final MapActivity mapActivity;
 		private final OsmandPreference<Boolean> pref;

@@ -3,8 +3,8 @@ package net.osmand.plus.wikipedia;
 import android.widget.ArrayAdapter;
 
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
@@ -16,6 +16,9 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
+import net.osmand.plus.widgets.cmadapter.callback.ProgressListener;
 
 import java.io.IOException;
 import java.util.List;
@@ -37,26 +40,20 @@ public class WikipediaPoiMenu {
 	}
 
 	private ContextMenuAdapter createLayersItems() {
-		final int toggleActionStringId = R.string.shared_string_wikipedia;
-		final int languageActionStringId = R.string.shared_string_language;
-		final int spaceHeight = app.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_big_item_height);
-		final boolean enabled = app.getPoiFilters().isPoiFilterSelected(PoiFiltersHelper.getTopWikiPoiFilterId());
+		int toggleActionStringId = R.string.shared_string_wikipedia;
+		int languageActionStringId = R.string.shared_string_language;
+		int spaceHeight = app.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_big_item_height);
+		boolean enabled = app.getPoiFilters().isPoiFilterSelected(PoiFiltersHelper.getTopWikiPoiFilterId());
 		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 		adapter.setDefaultLayoutId(R.layout.dash_item_with_description_72dp);
 		adapter.setProfileDependent(true);
-		adapter.setNightMode(nightMode);
 
-		ContextMenuAdapter.OnRowItemClick l = new ContextMenuAdapter.OnRowItemClick() {
+		OnRowItemClick l = new OnRowItemClick() {
 			@Override
 			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter,
 			                                  final int itemId, final int position, final boolean isChecked, int[] viewCoordinates) {
 				if (itemId == toggleActionStringId) {
-					app.runInUIThread(new Runnable() {
-						@Override
-						public void run() {
-							wikiPlugin.toggleWikipediaPoi(!enabled, null);
-						}
-					});
+					app.runInUIThread(() -> wikiPlugin.toggleWikipediaPoi(!enabled, null));
 				} else if (itemId == languageActionStringId) {
 					SelectWikiLanguagesBottomSheet.showInstance(mapActivity, true);
 				}
@@ -136,7 +133,7 @@ public class WikipediaPoiMenu {
 								.setDescription(DownloadActivityType.WIKIPEDIA_FILE.getString(app) + " • " + indexItem.getSizeDescription(app))
 								.setIcon(DownloadActivityType.WIKIPEDIA_FILE.getIconResource())
 								.hideDivider(isLastItem)
-								.setListener(new ContextMenuAdapter.ItemClickListener() {
+								.setListener(new ItemClickListener() {
 									@Override
 									public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
 										ContextMenuItem item = adapter.getItem(position);
@@ -160,7 +157,7 @@ public class WikipediaPoiMenu {
 										return false;
 									}
 								})
-								.setProgressListener(new ContextMenuAdapter.ProgressListener() {
+								.setProgressListener(new ProgressListener() {
 									@Override
 									public boolean onProgressChanged(Object progressObject, int progress,
 									                                 ArrayAdapter<ContextMenuItem> adapter,

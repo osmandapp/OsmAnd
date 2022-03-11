@@ -16,10 +16,10 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
-import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
-import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
+import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
+import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -55,7 +55,6 @@ import java.util.Map;
 import static android.content.Intent.ACTION_VIEW;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAPILLARY;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_MAPILLARY;
-import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 
 public class MapillaryPlugin extends OsmandPlugin {
 
@@ -234,7 +233,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 				.setColor(app, SHOW_MAPILLARY.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_mapillary)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
-				.setItemDeleteAction(makeDeleteAction(SHOW_MAPILLARY))
+				.setItemDeleteAction(SHOW_MAPILLARY)
 				.setListener(listener)
 				.createItem());
 	}

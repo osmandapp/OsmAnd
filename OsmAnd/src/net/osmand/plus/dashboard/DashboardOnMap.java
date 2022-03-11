@@ -48,10 +48,10 @@ import com.github.ksoichiro.android.observablescrollview.ScrollState;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.ValueHolder;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
-import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
-import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
+import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
+import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -737,7 +737,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			this.nightMode = nightMode;
 			applyDayNightMode();
 		}
-		final ArrayAdapter<ContextMenuItem> listAdapter = cm.createListAdapter(mapActivity, !nightMode);
+		ArrayAdapter<ContextMenuItem> listAdapter = cm.createListAdapter(mapActivity, !nightMode);
 		OnItemClickListener listener = getOptionsMenuOnClickListener(cm, listAdapter);
 		updateListAdapter(listAdapter, listener);
 	}
@@ -1055,7 +1055,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			for (int i = 0; i < listAdapter.getCount(); i++) {
 				Object o = listAdapter.getItem(i);
 				if (o instanceof ContextMenuItem) {
-					((ContextMenuItem) o).update();
+					((ContextMenuItem) o).refreshWithActualData();
 				}
 			}
 			listAdapter.notifyDataSetChanged();
