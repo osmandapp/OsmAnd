@@ -8,6 +8,8 @@ import net.osmand.plus.resources.AsyncLoadingThread.TileLoadDownloadRequest;
 import java.io.File;
 import java.io.IOException;
 
+import androidx.annotation.NonNull;
+
 import static net.osmand.map.TileSourceManager.MAPILLARY_VECTOR_TILE_EXT;
 
 public class GeometryTilesCache extends TilesCache<GeometryTile> {
@@ -46,7 +48,7 @@ public class GeometryTilesCache extends TilesCache<GeometryTile> {
 	}
 
 	@Override
-	protected GeometryTile getTileObject(TileLoadDownloadRequest req) {
+	protected GeometryTile getTileObject(@NonNull TileLoadDownloadRequest req) {
 		GeometryTile tile = null;
 		File en = new File(req.dirWithTiles, req.tileId);
 		if (en.exists()) {

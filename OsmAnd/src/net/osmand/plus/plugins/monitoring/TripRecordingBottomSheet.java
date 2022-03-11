@@ -84,7 +84,6 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	private static final Log LOG = PlatformUtil.getLog(TripRecordingBottomSheet.class);
 	public static final String UPDATE_TRACK_ICON = "update_track_icon";
 	public static final String UPDATE_DYNAMIC_ITEMS = "update_dynamic_items";
-	private static final int GPS_UPDATE_INTERVAL = 1000;
 	public static final GPXTabItemType[] INIT_TAB_ITEMS =
 			new GPXTabItemType[] {GPX_TAB_ITEM_GENERAL, GPX_TAB_ITEM_ALTITUDE, GPX_TAB_ITEM_SPEED};
 
@@ -103,9 +102,8 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 
 	private GpxBlockStatisticsBuilder blockStatisticsBuilder;
 	private SelectedGpxFile selectedGpxFile;
-	private final Handler handler = new Handler();
-	private Runnable updatingGPS;
-	private Runnable updatingGraph;
+
+	private TripRecordingUpdatesHandler handler;
 
 	private GPXFile getGPXFile() {
 		return selectedGpxFile.getGpxFile();
@@ -131,12 +129,21 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	}
 
 	@Override
-	public void createMenuItems(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		app = requiredMyApplication();
 		settings = app.getSettings();
 		helper = app.getSavingTrackHelper();
 		plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
 		selectedGpxFile = helper.getCurrentTrack();
+		handler = new TripRecordingUpdatesHandler(app, this::updateStatus, () -> {
+			graphsAdapter.updateGraph(graphTabPosition);
+			AndroidUiHelper.updateVisibility(segmentsTabs, graphsAdapter.isTabsVisible());
+		});
+	}
+
+	@Override
+	public void createMenuItems(Bundle savedInstanceState) {
 		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
 
 		View itemView = inflater.inflate(R.layout.trip_recording_fragment, null, false);
@@ -196,10 +203,10 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 			boolean isRecordingTrack = isRecordingTrack();
 			if (isRecordingTrack) {
 				blockStatisticsBuilder.stopUpdatingStatBlocks();
-				stopUpdatingGraph();
+				handler.stopChartUpdates();
 			} else {
 				blockStatisticsBuilder.runUpdatingStatBlocksIfNeeded();
-				runUpdatingGraph();
+				handler.startChartUpdatesIfNotRunning();
 			}
 			if (isRecordingTrack) {
 				settings.SAVE_GLOBAL_TRACK_TO_GPX.set(false);
@@ -244,8 +251,8 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	public void onResume() {
 		super.onResume();
 		blockStatisticsBuilder.runUpdatingStatBlocksIfNeeded();
-		runUpdatingGPS();
-		runUpdatingGraph();
+		handler.startGpsUpdatesIfNotRunning();
+		handler.startChartUpdatesIfNotRunning();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(trackChartPoints);
@@ -256,8 +263,8 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	public void onPause() {
 		super.onPause();
 		blockStatisticsBuilder.stopUpdatingStatBlocks();
-		stopUpdatingGPS();
-		stopUpdatingGraph();
+		handler.stopGpsUpdates();
+		handler.stopChartUpdates();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(null);
@@ -287,50 +294,9 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		}
 	}
 
-	private void stopUpdatingGPS() {
-		handler.removeCallbacks(updatingGPS);
-	}
-
-	private void runUpdatingGPS() {
-		if (updatingGPS == null) {
-			updatingGPS = new Runnable() {
-				@Override
-				public void run() {
-					int interval = app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get();
-					updateStatus();
-					handler.postDelayed(this, Math.max(GPS_UPDATE_INTERVAL, interval));
-				}
-			};
-		}
-		if (!handler.hasCallbacks(updatingGPS)) {
-			handler.post(updatingGPS);
-		}
-	}
-
-	private void stopUpdatingGraph() {
-		handler.removeCallbacks(updatingGraph);
-	}
-
-	private void runUpdatingGraph() {
-		if (updatingGraph == null) {
-			updatingGraph = new Runnable() {
-				@Override
-				public void run() {
-					int interval = app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get();
-					graphsAdapter.updateGraph(graphTabPosition);
-					AndroidUiHelper.updateVisibility(segmentsTabs, graphsAdapter.isTabsVisible());
-					handler.postDelayed(this, Math.max(GPS_UPDATE_INTERVAL, interval));
-				}
-			};
-		}
-		if (!handler.hasCallbacks(updatingGraph)) {
-			handler.post(updatingGraph);
-		}
-	}
-
 	private void restartUpdatingGraph() {
-		stopUpdatingGraph();
-		runUpdatingGraph();
+		handler.stopChartUpdates();
+		handler.startChartUpdatesIfNotRunning();
 	}
 
 	private void createSegmentsTabs(ViewGroup viewGroup) {

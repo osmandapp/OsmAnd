@@ -418,8 +418,8 @@ public class ResourceManager {
 		return cache != null && cache.isTileSavedOnFileSystem(tileId, map, x, y, zoom);
 	}
 
-	public synchronized long getTileBytesSizeOnFileSystem(@NonNull String tileId, @NonNull ITileSource map,
-	                                                      int x, int y, int zoom) {
+	public synchronized int getTileBytesSizeOnFileSystem(@NonNull String tileId, @NonNull ITileSource map,
+	                                                     int x, int y, int zoom) {
 		TilesCache<?> cache = getTilesCache(map);
 		return cache != null
 				? cache.getTileBytesSizeOnFileSystem(tileId, map, x, y, zoom)

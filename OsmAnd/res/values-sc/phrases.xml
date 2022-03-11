@@ -4295,4 +4295,6 @@
     <string name="poi_tiles">Butega de pianellas</string>
     <string name="poi_parcel_locker">Armarieddu pro pacos</string>
     <string name="poi_access_permit">Permissu netzessàriu</string>
+    <string name="poi_greenery">Vegetatzione</string>
+    <string name="poi_landuse_education">Educatzione</string>
 </resources>

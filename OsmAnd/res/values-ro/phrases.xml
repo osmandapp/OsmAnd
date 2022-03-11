@@ -4098,7 +4098,7 @@
     <string name="poi_membership_no">Nu</string>
     <string name="poi_tobacco_yes">Da;Tutun</string>
     <string name="poi_membership_yes">Da;Calitatea de membru</string>
-    <string name="poi_lgbtq_no">LGBTQ acum permis</string>
+    <string name="poi_lgbtq_no">LGBTQ nepermis</string>
     <string name="poi_massage_shiatsu">Shiatsu</string>
     <string name="poi_beauty_salon_waxing">Epilare cu ceară</string>
     <string name="poi_beauty_salon_aesthetic">Estetică</string>
@@ -4288,4 +4288,11 @@
     <string name="poi_access_permit">Autorizație necesară</string>
     <string name="poi_parcel_locker">Dulap pentru colete</string>
     <string name="poi_tiles">Magazin de gresie și faianță</string>
+    <string name="poi_board_type_art">Artă</string>
+    <string name="poi_landuse_education">Educație</string>
+    <string name="poi_board_type_sight">Vedere</string>
+    <string name="poi_board_type_planet_walk">Platoul de mers pe jos</string>
+    <string name="poi_board_type_sport">Sport</string>
+    <string name="poi_board_type_welcome_sign">Semn de bun venit</string>
+    <string name="poi_greenery">Verdeață</string>
 </resources>

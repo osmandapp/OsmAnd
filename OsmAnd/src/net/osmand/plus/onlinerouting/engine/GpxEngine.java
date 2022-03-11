@@ -142,6 +142,11 @@ public class GpxEngine extends OnlineRoutingEngine {
 		try {
 			RoutingHelper routingHelper = app.getRoutingHelper();
 			ApplicationMode appMode = routingHelper.getAppMode();
+			String routingProfile = getApproximateRouteProfile();
+			String oldRoutingProfile = appMode.getRoutingProfile();
+			if (routingProfile != null) {
+				appMode.setRoutingProfile(routingProfile);
+			}
 			List<WptPt> points = gpxFile.getAllSegmentsPoints();
 			LocationsHolder holder = new LocationsHolder(points);
 			if (holder.getSize() > 1) {
@@ -153,6 +158,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 				GpxRouteApproximation gpxApproximation = routingHelper.calculateGpxApproximation(env, gctx, gpxPoints, null);
 				MeasurementEditingContext ctx = new MeasurementEditingContext(app);
 				ctx.setPoints(gpxApproximation, points, appMode, useExternalTimestamps());
+				appMode.setRoutingProfile(oldRoutingProfile);
 				return ctx;
 			}
 		} catch (IOException | InterruptedException e) {

@@ -2442,4 +2442,23 @@
 \nCaiff pwyntiau gyda gwerth uwch eu cuddio.</string>
     <string name="exit_pan_mode_descr">Pwyswch Dewis i adael modd tremio</string>
     <string name="routing_attr_only_permitted_ways_name">Ffyrdd wedi\'u caniatáu yn benodol</string>
+    <string name="purchases_feature_desc_monthly_map_updates">Cael mynediad at ddiweddariadau misol o fapiau all-lein.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description"></string>
+    <string name="on_hold_since"></string>
+    <string name="explore_wikipedia_offline">Pori Wikipedia all-lein.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Cael OsmAnd Cloud i gadw holl ddata OsmAnd ar-lein. Dim colli data ar ôl ailosod. Cadw gwybodaeth wrth gefn a\'i hadfer yn hawdd.</string>
+    <string name="purchases_feature_desc_pro_widgets">Cael mynediad at nodweddion OsmAnd Pro: Lliwio llwybrau a mwy.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Edrych ar gynlluniau OsmAnd i ganfod un sy\'n addas ar eich cyfer.</string>
+    <string name="backup_dont_have_any_descr">Trefnu cadw wrth gefn yn awtomatig a byth colli data.</string>
+    <string name="backup_do_not_have_any">Nid oes gennych eto gopi wrth gefn ar-lein.</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Cael mynediad at ddiweddariadau mapiau\'n fwy aml. Diweddariadau wythnosol, dyddiol neu bob awr. Llwythir diweddariadau yn rhannol, dim ond ar gyfer yr ardaloedd wedi newid.</string>
+    <string name="osmand_pro_tagline">Cael pob nodwedd posib</string>
+    <string name="shared_string_relation">Perthynas</string>
+    <string name="benefits_for_contributors">Buddion i gyfranwyr gweithredol OSM</string>
+    <string name="benefits_for_contributors_primary_descr">Gall fod cyfranwyr gweithredol OpenStreetMap yn cael diweddariadau mapiau hyd at bob awr heb derfyn.</string>
+    <string name="not_enough_contributions_descr">Rhaid gwneud o leiaf %1$s newid dros gyfnod y ddeufis diwethaf %2$s er mwyn cael mynediad at ddiweddariadau mapiau hyd at bob awr heb derfyn.</string>
+    <string name="online_maps_required_descr">Yn anffodus, ni all OsmAnd darganfod llwybr ar gyfer dy osodiadau.
+\n
+\nEfallai nad yw rhai mapiau wedi\'i llwytho. Gellir gwirio ar-lein am y mapiau angenrheidiol.</string>
+    <string name="attribute">Priodoledd</string>
 </resources>

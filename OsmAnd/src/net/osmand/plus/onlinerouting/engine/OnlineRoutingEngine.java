@@ -16,6 +16,7 @@ import net.osmand.plus.onlinerouting.VehicleType;
 import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -106,10 +107,16 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 
 	public boolean shouldApproximateRoute() {
 		String value = get(EngineParameter.APPROXIMATE_ROUTE);
-		if (!Algorithms.isEmpty(value)) {
-			return Boolean.parseBoolean(value);
+		return !Algorithms.isEmpty(value);
+	}
+
+	@Nullable
+	public String getApproximateRouteProfile() {
+		String routingProfile = get(EngineParameter.APPROXIMATE_ROUTE);
+		if (!Algorithms.isEmpty(routingProfile)) {
+			return routingProfile;
 		}
-		return false;
+		return null;
 	}
 
 	public boolean useExternalTimestamps() {

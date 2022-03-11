@@ -238,7 +238,8 @@ public class WaypointHelper {
 			int kIterator = pointsProgress.get(ALARMS);
 			List<LocationPointWrapper> lp = locationPoints.get(ALARMS);
 			while (kIterator < lp.size()) {
-				AlarmInfo inf = (AlarmInfo) lp.get(kIterator).point;
+				LocationPointWrapper lwp = lp.get(kIterator);
+				AlarmInfo inf = (AlarmInfo) lwp.point;
 				int currentRoute = route.getCurrentRoute();
 				if (inf.getLocationIndex() < currentRoute && inf.getLastLocationIndex() != -1
 						&& inf.getLastLocationIndex() < currentRoute) {
@@ -249,7 +250,12 @@ public class WaypointHelper {
 							&& currentRoute < inf.getLastLocationIndex()) {
 						inf.setFloatValue(route.getDistanceToPoint(inf.getLastLocationIndex()));
 					}
-					int d = route.getDistanceToPoint(inf.getLocationIndex());
+					Location lastKnownLocation = app.getRoutingHelper().getLastProjection();
+					int d = (int) Math.max(0.0, MapUtils.getDistance(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
+							inf.getLatitude(), inf.getLongitude()) - lwp.getDeviationDistance());
+					if (inf.getLocationIndex() == currentRoute && d > 10) {
+						return null;
+					}
 					if (!atd.isTurnStateActive(0, d, STATE_LONG_PNT_APPROACH)) {
 						break;
 					}
@@ -437,7 +443,9 @@ public class WaypointHelper {
 										filterCloseAlarms = true;
 										break;
 									case PEDESTRIAN:
-										announceRadius = nextRoute.getTurnType().isRoundAbout() && kIterator != 0
+										announceRadius = ((nextRoute != null)
+												&& (nextRoute.getTurnType().isRoundAbout())
+												&& (kIterator != 0))
 												? STATE_SHORT_ALARM_ANNOUNCE
 												: STATE_LONG_ALARM_ANNOUNCE;
 										break;

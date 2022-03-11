@@ -167,11 +167,13 @@ public class MenuBuilder {
 		}
 	};
 
-	public void addImageCard(ImageCard card) {
-		if (onlinePhotoCards.size() == 1 && onlinePhotoCards.get(0) instanceof NoImagesCard) {
-			onlinePhotoCards.clear();
+	public void addImageCard(@NonNull ImageCard card) {
+		if (onlinePhotoCards != null) {
+			if (onlinePhotoCards.size() == 1 && onlinePhotoCards.get(0) instanceof NoImagesCard) {
+				onlinePhotoCards.clear();
+			}
+			onlinePhotoCards.add(0, card);
 		}
-		onlinePhotoCards.add(0, card);
 		if (onlinePhotoCardsRow != null) {
 			onlinePhotoCardsRow.setCards(onlinePhotoCards);
 		}

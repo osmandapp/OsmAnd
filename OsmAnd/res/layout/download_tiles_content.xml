@@ -82,8 +82,8 @@
 		<include
 			android:id="@+id/max_zoom_tile_preview"
 			layout="@layout/map_tile_preview"
-			android:layout_width="@dimen/bottom_sheet_big_item_height"
-			android:layout_height="@dimen/bottom_sheet_big_item_height"
+			android:layout_width="@dimen/map_tile_preview_size"
+			android:layout_height="@dimen/map_tile_preview_size"
 			android:layout_marginStart="@dimen/content_padding" />
 
 	</LinearLayout>

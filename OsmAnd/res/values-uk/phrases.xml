@@ -4295,4 +4295,7 @@
     <string name="poi_board_type_sport">Спорт</string>
     <string name="poi_board_type_welcome_sign">Вітання</string>
     <string name="poi_board_type_sight">Визначні місця</string>
+    <string name="poi_greenery">Теплиця</string>
+    <string name="poi_landuse_education">Освіта</string>
+    <string name="poi_hairdresser_supply">Магазин перукарських товарів</string>
 </resources>

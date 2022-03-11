@@ -612,9 +612,9 @@
     <string name="poi_craft_plasterer">Yesería;Yesero</string>
     <string name="poi_craft_plumber">Plomería (oficio);Plomero;Fontanería (oficio);Fontanero</string>
     <string name="poi_craft_pottery">Alfarería</string>
-    <string name="poi_craft_rigger">Montador</string>
+    <string name="poi_craft_rigger">Aparejador/a (náutica);Aparejadora</string>
     <string name="poi_craft_roofer">Reparación de techos;Techador/a</string>
-    <string name="poi_craft_saddler">Guarnicionero</string>
+    <string name="poi_craft_saddler">Guarnicionería;Guasquería;Talabartería</string>
     <string name="poi_craft_sailmaker">Astillero artesanal</string>
     <string name="poi_craft_sawmill">Aserradero</string>
     <string name="poi_craft_scaffolder">Montador de andamios</string>
@@ -1811,7 +1811,7 @@
     <string name="poi_industrial_warehouse">Tipo: almacén</string>
     <string name="poi_industrial_auto_wrecker">Tipo: Deshuesadero/Cementerio de coches</string>
     <string name="poi_industrial_agriculture">Tipo: agrícola</string>
-    <string name="poi_industrial_brewery">Tipo: cervecería</string>
+    <string name="poi_industrial_brewery">Tipo: cervecería industrial</string>
     <string name="poi_industrial_brickyard">Tipo: fábrica de ladrillos</string>
     <string name="poi_industrial_intermodal_freight_terminal">Tipo: terminal intermodal de mercancías</string>
     <string name="poi_industrial_sawmill">Tipo: aserradero</string>
@@ -2188,7 +2188,7 @@
     <string name="poi_cargo_container">Contenedores</string>
     <string name="poi_cargo_hgv">Vehículos pesados</string>
     <string name="poi_fitness_station">Estación aeróbica;Gimnasio exterior;Parque de gimnasia</string>
-    <string name="poi_hackerspace">Encuentro de hackers</string>
+    <string name="poi_hackerspace">Encuentro de hackers;Encuentro de programadores;Hackathon;Hackatón</string>
     <string name="poi_wiki_lang_af">Wiki en Afrikáans</string>
     <string name="poi_wiki_lang_als">Wiki en alsaciano</string>
     <string name="poi_wiki_lang_az">Wiki en azerí (Azerbaiyán)</string>
@@ -4295,4 +4295,7 @@
     <string name="poi_board_type_welcome_sign">Cartel de bienvenida</string>
     <string name="poi_board_type_sport">Deporte</string>
     <string name="poi_board_type_art">Arte</string>
+    <string name="poi_landuse_education">Educación</string>
+    <string name="poi_greenery">Vegetación (decorativa);Follaje;Verdor</string>
+    <string name="poi_hairdresser_supply">Suministros de peluquería</string>
 </resources>
