@@ -94,7 +94,7 @@
     <string name="map_widget_top_text">اسم الشارع</string>
     <string name="map_widget_reset">إعادة التعيين إلى الافتراضي</string>
     <string name="map_widget_parking">موقف سيارات</string>
-    <string name="map_widget_speed">السرعة</string>
+    <string name="map_widget_speed">سرعة</string>
     <string name="map_widget_distance">الوجهة</string>
     <string name="map_widget_altitude">الارتفاع</string>
     <string name="map_widget_time">وقت الذهاب</string>
@@ -4382,7 +4382,7 @@
     <string name="no_activity_for_intent">قم بتثبيت تطبيق يمكنه تنفيذ هذا الإجراء.</string>
     <string name="no_items_of_type_message">لا يوجد لديك عناصر من هذا النوع</string>
     <string name="routeInfo_tracktype_description">لون المسار أو خط المسار من خلال تكوين سطحه. يتم تطبيقه عادةً عندما تكون شبكة الطرق غير معبدة إلى حد كبير.</string>
-    <string name="routeInfo_winter_ice_road_description">لون الطريق أو خط المسار حسب تصنيف طرق الشتاء.</string>
+    <string name="routeInfo_winter_ice_road_description">قم بتلوين المسار أو خط المسار حسب تصنيف الطريق الشتوي.</string>
     <string name="routeInfo_smoothness_description">تصنيف القدرة على المناورة على الطريق/ممر المشاة للمركبات ذات العجلات ، لا سيما فيما يتعلق بانتظام السطح / وتسطيحه.</string>
     <string name="routeInfo_surface_description">توفير معلومات السطح المادي للطريق/ممر المشاة.</string>
     <string name="routeInfo_roadClass_description">لون الطريق أو خط المسار وفقا لتصنيف الطرق.</string>

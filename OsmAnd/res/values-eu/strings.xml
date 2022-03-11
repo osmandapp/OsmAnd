@@ -4230,4 +4230,131 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="markers_history_is_disabled_descr">Gaitu historia bisitatutako mapa-markatzaileen zerrenda gogoratzeko.</string>
     <string name="history_is_disabled_descr">Gaitu historia erabilitako azken emaitzak azkarrago atzitzeko.</string>
     <string name="navigation_history">Nabigazioaren historia</string>
+    <string name="included_categories">Sartutako kategoriak</string>
+    <string name="routes_color_by_type">Koloreztatu ibilbideak honen arabera…</string>
+    <string name="shortcut_navigate_to">Nabigatu hona…</string>
+    <string name="shortcut_navigate_to_work">Nabigatu \'Lanera\'</string>
+    <string name="release_4_1">• Android Auto-rekin funtzionatzeko aukera gehitu da
+\n
+\n • Erabiltzailearen interfazearen eguneratzea UTM koordenatuak bilatzeko
+\n
+\n • GPX arrastoetarako GPS iragazkia
+\n
+\n • Altuera Widget (Pro)
+\n
+\n • Gogokoak: erabili berri diren ikonoak ikusteko gaitasuna gehitu da
+\n
+\n • Ibilbideen plangintza: hautatutako profila erabiliko du abiarazi ondoren
+\n
+\n • Mapillary geruza konpondu da, plugina lehenespenez desgaituta dago orain
+\n
+\n • Aplikazioko historia guztia kudeatzeko pantaila gehitu da
+\n
+\n • Maparen orientazioa ez da berrezartzen aplikazioa berrabiarazi ondoren
+\n
+\n • SRTM altuera-markaren errendatzea hobetu da 
+\n
+\n • Arabiar maparen epigrafeak konpondu dira
+\n
+\n • Bideratze-arazo desberdinak konpondu dira
+\n
+\n</string>
+    <string name="exit_pan_mode_descr">Sakatu Hautatu panoramika modutik irteteko</string>
+    <string name="routing_attr_prefer_tactile_paving_description">Nahiago ukimenezko zoladura</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Koloreztatu ibilbideak tokiko kolore indibidualaren arabera (OpenStreetMap-en badago) eta mendizaleen ezkutuaren ikurraren arabera.</string>
+    <string name="logout_from_osmand_cloud_decsr">Saioa amaitu\?
+\nBerriro saioa hasi beharko duzu datuen babeskopia egiteko edo leheneratzeko.</string>
+    <string name="upload_gpx_description_hint">Utzi hutsik, arrastoen izenak deskribapen gisa erabiliko dira. Sartutako deskribapena pista bakoitzari aplikatuko zaio.</string>
+    <string name="routeInfo_tracktype_description">Margotu ibilbidea edo pista gainazaleko konposizioaren arabera. Normalean errepide sarea asfaltatu gabe dagoenean aplikatzen da.</string>
+    <string name="empty_category_name">Kategoria-izena hutsik dago</string>
+    <string name="osm_live_payment_subscription_management_amz">Ordainketa zure Amazon kontutik kobratzen da erosketa berresten duzunean.
+\n
+\nAukeratutako berritze-epea baino lehen bertan behera utzi ezean berritzen da.
+\n
+\nKudeatu edo bertan behera utzi zure harpidetzak Amazon ezarpenetatik edozein unetan.</string>
+    <string name="backup_restore_now">Leheneratu orain</string>
+    <string name="purchases_feature_desc_pro_widgets">Lortu OsmAnd Pro funtzioetarako sarbidea: Ibilbideak koloreztatu eta gehiago.</string>
+    <string name="backup_setup">Konfiguratu babeskopia</string>
+    <string name="backup_dont_have_any_descr">Antolatu babeskopia automatikoak eta ez galdu inoiz datuak.</string>
+    <string name="backup_deleted_all_data_descr">Zure datu guztiak behar bezala ezabatu dira OsmAnd Cloud-etik.</string>
+    <string name="backup_welcome_back">Ongi etorri berriro!</string>
+    <string name="backup_do_not_have_any">Oraindik ez duzu sareko babeskopiarik.</string>
+    <string name="logout_from_osmand_cloud">Amaitu OsmAnd Cloud saioa</string>
+    <string name="release_4_0">• Babeskopia hodeian
+\n
+\n • \"Topo\" mapa estilorako gaueko modua gehitu da
+\n
+\n • Aukera gehitu da oinetan neurtutako sestra-lerroak deskargatzeko
+\n
+\n • Arrastoak altitudearen, abiaduraren edo maldaren arabera koloreztatu daitezke orain
+\n
+\n • \"Bidaia grabatzeko\" elkarrizketa-koadroa eguneratua
+\n
+\n • Ukitu bidezko distantzia Erradioaren erregelatik aparteko aukera batera eraman da
+\n
+\n • Ibilbidea planifikatu: orain nabigazio-aukerak alda ditzakezu, maparen konfigurazioan sartu eta ibilbidearen plangintzatik irten gabe bilatu dezakezu
+\n
+\n • \"Erosketa\" pantaila berria erosketa informazio zehatzarekin
+\n
+\n • Ibilbide-lerroaren itxura aldatzeko aukera gehitu da
+\n
+\n • OsmAnd Live eguneraketak \"Deskargak &gt; Eguneraketak\" atalera eraman dira
+\n
+\n</string>
+    <string name="android_auto_purchase_request_title">Erosi OsmAnd Pro edo Maps+ OsmAnd Android Auto-rekin erabiltzeko</string>
+    <string name="location_access_request_title">OsmAnd-ek kokapen-baimena behar du nabigatzeko.</string>
+    <string name="location_access_request_action">Baimena eman</string>
+    <string name="shared_string_details">Xehetasunak</string>
+    <string name="shared_app_storage_description">Partekatutako memoria jada ez dago erabilgarri, Android biltegiratze sarbidea aldatu delako.</string>
+    <string name="routing_attr_prefer_horse_routes_name">Nahiago zaldi ibilbideak</string>
+    <string name="routing_attr_allow_gate_name">Baimendu atea erabiltzea</string>
+    <string name="routing_attr_allow_gate_description">Baimendu ateak erabiltzea</string>
+    <string name="routing_attr_only_permitted_streets_name">Berariaz baimenduta dauden kaleak</string>
+    <string name="no_items_of_type_message">Ez duzu mota honetako elementurik</string>
+    <string name="backup_welcome_back_descr">Leheneratu gailu honetako datuak lehendik dauden babeskopiak erabiliz edo egin datuen babeskopia OsmAnd Cloud-en.</string>
+    <string name="promo_subscription">Sustapeneko harpidetza</string>
+    <string name="on_hold_since">Zain %1$s geroztik</string>
+    <string name="backup_deleting_all_data_descr">Mesedez, itxaron OsmAnd-ek zure datuak hodeitik ezabatzen dituen arte. Gailuko datu guztiak ukitu gabe geratuko dira.</string>
+    <string name="duration_moment_ago">duela gutxi</string>
+    <string name="backup_deleting_all_data">Datu guztiak ezabatzen…</string>
+    <string name="transparent_status_bar">Egoera-barra gardena</string>
+    <string name="routeInfo_winter_ice_road_description">Margotu ibilbidea edo pista neguko errepideen sailkapenaren arabera.</string>
+    <string name="grey_color_undefined">Daturik gabeko zatiak grisak dira.</string>
+    <string name="track_has_no_needed_data">Arrastoari dagozkion datuak falta zaizkio.</string>
+    <string name="continue_on_phone">Jarraitu mugikorrean</string>
+    <string name="shared_string_articles">Artikuluak</string>
+    <string name="location_access_request_result">Onartua: %1$s Baztertua: %2$s</string>
+    <string name="attribute">Atributua</string>
+    <string name="android_auto_map_placeholder_title">Mapa ibilgailuaren pantailan bistaratzen da.</string>
+    <string name="android_auto_map_placeholder_descr">Deskonektatu gailua Android Auto-tik mapa aplikazioan ikusteko.</string>
+    <string name="internal_app_storage_description">Barne biltegiratzea, erabiltzaile guztientzat eta beste aplikaziorentzat ezkutatuta, beraz, OsmAnd-ek bakarrik atzi ditzake zure datuak.</string>
+    <string name="shared_storage_warning_title">Biltegiratzeko sarbide-arauetan aldaketak</string>
+    <string name="purchases_feature_desc_android_auto">OsmAnd lineaz kanpoko mapak eta nabigazioa zure ibilgailuaren pantailara ekartzen ditu eta zure ibilgailuaren kontrolekin integratzen da.</string>
+    <string name="icon_group_nautical">Itsasokoa</string>
+    <string name="transparent_status_bar_descr">Erakutsi mapa egoera-barraren azpian</string>
+    <string name="routing_attr_prefer_horse_routes_description">Nahiago zaldi ibilbideak</string>
+    <string name="routeInfo_smoothness_description">Gurpildun ibilgailuen errepide/bideen maniobragarritasunaren sailkapena, batez ere gainazaleko erregulartasunari/lautasunari dagokionez.</string>
+    <string name="no_activity_for_intent">Instalatu ekintza hau egin dezakeen aplikazio bat.</string>
+    <string name="amz_manage_subscription_descr">Kudeatu zure harpidetza Amazon aplikazioa edo Amazon webgunea erabiliz.</string>
+    <string name="cancel_anytime_in_amazon_app">Edonoiz utz dezakezu Amazon aplikazioaren bidez</string>
+    <string name="backup_data_removed">Datu guztiak kendu dira.</string>
+    <string name="backup_version_history_removed">Bertsioen historia guztia kendu da.</string>
+    <string name="purchases_restored">Erosketa berreskuratuak</string>
+    <string name="shared_string_relation">Harremana</string>
+    <string name="option_available_only_in_osmand_pro">OsmAnd Pro harpidetzaren zati gisa eskuragarri.</string>
+    <string name="horseback_riding">Zaldi-ibilaldiak</string>
+    <string name="shared_string_progress">Aurrerapena</string>
+    <string name="shortcut_navigate_to_home">Nabigatu \'Etxera\'</string>
+    <string name="search_title">Bilatu: %1$s</string>
+    <string name="routing_attr_prefer_tactile_paving_name">Nahiago ukimenezko zoladura</string>
+    <string name="routing_attr_only_permitted_streets_description">Erabili berariaz baimenduta dauden kaleak soilik</string>
+    <string name="routing_attr_only_permitted_ways_name">Berariaz baimendutako bideak</string>
+    <string name="routing_attr_only_permitted_ways_description">Erabili soilik berariaz baimenduta dauden bideak (bide-zidorrak, bideak, etab.)</string>
+    <string name="shared_string_mini">mini</string>
+    <string name="sample_wikivoyage">Wikibidaien adibidea</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Aztertu OsmAnd Planak zuretzat egokia den bat aurkitzeko.</string>
+    <string name="active_till">Aktibo %1$s arte</string>
+    <string name="explore_wikipedia_offline">Arakatu Wikipedia lineaz kanpo.</string>
+    <string name="shared_string_purchased">Erosita</string>
+    <string name="backup_deleted_all_data">Datu guztiak ezabatu dira.</string>
 </resources>
