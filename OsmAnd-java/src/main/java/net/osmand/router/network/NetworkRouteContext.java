@@ -58,7 +58,7 @@ public class NetworkRouteContext {
 		}
 	}
 	
-	public static long convertPontToLong(int x31, int y31) {
+	public static long convertPointToLong(int x31, int y31) {
 		return (((long) x31) << 32l) + y31;
 	}
 	
@@ -393,7 +393,7 @@ public class NetworkRouteContext {
 			for (int i = 0; i < len; i++) {
 				int x31 = obj.getPoint31XTile(i);
 				int y31 = obj.getPoint31YTile(i);
-				long id = convertPontToLong(x31, y31);
+				long id = convertPointToLong(x31, y31);
 				NetworkRoutePoint point = routes.get(id);
 				if (point == null) {
 					point = new NetworkRoutePoint(x31, y31, id);
@@ -414,7 +414,7 @@ public class NetworkRouteContext {
 			for (int i = 0; i < len; i++) {
 				int x31 = obj.getPoint31XTile(i);
 				int y31 = obj.getPoint31YTile(i);
-				long id = convertPontToLong(x31, y31);
+				long id = convertPointToLong(x31, y31);
 				NetworkRoutePoint point = routes.get(id);
 				if (point == null) {
 					point = new NetworkRoutePoint(x31, y31, id);
@@ -434,7 +434,7 @@ public class NetworkRouteContext {
 		}
 
 		public NetworkRoutePoint getRouteSegment(int x31, int y31) {
-			return routes.get(convertPontToLong(x31, y31));
+			return routes.get(convertPointToLong(x31, y31));
 		}
 
 	}
