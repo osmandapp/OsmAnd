@@ -19,7 +19,6 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
-import net.osmand.plus.views.mapwidgets.LanesControl;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
@@ -31,6 +30,7 @@ import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.plus.views.mapwidgets.widgets.CoordinatesWidget;
 import net.osmand.plus.views.mapwidgets.widgets.ElevationProfileWidget;
+import net.osmand.plus.views.mapwidgets.widgets.LanesWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
 import net.osmand.plus.views.mapwidgets.widgets.NextTurnWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
@@ -90,7 +90,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private CoordinatesWidget topCoordinatesView;
 	private StreetNameWidget streetNameWidget;
 	private MapMarkersBarWidget mapMarkersBarWidget;
-	private LanesControl lanesControl;
+	private LanesWidget lanesWidget;
 	private ElevationProfileWidget elevationProfileWidget;
 
 	public MapInfoLayer(@NonNull Context context, @NonNull RouteLayer layer) {
@@ -134,7 +134,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			expandButton = null;
 			mapRulerLayout = null;
 
-			lanesControl = null;
+			lanesWidget = null;
 			alarmControl = null;
 			rulerWidgets = null;
 
@@ -226,7 +226,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		RouteInfoWidgetsFactory ric = new RouteInfoWidgetsFactory(app);
 		MapInfoWidgetsFactory mic = new MapInfoWidgetsFactory(app);
 		MarkersWidgetsHelper markersWidgetsHelper = mapActivity.getMapLayers().getMapMarkersLayer().getMarkersWidgetsHelper();
-		lanesControl = RouteInfoWidgetsFactory.createLanesControl(mapActivity, view);
 
 		TextState ts = calculateTextState();
 
@@ -245,6 +244,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 		mapMarkersBarWidget = markersWidgetsHelper.getMapMarkersBarWidget();
 		int insertIndex = defaultStreetNamePosition != null ? 1 : 2;
 		((ViewGroup) mapActivity.findViewById(R.id.MapHudButtonsOverlayTop)).addView(mapMarkersBarWidget.getView(), insertIndex);
+
+		lanesWidget = new LanesWidget(mapActivity, ts);
+		ViewGroup defaultLanesPosition = mapActivity.findViewById(R.id.lanes_widget_default_position);
+		defaultLanesPosition.removeAllViews();
+		defaultLanesPosition.addView(lanesWidget.getView());
 
 		topToolbarView = new TopToolbarView(mapActivity);
 		updateTopToolbar(false);
@@ -387,7 +391,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		if (themeId != calcThemeId) {
 			themeId = calcThemeId;
 			TextState ts = calculateTextState();
-			mapActivity.findViewById(R.id.map_center_info).setBackgroundResource(ts.boxFree);
 			if (mapInfoControls != null) {
 				for (MapWidgetRegInfo reg : mapInfoControls.getLeftWidgetSet()) {
 					updateReg(ts, reg);
@@ -399,7 +402,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			updateStreetName(nightMode, ts);
 			updateTopCoordinates(nightMode, ts);
 			updateTopToolbar(nightMode);
-			lanesControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius / 2);
+			lanesWidget.updateColors(nightMode, ts);
 			int padding = expandButton.getPaddingLeft();
 			expandButton.setBackgroundResource(ts.expand);
 			expandButton.setPadding(padding, padding, padding, padding);
@@ -486,7 +489,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			topCoordinatesView.updateInfo(drawSettings);
 			elevationProfileWidget.updateInfo();
 			alarmControl.updateInfo(drawSettings, false);
-			lanesControl.updateInfo(drawSettings);
+			lanesWidget.updateInfo(drawSettings);
 
 			for (RulerWidget rulerWidget : rulerWidgets) {
 				rulerWidget.updateInfo(tileBox, drawSettings);

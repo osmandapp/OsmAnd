@@ -292,66 +292,13 @@
 
 		</LinearLayout>
 
-		<!-- Lanes widget -->
-		<LinearLayout
-			android:id="@+id/map_center_info"
+		<!-- Lanes widget (default position) -->
+		<FrameLayout
+			android:id="@+id/lanes_widget_default_position"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_gravity="top|center"
-			android:layout_marginTop="@dimen/map_button_margin"
-			android:background="@drawable/btn_round"
-			android:orientation="vertical"
-			android:visibility="gone">
-
-			<androidx.appcompat.widget.AppCompatImageView
-				android:id="@+id/map_lanes"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="center"
-				android:layout_marginLeft="@dimen/widget_turn_lane_border"
-				android:layout_marginRight="@dimen/widget_turn_lane_border"
-				android:layout_marginTop="@dimen/widget_turn_lane_border"
-				android:layout_marginStart="@dimen/widget_turn_lane_border"
-				android:layout_marginEnd="@dimen/widget_turn_lane_border" />
-
-			<FrameLayout
-				android:layout_width="wrap_content"
-				android:layout_height="0dp"
-				android:layout_gravity="center"
-				android:layout_weight="1">
-
-				<TextView
-					android:id="@+id/map_lanes_dist_text_shadow"
-					android:importantForAccessibility="no"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="center"
-					android:layout_marginLeft="@dimen/widget_turn_lane_border"
-					android:layout_marginRight="@dimen/widget_turn_lane_border"
-					android:maxLines="1"
-					android:textColor="@color/color_black"
-					android:textSize="@dimen/map_button_text_size"
-					tools:text="1048 km"
-					android:layout_marginEnd="@dimen/widget_turn_lane_border"
-					android:layout_marginStart="@dimen/widget_turn_lane_border" />
-
-				<TextView
-					android:id="@+id/map_lanes_dist_text"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="center"
-					android:layout_marginLeft="@dimen/widget_turn_lane_border"
-					android:layout_marginRight="@dimen/widget_turn_lane_border"
-					android:maxLines="1"
-					android:textColor="@color/color_black"
-					android:textSize="@dimen/map_button_text_size"
-					tools:text="1048 km"
-					android:layout_marginEnd="@dimen/widget_turn_lane_border"
-					android:layout_marginStart="@dimen/widget_turn_lane_border" />
-
-			</FrameLayout>
-
-		</LinearLayout>
+			android:layout_gravity="center_horizontal|top"
+			android:layout_marginTop="@dimen/map_button_margin" />
 
 	</FrameLayout>
 

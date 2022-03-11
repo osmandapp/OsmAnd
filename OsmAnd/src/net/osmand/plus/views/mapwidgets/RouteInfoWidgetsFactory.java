@@ -529,10 +529,6 @@ public class RouteInfoWidgetsFactory {
 		return Math.abs(oldDegrees - degrees) >= 1;
 	}
 
-	public static LanesControl createLanesControl(final MapActivity map, final OsmandMapTileView view) {
-		return new LanesControl(map, view);
-	}
-
 	public static AlarmWidget createAlarmInfoControl(OsmandApplication app, MapActivity map) {
 		return new AlarmWidget(app, map);
 	}

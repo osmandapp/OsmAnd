@@ -1,0 +1,166 @@
+package net.osmand.plus.views.mapwidgets.widgets;
+
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import net.osmand.Location;
+import net.osmand.binary.RouteDataObject;
+import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.routing.RouteDirectionInfo;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.views.layers.MapInfoLayer.TextState;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.LanesDrawable;
+import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
+import net.osmand.router.RouteResultPreparation;
+import net.osmand.router.TurnType;
+
+import java.util.Arrays;
+import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+public class LanesWidget extends MapWidget {
+
+	private static final int MAX_METERS_NOT_SPOKEN_TURN = 800;
+	private static final int MAX_METERS_SPOKEN_TURN = 1200;
+
+	private final RoutingHelper routingHelper;
+
+	private final ImageView lanesImage;
+	private final TextView lanesText;
+	private final TextView lanesShadowText;
+
+	private final LanesDrawable lanesDrawable;
+
+	private int cachedDist;
+	private int shadowRadius;
+
+	public LanesWidget(@NonNull MapActivity mapActivity, @NonNull TextState textState) {
+		super(mapActivity);
+
+		routingHelper = mapActivity.getMyApplication().getRoutingHelper();
+
+		lanesImage = view.findViewById(R.id.map_lanes);
+		lanesText = view.findViewById(R.id.map_lanes_dist_text);
+		lanesShadowText = view.findViewById(R.id.map_lanes_dist_text_shadow);
+
+		lanesDrawable = new LanesDrawable(mapActivity, mapActivity.getMapView().getScaleCoefficient());
+		lanesImage.setImageDrawable(lanesDrawable);
+
+		updateColors(isNightMode(), textState);
+		updateVisibility(false);
+	}
+
+	@Override
+	protected int getLayoutId() {
+		return R.layout.lanes_widget;
+	}
+
+	@Override
+	public void updateInfo(@Nullable DrawSettings drawSettings) {
+		int imminent = -1;
+		int[] lanes = null;
+		int dist = 0;
+
+		boolean followingMode = routingHelper.isFollowingMode();
+		boolean deviatedFromRoute = routingHelper.isDeviatedFromRoute();
+		boolean notOsmAndGpxRoute = routingHelper.getCurrentGPXRoute() != null && !routingHelper.isCurrentGPXRouteV2();
+		boolean mapLinkedToLocation = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
+		boolean lanesEnabled = settings.SHOW_LANES.get();
+
+		if (lanesEnabled) {
+			if (mapLinkedToLocation && (!followingMode || deviatedFromRoute || notOsmAndGpxRoute)) {
+				OsmAndLocationProvider locationProvider = app.getLocationProvider();
+				RouteDataObject ro = locationProvider.getLastKnownRouteSegment();
+				if (ro != null) {
+					Location lastKnownLocation = locationProvider.getLastKnownLocation();
+					float degree = lastKnownLocation == null || !lastKnownLocation.hasBearing()
+							? 0
+							: lastKnownLocation.getBearing();
+					lanes = RouteResultPreparation.parseTurnLanes(ro, degree / 180 * Math.PI);
+					if (lanes == null) {
+						lanes = RouteResultPreparation.parseLanes(ro, degree / 180 * Math.PI);
+					}
+				}
+			} else if (routingHelper.isRouteCalculated() && followingMode) {
+				NextDirectionInfo directionInfo = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
+				RouteDirectionInfo routeDirectionInfo = directionInfo != null ? directionInfo.directionInfo : null;
+				TurnType turnType = routeDirectionInfo != null ? routeDirectionInfo.getTurnType() : null;
+				boolean tooFar = (turnType != null)
+						&& (directionInfo.distanceTo > MAX_METERS_NOT_SPOKEN_TURN && turnType.isSkipToSpeak()
+						|| directionInfo.distanceTo > MAX_METERS_SPOKEN_TURN);
+
+				if (turnType != null && !tooFar) {
+					lanes = directionInfo.directionInfo.getTurnType().getLanes();
+					imminent = directionInfo.imminent;
+					dist = directionInfo.distanceTo;
+				}
+			}
+		} else {
+			int directionIndex = MapRouteInfoMenu.getDirectionInfo();
+			List<RouteDirectionInfo> routeDirections = routingHelper.getRouteDirections();
+			boolean validDirectionIndex = directionIndex >= 0 && directionIndex < routeDirections.size();
+			if (validDirectionIndex && mapActivity.getMapRouteInfoMenu().isVisible()) {
+				RouteDirectionInfo next = routeDirections.get(directionIndex);
+				if (next != null) {
+					lanes = next.getTurnType().getLanes();
+				}
+			}
+		}
+
+		boolean visible = lanes != null && lanes.length > 0
+				&& !MapRouteInfoMenu.chooseRoutesVisible
+				&& !MapRouteInfoMenu.waypointsVisible
+				&& !MapRouteInfoMenu.followTrackVisible;
+		if (visible) {
+			updateLanes(lanes, imminent, dist);
+		}
+
+		AndroidUiHelper.updateVisibility(view, visible);
+		AndroidUiHelper.updateVisibility(lanesShadowText, visible && shadowRadius > 0);
+	}
+
+	private void updateLanes(@NonNull int[] lanes, int imminent, int dist) {
+		boolean updateDrawable = !Arrays.equals(lanesDrawable.lanes, lanes) || (imminent == 0) != lanesDrawable.imminent;
+		if (updateDrawable) {
+			lanesDrawable.imminent = imminent == 0;
+			lanesDrawable.lanes = lanes;
+			lanesDrawable.updateBounds();
+			lanesImage.setImageDrawable(null);
+			lanesImage.setImageDrawable(lanesDrawable);
+			lanesImage.requestLayout();
+			lanesImage.invalidate();
+		}
+
+		if (RouteInfoWidgetsFactory.distChanged(dist, cachedDist)) {
+			cachedDist = dist;
+			if (dist == 0) {
+				lanesShadowText.setText("");
+				lanesText.setText("");
+			} else {
+				lanesShadowText.setText(OsmAndFormatter.getFormattedDistance(dist, app));
+				lanesText.setText(OsmAndFormatter.getFormattedDistance(dist, app));
+			}
+			lanesShadowText.invalidate();
+			lanesText.invalidate();
+		}
+	}
+
+	public void updateColors(boolean nightMode, @NonNull TextState textState) {
+		setNightMode(nightMode);
+
+		view.setBackgroundResource(textState.boxFree);
+
+		shadowRadius = textState.textShadowRadius / 2;
+		TextInfoWidget.updateTextColor(lanesText, lanesShadowText, textState.textColor,
+				textState.textShadowColor, textState.textBold, shadowRadius);
+	}
+}
