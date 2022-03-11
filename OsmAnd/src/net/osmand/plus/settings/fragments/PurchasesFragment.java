@@ -17,28 +17,27 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.appbar.AppBarLayout;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.chooseplan.NoPurchasesCard;
 import net.osmand.plus.chooseplan.TroubleshootingCard;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
-import net.osmand.plus.liveupdates.CountrySelectionFragment;
+import net.osmand.plus.liveupdates.CountrySelectionFragment.CountryItem;
 import net.osmand.plus.liveupdates.CountrySelectionFragment.OnFragmentInteractionListener;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurchaseListener, OnFragmentInteractionListener {
+public class PurchasesFragment extends BaseOsmAndDialogFragment implements InAppPurchaseListener, OnFragmentInteractionListener {
 
 	public static final String TAG = PurchasesFragment.class.getName();
 
@@ -51,20 +50,10 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 
 	private boolean nightMode;
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager) {
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			PurchasesFragment fragment = new PurchasesFragment();
-			fragmentManager.beginTransaction()
-					.add(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(TAG)
-					.commitAllowingStateLoss();
-		}
-	}
-
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
+		app = getMyApplication();
 		nightMode = !app.getSettings().isLightContent();
 	}
 
@@ -73,7 +62,6 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 
 		View view = themedInflater.inflate(R.layout.purchases_layout, container, false);
-		AndroidUtils.addStatusBarPadding21v(getActivity(), view);
 		createToolbar(view, nightMode);
 		cardsContainer = view.findViewById(R.id.cards_container);
 
@@ -91,9 +79,9 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 	}
 
 	private void updateCards() {
-		MapActivity mapActivity = getMapActivity();
+		FragmentActivity activity = getActivity();
 		purchaseHelper = getInAppPurchaseHelper();
-		if (mapActivity == null || purchaseHelper == null) {
+		if (activity == null || purchaseHelper == null) {
 			return;
 		}
 		cardsContainer.removeAllViews();
@@ -101,17 +89,17 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 		List<InAppPurchase> mainPurchases = purchaseHelper.getEverMadeMainPurchases();
 		for (int i = 0; i < mainPurchases.size(); i++) {
 			InAppPurchase purchase = mainPurchases.get(i);
-			cardsContainer.addView(new InAppPurchaseCard(mapActivity, purchaseHelper, purchase).build(mapActivity));
+			cardsContainer.addView(new InAppPurchaseCard(activity, purchaseHelper, purchase).build(activity));
 		}
 		boolean promoActive = app.getSettings().BACKUP_PROMOCODE_ACTIVE.get();
 		if (promoActive) {
-			cardsContainer.addView(new PromoPurchaseCard(mapActivity).build(mapActivity));
+			cardsContainer.addView(new PromoPurchaseCard(activity).build(activity));
 		}
 
 		if (!Version.isPaidVersion(app) || Algorithms.isEmpty(mainPurchases)) {
-			cardsContainer.addView(new NoPurchasesCard(mapActivity, false).build(mapActivity));
+			cardsContainer.addView(new NoPurchasesCard(activity, false).build(activity));
 		}
-		cardsContainer.addView(new TroubleshootingCard(mapActivity, purchaseHelper, false).build(mapActivity));
+		cardsContainer.addView(new TroubleshootingCard(activity, purchaseHelper, false).build(activity));
 	}
 
 	@Nullable
@@ -132,25 +120,14 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 		ImageView icon = iconToolbarContainer.findViewById(R.id.profile_icon);
 		int iconColorRes = nightMode ? R.color.icon_color_primary_dark : R.color.active_buttons_and_links_text_light;
 		icon.setImageDrawable(getIcon(R.drawable.ic_action_help_online, iconColorRes));
-		icon.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (getContext() != null) {
-					WikipediaDialogFragment.showFullArticle(getContext(), Uri.parse(OSMAND_PURCHASES_URL), nightMode);
-				}
+		icon.setOnClickListener(v -> {
+			if (getContext() != null) {
+				WikipediaDialogFragment.showFullArticle(getContext(), Uri.parse(OSMAND_PURCHASES_URL), nightMode);
 			}
 		});
 		ImageButton backButton = toolbar.findViewById(R.id.close_button);
 		UiUtilities.rotateImageByLayoutDirection(backButton);
-		backButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentActivity fragmentActivity = getActivity();
-				if (fragmentActivity != null) {
-					fragmentActivity.onBackPressed();
-				}
-			}
-		});
+		backButton.setOnClickListener(v -> dismiss());
 
 		TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
 		toolbarTitle.setText(getString(R.string.purchases));
@@ -158,7 +135,7 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 	}
 
 	@Override
-	public void onError(InAppPurchaseHelper.InAppPurchaseTaskType taskType, String error) {
+	public void onError(InAppPurchaseTaskType taskType, String error) {
 	}
 
 	@Override
@@ -174,24 +151,22 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 	}
 
 	@Override
-	public void showProgress(InAppPurchaseHelper.InAppPurchaseTaskType taskType) {
+	public void showProgress(InAppPurchaseTaskType taskType) {
 	}
 
 	@Override
-	public void dismissProgress(InAppPurchaseHelper.InAppPurchaseTaskType taskType) {
+	public void dismissProgress(InAppPurchaseTaskType taskType) {
 	}
 
 	@Override
-	public void onSearchResult(CountrySelectionFragment.CountryItem name) {
+	public void onSearchResult(CountryItem name) {
 
 	}
 
-	@Override
-	public int getStatusBarColorId() {
-		return ColorUtilities.getStatusBarColorId(nightMode);
-	}
-
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
+	public static void showInstance(@NonNull FragmentManager manager) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			PurchasesFragment fragment = new PurchasesFragment();
+			fragment.show(manager, TAG);
+		}
 	}
 }
