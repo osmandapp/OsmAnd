@@ -3564,9 +3564,9 @@
     <string name="poi_hazard_additional_minefield">Peligro: campo minado</string>
     <string name="poi_hazard_additional_contamination">Peligro: contaminación</string>
     <string name="poi_defibrillator_location">Ubicación</string>
-    <string name="poi_changing_table_yes">Cambiador de pañales: sí</string>
-    <string name="poi_changing_table_no">Cambiador de pañales: no</string>
-    <string name="poi_changing_table_limited">Cambiador de pañales: limitado</string>
+    <string name="poi_changing_table_yes">Sí;Cambiador de pañales: sí</string>
+    <string name="poi_changing_table_no">No;Cambiador de pañales: no</string>
+    <string name="poi_changing_table_limited">Limitado;Cambiador de pañales: limitado</string>
     <string name="poi_changing_table_location_room">Ubicación del cambiador: habitación</string>
     <string name="poi_changing_table_location_male_toilet">Ubicación del cambiador: baño masculino</string>
     <string name="poi_changing_table_location_female_toilet">Ubicación del cambiador: baño femenino</string>
@@ -4298,4 +4298,5 @@
     <string name="poi_landuse_education">Educación</string>
     <string name="poi_greenery">Vegetación (decorativa);Follaje;Verdor</string>
     <string name="poi_hairdresser_supply">Suministros de peluquería</string>
+    <string name="poi_changing_table_filter">Cambiador de pañales</string>
 </resources>
