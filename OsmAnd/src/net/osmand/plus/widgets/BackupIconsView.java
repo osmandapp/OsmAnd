@@ -25,35 +25,39 @@ import java.util.Random;
 
 public class BackupIconsView extends View {
 	private final Paint paint = new Paint();
-	private final int iconSize = AndroidUtils.dimensToPx(getContext(), getContext().getResources().getDimension(R.dimen.big_icon_size));
-	private final int rowMargin = AndroidUtils.dimensToPx(getContext(), getContext().getResources().getDimension(R.dimen.content_padding));
+	private final int iconSize;
+	private final int rowMargin;
 	private final OsmandApplication app;
-	private final Map<Integer, List<Integer>> iconsMap = new HashMap<Integer, List<Integer>>() {{
-		put(R.color.backup_restore_icons_yellow, new ArrayList<>());
-		put(R.color.backup_restore_icons_blue, new ArrayList<>());
-		put(R.color.backup_restore_icons_green, new ArrayList<>());
-	}};
+	private final Map<Integer, List<Integer>> iconsMap = new HashMap<>();
 
 	public BackupIconsView(Context context, @Nullable AttributeSet attrs) {
 		super(context, attrs);
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(AndroidUtils.dpToPx(context, 1));
 		app = (OsmandApplication) context.getApplicationContext();
+		iconSize = context.getResources().getDimensionPixelSize(R.dimen.big_icon_size);
+		rowMargin = context.getResources().getDimensionPixelSize(R.dimen.content_padding);
+		addRows();
+	}
+
+	private void addRows() {
+		iconsMap.put(R.color.backup_restore_icons_yellow, new ArrayList<>());
+		iconsMap.put(R.color.backup_restore_icons_blue, new ArrayList<>());
+		iconsMap.put(R.color.backup_restore_icons_green, new ArrayList<>());
 	}
 
 	@Override
 	protected void onDraw(Canvas canvas) {
-		super.onDraw(canvas);
 		buildRows(canvas);
 	}
 
 	private void buildRows(Canvas canvas) {
-		int screenSize = Resources.getSystem().getDisplayMetrics().widthPixels;
 		int xOffset = 0;
 		int xOffsetStep = iconSize + rowMargin;
 		int row = 0;
 
 		for (Map.Entry<Integer, List<Integer>> entry: iconsMap.entrySet()) {
+			int screenSize = Resources.getSystem().getDisplayMetrics().widthPixels;
 			if (row % 2 == 0) {
 				xOffset = rowMargin;
 			}
@@ -69,7 +73,6 @@ public class BackupIconsView extends View {
 				drawIcon(canvas, entry.getValue().get(i), entry.getKey(), xOffset, row);
 				xOffset += xOffsetStep;
 			}
-			screenSize = Resources.getSystem().getDisplayMetrics().widthPixels;
 			xOffset = 0;
 			row++;
 		}
