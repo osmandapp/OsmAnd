@@ -1,14 +1,19 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import android.graphics.Paint.Style;
+import android.graphics.Typeface;
 import android.view.View;
+import android.widget.TextView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,10 +47,6 @@ public abstract class MapWidget {
 		return view;
 	}
 
-	public void setNightMode(boolean nightMode) {
-		this.nightMode = nightMode;
-	}
-
 	public boolean isNightMode() {
 		return nightMode;
 	}
@@ -54,8 +55,34 @@ public abstract class MapWidget {
 		// Not implemented
 	}
 
+	public void updateColors(@NonNull TextState textState) {
+		nightMode = textState.night;
+	}
+
 	protected boolean updateVisibility(boolean visible) {
 		return AndroidUiHelper.updateVisibility(view, visible);
+	}
+
+	public static void updateTextColor(@NonNull TextView text, @Nullable TextView textShadow,
+	                                   @ColorInt int textColor, @ColorInt int textShadowColor,
+	                                   boolean boldText, int shadowRadius) {
+		int typefaceStyle = boldText ? Typeface.BOLD : Typeface.NORMAL;
+
+		if (textShadow != null) {
+			if (shadowRadius > 0) {
+				AndroidUiHelper.updateVisibility(textShadow, true);
+				textShadow.setVisibility(View.VISIBLE);
+				textShadow.setTypeface(Typeface.DEFAULT,typefaceStyle);
+				textShadow.getPaint().setStrokeWidth(shadowRadius);
+				textShadow.getPaint().setStyle(Style.STROKE);
+				textShadow.setTextColor(textShadowColor);
+			} else {
+				AndroidUiHelper.updateVisibility(textShadow, false);
+			}
+		}
+
+		text.setTextColor(textColor);
+		text.setTypeface(Typeface.DEFAULT, typefaceStyle);
 	}
 
 	@NonNull

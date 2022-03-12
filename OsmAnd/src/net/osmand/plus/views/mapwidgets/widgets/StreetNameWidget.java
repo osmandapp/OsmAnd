@@ -89,7 +89,7 @@ public class StreetNameWidget extends MapWidget {
 		turnDrawable = new TurnDrawable(mapActivity, true);
 
 		updateVisibility(false);
-		updateColors(isNightMode(), textState);
+		updateColors(textState);
 	}
 
 	@Override
@@ -308,8 +308,9 @@ public class StreetNameWidget extends MapWidget {
 		return paint;
 	}
 
-	public void updateColors(boolean nightMode, @NonNull TextState textState) {
-		setNightMode(nightMode);
+	public void updateColors(@NonNull TextState textState) {
+		super.updateColors(textState);
+
 		shadowRadius = textState.textShadowRadius;
 
 		boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
@@ -317,20 +318,20 @@ public class StreetNameWidget extends MapWidget {
 
 		TextView waypointText = view.findViewById(R.id.waypoint_text);
 		TextView waypointTextShadow = view.findViewById(R.id.waypoint_text_shadow);
-		TextInfoWidget.updateTextColor(addressText, addressTextShadow, textState.textColor,
+		updateTextColor(addressText, addressTextShadow, textState.textColor,
 				textState.textShadowColor, textState.textBold, shadowRadius);
-		TextInfoWidget.updateTextColor(waypointText, waypointTextShadow, textState.textColor,
+		updateTextColor(waypointText, waypointTextShadow, textState.textColor,
 				textState.textShadowColor, textState.textBold, shadowRadius / 2);
 
-		int exitRefTextColorId = nightMode
+		int exitRefTextColorId = isNightMode()
 				? R.color.text_color_primary_dark
 				: R.color.color_white;
 		exitRefText.setTextColor(ContextCompat.getColor(app, exitRefTextColorId));
 
 		ImageView moreImage = waypointInfoBar.findViewById(R.id.waypoint_more);
 		ImageView removeImage = waypointInfoBar.findViewById(R.id.waypoint_close);
-		moreImage.setImageDrawable(iconsCache.getIcon(R.drawable.ic_overflow_menu_white, nightMode));
-		removeImage.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_remove_dark, nightMode));
+		moreImage.setImageDrawable(iconsCache.getIcon(R.drawable.ic_overflow_menu_white, isNightMode()));
+		removeImage.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_remove_dark, isNightMode()));
 	}
 
 	@Override

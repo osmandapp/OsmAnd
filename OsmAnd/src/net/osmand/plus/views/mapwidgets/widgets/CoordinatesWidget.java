@@ -71,7 +71,7 @@ public class CoordinatesWidget extends MapWidget {
 
 		view.setOnClickListener(v -> copyCoordinates());
 		updateVisibility(false);
-		updateColors(isNightMode(), textState.textBold);
+		updateColors(textState);
 	}
 
 	private void copyCoordinates() {
@@ -232,16 +232,17 @@ public class CoordinatesWidget extends MapWidget {
 		return updatedVisibility;
 	}
 
-	public void updateColors(boolean nightMode, boolean bold) {
-		setNightMode(nightMode);
+	public void updateColors(@NonNull TextState textState) {
+		super.updateColors(textState);
 
-		divider.setBackgroundColor(ColorUtilities.getDividerColor(app, nightMode));
+		divider.setBackgroundColor(ColorUtilities.getDividerColor(app, isNightMode()));
 
 		int textColor = ContextCompat.getColor(app, R.color.activity_background_light);
 		firstCoordinate.setTextColor(textColor);
 		secondCoordinate.setTextColor(textColor);
 
-		firstCoordinate.setTypeface(Typeface.DEFAULT, bold ? Typeface.BOLD : Typeface.NORMAL);
-		secondCoordinate.setTypeface(Typeface.DEFAULT, bold ? Typeface.BOLD : Typeface.NORMAL);
+		int typefaceStyle = textState.textBold ? Typeface.BOLD : Typeface.NORMAL;
+		firstCoordinate.setTypeface(Typeface.DEFAULT, typefaceStyle);
+		secondCoordinate.setTypeface(Typeface.DEFAULT, typefaceStyle);
 	}
 }

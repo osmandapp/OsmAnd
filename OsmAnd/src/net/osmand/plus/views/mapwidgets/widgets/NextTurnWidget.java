@@ -13,6 +13,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
 import net.osmand.router.TurnType;
@@ -131,8 +132,9 @@ public class NextTurnWidget extends TextInfoWidget {
 	}
 
 	@Override
-	public void updateTextColor(int textColor, int textShadowColor, boolean bold, int rad) {
-		super.updateTextColor(textColor, textShadowColor, bold, rad);
-		updateTextColor(topTextView, null, textColor, textShadowColor, bold, rad);
+	public void updateColors(@NonNull TextState textState) {
+		super.updateColors(textState);
+		updateTextColor(topTextView, null, textState.textColor, textState.textShadowColor, textState.textBold,
+				textState.textShadowRadius);
 	}
 }

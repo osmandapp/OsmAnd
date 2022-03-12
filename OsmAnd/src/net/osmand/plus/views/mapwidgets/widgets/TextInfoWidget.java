@@ -1,7 +1,5 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
-import android.graphics.Paint.Style;
-import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
@@ -12,6 +10,7 @@ import android.widget.TextView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -155,17 +154,16 @@ public class TextInfoWidget extends MapWidget {
 	}
 
 	@Override
-	public void setNightMode(boolean nightMode) {
-		super.setNightMode(nightMode);
+	public void updateColors(@NonNull TextState textState) {
+		super.updateColors(textState);
+		updateTextColor(smallTextView, smallTextViewShadow, textState.textColor, textState.textShadowColor,
+				textState.textBold, textState.textShadowRadius);
+		updateTextColor(textView, textViewShadow, textState.textColor, textState.textShadowColor,
+				textState.textBold, textState.textShadowRadius);
 		int iconId = getIconId();
 		if (iconId != 0) {
 			setImageDrawable(iconId);
 		}
-	}
-
-	public void updateTextColor(int textColor, int textShadowColor, boolean bold, int rad) {
-		updateTextColor(smallTextView, smallTextViewShadow, textColor, textShadowColor, bold, rad);
-		updateTextColor(textView, textViewShadow, textColor, textShadowColor, bold, rad);
 	}
 
 	@Override
@@ -180,21 +178,5 @@ public class TextInfoWidget extends MapWidget {
 	@DrawableRes
 	protected int getIconId() {
 		return isNightMode() ? nightIconId : dayIconId;
-	}
-
-	public static void updateTextColor(TextView tv, TextView shadow, int textColor, int textShadowColor, boolean textBold, int rad) {
-		if (shadow != null) {
-			if (rad > 0) {
-				shadow.setVisibility(View.VISIBLE);
-				shadow.setTypeface(Typeface.DEFAULT, textBold ? Typeface.BOLD : Typeface.NORMAL);
-				shadow.getPaint().setStrokeWidth(rad);
-				shadow.getPaint().setStyle(Style.STROKE);
-				shadow.setTextColor(textShadowColor);
-			} else {
-				shadow.setVisibility(View.GONE);
-			}
-		}
-		tv.setTextColor(textColor);
-		tv.setTypeface(Typeface.DEFAULT, textBold ? Typeface.BOLD : Typeface.NORMAL);
 	}
 }

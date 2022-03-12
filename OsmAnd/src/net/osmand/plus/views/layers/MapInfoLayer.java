@@ -399,10 +399,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 					updateReg(ts, reg);
 				}
 			}
-			updateStreetName(nightMode, ts);
-			updateTopCoordinates(nightMode, ts);
+			updateStreetName(ts);
+			updateTopCoordinates(ts);
 			updateTopToolbar(nightMode);
-			lanesWidget.updateColors(nightMode, ts);
+			lanesWidget.updateColors(ts);
 			int padding = expandButton.getPaddingLeft();
 			expandButton.setBackgroundResource(ts.expand);
 			expandButton.setPadding(padding, padding, padding, padding);
@@ -415,24 +415,23 @@ public class MapInfoLayer extends OsmandMapLayer {
 		}
 	}
 
-	private void updateStreetName(boolean nightMode, TextState ts) {
-		streetNameWidget.updateColors(nightMode, ts);
+	private void updateStreetName(TextState ts) {
+		streetNameWidget.updateColors(ts);
 	}
 
 	private void updateTopToolbar(boolean nightMode) {
 		topToolbarView.updateColors(nightMode);
 	}
 
-	private void updateTopCoordinates(boolean nightMode, TextState ts) {
-		topCoordinatesView.updateColors(nightMode, ts.textBold);
+	private void updateTopCoordinates(TextState ts) {
+		topCoordinatesView.updateColors(ts);
 	}
 
 	private void updateReg(TextState ts, MapWidgetRegInfo reg) {
 		View v = reg.widget != null ? reg.widget.getView().findViewById(R.id.widget_bg) : null;
 		if (v != null) {
 			v.setBackgroundResource(reg.left ? ts.leftRes : ts.rightRes);
-			reg.widget.updateTextColor(ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius);
-			reg.widget.setNightMode(ts.night);
+			reg.widget.updateColors(ts);
 		}
 	}
 

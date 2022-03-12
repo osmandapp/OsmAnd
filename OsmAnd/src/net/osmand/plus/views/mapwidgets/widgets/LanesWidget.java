@@ -55,7 +55,7 @@ public class LanesWidget extends MapWidget {
 		lanesDrawable = new LanesDrawable(mapActivity, mapActivity.getMapView().getScaleCoefficient());
 		lanesImage.setImageDrawable(lanesDrawable);
 
-		updateColors(isNightMode(), textState);
+		updateColors(textState);
 		updateVisibility(false);
 	}
 
@@ -154,13 +154,13 @@ public class LanesWidget extends MapWidget {
 		}
 	}
 
-	public void updateColors(boolean nightMode, @NonNull TextState textState) {
-		setNightMode(nightMode);
+	public void updateColors(@NonNull TextState textState) {
+		super.updateColors(textState);
 
 		view.setBackgroundResource(textState.boxFree);
 
 		shadowRadius = textState.textShadowRadius / 2;
-		TextInfoWidget.updateTextColor(lanesText, lanesShadowText, textState.textColor,
+		updateTextColor(lanesText, lanesShadowText, textState.textColor,
 				textState.textShadowColor, textState.textBold, shadowRadius);
 	}
 }
