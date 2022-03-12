@@ -124,18 +124,23 @@ public class ContextMenuAdapter {
 	}
 
 	public ArrayAdapter<ContextMenuItem> createListAdapter(@NonNull Activity activity, boolean lightTheme) {
+		removeHiddenItems(activity);
+		ContextMenuItem[] _items = items.toArray(new ContextMenuItem[0]);
+		return new ContextMenuArrayAdapter(activity, defLayoutId, _items, !lightTheme, profileDependent);
+	}
+
+	private void removeHiddenItems(@NonNull Activity activity) {
 		OsmandApplication app = ((OsmandApplication) activity.getApplication());
-		OsmAndAppCustomization customization = app.getAppCustomization();
+		OsmAndAppCustomization custom = app.getAppCustomization();
 		Set<ContextMenuItem> hidden = new HashSet<>();
 		for (ContextMenuItem item : items) {
 			String id = item.getId();
-			if (item.isHidden() || !TextUtils.isEmpty(id) && !customization.isFeatureEnabled(id)) {
+			boolean hiddenInCustomization = !TextUtils.isEmpty(id) && !custom.isFeatureEnabled(id);
+			if (item.isHidden() || hiddenInCustomization) {
 				hidden.add(item);
 			}
 		}
 		items.removeAll(hidden);
-		ContextMenuItem[] _items = items.toArray(new ContextMenuItem[0]);
-		return new ContextMenuArrayAdapter(activity, defLayoutId, _items, app, !lightTheme, profileDependent);
 	}
 
 	public List<ContextMenuItem> getDefaultItems() {

@@ -527,26 +527,22 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				return true;
 			}
 		};
-		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+		optionsMenuAdapter.addItem(new ContextMenuItem(null)
 				.setTitleId(R.string.shared_string_refresh, getContext())
 				.setIcon(R.drawable.ic_action_refresh_dark)
 				.setListener(listener)
-				.setColor(getContext(), iconColorResId)
-				.createItem());
-		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setColor(getContext(), iconColorResId));
+		optionsMenuAdapter.addItem(new ContextMenuItem(null)
 				.setTitleId(R.string.shared_string_delete, getContext())
 				.setIcon(R.drawable.ic_action_delete_dark)
 				.setListener(listener)
-				.setColor(getContext(), iconColorResId)
-				.createItem());
-		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setColor(getContext(), iconColorResId));
+		optionsMenuAdapter.addItem(new ContextMenuItem(null)
 				.setTitleId(R.string.local_index_mi_backup, getContext())
-				.setListener(listener)
-				.createItem());
-		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setListener(listener));
+		optionsMenuAdapter.addItem(new ContextMenuItem(null)
 				.setTitleId(R.string.local_index_mi_restore, getContext())
-				.setListener(listener)
-				.createItem());
+				.setListener(listener));
 		// doesn't work correctly
 		//int max =  getResources().getInteger(R.integer.abs__max_action_buttons);
 		int max = 3;

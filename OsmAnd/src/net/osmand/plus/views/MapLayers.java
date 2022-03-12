@@ -357,9 +357,9 @@ public class MapLayers {
 	public void showSingleChoicePoiFilterDialog(final MapActivity mapActivity, final DismissListener listener) {
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(app);
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
+		adapter.addItem(new ContextMenuItem(null)
 				.setTitleId(R.string.shared_string_search, app)
-				.setIcon(R.drawable.ic_action_search_dark).createItem());
+				.setIcon(R.drawable.ic_action_search_dark));
 		final List<PoiUIFilter> list = new ArrayList<>();
 		list.add(null);
 		for (PoiUIFilter f : poiFilters.getSortedPoiFilters(true)) {
@@ -412,26 +412,26 @@ public class MapLayers {
 								 final PoiUIFilter f,
 								 boolean multiChoice) {
 		list.add(f);
-		ContextMenuItem.ItemBuilder builder = new ContextMenuItem.ItemBuilder();
+		ContextMenuItem item = new ContextMenuItem(null);
 		if (multiChoice) {
-			builder.setSelected(app.getPoiFilters().isPoiFilterSelected(f));
-			builder.setListener((adptr, itemId, position, isChecked, viewCoordinates) -> {
-				ContextMenuItem item = adptr.getItem(position);
-				if (item != null) {
-					item.setSelected(isChecked);
+			item.setSelected(app.getPoiFilters().isPoiFilterSelected(f));
+			item.setListener((adptr, itemId, position, isChecked, viewCoordinates) -> {
+				ContextMenuItem it = adptr.getItem(position);
+				if (it != null) {
+					it.setSelected(isChecked);
 				}
 				return false;
 			});
 		}
-		builder.setTitle(f.getName());
+		item.setTitle(f.getName());
 		if (RenderingIcons.containsBigIcon(f.getIconId())) {
-			builder.setIcon(RenderingIcons.getBigIconResourceId(f.getIconId()));
+			item.setIcon(RenderingIcons.getBigIconResourceId(f.getIconId()));
 		} else {
-			builder.setIcon(R.drawable.mx_special_custom_category);
+			item.setIcon(R.drawable.mx_special_custom_category);
 		}
-		builder.setColor(app, ContextMenuItem.INVALID_ID);
-		builder.setUseNaturalIconColor(true);
-		adapter.addItem(builder.createItem());
+		item.setColor(app, ContextMenuItem.INVALID_ID);
+		item.setUseNaturalIconColor(true);
+		adapter.addItem(item);
 	}
 
 	public void selectMapLayer(@NonNull MapActivity mapActivity,

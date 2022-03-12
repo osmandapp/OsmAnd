@@ -368,32 +368,30 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		}
 		boolean hasOverlayDescription = overlayMapDescr != null;
 		overlayMapDescr = hasOverlayDescription ? overlayMapDescr : mapActivity.getString(R.string.shared_string_none);
-		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_overlay, mapActivity)
-				.setId(OVERLAY_MAP)
+		adapter.addItem(new ContextMenuItem(OVERLAY_MAP)
+				.setTitleId(R.string.layer_overlay, mapActivity)
 				.setDescription(overlayMapDescr)
 				.setSelected(hasOverlayDescription)
 				.setColor(app, hasOverlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_layer_top)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener)
-				.setItemDeleteAction(settings.MAP_OVERLAY, settings.MAP_OVERLAY_PREVIOUS, settings.MAP_OVERLAY_TRANSPARENCY)
-				.createItem());
+				.setItemDeleteAction(settings.MAP_OVERLAY, settings.MAP_OVERLAY_PREVIOUS, settings.MAP_OVERLAY_TRANSPARENCY));
 		String underlayMapDescr = settings.MAP_UNDERLAY.get();
 		if (underlayMapDescr != null && underlayMapDescr.contains(".sqlitedb")) {
 			underlayMapDescr = underlayMapDescr.replaceFirst(".sqlitedb", "");
 		}
 		boolean hasUnderlayDescription = underlayMapDescr != null;
 		underlayMapDescr = hasUnderlayDescription ? underlayMapDescr : mapActivity.getString(R.string.shared_string_none);
-		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_underlay, mapActivity)
-				.setId(UNDERLAY_MAP)
+		adapter.addItem(new ContextMenuItem(UNDERLAY_MAP)
+				.setTitleId(R.string.layer_underlay, mapActivity)
 				.setDescription(underlayMapDescr)
 				.setSelected(hasUnderlayDescription)
 				.setColor(app, hasUnderlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_layer_bottom)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener)
-				.setItemDeleteAction(settings.MAP_UNDERLAY, settings.MAP_UNDERLAY_PREVIOUS)
-				.createItem());
+				.setItemDeleteAction(settings.MAP_UNDERLAY, settings.MAP_UNDERLAY_PREVIOUS));
 	}
 
 
@@ -403,9 +401,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 											  ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 		boolean mapTileLayer = mapActivity.getMapView().getMainLayer() instanceof MapTileLayer;
 		if (configureMenu || mapTileLayer) {
-			ContextMenuItem.ItemBuilder downloadMapItemBuilder = new ContextMenuItem.ItemBuilder()
+			ContextMenuItem item = new ContextMenuItem(MAP_CONTEXT_MENU_DOWNLOAD_MAP)
 					.setTitleId(R.string.shared_string_download_map, mapActivity)
-					.setId(MAP_CONTEXT_MENU_DOWNLOAD_MAP)
 					.setIcon(R.drawable.ic_action_import)
 					.setOrder(DOWNLOAD_MAP_ITEM_ORDER);
 
@@ -423,10 +420,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 					}
 					return true;
 				};
-				downloadMapItemBuilder.setListener(listener);
+				item.setListener(listener);
 			}
-
-			adapter.addItem(downloadMapItemBuilder.createItem());
+			adapter.addItem(item);
 		}
 	}
 

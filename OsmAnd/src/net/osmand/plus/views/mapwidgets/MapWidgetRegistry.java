@@ -15,6 +15,7 @@ import androidx.annotation.StringRes;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.ContextMenuCategory;
 import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -413,9 +414,10 @@ public class MapWidgetRegistry {
 
 	private void addControlId(@NonNull MapActivity mapActivity, @NonNull ContextMenuAdapter cm,
 	                          @StringRes int stringId, @NonNull OsmandPreference<Boolean> pref) {
-		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(stringId, mapActivity)
+		cm.addItem(new ContextMenuItem(null)
+				.setTitleId(stringId, mapActivity)
 				.setSelected(pref.get())
-				.setListener(new AppearanceItemClickListener(pref, mapActivity)).createItem());
+				.setListener(new AppearanceItemClickListener(pref, mapActivity)));
 	}
 
 	public static boolean distChanged(int oldDist, int dist) {
@@ -452,16 +454,18 @@ public class MapWidgetRegistry {
 	}
 
 	private void addHeader(@NonNull MapActivity mapActivity, @NonNull ContextMenuAdapter cm, int titleId) {
-		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(titleId, mapActivity)
-				.setCategory(true).setLayout(R.layout.list_group_title_with_switch).createItem());
+		cm.addItem(new ContextMenuCategory(null)
+				.setTitleId(titleId, mapActivity)
+				.setLayout(R.layout.list_group_title_with_switch));
 	}
 
 	private void addQuickActionControl(@NonNull MapActivity mapActivity, @NonNull ContextMenuAdapter cm) {
-		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_right, mapActivity)
-				.setCategory(true).setLayout(R.layout.list_group_empty_title_with_switch).createItem());
+		cm.addItem(new ContextMenuCategory(null)
+				.setTitleId(R.string.map_widget_right, mapActivity)
+				.setLayout(R.layout.list_group_empty_title_with_switch));
 
 		boolean selected = app.getQuickActionRegistry().isQuickActionOn();
-		cm.addItem(new ContextMenuItem.ItemBuilder()
+		cm.addItem(new ContextMenuItem(null)
 				.setTitleId(R.string.configure_screen_quick_action, mapActivity)
 				.setIcon(R.drawable.ic_quick_action)
 				.setSelected(selected)
@@ -496,8 +500,7 @@ public class MapWidgetRegistry {
 						adapter.notifyDataSetChanged();
 
 					}
-				})
-				.createItem());
+				}));
 	}
 
 	private void addControls(@NonNull MapActivity mapActivity, @NonNull ContextMenuAdapter contextMenuAdapter,
@@ -508,7 +511,7 @@ public class MapWidgetRegistry {
 			}
 			boolean selected = r.isVisibleCollapsed(mode) || r.isVisible(mode);
 			String desc = mapActivity.getString(R.string.shared_string_collapse);
-			ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder()
+			ContextMenuItem item = new ContextMenuItem(null)
 					.setIcon(r.getDrawableMenu())
 					.setSelected(selected)
 					.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
@@ -543,11 +546,11 @@ public class MapWidgetRegistry {
 
 					});
 			if (r.getMessage() != null) {
-				itemBuilder.setTitle(r.getMessage());
+				item.setTitle(r.getMessage());
 			} else {
-				itemBuilder.setTitleId(r.getMessageId(), mapActivity);
+				item.setTitleId(r.getMessageId(), mapActivity);
 			}
-			contextMenuAdapter.addItem(itemBuilder.createItem());
+			contextMenuAdapter.addItem(item);
 		}
 	}
 
@@ -563,23 +566,23 @@ public class MapWidgetRegistry {
 		if (mode != ApplicationMode.DEFAULT) {
 			addControlId(mapActivity, cm, R.string.map_widget_top_text, settings.SHOW_STREET_NAME);
 		}
-		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.coordinates_widget, mapActivity)
+		cm.addItem(new ContextMenuItem(null).setTitleId(R.string.coordinates_widget, mapActivity)
 				.setIcon(R.drawable.ic_action_coordinates_widget)
 				.setSelected(settings.SHOW_COORDINATES_WIDGET.get())
 				.setListener(new AppearanceItemClickListener(settings.SHOW_COORDINATES_WIDGET, mapActivity))
-				.setLayout(R.layout.list_item_icon_and_switch).createItem());
+				.setLayout(R.layout.list_item_icon_and_switch));
 
-		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_distance_by_tap, mapActivity)
+		cm.addItem(new ContextMenuItem(null).setTitleId(R.string.map_widget_distance_by_tap, mapActivity)
 				.setIcon(R.drawable.ic_action_ruler_line)
 				.setSelected(settings.SHOW_DISTANCE_RULER.get())
 				.setListener(new AppearanceItemClickListener(settings.SHOW_DISTANCE_RULER, mapActivity))
-				.setLayout(R.layout.list_item_icon_and_switch).createItem());
+				.setLayout(R.layout.list_item_icon_and_switch));
 
 		if (InAppPurchaseHelper.isOsmAndProAvailable(app)) {
 			addElevationProfileWidget(mapActivity, cm, mode);
 		}
 
-		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_markers, mapActivity)
+		cm.addItem(new ContextMenuItem(null).setTitleId(R.string.map_markers, mapActivity)
 				.setDescription(settings.MAP_MARKERS_MODE.get().toHumanString(mapActivity))
 				.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
 					DirectionIndicationDialogFragment fragment = new DirectionIndicationDialogFragment();
@@ -590,7 +593,7 @@ public class MapWidgetRegistry {
 					});
 					fragment.show(mapActivity.getSupportFragmentManager(), DirectionIndicationDialogFragment.TAG);
 					return false;
-				}).setLayout(R.layout.list_item_text_button).createItem());
+				}).setLayout(R.layout.list_item_text_button));
 		addControlId(mapActivity, cm, R.string.map_widget_transparent, settings.TRANSPARENT_MAP_THEME);
 		addControlId(mapActivity, cm, R.string.show_lanes, settings.SHOW_LANES);
 	}
@@ -600,7 +603,7 @@ public class MapWidgetRegistry {
 		final OsmandPreference<Boolean> pref = settings.SHOW_ELEVATION_PROFILE_WIDGET;
 
 		final ElevationProfileWidgetState widgetState = new ElevationProfileWidgetState(app);
-		ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder()
+		ContextMenuItem item = new ContextMenuItem(null)
 				.setTitleId(widgetState.getMenuTitleId(), app)
 				.setIcon(R.drawable.ic_action_elevation_profile)
 				.setSelected(pref.get())
@@ -627,7 +630,7 @@ public class MapWidgetRegistry {
 						return false;
 					}
 				});
-		cm.addItem(itemBuilder.createItem());
+		cm.addItem(item);
 	}
 
 	public OnClickListener getElevationPopupMenuItemListener(@NonNull MapActivity mapActivity,
@@ -731,8 +734,8 @@ public class MapWidgetRegistry {
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		cm.setProfileDependent(true);
 		cm.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
-		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.app_modes_choose, mapActivity)
-				.setLayout(R.layout.mode_toggles).createItem());
+		cm.addItem(new ContextMenuItem(null).setTitleId(R.string.app_modes_choose, mapActivity)
+				.setLayout(R.layout.mode_toggles));
 //		cm.setChangeAppModeListener(() -> mapActivity.getDashboard().updateListAdapter(getViewConfigureMenuAdapter(mapActivity)));
 		ApplicationMode mode = settings.getApplicationMode();
 		addControls(mapActivity, cm, mode);

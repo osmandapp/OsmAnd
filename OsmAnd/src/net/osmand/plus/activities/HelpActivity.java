@@ -30,8 +30,8 @@ import net.osmand.plus.plugins.development.BaseLogcatActivity;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.ContextMenuCategory;
 import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
-import net.osmand.plus.widgets.cmadapter.ContextMenuItem.ItemBuilder;
 import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
 import net.osmand.plus.widgets.cmadapter.callback.ItemLongClickListener;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
@@ -233,26 +233,24 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 		final OsmandApplication app = getMyApplication();
 
 		contextMenuAdapter.addItem(createCategory(R.string.help_us_to_improve_menu_group));
-		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setLayout(R.layout.help_to_improve_item).createItem());
+		contextMenuAdapter.addItem(new ContextMenuItem(null)
+				.setLayout(R.layout.help_to_improve_item));
 
 		final File exceptionLog = app.getAppPath(OsmandApplication.EXCEPTION_PATH);
 		if (exceptionLog.exists()) {
-			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+			contextMenuAdapter.addItem(new ContextMenuItem(null)
 					.setTitle(getString(R.string.send_crash_log))
 					.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
 						app.sendCrashLog(exceptionLog);
 						return false;
-					}).createItem()
-			);
+					}));
 		}
-		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+		contextMenuAdapter.addItem(new ContextMenuItem(null)
 				.setTitle(getString(R.string.send_logcat_log))
 				.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
 					startSaveLogsAsyncTask();
 					return false;
-				}).createItem()
-		);
+				}));
 	}
 
 	private void createFeaturesItems(ContextMenuAdapter contextMenuAdapter) {
@@ -315,50 +313,48 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 		String version = Version.getFullVersion(getMyApplication()) + releaseDate;
 		ShowArticleOnTouchListener listener = new ShowArticleOnTouchListener(
 				"feature_articles/about.html", this, version);
-		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+		contextMenuAdapter.addItem(new ContextMenuItem(null)
 				.setTitle(getString(R.string.shared_string_about))
 				.setDescription(version)
 				.setListener(listener)
 				.setLongClickListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
 					ShareMenu.copyToClipboardWithToast(adapter.getContext(), version, Toast.LENGTH_SHORT);
 					return false;
-				})
-				.createItem());
+				}));
 	}
 
 	// Helper methods
 	private ContextMenuItem createCategory(@StringRes int titleRes) {
-		return new ContextMenuItem.ItemBuilder().setTitle(
-				getString(titleRes)).setCategory(true)
-				.setLayout(R.layout.download_item_list_section).createItem();
+		return new ContextMenuCategory(null)
+				.setTitle(getString(titleRes))
+				.setLayout(R.layout.download_item_list_section);
 	}
 
 	private ContextMenuItem createItem(@StringRes int titleRes,
 									   @StringRes int descriptionRes,
 									   String path) {
-		ContextMenuItem.ItemBuilder builder = new ContextMenuItem.ItemBuilder()
+		ContextMenuItem item = new ContextMenuItem(null)
 				.setTitle(getString(titleRes))
 				.setListener(new ShowArticleOnTouchListener(path, this));
 		if (descriptionRes != -1) {
-			builder.setDescription(getString(descriptionRes));
+			item.setDescription(getString(descriptionRes));
 		}
-		return builder.createItem();
+		return item;
 	}
 
 	private ContextMenuItem createPluginItem(String title,
 											 @DrawableRes int icon,
 											 String path) {
-		return new ContextMenuItem.ItemBuilder()
+		return new ContextMenuItem(null)
 				.setTitle(title)
 				.setIcon(icon)
-				.setListener(new ShowArticleOnTouchListener(path, this))
-				.createItem();
+				.setListener(new ShowArticleOnTouchListener(path, this));
 	}
 
 	private ContextMenuItem createSocialItem(String title,
 											 String url,
 											 @DrawableRes int icon) {
-		return new ContextMenuItem.ItemBuilder()
+		return new ContextMenuItem(null)
 				.setTitle(title)
 				.setDescription(url)
 				.setIcon(icon)
@@ -366,12 +362,11 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 					AndroidUtils.startActivityIfSafe(this, intent);
 					return false;
-				})
-				.createItem();
+				});
 	}
 
 	private ContextMenuItem createViewAllButton() {
-		return new ItemBuilder()
+		return new ContextMenuItem(null)
 				.setLayout(R.layout.title_with_right_icon_list_item)
 				.setTitle(getString(R.string.shared_string_view_all))
 				.setIcon(R.drawable.ic_action_arrow_down)
@@ -381,8 +376,7 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 					createItems();
 					listView.setSelection(pos);
 					return false;
-				})
-				.createItem();
+				});
 	}
 
 	@NonNull

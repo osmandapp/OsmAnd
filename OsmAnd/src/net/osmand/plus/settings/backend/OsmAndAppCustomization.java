@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,7 +32,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.JsonUtils;
 import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
 import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
-import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -490,18 +488,13 @@ public class OsmAndAppCustomization {
 					}
 					final Intent finalIntent = intent;
 					int iconId = AndroidUtils.getDrawableId(app, item.iconName);
-					adapter.addItem(new ContextMenuItem.ItemBuilder()
-							.setId(item.getId())
+					adapter.addItem(new ContextMenuItem(item.getId())
 							.setTitle(item.name)
 							.setIcon(iconId != 0 ? iconId : ContextMenuItem.INVALID_ID)
-							.setListener(new ItemClickListener() {
-								@Override
-								public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
-									activity.startActivity(finalIntent);
-									return true;
-								}
-							})
-							.createItem());
+							.setListener((adapter1, itemId, position, isChecked, viewCoordinates) -> {
+								activity.startActivity(finalIntent);
+								return true;
+							}));
 				}
 			}
 		}

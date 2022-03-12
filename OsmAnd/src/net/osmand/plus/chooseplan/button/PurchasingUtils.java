@@ -104,15 +104,13 @@ public class PurchasingUtils {
 			return false;
 		};
 
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setId(PROMO_PREFIX + id)
+		adapter.addItem(new ContextMenuItem(PROMO_PREFIX + id)
 				.setLayout(R.layout.list_item_promo)
 				.setTitleId(titleId, mapActivity)
 				.setDescription(app.getString(descriptionId))
 				.setIcon(feature.getIconId(nightMode))
 				.setUseNaturalIconColor(true)
-				.setListener(listener)
-				.createItem());
+				.setListener(listener));
 	}
 
 	public static void removePromoItems(ContextMenuAdapter contextMenuAdapter) {

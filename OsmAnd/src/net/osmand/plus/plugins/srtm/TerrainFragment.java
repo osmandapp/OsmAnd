@@ -382,11 +382,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		}
 
 		if (downloadThread.shouldDownloadIndexes()) {
-			adapter.addItem(new ContextMenuItem.ItemBuilder()
+			adapter.addItem(new ContextMenuItem(null)
 					.setLayout(R.layout.list_item_icon_and_download)
 					.setTitleId(R.string.downloading_list_indexes, mapActivity)
-					.setLoading(true)
-					.createItem());
+					.setLoading(true));
 		} else {
 			try {
 				TerrainMode mode = srtmPlugin.getTerrainMode();
@@ -400,7 +399,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 					downloadTopDivider.setVisibility(View.VISIBLE);
 					downloadBottomDivider.setVisibility(View.VISIBLE);
 					for (final IndexItem indexItem : terrainItems) {
-						ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder()
+						ContextMenuItem _item = new ContextMenuItem(null)
 								.setLayout(R.layout.list_item_icon_and_download)
 								.setTitle(indexItem.getVisibleName(app, app.getRegions(), false))
 								.setDescription(mode == HILLSHADE
@@ -449,13 +448,13 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 								});
 
 						if (indexItem == currentDownloadingItem) {
-							itemBuilder.setLoading(true)
+							_item.setLoading(true)
 									.setProgress(currentDownloadingProgress)
 									.setSecondaryIcon(R.drawable.ic_action_remove_dark);
 						} else {
-							itemBuilder.setSecondaryIcon(R.drawable.ic_action_import);
+							_item.setSecondaryIcon(R.drawable.ic_action_import);
 						}
-						adapter.addItem(itemBuilder.createItem());
+						adapter.addItem(_item);
 					}
 				} else {
 					downloadContainer.setVisibility(View.GONE);

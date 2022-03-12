@@ -59,14 +59,13 @@ public class ContextMenuArrayAdapter extends ArrayAdapter<ContextMenuItem> {
 	private final boolean nightMode;
 	private final @LayoutRes int defLayoutId;
 
-	public ContextMenuArrayAdapter(@NonNull Activity context,
+	public ContextMenuArrayAdapter(@NonNull Activity ctx,
 	                               @LayoutRes int layoutRes,
 	                               ContextMenuItem[] objects,
-	                               OsmandApplication app,
 	                               boolean nightMode,
 	                               boolean profileDependent) {
-		super(context, layoutRes, R.id.title, objects);
-		this.app = app;
+		super(ctx, layoutRes, R.id.title, objects);
+		this.app = (OsmandApplication) ctx.getApplicationContext();
 		this.nightMode = nightMode;
 		this.profileDependent = profileDependent;
 		this.defLayoutId = layoutRes;
@@ -172,6 +171,12 @@ public class ContextMenuArrayAdapter extends ArrayAdapter<ContextMenuItem> {
 		}
 
 		return convertView;
+	}
+
+	@NonNull
+	private View getExpandableCategoryView(@NonNull View view,
+	                                       @NonNull ContextMenuItem item) {
+		return view;
 	}
 
 	@NonNull

@@ -162,14 +162,12 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 			}
 		};
 		boolean layersEnabled = layersPref.get();
-		menuAdapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setId(CONFIGURE_MAP_ITEM_ID_SCHEME + AIDL_LAYERS_PREFIX + pack)
+		menuAdapter.addItem(new ContextMenuItem(CONFIGURE_MAP_ITEM_ID_SCHEME + AIDL_LAYERS_PREFIX + pack)
 				.setTitle(name)
 				.setListener(listener)
 				.setSelected(layersEnabled)
 				.setIcon(R.drawable.ic_extension_dark)
-				.setColor(app, layersEnabled ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
-				.createItem());
+				.setColor(app, layersEnabled ? R.color.osmand_orange : ContextMenuItem.INVALID_ID));
 	}
 
 	void registerWidgetControls(@NonNull MapActivity mapActivity) {

@@ -18,90 +18,71 @@ import net.osmand.plus.widgets.cmadapter.callback.OnItemDeleteAction;
 import net.osmand.plus.widgets.cmadapter.callback.ProgressListener;
 
 public class ContextMenuItem {
+
 	public static final int INVALID_ID = -1;
 
-	@StringRes
-	private final int titleId;
-	private String title;
-	@DrawableRes
-	private int mIcon;
-	@ColorInt
-	private Integer color;
-	@DrawableRes
-	private int secondaryIcon;
-	private Boolean selected;
-	private int progress;
-	@LayoutRes
-	private final int layout;
-	private boolean loading;
-	private final boolean category;
-	private final boolean clickable;
-	private final boolean useNaturalIconColor;
-	private boolean hidden;
-	private int order;
-	private String description;
-	private final OnRefreshCallback onRefreshCallback;
-	private final ItemClickListener itemClickListener;
-	private final ItemLongClickListener itemLongClickListener;
-	private final OnIntegerValueChangedListener integerListener;
-	private final ProgressListener progressListener;
-	private final OnItemDeleteAction itemDeleteAction;
-	private final boolean hideDivider;
-	private final boolean hideCompoundButton;
-	private final int minHeight;
-	private final int tag;
 	private final String id;
+	private int tag;
 
-	private ContextMenuItem(@StringRes int titleId,
-							String title,
-							@DrawableRes int icon,
-							@ColorInt Integer color,
-							@DrawableRes int secondaryIcon,
-							Boolean selected,
-							int progress,
-							@LayoutRes int layout,
-							boolean loading,
-							boolean category,
-							boolean clickable,
-							boolean useNaturalIconColor,
-							int order,
-							String description,
-							OnRefreshCallback onRefreshCallback,
-							ItemClickListener itemClickListener,
-							ItemLongClickListener itemLongClickListener,
-							OnIntegerValueChangedListener integerListener,
-							ProgressListener progressListener,
-							OnItemDeleteAction itemDeleteAction,
-							boolean hideDivider,
-							boolean hideCompoundButton,
-							int minHeight,
-							int tag,
-							String id) {
-		this.titleId = titleId;
-		this.title = title;
-		this.mIcon = icon;
-		this.color = color;
-		this.secondaryIcon = secondaryIcon;
-		this.selected = selected;
-		this.progress = progress;
-		this.layout = layout;
-		this.loading = loading;
-		this.category = category;
-		this.clickable = clickable;
-		this.useNaturalIconColor = useNaturalIconColor;
-		this.order = order;
-		this.description = description;
-		this.onRefreshCallback = onRefreshCallback;
-		this.itemClickListener = itemClickListener;
-		this.itemLongClickListener = itemLongClickListener;
-		this.integerListener = integerListener;
-		this.progressListener = progressListener;
-		this.hideDivider = hideDivider;
-		this.itemDeleteAction = itemDeleteAction;
-		this.hideCompoundButton = hideCompoundButton;
-		this.minHeight = minHeight;
-		this.tag = tag;
+	private @LayoutRes int layout = INVALID_ID;
+	private boolean hideCompoundButton;
+	private boolean hideDivider;
+	private boolean clickable = true;
+	private int minHeight;
+
+	private @StringRes int titleId;
+	private String description;
+	private String title;
+
+	private boolean useNaturalIconColor;
+	private @ColorInt Integer color = null;
+	private @DrawableRes int icon = INVALID_ID;
+	private @DrawableRes int secondaryIcon = INVALID_ID;
+
+	private Boolean selected = null;
+	private int progress = INVALID_ID;
+	private boolean loading;
+	private boolean hidden;
+	private int order = 0;
+
+	private OnRefreshCallback onRefreshCallback;
+	private ItemClickListener itemClickListener;
+	private ItemLongClickListener itemLongClickListener;
+	private OnIntegerValueChangedListener integerListener;
+	private ProgressListener progressListener;
+	private OnItemDeleteAction itemDeleteAction;
+
+	public ContextMenuItem(String id) {
 		this.id = id;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public int getTag() {
+		return tag;
+	}
+
+	@LayoutRes
+	public int getLayout() {
+		return layout;
+	}
+
+	public boolean shouldHideCompoundButton() {
+		return hideCompoundButton;
+	}
+
+	public boolean shouldHideDivider() {
+		return hideDivider;
+	}
+
+	public boolean isClickable() {
+		return clickable;
+	}
+
+	public int getMinHeight() {
+		return minHeight;
 	}
 
 	@StringRes
@@ -109,18 +90,26 @@ public class ContextMenuItem {
 		return titleId;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
 	public String getTitle() {
 		return title;
 	}
 
-	@DrawableRes
-	public int getIcon() {
-		return mIcon;
+	public boolean useNaturalIconColor() {
+		return useNaturalIconColor;
 	}
 
 	@ColorInt
 	public Integer getColor() {
 		return color;
+	}
+
+	@DrawableRes
+	public int getIcon() {
+		return icon;
 	}
 
 	@DrawableRes
@@ -136,21 +125,8 @@ public class ContextMenuItem {
 		return progress;
 	}
 
-	@LayoutRes
-	public int getLayout() {
-		return layout;
-	}
-
 	public boolean isLoading() {
 		return loading;
-	}
-
-	public boolean isCategory() {
-		return category;
-	}
-
-	public boolean isClickable() {
-		return clickable;
 	}
 
 	public boolean isHidden() {
@@ -161,12 +137,8 @@ public class ContextMenuItem {
 		return order;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public OnItemDeleteAction getItemDeleteAction() {
-		return itemDeleteAction;
+	public boolean isCategory() {
+		return false;
 	}
 
 	@Nullable
@@ -189,260 +161,145 @@ public class ContextMenuItem {
 		return progressListener;
 	}
 
-	public boolean useNaturalIconColor() {
-		return useNaturalIconColor;
+	public OnItemDeleteAction getItemDeleteAction() {
+		return itemDeleteAction;
 	}
 
-	public boolean shouldHideDivider() {
-		return hideDivider;
+	public ContextMenuItem setTag(int tag) {
+		this.tag = tag;
+		return this;
+	}
+
+	public ContextMenuItem setLayout(@LayoutRes int layout) {
+		this.layout = layout;
+		return this;
+	}
+
+	public ContextMenuItem hideCompoundButton(boolean hideCompoundButton) {
+		this.hideCompoundButton = hideCompoundButton;
+		return this;
+	}
+
+	public ContextMenuItem hideDivider(boolean hideDivider) {
+		this.hideDivider = hideDivider;
+		return this;
+	}
+
+	public ContextMenuItem setClickable(boolean clickable) {
+		this.clickable = clickable;
+		return this;
+	}
+
+	public ContextMenuItem setMinHeight(int minHeight) {
+		this.minHeight = minHeight;
+		return this;
+	}
+
+	public ContextMenuItem setTitleId(@StringRes int titleId,
+	                                  @Nullable Context context) {
+		this.titleId = titleId;
+		if (context != null) {
+			this.title = context.getString(titleId);
+		}
+		return this;
+	}
+
+	public ContextMenuItem setDescription(String description) {
+		this.description = description;
+		return this;
+	}
+
+	public ContextMenuItem setTitle(String title) {
+		this.title = title;
+		this.titleId = title.hashCode();
+		return this;
+	}
+
+	public ContextMenuItem setUseNaturalIconColor(boolean useNaturalIconColor) {
+		this.useNaturalIconColor = useNaturalIconColor;
+		return this;
+	}
+
+	public ContextMenuItem setColor(@ColorInt Integer color) {
+		this.color = color;
+		return this;
+	}
+
+	public ContextMenuItem setColor(Context context, @ColorRes int colorRes) {
+		this.color = colorRes != INVALID_ID ? ContextCompat.getColor(context, colorRes) : null;
+		return this;
+	}
+
+	public ContextMenuItem setIcon(@DrawableRes int icon) {
+		this.icon = icon;
+		return this;
+	}
+
+	public ContextMenuItem setSecondaryIcon(@DrawableRes int secondaryIcon) {
+		this.secondaryIcon = secondaryIcon;
+		return this;
+	}
+
+	public ContextMenuItem setSelected(boolean selected) {
+		this.selected = selected;
+		return this;
+	}
+
+	public ContextMenuItem setProgress(int progress) {
+		this.progress = progress;
+		return this;
+	}
+
+	public ContextMenuItem setLoading(boolean loading) {
+		this.loading = loading;
+		return this;
 	}
 
 	public void setHidden(boolean hidden) {
 		this.hidden = hidden;
 	}
 
-	public boolean shouldHideCompoundButton() {
-		return hideCompoundButton;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public void setIcon(int iconId) {
-		this.mIcon = iconId;
-	}
-
-	public void setSecondaryIcon(int secondaryIcon) {
-		this.secondaryIcon = secondaryIcon;
-	}
-
-	public void setColor(Context context, @ColorRes int colorRes) {
-		color = colorRes != INVALID_ID ? ContextCompat.getColor(context, colorRes) : null;
-	}
-
-	public void setSelected(boolean selected) {
-		this.selected = selected;
-	}
-
-	public void setProgress(int progress) {
-		this.progress = progress;
-	}
-
-	public void setOrder(int order) {
+	public ContextMenuItem setOrder(int order) {
 		this.order = order;
+		return this;
 	}
 
-	public void setLoading(boolean loading) {
-		this.loading = loading;
+	public ContextMenuItem setRefreshCallback(OnRefreshCallback onRefreshCallback) {
+		this.onRefreshCallback = onRefreshCallback;
+		refreshWithActualData();
+		return this;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public ContextMenuItem setListener(ItemClickListener itemClickListener) {
+		this.itemClickListener = itemClickListener;
+		return this;
 	}
 
-	public int getMinHeight() {
-		return minHeight;
+	public ContextMenuItem setLongClickListener(ItemLongClickListener longClickListener) {
+		this.itemLongClickListener = longClickListener;
+		return this;
 	}
 
-	public int getTag() {
-		return tag;
+	public ContextMenuItem setIntegerListener(OnIntegerValueChangedListener integerListener) {
+		this.integerListener = integerListener;
+		return this;
 	}
 
-	public String getId() {
-		return id;
+	public ContextMenuItem setProgressListener(ProgressListener progressListener) {
+		this.progressListener = progressListener;
+		return this;
 	}
 
-	public void refreshWithActualData() {
+	public ContextMenuItem setItemDeleteAction(OsmandPreference<?>... prefs) {
+		this.itemDeleteAction = OnItemDeleteAction.makeDeleteAction(prefs);
+		return this;
+	}
+
+	public ContextMenuItem refreshWithActualData() {
 		if (onRefreshCallback != null) {
 			onRefreshCallback.onRefreshMenuItem(this);
 		}
+		return this;
 	}
 
-	public static ItemBuilder createBuilder(String title) {
-		return new ItemBuilder().setTitle(title);
-	}
-
-	public static class ItemBuilder {
-		@StringRes
-		private int mTitleId;
-		private String mTitle;
-		@DrawableRes
-		private int mIcon = INVALID_ID;
-		@ColorInt
-		private Integer mColor = null;
-		@DrawableRes
-		private int mSecondaryIcon = INVALID_ID;
-		private Boolean mSelected = null;
-		private int mProgress = INVALID_ID;
-		@LayoutRes
-		private int mLayout = INVALID_ID;
-		private boolean mLoading = false;
-		private boolean mIsCategory = false;
-		private boolean mIsClickable = true;
-		private int mOrder = 0;
-		private String mDescription = null;
-		private OnRefreshCallback mOnRefreshCallback = null;
-		private ItemClickListener mItemClickListener = null;
-		private ItemLongClickListener mItemLongClickListener = null;
-		private OnIntegerValueChangedListener mIntegerListener = null;
-		private ProgressListener mProgressListener = null;
-		private OnItemDeleteAction mItemDeleteAction = null;
-		private boolean mUseNaturalIconColor;
-		private boolean mHideDivider;
-		private boolean mHideCompoundButton;
-		private int mMinHeight;
-		private int mTag;
-		private String mId;
-
-		public ItemBuilder setTitleId(@StringRes int titleId, @Nullable Context context) {
-			this.mTitleId = titleId;
-			if (context != null) {
-				mTitle = context.getString(titleId);
-			}
-			return this;
-		}
-
-		public ItemBuilder setTitle(String title) {
-			this.mTitle = title;
-			this.mTitleId = title.hashCode();
-			return this;
-		}
-
-		public ItemBuilder setColor(@ColorInt Integer color) {
-			mColor = color;
-			return this;
-		}
-
-		public ItemBuilder setColor(Context context, @ColorRes int colorRes) {
-			if (colorRes != INVALID_ID) {
-				mColor = ContextCompat.getColor(context, colorRes);
-			}
-			return this;
-		}
-
-		public ItemBuilder setIcon(@DrawableRes int icon) {
-			mIcon = icon;
-			return this;
-		}
-
-		public ItemBuilder setSecondaryIcon(@DrawableRes int secondaryIcon) {
-			mSecondaryIcon = secondaryIcon;
-			return this;
-		}
-
-		public ItemBuilder setSelected(boolean selected) {
-			mSelected = selected;
-			return this;
-		}
-
-		public ItemBuilder setProgress(int progress) {
-			mProgress = progress;
-			return this;
-		}
-
-		public ItemBuilder setLayout(@LayoutRes int layout) {
-			mLayout = layout;
-			return this;
-		}
-
-		public ItemBuilder setLoading(boolean loading) {
-			mLoading = loading;
-			return this;
-		}
-
-		public ItemBuilder setCategory(boolean category) {
-			mIsCategory = category;
-			return this;
-		}
-
-		public ItemBuilder setClickable(boolean clickable) {
-			mIsClickable = clickable;
-			return this;
-		}
-
-		public ItemBuilder setOrder(int order) {
-			mOrder = order;
-			return this;
-		}
-
-		public ItemBuilder setDescription(String description) {
-			mDescription = description;
-			return this;
-		}
-
-		public ItemBuilder setRefreshCallback(OnRefreshCallback onRefreshCallback) {
-			mOnRefreshCallback = onRefreshCallback;
-			return this;
-		}
-
-		public ItemBuilder setListener(ItemClickListener checkBoxListener) {
-			mItemClickListener = checkBoxListener;
-			return this;
-		}
-
-		public ItemBuilder setLongClickListener(ItemLongClickListener longClickListener) {
-			mItemLongClickListener = longClickListener;
-			return this;
-		}
-
-		public ItemBuilder setIntegerListener(OnIntegerValueChangedListener integerListener) {
-			mIntegerListener = integerListener;
-			return this;
-		}
-
-		public ItemBuilder setProgressListener(ProgressListener progressListener) {
-			mProgressListener = progressListener;
-			return this;
-		}
-
-		public ItemBuilder setUseNaturalIconColor(boolean useNaturalIconColor) {
-			mUseNaturalIconColor = useNaturalIconColor;
-			return this;
-		}
-
-		public ItemBuilder setItemDeleteAction(OsmandPreference<?>... prefs) {
-			this.mItemDeleteAction = OnItemDeleteAction.makeDeleteAction(prefs);
-			return this;
-		}
-
-		public ItemBuilder hideDivider(boolean hideDivider) {
-			mHideDivider = hideDivider;
-			return this;
-		}
-
-		public ItemBuilder hideCompoundButton(boolean hideCompoundButton) {
-			mHideCompoundButton = hideCompoundButton;
-			return this;
-		}
-
-		public ItemBuilder setMinHeight(int minHeight) {
-			this.mMinHeight = minHeight;
-			return this;
-		}
-
-		public int getTag() {
-			return mTag;
-		}
-
-		public ItemBuilder setTag(int tag) {
-			this.mTag = tag;
-			return this;
-		}
-
-		public ItemBuilder setId(String id) {
-			this.mId = id;
-			return this;
-		}
-
-		public ContextMenuItem createItem() {
-			ContextMenuItem item = new ContextMenuItem(mTitleId, mTitle, mIcon, mColor, mSecondaryIcon,
-					mSelected, mProgress, mLayout, mLoading, mIsCategory, mIsClickable, mUseNaturalIconColor,
-					mOrder, mDescription, mOnRefreshCallback, mItemClickListener, mItemLongClickListener,
-					mIntegerListener, mProgressListener, mItemDeleteAction, mHideDivider, mHideCompoundButton,
-					mMinHeight, mTag, mId);
-			item.refreshWithActualData();
-			return item;
-		}
-	}
 }

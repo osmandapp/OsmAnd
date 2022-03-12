@@ -225,8 +225,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 			}
 		};
 
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setId(MAPILLARY)
+		adapter.addItem(new ContextMenuItem(MAPILLARY)
 				.setTitleId(R.string.street_level_imagery, mapActivity)
 				.setDescription("Mapillary")
 				.setSelected(SHOW_MAPILLARY.get())
@@ -234,8 +233,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 				.setIcon(R.drawable.ic_action_mapillary)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setItemDeleteAction(SHOW_MAPILLARY)
-				.setListener(listener)
-				.createItem());
+				.setListener(listener));
 	}
 
 	private void registerWidget(@NonNull MapActivity activity) {

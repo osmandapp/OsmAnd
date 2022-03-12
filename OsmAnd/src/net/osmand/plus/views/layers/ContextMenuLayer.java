@@ -1,9 +1,5 @@
 package net.osmand.plus.views.layers;
 
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-
 import android.Manifest;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -25,7 +21,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
 import androidx.appcompat.content.res.AppCompatResources;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
@@ -57,8 +52,6 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -73,12 +66,15 @@ import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.MoveMarkerBottomSheetHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
 import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.util.Algorithms;
@@ -94,6 +90,10 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import gnu.trove.list.array.TIntArrayList;
+
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 
 public class ContextMenuLayer extends OsmandMapLayer {
 	//private static final Log LOG = PlatformUtil.getLog(ContextMenuLayer.class);
@@ -330,14 +330,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			enterMovingMode(tileBox);
 			return true;
 		};
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
+		adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION)
 				.setTitleId(R.string.change_markers_position, getContext())
-				.setId(MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION)
 				.setIcon(R.drawable.ic_show_on_map)
 				.setOrder(MapActivityActions.CHANGE_POSITION_ITEM_ORDER)
 				.setClickable(isObjectMoveable(o))
-				.setListener(listener)
-				.createItem());
+				.setListener(listener));
 	}
 
 	@Override

@@ -495,19 +495,26 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				return true;
 			}
 		};
-		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.gpx_add_track, getActivity())
+		optionsMenuAdapter.addItem(new ContextMenuItem(null)
+				.setTitleId(R.string.gpx_add_track, getActivity())
 				.setIcon(R.drawable.ic_action_plus)
-				.setListener(listener).createItem());
-		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.coordinate_input, getActivity())
+				.setListener(listener));
+		optionsMenuAdapter.addItem(new ContextMenuItem(null)
+				.setTitleId(R.string.coordinate_input, getActivity())
 				.setIcon(R.drawable.ic_action_coordinates_longitude)
-				.setListener(listener).createItem());
-		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.shared_string_show_on_map, getActivity())
+				.setListener(listener));
+		optionsMenuAdapter.addItem(new ContextMenuItem(null)
+				.setTitleId(R.string.shared_string_show_on_map, getActivity())
 				.setIcon(R.drawable.ic_show_on_map)
-				.setListener(listener).createItem());
-		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.shared_string_delete, getActivity())
-				.setIcon(R.drawable.ic_action_delete_dark).setListener(listener).createItem());
-		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.shared_string_refresh, getActivity())
-				.setIcon(R.drawable.ic_action_refresh_dark).setListener(listener).createItem());
+				.setListener(listener));
+		optionsMenuAdapter.addItem(new ContextMenuItem(null)
+				.setTitleId(R.string.shared_string_delete, getActivity())
+				.setIcon(R.drawable.ic_action_delete_dark)
+				.setListener(listener));
+		optionsMenuAdapter.addItem(new ContextMenuItem(null)
+				.setTitleId(R.string.shared_string_refresh, getActivity())
+				.setIcon(R.drawable.ic_action_refresh_dark)
+				.setListener(listener));
 		OsmandPlugin.onOptionsMenuActivity(getActivity(), this, optionsMenuAdapter);
 		for (int j = 0; j < optionsMenuAdapter.length(); j++) {
 			final MenuItem item;

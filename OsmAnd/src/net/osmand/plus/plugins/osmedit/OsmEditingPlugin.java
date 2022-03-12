@@ -58,8 +58,8 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenTyp
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.ContextMenuCategory;
 import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
-import net.osmand.plus.widgets.cmadapter.ContextMenuItem.ItemBuilder;
 import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
 import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
 import net.osmand.render.RenderingRuleProperty;
@@ -331,41 +331,36 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					|| (objectId >> MapObject.NON_AMENITY_ID_RIGHT_SHIFT) < Integer.MAX_VALUE);
 		}
 		if (isEditable) {
-			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.poi_context_menu_modify, mapActivity)
-					.setId(MAP_CONTEXT_MENU_CREATE_POI)
+			adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_CREATE_POI)
+					.setTitleId(R.string.poi_context_menu_modify, mapActivity)
 					.setIcon(R.drawable.ic_action_edit_dark)
 					.setOrder(MODIFY_POI_ITEM_ORDER)
-					.setListener(listener)
-					.createItem());
+					.setListener(listener));
 		} else if (selectedObj instanceof OpenstreetmapPoint && ((OpenstreetmapPoint) selectedObj).getAction() != Action.DELETE) {
-			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.poi_context_menu_modify_osm_change, mapActivity)
-					.setId(MAP_CONTEXT_MENU_CREATE_POI)
+			adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_CREATE_POI)
+					.setTitleId(R.string.poi_context_menu_modify_osm_change, mapActivity)
 					.setIcon(R.drawable.ic_action_edit_dark)
 					.setOrder(MODIFY_OSM_CHANGE_ITEM_ORDER)
-					.setListener(listener)
-					.createItem());
+					.setListener(listener));
 		} else {
-			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.context_menu_item_create_poi, mapActivity)
-					.setId(MAP_CONTEXT_MENU_CREATE_POI)
+			adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_CREATE_POI)
+					.setTitleId(R.string.context_menu_item_create_poi, mapActivity)
 					.setIcon(R.drawable.ic_action_plus_dark)
 					.setOrder(CREATE_POI_ITEM_ORDER)
-					.setListener(listener)
-					.createItem());
+					.setListener(listener));
 		}
 		if (selectedObj instanceof OsmNotesPoint) {
-			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.context_menu_item_modify_note, mapActivity)
-					.setId(MAP_CONTEXT_MENU_OPEN_OSM_NOTE)
+			adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_OPEN_OSM_NOTE)
+					.setTitleId(R.string.context_menu_item_modify_note, mapActivity)
 					.setIcon(R.drawable.ic_action_edit_dark)
 					.setOrder(MODIFY_OSM_NOTE_ITEM_ORDER)
-					.setListener(listener)
-					.createItem());
+					.setListener(listener));
 		} else {
-			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.context_menu_item_open_note, mapActivity)
-					.setId(MAP_CONTEXT_MENU_OPEN_OSM_NOTE)
+			adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_OPEN_OSM_NOTE)
+					.setTitleId(R.string.context_menu_item_open_note, mapActivity)
 					.setIcon(R.drawable.ic_action_osm_note_add)
 					.setOrder(OPEN_OSM_NOTE_ITEM_ORDER)
-					.setListener(listener)
-					.createItem());
+					.setListener(listener));
 		}
 	}
 
@@ -396,14 +391,11 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	protected void registerConfigureMapCategoryActions(@NonNull ContextMenuAdapter adapter,
 	                                                   @NonNull MapActivity mapActivity,
 	                                                   @NonNull List<RenderingRuleProperty> customRules) {
-		adapter.addItem(new ItemBuilder()
+		adapter.addItem(new ContextMenuCategory(OPEN_STREET_MAP)
 				.setTitleId(R.string.shared_string_open_street_map, mapActivity)
-				.setId(OPEN_STREET_MAP)
-				.setLayout(R.layout.list_group_title_with_switch)
-				.setCategory(true).createItem());
+				.setLayout(R.layout.list_group_title_with_switch));
 
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setId(OSM_NOTES)
+		adapter.addItem(new ContextMenuItem(OSM_NOTES)
 				.setTitleId(R.string.layer_osm_bugs, mapActivity)
 				.setSelected(SHOW_OSM_BUGS.get())
 				.setIcon(R.drawable.ic_action_osm_note)
@@ -432,11 +424,9 @@ public class OsmEditingPlugin extends OsmandPlugin {
 						return true;
 					}
 				})
-				.setItemDeleteAction(SHOW_OSM_BUGS)
-				.createItem());
+				.setItemDeleteAction(SHOW_OSM_BUGS));
 
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setId(OSM_EDITS)
+		adapter.addItem(new ContextMenuItem(OSM_EDITS)
 				.setTitleId(R.string.layer_osm_edits, mapActivity)
 				.setSelected(SHOW_OSM_EDITS.get())
 				.setIcon(R.drawable.ic_action_openstreetmap_logo)
@@ -454,8 +444,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 						return true;
 					}
 				})
-				.setItemDeleteAction(SHOW_OSM_EDITS)
-				.createItem());
+				.setItemDeleteAction(SHOW_OSM_EDITS));
 
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		Iterator<RenderingRuleProperty> iterator = customRules.iterator();
@@ -484,7 +473,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	public void optionsMenuFragment(final FragmentActivity activity, final Fragment fragment, ContextMenuAdapter optionsMenuAdapter) {
 		if (fragment instanceof AvailableGPXFragment) {
 			final AvailableGPXFragment f = ((AvailableGPXFragment) fragment);
-			optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.local_index_mi_upload_gpx, activity)
+			optionsMenuAdapter.addItem(new ContextMenuItem(null)
+					.setTitleId(R.string.local_index_mi_upload_gpx, activity)
 					.setIcon(R.drawable.ic_action_upload_to_openstreetmap)
 					.setColor(app, R.color.color_white)
 					.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
@@ -493,8 +483,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 										OsmEditingPlugin.this.sendGPXFiles(activity, f,
 												items.toArray(new GpxInfo[0])));
 						return true;
-					})
-					.createItem());
+					}));
 		}
 	}
 

@@ -152,57 +152,54 @@ public class RasterMapMenu {
 		};
 
 		mapTypeDescr = mapSelected ? mapTypeDescr : mapActivity.getString(R.string.shared_string_none);
-		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+		contextMenuAdapter.addItem(new ContextMenuItem(null)
 				.setTitleId(toggleActionStringId, mapActivity)
 				.hideDivider(true)
 				.setListener(l)
-				.setSelected(mapSelected).createItem());
+				.setSelected(mapSelected));
 		if (mapSelected) {
-			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+			contextMenuAdapter.addItem(new ContextMenuItem(null)
 					.setTitleId(mapTypeString, mapActivity)
 					.hideDivider(true)
 					.setListener(l)
 					.setLayout(R.layout.list_item_icon_and_menu_wide)
-					.setDescription(mapTypeDescr).createItem());
+					.setDescription(mapTypeDescr));
 			OnIntegerValueChangedListener integerListener =
-					new OnIntegerValueChangedListener() {
-						@Override
-						public boolean onIntegerValueChangedListener(int newValue) {
-							mapTransparencyPreference.set(newValue);
-							mapActivity.getMapLayers().getMapControlsLayer().updateTransparencySliderValue();
-							mapActivity.refreshMap();
-							return false;
-						}
+					newValue -> {
+						mapTransparencyPreference.set(newValue);
+						mapActivity.getMapLayers().getMapControlsLayer().updateTransparencySliderValue();
+						mapActivity.refreshMap();
+						return false;
 					};
 			// android:max="255" in layout is expected
-			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+			contextMenuAdapter.addItem(new ContextMenuItem(null)
 					.setTitleId(mapTypeStringTransparency, mapActivity)
 					.hideDivider(true)
 					.setLayout(R.layout.list_item_progress)
 					.setIcon(R.drawable.ic_action_opacity)
 					.setProgress(mapTransparencyPreference.get())
 					.setListener(l)
-					.setIntegerListener(integerListener).createItem());
+					.setIntegerListener(integerListener));
 			if (type == RasterMapType.UNDERLAY) {
-				contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+				contextMenuAdapter.addItem(new ContextMenuItem(null)
 						.setTitleId(R.string.show_polygons, mapActivity)
 						.hideDivider(true)
 						.setListener(l)
-						.setSelected(!hidePolygonsPref.get()).createItem());
+						.setSelected(!hidePolygonsPref.get()));
 			}
 			Boolean transparencySwitchState = isSeekbarVisible(app, type);
-			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+			contextMenuAdapter.addItem(new ContextMenuItem(null)
 					.setTitleId(R.string.show_transparency_seekbar, mapActivity)
 					.hideDivider(true)
 					.setListener(l)
-					.setSelected(transparencySwitchState).createItem());
+					.setSelected(transparencySwitchState));
 			ITileSource oveplayMap = plugin.getOverlayLayer().getMap();
 			if (type == RasterMapType.OVERLAY && oveplayMap != null && oveplayMap.getParamType() != ParameterType.UNDEFINED) {
-				contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+				contextMenuAdapter.addItem(new ContextMenuItem(null)
 						.setTitleId(R.string.show_parameter_seekbar, mapActivity)
 						.hideDivider(true)
 						.setListener(l)
-						.setSelected(settings.SHOW_MAP_LAYER_PARAMETER.get()).createItem());
+						.setSelected(settings.SHOW_MAP_LAYER_PARAMETER.get()));
 			}
 		}
 	}

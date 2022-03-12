@@ -98,37 +98,33 @@ public class OsmNotesMenu {
 			toggleIconColorId = ContextMenuItem.INVALID_ID;
 		}
 
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
+		adapter.addItem(new ContextMenuItem(null)
 				.setTitleId(osmNotesStringId, mapActivity)
 				.setDescription(mapActivity.getString(R.string.switch_osm_notes_visibility_desc))
 				.setIcon(R.drawable.ic_action_osm_note)
 				.setColor(app, toggleIconColorId)
 				.setListener(l)
-				.setSelected(showOsmBugs)
-				.createItem());
+				.setSelected(showOsmBugs));
 
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
+		adapter.addItem(new ContextMenuItem(null)
 				.setTitleId(showZoomLevelStringId, mapActivity)
 				.setDescription(zoomStrings[Arrays.asList(zoomIntValues).indexOf(plugin.SHOW_OSM_BUGS_MIN_ZOOM.get())])
 				.setLayout(R.layout.list_item_single_line_descrition_narrow)
 				.setIcon(R.drawable.ic_action_map_magnifier)
 				.setListener(l)
-				.setClickable(showOsmBugs)
-				.createItem());
+				.setClickable(showOsmBugs));
 
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
+		adapter.addItem(new ContextMenuItem(null)
 				.setTitleId(showClosedNotesStringId, mapActivity)
 				.setIcon(R.drawable.ic_action_note_dark)
 				.setListener(l)
 				.setSelected(plugin.SHOW_CLOSED_OSM_BUGS.get())
 				.setClickable(showOsmBugs)
-				.hideDivider(true)
-				.createItem());
+				.hideDivider(true));
 
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
+		adapter.addItem(new ContextMenuItem(null)
 				.setLayout(R.layout.card_bottom_divider)
-				.setClickable(false)
-				.createItem());
+				.setClickable(false));
 	}
 
 	private static String[] getZoomStrings(Context context) {

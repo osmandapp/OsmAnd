@@ -200,15 +200,14 @@ public class WikipediaPlugin extends OsmandPlugin {
 		};
 
 		boolean selected = app.getPoiFilters().isPoiFilterSelected(PoiFiltersHelper.getTopWikiPoiFilterId());
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setId(WIKIPEDIA_ID)
+		adapter.addItem(new ContextMenuItem(WIKIPEDIA_ID)
 				.setTitleId(R.string.shared_string_wikipedia, mapActivity)
 				.setDescription(selected ? getLanguagesSummary() : null)
 				.setSelected(selected)
 				.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_plugin_wikipedia)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
-				.setListener(listener).createItem());
+				.setListener(listener));
 	}
 
 	@Override

@@ -321,10 +321,10 @@ public class GpxUiHelper {
 	private static void fillGpxContextMenuAdapter(ContextMenuAdapter adapter, List<GPXInfo> allGpxFiles,
 	                                              boolean needSelectItems) {
 		for (GPXInfo gpxInfo : allGpxFiles) {
-			adapter.addItem(ContextMenuItem.createBuilder(getGpxTitle(gpxInfo.getFileName()))
+			adapter.addItem(new ContextMenuItem(null)
+					.setTitle(getGpxTitle(gpxInfo.getFileName()))
 					.setSelected(needSelectItems && gpxInfo.selected)
-					.setIcon(R.drawable.ic_action_polygom_dark)
-					.createItem());
+					.setIcon(R.drawable.ic_action_polygom_dark));
 		}
 	}
 
