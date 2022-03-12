@@ -192,6 +192,10 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		return gpxData;
 	}
 
+	List<WptPt> getWptPoints() {
+		return gpxData.getGpxFile().getPoints();
+	}
+
 	public boolean isNewData() {
 		return gpxData == null;
 	}
