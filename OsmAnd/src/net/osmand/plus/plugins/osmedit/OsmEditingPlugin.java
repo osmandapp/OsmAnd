@@ -58,8 +58,8 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenTyp
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.ContextMenuCategory;
-import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuCategory;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
 import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
 import net.osmand.render.RenderingRuleProperty;
@@ -78,7 +78,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_EDITING;
 import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
-import static net.osmand.plus.widgets.cmadapter.ContextMenuItem.INVALID_ID;
+import static net.osmand.plus.widgets.cmadapter.item.ContextMenuItem.INVALID_ID;
 
 
 public class OsmEditingPlugin extends OsmandPlugin {

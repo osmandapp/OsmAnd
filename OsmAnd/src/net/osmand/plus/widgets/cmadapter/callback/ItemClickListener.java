@@ -2,7 +2,7 @@ package net.osmand.plus.widgets.cmadapter.callback;
 
 import android.widget.ArrayAdapter;
 
-import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 
 public interface ItemClickListener {
 	/**

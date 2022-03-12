@@ -23,7 +23,7 @@ import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
 import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
 import net.osmand.util.Algorithms;

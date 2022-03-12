@@ -38,12 +38,13 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
 import net.osmand.plus.widgets.cmadapter.callback.OnIntegerValueChangedListener;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.util.Algorithms;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import static net.osmand.plus.widgets.cmadapter.ContextMenuItem.INVALID_ID;
+import static net.osmand.plus.widgets.cmadapter.item.ContextMenuItem.INVALID_ID;
 
 public class ContextMenuArrayAdapter extends ArrayAdapter<ContextMenuItem> {
 

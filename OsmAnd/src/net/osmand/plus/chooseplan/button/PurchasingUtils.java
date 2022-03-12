@@ -10,7 +10,7 @@ import androidx.annotation.StringRes;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
 import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
-import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;

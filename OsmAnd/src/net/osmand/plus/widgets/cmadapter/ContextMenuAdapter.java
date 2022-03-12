@@ -13,6 +13,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.preferences.ContextMenuItemsPreference;
 import net.osmand.plus.widgets.cmadapter.comparator.MenuItemsComparator;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

@@ -5,7 +5,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 
 import net.osmand.plus.R;
-import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 
 public abstract class OnRowItemClick implements ItemClickListener {
 

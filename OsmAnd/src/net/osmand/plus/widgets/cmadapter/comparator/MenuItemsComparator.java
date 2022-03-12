@@ -1,6 +1,6 @@
 package net.osmand.plus.widgets.cmadapter.comparator;
 
-import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 
 import java.util.Comparator;
 

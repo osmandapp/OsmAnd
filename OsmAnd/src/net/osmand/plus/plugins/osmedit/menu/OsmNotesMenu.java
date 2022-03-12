@@ -9,7 +9,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
 import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
-import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;

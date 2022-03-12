@@ -1,4 +1,4 @@
-package net.osmand.plus.widgets.cmadapter;
+package net.osmand.plus.widgets.cmadapter.item;
 
 import androidx.annotation.Nullable;
 

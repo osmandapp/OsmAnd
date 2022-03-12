@@ -1,4 +1,4 @@
-package net.osmand.plus.widgets.cmadapter;
+package net.osmand.plus.widgets.cmadapter.item;
 
 import android.content.Context;
 
@@ -11,6 +11,7 @@ import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.widgets.cmadapter.callback.OnRefreshCallback;
 import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
 import net.osmand.plus.widgets.cmadapter.callback.ItemLongClickListener;
 import net.osmand.plus.widgets.cmadapter.callback.OnIntegerValueChangedListener;

@@ -31,7 +31,7 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.JsonUtils;
 import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
