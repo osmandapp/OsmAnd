@@ -4542,4 +4542,6 @@
     <string name="move_map_to_select_area">Movu la mapon por elekti deziratan areon.</string>
     <string name="shared_string_shape">Formo</string>
     <string name="default_appearance_desc">La implicita koloro, bildsimbolo kaj formo, kiuj aplikiĝos al la punktoj aldonotaj al la grupo.</string>
+    <string name="rendering_attr_showFitnessTrails_description">Montri “vojetojn de sano”</string>
+    <string name="rendering_attr_showFitnessTrails_name">Vojetoj de sportiloj</string>
 </resources>
