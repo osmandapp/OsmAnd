@@ -4542,4 +4542,6 @@
     <string name="exit_import">Essire\?</string>
     <string name="shared_string_reading_file">Leghende s\'archìviu…</string>
     <string name="import_tracks">Importa rastas</string>
+    <string name="rendering_attr_showFitnessTrails_name">Ammustra sas camineras de allenamentu</string>
+    <string name="rendering_attr_showFitnessTrails_description">Ammustra sas camineras de allenamentu</string>
 </resources>
