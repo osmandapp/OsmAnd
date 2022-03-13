@@ -21,7 +21,7 @@ import net.osmand.router.TurnType;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class NextTurnWidget extends TextInfoWidget {
+public class NextTurnWidget extends LeftTextInfoWidget {
 
 	protected boolean horizontalMini;
 

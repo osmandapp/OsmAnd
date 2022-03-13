@@ -41,6 +41,8 @@ import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
+import java.util.List;
+
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -74,7 +76,7 @@ public class StreetNameWidget extends MapWidget {
 		return R.layout.street_name_widget;
 	}
 
-	public StreetNameWidget(@NonNull MapActivity mapActivity, @NonNull TextState textState) {
+	public StreetNameWidget(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
 
 		waypointHelper = app.getWaypointHelper();
@@ -89,7 +91,6 @@ public class StreetNameWidget extends MapWidget {
 		turnDrawable = new TurnDrawable(mapActivity, true);
 
 		updateVisibility(false);
-		updateColors(textState);
 	}
 
 	@Override
@@ -341,6 +342,26 @@ public class StreetNameWidget extends MapWidget {
 			mapActivity.updateStatusBarColor();
 		}
 		return updatedVisibility;
+	}
+
+	@Override
+	public void attachView(@NonNull ViewGroup container, int order, @NonNull List<MapWidget> followingWidgets) {
+		ViewGroup specialContainer = mapActivity.findViewById(R.id.street_name_widget_special_container);
+		boolean specialPosition = specialContainer != null;
+		if (specialPosition) {
+			for (MapWidget widget : followingWidgets) {
+				if (widget instanceof CoordinatesWidget) {
+					specialPosition = false;
+					break;
+				}
+			}
+		}
+		if (specialPosition) {
+			specialContainer.removeAllViews();
+			specialContainer.addView(view);
+		} else {
+			container.addView(view, order);
+		}
 	}
 
 	private static class StreetNameWidgetParams {

@@ -55,7 +55,7 @@ public class CoordinatesWidget extends MapWidget {
 		return R.layout.coordinates_widget;
 	}
 
-	public CoordinatesWidget(@NonNull MapActivity mapActivity, @NonNull TextState textState) {
+	public CoordinatesWidget(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
 
 		locationProvider = app.getLocationProvider();
@@ -71,7 +71,6 @@ public class CoordinatesWidget extends MapWidget {
 
 		view.setOnClickListener(v -> copyCoordinates());
 		updateVisibility(false);
-		updateColors(textState);
 	}
 
 	private void copyCoordinates() {

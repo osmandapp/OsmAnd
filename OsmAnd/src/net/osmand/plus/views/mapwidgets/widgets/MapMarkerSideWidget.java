@@ -20,7 +20,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class MapMarkerSideWidget extends TextInfoWidget {
+public class MapMarkerSideWidget extends RightTextInfoWidget {
 
 	private final MapMarkersHelper mapMarkersHelper;
 

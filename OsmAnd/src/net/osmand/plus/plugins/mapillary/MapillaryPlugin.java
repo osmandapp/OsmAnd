@@ -39,7 +39,8 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapTileLayer;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
@@ -62,6 +63,8 @@ public class MapillaryPlugin extends OsmandPlugin {
 	public static final String TYPE_MAPILLARY_PHOTO = "mapillary-photo";
 	public static final String TYPE_MAPILLARY_CONTRIBUTE = "mapillary-contribute";
 
+	public static final String WIDGET_MAPILLARY = "mapillary";
+
 	private static final String MAPILLARY_PACKAGE_ID = "com.mapillary.app";
 
 	private static final Log LOG = PlatformUtil.getLog(OpenPlaceReviewsPlugin.class);
@@ -80,7 +83,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	private MapillaryVectorLayer vectorLayer;
 	private TextInfoWidget mapillaryControl;
-	private MapWidgetRegInfo mapillaryWidgetRegInfo;
+	private MapWidgetInfo mapillaryWidgetRegInfo;
 
 	public MapillaryPlugin(OsmandApplication app) {
 		super(app);
@@ -242,8 +245,8 @@ public class MapillaryPlugin extends OsmandPlugin {
 	private void registerWidget(@NonNull MapActivity activity) {
 		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
 		mapillaryControl = createMonitoringControl(activity);
-		mapillaryWidgetRegInfo = layer.registerSideWidget(mapillaryControl,
-				R.drawable.ic_action_mapillary, R.string.mapillary, "mapillary", false, 19);
+		mapillaryWidgetRegInfo = layer.registerWidget(WIDGET_MAPILLARY, mapillaryControl,
+				R.drawable.ic_action_mapillary, R.string.mapillary, WidgetsPanel.RIGHT);
 		layer.recreateControls();
 	}
 

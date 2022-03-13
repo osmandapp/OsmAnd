@@ -6,37 +6,36 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class MapWidgetRegInfo implements Comparable<MapWidgetRegInfo> {
+public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 
 	public static final int INVALID_ID = 0;
 
 	public final String key;
-	public final TextInfoWidget widget;
-	public final boolean left;
+	public final MapWidget widget;
+	public final WidgetsPanel widgetPanel;
 	public final int priority;
+
 	@DrawableRes
 	private final int settingsIconId;
 	@StringRes
 	private final int messageId;
 	private final String message;
 	private final WidgetState widgetState;
-	private final Set<ApplicationMode> visibleCollapsible = new LinkedHashSet<>();
-	private final Set<ApplicationMode> visibleModes = new LinkedHashSet<>();
 
-	public MapWidgetRegInfo(@NonNull String key,
-	                        TextInfoWidget widget,
+	public MapWidgetInfo(@NonNull String key,
+	                        @NonNull MapWidget widget,
 	                        @Nullable WidgetState widgetState,
 	                        @DrawableRes int settingsIconId,
 	                        @StringRes int messageId,
 	                        @Nullable String message,
 	                        int priority,
-	                        boolean left) {
+	                        @NonNull WidgetsPanel widgetPanel) {
 		this.key = key;
 		this.widget = widget;
 		this.widgetState = widgetState;
@@ -44,7 +43,7 @@ public class MapWidgetRegInfo implements Comparable<MapWidgetRegInfo> {
 		this.messageId = messageId;
 		this.message = message;
 		this.priority = priority;
-		this.left = left;
+		this.widgetPanel = widgetPanel;
 	}
 
 	@Nullable
@@ -71,29 +70,17 @@ public class MapWidgetRegInfo implements Comparable<MapWidgetRegInfo> {
 				: messageId;
 	}
 
-	public boolean isVisibleCollapsed(ApplicationMode mode) {
-		return visibleCollapsible.contains(mode);
-	}
+	public abstract boolean isVisibleCollapsed(@NonNull ApplicationMode appMode);
 
-	public boolean isVisible(ApplicationMode mode) {
-		return visibleModes.contains(mode);
-	}
+	public abstract boolean isVisible(@NonNull ApplicationMode appMode);
 
-	public void addVisible(ApplicationMode mode) {
-		visibleModes.add(mode);
-	}
+	public abstract void addVisible(@NonNull ApplicationMode appMode);
 
-	public void addVisibleCollapsible(ApplicationMode mode) {
-		visibleCollapsible.add(mode);
-	}
+	public abstract void addVisibleCollapsible(@NonNull ApplicationMode appMode);
 
-	public void removeVisible(ApplicationMode mode) {
-		visibleModes.remove(mode);
-	}
+	public abstract void removeVisible(@NonNull ApplicationMode appMode);
 
-	public void removeVisibleCollapsible(ApplicationMode mode) {
-		visibleCollapsible.remove(mode);
-	}
+	public abstract void removeVisibleCollapsible(@NonNull ApplicationMode appMode);
 
 	@Override
 	public int hashCode() {
@@ -110,7 +97,7 @@ public class MapWidgetRegInfo implements Comparable<MapWidgetRegInfo> {
 		} else if (getClass() != obj.getClass()) {
 			return false;
 		}
-		MapWidgetRegInfo other = (MapWidgetRegInfo) obj;
+		MapWidgetInfo other = (MapWidgetInfo) obj;
 		if (getMessageId() == 0 && other.getMessageId() == 0) {
 			return key.equals(other.key);
 		}
@@ -118,7 +105,7 @@ public class MapWidgetRegInfo implements Comparable<MapWidgetRegInfo> {
 	}
 
 	@Override
-	public int compareTo(@NonNull MapWidgetRegInfo another) {
+	public int compareTo(@NonNull MapWidgetInfo another) {
 		if (getMessageId() == 0 && another.getMessageId() == 0) {
 			if (key.equals(another.key)) {
 				return 0;

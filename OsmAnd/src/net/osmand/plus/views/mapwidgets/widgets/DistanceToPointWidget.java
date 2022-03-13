@@ -13,7 +13,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public abstract class DistanceToPointWidget extends TextInfoWidget {
+public abstract class DistanceToPointWidget extends RightTextInfoWidget {
 
 	private final OsmandMapTileView view;
 	private float[] calculations = new float[1];

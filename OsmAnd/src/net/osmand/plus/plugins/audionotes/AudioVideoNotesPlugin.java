@@ -61,6 +61,8 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 import net.osmand.render.RenderingRuleProperty;
@@ -116,6 +118,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private static final int TAKE_AUDIO_NOTE_ITEM_ORDER = 4100;
 	private static final int TAKE_VIDEO_NOTE_ITEM_ORDER = 4300;
 	private static final int TAKE_PHOTO_NOTE_ITEM_ORDER = 4500;
+
+	public static final String WIDGET_AUDIO_VIDEO_NOTES = "audionotes";
 
 	private TextInfoWidget recordControl;
 
@@ -746,7 +750,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private void registerWidget(@NonNull MapActivity mapActivity) {
 		MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {
-			recordControl = new TextInfoWidget(mapActivity) {
+			recordControl = new RightTextInfoWidget(mapActivity) {
 
 				private Integer cachedAction;
 				private Boolean cachedRecording;
@@ -790,7 +794,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					}
 				}
 			});
-			mapInfoLayer.registerSideWidget(recordControl, new AudioVideoNotesWidgetState(app, AV_DEFAULT_ACTION), "audionotes", false, 32);
+			WidgetState widgetState = new AudioVideoNotesWidgetState(app, AV_DEFAULT_ACTION);
+			mapInfoLayer.registerWidget(WIDGET_AUDIO_VIDEO_NOTES, recordControl, widgetState, WidgetsPanel.RIGHT);
 			mapInfoLayer.recreateControls();
 		}
 	}

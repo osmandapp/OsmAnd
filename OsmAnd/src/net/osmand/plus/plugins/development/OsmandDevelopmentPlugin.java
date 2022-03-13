@@ -23,12 +23,15 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenTyp
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_DEV;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
+
+	public static final String WIDGET_FPS = "fps";
 
 	public OsmandDevelopmentPlugin(OsmandApplication app) {
 		super(app);
@@ -96,7 +99,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		}
 	}
 
-	public static class FPSTextInfoWidget extends TextInfoWidget {
+	public static class FPSTextInfoWidget extends RightTextInfoWidget {
 
 		private final OsmandMapTileView mapView;
 
@@ -119,8 +122,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		if (mapInfoLayer != null && mapInfoLayer.getSideWidget(FPSTextInfoWidget.class) == null) {
 			FPSTextInfoWidget fps = new FPSTextInfoWidget(mapActivity);
 			fps.setIcons(R.drawable.widget_fps_day, R.drawable.widget_fps_night);
-			mapInfoLayer.registerSideWidget(fps, R.drawable.ic_action_fps,
-					R.string.map_widget_fps_info, "fps", false, 50);
+			mapInfoLayer.registerWidget(WIDGET_FPS, fps, R.drawable.ic_action_fps,
+					R.string.map_widget_fps_info, WidgetsPanel.RIGHT);
 			mapInfoLayer.recreateControls();
 		}
 	}

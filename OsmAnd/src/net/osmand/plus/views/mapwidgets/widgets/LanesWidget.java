@@ -1,5 +1,6 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,7 +44,7 @@ public class LanesWidget extends MapWidget {
 	private int cachedDist;
 	private int shadowRadius;
 
-	public LanesWidget(@NonNull MapActivity mapActivity, @NonNull TextState textState) {
+	public LanesWidget(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
 
 		routingHelper = mapActivity.getMyApplication().getRoutingHelper();
@@ -55,7 +56,6 @@ public class LanesWidget extends MapWidget {
 		lanesDrawable = new LanesDrawable(mapActivity, mapActivity.getMapView().getScaleCoefficient());
 		lanesImage.setImageDrawable(lanesDrawable);
 
-		updateColors(textState);
 		updateVisibility(false);
 	}
 
@@ -162,5 +162,23 @@ public class LanesWidget extends MapWidget {
 		shadowRadius = textState.textShadowRadius / 2;
 		updateTextColor(lanesText, lanesShadowText, textState.textColor,
 				textState.textShadowColor, textState.textBold, shadowRadius);
+	}
+
+	@Override
+	public void attachView(@NonNull ViewGroup container, int order, @NonNull List<MapWidget> followingWidgets) {
+		boolean specialPosition = true;
+		for (MapWidget widget : followingWidgets) {
+			if (widget instanceof CoordinatesWidget || widget instanceof StreetNameWidget) {
+				specialPosition = false;
+				break;
+			}
+		}
+		if (specialPosition) {
+			ViewGroup specialContainer = mapActivity.findViewById(R.id.lanes_widget_special_position);
+			specialContainer.removeAllViews();
+			specialContainer.addView(view);
+		} else {
+			container.addView(view, order);
+		}
 	}
 }

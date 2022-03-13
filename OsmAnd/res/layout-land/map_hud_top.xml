@@ -6,7 +6,12 @@
 	android:layout_height="match_parent"
 	android:orientation="vertical">
 
-	<!-- Map markers -->
+	<!-- Container for top widgets: Coordinates, Map markers bar, Street name, Lanes -->
+	<LinearLayout
+		android:id="@+id/top_widgets_panel"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical" />
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -56,7 +61,7 @@
 
 			<!-- Street name widget (default position) -->
 			<FrameLayout
-				android:id="@+id/street_name_widget_default_container"
+				android:id="@+id/street_name_widget_special_container"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content" />
 
@@ -258,7 +263,7 @@
 
 				<!-- Lanes widget (default position) -->
 				<FrameLayout
-					android:id="@+id/lanes_widget_default_position"
+					android:id="@+id/lanes_widget_special_position"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_gravity="center_horizontal|top"

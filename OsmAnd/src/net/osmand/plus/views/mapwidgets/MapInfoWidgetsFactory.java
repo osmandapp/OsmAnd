@@ -23,6 +23,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.MapUtils;
 
@@ -59,7 +60,7 @@ public class MapInfoWidgetsFactory {
 	}
 
 	public TextInfoWidget createAltitudeControl(@NonNull MapActivity mapActivity) {
-		TextInfoWidget altitudeControl = new TextInfoWidget(mapActivity) {
+		TextInfoWidget altitudeControl = new RightTextInfoWidget(mapActivity) {
 			private int cachedAlt = 0;
 
 			@Override
@@ -94,7 +95,7 @@ public class MapInfoWidgetsFactory {
 	}
 
 	public TextInfoWidget createGPSInfoControl(@NonNull MapActivity mapActivity) {
-		TextInfoWidget gpsInfoControl = new TextInfoWidget(mapActivity) {
+		TextInfoWidget gpsInfoControl = new RightTextInfoWidget(mapActivity) {
 			private int usedSatellites = -1;
 			private int foundSatellites = -1;
 
@@ -118,7 +119,7 @@ public class MapInfoWidgetsFactory {
 
 	public TextInfoWidget createRadiusRulerControl(@NonNull MapActivity mapActivity) {
 		final String title = "—";
-		final TextInfoWidget radiusRulerControl = new TextInfoWidget(mapActivity) {
+		final TextInfoWidget radiusRulerControl = new RightTextInfoWidget(mapActivity) {
 
 			@Override
 			public void updateInfo(@Nullable DrawSettings drawSettings) {

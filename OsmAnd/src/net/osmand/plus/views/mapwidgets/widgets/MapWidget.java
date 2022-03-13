@@ -3,6 +3,7 @@ package net.osmand.plus.views.mapwidgets.widgets;
 import android.graphics.Paint.Style;
 import android.graphics.Typeface;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import net.osmand.plus.OsmandApplication;
@@ -12,6 +13,8 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+
+import java.util.List;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.LayoutRes;
@@ -45,6 +48,10 @@ public abstract class MapWidget {
 	@NonNull
 	public View getView() {
 		return view;
+	}
+
+	public void attachView(@NonNull ViewGroup container, int order, @NonNull List<MapWidget> followingWidgets) {
+		container.addView(view);
 	}
 
 	public boolean isNightMode() {

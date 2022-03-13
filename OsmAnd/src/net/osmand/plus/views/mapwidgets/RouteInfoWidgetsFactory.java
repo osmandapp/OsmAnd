@@ -29,6 +29,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.plus.views.mapwidgets.widgets.DistanceToPointWidget;
 import net.osmand.plus.views.mapwidgets.widgets.NextTurnWidget;
+import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.router.TurnType;
@@ -173,7 +174,7 @@ public class RouteInfoWidgetsFactory {
 				? settings.SHOW_INTERMEDIATE_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME
 				: settings.SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME;
 
-		final TextInfoWidget leftTimeControl = new TextInfoWidget(mapActivity) {
+		final TextInfoWidget leftTimeControl = new RightTextInfoWidget(mapActivity) {
 			private long cachedLeftTime = 0;
 			
 			@Override
@@ -234,7 +235,7 @@ public class RouteInfoWidgetsFactory {
 	}
 
 	public TextInfoWidget createPlainTimeControl(@NonNull MapActivity mapActivity) {
-		TextInfoWidget plainTimeControl = new TextInfoWidget(mapActivity) {
+		TextInfoWidget plainTimeControl = new RightTextInfoWidget(mapActivity) {
 			private long cachedLeftTime = 0;
 			
 			@Override
@@ -261,7 +262,7 @@ public class RouteInfoWidgetsFactory {
 		int batteryN = R.drawable.widget_battery_night;
 		int batteryCharging = R.drawable.widget_battery_charging_day;
 		int batteryChargingN = R.drawable.widget_battery_charging_night;
-		TextInfoWidget batteryControl = new TextInfoWidget(mapActivity) {
+		TextInfoWidget batteryControl = new RightTextInfoWidget(mapActivity) {
 			private long cachedLeftTime = 0;
 
 			@Override
@@ -293,7 +294,7 @@ public class RouteInfoWidgetsFactory {
 
 	public TextInfoWidget createMaxSpeedControl(@NonNull MapActivity mapActivity) {
 		MapViewTrackingUtilities trackingUtilities = mapActivity.getMapViewTrackingUtilities();
-		TextInfoWidget speedControl = new TextInfoWidget(mapActivity) {
+		TextInfoWidget speedControl = new RightTextInfoWidget(mapActivity) {
 			private float cachedSpeed = 0;
 
 			@Override
@@ -339,7 +340,7 @@ public class RouteInfoWidgetsFactory {
 	}
 
 	public TextInfoWidget createSpeedControl(@NonNull MapActivity mapActivity) {
-		TextInfoWidget speedControl = new TextInfoWidget(mapActivity) {
+		TextInfoWidget speedControl = new RightTextInfoWidget(mapActivity) {
 			private float cachedSpeed = 0;
 
 			@Override
@@ -435,7 +436,7 @@ public class RouteInfoWidgetsFactory {
 		int relativeBearingNightResId = R.drawable.widget_relative_bearing_night;
 		OsmandPreference<Boolean> showRelativeBearing = settings.SHOW_RELATIVE_BEARING_OTHERWISE_REGULAR_BEARING;
 
-		TextInfoWidget bearingControl = new TextInfoWidget(mapActivity) {
+		TextInfoWidget bearingControl = new RightTextInfoWidget(mapActivity) {
 			private int cachedDegrees;
 			private float MIN_SPEED_FOR_HEADING = 1f;
 

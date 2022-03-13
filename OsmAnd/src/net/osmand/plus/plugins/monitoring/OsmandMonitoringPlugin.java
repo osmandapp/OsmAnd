@@ -2,27 +2,16 @@ package net.osmand.plus.plugins.monitoring;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_MONITORING;
-import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface.OnClickListener;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-
-import com.google.android.material.slider.Slider;
 
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
@@ -45,11 +34,11 @@ import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.track.helpers.SavingTrackHelper.SaveGpxResult;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
@@ -66,6 +55,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	private static final Log LOG = PlatformUtil.getLog(OsmandMonitoringPlugin.class);
 	public static final String OSMAND_SAVE_SERVICE_ACTION = "OSMAND_SAVE_SERVICE_ACTION";
 	public static final int REQUEST_LOCATION_PERMISSION_FOR_GPX_RECORDING = 208;
+
+	public static final String WIDGET_TRIP_RECORDING = "monitoring";
 
 	private final OsmandSettings settings;
 	private final LiveMonitoringHelper liveMonitoringHelper;
@@ -156,8 +147,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
 		monitoringControl = createMonitoringControl(activity);
 
-		layer.registerSideWidget(monitoringControl,
-				R.drawable.ic_action_play_dark, R.string.map_widget_monitoring, "monitoring", false, 30);
+		layer.registerWidget(WIDGET_TRIP_RECORDING, monitoringControl, R.drawable.ic_action_play_dark,
+				R.string.map_widget_monitoring, WidgetsPanel.RIGHT);
 		layer.recreateControls();
 	}
 
@@ -197,7 +188,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	 * creates (if it wasn't created previously) the control to be added on a MapInfoLayer that shows a monitoring state (recorded/stopped)
 	 */
 	private TextInfoWidget createMonitoringControl(@NonNull MapActivity mapActivity) {
-		monitoringControl = new TextInfoWidget(mapActivity) {
+		monitoringControl = new RightTextInfoWidget(mapActivity) {
 			long lastUpdateTime;
 
 			@Override

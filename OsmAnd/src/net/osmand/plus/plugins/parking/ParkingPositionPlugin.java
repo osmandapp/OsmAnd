@@ -46,6 +46,8 @@ import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
 import java.util.ArrayList;
@@ -60,13 +62,15 @@ import java.util.List;
  */
 public class ParkingPositionPlugin extends OsmandPlugin {
 
-	public static final String PARKING_PLUGIN_COMPONENT = "net.osmand.parkingPlugin"; //$NON-NLS-1$
-	public static final String PARKING_POINT_LAT = "parking_point_lat"; //$NON-NLS-1$
-	public static final String PARKING_POINT_LON = "parking_point_lon"; //$NON-NLS-1$
-	public static final String PARKING_TYPE = "parking_type"; //$NON-NLS-1$
-	public static final String PARKING_TIME = "parking_limit_time"; //$//$NON-NLS-1$
-	public static final String PARKING_START_TIME = "parking_time"; //$//$NON-NLS-1$
-	public static final String PARKING_EVENT_ADDED = "parking_event_added"; //$//$NON-NLS-1$
+	public static final String PARKING_PLUGIN_COMPONENT = "net.osmand.parkingPlugin";
+	public static final String PARKING_POINT_LAT = "parking_point_lat";
+	public static final String PARKING_POINT_LON = "parking_point_lon";
+	public static final String PARKING_TYPE = "parking_type";
+	public static final String PARKING_TIME = "parking_limit_time";
+	public static final String PARKING_START_TIME = "parking_time";
+	public static final String PARKING_EVENT_ADDED = "parking_event_added";
+
+	public static final String WIDGET_PARKING = "parking";
 
 	// Constants for determining the order of items in the additional actions context menu
 	private static final int MARK_AS_PARKING_POS_ITEM_ORDER = 10500;
@@ -231,8 +235,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {
 			parkingPlaceControl = createParkingPlaceInfoControl(activity);
-			mapInfoLayer.registerSideWidget(parkingPlaceControl,
-					R.drawable.ic_action_parking_dark,  R.string.map_widget_parking, "parking", false, 10);
+			mapInfoLayer.registerWidget(WIDGET_PARKING, parkingPlaceControl,
+					R.drawable.ic_action_parking_dark,  R.string.map_widget_parking, WidgetsPanel.RIGHT);
 			mapInfoLayer.recreateControls();
 		}
 	}
@@ -454,7 +458,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	 * and the location of the parked car
 	 */
 	private TextInfoWidget createParkingPlaceInfoControl(@NonNull MapActivity mapActivity) {
-		TextInfoWidget parkingPlaceControl = new TextInfoWidget(mapActivity) {
+		TextInfoWidget parkingPlaceControl = new RightTextInfoWidget(mapActivity) {
 			private float[] calculations = new float[1];
 			private int cachedMeters = 0;			
 			

@@ -21,6 +21,8 @@ import net.osmand.plus.views.layers.AidlMapLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
@@ -180,14 +182,14 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 				int iconId = AndroidUtils.getDrawableId(mapActivity.getMyApplication(), widget.getMenuIconName());
 				int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
 				String widgetKey = "aidl_widget_" + widget.getId();
-				layer.registerSideWidget(control, menuIconId, widget.getMenuTitle(), widgetKey, false, widget.getOrder());
+				layer.registerWidget(widgetKey, control, menuIconId, widget.getMenuTitle(), WidgetsPanel.RIGHT, widget.getOrder());
 			}
 		}
 	}
 
 	@NonNull
 	TextInfoWidget createWidgetControl(@NonNull MapActivity mapActivity, String widgetId) {
-		TextInfoWidget control = new TextInfoWidget(mapActivity) {
+		TextInfoWidget control = new RightTextInfoWidget(mapActivity) {
 
 			private boolean init = true;
 			private String cachedTxt;

@@ -7,7 +7,6 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -231,7 +230,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			app.getPoiFilters().loadSelectedPoiFilters();
-			mapActivity.getMapLayers().getMapWidgetRegistry().updateVisibleWidgets();
+			mapActivity.getMapLayers().getMapWidgetRegistry().updateVisibleSideWidgets();
 			mapActivity.updateApplicationModeSettings();
 			updateToolbar();
 			updateAllSettings();
