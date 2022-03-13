@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -37,7 +38,7 @@ public class NetworkRouteSelector {
 	private static final int MAX_ITERATIONS = 16000;
 	// works only if road in same tile
 	private static final double MAX_RADIUS_HOLE = 30;
-	private static final double CONNECT_POINTS_DISTANCE = 20;
+	private static final double CONNECT_POINTS_DISTANCE = 100;
 
 	
 	private final NetworkRouteContext rCtx;
@@ -46,14 +47,13 @@ public class NetworkRouteSelector {
 	// TODO 1. FIX & implement work with routing tags
 	// TODO TEST 2.1 growth in the middle - Test 1 
 	// TODO      2.2 roundabout 
-	// TODO      2.3 step back technique 
 	// TEST:
 	// 1. Round routes
-	// 2. Loop & middle & roundabout: https://www.openstreetmap.org/way/23246638#map=19/47.98180/11.28338
+	// 2. Loop & middle & roundabout: https://www.openstreetmap.org/way/23246638#map=19/47.98180/11.28338 [5]
 	//    Lots deviations https://www.openstreetmap.org/relation/1075081#map=8/47.656/10.456
-	// 3. https://www.openstreetmap.org/relation/1200009#map=8/60.592/10.940
-	// 4. + https://www.openstreetmap.org/relation/138401#map=19/51.06795/7.37955
-	// 5. + https://www.openstreetmap.org/relation/145490#map=16/51.0607/7.3596
+	// 3. https://www.openstreetmap.org/relation/1200009#map=8/60.592/10.940 [25]
+	// 4. https://www.openstreetmap.org/relation/138401#map=19/51.06795/7.37955 [6] -> 1
+	// 5. https://www.openstreetmap.org/relation/145490#map=16/51.0607/7.3596 [2] -> 1
 	
 	public NetworkRouteSelector(BinaryMapIndexReader[] files, NetworkRouteSelectorFilter filter) {
 		this(files, filter, false);
@@ -92,7 +92,6 @@ public class NetworkRouteSelector {
 	}
 	
 	public Map<RouteKey, GPXFile> getRoutes(QuadRect bBox) throws IOException {
-		// TODO
 		throw new UnsupportedOperationException();
 	}
 	
@@ -128,6 +127,32 @@ public class NetworkRouteSelector {
 		}
 	}
 	
+	private List<NetworkRouteSegmentChain> getByPoint(Map<Long, List<NetworkRouteSegmentChain>> chains, long pnt, int radius) {
+		List<NetworkRouteSegmentChain> list = null;
+		if (radius == 0) {
+			list = chains.get(pnt);
+		} else {
+			int x = NetworkRouteContext.getXFromLong(pnt);
+			int y = NetworkRouteContext.getYFromLong(pnt);
+			Iterator<Entry<Long, List<NetworkRouteSegmentChain>>> it = chains.entrySet().iterator();
+			while (it.hasNext()) {
+				Entry<Long, List<NetworkRouteSegmentChain>> e = it.next();
+				int x2 = NetworkRouteContext.getXFromLong(e.getKey());
+				int y2 = NetworkRouteContext.getYFromLong(e.getKey());
+				if (MapUtils.squareRootDist31(x, y, x2, y2) < radius) {
+					if (list == null) {
+						list = new ArrayList<NetworkRouteSelector.NetworkRouteSegmentChain>();
+					}
+					list.addAll(e.getValue());
+				}
+			}
+		}
+		if (list == null) {
+			return Collections.emptyList();
+		}
+		return list;
+	}
+	
 	private void connectAlgorithm(NetworkRouteSegment segment, Map<RouteKey, GPXFile> res) throws IOException {
 		RouteKey rkey = segment.routeKey;
 		List<NetworkRouteSegment> loaded = new ArrayList<>();
@@ -137,12 +162,8 @@ public class NetworkRouteSelector {
 		Map<Long, List<NetworkRouteSegmentChain>> chains = createChainStructure(loaded);
 		Map<Long, List<NetworkRouteSegmentChain>> endChains = prepareEndChain(chains);
 		// Merged
-		int merged = 1;
-		while (merged > 0) {
-			int rs = reverseToConnectMore(chains, endChains);
-			merged = connectSimpleStraight(chains, endChains);
-			System.out.println(String.format("Simple merged: %d, reversed: %d", merged, rs));
-		}
+		connectSimpleMerge(chains, endChains, 0);
+		connectSimpleMerge(chains, endChains, (int) CONNECT_POINTS_DISTANCE);
 		
 		List<NetworkRouteSegment> lst = flattenChainStructure(chains);
 		GPXFile fl = createGpxFile(lst);
@@ -150,9 +171,19 @@ public class NetworkRouteSelector {
 		System.out.println("Segments size: " + fl.tracks.get(0).segments.size());
 		debug("FINISH " + lst.size(), null, segment);
 	}
+
+	private void connectSimpleMerge(Map<Long, List<NetworkRouteSegmentChain>> chains,
+			Map<Long, List<NetworkRouteSegmentChain>> endChains, int rad) {
+		int merged = 1;
+		while (merged > 0) {
+			int rs = reverseToConnectMore(chains, endChains, rad);
+			merged = connectSimpleStraight(chains, endChains, rad);
+			System.out.println(String.format("Simple merged: %d, reversed: %d (radius %d)", merged, rs, rad));
+		}
+	}
 	
 	
-	private int reverseToConnectMore(Map<Long, List<NetworkRouteSegmentChain>> chains, Map<Long, List<NetworkRouteSegmentChain>> endChains) {
+	private int reverseToConnectMore(Map<Long, List<NetworkRouteSegmentChain>> chains, Map<Long, List<NetworkRouteSegmentChain>> endChains, int rad) {
 		int reversed = 0;
 		List<Long> longPoints = new ArrayList<>(chains.keySet());
 		for (Long startPnt : longPoints) {
@@ -161,10 +192,10 @@ public class NetworkRouteSelector {
 				NetworkRouteSegmentChain it = vls.get(i);
 				long pnt = NetworkRouteContext.convertPointToLong(it.getEndPointX(), it.getEndPointY());
 				// 1. reverse if 2 segments start from same point
-				boolean reverse = (!chains.containsKey(pnt) && i == 1);
+				boolean noStartFromEnd = getByPoint(chains, pnt, rad).size() == 0;
+				boolean reverse = (noStartFromEnd && i == 1);
 				// 2. reverse 2 segments ends at same point
-				List<NetworkRouteSegmentChain> ends = endChains.get(pnt);
-				reverse |= i == 0 && ends != null && ends.size() > 1 && !chains.containsKey(pnt);
+				reverse |= i == 0 && getByPoint(endChains, pnt, rad).size() > 1 && noStartFromEnd;
 				if (reverse) {
 					List<NetworkRouteSegment> lst = new ArrayList<>();
 					lst.add(0, it.start.inverse());
@@ -190,7 +221,8 @@ public class NetworkRouteSelector {
 		return reversed;
 	}
 
-	private int connectSimpleStraight(Map<Long, List<NetworkRouteSegmentChain>> chains, Map<Long, List<NetworkRouteSegmentChain>> endChains) {
+	private int connectSimpleStraight(Map<Long, List<NetworkRouteSegmentChain>> chains, 
+			Map<Long, List<NetworkRouteSegmentChain>> endChains, int rad) {
 		int merged = 0;
 		boolean changed = true;
 		while (changed) {
@@ -198,18 +230,18 @@ public class NetworkRouteSelector {
 			mainLoop: for (List<NetworkRouteSegmentChain> lst : chains.values()) {
 				for(NetworkRouteSegmentChain it: lst) {
 					long pnt = NetworkRouteContext.convertPointToLong(it.getEndPointX(), it.getEndPointY());
-					List<NetworkRouteSegmentChain> connectNextLst = chains.get(pnt);
-					List<NetworkRouteSegmentChain> connectToEndLst = endChains.get(pnt); // equal to c
+					List<NetworkRouteSegmentChain> connectNextLst = getByPoint(chains, pnt, rad);
+					List<NetworkRouteSegmentChain> connectToEndLst = getByPoint(endChains, pnt, rad); // equal to c
 					// no alternative join
-					if (connectNextLst != null && connectNextLst.size() == 1 && connectToEndLst != null
-							&& connectToEndLst.size() == 1) {
+					if (connectNextLst.size() == 1 && connectToEndLst.size() == 1) {
 						NetworkRouteSegmentChain connectNext = connectNextLst.get(0);
 						if (connectNext == it) {
 							continue;
 						}
 						it.addChain(connectNext);
 						long newEnd = NetworkRouteContext.convertPointToLong(it.getEndPointX(), it.getEndPointY());
-						remove(chains, pnt, connectNext);
+						remove(chains, NetworkRouteContext.convertPointToLong(connectNext.start.getStartPointX(), 
+								connectNext.start.getStartPointY()), connectNext);
 						remove(endChains, newEnd, connectNext);
 						remove(endChains, pnt, it);
 						add(endChains, newEnd, it);
