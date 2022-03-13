@@ -3694,7 +3694,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="save_global_track_interval_descr">Zehaztu lorratz orokorreko grabazio erregistroaren tartea (mapan \'Bidaia grabaketa\' trepetaren bidez aktibatuta dago).</string>
     <string name="open_saved_track">Ireki gordetako lorratza</string>
     <string name="gpx_upload_trackable_visibility_descr">\"Jarraigarria\" esan nahi du lorratza ez dela inolako zerrenda publikoetan agertzen, baina prozesatutako puntuak bere denbora markekin (zurekin zuzenean lotu ezin direnak) GPS API publikoaren deskargen bidez agertzen dira.</string>
-    <string name="app_mode_wheelchair_forward"/>
+    <string name="app_mode_wheelchair_forward">Gurpil-aulkia aurrera</string>
     <string name="icon_group_amenity">Prestazioa</string>
     <string name="login_open_street_map">OpenStreetMap-eko saio hasiera</string>
     <string name="login_open_street_map_org">OpenStreetMap.org-eko saio hasiera</string>
@@ -4085,7 +4085,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="service_is_not_available_please_try_later">Zerbitzua ez dago erabilgarri, mesedez saiatu geroago</string>
     <string name="shared_string_files">Artxibategiak</string>
     <string name="travel_route_types">Ibilbide motak</string>
-    <string name="shared_string_statistics">Estatistikak</string>
+    <string name="shared_string_statistics">Estatistika</string>
     <string name="gps_filter_smoothing">Leuntzea</string>
     <string name="save_as_copy">Gorde kopia gisa</string>
     <string name="exit_without_saving_warning">Irten datuak gorde gabe\?</string>
@@ -4436,4 +4436,109 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="track_recording_stop_without_saving">Gelditu gorde gabe</string>
     <string name="restart">Berrabiarazi</string>
     <string name="no_purchases">Ez duzu erosketarik</string>
+    <string name="shared_string_folders">Karpetak</string>
+    <string name="online_routing_engines">Lineako bideratze-motorrak</string>
+    <string name="announcement_time_off_route">Ibilbidetik kanpo</string>
+    <string name="announcement_time_title">Iragarki ordua</string>
+    <string name="select_folder">Hautatu karpeta</string>
+    <string name="online_routing_engine">Lineako bideratze motorra</string>
+    <string name="analyze_by_intervals">Zatitutako tarteak aztertzea</string>
+    <string name="shared_string_empty">Hutsa</string>
+    <string name="snap_to_road_descr">Uneko posizioaren ikonoa uneko nabigazio-ibilbidera egokituko da</string>
+    <string name="routing_attr_short_way_description">Ibilbide laburragoa optimizatua (energia aurreztea)</string>
+    <string name="temporary_conditional_routing_descr">Erabili mapan orain aktibo dauden errepide murrizketak</string>
+    <string name="activity_type_motorbike_name">Motorra</string>
+    <string name="activity_type_offroad_name">Lur-orotakoa</string>
+    <string name="activity_type_cycling_name">Txirringa</string>
+    <string name="hillshade_slope_contour_lines">Itzala / Malda / Sestra-lerroak</string>
+    <string name="toast_select_edits_for_upload">Hautatu aldaketak kargatzeko</string>
+    <string name="uploaded_count">%1$d/%2$d kargatu da</string>
+    <string name="segments_count">%1$d segmentua</string>
+    <string name="select_segments_description">%1$s segmentu bat baino gehiago ditu, nabigaziorako zatia zehaztu behar duzu.</string>
+    <string name="upload_photo">Kargatzen</string>
+    <string name="copy_to_map_favorites">Kopiatu gogokoetan</string>
+    <string name="copy_to_map_markers">Kopiatu mapako markatzaileetan</string>
+    <string name="delete_waypoints">Ezabatu bide-puntuak</string>
+    <string name="context_menu_edit_descr">Editatu deskribapena</string>
+    <string name="context_menu_read_full">Irakurri osorik</string>
+    <string name="message_name_is_already_exists">Izena jada existitzen da</string>
+    <string name="message_server_error">Zerbitzariaren errorea: %1$s</string>
+    <string name="routing_engine_vehicle_type_racingbike">Errepideko txirringa</string>
+    <string name="routing_engine_vehicle_type_scooter">Motoa</string>
+    <string name="announcement_time_prepare">Prestatu</string>
+    <string name="announcement_time_prepare_long">Luze prestatu</string>
+    <string name="shared_string_sec">seg</string>
+    <string name="change_folder">Aldatu karpeta</string>
+    <string name="rename_track">Berrizendatu arrastoa</string>
+    <string name="upload_to_openstreetmap">Kargatu OpenStreetMapen</string>
+    <string name="edit_online_routing_engine">Editatu lineako bideratze motorra</string>
+    <string name="add_online_routing_engine">Gehitu lineako bideratze motorra</string>
+    <string name="routing_attr_allow_intermittent_name">Onartu aldizkako ur-ibilguak</string>
+    <string name="routing_attr_allow_streams_name">Onartu errekak eta hustubideak</string>
+    <string name="routing_attr_prefer_hiking_routes_name">Hobetsi mendiko ibilbideak</string>
+    <string name="shared_string_last_used">Erabilitako azkena</string>
+    <string name="profile_by_default_description">Hautatu aplikazioa abiatzean erabiliko den profila.</string>
+    <string name="use_dev_url_descr">Erabili dev.openstreetmap.org openstreetmap.org erabili beharrean OSM Note / POI / GPX-en karga probatzeko.</string>
+    <string name="navigate_point_format_swiss_grid">Suitzako sarea (CH1903)</string>
+    <string name="navigate_point_format_swiss_grid_plus">Suitzako sarea (CH1903+)</string>
+    <string name="lang_de_casual">Alemana (kasuala)</string>
+    <string name="upload_photo_completed">Kargatzea osatu da</string>
+    <string name="announcement_time_approach">Hurbilketa</string>
+    <string name="announcement_time_passing">Pasatzea</string>
+    <string name="activity_type_riding_name">Zaldiketa</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Hobetsi mendiko ibilbideak</string>
+    <string name="routing_attr_allow_intermittent_description">Onartu aldizkako ur-ibilguak</string>
+    <string name="routing_engine_vehicle_type_cycling_road">Errepideko txirrindularitza</string>
+    <string name="activity_type_hiking_name">Mendi-ibilaldia</string>
+    <string name="activity_type_mountainbike_name">Mendiko txirringa</string>
+    <string name="activity_type_walking_name">Oinezkoa</string>
+    <string name="activity_type_snowmobile_name">Elur-motorra</string>
+    <string name="activity_type_running_name">Korrikalaria</string>
+    <string name="opr_use_dev_url">Erabili test.openplacereviews.org</string>
+    <string name="activity_type_water_name">Ura</string>
+    <string name="login_open_place_reviews">Hasi saioa OpenPlaceReviews-en</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="open_place_reviews_plugin_description">Bidali leku publikoei buruzko argazkiak, iritziak eta estekak, hala nola jatetxe, hotel, museo eta bide-puntuei buruzko datu ireki gisa https://openplacereviews.org/data/.
+\n
+\nIrakurri gehiago https://openplacereviews.org helbidean</string>
+    <string name="select_segments">Hautatu segmentuak</string>
+    <string name="uploading_count">%1$d/%2$d kargatzen</string>
+    <string name="activity_type_winter_name">Negua</string>
+    <string name="announcement_time_descr">Ahots-abisu desberdinen iragarpen-denbora gonbita motaren, uneko nabigazio-abiaduraren eta nabigazio-abiadura lehenetsiaren araberakoa da.</string>
+    <string name="shared_string_turn">Bira</string>
+    <string name="announcement_time_arrive">Helmugara iritsi zara</string>
+    <string name="profile_type_user_string">Erabiltzailearen profila</string>
+    <string name="activity_type_racing_name">Lasterketa</string>
+    <string name="profile_type_osmand_string">OsmAnd profila</string>
+    <string name="reverse_all_points">Alderantzikatu puntu guztiak</string>
+    <string name="release_3_9">• Datu guztiak esportatzeko eta inportatzeko aukera gehitu da ezarpenak, baliabideak, nire tokiak barne
+\n
+\n • Ibilbidea planifikatu: ibilbidea duten segmentuen grafikoak eta ibilbideen segmentu anitz sortzeko eta editatzeko gaitasuna gehitu da
+\n
+\n • OpenStreetMap-erako OAuth autentifikazio-metodoa gehitu da, OSM elkarrizketa-koadroen UI hobetua
+\n
+\n • Onartu kolore pertsonalizatuak gogokoentzat eta jarraitu bide-puntuak
+\n
+\n</string>
+    <string name="voice_prompts_timetable">Ahozko abisuen denborak</string>
+    <string name="routing_engine_vehicle_type_cycling_regular">Txirrindularitza arrunta</string>
+    <string name="delete_online_routing_engine">Lineako bideratze-motor hau kendu nahi duzu\?</string>
+    <string name="routing_engine_vehicle_type_mtb">Mendiko txirringa</string>
+    <string name="routing_engine_vehicle_type_truck">Kamioia</string>
+    <string name="routing_engine_vehicle_type_small_truck">Kamioi txikia</string>
+    <string name="show_track_on_map">Erakutsi arrastoa mapan</string>
+    <string name="start_recording">Hasi grabatzen</string>
+    <string name="routing_engine_vehicle_type_cycling_mountain">Mendiko txirrindularitza</string>
+    <string name="announcement_time_intervals">Denbora eta distantzia tarteak</string>
+    <string name="select_folder_descr">Hautatu karpeta edo gehitu berri bat</string>
+    <string name="routing_engine_vehicle_type_cycling_electric">Txirringa elektrikoa</string>
+    <string name="routing_engine_vehicle_type_walking">Oinezkoa</string>
+    <string name="routing_engine_vehicle_type_hiking">Mendiko ibilaldiak</string>
+    <string name="routing_engine_vehicle_type_wheelchair">Gurpil-aulkia</string>
+    <string name="routing_attr_allow_streams_description">Onartu errekak eta hustubideak</string>
+    <string name="cannot_upload_image">Ezin da irudia kargatu, saiatu berriro geroago</string>
+    <string name="activity_type_car_name">Autoa</string>
+    <string name="routing_attr_driving_style_description">Hautatu gidatzeko helburua ibilbide laburragoa, azkarragoa edo seguruagoa lortzeko</string>
+    <string name="routing_engine_vehicle_type_hgv">Ibilgailu astunak</string>
+    <string name="edit_track">Editatu arrastoa</string>
 </resources>
