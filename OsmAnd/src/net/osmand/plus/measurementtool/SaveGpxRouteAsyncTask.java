@@ -126,8 +126,11 @@ class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
             track.name = trackName;
             gpx.tracks.add(track);
 
-            List<WptPt> points = editingCtx.getWptPoints();
-            gpx.points.addAll(points);
+            GpxData gpxData = editingCtx.getGpxData();
+            if (gpxData != null) {
+                List<WptPt> points = gpxData.getGpxFile().getPoints();
+                gpx.addPoints(points);
+            }
 
             for (TrkSegment s : before) {
                 TrkSegment segment = new TrkSegment();

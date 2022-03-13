@@ -1276,7 +1276,7 @@ public class GPXUtilities {
 		public String author;
 		public Metadata metadata = new Metadata();
 		public List<Track> tracks = new ArrayList<>();
-		public List<WptPt> points = new ArrayList<>();
+		private List<WptPt> points = new ArrayList<>();
 		public List<Route> routes = new ArrayList<>();
 
 		public Exception error = null;
