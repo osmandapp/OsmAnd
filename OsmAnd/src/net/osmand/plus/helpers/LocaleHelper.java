@@ -18,12 +18,13 @@ public class LocaleHelper {
 
 	private final OsmandApplication app;
 
-	private Locale defaultLocale;
+	private final Locale defaultLocale;
 	private Locale preferredLocale;
 	private Resources localizedResources;
 
 	public LocaleHelper(@NonNull OsmandApplication app) {
 		this.app = app;
+		this.defaultLocale = Locale.getDefault();
 	}
 
 	public void checkPreferredLocale() {
@@ -35,10 +36,6 @@ public class LocaleHelper {
 		String[] splitCountry = splitScript[0].split("_");
 		String lang = splitCountry[0];
 		String country = (splitCountry.length > 1) ? splitCountry[1] : "";
-
-		if (defaultLocale == null) {
-			defaultLocale = Locale.getDefault();
-		}
 
 		if (!Algorithms.isEmpty(lang)) {
 			Locale.Builder builder = new Locale.Builder();
@@ -106,7 +103,7 @@ public class LocaleHelper {
 		return preferredLocale;
 	}
 
-	@Nullable
+	@NonNull
 	public Locale getDefaultLocale() {
 		return defaultLocale;
 	}
