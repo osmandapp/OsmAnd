@@ -4813,4 +4813,8 @@
 
 	<string name="poi_changing_table_filter">Changing table</string>
 
+	<string name="poi_shop_fuel">Fuel store</string>
+	<string name="poi_printer_ink">Printer ink store</string>
+	<string name="poi_water_sports">Water sports store</string>
+
 </resources>

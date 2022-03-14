@@ -4613,4 +4613,6 @@
     <string name="move_map_to_select_area">حرك الخريطة لتحديد المنطقة المطلوبة.</string>
     <string name="stop_download_desc">التنزيل لم يكتمل. إذا قمت بمقاطعة التنزيل الآن ، فسيكون جزء فقط من المربعات متاحًا للعرض.</string>
     <string name="stop_download">اوقف التنزيل</string>
+    <string name="rendering_attr_showFitnessTrails_name">إظهار مسارات اللياقة البدنية</string>
+    <string name="rendering_attr_showFitnessTrails_description">إظهار مسارات اللياقة البدنية</string>
 </resources>

@@ -4543,7 +4543,7 @@
     <string name="stop_download_desc">La descarga está incompleta. Si interrumpes la descarga ahora, sólo podrás ver una parte de las teselas.</string>
     <string name="number_of_tiles">Número de teselas</string>
     <string name="move_map_to_select_area">Mover el mapa para elegir el área necesaria.</string>
-    <string name="zoom_levels_difference_description">La gran diferencia entre los niveles de zum, puede aumentar el tamaño de los datos descargados.</string>
-    <string name="rendering_attr_showFitnessTrails_description">Muestra los senderos de obstáculos</string>
-    <string name="rendering_attr_showFitnessTrails_name">Mostrar senderos de obstáculos</string>
+    <string name="zoom_levels_difference_description">Una gran diferencia entre los niveles de zum, puede aumentar el tamaño de los datos descargados.</string>
+    <string name="rendering_attr_showFitnessTrails_description">Muestra los circuitos aeróbicos</string>
+    <string name="rendering_attr_showFitnessTrails_name">Mostrar circuitos aeróbicos</string>
 </resources>

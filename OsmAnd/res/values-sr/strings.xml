@@ -4539,4 +4539,6 @@
     <string name="number_of_tiles">Број плочица</string>
     <string name="stop_download_desc">Преузимање није завршено. Ако сада прекинете преузимање, само део плочица ће бити доступан за преглед.</string>
     <string name="move_map_to_select_area">Померите мапу да бисте изабрали потребну област.</string>
+    <string name="rendering_attr_showFitnessTrails_name">Покажи стазе за фитнес</string>
+    <string name="rendering_attr_showFitnessTrails_description">Показивање стаза за фитнес</string>
 </resources>

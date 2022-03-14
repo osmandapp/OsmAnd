@@ -4550,4 +4550,6 @@
     <string name="estimated_download_size">Geschätzte Downloadgröße</string>
     <string name="number_of_tiles">Anzahl der Kacheln</string>
     <string name="move_map_to_select_area">Bewegen Sie die Karte, um den gewünschten Bereich auszuwählen.</string>
+    <string name="rendering_attr_showFitnessTrails_description">Fitnesspfade anzeigen</string>
+    <string name="rendering_attr_showFitnessTrails_name">Fitnesspfade anzeigen</string>
 </resources>

@@ -4549,4 +4549,6 @@
     <string name="shared_string_complete">завершено</string>
     <string name="stop_download_desc">Загрузка не завершена. Если прервать загрузку сейчас, для просмотра будет доступна только часть тайлов.</string>
     <string name="zoom_levels_difference_description">Большая разница между уровнями масштабирования может увеличить размер загружаемых данных.</string>
+    <string name="rendering_attr_showFitnessTrails_description">Показать фитнес-маршруты</string>
+    <string name="rendering_attr_showFitnessTrails_name">Показать фитнес-маршруты</string>
 </resources>

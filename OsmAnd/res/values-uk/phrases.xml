@@ -3564,9 +3564,9 @@
     <string name="poi_hazard_additional_minefield">Небезпека: мінне поле</string>
     <string name="poi_hazard_additional_contamination">Небезпека: забруднення</string>
     <string name="poi_defibrillator_location">Розташування</string>
-    <string name="poi_changing_table_yes">Сповивальний стіл: так</string>
-    <string name="poi_changing_table_no">Сповивальний стіл: ні</string>
-    <string name="poi_changing_table_limited">Сповивальний стіл: обмежено</string>
+    <string name="poi_changing_table_yes">Так;Сповивальний стіл: так</string>
+    <string name="poi_changing_table_no">Ні;Сповивальний стіл: ні</string>
+    <string name="poi_changing_table_limited">Обмежено;Сповивальний стіл: обмежено</string>
     <string name="poi_changing_table_location_room">Розташування сповивального столу: кімната</string>
     <string name="poi_changing_table_location_male_toilet">Розташування сповивального столу: чоловічий туалет</string>
     <string name="poi_changing_table_location_female_toilet">Розташування сповивального столу: жіночий туалет</string>
@@ -4298,4 +4298,5 @@
     <string name="poi_greenery">Теплиця</string>
     <string name="poi_landuse_education">Освіта</string>
     <string name="poi_hairdresser_supply">Магазин перукарських товарів</string>
+    <string name="poi_changing_table_filter">Сповивальний стіл</string>
 </resources>

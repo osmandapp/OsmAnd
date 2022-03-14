@@ -4551,4 +4551,6 @@
     <string name="zoom_levels_difference_description">Diferența mare între nivelurile de zoom poate crește dimensiunea datelor descărcate.</string>
     <string name="estimated_download_size">Dimensiunea estimată a descărcării</string>
     <string name="number_of_tiles">Număr de plăci</string>
+    <string name="rendering_attr_showFitnessTrails_description">Afișați trasee de fitness</string>
+    <string name="rendering_attr_showFitnessTrails_name">Afișați trasee de fitness</string>
 </resources>
