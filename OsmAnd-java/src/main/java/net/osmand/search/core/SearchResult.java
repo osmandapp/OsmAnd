@@ -1,6 +1,7 @@
 package net.osmand.search.core;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -17,6 +18,8 @@ import net.osmand.util.MapUtils;
 
 public class SearchResult {
 	private static final double MAX_TYPE_WEIGHT = 10;
+	public static final String DELIMITER = " ";
+	public int SEARCH_PRIORITY_COEF = 10;
 
 	// search phrase that makes search result valid
 	public SearchPhrase requiredSearchPhrase;
@@ -68,21 +71,14 @@ public class SearchResult {
 
 	private double getSumPhraseMatchWeight() {
 		// if result is a complete match in the search we prioritize it higher
-		List<String> searchPhraseNames = getSearchPhraseNames();
-		boolean allWordsMatched = allWordsMatched(SearchPhrase.splitWords(localeName, new ArrayList<String>()), searchPhraseNames);
-		if (otherNames != null && !allWordsMatched) {
-			for (String otherName : otherNames) {
-				allWordsMatched = allWordsMatched(SearchPhrase.splitWords(otherName, new ArrayList<String>()), searchPhraseNames);
-				if (allWordsMatched) {
-					break;
-				}
-			}
-		}
+		boolean allWordsMatched = allWordsMatched(localeName);
+		allWordsMatched = checkOtherNames(allWordsMatched);
+		
 		if (objectType == ObjectType.POI_TYPE) {
 			allWordsMatched = false;
 		}
 
-		double res = allWordsMatched ? ObjectType.getTypeWeight(objectType) * 10 : ObjectType.getTypeWeight(null);
+		double res = allWordsMatched ? ObjectType.getTypeWeight(objectType) * SEARCH_PRIORITY_COEF : ObjectType.getTypeWeight(null);
 		if (requiredSearchPhrase.getUnselectedPoiType() != null) {
 			// search phrase matches poi type, then we lower all POI matches and don't check allWordsMatched
 			res = ObjectType.getTypeWeight(objectType);
@@ -91,6 +87,18 @@ public class SearchResult {
 			res = res + parentSearchResult.getSumPhraseMatchWeight() / MAX_TYPE_WEIGHT;
 		}
 		return res;
+	}
+	
+	private boolean checkOtherNames(boolean allWordsMatched) {
+		if (otherNames != null && !allWordsMatched) {
+			for (String otherName : otherNames) {
+				allWordsMatched = allWordsMatched(otherName);
+				if (allWordsMatched) {
+					break;
+				}
+			}
+		}
+		return allWordsMatched;
 	}
 
 	public int getDepth() {
@@ -108,13 +116,17 @@ public class SearchResult {
 		return inc;
 	}
 
-	private boolean allWordsMatched(List<String> localResultNames, List<String> searchPhraseNames) {
-		if (searchPhraseNames.size() == 0) {
+	private boolean allWordsMatched(String name) {
+		List<String> localResultNames = SearchPhrase.splitWords(name, new ArrayList<String>());
+		if (localeRelatedObjectName != null) {
+			localResultNames.add(localeRelatedObjectName);
+		}
+		List<String> searchPhraseNames = Arrays.asList(requiredSearchPhrase.getFullSearchPhrase().split(DELIMITER));
+		if (searchPhraseNames.isEmpty()) {
 			return false;
 		}
 		int idxMatchedWord = -1;
 		for (String searchPhraseName : searchPhraseNames) {
-			
 			boolean wordMatched = false;
 			for (int i = idxMatchedWord + 1; i < localResultNames.size(); i++) {
 				int r = requiredSearchPhrase.getCollator().compare(searchPhraseName, localResultNames.get(i));
@@ -128,6 +140,15 @@ public class SearchResult {
 				return false;
 			}
 		}
+		List<String> res = new ArrayList<>(localResultNames);
+		if (localeRelatedObjectName != null) {
+			res.addAll(Arrays.asList(localeRelatedObjectName.split(DELIMITER)));
+		}
+		//if want to priority allWordsMatched result without other words
+		//fix 13797 but break tests (starbucks and burger_king)
+//		if (res.size() == searchPhraseNames.size()) {
+//			SEARCH_PRIORITY_COEF = 30;
+//		}
 		return true;
 	}
 
