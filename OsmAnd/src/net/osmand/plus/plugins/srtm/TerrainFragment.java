@@ -1,14 +1,5 @@
 package net.osmand.plus.plugins.srtm;
 
-import static net.osmand.plus.utils.UiUtilities.CustomRadioButtonType.END;
-import static net.osmand.plus.utils.UiUtilities.CustomRadioButtonType.START;
-import static net.osmand.plus.download.DownloadActivityType.HILLSHADE_FILE;
-import static net.osmand.plus.download.DownloadActivityType.SLOPE_FILE;
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.TERRAIN_MAX_ZOOM;
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.TERRAIN_MIN_ZOOM;
-import static net.osmand.plus.plugins.srtm.TerrainMode.HILLSHADE;
-import static net.osmand.plus.plugins.srtm.TerrainMode.SLOPE;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -36,24 +27,25 @@ import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.slider.Slider;
 
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import org.apache.commons.logging.Log;
@@ -61,6 +53,15 @@ import org.apache.commons.logging.Log;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.List;
+
+import static net.osmand.plus.download.DownloadActivityType.HILLSHADE_FILE;
+import static net.osmand.plus.download.DownloadActivityType.SLOPE_FILE;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.TERRAIN_MAX_ZOOM;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.TERRAIN_MIN_ZOOM;
+import static net.osmand.plus.plugins.srtm.TerrainMode.HILLSHADE;
+import static net.osmand.plus.plugins.srtm.TerrainMode.SLOPE;
+import static net.osmand.plus.utils.UiUtilities.CustomRadioButtonType.END;
+import static net.osmand.plus.utils.UiUtilities.CustomRadioButtonType.START;
 
 
 public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickListener,
@@ -363,10 +364,9 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	}
 
 	private void updateDownloadSection() {
-		final ContextMenuAdapter adapter = new ContextMenuAdapter(app);
+		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
 		adapter.setProfileDependent(true);
-		adapter.setNightMode(nightMode);
 
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
@@ -382,11 +382,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		}
 
 		if (downloadThread.shouldDownloadIndexes()) {
-			adapter.addItem(new ContextMenuItem.ItemBuilder()
+			adapter.addItem(new ContextMenuItem(null)
 					.setLayout(R.layout.list_item_icon_and_download)
 					.setTitleId(R.string.downloading_list_indexes, mapActivity)
-					.setLoading(true)
-					.createItem());
+					.setLoading(true));
 		} else {
 			try {
 				TerrainMode mode = srtmPlugin.getTerrainMode();
@@ -400,7 +399,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 					downloadTopDivider.setVisibility(View.VISIBLE);
 					downloadBottomDivider.setVisibility(View.VISIBLE);
 					for (final IndexItem indexItem : terrainItems) {
-						ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder()
+						ContextMenuItem _item = new ContextMenuItem(null)
 								.setLayout(R.layout.list_item_icon_and_download)
 								.setTitle(indexItem.getVisibleName(app, app.getRegions(), false))
 								.setDescription(mode == HILLSHADE
@@ -449,13 +448,13 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 								});
 
 						if (indexItem == currentDownloadingItem) {
-							itemBuilder.setLoading(true)
+							_item.setLoading(true)
 									.setProgress(currentDownloadingProgress)
 									.setSecondaryIcon(R.drawable.ic_action_remove_dark);
 						} else {
-							itemBuilder.setSecondaryIcon(R.drawable.ic_action_import);
+							_item.setSecondaryIcon(R.drawable.ic_action_import);
 						}
-						adapter.addItem(itemBuilder.createItem());
+						adapter.addItem(_item);
 					}
 				} else {
 					downloadContainer.setVisibility(View.GONE);
@@ -470,7 +469,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		observableListView.setAdapter(listAdapter);
 		observableListView.setOnItemClickListener((parent, view, position, id) -> {
 			ContextMenuItem item = adapter.getItem(position);
-			ContextMenuAdapter.ItemClickListener click = item.getItemClickListener();
+			ItemClickListener click = item.getItemClickListener();
 			if (click != null) {
 				click.onContextMenuClick(listAdapter, item.getTitleId(), position, false, null);
 			}

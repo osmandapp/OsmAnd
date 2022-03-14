@@ -18,7 +18,6 @@ import android.view.ViewAnimationUtils;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -48,10 +47,6 @@ import com.github.ksoichiro.android.observablescrollview.ScrollState;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.ValueHolder;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
-import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
-import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -89,6 +84,10 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
+import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
 import net.osmand.plus.wikipedia.WikipediaPoiMenu;
 
 import java.lang.ref.WeakReference;
@@ -133,7 +132,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private FrameLayout dashboardView;
 
 	private ArrayAdapter<?> listAdapter;
-	private OnItemClickListener listAdapterOnClickListener;
+	private OnItemClickListener adapterClickListener;
 
 	private boolean visible = false;
 	private DashboardType visibleType;
@@ -514,10 +513,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		return listAdapter;
 	}
 
-	public OnItemClickListener getListAdapterOnClickListener() {
-		return listAdapterOnClickListener;
-	}
-
 	public void hideDashboard() {
 		setDashboardVisibility(false, visibleType);
 	}
@@ -737,7 +732,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			this.nightMode = nightMode;
 			applyDayNightMode();
 		}
-		final ArrayAdapter<ContextMenuItem> listAdapter = cm.createListAdapter(mapActivity, !nightMode);
+		ArrayAdapter<ContextMenuItem> listAdapter = cm.createListAdapter(mapActivity, !nightMode);
 		OnItemClickListener listener = getOptionsMenuOnClickListener(cm, listAdapter);
 		updateListAdapter(listAdapter, listener);
 	}
@@ -1055,7 +1050,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			for (int i = 0; i < listAdapter.getCount(); i++) {
 				Object o = listAdapter.getItem(i);
 				if (o instanceof ContextMenuItem) {
-					((ContextMenuItem) o).update();
+					((ContextMenuItem) o).refreshWithActualData();
 				}
 			}
 			listAdapter.notifyDataSetChanged();
@@ -1226,16 +1221,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	private void updateListAdapter(ArrayAdapter<?> listAdapter, OnItemClickListener listener) {
 		this.listAdapter = listAdapter;
-		listAdapterOnClickListener = listener;
+		adapterClickListener = listener;
 		if (listView != null) {
 			listView.setAdapter(listAdapter);
-			if (listAdapterOnClickListener != null) {
-				listView.setOnItemClickListener(new OnItemClickListener() {
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-						listAdapterOnClickListener.onItemClick(parent, view, position - listView.getHeaderViewsCount(), id);
-					}
-				});
+			if (adapterClickListener != null) {
+				listView.setOnItemClickListener((parent, view, position, id) ->
+						adapterClickListener.onItemClick(parent, view, position - listView.getHeaderViewsCount(), id));
 			} else {
 				listView.setOnItemClickListener(null);
 			}
