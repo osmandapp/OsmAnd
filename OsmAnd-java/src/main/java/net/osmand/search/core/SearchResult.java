@@ -144,8 +144,9 @@ public class SearchResult {
 		if (localeRelatedObjectName != null) {
 			res.addAll(Arrays.asList(localeRelatedObjectName.split(DELIMITER)));
 		}
-		//if want to priority allWordsMatched result without other words
-		//fix 13797 but break tests (starbucks and burger_king)
+		// if want to priority allWordsMatched result without other words
+		// fix 13797 but break tests (starbucks and burger_king)
+		// need SEARCH_AMENITY_BY_NAME_PRIORITY = 500 and
 //		if (res.size() == searchPhraseNames.size()) {
 //			SEARCH_PRIORITY_COEF = 30;
 //		}
