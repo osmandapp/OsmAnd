@@ -4539,4 +4539,6 @@
     <string name="estimated_download_size">Odhadovaná veľkosť na stiahnutie</string>
     <string name="number_of_tiles">Počet dlaždíc</string>
     <string name="move_map_to_select_area">Posuňte mapu pre zvolenie potrebnej oblasti.</string>
+    <string name="rendering_attr_showFitnessTrails_description">Zobraziť fitnes trasy</string>
+    <string name="rendering_attr_showFitnessTrails_name">Zobraziť fitnes trasy</string>
 </resources>
