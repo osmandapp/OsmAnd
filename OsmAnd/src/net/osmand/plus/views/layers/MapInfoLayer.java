@@ -85,6 +85,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private MapWidgetRegistry mapInfoControls;
 
 	private DrawSettings drawSettings;
+	private int themeId = -1;
+
 	private TopTextView streetNameView;
 	private TopToolbarView topToolbarView;
 	private TopCoordinatesView topCoordinatesView;
@@ -136,6 +138,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 			rulerWidgets = null;
 
 			drawSettings = null;
+			themeId = -1;
+
 			streetNameView = null;
 			topToolbarView = null;
 			topCoordinatesView = null;
@@ -355,8 +359,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		int boxFree;
 		int textShadowRadius;
 	}
-
-	private int themeId = -1;
 
 	public void updateColorShadowsOfText() {
 		MapActivity mapActivity = getMapActivity();
