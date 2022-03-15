@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/marker_circle_background_p_with_inset" android:state_pressed="true"/>
-    <item android:drawable="@drawable/marker_circle_background_on_map_n_with_inset"/>
-</selector>

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-	<item android:drawable="@color/dashboard_parking_dark_selected" android:state_enabled="false"/>
-	<item android:drawable="@color/dashboard_parking_dark_selected" android:state_pressed="true"/>
-	<item android:drawable="@color/dashboard_parking_dark_selected" android:state_focused="true"/>
-	<item android:drawable="@color/dashboard_parking_dark_color"/>
-</selector>

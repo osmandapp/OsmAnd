@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<inset xmlns:android="http://schemas.android.com/apk/res/android"
-       android:drawable="@drawable/marker_circle_background_light_n"
-       android:insetBottom="@dimen/context_menu_first_line_top_margin"
-       android:insetLeft="@dimen/context_menu_first_line_top_margin"
-       android:insetRight="@dimen/context_menu_first_line_top_margin"
-       android:insetTop="@dimen/context_menu_first_line_top_margin"/>
