@@ -1,8 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="shared_string_no">Ոչ</string>
-    <string name="shared_string_yes">Այո</string>
-    <string name="osmand_app_not_found">OsmAnd - ը չի տեղադրված</string>
-    <string name="app_name">OsmAnd Parking Plugin</string>
-    <string name="parking_plugin_installed">OsmAnd Parking Plugiն - ը տեղադրված է և ակտիվացված է OsmAnd-ի կարգավորումներում.</string>
-</resources>

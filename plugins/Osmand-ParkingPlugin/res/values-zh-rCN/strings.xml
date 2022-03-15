@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="shared_string_yes">是</string>
-    <string name="shared_string_no">没有</string>
-    <string name="osmand_app_not_found">OsmAnd 未安装</string>
-    <string name="app_name">OsmAnd 停车场</string>
-    <string name="parking_plugin_installed">OsmAnd 停车场插件已安装，并已在 OsmAnd 设置中启用。</string>
-</resources>

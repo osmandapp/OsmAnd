@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="shared_string_yes">بله</string>
-    <string name="shared_string_no">خیر</string>
-    <string name="osmand_app_not_found">OsmAnd نصب نشده است</string>
-    <string name="app_name">پارکینگ OsmAnd</string>
-    <string name="parking_plugin_installed">افزونه پارکینگ OsmAnd نصب شده و در تنظیمات OsmAnd فعال شده است.</string>
-</resources>

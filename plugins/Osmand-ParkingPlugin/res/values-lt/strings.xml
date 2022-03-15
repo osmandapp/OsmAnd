@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="shared_string_no">Ne</string>
-    <string name="shared_string_yes">Taip</string>
-    <string name="osmand_app_not_found">OsmAnd programa neįdiegta</string>
-    <string name="app_name">OsmAnd parkavimo įskiepis</string>
-    <string name="parking_plugin_installed">OsmAnd Parkavimo įskiepis įdiegiamas ir aktyvuojamas OsmAnd nustatymuose.</string>
-</resources>

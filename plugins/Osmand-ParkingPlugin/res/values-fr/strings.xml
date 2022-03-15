@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="shared_string_no">Non</string>
-    <string name="shared_string_yes">Oui</string>
-    <string name="osmand_app_not_found">OsmAnd n\'est pas installé</string>
-    <string name="app_name">Greffon Parking pour OsmAnd</string>
-    <string name="parking_plugin_installed">Le greffon Parking est installé et activé dans les paramètres de OsmAnd.</string>
-</resources>

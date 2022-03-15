@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="shared_string_no">Jo</string>
-    <string name="shared_string_yes">Po</string>
-    <string name="osmand_app_not_found">OsmAnd nuk është instaluar</string>
-    <string name="app_name">OsmAnd Parkim</string>
-    <string name="parking_plugin_installed">Plugini OsmAnd Parkim është instaluar dhe aktivizuar në OsmAnd settings.</string>
-</resources>

@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="shared_string_no">ليس</string>
-    <string name="shared_string_yes">نعم</string>
-    <string name="osmand_app_not_found">لم يتم تثبيت OsmAnd</string>
-    <string name="app_name">وقوف السيارات</string>
-    <string name="parking_plugin_installed">يتم تثبيت البرنامج المساعد OsmAnd وقوف السيارات وتمكينها في إعدادات OsmAnd</string>
-</resources>

@@ -1,8 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="shared_string_no">नही</string>
-    <string name="shared_string_yes">हा</string>
-    <string name="osmand_app_not_found">OsmAnd is not installed</string>
-    <string name="app_name">ओएसएमएएनडी पार्किंग प्लगिन</string>
-    <string name="parking_plugin_installed">OsmAnd Parking Plugin is installed and enabled in OsmAnd settings.</string>
-</resources>

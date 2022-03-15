@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="shared_string_no">Não</string>
-    <string name="shared_string_yes">Sim</string>
-    <string name="osmand_app_not_found">Osmand não está instalado</string>
-    <string name="app_name">OsmAnd Parking Plugin</string>
-    <string name="parking_plugin_installed">OsmAnd Parking Plugin está instalado e activado nas opções OsmAnd.</string>
-</resources>
