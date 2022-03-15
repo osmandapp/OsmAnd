@@ -51,6 +51,11 @@ public class FolderListAdapter extends RecyclerView.Adapter<FolderViewHolder> {
 		this.uiUtilities = app.getUIUtilities();
 	}
 
+	@NonNull
+	public List<Object> getItems() {
+		return items;
+	}
+
 	public void setItems(@NonNull List<Object> items) {
 		this.items = items;
 	}

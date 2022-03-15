@@ -327,7 +327,6 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 		onFolderSelected(folder);
 	}
 
-
 	@Override
 	public void onAddFolderSelected() {
 		FragmentActivity activity = getActivity();
