@@ -65,7 +65,7 @@ public class LocaleBuilder {
 			return defaultDeviceLocale.getCountry();
 		}
 
-		return defaultDeviceLocale.getCountry().equals(defaultEngineLocale.getCountry())
+		return defaultDeviceLocale.getLanguage().equals(defaultEngineLocale.getLanguage())
 				? defaultEngineLocale.getCountry()
 				: "";
 	}
