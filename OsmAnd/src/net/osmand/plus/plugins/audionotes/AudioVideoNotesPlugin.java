@@ -37,9 +37,9 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
-import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -99,7 +99,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_P
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_VIDEO_NOTE;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_AUDIO_VIDEO_NOTES;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.RECORDING_LAYER;
-import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 
 
 public class AudioVideoNotesPlugin extends OsmandPlugin {
@@ -666,13 +665,13 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			}
 			return true;
 		};
-		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_recordings, app)
-				.setId(RECORDING_LAYER)
+		adapter.addItem(new ContextMenuItem(RECORDING_LAYER)
+				.setTitleId(R.string.layer_recordings, app)
 				.setSelected(SHOW_RECORDINGS.get())
 				.setIcon(R.drawable.ic_action_micro_dark)
 				.setColor(mapActivity, SHOW_RECORDINGS.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
-				.setItemDeleteAction(makeDeleteAction(SHOW_RECORDINGS))
-				.setListener(listener).createItem());
+				.setItemDeleteAction(SHOW_RECORDINGS)
+				.setListener(listener));
 	}
 
 	@Override
@@ -681,33 +680,30 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		if (!configureMenu && isRecording()) {
 			return;
 		}
-		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.recording_context_menu_arecord, app)
-				.setId(MAP_CONTEXT_MENU_AUDIO_NOTE)
+		adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_AUDIO_NOTE)
+				.setTitleId(R.string.recording_context_menu_arecord, app)
 				.setIcon(R.drawable.ic_action_micro_dark)
 				.setOrder(TAKE_AUDIO_NOTE_ITEM_ORDER)
 				.setListener((adptr, itemId, pos, isChecked, viewCoordinates) -> {
 					recordAudio(latitude, longitude, mapActivity);
 					return true;
-				})
-				.createItem());
-		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.recording_context_menu_vrecord, app)
-				.setId(MAP_CONTEXT_MENU_VIDEO_NOTE)
+				}));
+		adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_VIDEO_NOTE)
+				.setTitleId(R.string.recording_context_menu_vrecord, app)
 				.setIcon(R.drawable.ic_action_video_dark)
 				.setOrder(TAKE_VIDEO_NOTE_ITEM_ORDER)
 				.setListener((adptr, itemId, pos, isChecked, viewCoordinates) -> {
 					recordVideo(latitude, longitude, mapActivity, false);
 					return true;
-				})
-				.createItem());
-		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.recording_context_menu_precord, app)
-				.setId(MAP_CONTEXT_MENU_PHOTO_NOTE)
+				}));
+		adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_PHOTO_NOTE)
+				.setTitleId(R.string.recording_context_menu_precord, app)
 				.setIcon(R.drawable.ic_action_photo_dark)
 				.setOrder(TAKE_PHOTO_NOTE_ITEM_ORDER)
 				.setListener((adptr, itemId, pos, isChecked, viewCoordinates) -> {
 					takePhoto(latitude, longitude, mapActivity, false, false);
 					return true;
-				})
-				.createItem());
+				}));
 	}
 
 	@Override

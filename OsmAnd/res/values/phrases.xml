@@ -3997,9 +3997,9 @@
 
 	<string name="poi_defibrillator_location">Location</string>
 
-	<string name="poi_changing_table_yes">Changing table: yes</string>
-	<string name="poi_changing_table_no">Changing table: no</string>
-	<string name="poi_changing_table_limited">Changing table: limited</string>
+	<string name="poi_changing_table_yes">Yes;Changing table: yes</string>
+	<string name="poi_changing_table_no">No;Changing table: no</string>
+	<string name="poi_changing_table_limited">Limited;Changing table: limited</string>
 	<string name="poi_changing_table_location_room">Changing table location: room</string>
 	<string name="poi_changing_table_location_male_toilet">Changing table location: male toilet</string>
 	<string name="poi_changing_table_location_female_toilet">Changing table location: female toilet</string>
@@ -4810,5 +4810,22 @@
 	<string name="poi_greenery">Greenery</string>
 
 	<string name="poi_hairdresser_supply">Hairdresser supply store</string>
+
+	<string name="poi_changing_table_filter">Changing table</string>
+
+	<string name="poi_shop_fuel">Fuel store</string>
+	<string name="poi_printer_ink">Printer ink store</string>
+	<string name="poi_water_sports">Water sports store</string>
+
+	<string name="poi_payment_american_express_contactless_yes">Contactless American Express (AMEX)</string>
+	<string name="poi_payment_girocard_contactless_yes">Girocard</string>
+	<string name="poi_payment_maestro_contactless_yes">Contactless Maestro</string>
+	<string name="poi_payment_mastercard_contactless_yes">Contactless MasterCard</string>
+	<string name="poi_payment_visa_contactless_yes">Contactless Visa</string>
+	<string name="poi_payment_american_express_contactless_no">Contactless American Express (AMEX) not accepted</string>
+	<string name="poi_payment_girocard_contactless_no">Contactless Girocard not accepted</string>
+	<string name="poi_payment_maestro_contactless_no">Contactless Maestro not accepted</string>
+	<string name="poi_payment_mastercard_contactless_no">Contactless MasterCard not accepted</string>
+	<string name="poi_payment_visa_contactless_no">Contactless Visa not accepted</string>
 
 </resources>

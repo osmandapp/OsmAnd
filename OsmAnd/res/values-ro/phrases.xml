@@ -3451,7 +3451,7 @@
     <string name="poi_changing_table_fee_no">Taxa pentru masa de schimbat: nu</string>
     <string name="poi_changing_table_fee_yes">Taxă pentru masa de schimb: da</string>
     <string name="poi_changing_table_count">Numărătoarea mesei de schimbare</string>
-    <string name="poi_changing_table_yes">Masă schimbătoare: da</string>
+    <string name="poi_changing_table_yes">Da;Masă de schimb: da</string>
     <string name="poi_defibrillator_location">Locație</string>
     <string name="poi_hazard_additional_contamination">Pericol: contaminare</string>
     <string name="poi_hazard_additional_minefield">Pericol: câmp minat</string>
@@ -3643,8 +3643,8 @@
     <string name="poi_changing_table_location_female_toilet">Locația mesei de schimb: toaletă pentru femei</string>
     <string name="poi_changing_table_location_male_toilet">Locația mesei de schimb: toaletă bărbați</string>
     <string name="poi_changing_table_location_room">Amplasarea mesei de schimb: cameră</string>
-    <string name="poi_changing_table_limited">Masă schimbătoare: limitată</string>
-    <string name="poi_changing_table_no">Masă de schimbat: nu</string>
+    <string name="poi_changing_table_limited">Limitat;Masă de schimbat: limitată</string>
+    <string name="poi_changing_table_no">Nu;Masă de schimbat: nu</string>
     <string name="poi_climbing_grade_french_min">Traseul cel mai ușor (clasa franceză)</string>
     <string name="poi_climbing_grade_saxon_min">Cea mai ușoară rută (grad săsesc)</string>
     <string name="poi_climbing_routes">Traseele de cățărare</string>
@@ -4295,4 +4295,6 @@
     <string name="poi_board_type_sport">Sport</string>
     <string name="poi_board_type_welcome_sign">Semn de bun venit</string>
     <string name="poi_greenery">Verdeață</string>
+    <string name="poi_changing_table_filter">Masă de schimbat</string>
+    <string name="poi_hairdresser_supply">Magazin de aprovizionare pentru coafor</string>
 </resources>

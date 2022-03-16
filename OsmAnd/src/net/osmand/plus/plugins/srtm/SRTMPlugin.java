@@ -1,10 +1,5 @@
 package net.osmand.plus.plugins.srtm;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_SRTM;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
-import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,10 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.data.LatLon;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
-import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
-import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -40,12 +31,20 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
+import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_SRTM;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
 
 public class SRTMPlugin extends OsmandPlugin {
 
@@ -381,21 +380,19 @@ public class SRTMPlugin extends OsmandPlugin {
 			final CommonPreference<String> pref = settings.getCustomRenderProperty(contourLinesProp.getAttrName());
 			boolean contourLinesSelected = isContourLinesLayerEnabled(app);
 			String descr = getPrefDescription(app, contourLinesProp, pref);
-			adapter.addItem(new ContextMenuItem.ItemBuilder()
-					.setId(CONTOUR_LINES)
+			adapter.addItem(new ContextMenuItem(CONTOUR_LINES)
 					.setTitleId(R.string.srtm_plugin_name, mapActivity)
 					.setSelected(contourLinesSelected)
 					.setIcon(R.drawable.ic_plugin_srtm)
 					.setDescription(app.getString(R.string.display_zoom_level, descr))
 					.setColor(app, contourLinesSelected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
-					.setItemDeleteAction(makeDeleteAction(CONTOUR_LINES_ZOOM))
+					.setItemDeleteAction(CONTOUR_LINES_ZOOM)
 					.setSecondaryIcon(R.drawable.ic_action_additional_option)
-					.setListener(listener).createItem());
+					.setListener(listener));
 		}
 		boolean terrainEnabled = TERRAIN.get();
 		TerrainMode terrainMode = TERRAIN_MODE.get();
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setId(TERRAIN_ID)
+		adapter.addItem(new ContextMenuItem(TERRAIN_ID)
 				.setTitleId(R.string.shared_string_terrain, mapActivity)
 				.setDescription(app.getString(terrainMode == TerrainMode.HILLSHADE
 						? R.string.shared_string_hillshade
@@ -404,9 +401,9 @@ public class SRTMPlugin extends OsmandPlugin {
 				.setColor(app, terrainEnabled ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_hillshade_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
-				.setItemDeleteAction(makeDeleteAction(TERRAIN, TERRAIN_MODE))
+				.setItemDeleteAction(TERRAIN, TERRAIN_MODE)
 				.setListener(listener)
-				.createItem()
+
 		);
 	}
 

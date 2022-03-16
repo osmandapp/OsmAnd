@@ -3564,9 +3564,9 @@
     <string name="poi_hazard_additional_minefield">Perigo: campo minado</string>
     <string name="poi_hazard_additional_contamination">Perigo: contaminação</string>
     <string name="poi_defibrillator_location">Localização</string>
-    <string name="poi_changing_table_yes">Mesa muda-fraldas: sim</string>
-    <string name="poi_changing_table_no">Mesa muda-fraldas: não</string>
-    <string name="poi_changing_table_limited">Mesa muda-fraldas: limitada</string>
+    <string name="poi_changing_table_yes">Sim;Mesa muda-fraldas: sim</string>
+    <string name="poi_changing_table_no">Não;Mesa muda-fraldas: não</string>
+    <string name="poi_changing_table_limited">Limitada;Mesa muda-fraldas: limitada</string>
     <string name="poi_changing_table_location_room">Mesa muda-fraldas: sala</string>
     <string name="poi_changing_table_location_male_toilet">Local da mesa muda-fraldas: WC masculino</string>
     <string name="poi_changing_table_location_female_toilet">Local da mesa muda-fraldas: WC feminino</string>
@@ -4297,4 +4297,6 @@
     <string name="poi_board_type_welcome_sign">Sinal de boas-vindas</string>
     <string name="poi_greenery">Espaço verde</string>
     <string name="poi_landuse_education">Educação</string>
+    <string name="poi_hairdresser_supply">Loja de artigos para cabeleireiros</string>
+    <string name="poi_changing_table_filter">Mesa muda-fraldas</string>
 </resources>

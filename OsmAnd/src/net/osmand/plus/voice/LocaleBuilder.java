@@ -1,11 +1,11 @@
 package net.osmand.plus.voice;
 
-import net.osmand.CallbackWithObject;
-import net.osmand.Location;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.Voice;
+
 import net.osmand.PlatformUtil;
-import net.osmand.data.LatLon;
-import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -17,34 +17,18 @@ public class LocaleBuilder {
 
 	private static final Log log = PlatformUtil.getLog(LocaleBuilder.class);
 
-	private static final String LANG_PORTUGUESE = "pt";
-	private static final String LANG_DUTCH = "nl";
-
-	private static final String REGION_PORTUGAL = "PT";
-	private static final String REGION_BELGIUM = "BE";
-
-	private static final String WORLD_REGION_ID_BELGIUM = "europe_belgium";
-
-	private final OsmandApplication app;
+	private final TextToSpeech tts;
+	private final Locale defaultDeviceLocale;
 	private final String localeParams;
-	private final CallbackWithObject<Locale> callback;
 
-	public static void buildLocale(@NonNull OsmandApplication app,
-	                               @NonNull String localeParams,
-	                               @NonNull CallbackWithObject<Locale> callback) {
-		new LocaleBuilder(app, localeParams, callback);
-	}
-
-	private LocaleBuilder(@NonNull OsmandApplication app,
-	                      @NonNull String localeParams,
-	                      @NonNull CallbackWithObject<Locale> callback) {
-		this.app = app;
+	public LocaleBuilder(@NonNull OsmandApplication app, @NonNull TextToSpeech tts, @NonNull String localeParams) {
+		this.tts = tts;
+		this.defaultDeviceLocale = app.getLocaleHelper().getDefaultLocale();
 		this.localeParams = localeParams;
-		this.callback = callback;
-		buildLocale();
 	}
 
-	private void buildLocale() {
+	@NonNull
+	public Locale buildLocale() {
 		final String[] params = (localeParams + "____.").split("[\\_\\-]");
 		String language = params[0];
 		                        // As per BCP 47:
@@ -62,51 +46,33 @@ public class LocaleBuilder {
 			}
 		}
 
-		String finalVariant = variant;
-		String finalScript = script;
-		defineRegion(region, properRegion -> {
-			Locale locale = buildLocale(language, properRegion, finalVariant, finalScript);
-			callback.processResult(locale);
-			return true;
-		});
-	}
-
-	private void defineRegion(@NonNull String regionFromParams,
-	                          @NonNull CallbackWithObject<String> regionCallback) {
-		boolean forcePortuguesePronunciation = localeParams.equals(LANG_PORTUGUESE); // Fix #10232
-		Location lastKnownLocation = app.getLocationProvider().getLastKnownLocation();
-		boolean detectPronunciationForNl = localeParams.equals(LANG_DUTCH) && lastKnownLocation != null;
-		if (forcePortuguesePronunciation) {
-			regionCallback.processResult(REGION_PORTUGAL);
-		} else if (detectPronunciationForNl) {
-			LatLon latLon = new LatLon(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
-			app.getMapViewTrackingUtilities().detectCurrentRegion(latLon, worldRegion -> {
-				String region = getSpecialOrDefaultRegion(worldRegion, WORLD_REGION_ID_BELGIUM,
-						REGION_BELGIUM, regionFromParams);
-				regionCallback.processResult(region);
-				return true;
-			});
-		} else {
-			regionCallback.processResult(regionFromParams);
-		}
+		return buildLocaleInternal(language, getSuitableRegion(region), variant, script);
 	}
 
 	@NonNull
-	private String getSpecialOrDefaultRegion(@NonNull WorldRegion worldRegion, @NonNull String specialRegionId,
-	                                         @NonNull String specialRegion, @NonNull String defaultRegion) {
-		return hasRegionWithId(worldRegion, specialRegionId) ? specialRegion : defaultRegion;
-	}
-
-	private boolean hasRegionWithId(@NonNull WorldRegion worldRegion, @NonNull String regionId) {
-		while (worldRegion != null && !regionId.equals(worldRegion.getRegionId())) {
-			worldRegion = worldRegion.getSuperregion();
+	private String getSuitableRegion(@NonNull String regionFromFile) {
+		if (!Algorithms.isEmpty(regionFromFile)) {
+			return regionFromFile;
 		}
-		return worldRegion != null && regionId.equals(worldRegion.getRegionId());
+
+		Voice defaultVoice = tts.getDefaultVoice();
+		if (defaultVoice == null) {
+			return defaultDeviceLocale.getCountry();
+		}
+
+		Locale defaultEngineLocale = defaultVoice.getLocale();
+		if (defaultEngineLocale == null) {
+			return defaultDeviceLocale.getCountry();
+		}
+
+		return defaultDeviceLocale.getLanguage().equals(defaultEngineLocale.getLanguage())
+				? defaultEngineLocale.getCountry()
+				: "";
 	}
 
 	@NonNull
-	private Locale buildLocale(@NonNull String language, @NonNull String region,
-	                           @NonNull String variant, @NonNull String script) {
+	private Locale buildLocaleInternal(@NonNull String language, @NonNull String region,
+	                                   @NonNull String variant, @NonNull String script) {
 		try {
 			return new Locale.Builder()
 					.setLanguage(language)

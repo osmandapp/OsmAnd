@@ -3,13 +3,10 @@ package net.osmand.plus.plugins.development;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -23,6 +20,9 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenTyp
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
 
@@ -68,18 +68,14 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	@Override
 	public void registerOptionsMenuItems(final MapActivity mapActivity, ContextMenuAdapter helper) {
 		if (Version.isDeveloperVersion(mapActivity.getMyApplication())) {
-			helper.addItem(new ContextMenuItem.ItemBuilder()
-					.setId(DRAWER_BUILDS_ID)
+			helper.addItem(new ContextMenuItem(DRAWER_BUILDS_ID)
 					.setTitleId(R.string.version_settings, mapActivity)
 					.setIcon(R.drawable.ic_action_apk)
-					.setListener(new ContextMenuAdapter.ItemClickListener() {
-						@Override
-						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
-							final Intent mapIntent = new Intent(mapActivity, ContributionVersionActivity.class);
-							mapActivity.startActivityForResult(mapIntent, 0);
-							return true;
-						}
-					}).createItem());
+					.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
+						final Intent mapIntent = new Intent(mapActivity, ContributionVersionActivity.class);
+						mapActivity.startActivityForResult(mapIntent, 0);
+						return true;
+					}));
 		}
 
 	}

@@ -11,11 +11,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.utils.AndroidNetworkUtils;
-import net.osmand.plus.utils.AndroidNetworkUtils.OnRequestResultListener;
-import net.osmand.plus.utils.AndroidNetworkUtils.OnSendRequestsListener;
-import net.osmand.plus.utils.AndroidNetworkUtils.Request;
-import net.osmand.plus.utils.AndroidNetworkUtils.RequestResponse;
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -29,6 +24,11 @@ import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionList;
 import net.osmand.plus.inapp.InAppPurchases.PurchaseInfo;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidNetworkUtils.OnRequestResultListener;
+import net.osmand.plus.utils.AndroidNetworkUtils.OnSendRequestsListener;
+import net.osmand.plus.utils.AndroidNetworkUtils.Request;
+import net.osmand.plus.utils.AndroidNetworkUtils.RequestResponse;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONArray;
@@ -150,9 +150,13 @@ public abstract class InAppPurchaseHelper {
 				|| ctx.getSettings().LIVE_UPDATES_PURCHASED.get();
 	}
 
-	public static boolean isSubscribedToMaps(@NonNull OsmandApplication ctx) {
-		return Version.isDeveloperBuild(ctx)
-				|| ctx.getSettings().OSMAND_MAPS_PURCHASED.get();
+	public static boolean isSubscribedToMaps(@NonNull OsmandApplication app) {
+		return isSubscribedToMaps(app, true);
+	}
+
+	public static boolean isSubscribedToMaps(@NonNull OsmandApplication app, boolean checkDevBuild) {
+		return checkDevBuild && Version.isDeveloperBuild(app)
+				|| app.getSettings().OSMAND_MAPS_PURCHASED.get();
 	}
 
 	public static boolean isSubscribedToLiveUpdates(@NonNull OsmandApplication ctx) {
@@ -202,8 +206,12 @@ public abstract class InAppPurchaseHelper {
 		return 0;
 	}
 
-	public static boolean isFullVersionPurchased(@NonNull OsmandApplication ctx) {
-		return Version.isDeveloperBuild(ctx) || ctx.getSettings().FULL_VERSION_PURCHASED.get();
+	public static boolean isFullVersionPurchased(@NonNull OsmandApplication app) {
+		return isFullVersionPurchased(app, true);
+	}
+
+	public static boolean isFullVersionPurchased(@NonNull OsmandApplication app, boolean checkDevBuild) {
+		return checkDevBuild && Version.isDeveloperBuild(app) || app.getSettings().FULL_VERSION_PURCHASED.get();
 	}
 
 	public static boolean isDepthContoursPurchased(@NonNull OsmandApplication ctx) {
