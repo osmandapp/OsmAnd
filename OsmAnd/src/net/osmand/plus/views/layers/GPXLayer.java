@@ -1,6 +1,7 @@
 package net.osmand.plus.views.layers;
 
 import static net.osmand.GPXUtilities.calculateTrackBounds;
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 
@@ -23,11 +24,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
+import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -38,6 +41,7 @@ import net.osmand.plus.ChartPointsHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -59,8 +63,10 @@ import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.NetworkRouteSelectionTask;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
@@ -998,9 +1004,15 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				name = formatName(Algorithms.getFileWithoutDirs(selectedGpxFile.getGpxFile().path));
 			}
 			return new PointDescription(PointDescription.POINT_TYPE_GPX, name);
-		} else if (o instanceof Pair && ((Pair<?, ?>) o).first instanceof TravelGpx) {
-			TravelGpx travelGpx = (TravelGpx) ((Pair<?, ?>) o).first;
-			return new PointDescription(PointDescription.POINT_TYPE_GPX, travelGpx.getTitle());
+		} else if (o instanceof Pair) {
+			Pair<?, ?> pair = (Pair<?, ?>) o;
+			if (pair.first instanceof TravelGpx && pair.second instanceof SelectedGpxPoint) {
+				TravelGpx travelGpx = (TravelGpx) ((Pair<?, ?>) o).first;
+				return new PointDescription(PointDescription.POINT_TYPE_GPX, travelGpx.getTitle());
+			} else if (pair.first instanceof RenderedObject && pair.second instanceof LatLon) {
+				RenderedObject renderedObject = (RenderedObject) pair.first;
+				return new PointDescription(PointDescription.POINT_TYPE_GPX, renderedObject.getRouteName());
+			}
 		}
 		return null;
 	}
@@ -1072,13 +1084,17 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else if (o instanceof SelectedGpxPoint) {
 			WptPt point = ((SelectedGpxPoint) o).getSelectedPoint();
 			return new LatLon(point.lat, point.lon);
-		} else if (o instanceof Pair && ((Pair<?, ?>) o).second instanceof SelectedGpxPoint) {
-			WptPt point = ((SelectedGpxPoint) ((Pair<?, ?>) o).second).getSelectedPoint();
-			return new LatLon(point.lat, point.lon);
+		} else if (o instanceof Pair) {
+			Pair<?, ?> pair = (Pair<?, ?>) o;
+			if (pair.first instanceof TravelGpx && pair.second instanceof SelectedGpxPoint) {
+				WptPt point = ((SelectedGpxPoint) pair.second).getSelectedPoint();
+				return new LatLon(point.lat, point.lon);
+			} else if (pair.first instanceof RenderedObject && pair.second instanceof LatLon) {
+				return (LatLon) pair.second;
+			}
 		}
 		return null;
 	}
-
 
 	@Override
 	public void destroyLayer() {
@@ -1119,13 +1135,35 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		OsmandApplication app = view.getApplication();
 		MapActivity mapActivity = view.getMapActivity();
 		if (mapActivity != null) {
-			if (object instanceof Pair && ((Pair<?, ?>) object).first instanceof TravelGpx
-					&& ((Pair<?, ?>) object).second instanceof SelectedGpxPoint) {
-				Pair<TravelGpx, SelectedGpxPoint> pair = (Pair) object;
-				LatLon latLon = new LatLon(pair.second.getSelectedPoint().lat, pair.second.getSelectedPoint().lon);
-				TravelHelper travelHelper = app.getTravelHelper();
-				travelHelper.openTrackMenu(pair.first, mapActivity, pair.first.getRouteId(), latLon);
-				return true;
+			if (object instanceof Pair) {
+				Pair<?, ?> pair = (Pair<?, ?>) object;
+				if (pair.first instanceof TravelGpx && pair.second instanceof SelectedGpxPoint) {
+					Pair<TravelGpx, SelectedGpxPoint> travelPair = (Pair) object;
+					LatLon latLon = new LatLon(travelPair.second.getSelectedPoint().lat, travelPair.second.getSelectedPoint().lon);
+					TravelHelper travelHelper = app.getTravelHelper();
+					travelHelper.openTrackMenu(travelPair.first, mapActivity, travelPair.first.getRouteId(), latLon);
+					return true;
+				} else if (pair.first instanceof RenderedObject && pair.second instanceof LatLon) {
+					RenderedObject renderedObject = (RenderedObject) pair.first;
+					LatLon latLon = (LatLon) pair.second;
+					CallbackWithObject<GPXFile> callback = gpxFile -> {
+
+						if (gpxFile != null) {
+							WptPt wptPt = new WptPt();
+							wptPt.lat = latLon.getLatitude();
+							wptPt.lon = latLon.getLongitude();
+
+							String name = renderedObject.getRouteName();
+							String fileName = name.endsWith(GPX_FILE_EXT) ? name : name + GPX_FILE_EXT;
+							File file = new File(FileUtils.getTempDir(app), fileName);
+							GpxUiHelper.saveAndOpenGpx(mapActivity, file, gpxFile, wptPt, null);
+						}
+						return true;
+					};
+					NetworkRouteSelectionTask selectionTask = new NetworkRouteSelectionTask(mapActivity, renderedObject, callback);
+					selectionTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					return true;
+				}
 			} else if (object instanceof SelectedGpxPoint) {
 				SelectedGpxPoint selectedGpxPoint = (SelectedGpxPoint) object;
 				if (selectedGpxPoint.shouldShowTrackPointMenu()) {
@@ -1141,7 +1179,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 		return false;
 	}
-
 
 	@Override
 	public LatLon getTextLocation(WptPt o) {
