@@ -1,5 +1,7 @@
 package net.osmand.plus.activities;
 
+import static net.osmand.plus.AppInitializer.LATEST_CHANGES_URL;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -30,15 +32,12 @@ import net.osmand.plus.plugins.development.BaseLogcatActivity;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuCategory;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
 import net.osmand.plus.widgets.cmadapter.callback.ItemLongClickListener;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuCategory;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 
 import java.io.File;
-
-import static net.osmand.plus.AppInitializer.LATEST_CHANGES_URL;
 
 public class HelpActivity extends BaseLogcatActivity implements OnItemClickListener, OnItemLongClickListener {
 
