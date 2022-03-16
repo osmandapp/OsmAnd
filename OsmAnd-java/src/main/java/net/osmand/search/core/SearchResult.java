@@ -78,7 +78,7 @@ public class SearchResult {
 			allWordsMatched = false;
 		}
 
-		double res = allWordsMatched ? ObjectType.getTypeWeight(objectType) * SEARCH_PRIORITY_COEF : ObjectType.getTypeWeight(null);
+		double res = allWordsMatched ? ObjectType.getTypeWeight(objectType) * SEARCH_PRIORITY_COEF : ObjectType.getTypeWeight(objectType);
 		if (requiredSearchPhrase.getUnselectedPoiType() != null) {
 			// search phrase matches poi type, then we lower all POI matches and don't check allWordsMatched
 			res = ObjectType.getTypeWeight(objectType);
@@ -118,10 +118,8 @@ public class SearchResult {
 
 	private boolean allWordsMatched(String name) {
 		List<String> localResultNames = SearchPhrase.splitWords(name, new ArrayList<String>());
-		if (localeRelatedObjectName != null) {
-			localResultNames.add(localeRelatedObjectName);
-		}
-		List<String> searchPhraseNames = Arrays.asList(requiredSearchPhrase.getFullSearchPhrase().split(DELIMITER));
+		List<String> searchPhraseNames = getSearchPhraseNames();
+		
 		if (searchPhraseNames.isEmpty()) {
 			return false;
 		}
@@ -140,16 +138,7 @@ public class SearchResult {
 				return false;
 			}
 		}
-		List<String> res = new ArrayList<>(localResultNames);
-		if (localeRelatedObjectName != null) {
-			res.addAll(Arrays.asList(localeRelatedObjectName.split(DELIMITER)));
-		}
-		// if want to priority allWordsMatched result without other words
-		// fix 13797 but break tests (starbucks and burger_king)
-		// need SEARCH_AMENITY_BY_NAME_PRIORITY = 500 and
-//		if (res.size() == searchPhraseNames.size()) {
-//			SEARCH_PRIORITY_COEF = 30;
-//		}
+		
 		return true;
 	}
 

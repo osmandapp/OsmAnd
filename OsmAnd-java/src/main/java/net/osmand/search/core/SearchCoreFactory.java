@@ -597,6 +597,9 @@ public class SearchCoreFactory {
 
 						@Override
 						public boolean publish(Amenity object) {
+							if (phrase.getSettings().isExportObjects()) {
+								resultMatcher.exportObject(phrase, object);
+							}
 							if (limit++ > LIMIT) {
 								return false;
 							}
