@@ -546,12 +546,18 @@ public class NetworkRouteSelector {
 		BICYCLE("bicycle"),
 		MTB("mtb"),
 		HORSE("horse");
+
+		private final String tag;
 		private final String tagPrefix;
 
 		RouteType(String tag) {
+			this.tag = tag;
 			this.tagPrefix = "route_" + tag + "_";
 		}
 
+		public String getTag() {
+			return tag;
+		}
 
 		public static List<RouteKey> getRouteKeys(RouteDataObject obj) {
 			Map<String, String> tags = new TreeMap<>();
