@@ -4299,4 +4299,7 @@
     <string name="poi_landuse_education">Oktatási intézmény területe</string>
     <string name="poi_hairdresser_supply">Fodrászkellék-szaküzlet</string>
     <string name="poi_changing_table_filter">Pelenkázóasztal</string>
+    <string name="poi_printer_ink">Nyomtatófestékbolt</string>
+    <string name="poi_water_sports">Vízisportfelszerelés-szaküzlet</string>
+    <string name="poi_shop_fuel">Tüzelő- és üzemanyagbolt</string>
 </resources>
