@@ -71,10 +71,10 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public boolean shouldHideMapMarkersWidget() {
-		View addressTopBar = mapActivity.findViewById(R.id.map_top_bar);
+		View streetName = mapActivity.findViewById(R.id.street_name_widget);
 		return !settings.MARKERS_DISTANCE_INDICATION_ENABLED.get()
 				|| !settings.MAP_MARKERS_MODE.get().isToolbar()
-				|| addressTopBar != null && addressTopBar.getVisibility() == View.VISIBLE
+				|| streetName != null && streetName.getVisibility() == View.VISIBLE
 				|| routingHelper.isFollowingMode()
 				|| routingHelper.isRoutePlanningMode()
 				|| isMapRouteInfoMenuVisible()

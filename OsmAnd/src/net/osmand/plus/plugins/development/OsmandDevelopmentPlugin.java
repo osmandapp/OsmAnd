@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.development;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -24,12 +23,15 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenTyp
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_DEV;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
+
+	public static final String WIDGET_FPS = "fps";
 
 	public OsmandDevelopmentPlugin(OsmandApplication app) {
 		super(app);
@@ -97,36 +99,31 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		}
 	}
 
-	public static class FPSTextInfoWidget extends TextInfoWidget {
+	public static class FPSTextInfoWidget extends RightTextInfoWidget {
 
-		private OsmandMapTileView mv;
+		private final OsmandMapTileView mapView;
 
-		public FPSTextInfoWidget(OsmandMapTileView mv, Activity activity) {
-			super(activity);
-			this.mv = mv;
+		public FPSTextInfoWidget(@NonNull MapActivity mapActivity) {
+			super(mapActivity);
+			this.mapView = mapActivity.getMapView();
 		}
 
 		@Override
-		public boolean updateInfo(DrawSettings drawSettings) {
-			if (!mv.isMeasureFPS()) {
-				mv.setMeasureFPS(true);
+		public void updateInfo(@Nullable DrawSettings drawSettings) {
+			if (!mapView.isMeasureFPS()) {
+				mapView.setMeasureFPS(true);
 			}
-			setText("", Integer.toString((int) mv.getFPS()) + "/"
-					+ Integer.toString((int) mv.getSecondaryFPS())
-					+ " FPS");
-			return true;
+			setText("", (int) mapView.getFPS() + "/" + (int) mapView.getSecondaryFPS() + " FPS");
 		}
 	}
 
-
-	private void registerWidget(@NonNull MapActivity activity) {
-		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
-		final OsmandMapTileView mv = activity.getMapView();
+	private void registerWidget(@NonNull MapActivity mapActivity) {
+		MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null && mapInfoLayer.getSideWidget(FPSTextInfoWidget.class) == null) {
-			FPSTextInfoWidget fps = new FPSTextInfoWidget(mv, activity);
+			FPSTextInfoWidget fps = new FPSTextInfoWidget(mapActivity);
 			fps.setIcons(R.drawable.widget_fps_day, R.drawable.widget_fps_night);
-			mapInfoLayer.registerSideWidget(fps, R.drawable.ic_action_fps,
-					R.string.map_widget_fps_info, "fps", false, 50);
+			mapInfoLayer.registerWidget(WIDGET_FPS, fps, R.drawable.ic_action_fps,
+					R.string.map_widget_fps_info, WidgetsPanel.RIGHT);
 			mapInfoLayer.recreateControls();
 		}
 	}

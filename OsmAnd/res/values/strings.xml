@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="map_markers_bar">Map markers bar</string>
     <string name="shared_string_visible_widgets">Visible widgets</string>
     <string name="top_widgets_panel">Top panel</string>
     <string name="bottom_widgets_panel">Bottom panel</string>

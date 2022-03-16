@@ -16,7 +16,7 @@ public abstract class WidgetState {
 
 	public abstract int getMenuTitleId();
 
-	public abstract int getMenuIconId();
+	public abstract int getSettingsIconId();
 
 	public abstract int getMenuItemId();
 

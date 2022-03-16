@@ -937,14 +937,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			color = toolbarController.getStatusBarColor(this, night);
 		}
 		if (color == TopToolbarController.NO_COLOR) {
-			boolean mapTopBar = findViewById(R.id.map_top_bar).getVisibility() == View.VISIBLE;
-			boolean markerTopBar = findViewById(R.id.map_markers_top_bar).getVisibility() == View.VISIBLE;
-			boolean coordinatesTopBar = findViewById(R.id.coordinates_top_bar).getVisibility() == View.VISIBLE;
-			if (coordinatesTopBar && mapControlsVisible) {
+			View streetNameWidget = findViewById(R.id.street_name_widget);
+			boolean streetNameVisible = streetNameWidget != null && streetNameWidget.getVisibility() == View.VISIBLE;
+			boolean mapMarkersBarVisible = mapLayers.getMapMarkersLayer().getMarkersWidgetsHelper().isMapMarkersBarWidgetVisible();
+			boolean coordinatesWidgetVisible = mapWidgetsVisibilityHelper.shouldShowTopCoordinatesWidget();
+			if (coordinatesWidgetVisible && mapControlsVisible) {
 				colorId = night ? R.color.status_bar_main_dark : R.color.status_bar_main_dark;
-			} else if (mapTopBar && mapControlsVisible) {
+			} else if (streetNameVisible && mapControlsVisible) {
 				colorId = night ? R.color.status_bar_route_dark : R.color.status_bar_route_light;
-			} else if (markerTopBar && mapControlsVisible) {
+			} else if (mapMarkersBarVisible && mapControlsVisible) {
 				colorId = R.color.status_bar_color_dark;
 			} else {
 				colorId = night ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;

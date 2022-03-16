@@ -195,13 +195,19 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 
 	private void updateButtonsCard() {
 		buttonsCard.removeAllViews();
+
+		OsmandPreference<Boolean> prefShowCompass = settings.SHOW_COMPASS;
 		buttonsCard.addView(createButtonWithSwitch(
 				R.drawable.ic_action_compass,
 				getString(R.string.map_widget_compass),
+				prefShowCompass.getModeValue(appMode),
 				false,
 				false,
-				false,
-				null
+				v -> {
+					boolean enabled = prefShowCompass.getModeValue(appMode);
+					prefShowCompass.setModeValue(appMode, !enabled);
+					mapActivity.updateApplicationModeSettings();
+				}
 		));
 
 		OsmandPreference<Boolean> prefDistanceRuler = settings.SHOW_DISTANCE_RULER;
@@ -212,7 +218,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 				true,
 				false,
 				v -> {
-					boolean enabled = prefDistanceRuler.get();
+					boolean enabled = prefDistanceRuler.getModeValue(appMode);
 					prefDistanceRuler.setModeValue(appMode, !enabled);
 					mapActivity.updateApplicationModeSettings();
 				}

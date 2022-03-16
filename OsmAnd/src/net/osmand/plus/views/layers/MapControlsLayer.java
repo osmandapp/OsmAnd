@@ -976,11 +976,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private boolean shouldShowCompass() {
-		MapActivity mapActivity = requireMapActivity();
 		float mapRotate = mapView.getRotate();
 		return forceShowCompass || mapRotate != 0
 				|| settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_NONE
-				|| mapActivity.getMapLayers().getMapInfoLayer().getMapInfoControls().isVisible("compass");
+				|| settings.SHOW_COMPASS.get();
 	}
 
 	private void updateMyLocation(MapHudButton backToLocationControl) {
