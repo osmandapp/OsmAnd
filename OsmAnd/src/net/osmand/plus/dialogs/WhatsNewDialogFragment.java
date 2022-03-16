@@ -1,7 +1,5 @@
 package net.osmand.plus.dialogs;
 
-import static net.osmand.plus.AppInitializer.LATEST_CHANGES_URL;
-
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.net.Uri;
@@ -13,13 +11,14 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
+import net.osmand.plus.utils.AndroidUtils;
+
+import static net.osmand.plus.AppInitializer.LATEST_CHANGES_URL;
 
 public class WhatsNewDialogFragment extends DialogFragment {
 
@@ -50,7 +49,7 @@ public class WhatsNewDialogFragment extends DialogFragment {
 			OsmandApplication app = requireMyApplication();
 			Uri uri = Uri.parse(LATEST_CHANGES_URL);
 			boolean nightMode = !app.getSettings().isLightContent();
-			WikipediaDialogFragment.showFullArticle(mapActivity, uri, nightMode);
+			AndroidUtils.openUrl(mapActivity, uri, nightMode);
 		}
 	}
 

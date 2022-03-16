@@ -32,7 +32,6 @@ import net.osmand.plus.liveupdates.CountrySelectionFragment.CountryItem;
 import net.osmand.plus.liveupdates.CountrySelectionFragment.OnFragmentInteractionListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -122,7 +121,7 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 		icon.setImageDrawable(getIcon(R.drawable.ic_action_help_online, iconColorRes));
 		icon.setOnClickListener(v -> {
 			if (getContext() != null) {
-				WikipediaDialogFragment.showFullArticle(getContext(), Uri.parse(OSMAND_PURCHASES_URL), nightMode);
+				AndroidUtils.openUrl(getContext(), Uri.parse(OSMAND_PURCHASES_URL), nightMode);
 			}
 		});
 		ImageButton backButton = toolbar.findViewById(R.id.close_button);
