@@ -800,14 +800,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		routingHelper.addListener(this);
 		app.getMapMarkersHelper().addListener(this);
 
-		QuickSearchDialogFragment searchDialogFragment = getQuickSearchDialogFragment();
-		if (searchDialogFragment != null) {
-			if (searchDialogFragment.isSearchHidden()) {
-				searchDialogFragment.hide();
-				searchDialogFragment.restoreToolbar();
-			}
-		}
-
 		if (System.currentTimeMillis() - tm > 50) {
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
