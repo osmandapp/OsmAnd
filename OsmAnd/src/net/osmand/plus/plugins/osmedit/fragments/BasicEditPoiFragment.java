@@ -72,7 +72,7 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment implements OnFragme
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		app = requireMyApplication();
 
-		boolean nightMode = app.getDaynightHelper().isNightMode();
+		boolean nightMode = !app.getSettings().isLightActionBar();
 		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
 		View view = themedInflater.inflate(R.layout.fragment_edit_poi_normal, container, false);
 
