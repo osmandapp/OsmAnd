@@ -606,7 +606,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (savedInstanceState == null) {
 			if (fileName != null) {
 				addNewGpxData(getGpxFile(fileName));
-			} else if (editingCtx.isApproximationNeeded() && isFollowTrackMode() && isShowSnapWarning()) {
+			} else if (isFollowTrackMode() && isShowSnapWarning()) {
 				enterApproximationMode(mapActivity);
 			}
 		} else {
@@ -927,44 +927,48 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == SnapTrackWarningFragment.REQUEST_CODE) {
+			onSnapTrackWarningResult(resultCode);
+		} else if (requestCode == ExitBottomSheetDialogFragment.REQUEST_CODE) {
+			onExitDialogResult(resultCode);
+		}
+	}
+
+	private void onSnapTrackWarningResult(int resultCode) {
 		MapActivity mapActivity = getMapActivity();
-		switch (requestCode) {
-			case SnapTrackWarningFragment.REQUEST_CODE:
-				switch (resultCode) {
-					case SnapTrackWarningFragment.CANCEL_RESULT_CODE:
-						toolBarController.setSaveViewVisible(true);
-						setMode(DIRECTION_MODE, false);
-						exitApproximationMode();
-						updateToolbar();
-						break;
-					case SnapTrackWarningFragment.CONTINUE_RESULT_CODE:
-						if (mapActivity != null) {
-							ApplicationMode mode = editingCtx.getAppMode();
-							if (mode == ApplicationMode.DEFAULT || PUBLIC_TRANSPORT_KEY.equals(mode.getRoutingProfile())) {
-								mode = null;
-							}
-							List<List<WptPt>> pointsSegments = editingCtx.getPointsSegments(true, false);
-							if (!pointsSegments.isEmpty()) {
-								GpxApproximationFragment.showInstance(
-										mapActivity.getSupportFragmentManager(), this, pointsSegments, mode);
-							}
-						}
-						break;
-				}
-				break;
-			case ExitBottomSheetDialogFragment.REQUEST_CODE:
-				switch (resultCode) {
-					case ExitBottomSheetDialogFragment.EXIT_RESULT_CODE:
-						if (mapActivity != null) {
-							dismiss(getMapActivity());
-						}
-						break;
-					case ExitBottomSheetDialogFragment.SAVE_RESULT_CODE:
-						if (mapActivity != null) {
-							openSaveAsNewTrackMenu(getMapActivity());
-						}
-						break;
-				}
+
+		if (resultCode == SnapTrackWarningFragment.CANCEL_RESULT_CODE) {
+			onCancelSnapTrackWarning();
+		} else if (resultCode == SnapTrackWarningFragment.CONTINUE_RESULT_CODE) {
+			ApplicationMode mode = editingCtx.getAppMode();
+			if (mode == ApplicationMode.DEFAULT || PUBLIC_TRANSPORT_KEY.equals(mode.getRoutingProfile())) {
+				mode = null;
+			}
+			List<List<WptPt>> pointsSegments = editingCtx.getSegmentsPoints(true, true);
+			if (Algorithms.isEmpty(pointsSegments)) {
+				onCancelSnapTrackWarning();
+			} else if (mapActivity != null) {
+				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+				GpxApproximationFragment.showInstance(fragmentManager, this, pointsSegments, mode);
+			}
+		}
+	}
+
+	private void onCancelSnapTrackWarning() {
+		toolBarController.setSaveViewVisible(true);
+		setMode(DIRECTION_MODE, false);
+		exitApproximationMode();
+		updateToolbar();
+	}
+
+	private void onExitDialogResult(int resultCode) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			if (resultCode == ExitBottomSheetDialogFragment.EXIT_RESULT_CODE) {
+				dismiss(mapActivity);
+			} else if (resultCode == ExitBottomSheetDialogFragment.SAVE_RESULT_CODE) {
+				openSaveAsNewTrackMenu(mapActivity);
+			}
 		}
 	}
 
@@ -1104,6 +1108,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			} else {
 				Toast.makeText(mapActivity, getString(R.string.one_point_error), Toast.LENGTH_SHORT).show();
 			}
+		}
+	}
+
+	@Override
+	public void attachToRoadsClick() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			enterApproximationMode(mapActivity);
 		}
 	}
 
@@ -2232,7 +2244,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		updateToolbar();
 	}
 
-	private void enterApproximationMode(MapActivity mapActivity) {
+	private void enterApproximationMode(@NonNull MapActivity mapActivity) {
 		MeasurementToolLayer layer = getMeasurementLayer();
 		if (layer != null) {
 			layer.setTapsDisabled(true);
