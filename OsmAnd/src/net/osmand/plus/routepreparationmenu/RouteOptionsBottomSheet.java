@@ -442,6 +442,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp, null, false);
 		final ImageView icon = itemView.findViewById(R.id.icon);
 		TextView tvTitle = itemView.findViewById(R.id.title);
+		itemView.findViewById(R.id.description).setVisibility(View.GONE);
 		View basicItem = itemView.findViewById(R.id.basic_item_body);
 		final CompoundButton cb = itemView.findViewById(R.id.compound_button);
 		View settingBtn = itemView.findViewById(R.id.additional_button);

@@ -1,6 +1,8 @@
 package net.osmand.plus;
 
 
+import static net.osmand.plus.settings.fragments.SimulationNavigationSettingFragment.*;
+
 import android.app.Activity;
 import android.view.View;
 import android.widget.TextView;
@@ -106,12 +108,12 @@ public class OsmAndLocationSimulation {
 			}
 		}
 	}
-	
-	public void startStopRouteAnimation(@Nullable Activity activity)  {
+
+	public void startStopRouteAnimation(@Nullable Activity activity) {
 		startStopRouteAnimation(activity, false, null);
 	}
 
-	public void startStopGpxAnimation(@Nullable Activity activity)  {
+	public void startStopGpxAnimation(@Nullable Activity activity) {
 		startStopRouteAnimation(activity, true, null);
 	}
 
@@ -128,10 +130,9 @@ public class OsmAndLocationSimulation {
 				if (current != null) {
 					current.setProvider(OsmAndLocationProvider.SIMULATED_PROVIDER);
 				}
-				//int simSpeed = app.getSettings().SIMULATION_SPEED;
-				//boolean reality = app.getSettings().CLOSE_TO_REALITY_SIMULATION;
-				int simSpeed = 0;
-				boolean reality = true;
+				float simSpeed = app.getSettings().simulateNavigationSpeed;
+				SimulationMode simulationMode = SimulationMode.getMode(app.getSettings().simulateNavigationMode);
+				boolean reality = simulationMode == SimulationMode.REALITY;
 
 				while (!directions.isEmpty() && routeAnimation != null) {
 					long timeout = (long) (time * 1000);
@@ -146,7 +147,7 @@ public class OsmAndLocationSimulation {
 						}
 					} else {
 						List<Object> result;
-						if (simSpeed != 0) {
+						if (simulationMode == SimulationMode.CONSTANT) {
 							result = useSimulationConstantSpeed(simSpeed, current, directions, meters, intervalTime, coeff);
 						} else {
 							result = useDefaultSimulation(current, directions, meters);
@@ -168,7 +169,8 @@ public class OsmAndLocationSimulation {
 					final Location toset = current;
 					app.runInUIThread(() -> provider.setLocationFromSimulation(toset));
 					try {
-						Thread.sleep((long) (timeout / coeff));
+						long delay = (long) (timeout / coeff) + (reality && toset.isTrafficLight() ? 5000 : 0);
+						Thread.sleep(delay);
 					} catch (InterruptedException e) {
 						// do nothing
 					}
@@ -181,9 +183,8 @@ public class OsmAndLocationSimulation {
 		routeAnimation.start();
 	}
 
-	private List<Object> useSimulationConstantSpeed(int speed, Location current, List<Location> directions, float meters, float intervalTime, float coeff) {
+	private List<Object> useSimulationConstantSpeed(float speed, Location current, List<Location> directions, float meters, float intervalTime, float coeff) {
 		List<Object> result = new ArrayList<>();
-		speed = (int) (speed / 3.6);
 		if (current.distanceTo(directions.get(0)) > meters) {
 			current = middleLocation(current, directions.get(0), meters);
 		} else {
@@ -234,6 +235,7 @@ public class OsmAndLocationSimulation {
 		nl.setLatitude(toDegree(lat2));
 		nl.setLongitude(toDegree(lon2));
 		nl.setBearing(brng);
+		nl.setTrafficLight(false);
 		return nl;
 	}
 

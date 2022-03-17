@@ -10,7 +10,13 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributions/translating-osmand
 	Thx - Hardy
 -->
-    <string name="rendering_attr_showFitnessTrails_name">Show fitness trails</string>
+    <string name="sim_real_mode_desc">The maximum speed during the simulation will be equal to the maximum speed of the roads along the route.</string>
+    <string name="sim_real_mode_title">Close to reality mode</string>
+    <string name="sim_constant_mode_desc">The speed will be constant during the simulation.</string>
+    <string name="sim_constant_mode_title">Simulate with a given speed</string>
+    <string name="sim_preview_mode_desc">The speed will be randomly vary during the simulation.</string>
+    <string name="sim_preview_mode_title">Fast preview mode</string>
+    <string name="speed_mode">Speed mode</string>
     <string name="rendering_attr_showFitnessTrails_description">Show fitness trails</string>
     <string name="stop_download_desc">Download is not complete. If you interrupt the download now, only part of the tiles will be available for viewing.</string>
     <string name="stop_download">Stop download</string>
