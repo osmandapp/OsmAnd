@@ -18,6 +18,14 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.core.jni.FColorARGB;
+import net.osmand.core.jni.LineEndCapStyle;
+import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.QListVectorLine;
+import net.osmand.core.jni.QVectorPointI;
+import net.osmand.core.jni.VectorLine;
+import net.osmand.core.jni.VectorLinesCollection;
+import net.osmand.core.jni.VectorLineBuilder;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -75,14 +83,17 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	private final ColoringTypeAvailabilityCache coloringAvailabilityCache;
 
 	private LayerDrawable projectionIcon;
+	private VectorLinesCollection _collection;
+	private VectorLinesCollection _actionLinesCollection;
 
-	public RouteLayer(@NonNull Context context) {
+	public RouteLayer(@NonNull Context context, int baseOrder) {
 		super(context);
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		this.helper = app.getRoutingHelper();
 		this.transportHelper = helper.getTransportRoutingHelper();
 		chartPointsHelper = new ChartPointsHelper(app);
 		coloringAvailabilityCache = new ColoringTypeAvailabilityCache(app);
+		this.baseOrder = baseOrder;
 	}
 
 	public RoutingHelper getHelper() {
@@ -150,6 +161,14 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 			final QuadRect latlonRect = cp.getLatLonBounds();
 			final QuadRect correctedQuadRect = getCorrectedQuadRect(latlonRect);
+
+			if (view.hasMapRenderer()) {
+				//OpenGL
+				drawRouteSegment(tileBox);
+				buildActionArrows(tileBox, correctedQuadRect);
+				return;
+			}
+
 			drawLocations(tileBox, canvas, correctedQuadRect.top, correctedQuadRect.left, correctedQuadRect.bottom, correctedQuadRect.right);
 
 			if (trackChartPoints != null) {
@@ -166,6 +185,11 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				}
 
 				canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+			}
+		} else {
+			if (view.hasMapRenderer()) {
+				//Clear OpenGL
+				resetLayer();
 			}
 		}
 	}
@@ -585,5 +609,149 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	@Override
 	public boolean showMenuAction(@Nullable Object o) {
 		return false;
+	}
+
+	/** OpenGL */
+	private void buildActionArrows(RotatedTileBox tileBox, QuadRect correctedQuadRect) {
+
+		if (_collection.getLines().isEmpty() || tileBox.getZoom() <= 14) {
+			if (_actionLinesCollection != null) {
+				_actionLinesCollection.removeAllLines();
+				view.getMapRenderer().removeSymbolsProvider(_actionLinesCollection);
+			}
+			return;
+		}
+
+		RouteCalculationResult route = helper.getRoute();
+		boolean directTo = route.getRouteService() == RouteService.DIRECT_TO;
+		if (directTo || !shouldShowTurnArrows()) {
+			return;
+		}
+
+		int bsOrder = this.baseOrder - 1000;
+		List<RouteDirectionInfo> rd = helper.getRouteDirections();
+		Iterator<RouteDirectionInfo> it = rd.iterator();
+		List<Location> actionPoints = calculateActionPoints(correctedQuadRect.top, correctedQuadRect.left,
+				correctedQuadRect.bottom, correctedQuadRect.right, helper.getLastProjection(),
+				helper.getRoute().getRouteLocations(), helper.getRoute().getCurrentRoute(), it, tileBox.getZoom());
+		List<List<Location>> actionArrows = getActionArrows(actionPoints);
+		if (!actionArrows.isEmpty()) {
+			int lineIdx = 0;
+			if (_actionLinesCollection == null) {
+				_actionLinesCollection = new VectorLinesCollection();
+			}
+			long initialLinesCount = _actionLinesCollection.getLines().size();
+			for (List<Location> line : actionArrows) {
+				QVectorPointI points = new QVectorPointI();
+				for (Location point : line) {
+					int x = MapUtils.get31TileNumberX(point.getLongitude());
+					int y = MapUtils.get31TileNumberY(point.getLatitude());
+					points.add(new PointI(x, y));
+				}
+				if (lineIdx < initialLinesCount) {
+					VectorLine vectorLine = _actionLinesCollection.getLines().get(lineIdx);
+					vectorLine.setPoints(points);
+					vectorLine.setIsHidden(false);
+					lineIdx++;
+				} else {
+					VectorLineBuilder vectorLineBuilder = new VectorLineBuilder();
+					vectorLineBuilder.setBaseOrder(bsOrder--)
+							.setIsHidden(false)
+							.setLineId((int)_actionLinesCollection.getLines().size())
+							.setLineWidth(getRouteLineWidth(tileBox) * 0.4)
+							.setPoints(points)
+							.setEndCapStyle(LineEndCapStyle.ARROW.ordinal())
+							.setFillColor(getFColorARGB(customTurnArrowColor));
+					vectorLineBuilder.buildAndAddToCollection(_actionLinesCollection);
+				}
+			}
+			while (lineIdx < initialLinesCount) {
+				_actionLinesCollection.getLines().get(lineIdx).setIsHidden(true);
+				lineIdx++;
+			}
+			view.getMapRenderer().addSymbolsProvider(_actionLinesCollection);
+		}
+	}
+
+	/** OpenGL */
+	private void drawRouteSegment(RotatedTileBox tb) {
+		if (!view.hasMapRenderer()) {
+			return;
+		}
+
+		QListVectorLine lines = new QListVectorLine();
+		if (_collection != null) {
+			lines = _collection.getLines();
+		}
+
+		if (lines.isEmpty()) {
+			VectorLineBuilder vectorLineBuilder = new VectorLineBuilder();
+			QVectorPointI points = new QVectorPointI();
+			List<Location> ll = helper.getRoute().getRouteLocations();
+			for (Location l : ll) {
+				int x = MapUtils.get31TileNumberX(l.getLongitude());
+				int y = MapUtils.get31TileNumberY(l.getLatitude());
+				points.add(new PointI(x, y));
+			}
+
+			int bsOrder = baseOrder;
+			vectorLineBuilder
+					.setPoints(points)
+					.setIsHidden(false)
+					.setLineId(1)
+					.setLineWidth(getRouteLineWidth(tb))
+					.setFillColor(getFColorARGB(getRouteLineColor()))
+					.setBaseOrder(bsOrder--);
+
+			if (_collection == null) {
+				_collection = new VectorLinesCollection();
+			}
+
+			vectorLineBuilder.buildAndAddToCollection(_collection);
+
+			view.getMapRenderer().addSymbolsProvider(_collection);
+		}
+	}
+
+	/** OpenGL */
+	private void resetLayer() {
+		if (_collection != null) {
+			QListVectorLine lines = _collection.getLines();
+			if (!lines.isEmpty()) {
+				view.getMapRenderer().removeSymbolsProvider(_collection);
+				_collection = null;
+			}
+		}
+		if (_actionLinesCollection != null) {
+			QListVectorLine lines = _actionLinesCollection.getLines();
+			if (!lines.isEmpty()) {
+				view.getMapRenderer().removeSymbolsProvider(_actionLinesCollection);
+				_actionLinesCollection = null;
+			}
+		}
+	}
+
+	private List<List<Location>> getActionArrows(List<Location> locations) {
+		List<List<Location>> ll = new ArrayList<>();
+		ll.add(new ArrayList<>());
+		int index = 0;
+		for (int i = 0; i < locations.size(); i++) {
+			Location loc = locations.get(i);
+			if (loc != null) {
+				ll.get(index).add(loc);
+			} else if (i < locations.size() - 1) {
+				index++;
+				ll.add(new ArrayList<>());
+			}
+		}
+		return ll;
+	}
+
+	private FColorARGB getFColorARGB(int color) {
+		float a = (color >> 24) & 0xFF;
+		float r = (color >> 16) & 0xFF;
+		float g = (color >> 8) & 0xFF;
+		float b = (color >> 0) & 0xFF;
+		return new FColorARGB(a / 255, r / 255, g / 255, b / 255);
 	}
 }
