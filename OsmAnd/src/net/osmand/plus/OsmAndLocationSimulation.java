@@ -23,14 +23,17 @@ import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class OsmAndLocationSimulation {
 
+	public static final float PRECISION_1_M = 0.00001f;
+	public static final int DEVIATION_M = 6;
 	private Thread routeAnimation;
 	private final OsmAndLocationProvider provider;
 	private final OsmandApplication app;
-	
-	public OsmAndLocationSimulation(OsmandApplication app, OsmAndLocationProvider provider){
+
+	public OsmAndLocationSimulation(OsmandApplication app, OsmAndLocationProvider provider) {
 		this.app = app;
 		this.provider = provider;
 	}
@@ -38,7 +41,7 @@ public class OsmAndLocationSimulation {
 	public boolean isRouteAnimating() {
 		return routeAnimation != null;
 	}
-	
+
 //	public void startStopRouteAnimationRoute(final MapActivity ma) {
 //		if (!isRouteAnimating()) {
 //			List<Location> currentRoute = app.getRoutingHelper().getCurrentRoute();
@@ -133,44 +136,55 @@ public class OsmAndLocationSimulation {
 				float simSpeed = app.getSettings().simulateNavigationSpeed;
 				SimulationMode simulationMode = SimulationMode.getMode(app.getSettings().simulateNavigationMode);
 				boolean reality = simulationMode == SimulationMode.REALITY;
+				int stopDelayCount = 0;
 
 				while (!directions.isEmpty() && routeAnimation != null) {
 					long timeout = (long) (time * 1000);
 					float intervalTime = time;
-					if (useLocationTime) {
-						current = directions.remove(0);
-						meters = current.distanceTo(prev);
-						if (!directions.isEmpty()) {
-							timeout = Math.abs((directions.get(0).getTime() - current.getTime()));
-							intervalTime = Math.abs((current.getTime() - prevTime) / 1000f);
-							prevTime = current.getTime();
-						}
-					} else {
-						List<Object> result;
-						if (simulationMode == SimulationMode.CONSTANT) {
-							result = useSimulationConstantSpeed(simSpeed, current, directions, meters, intervalTime, coeff);
+					if (stopDelayCount == 0) {
+						if (useLocationTime) {
+							current = directions.remove(0);
+							meters = current.distanceTo(prev);
+							if (!directions.isEmpty()) {
+								timeout = Math.abs((directions.get(0).getTime() - current.getTime()));
+								intervalTime = Math.abs((current.getTime() - prevTime) / 1000f);
+								prevTime = current.getTime();
+							}
 						} else {
-							result = useDefaultSimulation(current, directions, meters);
+							List<Object> result;
+							if (simulationMode == SimulationMode.CONSTANT) {
+								result = useSimulationConstantSpeed(simSpeed, current, directions, meters, intervalTime, coeff);
+							} else {
+								result = useDefaultSimulation(current, directions, meters);
+							}
+							current = (Location) result.get(0);
+							meters = (float) result.get(1);
 						}
-						current = (Location) result.get(0);
-						meters = (float) result.get(1);
-					}
-					int speed = (int) (meters / intervalTime * coeff);
-					if (intervalTime != 0) {
-						current.setSpeed(meters / intervalTime * coeff);
+						float speed = meters / intervalTime * coeff;
+						if (intervalTime != 0) {
+							current.setSpeed(speed);
+						}
+						if (!current.hasAccuracy() || Double.isNaN(current.getAccuracy()) || (reality && speed < 10)) {
+							current.setAccuracy(5);
+						}
+						if (prev != null && prev.distanceTo(current) > 3 || (reality && speed >= 3)) {
+							current.setBearing(prev.bearingTo(current));
+						}
 					}
 					current.setTime(System.currentTimeMillis());
-					if (!current.hasAccuracy() || Double.isNaN(current.getAccuracy()) || (reality && speed < 10)) {
-						current.setAccuracy(5);
-					}
-					if (prev != null && prev.distanceTo(current) > 3 || (reality && speed >= 3)) {
-						current.setBearing(prev.bearingTo(current));
-					}
 					final Location toset = current;
+					if (reality) {
+						addNoise(toset);
+					}
+					if (reality && current.isTrafficLight() && stopDelayCount == 0) {
+						stopDelayCount = 5;
+						current.removeBearing();
+					} else if (stopDelayCount > 0) {
+						stopDelayCount--;
+					}
 					app.runInUIThread(() -> provider.setLocationFromSimulation(toset));
 					try {
-						long delay = (long) (timeout / coeff) + (reality && toset.isTrafficLight() ? 5000 : 0);
-						Thread.sleep(delay);
+						Thread.sleep((long) (timeout / coeff));
 					} catch (InterruptedException e) {
 						// do nothing
 					}
@@ -179,11 +193,20 @@ public class OsmAndLocationSimulation {
 				OsmAndLocationSimulation.this.stop();
 			}
 
+			private void addNoise(Location location) {
+				Random r = new Random();
+				float d = (r.nextInt(DEVIATION_M + 1) - DEVIATION_M / 2) * PRECISION_1_M;
+				location.setLatitude(location.getLatitude() + d);
+				d = (r.nextInt(DEVIATION_M + 1) - DEVIATION_M / 2) * PRECISION_1_M;
+				location.setLongitude(location.getLongitude() + d);
+			}
+
 		};
 		routeAnimation.start();
 	}
 
-	private List<Object> useSimulationConstantSpeed(float speed, Location current, List<Location> directions, float meters, float intervalTime, float coeff) {
+	private List<Object> useSimulationConstantSpeed(float speed, Location current, List<Location> directions,
+	                                                float meters, float intervalTime, float coeff) {
 		List<Object> result = new ArrayList<>();
 		if (current.distanceTo(directions.get(0)) > meters) {
 			current = middleLocation(current, directions.get(0), meters);
