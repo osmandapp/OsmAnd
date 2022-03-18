@@ -100,6 +100,8 @@ public class ConfigureMapMenu {
 	public static final String WHITE_WATER_SPORTS_ATTR = "whiteWaterSports";
 	public static final String HIKING_ROUTES_OSMC_ATTR = "hikingRoutesOSMC";
 	public static final String CYCLE_NODE_NETWORK_ROUTES_ATTR = "showCycleNodeNetworkRoutes";
+	public static final String SHOW_FITNESS_TRAILS_ATTR = "showFitnessTrails";
+	public static final String SHOW_RUNNING_ROUTES_ATTR = "showRunningRoutes";
 
 	public static final String CURRENT_TRACK_COLOR_ATTR = "currentTrackColor";
 	public static final String CURRENT_TRACK_WIDTH_ATTR = "currentTrackWidth";
@@ -439,6 +441,10 @@ public class ConfigureMapMenu {
 				return R.drawable.ic_action_skiing;
 			case TRAVEL_ROUTES:
 				return R.drawable.mm_routes;
+			case SHOW_FITNESS_TRAILS_ATTR:
+				return R.drawable.mx_sport_athletics;
+			case SHOW_RUNNING_ROUTES_ATTR:
+				return R.drawable.mx_running;
 		}
 		return INVALID_ID;
 	}
