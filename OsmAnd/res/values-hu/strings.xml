@@ -1738,7 +1738,7 @@
     <string name="osm_save_offline">Mentés offline</string>
     <string name="osm_edit_modified_poi">Módosított OSM POI</string>
     <string name="osm_edit_deleted_poi">Törölt OSM POI</string>
-    <string name="context_menu_item_open_note">OSM Jegyzet megnyitása</string>
+    <string name="context_menu_item_open_note">OSM jegyzet nyitása</string>
     <string name="osm_edit_reopened_note">Újranyitott OSM Jegyzet</string>
     <string name="osm_edit_commented_note">Kommentált OSM Jegyzet</string>
     <string name="osm_edit_created_note">Létrehozott OSM Jegyzet</string>
@@ -4536,4 +4536,6 @@
     <string name="number_of_tiles">Csempék száma</string>
     <string name="zoom_levels_difference_description">A nagyítási szintek közötti nagy különbség növelheti a letöltött adatok méretét.</string>
     <string name="move_map_to_select_area">Mozgassa a térképet a kívánt terület kijelöléséhez.</string>
+    <string name="rendering_attr_showFitnessTrails_description">Erdei tornapályák megjelenítése</string>
+    <string name="rendering_attr_showFitnessTrails_name">Erdei tornapályák megjelenítése</string>
 </resources>

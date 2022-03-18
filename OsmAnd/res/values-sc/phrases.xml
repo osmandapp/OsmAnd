@@ -3564,16 +3564,16 @@
     <string name="poi_hazard_additional_minefield">Perìgulu: campu minadu</string>
     <string name="poi_hazard_additional_contamination">Perìgulu: cuntaminatzione</string>
     <string name="poi_defibrillator_location">Positzione</string>
-    <string name="poi_changing_table_yes">Fasciatòiu: eja</string>
-    <string name="poi_changing_table_no">Fasciatòiu: nono</string>
-    <string name="poi_changing_table_limited">Fasciatòiu: limitadu</string>
-    <string name="poi_changing_table_location_room">Logu de su fasciatòiu: aposentu</string>
-    <string name="poi_changing_table_location_male_toilet">Logu de su fasciatòiu: bagnu de sos òmines</string>
-    <string name="poi_changing_table_location_female_toilet">Logu de su fasciatòiu: bagnu de sas fèminas</string>
-    <string name="poi_changing_table_location_unisex_toilet">Logu de su fasciatòiu: bagnu unisex</string>
+    <string name="poi_changing_table_yes">Eja;Fasciatoju: eja</string>
+    <string name="poi_changing_table_no">Nono;Fasciatoju: nono</string>
+    <string name="poi_changing_table_limited">Limitadu;Fasciatoju: limitadu</string>
+    <string name="poi_changing_table_location_room">Logu de su fasciatoju: aposentu</string>
+    <string name="poi_changing_table_location_male_toilet">Logu de su fasciatoju: bagnu de sos òmines</string>
+    <string name="poi_changing_table_location_female_toilet">Logu de su fasciatoju: bagnu de sas fèminas</string>
+    <string name="poi_changing_table_location_unisex_toilet">Logu de su fasciatoju: bagnu mistu</string>
     <string name="poi_changing_table_count">Nùmeru de fasciatòios</string>
-    <string name="poi_changing_table_fee_yes">Tarifa pro s\'impreu de su fasciatòiu: eja</string>
-    <string name="poi_changing_table_fee_no">Tarifa pro s\'impreu de su fasciatòiu: nono</string>
+    <string name="poi_changing_table_fee_yes">Tarifa pro s\'impreu de su fasciatoju: eja</string>
+    <string name="poi_changing_table_fee_no">Tarifa pro s\'impreu de su fasciatoju: nono</string>
     <string name="poi_charcoal_pile">Chea</string>
     <string name="poi_historic_tank">Carru armadu istòricu</string>
     <string name="poi_hookah_lounge">Sala pro su narghilè</string>
@@ -4297,4 +4297,6 @@
     <string name="poi_access_permit">Permissu netzessàriu</string>
     <string name="poi_greenery">Vegetatzione</string>
     <string name="poi_landuse_education">Educatzione</string>
+    <string name="poi_hairdresser_supply">Butega de artìculos pro pilucheris</string>
+    <string name="poi_changing_table_filter">Fasciatoju</string>
 </resources>

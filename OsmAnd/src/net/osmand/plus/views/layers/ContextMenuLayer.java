@@ -15,6 +15,7 @@ import android.os.Vibrator;
 import android.text.TextUtils;
 import android.util.Pair;
 import android.view.GestureDetector;
+import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout.LayoutParams;
@@ -25,7 +26,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
 import androidx.appcompat.content.res.AppCompatResources;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
@@ -57,8 +57,6 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -73,13 +71,19 @@ import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.MoveMarkerBottomSheetHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
+import net.osmand.router.network.NetworkRouteSelector.RouteKey;
+import net.osmand.router.network.NetworkRouteSelector.RouteType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -324,19 +328,17 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public void populateObjectContextMenu(@NonNull LatLon latLon, @Nullable Object o, @NonNull ContextMenuAdapter adapter) {
-		ContextMenuAdapter.ItemClickListener listener = (adptr, itemId, pos, isChecked, viewCoordinates) -> {
+		ItemClickListener listener = (adptr, itemId, pos, isChecked, viewCoordinates) -> {
 			RotatedTileBox tileBox = getMapView().getCurrentRotatedTileBox();
 			enterMovingMode(tileBox);
 			return true;
 		};
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
+		adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION)
 				.setTitleId(R.string.change_markers_position, getContext())
-				.setId(MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION)
 				.setIcon(R.drawable.ic_show_on_map)
 				.setOrder(MapActivityActions.CHANGE_POSITION_ITEM_ORDER)
 				.setClickable(isObjectMoveable(o))
-				.setListener(listener)
-				.createItem());
+				.setListener(listener));
 	}
 
 	@Override
@@ -790,9 +792,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					String routeID = renderedObject.getRouteID();
 					String fileName = renderedObject.getGpxFileName();
 					String filter = routeID != null ? routeID : fileName;
-					boolean isGpx = !Algorithms.isEmpty(filter);
-					if (!isGpx && (renderedObject.getId() == null || !renderedObject.isVisible()
-							|| renderedObject.isDrawOnPath())) {
+					List<RouteKey> routeKeys = RouteType.getRouteStringKeys(renderedObject);
+
+					boolean isTravelGpx = !Algorithms.isEmpty(filter);
+					boolean isRouteGpx = !Algorithms.isEmpty(routeKeys);
+					if (!isTravelGpx && !isRouteGpx && (renderedObject.getId() == null
+							|| !renderedObject.isVisible() || renderedObject.isDrawOnPath())) {
 						continue;
 					}
 
@@ -820,17 +825,18 @@ public class ContextMenuLayer extends OsmandMapLayer {
 						objectLatLon = renderedObject.getLabelLatLon();
 					}
 					LatLon searchLatLon = objectLatLon != null ? objectLatLon : pointLatLon;
-					if (isGpx) {
+					if (isTravelGpx) {
 						TravelGpx travelGpx = app.getTravelHelper().searchGpx(pointLatLon, filter,
 								renderedObject.getTagValue("ref"));
 						if (travelGpx != null && isUniqueGpx(selectedObjects, travelGpx)) {
 							WptPt selectedPoint = new WptPt();
 							selectedPoint.lat = pointLatLon.getLatitude();
 							selectedPoint.lon = pointLatLon.getLongitude();
-							SelectedGpxPoint selectedGpxPoint =
-									new SelectedGpxPoint(null, selectedPoint);
+							SelectedGpxPoint selectedGpxPoint = new SelectedGpxPoint(null, selectedPoint);
 							selectedObjects.put(new Pair<>(travelGpx, selectedGpxPoint), gpxMenuProvider);
 						}
+					} else if (isRouteGpx) {
+						selectedObjects.put(new Pair<>(renderedObject, pointLatLon), gpxMenuProvider);
 					} else {
 						Amenity amenity = findAmenity(app, renderedObject.getId() >> 7,
 								renderedObject.getOriginalNames(), searchLatLon, AMENITY_SEARCH_RADIUS);
@@ -1231,7 +1237,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		void clearSelectedObject();
 	}
 
-	private class MenuLayerOnGestureListener extends GestureDetector.SimpleOnGestureListener {
+	private static class MenuLayerOnGestureListener extends SimpleOnGestureListener {
 
 		@Override
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {

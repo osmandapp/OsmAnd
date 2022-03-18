@@ -4537,4 +4537,6 @@
     <string name="stop_and_exit">停止並離開</string>
     <string name="shared_string_complete">完成</string>
     <string name="number_of_tiles">圖磚數</string>
+    <string name="rendering_attr_showFitnessTrails_description">顯示健身路徑</string>
+    <string name="rendering_attr_showFitnessTrails_name">顯示健身路徑</string>
 </resources>

@@ -4064,4 +4064,5 @@
     <string name="monitoring_min_speed">最低速度</string>
     <string name="monitoring_min_accuracy">最低精度</string>
     <string name="monitoring_min_distance">最小位移</string>
+    <string name="logcat_buffer">Logcat 缓冲区</string>
 </resources>

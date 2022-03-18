@@ -20,6 +20,7 @@ import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TransportRoutingConfiguration;
+import net.osmand.router.network.NetworkRouteSelector.RouteType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -612,6 +613,16 @@ public class NativeLibrary {
 		public String getGpxFileName() {
 			for (String name : getOriginalNames()) {
 				if (name.endsWith(GPX_FILE_EXT) || name.endsWith(GPX_GZ_FILE_EXT)) {
+					return name;
+				}
+			}
+			return null;
+		}
+
+		public String getRouteName() {
+			for (RouteType routeType : RouteType.values()) {
+				String name = getTagValue(routeType.getTag() + "_route_name");
+				if (!Algorithms.isEmpty(name)) {
 					return name;
 				}
 			}

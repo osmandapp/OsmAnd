@@ -296,7 +296,7 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 			iconId = R.drawable.ic_action_marker_dark;
 		} else if (pd.isPoi()) {
 			iconId = R.drawable.ic_action_info_dark;
-		} else if (pd.isGpxFile()) {
+		} else if (pd.isGpxFile() || pd.isGpxPoint()) {
 			iconId = R.drawable.ic_action_polygom_dark;
 		} else if (pd.isWpt()) {
 			iconId = R.drawable.ic_action_flag_stroke;

@@ -10,15 +10,15 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.widget.ArrayAdapter;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.ConnectedApp;
 import net.osmand.data.LocationPoint;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
@@ -30,6 +30,8 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.JsonUtils;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -53,9 +55,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 
@@ -489,18 +488,13 @@ public class OsmAndAppCustomization {
 					}
 					final Intent finalIntent = intent;
 					int iconId = AndroidUtils.getDrawableId(app, item.iconName);
-					adapter.addItem(new ContextMenuItem.ItemBuilder()
-							.setId(item.getId())
+					adapter.addItem(new ContextMenuItem(item.getId())
 							.setTitle(item.name)
 							.setIcon(iconId != 0 ? iconId : ContextMenuItem.INVALID_ID)
-							.setListener(new ContextMenuAdapter.ItemClickListener() {
-								@Override
-								public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
-									activity.startActivity(finalIntent);
-									return true;
-								}
-							})
-							.createItem());
+							.setListener((adapter1, itemId, position, isChecked, viewCoordinates) -> {
+								activity.startActivity(finalIntent);
+								return true;
+							}));
 				}
 			}
 		}

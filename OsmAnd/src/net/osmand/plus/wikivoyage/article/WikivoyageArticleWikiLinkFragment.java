@@ -1,7 +1,5 @@
 package net.osmand.plus.wikivoyage.article;
 
-import static net.osmand.plus.download.ui.SearchDialogFragment.SHOW_WIKI_KEY;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -13,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -22,7 +19,9 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleDividerItem;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
+import net.osmand.plus.utils.AndroidUtils;
+
+import static net.osmand.plus.download.ui.SearchDialogFragment.SHOW_WIKI_KEY;
 
 public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFragment {
 
@@ -98,7 +97,7 @@ public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFrag
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-				   		WikipediaDialogFragment.showFullArticle(getContext(), Uri.parse(articleUrl), nightMode);
+				   		AndroidUtils.openUrl(getContext(), Uri.parse(articleUrl), nightMode);
 						dismiss();
 					}
 				})

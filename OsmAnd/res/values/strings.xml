@@ -17,6 +17,9 @@
     <string name="simulation_preview_mode_desc">The speed of the simulation will be maximum on straight sections and slow down only at intersections.</string>
     <string name="simulation_preview_mode_title">Fast preview mode</string>
     <string name="speed_mode">Speed mode</string>
+    <string name="rendering_attr_showRunningRoutes_name">Running routes</string>
+    <string name="rendering_attr_showRunningRoutes_description">Show running routes</string>
+    <string name="rendering_attr_showFitnessTrails_name">Fitness trails</string>
     <string name="rendering_attr_showFitnessTrails_description">Show fitness trails</string>
     <string name="stop_download_desc">Download is not complete. If you interrupt the download now, only part of the tiles will be available for viewing.</string>
     <string name="stop_download">Stop download</string>
@@ -4553,6 +4556,6 @@
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
     <string name="routing_attr_freeride_policy_description">\'Freeride\' and \'Off-piste\' are unofficial routes and passages. Typically ungroomed, unmaintained and not checked in the evening. Enter at your own risk.</string>
     <string name="voice_prompts_timetable">Voice prompts times</string>
-    <string name="constant_speed">Constant speed</string>
+
 
 </resources>

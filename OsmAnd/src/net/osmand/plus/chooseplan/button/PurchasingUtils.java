@@ -8,9 +8,9 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
-import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -104,15 +104,13 @@ public class PurchasingUtils {
 			return false;
 		};
 
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setId(PROMO_PREFIX + id)
+		adapter.addItem(new ContextMenuItem(PROMO_PREFIX + id)
 				.setLayout(R.layout.list_item_promo)
 				.setTitleId(titleId, mapActivity)
 				.setDescription(app.getString(descriptionId))
 				.setIcon(feature.getIconId(nightMode))
-				.setSkipPaintingWithoutColor(true)
-				.setListener(listener)
-				.createItem());
+				.setUseNaturalIconColor(true)
+				.setListener(listener));
 	}
 
 	public static void removePromoItems(ContextMenuAdapter contextMenuAdapter) {

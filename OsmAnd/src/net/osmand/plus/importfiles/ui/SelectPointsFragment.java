@@ -87,7 +87,11 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 		return new Dialog(requireContext(), getTheme()) {
 			@Override
 			public void onBackPressed() {
-				showSkipSelectionDialog();
+				if (selectedPointsChanged()) {
+					dismiss();
+				} else {
+					showSkipSelectionDialog();
+				}
 			}
 		};
 	}
@@ -171,7 +175,13 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 		toolbarTitle = appbar.findViewById(R.id.toolbar_title);
 
 		ImageView closeButton = appbar.findViewById(R.id.close_button);
-		closeButton.setOnClickListener(v -> showSkipSelectionDialog());
+		closeButton.setOnClickListener(v -> {
+			if (selectedPointsChanged()) {
+				dismiss();
+			} else {
+				showSkipSelectionDialog();
+			}
+		});
 		closeButton.setImageDrawable(getIcon(AndroidUtils.getNavigationIconResId(view.getContext())));
 	}
 
@@ -225,6 +235,11 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 			((PointsSelectionListener) target).onPointsSelected(trackItem, selectedPoints);
 		}
 		dismiss();
+	}
+
+	private boolean selectedPointsChanged() {
+		return selectedPoints.size() == trackItem.selectedPoints.size()
+				&& selectedPoints.containsAll(trackItem.selectedPoints);
 	}
 
 	private void showSkipSelectionDialog() {
