@@ -34,25 +34,24 @@ public class NetworkRouteSelector {
 	
 	private static final String ROUTE_KEY_VALUE_SEPARATOR = "__";
 
-	private static final boolean GROW_ALGORITHM = false;
+	private static final boolean GROW_ALGORITHM = false; // not implemented fully and has flaws (should be deleted)
 	private static final int MAX_ITERATIONS = 16000;
 	// works only if road in same tile
 	private static final double MAX_RADIUS_HOLE = 30;
 	private static final int CONNECT_POINTS_DISTANCE_STEP = 50;
-	private static final int CONNECT_POINTS_DISTANCE_MAX = 100;
+	private static final int CONNECT_POINTS_DISTANCE_MAX = 1000;
 
 	
 	private final NetworkRouteContext rCtx;
 	
-	// TODO 1. Search by bbox
-	// TODO 2. FIX & implement work with routing tags
+	// TODO - FIX & implement work with routing tags
 	// TEST:
-	// --- https://www.openstreetmap.org/relation/1075081#map=17/48.04245/11.51900 [21] -> ? 3 main (114km, 82km, 71km, 34km, 19km,...)
-	// +++ https://www.openstreetmap.org/relation/1200009#map=8/60.592/10.940 [25] -> 3!
-	// +++ https://www.openstreetmap.org/relation/138401#map=19/51.06795/7.37955 [6] -> 1
-	// +++ https://www.openstreetmap.org/relation/145490#map=16/51.0607/7.3596 [2] -> 2
-	// +++ https://www.openstreetmap.org/way/23246638#map=19/47.98180/11.28338 [5] -> 3
-	// +++ https://www.openstreetmap.org/relation/1075081#map=15/47.656/10.456 [46] 
+	// TODO https://www.openstreetmap.org/relation/1075081#map=17/48.04245/11.51900 [21] -> ? 3 main not straight (137km, 114km, 80km, ...(12) <5km)
+	// +++  https://www.openstreetmap.org/relation/1200009#map=8/60.592/10.940 [25] -> 3!
+	// +++  https://www.openstreetmap.org/relation/138401#map=19/51.06795/7.37955 [6] -> 1
+	// +++  https://www.openstreetmap.org/relation/145490#map=16/51.0607/7.3596 [2] -> 2
+	// +++  https://www.openstreetmap.org/way/23246638#map=19/47.98180/11.28338 [5] -> 3
+	// +++  https://www.openstreetmap.org/relation/1075081#map=15/47.656/10.456 [46] 
 	public NetworkRouteSelector(BinaryMapIndexReader[] files, NetworkRouteSelectorFilter filter) {
 		this(files, filter, false);
 	}
@@ -89,8 +88,27 @@ public class NetworkRouteSelector {
 		return res;
 	}
 	
-	public Map<RouteKey, GPXFile> getRoutes(QuadRect bBox) throws IOException {
-		throw new UnsupportedOperationException();
+	public Map<RouteKey, GPXFile> getRoutes(QuadRect bBox, boolean loadKeys, RouteKey selected) throws IOException {
+		int y31T = MapUtils.get31TileNumberY(Math.max(bBox.bottom, bBox.top));
+		int y31B = MapUtils.get31TileNumberY(Math.min(bBox.bottom, bBox.top));
+		int x31L = MapUtils.get31TileNumberX(bBox.left);
+		int x31R = MapUtils.get31TileNumberX(bBox.right);
+		Map<RouteKey, List<NetworkRouteSegment>> res = rCtx.loadRouteSegmentTile(x31L, y31T, x31R, y31B, null);
+		Map<RouteKey, GPXFile> r = new LinkedHashMap<>();
+		for (RouteKey key : res.keySet()) {
+			if(selected != null && !selected.equals(key)) {
+				continue;
+			}
+			List<NetworkRouteSegment> list = res.get(key);
+			if (list.size() > 0) {
+				if (!loadKeys) {
+					r.put(key, null);
+				} else {
+					connectAlgorithm(list.get(0), r);
+				}
+			}
+		}
+		return r;
 	}
 	
 	
@@ -457,7 +475,7 @@ public class NetworkRouteSelector {
 				return -Integer.compare(o1.getSize(), o2.getSize());
 			}
 		});
-//		return chainsFlat.subList(0, 5);
+//		return chainsFlat.subList(0, 4);
 		return chainsFlat;
 	}
 
