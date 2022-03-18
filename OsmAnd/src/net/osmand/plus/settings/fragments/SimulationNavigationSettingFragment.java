@@ -33,6 +33,7 @@ import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.router.GeneralRouter;
 
 public class SimulationNavigationSettingFragment extends BaseSettingsFragment {
 
@@ -200,12 +201,12 @@ public class SimulationNavigationSettingFragment extends BaseSettingsFragment {
 	private void setupSpeedSlider(View itemView, int titleRes) {
 		float min = MIN_SPEED;
 		float max = MAX_SPEED;
-//		GeneralRouter router = app.getRouter(getSelectedAppMode());
-//		if (router != null) {
-//			max = router.getMaxSpeed() * 2;
-//		}
+		GeneralRouter router = app.getRouter(getSelectedAppMode());
+		if (router != null) {
+			max = router.getMaxSpeed() * 2;
+		}
 		float speedValue = settings.simulateNavigationSpeed;
-//		speedValue = Math.min(speedValue, max);
+		speedValue = Math.min(speedValue, max);
 		final Slider slider = itemView.findViewById(R.id.slider);
 		final TextView title = itemView.findViewById(android.R.id.title);
 		final TextView minSpeed = itemView.findViewById(R.id.min);
@@ -216,7 +217,7 @@ public class SimulationNavigationSettingFragment extends BaseSettingsFragment {
 		title.setText(getString(R.string.ltr_or_rtl_combine_via_colon, getString(titleRes),
 				getFormattedSpeed(speedValue, app)));
 		slider.setValueTo(max - min);
-		slider.setValue(speedValue);
+		slider.setValue(speedValue - min);
 		slider.addOnChangeListener((s, val, fromUser) -> {
 			float value = min + val;
 			title.setText(SimulationNavigationSettingFragment.this.getString(R.string.ltr_or_rtl_combine_via_colon,
