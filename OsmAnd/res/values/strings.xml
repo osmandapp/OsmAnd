@@ -10,7 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributions/translating-osmand
 	Thx - Hardy
 -->
-    <string name="rendering_attr_showFitnessTrails_name">Show fitness trails</string>
+    <string name="rendering_attr_showRunningRoutes_name">Running routes</string>
+    <string name="rendering_attr_showRunningRoutes_description">Show running routes</string>
+    <string name="rendering_attr_showFitnessTrails_name">Fitness trails</string>
     <string name="rendering_attr_showFitnessTrails_description">Show fitness trails</string>
     <string name="stop_download_desc">Download is not complete. If you interrupt the download now, only part of the tiles will be available for viewing.</string>
     <string name="stop_download">Stop download</string>
