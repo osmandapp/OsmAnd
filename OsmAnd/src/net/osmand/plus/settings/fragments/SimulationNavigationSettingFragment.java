@@ -5,6 +5,9 @@ import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.BulletSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -161,28 +164,48 @@ public class SimulationNavigationSettingFragment extends BaseSettingsFragment {
 				TextView description = itemView.findViewById(R.id.description);
 				boolean checked = ((CheckBoxPreference) preference).isChecked();
 				description.setVisibility(checked ? View.VISIBLE : View.GONE);
-				description.setText(mode.description);
+				String str = getString(mode.description);
+				SpannableString spanDescription = new SpannableString(str);
+				if (mode == SimulationMode.REALITY) {
+					int startLine = 0;
+					int endLine = 0;
+					int dp8 = AndroidUtils.dpToPx(itemView.getContext(), 8f);
+					while (endLine < str.length()) {
+						endLine = str.indexOf("\n", startLine);
+						endLine = endLine > 0 ? endLine : str.length();
+						spanDescription.setSpan(new BulletSpan(dp8),
+								startLine, endLine, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+						startLine = endLine + 1;
+					}
+					AndroidUtils.setPadding(description, dp8, 0, 0, 0);
+				}
+				description.setText(spanDescription);
 				View slider = itemView.findViewById(R.id.slider_group);
 				if (slider != null) {
 					slider.setVisibility(checked ? View.VISIBLE : View.GONE);
 					if (checked) {
-						setupSpeedSlider(itemView);
+						setupSpeedSlider(itemView, mode.title);
 					}
 				}
 				View divider = itemView.findViewById(R.id.divider);
 				if (mode != SimulationMode.REALITY) {
 					divider.setVisibility(View.VISIBLE);
 				} else {
-					divider.setVisibility(View.GONE);
+					divider.setVisibility(View.INVISIBLE);
 				}
 			}
 		}
 	}
 
-	private void setupSpeedSlider(View itemView) {
+	private void setupSpeedSlider(View itemView, int titleRes) {
 		float min = MIN_SPEED;
 		float max = MAX_SPEED;
+//		GeneralRouter router = app.getRouter(getSelectedAppMode());
+//		if (router != null) {
+//			max = router.getMaxSpeed() * 2;
+//		}
 		float speedValue = settings.simulateNavigationSpeed;
+//		speedValue = Math.min(speedValue, max);
 		final Slider slider = itemView.findViewById(R.id.slider);
 		final TextView title = itemView.findViewById(android.R.id.title);
 		final TextView minSpeed = itemView.findViewById(R.id.min);
@@ -190,23 +213,23 @@ public class SimulationNavigationSettingFragment extends BaseSettingsFragment {
 
 		minSpeed.setText(getFormattedSpeed(min, app));
 		maxSpeed.setText(getFormattedSpeed(max, app));
-		title.setText(getString(R.string.ltr_or_rtl_combine_via_colon, "Simulate with a given speed",
+		title.setText(getString(R.string.ltr_or_rtl_combine_via_colon, getString(titleRes),
 				getFormattedSpeed(speedValue, app)));
 		slider.setValueTo(max - min);
 		slider.setValue(speedValue);
 		slider.addOnChangeListener((s, val, fromUser) -> {
 			float value = min + val;
-			title.setText(SimulationNavigationSettingFragment.this.getString(R.string.ltr_or_rtl_combine_via_colon, "Simulate with a given speed",
-					getFormattedSpeed(value, app)));
+			title.setText(SimulationNavigationSettingFragment.this.getString(R.string.ltr_or_rtl_combine_via_colon,
+					getString(titleRes), getFormattedSpeed(value, app)));
 			settings.simulateNavigationSpeed = value;
 		});
 		UiUtilities.setupSlider(slider, isNightMode(), getActiveProfileColor());
 	}
 
 	public enum SimulationMode {
-		PREVIEW("preview_mode", R.string.sim_preview_mode_title, R.string.sim_preview_mode_desc, R.layout.preference_simulation_mode_item),
-		CONSTANT("const_mode", R.string.sim_constant_mode_title, R.string.sim_constant_mode_desc, R.layout.preference_simulation_mode_slider),
-		REALITY("real_mode", R.string.sim_real_mode_title, R.string.sim_real_mode_desc, R.layout.preference_simulation_mode_item);
+		PREVIEW("preview_mode", R.string.simulation_preview_mode_title, R.string.simulation_preview_mode_desc, R.layout.preference_simulation_mode_item),
+		CONSTANT("const_mode", R.string.simulation_constant_mode_title, R.string.simulation_constant_mode_desc, R.layout.preference_simulation_mode_slider),
+		REALITY("real_mode", R.string.simulation_real_mode_title, R.string.simulation_real_mode_desc, R.layout.preference_simulation_mode_item);
 
 		String key;
 		int title;
