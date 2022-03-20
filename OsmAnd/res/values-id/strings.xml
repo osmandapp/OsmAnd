@@ -2111,4 +2111,7 @@
     <string name="clear_confirmation_msg">Lupakan %1$s\?</string>
     <string name="online_routing_example_hint">URL dengan semua parameter bernyala akan diperlihatkan seperti berikut:</string>
     <string name="file_import_error">%1$s gatal impor: %2$s</string>
+    <string name="precision_hdop_and_vdop">Presisi horisontal: %1$s, vertikal: %2$s</string>
+    <string name="configure_profile_info">Setelan profil:</string>
+    <string name="pref_selected_by_default_for_profiles">Pengaturan ini dipilih secara standar buat profil: %s</string>
 </resources>
