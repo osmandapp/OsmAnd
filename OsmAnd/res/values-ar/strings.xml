@@ -4382,7 +4382,7 @@
     <string name="no_activity_for_intent">قم بتثبيت تطبيق يمكنه تنفيذ هذا الإجراء.</string>
     <string name="no_items_of_type_message">لا يوجد لديك عناصر من هذا النوع</string>
     <string name="routeInfo_tracktype_description">لون المسار أو خط المسار من خلال تكوين سطحه. يتم تطبيقه عادةً عندما تكون شبكة الطرق غير معبدة إلى حد كبير.</string>
-    <string name="routeInfo_winter_ice_road_description">قم بتلوين المسار أو خط المسار حسب تصنيف الطريق الشتوي.</string>
+    <string name="routeInfo_winter_ice_road_description">قم بتلوين المسار أو خط المسار حسب تصنيف طرقاته الشتوية.</string>
     <string name="routeInfo_smoothness_description">تصنيف القدرة على المناورة على الطريق/ممر المشاة للمركبات ذات العجلات ، لا سيما فيما يتعلق بانتظام السطح / وتسطيحه.</string>
     <string name="routeInfo_surface_description">توفير معلومات السطح المادي للطريق/ممر المشاة.</string>
     <string name="routeInfo_roadClass_description">لون الطريق أو خط المسار وفقا لتصنيف الطرق.</string>
@@ -4613,6 +4613,8 @@
     <string name="move_map_to_select_area">حرك الخريطة لتحديد المنطقة المطلوبة.</string>
     <string name="stop_download_desc">التنزيل لم يكتمل. إذا قمت بمقاطعة التنزيل الآن ، فسيكون جزء فقط من المربعات متاحًا للعرض.</string>
     <string name="stop_download">اوقف التنزيل</string>
-    <string name="rendering_attr_showFitnessTrails_name">إظهار مسارات اللياقة البدنية</string>
+    <string name="rendering_attr_showFitnessTrails_name">مسارات اللياقة البدنية</string>
     <string name="rendering_attr_showFitnessTrails_description">إظهار مسارات اللياقة البدنية</string>
+    <string name="rendering_attr_showRunningRoutes_description">عرض مسارات الجري</string>
+    <string name="rendering_attr_showRunningRoutes_name">مسارات الجري</string>
 </resources>
