@@ -776,7 +776,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	public void refreshContent(boolean force) {
-		if (visibleType == DashboardType.CONFIGURE_SCREEN || force) {
+		if (force) {
+			listView.clearParams();
+			updateListAdapter();
+		} else if (visibleType == DashboardType.CONFIGURE_SCREEN) {
 			updateListAdapter();
 		} else if (visibleType == DashboardType.CONFIGURE_MAP || visibleType == DashboardType.ROUTE_PREFERENCES) {
 			int index = listView.getFirstVisiblePosition();
