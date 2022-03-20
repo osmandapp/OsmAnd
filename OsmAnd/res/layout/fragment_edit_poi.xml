@@ -22,6 +22,7 @@
         app:contentInsetEnd="0dp"/>
 
     <ScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
