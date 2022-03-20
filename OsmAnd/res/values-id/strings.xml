@@ -1872,7 +1872,7 @@
     <string name="tab_title_advanced">Lanjutan</string>
     <string name="prefs_plugins_descr">Plugin-plugin mengaktivasi pengaturan lanjutan dan fungsi-fungsi tambahan.</string>
     <string name="btn_advanced_mode">Mode Lanjutan…</string>
-    <string name="route_line_use_map_style_color">Gunakan warna default dari gaya peta (%1$s).</string>
+    <string name="route_line_use_map_style_color">Gunakan warna standar milik gaya peta (%1$s).</string>
     <string name="routing_attr_avoid_low_emission_zone_description">Menghindari zona emisi rendah</string>
     <string name="routing_attr_avoid_low_emission_zone_name">Hindari zona emisi rendah</string>
     <string name="local_backup">Pencadangan lokal</string>
