@@ -2501,4 +2501,5 @@
     <string name="save_as_copy">Запазване като копие</string>
     <string name="gps_filter_smoothing">Заглаждане</string>
     <string name="save_changes_into_file">Запазване на промените във файл</string>
+    <string name="rendering_attr_showRunningRoutes_name">Маршрути за бягане</string>
 </resources>

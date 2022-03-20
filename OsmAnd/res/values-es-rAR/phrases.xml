@@ -4301,5 +4301,15 @@
     <string name="poi_changing_table_filter">Cambiador de pañales</string>
     <string name="poi_printer_ink">Tinta para impresoras</string>
     <string name="poi_water_sports">Artículos para deportes acuáticos</string>
-    <string name="poi_shop_fuel">Almacén de combustible</string>
+    <string name="poi_shop_fuel">Venta de combustibles</string>
+    <string name="poi_payment_girocard_contactless_yes">Girocard (sin contacto)</string>
+    <string name="poi_payment_maestro_contactless_yes">Maestro (sin contacto)</string>
+    <string name="poi_payment_visa_contactless_yes">Visa (sin contacto)</string>
+    <string name="poi_payment_american_express_contactless_no">No se acepta American Express (AMEX) sin contacto</string>
+    <string name="poi_payment_girocard_contactless_no">No se acepta Girocard (sin contacto)</string>
+    <string name="poi_payment_maestro_contactless_no">No se acepta Maestro (sin contacto)</string>
+    <string name="poi_payment_visa_contactless_no">No se acepta Visa (sin contacto)</string>
+    <string name="poi_payment_mastercard_contactless_yes">MasterCard (sin contacto)</string>
+    <string name="poi_payment_american_express_contactless_yes">American Express (AMEX, sin contacto)</string>
+    <string name="poi_payment_mastercard_contactless_no">No se acepta MasterCard (sin contacto)</string>
 </resources>

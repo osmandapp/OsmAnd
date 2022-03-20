@@ -4506,7 +4506,7 @@
     <string name="quick_action_add_route_descr">Przycisk rozpoczęcia trasy od środka ekranu.</string>
     <string name="gpx_no_routes_descr">Możesz użyć narzędzia „%1$s”, aby zapisać trasę w pliku.</string>
     <string name="gpx_no_routes_title">Brak tras</string>
-    <string name="save_track_to_gpx_descrp">Rozpocznij nagrywanie śladu automatycznie, gdy nawigacja jest w toku. Po zakończeniu ścieżka zostanie automatycznie zapisana.</string>
+    <string name="save_track_to_gpx_descrp">Automatyczne uruchamianie nagrywania ścieżek podczas nawigacji i automatyczne zapisywanie później.</string>
     <string name="rendering_value_omit_name">Pomiń</string>
     <string name="google_play_services">Usługi Google Play</string>
     <string name="location_source">Źródło lokalizacji</string>
@@ -4518,4 +4518,21 @@
     <string name="exit_import">Wyjść\?</string>
     <string name="import_tracks">Importuj trasy</string>
     <string name="memory_allocated_for_routing">Pamięć została przydzielona do routingu.</string>
+    <string name="rendering_attr_showFitnessTrails_name">Trasy fitness</string>
+    <string name="default_appearance_desc">Domyślny kolor, ikona i kształt zostaną zastosowane do dodanych ulubionych punktów do grupy.</string>
+    <string name="location_source_descr">OsmAnd zainstalowany domyślnie z Google Play używa %1$s do określenia lokalizacji.
+\n
+\nJeśli otrzymasz niedokładne informacje o lokalizacji lub korzystasz z urządzenia bez %2$s, spróbuj przełączyć się na „%3$s”</string>
+    <string name="default_appearance">Wygląd domyślny</string>
+    <string name="rendering_attr_showRunningRoutes_description">Pokaż trasy biegowe</string>
+    <string name="rendering_attr_showFitnessTrails_description">Pokaż trasy fitness</string>
+    <string name="stop_and_exit">Zatrzymaj i wyjdź</string>
+    <string name="estimated_download_size">Szacowany rozmiar pobierania</string>
+    <string name="move_map_to_select_area">Przesuń mapę, aby wybrać żądany obszar.</string>
+    <string name="shared_string_shape">Kształt</string>
+    <string name="selected_waypoints_descr">Wybrane punkty trasy zostaną dodane do ścieżki \"%1$s\".</string>
+    <string name="stop_download">Zatrzymaj pobieranie</string>
+    <string name="rendering_attr_showRunningRoutes_name">Trasy biegowe</string>
+    <string name="stop_download_desc">Pobieranie nie zostało ukończone. Jeśli teraz przerwiesz pobieranie, tylko część kafelków będzie dostępna do wyświetlenia.</string>
+    <string name="edit_category">Edytuj kategorię</string>
 </resources>
