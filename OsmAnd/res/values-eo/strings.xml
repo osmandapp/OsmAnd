@@ -4544,4 +4544,6 @@
     <string name="default_appearance_desc">La implicita koloro, bildsimbolo kaj formo, kiuj aplikiĝos al la punktoj aldonotaj al la grupo.</string>
     <string name="rendering_attr_showFitnessTrails_description">Montri “vojetojn de sano”</string>
     <string name="rendering_attr_showFitnessTrails_name">Vojetoj de sportiloj</string>
+    <string name="rendering_attr_showRunningRoutes_description">Montri vojetojn por kurado</string>
+    <string name="rendering_attr_showRunningRoutes_name">Kuradaj kursoj</string>
 </resources>
