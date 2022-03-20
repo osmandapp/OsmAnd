@@ -2108,4 +2108,7 @@
     <string name="m">m</string>
     <string name="enter_verification_code">Masukkan kata sandi sekali pakai</string>
     <string name="routing_attr_height_obstacles_description">Perutean dapat menghindari tanjakan yang kuat.</string>
+    <string name="clear_confirmation_msg">Lupakan %1$s\?</string>
+    <string name="online_routing_example_hint">URL dengan semua parameter bernyala akan diperlihatkan seperti berikut:</string>
+    <string name="file_import_error">%1$s gatal impor: %2$s</string>
 </resources>
