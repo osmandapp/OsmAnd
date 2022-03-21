@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="osm-carto_render_descr">Similar to OpenStreetMap-carto style used on main OSM site</string>
     <string name="rendering_attr_showRunningRoutes_name">Running routes</string>
     <string name="rendering_attr_showRunningRoutes_description">Show running routes</string>
     <string name="rendering_attr_showFitnessTrails_name">Fitness trails</string>
