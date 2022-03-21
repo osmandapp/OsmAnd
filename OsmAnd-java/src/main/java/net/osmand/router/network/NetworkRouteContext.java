@@ -170,6 +170,7 @@ public class NetworkRouteContext {
 		if (routing) {
 			SearchRequest<RouteDataObject> req = BinaryMapIndexReader.buildSearchRouteRequest(tileLeft, tileRight,
 					tileTop, tileBottom, null);
+			req.log = false;
 			return loadRoutingDataTile(req);
 		} else {
 			SearchRequest<BinaryMapDataObject> req = BinaryMapIndexReader.buildSearchRequest(tileLeft, tileRight,
@@ -179,6 +180,7 @@ public class NetworkRouteContext {
 							return true;
 						}
 					}, null);
+			req.log = false;
 			return loadMapDataTile(req);
 		}
 	}

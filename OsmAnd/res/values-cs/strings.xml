@@ -4542,4 +4542,6 @@
     <string name="move_map_to_select_area">Posuňte mapu, abyste mohli vybrat potřebnou oblast.</string>
     <string name="shared_string_complete">hotovo</string>
     <string name="stop_download_desc">Stahování není dokončeno. Pokud jej teď přerušíte, budete moci prohlížet jen část dlaždic.</string>
+    <string name="rendering_attr_showFitnessTrails_name">Fitness trasy</string>
+    <string name="rendering_attr_showFitnessTrails_description">Zobrazit fitness trasy</string>
 </resources>

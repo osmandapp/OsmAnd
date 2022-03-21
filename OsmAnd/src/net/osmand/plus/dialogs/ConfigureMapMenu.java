@@ -1,56 +1,5 @@
 package net.osmand.plus.dialogs;
 
-import android.view.View;
-import android.widget.ArrayAdapter;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.annotation.StyleRes;
-
-import com.google.android.material.snackbar.Snackbar;
-
-import net.osmand.CallbackWithObject;
-import net.osmand.IndexConstants;
-import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
-import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.render.RendererRegistry;
-import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.settings.enums.DayNightMode;
-import net.osmand.plus.transport.TransportLinesMenu;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuCategory;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
-import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
-import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
-import net.osmand.render.RenderingRuleProperty;
-import net.osmand.render.RenderingRulesStorage;
-import net.osmand.util.Algorithms;
-import net.osmand.util.SunriseSunset;
-
-import org.apache.commons.logging.Log;
-
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CUSTOM_RENDERING_ITEMS_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DETAILS_ID;
@@ -86,6 +35,59 @@ import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDE
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDE;
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_ROUTES;
 
+import android.view.View;
+import android.widget.ArrayAdapter;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.annotation.StyleRes;
+
+import com.google.android.material.snackbar.Snackbar;
+
+import net.osmand.CallbackWithObject;
+import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.DayNightMode;
+import net.osmand.plus.transport.TransportLinesMenu;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
+import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuCategory;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
+import net.osmand.render.RenderingRuleProperty;
+import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
+import net.osmand.util.SunriseSunset;
+
+import org.apache.commons.logging.Log;
+
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+
 public class ConfigureMapMenu {
 
 	private static final Log LOG = PlatformUtil.getLog(ConfigureMapMenu.class);
@@ -98,6 +100,8 @@ public class ConfigureMapMenu {
 	public static final String WHITE_WATER_SPORTS_ATTR = "whiteWaterSports";
 	public static final String HIKING_ROUTES_OSMC_ATTR = "hikingRoutesOSMC";
 	public static final String CYCLE_NODE_NETWORK_ROUTES_ATTR = "showCycleNodeNetworkRoutes";
+	public static final String SHOW_FITNESS_TRAILS_ATTR = "showFitnessTrails";
+	public static final String SHOW_RUNNING_ROUTES_ATTR = "showRunningRoutes";
 
 	public static final String CURRENT_TRACK_COLOR_ATTR = "currentTrackColor";
 	public static final String CURRENT_TRACK_WIDTH_ATTR = "currentTrackWidth";
@@ -220,8 +224,9 @@ public class ConfigureMapMenu {
 		app.getAidlApi().registerLayerContextMenu(adapter, activity);
 	}
 
-	private void createRouteAttributeItems(List<RenderingRuleProperty> customRules,
-	                                       ContextMenuAdapter adapter, MapActivity activity,
+	private void createRouteAttributeItems(@NonNull List<RenderingRuleProperty> customRules,
+	                                       @NonNull ContextMenuAdapter adapter,
+	                                       @NonNull MapActivity activity,
 	                                       boolean nightMode) {
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
@@ -230,11 +235,10 @@ public class ConfigureMapMenu {
 				.setTitleId(R.string.rendering_category_routes, activity)
 				.setLayout(R.layout.list_group_title_with_switch));
 
-		for (String attrName : getRoutesDefaultAttrs().keySet()) {
+		for (String attrName : getRoutesAttrsNames(customRules)) {
 			RenderingRuleProperty property = getPropertyForAttr(customRules, attrName);
 			if (SHOW_CYCLE_ROUTES_ATTR.equals(attrName)) {
 				adapter.addItem(createCycleRoutesItem(activity, attrName, property, nightMode));
-				customRules.remove(getPropertyForAttr(customRules, CYCLE_NODE_NETWORK_ROUTES_ATTR));
 			} else if (HIKING_ROUTES_OSMC_ATTR.equals(attrName)) {
 				adapter.addItem(createHikingRoutesItem(activity, attrName, property, nightMode));
 			} else {
@@ -380,6 +384,18 @@ public class ConfigureMapMenu {
 				});
 	}
 
+	private static Set<String> getRoutesAttrsNames(@NonNull List<RenderingRuleProperty> customRules) {
+		Set<String> routeAttrNames = new LinkedHashSet<>(getRoutesDefaultAttrs().keySet());
+		for (RenderingRuleProperty property : customRules) {
+			String attrName = property.getAttrName();
+			if (Algorithms.stringsEqual(property.getCategory(), UI_CATEGORY_ROUTES)
+					&& !Algorithms.stringsEqual(attrName, CYCLE_NODE_NETWORK_ROUTES_ATTR)) {
+				routeAttrNames.add(attrName);
+			}
+		}
+		return routeAttrNames;
+	}
+
 	private static Map<String, String> getRoutesDefaultAttrs() {
 		Map<String, String> attrs = new LinkedHashMap<>();
 		attrs.put(SHOW_CYCLE_ROUTES_ATTR, RendererRegistry.DEFAULT_RENDER);
@@ -425,6 +441,10 @@ public class ConfigureMapMenu {
 				return R.drawable.ic_action_skiing;
 			case TRAVEL_ROUTES:
 				return R.drawable.mm_routes;
+			case SHOW_FITNESS_TRAILS_ATTR:
+				return R.drawable.mx_sport_athletics;
+			case SHOW_RUNNING_ROUTES_ATTR:
+				return R.drawable.mx_running;
 		}
 		return INVALID_ID;
 	}
@@ -542,12 +562,6 @@ public class ConfigureMapMenu {
 		}
 		props = createProperties(customRules, R.string.rendering_category_hide, R.drawable.ic_action_hide,
 				UI_CATEGORY_HIDE, adapter, activity, true, HIDE_ID, nightMode, selectedProfileColor);
-		if (props != null) {
-			adapter.addItem(props);
-		}
-		props = createProperties(customRules, R.string.rendering_category_routes, R.drawable.ic_action_map_routes,
-				UI_CATEGORY_ROUTES, adapter, activity, true,
-				CUSTOM_RENDERING_ITEMS_ID_SCHEME + UI_CATEGORY_ROUTES, nightMode, selectedProfileColor);
 		if (props != null) {
 			adapter.addItem(props);
 		}
