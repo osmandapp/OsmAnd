@@ -38,6 +38,7 @@ import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.ColoringTypeAvailabilityCache;
+import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RouteService;
@@ -145,6 +146,12 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if ((helper.isPublicTransportMode() && transportHelper.getRoutes() != null) ||
 				(helper.getFinalLocation() != null && helper.getRoute().isCalculated())) {
+
+			if (PreviewRouteLineInfo.applyAttributes) {
+				//OpenGL
+				resetLayer();
+				PreviewRouteLineInfo.applyAttributes = false;
+			}
 
 			updateRouteColoringType();
 			updateAttrs(settings, tileBox);
@@ -707,7 +714,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			// Add outline for colorized lines
 			if (!colors.isEmpty()) {
 				VectorLineBuilder outlineBuilder = new VectorLineBuilder();;
-				outlineBuilder.setBaseOrder(baseOrder--)
+				outlineBuilder.setBaseOrder(bsOrder--)
 						.setIsHidden(points.size() < 2)
 						.setLineId(kOutlineId)
 						.setLineWidth(getRouteLineWidth(tb) + kOutlineWidth)
@@ -734,35 +741,18 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			vectorLineBuilder.buildAndAddToCollection(collection);
 
 			view.getMapRenderer().addSymbolsProvider(collection);
-		} else {
-			for (int i = 0; i < lines.size(); i++) {
-				VectorLine vl = lines.get(i);
-				vl.setPoints(points);
-				if (!colors.isEmpty()) {
-					vl.setColorizationMapping(colors);
-				}
-				//vl.setFillColor(NativeUtilities.createFColorARGB(getRouteLineColor()));
-				//vl.setLineWidth(getRouteLineWidth(tb));
-				//vl.setColorizationScheme(colorizationScheme);
-			}
 		}
 	}
 
 	/** OpenGL */
 	private void resetLayer() {
 		if (collection != null) {
-			QListVectorLine lines = collection.getLines();
-			if (!lines.isEmpty()) {
-				view.getMapRenderer().removeSymbolsProvider(collection);
-				collection = null;
-			}
+			view.getMapRenderer().removeSymbolsProvider(collection);
+			collection = null;
 		}
 		if (actionLinesCollection != null) {
-			QListVectorLine lines = actionLinesCollection.getLines();
-			if (!lines.isEmpty()) {
-				view.getMapRenderer().removeSymbolsProvider(actionLinesCollection);
-				actionLinesCollection = null;
-			}
+			view.getMapRenderer().removeSymbolsProvider(actionLinesCollection);
+			actionLinesCollection = null;
 		}
 	}
 

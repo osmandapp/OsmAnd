@@ -44,6 +44,9 @@ public class PreviewRouteLineInfo {
 	private int centerY;
 	private int screenHeight;
 
+	//OpenGL
+	public static boolean applyAttributes = false;
+
 	public PreviewRouteLineInfo(@ColorInt int customColorDay,
 	                            @ColorInt int customColorNight,
 	                            @NonNull ColoringType coloringType,

@@ -67,7 +67,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 	//OpenGL
 	//kOutlineColor 150, 0, 0, 0
 	public FColorARGB kOutlineColor;
-	public static final int kOutlineWidth = 40;
+	public static final int kOutlineWidth = 10;
 	public static final int kOutlineId = 1001;
 
 	public BaseRouteLayer(@NonNull Context ctx) {
@@ -113,7 +113,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 	}
 
 	public void initCoreRenderer() {
-		kOutlineColor = new FColorARGB(150/255, 0.0f, 0.0f, 0.0f);
+		kOutlineColor = new FColorARGB(150.0f/255.0f, 0.0f, 0.0f, 0.0f);
 	}
 
 	@Override
