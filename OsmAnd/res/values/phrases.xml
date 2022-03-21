@@ -4827,5 +4827,13 @@
 	<string name="poi_payment_maestro_contactless_no">Contactless Maestro not accepted</string>
 	<string name="poi_payment_mastercard_contactless_no">Contactless MasterCard not accepted</string>
 	<string name="poi_payment_visa_contactless_no">Contactless Visa not accepted</string>
+	<string name="poi_rice">Rice shop</string>
+
+	<string name="poi_wool">Wool store</string>
+
+	<string name="poi_birds_nest">Bird's nest</string>
+
+	<string name="poi_dovecote">Dovecote</string>
+	<string name="poi_fish_pass">Fish pass</string>
 
 </resources>
