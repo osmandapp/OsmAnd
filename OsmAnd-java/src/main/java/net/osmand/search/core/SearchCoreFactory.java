@@ -432,10 +432,6 @@ public class SearchCoreFactory {
 							if (object.getName().startsWith("<")) {
 								return false;
 							}
-
-//							if (!phrase.getUnknownWordToSearchBuildingNameMatcher().matches(stripBraces(sr.localeName))) {
-//								sr.priorityDistance = 5;
-//							}
 							sr.objectType = ObjectType.STREET;
 							sr.localeRelatedObjectName = ((Street)object).getCity().getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 							sr.relatedObject = ((Street)object).getCity();

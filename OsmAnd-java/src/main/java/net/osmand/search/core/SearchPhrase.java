@@ -302,7 +302,7 @@ public class SearchPhrase {
 			searchWords.add(0, getFirstUnknownSearchWord());
 			Collections.sort(searchWords, commonWordsComparator);
 			for (String s : searchWords) {
-				if (s.length() > 0 && hasMoreOneLetter(s) && !LocationParser.isValidOLC(s)) {
+				if (s.length() > 0 && !LocationParser.isValidOLC(s)) {
 					mainUnknownWordToSearch = s.trim();
 					if (mainUnknownWordToSearch.endsWith(".")) {
 						mainUnknownWordToSearch = mainUnknownWordToSearch.substring(0,

@@ -16,10 +16,11 @@ import net.osmand.osm.PoiType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import static net.osmand.search.SearchUICore.SEARCH_PRIORITY_COEF;
+
 public class SearchResult {
 	private static final double MAX_TYPE_WEIGHT = 10;
 	public static final String DELIMITER = " ";
-	public int SEARCH_PRIORITY_COEF = 10;
 
 	// search phrase that makes search result valid
 	public SearchPhrase requiredSearchPhrase;
@@ -94,7 +95,7 @@ public class SearchResult {
 			for (String otherName : otherNames) {
 				allWordsMatched = allWordsMatched(otherName);
 				if (allWordsMatched) {
-					break;
+					return true;
 				}
 			}
 		}

@@ -23,6 +23,9 @@ public class CommonWords {
 	}
 
 	public static int getCommonSearch(String name) {
+		if (Character.isDigit(name.charAt(0)) && !hasMoreOneLetter(name)) {
+			name = "DIGIT";
+		}
 		Integer i = commonWordsDictionary.get(name);
 		// higher means better for search
 		if (i == null) {
@@ -38,6 +41,16 @@ public class CommonWords {
 	public static int getCommonGeocoding(String name) {
 		Integer i = commonWordsDictionary.get(name);
 		return i == null ? -1 : i.intValue();
+	}
+	
+	private static boolean hasMoreOneLetter(String s) {
+		int count = 0;
+		for (int i = 0; i < s.length(); i++) {
+			if (!Character.isDigit(s.charAt(i)) && !Character.isSpaceChar(s.charAt(i))) {
+				count++;
+			}
+		}
+		return count > 1;
 	}
 	
 	static {
@@ -892,6 +905,8 @@ public class CommonWords {
 		addCommon("camino");
 		addCommon("viale");
 		addCommon("loop");
+		
+		addCommon("DIGIT");
 
 		addCommon("bridge");
 		addCommon("embankment");
