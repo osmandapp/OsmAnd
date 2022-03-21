@@ -390,6 +390,18 @@ public class MapWidgetRegistry {
 		settings.MAP_MARKERS_MODE.resetModeToDefault(mode);
 	}
 
+	public void reorderWidgets() {
+		for (WidgetsPanel panel : WidgetsPanel.values()) {
+			Set<MapWidgetInfo> oldOrder = getWidgetsForPanel(panel);
+			Set<MapWidgetInfo> newOrder = new TreeSet<>();
+			for (MapWidgetInfo widgetInfo : oldOrder) {
+				widgetInfo.priority = panel.getWidgetOrder(widgetInfo.key, settings);
+				newOrder.add(widgetInfo);
+			}
+			allWidgets.put(panel, newOrder);
+		}
+	}
+
 	public void updateMapMarkersMode(MapActivity mapActivity) {
 		for (MapWidgetInfo info : getRightWidgets()) {
 			if (WIDGET_MARKER_1.equals(info.key)) {

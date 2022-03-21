@@ -349,6 +349,8 @@ public class StreetNameWidget extends MapWidget {
 		ViewGroup specialContainer = mapActivity.findViewById(R.id.street_name_widget_special_container);
 		boolean specialPosition = specialContainer != null;
 		if (specialPosition) {
+			specialContainer.removeAllViews();
+
 			for (MapWidget widget : followingWidgets) {
 				if (widget instanceof CoordinatesWidget) {
 					specialPosition = false;
@@ -357,7 +359,6 @@ public class StreetNameWidget extends MapWidget {
 			}
 		}
 		if (specialPosition) {
-			specialContainer.removeAllViews();
 			specialContainer.addView(view);
 		} else {
 			container.addView(view, order);

@@ -1,6 +1,7 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -222,5 +223,24 @@ public class MapMarkersBarWidget extends MapWidget {
 			mapActivity.updateStatusBarColor();
 		}
 		return updatedVisibility;
+	}
+
+	@Override
+	public void attachView(@NonNull ViewGroup container, int order, @NonNull List<MapWidget> followingWidgets) {
+		super.attachView(container, order, followingWidgets);
+
+		boolean showBottomShadow = true;
+		for (MapWidget widget : followingWidgets) {
+			if (widget instanceof CoordinatesWidget) {
+				showBottomShadow = false;
+				break;
+			}
+		}
+		showHideBottomShadow(showBottomShadow);
+	}
+
+	private void showHideBottomShadow(boolean show) {
+		View bottomShadow = view.findViewById(R.id.bottom_shadow);
+		AndroidUiHelper.updateVisibility(bottomShadow, show);
 	}
 }

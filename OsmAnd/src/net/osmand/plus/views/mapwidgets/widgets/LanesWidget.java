@@ -166,6 +166,9 @@ public class LanesWidget extends MapWidget {
 
 	@Override
 	public void attachView(@NonNull ViewGroup container, int order, @NonNull List<MapWidget> followingWidgets) {
+		ViewGroup specialContainer = mapActivity.findViewById(R.id.lanes_widget_special_position);
+		specialContainer.removeAllViews();
+
 		boolean specialPosition = true;
 		for (MapWidget widget : followingWidgets) {
 			if (widget instanceof CoordinatesWidget || widget instanceof StreetNameWidget) {
@@ -174,8 +177,6 @@ public class LanesWidget extends MapWidget {
 			}
 		}
 		if (specialPosition) {
-			ViewGroup specialContainer = mapActivity.findViewById(R.id.lanes_widget_special_position);
-			specialContainer.removeAllViews();
 			specialContainer.addView(view);
 		} else {
 			container.addView(view, order);

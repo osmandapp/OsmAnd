@@ -8,16 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import net.osmand.StateChangedListener;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
@@ -33,7 +34,6 @@ import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.plus.views.mapwidgets.widgets.CoordinatesWidget;
 import net.osmand.plus.views.mapwidgets.widgets.ElevationProfileWidget;
 import net.osmand.plus.views.mapwidgets.widgets.LanesWidget;
-import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
@@ -45,25 +45,6 @@ import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_ALTITUDE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BATTERY;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BEARING;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_COMPASS;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_DISTANCE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_GPS_INFO;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_DISTANCE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_TIME;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MARKER_1;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MARKER_2;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MAX_SPEED;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_TURN_SMALL;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_PLAIN_TIME;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_RADIUS_RULER;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_SPEED;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_TIME;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -115,12 +96,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private int themeId = -1;
 
 	private TopToolbarView topToolbarView;
-
-	private CoordinatesWidget topCoordinatesView;
-	private StreetNameWidget streetNameWidget;
-	private MapMarkersBarWidget mapMarkersBarWidget;
-	private LanesWidget lanesWidget;
 	private ElevationProfileWidget elevationProfileWidget;
+
+	private StateChangedListener<ApplicationMode> appModeChangeListener;
 
 	public MapInfoLayer(@NonNull Context context, @NonNull RouteLayer layer) {
 		super(context);
@@ -148,9 +126,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 			expandButton = mapActivity.findViewById(R.id.map_collapse_button);
 			mapRulerLayout = mapActivity.findViewById(R.id.map_ruler_layout);
 
+			appModeChangeListener = createAppModeChangeListener();
+			settings.APPLICATION_MODE.addListener(appModeChangeListener);
+
 			registerAllControls(mapActivity);
 			recreateControls();
 		} else {
+			settings.APPLICATION_MODE.removeListener(appModeChangeListener);
+			appModeChangeListener = null;
+
 			if (mapInfoControls != null) {
 				mapInfoControls.clearWidgets();
 			}
@@ -162,18 +146,24 @@ public class MapInfoLayer extends OsmandMapLayer {
 			expandButton = null;
 			mapRulerLayout = null;
 
-			lanesWidget = null;
 			alarmControl = null;
 			rulerWidgets = null;
 
 			drawSettings = null;
 			themeId = -1;
 
-			streetNameWidget = null;
-			mapMarkersBarWidget = null;
 			topToolbarView = null;
-			topCoordinatesView = null;
 		}
+	}
+
+	@NonNull
+	private StateChangedListener<ApplicationMode> createAppModeChangeListener() {
+		return appMode -> {
+			if (mapInfoControls != null) {
+				mapInfoControls.reorderWidgets();
+				recreateControls();
+			}
+		};
 	}
 
 	@Nullable
