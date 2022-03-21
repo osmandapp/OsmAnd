@@ -175,6 +175,8 @@
 	<string name="poi_computer_parts">Parts for computers</string>
 	<string name="poi_museum_type">Museum topic</string>
 	<string name="poi_post_office_type">Type</string>
+	<string name="poi_laundry_service_filter">Laundry service</string>
+	<string name="poi_dry_cleaning_filter">Dry cleaning</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -4835,5 +4837,9 @@
 
 	<string name="poi_dovecote">Dovecote</string>
 	<string name="poi_fish_pass">Fish pass</string>
+	<string name="poi_laundry_service_yes">Yes</string>
+	<string name="poi_laundry_service_no">No</string>
+	<string name="poi_dry_cleaning_yes">Yes</string>
+	<string name="poi_dry_cleaning_no">No</string>
 
 </resources>
