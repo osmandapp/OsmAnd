@@ -18,9 +18,9 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.core.jni.FColorARGB;
 import net.osmand.core.jni.LineEndCapStyle;
 import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.QListFColorARGB;
 import net.osmand.core.jni.QListVectorLine;
 import net.osmand.core.jni.QVectorPointI;
 import net.osmand.core.jni.VectorLine;
@@ -44,6 +44,7 @@ import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.BaseRouteLayer;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWay;
@@ -83,8 +84,10 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	private final ColoringTypeAvailabilityCache coloringAvailabilityCache;
 
 	private LayerDrawable projectionIcon;
-	private VectorLinesCollection _collection;
-	private VectorLinesCollection _actionLinesCollection;
+
+	//OpenGL
+	private VectorLinesCollection collection;
+	private VectorLinesCollection actionLinesCollection;
 
 	public RouteLayer(@NonNull Context context, int baseOrder) {
 		super(context);
@@ -161,13 +164,6 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 			final QuadRect latlonRect = cp.getLatLonBounds();
 			final QuadRect correctedQuadRect = getCorrectedQuadRect(latlonRect);
-
-			if (view.hasMapRenderer()) {
-				//OpenGL
-				drawRouteSegment(tileBox);
-				buildActionArrows(tileBox, correctedQuadRect);
-				return;
-			}
 
 			drawLocations(tileBox, canvas, correctedQuadRect.top, correctedQuadRect.left, correctedQuadRect.bottom, correctedQuadRect.right);
 
@@ -307,22 +303,32 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 					directionArrowsColor, actualColoringType, routeInfoAttribute);
 			routeGeometry.updateRoute(tb, route);
 
-			if (directTo) {
-				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-						null, 0);
-			} else if (straight) {
-				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-						helper.getLastFixedLocation(), route.getCurrentStraightAngleRoute());
+			if (view.hasMapRenderer()) {
+				//OpenGL
+				drawRouteSegment(tb);
 			} else {
-				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-						helper.getLastProjection(), route.getCurrentStraightAngleRoute());
+				if (directTo) {
+					routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
+							null, 0);
+				} else if (straight) {
+					routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
+							helper.getLastFixedLocation(), route.getCurrentStraightAngleRoute());
+				} else {
+					routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
+							helper.getLastProjection(), route.getCurrentStraightAngleRoute());
+				}
 			}
 			List<RouteDirectionInfo> rd = helper.getRouteDirections();
 			Iterator<RouteDirectionInfo> it = rd.iterator();
 			if (!directTo && tb.getZoom() >= 14 && shouldShowTurnArrows()) {
 				List<Location> actionPoints = calculateActionPoints(topLatitude, leftLongitude, bottomLatitude, rightLongitude, helper.getLastProjection(),
 						helper.getRoute().getRouteLocations(), helper.getRoute().getCurrentRoute(), it, tb.getZoom());
-				drawAction(tb, canvas, actionPoints);
+				if (view.hasMapRenderer()) {
+					//OpenGL
+					buildActionArrows(tb, actionPoints);
+				} else {
+					drawAction(tb, canvas, actionPoints);
+				}
 			}
 			if (directTo) {
 				//add projection point on original route
@@ -612,12 +618,12 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	}
 
 	/** OpenGL */
-	private void buildActionArrows(RotatedTileBox tileBox, QuadRect correctedQuadRect) {
+	private void buildActionArrows(RotatedTileBox tileBox, List<Location> actionPoints) {
 
-		if (_collection.getLines().isEmpty() || tileBox.getZoom() <= 14) {
-			if (_actionLinesCollection != null) {
-				_actionLinesCollection.removeAllLines();
-				view.getMapRenderer().removeSymbolsProvider(_actionLinesCollection);
+		if (collection.getLines().isEmpty() || tileBox.getZoom() <= 14) {
+			if (actionLinesCollection != null) {
+				actionLinesCollection.removeAllLines();
+				view.getMapRenderer().removeSymbolsProvider(actionLinesCollection);
 			}
 			return;
 		}
@@ -629,18 +635,13 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		}
 
 		int bsOrder = this.baseOrder - 1000;
-		List<RouteDirectionInfo> rd = helper.getRouteDirections();
-		Iterator<RouteDirectionInfo> it = rd.iterator();
-		List<Location> actionPoints = calculateActionPoints(correctedQuadRect.top, correctedQuadRect.left,
-				correctedQuadRect.bottom, correctedQuadRect.right, helper.getLastProjection(),
-				helper.getRoute().getRouteLocations(), helper.getRoute().getCurrentRoute(), it, tileBox.getZoom());
 		List<List<Location>> actionArrows = getActionArrows(actionPoints);
 		if (!actionArrows.isEmpty()) {
 			int lineIdx = 0;
-			if (_actionLinesCollection == null) {
-				_actionLinesCollection = new VectorLinesCollection();
+			if (actionLinesCollection == null) {
+				actionLinesCollection = new VectorLinesCollection();
 			}
-			long initialLinesCount = _actionLinesCollection.getLines().size();
+			long initialLinesCount = actionLinesCollection.getLines().size();
 			for (List<Location> line : actionArrows) {
 				QVectorPointI points = new QVectorPointI();
 				for (Location point : line) {
@@ -649,7 +650,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 					points.add(new PointI(x, y));
 				}
 				if (lineIdx < initialLinesCount) {
-					VectorLine vectorLine = _actionLinesCollection.getLines().get(lineIdx);
+					VectorLine vectorLine = actionLinesCollection.getLines().get(lineIdx);
 					vectorLine.setPoints(points);
 					vectorLine.setIsHidden(false);
 					lineIdx++;
@@ -657,19 +658,19 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 					VectorLineBuilder vectorLineBuilder = new VectorLineBuilder();
 					vectorLineBuilder.setBaseOrder(bsOrder--)
 							.setIsHidden(false)
-							.setLineId((int)_actionLinesCollection.getLines().size())
+							.setLineId((int) actionLinesCollection.getLines().size())
 							.setLineWidth(getRouteLineWidth(tileBox) * 0.4)
 							.setPoints(points)
 							.setEndCapStyle(LineEndCapStyle.ARROW.ordinal())
-							.setFillColor(getFColorARGB(customTurnArrowColor));
-					vectorLineBuilder.buildAndAddToCollection(_actionLinesCollection);
+							.setFillColor(NativeUtilities.createFColorARGB(customTurnArrowColor));
+					vectorLineBuilder.buildAndAddToCollection(actionLinesCollection);
 				}
 			}
 			while (lineIdx < initialLinesCount) {
-				_actionLinesCollection.getLines().get(lineIdx).setIsHidden(true);
+				actionLinesCollection.getLines().get(lineIdx).setIsHidden(true);
 				lineIdx++;
 			}
-			view.getMapRenderer().addSymbolsProvider(_actionLinesCollection);
+			view.getMapRenderer().addSymbolsProvider(actionLinesCollection);
 		}
 	}
 
@@ -680,53 +681,87 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		}
 
 		QListVectorLine lines = new QListVectorLine();
-		if (_collection != null) {
-			lines = _collection.getLines();
+		if (collection != null) {
+			lines = collection.getLines();
 		}
+
+		QVectorPointI points = new QVectorPointI();
+		List<Location> ll = helper.getRoute().getRouteLocations();
+		for (Location l : ll) {
+			int x = MapUtils.get31TileNumberX(l.getLongitude());
+			int y = MapUtils.get31TileNumberY(l.getLatitude());
+			points.add(new PointI(x, y));
+		}
+
+		QListFColorARGB colors = routeGeometry.getColorizationMapping();
+		int colorizationScheme = routeGeometry.getColorizationScheme();
 
 		if (lines.isEmpty()) {
 			VectorLineBuilder vectorLineBuilder = new VectorLineBuilder();
-			QVectorPointI points = new QVectorPointI();
-			List<Location> ll = helper.getRoute().getRouteLocations();
-			for (Location l : ll) {
-				int x = MapUtils.get31TileNumberX(l.getLongitude());
-				int y = MapUtils.get31TileNumberY(l.getLatitude());
-				points.add(new PointI(x, y));
+			int bsOrder = baseOrder;
+
+			if (collection == null) {
+				collection = new VectorLinesCollection();
 			}
 
-			int bsOrder = baseOrder;
+			// Add outline for colorized lines
+			if (!colors.isEmpty()) {
+				VectorLineBuilder outlineBuilder = new VectorLineBuilder();;
+				outlineBuilder.setBaseOrder(baseOrder--)
+						.setIsHidden(points.size() < 2)
+						.setLineId(kOutlineId)
+						.setLineWidth(getRouteLineWidth(tb) + kOutlineWidth)
+						.setOutlineWidth(kOutlineWidth)
+						.setPoints(points)
+						.setFillColor(kOutlineColor)
+						.setApproximationEnabled(false);
+
+				outlineBuilder.buildAndAddToCollection(collection);
+			}
+
 			vectorLineBuilder
 					.setPoints(points)
 					.setIsHidden(false)
 					.setLineId(1)
 					.setLineWidth(getRouteLineWidth(tb))
-					.setFillColor(getFColorARGB(getRouteLineColor()))
+					.setFillColor(NativeUtilities.createFColorARGB(getRouteLineColor()))
 					.setBaseOrder(bsOrder--);
 
-			if (_collection == null) {
-				_collection = new VectorLinesCollection();
+			if (!colors.isEmpty()) {
+				vectorLineBuilder.setColorizationMapping(colors);
+				vectorLineBuilder.setColorizationScheme(colorizationScheme);
 			}
+			vectorLineBuilder.buildAndAddToCollection(collection);
 
-			vectorLineBuilder.buildAndAddToCollection(_collection);
-
-			view.getMapRenderer().addSymbolsProvider(_collection);
+			view.getMapRenderer().addSymbolsProvider(collection);
+		} else {
+			for (int i = 0; i < lines.size(); i++) {
+				VectorLine vl = lines.get(i);
+				vl.setPoints(points);
+				if (!colors.isEmpty()) {
+					vl.setColorizationMapping(colors);
+				}
+				//vl.setFillColor(NativeUtilities.createFColorARGB(getRouteLineColor()));
+				//vl.setLineWidth(getRouteLineWidth(tb));
+				//vl.setColorizationScheme(colorizationScheme);
+			}
 		}
 	}
 
 	/** OpenGL */
 	private void resetLayer() {
-		if (_collection != null) {
-			QListVectorLine lines = _collection.getLines();
+		if (collection != null) {
+			QListVectorLine lines = collection.getLines();
 			if (!lines.isEmpty()) {
-				view.getMapRenderer().removeSymbolsProvider(_collection);
-				_collection = null;
+				view.getMapRenderer().removeSymbolsProvider(collection);
+				collection = null;
 			}
 		}
-		if (_actionLinesCollection != null) {
-			QListVectorLine lines = _actionLinesCollection.getLines();
+		if (actionLinesCollection != null) {
+			QListVectorLine lines = actionLinesCollection.getLines();
 			if (!lines.isEmpty()) {
-				view.getMapRenderer().removeSymbolsProvider(_actionLinesCollection);
-				_actionLinesCollection = null;
+				view.getMapRenderer().removeSymbolsProvider(actionLinesCollection);
+				actionLinesCollection = null;
 			}
 		}
 	}
@@ -745,13 +780,5 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			}
 		}
 		return ll;
-	}
-
-	private FColorARGB getFColorARGB(int color) {
-		float a = (color >> 24) & 0xFF;
-		float r = (color >> 16) & 0xFF;
-		float g = (color >> 8) & 0xFF;
-		float b = (color >> 0) & 0xFF;
-		return new FColorARGB(a / 255, r / 255, g / 255, b / 255);
 	}
 }

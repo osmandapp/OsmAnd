@@ -17,8 +17,10 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.PlatformUtil;
+import net.osmand.core.jni.FColorARGB;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
@@ -27,6 +29,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -61,6 +64,12 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 	protected Paint paintIconAction;
 	private Bitmap actionArrow;
 
+	//OpenGL
+	//kOutlineColor 150, 0, 0, 0
+	public FColorARGB kOutlineColor;
+	public static final int kOutlineWidth = 40;
+	public static final int kOutlineId = 1001;
+
 	public BaseRouteLayer(@NonNull Context ctx) {
 		super(ctx);
 	}
@@ -77,6 +86,9 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		initGeometries(density);
 		initPaints();
 		initIcons();
+		if (view.hasMapRenderer()) {
+			initCoreRenderer();
+		}
 	}
 
 	protected void initAttrs(float density) {
@@ -98,6 +110,18 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 
 	protected void initIcons() {
 		actionArrow = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_action_arrow, null);
+	}
+
+	public void initCoreRenderer() {
+		kOutlineColor = new FColorARGB(150/255, 0.0f, 0.0f, 0.0f);
+	}
+
+	@Override
+	public void setMapActivity(@Nullable MapActivity mapActivity) {
+		super.setMapActivity(mapActivity);
+		if (mapActivity != null) {
+			initCoreRenderer();
+		}
 	}
 
 	protected void updateRouteColors(boolean night) {
