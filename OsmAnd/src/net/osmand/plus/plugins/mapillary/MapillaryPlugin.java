@@ -8,18 +8,10 @@ import android.net.Uri;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
-
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
-import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -41,7 +33,12 @@ import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
+import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
@@ -52,6 +49,10 @@ import org.json.JSONObject;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
 import static android.content.Intent.ACTION_VIEW;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAPILLARY;
@@ -248,7 +249,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	private TextInfoWidget createMonitoringControl(final MapActivity map) {
-		mapillaryControl = new TextInfoWidget(map);
+		mapillaryControl = new RightTextInfoWidget(map);
 		mapillaryControl.setText(map.getString(R.string.mapillary), "");
 		mapillaryControl.setIcons(R.drawable.widget_mapillary_day, R.drawable.widget_mapillary_night);
 		mapillaryControl.setOnClickListener(v -> openMapillary(map, null));
