@@ -4551,5 +4551,7 @@
     <string name="stop_download">Stop download</string>
     <string name="number_of_tiles">Antal kortfliser</string>
     <string name="rendering_attr_showFitnessTrails_description">Vis fitnessbaner</string>
-    <string name="rendering_attr_showFitnessTrails_name">Vis fitnessbaner</string>
+    <string name="rendering_attr_showFitnessTrails_name">Fitnessbaner</string>
+    <string name="rendering_attr_showRunningRoutes_name">Løberuter</string>
+    <string name="rendering_attr_showRunningRoutes_description">Vis løberuter</string>
 </resources>

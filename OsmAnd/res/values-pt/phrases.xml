@@ -4299,4 +4299,7 @@
     <string name="poi_landuse_education">Educação</string>
     <string name="poi_hairdresser_supply">Loja de artigos para cabeleireiros</string>
     <string name="poi_changing_table_filter">Mesa muda-fraldas</string>
+    <string name="poi_shop_fuel">Loja de combustíveis</string>
+    <string name="poi_printer_ink">Loja de cartuchos de tinta e tonners</string>
+    <string name="poi_water_sports">Loja de artigos desportivos aquáticos</string>
 </resources>

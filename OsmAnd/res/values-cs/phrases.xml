@@ -3543,9 +3543,9 @@
     <string name="poi_hazard_additional_minefield">Nebezpečí: minové pole</string>
     <string name="poi_hazard_additional_contamination">Nebezpečí: kontaminace</string>
     <string name="poi_defibrillator_location">Poloha</string>
-    <string name="poi_changing_table_yes">Přebalovací pult: ano</string>
-    <string name="poi_changing_table_no">Přebalovací pult: ne</string>
-    <string name="poi_changing_table_limited">Přebalovací pult: limitováno</string>
+    <string name="poi_changing_table_yes">Ano;Přebalovací pult: ano</string>
+    <string name="poi_changing_table_no">Ne;Přebalovací pult: ne</string>
+    <string name="poi_changing_table_limited">Omezeně;Přebalovací pult: omezeně</string>
     <string name="poi_changing_table_location_room">Umístění přebalovacího pultu: místnost</string>
     <string name="poi_changing_table_location_male_toilet">Umístění přebalovacího pultu: pánské toalety</string>
     <string name="poi_changing_table_location_female_toilet">Umístění přebalovacího pultu: dámské toalety</string>
@@ -4288,4 +4288,16 @@
     <string name="poi_avalanche_transceiver">Detektor obětí lavin;AVD;Lavinový vyhledávač</string>
     <string name="poi_books_adults">Dospělí</string>
     <string name="poi_access_permit">Vyžadováno povolení</string>
+    <string name="poi_payment_visa_contactless_yes">Bezkontaktní Visa</string>
+    <string name="poi_payment_american_express_contactless_no">Nepřijímá bezkontaktní American Express (AMEX)</string>
+    <string name="poi_payment_maestro_contactless_no">Nepřijímá bezkontaktní Maestro</string>
+    <string name="poi_payment_mastercard_contactless_no">Nepřijímá bezkontaktní MasterCard</string>
+    <string name="poi_changing_table_filter">Přebalovací pult</string>
+    <string name="poi_payment_american_express_contactless_yes">Bezkontaktní American Express (AMEX)</string>
+    <string name="poi_payment_mastercard_contactless_yes">Bezkontaktní MasterCard</string>
+    <string name="poi_payment_visa_contactless_no">Nepřijímá bezkontaktní Visa</string>
+    <string name="poi_payment_maestro_contactless_yes">Bezkontaktní Maestro</string>
+    <string name="poi_shop_fuel">Obchod s palivy</string>
+    <string name="poi_printer_ink">Obchod s inkoustem do tiskáren</string>
+    <string name="poi_water_sports">Potřeby pro vodní sporty</string>
 </resources>

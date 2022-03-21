@@ -4299,4 +4299,7 @@
     <string name="poi_greenery">綠化</string>
     <string name="poi_hairdresser_supply">美髮用品店</string>
     <string name="poi_changing_table_filter">尿布桌</string>
+    <string name="poi_shop_fuel">燃料商店</string>
+    <string name="poi_printer_ink">印表機墨水商店</string>
+    <string name="poi_water_sports">水上運動商店</string>
 </resources>

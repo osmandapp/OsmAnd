@@ -151,7 +151,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private int mFlexibleSpaceImageHeight;
 	private int mFlexibleBlurSpaceHeight;
 	private boolean portrait;
-	private TextView listEmptyTextView;
 	private int[] animationCoordinates;
 	private ProgressBar planRouteProgressBar;
 
@@ -238,7 +237,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		//listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		listView.setDrawSelectorOnTop(true);
 		listView.setScrollViewCallbacks(this);
-		listEmptyTextView = dashboardView.findViewById(R.id.emptyTextView);
 		gradientToolbar = AppCompatResources.getDrawable(mapActivity, R.drawable.gradient_toolbar).mutate();
 		if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
 			this.portrait = true;
@@ -649,7 +647,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			listBackgroundView.setBackgroundColor(backgroundColor);
 		} else {
 			listView.setBackgroundColor(backgroundColor);
-			listEmptyTextView.setBackgroundColor(backgroundColor);
 		}
 		if (visibleType != DashboardType.CONFIGURE_MAP
 				&& visibleType != DashboardType.CONTOUR_LINES
@@ -664,7 +661,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		} else {
 			listView.setDivider(null);
 		}
-		AndroidUtils.setTextSecondaryColor(mapActivity, listEmptyTextView, nightMode);
 
 		if (planRouteProgressBar != null) {
 			mapActivity.setupRouteCalculationProgressBar(planRouteProgressBar);
@@ -672,7 +668,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	private void updateListAdapter() {
-		listEmptyTextView.setVisibility(View.GONE);
 		listView.setEmptyView(null);
 		ContextMenuAdapter cm = null;
 		if (visibleType == DashboardType.CONFIGURE_MAP) {
@@ -756,6 +751,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	public void refreshContent(boolean force) {
 		if (force) {
+			listView.clearParams();
+			updateListAdapter();
+		} else if (visibleType == DashboardType.CONFIGURE_SCREEN) {
 			updateListAdapter();
 		} else if (visibleType == DashboardType.CONFIGURE_MAP || visibleType == DashboardType.ROUTE_PREFERENCES) {
 			int index = listView.getFirstVisiblePosition();
