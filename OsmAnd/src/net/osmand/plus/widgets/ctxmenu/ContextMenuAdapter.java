@@ -1,19 +1,23 @@
-package net.osmand.plus.widgets.cmadapter;
+package net.osmand.plus.widgets.ctxmenu;
 
 import android.app.Activity;
 import android.text.TextUtils;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.ContextMenuItemsPreference;
-import net.osmand.plus.widgets.cmadapter.comparator.MenuItemsComparator;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
+import net.osmand.plus.widgets.ctxmenu.comparator.MenuItemsComparator;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.plus.widgets.ctxmenu.data.ExpandableCategory;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -32,9 +36,8 @@ public class ContextMenuAdapter {
 
 	private final OsmandApplication app;
 	private final List<ContextMenuItem> items = new ArrayList<>();
-
-	private @LayoutRes int defLayoutId = R.layout.list_menu_item_native;
-	private boolean profileDependent = false;
+	private int defLayoutId = R.layout.list_menu_item_native;
+	private boolean useProfileColor;
 
 	public ContextMenuAdapter(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -44,12 +47,8 @@ public class ContextMenuAdapter {
 		return items.size();
 	}
 
-	public String[] getItemNames() {
-		String[] itemNames = new String[items.size()];
-		for (int i = 0; i < items.size(); i++) {
-			itemNames[i] = items.get(i).getTitle();
-		}
-		return itemNames;
+	public List<String> getNames() {
+		return ContextMenuUtils.getNames(items);
 	}
 
 	public void addItem(ContextMenuItem item) {
@@ -74,12 +73,12 @@ public class ContextMenuAdapter {
 		items.clear();
 	}
 
-	public void setProfileDependent(boolean profileDependent) {
-		this.profileDependent = profileDependent;
+	public void setUseProfileColor(boolean useProfileColor) {
+		this.useProfileColor = useProfileColor;
 	}
 
-	public void setDefaultLayoutId(int defaultLayoutId) {
-		this.defLayoutId = defaultLayoutId;
+	public void setDefaultLayoutId(int defLayoutId) {
+		this.defLayoutId = defLayoutId;
 	}
 
 	private void sortItemsByOrder() {
@@ -124,14 +123,46 @@ public class ContextMenuAdapter {
 		}
 	}
 
-	public ArrayAdapter<ContextMenuItem> createListAdapter(@NonNull Activity activity, boolean lightTheme) {
-		removeHiddenItems(activity);
-		ContextMenuItem[] _items = items.toArray(new ContextMenuItem[0]);
-		return new ContextMenuArrayAdapter(activity, defLayoutId, _items, !lightTheme, profileDependent);
+	public ArrayAdapter<ContextMenuItem> createListAdapter(@NonNull Activity activity, boolean nightMode) { // TODO "createListAdapter" -> "toListAdapter"
+		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
+		OsmandSettings settings = app.getSettings();
+		consolidate();
+
+		Integer controlsColor = null;
+		if (useProfileColor) {
+			ApplicationMode appMode = settings.getApplicationMode();
+			controlsColor = appMode.getProfileColor(nightMode);
+		}
+
+		ViewBinder viewCreator = new ViewBinder(activity, defLayoutId, controlsColor, nightMode);
+
+		return new ArrayAdapter<ContextMenuItem>(activity, defLayoutId, R.id.title, items) {
+
+			@Override
+			public boolean isEnabled(int position) {
+				final ContextMenuItem item = getItem(position);
+				if (item != null) {
+					return !item.isCategory() && item.isClickable() && item.getLayout() != R.layout.drawer_divider;
+				}
+				return true;
+			}
+
+			@Override
+			public View getView(int position, View convertView, ViewGroup parent) {
+				return viewCreator.getView(getItem(position), convertView);
+			}
+		};
 	}
 
-	private void removeHiddenItems(@NonNull Activity activity) {
-		OsmandApplication app = ((OsmandApplication) activity.getApplication());
+	public ContextMenuAdapter consolidate() {
+		removeHidden();
+		processCategories();
+		processTotalPosition();
+		processDividers();
+		return this;
+	}
+
+	private void removeHidden() {
 		OsmAndAppCustomization custom = app.getAppCustomization();
 		Set<ContextMenuItem> hidden = new HashSet<>();
 		for (ContextMenuItem item : items) {
@@ -142,6 +173,47 @@ public class ContextMenuAdapter {
 			}
 		}
 		items.removeAll(hidden);
+	}
+
+	private void processDividers() {
+		for (int i = 0; i < items.size() - 1; i++) {
+			// Hide bottom divider for each item before next category
+			ContextMenuItem item = items.get(i);
+			ContextMenuItem next = items.get(i + 1);
+			item.setHideDivider(next.isCategory());
+		}
+		// Hide bottom divider for last item in list
+		items.get(items.size() - 1).setHideDivider(true);
+	}
+
+	private void processTotalPosition() {
+		for (int i = 0; i < items.size(); i++) {
+			items.get(i).setPosition(i);
+		}
+	}
+
+	private void processCategories() {
+		Set<ContextMenuItem> categories = new HashSet<>();
+		for (ContextMenuItem item : items) {
+		}
+	}
+
+	public List<ContextMenuItem> populateCategorizedItems() {
+		ExpandableCategory c = null;
+		List<ContextMenuItem> list = new ArrayList<>();
+		for (ContextMenuItem item : items) {
+			if (item instanceof ExpandableCategory) {
+				if (c != null) {
+					list.add(c);
+				}
+				c = (ExpandableCategory) item;
+			} else if (c != null) {
+				c.addItem(item);
+			} else {
+				list.add(item);
+			}
+		}
+		return list;
 	}
 
 	public List<ContextMenuItem> getDefaultItems() {

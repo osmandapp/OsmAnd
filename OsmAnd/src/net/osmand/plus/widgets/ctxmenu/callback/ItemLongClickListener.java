@@ -1,8 +1,8 @@
-package net.osmand.plus.widgets.cmadapter.callback;
+package net.osmand.plus.widgets.ctxmenu.callback;
 
 import android.widget.ArrayAdapter;
 
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
 public interface ItemLongClickListener {
 	/**

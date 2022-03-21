@@ -20,10 +20,10 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapTileLayer;
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
-import net.osmand.plus.widgets.cmadapter.callback.OnIntegerValueChangedListener;
-import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.plus.widgets.ctxmenu.callback.OnIntegerValueChangedListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 
 import static net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode.OVERLAY;
 import static net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode.UNDERLAY;

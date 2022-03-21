@@ -1,4 +1,4 @@
-package net.osmand.plus.widgets.cmadapter.callback;
+package net.osmand.plus.widgets.ctxmenu.callback;
 
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;

@@ -1,11 +1,11 @@
-package net.osmand.plus.widgets.cmadapter.callback;
+package net.osmand.plus.widgets.ctxmenu.callback;
 
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 
 import net.osmand.plus.R;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
 public abstract class OnRowItemClick implements ItemClickListener {
 

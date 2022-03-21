@@ -17,8 +17,8 @@ import androidx.appcompat.widget.SwitchCompat;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.core.android.MapRendererContext;
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
