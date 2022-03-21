@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import net.osmand.StateChangedListener;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -97,6 +98,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private TopToolbarView topToolbarView;
 	private ElevationProfileWidget elevationProfileWidget;
 
+	private StateChangedListener<ApplicationMode> appModeChangeListener;
+
 	public MapInfoLayer(@NonNull Context context, @NonNull RouteLayer layer) {
 		super(context);
 		settings = getApplication().getSettings();
@@ -123,9 +126,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 			expandButton = mapActivity.findViewById(R.id.map_collapse_button);
 			mapRulerLayout = mapActivity.findViewById(R.id.map_ruler_layout);
 
+			appModeChangeListener = createAppModeChangeListener();
+			settings.APPLICATION_MODE.addListener(appModeChangeListener);
+
 			registerAllControls(mapActivity);
 			recreateControls();
 		} else {
+			settings.APPLICATION_MODE.removeListener(appModeChangeListener);
+			appModeChangeListener = null;
+
 			if (mapInfoControls != null) {
 				mapInfoControls.clearWidgets();
 			}
@@ -145,6 +154,16 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 			topToolbarView = null;
 		}
+	}
+
+	@NonNull
+	private StateChangedListener<ApplicationMode> createAppModeChangeListener() {
+		return appMode -> {
+			if (mapInfoControls != null) {
+				mapInfoControls.reorderWidgets();
+				recreateControls();
+			}
+		};
 	}
 
 	@Nullable

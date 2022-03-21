@@ -19,7 +19,7 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 	public final String key;
 	public final MapWidget widget;
 	public final WidgetsPanel widgetPanel;
-	public final int priority;
+	public int priority;
 
 	@DrawableRes
 	private final int settingsIconId;
@@ -29,13 +29,13 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 	private final WidgetState widgetState;
 
 	public MapWidgetInfo(@NonNull String key,
-	                        @NonNull MapWidget widget,
-	                        @Nullable WidgetState widgetState,
-	                        @DrawableRes int settingsIconId,
-	                        @StringRes int messageId,
-	                        @Nullable String message,
-	                        int priority,
-	                        @NonNull WidgetsPanel widgetPanel) {
+	                     @NonNull MapWidget widget,
+	                     @Nullable WidgetState widgetState,
+	                     @DrawableRes int settingsIconId,
+	                     @StringRes int messageId,
+	                     @Nullable String message,
+	                     int priority,
+	                     @NonNull WidgetsPanel widgetPanel) {
 		this.key = key;
 		this.widget = widget;
 		this.widgetState = widgetState;
