@@ -3563,9 +3563,9 @@
     <string name="poi_hazard_additional_minefield">Danger : champ de mines</string>
     <string name="poi_hazard_additional_contamination">Danger : contamination</string>
     <string name="poi_defibrillator_location">Emplacement</string>
-    <string name="poi_changing_table_yes">Table à langer : oui</string>
-    <string name="poi_changing_table_no">Table à langer : non</string>
-    <string name="poi_changing_table_limited">Table à langer : limitée</string>
+    <string name="poi_changing_table_yes">Oui ; Table à langer : oui</string>
+    <string name="poi_changing_table_no">Non ; Table à langer : non</string>
+    <string name="poi_changing_table_limited">Limitée ; Table à langer : limitée</string>
     <string name="poi_changing_table_location_room">Emplacement de la table à langer : pièce séparée</string>
     <string name="poi_changing_table_location_male_toilet">Emplacement de la table à langer : toilettes hommes</string>
     <string name="poi_changing_table_location_female_toilet">Emplacement de la table à langer : toilettes femmes</string>
@@ -4296,4 +4296,16 @@
     <string name="poi_access_permit">Permis requis</string>
     <string name="poi_parcel_locker">Casier à colis</string>
     <string name="poi_landuse_education">Education</string>
+    <string name="poi_changing_table_filter">Table à langer</string>
+    <string name="poi_payment_girocard_contactless_yes">Girocard</string>
+    <string name="poi_payment_maestro_contactless_yes">Sans contact Maestro</string>
+    <string name="poi_payment_visa_contactless_yes">Sans contact Visa</string>
+    <string name="poi_payment_american_express_contactless_no">American Express (AMEX) sans contact non acceptée</string>
+    <string name="poi_payment_girocard_contactless_no">Girocard sans contact non acceptée</string>
+    <string name="poi_payment_maestro_contactless_no">Maestro sans contact non acceptée</string>
+    <string name="poi_payment_visa_contactless_no">Visa sans contact non acceptée</string>
+    <string name="poi_payment_american_express_contactless_yes">Sans contact American Express (AMEX)</string>
+    <string name="poi_payment_mastercard_contactless_yes">Sans contact MasterCard</string>
+    <string name="poi_payment_mastercard_contactless_no">MasterCard sans contact non acceptée</string>
+    <string name="poi_printer_ink">Magasin de cartouches d\'encre</string>
 </resources>
