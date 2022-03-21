@@ -134,10 +134,10 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		ChipItem selectedItem = null;
 		for (ApplicationMode am : ApplicationMode.values(app)) {
 			ChipItem item = new ChipItem(am.getStringKey());
-			int colorId = am.getIconColorInfo().getColor(nightMode);
-			int profileColor = ContextCompat.getColor(app, colorId);
+			int profileColor = am.getProfileColor(nightMode);
 			int bgSelectedColor = ColorUtilities.getColorWithAlpha(profileColor, 0.25f);
-			item.icon = iconsCache.getIcon(am.getIconRes());
+			// Do not use iconsCache to prevent same coloring for profiles with same icons
+			item.icon = ContextCompat.getDrawable(app, am.getIconRes());
 			item.iconColor = profileColor;
 			item.iconSelectedColor = profileColor;
 			item.strokeSelectedColor = profileColor;
