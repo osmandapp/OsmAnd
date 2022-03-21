@@ -778,7 +778,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 				.setTitleId(R.string.layer_map_appearance, mapActivity)
 				.setIcon(R.drawable.ic_configure_screen_dark)
 				.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
-					app.logEvent("config_screen_open");
+					app.logEvent("drawer_config_screen_open");
 					MapActivity.clearPrevActivityIntent();
 					ConfigureScreenFragment.showInstance(mapActivity);
 					return true;

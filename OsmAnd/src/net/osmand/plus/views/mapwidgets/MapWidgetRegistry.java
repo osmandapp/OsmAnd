@@ -11,12 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapmarkers.DirectionIndicationDialogFragment;
+import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
@@ -204,7 +206,6 @@ public class MapWidgetRegistry {
 	                                    int priorityOrder,
 	                                    @NonNull WidgetsPanel widgetPanel) {
 		MapWidgetInfo widgetInfo;
-
 		if (widget instanceof TextInfoWidget) {
 			widgetInfo = new SideWidgetInfo(key, widget, widgetState, settingsIconId, messageId, message,
 					priorityOrder, widgetPanel);
@@ -291,9 +292,9 @@ public class MapWidgetRegistry {
 		adapter.notifyDataSetChanged();
 	}
 
-	public void setVisibility(MapWidgetInfo m, boolean visible, boolean collapsed) {
+	public void setVisibility(@NonNull MapWidgetInfo widgetInfo, boolean visible, boolean collapsed) {
 		ApplicationMode mode = settings.APPLICATION_MODE.get();
-		setVisibility(mode, m, visible, collapsed);
+		setVisibility(mode, widgetInfo, visible, collapsed);
 	}
 
 	public void setVisibility(ApplicationMode mode, MapWidgetInfo m, boolean visible, boolean collapsed) {
@@ -498,7 +499,7 @@ public class MapWidgetRegistry {
 
 					@Override
 					public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
-//						QuickActionListFragment.showInstance(mapActivity, true, true);
+						QuickActionListFragment.showInstance(mapActivity, true);
 						return true;
 					}
 
@@ -546,11 +547,14 @@ public class MapWidgetRegistry {
 								return false;
 							}
 							boolean selected = r.isVisibleCollapsed(mode) || r.isVisible(mode);
-							showPopUpMenu(mapActivity, view, adapter, r.getWidgetState(), r.getMessage(), mode,
+
+							WidgetState widgetState = r.getWidgetState();
+							CallbackWithObject<WidgetState> callback = getWidgetStateCallback(adapter, widgetState, r.getMessage(), pos);
+							showPopUpMenu(view, callback, widgetState, mode,
 									getPopupMenuItemListener(adapter, r, pos, true, false),
 									getPopupMenuItemListener(adapter, r, pos, false, false),
 									getPopupMenuItemListener(adapter, r, pos, true, true),
-									selected, pos);
+									selected);
 
 							return false;
 						}
@@ -572,12 +576,23 @@ public class MapWidgetRegistry {
 		}
 	}
 
-	private OnClickListener getPopupMenuItemListener(final ArrayAdapter<ContextMenuItem> adapter,
-	                                                      final MapWidgetInfo r,
-	                                                      final int pos,
-	                                                      final boolean visible,
-	                                                      final boolean collapsed) {
+	private OnClickListener getPopupMenuItemListener(ArrayAdapter<ContextMenuItem> adapter, MapWidgetInfo r, int pos, boolean visible, boolean collapsed) {
 		return v -> setVisibility(adapter, r, pos, visible, collapsed);
+	}
+
+	private CallbackWithObject<WidgetState> getWidgetStateCallback(ArrayAdapter<ContextMenuItem> adapter, WidgetState widgetState, String message, int pos) {
+		return result -> {
+			ContextMenuItem item = adapter.getItem(pos);
+			if (message != null) {
+				item.setTitle(message);
+			} else {
+				item.setTitle(getString(widgetState.getMenuTitleId()));
+			}
+			item.setIcon(widgetState.getSettingsIconId());
+
+			adapter.notifyDataSetChanged();
+			return false;
+		};
 	}
 
 	public void addControlsAppearance(@NonNull MapActivity mapActivity, @NonNull ContextMenuAdapter cm, @NonNull ApplicationMode mode) {
@@ -633,10 +648,11 @@ public class MapWidgetRegistry {
 					                              final int itemId,
 					                              final int pos) {
 						boolean selected = pref.get();
-						showPopUpMenu(mapActivity, view, adapter, widgetState, null, mode,
+						CallbackWithObject<WidgetState> callback = getWidgetStateCallback(adapter, widgetState, null, pos);
+						showPopUpMenu(view, callback, widgetState, mode,
 								getElevationPopupMenuItemListener(mapActivity, adapter, pref, pos, true),
 								getElevationPopupMenuItemListener(mapActivity, adapter, pref, pos, false),
-								null, selected, pos);
+								null, selected);
 						return false;
 					}
 
@@ -661,17 +677,14 @@ public class MapWidgetRegistry {
 		};
 	}
 
-	public void showPopUpMenu(@NonNull MapActivity mapActivity,
-	                          @NonNull View view,
-	                          @NonNull final ArrayAdapter<ContextMenuItem> adapter,
+	public void showPopUpMenu(@NonNull View view,
+	                          @NonNull final CallbackWithObject<WidgetState> callback,
 	                          @Nullable final WidgetState widgetState,
-	                          @Nullable final String message,
 	                          @NonNull ApplicationMode mode,
-	                          @NonNull OnClickListener showBtnListener,
-	                          @NonNull OnClickListener hideBtnListener,
+	                          @Nullable OnClickListener showBtnListener,
+	                          @Nullable OnClickListener hideBtnListener,
 	                          @Nullable OnClickListener collapseBtnListener,
-	                          boolean selected,
-	                          final int pos) {
+	                          boolean selected) {
 		final boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		final int currentModeColor = mode.getProfileColor(nightMode);
 		View parentView = view.findViewById(R.id.text_wrapper);
@@ -697,18 +710,11 @@ public class MapWidgetRegistry {
 							.setIcon(icon)
 							.setOnClickListener(v -> {
 								widgetState.changeState(id);
-								MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
-								if (mil != null) {
-									mil.recreateControls();
+								MapInfoLayer layer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
+								if (layer != null) {
+									layer.recreateControls();
 								}
-								ContextMenuItem item = adapter.getItem(pos);
-								item.setIcon(widgetState.getSettingsIconId());
-								if (message != null) {
-									item.setTitle(message);
-								} else {
-									item.setTitle(getString(widgetState.getMenuTitleId()));
-								}
-								adapter.notifyDataSetChanged();
+								callback.processResult(widgetState);
 							})
 							.showCompoundBtn(currentModeColor)
 							.setSelected(checkedItem)
@@ -716,23 +722,21 @@ public class MapWidgetRegistry {
 				}
 			}
 		}
-
-		// show
-		items.add(new PopUpMenuItem.Builder(app)
-				.setTitleId(R.string.shared_string_show)
-				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_view))
-				.setOnClickListener(showBtnListener)
-				.showTopDivider(items.size() > 0)
-				.create());
-
-		// hide
-		items.add(new PopUpMenuItem.Builder(app)
-				.setTitleId(R.string.shared_string_hide)
-				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_hide))
-				.setOnClickListener(hideBtnListener)
-				.create());
-
-		// collapse
+		if (showBtnListener != null) {
+			items.add(new PopUpMenuItem.Builder(app)
+					.setTitleId(R.string.shared_string_show)
+					.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_view))
+					.setOnClickListener(showBtnListener)
+					.showTopDivider(items.size() > 0)
+					.create());
+		}
+		if (hideBtnListener != null) {
+			items.add(new PopUpMenuItem.Builder(app)
+					.setTitleId(R.string.shared_string_hide)
+					.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_hide))
+					.setOnClickListener(hideBtnListener)
+					.create());
+		}
 		if (collapseBtnListener != null) {
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitleId(R.string.shared_string_collapse)
@@ -743,21 +747,8 @@ public class MapWidgetRegistry {
 
 		new PopUpMenuHelper.Builder(parentView, items, nightMode)
 				.setWidthType(PopUpMenuWidthType.STANDARD)
-				.setBackgroundColor(ColorUtilities.getListBgColor(mapActivity, nightMode))
+				.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode))
 				.show();
-	}
-
-	public ContextMenuAdapter getViewConfigureMenuAdapter(@NonNull MapActivity mapActivity) {
-		ContextMenuAdapter cm = new ContextMenuAdapter(app);
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		cm.setProfileDependent(true);
-		cm.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
-		cm.addItem(new ContextMenuItem(null).setTitleId(R.string.app_modes_choose, mapActivity)
-				.setLayout(R.layout.mode_toggles));
-//		cm.setChangeAppModeListener(() -> mapActivity.getDashboard().updateListAdapter(getViewConfigureMenuAdapter(mapActivity)));
-		ApplicationMode mode = settings.getApplicationMode();
-		addControls(mapActivity, cm, mode);
-		return cm;
 	}
 
 	private String getString(@StringRes int resId) {
@@ -783,7 +774,7 @@ public class MapWidgetRegistry {
 
 		@Override
 		public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> a, int itemId, int pos,
-										  boolean isChecked, int[] viewCoordinates) {
+		                                  boolean isChecked, int[] viewCoordinates) {
 			updateAppearancePref(mapActivity, pref, a, !pref.get());
 			return false;
 		}

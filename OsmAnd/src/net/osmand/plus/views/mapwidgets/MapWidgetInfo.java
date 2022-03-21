@@ -9,9 +9,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 
 	public static final int INVALID_ID = 0;

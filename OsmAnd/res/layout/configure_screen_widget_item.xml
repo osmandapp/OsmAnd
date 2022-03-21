@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -20,16 +19,16 @@
 			android:layout_height="@dimen/standard_icon_size"
 			android:layout_gravity="center_vertical"
 			android:layout_marginHorizontal="@dimen/content_padding"
-			tools:src="@drawable/ic_action_info_dark"/>
+			tools:src="@drawable/ic_action_info_dark" />
 
 		<LinearLayout
 			android:id="@+id/text_wrapper"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-			android:layout_weight="1"
 			android:layout_gravity="center_vertical"
-			android:layout_marginStart="@dimen/content_padding"
 			android:layout_marginVertical="@dimen/content_padding_small"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_weight="1"
 			android:gravity="center_vertical"
 			android:orientation="vertical">
 
@@ -38,7 +37,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:textAppearance="@style/TextAppearance.ListItemTitle"
-				tools:text="Some title text"/>
+				tools:text="Some title text" />
 
 			<androidx.appcompat.widget.AppCompatTextView
 				android:id="@+id/description"
@@ -48,7 +47,7 @@
 				android:lines="1"
 				android:textColor="?android:textColorSecondary"
 				android:textSize="@dimen/default_desc_text_size"
-				tools:text="Some very long subtitle text, that won't fit into one line"/>
+				tools:text="Some very long subtitle text, that won't fit into one line" />
 
 		</LinearLayout>
 
@@ -59,15 +58,24 @@
 			android:layout_gravity="center_vertical"
 			android:layout_margin="@dimen/content_padding"
 			android:tint="?attr/default_icon_color"
-			tools:src="@drawable/ic_action_additional_option"/>
+			tools:src="@drawable/ic_action_additional_option" />
 
-		<androidx.appcompat.widget.SwitchCompat
-			android:id="@+id/compound_button"
+		<FrameLayout
+			android:id="@+id/switch_container"
 			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
-			android:layout_gravity="center_vertical"
-			android:layout_marginEnd="@dimen/content_padding"
-			android:focusable="false"/>
+			android:layout_height="match_parent">
+
+			<androidx.appcompat.widget.SwitchCompat
+				android:id="@+id/compound_button"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_gravity="center_vertical"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:background="@null"
+				android:clickable="false"
+				android:focusable="false" />
+
+		</FrameLayout>
 
 	</LinearLayout>
 

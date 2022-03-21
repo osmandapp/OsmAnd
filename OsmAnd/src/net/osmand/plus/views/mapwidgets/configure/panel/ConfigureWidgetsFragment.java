@@ -37,14 +37,12 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.configure.reorder.OnNewOrderAppliedCallback;
-import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment;
+import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment.WidgetsOrderListener;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class ConfigureWidgetsFragment extends BaseOsmAndFragment
-		implements OnNewOrderAppliedCallback, OnOffsetChangedListener {
+public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements WidgetsOrderListener, OnOffsetChangedListener {
 
 	public static final String TAG = ConfigureWidgetsFragment.class.getSimpleName();
 
@@ -55,19 +53,29 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
-	private ApplicationMode appMode;
 
-	private View view;
-	private AppBarLayout appBar;
+	private WidgetsPanel selectedPanel;
+	private ApplicationMode selectedAppMode;
+	private WidgetsListFragment selectedFragment;
+
 	private Toolbar toolbar;
 	private TabLayout tabLayout;
 	private ViewPager2 viewPager;
 	private View compensationView;
 
-	private List<WidgetsPanel> availablePanels;
-	private WidgetsListFragment currentListFragment;
-	private WidgetsPanel selectedPanel;
 	private boolean nightMode;
+
+	public void setSelectedPanel(@NonNull WidgetsPanel panel) {
+		this.selectedPanel = panel;
+	}
+
+	public void setSelectedAppMode(@NonNull ApplicationMode appMode) {
+		this.selectedAppMode = appMode;
+	}
+
+	public void setSelectedFragment(@Nullable WidgetsListFragment fragment) {
+		this.selectedFragment = fragment;
+	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,35 +84,29 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment
 		settings = app.getSettings();
 
 		if (savedInstanceState != null) {
-			restoreData(savedInstanceState);
+			String appModeKey = savedInstanceState.getString(APP_MODE_ATTR);
+			selectedAppMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
+			selectedPanel = WidgetsPanel.valueOf(savedInstanceState.getString(SELECTED_GROUP_ATTR));
 		}
-
-		availablePanels = new ArrayList<>();
-		availablePanels.add(WidgetsPanel.LEFT);
-		availablePanels.add(WidgetsPanel.RIGHT);
-		availablePanels.add(WidgetsPanel.TOP);
-		availablePanels.add(WidgetsPanel.BOTTOM);
 	}
 
 	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater,
-	                         @Nullable ViewGroup container,
-	                         @Nullable Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		nightMode = !settings.isLightContent();
-		inflater = UiUtilities.getInflater(getContext(), nightMode);
+		inflater = UiUtilities.getInflater(requireContext(), nightMode);
 
-		view = inflater.inflate(R.layout.fragment_configure_widgets, container, false);
+		View view = inflater.inflate(R.layout.fragment_configure_widgets, container, false);
 		if (Build.VERSION.SDK_INT < 30) {
 			AndroidUtils.addStatusBarPadding21v(app, view);
 		}
+		AppBarLayout appBar = view.findViewById(R.id.appbar);
+		appBar.addOnOffsetChangedListener(this);
 
-		appBar = view.findViewById(R.id.appbar);
 		toolbar = view.findViewById(R.id.toolbar);
 		tabLayout = view.findViewById(R.id.tab_layout);
 		viewPager = view.findViewById(R.id.view_pager);
 		compensationView = view.findViewById(R.id.compensation_view);
-		appBar.addOnOffsetChangedListener(this);
 
 		setupToolbar();
 		setupTabLayout();
@@ -113,41 +115,48 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment
 	}
 
 	private void setupToolbar() {
-		ImageButton backBtn = toolbar.findViewById(R.id.back_button);
-		backBtn.setOnClickListener(view -> {
+		ImageButton backButton = toolbar.findViewById(R.id.back_button);
+		backButton.setOnClickListener(view -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				activity.onBackPressed();
 			}
 		});
-		UiUtilities.rotateImageByLayoutDirection(backBtn);
-		View infoBtn = toolbar.findViewById(R.id.info_button);
-		infoBtn.setOnClickListener(v -> {
+		UiUtilities.rotateImageByLayoutDirection(backButton);
+
+		View infoButton = toolbar.findViewById(R.id.info_button);
+		infoButton.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				AndroidUtils.openUrl(activity, Uri.parse(INFO_LINK), nightMode);
 			}
 		});
 		TextView tvSubtitle = toolbar.findViewById(R.id.toolbar_subtitle);
-		String appModeName = appMode.toHumanString();
-		tvSubtitle.setText(appModeName);
+		tvSubtitle.setText(selectedAppMode.toHumanString());
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putString(APP_MODE_ATTR, selectedAppMode.getStringKey());
+		outState.putString(SELECTED_GROUP_ATTR, selectedPanel.name());
 	}
 
 	private void setupTabLayout() {
-		WidgetsTabAdapter tabAdapter = new WidgetsTabAdapter(this, availablePanels);
+		WidgetsTabAdapter tabAdapter = new WidgetsTabAdapter(this);
 		viewPager.setAdapter(tabAdapter);
-
 		viewPager.registerOnPageChangeCallback(new OnPageChangeCallback() {
 			@Override
 			public void onPageSelected(int position) {
-				selectedPanel = availablePanels.get(position);
+				selectedPanel = WidgetsPanel.values()[position];
 			}
 		});
 
-		TabLayoutMediator mediator = new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> { });
+		TabLayoutMediator mediator = new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
+		});
 		mediator.attach();
 
-		int profileColor = appMode.getProfileColor(nightMode);
+		int profileColor = selectedAppMode.getProfileColor(nightMode);
 		int defaultIconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		tabLayout.setSelectedTabIndicatorColor(profileColor);
 		tabLayout.addOnTabSelectedListener(new OnTabSelectedListener() {
@@ -173,104 +182,51 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment
 			}
 		});
 
+		List<WidgetsPanel> panels = Arrays.asList(WidgetsPanel.values());
 		for (int i = 0; i < tabLayout.getTabCount(); i++) {
 			Tab tab = tabLayout.getTabAt(i);
-			WidgetsPanel panel = availablePanels.get(i);
-			if (tab != null ) {
+			WidgetsPanel panel = panels.get(i);
+			if (tab != null) {
 				tab.setTag(panel);
 				tab.setIcon(panel.getIconId());
 			}
 		}
-
-		int selectedTabPosition = availablePanels.indexOf(selectedPanel);
+		int selectedTabPosition = panels.indexOf(selectedPanel);
 		viewPager.setCurrentItem(selectedTabPosition, false);
-	}
-
-	public void setupReorderButton(View btnChangeOrder) {
-		btnChangeOrder.setOnClickListener(v -> onReorderButtonClicked());
-		setupListItemBackground(btnChangeOrder);
-	}
-
-	private void onReorderButtonClicked() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			ReorderWidgetsFragment.showInstance(this, activity, selectedPanel, appMode);
-		}
-	}
-
-	@Override
-	public void onSaveInstanceState(@NonNull Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putString(APP_MODE_ATTR, appMode.getStringKey());
-		outState.putString(SELECTED_GROUP_ATTR, selectedPanel.name());
-	}
-
-	private void restoreData(@NonNull Bundle savedInstanceState) {
-		String appModeKey = savedInstanceState.getString(APP_MODE_ATTR);
-		appMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
-		String groupName = savedInstanceState.getString(SELECTED_GROUP_ATTR);
-		selectedPanel = WidgetsPanel.valueOf(groupName);
-	}
-
-	private void setupListItemBackground(@NonNull View view) {
-		View button = view.findViewById(R.id.button_container);
-		int activeColor = appMode.getProfileColor(nightMode);;
-		Drawable background = UiUtilities.getColoredSelectableDrawable(app, activeColor, 0.3f);
-		AndroidUtils.setBackground(button, background);
-	}
-
-	public void setSelectedPanel(WidgetsPanel selectedPanel) {
-		this.selectedPanel = selectedPanel;
-	}
-
-	public WidgetsPanel getSelectedPanel() {
-		return selectedPanel;
-	}
-
-	public void setAppMode(ApplicationMode appMode) {
-		this.appMode = appMode;
-	}
-
-	public void setCurrentListFragment(WidgetsListFragment currentListFragment) {
-		this.currentListFragment = currentListFragment;
-	}
-
-	@Override
-	public int getStatusBarColorId() {
-		View view = getView();
-		if (view != null && Build.VERSION.SDK_INT >= 23 && !nightMode) {
-			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-		}
-		return ColorUtilities.getListBgColorId(nightMode);
 	}
 
 	@Override
 	public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
 		int height = toolbar.getHeight() - Math.abs(verticalOffset);
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, height);
-		compensationView.setLayoutParams(params);
+		compensationView.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, height));
 	}
 
 	@Override
-	public void onNewOrderApplied() {
-		if (currentListFragment != null) {
-			currentListFragment.updateContent();
+	public void onWidgetsOrderApplied() {
+		if (selectedFragment != null) {
+			selectedFragment.updateContent();
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentActivity activity,
-	                                @NonNull WidgetsPanel selectedGroup,
-	                                @NonNull ApplicationMode appMode) {
+	@Override
+	public int getStatusBarColorId() {
+		View view = getView();
+		if (view != null && !nightMode) {
+			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+		}
+		return ColorUtilities.getListBgColorId(nightMode);
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			ConfigureWidgetsFragment fragment = new ConfigureWidgetsFragment();
-			fragment.setSelectedPanel(selectedGroup);
-			fragment.setAppMode(appMode);
+			fragment.setSelectedPanel(panel);
+			fragment.setSelectedAppMode(appMode);
 			fragmentManager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 		}
 	}
-
 }

@@ -1,5 +1,8 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.render.OsmandRenderer.RenderingContext;
+import static net.osmand.plus.render.TextRenderer.TextDrawInfo;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -12,6 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
@@ -42,15 +51,6 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
-
-import androidx.annotation.ColorRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
-
-import static net.osmand.plus.render.OsmandRenderer.RenderingContext;
-import static net.osmand.plus.render.TextRenderer.TextDrawInfo;
 
 public class StreetNameWidget extends MapWidget {
 

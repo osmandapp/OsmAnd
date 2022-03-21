@@ -2,14 +2,14 @@ package net.osmand.plus.views.mapwidgets.configure.reorder.viewholder;
 
 import android.view.View;
 
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
-import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
+import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.UnmovableItem;
 
-public class DividerViewHolder extends RecyclerView.ViewHolder
-		implements ReorderItemTouchHelperCallback.UnmovableItem {
+public class DividerViewHolder extends ViewHolder implements UnmovableItem {
 
-	public DividerViewHolder(View itemView) {
+	public DividerViewHolder(@NonNull View itemView) {
 		super(itemView);
 	}
 

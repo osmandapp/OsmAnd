@@ -1,13 +1,13 @@
 package net.osmand.plus.views.mapwidgets;
 
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
-import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
-
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
+import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 
 public class CenterWidgetInfo extends MapWidgetInfo {
 

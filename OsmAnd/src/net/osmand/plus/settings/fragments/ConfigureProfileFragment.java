@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -59,8 +61,6 @@ import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
-import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
-
 public class ConfigureProfileFragment extends BaseSettingsFragment implements CopyAppModePrefsListener,
 		ResetAppModePrefsListener, PluginStateListener {
 
@@ -107,15 +107,11 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		toolbarSubtitle.setText(R.string.configure_profile);
 		toolbarSubtitle.setVisibility(View.VISIBLE);
 
-		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				ApplicationMode selectedMode = getSelectedAppMode();
-				List<ApplicationMode> availableAppModes = ApplicationMode.values(app);
-				boolean isChecked = availableAppModes.contains(selectedMode);
-				ApplicationMode.changeProfileAvailability(selectedMode, !isChecked, getMyApplication());
-				updateToolbarSwitch();
-			}
+		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(view1 -> {
+			ApplicationMode selectedMode = getSelectedAppMode();
+			boolean isChecked = ApplicationMode.values(app).contains(selectedMode);
+			ApplicationMode.changeProfileAvailability(selectedMode, !isChecked, getMyApplication());
+			updateToolbarSwitch();
 		});
 
 		View switchProfile = view.findViewById(R.id.profile_button);
@@ -244,7 +240,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 
 		return new RecyclerView.ItemDecoration() {
 			@Override
-			public void onDraw(Canvas canvas, RecyclerView parent, RecyclerView.State state) {
+			public void onDraw(@NonNull Canvas canvas, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
 				int dividerLeft = parent.getPaddingLeft();
 				int dividerRight = parent.getWidth() - parent.getPaddingRight();
 
@@ -266,7 +262,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			}
 
 			@Override
-			public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+			public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
 				if (shouldDrawDivider(view)) {
 					outRect.set(0, 0, 0, pluginDividerHeight);
 				}

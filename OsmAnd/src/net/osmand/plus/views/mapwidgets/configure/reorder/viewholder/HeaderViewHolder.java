@@ -3,19 +3,19 @@ package net.osmand.plus.views.mapwidgets.configure.reorder.viewholder;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.R;
-import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
+import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.UnmovableItem;
 
-public class HeaderViewHolder extends RecyclerView.ViewHolder
-		implements ReorderItemTouchHelperCallback.UnmovableItem {
+public class HeaderViewHolder extends ViewHolder implements UnmovableItem {
 
-	public final TextView tvTitle;
+	public final TextView title;
 
-	public HeaderViewHolder(View itemView) {
+	public HeaderViewHolder(@NonNull View itemView) {
 		super(itemView);
-		tvTitle = itemView.findViewById(R.id.title);
+		title = itemView.findViewById(R.id.title);
 	}
 
 	@Override

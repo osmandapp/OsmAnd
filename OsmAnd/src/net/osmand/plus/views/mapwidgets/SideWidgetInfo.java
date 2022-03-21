@@ -1,16 +1,16 @@
 package net.osmand.plus.views.mapwidgets;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 public class SideWidgetInfo extends MapWidgetInfo {
 

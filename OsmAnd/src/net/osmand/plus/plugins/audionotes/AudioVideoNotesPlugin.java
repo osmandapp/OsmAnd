@@ -1,5 +1,11 @@
 package net.osmand.plus.plugins.audionotes;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_AUDIO_NOTE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_PHOTO_NOTE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_VIDEO_NOTE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_AUDIO_VIDEO_NOTES;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.RECORDING_LAYER;
+
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -30,6 +36,11 @@ import android.view.SurfaceView;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
@@ -37,9 +48,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -65,6 +73,9 @@ import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
@@ -88,17 +99,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_AUDIO_NOTE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_PHOTO_NOTE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_VIDEO_NOTE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_AUDIO_VIDEO_NOTES;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.RECORDING_LAYER;
 
 
 public class AudioVideoNotesPlugin extends OsmandPlugin {
@@ -2058,93 +2058,5 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	@Override
 	public DashFragmentData getCardFragment() {
 		return DashAudioVideoNotesFragment.FRAGMENT_DATA;
-	}
-
-	public static class AudioVideoNotesWidgetState extends WidgetState {
-
-		private final CommonPreference<Integer> defaultActionSetting;
-
-		private static final int AV_WIDGET_STATE_ASK = R.id.av_notes_widget_state_ask;
-		private static final int AV_WIDGET_STATE_AUDIO = R.id.av_notes_widget_state_audio;
-		private static final int AV_WIDGET_STATE_VIDEO = R.id.av_notes_widget_state_video;
-		private static final int AV_WIDGET_STATE_PHOTO = R.id.av_notes_widget_state_photo;
-
-		AudioVideoNotesWidgetState(OsmandApplication ctx, CommonPreference<Integer> defaultActionSetting) {
-			super(ctx);
-			this.defaultActionSetting = defaultActionSetting;
-		}
-
-		@Override
-		public int getMenuTitleId() {
-			Integer action = defaultActionSetting.get();
-			switch (action) {
-				case AV_DEFAULT_ACTION_AUDIO:
-					return R.string.av_def_action_audio;
-				case AV_DEFAULT_ACTION_VIDEO:
-					return R.string.av_def_action_video;
-				case AV_DEFAULT_ACTION_TAKEPICTURE:
-					return R.string.av_def_action_picture;
-				default:
-					return R.string.map_widget_av_notes;
-			}
-		}
-
-		@Override
-		public int getSettingsIconId() {
-			Integer action = defaultActionSetting.get();
-			switch (action) {
-				case AV_DEFAULT_ACTION_AUDIO:
-					return R.drawable.ic_action_micro_dark;
-				case AV_DEFAULT_ACTION_VIDEO:
-					return R.drawable.ic_action_video_dark;
-				case AV_DEFAULT_ACTION_TAKEPICTURE:
-					return R.drawable.ic_action_photo_dark;
-				default:
-					return R.drawable.ic_action_photo_dark;
-			}
-		}
-
-		@Override
-		public int getMenuItemId() {
-			Integer action = defaultActionSetting.get();
-			switch (action) {
-				case AV_DEFAULT_ACTION_AUDIO:
-					return AV_WIDGET_STATE_AUDIO;
-				case AV_DEFAULT_ACTION_VIDEO:
-					return AV_WIDGET_STATE_VIDEO;
-				case AV_DEFAULT_ACTION_TAKEPICTURE:
-					return AV_WIDGET_STATE_PHOTO;
-				default:
-					return AV_WIDGET_STATE_ASK;
-			}
-		}
-
-		@Override
-		public int[] getMenuTitleIds() {
-			return new int[]{R.string.av_def_action_choose, R.string.av_def_action_audio, R.string.av_def_action_video, R.string.av_def_action_picture};
-		}
-
-		@Override
-		public int[] getMenuIconIds() {
-			return new int[]{R.drawable.ic_action_photo_dark, R.drawable.ic_action_micro_dark, R.drawable.ic_action_video_dark, R.drawable.ic_action_photo_dark};
-		}
-
-		@Override
-		public int[] getMenuItemIds() {
-			return new int[]{AV_WIDGET_STATE_ASK, AV_WIDGET_STATE_AUDIO, AV_WIDGET_STATE_VIDEO, AV_WIDGET_STATE_PHOTO};
-		}
-
-		@Override
-		public void changeState(int stateId) {
-			if (stateId == AV_WIDGET_STATE_AUDIO) {
-				defaultActionSetting.set(AV_DEFAULT_ACTION_AUDIO);
-			} else if (stateId == AV_WIDGET_STATE_VIDEO) {
-				defaultActionSetting.set(AV_DEFAULT_ACTION_VIDEO);
-			} else if (stateId == AV_WIDGET_STATE_PHOTO) {
-				defaultActionSetting.set(AV_DEFAULT_ACTION_TAKEPICTURE);
-			} else {
-				defaultActionSetting.set(AV_DEFAULT_ACTION_CHOOSE);
-			}
-		}
 	}
 }

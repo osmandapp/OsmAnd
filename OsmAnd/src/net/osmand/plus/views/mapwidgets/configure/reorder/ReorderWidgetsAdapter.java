@@ -22,7 +22,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.ButtonViewHolder;
-import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.ButtonViewHolder.ButtonUiInfo;
+import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.ButtonViewHolder.ButtonInfo;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.DividerViewHolder;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.HeaderViewHolder;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.SpaceViewHolder;
@@ -119,9 +119,9 @@ public class ReorderWidgetsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 		} else if (holder instanceof HeaderViewHolder) {
 			HeaderViewHolder h = (HeaderViewHolder) holder;
 			String header = (String) item.value;
-			h.tvTitle.setText(header);
+			h.title.setText(header);
 		} else if (holder instanceof ButtonViewHolder) {
-			ButtonUiInfo buttonInfo = (ButtonUiInfo) item.value;
+			ButtonInfo buttonInfo = (ButtonInfo) item.value;
 			ButtonViewHolder h = (ButtonViewHolder) holder;
 			h.buttonView.setOnClickListener(buttonInfo.listener);
 			h.icon.setImageResource(buttonInfo.iconRes);
@@ -132,7 +132,7 @@ public class ReorderWidgetsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 			AndroidUtils.setBackground(h.buttonView, drawable);
 		} else if (holder instanceof SpaceViewHolder) {
 			float space = (float) item.value;
-			((SpaceViewHolder) holder).setSpace((int) space);
+			((SpaceViewHolder) holder).setHeight((int) space);
 		}
 	}
 
@@ -182,8 +182,8 @@ public class ReorderWidgetsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 		ListItem item = items.get(position);
 		if (item.value instanceof WidgetUiInfo) {
 			return ((WidgetUiInfo) item.value).title.hashCode();
-		} else if (item.value instanceof ButtonUiInfo) {
-			return ((ButtonUiInfo) item.value).title.hashCode();
+		} else if (item.value instanceof ButtonInfo) {
+			return ((ButtonInfo) item.value).title.hashCode();
 		} else if (item.value != null) {
 			return item.value.hashCode();
 		}

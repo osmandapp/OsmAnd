@@ -4,23 +4,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
-import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
+import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.UnmovableItem;
 
-public class SpaceViewHolder extends RecyclerView.ViewHolder
-		implements ReorderItemTouchHelperCallback.UnmovableItem {
+public class SpaceViewHolder extends ViewHolder implements UnmovableItem {
 
-	View space;
-
-	public SpaceViewHolder(View itemView) {
+	public SpaceViewHolder(@NonNull View itemView) {
 		super(itemView);
-		space = itemView;
 	}
 
-	public void setSpace(int hSpace) {
-		ViewGroup.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, hSpace);
-		space.setLayoutParams(lp);
+	public void setHeight(int height) {
+		itemView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height));
 	}
 
 	@Override

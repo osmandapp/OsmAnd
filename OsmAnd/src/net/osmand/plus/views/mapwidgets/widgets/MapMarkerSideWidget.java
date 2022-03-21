@@ -2,6 +2,9 @@ package net.osmand.plus.views.mapwidgets.widgets;
 
 import android.graphics.drawable.Drawable;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
@@ -16,9 +19,6 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
 
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class MapMarkerSideWidget extends RightTextInfoWidget {
 

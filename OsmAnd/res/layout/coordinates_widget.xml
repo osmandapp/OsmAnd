@@ -4,9 +4,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:minHeight="@dimen/map_address_height"
 	android:background="@color/activity_background_dark"
 	android:clickable="true"
+	android:minHeight="@dimen/map_address_height"
 	tools:ignore="KeyboardInaccessibleWidget">
 
 	<LinearLayout
@@ -22,12 +22,12 @@
 			android:id="@+id/first_coordinates_container"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding_half"
 			android:layout_marginLeft="@dimen/content_padding_half"
+			android:layout_marginEnd="@dimen/content_padding_half"
 			android:layout_marginRight="@dimen/content_padding_half"
 			android:layout_weight="1"
-			android:orientation="horizontal"
-			android:layout_marginEnd="@dimen/content_padding_half"
-			android:layout_marginStart="@dimen/content_padding_half">
+			android:orientation="horizontal">
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/first_icon"
@@ -45,11 +45,11 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
 				android:maxLines="1"
-				android:textDirection="ltr"
 				android:textColor="@color/activity_background_light"
+				android:textDirection="ltr"
 				android:textSize="@dimen/map_top_widget_text_size"
-				tools:textStyle="bold"
-				tools:text="N 20°96′60″" />
+				tools:text="N 20°96′60″"
+				tools:textStyle="bold" />
 
 		</LinearLayout>
 
@@ -65,12 +65,12 @@
 			android:id="@+id/second_container"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding_half"
 			android:layout_marginLeft="@dimen/content_padding_half"
+			android:layout_marginEnd="@dimen/content_padding_half"
 			android:layout_marginRight="@dimen/content_padding_half"
 			android:layout_weight="1"
-			android:orientation="horizontal"
-			android:layout_marginEnd="@dimen/content_padding_half"
-			android:layout_marginStart="@dimen/content_padding_half">
+			android:orientation="horizontal">
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/second_icon"
@@ -88,11 +88,11 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
 				android:maxLines="1"
-				android:textDirection="ltr"
 				android:textColor="@color/activity_background_light"
+				android:textDirection="ltr"
 				android:textSize="@dimen/map_top_widget_text_size"
-				tools:textStyle="bold"
-				tools:text="W 120°31′12″" />
+				tools:text="W 120°31′12″"
+				tools:textStyle="bold" />
 
 		</LinearLayout>
 

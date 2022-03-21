@@ -6,29 +6,22 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
-import java.util.List;
-
 public class WidgetsTabAdapter extends FragmentStateAdapter {
 
-	private final List<WidgetsPanel> widgetsPanels;
-
-	public WidgetsTabAdapter(@NonNull Fragment fragment,
-	                         @NonNull List<WidgetsPanel> widgetsPanels) {
+	public WidgetsTabAdapter(@NonNull Fragment fragment) {
 		super(fragment);
-		this.widgetsPanels = widgetsPanels;
 	}
 
 	@NonNull
 	@Override
 	public Fragment createFragment(int position) {
 		WidgetsListFragment fragment = new WidgetsListFragment();
-		fragment.setPanel(widgetsPanels.get(position));
+		fragment.setSelectedPanel(WidgetsPanel.values()[position]);
 		return fragment;
 	}
 
 	@Override
 	public int getItemCount() {
-		return widgetsPanels.size();
+		return WidgetsPanel.values().length;
 	}
-
 }

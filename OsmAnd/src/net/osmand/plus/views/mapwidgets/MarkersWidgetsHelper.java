@@ -2,6 +2,9 @@ package net.osmand.plus.views.mapwidgets;
 
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -13,9 +16,6 @@ import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.widgets.MapMarkerSideWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class MarkersWidgetsHelper {
 

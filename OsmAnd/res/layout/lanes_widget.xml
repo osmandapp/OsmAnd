@@ -6,8 +6,8 @@
 	android:layout_height="wrap_content"
 	android:layout_gravity="center_horizontal|top"
 	android:layout_marginTop="@dimen/map_button_margin"
-	android:orientation="vertical"
 	android:background="@drawable/btn_round"
+	android:orientation="vertical"
 	android:visibility="gone">
 
 	<androidx.appcompat.widget.AppCompatImageView
@@ -22,8 +22,8 @@
 	<FrameLayout
 		android:layout_width="wrap_content"
 		android:layout_height="0dp"
-		android:layout_weight="1"
-		android:layout_gravity="center">
+		android:layout_gravity="center"
+		android:layout_weight="1">
 
 		<TextView
 			android:id="@+id/map_lanes_dist_text_shadow"
@@ -31,8 +31,8 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center"
 			android:layout_marginHorizontal="@dimen/widget_turn_lane_border"
-			android:maxLines="1"
 			android:importantForAccessibility="no"
+			android:maxLines="1"
 			android:textColor="@color/color_black"
 			android:textSize="@dimen/map_button_text_size"
 			tools:text="1048 km" />

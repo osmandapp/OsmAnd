@@ -4,6 +4,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -24,9 +27,6 @@ import net.osmand.router.TurnType;
 
 import java.util.Arrays;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class LanesWidget extends MapWidget {
 

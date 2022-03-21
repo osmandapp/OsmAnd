@@ -33,12 +33,11 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.WidgetsRegister;
 import net.osmand.plus.views.mapwidgets.configure.WidgetItem;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ItemType;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ListItem;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.WidgetAdapterListener;
-import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.ButtonViewHolder.ButtonUiInfo;
+import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.ButtonViewHolder.ButtonInfo;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.WidgetViewHolder.WidgetUiInfo;
 
 import java.util.ArrayList;
@@ -62,7 +61,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 	private RecyclerView rvContentList;
 
 	private final DataHolder dataHolder = new DataHolder();
-	private OnNewOrderAppliedCallback callback;
+	private WidgetsOrderListener callback;
 	private ReorderWidgetsAdapter adapter;
 
 
@@ -71,7 +70,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
 		settings = app.getSettings();
-		callback = (OnNewOrderAppliedCallback) getTargetFragment();
+		callback = (WidgetsOrderListener) getTargetFragment();
 		if (savedInstanceState != null) {
 			restoreData(savedInstanceState);
 		} else {
@@ -182,16 +181,16 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 
 	private void onApplyChanges() {
 		applyOrder();
-		callback.onNewOrderApplied();
+		callback.onWidgetsOrderApplied();
 		dismiss();
 	}
 
 	private void applyOrder() {
 		WidgetsPanel selectedPanel = dataHolder.getSelectedPanel();
-		for (WidgetItem widget : WidgetsRegister.getWidgets(appMode, selectedPanel)) {
-			String key = widget.title;
-			widget.priority = dataHolder.getOrder(key);
-		}
+//		for (WidgetItem widget : WidgetsRegister.getWidgets(appMode, selectedPanel)) {
+//			String key = widget.title;
+//			widget.priority = dataHolder.getOrder(key);
+//		}
 	}
 
 	@Override
@@ -214,12 +213,12 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 		items.addAll(createWidgetsList());
 		items.add(new ListItem(ItemType.CARD_DIVIDER, 0));
 		items.add(new ListItem(ItemType.HEADER, getString(R.string.shared_string_actions)));
-		items.add(new ListItem(ItemType.BUTTON, new ButtonUiInfo(
+		items.add(new ListItem(ItemType.BUTTON, new ButtonInfo(
 				getString(R.string.reset_to_default),
 				R.drawable.ic_action_reset,
 				v -> onResetChanges()
 		)));
-		items.add(new ListItem(ItemType.BUTTON, new ButtonUiInfo(
+		items.add(new ListItem(ItemType.BUTTON, new ButtonInfo(
 				getString(R.string.copy_from_other_profile),
 				R.drawable.ic_action_copy,
 				v -> onCopyFromProfile()
@@ -232,7 +231,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 
 	private List<ListItem> createWidgetsList() {
 		List<ListItem> list = new ArrayList<>();
-		List<WidgetItem> widgets = WidgetsRegister.getWidgets(appMode, dataHolder.getSelectedPanel(), false);
+		List<WidgetItem> widgets = new ArrayList<>();
 		for (WidgetItem item : widgets) {
 			addWidgetToList(list, item);
 		}
@@ -284,7 +283,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 	@Override
 	public int getStatusBarColorId() {
 		View view = getView();
-		if (view != null && Build.VERSION.SDK_INT >= 23 && !nightMode) {
+		if (view != null && !nightMode) {
 			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 		}
 		return ColorUtilities.getListBgColorId(nightMode);
@@ -307,4 +306,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 		}
 	}
 
+	public interface WidgetsOrderListener {
+		void onWidgetsOrderApplied();
+	}
 }

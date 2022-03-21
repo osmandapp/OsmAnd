@@ -1,9 +1,9 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
-
-import androidx.annotation.NonNull;
 
 public class RightTextInfoWidget extends TextInfoWidget {
 

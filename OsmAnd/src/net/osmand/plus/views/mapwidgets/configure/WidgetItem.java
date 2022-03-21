@@ -11,5 +11,4 @@ public class WidgetItem {
 		this.iconId = iconId;
 		this.title = title;
 	}
-
 }

@@ -1,15 +1,5 @@
 package net.osmand.plus.views.mapwidgets;
 
-import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.ListStringPreference;
-import net.osmand.util.Algorithms;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import androidx.annotation.NonNull;
-
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.WIDGET_AUDIO_VIDEO_NOTES;
 import static net.osmand.plus.plugins.development.OsmandDevelopmentPlugin.WIDGET_FPS;
 import static net.osmand.plus.plugins.mapillary.MapillaryPlugin.WIDGET_MAPILLARY;
@@ -37,6 +27,16 @@ import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_RADIUS_R
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_SPEED;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_STREET_NAME;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_TIME;
+
+import androidx.annotation.NonNull;
+
+import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.ListStringPreference;
+import net.osmand.util.Algorithms;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public enum WidgetsPanel {
 

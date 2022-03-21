@@ -5,12 +5,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.R;
-import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
+import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.UnmovableItem;
 
-public class WidgetViewHolder extends RecyclerView.ViewHolder
-		implements ReorderItemTouchHelperCallback.UnmovableItem {
+public class WidgetViewHolder extends ViewHolder implements UnmovableItem {
 
 	public TextView title;
 	public ImageView icon;

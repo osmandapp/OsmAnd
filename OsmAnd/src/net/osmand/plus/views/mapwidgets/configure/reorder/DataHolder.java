@@ -6,11 +6,8 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.WidgetsRegister;
-import net.osmand.plus.views.mapwidgets.configure.WidgetItem;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class DataHolder {
 
@@ -73,10 +70,10 @@ public class DataHolder {
 		if (orderByDefault) {
 			orderModified();
 		}
-		List<WidgetItem> widgets = WidgetsRegister.getSortedWidgets(appMode, selectedPanel, orderByDefault);
-		for (WidgetItem widget : widgets) {
-			orders.put(widget.title, widget.priority);
-		}
+//		List<WidgetItem> widgets = WidgetsRegister.getSortedWidgets(appMode, selectedPanel, orderByDefault);
+//		for (WidgetItem widget : widgets) {
+//			orders.put(widget.title, widget.priority);
+//		}
 	}
 
 }
