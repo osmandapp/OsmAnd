@@ -159,7 +159,7 @@
 		</FrameLayout>
 
 		<FrameLayout
-			android:id="@+id/map_markers_top_bar_shadow"
+			android:id="@+id/bottom_shadow"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:foreground="@drawable/bg_contextmenu_shadow"
