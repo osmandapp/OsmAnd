@@ -29,7 +29,6 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -86,9 +85,6 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		initGeometries(density);
 		initPaints();
 		initIcons();
-		if (view.hasMapRenderer()) {
-			initCoreRenderer();
-		}
 	}
 
 	protected void initAttrs(float density) {
@@ -110,18 +106,6 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 
 	protected void initIcons() {
 		actionArrow = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_action_arrow, null);
-	}
-
-	public void initCoreRenderer() {
-		kOutlineColor = new FColorARGB(150.0f/255.0f, 0.0f, 0.0f, 0.0f);
-	}
-
-	@Override
-	public void setMapActivity(@Nullable MapActivity mapActivity) {
-		super.setMapActivity(mapActivity);
-		if (mapActivity != null) {
-			initCoreRenderer();
-		}
 	}
 
 	protected void updateRouteColors(boolean night) {
