@@ -330,7 +330,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 		} else if (RESET_TO_DEFAULT.equals(prefId)) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, prefId, this, false, getSelectedAppMode());
+				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, getSelectedAppMode(), this, false);
 			}
 		}
 		return super.onPreferenceClick(preference);

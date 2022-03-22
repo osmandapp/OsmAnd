@@ -12,7 +12,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewTreeObserver;
@@ -166,7 +165,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	public enum DashboardType {
-		CONFIGURE_SCREEN,
 		CONFIGURE_MAP,
 		LIST_MENU,
 		ROUTE_PREFERENCES,
@@ -310,8 +308,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		tv.setText("");
 		if (visibleType == DashboardType.CONFIGURE_MAP) {
 			tv.setText(R.string.configure_map);
-		} else if (visibleType == DashboardType.CONFIGURE_SCREEN) {
-			tv.setText(R.string.layer_map_appearance);
 		} else if (visibleType == DashboardType.ROUTE_PREFERENCES) {
 			tv.setText(R.string.shared_string_settings);
 		} else if (visibleType == DashboardType.UNDERLAY_MAP) {
@@ -380,24 +376,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		}
 
 		toolbar.getMenu().clear();
-		if (visibleType == DashboardType.CONFIGURE_SCREEN) {
-			toolbar.inflateMenu(R.menu.refresh_menu);
-			toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem menuItem) {
-					if (menuItem.getItemId() == R.id.action_refresh) {
-						MapWidgetRegistry registry = mapActivity.getMapLayers().getMapWidgetRegistry();
-						registry.resetToDefault();
-						MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
-						if (mil != null) {
-							mil.recreateControls();
-						}
-						updateListAdapter(registry.getViewConfigureMenuAdapter(mapActivity));
-					}
-					return false;
-				}
-			});
-		}
 	}
 
 	private FrameLayout.LayoutParams getActionButtonLayoutParams(int btnSizePx) {
@@ -466,8 +444,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		DashboardActionButton button = null;
 
 		if (type == DashboardType.DASHBOARD
-				|| type == DashboardType.LIST_MENU
-				|| type == DashboardType.CONFIGURE_SCREEN) {
+				|| type == DashboardType.LIST_MENU) {
 			button = actionButtons.get(DashboardActionButtonType.MY_LOCATION);
 		} else if (type == DashboardType.ROUTE_PREFERENCES) {
 			button = actionButtons.get(DashboardActionButtonType.NAVIGATE);
@@ -671,8 +648,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		} else {
 			listView.setBackgroundColor(backgroundColor);
 		}
-		if (visibleType != DashboardType.CONFIGURE_SCREEN
-				&& visibleType != DashboardType.CONFIGURE_MAP
+		if (visibleType != DashboardType.CONFIGURE_MAP
 				&& visibleType != DashboardType.CONTOUR_LINES
 				&& visibleType != DashboardType.TERRAIN
 				&& visibleType != DashboardType.CYCLE_ROUTES
@@ -694,9 +670,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private void updateListAdapter() {
 		listView.setEmptyView(null);
 		ContextMenuAdapter cm = null;
-		if (visibleType == DashboardType.CONFIGURE_SCREEN) {
-			cm = mapActivity.getMapLayers().getMapWidgetRegistry().getViewConfigureMenuAdapter(mapActivity);
-		} else if (visibleType == DashboardType.CONFIGURE_MAP) {
+		if (visibleType == DashboardType.CONFIGURE_MAP) {
 			cm = new ConfigureMapMenu().createListAdapter(mapActivity);
 		} else if (visibleType == DashboardType.LIST_MENU) {
 			cm = mapActivity.getMapActions().createMainOptionsMenu();
@@ -778,8 +752,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	public void refreshContent(boolean force) {
 		if (force) {
 			listView.clearParams();
-			updateListAdapter();
-		} else if (visibleType == DashboardType.CONFIGURE_SCREEN) {
 			updateListAdapter();
 		} else if (visibleType == DashboardType.CONFIGURE_MAP || visibleType == DashboardType.ROUTE_PREFERENCES) {
 			int index = listView.getFirstVisiblePosition();
@@ -1138,8 +1110,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private boolean isActionButtonVisible() {
 		return visibleType == DashboardType.DASHBOARD
 				|| visibleType == DashboardType.LIST_MENU
-				|| visibleType == DashboardType.ROUTE_PREFERENCES
-				|| visibleType == DashboardType.CONFIGURE_SCREEN;
+				|| visibleType == DashboardType.ROUTE_PREFERENCES;
 	}
 
 	private boolean isBackButtonVisible() {

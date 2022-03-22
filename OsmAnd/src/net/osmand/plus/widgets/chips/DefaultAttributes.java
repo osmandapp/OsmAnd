@@ -34,6 +34,8 @@ class DefaultAttributes {
 	public int bgSelectedColor;
 	@ColorInt
 	public int bgDisabledColor;
+	@ColorInt
+	public Integer rippleColor;
 	public int bgRippleId;
 
 	/**
@@ -89,6 +91,7 @@ class DefaultAttributes {
 		defAttrs.bgDisabledColor = a.getInteger(
 				R.styleable.HorizontalChipsView_chipBgDisabledColor,
 				getColor(context, R.color.color_transparent));
+		defAttrs.rippleColor = resolveAttribute(context, R.attr.active_color_basic);
 		defAttrs.bgRippleId = resolveAttribute(context, R.attr.chip_ripple);
 
 		defAttrs.drawablePaddingPx = getDimension(context, R.dimen.content_padding_half);

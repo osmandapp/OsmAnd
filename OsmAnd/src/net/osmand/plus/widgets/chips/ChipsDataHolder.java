@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 class ChipsDataHolder {
 
@@ -21,13 +22,11 @@ class ChipsDataHolder {
 	}
 
 	public void setSelected(@Nullable ChipItem item) {
-		if (selected != null) {
-			selected.isSelected = false;
-		}
-		if (item != null) {
-			item.isSelected = true;
-		}
 		selected = item;
+	}
+
+	public boolean isSelected(@Nullable ChipItem item) {
+		return Objects.equals(item, selected);
 	}
 
 	@Nullable

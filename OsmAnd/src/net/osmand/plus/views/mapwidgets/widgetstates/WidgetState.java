@@ -4,19 +4,19 @@ import net.osmand.plus.OsmandApplication;
 
 public abstract class WidgetState {
 
-	private OsmandApplication ctx;
+	private final OsmandApplication app;
 
-	public OsmandApplication getCtx() {
-		return ctx;
+	public WidgetState(OsmandApplication app) {
+		this.app = app;
 	}
 
-	public WidgetState(OsmandApplication ctx) {
-		this.ctx = ctx;
+	public OsmandApplication getApp() {
+		return app;
 	}
 
 	public abstract int getMenuTitleId();
 
-	public abstract int getMenuIconId();
+	public abstract int getSettingsIconId();
 
 	public abstract int getMenuItemId();
 

@@ -1,11 +1,5 @@
 package net.osmand.plus.helpers;
 
-import static net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
-import static net.osmand.plus.track.fragments.TrackMenuFragment.CURRENT_RECORDING;
-import static net.osmand.plus.track.fragments.TrackMenuFragment.OPEN_TAB_NAME;
-import static net.osmand.plus.track.fragments.TrackMenuFragment.RETURN_SCREEN_NAME;
-import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -38,6 +32,7 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenFragment;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -47,6 +42,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.CURRENT_RECORDING;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.OPEN_TAB_NAME;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.RETURN_SCREEN_NAME;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
 
 public class IntentHelper {
 
@@ -257,7 +258,7 @@ public class IntentHelper {
 						break;
 
 					case BaseSettingsFragment.SCREEN_CONFIG:
-						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN, null);
+						ConfigureScreenFragment.showInstance(mapActivity);
 						break;
 				}
 				mapActivity.setIntent(null);
