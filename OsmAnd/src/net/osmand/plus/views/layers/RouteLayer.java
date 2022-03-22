@@ -18,7 +18,6 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.core.jni.LineEndCapStyle;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QListFColorARGB;
 import net.osmand.core.jni.QListVectorLine;
@@ -668,7 +667,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 							.setLineId((int) actionLinesCollection.getLines().size())
 							.setLineWidth(getRouteLineWidth(tileBox) * 0.4)
 							.setPoints(points)
-							.setEndCapStyle(LineEndCapStyle.ARROW.ordinal())
+							.setEndCapStyle(VectorLine.EndCapStyle.ARROW.ordinal())
 							.setFillColor(NativeUtilities.createFColorARGB(customTurnArrowColor));
 					vectorLineBuilder.buildAndAddToCollection(actionLinesCollection);
 				}
