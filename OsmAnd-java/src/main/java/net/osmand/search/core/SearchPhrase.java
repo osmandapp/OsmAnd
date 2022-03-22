@@ -318,16 +318,6 @@ public class SearchPhrase {
 			}
 		}
 	}
-	
-	private boolean hasMoreOneLetter(String s) {
-		int count = 0;
-		for (int i = 0; i < s.length(); i++) {
-			if (Character.isAlphabetic(s.charAt(i))) {
-				count++;
-			}
-		}
-		return count > 1;
-	}
 
 	public List<SearchWord> getWords() {
 		return words;

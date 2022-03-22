@@ -952,7 +952,7 @@ public class SearchUICore {
 				SearchPhrase ph = o1.requiredSearchPhrase;
 				double o1PhraseWeight = o1.getUnknownPhraseMatchWeight();
 				double o2PhraseWeight = o2.getUnknownPhraseMatchWeight();
-				if (o1PhraseWeight == o2PhraseWeight && o1PhraseWeight/SEARCH_PRIORITY_COEF > 1) {
+				if (o1PhraseWeight == o2PhraseWeight && o1PhraseWeight / SEARCH_PRIORITY_COEF > 1) {
 					if (!ph.getUnknownWordToSearchBuildingNameMatcher().matches(stripBraces(o1.localeName))) {
 						o1PhraseWeight--;
 					}
