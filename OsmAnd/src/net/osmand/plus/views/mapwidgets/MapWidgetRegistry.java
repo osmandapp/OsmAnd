@@ -6,11 +6,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-
 import net.osmand.CallbackWithObject;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
@@ -24,7 +19,10 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.widgets.CoordinatesWidget;
+import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
+import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.ElevationProfileWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
@@ -45,6 +43,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 public class MapWidgetRegistry {
 
@@ -586,5 +590,28 @@ public class MapWidgetRegistry {
 		pref.set(value);
 		mapActivity.updateApplicationModeSettings();
 		a.notifyDataSetChanged();
+	}
+
+	@ColorRes
+	public int getStatusBarColorForTopWidget(boolean night) {
+		Set<MapWidgetInfo> topWidgetsInfo = getWidgetsForPanel(WidgetsPanel.TOP);
+		for (MapWidgetInfo widgetInfo : topWidgetsInfo) {
+			MapWidget widget = widgetInfo.widget;
+			if (widget.getView().getVisibility() != View.VISIBLE) {
+				continue;
+			}
+
+			if (widget instanceof CoordinatesWidget) {
+				return R.color.status_bar_main_dark;
+			} else if (widget instanceof StreetNameWidget) {
+				return night ? R.color.status_bar_route_dark : R.color.status_bar_route_light;
+			} else if (widget instanceof MapMarkersBarWidget) {
+				return R.color.status_bar_color_dark;
+			} else {
+				return -1;
+			}
+		}
+
+		return -1;
 	}
 }
