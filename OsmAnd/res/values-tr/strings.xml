@@ -4544,4 +4544,8 @@
     <string name="stop_and_exit">Durdur ve çık</string>
     <string name="shared_string_complete">tamam</string>
     <string name="zoom_levels_difference_description">Yakınlaştırma seviyeleri arasındaki büyük fark, indirilen verilerin boyutunu artırabilir.</string>
+    <string name="rendering_attr_showFitnessTrails_description">Fitness parkurlarını göster</string>
+    <string name="rendering_attr_showFitnessTrails_name">Fitness parkurları</string>
+    <string name="rendering_attr_showRunningRoutes_description">Koşu güzergahlarını göster</string>
+    <string name="rendering_attr_showRunningRoutes_name">Koşu güzergahları</string>
 </resources>

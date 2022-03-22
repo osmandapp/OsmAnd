@@ -648,7 +648,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (getMapLayers().getContextMenuLayer().isInAddGpxPointMode()) {
 			quitAddGpxPointMode();
 		}
-		if (getSupportFragmentManager().getBackStackEntryCount() == 0 && launchPrevActivityIntent()) {
+		int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
+		if (backStackEntryCount == 0 && launchPrevActivityIntent()) {
+			return;
+		}
+		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
+		if ((backStackEntryCount == 0 || mapContextMenu.isVisible()) && fragment != null && fragment.isSearchHidden()) {
+			showQuickSearch(ShowQuickSearchMode.CURRENT, false);
 			return;
 		}
 		super.onBackPressed();
@@ -937,18 +943,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			color = toolbarController.getStatusBarColor(this, night);
 		}
 		if (color == TopToolbarController.NO_COLOR) {
-			boolean mapTopBar = findViewById(R.id.map_top_bar).getVisibility() == View.VISIBLE;
-			boolean markerTopBar = findViewById(R.id.map_markers_top_bar).getVisibility() == View.VISIBLE;
-			boolean coordinatesTopBar = findViewById(R.id.coordinates_top_bar).getVisibility() == View.VISIBLE;
-			if (coordinatesTopBar && mapControlsVisible) {
-				colorId = night ? R.color.status_bar_main_dark : R.color.status_bar_main_dark;
-			} else if (mapTopBar && mapControlsVisible) {
-				colorId = night ? R.color.status_bar_route_dark : R.color.status_bar_route_light;
-			} else if (markerTopBar && mapControlsVisible) {
-				colorId = R.color.status_bar_color_dark;
-			} else {
-				colorId = night ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
-			}
+			int defaultColorId = night ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
+			int colorIdForTopWidget = mapLayers.getMapWidgetRegistry().getStatusBarColorForTopWidget(night);
+			colorId = mapControlsVisible && colorIdForTopWidget != -1 ? colorIdForTopWidget : defaultColorId;
 			color = ContextCompat.getColor(this, colorId);
 		}
 		getWindow().setStatusBarColor(color);
@@ -1861,7 +1858,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (fragmentRef == null) {
 			fragmentRef = mapRouteInfoMenu.findFollowTrackFragment();
 		}
-		View mapBottomView = findViewById(R.id.MapBottomContainer);
+		View mapBottomView = findViewById(R.id.map_bottom_widgets_panel);
 		int mapBottomViewHeight = mapBottomView.getHeight();
 		if (fragmentRef != null) {
 			ContextMenuFragment f = (ContextMenuFragment) fragmentRef.get();

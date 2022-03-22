@@ -1,15 +1,10 @@
 package net.osmand.plus.voice;
 
-import static net.osmand.IndexConstants.TTSVOICE_INDEX_EXT_JS;
-import static net.osmand.IndexConstants.VOICE_PROVIDER_SUFFIX;
-
 import android.content.Intent;
 import android.media.AudioAttributes;
 import android.os.Build;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
-
-import androidx.annotation.NonNull;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -28,6 +23,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
+
+import static net.osmand.IndexConstants.TTSVOICE_INDEX_EXT_JS;
+import static net.osmand.IndexConstants.VOICE_PROVIDER_SUFFIX;
 
 public class JsTtsCommandPlayer extends CommandPlayer {
 
@@ -89,10 +89,8 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 					internalClear();
 					app.showToastMessage(app.getString(R.string.tts_initialization_error));
 				} else if (mTts != null) {
-					LocaleBuilder.buildLocale(app, language, locale -> {
-						onSuccessfulTtsInit(locale, cSpeechRate);
-						return true;
-					});
+					Locale locale = new LocaleBuilder(app, mTts, language).buildLocale();
+					onSuccessfulTtsInit(locale, cSpeechRate);
 				}
 			});
 			mTts.setOnUtteranceCompletedListener(new OnUtteranceCompletedListener() {

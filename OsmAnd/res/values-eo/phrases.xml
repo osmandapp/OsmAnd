@@ -3564,9 +3564,9 @@
     <string name="poi_hazard_additional_minefield">Danĝero: minkampo</string>
     <string name="poi_hazard_additional_contamination">Danĝero: poluo</string>
     <string name="poi_defibrillator_location">Loko</string>
-    <string name="poi_changing_table_yes">Tablo por ŝanĝi vindotukojn: jes</string>
-    <string name="poi_changing_table_no">Tablo por ŝanĝi vindotukojn: ne</string>
-    <string name="poi_changing_table_limited">Tablo por ŝanĝi vindotukojn: neoficiala</string>
+    <string name="poi_changing_table_yes">jes;Tablo por ŝanĝi vindotukojn: jes;vindotuko;bebo</string>
+    <string name="poi_changing_table_no">ne;Tablo por ŝanĝi vindotukojn: ne</string>
+    <string name="poi_changing_table_limited">neoficiala;Tablo por ŝanĝi vindotukojn: neoficiala;vindotuko;bebo</string>
     <string name="poi_changing_table_location_room">Tablo por ŝanĝi vindotukojn: aparta ĉambro</string>
     <string name="poi_changing_table_location_male_toilet">Loko de tablo: vira necesejo</string>
     <string name="poi_changing_table_location_female_toilet">Loko de tablo: ina necesejo</string>
@@ -4297,4 +4297,9 @@
     <string name="poi_board_type_sport">sporto</string>
     <string name="poi_landuse_education">Edukada institucio</string>
     <string name="poi_greenery">Vegetaĵa tereno</string>
+    <string name="poi_changing_table_filter">Tablo por ŝanĝi vindotukojn</string>
+    <string name="poi_hairdresser_supply">Frizist-ilara vendejo</string>
+    <string name="poi_printer_ink">Presil-inka vendejo</string>
+    <string name="poi_shop_fuel">Brulaĵ-vendejo</string>
+    <string name="poi_water_sports">Akvosport-aparata vendejo</string>
 </resources>

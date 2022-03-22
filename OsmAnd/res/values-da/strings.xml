@@ -3098,7 +3098,7 @@
     <string name="app_mode_camper">Campingvogn</string>
     <string name="app_mode_campervan">Autocamper (RV)</string>
     <string name="rendering_attr_showLez_description">Vis miljøzoner på kortet. Påvirker ikke ruteberegning.</string>
-    <string name="rendering_attr_showLez_name">Vis Miljøzoner</string>
+    <string name="rendering_attr_showLez_name">Vis miljøzoner</string>
     <string name="temporary_conditional_routing">Overvej midlertidige begrænsninger</string>
     <string name="shared_string_default">Standard</string>
     <string name="new_route_calculated_dist_dbg">Rute: afstand %1$s, rute tid %2$s
@@ -4550,4 +4550,8 @@
     <string name="estimated_download_size">Anslået størrelse af download</string>
     <string name="stop_download">Stop download</string>
     <string name="number_of_tiles">Antal kortfliser</string>
+    <string name="rendering_attr_showFitnessTrails_description">Vis fitnessbaner</string>
+    <string name="rendering_attr_showFitnessTrails_name">Fitnessbaner</string>
+    <string name="rendering_attr_showRunningRoutes_name">Løberuter</string>
+    <string name="rendering_attr_showRunningRoutes_description">Vis løberuter</string>
 </resources>

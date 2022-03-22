@@ -54,7 +54,6 @@ import net.osmand.plus.mapsource.InputZoomLevelsBottomSheet.OnZoomSetListener;
 import net.osmand.plus.mapsource.ExpireTimeBottomSheet.OnExpireValueSetListener;
 import net.osmand.plus.mapsource.MercatorProjectionBottomSheet.OnMercatorSelectedListener;
 import net.osmand.plus.mapsource.TileStorageFormatBottomSheet.OnTileStorageFormatSelectedListener;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
 
@@ -421,7 +420,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	}
 
 	private void onHelpClick() {
-		WikipediaDialogFragment.showFullArticle(requireContext(), Uri.parse(HELP_ARTICLE_URL), nightMode);
+		AndroidUtils.openUrl(requireContext(), Uri.parse(HELP_ARTICLE_URL), nightMode);
 	}
 
 	private void showExitDialog() {

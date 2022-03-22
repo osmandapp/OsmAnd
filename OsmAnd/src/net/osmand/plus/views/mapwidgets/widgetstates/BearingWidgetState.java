@@ -22,7 +22,7 @@ public class BearingWidgetState extends WidgetState {
 	}
 
 	@Override
-	public int getMenuIconId() {
+	public int getSettingsIconId() {
 		return showRelativeBearing.get() ? R.drawable.ic_action_relative_bearing : R.drawable.ic_action_bearing;
 	}
 

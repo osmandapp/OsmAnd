@@ -7,7 +7,11 @@ import android.graphics.drawable.Drawable;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
+import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities.GPXFile;
@@ -17,9 +21,6 @@ import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
-import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -61,18 +62,15 @@ import net.osmand.plus.views.layers.RouteLayer;
 import net.osmand.plus.views.layers.TransportStopsLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StyleRes;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ContextThemeWrapper;
 
 /**
  * Object is responsible to maintain layers using by map activity
@@ -141,7 +139,7 @@ public class MapLayers {
 		mapView.addLayer(gpxLayer, 0.9f);
 
 		// 1. route layer
-		routeLayer = new RouteLayer(app);
+		routeLayer = new RouteLayer(app, -150000);
 		mapView.addLayer(routeLayer, 1);
 
 		// 1.5 preview route line layer
@@ -307,7 +305,6 @@ public class MapLayers {
 			}
 		}
 		adapter.setProfileDependent(true);
-		adapter.setNightMode(isNightMode());
 
 		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(mapActivity, !isNightMode());
 		Context themedContext = UiUtilities.getThemedContext(mapActivity, isNightMode());
@@ -360,9 +357,9 @@ public class MapLayers {
 	public void showSingleChoicePoiFilterDialog(final MapActivity mapActivity, final DismissListener listener) {
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(app);
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
+		adapter.addItem(new ContextMenuItem(null)
 				.setTitleId(R.string.shared_string_search, app)
-				.setIcon(R.drawable.ic_action_search_dark).createItem());
+				.setIcon(R.drawable.ic_action_search_dark));
 		final List<PoiUIFilter> list = new ArrayList<>();
 		list.add(null);
 		for (PoiUIFilter f : poiFilters.getSortedPoiFilters(true)) {
@@ -415,26 +412,26 @@ public class MapLayers {
 								 final PoiUIFilter f,
 								 boolean multiChoice) {
 		list.add(f);
-		ContextMenuItem.ItemBuilder builder = new ContextMenuItem.ItemBuilder();
+		ContextMenuItem item = new ContextMenuItem(null);
 		if (multiChoice) {
-			builder.setSelected(app.getPoiFilters().isPoiFilterSelected(f));
-			builder.setListener((adptr, itemId, position, isChecked, viewCoordinates) -> {
-				ContextMenuItem item = adptr.getItem(position);
-				if (item != null) {
-					item.setSelected(isChecked);
+			item.setSelected(app.getPoiFilters().isPoiFilterSelected(f));
+			item.setListener((adptr, itemId, position, isChecked, viewCoordinates) -> {
+				ContextMenuItem it = adptr.getItem(position);
+				if (it != null) {
+					it.setSelected(isChecked);
 				}
 				return false;
 			});
 		}
-		builder.setTitle(f.getName());
+		item.setTitle(f.getName());
 		if (RenderingIcons.containsBigIcon(f.getIconId())) {
-			builder.setIcon(RenderingIcons.getBigIconResourceId(f.getIconId()));
+			item.setIcon(RenderingIcons.getBigIconResourceId(f.getIconId()));
 		} else {
-			builder.setIcon(R.drawable.mx_special_custom_category);
+			item.setIcon(R.drawable.mx_special_custom_category);
 		}
-		builder.setColor(app, ContextMenuItem.INVALID_ID);
-		builder.setSkipPaintingWithoutColor(true);
-		adapter.addItem(builder.createItem());
+		item.setColor(app, ContextMenuItem.INVALID_ID);
+		item.setUseNaturalIconColor(true);
+		adapter.addItem(item);
 	}
 
 	public void selectMapLayer(@NonNull MapActivity mapActivity,

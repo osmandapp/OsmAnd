@@ -4545,4 +4545,8 @@
     <string name="shared_string_complete">הושלם</string>
     <string name="zoom_levels_difference_description">ההבדל הגדול בין רמות התקריב יכול להגדיל את גודל הנתונים שנמשכים.</string>
     <string name="number_of_tiles">מספר האריחים</string>
+    <string name="rendering_attr_showFitnessTrails_description">הצגת מסלולי חיטוב</string>
+    <string name="rendering_attr_showFitnessTrails_name">מסלולי חיטוב</string>
+    <string name="rendering_attr_showRunningRoutes_description">הצגת מסלולי ריצה</string>
+    <string name="rendering_attr_showRunningRoutes_name">מסלולי ריצה</string>
 </resources>

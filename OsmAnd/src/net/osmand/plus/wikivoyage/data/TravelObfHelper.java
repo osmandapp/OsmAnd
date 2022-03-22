@@ -9,9 +9,9 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.plus.utils.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
@@ -26,8 +26,8 @@ import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.track.SaveGpxAsyncTask;
-import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.util.Algorithms;
@@ -607,35 +607,15 @@ public class TravelObfHelper implements TravelHelper {
 			}
 
 			@Override
-			public void onGpxFileRead(@Nullable GPXUtilities.GPXFile gpxFile) {
+			public void onGpxFileRead(@Nullable GPXFile gpxFile) {
 				if (gpxFile != null) {
-					OsmandApplication app = mapActivity.getMyApplication();
-					String fileName = gpxFileName;
-					if (!fileName.endsWith(GPX_FILE_EXT)) {
-						fileName += GPX_FILE_EXT;
-					}
-					File file = new File(FileUtils.getTempDir(app), fileName);
-					new SaveGpxAsyncTask(file, gpxFile, new SaveGpxAsyncTask.SaveGpxListener() {
-						@Override
-						public void gpxSavingStarted() {
+					WptPt wptPt = new WptPt();
+					wptPt.lat = latLon.getLatitude();
+					wptPt.lon = latLon.getLongitude();
 
-						}
-
-						@Override
-						public void gpxSavingFinished(Exception errorMessage) {
-							if (errorMessage == null) {
-								GPXUtilities.WptPt selectedPoint = new GPXUtilities.WptPt();
-								selectedPoint.lat = latLon.getLatitude();
-								selectedPoint.lon = latLon.getLongitude();
-								SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
-								SelectedGpxPoint selectedGpxPoint = new SelectedGpxPoint(selectedGpxFile, selectedPoint);
-								TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint,
-										null, null, null, false, article.getAnalysis());
-							} else {
-								LOG.error(errorMessage);
-							}
-						}
-					}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					String name = gpxFileName.endsWith(GPX_FILE_EXT) ? gpxFileName : gpxFileName + GPX_FILE_EXT;
+					File file = new File(FileUtils.getTempDir(app), name);
+					GpxUiHelper.saveAndOpenGpx(mapActivity, file, gpxFile, wptPt, article.getAnalysis());
 				}
 			}
 		};
@@ -1120,7 +1100,6 @@ public class TravelObfHelper implements TravelHelper {
 		article.gpxFile = gpxFile;
 		return gpxFile;
 	}
-
 
 
 	@NonNull

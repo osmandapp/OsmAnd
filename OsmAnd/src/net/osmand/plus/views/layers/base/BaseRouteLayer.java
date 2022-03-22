@@ -17,8 +17,10 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.PlatformUtil;
+import net.osmand.core.jni.FColorARGB;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
@@ -60,6 +62,12 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 
 	protected Paint paintIconAction;
 	private Bitmap actionArrow;
+
+	//OpenGL
+	//kOutlineColor 150, 0, 0, 0
+	public FColorARGB kOutlineColor;
+	public static final int kOutlineWidth = 10;
+	public static final int kOutlineId = 1001;
 
 	public BaseRouteLayer(@NonNull Context ctx) {
 		super(ctx);

@@ -2442,4 +2442,57 @@
 \nCaiff pwyntiau gyda gwerth uwch eu cuddio.</string>
     <string name="exit_pan_mode_descr">Pwyswch Dewis i adael modd tremio</string>
     <string name="routing_attr_only_permitted_ways_name">Ffyrdd wedi\'u caniatáu yn benodol</string>
+    <string name="purchases_feature_desc_monthly_map_updates">Cael mynediad at ddiweddariadau misol o fapiau all-lein.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description"/>
+    <string name="on_hold_since"/>
+    <string name="explore_wikipedia_offline">Pori Wikipedia all-lein.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Cael OsmAnd Cloud i gadw holl ddata OsmAnd ar-lein. Dim colli data ar ôl ailosod. Cadw gwybodaeth wrth gefn a\'i hadfer yn hawdd.</string>
+    <string name="purchases_feature_desc_pro_widgets">Cael mynediad at nodweddion OsmAnd Pro: Lliwio llwybrau a mwy.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Edrych ar gynlluniau OsmAnd i ganfod un sy\'n addas ar eich cyfer.</string>
+    <string name="backup_dont_have_any_descr">Trefnu cadw wrth gefn yn awtomatig a byth colli data.</string>
+    <string name="backup_do_not_have_any">Nid oes gennych eto gopi wrth gefn ar-lein.</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Cael mynediad at ddiweddariadau mapiau\'n fwy aml. Diweddariadau wythnosol, dyddiol neu bob awr. Llwythir diweddariadau yn rhannol, dim ond ar gyfer yr ardaloedd wedi newid.</string>
+    <string name="osmand_pro_tagline">Cael pob nodwedd posib</string>
+    <string name="shared_string_relation">Perthynas</string>
+    <string name="benefits_for_contributors">Buddion i gyfranwyr gweithredol OSM</string>
+    <string name="benefits_for_contributors_primary_descr">Gall fod cyfranwyr gweithredol OpenStreetMap yn cael diweddariadau mapiau hyd at bob awr heb derfyn.</string>
+    <string name="not_enough_contributions_descr">Rhaid gwneud o leiaf %1$s newid dros gyfnod y ddeufis diwethaf %2$s er mwyn cael mynediad at ddiweddariadau mapiau hyd at bob awr heb derfyn.</string>
+    <string name="online_maps_required_descr">Yn anffodus, ni all OsmAnd darganfod llwybr ar gyfer dy osodiadau.
+\n
+\nEfallai nad yw rhai mapiau wedi\'i llwytho. Gellir gwirio ar-lein am y mapiau angenrheidiol.</string>
+    <string name="attribute">Priodoledd</string>
+    <string name="km_h">km/a</string>
+    <string name="foot">td</string>
+    <string name="purchases_feature_desc_terrain">Cyfuchlinellau\'r dirwedd, map cysgodion bryniau gyda chysgodion tywyll, a mapiau llethrau gyda lliwiau i ddangos copaon ac iseldiroedd.</string>
+    <string name="send_crash_log">Anfon log chwalu</string>
+    <string name="backup_complete">Wedi cwblhau copi wrth gefn</string>
+    <string name="rendering_attr_surface_cobblestone_name">Cobbls</string>
+    <string name="favourites_group">Categori ffefrynnau</string>
+    <string name="empty_state_markers_groups">Mewnforio grwpiau</string>
+    <string name="version_settings">Adeileddau</string>
+    <string name="km">km</string>
+    <string name="backup_danger_zone">Parth perygl</string>
+    <string name="purchases_feature_desc_wikivoyage">Pori Wikivoyage all-lein. Erthyglau wedi\'u rhannu yn ôl gwledydd a rhanbarthau ac ar gael ym mhob iaith.</string>
+    <string name="shared_string_interval">Cyfnod</string>
+    <string name="backup_confilcts_descr">Methwyd llwytho rhai ffeiliau i\'r gweinydd am fod fersiwn mwy newydd ar y gweinydd.</string>
+    <string name="make_backup_descr">Mae yna lawer o newidiadau ar y ddyfais hon. Cadwch gopi wrth gefn o\'r data er mwyn peidio ei golli.</string>
+    <string name="purchases_feature_desc_nautical">Cael mynediad at wybodaeth dyfnder morwrol</string>
+    <string name="route_line_use_gradient_coloring">Mae llinell y llwybr wedi\'i liwio yn ôl graddiant llethrau.</string>
+    <string name="srtm_download_list_help_message">Mae OsmAnd yn cynnig data cyfuchlinellau mewn metrau a throedfeddi. Bydd rhaid ail-lawrlwytho\'r ffeil i newid y fformat.</string>
+    <string name="srtm_unit_format">Amrywiolyn uned cyfuchlinellau</string>
+    <string name="rendering_attr_surface_asphalt_name">Asffelt</string>
+    <string name="import_file">Mewnforio ffeil</string>
+    <string name="tap_on_map_to_hide_interface">Modd sgrin llawn</string>
+    <string name="nm_h">kn</string>
+    <string name="min_mile">mun/m</string>
+    <string name="min_km">mun/km</string>
+    <string name="traffic_warning_hazard">Peryg</string>
+    <string name="rendering_value__name">Rhagosodedig</string>
+    <string name="make_backup">Cadw copi wrth gefn</string>
+    <string name="rendering_attr_surface_pebblestone_name">Caregos</string>
+    <string name="send_logcat_log">Anfon log logcat</string>
+    <string name="routing_attr_driving_style_description">Dewiswch bwrpas taith i gael llwybrau mwy diogel, byrraf neu gyflymach.</string>
+    <string name="routing_attr_short_way_description">Llwybr byrrach (arbed ynni)</string>
+    <string name="backup_storage_taken">Storfa wedi\'i chymryd</string>
+    <string name="backup_now">Copi wrth gefn nawr</string>
 </resources>

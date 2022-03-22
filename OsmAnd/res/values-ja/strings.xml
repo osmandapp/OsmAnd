@@ -4566,4 +4566,8 @@ POIの更新は利用できません</string>
     <string name="shared_string_progress">進捗</string>
     <string name="backup_data_removed">すべてのデータが削除されました。</string>
     <string name="backup_version_history_removed">すべてのバージョン履歴が削除されました。</string>
+    <string name="rendering_attr_showRunningRoutes_description">ランニングルートを表示します</string>
+    <string name="rendering_attr_showFitnessTrails_name">アスレチックコース</string>
+    <string name="rendering_attr_showFitnessTrails_description">アスレチックコースを表示します</string>
+    <string name="rendering_attr_showRunningRoutes_name">ランニングルート</string>
 </resources>

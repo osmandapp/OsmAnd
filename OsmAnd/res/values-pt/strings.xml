@@ -4549,4 +4549,6 @@
     <string name="shared_string_complete">completo</string>
     <string name="number_of_tiles">Número de mosaicos</string>
     <string name="move_map_to_select_area">Mova o mapa para selecionar a área necessária.</string>
+    <string name="rendering_attr_showFitnessTrails_description">Mostrar trilhos de fitness</string>
+    <string name="rendering_attr_showFitnessTrails_name">Mostrar trilhos de fitness</string>
 </resources>

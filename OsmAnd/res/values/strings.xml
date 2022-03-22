@@ -11,6 +11,18 @@
 	Thx - Hardy
 -->
 
+    <string name="map_markers_bar">Map markers bar</string>
+    <string name="shared_string_visible_widgets">Visible widgets</string>
+    <string name="top_widgets_panel">Top panel</string>
+    <string name="bottom_widgets_panel">Bottom panel</string>
+    <string name="shared_string_item">Item</string>
+    <string name="shared_string_buttons">Buttons</string>
+    <string name="configure_screen_widgets_descr">Select screen side to add or rearange widgets.</string>
+    <string name="osm_carto_render_descr">Similar to OpenStreetMap-carto style used on main OSM site</string>
+    <string name="rendering_attr_showRunningRoutes_name">Running routes</string>
+    <string name="rendering_attr_showRunningRoutes_description">Show running routes</string>
+    <string name="rendering_attr_showFitnessTrails_name">Fitness trails</string>
+    <string name="rendering_attr_showFitnessTrails_description">Show fitness trails</string>
     <string name="stop_download_desc">Download is not complete. If you interrupt the download now, only part of the tiles will be available for viewing.</string>
     <string name="stop_download">Stop download</string>
     <string name="stop_and_exit">Stop and exit</string>

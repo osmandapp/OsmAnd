@@ -32,7 +32,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.chooseplan.button.PriceButton;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -130,7 +129,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 
 		ImageView helpBtn = mainView.findViewById(R.id.button_help);
 		helpBtn.setOnClickListener(v ->
-				WikipediaDialogFragment.showFullArticle(requireActivity(), Uri.parse(PURCHASES_INFO), nightMode));
+				AndroidUtils.openUrl(requireActivity(), Uri.parse(PURCHASES_INFO), nightMode));
 	}
 
 	@Override

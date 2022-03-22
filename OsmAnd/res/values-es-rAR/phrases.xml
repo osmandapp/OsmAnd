@@ -3564,9 +3564,9 @@
     <string name="poi_hazard_additional_minefield">Peligro: campo minado</string>
     <string name="poi_hazard_additional_contamination">Peligro: contaminación</string>
     <string name="poi_defibrillator_location">Ubicación</string>
-    <string name="poi_changing_table_yes">Cambiador de pañales: sí</string>
-    <string name="poi_changing_table_no">Cambiador de pañales: no</string>
-    <string name="poi_changing_table_limited">Cambiador de pañales: limitado</string>
+    <string name="poi_changing_table_yes">Sí;Cambiador de pañales: sí</string>
+    <string name="poi_changing_table_no">No;Cambiador de pañales: no</string>
+    <string name="poi_changing_table_limited">Limitado;Cambiador de pañales: limitado</string>
     <string name="poi_changing_table_location_room">Ubicación del cambiador: habitación</string>
     <string name="poi_changing_table_location_male_toilet">Ubicación del cambiador: baño masculino</string>
     <string name="poi_changing_table_location_female_toilet">Ubicación del cambiador: baño femenino</string>
@@ -4298,4 +4298,18 @@
     <string name="poi_landuse_education">Educación</string>
     <string name="poi_greenery">Vegetación (decorativa);Follaje;Verdor</string>
     <string name="poi_hairdresser_supply">Suministros de peluquería</string>
+    <string name="poi_changing_table_filter">Cambiador de pañales</string>
+    <string name="poi_printer_ink">Tinta para impresoras</string>
+    <string name="poi_water_sports">Artículos para deportes acuáticos</string>
+    <string name="poi_shop_fuel">Venta de combustibles</string>
+    <string name="poi_payment_girocard_contactless_yes">Girocard (sin contacto)</string>
+    <string name="poi_payment_maestro_contactless_yes">Maestro (sin contacto)</string>
+    <string name="poi_payment_visa_contactless_yes">Visa (sin contacto)</string>
+    <string name="poi_payment_american_express_contactless_no">No se acepta American Express (AMEX) sin contacto</string>
+    <string name="poi_payment_girocard_contactless_no">No se acepta Girocard (sin contacto)</string>
+    <string name="poi_payment_maestro_contactless_no">No se acepta Maestro (sin contacto)</string>
+    <string name="poi_payment_visa_contactless_no">No se acepta Visa (sin contacto)</string>
+    <string name="poi_payment_mastercard_contactless_yes">MasterCard (sin contacto)</string>
+    <string name="poi_payment_american_express_contactless_yes">American Express (AMEX, sin contacto)</string>
+    <string name="poi_payment_mastercard_contactless_no">No se acepta MasterCard (sin contacto)</string>
 </resources>

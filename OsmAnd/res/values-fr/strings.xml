@@ -4538,4 +4538,8 @@
     <string name="zoom_levels_difference_description">Un niveau de zoom élevé peut augmenter significativement la taille des données téléchargées.</string>
     <string name="stop_download_desc">Le téléchargement n\'est pas terminé. Si vous arrêtez le téléchargement maintenant, seule une partie des tuiles sera disponible lors de l\'affichage de la carte.</string>
     <string name="move_map_to_select_area">Déplacez la carte pour sélectionner la zone souhaitée.</string>
+    <string name="rendering_attr_showFitnessTrails_name">Parcours de santé</string>
+    <string name="rendering_attr_showFitnessTrails_description">Afficher les parcours de santé</string>
+    <string name="rendering_attr_showRunningRoutes_name">Itinéraires de course</string>
+    <string name="rendering_attr_showRunningRoutes_description">Afficher les itinéraires de course</string>
 </resources>

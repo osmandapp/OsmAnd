@@ -182,7 +182,7 @@ public class TrackBitmapDrawer {
 							refreshTrackBitmap();
 						}
 					}
-				}));
+				}), true);
 			}
 			return true;
 		}

@@ -1,7 +1,5 @@
 package net.osmand.plus.plugins.osmedit.dialogs;
 
-import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -33,21 +31,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.ViewCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -98,7 +84,21 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.ViewCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
+
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 
 public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	public static final String TAG = EditPoiDialogFragment.class.getSimpleName();
@@ -562,6 +562,14 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 	public void setSubCategory(String subCategory) {
 		poiTypeEditText.setText(subCategory);
+	}
+
+	public void smoothScrollToBottom() {
+		ScrollView scrollView = view.findViewById(R.id.scroll_view);
+		int height = scrollView.getHeight();
+		int bottom = scrollView.getChildAt(0).getBottom();
+		int maxScrollY = Math.max(0, bottom - height);
+		scrollView.smoothScrollTo(0, maxScrollY);
 	}
 
 	public static void commitEntity(final Action action,

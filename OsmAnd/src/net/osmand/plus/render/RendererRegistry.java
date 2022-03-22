@@ -44,6 +44,7 @@ public class RendererRegistry {
 	public final static String NAUTICAL_RENDER = "Nautical"; 
 	public final static String TOPO_RENDER = "Topo"; 
 	public final static String MAPNIK_RENDER = "Mapnik"; 
+	public final static String OSM_CARTO_RENDER = "OSM-carto";
 	public final static String OFFROAD_RENDER = "Offroad"; 
 	public final static String LIGHTRS_RENDER = "LightRS"; 
 	public final static String UNIRS_RENDER = "UniRS"; 
@@ -70,6 +71,7 @@ public class RendererRegistry {
 		internalRenderers.put(TOURING_VIEW, "Touring-view_(more-contrast-and-details)" + RENDERER_INDEX_EXT);
 		internalRenderers.put(TOPO_RENDER, "topo" + RENDERER_INDEX_EXT);
 		internalRenderers.put(MAPNIK_RENDER, "mapnik" + RENDERER_INDEX_EXT);
+		internalRenderers.put(OSM_CARTO_RENDER, "osm-carto" + RENDERER_INDEX_EXT);
 		internalRenderers.put(LIGHTRS_RENDER, "LightRS" + RENDERER_INDEX_EXT);
 		internalRenderers.put(UNIRS_RENDER, "UniRS" + RENDERER_INDEX_EXT);
 		internalRenderers.put(NAUTICAL_RENDER, "nautical" + RENDERER_INDEX_EXT);
@@ -336,6 +338,8 @@ public class RendererRegistry {
 				return ctx.getString(R.string.touring_view_render_descr);
 			case MAPNIK_RENDER:
 				return ctx.getString(R.string.mapnik_render_descr);
+			case OSM_CARTO_RENDER:
+				return ctx.getString(R.string.osm_carto_render_descr);
 			case TOPO_RENDER:
 				return ctx.getString(R.string.topo_render_descr);
 			case LIGHTRS_RENDER:
