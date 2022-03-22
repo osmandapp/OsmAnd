@@ -979,7 +979,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		float mapRotate = mapView.getRotate();
 		return forceShowCompass || mapRotate != 0
 				|| settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_NONE
-				|| settings.SHOW_COMPASS.get();
+				|| settings.SHOW_COMPASS_ALWAYS.get();
 	}
 
 	private void updateMyLocation(MapHudButton backToLocationControl) {

@@ -198,11 +198,11 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		buttonsCard.addView(createButtonWithSwitch(
 				R.drawable.ic_action_compass,
 				getString(R.string.map_widget_compass),
-				settings.SHOW_COMPASS.getModeValue(selectedAppMode),
+				settings.SHOW_COMPASS_ALWAYS.getModeValue(selectedAppMode),
 				false,
 				v -> {
-					boolean enabled = settings.SHOW_COMPASS.getModeValue(selectedAppMode);
-					settings.SHOW_COMPASS.setModeValue(selectedAppMode, !enabled);
+					boolean enabled = settings.SHOW_COMPASS_ALWAYS.getModeValue(selectedAppMode);
+					settings.SHOW_COMPASS_ALWAYS.setModeValue(selectedAppMode, !enabled);
 					mapActivity.updateApplicationModeSettings();
 				}
 		));
