@@ -1,8 +1,6 @@
 package net.osmand.plus;
 
 
-import static net.osmand.plus.settings.fragments.SimulationNavigationSettingFragment.*;
-
 import android.app.Activity;
 import android.view.View;
 import android.widget.TextView;
@@ -19,6 +17,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.SimulationMode;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
@@ -120,8 +119,12 @@ public class OsmAndLocationSimulation {
 		startStopRouteAnimation(activity, true, null);
 	}
 
-	private void startAnimationThread(final OsmandApplication app, final List<Location> directions, final boolean locTime, final float coeff) {
+	private void startAnimationThread(final OsmandApplication app, final List<Location> directions,
+	                                  final boolean locTime, final float coeff) {
 		final float time = 1.5f;
+		float simSpeed = app.getSettings().simulateNavigationSpeed;
+		SimulationMode simulationMode = SimulationMode.getMode(app.getSettings().simulateNavigationMode);
+		boolean realistic = simulationMode == SimulationMode.REALISTIC;
 		routeAnimation = new Thread() {
 			@Override
 			public void run() {
@@ -133,9 +136,6 @@ public class OsmAndLocationSimulation {
 				if (current != null) {
 					current.setProvider(OsmAndLocationProvider.SIMULATED_PROVIDER);
 				}
-				float simSpeed = app.getSettings().simulateNavigationSpeed;
-				SimulationMode simulationMode = SimulationMode.getMode(app.getSettings().simulateNavigationMode);
-				boolean reality = simulationMode == SimulationMode.REALITY;
 				int stopDelayCount = 0;
 
 				while (!directions.isEmpty() && routeAnimation != null) {
@@ -164,19 +164,19 @@ public class OsmAndLocationSimulation {
 						if (intervalTime != 0) {
 							current.setSpeed(speed);
 						}
-						if (!current.hasAccuracy() || Double.isNaN(current.getAccuracy()) || (reality && speed < 10)) {
+						if (!current.hasAccuracy() || Double.isNaN(current.getAccuracy()) || (realistic && speed < 10)) {
 							current.setAccuracy(5);
 						}
-						if (prev != null && prev.distanceTo(current) > 3 || (reality && speed >= 3)) {
+						if (prev != null && prev.distanceTo(current) > 3 || (realistic && speed >= 3)) {
 							current.setBearing(prev.bearingTo(current));
 						}
 					}
 					current.setTime(System.currentTimeMillis());
 					final Location toset = current;
-					if (reality) {
+					if (realistic) {
 						addNoise(toset);
 					}
-					if (reality && current.isTrafficLight() && stopDelayCount == 0) {
+					if (realistic && current.isTrafficLight() && stopDelayCount == 0) {
 						stopDelayCount = 5;
 						current.removeBearing();
 					} else if (stopDelayCount > 0) {

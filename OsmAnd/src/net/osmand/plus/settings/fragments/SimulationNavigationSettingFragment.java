@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.settings.backend.OsmandSettings.SIM_MIN_SPEED;
 import static net.osmand.plus.utils.OsmAndFormatter.*;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
@@ -15,9 +16,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.preference.CheckBoxPreference;
@@ -30,6 +28,7 @@ import com.google.android.material.slider.Slider;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.settings.enums.SimulationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -37,8 +36,7 @@ import net.osmand.router.GeneralRouter;
 
 public class SimulationNavigationSettingFragment extends BaseSettingsFragment {
 
-	public static final float MIN_SPEED = 5 / 3.6f;
-	public static final float MAX_SPEED = 900 / 3.6f;
+	public static final float SIM_MAX_SPEED = 900 / 3.6f;
 	private OsmandActionBarActivity activity;
 
 	@Override
@@ -133,9 +131,9 @@ public class SimulationNavigationSettingFragment extends BaseSettingsFragment {
 		screen.addPreference(preference);
 		for (SimulationMode sm : SimulationMode.values()) {
 			preference = new CheckBoxPreference(activity);
-			preference.setKey(sm.key);
-			preference.setTitle(sm.title);
-			preference.setLayoutResource(sm.layout);
+			preference.setKey(sm.getKey());
+			preference.setTitle(sm.getTitle());
+			preference.setLayoutResource(sm.getLayout());
 			screen.addPreference(preference);
 		}
 		preference = new Preference(activity);
@@ -165,9 +163,9 @@ public class SimulationNavigationSettingFragment extends BaseSettingsFragment {
 				TextView description = itemView.findViewById(R.id.description);
 				boolean checked = ((CheckBoxPreference) preference).isChecked();
 				description.setVisibility(checked ? View.VISIBLE : View.GONE);
-				String str = getString(mode.description);
+				String str = getString(mode.getDescription());
 				SpannableString spanDescription = new SpannableString(str);
-				if (mode == SimulationMode.REALITY) {
+				if (mode == SimulationMode.REALISTIC) {
 					int startLine = 0;
 					int endLine = 0;
 					int dp8 = AndroidUtils.dpToPx(itemView.getContext(), 8f);
@@ -185,11 +183,11 @@ public class SimulationNavigationSettingFragment extends BaseSettingsFragment {
 				if (slider != null) {
 					slider.setVisibility(checked ? View.VISIBLE : View.GONE);
 					if (checked) {
-						setupSpeedSlider(itemView, mode.title);
+						setupSpeedSlider(itemView, mode.getTitle());
 					}
 				}
 				View divider = itemView.findViewById(R.id.divider);
-				if (mode != SimulationMode.REALITY) {
+				if (mode != SimulationMode.REALISTIC) {
 					divider.setVisibility(View.VISIBLE);
 				} else {
 					divider.setVisibility(View.INVISIBLE);
@@ -199,8 +197,8 @@ public class SimulationNavigationSettingFragment extends BaseSettingsFragment {
 	}
 
 	private void setupSpeedSlider(View itemView, int titleRes) {
-		float min = MIN_SPEED;
-		float max = MAX_SPEED;
+		float min = SIM_MIN_SPEED;
+		float max = SIM_MAX_SPEED;
 		GeneralRouter router = app.getRouter(getSelectedAppMode());
 		if (router != null) {
 			max = router.getMaxSpeed() * 2;
@@ -225,37 +223,5 @@ public class SimulationNavigationSettingFragment extends BaseSettingsFragment {
 			settings.simulateNavigationSpeed = value;
 		});
 		UiUtilities.setupSlider(slider, isNightMode(), getActiveProfileColor());
-	}
-
-	public enum SimulationMode {
-		PREVIEW("preview_mode", R.string.simulation_preview_mode_title, R.string.simulation_preview_mode_desc, R.layout.preference_simulation_mode_item),
-		CONSTANT("const_mode", R.string.simulation_constant_mode_title, R.string.simulation_constant_mode_desc, R.layout.preference_simulation_mode_slider),
-		REALITY("real_mode", R.string.simulation_real_mode_title, R.string.simulation_real_mode_desc, R.layout.preference_simulation_mode_item);
-
-		String key;
-		int title;
-		int description;
-		int layout;
-
-		SimulationMode(String key, @StringRes int title, @StringRes int description, @LayoutRes int layout) {
-			this.key = key;
-			this.title = title;
-			this.description = description;
-			this.layout = layout;
-		}
-
-		@Nullable
-		public static SimulationMode getMode(String key) {
-			for (SimulationMode mode : SimulationMode.values()) {
-				if (mode.key.equals(key)) {
-					return mode;
-				}
-			}
-			return null;
-		}
-
-		public String getKey() {
-			return key;
-		}
 	}
 }
