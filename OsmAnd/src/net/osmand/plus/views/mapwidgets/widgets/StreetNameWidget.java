@@ -42,6 +42,7 @@ import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -53,6 +54,8 @@ import net.osmand.util.Algorithms;
 import java.util.List;
 
 public class StreetNameWidget extends MapWidget {
+
+	public static final String WIDGET_STREET_NAME = "street_name";
 
 	private static final int MAX_MARKER_DISTANCE = 50;
 
@@ -74,6 +77,12 @@ public class StreetNameWidget extends MapWidget {
 	@Override
 	protected int getLayoutId() {
 		return R.layout.street_name_widget;
+	}
+
+	@Nullable
+	@Override
+	public OsmandPreference<Boolean> getWidgetVisibilityPref() {
+		return settings.SHOW_STREET_NAME;
 	}
 
 	public StreetNameWidget(@NonNull MapActivity mapActivity) {

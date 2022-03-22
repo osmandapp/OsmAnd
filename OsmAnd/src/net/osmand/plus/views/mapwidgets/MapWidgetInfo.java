@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
@@ -82,6 +83,15 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 		return widgetState != null
 				? widgetState.getMenuTitleId()
 				: messageId;
+	}
+
+	public boolean isSelected(@NonNull ApplicationMode appMode) {
+		OsmandPreference<Boolean> pref = widget.getWidgetVisibilityPref();
+		if (pref != null) {
+			return pref.getModeValue(appMode);
+		} else {
+			return isVisibleCollapsed(appMode) || isVisible(appMode);
+		}
 	}
 
 	public abstract boolean isVisibleCollapsed(@NonNull ApplicationMode appMode);

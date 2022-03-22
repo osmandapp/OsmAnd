@@ -19,6 +19,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
@@ -71,13 +72,6 @@ public class MapWidgetRegistry {
 	public static final String WIDGET_PLAIN_TIME = "plain_time";
 	public static final String WIDGET_BATTERY = "battery";
 	public static final String WIDGET_RADIUS_RULER = "ruler";
-
-	public static final String WIDGET_COORDINATES = "coordinates";
-	public static final String WIDGET_STREET_NAME = "street_name";
-	public static final String WIDGET_MAP_MARKERS = "map_markers_top";
-	public static final String WIDGET_LANES = "lanes";
-
-	public static final String WIDGET_ELEVATION_PROFILE = "elevation_profile";
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -270,6 +264,11 @@ public class MapWidgetRegistry {
 	public void setVisibility(@NonNull MapWidgetInfo widgetInfo, boolean visible, boolean collapsed) {
 		ApplicationMode mode = settings.APPLICATION_MODE.get();
 		setVisibility(mode, widgetInfo, visible, collapsed);
+
+		OsmandPreference<Boolean> pref = widgetInfo.widget.getWidgetVisibilityPref();
+		if (pref != null) {
+			pref.set(!pref.get());
+		}
 
 		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {

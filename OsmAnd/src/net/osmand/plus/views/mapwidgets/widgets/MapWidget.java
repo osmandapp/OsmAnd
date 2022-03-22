@@ -16,6 +16,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -50,6 +51,11 @@ public abstract class MapWidget {
 		return view;
 	}
 
+	@Nullable
+	public OsmandPreference<Boolean> getWidgetVisibilityPref() {
+		return null;
+	}
+
 	public void attachView(@NonNull ViewGroup container, int order, @NonNull List<MapWidget> followingWidgets) {
 		container.addView(view);
 	}
@@ -79,7 +85,7 @@ public abstract class MapWidget {
 			if (shadowRadius > 0) {
 				AndroidUiHelper.updateVisibility(textShadow, true);
 				textShadow.setVisibility(View.VISIBLE);
-				textShadow.setTypeface(Typeface.DEFAULT,typefaceStyle);
+				textShadow.setTypeface(Typeface.DEFAULT, typefaceStyle);
 				textShadow.getPaint().setStrokeWidth(shadowRadius);
 				textShadow.getPaint().setStyle(Style.STROKE);
 				textShadow.setTextColor(textShadowColor);

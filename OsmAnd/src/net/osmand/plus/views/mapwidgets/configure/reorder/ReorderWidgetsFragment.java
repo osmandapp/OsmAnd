@@ -226,7 +226,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 			info.key = widgetInfo.key;
 			info.title = widgetInfo.getTitle(app);
 			info.iconId = widgetInfo.getMapIconId(nightMode);
-			info.isActive = widgetInfo.isVisibleCollapsed(selectedAppMode) || widgetInfo.isVisible(selectedAppMode);
+			info.isActive = widgetInfo.isSelected(selectedAppMode);
 			info.order = order;
 			info.info = widgetInfo;
 			list.add(new ListItem(ItemType.WIDGET, info));

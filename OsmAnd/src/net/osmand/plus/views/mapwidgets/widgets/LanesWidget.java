@@ -17,6 +17,7 @@ import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -29,6 +30,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LanesWidget extends MapWidget {
+
+	public static final String WIDGET_LANES = "lanes";
 
 	private static final int MAX_METERS_NOT_SPOKEN_TURN = 800;
 	private static final int MAX_METERS_SPOKEN_TURN = 1200;
@@ -62,6 +65,12 @@ public class LanesWidget extends MapWidget {
 	@Override
 	protected int getLayoutId() {
 		return R.layout.lanes_widget;
+	}
+
+	@Nullable
+	@Override
+	public OsmandPreference<Boolean> getWidgetVisibilityPref() {
+		return settings.SHOW_LANES;
 	}
 
 	@Override

@@ -2182,7 +2182,7 @@ public class OsmandSettings {
 	}
 
 	public void setMapLocationToShow(double latitude, double longitude, int zoom, PointDescription pointDescription,
-									 boolean addToHistory, Object toShow) {
+	                                 boolean addToHistory, Object toShow) {
 		SettingsEditor edit = settingsAPI.edit(globalPreferences);
 		edit.putFloat(MAP_LAT_TO_SHOW, (float) latitude);
 		edit.putFloat(MAP_LON_TO_SHOW, (float) longitude);
@@ -2912,8 +2912,7 @@ public class OsmandSettings {
 		TRANSPARENT_MAP_THEME.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
 	}
 
-	public final CommonPreference<Boolean> SHOW_STREET_NAME =
-			new BooleanPreference(this, "show_street_name", false).makeProfile();
+	public final CommonPreference<Boolean> SHOW_STREET_NAME = new BooleanPreference(this, "show_street_name", false).makeProfile();
 
 	{
 		SHOW_STREET_NAME.setModeDefaultValue(ApplicationMode.DEFAULT, false);

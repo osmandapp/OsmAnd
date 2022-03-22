@@ -26,6 +26,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -35,6 +36,8 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import org.apache.commons.logging.Log;
 
 public class CoordinatesWidget extends MapWidget {
+
+	public static final String WIDGET_COORDINATES = "coordinates";
 
 	private static final Log log = PlatformUtil.getLog(CoordinatesWidget.class);
 
@@ -53,6 +56,12 @@ public class CoordinatesWidget extends MapWidget {
 	@Override
 	protected int getLayoutId() {
 		return R.layout.coordinates_widget;
+	}
+
+	@Nullable
+	@Override
+	public OsmandPreference<Boolean> getWidgetVisibilityPref() {
+		return settings.SHOW_COORDINATES_WIDGET;
 	}
 
 	public CoordinatesWidget(@NonNull MapActivity mapActivity) {

@@ -43,6 +43,7 @@ import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.graph.BaseCommonChartAdapter;
 import net.osmand.plus.routing.RouteCalculationResult;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -53,6 +54,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ElevationProfileWidget extends MapWidget {
+
+	public static final String WIDGET_ELEVATION_PROFILE = "elevation_profile";
 
 	private static final int MAX_DISTANCE_TO_SHOW_IM_METERS = 10_000;
 
@@ -90,6 +93,12 @@ public class ElevationProfileWidget extends MapWidget {
 	@Override
 	protected int getLayoutId() {
 		return R.layout.elevation_profile_widget;
+	}
+
+	@Nullable
+	@Override
+	public OsmandPreference<Boolean> getWidgetVisibilityPref() {
+		return settings.SHOW_ELEVATION_PROFILE_WIDGET;
 	}
 
 	@Override
