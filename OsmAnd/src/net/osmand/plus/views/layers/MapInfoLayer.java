@@ -6,6 +6,7 @@ import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BATTERY;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BEARING;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_COORDINATES;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_ELEVATION_PROFILE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_GPS_INFO;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_DISTANCE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_TIME;
@@ -68,6 +69,7 @@ import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.BearingWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.CompassRulerWidgetState;
+import net.osmand.plus.views.mapwidgets.widgetstates.ElevationProfileWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.TimeWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 
@@ -85,6 +87,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private ViewGroup topWidgetsContainer;
 	private ViewGroup rightWidgetsContainer;
 	private ViewGroup leftWidgetsContainer;
+	private ViewGroup bottomWidgetsContainer;
 
 	private ImageButton expandButton;
 	private View mapRulerLayout;
@@ -96,7 +99,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private int themeId = -1;
 
 	private TopToolbarView topToolbarView;
-	private ElevationProfileWidget elevationProfileWidget;
 
 	private StateChangedListener<ApplicationMode> appModeChangeListener;
 
@@ -123,6 +125,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			topWidgetsContainer = mapActivity.findViewById(R.id.top_widgets_panel);
 			leftWidgetsContainer = mapActivity.findViewById(R.id.map_left_widgets_panel);
 			rightWidgetsContainer = mapActivity.findViewById(R.id.map_right_widgets_panel);
+			bottomWidgetsContainer = mapActivity.findViewById(R.id.map_bottom_widgets_panel);
 			expandButton = mapActivity.findViewById(R.id.map_collapse_button);
 			mapRulerLayout = mapActivity.findViewById(R.id.map_ruler_layout);
 
@@ -218,15 +221,20 @@ public class MapInfoLayer extends OsmandMapLayer {
 		alarmControl = RouteInfoWidgetsFactory.createAlarmInfoControl(app, mapActivity);
 		alarmControl.setVisibility(false);
 
-		elevationProfileWidget = new ElevationProfileWidget(mapActivity);
-
 		setupRulerWidget(mapRulerLayout);
 
 		registerTopWidgets(mapActivity);
+		registerBottomWidgets(mapActivity);
 		registerLeftWidgets(mapActivity, routeWidgetsFactory);
 		registerRightWidgets(mapActivity, routeWidgetsFactory, mapWidgetsFactory);
 
 		app.getAidlApi().registerWidgetControls(mapActivity);
+	}
+
+	private void registerBottomWidgets(@NonNull MapActivity mapActivity) {
+		ElevationProfileWidget widget = new ElevationProfileWidget(mapActivity);
+		ElevationProfileWidgetState widgetState = new ElevationProfileWidgetState(getApplication());
+		registerWidget(WIDGET_ELEVATION_PROFILE, widget, widgetState, WidgetsPanel.BOTTOM);
 	}
 
 	private void registerTopWidgets(@NonNull MapActivity mapActivity) {
@@ -358,11 +366,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 		recreateWidgetsPanel(topWidgetsContainer, WidgetsPanel.TOP, appMode);
 		recreateWidgetsPanel(leftWidgetsContainer, WidgetsPanel.LEFT, appMode);
 		recreateWidgetsPanel(rightWidgetsContainer, WidgetsPanel.RIGHT, appMode);
+		recreateWidgetsPanel(bottomWidgetsContainer, WidgetsPanel.BOTTOM, appMode);
 		setupExpandButton();
 	}
 
-	private void recreateWidgetsPanel(@Nullable ViewGroup container, @NonNull WidgetsPanel panel,
-	                                  @NonNull ApplicationMode appMode) {
+	private void recreateWidgetsPanel(@Nullable ViewGroup container, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode) {
 		if (container != null) {
 			container.removeAllViews();
 			if (mapInfoControls != null) {
@@ -516,7 +524,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 				mapInfoControls.updateWidgetsInfo(appMode, drawSettings, WIDGETS_EXPANDED);
 			}
 			topToolbarView.updateInfo();
-			elevationProfileWidget.updateInfo();
 			alarmControl.updateInfo(drawSettings, false);
 
 			for (RulerWidget rulerWidget : rulerWidgets) {

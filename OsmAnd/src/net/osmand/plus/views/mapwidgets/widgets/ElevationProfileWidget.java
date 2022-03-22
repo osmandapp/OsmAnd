@@ -1,13 +1,17 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.GPXUtilities.GPXTrackAnalysis.ElevationDiffsCalculator.CALCULATED_GPX_WINDOW_LENGTH;
+
 import android.graphics.Matrix;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -29,12 +33,8 @@ import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXHighlight;
@@ -43,31 +43,24 @@ import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.graph.BaseCommonChartAdapter;
 import net.osmand.plus.routing.RouteCalculationResult;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.GPXUtilities.GPXTrackAnalysis.ElevationDiffsCalculator.CALCULATED_GPX_WINDOW_LENGTH;
-
-public class ElevationProfileWidget {
+public class ElevationProfileWidget extends MapWidget {
 
 	private static final int MAX_DISTANCE_TO_SHOW_IM_METERS = 10_000;
 
-	private final MapActivity map;
-	private final OsmandApplication app;
-	private final OsmandSettings settings;
-
-	private View view;
 	private View uphillView;
 	private View downhillView;
 	private View gradeView;
 	private LineChart chart;
-	private BaseCommonChartAdapter chartAdapter;
 
-	private GPXTrackAnalysis analysis;
 	private GpxDisplayItem gpxItem;
 	private TrkSegment segment;
 	private GPXFile gpx;
@@ -89,20 +82,21 @@ public class ElevationProfileWidget {
 		}
 	};
 
-	public ElevationProfileWidget(MapActivity map) {
-		this.map = map;
-		app = map.getMyApplication();
-		settings = app.getSettings();
-		initView();
+	public ElevationProfileWidget(@NonNull MapActivity mapActivity) {
+		super(mapActivity);
 		settings.MAP_LINKED_TO_LOCATION.addListener(linkedToLocationListener);
 	}
 
-	private void initView() {
-		this.view = map.findViewById(R.id.elevation_profile_widget_layout);
-		setupStatisticBlocks();
+	@Override
+	protected int getLayoutId() {
+		return R.layout.elevation_profile_widget;
 	}
 
-
+	@Override
+	public void attachView(@NonNull ViewGroup container, int order, @NonNull List<MapWidget> followingWidgets) {
+		super.attachView(container, order, followingWidgets);
+		setupStatisticBlocks();
+	}
 
 	private void setupStatisticBlocks() {
 		uphillView = setupStatisticBlock(R.id.uphill_widget,
@@ -133,9 +127,10 @@ public class ElevationProfileWidget {
 		return blockView;
 	}
 
-	public void updateInfo() {
-		boolean visible = map.getWidgetsVisibilityHelper().shouldShowElevationProfileWidget();
-		AndroidUiHelper.updateVisibility(view, visible);
+	@Override
+	public void updateInfo(@Nullable DrawSettings drawSettings) {
+		boolean visible = mapActivity.getWidgetsVisibilityHelper().shouldShowElevationProfileWidget();
+		updateVisibility(visible);
 		if (visible) {
 			updateInfoImpl();
 		}
@@ -164,7 +159,7 @@ public class ElevationProfileWidget {
 
 	private void setupChart() {
 		gpx = GpxUiHelper.makeGpxFromRoute(app.getRoutingHelper().getRoute(), app);
-		analysis = gpx.getAnalysis(0);
+		GPXTrackAnalysis analysis = gpx.getAnalysis(0);
 		allPoints = gpx.getAllSegmentsPoints();
 		gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, ChartPointLayer.ROUTE);
 		firstVisiblePointIndex = -1;
@@ -176,7 +171,7 @@ public class ElevationProfileWidget {
 		GpxUiHelper.setupGPXChart(chart, 24f, 16f, true, markerIcon);
 		chart.setHighlightPerTapEnabled(false);
 		chart.setHighlightPerDragEnabled(false);
-		chartAdapter = new BaseCommonChartAdapter(app, chart, true);
+		BaseCommonChartAdapter chartAdapter = new BaseCommonChartAdapter(app, chart, true);
 
 		if (analysis.hasElevationData) {
 			List<ILineDataSet> dataSets = new ArrayList<>();
@@ -245,7 +240,7 @@ public class ElevationProfileWidget {
 				Highlight locationHighlight = ElevationProfileWidget.this.locationHighlight;
 				h = createHighlight(h.getX(), false);
 				if (locationHighlight != null) {
-					chart.highlightValues(new Highlight[]{locationHighlight, h});
+					chart.highlightValues(new Highlight[] {locationHighlight, h});
 				} else {
 					chart.highlightValue(h, true);
 				}
@@ -268,7 +263,7 @@ public class ElevationProfileWidget {
 					if (h != null) {
 						h = createHighlight(h.getX(), false);
 						if (locationHighlight != null) {
-							chart.highlightValues(new Highlight[]{locationHighlight, h});
+							chart.highlightValues(new Highlight[] {locationHighlight, h});
 						} else {
 							chart.highlightValue(h, true);
 						}
@@ -357,7 +352,7 @@ public class ElevationProfileWidget {
 			}
 		} else if (newLocationHighlight != null) {
 			if (highlighted == null) {
-				highlighted = new Highlight[]{newLocationHighlight};
+				highlighted = new Highlight[] {newLocationHighlight};
 			} else {
 				Highlight[] newHighlighted = new Highlight[highlighted.length + 1];
 				newHighlighted[0] = newLocationHighlight;
@@ -462,10 +457,6 @@ public class ElevationProfileWidget {
 			chart.zoom(scaleX, 1.0f, 0, 0);
 			chart.scrollTo(0, 0);
 		}
-	}
-
-	private boolean isNightMode() {
-		return app.getDaynightHelper().isNightModeForMapControls();
 	}
 
 	private static void moveViewToX(LineChart chart, float nextVisibleX) {

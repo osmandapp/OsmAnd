@@ -4,7 +4,12 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.StateChangedListener;
@@ -14,7 +19,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
@@ -24,11 +28,7 @@ import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
-import net.osmand.plus.views.mapwidgets.widgetstates.ElevationProfileWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper.PopUpMenuWidthType;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
@@ -43,12 +43,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 public class MapWidgetRegistry {
 
@@ -445,68 +439,6 @@ public class MapWidgetRegistry {
 		return widgets;
 	}
 
-	private CallbackWithObject<WidgetState> getWidgetStateCallback(ArrayAdapter<ContextMenuItem> adapter, WidgetState widgetState, String message, int pos) {
-		return result -> {
-			ContextMenuItem item = adapter.getItem(pos);
-			if (message != null) {
-				item.setTitle(message);
-			} else {
-				item.setTitle(getString(widgetState.getMenuTitleId()));
-			}
-			item.setIcon(widgetState.getSettingsIconId());
-
-			adapter.notifyDataSetChanged();
-			return false;
-		};
-	}
-
-	public void addElevationProfileWidget(@NonNull MapActivity mapActivity, @NonNull ContextMenuAdapter cm,
-	                                      @NonNull ApplicationMode mode) {
-		final OsmandPreference<Boolean> pref = settings.SHOW_ELEVATION_PROFILE_WIDGET;
-
-		final ElevationProfileWidgetState widgetState = new ElevationProfileWidgetState(app);
-		ContextMenuItem item = new ContextMenuItem(null)
-				.setTitleId(widgetState.getMenuTitleId(), app)
-				.setIcon(R.drawable.ic_action_elevation_profile)
-				.setSelected(pref.get())
-				.setSecondaryIcon(R.drawable.ic_action_additional_option)
-				.setListener(new OnRowItemClick() {
-					@Override
-					public boolean onRowItemClick(final ArrayAdapter<ContextMenuItem> adapter,
-					                              final View view,
-					                              final int itemId,
-					                              final int pos) {
-						boolean selected = pref.get();
-						boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-						CallbackWithObject<WidgetState> callback = getWidgetStateCallback(adapter, widgetState, null, pos);
-						showPopUpMenu(view, callback, widgetState, mode,
-								getElevationPopupMenuItemListener(mapActivity, adapter, pref, pos, true),
-								getElevationPopupMenuItemListener(mapActivity, adapter, pref, pos, false),
-								null, selected, nightMode);
-						return false;
-					}
-
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> a,
-					                                  int itemId, int pos, boolean isChecked,
-					                                  int[] viewCoordinates) {
-						updateAppearancePref(mapActivity, pref, a, !pref.get());
-						return false;
-					}
-				});
-		cm.addItem(item);
-	}
-
-	public OnClickListener getElevationPopupMenuItemListener(@NonNull MapActivity mapActivity,
-	                                                         @NonNull ArrayAdapter<ContextMenuItem> adapter,
-	                                                         @NonNull OsmandPreference<Boolean> pref,
-	                                                         int pos, boolean visible) {
-		return v -> {
-			adapter.getItem(pos).setSelected(visible);
-			updateAppearancePref(mapActivity, pref, adapter, visible);
-		};
-	}
-
 	public void showPopUpMenu(@NonNull View view,
 	                          @NonNull final CallbackWithObject<WidgetState> callback,
 	                          @Nullable final WidgetState widgetState,
@@ -583,13 +515,6 @@ public class MapWidgetRegistry {
 
 	private String getString(@StringRes int resId) {
 		return app.getString(resId);
-	}
-
-	private static void updateAppearancePref(@NonNull MapActivity mapActivity, @NonNull OsmandPreference<Boolean> pref,
-	                                         @NonNull ArrayAdapter<ContextMenuItem> a, boolean value) {
-		pref.set(value);
-		mapActivity.updateApplicationModeSettings();
-		a.notifyDataSetChanged();
 	}
 
 	@ColorRes
