@@ -1,5 +1,7 @@
 package net.osmand.plus.views.mapwidgets;
 
+import android.content.Context;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -7,6 +9,7 @@ import androidx.annotation.StringRes;
 
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 
 public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
@@ -53,6 +56,20 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 		return widgetState != null
 				? widgetState.getSettingsIconId()
 				: settingsIconId;
+	}
+
+	@DrawableRes
+	public int getMapIconId(boolean nightMode) {
+		if (widget instanceof TextInfoWidget) {
+			TextInfoWidget textInfoWidget = (TextInfoWidget) widget;
+			return textInfoWidget.getIconId(nightMode);
+		}
+		return 0;
+	}
+
+	@NonNull
+	public String getTitle(@NonNull Context ctx) {
+		return message != null ? message : ctx.getString(getMessageId());
 	}
 
 	@Nullable

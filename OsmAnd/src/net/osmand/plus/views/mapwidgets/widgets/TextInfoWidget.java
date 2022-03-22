@@ -8,13 +8,13 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.layers.MapInfoLayer.TextState;
-
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 
 public class TextInfoWidget extends MapWidget {
 
@@ -177,6 +177,11 @@ public class TextInfoWidget extends MapWidget {
 
 	@DrawableRes
 	protected int getIconId() {
-		return isNightMode() ? nightIconId : dayIconId;
+		return getIconId(isNightMode());
+	}
+
+	@DrawableRes
+	public int getIconId(boolean nightMode) {
+		return nightMode ? nightIconId : dayIconId;
 	}
 }

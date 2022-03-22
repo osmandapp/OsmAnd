@@ -51,7 +51,6 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
-	private UiUtilities iconsCache;
 	private MapWidgetRegistry widgetRegistry;
 	private ApplicationMode selectedAppMode;
 
@@ -78,7 +77,6 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		iconsCache = app.getUIUtilities();
 		nightMode = !settings.isLightContent();
 		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 

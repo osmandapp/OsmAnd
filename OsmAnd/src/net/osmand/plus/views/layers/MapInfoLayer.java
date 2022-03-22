@@ -344,11 +344,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	public void registerWidget(@NonNull String key, @NonNull MapWidget widget,
-			                   @NonNull WidgetState widgetState, @NonNull WidgetsPanel widgetPanel) {
+	                           @NonNull WidgetState widgetState, @NonNull WidgetsPanel widgetPanel) {
 		if (mapInfoControls != null) {
 			int order = widgetPanel.getWidgetOrder(key, settings);
-			mapInfoControls.registerWidget(key, widget, widgetState,
-					MapWidgetInfo.INVALID_ID, MapWidgetInfo.INVALID_ID, null, order, widgetPanel);
+			mapInfoControls.registerWidget(key, widget, widgetState, MapWidgetInfo.INVALID_ID,
+					MapWidgetInfo.INVALID_ID, null, order, widgetPanel);
 			widget.updateColors(calculateTextState());
 		}
 	}

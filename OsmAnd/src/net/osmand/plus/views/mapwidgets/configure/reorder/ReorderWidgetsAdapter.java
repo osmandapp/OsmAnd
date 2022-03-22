@@ -1,48 +1,49 @@
 package net.osmand.plus.views.mapwidgets.configure.reorder;
 
+import static net.osmand.plus.utils.UiUtilities.getColoredSelectableDrawable;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView.Adapter;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
+import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.OnItemMoveCallback;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.ButtonViewHolder;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.ButtonViewHolder.ButtonInfo;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.DividerViewHolder;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.HeaderViewHolder;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.SpaceViewHolder;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.WidgetViewHolder;
-import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.WidgetViewHolder.CheckItemIsMovable;
+import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.WidgetViewHolder.ItemMovableCallback;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.WidgetViewHolder.WidgetUiInfo;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ReorderWidgetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
-		implements ReorderItemTouchHelperCallback.OnItemMoveCallback, CheckItemIsMovable {
+public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItemMoveCallback, ItemMovableCallback {
 
 	private final OsmandApplication app;
-	private DataHolder dataHolder;
-	private WidgetAdapterListener listener;
+	private final WidgetsDataHolder dataHolder;
+	private final List<ListItem> items = new ArrayList<>();
 
-	private List<ListItem> items = new ArrayList<>();
+	private WidgetAdapterListener listener;
 	private final boolean nightMode;
+	private final int profileColor;
+	private final int defaultIconColor;
 
 	public enum ItemType {
 		HEADER,
@@ -54,13 +55,30 @@ public class ReorderWidgetsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 		BUTTON
 	}
 
-	public ReorderWidgetsAdapter(@NonNull OsmandApplication app,
-	                             @NonNull DataHolder dataHolder,
-	                             boolean nightMode) {
+	public ReorderWidgetsAdapter(@NonNull OsmandApplication app, @NonNull WidgetsDataHolder dataHolder, boolean nightMode) {
 		setHasStableIds(true);
 		this.app = app;
 		this.nightMode = nightMode;
 		this.dataHolder = dataHolder;
+
+		ApplicationMode mode = app.getSettings().getApplicationMode();
+		profileColor = mode.getProfileColor(nightMode);
+		defaultIconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
+	}
+
+	@NonNull
+	public List<ListItem> getItems() {
+		return items;
+	}
+
+	public void setItems(@NonNull List<ListItem> items) {
+		this.items.clear();
+		this.items.addAll(items);
+		notifyDataSetChanged();
+	}
+
+	public void setListener(@NonNull WidgetAdapterListener listener) {
+		this.listener = listener;
 	}
 
 	@NonNull
@@ -68,32 +86,26 @@ public class ReorderWidgetsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		Context ctx = parent.getContext();
 		LayoutInflater inflater = UiUtilities.getInflater(ctx, nightMode);
-		ItemType type = viewType < ItemType.values().length ? ItemType.values()[viewType] : ItemType.CARD_DIVIDER;
-		View itemView;
-		switch (type) {
+
+		switch (ItemType.values()[viewType]) {
 			case WIDGET:
-				itemView = inflater.inflate(R.layout.configure_screen_list_item_widget_reorder, parent, false);
+				View itemView = inflater.inflate(R.layout.configure_screen_list_item_widget_reorder, parent, false);
 				return new WidgetViewHolder(itemView, ReorderWidgetsAdapter.this);
 			case HEADER:
-				itemView = inflater.inflate(R.layout.configure_screen_list_item_header, parent, false);
-				return new HeaderViewHolder(itemView);
+				return new HeaderViewHolder(inflater.inflate(R.layout.configure_screen_list_item_header, parent, false));
 			case CARD_DIVIDER:
-				itemView = inflater.inflate(R.layout.list_item_divider, parent, false);
-				return new DividerViewHolder(itemView);
+				return new DividerViewHolder(inflater.inflate(R.layout.list_item_divider, parent, false));
 			case CARD_TOP_DIVIDER:
 				itemView = inflater.inflate(R.layout.list_item_divider, parent, false);
 				View bottomShadow = itemView.findViewById(R.id.bottomShadowView);
 				bottomShadow.setVisibility(View.INVISIBLE);
 				return new DividerViewHolder(itemView);
 			case CARD_BOTTOM_DIVIDER:
-				itemView = inflater.inflate(R.layout.card_bottom_divider, parent, false);
-				return new DividerViewHolder(itemView);
+				return new DividerViewHolder(inflater.inflate(R.layout.card_bottom_divider, parent, false));
 			case SPACE:
-				itemView = new View(ctx);
-				return new SpaceViewHolder(itemView);
+				return new SpaceViewHolder(new View(ctx));
 			case BUTTON:
-				itemView = inflater.inflate(R.layout.configure_screen_list_item_button, parent, false);
-				return new ButtonViewHolder(itemView);
+				return new ButtonViewHolder(inflater.inflate(R.layout.configure_screen_list_item_button, parent, false));
 			default:
 				throw new IllegalArgumentException("Unsupported view type");
 		}
@@ -101,44 +113,63 @@ public class ReorderWidgetsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
 	@SuppressLint("ClickableViewAccessibility")
 	@Override
-	public void onBindViewHolder(@NonNull ViewHolder holder,
-	                             int position) {
+	public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 		ListItem item = items.get(position);
-		if (holder instanceof WidgetViewHolder) {
-			WidgetViewHolder h = (WidgetViewHolder) holder;
+		if (viewHolder instanceof WidgetViewHolder) {
 			WidgetUiInfo widgetInfo = (WidgetUiInfo) item.value;
-			h.title.setText(widgetInfo.title);
-			h.icon.setImageResource(widgetInfo.iconId);
-			setImageFilter(h.icon, !widgetInfo.isActive);
-			h.moveIcon.setOnTouchListener((view, event) -> {
+			WidgetViewHolder holder = (WidgetViewHolder) viewHolder;
+
+			holder.title.setText(widgetInfo.title);
+			holder.moveIcon.setOnTouchListener((view, event) -> {
 				if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-					listener.onDragStarted(holder);
+					listener.onDragStarted(viewHolder);
 				}
 				return false;
 			});
-		} else if (holder instanceof HeaderViewHolder) {
-			HeaderViewHolder h = (HeaderViewHolder) holder;
-			String header = (String) item.value;
-			h.title.setText(header);
-		} else if (holder instanceof ButtonViewHolder) {
+			holder.icon.setImageResource(widgetInfo.iconId);
+			WidgetViewHolder.updateWidgetIcon(holder.icon, widgetInfo.info, profileColor, defaultIconColor, widgetInfo.isActive, nightMode);
+		} else if (viewHolder instanceof HeaderViewHolder) {
+			HeaderViewHolder holder = (HeaderViewHolder) viewHolder;
+			holder.title.setText((String) item.value);
+		} else if (viewHolder instanceof ButtonViewHolder) {
 			ButtonInfo buttonInfo = (ButtonInfo) item.value;
-			ButtonViewHolder h = (ButtonViewHolder) holder;
-			h.buttonView.setOnClickListener(buttonInfo.listener);
-			h.icon.setImageResource(buttonInfo.iconRes);
-			h.title.setText(buttonInfo.title);
+
+			ButtonViewHolder holder = (ButtonViewHolder) viewHolder;
+			holder.buttonView.setOnClickListener(buttonInfo.listener);
+			holder.icon.setImageResource(buttonInfo.iconRes);
+			holder.title.setText(buttonInfo.title);
+
 			ApplicationMode appMode = app.getSettings().getApplicationMode();
 			int profileColor = appMode.getProfileColor(nightMode);
-			Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, profileColor, 0.3f);
-			AndroidUtils.setBackground(h.buttonView, drawable);
-		} else if (holder instanceof SpaceViewHolder) {
-			float space = (float) item.value;
-			((SpaceViewHolder) holder).setHeight((int) space);
+			AndroidUtils.setBackground(holder.buttonView, getColoredSelectableDrawable(app, profileColor, 0.3f));
+		} else if (viewHolder instanceof SpaceViewHolder) {
+			SpaceViewHolder holder = (SpaceViewHolder) viewHolder;
+			holder.setHeight((int) item.value);
 		}
 	}
 
-	public void setItems(List<ListItem> items) {
-		this.items = items;
-		notifyDataSetChanged();
+	@Override
+	public boolean onItemMove(int from, int to) {
+		Object itemTo = items.get(to).value;
+		Object itemFrom = items.get(from).value;
+		if (itemFrom instanceof WidgetUiInfo && itemTo instanceof WidgetUiInfo) {
+			WidgetUiInfo widgetTo = (WidgetUiInfo) itemTo;
+			WidgetUiInfo widgetFrom = (WidgetUiInfo) itemFrom;
+
+			int orderTo = widgetTo.order;
+			int orderFrom = widgetFrom.order;
+
+			widgetTo.order = orderFrom;
+			widgetFrom.order = orderTo;
+
+			dataHolder.getOrders().put(widgetTo.title, orderFrom);
+			dataHolder.getOrders().put(widgetFrom.title, orderTo);
+
+			Collections.swap(items, from, to);
+			notifyItemMoved(from, to);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -153,35 +184,15 @@ public class ReorderWidgetsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 	}
 
 	@Override
-	public boolean onItemMove(int from, int to) {
-		Object itemFrom = items.get(from).value;
-		Object itemTo = items.get(to).value;
-		if (itemFrom instanceof WidgetUiInfo && itemTo instanceof WidgetUiInfo) {
-			dataHolder.orderModified();
-			WidgetUiInfo widgetFrom = (WidgetUiInfo) itemFrom;
-			WidgetUiInfo widgetTo = (WidgetUiInfo) itemTo;
-
-			int orderFrom = widgetFrom.order;
-			int orderTo = widgetTo.order;
-
-			widgetFrom.order = orderTo;
-			widgetTo.order = orderFrom;
-
-			dataHolder.getOrders().put(widgetFrom.title, orderTo);
-			dataHolder.getOrders().put(widgetTo.title, orderFrom);
-
-			Collections.swap(items, from, to);
-			notifyItemMoved(from, to);
-			return true;
-		}
-		return false;
+	public void onItemDismiss(ViewHolder holder) {
+		listener.onDragOrSwipeEnded(holder);
 	}
 
 	@Override
 	public long getItemId(int position) {
 		ListItem item = items.get(position);
 		if (item.value instanceof WidgetUiInfo) {
-			return ((WidgetUiInfo) item.value).title.hashCode();
+			return ((WidgetUiInfo) item.value).key.hashCode();
 		} else if (item.value instanceof ButtonInfo) {
 			return ((ButtonInfo) item.value).title.hashCode();
 		} else if (item.value != null) {
@@ -191,45 +202,26 @@ public class ReorderWidgetsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 	}
 
 	@Override
-	public void onItemDismiss(ViewHolder holder) {
-		listener.onDragOrSwipeEnded(holder);
-	}
-
-	public void setListener(@NonNull WidgetAdapterListener listener) {
-		this.listener = listener;
-	}
-
-	private void setImageFilter(@NonNull ImageView ivImage, boolean applyFilter) {
-		if (applyFilter) {
-			ColorMatrix matrix = new ColorMatrix();
-			matrix.setSaturation(0);
-			ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
-			ivImage.setColorFilter(filter);
-		} else {
-			ivImage.clearColorFilter();
-		}
-	}
-
-	@Override
 	public boolean isListItemMovable(int position) {
 		ListItem item = items.get(position);
 		return item.value instanceof WidgetUiInfo;
 	}
 
-
 	public static class ListItem {
-		ItemType type;
-		Object value;
 
-		public ListItem(@NonNull ItemType type, @NonNull Object value) {
+		public final ItemType type;
+		public final Object value;
+
+		public ListItem(@NonNull ItemType type, @Nullable Object value) {
 			this.type = type;
 			this.value = value;
 		}
 	}
 
 	public interface WidgetAdapterListener {
-		void onDragStarted(RecyclerView.ViewHolder holder);
-		void onDragOrSwipeEnded(RecyclerView.ViewHolder holder);
-	}
 
+		void onDragStarted(ViewHolder holder);
+
+		void onDragOrSwipeEnded(ViewHolder holder);
+	}
 }

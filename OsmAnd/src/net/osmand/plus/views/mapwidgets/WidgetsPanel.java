@@ -28,9 +28,12 @@ import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_SPEED;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_STREET_NAME;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_TIME;
 
+import android.text.TextUtils;
+
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.util.Algorithms;
@@ -119,6 +122,10 @@ public enum WidgetsPanel {
 	}
 
 	public int getWidgetOrder(@NonNull String widgetId, @NonNull OsmandSettings settings) {
+		return getWidgetOrder(settings.getApplicationMode(), widgetId, settings);
+	}
+
+	public int getWidgetOrder(@NonNull ApplicationMode appMode, @NonNull String widgetId, @NonNull OsmandSettings settings) {
 		ListStringPreference orderPreference;
 		if (this == LEFT) {
 			orderPreference = settings.LEFT_WIDGET_PANEL_ORDER;
@@ -129,12 +136,27 @@ public enum WidgetsPanel {
 		} else {
 			orderPreference = settings.BOTTOM_WIDGET_PANEL_ORDER;
 		}
-		List<String> orderIds = orderPreference.getStringsList();
+		List<String> orderIds = orderPreference.getStringsListForProfile(appMode);
 		if (Algorithms.isEmpty(orderIds)) {
 			return 0;
 		}
 
 		int order = orderIds.indexOf(widgetId);
 		return order == -1 ? orderIds.size() + 1 : order;
+	}
+
+	public boolean setWidgetsOrder(@NonNull ApplicationMode appMode, @NonNull List<String> widgetIds, @NonNull OsmandSettings settings) {
+		ListStringPreference orderPreference;
+		if (this == LEFT) {
+			orderPreference = settings.LEFT_WIDGET_PANEL_ORDER;
+		} else if (this == RIGHT) {
+			orderPreference = settings.RIGHT_WIDGET_PANEL_ORDER;
+		} else if (this == TOP) {
+			orderPreference = settings.TOP_WIDGET_PANEL_ORDER;
+		} else {
+			orderPreference = settings.BOTTOM_WIDGET_PANEL_ORDER;
+		}
+		String widgetsOrder = TextUtils.join(",", widgetIds);
+		return orderPreference.setModeValue(appMode, widgetsOrder);
 	}
 }

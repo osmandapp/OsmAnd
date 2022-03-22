@@ -1,7 +1,5 @@
 package net.osmand.plus.views.mapwidgets.configure.panel;
 
-import static net.osmand.plus.utils.ColorUtilities.getDefaultIconColor;
-
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -26,11 +24,13 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment;
+import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.WidgetViewHolder;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 
 public class WidgetsListFragment extends Fragment implements OnScrollChangedListener {
@@ -38,7 +38,6 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	private static final String SELECTED_GROUP_ATTR = "selected_group_key";
 
 	private OsmandApplication app;
-	private UiUtilities uiUtilities;
 	private MapWidgetRegistry widgetRegistry;
 
 	private WidgetsPanel selectedPanel;
@@ -58,7 +57,6 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = (OsmandApplication) requireContext().getApplicationContext();
-		uiUtilities = app.getUIUtilities();
 		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 
 		OsmandSettings settings = app.getSettings();
@@ -116,7 +114,8 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		view.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				ReorderWidgetsFragment.showInstance(this, activity, selectedPanel, selectedAppMode);
+				ReorderWidgetsFragment.showInstance(activity.getSupportFragmentManager(), selectedPanel,
+						selectedAppMode, getParentFragment());
 			}
 		});
 		setupListItemBackground(view);
@@ -126,28 +125,20 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		widgetsContainer.removeAllViews();
 
 		int profileColor = selectedAppMode.getProfileColor(nightMode);
-		int defaultIconColor = getDefaultIconColor(app, nightMode);
+		int defaultIconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 
 		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
-		for (MapWidgetInfo widgetInfo : widgetRegistry.getWidgetsForPanel(selectedPanel)) {
-			if (!selectedAppMode.isWidgetAvailable(widgetInfo.key)) {
-				continue;
-			}
+		for (MapWidgetInfo widgetInfo : widgetRegistry.getAvailableWidgetsForPanel(selectedAppMode, selectedPanel)) {
 			View view = inflater.inflate(R.layout.configure_screen_widget_item, widgetsContainer, false);
 
-			TextView tvTitle = view.findViewById(R.id.title);
-			if (widgetInfo.getMessage() != null) {
-				tvTitle.setText(widgetInfo.getMessage());
-			} else {
-				tvTitle.setText(widgetInfo.getMessageId());
-			}
+			TextView title = view.findViewById(R.id.title);
+			title.setText(widgetInfo.getTitle(app));
 			AndroidUiHelper.updateVisibility(view.findViewById(R.id.description), false);
 
 			boolean selected = widgetInfo.isVisibleCollapsed(selectedAppMode) || widgetInfo.isVisible(selectedAppMode);
 
-			int colorId = selected ? profileColor : defaultIconColor;
 			ImageView imageView = view.findViewById(R.id.icon);
-			imageView.setImageDrawable(uiUtilities.getPaintedIcon(widgetInfo.getSettingsIconId(), colorId));
+			WidgetViewHolder.updateWidgetIcon(imageView, widgetInfo, profileColor, defaultIconColor, selected, nightMode);
 
 			ImageView secondaryIcon = view.findViewById(R.id.secondary_icon);
 			secondaryIcon.setImageResource(R.drawable.ic_action_additional_option);
@@ -161,23 +152,23 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 				compoundButton.performClick();
 
 				boolean checked = compoundButton.isChecked();
+				WidgetViewHolder.updateWidgetIcon(imageView, widgetInfo, profileColor, defaultIconColor, checked, nightMode);
 				widgetRegistry.setVisibility(widgetInfo, checked, false);
-				imageView.setImageDrawable(uiUtilities.getPaintedIcon(widgetInfo.getSettingsIconId(), checked ? profileColor : defaultIconColor));
 			});
 
 			view.setOnClickListener(v -> {
 				if (widgetInfo.getWidgetState() == null) {
 					boolean checked = !compoundButton.isChecked();
 					compoundButton.setChecked(checked);
+					WidgetViewHolder.updateWidgetIcon(imageView, widgetInfo, profileColor, defaultIconColor, checked, nightMode);
 					widgetRegistry.setVisibility(widgetInfo, checked, false);
-					imageView.setImageDrawable(uiUtilities.getPaintedIcon(widgetInfo.getSettingsIconId(), checked ? profileColor : defaultIconColor));
 				} else {
 					CallbackWithObject<WidgetState> callback = result -> {
 						updateContent();
 						return true;
 					};
 					widgetRegistry.showPopUpMenu(view, callback, widgetInfo.getWidgetState(), selectedAppMode,
-							null, null, null, compoundButton.isChecked());
+							null, null, null, compoundButton.isChecked(), nightMode);
 				}
 			});
 			setupListItemBackground(view);

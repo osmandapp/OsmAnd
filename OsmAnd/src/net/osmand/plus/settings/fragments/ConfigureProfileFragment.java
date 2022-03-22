@@ -448,7 +448,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			} else if (COPY_PROFILE_SETTINGS.equals(prefId)) {
 				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, false, selectedMode);
 			} else if (RESET_TO_DEFAULT.equals(prefId)) {
-				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, prefId, this, false, selectedMode);
+				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, getSelectedAppMode(), this, false);
 			} else if (EXPORT_PROFILE.equals(prefId)) {
 				ExportSettingsFragment.showInstance(fragmentManager, selectedMode, null, false);
 			} else if (DELETE_PROFILE.equals(prefId)) {
