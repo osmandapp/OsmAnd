@@ -111,10 +111,10 @@ public class TurnType {
 	}
 	
 
-	public static TurnType valueOf(int vs, boolean leftSide) {
-		if(vs == TU && leftSide) {
+	public static TurnType valueOf(int vs, boolean clockwise) {
+		if(vs == TU && clockwise) {
 			vs = TRU;
-		} else if(vs == RNDB && leftSide) {
+		} else if(vs == RNDB && clockwise) {
 			vs = RNLB;
 		}
 	

@@ -1,5 +1,6 @@
 package net.osmand.router;
 
+import java.awt.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -185,7 +186,7 @@ public class RouteResultPreparation {
 			filterMinorStops(result.get(i));
 		}
 		calculateTimeSpeed(ctx, result);
-		prepareTurnResults(ctx, result);
+		prepareTurnResults(result);
 		return result;
 	}
 	
@@ -225,19 +226,19 @@ public class RouteResultPreparation {
 		return seg;
 	}
 
-	public void prepareTurnResults(RoutingContext ctx, List<RouteSegmentResult> result) {
+	public void prepareTurnResults(List<RouteSegmentResult> result) {
 		for (int i = 0; i < result.size(); i ++) {
-			TurnType turnType = getTurnInfo(result, i, ctx.leftSideNavigation);
+			TurnType turnType = getTurnInfo(result, i);
 			result.get(i).setTurnType(turnType);
 		}
 		
-		determineTurnsToMerge(ctx.leftSideNavigation, result);
-		ignorePrecedingStraightsOnSameIntersection(ctx.leftSideNavigation, result);
-		justifyUTurns(ctx.leftSideNavigation, result);
+		determineTurnsToMerge(result);
+		ignorePrecedingStraightsOnSameIntersection(result);
+		justifyUTurns(result);
 		addTurnInfoDescriptions(result);
 	}
 
-	protected void ignorePrecedingStraightsOnSameIntersection(boolean leftside, List<RouteSegmentResult> result) {
+	protected void ignorePrecedingStraightsOnSameIntersection(List<RouteSegmentResult> result) {
 		//Issue 2571: Ignore TurnType.C if immediately followed by another turn in non-motorway cases, as these likely belong to the very same intersection
 		RouteSegmentResult nextSegment = null;
 		double distanceToNextTurn = 999999;
@@ -266,14 +267,14 @@ public class RouteResultPreparation {
 		}
 	}
 
-	private void justifyUTurns(boolean leftSide, List<RouteSegmentResult> result) {
+	private void justifyUTurns(List<RouteSegmentResult> result) {
 		int next;
 		for (int i = 1; i < result.size() - 1; i = next) {
 			next = i + 1;
 			TurnType t = result.get(i).getTurnType();
 			// justify turn
 			if (t != null) {
-				TurnType jt = justifyUTurn(leftSide, result, i, t);
+				TurnType jt = justifyUTurn(result, i, t);
 				if (jt != null) {
 					result.get(i).setTurnType(jt);
 					next = i + 2;
@@ -846,7 +847,7 @@ public class RouteResultPreparation {
 		}
 	}
 
-	protected TurnType justifyUTurn(boolean leftside, List<RouteSegmentResult> result, int i, TurnType t) {
+	protected TurnType justifyUTurn(List<RouteSegmentResult> result, int i, TurnType t) {
 		boolean tl = TurnType.isLeftTurnNoUTurn(t.getValue());
 		boolean tr = TurnType.isRightTurnNoUTurn(t.getValue());
 		if(tl || tr) {
@@ -906,7 +907,7 @@ public class RouteResultPreparation {
 		return nm;
 	}
 
-	private void determineTurnsToMerge(boolean leftside, List<RouteSegmentResult> result) {
+	private void determineTurnsToMerge(List<RouteSegmentResult> result) {
 		RouteSegmentResult nextSegment = null;
 		double dist = 0;
 		for (int i = result.size() - 1; i >= 0; i--) {
@@ -924,7 +925,7 @@ public class RouteResultPreparation {
 						mergeDistance = 400;
 					}
 					if (dist < mergeDistance) {
-						mergeTurnLanes(leftside, currentSegment, nextSegment);
+						mergeTurnLanes(currentSegment, nextSegment);
 						inferCommonActiveLane(currentSegment.getTurnType(), nextSegment.getTurnType());
 						merged = true;
 					}
@@ -1009,7 +1010,7 @@ public class RouteResultPreparation {
 		}
 	}
 	
-	private boolean mergeTurnLanes(boolean leftSide, RouteSegmentResult currentSegment, RouteSegmentResult nextSegment) {
+	private boolean mergeTurnLanes(RouteSegmentResult currentSegment, RouteSegmentResult nextSegment) {
 		MergeTurnLaneTurn active = new MergeTurnLaneTurn(currentSegment);
 		MergeTurnLaneTurn target = new MergeTurnLaneTurn(nextSegment);
 		if (active.activeLen < 2) {
@@ -1157,7 +1158,7 @@ public class RouteResultPreparation {
 	}
 
 
-	private TurnType getTurnInfo(List<RouteSegmentResult> result, int i, boolean leftSide) {
+	private TurnType getTurnInfo(List<RouteSegmentResult> result, int i) {
 		if (i == 0) {
 			return TurnType.valueOf(TurnType.C, false);
 		}
@@ -1168,7 +1169,7 @@ public class RouteResultPreparation {
 		}
 		RouteSegmentResult rr = result.get(i);
 		if (rr.getObject().roundabout()) {
-			return processRoundaboutTurn(result, i, leftSide, prev, rr);
+			return processRoundaboutTurn(result, i, prev, rr);
 		}
 		TurnType t = null;
 		if (prev != null) {
@@ -1181,39 +1182,132 @@ public class RouteResultPreparation {
 			}
 			double mpi = MapUtils.degreesDiff(prev.getBearingEnd(prev.getEndPointIndex(), Math.min(prev.getDistance(), bearingDist)), 
 					rr.getBearingBegin(rr.getStartPointIndex(), Math.min(rr.getDistance(), bearingDist)));
+			boolean clockwise = isClockwise(result);
 			if (mpi >= TURN_DEGREE_MIN) {
 				if (mpi < TURN_DEGREE_MIN) {
 					// Slight turn detection here causes many false positives where drivers would expect a "normal" TL. Best use limit-angle=TURN_DEGREE_MIN, this reduces TSL to the turn-lanes cases.
-					t = TurnType.valueOf(TurnType.TSLL, leftSide);
+					t = TurnType.valueOf(TurnType.TSLL, clockwise);
 				} else if (mpi < 120) {
-					t = TurnType.valueOf(TurnType.TL, leftSide);
-				} else if (mpi < 150 || leftSide) {
-					t = TurnType.valueOf(TurnType.TSHL, leftSide);
+					t = TurnType.valueOf(TurnType.TL, clockwise);
+				} else if (mpi < 150 || mpi > 0) {
+					t = TurnType.valueOf(TurnType.TSHL, clockwise);
 				} else {
-					t = TurnType.valueOf(TurnType.TU, leftSide);
+					t = TurnType.valueOf(TurnType.TU, clockwise);
 				}
 				int[] lanes = getTurnLanesInfo(prev, t.getValue());
 				t.setLanes(lanes);
 			} else if (mpi < -TURN_DEGREE_MIN) {
 				if (mpi > -TURN_DEGREE_MIN) {
-					t = TurnType.valueOf(TurnType.TSLR, leftSide);
+					t = TurnType.valueOf(TurnType.TSLR, clockwise);
 				} else if (mpi > -120) {
-					t = TurnType.valueOf(TurnType.TR, leftSide);
-				} else if (mpi > -150 || !leftSide) {
-					t = TurnType.valueOf(TurnType.TSHR, leftSide);
+					t = TurnType.valueOf(TurnType.TR, clockwise);
+				} else if (mpi > -150 || !clockwise) {
+					t = TurnType.valueOf(TurnType.TSHR, clockwise);
 				} else {
-					t = TurnType.valueOf(TurnType.TRU, leftSide);
+					t = TurnType.valueOf(TurnType.TRU, clockwise);
 				}
 				int[] lanes = getTurnLanesInfo(prev, t.getValue());
 				t.setLanes(lanes);
 			} else {
-				t = attachKeepLeftInfoAndLanes(leftSide, prev, rr);
+				t = attachKeepLeftInfoAndLanes(mpi > 0, prev, rr);
 			}
 			if (t != null) {
 				t.setTurnAngle((float) - mpi);
 			}
 		}
 		return t;
+	}
+	
+	private boolean isClockwise(List<RouteSegmentResult> result) {
+		if (result.isEmpty()) {
+			return true;
+		}
+		LatLon latLon = result.get(0).getStartPoint();
+		double lat = latLon.getLatitude();
+		double lon = 180;
+		double firstLon = -360;
+		boolean firstDirectionUp = false;
+		double previousLon = -360;
+		
+		double clockwiseSum = 0;
+		
+		Point prevP = null;
+		boolean firstSeg = true;
+		
+		for (RouteSegmentResult seg : result) {
+			int startInd = 0;
+			int segSize = seg.getObject().pointsX.length;
+			if (firstSeg && segSize > 0) {
+				prevP = new Point(seg.getObject().pointsX[0], seg.getObject().pointsY[0]);
+				startInd = 1;
+				firstSeg = false;
+			}
+			for (int i = startInd; i < seg.getObject().pointsX.length; i++) {
+				Point nextP = new Point(seg.getObject().pointsX[i], seg.getObject().pointsY[i]);
+				double rlon = 0;
+				if (prevP != null) {
+					rlon = ray_intersect_lon(prevP, nextP, lat, lon);
+				}
+				if (rlon != -360d) {
+					boolean skipSameSide = (prevP.getX() <= lat) == (nextP.getX() <= lat);
+					if (skipSameSide) {
+						continue;
+					}
+					boolean directionUp = prevP.getX() <= lat;
+					if (firstLon == -360) {
+						firstDirectionUp = directionUp;
+						firstLon = rlon;
+					} else {
+						boolean clockwise = (!directionUp) == (previousLon < rlon);
+						if (clockwise) {
+							clockwiseSum += Math.abs(previousLon - rlon);
+						} else {
+							clockwiseSum -= Math.abs(previousLon - rlon);
+						}
+					}
+					previousLon = rlon;
+				}
+				prevP = nextP;
+			}
+		}
+		if (firstLon != -360) {
+			boolean clockwise = (!firstDirectionUp) == (previousLon < firstLon);
+			if (clockwise) {
+				clockwiseSum += Math.abs(previousLon - firstLon);
+			} else {
+				clockwiseSum -= Math.abs(previousLon - firstLon);
+			}
+		}
+		
+		return clockwiseSum >= 0;
+	}
+	
+	private double ray_intersect_lon(Point prevP, Point nextP, double latitude, double longitude) {
+		Point a = prevP.getX() < nextP.getX() ? prevP : nextP;
+		Point b = a == nextP ? prevP : nextP;
+		if (latitude == a.getX() || latitude == b.getX()) {
+			latitude += 0.00000001d;
+		}
+		if (latitude < a.getX() || latitude > b.getX()) {
+			return -360d;
+		} else {
+			if (longitude < Math.min(a.getY(), b.getY())) {
+				return -360d;
+			} else {
+				if (a.getY() == b.getY() && longitude == a.getY()) {
+					// the node on the boundary !!!
+					return longitude;
+				}
+				// that tested on all cases (left/right)
+				double lon = b.getY() - (b.getX() - latitude) * (b.getY() - a.getY())
+						/ (b.getX() - a.getX());
+				if (lon <= longitude) {
+					return lon;
+				} else {
+					return -360d;
+				}
+			}
+		}
 	}
 
 	private int[] getTurnLanesInfo(RouteSegmentResult prevSegm, int mainTurnType) {
@@ -1283,7 +1377,7 @@ public class RouteResultPreparation {
 		return turnSet;
 	}
 
-	private TurnType processRoundaboutTurn(List<RouteSegmentResult> result, int i, boolean leftSide, RouteSegmentResult prev,
+	private TurnType processRoundaboutTurn(List<RouteSegmentResult> result, int i, RouteSegmentResult prev,
 			RouteSegmentResult rr) {
 		int exit = 1;
 		RouteSegmentResult last = rr;
@@ -1313,7 +1407,7 @@ public class RouteResultPreparation {
 			}
 		}
 		// combine all roundabouts
-		TurnType t = TurnType.getExitTurn(exit, 0, leftSide);
+		TurnType t = TurnType.getExitTurn(exit, 0, isClockwise(result));
 		// usually covers more than expected
 		float turnAngleBasedOnOutRoads = (float) MapUtils.degreesDiff(last.getBearingBegin(), prev.getBearingEnd());
 		// Angle based on circle method tries 

@@ -519,7 +519,7 @@ public class RoutePlannerFrontEnd {
 			r.setDescription("");
 		}
 		if (!gctx.ctx.calculationProgress.isCancelled) {
-			preparation.prepareTurnResults(gctx.ctx, gctx.result);
+			preparation.prepareTurnResults(gctx.result);
 		}
 	}
 

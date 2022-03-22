@@ -73,7 +73,6 @@ public class RoutingContext {
 	
 	public RouteCalculationProgress calculationProgress;
 	public RouteCalculationProgress calculationProgressFirstPhase;
-	public boolean leftSideNavigation;
 	public List<RouteSegmentResult> previouslyCalculatedRoute;
 	public PrecalculatedRouteDirection precalculatedRouteDirection;
 	
@@ -109,7 +108,6 @@ public class RoutingContext {
 		this.config = cp.config;
 		this.map.putAll(cp.map);
 		this.calculationMode = cp.calculationMode;
-		this.leftSideNavigation = cp.leftSideNavigation;
 		this.reverseMap.putAll(cp.reverseMap);
 		this.nativeLib = cp.nativeLib;
 		this.visitor = cp.visitor;
