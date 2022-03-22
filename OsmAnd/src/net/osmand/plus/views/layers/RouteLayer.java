@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.core.jni.FColorARGB;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QListFColorARGB;
 import net.osmand.core.jni.QListVectorLine;
@@ -708,6 +709,10 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 			if (collection == null) {
 				collection = new VectorLinesCollection();
+			}
+
+			if (kOutlineColor == null) {
+				kOutlineColor = new FColorARGB(150.0f/255.0f, 0.0f, 0.0f, 0.0f);
 			}
 
 			// Add outline for colorized lines
