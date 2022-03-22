@@ -7,6 +7,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_A
 import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 import static net.osmand.plus.settings.enums.LocationSource.ANDROID_API;
 import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_COMPASS;
 
@@ -776,17 +777,41 @@ public class OsmandSettings {
 	}
 
 	public final CommonPreference<RadiusRulerMode> RADIUS_RULER_MODE = new EnumStringPreference<>(this, "ruler_mode", RadiusRulerMode.FIRST, RadiusRulerMode.values()).makeGlobal().makeShared();
-	public final CommonPreference<Boolean> SHOW_COMPASS = new BooleanPreference(this, "show_compass",
-			true) {
+	public final CommonPreference<Boolean> SHOW_COMPASS_ALWAYS = new BooleanPreference(this, "show_compass_always",
+			false) {
 
 		@Override
-		public Boolean getProfileDefaultValue(ApplicationMode mode) {
-			String visibleControlsString = MAP_INFO_CONTROLS.getModeValue(mode);
-			if (Algorithms.isEmpty(visibleControlsString)) {
+		public Boolean getModeValue(ApplicationMode mode) {
+			boolean defaultValue = mode.isWidgetVisible(WIDGET_COMPASS);
+			List<String> widgetsVisibility = getWidgetsVisibilityInfo(mode);
+			if (widgetsVisibility.contains(WIDGET_COMPASS)) {
 				return true;
+			} else if (widgetsVisibility.contains(HIDE_PREFIX + WIDGET_COMPASS)) {
+				return false;
 			}
-			List<String> visibleControls = Arrays.asList(visibleControlsString.split(SETTINGS_SEPARATOR));
-			return visibleControls.contains(WIDGET_COMPASS);
+			return defaultValue;
+		}
+
+		@Override
+		public boolean setModeValue(ApplicationMode mode, Boolean obj) {
+			List<String> widgetsVisibilityInfo = getWidgetsVisibilityInfo(mode);
+			if (obj != null && obj) {
+				widgetsVisibilityInfo.remove(HIDE_PREFIX + WIDGET_COMPASS);
+				widgetsVisibilityInfo.add(WIDGET_COMPASS);
+			} else {
+				widgetsVisibilityInfo.remove(WIDGET_COMPASS);
+				widgetsVisibilityInfo.add(HIDE_PREFIX + WIDGET_COMPASS);
+			}
+			StringBuilder widgetsVisibilityString = new StringBuilder();
+			for (String widgetVisibility : widgetsVisibilityInfo) {
+				widgetsVisibilityString.append(widgetVisibility).append(SETTINGS_SEPARATOR);
+			}
+			return MAP_INFO_CONTROLS.setModeValue(mode, widgetsVisibilityString.toString());
+		}
+
+		@NonNull
+		private List<String> getWidgetsVisibilityInfo(ApplicationMode appMode) {
+			return new ArrayList<>(Arrays.asList(MAP_INFO_CONTROLS.getModeValue(appMode).split(SETTINGS_SEPARATOR)));
 		}
 	};
 	public final OsmandPreference<Boolean> SHOW_COMPASS_CONTROL_RULER = new BooleanPreference(this, "show_compass_ruler", true).makeGlobal().makeShared();
