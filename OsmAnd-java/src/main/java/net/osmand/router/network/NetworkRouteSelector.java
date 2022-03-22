@@ -70,25 +70,35 @@ public class NetworkRouteSelector {
 	public Map<RouteKey, GPXFile> getRoutes(RenderedObject renderedObject) throws IOException {
 		int x = renderedObject.getX().get(0);
 		int y = renderedObject.getY().get(0);
-		return getRoutes(x, y);
+		return getRoutes(x, y, true);
 	}
-
-	public Map<RouteKey, GPXFile> getRoutes(int x, int y) throws IOException {
+	
+	public Map<RouteKey, GPXFile> getRoutes(RenderedObject renderedObject, boolean loadRoutes) throws IOException {
+		int x = renderedObject.getX().get(0);
+		int y = renderedObject.getY().get(0);
+		return getRoutes(x, y, loadRoutes);
+	}
+	
+	public Map<RouteKey, GPXFile> getRoutes(int x, int y, boolean loadRoutes) throws IOException {
 		Map<RouteKey, GPXFile> res = new LinkedHashMap<RouteKey, GPXUtilities.GPXFile>();
 		for (NetworkRouteSegment segment : rCtx.loadRouteSegment(x, y)) {
 			if (res.containsKey(segment.routeKey)) {
 				continue;
 			}
-			if (GROW_ALGORITHM) {
-				growAlgorithm(segment, res);
+			if (loadRoutes) {
+				if (GROW_ALGORITHM) {
+					growAlgorithm(segment, res);
+				} else {
+					connectAlgorithm(segment, res);
+				}
 			} else {
-				connectAlgorithm(segment, res);
+				res.put(segment.routeKey, null);
 			}
 		}
 		return res;
 	}
 	
-	public Map<RouteKey, GPXFile> getRoutes(QuadRect bBox, boolean loadKeys, RouteKey selected) throws IOException {
+	public Map<RouteKey, GPXFile> getRoutes(QuadRect bBox, boolean loadRoutes, RouteKey selected) throws IOException {
 		int y31T = MapUtils.get31TileNumberY(Math.max(bBox.bottom, bBox.top));
 		int y31B = MapUtils.get31TileNumberY(Math.min(bBox.bottom, bBox.top));
 		int x31L = MapUtils.get31TileNumberX(bBox.left);
@@ -101,7 +111,7 @@ public class NetworkRouteSelector {
 			}
 			List<NetworkRouteSegment> list = res.get(key);
 			if (list.size() > 0) {
-				if (!loadKeys) {
+				if (!loadRoutes) {
 					r.put(key, null);
 				} else {
 					connectAlgorithm(list.get(0), r);
