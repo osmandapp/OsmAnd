@@ -7,8 +7,8 @@ public class CommonWords {
 	private static Map<String, Integer> commonWordsDictionary = new LinkedHashMap<>();
 	private static Map<String, Integer> frequentlyUsedWordsDictionary = new LinkedHashMap<>();
 	
-	// potenitally name of street (31st road)
-	private static String NUMBER_WITHOUT_2_OR_MORE_LETTERS = "NUMBER_WITHOUT_2_OR_MORE_LETTERS";
+	// for ex: 100 bridge, ленина 30, but not potenitally name of street (31st road)
+	private static String NUMBER_WITH_LESS_THAN_2_LETTERS = "NUMBER_WITH_LESS_THAN_2_LETTERS";
 	
 	private static void addCommon(String string) {
 		commonWordsDictionary.put(string, commonWordsDictionary.size());
@@ -28,7 +28,7 @@ public class CommonWords {
 
 	public static int getCommonSearch(String name) {
 		if (Character.isDigit(name.charAt(0)) && letters(name) < 2) {
-			name = NUMBER_WITHOUT_2_OR_MORE_LETTERS;
+			name = NUMBER_WITH_LESS_THAN_2_LETTERS;
 		}
 		Integer i = commonWordsDictionary.get(name);
 		// higher means better for search
@@ -910,7 +910,7 @@ public class CommonWords {
 		addCommon("viale");
 		addCommon("loop");
 		
-		addCommon(NUMBER_WITHOUT_2_OR_MORE_LETTERS);
+		addCommon(NUMBER_WITH_LESS_THAN_2_LETTERS);
 
 		addCommon("bridge");
 		addCommon("embankment");
