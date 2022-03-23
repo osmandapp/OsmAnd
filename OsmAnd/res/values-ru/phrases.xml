@@ -3533,9 +3533,9 @@
     <string name="poi_rtsa_scale_3b_asterisk">3Б*</string>
     <string name="poi_change_delete">Удаленный объект</string>
     <string name="poi_health_specialty_radiotherapy_yes">Радиотерапия</string>
-    <string name="poi_changing_table_yes">Пеленальный стол: да</string>
-    <string name="poi_changing_table_no">Пеленальный стол: нет</string>
-    <string name="poi_changing_table_limited">Пеленальный стол: ограничено</string>
+    <string name="poi_changing_table_yes">Есть;Пеленальный стол: есть</string>
+    <string name="poi_changing_table_no">Нет;Пеленальный стол: нет</string>
+    <string name="poi_changing_table_limited">Ограничено;Пеленальный стол: ограничено</string>
     <string name="poi_changing_table_location_room">Местоположение пеленального стола: комната</string>
     <string name="poi_changing_table_location_male_toilet">Местоположение пеленального стола: мужской туалет</string>
     <string name="poi_changing_table_location_female_toilet">Местоположение пеленального стола: женский туалет</string>
@@ -3716,7 +3716,7 @@
     <string name="poi_traffic_signals_sound_locate">Только если разрешена ходьба</string>
     <string name="poi_drinking_water_refill_network">Сеть заправки питьевой воды</string>
     <string name="poi_drinking_water_refill_no">Заправка питьевой водой: нет</string>
-    <string name="poi_drinking_water_refill_yes">Да</string>
+    <string name="poi_drinking_water_refill_yes">Да;Пополнение питьевой воды; Пополнение</string>
     <string name="poi_socket_type3_yes">Тип 3</string>
     <string name="poi_socket_type2_combo_yes">Тип 2 комбинированный</string>
     <string name="poi_socket_type2_yes">Тип 2</string>
@@ -4038,7 +4038,7 @@
     <string name="poi_agrarian_agricultural_machinery">Сельскохозяйственная техника</string>
     <string name="poi_agrarian_yes">Есть</string>
     <string name="poi_heating_radiator">Радиатор</string>
-    <string name="poi_fridge_yes">Есть</string>
+    <string name="poi_fridge_yes">Есть;Холодильник</string>
     <string name="poi_fridge_no">Нет</string>
     <string name="poi_fumarole">Фумарола</string>
     <string name="poi_glacier_status_marked_retreat">Состояние ледника: заметное отступление</string>
@@ -4085,8 +4085,8 @@
     <string name="poi_mattress_no">Нет</string>
     <string name="poi_furniture_office">Офис</string>
     <string name="poi_furniture_no">Нет</string>
-    <string name="poi_furniture_sofa">Диван</string>
-    <string name="poi_furniture_bed">Кровать</string>
+    <string name="poi_furniture_sofa">Диван;Мебель</string>
+    <string name="poi_furniture_bed">Кровать;Мебель</string>
     <string name="poi_furniture_living_room">Гостиная</string>
     <string name="poi_furniture_kitchen">Кухня</string>
     <string name="poi_furniture_bedroom">Спальня</string>
@@ -4115,8 +4115,8 @@
     <string name="poi_generator_type_redox_flow">Тип генератора: окислительно-восстановительный проточный</string>
     <string name="poi_heating_gas">Газ</string>
     <string name="poi_computer_sales_yes">Есть</string>
-    <string name="poi_computer_repair_yes">Есть</string>
-    <string name="poi_computer_parts_yes">Есть</string>
+    <string name="poi_computer_repair_yes">Есть;Ремонт компьютеров</string>
+    <string name="poi_computer_parts_yes">Есть;Компьютерные комплектующие</string>
     <string name="poi_computer_parts_no">Комплектующие для ПК: нет</string>
     <string name="poi_escape_game">Квест в реальности</string>
     <string name="poi_generator_method_combustion">Метод генерации: сжигание</string>
@@ -4137,8 +4137,8 @@
     <string name="poi_generator_type_molten_salt">Тип генератора: жидкосолевой</string>
     <string name="poi_mattress_yes">Есть</string>
     <string name="poi_heating_fireplace">Камин</string>
-    <string name="poi_furniture_yes">Есть</string>
-    <string name="poi_heating_yes">Есть</string>
+    <string name="poi_furniture_yes">Есть;Мебель</string>
+    <string name="poi_heating_yes">Есть;Отопление</string>
     <string name="poi_heating_no">Нет</string>
     <string name="poi_massage_chiropractic">Хиропрактика</string>
     <string name="poi_generator_source_tidal">Источник энергии: прилив</string>
@@ -4288,4 +4288,18 @@
     <string name="poi_medical_supply_respiratory">Респираторные средства</string>
     <string name="poi_hairdresser_supply">Магазин парикмахерских принадлежностей</string>
     <string name="poi_landuse_education">Образование</string>
+    <string name="poi_changing_table_filter">Пеленальный столик</string>
+    <string name="poi_shop_fuel">Магазин топлива</string>
+    <string name="poi_printer_ink">Магазин чернил для принтера</string>
+    <string name="poi_water_sports">Магазин водных видов спорта</string>
+    <string name="poi_payment_girocard_contactless_yes">Girocard</string>
+    <string name="poi_payment_maestro_contactless_yes">Бесконтактный Maestro</string>
+    <string name="poi_payment_mastercard_contactless_yes">Бесконтактный MasterCard</string>
+    <string name="poi_payment_visa_contactless_yes">Бесконтактная Visa</string>
+    <string name="poi_payment_girocard_contactless_no">Бесконтактный Girocard не принимается</string>
+    <string name="poi_payment_visa_contactless_no">Бесконтактная Visa не принимается</string>
+    <string name="poi_payment_american_express_contactless_yes">Бесконтактный American Express (AMEX)</string>
+    <string name="poi_payment_american_express_contactless_no">Бесконтактный American Express (AMEX) не принимается</string>
+    <string name="poi_payment_mastercard_contactless_no">Бесконтактный MasterCard не принимается</string>
+    <string name="poi_payment_maestro_contactless_no">Бесконтактный Maestro не принимается</string>
 </resources>

@@ -5,7 +5,7 @@
     <string name="poi_emergency">Emergencia</string>
     <string name="poi_transportation">Transporte</string>
     <string name="poi_road_obstacle">Obstáculo de carretera;Obstáculo en el camino</string>
-    <string name="poi_filling_station">Gasolinera;Estación de servicio</string>
+    <string name="poi_filling_station">Gasolinera;Estación de servicio;Estación de combustible;Servicentro;Bencinera;Bomba</string>
     <string name="poi_personal_transport">Transporte particular</string>
     <string name="poi_public_transport">Transporte público</string>
     <string name="poi_air_transport">Transporte aéreo</string>
@@ -163,7 +163,7 @@
     <string name="poi_service_tyres">Neumáticos</string>
     <string name="poi_vehicle_inspection">Inspección de vehículos</string>
     <string name="poi_car_wash">Lavadero de automóviles</string>
-    <string name="poi_fuel">Gasolinera;Estación de servicio;Estación de combustible;Servicentro;Bencinera</string>
+    <string name="poi_fuel">Gasolinera;Estación de servicio;Estación de combustible;Servicentro;Bencinera;Bomba</string>
     <string name="poi_fuel_diesel">Diésel (Euro);Infinia Diesel;V-Power Nitro+ Diesel;Euro+ Diesel;Podium</string>
     <string name="poi_fuel_gtl_diesel">Diésel GTL</string>
     <string name="poi_fuel_hgv_diesel">Diésel de vehículos pesados</string>

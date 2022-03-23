@@ -437,4 +437,8 @@
 	<dimen name="radius_normal">6dp</dimen>
 	<dimen name="radius_small">3dp</dimen>
 	<dimen name="radius_large">9dp</dimen>
+	<dimen name="radius_double_large">18dp</dimen>
+
+	<dimen name="bottom_space_height">160dp</dimen>
+
 </resources>

@@ -117,6 +117,7 @@ import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
 import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
 import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
+import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenFragment;
 import net.osmand.plus.wikivoyage.WikivoyageWelcomeDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
@@ -779,8 +780,8 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 				.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
 					app.logEvent("drawer_config_screen_open");
 					MapActivity.clearPrevActivityIntent();
-					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN, viewCoordinates);
-					return false;
+					ConfigureScreenFragment.showInstance(mapActivity);
+					return true;
 				}));
 
 		optionsMenuHelper.addItem(new ContextMenuItem(DRAWER_PLUGINS_ID)

@@ -1,86 +1,54 @@
 package net.osmand.plus.views.mapwidgets;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import net.osmand.Location;
+import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.OsmAndLocationProvider.GPSInfo;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.actions.StartGPSStatus;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.util.MapUtils;
+
+import java.util.Iterator;
+import java.util.LinkedList;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
-import com.google.android.material.snackbar.Snackbar;
-import com.jwetherell.openmap.common.LatLonPoint;
-import com.jwetherell.openmap.common.MGRSPoint;
-import com.jwetherell.openmap.common.UTMPoint;
-
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.Location;
-import net.osmand.LocationConvert;
-import net.osmand.PlatformUtil;
-import net.osmand.binary.BinaryMapRouteReaderAdapter;
-import net.osmand.binary.RouteDataObject;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.helpers.CurrentPositionHelper;
-import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.OsmAndLocationProvider;
-import net.osmand.plus.OsmAndLocationProvider.GPSInfo;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.actions.StartGPSStatus;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.WaypointDialogHelper;
-import net.osmand.plus.helpers.WaypointHelper;
-import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
-import net.osmand.plus.mapcontextmenu.other.ShareMenu;
-import net.osmand.plus.render.OsmandRenderer;
-import net.osmand.plus.render.TextRenderer;
-import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
-import net.osmand.plus.routepreparationmenu.ShowAlongTheRouteBottomSheet;
-import net.osmand.plus.routing.CurrentStreetName;
-import net.osmand.plus.routing.RouteCalculationResult;
-import net.osmand.plus.routing.RouteDirectionInfo;
-import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.routing.RoutingHelperUtils;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
-import net.osmand.render.RenderingRuleSearchRequest;
-import net.osmand.render.RenderingRulesStorage;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
-
-import org.apache.commons.logging.Log;
-
-import java.util.Iterator;
-import java.util.LinkedList;
-
 public class MapInfoWidgetsFactory {
+
+	private final OsmandApplication app;
+	private final OsmAndLocationProvider locationProvider;
+
+	public MapInfoWidgetsFactory(@NonNull OsmandApplication app) {
+		this.app = app;
+		this.locationProvider = app.getLocationProvider();
+	}
+
 	public enum TopToolbarControllerType {
 		QUICK_SEARCH,
 		CONTEXT_MENU,
@@ -91,33 +59,29 @@ public class MapInfoWidgetsFactory {
 		DOWNLOAD_MAP
 	}
 
-	public TextInfoWidget createAltitudeControl(final MapActivity map) {
-		final TextInfoWidget altitudeControl = new TextInfoWidget(map) {
+	public TextInfoWidget createAltitudeControl(@NonNull MapActivity mapActivity) {
+		TextInfoWidget altitudeControl = new RightTextInfoWidget(mapActivity) {
 			private int cachedAlt = 0;
 
 			@Override
-			public boolean updateInfo(DrawSettings d) {
-				// draw speed
-				Location loc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
+			public void updateInfo(@Nullable DrawSettings drawSettings) {
+				Location loc = locationProvider.getLastKnownLocation();
 				if (loc != null && loc.hasAltitude()) {
 					double compAlt = loc.getAltitude();
 					if (isUpdateNeeded() || cachedAlt != (int) compAlt) {
 						cachedAlt = (int) compAlt;
-						String ds = OsmAndFormatter.getFormattedAlt(cachedAlt, map.getMyApplication());
+						String ds = OsmAndFormatter.getFormattedAlt(cachedAlt, app);
 						int ls = ds.lastIndexOf(' ');
 						if (ls == -1) {
 							setText(ds, null);
 						} else {
 							setText(ds.substring(0, ls), ds.substring(ls + 1));
 						}
-						return true;
 					}
 				} else if (cachedAlt != 0) {
 					cachedAlt = 0;
 					setText(null, null);
-					return true;
 				}
-				return false;
 			}
 
 			@Override
@@ -130,47 +94,40 @@ public class MapInfoWidgetsFactory {
 		return altitudeControl;
 	}
 
-	public TextInfoWidget createGPSInfoControl(final MapActivity map) {
-		final OsmandApplication app = map.getMyApplication();
-		final OsmAndLocationProvider loc = app.getLocationProvider();
-		final TextInfoWidget gpsInfoControl = new TextInfoWidget(map) {
-			private int u = -1;
-			private int f = -1;
+	public TextInfoWidget createGPSInfoControl(@NonNull MapActivity mapActivity) {
+		TextInfoWidget gpsInfoControl = new RightTextInfoWidget(mapActivity) {
+			private int usedSatellites = -1;
+			private int foundSatellites = -1;
 
 			@Override
-			public boolean updateInfo(DrawSettings d) {
-				GPSInfo gpsInfo = loc.getGPSInfo();
-				if (isUpdateNeeded() || gpsInfo.usedSatellites != u || gpsInfo.foundSatellites != f) {
-					u = gpsInfo.usedSatellites;
-					f = gpsInfo.foundSatellites;
+			public void updateInfo(@Nullable DrawSettings drawSettings) {
+				GPSInfo gpsInfo = locationProvider.getGPSInfo();
+				if (isUpdateNeeded()
+						|| gpsInfo.usedSatellites != usedSatellites
+						|| gpsInfo.foundSatellites != foundSatellites) {
+					usedSatellites = gpsInfo.usedSatellites;
+					foundSatellites = gpsInfo.foundSatellites;
 					setText(gpsInfo.usedSatellites + "/" + gpsInfo.foundSatellites, "");
-					return true;
 				}
-				return false;
 			}
 		};
 		gpsInfoControl.setIcons(R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night);
 		gpsInfoControl.setText(null, null);
-		gpsInfoControl.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				new StartGPSStatus(map).run();
-			}
-		});
+		gpsInfoControl.setOnClickListener(view -> new StartGPSStatus(mapActivity).run());
 		return gpsInfoControl;
 	}
 
-	public TextInfoWidget createRadiusRulerControl(final MapActivity map) {
+	public TextInfoWidget createRadiusRulerControl(@NonNull MapActivity mapActivity) {
 		final String title = "—";
-		final TextInfoWidget radiusRulerControl = new TextInfoWidget(map) {
+		final TextInfoWidget radiusRulerControl = new RightTextInfoWidget(mapActivity) {
 
 			@Override
-			public boolean updateInfo(DrawSettings drawSettings) {
-				Location currentLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
-				LatLon centerLoc = map.getMapLocation();
+			public void updateInfo(@Nullable DrawSettings drawSettings) {
+				Location currentLoc = locationProvider.getLastKnownLocation();
+				LatLon centerLoc = mapActivity.getMapLocation();
 
 				if (currentLoc != null && centerLoc != null) {
-					if (map.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
+					if (mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
 						setDistanceText(0);
 					} else {
 						setDistanceText(currentLoc.getLatitude(), currentLoc.getLongitude(),
@@ -179,7 +136,6 @@ public class MapInfoWidgetsFactory {
 				} else {
 					setText(title, null);
 				}
-				return true;
 			}
 
 			private void setDistanceText(float dist) {
@@ -192,18 +148,18 @@ public class MapInfoWidgetsFactory {
 			}
 
 			private void calculateAndSetText(float dist) {
-				String distance = OsmAndFormatter.getFormattedDistance(dist, map.getMyApplication());
+				String distance = OsmAndFormatter.getFormattedDistance(dist, app);
 				int ls = distance.lastIndexOf(' ');
 				setText(distance.substring(0, ls), distance.substring(ls + 1));
 			}
 		};
 
 		radiusRulerControl.setText(title, null);
-		setRulerControlIcon(radiusRulerControl, map.getMyApplication().getSettings().RADIUS_RULER_MODE.get());
+		setRulerControlIcon(radiusRulerControl, app.getSettings().RADIUS_RULER_MODE.get());
 		radiusRulerControl.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				final RadiusRulerMode mode = map.getMyApplication().getSettings().RADIUS_RULER_MODE.get();
+				final RadiusRulerMode mode = app.getSettings().RADIUS_RULER_MODE.get();
 				RadiusRulerMode newMode = RadiusRulerMode.FIRST;
 				if (mode == RadiusRulerMode.FIRST) {
 					newMode = RadiusRulerMode.SECOND;
@@ -211,8 +167,8 @@ public class MapInfoWidgetsFactory {
 					newMode = RadiusRulerMode.EMPTY;
 				}
 				setRulerControlIcon(radiusRulerControl, newMode);
-				map.getMyApplication().getSettings().RADIUS_RULER_MODE.set(newMode);
-				map.refreshMap();
+				app.getSettings().RADIUS_RULER_MODE.set(newMode);
+				mapActivity.refreshMap();
 			}
 		});
 
@@ -681,7 +637,7 @@ public class MapInfoWidgetsFactory {
 				}
 			}
 			controllers.add(controller);
-			map.getMapLayers().getMapMarkersLayer().getWidgetsFactory().updateInfo(null, map.getMapView().getZoom());
+			map.getMapLayers().getMapMarkersLayer().getMarkersWidgetsHelper().setCustomLatLon(null);
 			updateColors();
 			updateInfo();
 		}
@@ -837,484 +793,6 @@ public class MapInfoWidgetsFactory {
 				controller.nightMode = nightMode;
 			}
 			updateColors();
-		}
-	}
-
-	public static class TopTextView {
-		private final RoutingHelper routingHelper;
-		private final MapActivity map;
-		private final View topBar;
-		private final TextView addressText;
-		private final TextView addressTextShadow;
-		private final TextView exitRefText;
-		private final ImageView shieldIcon;
-		private final ImageView turnIcon;
-		private final OsmAndLocationProvider locationProvider;
-		private WaypointHelper waypointHelper;
-		private OsmandSettings settings;
-		private View waypointInfoBar;
-		private LocationPointWrapper lastPoint;
-		private TurnDrawable turnDrawable;
-		private int shadowRad;
-		RouteCalculationResult.NextDirectionInfo calc1;
-
-		private static final Log LOG = PlatformUtil.getLog(TopTextView.class);
-		private boolean showMarker;
-
-		public TopTextView(OsmandApplication app, MapActivity map) {
-			turnDrawable = new TurnDrawable(map, true);
-			topBar = map.findViewById(R.id.map_top_bar);
-			addressText = (TextView) map.findViewById(R.id.map_address_text);
-			addressTextShadow = (TextView) map.findViewById(R.id.map_address_text_shadow);
-			waypointInfoBar = map.findViewById(R.id.waypoint_info_bar);
-			exitRefText = map.findViewById(R.id.map_exit_ref);
-			shieldIcon = map.findViewById(R.id.map_shield_icon);
-			turnIcon = map.findViewById(R.id.map_turn_icon);
-			this.routingHelper = app.getRoutingHelper();
-			locationProvider = app.getLocationProvider();
-			this.map = map;
-			settings = app.getSettings();
-			waypointHelper = app.getWaypointHelper();
-			updateVisibility(false);
-			calc1 = new RouteCalculationResult.NextDirectionInfo();
-		}
-
-		public boolean updateVisibility(boolean visible) {
-			boolean res = AndroidUiHelper.updateVisibility(topBar, visible);
-			if (res) {
-				map.updateStatusBarColor();
-			}
-			return res;
-		}
-
-		public void updateTextColor(boolean nightMode, int textColor, int textShadowColor, boolean bold, int rad) {
-			this.shadowRad = rad;
-			TextInfoWidget.updateTextColor(addressText, addressTextShadow, textColor, textShadowColor, bold, rad);
-			TextInfoWidget.updateTextColor((TextView) waypointInfoBar.findViewById(R.id.waypoint_text),
-					(TextView) waypointInfoBar.findViewById(R.id.waypoint_text_shadow),
-					textColor, textShadowColor, bold, rad / 2);
-			exitRefText.setTextColor(nightMode ?
-					map.getResources().getColor(R.color.text_color_primary_dark) :
-					map.getResources().getColor(R.color.color_white));
-
-			ImageView all = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_more);
-			ImageView remove = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_close);
-			all.setImageDrawable(map.getMyApplication().getUIUtilities()
-					.getIcon(R.drawable.ic_overflow_menu_white, !nightMode));
-			remove.setImageDrawable(map.getMyApplication().getUIUtilities()
-					.getIcon(R.drawable.ic_action_remove_dark, !nightMode));
-		}
-
-
-		public boolean updateInfo(DrawSettings d) {
-			CurrentStreetName streetName = null;
-			boolean showClosestWaypointFirstInAddress = true;
-			if (routingHelper != null && routingHelper.isRouteCalculated() && !routingHelper.isDeviatedFromRoute()) {
-				if (routingHelper.isFollowingMode()) {
-					if (settings.SHOW_STREET_NAME.get()) {
-						RouteCalculationResult.NextDirectionInfo nextDirInfo = routingHelper.getNextRouteDirectionInfo(calc1, true);
-						streetName = routingHelper.getCurrentName(nextDirInfo);
-						turnDrawable.setColor(R.color.nav_arrow);
-					}
-				} else {
-					int di = MapRouteInfoMenu.getDirectionInfo();
-					if (di >= 0 && map.getMapRouteInfoMenu().isVisible() && di < routingHelper.getRouteDirections().size()) {
-						showClosestWaypointFirstInAddress = false;
-						RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
-						streetName = routingHelper.getCurrentName(routingHelper.getNextRouteDirectionInfo(calc1, true));
-						turnDrawable.setColor(R.color.nav_arrow_distant);
-					}
-				}
-			} else if (map.getMapViewTrackingUtilities().isMapLinkedToLocation() &&
-					settings.SHOW_STREET_NAME.get()) {
-				streetName = new CurrentStreetName();
-				RouteDataObject rt = locationProvider.getLastKnownRouteSegment();
-				if (rt != null) {
-					Location lastKnownLocation = locationProvider.getLastKnownLocation();
-					streetName.text = RoutingHelperUtils.formatStreetName(
-							rt.getName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get()),
-							rt.getRef(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(lastKnownLocation)),
-							rt.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(lastKnownLocation)),
-							"»");
-					if (!Algorithms.isEmpty(streetName.text) && lastKnownLocation != null) {
-						double dist = CurrentPositionHelper.getOrthogonalDistance(rt, lastKnownLocation);
-						if (dist < 50) {
-							streetName.showMarker = true;
-						} else {
-							streetName.text = map.getResources().getString(R.string.shared_string_near) + " " + streetName.text;
-						}
-					}
-				}
-			}
-			if (map.isTopToolbarActive() || map.shouldHideTopControls() || MapRouteInfoMenu.chooseRoutesVisible || MapRouteInfoMenu.waypointsVisible) {
-				updateVisibility(false);
-			} else if (showClosestWaypointFirstInAddress && updateWaypoint()) {
-				updateVisibility(true);
-				AndroidUiHelper.updateVisibility(addressText, false);
-				AndroidUiHelper.updateVisibility(addressTextShadow, false);
-				AndroidUiHelper.updateVisibility(turnIcon, false);
-				AndroidUiHelper.updateVisibility(shieldIcon, false);
-				AndroidUiHelper.updateVisibility(exitRefText, false);
-			} else if (streetName == null) {
-				updateVisibility(false);
-			} else {
-				updateVisibility(true);
-				AndroidUiHelper.updateVisibility(waypointInfoBar, false);
-				AndroidUiHelper.updateVisibility(addressText, true);
-				AndroidUiHelper.updateVisibility(addressTextShadow, shadowRad > 0);
-
-				if (streetName.shieldObject != null && streetName.shieldObject.nameIds != null
-						&& setRoadShield(shieldIcon, streetName.shieldObject)) {
-					AndroidUiHelper.updateVisibility(shieldIcon, true);
-					int indexOf = streetName.text.indexOf("»");
-					if (indexOf > 0) {
-						streetName.text = streetName.text.substring(indexOf);
-					}
-				} else {
-					AndroidUiHelper.updateVisibility(shieldIcon, false);
-				}
-
-				if (!Algorithms.isEmpty(streetName.exitRef)) {
-					exitRefText.setText(streetName.exitRef);
-					AndroidUiHelper.updateVisibility(exitRefText, true);
-				} else {
-					AndroidUiHelper.updateVisibility(exitRefText, false);
-				}
-				if (turnDrawable.setTurnType(streetName.turnType) || streetName.showMarker != this.showMarker) {
-					this.showMarker = streetName.showMarker;
-					if (streetName.turnType != null) {
-						turnIcon.invalidateDrawable(turnDrawable);
-						turnIcon.setImageDrawable(turnDrawable);
-						AndroidUiHelper.updateVisibility(turnIcon, true);
-					} else if (streetName.showMarker) {
-						Drawable marker = map.getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_start_navigation, R.color.color_myloc_distance);
-						turnIcon.setImageDrawable(marker);
-						AndroidUiHelper.updateVisibility(turnIcon, true);
-					} else {
-						AndroidUiHelper.updateVisibility(turnIcon, false);
-					}
-				}
-				if (streetName.text == null || streetName.text.isEmpty()) {
-					addressTextShadow.setText("");
-					addressText.setText("");
-				} else if (!streetName.text.equals(addressText.getText().toString())) {
-					addressTextShadow.setText(streetName.text);
-					addressText.setText(streetName.text);
-					return true;
-				}
-			}
-			return false;
-		}
-
-		private boolean setRoadShield(ImageView view, RouteDataObject object) {
-			StringBuilder additional = new StringBuilder();
-			for (int i = 0; i < object.nameIds.length; i++) {
-				String key = object.region.routeEncodingRules.get(object.nameIds[i]).getTag();
-				String val = object.names.get(object.nameIds[i]);
-				if (!key.endsWith("_ref") && !key.startsWith("route_road")) {
-					additional.append(key).append("=").append(val).append(";");
-				}
-			}
-			for (int i = 0; i < object.nameIds.length; i++) {
-				String key = object.region.routeEncodingRules.get(object.nameIds[i]).getTag();
-				String val = object.names.get(object.nameIds[i]);
-				if (key.startsWith("route_road") && key.endsWith("_ref")) {
-					boolean visible = setRoadShield(view, object, key, val, additional);
-					if (visible) {
-						return true;
-					}
-				}
-			}
-			return false;
-		}
-
-		private boolean setRoadShield(ImageView view, RouteDataObject object, String nameTag, String name, StringBuilder additional) {
-
-			Context context = topBar.getContext();
-			int[] tps = object.getTypes();
-			OsmandApplication app = ((OsmandApplication) context.getApplicationContext());
-			RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
-			boolean nightMode = app.getDaynightHelper().isNightMode();
-			RenderingRuleSearchRequest rreq = map.getMyApplication().getResourceManager()
-					.getRenderer().getSearchRequestWithAppliedCustomRules(storage, nightMode);
-
-			for (int i : tps) {
-				BinaryMapRouteReaderAdapter.RouteTypeRule tp = object.region.quickGetEncodingRule(i);
-				if (tp.getTag().equals("highway") || tp.getTag().equals("route")) {
-					rreq.setInitialTagValueZoom(tp.getTag(), tp.getValue(), 13, null);
-				} else {
-					additional.append(tp.getTag()).append("=").append(tp.getValue()).append(";");
-				}
-			}
-
-			rreq.setIntFilter(rreq.ALL.R_TEXT_LENGTH, name.length());
-			rreq.setStringFilter(rreq.ALL.R_NAME_TAG, nameTag);
-			rreq.setStringFilter(rreq.ALL.R_ADDITIONAL, additional.toString());
-			rreq.search(RenderingRulesStorage.TEXT_RULES);
-
-			OsmandRenderer.RenderingContext rc = new OsmandRenderer.RenderingContext(context);
-
-			TextRenderer textRenderer = new TextRenderer(context);
-			TextRenderer.TextDrawInfo text = new TextRenderer.TextDrawInfo(name);
-
-
-			Paint p = textRenderer.getPaintText();
-			p.setTypeface(Typeface.create("Droid Serif", Typeface.BOLD));
-
-			int shieldRes = -1;
-
-			if (rreq.isSpecified(rreq.ALL.R_TEXT_SHIELD)) {
-				text.setShieldResIcon(rreq.getStringPropertyValue(rreq.ALL.R_TEXT_SHIELD));
-				shieldRes = app.getResources().getIdentifier("h_" + text.getShieldResIcon(),
-						"drawable", app.getPackageName());
-			}
-
-			if (rreq.isSpecified(rreq.ALL.R_TEXT_COLOR)) {
-				p.setColor(rreq.getIntPropertyValue(rreq.ALL.R_TEXT_COLOR));
-			}
-
-			if (rreq.isSpecified(rreq.ALL.R_TEXT_SIZE)) {
-				float ts = rreq.getFloatPropertyValue(rreq.ALL.R_TEXT_SIZE);
-				textRenderer.getPaintText().setTextSize(
-						TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, ts,
-								app.getResources().getDisplayMetrics()));
-			}
-
-			if (shieldRes != -1) {
-				Drawable shield = AppCompatResources.getDrawable(view.getContext(), shieldRes);
-				if (shield == null) {
-					return false;
-				}
-				float xSize = shield.getIntrinsicWidth();
-				float ySize = shield.getIntrinsicHeight();
-				float xyRatio = xSize / ySize;
-				//setting view propotions (height is fixed by toolbar size - 48dp);
-				int viewHeightPx = AndroidUtils.dpToPx(context, 48);
-				int viewWidthPx = (int) (viewHeightPx * xyRatio);
-
-				ViewGroup.LayoutParams params = view.getLayoutParams();
-				params.width = viewWidthPx;
-				view.setLayoutParams(params);
-
-				//creating bitmap according to size of resource
-				Bitmap bitmap = Bitmap.createBitmap((int) xSize, (int) ySize, Bitmap.Config.ARGB_8888);
-				Canvas canvas = new Canvas(bitmap);
-				text.fillProperties(rc, rreq, xSize / 2f, ySize / 2f - p.getFontMetrics().ascent / 2f);
-				textRenderer.drawShieldIcon(rc, canvas, text, text.getShieldResIcon());
-				textRenderer.drawWrappedText(canvas, text, 20f);
-
-				view.setImageBitmap(bitmap);
-				return true;
-			}
-			return false;
-		}
-
-		public boolean updateWaypoint() {
-			final LocationPointWrapper pnt = waypointHelper.getMostImportantLocationPoint(null);
-			boolean changed = this.lastPoint != pnt;
-			this.lastPoint = pnt;
-			if (pnt == null) {
-				topBar.setOnClickListener(null);
-				AndroidUiHelper.updateVisibility(waypointInfoBar, false);
-				return false;
-			} else {
-				AndroidUiHelper.updateVisibility(addressText, false);
-				AndroidUiHelper.updateVisibility(addressTextShadow, false);
-				boolean updated = AndroidUiHelper.updateVisibility(waypointInfoBar, true);
-				// pass top bar to make it clickable
-				WaypointDialogHelper.updatePointInfoView(map.getMyApplication(), map, topBar, pnt, true,
-						map.getMyApplication().getDaynightHelper().isNightModeForMapControls(), false, true);
-				if (updated || changed) {
-					ImageView all = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_more);
-					ImageView remove = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_close);
-					all.setOnClickListener(new OnClickListener() {
-						@Override
-						public void onClick(View view) {
-							map.hideContextAndRouteInfoMenues();
-							ShowAlongTheRouteBottomSheet fragment = new ShowAlongTheRouteBottomSheet();
-							Bundle args = new Bundle();
-							args.putInt(ShowAlongTheRouteBottomSheet.EXPAND_TYPE_KEY, pnt.type);
-							fragment.setArguments(args);
-							fragment.setUsedOnMap(true);
-							fragment.show(map.getSupportFragmentManager(), ShowAlongTheRouteBottomSheet.TAG);
-						}
-					});
-					remove.setOnClickListener(new OnClickListener() {
-						@Override
-						public void onClick(View view) {
-							waypointHelper.removeVisibleLocationPoint(pnt);
-							map.refreshMap();
-						}
-					});
-				}
-				return true;
-			}
-		}
-
-		public void setBackgroundResource(int boxTop) {
-			topBar.setBackgroundResource(boxTop);
-		}
-
-	}
-
-	public static class TopCoordinatesView {
-		private final MapActivity map;
-		private OsmandSettings settings;
-		private UiUtilities iconsCache;
-
-		private OsmAndLocationProvider locationProvider;
-		private View topBar;
-		private View coordinatesRow;
-		private View latCoordinatesContainer;
-		private View lonCoordinatesContainer;
-		private TextView latitudeText;
-		private TextView longitudeText;
-		private ImageView latitudeIcon;
-		private ImageView longitudeIcon;
-		private View coordinatesDivider;
-
-		private Location lastKnownLocation;
-		private boolean nightMode;
-
-		public TopCoordinatesView(OsmandApplication app, MapActivity map) {
-			topBar = map.findViewById(R.id.coordinates_top_bar);
-			coordinatesRow = (LinearLayout) map.findViewById(R.id.coordinates_row);
-			latCoordinatesContainer = (LinearLayout) map.findViewById(R.id.lat_coordinates_container);
-			lonCoordinatesContainer = (LinearLayout) map.findViewById(R.id.lon_coordinates_container);
-			latitudeText = (TextView) map.findViewById(R.id.lat_coordinates);
-			longitudeText = (TextView) map.findViewById(R.id.lon_coordinates);
-			latitudeIcon = (ImageView) map.findViewById(R.id.lat_icon);
-			longitudeIcon = (ImageView) map.findViewById(R.id.lon_icon);
-			coordinatesDivider = map.findViewById(R.id.coordinates_divider);
-			this.map = map;
-			settings = app.getSettings();
-			iconsCache = app.getUIUtilities();
-			locationProvider = app.getLocationProvider();
-			updateVisibility(false);
-			coordinatesRow.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (lastKnownLocation != null) {
-						String coordinates = latitudeText.getText().toString();
-						if (lonCoordinatesContainer.getVisibility() == View.VISIBLE) {
-							coordinates += ", " + longitudeText.getText().toString();
-						}
-						copyToClipboard(coordinates);
-					}
-				}
-			});
-			AndroidUtils.setTextDirection(latitudeText, false);
-			AndroidUtils.setTextDirection(longitudeText, false);
-		}
-
-		@SuppressLint("SetTextI18n")
-		public boolean updateInfo() {
-			boolean visible = map.getWidgetsVisibilityHelper().shouldShowTopCoordinatesWidget();
-			updateVisibility(visible);
-			if (visible) {
-				lastKnownLocation = locationProvider.getLastKnownLocation();
-				if (lastKnownLocation != null) {
-					int f = settings.COORDINATES_FORMAT.get();
-					double lat = lastKnownLocation.getLatitude();
-					double lon = lastKnownLocation.getLongitude();
-
-					if (f == PointDescription.UTM_FORMAT) {
-						AndroidUiHelper.updateVisibility(lonCoordinatesContainer, false);
-						AndroidUiHelper.updateVisibility(coordinatesDivider, false);
-						AndroidUiHelper.updateVisibility(latitudeIcon, true);
-						latitudeIcon.setImageDrawable(iconsCache.getIcon(nightMode ? R.drawable.widget_coordinates_utm_night : R.drawable.widget_coordinates_utm_day));
-						UTMPoint pnt = new UTMPoint(new LatLonPoint(lat, lon));
-						String utmLocation = pnt.zone_number + "" + pnt.zone_letter + " " + ((long) pnt.easting) + " " + ((long) pnt.northing);
-						latitudeText.setText(utmLocation);
-					} else if (f == PointDescription.MGRS_FORMAT) {
-						AndroidUiHelper.updateVisibility(lonCoordinatesContainer, false);
-						AndroidUiHelper.updateVisibility(coordinatesDivider, false);
-						AndroidUiHelper.updateVisibility(latitudeIcon, true);
-						latitudeIcon.setImageDrawable(iconsCache.getIcon(nightMode ? R.drawable.widget_coordinates_utm_night : R.drawable.widget_coordinates_utm_day));
-						MGRSPoint pnt = new MGRSPoint(new LatLonPoint(lat, lon));
-						latitudeText.setText(pnt.toFlavoredString(5));
-					} else if (f == PointDescription.OLC_FORMAT) {
-						AndroidUiHelper.updateVisibility(lonCoordinatesContainer, false);
-						AndroidUiHelper.updateVisibility(coordinatesDivider, false);
-						AndroidUiHelper.updateVisibility(latitudeIcon, true);
-						latitudeIcon.setImageDrawable(iconsCache.getIcon(nightMode ? R.drawable.widget_coordinates_utm_night : R.drawable.widget_coordinates_utm_day));
-						String olcLocation;
-						try {
-							olcLocation = PointDescription.getLocationOlcName(lat, lon);
-						} catch (RuntimeException e) {
-							e.printStackTrace();
-							olcLocation = "0, 0";
-						}
-						latitudeText.setText(olcLocation);
-					} else {
-						AndroidUiHelper.updateVisibility(lonCoordinatesContainer, true);
-						AndroidUiHelper.updateVisibility(coordinatesDivider, true);
-						AndroidUiHelper.updateVisibility(latitudeIcon, true);
-						String latitude = "";
-						String longitude = "";
-						try {
-							latitude = LocationConvert.convertLatitude(lat, f, true);
-							longitude = LocationConvert.convertLongitude(lon, f, true);
-						} catch (RuntimeException e) {
-							e.printStackTrace();
-						}
-						int latDayImgId = lat >= 0 ? R.drawable.widget_coordinates_latitude_north_day : R.drawable.widget_coordinates_latitude_south_day;
-						int latNightImgId = lat >= 0 ? R.drawable.widget_coordinates_latitude_north_night : R.drawable.widget_coordinates_latitude_south_night;
-						int lonDayImgId = lon >= 0 ? R.drawable.widget_coordinates_longitude_east_day : R.drawable.widget_coordinates_longitude_west_day;
-						int lonNightImgId = lon >= 0 ? R.drawable.widget_coordinates_longitude_east_night : R.drawable.widget_coordinates_longitude_west_night;
-						latitudeIcon.setImageDrawable(iconsCache.getIcon(nightMode ? latDayImgId : latNightImgId));
-						longitudeIcon.setImageDrawable(iconsCache.getIcon(nightMode ? lonDayImgId : lonNightImgId));
-						latitudeText.setText(latitude);
-						longitudeText.setText(longitude);
-					}
-				} else {
-					AndroidUiHelper.updateVisibility(lonCoordinatesContainer, false);
-					AndroidUiHelper.updateVisibility(coordinatesDivider, false);
-					AndroidUiHelper.updateVisibility(latitudeIcon, false);
-					GPSInfo gpsInfo = locationProvider.getGPSInfo();
-					latitudeText.setText(map.getString(R.string.searching_gps) + "…" + gpsInfo.usedSatellites + "/" + gpsInfo.foundSatellites);
-				}
-			}
-			return false;
-		}
-
-		private void copyToClipboard(@NonNull String text) {
-			if (ShareMenu.copyToClipboard(map, text)) {
-				showShareSnackbar(text, map);
-			}
-		}
-
-		private void showShareSnackbar(@NonNull final String text, @NonNull final Context ctx) {
-			Snackbar snackbar = Snackbar.make(map.getLayout(), ctx.getResources().getString(R.string.copied_to_clipboard) + ":\n" + text, Snackbar.LENGTH_LONG)
-					.setAction(R.string.shared_string_share, view -> {
-						Intent intent = new Intent(Intent.ACTION_SEND);
-						intent.setAction(Intent.ACTION_SEND);
-						intent.putExtra(Intent.EXTRA_TEXT, text);
-						intent.setType("text/plain");
-						Intent chooserIntent = Intent.createChooser(intent, ctx.getString(R.string.send_location));
-						AndroidUtils.startActivityIfSafe(ctx, intent, chooserIntent);
-					});
-			UiUtilities.setupSnackbar(snackbar, nightMode, 5);
-			snackbar.show();
-		}
-
-		public boolean updateVisibility(boolean visible) {
-			boolean res = AndroidUiHelper.updateVisibility(topBar, visible);
-			if (res) {
-				map.updateStatusBarColor();
-			}
-			return res;
-		}
-
-		public void updateColors(boolean nightMode, boolean bold) {
-			this.nightMode = nightMode;
-			topBar.setBackgroundColor(ContextCompat.getColor(map, nightMode ? R.color.activity_background_dark : R.color.activity_background_dark));
-			int textColor = ContextCompat.getColor(map, nightMode ? R.color.activity_background_light : R.color.activity_background_light);
-			latitudeText.setTextColor(textColor);
-			longitudeText.setTextColor(textColor);
-			coordinatesDivider.setBackgroundColor(ColorUtilities.getDividerColor(map, nightMode));
-			latitudeText.setTypeface(Typeface.DEFAULT, bold ? Typeface.BOLD : Typeface.NORMAL);
-			longitudeText.setTypeface(Typeface.DEFAULT, bold ? Typeface.BOLD : Typeface.NORMAL);
 		}
 	}
 }

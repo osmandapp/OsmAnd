@@ -3,10 +3,12 @@ package net.osmand.plus.views.layers.geometry;
 import android.graphics.Paint;
 
 import net.osmand.Location;
+import net.osmand.core.jni.QListFColorARGB;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -121,5 +123,42 @@ public class RouteGeometryWay extends
 			route = null;
 			clearWay();
 		}
+	}
+
+	public QListFColorARGB getColorizationMapping() {
+		//OpenGL
+		QListFColorARGB colors = new QListFColorARGB();
+		if (styleMap != null && styleMap.size() > 0) {
+			int lastColor = 0;
+			for (int i = 0; i < styleMap.size(); i++) {
+				GeometryWayStyle<?> style = styleMap.get(i);
+				int color = 0;
+				if (style != null) {
+					if (style instanceof GeometryGradientWayStyle) {
+						color = ((GeometryGradientWayStyle) style).currColor;
+						lastColor = ((GeometryGradientWayStyle) style).nextColor;
+					} else {
+						color = style.getColor() == null ? 0 : style.getColor();
+						lastColor = color;
+					}
+				}
+				colors.add(NativeUtilities.createFColorARGB(color));
+			}
+			colors.add(NativeUtilities.createFColorARGB(lastColor));
+		}
+		return colors;
+	}
+
+	public int getColorizationScheme() {
+		//OpenGL
+		if (styleMap != null) {
+			for (int i = 0; i < styleMap.size(); i++) {
+				GeometryWayStyle<?> style = styleMap.get(i);
+				if (style != null) {
+					return style.getColorizationScheme();
+				}
+			}
+		}
+		return GeometryWayStyle.COLORIZATION_NONE;
 	}
 }

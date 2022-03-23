@@ -4545,5 +4545,7 @@
     <string name="stop_download_desc">Завантаження не завершено. Якщо зараз перервати його, для перегляду буде доступна лише частина тайлів.</string>
     <string name="move_map_to_select_area">Перемістіть мапу, щоб вибрати потрібну ділянку.</string>
     <string name="rendering_attr_showFitnessTrails_description">Показати фітнес-стежки</string>
-    <string name="rendering_attr_showFitnessTrails_name">Показати фітнес-стежки</string>
+    <string name="rendering_attr_showFitnessTrails_name">Фітнес-стежки</string>
+    <string name="rendering_attr_showRunningRoutes_description">Показати бігові маршрути</string>
+    <string name="rendering_attr_showRunningRoutes_name">Бігові маршрути</string>
 </resources>

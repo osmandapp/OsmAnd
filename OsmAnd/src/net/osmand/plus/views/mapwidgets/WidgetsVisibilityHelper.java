@@ -5,36 +5,37 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapQuickActionLayer;
 
 import java.lang.ref.WeakReference;
 
 public class WidgetsVisibilityHelper {
 
-	private final MapActivity mapActivity;
+	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final RoutingHelper routingHelper;
-	private final MapLayers mapLayers;
 
-	boolean proVersionAvailable;
+	private final MapActivity mapActivity;
+	private final MapLayers mapLayers;
 
 	public WidgetsVisibilityHelper(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
-		this.settings = mapActivity.getMyApplication().getSettings();
-		this.routingHelper = mapActivity.getRoutingHelper();
-		this.mapLayers = mapActivity.getMapLayers();
-		this.proVersionAvailable = InAppPurchaseHelper.isOsmAndProAvailable(mapActivity.getMyApplication());
+		app = mapActivity.getMyApplication();
+		settings = app.getSettings();
+		routingHelper = app.getRoutingHelper();
+		mapLayers = app.getOsmandMap().getMapLayers();
 	}
 
 	public boolean shouldShowQuickActionButton() {
@@ -71,10 +72,10 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public boolean shouldHideMapMarkersWidget() {
-		View addressTopBar = mapActivity.findViewById(R.id.map_top_bar);
+		View streetName = mapActivity.findViewById(R.id.street_name_widget);
 		return !settings.MARKERS_DISTANCE_INDICATION_ENABLED.get()
 				|| !settings.MAP_MARKERS_MODE.get().isToolbar()
-				|| addressTopBar != null && addressTopBar.getVisibility() == View.VISIBLE
+				|| streetName != null && streetName.getVisibility() == View.VISIBLE
 				|| routingHelper.isFollowingMode()
 				|| routingHelper.isRoutePlanningMode()
 				|| isMapRouteInfoMenuVisible()
@@ -161,13 +162,13 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public boolean shouldShowElevationProfileWidget() {
-		return proVersionAvailable && settings.SHOW_ELEVATION_PROFILE_WIDGET.get()
+		return settings.SHOW_ELEVATION_PROFILE_WIDGET.get() && isRouteCalculated()
+				&& InAppPurchaseHelper.isOsmAndProAvailable(app)
 				&& !isInChangeMarkerPositionMode()
 				&& !isInMeasurementToolMode()
 				&& !isInChoosingRoutesMode()
 				&& !isInWaypointsChoosingMode()
 				&& !isInPlanRouteMode()
-				&& isRouteCalculated()
 				&& !isSelectingTilesZone();
 		/*
 				&& !isDashboardVisible()

@@ -7,6 +7,9 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_A
 import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 import static net.osmand.plus.settings.enums.LocationSource.ANDROID_API;
 import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_COMPASS;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -17,6 +20,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Environment;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -84,6 +88,7 @@ import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
 import net.osmand.render.RenderingRulesStorage;
@@ -774,6 +779,43 @@ public class OsmandSettings {
 	}
 
 	public final CommonPreference<RadiusRulerMode> RADIUS_RULER_MODE = new EnumStringPreference<>(this, "ruler_mode", RadiusRulerMode.FIRST, RadiusRulerMode.values()).makeGlobal().makeShared();
+	public final CommonPreference<Boolean> SHOW_COMPASS_ALWAYS = new BooleanPreference(this, "show_compass_always",
+			false) {
+
+		@Override
+		public Boolean getModeValue(ApplicationMode mode) {
+			boolean defaultValue = mode.isWidgetVisible(WIDGET_COMPASS);
+			List<String> widgetsVisibility = getWidgetsVisibilityInfo(mode);
+			if (widgetsVisibility.contains(WIDGET_COMPASS)) {
+				return true;
+			} else if (widgetsVisibility.contains(HIDE_PREFIX + WIDGET_COMPASS)) {
+				return false;
+			}
+			return defaultValue;
+		}
+
+		@Override
+		public boolean setModeValue(ApplicationMode mode, Boolean obj) {
+			List<String> widgetsVisibilityInfo = getWidgetsVisibilityInfo(mode);
+			if (obj != null && obj) {
+				widgetsVisibilityInfo.remove(HIDE_PREFIX + WIDGET_COMPASS);
+				widgetsVisibilityInfo.add(WIDGET_COMPASS);
+			} else {
+				widgetsVisibilityInfo.remove(WIDGET_COMPASS);
+				widgetsVisibilityInfo.add(HIDE_PREFIX + WIDGET_COMPASS);
+			}
+			StringBuilder widgetsVisibilityString = new StringBuilder();
+			for (String widgetVisibility : widgetsVisibilityInfo) {
+				widgetsVisibilityString.append(widgetVisibility).append(SETTINGS_SEPARATOR);
+			}
+			return MAP_INFO_CONTROLS.setModeValue(mode, widgetsVisibilityString.toString());
+		}
+
+		@NonNull
+		private List<String> getWidgetsVisibilityInfo(ApplicationMode appMode) {
+			return new ArrayList<>(Arrays.asList(MAP_INFO_CONTROLS.getModeValue(appMode).split(SETTINGS_SEPARATOR)));
+		}
+	};
 	public final OsmandPreference<Boolean> SHOW_COMPASS_CONTROL_RULER = new BooleanPreference(this, "show_compass_ruler", true).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> SHOW_DISTANCE_RULER = new BooleanPreference(this, "show_distance_ruler", false).makeProfile();
 	public final OsmandPreference<Boolean> SHOW_ELEVATION_PROFILE_WIDGET = new BooleanPreference(this, "show_elevation_profile_widget", false).makeProfile();
@@ -1724,6 +1766,18 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> TRANSPARENT_STATUS_BAR = new BooleanPreference(this, "transparent_status_bar", true).makeGlobal().makeShared();
 
+	public final ListStringPreference LEFT_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
+			"left_widget_panel_order", TextUtils.join(",", WidgetsPanel.LEFT.getOriginalOrder()), ",").makeProfile();
+
+	public final ListStringPreference TOP_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
+			"top_widget_panel_order", TextUtils.join(",", WidgetsPanel.TOP.getOriginalOrder()), ",").makeProfile();
+
+	public final ListStringPreference RIGHT_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
+			"right_widget_panel_order", TextUtils.join(",", WidgetsPanel.RIGHT.getOriginalOrder()), ",").makeProfile();
+
+	public final ListStringPreference BOTTOM_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
+			"bottom_widget_panel_order", TextUtils.join(",", WidgetsPanel.BOTTOM.getOriginalOrder()), ",").makeProfile();
+
 	public final OsmandPreference<Boolean> MARKERS_DISTANCE_INDICATION_ENABLED = new BooleanPreference(this, "markers_distance_indication_enabled", true).makeProfile();
 
 	public final OsmandPreference<Integer> DISPLAYED_MARKERS_WIDGETS_COUNT = new IntPreference(this, "displayed_markers_widgets_count", 1).makeProfile();
@@ -2132,7 +2186,7 @@ public class OsmandSettings {
 	}
 
 	public void setMapLocationToShow(double latitude, double longitude, int zoom, PointDescription pointDescription,
-									 boolean addToHistory, Object toShow) {
+	                                 boolean addToHistory, Object toShow) {
 		SettingsEditor edit = settingsAPI.edit(globalPreferences);
 		edit.putFloat(MAP_LAT_TO_SHOW, (float) latitude);
 		edit.putFloat(MAP_LON_TO_SHOW, (float) longitude);
@@ -2862,8 +2916,7 @@ public class OsmandSettings {
 		TRANSPARENT_MAP_THEME.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
 	}
 
-	public final CommonPreference<Boolean> SHOW_STREET_NAME =
-			new BooleanPreference(this, "show_street_name", false).makeProfile();
+	public final CommonPreference<Boolean> SHOW_STREET_NAME = new BooleanPreference(this, "show_street_name", false).makeProfile();
 
 	{
 		SHOW_STREET_NAME.setModeDefaultValue(ApplicationMode.DEFAULT, false);

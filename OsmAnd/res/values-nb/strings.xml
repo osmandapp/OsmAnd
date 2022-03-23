@@ -4540,6 +4540,8 @@
     <string name="shared_string_complete">fullført</string>
     <string name="number_of_tiles">Antall kartfliser</string>
     <string name="move_map_to_select_area">Flytt kartet for å velge ønsket område.</string>
-    <string name="rendering_attr_showFitnessTrails_name">Vis trimløyper</string>
+    <string name="rendering_attr_showFitnessTrails_name">Trimløyper</string>
     <string name="rendering_attr_showFitnessTrails_description">Vis trimløyper</string>
+    <string name="rendering_attr_showRunningRoutes_name">Løperuter</string>
+    <string name="rendering_attr_showRunningRoutes_description">Vis løperuter</string>
 </resources>
