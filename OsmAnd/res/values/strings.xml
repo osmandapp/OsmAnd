@@ -10,7 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="rendering_attr_showBusRoutes_name">Bus routes</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Trolleybus routes</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">Shuttle routes</string>
     <string name="map_markers_bar">Map markers bar</string>
     <string name="shared_string_visible_widgets">Visible widgets</string>
     <string name="top_widgets_panel">Top panel</string>
