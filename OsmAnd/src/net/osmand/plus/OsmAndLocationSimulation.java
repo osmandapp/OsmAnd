@@ -82,7 +82,7 @@ public class OsmAndLocationSimulation {
 					boolean nightMode1 = activity instanceof MapActivity ? app.getDaynightHelper().isNightModeForMapControls() : !app.getSettings().isLightContent();
 					GpxUiHelper.selectGPXFile(activity, false, false, result -> {
 						GPXRouteParamsBuilder gpxParamsBuilder = new GPXRouteParamsBuilder(result[0], app.getSettings());
-						startAnimationThread(app, gpxParamsBuilder.getPoints(app), true, speedup.getValue() + 1);
+						startAnimationThread(app, gpxParamsBuilder.getSimulationData(app), true, speedup.getValue() + 1);
 						if (runnable != null) {
 							runnable.run();
 						}
@@ -92,12 +92,12 @@ public class OsmAndLocationSimulation {
 				builder.setNegativeButton(R.string.shared_string_cancel, null);
 				builder.show();
 			} else {
-				List<Location> currentRoute = app.getRoutingHelper().getCurrentCalculatedRoute();
+				List<SimulationData> currentRoute = app.getRoutingHelper().getRoute().getImmutableSimData();
 				if (currentRoute.isEmpty()) {
 					Toast.makeText(app, R.string.animate_routing_route_not_calculated,
 							Toast.LENGTH_LONG).show();
 				} else {
-					startAnimationThread(app, new ArrayList<Location>(currentRoute), false, 1);
+					startAnimationThread(app, new ArrayList<>(currentRoute), false, 1);
 					if (runnable != null) {
 						runnable.run();
 					}
@@ -119,7 +119,7 @@ public class OsmAndLocationSimulation {
 		startStopRouteAnimation(activity, true, null);
 	}
 
-	private void startAnimationThread(final OsmandApplication app, final List<Location> directions,
+	private void startAnimationThread(final OsmandApplication app, List<SimulationData> directions,
 	                                  final boolean locTime, final float coeff) {
 		final float time = 1.5f;
 		float simSpeed = app.getSettings().simulateNavigationSpeed;
@@ -128,9 +128,9 @@ public class OsmAndLocationSimulation {
 		routeAnimation = new Thread() {
 			@Override
 			public void run() {
-				Location current = directions.isEmpty() ? null : new Location(directions.remove(0));
+				SimulationData current = directions.isEmpty() ? null : new SimulationData(directions.remove(0));
 				boolean useLocationTime = locTime && current.getTime() != 0;
-				Location prev = current;
+				SimulationData prev = current;
 				long prevTime = current == null ? 0 : current.getTime();
 				float meters = metersToGoInFiveSteps(directions, current);
 				if (current != null) {
@@ -157,7 +157,7 @@ public class OsmAndLocationSimulation {
 							} else {
 								result = useDefaultSimulation(current, directions, meters);
 							}
-							current = (Location) result.get(0);
+							current = (SimulationData) result.get(0);
 							meters = (float) result.get(1);
 						}
 						float speed = meters / intervalTime * coeff;
@@ -205,13 +205,13 @@ public class OsmAndLocationSimulation {
 		routeAnimation.start();
 	}
 
-	private List<Object> useSimulationConstantSpeed(float speed, Location current, List<Location> directions,
+	private List<Object> useSimulationConstantSpeed(float speed, SimulationData current, List<SimulationData> directions,
 	                                                float meters, float intervalTime, float coeff) {
 		List<Object> result = new ArrayList<>();
 		if (current.distanceTo(directions.get(0)) > meters) {
 			current = middleLocation(current, directions.get(0), meters);
 		} else {
-			current = new Location(directions.remove(0));
+			current = new SimulationData(directions.remove(0));
 		}
 		meters = speed * intervalTime * coeff;
 
@@ -221,12 +221,12 @@ public class OsmAndLocationSimulation {
 		return result;
 	}
 
-	private List<Object> useDefaultSimulation(Location current, List<Location> directions, float meters) {
+	private List<Object> useDefaultSimulation(SimulationData current, List<SimulationData> directions, float meters) {
 		List<Object> result = new ArrayList<>();
 		if (current.distanceTo(directions.get(0)) > meters) {
 			current = middleLocation(current, directions.get(0), meters);
 		} else {
-			current = new Location(directions.remove(0));
+			current = new SimulationData(directions.remove(0));
 			meters = metersToGoInFiveSteps(directions, current);
 		}
 		result.add(current);
@@ -234,16 +234,16 @@ public class OsmAndLocationSimulation {
 
 		return result;
 	}
-	
-	private float metersToGoInFiveSteps(List<Location> directions, Location current) {
-		return directions.isEmpty() ? 20.0f : Math.max(20.0f, current.distanceTo(directions.get(0)) / 2 );
+
+	private float metersToGoInFiveSteps(List<SimulationData> directions, SimulationData current) {
+		return directions.isEmpty() ? 20.0f : Math.max(20.0f, current.distanceTo(directions.get(0)) / 2);
 	}
 
 	public void stop() {
 		routeAnimation = null;
 	}
 
-	public static Location middleLocation(Location start, Location end, float meters) {
+	public static SimulationData middleLocation(SimulationData start, SimulationData end, float meters) {
 		double lat1 = toRad(start.getLatitude());
 		double lon1 = toRad(start.getLongitude());
 		double R = 6371; // radius of earth in km
@@ -253,8 +253,8 @@ public class OsmAndLocationSimulation {
 				+ Math.cos(lat1) * Math.sin(d / R) * Math.cos(brng));
 		double lon2 = lon1
 				+ Math.atan2(Math.sin(brng) * Math.sin(d / R) * Math.cos(lat1),
-						Math.cos(d / R) - Math.sin(lat1) * Math.sin(lat2));
-		Location nl = new Location(start);
+				Math.cos(d / R) - Math.sin(lat1) * Math.sin(lat2));
+		SimulationData nl = new SimulationData(start);
 		nl.setLatitude(toDegree(lat2));
 		nl.setLongitude(toDegree(lon2));
 		nl.setBearing(brng);
@@ -268,5 +268,30 @@ public class OsmAndLocationSimulation {
 
 	private static double toRad(double degree) {
 		return degree * Math.PI / 180;
+	}
+
+	public static class SimulationData extends Location {
+		private boolean trafficLight;
+
+		public SimulationData(SimulationData l) {
+			super(l);
+			trafficLight = l.isTrafficLight();
+		}
+
+		public SimulationData(String s) {
+			super(s);
+		}
+
+		public SimulationData(Location l) {
+			super(l);
+		}
+
+		public boolean isTrafficLight() {
+			return trafficLight;
+		}
+
+		public void setTrafficLight(boolean trafficLight) {
+			this.trafficLight = trafficLight;
+		}
 	}
 }

@@ -16,6 +16,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.map.WorldRegion;
+import net.osmand.plus.OsmAndLocationSimulation.SimulationData;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
@@ -44,6 +45,7 @@ public class RouteCalculationResult {
 	private final List<RouteDirectionInfo> directions;
 	private final List<RouteSegmentResult> segments;
 	private final List<AlarmInfo> alarmInfo;
+	private final List<SimulationData> simulationData;
 	private final String errorMessage;
 	private final int[] listDistance;
 	private final int[] intermediatePoints;
@@ -90,6 +92,7 @@ public class RouteCalculationResult {
 		this.listDistance = new int[0];
 		this.directions = new ArrayList<>();
 		this.alarmInfo = new ArrayList<>();
+		this.simulationData = new ArrayList<>();
 		this.routeService = null;
 		this.appMode = null;
 		this.routeRecalcDistance = 0;
@@ -126,6 +129,7 @@ public class RouteCalculationResult {
 		this.listDistance = new int[locations.size()];
 		updateListDistanceTime(this.listDistance, this.locations);
 		this.alarmInfo = new ArrayList<>();
+		this.simulationData = new ArrayList<>();
 		calculateIntermediateIndexes(params.ctx, this.locations, params.intermediates, localDirections, this.intermediatePoints);
 		this.directions = Collections.unmodifiableList(localDirections);
 		updateDirectionsTime(this.directions, this.listDistance);
@@ -166,15 +170,19 @@ public class RouteCalculationResult {
 		List<RouteDirectionInfo> computeDirections = new ArrayList<>();
 		this.errorMessage = null;
 		this.intermediatePoints = new int[intermediates == null ? 0 : intermediates.size()];
-		List<Location> locations = new ArrayList<>();
+		List<SimulationData> data = new ArrayList<>();
 		ArrayList<AlarmInfo> alarms = new ArrayList<>();
-		List<RouteSegmentResult> segments = convertVectorResult(computeDirections, locations, list, alarms, ctx);
+		ArrayList<Location> stops = new ArrayList<>();
+
+		List<RouteSegmentResult> segments = convertVectorResult(computeDirections, data, list, alarms, ctx);
+		List<Location> locations = new ArrayList<>(data);
 		if (calculateFirstAndLastPoint) {
 			introduceFirstPointAndLastPoint(locations, computeDirections, segments, start, end, ctx);
 		}
 
 		this.locations = Collections.unmodifiableList(locations);
 		this.segments = Collections.unmodifiableList(segments);
+		this.simulationData = Collections.unmodifiableList(data);
 		this.listDistance = new int[locations.size()];
 		calculateIntermediateIndexes(ctx, this.locations, intermediates, computeDirections, this.intermediatePoints);
 		updateListDistanceTime(this.listDistance, this.locations);
@@ -339,8 +347,10 @@ public class RouteCalculationResult {
 	/**
 	 * PREPARATION
 	 */
-	private static List<RouteSegmentResult> convertVectorResult(List<RouteDirectionInfo> directions, List<Location> locations, List<RouteSegmentResult> list,
-																List<AlarmInfo> alarms, OsmandApplication ctx) {
+	private static List<RouteSegmentResult> convertVectorResult(List<RouteDirectionInfo> directions,
+	                                                            List<SimulationData> locations, List<RouteSegmentResult> list,
+	                                                            List<AlarmInfo> alarms,
+	                                                            OsmandApplication ctx) {
 		float prevDirectionTime = 0;
 		float prevDirectionDistance = 0;
 		double lastHeight = HEIGHT_UNDEFINED;
@@ -372,7 +382,7 @@ public class RouteCalculationResult {
 				if (i == s.getEndPointIndex() && routeInd != list.size() - 1) {
 					break;
 				}
-				Location n = new Location(""); //$NON-NLS-1$
+				SimulationData n = new SimulationData("");
 				LatLon point = s.getPoint(i);
 				n.setLatitude(point.getLatitude());
 				n.setLongitude(point.getLongitude());
@@ -382,7 +392,7 @@ public class RouteCalculationResult {
 					float h = vls[2 * i + 1];
 					n.setAltitude(h);
 					if (lastHeight == HEIGHT_UNDEFINED && locations.size() > 0) {
-						for (Location l : locations) {
+						for (SimulationData l : locations) {
 							if (!l.hasAltitude()) {
 								l.setAltitude(h);
 							}
@@ -960,6 +970,10 @@ public class RouteCalculationResult {
 
 	public List<Location> getImmutableAllLocations() {
 		return locations;
+	}
+
+	public List<SimulationData> getImmutableSimData() {
+		return simulationData;
 	}
 
 	public List<RouteDirectionInfo> getImmutableAllDirections() {

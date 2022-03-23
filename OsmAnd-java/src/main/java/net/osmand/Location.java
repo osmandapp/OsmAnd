@@ -52,7 +52,6 @@ public class Location {
     private double mLon2 = 0.0;
     private float mDistance = 0.0f;
     private float mInitialBearing = 0.0f;
-    private boolean trafficLight;
     // Scratchpad
     private float[] mResults = new float[2];
     
@@ -100,7 +99,6 @@ public class Location {
         mAccuracy = l.mAccuracy;
         mHasVerticalAccuracy = l.mHasVerticalAccuracy;
         mVerticalAccuracy = l.mVerticalAccuracy;
-        trafficLight = l.trafficLight;
     }
 
     /**
@@ -541,14 +539,6 @@ public class Location {
         mHasVerticalAccuracy = false;
     }
 
-    public boolean isTrafficLight() {
-        return trafficLight;
-    }
-
-    public void setTrafficLight(boolean trafficLight) {
-        this.trafficLight = trafficLight;
-    }
-
     @Override public String toString() {
         return "Location[mProvider=" + mProvider +
             ",mTime=" + mTime +
@@ -563,8 +553,7 @@ public class Location {
             ",mHasAccuracy=" + mHasAccuracy +
             ",mAccuracy=" + mAccuracy +
             ",mHasVerticalAccuracy=" + mHasVerticalAccuracy +
-            ",mVerticalAccuracy=" + mVerticalAccuracy +
-            ",trafficLight=" + trafficLight;
+            ",mVerticalAccuracy=" + mVerticalAccuracy;
     }
 
     
