@@ -651,12 +651,13 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
-		ItemClickListener listener = (adptr, itemId, pos, isChecked, viewCoordinates) -> {
+		ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {
+			int itemId = item.getTitleId();
 			if (itemId == R.string.layer_recordings) {
 				SHOW_RECORDINGS.set(!SHOW_RECORDINGS.get());
-				adptr.getItem(pos).setColor(app, SHOW_RECORDINGS.get() ?
+				item.setColor(app, SHOW_RECORDINGS.get() ?
 						R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-				adptr.notifyDataSetChanged();
+				uiAdapter.onDataSetChanged();
 				updateLayers(mapActivity, mapActivity);
 			}
 			return true;
@@ -672,7 +673,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public void registerMapContextMenuActions(@NonNull final MapActivity mapActivity, final double latitude, final double longitude,
-											  ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
+	                                          ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 		if (!configureMenu && isRecording()) {
 			return;
 		}
@@ -680,7 +681,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.setTitleId(R.string.recording_context_menu_arecord, app)
 				.setIcon(R.drawable.ic_action_micro_dark)
 				.setOrder(TAKE_AUDIO_NOTE_ITEM_ORDER)
-				.setListener((adptr, itemId, pos, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					recordAudio(latitude, longitude, mapActivity);
 					return true;
 				}));
@@ -688,7 +689,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.setTitleId(R.string.recording_context_menu_vrecord, app)
 				.setIcon(R.drawable.ic_action_video_dark)
 				.setOrder(TAKE_VIDEO_NOTE_ITEM_ORDER)
-				.setListener((adptr, itemId, pos, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					recordVideo(latitude, longitude, mapActivity, false);
 					return true;
 				}));
@@ -696,7 +697,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.setTitleId(R.string.recording_context_menu_precord, app)
 				.setIcon(R.drawable.ic_action_photo_dark)
 				.setOrder(TAKE_PHOTO_NOTE_ITEM_ORDER)
-				.setListener((adptr, itemId, pos, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					takePhoto(latitude, longitude, mapActivity, false, false);
 					return true;
 				}));

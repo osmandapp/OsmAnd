@@ -1,13 +1,6 @@
 package net.osmand.plus.settings.backend;
 
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
-import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
-import static net.osmand.plus.settings.enums.LocationSource.ANDROID_API;
-import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES;
-
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -107,6 +100,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
+import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
+import static net.osmand.plus.settings.enums.LocationSource.ANDROID_API;
+import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES;
 
 public class OsmandSettings {
 
@@ -2661,6 +2661,9 @@ public class OsmandSettings {
 	public final ContextMenuItemsPreference DRAWER_ITEMS =
 			(ContextMenuItemsPreference) new ContextMenuItemsPreference(this, "drawer_items", DRAWER_ITEM_ID_SCHEME, DrawerMenuItemsSettings.getDrawerDefaultInstance())
 					.makeProfile().cache();
+
+	public final ListStringPreference COLLAPSED_CONFIGURE_MAP_CATEGORIES = (ListStringPreference)
+			new ListStringPreference(this, "collapsed_configure_map_categories", "", ",,").makeProfile().cache();
 
 	public final ContextMenuItemsPreference CONFIGURE_MAP_ITEMS =
 			(ContextMenuItemsPreference) new ContextMenuItemsPreference(this, "configure_map_items", CONFIGURE_MAP_ITEM_ID_SCHEME, new ContextMenuItemsSettings())

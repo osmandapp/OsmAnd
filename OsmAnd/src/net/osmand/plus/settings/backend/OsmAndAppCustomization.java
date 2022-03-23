@@ -491,7 +491,7 @@ public class OsmAndAppCustomization {
 					adapter.addItem(new ContextMenuItem(item.getId())
 							.setTitle(item.name)
 							.setIcon(iconId != 0 ? iconId : ContextMenuItem.INVALID_ID)
-							.setListener((adapter1, itemId, position, isChecked, viewCoordinates) -> {
+							.setListener((uiAdapter, view, _item, isChecked) -> {
 								activity.startActivity(finalIntent);
 								return true;
 							}));

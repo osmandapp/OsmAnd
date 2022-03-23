@@ -1,7 +1,5 @@
 package net.osmand.plus.render;
 
-import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
-
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -31,6 +29,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
 
 
 public class RendererRegistry {

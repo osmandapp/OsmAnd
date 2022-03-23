@@ -4,7 +4,6 @@ package net.osmand.plus.views;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -63,7 +62,10 @@ import net.osmand.plus.views.layers.TransportStopsLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
+import net.osmand.plus.widgets.ctxmenu.ViewCreator;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
 import java.util.ArrayList;
@@ -304,9 +306,12 @@ public class MapLayers {
 				addFilterToList(adapter, list, f, true);
 			}
 		}
-		adapter.setProfileDependent(true);
 
-		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(mapActivity, !isNightMode());
+		ApplicationMode appMode = app.getSettings().getApplicationMode();
+		ViewCreator viewCreator = new ViewCreator(mapActivity, isNightMode());
+		viewCreator.setCustomControlsColor(appMode.getProfileColor(isNightMode()));
+		ContextMenuListAdapter listAdapter = adapter.toListAdapter(mapActivity, viewCreator);
+
 		Context themedContext = UiUtilities.getThemedContext(mapActivity, isNightMode());
 		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 		final ListView listView = new ListView(themedContext);
@@ -319,7 +324,7 @@ public class MapLayers {
 				item.setSelected(!item.getSelected());
 				ItemClickListener clickListener = item.getItemClickListener();
 				if (clickListener != null) {
-					clickListener.onContextMenuClick(listAdapter, position, position, item.getSelected(), null);
+					clickListener.onContextMenuClick(listAdapter, view, item, item.getSelected());
 				}
 				listAdapter.notifyDataSetChanged();
 			}
@@ -372,7 +377,11 @@ public class MapLayers {
 			}
 		}
 
-		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(mapActivity, !isNightMode());
+		ApplicationMode appMode = app.getSettings().getApplicationMode();
+		ViewCreator viewCreator = new ViewCreator(mapActivity, isNightMode());
+		viewCreator.setCustomControlsColor(appMode.getProfileColor(isNightMode()));
+		ContextMenuListAdapter listAdapter = adapter.toListAdapter(mapActivity, viewCreator);
+
 		Context themedContext = UiUtilities.getThemedContext(mapActivity, isNightMode());
 		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 		builder.setAdapter(listAdapter, (dialog, which) -> {
@@ -415,11 +424,8 @@ public class MapLayers {
 		ContextMenuItem item = new ContextMenuItem(null);
 		if (multiChoice) {
 			item.setSelected(app.getPoiFilters().isPoiFilterSelected(f));
-			item.setListener((adptr, itemId, position, isChecked, viewCoordinates) -> {
-				ContextMenuItem it = adptr.getItem(position);
-				if (it != null) {
-					it.setSelected(isChecked);
-				}
+			item.setListener((uiAdapter, view, it, isChecked) -> {
+				it.setSelected(isChecked);
 				return false;
 			});
 		}
@@ -436,10 +442,10 @@ public class MapLayers {
 
 	public void selectMapLayer(@NonNull MapActivity mapActivity,
 	                           @NonNull ContextMenuItem item,
-	                           @NonNull ArrayAdapter<ContextMenuItem> adapter) {
+	                           @NonNull OnDataChangeUiAdapter uiAdapter) {
 		selectMapLayer(mapActivity, true, mapSourceName -> {
 			item.setDescription(mapSourceName);
-			adapter.notifyDataSetChanged();
+			uiAdapter.onDataSetChanged();
 			return true;
 		});
 	}

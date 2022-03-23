@@ -83,7 +83,7 @@ public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialo
 			@Override
 			public void onClick(View view) {
 				if (listener != null) {
-					listener.onItemClick((int) view.getTag());
+					listener.onItemClick(view, (int) view.getTag());
 				}
 				dismiss();
 			}
@@ -210,6 +210,6 @@ public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialo
 	}
 
 	public interface ContextMenuItemClickListener {
-		void onItemClick(int position);
+		void onItemClick(View view, int position);
 	}
 }

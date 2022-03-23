@@ -41,6 +41,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.voice.JsMediaCommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.CtxMenuUtils;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
@@ -130,7 +131,7 @@ public class RoutingOptionsHelper {
 	}
 
 	public void selectVoiceGuidance(final MapActivity mapActivity, final CallbackWithObject<String> callback, ApplicationMode applicationMode) {
-		final ContextMenuAdapter adapter = new ContextMenuAdapter(app);
+		ContextMenuAdapter contextMenuAdapter = new ContextMenuAdapter(app);
 
 		String[] entries;
 		final String[] entrieValues;
@@ -142,7 +143,7 @@ public class RoutingOptionsHelper {
 		String selectedValue = mapActivity.getMyApplication().getSettings().VOICE_PROVIDER.getModeValue(applicationMode);
 		entrieValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
 		entries[k] = mapActivity.getResources().getString(R.string.shared_string_do_not_use);
-		adapter.addItem(new ContextMenuItem(null).setTitle(entries[k]));
+		contextMenuAdapter.addItem(new ContextMenuItem(null).setTitle(entries[k]));
 		if (OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(selectedValue)) {
 			selected = k;
 		}
@@ -151,7 +152,7 @@ public class RoutingOptionsHelper {
 			entries[k] = (s.contains("tts") ? mapActivity.getResources().getString(R.string.ttsvoice) + " " : "") +
 					FileNameTranslationHelper.getVoiceName(mapActivity, s);
 			entrieValues[k] = s;
-			adapter.addItem(new ContextMenuItem(null).setTitle(entries[k]));
+			contextMenuAdapter.addItem(new ContextMenuItem(null).setTitle(entries[k]));
 			if (s.equals(selectedValue)) {
 				selected = k;
 			}
@@ -159,7 +160,7 @@ public class RoutingOptionsHelper {
 		}
 		entrieValues[k] = MORE_VALUE;
 		entries[k] = mapActivity.getResources().getString(R.string.install_more);
-		adapter.addItem(new ContextMenuItem(null).setTitle(entries[k]));
+		contextMenuAdapter.addItem(new ContextMenuItem(null).setTitle(entries[k]));
 
 		boolean nightMode = isNightMode(app);
 		Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
@@ -361,7 +362,8 @@ public class RoutingOptionsHelper {
 		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 		final int layout = R.layout.list_menu_item_native_singlechoice;
 
-		final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(themedContext, layout, R.id.text1, adapter.getItemNames()) {
+		List<String> names = CtxMenuUtils.getNames(adapter.getItems());
+		final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(themedContext, layout, R.id.text1, names) {
 			@NonNull
 			@Override
 			public View getView(final int position, View convertView, @NonNull ViewGroup parent) {

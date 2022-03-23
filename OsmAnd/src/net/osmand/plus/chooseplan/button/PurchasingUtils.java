@@ -99,7 +99,7 @@ public class PurchasingUtils {
 		OsmandApplication app = mapActivity.getMyApplication();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 
-		ItemClickListener listener = (adapter1, itemId, position, isChecked, viewCoordinates) -> {
+		ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {
 			ChoosePlanFragment.showInstance(mapActivity, feature);
 			return false;
 		};

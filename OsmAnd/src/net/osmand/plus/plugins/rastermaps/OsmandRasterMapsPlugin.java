@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.view.ContextThemeWrapper;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,11 +35,14 @@ import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
-import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -281,11 +283,14 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		ItemClickListener listener = new OnRowItemClick() {
+
 			@Override
-			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
+			public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
+			                              @NonNull View view, @NonNull ContextMenuItem item) {
 				MapActivity mapActivity = mapActivityRef.get();
 				if (mapActivity != null && !mapActivity.isFinishing()) {
 					int[] viewCoordinates = AndroidUtils.getCenterViewCoordinates(view);
+					int itemId = item.getTitleId();
 					if (itemId == R.string.layer_overlay) {
 						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.OVERLAY_MAP, viewCoordinates);
 						return false;
@@ -298,27 +303,27 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			}
 
 			@Override
-			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int pos, boolean isChecked, int[] viewCoordinates) {
+			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
+			                                  @Nullable View view, @NotNull ContextMenuItem item,
+			                                  boolean isChecked) {
 				MapActivity mapActivity = mapActivityRef.get();
 				if (mapActivity == null || mapActivity.isFinishing()) {
 					return false;
 				}
+				int itemId = item.getTitleId();
 				if (itemId == R.string.layer_overlay) {
 					toggleUnderlayState(mapActivity, RasterMapType.OVERLAY,
 							canceled -> {
 								MapActivity mapActv = mapActivityRef.get();
 								if (mapActv != null && !mapActv.isFinishing()) {
-									ContextMenuItem item = adapter.getItem(pos);
-									if (item != null) {
-										String overlayMapDescr = mapActv.getMyApplication().getSettings().MAP_OVERLAY.get();
-										boolean hasOverlayDescription = overlayMapDescr != null;
-										overlayMapDescr = hasOverlayDescription ? overlayMapDescr
-												: mapActv.getString(R.string.shared_string_none);
-										item.setDescription(overlayMapDescr);
-										item.setSelected(hasOverlayDescription);
-										item.setColor(app, hasOverlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-										adapter.notifyDataSetChanged();
-									}
+									String overlayMapDescr = mapActv.getMyApplication().getSettings().MAP_OVERLAY.get();
+									boolean hasOverlayDescription = overlayMapDescr != null;
+									overlayMapDescr = hasOverlayDescription ? overlayMapDescr
+											: mapActv.getString(R.string.shared_string_none);
+									item.setDescription(overlayMapDescr);
+									item.setSelected(hasOverlayDescription);
+									item.setColor(app, hasOverlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+									uiAdapter.onDataSetChanged();
 								}
 							});
 					return false;
@@ -327,23 +332,19 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 							canceled -> {
 								MapActivity mapActv = mapActivityRef.get();
 								if (mapActv != null && !mapActv.isFinishing()) {
-									ContextMenuItem item = adapter.getItem(pos);
-									if (item != null) {
-										String underlayMapDescr = settings.MAP_UNDERLAY.get();
+									String underlayMapDescr = settings.MAP_UNDERLAY.get();
 
-										boolean hasUnderlayDescription = underlayMapDescr != null;
-										underlayMapDescr = hasUnderlayDescription
-												? underlayMapDescr
-												: mapActv.getString(R.string.shared_string_none);
+									boolean hasUnderlayDescription = underlayMapDescr != null;
+									underlayMapDescr = hasUnderlayDescription
+											? underlayMapDescr
+											: mapActv.getString(R.string.shared_string_none);
 
-										item.setDescription(underlayMapDescr);
-										item.setSelected(hasUnderlayDescription);
-										item.setColor(app, hasUnderlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+									item.setDescription(underlayMapDescr);
+									item.setSelected(hasUnderlayDescription);
+									item.setColor(app, hasUnderlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+									uiAdapter.onDataSetChanged();
 
-										adapter.notifyDataSetChanged();
-
-										mapActv.refreshMapComplete();
-									}
+									mapActv.refreshMapComplete();
 								}
 							});
 					return false;
@@ -397,8 +398,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 	@Override
 	public void registerMapContextMenuActions(@NonNull MapActivity mapActivity,
-											  final double latitude, final double longitude,
-											  ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
+	                                          final double latitude, final double longitude,
+	                                          ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 		boolean mapTileLayer = mapActivity.getMapView().getMainLayer() instanceof MapTileLayer;
 		if (configureMenu || mapTileLayer) {
 			ContextMenuItem item = new ContextMenuItem(MAP_CONTEXT_MENU_DOWNLOAD_MAP)
@@ -408,7 +409,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 			if (mapTileLayer) {
 				final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
-				ItemClickListener listener = (adptr, resId, pos, isChecked, viewCoordinates) -> {
+				ItemClickListener listener = (uiAdapter, view, _item, isChecked) -> {
 					MapActivity mapActivity1 = mapActivityRef.get();
 					if (AndroidUtils.isActivityNotDestroyed(mapActivity1)) {
 						OsmandApplication app = mapActivity1.getMyApplication();

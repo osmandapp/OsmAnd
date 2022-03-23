@@ -108,6 +108,7 @@ import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.CtxMenuUtils;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
@@ -122,7 +123,6 @@ import java.io.File;
 import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -315,7 +315,7 @@ public class GpxUiHelper {
 	private static ContextMenuAdapter createGpxContextMenuAdapter(OsmandApplication app,
 	                                                              List<GPXInfo> allGpxList,
 	                                                              boolean needSelectItems) {
-		final ContextMenuAdapter adapter = new ContextMenuAdapter(app);
+		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 		fillGpxContextMenuAdapter(adapter, allGpxList, needSelectItems);
 		return adapter;
 	}
@@ -411,7 +411,7 @@ public class GpxUiHelper {
 	                                        final boolean showAppearanceSetting,
 	                                        final CallbackWithObject<GPXFile[]> callbackWithObject,
 	                                        final List<GPXInfo> gpxInfoList,
-	                                        final ContextMenuAdapter contextMenuAdapter,
+	                                        final ContextMenuAdapter adapter,
 	                                        final int themeRes,
 	                                        final boolean nightMode) {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
@@ -421,9 +421,8 @@ public class GpxUiHelper {
 		final Map<String, String> gpxAppearanceParams = new HashMap<>();
 		final DialogGpxDataItemCallback gpxDataItemCallback = new DialogGpxDataItemCallback(app);
 
-		ArrayList<String> modifiableGpxFileNames = new ArrayList<>(Arrays.asList(contextMenuAdapter.getItemNames()));
-		final ArrayAdapter<String> alertDialogAdapter = new ArrayAdapter<String>(activity, layout, R.id.title,
-				modifiableGpxFileNames) {
+		List<String> modifiableGpxFileNames = CtxMenuUtils.getNames(adapter.getItems());
+		final ArrayAdapter<String> alertDialogAdapter = new ArrayAdapter<String>(activity, layout, R.id.title, modifiableGpxFileNames) {
 
 			@Override
 			public int getItemViewType(int position) {
@@ -451,7 +450,7 @@ public class GpxUiHelper {
 					v = View.inflate(new ContextThemeWrapper(activity, themeRes), layout, null);
 				}
 
-				final ContextMenuItem item = contextMenuAdapter.getItem(position);
+				ContextMenuItem item = adapter.getItem(position);
 				GPXInfo info = gpxInfoList.get(position);
 				boolean currentlyRecordingTrack = showCurrentGpx && position == 0;
 
@@ -602,12 +601,12 @@ public class GpxUiHelper {
 					if (app.getSelectedGpxHelper() != null) {
 						app.getSelectedGpxHelper().clearAllGpxFilesToShow(false);
 					}
-					if (showCurrentGpx && contextMenuAdapter.getItem(0).getSelected()) {
+					if (showCurrentGpx && adapter.getItem(0).getSelected()) {
 						currentGPX = app.getSavingTrackHelper().getCurrentGpx();
 					}
 					List<String> selectedGpxNames = new ArrayList<>();
-					for (int i = (showCurrentGpx ? 1 : 0); i < contextMenuAdapter.length(); i++) {
-						if (contextMenuAdapter.getItem(i).getSelected()) {
+					for (int i = (showCurrentGpx ? 1 : 0); i < adapter.length(); i++) {
+						if (adapter.getItem(i).getSelected()) {
 							selectedGpxNames.add(gpxInfoList.get(i).getFileName());
 						}
 					}
@@ -640,7 +639,7 @@ public class GpxUiHelper {
 				footerView.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						addTrack(activity, alertDialogAdapter, contextMenuAdapter, gpxInfoList);
+						addTrack(activity, alertDialogAdapter, adapter, gpxInfoList);
 					}
 				});
 			}
@@ -650,7 +649,7 @@ public class GpxUiHelper {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				if (multipleChoice) {
-					ContextMenuItem item = contextMenuAdapter.getItem(position);
+					ContextMenuItem item = adapter.getItem(position);
 					item.setSelected(!item.getSelected());
 					alertDialogAdapter.notifyDataSetInvalidated();
 					if (position == 0 && showCurrentGpx && item.getSelected()) {
@@ -697,7 +696,7 @@ public class GpxUiHelper {
 					addTrackButton.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							addTrack(activity, alertDialogAdapter, contextMenuAdapter, gpxInfoList);
+							addTrack(activity, alertDialogAdapter, adapter, gpxInfoList);
 						}
 					});
 				}
@@ -927,10 +926,10 @@ public class GpxUiHelper {
 		}
 		allGpxFiles.clear();
 		allGpxFiles.addAll(listGpxInfo(app, selectedGpxFiles, false));
-		adapter.clearAdapter();
+		adapter.clear();
 		fillGpxContextMenuAdapter(adapter, allGpxFiles, true);
 		dialogAdapter.clear();
-		dialogAdapter.addAll(adapter.getItemNames());
+		dialogAdapter.addAll(CtxMenuUtils.getNames(adapter.getItems()));
 		dialogAdapter.notifyDataSetInvalidated();
 	}
 

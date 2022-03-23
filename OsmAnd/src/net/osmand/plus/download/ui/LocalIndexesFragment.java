@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
@@ -519,13 +518,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		UiUtilities iconsCache = getMyApplication().getUIUtilities();
 		int iconColorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 		optionsMenuAdapter = new ContextMenuAdapter(requireMyApplication());
-		ItemClickListener listener = new ItemClickListener() {
-			@Override
-			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter,
-			                                  int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
-				localOptionsMenu(itemId);
-				return true;
-			}
+		ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {
+			localOptionsMenu(item.getTitleId());
+			return true;
 		};
 		optionsMenuAdapter.addItem(new ContextMenuItem(null)
 				.setTitleId(R.string.shared_string_refresh, getContext())
@@ -585,7 +580,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			for (int i = 0; i < optionsMenuAdapter.length(); i++) {
 				ContextMenuItem contextMenuItem = optionsMenuAdapter.getItem(i);
 				if (itemId == contextMenuItem.getTitleId()) {
-					contextMenuItem.getItemClickListener().onContextMenuClick(null, itemId, i, false, null);
+					ItemClickListener listener = contextMenuItem.getItemClickListener();
+					if (listener != null) {
+						listener.onContextMenuClick(null, null, contextMenuItem, false);
+					}
 					return true;
 				}
 			}

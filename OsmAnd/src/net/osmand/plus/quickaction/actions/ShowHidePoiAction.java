@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.ViewCreator;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -287,7 +288,8 @@ public class ShowHidePoiAction extends QuickAction {
 		}
 
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(mapActivity, !nightMode);
+		ViewCreator viewCreator = new ViewCreator(mapActivity, nightMode);
+		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.toListAdapter(mapActivity, viewCreator);
 		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(mapActivity, nightMode));
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 			@Override

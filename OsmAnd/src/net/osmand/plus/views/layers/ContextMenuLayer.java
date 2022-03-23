@@ -1,9 +1,5 @@
 package net.osmand.plus.views.layers;
 
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-
 import android.Manifest;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -97,6 +93,10 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import gnu.trove.list.array.TIntArrayList;
+
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 
 public class ContextMenuLayer extends OsmandMapLayer {
 	//private static final Log LOG = PlatformUtil.getLog(ContextMenuLayer.class);
@@ -328,7 +328,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public void populateObjectContextMenu(@NonNull LatLon latLon, @Nullable Object o, @NonNull ContextMenuAdapter adapter) {
-		ItemClickListener listener = (adptr, itemId, pos, isChecked, viewCoordinates) -> {
+		ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {
 			RotatedTileBox tileBox = getMapView().getCurrentRotatedTileBox();
 			enterMovingMode(tileBox);
 			return true;

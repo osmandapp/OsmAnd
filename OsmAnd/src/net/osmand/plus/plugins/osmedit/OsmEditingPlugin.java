@@ -8,7 +8,6 @@ import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.StyleSpan;
 import android.view.View;
-import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +25,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
+import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
@@ -59,13 +59,14 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
-import net.osmand.plus.widgets.ctxmenu.data.ExpandableCategory;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -290,7 +291,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	                                          final double longitude,
 	                                          ContextMenuAdapter adapter,
 	                                          final Object selectedObj, boolean configureMenu) {
-		ItemClickListener listener = (adptr, resId, pos, isChecked, viewCoordinates) -> {
+		ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {
+			int resId = item.getTitleId();
 			if (resId == R.string.context_menu_item_create_poi) {
 				//getPoiActions(mapActivity).showCreateDialog(latitude, longitude);
 				EditPoiDialogFragment editPoiDialogFragment =
@@ -391,7 +393,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	protected void registerConfigureMapCategoryActions(@NonNull ContextMenuAdapter adapter,
 	                                                   @NonNull MapActivity mapActivity,
 	                                                   @NonNull List<RenderingRuleProperty> customRules) {
-		adapter.addItem(new ContextMenuCategory(OPEN_STREET_MAP)
+		adapter.addItem(new ContextMenuItem(OPEN_STREET_MAP)
+				.setCategory(true)
 				.setTitleId(R.string.shared_string_open_street_map, mapActivity)
 				.setLayout(R.layout.list_group_title_with_switch));
 
@@ -404,21 +407,24 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				.setListener(new OnRowItemClick() {
 
 					@Override
-					public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
-						if (itemId == R.string.layer_osm_bugs) {
-							mapActivity.getDashboard().setDashboardVisibility(true,
-									DashboardType.OSM_NOTES, AndroidUtils.getCenterViewCoordinates(view));
+					public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
+					                              @NonNull View view, @NotNull ContextMenuItem item) {
+						if (item.getTitleId() == R.string.layer_osm_bugs) {
+							DashboardOnMap dashboard = mapActivity.getDashboard();
+							dashboard.setDashboardVisibility(true, DashboardType.OSM_NOTES, AndroidUtils.getCenterViewCoordinates(view));
 							return false;
 						}
 						return true;
 					}
 
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
-						if (itemId == R.string.layer_osm_bugs) {
+					public boolean onContextMenuClick(OnDataChangeUiAdapter uiAdapter,
+					                                  @Nullable View view, @NotNull ContextMenuItem item,
+					                                  boolean isChecked) {
+						if (item.getTitleId() == R.string.layer_osm_bugs) {
 							SHOW_OSM_BUGS.set(isChecked);
-							adapter.getItem(pos).setColor(app, SHOW_OSM_BUGS.get() ? R.color.osmand_orange : INVALID_ID);
-							adapter.notifyDataSetChanged();
+							item.setColor(app, SHOW_OSM_BUGS.get() ? R.color.osmand_orange : INVALID_ID);
+							uiAdapter.onDataSetChanged();
 							updateLayers(mapActivity, mapActivity);
 						}
 						return true;
@@ -433,14 +439,12 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				.setColor(app, SHOW_OSM_EDITS.get() ? R.color.osmand_orange : INVALID_ID)
 				.setListener(new OnRowItemClick() {
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
-						if (itemId == R.string.layer_osm_edits) {
-							OsmandPreference<Boolean> showOsmEdits = SHOW_OSM_EDITS;
-							showOsmEdits.set(isChecked);
-							adapter.getItem(pos).setColor(app, showOsmEdits.get() ? R.color.osmand_orange : INVALID_ID);
-							adapter.notifyDataSetChanged();
-							updateLayers(mapActivity, mapActivity);
-						}
+					public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter, @Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
+						OsmandPreference<Boolean> showOsmEdits = SHOW_OSM_EDITS;
+						showOsmEdits.set(isChecked);
+						item.setColor(app, showOsmEdits.get() ? R.color.osmand_orange : INVALID_ID);
+						uiAdapter.onDataSetChanged();
+						updateLayers(mapActivity, mapActivity);
 						return true;
 					}
 				})
@@ -477,7 +481,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					.setTitleId(R.string.local_index_mi_upload_gpx, activity)
 					.setIcon(R.drawable.ic_action_upload_to_openstreetmap)
 					.setColor(app, R.color.color_white)
-					.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
+					.setListener((uiAdapter, view, item, isChecked) -> {
 						f.openSelectionMode(R.string.local_index_mi_upload_gpx, R.drawable.ic_action_upload_to_openstreetmap,
 								R.drawable.ic_action_upload_to_openstreetmap, items ->
 										OsmEditingPlugin.this.sendGPXFiles(activity, f,

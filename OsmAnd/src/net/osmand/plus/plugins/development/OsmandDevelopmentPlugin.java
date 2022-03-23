@@ -68,7 +68,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			helper.addItem(new ContextMenuItem(DRAWER_BUILDS_ID)
 					.setTitleId(R.string.version_settings, mapActivity)
 					.setIcon(R.drawable.ic_action_apk)
-					.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
+					.setListener((uiAdapter, view, item, isChecked) -> {
 						final Intent mapIntent = new Intent(mapActivity, ContributionVersionActivity.class);
 						mapActivity.startActivityForResult(mapIntent, 0);
 						return true;

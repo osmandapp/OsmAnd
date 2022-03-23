@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.view.ContextThemeWrapper;
 import android.view.View;
-import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,10 +32,13 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -309,8 +311,9 @@ public class SRTMPlugin extends OsmandPlugin {
 		ItemClickListener listener = new OnRowItemClick() {
 
 			@Override
-			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
+			public boolean onRowItemClick(@NonNull @NotNull OnDataChangeUiAdapter uiAdapter, @NonNull @NotNull View view, @NonNull @NotNull ContextMenuItem item) {
 				int[] viewCoordinates = AndroidUtils.getCenterViewCoordinates(view);
+				int itemId = item.getTitleId();
 				if (itemId == R.string.srtm_plugin_name) {
 					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.CONTOUR_LINES, viewCoordinates);
 					return false;
@@ -322,11 +325,8 @@ public class SRTMPlugin extends OsmandPlugin {
 			}
 
 			@Override
-			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter,
-			                                  final int itemId,
-			                                  final int position,
-			                                  final boolean isChecked,
-			                                  final int[] viewCoordinates) {
+			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter, @Nullable View view, @NotNull ContextMenuItem item, final boolean isChecked) {
+				int itemId = item.getTitleId();
 				if (itemId == R.string.srtm_plugin_name) {
 					toggleContourLines(mapActivity, isChecked, new Runnable() {
 						@Override
@@ -339,14 +339,11 @@ public class SRTMPlugin extends OsmandPlugin {
 								SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
 								OsmandPlugin.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
 
-								ContextMenuItem item = adapter.getItem(position);
-								if (item != null) {
-									item.setDescription(app.getString(R.string.display_zoom_level,
-											getPrefDescription(app, contourLinesProp, pref)));
-									item.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-									item.setSelected(selected);
-									adapter.notifyDataSetChanged();
-								}
+								item.setDescription(app.getString(R.string.display_zoom_level,
+										getPrefDescription(app, contourLinesProp, pref)));
+								item.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+								item.setSelected(selected);
+								uiAdapter.onDataSetChanged();
 								mapActivity.refreshMapComplete();
 							}
 						}
@@ -360,12 +357,9 @@ public class SRTMPlugin extends OsmandPlugin {
 							if (selected) {
 								OsmandPlugin.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
 							}
-							ContextMenuItem item = adapter.getItem(position);
-							if (item != null) {
-								item.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-								item.setSelected(selected);
-								adapter.notifyDataSetChanged();
-							}
+							item.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+							item.setSelected(selected);
+							uiAdapter.onDataSetChanged();
 							updateLayers(mapActivity, mapActivity);
 							mapActivity.refreshMapComplete();
 						}

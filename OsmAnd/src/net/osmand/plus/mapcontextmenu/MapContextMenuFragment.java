@@ -1,9 +1,5 @@
 package net.osmand.plus.mapcontextmenu;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
-import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
-import static net.osmand.plus.settings.fragments.ConfigureMenuItemsFragment.MAIN_BUTTONS_QUANTITY;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -56,8 +52,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportRoute;
-import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
-import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -89,12 +83,18 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.plus.views.layers.TransportStopsLayer;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.router.TransportRouteResult;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
+import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
+import static net.osmand.plus.settings.fragments.ConfigureMenuItemsFragment.MAIN_BUTTONS_QUANTITY;
 
 
 public class MapContextMenuFragment extends BaseOsmAndFragment implements DownloadEvents {
@@ -632,6 +632,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private void updateActionButtons(MapActivity mapActivity) {
+		OsmandApplication app = mapActivity.getMyApplication();
 		LinearLayout buttons = view.findViewById(R.id.context_menu_buttons);
 		buttons.setBackgroundColor(ContextCompat.getColor(mapActivity,
 				nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light));
@@ -641,8 +642,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		List<ContextMenuItem> items = adapter.getVisibleItems();
 		List<String> mainIds = ((MainContextMenuItemsSettings) mapActivity.getMyApplication()
 				.getSettings().CONTEXT_MENU_ACTIONS_ITEMS.get()).getMainIds();
-		ContextMenuAdapter mainAdapter = new ContextMenuAdapter(requireMyApplication());
-		ContextMenuAdapter additionalAdapter = new ContextMenuAdapter(requireMyApplication());
+		ContextMenuAdapter mainAdapter = new ContextMenuAdapter(app);
+		ContextMenuAdapter additionalAdapter = new ContextMenuAdapter(app);
 
 		if (!mainIds.isEmpty()) {
 			for (ContextMenuItem item : items) {
@@ -706,12 +707,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				}
 			});
 		} else {
-			item.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					mainListener.onItemClick(position);
-				}
-			});
+			item.setOnClickListener(v -> mainListener.onItemClick(v, position));
 		}
 		return view;
 	}

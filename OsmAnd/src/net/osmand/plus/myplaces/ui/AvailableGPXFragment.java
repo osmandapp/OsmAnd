@@ -1,12 +1,5 @@
 package net.osmand.plus.myplaces.ui;
 
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.GPX_TAB;
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
-import static net.osmand.plus.track.fragments.TrackMenuFragment.openTrack;
-import static net.osmand.plus.track.helpers.GpxSelectionHelper.CURRENT_TRACK;
-import static net.osmand.util.Algorithms.formatDuration;
-import static net.osmand.util.Algorithms.objectEquals;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -26,7 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -55,9 +47,6 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
-import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
-import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -93,10 +82,16 @@ import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.FileUtils.RenameCallback;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.util.Algorithms;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -112,6 +107,13 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import static net.osmand.plus.myplaces.ui.FavoritesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.openTrack;
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.CURRENT_TRACK;
+import static net.osmand.util.Algorithms.formatDuration;
+import static net.osmand.util.Algorithms.objectEquals;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment implements
 		FavoritesFragmentStateHolder, OsmAuthorizationListener, OnTrackFileMoveListener,
@@ -474,7 +476,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		optionsMenuAdapter = new ContextMenuAdapter(app);
 		ItemClickListener listener = new ItemClickListener() {
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, final int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
+			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
+			                                  @Nullable View view, @NotNull ContextMenuItem item,
+			                                  boolean isChecked) {
+				int itemId = item.getTitleId();
 				if (itemId == R.string.shared_string_refresh) {
 					reloadTracks();
 				} else if (itemId == R.string.shared_string_show_on_map) {
@@ -557,7 +562,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		for (int i = 0; i < optionsMenuAdapter.length(); i++) {
 			ContextMenuItem contextMenuItem = optionsMenuAdapter.getItem(i);
 			if (itemId == contextMenuItem.getTitleId()) {
-				contextMenuItem.getItemClickListener().onContextMenuClick(null, itemId, i, false, null);
+				ItemClickListener listener = contextMenuItem.getItemClickListener();
+				if (listener != null) {
+					listener.onContextMenuClick(null, null, contextMenuItem, false);
+				}
 				return true;
 			}
 		}

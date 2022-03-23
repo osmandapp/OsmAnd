@@ -45,7 +45,6 @@ public class ContextMenuItem {
 	private int progress = INVALID_ID;
 	private boolean loading;
 
-	private int position;
 	private boolean hidden;
 	private int order = 0;
 
@@ -61,7 +60,7 @@ public class ContextMenuItem {
 	}
 
 	public String getId() {
-		return id != null ? id : getTitle();
+		return id;
 	}
 
 	public int getTag() {
@@ -135,10 +134,6 @@ public class ContextMenuItem {
 
 	public boolean isLoading() {
 		return loading;
-	}
-
-	public int getPosition() {
-		return position;
 	}
 
 	public boolean isHidden() {
@@ -266,10 +261,6 @@ public class ContextMenuItem {
 	public ContextMenuItem setLoading(boolean loading) {
 		this.loading = loading;
 		return this;
-	}
-
-	public void setPosition(int position) {
-		this.position = position;
 	}
 
 	public void setHidden(boolean hidden) {

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -27,7 +26,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 
@@ -50,9 +49,8 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 	private OsmandApplication app;
 	private List<RenderingRuleProperty> properties;
 	private List<CommonPreference<Boolean>> preferences;
-	private ArrayAdapter<?> arrayAdapter;
-	private ContextMenuAdapter adapter;
-	private int position;
+	private OnDataChangeUiAdapter uiAdapter;
+	private ContextMenuItem item;
 	private int padding;
 	private int paddingSmall;
 	private int paddingHalf;
@@ -60,16 +58,14 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 	public static void showInstance(@NonNull FragmentManager fm,
 									List<RenderingRuleProperty> properties,
 									List<CommonPreference<Boolean>> preferences,
-									ArrayAdapter<?> arrayAdapter,
-									ContextMenuAdapter adapter,
-									int position) {
+									OnDataChangeUiAdapter uiAdapter,
+	                                ContextMenuItem item) {
 		if (!fm.isStateSaved()) {
 			DetailsBottomSheet bottomSheet = new DetailsBottomSheet();
 			bottomSheet.setProperties(properties);
 			bottomSheet.setPreferences(preferences);
-			bottomSheet.setAdapter(adapter);
-			bottomSheet.setPosition(position);
-			bottomSheet.setArrayAdapter(arrayAdapter);
+			bottomSheet.setUiAdapter(uiAdapter);
+			bottomSheet.setMenuItem(item);
 			bottomSheet.show(fm, TAG);
 		}
 	}
@@ -216,16 +212,16 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 				selected++;
 			}
 		}
-		if (adapter != null) {
-			adapter.getItem(position).setSelected(checked);
-			adapter.getItem(position).setColor(app, checked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-			adapter.getItem(position).setDescription(getString(
+		if (item != null) {
+			item.setSelected(checked);
+			item.setColor(app, checked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+			item.setDescription(getString(
 					R.string.ltr_or_rtl_combine_via_slash,
 					String.valueOf(selected),
 					String.valueOf(preferences.size())));
 		}
-		if (arrayAdapter != null) {
-			arrayAdapter.notifyDataSetInvalidated();
+		if (uiAdapter != null) {
+			uiAdapter.onDataSetInvalidated();
 		}
 		Activity activity = getActivity();
 		if (activity instanceof MapActivity) {
@@ -244,15 +240,11 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 		this.preferences = preferences;
 	}
 
-	public void setAdapter(ContextMenuAdapter adapter) {
-		this.adapter = adapter;
+	public void setUiAdapter(OnDataChangeUiAdapter uiAdapter) {
+		this.uiAdapter = uiAdapter;
 	}
 
-	public void setPosition(int position) {
-		this.position = position;
-	}
-
-	public void setArrayAdapter(ArrayAdapter<?> arrayAdapter) {
-		this.arrayAdapter = arrayAdapter;
+	public void setMenuItem(ContextMenuItem item) {
+		this.item = item;
 	}
 }

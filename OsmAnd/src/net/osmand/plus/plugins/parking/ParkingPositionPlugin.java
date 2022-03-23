@@ -9,7 +9,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -41,8 +40,8 @@ import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
-import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -238,18 +237,12 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 
 	@Override
 	public void registerMapContextMenuActions(@NonNull final MapActivity mapActivity,
-											  final double latitude, final double longitude,
-											  ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
+	                                          final double latitude, final double longitude,
+	                                          ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 
-		ItemClickListener addListener = new ItemClickListener() {
-			@Override
-			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int resId,
-					int pos, boolean isChecked, int[] viewCoordinates) {
-				if (resId == R.string.context_menu_item_add_parking_point) {
-					showAddParkingDialog(mapActivity, latitude, longitude);
-				}
-				return true;
-			}
+		ItemClickListener addListener = (uiAdapter, view, item, isChecked) -> {
+			showAddParkingDialog(mapActivity, latitude, longitude);
+			return true;
 		};
 		adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC)
 				.setTitleId(R.string.context_menu_item_add_parking_point, mapActivity)

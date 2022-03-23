@@ -35,6 +35,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnIntegerValueChangedListener;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.util.Algorithms;
@@ -44,7 +45,7 @@ import java.util.Set;
 
 import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 
-public class ViewBinder {
+public class ViewCreator {
 
 	// Constants to determine profiles list item type (drawer menu items in 'Switch profile' mode)
 	public static final int PROFILES_NORMAL_PROFILE_TAG = 0;
@@ -53,26 +54,33 @@ public class ViewBinder {
 
 	private final Activity ctx;
 	private final UiUtilities iconsCache;
-
-	private final @LayoutRes int defLayoutId;
-	private final Integer controlsColor;
 	private final boolean nightMode;
 
-	public ViewBinder(@NonNull Activity ctx,
-	                  @LayoutRes int defLayoutId,
-	                  @Nullable Integer controlsColor,
-	                  boolean nightMode) {
+	private OnDataChangeUiAdapter uiAdapter;
+	private @LayoutRes int defLayoutId = R.layout.list_menu_item_native;
+	private Integer customControlsColor;
+
+	public ViewCreator(@NonNull Activity ctx, boolean nightMode) {
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
 		this.ctx = ctx;
-		this.defLayoutId = defLayoutId;
 		this.nightMode = nightMode;
-		this.controlsColor = controlsColor;
 		iconsCache = app.getUIUtilities();
 	}
 
-	@NonNull
-	public View getView(@NonNull ContextMenuItem item) {
-		return getView(item, null);
+	public void setUiAdapter(OnDataChangeUiAdapter uiAdapter) {
+		this.uiAdapter = uiAdapter;
+	}
+
+	public void setDefaultLayoutId(int defLayoutId) {
+		this.defLayoutId = defLayoutId;
+	}
+
+	public void setCustomControlsColor(Integer customControlsColor) {
+		this.customControlsColor = customControlsColor;
+	}
+
+	public int getDefaultLayoutId() {
+		return defLayoutId;
 	}
 
 	@NonNull
@@ -116,7 +124,7 @@ public class ViewBinder {
 
 		CompoundButton toggle = convertView.findViewById(R.id.toggle_item);
 		if (toggle != null && !item.isCategory()) {
-			setupToggle(toggle, item, item.getPosition());
+			setupToggle(toggle, convertView, item);
 		}
 
 		Slider slider = convertView.findViewById(R.id.slider);
@@ -137,7 +145,8 @@ public class ViewBinder {
 
 		View dividerView = convertView.findViewById(R.id.divider);
 		if (dividerView != null) {
-			AndroidUiHelper.updateVisibility(dividerView, !item.shouldHideDivider());
+			boolean hideDivider = item.shouldHideDivider();
+			AndroidUiHelper.updateVisibility(dividerView, !hideDivider);
 		}
 
 		if (item.isCategory()) {
@@ -179,7 +188,9 @@ public class ViewBinder {
 						OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
 						OsmandSettings settings = app.getSettings();
 						settings.setApplicationMode(selected.iterator().next());
-//						notifyDataSetChanged(); TODO use adapter
+						if (uiAdapter != null) {
+							uiAdapter.onDataSetChanged();
+						}
 					}
 				});
 	}
@@ -305,8 +316,8 @@ public class ViewBinder {
 				int colorId = ColorUtilities.getDefaultIconColorId(nightMode);
 				colorId = item.useNaturalIconColor() ? 0 : colorId;
 				drawable = iconsCache.getIcon(iconId, colorId);
-			} else if (controlsColor != null) {
-				drawable = iconsCache.getPaintedIcon(iconId, controlsColor);
+			} else if (customControlsColor != null) {
+				drawable = iconsCache.getPaintedIcon(iconId, customControlsColor);
 			} else {
 				drawable = iconsCache.getPaintedIcon(iconId, color);
 			}
@@ -332,18 +343,16 @@ public class ViewBinder {
 		}
 	}
 
-	private void setupToggle(@NonNull CompoundButton toggle, @NonNull ContextMenuItem item, int position) {
+	private void setupToggle(@NonNull CompoundButton toggle, @NonNull View convertView, @NonNull ContextMenuItem item) {
 		Boolean selected = item.getSelected();
 		if (selected != null) {
 			toggle.setOnCheckedChangeListener(null); // Removing listener required before checking/unchecking
 			toggle.setChecked(selected);
-//			ArrayAdapter<ContextMenuItem> adapter = this;
 			OnCheckedChangeListener listener = (buttonView, isChecked) -> {
 				item.setSelected(isChecked);
 				ItemClickListener clickListener = item.getItemClickListener();
 				if (clickListener != null) {
-					clickListener.onContextMenuClick(null, item.getTitleId(), position, isChecked, null);
-//					clickListener.onContextMenuClick(adapter, item.getTitleId(), position, isChecked, null);
+					clickListener.onContextMenuClick(uiAdapter, convertView, item, isChecked);
 				}
 			};
 			toggle.setOnCheckedChangeListener(listener);
@@ -351,8 +360,8 @@ public class ViewBinder {
 		} else {
 			AndroidUiHelper.updateVisibility(toggle, false);
 		}
-		if (controlsColor != null) {
-			UiUtilities.setupCompoundButton(nightMode, controlsColor, toggle);
+		if (customControlsColor != null) {
+			UiUtilities.setupCompoundButton(nightMode, customControlsColor, toggle);
 		}
 	}
 
@@ -373,8 +382,8 @@ public class ViewBinder {
 		} else {
 			AndroidUiHelper.updateVisibility(slider, false);
 		}
-		if (controlsColor != null) {
-			UiUtilities.setupSlider(slider, nightMode, controlsColor);
+		if (customControlsColor != null) {
+			UiUtilities.setupSlider(slider, nightMode, customControlsColor);
 		} else {
 			int activeColor = ColorUtilities.getActiveColor(ctx, nightMode);
 			UiUtilities.setupSlider(slider, nightMode, activeColor);

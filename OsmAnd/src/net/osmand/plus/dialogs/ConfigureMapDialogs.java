@@ -15,21 +15,21 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
 import androidx.appcompat.widget.SwitchCompat;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.core.android.MapRendererContext;
-import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
-import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.settings.enums.DayNightMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.DayNightMode;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
@@ -63,7 +63,7 @@ public class ConfigureMapDialogs {
 						int which = (int) v.getTag();
 						view.getSettings().DAYNIGHT_MODE.set(DayNightMode.values()[which]);
 						activity.refreshMapComplete();
-						activity.getDashboard().refreshContent(true);
+						activity.getDashboard().refreshContent(false);
 					}
 				}
 		);
@@ -71,9 +71,8 @@ public class ConfigureMapDialogs {
 		dialogAdapter.setDialog(bld.show());
 	}
 
-	protected static void showMapMagnifierDialog(MapActivity activity, ContextMenuAdapter adapter,
-												 int themeRes, boolean nightMode,
-												 int pos, ArrayAdapter<ContextMenuItem> ad) {
+	protected static void showMapMagnifierDialog(MapActivity activity, int themeRes, boolean nightMode,
+												 ContextMenuItem item, OnDataChangeUiAdapter uiAdapter) {
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		int selectedProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
@@ -117,11 +116,11 @@ public class ConfigureMapDialogs {
 						if (mapContext != null) {
 							mapContext.updateMapSettings();
 						}
-						adapter.getItem(pos).setDescription(
+						item.setDescription(
 								String.format(Locale.UK, "%.0f", 100f * activity.getMyApplication()
 										.getSettings().MAP_DENSITY.get())
 										+ " %");
-						ad.notifyDataSetInvalidated();
+						uiAdapter.onDataSetInvalidated();
 					}
 				}
 		);
@@ -129,9 +128,8 @@ public class ConfigureMapDialogs {
 		dialogAdapter.setDialog(bld.show());
 	}
 
-	protected static void showTextSizeDialog(MapActivity activity, ContextMenuAdapter adapter,
-											 int themeRes, boolean nightMode,
-											 int pos, ArrayAdapter<ContextMenuItem> ad) {
+	protected static void showTextSizeDialog(MapActivity activity, int themeRes, boolean nightMode,
+											 ContextMenuItem item, OnDataChangeUiAdapter uiAdapter) {
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		int selectedProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
@@ -157,8 +155,8 @@ public class ConfigureMapDialogs {
 						int which = (int) v.getTag();
 						view.getSettings().TEXT_SCALE.set(txtValues[which]);
 						activity.refreshMapComplete();
-						adapter.getItem(pos).setDescription(ConfigureMapUtils.getScale(activity));
-						ad.notifyDataSetInvalidated();
+						item.setDescription(ConfigureMapUtils.getScale(activity));
+						uiAdapter.onDataSetInvalidated();
 					}
 				});
 		b.setAdapter(dialogAdapter, null);
@@ -166,7 +164,8 @@ public class ConfigureMapDialogs {
 		dialogAdapter.setDialog(b.show());
 	}
 
-	protected static void showMapLanguageDialog(MapActivity activity, ContextMenuAdapter adapter, int themeRes, boolean nightMode, int pos, ArrayAdapter<ContextMenuItem> ad) {
+	protected static void showMapLanguageDialog(MapActivity activity, int themeRes, boolean nightMode,
+	                                            ContextMenuItem item, OnDataChangeUiAdapter uiAdapter) {
 
 		int[] selectedLanguageIndex = new int[1];
 		boolean[] transliterateNames = new boolean[1];
@@ -251,15 +250,16 @@ public class ConfigureMapDialogs {
 				String localeDescr = txtIds[index];
 				localeDescr = localeDescr == null || localeDescr.isEmpty() ? activity
 						.getString(R.string.local_map_names) : localeDescr;
-				adapter.getItem(pos).setDescription(localeDescr);
-				ad.notifyDataSetInvalidated();
+				item.setDescription(localeDescr);
+				uiAdapter.onDataSetInvalidated();
 			}
 		});
 		b.show();
 	}
 
-	protected static void showRenderingPropertyDialog(MapActivity activity, ContextMenuAdapter adapter, RenderingRuleProperty p,
-													  CommonPreference<String> pref, int pos, boolean nightMode) {
+	protected static void showRenderingPropertyDialog(MapActivity activity, RenderingRuleProperty p,
+													  CommonPreference<String> pref, ContextMenuItem item,
+													  boolean nightMode) {
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		int currentProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
@@ -290,7 +290,7 @@ public class ConfigureMapDialogs {
 					}
 					activity.refreshMapComplete();
 					String description = AndroidUtils.getRenderingStringPropertyValue(activity, pref.get());
-					adapter.getItem(pos).setDescription(description);
+					item.setDescription(description);
 				}
 		);
 		b.setNegativeButton(R.string.shared_string_dismiss, null);
@@ -298,9 +298,8 @@ public class ConfigureMapDialogs {
 		dialogAdapter.setDialog(b.show());
 	}
 
-	protected static void showPreferencesDialog(ContextMenuAdapter adapter,
-												ArrayAdapter<?> a,
-												int pos,
+	protected static void showPreferencesDialog(OnDataChangeUiAdapter uiAdapter,
+												ContextMenuItem item,
 												MapActivity activity,
 												String category,
 												List<RenderingRuleProperty> ps,
@@ -345,9 +344,9 @@ public class ConfigureMapDialogs {
 				for (int i = 0; i < prefs.size(); i++) {
 					selected |= prefs.get(i).get();
 				}
-				adapter.getItem(pos).setSelected(selected);
-				adapter.getItem(pos).setColor(activity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-				a.notifyDataSetInvalidated();
+				item.setSelected(selected);
+				item.setColor(activity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+				uiAdapter.onDataSetInvalidated();
 			}
 		});
 
@@ -358,11 +357,9 @@ public class ConfigureMapDialogs {
 					prefs.get(i).set(tempPrefs[i]);
 					selected |= tempPrefs[i];
 				}
-				if (adapter != null) {
-					adapter.getItem(pos).setSelected(selected);
-					adapter.getItem(pos).setColor(activity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-				}
-				a.notifyDataSetInvalidated();
+				item.setSelected(selected);
+				item.setColor(activity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+				uiAdapter.onDataSetInvalidated();
 				activity.refreshMapComplete();
 				activity.getMapLayers().updateLayers(activity);
 			}
