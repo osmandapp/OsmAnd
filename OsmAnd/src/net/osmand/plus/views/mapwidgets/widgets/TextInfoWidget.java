@@ -1,53 +1,41 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
-import android.app.Activity;
-import android.graphics.Paint.Style;
-import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.plus.OsmandApplication;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 
-public class TextInfoWidget {
-
-	private final OsmandApplication app;
+public class TextInfoWidget extends MapWidget {
 
 	private String contentTitle;
-	private final View view;
+
 	private final ImageView imageView;
 	private final TextView textView;
 	private final TextView textViewShadow;
 	private final TextView smallTextView;
 	private final TextView smallTextViewShadow;
-	private final ImageView topImageView;
-	protected TextView topTextView;
-	private boolean explicitlyVisible;
 
-	private int dayIcon;
-	private int nightIcon;
-	private boolean isNight;
-	private final ViewGroup bottomLayout;
+	@DrawableRes
+	private int dayIconId;
+	@DrawableRes
+	private int nightIconId;
 
 	private Integer cachedMetricSystem = null;
 	private Integer cachedAngularUnits = null;
 
-	public TextInfoWidget(Activity activity) {
-		app = (OsmandApplication) activity.getApplication();
-		view = UiUtilities.getInflater(activity, isNight).inflate(R.layout.map_hud_widget, null);
-		bottomLayout = view.findViewById(R.id.widget_bottom_layout);
-		topImageView = view.findViewById(R.id.widget_top_icon);
-		topTextView = view.findViewById(R.id.widget_top_icon_text);
+	public TextInfoWidget(@NonNull MapActivity mapActivity) {
+		super(mapActivity);
 		imageView = view.findViewById(R.id.widget_icon);
 		textView = view.findViewById(R.id.widget_text);
 		textViewShadow = view.findViewById(R.id.widget_text_shadow);
@@ -55,12 +43,9 @@ public class TextInfoWidget {
 		smallTextView = view.findViewById(R.id.widget_text_small);
 	}
 
-	public OsmandApplication getApplication() {
-		return app;
-	}
-
-	public View getView() {
-		return view;
+	@Override
+	protected int getLayoutId() {
+		return R.layout.map_hud_widget;
 	}
 
 	public void setImageDrawable(Drawable imageDrawable) {
@@ -68,7 +53,7 @@ public class TextInfoWidget {
 	}
 
 	public void setImageDrawable(int res) {
-		setImageDrawable(app.getUIUtilities().getIcon(res, 0), false);
+		setImageDrawable(iconsCache.getIcon(res, 0), false);
 	}
 
 	public void setImageDrawable(Drawable imageDrawable, boolean gone) {
@@ -85,41 +70,15 @@ public class TextInfoWidget {
 		imageView.invalidate();
 	}
 
-	public void setTopImageDrawable(Drawable imageDrawable, String topText) {
-		if (imageDrawable != null) {
-			topImageView.setImageDrawable(imageDrawable);
-			topImageView.setVisibility(View.VISIBLE);
-			LinearLayout.LayoutParams lp = (android.widget.LinearLayout.LayoutParams) bottomLayout.getLayoutParams();
-			lp.gravity = Gravity.CENTER_HORIZONTAL;
-			bottomLayout.setLayoutParams(lp);
-			bottomLayout.invalidate();
-			topTextView.setVisibility(View.VISIBLE);
-			topTextView.setText(topText == null ? "" : topText);
-		} else {
-			topImageView.setVisibility(View.GONE);
-			topTextView.setVisibility(View.GONE);
-			LinearLayout.LayoutParams lp = (android.widget.LinearLayout.LayoutParams) bottomLayout.getLayoutParams();
-			lp.gravity = Gravity.NO_GRAVITY;
-			bottomLayout.setLayoutParams(lp);
-		}
-
-		topTextView.invalidate();
-		topImageView.invalidate();
-	}
-
-	public boolean setIcons(int widgetDayIcon, int widgetNightIcon) {
-		if (dayIcon != widgetDayIcon || nightIcon != widgetNightIcon) {
-			dayIcon = widgetDayIcon;
-			nightIcon = widgetNightIcon;
-			setImageDrawable(!isNight ? dayIcon : nightIcon);
+	public boolean setIcons(@DrawableRes int widgetDayIcon, @DrawableRes int widgetNightIcon) {
+		if (dayIconId != widgetDayIcon || nightIconId != widgetNightIcon) {
+			dayIconId = widgetDayIcon;
+			nightIconId = widgetNightIcon;
+			setImageDrawable(getIconId());
 			return true;
 		} else {
 			return false;
 		}
-	}
-
-	public boolean isNight() {
-		return isNight;
 	}
 
 	private CharSequence combine(CharSequence text, CharSequence subtext) {
@@ -128,7 +87,7 @@ public class TextInfoWidget {
 		} else if (TextUtils.isEmpty(subtext)) {
 			return text;
 		}
-		return text + " " + subtext; //$NON-NLS-1$
+		return text + " " + subtext;
 	}
 
 	public void setContentDescription(CharSequence text) {
@@ -136,7 +95,7 @@ public class TextInfoWidget {
 	}
 
 	public void setContentTitle(int messageId) {
-		setContentTitle(view.getContext().getString(messageId));
+		setContentTitle(getString(messageId));
 	}
 
 	public void setContentTitle(String text) {
@@ -151,9 +110,6 @@ public class TextInfoWidget {
 
 	protected void setTextNoUpdateVisibility(String text, String subtext) {
 		setContentDescription(combine(text, subtext));
-//		if(this.text != null && this.text.length() > 7) {
-//			this.text = this.text.substring(0, 6) +"..";
-//		}
 		if (text == null) {
 			textView.setText("");
 			textViewShadow.setText("");
@@ -170,42 +126,19 @@ public class TextInfoWidget {
 		}
 	}
 
-	protected boolean updateVisibility(boolean visible) {
-		if (visible != (view.getVisibility() == View.VISIBLE)) {
-			if (visible) {
-				view.setVisibility(View.VISIBLE);
-			} else {
-				view.setVisibility(View.GONE);
-			}
-			view.invalidate();
-			if (app.accessibilityEnabled())
-				view.setFocusable(visible);
-			return true;
-		}
-		return false;
-	}
-
-	public boolean isVisible() {
-		return view.getVisibility() == View.VISIBLE && view.getParent() != null;
-	}
-
-	public boolean updateInfo(DrawSettings drawSettings) {
-		return false;
-	}
-
 	public boolean isUpdateNeeded() {
-		boolean res = false;
+		boolean updateNeeded = false;
 		if (isMetricSystemDepended()) {
 			int metricSystem = app.getSettings().METRIC_SYSTEM.get().ordinal();
-			res |= cachedMetricSystem == null || cachedMetricSystem != metricSystem;
+			updateNeeded = cachedMetricSystem == null || cachedMetricSystem != metricSystem;
 			cachedMetricSystem = metricSystem;
 		}
 		if (isAngularUnitsDepended()) {
 			int angularUnits = app.getSettings().ANGULAR_UNITS.get().ordinal();
-			res |= cachedAngularUnits == null || cachedAngularUnits != angularUnits;
+			updateNeeded |= cachedAngularUnits == null || cachedAngularUnits != angularUnits;
 			cachedAngularUnits = angularUnits;
 		}
-		return res;
+		return updateNeeded;
 	}
 
 	public boolean isMetricSystemDepended() {
@@ -216,46 +149,39 @@ public class TextInfoWidget {
 		return false;
 	}
 
-	public void setOnClickListener(OnClickListener onClickListener) {
+	public void setOnClickListener(@Nullable OnClickListener onClickListener) {
 		view.setOnClickListener(onClickListener);
 	}
 
-	public void setExplicitlyVisible(boolean explicitlyVisible) {
-		this.explicitlyVisible = explicitlyVisible;
-	}
-
-	public boolean isExplicitlyVisible() {
-		return explicitlyVisible;
-	}
-
-	public void updateIconMode(boolean night) {
-		isNight = night;
-		if (dayIcon != 0) {
-			setImageDrawable(!night ? dayIcon : nightIcon);
+	@Override
+	public void updateColors(@NonNull TextState textState) {
+		super.updateColors(textState);
+		updateTextColor(smallTextView, smallTextViewShadow, textState.textColor, textState.textShadowColor,
+				textState.textBold, textState.textShadowRadius);
+		updateTextColor(textView, textViewShadow, textState.textColor, textState.textShadowColor,
+				textState.textBold, textState.textShadowRadius);
+		int iconId = getIconId();
+		if (iconId != 0) {
+			setImageDrawable(iconId);
 		}
 	}
 
-	public void updateTextColor(int textColor, int textShadowColor, boolean bold, int rad) {
-		updateTextColor(smallTextView, smallTextViewShadow, textColor, textShadowColor, bold, rad);
-		updateTextColor(textView, textViewShadow, textColor, textShadowColor, bold, rad);
-		updateTextColor(topTextView, null, textColor, textShadowColor, bold, rad);
+	@Override
+	protected boolean updateVisibility(boolean visible) {
+		boolean updatedVisibility = super.updateVisibility(visible);
+		if (updatedVisibility && app.accessibilityEnabled()) {
+			view.setFocusable(visible);
+		}
+		return updatedVisibility;
 	}
 
-	public static void updateTextColor(TextView tv, TextView shadow, int textColor, int textShadowColor, boolean textBold, int rad) {
-		if (shadow != null) {
-			if (rad > 0) {
-				shadow.setVisibility(View.VISIBLE);
-				shadow.setTypeface(Typeface.DEFAULT, textBold ? Typeface.BOLD : Typeface.NORMAL);
-				shadow.getPaint().setStrokeWidth(rad);
-				shadow.getPaint().setStyle(Style.STROKE);
-				shadow.setTextColor(textShadowColor);
-//				tv.getPaint().setStyle(Style.FILL);
-			} else {
-//				tv.getPaint().setStyle(Style.FILL_AND_STROKE);
-				shadow.setVisibility(View.GONE);
-			}
-		}
-		tv.setTextColor(textColor);
-		tv.setTypeface(Typeface.DEFAULT, textBold ? Typeface.BOLD : Typeface.NORMAL);
+	@DrawableRes
+	protected int getIconId() {
+		return getIconId(isNightMode());
+	}
+
+	@DrawableRes
+	public int getIconId(boolean nightMode) {
+		return nightMode ? nightIconId : dayIconId;
 	}
 }

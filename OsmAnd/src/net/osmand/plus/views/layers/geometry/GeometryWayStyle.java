@@ -13,6 +13,9 @@ public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 	private final T context;
 	protected Integer color;
 	protected Float width;
+	public static final int COLORIZATION_NONE = 0;
+	public static final int COLORIZATION_GRADIENT = 1;
+	public static final int COLORIZATION_SOLID = 2;
 
 	public GeometryWayStyle(@NonNull T context) {
 		this.context = context;
@@ -114,5 +117,9 @@ public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 		}
 		GeometryWayStyle<?> o = (GeometryWayStyle<?>) other;
 		return Algorithms.objectEquals(color, o.color) && Algorithms.objectEquals(width, o.width);
+	}
+
+	public int getColorizationScheme() {
+		return COLORIZATION_NONE;
 	}
 }

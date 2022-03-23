@@ -2700,7 +2700,6 @@
     <string name="ski_map_render_descr">Pentru schi. Dispune de pârtii, teleschiuri, piste de fond, etc.</string>
     <string name="light_rs_render_descr">Stil de conducere simplu. Mod de noapte ,cu linii de contur, drumuri cu contrast portocaliu, obiecte intunecate in harta secundară.</string>
     <string name="topo_render_descr">Pentru drumeții, trekking și ciclism în natură. Se poate citi în aer liber. Drumuri contrastante și obiecte naturale, diferite tipuri de trasee, opțiuni avansate de linii de contur, detalii suplimentare. Reglarea integrității suprafeței distinge calitatea drumului. Fără mod nocturn.</string>
-    <string name="mapnik_render_descr">Vechiul stil \"Mapnik\".Culori similare cu \"Mapnik\".</string>
     <string name="touring_view_render_descr">Stil turistic cu contrast ridicat și detalii maxime. Include toate opțiunile stilului implicit OsmAnd, afișând în același timp cât mai multe detalii posibile, în special drumuri, căi și alte modalități de călătorie. Distincția clară \"atlas turistic\" între tipurile de drum. Potrivit pentru zi, noapte și în aer liber.</string>
     <string name="off_road_render_descr">Pentru conducere off-road bazată pe stilul „Topo” și pentru utilizarea cu imagini de satelit verzi, ca strat subaltern. Grosimea drumului principal redus, grosimea crescută a pistelor, cărărilor, bicicletelor și altor rute.</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Un buton pentru a afișa sau ascunde traseele selectate pe hartă.</string>

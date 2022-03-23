@@ -2687,7 +2687,6 @@
     <string name="ski_map_render_descr">Stile per lo sci. Visualizza piste da sci, impianti di risalita. Oggetti della mappa secondari ridotti nell\'aspetto.</string>
     <string name="light_rs_render_descr">Stile semplice per la guida. Modalità notte delicato, isoipse, strade arancio contrastate, oggetti secondari ridotti nell\'aspetto.</string>
     <string name="topo_render_descr">Per passeggiate, escursioni e pedalate nella natura. Leggibile all\'aperto. Oggetti naturali e strade ad alto contrasto, tipi differenti di percorsi, isoipse con impostazioni avanzate, più dettagli. L\'integrità della superficie distingue la qualità delle strade. No modalità notte.</string>
-    <string name="mapnik_render_descr">Vecchio stile simile a ‘Mapnik’. Colori simili a ‘Mapnik’.</string>
     <string name="default_render_descr">Stile per uso generico. Città dense visualizzate chiaramente. Isoipse, percorsi, qualità della superficie, restrizioni di accesso, sigle stradali, rappresentazione grafica dei percorsi in base al SAC, elementi per gli sport fluviali.</string>
     <string name="open_wikipedia_link_online">Apri il link di Wikipedia online</string>
     <string name="open_wikipedia_link_online_description">Il link verrà aperto in un browser web.</string>

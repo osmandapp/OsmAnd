@@ -1,10 +1,6 @@
 package net.osmand.plus.utils;
 
 
-import static android.content.Context.POWER_SERVICE;
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
-import static android.util.TypedValue.COMPLEX_UNIT_SP;
-
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.ActivityNotFoundException;
@@ -63,6 +59,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.graphics.drawable.DrawableCompat;
@@ -93,6 +90,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+
+import static android.content.Context.POWER_SERVICE;
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 public class AndroidUtils {
 	private static final Log LOG = PlatformUtil.getLog(AndroidUtils.class);
@@ -702,6 +703,20 @@ public class AndroidUtils {
 		return coordinates;
 	}
 
+	public static int getViewOnScreenX(@NonNull View view) {
+		return getLocationOnScreen(view)[0];
+	}
+
+	public static int getViewOnScreenY(@NonNull View view) {
+		return getLocationOnScreen(view)[1];
+	}
+
+	public static int[] getLocationOnScreen(@NonNull View view) {
+		int[] locationOnScreen = new int[2];
+		view.getLocationOnScreen(locationOnScreen);
+		return locationOnScreen;
+	}
+
 	public static void enterToFullScreen(Activity activity, View view) {
 		if (Build.VERSION.SDK_INT >= 21) {
 			requestLayout(view);
@@ -1162,4 +1177,19 @@ public class AndroidUtils {
 		}
 		return null;
 	}
+
+	public static void openUrl(@NonNull Context context, @NonNull Uri uri, boolean nightMode) {
+		CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
+				.setToolbarColor(ColorUtilities.getAppBarColor(context, nightMode))
+				.build();
+		customTabsIntent.intent.setData(uri);
+		try {
+			customTabsIntent.launchUrl(context, uri);
+		} catch (ActivityNotFoundException e) {
+			Toast.makeText(context, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
+		}
+	}
+
+
+
 }

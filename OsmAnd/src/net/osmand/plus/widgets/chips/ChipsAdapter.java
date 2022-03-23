@@ -1,8 +1,10 @@
 package net.osmand.plus.widgets.chips;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.RippleDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
@@ -68,10 +71,12 @@ public class ChipsAdapter extends RecyclerView.Adapter<ChipViewHolder> {
 		background.setColor(color);
 		int strokeWidth = getStrokeWidth();
 		if (strokeWidth > 0) {
-			int strokeColor = getStrokeColor();
+			int strokeColor = getStrokeColor(chip);
 			background.setStroke(strokeWidth, strokeColor);
 		}
-		Drawable ripple = getDrawable(getRippleId());
+		ColorStateList rippleColor = ColorStateList.valueOf(getRippleColor(chip));
+		RippleDrawable ripple = new RippleDrawable(rippleColor, null, null);
+		UiUtilities.tintDrawable(ripple, getRippleColor(chip));
 		AndroidUtils.setBackground(button, background);
 		AndroidUtils.setBackground(wrapper, ripple);
 	}
@@ -114,7 +119,7 @@ public class ChipsAdapter extends RecyclerView.Adapter<ChipViewHolder> {
 	@ColorInt
 	private int getBgColor(@NonNull ChipItem chip) {
 		if (chip.isEnabled) {
-			if (chip.isSelected) {
+			if (dataHolder.isSelected(chip)) {
 				return chip.bgSelectedColor != null ? chip.bgSelectedColor : defAttrs.bgSelectedColor;
 			} else {
 				return chip.bgColor != null ? chip.bgColor : defAttrs.bgColor;
@@ -127,7 +132,7 @@ public class ChipsAdapter extends RecyclerView.Adapter<ChipViewHolder> {
 	@ColorInt
 	private int getTitleColor(@NonNull ChipItem chip) {
 		if (chip.isEnabled) {
-			if (chip.isSelected) {
+			if (dataHolder.isSelected(chip)) {
 				return chip.titleSelectedColor != null ? chip.titleSelectedColor : defAttrs.titleSelectedColor;
 			} else {
 				return chip.titleColor != null ? chip.titleColor : defAttrs.titleColor;
@@ -140,7 +145,7 @@ public class ChipsAdapter extends RecyclerView.Adapter<ChipViewHolder> {
 	@ColorInt
 	private int getIconColor(@NonNull ChipItem chip) {
 		if (chip.isEnabled) {
-			if (chip.isSelected) {
+			if (dataHolder.isSelected(chip)) {
 				return chip.iconSelectedColor != null ? chip.iconSelectedColor : defAttrs.iconSelectedColor;
 			} else {
 				return chip.iconColor != null ? chip.iconColor : defAttrs.iconColor;
@@ -151,8 +156,21 @@ public class ChipsAdapter extends RecyclerView.Adapter<ChipViewHolder> {
 	}
 
 	@ColorInt
-	private int getStrokeColor() {
-		return defAttrs.strokeColor;
+	private int getStrokeColor(@NonNull ChipItem chip) {
+		if (chip.isEnabled) {
+			if (dataHolder.isSelected(chip)) {
+				return chip.strokeSelectedColor != null ? chip.strokeSelectedColor : defAttrs.strokeColor;
+			} else {
+				return chip.strokeColor != null ? chip.strokeColor : defAttrs.strokeColor;
+			}
+		} else {
+			return chip.strokeDisabledColor != null ? chip.strokeDisabledColor : defAttrs.strokeColor;
+		}
+	}
+
+	@ColorInt
+	private int getRippleColor(@NonNull ChipItem chip) {
+		return chip.rippleColor != null ? chip.rippleColor : defAttrs.rippleColor;
 	}
 
 	private int getStrokeWidth() {

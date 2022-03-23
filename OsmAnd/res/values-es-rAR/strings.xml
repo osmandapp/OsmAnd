@@ -2729,7 +2729,6 @@
     <string name="ski_map_render_descr">Para esquiar. Cuenta con pistas de esquí, remontes, pistas de esquí de fondo, etc. Atenúa los objetos de mapas secundarios.</string>
     <string name="light_rs_render_descr">Estilo de conducción simple. Modo nocturno suave, curvas de nivel, caminos contrastantes con estilo naranja, atenúa los objetos de mapas secundarios.</string>
     <string name="topo_render_descr">Para practicar caminatas, senderismo y ciclismo en la naturaleza. Legible al aire libre. Caminos y objetos naturales en contraste, diferentes tipos de recorridos, opciones avanzadas en curvas de nivel, detalles adicionales. Ajustar la integridad de la superficie distingue la calidad del camino. Sin modo nocturno.</string>
-    <string name="mapnik_render_descr">Antiguo estilo predefinido de Mapnik. Colores similares al estilo Mapnik.</string>
     <string name="default_render_descr">Estilo de uso general. Ciudades densas mostradas limpiamente. Cuenta con curvas de nivel, recorridos, calidad de la superficie, restricciones de acceso, escudos, visualización de caminos según escala SA y características de deportes acuáticos.</string>
     <string name="touring_view_render_descr">Estilo turístico con alto contraste y máximo detalle. Incluye todas las opciones del estilo predefinido de OsmAnd, mientras que muestra tantos detalles como sea posible, en caminos, senderos y otras formas de viaje. Clara distinción del «atlas turístico» entre tipos de caminos. Adecuado para uso diurno, nocturno y al aire libre.</string>
     <string name="shared_string_bookmark">Favorito</string>
@@ -4545,5 +4544,7 @@
     <string name="move_map_to_select_area">Mover el mapa para elegir el área necesaria.</string>
     <string name="zoom_levels_difference_description">Una gran diferencia entre los niveles de zum, puede aumentar el tamaño de los datos descargados.</string>
     <string name="rendering_attr_showFitnessTrails_description">Muestra los circuitos aeróbicos</string>
-    <string name="rendering_attr_showFitnessTrails_name">Mostrar circuitos aeróbicos</string>
+    <string name="rendering_attr_showFitnessTrails_name">Circuitos aeróbicos</string>
+    <string name="rendering_attr_showRunningRoutes_name">Rutas para correr</string>
+    <string name="rendering_attr_showRunningRoutes_description">Mostrar rutas para correr</string>
 </resources>

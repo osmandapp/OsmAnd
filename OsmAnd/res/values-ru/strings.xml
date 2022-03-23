@@ -106,9 +106,9 @@
     <string name="quick_action_add_first_intermediate_desc">Установка центра экрана местом первой остановки на маршруте.</string>
     <string name="no_overlay">Без наложения</string>
     <string name="no_underlay">Без подложки</string>
-    <string name="routing_attr_relief_smoothness_factor_hills_name">Гористый</string>
-    <string name="routing_attr_relief_smoothness_factor_plains_name">Сглаженный</string>
-    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Ровный</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Холмистый</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Слабохолмистый</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Равнинный</string>
     <string name="routing_attr_driving_style_speed_name">Короткие маршруты</string>
     <string name="routing_attr_driving_style_balance_name">Сбалансированный</string>
     <string name="routing_attr_driving_style_safety_name">Предпочитать переулки</string>
@@ -2762,7 +2762,6 @@
     <string name="download_all">Скачать все</string>
     <string name="light_rs_render_descr">Простой стиль для вождения. Мягкий ночной режим, контурные линии, контрастные дороги в оранжевом стиле, тусклые второстепенные объекты карты.</string>
     <string name="topo_render_descr">Для пеших походов, трекинга и велопоездок на природе. Хорошо читается при сложном освещении. Контрастные дороги и природные объекты, различные типы маршрутов, контурные линии с расширенными настройками, дополнительные детали. Параметр «дорожное покрытие» позволяет различать поверхность и качество дорог. Ночной режим отсутствует.</string>
-    <string name="mapnik_render_descr">Старый стиль по умолчанию «Mapnik». Похожие цвета на «Mapnik».</string>
     <string name="default_render_descr">Стиль общего назначения. Густонаселённые города показаны упрощённо. Выделяет контурные линии, маршруты, качество поверхности, ограничения доступа, дорожные щиты, визуализация пешеходных маршрутов по шкале SAC, объекты спортивных сплавов.</string>
     <string name="open_wikipedia_link_online">Открыть ссылку Википедии в онлайн</string>
     <string name="open_wikipedia_link_online_description">Ссылка будет открыта в веб-браузере.</string>
@@ -4550,5 +4549,7 @@
     <string name="stop_download_desc">Загрузка не завершена. Если прервать загрузку сейчас, для просмотра будет доступна только часть тайлов.</string>
     <string name="zoom_levels_difference_description">Большая разница между уровнями масштабирования может увеличить размер загружаемых данных.</string>
     <string name="rendering_attr_showFitnessTrails_description">Показать фитнес-маршруты</string>
-    <string name="rendering_attr_showFitnessTrails_name">Показать фитнес-маршруты</string>
+    <string name="rendering_attr_showFitnessTrails_name">Фитнес-маршруты</string>
+    <string name="rendering_attr_showRunningRoutes_name">Беговые маршруты</string>
+    <string name="rendering_attr_showRunningRoutes_description">Показать беговые маршруты</string>
 </resources>

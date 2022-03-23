@@ -2594,7 +2594,6 @@ POIの更新は利用できません</string>
     <string name="ski_map_render_descr">スキー用です。主な特徴はピステ(滑走路、ゲレンデ)、スキーリフト、クロスカントリー用コース表示などを備えています。 逆にそれ以外のマップオブジェクトを暗くして目立たなくなるようにもします。</string>
     <string name="light_rs_render_descr">シンプルな運転用スタイルです。おだやかな夜間モード、等高線、対照的なオレンジ色スタイルの道路表示で、セカンダリマップオブジェクトは若干暗くしてあります。</string>
     <string name="topo_render_descr">ハイキング、トレッキング、ネイチャーサイクリング向けです。屋外で視認しやすい配色になっています。対照的な道路と自然物、さまざまなルートタイプ、高度な等高線オプション、詳細の追加などがなされています。 路面の素材や質を表示するオプションを使えば、各道路の状態も把握できます。夜間モードはありません。</string>
-    <string name="mapnik_render_descr">昔のデフォルトであった『Mapnik』スタイルです。Mapnikそのものではありませんが似た配色になります。</string>
     <string name="coord_input_edit_point">地点/座標の編集</string>
     <string name="coord_input_add_point">座標の追加</string>
     <string name="coord_input_save_as_track">経路として保存</string>
@@ -4566,4 +4565,8 @@ POIの更新は利用できません</string>
     <string name="shared_string_progress">進捗</string>
     <string name="backup_data_removed">すべてのデータが削除されました。</string>
     <string name="backup_version_history_removed">すべてのバージョン履歴が削除されました。</string>
+    <string name="rendering_attr_showRunningRoutes_description">ランニングルートを表示します</string>
+    <string name="rendering_attr_showFitnessTrails_name">アスレチックコース</string>
+    <string name="rendering_attr_showFitnessTrails_description">アスレチックコースを表示します</string>
+    <string name="rendering_attr_showRunningRoutes_name">ランニングルート</string>
 </resources>

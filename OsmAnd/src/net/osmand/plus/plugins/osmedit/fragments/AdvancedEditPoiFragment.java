@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -88,7 +89,10 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 		mAdapter.setValueData(valueKeys.toArray(new String[0]));
 
 		View addTagButton = view.findViewById(R.id.addTagButton);
-		addTagButton.setOnClickListener(v -> mAdapter.addTagView("", ""));
+		addTagButton.setOnClickListener(v -> {
+			mAdapter.addTagView("", "");
+			scrollToBottom(view);
+		});
 
 		return view;
 	}
@@ -100,6 +104,17 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 			addPoiToStringSet(abstractPoiType, tagKeys, valueKeys);
 		}
 		addPoiToStringSet(mapPoiTypes.getOtherMapCategory(), tagKeys, valueKeys);
+	}
+
+	private void scrollToBottom(@NonNull View view) {
+		view.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+				EditPoiDialogFragment parentFragment = getEditPoiFragment();
+				parentFragment.smoothScrollToBottom();
+			}
+		});
 	}
 
 	@Override

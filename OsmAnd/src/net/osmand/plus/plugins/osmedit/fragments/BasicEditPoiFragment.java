@@ -2,7 +2,6 @@ package net.osmand.plus.plugins.osmedit.fragments;
 
 import static net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment.AMENITY_TEXT_LENGTH;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -10,7 +9,6 @@ import android.text.InputFilter;
 import android.text.InputFilter.LengthFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +37,7 @@ import net.osmand.plus.plugins.osmedit.dialogs.OpeningHoursDaysDialogFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.OpeningHoursHoursDialogFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 import net.osmand.util.OpeningHoursParser.BasicOpeningHourRule;
@@ -73,10 +72,9 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment implements OnFragme
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		app = requireMyApplication();
 
-		boolean nightMode = app.getDaynightHelper().isNightMode();
-		int themeRes = requireMyApplication().getSettings().isLightActionBar() ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
-		Context themedContext = new ContextThemeWrapper(getContext(), themeRes);
-		View view = inflater.cloneInContext(themedContext).inflate(R.layout.fragment_edit_poi_normal, container, false);
+		boolean nightMode = !app.getSettings().isLightActionBar();
+		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+		View view = themedInflater.inflate(R.layout.fragment_edit_poi_normal, container, false);
 
 		InputFilter[] lengthLimit = new InputFilter[] {
 				new LengthFilter(AMENITY_TEXT_LENGTH)

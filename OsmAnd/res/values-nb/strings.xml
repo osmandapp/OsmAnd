@@ -2726,7 +2726,6 @@
     <string name="ski_map_render_descr">Skistil. Har bakker, heiser og andre skifunksjoner osv. Demper sekundære kartobjekter.</string>
     <string name="light_rs_render_descr">Enkel kjørestil. Skånsom nattmodus, koter, kontrastrike oransjefargede veier, dempede sekundære kartobjekter.</string>
     <string name="topo_render_descr">For turgåing, vandring og sykling i naturen. Lesbar utendørs. Kontrasterende veier og naturlige objekter, forskjellige rutetyper, avanserte kotealternativer, flere detaljer. Justering av overflate gjør det mulig å skjelne veikvalitet. Ingen nattmodus.</string>
-    <string name="mapnik_render_descr">Gammel forvalgt \'Mapnik\'-stil. Lignende farger som \"Mapnik\".</string>
     <string name="touring_view_render_descr">Turstil med høy kontrast og maksimalt med detaljer. Inkluderer alle alternativene til standardstilen til OsmAnd, med visning av så mange detaljer som mulig, i særdeleshet veier, stier og andre måter å reise på. Tydelig \"reiseatlas\"-skille mellom veityper. Egnet for dag, natt og utendørs bruk.</string>
     <string name="default_render_descr">Stil for generell bruk. Renere opptegning i tett befolkede byer. Har koter, ruter, overflatekvalitet, tilgangsbegrensninger, veinummer, stiopptegning i henhold til SAC-skala, raftingsfunksjoner.</string>
     <string name="open_wikipedia_link_online">Åpne Wikipedia-lenke på nett</string>
@@ -4540,6 +4539,8 @@
     <string name="shared_string_complete">fullført</string>
     <string name="number_of_tiles">Antall kartfliser</string>
     <string name="move_map_to_select_area">Flytt kartet for å velge ønsket område.</string>
-    <string name="rendering_attr_showFitnessTrails_name">Vis trimløyper</string>
+    <string name="rendering_attr_showFitnessTrails_name">Trimløyper</string>
     <string name="rendering_attr_showFitnessTrails_description">Vis trimløyper</string>
+    <string name="rendering_attr_showRunningRoutes_name">Løperuter</string>
+    <string name="rendering_attr_showRunningRoutes_description">Vis løperuter</string>
 </resources>
