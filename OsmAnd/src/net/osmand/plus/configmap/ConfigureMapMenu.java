@@ -1,4 +1,4 @@
-package net.osmand.plus.dialogs;
+package net.osmand.plus.configmap;
 
 import android.view.View;
 
@@ -18,6 +18,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
+import net.osmand.plus.dialogs.DetailsBottomSheet;
+import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RendererRegistry;

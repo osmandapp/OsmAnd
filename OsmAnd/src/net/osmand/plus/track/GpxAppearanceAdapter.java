@@ -1,7 +1,5 @@
 package net.osmand.plus.track;
 
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -13,12 +11,12 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.configmap.ConfigureMapMenu;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.render.RenderingRule;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
@@ -26,6 +24,8 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 
 public class GpxAppearanceAdapter extends ArrayAdapter<GpxAppearanceAdapter.AppearanceListItem> {
 

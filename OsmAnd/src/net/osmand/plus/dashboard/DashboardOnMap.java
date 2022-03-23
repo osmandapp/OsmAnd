@@ -50,7 +50,7 @@ import net.osmand.data.ValueHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.configuremap.ConfigureMapFragment;
+import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dashboard.tools.DashboardSettingsDialogFragment;
 import net.osmand.plus.dashboard.tools.TransactionBuilder;

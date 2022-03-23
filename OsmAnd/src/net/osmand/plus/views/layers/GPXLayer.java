@@ -2,8 +2,8 @@ package net.osmand.plus.views.layers;
 
 import static net.osmand.GPXUtilities.calculateTrackBounds;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
+import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
+import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 
 import android.content.Context;
 import android.graphics.Canvas;

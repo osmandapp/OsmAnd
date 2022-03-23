@@ -28,7 +28,7 @@ import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.configmap.ConfigureMapMenu;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.myplaces.ui.AvailableGPXFragment;
 import net.osmand.plus.myplaces.ui.AvailableGPXFragment.GpxInfo;

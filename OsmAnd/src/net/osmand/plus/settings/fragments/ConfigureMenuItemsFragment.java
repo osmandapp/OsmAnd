@@ -31,7 +31,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.button.PurchasingUtils;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.configmap.ConfigureMapMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.settings.backend.ApplicationMode;

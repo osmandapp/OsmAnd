@@ -21,6 +21,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTwoChoicesButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTwoChoicesButton.OnBottomBtnClickListener;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
+import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
