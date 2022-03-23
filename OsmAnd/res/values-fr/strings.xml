@@ -2720,7 +2720,6 @@
     <string name="nautical_render_descr">Pour le guidage en mer et en rivière. Fonctions clés : bouées, phares, balises, chenaux de navigation, ports, lignes de sonde.</string>
     <string name="ski_map_render_descr">Sports d\'hiver. Fonctions clés : tracés et difficultés des pistes de ski, remontées mécaniques, courses hors-piste, rendu hivernal et masquage des objets secondaires.</string>
     <string name="light_rs_render_descr">Style simple pour la conduite. Mode nuit doux, courbes de niveaux, routes contrastées de couleur orange, objets secondaires masqués.</string>
-    <string name="mapnik_render_descr">Ancien rendu par défaut Mapnik. Fonctions clés : couleurs identiques au style Mapnik.</string>
     <string name="default_render_descr">Style générique. Zones urbaines affichées clairement, courbes de niveaux, routes et revêtement des routes, restrictions d\'accès, chemins identifiés sur l\'échelle SAC.</string>
     <string name="shared_string_bookmark">Favori</string>
     <string name="topo_render_descr">Pour les activités en extérieur (randonnée, VTT). Lisibilité optimisée pour l\'extérieur, routes et éléments naturels contrastés, distinction des types de routes en fonction de leur revêtement, options avancées pour les courbes de niveaux, nombreux détails. Pas de mode nuit.</string>

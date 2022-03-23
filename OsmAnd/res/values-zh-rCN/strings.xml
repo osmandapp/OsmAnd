@@ -3593,7 +3593,6 @@
     <string name="welcome_to_open_beta">欢迎使用公开测试版</string>
     <string name="start_editing_card_image_text">任何人都可以编辑的自由的全球旅游指南。</string>
     <string name="travel_card_download_descr">下载 Wikivoyage 旅行指南，在没有连接到互联网的情况下查看世界各地的文章。</string>
-    <string name="mapnik_render_descr">旧的默认 \'Mapnik\' 风格。与 \'Mapnik\' 颜色相似。</string>
     <string name="keep_passed_markers">在地图上保留已通过的标记</string>
     <string name="choose_track_file_to_follow">选择要跟随的轨迹文件</string>
     <string name="rendering_attr_highway_class_state_road_name">国道</string>

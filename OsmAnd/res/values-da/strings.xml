@@ -2738,7 +2738,6 @@
     <string name="ski_map_render_descr">Til skiløb. Viser pister, skilifte, cross country-spor, etc. Dæmper sekundære kortobjekter.</string>
     <string name="light_rs_render_descr">Enkel stil til kørsel. Skånsom for øjnene i nat-tilstand, højdekurver, veje med kontrast i orange, dæmper sekundære kortobjekter.</string>
     <string name="topo_render_descr">Til vandring, gåture og cykling i naturen. God læsbarhed udendørs. Kontrast mellem veje og naturlige objekter, forskellige typer ruter, højdekurver med avancerede indstillinger, ekstra detaljer. Overfladevalg gør det muligt at skelne mellem veje med forskellig overfladekvalitet. Ingen nat-tilstand.</string>
-    <string name="mapnik_render_descr">Gammel standard \'Mapnik\' stilart. Farver svarer til \'Mapnik\'.</string>
     <string name="default_render_descr">Stilart til general brug. Tæt bebyggede byer vises klart. Højdekurver, ruter, vejbelægning, adgangsbegrænsninger, vejskilte, visning af stier i henhold til SAC-skalaen, rafting (sport) elementer.</string>
     <string name="touring_view_render_descr">Touring-stilart med høj kontrast og maksimal detalje. Indeholder alle indstillingsmuligheder fra OsmAnd-standardstilen, mens der vises så mange detaljer som muligt, navnlig alle veje, stier og andre måder at rejse på. Klar \"touring atlas\" sondring mellem alle forskellige vejtyper. Velegnet til dag, nat og udendørsbrug.</string>
     <string name="shared_string_bookmark">Bogmærke</string>
