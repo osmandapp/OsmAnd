@@ -32,7 +32,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import gnu.trove.list.array.TIntArrayList;
 
@@ -622,6 +628,16 @@ public class NativeLibrary {
 		public String getRouteName() {
 			for (RouteType routeType : RouteType.values()) {
 				String name = getTagValue(routeType.getTag() + "_route_name");
+				if (!Algorithms.isEmpty(name)) {
+					return name;
+				}
+			}
+			return null;
+		}
+
+		public String getRouteRef() {
+			for (RouteType routeType : RouteType.values()) {
+				String name = getTagValue(routeType.getTag() + "_route_ref");
 				if (!Algorithms.isEmpty(name)) {
 					return name;
 				}
