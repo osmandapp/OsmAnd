@@ -72,9 +72,7 @@ public class SearchResult {
 
 	private double getSumPhraseMatchWeight() {
 		// if result is a complete match in the search we prioritize it higher
-		boolean allWordsMatched = allWordsMatched(localeName);
-		allWordsMatched = checkOtherNames(allWordsMatched);
-		
+		boolean allWordsMatched = allWordsMatched(localeName) || checkOtherNames();
 		if (objectType == ObjectType.POI_TYPE) {
 			allWordsMatched = false;
 		}
@@ -90,16 +88,15 @@ public class SearchResult {
 		return res;
 	}
 	
-	private boolean checkOtherNames(boolean allWordsMatched) {
-		if (otherNames != null && !allWordsMatched) {
+	private boolean checkOtherNames() {
+		if (otherNames != null) {
 			for (String otherName : otherNames) {
-				allWordsMatched = allWordsMatched(otherName);
-				if (allWordsMatched) {
+				if (allWordsMatched(otherName)) {
 					return true;
 				}
 			}
 		}
-		return allWordsMatched;
+		return false;
 	}
 
 	public int getDepth() {

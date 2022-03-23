@@ -1633,18 +1633,6 @@ public class SearchCoreFactory {
 		}
 	}
 
-	private static String stripBraces(String localeName) {
-		int i = localeName.indexOf('(');
-		String retName = localeName;
-		if (i > -1) {
-			retName = localeName.substring(0, i);
-			int j = localeName.indexOf(')', i);
-			if (j > -1) {
-				retName = retName.trim() + ' ' + localeName.substring(j);
-			}
-		}
-		return retName;
-	}
 
 	public static boolean isLastWordCityGroup(SearchPhrase p ) {
 		return p.isLastWord(ObjectType.CITY) || p.isLastWord(ObjectType.POSTCODE) ||

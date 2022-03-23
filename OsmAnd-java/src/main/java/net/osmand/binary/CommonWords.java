@@ -6,6 +6,10 @@ import java.util.Map;
 public class CommonWords {
 	private static Map<String, Integer> commonWordsDictionary = new LinkedHashMap<>();
 	private static Map<String, Integer> frequentlyUsedWordsDictionary = new LinkedHashMap<>();
+	
+	// potenitally name of street (31st road)
+	private static String NUMBER_WITH_2_OR_MORE_LETTERS = "NUMBER_WITH_2_OR_MORE_LETTERS"; 
+	
 	private static void addCommon(String string) {
 		commonWordsDictionary.put(string, commonWordsDictionary.size());
 	}
@@ -23,8 +27,8 @@ public class CommonWords {
 	}
 
 	public static int getCommonSearch(String name) {
-		if (Character.isDigit(name.charAt(0)) && !hasMoreOneLetter(name)) {
-			name = "DIGIT";
+		if (Character.isDigit(name.charAt(0)) && letters(name) >= 2) {
+			name = NUMBER_WITH_2_OR_MORE_LETTERS;
 		}
 		Integer i = commonWordsDictionary.get(name);
 		// higher means better for search
@@ -43,14 +47,14 @@ public class CommonWords {
 		return i == null ? -1 : i.intValue();
 	}
 	
-	private static boolean hasMoreOneLetter(String s) {
+	private static int letters(String s) {
 		int count = 0;
 		for (int i = 0; i < s.length(); i++) {
-			if (!Character.isDigit(s.charAt(i)) && !Character.isSpaceChar(s.charAt(i))) {
+			if (!Character.isDigit(s.charAt(i))) {
 				count++;
 			}
 		}
-		return count > 1;
+		return count;
 	}
 	
 	static {
@@ -906,7 +910,7 @@ public class CommonWords {
 		addCommon("viale");
 		addCommon("loop");
 		
-		addCommon("DIGIT");
+		addCommon(NUMBER_WITH_2_OR_MORE_LETTERS);
 
 		addCommon("bridge");
 		addCommon("embankment");
