@@ -4083,13 +4083,13 @@
     <string name="poi_computer_repair_no">Ремонт компьютеров: нет</string>
     <string name="poi_computer_sales_no">Продажа компьютеров: нет</string>
     <string name="poi_mattress_no">Нет</string>
-    <string name="poi_furniture_office">Офис</string>
+    <string name="poi_furniture_office">Офис;Офисная мебель</string>
     <string name="poi_furniture_no">Нет</string>
     <string name="poi_furniture_sofa">Диван;Мебель</string>
     <string name="poi_furniture_bed">Кровать;Мебель</string>
-    <string name="poi_furniture_living_room">Гостиная</string>
-    <string name="poi_furniture_kitchen">Кухня</string>
-    <string name="poi_furniture_bedroom">Спальня</string>
+    <string name="poi_furniture_living_room">Гостиная;Мебель для гостиной</string>
+    <string name="poi_furniture_kitchen">Кухня;Кухонная мебель</string>
+    <string name="poi_furniture_bedroom">Спальня;Мебель для спальни</string>
     <string name="poi_generator_type_lead_acid">Тип генератора: свинцово-кислотный</string>
     <string name="poi_generator_type_bioreactor">Тип генератора: биореактор</string>
     <string name="poi_generator_type_combined_cycle">Тип генератора: комбинированный цикл</string>
@@ -4114,7 +4114,7 @@
     <string name="poi_generator_method_stream">Метод генерации: поток</string>
     <string name="poi_generator_type_redox_flow">Тип генератора: окислительно-восстановительный проточный</string>
     <string name="poi_heating_gas">Газ</string>
-    <string name="poi_computer_sales_yes">Есть</string>
+    <string name="poi_computer_sales_yes">Есть;Продажа компьютеров</string>
     <string name="poi_computer_repair_yes">Есть;Ремонт компьютеров</string>
     <string name="poi_computer_parts_yes">Есть;Компьютерные комплектующие</string>
     <string name="poi_computer_parts_no">Комплектующие для ПК: нет</string>
@@ -4135,7 +4135,7 @@
     <string name="poi_generator_type_pelton_turbine">Тип генератора: ковшовая турбина (турбина Пелтона)</string>
     <string name="poi_generator_type_hydrodynamic_screw">Тип генератора: гидродинамический винт (Архимедов винт)</string>
     <string name="poi_generator_type_molten_salt">Тип генератора: жидкосолевой</string>
-    <string name="poi_mattress_yes">Есть</string>
+    <string name="poi_mattress_yes">Есть;Матрас</string>
     <string name="poi_heating_fireplace">Камин</string>
     <string name="poi_furniture_yes">Есть;Мебель</string>
     <string name="poi_heating_yes">Есть;Отопление</string>
@@ -4156,7 +4156,7 @@
     <string name="poi_generator_type_bwr_5">Тип генератора: кипящий водо-водяной реактор BWR-5</string>
     <string name="poi_generator_type_bwr_6">Тип генератора: кипящий водо-водяной реактор BWR-6</string>
     <string name="poi_generator_method_barrage">Метод генерации: энергия прилива</string>
-    <string name="poi_computer_sales_used">Б/у</string>
+    <string name="poi_computer_sales_used">Б/у; Б/у компьютеры</string>
     <string name="poi_generator_type_phwr">Тип генератора: тяжеловодный ядерный реактор (PHWR)</string>
     <string name="poi_computer_sales">Продажа компьютеров</string>
     <string name="poi_computer_repair">Ремонт компьютеров</string>
@@ -4169,7 +4169,7 @@
     <string name="poi_generator_type_epr">Тип генератора: водо-водяной ядерный реактор EPR</string>
     <string name="poi_generator_type_icf">Тип генератора: инерциальный управляемый термоядерный синтез ICF</string>
     <string name="poi_service_fleurop_yes">Есть</string>
-    <string name="poi_furniture_used">Б/у</string>
+    <string name="poi_furniture_used">Б/у;Б/у мебель</string>
     <string name="poi_medical_supply_filter">Категории медицинского снабжения</string>
     <string name="poi_mattress_filter">Матрас</string>
     <string name="poi_furniture_filter">Мебель</string>
@@ -4185,9 +4185,9 @@
     <string name="poi_museum_art">Искусство</string>
     <string name="poi_museum_aviation">Авиация</string>
     <string name="poi_museum_aerospace">Космонавтика</string>
-    <string name="poi_museum_maritime">Морская</string>
+    <string name="poi_museum_maritime">Морской транспорт</string>
     <string name="poi_museum_science">Наука</string>
-    <string name="poi_museum_local">Местная</string>
+    <string name="poi_museum_local">Краеведение</string>
     <string name="poi_museum_children">Дети</string>
     <string name="poi_museum_ethnography">Этнография</string>
     <string name="poi_museum_person">Человек</string>
@@ -4203,12 +4203,12 @@
     <string name="poi_museum_transport">Транспорт</string>
     <string name="poi_museum_paleontology">Палеонтология</string>
     <string name="poi_museum_history">История</string>
-    <string name="poi_museum_military">Военная</string>
+    <string name="poi_museum_military">Военные</string>
     <string name="poi_museum_war">Война</string>
     <string name="poi_museum_open_air">Под открытым небом</string>
     <string name="poi_museum_technology">Технологии</string>
     <string name="poi_museum_agriculture">Сельское хозяйство</string>
-    <string name="poi_museum_living_history">Живая история</string>
+    <string name="poi_museum_living_history">Реконструкция истории</string>
     <string name="poi_museum_archaeological">Археология</string>
     <string name="poi_handwashing_soap_yes">Мыло: есть</string>
     <string name="poi_hot_water_yes">Горячая вода: есть</string>
@@ -4279,7 +4279,7 @@
     <string name="poi_reusable_packaging_offer_no">Предлагают многоразовые контейнеры: нет</string>
     <string name="poi_reusable_packaging_accept_yes">Принимаются многоразовые контейнеры: да</string>
     <string name="poi_medical_supply_diabetic">Диабетические препараты</string>
-    <string name="poi_ultimate">Фрисби</string>
+    <string name="poi_ultimate">Алтимат фрисби</string>
     <string name="poi_reusable_packaging_accept_no">Принимаются многоразовые контейнеры: нет</string>
     <string name="poi_reusable_packaging_offer_yes">Предлагают многоразовые контейнеры: да</string>
     <string name="poi_handwashing_hand_cleaning_paste_yes">Паста для чистки рук: есть</string>
@@ -4308,4 +4308,6 @@
     <string name="poi_lgbtq_yes">ЛГБТ-сообщества допускаются</string>
     <string name="poi_lgbtq_only">Исключительно ЛГБТ-сообщества</string>
     <string name="poi_lgbtq_no">ЛГБТ-сообщества не допускаются</string>
+    <string name="poi_glacier_edge_calving_line">Край ледника: линия отела</string>
+    <string name="poi_glacier_edge_grounding_line">Край ледника: линия по земле</string>
 </resources>
