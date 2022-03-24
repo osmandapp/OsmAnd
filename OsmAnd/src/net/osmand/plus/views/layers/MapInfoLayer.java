@@ -1,53 +1,19 @@
 package net.osmand.plus.views.layers;
 
 
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_ALTITUDE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BATTERY;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BEARING;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_DISTANCE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_GPS_INFO;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_DISTANCE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_TIME;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MARKER_1;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MARKER_2;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MAX_SPEED;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_TURN_SMALL;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_PLAIN_TIME;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_RADIUS_RULER;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_SPEED;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_TIME;
-import static net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper.WIDGET_MAP_MARKERS;
-import static net.osmand.plus.views.mapwidgets.widgets.CoordinatesWidget.WIDGET_COORDINATES;
-import static net.osmand.plus.views.mapwidgets.widgets.ElevationProfileWidget.WIDGET_ELEVATION_PROFILE;
-import static net.osmand.plus.views.mapwidgets.widgets.LanesWidget.WIDGET_LANES;
-import static net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget.WIDGET_STREET_NAME;
-
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.StateChangedListener;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
@@ -76,9 +42,36 @@ import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapInfoLayer extends OsmandMapLayer {
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
 
-	private static boolean WIDGETS_EXPANDED = false;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_ALTITUDE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BATTERY;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BEARING;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_GPS_INFO;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_TIME;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MARKER_1;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MARKER_2;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MAX_SPEED;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_TURN_SMALL;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_PLAIN_TIME;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_RADIUS_RULER;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_SPEED;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_TIME;
+import static net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper.WIDGET_MAP_MARKERS;
+import static net.osmand.plus.views.mapwidgets.widgets.CoordinatesWidget.WIDGET_COORDINATES;
+import static net.osmand.plus.views.mapwidgets.widgets.ElevationProfileWidget.WIDGET_ELEVATION_PROFILE;
+import static net.osmand.plus.views.mapwidgets.widgets.LanesWidget.WIDGET_LANES;
+import static net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget.WIDGET_STREET_NAME;
+
+public class MapInfoLayer extends OsmandMapLayer {
 
 	private final RouteLayer routeLayer;
 	private final OsmandSettings settings;
@@ -89,7 +82,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private ViewGroup leftWidgetsContainer;
 	private ViewGroup bottomWidgetsContainer;
 
-	private ImageButton expandButton;
 	private View mapRulerLayout;
 	private AlarmWidget alarmControl;
 	private List<RulerWidget> rulerWidgets;
@@ -126,7 +118,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 			leftWidgetsContainer = mapActivity.findViewById(R.id.map_left_widgets_panel);
 			rightWidgetsContainer = mapActivity.findViewById(R.id.map_right_widgets_panel);
 			bottomWidgetsContainer = mapActivity.findViewById(R.id.map_bottom_widgets_panel);
-			expandButton = mapActivity.findViewById(R.id.map_collapse_button);
 			mapRulerLayout = mapActivity.findViewById(R.id.map_ruler_layout);
 
 			appModeChangeListener = createAppModeChangeListener();
@@ -146,7 +137,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 			topWidgetsContainer = null;
 			leftWidgetsContainer = null;
 			rightWidgetsContainer = null;
-			expandButton = null;
 			mapRulerLayout = null;
 
 			alarmControl = null;
@@ -367,33 +357,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 		recreateWidgetsPanel(leftWidgetsContainer, WidgetsPanel.LEFT, appMode);
 		recreateWidgetsPanel(rightWidgetsContainer, WidgetsPanel.RIGHT, appMode);
 		recreateWidgetsPanel(bottomWidgetsContainer, WidgetsPanel.BOTTOM, appMode);
-		setupExpandButton();
 	}
 
 	private void recreateWidgetsPanel(@Nullable ViewGroup container, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode) {
 		if (container != null) {
 			container.removeAllViews();
 			if (mapInfoControls != null) {
-				mapInfoControls.populateControlsContainer(container, appMode, panel, WIDGETS_EXPANDED);
+				mapInfoControls.populateControlsContainer(container, appMode, panel);
 			}
 			container.requestLayout();
-		}
-	}
-
-	private void setupExpandButton() {
-		if (expandButton != null) {
-			AndroidUiHelper.updateVisibility(expandButton, mapInfoControls.hasCollapsibles(settings.getApplicationMode()));
-			UiUtilities uiUtilities = getApplication().getUIUtilities();
-			int iconId = WIDGETS_EXPANDED ? R.drawable.ic_action_arrow_up : R.drawable.ic_action_arrow_down;
-			int colorId = ColorUtilities.getMapButtonIconColorId(false);
-			Drawable expandIcon = uiUtilities.getIcon(iconId, colorId);
-			setMapButtonIcon(expandButton, expandIcon);
-			int contentDescrId = WIDGETS_EXPANDED ? R.string.shared_string_collapse : R.string.access_widget_expand;
-			expandButton.setContentDescription(getString(contentDescrId));
-			expandButton.setOnClickListener(v -> {
-				WIDGETS_EXPANDED = !WIDGETS_EXPANDED;
-				recreateControls();
-			});
 		}
 	}
 
@@ -457,9 +429,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 			updateTopToolbar(nightMode);
 
-			expandButton.setBackgroundResource(ts.expand);
-			int padding = expandButton.getPaddingLeft();
-			expandButton.setPadding(padding, padding, padding, padding);
 			topWidgetsContainer.invalidate();
 			rightWidgetsContainer.invalidate();
 			leftWidgetsContainer.invalidate();
@@ -521,7 +490,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			updateColorShadowsOfText();
 			if (mapInfoControls != null) {
 				ApplicationMode appMode = settings.getApplicationMode();
-				mapInfoControls.updateWidgetsInfo(appMode, drawSettings, WIDGETS_EXPANDED);
+				mapInfoControls.updateWidgetsInfo(appMode, drawSettings);
 			}
 			topToolbarView.updateInfo();
 			alarmControl.updateInfo(drawSettings, false);

@@ -264,32 +264,16 @@
 				android:layout_weight="0.45">
 
 				<LinearLayout
+					android:id="@+id/map_right_widgets_panel"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_gravity="top|end"
-					android:orientation="vertical">
+					android:orientation="vertical"
+					tools:ignore="UselessParent">
 
-					<LinearLayout
-						android:id="@+id/map_right_widgets_panel"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_gravity="top|end"
-						android:orientation="vertical">
+					<include layout="@layout/map_hud_widget"/>
 
-						<include layout="@layout/map_hud_widget"/>
-
-						<include layout="@layout/map_hud_widget"/>
-
-					</LinearLayout>
-
-					<ImageButton
-						android:id="@+id/map_collapse_button"
-						android:contentDescription="@string/shared_string_collapse"
-						android:layout_width="@dimen/map_small_button_size"
-						android:layout_height="@dimen/map_small_button_size"
-						android:layout_gravity="top|center_horizontal"
-						android:background="@drawable/btn_inset_circle_trans"
-						tools:src="@drawable/ic_action_remove_dark"/>
+					<include layout="@layout/map_hud_widget"/>
 
 				</LinearLayout>
 

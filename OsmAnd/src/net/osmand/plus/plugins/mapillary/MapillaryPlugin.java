@@ -261,7 +261,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 		if (mapillaryWidgetRegInfo != null) {
 			final List<ApplicationMode> allModes = ApplicationMode.allPossibleValues();
 			for (ApplicationMode mode : allModes) {
-				mapActivity.getMapLayers().getMapWidgetRegistry().setVisibility(mode, mapillaryWidgetRegInfo, visible, false);
+				mapActivity.getMapLayers().getMapWidgetRegistry().setVisibility(mode, mapillaryWidgetRegInfo, visible);
 			}
 			MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
 			if (mil != null) {

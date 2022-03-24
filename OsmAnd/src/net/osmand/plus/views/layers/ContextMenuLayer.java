@@ -1,9 +1,5 @@
 package net.osmand.plus.views.layers;
 
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-
 import android.Manifest;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -20,11 +16,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresPermission;
-import androidx.appcompat.content.res.AppCompatResources;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
@@ -96,7 +87,15 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresPermission;
+import androidx.appcompat.content.res.AppCompatResources;
 import gnu.trove.list.array.TIntArrayList;
+
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 
 public class ContextMenuLayer extends OsmandMapLayer {
 	//private static final Log LOG = PlatformUtil.getLog(ContextMenuLayer.class);
@@ -124,7 +123,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private IContextMenuProvider selectedObjectContextMenuProvider;
 	private boolean cancelApplyingNewMarkerPosition;
 	private LatLon applyingMarkerLatLon;
-	private boolean wasCollapseButtonVisible;
 	private boolean mInGpxDetailsMode;
 	private boolean mInAddGpxPointMode;
 
@@ -499,14 +497,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		mapActivity.disableDrawer();
 		AndroidUiHelper.setVisibility(mapActivity, View.INVISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
-
-		View collapseButton = mapActivity.findViewById(R.id.map_collapse_button);
-		if (collapseButton != null && collapseButton.getVisibility() == View.VISIBLE) {
-			wasCollapseButtonVisible = true;
-			collapseButton.setVisibility(View.INVISIBLE);
-		} else {
-			wasCollapseButtonVisible = false;
-		}
 	}
 
 	public void exitGpxDetailsMode() {
@@ -519,11 +509,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		mapActivity.enableDrawer();
 		AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
-
-		View collapseButton = mapActivity.findViewById(R.id.map_collapse_button);
-		if (collapseButton != null && wasCollapseButtonVisible) {
-			collapseButton.setVisibility(View.VISIBLE);
-		}
 	}
 
 	private void quitMovingMarker() {
@@ -535,11 +520,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		mInChangeMarkerPositionMode = false;
 		AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
-
-		View collapseButton = mapActivity.findViewById(R.id.map_collapse_button);
-		if (collapseButton != null && wasCollapseButtonVisible) {
-			collapseButton.setVisibility(View.VISIBLE);
-		}
 	}
 
 	public void quitAddGpxPoint() {
@@ -551,11 +531,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		mInAddGpxPointMode = false;
 		AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
-
-		View collapseButton = mapActivity.findViewById(R.id.map_collapse_button);
-		if (collapseButton != null && wasCollapseButtonVisible) {
-			collapseButton.setVisibility(View.VISIBLE);
-		}
 	}
 
 	public void enterAddGpxPointMode(NewGpxPoint newGpxPoint) {
@@ -573,14 +548,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		mAddGpxPointBottomSheetHelper.show(newGpxPoint);
 		AndroidUiHelper.setVisibility(mapActivity, View.INVISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
-
-		View collapseButton = mapActivity.findViewById(R.id.map_collapse_button);
-		if (collapseButton != null && collapseButton.getVisibility() == View.VISIBLE) {
-			wasCollapseButtonVisible = true;
-			collapseButton.setVisibility(View.INVISIBLE);
-		} else {
-			wasCollapseButtonVisible = false;
-		}
 
 		view.refreshMap();
 	}
@@ -611,14 +578,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		mMoveMarkerBottomSheetHelper.show(menu.getRightIcon());
 		AndroidUiHelper.setVisibility(mapActivity, View.INVISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
-
-		View collapseButton = mapActivity.findViewById(R.id.map_collapse_button);
-		if (collapseButton != null && collapseButton.getVisibility() == View.VISIBLE) {
-			wasCollapseButtonVisible = true;
-			collapseButton.setVisibility(View.INVISIBLE);
-		} else {
-			wasCollapseButtonVisible = false;
-		}
 
 		view.refreshMap();
 	}
