@@ -2750,7 +2750,6 @@
     <string name="welcome_to_open_beta">Vítejte v otevřené beta verzi</string>
     <string name="light_rs_render_descr">Jednoduchý styl pro automobilovou navigaci. Příjemný noční režim, vrstevnice, kontrastní oranžové silnice, druhořadé objekty jsou méně výrazné.</string>
     <string name="topo_render_descr">Pro pěší turistiku a cyklistiku v přírodě. Dobře čitelný venku. Kontrastní silnice a přírodních objekty, různé typy tras, vrstevnice s rozšířeným nastavením, více detailů. Umožňuje rozlišit kvalitu povrchu vozovky. Nemá noční režim.</string>
-    <string name="mapnik_render_descr">Starý výchozí styl \'Mapnik\'. Barvy jsou podobné jako styl \'Mapnik\'.</string>
     <string name="touring_view_render_descr">Styl pro cestování s vysokým kontrastem a maximálními detaily. Obsahuje všechna nastavení ze základního stylu OsmAnd a navíc zobrazuje maximum detailů, především silnice, cesty a jiné způsoby cestování. Jasně rozlišuje různé typy cest, podobně jako cestovní atlasy. Vhodný pro použití ve dne, v noci i venku.</string>
     <string name="default_render_descr">Obecný styl. Čisté vykreslování hustě osídlených měst. Obsahuje vrstevnice, trasy, kvalita povrchu cest, omezení přístupu, čísla cest, značení dle SAC, objekty pro vodní sporty.</string>
     <string name="travel_card_download_descr">Stáhněte si cestovní průvodce Wikivoyage a prohlížejte články o místech po celém světě bez připojení na internet.</string>
