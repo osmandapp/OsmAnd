@@ -3684,7 +3684,7 @@
     <string name="poi_disabled_no">Accès pour handicapés : non</string>
     <string name="poi_snowmobile_yes">Oui ; Motoneige</string>
     <string name="poi_snowmobile_designated">Indiqué ; Indiqué pour les motoneiges</string>
-    <string name="poi_snowmobile_permissive">"Autorisé  ; accès autorisé  aux motoneiges."</string>
+    <string name="poi_snowmobile_permissive">"Autorisé  ; accès autorisé  aux motoneiges"</string>
     <string name="poi_bus_designated">Désigné ; désigné pour les bus</string>
     <string name="poi_caravan_yes">Oui ; Caravane</string>
     <string name="poi_caravan_designated">Désignée ; désignée pour les caravanes</string>
@@ -4308,4 +4308,6 @@
     <string name="poi_payment_mastercard_contactless_yes">Sans contact MasterCard</string>
     <string name="poi_payment_mastercard_contactless_no">MasterCard sans contact non acceptée</string>
     <string name="poi_printer_ink">Magasin de cartouches d\'encre</string>
+    <string name="poi_hairdresser_supply">Magasin de fournitures pour coiffeurs</string>
+    <string name="poi_water_sports">Magasin de sports nautiques</string>
 </resources>
