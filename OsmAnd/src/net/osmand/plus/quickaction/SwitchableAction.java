@@ -139,6 +139,8 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		return adapter;
 	}
 
+	public abstract String getItemIdFromObject(T object);
+
 	public abstract List<T> loadListFromParams();
 
 	public abstract void executeWithParams(@NonNull MapActivity activity, String params);
