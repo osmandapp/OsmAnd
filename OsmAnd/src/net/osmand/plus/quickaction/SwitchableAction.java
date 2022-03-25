@@ -110,15 +110,25 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	@Override
 	public String getActionText(OsmandApplication app) {
-		String arrowDirection = isLayoutRtl(app) ? "\u25c0" : "\u25b6";
-		String disabledItem = getDisabledItem(app);
+		String rtlArrow = "\u25c0", ltrArrow = "\u25b6";
+		String arrow = isLayoutRtl(app) ? rtlArrow : ltrArrow;
 		String selectedItem = getSelectedItem(app);
-		String nextItem = getNextSelectedItem(app);
-
-		boolean disabledNextItem = Algorithms.stringsEqual(nextItem, disabledItem);
-		String itemName = getTranslatedItemName(app, disabledNextItem ? selectedItem : nextItem);
-		if (loadListFromParams().size() > 1) {
-			itemName += arrowDirection + "\u2026";
+		if (loadListFromParams().size() == 1) {
+			String mainItem = getItemIdFromObject(loadListFromParams.get(0));
+			boolean selectedMain = Algorithms.stringsEqual(mainItem, selectedItem);
+			// RTL: A  <| MAIN (selected), MAIN <| B (selected)
+			// LTR: A (selected) |> MAIN , MAIN (selected) |>  B
+			itemName = (selectedMain ? "" : arrow) + getTranslatedItemName(app, mainItem) +
+					 (selectedMain ? arrow : "");
+		} else {
+			String disabledItem = getDisabledItem(app);
+			String nextItem = getNextSelectedItem(app);
+			String mainItem = Algorithms.stringsEqual(nextItem, disabledItem) ? selectedItem : nextItem; 
+			boolean selectedMain = Algorithms.stringsEqual(mainItem, selectedItem);
+			// RTL: A  <| MAIN (selected), MAIN <| B (selected)
+			// LTR: A (selected) |> MAIN , MAIN (selected) |>  B
+			itemName = (selectedMain ? "" : ("\u2026" + arrow)) + getTranslatedItemName(app, mainItem) +
+					 (selectedMain ? (arrow + "\u2026") : "");
 		}
 		return itemName;
 	}
