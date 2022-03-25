@@ -459,7 +459,7 @@ public class MapWidgetRegistry {
 		Set<MapWidgetInfo> topWidgetsInfo = getWidgetsForPanel(WidgetsPanel.TOP);
 		for (MapWidgetInfo widgetInfo : topWidgetsInfo) {
 			MapWidget widget = widgetInfo.widget;
-			if (widget.getView().getVisibility() != View.VISIBLE) {
+			if (!widget.isViewVisible()) {
 				continue;
 			}
 

@@ -76,6 +76,10 @@ public abstract class MapWidget {
 		return AndroidUiHelper.updateVisibility(view, visible);
 	}
 
+	public boolean isViewVisible() {
+		return view.getVisibility() == View.VISIBLE;
+	}
+
 	public static void updateTextColor(@NonNull TextView text, @Nullable TextView textShadow,
 	                                   @ColorInt int textColor, @ColorInt int textShadowColor,
 	                                   boolean boldText, int shadowRadius) {
