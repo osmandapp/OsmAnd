@@ -113,8 +113,9 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		String rtlArrow = "\u25c0", ltrArrow = "\u25b6";
 		String arrow = isLayoutRtl(app) ? rtlArrow : ltrArrow;
 		String selectedItem = getSelectedItem(app);
+		String itemName;
 		if (loadListFromParams().size() == 1) {
-			String mainItem = getItemIdFromObject(loadListFromParams.get(0));
+			String mainItem = getItemIdFromObject(loadListFromParams().get(0));
 			boolean selectedMain = Algorithms.stringsEqual(mainItem, selectedItem);
 			// RTL: A  <| MAIN (selected), MAIN <| B (selected)
 			// LTR: A (selected) |> MAIN , MAIN (selected) |>  B
