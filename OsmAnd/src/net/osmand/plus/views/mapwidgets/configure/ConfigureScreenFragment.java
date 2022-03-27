@@ -142,6 +142,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 			item.iconColor = profileColor;
 			item.iconSelectedColor = profileColor;
 			item.strokeSelectedColor = profileColor;
+			item.strokeSelectedWidth = AndroidUtils.dpToPx(app, 2);
 			item.rippleColor = profileColor;
 			item.bgSelectedColor = bgSelectedColor;
 			item.tag = mode;
