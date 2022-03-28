@@ -2478,15 +2478,21 @@ public class OsmandAidlApi {
 
 	public boolean setPreference(PreferenceParams params) {
 		String prefId = params.getPrefId();
-		String value = params.getValue();
-		ApplicationMode appMode = ApplicationMode.valueOfStringKey(params.getAppModeKey(), null);
-		return app.getSettings().setPreference(prefId, value, appMode);
+		OsmandSettings settings = app.getSettings();
+		OsmandPreference<?> pref = settings.getPreference(prefId);
+		if (pref != null && settings.isExportAvailableForPref(pref)) {
+			String value = params.getValue();
+			ApplicationMode appMode = ApplicationMode.valueOfStringKey(params.getAppModeKey(), null);
+			return settings.setPreference(prefId, value, appMode);
+		}
+		return false;
 	}
 
 	public boolean getPreference(PreferenceParams params) {
 		String prefId = params.getPrefId();
-		OsmandPreference<?> pref = app.getSettings().getPreference(prefId);
-		if (pref != null) {
+		OsmandSettings settings = app.getSettings();
+		OsmandPreference<?> pref = settings.getPreference(prefId);
+		if (pref != null && settings.isExportAvailableForPref(pref)) {
 			ApplicationMode appMode = ApplicationMode.valueOfStringKey(params.getAppModeKey(), null);
 			String value = appMode != null ? pref.asStringModeValue(appMode) : pref.asString();
 			params.setValue(value);

@@ -370,6 +370,16 @@ public class OsmandSettings {
 				&& !APP_MODE_VERSION.getId().equals(pref.getId());
 	}
 
+	public boolean isExportAvailableForPref(@NonNull OsmandPreference<?> preference) {
+		if (APPLICATION_MODE.getId().equals(preference.getId())) {
+			return true;
+		} else if (preference instanceof CommonPreference) {
+			CommonPreference<?> commonPreference = (CommonPreference<?>) preference;
+			return !commonPreference.isGlobal() || commonPreference.isShared();
+		}
+		return false;
+	}
+
 	public ApplicationMode LAST_ROUTING_APPLICATION_MODE = null;
 
 	public boolean setApplicationMode(ApplicationMode appMode) {
