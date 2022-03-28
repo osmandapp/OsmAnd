@@ -334,6 +334,9 @@ public class NetworkRouteContext {
 		}
 
 		public long getId() {
+			if (robj != null) {
+				return robj.getId();
+			}
 			return obj.getId();
 		}
 
