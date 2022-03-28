@@ -21,6 +21,13 @@
     <string name="shared_string_buttons">Buttons</string>
     <string name="configure_screen_widgets_descr">Select screen side to add or rearange widgets.</string>
     <string name="osm_carto_render_descr">Similar to OpenStreetMap-carto style used on main OSM site</string>
+    <string name="simulation_real_mode_desc">On straight road sections, speed will be approximate to the maximum allowed speed.\nAt intersections, the simulation will slow down.\nExtra penalties will be applied on traffic signals, stop signs, etc.</string>
+    <string name="simulation_real_mode_title">Realistic simulation</string>
+    <string name="simulation_constant_mode_desc">The simulation will be performed with constant selected speed.</string>
+    <string name="simulation_constant_mode_title">Fixed speed</string>
+    <string name="simulation_preview_mode_desc">The speed of the simulation will be maximum on straight sections and slow down only at intersections.</string>
+    <string name="simulation_preview_mode_title">Fast preview mode</string>
+    <string name="speed_mode">Speed mode</string>
     <string name="rendering_attr_showRunningRoutes_name">Running routes</string>
     <string name="rendering_attr_showRunningRoutes_description">Show running routes</string>
     <string name="rendering_attr_showFitnessTrails_name">Fitness trails</string>

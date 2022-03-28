@@ -83,6 +83,7 @@ import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.LocationSource;
 import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.settings.enums.SimulationMode;
 import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.utils.FileUtils;
@@ -127,6 +128,7 @@ public class OsmandSettings {
 	private static final String RENDERER_PREFERENCE_PREFIX = "nrenderer_";
 	public static final String ROUTING_PREFERENCE_PREFIX = "prouting_";
 
+	public static final float SIM_MIN_SPEED = 5 / 3.6f;
 	/// Settings variables
 	private final OsmandApplication ctx;
 	private SettingsAPI settingsAPI;
@@ -1406,6 +1408,8 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> ENABLE_TIME_CONDITIONAL_ROUTING = new BooleanPreference(this, "enable_time_conditional_routing", true).makeProfile();
 
 	public boolean simulateNavigation = false;
+	public String simulateNavigationMode = SimulationMode.PREVIEW.getKey();
+	public float simulateNavigationSpeed = SIM_MIN_SPEED;
 
 	public final CommonPreference<Boolean> SHOW_ROUTING_ALARMS = new BooleanPreference(this, "show_routing_alarms", true).makeProfile().cache();
 
