@@ -190,11 +190,11 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		modesToggle.setSelected(selectedItem);
 		modesToggle.setOnSelectChipListener(chip -> {
 			if (chip.tag instanceof ApplicationMode) {
-				ApplicationMode am = (ApplicationMode) chip.tag;
-				if (!am.equals(selectedAppMode)) {
-					selectedAppMode = am;
-				    modesToggle.scrollTo(chip);
-					settings.setApplicationMode(am);
+				ApplicationMode mode = (ApplicationMode) chip.tag;
+				if (!Algorithms.stringsEqual(mode.getStringKey(), selectedAppMode.getStringKey())) {
+					selectedAppMode = mode;
+					modesToggle.scrollTo(chip);
+					settings.setApplicationMode(mode);
 					updateFragment();
 				}
 			}
