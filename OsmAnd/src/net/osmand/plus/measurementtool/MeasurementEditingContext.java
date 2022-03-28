@@ -314,7 +314,8 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		return getBeforePoints();
 	}
 
-	public List<List<WptPt>> getPointsSegments(boolean plain, boolean route) {
+	@NonNull
+	public List<List<WptPt>> getSegmentsPoints(boolean plain, boolean route) {
 		List<List<WptPt>> res = new ArrayList<>();
 		List<WptPt> allPoints = getPoints();
 		List<WptPt> segment = new ArrayList<>();
