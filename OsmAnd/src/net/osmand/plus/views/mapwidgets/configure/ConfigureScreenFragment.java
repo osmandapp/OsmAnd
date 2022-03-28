@@ -17,11 +17,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.AppBarLayout.Behavior;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -59,6 +63,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	private MapActivity mapActivity;
 	private LayoutInflater themedInflater;
 
+	private AppBarLayout appBar;
 	private Toolbar toolbar;
 	private HorizontalChipsView modesToggle;
 	private LinearLayout widgetsCard;
@@ -67,6 +72,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 
 	private boolean nightMode;
 	private int currentScrollY;
+	private int currentAppBarOffset;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -89,12 +95,14 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 			AndroidUtils.addStatusBarPadding21v(app, view);
 		}
 
+		appBar = view.findViewById(R.id.appbar);
 		toolbar = view.findViewById(R.id.toolbar);
 		modesToggle = view.findViewById(R.id.modes_toggle);
 		widgetsCard = view.findViewById(R.id.widgets_card);
 		buttonsCard = view.findViewById(R.id.buttons_card);
 		scrollView = view.findViewById(R.id.scroll_view);
 
+		setupAppBar();
 		setupToolbar();
 		setupModesToggle();
 		setupWidgetsCard();
@@ -119,6 +127,23 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		super.onStop();
 		app.getQuickActionRegistry().removeUpdatesListener(this);
 		mapActivity.enableDrawer();
+	}
+
+	private void setupAppBar() {
+		appBar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
+			currentAppBarOffset = verticalOffset;
+		});
+		CoordinatorLayout.LayoutParams param = (CoordinatorLayout.LayoutParams) appBar.getLayoutParams();
+		param.setBehavior(new AppBarLayout.Behavior());
+		setAppBarOffset(currentAppBarOffset);
+	}
+
+	private void setAppBarOffset(int verticalOffset) {
+		CoordinatorLayout.LayoutParams param = (CoordinatorLayout.LayoutParams) appBar.getLayoutParams();
+		AppBarLayout.Behavior behavior = (Behavior) param.getBehavior();
+		if (behavior != null) {
+			behavior.setTopAndBottomOffset(verticalOffset);
+		}
 	}
 
 	private void setupToolbar() {
