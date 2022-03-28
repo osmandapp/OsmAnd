@@ -101,11 +101,7 @@ public class PointDescriptionMenuController extends MenuController {
 	public String getCommonTypeStr() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			if (getPointDescription().isRoutePoint()) {
-				return mapActivity.getString(R.string.layer_route);
-			} else {
-				return mapActivity.getString(R.string.shared_string_location);
-			}
+			return mapActivity.getString(R.string.shared_string_location);
 		} else {
 			return "";
 		}
