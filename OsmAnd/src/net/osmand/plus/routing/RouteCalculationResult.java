@@ -45,7 +45,7 @@ public class RouteCalculationResult {
 	private final List<RouteDirectionInfo> directions;
 	private final List<RouteSegmentResult> segments;
 	private final List<AlarmInfo> alarmInfo;
-	private final List<SimulatedLocation> simulatedLocation;
+	private final List<SimulatedLocation> simulatedLocations;
 	private final String errorMessage;
 	private final int[] listDistance;
 	private final int[] intermediatePoints;
@@ -92,7 +92,7 @@ public class RouteCalculationResult {
 		this.listDistance = new int[0];
 		this.directions = new ArrayList<>();
 		this.alarmInfo = new ArrayList<>();
-		this.simulatedLocation = new ArrayList<>();
+		this.simulatedLocations = new ArrayList<>();
 		this.routeService = null;
 		this.appMode = null;
 		this.routeRecalcDistance = 0;
@@ -129,7 +129,7 @@ public class RouteCalculationResult {
 		this.listDistance = new int[locations.size()];
 		updateListDistanceTime(this.listDistance, this.locations);
 		this.alarmInfo = new ArrayList<>();
-		this.simulatedLocation = new ArrayList<>();
+		this.simulatedLocations = new ArrayList<>();
 		calculateIntermediateIndexes(params.ctx, this.locations, params.intermediates, localDirections, this.intermediatePoints);
 		this.directions = Collections.unmodifiableList(localDirections);
 		updateDirectionsTime(this.directions, this.listDistance);
@@ -178,7 +178,7 @@ public class RouteCalculationResult {
 		}
 		this.locations = Collections.unmodifiableList(locations);
 		this.segments = Collections.unmodifiableList(segments);
-		this.simulatedLocation = new ArrayList<>();
+		this.simulatedLocations = new ArrayList<>();
 		this.listDistance = new int[locations.size()];
 		calculateIntermediateIndexes(ctx, this.locations, intermediates, computeDirections, this.intermediatePoints);
 		updateListDistanceTime(this.listDistance, this.locations);
@@ -967,9 +967,9 @@ public class RouteCalculationResult {
 	}
 
 	public List<SimulatedLocation> getImmutableSimulatedLocations() {
-		if (Algorithms.isEmpty(simulatedLocation)) {
+		if (Algorithms.isEmpty(simulatedLocations)) {
 			for (Location l : locations) {
-				simulatedLocation.add(new SimulatedLocation(l));
+				simulatedLocations.add(new SimulatedLocation(l));
 			}
 			for (int routeInd = 0; routeInd < segments.size(); routeInd++) {
 				RouteSegmentResult s = segments.get(routeInd);
@@ -978,7 +978,7 @@ public class RouteCalculationResult {
 				while (i != s.getEndPointIndex() || routeInd == segments.size() - 1) {
 					if (s.isTrafficLight(i)) {
 						LatLon point = s.getPoint(i);
-						for (SimulatedLocation sd : simulatedLocation) {
+						for (SimulatedLocation sd : simulatedLocations) {
 							LatLon latLon = new LatLon(sd.getLatitude(), sd.getLongitude());
 							if (latLon.equals(point)) {
 								sd.setTrafficLight(true);
@@ -993,7 +993,7 @@ public class RouteCalculationResult {
 				}
 			}
 		}
-		return simulatedLocation;
+		return simulatedLocations;
 	}
 
 	public List<RouteDirectionInfo> getImmutableAllDirections() {
