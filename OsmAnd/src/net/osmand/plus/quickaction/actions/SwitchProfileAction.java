@@ -229,6 +229,11 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 	}
 
 	@Override
+	public String getItemIdFromObject(String object) {
+		return object;
+	}
+
+	@Override
 	protected void onItemsSelected(Context ctx, List<String> selectedItems) {
 		Adapter adapter = getAdapter();
 		if (adapter == null) {
