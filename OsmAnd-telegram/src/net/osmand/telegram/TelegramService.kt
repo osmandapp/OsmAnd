@@ -230,10 +230,11 @@ class TelegramService : Service(), TelegramIncomingMessagesListener,
 
 	private fun startWidgetUpdates() {
 		updateWidgetHandler?.postDelayed({
-			if (isUsedByMyLocation(usedBy)) {
-				val sharingStatus = app().settings.sharingStatusChanges.last()
+			val settings = app().settings
+			if (isUsedByMyLocation(usedBy) && settings.sharingStatusChanges.isNotEmpty()) {
+				val sharingStatus = settings.sharingStatusChanges.last()
 				var isSending = sharingStatus.statusType == TelegramSettings.SharingStatusType.SENDING
-				val sharingChats = app().settings.getShareLocationChats()
+				val sharingChats = settings.getShareLocationChats()
 				var oldestTime = 0L
 				if (sharingChats.isNotEmpty() && app().shareLocationHelper.sharingLocation) {
 					sharingChats.forEach { id ->
