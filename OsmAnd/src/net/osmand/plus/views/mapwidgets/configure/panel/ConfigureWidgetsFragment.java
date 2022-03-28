@@ -160,26 +160,20 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		int defaultIconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		tabLayout.setSelectedTabIndicatorColor(profileColor);
 		tabLayout.addOnTabSelectedListener(new OnTabSelectedListener() {
+
 			@Override
 			public void onTabSelected(Tab tab) {
-				Drawable icon = tab.getIcon();
-				if (icon != null) {
-					icon.setColorFilter(profileColor, PorterDuff.Mode.SRC_IN);
-				}
+				setupTabIconColor(tab, profileColor);
 			}
 
 			@Override
 			public void onTabUnselected(Tab tab) {
-				Drawable icon = tab.getIcon();
-				if (icon != null) {
-					icon.setColorFilter(defaultIconColor, PorterDuff.Mode.SRC_IN);
-				}
+				setupTabIconColor(tab, defaultIconColor);
 			}
 
 			@Override
-			public void onTabReselected(Tab tab) {
+			public void onTabReselected(Tab tab) { }
 
-			}
 		});
 
 		List<WidgetsPanel> panels = Arrays.asList(WidgetsPanel.values());
@@ -191,8 +185,23 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 				tab.setIcon(panel.getIconId());
 			}
 		}
-		int selectedTabPosition = panels.indexOf(selectedPanel);
-		viewPager.setCurrentItem(selectedTabPosition, false);
+
+		int position = panels.indexOf(selectedPanel);
+		viewPager.setCurrentItem(position, false);
+
+		if (position == 0) {
+			Tab tab = tabLayout.getTabAt(position);
+			setupTabIconColor(tab, profileColor);
+		}
+	}
+
+	public void setupTabIconColor(@Nullable Tab tab, int color) {
+		if (tab != null) {
+			Drawable icon = tab.getIcon();
+			if (icon != null) {
+				icon.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+			}
+		}
 	}
 
 	@Override

@@ -17,9 +17,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.AppBarLayout.Behavior;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -57,12 +63,16 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	private MapActivity mapActivity;
 	private LayoutInflater themedInflater;
 
+	private AppBarLayout appBar;
 	private Toolbar toolbar;
 	private HorizontalChipsView modesToggle;
 	private LinearLayout widgetsCard;
 	private LinearLayout buttonsCard;
+	private NestedScrollView scrollView;
 
 	private boolean nightMode;
+	private int currentScrollY;
+	private int currentAppBarOffset;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -85,14 +95,22 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 			AndroidUtils.addStatusBarPadding21v(app, view);
 		}
 
+		appBar = view.findViewById(R.id.appbar);
 		toolbar = view.findViewById(R.id.toolbar);
 		modesToggle = view.findViewById(R.id.modes_toggle);
 		widgetsCard = view.findViewById(R.id.widgets_card);
 		buttonsCard = view.findViewById(R.id.buttons_card);
+		scrollView = view.findViewById(R.id.scroll_view);
 
+		setupAppBar();
 		setupToolbar();
 		setupModesToggle();
-		fullUpdate();
+		setupWidgetsCard();
+		setupButtonsCard();
+
+		if (currentScrollY > 0) {
+			scrollView.scrollTo(0, currentScrollY);
+		}
 
 		return view;
 	}
@@ -109,6 +127,23 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		super.onStop();
 		app.getQuickActionRegistry().removeUpdatesListener(this);
 		mapActivity.enableDrawer();
+	}
+
+	private void setupAppBar() {
+		appBar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
+			currentAppBarOffset = verticalOffset;
+		});
+		CoordinatorLayout.LayoutParams param = (CoordinatorLayout.LayoutParams) appBar.getLayoutParams();
+		param.setBehavior(new AppBarLayout.Behavior());
+		setAppBarOffset(currentAppBarOffset);
+	}
+
+	private void setAppBarOffset(int verticalOffset) {
+		CoordinatorLayout.LayoutParams param = (CoordinatorLayout.LayoutParams) appBar.getLayoutParams();
+		AppBarLayout.Behavior behavior = (Behavior) param.getBehavior();
+		if (behavior != null) {
+			behavior.setTopAndBottomOffset(verticalOffset);
+		}
 	}
 
 	private void setupToolbar() {
@@ -142,6 +177,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 			item.iconColor = profileColor;
 			item.iconSelectedColor = profileColor;
 			item.strokeSelectedColor = profileColor;
+			item.strokeSelectedWidth = AndroidUtils.dpToPx(app, 2);
 			item.rippleColor = profileColor;
 			item.bgSelectedColor = bgSelectedColor;
 			item.tag = mode;
@@ -154,11 +190,13 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		modesToggle.setSelected(selectedItem);
 		modesToggle.setOnSelectChipListener(chip -> {
 			if (chip.tag instanceof ApplicationMode) {
-				ApplicationMode am = (ApplicationMode) chip.tag;
-				selectedAppMode = am;
-				modesToggle.smoothScrollTo(chip);
-				settings.setApplicationMode(am);
-				fullUpdate();
+				ApplicationMode mode = (ApplicationMode) chip.tag;
+				if (!Algorithms.stringsEqual(mode.getStringKey(), selectedAppMode.getStringKey())) {
+					selectedAppMode = mode;
+					modesToggle.scrollTo(chip);
+					settings.setApplicationMode(mode);
+					updateFragment();
+				}
 			}
 			return true;
 		});
@@ -167,12 +205,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		}
 	}
 
-	private void fullUpdate() {
-		updateWidgetsCard();
-		updateButtonsCard();
-	}
-
-	private void updateWidgetsCard() {
+	private void setupWidgetsCard() {
 		widgetsCard.removeAllViews();
 		widgetsCard.addView(createWidgetGroupView(WidgetsPanel.LEFT, false, false));
 		widgetsCard.addView(createWidgetGroupView(WidgetsPanel.RIGHT, true, false));
@@ -190,7 +223,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		));
 	}
 
-	private void updateButtonsCard() {
+	private void setupButtonsCard() {
 		buttonsCard.removeAllViews();
 
 		buttonsCard.addView(createButtonWithSwitch(
@@ -232,7 +265,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 
 	@Override
 	public void onActionsUpdated() {
-		updateButtonsCard();
+		setupButtonsCard();
 	}
 
 	private View createWidgetGroupView(@NonNull WidgetsPanel panel, boolean showShortDivider, boolean showLongDivider) {
@@ -360,6 +393,18 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 		}
 		return ColorUtilities.getListBgColorId(nightMode);
+	}
+
+	private void updateFragment() {
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		Fragment fragment = fragmentManager.findFragmentByTag(TAG);
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			currentScrollY = scrollView.getScrollY();
+			fragmentManager.beginTransaction()
+					.detach(fragment)
+					.attach(fragment)
+					.commitAllowingStateLoss();
+		}
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity) {
