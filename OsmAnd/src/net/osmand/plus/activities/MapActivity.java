@@ -837,9 +837,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					}
 				}
 			} else {
-				if (permissionGranted) {
+				DataStorageFragment fragment = (DataStorageFragment) fragmentManager.findFragmentByTag(SettingsScreenType.DATA_STORAGE.fragmentName);
+				if (fragment != null && fragment.onPermissionGranted(permissionGranted)) {
+				} else if (permissionGranted) {
 					RestartActivity.doRestart(this, getString(R.string.storage_permission_restart_is_required));
-				} else if (fragmentManager.findFragmentByTag(SettingsScreenType.DATA_STORAGE.fragmentName) == null) {
+				} else {
 					Bundle args = new Bundle();
 					args.putBoolean(FIRST_USAGE, true);
 					BaseSettingsFragment.showInstance(this, SettingsScreenType.DATA_STORAGE, null, args, null);

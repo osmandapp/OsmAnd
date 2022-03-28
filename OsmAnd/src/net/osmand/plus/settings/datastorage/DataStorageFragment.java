@@ -85,6 +85,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 	private OsmandActionBarActivity activity;
 	boolean storageMigration;
 	boolean firstUsage;
+	StorageItem newDataStorage;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -202,7 +203,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 			//show necessary dialog
 			String key = preference.getKey();
 			if (key != null) {
-				StorageItem newDataStorage = dataStorageHelper.getStorage(key);
+				newDataStorage = dataStorageHelper.getStorage(key);
 				if (newDataStorage != null && !currentDataStorage.getKey().equals(newDataStorage.getKey())) {
 					if (!key.equals(INTERNAL_STORAGE) && !DownloadActivity.hasPermissionToWriteExternalStorage(activity)) {
 						ActivityCompat.requestPermissions(activity,
@@ -218,6 +219,14 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 					}
 				}
 			}
+		}
+		return false;
+	}
+
+	public boolean onPermissionGranted(boolean permissionGranted) {
+		if (firstUsage && newDataStorage != null && permissionGranted) {
+			confirm(app, activity, newDataStorage, false);
+			return true;
 		}
 		return false;
 	}
@@ -511,11 +520,11 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 					} else {
 						RestartActivity.doRestart(activity);
 					}
+					Fragment target = getTargetFragment();
+					if (target instanceof StorageSelectionListener) {
+						((StorageSelectionListener) target).onStorageSelected(newStorageDirectory);
+					}
 				}
-			}
-			Fragment target = getTargetFragment();
-			if (target instanceof StorageSelectionListener) {
-				((StorageSelectionListener) target).onStorageSelected(newStorageDirectory);
 			}
 		} else {
 			Toast.makeText(activity, R.string.specified_directiory_not_writeable,
