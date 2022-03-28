@@ -8,7 +8,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.WptLocationPoint;
-import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -225,12 +224,12 @@ public class GPXRouteParams {
 			return copy.getPoints();
 		}
 
-		public List<SimulationData> getSimulationData(OsmandApplication app) {
-			List<SimulationData> dataList = new ArrayList<>();
+		public List<SimulatedLocation> getSimulatedLocations(OsmandApplication app) {
+			List<SimulatedLocation> locationList = new ArrayList<>();
 			for (Location l : getPoints(app)) {
-				dataList.add(new SimulationData(l));
+				locationList.add(new SimulatedLocation(l));
 			}
-			return dataList;
+			return locationList;
 		}
 	}
 }
