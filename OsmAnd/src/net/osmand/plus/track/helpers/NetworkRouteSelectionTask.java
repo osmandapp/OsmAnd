@@ -9,6 +9,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.router.network.NetworkRouteSelector;
@@ -28,14 +29,19 @@ public class NetworkRouteSelectionTask extends BaseLoadAsyncTask<Void, Void, GPX
 	private static final Log log = PlatformUtil.getLog(NetworkRouteSelectionTask.class);
 
 	private final OsmandApplication app;
+
+	private final QuadRect quadRect;
 	private final RenderedObject renderedObject;
 	private final CallbackWithObject<GPXFile> callback;
 
-	public NetworkRouteSelectionTask(@NonNull FragmentActivity activity, @Nullable RenderedObject renderedObject,
+	public NetworkRouteSelectionTask(@NonNull FragmentActivity activity,
+	                                 @NonNull RenderedObject renderedObject,
+	                                 @NonNull QuadRect quadRect,
 	                                 @Nullable CallbackWithObject<GPXFile> callback) {
 		super(activity);
 		this.app = (OsmandApplication) activity.getApplication();
 		this.renderedObject = renderedObject;
+		this.quadRect = quadRect;
 		this.callback = callback;
 	}
 
@@ -48,7 +54,7 @@ public class NetworkRouteSelectionTask extends BaseLoadAsyncTask<Void, Void, GPX
 		for (RouteKey routeKey : RouteType.getRouteStringKeys(renderedObject)) {
 			selectorFilter.keyFilter = Collections.singleton(routeKey);
 			try {
-				Map<RouteKey, GPXFile> routes = routeSelector.getRoutes(renderedObject);
+				Map<RouteKey, GPXFile> routes = routeSelector.getRoutes(quadRect, true, routeKey);
 				if (!Algorithms.isEmpty(routes)) {
 					return routes.values().iterator().next();
 				}
