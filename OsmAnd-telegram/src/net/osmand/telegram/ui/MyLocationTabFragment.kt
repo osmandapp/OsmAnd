@@ -520,8 +520,9 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	private fun updateSharingStatus() {
 		if (sharingMode) {
 			settings.updateSharingStatusHistory()
-			if (settings.sharingStatusChanges.isNotEmpty()) {
-				updateSharingStatus(settings.sharingStatusChanges.last())
+			val statusChanges = settings.sharingStatusChanges
+			if (statusChanges.isNotEmpty()) {
+				updateSharingStatus(statusChanges.last())
 			}
 		}
 	}
