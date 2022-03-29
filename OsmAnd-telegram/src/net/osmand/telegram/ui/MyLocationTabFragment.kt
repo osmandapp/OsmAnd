@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.AppBarLayout
 import net.osmand.PlatformUtil
 import net.osmand.telegram.*
+import net.osmand.telegram.TelegramSettings.SharingStatus
 import net.osmand.telegram.helpers.LocationMessages
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.TelegramListener
@@ -519,15 +520,21 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	private fun updateSharingStatus() {
 		if (sharingMode) {
 			settings.updateSharingStatusHistory()
-			val sharingStatus = settings.sharingStatusChanges.last()
-			sharingStatusTitle.text = sharingStatus.getTitle(app)
-			sharingStatusIcon.setImageDrawable(
-				app.uiUtils.getIcon(
-					sharingStatus.statusType.iconId,
-					sharingStatus.statusType.iconColorRes
-				)
-			)
+			val statusChanges = settings.sharingStatusChanges
+			if (statusChanges.isNotEmpty()) {
+				updateSharingStatus(statusChanges.last())
+			}
 		}
+	}
+
+	private fun updateSharingStatus(sharingStatus: SharingStatus) {
+		sharingStatusTitle.text = sharingStatus.getTitle(app)
+		sharingStatusIcon.setImageDrawable(
+			app.uiUtils.getIcon(
+				sharingStatus.statusType.iconId,
+				sharingStatus.statusType.iconColorRes
+			)
+		)
 	}
 
 	private fun updateList() {
