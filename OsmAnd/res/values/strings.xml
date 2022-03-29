@@ -10,6 +10,13 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="routing_attr_carriage_restrictions_name">Carriage restrictions</string>
+    <string name="routing_attr_carriage_restrictions_description">Consider access permissions for horse-drawn vehicles</string>
+    <string name="rendering_attr_showTramRoutes_name">Tram routes</string>
+    <string name="rendering_attr_showTrainRoutes_name">Train routes</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Light rail routes</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Monorail routes</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Funicular routes</string>
     <string name="rendering_attr_showBusRoutes_name">Bus routes</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">Trolleybus routes</string>
     <string name="rendering_attr_showShareTaxiRoutes_name">Shuttle routes</string>
