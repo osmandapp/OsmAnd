@@ -309,7 +309,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		View compass = mapActivity.findViewById(R.id.map_compass_button);
 		compassHud = createHudButton(compass, R.drawable.ic_compass, COMPASS_HUD_ID).setIconColorId(0).
 				setBg(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
-		compassHud.compass = true;
+		compassHud.isCompass = true;
 		controls.add(compassHud);
 		compass.setOnClickListener(v -> app.getMapViewTrackingUtilities().switchRotateMapMode());
 
@@ -974,12 +974,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 		if (isRouteDialogOpened || vh.shouldHideCompass()) {
 			// force hide compass
 			return false;
-		} else if (forceShowCompass) {
-			return true;
-		} else {
+		} else if (!forceShowCompass) {
 			ApplicationMode appMode = settings.getApplicationMode();
 			return settings.SHOW_COMPASS_ALWAYS.getModeValue(appMode);
 		}
+		return true;
 	}
 
 	private void updateMyLocation(MapHudButton backToLocationControl) {
@@ -1171,7 +1170,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 		private boolean nightMode = false;
 		private boolean f = true;
-		private boolean compass;
+		private boolean isCompass;
 		private boolean compassOutside;
 
 		public MapHudButton setRoundTransparent() {
@@ -1197,9 +1196,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 				iv.setVisibility(visible ? View.VISIBLE : View.GONE);
 				iv.invalidate();
 				return true;
-			} else if (visible) {
-				iv.setVisibility(View.VISIBLE);
-				iv.invalidate();
 			}
 			return false;
 		}
@@ -1318,7 +1314,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				}
 			}
 			if (iv instanceof ImageView) {
-				if (compass) {
+				if (isCompass) {
 					setMapButtonIcon((ImageView) iv, new CompassDrawable(d));
 				} else {
 					setMapButtonIcon((ImageView) iv, d);
