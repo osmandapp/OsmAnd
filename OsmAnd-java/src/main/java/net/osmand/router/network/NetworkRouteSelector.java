@@ -53,7 +53,7 @@ public class NetworkRouteSelector {
 	// +++  https://www.openstreetmap.org/way/23246638#map=19/47.98180/11.28338 [5] -> 3
 	// +++  https://www.openstreetmap.org/relation/1075081#map=15/47.656/10.456 [46] 
 	public NetworkRouteSelector(BinaryMapIndexReader[] files, NetworkRouteSelectorFilter filter) {
-		this(files, filter, false);
+		this(files, filter, true);
 	}
 	
 	public NetworkRouteSelector(BinaryMapIndexReader[] files, NetworkRouteSelectorFilter filter, boolean routing) {
@@ -649,6 +649,7 @@ public class NetworkRouteSelector {
 					GPXUtilities.WptPt point = new GPXUtilities.WptPt();
 					point.lat = MapUtils.get31LatitudeY(segment.getPoint31YTile(i));
 					point.lon = MapUtils.get31LongitudeX(segment.getPoint31XTile(i));
+					point.ele = segment.getPointElevation(i);
 					trkSegment.points.add(point);
 					if(prev != null) {
 						l += MapUtils.getDistance(prev.lat, prev.lon, point.lat, point.lon);

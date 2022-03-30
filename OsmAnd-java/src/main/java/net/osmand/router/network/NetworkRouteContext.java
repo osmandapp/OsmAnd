@@ -201,6 +201,9 @@ public class NetworkRouteContext {
 					stats.loadTimeNs += (System.nanoTime() - nt);
 				}
 				for (RouteDataObject obj : objects) {
+					if (obj == null) {
+						continue;
+					}
 					stats.loadedObjects++;
 					List<RouteKey> keys = filter.convert(obj);
 					for (RouteKey rk : keys) {
@@ -304,6 +307,7 @@ public class NetworkRouteContext {
 		public final BinaryMapDataObject obj;
 		public final RouteDataObject robj;
 		public final RouteKey routeKey;
+		float[] heightArray;
 		
 		public NetworkRouteSegment(BinaryMapDataObject obj, RouteKey routeKey, int start, int end) {
 			this.robj = null;
@@ -319,6 +323,7 @@ public class NetworkRouteContext {
 			this.start = start;
 			this.end = end;
 			this.routeKey = segment.routeKey;
+			heightArray = robj.calculateHeightArray();
 		}
 		
 		public NetworkRouteSegment(RouteDataObject obj, RouteKey routeKey, int start, int end) {
@@ -327,6 +332,7 @@ public class NetworkRouteContext {
 			this.start = start;
 			this.end = end;
 			this.routeKey = routeKey;
+			heightArray = robj.calculateHeightArray();
 		}
 		
 		public boolean direction() {
@@ -375,6 +381,13 @@ public class NetworkRouteContext {
 		
 		public int getEndPointY() {
 			return getPoint31YTile(end);
+		}
+
+		public double getPointElevation(int i){
+				if (heightArray != null && heightArray.length > i * 2 + 1) {
+					return heightArray[i * 2 + 1];
+				}
+			return Double.NaN;
 		}
 
 		@Override
