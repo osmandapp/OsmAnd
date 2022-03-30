@@ -331,40 +331,15 @@ class LoginDialogFragment : BaseDialogFragment() {
 
 		val noTelegramViewContainer: LinearLayout? = view.findViewById(R.id.no_telegram)
 		if (activeDialogType == LoginDialogType.ENTER_PHONE_NUMBER) {
-			view.findViewById<TextView>(R.id.no_telegram_title)?.text = getText(R.string.do_not_have_telegram)
-			view.findViewById<TextView>(R.id.phone_number_format)?.text = getText(R.string.phone_number_descr)
-			view.findViewById<ImageView>(R.id.no_telegram_button)?.setImageResource(R.drawable.ic_arrow_forward)
-
-			noTelegramViewContainer?.setOnClickListener {
-				val focusedView = dialog?.currentFocus
-				val mainActivity = activity
-				if (focusedView != null && mainActivity != null) {
-					AndroidUtils.hideSoftKeyboard(mainActivity, focusedView)
-				}
-				updateDialog(LoginDialogType.GET_TELEGRAM, false)
-			}
+			bindPhoneNumberPage(view, noTelegramViewContainer)
 			noTelegramViewContainer?.visibility = View.VISIBLE
 		} else {
 			noTelegramViewContainer?.visibility = View.GONE
 		}
 
-		val getTelegramViewContainer: LinearLayout? =
-			view.findViewById(R.id.get_telegram_layout)
+		val getTelegramViewContainer: LinearLayout? = view.findViewById(R.id.get_telegram_layout)
 		if (activeDialogType == LoginDialogType.GET_TELEGRAM) {
-			view.findViewById<TextView>(R.id.get_telegram_description_first)?.text = getText(R.string.get_telegram_description_continue)
-			view.findViewById<TextView>(R.id.get_telegram_description_second)?.text = getText(R.string.get_telegram_after_creating_account)
-			val getTelegramButton: ImageView? = view.findViewById(R.id.google_play_button)
-			getTelegramButton?.setImageResource(R.drawable.img_google_play_badge)
-			getTelegramButton?.setOnClickListener {
-				context?.also { ctx ->
-					startActivity(
-						AndroidUtils.getPlayMarketIntent(
-							ctx,
-							TELEGRAM_PACKAGE
-						)
-					)
-				}
-			}
+			bindGetTelegramPage(view)
 			view.findViewById<Button>(R.id.continue_button).visibility = View.GONE
 			getTelegramViewContainer?.visibility = View.VISIBLE
 		} else {
@@ -374,170 +349,227 @@ class LoginDialogFragment : BaseDialogFragment() {
 
 		val privacyPolicyContainer: LinearLayout? = view.findViewById(R.id.privacy_policy_layout)
 		if (activeDialogType == LoginDialogType.PRIVACY_POLICY) {
-			titleView?.setTextColor(
-				ContextCompat.getColor(
-					app,
-					R.color.text_bold_highlight
-				)
-			)
-			val useTelegramDescr = getString(R.string.privacy_policy_use_telegram)
-			descriptionView?.apply {
-				text = SpannableString(useTelegramDescr).apply {
-					val telegram = getString(R.string.shared_string_telegram)
-					val start = useTelegramDescr.indexOf(telegram)
-					if (start != -1) {
-						val clickableSpan = object : ClickableSpan() {
-							override fun onClick(textView: View) {
-								context?.also { ctx ->
-									startActivity(
-										AndroidUtils.getPlayMarketIntent(
-											ctx,
-											TELEGRAM_PACKAGE
-										)
-									)
-								}
-							}
-
-							override fun updateDrawState(ds: TextPaint) {
-								super.updateDrawState(ds)
-								ds.isUnderlineText = false
-							}
-						}
-						setSpan(clickableSpan, start, start + telegram.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-						setSpan(
-							ForegroundColorSpan(
-								ContextCompat.getColor(
-									app,
-									R.color.text_bold_highlight
-								)
-							),
-							start, start + telegram.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-						)
-						setSpan(
-							StyleSpan(android.graphics.Typeface.BOLD),
-							start, start + telegram.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-						)
-					}
-				}
-				movementMethod = LinkMovementMethod.getInstance()
-			}
-
-			view.findViewById<TextView>(R.id.privacy_policy_agree).apply {
-				val policyAgreeDescr = getString(R.string.privacy_policy_agree)
-				text = SpannableString(policyAgreeDescr).apply {
-					val telegramPrivacyPolicy = getString(R.string.telegram_privacy_policy)
-					val osmAndPrivacyPolicy = getString(R.string.osmand_privacy_policy)
-					var start = policyAgreeDescr.indexOf(telegramPrivacyPolicy)
-					if (start != -1) {
-						val clickableSpanTelegram = object : ClickableSpan() {
-							override fun onClick(textView: View) {
-								val intent = Intent(
-									Intent.ACTION_VIEW,
-									Uri.parse(TELEGRAM_PRIVACY_POLICY)
-								)
-								if (AndroidUtils.isIntentSafe(context, intent)) {
-									startActivity(intent)
-								}
-							}
-
-							override fun updateDrawState(ds: TextPaint) {
-								super.updateDrawState(ds)
-								ds.isUnderlineText = false
-							}
-						}
-						setSpan(clickableSpanTelegram, start, start + telegramPrivacyPolicy.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-						setSpan(
-							ForegroundColorSpan(
-								ContextCompat.getColor(
-									app,
-									R.color.text_bold_highlight
-								)
-							),
-							start, start + telegramPrivacyPolicy.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-						)
-					}
-					start = policyAgreeDescr.indexOf(osmAndPrivacyPolicy)
-					if (start != -1) {
-						val clickableSpanOsmAnd = object : ClickableSpan() {
-							override fun onClick(textView: View) {
-								val intent = Intent(
-									Intent.ACTION_VIEW,
-									Uri.parse(OSMAND_PRIVACY_POLICY)
-								)
-								if (AndroidUtils.isIntentSafe(context, intent)) {
-									startActivity(intent)
-								}
-							}
-
-							override fun updateDrawState(ds: TextPaint) {
-								super.updateDrawState(ds)
-								ds.isUnderlineText = false
-							}
-						}
-						setSpan(clickableSpanOsmAnd, start, start + osmAndPrivacyPolicy.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-						setSpan(
-							ForegroundColorSpan(
-								ContextCompat.getColor(
-									app,
-									R.color.text_bold_highlight
-								)
-							),
-							start, start + osmAndPrivacyPolicy.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-						)
-					}
-				}
-				movementMethod = LinkMovementMethod.getInstance()
-			}
-			view.findViewById<LinearLayout>(R.id.telegram_privacy_policy_btn).apply {
-				findViewById<TextView>(R.id.telegram_privacy_policy_title).text =
-					getText(R.string.telegram_privacy_policy)
-				findViewById<ImageView>(R.id.telegram_privacy_policy_icon)?.setImageDrawable(
-					app.uiUtils.getIcon(
-						R.drawable.ic_arrow_forward,
-						R.color.text_bold_highlight
-					)
-				)
-				setOnClickListener {
-					context?.also {
-						val intent = Intent(
-							Intent.ACTION_VIEW,
-							Uri.parse(TELEGRAM_PRIVACY_POLICY)
-						)
-						if (AndroidUtils.isIntentSafe(context, intent)) {
-							startActivity(intent)
-						}
-					}
-				}
-			}
-			view.findViewById<LinearLayout>(R.id.osmand_privacy_policy_btn).apply {
-				findViewById<TextView>(R.id.osmand_privacy_policy_title).text =
-					getText(R.string.osmand_privacy_policy)
-				findViewById<ImageView>(R.id.osmand_privacy_policy_icon)?.setImageDrawable(
-					app.uiUtils.getIcon(R.drawable.ic_arrow_forward, R.color.text_bold_highlight)
-				)
-				setOnClickListener {
-					context?.also {
-						val intent = Intent(Intent.ACTION_VIEW, Uri.parse(OSMAND_PRIVACY_POLICY))
-						if (AndroidUtils.isIntentSafe(context, intent)) {
-							startActivity(intent)
-						}
-					}
-				}
-			}
-			view.findViewById<Button>(R.id.continue_button).text = getText(R.string.shared_string_accept)
-			changeContinueButtonEnabled(true)
-			transformContinueButton(true, acceptMode = true)
+			bindPrivacyPolicyPage(view, titleView, descriptionView)
 			privacyPolicyContainer?.visibility = View.VISIBLE
 		} else {
 			privacyPolicyContainer?.visibility = View.GONE
-			titleView?.setTextColor(
-				ContextCompat.getColor(
-					app,
-					R.color.ctrl_active_light
-				)
-			)
+			val titleColor = ContextCompat.getColor(app, R.color.ctrl_active_light)
+			titleView?.setTextColor(titleColor)
 			view.findViewById<Button>(R.id.continue_button).text = getText(R.string.shared_string_continue)
 		}
+	}
+
+	private fun bindPhoneNumberPage(
+		view: View,
+		noTelegramViewContainer: View?
+	) {
+		view.findViewById<TextView>(R.id.no_telegram_title)?.text = getText(R.string.do_not_have_telegram)
+		view.findViewById<TextView>(R.id.phone_number_format)?.text = getText(R.string.phone_number_descr)
+		view.findViewById<ImageView>(R.id.no_telegram_button)?.setImageResource(R.drawable.ic_arrow_forward)
+
+		noTelegramViewContainer?.setOnClickListener {
+			val focusedView = dialog?.currentFocus
+			val mainActivity = activity
+			if (focusedView != null && mainActivity != null) {
+				AndroidUtils.hideSoftKeyboard(mainActivity, focusedView)
+			}
+			updateDialog(LoginDialogType.GET_TELEGRAM, false)
+		}
+	}
+
+	private fun bindGetTelegramPage(view: View) {
+		view.findViewById<TextView>(R.id.get_telegram_description_first)?.text = getText(R.string.get_telegram_description_continue)
+		view.findViewById<TextView>(R.id.get_telegram_description_second)?.text = getText(R.string.get_telegram_after_creating_account)
+		val getTelegramButton: ImageView? = view.findViewById(R.id.google_play_button)
+		getTelegramButton?.setImageResource(R.drawable.img_google_play_badge)
+		getTelegramButton?.setOnClickListener {
+			context?.also { ctx ->
+				startActivity(
+					AndroidUtils.getPlayMarketIntent(
+						ctx,
+						TELEGRAM_PACKAGE
+					)
+				)
+			}
+		}
+	}
+
+	private fun bindPrivacyPolicyPage(
+		view: View,
+		titleView: TextView?,
+		descriptionView: TextView?
+	) {
+		titleView?.setTextColor(
+			ContextCompat.getColor(
+				app,
+				R.color.text_bold_highlight
+			)
+		)
+		val useTelegramDescr = getString(R.string.privacy_policy_use_telegram)
+		descriptionView?.apply {
+			text = SpannableString(useTelegramDescr).apply {
+				val telegram = getString(R.string.shared_string_telegram)
+				val start = useTelegramDescr.indexOf(telegram)
+				if (start != -1) {
+					val clickableSpan = object : ClickableSpan() {
+						override fun onClick(textView: View) {
+							context?.also { ctx ->
+								startActivity(
+									AndroidUtils.getPlayMarketIntent(
+										ctx,
+										TELEGRAM_PACKAGE
+									)
+								)
+							}
+						}
+
+						override fun updateDrawState(ds: TextPaint) {
+							super.updateDrawState(ds)
+							ds.isUnderlineText = false
+						}
+					}
+					setSpan(
+						clickableSpan,
+						start,
+						start + telegram.length,
+						Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+					)
+					setSpan(
+						ForegroundColorSpan(
+							ContextCompat.getColor(
+								app,
+								R.color.text_bold_highlight
+							)
+						),
+						start, start + telegram.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+					)
+					setSpan(
+						StyleSpan(android.graphics.Typeface.BOLD),
+						start, start + telegram.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+					)
+				}
+			}
+			movementMethod = LinkMovementMethod.getInstance()
+		}
+
+		view.findViewById<TextView>(R.id.privacy_policy_agree).apply {
+			val policyAgreeDescr = getString(R.string.privacy_policy_agree)
+			text = SpannableString(policyAgreeDescr).apply {
+				val telegramPrivacyPolicy = getString(R.string.telegram_privacy_policy)
+				val osmAndPrivacyPolicy = getString(R.string.osmand_privacy_policy)
+				var start = policyAgreeDescr.indexOf(telegramPrivacyPolicy)
+				if (start != -1) {
+					val clickableSpanTelegram = object : ClickableSpan() {
+						override fun onClick(textView: View) {
+							val intent = Intent(
+								Intent.ACTION_VIEW,
+								Uri.parse(TELEGRAM_PRIVACY_POLICY)
+							)
+							if (AndroidUtils.isIntentSafe(context, intent)) {
+								startActivity(intent)
+							}
+						}
+
+						override fun updateDrawState(ds: TextPaint) {
+							super.updateDrawState(ds)
+							ds.isUnderlineText = false
+						}
+					}
+					setSpan(
+						clickableSpanTelegram,
+						start,
+						start + telegramPrivacyPolicy.length,
+						Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+					)
+					setSpan(
+						ForegroundColorSpan(
+							ContextCompat.getColor(
+								app,
+								R.color.text_bold_highlight
+							)
+						),
+						start,
+						start + telegramPrivacyPolicy.length,
+						Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+					)
+				}
+				start = policyAgreeDescr.indexOf(osmAndPrivacyPolicy)
+				if (start != -1) {
+					val clickableSpanOsmAnd = object : ClickableSpan() {
+						override fun onClick(textView: View) {
+							val intent = Intent(
+								Intent.ACTION_VIEW,
+								Uri.parse(OSMAND_PRIVACY_POLICY)
+							)
+							if (AndroidUtils.isIntentSafe(context, intent)) {
+								startActivity(intent)
+							}
+						}
+
+						override fun updateDrawState(ds: TextPaint) {
+							super.updateDrawState(ds)
+							ds.isUnderlineText = false
+						}
+					}
+					setSpan(
+						clickableSpanOsmAnd,
+						start,
+						start + osmAndPrivacyPolicy.length,
+						Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+					)
+					setSpan(
+						ForegroundColorSpan(
+							ContextCompat.getColor(
+								app,
+								R.color.text_bold_highlight
+							)
+						),
+						start, start + osmAndPrivacyPolicy.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+					)
+				}
+			}
+			movementMethod = LinkMovementMethod.getInstance()
+		}
+		view.findViewById<LinearLayout>(R.id.telegram_privacy_policy_btn).apply {
+			findViewById<TextView>(R.id.telegram_privacy_policy_title).text =
+				getText(R.string.telegram_privacy_policy)
+			findViewById<ImageView>(R.id.telegram_privacy_policy_icon)?.setImageDrawable(
+				app.uiUtils.getIcon(
+					R.drawable.ic_arrow_forward,
+					R.color.text_bold_highlight
+				)
+			)
+			setOnClickListener {
+				context?.also {
+					val intent = Intent(
+						Intent.ACTION_VIEW,
+						Uri.parse(TELEGRAM_PRIVACY_POLICY)
+					)
+					if (AndroidUtils.isIntentSafe(context, intent)) {
+						startActivity(intent)
+					}
+				}
+			}
+		}
+		view.findViewById<LinearLayout>(R.id.osmand_privacy_policy_btn).apply {
+			findViewById<TextView>(R.id.osmand_privacy_policy_title).text =
+				getText(R.string.osmand_privacy_policy)
+			findViewById<ImageView>(R.id.osmand_privacy_policy_icon)?.setImageDrawable(
+				app.uiUtils.getIcon(R.drawable.ic_arrow_forward, R.color.text_bold_highlight)
+			)
+			setOnClickListener {
+				context?.also {
+					val intent = Intent(Intent.ACTION_VIEW, Uri.parse(OSMAND_PRIVACY_POLICY))
+					if (AndroidUtils.isIntentSafe(context, intent)) {
+						startActivity(intent)
+					}
+				}
+			}
+		}
+		view.findViewById<Button>(R.id.continue_button).text =
+			getText(R.string.shared_string_accept)
+		changeContinueButtonEnabled(true)
+		transformContinueButton(true, acceptMode = true)
 	}
 
 	private fun updateProgressView(view: View) {
