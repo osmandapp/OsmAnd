@@ -644,14 +644,20 @@ public class NetworkRouteSelector {
 			int l = 0;
 			GPXUtilities.WptPt prev = null;
  			for (NetworkRouteSegment segment : segmentList) {
+				float[] heightArray = null;
+				if (segment.robj != null) {
+					heightArray = segment.robj.calculateHeightArray();
+				}
 				int inc = segment.start < segment.end ? 1 : -1;
-				for (int i = segment.start;; i += inc) {
+				for (int i = segment.start; ; i += inc) {
 					GPXUtilities.WptPt point = new GPXUtilities.WptPt();
 					point.lat = MapUtils.get31LatitudeY(segment.getPoint31YTile(i));
 					point.lon = MapUtils.get31LongitudeX(segment.getPoint31XTile(i));
-					point.ele = segment.getPointElevation(i);
+					if (heightArray != null && heightArray.length > i * 2 + 1) {
+						point.ele = heightArray[i * 2 + 1];
+					}
 					trkSegment.points.add(point);
-					if(prev != null) {
+					if (prev != null) {
 						l += MapUtils.getDistance(prev.lat, prev.lon, point.lat, point.lon);
 					}
 					prev = point;
