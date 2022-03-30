@@ -4538,10 +4538,12 @@
     <string name="stop_download">Parar descarga</string>
     <string name="estimated_download_size">Tamaño estimado de descarga</string>
     <string name="number_of_tiles">Número de teselas</string>
-    <string name="rendering_attr_showFitnessTrails_name">Mostrar circuitos aeróbicos</string>
+    <string name="rendering_attr_showFitnessTrails_name">Circuitos aeróbicos</string>
     <string name="stop_download_desc">La descarga está incompleta. Si interrumpes la descarga ahora, sólo podrás ver una parte de las teselas.</string>
     <string name="stop_and_exit">Parar y salir</string>
     <string name="shared_string_complete">completo</string>
     <string name="zoom_levels_difference_description">Una gran diferencia entre los niveles de zum, puede aumentar el tamaño de los datos descargados.</string>
     <string name="move_map_to_select_area">Mover el mapa para elegir el área necesaria.</string>
+    <string name="rendering_attr_showRunningRoutes_name">Rutas para correr</string>
+    <string name="rendering_attr_showRunningRoutes_description">Mostrar rutas para correr</string>
 </resources>

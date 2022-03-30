@@ -4537,5 +4537,7 @@
     <string name="shared_string_complete">完成</string>
     <string name="number_of_tiles">圖磚數</string>
     <string name="rendering_attr_showFitnessTrails_description">顯示健身路徑</string>
-    <string name="rendering_attr_showFitnessTrails_name">顯示健身路徑</string>
+    <string name="rendering_attr_showFitnessTrails_name">健身路徑</string>
+    <string name="rendering_attr_showRunningRoutes_description">顯示跑步路線</string>
+    <string name="rendering_attr_showRunningRoutes_name">跑步路線</string>
 </resources>
