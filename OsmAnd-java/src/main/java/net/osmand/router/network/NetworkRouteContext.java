@@ -307,25 +307,26 @@ public class NetworkRouteContext {
 		public final BinaryMapDataObject obj;
 		public final RouteDataObject robj;
 		public final RouteKey routeKey;
-		float[] heightArray;
-		
+		public final float[] heightArray;
+
 		public NetworkRouteSegment(BinaryMapDataObject obj, RouteKey routeKey, int start, int end) {
 			this.robj = null;
 			this.obj = obj;
 			this.start = start;
 			this.end = end;
 			this.routeKey = routeKey;
+			heightArray = null;
 		}
-		
+
 		public NetworkRouteSegment(NetworkRouteSegment segment, int start, int end) {
 			this.robj = segment.robj;
 			this.obj = segment.obj;
 			this.start = start;
 			this.end = end;
 			this.routeKey = segment.routeKey;
-			heightArray = robj.calculateHeightArray();
+			heightArray = segment.heightArray;
 		}
-		
+
 		public NetworkRouteSegment(RouteDataObject obj, RouteKey routeKey, int start, int end) {
 			this.robj = obj;
 			this.obj = null;
@@ -334,7 +335,7 @@ public class NetworkRouteContext {
 			this.routeKey = routeKey;
 			heightArray = robj.calculateHeightArray();
 		}
-		
+
 		public boolean direction() {
 			return end > start;
 		}
