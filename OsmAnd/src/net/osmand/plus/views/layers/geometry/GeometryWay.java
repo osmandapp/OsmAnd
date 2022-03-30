@@ -9,6 +9,9 @@ import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities;
 import net.osmand.Location;
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.FColorARGB;
+import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.views.layers.geometry.GeometryWayDrawer.DrawPathData;
 import net.osmand.util.Algorithms;
@@ -37,6 +40,16 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 	private List<Double> angles = new ArrayList<>();
 	private List<Double> distances = new ArrayList<>();
 	private List<GeometryWayStyle<?>> styles = new ArrayList<>();
+
+	//OpenGL
+	public boolean openGlRendering = false;
+	public int baseOrder = -1;
+	public VectorLinesCollection collection;
+	public VectorLinesCollection actionLinesCollection;
+	public FColorARGB kOutlineColor;
+	public static final int kOutlineWidth = 10;
+	public static final int kOutlineId = 1001;
+	public MapRendererView openGlView;
 
 	public interface GeometryWayProvider {
 		double getLatitude(int index);

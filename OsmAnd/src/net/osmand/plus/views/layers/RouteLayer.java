@@ -18,10 +18,7 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.core.jni.FColorARGB;
 import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.QListFColorARGB;
-import net.osmand.core.jni.QListVectorLine;
 import net.osmand.core.jni.QVectorPointI;
 import net.osmand.core.jni.VectorLine;
 import net.osmand.core.jni.VectorLinesCollection;
@@ -87,8 +84,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	private LayerDrawable projectionIcon;
 
 	//OpenGL
-	private VectorLinesCollection collection;
-	private VectorLinesCollection actionLinesCollection;
+	private RenderState renderState;
 
 	public RouteLayer(@NonNull Context context, int baseOrder) {
 		super(context);
@@ -98,6 +94,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		chartPointsHelper = new ChartPointsHelper(app);
 		coloringAvailabilityCache = new ColoringTypeAvailabilityCache(app);
 		this.baseOrder = baseOrder;
+		renderState = new RenderState();
 	}
 
 	public RoutingHelper getHelper() {
@@ -286,6 +283,17 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	public void drawLocations(RotatedTileBox tb, Canvas canvas, double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
 		if (helper.isPublicTransportMode()) {
 			int currentRoute = transportHelper.getCurrentRoute();
+
+			publicTransportRouteGeometry.openGlRendering = view.hasMapRenderer();
+			if (publicTransportRouteGeometry.openGlRendering) {
+				publicTransportRouteGeometry.baseOrder = baseOrder;
+				publicTransportRouteGeometry.openGlView = view.getMapRenderer();
+				if (!renderState.publicTransportStateEqual(currentRoute)) {
+					resetLayer();
+				}
+				renderState.setPublicTransportCurrentRoute(currentRoute);
+			}
+
 			List<TransportRouteResult> routes = transportHelper.getRoutes();
 			TransportRouteResult route = routes != null && routes.size() > currentRoute ? routes.get(currentRoute) : null;
 			routeGeometry.clearRoute();
@@ -306,32 +314,38 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 			ColoringType actualColoringType = isColoringAvailable(routeColoringType, routeInfoAttribute) ?
 							routeColoringType : ColoringType.DEFAULT;
-			routeGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tb),
+			float routeLineWidth = getRouteLineWidth(tb);
+			routeGeometry.setRouteStyleParams(getRouteLineColor(), routeLineWidth,
 					directionArrowsColor, actualColoringType, routeInfoAttribute);
 			routeGeometry.updateRoute(tb, route);
 
-			if (view.hasMapRenderer()) {
-				//OpenGL
-				drawRouteSegment(tb);
-			} else {
-				if (directTo) {
-					routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-							null, 0);
-				} else if (straight) {
-					routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-							helper.getLastFixedLocation(), route.getCurrentStraightAngleRoute());
-				} else {
-					routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-							helper.getLastProjection(), route.getCurrentStraightAngleRoute());
+			routeGeometry.openGlRendering = view.hasMapRenderer();
+			if (routeGeometry.openGlRendering) {
+				routeGeometry.baseOrder = baseOrder;
+				routeGeometry.openGlView = view.getMapRenderer();
+				if (!renderState.routeStateEqual(actualColoringType, getRouteLineColor(), routeLineWidth)) {
+					resetLayer();
 				}
+				renderState.setPreviewRouteLineInfo(previewRouteLineInfo);
+				renderState.setRouteParams(actualColoringType, getRouteLineColor(), routeLineWidth);
+			}
+
+			if (directTo) {
+				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
+						null, 0);
+			} else if (straight) {
+				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
+						helper.getLastFixedLocation(), route.getCurrentStraightAngleRoute());
+			} else {
+				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
+						helper.getLastProjection(), route.getCurrentStraightAngleRoute());
 			}
 			List<RouteDirectionInfo> rd = helper.getRouteDirections();
 			Iterator<RouteDirectionInfo> it = rd.iterator();
 			if (!directTo && tb.getZoom() >= 14 && shouldShowTurnArrows()) {
 				List<Location> actionPoints = calculateActionPoints(topLatitude, leftLongitude, bottomLatitude, rightLongitude, helper.getLastProjection(),
 						helper.getRoute().getRouteLocations(), helper.getRoute().getCurrentRoute(), it, tb.getZoom());
-				if (view.hasMapRenderer()) {
-					//OpenGL
+				if (routeGeometry.openGlRendering) {
 					buildActionArrows(tb, actionPoints);
 				} else {
 					drawAction(tb, canvas, actionPoints);
@@ -344,6 +358,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 					drawProjectionPoint(canvas, projectionOnRoute);
 				}
 			}
+			renderState.setPreviewRouteLineInfo(previewRouteLineInfo);
 		}
 	}
 	
@@ -627,10 +642,10 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	/** OpenGL */
 	private void buildActionArrows(RotatedTileBox tileBox, List<Location> actionPoints) {
 
-		if (collection.getLines().isEmpty() || tileBox.getZoom() <= 14) {
-			if (actionLinesCollection != null) {
-				actionLinesCollection.removeAllLines();
-				view.getMapRenderer().removeSymbolsProvider(actionLinesCollection);
+		if (routeGeometry.collection.getLines().isEmpty() || tileBox.getZoom() <= 14) {
+			if (routeGeometry.actionLinesCollection != null) {
+				routeGeometry.actionLinesCollection.removeAllLines();
+				view.getMapRenderer().removeSymbolsProvider(routeGeometry.actionLinesCollection);
 			}
 			return;
 		}
@@ -645,10 +660,10 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		List<List<Location>> actionArrows = getActionArrows(actionPoints);
 		if (!actionArrows.isEmpty()) {
 			int lineIdx = 0;
-			if (actionLinesCollection == null) {
-				actionLinesCollection = new VectorLinesCollection();
+			if (routeGeometry.actionLinesCollection == null) {
+				routeGeometry.actionLinesCollection = new VectorLinesCollection();
 			}
-			long initialLinesCount = actionLinesCollection.getLines().size();
+			long initialLinesCount = routeGeometry.actionLinesCollection.getLines().size();
 			for (List<Location> line : actionArrows) {
 				QVectorPointI points = new QVectorPointI();
 				for (Location point : line) {
@@ -657,7 +672,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 					points.add(new PointI(x, y));
 				}
 				if (lineIdx < initialLinesCount) {
-					VectorLine vectorLine = actionLinesCollection.getLines().get(lineIdx);
+					VectorLine vectorLine = routeGeometry.actionLinesCollection.getLines().get(lineIdx);
 					vectorLine.setPoints(points);
 					vectorLine.setIsHidden(false);
 					lineIdx++;
@@ -665,99 +680,33 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 					VectorLineBuilder vectorLineBuilder = new VectorLineBuilder();
 					vectorLineBuilder.setBaseOrder(bsOrder--)
 							.setIsHidden(false)
-							.setLineId((int) actionLinesCollection.getLines().size())
+							.setLineId((int) routeGeometry.actionLinesCollection.getLines().size())
 							.setLineWidth(getRouteLineWidth(tileBox) * 0.4)
 							.setPoints(points)
 							.setEndCapStyle(VectorLine.EndCapStyle.ARROW.ordinal())
 							.setFillColor(NativeUtilities.createFColorARGB(customTurnArrowColor));
-					vectorLineBuilder.buildAndAddToCollection(actionLinesCollection);
+					vectorLineBuilder.buildAndAddToCollection(routeGeometry.actionLinesCollection);
 				}
 			}
 			while (lineIdx < initialLinesCount) {
-				actionLinesCollection.getLines().get(lineIdx).setIsHidden(true);
+				routeGeometry.actionLinesCollection.getLines().get(lineIdx).setIsHidden(true);
 				lineIdx++;
 			}
-			view.getMapRenderer().addSymbolsProvider(actionLinesCollection);
-		}
-	}
-
-	/** OpenGL */
-	private void drawRouteSegment(RotatedTileBox tb) {
-		if (!view.hasMapRenderer()) {
-			return;
-		}
-
-		QListVectorLine lines = new QListVectorLine();
-		if (collection != null) {
-			lines = collection.getLines();
-		}
-
-		QVectorPointI points = new QVectorPointI();
-		List<Location> ll = helper.getRoute().getRouteLocations();
-		for (Location l : ll) {
-			int x = MapUtils.get31TileNumberX(l.getLongitude());
-			int y = MapUtils.get31TileNumberY(l.getLatitude());
-			points.add(new PointI(x, y));
-		}
-
-		QListFColorARGB colors = routeGeometry.getColorizationMapping();
-		int colorizationScheme = routeGeometry.getColorizationScheme();
-
-		if (lines.isEmpty()) {
-			VectorLineBuilder vectorLineBuilder = new VectorLineBuilder();
-			int bsOrder = baseOrder;
-
-			if (collection == null) {
-				collection = new VectorLinesCollection();
-			}
-
-			if (kOutlineColor == null) {
-				kOutlineColor = new FColorARGB(150.0f/255.0f, 0.0f, 0.0f, 0.0f);
-			}
-
-			// Add outline for colorized lines
-			if (!colors.isEmpty()) {
-				VectorLineBuilder outlineBuilder = new VectorLineBuilder();;
-				outlineBuilder.setBaseOrder(bsOrder--)
-						.setIsHidden(points.size() < 2)
-						.setLineId(kOutlineId)
-						.setLineWidth(getRouteLineWidth(tb) + kOutlineWidth)
-						.setOutlineWidth(kOutlineWidth)
-						.setPoints(points)
-						.setFillColor(kOutlineColor)
-						.setApproximationEnabled(false);
-
-				outlineBuilder.buildAndAddToCollection(collection);
-			}
-
-			vectorLineBuilder
-					.setPoints(points)
-					.setIsHidden(false)
-					.setLineId(1)
-					.setLineWidth(getRouteLineWidth(tb))
-					.setFillColor(NativeUtilities.createFColorARGB(getRouteLineColor()))
-					.setBaseOrder(bsOrder--);
-
-			if (!colors.isEmpty()) {
-				vectorLineBuilder.setColorizationMapping(colors);
-				vectorLineBuilder.setColorizationScheme(colorizationScheme);
-			}
-			vectorLineBuilder.buildAndAddToCollection(collection);
-
-			view.getMapRenderer().addSymbolsProvider(collection);
+			view.getMapRenderer().addSymbolsProvider(routeGeometry.actionLinesCollection);
 		}
 	}
 
 	/** OpenGL */
 	private void resetLayer() {
-		if (collection != null) {
-			view.getMapRenderer().removeSymbolsProvider(collection);
-			collection = null;
+		if (routeGeometry.collection != null) {
+			routeGeometry.openGlView.removeSymbolsProvider(routeGeometry.collection);
+			routeGeometry.collection = null;
 		}
-		if (actionLinesCollection != null) {
-			view.getMapRenderer().removeSymbolsProvider(actionLinesCollection);
-			actionLinesCollection = null;
+		if (routeGeometry.actionLinesCollection != null) {
+			routeGeometry.openGlView.removeSymbolsProvider(routeGeometry.actionLinesCollection);
+			routeGeometry.actionLinesCollection = null;
 		}
+		publicTransportRouteGeometry.resetLayer();
 	}
 
 	private List<List<Location>> getActionArrows(List<Location> locations) {
@@ -774,5 +723,42 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			}
 		}
 		return ll;
+	}
+
+	private class RenderState {
+		PreviewRouteLineInfo lineInfo;
+		int publicTransportRoute = -1;
+		ColoringType type = ColoringType.DEFAULT;
+		int color = -1;
+		float width = 1.0f;
+
+		public void setRouteParams(ColoringType type, int color, float width) {
+			this.type = type;
+			this.color = color;
+			this.width = width;
+		}
+
+		public void setPreviewRouteLineInfo(PreviewRouteLineInfo info) {
+			previewRouteLineInfo = info;
+		}
+
+		public void setPublicTransportCurrentRoute(int currentRoute) {
+			publicTransportRoute = currentRoute;
+		}
+
+		public boolean routeStateEqual(ColoringType coloringType, int routeColor, float routeWidth) {
+			if (lineInfo != null && lineInfo.equals(previewRouteLineInfo)) {
+				return true;
+			} else {
+				return color != -1 && type == coloringType && color == routeColor && width == routeWidth;
+			}
+		}
+
+		public boolean publicTransportStateEqual(int currentRoute) {
+			if (publicTransportRoute != -1 && publicTransportRoute == currentRoute) {
+				return true;
+			}
+			return false;
+		}
 	}
 }

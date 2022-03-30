@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
+import net.osmand.core.jni.ColorARGB;
 import net.osmand.core.jni.FColorARGB;
 import net.osmand.core.jni.FColorRGB;
 import net.osmand.core.jni.SWIGTYPE_p_sk_spT_SkImage_const_t;
@@ -29,5 +30,13 @@ public class NativeUtilities {
 		float g = (color >> 8) & 0xFF;
 		float b = (color >> 0) & 0xFF;
 		return new FColorARGB(a / 255, r / 255, g / 255, b / 255);
+	}
+
+	public static ColorARGB createColorARGB(@ColorInt int color) {
+		int a = (color >> 24) & 0xFF;
+		int r = (color >> 16) & 0xFF;
+		int g = (color >> 8) & 0xFF;
+		int b = (color >> 0) & 0xFF;
+		return new ColorARGB((short)a, (short)r , (short)g, (short)b);
 	}
 }

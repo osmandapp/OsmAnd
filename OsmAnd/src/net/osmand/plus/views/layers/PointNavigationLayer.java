@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.PointF;
@@ -11,6 +12,12 @@ import android.graphics.PointF;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.core.jni.MapMarker;
+import net.osmand.core.jni.MapMarkerBuilder;
+import net.osmand.core.jni.MapMarkersCollection;
+import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.QListMapMarker;
+import net.osmand.core.jni.TextRasterizer;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -18,10 +25,12 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IMoveObjectProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.util.MapUtils;
 
 import java.util.List;
 
@@ -43,8 +52,25 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 
 	private ContextMenuLayer contextMenuLayer;
 
-	public PointNavigationLayer(@NonNull Context context) {
+	//OpenGL
+	private MapMarkersCollection startMarkersCollection;
+	private MapMarkersCollection intermediateMarkersCollection;
+	private MapMarkersCollection destinationsMarkersCollection;
+	private TextRasterizer.Style captionStyle;
+	private boolean nightMode;
+	private final int TEXT_DAY_COLOR = 0xff000000;
+	private final int TEXT_NIGHT_COLOR = 0xffC8C8C8;
+	private final int TEXT_DAY_HALO_COLOR = 0xffffffff;
+	private final int TEXT_NIGHT_HALO_COLOR = 0xdc262626;
+	private enum MarkerType {
+		START,
+		INTERMEDIATE,
+		DESTINATION
+	};
+
+	public PointNavigationLayer(@NonNull Context context, int order) {
 		super(context);
+		baseOrder = order;
 	}
 
 	private void initUI() {
@@ -75,6 +101,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		if (tb.getZoom() < 3) {
 			return;
 		}
+		this.nightMode = nightMode.isNightMode();
 		updateBitmaps(false);
 
 		OsmandApplication app = getApplication();
@@ -86,26 +113,44 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 				int marginY = mStartPoint.getHeight();
 				float locationX = getPointX(tb, pointToStart);
 				float locationY = getPointY(tb, pointToStart);
-				canvas.rotate(-tb.getRotate(), locationX, locationY);
-				canvas.drawBitmap(mStartPoint, locationX - marginX, locationY - marginY, mBitmapPaint);
-				canvas.rotate(tb.getRotate(), locationX, locationY);
+				if (getMapView().hasMapRenderer()) {
+					//OpenGL
+					int x = MapUtils.get31TileNumberX(pointToStart.getLongitude());
+					int y = MapUtils.get31TileNumberY(pointToStart.getLatitude());
+					drawMarker(MarkerType.START, new PointI(x, y));
+				} else {
+					canvas.rotate(-tb.getRotate(), locationX, locationY);
+					canvas.drawBitmap(mStartPoint, locationX - marginX, locationY - marginY, mBitmapPaint);
+					canvas.rotate(tb.getRotate(), locationX, locationY);
+				}
 			}
+		} else {
+			removeMarkers(MarkerType.START);
 		}
 
-		int index = 0;
-		for (TargetPoint ip : targetPoints.getIntermediatePoints()) {
-			index++;
-			if (isLocationVisible(tb, ip)) {
-				int marginX = mIntermediatePoint.getWidth() / 6;
-				int marginY = mIntermediatePoint.getHeight();
-				float locationX = getPointX(tb, ip);
-				float locationY = getPointY(tb, ip);
-				canvas.rotate(-tb.getRotate(), locationX, locationY);
-				canvas.drawBitmap(mIntermediatePoint, locationX - marginX, locationY - marginY, mBitmapPaint);
-				marginX = mIntermediatePoint.getWidth() / 3;
-				canvas.drawText(index + "", locationX + marginX, locationY - 3 * marginY / 5, mTextPaint);
-				canvas.rotate(tb.getRotate(), locationX, locationY);
+		List<TargetPoint> intermediatePoints = targetPoints.getIntermediatePoints();
+		if (intermediatePoints.size() > 0) {
+			if (getMapView().hasMapRenderer()) {
+				drawIntermediateMarkers(intermediatePoints);
+			} else {
+				int index = 0;
+				for (TargetPoint ip : intermediatePoints) {
+					index++;
+					if (isLocationVisible(tb, ip)) {
+						int marginX = mIntermediatePoint.getWidth() / 6;
+						int marginY = mIntermediatePoint.getHeight();
+						float locationX = getPointX(tb, ip);
+						float locationY = getPointY(tb, ip);
+						canvas.rotate(-tb.getRotate(), locationX, locationY);
+						canvas.drawBitmap(mIntermediatePoint, locationX - marginX, locationY - marginY, mBitmapPaint);
+						marginX = mIntermediatePoint.getWidth() / 3;
+						canvas.drawText(index + "", locationX + marginX, locationY - 3 * marginY / 5, mTextPaint);
+						canvas.rotate(tb.getRotate(), locationX, locationY);
+					}
+				}
 			}
+		} else {
+			removeMarkers(MarkerType.INTERMEDIATE);
 		}
 
 		TargetPoint pointToNavigate = targetPoints.getPointToNavigate();
@@ -114,9 +159,18 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 			int marginY = mTargetPoint.getHeight();
 			float locationX = getPointX(tb, pointToNavigate);
 			float locationY = getPointY(tb, pointToNavigate);
-			canvas.rotate(-tb.getRotate(), locationX, locationY);
-			canvas.drawBitmap(mTargetPoint, locationX - marginX, locationY - marginY, mBitmapPaint);
-			canvas.rotate(tb.getRotate(), locationX, locationY);
+			if (getMapView().hasMapRenderer()) {
+				//OpenGL
+				int x = MapUtils.get31TileNumberX(pointToNavigate.getLongitude());
+				int y = MapUtils.get31TileNumberY(pointToNavigate.getLatitude());
+				drawMarker(MarkerType.DESTINATION, new PointI(x, y));
+			} else {
+				canvas.rotate(-tb.getRotate(), locationX, locationY);
+				canvas.drawBitmap(mTargetPoint, locationX - marginX, locationY - marginY, mBitmapPaint);
+				canvas.rotate(tb.getRotate(), locationX, locationY);
+			}
+		} else {
+			removeMarkers(MarkerType.DESTINATION);
 		}
 
 	}
@@ -293,5 +347,146 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		if (callback != null) {
 			callback.onApplyMovedObject(result, newTargetPoint == null ? o : newTargetPoint);
 		}
+	}
+
+	/** OpenGL */
+	private void drawMarker(MarkerType type, PointI position) {
+		MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
+		mapMarkerBuilder
+				.setPosition(position)
+				.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.Top)
+				.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.Right)
+				.setIsHidden(false)
+				.setBaseOrder(baseOrder);
+
+		switch (type) {
+			case START:
+				if (startMarkersCollection == null) {
+					startMarkersCollection = new MapMarkersCollection();
+					mapMarkerBuilder.setPinIcon(NativeUtilities.createSkImageFromBitmap(mStartPoint));
+					mapMarkerBuilder.buildAndAddToCollection(startMarkersCollection);
+					getMapView().getMapRenderer().addSymbolsProvider(startMarkersCollection);
+				} else {
+					updateMarker(startMarkersCollection, position, 0);
+				}
+				break;
+			case DESTINATION:
+				if (destinationsMarkersCollection == null) {
+					destinationsMarkersCollection = new MapMarkersCollection();
+					mapMarkerBuilder.setPinIcon(NativeUtilities.createSkImageFromBitmap(mTargetPoint));
+					mapMarkerBuilder.buildAndAddToCollection(destinationsMarkersCollection);
+					getMapView().getMapRenderer().addSymbolsProvider(destinationsMarkersCollection);
+				} else {
+					updateMarker(destinationsMarkersCollection, position, 0);
+				}
+				break;
+		}
+	}
+
+	/** OpenGL */
+	private void drawIntermediateMarkers(List<TargetPoint> intermediatePoints) {
+		int size = intermediatePoints.size();
+		if (intermediateMarkersCollection != null && intermediateMarkersCollection.getMarkers().size() != size) {
+			removeMarkers(MarkerType.INTERMEDIATE);
+		}
+		if (intermediateMarkersCollection == null) {
+			initCaptionStyle();
+			intermediateMarkersCollection = new MapMarkersCollection();
+			int index = 0;
+			for (TargetPoint ip : intermediatePoints) {
+				index++;
+				int x = MapUtils.get31TileNumberX(ip.getLongitude());
+				int y = MapUtils.get31TileNumberY(ip.getLatitude());
+				MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
+				mapMarkerBuilder
+						.setPinIcon(NativeUtilities.createSkImageFromBitmap(mIntermediatePoint))
+						.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.Top)
+						.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.Right)
+						.setIsHidden(false)
+						.setBaseOrder(baseOrder)
+						.setCaptionStyle(captionStyle)
+						.setCaptionTopSpace(- mIntermediatePoint.getHeight() * 0.7 - captionStyle.getSize() / 2)
+						.setPosition(new PointI(x, y))
+						.setCaption(String.valueOf(index));
+				mapMarkerBuilder.buildAndAddToCollection(intermediateMarkersCollection);
+			}
+			getMapView().getMapRenderer().addSymbolsProvider(intermediateMarkersCollection);
+		} else {
+			//update
+			int index = 0;
+			for (TargetPoint ip : intermediatePoints) {
+				index++;
+				int x = MapUtils.get31TileNumberX(ip.getLongitude());
+				int y = MapUtils.get31TileNumberY(ip.getLatitude());
+				updateMarker(intermediateMarkersCollection, new PointI(x, y), index);
+			}
+		}
+	}
+
+	/** OpenGL */
+	private void updateMarker(MapMarkersCollection collection, PointI position, int index) {
+		if (collection != null) {
+			QListMapMarker list = collection.getMarkers();
+			if (list.size() == 1 && index == 0) {
+				//single marker
+				MapMarker marker = list.get(0);
+				int x = marker.getPosition().getX();
+				int y = marker.getPosition().getY();
+				if (x != position.getX() && y != position.getY()) {
+					marker.setPosition(position);
+				}
+				return;
+			}
+			for (int i = 0; i < list.size(); i++) {
+				//several markers with caption
+				MapMarker marker = list.get(i);
+				String caption = marker.getCaption();
+				int x = marker.getPosition().getX();
+				int y = marker.getPosition().getY();
+				if (caption.equals(String.valueOf(index)) && x != position.getX() && y != position.getY()) {
+					marker.setPosition(position);
+				}
+			}
+		}
+	}
+
+	/** OpenGL */
+	private void removeMarkers(MarkerType type) {
+		switch (type) {
+			case START:
+				if (startMarkersCollection != null) {
+					getMapView().getMapRenderer().removeSymbolsProvider(startMarkersCollection);
+					startMarkersCollection = null;
+				}
+				break;
+			case INTERMEDIATE:
+				if (intermediateMarkersCollection != null) {
+					getMapView().getMapRenderer().removeSymbolsProvider(intermediateMarkersCollection);
+					intermediateMarkersCollection = null;
+				}
+				break;
+			case DESTINATION:
+				if (destinationsMarkersCollection != null) {
+					getMapView().getMapRenderer().removeSymbolsProvider(destinationsMarkersCollection);
+					destinationsMarkersCollection = null;
+				}
+				break;
+		}
+	}
+
+	/** OpenGL */
+	private void initCaptionStyle() {
+		if (captionStyle != null) {
+			return;
+		}
+		captionStyle = new TextRasterizer.Style();
+		captionStyle.setSize(mTextPaint.getTextSize());
+		captionStyle.setWrapWidth(20);
+		captionStyle.setMaxLines(3);
+		captionStyle.setBold(false);
+		captionStyle.setItalic(false);
+		captionStyle.setColor(NativeUtilities.createColorARGB(nightMode ? TEXT_NIGHT_COLOR : TEXT_DAY_COLOR));
+		//captionStyle.setHaloColor(NativeUtilities.createColorARGB(nightMode ? TEXT_NIGHT_HALO_COLOR : TEXT_DAY_HALO_COLOR));
+		//captionStyle.setHaloRadius(5);
 	}
 }
