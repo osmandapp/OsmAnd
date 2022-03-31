@@ -2814,7 +2814,6 @@
     <string name="ski_map_render_descr">للتزلج. يتميز بمناطق التزلج ومصاعد التزلج ومسارات التزلج على الجليد وما إلى ذلك. يعتم كائنات الخريطة الثانوية.</string>
     <string name="light_rs_render_descr">أسلوب قيادة بسيط. الوضع الليلي اللطيف ، وخطوط الكنتور ، مقارنة بالطرق ذات اللون البرتقالي ، يعتم الكائنات في الخريطة الثانوية.</string>
     <string name="topo_render_descr">على النقيض من نمط مصممة أساسا للمشي والتنزه وركوب الدراجات في الطبيعة. قراءة جيدة في الإضاءة الخارجية المعقدة. الميزات الرئيسية: مقارنة الطرق والأجسام الطبيعية، أنواع مختلفة من طرق، والخطوط الكنتورية مع إعدادات متقدمة، تفاصيل أكثر في مستويات التكبير/التصغير المقابلة من النمط الافتراضي. يسمح الخيار تكامل سطحي التمييز بين نوعية سطح الطريق. لا يوجد وضع ليلي.</string>
-    <string name="mapnik_render_descr">الستايل القديم Mapnik الافتراضي جعل ستايل.السمات الرئيسية: الوان متشابهة إلى Mapnik \'الأسلوب.</string>
     <string name="touring_view_render_descr">أسلوب الملاحة مع التباين العالي والحد الأعلى من التفاصيل. يتضمن كل خيارات النمط الافتراضي أوسماند، مع عرض أكبر قدر ممكن من التفاصيل ، ولا سيما الطرق والمسارات وطرق السفر الأخرى. التمييز الواضح بين \"جولة الأطلس\" بين أنواع الطرق. مناسبة للاستخدام النهاري والليلي وفي الهواء الطلق.</string>
     <string name="default_render_descr">أسلوب الغرض العام. تقديم نظافة مبسطة في المدن المكتظة بالسكان. الملامح الرئيسية: خطوط الكنتور ، والطرق ، وجودة السطح ، والقيود المفروضة على الوصول ، ودروع الطريق ، والمسارات التي تظهر وفقاً لمقياس SAC ، وميزات رياضة الماء الأبيض.</string>
     <string name="travel_card_download_descr">قم بتنزيل أدلة السفر هذه من ويكي الرحلات لعرض مقالات حول الأماكن في العالم بدون إنترنت.</string>
@@ -4382,7 +4381,7 @@
     <string name="no_activity_for_intent">قم بتثبيت تطبيق يمكنه تنفيذ هذا الإجراء.</string>
     <string name="no_items_of_type_message">لا يوجد لديك عناصر من هذا النوع</string>
     <string name="routeInfo_tracktype_description">لون المسار أو خط المسار من خلال تكوين سطحه. يتم تطبيقه عادةً عندما تكون شبكة الطرق غير معبدة إلى حد كبير.</string>
-    <string name="routeInfo_winter_ice_road_description">قم بتلوين المسار أو خط المسار حسب تصنيف الطريق الشتوي.</string>
+    <string name="routeInfo_winter_ice_road_description">قم بتلوين المسار أو خط المسار حسب تصنيف طرقاته الشتوية.</string>
     <string name="routeInfo_smoothness_description">تصنيف القدرة على المناورة على الطريق/ممر المشاة للمركبات ذات العجلات ، لا سيما فيما يتعلق بانتظام السطح / وتسطيحه.</string>
     <string name="routeInfo_surface_description">توفير معلومات السطح المادي للطريق/ممر المشاة.</string>
     <string name="routeInfo_roadClass_description">لون الطريق أو خط المسار وفقا لتصنيف الطرق.</string>
@@ -4613,6 +4612,8 @@
     <string name="move_map_to_select_area">حرك الخريطة لتحديد المنطقة المطلوبة.</string>
     <string name="stop_download_desc">التنزيل لم يكتمل. إذا قمت بمقاطعة التنزيل الآن ، فسيكون جزء فقط من المربعات متاحًا للعرض.</string>
     <string name="stop_download">اوقف التنزيل</string>
-    <string name="rendering_attr_showFitnessTrails_name">إظهار مسارات اللياقة البدنية</string>
+    <string name="rendering_attr_showFitnessTrails_name">مسارات اللياقة البدنية</string>
     <string name="rendering_attr_showFitnessTrails_description">إظهار مسارات اللياقة البدنية</string>
+    <string name="rendering_attr_showRunningRoutes_description">عرض مسارات الجري</string>
+    <string name="rendering_attr_showRunningRoutes_name">مسارات الجري</string>
 </resources>

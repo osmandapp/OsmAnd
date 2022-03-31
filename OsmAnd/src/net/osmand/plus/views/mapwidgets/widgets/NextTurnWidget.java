@@ -1,33 +1,48 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
-import android.app.Activity;
+import android.graphics.drawable.Drawable;
+import android.view.Gravity;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-
-import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
 import net.osmand.router.TurnType;
 
-public class NextTurnWidget extends TextInfoWidget {
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+public class NextTurnWidget extends LeftTextInfoWidget {
 
 	protected boolean horizontalMini;
 
 	protected int deviatedPath = 0;
 	protected int nextTurnDistance = 0;
 
-	private final TurnDrawable turnDrawable;
-	private final OsmandApplication app;
+	private final ImageView topImageView;
+	private final TextView topTextView;
+	private final ViewGroup bottomLayout;
 
-	public NextTurnWidget(Activity activity, @NonNull OsmandApplication app, boolean horizontalMini) {
-		super(activity);
-		this.app = app;
+	private final TurnDrawable turnDrawable;
+
+	public NextTurnWidget(@NonNull MapActivity mapActivity, boolean horizontalMini) {
+		super(mapActivity);
 		this.horizontalMini = horizontalMini;
-		turnDrawable = new TurnDrawable(activity, horizontalMini);
+
+		topImageView = view.findViewById(R.id.widget_top_icon);
+		topTextView = view.findViewById(R.id.widget_top_icon_text);
+		bottomLayout = view.findViewById(R.id.widget_bottom_layout);
+
+		turnDrawable = new TurnDrawable(mapActivity, horizontalMini);
 		if (horizontalMini) {
 			setImageDrawable(turnDrawable, false);
 			setTopImageDrawable(null, null);
@@ -49,10 +64,31 @@ public class NextTurnWidget extends TextInfoWidget {
 				setImageDrawable(turnDrawable, false);
 			} else {
 				setTopImageDrawable(turnDrawable, "");
-//				setTopImageDrawable(turnDrawable, turnType == null || turnType.getExitOut() == 0 ? "" : 
-//					turnType.getExitOut() + "");
 			}
 		}
+	}
+
+	public void setTopImageDrawable(@Nullable Drawable imageDrawable, @Nullable String topText) {
+		boolean hasImage = imageDrawable != null;
+		if (hasImage) {
+			topImageView.setImageDrawable(imageDrawable);
+			topTextView.setText(topText == null ? "" : topText);
+
+			LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) bottomLayout.getLayoutParams();
+			lp.gravity = Gravity.CENTER_HORIZONTAL;
+			bottomLayout.setLayoutParams(lp);
+			bottomLayout.invalidate();
+		} else {
+			LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) bottomLayout.getLayoutParams();
+			lp.gravity = Gravity.NO_GRAVITY;
+			bottomLayout.setLayoutParams(lp);
+		}
+
+		AndroidUiHelper.updateVisibility(topImageView, hasImage);
+		AndroidUiHelper.updateVisibility(topTextView, hasImage);
+
+		topTextView.invalidate();
+		topImageView.invalidate();
 	}
 
 	public void setTurnImminent(int turnImminent, boolean deviatedFromRoute) {
@@ -96,7 +132,9 @@ public class NextTurnWidget extends TextInfoWidget {
 	}
 
 	@Override
-	public boolean updateInfo(DrawSettings drawSettings) {
-		return false;
+	public void updateColors(@NonNull TextState textState) {
+		super.updateColors(textState);
+		updateTextColor(topTextView, null, textState.textColor, textState.textShadowColor, textState.textBold,
+				textState.textShadowRadius);
 	}
 }

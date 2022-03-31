@@ -457,4 +457,8 @@ public class UTMPoint {
     public String toString() {
         return "Zone_number=" + zone_number + ", Hemisphere=" + zone_letter + ", Northing=" + northing + ", Easting=" + easting;
     }
+
+    public String format() {
+        return zone_number + "" + zone_letter + " " + ((long) easting) + ((long) northing);
+    }
 }

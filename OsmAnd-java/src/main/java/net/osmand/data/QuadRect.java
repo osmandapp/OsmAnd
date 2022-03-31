@@ -64,7 +64,6 @@ public class QuadRect {
 		top += dy;
 		right += dx;
 		bottom += dy;
-
 	}
 
 	public void inset(double dx, double  dy) {

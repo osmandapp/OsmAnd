@@ -296,13 +296,13 @@ public class SearchPhrase {
 		List<String> unknownSearchWords = otherUnknownWords;
 		mainUnknownWordToSearch = firstUnknownSearchWord;
 		mainUnknownSearchWordComplete = lastUnknownSearchWordComplete;
-		if (unknownSearchWords.size() > 0) {
+		if (!unknownSearchWords.isEmpty()) {
 			mainUnknownSearchWordComplete = true;
 			List<String> searchWords = new ArrayList<>(unknownSearchWords);
 			searchWords.add(0, getFirstUnknownSearchWord());
 			Collections.sort(searchWords, commonWordsComparator);
 			for (String s : searchWords) {
-				if (s.length() > 0 && !Character.isDigit(s.charAt(0)) && !LocationParser.isValidOLC(s)) {
+				if (s.length() > 0 && !LocationParser.isValidOLC(s)) {
 					mainUnknownWordToSearch = s.trim();
 					if (mainUnknownWordToSearch.endsWith(".")) {
 						mainUnknownWordToSearch = mainUnknownWordToSearch.substring(0,

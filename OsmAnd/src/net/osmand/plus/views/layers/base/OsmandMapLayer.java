@@ -55,6 +55,7 @@ public abstract class OsmandMapLayer {
 	private static final Log LOG = PlatformUtil.getLog(OsmandMapLayer.class);
 
 	public static final float ICON_VISIBLE_PART_RATIO = 0.45f;
+	public int baseOrder = -1;
 
 	@NonNull
 	private final Context ctx;

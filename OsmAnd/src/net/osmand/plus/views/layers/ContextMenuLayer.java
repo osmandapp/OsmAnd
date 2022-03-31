@@ -48,6 +48,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
@@ -99,9 +100,11 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_C
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 
 public class ContextMenuLayer extends OsmandMapLayer {
+
 	//private static final Log LOG = PlatformUtil.getLog(ContextMenuLayer.class);
 	public static final int VIBRATE_SHORT = 100;
 	private static final int AMENITY_SEARCH_RADIUS = 50;
+	private static final int ROUTE_SEARCH_RADIUS_PX = 10;
 
 	private OsmandMapTileView view;
 
@@ -685,8 +688,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 
 		LatLon objectLatLon = null;
-		Map<Object, IContextMenuProvider> selectedObjects
-				= selectObjectsForContextMenu(tileBox, point, false, showUnknownLocation);
+		Map<Object, IContextMenuProvider> selectedObjects = selectObjectsForContextMenu(tileBox, point, false, showUnknownLocation);
 		NativeOsmandLibrary nativeLib = NativeOsmandLibrary.getLoadedLibrary();
 		LatLon pointLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
 		OsmandApplication app = getApplication();
@@ -836,7 +838,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 							selectedObjects.put(new Pair<>(travelGpx, selectedGpxPoint), gpxMenuProvider);
 						}
 					} else if (isRouteGpx) {
-						selectedObjects.put(new Pair<>(renderedObject, pointLatLon), gpxMenuProvider);
+						LatLon minLatLon = tileBox.getLatLonFromPixel(point.x - ROUTE_SEARCH_RADIUS_PX, point.y - ROUTE_SEARCH_RADIUS_PX);
+						LatLon maxLatLon = tileBox.getLatLonFromPixel(point.x + ROUTE_SEARCH_RADIUS_PX, point.y + ROUTE_SEARCH_RADIUS_PX);
+
+						QuadRect rect = new QuadRect(minLatLon.getLongitude(), maxLatLon.getLatitude(),
+								maxLatLon.getLongitude(), minLatLon.getLatitude());
+
+						selectedObjects.put(new Pair<>(renderedObject, rect), gpxMenuProvider);
 					} else {
 						Amenity amenity = findAmenity(app, renderedObject.getId() >> 7,
 								renderedObject.getOriginalNames(), searchLatLon, AMENITY_SEARCH_RADIUS);

@@ -1,5 +1,19 @@
 package net.osmand.plus.helpers;
 
+import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
+import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
+import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
+import static net.osmand.plus.track.GpxAppearanceAdapter.SHOW_START_FINISH_ATTR;
+import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
+import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+import static net.osmand.util.Algorithms.capitalizeFirstLetter;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -1295,7 +1309,7 @@ public class GpxUiHelper {
 		xAxis.setGranularity(1f);
 		xAxis.setValueFormatter((value, axis) -> {
 			long seconds = (long) (startTime / 1000 + value);
-			return OsmAndFormatter.getFormattedTimeShort(seconds);
+			return OsmAndFormatter.getFormattedFullTime(seconds);
 		});
 		return 1f;
 	}
@@ -2224,7 +2238,8 @@ public class GpxUiHelper {
 	                                  @NonNull File file,
 	                                  @NonNull GPXFile gpxFile,
 	                                  @NonNull WptPt selectedPoint,
-	                                  @Nullable GPXTrackAnalysis analyses) {
+	                                  @Nullable GPXTrackAnalysis analyses,
+	                                  @Nullable Drawable trackIcon) {
 		new SaveGpxAsyncTask(file, gpxFile, new SaveGpxListener() {
 			@Override
 			public void gpxSavingStarted() {
@@ -2239,7 +2254,7 @@ public class GpxUiHelper {
 					GPXTrackAnalysis trackAnalysis = analyses != null ? analyses : selectedGpxFile.getTrackAnalysis(app);
 					SelectedGpxPoint selectedGpxPoint = new SelectedGpxPoint(selectedGpxFile, selectedPoint);
 					TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint,
-							null, null, null, false, trackAnalysis);
+							null, null, null, false, trackAnalysis, trackIcon);
 				} else {
 					LOG.error(errorMessage);
 				}

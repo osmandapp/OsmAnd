@@ -4302,4 +4302,14 @@
     <string name="poi_printer_ink">Nyomtatófestékbolt</string>
     <string name="poi_water_sports">Vízisportfelszerelés-szaküzlet</string>
     <string name="poi_shop_fuel">Tüzelő- és üzemanyagbolt</string>
+    <string name="poi_payment_girocard_contactless_yes">Girocard</string>
+    <string name="poi_payment_maestro_contactless_yes">Érintésmentes Maestro</string>
+    <string name="poi_payment_visa_contactless_yes">Érintésmentes Visa</string>
+    <string name="poi_payment_american_express_contactless_no">Érintésmentes American Expresst (AMEX) nem fogad el</string>
+    <string name="poi_payment_mastercard_contactless_no">Érintésmentes MasterCardot nem fogad el</string>
+    <string name="poi_payment_visa_contactless_no">Érintésmentes Visát nem fogad el</string>
+    <string name="poi_payment_american_express_contactless_yes">Érintésmentes American Express (AMEX)</string>
+    <string name="poi_payment_mastercard_contactless_yes">Érintésmentes MasterCard</string>
+    <string name="poi_payment_girocard_contactless_no">Érintésmentes Girocardot nem fogad el</string>
+    <string name="poi_payment_maestro_contactless_no">Érintésmentes Maestrót nem fogad el</string>
 </resources>

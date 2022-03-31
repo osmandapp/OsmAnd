@@ -47,7 +47,7 @@ import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelection;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.geometry.GeometryWay;
-import net.osmand.plus.views.mapwidgets.MapMarkersWidgetsFactory;
+import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -63,7 +63,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	private OsmandMapTileView view;
 
-	private MapMarkersWidgetsFactory widgetsFactory;
+	private MarkersWidgetsHelper markersWidgetsHelper;
 
 	private Paint bitmapPaint;
 	private Bitmap markerBitmapBlue;
@@ -120,8 +120,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		super(context);
 	}
 
-	public MapMarkersWidgetsFactory getWidgetsFactory() {
-		return widgetsFactory;
+	public MarkersWidgetsHelper getMarkersWidgetsHelper() {
+		return markersWidgetsHelper;
 	}
 
 	public boolean isInPlanRouteMode() {
@@ -158,7 +158,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);
 		if (mapActivity != null) {
-			widgetsFactory = new MapMarkersWidgetsFactory(mapActivity);
+			markersWidgetsHelper = new MarkersWidgetsHelper(mapActivity);
 			longTapDetector = new GestureDetector(mapActivity, new GestureDetector.SimpleOnGestureListener() {
 				@Override
 				public void onLongPress(MotionEvent e) {
@@ -166,7 +166,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				}
 			});
 		} else {
-			widgetsFactory = null;
+			markersWidgetsHelper = null;
 			longTapDetector = null;
 		}
 	}
@@ -331,8 +331,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
-		if (widgetsFactory != null) {
-			widgetsFactory.updateInfo(useFingerLocation ? fingerLocation : null, tileBox.getZoom());
+		if (markersWidgetsHelper != null) {
+			markersWidgetsHelper.setCustomLatLon(useFingerLocation ? fingerLocation : null);
 		}
 		OsmandApplication app = getApplication();
 		OsmandSettings settings = app.getSettings();
@@ -460,8 +460,10 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	public boolean containsLatLon(RotatedTileBox tb, double lat, double lon, double w, double h) {
 		double widgetHeight = 0;
-		if (widgetsFactory != null && widgetsFactory.isTopBarVisible() && !getApplication().getOsmandMap().getMapView().isCarView()) {
-			widgetHeight = widgetsFactory.getTopBarHeight();
+		if (markersWidgetsHelper != null
+				&& markersWidgetsHelper.isMapMarkersBarWidgetVisible()
+				&& !getApplication().getOsmandMap().getMapView().isCarView()) {
+			widgetHeight = markersWidgetsHelper.getMapMarkersBarWidgetHeight();
 		}
 		double tx = tb.getPixXFromLatLon(lat, lon);
 		double ty = tb.getPixYFromLatLon(lat, lon);

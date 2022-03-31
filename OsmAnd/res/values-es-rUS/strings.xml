@@ -2729,7 +2729,6 @@
     <string name="ski_map_render_descr">Para esquiar. Cuenta con pistas de esquí, remontes, pistas de esquí de fondo, etc. Atenúa los objetos de mapas secundarios.</string>
     <string name="light_rs_render_descr">Estilo de conducción simple. Modo nocturno suave, curvas de nivel, caminos contrastantes con estilo naranja, atenúa los objetos de mapas secundarios.</string>
     <string name="topo_render_descr">Para practicar caminatas, senderismo y ciclismo en la naturaleza. Legible al aire libre. Caminos y objetos naturales en contraste, diferentes tipos de recorridos, opciones avanzadas en curvas de nivel, detalles adicionales. Ajustar la integridad de la superficie distingue la calidad del camino. Sin modo nocturno.</string>
-    <string name="mapnik_render_descr">Antiguo estilo predefinido de Mapnik. Colores similares al estilo Mapnik.</string>
     <string name="default_render_descr">Estilo de uso general. Ciudades densas mostradas limpiamente. Cuenta con curvas de nivel, recorridos, calidad de la superficie, restricciones de acceso, escudos, visualización de caminos según escala SA y características de deportes acuáticos.</string>
     <string name="shared_string_bookmark">Favorito</string>
     <string name="off_road_render_descr">Adecuado para usarlo durante la conducción todoterreno basado en el estilo «Topo» y como un mapa subyacente con imágenes satelitales verdes. Reducción del grosor en carreteras principales, aumento del grosor de las vías, senderos, bicicletas y otras rutas.</string>
@@ -4539,10 +4538,12 @@
     <string name="stop_download">Parar descarga</string>
     <string name="estimated_download_size">Tamaño estimado de descarga</string>
     <string name="number_of_tiles">Número de teselas</string>
-    <string name="rendering_attr_showFitnessTrails_name">Mostrar circuitos aeróbicos</string>
+    <string name="rendering_attr_showFitnessTrails_name">Circuitos aeróbicos</string>
     <string name="stop_download_desc">La descarga está incompleta. Si interrumpes la descarga ahora, sólo podrás ver una parte de las teselas.</string>
     <string name="stop_and_exit">Parar y salir</string>
     <string name="shared_string_complete">completo</string>
     <string name="zoom_levels_difference_description">Una gran diferencia entre los niveles de zum, puede aumentar el tamaño de los datos descargados.</string>
     <string name="move_map_to_select_area">Mover el mapa para elegir el área necesaria.</string>
+    <string name="rendering_attr_showRunningRoutes_name">Rutas para correr</string>
+    <string name="rendering_attr_showRunningRoutes_description">Mostrar rutas para correr</string>
 </resources>

@@ -141,7 +141,7 @@ public class MapLayers {
 		mapView.addLayer(gpxLayer, 0.9f);
 
 		// 1. route layer
-		routeLayer = new RouteLayer(app);
+		routeLayer = new RouteLayer(app, -150000);
 		mapView.addLayer(routeLayer, 1);
 
 		// 1.5 preview route line layer

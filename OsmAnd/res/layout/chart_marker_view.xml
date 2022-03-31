@@ -181,7 +181,7 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:textColor="@color/gpx_chart_blue"
+                    android:textColor="?android:attr/textColorPrimary"
                     android:textSize="@dimen/default_desc_text_size"
                     android:textStyle="bold"
                     tools:text="100 " />

@@ -4833,7 +4833,7 @@
 
 	<string name="poi_wool">Wool store</string>
 
-	<string name="poi_birds_nest">Bird's nest</string>
+	<string name="poi_birds_nest">Bird\'s nest</string>
 
 	<string name="poi_dovecote">Dovecote</string>
 	<string name="poi_fish_pass">Fish pass</string>
@@ -4841,5 +4841,13 @@
 	<string name="poi_laundry_service_no">No</string>
 	<string name="poi_dry_cleaning_yes">Yes</string>
 	<string name="poi_dry_cleaning_no">No</string>
+
+	<string name="poi_termite_mound">Termite mound</string>
+
+	<string name="poi_anthill">Anthill</string>
+	<string name="poi_board_type_wildlife">Wildlife</string>
+	<string name="poi_board_type_nature">Nature</string>
+
+	<string name="poi_food_no">Food: no</string>
 
 </resources>

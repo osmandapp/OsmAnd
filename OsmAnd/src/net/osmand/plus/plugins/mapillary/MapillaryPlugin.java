@@ -7,10 +7,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
-
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.map.ITileSource;
@@ -34,7 +30,9 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapTileLayer;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
@@ -45,13 +43,16 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
-import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
 import static android.content.Intent.ACTION_VIEW;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAPILLARY;
@@ -61,6 +62,8 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	public static final String TYPE_MAPILLARY_PHOTO = "mapillary-photo";
 	public static final String TYPE_MAPILLARY_CONTRIBUTE = "mapillary-contribute";
+
+	public static final String WIDGET_MAPILLARY = "mapillary";
 
 	private static final String MAPILLARY_PACKAGE_ID = "com.mapillary.app";
 
@@ -80,7 +83,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	private MapillaryVectorLayer vectorLayer;
 	private TextInfoWidget mapillaryControl;
-	private MapWidgetRegInfo mapillaryWidgetRegInfo;
+	private MapWidgetInfo mapillaryWidgetRegInfo;
 
 	public MapillaryPlugin(OsmandApplication app) {
 		super(app);
@@ -233,13 +236,13 @@ public class MapillaryPlugin extends OsmandPlugin {
 	private void registerWidget(@NonNull MapActivity activity) {
 		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
 		mapillaryControl = createMonitoringControl(activity);
-		mapillaryWidgetRegInfo = layer.registerSideWidget(mapillaryControl,
-				R.drawable.ic_action_mapillary, R.string.mapillary, "mapillary", false, 19);
+		mapillaryWidgetRegInfo = layer.registerWidget(WIDGET_MAPILLARY, mapillaryControl,
+				R.drawable.ic_action_mapillary, R.string.mapillary, WidgetsPanel.RIGHT);
 		layer.recreateControls();
 	}
 
 	private TextInfoWidget createMonitoringControl(final MapActivity map) {
-		mapillaryControl = new TextInfoWidget(map);
+		mapillaryControl = new RightTextInfoWidget(map);
 		mapillaryControl.setText(map.getString(R.string.mapillary), "");
 		mapillaryControl.setIcons(R.drawable.widget_mapillary_day, R.drawable.widget_mapillary_night);
 		mapillaryControl.setOnClickListener(v -> openMapillary(map, null));

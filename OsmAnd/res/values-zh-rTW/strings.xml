@@ -2723,7 +2723,6 @@
     <string name="nautical_render_descr">用於航海導航。特色是浮標、燈塔、河道、航線與標記、港口、海洋標記服務與等深線。</string>
     <string name="ski_map_render_descr">用於滑雪。特色是滑雪道、滑雪纜車、越野賽道等等。讓次要地點變暗。</string>
     <string name="light_rs_render_descr">簡易的車輛駕駛樣式。柔和的夜間模式、等高線、對比鮮明的橘色道路、並讓次要地點變暗。</string>
-    <string name="mapnik_render_descr">舊的預設「mapnik」樣式。類似於「Mapnik」的顏色。</string>
     <string name="topo_render_descr">用於遠足、徒步旅行和在大自然中騎車。容易在戶外閱讀的地圖。對比鮮明的道路與自然地點、不同的路徑類型、進階等高線選項、額外的細節。調整表面完整性可以分辨道路品質。無夜間模式。</string>
     <string name="default_render_descr">一般用途樣式。在人口密集的城市中也很清楚。特色是等高線、路徑、路面品質、進入限制、路障、根據 SAC 比例繪製的路徑、激流運動項目。</string>
     <string name="shared_string_bookmark">書籤</string>
@@ -4538,5 +4537,7 @@
     <string name="shared_string_complete">完成</string>
     <string name="number_of_tiles">圖磚數</string>
     <string name="rendering_attr_showFitnessTrails_description">顯示健身路徑</string>
-    <string name="rendering_attr_showFitnessTrails_name">顯示健身路徑</string>
+    <string name="rendering_attr_showFitnessTrails_name">健身路徑</string>
+    <string name="rendering_attr_showRunningRoutes_description">顯示跑步路線</string>
+    <string name="rendering_attr_showRunningRoutes_name">跑步路線</string>
 </resources>

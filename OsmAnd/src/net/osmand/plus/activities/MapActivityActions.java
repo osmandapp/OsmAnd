@@ -782,8 +782,8 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 				.setListener((uiAdapter, view, item, isChecked) -> {
 					app.logEvent("drawer_config_screen_open");
 					MapActivity.clearPrevActivityIntent();
-					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN, AndroidUtils.getCenterViewCoordinates(view));
-					return false;
+					ConfigureScreenFragment.showInstance(mapActivity);
+					return true;
 				}));
 
 		optionsMenuHelper.addItem(new ContextMenuItem(DRAWER_PLUGINS_ID)

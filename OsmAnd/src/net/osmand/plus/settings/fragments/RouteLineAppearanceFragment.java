@@ -323,6 +323,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 			settings.ROUTE_INFO_ATTRIBUTE.setModeValue(appMode, previewRouteLineInfo.getRouteInfoAttribute());
 			settings.ROUTE_LINE_WIDTH.setModeValue(appMode, previewRouteLineInfo.getWidth());
 			settings.ROUTE_SHOW_TURN_ARROWS.setModeValue(appMode, previewRouteLineInfo.shouldShowTurnArrows());
+			PreviewRouteLineInfo.applyAttributes = true;
 		}
 	}
 

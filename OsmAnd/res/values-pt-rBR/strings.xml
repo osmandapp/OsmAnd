@@ -2690,7 +2690,6 @@
     <string name="coord_input_save_as_track">Salvar como trilha</string>
     <string name="coord_input_save_as_track_descr">Você adicionou %1$s pontos. Digite um nome de arquivo e toque em \"Salvar\".</string>
     <string name="topo_render_descr">Para caminhadas, trekking e ciclismo na natureza. Legível ao ar livre. Estradas e objetos naturais contrastantes, diferentes tipos de rotas, opções avançadas de curvas de nível, detalhes extras. O ajuste da integridade da superfície distingue a qualidade da estrada. Sem modo noturno.</string>
-    <string name="mapnik_render_descr">Antigo estilo padrão \'Mapnik\'. Cores parecidas com \'Mapnik\'.</string>
     <string name="default_render_descr">Estilo de uso geral. Cidades densas mostradas de forma limpa. Apresenta curvas de nível, rotas, qualidade da superfície, restrições de acesso, símbolos de estrada, caminhos renderizados conforme a escala SAC, itens de esporte em corredeiras.</string>
     <string name="osmand_extended_description_part8">OsmAnd é um software aberto desenvolvido ativamente. Todos podem contribuir para o app reportando bugs, melhorando traduções ou programando novas funcionalidades. Além disso, o projeto conta com contribuições financeiras para financiar a programação e testes de novas funcionalidades.
 \nCobertura de mapa e qualidade aproximada:

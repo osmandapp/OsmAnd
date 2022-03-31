@@ -2687,7 +2687,6 @@
     <string name="ski_map_render_descr">Pre lyžovanie. Obsahuje zjazdovky, lyžiarske vleky a iné objekty pre lyžiarov. Druhoradé objekty na mape sú menej výrazné.</string>
     <string name="light_rs_render_descr">Jednoduchý štýl pre navigáciu auta. Príjemný nočný režim, vrstevnice, kontrastné oranžové cesty, druhoradé objekty na mape sú menej výrazné.</string>
     <string name="topo_render_descr">Pre turistiku a bicyklovanie v prírode. Dobrá čitateľnosť v exteriéri. Kontrastné cesty a prírodné objekty, rôzne typy trás, vrstevnice s pokročilými nastaveniami, viac detailov. Ďalšie nastavenia umožňujú rozlíšiť kvalitu povrchu ciest. Nemá nočný režim.</string>
-    <string name="mapnik_render_descr">Starý základný štýl podobný \'Mapniku\'. Farby sú podobné ako štýl \'Mapnik\'.</string>
     <string name="touring_view_render_descr">Štýl pre účely cestovania s vysokým kontrastom a všetkými detailami. Obsahuje všetky možnosti základného štýlu OsmAnd, pričom zobrazuje čo najviac detailov, všetky cesty, chodníky a iné spôsoby cestovania. Jasné rozlíšenie typov ciest ako v cestovných atlasoch. Vhodný pre denné, nočné aj externé použitie.</string>
     <string name="default_render_descr">Všeobecný štýl. Husto zakreslené mestá zobrazené čisto. Obsahuje vrstevnice, trasy, kvalitu ciest, obmedzenia prístupu, čísla ciest, chodníky podľa stupnice SAC, objekty pre vodné športy.</string>
     <string name="open_wikipedia_link_online">Otvoriť odkaz Wikipédie na Internete</string>
@@ -4540,5 +4539,7 @@
     <string name="number_of_tiles">Počet dlaždíc</string>
     <string name="move_map_to_select_area">Posuňte mapu pre zvolenie potrebnej oblasti.</string>
     <string name="rendering_attr_showFitnessTrails_description">Zobraziť fitnes trasy</string>
-    <string name="rendering_attr_showFitnessTrails_name">Zobraziť fitnes trasy</string>
+    <string name="rendering_attr_showFitnessTrails_name">Fitnes trasy</string>
+    <string name="rendering_attr_showRunningRoutes_description">Zobraziť bežecké trasy</string>
+    <string name="rendering_attr_showRunningRoutes_name">Bežecké trasy</string>
 </resources>
