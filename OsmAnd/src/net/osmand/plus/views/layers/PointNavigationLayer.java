@@ -179,11 +179,12 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 			}
 
 			if (collection == null) {
+				collection = new MapMarkersCollection();
 				TargetPoint pointToStart = targetPoints.getPointToStart();
 				if (pointToStart != null) {
 					int x = MapUtils.get31TileNumberX(pointToStart.getLongitude());
 					int y = MapUtils.get31TileNumberY(pointToStart.getLatitude());
-					drawMarker(MarkerType.START, new PointI(x, y), null);
+					drawMarker(mStartPoint, new PointI(x, y), null);
 				}
 
 				List<TargetPoint> intermediatePoints = targetPoints.getIntermediatePoints();
@@ -193,7 +194,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 						index++;
 						int x = MapUtils.get31TileNumberX(ip.getLongitude());
 						int y = MapUtils.get31TileNumberY(ip.getLatitude());
-						drawMarker(MarkerType.INTERMEDIATE, new PointI(x, y), String.valueOf(index));
+						drawMarker(mIntermediatePoint, new PointI(x, y), String.valueOf(index));
 					}
 				}
 
@@ -201,11 +202,11 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 				if (pointToNavigate != null) {
 					int x = MapUtils.get31TileNumberX(pointToNavigate.getLongitude());
 					int y = MapUtils.get31TileNumberY(pointToNavigate.getLatitude());
-					drawMarker(MarkerType.DESTINATION, new PointI(x, y), null);
+					drawMarker(mTargetPoint, new PointI(x, y), null);
 				}
 
 				renderedPoints = allPoints;
-				if (collection != null) {
+				if (getMapView().getMapRenderer() != null) {
 					getMapView().getMapRenderer().addSymbolsProvider(collection);
 				}
 			}
@@ -229,6 +230,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		mStartPoint = getScaledBitmap(R.drawable.map_start_point);
 		mTargetPoint = getScaledBitmap(R.drawable.map_target_point);
 		mIntermediatePoint = getScaledBitmap(R.drawable.map_intermediate_point);
+		removeMarkers();
 	}
 
 	@Nullable
@@ -387,28 +389,9 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	}
 
 	/** OpenGL */
-	private void drawMarker(MarkerType type, PointI position, @Nullable String caption) {
+	private void drawMarker(Bitmap bitmap, PointI position, @Nullable String caption) {
 		if (getMapView().getMapRenderer() == null) {
 			return;
-		}
-
-		Bitmap bitmap = null;
-		switch (type) {
-			case START:
-				bitmap = mStartPoint;
-				break;
-			case INTERMEDIATE:
-				bitmap = mIntermediatePoint;
-				break;
-			case DESTINATION:
-				bitmap = mTargetPoint;
-				break;
-			default:
-				return;
-		}
-
-		if (collection == null) {
-			collection = new MapMarkersCollection();
 		}
 
 		MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
@@ -434,7 +417,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 
 	/** OpenGL */
 	private void removeMarkers() {
-		if (getMapView().hasMapRenderer() && collection != null) {
+		if (getMapView().getMapRenderer() != null && collection != null) {
 			getMapView().getMapRenderer().removeSymbolsProvider(collection);
 			collection = null;
 		}
