@@ -488,7 +488,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				androidAutoPlaceholder.setVisibility(View.GONE);
 			}
 			getMapViewTrackingUtilities().setMapView(mapView);
-			mapView.setMapRender(atlasMapRendererView);
+			mapView.setMapRenderer(atlasMapRendererView);
 			OsmAndMapSurfaceView surf = findViewById(R.id.MapView);
 			surf.setVisibility(View.GONE);
 		} else {
