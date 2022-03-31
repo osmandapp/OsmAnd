@@ -46,7 +46,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	private OsmandSettings settings;
 	private ApplicationMode appMode;
 	private ViewCreator viewCreator;
-	private ContextMenuAdapter adapter;
+	Map<ContextMenuItem, List<ContextMenuItem>> items;
 	private boolean nightMode;
 
 	private final Map<Integer, View> views = new HashMap<>();
@@ -83,19 +83,18 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 		return view;
 	}
 
-	private void updateList(boolean resetList) {
-
-		if (resetList) {
+	private void updateList(boolean reset) {
+		if (reset) {
 			ConfigureMapMenu menu = new ConfigureMapMenu();
-			adapter = menu.createListAdapter(mapActivity);
+			ContextMenuAdapter adapter = menu.createListAdapter(mapActivity);
 			CtxMenuUtils.removeHiddenItems(adapter);
 			CtxMenuUtils.hideExtraDividers(adapter);
+			items = CtxMenuUtils.collectItemsByCategories(adapter.getItems());
+			ContextMenuItem bottomShadow = new ContextMenuItem(null).setLayout(R.layout.card_bottom_divider);
+			items.put(bottomShadow, null);
 			views.clear();
 			llList.removeAllViews();
 		}
-
-		Map<ContextMenuItem, List<ContextMenuItem>> items =
-				CtxMenuUtils.collectItemsByCategories(adapter.getItems());
 
 		for (ContextMenuItem topItem : items.keySet()) {
 			List<ContextMenuItem> nestedItems = items.get(topItem);
