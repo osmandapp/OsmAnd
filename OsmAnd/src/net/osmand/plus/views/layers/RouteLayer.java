@@ -136,6 +136,9 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 		publicTransportWayContext = new PublicTransportGeometryWayContext(view.getContext(), density);
 		publicTransportWayContext.updatePaints(nightMode, attrs, attrsPT, attrsW);
+		float transporRoutetWalkWidth = 40.0f;
+		int transportRouteWalkColor = getContext().getResources().getColor(R.color.transport_route_walk_line, null);
+		publicTransportWayContext.setWalkRouteParams(transportRouteWalkColor, transporRoutetWalkWidth);
 		publicTransportRouteGeometry = new PublicTransportGeometryWay(publicTransportWayContext);
 	}
 
@@ -143,12 +146,6 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if ((helper.isPublicTransportMode() && transportHelper.getRoutes() != null) ||
 				(helper.getFinalLocation() != null && helper.getRoute().isCalculated())) {
-
-			if (PreviewRouteLineInfo.applyAttributes) {
-				//OpenGL
-				resetLayer();
-				PreviewRouteLineInfo.applyAttributes = false;
-			}
 
 			updateRouteColoringType();
 			updateAttrs(settings, tileBox);
@@ -187,10 +184,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 			}
 		} else {
-			if (view.hasMapRenderer()) {
-				//Clear OpenGL
-				resetLayer();
-			}
+			resetLayer();
 		}
 	}
 
@@ -284,12 +278,12 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		if (helper.isPublicTransportMode()) {
 			int currentRoute = transportHelper.getCurrentRoute();
 
-			publicTransportRouteGeometry.openGlRendering = view.hasMapRenderer();
-			if (publicTransportRouteGeometry.openGlRendering) {
+			if (view.hasMapRenderer()) {
+				//OpenGL
+				publicTransportRouteGeometry.setMapRenderer(view.getMapRenderer());
 				publicTransportRouteGeometry.baseOrder = baseOrder;
-				publicTransportRouteGeometry.openGlView = view.getMapRenderer();
 				if (!renderState.publicTransportStateEqual(currentRoute)) {
-					resetLayer();
+					publicTransportRouteGeometry.resetLayer();
 				}
 				renderState.setPublicTransportCurrentRoute(currentRoute);
 			}
@@ -319,12 +313,12 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 					directionArrowsColor, actualColoringType, routeInfoAttribute);
 			routeGeometry.updateRoute(tb, route);
 
-			routeGeometry.openGlRendering = view.hasMapRenderer();
-			if (routeGeometry.openGlRendering) {
+			if (view.hasMapRenderer()) {
+				//OpenGL
+				routeGeometry.setMapRenderer(view.getMapRenderer());
 				routeGeometry.baseOrder = baseOrder;
-				routeGeometry.openGlView = view.getMapRenderer();
 				if (!renderState.routeStateEqual(actualColoringType, getRouteLineColor(), routeLineWidth)) {
-					resetLayer();
+					routeGeometry.resetLayer();
 				}
 				renderState.setPreviewRouteLineInfo(previewRouteLineInfo);
 				renderState.setRouteParams(actualColoringType, getRouteLineColor(), routeLineWidth);
@@ -345,7 +339,8 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			if (!directTo && tb.getZoom() >= 14 && shouldShowTurnArrows()) {
 				List<Location> actionPoints = calculateActionPoints(topLatitude, leftLongitude, bottomLatitude, rightLongitude, helper.getLastProjection(),
 						helper.getRoute().getRouteLocations(), helper.getRoute().getCurrentRoute(), it, tb.getZoom());
-				if (routeGeometry.openGlRendering) {
+				if (routeGeometry.hasMapRenderer()) {
+					//OpenGL
 					buildActionArrows(tb, actionPoints);
 				} else {
 					drawAction(tb, canvas, actionPoints);
@@ -642,6 +637,9 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	/** OpenGL */
 	private void buildActionArrows(RotatedTileBox tileBox, List<Location> actionPoints) {
 
+		if (!view.hasMapRenderer()) {
+			return;
+		}
 		if (routeGeometry.collection.getLines().isEmpty() || tileBox.getZoom() <= 14) {
 			if (routeGeometry.actionLinesCollection != null) {
 				routeGeometry.actionLinesCollection.removeAllLines();
@@ -698,15 +696,14 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	/** OpenGL */
 	private void resetLayer() {
-		if (routeGeometry.collection != null) {
-			routeGeometry.openGlView.removeSymbolsProvider(routeGeometry.collection);
-			routeGeometry.collection = null;
+		if (view.hasMapRenderer()) {
+			if (routeGeometry != null) {
+				routeGeometry.resetLayer();
+			}
+			if (publicTransportRouteGeometry != null) {
+				publicTransportRouteGeometry.resetLayer();
+			}
 		}
-		if (routeGeometry.actionLinesCollection != null) {
-			routeGeometry.openGlView.removeSymbolsProvider(routeGeometry.actionLinesCollection);
-			routeGeometry.actionLinesCollection = null;
-		}
-		publicTransportRouteGeometry.resetLayer();
 	}
 
 	private List<List<Location>> getActionArrows(List<Location> locations) {
@@ -750,7 +747,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			if (lineInfo != null && lineInfo.equals(previewRouteLineInfo)) {
 				return true;
 			} else {
-				return color != -1 && type == coloringType && color == routeColor && width == routeWidth;
+				return type == coloringType && color == routeColor && width == routeWidth;
 			}
 		}
 

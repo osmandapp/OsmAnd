@@ -42,14 +42,12 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 	private List<GeometryWayStyle<?>> styles = new ArrayList<>();
 
 	//OpenGL
-	public boolean openGlRendering = false;
 	public int baseOrder = -1;
 	public VectorLinesCollection collection;
-	public VectorLinesCollection actionLinesCollection;
 	public FColorARGB kOutlineColor;
 	public static final int kOutlineWidth = 10;
 	public static final int kOutlineId = 1001;
-	public MapRendererView openGlView;
+	protected MapRendererView mapRendererView;
 
 	public interface GeometryWayProvider {
 		double getLatitude(int index);
@@ -554,5 +552,13 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		public TByteArrayList getSimplifyPoints() {
 			return simplifyPoints;
 		}
+	}
+
+	public void setMapRenderer(MapRendererView mapRenderer) {
+		mapRendererView = mapRenderer;
+	}
+
+	public boolean hasMapRenderer() {
+		return mapRendererView != null;
 	}
 }

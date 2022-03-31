@@ -34,6 +34,9 @@ public class RouteGeometryWay extends
 
 	private Integer customDirectionArrowColor;
 
+	//OpenGL
+	public VectorLinesCollection actionLinesCollection;
+
 	public RouteGeometryWay(RouteGeometryWayContext context) {
 		super(context, new MultiColoringGeometryWayDrawer<>(context));
 		this.helper = context.getApp().getRoutingHelper();
@@ -139,7 +142,7 @@ public class RouteGeometryWay extends
 								 List<Double> angles, List<Double> distances, double distToFinish,
 								 List<GeometryWayStyle<?>> styles) {
 
-		if (openGlRendering) {
+		if (hasMapRenderer()) {
 
 			QListVectorLine lines = new QListVectorLine();
 			if (collection != null) {
@@ -200,7 +203,7 @@ public class RouteGeometryWay extends
 				}
 				vectorLineBuilder.buildAndAddToCollection(collection);
 
-				openGlView.addSymbolsProvider(collection);
+				mapRendererView.addSymbolsProvider(collection);
 			} else {
 				//update route line during navigation
 				for (int i = 0; i < lines.size(); i++) {
@@ -253,5 +256,18 @@ public class RouteGeometryWay extends
 			}
 		}
 		return GeometryWayStyle.COLORIZATION_NONE;
+	}
+
+	public void resetLayer() {
+		if (mapRendererView != null) {
+			if (collection != null) {
+				mapRendererView.removeSymbolsProvider(collection);
+				collection = null;
+			}
+			if (actionLinesCollection != null) {
+				mapRendererView.removeSymbolsProvider(actionLinesCollection);
+				actionLinesCollection = null;
+			}
+		}
 	}
 }
