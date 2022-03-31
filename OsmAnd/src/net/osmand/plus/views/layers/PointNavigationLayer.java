@@ -102,8 +102,6 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 			return;
 		}
 
-		OsmandApplication app = getApplication();
-		TargetPointsHelper targetPoints = app.getTargetPointsHelper();
 		TargetPoint pointToStart = targetPoints.getPointToStart();
 		if (pointToStart != null) {
 			if (isLocationVisible(tb, pointToStart)) {
