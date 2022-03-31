@@ -7,7 +7,7 @@ import net.osmand.telegram.SHARE_TYPE_MAP_AND_TEXT
 import net.osmand.telegram.SHARE_TYPE_TEXT
 import net.osmand.telegram.TelegramSettings
 import net.osmand.telegram.TelegramSettings.ShareChatInfo
-import net.osmand.telegram.helpers.TelegramHelper.TelegramAuthenticationParameterType.*
+import net.osmand.telegram.helpers.TelegramHelper.TelegramAuthParamType.*
 import net.osmand.telegram.utils.GRAYSCALE_PHOTOS_DIR
 import net.osmand.telegram.utils.GRAYSCALE_PHOTOS_EXT
 import net.osmand.telegram.utils.OsmandLocationUtils
@@ -213,7 +213,7 @@ class TelegramHelper private constructor() {
 		return chat.type is TdApi.ChatTypeSupergroup && (chat.type as TdApi.ChatTypeSupergroup).isChannel
 	}
 
-	enum class TelegramAuthenticationParameterType {
+	enum class TelegramAuthParamType {
 		PHONE_NUMBER,
 		CODE,
 		PASSWORD
@@ -261,7 +261,7 @@ class TelegramHelper private constructor() {
 	}
 
 	interface TelegramAuthorizationRequestListener {
-		fun onRequestTelegramAuthenticationParameter(parameterType: TelegramAuthenticationParameterType)
+		fun onRequestTelegramAuthenticationParameter(parameterType: TelegramAuthParamType)
 		fun onTelegramAuthorizationRequestError(code: Int, message: String)
 	}
 
@@ -273,17 +273,18 @@ class TelegramHelper private constructor() {
 
 	inner class TelegramAuthorizationRequestHandler(val telegramAuthorizationRequestListener: TelegramAuthorizationRequestListener) {
 
-		fun applyAuthenticationParameter(parameterType: TelegramAuthenticationParameterType, parameterValue: String) {
-			if (!TextUtils.isEmpty(parameterValue)) {
-				when (parameterType) {
+		fun applyAuthParam(type: TelegramAuthParamType, value: String) {
+			if (!TextUtils.isEmpty(value)) {
+				log.info("Authorization: apply parameter ${type.name}")
+				when (type) {
 					PHONE_NUMBER -> client!!.send(
 						TdApi.SetAuthenticationPhoneNumber(
-							parameterValue,
+							value,
 							TdApi.PhoneNumberAuthenticationSettings(false, false, false, false, null)
 						), AuthorizationRequestHandler()
 					)
-					CODE -> client!!.send(TdApi.CheckAuthenticationCode(parameterValue), AuthorizationRequestHandler())
-					PASSWORD -> client!!.send(TdApi.CheckAuthenticationPassword(parameterValue), AuthorizationRequestHandler())
+					CODE -> client!!.send(TdApi.CheckAuthenticationCode(value), AuthorizationRequestHandler())
+					PASSWORD -> client!!.send(TdApi.CheckAuthenticationPassword(value), AuthorizationRequestHandler())
 				}
 			}
 		}

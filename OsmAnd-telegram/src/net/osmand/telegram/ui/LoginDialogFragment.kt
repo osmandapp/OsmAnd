@@ -588,15 +588,14 @@ class LoginDialogFragment : BaseDialogFragment() {
 			privacyPolicyAgreed = true
 			buildDialog(view)
 		} else {
-			for (t in LoginDialogType.values()) {
-				val layout: View? = view.findViewById(t.viewId)
-				val contains = t == activeDialogType
-				if (contains && layout != null) {
-					val editText: ExtendedEditText? = layout.findViewById(t.editorId)
+			for (type in LoginDialogType.values()) {
+				val layout: View? = view.findViewById(type.viewId)
+				if (type == activeDialogType && layout != null) {
+					val editText: ExtendedEditText? = layout.findViewById(type.editorId)
 					val text = editText?.text.toString()
 					if (!TextUtils.isEmpty(text) && text.length > 1) {
 						continueButton.setTextColor(ContextCompat.getColor(app, R.color.secondary_text_light))
-						applyAuthParam(t, text)
+						applyAuthParam(type, text)
 					}
 				}
 			}
@@ -648,8 +647,8 @@ class LoginDialogFragment : BaseDialogFragment() {
 		})
 	}
 
-	private fun applyAuthParam(t: LoginDialogType, value: String) {
-		getMainActivity()?.applyAuthParam(this, t, value)
+	private fun applyAuthParam(type: LoginDialogType, value: String) {
+		getMainActivity()?.applyAuthParam(this, type, value)
 	}
 
 	override fun onSaveInstanceState(outState: Bundle) {
