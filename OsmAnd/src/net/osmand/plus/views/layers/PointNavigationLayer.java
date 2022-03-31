@@ -118,22 +118,19 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 			}
 		}
 
-		List<TargetPoint> intermediatePoints = targetPoints.getIntermediatePoints();
-		if (intermediatePoints.size() > 0) {
-			int index = 0;
-			for (TargetPoint ip : intermediatePoints) {
-				index++;
-				if (isLocationVisible(tb, ip)) {
-					int marginX = mIntermediatePoint.getWidth() / 6;
-					int marginY = mIntermediatePoint.getHeight();
-					float locationX = getPointX(tb, ip);
-					float locationY = getPointY(tb, ip);
-					canvas.rotate(-tb.getRotate(), locationX, locationY);
-					canvas.drawBitmap(mIntermediatePoint, locationX - marginX, locationY - marginY, mBitmapPaint);
-					marginX = mIntermediatePoint.getWidth() / 3;
-					canvas.drawText(index + "", locationX + marginX, locationY - 3 * marginY / 5, mTextPaint);
-					canvas.rotate(tb.getRotate(), locationX, locationY);
-				}
+		int index = 0;
+		for (TargetPoint ip : targetPoints.getIntermediatePoints()) {
+			index++;
+			if (isLocationVisible(tb, ip)) {
+				int marginX = mIntermediatePoint.getWidth() / 6;
+				int marginY = mIntermediatePoint.getHeight();
+				float locationX = getPointX(tb, ip);
+				float locationY = getPointY(tb, ip);
+				canvas.rotate(-tb.getRotate(), locationX, locationY);
+				canvas.drawBitmap(mIntermediatePoint, locationX - marginX, locationY - marginY, mBitmapPaint);
+				marginX = mIntermediatePoint.getWidth() / 3;
+				canvas.drawText(index + "", locationX + marginX, locationY - 3 * marginY / 5, mTextPaint);
+				canvas.rotate(tb.getRotate(), locationX, locationY);
 			}
 		}
 
