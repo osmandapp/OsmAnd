@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.PointF;
@@ -12,11 +11,11 @@ import android.graphics.PointF;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.QListMapMarker;
 import net.osmand.core.jni.TextRasterizer;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -30,14 +29,16 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IMoveObjectProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PointNavigationLayer extends OsmandMapLayer implements
 		IContextMenuProvider, IMoveObjectProvider {
 
-	private Paint mBitmapPaint;
+	private final TargetPointsHelper targetPoints;
 
 	private OsmandMapTileView mView;
 	private boolean carView;
@@ -48,24 +49,21 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	private Bitmap mTargetPoint;
 	private Bitmap mIntermediatePoint;
 
+	private Paint mBitmapPaint;
 	private Paint mTextPaint;
 
 	private ContextMenuLayer contextMenuLayer;
 
 	//OpenGL
-	private MapMarkersCollection collection;
+	private MapMarkersCollection markersCollection;
 	private TextRasterizer.Style captionStyle;
 	private List<TargetPoint> renderedPoints;
 	private boolean nightMode = false;
-	private enum MarkerType {
-		START,
-		INTERMEDIATE,
-		DESTINATION
-	};
 
 	public PointNavigationLayer(@NonNull Context context, int order) {
 		super(context);
 		baseOrder = order;
+		targetPoints = getApplication().getTargetPointsHelper();
 	}
 
 	private void initUI() {
@@ -94,6 +92,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
 		if (tb.getZoom() < 3) {
+			removeMarkers();
 			return;
 		}
 		updateBitmaps(false);
@@ -122,14 +121,14 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		for (TargetPoint ip : targetPoints.getIntermediatePoints()) {
 			index++;
 			if (isLocationVisible(tb, ip)) {
-				int marginX = mIntermediatePoint.getWidth() / 6;
-				int marginY = mIntermediatePoint.getHeight();
+				float marginX = mIntermediatePoint.getWidth() / 6f;
+				float marginY = mIntermediatePoint.getHeight();
 				float locationX = getPointX(tb, ip);
 				float locationY = getPointY(tb, ip);
 				canvas.rotate(-tb.getRotate(), locationX, locationY);
 				canvas.drawBitmap(mIntermediatePoint, locationX - marginX, locationY - marginY, mBitmapPaint);
-				marginX = mIntermediatePoint.getWidth() / 3;
-				canvas.drawText(index + "", locationX + marginX, locationY - 3 * marginY / 5, mTextPaint);
+				marginX = mIntermediatePoint.getWidth() / 3f;
+				canvas.drawText(index + "", locationX + marginX, locationY - 3 * marginY / 5f, mTextPaint);
 				canvas.rotate(tb.getRotate(), locationX, locationY);
 			}
 		}
@@ -148,7 +147,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		if (getMapView().hasMapRenderer()) {
+		MapRendererView mapRenderer = getMapView().getMapRenderer();
+		if (mapRenderer != null) {
 			//OpenGL
 			if (nightMode != settings.isNightMode()) {
 				//switch to day/night mode
@@ -157,19 +157,27 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 				nightMode = settings.isNightMode();
 			}
 
-			OsmandApplication app = getApplication();
-			TargetPointsHelper targetPoints = app.getTargetPointsHelper();
-			List<TargetPoint> allPoints = targetPoints.getAllPoints();
-
-
+			TargetPoint pointToStart = targetPoints.getPointToStart();
+			TargetPoint pointToNavigate = targetPoints.getPointToNavigate();
+			List<TargetPoint> intermediatePoints = targetPoints.getIntermediatePoints();
+			List<TargetPoint> allPoints = new ArrayList<>();
+			if (pointToStart != null) {
+				allPoints.add(pointToStart);
+			}
+			if (!Algorithms.isEmpty(intermediatePoints)) {
+				allPoints.addAll(intermediatePoints);
+			}
+			if (pointToNavigate != null) {
+				allPoints.add(pointToNavigate);
+			}
+			List<TargetPoint> renderedPoints = this.renderedPoints;
 			if (renderedPoints != null) {
-				if (renderedPoints.size() != allPoints.size()) {
+				if (allPoints.isEmpty() || renderedPoints.size() != allPoints.size()) {
 					removeMarkers();
-				}
-				if (allPoints.size() > 0 && allPoints.size() == renderedPoints.size()) {
+				} else {
 					for (int i = 0; i < allPoints.size(); i++) {
 						TargetPoint r = renderedPoints.get(i);
-						TargetPoint a = renderedPoints.get(i);
+						TargetPoint a = allPoints.get(i);
 						if (!a.equals(r)) {
 							removeMarkers();
 							break;
@@ -178,38 +186,29 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 				}
 			}
 
-			if (collection == null) {
-				collection = new MapMarkersCollection();
-				TargetPoint pointToStart = targetPoints.getPointToStart();
+			MapMarkersCollection markersCollection = this.markersCollection;
+			if (markersCollection == null && !allPoints.isEmpty()) {
+				markersCollection = new MapMarkersCollection();
 				if (pointToStart != null) {
 					int x = MapUtils.get31TileNumberX(pointToStart.getLongitude());
 					int y = MapUtils.get31TileNumberY(pointToStart.getLatitude());
-					drawMarker(mStartPoint, new PointI(x, y), null);
+					drawMarker(markersCollection, mStartPoint, new PointI(x, y), null);
 				}
-
-				List<TargetPoint> intermediatePoints = targetPoints.getIntermediatePoints();
-				if (intermediatePoints.size() > 0) {
-					int index = 0;
-					for (TargetPoint ip : intermediatePoints) {
-						index++;
-						int x = MapUtils.get31TileNumberX(ip.getLongitude());
-						int y = MapUtils.get31TileNumberY(ip.getLatitude());
-						drawMarker(mIntermediatePoint, new PointI(x, y), String.valueOf(index));
-					}
+				for (int i = 0; i < intermediatePoints.size(); i++) {
+					TargetPoint ip = intermediatePoints.get(i);
+					int x = MapUtils.get31TileNumberX(ip.getLongitude());
+					int y = MapUtils.get31TileNumberY(ip.getLatitude());
+					drawMarker(markersCollection, mIntermediatePoint, new PointI(x, y), String.valueOf(i + 1));
 				}
-
-				TargetPoint pointToNavigate = targetPoints.getPointToNavigate();
 				if (pointToNavigate != null) {
 					int x = MapUtils.get31TileNumberX(pointToNavigate.getLongitude());
 					int y = MapUtils.get31TileNumberY(pointToNavigate.getLatitude());
-					drawMarker(mTargetPoint, new PointI(x, y), null);
+					drawMarker(markersCollection, mTargetPoint, new PointI(x, y), null);
 				}
-
-				renderedPoints = allPoints;
-				if (getMapView().getMapRenderer() != null) {
-					getMapView().getMapRenderer().addSymbolsProvider(collection);
-				}
+				mapRenderer.addSymbolsProvider(markersCollection);
+				this.markersCollection = markersCollection;
 			}
+			this.renderedPoints = allPoints;
 		}
 	}
 
@@ -389,8 +388,9 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	}
 
 	/** OpenGL */
-	private void drawMarker(Bitmap bitmap, PointI position, @Nullable String caption) {
-		if (getMapView().getMapRenderer() == null) {
+	private void drawMarker(@NonNull MapMarkersCollection markersCollection,
+	                        @NonNull Bitmap bitmap, @NonNull PointI position, @Nullable String caption) {
+		if (!getMapView().hasMapRenderer()) {
 			return;
 		}
 
@@ -409,33 +409,34 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 			initCaptionStyle();
 			mapMarkerBuilder
 					.setCaptionStyle(captionStyle)
-					.setCaptionTopSpace(- mIntermediatePoint.getHeight() * 0.7 - captionStyle.getSize() / 2)
+					.setCaptionTopSpace(-mIntermediatePoint.getHeight() * 0.7 - captionStyle.getSize() / 2)
 					.setCaption(caption);
 		}
-		mapMarkerBuilder.buildAndAddToCollection(collection);
+		mapMarkerBuilder.buildAndAddToCollection(markersCollection);
 	}
 
 	/** OpenGL */
 	private void removeMarkers() {
-		if (getMapView().getMapRenderer() != null && collection != null) {
-			getMapView().getMapRenderer().removeSymbolsProvider(collection);
-			collection = null;
+		MapRendererView mapRenderer = getMapView().getMapRenderer();
+		if (mapRenderer != null && markersCollection != null) {
+			mapRenderer.removeSymbolsProvider(markersCollection);
+			markersCollection = null;
 		}
 	}
 
 	/** OpenGL */
 	private void initCaptionStyle() {
-		if (captionStyle != null || !getMapView().hasMapRenderer()) {
+		if (!getMapView().hasMapRenderer() || captionStyle != null) {
 			return;
 		}
-		int nightColor = getContext().getResources().getColor(R.color.widgettext_night, null);
-		int dayColor = getContext().getResources().getColor(R.color.widgettext_day, null);
+		int captionColor = getContext().getResources().getColor(
+				nightMode ? R.color.widgettext_night : R.color.widgettext_day, null);
 		captionStyle = new TextRasterizer.Style();
 		captionStyle.setSize(mTextPaint.getTextSize());
 		captionStyle.setWrapWidth(20);
 		captionStyle.setMaxLines(3);
 		captionStyle.setBold(false);
 		captionStyle.setItalic(false);
-		captionStyle.setColor(NativeUtilities.createColorARGB(nightMode ? nightColor : dayColor));
+		captionStyle.setColor(NativeUtilities.createColorARGB(captionColor));
 	}
 }
