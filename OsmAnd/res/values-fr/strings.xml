@@ -4545,4 +4545,34 @@
     <string name="simulation_real_mode_desc">Sur les sections de routes droites, la vitesse sera approximativement égale à la vitesse maximale autorisée.
 \nAux intersections, la simulation ralentira.
 \nDes pénalités supplémentaires seront appliquées sur les feux de signalisation, les panneaux stop, etc.</string>
+    <string name="routeInfo_horse_scale_description">Afficher les chemins en fonction de la difficulté des sentiers pour chevaux</string>
+    <string name="rendering_attr_horse_scale_common_name">Commun</string>
+    <string name="rendering_attr_horse_scale_demanding_name">Exigeant</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Difficile</string>
+    <string name="rendering_attr_horse_scale_critical_name">Critique</string>
+    <string name="rendering_attr_showTramRoutes_name">Lignes de tramway</string>
+    <string name="rendering_attr_showTrainRoutes_name">Voies de chemin de fer</string>
+    <string name="rendering_attr_showBusRoutes_name">Lignes d\'autobus</string>
+    <string name="speed_mode">Mode de vitesse</string>
+    <string name="map_markers_bar">Barre de marqueurs</string>
+    <string name="shared_string_visible_widgets">Widgets visibles</string>
+    <string name="top_widgets_panel">Panneau supérieur</string>
+    <string name="bottom_widgets_panel">Panneau inférieur</string>
+    <string name="shared_string_item">Élément</string>
+    <string name="shared_string_buttons">Boutons</string>
+    <string name="simulation_real_mode_title">Simulation réaliste</string>
+    <string name="simulation_constant_mode_desc">La simulation sera effectuée avec la vitesse constante sélectionnée.</string>
+    <string name="simulation_constant_mode_title">Vitesse fixe</string>
+    <string name="simulation_preview_mode_desc">La vitesse de la simulation sera maximale sur les sections droites et ralentira aux bifurcations.</string>
+    <string name="simulation_preview_mode_title">Mode de prévisualisation rapide</string>
+    <string name="routing_attr_carriage_restrictions_name">Restrictions de chariot</string>
+    <string name="routing_attr_carriage_restrictions_description">Prendre en compte les autorisations d\'accès pour les véhicules hippomobiles</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Voies pour monorail</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Voies pour funiculaire</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Lignes de trolleybus</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">Lignes de navette</string>
+    <string name="osm_carto_render_descr">Similaire au style OpenStreetMap-carto utilisé sur le site principal d\'OSM</string>
+    <string name="routeInfo_horse_scale_name">Difficulté des sentiers équestres</string>
+    <string name="rendering_attr_horse_scale_impossible_name">Impossible</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">Dangereux</string>
 </resources>
