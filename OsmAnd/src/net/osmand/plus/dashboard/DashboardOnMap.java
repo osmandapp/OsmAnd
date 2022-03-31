@@ -50,6 +50,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapFragment;
+import net.osmand.plus.configmap.ConfigureMapMenu;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dashboard.tools.DashboardSettingsDialogFragment;
 import net.osmand.plus.dashboard.tools.TransactionBuilder;
@@ -1033,8 +1034,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	public void onApplicationModeSettingsUpdated() {
 		if (DashboardType.CONFIGURE_MAP == visibleType) {
 			refreshContent(false);
-		} else if (visibleType == DashboardType.CONFIGURE_SCREEN) {
-			updateListAdapter(mapActivity.getMapLayers().getMapWidgetRegistry().getViewConfigureMenuAdapter(mapActivity));
 		}
 	}
 

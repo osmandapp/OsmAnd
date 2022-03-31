@@ -57,7 +57,6 @@ import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelecti
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
