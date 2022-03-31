@@ -13,6 +13,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_ALTITUDE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BEARING;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_GPS_INFO;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_TIME;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MARKER_1;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MARKER_2;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MAX_SPEED;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_SPEED;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_TIME;
+
 public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 
 	public static final int INVALID_ID = 0;
@@ -21,6 +33,7 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 	public final MapWidget widget;
 	public final WidgetsPanel widgetPanel;
 	public int priority;
+	public int pageIndex = 0;
 
 	@DrawableRes
 	private final int settingsIconId;
@@ -45,6 +58,29 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 		this.message = message;
 		this.priority = priority;
 		this.widgetPanel = widgetPanel;
+
+		if (widgetPanel == WidgetsPanel.RIGHT) {
+			switch (key) {
+				case WIDGET_INTERMEDIATE_DISTANCE:
+				case WIDGET_INTERMEDIATE_TIME:
+				case WIDGET_DISTANCE:
+				case WIDGET_TIME:
+					pageIndex = 0;
+					break;
+				case WIDGET_MARKER_1:
+				case WIDGET_BEARING:
+				case WIDGET_MARKER_2:
+				case WIDGET_SPEED:
+				case WIDGET_MAX_SPEED:
+				case WIDGET_ALTITUDE:
+				case WIDGET_GPS_INFO:
+					pageIndex = 1;
+					break;
+				default:
+					pageIndex = 2;
+					break;
+			}
+		}
 	}
 
 	@Nullable

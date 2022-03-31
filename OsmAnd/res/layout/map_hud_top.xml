@@ -263,19 +263,13 @@
 				android:layout_gravity="top|end"
 				android:layout_weight="0.45">
 
-				<LinearLayout
+				<net.osmand.plus.views.controls.RightWidgetsPanel
 					android:id="@+id/map_right_widgets_panel"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_gravity="top|end"
-					android:orientation="vertical"
-					tools:ignore="UselessParent">
-
-					<include layout="@layout/map_hud_widget"/>
-
-					<include layout="@layout/map_hud_widget"/>
-
-				</LinearLayout>
+					android:layout_marginTop="@dimen/content_padding_small_half"
+					tools:ignore="UselessParent" />
 
 			</FrameLayout>
 

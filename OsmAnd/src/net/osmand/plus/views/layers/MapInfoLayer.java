@@ -23,6 +23,7 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
+import net.osmand.plus.views.controls.RightWidgetsPanel;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
@@ -78,7 +79,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private OsmandMapTileView view;
 
 	private ViewGroup topWidgetsContainer;
-	private ViewGroup rightWidgetsContainer;
+	private RightWidgetsPanel rightWidgetsPanel;
 	private ViewGroup leftWidgetsContainer;
 	private ViewGroup bottomWidgetsContainer;
 
@@ -116,7 +117,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			mapInfoControls = mapActivity.getMapLayers().getMapWidgetRegistry();
 			topWidgetsContainer = mapActivity.findViewById(R.id.top_widgets_panel);
 			leftWidgetsContainer = mapActivity.findViewById(R.id.map_left_widgets_panel);
-			rightWidgetsContainer = mapActivity.findViewById(R.id.map_right_widgets_panel);
+			rightWidgetsPanel = mapActivity.findViewById(R.id.map_right_widgets_panel);
 			bottomWidgetsContainer = mapActivity.findViewById(R.id.map_bottom_widgets_panel);
 			mapRulerLayout = mapActivity.findViewById(R.id.map_ruler_layout);
 
@@ -136,7 +137,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 			topWidgetsContainer = null;
 			leftWidgetsContainer = null;
-			rightWidgetsContainer = null;
+			rightWidgetsPanel = null;
 			mapRulerLayout = null;
 
 			alarmControl = null;
@@ -355,7 +356,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		ApplicationMode appMode = settings.getApplicationMode();
 		recreateWidgetsPanel(topWidgetsContainer, WidgetsPanel.TOP, appMode);
 		recreateWidgetsPanel(leftWidgetsContainer, WidgetsPanel.LEFT, appMode);
-		recreateWidgetsPanel(rightWidgetsContainer, WidgetsPanel.RIGHT, appMode);
 		recreateWidgetsPanel(bottomWidgetsContainer, WidgetsPanel.BOTTOM, appMode);
 	}
 
@@ -405,9 +405,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 		public int boxTop;
 		public int rightRes;
 		public int leftRes;
-		public int expand;
 		public int boxFree;
 		public int textShadowRadius;
+		public int rightDividerColorId;
+		public int rightBorderColorId;
 	}
 
 	public void updateColorShadowsOfText() {
@@ -428,10 +429,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 				}
 			}
 			updateTopToolbar(nightMode);
+			rightWidgetsPanel.updateColors(ts);
 
 			topWidgetsContainer.invalidate();
-			rightWidgetsContainer.invalidate();
 			leftWidgetsContainer.invalidate();
+			bottomWidgetsContainer.invalidate();
 
 			for (RulerWidget rulerWidget : rulerWidgets) {
 				rulerWidget.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, (int) (2 * view.getDensity()));
@@ -465,20 +467,23 @@ public class MapInfoLayer extends OsmandMapLayer {
 			ts.boxTop = R.drawable.btn_flat_transparent;
 			ts.rightRes = R.drawable.btn_left_round_transparent;
 			ts.leftRes = R.drawable.btn_right_round_transparent;
-			ts.expand = R.drawable.btn_inset_circle_transparent;
 			ts.boxFree = R.drawable.btn_round_transparent;
+			ts.rightDividerColorId = R.color.widget_divider_transparent;
+			ts.rightBorderColorId = R.color.widget_panel_border_transparent;
 		} else if (nightMode) {
 			ts.boxTop = R.drawable.btn_flat_night;
 			ts.rightRes = R.drawable.btn_left_round_night;
 			ts.leftRes = R.drawable.btn_right_round_night;
-			ts.expand = R.drawable.btn_inset_circle_night;
 			ts.boxFree = R.drawable.btn_round_night;
+			ts.rightDividerColorId = R.color.divider_color_dark;
+			ts.rightBorderColorId = R.color.icon_color_secondary_dark;
 		} else {
 			ts.boxTop = R.drawable.btn_flat;
 			ts.rightRes = R.drawable.btn_left_round;
 			ts.leftRes = R.drawable.btn_right_round;
-			ts.expand = R.drawable.btn_inset_circle;
 			ts.boxFree = R.drawable.btn_round;
+			ts.rightDividerColorId = R.color.divider_color_light;
+			ts.rightBorderColorId = R.color.stroked_buttons_and_links_outline_light;
 		}
 		return ts;
 	}
@@ -492,6 +497,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 				ApplicationMode appMode = settings.getApplicationMode();
 				mapInfoControls.updateWidgetsInfo(appMode, drawSettings);
 			}
+			rightWidgetsPanel.update();
 			topToolbarView.updateInfo();
 			alarmControl.updateInfo(drawSettings, false);
 
