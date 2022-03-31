@@ -10,6 +10,14 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="routeInfo_horse_scale_name">Difficulty of horse trails</string>
+    <string name="routeInfo_horse_scale_description">Render paths according to difficulty of horse trails</string>
+    <string name="rendering_attr_horse_scale_common_name">Common</string>
+    <string name="rendering_attr_horse_scale_demanding_name">Demanding</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Difficult</string>
+    <string name="rendering_attr_horse_scale_critical_name">Critical</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">Dangerous</string>
+    <string name="rendering_attr_horse_scale_impossible_name">Impossible</string>
     <string name="routing_attr_carriage_restrictions_name">Carriage restrictions</string>
     <string name="routing_attr_carriage_restrictions_description">Consider access permissions for horse-drawn vehicles</string>
     <string name="rendering_attr_showTramRoutes_name">Tram routes</string>
