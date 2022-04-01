@@ -74,6 +74,7 @@ public class RoutingHelper {
 	private Location lastFixedLocation;
 	private boolean routeWasFinished;
 	private ApplicationMode mode;
+	private boolean deviceHasBearing = false;
 
 	private static boolean isDeviatedFromRoute = false;
 	private long deviateFromRouteDetected = 0;
@@ -164,6 +165,14 @@ public class RoutingHelper {
 
 	public boolean isPauseNavigation() {
 		return isPauseNavigation;
+	}
+
+	public void setDeviceHasBearing(boolean deviceHasBearing) {
+		this.deviceHasBearing = deviceHasBearing;
+	}
+
+	public boolean isDeviceHasBearing() {
+		return deviceHasBearing;
 	}
 
 	public void setFollowingMode(boolean follow) {
@@ -534,7 +543,7 @@ public class RoutingHelper {
 				} else {
 					// case if you are getting close to the next point after turn
 					// but you have not yet turned (could be checked bearing)
-					if (currentLocation.hasBearing()) {
+					if (currentLocation.hasBearing() || (!isDeviceHasBearing() && lastFixedLocation != null)) {
 						float bearingToRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
 						float bearingRouteNext = routeNodes.get(newCurrentRoute).bearingTo(routeNodes.get(newCurrentRoute + 1));
 						float bearingMotion = currentLocation.hasBearing() ? currentLocation.getBearing() : lastFixedLocation
