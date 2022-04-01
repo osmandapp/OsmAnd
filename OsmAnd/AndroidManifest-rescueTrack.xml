@@ -9,7 +9,7 @@
 
 		<activity
 			android:name="net.osmand.plus.activities.MapActivity"
-			android:theme="@style/FirstSplashScreenFree"
+			android:theme="@style/FirstSplashScreenRescueTrack"
 			tools:replace="android:theme"/>
 
 	</application>
