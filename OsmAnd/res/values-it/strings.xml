@@ -4514,4 +4514,7 @@
     <string name="always_ask_waypoint_appearance_description">Toccando quest\'azione si aprirà la schermata \"Aggiungi punto intermedio\" dove puoi cambiare nome e aspetto.</string>
     <string name="track_file_description">Toccando questa azione verrà mostrato una finestra di dialogo di scelta delle tracce disponibili.</string>
     <string name="shared_string_grade">Grado</string>
+    <string name="edit_category">Modifica la categoria</string>
+    <string name="shared_string_buttons">Bottoni</string>
+    <string name="rendering_attr_horse_scale_impossible_name">Impossibile</string>
 </resources>
