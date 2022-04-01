@@ -1529,7 +1529,7 @@
     <string name="shared_string_logoff">Se déconnecter</string>
     <string name="rendering_value_disabled_name">Désactivé</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">L’affiliation au réseau</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Affiliation au réseau</string>
     <string name="osm_edit_context_menu_delete">Supprimer la modification OSM</string>
     <string name="shared_string_show_details">Afficher les détails</string>
     <string name="read_full_article">Lire l\'article complet (en ligne)</string>
