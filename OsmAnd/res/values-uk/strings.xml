@@ -1772,7 +1772,7 @@
     <string name="access_from_map_description">Кнопка меню запускає панель керування, а не меню</string>
     <string name="access_from_map">Доступ з мапи</string>
     <string name="simulate_initial_startup_descr">Встановлює прапорець першого запуску застосунку, не змінює інші налаштування.</string>
-    <string name="simulate_your_location_descr">Моделювати моє розташування, використовуючи обчислений маршрут або записаний GPX-трек.</string>
+    <string name="simulate_your_location_descr">Симулювати моє розташування, використовуючи обчислений маршрут або записаний GPX-трек.</string>
     <string name="user_hates_app_get_feedback_long">Будь ласка, повідомте нам будь-які пропозиції.</string>
     <string name="opening_at">Відкриття о</string>
     <string name="closing_at">Закриття о</string>
@@ -4547,4 +4547,39 @@
     <string name="rendering_attr_showFitnessTrails_name">Фітнес-стежки</string>
     <string name="rendering_attr_showRunningRoutes_description">Показати бігові маршрути</string>
     <string name="rendering_attr_showRunningRoutes_name">Бігові маршрути</string>
+    <string name="rendering_attr_horse_scale_common_name">Загальне</string>
+    <string name="rendering_attr_horse_scale_demanding_name">Вимогливість</string>
+    <string name="rendering_attr_horse_scale_impossible_name">Неможливо</string>
+    <string name="routing_attr_carriage_restrictions_name">Обмеження на перевезення</string>
+    <string name="routing_attr_carriage_restrictions_description">Враховувати дозволи на доступ для кінних транспортних засобів</string>
+    <string name="rendering_attr_showTrainRoutes_name">Залізничні маршрути</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Легкі залізничні маршрути</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Фунікулерні маршрути</string>
+    <string name="rendering_attr_showBusRoutes_name">Автобусні маршрути</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Тролейбусні маршрути</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">Трансферні маршрути</string>
+    <string name="map_markers_bar">Панель позначок мапи</string>
+    <string name="shared_string_visible_widgets">Видимі віджети</string>
+    <string name="shared_string_item">Пункт</string>
+    <string name="shared_string_buttons">Кнопки</string>
+    <string name="simulation_constant_mode_desc">Симуляція буде проводитися з постійною вибраною швидкістю.</string>
+    <string name="simulation_constant_mode_title">Стала швидкість</string>
+    <string name="simulation_preview_mode_desc">Швидкість симуляції буде максимальною на прямих ділянках і сповільнюватиметься лише на перехрестях.</string>
+    <string name="simulation_preview_mode_title">Режим швидкого передогляду</string>
+    <string name="speed_mode">Режим швидкості</string>
+    <string name="routeInfo_horse_scale_name">Складність кінних стежок</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Складність</string>
+    <string name="routeInfo_horse_scale_description">Відображати шляхи відповідно до складності кінних стежок</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">Небезпечно</string>
+    <string name="rendering_attr_showTramRoutes_name">Трамвайні маршрути</string>
+    <string name="rendering_attr_horse_scale_critical_name">Критич.</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Одноколійні маршрути</string>
+    <string name="top_widgets_panel">Верхня панель</string>
+    <string name="bottom_widgets_panel">Нижня панель</string>
+    <string name="configure_screen_widgets_descr">Виберіть сторону екрана, щоб додати або переставити віджети.</string>
+    <string name="osm_carto_render_descr">Подібно до стилю OpenStreetMap-carto, який використовується на головному сайті OSM</string>
+    <string name="simulation_real_mode_desc">На прямих ділянках доріг швидкість буде наближена до максимально дозволеної швидкості.
+\nНа перехрестях симуляція сповільниться.
+\nДодаткові штрафи будуть застосовуватися на світлофорах, знаках зупинки і т.д.</string>
+    <string name="simulation_real_mode_title">Реалістична симуляція</string>
 </resources>

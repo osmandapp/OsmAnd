@@ -4312,4 +4312,20 @@
     <string name="poi_water_sports">Magasin de sports nautiques</string>
     <string name="poi_greenery">Verdure</string>
     <string name="poi_shop_fuel">Magasin de carburant</string>
+    <string name="poi_laundry_service_filter">Service de blanchisserie</string>
+    <string name="poi_dry_cleaning_filter">Pressing</string>
+    <string name="poi_wool">Magasin de laine</string>
+    <string name="poi_birds_nest">Nid d\'oiseau</string>
+    <string name="poi_dovecote">Pigeonnier</string>
+    <string name="poi_laundry_service_yes">Oui</string>
+    <string name="poi_laundry_service_no">Non</string>
+    <string name="poi_termite_mound">Termitière</string>
+    <string name="poi_dry_cleaning_yes">Oui</string>
+    <string name="poi_board_type_wildlife">Faune sauvage</string>
+    <string name="poi_dry_cleaning_no">Non</string>
+    <string name="poi_anthill">Fourmilière</string>
+    <string name="poi_board_type_nature">Nature</string>
+    <string name="poi_food_no">Nourriture : non</string>
+    <string name="poi_rice">Magasin de riz</string>
+    <string name="poi_fish_pass">Passe à poissons</string>
 </resources>

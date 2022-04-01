@@ -4312,4 +4312,20 @@
     <string name="poi_payment_mastercard_contactless_no">Безконтактна MasterCard не приймається</string>
     <string name="poi_payment_visa_contactless_no">Безконтактна Visa не приймається</string>
     <string name="poi_payment_maestro_contactless_no">Безконтактна Maestro не приймається</string>
+    <string name="poi_laundry_service_filter">Послуги пральні</string>
+    <string name="poi_dry_cleaning_filter">Хімчистка</string>
+    <string name="poi_birds_nest">Пташине гніздо</string>
+    <string name="poi_dovecote">Голубник</string>
+    <string name="poi_fish_pass">Рибопропускова споруда</string>
+    <string name="poi_dry_cleaning_yes">Є</string>
+    <string name="poi_dry_cleaning_no">Немає</string>
+    <string name="poi_termite_mound">Термітник</string>
+    <string name="poi_anthill">Мурашник</string>
+    <string name="poi_board_type_wildlife">Дикі звірі</string>
+    <string name="poi_board_type_nature">Природа</string>
+    <string name="poi_food_no">Їжа: немає</string>
+    <string name="poi_rice">Крамниця рису</string>
+    <string name="poi_wool">Крамниця вовни</string>
+    <string name="poi_laundry_service_yes">Є</string>
+    <string name="poi_laundry_service_no">Немає</string>
 </resources>
