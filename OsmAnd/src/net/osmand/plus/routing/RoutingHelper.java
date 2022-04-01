@@ -534,7 +534,7 @@ public class RoutingHelper {
 				} else {
 					// case if you are getting close to the next point after turn
 					// but you have not yet turned (could be checked bearing)
-					if (currentLocation.hasBearing() || lastFixedLocation != null) {
+					if (currentLocation.hasBearing()) {
 						float bearingToRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
 						float bearingRouteNext = routeNodes.get(newCurrentRoute).bearingTo(routeNodes.get(newCurrentRoute + 1));
 						float bearingMotion = currentLocation.hasBearing() ? currentLocation.getBearing() : lastFixedLocation
