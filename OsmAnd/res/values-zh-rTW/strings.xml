@@ -4540,4 +4540,39 @@
     <string name="rendering_attr_showFitnessTrails_name">健身路徑</string>
     <string name="rendering_attr_showRunningRoutes_description">顯示跑步路線</string>
     <string name="rendering_attr_showRunningRoutes_name">跑步路線</string>
+    <string name="routeInfo_horse_scale_description">根據馬道的難度繪製路徑</string>
+    <string name="rendering_attr_horse_scale_common_name">一般</string>
+    <string name="rendering_attr_horse_scale_demanding_name">苛刻</string>
+    <string name="rendering_attr_horse_scale_difficult_name">困難</string>
+    <string name="rendering_attr_horse_scale_critical_name">危急</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">危險</string>
+    <string name="rendering_attr_horse_scale_impossible_name">不可能</string>
+    <string name="routing_attr_carriage_restrictions_name">運輸限制</string>
+    <string name="routing_attr_carriage_restrictions_description">考慮馬車的進入權限</string>
+    <string name="rendering_attr_showTramRoutes_name">有軌電車路線</string>
+    <string name="rendering_attr_showTrainRoutes_name">火車路線</string>
+    <string name="rendering_attr_showLightRailRoutes_name">輕軌路線</string>
+    <string name="rendering_attr_showMonorailRoutes_name">單軌電車路線</string>
+    <string name="rendering_attr_showFunicularRoutes_name">纜車路線</string>
+    <string name="rendering_attr_showBusRoutes_name">公車路線</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">無軌電車路線</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">快速公車路線</string>
+    <string name="map_markers_bar">地圖標記列</string>
+    <string name="shared_string_visible_widgets">可見的小工具</string>
+    <string name="top_widgets_panel">頂部面板</string>
+    <string name="bottom_widgets_panel">底部面板</string>
+    <string name="shared_string_buttons">按鈕</string>
+    <string name="osm_carto_render_descr">類似於 OSM 主要站點上使用的 OpenStreetMap-carto 樣式</string>
+    <string name="simulation_real_mode_title">逼真模擬</string>
+    <string name="simulation_constant_mode_desc">模擬將以選定的恆定速度執行。</string>
+    <string name="simulation_constant_mode_title">固定速度</string>
+    <string name="simulation_preview_mode_desc">膜你的速度在直線部份會是最大值，僅在交叉路口減慢。</string>
+    <string name="simulation_preview_mode_title">快速預覽模式</string>
+    <string name="speed_mode">速度模式</string>
+    <string name="routeInfo_horse_scale_name">馬道難度</string>
+    <string name="configure_screen_widgets_descr">選取要新增或重新排列小工具的螢幕邊緣。</string>
+    <string name="shared_string_item">項目</string>
+    <string name="simulation_real_mode_desc">在筆直的路段，速度大約是最大允許的速度。
+\n在交叉路口，模擬會變慢。
+\n紅綠燈與停止標誌將會有額外延遲。</string>
 </resources>
