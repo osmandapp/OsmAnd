@@ -525,7 +525,7 @@
     <string name="poi_fast_food">Фастфуд (быстрое питание)</string>
     <string name="poi_bar">Бар</string>
     <string name="poi_pub">Паб</string>
-    <string name="poi_food_court">Ресторанный дворик</string>
+    <string name="poi_food_court">Ресторанный дворик;Фуд-корт</string>
     <string name="poi_drinking_water">Питьевая вода</string>
     <string name="poi_barbecue">Установка для барбекю</string>
     <string name="poi_craft_agricultural_engines">Ремонт сельскохозяйственной техники</string>
@@ -1431,7 +1431,7 @@
     <string name="poi_vending_condoms">Презервативы</string>
     <string name="poi_vending_stamps">Марки</string>
     <string name="poi_vending_bicycle_tube">Велосипедные камеры</string>
-    <string name="poi_vending_food">Питание</string>
+    <string name="poi_vending_food">Еда;Питание</string>
     <string name="poi_vending_drinks_food">Напитки и закуски</string>
     <string name="poi_vending_fuel">Топливо</string>
     <string name="poi_vending_parcel_pickup">Получение посылок</string>
@@ -4325,4 +4325,5 @@
     <string name="poi_board_type_wildlife">Животные</string>
     <string name="poi_dry_cleaning_filter">Химчистка</string>
     <string name="poi_laundry_service_filter">Услуги прачечной</string>
+    <string name="poi_food_no">Еда: нет</string>
 </resources>
