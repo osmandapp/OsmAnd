@@ -4557,11 +4557,11 @@
     <string name="rendering_attr_showMonorailRoutes_name">Монорельсовые маршруты</string>
     <string name="top_widgets_panel">Верхняя панель</string>
     <string name="rendering_attr_showShareTaxiRoutes_name">Маршрутные такси</string>
-    <string name="configure_screen_widgets_descr">Выберите сторону экрана, чтобы добавить или изменить порядок виджетов.</string>
+    <string name="configure_screen_widgets_descr">Выберите сторону экрана, чтобы добавить виджеты или изменить их порядок.</string>
     <string name="osm_carto_render_descr">Стиль похож на OpenStreetMap-carto, используемый на главном странице сайта OSM.</string>
     <string name="simulation_real_mode_title">Реалистичное моделирование</string>
     <string name="simulation_constant_mode_desc">Моделирование будет проводиться с постоянной заданной скоростью.</string>
-    <string name="simulation_preview_mode_title">Режим быстрого предварительного просмотра</string>
+    <string name="simulation_preview_mode_title">Режим быстрого предпросмотра</string>
     <string name="shared_string_visible_widgets">Видимые виджеты</string>
     <string name="routing_attr_carriage_restrictions_description">Учитывать права доступа для гужевых транспортных средств</string>
     <string name="rendering_attr_showBusRoutes_name">Автобусные маршруты</string>
@@ -4579,4 +4579,12 @@
     <string name="simulation_constant_mode_title">Фиксированная скорость</string>
     <string name="simulation_preview_mode_desc">Скорость моделирования будет максимальной на прямых участках и замедляться только на перекрестках.</string>
     <string name="speed_mode">Скоростной режим</string>
+    <string name="rendering_attr_horse_scale_common_name">Обычный</string>
+    <string name="rendering_attr_horse_scale_demanding_name">Требовательный</string>
+    <string name="rendering_attr_horse_scale_critical_name">Критический</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Сложный</string>
+    <string name="rendering_attr_horse_scale_impossible_name">Непроходимый</string>
+    <string name="routeInfo_horse_scale_name">Сложность конных маршрутов</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">Опасный</string>
+    <string name="routeInfo_horse_scale_description">Отрисовка маршрута в зависимости от сложности конных троп</string>
 </resources>
