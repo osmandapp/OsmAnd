@@ -2,16 +2,28 @@ package net.osmand.plus.views.mapwidgets;
 
 import android.content.Context;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_ALTITUDE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BEARING;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_GPS_INFO;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_TIME;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MARKER_1;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MARKER_2;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MAX_SPEED;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_SPEED;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_TIME;
 
 public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 
@@ -21,6 +33,7 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 	public final MapWidget widget;
 	public final WidgetsPanel widgetPanel;
 	public int priority;
+	public int pageIndex = 0;
 
 	@DrawableRes
 	private final int settingsIconId;
@@ -86,25 +99,13 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 	}
 
 	public boolean isSelected(@NonNull ApplicationMode appMode) {
-		OsmandPreference<Boolean> pref = widget.getWidgetVisibilityPref();
-		if (pref != null) {
-			return pref.getModeValue(appMode);
-		} else {
-			return isVisibleCollapsed(appMode) || isVisible(appMode);
-		}
+		OsmandPreference<Boolean> visibilityPref = widget.getWidgetVisibilityPref();
+		return visibilityPref != null ? visibilityPref.getModeValue(appMode) : isVisibleForAppMode(appMode);
 	}
 
-	public abstract boolean isVisibleCollapsed(@NonNull ApplicationMode appMode);
+	public abstract boolean isVisibleForAppMode(@NonNull ApplicationMode appMode);
 
-	public abstract boolean isVisible(@NonNull ApplicationMode appMode);
-
-	public abstract void addVisible(@NonNull ApplicationMode appMode);
-
-	public abstract void addVisibleCollapsible(@NonNull ApplicationMode appMode);
-
-	public abstract void removeVisible(@NonNull ApplicationMode appMode);
-
-	public abstract void removeVisibleCollapsible(@NonNull ApplicationMode appMode);
+	public abstract void showHideForAppMode(@NonNull ApplicationMode appMode, boolean show);
 
 	@Override
 	public int hashCode() {

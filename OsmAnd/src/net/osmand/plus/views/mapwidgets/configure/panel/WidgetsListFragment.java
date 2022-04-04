@@ -155,7 +155,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 
 				boolean checked = compoundButton.isChecked();
 				WidgetViewHolder.updateWidgetIcon(imageView, widgetInfo, profileColor, defaultIconColor, checked, nightMode);
-				widgetRegistry.setVisibility(widgetInfo, checked, false);
+				widgetRegistry.setVisibility(widgetInfo, checked);
 			});
 
 			view.setOnClickListener(v -> {
@@ -163,14 +163,14 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 					boolean checked = !compoundButton.isChecked();
 					compoundButton.setChecked(checked);
 					WidgetViewHolder.updateWidgetIcon(imageView, widgetInfo, profileColor, defaultIconColor, checked, nightMode);
-					widgetRegistry.setVisibility(widgetInfo, checked, false);
+					widgetRegistry.setVisibility(widgetInfo, checked);
 				} else {
 					CallbackWithObject<WidgetState> callback = result -> {
 						updateContent();
 						return true;
 					};
 					widgetRegistry.showPopUpMenu(view, callback, widgetInfo.getWidgetState(), selectedAppMode,
-							null, null, null, compoundButton.isChecked(), nightMode);
+							compoundButton.isChecked(), nightMode);
 				}
 			});
 			setupListItemBackground(view);

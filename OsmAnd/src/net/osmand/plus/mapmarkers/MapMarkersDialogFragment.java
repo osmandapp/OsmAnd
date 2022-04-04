@@ -443,7 +443,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 
 			@Override
 			public void onMapMarkersModeChanged(boolean showDirectionEnabled) {
-				mapActivity.getMapLayers().getMapWidgetRegistry().updateMapMarkersMode(mapActivity);
+				mapActivity.getMapLayers().getMapWidgetRegistry().updateMarkerSideWidgetsVisibility(mapActivity);
 				activeFragment.setShowDirectionEnabled(showDirectionEnabled);
 				updateAdapters();
 			}

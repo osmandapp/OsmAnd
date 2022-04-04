@@ -1,17 +1,5 @@
 package net.osmand.plus.measurementtool;
 
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode;
-import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
-import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.ADD_TO_TRACK;
-import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
-import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode;
-import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.AFTER;
-import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.ALL;
-import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.BEFORE;
-import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -34,17 +22,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
-import androidx.core.widget.TextViewCompat;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.google.android.material.snackbar.Snackbar;
@@ -119,6 +96,29 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.TextViewCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
+
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
+import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode;
+import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
+import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.ADD_TO_TRACK;
+import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.AFTER;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.ALL;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.BEFORE;
+import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
+
 public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
 		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener,
 		SaveAsNewTrackFragmentListener, MapControlsThemeInfoProvider, GpsFilterFragmentLister {
@@ -159,7 +159,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	private InfoType currentInfoType;
 
-	private boolean wasCollapseButtonVisible;
 	private boolean progressBarVisible;
 	private boolean infoExpanded;
 
@@ -1953,13 +1952,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 			mainView.getViewTreeObserver().addOnGlobalLayoutListener(getWidgetsLayoutListener());
 
-			View collapseButton = mapActivity.findViewById(R.id.map_collapse_button);
-			if (collapseButton != null && collapseButton.getVisibility() == View.VISIBLE) {
-				wasCollapseButtonVisible = true;
-				collapseButton.setVisibility(View.INVISIBLE);
-			} else {
-				wasCollapseButtonVisible = false;
-			}
 			updateMainIcon();
 			updateDistancePointsText();
 		}
@@ -2012,11 +2004,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					R.id.map_layers_button,
 					R.id.map_search_button,
 					R.id.map_quick_actions_button);
-
-			View collapseButton = mapActivity.findViewById(R.id.map_collapse_button);
-			if (collapseButton != null && wasCollapseButtonVisible) {
-				collapseButton.setVisibility(View.VISIBLE);
-			}
 
 			mapActivity.refreshMap();
 		}

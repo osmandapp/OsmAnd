@@ -752,7 +752,7 @@ public class OsmandSettings {
 
 		@Override
 		public Boolean getModeValue(ApplicationMode mode) {
-			boolean defaultValue = mode.isWidgetVisible(WIDGET_COMPASS);
+			boolean defaultValue = mode.isWidgetVisibleByDefault(WIDGET_COMPASS);
 			List<String> widgetsVisibility = getWidgetsVisibilityInfo(mode);
 			if (widgetsVisibility.contains(WIDGET_COMPASS)) {
 				return true;

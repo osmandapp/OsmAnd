@@ -60,7 +60,7 @@ public class MapMarkerMenuController extends MenuController {
 								= activity.getMyApplication().getSettings().MARKERS_DISTANCE_INDICATION_ENABLED;
 						if (!indication.get()) {
 							indication.set(true);
-							activity.getMapLayers().getMapWidgetRegistry().updateMapMarkersMode(activity);
+							activity.getMapLayers().getMapWidgetRegistry().updateMarkerSideWidgetsVisibility(activity);
 						}
 						MapMarkersHelper markersHelper = activity.getMyApplication().getMapMarkersHelper();
 						markersHelper.moveMarkerToTop(getMapMarker());
