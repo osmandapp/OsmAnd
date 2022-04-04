@@ -327,8 +327,8 @@ public class DataStorageHelper {
 		return writable;
 	}
 
-	public static void checkAssets(@NonNull OsmandApplication app) {
-		app.getResourceManager().checkAssets(IProgress.EMPTY_PROGRESS, true, false);
+	public static void checkAssetsAsync(@NonNull OsmandApplication app) {
+		app.getResourceManager().checkAssetsAsync(IProgress.EMPTY_PROGRESS, true, false, null);
 	}
 
 	public static void updateDownloadIndexes(@NonNull OsmandApplication app) {
