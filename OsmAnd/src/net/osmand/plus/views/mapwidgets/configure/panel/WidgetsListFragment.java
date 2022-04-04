@@ -71,6 +71,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		inflater = UiUtilities.getInflater(requireContext(), nightMode);
 		View view = inflater.inflate(R.layout.fragment_widgets_list, container, false);
 
 		widgetsContainer = view.findViewById(R.id.widgets_list);

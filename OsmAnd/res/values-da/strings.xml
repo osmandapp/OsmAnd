@@ -4553,4 +4553,39 @@
     <string name="rendering_attr_showFitnessTrails_name">Fitnessbaner</string>
     <string name="rendering_attr_showRunningRoutes_name">Løberuter</string>
     <string name="rendering_attr_showRunningRoutes_description">Vis løberuter</string>
+    <string name="routeInfo_horse_scale_description">Gengiv stier i henhold til sværhedsgraden af hestestier</string>
+    <string name="rendering_attr_horse_scale_common_name">Almindelig</string>
+    <string name="rendering_attr_horse_scale_demanding_name">Krævende</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Vanskelig</string>
+    <string name="rendering_attr_horse_scale_critical_name">Kritisk</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">Farlig</string>
+    <string name="routing_attr_carriage_restrictions_name">Vognbegrænsninger</string>
+    <string name="routing_attr_carriage_restrictions_description">Tag højde for adgangstilladelser for hestekøretøjer</string>
+    <string name="rendering_attr_showTramRoutes_name">Sporvognsruter</string>
+    <string name="rendering_attr_showTrainRoutes_name">Togruter</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Letbaneruter</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Monorailruter</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Kabelbaneruter</string>
+    <string name="rendering_attr_showBusRoutes_name">Busruter</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Trolleybusruter</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">Shuttle-ruter</string>
+    <string name="map_markers_bar">Bjælke til kortmarkører</string>
+    <string name="shared_string_visible_widgets">Synlige moduler</string>
+    <string name="top_widgets_panel">Øverste panel</string>
+    <string name="bottom_widgets_panel">Nederste panel</string>
+    <string name="shared_string_item">Emne</string>
+    <string name="shared_string_buttons">Knapper</string>
+    <string name="configure_screen_widgets_descr">Vælg skærmside for at tilføje eller omarrangere moduler.</string>
+    <string name="simulation_real_mode_title">Realistisk simulering</string>
+    <string name="simulation_preview_mode_title">Hurtig forhåndsvisningstilstand</string>
+    <string name="speed_mode">Hastighedsindstilling</string>
+    <string name="routeInfo_horse_scale_name">Hestestiers sværhedsgrad</string>
+    <string name="rendering_attr_horse_scale_impossible_name">Umulig</string>
+    <string name="simulation_preview_mode_desc">Hastigheden i simuleringen er maksimal på lige strækninger og sænkes kun ved kryds.</string>
+    <string name="osm_carto_render_descr">Svarende til OpenStreetMap-carto-stilen, der anvendes på det primære OSM-websted</string>
+    <string name="simulation_real_mode_desc">På lige vejstrækninger vil hastigheden være omtrent den maksimalt tilladte hastighed.
+\nVed kryds sænkes hastigheden i simuleringen.
+\nDer vil blive anvendt ekstra sanktioner ved trafiksignaler, stopskilte osv.</string>
+    <string name="simulation_constant_mode_desc">Simuleringen vil blive udført med valgt, konstant hastighed.</string>
+    <string name="simulation_constant_mode_title">Fast hastighed</string>
 </resources>

@@ -2919,11 +2919,11 @@
     <string name="help_us_make_osmand_better">Aiutaci a rendere OsmAnd migliore</string>
     <string name="choose_data_to_share">Scegli il tipo di dati che vuoi condividere:</string>
     <string name="downloaded_maps">Mappe scaricate</string>
-    <string name="visited_screens">Schermiate visitate</string>
+    <string name="visited_screens">Schermate visitate</string>
     <string name="collected_data_descr">Scegli quali dati permetti a OsmAnd di condividere.</string>
-    <string name="downloaded_maps_collect_descr">Aiutaci a capire la popolarità di mappe di regioni e paesi.</string>
-    <string name="visited_screens_collect_descr">Aiutaci a capire la popolarità delle funzionalità di OsmAnd.</string>
-    <string name="privacy_and_security_change_descr">Toccando \"Consenti\" se accetti la nostra %1$s</string>
+    <string name="downloaded_maps_collect_descr">Aiutaci a capire la popolarità delle mappe di regioni e Paesi.</string>
+    <string name="visited_screens_collect_descr">Aiutaci a capire la popolarità delle funzioni di OsmAnd.</string>
+    <string name="privacy_and_security_change_descr">Tocca \"Consenti\" se accetti la nostra %1$s</string>
     <string name="settings_privacy_and_security">Privacy e sicurezza</string>
     <string name="shared_string_no_thank_you">No, grazie</string>
     <string name="shared_string_allow">Consenti</string>
@@ -3024,11 +3024,11 @@
     <string name="routing_attr_piste_type_sled_description">Piste per slittino.</string>
     <string name="shared_string_crash">Interruzione</string>
     <string name="rate_dialog_descr">Per favore condividi il tuo feedback e dai un voto al nostro lavoro su Google Play.</string>
-    <string name="shared_string_privacy_policy">Politica della privacy</string>
+    <string name="shared_string_privacy_policy">Politica sulla privacy</string>
     <string name="process_downloading_service">Servizio di download OsmAnd</string>
-    <string name="make_osmand_better_descr">Permetti a OsmAnd di raccogliere ed elaborare anonimamente dati di utilizzo dell\'applicazione. Nessuna informazione circa la tua posizione o i luoghi che visualizzi nella mappa vengono raccolti. 
-\n 
-\nCambiare la tua scelta in ogni momento in \'Impostazioni\'→\'Politica della Privacy\'.</string>
+    <string name="make_osmand_better_descr">Permetti a OsmAnd di raccogliere ed elaborare anonimamente dati di utilizzo dell\'applicazione. Nessuna informazione circa la tua posizione o i luoghi che visualizzi nella mappa verrà raccolta.
+\n
+\nCambia la tua scelta in ogni momento in \'Impostazioni\' → \'Impostazioni OsmAnd\' → \'Statistiche\'.</string>
     <string name="show_compass_ruler">Mostra il righello della bussola</string>
     <string name="hide_compass_ruler">Nascondi il righello della bussola</string>
     <string name="settings_derived_routing_mode_string">Modo di utilizzo, derivato da: %s</string>
@@ -3587,7 +3587,7 @@
 \n
 \nPuoi disattivare i plugin inutilizzati, per nascondere tutti i loro controlli. %1$s.</string>
     <string name="ui_customization_short_descr">Elementi pannello, menù contestuale</string>
-    <string name="ui_customization">Personalizzazione Interfaccia Grafica</string>
+    <string name="ui_customization">Personalizzazione dell\'interfaccia grafica</string>
     <string name="shared_string_drawer">Pannello</string>
     <string name="context_menu_actions">Azioni menù contestuale</string>
     <string name="reorder_or_hide_from">Riordina o nascondi elementi dal %1$s.</string>
@@ -3656,12 +3656,12 @@
 \nScegliendo %2$s. Tutti i dati relativi agli autovelox: avvisi, notifiche, PDI saranno cancellati fino a che OsmAnd non sarà completamente reinstallato.</string>
     <string name="keep_active">Mantieni attivo</string>
     <string name="shared_string_uninstall">Disinstalla</string>
-    <string name="speed_cameras_alert">Gli avvisi sulla presenza di autovelox in alcuni paesi sono proibiti dalla legge.</string>
+    <string name="speed_cameras_alert">Gli avvisi sulla presenza di autovelox in alcuni Paesi sono proibiti dalla legge.</string>
     <string name="routing_attr_length_description">Specifica la lunghezza del veicolo permessa nei percorsi.</string>
     <string name="routing_attr_length_name">Lunghezza massima</string>
     <string name="shared_string_bearing">Direzione</string>
     <string name="item_deleted">%1$s cancellato</string>
-    <string name="speed_cameras_restart_descr">Riavvia l\'app per cancellare tutti i dati degli autovelox.</string>
+    <string name="speed_cameras_restart_descr">Riavvia l\'app per cancellare tutti i dati sugli autovelox.</string>
     <string name="shared_string_uninstall_and_restart">Disinstalla e Riavvia</string>
     <string name="speed_cameras_removed_descr">Questo dispositivo non ha autovelox.</string>
     <string name="app_mode_inline_skates">Pattini in linea</string>
@@ -4028,7 +4028,7 @@
     <string name="show_start_dialog">Mostra la finestra di avvio</string>
     <string name="trip_recording_show_start_dialog_setting">Se disabilitato, la registrazione inizierà appena premuto sul widget o sul menu, saltando la finestra di conferma.</string>
     <string name="specify_color_for_map_mode">Specifica il colore per il tipo di mappa %1$s.</string>
-    <string name="new_device_account">Nuovo dispositivo / nuovo account</string>
+    <string name="new_device_account">Nuovo dispositivo/account</string>
     <string name="contact_support_description">Se hai delle domande, per favore contattaci al %1$s.</string>
     <string name="next_billing_date">Nuova data di addebito: %1$s</string>
     <string name="routing_attr_allow_streams_name">Permetti ruscelli e scoli</string>
@@ -4051,7 +4051,7 @@
     <string name="customize_route_line">Personalizza la linea del percorso</string>
     <string name="shared_string_route_line">Linea del percorso</string>
     <string name="no_purchases">Non hai alcun acquisto</string>
-    <string name="empty_purchases_description">Se l\'acquisto non viene visualizzato qui, premi su “%1$s”, o contatta il supporto.</string>
+    <string name="empty_purchases_description">Se l\'acquisto non viene visualizzato qui, premi su \"%1$s\" o contatta il supporto.</string>
     <string name="contact_support">Contatta il supporto</string>
     <string name="troubleshooting">Risoluzione dei problemi</string>
     <string name="troubleshooting_description">Per problemi con gli acquisti per favore segui il link.</string>
@@ -4091,7 +4091,7 @@
 \ne tutti i tuoi dati saranno collegati ad esso.</string>
     <string name="search_more">Cerca di più …</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
-    <string name="backup_and_restore">Salvataggio e Ripristino</string>
+    <string name="backup_and_restore">Backup e ripristino</string>
     <string name="last_backup">Ultimo salvataggio</string>
     <string name="duration_ago">%1$s fa</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
@@ -4153,7 +4153,7 @@
     <string name="receiving_data_from_server">Ricezione in corso dei dati dal server…</string>
     <string name="restore_complete">Ripristinato</string>
     <string name="offline_wikipeadia">Wikipedia offline</string>
-    <string name="purchases_feature_desc_osmand_cloud">Ottieni OsmAnd Cloud per salvare tutti i dati OsmAnd online. Nessuna perdita di dati dopo la reinstallazione. Backup e ripristino di tutte le informazioni facilmente.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Ottieni OsmAnd Cloud per salvare tutti i dati OsmAnd online. Nessuna perdita di dati dopo la reinstallazione. Fai backup e ripristino di tutte le informazioni facilmente.</string>
     <string name="offline_wikivoyage">Wikivoyage offline</string>
     <string name="you_can_get_feature_as_part_of_pattern">Ottieni“%1$s” come parte del piano %2$s . Confronto:</string>
     <string name="nautical_depth">Linee batimetriche</string>
@@ -4483,7 +4483,7 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Mostra etichette Fixme</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etichette Note</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Mostra etichette Note</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icone a zomm bassi</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icone a zoom bassi</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schema della visualizzazione delle icone a bassi zoom</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tunnel per canali</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Non nascondere i tunnel per canali</string>
@@ -4514,4 +4514,21 @@
     <string name="always_ask_waypoint_appearance_description">Toccando quest\'azione si aprirà la schermata \"Aggiungi punto intermedio\" dove puoi cambiare nome e aspetto.</string>
     <string name="track_file_description">Toccando questa azione verrà mostrato una finestra di dialogo di scelta delle tracce disponibili.</string>
     <string name="shared_string_grade">Grado</string>
+    <string name="edit_category">Modifica la categoria</string>
+    <string name="shared_string_buttons">Bottoni</string>
+    <string name="rendering_attr_horse_scale_impossible_name">Impossibile</string>
+    <string name="rendering_attr_horse_scale_common_name">Comune</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Linee della monorotaia</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Percorsi della funicolare</string>
+    <string name="rendering_attr_showBusRoutes_name">Linee dell\'autobus</string>
+    <string name="shared_string_visible_widgets">Widget visibili</string>
+    <string name="top_widgets_panel">Pannello superiore</string>
+    <string name="bottom_widgets_panel">Pannello inferiore</string>
+    <string name="shared_string_item">Oggetto</string>
+    <string name="routeInfo_horse_scale_name">Difficoltà percorsi a cavallo</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Difficile</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">Pericoloso</string>
+    <string name="rendering_attr_horse_scale_critical_name">Arduo</string>
+    <string name="rendering_attr_showTrainRoutes_name">Linee ferroviarie</string>
+    <string name="rendering_attr_showTramRoutes_name">Percorsi dei tram</string>
 </resources>

@@ -214,4 +214,9 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 		getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
 		return super.fillParams(root, mapActivity);
 	}
+
+	@Override
+	public String getItemIdFromObject(Pair<String, String> object) {
+		return object.first;
+	}
 }

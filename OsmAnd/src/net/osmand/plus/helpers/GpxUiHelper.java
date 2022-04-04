@@ -2225,7 +2225,8 @@ public class GpxUiHelper {
 	                                  @NonNull File file,
 	                                  @NonNull GPXFile gpxFile,
 	                                  @NonNull WptPt selectedPoint,
-	                                  @Nullable GPXTrackAnalysis analyses) {
+	                                  @Nullable GPXTrackAnalysis analyses,
+	                                  @Nullable Drawable trackIcon) {
 		new SaveGpxAsyncTask(file, gpxFile, new SaveGpxListener() {
 			@Override
 			public void gpxSavingStarted() {
@@ -2240,7 +2241,7 @@ public class GpxUiHelper {
 					GPXTrackAnalysis trackAnalysis = analyses != null ? analyses : selectedGpxFile.getTrackAnalysis(app);
 					SelectedGpxPoint selectedGpxPoint = new SelectedGpxPoint(selectedGpxFile, selectedPoint);
 					TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint,
-							null, null, null, false, trackAnalysis);
+							null, null, null, false, trackAnalysis, trackIcon);
 				} else {
 					LOG.error(errorMessage);
 				}
