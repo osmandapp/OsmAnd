@@ -367,7 +367,6 @@ public class MapWidgetRegistry {
 	private void resetDefaultAppearance(ApplicationMode mode) {
 		settings.TRANSPARENT_MAP_THEME.resetModeToDefault(mode);
 		settings.SHOW_STREET_NAME.resetModeToDefault(mode);
-		settings.MAP_MARKERS_MODE.resetModeToDefault(mode);
 	}
 
 	public void reorderWidgets() {
@@ -380,20 +379,6 @@ public class MapWidgetRegistry {
 			}
 			allWidgets.put(panel, newOrder);
 		}
-	}
-
-	public void updateMapMarkersMode(MapActivity mapActivity) {
-		for (MapWidgetInfo info : getRightWidgets()) {
-			if (WIDGET_MARKER_1.equals(info.key)) {
-				setVisibility(info, settings.MAP_MARKERS_MODE.get().isWidgets()
-						&& settings.MARKERS_DISTANCE_INDICATION_ENABLED.get(), false);
-			} else if (WIDGET_MARKER_2.equals(info.key)) {
-				setVisibility(info, settings.MAP_MARKERS_MODE.get().isWidgets()
-						&& settings.MARKERS_DISTANCE_INDICATION_ENABLED.get()
-						&& settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 2, false);
-			}
-		}
-		mapActivity.refreshMap();
 	}
 
 	@NonNull
