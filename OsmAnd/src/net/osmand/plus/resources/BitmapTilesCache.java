@@ -1,20 +1,19 @@
 package net.osmand.plus.resources;
 
+import static net.osmand.map.TileSourceManager.MAPILLARY_VECTOR_TILE_EXT;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.map.ITileSource;
 import net.osmand.plus.resources.AsyncLoadingThread.TileLoadDownloadRequest;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.map.TileSourceManager.MAPILLARY_VECTOR_TILE_EXT;
 
 public class BitmapTilesCache extends TilesCache<Bitmap> {
 
@@ -54,13 +53,9 @@ public class BitmapTilesCache extends TilesCache<Bitmap> {
 		Bitmap bitmap = null;
 		try {
 			long[] timeHolder = new long[1];
-			byte[] blob = tileSource.getBytes(request.xTile, request.yTile, request.zoom, null, timeHolder);
-			if (blob != null) {
-				String[] params = tileSource.getTileDbParams(request.xTile, request.yTile, request.zoom);
-				bitmap = tileSource.getImage(blob, params);
-				if (bitmap != null) {
-					updateTilesSizes(tileSource.getName(), request.zoom, blob.length);
-				}
+			bitmap = tileSource.getImage(request.xTile, request.yTile, request.zoom, timeHolder);
+			if (bitmap != null) {
+				updateTilesSizes(tileSource.getName(), request.zoom, bitmap.getByteCount());
 			}
 			if (timeHolder[0] != 0) {
 				downloadIfExpired(request, timeHolder[0]);
@@ -68,7 +63,6 @@ public class BitmapTilesCache extends TilesCache<Bitmap> {
 		} catch (OutOfMemoryError e) {
 			log.error("Out of memory error", e);
 			clearTiles();
-		} catch (IOException ignored) {
 		}
 		return bitmap;
 	}
