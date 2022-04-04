@@ -1,10 +1,5 @@
 package net.osmand.plus.views.mapwidgets;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
@@ -12,10 +7,14 @@ import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
 public class SideWidgetInfo extends MapWidgetInfo {
 
-	private final Set<ApplicationMode> visibleCollapsible = new LinkedHashSet<>();
-	private final Set<ApplicationMode> visible = new LinkedHashSet<>();
+	private final Set<ApplicationMode> visibilityForAppModes = new LinkedHashSet<>();
 
 	public SideWidgetInfo(@NonNull String key,
 	                      @NonNull MapWidget widget,
@@ -29,32 +28,16 @@ public class SideWidgetInfo extends MapWidgetInfo {
 	}
 
 	@Override
-	public boolean isVisible(@NonNull ApplicationMode appMode) {
-		return visible.contains(appMode);
+	public boolean isVisibleForAppMode(@NonNull ApplicationMode appMode) {
+		return visibilityForAppModes.contains(appMode);
 	}
 
 	@Override
-	public boolean isVisibleCollapsed(@NonNull ApplicationMode appMode) {
-		return visibleCollapsible.contains(appMode);
-	}
-
-	@Override
-	public void addVisible(@NonNull ApplicationMode appMode) {
-		visible.add(appMode);
-	}
-
-	@Override
-	public void addVisibleCollapsible(@NonNull ApplicationMode appMode) {
-		visibleCollapsible.add(appMode);
-	}
-
-	@Override
-	public void removeVisible(@NonNull ApplicationMode appMode) {
-		visible.remove(appMode);
-	}
-
-	@Override
-	public void removeVisibleCollapsible(@NonNull ApplicationMode appMode) {
-		visibleCollapsible.remove(appMode);
+	public void showHideForAppMode(@NonNull ApplicationMode appMode, boolean show) {
+		if (show) {
+			visibilityForAppModes.add(appMode);
+		} else {
+			visibilityForAppModes.remove(appMode);
+		}
 	}
 }

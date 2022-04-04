@@ -237,8 +237,9 @@ public class MapMarkersBarWidget extends MapWidget {
 		super.attachView(container, order, followingWidgets);
 
 		boolean showBottomShadow = true;
+		boolean coordinatedVisible = mapActivity.getWidgetsVisibilityHelper().shouldShowTopCoordinatesWidget();
 		for (MapWidget widget : followingWidgets) {
-			if (widget instanceof CoordinatesWidget) {
+			if (widget instanceof CoordinatesWidget && coordinatedVisible) {
 				showBottomShadow = false;
 				break;
 			}
