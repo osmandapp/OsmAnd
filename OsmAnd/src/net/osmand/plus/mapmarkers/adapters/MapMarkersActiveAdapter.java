@@ -47,7 +47,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		updateLocationViewCache = uiUtilities.getUpdateLocationViewCache();
 		markers = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers();
 		night = !mapActivity.getMyApplication().getSettings().isLightContent();
-		showDirectionEnabled = mapActivity.getMyApplication().getSettings().MARKERS_DISTANCE_INDICATION_ENABLED.get();
+		showDirectionEnabled = mapActivity.getMyApplication().getSettings().SHOW_MAP_MARKERS_BAR_WIDGET.get();
 	}
 
 	public void setShowDirectionEnabled(boolean showDirectionEnabled) {

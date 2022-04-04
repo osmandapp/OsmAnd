@@ -8,7 +8,6 @@ import net.osmand.CallbackWithObject;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -235,12 +234,12 @@ public class MapWidgetRegistry {
 	}
 
 	public void setVisibility(@NonNull MapWidgetInfo widgetInfo, boolean visible) {
-		ApplicationMode mode = settings.APPLICATION_MODE.get();
-		setVisibility(mode, widgetInfo, visible);
-
-		OsmandPreference<Boolean> pref = widgetInfo.widget.getWidgetVisibilityPref();
-		if (pref != null) {
-			pref.set(!pref.get());
+		OsmandPreference<Boolean> visibilityPref = widgetInfo.widget.getWidgetVisibilityPref();
+		if (visibilityPref != null) {
+			visibilityPref.set(!visibilityPref.get());
+		} else {
+			ApplicationMode mode = settings.APPLICATION_MODE.get();
+			setVisibility(mode, widgetInfo, visible);
 		}
 
 		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
@@ -308,28 +307,6 @@ public class MapWidgetRegistry {
 		settings.MAP_INFO_CONTROLS.set(widgetsVisibilityString.toString());
 	}
 
-	public void resetToDefault() {
-		ApplicationMode appMode = settings.getApplicationMode();
-		resetWidgetsVisibility(appMode, getLeftWidgets());
-		resetWidgetsVisibility(appMode, getRightWidgets());
-		resetDefaultAppearance(appMode);
-		sideWidgetsVisibilityFromSettings.put(appMode, null);
-		settings.MAP_INFO_CONTROLS.set("");
-	}
-
-	private void resetWidgetsVisibility(@NonNull ApplicationMode mode, @NonNull Set<MapWidgetInfo> widgets) {
-		for (MapWidgetInfo widgetInfo : widgets) {
-			boolean visibleByDefault = mode.isWidgetVisibleByDefault(widgetInfo.key);
-			widgetInfo.showHideForAppMode(mode, visibleByDefault);
-		}
-	}
-
-	private void resetDefaultAppearance(ApplicationMode mode) {
-		settings.TRANSPARENT_MAP_THEME.resetModeToDefault(mode);
-		settings.SHOW_STREET_NAME.resetModeToDefault(mode);
-		settings.MAP_MARKERS_MODE.resetModeToDefault(mode);
-	}
-
 	public void reorderWidgets() {
 		for (WidgetsPanel panel : WidgetsPanel.values()) {
 			Set<MapWidgetInfo> oldOrder = getWidgetsForPanel(panel);
@@ -340,23 +317,6 @@ public class MapWidgetRegistry {
 			}
 			allWidgets.put(panel, newOrder);
 		}
-	}
-
-	public void updateMarkerSideWidgetsVisibility(@NonNull MapActivity mapActivity) {
-		boolean markersWidgetEnabled = settings.MARKERS_DISTANCE_INDICATION_ENABLED.get();
-		boolean sideMarkerWidgetEnabled = settings.MAP_MARKERS_MODE.get().isWidgets();
-		boolean showFirstMarkerSideWidget = markersWidgetEnabled && sideMarkerWidgetEnabled;
-		boolean showSecondMarkerSideWidget = showFirstMarkerSideWidget
-				&& settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 2;
-
-		for (MapWidgetInfo widgetInfo : getRightWidgets()) {
-			if (WIDGET_MARKER_1.equals(widgetInfo.key)) {
-				setVisibility(widgetInfo, showFirstMarkerSideWidget);
-			} else if (WIDGET_MARKER_2.equals(widgetInfo.key)) {
-				setVisibility(widgetInfo, showSecondMarkerSideWidget);
-			}
-		}
-		mapActivity.refreshMap();
 	}
 
 	@NonNull

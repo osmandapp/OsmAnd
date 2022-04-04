@@ -6,9 +6,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -18,6 +15,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -27,6 +25,9 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class MapMarkersBarWidget extends MapWidget {
 
@@ -214,6 +215,12 @@ public class MapMarkersBarWidget extends MapWidget {
 		}
 
 		addressText.setText(descr);
+	}
+
+	@Nullable
+	@Override
+	public OsmandPreference<Boolean> getWidgetVisibilityPref() {
+		return settings.SHOW_MAP_MARKERS_BAR_WIDGET;
 	}
 
 	@Override
