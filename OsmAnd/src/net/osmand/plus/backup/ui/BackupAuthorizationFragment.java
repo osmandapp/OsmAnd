@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
-import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -64,11 +63,9 @@ public class BackupAuthorizationFragment extends BaseSettingsFragment implements
 	@Override
 	protected void createToolbar(LayoutInflater inflater, View view) {
 		super.createToolbar(inflater, view);
-		AppBarLayout appBarLayout = (AppBarLayout) view.findViewById(R.id.appbar);
-		ViewCompat.setElevation(appBarLayout, 0f);
-		appBarLayout.setOutlineProvider(null);
 		View subtitle = view.findViewById(R.id.toolbar_subtitle);
 		AndroidUiHelper.updateVisibility(subtitle, false);
+		((AppBarLayout) view.findViewById(R.id.appbar)).setOutlineProvider(null);
 	}
 
 	@Override

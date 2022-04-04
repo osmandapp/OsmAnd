@@ -1,6 +1,7 @@
 package net.osmand.plus.widgets;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
@@ -13,6 +14,8 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,88 +25,103 @@ import java.util.Map;
 import java.util.Random;
 
 public class BackupIconsView extends View {
+
+	private final OsmandApplication app;
+	private final UiUtilities uiUtilities;
+
 	private final Paint paint = new Paint();
+	private final Map<Integer, List<Integer>> iconsMap = new HashMap<>();
+
 	private final int iconSize;
 	private final int rowMargin;
-	private final OsmandApplication app;
-	private final List<HashMap<Integer, Integer>> columnList = new ArrayList<>();
-	private int xAnim = 0;
-	private final int xStep;
+	private final int screenSize;
+
+	private int iconsOffset = 0;
 
 	public BackupIconsView(Context context, @Nullable AttributeSet attrs) {
 		super(context, attrs);
 		app = (OsmandApplication) context.getApplicationContext();
+		uiUtilities = app.getUIUtilities();
+
 		paint.setStyle(Style.STROKE);
-		paint.setAntiAlias(true);
-		paint.setStrokeWidth(context.getResources().getDimensionPixelSize(R.dimen.map_button_stroke));
-		iconSize = context.getResources().getDimensionPixelSize(R.dimen.big_icon_size);
-		rowMargin = context.getResources().getDimensionPixelSize(R.dimen.content_padding);
-		xStep = iconSize + rowMargin;
-	}
+		paint.setStrokeWidth(AndroidUtils.dpToPx(app, 1));
 
-	private void initView() {
-		int screenSize = getWidth();
-		if (columnList.isEmpty()) {
-			while (screenSize > 0) {
-				addColumn();
-				screenSize -= xStep;
-			}
-		}
-	}
+		Resources resources = app.getResources();
+		iconSize = resources.getDimensionPixelSize(R.dimen.big_icon_size);
+		rowMargin = resources.getDimensionPixelSize(R.dimen.content_padding);
 
-	private void addColumn() {
-		HashMap<Integer, Integer> map = new HashMap<>();
-		map.put(R.color.backup_restore_icons_yellow, getIconId());
-		map.put(R.color.backup_restore_icons_blue, getIconId());
-		map.put(R.color.backup_restore_icons_green, getIconId());
-		columnList.add(map);
+		screenSize = app.getResources().getDisplayMetrics().widthPixels;
+		initIconsMap();
 	}
 
 	@Override
 	protected void onDraw(Canvas canvas) {
-		initView();
-		int x = xAnim;
-		xAnim += 10;
-		for (HashMap<Integer, Integer> map : columnList) {
-			buildColumn(canvas, map, x);
-			x -= xStep;
-		}
-		if (xAnim >= xStep * columnList.size()) {
-			addColumn();
-		}
+		buildRows(canvas);
 		invalidate();
+
+		if (iconsOffset >= screenSize) {
+			iconsOffset = 0;
+		} else {
+			iconsOffset++;
+		}
 	}
 
-	private void buildColumn(Canvas canvas, HashMap<Integer, Integer> map, int x) {
+	private void buildRows(Canvas canvas) {
+		int xOffsetStep = iconSize + rowMargin;
 		int row = 0;
-		int xOffset = x;
-		for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-			if (row % 2 == 0) {
-				xOffset += rowMargin;
+
+		for (Map.Entry<Integer, List<Integer>> entry : iconsMap.entrySet()) {
+			Integer color = entry.getKey();
+			List<Integer> iconIds = entry.getValue();
+
+			int xOffset = row % 2 == 0 ? rowMargin : 0;
+			xOffset = xOffset + iconsOffset;
+
+			for (Integer iconId : iconIds) {
+				if (xOffset > screenSize) {
+					xOffset = xOffset - screenSize;
+				}
+				drawIcon(canvas, iconId, color, xOffset, row);
+				xOffset += xOffsetStep;
 			}
-			drawIcon(canvas, entry.getValue(), entry.getKey(), xOffset, row);
 			row++;
-			xOffset = x;
 		}
 	}
 
-	private void drawIcon(Canvas canvas, int drawableId, int color, int x, int rowNumber) {
-		int rowBottomMargin = iconSize / 4;
-		int center = iconSize / 2;
-		Drawable icon = app.getUIUtilities().getIcon(drawableId, color);
-		paint.setColor(ContextCompat.getColor(app, color));
-		paint.setAlpha(51);
-		x += center;
-		int y = center;
-		if (icon != null) {
-			y += rowNumber * (iconSize + rowBottomMargin);
-			icon.setBounds((x - icon.getIntrinsicWidth() / 2),
-					y - icon.getIntrinsicHeight() / 2,
-					x + icon.getIntrinsicWidth() / 2,
-					y + icon.getIntrinsicHeight() / 2);
-			canvas.drawCircle(x, y, center, paint);
-			icon.draw(canvas);
+	private void initIconsMap() {
+		List<Integer> colorIds = new ArrayList<>();
+		colorIds.add(R.color.backup_restore_icons_yellow);
+		colorIds.add(R.color.backup_restore_icons_blue);
+		colorIds.add(R.color.backup_restore_icons_green);
+
+		int xOffsetStep = iconSize + rowMargin;
+		int iconsCount = screenSize / xOffsetStep;
+
+		for (Integer colorId : colorIds) {
+			List<Integer> icons = new ArrayList<>();
+			for (int i = 0; i < iconsCount; i++) {
+				icons.add(getIconId());
+			}
+			iconsMap.put(colorId, icons);
 		}
+	}
+
+	private void drawIcon(Canvas canvas, int drawableId, int colorId, int xOffset, int rowNumber) {
+		Drawable icon = uiUtilities.getIcon(drawableId, colorId);
+		paint.setColor(ContextCompat.getColor(app, colorId));
+		paint.setAlpha(51);
+
+		int center = iconSize / 2;
+		int rowBottomMargin = iconSize / 4;
+		int x = center + xOffset;
+		int y = center + rowNumber * (iconSize + rowBottomMargin);
+
+		icon.setBounds((x - icon.getIntrinsicWidth() / 2),
+				y - icon.getIntrinsicHeight() / 2,
+				x + icon.getIntrinsicWidth() / 2,
+				y + icon.getIntrinsicHeight() / 2);
+		canvas.drawCircle(center + xOffset, y, center, paint);
+		icon.draw(canvas);
 	}
 
 	private int getIconId() {
