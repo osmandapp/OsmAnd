@@ -614,40 +614,102 @@ public class ResourceManager {
 		}
 	}
 
-	public List<String> checkAssets(IProgress progress, boolean forceUpdate, boolean forceCheck) {
-		if (context.getAppInitializer().isAppVersionChanged()) {
-			copyMissingJSAssets();
+	private final ExecutorService checkAssetsSingleThreadExecutor = Executors.newSingleThreadExecutor();
+
+	public void checkAssetsAsync(@Nullable IProgress progress, boolean forceUpdate, boolean forceCheck,
+	                             @Nullable CheckAssetsListener listener) {
+		CheckAssetsTask task = new CheckAssetsTask(progress, forceUpdate, forceCheck, listener);
+		task.executeOnExecutor(checkAssetsSingleThreadExecutor);
+	}
+
+	public List<String> checkAssets(@Nullable IProgress progress, boolean forceUpdate, boolean forceCheck) {
+		List<String> warnings = new ArrayList<>();
+		CheckAssetsTask task = new CheckAssetsTask(progress, forceUpdate, forceCheck, null);
+		try {
+			warnings.addAll(task.executeOnExecutor(checkAssetsSingleThreadExecutor).get());
+		} catch (ExecutionException | InterruptedException e) {
+			log.error(e);
 		}
-		String fv = Version.getFullVersion(context);
-		OsmandSettings settings = context.getSettings();
-		boolean versionChanged = !fv.equalsIgnoreCase(settings.PREVIOUS_INSTALLED_VERSION.get());
-		boolean overwrite = versionChanged || forceUpdate;
-		if (overwrite || forceCheck) {
-			File appDataDir = context.getAppPath(null);
-			appDataDir.mkdirs();
-			if (appDataDir.canWrite()) {
-				try {
-					progress.startTask(context.getString(R.string.installing_new_resources), -1);
-					AssetManager assetManager = context.getAssets();
-					boolean firstInstall = !settings.PREVIOUS_INSTALLED_VERSION.isSet();
-					unpackBundledAssets(assetManager, appDataDir, firstInstall || forceUpdate, overwrite, forceCheck);
-					settings.PREVIOUS_INSTALLED_VERSION.set(fv);
-					copyRegionsBoundaries(overwrite);
-					// see Issue #3381
-					//copyPoiTypes();
-					RendererRegistry registry = context.getRendererRegistry();
-					for (String internalStyle : registry.getInternalRenderers().keySet()) {
-						File file = registry.getFileForInternalStyle(internalStyle);
-						if (file.exists() && overwrite) {
-							registry.copyFileForInternalStyle(internalStyle);
-						}
-					}
-				} catch (SQLiteException | IOException | XmlPullParserException e) {
-					log.error(e.getMessage(), e);
-				}
+		return warnings;
+	}
+
+	private class CheckAssetsTask extends AsyncTask<Void, String, List<String>> {
+
+		private final IProgress progress;
+		private final CheckAssetsListener listener;
+
+		private final boolean forceUpdate;
+		private final boolean forceCheck;
+
+		public CheckAssetsTask(@Nullable IProgress progress, boolean forceUpdate, boolean forceCheck,
+		                       @Nullable CheckAssetsListener listener) {
+			this.progress = progress;
+			this.forceUpdate = forceUpdate;
+			this.forceCheck = forceCheck;
+			this.listener = listener;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			if (listener != null) {
+				listener.checkAssetsStarted();
 			}
 		}
-		return Collections.emptyList();
+
+		@Override
+		protected List<String> doInBackground(Void... params) {
+			return checkAssets(progress, forceUpdate, forceCheck);
+		}
+
+		private List<String> checkAssets(IProgress progress, boolean forceUpdate, boolean forceCheck) {
+			if (context.getAppInitializer().isAppVersionChanged()) {
+				copyMissingJSAssets();
+			}
+			String fv = Version.getFullVersion(context);
+			OsmandSettings settings = context.getSettings();
+			boolean versionChanged = !fv.equalsIgnoreCase(settings.PREVIOUS_INSTALLED_VERSION.get());
+			boolean overwrite = versionChanged || forceUpdate;
+			if (overwrite || forceCheck) {
+				File appDataDir = context.getAppPath(null);
+				appDataDir.mkdirs();
+				if (appDataDir.canWrite()) {
+					try {
+						progress.startTask(context.getString(R.string.installing_new_resources), -1);
+						AssetManager assetManager = context.getAssets();
+						boolean firstInstall = !settings.PREVIOUS_INSTALLED_VERSION.isSet();
+						unpackBundledAssets(assetManager, appDataDir, firstInstall || forceUpdate, overwrite, forceCheck);
+						settings.PREVIOUS_INSTALLED_VERSION.set(fv);
+						copyRegionsBoundaries(overwrite);
+						// see Issue #3381
+						//copyPoiTypes();
+						RendererRegistry registry = context.getRendererRegistry();
+						for (String internalStyle : registry.getInternalRenderers().keySet()) {
+							File file = registry.getFileForInternalStyle(internalStyle);
+							if (file.exists() && overwrite) {
+								registry.copyFileForInternalStyle(internalStyle);
+							}
+						}
+					} catch (SQLiteException | IOException | XmlPullParserException e) {
+						log.error(e.getMessage(), e);
+					}
+				}
+			}
+			return Collections.emptyList();
+		}
+
+		@Override
+		protected void onPostExecute(List<String> warnings) {
+			if (listener != null) {
+				listener.checkAssetsFinished(warnings);
+			}
+		}
+	}
+
+	public interface CheckAssetsListener {
+
+		void checkAssetsStarted();
+
+		void checkAssetsFinished(List<String> warnings);
 	}
 
 	private void copyRegionsBoundaries(boolean overwrite) {

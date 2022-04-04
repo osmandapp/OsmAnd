@@ -498,7 +498,6 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 
 	@Override
 	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 		if (requestCode == CAMERA_FOR_PHOTO_PARAMS_REQUEST_CODE && grantResults.length > 0
 				&& permissions.length > 0 && Manifest.permission.CAMERA.equals(permissions[0])) {
 			if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
