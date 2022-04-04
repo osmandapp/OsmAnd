@@ -4548,4 +4548,39 @@
     <string name="rendering_attr_showFitnessTrails_name">מסלולי חיטוב</string>
     <string name="rendering_attr_showRunningRoutes_description">הצגת מסלולי ריצה</string>
     <string name="rendering_attr_showRunningRoutes_name">מסלולי ריצה</string>
+    <string name="routeInfo_horse_scale_description">עיבוד הנתיבים לפי קושי מסלולי הסוסים</string>
+    <string name="rendering_attr_horse_scale_common_name">נפוץ</string>
+    <string name="rendering_attr_horse_scale_demanding_name">תובעני</string>
+    <string name="rendering_attr_horse_scale_difficult_name">קשה</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">מסוכן</string>
+    <string name="rendering_attr_horse_scale_impossible_name">בלתי אפשרי</string>
+    <string name="routing_attr_carriage_restrictions_description">התחשבות במגבלות גישה למרכבים מובלי סוס</string>
+    <string name="rendering_attr_showTramRoutes_name">מסלולי חשמלית</string>
+    <string name="rendering_attr_showTrainRoutes_name">מסלולי רכבת</string>
+    <string name="rendering_attr_showLightRailRoutes_name">מסלולי רכבת קלה</string>
+    <string name="rendering_attr_showMonorailRoutes_name">מסלולי מונורייל</string>
+    <string name="rendering_attr_showFunicularRoutes_name">מסלולי פוניקולר</string>
+    <string name="rendering_attr_showBusRoutes_name">מסלולי אוטובוסים</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">מסלולי טרוליבוס</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">מסלולי מעבורות</string>
+    <string name="map_markers_bar">סרגל סמני מפה</string>
+    <string name="shared_string_visible_widgets">וידג׳טים גלויים</string>
+    <string name="top_widgets_panel">לוח עליון</string>
+    <string name="bottom_widgets_panel">לוח תחתון</string>
+    <string name="shared_string_item">פריט</string>
+    <string name="shared_string_buttons">כפתורים</string>
+    <string name="configure_screen_widgets_descr">נא לבחור צד במסך כדי להוסיף או לסדר וידג׳טים מחדש.</string>
+    <string name="osm_carto_render_descr">בדומה לסגנון OpenStreetMap-קרטו שמשמש את האתר הראשי של OSM</string>
+    <string name="simulation_real_mode_title">הדמיה מציאותית</string>
+    <string name="simulation_constant_mode_desc">ההדמיה תבוצע במהירות נבחרת קבועה.</string>
+    <string name="simulation_constant_mode_title">מהירות קבועה</string>
+    <string name="simulation_real_mode_desc">במקטעים ישרים, המהירות תמוצע לפי המהירות המרבית המותרת.
+\nבצמתים, ההדמיה תאט.
+\nישנה החמרת ענישה על תמרורים ככלל, תמרורי עצור בפרט וכן הלאה.</string>
+    <string name="simulation_preview_mode_title">מצב תצוגה מקדימה מהירה</string>
+    <string name="routeInfo_horse_scale_name">קושי מסלול הסוסים</string>
+    <string name="routing_attr_carriage_restrictions_name">מגבלות עגלה</string>
+    <string name="rendering_attr_horse_scale_critical_name">קריטי</string>
+    <string name="simulation_preview_mode_desc">מהירות ההדמיה שתהיה מרבית במקטעים ישרים ותאט רק בצמתים.</string>
+    <string name="speed_mode">מצב מהירות</string>
 </resources>

@@ -518,7 +518,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	public void onStorageSelected(@NonNull StorageItem storageItem) {
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
-			DataStorageHelper.checkAssets(app);
+			DataStorageHelper.checkAssetsAsync(app);
 			DataStorageHelper.updateDownloadIndexes(app);
 		}
 	}

@@ -35,6 +35,7 @@ import net.osmand.aidlapi.copyfile.CopyFileParams;
 import net.osmand.aidlapi.customization.AProfile;
 import net.osmand.aidlapi.customization.CustomPluginParams;
 import net.osmand.aidlapi.customization.CustomizationInfoParams;
+import net.osmand.aidlapi.customization.PreferenceParams;
 import net.osmand.aidlapi.customization.MapMarginsParams;
 import net.osmand.aidlapi.customization.OsmandSettingsInfoParams;
 import net.osmand.aidlapi.customization.OsmandSettingsParams;
@@ -1488,6 +1489,28 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 			try {
 				OsmandAidlApi api = getApi("reloadIndexes");
 				return api != null && api.reloadIndexes();
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean setPreference(PreferenceParams params) {
+			try {
+				OsmandAidlApi api = getApi("setPreference");
+				return api != null && api.setPreference(params);
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean getPreference(PreferenceParams params) {
+			try {
+				OsmandAidlApi api = getApi("getPreference");
+				return api != null && api.getPreference(params);
 			} catch (Exception e) {
 				handleException(e);
 				return false;

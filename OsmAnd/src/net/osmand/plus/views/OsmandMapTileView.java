@@ -1195,10 +1195,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return true;
 	}
 
-	public void setMapRender(MapRendererView mapRenderer) {
+	public void setMapRenderer(@Nullable MapRendererView mapRenderer) {
 		this.mapRenderer = mapRenderer;
 	}
 
+	@Nullable
 	public MapRendererView getMapRenderer() {
 		return mapRenderer;
 	}

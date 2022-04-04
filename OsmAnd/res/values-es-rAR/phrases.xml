@@ -4312,4 +4312,20 @@
     <string name="poi_payment_mastercard_contactless_yes">MasterCard (sin contacto)</string>
     <string name="poi_payment_american_express_contactless_yes">American Express (AMEX, sin contacto)</string>
     <string name="poi_payment_mastercard_contactless_no">No se acepta MasterCard (sin contacto)</string>
+    <string name="poi_wool">Venta de lana</string>
+    <string name="poi_laundry_service_no">No</string>
+    <string name="poi_dry_cleaning_no">No</string>
+    <string name="poi_dry_cleaning_yes">Sí</string>
+    <string name="poi_termite_mound">Montículo de termitas;Hormiguero de termitas</string>
+    <string name="poi_anthill">Hormiguero</string>
+    <string name="poi_board_type_wildlife">Fauna silvestre</string>
+    <string name="poi_food_no">Comida: no</string>
+    <string name="poi_rice">Arrocería;Venta de arróz</string>
+    <string name="poi_dry_cleaning_filter">Tintorería</string>
+    <string name="poi_birds_nest">Nido de pájaros</string>
+    <string name="poi_dovecote">Palomar</string>
+    <string name="poi_laundry_service_filter">Servicio de lavandería</string>
+    <string name="poi_board_type_nature">Naturaleza</string>
+    <string name="poi_fish_pass">Paso de peces</string>
+    <string name="poi_laundry_service_yes">Sí</string>
 </resources>

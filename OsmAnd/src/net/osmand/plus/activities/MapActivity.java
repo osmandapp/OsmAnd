@@ -130,7 +130,6 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.datastorage.DataStorageFragment;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
@@ -488,7 +487,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				androidAutoPlaceholder.setVisibility(View.GONE);
 			}
 			getMapViewTrackingUtilities().setMapView(mapView);
-			mapView.setMapRender(atlasMapRendererView);
+			mapView.setMapRenderer(atlasMapRendererView);
 			OsmAndMapSurfaceView surf = findViewById(R.id.MapView);
 			surf.setVisibility(View.GONE);
 		} else {
@@ -1673,8 +1672,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				mcl.onRequestPermissionsResult(requestCode, permissions, grantResults);
 			}
 
-			if ((requestCode == DataStorageFragment.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
-					|| requestCode == DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE)
+			if (requestCode == DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
 					&& permissions.length > 0
 					&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
 				permissionAsked = true;

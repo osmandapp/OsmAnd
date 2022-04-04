@@ -527,19 +527,31 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	public int getStartPointIndex() {
 		return startPointIndex;
 	}
-	
+
 	public int getEndPointIndex() {
 		return endPointIndex;
 	}
-	
+
 	public LatLon getPoint(int i) {
 		return convertPoint(object, i);
 	}
-	
+
+	public boolean isTrafficLight(int i) {
+		int[] pointTypes = object.getPointTypes(i);
+		if (pointTypes != null) {
+			for (int pointType : pointTypes) {
+				if (object.region.routeEncodingRules.get(pointType).getValue().startsWith("traffic_signals")) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	public LatLon getEndPoint() {
 		return convertPoint(object, endPointIndex);
 	}
-	
+
 	public boolean isForwardDirection() {
 		return endPointIndex - startPointIndex > 0;
 	}
