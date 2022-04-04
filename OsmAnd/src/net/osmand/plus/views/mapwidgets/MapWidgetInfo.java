@@ -58,29 +58,6 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 		this.message = message;
 		this.priority = priority;
 		this.widgetPanel = widgetPanel;
-
-		if (widgetPanel == WidgetsPanel.RIGHT) {
-			switch (key) {
-				case WIDGET_INTERMEDIATE_DISTANCE:
-				case WIDGET_INTERMEDIATE_TIME:
-				case WIDGET_DISTANCE:
-				case WIDGET_TIME:
-					pageIndex = 0;
-					break;
-				case WIDGET_MARKER_1:
-				case WIDGET_BEARING:
-				case WIDGET_MARKER_2:
-				case WIDGET_SPEED:
-				case WIDGET_MAX_SPEED:
-				case WIDGET_ALTITUDE:
-				case WIDGET_GPS_INFO:
-					pageIndex = 1;
-					break;
-				default:
-					pageIndex = 2;
-					break;
-			}
-		}
 	}
 
 	@Nullable
