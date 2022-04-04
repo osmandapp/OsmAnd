@@ -95,7 +95,6 @@
     <string name="save_track_to_gpx_globally_descr">Ahuĺny zapis miescaznachodžannia ŭ GPX-fajl moža być ukliučany abo vykliučany z dapamohaj knopki zapisu GPX na ekranie z mapaj.</string>
     <string name="save_current_track_descr">Zachavać dziejny slied zaraz ža jak GPX-fajl.</string>
     <string name="save_current_track">Zachavać dziejny slied</string>
-    <string name="save_track_to_gpx_descrp">GPX-trek aŭtamatyčna zachavany ŭ kataloh track padčas navihacyi.</string>
     <string name="save_track_interval_globally">Іntervał zapіsu</string>
     <string name="save_track_interval">Іntervał zachoŭvańnia padčas navіhacyі</string>
     <string name="save_track_interval_descr">Paznačyć interval zachoŭvannia punktaŭ sliedu padčas navihacyi.</string>
@@ -2667,7 +2666,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="ski_map_render_descr">Styĺ dlia katannia na lyžach. Asnoŭnyja mahčymasci: admalioŭka tras, padjomnikaŭ i inšych lyžnych abjektaŭ zručnym sposabam. Mienš druhasnych abjektaŭ mapy, što adciahvajuć uvahu.</string>
     <string name="light_rs_render_descr">Prosty i kantrastny styĺ dlia aŭtamabiĺnaj navihacyi. Piaščotny dlia vačej načny režym. Asnoŭnyja mahčymasci: konturnyja linii, kantrastnyja pamarančavyja darohi, mienš druhasnych abjektaŭ, što adciahvajuć uvahu.</string>
     <string name="topo_render_descr">Kantrastny styĺ, pryznačany ŭ pieršuju čarhu dlia špacyru, pachodu i katannia na rovary. Dobraja čytaĺnasć pry skladanym vonkavym asviatlienni. Asnoŭnyja mahčamasci: kantrastnyja darohi i pryrodnyja abjekty, roznyja typy maršrutaŭ, konturnyja linii z pašyranymi naladami, boĺš padrabiaznaja infarmacyja na adpaviednych uzroŭniach maštabavannia, čym u ahadanym styli. Opcyja celasnasci pavierchni dazvaliaje adroznivać darohi z roznaj jakasciu pavierchni. Biez načnoha režymu.</string>
-    <string name="mapnik_render_descr">Stary ahadany styĺ admalioŭki Mapnik. Asnoŭnyja mahčymasci: koliery padobnyja na styĺ Mapnik.</string>
     <string name="touring_view_render_descr">Vysokadetalizavany styĺ dlia turystyčnach met. Ukliučaje ŭ siabie ŭsie paramietry kanfihuracyi ahadanaha styliu i, akramia taho: pakazvaje, jak maha boĺš detaliaŭ, nakoĺki heta mahčyma, u pryvatnasci, usie darohi, šliachi i inšyja sposaby pieramiaščennia. Jasnaje vizuaĺnaje adrozniennie pamiž roznymi typami daroh, jakoje nahadvaje mnohija turystyčnyja atlasy. Vysokakantrastnaja kaliarovaja schiema dlia vuličnaha vykarystannia z dzionnym i načnym režymam.</string>
     <string name="default_render_descr">Styĺ ahuĺnaha pryznačennia. Sproščanaja čystaja admalioŭka ŭ ščyĺnanasielienych haradach. Asnoŭnyja mahčymasci: konturnyja linii, jakać pavierchni, abmiežavanni dostupu, darožnyja ščyty, admalioŭka šliachoŭ pa škalie SAC, abjekty vodnych splavaŭ.</string>
     <string name="open_wikipedia_link_online">Adkryć Vikipiedyja-spasylku anlajn</string>

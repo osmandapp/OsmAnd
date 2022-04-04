@@ -84,7 +84,7 @@ public class MapActions {
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 
 		ApplicationMode mode = appMode != null ? appMode : getRouteMode();
-		//app.getSettings().setApplicationMode(mode, false);
+		app.getSettings().setApplicationMode(mode, false);
 		app.getRoutingHelper().setAppMode(mode);
 		initVoiceCommandPlayer(mode, showMenu);
 		// save application mode controls

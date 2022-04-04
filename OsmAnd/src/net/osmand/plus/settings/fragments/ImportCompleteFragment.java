@@ -22,17 +22,16 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.myplaces.ui.FavoritesActivity;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.routepreparationmenu.AvoidRoadsBottomSheetDialogFragment;
@@ -43,6 +42,9 @@ import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.settings.fragments.ImportedSettingsItemsAdapter.OnItemClickListener;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +57,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 	private static final String KEY_NEED_RESTART = "key_need_restart";
 
 	private OsmandApplication app;
-	private List<SettingsItem> settingsItems = new ArrayList<>();
+	private final List<SettingsItem> settingsItems = new ArrayList<>();
 
 	private RecyclerView recyclerView;
 	private String sourceName;
@@ -272,22 +274,17 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		AndroidUiHelper.setVisibility(View.VISIBLE, buttonsDivider, buttonContainer);
 
 		TextView btnRestart = root.findViewById(R.id.button_restart);
-		btnRestart.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentActivity activity = getActivity();
-				if (activity instanceof MapActivity) {
-					MapActivity.doRestart(activity);
-				} else {
-					android.os.Process.killProcess(android.os.Process.myPid());
-				}
+		btnRestart.setOnClickListener(v -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				RestartActivity.doRestartSilent(activity);
 			}
 		});
 	}
 
 	@Override
 	public int getStatusBarColorId() {
-		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
+		return ColorUtilities.getStatusBarColorId(nightMode);
 	}
 
 	public void setSourceName(String sourceName) {

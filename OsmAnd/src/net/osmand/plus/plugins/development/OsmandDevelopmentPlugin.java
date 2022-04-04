@@ -1,33 +1,37 @@
 package net.osmand.plus.plugins.development;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_DEV;
-
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.ContributionVersionActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.openplacereviews.OpenPlaceReviewsPlugin;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
-import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_DEV;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
+
+	public static final String WIDGET_FPS = "fps";
 
 	public OsmandDevelopmentPlugin(OsmandApplication app) {
 		super(app);
@@ -64,18 +68,14 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	@Override
 	public void registerOptionsMenuItems(final MapActivity mapActivity, ContextMenuAdapter helper) {
 		if (Version.isDeveloperVersion(mapActivity.getMyApplication())) {
-			helper.addItem(new ContextMenuItem.ItemBuilder()
-					.setId(DRAWER_BUILDS_ID)
+			helper.addItem(new ContextMenuItem(DRAWER_BUILDS_ID)
 					.setTitleId(R.string.version_settings, mapActivity)
 					.setIcon(R.drawable.ic_action_apk)
-					.setListener(new ContextMenuAdapter.ItemClickListener() {
-						@Override
-						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
-							final Intent mapIntent = new Intent(mapActivity, ContributionVersionActivity.class);
-							mapActivity.startActivityForResult(mapIntent, 0);
-							return true;
-						}
-					}).createItem());
+					.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
+						final Intent mapIntent = new Intent(mapActivity, ContributionVersionActivity.class);
+						mapActivity.startActivityForResult(mapIntent, 0);
+						return true;
+					}));
 		}
 
 	}
@@ -95,36 +95,31 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		}
 	}
 
-	public static class FPSTextInfoWidget extends TextInfoWidget {
+	public static class FPSTextInfoWidget extends RightTextInfoWidget {
 
-		private OsmandMapTileView mv;
+		private final OsmandMapTileView mapView;
 
-		public FPSTextInfoWidget(OsmandMapTileView mv, Activity activity) {
-			super(activity);
-			this.mv = mv;
+		public FPSTextInfoWidget(@NonNull MapActivity mapActivity) {
+			super(mapActivity);
+			this.mapView = mapActivity.getMapView();
 		}
 
 		@Override
-		public boolean updateInfo(DrawSettings drawSettings) {
-			if (!mv.isMeasureFPS()) {
-				mv.setMeasureFPS(true);
+		public void updateInfo(@Nullable DrawSettings drawSettings) {
+			if (!mapView.isMeasureFPS()) {
+				mapView.setMeasureFPS(true);
 			}
-			setText("", Integer.toString((int) mv.getFPS()) + "/"
-					+ Integer.toString((int) mv.getSecondaryFPS())
-					+ " FPS");
-			return true;
+			setText("", (int) mapView.getFPS() + "/" + (int) mapView.getSecondaryFPS() + " FPS");
 		}
 	}
 
-
-	private void registerWidget(@NonNull MapActivity activity) {
-		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
-		final OsmandMapTileView mv = activity.getMapView();
+	private void registerWidget(@NonNull MapActivity mapActivity) {
+		MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null && mapInfoLayer.getSideWidget(FPSTextInfoWidget.class) == null) {
-			FPSTextInfoWidget fps = new FPSTextInfoWidget(mv, activity);
+			FPSTextInfoWidget fps = new FPSTextInfoWidget(mapActivity);
 			fps.setIcons(R.drawable.widget_fps_day, R.drawable.widget_fps_night);
-			mapInfoLayer.registerSideWidget(fps, R.drawable.ic_action_fps,
-					R.string.map_widget_fps_info, "fps", false, 50);
+			mapInfoLayer.registerWidget(WIDGET_FPS, fps, R.drawable.ic_action_fps,
+					R.string.map_widget_fps_info, WidgetsPanel.RIGHT);
 			mapInfoLayer.recreateControls();
 		}
 	}
@@ -151,9 +146,15 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 	@Override
 	public void disable(OsmandApplication app) {
-		if (app.getSettings().OSM_USE_DEV_URL.get()) {
-			app.getSettings().OSM_USE_DEV_URL.set(false);
+		OsmEditingPlugin osmPlugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		if (osmPlugin != null && osmPlugin.OSM_USE_DEV_URL.get()) {
+			osmPlugin.OSM_USE_DEV_URL.set(false);
 			app.getOsmOAuthHelper().resetAuthorization();
+		}
+		OpenPlaceReviewsPlugin oprPlugin = OsmandPlugin.getPlugin(OpenPlaceReviewsPlugin.class);
+		if (oprPlugin != null && oprPlugin.OPR_USE_DEV_URL.get()) {
+			oprPlugin.OPR_USE_DEV_URL.set(false);
+			app.getOprAuthHelper().resetAuthorization();
 		}
 		super.disable(app);
 	}

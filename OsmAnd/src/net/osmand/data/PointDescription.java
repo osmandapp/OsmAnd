@@ -30,7 +30,7 @@ public class PointDescription {
 	public static final String POINT_TYPE_FAVORITE = "favorite";
 	public static final String POINT_TYPE_WPT = "wpt";
 	public static final String POINT_TYPE_GPX = "gpx";
-	public static final String POINT_TYPE_RTE = "rte";
+	public static final String POINT_TYPE_ROUTE = "route";
 	public static final String POINT_TYPE_POI = "poi";
 	public static final String POINT_TYPE_ADDRESS = "address";
 	public static final String POINT_TYPE_OSM_NOTE= "osm_note";
@@ -46,7 +46,6 @@ public class PointDescription {
 	public static final String POINT_TYPE_MAP_MARKER = "map_marker";
 	public static final String POINT_TYPE_OSM_BUG = "bug";
 	public static final String POINT_TYPE_WORLD_REGION = "world_region";
-	public static final String POINT_TYPE_GPX_ITEM = "gpx_item";
 	public static final String POINT_TYPE_GPX_FILE = "gpx_file";
 	public static final String POINT_TYPE_WORLD_REGION_SHOW_ON_MAP = "world_region_show_on_map";
 	public static final String POINT_TYPE_BLOCKED_ROAD = "blocked_road";
@@ -55,6 +54,7 @@ public class PointDescription {
 	public static final String POINT_TYPE_MAPILLARY_IMAGE = "mapillary_image";
 	public static final String POINT_TYPE_POI_TYPE = "poi_type";
 	public static final String POINT_TYPE_CUSTOM_POI_FILTER = "custom_poi_filter";
+
 	public static final int LOCATION_URL = 200;
 	public static final int LOCATION_LIST_HEADER = 201;
 
@@ -198,10 +198,7 @@ public class PointDescription {
 		results.put(OsmAndFormatter.SWISS_GRID_FORMAT, swissGrid);
 		results.put(OsmAndFormatter.SWISS_GRID_PLUS_FORMAT, swissGridPlus);
 
-		int zoom = 17;
-		if (ctx.getMapView() != null) {
-			zoom = ctx.getMapView().getZoom();
-		}
+		int zoom = ctx.getMapView().getZoom();
 		final String httpUrl = "https://osmand.net/go?lat=" + (lat) + "&lon=" + (lon) + "&z=" + zoom;
 		results.put(LOCATION_URL, httpUrl);
 
@@ -253,10 +250,6 @@ public class PointDescription {
 	public boolean isWpt() {
 		return POINT_TYPE_WPT.equals(type);
 	}
-
-	public boolean isRte() {
-		return POINT_TYPE_RTE.equals(type);
-	}
 	
 	public boolean isPoi() {
 		return POINT_TYPE_POI.equals(type);
@@ -306,6 +299,10 @@ public class PointDescription {
 		return POINT_TYPE_GPX.equals(type);
 	}
 
+	public boolean isRoutePoint() {
+		return POINT_TYPE_ROUTE.equals(type);
+	}
+
 	public boolean isGpxFile() {
 		return POINT_TYPE_GPX_FILE.equals(type);
 	}
@@ -317,8 +314,8 @@ public class PointDescription {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		result = prime * result + ((typeName == null) ? 0 : typeName.hashCode());
-		result = prime * result + ((lat == 0) ? 0 : new Double(lat).hashCode());
-		result = prime * result + ((lon == 0) ? 0 : new Double(lon).hashCode());
+		result = prime * result + ((lat == 0) ? 0 : Double.valueOf(lat).hashCode());
+		result = prime * result + ((lon == 0) ? 0 : Double.valueOf(lon).hashCode());
 		return result;
 	}
 
@@ -343,7 +340,6 @@ public class PointDescription {
 	public static String getSimpleName(LocationPoint o, Context ctx) {
 		PointDescription pd = o.getPointDescription(ctx);
 		return pd.getSimpleName(ctx, true);
-//		return o.getPointDescription(ctx).getFullPlainName(ctx, o.getLatitude(), o.getLongitude());
 	}
 
 	public boolean isSearchingAddress(Context ctx) {

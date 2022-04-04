@@ -12,6 +12,8 @@ import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -214,10 +216,14 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 			return true;
 		} else if (SIMULATE_INITIAL_STARTUP.equals(prefId)) {
 			app.getAppInitializer().resetFirstTimeRun();
-			settings.FIRST_MAP_IS_DOWNLOADED.set(false);
-			settings.MAPILLARY_FIRST_DIALOG_SHOWN.set(false);
-			settings.WEBGL_SUPPORTED.set(true);
-			settings.WIKI_ARTICLE_SHOW_IMAGES_ASKED.set(false);
+			settings.FIRST_MAP_IS_DOWNLOADED.resetToDefault();
+			settings.WEBGL_SUPPORTED.resetToDefault();
+			settings.WIKI_ARTICLE_SHOW_IMAGES_ASKED.resetToDefault();
+
+			MapillaryPlugin mapillaryPlugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
+			if (mapillaryPlugin != null) {
+				mapillaryPlugin.MAPILLARY_FIRST_DIALOG_SHOWN.resetToDefault();
+			}
 
 			app.showToastMessage(R.string.shared_string_ok);
 			return true;

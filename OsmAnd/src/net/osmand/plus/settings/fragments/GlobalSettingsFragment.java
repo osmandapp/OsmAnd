@@ -16,7 +16,9 @@ import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.dialogs.ConfigureMapUtils;
+import net.osmand.plus.dialogs.LocationSourceBottomSheet;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment.OnSendAnalyticsPrefsUpdate;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
@@ -26,6 +28,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.DataStorageHelper;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
+import net.osmand.plus.settings.enums.LocationSource;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
@@ -49,6 +52,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		setupDialogsAndNotificationsPref();
 		setupHistoryPref();
 		setupEnableProxyPref();
+		setupLocationSourcePref();
 		setupUninstallSpeedCamerasPref();
 	}
 
@@ -121,10 +125,12 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 			OsmandApplication app = getMyApplication();
 			if (app != null && activity != null) {
 				app.getLocaleHelper().checkPreferredLocale();
-				app.restartApp(activity);
+				RestartActivity.doRestart(activity);
 			}
 		} else if (prefId.equals(settings.SPEED_CAMERAS_UNINSTALLED.getId())) {
 			setupUninstallSpeedCamerasPref();
+		} else if (prefId.equals(settings.LOCATION_SOURCE.getId())) {
+			setupLocationSourcePref();
 		}
 	}
 
@@ -143,9 +149,14 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 						getActivity(), this, getSelectedAppMode(), defaultModeKey, false);
 			}
 		} else if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(prefId) && !settings.SPEED_CAMERAS_UNINSTALLED.get()) {
-			FragmentManager fm = getFragmentManager();
-			if (fm != null) {
-				SpeedCamerasBottomSheet.showInstance(fm, this);
+			FragmentManager manager = getFragmentManager();
+			if (manager != null) {
+				SpeedCamerasBottomSheet.showInstance(manager, this);
+			}
+		} else if (prefId.equals(settings.LOCATION_SOURCE.getId())) {
+			FragmentManager manager = getFragmentManager();
+			if (manager != null) {
+				LocationSourceBottomSheet.showInstance(manager, this);
 			}
 		}
 		return super.onPreferenceClick(preference);
@@ -238,6 +249,14 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 			summary = getString(R.string.shared_string_disabled);
 		}
 		dialogsAndNotifications.setSummary(summary);
+	}
+
+	private void setupLocationSourcePref() {
+		Preference preference = (Preference) findPreference(settings.LOCATION_SOURCE.getId());
+		preference.setIcon(getContentIcon(R.drawable.ic_action_device_location));
+
+		LocationSource source = settings.LOCATION_SOURCE.get();
+		preference.setSummary(source.nameId);
 	}
 
 	private void setupEnableProxyPref() {

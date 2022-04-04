@@ -271,7 +271,6 @@
     <string name="show_full_description">முழு விளக்கத்தையும் காண்பி</string>
     <string name="nautical_render_descr">கடல் வழிசெலுத்தல் பாணி. முக்கிய அம்சங்கள்: கலங்கள், கலங்கரை விளக்கங்கள், ஆறுகள், கடல் பாதைகள் மற்றும் குறிப்புகள், துறைமுகங்கள், கடற்கரை சேவைகள், ஆழம் வரையறைகளை.</string>
     <string name="ski_map_render_descr">பனிச்சறுக்கு பாணி. முக்கிய அம்சங்கள்: ஒரு வசதியான முறையில் பிஸ்டெஸ், ஸ்கை-லிஃப்ட் மற்றும் இதர ஸ்கை அம்சங்களை வழங்குகிறது. குறைவான கவனத்தை திசைதிருப்பல்.</string>
-    <string name="mapnik_render_descr">பழைய \'Mapnik\' பாணி இயல்புநிலை ஒழுங்கமைவு பாணி. முக்கிய அம்சங்கள்: நிறங்கள் \'Mapnik\' பாணியைப் போலவே இருக்கின்றன.</string>
     <string name="in_app_purchase">செயலியுள் வாங்குதல்</string>
     <string name="in_app_purchase_desc">ஒரு முறை பணம் செலுத்துதல்</string>
     <string name="in_app_purchase_desc_ex">ஒருமுறை வாங்கிய பிறகு, அது உங்களுக்கு நிரந்தரமாக கிடைக்கும்.</string>
@@ -605,7 +604,6 @@
     <string name="save_current_track_descr">தற்போதைய பாதையை GPX கோப்பாக சேமி.</string>
     <string name="save_current_track">தற்போதைய பாதையை சேமிக்கவும்</string>
     <string name="save_track_to_gpx">வழிசெலுத்தலின் போது தானாக பதிவுசெய்த பாதையில்</string>
-    <string name="save_track_to_gpx_descrp">ஜி.பி.எக்ஸ் பாதையில் வழிசெலுத்தலின் போது தடங்கள் கோப்புறையில் தானாக சேமிக்கப்படும்.</string>
     <string name="save_track_interval_globally">பதிவு இடைவெளி</string>
     <string name="save_track_interval">வழிசெலுத்தலின் போது உள்நுழைவு இடைவெளி
 \n</string>

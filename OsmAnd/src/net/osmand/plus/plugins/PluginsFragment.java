@@ -32,6 +32,7 @@ import net.osmand.aidl.ConnectedApp;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.plugins.PluginInstalledBottomSheetDialog.PluginStateListener;
@@ -61,7 +62,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 
 	@Override
 	public int getStatusBarColorId() {
-		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
+		return ColorUtilities.getStatusBarColorId(nightMode);
 	}
 
 	@Override

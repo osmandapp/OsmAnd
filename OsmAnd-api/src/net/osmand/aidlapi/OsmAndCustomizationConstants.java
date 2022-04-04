@@ -29,6 +29,7 @@ public interface OsmAndCustomizationConstants {
 	String DRAWER_HELP_ID = DRAWER_ITEM_ID_SCHEME + "help";
 	String DRAWER_BUILDS_ID = DRAWER_ITEM_ID_SCHEME + "builds";
 	String DRAWER_DIVIDER_ID = DRAWER_ITEM_ID_SCHEME + "divider";
+	String DRAWER_OSMAND_VERSION_ID = DRAWER_ITEM_ID_SCHEME + "osmand_version";
 
 	// Configure Map:
 	String CONFIGURE_MAP_ITEM_ID_SCHEME = "map.configure.";
@@ -48,13 +49,15 @@ public interface OsmAndCustomizationConstants {
 	String MAP_MARKERS_ID = SHOW_ITEMS_ID_SCHEME + "map_markers";
 	String MAP_SOURCE_ID = SHOW_ITEMS_ID_SCHEME + "map_source";
 	String RECORDING_LAYER = SHOW_ITEMS_ID_SCHEME + "recording_layer";
+	String DEPTH_CONTOURS = SHOW_ITEMS_ID_SCHEME + "depth_contours";
 	String MAPILLARY = SHOW_ITEMS_ID_SCHEME + "mapillary";
 	String OSM_NOTES = SHOW_ITEMS_ID_SCHEME + "osm_notes";
 	String OSM_EDITS = SHOW_ITEMS_ID_SCHEME + "osm_edits";
+	String OPEN_STREET_MAP = SHOW_ITEMS_ID_SCHEME + "open_street_map";
 	String OVERLAY_MAP = SHOW_ITEMS_ID_SCHEME + "overlay_map";
 	String UNDERLAY_MAP = SHOW_ITEMS_ID_SCHEME + "underlay_map";
 	String CONTOUR_LINES = SHOW_ITEMS_ID_SCHEME + "contour_lines";
-	String TERRAIN = SHOW_ITEMS_ID_SCHEME + "terrain";
+	String TERRAIN_ID = SHOW_ITEMS_ID_SCHEME + "terrain";
 
 	String MAP_RENDERING_CATEGORY_ID = RENDERING_ITEMS_ID_SCHEME + "category";
 	String MAP_STYLE_ID = RENDERING_ITEMS_ID_SCHEME + "map_style";
@@ -148,6 +151,7 @@ public interface OsmAndCustomizationConstants {
 
 	//Navigation Options:
 	String NAVIGATION_OPTIONS_ID = "navigation.options.";
+	String NAVIGATION_OPTIONS_MENU_ID = NAVIGATION_OPTIONS_ID + "options_menu";
 	String NAVIGATION_SOUND_ID = NAVIGATION_OPTIONS_ID + "mute_sound";
 	String NAVIGATION_ROUTE_SIMULATION_ID = NAVIGATION_OPTIONS_ID + "route_simulation";
 	String NAVIGATION_TIME_CONDITIONAL_ID = NAVIGATION_OPTIONS_ID + "time_conditional";
@@ -163,9 +167,20 @@ public interface OsmAndCustomizationConstants {
 	String NAVIGATION_LOCAL_ROUTING_GROUP_ID = NAVIGATION_OPTIONS_ID + "local_routing_group";
 	String NAVIGATION_LOCAL_ROUTING_ID = NAVIGATION_OPTIONS_ID + "local_routing";
 	String NAVIGATION_DIVIDER_ID = NAVIGATION_OPTIONS_ID + "divider";
+	String NAVIGATION_APP_MODES_OPTIONS_ID = NAVIGATION_OPTIONS_ID + "app_modes_options";
+	String NAVIGATION_ROUTE_DETAILS_OPTIONS_ID = NAVIGATION_OPTIONS_ID + "route_details_options";
 
 	//Dialogs IDs:
 	String FRAGMENT_ID = "fragment.";
 	String FRAGMENT_RATE_US_ID = FRAGMENT_ID + "rate_us";
 	String FRAGMENT_CRASH_ID = FRAGMENT_ID + "crash";
+
+	//Map Context Menu rows:
+	String MAP_CONTEXT_MENU_ROWS = "context.menu.rows.";
+	String CONTEXT_MENU_LINKS_ID = MAP_CONTEXT_MENU_ROWS + "links";
+	String CONTEXT_MENU_PHONE_ID = MAP_CONTEXT_MENU_ROWS + "phone";
+	String CONTEXT_MENU_SEARCH_MORE_ID = MAP_CONTEXT_MENU_ROWS + "search_more";
+	String CONTEXT_MENU_SHOW_ON_MAP_ID = MAP_CONTEXT_MENU_ROWS + "show_on_map";
+	String CONTEXT_MENU_AVOID_ROADS_ID = MAP_CONTEXT_MENU_ROWS + "avoid_roads";
+	String CONTEXT_MENU_ONLINE_PHOTOS_ID = MAP_CONTEXT_MENU_ROWS + "online_photos";
 }

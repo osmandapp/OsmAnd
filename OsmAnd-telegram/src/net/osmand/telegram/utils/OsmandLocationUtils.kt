@@ -97,12 +97,12 @@ object OsmandLocationUtils {
 		return res
 	}
 
-	fun getSenderMessageId(message: TdApi.Message): Int {
+	fun getSenderMessageId(message: TdApi.Message): Long {
 		val forwardInfo = message.forwardInfo
 		return if (forwardInfo != null && forwardInfo.origin is TdApi.MessageForwardOriginUser) {
 			(forwardInfo.origin as TdApi.MessageForwardOriginUser).senderUserId
 		} else {
-			val sender = message.sender
+			val sender = message.senderId
 			if (sender is TdApi.MessageSenderUser) {
 				sender.userId
 			} else {
@@ -422,7 +422,7 @@ object OsmandLocationUtils {
 
 		var previousTime: Long = -1
 		var previousChatId: Long = -1
-		var previousUserId = -1
+		var previousUserId: Long = -1
 		var previousDeviceName = ""
 		var segment: GPXUtilities.TrkSegment? = null
 		var track: GPXUtilities.Track? = null
@@ -495,7 +495,7 @@ object OsmandLocationUtils {
 		}
 	}
 
-	fun getGpxFileNameForUserId(app: TelegramApplication, userId: Int, chatId: Long, time: Long): String {
+	fun getGpxFileNameForUserId(app: TelegramApplication, userId: Long, chatId: Long, time: Long): String {
 		var userName = userId.toString()
 		val user = app.telegramHelper.getUser(userId)
 		if (user != null) {

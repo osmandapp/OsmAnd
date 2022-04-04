@@ -81,6 +81,7 @@ import net.osmand.aidlapi.customization.MapMarginsParams;
 import net.osmand.aidlapi.customization.CustomPluginParams;
 import net.osmand.aidlapi.customization.SelectProfileParams;
 import net.osmand.aidlapi.customization.AProfile;
+import net.osmand.aidlapi.customization.PreferenceParams;
 
 import net.osmand.aidlapi.gpx.AGpxFile;
 import net.osmand.aidlapi.gpx.AGpxFileDetails;
@@ -111,8 +112,11 @@ import net.osmand.aidlapi.lock.SetLockStateParams;
 import net.osmand.aidlapi.events.AKeyEventsParams;
 
 import net.osmand.aidlapi.info.AppInfoParams;
+import net.osmand.aidlapi.info.GetTextParams;
 
 import net.osmand.aidlapi.profile.ExportProfileParams;
+
+import net.osmand.aidlapi.exit.ExitAppParams;
 
 // NOTE: Add new methods at the end of file!!!
 
@@ -904,4 +908,15 @@ interface IOsmAndAidlInterface {
     boolean removeRoadBlock(in RemoveBlockedRoadParams params);
 
     boolean setLocation(in SetLocationParams params);
+
+    boolean exitApp(in ExitAppParams params);
+
+    boolean getText(inout GetTextParams params);
+
+    boolean reloadIndexes();
+
+    boolean setPreference(in PreferenceParams params);
+
+    boolean getPreference(inout PreferenceParams params);
+
 }

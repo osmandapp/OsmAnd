@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.osmedit.menu;
 
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
+
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 
@@ -10,11 +12,11 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
@@ -24,19 +26,17 @@ import net.osmand.plus.plugins.osmedit.dialogs.SendOsmNoteBottomSheetFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.SendPoiBottomSheetFragment;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthAuthorizationAdapter;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
 import java.util.Map;
 
-import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
-
 public class EditPOIMenuController extends MenuController {
 
+	private final OsmEditingPlugin plugin;
+
 	private OsmPoint osmPoint;
-	private OsmEditingPlugin plugin;
-	private String categoryDescr;
-	private String actionStr;
+	private final String categoryDescr;
+	private final String actionStr;
 
 	public EditPOIMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull OsmPoint osmPoint) {
 		super(new EditPOIMenuBuilder(mapActivity, osmPoint), pointDescription, mapActivity);
@@ -53,11 +53,10 @@ public class EditPOIMenuController extends MenuController {
 				if (plugin != null && activity != null) {
 					OsmPoint point = getOsmPoint();
 					OsmandApplication app = activity.getMyApplication();
-					OsmandSettings settings = app.getSettings();
 					OsmOAuthAuthorizationAdapter client = new OsmOAuthAuthorizationAdapter(app);
 					boolean isLogged = client.isValidToken()
-							|| !Algorithms.isEmpty(settings.OSM_USER_NAME_OR_EMAIL.get())
-							&& !Algorithms.isEmpty(settings.OSM_USER_PASSWORD.get());
+							|| !Algorithms.isEmpty(plugin.OSM_USER_NAME_OR_EMAIL.get())
+							&& !Algorithms.isEmpty(plugin.OSM_USER_PASSWORD.get());
 
 					FragmentManager fragmentManager = activity.getSupportFragmentManager();
 					if (point instanceof OpenstreetmapPoint) {

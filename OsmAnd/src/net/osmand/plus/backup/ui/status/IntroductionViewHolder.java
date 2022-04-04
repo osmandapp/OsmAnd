@@ -93,8 +93,7 @@ public class IntroductionViewHolder extends RecyclerView.ViewHolder {
 				fragment.removeDialogType();
 			});
 			AndroidUiHelper.updateVisibility(backupButton, true);
-			UiUtilities.setupDialogButton(nightMode, backupButton, DialogButtonType.SECONDARY, R.string.backup_setup);
-			AndroidUtils.setBackground(activity, backupButton, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
+			UiUtilities.setupDialogButton(nightMode, backupButton, DialogButtonType.SECONDARY_ACTIVE, R.string.backup_setup);
 		} else {
 			AndroidUiHelper.updateVisibility(backupButton, false);
 		}

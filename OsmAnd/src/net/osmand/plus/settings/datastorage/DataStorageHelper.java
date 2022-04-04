@@ -1,25 +1,5 @@
 package net.osmand.plus.settings.datastorage;
 
-import android.os.Environment;
-
-import net.osmand.IndexConstants;
-import net.osmand.data.ValueHolder;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.datastorage.item.DirectoryItem;
-import net.osmand.plus.settings.datastorage.item.DirectoryItem.CheckingType;
-import net.osmand.plus.settings.datastorage.item.MemoryItem;
-import net.osmand.plus.settings.datastorage.item.StorageItem;
-import net.osmand.plus.settings.datastorage.task.RefreshUsedMemoryTask;
-
-import java.io.File;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-
 import static net.osmand.IndexConstants.AV_INDEX_DIR;
 import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
@@ -31,6 +11,34 @@ import static net.osmand.IndexConstants.WIKIVOYAGE_INDEX_DIR;
 import static net.osmand.IndexConstants.WIKI_INDEX_DIR;
 import static net.osmand.plus.settings.datastorage.item.DirectoryItem.CheckingType.EXTENSIONS;
 import static net.osmand.plus.settings.datastorage.item.DirectoryItem.CheckingType.PREFIX;
+
+import android.app.ProgressDialog;
+import android.os.Environment;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+
+import net.osmand.IProgress;
+import net.osmand.IndexConstants;
+import net.osmand.data.ValueHolder;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.ProgressImplementation;
+import net.osmand.plus.R;
+import net.osmand.plus.resources.ResourceManager.ReloadIndexesListener;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.datastorage.item.DirectoryItem;
+import net.osmand.plus.settings.datastorage.item.DirectoryItem.CheckingType;
+import net.osmand.plus.settings.datastorage.item.MemoryItem;
+import net.osmand.plus.settings.datastorage.item.StorageItem;
+import net.osmand.plus.settings.datastorage.task.RefreshUsedMemoryTask;
+import net.osmand.plus.utils.FileUtils;
+
+import java.io.File;
+import java.lang.ref.WeakReference;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataStorageHelper {
 	public final static String INTERNAL_STORAGE = "internal_storage";
@@ -306,6 +314,53 @@ public class DataStorageHelper {
 	public static boolean isCurrentStorageShared(@NonNull OsmandApplication app) {
 		DataStorageHelper dataStorageHelper = new DataStorageHelper(app);
 		return SHARED_STORAGE.equals(dataStorageHelper.getCurrentStorage().getKey());
+	}
+
+	public static boolean saveFilesLocation(@NonNull OsmandApplication app, @NonNull FragmentActivity activity, int type, @NonNull File selectedFile) {
+		boolean writable = FileUtils.isWritable(selectedFile);
+		if (writable) {
+			app.setExternalStorageDirectory(type, selectedFile.getAbsolutePath());
+			reloadData(app, activity);
+		} else {
+			app.showToastMessage(R.string.specified_directiory_not_writeable);
+		}
+		return writable;
+	}
+
+	public static void checkAssets(@NonNull OsmandApplication app) {
+		app.getResourceManager().checkAssets(IProgress.EMPTY_PROGRESS, true, false);
+	}
+
+	public static void updateDownloadIndexes(@NonNull OsmandApplication app) {
+		app.getDownloadThread().runReloadIndexFilesSilent();
+	}
+
+	public static void reloadData(@NonNull OsmandApplication app, @NonNull FragmentActivity activity) {
+		final WeakReference<FragmentActivity> activityRef = new WeakReference<>(activity);
+		app.getResourceManager().reloadIndexesAsync(IProgress.EMPTY_PROGRESS, new ReloadIndexesListener() {
+
+			private ProgressImplementation progress;
+
+			@Override
+			public void reloadIndexesStarted() {
+				FragmentActivity activity = activityRef.get();
+				if (activity != null) {
+					progress = ProgressImplementation.createProgressDialog(activity, app.getString(R.string.loading_data),
+							app.getString(R.string.loading_data), ProgressDialog.STYLE_HORIZONTAL);
+				}
+			}
+
+			@Override
+			public void reloadIndexesFinished(List<String> warnings) {
+				try {
+					if (progress != null && progress.getDialog().isShowing()) {
+						progress.getDialog().dismiss();
+					}
+				} catch (Exception e) {
+					//ignored
+				}
+			}
+		});
 	}
 
 	public interface UpdateMemoryInfoUIAdapter {

@@ -1,9 +1,5 @@
 package net.osmand.plus.plugins.openplacereviews;
 
-import static org.openplacereviews.opendb.SecUtils.ALGO_EC;
-import static org.openplacereviews.opendb.SecUtils.JSON_MSG_TYPE;
-import static org.openplacereviews.opendb.SecUtils.signMessageWithKeyBase64;
-
 import android.net.TrafficStats;
 import android.os.Build;
 
@@ -18,6 +14,7 @@ import com.google.gson.reflect.TypeToken;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -43,6 +40,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
+import static org.openplacereviews.opendb.SecUtils.ALGO_EC;
+import static org.openplacereviews.opendb.SecUtils.JSON_MSG_TYPE;
+import static org.openplacereviews.opendb.SecUtils.signMessageWithKeyBase64;
 
 
 public class OpenDBAPI {
@@ -93,9 +94,10 @@ public class OpenDBAPI {
 						responseStr, new TypeToken<HashMap<String, String>>() {
 						}.getType()
 				);
-				if (!Algorithms.isEmpty(map) && map.containsKey("blockchain-name")) {
+				OpenPlaceReviewsPlugin plugin = OsmandPlugin.getPlugin(OpenPlaceReviewsPlugin.class);
+				if (plugin != null && !Algorithms.isEmpty(map) && map.containsKey("blockchain-name")) {
 					String blockchainName = map.get("blockchain-name");
-					app.getSettings().OPR_BLOCKCHAIN_NAME.set(blockchainName);
+					plugin.OPR_BLOCKCHAIN_NAME.set(blockchainName);
 				} else {
 					return false;
 				}

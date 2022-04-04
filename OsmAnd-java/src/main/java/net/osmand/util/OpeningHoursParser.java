@@ -497,7 +497,7 @@ public class OpeningHoursParser {
 		public boolean isFallBackRule(int sequenceIndex) {
 			if (sequenceIndex != ALL_SEQUENCES) {
 				ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
-				return rules.get(0).isFallbackRule();
+				return !rules.isEmpty() && rules.get(0).isFallbackRule();
 			}
 			return false;
 		}
@@ -2241,11 +2241,11 @@ public class OpeningHoursParser {
 		boolean sameDayPart = Math.max(startHour, endHour) < 12 || Math.min(startHour, endHour) >= 12;
 		if (twelveHourFormatting && sameDayPart) {
 			formatTime(startMinute, stringBuilder, false);
-			stringBuilder.append("–");
+			stringBuilder.append("-");
 			formatTime(endMinute, stringBuilder, true);
 		} else {
 			formatTime(startMinute, stringBuilder);
-			stringBuilder.append("–");
+			stringBuilder.append("-");
 			formatTime(endMinute, stringBuilder);
 		}
 	}

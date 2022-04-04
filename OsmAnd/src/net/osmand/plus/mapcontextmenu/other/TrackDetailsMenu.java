@@ -22,6 +22,7 @@ import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import net.osmand.plus.track.GpxMarkerView;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
@@ -42,7 +43,7 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
-import net.osmand.plus.myplaces.GPXItemPagerAdapter;
+import net.osmand.plus.myplaces.ui.GPXItemPagerAdapter;
 import net.osmand.plus.views.layers.GPXLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
@@ -56,6 +57,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import static net.osmand.plus.helpers.GpxUiHelper.HOUR_IN_MILLIS;
 
 public class TrackDetailsMenu {
 
@@ -79,6 +82,8 @@ public class TrackDetailsMenu {
 	private boolean visible;
 	private boolean hidding;
 	private Location myLocation;
+
+	private boolean fitTrackOnMapForbidden = false;
 
 	@Nullable
 	public MapActivity getMapActivity() {
@@ -510,7 +515,7 @@ public class TrackDetailsMenu {
 		if (location != null) {
 			mapActivity.refreshMap();
 		}
-		if (fitTrackOnMap) {
+		if (!fitTrackOnMapForbidden && fitTrackOnMap) {
 			fitTrackOnMap(chart, location, forceFit);
 		}
 	}
@@ -677,7 +682,9 @@ public class TrackDetailsMenu {
 			}
 		});
 
-		GpxUiHelper.setupGPXChart(app, chart, 4);
+		boolean useHours = analysis.timeSpan != 0 && analysis.timeSpan / HOUR_IN_MILLIS > 0;
+		GpxMarkerView markerView = new GpxMarkerView(mapActivity, analysis.startTime, useHours);
+		GpxUiHelper.setupGPXChart(chart, markerView, 24, 16, true);
 
 		List<ILineDataSet> dataSets = new ArrayList<>();
 		if (gpxItem.chartTypes != null && gpxItem.chartTypes.length > 0) {
@@ -763,9 +770,11 @@ public class TrackDetailsMenu {
 					AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
 						@Override
 						public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+							fitTrackOnMapForbidden = true;
 							GpxDisplayItem gpxItem = getGpxItem();
 							gpxItem.chartTypes = availableTypes.get(position);
 							update();
+							fitTrackOnMapForbidden = false;
 						}
 					};
 					new PopUpMenuHelper.Builder(v, items, nightMode)
@@ -809,6 +818,7 @@ public class TrackDetailsMenu {
 							.setListener(new AdapterView.OnItemClickListener() {
 								@Override
 								public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+									fitTrackOnMapForbidden = true;
 									GpxDisplayItem gpxItem = getGpxItem();
 									if (gpxItem != null) {
 										gpxItem.chartAxisType = GPXDataSetAxisType.values()[position];
@@ -816,6 +826,7 @@ public class TrackDetailsMenu {
 										gpxItem.chartMatrix = null;
 										update();
 									}
+									fitTrackOnMapForbidden = false;
 								}
 							}).show();
 				}

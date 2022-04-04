@@ -6,6 +6,8 @@
     <!-- string name="app_version_suffix"></string -->
 
     <!-- Not translatable -->
+    <string name="google_play_services">Google Play Services</string>
+    <string name="android_api">Android API</string>
     <string name="github">GitHub</string>
     <string name="telegram">Telegram</string>
     <string name="full_version_price">€24,99</string>
@@ -23,8 +25,8 @@
 	<string name="osmo">OsMo</string>
     <string name="tag_poi_amenity">amenity</string>
     <string name="tag_poi_name">name</string>
-    <string name="hint_tag">Tag</string>
-    <string name="hint_value">Value</string>
+    <string name="hint_tag">tag</string>
+    <string name="hint_value">value</string>
     <!-- DEVELOPMENT -->
     <string name="osm_live_default_price">€1,49</string>
     <string name="osm_live_monthly_price">€1,99</string>

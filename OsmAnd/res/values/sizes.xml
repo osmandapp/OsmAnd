@@ -105,6 +105,7 @@
 	<dimen name="gpx_group_button_width">96dp</dimen>
 	<dimen name="chart_marker_horizontal_padding">6dp</dimen>
 	<dimen name="chart_marker_vertical_padding">2dp</dimen>
+	<dimen name="track_image_height">96dp</dimen>
 
 	<dimen name="dashboard_parking_left_margin">16dp</dimen>
 	<dimen name="dashboard_parking_icon_size">48dp</dimen>
@@ -138,6 +139,8 @@
 	<dimen name="map_button_spacing_land">6dp</dimen>
 	<dimen name="map_button_margin">6dp</dimen>
 	<dimen name="map_routing_progress_width">100dp</dimen>
+	<dimen name="map_window_height">136dp</dimen>
+	<dimen name="map_tile_preview_size">128dp</dimen>
 
 
 	<dimen name="map_button_inset_shadow">2dp</dimen>
@@ -434,4 +437,8 @@
 	<dimen name="radius_normal">6dp</dimen>
 	<dimen name="radius_small">3dp</dimen>
 	<dimen name="radius_large">9dp</dimen>
+	<dimen name="radius_double_large">18dp</dimen>
+
+	<dimen name="bottom_space_height">160dp</dimen>
+
 </resources>

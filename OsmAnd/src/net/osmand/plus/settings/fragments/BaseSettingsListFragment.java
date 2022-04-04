@@ -70,7 +70,7 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 
 	@Override
 	public int getStatusBarColorId() {
-		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
+		return ColorUtilities.getStatusBarColorId(nightMode);
 	}
 
 	@Override
@@ -207,12 +207,7 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 			View emptyView = new View(context);
 			emptyView.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, padding));
 			listView.addFooterView(emptyView);
-			ScrollUtils.addOnGlobalLayoutListener(listView, new Runnable() {
-				@Override
-				public void run() {
-					listView.requestLayout();
-				}
-			});
+			ScrollUtils.addOnGlobalLayoutListener(listView, listView::requestLayout);
 		}
 	}
 

@@ -1462,7 +1462,6 @@
     <string name="save_track_interval_descr">Navedite interval logovanja snimanja putanje prilikom navođenja</string>
     <string name="save_track_interval">Interval beleženja za vreme navođenja</string>
     <string name="save_track_interval_globally">Interval beleženja</string>
-    <string name="save_track_to_gpx_descrp">GPX putanja se automatski čuva u fasciklu sa putanjama dok je navođenje uključeno.</string>
     <string name="save_track_to_gpx">Automatski snimaj putanju za vreme navođenja</string>
     <string name="save_current_track">Sačuvaj trenutnu putanju</string>
     <string name="save_current_track_descr">Sačuvaj odmah trenutnu putanju kao GPX fajl.</string>
@@ -3254,7 +3253,6 @@
     <string name="open_wikipedia_link_online">Otvori Vikipedija vezu sa internetom</string>
     <string name="default_render_descr">Stil opšte namene. Gusti gradovi su prikazani jasno. Prikazuje izohipse, putanje, kvalitet podloge, zabrane pristupa, blokade puteva, iscrtavanje puteva po SAC alpskoj skali, objekti za sportove na brzacima.</string>
     <string name="touring_view_render_descr">Stil za turističke ture sa visokim kontrastom i maksimumom detalja. Uključuje sve opcije OsmAnd podrazumevanog stila, pritom prikazujući što je više detalja moguće, konkretno puteve, staze i ostale načine putovanja. Jasna vizuelna razlika između različitih tipova puteva, tako da podseća na turističke atlase. Pogodan za dnevni i noćni režim rada, kao i korišćenje napolju.</string>
-    <string name="mapnik_render_descr">Stari „Mapnik“ stil iscrtavanja. Slične boje kao u „Mapnik“ stilu.</string>
     <string name="topo_render_descr">Za šetanje, pešačenje, treking i biciklizam u prirodi. Dobra čitljivost u uslovima spoljne osvetljenosti. Dobar kontrast za puteve i prirodne objekte, različiti tipovi putanja, izohipse sa naprednim podešavanjima, više detalja. Opcija integriteta podloge Vam omogućava da razlikujete puteve sa različitim kvalitetima podloga. Nema noćnog režima.</string>
     <string name="light_rs_render_descr">Jednostavan stil za vožnju. Prijatan za oči noću, izohipse, narandžasti putevi sa dobrim kontrastom, zamagljuje manje bitne objekte sa karte.</string>
     <string name="ski_map_render_descr">Za skijanje. Prikazuje staze, ski liftova, kros-kantri staze itd. Zamagljuje manje bitne objekte sa karte.</string>

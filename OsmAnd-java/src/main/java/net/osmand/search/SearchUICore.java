@@ -49,6 +49,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class SearchUICore {
+	
+	public static final int SEARCH_PRIORITY_COEF = 10;
 
 	private static final int TIMEOUT_BETWEEN_CHARS = 700;
 	private static final int TIMEOUT_BEFORE_SEARCH = 50;
@@ -224,9 +226,16 @@ public class SearchUICore {
 		}
 
 		public boolean sameSearchResult(SearchResult r1, SearchResult r2) {
+			boolean isSameType = r1.objectType == r2.objectType;
+			if (isSameType) {
+				ObjectType type = r1.objectType;
+				if (type == ObjectType.INDEX_ITEM || type == ObjectType.GPX_TRACK) {
+					return Algorithms.objectEquals(r1.localeName, r2.localeName);
+				}
+			}
 			if (r1.location != null && r2.location != null &&
 					!ObjectType.isTopVisible(r1.objectType) && !ObjectType.isTopVisible(r2.objectType)) {
-				if (r1.objectType == r2.objectType) {
+				if (isSameType) {
 					if (r1.objectType == ObjectType.STREET) {
 						Street st1 = (Street) r1.object;
 						Street st2 = (Street) r2.object;
@@ -432,6 +441,16 @@ public class SearchUICore {
 	public SearchPhrase resetPhrase(String text) {
 		this.phrase = this.phrase.generateNewPhrase(text, searchSettings);
 		return this.phrase;
+	}
+	
+	public SearchResultCollection immediateSearch(final String text, final LatLon loc) {
+		searchSettings = searchSettings.setOriginalLocation(loc);
+		final SearchPhrase phrase = this.phrase.generateNewPhrase(text, searchSettings);
+		final SearchResultMatcher rm = new SearchResultMatcher(null, phrase, requestNumber.get(), requestNumber, totalLimit);
+		searchInternal(phrase, rm);
+		SearchResultCollection collection = new SearchResultCollection(phrase);
+		collection.addSearchResults(rm.getRequestResults(), true, true);
+		return collection;
 	}
 
 	public void search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher) {
@@ -930,8 +949,19 @@ public class SearchUICore {
 			case UNKNOWN_PHRASE_MATCH_WEIGHT:
 				// here we check how much each sub search result matches the phrase
 				// also we sort it by type house -> street/poi -> city/postcode/village/other
-				if (o1.getUnknownPhraseMatchWeight() != o2.getUnknownPhraseMatchWeight()) {
-					return -Double.compare(o1.getUnknownPhraseMatchWeight(), o2.getUnknownPhraseMatchWeight());
+				SearchPhrase ph = o1.requiredSearchPhrase;
+				double o1PhraseWeight = o1.getUnknownPhraseMatchWeight();
+				double o2PhraseWeight = o2.getUnknownPhraseMatchWeight();
+				if (o1PhraseWeight == o2PhraseWeight && o1PhraseWeight / SEARCH_PRIORITY_COEF > 1) {
+					if (!ph.getUnknownWordToSearchBuildingNameMatcher().matches(stripBraces(o1.localeName))) {
+						o1PhraseWeight--;
+					}
+					if (!ph.getUnknownWordToSearchBuildingNameMatcher().matches(stripBraces(o2.localeName))) {
+						o2PhraseWeight--;
+					}
+				}
+				if (o1PhraseWeight != o2PhraseWeight) {
+					return -Double.compare(o1PhraseWeight, o2PhraseWeight);
 				}
 				break;
 			case SEARCH_DISTANCE_IF_NOT_BY_NAME: 
@@ -1023,6 +1053,19 @@ public class SearchUICore {
 			}
 			return 0;
 		}
+	}
+	
+	private static String stripBraces(String localeName) {
+		int i = localeName.indexOf('(');
+		String retName = localeName;
+		if (i > -1) {
+			retName = localeName.substring(0, i);
+			int j = localeName.indexOf(')', i);
+			if (j > -1) {
+				retName = retName.trim() + ' ' + localeName.substring(j);
+			}
+		}
+		return retName;
 	}
 
 	public static class SearchResultComparator implements Comparator<SearchResult> {

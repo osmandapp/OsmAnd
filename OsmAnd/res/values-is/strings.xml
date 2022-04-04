@@ -1933,7 +1933,6 @@
     <string name="navigate_point_olc_info_area">Gildur fullur OLC
 \nStendur fyrir svæði: %1$s x %2$s</string>
     <string name="map_widget_appearance_rem">Atriði eftir</string>
-    <string name="save_track_to_gpx_descrp">GPX-ferlar verða sjálfvirkt vistaðir í ferlamöppu á meðan leiðsögn stendur.</string>
     <string name="save_track_interval">Millibil skráninga á meðan leiðsögn stendur</string>
     <string name="voice_provider_descr">Veldu raddleiðsögn fyrir leiðsögukerfið.</string>
     <string name="none_selected_gpx">Veldu GPX-skrá með því að ýta fyrst og halda niðri.</string>
@@ -2737,7 +2736,6 @@
     <string name="nautical_render_descr">Leiðsagnarstíll fyrir sjó og vötn. Helstu eiginleikar: baujur, siglingamerki, siglingaleiðir og merkingar, hafnir, þjónustur við sæfarendur, dýptarlínur.</string>
     <string name="ski_map_render_descr">Stíll fyrir skíði og vetraríþróttir. Helstu eiginleikar: myndgerir skíðaleiðir, skíðalyftur og aðra skíðaeiginleika á þægilegan hátt. Minni sjónræn truflun af völdum annarra kortahluta.</string>
     <string name="light_rs_render_descr">Einfaldur stíll fyrir leiðsögn við akstur. Fer vel með augun í næturham. Helstu eiginleikar: hæðarlínur, skýrar appelsínugular götur, litlar sjónrænar truflanir af völdum annarra kortafyrirbæra.</string>
-    <string name="mapnik_render_descr">Eldri sjálfgefni \'Mapnik\' myndgerðarstíllinn. Litum svipar til \'Mapnik\' stílsins.</string>
     <string name="default_render_descr">Stíll til almennrar notkunar. Einfölduð skýr framsetning fyrir þétta byggð. Helstu eiginleikar: hæðarlínur, leiðir, gæði yfirborðs, aðgangstakmarkanir, vegmerkingar, stígar skilgreindir skv. SAC-kvarða, eigindi fyrir vatnasport.</string>
     <string name="topo_render_descr">Stíll með góðum birtuskilum hugsaður fyrir gönguferðir, fjallaferðir og hjólreiðar úti í náttúrunni. Læsilegt í erfiðum birtuskilyrðum utanhúss. Helstu eiginleikar: skýr munur á götum og náttúrufyrirbærum, hæðarlínur með ítarlegum stillingum, fleiri smáatriði á hverju aðdráttarstigi en í sjálfgefna stílnum. Stillingar á yfirborðseiginleikum gerir kleift að aðgreina leiðir eftir gæðum yfirborðs. Enginn næturhamur.</string>
     <string name="touring_view_render_descr">Stíll með nákvæmum smáatriðum til ferðalaga. Er með öllum þeim stillingum sem fylgja sjálfgefna stílnum, en að auki: eins mörg smáatriði og mögulegt er, sérstaklega hvað varðar vegi, stíga og aðrar leiðir til umferðar. Skýr aðgreining allra gerða leiða, minnir á gamlar landakortabækur. Litastef með góðum birtuskilum til notkunar utanhúss, með dags- og næturham.</string>
@@ -3855,7 +3853,7 @@
     <string name="manage_subscription">Sýsla með áskrift</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="gpx_upload_public_visibility_descr">\"Opinbert\" þýðir að ferillinn birtist í GPS-ferlunum þínum og á opinberum listum yfir GPS-ferla, þar sem ferilpunktar eru með tímamerkjum á frumsniði. Gögn sem eru sótt í gegnum opinbert GPS API-forritsviðmót vísa ekki í ferlasíðuna þína. Tímamerki ferilpunkta eru ekki tiltæk í gegnum opinbera GPS API-forritsviðmótið og er ekki raðað í tímaröð.</string>
-    <string name="app_mode_kayak">Kayak</string>
+    <string name="app_mode_kayak">Kajak</string>
     <string name="shared_string_add_photo">Bæta við mynd</string>
     <string name="gpx_upload_identifiable_visibility_descr">\"Auðkennanlegt\" þýðir að ferillinn birtist í GPS-ferlunum þínum og á opinberum listum yfir GPS-ferla, sem þýðir að aðrir notendur geta sútt frumferilinn og tengt þær upplýsingar við notandanafnið þitt. Opinberir ferilpunktar með tímamerkjum sem eru sóttir í gegnum opinbera GPS API-forritsviðmótið vísa í ferlasíðuna þína.</string>
     <string name="shared_string_search_history">Leitarferill</string>
@@ -4330,7 +4328,7 @@
     <string name="shared_string_hide_all">Fela allt</string>
     <string name="storage_found_files_descr">Ýttu á \"%1$s\" til að afrita %2$s skrár úr \"%3$s\" yfir í \"%4$s\". Þetta gæti tekið nokkra stund.</string>
     <string name="continue_on_phone">Halda áfram á snjalltæki</string>
-    <string name="shared_string_travelbooks">Travelbooks</string>
+    <string name="shared_string_travelbooks">Ferðabækur</string>
     <string name="show_parameter_seekbar">Birta leitarstiku fyrir breytur</string>
     <string name="display_groups_visibility_dialog_description">Þú getur stýrt sýnileika hópa á landakortinu. Ef ferill er falinn, verða allir hópar einnig faldir.</string>
     <string name="no_plugins_enabled">Þú ert ekki með neinar virkar viðbætur. Þú getur sótt lista yfir tiltækar forritsviðbætur með því að fara í \'Valmynd\' → \'Viðbætur\'.</string>
@@ -4421,7 +4419,7 @@
     <string name="walking_route_osmc_description">Lita leiðir eftir stökum staðbundnum litum (ef til staðar í OpenStreetMap) og tegund vega (alþjóðlegt, héraðsbundið, staðbundið.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Lita leiðir eftir tegund vega í vegakerfi (alþjóðlegt, héraðsbundið, staðbundið.</string>
     <string name="make_backup_descr">Það eru margar breytingar á þessu tæki, taktu öryggisafrit af þessum gögnum svo þau tapist síður.</string>
-    <string name="use_routing_fallback">Nota varaleiðagerð</string>
+    <string name="use_routing_fallback">Leiðagerð til vara án nettengingar</string>
     <string name="memory_allocated_for_routing_ds">Úthlutun á meira minni mun hraða útreikningum á löngum leiðum (yfir 500 km), en getur haft áhrif á afköst annarra forrita.
 \nHefur engin áhrif á útreikninga styttri leiða.</string>
     <string name="approximate_route_description">Hengdu leiðina við vegi á kortinu til að fá fram allar beygjur og viðbótargögn, eins og t.d. áferð, tegund vega, o.fl.</string>
@@ -4491,5 +4489,35 @@
     <string name="created_on">Búið til</string>
     <string name="shared_string_size">Stærð</string>
     <string name="turn_arrows">Beygjuörvar</string>
-    <string name="turn_arrows_descr">Stjórnaðu sýnileika beygjuörva á leiðarlínunni.</string>
+    <string name="turn_arrows_descr">Veldu hvort beygjuörvar séu birtar á leiðarlínunni.</string>
+    <string name="shared_string_not_used">Ekki notað</string>
+    <string name="shared_string_used">Notað</string>
+    <string name="files_with_route_restrictions">Skrár með takmörkunum leiða</string>
+    <string name="track_file">Ferilskrá</string>
+    <string name="save_track_to_gpx_descrp">Byrja skráningu ferils sjálfvirkt á meðan leiðsögn stendur. Þegar henni er lokið vistast ferillinn sjálfkrafa.</string>
+    <string name="rendering_attr_seabedDetail_description">Viðbótar-textaupplýsingar um skilgreiningar á yfirborði sjávarbotns (surface_qualification), samsettar gerðir yfirborðs, flokkar og flokkunarfræði lífríkis (marhálmur eða grös)</string>
+    <string name="rendering_value_omit_name">Sleppa</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Lagamig-merki</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Birta Lagamig-merki</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Merki minnispunkta</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Birta merki minnispunkta</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Táknmyndir við lítinn aðdrátt</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Skematísk birting táknmynda við lítinn aðdrátt</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Siglingagöng</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Ekki fela göng sem siglt er í gegnum</string>
+    <string name="waypoint_template">Sniðmát ferilpunkts</string>
+    <string name="predefined_waypoint_appearance_description">Ef ýtt er á þennan aðgerðahnapp verður ferilpunktur vistaður sjálfvirkt með forákvörðuðum viðföngum.</string>
+    <string name="always_ask_waypoint_appearance_description">Ef ýtt er á þennan aðgerðahnapp opnast \"Bæta við ferilpunkti\" skjárinn, þar sem þú getur breytt heiti og útliti ferilpunktsins.</string>
+    <string name="waypoint_appearance">Útlit ferilpunkts</string>
+    <string name="track_file_description">Ef ýtt er á þennan aðgerðahnapp mun það birta valglugga tiltækra ferla.</string>
+    <string name="navigate_point_format_swiss_grid">Svissneska hnitanetið (CH1903)</string>
+    <string name="rendering_attr_seabedDetail_name">Smáatriði sjávarbotns</string>
+    <string name="rendering_value_all_name">Allt</string>
+    <string name="rendering_value_category_name">Flokkur</string>
+    <string name="navigate_point_format_swiss_grid_plus">Svissneska hnitanetið (CH1903+)</string>
+    <string name="please_provide_group_name_message">Gefðu hópnum eitthvað heiti.</string>
+    <string name="quick_action_add_route_descr">Hnappur til að byrja leið af miðjum skjánum.</string>
+    <string name="gpx_no_routes_descr">Þú getur notað \"%1$s\" verkfærið til að bæta leið inn í skrá.</string>
+    <string name="gpx_no_routes_title">Það eru engar leiðir</string>
 </resources>

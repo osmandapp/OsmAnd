@@ -20,6 +20,7 @@ import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TransportRoutingConfiguration;
+import net.osmand.router.network.NetworkRouteSelector.RouteType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -63,6 +64,7 @@ public class NativeLibrary {
 			this.nativeHandler = nativeHandler;
 		}
 
+		@SuppressWarnings("deprecation")
 		@Override
 		protected void finalize() throws Throwable {
 			deleteNativeResult();
@@ -88,6 +90,7 @@ public class NativeLibrary {
 			this.objects = objects;
 		}
 
+		@SuppressWarnings("deprecation")
 		@Override
 		protected void finalize() throws Throwable {
 			deleteNativeResult();
@@ -228,7 +231,6 @@ public class NativeLibrary {
 	}
 
 	public RouteSegmentResult[] runNativeRouting(RoutingContext c, RouteRegion[] regions, boolean basemap) {
-//		config.router.printRules(System.out);
 		return nativeRouting(c, c.config.initialDirection == null ? -360 : c.config.initialDirection.floatValue(),
 				regions, basemap);
 	}
@@ -479,8 +481,6 @@ public class NativeLibrary {
 		}
 		
 	}
-	
-
 
 	public static class RenderedObject extends MapObject {
 		private Map<String, String> tags = new LinkedHashMap<>();
@@ -619,6 +619,26 @@ public class NativeLibrary {
 		public String getGpxFileName() {
 			for (String name : getOriginalNames()) {
 				if (name.endsWith(GPX_FILE_EXT) || name.endsWith(GPX_GZ_FILE_EXT)) {
+					return name;
+				}
+			}
+			return null;
+		}
+
+		public String getRouteName() {
+			for (RouteType routeType : RouteType.values()) {
+				String name = getTagValue(routeType.getTag() + "_route_name");
+				if (!Algorithms.isEmpty(name)) {
+					return name;
+				}
+			}
+			return null;
+		}
+
+		public String getRouteRef() {
+			for (RouteType routeType : RouteType.values()) {
+				String name = getTagValue(routeType.getTag() + "_route_ref");
+				if (!Algorithms.isEmpty(name)) {
 					return name;
 				}
 			}

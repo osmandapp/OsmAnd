@@ -33,6 +33,8 @@ import android.graphics.drawable.Drawable;
 
 public class TextRenderer {
 
+	public static final String DROID_SERIF = "Droid Serif";
+
 	private Paint paintText;
 	private final Context context;
 	private Paint paintIcon;
@@ -126,11 +128,11 @@ public class TextRenderer {
 		paintText.setStrokeWidth(1);
 		paintText.setColor(Color.BLACK);
 		paintText.setTextAlign(Align.CENTER);
-		defaultTypeface = Typeface.create("Droid Serif", Typeface.NORMAL);
-		boldItalicTypeface = Typeface.create("Droid Serif", Typeface.BOLD_ITALIC);
-		italicTypeface = Typeface.create("Droid Serif", Typeface.ITALIC);
-		boldTypeface = Typeface.create("Droid Serif", Typeface.BOLD);
-		paintText.setTypeface(defaultTypeface); //$NON-NLS-1$
+		defaultTypeface = Typeface.create(DROID_SERIF, Typeface.NORMAL);
+		boldItalicTypeface = Typeface.create(DROID_SERIF, Typeface.BOLD_ITALIC);
+		italicTypeface = Typeface.create(DROID_SERIF, Typeface.ITALIC);
+		boldTypeface = Typeface.create(DROID_SERIF, Typeface.BOLD);
+		paintText.setTypeface(defaultTypeface);
 		paintText.setAntiAlias(true);
 
 		paintIcon = new Paint();

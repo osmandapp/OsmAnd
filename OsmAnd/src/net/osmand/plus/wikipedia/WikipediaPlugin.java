@@ -1,12 +1,5 @@
 package net.osmand.plus.wikipedia;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WIKIPEDIA;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.WIKIPEDIA_ID;
-import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
-import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
-import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
-import static net.osmand.plus.helpers.FileNameTranslationHelper.WIKI_NAME;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -17,19 +10,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.osm.AbstractPoiType;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
-import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
-import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
+import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
@@ -43,6 +34,7 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.QuickSearchDialogFragment;
@@ -51,9 +43,13 @@ import net.osmand.plus.search.listitems.QuickSearchBannerListItem;
 import net.osmand.plus.search.listitems.QuickSearchFreeBannerListItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.ListStringPreference;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer;
 import net.osmand.plus.wikimedia.WikiImageHelper;
+import net.osmand.render.RenderingRuleProperty;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
@@ -66,16 +62,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WIKIPEDIA;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.WIKIPEDIA_ID;
+import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
+import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
+import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
+import static net.osmand.plus.helpers.FileNameTranslationHelper.WIKI_NAME;
+
 public class WikipediaPlugin extends OsmandPlugin {
 
+	public final CommonPreference<Boolean> GLOBAL_WIKIPEDIA_POI_ENABLED;
+	public final ListStringPreference WIKIPEDIA_POI_ENABLED_LANGUAGES;
+
 	private MapActivity mapActivity;
-	private final OsmandSettings settings;
 
 	private PoiUIFilter topWikiPoiFilter;
 
 	public WikipediaPlugin(OsmandApplication app) {
 		super(app);
-		this.settings = app.getSettings();
+
+		GLOBAL_WIKIPEDIA_POI_ENABLED = registerBooleanPreference("global_wikipedia_poi_enabled", false).makeProfile();
+		WIKIPEDIA_POI_ENABLED_LANGUAGES = (ListStringPreference) registerListStringPreference("wikipedia_poi_enabled_languages", null, ",").makeProfile().cache();
 	}
 
 	@Override
@@ -147,7 +154,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
+	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
 		if (isLocked()) {
 			PurchasingUtils.createPromoItem(adapter, mapActivity, OsmAndFeature.WIKIPEDIA,
 					WIKIPEDIA_ID,
@@ -193,20 +200,20 @@ public class WikipediaPlugin extends OsmandPlugin {
 		};
 
 		boolean selected = app.getPoiFilters().isPoiFilterSelected(PoiFiltersHelper.getTopWikiPoiFilterId());
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setId(WIKIPEDIA_ID)
+		adapter.addItem(new ContextMenuItem(WIKIPEDIA_ID)
 				.setTitleId(R.string.shared_string_wikipedia, mapActivity)
 				.setDescription(selected ? getLanguagesSummary() : null)
 				.setSelected(selected)
 				.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_plugin_wikipedia)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
-				.setListener(listener).createItem());
+				.setListener(listener));
 	}
 
 	@Override
 	public List<IndexItem> getSuggestedMaps() {
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
+		OsmandSettings settings = app.getSettings();
 		if (!downloadThread.getIndexes().isDownloadedFromInternet && settings.isInternetConnectionAvailable()) {
 			downloadThread.runReloadIndexFiles();
 		}
@@ -265,43 +272,43 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	public boolean hasLanguagesFilter() {
-		return settings.WIKIPEDIA_POI_ENABLED_LANGUAGES.get() != null;
+		return WIKIPEDIA_POI_ENABLED_LANGUAGES.get() != null;
 	}
 
 	public boolean hasLanguagesFilter(ApplicationMode profile) {
-		return settings.WIKIPEDIA_POI_ENABLED_LANGUAGES.getModeValue(profile) != null;
+		return WIKIPEDIA_POI_ENABLED_LANGUAGES.getModeValue(profile) != null;
 	}
 
 	public boolean isShowAllLanguages() {
-		return settings.GLOBAL_WIKIPEDIA_POI_ENABLED.get();
+		return GLOBAL_WIKIPEDIA_POI_ENABLED.get();
 	}
 
 	public boolean isShowAllLanguages(ApplicationMode mode) {
-		return settings.GLOBAL_WIKIPEDIA_POI_ENABLED.getModeValue(mode);
+		return GLOBAL_WIKIPEDIA_POI_ENABLED.getModeValue(mode);
 	}
 
 	public void setShowAllLanguages(boolean showAllLanguages) {
-		settings.GLOBAL_WIKIPEDIA_POI_ENABLED.set(showAllLanguages);
+		GLOBAL_WIKIPEDIA_POI_ENABLED.set(showAllLanguages);
 	}
 
 	public void setShowAllLanguages(ApplicationMode mode, boolean showAllLanguages) {
-		settings.GLOBAL_WIKIPEDIA_POI_ENABLED.setModeValue(mode, showAllLanguages);
+		GLOBAL_WIKIPEDIA_POI_ENABLED.setModeValue(mode, showAllLanguages);
 	}
 
 	public List<String> getLanguagesToShow() {
-		return settings.WIKIPEDIA_POI_ENABLED_LANGUAGES.getStringsList();
+		return WIKIPEDIA_POI_ENABLED_LANGUAGES.getStringsList();
 	}
 
 	public List<String> getLanguagesToShow(ApplicationMode mode) {
-		return settings.WIKIPEDIA_POI_ENABLED_LANGUAGES.getStringsListForProfile(mode);
+		return WIKIPEDIA_POI_ENABLED_LANGUAGES.getStringsListForProfile(mode);
 	}
 
 	public void setLanguagesToShow(List<String> languagesToShow) {
-		settings.WIKIPEDIA_POI_ENABLED_LANGUAGES.setStringsList(languagesToShow);
+		WIKIPEDIA_POI_ENABLED_LANGUAGES.setStringsList(languagesToShow);
 	}
 
 	public void setLanguagesToShow(ApplicationMode mode, List<String> languagesToShow) {
-		settings.WIKIPEDIA_POI_ENABLED_LANGUAGES.setStringsListForProfile(mode, languagesToShow);
+		WIKIPEDIA_POI_ENABLED_LANGUAGES.setStringsListForProfile(mode, languagesToShow);
 	}
 
 	public void toggleWikipediaPoi(boolean enable, CallbackWithObject<Boolean> callback) {

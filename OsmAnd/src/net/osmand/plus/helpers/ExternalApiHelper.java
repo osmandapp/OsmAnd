@@ -38,7 +38,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.plugins.CustomOsmandPlugin;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -501,7 +501,7 @@ public class ExternalApiHelper {
 				fav.setColor(color);
 				fav.setVisible(visible);
 
-				FavouritesDbHelper helper = app.getFavorites();
+				FavouritesHelper helper = app.getFavoritesHelper();
 				helper.addFavourite(fav);
 
 				showOnMap(lat, lon, fav, mapActivity.getMapLayers().getFavouritesLayer().getObjectName(fav));

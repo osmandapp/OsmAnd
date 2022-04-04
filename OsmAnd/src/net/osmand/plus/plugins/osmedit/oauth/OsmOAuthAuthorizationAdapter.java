@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+
 import com.github.scribejava.core.builder.api.DefaultApi10a;
 import com.github.scribejava.core.exceptions.OAuthException;
 import com.github.scribejava.core.model.OAuth1AccessToken;
@@ -18,8 +20,10 @@ import net.osmand.PlatformUtil;
 import net.osmand.osm.oauth.OsmOAuthAuthorizationClient;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.helpers.OsmBugsRemoteUtil;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
+import net.osmand.plus.utils.AndroidUtils;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParserException;
@@ -33,15 +37,18 @@ public class OsmOAuthAuthorizationAdapter {
     private static final int THREAD_ID = 10101;
 
     private final OsmandApplication app;
+    private final OsmEditingPlugin plugin;
     private final OsmOAuthAuthorizationClient client;
 
-    public OsmOAuthAuthorizationAdapter(OsmandApplication app) {
+    public OsmOAuthAuthorizationAdapter(@NonNull OsmandApplication app) {
         TrafficStats.setThreadStatsTag(THREAD_ID);
         this.app = app;
+        this.plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+
         DefaultApi10a api10a;
         String key;
         String secret;
-        if (app.getSettings().OSM_USE_DEV_URL.get()) {
+        if (plugin.OSM_USE_DEV_URL.get()) {
             api10a = new OsmOAuthAuthorizationClient.OsmDevApi();
             key = app.getString(R.string.osm_oauth_developer_key);
             secret = app.getString(R.string.osm_oauth_developer_secret);
@@ -67,8 +74,8 @@ public class OsmOAuthAuthorizationAdapter {
     }
 
     public void restoreToken() {
-        String token = app.getSettings().OSM_USER_ACCESS_TOKEN.get();
-        String tokenSecret = app.getSettings().OSM_USER_ACCESS_TOKEN_SECRET.get();
+        String token = plugin.OSM_USER_ACCESS_TOKEN.get();
+        String tokenSecret = plugin.OSM_USER_ACCESS_TOKEN_SECRET.get();
         if (!(token.isEmpty() || tokenSecret.isEmpty())) {
             client.setAccessToken(new OAuth1AccessToken(token, tokenSecret));
         } else {
@@ -82,14 +89,14 @@ public class OsmOAuthAuthorizationAdapter {
 
     private void saveToken() {
         OAuth1AccessToken accessToken = client.getAccessToken();
-        app.getSettings().OSM_USER_ACCESS_TOKEN.set(accessToken.getToken());
-        app.getSettings().OSM_USER_ACCESS_TOKEN_SECRET.set(accessToken.getTokenSecret());
+        plugin.OSM_USER_ACCESS_TOKEN.set(accessToken.getToken());
+        plugin.OSM_USER_ACCESS_TOKEN_SECRET.set(accessToken.getTokenSecret());
     }
 
     private void loadWebView(ViewGroup root, boolean nightMode, String url) {
         Uri uri = Uri.parse(url);
         Context context = root.getContext();
-        WikipediaDialogFragment.showFullArticle(context, uri, nightMode);
+        AndroidUtils.openUrl(context, uri, nightMode);
     }
 
     public void performGetRequest(String url, OAuthAsyncRequestCallback<Response> callback) {
@@ -166,7 +173,7 @@ public class OsmOAuthAuthorizationAdapter {
                     | OAuthException e) {
                 log.error(e);
             }
-            app.getSettings().OSM_USER_DISPLAY_NAME.set(userName);
+            plugin.OSM_USER_DISPLAY_NAME.set(userName);
         }
 
         public String getUserName() throws InterruptedException, ExecutionException, IOException, XmlPullParserException {
@@ -175,7 +182,7 @@ public class OsmOAuthAuthorizationAdapter {
         }
 
         public Response getOsmUserDetails() throws InterruptedException, ExecutionException, IOException {
-            String osmUserDetailsUrl = app.getSettings().getOsmUrl() + "api/0.6/user/details";
+            String osmUserDetailsUrl = plugin.getOsmUrl() + "api/0.6/user/details";
             return performRequest(osmUserDetailsUrl, Verb.GET.name(), null);
         }
     }

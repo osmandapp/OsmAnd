@@ -180,6 +180,20 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 				.create();
 		items.add(reverse);
 
+		BaseBottomSheetItem attachToRoads = new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_action_attach_track))
+				.setTitle(getString(R.string.attach_to_the_roads))
+				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
+				.setOnClickListener(v -> {
+					Fragment target = getTargetFragment();
+					if (target instanceof OptionsFragmentListener) {
+						((OptionsFragmentListener) target).attachToRoadsClick();
+					}
+					dismiss();
+				})
+				.create();
+		items.add(attachToRoads);
+
 		if (plainTrack) {
 			BaseBottomSheetItem gpsFilter = new Builder()
 					.setIcon(getContentIcon(R.drawable.ic_action_filter))
@@ -279,6 +293,8 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		void directionsOnClick();
 
 		void reverseRouteOnClick();
+
+		void attachToRoadsClick();
 
 		void gpsFilterOnClick();
 

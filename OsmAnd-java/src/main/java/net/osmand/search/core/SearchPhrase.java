@@ -159,9 +159,9 @@ public class SearchPhrase {
 		List<SearchWord> leftWords = this.words;
 		String thisTxt = getText(true);
 		List<SearchWord> foundWords = new ArrayList<>();
-		if (text.startsWith(thisTxt)) {
+		if (textToSearch.startsWith(thisTxt)) {
 			// string is longer
-			textToSearch = text.substring(getText(false).length());
+			textToSearch = textToSearch.substring(getText(false).length());
 			foundWords.addAll(this.words);
 			leftWords = leftWords.subList(leftWords.size(), leftWords.size());
 		}
@@ -173,8 +173,7 @@ public class SearchPhrase {
 				break;
 			}
 		}
-		SearchPhrase sp = createNewSearchPhrase(settings, text, foundWords, textToSearch);
-		return sp;
+		return createNewSearchPhrase(settings, text, foundWords, textToSearch);
 	}
 
 	
@@ -297,13 +296,13 @@ public class SearchPhrase {
 		List<String> unknownSearchWords = otherUnknownWords;
 		mainUnknownWordToSearch = firstUnknownSearchWord;
 		mainUnknownSearchWordComplete = lastUnknownSearchWordComplete;
-		if (unknownSearchWords.size() > 0) {
+		if (!unknownSearchWords.isEmpty()) {
 			mainUnknownSearchWordComplete = true;
 			List<String> searchWords = new ArrayList<>(unknownSearchWords);
 			searchWords.add(0, getFirstUnknownSearchWord());
 			Collections.sort(searchWords, commonWordsComparator);
 			for (String s : searchWords) {
-				if (s.length() > 0 && !Character.isDigit(s.charAt(0)) && !LocationParser.isValidOLC(s)) {
+				if (s.length() > 0 && !LocationParser.isValidOLC(s)) {
 					mainUnknownWordToSearch = s.trim();
 					if (mainUnknownWordToSearch.endsWith(".")) {
 						mainUnknownWordToSearch = mainUnknownWordToSearch.substring(0,

@@ -105,15 +105,15 @@ public class GPXUtilities {
 		SILVER(0xFFC0C0C0),
 		TEAL(0xFF008080);
 
-		int color;
+		public final int color;
 
 		GPXColor(int color) {
 			this.color = color;
 		}
 
-		public static GPXColor getColorFromName(String s) {
+		public static GPXColor getColorFromName(String name) {
 			for (GPXColor c : values()) {
-				if (c.name().equalsIgnoreCase(s)) {
+				if (c.name().equalsIgnoreCase(name)) {
 					return c;
 				}
 			}
@@ -368,8 +368,12 @@ public class GPXUtilities {
 			return getExtensionsToRead().get(ADDRESS_EXTENSION);
 		}
 
-		public String setAddress(String address) {
-			return getExtensionsToWrite().put(ADDRESS_EXTENSION, address);
+		public void setAddress(String address) {
+			if (Algorithms.isBlank(address)) {
+				getExtensionsToWrite().remove(ADDRESS_EXTENSION);
+			} else {
+				getExtensionsToWrite().put(ADDRESS_EXTENSION, address);
+			}
 		}
 
 		public void setProfileType(String profileType) {
@@ -586,6 +590,7 @@ public class GPXUtilities {
 		public String speed;
 		public String turnType;
 		public String turnAngle;
+		public String skipTurn;
 		public String types;
 		public String pointTypes;
 		public String names;
@@ -598,6 +603,7 @@ public class GPXUtilities {
 			s.speed = bundle.getString("speed", null);
 			s.turnType = bundle.getString("turnType", null);
 			s.turnAngle = bundle.getString("turnAngle", null);
+			s.skipTurn = bundle.getString("skipTurn", null);
 			s.types = bundle.getString("types", null);
 			s.pointTypes = bundle.getString("pointTypes", null);
 			s.names = bundle.getString("names", null);
@@ -612,6 +618,7 @@ public class GPXUtilities {
 			bundle.putString("speed", speed);
 			bundle.putString("turnType", turnType);
 			bundle.putString("turnAngle", turnAngle);
+			bundle.putString("skipTurn", skipTurn);
 			bundle.putString("types", types);
 			bundle.putString("pointTypes", pointTypes);
 			bundle.putString("names", names);
@@ -639,6 +646,8 @@ public class GPXUtilities {
 	}
 
 	public static class GPXTrackAnalysis {
+		public String name;
+		
 		public float totalDistance = 0;
 		public float totalDistanceWithoutGaps = 0;
 		public int totalTracks = 0;
@@ -708,6 +717,7 @@ public class GPXUtilities {
 		public boolean hasElevationData;
 		public boolean hasSpeedData;
 		public boolean hasSpeedInTrack = false;
+		
 
 		public boolean isSpeedSpecified() {
 			return avgSpeed > 0;
@@ -1428,6 +1438,7 @@ public class GPXUtilities {
 		                                    Double toDistance) {
 			GPXTrackAnalysis g = new GPXTrackAnalysis();
 			g.wptPoints = points.size();
+			g.name = path;
 			g.wptCategoryNames = getWaypointCategories(true);
 			List<SplitSegment> segments = getSplitSegments(g, fromDistance, toDistance);
 			g.prepareInformation(fileTimestamp, segments.toArray(new SplitSegment[0]));
@@ -1547,28 +1558,6 @@ public class GPXUtilities {
 			}
 
 			points.add(pt);
-
-			modifiedTime = System.currentTimeMillis();
-
-			return pt;
-		}
-
-		public WptPt addRtePt(double lat, double lon, long time, String description, String name, String category, int color) {
-			double latAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lat));
-			double lonAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lon));
-			final WptPt pt = new WptPt(latAdjusted, lonAdjusted, time, Double.NaN, 0, Double.NaN);
-			pt.name = name;
-			pt.category = category;
-			pt.desc = description;
-			if (color != 0) {
-				pt.setColor(color);
-			}
-
-			if (routes.size() == 0) {
-				routes.add(new Route());
-			}
-			Route currentRoute = routes.get(routes.size() - 1);
-			currentRoute.points.add(pt);
 
 			modifiedTime = System.currentTimeMillis();
 
@@ -1790,6 +1779,16 @@ public class GPXUtilities {
 				}
 			}
 			return points.isEmpty() && routes.isEmpty();
+		}
+
+		public int getTracksCount() {
+			int count = 0;
+			for (Track track : tracks) {
+				if (!track.generalTrack) {
+					count++;
+				}
+			}
+			return count;
 		}
 
 		public int getNonEmptyTracksCount() {
@@ -2824,6 +2823,7 @@ public class GPXUtilities {
 		segment.speed = parser.getAttributeValue("", "speed");
 		segment.turnType = parser.getAttributeValue("", "turnType");
 		segment.turnAngle = parser.getAttributeValue("", "turnAngle");
+		segment.skipTurn = parser.getAttributeValue("", "skipTurn");
 		segment.types = parser.getAttributeValue("", "types");
 		segment.pointTypes = parser.getAttributeValue("", "pointTypes");
 		segment.names = parser.getAttributeValue("", "names");

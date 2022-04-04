@@ -8,9 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
-import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
@@ -145,6 +145,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 				ContextMenuItem it = adapter.getItem(pos);
 				mapActivity.getMapLayers().selectMapLayer(mapActivity, it, adapter);
 			}
+			return false;
 		}
 		adapter.notifyDataSetChanged();
 		mapActivity.updateLayers();

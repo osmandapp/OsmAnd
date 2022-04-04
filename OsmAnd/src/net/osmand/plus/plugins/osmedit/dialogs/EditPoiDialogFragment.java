@@ -31,12 +31,12 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -49,25 +49,26 @@ import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.osm.edit.Way;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.plugins.osmedit.data.EditPoiData;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.osmedit.EditPoiViewPager;
-import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapLocalUtil;
-import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
-import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapRemoteUtil;
-import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapUtil;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.plugins.osmedit.data.EditPoiData;
+import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint.Action;
 import net.osmand.plus.plugins.osmedit.fragments.AdvancedEditPoiFragment;
 import net.osmand.plus.plugins.osmedit.fragments.BasicEditPoiFragment;
+import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapLocalUtil;
+import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapRemoteUtil;
+import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapUtil;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
 
@@ -131,11 +132,11 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	public static final int AMENITY_TEXT_LENGTH= 255;
 
 	@Override
-	public void onAttach(Context activity) {
+	public void onAttach(@NonNull Context activity) {
 		super.onAttach(activity);
 		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
-		if (getSettings().OFFLINE_EDITION.get()
-				|| !getSettings().isInternetConnectionAvailable(true)) {
+
+		if (plugin.OFFLINE_EDITION.get() || !getSettings().isInternetConnectionAvailable(true)) {
 			mOpenstreetmapUtil = plugin.getPoiModificationLocalUtil();
 		} else {
 			mOpenstreetmapUtil = plugin.getPoiModificationRemoteUtil();
@@ -322,12 +323,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 				if (category != null) {
 					PoiSubTypeDialogFragment dialogFragment =
 							PoiSubTypeDialogFragment.createInstance(category);
-					dialogFragment.setOnItemSelectListener(new PoiSubTypeDialogFragment.OnItemSelectListener() {
-						@Override
-						public void select(String category) {
-							setSubCategory(category);
-						}
-					});
+					dialogFragment.setOnItemSelectListener(c -> setSubCategory(c));
 					dialogFragment.show(getChildFragmentManager(), "PoiSubTypeDialogFragment");
 				}
 			}
@@ -336,18 +332,10 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		if (!isAddingPoi && Entity.EntityType.valueOf(editPoiData.getEntity()) == Entity.EntityType.NODE) {
 			Button deleteButton = (Button) view.findViewById(R.id.deleteButton);
 			deleteButton.setVisibility(View.VISIBLE);
-			deleteButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					DeletePoiHelper deletePoiHelper = new DeletePoiHelper(getMyActivity());
-					deletePoiHelper.setCallback(new DeletePoiHelper.DeletePoiCallback() {
-						@Override
-						public void poiDeleted() {
-							dismiss();
-						}
-					});
-					deletePoiHelper.deletePoiWithDialog(getEditPoiData().getEntity());
-				}
+			deleteButton.setOnClickListener(v -> {
+				DeletePoiHelper deletePoiHelper = new DeletePoiHelper(getMyActivity());
+				deletePoiHelper.setCallback(this::dismiss);
+				deletePoiHelper.deletePoiWithDialog(getEditPoiData().getEntity());
 			});
 		}
 
@@ -528,9 +516,9 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		}
 		commitEntity(action, entity, mOpenstreetmapUtil.getEntityInfo(entity.getId()), comment, false,
 				result -> {
+					OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 					if (result != null) {
-						OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
-						if (plugin != null && offlineEdit) {
+						if (offlineEdit) {
 							List<OpenstreetmapPoint> points = plugin.getDBPOI().getOpenstreetmapPoints();
 							if (getActivity() instanceof MapActivity && points.size() > 0) {
 								OsmPoint point = points.get(points.size() - 1);
@@ -547,7 +535,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 						}
 						dismissAllowingStateLoss();
 					} else {
-						OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 						mOpenstreetmapUtil = plugin.getPoiModificationLocalUtil();
 						Button saveButton = view.findViewById(R.id.saveButton);
 						saveButton.setText(mOpenstreetmapUtil instanceof OpenstreetmapRemoteUtil
@@ -575,6 +562,14 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 	public void setSubCategory(String subCategory) {
 		poiTypeEditText.setText(subCategory);
+	}
+
+	public void smoothScrollToBottom() {
+		ScrollView scrollView = view.findViewById(R.id.scroll_view);
+		int height = scrollView.getHeight();
+		int bottom = scrollView.getChildAt(0).getBottom();
+		int maxScrollY = Math.max(0, bottom - height);
+		scrollView.smoothScrollTo(0, maxScrollY);
 	}
 
 	public static void commitEntity(final Action action,
@@ -800,7 +795,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			this.activity = activity;
 			OsmandSettings settings = ((OsmandApplication) activity.getApplication()).getSettings();
 			OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
-			if (settings.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {
+			if (plugin.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {
 				openstreetmapUtil = plugin.getPoiModificationLocalUtil();
 			} else {
 				openstreetmapUtil = plugin.getPoiModificationRemoteUtil();

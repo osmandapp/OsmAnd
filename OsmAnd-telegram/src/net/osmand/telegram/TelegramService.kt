@@ -11,6 +11,7 @@ import android.widget.Toast
 import com.google.android.gms.location.*
 import net.osmand.PlatformUtil
 import net.osmand.telegram.TelegramSettings.ShareChatInfo
+import net.osmand.telegram.TelegramSettings.SharingStatus
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.TelegramIncomingMessagesListener
 import net.osmand.telegram.helpers.TelegramHelper.TelegramOutgoingMessagesListener
@@ -230,33 +231,39 @@ class TelegramService : Service(), TelegramIncomingMessagesListener,
 
 	private fun startWidgetUpdates() {
 		updateWidgetHandler?.postDelayed({
-			if (isUsedByMyLocation(usedBy)) {
-				val sharingStatus = app().settings.sharingStatusChanges.last()
-				var isSending = sharingStatus.statusType == TelegramSettings.SharingStatusType.SENDING
-				val sharingChats = app().settings.getShareLocationChats()
-				var oldestTime = 0L
-				if (sharingChats.isNotEmpty() && app().shareLocationHelper.sharingLocation) {
-					sharingChats.forEach { id ->
-						val bufferMessages = app().locationMessages.getBufferedMessagesForChat(id)
-						if (bufferMessages.isNotEmpty()) {
-							val newTime = bufferMessages[0].time
-							if (oldestTime == 0L || newTime < oldestTime) {
-								oldestTime = newTime
-							}
-						} else {
-							oldestTime = 0L
-						}
-					}
-				} else {
-					isSending = false
-					oldestTime = -1
-				}
-				app().showLocationHelper.addOrUpdateStatusWidget(oldestTime, isSending)
-			} else {
-				app().showLocationHelper.addOrUpdateStatusWidget(-1, false)
+			val statusChanges = app().settings.sharingStatusChanges
+			if (statusChanges.isNotEmpty()) {
+				updateWidget(statusChanges.last())
 			}
 			startWidgetUpdates()
 		}, UPDATE_WIDGET_INTERVAL_MS)
+	}
+
+	private fun updateWidget(status: SharingStatus) {
+		if (isUsedByMyLocation(usedBy)) {
+			var isSending = status.statusType == TelegramSettings.SharingStatusType.SENDING
+			val sharingChats = app().settings.getShareLocationChats()
+			var oldestTime = 0L
+			if (sharingChats.isNotEmpty() && app().shareLocationHelper.sharingLocation) {
+				sharingChats.forEach { id ->
+					val bufferMessages = app().locationMessages.getBufferedMessagesForChat(id)
+					if (bufferMessages.isNotEmpty()) {
+						val newTime = bufferMessages[0].time
+						if (oldestTime == 0L || newTime < oldestTime) {
+							oldestTime = newTime
+						}
+					} else {
+						oldestTime = 0L
+					}
+				}
+			} else {
+				isSending = false
+				oldestTime = -1
+			}
+			app().showLocationHelper.addOrUpdateStatusWidget(oldestTime, isSending)
+		} else {
+			app().showLocationHelper.addOrUpdateStatusWidget(-1, false)
+		}
 	}
 
 	@SuppressLint("MissingPermission")

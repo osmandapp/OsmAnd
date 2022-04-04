@@ -29,7 +29,7 @@ import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -253,11 +253,11 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 											break;
 										case HOME:
 											app.showShortToastMessage(R.string.add_home);
-											app.getFavorites().setSpecialPoint(ll, FavouritePoint.SpecialPointType.HOME, null);
+											app.getFavoritesHelper().setSpecialPoint(ll, FavouritePoint.SpecialPointType.HOME, null);
 											break;
 										case WORK:
 											app.showShortToastMessage(R.string.add_work);
-											app.getFavorites().setSpecialPoint(ll, FavouritePoint.SpecialPointType.WORK, null);
+											app.getFavoritesHelper().setSpecialPoint(ll, FavouritePoint.SpecialPointType.WORK, null);
 											break;
 									}
 								} else if (pointType == PointType.START) {
@@ -361,7 +361,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		items.add(switchStartAndEndItem);
 	}
 
-	private void loadFavoritesItems(List<Object> items, FavouritesDbHelper helper) {
+	private void loadFavoritesItems(List<Object> items, FavouritesHelper helper) {
 		items.clear();
 		addMainScrollItems(items);
 		items.addAll(helper.getVisibleFavouritePoints());
@@ -377,12 +377,12 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			List<Object> items = new ArrayList<>();
 			final FavoritesItemsAdapter adapter = new FavoritesItemsAdapter(app, items);
 			adapter.setItemClickListener(getAdapterOnClickListener(items));
-			final FavouritesDbHelper helper = app.getFavorites();
+			final FavouritesHelper helper = app.getFavoritesHelper();
 			if (helper.isFavoritesLoaded()) {
 				loadFavoritesItems(items, helper);
 			} else {
 				addMainScrollItems(items);
-				helper.addListener(new FavouritesDbHelper.FavoritesListener() {
+				helper.addListener(new FavouritesHelper.FavoritesListener() {
 
 					private void reloadFavoritesItems() {
 						MapActivity mapActivity = (MapActivity) getActivity();
@@ -444,7 +444,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 							dismiss();
 						}
 					} else {
-						FavouritesDbHelper favorites = requiredMyApplication().getFavorites();
+						FavouritesHelper favorites = requiredMyApplication().getFavoritesHelper();
 						switch (pointType) {
 							case START:
 								targetPointsHelper.setStartPoint(ll, true, name);
@@ -482,7 +482,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		} else if (item instanceof PointType) {
 			MapActivity mapActivity = (MapActivity) getActivity();
 			if (mapActivity != null) {
-				FavouritesDbHelper favorites = mapActivity.getMyApplication().getFavorites();
+				FavouritesHelper favorites = mapActivity.getMyApplication().getFavoritesHelper();
 				FavouritePoint point = null;
 				if (item == PointType.HOME) {
 					point = favorites.getSpecialPoint(FavouritePoint.SpecialPointType.HOME);
@@ -667,7 +667,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 				AndroidUiHelper.updateVisibility(favoriteViewHolder.description, !Algorithms.isEmpty(description));
 			} else {
 				int defaultFavoritesColor = ContextCompat.getColor(app, R.color.color_favorite);
-				int pointColor = app.getFavorites().getColorWithCategory(point, defaultFavoritesColor);
+				int pointColor = app.getFavoritesHelper().getColorWithCategory(point, defaultFavoritesColor);
 				int pointIconRes = point.getIconId() == 0 ? R.drawable.ic_action_favorite : point.getIconId();
 				BackgroundType backgroundType = point.getBackgroundType() == null
 						? BackgroundType.CIRCLE

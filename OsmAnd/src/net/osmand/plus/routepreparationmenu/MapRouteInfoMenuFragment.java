@@ -1,7 +1,5 @@
 package net.osmand.plus.routepreparationmenu;
 
-import static net.osmand.plus.track.fragments.TrackMenuFragment.startNavigationForGPX;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -13,27 +11,27 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
-
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routing.GPXRouteParams;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
+import net.osmand.plus.track.helpers.GpxNavigationHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.TextViewExProgress;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 
 public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		implements OnSegmentSelectedListener, DownloadEvents {
@@ -503,17 +501,10 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 	}
 
 	@Override
-	public void onSegmentSelect(GPXUtilities.GPXFile gpxFile, int selectedSegment) {
+	public void onSegmentSelect(@NonNull GPXFile gpxFile, int selectedSegment) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
-			app.getSettings().GPX_ROUTE_SEGMENT.set(selectedSegment);
-			startNavigationForGPX(gpxFile, mapActivity.getMapActions(), mapActivity);
-			GPXRouteParams.GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
-			if (paramsBuilder != null) {
-				paramsBuilder.setSelectedSegment(selectedSegment);
-				app.getRoutingHelper().onSettingsChanged(true);
-			}
+			GpxNavigationHelper.startNavigationForSegment(gpxFile, selectedSegment, mapActivity);
 			dismiss();
 		}
 	}

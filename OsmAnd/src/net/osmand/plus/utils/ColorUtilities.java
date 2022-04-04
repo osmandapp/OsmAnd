@@ -3,12 +3,12 @@ package net.osmand.plus.utils;
 import android.content.Context;
 import android.graphics.Color;
 
-import net.osmand.plus.R;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+
+import net.osmand.plus.R;
 
 public class ColorUtilities {
 
@@ -133,6 +133,16 @@ public class ColorUtilities {
 	}
 
 	@ColorInt
+	public static int getActiveIconColor(@NonNull Context ctx, boolean nightMode) {
+		return ContextCompat.getColor(ctx, getActiveIconColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getActiveIconColorId(boolean nightMode) {
+		return nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light;
+	}
+
+	@ColorInt
 	public static int getDefaultIconColor(@NonNull Context ctx, boolean nightMode) {
 		return ContextCompat.getColor(ctx, getDefaultIconColorId(nightMode));
 	}
@@ -203,6 +213,16 @@ public class ColorUtilities {
 	}
 
 	@ColorInt
+	public static int getActiveTransparentColor(@NonNull Context ctx, boolean nightMode) {
+		return ContextCompat.getColor(ctx, getActiveTransparentColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getActiveTransparentColorId(boolean nightMode) {
+		return nightMode ? R.color.switch_button_active_dark : R.color.switch_button_active_light;
+	}
+
+	@ColorInt
 	public static int getCardAndListBackgroundColor(@NonNull Context ctx, boolean nightMode) {
 		return ContextCompat.getColor(ctx, getCardAndListBackgroundColorId(nightMode));
 	}
@@ -225,6 +245,16 @@ public class ColorUtilities {
 	}
 
 	@ColorInt
+	public static int getInactiveButtonsAndLinksColor(@NonNull Context ctx, boolean nightMode) {
+		return ContextCompat.getColor(ctx, getInactiveButtonsAndLinksColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getInactiveButtonsAndLinksColorId(boolean nightMode) {
+		return nightMode ? R.color.inactive_buttons_and_links_bg_dark : R.color.inactive_buttons_and_links_bg_light;
+	}
+
+	@ColorInt
 	public static int getMapButtonIconColor(@NonNull Context ctx, boolean nightMode) {
 		return ContextCompat.getColor(ctx, getMapButtonIconColorId(nightMode));
 	}
@@ -232,5 +262,10 @@ public class ColorUtilities {
 	@ColorRes
 	public static int getMapButtonIconColorId(boolean nightMode) {
 		return nightMode ? R.color.map_button_icon_color_dark : R.color.map_button_icon_color_light;
+	}
+
+	@ColorRes
+	public static int getStatusBarColorId(boolean nightMode) {
+		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
 	}
 }

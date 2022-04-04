@@ -8,7 +8,7 @@ import android.content.Context;
 import android.os.ParcelFileDescriptor;
 
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavouritesFileHelper;
 import net.osmand.plus.plugins.osmedit.helpers.OsmBugsDbHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -35,7 +35,7 @@ public class OsmandBackupAgent extends BackupAgentHelper {
 		SharedPreferencesBackupHelper helper = new SharedPreferencesBackupHelper(this, prefs);
 		addHelper("osmand.settings", helper);
 
-		FileBackupHelper fileBackupHelper = new FileBackupHelper(this, FavouritesDbHelper.FILE_TO_BACKUP,
+		FileBackupHelper fileBackupHelper = new FileBackupHelper(this, FavouritesFileHelper.FILE_TO_BACKUP,
 				"../databases/" + MapMarkersDbHelper.DB_NAME, "../databases/" + OsmBugsDbHelper.OSMBUGS_DB_NAME);
 		addHelper("osmand.files", fileBackupHelper);
 	}

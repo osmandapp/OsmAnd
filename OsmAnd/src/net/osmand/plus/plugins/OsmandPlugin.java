@@ -20,22 +20,22 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.map.WorldRegion;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.download.CustomRegion;
+import net.osmand.plus.AppInitializer;
+import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializer.InitEvents;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.api.SettingsAPI;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.download.CustomRegion;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
@@ -43,24 +43,30 @@ import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
+import net.osmand.plus.myplaces.ui.FavoritesActivity;
+import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.plugins.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
+import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.plugins.skimaps.SkiMapsPlugin;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
-import net.osmand.plus.plugins.skimaps.SkiMapsPlugin;
-import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
+import net.osmand.render.RenderingRuleProperty;
+import net.osmand.render.RenderingRulesStorage;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
 
@@ -74,6 +80,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -309,6 +316,7 @@ public abstract class OsmandPlugin {
 		allPlugins.add(new OsmandDevelopmentPlugin(app));
 
 		loadCustomPlugins(app);
+		registerAppInitializingDependedProperties(app);
 		enablePluginsByDefault(app, enabledPlugins);
 		activatePlugins(app, enabledPlugins);
 	}
@@ -424,11 +432,9 @@ public abstract class OsmandPlugin {
 		if (available || (!marketEnabled && !paid)) {
 			plugin.setInstallURL(null);
 			processed = true;
-		} else {
-			if (marketEnabled) {
-				plugin.setInstallURL(Version.getUrlWithUtmRef(app, plugin.getComponentId1()));
-				processed = true;
-			}
+		} else if (marketEnabled) {
+			plugin.setInstallURL(Version.getUrlWithUtmRef(app, plugin.getComponentId1()));
+			processed = true;
 		}
 		return processed;
 	}
@@ -510,6 +516,24 @@ public abstract class OsmandPlugin {
 		return true;
 	}
 
+	private static void registerAppInitializingDependedProperties(@NonNull OsmandApplication app) {
+		app.getAppInitializer().addListener(new AppInitializeListener() {
+
+			@Override
+			public void onStart(AppInitializer init) {
+			}
+
+			@Override
+			public void onProgress(AppInitializer init, InitEvents event) {
+			}
+
+			@Override
+			public void onFinish(AppInitializer init) {
+				registerRenderingPreferences(app);
+			}
+		});
+	}
+
 	protected List<IndexItem> getMapsForType(@NonNull LatLon latLon, @NonNull DownloadActivityType type) {
 		try {
 			return DownloadResources.findIndexItemsAt(app, latLon, type);
@@ -555,7 +579,15 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
+	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, List<RenderingRuleProperty> customRules) {
+	}
+
+	protected void registerConfigureMapCategoryActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
+	}
+
+	@Nullable
+	protected String getRenderPropertyPrefix() {
+		return null;
 	}
 
 	protected void registerMapContextMenuActions(@NonNull MapActivity mapActivity, double latitude, double longitude,
@@ -573,9 +605,6 @@ public abstract class OsmandPlugin {
 	}
 
 	protected void addMyPlacesTab(FavoritesActivity favoritesActivity, List<TabItem> mTabs, Intent intent) {
-	}
-
-	protected void contextMenuFragment(FragmentActivity activity, Fragment fragment, Object info, ContextMenuAdapter adapter) {
 	}
 
 	protected void optionsMenuFragment(FragmentActivity activity, Fragment fragment, ContextMenuAdapter optionsMenuAdapter) {
@@ -845,21 +874,45 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	public static void registerLayerContextMenu(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
+	public static void registerLayerContextMenu(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			plugin.registerLayerContextMenuActions(adapter, mapActivity);
+			plugin.registerLayerContextMenuActions(adapter, mapActivity, customRules);
+		}
+	}
+
+	public static void registerConfigureMapCategory(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			plugin.registerConfigureMapCategoryActions(adapter, mapActivity, customRules);
+		}
+	}
+
+	public static void registerRenderingPreferences(@NonNull OsmandApplication app) {
+		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+		if (renderer == null) return;
+
+		List<RenderingRuleProperty> customRules = new ArrayList<>(renderer.PROPS.getCustomRules());
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
+			String prefix = plugin.getRenderPropertyPrefix();
+			if (prefix != null) {
+				Iterator<RenderingRuleProperty> it = customRules.iterator();
+				while (it.hasNext()) {
+					RenderingRuleProperty rule = it.next();
+					if (rule.getAttrName().startsWith(prefix)) {
+						it.remove();
+						if (rule.isBoolean()) {
+							plugin.registerBooleanRenderingPreference(rule.getAttrName(), false);
+						} else {
+							plugin.registerRenderingPreference(rule.getAttrName(), "");
+						}
+					}
+				}
+			}
 		}
 	}
 
 	public static void registerOptionsMenu(MapActivity map, ContextMenuAdapter helper) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.registerOptionsMenuItems(map, helper);
-		}
-	}
-
-	public static void onContextMenuActivity(FragmentActivity activity, Fragment fragment, Object info, ContextMenuAdapter adapter) {
-		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			plugin.contextMenuFragment(activity, fragment, info, adapter);
 		}
 	}
 
@@ -932,7 +985,7 @@ public abstract class OsmandPlugin {
 	}
 
 	/**
-	 * @param holder an object to collect results
+	 * @param holder      an object to collect results
 	 * @param imageObject json object that contains data for create an image card
 	 * @return 'true' if an image card was created
 	 */
@@ -994,44 +1047,73 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	protected CommonPreference<Boolean> registerBooleanPreference(OsmandApplication app, String prefId, boolean defValue) {
+	protected CommonPreference<Boolean> registerBooleanPreference(@NonNull String prefId, boolean defValue) {
 		CommonPreference<Boolean> preference = app.getSettings().registerBooleanPreference(prefId, defValue);
+		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
-	private CommonPreference<Boolean> registerBooleanAccessibilityPreference(OsmandApplication app, String prefId, boolean defValue) {
+	protected CommonPreference<Boolean> registerBooleanAccessibilityPreference(@NonNull String prefId, boolean defValue) {
 		CommonPreference<Boolean> preference = app.getSettings().registerBooleanAccessibilityPreference(prefId, defValue);
+		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
-	protected CommonPreference<String> registerStringPreference(OsmandApplication app, String prefId, String defValue) {
+	protected CommonPreference<String> registerStringPreference(@NonNull String prefId, @Nullable String defValue) {
 		CommonPreference<String> preference = app.getSettings().registerStringPreference(prefId, defValue);
+		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
-	protected CommonPreference<Integer> registerIntPreference(OsmandApplication app, String prefId, int defValue) {
+	protected CommonPreference<Integer> registerIntPreference(@NonNull String prefId, int defValue) {
 		CommonPreference<Integer> preference = app.getSettings().registerIntPreference(prefId, defValue);
+		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
-	protected CommonPreference<Long> registerLongPreference(OsmandApplication app, String prefId, long defValue) {
+	protected CommonPreference<Long> registerLongPreference(@NonNull String prefId, long defValue) {
 		CommonPreference<Long> preference = app.getSettings().registerLongPreference(prefId, defValue);
+		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
-	protected CommonPreference<Float> registerFloatPreference(OsmandApplication app, String prefId, float defValue) {
+	protected CommonPreference<Float> registerFloatPreference(@NonNull String prefId, float defValue) {
 		CommonPreference<Float> preference = app.getSettings().registerFloatPreference(prefId, defValue);
+		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
-	protected <T extends Enum> CommonPreference<T> registerEnumIntPreference(OsmandApplication app, String prefId, Enum defaultValue, Enum[] values, Class<T> clz) {
+	protected <T extends Enum<?>> CommonPreference<T> registerEnumIntPreference(@NonNull String prefId, @NonNull Enum<?> defaultValue,
+	                                                                            @NonNull Enum<?>[] values, @NonNull Class<T> clz) {
 		CommonPreference<T> preference = app.getSettings().registerEnumIntPreference(prefId, defaultValue, values, clz);
+		preference.setRelatedPlugin(this);
+		pluginPreferences.add(preference);
+		return preference;
+	}
+
+	protected ListStringPreference registerListStringPreference(@NonNull String prefId, @Nullable String defValue, @NonNull String delimiter) {
+		ListStringPreference preference = app.getSettings().registerStringListPreference(prefId, defValue, delimiter);
+		preference.setRelatedPlugin(this);
+		pluginPreferences.add(preference);
+		return preference;
+	}
+
+	protected CommonPreference<Boolean> registerBooleanRenderingPreference(@NonNull String prefId, boolean defValue) {
+		CommonPreference<Boolean> preference = app.getSettings().registerCustomRenderBooleanProperty(prefId, defValue);
+		preference.setRelatedPlugin(this);
+		pluginPreferences.add(preference);
+		return preference;
+	}
+
+	protected CommonPreference<String> registerRenderingPreference(@NonNull String prefId, @Nullable String defValue) {
+		CommonPreference<String> preference = app.getSettings().registerCustomRenderProperty(prefId, defValue);
+		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}

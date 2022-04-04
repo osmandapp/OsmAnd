@@ -9,8 +9,8 @@ import android.media.SoundPool;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 

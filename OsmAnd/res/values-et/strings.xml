@@ -1289,7 +1289,6 @@
     <string name="save_track_to_gpx_globally_headline">Vajadusel teekonna logimine</string>
     <string name="save_current_track_descr">Salvesta praegune teekond kohe GPX failina.</string>
     <string name="save_current_track">Salvesta praegune teekond</string>
-    <string name="save_track_to_gpx_descrp">GPX teekond salvestatakse navigeerimise ajal automaatselt teekondade kausta.</string>
     <string name="save_track_interval_globally">Logimise ajavahemik</string>
     <string name="save_track_interval">Logimise ajavahemik navigeerimise ajal</string>
     <string name="save_track_interval_descr">Määra teekonna salvestamise logimise ajavahemik navigeerimise ajal</string>
@@ -2611,7 +2610,6 @@
     <string name="ski_map_render_descr">Suusatamiseks. Hõlmab nõlvu, suusatõstukeid, murdmaaradu jne. Hägustab teisejärgulised kaardiobjektid.</string>
     <string name="light_rs_render_descr">Lihtne sõidustiil. Õrn öörežiim, kõrgusjooned, kontrastsed oranži värvi teed ja hägustatud teisejärgulised kaardiobjektid.</string>
     <string name="topo_render_descr">Matkamiseks, rändamiseks ja jalgrattasõiduks looduses. Loetav õues. Kontrastsed teed ja loodusobjektid, erinevad teekonnaliigid, täpsemad kõrgusjoonte võimalused, lisadetailid. Pinna terviklikkuse reguleerimine eristab tee kvaliteeti. Öine režiim puudub.</string>
-    <string name="mapnik_render_descr">Vana vaikimisi \'Mapnik\' stiil. \'Mapnik\' sarnased värvid.</string>
     <string name="default_render_descr">Üldotstarbeline stiil. Selgelt esitatud tiheasustus. Sisaldab kõrgusjooni, teekondi, pinna kvaliteeti, juurdepääsupiiranguid, teekatteid, SAC-skaala järgi rajatavaid radu, kärestikuspordi üksuseid.</string>
     <string name="touring_view_render_descr">Suure kontrastsusega ja maksimaalselt detailne matkamise stiil. Sisaldab kõiki OsmAndi vaikestiili valikuid, kuvades samal ajal võimalikult palju üksikasju, eriti teid, radu ja muid liikumisviise. Selge \"turismialase atlase\" eristamine teetüüpide vahel. Sobib kasutamiseks nii päeval, öösel kui ka välitingimustes.</string>
     <string name="off_road_render_descr">\'Topo\' stiilis maanteel sõitmiseks ja rohelise satelliidipildi aluskihina kasutamiseks. Vähendatud peatee paksus, suurendatud radade, teede, jalgratta ja muude teede paksus.</string>

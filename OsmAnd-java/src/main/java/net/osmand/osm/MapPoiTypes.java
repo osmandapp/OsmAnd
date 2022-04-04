@@ -37,7 +37,6 @@ public class MapPoiTypes {
 	private List<PoiCategory> categories = new ArrayList<PoiCategory>();
 	private Set<String> forbiddenTypes = new HashSet<>();
 	private PoiCategory otherCategory;
-	private PoiCategory otherMapCategory;
 
 	public static final String WIKI_LANG = "wiki_lang";
 	public static final String WIKI_PLACE = "wiki_place";
@@ -107,10 +106,7 @@ public class MapPoiTypes {
 	}
 
 	public PoiCategory getOtherMapCategory() {
-		if (otherMapCategory == null) {
-			otherMapCategory = getPoiCategoryByName(OTHER_MAP_CATEGORY, true);
-		}
-		return otherMapCategory;
+		return getPoiCategoryByName(OTHER_MAP_CATEGORY, true);
 	}
 
 	public String getPoiAdditionalCategoryIconName(String category) {
@@ -260,7 +256,7 @@ public class MapPoiTypes {
 		List<AbstractPoiType> tm = new ArrayList<AbstractPoiType>();
 		for (int i = 0; i < categories.size(); i++) {
 			PoiCategory pc = categories.get(i);
-			if (pc == otherMapCategory) {
+			if (pc == getOtherMapCategory()) {
 				continue;
 			}
 			addIf(tm, pc, matcher);

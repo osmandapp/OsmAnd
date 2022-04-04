@@ -1,6 +1,8 @@
 package net.osmand.plus.resources;
 
 
+import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
+
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteException;
@@ -9,6 +11,9 @@ import android.os.HandlerThread;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.IProgress;
@@ -82,11 +87,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
 
 /**
  * Resource manager is responsible to work with all resources
@@ -407,9 +407,23 @@ public class ResourceManager {
 		}
 	}
 
-	public synchronized boolean tileExistOnFileSystem(String file, ITileSource map, int x, int y, int zoom) {
+	public synchronized boolean isTileDownloaded(String file, ITileSource map, int x, int y, int zoom) {
 		TilesCache<?> cache = getTilesCache(map);
-		return cache != null && cache.tileExistOnFileSystem(file, map, x, y, zoom);
+		return cache != null && cache.isTileDownloaded(file, map, x, y, zoom);
+	}
+
+	public synchronized boolean isTileSavedOnFileSystem(@NonNull String tileId, @Nullable ITileSource map,
+	                                                    int x, int y, int zoom) {
+		TilesCache<?> cache = getTilesCache(map);
+		return cache != null && cache.isTileSavedOnFileSystem(tileId, map, x, y, zoom);
+	}
+
+	public synchronized int getTileBytesSizeOnFileSystem(@NonNull String tileId, @NonNull ITileSource map,
+	                                                     int x, int y, int zoom) {
+		TilesCache<?> cache = getTilesCache(map);
+		return cache != null
+				? cache.getTileBytesSizeOnFileSystem(tileId, map, x, y, zoom)
+				: 0;
 	}
 
 	public void clearTileForMap(String file, ITileSource map, int x, int y, int zoom, long requestTimestamp) {
@@ -435,11 +449,12 @@ public class ResourceManager {
 		return cache != null && cache.getRequestedTile(req) != null;
 	}
 
-	public boolean hasTileForMapSync(String file, ITileSource map, int x, int y, int zoom,
-									 boolean loadFromInternetIfNeeded, long requestTimestamp) {
+	public void getTileForMapSync(String file, ITileSource map, int x, int y, int zoom,
+	                              boolean loadFromInternetIfNeeded, long requestTimestamp) {
 		TilesCache<?> cache = getTilesCache(map);
-		return cache != null
-				&& cache.getTileForMapSync(file, map, x, y, zoom, loadFromInternetIfNeeded, requestTimestamp) != null;
+		if (cache != null) {
+			cache.getTileForMapSync(file, map, x, y, zoom, loadFromInternetIfNeeded, requestTimestamp);
+		}
 	}
 
 	public void clearCacheAndTiles(@NonNull ITileSource map) {
@@ -1245,9 +1260,13 @@ public class ResourceManager {
 		return renderer.updateMapIsNeeded(rotatedTileBox, drawSettings);
 	}
 
-	public void updateRendererMap(RotatedTileBox rotatedTileBox, OnMapLoadedListener mapLoadedListener) {
+	public void updateRendererMap(@NonNull RotatedTileBox tileBox) {
+		updateRendererMap(tileBox, null, false);
+	}
+
+	public void updateRendererMap(@NonNull RotatedTileBox tileBox, @Nullable OnMapLoadedListener listener, boolean forceLoadMap) {
 		renderer.interruptLoadingMap();
-		asyncLoadingThread.requestToLoadMap(new MapLoadRequest(rotatedTileBox, mapLoadedListener));
+		asyncLoadingThread.requestToLoadMap(new MapLoadRequest(tileBox, listener, forceLoadMap));
 	}
 
 	public void interruptRendering() {

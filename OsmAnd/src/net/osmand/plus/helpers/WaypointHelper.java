@@ -15,6 +15,7 @@ import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -237,7 +238,8 @@ public class WaypointHelper {
 			int kIterator = pointsProgress.get(ALARMS);
 			List<LocationPointWrapper> lp = locationPoints.get(ALARMS);
 			while (kIterator < lp.size()) {
-				AlarmInfo inf = (AlarmInfo) lp.get(kIterator).point;
+				LocationPointWrapper lwp = lp.get(kIterator);
+				AlarmInfo inf = (AlarmInfo) lwp.point;
 				int currentRoute = route.getCurrentRoute();
 				if (inf.getLocationIndex() < currentRoute && inf.getLastLocationIndex() != -1
 						&& inf.getLastLocationIndex() < currentRoute) {
@@ -248,7 +250,12 @@ public class WaypointHelper {
 							&& currentRoute < inf.getLastLocationIndex()) {
 						inf.setFloatValue(route.getDistanceToPoint(inf.getLastLocationIndex()));
 					}
-					int d = route.getDistanceToPoint(inf.getLocationIndex());
+					Location lastKnownLocation = app.getRoutingHelper().getLastProjection();
+					int d = (int) Math.max(0.0, MapUtils.getDistance(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
+							inf.getLatitude(), inf.getLongitude()) - lwp.getDeviationDistance());
+					if (inf.getLocationIndex() == currentRoute && d > 10) {
+						return null;
+					}
 					if (!atd.isTurnStateActive(0, d, STATE_LONG_PNT_APPROACH)) {
 						break;
 					}
@@ -400,6 +407,7 @@ public class WaypointHelper {
 
 					VoiceRouter voiceRouter = getVoiceRouter();
 					AnnounceTimeDistances atd = voiceRouter.getAnnounceTimeDistances();
+					RouteDirectionInfo nextRoute = voiceRouter.getNextRouteDirection();
 					float atdSpeed = atd.getSpeed(lastKnownLocation);
 					while (kIterator < lp.size()) {
 						LocationPointWrapper lwp = lp.get(kIterator);
@@ -433,6 +441,13 @@ public class WaypointHelper {
 									case TRAFFIC_CALMING:
 										announceRadius = STATE_SHORT_ALARM_ANNOUNCE;
 										filterCloseAlarms = true;
+										break;
+									case PEDESTRIAN:
+										announceRadius = ((nextRoute != null)
+												&& (nextRoute.getTurnType().isRoundAbout())
+												&& (kIterator != 0))
+												? STATE_SHORT_ALARM_ANNOUNCE
+												: STATE_LONG_ALARM_ANNOUNCE;
 										break;
 									default:
 										announceRadius = STATE_LONG_ALARM_ANNOUNCE;
@@ -568,7 +583,7 @@ public class WaypointHelper {
 			if ((type == FAVORITES || all)) {
 				final List<LocationPointWrapper> array = clearAndGetArray(locationPoints, FAVORITES);
 				if (showFavorites) {
-					findLocationPoints(route, FAVORITES, array, app.getFavorites().getVisibleFavouritePoints(),
+					findLocationPoints(route, FAVORITES, array, app.getFavoritesHelper().getVisibleFavouritePoints(),
 							announceFavorites);
 					sortList(array);
 				}
@@ -819,7 +834,7 @@ public class WaypointHelper {
 
 			} else if (type == FAVORITES ) {
 				return PointImageDrawable.getFromFavorite(uiCtx,
-						app.getFavorites().getColorWithCategory((FavouritePoint) point,
+						app.getFavoritesHelper().getColorWithCategory((FavouritePoint) point,
 								app.getResources().getColor(R.color.color_favorite)), false, (FavouritePoint) point);
 			} else if (type == WAYPOINTS) {
 				if (point instanceof WptLocationPoint) {

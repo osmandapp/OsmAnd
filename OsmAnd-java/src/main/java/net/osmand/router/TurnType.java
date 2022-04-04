@@ -397,7 +397,7 @@ public class TurnType {
 		}
 		if(vl != null) {
 			if(lanes != null) {
-				vl += "(" + lanesToString(lanes) +")";
+				vl += " (" + lanesToString(lanes) +")";
 			}
 			return vl;
 		}

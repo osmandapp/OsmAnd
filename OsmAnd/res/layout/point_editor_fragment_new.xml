@@ -9,21 +9,21 @@
 	android:background="@android:color/transparent">
 
 	<LinearLayout
-		android:id="@+id/background_layout"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:background="?attr/activity_background_color"
+		android:background="?attr/appbar_and_list_background_color"
 		android:orientation="vertical">
 
 		<androidx.appcompat.widget.Toolbar
 			android:id="@+id/toolbar"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/toolbar_height"
-			android:background="?attr/card_and_list_background_basic"
+			android:background="?attr/appbar_and_list_background_color"
 			app:contentInsetStartWithNavigation="@dimen/toolbar_inset_start_with_navigation"
+			app:titleTextAppearance="@style/ToolbarTitle"
+			osmand:titleTextColor="?android:textColorPrimary"
 			osmand:subtitleTextColor="?android:textColorPrimary"
-			osmand:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-			osmand:titleTextColor="?android:textColorPrimary">
+			osmand:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
 			<ImageButton
 				android:id="@+id/toolbar_action"
@@ -383,7 +383,6 @@
 					android:paddingLeft="@dimen/content_padding"
 					android:paddingTop="@dimen/context_menu_first_line_top_margin"
 					android:paddingRight="@dimen/content_padding"
-					android:paddingBottom="@dimen/context_menu_first_line_top_margin"
 					android:text="@string/select_icon_profile_dialog_title"
 					android:textColor="?android:textColorSecondary"
 					android:textSize="@dimen/default_desc_text_size"
@@ -391,30 +390,11 @@
 					android:paddingEnd="@dimen/content_padding"
 					android:paddingStart="@dimen/content_padding" />
 
-				<androidx.recyclerview.widget.RecyclerView
-					android:id="@+id/group_name_recycler_view"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:clipToPadding="false"
-					android:orientation="horizontal"
-					android:paddingStart="@dimen/content_padding"
-					android:paddingLeft="@dimen/content_padding"
-					android:paddingEnd="@dimen/content_padding"
-					android:paddingRight="@dimen/content_padding"
-					tools:itemCount="3"
-					tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-					tools:listitem="@layout/point_editor_icon_category_item"
-					tools:orientation="horizontal" />
-
-				<net.osmand.plus.widgets.FlowLayout
-					android:id="@+id/select_icon"
+				<FrameLayout
+					android:id="@+id/icons_card_container"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginStart="@dimen/content_padding"
-					android:layout_marginLeft="@dimen/content_padding"
-					android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
-					android:layout_marginEnd="@dimen/content_padding"
-					android:layout_marginRight="@dimen/content_padding"
+					android:layout_marginTop="@dimen/content_padding_small"
 					android:layout_marginBottom="@dimen/content_padding_half" />
 
 				<View
@@ -461,13 +441,12 @@
 						android:paddingEnd="@dimen/content_padding" />
 				</LinearLayout>
 
-				<LinearLayout
-					android:id="@+id/select_color"
+				<FrameLayout
+					android:id="@+id/colors_card_container"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
-					android:layout_marginBottom="@dimen/content_padding_half"
-					android:orientation="horizontal" />
+					android:layout_marginBottom="@dimen/content_padding_half" />
 
 				<View
 					android:layout_width="match_parent"
@@ -513,17 +492,14 @@
 						android:paddingEnd="@dimen/content_padding" />
 				</LinearLayout>
 
-				<net.osmand.plus.widgets.FlowLayout
-					android:id="@+id/select_shape"
+				<FrameLayout
+					android:id="@+id/shapes_card_container"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginStart="@dimen/content_padding"
-					android:layout_marginLeft="@dimen/content_padding"
-					android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
+					android:layout_marginTop="@dimen/content_padding_small_half"
 					android:layout_marginEnd="@dimen/content_padding"
-					android:layout_marginRight="@dimen/content_padding"
-					android:layout_marginBottom="@dimen/content_padding_half"
-					android:gravity="start" />
+					android:layout_marginBottom="@dimen/content_padding_half" />
 
 				<View
 					android:layout_width="match_parent"

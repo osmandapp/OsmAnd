@@ -16,8 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
@@ -335,18 +335,18 @@ public class ShowHidePoiAction extends QuickAction {
 								 final List<PoiUIFilter> list,
 								 final PoiUIFilter f) {
 		list.add(f);
-		ContextMenuItem.ItemBuilder builder = new ContextMenuItem.ItemBuilder();
+		ContextMenuItem item = new ContextMenuItem(null);
 
-		builder.setTitle(f.getName());
+		item.setTitle(f.getName());
 
 		if (RenderingIcons.containsBigIcon(f.getIconId())) {
-			builder.setIcon(RenderingIcons.getBigIconResourceId(f.getIconId()));
+			item.setIcon(RenderingIcons.getBigIconResourceId(f.getIconId()));
 		} else {
-			builder.setIcon(R.drawable.mx_special_custom_category);
+			item.setIcon(R.drawable.mx_special_custom_category);
 		}
 
-		builder.setSkipPaintingWithoutColor(true);
-		adapter.addItem(builder.createItem());
+		item.setUseNaturalIconColor(true);
+		adapter.addItem(item);
 	}
 
 	@Override

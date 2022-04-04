@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
@@ -106,6 +106,12 @@ public class WptPtEditor extends PointEditor {
 		return wpt;
 	}
 
+	@Nullable
+	@Override
+	public String getPreselectedIconName() {
+		return isNew && wpt != null ? wpt.getIconName() : null;
+	}
+
 	@Override
 	public String getFragmentTag() {
 		return TAG;
@@ -138,10 +144,8 @@ public class WptPtEditor extends PointEditor {
 		showEditorFragment();
 	}
 
-	public void add(GPXFile gpxFile, LatLon latLon, String title, String address, String description,
-	                int color, String backgroundType, String categoryName, int categoryColor, boolean skipDialog) {
-		MapActivity mapActivity = getMapActivity();
-		if (latLon == null || mapActivity == null) {
+	public void add(@NonNull GPXFile gpxFile, @NonNull WptPt wpt, String categoryName, int categoryColor, boolean skipDialog) {
+		if (mapActivity == null) {
 			return;
 		}
 		isNew = true;
@@ -152,23 +156,14 @@ public class WptPtEditor extends PointEditor {
 				mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
 		gpxSelected = selectedGpxFile != null;
 
-		WptPt wpt = new WptPt(latLon.getLatitude(), latLon.getLongitude(),
-				System.currentTimeMillis(), Double.NaN, 0, Double.NaN);
-
-		wpt.name = title;
-		wpt.setAddress(address);
-		wpt.desc = description;
-		wpt.setColor(color);
-		wpt.setBackgroundType(backgroundType);
-
-		if (categoryName != null && !categoryName.isEmpty()) {
-			FavouritesDbHelper.FavoriteGroup category = mapActivity.getMyApplication()
-					.getFavorites()
+		if (!Algorithms.isEmpty(categoryName)) {
+			FavoriteGroup category = mapActivity.getMyApplication()
+					.getFavoritesHelper()
 					.getGroup(categoryName);
 
 			if (category == null) {
 				mapActivity.getMyApplication()
-						.getFavorites()
+						.getFavoritesHelper()
 						.addEmptyCategory(categoryName, categoryColor);
 			}
 

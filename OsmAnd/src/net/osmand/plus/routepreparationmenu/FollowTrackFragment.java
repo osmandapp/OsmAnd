@@ -524,7 +524,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 
 	private void setupSortButton(View view) {
 		final ImageButton sortButton = view.findViewById(R.id.sort_button);
-		int colorId = isNightMode() ? R.color.inactive_buttons_and_links_bg_dark : R.color.inactive_buttons_and_links_bg_light;
+		int colorId = ColorUtilities.getInactiveButtonsAndLinksColorId(isNightMode());
 		Drawable background = app.getUIUtilities().getIcon(R.drawable.bg_dash_line_dark, colorId);
 		sortButton.setImageResource(sortByMode.getIconId());
 		AndroidUtils.setBackground(sortButton, background);
@@ -599,7 +599,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	}
 
 	@Override
-	public void onSegmentSelect(GPXFile gpxFile, int selectedSegment) {
+	public void onSegmentSelect(@NonNull GPXFile gpxFile, int selectedSegment) {
 		app.getSettings().GPX_ROUTE_SEGMENT.set(selectedSegment);
 		selectTrackToFollow(gpxFile);
 		GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();

@@ -200,12 +200,12 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
         int rightMargin = fabMargin != null ? fabMargin.first : defRightMargin;
         int bottomMargin = fabMargin != null ? fabMargin.second : defBottomMargin;
         // check limits
-        if (rightMargin < 0) {
+        if (rightMargin <= 0) {
             rightMargin = defRightMargin;
         } else if (rightMargin > maxRightMargin) {
             rightMargin = maxRightMargin;
         }
-        if (bottomMargin < 0) {
+        if (bottomMargin <= 0) {
             bottomMargin = defBottomMargin;
         } else if (bottomMargin > maxBottomMargin) {
             bottomMargin = maxBottomMargin;
@@ -238,14 +238,16 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
             return false;
         }
 		// check if state change is needed
-		if (currentWidgetState != null && currentWidgetState == showWidget || isWidgetVisible() == showWidget) {
+		boolean quickActionModeEnabled = currentWidgetState != null && currentWidgetState || isWidgetVisible();
+		boolean quickActionModeDisabled = currentWidgetState == null || !currentWidgetState || !isWidgetVisible();
+		if (quickActionModeEnabled == showWidget && quickActionModeDisabled == !showWidget) {
 			return false;
 		}
 		currentWidgetState = showWidget;
 
 		updateQuickActionButton(showWidget);
-		if (settings.DO_NOT_USE_ANIMATIONS.get()) {
-			quickActionsWidget.setVisibility(!showWidget ? View.GONE : View.VISIBLE);
+		if (settings.DO_NOT_USE_ANIMATIONS.get() || !quickActionsWidget.isAttachedToWindow()) {
+			AndroidUiHelper.updateVisibility(quickActionsWidget, showWidget);
 		} else {
 			animateWidget(showWidget);
 		}
@@ -253,12 +255,12 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 
 		if (!showWidget) {
 		    quitMovingMarker();
-		    quickActionRegistry.setUpdatesListener(null);
+		    quickActionRegistry.removeUpdatesListener(this);
 		    quickActionsWidget.setSelectionListener(null);
 		} else {
 		    enterMovingMode(mapActivity.getMapView().getCurrentRotatedTileBox());
 		    quickActionsWidget.setActions(quickActionRegistry.getFilteredQuickActions());
-		    quickActionRegistry.setUpdatesListener(MapQuickActionLayer.this);
+		    quickActionRegistry.addUpdatesListener(MapQuickActionLayer.this);
 		    quickActionsWidget.setSelectionListener(MapQuickActionLayer.this);
 		}
 		return true;

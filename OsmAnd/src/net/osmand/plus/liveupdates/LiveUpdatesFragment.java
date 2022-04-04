@@ -76,7 +76,6 @@ import net.osmand.plus.liveupdates.LoadLiveMapsTask.LocalIndexInfoAdapter;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.TextViewEx;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -297,7 +296,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 			public void onClick(View view) {
 				Activity activity = getActivity();
 				if (activity != null) {
-					WikipediaDialogFragment.showFullArticle(activity, Uri.parse(SUBSCRIPTION_URL), nightMode);
+					AndroidUtils.openUrl(activity, Uri.parse(SUBSCRIPTION_URL), nightMode);
 				}
 			}
 		});

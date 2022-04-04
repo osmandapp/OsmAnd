@@ -12,13 +12,11 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -45,17 +43,10 @@ import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.data.ValueHolder;
 import net.osmand.data.LatLon;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
-import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
-import net.osmand.plus.ContextMenuItem;
+import net.osmand.data.ValueHolder;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
@@ -72,22 +63,30 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryFiltersFragment;
-import net.osmand.plus.plugins.mapillary.MapillaryPlugin.MapillaryFirstDialogFragment;
+import net.osmand.plus.plugins.mapillary.MapillaryFirstDialogFragment;
+import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.osmedit.menu.OsmNotesMenu;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.plugins.srtm.ContourLinesMenu;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
+import net.osmand.plus.plugins.srtm.TerrainFragment;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.plugins.srtm.ContourLinesMenu;
-import net.osmand.plus.plugins.srtm.SRTMPlugin;
-import net.osmand.plus.plugins.srtm.TerrainFragment;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
+import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
 import net.osmand.plus.wikipedia.WikipediaPoiMenu;
 
 import java.lang.ref.WeakReference;
@@ -132,7 +131,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private FrameLayout dashboardView;
 
 	private ArrayAdapter<?> listAdapter;
-	private OnItemClickListener listAdapterOnClickListener;
+	private OnItemClickListener adapterClickListener;
 
 	private boolean visible = false;
 	private DashboardType visibleType;
@@ -152,7 +151,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private int mFlexibleSpaceImageHeight;
 	private int mFlexibleBlurSpaceHeight;
 	private boolean portrait;
-	private TextView listEmptyTextView;
 	private int[] animationCoordinates;
 	private ProgressBar planRouteProgressBar;
 
@@ -167,7 +165,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	public enum DashboardType {
-		CONFIGURE_SCREEN,
 		CONFIGURE_MAP,
 		LIST_MENU,
 		ROUTE_PREFERENCES,
@@ -240,7 +237,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		//listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		listView.setDrawSelectorOnTop(true);
 		listView.setScrollViewCallbacks(this);
-		listEmptyTextView = dashboardView.findViewById(R.id.emptyTextView);
 		gradientToolbar = AppCompatResources.getDrawable(mapActivity, R.drawable.gradient_toolbar).mutate();
 		if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
 			this.portrait = true;
@@ -312,8 +308,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		tv.setText("");
 		if (visibleType == DashboardType.CONFIGURE_MAP) {
 			tv.setText(R.string.configure_map);
-		} else if (visibleType == DashboardType.CONFIGURE_SCREEN) {
-			tv.setText(R.string.layer_map_appearance);
 		} else if (visibleType == DashboardType.ROUTE_PREFERENCES) {
 			tv.setText(R.string.shared_string_settings);
 		} else if (visibleType == DashboardType.UNDERLAY_MAP) {
@@ -382,24 +376,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		}
 
 		toolbar.getMenu().clear();
-		if (visibleType == DashboardType.CONFIGURE_SCREEN) {
-			toolbar.inflateMenu(R.menu.refresh_menu);
-			toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem menuItem) {
-					if (menuItem.getItemId() == R.id.action_refresh) {
-						MapWidgetRegistry registry = mapActivity.getMapLayers().getMapWidgetRegistry();
-						registry.resetToDefault();
-						MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
-						if (mil != null) {
-							mil.recreateControls();
-						}
-						updateListAdapter(registry.getViewConfigureMenuAdapter(mapActivity));
-					}
-					return false;
-				}
-			});
-		}
 	}
 
 	private FrameLayout.LayoutParams getActionButtonLayoutParams(int btnSizePx) {
@@ -468,8 +444,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		DashboardActionButton button = null;
 
 		if (type == DashboardType.DASHBOARD
-				|| type == DashboardType.LIST_MENU
-				|| type == DashboardType.CONFIGURE_SCREEN) {
+				|| type == DashboardType.LIST_MENU) {
 			button = actionButtons.get(DashboardActionButtonType.MY_LOCATION);
 		} else if (type == DashboardType.ROUTE_PREFERENCES) {
 			button = actionButtons.get(DashboardActionButtonType.NAVIGATE);
@@ -511,10 +486,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	public ArrayAdapter<?> getListAdapter() {
 		return listAdapter;
-	}
-
-	public OnItemClickListener getListAdapterOnClickListener() {
-		return listAdapterOnClickListener;
 	}
 
 	public void hideDashboard() {
@@ -651,11 +622,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				}
 			}
 
-			OsmandSettings settings = getMyApplication().getSettings();
-			if (settings.SHOW_MAPILLARY.get() && !settings.MAPILLARY_FIRST_DIALOG_SHOWN.get()) {
+			MapillaryPlugin plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
+			if (plugin != null && plugin.SHOW_MAPILLARY.get() && !plugin.MAPILLARY_FIRST_DIALOG_SHOWN.get()) {
 				MapillaryFirstDialogFragment fragment = new MapillaryFirstDialogFragment();
 				fragment.show(mapActivity.getSupportFragmentManager(), MapillaryFirstDialogFragment.TAG);
-				settings.MAPILLARY_FIRST_DIALOG_SHOWN.set(true);
+				plugin.MAPILLARY_FIRST_DIALOG_SHOWN.set(true);
 			}
 		}
 		mapActivity.updateStatusBarColor();
@@ -676,10 +647,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			listBackgroundView.setBackgroundColor(backgroundColor);
 		} else {
 			listView.setBackgroundColor(backgroundColor);
-			listEmptyTextView.setBackgroundColor(backgroundColor);
 		}
-		if (visibleType != DashboardType.CONFIGURE_SCREEN
-				&& visibleType != DashboardType.CONFIGURE_MAP
+		if (visibleType != DashboardType.CONFIGURE_MAP
 				&& visibleType != DashboardType.CONTOUR_LINES
 				&& visibleType != DashboardType.TERRAIN
 				&& visibleType != DashboardType.CYCLE_ROUTES
@@ -692,7 +661,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		} else {
 			listView.setDivider(null);
 		}
-		AndroidUtils.setTextSecondaryColor(mapActivity, listEmptyTextView, nightMode);
 
 		if (planRouteProgressBar != null) {
 			mapActivity.setupRouteCalculationProgressBar(planRouteProgressBar);
@@ -700,12 +668,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	private void updateListAdapter() {
-		listEmptyTextView.setVisibility(View.GONE);
 		listView.setEmptyView(null);
 		ContextMenuAdapter cm = null;
-		if (visibleType == DashboardType.CONFIGURE_SCREEN) {
-			cm = mapActivity.getMapLayers().getMapWidgetRegistry().getViewConfigureMenuAdapter(mapActivity);
-		} else if (visibleType == DashboardType.CONFIGURE_MAP) {
+		if (visibleType == DashboardType.CONFIGURE_MAP) {
 			cm = new ConfigureMapMenu().createListAdapter(mapActivity);
 		} else if (visibleType == DashboardType.LIST_MENU) {
 			cm = mapActivity.getMapActions().createMainOptionsMenu();
@@ -736,7 +701,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			this.nightMode = nightMode;
 			applyDayNightMode();
 		}
-		final ArrayAdapter<ContextMenuItem> listAdapter = cm.createListAdapter(mapActivity, !nightMode);
+		ArrayAdapter<ContextMenuItem> listAdapter = cm.createListAdapter(mapActivity, !nightMode);
 		OnItemClickListener listener = getOptionsMenuOnClickListener(cm, listAdapter);
 		updateListAdapter(listAdapter, listener);
 	}
@@ -785,7 +750,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	public void refreshContent(boolean force) {
-		if (visibleType == DashboardType.CONFIGURE_SCREEN || force) {
+		if (force) {
+			listView.clearParams();
 			updateListAdapter();
 		} else if (visibleType == DashboardType.CONFIGURE_MAP || visibleType == DashboardType.ROUTE_PREFERENCES) {
 			int index = listView.getFirstVisiblePosition();
@@ -1054,7 +1020,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			for (int i = 0; i < listAdapter.getCount(); i++) {
 				Object o = listAdapter.getItem(i);
 				if (o instanceof ContextMenuItem) {
-					((ContextMenuItem) o).update();
+					((ContextMenuItem) o).refreshWithActualData();
 				}
 			}
 			listAdapter.notifyDataSetChanged();
@@ -1144,8 +1110,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private boolean isActionButtonVisible() {
 		return visibleType == DashboardType.DASHBOARD
 				|| visibleType == DashboardType.LIST_MENU
-				|| visibleType == DashboardType.ROUTE_PREFERENCES
-				|| visibleType == DashboardType.CONFIGURE_SCREEN;
+				|| visibleType == DashboardType.ROUTE_PREFERENCES;
 	}
 
 	private boolean isBackButtonVisible() {
@@ -1225,16 +1190,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	private void updateListAdapter(ArrayAdapter<?> listAdapter, OnItemClickListener listener) {
 		this.listAdapter = listAdapter;
-		listAdapterOnClickListener = listener;
+		adapterClickListener = listener;
 		if (listView != null) {
 			listView.setAdapter(listAdapter);
-			if (listAdapterOnClickListener != null) {
-				listView.setOnItemClickListener(new OnItemClickListener() {
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-						listAdapterOnClickListener.onItemClick(parent, view, position - listView.getHeaderViewsCount(), id);
-					}
-				});
+			if (adapterClickListener != null) {
+				listView.setOnItemClickListener((parent, view, position, id) ->
+						adapterClickListener.onItemClick(parent, view, position - listView.getHeaderViewsCount(), id));
 			} else {
 				listView.setOnItemClickListener(null);
 			}

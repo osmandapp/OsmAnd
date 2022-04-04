@@ -534,7 +534,6 @@
     <string name="save_current_track">Huidige GPX-track opslaan</string>
     <string name="save_track_interval">Registratie-interval bij navigatie</string>
     <string name="save_track_interval_descr">Stel het logging-interval in voor track-opname tijdens navigatie</string>
-    <string name="save_track_to_gpx_descrp">Tijdens het navigeren wordt automatisch een GPX-track opgeslagen in de tracks-map.</string>
     <string name="save_track_to_gpx">GPX-Track automatisch opnemen tijdens navigatie</string>
     <string name="update_tile">Kaart bijwerken</string>
     <string name="reload_tile">Herlaad kaartsegment</string>
@@ -1714,7 +1713,7 @@
     <string name="navigation_item_description">Navigatie-instellingen.</string>
     <string name="planning_trip_item">Een reis plannen</string>
     <string name="faq_item">FAQ</string>
-    <string name="faq_item_description">Veel gestelde vragen</string>
+    <string name="faq_item_description">Veel gestelde vragen.</string>
     <string name="map_viewing_item">De kaart bekijken</string>
     <string name="search_on_the_map_item">Zoeken op de kaart</string>
     <string name="instalation_troubleshooting_item">Installeren en foutoplossen</string>
@@ -2675,7 +2674,6 @@
     <string name="ski_map_render_descr">Skistijl. Toont pistes, skiliften en andere ski-gerelateerde elementen. Overige kaartelementen worden verduisterd.</string>
     <string name="light_rs_render_descr">Eenvoudige stijl voor autonavigatie. Zachte nachtmodus, hoogtelijnen, contrasterende wegen in oranje stijl, verduistert overige kaartelementen.</string>
     <string name="topo_render_descr">Voor wandelaars, trektochten en fietsen in de natuur. Buiten goed leesbaar. Contrasterende wegen en natuurlijke objecten, verschillende routetypen, geavanceerde hoogtelijn opties, extra details. Aanpassing van de oppervlakte-integriteit onderscheidt de kwaliteit van de weg. Geen nachtmodus.</string>
-    <string name="mapnik_render_descr">Oude \'Mapnik\'-standaardstijl. Kleuren vergelijkbaar met \'Mapnik\'.</string>
     <string name="touring_view_render_descr">Stijl met hoog contrast en maximaal detail. Deze bevat alle opties van de standaardstijl van OsmAnd, met zoveel mogelijk details, specifiek wegen, paden en andere reismogelijkheden. Geen verschil tussen “wegenkaart”-wegtypes. Geschikt voor dag, nacht en outdoor gebruik.</string>
     <string name="default_render_descr">Universele stijl. Vereenvoudigde weergave dichtbevolkte steden. Hoogtelijnen, routes, oppervlakkwaliteit, toegangsrestricties, wegnummers, weergave van paden volgens de SAC-schaal, wildwatersportelementen.</string>
     <string name="open_wikipedia_link_online">WIkipedia-link online openen</string>
@@ -3964,7 +3962,7 @@
     <string name="uploaded_count">Opgeladen %1$d van %2$d</string>
     <string name="toast_select_edits_for_upload">Selecteer de op te laden wijzigingen</string>
     <string name="track_recording_description">Stoppen met opnemen\?
-\n(Alle niet opgeslagen gegevens gaan verloren.).</string>
+\nAlle niet-opgeslagen gegevens gaan verloren.</string>
     <string name="select_segments">Selecteer segmenten</string>
     <string name="select_segments_description">%1$s bevat meer dan één segment, je moet het noodzakelijke deel selecteren om te navigeren.</string>
     <string name="segments_count">Segment %1$d</string>
@@ -4198,7 +4196,7 @@
     <string name="download_server_version">Download de serverversie</string>
     <string name="upload_local_version">Load lokale versie op</string>
     <string name="make_backup_descr">Er zijn vele veranderingen op dit apparaat. Maak alsjeblieft een back-up om geen van deze verandering te verliezen.</string>
-    <string name="upload_gpx_description_hint">Indien je dit leeg laat zullen de track namen gebruikt worden als beschrijving. De ingevulde beschrijving word toegepast op iedere track.</string>
+    <string name="upload_gpx_description_hint">Indien je dit leeg laat zullen de track namen gebruikt worden als beschrijving. De ingevulde beschrijving wordt toegepast op iedere track.</string>
     <string name="promo_subscription">Promotie op het abonnement</string>
     <string name="backup_setup">Stel back-ups in</string>
     <string name="on_hold_since">Op pauze gezet sinds %1$s</string>
@@ -4220,7 +4218,7 @@
     <string name="ltr_or_rtl_combine_via_or">%1$s of %2$s</string>
     <string name="icon_group_nautical">Nautisch</string>
     <string name="backup_delete_types_descr">Verwijder alle gegevens waarvan de gegevens zijn verouderd van OsmAnd Cloud\?</string>
-    <string name="osmand_cloud_help_descr">Hulp nodig\? Neem gelieve contact met ons op via %1$s.</string>
+    <string name="osmand_cloud_help_descr">Hulp nodig\? Neem gelieve contact met ons op via %1$s</string>
     <string name="purchases_feature_desc_pro_widgets">Krijg toegang tot OsmAnd Pro functies zoals routekleuringen en meer.</string>
     <string name="backup_welcome_back_descr">Herstel jouw gegevens op dit apparaat gebruikmakend van bestaande back-ups of back-up je gegevens naar OsmAnd Cloud.</string>
     <string name="release_4_0">• Cloud back-ups
@@ -4453,4 +4451,5 @@
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="send_logcat_log">Logcat log verzenden</string>
     <string name="shared_string_grade">Helling</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
 </resources>

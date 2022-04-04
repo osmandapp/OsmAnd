@@ -53,6 +53,10 @@
     <style name="FirstSplashScreenFree" parent="SplashScreenBaseTheme">
         <item name="android:windowBackground">@drawable/first_splash_screen_free</item>
     </style>
+    
+    <style name="FirstSplashScreenRescueTrack" parent="SplashScreenBaseTheme">
+        <item name="android:windowBackground">@drawable/first_splash_screen_rescue_track</item>
+    </style>
 
     <style name="FirstSplashScreenNightlyFree" parent="SplashScreenBaseTheme">
         <item name="android:windowBackground">@drawable/first_splash_screen_free_dev</item>
@@ -71,6 +75,8 @@
         <item name="android:statusBarColor">@color/status_bar_color_light</item>
         <item name="mapBackground">@color/map_background_color_light</item>
         <item name="chart_marker_background">@drawable/chart_marker_background_light</item>
+        <item name="chart_label_background">@drawable/chart_label_background_light</item>
+        <item name="chart_grid_line_color">@color/gpx_chart_grid_light</item>
         <item name="routeParameterTitleColor">@color/color_myloc_distance</item>
         <item name="ctx_menu_info_divider">@color/divider_color_light</item>
         <item name="ctx_menu_card_btn">@color/inactive_buttons_and_links_bg_light</item>
@@ -160,6 +166,7 @@
         <item name="text_color_tab_active">@color/text_color_tab_active_light</item>
         <item name="text_color_tab_active_white">@color/text_color_secondary_light</item>
         <item name="app_bar_primary_item_color">@color/active_buttons_and_links_text_light</item>
+        <item name="inactive_text_color">@color/icon_color_secondary_light</item>
 
         <item name="appbar_layout_theme">@style/OsmandLightTheme.DarkActionbar</item>
         <item name="search_tabbar_layout_theme">@style/OsmandLightTheme.SearchTabbar</item>
@@ -261,6 +268,12 @@
         <item name="android:forceDarkAllowed">false</item>
         <item name="ic_action_osmand_pro_logo_colored">@drawable/ic_action_osmand_pro_logo_colored</item>
         <item name="ic_action_android_auto_logo_colored">@drawable/ic_action_android_auto_colored</item>
+        <item name="chip_ripple">@drawable/ripple_solid_light_18dp</item>
+        <item name="chip_content_color">@color/preference_category_title</item>
+        <item name="appbar_and_list_background_color">@color/list_background_color_light</item>
+        <item name="image_tile_placeholder">@drawable/img_placeholder_tile_day</item>
+        <item name="toolbar_back_button_color">@color/list_background_color_light</item>
+        <item name="toolbar_title_color">@color/list_background_color_light</item>
     </style>
 
     <style name="ToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
@@ -391,6 +404,8 @@
         <item name="android:statusBarColor">@color/status_bar_color_dark</item>
         <item name="mapBackground">@color/map_background_color_dark</item>
         <item name="chart_marker_background">@drawable/chart_marker_background_dark</item>
+        <item name="chart_label_background">@drawable/chart_label_background_dark</item>
+        <item name="chart_grid_line_color">@color/gpx_chart_grid_dark</item>
         <item name="routeParameterTitleColor">@color/osmand_orange</item>
         <item name="ctx_menu_info_divider">@color/divider_color_dark</item>
         <item name="ctx_menu_card_btn">@color/inactive_buttons_and_links_bg_dark</item>
@@ -465,6 +480,7 @@
         <item name="text_color_tab_active">@color/text_color_tab_active_dark</item>
         <item name="text_color_tab_active_white">@color/text_color_tab_active_dark</item>
         <item name="app_bar_primary_item_color">@color/active_buttons_and_links_text_dark</item>
+        <item name="inactive_text_color">@color/icon_color_default_dark</item>
 
         <item name="appbar_layout_theme">@style/OsmandDarkTheme.DarkActionbar</item>
         <item name="search_tabbar_layout_theme">@style/OsmandDarkTheme.SearchTabbar</item>
@@ -571,6 +587,12 @@
         <item name="android:forceDarkAllowed">false</item>
         <item name="ic_action_osmand_pro_logo_colored">@drawable/ic_action_osmand_pro_logo_colored_night</item>
         <item name="ic_action_android_auto_logo_colored">@drawable/ic_action_android_auto_colored_night</item>
+        <item name="chip_ripple">@drawable/ripple_solid_dark_18dp</item>
+        <item name="chip_content_color">@color/active_color_primary_dark</item>
+        <item name="appbar_and_list_background_color">@color/app_bar_color_dark</item>
+        <item name="image_tile_placeholder">@drawable/img_placeholder_tile_night</item>
+        <item name="toolbar_back_button_color">@color/icon_color_primary_dark</item>
+        <item name="toolbar_title_color">@color/text_color_primary_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">
@@ -883,6 +905,11 @@
 
     <style name="SmallDescStyle.Medium">
         <item name="typeface">@string/font_roboto_medium</item>
+    </style>
+
+    <style name="ToolbarTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textColor">?attr/app_bar_primary_item_color</item>
+        <item name="android:textSize">@dimen/bottom_sheet_title_big</item>
     </style>
 
 </resources>

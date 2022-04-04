@@ -1,25 +1,24 @@
 package net.osmand.plus.plugins.openplacereviews;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OPEN_PLACE_REVIEWS;
-
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardType;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -31,14 +30,26 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OPEN_PLACE_REVIEWS;
+
 public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 
 	private static final Log LOG = PlatformUtil.getLog(OpenPlaceReviewsPlugin.class);
+
+	public final OsmandPreference<String> OPR_ACCESS_TOKEN;
+	public final OsmandPreference<String> OPR_USERNAME;
+	public final OsmandPreference<String> OPR_BLOCKCHAIN_NAME;
+	public final OsmandPreference<Boolean> OPR_USE_DEV_URL;
 
 	private MapActivity mapActivity;
 
 	public OpenPlaceReviewsPlugin(OsmandApplication app) {
 		super(app);
+
+		OPR_ACCESS_TOKEN = registerStringPreference("opr_user_access_token_secret", "").makeGlobal();
+		OPR_USERNAME = registerStringPreference("opr_username_secret", "").makeGlobal();
+		OPR_BLOCKCHAIN_NAME = registerStringPreference("opr_blockchain_name", "").makeGlobal();
+		OPR_USE_DEV_URL = registerBooleanPreference("opr_use_dev_url", false).makeGlobal().makeShared();
 	}
 
 	@Override
@@ -200,8 +211,8 @@ public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 
 	@Override
 	public void disable(OsmandApplication app) {
-		if (app.getSettings().OPR_USE_DEV_URL.get()) {
-			app.getSettings().OPR_USE_DEV_URL.set(false);
+		if (OPR_USE_DEV_URL.get()) {
+			OPR_USE_DEV_URL.set(false);
 			app.getOprAuthHelper().resetAuthorization();
 		}
 		super.disable(app);

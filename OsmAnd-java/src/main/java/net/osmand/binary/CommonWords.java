@@ -6,6 +6,10 @@ import java.util.Map;
 public class CommonWords {
 	private static Map<String, Integer> commonWordsDictionary = new LinkedHashMap<>();
 	private static Map<String, Integer> frequentlyUsedWordsDictionary = new LinkedHashMap<>();
+	
+	// for ex: 100 bridge, ленина 30, but not potenitally name of street (31st road)
+	private static String NUMBER_WITH_LESS_THAN_2_LETTERS = "NUMBER_WITH_LESS_THAN_2_LETTERS";
+	
 	private static void addCommon(String string) {
 		commonWordsDictionary.put(string, commonWordsDictionary.size());
 	}
@@ -23,6 +27,9 @@ public class CommonWords {
 	}
 
 	public static int getCommonSearch(String name) {
+		if (Character.isDigit(name.charAt(0)) && letters(name) < 2) {
+			name = NUMBER_WITH_LESS_THAN_2_LETTERS;
+		}
 		Integer i = commonWordsDictionary.get(name);
 		// higher means better for search
 		if (i == null) {
@@ -38,6 +45,16 @@ public class CommonWords {
 	public static int getCommonGeocoding(String name) {
 		Integer i = commonWordsDictionary.get(name);
 		return i == null ? -1 : i.intValue();
+	}
+	
+	private static int letters(String s) {
+		int count = 0;
+		for (int i = 0; i < s.length(); i++) {
+			if (!Character.isDigit(s.charAt(i))) {
+				count++;
+			}
+		}
+		return count;
 	}
 	
 	static {
@@ -892,6 +909,8 @@ public class CommonWords {
 		addCommon("camino");
 		addCommon("viale");
 		addCommon("loop");
+		
+		addCommon(NUMBER_WITH_LESS_THAN_2_LETTERS);
 
 		addCommon("bridge");
 		addCommon("embankment");

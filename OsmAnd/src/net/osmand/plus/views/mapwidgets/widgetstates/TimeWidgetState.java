@@ -31,7 +31,7 @@ public class TimeWidgetState extends WidgetState {
 	}
 
 	@Override
-	public int getMenuIconId() {
+	public int getSettingsIconId() {
 		if (intermediate) {
 			return R.drawable.ic_action_intermediate_destination_time;
 		}

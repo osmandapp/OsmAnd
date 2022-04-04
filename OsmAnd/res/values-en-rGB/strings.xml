@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--
 		Our app defaults to American English with default strings in res/values
@@ -18,7 +18,6 @@
     <string name="rendering_attr_currentTrackColor_name">GPX colour</string>
     <string name="rendering_attr_currentTrackColor_description">GPX colour</string>
     <string name="shared_string_color">Colour</string>
-    <string name="mapnik_render_descr">Old \'Mapnik\'-style default rendering style. Key features: colours are similar to \'Mapnik\' style.</string>
     <string name="touring_view_render_descr">High detail style for touring purposes. Includes all configuration options of default style, in addition: Displays as much detail as possible, in particular all roads, paths, and other ways to travel. Clear visual distinction between all different road types, reminiscent of many touring atlases. High contrast colour scheme for outdoor use, day and night mode.</string>
     <string name="unirs_render_descr">Modification of the default style to increase contrast of pedestrian and bicycle roads. Uses legacy Mapnik colours.</string>
     <string name="add_favourites_group_to_markers_descr">Select a Favourite category to add to the markers.</string>
@@ -102,4 +101,97 @@
     <string name="show_transparency_seekbar">Show transparency slider</string>
     <string name="app_mode_camper">Camper</string>
     <string name="osm_live_payment_discount_descr">Save %1$s</string>
+    <string name="routing_attr_short_way_description">Optimised shorter route (energy saving)</string>
+    <string name="release_3_7">• New offline Slope maps
+\n
+\n • Full customization of Favorites and GPX Waypoints – custom colours, icons, shapes
+\n
+\n • Customise items order in \"Context Menu\", \"Configure Map\" and \"Drawer\"
+\n
+\n • Wikipedia as a separate layer in Configure map, select only needed languages
+\n
+\n • Create your own POI filter / maps with total flexibility
+\n
+\n • Added options to restore settings for custom profiles
+\n
+\n • Full GPX routes from navigation support traffic lanes and complete turn instructions
+\n
+\n • Fix UI sizes on tablets
+\n
+\n • Fix bugs with RTL
+\n
+\n</string>
+    <string name="choose_osmand_theme_descr">Customise app appearance.</string>
+    <string name="release_3_4">• App profiles: Create a custom profile for your own needs, with a custom icon and colour
+\n
+\n • Now customize any profile\'s default and min/max speeds
+\n
+\n • Added a widget for the current coordinates
+\n
+\n • Added options to show the compass and a radius ruler on the map
+\n
+\n • Fix background track logging
+\n
+\n • Improved background map downloads
+\n
+\n • Returned \'Turn screen on\' option
+\n
+\n • Fixed Wikipedia language selection
+\n
+\n • Fixed compass button behaviour during navigation
+\n
+\n • Other bugfixes
+\n
+\n</string>
+    <string name="auto_zoom_map_descr">Zoom level according to your speed (while the map is synchronised with current position).</string>
+    <string name="customize_route_line">Customise route line</string>
+    <string name="intermediate_items_sort_return">Optimised order of intermediate destinations en-route to the destination.</string>
+    <string name="osmand_extended_description_part3">Map
+\n • Displays POIs (point of interests) around you
+\n • Adjusts the map to your direction of motion (or compass)
+\n • Shows your location and the direction you are looking in
+\n • Share your location so that your friends can find you
+\n • Keeps your most important places in \'Favourites\'
+\n • Allows you to choose how to display names on the map: In English, local, or phonetic spelling
+\n • Displays specialised online tiles, satellite view (from Bing), different overlays like touring/navigation GPX tracks and additional layers with customizable transparency
+\n</string>
+    <string name="osmand_plus_extended_description_part2">Navigation
+\n • Works online (fast) or offline (no roaming charges when you are abroad)
+\n • Turn-by-turn voice guidance (recorded and synthesised voices)
+\n • Optional lane guidance, street name display, and estimated time of arrival
+\n • Supports intermediate points on your itinerary
+\n • Automatic re-routing whenever you deviate from the route
+\n • Search for places by address, by type (e.g: Restaurant, hotel, gas station, museum), or by geographical coordinates
+\n</string>
+    <string name="osmand_plus_extended_description_part3">Map Viewing
+\n • Display your position and orientation
+\n • Optionally align the picture according to compass or your direction of motion
+\n • Save your most important places as Favorites
+\n • Display POIs (points of interest) around you
+\n • Display specialised online tiles, satellite view (from Bing), different overlays like touring/navigation GPX tracks and additional layers with customizable transparency
+\n • Optionally display place names in English, local, or phonetic spelling
+\n</string>
+    <string name="choose_auto_follow_route_descr">Time until the map view synchronises with the current position.</string>
+    <string name="ui_customization_description">Customise the number of items in \"Drawer\", \"Configure Map\" and \"Context Menu\".
+\n
+\nTurn off unused plugins to hide all their controls. %1$s.</string>
+    <string name="release_3_5">• Updated app and profile settings: Settings are now arranged by type. Each profile can be customized separately.
+\n
+\n • New map download dialogue suggesting a map to download while browsing
+\n
+\n • Dark theme fixes
+\n
+\n • Fixed several routing issues around the world
+\n
+\n • Updated base map with more detailed road network
+\n
+\n • Fixed flooded areas around the world
+\n
+\n • Ski routing: Added elevation profile and route complexity to the route details
+\n
+\n • Other bugfixes
+\n
+\n</string>
+    <string name="rendering_attr_appMode_description">Optimise map for</string>
+    <string name="shared_string_size">Size</string>
 </resources>

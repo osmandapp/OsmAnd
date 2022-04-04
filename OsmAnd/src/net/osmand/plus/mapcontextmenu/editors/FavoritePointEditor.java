@@ -1,11 +1,13 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
+import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
 
 public class FavoritePointEditor extends PointEditor {
@@ -21,6 +23,12 @@ public class FavoritePointEditor extends PointEditor {
 	@Override
 	public boolean isProcessingTemplate() {
 		return false;
+	}
+
+	@Nullable
+	@Override
+	public String getPreselectedIconName() {
+		return isNew && favorite != null ? RenderingIcons.getBigIconName(favorite.getIconId()) : null;
 	}
 
 	@Override
@@ -41,7 +49,7 @@ public class FavoritePointEditor extends PointEditor {
 
 		isNew = true;
 		String lastCategory = app.getSettings().LAST_FAV_CATEGORY_ENTERED.get();
-		if (!Algorithms.isEmpty(lastCategory) && !app.getFavorites().groupExists(lastCategory)) {
+		if (!Algorithms.isEmpty(lastCategory) && !app.getFavoritesHelper().groupExists(lastCategory)) {
 			lastCategory = "";
 		}
 		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, lastCategory, altitude, timestamp);
@@ -60,10 +68,10 @@ public class FavoritePointEditor extends PointEditor {
 		}
 		isNew = true;
 		if (categoryName != null && !categoryName.isEmpty()) {
-			FavouritesDbHelper.FavoriteGroup category = mapActivity.getMyApplication().getFavorites()
+			FavoriteGroup category = mapActivity.getMyApplication().getFavoritesHelper()
 					.getGroup(categoryName);
 			if (category == null) {
-				mapActivity.getMyApplication().getFavorites().addEmptyCategory(categoryName, categoryColor);
+				mapActivity.getMyApplication().getFavoritesHelper().addEmptyCategory(categoryName, categoryColor);
 			}
 		} else {
 			categoryName = "";
