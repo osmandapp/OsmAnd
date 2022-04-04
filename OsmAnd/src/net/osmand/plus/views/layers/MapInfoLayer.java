@@ -357,6 +357,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		recreateWidgetsPanel(topWidgetsContainer, WidgetsPanel.TOP, appMode);
 		recreateWidgetsPanel(leftWidgetsContainer, WidgetsPanel.LEFT, appMode);
 		recreateWidgetsPanel(bottomWidgetsContainer, WidgetsPanel.BOTTOM, appMode);
+		rightWidgetsPanel.update();
 	}
 
 	private void recreateWidgetsPanel(@Nullable ViewGroup container, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode) {
