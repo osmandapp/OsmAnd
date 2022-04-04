@@ -15,7 +15,6 @@ import net.osmand.CallbackWithObject;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -262,12 +261,12 @@ public class MapWidgetRegistry {
 	}
 
 	public void setVisibility(@NonNull MapWidgetInfo widgetInfo, boolean visible, boolean collapsed) {
-		ApplicationMode mode = settings.APPLICATION_MODE.get();
-		setVisibility(mode, widgetInfo, visible, collapsed);
-
-		OsmandPreference<Boolean> pref = widgetInfo.widget.getWidgetVisibilityPref();
-		if (pref != null) {
-			pref.set(!pref.get());
+		OsmandPreference<Boolean> visibilityPref = widgetInfo.widget.getWidgetVisibilityPref();
+		if (visibilityPref != null) {
+			visibilityPref.set(!visibilityPref.get());
+		} else {
+			ApplicationMode mode = settings.APPLICATION_MODE.get();
+			setVisibility(mode, widgetInfo, visible, collapsed);
 		}
 
 		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
@@ -338,35 +337,6 @@ public class MapWidgetRegistry {
 			bs.append(ks).append(SETTINGS_SEPARATOR);
 		}
 		settings.MAP_INFO_CONTROLS.set(bs.toString());
-	}
-
-
-	private void resetDefault(ApplicationMode mode, Set<MapWidgetInfo> set) {
-		for (MapWidgetInfo ri : set) {
-			ri.removeVisibleCollapsible(mode);
-			ri.removeVisible(mode);
-			if (mode.isWidgetVisible(ri.key)) {
-				if (mode.isWidgetCollapsible(ri.key)) {
-					ri.addVisibleCollapsible(mode);
-				} else {
-					ri.addVisible(mode);
-				}
-			}
-		}
-	}
-
-	public void resetToDefault() {
-		ApplicationMode appMode = settings.getApplicationMode();
-		resetDefault(appMode, getLeftWidgets());
-		resetDefault(appMode, getRightWidgets());
-		resetDefaultAppearance(appMode);
-		visibleSideWidgetsFromSettings.put(appMode, null);
-		settings.MAP_INFO_CONTROLS.set(SHOW_PREFIX);
-	}
-
-	private void resetDefaultAppearance(ApplicationMode mode) {
-		settings.TRANSPARENT_MAP_THEME.resetModeToDefault(mode);
-		settings.SHOW_STREET_NAME.resetModeToDefault(mode);
 	}
 
 	public void reorderWidgets() {
