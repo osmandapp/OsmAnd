@@ -121,7 +121,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private boolean inUpdateValue = false;
 
 	private Float heading = null;
-	private boolean deviceHasBearing = false;
 
 	// Current screen orientation
 	private int currentScreenOrientation;
@@ -771,15 +770,11 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (location != null) {
 			lastTimeLocationFixed = System.currentTimeMillis();
 			notifyGpsLocationRecovered();
-			if(!deviceHasBearing && location.hasBearing()){
-				deviceHasBearing = true;
-			}
 		}
 		// notify about lost location
 		scheduleCheckIfGpsLost(location);
 
 		RoutingHelper routingHelper = app.getRoutingHelper();
-		routingHelper.setDeviceHasBearing(deviceHasBearing);
 		app.getSavingTrackHelper().updateLocation(location, heading);
 		OsmandPlugin.updateLocationPlugins(location);
 		routingHelper.updateLocation(location);
@@ -800,11 +795,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public void setLocationFromSimulation(net.osmand.Location location) {
-		if(!deviceHasBearing && location.hasBearing()){
-			deviceHasBearing = true;
-			final RoutingHelper routingHelper = app.getRoutingHelper();
-			routingHelper.setDeviceHasBearing(deviceHasBearing);
-		}
 		setLocation(location);
 	}
 
