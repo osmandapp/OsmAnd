@@ -146,6 +146,7 @@ public class RightWidgetsPanel extends FrameLayout {
 
 	public void update() {
 		adapter.updateIfNeeded();
+		AndroidUiHelper.updateVisibility(this, adapter.getItemCount() > 0);
 		updateDots();
 	}
 
