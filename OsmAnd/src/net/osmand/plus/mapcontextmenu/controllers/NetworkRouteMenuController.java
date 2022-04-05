@@ -81,7 +81,10 @@ public class NetworkRouteMenuController extends MenuController {
 			Drawable icon = iconRes != 0 ? app.getUIUtilities().getIcon(iconRes) : null;
 			Drawable background = backgroundRes != 0 ? app.getUIUtilities().getIcon(backgroundRes) : null;
 
-			return UiUtilities.getLayeredIcon(background, icon);
+			if (icon != null && background != null) {
+				return UiUtilities.getLayeredIcon(background, icon);
+			}
+			return icon != null ? icon : background;
 		}
 		return null;
 	}

@@ -752,7 +752,7 @@ public class OsmandSettings {
 
 		@Override
 		public Boolean getModeValue(ApplicationMode mode) {
-			boolean defaultValue = mode.isWidgetVisible(WIDGET_COMPASS);
+			boolean defaultValue = mode.isWidgetVisibleByDefault(WIDGET_COMPASS);
 			List<String> widgetsVisibility = getWidgetsVisibilityInfo(mode);
 			if (widgetsVisibility.contains(WIDGET_COMPASS)) {
 				return true;
@@ -1746,20 +1746,9 @@ public class OsmandSettings {
 	public final ListStringPreference BOTTOM_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
 			"bottom_widget_panel_order", TextUtils.join(",", WidgetsPanel.BOTTOM.getOriginalOrder()), ",").makeProfile();
 
-	public final OsmandPreference<Boolean> MARKERS_DISTANCE_INDICATION_ENABLED = new BooleanPreference(this, "markers_distance_indication_enabled", true).makeProfile();
+	public final OsmandPreference<Boolean> SHOW_MAP_MARKERS_BAR_WIDGET = new BooleanPreference(this, "markers_distance_indication_enabled", true).makeProfile();
 
 	public final OsmandPreference<Integer> DISPLAYED_MARKERS_WIDGETS_COUNT = new IntPreference(this, "displayed_markers_widgets_count", 1).makeProfile();
-
-	public final CommonPreference<MapMarkersMode> MAP_MARKERS_MODE =
-			new EnumStringPreference<>(this, "map_markers_mode", MapMarkersMode.TOOLBAR, MapMarkersMode.values());
-
-	{
-		MAP_MARKERS_MODE.makeProfile().cache();
-		MAP_MARKERS_MODE.setModeDefaultValue(ApplicationMode.DEFAULT, MapMarkersMode.TOOLBAR);
-		MAP_MARKERS_MODE.setModeDefaultValue(ApplicationMode.CAR, MapMarkersMode.TOOLBAR);
-		MAP_MARKERS_MODE.setModeDefaultValue(ApplicationMode.BICYCLE, MapMarkersMode.TOOLBAR);
-		MAP_MARKERS_MODE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, MapMarkersMode.TOOLBAR);
-	}
 
 	public final OsmandPreference<Boolean> SHOW_MAP_MARKERS = new BooleanPreference(this, "show_map_markers", true).makeProfile();
 

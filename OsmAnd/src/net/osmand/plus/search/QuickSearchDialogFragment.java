@@ -975,6 +975,15 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	@Override
+	public void onStart() {
+		super.onStart();
+		if (isSearchHidden()) {
+			hide();
+			restoreToolbar();
+		}
+	}
+
+	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		outState.putString(QUICK_SEARCH_TYPE_KEY, searchType.name());
 		outState.putString(QUICK_SEARCH_QUERY_KEY, searchQuery);

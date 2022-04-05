@@ -360,8 +360,9 @@ public class StreetNameWidget extends MapWidget {
 		if (specialPosition) {
 			specialContainer.removeAllViews();
 
+			boolean coordinatesVisible = mapActivity.getWidgetsVisibilityHelper().shouldShowTopCoordinatesWidget();
 			for (MapWidget widget : followingWidgets) {
-				if (widget instanceof CoordinatesWidget) {
+				if (widget instanceof CoordinatesWidget && coordinatesVisible) {
 					specialPosition = false;
 					break;
 				}

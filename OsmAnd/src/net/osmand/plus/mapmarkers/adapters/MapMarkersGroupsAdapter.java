@@ -84,7 +84,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	}
 
 	private void updateShowDirectionMarkers() {
-		showDirectionEnabled = app.getSettings().MARKERS_DISTANCE_INDICATION_ENABLED.get();
+		showDirectionEnabled = app.getSettings().SHOW_MAP_MARKERS_BAR_WIDGET.get();
 		List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkers();
 		int markersCount = mapMarkers.size();
 		showDirectionMarkers = new ArrayList<>(mapMarkers.subList(0, getToIndex(markersCount)));
