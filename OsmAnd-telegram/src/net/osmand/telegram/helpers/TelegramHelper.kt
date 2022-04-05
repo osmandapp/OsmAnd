@@ -263,6 +263,7 @@ class TelegramHelper private constructor() {
 	interface TelegramAuthorizationRequestListener {
 		fun onRequestTelegramAuthenticationParameter(parameterType: TelegramAuthParamType)
 		fun onTelegramAuthorizationRequestError(code: Int, message: String)
+		fun onTelegramUnsupportedAuthorizationState(authorizationState: String)
 	}
 
 	interface TelegramSearchListener {
@@ -274,18 +275,17 @@ class TelegramHelper private constructor() {
 	inner class TelegramAuthorizationRequestHandler(val telegramAuthorizationRequestListener: TelegramAuthorizationRequestListener) {
 
 		fun applyAuthParam(type: TelegramAuthParamType, value: String) {
-			if (!TextUtils.isEmpty(value)) {
-				log.info("Authorization: apply parameter ${type.name}")
-				when (type) {
-					PHONE_NUMBER -> client!!.send(
-						TdApi.SetAuthenticationPhoneNumber(
-							value,
-							TdApi.PhoneNumberAuthenticationSettings(false, false, false, false, null)
-						), AuthorizationRequestHandler()
-					)
-					CODE -> client!!.send(TdApi.CheckAuthenticationCode(value), AuthorizationRequestHandler())
-					PASSWORD -> client!!.send(TdApi.CheckAuthenticationPassword(value), AuthorizationRequestHandler())
-				}
+			if (TextUtils.isEmpty(value)) return
+			log.info("Authorization: apply parameter ${type.name}")
+			when (type) {
+				PHONE_NUMBER -> client!!.send(
+					TdApi.SetAuthenticationPhoneNumber(
+						value,
+						TdApi.PhoneNumberAuthenticationSettings(false, false, false, false, null)
+					), AuthorizationRequestHandler()
+				)
+				CODE -> client!!.send(TdApi.CheckAuthenticationCode(value), AuthorizationRequestHandler())
+				PASSWORD -> client!!.send(TdApi.CheckAuthenticationPassword(value), AuthorizationRequestHandler())
 			}
 		}
 	}
@@ -1152,7 +1152,10 @@ class TelegramHelper private constructor() {
 			TdApi.AuthorizationStateClosed.CONSTRUCTOR -> {
 				log.info("Closed")
 			}
-			else -> log.error("Unsupported authorization state: " + this.authorizationState!!)
+			else -> {
+				log.error("Unsupported authorization state: " + this.authorizationState!!)
+				telegramAuthorizationRequestHandler?.telegramAuthorizationRequestListener?.onTelegramUnsupportedAuthorizationState("${this.authorizationState!!}")
+			}
 		}
 		val wasAuthorized = haveAuthorization
 		haveAuthorization = this.authorizationState?.constructor == TdApi.AuthorizationStateReady.CONSTRUCTOR

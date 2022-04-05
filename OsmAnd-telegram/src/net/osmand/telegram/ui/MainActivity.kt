@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.Gravity
 import android.view.View
 import android.widget.*
@@ -146,6 +147,13 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 			override fun onTelegramAuthorizationRequestError(code: Int, message: String) {
 				runOnUi {
 					Toast.makeText(this@MainActivity, "$code - $message", Toast.LENGTH_LONG).show()
+				}
+			}
+
+			override fun onTelegramUnsupportedAuthorizationState(authorizationState: String) {
+				runOnUi {
+					val message = "Unsupported authorization state: $authorizationState"
+					Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
 				}
 			}
 		})
@@ -463,6 +471,10 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	}
 
 	fun applyAuthParam(loginDialogFragment: LoginDialogFragment?, type: LoginDialogType, text: String) {
+		if (TextUtils.isEmpty(text)) {
+			Toast.makeText(this@MainActivity, "Authorization parameter is empty.", Toast.LENGTH_LONG).show()
+			return
+		}
 		loginDialogFragment?.showProgress()
 		when (type) {
 			LoginDialogType.ENTER_PHONE_NUMBER -> telegramAuthorizationRequestHandler?.applyAuthParam(TelegramAuthParamType.PHONE_NUMBER, text)
