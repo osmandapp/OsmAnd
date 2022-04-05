@@ -4537,6 +4537,41 @@
     <string name="move_map_to_select_area">Mozgassa a térképet a kívánt terület kijelöléséhez.</string>
     <string name="rendering_attr_showFitnessTrails_description">Erdei tornapályák megjelenítése</string>
     <string name="rendering_attr_showFitnessTrails_name">Erdei tornapályák</string>
-    <string name="rendering_attr_showRunningRoutes_description">Futó útvonalak megjelenítése</string>
-    <string name="rendering_attr_showRunningRoutes_name">Futó útvonalak</string>
+    <string name="rendering_attr_showRunningRoutes_description">Futóútvonalak megjelenítése</string>
+    <string name="rendering_attr_showRunningRoutes_name">Futóútvonalak</string>
+    <string name="routeInfo_horse_scale_description">Útvonalak kiszámolása a lovas utak nehézségi fokának megfelelően</string>
+    <string name="rendering_attr_horse_scale_common_name">Átlagos</string>
+    <string name="rendering_attr_horse_scale_demanding_name">Figyelmet igénylő</string>
+    <string name="routing_attr_carriage_restrictions_name">Szállítási korlátozások</string>
+    <string name="rendering_attr_showTramRoutes_name">Villamos útvonalak</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Sikló útvonalak</string>
+    <string name="rendering_attr_showBusRoutes_name">Busz útvonalak</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Trolibusz útvonalak</string>
+    <string name="rendering_attr_showLightRailRoutes_name">HÉV útvonalak</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Egysínű vasút útvonalak</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">Ingajárat útvonalak</string>
+    <string name="shared_string_visible_widgets">Látható widgetek</string>
+    <string name="top_widgets_panel">Felső panel</string>
+    <string name="bottom_widgets_panel">Alsó panel</string>
+    <string name="shared_string_item">Elem</string>
+    <string name="configure_screen_widgets_descr">A widgetek hozzáadásához vagy átrendezéséhez válasszon képernyőoldalt.</string>
+    <string name="osm_carto_render_descr">Hasonló az eredeti OSM webhelyen használt OpenStreetMap féle térképstílushoz</string>
+    <string name="simulation_real_mode_title">Realisztikus szimuláció</string>
+    <string name="simulation_constant_mode_desc">A szimuláció egy kiválasztott állandó sebességgel történik.</string>
+    <string name="simulation_constant_mode_title">Rögzített sebesség</string>
+    <string name="speed_mode">Sebesség mód</string>
+    <string name="routing_attr_carriage_restrictions_description">A lóvontatású járművekkel való behajtási engedély megfontolandó</string>
+    <string name="map_markers_bar">Térképjelölők sávja</string>
+    <string name="shared_string_buttons">Gombok</string>
+    <string name="rendering_attr_horse_scale_critical_name">Kritikus</string>
+    <string name="routeInfo_horse_scale_name">A lovas utak nehézségi foka</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Nehéz</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">Veszélyes</string>
+    <string name="rendering_attr_horse_scale_impossible_name">Lehetetlen</string>
+    <string name="rendering_attr_showTrainRoutes_name">Vonat útvonalak</string>
+    <string name="simulation_preview_mode_title">Gyors betekintő mód</string>
+    <string name="simulation_preview_mode_desc">A szimuláció sebessége az egyenes szakaszokon maximális lesz és csak a kereszteződéseknél lassul le.</string>
+    <string name="simulation_real_mode_desc">Az egyenes útszakaszokon a sebesség nagyjából a megengedett legnagyobb sebességhez fog igazodni.
+\nA kereszteződésekben a szimuláció lelassul.
+\nExtra szankciók a közlekedési lámpáknál, stoptábláknál stb.</string>
 </resources>

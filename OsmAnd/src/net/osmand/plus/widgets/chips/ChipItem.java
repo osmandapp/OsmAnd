@@ -41,6 +41,10 @@ public class ChipItem {
 	@ColorInt
 	public Integer strokeDisabledColor;
 
+	public Integer strokeWidth;
+	public Integer strokeSelectedWidth;
+	public Integer strokeDisabledWidth;
+
 	@ColorInt
 	public Integer rippleColor;
 

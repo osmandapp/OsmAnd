@@ -182,6 +182,8 @@
 	<!-- widgettext_shadow_night is the same as widget background color for non-transparent night skin (from box_night_free_simple.9.png) -->
 	<color name="widgettext_shadow_night">#dc262626</color>
 	<color name="widgettext_shadow_day">#fff</color>
+	<color name="widget_divider_transparent">#33000000</color>
+	<color name="widget_panel_border_transparent">#4d000000</color>
 
 	<!-- style colors  -->
 	<color name="group_background">#A5A5A5</color>
@@ -234,6 +236,7 @@
 	<color name="nav_track">#CCaa0088</color>
 	<color name="nav_track_fluorescent">#CC00ddff</color>
 	<color name="transport_route_line">#CC2f7af5</color>
+	<color name="transport_route_walk_line">#882A4BD1</color>
 
 	<color name="nav_track_walk_fill">#ff407ef5</color>
 	<color name="nav_track_walk_stroke">#ff1f478c</color>

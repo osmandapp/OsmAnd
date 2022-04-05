@@ -5,21 +5,22 @@ import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
 import net.osmand.data.PointDescription;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 public class MapMarkerMenuController extends MenuController {
 
@@ -56,13 +57,12 @@ public class MapMarkerMenuController extends MenuController {
 				public void buttonPressed() {
 					MapActivity activity = getMapActivity();
 					if (activity != null) {
-						OsmandPreference<Boolean> indication
-								= activity.getMyApplication().getSettings().MARKERS_DISTANCE_INDICATION_ENABLED;
+						OsmandApplication app = activity.getMyApplication();
+						OsmandPreference<Boolean> indication = app.getSettings().SHOW_MAP_MARKERS_BAR_WIDGET;
 						if (!indication.get()) {
 							indication.set(true);
-							activity.getMapLayers().getMapWidgetRegistry().updateMapMarkersMode(activity);
 						}
-						MapMarkersHelper markersHelper = activity.getMyApplication().getMapMarkersHelper();
+						MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 						markersHelper.moveMarkerToTop(getMapMarker());
 						activity.getContextMenu().close();
 					}

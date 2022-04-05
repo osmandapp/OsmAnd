@@ -81,6 +81,7 @@ import net.osmand.aidlapi.customization.MapMarginsParams;
 import net.osmand.aidlapi.customization.CustomPluginParams;
 import net.osmand.aidlapi.customization.SelectProfileParams;
 import net.osmand.aidlapi.customization.AProfile;
+import net.osmand.aidlapi.customization.PreferenceParams;
 
 import net.osmand.aidlapi.gpx.AGpxFile;
 import net.osmand.aidlapi.gpx.AGpxFileDetails;
@@ -913,4 +914,9 @@ interface IOsmAndAidlInterface {
     boolean getText(inout GetTextParams params);
 
     boolean reloadIndexes();
+
+    boolean setPreference(in PreferenceParams params);
+
+    boolean getPreference(inout PreferenceParams params);
+
 }

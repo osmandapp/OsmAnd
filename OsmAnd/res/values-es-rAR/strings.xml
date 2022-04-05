@@ -4547,4 +4547,39 @@
     <string name="rendering_attr_showFitnessTrails_name">Circuitos aeróbicos</string>
     <string name="rendering_attr_showRunningRoutes_name">Rutas para correr</string>
     <string name="rendering_attr_showRunningRoutes_description">Mostrar rutas para correr</string>
+    <string name="routeInfo_horse_scale_description">Visualizar los caminos según la dificultad de los senderos ecuestres</string>
+    <string name="rendering_attr_horse_scale_common_name">Común</string>
+    <string name="rendering_attr_horse_scale_demanding_name">Exigente</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Difícil</string>
+    <string name="rendering_attr_horse_scale_critical_name">Crítico</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">Peligroso</string>
+    <string name="rendering_attr_horse_scale_impossible_name">Imposible</string>
+    <string name="routing_attr_carriage_restrictions_name">Restricciones al transporte</string>
+    <string name="routing_attr_carriage_restrictions_description">Considera los permisos de acceso para los vehículos tirados por caballos</string>
+    <string name="rendering_attr_showTramRoutes_name">Rutas de tranvía</string>
+    <string name="rendering_attr_showTrainRoutes_name">Rutas de tren</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Rutas de tren ligero</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Rutas de monorraíl</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Rutas funiculares</string>
+    <string name="rendering_attr_showBusRoutes_name">Rutas de colectivos</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Rutas de trolebús</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">Rutas de enlace</string>
+    <string name="map_markers_bar">Barra de marcadores del mapa</string>
+    <string name="shared_string_visible_widgets">Widgets visibles</string>
+    <string name="top_widgets_panel">Panel superior</string>
+    <string name="bottom_widgets_panel">Panel inferior</string>
+    <string name="shared_string_item">Elemento</string>
+    <string name="shared_string_buttons">Botones</string>
+    <string name="configure_screen_widgets_descr">Elige la pantalla a añadir o el widgets a reorganizar.</string>
+    <string name="osm_carto_render_descr">Similar al estilo OpenStreetMap-carto usado en el sitio principal de OSM</string>
+    <string name="simulation_real_mode_desc">En los tramos rectos, la velocidad será aproximada a la máxima permitida.
+\nEn las intersecciones, la simulación reducirá la velocidad.
+\nSe aplicarán penalizaciones adicionales en semáforos, señales de pare, etc.</string>
+    <string name="simulation_real_mode_title">Simulación realista</string>
+    <string name="simulation_constant_mode_desc">La simulación será realizada con una velocidad constante elegida.</string>
+    <string name="simulation_constant_mode_title">Velocidad constante</string>
+    <string name="simulation_preview_mode_desc">La velocidad de la simulación será máxima en los tramos rectos y disminuirá sólo en las intersecciones.</string>
+    <string name="speed_mode">Modo de velocidad</string>
+    <string name="routeInfo_horse_scale_name">Dificultad de los senderos ecuestres</string>
+    <string name="simulation_preview_mode_title">Modo de previsualización rápida</string>
 </resources>

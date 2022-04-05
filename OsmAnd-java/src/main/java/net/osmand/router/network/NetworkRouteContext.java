@@ -201,6 +201,9 @@ public class NetworkRouteContext {
 					stats.loadTimeNs += (System.nanoTime() - nt);
 				}
 				for (RouteDataObject obj : objects) {
+					if (obj == null) {
+						continue;
+					}
 					stats.loadedObjects++;
 					List<RouteKey> keys = filter.convert(obj);
 					for (RouteKey rk : keys) {
@@ -304,7 +307,7 @@ public class NetworkRouteContext {
 		public final BinaryMapDataObject obj;
 		public final RouteDataObject robj;
 		public final RouteKey routeKey;
-		
+
 		public NetworkRouteSegment(BinaryMapDataObject obj, RouteKey routeKey, int start, int end) {
 			this.robj = null;
 			this.obj = obj;
@@ -312,7 +315,7 @@ public class NetworkRouteContext {
 			this.end = end;
 			this.routeKey = routeKey;
 		}
-		
+
 		public NetworkRouteSegment(NetworkRouteSegment segment, int start, int end) {
 			this.robj = segment.robj;
 			this.obj = segment.obj;
@@ -320,7 +323,7 @@ public class NetworkRouteContext {
 			this.end = end;
 			this.routeKey = segment.routeKey;
 		}
-		
+
 		public NetworkRouteSegment(RouteDataObject obj, RouteKey routeKey, int start, int end) {
 			this.robj = obj;
 			this.obj = null;
@@ -328,12 +331,15 @@ public class NetworkRouteContext {
 			this.end = end;
 			this.routeKey = routeKey;
 		}
-		
+
 		public boolean direction() {
 			return end > start;
 		}
 
 		public long getId() {
+			if (robj != null) {
+				return robj.getId();
+			}
 			return obj.getId();
 		}
 
