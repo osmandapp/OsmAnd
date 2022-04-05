@@ -2561,7 +2561,7 @@
     <string name="poi_impromptu_no">Improvizat: nu</string>
     <string name="poi_impromptu_yes">Improvizat: da</string>
     <string name="poi_caravans_no">Rulote: nu</string>
-    <string name="poi_caravans_yes">Da;Caravane</string>
+    <string name="poi_caravans_yes">Da;Autorulote</string>
     <string name="poi_shower_indoor">Duș: interior</string>
     <string name="poi_shower_cold">Duș: rece</string>
     <string name="poi_shower_outdoor">Duș: în aer liber</string>
@@ -3959,7 +3959,7 @@
     <string name="poi_motorhome_designated">Desemnat;Desemnat pentru rulote</string>
     <string name="poi_motorhome_yes">Da;Autocaravană</string>
     <string name="poi_caravan_designated">Desemnat;Desemnat pentru rulote</string>
-    <string name="poi_caravan_yes">Da;Caravană</string>
+    <string name="poi_caravan_yes">Da;Autorulotă</string>
     <string name="poi_bus_designated">Desemnat;Desemnat pentru autobuze</string>
     <string name="poi_bus_yes">Da;Autobuz;Autobuze</string>
     <string name="poi_snowmobile_permissive">Acces permis;Acces permis pentru snowmobile</string>
@@ -4297,4 +4297,17 @@
     <string name="poi_greenery">Verdeață</string>
     <string name="poi_changing_table_filter">Masă de schimbat</string>
     <string name="poi_hairdresser_supply">Magazin de aprovizionare pentru coafor</string>
+    <string name="poi_payment_american_express_contactless_yes">AMEX contactless</string>
+    <string name="poi_payment_maestro_contactless_yes">Maestro contactless</string>
+    <string name="poi_payment_mastercard_contactless_yes">MasterCard contactless</string>
+    <string name="poi_payment_visa_contactless_yes">Visa contactless</string>
+    <string name="poi_payment_american_express_contactless_no">AMEX contactless neacceptat</string>
+    <string name="poi_payment_girocard_contactless_yes">Girocard</string>
+    <string name="poi_payment_girocard_contactless_no">Girocard contactless neacceptat</string>
+    <string name="poi_payment_maestro_contactless_no">Maestro contactless neacceptat</string>
+    <string name="poi_payment_mastercard_contactless_no">MasterCard contactless neacceptat</string>
+    <string name="poi_payment_visa_contactless_no">Visa contactless neacceptat</string>
+    <string name="poi_shop_fuel">Benzinărie</string>
+    <string name="poi_printer_ink">Imprimerie</string>
+    <string name="poi_water_sports">Sporturi acvatice</string>
 </resources>
