@@ -363,6 +363,7 @@ public class ViewCreator {
 		if (customControlsColor != null) {
 			UiUtilities.setupCompoundButton(nightMode, customControlsColor, toggle);
 		}
+		toggle.setSaveEnabled(false);
 	}
 
 	private void setupSlider(@NonNull Slider slider, @NonNull ContextMenuItem item) {
