@@ -36,6 +36,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 import androidx.annotation.ColorRes;
@@ -336,6 +337,22 @@ public class MapWidgetRegistry {
 			widgets.addAll(panelWidgets);
 		}
 		return widgets;
+	}
+
+	@NonNull
+	public List<Set<MapWidgetInfo>> getAvailablePagedWidgetsForPanel(@NonNull ApplicationMode appMode,
+	                                                                 @NonNull WidgetsPanel panel) {
+		Map<Integer, Set<MapWidgetInfo>> widgetsByPages = new TreeMap<>();
+		for (MapWidgetInfo widgetInfo : getAvailableWidgetsForPanel(appMode, panel)) {
+			int page = widgetInfo.pageIndex;
+			Set<MapWidgetInfo> widgetsOfPage = widgetsByPages.get(page);
+			if (widgetsOfPage == null) {
+				widgetsOfPage = new TreeSet<>();
+				widgetsByPages.put(page, widgetsOfPage);
+			}
+			widgetsOfPage.add(widgetInfo);
+		}
+		return new ArrayList<>(widgetsByPages.values());
 	}
 
 	@NonNull

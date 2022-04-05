@@ -159,4 +159,8 @@ public enum WidgetsPanel {
 		String widgetsOrder = TextUtils.join(",", widgetIds);
 		return orderPreference.setModeValue(appMode, widgetsOrder);
 	}
+
+	public boolean isPagingAllowed() {
+		return this == RIGHT;
+	}
 }
