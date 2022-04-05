@@ -1,11 +1,12 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.activities.MapActivity;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import net.osmand.GPXUtilities.PointsGroup;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.MapActivity;
 
 public abstract class PointEditor {
 
@@ -42,13 +43,13 @@ public abstract class PointEditor {
 
 	public abstract String getFragmentTag();
 
-	public void setCategory(String name, int color) {
+	public void setPointsGroup(PointsGroup pointsGroup) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(getFragmentTag());
-			if (fragment instanceof PointEditorFragmentNew) {
-				PointEditorFragmentNew editorFragment = (PointEditorFragmentNew) fragment;
-				editorFragment.setCategory(name, color);
+			if (fragment instanceof PointEditorFragment) {
+				PointEditorFragment editorFragment = (PointEditorFragment) fragment;
+				editorFragment.setPointsGroup(pointsGroup);
 			}
 		}
 	}

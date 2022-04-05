@@ -1,20 +1,23 @@
 package net.osmand.plus.track.helpers;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.GPXUtilities;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.plus.routing.ColoringType;
+import net.osmand.plus.track.GpxSplitType;
+import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.track.helpers.GpsFilterHelper.AltitudeFilter;
 import net.osmand.plus.track.helpers.GpsFilterHelper.HdopFilter;
 import net.osmand.plus.track.helpers.GpsFilterHelper.SmoothingFilter;
 import net.osmand.plus.track.helpers.GpsFilterHelper.SpeedFilter;
-import net.osmand.plus.routing.ColoringType;
-import net.osmand.plus.track.GpxSplitType;
-import net.osmand.plus.track.GradientScaleType;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -24,9 +27,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class GPXDatabase {
 

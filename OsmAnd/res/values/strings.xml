@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="change_default_appearance">Change default appearance</string>
     <string name="routeInfo_horse_scale_name">Difficulty of horse trails</string>
     <string name="routeInfo_horse_scale_description">Render paths according to difficulty of horse trails</string>
     <string name="rendering_attr_horse_scale_common_name">Common</string>

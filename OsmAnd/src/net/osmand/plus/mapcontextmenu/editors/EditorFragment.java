@@ -14,7 +14,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -58,19 +58,60 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 
 	protected OsmandApplication app;
 
-	protected boolean cancelled;
-	protected boolean nightMode;
+	protected IconsCard iconsCard;
+	protected ColorsCard colorsCard;
+	protected ShapesCard shapesCard;
 
 	protected View view;
-	protected TextInputLayout nameCaption;
 	protected EditText nameEdit;
+	protected TextInputLayout nameCaption;
+
+	protected int color;
+	protected String iconName;
+	protected BackgroundType backgroundType;
 
 	private int scrollViewY;
 	private int layoutHeightPrevious = 0;
 
-	protected IconsCard iconsCard;
-	protected ColorsCard colorsCard;
-	protected ShapesCard shapesCard;
+	protected boolean cancelled;
+	protected boolean nightMode;
+
+	@ColorInt
+	public int getColor() {
+		return color;
+	}
+
+	public void setColor(@ColorInt int color) {
+		this.color = color;
+	}
+
+	public String getIconName() {
+		return iconName;
+	}
+
+	public void setIconName(@NonNull String iconName) {
+		this.iconName = iconName;
+	}
+
+	@DrawableRes
+	public int getIconId() {
+		int iconId = RenderingIcons.getBigIconResourceId(iconName);
+		return iconId != 0 ? iconId : DEFAULT_UI_ICON_ID;
+	}
+
+	public void setIcon(@DrawableRes int iconId) {
+		String name = RenderingIcons.getBigIconName(iconId);
+		iconName = name != null ? name : DEFAULT_ICON_NAME;
+	}
+
+	@NonNull
+	public BackgroundType getBackgroundType() {
+		return backgroundType;
+	}
+
+	public void setBackgroundType(@NonNull BackgroundType backgroundType) {
+		this.backgroundType = backgroundType;
+	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -111,7 +152,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 		createIconSelector();
 		createColorSelector();
 		createShapeSelector();
-		updateColorSelector(getPointColor());
+		updateContent();
 
 		view.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
 		return view;
@@ -183,7 +224,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 		}
 	}
 
-	private ViewTreeObserver.OnGlobalLayoutListener getOnGlobalLayoutListener() {
+	private OnGlobalLayoutListener getOnGlobalLayoutListener() {
 		return () -> {
 			Rect visibleDisplayFrame = new Rect();
 			view.getWindowVisibleDisplayFrame(visibleDisplayFrame);
@@ -200,7 +241,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	private void createIconSelector() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			iconsCard = new IconsCard(mapActivity, getIconId(), getPreselectedIconName(), getPointColor());
+			iconsCard = new IconsCard(mapActivity, getIconId(), getPreselectedIconName(), getColor());
 			iconsCard.setListener(this);
 			ViewGroup shapesCardContainer = view.findViewById(R.id.icons_card_container);
 			shapesCardContainer.addView(iconsCard.build(mapActivity));
@@ -214,11 +255,11 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 			for (int color : ColorDialogs.pallette) {
 				colors.add(color);
 			}
-			int customColor = getPointColor();
+			int customColor = getColor();
 			if (!ColorDialogs.isPaletteColor(customColor)) {
 				colors.add(customColor);
 			}
-			colorsCard = new ColorsCard(mapActivity, null, this, getPointColor(),
+			colorsCard = new ColorsCard(mapActivity, null, this, getColor(),
 					colors, app.getSettings().CUSTOM_TRACK_COLORS, true);
 			colorsCard.setListener(this);
 			ViewGroup colorsCardContainer = view.findViewById(R.id.colors_card_container);
@@ -229,7 +270,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	private void createShapeSelector() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			shapesCard = new ShapesCard(mapActivity, getBackgroundType(), getPointColor());
+			shapesCard = new ShapesCard(mapActivity, getBackgroundType(), getColor());
 			shapesCard.setListener(this);
 			ViewGroup shapesCardContainer = view.findViewById(R.id.shapes_card_container);
 			shapesCardContainer.addView(shapesCard.build(mapActivity));
@@ -238,20 +279,39 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	}
 
 	@Override
-	public void onColorSelected(Integer prevColor, int newColor) {
-		colorsCard.onColorSelected(prevColor, newColor);
-		updateColorSelector(colorsCard.getSelectedColor());
+	public void onCardPressed(@NonNull BaseCard card) {
+		if (card instanceof IconsCard) {
+			setIcon(iconsCard.getSelectedIconId());
+		} else if (card instanceof ColorsCard) {
+			setColor(colorsCard.getSelectedColor());
+			updateContent();
+		} else if (card instanceof ShapesCard) {
+			setBackgroundType(shapesCard.getSelectedShape());
+			updateSelectedShapeText();
+		}
 	}
 
-	protected void updateColorSelector(@ColorInt int color) {
-		((TextView) view.findViewById(R.id.color_name)).setText(ColorDialogs.getColorName(color));
-		setColor(color);
-		iconsCard.updateSelectedColor(color);
-		shapesCard.updateSelectedColor(color);
+	@Override
+	public void onColorSelected(Integer prevColor, int newColor) {
+		colorsCard.onColorSelected(prevColor, newColor);
+		setColor(colorsCard.getSelectedColor());
+		updateContent();
+	}
+
+	protected void updateContent() {
+		updateSelectedColorText();
+
+		colorsCard.setSelectedColor(color);
+		iconsCard.updateSelectedIcon(color, iconName);
+		shapesCard.updateSelectedShape(color, backgroundType);
 	}
 
 	protected void updateSelectedShapeText() {
-		((TextView) view.findViewById(R.id.shape_name)).setText(shapesCard.getSelectedShape().getNameId());
+		((TextView) view.findViewById(R.id.shape_name)).setText(backgroundType.getNameId());
+	}
+
+	protected void updateSelectedColorText() {
+		((TextView) view.findViewById(R.id.color_name)).setText(ColorDialogs.getColorName(color));
 	}
 
 	@Override
@@ -265,7 +325,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	@DrawableRes
 	protected int getDefaultIconId() {
 		String iconName = getDefaultIconName();
-		int iconId = getIconIdByName(iconName);
+		int iconId = RenderingIcons.getBigIconResourceId(iconName);
 		return iconId == 0 ? DEFAULT_UI_ICON_ID : iconId;
 	}
 
@@ -279,11 +339,6 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 			return lastUsedIcons.get(0);
 		}
 		return DEFAULT_ICON_NAME;
-	}
-
-	@DrawableRes
-	protected int getIconIdByName(@Nullable String iconName) {
-		return RenderingIcons.getBigIconResourceId(iconName);
 	}
 
 	protected void addLastUsedIcon(@DrawableRes int iconId) {
@@ -329,10 +384,15 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 
 	public void dismiss() {
 		hideKeyboard();
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.getSupportFragmentManager().popBackStack();
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			activity.getSupportFragmentManager().popBackStack();
 		}
+	}
+
+	@DrawableRes
+	protected int getToolbarNavigationIconId() {
+		return AndroidUtils.getNavigationIconResId(app);
 	}
 
 	@Nullable
@@ -344,26 +404,8 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	@NonNull
 	protected abstract String getToolbarTitle();
 
-	@DrawableRes
-	protected abstract int getToolbarNavigationIconId();
-
 	@Nullable
 	public abstract String getNameInitValue();
-
-	@ColorInt
-	public abstract int getPointColor();
-
-	public abstract void setColor(@ColorInt int color);
-
-	@DrawableRes
-	public abstract int getIconId();
-
-	public abstract void setIcon(@DrawableRes int iconId);
-
-	@NonNull
-	public abstract BackgroundType getBackgroundType();
-
-	public abstract void setBackgroundType(@NonNull BackgroundType backgroundType);
 
 	protected abstract boolean wasSaved();
 
@@ -389,9 +431,9 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 		if (wasSaved()) {
 			exitEditing();
 		} else {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				FragmentManager fragmentManager = activity.getSupportFragmentManager();
 				String message = getString(R.string.exit_without_saving_warning);
 				ExitBottomSheetDialogFragment.showInstance(fragmentManager, this, message);
 			}
@@ -418,5 +460,10 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	@Nullable
 	protected MapActivity getMapActivity() {
 		return (MapActivity) getActivity();
+	}
+
+	@NonNull
+	protected MapActivity requireMapActivity() {
+		return (MapActivity) requireActivity();
 	}
 }

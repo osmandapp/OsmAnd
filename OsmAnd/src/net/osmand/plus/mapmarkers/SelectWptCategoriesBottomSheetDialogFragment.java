@@ -6,7 +6,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.PointsCategory;
+import net.osmand.GPXUtilities.PointsGroup;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -30,6 +30,7 @@ import java.util.Set;
 public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = SelectWptCategoriesBottomSheetDialogFragment.class.getSimpleName();
+
 	public static final String GPX_FILE_PATH_KEY = "gpx_file_path";
 	public static final String UPDATE_CATEGORIES_KEY = "update_categories";
 	public static final String ACTIVE_CATEGORIES_KEY = "active_categories";
@@ -55,9 +56,11 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 
 		items.add(new ShortDescriptionItem(getString(R.string.select_waypoints_category_description)));
 
+		Map<String, PointsGroup> pointsGroups = gpxFile.getPointsGroups();
+
 		final BottomSheetItemWithCompoundButton[] selectAllItem = new BottomSheetItemWithCompoundButton[1];
 		selectAllItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
-				.setChecked(!isUpdateMode || categories != null && categories.size() == gpxFile.getPointsCategories().size())
+				.setChecked(!isUpdateMode || categories != null && categories.size() == pointsGroups.size())
 				.setCompoundButtonColorId(activeColorResId)
 				.setDescription(getString(R.string.shared_string_total) + ": " + gpxFile.getPoints().size())
 				.setIcon(getContentIcon(R.drawable.ic_action_group_select_all))
@@ -75,18 +78,11 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 
 		items.add(new DividerItem(getContext()));
 
-		Map<String, PointsCategory> pointsByCategories = gpxFile.getPointsCategories();
-		for (Entry<String, PointsCategory> entry : pointsByCategories.entrySet()) {
-			String categoryName = entry.getKey();
-			PointsCategory pointsCategory = entry.getValue();
-			boolean selected = !isUpdateMode || categories != null && categories.contains(categoryName);
-			if (selected) {
-				selectedCategories.add(categoryName);
-			}
-
+		for (Entry<String, PointsGroup> entry : pointsGroups.entrySet()) {
+			String category = entry.getKey();
 			final BottomSheetItemWithCompoundButton[] categoryItem = new BottomSheetItemWithCompoundButton[1];
 			categoryItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
-					.setChecked(selected)
+					.setChecked(!isUpdateMode || (categories != null && categories.contains(category)))
 					.setOnCheckedChangeListener((buttonView, isChecked) -> {
 						if (isChecked) {
 							selectedCategories.add((String) categoryItem[0].getTag());
@@ -95,11 +91,11 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 						}
 					})
 					.setCompoundButtonColorId(activeColorResId)
-					.setDescription(String.valueOf(pointsCategory.points.size()))
+					.setDescription(String.valueOf(entry.getValue().points.size()))
 					.setIcon(getContentIcon(R.drawable.ic_action_folder))
-					.setTitle(categoryName.isEmpty() ? getString(R.string.shared_string_waypoints) : categoryName)
+					.setTitle(category.isEmpty() ? getString(R.string.shared_string_waypoints) : category)
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_checkbox_56dp)
-					.setTag(categoryName)
+					.setTag(category)
 					.setOnClickListener(v -> {
 						categoryItem[0].setChecked(!categoryItem[0].isChecked());
 						selectAllItem[0].setChecked(isAllChecked());
@@ -107,6 +103,9 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 					.create();
 			items.add(categoryItem[0]);
 			categoryItems.add(categoryItem[0]);
+			if (!isUpdateMode || categories != null && categories.contains(category)) {
+				selectedCategories.add(category);
+			}
 		}
 	}
 

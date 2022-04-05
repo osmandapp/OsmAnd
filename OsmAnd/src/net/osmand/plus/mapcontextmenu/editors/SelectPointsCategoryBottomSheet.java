@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import static net.osmand.GPXUtilities.GPXFile;
+
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -9,6 +11,12 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.fragment.app.FragmentManager;
+
+import net.osmand.GPXUtilities.PointsGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -19,25 +27,15 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.myplaces.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.fragment.app.FragmentManager;
-
-import static net.osmand.GPXUtilities.GPXFile;
-import static net.osmand.GPXUtilities.WptPt;
 
 public class SelectPointsCategoryBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -45,13 +43,13 @@ public class SelectPointsCategoryBottomSheet extends MenuBottomSheetDialogFragme
 
 	private static final String KEY_EDITOR_TAG = "editor_tag";
 	private static final String KEY_SELECTED_CATEGORY = "selected_category";
-	private static final String KEY_GPX_CATEGORIES = "gpx_categories";
 
 	private String editorTag;
 	private String selectedCategory;
 
 	private GPXFile gpxFile;
-	private Map<String, Integer> gpxCategories;
+	private PointsGroup pointsGroup;
+	private Map<String, PointsGroup> pointsGroups;
 	private CategorySelectionListener selectionListener;
 
 	@Override
@@ -70,9 +68,6 @@ public class SelectPointsCategoryBottomSheet extends MenuBottomSheetDialogFragme
 		if (WptPtEditor.TAG.equals(editorTag)) {
 			WptPtEditor editor = ((MapActivity) requireActivity()).getContextMenu().getWptPtPointEditor();
 			gpxFile = editor != null ? editor.getGpxFile() : null;
-		}
-		if (bundle.containsKey(KEY_GPX_CATEGORIES)) {
-			gpxCategories = (HashMap<String, Integer>) bundle.getSerializable(KEY_GPX_CATEGORIES);
 		}
 	}
 
@@ -127,11 +122,8 @@ public class SelectPointsCategoryBottomSheet extends MenuBottomSheetDialogFragme
 	private void showAddNewCategoryFragment() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			Set<String> categories = gpxCategories != null ? gpxCategories.keySet() : null;
-			AddNewFavoriteCategoryBottomSheet fragment =
-					AddNewFavoriteCategoryBottomSheet.createInstance(editorTag, categories, isWaypointCategories());
-			fragment.setSelectionListener(selectionListener);
-			fragment.show(mapActivity.getSupportFragmentManager(), AddNewFavoriteCategoryBottomSheet.TAG);
+			FragmentManager manager = mapActivity.getSupportFragmentManager();
+			PointsCategoryEditorFragment.showInstance(manager, editorTag, null, pointsGroups, selectionListener);
 		}
 		dismiss();
 	}
@@ -154,37 +146,25 @@ public class SelectPointsCategoryBottomSheet extends MenuBottomSheetDialogFragme
 	}
 
 	private void attachWaypointCategories(@NonNull ViewGroup container) {
-		if (gpxCategories != null) {
-			Map<String, List<WptPt>> pointsCategories = gpxFile != null
-					? gpxFile.getPointsByCategories()
-					: new HashMap<>();
-
-			for (Map.Entry<String, Integer> category : gpxCategories.entrySet()) {
-				String categoryName = category.getKey();
-				int categoryColor = category.getValue();
-				List<WptPt> categoryPoints = pointsCategories.get(categoryName);
-				String categoryCount = Algorithms.isEmpty(categoryPoints)
-						? getString(R.string.shared_string_empty)
-						: String.valueOf(categoryPoints.size());
-				container.addView(createCategoryItem(categoryName, categoryColor, categoryCount, false));
+		if (pointsGroups != null) {
+			for (PointsGroup pointsGroup : pointsGroups.values()) {
+				container.addView(createCategoryItem(pointsGroup, false));
 			}
 		}
 	}
 
 	private void attachFavoriteCategories(@NonNull ViewGroup container) {
-		FavouritesHelper favoritesHelper = requiredMyApplication().getFavoritesHelper();
+		OsmandApplication app = requiredMyApplication();
+		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
 		List<FavoriteGroup> favoriteGroups = favoritesHelper.getFavoriteGroups();
-		for (FavoriteGroup category : favoriteGroups) {
-			String displayName = category.getDisplayName(getContext());
-			String categoryCount = Algorithms.isEmpty(category.getPoints())
-					? getString(R.string.shared_string_empty)
-					: String.valueOf(category.getPoints().size());
-			container.addView(createCategoryItem(displayName, category.getColor(), categoryCount, !category.isVisible()));
+		for (FavoriteGroup favoriteGroup : favoriteGroups) {
+			PointsGroup pointsGroup = favoriteGroup.toPointsGroup(app);
+			container.addView(createCategoryItem(pointsGroup, !favoriteGroup.isVisible()));
 		}
 	}
 
 	@NonNull
-	private View createCategoryItem(final String categoryName, final int categoryColor, String categoryPointCount, boolean isHidden) {
+	private View createCategoryItem(final PointsGroup pointsGroup, boolean isHidden) {
 		Context context = requireContext();
 		int dp8 = AndroidUtils.dpToPx(context, 8f);
 		int dp16 = AndroidUtils.dpToPx(context, 16f);
@@ -200,6 +180,7 @@ public class SelectPointsCategoryBottomSheet extends MenuBottomSheetDialogFragme
 		if (isHidden) {
 			button.setImageResource(R.drawable.ic_action_hide);
 		} else {
+			int categoryColor = pointsGroup.getColor();
 			if (categoryColor != 0) {
 				button.setImageDrawable(getPaintedIcon(R.drawable.ic_action_folder, categoryColor));
 			} else {
@@ -207,7 +188,7 @@ public class SelectPointsCategoryBottomSheet extends MenuBottomSheetDialogFragme
 				button.setImageDrawable(getIcon(R.drawable.ic_action_folder, defaultColorId));
 			}
 		}
-
+		String categoryName = pointsGroup.getName();
 		RadioButton compoundButton = itemView.findViewById(R.id.compound_button);
 		compoundButton.setChecked(Algorithms.stringsEqual(selectedCategory, categoryName));
 		int activeColor = ColorUtilities.getActiveColor(context, nightMode);
@@ -217,17 +198,17 @@ public class SelectPointsCategoryBottomSheet extends MenuBottomSheetDialogFragme
 		TextView description = itemView.findViewById(R.id.description);
 		String name = categoryName.length() == 0 ? getString(R.string.shared_string_favorites) : categoryName;
 		text.setText(name);
-		description.setText(String.valueOf(categoryPointCount));
+		description.setText(String.valueOf(pointsGroup.points.size()));
 
 		itemView.setOnClickListener(v -> {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				PointEditor pointEditor = mapActivity.getContextMenu().getPointEditor(editorTag);
 				if (pointEditor != null) {
-					pointEditor.setCategory(categoryName, categoryColor);
+					pointEditor.setPointsGroup(pointsGroup);
 				}
 				if (selectionListener != null) {
-					selectionListener.onCategorySelected(categoryName, categoryColor);
+					selectionListener.onCategorySelected(pointsGroup);
 				}
 			}
 			dismiss();
@@ -245,9 +226,6 @@ public class SelectPointsCategoryBottomSheet extends MenuBottomSheetDialogFragme
 	private void saveState(@NonNull Bundle bundle) {
 		bundle.putString(KEY_EDITOR_TAG, editorTag);
 		bundle.putString(KEY_SELECTED_CATEGORY, selectedCategory);
-		if (gpxCategories != null) {
-			bundle.putSerializable(KEY_GPX_CATEGORIES, new HashMap<>(gpxCategories));
-		}
 	}
 
 	private boolean isWaypointCategories() {
@@ -271,22 +249,22 @@ public class SelectPointsCategoryBottomSheet extends MenuBottomSheetDialogFragme
 
 	public static void showSelectWaypointCategoryFragment(@NonNull FragmentManager fragmentManager,
 	                                                      @NonNull String selectedCategory,
-	                                                      @NonNull Map<String, Integer> gpxCategories) {
-		showInstance(fragmentManager, null, WptPtEditor.TAG, selectedCategory, gpxCategories);
+	                                                      @NonNull Map<String, PointsGroup> gpxGroups) {
+		showInstance(fragmentManager, null, WptPtEditor.TAG, selectedCategory, gpxGroups);
 	}
 
 	private static void showInstance(@NonNull FragmentManager fragmentManager,
 	                                 @Nullable CategorySelectionListener selectionListener,
 	                                 @NonNull String editorTag,
 	                                 @NonNull String selectedCategory,
-	                                 @Nullable Map<String, Integer> gpxCategories) {
+	                                 @Nullable Map<String, PointsGroup> pointsGroups) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			SelectPointsCategoryBottomSheet fragment = new SelectPointsCategoryBottomSheet();
 			Bundle args = new Bundle();
 			args.putString(KEY_EDITOR_TAG, editorTag);
 			args.putString(KEY_SELECTED_CATEGORY, selectedCategory);
-			if (gpxCategories != null) {
-				args.putSerializable(KEY_GPX_CATEGORIES, new HashMap<>(gpxCategories));
+			if (pointsGroups != null) {
+				fragment.pointsGroups.putAll(pointsGroups);
 			}
 			fragment.setArguments(args);
 			fragment.selectionListener = selectionListener;
@@ -297,6 +275,6 @@ public class SelectPointsCategoryBottomSheet extends MenuBottomSheetDialogFragme
 
 	public interface CategorySelectionListener {
 
-		void onCategorySelected(String category, int color);
+		void onCategorySelected(PointsGroup pointsGroup);
 	}
 }

@@ -1,58 +1,50 @@
 package net.osmand.plus.myplaces.ui;
 
+import static net.osmand.plus.myplaces.ui.FavoritesActivity.FAV_TAB;
+import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.ListPopupWindow;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.myplaces.FavoriteGroup;
-import net.osmand.plus.myplaces.FavouritesHelper;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.ColorDialogs;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.myplaces.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = "EditFavoriteGroupDialogFragment";
-	private static final String GROUP_NAME_KEY = "group_name_key";
+	public static final String TAG = EditFavoriteGroupDialogFragment.class.getSimpleName();
+	public static final String GROUP_NAME_KEY = "group_name_key";
 
 	private FavoriteGroup group;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		final OsmandApplication app = getMyApplication();
+		OsmandApplication app = requiredMyApplication();
 		FavouritesHelper helper = app.getFavoritesHelper();
 		Bundle args = getArguments();
 		if (args != null) {
@@ -108,50 +100,20 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 				.create();
 		items.add(editNameItem);
 
-		final View changeColorView = UiUtilities.getInflater(getContext(), nightMode)
-				.inflate(R.layout.change_fav_color, null, false);
-		((ImageView) changeColorView.findViewById(R.id.change_color_icon))
-				.setImageDrawable(getContentIcon(R.drawable.ic_action_appearance));
-		updateColorView((ImageView) changeColorView.findViewById(R.id.colorImage));
-		BaseBottomSheetItem changeColorItem = new BaseBottomSheetItem.Builder()
-				.setCustomView(changeColorView)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Activity activity = getActivity();
-						if (activity != null) {
-							final ListPopupWindow popup = new ListPopupWindow(v.getContext());
-							popup.setAnchorView(v);
-							popup.setContentWidth(AndroidUtils.dpToPx(app, 200f));
-							popup.setModal(true);
-							popup.setDropDownGravity(Gravity.END | Gravity.TOP);
-							if (AndroidUiHelper.isOrientationPortrait(activity)) {
-								if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-									popup.setVerticalOffset(AndroidUtils.dpToPx(app, 48f));
-								}
-							} else {
-								popup.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
-							}
-							popup.setHorizontalOffset(AndroidUtils.dpToPx(app, -6f));
-							final FavoriteColorAdapter colorAdapter = new FavoriteColorAdapter(activity);
-							popup.setAdapter(colorAdapter);
-							popup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-								@Override
-								public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-									Integer color = colorAdapter.getItem(position);
-									if (color != null) {
-										if (color != group.getColor()) {
-											app.getFavoritesHelper()
-													.editFavouriteGroup(group, group.getName(), color, group.isVisible());
-											updateParentFragment();
-										}
-									}
-									popup.dismiss();
-									dismiss();
-								}
-							});
-							popup.show();
-						}
+		BaseBottomSheetItem changeColorItem = new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_action_appearance))
+				.setTitle(getString(R.string.change_default_appearance))
+				.setLayoutId(R.layout.bottom_sheet_item_simple)
+				.setOnClickListener(v -> {
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						Bundle bundle = new Bundle();
+						Bundle prevParams = new Bundle();
+
+						prevParams.putInt(TAB_ID, FAV_TAB);
+						bundle.putString(GROUP_NAME_KEY, group.getName());
+
+						MapActivity.launchMapActivityMoveToTop(activity, prevParams, null, bundle);
 					}
 				})
 				.create();
@@ -248,56 +210,11 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 		}
 	}
 
-	private void updateColorView(ImageView colorImageView) {
-		int color = group.getColor() == 0 ? getResources().getColor(R.color.color_favorite) : group.getColor();
-		if (color == 0) {
-			colorImageView.setImageDrawable(getContentIcon(R.drawable.ic_action_circle));
-		} else {
-			colorImageView.setImageDrawable(getMyApplication().getUIUtilities().getPaintedIcon(R.drawable.ic_action_circle, color));
-		}
-	}
-
 	public static void showInstance(FragmentManager fragmentManager, String groupName) {
 		EditFavoriteGroupDialogFragment f = new EditFavoriteGroupDialogFragment();
 		Bundle args = new Bundle();
 		args.putString(GROUP_NAME_KEY, groupName);
 		f.setArguments(args);
 		f.show(fragmentManager, EditFavoriteGroupDialogFragment.TAG);
-	}
-
-	public static class FavoriteColorAdapter extends ArrayAdapter<Integer> {
-
-		private final OsmandApplication app;
-
-		public FavoriteColorAdapter(Context context) {
-			super(context, R.layout.rendering_prop_menu_item);
-			this.app = (OsmandApplication) getContext().getApplicationContext();
-			init();
-		}
-
-		public void init() {
-			for (int color : ColorDialogs.pallette) {
-				add(color);
-			}
-		}
-
-		@NonNull
-		@Override
-		public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-			Integer color = getItem(position);
-			View v = convertView;
-			if (v == null) {
-				v = LayoutInflater.from(getContext()).inflate(R.layout.rendering_prop_menu_item, parent, false);
-			}
-			if (color != null) {
-				TextView textView = (TextView) v.findViewById(R.id.text1);
-				textView.setText(app.getString(ColorDialogs.paletteColors[position]));
-				textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
-						app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_circle, color), null);
-				textView.setCompoundDrawablePadding(AndroidUtils.dpToPx(getContext(), 10f));
-				v.findViewById(R.id.divider).setVisibility(View.GONE);
-			}
-			return v;
-		}
 	}
 }

@@ -646,7 +646,7 @@ public class GPXUtilities {
 		}
 	}
 
-	public static class PointsCategory {
+	public static class PointsGroup {
 
 		protected String name;
 		protected String iconName;
@@ -655,17 +655,17 @@ public class GPXUtilities {
 
 		public final List<WptPt> points = new ArrayList<>();
 
-		public PointsCategory() {
+		public PointsGroup() {
 		}
 
-		public PointsCategory(PointsCategory category) {
+		public PointsGroup(PointsGroup category) {
 			this.name = category.name;
 			this.color = category.color;
 			this.iconName = category.iconName;
 			this.backgroundType = category.backgroundType;
 		}
 
-		public PointsCategory(String name, int color, String iconName, String backgroundType) {
+		public PointsGroup(String name, int color, String iconName, String backgroundType) {
 			this.name = name;
 			this.color = color;
 			this.iconName = iconName;
@@ -720,8 +720,8 @@ public class GPXUtilities {
 			return bundle;
 		}
 
-		private static PointsCategory parsePointsCategoryAttributes(XmlPullParser parser) {
-			PointsCategory category = new PointsCategory();
+		private static PointsGroup parsePointsCategoryAttributes(XmlPullParser parser) {
+			PointsGroup category = new PointsGroup();
 			String name = parser.getAttributeValue("", "name");
 			category.name = name != null ? name : "";
 			category.color = parseColor(parser.getAttributeValue("", "color"), 0);
@@ -1358,12 +1358,13 @@ public class GPXUtilities {
 	}
 
 	public static class GPXFile extends GPXExtensions {
+
 		public String author;
 		public Metadata metadata = new Metadata();
 		public List<Track> tracks = new ArrayList<>();
-		private List<WptPt> points = new ArrayList<>();
+		private final List<WptPt> points = new ArrayList<>();
 		public List<Route> routes = new ArrayList<>();
-		private final Map<String, PointsCategory> pointsCategories = new LinkedHashMap<>();
+		private final Map<String, PointsGroup> pointsGroups = new LinkedHashMap<>();
 
 		public Exception error = null;
 		public String path = "";
@@ -1412,12 +1413,8 @@ public class GPXUtilities {
 			return points;
 		}
 
-		public void addCategory(PointsCategory category) {
-			pointsCategories.put(category.getName(), category);
-		}
-
-		public Map<String, PointsCategory> getPointsCategories() {
-			return Collections.unmodifiableMap(pointsCategories);
+		public Map<String, PointsGroup> getPointsGroups() {
+			return Collections.unmodifiableMap(pointsGroups);
 		}
 
 		public boolean isPointsEmpty() {
@@ -1515,7 +1512,7 @@ public class GPXUtilities {
 			GPXTrackAnalysis analysis = new GPXTrackAnalysis();
 			analysis.name = path;
 			analysis.wptPoints = points.size();
-			analysis.wptCategoryNames = new HashSet<>(pointsCategories.keySet());
+			analysis.wptCategoryNames = new HashSet<>(pointsGroups.keySet());
 
 			List<SplitSegment> segments = getSplitSegments(analysis, fromDistance, toDistance);
 			analysis.prepareInformation(fileTimestamp, segments.toArray(new SplitSegment[0]));
@@ -2239,14 +2236,14 @@ public class GPXUtilities {
 	}
 
 	private static void assignPointsCategoriesExtensionWriter(final GPXFile gpxFile) {
-		if (!Algorithms.isEmpty(gpxFile.pointsCategories) && gpxFile.getExtensionsWriter() == null) {
+		if (!Algorithms.isEmpty(gpxFile.pointsGroups) && gpxFile.getExtensionsWriter() == null) {
 			gpxFile.setExtensionsWriter(new GPXExtensionsWriter() {
 
 				@Override
 				public void writeExtensions(XmlSerializer serializer) {
 					StringBundle bundle = new StringBundle();
 					List<StringBundle> categoriesBundle = new ArrayList<>();
-					for (PointsCategory category : gpxFile.pointsCategories.values()) {
+					for (PointsGroup category : gpxFile.pointsGroups.values()) {
 						categoriesBundle.add(category.toStringBundle());
 					}
 					bundle.putBundleList("points_categories", "category", categoriesBundle);
@@ -2517,7 +2514,7 @@ public class GPXUtilities {
 			boolean routePointExtension = false;
 			List<RouteSegment> routeSegments = new ArrayList<>();
 			List<RouteType> routeTypes = new ArrayList<>();
-			List<PointsCategory> pointsCategories = new ArrayList<>();
+			List<PointsGroup> pointsCategories = new ArrayList<>();
 			boolean routeExtension = false;
 			boolean typesExtension = false;
 			boolean pointsCategoriesExtension = false;
@@ -2536,7 +2533,7 @@ public class GPXUtilities {
 							RouteType type = parseRouteTypeAttributes(parser);
 							routeTypes.add(type);
 						} else if (pointsCategoriesExtension && tagName.equals("category")) {
-							PointsCategory category = PointsCategory.parsePointsCategoryAttributes(parser);
+							PointsGroup category = PointsGroup.parsePointsCategoryAttributes(parser);
 							pointsCategories.add(category);
 						}
 						switch (tagName) {
@@ -2847,7 +2844,7 @@ public class GPXUtilities {
 				firstSegment.routeTypes = routeTypes;
 			}
 			if (!pointsCategories.isEmpty() || !gpxFile.points.isEmpty()) {
-				gpxFile.pointsCategories.putAll(mergePointsCategories(pointsCategories, gpxFile.points));
+				gpxFile.pointsGroups.putAll(mergePointsCategories(pointsCategories, gpxFile.points));
 			}
 			gpxFile.addGeneralTrack();
 		} catch (Exception e) {
@@ -2969,17 +2966,17 @@ public class GPXUtilities {
 		}
 	}
 
-	private static Map<String, PointsCategory> mergePointsCategories(List<PointsCategory> categories, List<WptPt> points) {
-		Map<String, PointsCategory> allCategories = new LinkedHashMap<>();
-		for (PointsCategory category : categories) {
+	private static Map<String, PointsGroup> mergePointsCategories(List<PointsGroup> categories, List<WptPt> points) {
+		Map<String, PointsGroup> allCategories = new LinkedHashMap<>();
+		for (PointsGroup category : categories) {
 			allCategories.put(category.name, category);
 		}
 		for (WptPt point : points) {
 			String categoryName = point.category != null ? point.category : "";
 
-			PointsCategory category = allCategories.get(categoryName);
+			PointsGroup category = allCategories.get(categoryName);
 			if (category == null) {
-				category = new PointsCategory(categoryName, point.getColor(), null, null);
+				category = new PointsGroup(categoryName, point.getColor(), null, null);
 				allCategories.put(categoryName, category);
 			}
 			int color = point.getColor();

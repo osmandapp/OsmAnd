@@ -26,12 +26,10 @@ public class ShapesCard extends MapBaseCard {
 	@ColorInt
 	private int selectedColor;
 
-	public ShapesCard(@NonNull MapActivity mapActivity,
-	                  @NonNull BackgroundType selectedShape,
-	                  @ColorInt int selectedColor) {
+	public ShapesCard(@NonNull MapActivity mapActivity, @NonNull BackgroundType shape, @ColorInt int color) {
 		super(mapActivity);
-		this.selectedShape = selectedShape;
-		this.selectedColor = selectedColor;
+		this.selectedShape = shape;
+		this.selectedColor = color;
 	}
 
 	@Override
@@ -44,13 +42,9 @@ public class ShapesCard extends MapBaseCard {
 		return selectedShape;
 	}
 
-	public void updateSelectedShape(@NonNull BackgroundType shape) {
-		reselectShape(shape, true);
-	}
-
-	public void updateSelectedColor(@ColorInt int color) {
+	public void updateSelectedShape(@ColorInt int color, @NonNull BackgroundType shape) {
 		selectedColor = color;
-		reselectShape(selectedShape, false);
+		reselectShape(shape, false);
 	}
 
 	@Override

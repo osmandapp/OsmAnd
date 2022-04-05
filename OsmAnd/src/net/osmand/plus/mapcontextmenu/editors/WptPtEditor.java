@@ -5,12 +5,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.PointsCategory;
+import net.osmand.GPXUtilities.PointsGroup;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
 
 import java.util.HashMap;
@@ -86,15 +86,15 @@ public class WptPtEditor extends PointEditor {
 	}
 
 	@NonNull
-	public Map<String, PointsCategory> getPointsCategories() {
+	public Map<String, PointsGroup> getPointsGroups() {
 		if (gpxFile != null) {
-			return gpxFile.getPointsCategories();
+			return gpxFile.getPointsGroups();
 		}
-		if (isProcessingTemplate() && !Algorithms.isEmpty(wpt.category) && categoryColor != 0) {
-			PointsCategory category = new PointsCategory(wpt.category, categoryColor,
+		if (isProcessingTemplate() && !Algorithms.isEmpty(wpt.category)) {
+			PointsGroup category = new PointsGroup(wpt.category, categoryColor,
 					wpt.getIconNameOrDefault(), wpt.getBackgroundType());
 
-			Map<String, PointsCategory> predefinedCategory = new HashMap<>();
+			Map<String, PointsGroup> predefinedCategory = new HashMap<>();
 			predefinedCategory.put(wpt.category, category);
 			return predefinedCategory;
 		}
@@ -231,14 +231,14 @@ public class WptPtEditor extends PointEditor {
 	public void showEditorFragment() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			WptPtEditorFragmentNew.showInstance(mapActivity);
+			WptPtEditorFragment.showInstance(mapActivity);
 		}
 	}
 
 	public void showEditorFragment(boolean skipDialog) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			WptPtEditorFragmentNew.showInstance(mapActivity, skipDialog);
+			WptPtEditorFragment.showInstance(mapActivity, skipDialog);
 		}
 	}
 

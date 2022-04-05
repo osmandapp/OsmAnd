@@ -1,5 +1,8 @@
 package net.osmand.plus.myplaces;
 
+import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
@@ -7,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.PlatformUtil;
+import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.FavouritePoint.SpecialPointType;
 import net.osmand.data.LatLon;
@@ -466,18 +470,20 @@ public class FavouritesHelper {
 		return false;
 	}
 
-	private void addEmptyCategory(String name) {
-		addEmptyCategory(name, 0, true);
-	}
-
 	public void addEmptyCategory(String name, int color) {
 		addEmptyCategory(name, color, true);
 	}
 
 	public void addEmptyCategory(String name, int color, boolean visible) {
+		addEmptyCategory(name, color, DEFAULT_ICON_NAME, DEFAULT_BACKGROUND_TYPE, visible);
+	}
+
+	public void addEmptyCategory(String name, int color, String iconName, BackgroundType backgroundType, boolean visible) {
 		FavoriteGroup group = new FavoriteGroup();
 		group.setName(FavoriteGroup.convertDisplayNameToGroupIdName(app, name));
 		group.setColor(color);
+		group.setIconName(iconName);
+		group.setBackgroundType(backgroundType);
 		group.setVisible(visible);
 		favoriteGroups.add(group);
 		flatGroups.put(group.getName(), group);

@@ -10,6 +10,10 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.data.LatLon;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.GeocodingLookupService.OnAddressLookupResult;
@@ -23,10 +27,6 @@ import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.fragment.app.FragmentManager;
 
 public class FavoriteAction extends QuickAction {
 
@@ -175,14 +175,14 @@ public class FavoriteAction extends QuickAction {
 
 		categoryEdit.setOnClickListener(view -> {
 			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-			CategorySelectionListener listener = (category, color) -> fillGroupParams(root, category, color);
+			CategorySelectionListener listener = (pointsGroup) -> fillGroupParams(root, pointsGroup.getName(), pointsGroup.getColor());
 			SelectPointsCategoryBottomSheet.showSelectFavoriteCategoryFragment(fragmentManager, listener, "");
 		});
 
 		SelectPointsCategoryBottomSheet dialogFragment = (SelectPointsCategoryBottomSheet)
 				mapActivity.getSupportFragmentManager().findFragmentByTag(SelectPointsCategoryBottomSheet.TAG);
 		if (dialogFragment != null) {
-			dialogFragment.setSelectionListener((category, color) -> fillGroupParams(root, category, color));
+			dialogFragment.setSelectionListener((pointsGroup) -> fillGroupParams(root, pointsGroup.getName(), pointsGroup.getColor()));
 		}
 	}
 
