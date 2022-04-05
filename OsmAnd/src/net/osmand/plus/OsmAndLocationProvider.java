@@ -793,7 +793,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			updateLocation(this.location);
 		}
 	}
-	
+
 	public void setLocationFromSimulation(net.osmand.Location location) {
 		setLocation(location);
 	}

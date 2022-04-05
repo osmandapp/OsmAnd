@@ -9,8 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.voice.LocaleBuilder;
-
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
@@ -20,12 +18,13 @@ public class LocaleHelper {
 
 	private final OsmandApplication app;
 
-	private Locale defaultLocale;
+	private final Locale defaultLocale;
 	private Locale preferredLocale;
 	private Resources localizedResources;
 
 	public LocaleHelper(@NonNull OsmandApplication app) {
 		this.app = app;
+		this.defaultLocale = Locale.getDefault();
 	}
 
 	public void checkPreferredLocale() {
@@ -37,10 +36,6 @@ public class LocaleHelper {
 		String[] splitCountry = splitScript[0].split("_");
 		String lang = splitCountry[0];
 		String country = (splitCountry.length > 1) ? splitCountry[1] : "";
-
-		if (defaultLocale == null) {
-			defaultLocale = Locale.getDefault();
-		}
 
 		if (!Algorithms.isEmpty(lang)) {
 			Locale.Builder builder = new Locale.Builder();
@@ -108,7 +103,7 @@ public class LocaleHelper {
 		return preferredLocale;
 	}
 
-	@Nullable
+	@NonNull
 	public Locale getDefaultLocale() {
 		return defaultLocale;
 	}
@@ -133,8 +128,16 @@ public class LocaleHelper {
 		return lang;
 	}
 
-	private void updateOpeningHoursParser(@NonNull Locale locale) {
-		OpeningHoursParser.setTwelveHourFormattingEnabled(!DateFormat.is24HourFormat(app), locale);
+	public void updateOpeningHoursParser() {
+		updateOpeningHoursParser(Locale.getDefault());
+	}
+
+	public void updateOpeningHoursParser(@NonNull Locale locale) {
+		updateOpeningHoursParser(!DateFormat.is24HourFormat(app), locale);
+	}
+
+	public void updateOpeningHoursParser(boolean enabled, @NonNull Locale locale) {
+		OpeningHoursParser.setTwelveHourFormattingEnabled(enabled, locale);
 	}
 
 	public Resources getLocalizedResources(@NonNull String language) {

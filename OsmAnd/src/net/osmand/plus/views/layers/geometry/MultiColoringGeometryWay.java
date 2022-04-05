@@ -379,6 +379,11 @@ public abstract class MultiColoringGeometryWay
 			GeometrySolidWayStyle<?> o = (GeometrySolidWayStyle<?>) other;
 			return Algorithms.objectEquals(directionArrowColor, o.directionArrowColor);
 		}
+
+		@Override
+		public int getColorizationScheme() {
+			return COLORIZATION_SOLID;
+		}
 	}
 
 	public static class GeometryGradientWayStyle<C extends MultiColoringGeometryWayContext> extends GeometrySolidWayStyle<C> {
@@ -408,6 +413,11 @@ public abstract class MultiColoringGeometryWay
 			}
 			GeometryGradientWayStyle<?> o = (GeometryGradientWayStyle<?>) other;
 			return currColor == o.currColor && nextColor == o.nextColor;
+		}
+
+		@Override
+		public int getColorizationScheme() {
+			return COLORIZATION_GRADIENT;
 		}
 	}
 }

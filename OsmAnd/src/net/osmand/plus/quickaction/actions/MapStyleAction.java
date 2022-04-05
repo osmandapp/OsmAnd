@@ -224,6 +224,11 @@ public class MapStyleAction extends SwitchableAction<String> {
 	}
 
 	@Override
+	public String getItemIdFromObject(String object) {
+		return object;
+	}
+
+	@Override
 	public List<String> loadListFromParams() {
 
 		List<String> styles = new ArrayList<>();

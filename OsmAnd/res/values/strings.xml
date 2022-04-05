@@ -10,7 +10,51 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="routeInfo_horse_scale_name">Difficulty of horse trails</string>
+    <string name="routeInfo_horse_scale_description">Render paths according to difficulty of horse trails</string>
+    <string name="rendering_attr_horse_scale_common_name">Common</string>
+    <string name="rendering_attr_horse_scale_demanding_name">Demanding</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Difficult</string>
+    <string name="rendering_attr_horse_scale_critical_name">Critical</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">Dangerous</string>
+    <string name="rendering_attr_horse_scale_impossible_name">Impossible</string>
+    <string name="routing_attr_carriage_restrictions_name">Carriage restrictions</string>
+    <string name="routing_attr_carriage_restrictions_description">Consider access permissions for horse-drawn vehicles</string>
+    <string name="rendering_attr_showTramRoutes_name">Tram routes</string>
+    <string name="rendering_attr_showTrainRoutes_name">Train routes</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Light rail routes</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Monorail routes</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Funicular routes</string>
+    <string name="rendering_attr_showBusRoutes_name">Bus routes</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Trolleybus routes</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">Shuttle routes</string>
+    <string name="map_markers_bar">Map markers bar</string>
+    <string name="shared_string_visible_widgets">Visible widgets</string>
+    <string name="top_widgets_panel">Top panel</string>
+    <string name="bottom_widgets_panel">Bottom panel</string>
+    <string name="shared_string_item">Item</string>
+    <string name="shared_string_buttons">Buttons</string>
+    <string name="configure_screen_widgets_descr">Select screen side to add or rearange widgets.</string>
+    <string name="osm_carto_render_descr">Similar to OpenStreetMap-carto style used on main OSM site</string>
+    <string name="simulation_real_mode_desc">On straight road sections, speed will be approximate to the maximum allowed speed.\nAt intersections, the simulation will slow down.\nExtra penalties will be applied on traffic signals, stop signs, etc.</string>
+    <string name="simulation_real_mode_title">Realistic simulation</string>
+    <string name="simulation_constant_mode_desc">The simulation will be performed with constant selected speed.</string>
+    <string name="simulation_constant_mode_title">Fixed speed</string>
+    <string name="simulation_preview_mode_desc">The speed of the simulation will be maximum on straight sections and slow down only at intersections.</string>
+    <string name="simulation_preview_mode_title">Fast preview mode</string>
+    <string name="speed_mode">Speed mode</string>
+    <string name="rendering_attr_showRunningRoutes_name">Running routes</string>
+    <string name="rendering_attr_showRunningRoutes_description">Show running routes</string>
+    <string name="rendering_attr_showFitnessTrails_name">Fitness trails</string>
+    <string name="rendering_attr_showFitnessTrails_description">Show fitness trails</string>
+    <string name="stop_download_desc">Download is not complete. If you interrupt the download now, only part of the tiles will be available for viewing.</string>
+    <string name="stop_download">Stop download</string>
+    <string name="stop_and_exit">Stop and exit</string>
+    <string name="shared_string_complete">complete</string>
+    <string name="zoom_levels_difference_description">The big difference between zoom levels can increase the size of the downloaded data.</string>
+    <string name="estimated_download_size">Estimated download size</string>
+    <string name="number_of_tiles">Number of tiles</string>
+    <string name="move_map_to_select_area">Move map to select needed area.</string>
     <string name="edit_category">Edit category</string>
     <string name="shared_string_shape">Shape</string>
     <string name="default_appearance_desc">Default color, icon and shape will apply to the added favorite points into the group.</string>
@@ -1653,7 +1697,6 @@
     <string name="ski_map_render_descr">For skiing. Features pistes, ski-lifts, cross country tracks, etc. Dims secondary map objects.</string>
     <string name="light_rs_render_descr">Simple driving style. Gentle night mode, contour lines, contrasting orange styled roads, dims secondary map objects.</string>
     <string name="topo_render_descr">For hiking, trekking, and nature cycling. Readable outdoors. Contrasting roads and natural objects, different route types, advanced contour line options, extra details. Adjusting "Surface integrity" distinguishes road quality. No night mode.</string>
-    <string name="mapnik_render_descr">Old default \'Mapnik\'-style. Similar colors to \'Mapnik\'.</string>
     <string name="touring_view_render_descr">Touring style with high contrast and maximum detail. Includes all options of the OsmAnd default style, while displaying as much detail as possible, in particular roads, paths, and other ways to travel. Clear \"touring atlas\" distinction between road types. Suitable for day, night, and outdoor use.</string>
     <string name="default_render_descr">General purpose style. Dense cities shown cleanly. Features contour lines, routes, surface quality, access restrictions, road shields, paths rendering according to SAC scale, whitewater sports items.</string>
     <string name="open_wikipedia_link_online">Open Wikipedia link online</string>

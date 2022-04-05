@@ -1,29 +1,30 @@
 package net.osmand.plus.measurementtool;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Metadata;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.List;
-
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
 
 class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
 
@@ -119,10 +120,18 @@ class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
                                           boolean addToTrack) {
         List<TrkSegment> before = editingCtx.getBeforeTrkSegmentLine();
         List<TrkSegment> after = editingCtx.getAfterTrkSegmentLine();
+
         if (simplified) {
             Track track = new Track();
             track.name = trackName;
             gpx.tracks.add(track);
+
+            GpxData gpxData = editingCtx.getGpxData();
+            if (gpxData != null) {
+                List<WptPt> points = gpxData.getGpxFile().getPoints();
+                gpx.addPoints(points);
+            }
+
             for (TrkSegment s : before) {
                 TrkSegment segment = new TrkSegment();
                 segment.points.addAll(s.points);

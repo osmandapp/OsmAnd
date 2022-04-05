@@ -4058,7 +4058,7 @@
     <string name="poi_zero_waste_no">صفر نفايات: لا</string>
     <string name="poi_lgbtq_only">LGBTQ فقط</string>
     <string name="poi_lgbtq_yes">مسموح ب LGBTQ</string>
-    <string name="poi_lgbtq_no">مسموح الآن LGBTQ</string>
+    <string name="poi_lgbtq_no">LGBTQ غير مسموح</string>
     <string name="poi_beauty_salon_tanning">دباغة الجلود</string>
     <string name="poi_beauty_salon_cosmetics">مستحضرات التجميل</string>
     <string name="poi_generator_source_tidal">مصدر الطاقة: المد والجزر</string>
@@ -4293,4 +4293,9 @@
     <string name="poi_board_type_art">فن</string>
     <string name="poi_board_type_welcome_sign">لافتة ترحيب</string>
     <string name="poi_board_type_sport">رياضة</string>
+    <string name="poi_board_type_sight">بصر</string>
+    <string name="poi_board_type_planet_walk">المشي ما بين الكواكب</string>
+    <string name="poi_landuse_education">التعليم</string>
+    <string name="poi_greenery">الخضرة</string>
+    <string name="poi_hairdresser_supply">متجر مستلزمات تصفيف الشعر</string>
 </resources>

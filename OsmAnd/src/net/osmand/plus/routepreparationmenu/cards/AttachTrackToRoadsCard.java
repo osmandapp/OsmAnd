@@ -26,7 +26,7 @@ public class AttachTrackToRoadsCard extends MapBaseCard {
 		titleTv.setText(R.string.attach_to_the_roads);
 
 		ImageView icon = view.findViewById(R.id.icon);
-		icon.setImageDrawable(getContentIcon(R.drawable.ic_action_snap_to_road));
+		icon.setImageDrawable(getContentIcon(R.drawable.ic_action_attach_track));
 
 		view.setOnClickListener(v -> notifyCardPressed());
 	}

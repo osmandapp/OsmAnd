@@ -27,7 +27,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.AnnouncementTimeBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
@@ -65,7 +64,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 			@Override
 			public void onClick(View v) {
 				if (getContext() != null) {
-					WikipediaDialogFragment.showFullArticle(getContext(), Uri.parse(OSMAND_VOICE_NAVIGATION_URL), isNightMode());
+					AndroidUtils.openUrl(getContext(), Uri.parse(OSMAND_VOICE_NAVIGATION_URL), isNightMode());
 				}
 			}
 		});

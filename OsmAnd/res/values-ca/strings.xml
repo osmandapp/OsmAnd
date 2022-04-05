@@ -371,25 +371,25 @@
 \n- No hi ha accés als PDIs de la Viquipèdia sense connexió
 \n
 \nOsmAnd es desenvolupa activament i el nostre projecte i el seu progrés continu depenen de donacions pel desenvolupament i proves de noves funcions. Si us plau, considereu la compra d\'OsmAnd+ o patrocinar una nova característica concreta, o fer una donació genèrica a la pàgina https\\\\osmand.net.</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) 
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
 \n
-\nL\'OsmAnd+ és un programari de navegació de codi obert amb accés a una gran varietat de dades globals de OSM. Totes les dades de mapes (mapes de tessel·les o vectorials) poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús sense connexió. També proporciona la funcionalitat de càlcul de rutes sigui amb connexió o sense, incloent orientació per veu. 
+\nL\'OsmAnd+ és un programari de navegació de codi obert amb accés a una gran varietat de dades globals de OSM. Totes les dades de mapes (mapes de tessel·les o vectorials) poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús sense connexió. També proporciona que la funcionalitat de càlcul de rutes sigui amb connexió o sense, incloent-hi guiatge per veu.
 \n
-\nL\'OsmAnd+ és la versió de pagament; comprant-la esteu donant suport al projecte, financeu el desenvolupament de noves funcions i rebreu les darreres actualitzacions. 
+\nL\'OsmAnd+ és la versió de pagament; comprant-la esteu donant suport al projecte, financeu el desenvolupament de noves funcions i rebreu les darreres actualitzacions.
 \n
-\nAlgunes de les característiques centrals són: 
-\n- Funcionalitat completa fora de línia (desa en el dispositiu d\'emmagatzemament els mapes vectorials i de mosaic baixats) 
-\n- Mapes vectorials compactes de tot el món disponibles 
-\n- Baixada il·limitada de mapes nacionals o regionals directament des de l\'aplicació 
-\n- Disponibilitat sense connexió dels PDI baixats prèviament de Viquipèdia, ideal per fer turisme 
+\nAlgunes de les característiques centrals són:
+\n- Funcionalitat completa fora de línia (desa en el dispositiu d\'emmagatzemament els mapes vectorials i de mosaic baixats)
+\n- Mapes vectorials compactes de tot el món disponibles
+\n- Baixada il·limitada de mapes nacionals o regionals directament des de l\'aplicació
+\n- Disponibilitat sense connexió dels PDI baixats prèviament de Viquipèdia, ideal per fer turisme
 \n- Possibilitat de superposar diverses capes de mapes simultànies, com traces GPX o de navegació, Punts d\'interès, Favorits, corbes de nivell, parades de transport públic, mapes addicionals amb nivell de transparència ajustable
 \n
-\n- Cerca fora de línia d\'adreces i llocs (PDIs) 
-\n- Càlcul de rutes fora de línia per distàncies d\'abast mitjà 
-\n- Modalitats opcionals de cotxe, ciclista i vianant 
-\n- Ajust automàtic de representació diürna/nocturna 
-\n- Escala automàtica del mapa segons la velocitat 
-\n- Orientació del mapa segons la brúixola o la direcció del moviment 
+\n- Cerca fora de línia d\'adreces i llocs d\'interès (PDI)
+\n- Càlcul de rutes fora de línia per distàncies d\'abast mitjà
+\n- Modalitats opcionals de cotxe, ciclista i vianant
+\n- Ajust automàtic de representació diürna/nocturna
+\n- Escala automàtica del mapa segons la velocitat
+\n- Orientació del mapa segons la brúixola o la direcció del moviment
 \n- Indicacions de carril, velocitat màxima permesa, veus enregistrades i sintetitzades
 \n</string>
     <string name="rendering_attr_contourLines_description">Seleccioneu el nivell mínim de zoom per mostrar el mapa si està disponible. Caldrà el fitxer SRTM separat:</string>
@@ -1673,7 +1673,7 @@
     <string name="srtm_plugin_disabled">Corbes de nivell desactivades</string>
     <string name="show_free_version_banner">Mostra bàner de la versió gratuïta</string>
     <string name="show_free_version_banner_description">Mostra el bàner de la versió gratuïta encara que sigui la versió de pagament.</string>
-    <string name="downloading_number_of_files">Baixada - %1$d fitxer</string>
+    <string name="downloading_number_of_files">Baixada - %1$d fitxer…</string>
     <string name="hillshade_layer_disabled">Capa d\'ombrejat desactivada</string>
     <string name="buy">Compra</string>
     <string name="regions">Regions</string>
@@ -1982,7 +1982,7 @@
     <string name="shared_string_change">Modifica</string>
     <string name="get_started">Comença</string>
     <string name="routing_attr_short_way_name">Ruta amb menys consum</string>
-    <string name="replace_favorite_confirmation">Confirmeu que voleu substituir el Preferit %1$s?</string>
+    <string name="replace_favorite_confirmation">Substituir el preferit %1$s\?</string>
     <string name="update_all_maps_now">Voleu actualitzar tots els mapes ara mateix?</string>
     <string name="clear_tile_data">Esborra totes les tessel·les</string>
     <string name="search_map">Cercant mapes…</string>
@@ -2726,7 +2726,6 @@
     <string name="shared_string_bookmark">Adreça d\'interès</string>
     <string name="off_road_render_descr">Per conducció fora d\'asfalt és un tipus d\'estil topogràfic que posa imatges de satèl·lit de fons. Gruix petit de les carreteres principals, major gruix de les pistes, camins, vies ciclistes i altres vies.</string>
     <string name="topo_render_descr">Per senderisme, excursionisme i ciclisme de natura. Pensat per il·luminació d\'exteriors. Contrast de vies i objectes naturals, diferents tipus de rutes, configuració avançada de corbes de nivell, detalls addicionals. Ajustant la integritat de superfície es distingeix el tipus de superfície de la via. No hi ha mode nocturn.</string>
-    <string name="mapnik_render_descr">Antic estil per defecte de \'Mapnik\'. Colors semblants als de \'Mapnik\'.</string>
     <string name="touring_view_render_descr">Estil molt detallat per fer turisme. Inclou totes les opcions de configuració de l\'estil per defecte, afegint: Pantalles amb el màxim detall, en particular totes les carreteres, camins, i altres maneres de viatjar. Distinció visual clara entre tots els tipus diferents de via, semblant al de molts atles de viatge. Paleta de colors d\'alt contrast per utilitzar a l\'exterior, mode diürn i nocturn.</string>
     <string name="default_render_descr">Estil de propòsit general. Les ciutats denses es mostren amb claredat. Disposa de corbes de nivell, vies, tipus de superfície, restriccions d\'accés, codis de carreteres, camins representats segons l\'escala SAC, elements d\'esports aquàtics.</string>
     <string name="access_intermediate_arrival_time">Temps de pas</string>
@@ -3903,8 +3902,45 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Mostra les etiquetes de notes</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icones si zooms baixos</string>
     <string name="quick_action_add_route_descr">Un botó per a començar una ruta des del mig de la pantalla.</string>
-    <string name="gpx_no_routes_descr">Podeu utilitzar l\'eina \"%1$s\" per afegir una ruta al fitxer.</string>
+    <string name="gpx_no_routes_descr">Podeu utilitzar l\'eina \"%1$s\" per guardar la ruta com a fitxer.</string>
     <string name="gpx_no_routes_title">No hi han rutes</string>
     <string name="save_track_to_gpx_descrp">Comença a gravar la ruta automàticament quan la navegació està en procés. Quan acabe, la ruta serà guardada automàticament.</string>
     <string name="rendering_attr_seabedDetail_name">Detall del fons marí</string>
+    <string name="exit_import_descr">Voleu sortir sense desar cap canvi\?</string>
+    <string name="exit_import">Voleu sortir\?</string>
+    <string name="stop_download">Atura la baixada</string>
+    <string name="stop_and_exit">Atura-la i surt</string>
+    <string name="shared_string_complete">complet</string>
+    <string name="edit_category">Edita la categoria</string>
+    <string name="shared_string_shape">Forma</string>
+    <string name="number_of_tiles">Nombre de tessel·les</string>
+    <string name="move_map_to_select_area">Moveu el mapa per a seleccionar l\'àrea requerida.</string>
+    <string name="all_groups">Tots els grups</string>
+    <string name="list_of_groups">Llista dels grups</string>
+    <string name="points_selection_descr">Voleu tancar i perdre tots els canvis\?</string>
+    <string name="import_tracks">Importa les traces</string>
+    <string name="stop_download_desc">La baixada no ha finalitzat. Si atureu ara la baixada, només es podran mostrar una part de les tessel·les.</string>
+    <string name="default_appearance_desc">El color, l’icona i la forma predeterminada s’aplicaran als punts preferits agregats al grup.</string>
+    <string name="default_appearance">Aparença predeterminada</string>
+    <string name="location_source_descr">Per defecte, OsmAnd instal·lat des de Google Play utilitza %1$s per a determinar la ubicació.
+\n
+\nSi obtens informació d’ubicació imprecisa o utilitzes un dispositiu sense %2$s, intenta canviar a \"%3$s\"</string>
+    <string name="import_tracks_descr">%1$s, conté %2$s pistes separades. Tria pistes a importar.</string>
+    <string name="please_provide_group_name_message">Per favor, anomena el grup.</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="files_with_route_restrictions">Arxius amb restriccions de ruta</string>
+    <string name="location_source">Font de la ubicació</string>
+    <string name="estimated_download_size">Tamany de baixada estimat</string>
+    <string name="always_ask_waypoint_appearance_description">Al prémer aquesta acció s’obrirà la pantalla \"Afegir punt de ruta\", en la qual podrà canviar el nom i l’aparença.</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualització esquemàtica de les icones en els zooms baixos</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Túnels fluvials</string>
+    <string name="rendering_value_category_name">Categoria</string>
+    <string name="rendering_value_all_name">Tot</string>
+    <string name="waypoint_template">Plantilla de punts de ruta</string>
+    <string name="predefined_waypoint_appearance_description">Al prémer aquesta acció s’autoguardarà el punt de ruta amb paràmetres predefinits.</string>
+    <string name="waypoint_appearance">Aspecte del punt de ruta</string>
+    <string name="rendering_value_omit_name">Ometre</string>
+    <string name="select_suggested_points">Selecciona punts suggerits</string>
+    <string name="selected_waypoints_descr">Els punts de ruta seleccionats s’afegiran a la traça «%1$s»</string>
+    <string name="shared_string_reading_file">Llegit arxiu…</string>
 </resources>

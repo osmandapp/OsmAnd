@@ -17,19 +17,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import androidx.annotation.DimenRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.util.Pair;
-
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetView;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -42,11 +34,19 @@ import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.quickaction.QuickActionRegistry.QuickActionUpdatesListener;
 import net.osmand.plus.quickaction.QuickActionsWidget;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.DimenRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.util.Pair;
 
 import static net.osmand.plus.views.layers.ContextMenuLayer.VIBRATE_SHORT;
 
@@ -65,7 +65,6 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
     private QuickActionsWidget quickActionsWidget;
 
     private OsmandMapTileView view;
-    private boolean wasCollapseButtonVisible;
     private int previousMapPosition;
 
     private boolean inMovingMarkerMode;
@@ -255,12 +254,12 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 
 		if (!showWidget) {
 		    quitMovingMarker();
-		    quickActionRegistry.setUpdatesListener(null);
+		    quickActionRegistry.removeUpdatesListener(this);
 		    quickActionsWidget.setSelectionListener(null);
 		} else {
 		    enterMovingMode(mapActivity.getMapView().getCurrentRotatedTileBox());
 		    quickActionsWidget.setActions(quickActionRegistry.getFilteredQuickActions());
-		    quickActionRegistry.setUpdatesListener(MapQuickActionLayer.this);
+		    quickActionRegistry.addUpdatesListener(MapQuickActionLayer.this);
 		    quickActionsWidget.setSelectionListener(MapQuickActionLayer.this);
 		}
 		return true;
@@ -352,14 +351,6 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
         AndroidUiHelper.setVisibility(mapActivity, View.INVISIBLE, R.id.map_ruler_layout,
                 R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 
-        View collapseButton = mapActivity.findViewById(R.id.map_collapse_button);
-        if (collapseButton != null && collapseButton.getVisibility() == View.VISIBLE) {
-            wasCollapseButtonVisible = true;
-            collapseButton.setVisibility(View.INVISIBLE);
-        } else {
-            wasCollapseButtonVisible = false;
-        }
-
         view.refreshMap();
     }
 
@@ -393,10 +384,6 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
         AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE, R.id.map_ruler_layout,
                 R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 
-        View collapseButton = mapActivity.findViewById(R.id.map_collapse_button);
-        if (collapseButton != null && wasCollapseButtonVisible) {
-            collapseButton.setVisibility(View.VISIBLE);
-        }
         view.refreshMap();
     }
 

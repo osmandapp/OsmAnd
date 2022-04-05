@@ -81,8 +81,6 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -91,6 +89,7 @@ import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.myplaces.SaveCurrentTrackTask;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -108,6 +107,7 @@ import net.osmand.plus.track.GpxMarkerView;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
+import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter;
 import net.osmand.plus.track.helpers.GpxDbHelper;
@@ -121,6 +121,8 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteStatisticsHelper;
@@ -321,10 +323,10 @@ public class GpxUiHelper {
 	private static void fillGpxContextMenuAdapter(ContextMenuAdapter adapter, List<GPXInfo> allGpxFiles,
 	                                              boolean needSelectItems) {
 		for (GPXInfo gpxInfo : allGpxFiles) {
-			adapter.addItem(ContextMenuItem.createBuilder(getGpxTitle(gpxInfo.getFileName()))
+			adapter.addItem(new ContextMenuItem(null)
+					.setTitle(getGpxTitle(gpxInfo.getFileName()))
 					.setSelected(needSelectItems && gpxInfo.selected)
-					.setIcon(R.drawable.ic_action_polygom_dark)
-					.createItem());
+					.setIcon(R.drawable.ic_action_polygom_dark));
 		}
 	}
 
@@ -1294,7 +1296,7 @@ public class GpxUiHelper {
 		xAxis.setGranularity(1f);
 		xAxis.setValueFormatter((value, axis) -> {
 			long seconds = (long) (startTime / 1000 + value);
-			return OsmAndFormatter.getFormattedTimeShort(seconds);
+			return OsmAndFormatter.getFormattedFullTime(seconds);
 		});
 		return 1f;
 	}
@@ -2217,6 +2219,34 @@ public class GpxUiHelper {
 
 	public static void saveGpx(GPXFile gpxFile, SaveGpxListener listener) {
 		new SaveGpxAsyncTask(new File(gpxFile.path), gpxFile, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	public static void saveAndOpenGpx(@NonNull MapActivity mapActivity,
+	                                  @NonNull File file,
+	                                  @NonNull GPXFile gpxFile,
+	                                  @NonNull WptPt selectedPoint,
+	                                  @Nullable GPXTrackAnalysis analyses,
+	                                  @Nullable Drawable trackIcon) {
+		new SaveGpxAsyncTask(file, gpxFile, new SaveGpxListener() {
+			@Override
+			public void gpxSavingStarted() {
+
+			}
+
+			@Override
+			public void gpxSavingFinished(Exception errorMessage) {
+				if (errorMessage == null) {
+					OsmandApplication app = mapActivity.getMyApplication();
+					SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
+					GPXTrackAnalysis trackAnalysis = analyses != null ? analyses : selectedGpxFile.getTrackAnalysis(app);
+					SelectedGpxPoint selectedGpxPoint = new SelectedGpxPoint(selectedGpxFile, selectedPoint);
+					TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint,
+							null, null, null, false, trackAnalysis, trackIcon);
+				} else {
+					LOG.error(errorMessage);
+				}
+			}
+		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private static GpxDataItem getDataItem(@NonNull final OsmandApplication app, @NonNull final GPXFile gpxFile) {

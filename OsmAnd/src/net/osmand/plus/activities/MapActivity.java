@@ -3,6 +3,7 @@ package net.osmand.plus.activities;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_CRASH_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RATE_US_ID;
+import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
 
 import android.Manifest;
 import android.app.Activity;
@@ -36,7 +37,6 @@ import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentManager.BackStackEntry;
@@ -62,7 +62,6 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
-import net.osmand.plus.OnDismissDialogFragmentListener;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
@@ -82,7 +81,6 @@ import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.dialogs.XMasDialogFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
-import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
 import net.osmand.plus.firstusage.FirstUsageWelcomeFragment;
 import net.osmand.plus.firstusage.FirstUsageWizardFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -116,6 +114,7 @@ import net.osmand.plus.measurementtool.SnapTrackWarningFragment;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.accessibility.MapAccessibilityActions;
 import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
+import net.osmand.plus.plugins.rastermaps.DownloadTilesFragment;
 import net.osmand.plus.render.UpdateVectorRendererAsyncTask;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
@@ -131,7 +130,6 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.datastorage.DataStorageFragment;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
@@ -171,7 +169,7 @@ import java.util.concurrent.Executors;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
-		MapMarkerChangedListener, OnDismissDialogFragmentListener, OnDrawMapListener,
+		MapMarkerChangedListener, OnDrawMapListener,
 		OsmAndAppCustomizationListener, LockUIAdapter, OnPreferenceStartFragmentCallback,
 		OnScrollEventListener, OsmandMapListener {
 
@@ -489,7 +487,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				androidAutoPlaceholder.setVisibility(View.GONE);
 			}
 			getMapViewTrackingUtilities().setMapView(mapView);
-			mapView.setMapRender(atlasMapRendererView);
+			mapView.setMapRenderer(atlasMapRendererView);
 			OsmAndMapSurfaceView surf = findViewById(R.id.MapView);
 			surf.setVisibility(View.GONE);
 		} else {
@@ -649,7 +647,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (getMapLayers().getContextMenuLayer().isInAddGpxPointMode()) {
 			quitAddGpxPointMode();
 		}
-		if (getSupportFragmentManager().getBackStackEntryCount() == 0 && launchPrevActivityIntent()) {
+		int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
+		if (backStackEntryCount == 0 && launchPrevActivityIntent()) {
+			return;
+		}
+		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
+		if ((backStackEntryCount == 0 || mapContextMenu.isVisible()) && fragment != null && fragment.isSearchHidden()) {
+			showQuickSearch(ShowQuickSearchMode.CURRENT, false);
 			return;
 		}
 		super.onBackPressed();
@@ -795,14 +799,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		routingHelper.addListener(this);
 		app.getMapMarkersHelper().addListener(this);
 
-		QuickSearchDialogFragment searchDialogFragment = getQuickSearchDialogFragment();
-		if (searchDialogFragment != null) {
-			if (searchDialogFragment.isSearchHidden()) {
-				searchDialogFragment.hide();
-				searchDialogFragment.restoreToolbar();
-			}
-		}
-
 		if (System.currentTimeMillis() - tm > 50) {
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
@@ -820,9 +816,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (!permissionAsked) {
 				if (app.isExternalStorageDirectoryReadOnly() && !showStorageMigrationScreen
 						&& fragmentManager.findFragmentByTag(SharedStorageWarningFragment.TAG) == null
-						&& fragmentManager.findFragmentByTag(DataStoragePlaceDialogFragment.TAG) == null) {
+						&& fragmentManager.findFragmentByTag(SettingsScreenType.DATA_STORAGE.fragmentName) == null) {
 					if (DownloadActivity.hasPermissionToWriteExternalStorage(this)) {
-						DataStoragePlaceDialogFragment.showInstance(fragmentManager, null, true);
+						Bundle args = new Bundle();
+						args.putBoolean(FIRST_USAGE, true);
+						BaseSettingsFragment.showInstance(this, SettingsScreenType.DATA_STORAGE, null, args, null);
 					} else {
 						ActivityCompat.requestPermissions(this,
 								new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
@@ -832,8 +830,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			} else {
 				if (permissionGranted) {
 					RestartActivity.doRestart(this, getString(R.string.storage_permission_restart_is_required));
-				} else if (fragmentManager.findFragmentByTag(DataStoragePlaceDialogFragment.TAG) == null) {
-					DataStoragePlaceDialogFragment.showInstance(fragmentManager, null, true);
+				} else if (fragmentManager.findFragmentByTag(SettingsScreenType.DATA_STORAGE.fragmentName) == null) {
+					Bundle args = new Bundle();
+					args.putBoolean(FIRST_USAGE, true);
+					BaseSettingsFragment.showInstance(this, SettingsScreenType.DATA_STORAGE, null, args, null);
 				}
 				permissionAsked = false;
 				permissionGranted = false;
@@ -934,18 +934,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			color = toolbarController.getStatusBarColor(this, night);
 		}
 		if (color == TopToolbarController.NO_COLOR) {
-			boolean mapTopBar = findViewById(R.id.map_top_bar).getVisibility() == View.VISIBLE;
-			boolean markerTopBar = findViewById(R.id.map_markers_top_bar).getVisibility() == View.VISIBLE;
-			boolean coordinatesTopBar = findViewById(R.id.coordinates_top_bar).getVisibility() == View.VISIBLE;
-			if (coordinatesTopBar && mapControlsVisible) {
-				colorId = night ? R.color.status_bar_main_dark : R.color.status_bar_main_dark;
-			} else if (mapTopBar && mapControlsVisible) {
-				colorId = night ? R.color.status_bar_route_dark : R.color.status_bar_route_light;
-			} else if (markerTopBar && mapControlsVisible) {
-				colorId = R.color.status_bar_color_dark;
-			} else {
-				colorId = night ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
-			}
+			int defaultColorId = night ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
+			int colorIdForTopWidget = mapLayers.getMapWidgetRegistry().getStatusBarColorForTopWidget(night);
+			colorId = mapControlsVisible && colorIdForTopWidget != -1 ? colorIdForTopWidget : defaultColorId;
 			color = ContextCompat.getColor(this, colorId);
 		}
 		getWindow().setStatusBarColor(color);
@@ -1011,16 +1002,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		if (!fragmentManager.isStateSaved()) {
 			fragmentManager.popBackStack(ContextMenuCardDialogFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-		}
-	}
-
-	@Override
-	public void onDismissDialogFragment(DialogFragment dialogFragment) {
-		if (dialogFragment instanceof DataStoragePlaceDialogFragment) {
-			FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
-			if (wizardFragment != null) {
-				wizardFragment.updateStorageView();
-			}
 		}
 	}
 
@@ -1439,6 +1420,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return app.getOsmandMap().getMapLayers();
 	}
 
+	@NonNull
 	public WidgetsVisibilityHelper getWidgetsVisibilityHelper() {
 		return mapWidgetsVisibilityHelper;
 	}
@@ -1682,28 +1664,16 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				mcl.onRequestPermissionsResult(requestCode, permissions, grantResults);
 			}
 
-			if (requestCode == DataStorageFragment.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
+			if (requestCode == DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
 					&& permissions.length > 0
 					&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
+				permissionAsked = true;
+				permissionGranted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
 				if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
 					Toast.makeText(this,
 							R.string.missing_write_external_storage_permission,
 							Toast.LENGTH_LONG).show();
 				}
-			} else if (requestCode == DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
-					&& permissions.length > 0
-					&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
-				permissionAsked = true;
-				permissionGranted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-			} else if (requestCode == FirstUsageWizardFragment.FIRST_USAGE_REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION
-					&& permissions.length > 0
-					&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
-				app.runInUIThread(() -> {
-					FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
-					if (wizardFragment != null) {
-						wizardFragment.processStoragePermission(grantResults[0] == PackageManager.PERMISSION_GRANTED);
-					}
-				}, 1);
 			} else if (requestCode == FirstUsageWizardFragment.FIRST_USAGE_LOCATION_PERMISSION) {
 				app.runInUIThread(() -> {
 					FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
@@ -1878,7 +1848,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (fragmentRef == null) {
 			fragmentRef = mapRouteInfoMenu.findFollowTrackFragment();
 		}
-		View mapBottomView = findViewById(R.id.MapBottomContainer);
+		View mapBottomView = findViewById(R.id.map_bottom_widgets_panel);
 		int mapBottomViewHeight = mapBottomView.getHeight();
 		if (fragmentRef != null) {
 			ContextMenuFragment f = (ContextMenuFragment) fragmentRef.get();
@@ -2114,6 +2084,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Nullable
 	public GpsFilterFragment getGpsFilterFragment() {
 		return getFragment(GpsFilterFragment.TAG);
+	}
+
+	@Nullable
+	public DownloadTilesFragment getDownloadTilesFragment() {
+		return getFragment(DownloadTilesFragment.TAG);
 	}
 
 	public void dismissTrackMenu() {

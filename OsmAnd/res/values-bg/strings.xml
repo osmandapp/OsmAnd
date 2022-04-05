@@ -2491,4 +2491,15 @@
     <string name="plan_route_create_new_route">Създаване на маршрут</string>
     <string name="plan_route_open_existing_track">Отваряне на съществуваща следа</string>
     <string name="plan_route_add_new_segment">Добавяне на сегмент</string>
+    <string name="rendering_value_all_name">Всички</string>
+    <string name="rendering_value_category_name">Категория</string>
+    <string name="shared_string_statistics">Статистика</string>
+    <string name="gps_filter_precision">Точност на GPS</string>
+    <string name="shared_string_precision">Точност</string>
+    <string name="shared_string_shape">Форма</string>
+    <string name="all_groups">Всички групи</string>
+    <string name="save_as_copy">Запазване като копие</string>
+    <string name="gps_filter_smoothing">Заглаждане</string>
+    <string name="save_changes_into_file">Запазване на промените във файл</string>
+    <string name="rendering_attr_showRunningRoutes_name">Маршрути за бягане</string>
 </resources>

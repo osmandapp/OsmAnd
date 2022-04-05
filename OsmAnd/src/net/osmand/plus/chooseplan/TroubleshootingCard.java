@@ -17,7 +17,7 @@ import net.osmand.plus.backup.ui.AuthorizeFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class TroubleshootingCard extends BaseCard {
 
@@ -69,7 +69,7 @@ public class TroubleshootingCard extends BaseCard {
 	protected void setupNewDeviceOrAccountBtn() {
 		View newDeviceAccountContainer = view.findViewById(R.id.new_device_account_container);
 		newDeviceAccountContainer.setOnClickListener(v ->
-				WikipediaDialogFragment.showFullArticle(activity, Uri.parse(OSMAND_NEW_DEVICE_URL), nightMode));
+				AndroidUtils.openUrl(activity, Uri.parse(OSMAND_NEW_DEVICE_URL), nightMode));
 	}
 
 	protected void setupSupportDescription() {

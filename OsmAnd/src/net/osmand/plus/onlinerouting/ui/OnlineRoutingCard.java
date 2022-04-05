@@ -151,6 +151,19 @@ public class OnlineRoutingCard extends MapBaseCard {
 		tvDescription.setText(description);
 	}
 
+	public void onClickCheckBox(@NonNull String title, @NonNull CallbackWithObject<Boolean> callback) {
+		showElements(checkBoxContainer);
+		tvCheckBoxDescription.setText(title);
+		UiUtilities.setupCompoundButton(checkBox, nightMode, CompoundButtonType.GLOBAL);
+		checkBoxContainer.setOnClickListener(v -> {
+			callback.processResult(checkBox.isChecked());
+		});
+	}
+
+	public void setCheckBox(boolean checked) {
+		checkBox.setChecked(checked);
+	}
+
 	public void setCheckBox(@NonNull String title, boolean checked,
 	                        @NonNull CallbackWithObject<Boolean> callback) {
 		showElements(checkBoxContainer);

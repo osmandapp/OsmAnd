@@ -314,7 +314,8 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		return getBeforePoints();
 	}
 
-	public List<List<WptPt>> getPointsSegments(boolean plain, boolean route) {
+	@NonNull
+	public List<List<WptPt>> getSegmentsPoints(boolean plain, boolean route) {
 		List<List<WptPt>> res = new ArrayList<>();
 		List<WptPt> allPoints = getPoints();
 		List<WptPt> segment = new ArrayList<>();
@@ -508,7 +509,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	public void replacePoints(List<WptPt> originalPoints, List<WptPt> points) {
 		if (originalPoints.size() > 1) {
 			int firstPointIndex = before.points.indexOf(originalPoints.get(0));
-			int lastPointIndex = before.points.indexOf(originalPoints.get(originalPoints.size() - 1));
+			int lastPointIndex = before.points.lastIndexOf(originalPoints.get(originalPoints.size() - 1));
 			List<WptPt> newPoints = new ArrayList<>();
 			if (firstPointIndex != -1 && lastPointIndex != -1) {
 				newPoints.addAll(before.points.subList(0, firstPointIndex));

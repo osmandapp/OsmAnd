@@ -417,7 +417,7 @@ public class VoiceRouter {
 			if (dist <= 0) {
 				return;
 			} else if (needsInforming()) {
-				playGoAhead(dist, getSpeakableStreetName(currentSegment, next, false));
+				playGoAhead(dist, next, getSpeakableStreetName(currentSegment, next, false));
 				return;
 			} else if (currentStatus == STATUS_TOLD) {
 				// nothing said possibly that's wrong case we should say before that
@@ -450,13 +450,13 @@ public class VoiceRouter {
 					// Distance fon non-straights already announced in "Turn (now)"'s nextnext  code above
 					if ((nextNextInfo != null) && (nextNextInfo.directionInfo != null) && nextNextInfo.directionInfo.getTurnType().goAhead()) {
 						playThen();
-						playGoAhead(nextNextInfo.distanceTo, new StreetName());
+						playGoAhead(nextNextInfo.distanceTo, next, new StreetName());
 					}
 					playAndArriveAtDestination(nextNextInfo);
 				} else if (!atd.isTurnStateNotPassed(0, nextNextInfo.distanceTo / 1.2f, STATE_TURN_IN )) {
 					// 1.2 is safety margin should the subsequent "Turn in" prompt not fit in amy more
 					playThen();
-					playGoAhead(nextNextInfo.distanceTo, new StreetName());
+					playGoAhead(nextNextInfo.distanceTo, next, new StreetName());
 					playAndArriveAtDestination(nextNextInfo);
 				}
 			}
@@ -501,7 +501,7 @@ public class VoiceRouter {
 			nextStatusAfter(STATUS_UNKNOWN);
 		} else if (repeat || (statusNotPassed(STATUS_PREPARE) && dist < playGoAheadDist)) {
 			playGoAheadDist = 0;
-			playGoAhead(dist, getSpeakableStreetName(currentSegment, next, false));
+			playGoAhead(dist, next, getSpeakableStreetName(currentSegment, next, false));
 		}
 	}
 
@@ -534,10 +534,16 @@ public class VoiceRouter {
 		play(p);
 	}
 
-	private void playGoAhead(int dist, StreetName streetName) {
+	private void playGoAhead(int dist, RouteDirectionInfo next, StreetName streetName) {
 		CommandBuilder p = getNewCommandPlayerToPlay();
+		String tParam = getTurnType(next.getTurnType());
+		ExitInfo exitInfo = next.getExitInfo();
 		if (p != null) {
 			p.goAhead(dist, streetName);
+			if (tParam != null && exitInfo != null && !Algorithms.isEmpty(exitInfo.getRef()) && settings.SPEAK_EXIT_NUMBER_NAMES.get()) {
+				String stringRef = getSpeakableExitRef(exitInfo.getRef());
+				p.then().takeExit(tParam, stringRef, getIntRef(exitInfo.getRef()), getSpeakableExitName(next, exitInfo, true));
+			}
 		}
 		play(p);
 	}
@@ -727,7 +733,7 @@ public class VoiceRouter {
 		RouteDirectionInfo next = nextInfo.directionInfo;
 		if (isTargetPoint(nextInfo) && (!playedAndArriveAtTarget || repeat)) {
 			if (next.getTurnType().goAhead()) {
-				playGoAhead(nextInfo.distanceTo, getSpeakableStreetName(currentSegment, next, false));
+				playGoAhead(nextInfo.distanceTo, next, getSpeakableStreetName(currentSegment, next, false));
 				playAndArriveAtDestination(nextInfo);
 				playedAndArriveAtTarget = true;
 			} else if (nextInfo != null &&

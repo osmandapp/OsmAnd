@@ -1,19 +1,5 @@
 package net.osmand.plus.views.layers;
 
-import net.osmand.core.android.MapRendererContext;
-import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.MapLayerConfiguration;
-import net.osmand.core.jni.PointI;
-import net.osmand.data.LatLon;
-import net.osmand.data.QuadPointDouble;
-import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.render.MapRenderRepositories;
-import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.views.layers.base.BaseMapLayer;
-import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.corenative.NativeCoreContext;
-import net.osmand.util.MapUtils;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -23,9 +9,24 @@ import android.graphics.RectF;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.core.android.MapRendererContext;
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.MapLayerConfiguration;
+import net.osmand.core.jni.PointI;
+import net.osmand.data.LatLon;
+import net.osmand.data.QuadPointDouble;
+import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.plus.views.layers.base.BaseMapLayer;
+import net.osmand.util.MapUtils;
+
 public class MapVectorLayer extends BaseMapLayer {
+
 	private OsmandMapTileView view;
-	private ResourceManager resourceManager;
+	private final ResourceManager resourceManager;
 	private Paint paintImg;
 
 	private final RectF destImage = new RectF();
@@ -140,7 +141,7 @@ public class MapVectorLayer extends BaseMapLayer {
 				updateLayerProviderAlpha(alpha);
 			}
 
-			LatLon ll = tilesRect.getLatLonFromPixel(tilesRect.getPixWidth() / 2, tilesRect.getPixHeight() / 2);
+			LatLon ll = tilesRect.getLatLonFromPixel(tilesRect.getPixWidth() / 2f, tilesRect.getPixHeight() / 2f);
 			mapRenderer.setTarget(new PointI(MapUtils.get31TileNumberX(ll.getLongitude()), MapUtils.get31TileNumberY(ll
 					.getLatitude())));
 			mapRenderer.setAzimuth(-tilesRect.getRotate());
@@ -153,13 +154,11 @@ public class MapVectorLayer extends BaseMapLayer {
 				if (resourceManager.updateRenderedMapNeeded(tilesRect, drawSettings)) {
 					// pixRect.set(-view.getWidth(), -view.getHeight() / 2, 2 * view.getWidth(), 3 *
 					// view.getHeight() / 2);
-					final RotatedTileBox copy = tilesRect.copy();
+					RotatedTileBox copy = tilesRect.copy();
 					copy.increasePixelDimensions(copy.getPixWidth() / 3, copy.getPixHeight() / 4);
-					resourceManager.updateRendererMap(copy, null);
+					resourceManager.updateRendererMap(copy);
 				}
-
 			}
-
 			MapRenderRepositories renderer = resourceManager.getRenderer();
 			drawRenderedMap(canvas, renderer.getBitmap(), renderer.getBitmapLocation(), tilesRect);
 			drawRenderedMap(canvas, renderer.getPrevBitmap(), renderer.getPrevBmpLocation(), tilesRect);

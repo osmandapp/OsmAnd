@@ -7,9 +7,9 @@ import android.widget.ArrayAdapter;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
-import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -30,7 +30,6 @@ public class OsmNotesMenu {
 		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
 		adapter.setProfileDependent(true);
-		adapter.setNightMode(nightMode);
 		createLayersItems(adapter, mapActivity);
 		return adapter;
 	}
@@ -99,37 +98,33 @@ public class OsmNotesMenu {
 			toggleIconColorId = ContextMenuItem.INVALID_ID;
 		}
 
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
+		adapter.addItem(new ContextMenuItem(null)
 				.setTitleId(osmNotesStringId, mapActivity)
 				.setDescription(mapActivity.getString(R.string.switch_osm_notes_visibility_desc))
 				.setIcon(R.drawable.ic_action_osm_note)
 				.setColor(app, toggleIconColorId)
 				.setListener(l)
-				.setSelected(showOsmBugs)
-				.createItem());
+				.setSelected(showOsmBugs));
 
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
+		adapter.addItem(new ContextMenuItem(null)
 				.setTitleId(showZoomLevelStringId, mapActivity)
 				.setDescription(zoomStrings[Arrays.asList(zoomIntValues).indexOf(plugin.SHOW_OSM_BUGS_MIN_ZOOM.get())])
 				.setLayout(R.layout.list_item_single_line_descrition_narrow)
 				.setIcon(R.drawable.ic_action_map_magnifier)
 				.setListener(l)
-				.setClickable(showOsmBugs)
-				.createItem());
+				.setClickable(showOsmBugs));
 
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
+		adapter.addItem(new ContextMenuItem(null)
 				.setTitleId(showClosedNotesStringId, mapActivity)
 				.setIcon(R.drawable.ic_action_note_dark)
 				.setListener(l)
 				.setSelected(plugin.SHOW_CLOSED_OSM_BUGS.get())
 				.setClickable(showOsmBugs)
-				.hideDivider(true)
-				.createItem());
+				.hideDivider(true));
 
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
+		adapter.addItem(new ContextMenuItem(null)
 				.setLayout(R.layout.card_bottom_divider)
-				.setClickable(false)
-				.createItem());
+				.setClickable(false));
 	}
 
 	private static String[] getZoomStrings(Context context) {

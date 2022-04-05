@@ -1,10 +1,6 @@
 package net.osmand.plus.utils;
 
 
-import static android.content.Context.POWER_SERVICE;
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
-import static android.util.TypedValue.COMPLEX_UNIT_SP;
-
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.ActivityNotFoundException;
@@ -58,12 +54,15 @@ import android.widget.Toast;
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.text.TextUtilsCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentManager;
@@ -78,6 +77,7 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.lang.reflect.Field;
+import java.nio.ByteBuffer;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -90,6 +90,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+
+import static android.content.Context.POWER_SERVICE;
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 public class AndroidUtils {
 	private static final Log LOG = PlatformUtil.getLog(AndroidUtils.class);
@@ -152,6 +156,36 @@ public class AndroidUtils {
 			bm.recycle();
 		}
 		return resizedBitmap;
+	}
+
+	public static byte[] getByteArrayFromBitmap(@NonNull Bitmap bitmap) {
+		int size = bitmap.getRowBytes() * bitmap.getHeight();
+		ByteBuffer byteBuffer = ByteBuffer.allocate(size);
+		bitmap.copyPixelsToBuffer(byteBuffer);
+		return byteBuffer.array();
+	}
+
+	public static Bitmap createScaledBitmapWithTint(final Context ctx, @DrawableRes int drawableId, float scale, int tint) {
+		Drawable drawableIcon = AppCompatResources.getDrawable(ctx, drawableId);
+		if (drawableIcon != null) {
+			DrawableCompat.setTint(DrawableCompat.wrap(drawableIcon), tint);
+		}
+		Bitmap bitmap = drawableToBitmap(drawableIcon, true);
+		if (bitmap != null && scale != 1f && scale > 0.0f) {
+			bitmap = scaleBitmap(bitmap,
+					(int) (bitmap.getWidth() * scale), (int) (bitmap.getHeight() * scale), false);
+		}
+
+		return bitmap;
+	}
+
+	public static Bitmap createScaledBitmap(Drawable drawable, float scale) {
+		int width = (int) (drawable.getIntrinsicWidth() * scale);
+		int height = (int) (drawable.getIntrinsicHeight() * scale);
+		width += width % 2 == 1 ? 1 : 0;
+		height += height % 2 == 1 ? 1 : 0;
+
+		return createScaledBitmap(drawable, width, height);
 	}
 
 	public static Bitmap createScaledBitmap(Drawable drawable, int width, int height) {
@@ -669,6 +703,20 @@ public class AndroidUtils {
 		return coordinates;
 	}
 
+	public static int getViewOnScreenX(@NonNull View view) {
+		return getLocationOnScreen(view)[0];
+	}
+
+	public static int getViewOnScreenY(@NonNull View view) {
+		return getLocationOnScreen(view)[1];
+	}
+
+	public static int[] getLocationOnScreen(@NonNull View view) {
+		int[] locationOnScreen = new int[2];
+		view.getLocationOnScreen(locationOnScreen);
+		return locationOnScreen;
+	}
+
 	public static void enterToFullScreen(Activity activity, View view) {
 		if (Build.VERSION.SDK_INT >= 21) {
 			requestLayout(view);
@@ -798,7 +846,11 @@ public class AndroidUtils {
 	}
 
 	public static Bitmap drawableToBitmap(Drawable drawable) {
-		if (drawable instanceof BitmapDrawable) {
+		return drawableToBitmap(drawable, false);
+	}
+
+	public static Bitmap drawableToBitmap(Drawable drawable, boolean noOptimization) {
+		if (drawable instanceof BitmapDrawable && !noOptimization) {
 			BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
 			if (bitmapDrawable.getBitmap() != null) {
 				return bitmapDrawable.getBitmap();
@@ -1125,4 +1177,19 @@ public class AndroidUtils {
 		}
 		return null;
 	}
+
+	public static void openUrl(@NonNull Context context, @NonNull Uri uri, boolean nightMode) {
+		CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
+				.setToolbarColor(ColorUtilities.getAppBarColor(context, nightMode))
+				.build();
+		customTabsIntent.intent.setData(uri);
+		try {
+			customTabsIntent.launchUrl(context, uri);
+		} catch (ActivityNotFoundException e) {
+			Toast.makeText(context, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
+		}
+	}
+
+
+
 }

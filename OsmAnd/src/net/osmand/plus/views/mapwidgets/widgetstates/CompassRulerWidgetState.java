@@ -22,7 +22,7 @@ public class CompassRulerWidgetState extends WidgetState {
 	}
 
 	@Override
-	public int getMenuIconId() {
+	public int getSettingsIconId() {
 		return R.drawable.ic_action_ruler_circle;
 	}
 

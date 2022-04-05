@@ -153,7 +153,7 @@
     <string name="altitude">Høyde</string>
     <string name="no_info">Ingen info</string>
     <string name="direction_style_sidewise">Sideveis (8 sektorer)</string>
-    <string name="direction_style_clockwise">Med klokken (12 sektorer)</string>
+    <string name="direction_style_clockwise">Med urviser (12 sektorer)</string>
     <string name="settings_direction_style">Retningsstil</string>
     <string name="settings_direction_style_descr">Velg stil til å uttrykke relative retninger under bevegelse</string>
     <string name="auto_announce_on">Start auto-annonsering</string>
@@ -772,7 +772,7 @@
     <string name="level_to_switch_vector_raster_descr">Bruk rasterkart for alt utover dette nivået.</string>
     <string name="level_to_switch_vector_raster">Minste vektor-zoomnivå</string>
     <string name="incomplete_locale">ufullstendig</string>
-    <string name="voice_is_not_available_title">Velg en taleveiledningspakke</string>
+    <string name="voice_is_not_available_title">Velg en talemeldingspakke</string>
     <string name="select_max_zoom_preload_area">Maksimal forstørrelse å forhåndslaste</string>
     <string name="voice_data_initializing">Initialiserer taledata…</string>
     <string name="update_poi_is_not_available_for_zoom">Å zoome inn lar deg oppdatere interessepunkter</string>
@@ -2415,7 +2415,7 @@
     <string name="intermediate_items_sort_return">Optimalisert rekkefølge av mellomliggende reisemål underveis til målet.</string>
     <string name="audionotes_location_not_defined">Trykk \'Bruk posisjon…\' for å legge til et notat til stedet.</string>
     <string name="add_waypoint_dialog_title">Legg til rutepunkt i innspilt GPX-spor</string>
-    <string name="voice_is_not_available_msg">Taleveiledning er ikke tilgjengelig, gå til \'Innstillinger\' → \'Navigeringsinnstillinger\' , velg profilen → \'Taleveiledning\' og velg eller last ned en talemeldingspakke.</string>
+    <string name="voice_is_not_available_msg">Taleveiledning er ikke tilgjengelig, gå til \'Innstillinger\' → \'Navigeringsinnstillinger\', velg profilen → \'Taleveiledning\' og velg eller last ned en talemeldingspakke.</string>
     <string name="use_fast_recalculation_desc">Beregner på nytt bare den første delen av ruten, nyttig for lange turer.</string>
     <string name="nautical_renderer">Maritimt</string>
     <string name="day_off_label">stengt (fridag)</string>
@@ -2726,7 +2726,6 @@
     <string name="ski_map_render_descr">Skistil. Har bakker, heiser og andre skifunksjoner osv. Demper sekundære kartobjekter.</string>
     <string name="light_rs_render_descr">Enkel kjørestil. Skånsom nattmodus, koter, kontrastrike oransjefargede veier, dempede sekundære kartobjekter.</string>
     <string name="topo_render_descr">For turgåing, vandring og sykling i naturen. Lesbar utendørs. Kontrasterende veier og naturlige objekter, forskjellige rutetyper, avanserte kotealternativer, flere detaljer. Justering av overflate gjør det mulig å skjelne veikvalitet. Ingen nattmodus.</string>
-    <string name="mapnik_render_descr">Gammel forvalgt \'Mapnik\'-stil. Lignende farger som \"Mapnik\".</string>
     <string name="touring_view_render_descr">Turstil med høy kontrast og maksimalt med detaljer. Inkluderer alle alternativene til standardstilen til OsmAnd, med visning av så mange detaljer som mulig, i særdeleshet veier, stier og andre måter å reise på. Tydelig \"reiseatlas\"-skille mellom veityper. Egnet for dag, natt og utendørs bruk.</string>
     <string name="default_render_descr">Stil for generell bruk. Renere opptegning i tett befolkede byer. Har koter, ruter, overflatekvalitet, tilgangsbegrensninger, veinummer, stiopptegning i henhold til SAC-skala, raftingsfunksjoner.</string>
     <string name="open_wikipedia_link_online">Åpne Wikipedia-lenke på nett</string>
@@ -4335,11 +4334,11 @@
     <string name="skip_confirmation">Ja, hopp over</string>
     <string name="shared_storage">Delt lagring</string>
     <string name="show_parameter_seekbar">Vis parametersøkefelt</string>
-    <string name="shared_string_skip_warning">Start flyttingen\? OsmAnd vil ikke lenger ha tilgang til filene dine i delt lagring.
+    <string name="shared_string_skip_warning">Hoppe over flyttingen\? OsmAnd har ikke lenger tilgang til filene dine i delt lagring.
 \n
 \nProgrammet vil begynne å bruke den nye datamappen.</string>
-    <string name="shared_storage_last_step">Du vil kunne angi ny datalagring etter å ha valgt delt lagring.</string>
-    <string name="shared_storage_third_step">Innvilg tilgang til mappen. Uten dette kan ikke OsmAnd kopiere filer.</string>
+    <string name="shared_storage_last_step">Du kan angi en ny datamappe etterpå.</string>
+    <string name="shared_storage_third_step">Gi tillatelse for å få tilgang til mappen. Uten den kan ikke OsmAnd kopiere filer.</string>
     <string name="shared_storage_first_step">Trykk «%1$s».
 \nFilbehandleren åpnes der du trenger å finne og åpne OsmAnd-mappen.</string>
     <string name="storage_copying_files_size">Kopierer %1$s filer %2$s …</string>
@@ -4384,7 +4383,7 @@
     <string name="shared_string_precision">Presisjon</string>
     <string name="shared_string_statistics">Statistikk</string>
     <string name="distance_between_points">Avstand mellom punkter</string>
-    <string name="gps_filter_precision">GPS-preisisjon</string>
+    <string name="gps_filter_precision">GPS-presisjon</string>
     <string name="shared_string_size">Størrelse</string>
     <string name="created_on">Opprettet</string>
     <string name="gps_filter_smoothing">Utjevning</string>
@@ -4446,7 +4445,7 @@
 \nHvis du får upresis posisjonsinfo eller bruker en enhet uten %2$s, kan du prøve å bytte til «%3$s».</string>
     <string name="edit_category">Rediger kategori</string>
     <string name="shared_string_shape">Form</string>
-    <string name="default_appearance_desc">Forvalgt, farge, ikon og form vil bli brukt for favorittpunkter i gruppen</string>
+    <string name="default_appearance_desc">Forvalgt farge, ikon og form vil bli brukt for de tillagte favorittpunktene i gruppen.</string>
     <string name="default_appearance">Forvalgt utseende</string>
     <string name="release_3_8">- Oppdatert Planlegg en rute-funksjon: gjør det mulig å bruke forskjellige navigatsjonstyper pr. segment og inkludere spor
 \n
@@ -4532,4 +4531,16 @@
 \n • Rettet forskjellige problemer med ruteføring
 \n
 \n</string>
+    <string name="stop_and_exit">Stopp og avslutt</string>
+    <string name="zoom_levels_difference_description">Den store forskjellen mellom forstørrelsesnivåene kan øke størrelsen på nedlastet data.</string>
+    <string name="estimated_download_size">Anslått nedlastningsstørrelse</string>
+    <string name="stop_download">Stopp nedlasting</string>
+    <string name="stop_download_desc">Nedlastingen er ikke fullført. Hvis du avbryter nedlastingen nå, vil kun en del av kartflisene være tilgjengelig for visning.</string>
+    <string name="shared_string_complete">fullført</string>
+    <string name="number_of_tiles">Antall kartfliser</string>
+    <string name="move_map_to_select_area">Flytt kartet for å velge ønsket område.</string>
+    <string name="rendering_attr_showFitnessTrails_name">Trimløyper</string>
+    <string name="rendering_attr_showFitnessTrails_description">Vis trimløyper</string>
+    <string name="rendering_attr_showRunningRoutes_name">Løperuter</string>
+    <string name="rendering_attr_showRunningRoutes_description">Vis løperuter</string>
 </resources>

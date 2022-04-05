@@ -20,8 +20,8 @@ import androidx.appcompat.widget.PopupMenu;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -85,8 +85,9 @@ public class RoutePreferencesMenu {
 					int i = 0;
 					int selectedIndex = -1;
 					for (LocalRoutingParameter p : group.getRoutingParameters()) {
-						adapter.addItem(ContextMenuItem.createBuilder(p.getText(mapActivity))
-								.setSelected(false).createItem());
+						adapter.addItem(new ContextMenuItem(null)
+								.setTitle(p.getText(mapActivity))
+								.setSelected(false));
 						if (p.isSelected(settings)) {
 							selectedIndex = i;
 						}

@@ -160,7 +160,7 @@
     <string name="left">till vänster</string>
     <string name="front_left">framåt till vänster</string>
     <string name="towards">mot</string>
-    <string name="altitude">Höjd över havet</string>
+    <string name="altitude">Höjd</string>
     <string name="map_widget_renderer">Kartutseende</string>
     <string name="osmand_parking_position_description_add">Att hämta bilen på:</string>
     <string name="osmand_parking_pm">em</string>
@@ -2584,7 +2584,6 @@
     <string name="ski_map_render_descr">För skidåkning. Innehåller pister, skidliftar, längdspår osv. Dämpar sekundära kartobjekt.</string>
     <string name="light_rs_render_descr">Enkel stil för bilkörning. Skonsamt nattläge, höjdkurvor, kontrasterande orangefärgade vägar, och nedtonade sekundära kartobjekt.</string>
     <string name="topo_render_descr">För utflykter, vandring och cykling i naturen. God läsbarhet utomhus. Kontrasterande vägar och naturobjekt, olika ledtyper, avancerade alternativ för höjdkurvor, mer detaljrik. Inställning för att visa vägbanans kvalitet. Inget nattläge.</string>
-    <string name="mapnik_render_descr">Gammal standard \"Mapnik\"-stil. Använder liknande färger som \"Mapnik\".</string>
     <string name="touring_view_render_descr">Turiststil med hög kontrast och maximal detaljrikedom. Innehåller alla alternativ i OsmAnd:s standardstil, samtidigt som den visar så mycket detaljer som möjligt, särskilt vägar, stigar, och andra sätt att resa. Tydlig distinktion mellan olika vägtyper som i en turistatlas. Lämplig för användning på dag, natt, och utomhus.</string>
     <string name="default_render_descr">Allmän stil. Tydlig återgivning i tät bebyggelse. Visar höjdkurvor, leder, vägbanekvalitet, åtkomstbegränsningar, vägnummer, stigar enligt SAC-skalan, vattensportobjekt.</string>
     <string name="open_wikipedia_link_online">Öppna Wikipedia-länk på internet</string>
@@ -3040,7 +3039,7 @@
     <string name="join_segments">Slå ihop segment</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Visa cykelrutter längs nodnätverk</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Nodnätverk</string>
-    <string name="save_heading">Inkludera rubrik</string>
+    <string name="save_heading">Inkludera riktning</string>
     <string name="add_new_profile_q">Lägg till ny profil \'%1$s\'\?</string>
     <string name="personal_category_name">Personlig</string>
     <string name="shared_string_downloading_formatted">Laddar ned %s</string>
@@ -3730,8 +3729,8 @@
     <string name="available_until">Tillgänglig till %1$s</string>
     <string name="enough_contributions_descr">Grattis, du har bidragit tillräckligt mycket till OpenStreetMap och kan nu dra nytta av obegränsade kartuppdateringar i OsmAnd!</string>
     <string name="map_updates_are_unavailable_yet">Kartuppdateringar är ännu inte tillgängliga. :-(</string>
-    <string name="shared_string_min_height">Lägsta höjd</string>
-    <string name="shared_string_max_height">Högsta höjd</string>
+    <string name="shared_string_min_height">Min. höjd</string>
+    <string name="shared_string_max_height">Max höjd</string>
     <string name="search_more">Sök mer…</string>
     <string name="shared_string_external">Extern</string>
     <string name="delete_all_confirmation">Ja, ta bort alla</string>
@@ -3803,14 +3802,14 @@
     <string name="hidden_items_descr">Dessa objekt döljs från menyn, men de innehållande valen, funktionerna eller insticksprogrammen fortsätter att fungera.</string>
     <string name="test_voice_desrc">Tryck på en knapp och lyssna på motsvarande röstinspelning för att höra om den saknas eller är felaktig.</string>
     <string name="purchases_feature_desc_android_auto">OsmAnds offline-kartor och navigering på skärmen i din bil. Bekväm integrering med bilens kontroller.</string>
-    <string name="routeInfo_smoothness_description">Ger en klassificering av den fysiska användbarheten av en väg för hjulburna fordon, särskilt när det gäller ytans jämnhet/planhet.</string>
+    <string name="routeInfo_smoothness_description">Klassificering av vägar och gångvägar för hjulfordon, särskilt med avseende på ytans jämnhet/planhet.</string>
     <string name="import_profile_dialog_description">Den importerade profilen innehåller extra data. Klicka på \"Importera\" för att endast importera profildata, eller välj ytterligare data.</string>
     <string name="recalc_angle_dialog_descr">En raksträcka mellan min position och den beräknade rutten visas, tills rutten har beräknats om.</string>
     <string name="turn_screen_on_descr">Välj alternativ för skärmväckning (se till att OsmAnd är i förgrunden när enheten låses):</string>
     <string name="search_poi_types_descr">Kombinera POI-typer från olika kategorier. Tryck på knappen för att välja alla, tryck på vänster sida för att välja kategori.</string>
     <string name="rendering_attr_piste_difficulty_intermediate_name">Medel</string>
     <string name="no_plugins_enabled">Du har inga aktiverade insticksmoduler. Du hittar en lista över tillgängliga moduler i Meny - Insticksmoduler.</string>
-    <string name="routeInfo_winter_ice_road_description">Färgsättning av rutt- eller spårlinjen enligt vinterväglags-klassificering, endast användbar på vintern.</string>
+    <string name="routeInfo_winter_ice_road_description">Färglägg rutten eller spårlinjen efter dess klassificering av vintervägar.</string>
     <string name="recorded_description">Inspelad röst låter bättre, men kan bara uttala förinspelade fraser som sväng-instruktioner. Kan inte uttala gatunamn eller POI-namn.</string>
     <string name="srtm_unit_format">Måttenhet för höjdkurvor</string>
     <string name="rendering_attr_natureReserves_name">Naturreservat</string>
@@ -3955,4 +3954,21 @@
     <string name="shared_string_transparency">Transparens</string>
     <string name="icon_group_nautical">Nautiska</string>
     <string name="shared_string_travelbooks">Reseböcker</string>
+    <string name="rendering_attr_showFitnessTrails_name">Motionsspår</string>
+    <string name="rendering_attr_showFitnessTrails_description">Visa motionsspår</string>
+    <string name="routeInfo_tracktype_description">Färglägg rutten eller spårlinjen efter dess ytsammansättning. Gäller vanligtvis när vägnätet är i stort sett obanerat.</string>
+    <string name="routeInfo_surface_description">Ange information om vägar och gångvägar yta.</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="routing_attr_allow_gate_name">Tillåt portanvändning</string>
+    <string name="routing_attr_allow_gate_description">Tillåt användning av grindar</string>
+    <string name="routing_attr_only_permitted_streets_description">Använd endast gator som uttryckligen är tillåtna</string>
+    <string name="routing_attr_only_permitted_streets_name">Uttryckligen tillåtna gator</string>
+    <string name="routing_attr_only_permitted_ways_description">Använd endast sätt (spår, banor osv.) som uttryckligen är tillåtna</string>
+    <string name="routeInfo_roadClass_description">Färglägg rutten eller spårlinjen efter vägklassificering.</string>
+    <string name="routing_attr_only_permitted_ways_name">Uttryckligen tillåtna vägar</string>
+    <string name="routing_attr_prefer_horse_routes_name">Föredra hästvägar</string>
+    <string name="horseback_riding">Ridning</string>
+    <string name="rendering_attr_showRunningRoutes_name">Rutter för löpning</string>
+    <string name="rendering_attr_showRunningRoutes_description">Visa löprutter</string>
+    <string name="routing_attr_prefer_horse_routes_description">Föredra hästvägar</string>
 </resources>

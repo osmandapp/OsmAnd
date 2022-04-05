@@ -2552,8 +2552,8 @@
     <string name="poi_netball">Netball</string>
     <string name="poi_disc_golf">Diskový golf</string>
     <string name="poi_shuffleboard">Shuffleboard</string>
-    <string name="poi_forestry_compartment">Rázcestník: lesnícky pozemok</string>
-    <string name="poi_forestry_allotment">Rázcestník: lesnícka parcela</string>
+    <string name="poi_forestry_compartment">Tabuľa: lesnícky pozemok</string>
+    <string name="poi_forestry_allotment">Tabuľa: lesnícka parcela</string>
     <string name="poi_inscription_n">Nápis: S</string>
     <string name="poi_inscription_nw">Nápis: SZ</string>
     <string name="poi_inscription_w">Nápis: Z</string>
@@ -3282,9 +3282,9 @@
     <string name="poi_hazard_additional_minefield">Riziko: mínové pole</string>
     <string name="poi_hazard_additional_contamination">Riziko: zamorenie</string>
     <string name="poi_defibrillator_location">Umiestnenie</string>
-    <string name="poi_changing_table_yes">Stôl na prebaľovanie: áno</string>
-    <string name="poi_changing_table_no">Stôl na prebaľovanie: nie</string>
-    <string name="poi_changing_table_limited">Stôl na prebaľovanie: obmedzený</string>
+    <string name="poi_changing_table_yes">Áno;Stôl na prebaľovanie: áno</string>
+    <string name="poi_changing_table_no">Nie;Stôl na prebaľovanie: nie</string>
+    <string name="poi_changing_table_limited">Obmedzene;Stôl na prebaľovanie: obmedzený</string>
     <string name="poi_changing_table_location_room">Umiestnenie stola na prebaľovanie: miestnosť</string>
     <string name="poi_changing_table_location_male_toilet">Umiestnenie stola na prebaľovanie: pánske toalety</string>
     <string name="poi_changing_table_location_female_toilet">Umiestnenie stola na prebaľovanie: dámske toalety</string>

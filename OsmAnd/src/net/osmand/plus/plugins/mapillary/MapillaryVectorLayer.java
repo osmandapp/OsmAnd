@@ -150,7 +150,7 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 				GeometryTile tile = tiles.get(tileId);
 				if (tile == null) {
 					// asking tile image async
-					boolean imgExist = tilesCache.tileExistOnFileSystem(tileId, map, tileX, tileY, tileZoom);
+					boolean imgExist = tilesCache.isTileDownloaded(tileId, map, tileX, tileY, tileZoom);
 					if (imgExist || useInternet) {
 						tile = tilesCache.getTileForMapAsync(tileId, map, tileX, tileY,
 								tileZoom, useInternet, drawSettings.mapRefreshTimestamp);

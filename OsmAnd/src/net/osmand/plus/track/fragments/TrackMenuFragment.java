@@ -88,8 +88,8 @@ import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
-import net.osmand.plus.myplaces.ui.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.myplaces.DeletePointsTask.OnPointsDeleteListener;
+import net.osmand.plus.myplaces.ui.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.myplaces.ui.MoveGpxFileBottomSheet;
 import net.osmand.plus.myplaces.ui.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.ui.SegmentActionsListener;
@@ -144,16 +144,15 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		OsmAndLocationListener, OsmAndCompassListener, OnSegmentSelectedListener, GpsFilterFragmentLister,
 		DisplayPointGroupsCallback {
 
+	public static final String TAG = TrackMenuFragment.class.getName();
+	private static final Log log = PlatformUtil.getLog(TrackMenuFragment.class);
+
 	public static final String TRACK_FILE_NAME = "TRACK_FILE_NAME";
 	public static final String OPEN_TAB_NAME = "open_tab_name";
 	public static final String CURRENT_RECORDING = "CURRENT_RECORDING";
-	public static final String SHOW_TEMPORARILY = "SHOW_TEMPORARILY";
 	public static final String OPEN_TRACK_MENU = "open_track_menu";
 	public static final String RETURN_SCREEN_NAME = "return_screen_name";
 	public static final String TRACK_DELETED_KEY = "track_deleted_key";
-
-	public static final String TAG = TrackMenuFragment.class.getName();
-	private static final Log log = PlatformUtil.getLog(TrackMenuFragment.class);
 
 	private OsmandApplication app;
 	private TrackDisplayHelper displayHelper;
@@ -189,6 +188,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private String callingFragmentTag;
 	private SelectedGpxPoint gpxPoint;
 	private TrackChartPoints trackChartPoints;
+	private Drawable trackIcon;
 
 	private Float heading;
 	private Location lastLocation;
@@ -282,16 +282,13 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			String path = savedInstanceState.getString(TRACK_FILE_NAME);
 			boolean showCurrentTrack = savedInstanceState.getBoolean(CURRENT_RECORDING);
 			MapActivity mapActivity = requireMapActivity();
-			loadSelectedGpxFile(mapActivity, path, showCurrentTrack, new CallbackWithObject<SelectedGpxFile>() {
-				@Override
-				public boolean processResult(SelectedGpxFile result) {
-					setSelectedGpxFile(result);
-					onSelectedGpxFileAvailable();
-					if (getView() != null) {
-						initContent(getView());
-					}
-					return true;
+			loadSelectedGpxFile(mapActivity, path, showCurrentTrack, result -> {
+				setSelectedGpxFile(result);
+				onSelectedGpxFileAvailable();
+				if (getView() != null) {
+					initContent(getView());
 				}
+				return true;
 			});
 			if (savedInstanceState.containsKey(KEY_LATITUDE) && savedInstanceState.containsKey(KEY_LONGITUDE)) {
 				double latitude = savedInstanceState.getDouble(KEY_LATITUDE);
@@ -381,6 +378,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		this.callingFragmentTag = callingFragmentTag;
 	}
 
+	public void setTrackIcon(Drawable trackIcon) {
+		this.trackIcon = trackIcon;
+	}
+
 	public void setGpxPoint(SelectedGpxPoint point) {
 		this.gpxPoint = point;
 	}
@@ -458,6 +459,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 		AndroidUiHelper.updateVisibility(displayGroupsButton, hasPointsGroups());
 		AndroidUiHelper.updateVisibility(headerIcon, menuType != TrackMenuType.OPTIONS);
+
+		Drawable icon = trackIcon != null ? trackIcon : app.getUIUtilities().getThemedIcon(R.drawable.ic_action_polygom_dark);
+		headerIcon.setImageDrawable(icon);
 	}
 
 	@NonNull
@@ -1613,7 +1617,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			public boolean processResult(SelectedGpxFile selectedGpxFile) {
 				MapActivity mapActivity = mapActivityRef.get();
 				if (mapActivity != null && selectedGpxFile != null) {
-					showInstance(mapActivity, selectedGpxFile, null, returnScreenName, callingFragmentTag, tabToOpenName, true, null);
+					showInstance(mapActivity, selectedGpxFile, null, returnScreenName, callingFragmentTag, tabToOpenName, true, null, null);
 				}
 				return true;
 			}
@@ -1623,7 +1627,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
 	                                   @NonNull SelectedGpxFile selectedGpxFile,
 	                                   @Nullable SelectedGpxPoint gpxPoint) {
-		return showInstance(mapActivity, selectedGpxFile, gpxPoint, null, null, null, false, null);
+		return showInstance(mapActivity, selectedGpxFile, gpxPoint, null, null, null, false, null, null);
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
@@ -1633,7 +1637,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	                                   @Nullable String callingFragmentTag,
 	                                   @Nullable String tabToOpenName,
 	                                   boolean adjustMapPosition,
-	                                   @Nullable GPXTrackAnalysis analyses) {
+	                                   @Nullable GPXTrackAnalysis analyses,
+	                                   @Nullable Drawable trackIcon) {
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Bundle args = new Bundle();
@@ -1645,6 +1650,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			fragment.setAnalyses(analyses);
 			fragment.setSelectedGpxFile(selectedGpxFile);
 			fragment.setReturnScreenName(returnScreenName);
+			fragment.setTrackIcon(trackIcon);
 			fragment.setCallingFragmentTag(callingFragmentTag);
 			fragment.setAdjustMapPosition(adjustMapPosition);
 			if (tabToOpenName != null) {

@@ -1725,7 +1725,7 @@
     <string name="north_west">северозапад</string>
     <string name="north_north_west">север-северозапад</string>
     <string name="accuracy">Тачност</string>
-    <string name="altitude">Надморска висина</string>
+    <string name="altitude">Висина</string>
     <string name="no_info">Нема информација</string>
     <string name="i_am_here">Ја сам овде</string>
     <string name="poi_filter_sightseeing">Разгледање знаменитости</string>
@@ -2572,7 +2572,6 @@
     <string name="ski_map_render_descr">За скијање. Приказује стазе, ски лифтова, крос-кантри стазе итд. Замагљује мање битне објекте са карте.</string>
     <string name="light_rs_render_descr">Једноставан стил за вожњу. Пријатан за очи ноћу, изохипсе, наранџасти путеви са добрим контрастом, замагљује мање битне објекте са карте.</string>
     <string name="topo_render_descr">За шетање, пешачење, трекинг и бициклизам у природи. Добра читљивост у условима спољне осветљености. Добар контраст за путеве и природне објекте, различити типови путања, изохипсе са напредним подешавањима, више детаља. Опција интегритета подлоге Вам омогућава да разликујете путеве са различитим квалитетима подлога. Нема ноћног режима.</string>
-    <string name="mapnik_render_descr">Стари „Мапник“ стил исцртавања. Сличне боје као у „Мапник“ стилу.</string>
     <string name="default_render_descr">Стил опште намене. Густи градови су приказани јасно. Приказује изохипсе, путање, квалитет подлоге, забране приступа, блокаде путева, исцртавање путева по SAC алпској скали, објекти за спортове на брзацима.</string>
     <string name="open_wikipedia_link_online">Отвори Википедија везу са интернетом</string>
     <string name="open_wikipedia_link_online_description">Веза ће бити отворена у веб читачу.</string>
@@ -3277,7 +3276,7 @@
     <string name="new_plugin_added">Нови додатак додат</string>
     <string name="join_segments">Споји сегменте</string>
     <string name="add_new_profile_q">Додај нови профил ’%1$s’\?</string>
-    <string name="save_heading">Укључи заглавље</string>
+    <string name="save_heading">Урачунај правац</string>
     <string name="save_heading_descr">Сачувај заглавље свакој тачки праћења приликом снимања.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
@@ -4531,4 +4530,14 @@
     <string name="default_appearance">Подразумевани изглед</string>
     <string name="edit_category">Уреди категорију</string>
     <string name="shared_string_shape">Облик</string>
+    <string name="stop_download">Заустави преузимање</string>
+    <string name="stop_and_exit">Заустави и изађи</string>
+    <string name="shared_string_complete">завршено</string>
+    <string name="zoom_levels_difference_description">Велика разлика између нивоа зумирања може повећати величину преузетих података.</string>
+    <string name="estimated_download_size">Процењена величина преузимања</string>
+    <string name="number_of_tiles">Број плочица</string>
+    <string name="stop_download_desc">Преузимање није завршено. Ако сада прекинете преузимање, само део плочица ће бити доступан за преглед.</string>
+    <string name="move_map_to_select_area">Померите мапу да бисте изабрали потребну област.</string>
+    <string name="rendering_attr_showFitnessTrails_name">Покажи стазе за фитнес</string>
+    <string name="rendering_attr_showFitnessTrails_description">Показивање стаза за фитнес</string>
 </resources>

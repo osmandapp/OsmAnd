@@ -217,7 +217,7 @@
     <string name="search_contacts_descr">Sök i alla dina grupper och kontakter.</string>
     <string name="search_contacts">Sök kontakter</string>
     <string name="bearing">Riktning</string>
-    <string name="altitude">Höjd över havet</string>
+    <string name="altitude">Höjd</string>
     <string name="precision">Precision</string>
     <string name="direction">Riktning</string>
     <string name="privacy">Integritet</string>

@@ -432,10 +432,6 @@ public class SearchCoreFactory {
 							if (object.getName().startsWith("<")) {
 								return false;
 							}
-
-							if (!phrase.getUnknownWordToSearchBuildingNameMatcher().matches(stripBraces(sr.localeName))) {
-								sr.priorityDistance = 5;
-							}
 							sr.objectType = ObjectType.STREET;
 							sr.localeRelatedObjectName = ((Street)object).getCity().getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 							sr.relatedObject = ((Street)object).getCity();
@@ -597,6 +593,9 @@ public class SearchCoreFactory {
 
 						@Override
 						public boolean publish(Amenity object) {
+							if (phrase.getSettings().isExportObjects()) {
+								resultMatcher.exportObject(phrase, object);
+							}
 							if (limit++ > LIMIT) {
 								return false;
 							}
@@ -1634,18 +1633,6 @@ public class SearchCoreFactory {
 		}
 	}
 
-	private static String stripBraces(String localeName) {
-		int i = localeName.indexOf('(');
-		String retName = localeName;
-		if (i > -1) {
-			retName = localeName.substring(0, i);
-			int j = localeName.indexOf(')', i);
-			if (j > -1) {
-				retName = retName.trim() + ' ' + localeName.substring(j);
-			}
-		}
-		return retName;
-	}
 
 	public static boolean isLastWordCityGroup(SearchPhrase p ) {
 		return p.isLastWord(ObjectType.CITY) || p.isLastWord(ObjectType.POSTCODE) ||

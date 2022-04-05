@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class PublicTransportBetaWarningCard extends WarningCard {
 
@@ -23,6 +23,6 @@ public class PublicTransportBetaWarningCard extends WarningCard {
 
 	@Override
 	protected void onLinkClicked() {
-		WikipediaDialogFragment.showFullArticle(mapActivity, Uri.parse(OSMAND_BLOG_LINK), nightMode);
+		AndroidUtils.openUrl(mapActivity, Uri.parse(OSMAND_BLOG_LINK), nightMode);
 	}
 }

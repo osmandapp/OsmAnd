@@ -22,7 +22,6 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
-import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -52,9 +51,12 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.layers.ContextMenuLayer;
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelection;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
@@ -665,12 +667,12 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (mapActivity != null) {
 			mapActivity.getMapLayers().getContextMenuLayer().setSelectedObject(object);
 			if (object != null) {
-				for (OsmandMapLayer l : mapActivity.getMapView().getLayers()) {
-					if (l instanceof ContextMenuLayer.IContextMenuProvider) {
-						PointDescription pointDescription = ((ContextMenuLayer.IContextMenuProvider) l).getObjectName(object);
+				for (OsmandMapLayer layer : mapActivity.getMapView().getLayers()) {
+					if (layer instanceof IContextMenuProvider) {
+						PointDescription pointDescription = ((IContextMenuProvider) layer).getObjectName(object);
 						if (pointDescription != null) {
-							if (l instanceof ContextMenuLayer.IContextMenuProviderSelection) {
-								((ContextMenuLayer.IContextMenuProviderSelection) l).setSelectedObject(object);
+							if (layer instanceof IContextMenuProviderSelection) {
+								((ContextMenuLayer.IContextMenuProviderSelection) layer).setSelectedObject(object);
 							}
 						}
 					}

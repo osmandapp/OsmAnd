@@ -26,6 +26,7 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.resources.AmenityIndexRepositoryBinary;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleWikiLinkFragment;
 import net.osmand.util.Algorithms;
 
@@ -285,7 +286,7 @@ public class WikiArticleHelper {
 				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						WikipediaDialogFragment.showFullArticle(context, Uri.parse(url), nightMode);
+						AndroidUtils.openUrl(context, Uri.parse(url), nightMode);
 					}
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null)

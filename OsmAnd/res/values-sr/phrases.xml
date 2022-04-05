@@ -3719,9 +3719,9 @@
     <string name="poi_changing_table_location_female_toilet">Локација промене стола: женски тоалет</string>
     <string name="poi_changing_table_location_male_toilet">Локација промене стола: мушки тоалет</string>
     <string name="poi_changing_table_location_room">Локација промене стола: соба</string>
-    <string name="poi_changing_table_limited">Промена стола: ограничена</string>
-    <string name="poi_changing_table_no">Промена стола: не</string>
-    <string name="poi_changing_table_yes">Промена стола: да</string>
+    <string name="poi_changing_table_limited">Ограничено;Промена стола: ограничена</string>
+    <string name="poi_changing_table_no">Не;Промена стола: не</string>
+    <string name="poi_changing_table_yes">Да;Промена стола: да</string>
     <string name="poi_defibrillator_location">Локација</string>
     <string name="poi_hazard_additional_contamination">Опасност: контаминација</string>
     <string name="poi_hazard_additional_minefield">Опасност: минско поље</string>
@@ -4295,4 +4295,11 @@
     <string name="poi_board_type_welcome_sign">Знак добродошлице</string>
     <string name="poi_board_type_art">Уметност</string>
     <string name="poi_board_type_planet_walk">Шетња по планети</string>
+    <string name="poi_landuse_education">Образовање</string>
+    <string name="poi_greenery">Зеленило</string>
+    <string name="poi_hairdresser_supply">Продавница фризерског прибора</string>
+    <string name="poi_changing_table_filter">Промена стола</string>
+    <string name="poi_printer_ink">Продавница мастила за штампаче</string>
+    <string name="poi_water_sports">Продавница водених спортова</string>
+    <string name="poi_shop_fuel">Продавница горива</string>
 </resources>

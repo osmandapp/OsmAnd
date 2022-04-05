@@ -105,15 +105,15 @@ public class GPXUtilities {
 		SILVER(0xFFC0C0C0),
 		TEAL(0xFF008080);
 
-		int color;
+		public final int color;
 
 		GPXColor(int color) {
 			this.color = color;
 		}
 
-		public static GPXColor getColorFromName(String s) {
+		public static GPXColor getColorFromName(String name) {
 			for (GPXColor c : values()) {
-				if (c.name().equalsIgnoreCase(s)) {
+				if (c.name().equalsIgnoreCase(name)) {
 					return c;
 				}
 			}

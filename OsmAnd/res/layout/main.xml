@@ -98,9 +98,10 @@
 
 		</FrameLayout>
 
-		<include
-			android:id="@+id/MapBottomContainer"
-			layout="@layout/map_bottom" />
+		<FrameLayout
+			android:id="@+id/map_bottom_widgets_panel"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
 
 	</LinearLayout>
 

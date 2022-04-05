@@ -11,7 +11,6 @@ public class ChipItem {
 	public String title;
 	public Drawable icon;
 
-	boolean isSelected = false;
 	public boolean isEnabled = true;
 
 	@ColorInt
@@ -35,6 +34,20 @@ public class ChipItem {
 	@ColorInt
 	public Integer bgDisabledColor;
 
+	@ColorInt
+	public Integer strokeColor;
+	@ColorInt
+	public Integer strokeSelectedColor;
+	@ColorInt
+	public Integer strokeDisabledColor;
+
+	public Integer strokeWidth;
+	public Integer strokeSelectedWidth;
+	public Integer strokeDisabledWidth;
+
+	@ColorInt
+	public Integer rippleColor;
+
 	public Integer drawablePaddingPx;
 
 	public Object tag;
@@ -49,4 +62,18 @@ public class ChipItem {
 		void onAfterViewBound(@NonNull ChipItem chip, @NonNull ChipViewHolder holder);
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof ChipItem)) return false;
+
+		ChipItem item = (ChipItem) o;
+
+		return id.equals(item.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return id.hashCode();
+	}
 }

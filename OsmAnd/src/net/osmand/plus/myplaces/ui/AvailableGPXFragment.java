@@ -55,9 +55,9 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
-import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
+import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -472,7 +472,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 		// To do Rewrite without ContextMenuAdapter
 		optionsMenuAdapter = new ContextMenuAdapter(app);
-		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
+		ItemClickListener listener = new ItemClickListener() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, final int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 				if (itemId == R.string.shared_string_refresh) {
@@ -495,19 +495,26 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				return true;
 			}
 		};
-		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.gpx_add_track, getActivity())
+		optionsMenuAdapter.addItem(new ContextMenuItem(null)
+				.setTitleId(R.string.gpx_add_track, getActivity())
 				.setIcon(R.drawable.ic_action_plus)
-				.setListener(listener).createItem());
-		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.coordinate_input, getActivity())
+				.setListener(listener));
+		optionsMenuAdapter.addItem(new ContextMenuItem(null)
+				.setTitleId(R.string.coordinate_input, getActivity())
 				.setIcon(R.drawable.ic_action_coordinates_longitude)
-				.setListener(listener).createItem());
-		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.shared_string_show_on_map, getActivity())
+				.setListener(listener));
+		optionsMenuAdapter.addItem(new ContextMenuItem(null)
+				.setTitleId(R.string.shared_string_show_on_map, getActivity())
 				.setIcon(R.drawable.ic_show_on_map)
-				.setListener(listener).createItem());
-		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.shared_string_delete, getActivity())
-				.setIcon(R.drawable.ic_action_delete_dark).setListener(listener).createItem());
-		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.shared_string_refresh, getActivity())
-				.setIcon(R.drawable.ic_action_refresh_dark).setListener(listener).createItem());
+				.setListener(listener));
+		optionsMenuAdapter.addItem(new ContextMenuItem(null)
+				.setTitleId(R.string.shared_string_delete, getActivity())
+				.setIcon(R.drawable.ic_action_delete_dark)
+				.setListener(listener));
+		optionsMenuAdapter.addItem(new ContextMenuItem(null)
+				.setTitleId(R.string.shared_string_refresh, getActivity())
+				.setIcon(R.drawable.ic_action_refresh_dark)
+				.setListener(listener));
 		OsmandPlugin.onOptionsMenuActivity(getActivity(), this, optionsMenuAdapter);
 		for (int j = 0; j < optionsMenuAdapter.length(); j++) {
 			final MenuItem item;

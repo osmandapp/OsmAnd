@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class StartEditingTravelCard extends BaseTravelCard {
 
@@ -35,7 +35,7 @@ public class StartEditingTravelCard extends BaseTravelCard {
 			holder.button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					WikipediaDialogFragment.showFullArticle(activity,
+					AndroidUtils.openUrl(activity,
 							Uri.parse("https://" + app.getLanguage().toLowerCase() + ".m.wikivoyage.org"), nightMode);
 				}
 			});

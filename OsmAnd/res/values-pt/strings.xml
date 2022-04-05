@@ -2155,7 +2155,6 @@
     <string name="ski_map_render_descr">Para esquiar. Contém pistas de esqui, elevadores, pistas de cross country, etc. Escurece objetos secundários do mapa.</string>
     <string name="light_rs_render_descr">Estilo simples e contrastante para a navegação do carro. É suave para os olhos no modo noturno. Características principais: curvas de nível, estradas contrastantes de estilo laranja, menos objetos secundários do mapa para evitar distrações.</string>
     <string name="topo_render_descr">Para caminhadas, pedestrianismo e ciclismo de natureza. Legível em exteriores. Estradas e objetos naturais contrastantes, diferentes tipos de rotas, opções avançadas de linha de contorno, detalhes extras. O ajuste da integridade da superfície distingue a qualidade da estrada. Sem modo noturno.</string>
-    <string name="mapnik_render_descr">O velho estilo padrão \"Mapnik\". Cores como \"Mapnik\".</string>
     <string name="touring_view_render_descr">Estilo turístico com alto contraste e máximo detalhe. Inclui todas as opções do estilo OsmAnd padrão, enquanto mostra o máximo de detalhes possíveis, particularmente estradas, caminhos e outras formas de viajar. Distinção clara do \"atlas turístico\" entre as categorias de estrada. Adequado para uso diurno, noturno e ao ar livre.</string>
     <string name="default_render_descr">Estilo de propósito geral. Renderização simplificada e limpa em cidades densamente povoadas. Características principais: curvas de nível, rotas, qualidade da superfície, restrições de acesso, placas das referências da estradas, renderização de caminhos de acordo com a escala SAC, características desportivas de águas brancas.</string>
     <string name="open_wikipedia_link_online">Abrir página da Wikipédia na Internet</string>
@@ -4537,4 +4536,18 @@
 \n
 \nSe obtiver informações de localização pouco precisas ou usar um aparelho sem %2$s, tente mudar para \"%3$s\"</string>
     <string name="location_source">Fonte de localização</string>
+    <string name="shared_string_shape">Forma</string>
+    <string name="default_appearance_desc">A cor, ícone e forma predefinidas serão aplicadas aos pontos favoritos adicionados ao grupo.</string>
+    <string name="default_appearance">Aparência predefinida</string>
+    <string name="edit_category">Editar categoria</string>
+    <string name="stop_download">Parar o descarregamento</string>
+    <string name="zoom_levels_difference_description">A grande diferença entre níveis de ampliação pode aumentar a quantidade de dados descarregados.</string>
+    <string name="estimated_download_size">Estimativa do tamanho do descarregamento</string>
+    <string name="stop_download_desc">O descarregamento não terminou. Se o interromper agora, apenas parte dos mosaicos estarão disponíveis.</string>
+    <string name="stop_and_exit">Parar e sair</string>
+    <string name="shared_string_complete">completo</string>
+    <string name="number_of_tiles">Número de mosaicos</string>
+    <string name="move_map_to_select_area">Mova o mapa para selecionar a área necessária.</string>
+    <string name="rendering_attr_showFitnessTrails_description">Mostrar trilhos de fitness</string>
+    <string name="rendering_attr_showFitnessTrails_name">Mostrar trilhos de fitness</string>
 </resources>
