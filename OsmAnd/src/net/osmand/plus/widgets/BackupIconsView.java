@@ -14,7 +14,6 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
@@ -34,7 +33,7 @@ public class BackupIconsView extends View {
 
 	private final int iconSize;
 	private final int rowMargin;
-	private final int screenSize;
+	private final double screenSize;
 
 	private int iconsOffset = 0;
 
@@ -44,13 +43,13 @@ public class BackupIconsView extends View {
 		uiUtilities = app.getUIUtilities();
 
 		paint.setStyle(Style.STROKE);
-		paint.setStrokeWidth(AndroidUtils.dpToPx(app, 1));
+		paint.setStrokeWidth(context.getResources().getDimensionPixelSize(R.dimen.map_button_stroke));
 
 		Resources resources = app.getResources();
 		iconSize = resources.getDimensionPixelSize(R.dimen.big_icon_size);
 		rowMargin = resources.getDimensionPixelSize(R.dimen.content_padding);
 
-		screenSize = app.getResources().getDisplayMetrics().widthPixels;
+		screenSize = (app.getResources().getDisplayMetrics().widthPixels) * 1.2;
 		initIconsMap();
 	}
 
@@ -78,8 +77,8 @@ public class BackupIconsView extends View {
 			xOffset = xOffset + iconsOffset;
 
 			for (Integer iconId : iconIds) {
-				if (xOffset > screenSize) {
-					xOffset = xOffset - screenSize;
+				if (xOffset > screenSize - xOffsetStep) {
+					xOffset = xOffset - (int) screenSize;
 				}
 				drawIcon(canvas, iconId, color, xOffset, row);
 				xOffset += xOffsetStep;
@@ -95,7 +94,7 @@ public class BackupIconsView extends View {
 		colorIds.add(R.color.backup_restore_icons_green);
 
 		int xOffsetStep = iconSize + rowMargin;
-		int iconsCount = screenSize / xOffsetStep;
+		int iconsCount = (int) screenSize / xOffsetStep;
 
 		for (Integer colorId : colorIds) {
 			List<Integer> icons = new ArrayList<>();
