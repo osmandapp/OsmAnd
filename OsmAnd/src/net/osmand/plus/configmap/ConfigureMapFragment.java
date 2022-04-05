@@ -150,12 +150,12 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 		View view = viewCreator.getView(item, existedView);
 		view.setTag(R.id.item_as_tag, item);
 		view.setOnClickListener(getItemsClickListener());
-		if (item.getLayout() != R.layout.mode_toggles) {
-			setupSelectableBg(view);
-		}
 		if (existedView == null) {
 			views.put(standardId, view);
 			container.addView(view);
+			if (item.getLayout() != R.layout.mode_toggles) {
+				setupSelectableBg(view);
+			}
 		}
 	}
 
