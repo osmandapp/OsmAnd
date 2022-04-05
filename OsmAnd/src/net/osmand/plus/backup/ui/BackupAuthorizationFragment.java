@@ -18,6 +18,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.appbar.AppBarLayout;
+
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
@@ -63,6 +65,7 @@ public class BackupAuthorizationFragment extends BaseSettingsFragment implements
 		super.createToolbar(inflater, view);
 		View subtitle = view.findViewById(R.id.toolbar_subtitle);
 		AndroidUiHelper.updateVisibility(subtitle, false);
+		((AppBarLayout) view.findViewById(R.id.appbar)).setOutlineProvider(null);
 	}
 
 	@Override
