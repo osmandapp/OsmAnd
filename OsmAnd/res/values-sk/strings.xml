@@ -4539,5 +4539,42 @@
     <string name="number_of_tiles">Počet dlaždíc</string>
     <string name="move_map_to_select_area">Posuňte mapu pre zvolenie potrebnej oblasti.</string>
     <string name="rendering_attr_showFitnessTrails_description">Zobraziť fitnes trasy</string>
-    <string name="rendering_attr_showFitnessTrails_name">Zobraziť fitnes trasy</string>
+    <string name="rendering_attr_showFitnessTrails_name">Fitnes trasy</string>
+    <string name="rendering_attr_showRunningRoutes_description">Zobraziť bežecké trasy</string>
+    <string name="rendering_attr_showRunningRoutes_name">Bežecké trasy</string>
+    <string name="rendering_attr_horse_scale_common_name">Bežná</string>
+    <string name="rendering_attr_horse_scale_demanding_name">Náročná</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Ťažká</string>
+    <string name="rendering_attr_horse_scale_critical_name">Kritická</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">Nebezpečná</string>
+    <string name="rendering_attr_horse_scale_impossible_name">Nemožná</string>
+    <string name="routing_attr_carriage_restrictions_name">Obmedzenia pre vozy/koče</string>
+    <string name="routing_attr_carriage_restrictions_description">Zohľadniť obmedzenia vjazdu pre vozidlá ťahané koňmi</string>
+    <string name="rendering_attr_showTramRoutes_name">Trasy električiek</string>
+    <string name="rendering_attr_showTrainRoutes_name">Trasy vlakov</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Trasy ďiaľkových električiek</string>
+    <string name="rendering_attr_showBusRoutes_name">Trasy autobusov</string>
+    <string name="map_markers_bar">Panel mapových značiek</string>
+    <string name="shared_string_visible_widgets">Viditeľné nástroje</string>
+    <string name="bottom_widgets_panel">Dolný panel</string>
+    <string name="configure_screen_widgets_descr">Zvoľte stranu obrazovky, na ktorej chcete pridať alebo premiestniť nástroje.</string>
+    <string name="osm_carto_render_descr">Podobný ako štýl OpenStreetMap-carto na hlavnej stránke OSM</string>
+    <string name="simulation_constant_mode_title">Konštantná rýchlosť</string>
+    <string name="simulation_preview_mode_desc">Rýchlosť simulácie na rovných úsekoch bude maximálna a spomalí len na križovatkách.</string>
+    <string name="simulation_preview_mode_title">Režim rýchleho prehľadu</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Trasy lanoviek</string>
+    <string name="routeInfo_horse_scale_description">Vykresľovať cesty podľa náročnosti pre kone</string>
+    <string name="routeInfo_horse_scale_name">Náročnosť ciest pre kone</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Trasy jednokoľajky</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Trasy trolejbusov</string>
+    <string name="simulation_constant_mode_desc">Simulácia bude prevedená so zvolenou konštantnou rýchlosťou.</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">Trasy zdieľaných taxíkov</string>
+    <string name="top_widgets_panel">Horný panel</string>
+    <string name="shared_string_item">Položka</string>
+    <string name="simulation_real_mode_desc">Na rovných úsekoch ciest bude rýchlosť približná k maximálnej povolenej rýchlosti.
+\nNa križovatkách simulácia spomalí.
+\nĎalšie zdržanie bude použité na semaforoch, značkách stop atď.</string>
+    <string name="simulation_real_mode_title">Realistická simulácia</string>
+    <string name="shared_string_buttons">Tlačidlá</string>
+    <string name="speed_mode">Rýchlostný režim</string>
 </resources>

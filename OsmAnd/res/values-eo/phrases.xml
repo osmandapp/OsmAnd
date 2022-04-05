@@ -4302,4 +4302,14 @@
     <string name="poi_printer_ink">Presil-inka vendejo</string>
     <string name="poi_shop_fuel">Brulaĵ-vendejo</string>
     <string name="poi_water_sports">Akvosport-aparata vendejo</string>
+    <string name="poi_payment_american_express_contactless_yes">American Express (AMEX) senkontakta</string>
+    <string name="poi_payment_girocard_contactless_yes">Girocard (ec-Karte) senkontakta</string>
+    <string name="poi_payment_maestro_contactless_yes">Maestro senkontakta</string>
+    <string name="poi_payment_mastercard_contactless_yes">MasterCard senkontakta</string>
+    <string name="poi_payment_visa_contactless_yes">Visa senkontakta</string>
+    <string name="poi_payment_american_express_contactless_no">Senkontaktaj kartoj American Express (AMEX) malakceptataj</string>
+    <string name="poi_payment_girocard_contactless_no">Senkontaktaj kartoj Girocard malakceptataj</string>
+    <string name="poi_payment_maestro_contactless_no">Senkontaktaj kartoj Maestro malakceptataj</string>
+    <string name="poi_payment_mastercard_contactless_no">Senkontaktaj kartoj MasterCard malakceptataj</string>
+    <string name="poi_payment_visa_contactless_no">Senkontaktaj kartoj Visa malakceptataj</string>
 </resources>

@@ -74,8 +74,9 @@ public class RoutingHelper {
 	private Location lastFixedLocation;
 	private boolean routeWasFinished;
 	private ApplicationMode mode;
+	private boolean deviceHasBearing = false;
 
-	private static boolean isDeviatedFromRoute = false;
+	private boolean isDeviatedFromRoute = false;
 	private long deviateFromRouteDetected = 0;
 	//private long wrongMovementDetected = 0;
 	private boolean voiceRouterStopped = false;
@@ -532,9 +533,11 @@ public class RoutingHelper {
 						log.debug("Processed by distance : " + newDist + " " + dist); //$NON-NLS-1$//$NON-NLS-2$
 					}
 				} else {
-					// case if you are getting close to the next point after turn
-					// but you have not yet turned (could be checked bearing)
-					if (currentLocation.hasBearing() || lastFixedLocation != null) {
+					if (currentLocation.hasBearing() && !deviceHasBearing) {
+						deviceHasBearing = true; 
+					}
+					// lastFixedLocation.bearingTo -  gives artefacts during u-turn, so we avoid for devices with bearing
+					if (currentLocation.hasBearing() || (!deviceHasBearing && lastFixedLocation != null)) {
 						float bearingToRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
 						float bearingRouteNext = routeNodes.get(newCurrentRoute).bearingTo(routeNodes.get(newCurrentRoute + 1));
 						float bearingMotion = currentLocation.hasBearing() ? currentLocation.getBearing() : lastFixedLocation

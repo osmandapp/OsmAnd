@@ -69,7 +69,7 @@ public class ChipsAdapter extends RecyclerView.Adapter<ChipViewHolder> {
 		GradientDrawable background = (GradientDrawable) getDrawable(R.drawable.bg_selected_chip).mutate();
 		int color = getBgColor(chip);
 		background.setColor(color);
-		int strokeWidth = getStrokeWidth();
+		int strokeWidth = getStrokeWidth(chip);
 		if (strokeWidth > 0) {
 			int strokeColor = getStrokeColor(chip);
 			background.setStroke(strokeWidth, strokeColor);
@@ -173,8 +173,16 @@ public class ChipsAdapter extends RecyclerView.Adapter<ChipViewHolder> {
 		return chip.rippleColor != null ? chip.rippleColor : defAttrs.rippleColor;
 	}
 
-	private int getStrokeWidth() {
-		return defAttrs.strokeWidth;
+	private int getStrokeWidth(@NonNull ChipItem chip) {
+		if (chip.isEnabled) {
+			if (dataHolder.isSelected(chip)) {
+				return chip.strokeSelectedWidth != null ? chip.strokeSelectedWidth : defAttrs.strokeWidth;
+			} else {
+				return chip.strokeWidth != null ? chip.strokeWidth : defAttrs.strokeWidth;
+			}
+		} else {
+			return chip.strokeDisabledWidth != null ? chip.strokeDisabledWidth : defAttrs.strokeWidth;
+		}
 	}
 
 	private int getRippleId() {

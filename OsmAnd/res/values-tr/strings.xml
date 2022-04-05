@@ -1721,7 +1721,7 @@
     <string name="search_for">Arama</string>
     <string name="rendering_attr_publicTransportMode_name">Otobüs, troleybüs, mekik yolları</string>
     <string name="rendering_attr_tramTrainRoutes_name">Tramvay ve tren yolları</string>
-    <string name="rendering_attr_subwayMode_name">Metro rotaları</string>
+    <string name="rendering_attr_subwayMode_name">Metro yolları</string>
     <string name="lock_screen_request_explanation">%1$s ihtiyaçları güç tasarrufu özelliği ekranını kapatmak için bu izni.</string>
     <string name="wake_on_voice">Ekranı aç</string>
     <string name="wake_on_voice_descr">Bir dönüşe yaklaşırken (kapalı ise) aygıtın ekranını aç.</string>
@@ -1729,8 +1729,8 @@
     <string name="rendering_attr_trainLightrailRoutes_name">Tren yolları</string>
     <string name="rendering_attr_tramRoutes_name">Tramvay yolları</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Taksi yolları paylaşmak</string>
-    <string name="rendering_attr_trolleybusRoutes_name">Troleybüs rotaları</string>
-    <string name="rendering_attr_busRoutes_name">Otobüs rotaları</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Troleybüs yolları</string>
+    <string name="rendering_attr_busRoutes_name">Otobüs yolları</string>
     <string name="rendering_category_hide">Gizle</string>
     <string name="rendering_category_routes">Rotalar</string>
     <string name="rendering_category_transport">Ulaşım</string>
@@ -4547,4 +4547,39 @@
     <string name="rendering_attr_showFitnessTrails_name">Fitness parkurları</string>
     <string name="rendering_attr_showRunningRoutes_description">Koşu güzergahlarını göster</string>
     <string name="rendering_attr_showRunningRoutes_name">Koşu güzergahları</string>
+    <string name="routeInfo_horse_scale_description">Yolları at parkurlarının zorluğuna göre görselleştir</string>
+    <string name="rendering_attr_horse_scale_impossible_name">İmkansız</string>
+    <string name="routing_attr_carriage_restrictions_name">Araba kısıtlamaları</string>
+    <string name="routing_attr_carriage_restrictions_description">Atlı araçlar için erişim izinlerini göz önünde bulundur</string>
+    <string name="rendering_attr_showTramRoutes_name">Tramvay yolları</string>
+    <string name="rendering_attr_showTrainRoutes_name">Tren yolları</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Hafif raylı yolları</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Monoray yolları</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Füniküler yolları</string>
+    <string name="rendering_attr_showBusRoutes_name">Otobüs yolları</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Troleybüs yolları</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">Mekik yolları</string>
+    <string name="map_markers_bar">Harita işaretleyicileri çubuğu</string>
+    <string name="shared_string_visible_widgets">Görünür widget\'lar</string>
+    <string name="top_widgets_panel">Üst panel</string>
+    <string name="bottom_widgets_panel">Alt panel</string>
+    <string name="shared_string_item">Öge</string>
+    <string name="shared_string_buttons">Düğmeler</string>
+    <string name="configure_screen_widgets_descr">Widget eklemek veya yeniden düzenlemek için ekran tarafını seçin.</string>
+    <string name="osm_carto_render_descr">Ana OSM sitesinde kullanılan OpenStreetMap-carto tarzına benzer</string>
+    <string name="simulation_constant_mode_desc">Simülasyon sabit seçilen hızda gerçekleştirilecektir.</string>
+    <string name="simulation_constant_mode_title">Sabit hız</string>
+    <string name="simulation_preview_mode_title">Hızlı ön izleme modu</string>
+    <string name="speed_mode">Hız modu</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">Tehlikeli</string>
+    <string name="routeInfo_horse_scale_name">At parkurlarının zorluğu</string>
+    <string name="rendering_attr_horse_scale_common_name">Yaygın</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Zor</string>
+    <string name="rendering_attr_horse_scale_critical_name">Kritik</string>
+    <string name="rendering_attr_horse_scale_demanding_name">Zahmetli</string>
+    <string name="simulation_real_mode_desc">Düz yol kesimlerinde hız, izin verilen azami hıza yaklaşık olacaktır.
+\nKavşaklarda simülasyon yavaşlayacaktır.
+\nTrafik işaretleri, dur işaretleri vb. için ek cezalar uygulanacaktır.</string>
+    <string name="simulation_real_mode_title">Gerçekçi simülasyon</string>
+    <string name="simulation_preview_mode_desc">Simülasyonun hızı düz kısımlarda azami olacak ve yalnızca kavşaklarda yavaşlayacaktır.</string>
 </resources>
