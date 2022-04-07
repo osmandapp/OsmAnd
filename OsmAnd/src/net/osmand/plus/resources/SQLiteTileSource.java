@@ -441,13 +441,28 @@ public class SQLiteTileSource implements ITileSource {
 			}
 		}
 	}
-	
+
 	public boolean isLocked() {
 		SQLiteConnection db = getDatabase();
-		if(db == null){
+		if (db == null) {
 			return false;
 		}
 		return db.isDbLockedByOtherThreads();
+	}
+
+	@Override
+	public long getTileModifyTime(int x, int y, int zoom, String dirWithTiles) {
+		long time = System.currentTimeMillis();
+		SQLiteConnection db = getDatabase();
+		if (db != null && zoom <= maxZoom && timeSupported) {
+			String[] params = getTileDbParams(x, y, zoom);
+			SQLiteCursor cursor = db.rawQuery("SELECT time FROM tiles WHERE x = ? AND y = ? AND z = ?", params);
+			if (cursor.moveToFirst()) {
+				time = cursor.getLong(0);
+			}
+			cursor.close();
+		}
+		return time;
 	}
 
 	@Nullable
