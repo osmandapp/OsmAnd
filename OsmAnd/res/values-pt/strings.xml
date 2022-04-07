@@ -4103,7 +4103,7 @@
     <string name="search_more">Pesquisar mais…</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="backup_into_file">Fazer cópia de segurança para um ficheiro</string>
-    <string name="restore_from_file">Restaurar de um ficheiro de cópia de segurança</string>
+    <string name="restore_from_file">Restaurar de um ficheiro</string>
     <string name="osmand_cloud_help_descr">Precisa de ajuda\? Contacte-nos em %1$s</string>
     <string name="osmand_cloud_create_account_descr">Introduza o seu endereço de email. Será enviado um código de verificação para esse endereço.
 \nTodos os seus dados serão ligados a ele.</string>
@@ -4549,5 +4549,42 @@
     <string name="number_of_tiles">Número de mosaicos</string>
     <string name="move_map_to_select_area">Mova o mapa para selecionar a área necessária.</string>
     <string name="rendering_attr_showFitnessTrails_description">Mostrar trilhos de fitness</string>
-    <string name="rendering_attr_showFitnessTrails_name">Mostrar trilhos de fitness</string>
+    <string name="rendering_attr_showFitnessTrails_name">Trilhos de fitness</string>
+    <string name="routeInfo_horse_scale_name">Dificuldade dos percursos equestres</string>
+    <string name="routing_attr_carriage_restrictions_name">Restrições de carruagem</string>
+    <string name="rendering_attr_showTrainRoutes_name">Rotas de comboio</string>
+    <string name="simulation_real_mode_desc">Em trechos de estradas retas, a velocidade será próxima da velocidade máxima permitida.
+\nNos cruzamentos, a simulação diminui.
+\nSerão aplicadas penalidades extras em semáforos, sinais de stop, etc.</string>
+    <string name="speed_mode">Modo de velocidade</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">Perigoso</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Rotas de funicular</string>
+    <string name="shared_string_buttons">Botões</string>
+    <string name="routing_attr_carriage_restrictions_description">Considerar permissões de acesso a veículos puxados a cavalo</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Rotas de comboios ligeiros</string>
+    <string name="simulation_preview_mode_desc">A velocidade na simulação será a máxima em retas e diminuirá apenas nas intersecções.</string>
+    <string name="rendering_attr_showRunningRoutes_name">Rotas para correr</string>
+    <string name="rendering_attr_showRunningRoutes_description">Mostrar rotas para correr</string>
+    <string name="routeInfo_horse_scale_description">Mostrar percursos equestres de acordo com a sua dificuldade</string>
+    <string name="rendering_attr_horse_scale_common_name">Comum</string>
+    <string name="rendering_attr_horse_scale_demanding_name">Exigente</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Difícil</string>
+    <string name="rendering_attr_horse_scale_critical_name">Crítico</string>
+    <string name="rendering_attr_horse_scale_impossible_name">Impossível</string>
+    <string name="rendering_attr_showTramRoutes_name">Rotas de elétrico</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Rotas de monocarril</string>
+    <string name="rendering_attr_showBusRoutes_name">Rotas de autocarro</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Rotas de troleicarro</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">Rotas de vaivem</string>
+    <string name="map_markers_bar">Barra de marcadores de mapa</string>
+    <string name="shared_string_visible_widgets">Widgets visíveis</string>
+    <string name="top_widgets_panel">Painel de cima</string>
+    <string name="bottom_widgets_panel">Painel de baixo</string>
+    <string name="shared_string_item">Item</string>
+    <string name="configure_screen_widgets_descr">Selecione o lado do ecrã para adicionar ou reorganizar os widgets.</string>
+    <string name="osm_carto_render_descr">Similar ao estilo OpenStreetMap-carto no site do OSM</string>
+    <string name="simulation_real_mode_title">Simulação realista</string>
+    <string name="simulation_constant_mode_desc">A simulação será feita na velocidade constante selecionada.</string>
+    <string name="simulation_constant_mode_title">Velocidade fixa</string>
+    <string name="simulation_preview_mode_title">Modo de visualização rápida</string>
 </resources>
