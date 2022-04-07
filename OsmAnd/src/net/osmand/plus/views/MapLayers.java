@@ -166,7 +166,7 @@ public class MapLayers {
 		locationLayer = new PointLocationLayer(app);
 		mapView.addLayer(locationLayer, 6);
 		// 7. point navigation layer
-		navigationLayer = new PointNavigationLayer(app);
+		navigationLayer = new PointNavigationLayer(app, -207000);
 		mapView.addLayer(navigationLayer, 7);
 		// 7.3 map markers layer
 		mapMarkersLayer = new MapMarkersLayer(app);

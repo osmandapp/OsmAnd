@@ -31,6 +31,8 @@ public interface ITileSource {
 
 	public int getExpirationTimeMinutes();
 
+	public long getTileModifyTime(int x, int y, int zoom, String dirWithTiles);
+
 	public String getReferer();
 
 	public String getUserAgent();

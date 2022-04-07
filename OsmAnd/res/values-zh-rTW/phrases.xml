@@ -4312,4 +4312,20 @@
     <string name="poi_payment_maestro_contactless_no">不接受非接觸式萬事順卡</string>
     <string name="poi_payment_mastercard_contactless_no">不接受非接觸式萬事達卡</string>
     <string name="poi_payment_visa_contactless_no">不接受非接觸式 Visa 卡</string>
+    <string name="poi_laundry_service_filter">洗衣服務</string>
+    <string name="poi_termite_mound">白蟻丘</string>
+    <string name="poi_anthill">蟻丘</string>
+    <string name="poi_board_type_wildlife">野生動物</string>
+    <string name="poi_board_type_nature">自然</string>
+    <string name="poi_food_no">食物：否</string>
+    <string name="poi_dry_cleaning_filter">乾洗</string>
+    <string name="poi_birds_nest">鳥巢</string>
+    <string name="poi_dovecote">鴿舍</string>
+    <string name="poi_fish_pass">魚道</string>
+    <string name="poi_laundry_service_yes">是</string>
+    <string name="poi_dry_cleaning_yes">是</string>
+    <string name="poi_dry_cleaning_no">否</string>
+    <string name="poi_rice">米店</string>
+    <string name="poi_wool">羊毛店</string>
+    <string name="poi_laundry_service_no">否</string>
 </resources>

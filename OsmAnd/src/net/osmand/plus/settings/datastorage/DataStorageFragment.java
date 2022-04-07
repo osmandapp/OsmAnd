@@ -17,6 +17,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,7 +31,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
@@ -74,6 +74,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 	private ArrayList<MemoryItem> memoryItems;
 	private ArrayList<CheckBoxPreference> dataStorageRadioButtonsGroup;
 	private Preference changeButton;
+	private StorageItem newDataStorage;
 	private StorageItem currentDataStorage;
 	private String tmpManuallySpecifiedPath;
 	private DataStorageHelper dataStorageHelper;
@@ -83,8 +84,8 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 	private RefreshUsedMemoryTask calculateTilesMemoryTask;
 
 	private OsmandActionBarActivity activity;
-	boolean storageMigration;
-	boolean firstUsage;
+	private boolean storageMigration;
+	private boolean firstUsage;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -157,8 +158,6 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		super.onPreferenceChange(preference, newValue);
-
 		if (newValue instanceof Bundle) {
 			//results from BottomSheets
 			Bundle resultData = (Bundle) newValue;
@@ -202,12 +201,10 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 			//show necessary dialog
 			String key = preference.getKey();
 			if (key != null) {
-				StorageItem newDataStorage = dataStorageHelper.getStorage(key);
+				newDataStorage = dataStorageHelper.getStorage(key);
 				if (newDataStorage != null && !currentDataStorage.getKey().equals(newDataStorage.getKey())) {
 					if (!key.equals(INTERNAL_STORAGE) && !DownloadActivity.hasPermissionToWriteExternalStorage(activity)) {
-						ActivityCompat.requestPermissions(activity,
-								new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
-								DataStorageFragment.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+						requestPermissions(new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
 					} else if (key.equals(MANUALLY_SPECIFIED)) {
 						showFolderSelectionDialog();
 					} else if (storageMigration || firstUsage) {
@@ -220,6 +217,20 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		if (requestCode == PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE && grantResults.length > 0
+				&& permissions.length > 0 && Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
+			if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+				if (newDataStorage != null) {
+					confirm(app, activity, newDataStorage, false);
+				}
+			} else {
+				app.showToastMessage(R.string.missing_write_external_storage_permission);
+			}
+		}
 	}
 
 	@Override
