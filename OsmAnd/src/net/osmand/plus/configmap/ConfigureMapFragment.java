@@ -36,6 +36,7 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataChangeUiAdapter {
 
@@ -46,8 +47,9 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	private OsmandSettings settings;
 	private ApplicationMode appMode;
 	private ViewCreator viewCreator;
-	Map<ContextMenuItem, List<ContextMenuItem>> items;
+	private Map<ContextMenuItem, List<ContextMenuItem>> items;
 	private boolean nightMode;
+	private boolean useAnimation;
 
 	private final Map<Integer, View> views = new HashMap<>();
 	private LinearLayout llList;
@@ -70,6 +72,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	                         @Nullable Bundle savedInstanceState) {
 		appMode = settings.getApplicationMode();
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		useAnimation = !settings.DO_NOT_USE_ANIMATIONS.getModeValue(appMode);
 		inflater = UiUtilities.getInflater(getContext(), nightMode);
 		View view = inflater.inflate(R.layout.fragment_configure_map, container, false);
 
@@ -133,9 +136,9 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 		btnView.setOnClickListener(v -> {
 			boolean isCollapsed = collapsedIds.containsValue(appMode, id);
 			if (isCollapsed) {
-				expand(category);
+				expandCategory(category);
 			} else {
-				collapse(category);
+				collapseCategory(category);
 			}
 		});
 
@@ -160,28 +163,38 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	}
 
 	private void updateCategoryView(@NonNull ContextMenuItem category) {
-		String id = category.getId();
-		int standardId = category.getTitleId();
-		View view = views.get(standardId);
-		if (view == null) {
-			return;
+		View view = views.get(category.getTitleId());
+		if (view != null) {
+			String id = category.getId();
+			boolean isCollapsed = collapsedIds.containsValue(appMode, id);
+
+			ImageView ivIndicator = view.findViewById(R.id.explicit_indicator);
+			ivIndicator.setImageResource(isCollapsed ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up);
+
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.description), isCollapsed);
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.items_container), !isCollapsed);
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.divider), !isCollapsed);
 		}
-		boolean isCollapsed = collapsedIds.containsValue(appMode, id);
-		ImageView ivIndicator = view.findViewById(R.id.explicit_indicator);
-		ivIndicator.setImageResource(isCollapsed ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.description), isCollapsed);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.items_container), !isCollapsed);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.divider), !isCollapsed);
 	}
 
-	private void expand(@NonNull ContextMenuItem category) {
+	private void expandCategory(@NonNull ContextMenuItem category) {
 		collapsedIds.removeValueForProfile(appMode, category.getId());
-		updateCategoryView(category);
+		if (useAnimation) {
+			View view = views.get(category.getTitleId());
+			CategoryAnimator.startExpanding(category, Objects.requireNonNull(view));
+		} else {
+			updateCategoryView(category);
+		}
 	}
 
-	private void collapse(@NonNull ContextMenuItem category) {
+	private void collapseCategory(@NonNull ContextMenuItem category) {
 		collapsedIds.addModeValue(appMode, category.getId());
-		updateCategoryView(category);
+		if (useAnimation) {
+			View view = views.get(category.getTitleId());
+			CategoryAnimator.startCollapsing(category, Objects.requireNonNull(view));
+		} else {
+			updateCategoryView(category);
+		}
 	}
 
 	public View.OnClickListener getItemsClickListener() {
