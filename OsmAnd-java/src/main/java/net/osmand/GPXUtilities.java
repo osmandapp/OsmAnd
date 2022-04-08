@@ -1857,8 +1857,10 @@ public class GPXUtilities {
 
 				PointsGroup pointsGroup = categories.get(category);
 				if (pointsGroup == null) {
-					pointsGroup = new PointsGroup(category, wptPt.getIconName(), wptPt.getBackgroundType(), color, 0);
+					pointsGroup = new PointsGroup(category, wptPt.getIconName(), wptPt.getBackgroundType(), color, 1);
 					categories.put(category, pointsGroup);
+				} else {
+					pointsGroup.pointsSize++;
 				}
 				if (pointsGroup.color == 0 && color != 0) {
 					pointsGroup.color = color;
