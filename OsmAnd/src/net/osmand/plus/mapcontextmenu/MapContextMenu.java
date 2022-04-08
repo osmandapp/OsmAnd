@@ -136,9 +136,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public MapContextMenu() {
-	}
-
 	@Nullable
 	@Override
 	public MapActivity getMapActivity() {

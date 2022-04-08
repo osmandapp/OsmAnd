@@ -16,7 +16,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.myplaces.FavouritesHelper.FavoritesListener;
+import net.osmand.plus.myplaces.FavoritesListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -61,7 +61,7 @@ public class LauncherShortcutsHelper {
 			}
 
 			@Override
-			public void onFavoriteDataUpdated(@NonNull FavouritePoint favouritePoint) {
+			public void onFavoriteDataUpdated(@NonNull FavouritePoint point) {
 			}
 		};
 		app.getFavoritesHelper().addListener(favoritesListener);

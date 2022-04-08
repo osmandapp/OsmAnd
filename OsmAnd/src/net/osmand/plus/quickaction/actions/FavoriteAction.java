@@ -10,12 +10,17 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.data.LatLon;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.GeocodingLookupService.OnAddressLookupResult;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
+import net.osmand.plus.mapcontextmenu.editors.SelectFavouriteGroupBottomSheet;
 import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet;
 import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
 import net.osmand.plus.myplaces.FavoriteGroup;
@@ -23,10 +28,6 @@ import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.fragment.app.FragmentManager;
 
 public class FavoriteAction extends QuickAction {
 
@@ -174,15 +175,15 @@ public class FavoriteAction extends QuickAction {
 		}
 
 		categoryEdit.setOnClickListener(view -> {
-			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-			CategorySelectionListener listener = (category, color) -> fillGroupParams(root, category, color);
-			SelectPointsCategoryBottomSheet.showSelectFavoriteCategoryFragment(fragmentManager, listener, "");
+			FragmentManager manager = mapActivity.getSupportFragmentManager();
+			CategorySelectionListener listener = (pointsGroup) -> fillGroupParams(root, pointsGroup.name, pointsGroup.color);
+			SelectFavouriteGroupBottomSheet.showInstance(manager, "", listener);
 		});
 
 		SelectPointsCategoryBottomSheet dialogFragment = (SelectPointsCategoryBottomSheet)
 				mapActivity.getSupportFragmentManager().findFragmentByTag(SelectPointsCategoryBottomSheet.TAG);
 		if (dialogFragment != null) {
-			dialogFragment.setSelectionListener((category, color) -> fillGroupParams(root, category, color));
+			dialogFragment.setListener((pointsGroup) -> fillGroupParams(root, pointsGroup.name, pointsGroup.color));
 		}
 	}
 
