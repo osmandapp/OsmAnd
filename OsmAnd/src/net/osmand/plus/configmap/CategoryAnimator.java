@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class CategoryAnimator {
 
-	private static Map<ContextMenuItem, ValueAnimator> runningAnimations = new HashMap<>();
+	private static final Map<ContextMenuItem, ValueAnimator> runningAnimations = new HashMap<>();
 
 	private static final float MAX_ROTATION = 180;
 
@@ -90,7 +90,6 @@ public class CategoryAnimator {
 				}
 			}
 		});
-
 		animation.start();
 		return animation;
 	}
@@ -113,6 +112,8 @@ public class CategoryAnimator {
 		tvDescription.setVisibility(View.VISIBLE);
 		itemsContainer.setVisibility(View.VISIBLE);
 		divider.setVisibility(View.VISIBLE);
+
+		// Description will be invisible until collapsing animation finished
 		tvDescription.setVisibility(View.INVISIBLE);
 	}
 
@@ -130,8 +131,8 @@ public class CategoryAnimator {
 
 		// Set list alpha
 		float listAlpha = ColorUtilities.getProportionalAlpha(minValue, maxValue, val);
-		float inverseListAlpha = 1.0f - listAlpha;
-		itemsContainer.setAlpha(isExpanding ? inverseListAlpha : listAlpha);
+		float listInverseAlpha = 1.0f - listAlpha;
+		itemsContainer.setAlpha(isExpanding ? listInverseAlpha : listAlpha);
 
 		// Set list height
 		float increment = (float) maxListHeight / maxValue * val;
@@ -142,14 +143,17 @@ public class CategoryAnimator {
 	}
 
 	private void onMainAnimationFinished() {
+		// Set indicator icon and reset its rotation
 		int indicatorRes = isExpanding ? R.drawable.ic_action_arrow_up : R.drawable.ic_action_arrow_down;
 		ivIndicator.setRotation(0);
 		ivIndicator.setImageResource(indicatorRes);
 
+		// Update views visibility
 		AndroidUiHelper.updateVisibility(divider, isExpanding);
 		AndroidUiHelper.updateVisibility(tvDescription, !isExpanding);
 		AndroidUiHelper.updateVisibility(itemsContainer, isExpanding);
 
+		// Items container height to wrap content
 		LayoutParams params = itemsContainer.getLayoutParams();
 		params.height = LayoutParams.WRAP_CONTENT;
 		itemsContainer.setLayoutParams(params);
