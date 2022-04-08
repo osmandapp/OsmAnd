@@ -10,6 +10,13 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="apply_to_existing_points_descr">Apply changes to the existing points of the group or only to new?</string>
+    <string name="apply_to_existing_favorites_descr">Apply changes to the existing favorite points of the group or only to new?</string>
+    <string name="apply_to_existing">Apply to existing</string>
+    <string name="apply_only_to_new_points">Apply only to new points</string>
+    <string name="apply_only_to_new_favorites">Apply only to new favorites</string>
+    <string name="change_default_appearance">Change default appearance</string>
     <string name="routeInfo_horse_scale_name">Difficulty of horse trails</string>
     <string name="routeInfo_horse_scale_description">Render paths according to difficulty of horse trails</string>
     <string name="rendering_attr_horse_scale_common_name">Common</string>

@@ -1230,10 +1230,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			SelectedGpxFile selectedGpxFile = pointFileMap.get(objectInMotion);
 			if (selectedGpxFile != null) {
 				GPXFile gpxFile = selectedGpxFile.getGpxFile();
-				gpxFile.updateWptPt(objectInMotion, position.getLatitude(),
-						position.getLongitude(), System.currentTimeMillis(), objectInMotion.desc,
-						objectInMotion.name, objectInMotion.category, objectInMotion.getColor(),
-						objectInMotion.getIconName(), objectInMotion.getBackgroundType());
+				gpxFile.updateWptPt(objectInMotion, position.getLatitude(),	position.getLongitude(),
+						objectInMotion.desc, objectInMotion.name, objectInMotion.category,
+						objectInMotion.getColor(), objectInMotion.getIconName(), objectInMotion.getBackgroundType());
 				syncGpx(gpxFile);
 				if (gpxFile.showCurrentTrack) {
 					if (callback != null) {

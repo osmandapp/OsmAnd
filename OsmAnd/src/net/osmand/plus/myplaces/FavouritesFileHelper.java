@@ -73,7 +73,7 @@ public class FavouritesFileHelper {
 		}
 		for (WptPt wptPt : res.getPoints()) {
 			FavouritePoint favouritePoint = FavouritePoint.fromWpt(wptPt, app);
-			points.put(FavouritesHelper.getKey(favouritePoint), favouritePoint);
+			points.put(favouritePoint.getKey(), favouritePoint);
 		}
 		return true;
 	}
@@ -98,7 +98,7 @@ public class FavouritesFileHelper {
 			Map<String, FavouritePoint> deletedInMemory = new LinkedHashMap<>();
 			loadGPXFile(getInternalFile(), deletedInMemory);
 			for (FavouritePoint point : points) {
-				deletedInMemory.remove(FavouritesHelper.getKey(point));
+				deletedInMemory.remove(point.getKey());
 			}
 			saveFile(points, getInternalFile());
 			saveExternalFile(points, deletedInMemory.keySet());
@@ -117,8 +117,8 @@ public class FavouritesFileHelper {
 			}
 		}
 		// remove already existing in memory
-		for (FavouritePoint p : points) {
-			all.remove(FavouritesHelper.getKey(p));
+		for (FavouritePoint point : points) {
+			all.remove(point.getKey());
 		}
 		// save favoritePoints from memory in order to update existing
 		points.addAll(all.values());

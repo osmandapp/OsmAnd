@@ -22,10 +22,11 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.plus.myplaces.FavoritesListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
-import net.osmand.data.FavouritePoint.BackgroundType;
+import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.utils.ColorUtilities;
@@ -382,7 +383,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 				loadFavoritesItems(items, helper);
 			} else {
 				addMainScrollItems(items);
-				helper.addListener(new FavouritesHelper.FavoritesListener() {
+				helper.addListener(new FavoritesListener() {
 
 					private void reloadFavoritesItems() {
 						MapActivity mapActivity = (MapActivity) getActivity();
@@ -398,7 +399,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 					}
 
 					@Override
-					public void onFavoriteDataUpdated(@NonNull FavouritePoint favouritePoint) {
+					public void onFavoriteDataUpdated(@NonNull FavouritePoint point) {
 						reloadFavoritesItems();
 					}
 				});
