@@ -318,9 +318,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 	                                    @DrawableRes int settingsIconId, @StringRes int messageId,
 	                                    @NonNull WidgetsPanel widgetPanel) {
 		if (mapInfoControls != null) {
+			int page = widgetPanel.getWidgetPage(key, settings);
 			int order = widgetPanel.getWidgetOrder(key, settings);
 			MapWidgetInfo widgetInfo = mapInfoControls.registerWidget(key, widget, null,
-					settingsIconId, messageId, null, order, widgetPanel);
+					settingsIconId, messageId, null, page, order, widgetPanel);
 			widget.updateColors(calculateTextState());
 			return widgetInfo;
 		} else {
@@ -333,8 +334,13 @@ public class MapInfoLayer extends OsmandMapLayer {
 	                                    @DrawableRes int settingsIconId, @Nullable String message,
 	                                    @NonNull WidgetsPanel widgetPanel, int order) {
 		if (mapInfoControls != null) {
+			int page = widgetPanel.getWidgetPage(key, settings);
+			int savedOrder = widgetPanel.getWidgetOrder(key, settings);
+			if (savedOrder != WidgetsPanel.DEFAULT_ORDER) {
+				order = savedOrder;
+			}
 			MapWidgetInfo reg = mapInfoControls.registerWidget(key, widget, null, settingsIconId,
-					MapWidgetInfo.INVALID_ID, message, order, widgetPanel);
+					MapWidgetInfo.INVALID_ID, message, page, order, widgetPanel);
 			widget.updateColors(calculateTextState());
 			return reg;
 		} else {
@@ -345,9 +351,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public void registerWidget(@NonNull String key, @NonNull MapWidget widget,
 	                           @NonNull WidgetState widgetState, @NonNull WidgetsPanel widgetPanel) {
 		if (mapInfoControls != null) {
+			int page = widgetPanel.getWidgetPage(key, settings);
 			int order = widgetPanel.getWidgetOrder(key, settings);
 			mapInfoControls.registerWidget(key, widget, widgetState, MapWidgetInfo.INVALID_ID,
-					MapWidgetInfo.INVALID_ID, null, order, widgetPanel);
+					MapWidgetInfo.INVALID_ID, null, page, order, widgetPanel);
 			widget.updateColors(calculateTextState());
 		}
 	}

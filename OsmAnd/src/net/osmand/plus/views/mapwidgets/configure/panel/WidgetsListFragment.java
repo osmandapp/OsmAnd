@@ -143,7 +143,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	}
 
 	private void inflatePageItemView(int index, @NonNull LayoutInflater inflater) {
-		View view = inflater.inflate(R.layout.configure_screen_page_item, widgetsContainer, false);
+		View view = inflater.inflate(R.layout.configure_screen_list_item_page, widgetsContainer, false);
 		View topDivider = view.findViewById(R.id.top_divider);
 		TextView pageText = view.findViewById(R.id.page);
 		AndroidUiHelper.updateVisibility(topDivider, index > 0);

@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="add_page">Add page</string>
     <string name="page_number">Page %1$s</string>
     <string name="routeInfo_horse_scale_name">Difficulty of horse trails</string>
     <string name="routeInfo_horse_scale_description">Render paths according to difficulty of horse trails</string>

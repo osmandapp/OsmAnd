@@ -7,17 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.ViewHolder;
-
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -39,13 +28,25 @@ import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ItemType;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ListItem;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.WidgetAdapterListener;
-import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.ButtonViewHolder.ButtonInfo;
+import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.ActionButtonViewHolder.ActionButtonInfo;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.WidgetViewHolder.WidgetUiInfo;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
 
@@ -195,14 +196,17 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 		items.add(new ListItem(ItemType.CARD_TOP_DIVIDER, null));
 		items.add(new ListItem(ItemType.HEADER, getString(R.string.shared_string_visible_widgets)));
 		items.addAll(createWidgetsList());
+		if (dataHolder.getSelectedPanel().isPagingAllowed()) {
+			items.add(new ListItem(ItemType.ADD_PAGE_BUTTON, null));
+		}
 		items.add(new ListItem(ItemType.CARD_DIVIDER, null));
 		items.add(new ListItem(ItemType.HEADER, getString(R.string.shared_string_actions)));
-		items.add(new ListItem(ItemType.BUTTON, new ButtonInfo(
+		items.add(new ListItem(ItemType.ACTION_BUTTON, new ActionButtonInfo(
 				getString(R.string.reset_to_default),
 				R.drawable.ic_action_reset,
 				v -> resetChanges()
 		)));
-		items.add(new ListItem(ItemType.BUTTON, new ButtonInfo(
+		items.add(new ListItem(ItemType.ACTION_BUTTON, new ActionButtonInfo(
 				getString(R.string.copy_from_other_profile),
 				R.drawable.ic_action_copy,
 				v -> copyFromProfile()
@@ -213,43 +217,79 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 	}
 
 	private List<ListItem> createWidgetsList() {
-		List<ListItem> list = new ArrayList<>();
+		List<ListItem> widgetsItems = new ArrayList<>();
 
 		WidgetsPanel selectedPanel = dataHolder.getSelectedPanel();
 		for (MapWidgetInfo widgetInfo : widgetRegistry.getAvailableWidgetsForPanel(selectedAppMode, selectedPanel)) {
 			Map<String, Integer> orders = dataHolder.getOrders();
+			int page = dataHolder.getWidgetPage(widgetInfo.key);
 			Integer order = orders.get(widgetInfo.key);
+			if (page == -1) {
+				page = widgetInfo.pageIndex;
+				dataHolder.addWidgetToPage(widgetInfo.key, page);
+			}
 			if (order == null) {
 				order = widgetInfo.priority;
+				orders.put(widgetInfo.key, order);
 			}
 			WidgetUiInfo info = new WidgetUiInfo();
 			info.key = widgetInfo.key;
 			info.title = widgetInfo.getTitle(app);
 			info.iconId = widgetInfo.getMapIconId(nightMode);
 			info.isActive = widgetInfo.isSelected(selectedAppMode);
+			info.page = page;
 			info.order = order;
 			info.info = widgetInfo;
-			list.add(new ListItem(ItemType.WIDGET, info));
+			widgetsItems.add(new ListItem(ItemType.WIDGET, info));
 		}
-		Collections.sort(list, (o1, o2) -> {
-			int order1 = ((WidgetUiInfo) o1.value).order;
-			int order2 = ((WidgetUiInfo) o2.value).order;
-			return Integer.compare(order1, order2);
+		Collections.sort(widgetsItems, (o1, o2) -> {
+			WidgetUiInfo info1 = ((WidgetUiInfo) o1.value);
+			WidgetUiInfo info2 = ((WidgetUiInfo) o2.value);
+			if (info1 == null || info2 == null) {
+				return 0;
+			} else if (info1.page != info2.page) {
+				return Integer.compare(info1.page, info2.page);
+			}
+			return Integer.compare(info1.order, info2.order);
 		});
-		return list;
+
+		List<ListItem> pagedWidgetsItems = new ArrayList<>();
+
+		for (int page : dataHolder.getPages().keySet()) {
+
+			if (dataHolder.getSelectedPanel().isPagingAllowed()) {
+				pagedWidgetsItems.add(new ListItem(ItemType.PAGE, page));
+			}
+
+			for (ListItem widgetItem : widgetsItems) {
+				int widgetPage = widgetItem.value instanceof WidgetUiInfo
+						? ((WidgetUiInfo) widgetItem.value).page
+						: -1;
+				if (widgetPage == page) {
+					pagedWidgetsItems.add(widgetItem);
+				}
+			}
+		}
+
+		return pagedWidgetsItems;
 	}
 
 	private void applyOrder() {
 		List<ListItem> items = adapter.getItems();
-		List<String> widgetsOrder = new ArrayList<>();
+		Map<Integer, List<String>> pagedOrder = new TreeMap<>();
 		for (ListItem item : items) {
 			if (item.value instanceof WidgetUiInfo) {
 				WidgetUiInfo widgetInfo = (WidgetUiInfo) item.value;
+				List<String> widgetsOrder = pagedOrder.get(widgetInfo.page);
+				if (widgetsOrder == null) {
+					widgetsOrder = new ArrayList<>();
+					pagedOrder.put(widgetInfo.page, widgetsOrder);
+				}
 				widgetsOrder.add(widgetInfo.key);
 			}
 		}
 		WidgetsPanel selectedPanel = dataHolder.getSelectedPanel();
-		selectedPanel.setWidgetsOrder(selectedAppMode, widgetsOrder, settings);
+		selectedPanel.setWidgetsOrder(selectedAppMode, new ArrayList<>(pagedOrder.values()), settings);
 		widgetRegistry.reorderWidgets();
 
 		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();

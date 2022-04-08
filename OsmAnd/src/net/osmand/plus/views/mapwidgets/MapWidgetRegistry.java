@@ -169,12 +169,13 @@ public class MapWidgetRegistry {
 	                                    @DrawableRes int settingsIconId,
 	                                    @StringRes int messageId,
 	                                    @Nullable String message,
-	                                    int priorityOrder,
+	                                    int page,
+	                                    int order,
 	                                    @NonNull WidgetsPanel widgetPanel) {
 		MapWidgetInfo widgetInfo;
 		if (widget instanceof TextInfoWidget) {
-			widgetInfo = new SideWidgetInfo(key, widget, widgetState, settingsIconId, messageId, message,
-					priorityOrder, widgetPanel);
+			widgetInfo = new SideWidgetInfo(key, widget, widgetState, settingsIconId, messageId, message, page,
+					order, widgetPanel);
 			processVisibleModes(widgetInfo);
 			TextInfoWidget textWidget = ((TextInfoWidget) widget);
 			if (message != null) {
@@ -185,8 +186,8 @@ public class MapWidgetRegistry {
 				textWidget.setContentTitle(widgetState.getMenuTitleId());
 			}
 		} else {
-			widgetInfo = new CenterWidgetInfo(key, widget, widgetState, settingsIconId, messageId, message,
-					priorityOrder, widgetPanel);
+			widgetInfo = new CenterWidgetInfo(key, widget, widgetState, settingsIconId, messageId, message, page,
+					order, widgetPanel);
 		}
 
 		getWidgetsForPanel(widgetPanel).add(widgetInfo);
@@ -313,6 +314,7 @@ public class MapWidgetRegistry {
 			Set<MapWidgetInfo> oldOrder = getWidgetsForPanel(panel);
 			Set<MapWidgetInfo> newOrder = new TreeSet<>();
 			for (MapWidgetInfo widgetInfo : oldOrder) {
+				widgetInfo.pageIndex = panel.getWidgetPage(widgetInfo.key, settings);
 				widgetInfo.priority = panel.getWidgetOrder(widgetInfo.key, settings);
 				newOrder.add(widgetInfo);
 			}
