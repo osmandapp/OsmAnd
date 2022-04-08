@@ -327,7 +327,7 @@
     <string name="poi_residential">Área residencial</string>
     <string name="poi_pharmacy">Farmacia</string>
     <string name="poi_hospital">Hospital</string>
-    <string name="poi_doctors">Doctor/a;Doctora;Médico;Médica</string>
+    <string name="poi_doctors">Consultorio médico;Doctor;Doctora;Médico;Médica</string>
     <string name="poi_clinic">Clínica</string>
     <string name="poi_first_aid">Primeros auxilios</string>
     <string name="poi_dentist">Dentista;Odontología</string>
@@ -3467,7 +3467,7 @@
     <string name="poi_checkpoint_type">Tipo de puesto de control</string>
     <string name="poi_checkpoint_hiking">Puesto de control para senderismo</string>
     <string name="poi_checkpoint_type_stamp">Puesto de sellado</string>
-    <string name="poi_checkpoint_type_code">Cartel</string>
+    <string name="poi_checkpoint_type_code">Código</string>
     <string name="poi_checkpoint_type_notebook">Portátil (notebook)</string>
     <string name="poi_checkpoint_type_electronic">Electrónico</string>
     <string name="poi_course">Circuito</string>
@@ -3651,8 +3651,8 @@
     <string name="poi_tourist_bus_yes">Acceso para autobuses turísticos: sí</string>
     <string name="poi_tourist_bus_designated">Acceso para autobuses turísticos: designado</string>
     <string name="poi_tourist_bus_no">Acceso para autobuses turísticos: no</string>
-    <string name="poi_coach_yes">Acceso para autobuses de larga distancia: sí</string>
-    <string name="poi_coach_no">Acceso para autobuses de larga distancia: no</string>
+    <string name="poi_coach_yes">Acceso para autobuses de larga distancia: sí;Acceso para ómnibus: sí</string>
+    <string name="poi_coach_no">Acceso para colectivos de larga distancia: no;Acceso para ómnibus: no</string>
     <string name="poi_ski_yes">Acceso para esquís: sí</string>
     <string name="poi_ski_no">Acceso para esquís: no</string>
     <string name="poi_snowmobile_private">Acceso para motonieves: privado</string>
@@ -4312,4 +4312,20 @@
     <string name="poi_shop_fuel">Venta de combustibles</string>
     <string name="poi_printer_ink">Tinta para impresoras</string>
     <string name="poi_water_sports">Artículos para deportes acuáticos</string>
+    <string name="poi_rice">Arrocería;Venta de arróz</string>
+    <string name="poi_wool">Venta de lana</string>
+    <string name="poi_birds_nest">Nido de pájaros</string>
+    <string name="poi_dovecote">Palomar</string>
+    <string name="poi_fish_pass">Paso de peces</string>
+    <string name="poi_laundry_service_no">No</string>
+    <string name="poi_dry_cleaning_yes">Sí</string>
+    <string name="poi_dry_cleaning_no">No</string>
+    <string name="poi_termite_mound">Montículo de termitas;Hormiguero de termitas</string>
+    <string name="poi_anthill">Hormiguero</string>
+    <string name="poi_board_type_wildlife">Fauna silvestre</string>
+    <string name="poi_board_type_nature">Naturaleza</string>
+    <string name="poi_food_no">Comida: no</string>
+    <string name="poi_laundry_service_filter">Servicio de lavandería</string>
+    <string name="poi_dry_cleaning_filter">Tintorería</string>
+    <string name="poi_laundry_service_yes">Sí</string>
 </resources>

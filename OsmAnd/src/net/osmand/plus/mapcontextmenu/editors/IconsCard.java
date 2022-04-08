@@ -54,13 +54,14 @@ public class IconsCard extends MapBaseCard {
 	private final Map<String, JSONArray> iconsCategories;
 
 	private final String preselectedIconName;
-	private String selectedIconCategory;
+	private String selectedCategory;
 	@DrawableRes
 	private int selectedIconId;
 	@ColorInt
 	private int selectedColor;
 
 	private FlowLayout iconsSelector;
+	private HorizontalChipsView categorySelector;
 
 	@Override
 	public int getCardLayoutId() {
@@ -75,7 +76,7 @@ public class IconsCard extends MapBaseCard {
 		this.lastUsedIcons = fetchLastUsedIcons();
 		this.iconsCategories = collectIconsCategories();
 		this.preselectedIconName = preselectedIconName;
-		this.selectedIconCategory = getInitialCategory(RenderingIcons.getBigIconName(selectedIconId));
+		this.selectedCategory = getInitialCategory(RenderingIcons.getBigIconName(selectedIconId));
 		this.selectedIconId = selectedIconId;
 		this.selectedColor = selectedColor;
 	}
@@ -173,18 +174,14 @@ public class IconsCard extends MapBaseCard {
 			items.add(item);
 		}
 
-		HorizontalChipsView categorySelector = view.findViewById(R.id.icons_categories_selector);
+		categorySelector = view.findViewById(R.id.icons_categories_selector);
 		categorySelector.setItems(items);
 
-		ChipItem selected = categorySelector.getChipById(selectedIconCategory);
+		ChipItem selected = categorySelector.getChipById(selectedCategory);
 		categorySelector.setSelected(selected);
 
 		categorySelector.setOnSelectChipListener(chip -> {
-			selectedIconCategory = chip.id;
-			fillIconsSelector();
-			reselectIcon(selectedIconId, false);
-			categorySelector.notifyDataSetChanged();
-			categorySelector.smoothScrollTo(chip);
+			selectCategory(chip.id);
 			return true;
 		});
 
@@ -196,6 +193,17 @@ public class IconsCard extends MapBaseCard {
 
 		categorySelector.notifyDataSetChanged();
 		categorySelector.scrollTo(selected);
+	}
+
+	private void selectCategory(@NonNull String category) {
+		selectedCategory = category;
+		fillIconsSelector();
+		reselectIcon(selectedIconId, false);
+
+		ChipItem selected = categorySelector.getChipById(selectedCategory);
+		categorySelector.setSelected(selected);
+		categorySelector.notifyDataSetChanged();
+		categorySelector.smoothScrollTo(selected);
 	}
 
 	private void fillIconsSelector() {
@@ -213,7 +221,7 @@ public class IconsCard extends MapBaseCard {
 
 	@NonNull
 	private List<String> getIconNameListToShow() {
-		JSONArray iconJsonArray = iconsCategories.get(selectedIconCategory);
+		JSONArray iconJsonArray = iconsCategories.get(selectedCategory);
 		if (iconJsonArray == null) {
 			return Collections.emptyList();
 		}
@@ -240,17 +248,16 @@ public class IconsCard extends MapBaseCard {
 	private View createIconItemView(@NonNull LayoutInflater inflater, @NonNull String iconName) {
 		View iconItemView = inflater.inflate(R.layout.point_editor_button, iconsSelector, false);
 
-		int iconId = RenderingIcons.getBigIconResourceId(iconName);
-		int validIconId = iconId != 0 ? iconId : DEFAULT_UI_ICON_ID;
-		iconItemView.setTag(validIconId);
+		int iconId = getIconId(iconName);
+		iconItemView.setTag(iconId);
 
 		ImageView icon = iconItemView.findViewById(R.id.icon);
 		AndroidUiHelper.updateVisibility(icon, true);
-		setUnselectedIconColor(icon, validIconId);
+		setUnselectedIconColor(icon, iconId);
 
 		ImageView backgroundCircle = iconItemView.findViewById(R.id.background);
 		setUnselectedBackground(backgroundCircle);
-		backgroundCircle.setOnClickListener(v -> reselectIcon(validIconId, true));
+		backgroundCircle.setOnClickListener(v -> reselectIcon(iconId, true));
 
 		ImageView outline = iconItemView.findViewById(R.id.outline);
 		int outlineColorId = ColorUtilities.getStrokedButtonsOutlineColorId(nightMode);
@@ -310,14 +317,28 @@ public class IconsCard extends MapBaseCard {
 		reselectIcon(iconId, true);
 	}
 
-	public void updateSelectedColor(@ColorInt int newColor) {
+	public void updateSelectedIcon(@ColorInt int newColor, @NonNull String iconName) {
 		selectedColor = newColor;
-		reselectIcon(selectedIconId, false);
+
+		String category = getInitialCategory(iconName);
+		if (Algorithms.stringsEqual(selectedCategory, category)) {
+			int iconId = getIconId(iconName);
+			reselectIcon(iconId, false);
+		} else {
+			selectedIconId = getIconId(iconName);
+			selectCategory(category);
+		}
 	}
 
 	@DrawableRes
 	public int getSelectedIconId() {
 		return selectedIconId;
+	}
+
+	@DrawableRes
+	public int getIconId(@NonNull String iconName) {
+		int iconId = RenderingIcons.getBigIconResourceId(iconName);
+		return iconId != 0 ? iconId : DEFAULT_UI_ICON_ID;
 	}
 
 	@NonNull

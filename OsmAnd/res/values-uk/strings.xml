@@ -1666,7 +1666,7 @@
     <string name="default_speed_system_descr">Вкажіть одиниці вимірювання швидкості.</string>
     <string name="default_speed_system">Одиниці вимірювання швидкості</string>
     <string name="si_nm">Морські милі</string>
-    <string name="si_kmh">Кілометрів за годину</string>
+    <string name="si_kmh">Кілометрів на годину</string>
     <string name="si_mph">Миль на годину</string>
     <string name="si_m_s">Метрів за секунду</string>
     <string name="si_min_km">Хвилин за кілометр</string>

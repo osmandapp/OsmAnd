@@ -2,10 +2,12 @@ package net.osmand.plus.mapcontextmenu.editors;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapmarkers.MapMarker;
 
 public class MapMarkerEditor extends PointEditor {
+
+	public static final String TAG = MapMarkerEditor.class.getSimpleName();
 
 	private MapMarker marker;
 
@@ -20,7 +22,7 @@ public class MapMarkerEditor extends PointEditor {
 
 	@Override
 	public String getFragmentTag() {
-		return MapMarkerEditorFragment.class.getSimpleName();
+		return TAG;
 	}
 
 	public MapMarker getMarker() {

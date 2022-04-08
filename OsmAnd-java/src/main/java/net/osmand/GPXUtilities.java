@@ -186,26 +186,24 @@ public class GPXUtilities {
 		public void removeColor() {
 			getExtensionsToWrite().remove("color");
 		}
+	}
 
-		protected int parseColor(String colorString, int defColor) {
-			if (!Algorithms.isEmpty(colorString)) {
-				if (colorString.charAt(0) == '#') {
-					long color = Long.parseLong(colorString.substring(1), 16);
-					if (colorString.length() <= 7) {
-						color |= 0x00000000ff000000;
-					} else if (colorString.length() != 9) {
-						return defColor;
-					}
-					return (int) color;
-				} else {
-					GPXColor c = GPXColor.getColorFromName(colorString);
-					if (c != null) {
-						return c.color;
-					}
+	public static int parseColor(String colorString, int defColor) {
+		if (!Algorithms.isEmpty(colorString)) {
+			if (colorString.charAt(0) == '#') {
+				try {
+					return Algorithms.parseColor(colorString);
+				} catch (IllegalArgumentException e) {
+					return defColor;
+				}
+			} else {
+				GPXColor gpxColor = GPXColor.getColorFromName(colorString);
+				if (gpxColor != null) {
+					return gpxColor.color;
 				}
 			}
-			return defColor;
 		}
+		return defColor;
 	}
 
 	public static class Elevation {
@@ -498,7 +496,8 @@ public class GPXUtilities {
 		public Copyright copyright = null;
 		public Bounds bounds = null;
 
-		public Metadata() { }
+		public Metadata() {
+		}
 
 		public Metadata(Metadata source) {
 			name = source.name;
@@ -540,7 +539,8 @@ public class GPXUtilities {
 		public String email;
 		public String link;
 
-		public Author() { }
+		public Author() {
+		}
 
 		public Author(Author author) {
 			name = author.name;
@@ -555,7 +555,8 @@ public class GPXUtilities {
 		public String year;
 		public String license;
 
-		public Copyright() { }
+		public Copyright() {
+		}
 
 		public Copyright(Copyright copyright) {
 			author = copyright.author;
@@ -571,7 +572,8 @@ public class GPXUtilities {
 		public double maxlat;
 		public double maxlon;
 
-		public Bounds() { }
+		public Bounds() {
+		}
 
 		public Bounds(Bounds source) {
 			minlat = source.minlat;
@@ -580,7 +582,6 @@ public class GPXUtilities {
 			maxlon = source.maxlon;
 			copyExtensions(source);
 		}
-
 	}
 
 	public static class RouteSegment {
@@ -645,9 +646,52 @@ public class GPXUtilities {
 		}
 	}
 
-	public static class GPXTrackAnalysis {
+	public static class PointsGroup {
+
 		public String name;
-		
+		public String iconName;
+		public String backgroundType;
+		public int color;
+		public int pointsSize;
+
+		public PointsGroup() {
+		}
+
+		public PointsGroup(String name, String iconName, String backgroundType, int color, int pointsSize) {
+			this.name = name;
+			this.color = color;
+			this.iconName = iconName;
+			this.pointsSize = pointsSize;
+			this.backgroundType = backgroundType;
+		}
+
+		@Override
+		public int hashCode() {
+			return Algorithms.hash(name, iconName, backgroundType, color);
+		}
+
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) {
+				return true;
+			}
+			if (o == null || getClass() != o.getClass()) {
+				return false;
+			}
+			PointsGroup that = (PointsGroup) o;
+
+			return color == that.color
+					&& pointsSize == that.pointsSize
+					&& Algorithms.stringsEqual(name, that.name)
+					&& Algorithms.stringsEqual(iconName, that.iconName)
+					&& Algorithms.stringsEqual(backgroundType, that.backgroundType);
+		}
+	}
+
+	public static class GPXTrackAnalysis {
+
+		public String name;
+
 		public float totalDistance = 0;
 		public float totalDistanceWithoutGaps = 0;
 		public int totalTracks = 0;
@@ -708,7 +752,7 @@ public class GPXUtilities {
 		}
 
 		public boolean isBoundsCalculated() {
-			return left !=0 && right != 0 && top != 0 && bottom != 0;
+			return left != 0 && right != 0 && top != 0 && bottom != 0;
 		}
 
 		public List<Elevation> elevationData;
@@ -717,7 +761,6 @@ public class GPXUtilities {
 		public boolean hasElevationData;
 		public boolean hasSpeedData;
 		public boolean hasSpeedInTrack = false;
-		
 
 		public boolean isSpeedSpecified() {
 			return avgSpeed > 0;
@@ -967,7 +1010,7 @@ public class GPXUtilities {
 			//    Averaging speed values is less precise than totalDistanceMoving/timeMoving
 			if (speedCount > 0) {
 				if (timeMoving > 0) {
-					avgSpeed = (float) totalDistanceMoving / (float) timeMoving * 1000f;
+					avgSpeed = totalDistanceMoving / (float) timeMoving * 1000f;
 				} else {
 					avgSpeed = (float) totalSpeedSum / (float) speedCount;
 				}
@@ -1166,7 +1209,7 @@ public class GPXUtilities {
 	private static SplitMetric getDistanceMetric() {
 		return new SplitMetric() {
 
-			private float[] calculations = new float[1];
+			private final float[] calculations = new float[1];
 
 			@Override
 			public double metric(WptPt p1, WptPt p2) {
@@ -1196,8 +1239,8 @@ public class GPXUtilities {
 	}
 
 	private static void splitSegment(SplitMetric metric, SplitMetric secondaryMetric,
-									 double metricLimit, List<SplitSegment> splitSegments,
-									 TrkSegment segment, boolean joinSegments) {
+	                                 double metricLimit, List<SplitSegment> splitSegments,
+	                                 TrkSegment segment, boolean joinSegments) {
 		double currentMetricEnd = metricLimit;
 		double secondaryMetricEnd = 0;
 		SplitSegment sp = new SplitSegment(segment, 0, 0);
@@ -1273,10 +1316,11 @@ public class GPXUtilities {
 	}
 
 	public static class GPXFile extends GPXExtensions {
+
 		public String author;
 		public Metadata metadata = new Metadata();
 		public List<Track> tracks = new ArrayList<>();
-		private List<WptPt> points = new ArrayList<>();
+		private final List<WptPt> points = new ArrayList<>();
 		public List<Route> routes = new ArrayList<>();
 
 		public Exception error = null;
@@ -1295,13 +1339,13 @@ public class GPXUtilities {
 
 		public GPXFile(String title, String lang, String description) {
 			metadata.time = System.currentTimeMillis();
-			if(description != null) {
+			if (description != null) {
 				metadata.getExtensionsToWrite().put("desc", description);
 			}
-			if(lang != null) {
+			if (lang != null) {
 				metadata.getExtensionsToWrite().put("article_lang", lang);
 			}
-			if(title != null) {
+			if (title != null) {
 				metadata.getExtensionsToWrite().put("article_title", title);
 			}
 		}
@@ -1324,22 +1368,6 @@ public class GPXUtilities {
 				}
 			}
 			return points;
-		}
-
-		public Map<String, List<WptPt>> getPointsByCategories() {
-			Map<String, List<WptPt>> res = new HashMap<>();
-			for (WptPt pt : points) {
-				String category = pt.category == null ? "" : pt.category;
-				List<WptPt> list = res.get(category);
-				if (list != null) {
-					list.add(pt);
-				} else {
-					list = new ArrayList<>();
-					list.add(pt);
-					res.put(category, list);
-				}
-			}
-			return res;
 		}
 
 		public boolean isPointsEmpty() {
@@ -1433,16 +1461,15 @@ public class GPXUtilities {
 			return getAnalysis(fileTimestamp, null, null);
 		}
 
-		public GPXTrackAnalysis getAnalysis(long fileTimestamp,
-		                                    Double fromDistance,
-		                                    Double toDistance) {
-			GPXTrackAnalysis g = new GPXTrackAnalysis();
-			g.wptPoints = points.size();
-			g.name = path;
-			g.wptCategoryNames = getWaypointCategories(true);
-			List<SplitSegment> segments = getSplitSegments(g, fromDistance, toDistance);
-			g.prepareInformation(fileTimestamp, segments.toArray(new SplitSegment[0]));
-			return g;
+		public GPXTrackAnalysis getAnalysis(long fileTimestamp, Double fromDistance, Double toDistance) {
+			GPXTrackAnalysis analysis = new GPXTrackAnalysis();
+			analysis.name = path;
+			analysis.wptPoints = points.size();
+			analysis.wptCategoryNames = getWaypointCategories(true);
+
+			List<SplitSegment> segments = getSplitSegments(analysis, fromDistance, toDistance);
+			analysis.prepareInformation(fileTimestamp, segments.toArray(new SplitSegment[0]));
+			return analysis;
 		}
 
 		private List<SplitSegment> getSplitSegments(GPXTrackAnalysis g,
@@ -1631,19 +1658,14 @@ public class GPXUtilities {
 			modifiedTime = System.currentTimeMillis();
 		}
 
-		public void updateWptPt(WptPt pt, double lat, double lon, long time, String description, String name, String category,
-		                        int color) {
-			updateWptPt(pt, lat, lon, System.currentTimeMillis(), description, name, category, color, null, null);
-		}
-
-		public void updateWptPt(WptPt pt, double lat, double lon, long time, String description, String name, String category,
+		public void updateWptPt(WptPt pt, double lat, double lon, String description, String name, String category,
 		                        int color, String iconName, String backgroundType) {
 			int index = points.indexOf(pt);
 			double latAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lat));
 			double lonAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lon));
 			pt.lat = latAdjusted;
 			pt.lon = lonAdjusted;
-			pt.time = time;
+			pt.time = System.currentTimeMillis();
 			pt.desc = description;
 			pt.name = name;
 			pt.category = category;
@@ -1827,19 +1849,21 @@ public class GPXUtilities {
 			return categories;
 		}
 
-		public Map<String, Integer> getWaypointCategoriesWithColors(boolean withDefaultCategory) {
-			Map<String, Integer> categories = new HashMap<>();
-			for (WptPt pt : points) {
-				String category = pt.category == null ? "" : pt.category;
-				int color = pt.category == null ? 0 : pt.getColor();
-				boolean emptyCategory = Algorithms.isEmpty(category);
-				if (!emptyCategory) {
-					Integer existingColor = categories.get(category);
-					if (existingColor == null || (existingColor == 0 && color != 0)) {
-						categories.put(category, color);
-					}
-				} else if (withDefaultCategory) {
-					categories.put(category, 0);
+		public Map<String, PointsGroup> getPointsGroups() {
+			Map<String, PointsGroup> categories = new HashMap<>();
+			for (WptPt wptPt : points) {
+				String category = wptPt.category == null ? "" : wptPt.category;
+				int color = wptPt.category == null ? 0 : wptPt.getColor();
+
+				PointsGroup pointsGroup = categories.get(category);
+				if (pointsGroup == null) {
+					pointsGroup = new PointsGroup(category, wptPt.getIconName(), wptPt.getBackgroundType(), color, 1);
+					categories.put(category, pointsGroup);
+				} else {
+					pointsGroup.pointsSize++;
+				}
+				if (pointsGroup.color == 0 && color != 0) {
+					pointsGroup.color = color;
 				}
 			}
 			return categories;
@@ -2459,16 +2483,12 @@ public class GPXUtilities {
 					String tag = parser.getName();
 					if (extensionReadMode && parse != null && !routePointExtension) {
 						String tagName = tag.toLowerCase();
-						if (routeExtension) {
-							if (tagName.equals("segment")) {
-								RouteSegment segment = parseRouteSegmentAttributes(parser);
-								routeSegments.add(segment);
-							}
-						} else if (typesExtension) {
-							if (tagName.equals("type")) {
-								RouteType type = parseRouteTypeAttributes(parser);
-								routeTypes.add(type);
-							}
+						if (routeExtension && tagName.equals("segment")) {
+							RouteSegment segment = parseRouteSegmentAttributes(parser);
+							routeSegments.add(segment);
+						} else if (typesExtension && tagName.equals("type")) {
+							RouteType type = parseRouteTypeAttributes(parser);
+							routeTypes.add(type);
 						}
 						switch (tagName) {
 							case "routepointextension":
@@ -2477,11 +2497,9 @@ public class GPXUtilities {
 									parse.getExtensionsToWrite().put("offset", routeTrackSegment.points.size() + "");
 								}
 								break;
-
 							case "route":
 								routeExtension = true;
 								break;
-
 							case "types":
 								typesExtension = true;
 								break;
@@ -2706,7 +2724,7 @@ public class GPXUtilities {
 					Object parse = parserState.peek();
 					String tag = parser.getName();
 
-					if (tag.toLowerCase().equals("routepointextension")) {
+					if (tag.equalsIgnoreCase("routepointextension")) {
 						routePointExtension = false;
 					}
 					if (parse != null && tag.equals("extensions")) {
@@ -2777,7 +2795,7 @@ public class GPXUtilities {
 				firstSegment.routeSegments = routeSegments;
 				firstSegment.routeTypes = routeTypes;
 			}
-		gpxFile.addGeneralTrack();
+			gpxFile.addGeneralTrack();
 		} catch (Exception e) {
 			gpxFile.error = e;
 			log.error("Error reading gpx", e); //$NON-NLS-1$
@@ -2920,7 +2938,7 @@ public class GPXUtilities {
 				WptPt oppositeSideProjection = new WptPt(projection);
 				oppositeSideProjection.lon = -oppositeSideProjection.lon;
 				points.addAll(i, Arrays.asList(projection, oppositeSideProjection));
-				i+= 2;
+				i += 2;
 			}
 			i++;
 		}

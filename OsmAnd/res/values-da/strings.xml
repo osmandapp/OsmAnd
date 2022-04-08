@@ -4076,14 +4076,14 @@
     <string name="osmand_cloud_help_descr">Brug for hjælp\? Kontakt os venligst på %1$s</string>
     <string name="osmand_cloud_create_account_descr">Indtast din e-mailadresse, en bekræftelseskode vil blive sendt dertil,
 \nog alle dine data vil blive knyttet til den.</string>
-    <string name="osmand_cloud_login_descr">Indtast den e-mailadresse, du har registreret dig med. Der vil blive sendt en engangskode til den til det næste trin.</string>
+    <string name="osmand_cloud_login_descr">Indtast den e-mailadresse, du har registreret dig med. Der vil blive sendt en engangskode til det næste trin til den.</string>
     <string name="verify_email_address">Bekræft e-mailadressen</string>
     <string name="verify_email_address_descr">Verifikationskode sendt til %1$s. Indtast den venligst i feltet nedenfor.</string>
     <string name="enter_verification_code">Indtast engangsadgangskode</string>
-    <string name="cloud_email_not_registered">Denne e-mailadresse er ikke registreret til OsmAnd Cloud</string>
+    <string name="cloud_email_not_registered">Denne e-mailadresse er ikke registreret med OsmAnd Cloud</string>
     <string name="cloud_email_already_registered">Denne e-mailadresse er allerede registreret.</string>
     <string name="resend_verification_code">Send igen</string>
-    <string name="verification_code_missing">Jeg modtog ikke en verifikationskode</string>
+    <string name="verification_code_missing">Jeg har ikke modtaget en bekræftelseskode</string>
     <string name="verification_code_missing_description">Det kan tage 10 minutter. Brug knappen nedenfor, hvis den ikke er i din spam-mappe.</string>
     <string name="shared_string_offline">Offline</string>
     <string name="shared_string_online">Online</string>

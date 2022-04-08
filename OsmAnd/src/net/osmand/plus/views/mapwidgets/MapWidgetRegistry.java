@@ -4,6 +4,12 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
 import net.osmand.CallbackWithObject;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
@@ -30,6 +36,7 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -38,12 +45,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
-
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 public class MapWidgetRegistry {
 
@@ -78,13 +79,13 @@ public class MapWidgetRegistry {
 	private final Map<WidgetsPanel, Set<MapWidgetInfo>> allWidgets = new HashMap<>();
 	private final Map<ApplicationMode, Set<String>> sideWidgetsVisibilityFromSettings = new LinkedHashMap<>();
 
-	private final StateChangedListener<String> listener;
+	private Set<WidgetsVisibilityListener> visibilityListeners = new HashSet<>();
 
 	public MapWidgetRegistry(OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
 		loadVisibleElementsFromSettings();
-		listener = change -> updateVisibleSideWidgets();
+		StateChangedListener<String> listener = change -> updateVisibleSideWidgets();
 		settings.AVAILABLE_APP_MODES.addListener(listener);
 		settings.MAP_INFO_CONTROLS.addListener(listener);
 	}
@@ -239,6 +240,7 @@ public class MapWidgetRegistry {
 		OsmandPreference<Boolean> visibilityPref = widgetInfo.widget.getWidgetVisibilityPref();
 		if (visibilityPref != null) {
 			visibilityPref.set(!visibilityPref.get());
+			notifyWidgetVisibilityChanged(widgetInfo);
 		} else {
 			ApplicationMode mode = settings.APPLICATION_MODE.get();
 			setVisibility(mode, widgetInfo, visible);
@@ -262,6 +264,27 @@ public class MapWidgetRegistry {
 		}
 		widgetInfo.showHideForAppMode(mode, visible);
 		saveWidgetsVisibilityToSettings(widgetsVisibility);
+		notifyWidgetVisibilityChanged(widgetInfo);
+	}
+
+	public void addWidgetsVisibilityListener(@NonNull WidgetsVisibilityListener visibilityListener) {
+		Set<WidgetsVisibilityListener> visibilityListeners = new HashSet<>(this.visibilityListeners);
+		visibilityListeners.add(visibilityListener);
+		this.visibilityListeners = visibilityListeners;
+	}
+
+	public void removeWidgetsVisibilityListener(@NonNull WidgetsVisibilityListener visibilityListener) {
+		Set<WidgetsVisibilityListener> visibilityListeners = new HashSet<>(this.visibilityListeners);
+		visibilityListeners.remove(visibilityListener);
+		this.visibilityListeners = visibilityListeners;
+	}
+
+	private void notifyWidgetVisibilityChanged(@NonNull MapWidgetInfo widgetInfo) {
+		if (!Algorithms.isEmpty(visibilityListeners)) {
+			for (WidgetsVisibilityListener listener : visibilityListeners) {
+				listener.onWidgetVisibilityChanged(widgetInfo);
+			}
+		}
 	}
 
 	@NonNull
@@ -371,6 +394,17 @@ public class MapWidgetRegistry {
 	}
 
 	@NonNull
+	public Set<MapWidgetInfo> getVisibleWidgets(@NonNull ApplicationMode appMode, @NonNull WidgetsPanel panel) {
+		Set<MapWidgetInfo> visible = new TreeSet<>();
+		for (MapWidgetInfo widget : getWidgetsForPanel(panel)) {
+			if (widget.isSelected(appMode)) {
+				visible.add(widget);
+			}
+		}
+		return visible;
+	}
+
+	@NonNull
 	public Set<MapWidgetInfo> getWidgetsForPanel(@NonNull WidgetsPanel panel) {
 		Set<MapWidgetInfo> widgets = allWidgets.get(panel);
 		if (widgets == null) {
@@ -455,4 +489,9 @@ public class MapWidgetRegistry {
 
 		return -1;
 	}
+
+	public interface WidgetsVisibilityListener {
+		void onWidgetVisibilityChanged(@NonNull MapWidgetInfo widgetInfo);
+	}
+
 }
