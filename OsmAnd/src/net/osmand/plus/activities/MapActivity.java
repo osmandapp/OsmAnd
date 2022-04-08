@@ -299,7 +299,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		});
 		mapView.setAccessibilityActions(new MapAccessibilityActions(this));
 		getMapViewTrackingUtilities().setMapView(mapView);
-		getMapLayers().createAdditionalLayers();
+		getMapLayers().createAdditionalLayers(this);
 
 		createProgressBarForRouting();
 		updateStatusBarColor();

@@ -781,6 +781,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					}
 				}
 			};
+			recordControl.updateInfo(null);
 			recordControl.setOnClickListener(v -> {
 				if (this.mapActivity != null) {
 					if (isRecording()) {
