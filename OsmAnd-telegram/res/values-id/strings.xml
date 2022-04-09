@@ -129,7 +129,7 @@
     <string name="last_update_from_telegram_date">Pembaruan terakhir dari Telegram: %1$s</string>
     <string name="shared_string_export">Ekspor</string>
     <string name="send_report">Kirim laporan</string>
-    <string name="shared_string_off"/>
+    <string name="shared_string_off">Mati</string>
     <string name="mile">mi</string>
     <string name="mile_per_hour">mph</string>
     <string name="foot">kaki</string>
