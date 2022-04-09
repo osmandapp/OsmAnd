@@ -4588,4 +4588,10 @@
 \nDer vil blive anvendt ekstra sanktioner ved trafiksignaler, stopskilte osv.</string>
     <string name="simulation_constant_mode_desc">Simuleringen vil blive udført med valgt, konstant hastighed.</string>
     <string name="simulation_constant_mode_title">Fast hastighed</string>
+    <string name="apply_to_existing">Anvend på eksisterende</string>
+    <string name="apply_to_existing_points_descr">Anvend ændringer på de eksisterende punkter i gruppen eller kun på nye\?</string>
+    <string name="apply_only_to_new_favorites">Anvend kun på nye favoritter</string>
+    <string name="change_default_appearance">Skift standardudseende</string>
+    <string name="apply_to_existing_favorites_descr">Anvend ændringer på gruppens eksisterende favoritpunkter eller kun på nye\?</string>
+    <string name="apply_only_to_new_points">Anvend kun på nye punkter</string>
 </resources>
