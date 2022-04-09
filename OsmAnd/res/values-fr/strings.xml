@@ -2259,7 +2259,7 @@
     <string name="quick_action_add_destination_desc">Bouton pour définir le centre de la carte comme nouvelle destination. L\'ancienne destination deviendra la dernière étape.</string>
     <string name="quick_action_replace_destination_desc">Bouton pour définir le centre de la carte comme nouvelle destination en remplacement de la destination précédente (si elle existe).</string>
     <string name="quick_action_auto_zoom">Zoom automatique de la carte Actif / Inactif</string>
-    <string name="quick_action_auto_zoom_desc">Bouton pour activer ou désactiver le zoom automatique en fonction de votre vitesse.</string>
+    <string name="quick_action_auto_zoom_desc">Bouton pour activer ou désactiver le zoom automatique selon votre vitesse.</string>
     <string name="quick_action_auto_zoom_on">Activer le zoom automatique</string>
     <string name="quick_action_auto_zoom_off">Désactiver le zoom automatique</string>
     <string name="shared_string_paused">Mis en pause</string>
@@ -3648,9 +3648,9 @@
 \n
 \nVous devez faire un choix en fonction de la loi de votre pays.
 \n
-\nSélectionnez %1$s et vous recevrez des alertes et des avertissements sur les radars.
+\nSélectionnez %1$s pour recevoir des alertes et des avertissements sur les radars.
 \n
-\nSélectionnez %2$s. Toutes les données relatives aux radars (alertes, notifications, PI) seront supprimées.</string>
+\nSélectionnez %2$s. Toutes les données relatives aux radars (alertes, notifications, PI) seront supprimées pour cette installation de l’application.</string>
     <string name="keep_active">Garder actif</string>
     <string name="speed_cameras_restart_descr">Redémarrez l\'application pour supprimer les données radars.</string>
     <string name="uninstall_speed_cameras">Désinstaller les radars</string>
@@ -4242,9 +4242,9 @@
 \n
 \nPeut-être que certaines cartes sont absentes.</string>
     <string name="pro_widgets">Widgets Pro</string>
-    <string name="routes_color_by_type">Couleur des itinéraires selon…</string>
+    <string name="routes_color_by_type">Colorer les itinéraires selon…</string>
     <string name="shared_string_relation">Relation</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_description">Couleur selon l\'affiliation au réseau.</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Colorer selon l\'affiliation au réseau.</string>
     <string name="travel_routes">Itinéraires de voyage</string>
     <string name="setting_supported_by_style">Ce paramètre est disponible avec le style de carte \"%1$s\"</string>
     <string name="online_direct_line_maps_link">Vérifier les cartes nécessaires.</string>
@@ -4256,15 +4256,15 @@
     <string name="available_until">Disponible jusqu\'au %1$s</string>
     <string name="shared_string_contributions">Contributions</string>
     <string name="map_updates_are_unavailable_yet">Les mises à jour de cartes ne sont pas disponibles pour l\'instant . :-(</string>
-    <string name="rendering_value_walkingRoutesOSMC_description">Couleur des itinéraires en fonction de leurs couleur locale (si elle est connue d’OpenStreetMap) et du marquage des chemins de randonnée.</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Colorer les itinéraires selon leur couleur locale (si elle est connue d’OpenStreetMap) et du marquage des chemins de randonnée.</string>
     <string name="online_maps_required_descr">Malheureusement, OsmAnd n\'a pas trouvé d\'itinéraire avec vos paramètres.
 \n
 \nPeut-être que certaines cartes sont absentes. Vous pouvez vérifier en ligne, les cartes nécessaires.</string>
     <string name="option_available_only_in_osmand_pro">Disponible avec un abonnement OsmAnd Pro.</string>
     <string name="purchases_feature_desc_pro_widgets">Accédez aux fonctionnalités d\'OsmAnd Pro comme les itinéraires colorés et bien plus encore.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Explorez les offres OsmAnd et trouvez celle qui vous convient.</string>
-    <string name="rendering_value_walkingRoutesOSMCNodes_description">Couleur des itinéraires en fonction du type de réseau (international, régional, local).</string>
-    <string name="walking_route_osmc_description">Colore les itinéraires en fonction de leurs définitions locale (si elle est connue d’OpenStreetMap) et du type d\'itinéraire (international, régional, local).</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Colorer les itinéraires selon le type de réseau (international, régional, local).</string>
+    <string name="walking_route_osmc_description">Colorer les itinéraires selon leur définition locale (si elle est connue d’OpenStreetMap) et du type d\'itinéraire (international, régional, local).</string>
     <string name="backup_error_no_subscription">Aucun abonnement en cours</string>
     <string name="map_updates_for_mappers">Mises à jour des cartes pour les contributeurs OSM</string>
     <string name="benefits_for_contributors_primary_descr">Les contributeurs actifs d\'OpenStreetMap bénéficient des mises à jour horaires et illimitées des cartes.</string>
@@ -4575,4 +4575,11 @@
     <string name="routeInfo_horse_scale_name">Difficulté des sentiers équestres</string>
     <string name="rendering_attr_horse_scale_impossible_name">Impossible</string>
     <string name="rendering_attr_horse_scale_dangerous_name">Dangereux</string>
+    <string name="apply_only_to_new_points">Appliquer seulement aux nouveaux points</string>
+    <string name="apply_only_to_new_favorites">Appliquer seulement aux nouveaux favoris</string>
+    <string name="apply_to_existing">Appliquer à tous les points</string>
+    <string name="apply_to_existing_favorites_descr">Appliquer les modifications à tous les points favoris ou seulement aux nouveaux \?</string>
+    <string name="change_default_appearance">Modifier l’apparence par défaut</string>
+    <string name="apply_to_existing_points_descr">Appliquer les modifications à tous les points du groupe ou seulement aux nouveaux \?</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Chemins de fer légers</string>
 </resources>
