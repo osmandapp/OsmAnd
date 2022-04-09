@@ -3652,7 +3652,7 @@
     <string name="poi_tourist_bus_designated">Acceso para autobuses turísticos: designado</string>
     <string name="poi_tourist_bus_no">Acceso para autobuses turísticos: no</string>
     <string name="poi_coach_yes">Acceso para autobuses de larga distancia: sí;Acceso para ómnibus: sí</string>
-    <string name="poi_coach_no">Acceso para colectivos de larga distancia: no;Acceso para ómnibus: no</string>
+    <string name="poi_coach_no">Acceso para autobuses de larga distancia: no;Acceso para ómnibus: no</string>
     <string name="poi_ski_yes">Acceso para esquís: sí</string>
     <string name="poi_ski_no">Acceso para esquís: no</string>
     <string name="poi_snowmobile_private">Acceso para motonieves: privado</string>
