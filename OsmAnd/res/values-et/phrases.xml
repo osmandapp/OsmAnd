@@ -4242,4 +4242,6 @@
     <string name="poi_dry_cleaning_filter">Keemiline puhastus</string>
     <string name="poi_museum_living_history">Elav ajalugu</string>
     <string name="poi_museum_military">Sõjaline</string>
+    <string name="poi_museum_archaeological">Arheoloogiline</string>
+    <string name="poi_museum_war">Sõda</string>
 </resources>
