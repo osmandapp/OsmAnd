@@ -4211,4 +4211,15 @@
     <string name="desert_render_descr">用于沙漠和其他人口稀少的地区，更加详细。</string>
     <string name="add_new_profile_q">添加新的配置文件“%1$s”？</string>
     <string name="save_heading_descr">录制时将航向保存到每个轨迹点。</string>
+    <string name="apply_to_existing_favorites_descr">将更改应用于组中现有的收藏点，还是仅应用于新收藏点？</string>
+    <string name="apply_only_to_new_points">仅应用于新点</string>
+    <string name="apply_only_to_new_favorites">仅应用于新收藏夹</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">班车路线</string>
+    <string name="map_markers_bar">地图标记栏</string>
+    <string name="shared_string_visible_widgets">可见小部件</string>
+    <string name="top_widgets_panel">顶部面板</string>
+    <string name="apply_to_existing_points_descr">将更改应用于组内现有的点，还是只应用于新的？</string>
+    <string name="apply_to_existing">应用于已存在的</string>
+    <string name="change_default_appearance">更改默认外观</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">无轨电车线路</string>
 </resources>
