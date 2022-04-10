@@ -175,4 +175,7 @@
     <string name="favorite_home_category">ᱚᱲᱟᱜ</string>
     <string name="favorite_friends_category">ᱜᱟᱛᱮᱠᱚ</string>
     <string name="search_activity">ᱥᱮᱸᱫᱽᱨᱟ</string>
+    <string name="app_mode_bus">ᱵᱚᱥ</string>
+    <string name="app_mode_train">ᱴᱨᱮᱱ</string>
+    <string name="current_track">ᱱᱤᱛᱚᱜᱟᱜ ᱦᱚᱨ</string>
 </resources>
