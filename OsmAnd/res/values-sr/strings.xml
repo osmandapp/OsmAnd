@@ -4577,4 +4577,10 @@
     <string name="rendering_attr_showRunningRoutes_description">Приказ активних рута</string>
     <string name="simulation_preview_mode_title">Режим брзог прегледа</string>
     <string name="speed_mode">Режим брзине</string>
+    <string name="apply_only_to_new_points">Применити само на нове тачке</string>
+    <string name="apply_to_existing_favorites_descr">Применити промене на постојеће омиљене тачке групе или само на нове\?</string>
+    <string name="apply_to_existing">Применити на постојеће</string>
+    <string name="apply_only_to_new_favorites">Примени само на нове омиљене</string>
+    <string name="change_default_appearance">Промените подразумевани изглед</string>
+    <string name="apply_to_existing_points_descr">Применити промене на постојеће тачке групе или само на нове\?</string>
 </resources>
