@@ -40,6 +40,7 @@ public class OpeningHoursParser {
 	private static boolean twelveHourFormatting;
 	private static DateFormat twelveHourFormatter;
 	private static DateFormat twelveHourFormatterAmPm;
+	private static boolean rtlLocale;
 
 	static {
 		DateFormatSymbols dateFormatSymbols = DateFormatSymbols.getInstance(Locale.US);
@@ -69,6 +70,13 @@ public class OpeningHoursParser {
 				: DateFormatSymbols.getInstance(locale);
 		localMothsStr = dateFormatSymbols.getShortMonths();
 		localDaysStr = getLettersStringArray(dateFormatSymbols.getShortWeekdays(), 3);
+		rtlLocale = isRtl(locale == null ? Locale.US : locale);
+	}
+
+	private static boolean isRtl(Locale locale) {
+		String lang = locale.getLanguage();
+		List<String> rtl = Arrays.asList("iw", "ar", "fa", "ur");
+		return rtl.contains(lang);
 	}
 
 	public static void setTwelveHourFormattingEnabled(boolean enabled, Locale locale) {
@@ -80,7 +88,7 @@ public class OpeningHoursParser {
 
 	private static void initTwelveHourFormatters(Locale locale) {
 		twelveHourFormatter = new SimpleDateFormat("h:mm", locale);
-		twelveHourFormatterAmPm = new SimpleDateFormat("h:mm a", locale);
+		twelveHourFormatterAmPm = DateFormat.getTimeInstance(DateFormat.SHORT, locale);
 		TimeZone timeZone = TimeZone.getTimeZone("UTC");
 		twelveHourFormatter.setTimeZone(timeZone);
 		twelveHourFormatterAmPm.setTimeZone(timeZone);
@@ -2240,14 +2248,21 @@ public class OpeningHoursParser {
 		int endHour = (endMinute / 60) % 24;
 		boolean sameDayPart = Math.max(startHour, endHour) < 12 || Math.min(startHour, endHour) >= 12;
 		if (twelveHourFormatting && sameDayPart) {
-			formatTime(startMinute, stringBuilder, false);
+			boolean amPmOnLeft = isAmPmOnLeft(startMinute);
+			formatTime(startMinute, stringBuilder, amPmOnLeft);
 			stringBuilder.append("-");
-			formatTime(endMinute, stringBuilder, true);
+			formatTime(endMinute, stringBuilder, !amPmOnLeft);
 		} else {
 			formatTime(startMinute, stringBuilder);
 			stringBuilder.append("-");
 			formatTime(endMinute, stringBuilder);
 		}
+	}
+
+	private static boolean isAmPmOnLeft(int startMinute) {
+		StringBuilder sb = new StringBuilder();
+		formatTime(startMinute, sb);
+		return (!Character.isDigit(sb.charAt(0)) || rtlLocale);
 	}
 
 	private static void formatTime(int minutes, StringBuilder sb) {
