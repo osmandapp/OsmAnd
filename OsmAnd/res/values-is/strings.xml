@@ -4494,7 +4494,7 @@
     <string name="shared_string_used">Notað</string>
     <string name="files_with_route_restrictions">Skrár með takmörkunum leiða</string>
     <string name="track_file">Ferilskrá</string>
-    <string name="save_track_to_gpx_descrp">Byrja skráningu ferils sjálfvirkt á meðan leiðsögn stendur. Þegar henni er lokið vistast ferillinn sjálfkrafa.</string>
+    <string name="save_track_to_gpx_descrp">Byrja skráningu ferils sjálfvirkt á meðan leiðsögn stendur og vista síðan ferillinn sjálfkrafa.</string>
     <string name="rendering_attr_seabedDetail_description">Viðbótar-textaupplýsingar um skilgreiningar á yfirborði sjávarbotns (surface_qualification), samsettar gerðir yfirborðs, flokkar og flokkunarfræði lífríkis (marhálmur eða grös)</string>
     <string name="rendering_value_omit_name">Sleppa</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
@@ -4518,6 +4518,6 @@
     <string name="navigate_point_format_swiss_grid_plus">Svissneska hnitanetið (CH1903+)</string>
     <string name="please_provide_group_name_message">Gefðu hópnum eitthvað heiti.</string>
     <string name="quick_action_add_route_descr">Hnappur til að byrja leið af miðjum skjánum.</string>
-    <string name="gpx_no_routes_descr">Þú getur notað \"%1$s\" verkfærið til að bæta leið inn í skrá.</string>
+    <string name="gpx_no_routes_descr">Þú getur notað \"%1$s\" verkfærið til að vista leiðina inn í skrá.</string>
     <string name="gpx_no_routes_title">Það eru engar leiðir</string>
 </resources>
