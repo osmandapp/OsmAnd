@@ -137,6 +137,7 @@ public class LocaleHelper {
 	}
 
 	public void updateOpeningHoursParser(boolean enabled, @NonNull Locale locale) {
+		OpeningHoursParser.initLocalStrings(locale);
 		OpeningHoursParser.setTwelveHourFormattingEnabled(enabled, locale);
 	}
 
