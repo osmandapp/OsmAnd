@@ -35,6 +35,7 @@ import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.util.Algorithms;
 
+import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -58,8 +59,9 @@ public class OsmAndFormatter {
 	private static final int MIN_DURATION_FOR_DATE_FORMAT = 48 * 60 * 60;
 	private static final DecimalFormat fixed2 = new DecimalFormat("0.00");
 	private static final DecimalFormat fixed1 = new DecimalFormat("0.0");
-	private static final SimpleDateFormat FULL_TIME_OF_DAY_FORMAT = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
-	private static final SimpleDateFormat SIMPLE_TIME_OF_DAY_FORMAT = new SimpleDateFormat("HH:mm", Locale.getDefault());
+
+	private static boolean twelveHoursFormat = false;
+	private static TimeFormatter fullTimeFormatter;
 	private static final String[] localDaysStr = getLettersStringArray(DateFormatSymbols.getInstance().getShortWeekdays(), 3);
 
 	public static final float MILS_IN_DEGREE = 17.777778f;
@@ -83,10 +85,16 @@ public class OsmAndFormatter {
 	private static final char EAST = 'E';
 
 	static {
+		setTwelveHoursFormatting(false, Locale.getDefault());
 		fixed2.setMinimumFractionDigits(2);
 		fixed1.setMinimumFractionDigits(1);
 		fixed1.setMinimumIntegerDigits(1);
 		fixed2.setMinimumIntegerDigits(1);
+	}
+
+	public static void setTwelveHoursFormatting(boolean setTwelveHoursFormat, @NonNull Locale locale) {
+		twelveHoursFormat = setTwelveHoursFormat;
+		fullTimeFormatter = new TimeFormatter(locale, "H:mm:ss", "h:mm:ss a");
 	}
 
 	public static String getFormattedDuration(int seconds, @NonNull OsmandApplication app) {
@@ -137,7 +145,7 @@ public class OsmAndFormatter {
 	public static String getFormattedFullTime(long millis) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis(millis);
-		return FULL_TIME_OF_DAY_FORMAT.format(calendar.getTime());
+		return fullTimeFormatter.format(calendar.getTime(), twelveHoursFormat);
 	}
 
 	public static String getFormattedTime(long seconds, boolean useCurrentTime) {
@@ -147,17 +155,12 @@ public class OsmAndFormatter {
 		} else {
 			calendar.setTimeInMillis(seconds * 1000);
 		}
-		if (isSameDay(calendar, Calendar.getInstance())) {
-			return SIMPLE_TIME_OF_DAY_FORMAT.format(calendar.getTime());
-		} else {
-			return SIMPLE_TIME_OF_DAY_FORMAT.format(calendar.getTime()) + " " + localDaysStr[calendar.get(Calendar.DAY_OF_WEEK)];
+		Date date = calendar.getTime();
+		String formattedTime = fullTimeFormatter.format(date, false);
+		if (!isSameDay(calendar, Calendar.getInstance())) {
+			formattedTime += " " + localDaysStr[calendar.get(Calendar.DAY_OF_WEEK)];
 		}
-	}
-
-	public static String getFormattedTimeShort(long seconds) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTimeInMillis(seconds * 1000);
-		return SIMPLE_TIME_OF_DAY_FORMAT.format(calendar.getTime());
+		return formattedTime;
 	}
 
 	public static String getFormattedDate(Context context, long milliseconds) {
@@ -765,6 +768,22 @@ public class OsmAndFormatter {
 			return separateWithSpace
 					? context.getString(R.string.ltr_or_rtl_combine_via_space, value, unit)
 					: new MessageFormat("{0}{1}").format(new Object[] {value, unit});
+		}
+	}
+
+	private static class TimeFormatter {
+
+		private final DateFormat simpleTimeFormat;
+		private final DateFormat amPmTimeFormat;
+
+		public TimeFormatter(@NonNull Locale locale, @NonNull String pattern, @NonNull String amPmPattern) {
+			simpleTimeFormat = new SimpleDateFormat(pattern, locale);
+			amPmTimeFormat = new SimpleDateFormat(amPmPattern, locale);
+		}
+
+		public String format(@NonNull Date date, boolean twelveHoursFormat) {
+			DateFormat timeFormat = twelveHoursFormat ? amPmTimeFormat : simpleTimeFormat;
+			return timeFormat.format(date);
 		}
 	}
 }

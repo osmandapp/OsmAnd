@@ -682,8 +682,9 @@ public class TrackDetailsMenu {
 			}
 		});
 
+		Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
 		boolean useHours = analysis.timeSpan != 0 && analysis.timeSpan / HOUR_IN_MILLIS > 0;
-		GpxMarkerView markerView = new GpxMarkerView(mapActivity, analysis.startTime, useHours);
+		GpxMarkerView markerView = new GpxMarkerView(themedContext, analysis.startTime, useHours);
 		GpxUiHelper.setupGPXChart(chart, markerView, 24, 16, true);
 
 		List<ILineDataSet> dataSets = new ArrayList<>();

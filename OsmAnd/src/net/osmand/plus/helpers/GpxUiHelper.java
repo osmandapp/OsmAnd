@@ -1292,11 +1292,11 @@ public class GpxUiHelper {
 		}
 	}
 
-	private static float setupXAxisTimeOfDay(XAxis xAxis, final long startTime) {
+	private static float setupXAxisTimeOfDay(@NonNull XAxis xAxis, long startTime) {
 		xAxis.setGranularity(1f);
-		xAxis.setValueFormatter((value, axis) -> {
-			long seconds = (long) (startTime / 1000 + value);
-			return OsmAndFormatter.getFormattedFullTime(seconds);
+		xAxis.setValueFormatter((seconds, axis) -> {
+			long time = startTime + (long) (seconds * 1000);
+			return OsmAndFormatter.getFormattedFullTime(time);
 		});
 		return 1f;
 	}
