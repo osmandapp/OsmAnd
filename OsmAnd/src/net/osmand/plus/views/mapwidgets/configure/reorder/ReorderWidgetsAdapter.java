@@ -190,17 +190,28 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 			return;
 		}
 
-		int movedWidgets = moveWidgetsToPreviousPage(pageToDelete);
+		moveWidgetsToPreviousPage(pageToDelete);
 		dataHolder.deletePage(pageToDelete);
 
 		items.remove(position);
+		List<Integer> changedPageItems = new ArrayList<>();
+		for (int i = position; i < getItemCount(); i++) {
+			ListItem listItem = items.get(i);
+			if (listItem.type == ItemType.PAGE) {
+				int pageIndex = ((int) listItem.value);
+				items.set(i, new ListItem(ItemType.PAGE, pageIndex - 1));
+				changedPageItems.add(i);
+			}
+		}
+
 		notifyItemRemoved(position);
-		notifyItemRangeChanged(position, movedWidgets);
+		for (int itemIndex : changedPageItems) {
+			notifyItemChanged(itemIndex);
+		}
 	}
 
-	private int moveWidgetsToPreviousPage(int pageToMoveFrom) {
+	private void moveWidgetsToPreviousPage(int pageToMoveFrom) {
 		int previousPage = pageToMoveFrom - 1;
-		int movedWidgets = 0;
 		int previousPageSize = 0;
 		for (ListItem item : items) {
 			if (item.value instanceof WidgetUiInfo) {
@@ -211,15 +222,12 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 					widgetUiInfo.page = previousPage;
 					widgetUiInfo.order = previousPageSize;
 					previousPageSize++;
-					movedWidgets++;
 
 					dataHolder.addWidgetToPage(widgetUiInfo.key, widgetUiInfo.page);
 					dataHolder.getOrders().put(widgetUiInfo.key, widgetUiInfo.order);
 				}
 			}
 		}
-
-		return movedWidgets;
 	}
 
 	private void addPage() {

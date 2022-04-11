@@ -71,10 +71,9 @@ public class WidgetsDataHolder {
 
 	public int getWidgetPage(@NonNull String widgetId) {
 		for (Entry<Integer, List<String>> entry : pages.entrySet()) {
-			int page = entry.getKey();
 			List<String> widgetsOfPage = entry.getValue();
 			if (widgetsOfPage.contains(widgetId)) {
-				return page;
+				return entry.getKey();
 			}
 		}
 		return -1;

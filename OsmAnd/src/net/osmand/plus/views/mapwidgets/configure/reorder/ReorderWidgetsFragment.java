@@ -253,13 +253,17 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 			return Integer.compare(info1.order, info2.order);
 		});
 
-		List<ListItem> pagedWidgetsItems = new ArrayList<>();
 
+		boolean pagingAllowed = dataHolder.getSelectedPanel().isPagingAllowed();
+		return pagingAllowed ? getPagedWidgetItems(widgetsItems) : widgetsItems;
+	}
+
+	@NonNull
+	private List<ListItem> getPagedWidgetItems(@NonNull List<ListItem> widgetsItems) {
+		List<ListItem> pagedWidgetsItems = new ArrayList<>();
 		for (int page : dataHolder.getPages().keySet()) {
 
-			if (dataHolder.getSelectedPanel().isPagingAllowed()) {
-				pagedWidgetsItems.add(new ListItem(ItemType.PAGE, page));
-			}
+			pagedWidgetsItems.add(new ListItem(ItemType.PAGE, page));
 
 			for (ListItem widgetItem : widgetsItems) {
 				int widgetPage = widgetItem.value instanceof WidgetUiInfo
@@ -270,7 +274,6 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 				}
 			}
 		}
-
 		return pagedWidgetsItems;
 	}
 
