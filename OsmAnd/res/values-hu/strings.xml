@@ -2179,7 +2179,7 @@
     <string name="routing_attr_driving_style_balance_name">Kiegyensúlyozott</string>
     <string name="routing_attr_driving_style_safety_name">Mellékutak előnyben részesítése</string>
     <string name="relief_smoothness_factor_descr">Előnyben részesített terep: sík vagy dombos.</string>
-    <string name="shared_string_slope">Lejtviszony</string>
+    <string name="shared_string_slope">Lejtés</string>
     <string name="add_new_folder">Új mappa hozzáadása</string>
     <string name="points_delete_multiple_succesful">Pont(ok) törölve.</string>
     <string name="points_delete_multiple">Töröl %1$d pontot\?</string>
@@ -3353,7 +3353,7 @@
     <string name="clear_recorded_data_warning">Törli a felvett adatokat\?</string>
     <string name="importing_from">Adatok importálása innen: %1$s</string>
     <string name="shared_string_importing">Importálás</string>
-    <string name="slope_read_more">A lejtviszonyról olvashat itt: %1$s.</string>
+    <string name="slope_read_more">A lejtési viszonyokról itt olvashat: %1$s.</string>
     <string name="shared_string_rendering_style">Megjelenítés stílusa</string>
     <string name="shared_string_routing">Útvonaltervezés</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
@@ -3375,10 +3375,10 @@
     <string name="replace_all">Az összes cseréje</string>
     <string name="shared_string_terrain">Domborzat</string>
     <string name="hillshade_description">A domborzatárnyékolás réteg sötét árnyalatokkal különbözteti meg a lejtőket, csúcsokat és a síkságokat.</string>
-    <string name="slope_description">A lejtviszony színezéssel jeleníti meg a terep meredekségét.</string>
+    <string name="slope_description">A lejtésviszony színezéssel jeleníti meg a terep meredekségét.</string>
     <string name="terrain_slider_description">Állítsa be a legkisebb és legnagyobb nagyítási szintet, amelyen a réteg megjelenjen.</string>
     <string name="hillshade_download_description">A domborzatárnyékolás térképen való megjelenítéséhez további térképek szükségesek.</string>
-    <string name="slope_download_description">További térképek szükségesek a lejtviszonyok térképen való megjelenítéséhez.</string>
+    <string name="slope_download_description">A lejtési viszonyok térképen való megjelenítéséhez további térképek szükségesek.</string>
     <string name="shared_string_transparency">Áttetszőség</string>
     <string name="shared_string_zoom_levels">Nagyítási szintek</string>
     <string name="shared_string_legend">Jelmagyarázat</string>
@@ -3389,7 +3389,7 @@
     <string name="select_distance_route_will_recalc">Jelölje ki a távolságot, amelytől kezdve az útvonal újra lesz számítva.</string>
     <string name="recalculate_route_distance_promo">Az útvonal újraszámításra kerül, amennyiben az útvonal és a jelenlegi helyzet közötti távolság nagyobb, mint a kiválasztott érték.</string>
     <string name="n_items_of_z">%1$s a %2$s-ból</string>
-    <string name="download_slope_maps">Lejtviszonyok</string>
+    <string name="download_slope_maps">Lejtési viszonyok</string>
     <string name="quick_action_terrain_descr">Váltógomb, amely a térképen megjeleníti vagy elrejti a domborzati réteget.</string>
     <string name="delete_description">Leírás törlése</string>
     <string name="add_description">Leírás hozzáadása</string>
@@ -3400,7 +3400,7 @@
     <string name="shared_string_square">Négyzet</string>
     <string name="shared_string_min">Min</string>
     <string name="clear_recorded_data">Felvett adatok törlése</string>
-    <string name="terrain_empty_state_text">Megjeleníti a térképen a domborzatárnyékolást vagy a lejtviszonyokat. Ezekről a térképfajtákról a honlapunkon olvashat.</string>
+    <string name="terrain_empty_state_text">Megjeleníti a térképen a domborzatárnyékolást vagy a lejtési viszonyokat. Ezekről a térképfajtákról a honlapunkon olvashat.</string>
     <string name="app_mode_ski_touring">Túrasízés</string>
     <string name="app_mode_ski_snowmobile">Motoros szán</string>
     <string name="custom_osmand_plugin">Egyéni OsmAnd bővítmény</string>
@@ -3969,7 +3969,7 @@
     <string name="uploaded_count">%1$d / %2$d feltöltve</string>
     <string name="toast_select_edits_for_upload">Szerkesztések kijelölése feltöltéshez</string>
     <string name="activity_type_snowmobile_name">Motoros szán</string>
-    <string name="hillshade_slope_contour_lines">Domborzatárnyékolás / lejtviszony / szintvonalak</string>
+    <string name="hillshade_slope_contour_lines">Domborzatárnyékolás / lejtés / szintvonalak</string>
     <string name="open_place_reviews_plugin_description">Küldjön fényképeket, értékeléseket és linkeket nyilvános helyekről (pl. éttermekről, szállodákról, múzeumokról és útpontokról) nyílt adatként: https://openplacereviews.org/data/.
 \n
 \nTovábbi információ: https://openplacereviews.org</string>
@@ -4076,7 +4076,7 @@
     <string name="srtm_download_list_help_message">Az OsmAnd méterben és lábban adja meg a szintvonalak magasságát. A mértékegység módosításához újra le kell töltenie a fájlt.</string>
     <string name="shared_string_feet">láb</string>
     <string name="srtm_unit_format">Szintvonalak mértékegysége</string>
-    <string name="route_line_use_gradient_coloring">Az útvonal a lejtviszonyok szerint színezett.</string>
+    <string name="route_line_use_gradient_coloring">Az útvonal a lejtési viszonyok szerint van színezve.</string>
     <string name="shared_string_min_height">Legkisebb magasság</string>
     <string name="shared_string_max_height">Legnagyobb magasság</string>
     <string name="use_system_language">A rendszer nyelvének használata</string>
@@ -4251,7 +4251,7 @@
     <string name="promo_subscription">Promóciós előfizetés</string>
     <string name="track_has_no_needed_data">A nyomvonal nem tartalmazza a szükséges adatokat.</string>
     <string name="backup_error_subscription_was_expired_descr">Az OsmAnd Pro előfizetése lejárt; a biztonsági mentés használatához meg kell újítania. A felhőből továbbra is visszaállíthatja az adatokat.</string>
-    <string name="contour_lines_hillshades_slope">Szintvonalak, domborzat, lejtviszony</string>
+    <string name="contour_lines_hillshades_slope">Szintvonalak, domborzat, lejtés</string>
     <string name="backup_deleting_all_data">Minden adat törlődik…</string>
     <string name="backup_deleted_all_data">Minden adat törölve.</string>
     <string name="backup_deleting_all_data_descr">Kérjük, várjon, amíg az OsmAnd törli adatait a felhőből. Az eszközön lévő összes adat érintetlenül marad.</string>
@@ -4307,7 +4307,7 @@
     <string name="routeInfo_roadClass_description">Útvonal vagy nyomvonal színezése az út besorolása szerint.</string>
     <string name="routeInfo_winter_ice_road_description">Útvonal vagy nyomvonal színezése a téli használatra való besorolása szerint.</string>
     <string name="no_items_of_type_message">Nincs ilyen típusú eleme</string>
-    <string name="routeInfo_tracktype_description">Útvonal vagy nyomvonal színezése a felületi összetétele alapján. Alkalmazása a főleg burkolatlan utakból álló úthálózat esetében jellemző.</string>
+    <string name="routeInfo_tracktype_description">Útvonal vagy nyomvonal színezése a felület összetétele alapján. Főleg burkolatlan utakból álló hálózatnál célszerű alkalmazni.</string>
     <string name="routeInfo_smoothness_description">Utak/gyalogutak osztályozása, hogy mennyire használhatók kerekes járművekkel, különös tekintettel az útfelszín egyenletességére/simaságára.</string>
     <string name="add_group_to_markers">Csoport hozzáadása a jelölők listájához</string>
     <string name="remove_group_from_markers">Csoport eltávolítása a jelölők listájáról</string>
@@ -4496,7 +4496,7 @@
     <string name="track_file">Nyomvonalfájl</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme címkék</string>
     <string name="waypoint_appearance">Útpont megjelenése</string>
-    <string name="always_ask_waypoint_appearance_description">Ha erre a műveletre koppint, megnyílik az „Útpont hozzáadása” képernyő, ahol módosíthatja a nevet és a megjelenést.</string>
+    <string name="always_ask_waypoint_appearance_description">Erre a műveletre koppintva megnyílik az „Útpont hozzáadása” képernyő, ahol módosíthatja a nevet és a megjelenést.</string>
     <string name="track_file_description">Ha erre a műveletre koppint, megjelenik egy kijelölési párbeszédpanel az elérhető nyomvonalakkal.</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_value_category_name">Kategória</string>
@@ -4514,70 +4514,70 @@
     <string name="shared_string_reading_file">Fájl olvasása…</string>
     <string name="all_groups">Minden csoport</string>
     <string name="list_of_groups">Csoportok listája</string>
-    <string name="points_selection_descr">Változások elvetése és bezárás\?</string>
-    <string name="exit_import_descr">Kilépés a változások mentése nélkül\?</string>
+    <string name="points_selection_descr">Módosítások elvetése és bezárás\?</string>
+    <string name="exit_import_descr">Kilépés a módosítások mentése nélkül\?</string>
     <string name="exit_import">Kilép\?</string>
     <string name="import_tracks_descr">„%1$s” %2$s különálló nyomvonalat tartalmaz. Válassza ki az importálandókat.</string>
     <string name="quick_action_add_route_descr">Gomb, amellyel a képernyő közepéről lehet útvonalat indítani.</string>
-    <string name="location_source_descr">Alapértelmezés szerint a Google Playről telepített OsmAnd a(z) %1$s segítségével határozza meg a pozíciót.
+    <string name="location_source_descr">Alapértelmezés szerint a Google Playről telepített OsmAnd a következő segítségével határozza meg a pozíciót: %1$s.
 \n
-\nHa ez nem elég pontos, vagy az eszközt %2$s nélkül használja, próbáljon meg átváltani erre: \"%3$s\"</string>
+\nHa ez pontatlan, vagy az eszközt %2$s nélkül használja, próbáljon meg átváltani erre: „%3$s”.</string>
     <string name="location_source">Helyadatok forrása</string>
     <string name="shared_string_shape">Alak</string>
     <string name="default_appearance_desc">Az alapértelmezett szín, ikon és alak a csoporthoz hozzáadott kedvenc pontokra lesz érvényes.</string>
     <string name="default_appearance">Alapértelmezett megjelenés</string>
     <string name="edit_category">Kategória szerkesztése</string>
-    <string name="stop_download_desc">A letöltés nincs kész. Ha most megszakítja azt, csak a csempék egy része lesz megtekinthető.</string>
+    <string name="stop_download_desc">A letöltés nincs kész. Ha most megszakítja, akkor csak a csempék egy része lesz megtekinthető.</string>
     <string name="stop_download">Letöltés leállítása</string>
     <string name="stop_and_exit">Leállítás és kilépés</string>
     <string name="shared_string_complete">kész</string>
     <string name="estimated_download_size">Becsült letöltési méret</string>
     <string name="number_of_tiles">Csempék száma</string>
-    <string name="zoom_levels_difference_description">A nagyítási szintek közötti nagy különbség növelheti a letöltött adatok méretét.</string>
+    <string name="zoom_levels_difference_description">A nagyítási szintek közötti nagy különbség növelheti a letöltött adat mennyiségét.</string>
     <string name="move_map_to_select_area">Mozgassa a térképet a kívánt terület kijelöléséhez.</string>
     <string name="rendering_attr_showFitnessTrails_description">Erdei tornapályák megjelenítése</string>
     <string name="rendering_attr_showFitnessTrails_name">Erdei tornapályák</string>
     <string name="rendering_attr_showRunningRoutes_description">Futóútvonalak megjelenítése</string>
     <string name="rendering_attr_showRunningRoutes_name">Futóútvonalak</string>
-    <string name="routeInfo_horse_scale_description">Útvonalak kiszámolása a lovas utak nehézségi fokának megfelelően</string>
-    <string name="rendering_attr_horse_scale_common_name">Átlagos</string>
+    <string name="routeInfo_horse_scale_description">Ösvények megjelenítése a lovas utak nehézségi foka szerint</string>
+    <string name="rendering_attr_horse_scale_common_name">Könnyű</string>
     <string name="rendering_attr_horse_scale_demanding_name">Figyelmet igénylő</string>
-    <string name="routing_attr_carriage_restrictions_name">Szállítási korlátozások</string>
-    <string name="rendering_attr_showTramRoutes_name">Villamos útvonalak</string>
-    <string name="rendering_attr_showFunicularRoutes_name">Sikló útvonalak</string>
-    <string name="rendering_attr_showBusRoutes_name">Busz útvonalak</string>
-    <string name="rendering_attr_showTrolleybusRoutes_name">Trolibusz útvonalak</string>
-    <string name="rendering_attr_showLightRailRoutes_name">HÉV útvonalak</string>
-    <string name="rendering_attr_showMonorailRoutes_name">Egysínű vasút útvonalak</string>
-    <string name="rendering_attr_showShareTaxiRoutes_name">Ingajárat útvonalak</string>
+    <string name="routing_attr_carriage_restrictions_name">Állati erővel vont jármű behajtási korlátozásai</string>
+    <string name="rendering_attr_showTramRoutes_name">Villamosvonalak</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Siklóvonalak</string>
+    <string name="rendering_attr_showBusRoutes_name">Buszvonalak</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Trolibuszvonalak</string>
+    <string name="rendering_attr_showLightRailRoutes_name">HÉV-vonalak</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Egysínűvasút-vonalak</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">Iránytaxi-vonalak</string>
     <string name="shared_string_visible_widgets">Látható widgetek</string>
     <string name="top_widgets_panel">Felső panel</string>
     <string name="bottom_widgets_panel">Alsó panel</string>
     <string name="shared_string_item">Elem</string>
-    <string name="configure_screen_widgets_descr">A widgetek hozzáadásához vagy átrendezéséhez válasszon képernyőoldalt.</string>
-    <string name="osm_carto_render_descr">Hasonló az eredeti OSM webhelyen használt OpenStreetMap féle térképstílushoz</string>
+    <string name="configure_screen_widgets_descr">A widgetek hozzáadásához vagy átrendezéséhez jelölje ki a képernyő oldalát.</string>
+    <string name="osm_carto_render_descr">Hasonló a fő OSM-webhelyen használt OpenStreetMap-carto stílushoz</string>
     <string name="simulation_real_mode_title">Realisztikus szimuláció</string>
     <string name="simulation_constant_mode_desc">A szimuláció egy kiválasztott állandó sebességgel történik.</string>
     <string name="simulation_constant_mode_title">Rögzített sebesség</string>
     <string name="speed_mode">Sebesség mód</string>
-    <string name="routing_attr_carriage_restrictions_description">A lóvontatású járművekkel való behajtási engedély megfontolandó</string>
+    <string name="routing_attr_carriage_restrictions_description">Állati erővel vont jármű korlátozásainak figyelembevétele</string>
     <string name="map_markers_bar">Térképjelölők sávja</string>
     <string name="shared_string_buttons">Gombok</string>
     <string name="rendering_attr_horse_scale_critical_name">Kritikus</string>
-    <string name="routeInfo_horse_scale_name">A lovas utak nehézségi foka</string>
+    <string name="routeInfo_horse_scale_name">Lovas utak nehézségi foka</string>
     <string name="rendering_attr_horse_scale_difficult_name">Nehéz</string>
     <string name="rendering_attr_horse_scale_dangerous_name">Veszélyes</string>
     <string name="rendering_attr_horse_scale_impossible_name">Lehetetlen</string>
-    <string name="rendering_attr_showTrainRoutes_name">Vonat útvonalak</string>
-    <string name="simulation_preview_mode_title">Gyors betekintő mód</string>
+    <string name="rendering_attr_showTrainRoutes_name">Vasútvonalak</string>
+    <string name="simulation_preview_mode_title">Gyors előnézet mód</string>
     <string name="simulation_preview_mode_desc">A szimuláció sebessége az egyenes szakaszokon maximális lesz és csak a kereszteződéseknél lassul le.</string>
-    <string name="simulation_real_mode_desc">Az egyenes útszakaszokon a sebesség nagyjából a megengedett legnagyobb sebességhez fog igazodni.
-\nA kereszteződésekben a szimuláció lelassul.
-\nExtra szankciók a közlekedési lámpáknál, stoptábláknál stb.</string>
-    <string name="apply_to_existing_favorites_descr">Alkalmazza a változtatásokat a csoport meglévő kedvenc pontjaira vagy csak az újakra\?</string>
+    <string name="simulation_real_mode_desc">Az egyenes útszakaszokon a sebesség közelít a sebességkorlátozáshoz.
+\nA kereszteződéseknél a szimuláció lelassul.
+\nA jelzőtábláknál, stop tábláknál stb. külön várakozási idők adódnak az úthoz.</string>
+    <string name="apply_to_existing_favorites_descr">Alkalmazza a módosításokat a csoport meglévő kedvenc pontjaira is vagy csak az újakra\?</string>
     <string name="apply_only_to_new_favorites">Alkalmazás csak az új kedvencekre</string>
-    <string name="apply_to_existing_points_descr">Alkalmazza a változtatásokat a csoport meglévő pontjaira vagy csak az újakra\?</string>
+    <string name="apply_to_existing_points_descr">Alkalmazza a módosításokat a csoport meglévő pontjaira is vagy csak az újakra\?</string>
     <string name="apply_to_existing">Alkalmazás a meglévőkre</string>
     <string name="apply_only_to_new_points">Alkalmazás csak az új pontokra</string>
-    <string name="change_default_appearance">Alapértelmezett megjelenés megváltoztatása</string>
+    <string name="change_default_appearance">Alapértelmezett megjelenés módosítása</string>
 </resources>
