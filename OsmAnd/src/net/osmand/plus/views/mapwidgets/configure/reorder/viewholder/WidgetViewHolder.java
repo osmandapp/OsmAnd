@@ -73,6 +73,7 @@ public class WidgetViewHolder extends ViewHolder implements UnmovableItem {
 		public String key;
 		public String title;
 		public MapWidgetInfo info;
+		public int page;
 		public int order;
 		public int iconId;
 		public boolean isActive;

@@ -40,6 +40,7 @@ public class MapMarkerSideWidget extends RightTextInfoWidget {
 		cachedNightMode = isNightMode();
 
 		setText(null, null);
+		setIcons(R.drawable.widget_marker_day, R.drawable.widget_marker_night);
 		setOnClickListener(v -> MarkersWidgetsHelper.showMarkerOnMap(mapActivity, firstMarker ? 0 : 1));
 	}
 
@@ -81,9 +82,7 @@ public class MapMarkerSideWidget extends RightTextInfoWidget {
 		boolean updateIcon = colorIndex != -1
 				&& (colorIndex != cachedMarkerColorIndex || cachedNightMode != isNightMode());
 		if (updateIcon) {
-			int backgroundIconId = isNightMode()
-					? R.drawable.widget_marker_night
-					: R.drawable.widget_marker_day;
+			int backgroundIconId = getIconId();
 			int foregroundColorId = MapMarker.getColorId(marker.colorIndex);
 			Drawable drawable = iconsCache.getLayeredIcon(backgroundIconId,
 					R.drawable.widget_marker_triangle, 0, foregroundColorId);

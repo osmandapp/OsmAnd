@@ -5,19 +5,19 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView.ViewHolder;
-
 import net.osmand.plus.R;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.UnmovableItem;
 
-public class ButtonViewHolder extends ViewHolder implements UnmovableItem {
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
+
+public class ActionButtonViewHolder extends ViewHolder implements UnmovableItem {
 
 	public View buttonView;
 	public ImageView icon;
 	public TextView title;
 
-	public ButtonViewHolder(@NonNull View itemView) {
+	public ActionButtonViewHolder(@NonNull View itemView) {
 		super(itemView);
 		buttonView = itemView.findViewById(R.id.button_container);
 		icon = itemView.findViewById(R.id.icon);
@@ -29,14 +29,14 @@ public class ButtonViewHolder extends ViewHolder implements UnmovableItem {
 		return true;
 	}
 
-	public static class ButtonInfo {
+	public static class ActionButtonInfo {
 
 		public final String title;
 		public final int iconRes;
 		public final OnClickListener listener;
 
-		public ButtonInfo(@NonNull String title, int iconRes,
-		                  @NonNull OnClickListener listener) {
+		public ActionButtonInfo(@NonNull String title, int iconRes,
+		                        @NonNull OnClickListener listener) {
 			this.title = title;
 			this.iconRes = iconRes;
 			this.listener = listener;

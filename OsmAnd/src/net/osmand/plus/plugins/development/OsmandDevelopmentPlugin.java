@@ -102,6 +102,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		public FPSTextInfoWidget(@NonNull MapActivity mapActivity) {
 			super(mapActivity);
 			this.mapView = mapActivity.getMapView();
+			updateInfo(null);
 		}
 
 		@Override
