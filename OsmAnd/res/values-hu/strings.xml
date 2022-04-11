@@ -332,7 +332,7 @@
     <string name="download_files_question">Letöltesz {0} fájlt ({1} MB)?</string>
     <string name="items_were_selected">{0} elem kijelölve</string>
     <string name="filter_existing_indexes">Letöltöttek</string>
-    <string name="shared_string_select_all">Minden kijelölése</string>
+    <string name="shared_string_select_all">Összes kijelölése</string>
     <string name="shared_string_refresh">Frissítés</string>
     <string name="fast_route_mode">Leggyorsabb útvonal</string>
     <string name="fast_route_mode_descr">Leggyorsabb útvonal kiszámításának engedélyezése, vagy tiltása az üzemanyag-takarékos útvonal útért.</string>
@@ -1055,7 +1055,7 @@
     <string name="edit_tilesource_choose_existing">Meglévő kijelölése…</string>
     <string name="maps_define_edit">Megad/Szerkeszt…</string>
     <string name="base_world_map">Föld alaptérkép</string>
-    <string name="map_magnifier">Térképnagyító</string>
+    <string name="map_magnifier">Térképnagyítás</string>
     <string name="animate_routing_route_not_calculated">Kérjük, először számolja ki az útvonalat</string>
     <string name="animate_routing_route">Szimuláció a tervezett útvonalon </string>
     <string name="animate_routing_gpx">Szimuláció GPX nyomvonalon</string>
@@ -3060,7 +3060,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Útvonaltervezésnél a burkolatlan utak előnyben részesítése a burkoltakkal szemben.</string>
     <string name="osmand_settings_descr">Az egész alkalmazásra érvényes beállítások</string>
     <string name="osmand_settings">OsmAnd beállítások</string>
-    <string name="shared_string_calculate">Kiszámít</string>
+    <string name="shared_string_calculate">Kiszámítás</string>
     <string name="layer_osm_edits">OSM-szerkesztések</string>
     <string name="quick_action_contour_lines_descr">Gomb, amely a térképen megjeleníti vagy elrejti a szintvonalakat.</string>
     <string name="quick_action_hillshade_descr">Gomb, amely a térképen megjeleníti vagy elrejti a domborzatárnyékolást.</string>
@@ -3757,7 +3757,7 @@
     <string name="add_address">Cím hozzáadása</string>
     <string name="nearest_point">Legközelebbi pont</string>
     <string name="empty_state_my_tracks">Nyomvonalfájlok hozzáadása</string>
-    <string name="in_case_of_reverse_direction">Fordított irány esetén</string>
+    <string name="in_case_of_reverse_direction">Ellentétes irányban haladva</string>
     <string name="monitoring_min_distance_descr_side_effect">Mellékhatások: A nyugalmi periódusok egyáltalán nem vagy csak egy ponttal lesznek felvéve. Kiszűrhetők a kis (valós) mozgások (pl. az út során egy átvezető út jelzése céljából megtett kitérők). A fájl kevesebb információt tartalmaz az utófeldolgozáshoz és rosszabb a statisztikája, mivel a felvételkor kiszűri a nyilvánvalóan felesleges pontokat, miközben megtarthatja a rossz vétel vagy a GPS lapkakészlet által okozott hibás mintázatok.</string>
     <string name="all_next_segments">Minden későbbi szakasz</string>
     <string name="number_of_gpx_files_selected_pattern">%s nyomvonalfájl kijelölve</string>
