@@ -570,10 +570,14 @@ public class OpeningHoursParserTest {
 		testParsedAndAssembledCorrectly("Mo-Fr 12:00 AM-12:00 PM, 12:00 PM-12:00 AM", hours);
 
 		OpeningHoursParser.setTwelveHourFormattingEnabled(true, Locale.CHINESE);
-		OpeningHoursParser.setRtl(true);
 		string = "Mo-Fr 04:30-10:00, 07:30-23:00; Sa, Su, PH 13:30-23:00";
 		hours = parseOpenedHours(string);
 		testParsedAndAssembledCorrectly("Mo-Fr 上午4:30-10:00, 上午7:30-下午11:00; Sa, Su, PH 下午1:30-11:00", hours);
+
+		OpeningHoursParser.setTwelveHourFormattingEnabled(true, new Locale("ar"));
+		string = "Mo-Fr 04:30-10:00, 07:30-23:00; Sa, Su, PH 13:30-23:00";
+		hours = parseOpenedHours(string);
+		testParsedAndAssembledCorrectly("Mo-Fr ٤:٣٠-١٠:٠٠ ص, ٧:٣٠ ص-١١:٠٠ م; Sa, Su, PH ١:٣٠-١١:٠٠ م", hours);
 	}
 
 	private static OpeningHours parseOpenedHours(String string) {

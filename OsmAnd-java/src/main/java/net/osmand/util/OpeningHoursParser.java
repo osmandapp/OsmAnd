@@ -40,7 +40,6 @@ public class OpeningHoursParser {
 	private static boolean twelveHourFormatting;
 	private static DateFormat twelveHourFormatter;
 	private static DateFormat twelveHourFormatterAmPm;
-	private static boolean rtlLocale;
 
 	static {
 		DateFormatSymbols dateFormatSymbols = DateFormatSymbols.getInstance(Locale.US);
@@ -70,10 +69,6 @@ public class OpeningHoursParser {
 				: DateFormatSymbols.getInstance(locale);
 		localMothsStr = dateFormatSymbols.getShortMonths();
 		localDaysStr = getLettersStringArray(dateFormatSymbols.getShortWeekdays(), 3);
-	}
-
-	public static void setRtl(boolean rtl) {
-		rtlLocale = rtl;
 	}
 
 	public static void setTwelveHourFormattingEnabled(boolean enabled, Locale locale) {
@@ -2259,7 +2254,7 @@ public class OpeningHoursParser {
 	private static boolean isAmPmOnLeft(int startMinute) {
 		StringBuilder sb = new StringBuilder();
 		formatTime(startMinute, sb);
-		return (!Character.isDigit(sb.charAt(0)) || rtlLocale);
+		return !Character.isDigit(sb.charAt(0));
 	}
 
 	private static void formatTime(int minutes, StringBuilder sb) {
