@@ -70,13 +70,10 @@ public class OpeningHoursParser {
 				: DateFormatSymbols.getInstance(locale);
 		localMothsStr = dateFormatSymbols.getShortMonths();
 		localDaysStr = getLettersStringArray(dateFormatSymbols.getShortWeekdays(), 3);
-		rtlLocale = isRtl(locale == null ? Locale.US : locale);
 	}
 
-	private static boolean isRtl(Locale locale) {
-		String lang = locale.getLanguage();
-		List<String> rtl = Arrays.asList("iw", "ar", "fa", "ur");
-		return rtl.contains(lang);
+	public static void setRtl(boolean rtl) {
+		rtlLocale = rtl;
 	}
 
 	public static void setTwelveHourFormattingEnabled(boolean enabled, Locale locale) {

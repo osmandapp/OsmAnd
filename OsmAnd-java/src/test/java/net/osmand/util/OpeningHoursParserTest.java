@@ -570,6 +570,7 @@ public class OpeningHoursParserTest {
 		testParsedAndAssembledCorrectly("Mo-Fr 12:00 AM-12:00 PM, 12:00 PM-12:00 AM", hours);
 
 		OpeningHoursParser.setTwelveHourFormattingEnabled(true, Locale.CHINESE);
+		OpeningHoursParser.setRtl(true);
 		string = "Mo-Fr 04:30-10:00, 07:30-23:00; Sa, Su, PH 13:30-23:00";
 		hours = parseOpenedHours(string);
 		testParsedAndAssembledCorrectly("Mo-Fr 上午4:30-10:00, 上午7:30-下午11:00; Sa, Su, PH 下午1:30-11:00", hours);

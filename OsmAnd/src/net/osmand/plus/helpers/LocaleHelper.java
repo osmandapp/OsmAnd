@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
@@ -138,6 +139,7 @@ public class LocaleHelper {
 
 	public void updateOpeningHoursParser(boolean enabled, @NonNull Locale locale) {
 		OpeningHoursParser.setTwelveHourFormattingEnabled(enabled, locale);
+		OpeningHoursParser.setRtl(AndroidUtils.isRTL());
 	}
 
 	public Resources getLocalizedResources(@NonNull String language) {
