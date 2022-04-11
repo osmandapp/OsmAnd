@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="add_page">Add page</string>
+    <string name="page_number">Page %1$s</string>
     <string name="apply_to_existing_points_descr">Apply changes to the existing points of the group or only to new?</string>
     <string name="apply_to_existing_favorites_descr">Apply changes to the existing favorite points of the group or only to new?</string>
     <string name="apply_to_existing">Apply to existing</string>

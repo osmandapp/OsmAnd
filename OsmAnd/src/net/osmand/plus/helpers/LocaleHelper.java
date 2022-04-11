@@ -138,6 +138,7 @@ public class LocaleHelper {
 	}
 
 	public void updateTimeFormatting(boolean twelveHoursFormatting, @NonNull Locale locale) {
+		OpeningHoursParser.initLocalStrings(locale);
 		OpeningHoursParser.setTwelveHourFormattingEnabled(twelveHoursFormatting, locale);
 		OsmAndFormatter.setTwelveHoursFormatting(twelveHoursFormatting, locale);
 	}

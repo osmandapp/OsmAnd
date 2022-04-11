@@ -4577,4 +4577,10 @@
     <string name="simulation_real_mode_title">Realistická simulácia</string>
     <string name="shared_string_buttons">Tlačidlá</string>
     <string name="speed_mode">Rýchlostný režim</string>
+    <string name="apply_to_existing_points_descr">Použiť zmeny na existujúce body skupiny, alebo iba a nové\?</string>
+    <string name="apply_to_existing">Použiť na existujúce</string>
+    <string name="apply_to_existing_favorites_descr">Použiť zmeny na existujúce obľúbené body skupiny, alebo iba a nové\?</string>
+    <string name="apply_only_to_new_points">Použiť iba na nové body</string>
+    <string name="change_default_appearance">Zmeniť predvolený vzhľad</string>
+    <string name="apply_only_to_new_favorites">Použiť iba na nové obľúbené body</string>
 </resources>

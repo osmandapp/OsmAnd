@@ -13,18 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_ALTITUDE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BEARING;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_DISTANCE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_GPS_INFO;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_DISTANCE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_TIME;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MARKER_1;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MARKER_2;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MAX_SPEED;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_SPEED;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_TIME;
-
 public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 
 	public static final int INVALID_ID = 0;
@@ -33,7 +21,7 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 	public final MapWidget widget;
 	public final WidgetsPanel widgetPanel;
 	public int priority;
-	public int pageIndex = 0;
+	public int pageIndex;
 
 	@DrawableRes
 	private final int settingsIconId;
@@ -48,7 +36,8 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 	                     @DrawableRes int settingsIconId,
 	                     @StringRes int messageId,
 	                     @Nullable String message,
-	                     int priority,
+	                     int page,
+	                     int order,
 	                     @NonNull WidgetsPanel widgetPanel) {
 		this.key = key;
 		this.widget = widget;
@@ -56,7 +45,8 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 		this.settingsIconId = settingsIconId;
 		this.messageId = messageId;
 		this.message = message;
-		this.priority = priority;
+		this.pageIndex = page;
+		this.priority = order;
 		this.widgetPanel = widgetPanel;
 	}
 
@@ -131,20 +121,17 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 
 	@Override
 	public int compareTo(@NonNull MapWidgetInfo another) {
-		if (getMessageId() == 0 && another.getMessageId() == 0) {
-			if (key.equals(another.key)) {
-				return 0;
-			}
-		} else if (getMessageId() == another.getMessageId()) {
+		if (equals(another)) {
 			return 0;
 		}
-		if (priority == another.priority) {
-			if (getMessageId() == 0 && another.getMessageId() == 0) {
-				return key.compareTo(another.key);
-			} else {
-				return getMessageId() - another.getMessageId();
-			}
+		if (pageIndex != another.pageIndex) {
+			return pageIndex - another.pageIndex;
 		}
-		return priority - another.priority;
+		if (priority != another.priority) {
+			return priority - another.priority;
+		}
+		return getMessageId() == 0 && another.getMessageId() == 0
+				? key.compareTo(another.key)
+				: getMessageId() - another.getMessageId();
 	}
 }

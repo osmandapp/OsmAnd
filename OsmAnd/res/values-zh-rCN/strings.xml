@@ -343,7 +343,7 @@
     <string name="clear_dest_confirm">删除目的地（和中转点）？</string>
     <string name="precise_routing_mode_descr">启用精确路径计算，受实地距离限制不使用本地库。</string>
     <string name="recording_photo_description">图片 %1$s of %2$s</string>
-    <string name="dropbox_plugin_description">Dropbox的插件可以让你的Dropbox帐户同步轨道和音频/视频数据。</string>
+    <string name="dropbox_plugin_description">将轨迹和音频/视频注记与您的 Dropbox 帐户同步。</string>
     <string name="dropbox_plugin_name">Dropbox插件</string>
     <string name="precise_routing_mode">精确路径（alpha）</string>
     <string name="srtm_paid_version_msg">请考虑在谷歌Play商店购买插件以支持进一步发展。</string>
@@ -1693,15 +1693,15 @@
     <string name="int_hour">小时</string>
     <string name="duration">持续时间</string>
     <string name="distance">距离</string>
-    <string name="plugin_touringview_descr">启动此预览的地图样式更改为“旅游查看”，这是给旅客和职业司机的一种特殊的高细节查看。 
+    <string name="plugin_touringview_descr">启动此预览的地图样式更改为“旅游查看”，这是给旅客和职业司机的一种特殊的高细节查看。
 \n
-\n此预览提供了在任何给与的地图缩放，（特别是公路、轨道、路径和定位标记）在地图数据中最大量可获得的详细行程。 
+\n此预览提供了在任何给与的地图缩放，（特别是公路、轨迹、路径和定位标记）在地图数据中最大量可获得的详细行程。
 \n
-\n它也清楚地描绘了各类道路明确地色码，例如驾驶大型车辆时，这是非常有用的。 
+\n它也清楚地描绘了各类道路明确地色码，例如驾驶大型车辆时，这是非常有用的。
 \n
-\n并提供了特别的旅游选项，比如显示自行车路线或高山的路线。 
+\n并提供了特别的旅游选项，比如显示自行车路线或高山的路线。
 \n
-\n此预览是从我们的标准地图所创建，不需要下载特殊的地图。 
+\n此预览是从我们的标准地图所创建，不需要下载特殊的地图。
 \n
 \n此预览可以在这里经由再次取消启动，或透过“配置地图”下的“地图样式”这两者中任何一个的更改而恢复它。</string>
     <string name="plugin_nautical_descr">这个插件丰富了 OsmAnd 地图和导航应用，也为了划船、帆船、与其他类型的水上运动，产生了航海地图。 
@@ -2753,7 +2753,7 @@
     <string name="rendering_attr_highway_class_street_name">街道</string>
     <string name="rendering_attr_highway_class_service_name">服务站</string>
     <string name="rendering_attr_highway_class_footway_name">人行道</string>
-    <string name="rendering_attr_highway_class_track_name">轨道</string>
+    <string name="rendering_attr_highway_class_track_name">轨迹</string>
     <string name="rendering_attr_highway_class_steps_name">台阶</string>
     <string name="rendering_attr_highway_class_cycleway_name">自行车道</string>
     <string name="angular_measeurement">角度单位</string>
@@ -3460,13 +3460,13 @@
     <string name="simplified_track">简化轨迹</string>
     <string name="system_default_theme">系统默认值</string>
     <string name="all_previous_segments">以前的所有部分</string>
-    <string name="release_3_8">• 更新计划路线功能：允许每个航段使用不同的导航类型和包含轨道
+    <string name="release_3_8">• 更新计划路线功能：允许每个航段使用不同的导航类型和包含轨迹
 \n
 \n• 轨道的新外观菜单：选择颜色、厚度、显示方向箭头、开始和完成图标
 \n
 \n•提高自行车节点的能见度。
 \n
-\n•轨道现在可上用，有上下文菜单与基本信息。
+\n•轨迹现在可点击，拥有上下文菜单与基本信息。
 \n
 \n• 改进的搜索算法
 \n
@@ -3756,11 +3756,11 @@
     <string name="reset_to_original">重置为原始状态</string>
     <string name="backup_error_no_subscription">当前无订阅</string>
     <string name="no_items_of_type_message">你没有此类型的项目</string>
-    <string name="routeInfo_tracktype_description">根据表面成分给路线或轨道线上色。通常适用于道路网络大部分未铺设的情况。</string>
+    <string name="routeInfo_tracktype_description">根据表面成分给路线或轨迹线上色。通常适用于道路网络大部分未铺设的情况。</string>
     <string name="routeInfo_winter_ice_road_description">按冬季道路分类为路线或轨迹线着色。</string>
     <string name="routeInfo_smoothness_description">轮式车辆的道路/人行道机动性分类，特别是关于路面规则性/平整度的分类。</string>
     <string name="routeInfo_surface_description">提供道路/人行道物理表面信息。</string>
-    <string name="routeInfo_roadClass_description">按道路分类给路线或轨道线上色。</string>
+    <string name="routeInfo_roadClass_description">按道路分类给路线或轨迹线上色。</string>
     <string name="add_group_to_markers">添加组别到标记列表</string>
     <string name="remove_group_from_markers">从标识物列表中移除群组</string>
     <string name="last_intermediate_dest_description">添加中间站</string>
@@ -4181,6 +4181,45 @@
     <string name="add_new_custom_category_button_promo">通过选择一个或多个类别来添加新的自定义类别。</string>
     <string name="monitoring_min_speed_descr">这是一个低速截止过滤器，用于不记录低于特定速度的点。当在地图上查看时，这可能会使记录的轨迹看起来更平滑。</string>
     <string name="monitoring_min_accuracy_descr_side_effect">副作用：由于按精确度过滤，点可能会完全丢失，例如桥梁下方、树下、高楼之间或在某些天气条件下。</string>
-    <string name="monitoring_min_accuracy_descr_recommendation">建议：很难预测将被记录的内容和不被记录的内容，最好关闭此过滤器。</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">建议：很难预测将记录的内容和不记录的内容，最好关闭此过滤器。</string>
     <string name="monitoring_min_distance_descr">此过滤器可避免在实际移动发生太少的情况下记录重复点，从而使之后未进行后处理的轨迹具有更好的空间外观。</string>
+    <string name="import_profile">导入配置文件</string>
+    <string name="reorder_profiles">编辑配置文件列表</string>
+    <string name="live_monitoring_time_buffer">时间缓冲</string>
+    <string name="live_monitoring_adress_descr">指定位置的 Web 地址参数语法：lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}。</string>
+    <string name="reset_plugin_to_default">重置插件设置为默认值</string>
+    <string name="multimedia_rec_split_title">拆分录制</string>
+    <string name="import_routing_file">导入路径规划文件</string>
+    <string name="monitoring_prefs_descr">导航、记录精确性</string>
+    <string name="live_monitoring">在线追踪</string>
+    <string name="save_track_logging_accuracy">记录精度</string>
+    <string name="route_recalculation">路线重新计算</string>
+    <string name="master_profile">主配置文件</string>
+    <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
+    <string name="save_heading">包括航向</string>
+    <string name="selected_profile">选定的配置文件</string>
+    <string name="monitoring_min_distance_descr_recommendation">建议：如果你不需要捕捉比这更精细的细节，也不想在休息时明确捕捉数据，那么设置为5米可能对你很有效。</string>
+    <string name="live_monitoring_tracking_interval">追踪间隔</string>
+    <string name="monitoring_min_distance_descr_side_effect">副作用。休息时将完全不被记录，或只被记录一个点。小的（现实世界的）移动（例如侧道，以标记你的旅行中可能出现的岔道）可能被过滤掉。你的文件包含较少的后处理信息，并且在记录时过滤掉明显多余的点，而有可能保留由不良接收或GPS芯片组影响造成的失真，使统计结果更差。</string>
+    <string name="select_nav_icon_descr">在导航或移动时显示的图标。</string>
+    <string name="tracks_view_descr">你录制的轨迹位于%1$s，或OsmAnd文件夹中。</string>
+    <string name="select_map_icon_descr">静止时显示的图标。</string>
+    <string name="join_segments">加入分段</string>
+    <string name="osm_editing">OSM编辑</string>
+    <string name="live_monitoring_adress">网址</string>
+    <string name="live_monitoring_descr">允许使用行程记录分享当前位置。</string>
+    <string name="desert_render_descr">用于沙漠和其他人口稀少的地区，更加详细。</string>
+    <string name="add_new_profile_q">添加新的配置文件“%1$s”？</string>
+    <string name="save_heading_descr">录制时将航向保存到每个轨迹点。</string>
+    <string name="apply_to_existing_favorites_descr">将更改应用于组中现有的收藏点，还是仅应用于新收藏点？</string>
+    <string name="apply_only_to_new_points">仅应用于新点</string>
+    <string name="apply_only_to_new_favorites">仅应用于新收藏夹</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">班车路线</string>
+    <string name="map_markers_bar">地图标记栏</string>
+    <string name="shared_string_visible_widgets">可见小部件</string>
+    <string name="top_widgets_panel">顶部面板</string>
+    <string name="apply_to_existing_points_descr">将更改应用于组内现有的点，还是只应用于新的？</string>
+    <string name="apply_to_existing">应用于已存在的</string>
+    <string name="change_default_appearance">更改默认外观</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">无轨电车线路</string>
 </resources>

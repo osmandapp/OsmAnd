@@ -319,7 +319,11 @@ public class QuickSearchListItem {
 		int iconId = -1;
 		switch (searchResult.objectType) {
 			case CITY:
-				return getIcon(app, R.drawable.ic_action_building2);
+				boolean town = (searchResult.object instanceof City)
+						&& (((City) searchResult.object).getType() == CityType.TOWN);
+				return town
+						? getIcon(app, R.drawable.mx_place_town)
+						: getIcon(app, R.drawable.ic_action_building2);
 			case VILLAGE:
 				return getIcon(app, R.drawable.ic_action_village);
 			case POSTCODE:
