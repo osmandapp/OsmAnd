@@ -123,17 +123,12 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	@Override
 	protected void initGeometries(float density) {
 		routeWayContext = new RouteGeometryWayContext(view.getContext(), density);
-		//routeWayContext.disableMapRenderer();
 		routeWayContext.updatePaints(nightMode, attrs);
 		routeGeometry = new RouteGeometryWay(routeWayContext);
 		routeGeometry.vectorLinesBaseOrder = baseOrder;
 
 		publicTransportWayContext = new PublicTransportGeometryWayContext(view.getContext(), density);
-		//publicTransportWayContext.disableMapRenderer();
 		publicTransportWayContext.updatePaints(nightMode, attrs, attrsPT, attrsW);
-		float transporRoutetWalkWidth = 40.0f;
-		int transportRouteWalkColor = getContext().getResources().getColor(R.color.transport_route_walk_line, null);
-		publicTransportWayContext.setWalkRouteParams(transportRouteWalkColor, transporRoutetWalkWidth);
 		publicTransportRouteGeometry = new PublicTransportGeometryWay(publicTransportWayContext);
 		publicTransportRouteGeometry.vectorLinesBaseOrder = baseOrder;
 	}

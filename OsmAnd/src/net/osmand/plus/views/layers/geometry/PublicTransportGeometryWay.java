@@ -192,40 +192,6 @@ public class PublicTransportGeometryWay extends GeometryWay<PublicTransportGeome
 		}
 	}
 
-	private void drawOpenGL(@NonNull VectorLinesCollection vectorLinesCollection,
-	                        @NonNull QVectorPointI points, GeometryWayStyle<?> style) {
-		if (style instanceof GeometryTransportWayStyle)	{
-			drawTransportWay(vectorLinesCollection, points, (GeometryTransportWayStyle) style);
-		}
-		if (style instanceof GeometryWalkWayStyle) {
-			drawWalkWay(vectorLinesCollection, points, (GeometryWalkWayStyle) style);
-		}
-	}
-
-	private void drawTransportWay(@NonNull VectorLinesCollection vectorLinesCollection,
-	                              @NonNull QVectorPointI points, @NonNull GeometryTransportWayStyle style) {
-		VectorLineBuilder builder = new VectorLineBuilder();
-		builder.setBaseOrder(vectorLinesBaseOrder--)
-				.setIsHidden(points.size() == 0)
-				.setLineId(1)
-				.setLineWidth(style.getWidth(50))
-				.setPoints(points)
-				.setFillColor(NativeUtilities.createFColorARGB(style.getColor(Color.BLACK)));
-		builder.buildAndAddToCollection(vectorLinesCollection);
-	}
-
-	private void drawWalkWay(@NonNull VectorLinesCollection vectorLinesCollection,
-	                         @NonNull QVectorPointI points, @NonNull GeometryWalkWayStyle style) {
-		VectorLineBuilder builder = new VectorLineBuilder();
-		builder.setPoints(points)
-				.setIsHidden(false)
-				.setLineId(1)
-				.setLineWidth(getContext().getWalkRouteWidth())
-				.setFillColor(NativeUtilities.createFColorARGB(getContext().getWalkRouteColor()))
-				.setBaseOrder(vectorLinesBaseOrder--);
-		builder.buildAndAddToCollection(vectorLinesCollection);
-	}
-
 	private void drawTransportStops(@NonNull MapMarkersCollection transportRouteMarkers) {
 		GeometryAnchorWayStyle anchorWayStyle = new GeometryAnchorWayStyle(getContext());
 		for (Map.Entry<Integer, GeometryWayStyle<?>> entry : styleMap.entrySet()) {

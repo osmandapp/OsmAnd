@@ -184,25 +184,9 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 	                               @NonNull List<DrawPathData31> pathsData) {
 		boolean hasColorizationMapping = colorizationMapping != null && !colorizationMapping.isEmpty();
 		QVectorPointI points = new QVectorPointI();
-		int px = 0;
-		int py = 0;
 		for (DrawPathData31 data : pathsData) {
-			if (hasColorizationMapping) {
-				int px1 = data.tx.size() > 0 ? data.tx.get(0) : 0;
-				int py1 = data.ty.size() > 0 ? data.ty.get(0) : 0;
-				int px2 = data.tx.size() > 1 ? data.tx.get(1) : px1;
-				int py2 = data.ty.size() > 1 ? data.ty.get(1) : py1;
-				points.add(new PointI(px1, py1));
-				points.add(new PointI(px2, py2));
-				continue;
-			}
 			for (int i = 0; i < data.tx.size(); i++) {
-				if (i == 0 && px == data.tx.get(i) && py == data.ty.get(i)) {
-					continue;
-				}
-				px = data.tx.get(i);
-				py = data.ty.get(i);
-				points.add(new PointI(px, py));
+				points.add(new PointI(data.tx.get(i), data.ty.get(i)));
 			}
 		}
 		QListVectorLine lines = collection.getLines();

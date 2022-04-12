@@ -165,7 +165,9 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 						lastColor = color;
 					}
 				}
-				colors.add(NativeUtilities.createFColorARGB(color));
+				for (int i = 0; i < data.tx.size() - 1; i++) {
+					colors.add(NativeUtilities.createFColorARGB(color));
+				}
 				colors.add(NativeUtilities.createFColorARGB(lastColor));
 			}
 		}

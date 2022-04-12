@@ -31,8 +31,6 @@ public class PublicTransportGeometryWayContext extends GeometryWayContext {
 	private Bitmap anchorBitmap;
 	private Map<Pair<Integer, Drawable>, Bitmap> stopBitmapsCache = new HashMap<>();
 	private final Map<Integer, Bitmap> stopSmallBitmapsCache = new HashMap<>();
-	private int walkRouteColor = Color.BLACK;
-	private float walkRouteWidth = 40.0f;
 
 	public PublicTransportGeometryWayContext(@NonNull Context ctx, float density) {
 		super(ctx, density);
@@ -207,18 +205,5 @@ public class PublicTransportGeometryWayContext extends GeometryWayContext {
 			stopSmallBitmapsCache.put(color, bmp);
 		}
 		return bmp;
-	}
-
-	public void setWalkRouteParams(int color, float width) {
-		walkRouteColor = color;
-		walkRouteWidth = width;
-	}
-
-	public int getWalkRouteColor() {
-		return walkRouteColor;
-	}
-
-	public float getWalkRouteWidth() {
-		return walkRouteWidth;
 	}
 }
