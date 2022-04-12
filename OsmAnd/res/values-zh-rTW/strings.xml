@@ -4575,4 +4575,10 @@
     <string name="simulation_real_mode_desc">在筆直的路段，速度大約是最大允許的速度。
 \n在交叉路口，模擬會變慢。
 \n紅綠燈與停止標誌將會有額外延遲。</string>
+    <string name="apply_to_existing">套用到既有的</string>
+    <string name="apply_only_to_new_points">僅套用到新點</string>
+    <string name="apply_to_existing_favorites_descr">將變更套用於既有的收藏點群組或僅套用到新的？</string>
+    <string name="apply_to_existing_points_descr">將變更套用於既有的點群組或僅套用到新的？</string>
+    <string name="apply_only_to_new_favorites">僅套用到新的收藏</string>
+    <string name="change_default_appearance">變更預設外觀</string>
 </resources>

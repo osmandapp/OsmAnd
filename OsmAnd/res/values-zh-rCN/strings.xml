@@ -4222,4 +4222,18 @@
     <string name="apply_to_existing">应用于已存在的</string>
     <string name="change_default_appearance">更改默认外观</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">无轨电车线路</string>
+    <string name="bottom_widgets_panel">底部面板</string>
+    <string name="shared_string_buttons">按钮</string>
+    <string name="rendering_attr_showFitnessTrails_description">显示健身步道</string>
+    <string name="stop_and_exit">停止并退出</string>
+    <string name="shared_string_complete">完成</string>
+    <string name="zoom_levels_difference_description">缩放级别之间的巨大差异可能会增加下载数据的大小。</string>
+    <string name="estimated_download_size">估计的下载大小</string>
+    <string name="number_of_tiles">磁贴数量</string>
+    <string name="rendering_attr_showRunningRoutes_name">跑步路线</string>
+    <string name="simulation_constant_mode_title">固定速度</string>
+    <string name="rendering_attr_showRunningRoutes_description">显示跑步路线</string>
+    <string name="stop_download">停止下载</string>
+    <string name="stop_download_desc">下载未完成。如果现在中断下载，则只有部分磁贴可供查看。</string>
+    <string name="rendering_attr_showFitnessTrails_name">健身步道</string>
 </resources>
