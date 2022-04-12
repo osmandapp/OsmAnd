@@ -1,7 +1,5 @@
 package net.osmand.plus.views.layers.base;
 
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -39,6 +37,8 @@ import org.apache.commons.logging.Log;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 
 public abstract class BaseRouteLayer extends OsmandMapLayer {
 

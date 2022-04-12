@@ -19,8 +19,8 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -83,7 +83,7 @@ public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialo
 			@Override
 			public void onClick(View view) {
 				if (listener != null) {
-					listener.onItemClick((int) view.getTag());
+					listener.onItemClick(view, (int) view.getTag());
 				}
 				dismiss();
 			}
@@ -210,6 +210,6 @@ public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialo
 	}
 
 	public interface ContextMenuItemClickListener {
-		void onItemClick(int position);
+		void onItemClick(View view, int position);
 	}
 }

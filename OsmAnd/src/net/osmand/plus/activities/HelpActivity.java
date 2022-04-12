@@ -1,7 +1,5 @@
 package net.osmand.plus.activities;
 
-import static net.osmand.plus.AppInitializer.LATEST_CHANGES_URL;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -13,12 +11,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.FragmentActivity;
 
@@ -31,13 +29,19 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.development.BaseLogcatActivity;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
-import net.osmand.plus.widgets.cmadapter.callback.ItemLongClickListener;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuCategory;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
+import net.osmand.plus.widgets.ctxmenu.ViewCreator;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemLongClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+
+import static net.osmand.plus.AppInitializer.LATEST_CHANGES_URL;
 
 public class HelpActivity extends BaseLogcatActivity implements OnItemClickListener, OnItemLongClickListener {
 
@@ -51,7 +55,7 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 	public static final String TELEGRAM_CHATS_EXPANDED = "telegram_chats_expanded";
 	// public static final String DIALOG = "dialog";
 
-	private ArrayAdapter<ContextMenuItem> mAdapter;
+	private ContextMenuListAdapter mAdapter;
 	private boolean telegramChatsExpanded;
 	private ListView listView;
 
@@ -136,20 +140,21 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 	}
 
 	private void createItems() {
-		ContextMenuAdapter contextMenuAdapter = new ContextMenuAdapter(getMyApplication());
-		contextMenuAdapter.setDefaultLayoutId(R.layout.two_line_with_images_list_item);
+		ContextMenuAdapter menu = new ContextMenuAdapter(getMyApplication());
 
-		createBeginWithOsmandItems(contextMenuAdapter);
-		createFeaturesItems(contextMenuAdapter);
-		createPluginsItems(contextMenuAdapter);
-		createHelpUsToImproveItems(contextMenuAdapter);
-		createOtherItems(contextMenuAdapter);
-		createDiscussionItems(contextMenuAdapter);
-		createSocialNetworksItems(contextMenuAdapter);
+		createBeginWithOsmandItems(menu);
+		createFeaturesItems(menu);
+		createPluginsItems(menu);
+		createHelpUsToImproveItems(menu);
+		createOtherItems(menu);
+		createDiscussionItems(menu);
+		createSocialNetworksItems(menu);
 
 		boolean lightContent = getMyApplication().getSettings().isLightContent();
 
-		mAdapter = contextMenuAdapter.createListAdapter(this, lightContent);
+		ViewCreator viewCreator = new ViewCreator(this, !lightContent);
+		viewCreator.setDefaultLayoutId(R.layout.two_line_with_images_list_item);
+		mAdapter = menu.toListAdapter(this, viewCreator);
 
 		listView.setAdapter(mAdapter);
 		listView.setOnItemClickListener(this);
@@ -163,9 +168,10 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		ItemClickListener listener = mAdapter.getItem(position).getItemClickListener();
+		ContextMenuItem item = mAdapter.getItem(position);
+		ItemClickListener listener = item.getItemClickListener();
 		if (listener != null) {
-			listener.onContextMenuClick(mAdapter, position, position, false, null);
+			listener.onContextMenuClick(mAdapter, view, item, false);
 		}
 	}
 
@@ -239,14 +245,14 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 		if (exceptionLog.exists()) {
 			contextMenuAdapter.addItem(new ContextMenuItem(null)
 					.setTitle(getString(R.string.send_crash_log))
-					.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
+					.setListener((uiAdapter, view, item, isChecked) -> {
 						app.sendCrashLog(exceptionLog);
 						return false;
 					}));
 		}
 		contextMenuAdapter.addItem(new ContextMenuItem(null)
 				.setTitle(getString(R.string.send_logcat_log))
-				.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					startSaveLogsAsyncTask();
 					return false;
 				}));
@@ -324,7 +330,8 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 
 	// Helper methods
 	private ContextMenuItem createCategory(@StringRes int titleRes) {
-		return new ContextMenuCategory(null)
+		return new ContextMenuItem(null)
+				.setCategory(true)
 				.setTitle(getString(titleRes))
 				.setLayout(R.layout.download_item_list_section);
 	}
@@ -357,7 +364,7 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 				.setTitle(title)
 				.setDescription(url)
 				.setIcon(icon)
-				.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 					AndroidUtils.startActivityIfSafe(this, intent);
 					return false;
@@ -369,7 +376,7 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 				.setLayout(R.layout.title_with_right_icon_list_item)
 				.setTitle(getString(R.string.shared_string_view_all))
 				.setIcon(R.drawable.ic_action_arrow_down)
-				.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					telegramChatsExpanded = true;
 					int pos = listView.getFirstVisiblePosition();
 					createItems();
@@ -407,13 +414,13 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 		}
 
 		@Override
-		public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
+		public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter, @Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
 			if (LATEST_CHANGES_URL.equals(path)) {
 				OsmandApplication app = (OsmandApplication) ctx.getApplication();
 				boolean nightMode = !app.getSettings().isLightContent();
 				AndroidUtils.openUrl(ctx, Uri.parse(LATEST_CHANGES_URL), nightMode);
 			} else {
-				String title = mTitle == null ? adapter.getItem(position).getTitle() : mTitle;
+				String title = mTitle == null ? item.getTitle() : mTitle;
 				HelpArticleDialogFragment.instantiateWithAsset(path, title)
 						.show(ctx.getSupportFragmentManager(), "DIALOG_HELP_ARTICLE");
 			}

@@ -2679,6 +2679,9 @@ public class OsmandSettings {
 			(ContextMenuItemsPreference) new ContextMenuItemsPreference(this, "drawer_items", DRAWER_ITEM_ID_SCHEME, DrawerMenuItemsSettings.getDrawerDefaultInstance())
 					.makeProfile().cache();
 
+	public final ListStringPreference COLLAPSED_CONFIGURE_MAP_CATEGORIES = (ListStringPreference)
+			new ListStringPreference(this, "collapsed_configure_map_categories", "", ",,").makeProfile().cache();
+
 	public final ContextMenuItemsPreference CONFIGURE_MAP_ITEMS =
 			(ContextMenuItemsPreference) new ContextMenuItemsPreference(this, "configure_map_items", CONFIGURE_MAP_ITEM_ID_SCHEME, new ContextMenuItemsSettings())
 					.makeProfile().cache();

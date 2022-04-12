@@ -1,4 +1,59 @@
-package net.osmand.plus.dialogs;
+package net.osmand.plus.configmap;
+
+import android.view.View;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.annotation.StyleRes;
+
+import com.google.android.material.snackbar.Snackbar;
+
+import net.osmand.CallbackWithObject;
+import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
+import net.osmand.plus.dialogs.DetailsBottomSheet;
+import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.DayNightMode;
+import net.osmand.plus.transport.TransportLinesMenu;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.render.RenderingRuleProperty;
+import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
+import net.osmand.util.SunriseSunset;
+
+import org.apache.commons.logging.Log;
+import org.jetbrains.annotations.NotNull;
+
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CUSTOM_RENDERING_ITEMS_ID_SCHEME;
@@ -26,7 +81,7 @@ import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_WIDTH_ATTR;
 import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
-import static net.osmand.plus.widgets.cmadapter.item.ContextMenuItem.INVALID_ID;
+import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 import static net.osmand.render.RenderingRuleStorageProperties.A_APP_MODE;
 import static net.osmand.render.RenderingRuleStorageProperties.A_BASE_APP_MODE;
 import static net.osmand.render.RenderingRuleStorageProperties.A_ENGINE_V1;
@@ -34,59 +89,6 @@ import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAI
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDE;
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_ROUTES;
-
-import android.view.View;
-import android.widget.ArrayAdapter;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.annotation.StyleRes;
-
-import com.google.android.material.snackbar.Snackbar;
-
-import net.osmand.CallbackWithObject;
-import net.osmand.IndexConstants;
-import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
-import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.render.RendererRegistry;
-import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.settings.enums.DayNightMode;
-import net.osmand.plus.transport.TransportLinesMenu;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
-import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuCategory;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
-import net.osmand.render.RenderingRuleProperty;
-import net.osmand.render.RenderingRulesStorage;
-import net.osmand.util.Algorithms;
-import net.osmand.util.SunriseSunset;
-
-import org.apache.commons.logging.Log;
-
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
 
 public class ConfigureMapMenu {
 
@@ -109,6 +111,8 @@ public class ConfigureMapMenu {
 	public static final String ROAD_STYLE_ATTR = "roadStyle";
 	public static final String TRAVEL_ROUTES = "travel_routes";
 
+	public static final String OTHER_MAP_ATTRIBUTES_CATEGORY = "otherMapAttributesCategory";
+
 	public interface OnClickListener {
 		void onClick();
 	}
@@ -118,8 +122,6 @@ public class ConfigureMapMenu {
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 
 		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
-		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
-		adapter.setProfileDependent(true);
 
 		adapter.addItem(new ContextMenuItem(APP_PROFILES_ID)
 				.setTitleId(R.string.app_modes_choose, mapActivity)
@@ -146,11 +148,12 @@ public class ConfigureMapMenu {
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		int selectedProfileColor = settings.getApplicationMode().getProfileColor(nightMode);
-		MapLayerMenuListener listener = new MapLayerMenuListener(activity, adapter);
+		MapLayerMenuListener listener = new MapLayerMenuListener(activity);
 
-		adapter.addItem(new ContextMenuCategory(SHOW_CATEGORY_ID)
-				.setTitleId(R.string.shared_string_show, activity)
-				.setLayout(R.layout.list_group_title_with_switch));
+		adapter.addItem(new ContextMenuItem(SHOW_CATEGORY_ID)
+				.setCategory(true)
+				.setLayout(R.layout.list_group_title_with_switch)
+				.setTitleId(R.string.shared_string_show, activity));
 
 		boolean selected = settings.SHOW_FAVORITES.get();
 		adapter.addItem(new ContextMenuItem(FAVORITES_ID)
@@ -231,7 +234,8 @@ public class ConfigureMapMenu {
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 
-		adapter.addItem(new ContextMenuCategory(ROUTES_ID)
+		adapter.addItem(new ContextMenuItem(ROUTES_ID)
+				.setCategory(true)
 				.setTitleId(R.string.rendering_category_routes, activity)
 				.setLayout(R.layout.list_group_title_with_switch));
 
@@ -281,7 +285,8 @@ public class ConfigureMapMenu {
 				.setListener(new OnRowItemClick() {
 
 					@Override
-					public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
+					public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
+					                              @NonNull View view, @NonNull ContextMenuItem item) {
 						if (property != null) {
 							activity.getDashboard().setDashboardVisibility(true, DashboardType.CYCLE_ROUTES, AndroidUtils.getCenterViewCoordinates(view));
 						} else {
@@ -291,14 +296,13 @@ public class ConfigureMapMenu {
 					}
 
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
+					public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
+					                                  @Nullable View view, @NotNull ContextMenuItem item,
+					                                  boolean isChecked) {
 						pref.set(isChecked);
-						ContextMenuItem item = adapter.getItem(position);
-						if (item != null) {
-							item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
-							item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
-							adapter.notifyDataSetChanged();
-						}
+						item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
+						item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
+						uiAdapter.onDataSetChanged();
 						if (property != null) {
 							activity.refreshMap();
 							activity.updateLayers();
@@ -328,20 +332,20 @@ public class ConfigureMapMenu {
 				.setListener(new OnRowItemClick() {
 
 					@Override
-					public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
+					public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
+					                              @NonNull View view, @NonNull ContextMenuItem item) {
 						activity.getDashboard().setDashboardVisibility(true, DashboardType.HIKING_ROUTES, AndroidUtils.getCenterViewCoordinates(view));
 						return false;
 					}
 
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
+					public boolean onContextMenuClick(@NonNull @Nullable OnDataChangeUiAdapter uiAdapter,
+					                                  @NonNull @Nullable View view, @NonNull ContextMenuItem item,
+					                                  boolean isChecked) {
 						pref.set(isChecked ? previousValue : "");
-						ContextMenuItem item = adapter.getItem(position);
-						if (item != null) {
-							item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
-							item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
-							adapter.notifyDataSetChanged();
-						}
+						item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
+						item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
+						uiAdapter.onDataSetChanged();
 						activity.refreshMap();
 						activity.updateLayers();
 						return false;
@@ -362,21 +366,21 @@ public class ConfigureMapMenu {
 				.setListener(new OnRowItemClick() {
 
 					@Override
-					public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
+					public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
+					                              @NonNull View view, @NonNull ContextMenuItem item) {
 						activity.getDashboard().setDashboardVisibility(true, DashboardType.TRAVEL_ROUTES, AndroidUtils.getCenterViewCoordinates(view));
 						return false;
 					}
 
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
+					public boolean onContextMenuClick(@NonNull OnDataChangeUiAdapter uiAdapter,
+					                                  @NonNull View view, @NonNull ContextMenuItem item,
+					                                  boolean isChecked) {
 						settings.SHOW_TRAVEL.set(isChecked);
-						ContextMenuItem item = adapter.getItem(position);
-						if (item != null) {
-							item.setSelected(isChecked);
-							item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
-							item.setDescription(activity.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
-							adapter.notifyDataSetChanged();
-						}
+						item.setSelected(isChecked);
+						item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
+						item.setDescription(activity.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
+						uiAdapter.onDataSetChanged();
 						activity.refreshMap();
 						activity.updateLayers();
 						return false;
@@ -450,22 +454,23 @@ public class ConfigureMapMenu {
 	}
 
 	private void createRenderingAttributeItems(List<RenderingRuleProperty> customRules,
-											   final ContextMenuAdapter adapter, final MapActivity activity,
-											   final boolean nightMode) {
+	                                           final ContextMenuAdapter adapter, final MapActivity activity,
+	                                           final boolean nightMode) {
 		final OsmandApplication app = activity.getMyApplication();
 		final OsmandSettings settings = app.getSettings();
 		final int selectedProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
 		final int themeRes = getThemeRes(nightMode);
 
-		adapter.addItem(new ContextMenuCategory(MAP_RENDERING_CATEGORY_ID)
-				.setTitleId(R.string.map_widget_map_rendering, activity)
-				.setLayout(R.layout.list_group_title_with_switch));
+		adapter.addItem(new ContextMenuItem(MAP_RENDERING_CATEGORY_ID)
+				.setCategory(true)
+				.setLayout(R.layout.list_group_title_with_switch)
+				.setTitleId(R.string.map_widget_map_rendering, activity));
 
 		adapter.addItem(new ContextMenuItem(MAP_STYLE_ID)
 				.setTitleId(R.string.map_widget_renderer, activity)
 				.setLayout(R.layout.list_item_single_line_descrition_narrow)
 				.setIcon(R.drawable.ic_map)
-				.setListener((ad, itemId, pos, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					SelectMapStyleBottomSheetDialogFragment.showInstance(activity.getSupportFragmentManager());
 					return false;
 				})
@@ -499,7 +504,7 @@ public class ConfigureMapMenu {
 				.setTitleId(R.string.map_mode, activity)
 				.setDescription(description)
 				.setIcon(ConfigureMapUtils.getDayNightIcon(activity))
-				.setListener((ad, itemId, pos, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					if (AndroidUtils.isActivityNotDestroyed(activity)) {
 						ConfigureMapDialogs.showMapModeDialog(activity, themeRes, nightMode);
 					}
@@ -513,9 +518,9 @@ public class ConfigureMapMenu {
 				.setDescription(magnifierDesc)
 				.setLayout(R.layout.list_item_single_line_descrition_narrow)
 				.setIcon(R.drawable.ic_action_map_magnifier)
-				.setListener((ad, itemId, pos, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					if (AndroidUtils.isActivityNotDestroyed(activity)) {
-						ConfigureMapDialogs.showMapMagnifierDialog(activity, adapter, themeRes, nightMode, pos, ad);
+						ConfigureMapDialogs.showMapMagnifierDialog(activity, themeRes, nightMode, item, uiAdapter);
 					}
 					return false;
 				})
@@ -532,9 +537,9 @@ public class ConfigureMapMenu {
 				.setDescription(ConfigureMapUtils.getScale(activity))
 				.setLayout(R.layout.list_item_single_line_descrition_narrow)
 				.setIcon(R.drawable.ic_action_map_text_size)
-				.setListener((ad, itemId, pos, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					if (AndroidUtils.isActivityNotDestroyed(activity)) {
-						ConfigureMapDialogs.showTextSizeDialog(activity, adapter, themeRes, nightMode, pos, ad);
+						ConfigureMapDialogs.showTextSizeDialog(activity, themeRes, nightMode, item, uiAdapter);
 					}
 					return false;
 				})
@@ -547,9 +552,9 @@ public class ConfigureMapMenu {
 				.setTitleId(R.string.map_locale, activity)
 				.setDescription(localeDescr).setLayout(R.layout.list_item_single_line_descrition_narrow)
 				.setIcon(R.drawable.ic_action_map_language)
-				.setListener((ad, itemId, pos, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					if (AndroidUtils.isActivityNotDestroyed(activity)) {
-						ConfigureMapDialogs.showMapLanguageDialog(activity, adapter, themeRes, nightMode, pos, ad);
+						ConfigureMapDialogs.showMapLanguageDialog(activity, themeRes, nightMode, item, uiAdapter);
 					}
 					return false;
 				})
@@ -567,7 +572,8 @@ public class ConfigureMapMenu {
 		}
 
 		if (getCustomRenderingPropertiesSize(customRules) > 0) {
-			adapter.addItem(new ContextMenuCategory(null)
+			adapter.addItem(new ContextMenuItem(OTHER_MAP_ATTRIBUTES_CATEGORY)
+					.setCategory(true)
 					.setTitleId(R.string.rendering_category_others, activity)
 					.setLayout(R.layout.list_group_title_with_switch));
 			createCustomRenderingProperties(adapter, activity, customRules, nightMode);
@@ -600,19 +606,19 @@ public class ConfigureMapMenu {
 			}
 		}
 		if (prefs.size() > 0) {
-			ItemClickListener clickListener = (a, itemId, pos, isChecked, viewCoordinates) -> {
+			ItemClickListener clickListener = (uiAdapter, view, item, isChecked) -> {
 				if (!isChecked && !useDescription) {
 					for (int i = 0; i < prefs.size(); i++) {
 						prefs.get(i).set(false);
 					}
-					a.notifyDataSetInvalidated();
+					uiAdapter.onDataSetInvalidated();
 					activity.refreshMapComplete();
 					activity.getMapLayers().updateLayers(activity);
 				} else {
 					if (UI_CATEGORY_DETAILS.equals(category)) {
-						DetailsBottomSheet.showInstance(activity.getSupportFragmentManager(), ps, prefs, a, adapter, pos);
+						DetailsBottomSheet.showInstance(activity.getSupportFragmentManager(), ps, prefs, uiAdapter, item);
 					} else {
-						ConfigureMapDialogs.showPreferencesDialog(adapter, a, pos, activity,
+						ConfigureMapDialogs.showPreferencesDialog(uiAdapter, item, activity,
 								activity.getString(strId), ps, prefs, nightMode, selectedProfileColor);
 					}
 				}
@@ -635,13 +641,13 @@ public class ConfigureMapMenu {
 			} else {
 				item.setListener(new OnRowItemClick() {
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> a, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
-						return clickListener.onContextMenuClick(a, itemId, pos, isChecked, null);
+					public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter, @Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
+						return clickListener.onContextMenuClick(uiAdapter, view, item, isChecked);
 					}
 
 					@Override
-					public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> a, View view, int itemId, int pos) {
-						ConfigureMapDialogs.showPreferencesDialog(adapter, a, pos, activity,
+					public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter, @NonNull View view, @NonNull ContextMenuItem item) {
+						ConfigureMapDialogs.showPreferencesDialog(uiAdapter, item, activity,
 								activity.getString(strId), ps, prefs, nightMode, selectedProfileColor);
 						return false;
 					}
@@ -676,8 +682,8 @@ public class ConfigureMapMenu {
 	}
 
 	private void createCustomRenderingProperties(ContextMenuAdapter adapter, MapActivity activity,
-												 List<RenderingRuleProperty> customRules,
-												 boolean nightMode) {
+	                                             List<RenderingRuleProperty> customRules,
+	                                             boolean nightMode) {
 		for (RenderingRuleProperty p : customRules) {
 			if (isPropertyAccepted(p)) {
 				adapter.addItem(createRenderingProperty(adapter, activity, INVALID_ID, p, CUSTOM_RENDERING_ITEMS_ID_SCHEME + p.getName(), nightMode));
@@ -696,9 +702,9 @@ public class ConfigureMapMenu {
 	}
 
 	private ContextMenuItem createRenderingProperty(List<RenderingRuleProperty> customRules,
-													ContextMenuAdapter adapter, MapActivity activity,
-													@DrawableRes int icon, String attrName, String id,
-													boolean nightMode) {
+	                                                ContextMenuAdapter adapter, MapActivity activity,
+	                                                @DrawableRes int icon, String attrName, String id,
+	                                                boolean nightMode) {
 		for (RenderingRuleProperty p : customRules) {
 			if (p.getAttrName().equals(attrName)) {
 				return createRenderingProperty(adapter, activity, icon, p, id, nightMode);
@@ -725,9 +731,9 @@ public class ConfigureMapMenu {
 			String propertyName = AndroidUtils.getRenderingStringPropertyName(app, p.getAttrName(), p.getName());
 			ContextMenuItem item = new ContextMenuItem(id)
 					.setTitle(propertyName)
-					.setListener((ad, itemId, pos, isChecked, viewCoordinates) -> {
+					.setListener((uiAdapter, view, _item, isChecked) -> {
 						if (AndroidUtils.isActivityNotDestroyed(activity)) {
-							ConfigureMapDialogs.showRenderingPropertyDialog(activity, adapter, p, pref, pos, nightMode);
+							ConfigureMapDialogs.showRenderingPropertyDialog(activity, p, pref, _item, nightMode);
 						}
 						return false;
 					})
@@ -755,7 +761,7 @@ public class ConfigureMapMenu {
 		CommonPreference<Boolean> pref = settings.getCustomRenderBooleanProperty(attrName);
 		return new ContextMenuItem(id)
 				.setTitle(name)
-				.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					if (property != null) {
 						pref.set(isChecked);
 						activity.refreshMap();
@@ -766,13 +772,10 @@ public class ConfigureMapMenu {
 					if (callback != null) {
 						callback.processResult(isChecked);
 					}
-					ContextMenuItem item = adapter.getItem(pos);
-					if (item != null) {
-						item.setSelected(pref.get());
-						item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
-						item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
-						adapter.notifyDataSetChanged();
-					}
+					item.setSelected(pref.get());
+					item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
+					item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
+					uiAdapter.onDataSetChanged();
 					return false;
 				})
 				.setSelected(pref.get())
@@ -800,7 +803,7 @@ public class ConfigureMapMenu {
 								}
 								app.getRendererRegistry().setCurrentSelectedRender(loaded);
 								activity.refreshMapComplete();
-								activity.getDashboard().updateListAdapter(createListAdapter(activity));
+								activity.getDashboard().refreshContent(false);
 							} else {
 								app.showShortToastMessage(R.string.renderer_load_exception);
 							}

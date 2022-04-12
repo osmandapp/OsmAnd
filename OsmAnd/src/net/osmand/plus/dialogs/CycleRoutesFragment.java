@@ -1,8 +1,5 @@
 package net.osmand.plus.dialogs;
 
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CYCLE_NODE_NETWORK_ROUTES_ATTR;
-import static net.osmand.plus.dialogs.ConfigureMapMenu.SHOW_CYCLE_ROUTES_ATTR;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +26,9 @@ import net.osmand.plus.widgets.multistatetoggle.RadioItem;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
+
+import static net.osmand.plus.configmap.ConfigureMapMenu.CYCLE_NODE_NETWORK_ROUTES_ATTR;
+import static net.osmand.plus.configmap.ConfigureMapMenu.SHOW_CYCLE_ROUTES_ATTR;
 
 public class CycleRoutesFragment extends BaseOsmAndFragment {
 

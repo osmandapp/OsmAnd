@@ -23,14 +23,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.CtxMenuUtils;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.button.PurchasingUtils;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.configmap.ConfigureMapMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -54,9 +55,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_PROFILE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SWITCH_PROFILE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
 import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.BUTTON;
 import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.DESCRIPTION;
@@ -183,28 +181,16 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	}
 
 	private void initMainActionsIds(ApplicationMode appMode, boolean useDefaultValue) {
-		List<ContextMenuItem> defItems = getCustomizableDefaultItems(contextMenuAdapter.getDefaultItems());
+		List<ContextMenuItem> items = CtxMenuUtils.getCustomizableItems(contextMenuAdapter);
 		ContextMenuItemsSettings pref = getMenuItemsSettings(appMode, useDefaultValue);
 		if (pref instanceof MainContextMenuItemsSettings) {
 			mainActionItems = new ArrayList<>(((MainContextMenuItemsSettings) pref).getMainIds());
 			if (mainActionItems.isEmpty()) {
-				for (int i = 0; i < MAIN_BUTTONS_QUANTITY && i < defItems.size(); i++) {
-					mainActionItems.add(defItems.get(i).getId());
+				for (int i = 0; i < MAIN_BUTTONS_QUANTITY && i < items.size(); i++) {
+					mainActionItems.add(items.get(i).getId());
 				}
 			}
 		}
-	}
-
-	public static List<ContextMenuItem> getCustomizableDefaultItems(List<ContextMenuItem> defItems) {
-		List<ContextMenuItem> items = new ArrayList<>();
-		for (ContextMenuItem item : defItems) {
-			if (!APP_PROFILES_ID.equals(item.getId())
-					&& !DRAWER_CONFIGURE_PROFILE_ID.equals(item.getId())
-					&& !DRAWER_SWITCH_PROFILE_ID.equals(item.getId())) {
-				items.add(item);
-			}
-		}
-		return items;
 	}
 
 	private void instantiateContextMenuAdapter() {
@@ -269,7 +255,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		applyButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				List<ContextMenuItem> defItems = getCustomizableDefaultItems(contextMenuAdapter.getDefaultItems());
+				List<ContextMenuItem> defItems = CtxMenuUtils.getCustomizableItems(contextMenuAdapter);
 				List<String> ids = new ArrayList<>();
 				if (!menuItemsOrder.isEmpty()) {
 					sortByCustomOrder(defItems, menuItemsOrder);
@@ -319,7 +305,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		super.onActivityCreated(savedInstanceState);
 		instantiateContextMenuAdapter();
 		if (menuItemsOrder.isEmpty()) {
-			for (ContextMenuItem item : getCustomizableDefaultItems(contextMenuAdapter.getDefaultItems())) {
+			for (ContextMenuItem item : CtxMenuUtils.getCustomizableItems(contextMenuAdapter)) {
 				menuItemsOrder.put(item.getId(), item.getOrder());
 			}
 		}
@@ -565,7 +551,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	}
 
 	private List<RearrangeMenuAdapterItem> getItemsForRearrangeAdapter(List<String> hiddenItemsIds, HashMap<String, Integer> itemsOrderIds, boolean hidden) {
-		List<ContextMenuItem> defItems = getCustomizableDefaultItems(contextMenuAdapter.getDefaultItems());
+		List<ContextMenuItem> defItems = CtxMenuUtils.getCustomizableItems(contextMenuAdapter);
 		if (!itemsOrderIds.isEmpty()) {
 			sortByCustomOrder(defItems, itemsOrderIds);
 		}

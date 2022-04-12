@@ -1,7 +1,5 @@
 package net.osmand.plus.dialogs;
 
-import static net.osmand.plus.dialogs.ConfigureMapMenu.HIKING_ROUTES_OSMC_ATTR;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +32,8 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.plus.configmap.ConfigureMapMenu.HIKING_ROUTES_OSMC_ATTR;
 
 public class HikingRoutesFragment extends BaseOsmAndFragment {
 

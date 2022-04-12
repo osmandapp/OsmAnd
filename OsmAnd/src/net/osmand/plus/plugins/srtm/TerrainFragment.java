@@ -39,13 +39,16 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
-import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
+import net.osmand.plus.widgets.ctxmenu.ViewCreator;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import org.apache.commons.logging.Log;
@@ -103,7 +106,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	private RangeSlider zoomSlider;
 	private ObservableListView observableListView;
 
-	private ArrayAdapter<ContextMenuItem> listAdapter;
+	private ContextMenuListAdapter listAdapter;
 
 	private final Slider.OnChangeListener transparencySliderChangeListener = new Slider.OnChangeListener() {
 		@Override
@@ -365,8 +368,6 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 
 	private void updateDownloadSection() {
 		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
-		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
-		adapter.setProfileDependent(true);
 
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
@@ -406,26 +407,21 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 										? HILLSHADE_FILE.getString(app) + " • " + indexItem.getSizeDescription(app)
 										: SLOPE_FILE.getString(app) + " • " + indexItem.getSizeDescription(app))
 								.setIcon(mode == HILLSHADE ? HILLSHADE_FILE.getIconResource() : SLOPE_FILE.getIconResource())
-								.setListener((adptr, itemId, position, isChecked, viewCoordinates) -> {
+								.setListener((uiAdapter, view, item, isChecked) -> {
 									MapActivity mapActivity1 = mapActivityRef.get();
 									if (mapActivity1 != null && !mapActivity1.isFinishing()) {
-										ContextMenuItem item = adptr.getItem(position);
 										if (downloadThread.isDownloading(indexItem)) {
 											downloadThread.cancelDownload(indexItem);
-											if (item != null) {
 												item.setProgress(ContextMenuItem.INVALID_ID);
 												item.setLoading(false);
 												item.setSecondaryIcon(R.drawable.ic_action_import);
-												adptr.notifyDataSetChanged();
-											}
+												uiAdapter.onDataSetChanged();
 										} else {
 											new DownloadValidationManager(app).startDownload(mapActivity1, indexItem);
-											if (item != null) {
 												item.setProgress(ContextMenuItem.INVALID_ID);
 												item.setLoading(true);
 												item.setSecondaryIcon(R.drawable.ic_action_remove_dark);
-												adptr.notifyDataSetChanged();
-											}
+												uiAdapter.onDataSetChanged();
 										}
 									}
 									return false;
@@ -465,13 +461,19 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 				e.printStackTrace();
 			}
 		}
-		listAdapter = adapter.createListAdapter(mapActivity, !nightMode);
+
+		ApplicationMode appMode = settings.getApplicationMode();
+		ViewCreator viewCreator = new ViewCreator(mapActivity, nightMode);
+		viewCreator.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
+		viewCreator.setCustomControlsColor(appMode.getProfileColor(nightMode));
+
+		listAdapter = adapter.toListAdapter(mapActivity, viewCreator);
 		observableListView.setAdapter(listAdapter);
 		observableListView.setOnItemClickListener((parent, view, position, id) -> {
 			ContextMenuItem item = adapter.getItem(position);
 			ItemClickListener click = item.getItemClickListener();
 			if (click != null) {
-				click.onContextMenuClick(listAdapter, item.getTitleId(), position, false, null);
+				click.onContextMenuClick(listAdapter, view, item, false);
 			}
 		});
 	}

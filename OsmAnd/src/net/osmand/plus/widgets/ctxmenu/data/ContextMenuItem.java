@@ -1,4 +1,4 @@
-package net.osmand.plus.widgets.cmadapter.item;
+package net.osmand.plus.widgets.ctxmenu.data;
 
 import android.content.Context;
 
@@ -11,12 +11,12 @@ import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.widgets.cmadapter.callback.OnRefreshCallback;
-import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
-import net.osmand.plus.widgets.cmadapter.callback.ItemLongClickListener;
-import net.osmand.plus.widgets.cmadapter.callback.OnIntegerValueChangedListener;
-import net.osmand.plus.widgets.cmadapter.callback.OnItemDeleteAction;
-import net.osmand.plus.widgets.cmadapter.callback.ProgressListener;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemLongClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnIntegerValueChangedListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnItemDeleteAction;
+import net.osmand.plus.widgets.ctxmenu.callback.OnRefreshCallback;
+import net.osmand.plus.widgets.ctxmenu.callback.ProgressListener;
 
 public class ContextMenuItem {
 
@@ -26,6 +26,7 @@ public class ContextMenuItem {
 	private int tag;
 
 	private @LayoutRes int layout = INVALID_ID;
+	private boolean isCategory;
 	private boolean hideCompoundButton;
 	private boolean hideDivider;
 	private boolean clickable = true;
@@ -43,6 +44,7 @@ public class ContextMenuItem {
 	private Boolean selected = null;
 	private int progress = INVALID_ID;
 	private boolean loading;
+
 	private boolean hidden;
 	private int order = 0;
 
@@ -68,6 +70,10 @@ public class ContextMenuItem {
 	@LayoutRes
 	public int getLayout() {
 		return layout;
+	}
+
+	public boolean isCategory() {
+		return isCategory;
 	}
 
 	public boolean shouldHideCompoundButton() {
@@ -138,10 +144,6 @@ public class ContextMenuItem {
 		return order;
 	}
 
-	public boolean isCategory() {
-		return false;
-	}
-
 	@Nullable
 	public ItemClickListener getItemClickListener() {
 		return itemClickListener;
@@ -176,12 +178,17 @@ public class ContextMenuItem {
 		return this;
 	}
 
+	public ContextMenuItem setCategory(boolean category) {
+		isCategory = category;
+		return this;
+	}
+
 	public ContextMenuItem hideCompoundButton(boolean hideCompoundButton) {
 		this.hideCompoundButton = hideCompoundButton;
 		return this;
 	}
 
-	public ContextMenuItem hideDivider(boolean hideDivider) {
+	public ContextMenuItem setHideDivider(boolean hideDivider) {
 		this.hideDivider = hideDivider;
 		return this;
 	}

@@ -49,10 +49,11 @@ import net.osmand.data.ValueHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.configmap.ConfigureMapFragment;
+import net.osmand.plus.configmap.ConfigureMapMenu;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dashboard.tools.DashboardSettingsDialogFragment;
 import net.osmand.plus.dashboard.tools.TransactionBuilder;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.CycleRoutesFragment;
 import net.osmand.plus.dialogs.HikingRoutesFragment;
 import net.osmand.plus.dialogs.RasterMapMenu;
@@ -81,12 +82,12 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer;
-import net.osmand.plus.views.layers.MapInfoLayer;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
-import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
-import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
+import net.osmand.plus.widgets.ctxmenu.ViewCreator;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.wikipedia.WikipediaPoiMenu;
 
 import java.lang.ref.WeakReference;
@@ -557,7 +558,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				actionButton.setVisibility(View.VISIBLE);
 			} else {
 				hideActionButton();
-				if (visibleType == DashboardType.CONFIGURE_MAP) {
+				if (visibleType == DashboardType.CONFIGURE_MAP) { // todo
 					int btnSizePx = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_small_button_size);
 					compassButton = mapActivity.getMapLayers().getMapControlsLayer()
 							.moveCompassButton(dashboardView, getActionButtonLayoutParams(btnSizePx), nightMode);
@@ -567,6 +568,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			View listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
 			ScrollView scrollView = dashboardView.findViewById(R.id.main_scroll);
 			if (visibleType == DashboardType.DASHBOARD
+					|| visibleType == DashboardType.CONFIGURE_MAP
 					|| visibleType == DashboardType.MAPILLARY
 					|| visibleType == DashboardType.CYCLE_ROUTES
 					|| visibleType == DashboardType.HIKING_ROUTES
@@ -575,6 +577,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 				if (visibleType == DashboardType.DASHBOARD) {
 					addOrUpdateDashboardFragments();
+				} else if(visibleType == DashboardType.CONFIGURE_MAP) {
+					ConfigureMapFragment.showInstance(fragmentManager);
 				} else if (visibleType == DashboardType.MAPILLARY) {
 					MapillaryFiltersFragment.showInstance(fragmentManager);
 				} else if (visibleType == DashboardType.CYCLE_ROUTES) {
@@ -696,12 +700,27 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	public void updateListAdapter(ContextMenuAdapter cm) {
-		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandSettings settings = app.getSettings();
+		ApplicationMode appMode = settings.getApplicationMode();
+
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		if (this.nightMode != nightMode) {
 			this.nightMode = nightMode;
 			applyDayNightMode();
 		}
-		ArrayAdapter<ContextMenuItem> listAdapter = cm.createListAdapter(mapActivity, !nightMode);
+
+		ViewCreator viewCreator = new ViewCreator(mapActivity, nightMode);
+		int profileColor = appMode.getProfileColor(nightMode);
+		if (visibleType == DashboardType.WIKIPEDIA) {
+			viewCreator.setDefaultLayoutId(R.layout.dash_item_with_description_72dp);
+			viewCreator.setCustomControlsColor(profileColor);
+		} else if (visibleType != DashboardType.LIST_MENU) {
+			viewCreator.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
+			viewCreator.setCustomControlsColor(profileColor);
+		}
+
+		ContextMenuListAdapter listAdapter = cm.toListAdapter(mapActivity, viewCreator);
 		OnItemClickListener listener = getOptionsMenuOnClickListener(cm, listAdapter);
 		updateListAdapter(listAdapter, listener);
 	}
@@ -716,7 +735,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	@SuppressWarnings("unchecked")
 	public void onDownloadInProgress() {
-		if (visibleType == DashboardType.CONTOUR_LINES || visibleType == DashboardType.TERRAIN
+		if (visibleType == DashboardType.CONTOUR_LINES
+				|| visibleType == DashboardType.TERRAIN
 				|| visibleType == DashboardType.WIKIPEDIA) {
 			DownloadIndexesThread downloadThread = getMyApplication().getDownloadThread();
 			IndexItem downloadIndexItem = downloadThread.getCurrentDownloadingItem();
@@ -753,14 +773,16 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		if (force) {
 			listView.clearParams();
 			updateListAdapter();
-		} else if (visibleType == DashboardType.CONFIGURE_MAP || visibleType == DashboardType.ROUTE_PREFERENCES) {
+		} else if (visibleType == DashboardType.CONFIGURE_MAP) {
+			refreshFragment(ConfigureMapFragment.TAG);
+		} else if (visibleType == DashboardType.ROUTE_PREFERENCES) {
 			int index = listView.getFirstVisiblePosition();
 			View v = listView.getChildAt(0);
 			int top = (v == null) ? 0 : (v.getTop() - listView.getPaddingTop());
 			updateListAdapter();
 			listView.setSelectionFromTop(index, top);
 		} else if (visibleType == DashboardType.MAPILLARY) {
-			refreshFragment((MapillaryFiltersFragment.TAG));
+			refreshFragment(MapillaryFiltersFragment.TAG);
 		} else if (visibleType == DashboardType.TERRAIN) {
 			refreshFragment(TerrainFragment.TAG);
 		} else if (visibleType == DashboardType.CYCLE_ROUTES) {
@@ -785,8 +807,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		}
 	}
 
-	private OnItemClickListener getOptionsMenuOnClickListener(final ContextMenuAdapter adapter,
-	                                                          final ArrayAdapter<ContextMenuItem> listAdapter) {
+	private OnItemClickListener getOptionsMenuOnClickListener(ContextMenuAdapter adapter,
+	                                                          ContextMenuListAdapter listAdapter) {
 		return (parent, view, position, id) -> {
 			int size = adapter.getItems().size();
 			if (position < 0 || position >= size) {
@@ -796,7 +818,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			ContextMenuItem item = adapter.getItem(position);
 			ItemClickListener click = item.getItemClickListener();
 			if (click instanceof OnRowItemClick) {
-				boolean cl = ((OnRowItemClick) click).onRowItemClick(listAdapter, view, item.getTitleId(), position);
+				boolean cl = ((OnRowItemClick) click).onRowItemClick(listAdapter, view, item);
 				if (cl) {
 					hideDashboard();
 				}
@@ -804,7 +826,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				CompoundButton btn = view.findViewById(R.id.toggle_item);
 				if (btn != null && btn.getVisibility() == View.VISIBLE) {
 					btn.setChecked(!btn.isChecked());
-				} else if (click.onContextMenuClick(listAdapter, item.getTitleId(), position, false, null)) {
+				} else if (click.onContextMenuClick(listAdapter, view, item, false)) {
 					hideDashboard();
 				}
 			} else if (!item.isCategory()) {
@@ -1005,25 +1027,13 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	public void onMapSettingsUpdated() {
 		if (DashboardType.CONFIGURE_MAP == visibleType) {
-			updateMenuItems();
+			refreshContent(false);
 		}
 	}
 
 	public void onApplicationModeSettingsUpdated() {
 		if (DashboardType.CONFIGURE_MAP == visibleType) {
-			updateListAdapter(new ConfigureMapMenu().createListAdapter(mapActivity));
-		}
-	}
-
-	public void updateMenuItems() {
-		if (listAdapter != null) {
-			for (int i = 0; i < listAdapter.getCount(); i++) {
-				Object o = listAdapter.getItem(i);
-				if (o instanceof ContextMenuItem) {
-					((ContextMenuItem) o).refreshWithActualData();
-				}
-			}
-			listAdapter.notifyDataSetChanged();
+			refreshContent(false);
 		}
 	}
 
