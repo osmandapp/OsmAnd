@@ -164,12 +164,6 @@ public class RightWidgetsPanel extends FrameLayout {
 	}
 
 	@Override
-	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-		super.onLayout(changed, left, top, right, bottom);
-		WrapContentViewPager2Callback.resizeViewPagerToWrapContent(viewPager, null);
-	}
-
-	@Override
 	protected void dispatchDraw(Canvas canvas) {
 		super.dispatchDraw(canvas);
 		drawBorder(canvas);
