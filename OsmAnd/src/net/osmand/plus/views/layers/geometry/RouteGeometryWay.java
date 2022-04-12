@@ -1,13 +1,14 @@
 package net.osmand.plus.views.layers.geometry;
 
-import android.graphics.Canvas;
 import android.graphics.Paint;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.Location;
-import net.osmand.core.jni.FColorARGB;
+import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.QListFColorARGB;
-import net.osmand.core.jni.QListVectorLine;
 import net.osmand.core.jni.QVectorPointI;
 import net.osmand.core.jni.VectorLine;
 import net.osmand.core.jni.VectorLineBuilder;
@@ -20,11 +21,8 @@ import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class RouteGeometryWay extends
 		MultiColoringGeometryWay<RouteGeometryWayContext, MultiColoringGeometryWayDrawer<RouteGeometryWayContext>> {
@@ -73,7 +71,7 @@ public class RouteGeometryWay extends
 		getContext().getAttrs().customColorPaint.setStrokeCap(cap);
 	}
 
-	public void updateRoute(@NonNull RotatedTileBox tb, @NonNull RouteCalculationResult route) {
+	public boolean updateRoute(@NonNull RotatedTileBox tb, @NonNull RouteCalculationResult route) {
 		if (coloringChanged || tb.getMapDensity() != getMapDensity() || this.route != route) {
 			this.route = route;
 			coloringChanged = false;
@@ -86,7 +84,9 @@ public class RouteGeometryWay extends
 			} else {
 				updateWay(locations, tb);
 			}
+			return true;
 		}
+		return false;
 	}
 
 	@NonNull
@@ -137,137 +137,85 @@ public class RouteGeometryWay extends
 		}
 	}
 
-	@Override
-	public void drawRouteSegment(RotatedTileBox tb, Canvas canvas, List<Float> tx, List<Float> ty,
-								 List<Double> angles, List<Double> distances, double distToFinish,
-								 List<GeometryWayStyle<?>> styles) {
-
-		if (hasMapRenderer()) {
-
-			QListVectorLine lines = new QListVectorLine();
-			if (collection != null) {
-				lines = collection.getLines();
-			}
-
-			QVectorPointI points = new QVectorPointI();
-			List<Location> ll = helper.getRoute().getRouteLocations();
-			for (Location l : ll) {
-				int x = MapUtils.get31TileNumberX(l.getLongitude());
-				int y = MapUtils.get31TileNumberY(l.getLatitude());
-				points.add(new PointI(x, y));
-			}
-			QListFColorARGB colors = getColorizationMapping();
-
-			if (lines.isEmpty()) {
-				int bsOrder = baseOrder;
-				if (collection == null) {
-					collection = new VectorLinesCollection();
-				}
-
-				if (kOutlineColor == null) {
-					kOutlineColor = new FColorARGB(150.0f/255.0f, 0.0f, 0.0f, 0.0f);
-				}
-
-
-				int colorizationScheme = getColorizationScheme();
-
-				// Add outline for colorized lines
-				if (!colors.isEmpty()) {
-					VectorLineBuilder outlineBuilder = new VectorLineBuilder();;
-					outlineBuilder.setBaseOrder(bsOrder--)
-							.setIsHidden(points.size() < 2)
-							.setLineId(kOutlineId)
-							.setLineWidth(customWidth + kOutlineWidth)
-							.setOutlineWidth(kOutlineWidth)
-							.setPoints(points)
-							.setFillColor(kOutlineColor)
-							.setApproximationEnabled(false);
-
-					outlineBuilder.buildAndAddToCollection(collection);
-				}
-
-				VectorLineBuilder vectorLineBuilder = new VectorLineBuilder();
-				double width = customWidth;
-				int color = customColor;
-				vectorLineBuilder
-						.setPoints(points)
-						.setIsHidden(false)
-						.setLineId(1)
-						.setLineWidth(width)
-						.setFillColor(NativeUtilities.createFColorARGB(color))
-						.setBaseOrder(bsOrder--);
-
-				if (!colors.isEmpty()) {
-					vectorLineBuilder.setColorizationMapping(colors);
-					vectorLineBuilder.setColorizationScheme(colorizationScheme);
-				}
-				vectorLineBuilder.buildAndAddToCollection(collection);
-
-				mapRendererView.addSymbolsProvider(collection);
-			} else {
-				//update route line during navigation
-				for (int i = 0; i < lines.size(); i++) {
-					VectorLine line = lines.get(i);
-					if (line.getPoints().size() != points.size()) {
-						line.setPoints(points);
-						if (!colors.isEmpty() && line.getOutlineWidth() == 0.0d) {
-							line.setColorizationMapping(colors);
-						}
-					}
-				}
-			}
-		} else {
-			super.drawRouteSegment(tb, canvas, tx, ty, angles, distances, distToFinish, styles);
-		}
-	}
-
-	public QListFColorARGB getColorizationMapping() {
-		//OpenGL
-		QListFColorARGB colors = new QListFColorARGB();
-		if (styleMap != null && styleMap.size() > 0) {
-			int lastColor = 0;
-			for (int i = 0; i < styleMap.size(); i++) {
-				GeometryWayStyle<?> style = styleMap.get(i);
-				int color = 0;
-				if (style != null) {
-					if (style instanceof GeometryGradientWayStyle) {
-						color = ((GeometryGradientWayStyle) style).currColor;
-						lastColor = ((GeometryGradientWayStyle) style).nextColor;
-					} else {
-						color = style.getColor() == null ? 0 : style.getColor();
-						lastColor = color;
-					}
-				}
-				colors.add(NativeUtilities.createFColorARGB(color));
-			}
-			colors.add(NativeUtilities.createFColorARGB(lastColor));
-		}
-		return colors;
-	}
-
-	public int getColorizationScheme() {
-		//OpenGL
-		if (styleMap != null) {
-			for (int i = 0; i < styleMap.size(); i++) {
-				GeometryWayStyle<?> style = styleMap.get(i);
-				if (style != null) {
-					return style.getColorizationScheme();
-				}
-			}
-		}
-		return GeometryWayStyle.COLORIZATION_NONE;
-	}
-
-	public void resetLayer() {
-		if (mapRendererView != null) {
-			if (collection != null) {
-				mapRendererView.removeSymbolsProvider(collection);
-				collection = null;
-			}
+	public void resetSymbolProviders() {
+		super.resetSymbolProviders();
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
 			if (actionLinesCollection != null) {
-				mapRendererView.removeSymbolsProvider(actionLinesCollection);
+				mapRenderer.removeSymbolsProvider(actionLinesCollection);
 				actionLinesCollection = null;
 			}
+		}
+	}
+
+	public void resetActionLines() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			if (actionLinesCollection != null) {
+				mapRenderer.removeSymbolsProvider(actionLinesCollection);
+				actionLinesCollection = null;
+			}
+		}
+	}
+
+	private List<List<Location>> getActionArrows(List<Location> locations) {
+		List<List<Location>> ll = new ArrayList<>();
+		ll.add(new ArrayList<>());
+		int index = 0;
+		for (int i = 0; i < locations.size(); i++) {
+			Location loc = locations.get(i);
+			if (loc != null) {
+				ll.get(index).add(loc);
+			} else if (i < locations.size() - 1) {
+				index++;
+				ll.add(new ArrayList<>());
+			}
+		}
+		return ll;
+	}
+
+	public void buildActionArrows(List<Location> actionPoints, int customTurnArrowColor) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null) {
+			return;
+		}
+		int baseOrder = this.vectorLinesBaseOrder - 1000;
+		List<List<Location>> actionArrows = getActionArrows(actionPoints);
+		if (!actionArrows.isEmpty()) {
+			int lineIdx = 0;
+			if (actionLinesCollection == null) {
+				actionLinesCollection = new VectorLinesCollection();
+			}
+			long initialLinesCount = actionLinesCollection.getLines().size();
+			for (List<Location> line : actionArrows) {
+				QVectorPointI points = new QVectorPointI();
+				for (Location point : line) {
+					int x = MapUtils.get31TileNumberX(point.getLongitude());
+					int y = MapUtils.get31TileNumberY(point.getLatitude());
+					points.add(new PointI(x, y));
+				}
+				if (lineIdx < initialLinesCount) {
+					VectorLine vectorLine = actionLinesCollection.getLines().get(lineIdx);
+					vectorLine.setPoints(points);
+					vectorLine.setIsHidden(false);
+					lineIdx++;
+				} else {
+					VectorLineBuilder vectorLineBuilder = new VectorLineBuilder();
+					vectorLineBuilder.setBaseOrder(baseOrder--)
+							.setIsHidden(false)
+							.setLineId((int) actionLinesCollection.getLines().size())
+							.setLineWidth(customWidth)
+							.setPoints(points)
+							.setEndCapStyle(VectorLine.EndCapStyle.ARROW.ordinal())
+							.setFillColor(NativeUtilities.createFColorARGB(customTurnArrowColor));
+					vectorLineBuilder.buildAndAddToCollection(actionLinesCollection);
+				}
+			}
+			while (lineIdx < initialLinesCount) {
+				actionLinesCollection.getLines().get(lineIdx).setIsHidden(true);
+				lineIdx++;
+			}
+			mapRenderer.addSymbolsProvider(actionLinesCollection);
 		}
 	}
 }

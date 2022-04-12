@@ -176,10 +176,13 @@ public abstract class MultiColoringGeometryWay
 	}
 
 	@Override
-	protected void addLocation(RotatedTileBox tb, int locationIdx, double dist, GeometryWayStyle<?> style,
-	                           List<Float> tx, List<Float> ty, List<Double> angles,
-	                           List<Double> distances, List<GeometryWayStyle<?>> styles) {
-		super.addLocation(tb, locationIdx, dist, style, tx, ty, angles, distances, styles);
+	protected void addLocation(RotatedTileBox tb, int locationIdx, double dist,
+	                           GeometryWayStyle<?> style,
+	                           List<Float> tx, List<Float> ty,
+	                           List<Integer> tx31, List<Integer> ty31,
+	                           List<Double> angles, List<Double> distances,
+	                           List<GeometryWayStyle<?>> styles) {
+		super.addLocation(tb, locationIdx, dist, style, tx, ty, tx31, ty31, angles, distances, styles);
 		if (style instanceof GeometryGradientWayStyle<?> && styles.size() > 1) {
 			GeometryGradientWayStyle<?> prevStyle = (GeometryGradientWayStyle<?>) styles.get(styles.size() - 2);
 			GeometryGradientWayStyle<?> currStyle = (GeometryGradientWayStyle<?>) style;
@@ -223,10 +226,10 @@ public abstract class MultiColoringGeometryWay
 	}
 
 	@Override
-	protected boolean shouldSkipLocation(TByteArrayList simplification, Map<Integer,
-	                                     GeometryWayStyle<?>> styleMap, int locationIdx) {
+	protected boolean shouldSkipLocation(@Nullable TByteArrayList simplification,
+	                                     Map<Integer, GeometryWayStyle<?>> styleMap, int locationIdx) {
 		return coloringType.isGradient()
-				? simplification.getQuick(locationIdx) == 0
+				? simplification != null && simplification.getQuick(locationIdx) == 0
 				: super.shouldSkipLocation(simplification, styleMap, locationIdx);
 	}
 

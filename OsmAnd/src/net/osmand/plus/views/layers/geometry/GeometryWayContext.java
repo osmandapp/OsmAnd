@@ -9,8 +9,10 @@ import android.graphics.PorterDuffColorFilter;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.graphics.ColorUtils;
 
+import net.osmand.core.android.MapRendererView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.RenderingLineAttributes;
@@ -20,9 +22,11 @@ public abstract class GeometryWayContext {
 	public static final int DEFAULT_SIMPLIFICATION_ZOOM = 16;
 
 	private final Context ctx;
+
 	private final float density;
 	private boolean nightMode;
 	private int simplificationZoom = DEFAULT_SIMPLIFICATION_ZOOM;
+	private boolean mapRendererEnabled = true;
 
 	private final Paint paintIcon;
 	private final Paint paintIconCustom;
@@ -58,6 +62,23 @@ public abstract class GeometryWayContext {
 	@NonNull
 	public Context getCtx() {
 		return ctx;
+	}
+
+	public boolean hasMapRenderer() {
+		return mapRendererEnabled && getMapRenderer() != null;
+	}
+
+	public void enableMapRenderer() {
+		mapRendererEnabled = true;
+	}
+
+	public void disableMapRenderer() {
+		mapRendererEnabled = false;
+	}
+
+	@Nullable
+	public MapRendererView getMapRenderer() {
+		return mapRendererEnabled ? getApp().getOsmandMap().getMapView().getMapRenderer() : null;
 	}
 
 	public RenderingLineAttributes getAttrs() {

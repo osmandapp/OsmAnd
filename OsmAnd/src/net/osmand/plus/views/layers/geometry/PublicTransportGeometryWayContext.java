@@ -12,7 +12,9 @@ import android.graphics.drawable.Drawable;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
+import net.osmand.core.android.MapRendererView;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.RenderingLineAttributes;
@@ -28,11 +30,11 @@ public class PublicTransportGeometryWayContext extends GeometryWayContext {
 	private Bitmap walkArrowBitmap;
 	private Bitmap anchorBitmap;
 	private Map<Pair<Integer, Drawable>, Bitmap> stopBitmapsCache = new HashMap<>();
-	private Map<Integer, Bitmap> stopSmallBitmapsCache = new HashMap<>();
+	private final Map<Integer, Bitmap> stopSmallBitmapsCache = new HashMap<>();
 	private int walkRouteColor = Color.BLACK;
 	private float walkRouteWidth = 40.0f;
 
-	public PublicTransportGeometryWayContext(Context ctx, float density) {
+	public PublicTransportGeometryWayContext(@NonNull Context ctx, float density) {
 		super(ctx, density);
 	}
 

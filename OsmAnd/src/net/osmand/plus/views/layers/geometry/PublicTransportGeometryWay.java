@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
@@ -24,7 +25,6 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.osm.edit.Way;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.render.RenderingIcons;
@@ -32,6 +32,7 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.transport.TransportStopType;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.router.TransportRoutePlanner;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
@@ -42,7 +43,6 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -50,7 +50,7 @@ import java.util.TreeMap;
 
 public class PublicTransportGeometryWay extends GeometryWay<PublicTransportGeometryWayContext, PublicTransportGeometryWayDrawer> {
 
-	private TransportRoutingHelper transportHelper;
+	private final TransportRoutingHelper transportHelper;
 	private TransportRouteResult route;
 	private static final Log LOG = PlatformUtil.getLog(PublicTransportGeometryWay.class);
 
@@ -68,7 +68,7 @@ public class PublicTransportGeometryWay extends GeometryWay<PublicTransportGeome
 		return new GeometryWalkWayStyle(getContext());
 	}
 
-	public void updateRoute(RotatedTileBox tb, TransportRouteResult route) {
+	public boolean updateRoute(RotatedTileBox tb, TransportRouteResult route) {
 		if (tb.getMapDensity() != getMapDensity() || this.route != route) {
 			this.route = route;
 			List<Location> locations;
@@ -102,7 +102,9 @@ public class PublicTransportGeometryWay extends GeometryWay<PublicTransportGeome
 				styleMap = stlMap;
 			}
 			updateWay(locations, styleMap, tb);
+			return true;
 		}
+		return false;
 	}
 
 	public void clearRoute() {
@@ -169,89 +171,62 @@ public class PublicTransportGeometryWay extends GeometryWay<PublicTransportGeome
 	}
 
 	@Override
-	public void drawRouteSegment(RotatedTileBox tb, Canvas canvas, List<Float> tx, List<Float> ty,
+	public void drawRouteSegment(RotatedTileBox tb, Canvas canvas,
+	                             List<Float> tx, List<Float> ty,
+	                             List<Integer> tx31, List<Integer> ty31,
 								 List<Double> angles, List<Double> distances, double distToFinish,
 								 List<GeometryWayStyle<?>> styles) {
+		super.drawRouteSegment(tb, canvas, tx, ty, tx31, ty31, angles, distances, distToFinish, styles);
 
-		if (hasMapRenderer()) {
-			//OpenGL
-			if (getLocationProvider() == null || baseOrder == -1) {
-				LOG.error("ERROR. OpenGL rendering of public transport");
-				return;
-			}
-
-			if (collection == null) {
-				Map<GeometryWayStyle<?>, QVectorPointI> segments = new HashMap<>();
-				int size = getLocationProvider().getSize();
-				GeometryWayStyle<?> style = null;
-				GeometryWayStyle<?> prevStyle = null;
-				QVectorPointI points = new QVectorPointI();
-				for (int i = 0; i < size; i++) {
-					style = getStyle(i, null);
-					if (style != null && prevStyle != null && prevStyle != style) {
-						drawOpenGL(points, prevStyle);
-						points.clear();
-					}
-					int x = MapUtils.get31TileNumberX(getLocationProvider().getLongitude(i));
-					int y = MapUtils.get31TileNumberY(getLocationProvider().getLatitude(i));
-					points.add(new PointI(x, y));
-					prevStyle = style;
-				}
-				if (points.size() > 0) {
-					drawOpenGL(points, prevStyle);
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			MapMarkersCollection transportRouteMarkers = this.transportRouteMarkers;
+			if (transportRouteMarkers == null) {
+				transportRouteMarkers = new MapMarkersCollection();
+				drawTransportStops(transportRouteMarkers);
+				if (!transportRouteMarkers.getMarkers().isEmpty()) {
+					mapRenderer.addSymbolsProvider(transportRouteMarkers);
+					this.transportRouteMarkers = transportRouteMarkers;
 				}
 			}
-		} else {
-			super.drawRouteSegment(tb, canvas, tx, ty, angles, distances, distToFinish, styles);
 		}
 	}
 
-	private void drawOpenGL(QVectorPointI points, GeometryWayStyle<?> style) {
-		if (!hasMapRenderer()) {
-			return;
-		}
+	private void drawOpenGL(@NonNull VectorLinesCollection vectorLinesCollection,
+	                        @NonNull QVectorPointI points, GeometryWayStyle<?> style) {
 		if (style instanceof GeometryTransportWayStyle)	{
-			drawTransportWay(points, (GeometryTransportWayStyle) style);
+			drawTransportWay(vectorLinesCollection, points, (GeometryTransportWayStyle) style);
 		}
 		if (style instanceof GeometryWalkWayStyle) {
-			drawWalkWay(points, (GeometryWalkWayStyle) style);
+			drawWalkWay(vectorLinesCollection, points, (GeometryWalkWayStyle) style);
 		}
-		mapRendererView.addSymbolsProvider(collection);
-		drawTransportStops();
 	}
 
-	/** OpenGL */
-	private void drawTransportWay(QVectorPointI points,  GeometryTransportWayStyle style) {
-		if (collection == null) {
-			collection = new VectorLinesCollection();
-		}
+	private void drawTransportWay(@NonNull VectorLinesCollection vectorLinesCollection,
+	                              @NonNull QVectorPointI points, @NonNull GeometryTransportWayStyle style) {
 		VectorLineBuilder builder = new VectorLineBuilder();
-		builder.setBaseOrder(baseOrder--)
+		builder.setBaseOrder(vectorLinesBaseOrder--)
 				.setIsHidden(points.size() == 0)
 				.setLineId(1)
 				.setLineWidth(style.getWidth(50))
 				.setPoints(points)
 				.setFillColor(NativeUtilities.createFColorARGB(style.getColor(Color.BLACK)));
-		builder.buildAndAddToCollection(collection);
+		builder.buildAndAddToCollection(vectorLinesCollection);
 	}
 
-	/** OpenGL */
-	private void drawWalkWay(QVectorPointI points, GeometryWalkWayStyle style) {
-		if (collection == null) {
-			collection = new VectorLinesCollection();
-		}
+	private void drawWalkWay(@NonNull VectorLinesCollection vectorLinesCollection,
+	                         @NonNull QVectorPointI points, @NonNull GeometryWalkWayStyle style) {
 		VectorLineBuilder builder = new VectorLineBuilder();
 		builder.setPoints(points)
 				.setIsHidden(false)
 				.setLineId(1)
 				.setLineWidth(getContext().getWalkRouteWidth())
 				.setFillColor(NativeUtilities.createFColorARGB(getContext().getWalkRouteColor()))
-				.setBaseOrder(baseOrder--);
-		builder.buildAndAddToCollection(collection);
+				.setBaseOrder(vectorLinesBaseOrder--);
+		builder.buildAndAddToCollection(vectorLinesCollection);
 	}
 
-	/** OpenGL */
-	private void drawTransportStops() {
+	private void drawTransportStops(@NonNull MapMarkersCollection transportRouteMarkers) {
 		GeometryAnchorWayStyle anchorWayStyle = new GeometryAnchorWayStyle(getContext());
 		for (Map.Entry<Integer, GeometryWayStyle<?>> entry : styleMap.entrySet()) {
 			GeometryWayStyle<?> style = entry.getValue();
@@ -266,39 +241,31 @@ public class PublicTransportGeometryWay extends GeometryWay<PublicTransportGeome
 					TransportStop stop = transportStops.get(i);
 					int x = MapUtils.get31TileNumberX(stop.getLocation().getLongitude());
 					int y = MapUtils.get31TileNumberY(stop.getLocation().getLatitude());
-
 					Bitmap icon = (i == start || i == end) ? anchorWayStyle.getPointBitmap() : wayStyle.getStopBitmap();
 
 					MapMarkerBuilder transportMarkerBuilder = new MapMarkerBuilder();
 					transportMarkerBuilder
 							.setIsAccuracyCircleSupported(false)
-							.setBaseOrder(baseOrder - 15)
+							.setBaseOrder(vectorLinesBaseOrder - 1500)
+							.setPosition(new PointI(x, y))
 							.setIsHidden(false)
 							.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal)
 							.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical)
 							.setPinIcon(NativeUtilities.createSkImageFromBitmap(icon));
-
-					if (transportRouteMarkers == null) {
-						transportRouteMarkers = new MapMarkersCollection();
-					}
-					MapMarker marker = transportMarkerBuilder.buildAndAddToCollection(transportRouteMarkers);
-					marker.setPosition(new PointI(x, y));
+					transportMarkerBuilder.buildAndAddToCollection(transportRouteMarkers);
 				}
 			}
 		}
-		if (transportRouteMarkers != null) {
-			mapRendererView.addSymbolsProvider(transportRouteMarkers);
-		}
 	}
 
-	public void resetLayer() {
-		if (collection != null) {
-			mapRendererView.removeSymbolsProvider(collection);
-			collection = null;
-		}
-		if (transportRouteMarkers != null) {
-			mapRendererView.removeSymbolsProvider(transportRouteMarkers);
-			transportRouteMarkers = null;
+	public void resetSymbolProviders() {
+		super.resetSymbolProviders();
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			if (transportRouteMarkers != null) {
+				mapRenderer.removeSymbolsProvider(transportRouteMarkers);
+				transportRouteMarkers = null;
+			}
 		}
 	}
 

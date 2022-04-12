@@ -63,6 +63,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 	@Override
 	protected void initGeometries(float density) {
 		previewWayContext = new RouteGeometryWayContext(view.getContext(), density);
+		previewWayContext.disableMapRenderer();
 		previewWayContext.updatePaints(nightMode, attrs);
 		previewLineGeometry = new RouteGeometryWay(previewWayContext);
 	}
@@ -127,6 +128,8 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 
 		List<Float> tx = new ArrayList<>();
 		List<Float> ty = new ArrayList<>();
+		List<Integer> tx31 = new ArrayList<>();
+		List<Integer> ty31 = new ArrayList<>();
 		tx.add(startX);
 		tx.add(centerX);
 		tx.add(centerX);
@@ -143,7 +146,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 				directionArrowsColor, routeColoringType, routeInfoAttribute);
 		fillPreviewLineArrays(tx, ty, angles, distances, styles);
 		canvas.rotate(+tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-		previewLineGeometry.drawRouteSegment(tileBox, canvas, tx, ty, angles, distances, 0, styles);
+		previewLineGeometry.drawRouteSegment(tileBox, canvas, tx, ty, tx31, ty31, angles, distances, 0, styles);
 		canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
 		if (previewRouteLineInfo.shouldShowTurnArrows()) {
@@ -178,7 +181,9 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 
 		if (previewIcon == null) {
 			previewIcon = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), previewInfo.getIconId());
-			DrawableCompat.setTint(previewIcon.getDrawable(1), previewInfo.getIconColor());
+			if (previewIcon != null) {
+				DrawableCompat.setTint(previewIcon.getDrawable(1), previewInfo.getIconColor());
+			}
 		}
 		canvas.rotate(-90, centerX, centerY);
 		drawIcon(canvas, previewIcon, (int) centerX, (int) centerY);

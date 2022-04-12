@@ -327,6 +327,7 @@ public class RoutingHelper {
 		return voiceRouter;
 	}
 
+	@Nullable
 	public Location getLastProjection() {
 		return lastProjection;
 	}
