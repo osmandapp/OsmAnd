@@ -667,7 +667,7 @@ public class GPXUtilities {
 
 		@Override
 		public int hashCode() {
-			return Algorithms.hash(name, iconName, backgroundType, color);
+			return Algorithms.hash(name, iconName, backgroundType, color, pointsSize);
 		}
 
 		@Override

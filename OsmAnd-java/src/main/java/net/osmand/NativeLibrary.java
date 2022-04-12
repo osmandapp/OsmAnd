@@ -479,7 +479,6 @@ public class NativeLibrary {
 			initFontType(f.getAbsolutePath(), name.substring(0, name.length() - 4), name.toLowerCase().contains("bold"),
 					name.toLowerCase().contains("italic"));
 		}
-		
 	}
 
 	public static class RenderedObject extends MapObject {
@@ -626,13 +625,20 @@ public class NativeLibrary {
 		}
 
 		public String getRouteName() {
+			String name = null;
 			for (RouteType routeType : RouteType.values()) {
-				String name = getTagValue(routeType.getTag() + "_route_name");
+				name = getTagValue(routeType.getTag() + "_route_name");
 				if (!Algorithms.isEmpty(name)) {
 					return name;
 				}
 			}
-			return null;
+			if (Algorithms.isEmpty(name)) {
+				name = getRouteRef();
+			}
+			if (Algorithms.isEmpty(name)) {
+				name = getName();
+			}
+			return name;
 		}
 
 		public String getRouteRef() {

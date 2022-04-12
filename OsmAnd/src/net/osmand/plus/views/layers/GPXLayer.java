@@ -1009,14 +1009,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				return new PointDescription(PointDescription.POINT_TYPE_GPX, travelGpx.getTitle());
 			} else if (pair.first instanceof RenderedObject && pair.second instanceof QuadRect) {
 				RenderedObject renderedObject = (RenderedObject) pair.first;
-				String name = renderedObject.getRouteName();
-				if (Algorithms.isEmpty(name)) {
-					name = renderedObject.getRouteRef();
-				}
-				if (Algorithms.isEmpty(name)) {
-					name = renderedObject.getName();
-				}
-				return new PointDescription(PointDescription.POINT_TYPE_ROUTE, name);
+				return new PointDescription(PointDescription.POINT_TYPE_ROUTE, renderedObject.getRouteName());
 			}
 		}
 		return null;
@@ -1230,7 +1223,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			SelectedGpxFile selectedGpxFile = pointFileMap.get(objectInMotion);
 			if (selectedGpxFile != null) {
 				GPXFile gpxFile = selectedGpxFile.getGpxFile();
-				gpxFile.updateWptPt(objectInMotion, position.getLatitude(),	position.getLongitude(),
+				gpxFile.updateWptPt(objectInMotion, position.getLatitude(), position.getLongitude(),
 						objectInMotion.desc, objectInMotion.name, objectInMotion.category,
 						objectInMotion.getColor(), objectInMotion.getIconName(), objectInMotion.getBackgroundType());
 				syncGpx(gpxFile);
