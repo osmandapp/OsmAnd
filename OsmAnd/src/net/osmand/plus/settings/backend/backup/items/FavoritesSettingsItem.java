@@ -11,11 +11,11 @@ import androidx.annotation.Nullable;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.FavouritePoint;
-import net.osmand.plus.myplaces.FavouritesHelper;
-import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.myplaces.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
@@ -202,7 +202,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 					for (FavouritePoint point : favourites) {
 						FavoriteGroup group = flatGroups.get(point.getCategory());
 						if (group == null) {
-							group = new FavoriteGroup(point.getCategory(), point.isVisible(), point.getColor());
+							group = new FavoriteGroup(point);
 							flatGroups.put(group.getName(), group);
 							items.add(group);
 						}

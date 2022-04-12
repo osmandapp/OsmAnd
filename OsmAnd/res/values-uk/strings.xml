@@ -1666,7 +1666,7 @@
     <string name="default_speed_system_descr">Вкажіть одиниці вимірювання швидкості.</string>
     <string name="default_speed_system">Одиниці вимірювання швидкості</string>
     <string name="si_nm">Морські милі</string>
-    <string name="si_kmh">Кілометрів за годину</string>
+    <string name="si_kmh">Кілометрів на годину</string>
     <string name="si_mph">Миль на годину</string>
     <string name="si_m_s">Метрів за секунду</string>
     <string name="si_min_km">Хвилин за кілометр</string>
@@ -4582,4 +4582,10 @@
 \nНа перехрестях симуляція сповільниться.
 \nДодаткові штрафи будуть застосовуватися на світлофорах, знаках зупинки і т.д.</string>
     <string name="simulation_real_mode_title">Реалістична симуляція</string>
+    <string name="apply_to_existing_points_descr">Застосувати зміни до наявних точок групи чи лише до нових\?</string>
+    <string name="apply_to_existing">Застосувати до наявних</string>
+    <string name="apply_to_existing_favorites_descr">Застосувати зміни до наявних вибраних точок групи чи лише до нових\?</string>
+    <string name="apply_only_to_new_points">Застосовувати лише до нових точок</string>
+    <string name="apply_only_to_new_favorites">Застосовувати лише до нових вибраних</string>
+    <string name="change_default_appearance">Змінити типовий зовнішній вигляд</string>
 </resources>

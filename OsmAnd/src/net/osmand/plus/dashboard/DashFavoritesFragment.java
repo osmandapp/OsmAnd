@@ -17,7 +17,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.myplaces.FavouritesHelper;
-import net.osmand.plus.myplaces.FavouritesHelper.FavoritesListener;
+import net.osmand.plus.myplaces.FavoritesListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -78,7 +78,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 				}
 
 				@Override
-				public void onFavoriteDataUpdated(@NonNull FavouritePoint favouritePoint) {
+				public void onFavoriteDataUpdated(@NonNull FavouritePoint point) {
 				}
 			});
 		}

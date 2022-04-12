@@ -4534,4 +4534,27 @@
     <string name="rendering_attr_showRunningRoutes_name">Trasy biegowe</string>
     <string name="stop_download_desc">Pobieranie nie zostało ukończone. Jeśli teraz przerwiesz pobieranie, tylko część kafelków będzie dostępna do wyświetlenia.</string>
     <string name="edit_category">Edytuj kategorię</string>
+    <string name="shared_string_visible_widgets">Widoczne widżety</string>
+    <string name="bottom_widgets_panel">Panel dolny</string>
+    <string name="routeInfo_horse_scale_name">Trudność szlaków konnych</string>
+    <string name="top_widgets_panel">Panel górny</string>
+    <string name="shared_string_item">Pozycja</string>
+    <string name="routeInfo_horse_scale_description">Renderowanie ścieżek według trudności szlaków konnych</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Trudna</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">Niebezpieczna</string>
+    <string name="map_markers_bar">Pasek znaczników mapy</string>
+    <string name="osm_carto_render_descr">Podobny do stylu OpenStreetMap-carto używanego na głównej stronie OSM</string>
+    <string name="rendering_attr_horse_scale_demanding_name">Wymagająca</string>
+    <string name="rendering_attr_horse_scale_critical_name">Krytyczny</string>
+    <string name="rendering_attr_showTramRoutes_name">Trasy tramwajowe</string>
+    <string name="rendering_attr_showTrainRoutes_name">Trasy kolejowe</string>
+    <string name="rendering_attr_showBusRoutes_name">Linie autobusowe</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Trasy trolejbusowe</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">Trasy wahadłowe</string>
+    <string name="shared_string_buttons">Przyciski</string>
+    <string name="configure_screen_widgets_descr">Wybierz stronę ekranu, aby dodać lub zmienić rozmieszczenie widżetów.</string>
+    <string name="simulation_real_mode_title">Realistyczna symulacja</string>
+    <string name="simulation_constant_mode_desc">Symulacja będzie wykonywana ze stałą wybraną prędkością.</string>
+    <string name="simulation_constant_mode_title">Stała prędkość</string>
+    <string name="speed_mode">Tryb prędkości</string>
 </resources>

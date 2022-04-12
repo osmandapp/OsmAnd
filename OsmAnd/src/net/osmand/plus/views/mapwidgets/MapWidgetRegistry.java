@@ -4,6 +4,12 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
 import net.osmand.CallbackWithObject;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
@@ -30,19 +36,15 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
-
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 public class MapWidgetRegistry {
 
@@ -77,13 +79,13 @@ public class MapWidgetRegistry {
 	private final Map<WidgetsPanel, Set<MapWidgetInfo>> allWidgets = new HashMap<>();
 	private final Map<ApplicationMode, Set<String>> sideWidgetsVisibilityFromSettings = new LinkedHashMap<>();
 
-	private final StateChangedListener<String> listener;
+	private Set<WidgetsVisibilityListener> visibilityListeners = new HashSet<>();
 
 	public MapWidgetRegistry(OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
 		loadVisibleElementsFromSettings();
-		listener = change -> updateVisibleSideWidgets();
+		StateChangedListener<String> listener = change -> updateVisibleSideWidgets();
 		settings.AVAILABLE_APP_MODES.addListener(listener);
 		settings.MAP_INFO_CONTROLS.addListener(listener);
 	}
@@ -168,12 +170,13 @@ public class MapWidgetRegistry {
 	                                    @DrawableRes int settingsIconId,
 	                                    @StringRes int messageId,
 	                                    @Nullable String message,
-	                                    int priorityOrder,
+	                                    int page,
+	                                    int order,
 	                                    @NonNull WidgetsPanel widgetPanel) {
 		MapWidgetInfo widgetInfo;
 		if (widget instanceof TextInfoWidget) {
-			widgetInfo = new SideWidgetInfo(key, widget, widgetState, settingsIconId, messageId, message,
-					priorityOrder, widgetPanel);
+			widgetInfo = new SideWidgetInfo(key, widget, widgetState, settingsIconId, messageId, message, page,
+					order, widgetPanel);
 			processVisibleModes(widgetInfo);
 			TextInfoWidget textWidget = ((TextInfoWidget) widget);
 			if (message != null) {
@@ -184,8 +187,8 @@ public class MapWidgetRegistry {
 				textWidget.setContentTitle(widgetState.getMenuTitleId());
 			}
 		} else {
-			widgetInfo = new CenterWidgetInfo(key, widget, widgetState, settingsIconId, messageId, message,
-					priorityOrder, widgetPanel);
+			widgetInfo = new CenterWidgetInfo(key, widget, widgetState, settingsIconId, messageId, message, page,
+					order, widgetPanel);
 		}
 
 		getWidgetsForPanel(widgetPanel).add(widgetInfo);
@@ -237,6 +240,7 @@ public class MapWidgetRegistry {
 		OsmandPreference<Boolean> visibilityPref = widgetInfo.widget.getWidgetVisibilityPref();
 		if (visibilityPref != null) {
 			visibilityPref.set(!visibilityPref.get());
+			notifyWidgetVisibilityChanged(widgetInfo);
 		} else {
 			ApplicationMode mode = settings.APPLICATION_MODE.get();
 			setVisibility(mode, widgetInfo, visible);
@@ -260,6 +264,27 @@ public class MapWidgetRegistry {
 		}
 		widgetInfo.showHideForAppMode(mode, visible);
 		saveWidgetsVisibilityToSettings(widgetsVisibility);
+		notifyWidgetVisibilityChanged(widgetInfo);
+	}
+
+	public void addWidgetsVisibilityListener(@NonNull WidgetsVisibilityListener visibilityListener) {
+		Set<WidgetsVisibilityListener> visibilityListeners = new HashSet<>(this.visibilityListeners);
+		visibilityListeners.add(visibilityListener);
+		this.visibilityListeners = visibilityListeners;
+	}
+
+	public void removeWidgetsVisibilityListener(@NonNull WidgetsVisibilityListener visibilityListener) {
+		Set<WidgetsVisibilityListener> visibilityListeners = new HashSet<>(this.visibilityListeners);
+		visibilityListeners.remove(visibilityListener);
+		this.visibilityListeners = visibilityListeners;
+	}
+
+	private void notifyWidgetVisibilityChanged(@NonNull MapWidgetInfo widgetInfo) {
+		if (!Algorithms.isEmpty(visibilityListeners)) {
+			for (WidgetsVisibilityListener listener : visibilityListeners) {
+				listener.onWidgetVisibilityChanged(widgetInfo);
+			}
+		}
 	}
 
 	@NonNull
@@ -312,6 +337,7 @@ public class MapWidgetRegistry {
 			Set<MapWidgetInfo> oldOrder = getWidgetsForPanel(panel);
 			Set<MapWidgetInfo> newOrder = new TreeSet<>();
 			for (MapWidgetInfo widgetInfo : oldOrder) {
+				widgetInfo.pageIndex = panel.getWidgetPage(widgetInfo.key, settings);
 				widgetInfo.priority = panel.getWidgetOrder(widgetInfo.key, settings);
 				newOrder.add(widgetInfo);
 			}
@@ -339,6 +365,22 @@ public class MapWidgetRegistry {
 	}
 
 	@NonNull
+	public List<Set<MapWidgetInfo>> getAvailablePagedWidgetsForPanel(@NonNull ApplicationMode appMode,
+	                                                                 @NonNull WidgetsPanel panel) {
+		Map<Integer, Set<MapWidgetInfo>> widgetsByPages = new TreeMap<>();
+		for (MapWidgetInfo widgetInfo : getAvailableWidgetsForPanel(appMode, panel)) {
+			int page = widgetInfo.pageIndex;
+			Set<MapWidgetInfo> widgetsOfPage = widgetsByPages.get(page);
+			if (widgetsOfPage == null) {
+				widgetsOfPage = new TreeSet<>();
+				widgetsByPages.put(page, widgetsOfPage);
+			}
+			widgetsOfPage.add(widgetInfo);
+		}
+		return new ArrayList<>(widgetsByPages.values());
+	}
+
+	@NonNull
 	public Set<MapWidgetInfo> getAvailableWidgetsForPanel(@NonNull ApplicationMode appMode, @NonNull WidgetsPanel panel) {
 		Set<MapWidgetInfo> widgets = new TreeSet<>();
 		for (MapWidgetInfo widgetInfo : getWidgetsForPanel(panel)) {
@@ -349,6 +391,17 @@ public class MapWidgetRegistry {
 			}
 		}
 		return widgets;
+	}
+
+	@NonNull
+	public Set<MapWidgetInfo> getVisibleWidgets(@NonNull ApplicationMode appMode, @NonNull WidgetsPanel panel) {
+		Set<MapWidgetInfo> visible = new TreeSet<>();
+		for (MapWidgetInfo widget : getWidgetsForPanel(panel)) {
+			if (widget.isSelected(appMode)) {
+				visible.add(widget);
+			}
+		}
+		return visible;
 	}
 
 	@NonNull
@@ -436,4 +489,9 @@ public class MapWidgetRegistry {
 
 		return -1;
 	}
+
+	public interface WidgetsVisibilityListener {
+		void onWidgetVisibilityChanged(@NonNull MapWidgetInfo widgetInfo);
+	}
+
 }

@@ -36,6 +36,8 @@ public class RightWidgetsPanel extends FrameLayout {
 	private final Path borderPath = new Path();
 
 	private boolean nightMode;
+	private boolean selfShowAllowed;
+	private boolean selfVisibilityChanging;
 
 	private ViewPager2 viewPager;
 	private WidgetsPagerAdapter adapter;
@@ -146,7 +148,12 @@ public class RightWidgetsPanel extends FrameLayout {
 
 	public void update() {
 		adapter.updateIfNeeded();
-		AndroidUiHelper.updateVisibility(this, adapter.getItemCount() > 0);
+		boolean show = adapter.getItemCount() > 0 && selfShowAllowed;
+		selfVisibilityChanging = true;
+		if (AndroidUiHelper.updateVisibility(this, show) && !show) {
+			selfShowAllowed = true;
+		}
+		selfVisibilityChanging = false;
 		updateDots();
 	}
 
@@ -154,12 +161,6 @@ public class RightWidgetsPanel extends FrameLayout {
 		this.nightMode = textState.night;
 		borderPaint.setColor(ContextCompat.getColor(getContext(), textState.rightBorderColorId));
 		updateDots();
-	}
-
-	@Override
-	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-		super.onLayout(changed, left, top, right, bottom);
-		WrapContentViewPager2Callback.resizeViewPagerToWrapContent(viewPager, null);
 	}
 
 	@Override
@@ -182,6 +183,14 @@ public class RightWidgetsPanel extends FrameLayout {
 		borderPath.lineTo(screenEdgeX, bottomY);
 
 		canvas.drawPath(borderPath, borderPaint);
+	}
+
+	@Override
+	public void setVisibility(int visibility) {
+		super.setVisibility(visibility);
+		if (!selfVisibilityChanging) {
+			selfShowAllowed = visibility == VISIBLE;
+		}
 	}
 
 	@NonNull

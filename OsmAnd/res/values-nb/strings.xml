@@ -4543,4 +4543,9 @@
     <string name="rendering_attr_showFitnessTrails_description">Vis trimløyper</string>
     <string name="rendering_attr_showRunningRoutes_name">Løperuter</string>
     <string name="rendering_attr_showRunningRoutes_description">Vis løperuter</string>
+    <string name="rendering_attr_showTramRoutes_name">Trikkeruter</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Trolleybussruter</string>
+    <string name="rendering_attr_showTrainRoutes_name">Togruter</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Kabelbaneruter</string>
+    <string name="rendering_attr_showBusRoutes_name">Bussruter</string>
 </resources>

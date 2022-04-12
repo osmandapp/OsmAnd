@@ -39,7 +39,9 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetsVisibilityListener;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment;
 import net.osmand.plus.widgets.chips.ChipItem;
@@ -49,7 +51,7 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConfigureScreenFragment extends BaseOsmAndFragment implements QuickActionUpdatesListener {
+public class ConfigureScreenFragment extends BaseOsmAndFragment implements QuickActionUpdatesListener, WidgetsVisibilityListener {
 
 	public static final String TAG = ConfigureScreenFragment.class.getSimpleName();
 
@@ -119,6 +121,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	public void onStart() {
 		super.onStart();
 		app.getQuickActionRegistry().addUpdatesListener(this);
+		widgetRegistry.addWidgetsVisibilityListener(this);
 		mapActivity.disableDrawer();
 	}
 
@@ -126,6 +129,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	public void onStop() {
 		super.onStop();
 		app.getQuickActionRegistry().removeUpdatesListener(this);
+		widgetRegistry.removeWidgetsVisibilityListener(this);
 		mapActivity.enableDrawer();
 	}
 
@@ -268,6 +272,11 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		setupButtonsCard();
 	}
 
+	@Override
+	public void onWidgetVisibilityChanged(@NonNull MapWidgetInfo widgetInfo) {
+		setupWidgetsCard();
+	}
+
 	private View createWidgetGroupView(@NonNull WidgetsPanel panel, boolean showShortDivider, boolean showLongDivider) {
 		int activeColor = selectedAppMode.getProfileColor(nightMode);
 		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
@@ -277,7 +286,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		TextView tvTitle = view.findViewById(R.id.title);
 		TextView tvDesc = view.findViewById(R.id.items_count_descr);
 
-		int count = widgetRegistry.getWidgetsForPanel(panel).size();
+		int count = widgetRegistry.getVisibleWidgets(selectedAppMode, panel).size();
 		int iconColor = count > 0 ? activeColor : defColor;
 		Drawable icon = getPaintedContentIcon(panel.getIconId(), iconColor);
 		ivIcon.setImageDrawable(icon);

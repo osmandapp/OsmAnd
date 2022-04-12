@@ -327,7 +327,7 @@
     <string name="poi_residential">Área residencial</string>
     <string name="poi_pharmacy">Farmacia</string>
     <string name="poi_hospital">Hospital</string>
-    <string name="poi_doctors">Doctor/a;Doctora;Médico;Médica</string>
+    <string name="poi_doctors">Consultorio médico;Doctor;Doctora;Médico;Médica</string>
     <string name="poi_clinic">Clínica</string>
     <string name="poi_first_aid">Primeros auxilios</string>
     <string name="poi_dentist">Dentista;Odontología</string>
@@ -3468,7 +3468,7 @@
     <string name="poi_checkpoint_type">Tipo de puesto de control</string>
     <string name="poi_checkpoint_hiking">Puesto de control para senderismo</string>
     <string name="poi_checkpoint_type_stamp">Puesto de sellado</string>
-    <string name="poi_checkpoint_type_code">Cartel</string>
+    <string name="poi_checkpoint_type_code">Código</string>
     <string name="poi_checkpoint_type_notebook">Portátil (notebook)</string>
     <string name="poi_checkpoint_type_electronic">Electrónico</string>
     <string name="poi_rock">Roca</string>
@@ -3651,8 +3651,8 @@
     <string name="poi_tourist_bus_yes">Acceso para colectivos turísticos: sí</string>
     <string name="poi_tourist_bus_designated">Acceso para colectivos turísticos: designado</string>
     <string name="poi_tourist_bus_no">Acceso para colectivos turísticos: no</string>
-    <string name="poi_coach_yes">Acceso para colectivos de larga distancia: sí</string>
-    <string name="poi_coach_no">Acceso para colectivos de larga distancia: no</string>
+    <string name="poi_coach_yes">Acceso para ómnibus: sí;Acceso para colectivos de larga distancia: sí</string>
+    <string name="poi_coach_no">Acceso para ómnibus: no;Acceso para colectivos de larga distancia: no</string>
     <string name="poi_ski_yes">Acceso para esquís: sí</string>
     <string name="poi_ski_no">Acceso para esquís: no</string>
     <string name="poi_snowmobile_private">Acceso para motonieves: privado</string>

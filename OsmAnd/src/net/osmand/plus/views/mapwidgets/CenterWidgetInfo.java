@@ -17,9 +17,10 @@ public class CenterWidgetInfo extends MapWidgetInfo {
 	                        @DrawableRes int settingsIconId,
 	                        @StringRes int messageId,
 	                        @Nullable String message,
-	                        int priority,
+	                        int page,
+	                        int order,
 	                        @NonNull WidgetsPanel widgetPanel) {
-		super(key, widget, widgetState, settingsIconId, messageId, message, priority, widgetPanel);
+		super(key, widget, widgetState, settingsIconId, messageId, message, page, order, widgetPanel);
 	}
 
 	@Override

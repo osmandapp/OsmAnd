@@ -258,9 +258,9 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment implements OnFragme
 			}
 			if (!data.isInEdit()) {
 				LocaleHelper helper = app.getLocaleHelper();
-				helper.updateOpeningHoursParser(false, Locale.getDefault());
+				helper.updateTimeFormatting(false, Locale.getDefault());
 				String openingHoursString = openingHours.toString();
-				helper.updateOpeningHoursParser();
+				helper.updateTimeFormatting();
 
 				if (!TextUtils.isEmpty(openingHoursString)) {
 					if (openingHours.getOriginal() == null ||

@@ -17,25 +17,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
-import net.osmand.data.FavouritePoint.BackgroundType;
+import net.osmand.GPXUtilities.PointsGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.track.cards.ColorsCard;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -44,11 +40,9 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
-public abstract class PointEditorFragmentNew extends EditorFragment {
-
-	public static final String TAG = PointEditorFragmentNew.class.getSimpleName();
+public abstract class PointEditorFragment extends EditorFragment {
 
 	private TextView addDelDescription;
 	private TextView addAddressBtn;
@@ -62,28 +56,21 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 	private EditText descriptionEdit;
 	private EditText addressEdit;
 
+	protected String selectedGroup;
 	protected boolean skipConfirmationDialog;
 
 	@Override
 	protected int getLayoutId() {
-		return R.layout.point_editor_fragment_new;
-	}
-
-	@DrawableRes
-	@Override
-	public int getToolbarNavigationIconId() {
-		return AndroidUtils.getNavigationIconResId(app);
+		return R.layout.point_editor_fragment;
 	}
 
 	@SuppressLint("ClickableViewAccessibility")
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
 		Context context = requireContext();
 		PointEditor editor = getEditor();
 		if (editor == null) {
-			view = UiUtilities.getInflater(context, nightMode)
-					.inflate(getLayoutId(), container, false);
+			view = UiUtilities.getInflater(context, nightMode).inflate(getLayoutId(), container, false);
 			AndroidUtils.addStatusBarPadding21v(context, view);
 			return view;
 		}
@@ -184,7 +171,7 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 				addressEdit.clearFocus();
 			}
 		});
-		nameIcon.setImageDrawable(getNameIcon());
+		updateNameIcon();
 
 		if (app.accessibilityEnabled()) {
 			nameCaption.setFocusable(true);
@@ -296,25 +283,15 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 
 	@Override
 	public void onCardPressed(@NonNull BaseCard card) {
-		if (card instanceof IconsCard) {
-			setIcon(iconsCard.getSelectedIconId());
+		super.onCardPressed(card);
+		if (card instanceof ShapesCard || card instanceof IconsCard) {
 			updateNameIcon();
-		} else if (card instanceof ColorsCard) {
-			int color = ((ColorsCard) card).getSelectedColor();
-			updateColorSelector(color);
-		} else if (card instanceof ShapesCard) {
-			BackgroundType selectedShape = shapesCard.getSelectedShape();
-			setBackgroundType(selectedShape);
-			updateNameIcon();
-			updateSelectedShapeText();
-			((TextView) view.findViewById(R.id.shape_name)).setText(selectedShape.getNameId());
 		}
 	}
 
 	@Override
-	protected void updateColorSelector(@ColorInt int color) {
-		int newColor = color == 0 ? getDefaultColor() : color;
-		super.updateColorSelector(newColor);
+	protected void updateContent() {
+		super.updateContent();
 		updateNameIcon();
 	}
 
@@ -326,21 +303,7 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 
 	@NonNull
 	public String getSelectedCategory() {
-		if (groupListAdapter != null && groupListAdapter.getSelectedItem() != null) {
-			return groupListAdapter.getSelectedItem();
-		}
-		return getCategoryInitValue();
-	}
-
-	@Nullable
-	protected AddNewFavoriteCategoryBottomSheet createAddCategoryDialog() {
-		PointEditor editor = getEditor();
-		if (editor != null) {
-			return AddNewFavoriteCategoryBottomSheet.createInstance(editor.getFragmentTag(), getCategories(),
-					!editor.getFragmentTag().equals(FavoritePointEditor.TAG));
-		} else {
-			return null;
-		}
+		return selectedGroup != null ? selectedGroup : getCategoryInitValue();
 	}
 
 	@Override
@@ -363,16 +326,21 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 		delete(true);
 	}
 
-	public void setCategory(String name, int color) {
-		setSelectedItemWithScroll(name);
-		updateColorSelector(color);
-		AndroidUiHelper.updateVisibility(addToHiddenGroupInfo, !isCategoryVisible(name));
+	public void setPointsGroup(@NonNull PointsGroup pointsGroup) {
+		setColor(pointsGroup.color);
+		setIconName(pointsGroup.iconName);
+		setBackgroundType(pointsGroup.backgroundType);
+
+		setSelectedItemWithScroll(pointsGroup.name);
+
+		updateContent();
+		AndroidUiHelper.updateVisibility(addToHiddenGroupInfo, !isCategoryVisible(pointsGroup.name));
 	}
 
 	@SuppressLint("NotifyDataSetChanged")
 	private void setSelectedItemWithScroll(String name) {
+		setSelectedGroup(name);
 		groupListAdapter.fillGroups();
-		groupListAdapter.setSelectedItemName(name);
 		groupListAdapter.notifyDataSetChanged();
 		int position = 0;
 		PointEditor editor = getEditor();
@@ -382,6 +350,10 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 					: groupListAdapter.getItemPosition(name);
 		}
 		groupRecyclerView.scrollToPosition(position);
+	}
+
+	public void setSelectedGroup(String selectedGroup) {
+		this.selectedGroup = selectedGroup;
 	}
 
 	protected String getLastUsedGroup() {
@@ -413,11 +385,8 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 
 	protected abstract void delete(boolean needDismiss);
 
-	@ColorInt
-	protected abstract int getDefaultColor();
-
 	@NonNull
-	protected abstract Set<String> getCategories();
+	protected abstract Map<String, PointsGroup> getPointsGroups();
 
 	@ColorInt
 	protected abstract int getCategoryColor(String category);
@@ -435,6 +404,8 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 
 	protected abstract void showSelectCategoryDialog();
 
+	protected abstract void showAddNewCategoryFragment();
+
 	protected boolean isCategoryVisible(String name) {
 		return true;
 	}
@@ -442,14 +413,13 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 	protected String getCategoryTextValue() {
 		RecyclerView recyclerView = view.findViewById(R.id.group_recycler_view);
 		if (recyclerView.getAdapter() != null) {
-			String name = ((GroupAdapter) recyclerView.getAdapter()).getSelectedItem();
-			if (isPersonalCategoryDisplayName(requireContext(), name)) {
+			if (isPersonalCategoryDisplayName(requireContext(), selectedGroup)) {
 				return PERSONAL_CATEGORY;
 			}
-			if (name.equals(getDefaultCategoryName())) {
+			if (selectedGroup.equals(getDefaultCategoryName())) {
 				return "";
 			}
-			return name;
+			return selectedGroup;
 		}
 		return "";
 	}
@@ -468,15 +438,10 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 
 	class GroupAdapter extends RecyclerView.Adapter<GroupsViewHolder> {
 
-		private static final int VIEW_TYPE_FOOTER = 1;
 		private static final int VIEW_TYPE_CELL = 0;
-		List<String> items = new ArrayList<>();
+		private static final int VIEW_TYPE_FOOTER = 1;
 
-		void setSelectedItemName(String selectedItemName) {
-			this.selectedItemName = selectedItemName;
-		}
-
-		String selectedItemName;
+		private final List<String> items = new ArrayList<>();
 
 		GroupAdapter() {
 			fillGroups();
@@ -484,7 +449,7 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 
 		private void fillGroups() {
 			items.clear();
-			items.addAll(getCategories());
+			items.addAll(getPointsGroups().keySet());
 		}
 
 		@NonNull
@@ -513,19 +478,14 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 		@Override
 		public void onBindViewHolder(@NonNull final GroupsViewHolder holder, int position) {
 			if (position == items.size()) {
-				holder.groupButton.setOnClickListener(view -> {
-					FragmentManager fragmentManager = getFragmentManager();
-					DialogFragment dialogFragment = createAddCategoryDialog();
-					if (fragmentManager != null && dialogFragment != null) {
-						dialogFragment.show(fragmentManager, AddNewFavoriteCategoryBottomSheet.TAG);
-					}
-				});
+				holder.groupButton.setOnClickListener(view -> showAddNewCategoryFragment());
 			} else {
 				holder.groupButton.setOnClickListener(view -> {
-					int previousSelectedPosition = getItemPosition(selectedItemName);
-					selectedItemName = items.get(holder.getAdapterPosition());
-					updateColorSelector(getCategoryColor(selectedItemName));
-					AndroidUiHelper.updateVisibility(addToHiddenGroupInfo, !isCategoryVisible(selectedItemName));
+					int previousSelectedPosition = getItemPosition(selectedGroup);
+					setSelectedGroup(items.get(holder.getAdapterPosition()));
+
+					updateContent();
+					AndroidUiHelper.updateVisibility(addToHiddenGroupInfo, !isCategoryVisible(selectedGroup));
 					notifyItemChanged(holder.getAdapterPosition());
 					notifyItemChanged(previousSelectedPosition);
 				});
@@ -534,7 +494,7 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 				holder.pointsCounter.setText(String.valueOf(getCategoryPointsCount(group)));
 				int strokeColor;
 				int strokeWidth;
-				if (selectedItemName != null && selectedItemName.equals(items.get(position))) {
+				if (selectedGroup != null && selectedGroup.equals(items.get(position))) {
 					strokeColor = ColorUtilities.getActiveColor(app, nightMode);
 					strokeWidth = 2;
 				} else {
@@ -574,11 +534,7 @@ public abstract class PointEditorFragmentNew extends EditorFragment {
 
 		@Override
 		public int getItemCount() {
-			return items == null ? 0 : items.size() + 1;
-		}
-
-		String getSelectedItem() {
-			return selectedItemName;
+			return items.size() + 1;
 		}
 
 		int getItemPosition(String name) {

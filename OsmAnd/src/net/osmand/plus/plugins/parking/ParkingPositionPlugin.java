@@ -499,6 +499,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				return true;
 			}
 		};
+		parkingPlaceControl.updateInfo(null);
 		parkingPlaceControl.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

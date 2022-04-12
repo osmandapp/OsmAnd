@@ -5,17 +5,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.PointsGroup;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class WptPtEditor extends PointEditor {
+
+	public static final String TAG = WptPtEditor.class.getSimpleName();
 
 	private OnTemplateAddedListener onTemplateAddedListener;
 	private OnDismissListener onDismissListener;
@@ -35,8 +38,6 @@ public class WptPtEditor extends PointEditor {
 
 	@NonNull
 	private ProcessedObject processedObject = ProcessedObject.ORDINARY;
-
-	public static final String TAG = "WptPtEditorFragment";
 
 	public WptPtEditor(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
@@ -85,13 +86,15 @@ public class WptPtEditor extends PointEditor {
 	}
 
 	@NonNull
-	public Map<String, Integer> getColoredWaypointCategories() {
+	public Map<String, PointsGroup> getPointsGroups() {
 		if (gpxFile != null) {
-			return gpxFile.getWaypointCategoriesWithColors(false);
+			return gpxFile.getPointsGroups();
 		}
 		if (isProcessingTemplate() && !Algorithms.isEmpty(wpt.category) && categoryColor != 0) {
-			Map<String, Integer> predefinedCategory = new HashMap<>();
-			predefinedCategory.put(wpt.category, categoryColor);
+			PointsGroup pointsGroup = new PointsGroup(wpt.category, wpt.getIconNameOrDefault(), wpt.getBackgroundType(), categoryColor, 0);
+
+			Map<String, PointsGroup> predefinedCategory = new HashMap<>();
+			predefinedCategory.put(wpt.category, pointsGroup);
 			return predefinedCategory;
 		}
 		return new HashMap<>();
@@ -164,7 +167,7 @@ public class WptPtEditor extends PointEditor {
 			if (category == null) {
 				mapActivity.getMyApplication()
 						.getFavoritesHelper()
-						.addEmptyCategory(categoryName, categoryColor);
+						.addFavoriteGroup(categoryName, categoryColor);
 			}
 
 		} else {
@@ -227,14 +230,14 @@ public class WptPtEditor extends PointEditor {
 	public void showEditorFragment() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			WptPtEditorFragmentNew.showInstance(mapActivity);
+			WptPtEditorFragment.showInstance(mapActivity);
 		}
 	}
 
 	public void showEditorFragment(boolean skipDialog) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			WptPtEditorFragmentNew.showInstance(mapActivity, skipDialog);
+			WptPtEditorFragment.showInstance(mapActivity, skipDialog);
 		}
 	}
 

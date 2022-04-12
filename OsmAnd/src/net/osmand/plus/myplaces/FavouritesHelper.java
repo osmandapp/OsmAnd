@@ -1,5 +1,8 @@
 package net.osmand.plus.myplaces;
 
+import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
@@ -7,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.PlatformUtil;
+import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.FavouritePoint.SpecialPointType;
 import net.osmand.data.LatLon;
@@ -34,15 +38,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class FavouritesHelper {
 
 	private static final Log log = PlatformUtil.getLog(FavouritesHelper.class);
-
-	public interface FavoritesListener {
-
-		void onFavoritesLoaded();
-
-		void onFavoriteDataUpdated(@NonNull FavouritePoint favouritePoint);
-	}
-
-	private static final String DELIMITER = "__";
 
 	private final OsmandApplication app;
 	private final FavouritesFileHelper fileHelper;
@@ -85,18 +80,17 @@ public class FavouritesHelper {
 	}
 
 	@Nullable
-	public Drawable getColoredIconForGroup(String groupName) {
+	public Drawable getColoredIconForGroup(@NonNull String groupName) {
 		String groupIdName = FavoriteGroup.convertDisplayNameToGroupIdName(app, groupName);
 		FavoriteGroup favoriteGroup = getGroup(groupIdName);
 		if (favoriteGroup != null) {
-			int color = favoriteGroup.getColor() == 0 ?
-					app.getResources().getColor(R.color.color_favorite) : favoriteGroup.getColor();
+			int color = favoriteGroup.getColor() == 0 ? ContextCompat.getColor(app, R.color.color_favorite) : favoriteGroup.getColor();
 			return app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_group_name_16, color);
 		}
 		return null;
 	}
 
-	public int getColorWithCategory(FavouritePoint point, int defaultColor) {
+	public int getColorWithCategory(@NonNull FavouritePoint point, int defaultColor) {
 		int color = 0;
 		if (point.getColor() != 0) {
 			color = point.getColor();
@@ -122,7 +116,7 @@ public class FavouritesHelper {
 		boolean changed = merge(extPoints, points);
 
 		for (FavouritePoint pns : points.values()) {
-			FavoriteGroup group = getOrCreateGroup(pns, 0);
+			FavoriteGroup group = getOrCreateGroup(pns);
 			group.getPoints().add(pns);
 		}
 		sortAll();
@@ -147,7 +141,7 @@ public class FavouritesHelper {
 			if (fp.getIconIdOrDefault() == FavouritePoint.DEFAULT_UI_ICON_ID) {
 				fp.setIconId(0);
 			}
-			FavoriteGroup group = getOrCreateGroup(fp, 0);
+			FavoriteGroup group = getOrCreateGroup(fp);
 			group.getPoints().add(fp);
 		}
 		sortAll();
@@ -252,8 +246,8 @@ public class FavouritesHelper {
 		saveCurrentPointsIntoFile();
 	}
 
-	public boolean deleteFavourite(FavouritePoint p) {
-		return deleteFavourite(p, true);
+	public boolean deleteFavourite(FavouritePoint point) {
+		return deleteFavourite(point, true);
 	}
 
 	public boolean deleteFavourite(FavouritePoint p, boolean saveImmediately) {
@@ -327,7 +321,7 @@ public class FavouritesHelper {
 			lookupAddress(p);
 		}
 		app.getSettings().SHOW_FAVORITES.set(true);
-		FavoriteGroup group = getOrCreateGroup(p, 0);
+		FavoriteGroup group = getOrCreateGroup(p);
 
 		if (!p.getName().isEmpty()) {
 			p.setVisible(group.isVisible());
@@ -393,7 +387,7 @@ public class FavouritesHelper {
 			if (old != null) {
 				old.getPoints().remove(p);
 			}
-			FavoriteGroup pg = getOrCreateGroup(p, 0);
+			FavoriteGroup pg = getOrCreateGroup(p);
 			p.setVisible(pg.isVisible());
 			if (SpecialPointType.PARKING == p.getSpecialPointType()) {
 				p.setColor(ContextCompat.getColor(app, R.color.parking_icon_background));
@@ -406,14 +400,14 @@ public class FavouritesHelper {
 		}
 		sortAll();
 		saveCurrentPointsIntoFile();
-		runSyncWithMarkers(getOrCreateGroup(p, 0));
+		runSyncWithMarkers(getOrCreateGroup(p));
 		return true;
 	}
 
 	private void editAddressDescription(@NonNull FavouritePoint p, @Nullable String address) {
 		p.setAddress(address);
 		saveCurrentPointsIntoFile();
-		runSyncWithMarkers(getOrCreateGroup(p, 0));
+		runSyncWithMarkers(getOrCreateGroup(p));
 	}
 
 	public boolean editFavourite(@NonNull FavouritePoint p, double lat, double lon) {
@@ -425,7 +419,7 @@ public class FavouritesHelper {
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile();
 		}
-		FavoriteGroup group = getOrCreateGroup(point, 0);
+		FavoriteGroup group = getOrCreateGroup(point);
 		runSyncWithMarkers(group);
 		return true;
 	}
@@ -439,7 +433,7 @@ public class FavouritesHelper {
 			p.setDescription(description);
 		}
 		saveCurrentPointsIntoFile();
-		runSyncWithMarkers(getOrCreateGroup(p, 0));
+		runSyncWithMarkers(getOrCreateGroup(p));
 		return true;
 	}
 
@@ -449,10 +443,6 @@ public class FavouritesHelper {
 
 	public Exception exportFavorites() {
 		return fileHelper.saveExternalFile(new ArrayList<>(cachedFavoritePoints), null);
-	}
-
-	public static String getKey(@NonNull FavouritePoint point) {
-		return point.getName() + DELIMITER + point.getCategory();
 	}
 
 	public boolean deleteGroup(@NonNull FavoriteGroup group) {
@@ -466,21 +456,21 @@ public class FavouritesHelper {
 		return false;
 	}
 
-	private void addEmptyCategory(String name) {
-		addEmptyCategory(name, 0, true);
+	public FavoriteGroup addFavoriteGroup(@NonNull String name, int color) {
+		return addFavoriteGroup(name, color, DEFAULT_ICON_NAME, DEFAULT_BACKGROUND_TYPE);
 	}
 
-	public void addEmptyCategory(String name, int color) {
-		addEmptyCategory(name, color, true);
-	}
-
-	public void addEmptyCategory(String name, int color, boolean visible) {
+	public FavoriteGroup addFavoriteGroup(@NonNull String name, int color, @NonNull String iconName, @NonNull BackgroundType backgroundType) {
 		FavoriteGroup group = new FavoriteGroup();
 		group.setName(FavoriteGroup.convertDisplayNameToGroupIdName(app, name));
 		group.setColor(color);
-		group.setVisible(visible);
+		group.setIconName(iconName);
+		group.setBackgroundType(backgroundType);
+
 		favoriteGroups.add(group);
 		flatGroups.put(group.getName(), group);
+
+		return group;
 	}
 
 	@NonNull
@@ -592,64 +582,110 @@ public class FavouritesHelper {
 		};
 	}
 
-	public void editFavouriteGroup(FavoriteGroup group, String newName, int color, boolean visible) {
+	public void updateGroupColor(@NonNull FavoriteGroup group, int color, boolean updatePoints, boolean saveImmediately) {
 		if (color != 0 && group.getColor() != color) {
-			FavoriteGroup gr = flatGroups.get(group.getName());
-			for (FavouritePoint p : gr.getPoints()) {
-				if (p.getColor() == group.getColor()) {
-					p.setColor(color);
+			if (updatePoints) {
+				for (FavouritePoint point : group.getPoints()) {
+					if (point.getColor() == group.getColor()) {
+						point.setColor(color);
+					}
 				}
 			}
 			group.setColor(color);
-			runSyncWithMarkers(gr);
+			runSyncWithMarkers(group);
 		}
-		if (group.isVisible() != visible) {
-			FavoriteGroup gr = flatGroups.get(group.getName());
-			group.setVisible(visible);
-			for (FavouritePoint p : gr.getPoints()) {
-				p.setVisible(visible);
+		if (saveImmediately) {
+			saveCurrentPointsIntoFile();
+		}
+	}
+
+	public void updateGroupIconName(@NonNull FavoriteGroup group, @NonNull String iconName,
+	                                boolean updatePoints, boolean saveImmediately) {
+		if (!Algorithms.stringsEqual(group.getIconName(), iconName)) {
+			if (updatePoints) {
+				for (FavouritePoint point : group.getPoints()) {
+					if (Algorithms.stringsEqual(point.getIconName(), group.getIconName())) {
+						point.setIconIdFromName(iconName);
+					}
+				}
 			}
-			runSyncWithMarkers(gr);
+			group.setIconName(iconName);
+			runSyncWithMarkers(group);
 		}
-		if (!group.getName().equals(newName)) {
-			FavoriteGroup gr = flatGroups.remove(group.getName());
-			boolean isInMarkers = removeFromMarkers(gr);
-			gr.setName(newName);
-			FavoriteGroup renamedGroup = flatGroups.get(gr.getName());
+		if (saveImmediately) {
+			saveCurrentPointsIntoFile();
+		}
+	}
+
+	public void updateGroupBackgroundType(@NonNull FavoriteGroup group, @NonNull BackgroundType backgroundType,
+	                                      boolean updatePoints, boolean saveImmediately) {
+		if (group.getBackgroundType() != backgroundType) {
+			if (updatePoints) {
+				for (FavouritePoint point : group.getPoints()) {
+					if (point.getBackgroundType() == group.getBackgroundType()) {
+						point.setBackgroundType(backgroundType);
+					}
+				}
+			}
+			group.setBackgroundType(backgroundType);
+			runSyncWithMarkers(group);
+		}
+		if (saveImmediately) {
+			saveCurrentPointsIntoFile();
+		}
+	}
+
+	public void updateGroupVisibility(@NonNull FavoriteGroup group, boolean visible, boolean saveImmediately) {
+		if (group.isVisible() != visible) {
+			for (FavouritePoint point : group.getPoints()) {
+				point.setVisible(visible);
+			}
+			group.setVisible(visible);
+			runSyncWithMarkers(group);
+		}
+		if (saveImmediately) {
+			saveCurrentPointsIntoFile();
+		}
+	}
+
+	public void updateGroupName(@NonNull FavoriteGroup group, @NonNull String newName, boolean saveImmediately) {
+		if (!Algorithms.stringsEqual(group.getName(), newName)) {
+			flatGroups.remove(group.getName());
+			boolean isInMarkers = removeFromMarkers(group);
+
+			group.setName(newName);
+			FavoriteGroup renamedGroup = flatGroups.get(group.getName());
 			boolean existing = renamedGroup != null;
 			if (renamedGroup == null) {
-				renamedGroup = gr;
-				flatGroups.put(gr.getName(), gr);
+				renamedGroup = group;
+				flatGroups.put(group.getName(), group);
 			} else {
-				favoriteGroups.remove(gr);
+				favoriteGroups.remove(group);
 			}
-			for (FavouritePoint p : gr.getPoints()) {
-				p.setCategory(newName);
-				if (existing) {
-					renamedGroup.getPoints().add(p);
-				}
+			for (FavouritePoint point : group.getPoints()) {
+				point.setCategory(newName);
+			}
+			if (existing) {
+				renamedGroup.getPoints().addAll(group.getPoints());
 			}
 			if (isInMarkers) {
 				addToMarkers(renamedGroup);
 			}
 		}
-		saveCurrentPointsIntoFile();
+		if (saveImmediately) {
+			saveCurrentPointsIntoFile();
+		}
 	}
 
-	private FavoriteGroup getOrCreateGroup(FavouritePoint p, int defColor) {
-		if (flatGroups.containsKey(p.getCategory())) {
-			return flatGroups.get(p.getCategory());
+	private FavoriteGroup getOrCreateGroup(@NonNull FavouritePoint point) {
+		if (flatGroups.containsKey(point.getCategory())) {
+			return flatGroups.get(point.getCategory());
 		}
-		FavoriteGroup group = new FavoriteGroup();
-		group.setName(p.getCategory());
-		group.setVisible(p.isVisible());
-		group.setColor(p.getColor());
+		FavoriteGroup group = new FavoriteGroup(point);
 
 		flatGroups.put(group.getName(), group);
 		favoriteGroups.add(group);
-		if (group.getColor() == 0) {
-			group.setColor(defColor);
-		}
+
 		return group;
 	}
 }

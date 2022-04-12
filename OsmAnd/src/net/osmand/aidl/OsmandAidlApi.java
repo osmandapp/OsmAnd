@@ -988,7 +988,9 @@ public class OsmandAidlApi {
 		if (!Algorithms.isEmpty(colorTag)) {
 			color = ColorDialogs.getColorByTag(colorTag);
 		}
-		favoritesHelper.addEmptyCategory(name, color, visible);
+		FavoriteGroup group = favoritesHelper.addFavoriteGroup(name, color);
+		group.setVisible(visible);
+
 		return true;
 	}
 
@@ -1006,16 +1008,16 @@ public class OsmandAidlApi {
 
 	boolean updateFavoriteGroup(String prevGroupName, String newGroupName, String colorTag, boolean visible) {
 		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
-		List<FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
-		for (FavoriteGroup g : groups) {
-			if (g.getName().equals(prevGroupName)) {
-				int color = 0;
-				if (!Algorithms.isEmpty(colorTag)) {
-					color = ColorDialogs.getColorByTag(colorTag);
-				}
-				favoritesHelper.editFavouriteGroup(g, newGroupName, color, visible);
-				return true;
-			}
+		FavoriteGroup group = favoritesHelper.getGroup(prevGroupName);
+		if (group != null) {
+			int color = Algorithms.isEmpty(colorTag) ? 0 : ColorDialogs.getColorByTag(colorTag);
+
+			favoritesHelper.updateGroupColor(group, color, true, false);
+			favoritesHelper.updateGroupVisibility(group, visible, false);
+			favoritesHelper.updateGroupName(group, newGroupName, false);
+
+			favoritesHelper.saveCurrentPointsIntoFile();
+			return true;
 		}
 		return false;
 	}
