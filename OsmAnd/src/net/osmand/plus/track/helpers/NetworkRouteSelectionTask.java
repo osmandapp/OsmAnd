@@ -49,7 +49,7 @@ public class NetworkRouteSelectionTask extends BaseLoadAsyncTask<Void, Void, GPX
 	protected GPXFile doInBackground(Void... voids) {
 		BinaryMapIndexReader[] readers = app.getResourceManager().getRoutingMapFiles();
 		NetworkRouteSelectorFilter selectorFilter = new NetworkRouteSelectorFilter();
-		NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter);
+		NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter, false);
 
 		for (RouteKey routeKey : RouteType.getRouteStringKeys(renderedObject)) {
 			selectorFilter.keyFilter = Collections.singleton(routeKey);

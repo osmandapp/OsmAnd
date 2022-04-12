@@ -72,8 +72,11 @@ public class NetworkRouteMenuController extends MenuController {
 		if (!Algorithms.isEmpty(routeKeys)) {
 			RouteKey routeKey = routeKeys.get(0);
 
-			String iconPrefix = "route_" + routeKey.type.getTag() + "__osmc_foreground__";
-			String backgroundPrefix = "route_" + routeKey.type.getTag() + "__osmc_background__";
+			String tag = routeKey.type.getTag();
+			String iconPrefix = "route_" + tag + "__osmc_foreground__";
+			String backgroundPrefix = "route_" + tag + "__osmc_background__";
+			String osmcText = renderedObject.getTagValue(tag + "_route_osmc_text");
+			String textColor = renderedObject.getTagValue(tag + "_route_osmc_textcolor");
 
 			int iconRes = getIconId(app, routeKey.set, iconPrefix, "mm_osmc_", "");
 			int backgroundRes = getIconId(app, routeKey.set, backgroundPrefix, "h_osmc_", "_bg");
