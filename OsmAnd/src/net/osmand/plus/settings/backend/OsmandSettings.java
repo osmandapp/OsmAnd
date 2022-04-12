@@ -113,6 +113,8 @@ import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_COMPASS;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.WIDGET_SEPARATOR;
 
 public class OsmandSettings {
 
@@ -1735,16 +1737,16 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> TRANSPARENT_STATUS_BAR = new BooleanPreference(this, "transparent_status_bar", true).makeGlobal().makeShared();
 
 	public final ListStringPreference LEFT_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
-			"left_widget_panel_order", TextUtils.join(",", WidgetsPanel.LEFT.getOriginalOrder()), ",").makeProfile();
+			"left_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.LEFT.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 
 	public final ListStringPreference TOP_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
-			"top_widget_panel_order", TextUtils.join(",", WidgetsPanel.TOP.getOriginalOrder()), ",").makeProfile();
+			"top_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.TOP.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 
 	public final ListStringPreference RIGHT_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
-			"right_widget_panel_order", TextUtils.join(",", WidgetsPanel.RIGHT.getOriginalOrder()), ",").makeProfile();
+			"right_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.RIGHT.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 
 	public final ListStringPreference BOTTOM_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
-			"bottom_widget_panel_order", TextUtils.join(",", WidgetsPanel.BOTTOM.getOriginalOrder()), ",").makeProfile();
+			"bottom_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.BOTTOM.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 
 	public final OsmandPreference<Boolean> SHOW_MAP_MARKERS_BAR_WIDGET = new BooleanPreference(this, "markers_distance_indication_enabled", true).makeProfile();
 
@@ -2676,6 +2678,9 @@ public class OsmandSettings {
 	public final ContextMenuItemsPreference DRAWER_ITEMS =
 			(ContextMenuItemsPreference) new ContextMenuItemsPreference(this, "drawer_items", DRAWER_ITEM_ID_SCHEME, DrawerMenuItemsSettings.getDrawerDefaultInstance())
 					.makeProfile().cache();
+
+	public final ListStringPreference COLLAPSED_CONFIGURE_MAP_CATEGORIES = (ListStringPreference)
+			new ListStringPreference(this, "collapsed_configure_map_categories", "", ",,").makeProfile().cache();
 
 	public final ContextMenuItemsPreference CONFIGURE_MAP_ITEMS =
 			(ContextMenuItemsPreference) new ContextMenuItemsPreference(this, "configure_map_items", CONFIGURE_MAP_ITEM_ID_SCHEME, new ContextMenuItemsSettings())

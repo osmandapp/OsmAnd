@@ -4574,4 +4574,10 @@
     <string name="simulation_real_mode_desc">Az egyenes útszakaszokon a sebesség nagyjából a megengedett legnagyobb sebességhez fog igazodni.
 \nA kereszteződésekben a szimuláció lelassul.
 \nExtra szankciók a közlekedési lámpáknál, stoptábláknál stb.</string>
+    <string name="apply_to_existing_favorites_descr">Alkalmazza a változtatásokat a csoport meglévő kedvenc pontjaira vagy csak az újakra\?</string>
+    <string name="apply_only_to_new_favorites">Alkalmazás csak az új kedvencekre</string>
+    <string name="apply_to_existing_points_descr">Alkalmazza a változtatásokat a csoport meglévő pontjaira vagy csak az újakra\?</string>
+    <string name="apply_to_existing">Alkalmazás a meglévőkre</string>
+    <string name="apply_only_to_new_points">Alkalmazás csak az új pontokra</string>
+    <string name="change_default_appearance">Alapértelmezett megjelenés megváltoztatása</string>
 </resources>

@@ -4549,8 +4549,43 @@
     <string name="estimated_download_size">Geschätzte Downloadgröße</string>
     <string name="number_of_tiles">Anzahl der Kacheln</string>
     <string name="move_map_to_select_area">Bewegen Sie die Karte, um den gewünschten Bereich auszuwählen.</string>
-    <string name="rendering_attr_showFitnessTrails_description">Fitnesspfade anzeigen</string>
-    <string name="rendering_attr_showFitnessTrails_name">Fitnesspfade</string>
-    <string name="rendering_attr_showRunningRoutes_name">Laufende Routen</string>
-    <string name="rendering_attr_showRunningRoutes_description">Laufende Routen anzeigen</string>
+    <string name="rendering_attr_showFitnessTrails_description">Fitness Parcours anzeigen</string>
+    <string name="rendering_attr_showFitnessTrails_name">Fitness Parcours</string>
+    <string name="rendering_attr_showRunningRoutes_name">Laufrouten</string>
+    <string name="rendering_attr_showRunningRoutes_description">Laufrouten anzeigen</string>
+    <string name="routeInfo_horse_scale_name">Schwierigkeitsgrad der Reitwege</string>
+    <string name="rendering_attr_showTrainRoutes_name">Zuglinien</string>
+    <string name="rendering_attr_showTramRoutes_name">Straßenbahnlinien</string>
+    <string name="simulation_real_mode_desc">Auf geraden Straßenabschnitten wird die Geschwindigkeit ungefähr der zulässigen Höchstgeschwindigkeit entsprechen.
+\nAn Kreuzungen wird die Simulation verlangsamt.
+\nZusätzliche Zeitzuschläge werden bei Verkehrszeichen, Stoppschildern usw. berücksichtigt.</string>
+    <string name="routeInfo_horse_scale_description">Reitwege nach ihrem Schwierigkeitsgrad darstellen</string>
+    <string name="rendering_attr_horse_scale_common_name">Anspruchslos</string>
+    <string name="rendering_attr_horse_scale_demanding_name">Vorsicht angeraten</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Schwieriger Weg</string>
+    <string name="rendering_attr_horse_scale_critical_name">Nur für Geübte</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">Gefährlich</string>
+    <string name="rendering_attr_horse_scale_impossible_name">Unpassierbar, Lebensgefahr</string>
+    <string name="routing_attr_carriage_restrictions_name">Einschränkungen für Pferdefuhrwerke</string>
+    <string name="routing_attr_carriage_restrictions_description">Berücksichtigung von Zufahrtsgenehmigungen für Pferdefuhrwerke</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Stadtbahnlinien</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Monoraillinien</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Kabelgetriebene Linien</string>
+    <string name="rendering_attr_showBusRoutes_name">Buslinien</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Oberleitungsbuslinien</string>
+    <string name="map_markers_bar">Leiste für Kartenmarkierungen</string>
+    <string name="shared_string_visible_widgets">Sichtbare Widgets</string>
+    <string name="top_widgets_panel">Oberes Paneel</string>
+    <string name="bottom_widgets_panel">Unteres Paneel</string>
+    <string name="shared_string_item">Element</string>
+    <string name="shared_string_buttons">Schaltflächen</string>
+    <string name="configure_screen_widgets_descr">Wählen Sie die Bildschirmseite aus, um Widgets hinzuzufügen oder neu anzuordnen.</string>
+    <string name="osm_carto_render_descr">Ähnlich dem OpenStreetMap-Carto-Stil, der auf der OSM-Hauptseite verwendet wird</string>
+    <string name="simulation_real_mode_title">Realistische Simulation</string>
+    <string name="simulation_constant_mode_desc">Die Simulation wird mit der gewählten konstanten Geschwindigkeit durchgeführt.</string>
+    <string name="simulation_constant_mode_title">Konstante Geschwindigkeit</string>
+    <string name="simulation_preview_mode_desc">Die Geschwindigkeit der Simulation wird auf geraden Streckenabschnitten maximal sein und sich nur an Kreuzungen verlangsamen.</string>
+    <string name="simulation_preview_mode_title">Schneller Vorschaumodus</string>
+    <string name="speed_mode">Geschwindigkeitsmodus</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">Sammeltaxirouten</string>
 </resources>

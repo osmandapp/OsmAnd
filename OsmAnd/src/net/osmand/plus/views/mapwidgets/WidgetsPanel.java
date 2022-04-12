@@ -29,6 +29,7 @@ import static net.osmand.plus.views.mapwidgets.widgets.LanesWidget.WIDGET_LANES;
 import static net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget.WIDGET_STREET_NAME;
 
 import android.text.TextUtils;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 
@@ -39,6 +40,7 @@ import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public enum WidgetsPanel {
@@ -47,6 +49,10 @@ public enum WidgetsPanel {
 	RIGHT(R.drawable.ic_action_screen_side_right, R.string.map_widget_right, R.id.right_side),
 	TOP(R.drawable.ic_action_screen_side_top, R.string.top_widgets_panel, R.id.top_side),
 	BOTTOM(R.drawable.ic_action_screen_side_bottom, R.string.bottom_widgets_panel, R.id.bottom_side);
+
+	public static final String PAGE_SEPARATOR = ";";
+	public static final String WIDGET_SEPARATOR = ",";
+	public static final Integer DEFAULT_ORDER = 1000;
 
 	private static final List<String> originalLeftOrder = new ArrayList<>();
 	private static final List<String> originalRightOrder = new ArrayList<>();
@@ -121,42 +127,74 @@ public enum WidgetsPanel {
 		}
 	}
 
+	public int getWidgetPage(@NonNull String widgetId, @NonNull OsmandSettings settings) {
+		return getWidgetPage(settings.getApplicationMode(), widgetId, settings);
+	}
+
+	public int getWidgetPage(@NonNull ApplicationMode appMode, @NonNull String widgetId, @NonNull OsmandSettings settings) {
+		return getPagedOrder(appMode, widgetId, settings).first;
+	}
+
 	public int getWidgetOrder(@NonNull String widgetId, @NonNull OsmandSettings settings) {
 		return getWidgetOrder(settings.getApplicationMode(), widgetId, settings);
 	}
 
 	public int getWidgetOrder(@NonNull ApplicationMode appMode, @NonNull String widgetId, @NonNull OsmandSettings settings) {
-		ListStringPreference orderPreference;
-		if (this == LEFT) {
-			orderPreference = settings.LEFT_WIDGET_PANEL_ORDER;
-		} else if (this == RIGHT) {
-			orderPreference = settings.RIGHT_WIDGET_PANEL_ORDER;
-		} else if (this == TOP) {
-			orderPreference = settings.TOP_WIDGET_PANEL_ORDER;
-		} else {
-			orderPreference = settings.BOTTOM_WIDGET_PANEL_ORDER;
-		}
-		List<String> orderIds = orderPreference.getStringsListForProfile(appMode);
-		if (Algorithms.isEmpty(orderIds)) {
-			return 0;
-		}
-
-		int order = orderIds.indexOf(widgetId);
-		return order == -1 ? orderIds.size() + 1 : order;
+		return getPagedOrder(appMode, widgetId, settings).second;
 	}
 
-	public boolean setWidgetsOrder(@NonNull ApplicationMode appMode, @NonNull List<String> widgetIds, @NonNull OsmandSettings settings) {
-		ListStringPreference orderPreference;
-		if (this == LEFT) {
-			orderPreference = settings.LEFT_WIDGET_PANEL_ORDER;
-		} else if (this == RIGHT) {
-			orderPreference = settings.RIGHT_WIDGET_PANEL_ORDER;
-		} else if (this == TOP) {
-			orderPreference = settings.TOP_WIDGET_PANEL_ORDER;
-		} else {
-			orderPreference = settings.BOTTOM_WIDGET_PANEL_ORDER;
+	@NonNull
+	private Pair<Integer, Integer> getPagedOrder(@NonNull ApplicationMode appMode,
+	                                             @NonNull String widgetId,
+	                                             @NonNull OsmandSettings settings) {
+		ListStringPreference orderPreference = getOrderPreference(settings);
+		List<String> pages = orderPreference.getStringsListForProfile(appMode);
+		if (Algorithms.isEmpty(pages)) {
+			return Pair.create(0, DEFAULT_ORDER);
 		}
-		String widgetsOrder = TextUtils.join(",", widgetIds);
-		return orderPreference.setModeValue(appMode, widgetsOrder);
+
+		for (int pageIndex = 0; pageIndex < pages.size(); pageIndex++) {
+			String page = pages.get(pageIndex);
+			List<String> orders = Arrays.asList(page.split(","));
+			int order = orders.indexOf(widgetId);
+			if (order != -1) {
+				return Pair.create(pageIndex, order);
+			}
+		}
+
+		return Pair.create(0, DEFAULT_ORDER);
+	}
+
+	public boolean setWidgetsOrder(@NonNull ApplicationMode appMode,
+	                               @NonNull List<List<String>> pagedOrder,
+	                               @NonNull OsmandSettings settings) {
+		ListStringPreference orderPreference = getOrderPreference(settings);
+		StringBuilder stringBuilder = new StringBuilder();
+		for (List<String> widgets : pagedOrder) {
+			String widgetsOrder = TextUtils.join(WIDGET_SEPARATOR, widgets);
+			if (!Algorithms.isEmpty(widgetsOrder)) {
+				stringBuilder.append(widgetsOrder)
+						.append(PAGE_SEPARATOR);
+			}
+		}
+		return orderPreference.setModeValue(appMode, stringBuilder.toString());
+	}
+
+	public boolean isPagingAllowed() {
+		return this == RIGHT;
+	}
+
+	@NonNull
+	public ListStringPreference getOrderPreference(@NonNull OsmandSettings settings) {
+		if (this == LEFT) {
+			return settings.LEFT_WIDGET_PANEL_ORDER;
+		} else if (this == RIGHT) {
+			return settings.RIGHT_WIDGET_PANEL_ORDER;
+		} else if (this == TOP) {
+			return settings.TOP_WIDGET_PANEL_ORDER;
+		} else if (this == BOTTOM) {
+			return settings.BOTTOM_WIDGET_PANEL_ORDER;
+		}
+		throw new IllegalStateException("Unsupported panel");
 	}
 }

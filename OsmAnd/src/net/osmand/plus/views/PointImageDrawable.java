@@ -22,7 +22,7 @@ import androidx.core.content.ContextCompat;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.data.FavouritePoint;
-import net.osmand.data.FavouritePoint.BackgroundType;
+import net.osmand.data.BackgroundType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;

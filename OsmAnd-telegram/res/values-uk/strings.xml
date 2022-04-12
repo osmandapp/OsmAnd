@@ -142,7 +142,7 @@
     <string name="m_s">м/с</string>
     <string name="km_h">км/г</string>
     <string name="mile_per_hour">мл/г</string>
-    <string name="si_kmh">Кілометрів за годину</string>
+    <string name="si_kmh">Кілометрів на годину</string>
     <string name="si_mph">Миль на годину</string>
     <string name="si_m_s">Метрів за секунду</string>
     <string name="si_min_km">Хвилин за кілометр</string>

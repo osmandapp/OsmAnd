@@ -17,7 +17,7 @@ import androidx.preference.SwitchPreferenceCompat;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.RestartActivity;
-import net.osmand.plus.dialogs.ConfigureMapUtils;
+import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.dialogs.LocationSourceBottomSheet;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment.OnSendAnalyticsPrefsUpdate;

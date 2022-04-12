@@ -429,7 +429,7 @@ public class ResourceManager {
 	public void clearTileForMap(String file, ITileSource map, int x, int y, int zoom, long requestTimestamp) {
 		TilesCache<?> cache = getTilesCache(map);
 		if (cache != null) {
-			cache.getTileForMap(file, map, x, y, zoom, true, false, true, true, requestTimestamp);
+			cache.getTileForMap(file, map, x, y, zoom, true, false, true, requestTimestamp);
 		}
 	}
 

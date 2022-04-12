@@ -21,10 +21,10 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_DEV;
@@ -71,7 +71,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			helper.addItem(new ContextMenuItem(DRAWER_BUILDS_ID)
 					.setTitleId(R.string.version_settings, mapActivity)
 					.setIcon(R.drawable.ic_action_apk)
-					.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
+					.setListener((uiAdapter, view, item, isChecked) -> {
 						final Intent mapIntent = new Intent(mapActivity, ContributionVersionActivity.class);
 						mapActivity.startActivityForResult(mapIntent, 0);
 						return true;
@@ -102,6 +102,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		public FPSTextInfoWidget(@NonNull MapActivity mapActivity) {
 			super(mapActivity);
 			this.mapView = mapActivity.getMapView();
+			updateInfo(null);
 		}
 
 		@Override

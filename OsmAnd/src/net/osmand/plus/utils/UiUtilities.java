@@ -5,7 +5,6 @@ import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
@@ -165,25 +164,26 @@ public class UiUtilities {
 		return getDrawable(id, ColorUtilities.getDefaultIconColorId(!light));
 	}
 
+	public static Drawable getColoredSelectableDrawable(Context ctx, int color, float alpha) {
+		int colorWithAlpha = ColorUtilities.getColorWithAlpha(color, alpha);
+		return getColoredSelectableDrawable(ctx, colorWithAlpha);
+	}
+
+	public static Drawable getColoredSelectableDrawable(Context ctx, int color) {
+		Drawable drawable = null;
+		Drawable bg = getSelectableDrawable(ctx);
+		if (bg != null) {
+			drawable = tintDrawable(bg, color);
+		}
+		return drawable;
+	}
+
 	public static Drawable getSelectableDrawable(Context ctx) {
 		int bgResId = AndroidUtils.resolveAttribute(ctx, R.attr.selectableItemBackground);
 		if (bgResId != 0) {
 			return AppCompatResources.getDrawable(ctx, bgResId);
 		}
 		return null;
-	}
-
-	public static Drawable getColoredSelectableDrawable(Context ctx, int color, float alpha) {
-		Drawable drawable = null;
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			Drawable bg = getSelectableDrawable(ctx);
-			if (bg != null) {
-				drawable = tintDrawable(bg, ColorUtilities.getColorWithAlpha(color, alpha));
-			}
-		} else {
-			drawable = AndroidUtils.createPressedStateListDrawable(new ColorDrawable(Color.TRANSPARENT), new ColorDrawable(ColorUtilities.getColorWithAlpha(color, alpha)));
-		}
-		return drawable;
 	}
 
 	public static Drawable createTintedDrawable(Context context, @DrawableRes int resId, @ColorInt int color) {

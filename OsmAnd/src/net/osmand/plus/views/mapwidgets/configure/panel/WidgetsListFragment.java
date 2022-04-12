@@ -33,6 +33,9 @@ import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.WidgetViewHolder;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 
+import java.util.List;
+import java.util.Set;
+
 public class WidgetsListFragment extends Fragment implements OnScrollChangedListener {
 
 	private static final String SELECTED_GROUP_ATTR = "selected_group_key";
@@ -126,11 +129,33 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	public void updateContent() {
 		widgetsContainer.removeAllViews();
 
+		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
+		if (selectedPanel.isPagingAllowed()) {
+			List<Set<MapWidgetInfo>> pagedWidgets =
+					widgetRegistry.getAvailablePagedWidgetsForPanel(selectedAppMode, selectedPanel);
+			for (int i = 0; i < pagedWidgets.size(); i++) {
+				inflatePageItemView(i, inflater);
+				inflatePageItemsViews(pagedWidgets.get(i), inflater);
+			}
+		} else {
+			inflatePageItemsViews(widgetRegistry.getAvailableWidgetsForPanel(selectedAppMode, selectedPanel), inflater);
+		}
+	}
+
+	private void inflatePageItemView(int index, @NonNull LayoutInflater inflater) {
+		View view = inflater.inflate(R.layout.configure_screen_list_item_page, widgetsContainer, false);
+		View topDivider = view.findViewById(R.id.top_divider);
+		TextView pageText = view.findViewById(R.id.page);
+		AndroidUiHelper.updateVisibility(topDivider, index > 0);
+		pageText.setText(getString(R.string.page_number, String.valueOf(index + 1)));
+		widgetsContainer.addView(view);
+	}
+
+	private void inflatePageItemsViews(@NonNull Set<MapWidgetInfo> widgetsInfo, @NonNull LayoutInflater inflater) {
 		int profileColor = selectedAppMode.getProfileColor(nightMode);
 		int defaultIconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 
-		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
-		for (MapWidgetInfo widgetInfo : widgetRegistry.getAvailableWidgetsForPanel(selectedAppMode, selectedPanel)) {
+		for (MapWidgetInfo widgetInfo : widgetsInfo) {
 			View view = inflater.inflate(R.layout.configure_screen_widget_item, widgetsContainer, false);
 
 			TextView title = view.findViewById(R.id.title);

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.View;
-import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,10 +15,6 @@ import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.osm.AbstractPoiType;
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
-import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -48,11 +43,18 @@ import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.wikimedia.WikiImageHelper;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -170,31 +172,26 @@ public class WikipediaPlugin extends OsmandPlugin {
 		ItemClickListener listener = new OnRowItemClick() {
 
 			@Override
-			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
-				if (itemId == R.string.shared_string_wikipedia) {
-					mapActivity.getDashboard().setDashboardVisibility(true,
-							DashboardOnMap.DashboardType.WIKIPEDIA,
-							AndroidUtils.getCenterViewCoordinates(view));
-				}
+			public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
+			                              @NonNull View view, @NonNull ContextMenuItem item) {
+				mapActivity.getDashboard().setDashboardVisibility(true,
+						DashboardOnMap.DashboardType.WIKIPEDIA,
+						AndroidUtils.getCenterViewCoordinates(view));
 				return false;
 			}
 
 			@Override
-			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId,
-			                                  final int pos, boolean isChecked, int[] viewCoordinates) {
-				if (itemId == R.string.shared_string_wikipedia) {
-					toggleWikipediaPoi(isChecked, selected -> {
-						ContextMenuItem item = adapter.getItem(pos);
-						if (item != null) {
-							item.setSelected(selected);
-							item.setColor(app, selected ?
-									R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-							item.setDescription(selected ? getLanguagesSummary() : null);
-							adapter.notifyDataSetChanged();
-						}
-						return true;
-					});
-				}
+			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
+			                                  @Nullable View view, @NotNull ContextMenuItem item,
+			                                  boolean isChecked) {
+				toggleWikipediaPoi(isChecked, selected -> {
+					item.setSelected(selected);
+					item.setColor(app, selected ?
+							R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+					item.setDescription(selected ? getLanguagesSummary() : null);
+					uiAdapter.onDataSetChanged();
+					return true;
+				});
 				return false;
 			}
 		};

@@ -44,7 +44,7 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
-import net.osmand.data.FavouritePoint.BackgroundType;
+import net.osmand.data.BackgroundType;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;

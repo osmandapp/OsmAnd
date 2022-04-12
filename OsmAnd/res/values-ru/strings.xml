@@ -4587,4 +4587,10 @@
     <string name="routeInfo_horse_scale_name">Сложность конных маршрутов</string>
     <string name="rendering_attr_horse_scale_dangerous_name">Опасный</string>
     <string name="routeInfo_horse_scale_description">Отрисовка маршрута в зависимости от сложности конных троп</string>
+    <string name="change_default_appearance">Изменить внешний вид по умолчанию</string>
+    <string name="apply_to_existing_favorites_descr">Применить изменения к существующим избранным точкам группы или только к новым\?</string>
+    <string name="apply_only_to_new_points">Применить только к новым точкам</string>
+    <string name="apply_only_to_new_favorites">Применить только к новым избранным</string>
+    <string name="apply_to_existing_points_descr">Применить изменения к существующим точкам группы или только к новым\?</string>
+    <string name="apply_to_existing">Применить к существующим</string>
 </resources>

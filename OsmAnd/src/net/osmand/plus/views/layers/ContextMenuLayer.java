@@ -1,5 +1,9 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+
 import android.Manifest;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -16,6 +20,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresPermission;
+import androidx.appcompat.content.res.AppCompatResources;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
@@ -39,8 +48,8 @@ import net.osmand.core.jni.QStringList;
 import net.osmand.core.jni.QStringStringHash;
 import net.osmand.core.jni.Utilities;
 import net.osmand.data.Amenity;
+import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
-import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -70,9 +79,9 @@ import net.osmand.plus.views.MoveMarkerBottomSheetHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.router.network.NetworkRouteSelector.RouteKey;
 import net.osmand.router.network.NetworkRouteSelector.RouteType;
@@ -88,15 +97,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresPermission;
-import androidx.appcompat.content.res.AppCompatResources;
 import gnu.trove.list.array.TIntArrayList;
-
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 
 public class ContextMenuLayer extends OsmandMapLayer {
 
@@ -329,7 +330,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public void populateObjectContextMenu(@NonNull LatLon latLon, @Nullable Object o, @NonNull ContextMenuAdapter adapter) {
-		ItemClickListener listener = (adptr, itemId, pos, isChecked, viewCoordinates) -> {
+		ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {
 			RotatedTileBox tileBox = getMapView().getCurrentRotatedTileBox();
 			enterMovingMode(tileBox);
 			return true;
@@ -797,13 +798,15 @@ public class ContextMenuLayer extends OsmandMapLayer {
 							selectedObjects.put(new Pair<>(travelGpx, selectedGpxPoint), gpxMenuProvider);
 						}
 					} else if (isRouteGpx) {
-						LatLon minLatLon = tileBox.getLatLonFromPixel(point.x - ROUTE_SEARCH_RADIUS_PX, point.y - ROUTE_SEARCH_RADIUS_PX);
-						LatLon maxLatLon = tileBox.getLatLonFromPixel(point.x + ROUTE_SEARCH_RADIUS_PX, point.y + ROUTE_SEARCH_RADIUS_PX);
+						if (isUniqueRoute(selectedObjects.keySet(), renderedObject)) {
+							LatLon minLatLon = tileBox.getLatLonFromPixel(point.x - ROUTE_SEARCH_RADIUS_PX, point.y - ROUTE_SEARCH_RADIUS_PX);
+							LatLon maxLatLon = tileBox.getLatLonFromPixel(point.x + ROUTE_SEARCH_RADIUS_PX, point.y + ROUTE_SEARCH_RADIUS_PX);
 
-						QuadRect rect = new QuadRect(minLatLon.getLongitude(), maxLatLon.getLatitude(),
-								maxLatLon.getLongitude(), minLatLon.getLatitude());
+							QuadRect rect = new QuadRect(minLatLon.getLongitude(), maxLatLon.getLatitude(),
+									maxLatLon.getLongitude(), minLatLon.getLatitude());
 
-						selectedObjects.put(new Pair<>(renderedObject, rect), gpxMenuProvider);
+							selectedObjects.put(new Pair<>(renderedObject, rect), gpxMenuProvider);
+						}
 					} else {
 						Amenity amenity = findAmenity(app, renderedObject.getId() >> 7,
 								renderedObject.getOriginalNames(), searchLatLon, AMENITY_SEARCH_RADIUS);
@@ -912,6 +915,22 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				return false;
 			} else if (o instanceof TransportStop && ((TransportStop) o).getName().startsWith(amenity.getName())) {
 				return false;
+			}
+		}
+		return true;
+	}
+
+	private boolean isUniqueRoute(@NonNull Set<Object> set, @NonNull RenderedObject renderedObject) {
+		for (Object o : set) {
+			if (o instanceof Pair) {
+				Pair<?, ?> pair = (Pair<?, ?>) o;
+				if (pair.first instanceof RenderedObject) {
+					RenderedObject object = (RenderedObject) pair.first;
+					if (Algorithms.objectEquals(object.getId(), renderedObject.getId())
+							|| Algorithms.stringsEqual(object.getRouteName(), renderedObject.getRouteName())) {
+						return false;
+					}
+				}
 			}
 		}
 		return true;

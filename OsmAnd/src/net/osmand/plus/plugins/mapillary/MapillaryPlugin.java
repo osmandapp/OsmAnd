@@ -6,7 +6,10 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.View;
-import android.widget.ArrayAdapter;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -35,24 +38,22 @@ import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
-import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
 
 import static android.content.Intent.ACTION_VIEW;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAPILLARY;
@@ -205,26 +206,19 @@ public class MapillaryPlugin extends OsmandPlugin {
 		ItemClickListener listener = new OnRowItemClick() {
 
 			@Override
-			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
-				if (itemId == R.string.street_level_imagery) {
-					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAPILLARY, AndroidUtils.getCenterViewCoordinates(view));
-					return false;
-				}
-				return true;
+			public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
+			                              @NonNull View view, @NonNull ContextMenuItem item) {
+				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAPILLARY, AndroidUtils.getCenterViewCoordinates(view));
+				return false;
 			}
 
 			@Override
-			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int pos, boolean isChecked, int[] viewCoordinates) {
-				if (itemId == R.string.street_level_imagery) {
-					SHOW_MAPILLARY.set(!SHOW_MAPILLARY.get());
-					updateMapLayers(mapActivity, mapActivity, false);
-					ContextMenuItem item = adapter.getItem(pos);
-					if (item != null) {
-						item.setSelected(SHOW_MAPILLARY.get());
-						item.setColor(app, SHOW_MAPILLARY.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-						adapter.notifyDataSetChanged();
-					}
-				}
+			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter, @Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
+				SHOW_MAPILLARY.set(!SHOW_MAPILLARY.get());
+				updateMapLayers(mapActivity, mapActivity, false);
+				item.setSelected(SHOW_MAPILLARY.get());
+				item.setColor(app, SHOW_MAPILLARY.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+				uiAdapter.onDataSetChanged();
 				return false;
 			}
 		};

@@ -7,18 +7,24 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.PointsGroup;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.myplaces.UpdateGpxCategoryTask;
+import net.osmand.plus.myplaces.UpdateGpxCategoryTask.UpdateGpxListener;
+import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.utils.AndroidUtils;
 
 import org.apache.commons.logging.Log;
+
+import java.lang.ref.WeakReference;
 
 public class RenameTrackGroupBottomSheet extends EditTrackGroupBottomSheet {
 
@@ -47,17 +53,46 @@ public class RenameTrackGroupBottomSheet extends EditTrackGroupBottomSheet {
 	}
 
 	private void renameGroupName() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			new UpdateGpxCategoryTask(activity, group, groupName)
-					.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		GPXFile gpxFile = group.getGpx();
+		PointsGroup pointsGroup = gpxFile.getPointsGroups().get(group.getName());
+		if (pointsGroup != null) {
+			updateGpx(gpxFile, pointsGroup);
 		}
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof OnGroupNameChangeListener) {
-			OnGroupNameChangeListener listener = (OnGroupNameChangeListener) fragment;
-			listener.onTrackGroupChanged();
+			((OnGroupNameChangeListener) fragment).onTrackGroupChanged();
 		}
 		dismiss();
+	}
+
+	private void updateGpx(@NonNull GPXFile gpxFile, @NonNull PointsGroup pointsGroup) {
+		MapActivity mapActivity = (MapActivity) getActivity();
+		if (mapActivity != null) {
+			UpdateGpxListener listener = getUpdateGpxListener(mapActivity);
+			PointsGroup newGroup = new PointsGroup(groupName, pointsGroup.iconName,
+					pointsGroup.backgroundType, pointsGroup.color, pointsGroup.pointsSize);
+
+			UpdateGpxCategoryTask task = new UpdateGpxCategoryTask(mapActivity, gpxFile, pointsGroup,
+					newGroup, listener, false);
+			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}
+	}
+
+	private UpdateGpxListener getUpdateGpxListener(@NonNull MapActivity mapActivity) {
+		WeakReference<MapActivity> activityRef = new WeakReference<>(mapActivity);
+		return errorMessage -> {
+			if (errorMessage == null) {
+				MapActivity activity = activityRef.get();
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
+					TrackMenuFragment fragment = activity.getTrackMenuFragment();
+					if (fragment != null) {
+						fragment.updateContent();
+					}
+				}
+			} else {
+				LOG.error(errorMessage);
+			}
+		};
 	}
 
 	@Override

@@ -112,26 +112,26 @@ public abstract class TilesCache<T> {
 
 	public T getTileForMapAsync(String file, ITileSource map, int x, int y, int zoom,
 	                            boolean loadFromInternetIfNeeded, long timestamp) {
-		return getTileForMap(file, map, x, y, zoom, loadFromInternetIfNeeded, false, true, timestamp);
+		return getTileForMap(file, map, x, y, zoom, loadFromInternetIfNeeded, false, timestamp);
 	}
 
 	public T getTileForMapSync(String file, ITileSource map, int x, int y, int zoom,
 	                           boolean loadFromInternetIfNeeded, long timestamp) {
-		return getTileForMap(file, map, x, y, zoom, loadFromInternetIfNeeded, true, true, timestamp);
+		return getTileForMap(file, map, x, y, zoom, loadFromInternetIfNeeded, true, timestamp);
 	}
 
 	/**
 	 * @param file - null could be passed if you do not call very often with that param
 	 */
 	protected T getTileForMap(String file, ITileSource map, int x, int y, int zoom,
-	                          boolean loadFromInternetIfNeeded, boolean sync, boolean loadFromFs,
+	                          boolean loadFromInternetIfNeeded, boolean sync,
 	                          long timestamp) {
-		return getTileForMap(file, map, x, y, zoom, loadFromInternetIfNeeded, sync, loadFromFs, false, timestamp);
+		return getTileForMap(file, map, x, y, zoom, loadFromInternetIfNeeded, sync, false, timestamp);
 	}
 
 	protected synchronized T getTileForMap(String tileId, ITileSource map, int x, int y, int zoom,
 	                                       boolean loadFromInternetIfNeeded, boolean sync,
-	                                       boolean loadFromFs, boolean deleteBefore, long timestamp) {
+	                                       boolean deleteBefore, long timestamp) {
 		if (tileId == null) {
 			tileId = calculateTileId(map, x, y, zoom);
 		}
@@ -149,9 +149,9 @@ public abstract class TilesCache<T> {
 			tilesOnFS.put(tileId, null);
 		}
 
-		if (loadFromFs && cache.get(tileId) == null && map != null) {
+		if (map != null) {
 			boolean locked = map instanceof SQLiteTileSource && ((SQLiteTileSource) map).isLocked();
-			if (!loadFromInternetIfNeeded && !locked && !isTileDownloaded(tileId, map, x, y, zoom)){
+			if (!loadFromInternetIfNeeded && !locked && !isTileDownloaded(tileId, map, x, y, zoom)) {
 				return null;
 			}
 			String url = loadFromInternetIfNeeded ? map.getUrlToLoad(x, y, zoom) : null;
@@ -165,10 +165,12 @@ public abstract class TilesCache<T> {
 			}
 			TileLoadDownloadRequest req = new TileLoadDownloadRequest(dirWithTiles, url, toSave,
 					tileId, map, x, y, zoom, timestamp, map.getReferer(), map.getUserAgent());
-			if (sync) {
-				return getRequestedTile(req);
-			} else {
-				asyncLoadingThread.requestToLoadTile(req);
+			if (cache.get(tileId) == null || isExpired(req)) {
+				if (sync) {
+					return getRequestedTile(req);
+				} else {
+					asyncLoadingThread.requestToLoadTile(req);
+				}
 			}
 		}
 		return get(tileId, timestamp);
@@ -217,8 +219,9 @@ public abstract class TilesCache<T> {
 
 	protected boolean isExpired(TileLoadDownloadRequest req) {
 		if (req.tileSource.getExpirationTimeMillis() != -1 && req.url != null && req.dirWithTiles.canRead()) {
-			File en = new File(req.dirWithTiles, req.tileId);
-			return en.exists() && isExpired(req, en.lastModified());
+			long lastModified = req.tileSource.getTileModifyTime(req.xTile, req.yTile, req.zoom,
+					req.dirWithTiles.getAbsolutePath());
+			return isExpired(req, lastModified);
 		}
 		return false;
 	}

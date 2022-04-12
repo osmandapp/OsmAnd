@@ -7,7 +7,6 @@ import android.text.format.DateFormat;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
@@ -17,16 +16,17 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.Version;
-import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -262,8 +262,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			if (db != null) {
 				try {
 					if (db.isOpen()) {
-						db.execSQL("DELETE FROM " + TRACK_NAME + " WHERE " + TRACK_COL_DATE + " <= ?", new Object[]{System.currentTimeMillis()}); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						db.execSQL("DELETE FROM " + POINT_NAME + " WHERE " + POINT_COL_DATE + " <= ?", new Object[]{System.currentTimeMillis()}); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						long time = System.currentTimeMillis();
+						db.execSQL("DELETE FROM " + TRACK_NAME + " WHERE " + TRACK_COL_DATE + " <= ?", new Object[] {time});
+						db.execSQL("DELETE FROM " + POINT_NAME + " WHERE " + POINT_COL_DATE + " <= ?", new Object[] {time});
 					}
 				} finally {
 					db.close();
@@ -552,12 +553,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		return pt;
 	}
 
-	public void updatePointData(WptPt pt, double lat, double lon, long time, String description, String name, String category, int color) {
-		updatePointData(pt, lat, lon, time, description, name, category, color, null, null);
-	}
-
-	public void updatePointData(WptPt pt, double lat, double lon, long time, String description, String name,
-								String category, int color, String iconName, String iconBackground) {
+	public void updatePointData(WptPt wptPt, double lat, double lon, String description, String name,
+	                            String category, int color, String iconName, String iconBackground) {
+		long time = System.currentTimeMillis();
 		currentTrack.getModifiableGpxFile().modifiedTime = time;
 
 		List<Object> params = new ArrayList<>();
@@ -571,9 +569,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		params.add(iconName);
 		params.add(iconBackground);
 
-		params.add(pt.getLatitude());
-		params.add(pt.getLongitude());
-		params.add(pt.time);
+		params.add(wptPt.getLatitude());
+		params.add(wptPt.getLongitude());
+		params.add(wptPt.time);
 
 		StringBuilder sb = new StringBuilder();
 		String prefix = "UPDATE " + POINT_NAME
@@ -593,41 +591,42 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				+ POINT_COL_DATE + "=?";
 
 		sb.append(prefix);
-		if (pt.desc != null) {
+		if (wptPt.desc != null) {
 			sb.append(" AND ").append(POINT_COL_DESCRIPTION).append("=?");
-			params.add(pt.desc);
+			params.add(wptPt.desc);
 		} else {
 			sb.append(" AND ").append(POINT_COL_DESCRIPTION).append(" IS NULL");
 		}
-		if (pt.name != null) {
+		if (wptPt.name != null) {
 			sb.append(" AND ").append(POINT_COL_NAME).append("=?");
-			params.add(pt.name);
+			params.add(wptPt.name);
 		} else {
 			sb.append(" AND ").append(POINT_COL_NAME).append(" IS NULL");
 		}
-		if (pt.category != null) {
+		if (wptPt.category != null) {
 			sb.append(" AND ").append(POINT_COL_CATEGORY).append("=?");
-			params.add(pt.category);
+			params.add(wptPt.category);
 		} else {
 			sb.append(" AND ").append(POINT_COL_CATEGORY).append(" IS NULL");
 		}
 
 		execWithClose(sb.toString(), params.toArray());
 
-		pt.lat = lat;
-		pt.lon = lon;
-		pt.time = time;
-		pt.desc = description;
-		pt.name = name;
-		pt.category = category;
+		wptPt.lat = lat;
+		wptPt.lon = lon;
+		wptPt.time = time;
+		wptPt.desc = description;
+		wptPt.name = name;
+		wptPt.category = category;
+
 		if (color != 0) {
-			pt.setColor(color);
+			wptPt.setColor(color);
 		}
 		if (iconName != null) {
-			pt.setIconName(iconName);
+			wptPt.setIconName(iconName);
 		}
 		if (iconBackground != null) {
-			pt.setBackgroundType(iconBackground);
+			wptPt.setBackgroundType(iconBackground);
 		}
 	}
 

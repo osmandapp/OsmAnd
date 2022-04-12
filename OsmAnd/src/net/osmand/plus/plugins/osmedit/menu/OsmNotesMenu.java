@@ -2,14 +2,12 @@ package net.osmand.plus.plugins.osmedit.menu;
 
 import android.content.Context;
 import android.view.ContextThemeWrapper;
-import android.widget.ArrayAdapter;
+import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -18,6 +16,12 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 
@@ -27,9 +31,6 @@ public class OsmNotesMenu {
 
 	public static ContextMenuAdapter createListAdapter(@NonNull final MapActivity mapActivity) {
 		ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity.getMyApplication());
-		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
-		adapter.setProfileDependent(true);
 		createLayersItems(adapter, mapActivity);
 		return adapter;
 	}
@@ -55,8 +56,10 @@ public class OsmNotesMenu {
 
 		OnRowItemClick l = new OnRowItemClick() {
 			@Override
-			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId,
-			                                  final int position, boolean isChecked, int[] viewCoordinates) {
+			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
+			                                  @Nullable View view, @NotNull ContextMenuItem item,
+			                                  boolean isChecked) {
+				int itemId = item.getTitleId();
 				if (itemId == osmNotesStringId) {
 					plugin.SHOW_OSM_BUGS.set(isChecked);
 					plugin.updateLayers(mapActivity, mapActivity);
@@ -69,11 +72,8 @@ public class OsmNotesMenu {
 							zoomStrings, nightMode, checked, app, selectedModeColor, themeRes, v -> {
 								int which = (int) v.getTag();
 								plugin.SHOW_OSM_BUGS_MIN_ZOOM.set(zoomIntValues[which]);
-								ContextMenuItem item = adapter.getItem(position);
-								if (item != null) {
-									item.setDescription(zoomStrings[which]);
-									adapter.notifyDataSetChanged();
-								}
+								item.setDescription(zoomStrings[which]);
+								uiAdapter.onDataSetChanged();
 								mapActivity.refreshMap();
 							}
 					);
@@ -120,7 +120,7 @@ public class OsmNotesMenu {
 				.setListener(l)
 				.setSelected(plugin.SHOW_CLOSED_OSM_BUGS.get())
 				.setClickable(showOsmBugs)
-				.hideDivider(true));
+				.setHideDivider(true));
 
 		adapter.addItem(new ContextMenuItem(null)
 				.setLayout(R.layout.card_bottom_divider)

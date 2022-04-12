@@ -5,11 +5,11 @@ import android.graphics.drawable.Drawable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.configmap.ConfigureMapMenu;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.ApplicationMode;

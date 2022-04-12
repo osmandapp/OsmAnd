@@ -19,8 +19,7 @@ public class ColorUtilities {
 		return luminance < 0.5 ? transparent ? ContextCompat.getColor(context, R.color.color_black_transparent) : Color.BLACK : Color.WHITE;
 	}
 
-	public static float getProportionalAlpha(float startValue, float endValue,
-	                                         float currentValue) {
+	public static float getProportionalAlpha(float startValue, float endValue, float currentValue) {
 		currentValue = Math.min(currentValue, endValue);
 		float proportion = (endValue - startValue) / 100;
 		if (currentValue > startValue) {
@@ -32,8 +31,7 @@ public class ColorUtilities {
 
 	@ColorInt
 	public static int getProportionalColorMix(@ColorInt int startColor, @ColorInt int endColor,
-	                                          float startValue, float endValue,
-	                                          float currentValue) {
+	                                          float startValue, float endValue, float currentValue) {
 		currentValue = Math.min(currentValue, endValue);
 		float proportion = (endValue - startValue) / 100;
 		if (currentValue > startValue) {

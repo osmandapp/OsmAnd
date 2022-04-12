@@ -4583,4 +4583,5 @@
     <string name="rendering_attr_horse_scale_critical_name">קריטי</string>
     <string name="simulation_preview_mode_desc">מהירות ההדמיה שתהיה מרבית במקטעים ישרים ותאט רק בצמתים.</string>
     <string name="speed_mode">מצב מהירות</string>
+    <string name="apply_to_existing_points_descr">להחיל את השינויים על הנקודות הקיימות בקבוצה או רק על חדשות\?</string>
 </resources>

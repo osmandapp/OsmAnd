@@ -1,9 +1,9 @@
 package net.osmand.plus.dialogs;
 
 import android.view.View;
-import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.map.ITileSource;
@@ -20,10 +20,13 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapTileLayer;
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
-import net.osmand.plus.widgets.cmadapter.callback.OnIntegerValueChangedListener;
-import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.OnIntegerValueChangedListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+
+import org.jetbrains.annotations.NotNull;
 
 import static net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode.OVERLAY;
 import static net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode.UNDERLAY;
@@ -34,10 +37,7 @@ public class RasterMapMenu {
 
 	public static ContextMenuAdapter createListAdapter(final MapActivity mapActivity,
 	                                                   final RasterMapType type) {
-		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity.getMyApplication());
-		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
-		adapter.setProfileDependent(true);
 		createLayersItems(adapter, mapActivity, type);
 		return adapter;
 	}
@@ -96,22 +96,25 @@ public class RasterMapMenu {
 				};
 		final MapLayers mapLayers = mapActivity.getMapLayers();
 		OnRowItemClick l = new OnRowItemClick() {
+
 			@Override
-			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter,
-			                              View view, int itemId, int pos) {
-				if (itemId == mapTypeString) {
+			public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
+			                              @NonNull View view, @NonNull ContextMenuItem item) {
+				if (item.getTitleId() == mapTypeString) {
 					if (mapSelected) {
 						plugin.selectMapOverlayLayer(mapTypePreference,
 								exMapTypePreference, true, mapActivity, onMapSelectedCallback);
 					}
 					return false;
 				}
-				return super.onRowItemClick(adapter, view, itemId, pos);
+				return super.onRowItemClick(uiAdapter, view, item);
 			}
 
 			@Override
-			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter,
-			                                  final int itemId, final int pos, final boolean isChecked, int[] viewCoordinates) {
+			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
+			                                  @Nullable View view, @NotNull ContextMenuItem item,
+			                                  final boolean isChecked) {
+				int itemId = item.getTitleId();
 				if (itemId == toggleActionStringId) {
 					app.runInUIThread(() -> {
 						plugin.toggleUnderlayState(mapActivity, type, onMapSelectedCallback);
@@ -154,13 +157,13 @@ public class RasterMapMenu {
 		mapTypeDescr = mapSelected ? mapTypeDescr : mapActivity.getString(R.string.shared_string_none);
 		contextMenuAdapter.addItem(new ContextMenuItem(null)
 				.setTitleId(toggleActionStringId, mapActivity)
-				.hideDivider(true)
+				.setHideDivider(true)
 				.setListener(l)
 				.setSelected(mapSelected));
 		if (mapSelected) {
 			contextMenuAdapter.addItem(new ContextMenuItem(null)
 					.setTitleId(mapTypeString, mapActivity)
-					.hideDivider(true)
+					.setHideDivider(true)
 					.setListener(l)
 					.setLayout(R.layout.list_item_icon_and_menu_wide)
 					.setDescription(mapTypeDescr));
@@ -174,7 +177,7 @@ public class RasterMapMenu {
 			// android:max="255" in layout is expected
 			contextMenuAdapter.addItem(new ContextMenuItem(null)
 					.setTitleId(mapTypeStringTransparency, mapActivity)
-					.hideDivider(true)
+					.setHideDivider(true)
 					.setLayout(R.layout.list_item_progress)
 					.setIcon(R.drawable.ic_action_opacity)
 					.setProgress(mapTransparencyPreference.get())
@@ -183,21 +186,21 @@ public class RasterMapMenu {
 			if (type == RasterMapType.UNDERLAY) {
 				contextMenuAdapter.addItem(new ContextMenuItem(null)
 						.setTitleId(R.string.show_polygons, mapActivity)
-						.hideDivider(true)
+						.setHideDivider(true)
 						.setListener(l)
 						.setSelected(!hidePolygonsPref.get()));
 			}
 			Boolean transparencySwitchState = isSeekbarVisible(app, type);
 			contextMenuAdapter.addItem(new ContextMenuItem(null)
 					.setTitleId(R.string.show_transparency_seekbar, mapActivity)
-					.hideDivider(true)
+					.setHideDivider(true)
 					.setListener(l)
 					.setSelected(transparencySwitchState));
 			ITileSource oveplayMap = plugin.getOverlayLayer().getMap();
 			if (type == RasterMapType.OVERLAY && oveplayMap != null && oveplayMap.getParamType() != ParameterType.UNDEFINED) {
 				contextMenuAdapter.addItem(new ContextMenuItem(null)
 						.setTitleId(R.string.show_parameter_seekbar, mapActivity)
-						.hideDivider(true)
+						.setHideDivider(true)
 						.setListener(l)
 						.setSelected(settings.SHOW_MAP_LAYER_PARAMETER.get()));
 			}

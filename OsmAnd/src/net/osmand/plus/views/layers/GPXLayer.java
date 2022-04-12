@@ -2,9 +2,9 @@ package net.osmand.plus.views.layers;
 
 import static net.osmand.GPXUtilities.calculateTrackBounds;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 import static net.osmand.plus.mapcontextmenu.controllers.NetworkRouteMenuController.getIconForRouteObject;
+import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
+import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -1009,14 +1009,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				return new PointDescription(PointDescription.POINT_TYPE_GPX, travelGpx.getTitle());
 			} else if (pair.first instanceof RenderedObject && pair.second instanceof QuadRect) {
 				RenderedObject renderedObject = (RenderedObject) pair.first;
-				String name = renderedObject.getRouteName();
-				if (Algorithms.isEmpty(name)) {
-					name = renderedObject.getRouteRef();
-				}
-				if (Algorithms.isEmpty(name)) {
-					name = renderedObject.getName();
-				}
-				return new PointDescription(PointDescription.POINT_TYPE_ROUTE, name);
+				return new PointDescription(PointDescription.POINT_TYPE_ROUTE, renderedObject.getRouteName());
 			}
 		}
 		return null;
@@ -1230,10 +1223,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			SelectedGpxFile selectedGpxFile = pointFileMap.get(objectInMotion);
 			if (selectedGpxFile != null) {
 				GPXFile gpxFile = selectedGpxFile.getGpxFile();
-				gpxFile.updateWptPt(objectInMotion, position.getLatitude(),
-						position.getLongitude(), System.currentTimeMillis(), objectInMotion.desc,
-						objectInMotion.name, objectInMotion.category, objectInMotion.getColor(),
-						objectInMotion.getIconName(), objectInMotion.getBackgroundType());
+				gpxFile.updateWptPt(objectInMotion, position.getLatitude(), position.getLongitude(),
+						objectInMotion.desc, objectInMotion.name, objectInMotion.category,
+						objectInMotion.getColor(), objectInMotion.getIconName(), objectInMotion.getBackgroundType());
 				syncGpx(gpxFile);
 				if (gpxFile.showCurrentTrack) {
 					if (callback != null) {
