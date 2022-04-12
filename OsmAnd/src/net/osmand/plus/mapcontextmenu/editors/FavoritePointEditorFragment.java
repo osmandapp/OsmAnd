@@ -105,9 +105,8 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	public void setSelectedGroup(String selectedGroup) {
 		super.setSelectedGroup(selectedGroup);
 
-		FavouritePoint favorite = getFavorite();
 		FavoriteGroup group = getFavoriteGroup(selectedGroup);
-		if (favorite == null && group != null) {
+		if (group != null) {
 			setColor(group.getColor());
 			setIconName(group.getIconName());
 			setBackgroundType(group.getBackgroundType());
@@ -460,7 +459,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	@DrawableRes
 	private int getInitialIconId() {
 		FavouritePoint favorite = getFavorite();
-		int iconId = favorite != null ? favorite.getColor() : 0;
+		int iconId = favorite != null ? favorite.getIconId() : 0;
 		FavoriteGroup group = getGroup();
 		if (group != null && iconId == 0) {
 			iconId = RenderingIcons.getBigIconResourceId(group.getIconName());

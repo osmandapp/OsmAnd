@@ -278,7 +278,8 @@ public abstract class PointEditorFragment extends EditorFragment {
 		groupRecyclerView = view.findViewById(R.id.group_recycler_view);
 		groupRecyclerView.setAdapter(groupListAdapter);
 		groupRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
-		setSelectedItemWithScroll(getCategoryInitValue());
+		selectedGroup = getCategoryInitValue();
+		setSelectedItemWithScroll(selectedGroup);
 	}
 
 	@Override
@@ -331,6 +332,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 		setIconName(pointsGroup.iconName);
 		setBackgroundType(pointsGroup.backgroundType);
 
+		setSelectedGroup(pointsGroup.name);
 		setSelectedItemWithScroll(pointsGroup.name);
 
 		updateContent();
@@ -339,7 +341,6 @@ public abstract class PointEditorFragment extends EditorFragment {
 
 	@SuppressLint("NotifyDataSetChanged")
 	private void setSelectedItemWithScroll(String name) {
-		setSelectedGroup(name);
 		groupListAdapter.fillGroups();
 		groupListAdapter.notifyDataSetChanged();
 		int position = 0;
