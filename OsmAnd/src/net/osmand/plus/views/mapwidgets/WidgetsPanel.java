@@ -8,7 +8,7 @@ import static net.osmand.plus.plugins.parking.ParkingPositionPlugin.WIDGET_PARKI
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_ALTITUDE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BATTERY;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BEARING;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_DISTANCE_TO_DESTINATION;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_GPS_INFO;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_DISTANCE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_TIME;
@@ -20,7 +20,7 @@ import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_TUR
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_TURN_SMALL;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_PLAIN_TIME;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_RADIUS_RULER;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_SPEED;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_CURRENT_SPEED;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_TIME;
 import static net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper.WIDGET_MAP_MARKERS;
 import static net.osmand.plus.views.mapwidgets.widgets.CoordinatesWidget.WIDGET_COORDINATES;
@@ -66,12 +66,12 @@ public enum WidgetsPanel {
 
 		originalRightOrder.add(WIDGET_INTERMEDIATE_DISTANCE);
 		originalRightOrder.add(WIDGET_INTERMEDIATE_TIME);
-		originalRightOrder.add(WIDGET_DISTANCE);
+		originalRightOrder.add(WIDGET_DISTANCE_TO_DESTINATION);
 		originalRightOrder.add(WIDGET_TIME);
 		originalRightOrder.add(WIDGET_MARKER_1);
 		originalRightOrder.add(WIDGET_BEARING);
 		originalRightOrder.add(WIDGET_MARKER_2);
-		originalRightOrder.add(WIDGET_SPEED);
+		originalRightOrder.add(WIDGET_CURRENT_SPEED);
 		originalRightOrder.add(WIDGET_MAX_SPEED);
 		originalRightOrder.add(WIDGET_ALTITUDE);
 		originalRightOrder.add(WIDGET_GPS_INFO);

@@ -79,9 +79,6 @@
     <string name="map_widget_compass">מצפן</string>
     <string name="map_widget_reset">איפוס לבררת המחדל</string>
     <string name="map_widget_parking">חנייה</string>
-    <string name="map_widget_speed">מהירות</string>
-    <string name="map_widget_distance">יעד</string>
-    <string name="map_widget_altitude">גובה</string>
     <string name="map_widget_next_turn">הפנייה הבאה</string>
     <string name="map_widget_next_turn_small">הפנייה הבאה (קטנה)</string>
     <string name="map_widget_next_next_turn">הפנייה השנייה הבאה</string>

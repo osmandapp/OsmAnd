@@ -737,9 +737,6 @@
     <string name="map_widget_compass">Kompass</string>
     <string name="map_widget_reset">Iestatīt uz noklusēto</string>
     <string name="map_widget_parking">Autostāvvietas</string>
-    <string name="map_widget_speed">Ātrums</string>
-    <string name="map_widget_distance">Mērķis</string>
-    <string name="map_widget_altitude">Augstums</string>
     <string name="map_widget_time">Laiks ceļam</string>
     <string name="map_widget_next_turn">Nākamais pagriez_</string>
     <string name="map_widget_next_turn_small">Nāk. pagriez. (mazs)</string>

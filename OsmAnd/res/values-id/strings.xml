@@ -2022,7 +2022,6 @@
     <string name="avoid_in_routing_title">Hindari…</string>
     <string name="map_widget_lock_screen">Kunci</string>
     <string name="map_widget_compass">Kompas</string>
-    <string name="map_widget_distance">Destinasi</string>
     <string name="bg_service_screen_unlock">Buka kunci</string>
     <string name="osmand_parking_warning">Peringatan</string>
     <string name="osmand_parking_lim_text">Waktu terbatas</string>
@@ -2063,9 +2062,7 @@
     <string name="local_index_mi_backup">Nonaktifkan</string>
     <string name="search_poi_filter">Saring</string>
     <string name="navigate_point_longitude">Garis bujur</string>
-    <string name="map_widget_speed">Kecepatan</string>
     <string name="map_widget_show_ruler">Penggaris</string>
-    <string name="map_widget_altitude">Ketinggian</string>
     <string name="osmand_parking_pm">PM</string>
     <string name="oclock">jam</string>
     <string name="navigate_point_format">Format</string>

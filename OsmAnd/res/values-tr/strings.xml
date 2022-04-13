@@ -58,8 +58,6 @@
     <string name="map_widget_lock_screen">Kilitle</string>
     <string name="map_widget_compass">Pusula</string>
     <string name="map_widget_reset">Öntanımlı değerlere sıfırla</string>
-    <string name="map_widget_speed">Hız</string>
-    <string name="map_widget_distance">Varış Noktası</string>
     <string name="bg_service_screen_lock">Kilitle</string>
     <string name="bg_service_screen_unlock">Kilidi aç</string>
     <string name="bg_service_screen_lock_toast">Ekran kilitli</string>
@@ -210,7 +208,6 @@
     <string name="map_widget_transparent">Şeffaf widget\'lar</string>
     <string name="map_widget_config">Ekranı ayarla</string>
     <string name="map_widget_parking">Park et</string>
-    <string name="map_widget_altitude">Rakım</string>
     <string name="map_widget_time">Gitme zamanı</string>
     <string name="map_widget_next_turn">Sonraki dönüş</string>
     <string name="map_widget_next_turn_small">Sonraki dönüş (küçük)</string>

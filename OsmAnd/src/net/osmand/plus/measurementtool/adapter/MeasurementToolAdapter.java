@@ -114,7 +114,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 		}
 		float speed = (float) pt.speed;
 		if (speed != 0) {
-			String speedStr = (mapActivity.getString(R.string.map_widget_speed)).substring(0, 1);
+			String speedStr = (mapActivity.getString(R.string.map_widget_current_speed)).substring(0, 1);
 			holder.speed.setText(mapActivity.getString(R.string.ltr_or_rtl_combine_via_colon,
 					speedStr, OsmAndFormatter.getFormattedSpeed(speed, app)));
 		} else {

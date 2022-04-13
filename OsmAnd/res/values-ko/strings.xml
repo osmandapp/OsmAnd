@@ -952,9 +952,6 @@
     <string name="map_widget_compass">나침반</string>
     <string name="map_widget_reset">기본값으로 재설정</string>
     <string name="map_widget_parking">주차</string>
-    <string name="map_widget_speed">속도</string>
-    <string name="map_widget_distance">도착지</string>
-    <string name="map_widget_altitude">고도</string>
     <string name="map_widget_time">가야할 시간</string>
     <string name="map_widget_next_turn">다음 턴</string>
     <string name="map_widget_next_turn_small">다음 턴(작은 아이콘)</string>

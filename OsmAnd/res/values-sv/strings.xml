@@ -10,9 +10,6 @@
     <string name="map_widget_lock_screen">Skärmlås</string>
     <string name="map_widget_compass">Kompass</string>
     <string name="map_widget_parking">Parkering</string>
-    <string name="map_widget_speed">Hastighet</string>
-    <string name="map_widget_distance">Destination</string>
-    <string name="map_widget_altitude">Höjd</string>
     <string name="map_widget_next_turn">Nästa sväng</string>
     <string name="show_warnings_title">Visa varningar …</string>
     <string name="show_warnings_descr">Ställ in trafikvarningar (hastighetsbegränsningar, tvångsstopp, farthinder, tunnlar), varningar för fartkameror och information om körfält.</string>

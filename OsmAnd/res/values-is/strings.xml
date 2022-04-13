@@ -455,9 +455,6 @@
     <string name="map_widget_compass">Áttaviti</string>
     <string name="map_widget_reset">Frumstilla á sjálfgefið</string>
     <string name="map_widget_parking">Bílastæði</string>
-    <string name="map_widget_speed">Hraði</string>
-    <string name="map_widget_distance">Áfangastaður</string>
-    <string name="map_widget_altitude">Hæð</string>
     <string name="bg_service_screen_lock">Læsa</string>
     <string name="osmand_parking_hours">Klukkustundir</string>
     <string name="osmand_parking_minutes">Mínútur</string>

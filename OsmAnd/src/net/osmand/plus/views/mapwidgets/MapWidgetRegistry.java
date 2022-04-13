@@ -58,12 +58,12 @@ public class MapWidgetRegistry {
 	public static final String WIDGET_NEXT_TURN_SMALL = "next_turn_small";
 	public static final String WIDGET_NEXT_NEXT_TURN = "next_next_turn";
 
-	public static final String WIDGET_DISTANCE = "distance";
+	public static final String WIDGET_DISTANCE_TO_DESTINATION = "distance";
 	public static final String WIDGET_INTERMEDIATE_DISTANCE = "intermediate_distance";
 	public static final String WIDGET_TIME = "time";
 	public static final String WIDGET_INTERMEDIATE_TIME = "intermediate_time";
 	public static final String WIDGET_MAX_SPEED = "max_speed";
-	public static final String WIDGET_SPEED = "speed";
+	public static final String WIDGET_CURRENT_SPEED = "speed";
 	public static final String WIDGET_ALTITUDE = "altitude";
 	public static final String WIDGET_GPS_INFO = "gps_info";
 	public static final String WIDGET_MARKER_1 = "map_marker_1st";

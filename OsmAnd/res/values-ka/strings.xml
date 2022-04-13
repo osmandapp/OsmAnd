@@ -736,9 +736,6 @@
     <string name="map_widget_compass">კომპასი</string>
     <string name="map_widget_reset">ნაგულისხმევზე დაბრუნება</string>
     <string name="map_widget_parking">პარკინგი</string>
-    <string name="map_widget_speed">სიჩქარე</string>
-    <string name="map_widget_distance">მიზანი</string>
-    <string name="map_widget_altitude">სიმაღლე</string>
     <string name="map_widget_time">წასვლის დროა</string>
     <string name="map_widget_next_turn">შემდეგი შესახვევი</string>
     <string name="map_widget_next_turn_small">შემდეგი შესახვევი (პატარა)</string>

@@ -749,9 +749,6 @@
     <string name="map_widget_compass">Bússola</string>
     <string name="map_widget_reset">Restaurar para predefinido</string>
     <string name="map_widget_parking">Estacionamento</string>
-    <string name="map_widget_speed">Velocidade</string>
-    <string name="map_widget_distance">Destino</string>
-    <string name="map_widget_altitude">Altitude</string>
     <string name="map_widget_time">Tempo para chegar</string>
     <string name="map_widget_next_turn">Próxima manobra</string>
     <string name="map_widget_next_turn_small">Próxima manobra (menor)</string>

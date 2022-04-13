@@ -121,9 +121,6 @@
     <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_reset">Resetiraj na zadano</string>
     <string name="map_widget_parking">Parkiralište</string>
-    <string name="map_widget_speed">Brzina</string>
-    <string name="map_widget_distance">Odredište</string>
-    <string name="map_widget_altitude">Visina</string>
     <string name="map_widget_time">Vrijeme za polazak</string>
     <string name="map_widget_next_turn">Skretanje</string>
     <string name="map_widget_next_next_turn">Slijedeće skretanje</string>

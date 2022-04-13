@@ -471,9 +471,6 @@
     <string name="map_widget_lock_screen">Lock screen</string>
     <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_parking">Parkowanišćo</string>
-    <string name="map_widget_speed">Spěšnosć</string>
-    <string name="map_widget_distance">Cil</string>
-    <string name="map_widget_altitude">Wysokosć</string>
     <string name="map_widget_time">Zbywacy čas</string>
     <string name="show_cameras">Błyskače pokazać</string>
     <string name="show_traffic_warnings">Wobchadne warnowanja pokazać</string>

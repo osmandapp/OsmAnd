@@ -567,9 +567,6 @@
     <string name="map_widget_compass">Compás</string>
     <string name="map_widget_reset">Restaurar valores predeterminado</string>
     <string name="map_widget_parking">Aparcamento</string>
-    <string name="map_widget_speed">Velocidade</string>
-    <string name="map_widget_distance">Destino</string>
-    <string name="map_widget_altitude">Altitude</string>
     <string name="map_widget_time">Tempo para chegar</string>
     <string name="map_widget_next_turn">Manobra seguinte</string>
     <string name="map_widget_next_turn_small">Manobra seguinte (pequena)</string>

@@ -121,9 +121,6 @@
     <string name="map_widget_compass">Busolă</string>
     <string name="map_widget_reset">Resetează la implicit</string>
     <string name="map_widget_parking">Parcare</string>
-    <string name="map_widget_speed">Viteză</string>
-    <string name="map_widget_distance">Distanța până la destinație</string>
-    <string name="map_widget_altitude">Altitudine</string>
     <string name="map_widget_time">Timp rămas</string>
     <string name="map_widget_next_turn">Următoarea manevră</string>
     <string name="map_widget_next_turn_small">Următoarea manevră (mic)</string>

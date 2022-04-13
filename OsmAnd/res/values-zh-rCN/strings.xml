@@ -74,9 +74,6 @@
     <string name="map_widget_compass">指南针</string>
     <string name="map_widget_reset">重置为默认</string>
     <string name="map_widget_parking">停车</string>
-    <string name="map_widget_speed">速度</string>
-    <string name="map_widget_distance">目的地</string>
-    <string name="map_widget_altitude">海拔</string>
     <string name="map_widget_time">剩余时间</string>
     <string name="map_widget_next_turn">下一个转弯</string>
     <string name="bg_service_screen_lock">锁定</string>

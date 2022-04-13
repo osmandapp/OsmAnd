@@ -741,9 +741,6 @@
     <string name="map_widget_compass">Iránytű</string>
     <string name="map_widget_reset">Alapértékek visszaállítása</string>
     <string name="map_widget_parking">Parkolás</string>
-    <string name="map_widget_speed">Sebesség</string>
-    <string name="map_widget_distance">Célpont</string>
-    <string name="map_widget_altitude">Magasság</string>
     <string name="map_widget_time">Hátralévő idő</string>
     <string name="map_widget_next_turn">Következő kanyarodás</string>
     <string name="map_widget_next_turn_small">Következő kanyarodás (kicsi)</string>

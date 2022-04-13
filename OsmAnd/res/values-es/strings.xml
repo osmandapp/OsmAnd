@@ -755,9 +755,6 @@
     <string name="map_widget_compass">Brújula</string>
     <string name="map_widget_reset">Restaurar a valores predefinidos</string>
     <string name="map_widget_parking">Aparcamiento</string>
-    <string name="map_widget_speed">Velocidad</string>
-    <string name="map_widget_distance">Destino</string>
-    <string name="map_widget_altitude">Altitud</string>
     <string name="map_widget_time">Tiempo de llegada</string>
     <string name="map_widget_next_turn">Próximo giro</string>
     <string name="map_widget_next_turn_small">Próximo giro (pequeño)</string>

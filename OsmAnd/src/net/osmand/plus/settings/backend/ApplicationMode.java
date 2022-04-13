@@ -33,7 +33,7 @@ import androidx.core.content.ContextCompat;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_ALTITUDE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BATTERY;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BEARING;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_DISTANCE_TO_DESTINATION;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_GPS_INFO;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_DISTANCE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_TIME;
@@ -45,7 +45,7 @@ import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_TUR
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_TURN_SMALL;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_PLAIN_TIME;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_RADIUS_RULER;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_SPEED;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_CURRENT_SPEED;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_TIME;
 
 public class ApplicationMode {
@@ -211,18 +211,18 @@ public class ApplicationMode {
 
 		// right
 		regWidgetVisibility(WIDGET_INTERMEDIATE_DISTANCE, all);
-		regWidgetVisibility(WIDGET_DISTANCE, all);
+		regWidgetVisibility(WIDGET_DISTANCE_TO_DESTINATION, all);
 		regWidgetVisibility(WIDGET_TIME, all);
 		regWidgetVisibility(WIDGET_INTERMEDIATE_TIME, all);
-		regWidgetVisibility(WIDGET_SPEED, CAR, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT, TRUCK,
+		regWidgetVisibility(WIDGET_CURRENT_SPEED, CAR, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT, TRUCK,
 				MOTORCYCLE, HORSE);
 		regWidgetVisibility(WIDGET_MAX_SPEED, CAR, TRUCK, MOTORCYCLE);
 		regWidgetVisibility(WIDGET_ALTITUDE, PEDESTRIAN, BICYCLE);
 		regWidgetAvailability(WIDGET_INTERMEDIATE_DISTANCE, all);
-		regWidgetAvailability(WIDGET_DISTANCE, all);
+		regWidgetAvailability(WIDGET_DISTANCE_TO_DESTINATION, all);
 		regWidgetAvailability(WIDGET_TIME, all);
 		regWidgetAvailability(WIDGET_INTERMEDIATE_TIME, all);
-		regWidgetAvailability(WIDGET_SPEED, all);
+		regWidgetAvailability(WIDGET_CURRENT_SPEED, all);
 		regWidgetAvailability(WIDGET_MAX_SPEED, all);
 		regWidgetAvailability(WIDGET_ALTITUDE, all);
 

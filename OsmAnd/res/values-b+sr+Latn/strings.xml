@@ -128,9 +128,6 @@
     <string name="map_widget_lock_screen">Zaključaj</string>
     <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_reset">Vrati na podrazumevano</string>
-    <string name="map_widget_speed">Brzina</string>
-    <string name="map_widget_distance">Odredište</string>
-    <string name="map_widget_altitude">Visina</string>
     <string name="map_widget_next_turn">Sledeće skretanje</string>
     <string name="map_widget_next_turn_small">Sledeće skretanje (malo)</string>
     <string name="map_widget_next_next_turn">Drugo sledeće skretanje</string>

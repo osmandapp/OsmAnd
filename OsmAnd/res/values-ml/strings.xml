@@ -127,7 +127,6 @@
     <string name="poi_filter_sightseeing">സൈറ്റ്സീയിങ്ങ്</string>
     <string name="map_widget_lock_screen">സ്ക്രീന്‍ പൂട്ടുക</string>
     <string name="map_widget_parking">പാര്‍ക്കിങ്ങ്</string>
-    <string name="map_widget_distance">ലക്ഷ്യസ്ഥാനം</string>
     <string name="bg_service_screen_lock">സ്ക്രീന്‍ പൂട്ടുക</string>
     <string name="osmand_parking_hours">മണിക്കുര്‍</string>
     <string name="osmand_parking_minutes">മിനിറ്റ്</string>
@@ -331,7 +330,6 @@
     <string name="auto_zoom_map">ഭൂപടം ഓട്ടോസൂമാക്കിക്കാണിക്കുക</string>
     <string name="bg_service_sleep_mode_on">"ബാക്ക്ഗ്രൗണ്ടില്‍ പ്രവര്‍ത്തിക്കുന്നത് നിര്‍ത്തുക "</string>
     <string name="map_widget_back_to_loc">എവിടെയാണ് ഞാന്‍</string>
-    <string name="map_widget_altitude">ഉയരം</string>
     <string name="map_widget_next_turn">അടുത്ത തിരുവ്</string>
     <string name="map_widget_next_turn_small">അടുത്ത (ചെറു) തിരുവ്</string>
     <string name="map_widget_next_next_turn">"രണ്ടാമത്തെ  തിരുവ്"</string>
@@ -644,7 +642,6 @@
     <string name="day_night_info">പകല്‍/രാത്രി വിവരം</string>
     <string name="map_widget_show_ruler">സ്കേല്‍</string>
     <string name="bg_service_sleep_mode_off">"ആപ്പിനെ ബാക്ക്ഗ്രൗണ്ടില്‍ പ്രവര്‍ത്തിപ്പിക്കുക "</string>
-    <string name="map_widget_speed">വേഗത</string>
     <string name="map_widget_time">ദൈര്‍ഘ്യം</string>
     <string name="bg_service_screen_unlock">"സ്ക്രീന്‍ തുറക്കുക "</string>
     <string name="bg_service_screen_lock_toast">"സ്ക്രീന്‍ പൂട്ടിയിരിക്കുന്നു "</string>

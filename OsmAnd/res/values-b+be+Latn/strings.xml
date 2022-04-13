@@ -635,9 +635,6 @@ Zachod: %2$s</string>
     <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_reset">Viarnucca da standartnych</string>
     <string name="map_widget_parking">Parkoŭka</string>
-    <string name="map_widget_speed">Chutkaść</string>
-    <string name="map_widget_distance">Miesca pryznačeńnia</string>
-    <string name="map_widget_altitude">Vyšynia</string>
     <string name="map_widget_time">Čas u darozie</string>
     <string name="map_widget_next_turn">Nastupny pavarot</string>
     <string name="map_widget_next_turn_small">Nastupny pavarot (mały)</string>

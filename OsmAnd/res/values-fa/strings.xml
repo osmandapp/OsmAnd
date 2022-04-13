@@ -99,9 +99,6 @@
     <string name="map_widget_compass">قطب‌نما</string>
     <string name="map_widget_reset">برگرداندن تنظیمات به حالت اولیه</string>
     <string name="map_widget_parking">پارکینگ</string>
-    <string name="map_widget_speed">سرعت</string>
-    <string name="map_widget_distance">مقصد</string>
-    <string name="map_widget_altitude">ارتفاع</string>
     <string name="map_widget_time">مدت سفر</string>
     <string name="map_widget_next_turn">پیچ بعدی</string>
     <string name="map_widget_next_turn_small">پیچ بعدی (کوچک)</string>

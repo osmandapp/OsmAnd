@@ -52,7 +52,7 @@ import androidx.core.content.ContextCompat;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_ALTITUDE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BATTERY;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BEARING;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_DISTANCE_TO_DESTINATION;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_GPS_INFO;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_DISTANCE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_TIME;
@@ -64,7 +64,7 @@ import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_TUR
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_TURN_SMALL;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_PLAIN_TIME;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_RADIUS_RULER;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_SPEED;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_CURRENT_SPEED;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_TIME;
 import static net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper.WIDGET_MAP_MARKERS;
 import static net.osmand.plus.views.mapwidgets.widgets.CoordinatesWidget.WIDGET_COORDINATES;
@@ -276,8 +276,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 		TextInfoWidget intermediateTime = routeWidgetsFactory.createTimeControl(mapActivity, true);
 		registerWidget(WIDGET_INTERMEDIATE_TIME, intermediateTime, new TimeWidgetState(app, true), rightPanel);
 
-		MapWidget dist = routeWidgetsFactory.createDistanceControl(mapActivity);
-		registerWidget(WIDGET_DISTANCE, dist, R.drawable.ic_action_target, R.string.map_widget_distance, rightPanel);
+		MapWidget distanceToDestination = routeWidgetsFactory.createDistanceControl(mapActivity);
+		registerWidget(WIDGET_DISTANCE_TO_DESTINATION, distanceToDestination, R.drawable.ic_action_target,
+				R.string.map_widget_distance_to_destination, rightPanel);
 
 		MapWidget time = routeWidgetsFactory.createTimeControl(mapActivity, false);
 		registerWidget(WIDGET_TIME, time, new TimeWidgetState(app, false), rightPanel);
@@ -291,14 +292,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 		MapWidget marker2nd = markersWidgetsHelper.getMapMarkerSideWidget(false);
 		registerWidget(WIDGET_MARKER_2, marker2nd, R.drawable.ic_action_flag, R.string.map_marker_2nd, rightPanel);
 
-		MapWidget speed = routeWidgetsFactory.createSpeedControl(mapActivity);
-		registerWidget(WIDGET_SPEED, speed, R.drawable.ic_action_speed, R.string.map_widget_speed, rightPanel);
+		MapWidget currentSpeed = routeWidgetsFactory.createSpeedControl(mapActivity);
+		registerWidget(WIDGET_CURRENT_SPEED, currentSpeed, R.drawable.ic_action_speed, R.string.map_widget_current_speed, rightPanel);
 
 		MapWidget maxSpeed = routeWidgetsFactory.createMaxSpeedControl(mapActivity);
 		registerWidget(WIDGET_MAX_SPEED, maxSpeed, R.drawable.ic_action_speed_limit, R.string.map_widget_max_speed, rightPanel);
 
-		MapWidget alt = mapWidgetsFactory.createAltitudeControl(mapActivity);
-		registerWidget(WIDGET_ALTITUDE, alt, R.drawable.ic_action_altitude, R.string.map_widget_altitude, rightPanel);
+		MapWidget altitude = mapWidgetsFactory.createAltitudeControl(mapActivity);
+		registerWidget(WIDGET_ALTITUDE, altitude, R.drawable.ic_action_altitude, R.string.map_widget_altitude, rightPanel);
 
 		MapWidget gpsInfo = mapWidgetsFactory.createGPSInfoControl(mapActivity);
 		registerWidget(WIDGET_GPS_INFO, gpsInfo, R.drawable.ic_action_gps_info, R.string.map_widget_gps_info, rightPanel);

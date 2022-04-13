@@ -721,9 +721,6 @@
     <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_reset">Herstel standaard</string>
     <string name="map_widget_parking">Parkeren</string>
-    <string name="map_widget_speed">Snelheid</string>
-    <string name="map_widget_distance">Bestemming</string>
-    <string name="map_widget_altitude">Hoogte</string>
     <string name="map_widget_time">Resterende tijd</string>
     <string name="map_widget_next_turn">Volgende bocht</string>
     <string name="map_widget_next_turn_small">Volgende bocht (klein)</string>

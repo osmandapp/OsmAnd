@@ -1860,7 +1860,7 @@ public class GpxUiHelper {
 
 	public enum GPXDataSetType {
 		ALTITUDE(R.string.altitude, R.drawable.ic_action_altitude_average),
-		SPEED(R.string.map_widget_speed, R.drawable.ic_action_speed),
+		SPEED(R.string.map_widget_current_speed, R.drawable.ic_action_speed),
 		SLOPE(R.string.shared_string_slope, R.drawable.ic_action_altitude_ascent);
 
 		private final int stringId;

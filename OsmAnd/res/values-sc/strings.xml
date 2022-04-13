@@ -537,9 +537,6 @@
     <string name="map_widget_compass">Bùssola</string>
     <string name="map_widget_reset">Reimposta sos valores predefinidos</string>
     <string name="map_widget_parking">Parchègiu</string>
-    <string name="map_widget_speed">Lestresa</string>
-    <string name="map_widget_distance">Destinatzione</string>
-    <string name="map_widget_altitude">Artària</string>
     <string name="map_widget_time">Tempus abarrau</string>
     <string name="map_widget_next_turn">Bortada imbeniente</string>
     <string name="map_widget_next_turn_small">Bortada imbeniente (minore)</string>

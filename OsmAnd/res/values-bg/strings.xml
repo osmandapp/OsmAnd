@@ -280,9 +280,6 @@
     <string name="map_widget_compass">Компас</string>
     <string name="map_widget_reset">Начални настройки</string>
     <string name="map_widget_parking">Паркинг</string>
-    <string name="map_widget_speed">Скорост</string>
-    <string name="map_widget_distance">Крайна цел</string>
-    <string name="map_widget_altitude">Надм. височина</string>
     <string name="map_widget_time">Време на пристигане</string>
     <string name="map_widget_next_turn">Следващ завой</string>
     <string name="map_widget_next_turn_small">Следващ завой (малка икона)</string>
