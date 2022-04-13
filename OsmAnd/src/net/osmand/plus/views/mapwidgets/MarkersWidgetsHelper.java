@@ -19,8 +19,6 @@ import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
 
 public class MarkersWidgetsHelper {
 
-	public static final String WIDGET_MAP_MARKERS = "map_markers_top";
-
 	private final MapActivity mapActivity;
 
 	private final MapMarkersBarWidget mapMarkersBarWidget;

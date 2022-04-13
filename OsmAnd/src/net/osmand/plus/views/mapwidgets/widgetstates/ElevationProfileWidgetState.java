@@ -22,8 +22,8 @@ public class ElevationProfileWidgetState extends WidgetState {
 	}
 
 	@Override
-	public int getSettingsIconId() {
-		return R.drawable.ic_action_elevation_profile;
+	public int getSettingsIconId(boolean nightMode) {
+		return nightMode ? R.drawable.widget_route_elevation_night : R.drawable.widget_route_elevation_day;
 	}
 
 	@Override

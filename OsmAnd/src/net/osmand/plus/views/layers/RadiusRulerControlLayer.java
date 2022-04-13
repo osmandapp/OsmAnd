@@ -37,7 +37,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_RADIUS_RULER;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.RADIUS_RULER;
 
 public class RadiusRulerControlLayer extends OsmandMapLayer {
 
@@ -184,7 +184,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 
 	public boolean rulerModeOn() {
 		MapWidgetRegistry mapWidgetRegistry = getApplication().getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		return mapWidgetRegistry.isWidgetVisible(WIDGET_RADIUS_RULER)
+		return mapWidgetRegistry.isWidgetVisible(RADIUS_RULER.id)
 				&& (rightWidgetsPanel == null || rightWidgetsPanel.getVisibility() == View.VISIBLE);
 	}
 

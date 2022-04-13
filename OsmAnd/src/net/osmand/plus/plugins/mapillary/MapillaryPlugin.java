@@ -7,10 +7,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
-
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.map.ITileSource;
@@ -35,6 +31,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
@@ -55,6 +52,10 @@ import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+
 import static android.content.Intent.ACTION_VIEW;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAPILLARY;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_MAPILLARY;
@@ -63,8 +64,6 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	public static final String TYPE_MAPILLARY_PHOTO = "mapillary-photo";
 	public static final String TYPE_MAPILLARY_CONTRIBUTE = "mapillary-contribute";
-
-	public static final String WIDGET_MAPILLARY = "mapillary";
 
 	private static final String MAPILLARY_PACKAGE_ID = "com.mapillary.app";
 
@@ -237,8 +236,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	private void registerWidget(@NonNull MapActivity activity) {
 		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
 		mapillaryControl = createMonitoringControl(activity);
-		mapillaryWidgetRegInfo = layer.registerWidget(WIDGET_MAPILLARY, mapillaryControl,
-				R.drawable.ic_action_mapillary, R.string.mapillary, WidgetsPanel.RIGHT);
+		mapillaryWidgetRegInfo = layer.registerWidget(WidgetParams.MAPILLARY, mapillaryControl, WidgetsPanel.RIGHT);
 		layer.recreateControls();
 	}
 

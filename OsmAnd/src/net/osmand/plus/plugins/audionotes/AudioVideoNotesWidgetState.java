@@ -35,7 +35,7 @@ public class AudioVideoNotesWidgetState extends WidgetState {
 	}
 
 	@Override
-	public int getSettingsIconId() {
+	public int getSettingsIconId(boolean nightMode) {
 		Integer action = defaultActionSetting.get();
 		switch (action) {
 			case AudioVideoNotesPlugin.AV_DEFAULT_ACTION_AUDIO:

@@ -14,13 +14,15 @@ public class CenterWidgetInfo extends MapWidgetInfo {
 	public CenterWidgetInfo(@NonNull String key,
 	                        @NonNull MapWidget widget,
 	                        @Nullable WidgetState widgetState,
-	                        @DrawableRes int settingsIconId,
+	                        @DrawableRes int daySettingsIconId,
+	                        @DrawableRes int nightSettingsIconId,
 	                        @StringRes int messageId,
 	                        @Nullable String message,
 	                        int page,
 	                        int order,
 	                        @NonNull WidgetsPanel widgetPanel) {
-		super(key, widget, widgetState, settingsIconId, messageId, message, page, order, widgetPanel);
+		super(key, widget, widgetState, daySettingsIconId, nightSettingsIconId, messageId, message,
+				page, order, widgetPanel);
 	}
 
 	@Override

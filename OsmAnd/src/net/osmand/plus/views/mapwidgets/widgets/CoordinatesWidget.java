@@ -37,8 +37,6 @@ import org.apache.commons.logging.Log;
 
 public class CoordinatesWidget extends MapWidget {
 
-	public static final String WIDGET_COORDINATES = "coordinates";
-
 	private static final Log log = PlatformUtil.getLog(CoordinatesWidget.class);
 
 	private final OsmAndLocationProvider locationProvider;

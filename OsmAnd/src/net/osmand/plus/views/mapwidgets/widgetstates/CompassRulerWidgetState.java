@@ -22,7 +22,7 @@ public class CompassRulerWidgetState extends WidgetState {
 	}
 
 	@Override
-	public int getSettingsIconId() {
+	public int getSettingsIconId(boolean nightMode) {
 		return R.drawable.ic_action_ruler_circle;
 	}
 

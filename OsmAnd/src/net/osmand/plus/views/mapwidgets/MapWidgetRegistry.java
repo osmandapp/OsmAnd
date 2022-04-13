@@ -4,12 +4,6 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-
 import net.osmand.CallbackWithObject;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
@@ -46,6 +40,12 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
 public class MapWidgetRegistry {
 
 	public static final String COLLAPSED_PREFIX = "+";
@@ -53,25 +53,6 @@ public class MapWidgetRegistry {
 	public static final String SETTINGS_SEPARATOR = ";";
 
 	public static final String WIDGET_COMPASS = "compass";
-
-	public static final String WIDGET_NEXT_TURN = "next_turn";
-	public static final String WIDGET_NEXT_TURN_SMALL = "next_turn_small";
-	public static final String WIDGET_NEXT_NEXT_TURN = "next_next_turn";
-
-	public static final String WIDGET_DISTANCE_TO_DESTINATION = "distance";
-	public static final String WIDGET_INTERMEDIATE_DISTANCE = "intermediate_distance";
-	public static final String WIDGET_TIME = "time";
-	public static final String WIDGET_INTERMEDIATE_TIME = "intermediate_time";
-	public static final String WIDGET_MAX_SPEED = "max_speed";
-	public static final String WIDGET_CURRENT_SPEED = "speed";
-	public static final String WIDGET_ALTITUDE = "altitude";
-	public static final String WIDGET_GPS_INFO = "gps_info";
-	public static final String WIDGET_MARKER_1 = "map_marker_1st";
-	public static final String WIDGET_MARKER_2 = "map_marker_2nd";
-	public static final String WIDGET_BEARING = "bearing";
-	public static final String WIDGET_PLAIN_TIME = "plain_time";
-	public static final String WIDGET_BATTERY = "battery";
-	public static final String WIDGET_RADIUS_RULER = "ruler";
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -167,7 +148,8 @@ public class MapWidgetRegistry {
 	public MapWidgetInfo registerWidget(@NonNull String key,
 	                                    @NonNull MapWidget widget,
 	                                    @Nullable WidgetState widgetState,
-	                                    @DrawableRes int settingsIconId,
+	                                    @DrawableRes int daySettingsIconId,
+	                                    @DrawableRes int nightSettingIconId,
 	                                    @StringRes int messageId,
 	                                    @Nullable String message,
 	                                    int page,
@@ -175,8 +157,8 @@ public class MapWidgetRegistry {
 	                                    @NonNull WidgetsPanel widgetPanel) {
 		MapWidgetInfo widgetInfo;
 		if (widget instanceof TextInfoWidget) {
-			widgetInfo = new SideWidgetInfo(key, widget, widgetState, settingsIconId, messageId, message, page,
-					order, widgetPanel);
+			widgetInfo = new SideWidgetInfo(key, widget, widgetState, daySettingsIconId, nightSettingIconId,
+					messageId, message, page, order, widgetPanel);
 			processVisibleModes(widgetInfo);
 			TextInfoWidget textWidget = ((TextInfoWidget) widget);
 			if (message != null) {
@@ -187,8 +169,8 @@ public class MapWidgetRegistry {
 				textWidget.setContentTitle(widgetState.getMenuTitleId());
 			}
 		} else {
-			widgetInfo = new CenterWidgetInfo(key, widget, widgetState, settingsIconId, messageId, message, page,
-					order, widgetPanel);
+			widgetInfo = new CenterWidgetInfo(key, widget, widgetState, daySettingsIconId, nightSettingIconId,
+					messageId, message, page, order, widgetPanel);
 		}
 
 		getWidgetsForPanel(widgetPanel).add(widgetInfo);
