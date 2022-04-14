@@ -4244,4 +4244,15 @@
     <string name="poi_museum_military">Sõjaline</string>
     <string name="poi_museum_archaeological">Arheoloogiline</string>
     <string name="poi_museum_war">Sõda</string>
+    <string name="poi_museum_health">Tervis</string>
+    <string name="poi_museum_language">Keel</string>
+    <string name="poi_museum_local">Kohalik</string>
+    <string name="poi_museum_ethnography">Etnograafia</string>
+    <string name="poi_museum_person">Isik</string>
+    <string name="poi_museum_open_air">Vabaõhu</string>
+    <string name="poi_museum_children">Lapsed</string>
+    <string name="poi_handwashing_hand_disinfection_no">Käte desinfitseerimine: ei</string>
+    <string name="poi_handwashing_soap_yes">Seep: jah</string>
+    <string name="poi_handwashing_soap_no">Seep: ei</string>
+    <string name="poi_handwashing_hand_disinfection_yes">Käte desinfitseerimine: jah</string>
 </resources>

@@ -4584,4 +4584,10 @@
     <string name="simulation_constant_mode_desc">A simulação será feita na velocidade constante selecionada.</string>
     <string name="simulation_constant_mode_title">Velocidade fixa</string>
     <string name="simulation_preview_mode_title">Modo de visualização rápida</string>
+    <string name="apply_to_existing_favorites_descr">Aplicar alterações aos pontos favoritos existentes do grupo ou apenas aos novos\?</string>
+    <string name="apply_to_existing">Aplicar aos existentes</string>
+    <string name="apply_only_to_new_points">Aplicar apenas aos novos</string>
+    <string name="apply_only_to_new_favorites">Aplicar apenas aos favoritos novos</string>
+    <string name="change_default_appearance">Alterar aparência predefinida</string>
+    <string name="apply_to_existing_points_descr">Aplicar alterações aos pontos existentes do grupo ou apenas aos novos\?</string>
 </resources>
