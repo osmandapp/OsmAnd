@@ -325,7 +325,7 @@ public class QuickSearchListItem {
 						? getIcon(app, R.drawable.mx_place_town)
 						: getIcon(app, R.drawable.ic_action_building2);
 			case VILLAGE:
-				return getIcon(app, R.drawable.ic_action_village);
+				return getIcon(app, R.drawable.mx_village);
 			case POSTCODE:
 			case STREET:
 				return getIcon(app, R.drawable.ic_action_street_name);
