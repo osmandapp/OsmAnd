@@ -508,9 +508,6 @@
     <string name="poi_filter_restaurants">Taneččit</string>
     <string name="poi_filter_fuel">Aserɣu</string>
     <string name="map_widget_parking">Aneɣsar</string>
-    <string name="map_widget_speed">Arured</string>
-    <string name="map_widget_distance">Taniɣert</string>
-    <string name="map_widget_altitude">Awrir</string>
     <string name="osmand_parking_minutes">Tisdatin</string>
     <string name="osmand_parking_warning">Γur-k</string>
     <string name="osmand_parking_pm">MD</string>

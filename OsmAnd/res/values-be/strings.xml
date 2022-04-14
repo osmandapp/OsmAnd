@@ -344,9 +344,6 @@
     <string name="map_widget_compass">Компас</string>
     <string name="map_widget_reset">Скінуць да прадвызначаных</string>
     <string name="map_widget_parking">Паркоўка</string>
-    <string name="map_widget_speed">Хуткасць</string>
-    <string name="map_widget_distance">Пункт прызначэння</string>
-    <string name="map_widget_altitude">Вышыня</string>
     <string name="map_widget_time">Час у дарозе</string>
     <string name="map_widget_next_turn">Наступны паварот</string>
     <string name="map_widget_next_turn_small">Наступны паварот (малы)</string>

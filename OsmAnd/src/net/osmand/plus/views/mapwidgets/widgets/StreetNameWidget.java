@@ -55,8 +55,6 @@ import java.util.List;
 
 public class StreetNameWidget extends MapWidget {
 
-	public static final String WIDGET_STREET_NAME = "street_name";
-
 	private static final int MAX_MARKER_DISTANCE = 50;
 
 	private final WaypointHelper waypointHelper;

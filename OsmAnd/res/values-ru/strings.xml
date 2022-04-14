@@ -1069,9 +1069,6 @@
     <string name="map_widget_compass">Компас</string>
     <string name="map_widget_reset">Сбросить настройки</string>
     <string name="map_widget_parking">Парковка</string>
-    <string name="map_widget_speed">Скорость</string>
-    <string name="map_widget_distance">Пункт назначения</string>
-    <string name="map_widget_altitude">Высота</string>
     <string name="map_widget_time">Время до прибытия</string>
     <string name="map_widget_next_turn">Следующий поворот</string>
     <string name="map_widget_next_turn_small">Следующий поворот (небольшой)</string>

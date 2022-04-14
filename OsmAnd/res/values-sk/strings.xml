@@ -55,9 +55,6 @@
     <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_reset">Znovunastaviť štandardné</string>
     <string name="map_widget_parking">Parkovanie</string>
-    <string name="map_widget_speed">Rýchlosť</string>
-    <string name="map_widget_distance">Cieľ</string>
-    <string name="map_widget_altitude">Nadm. výška</string>
     <string name="map_widget_time">Zostávajúci čas</string>
     <string name="map_widget_next_turn">Nasledujúca odbočka</string>
     <string name="map_widget_next_turn_small">Nasled. odbočka (malá)</string>

@@ -722,9 +722,6 @@ POIの更新は利用できません</string>
     <string name="map_widget_compass">コンパス</string>
     <string name="map_widget_reset">標準設定に戻す</string>
     <string name="map_widget_parking">駐車場</string>
-    <string name="map_widget_speed">速度</string>
-    <string name="map_widget_distance">目的地</string>
-    <string name="map_widget_altitude">標高</string>
     <string name="map_widget_time">出発時刻</string>
     <string name="map_widget_next_turn">次の曲がる方向</string>
     <string name="map_widget_next_turn_small">次の曲がる方向(小さいアイコン)</string>

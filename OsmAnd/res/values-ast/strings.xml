@@ -628,7 +628,6 @@
     <string name="shared_string_target_points">Destinos</string>
     <string name="poi_filter_entertainment">Entretenimientu</string>
     <string name="avoid_in_routing_title">Avoid…</string>
-    <string name="map_widget_distance">Destín</string>
     <string name="zoomOut">Zoom out</string>
     <string name="zoomIn">Zoom in</string>
     <string name="zoomIs">El nivel del zoom ye</string>
@@ -897,8 +896,6 @@
     <string name="map_widget_back_to_loc">Ónde toi</string>
     <string name="map_widget_compass">Brúxula</string>
     <string name="map_widget_reset">Reset to default</string>
-    <string name="map_widget_speed">Velocidá</string>
-    <string name="map_widget_altitude">Altitú</string>
     <string name="map_widget_next_turn">Xiru siguiente</string>
     <string name="bg_service_screen_lock_toast">La pantalla ta bloquiada</string>
     <string name="route_updated_loc_found">Awaiting position to calculate route</string>

@@ -65,9 +65,6 @@
     <string name="map_widget_compass">Kompass</string>
     <string name="map_widget_reset">Tilbakestill til standard</string>
     <string name="map_widget_parking">Parkering</string>
-    <string name="map_widget_speed">Hastighet</string>
-    <string name="map_widget_distance">Mål</string>
-    <string name="map_widget_altitude">Høyde</string>
     <string name="map_widget_time">Resterende tid</string>
     <string name="map_widget_next_turn">Neste sving</string>
     <string name="map_widget_next_turn_small">Neste sving (liten)</string>

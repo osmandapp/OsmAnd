@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.UnmovableItem;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 
@@ -45,15 +46,24 @@ public class WidgetViewHolder extends ViewHolder implements UnmovableItem {
 
 	public static void updateWidgetIcon(@NonNull ImageView imageView, @NonNull MapWidgetInfo widgetInfo,
 	                                    int profileColor, int defaultIconColor, boolean selected, boolean nightMode) {
+		boolean shouldPaintIcon = !widgetInfo.isIconPainted();
 		int mapIconId = widgetInfo.getMapIconId(nightMode);
-		int settingsIconId = widgetInfo.getSettingsIconId();
+		int settingsIconId = widgetInfo.getSettingsIconId(nightMode);
 
 		OsmandApplication app = (OsmandApplication) imageView.getContext().getApplicationContext();
 		if (mapIconId != 0) {
 			imageView.setImageResource(mapIconId);
-			WidgetViewHolder.setImageFilter(imageView, !selected);
+			if (shouldPaintIcon) {
+				WidgetViewHolder.setImageFilter(imageView, !selected);
+			}
 		} else {
-			Drawable drawable = app.getUIUtilities().getPaintedIcon(settingsIconId, selected ? profileColor : defaultIconColor);
+			UiUtilities iconsCache = app.getUIUtilities();
+			Drawable drawable;
+			if (shouldPaintIcon) {
+				drawable = iconsCache.getPaintedIcon(settingsIconId, selected ? profileColor : defaultIconColor);
+			} else {
+				drawable = iconsCache.getIcon(settingsIconId);
+			}
 			imageView.setImageDrawable(drawable);
 		}
 	}

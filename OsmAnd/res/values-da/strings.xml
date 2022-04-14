@@ -159,9 +159,6 @@
     <string name="download_hillshade_maps">Terrænskygger</string>
     <string name="map_widget_reset">Nulstil til standard</string>
     <string name="map_widget_parking">Parkering</string>
-    <string name="map_widget_speed">Hastighed</string>
-    <string name="map_widget_distance">Destination</string>
-    <string name="map_widget_altitude">Højde</string>
     <string name="map_widget_time">Resterende tid</string>
     <string name="map_widget_next_turn">Næste sving</string>
     <string name="map_widget_next_turn_small">Næste sving (lille)</string>

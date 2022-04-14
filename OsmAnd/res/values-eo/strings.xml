@@ -1104,9 +1104,6 @@
     <string name="map_widget_compass">Kompaso</string>
     <string name="map_widget_reset">Rekomencigi</string>
     <string name="map_widget_parking">Parkumejo</string>
-    <string name="map_widget_speed">Rapido</string>
-    <string name="map_widget_distance">Celo</string>
-    <string name="map_widget_altitude">Altitudo</string>
     <string name="map_widget_time">Plua tempo</string>
     <string name="map_widget_next_turn">Sekva kurbiĝo</string>
     <string name="map_widget_next_turn_small">Sekva kurbiĝeto</string>

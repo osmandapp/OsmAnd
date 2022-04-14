@@ -737,9 +737,6 @@
     <string name="map_widget_compass">Kompasas</string>
     <string name="map_widget_reset">Į pradinius nustatymus</string>
     <string name="map_widget_parking">Automobilio statymas</string>
-    <string name="map_widget_speed">Greitis</string>
-    <string name="map_widget_distance">Tikslas</string>
-    <string name="map_widget_altitude">Aukštis</string>
     <string name="map_widget_time">Liko laiko</string>
     <string name="map_widget_next_turn">Kitas posūkis</string>
     <string name="map_widget_next_turn_small">Kitas posūkis (mažas)</string>

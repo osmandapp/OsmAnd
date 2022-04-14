@@ -685,7 +685,6 @@
     <string name="routing_attr_avoid_borders_name">Evitar lo desbòrd de frontiera</string>
     <string name="routing_attr_avoid_borders_description">Evitar de passar lei frontieras</string>
     <string name="shared_string_address">Adreiça</string>
-    <string name="map_widget_distance">Destinacion</string>
     <string name="wake_on_voice">Activar l\'ecran</string>
     <string name="osm_live_enter_email">Siatz pregar d\'intrar una adreiça electronica valida</string>
     <string name="routing_attr_freeride_policy_name">Fòra de pista</string>

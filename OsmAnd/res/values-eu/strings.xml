@@ -306,9 +306,6 @@
     <string name="map_widget_compass">Iparrorratza</string>
     <string name="map_widget_reset">Lehenetsitakora berezarri</string>
     <string name="map_widget_parking">Aparkalekua</string>
-    <string name="map_widget_speed">Abiadura</string>
-    <string name="map_widget_distance">Helmuga</string>
-    <string name="map_widget_altitude">Altuera</string>
     <string name="map_widget_time">Falta den denbora</string>
     <string name="map_widget_next_turn">Hurrengo biraketa</string>
     <string name="map_widget_next_turn_small">Hurrengo biraketa (txikia)</string>

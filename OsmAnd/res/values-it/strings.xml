@@ -710,9 +710,6 @@
     <string name="map_widget_compass">Bussola</string>
     <string name="map_widget_reset">Reimposta i valori predefiniti</string>
     <string name="map_widget_parking">Parcheggio</string>
-    <string name="map_widget_speed">Velocità</string>
-    <string name="map_widget_distance">Destinazione</string>
-    <string name="map_widget_altitude">Altitudine</string>
     <string name="map_widget_time">Tempo rimasto</string>
     <string name="map_widget_next_turn">Prossima svolta</string>
     <string name="map_widget_next_turn_small">Prossima svolta (piccola)</string>

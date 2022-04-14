@@ -91,9 +91,6 @@
     <string name="map_widget_compass">Πυξίδα</string>
     <string name="map_widget_reset">Επαναφορά στα προκαθορισμένα</string>
     <string name="map_widget_parking">Στάθμευση</string>
-    <string name="map_widget_speed">Ταχύτητα</string>
-    <string name="map_widget_distance">Προορισμός</string>
-    <string name="map_widget_altitude">Υψόμετρο</string>
     <string name="map_widget_time">Υπολειπόμενος χρόνος</string>
     <string name="map_widget_next_turn">Επόμενη στροφή</string>
     <string name="map_widget_next_turn_small">Επόμενη στροφή (μικρό)</string>

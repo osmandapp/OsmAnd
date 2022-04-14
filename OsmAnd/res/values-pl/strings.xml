@@ -744,9 +744,6 @@
     <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_reset">Przywróć ustawienia domyślne</string>
     <string name="map_widget_parking">Miejsce parkowania</string>
-    <string name="map_widget_speed">Prędkość</string>
-    <string name="map_widget_distance">Cel</string>
-    <string name="map_widget_altitude">Wysokość</string>
     <string name="map_widget_time">Czas do osiągnięcia celu</string>
     <string name="map_widget_next_turn">Następny zakręt</string>
     <string name="map_widget_next_turn_small">Następny zakręt (mały)</string>

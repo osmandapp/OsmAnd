@@ -28,25 +28,25 @@ import java.util.Set;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_ALTITUDE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BATTERY;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BEARING;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_DISTANCE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_GPS_INFO;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_DISTANCE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_TIME;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MARKER_1;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MARKER_2;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MAX_SPEED;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_TURN_SMALL;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_PLAIN_TIME;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_RADIUS_RULER;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_SPEED;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.ALTITUDE;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.BATTERY;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.BEARING;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.DISTANCE_TO_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.GPS_INFO;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.MAX_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.NAVIGATION_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.SMALL_NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.PLAIN_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.RADIUS_RULER;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.SECOND_NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_1;
 
 public class ApplicationMode {
 
@@ -202,52 +202,48 @@ public class ApplicationMode {
 		ApplicationMode[] navigationSet1 = new ApplicationMode[] {CAR, BICYCLE, BOAT, SKI, TRUCK, MOTORCYCLE, HORSE};
 		ApplicationMode[] navigationSet2 = new ApplicationMode[] {PEDESTRIAN, PUBLIC_TRANSPORT, AIRCRAFT};
 
-		regWidgetVisibility(WIDGET_NEXT_TURN, navigationSet1);
-		regWidgetVisibility(WIDGET_NEXT_TURN_SMALL, navigationSet2);
-		regWidgetVisibility(WIDGET_NEXT_NEXT_TURN, navigationSet1);
-		regWidgetAvailability(WIDGET_NEXT_TURN, exceptDefault);
-		regWidgetAvailability(WIDGET_NEXT_TURN_SMALL, exceptDefault);
-		regWidgetAvailability(WIDGET_NEXT_NEXT_TURN, exceptDefault);
+		regWidgetVisibility(NEXT_TURN.id, navigationSet1);
+		regWidgetVisibility(SMALL_NEXT_TURN.id, navigationSet2);
+		regWidgetVisibility(SECOND_NEXT_TURN.id, navigationSet1);
+		regWidgetAvailability(NEXT_TURN.id, exceptDefault);
+		regWidgetAvailability(SMALL_NEXT_TURN.id, exceptDefault);
+		regWidgetAvailability(SECOND_NEXT_TURN.id, exceptDefault);
 
 		// right
-		regWidgetVisibility(WIDGET_INTERMEDIATE_DISTANCE, all);
-		regWidgetVisibility(WIDGET_DISTANCE, all);
-		regWidgetVisibility(WIDGET_TIME, all);
-		regWidgetVisibility(WIDGET_INTERMEDIATE_TIME, all);
-		regWidgetVisibility(WIDGET_SPEED, CAR, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT, TRUCK,
+		regWidgetVisibility(INTERMEDIATE_DISTANCE.id, all);
+		regWidgetVisibility(DISTANCE_TO_DESTINATION.id, all);
+		regWidgetVisibility(NAVIGATION_TIME.id, all);
+		regWidgetVisibility(INTERMEDIATE_TIME.id, all);
+		regWidgetVisibility(CURRENT_SPEED.id, CAR, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT, TRUCK,
 				MOTORCYCLE, HORSE);
-		regWidgetVisibility(WIDGET_MAX_SPEED, CAR, TRUCK, MOTORCYCLE);
-		regWidgetVisibility(WIDGET_ALTITUDE, PEDESTRIAN, BICYCLE);
-		regWidgetAvailability(WIDGET_INTERMEDIATE_DISTANCE, all);
-		regWidgetAvailability(WIDGET_DISTANCE, all);
-		regWidgetAvailability(WIDGET_TIME, all);
-		regWidgetAvailability(WIDGET_INTERMEDIATE_TIME, all);
-		regWidgetAvailability(WIDGET_SPEED, all);
-		regWidgetAvailability(WIDGET_MAX_SPEED, all);
-		regWidgetAvailability(WIDGET_ALTITUDE, all);
+		regWidgetVisibility(MAX_SPEED.id, CAR, TRUCK, MOTORCYCLE);
+		regWidgetVisibility(ALTITUDE.id, PEDESTRIAN, BICYCLE);
+		regWidgetAvailability(INTERMEDIATE_DISTANCE.id, all);
+		regWidgetAvailability(DISTANCE_TO_DESTINATION.id, all);
+		regWidgetAvailability(NAVIGATION_TIME.id, all);
+		regWidgetAvailability(INTERMEDIATE_TIME.id, all);
+		regWidgetAvailability(CURRENT_SPEED.id, all);
+		regWidgetAvailability(MAX_SPEED.id, all);
+		regWidgetAvailability(ALTITUDE.id, all);
 
 		// all = null everything
-		regWidgetAvailability(WIDGET_MARKER_1, none);
-		regWidgetAvailability(WIDGET_MARKER_2, none);
-		regWidgetAvailability(WIDGET_GPS_INFO, all);
-		regWidgetAvailability(WIDGET_BATTERY, all);
-		regWidgetAvailability(WIDGET_BEARING, all);
-		regWidgetAvailability(WIDGET_RADIUS_RULER, all);
-		regWidgetAvailability(WIDGET_PLAIN_TIME, all);
-
-		// top
-		// settings.SHOW_STREET_NAME
-//		regWidgetVisibility(WIDGET_STREET_NAME, new ApplicationMode[]{CAR, BICYCLE, PEDESTRIAN, PUBLIC_TRANSPORT});
-//		regWidgetAvailability(WIDGET_STREET_NAME, all);
+		regWidgetAvailability(SIDE_MARKER_1.id, none);
+		regWidgetAvailability(SIDE_MARKER_1.id, none);
+		regWidgetAvailability(GPS_INFO.id, all);
+		regWidgetAvailability(BATTERY.id, all);
+		regWidgetAvailability(BEARING.id, all);
+		regWidgetAvailability(RADIUS_RULER.id, all);
+		regWidgetAvailability(PLAIN_TIME.id, all);
 	}
 
 	// returns modifiable ! Set<ApplicationMode> to exclude non-wanted derived
-	public static Set<ApplicationMode> regWidgetVisibility(String widgetId, ApplicationMode... am) {
+	public static Set<ApplicationMode> regWidgetVisibility(@NonNull String widgetId,
+	                                                       @Nullable ApplicationMode... appModes) {
 		HashSet<ApplicationMode> set = new HashSet<>();
-		if (am == null) {
+		if (appModes == null) {
 			set.addAll(values);
 		} else {
-			Collections.addAll(set, am);
+			Collections.addAll(set, appModes);
 		}
 		for (ApplicationMode m : values) {
 			// add derived modes
@@ -267,12 +263,13 @@ public class ApplicationMode {
 		return widgetsVisibility != null && widgetsVisibility.contains(this);
 	}
 
-	public static Set<ApplicationMode> regWidgetAvailability(String widgetId, ApplicationMode... am) {
+	public static Set<ApplicationMode> regWidgetAvailability(@NonNull String widgetId,
+	                                                         @Nullable ApplicationMode... appModes) {
 		HashSet<ApplicationMode> set = new HashSet<>();
-		if (am == null) {
+		if (appModes == null) {
 			set.addAll(values);
 		} else {
-			Collections.addAll(set, am);
+			Collections.addAll(set, appModes);
 		}
 		for (ApplicationMode m : values) {
 			// add derived modes

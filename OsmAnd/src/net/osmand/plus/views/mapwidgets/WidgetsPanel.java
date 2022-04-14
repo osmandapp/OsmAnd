@@ -1,37 +1,7 @@
 package net.osmand.plus.views.mapwidgets;
 
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.WIDGET_AUDIO_VIDEO_NOTES;
-import static net.osmand.plus.plugins.development.OsmandDevelopmentPlugin.WIDGET_FPS;
-import static net.osmand.plus.plugins.mapillary.MapillaryPlugin.WIDGET_MAPILLARY;
-import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.WIDGET_TRIP_RECORDING;
-import static net.osmand.plus.plugins.parking.ParkingPositionPlugin.WIDGET_PARKING;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_ALTITUDE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BATTERY;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BEARING;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_DISTANCE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_GPS_INFO;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_DISTANCE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_TIME;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MARKER_1;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MARKER_2;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MAX_SPEED;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_TURN_SMALL;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_PLAIN_TIME;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_RADIUS_RULER;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_SPEED;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_TIME;
-import static net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper.WIDGET_MAP_MARKERS;
-import static net.osmand.plus.views.mapwidgets.widgets.CoordinatesWidget.WIDGET_COORDINATES;
-import static net.osmand.plus.views.mapwidgets.widgets.ElevationProfileWidget.WIDGET_ELEVATION_PROFILE;
-import static net.osmand.plus.views.mapwidgets.widgets.LanesWidget.WIDGET_LANES;
-import static net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget.WIDGET_STREET_NAME;
-
 import android.text.TextUtils;
 import android.util.Pair;
-
-import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -42,6 +12,8 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 public enum WidgetsPanel {
 
@@ -60,36 +32,21 @@ public enum WidgetsPanel {
 	private static final List<String> originalBottomOrder = new ArrayList<>();
 
 	static {
-		originalLeftOrder.add(WIDGET_NEXT_TURN);
-		originalLeftOrder.add(WIDGET_NEXT_TURN_SMALL);
-		originalLeftOrder.add(WIDGET_NEXT_NEXT_TURN);
-
-		originalRightOrder.add(WIDGET_INTERMEDIATE_DISTANCE);
-		originalRightOrder.add(WIDGET_INTERMEDIATE_TIME);
-		originalRightOrder.add(WIDGET_DISTANCE);
-		originalRightOrder.add(WIDGET_TIME);
-		originalRightOrder.add(WIDGET_MARKER_1);
-		originalRightOrder.add(WIDGET_BEARING);
-		originalRightOrder.add(WIDGET_MARKER_2);
-		originalRightOrder.add(WIDGET_SPEED);
-		originalRightOrder.add(WIDGET_MAX_SPEED);
-		originalRightOrder.add(WIDGET_ALTITUDE);
-		originalRightOrder.add(WIDGET_GPS_INFO);
-		originalRightOrder.add(WIDGET_TRIP_RECORDING);
-		originalRightOrder.add(WIDGET_AUDIO_VIDEO_NOTES);
-		originalRightOrder.add(WIDGET_MAPILLARY);
-		originalRightOrder.add(WIDGET_PARKING);
-		originalRightOrder.add(WIDGET_PLAIN_TIME);
-		originalRightOrder.add(WIDGET_BATTERY);
-		originalRightOrder.add(WIDGET_RADIUS_RULER);
-		originalRightOrder.add(WIDGET_FPS);
-
-		originalTopOrder.add(WIDGET_COORDINATES);
-		originalTopOrder.add(WIDGET_STREET_NAME);
-		originalTopOrder.add(WIDGET_MAP_MARKERS);
-		originalTopOrder.add(WIDGET_LANES);
-
-		originalBottomOrder.add(WIDGET_ELEVATION_PROFILE);
+		for (WidgetParams widget : WidgetParams.values()) {
+			String id = widget.id;
+			WidgetsPanel defaultPanel = widget.defaultPanel;
+			if (defaultPanel == LEFT) {
+				originalLeftOrder.add(id);
+			} else if (defaultPanel == TOP) {
+				originalTopOrder.add(id);
+			} else if (defaultPanel == RIGHT) {
+				originalRightOrder.add(id);
+			} else if (defaultPanel == BOTTOM) {
+				originalBottomOrder.add(id);
+			} else {
+				throw new IllegalStateException("Unsupported panel");
+			}
+		}
 	}
 
 	private final int iconId;

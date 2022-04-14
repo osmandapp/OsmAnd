@@ -52,6 +52,7 @@ import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_PARKING_POSITION;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.PARKING;
 
 /**
  * 
@@ -69,8 +70,6 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	public static final String PARKING_START_TIME = "parking_time";
 	public static final String PARKING_EVENT_ADDED = "parking_event_added";
 
-	public static final String WIDGET_PARKING = "parking";
-
 	// Constants for determining the order of items in the additional actions context menu
 	private static final int MARK_AS_PARKING_POS_ITEM_ORDER = 10500;
 
@@ -87,7 +86,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	public ParkingPositionPlugin(OsmandApplication app) {
 		super(app);
 		OsmandSettings set = app.getSettings();
-		ApplicationMode.regWidgetVisibility("parking", (ApplicationMode[]) null);
+		ApplicationMode.regWidgetVisibility(PARKING.id, (ApplicationMode[]) null);
 		parkingLat = set.registerFloatPreference(PARKING_POINT_LAT, 0f).makeGlobal().makeShared();
 		parkingLon = set.registerFloatPreference(PARKING_POINT_LON, 0f).makeGlobal().makeShared();
 		parkingType = set.registerBooleanPreference(PARKING_TYPE, false).makeGlobal().makeShared();
@@ -234,8 +233,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {
 			parkingPlaceControl = createParkingPlaceInfoControl(activity);
-			mapInfoLayer.registerWidget(WIDGET_PARKING, parkingPlaceControl,
-					R.drawable.ic_action_parking_dark,  R.string.map_widget_parking, WidgetsPanel.RIGHT);
+			mapInfoLayer.registerWidget(PARKING, parkingPlaceControl, WidgetsPanel.RIGHT);
 			mapInfoLayer.recreateControls();
 		}
 	}

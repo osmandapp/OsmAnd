@@ -381,7 +381,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 		}
 		float speed = (float) pt.speed;
 		if (speed != 0) {
-			description.append("  ").append((getString(R.string.map_widget_speed)).substring(0, 1)).append(": ");
+			description.append("  ").append((getString(R.string.map_widget_current_speed)).substring(0, 1)).append(": ");
 			description.append(OsmAndFormatter.getFormattedSpeed(speed, app));
 		}
 		return description.toString();

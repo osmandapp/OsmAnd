@@ -129,9 +129,6 @@
     <string name="map_widget_lock_screen">Закључај</string>
     <string name="map_widget_compass">Компас</string>
     <string name="map_widget_reset">Врати на подразумевано</string>
-    <string name="map_widget_speed">Брзина</string>
-    <string name="map_widget_distance">Одредиште</string>
-    <string name="map_widget_altitude">Висина</string>
     <string name="map_widget_next_turn">Следеће скретање</string>
     <string name="map_widget_next_turn_small">Следеће скретање (мало)</string>
     <string name="map_widget_next_next_turn">Друго следеће скретање</string>

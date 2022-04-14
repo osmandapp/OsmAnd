@@ -56,9 +56,6 @@
     <string name="map_widget_compass">Kompassi</string>
     <string name="map_widget_reset">Palauta oletusasetukset</string>
     <string name="map_widget_parking">Pysäköinti</string>
-    <string name="map_widget_speed">Nopeus</string>
-    <string name="map_widget_distance">Päämäärä</string>
-    <string name="map_widget_altitude">Korkeus</string>
     <string name="map_widget_next_turn">Seuraava käännös</string>
     <string name="map_widget_next_turn_small">Seuraava käännös (pieni)</string>
     <string name="bg_service_screen_lock">Lukitse näyttö</string>

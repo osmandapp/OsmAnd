@@ -730,9 +730,6 @@
 <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_reset">Herstel verstek</string>
     <string name="map_widget_parking">Parkering</string>
-<string name="map_widget_speed">Spoed</string>
-<string name="map_widget_distance">Teiken</string>
-<string name="map_widget_altitude">Hoogte</string>
 <string name="map_widget_time">Tyd oor</string>
 <string name="map_widget_next_turn">Volgende draai</string>
 <string name="map_widget_next_turn_small">Volgende draai (klein)</string>

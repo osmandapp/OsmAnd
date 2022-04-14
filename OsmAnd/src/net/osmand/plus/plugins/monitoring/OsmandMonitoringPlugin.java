@@ -1,17 +1,9 @@
 package net.osmand.plus.plugins.monitoring;
 
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_MONITORING;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
@@ -50,13 +42,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_MONITORING;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING;
+
 public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	private static final Log LOG = PlatformUtil.getLog(OsmandMonitoringPlugin.class);
 	public static final String OSMAND_SAVE_SERVICE_ACTION = "OSMAND_SAVE_SERVICE_ACTION";
 	public static final int REQUEST_LOCATION_PERMISSION_FOR_GPX_RECORDING = 208;
-
-	public static final String WIDGET_TRIP_RECORDING = "monitoring";
 
 	private final OsmandSettings settings;
 	private final LiveMonitoringHelper liveMonitoringHelper;
@@ -70,7 +69,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		super(app);
 		liveMonitoringHelper = new LiveMonitoringHelper(app);
 		final List<ApplicationMode> am = ApplicationMode.allPossibleValues();
-		ApplicationMode.regWidgetVisibility("monitoring", am.toArray(new ApplicationMode[0]));
+		ApplicationMode.regWidgetVisibility(TRIP_RECORDING.id, am.toArray(new ApplicationMode[0]));
 		settings = app.getSettings();
 		pluginPreferences.add(settings.SAVE_TRACK_TO_GPX);
 		pluginPreferences.add(settings.SAVE_TRACK_INTERVAL);
@@ -147,8 +146,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
 		monitoringControl = createMonitoringControl(activity);
 
-		layer.registerWidget(WIDGET_TRIP_RECORDING, monitoringControl, R.drawable.ic_action_play_dark,
-				R.string.map_widget_monitoring, WidgetsPanel.RIGHT);
+		layer.registerWidget(TRIP_RECORDING, monitoringControl, WidgetsPanel.RIGHT);
 		layer.recreateControls();
 	}
 

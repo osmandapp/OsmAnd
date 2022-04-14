@@ -894,9 +894,6 @@
     <string name="map_widget_compass">Kompass</string>
     <string name="map_widget_reset">Auf Voreinstellung zurücksetzen</string>
     <string name="map_widget_parking">Parken</string>
-    <string name="map_widget_speed">Geschwindigkeit</string>
-    <string name="map_widget_distance">Ziel</string>
-    <string name="map_widget_altitude">Höhe</string>
     <string name="map_widget_time">Verbleibende Zeit</string>
     <string name="map_widget_next_turn">Nächste Abzweigung</string>
     <string name="map_widget_next_turn_small">Nächste Abzweigung (klein)</string>

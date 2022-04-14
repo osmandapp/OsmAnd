@@ -18,9 +18,6 @@
     <string name="map_widget_compass">Cwmpawd</string>
     <string name="map_widget_reset">Ailosod i\'r rhagosodiad</string>
     <string name="map_widget_parking">Parcio</string>
-    <string name="map_widget_speed">Cyflymder</string>
-    <string name="map_widget_distance">Pen taith</string>
-    <string name="map_widget_altitude">Uchder</string>
     <string name="map_widget_time">Amser i fynd</string>
     <string name="map_widget_next_turn">Y tro nesaf</string>
     <string name="map_widget_next_turn_small">Y tro nesaf (bach)</string>

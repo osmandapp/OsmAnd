@@ -30,11 +30,6 @@ import android.view.SurfaceView;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
-
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
@@ -94,11 +89,17 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_AUDIO_NOTE;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_PHOTO_NOTE;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_VIDEO_NOTE;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_AUDIO_VIDEO_NOTES;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.RECORDING_LAYER;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.AUDIO_VIDEO_NOTES;
 
 
 public class AudioVideoNotesPlugin extends OsmandPlugin {
@@ -117,8 +118,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private static final int TAKE_AUDIO_NOTE_ITEM_ORDER = 4100;
 	private static final int TAKE_VIDEO_NOTE_ITEM_ORDER = 4300;
 	private static final int TAKE_PHOTO_NOTE_ITEM_ORDER = 4500;
-
-	public static final String WIDGET_AUDIO_VIDEO_NOTES = "audionotes";
 
 	private TextInfoWidget recordControl;
 
@@ -568,7 +567,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	public AudioVideoNotesPlugin(OsmandApplication app) {
 		super(app);
-		ApplicationMode.regWidgetVisibility("audionotes", (ApplicationMode[]) null);
+		ApplicationMode.regWidgetVisibility(AUDIO_VIDEO_NOTES.id, (ApplicationMode[]) null);
 		AV_EXTERNAL_RECORDER = registerBooleanPreference("av_external_recorder", false);
 		AV_EXTERNAL_PHOTO_CAM = registerBooleanPreference("av_external_cam", true);
 		AV_VIDEO_FORMAT = registerIntPreference("av_video_format", VIDEO_OUTPUT_MP4);
@@ -793,7 +792,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				}
 			});
 			WidgetState widgetState = new AudioVideoNotesWidgetState(app, AV_DEFAULT_ACTION);
-			mapInfoLayer.registerWidget(WIDGET_AUDIO_VIDEO_NOTES, recordControl, widgetState, WidgetsPanel.RIGHT);
+			mapInfoLayer.registerWidget(AUDIO_VIDEO_NOTES, recordControl, widgetState, WidgetsPanel.RIGHT);
 			mapInfoLayer.recreateControls();
 		}
 	}

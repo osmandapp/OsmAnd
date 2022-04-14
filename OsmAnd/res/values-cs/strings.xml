@@ -743,9 +743,6 @@
     <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_reset">Obnovit výchozí hodnoty</string>
     <string name="map_widget_parking">Parkování</string>
-    <string name="map_widget_speed">Aktuální rychlost</string>
-    <string name="map_widget_distance">Cíl</string>
-    <string name="map_widget_altitude">Nadmořská výška</string>
     <string name="map_widget_time">Zbývající čas do cíle</string>
     <string name="map_widget_next_turn">Příští odbočka</string>
     <string name="map_widget_next_turn_small">Příští odbočka (mini)</string>

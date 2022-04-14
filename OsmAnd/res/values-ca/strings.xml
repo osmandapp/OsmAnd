@@ -8,9 +8,6 @@
     <string name="map_widget_back_to_loc">On sou</string>
     <string name="map_widget_reset">Reinicia els valors per defecte</string>
     <string name="map_widget_parking">Aparcament</string>
-    <string name="map_widget_speed">Velocitat</string>
-    <string name="map_widget_distance">Destí</string>
-    <string name="map_widget_altitude">Altitud</string>
     <string name="map_widget_time">Temps per arribar-hi</string>
     <string name="show_cameras">Radars</string>
     <string name="show_traffic_warnings">Notificacions de trànsit</string>

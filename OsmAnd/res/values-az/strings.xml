@@ -448,7 +448,6 @@
     <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_lock_screen">Kilidlə</string>
     <string name="map_widget_reset">Standarta bərpa et</string>
-    <string name="map_widget_speed">Sürət</string>
     <string name="bg_service_screen_lock">Kilidlə</string>
     <string name="bg_service_screen_unlock">Kilidi aç</string>
     <string name="bg_service_screen_lock_toast">Ekran kilidlidir</string>
@@ -1005,7 +1004,6 @@
     <string name="altitude_range">Yüksəklik diapazonu</string>
     <string name="average_altitude">Ortalama yüksəklik</string>
     <string name="index_item_world_altitude_correction">Dünya yüksəklik düzəlişi</string>
-    <string name="map_widget_altitude">Yüksəklik</string>
     <string name="direction_style_sidewise">Yan-yana (8 sektor)</string>
     <string name="direction_style_clockwise">Saat istiqamətində (12 sektor)</string>
     <string name="settings_direction_style">İstiqamət stili</string>
@@ -1222,7 +1220,6 @@
 \nƏfqanıstandan Zimbabveyə, Avstraliyadan ABŞ-a. Argentina, Braziliya, Kanada, Fransa, Almaniya, Meksika, Böyük Britaniya, İspaniya, …
 \n</string>
     <string name="avoid_in_routing_title">Yayın…</string>
-    <string name="map_widget_distance">Təyinat nöqtəsi</string>
     <string name="quick_action_add_first_intermediate">Birinci aralığı əlavə et</string>
     <string name="quick_action_add_destination_desc">Ekranın mərkəzini təyinat nöqtəsi etmək üçün düymə, əvvəl seçilmiş hər hansı təyinat nöqtəsi son ara təyinat nöqtəsi olacaq.</string>
     <string name="quick_action_replace_destination_desc">Ekranın mərkəzini yeni marşrut təyinatı edən düymə. Əvvəl seçilmiş təyinatı (əgər varsa) əvəz edəcək.</string>

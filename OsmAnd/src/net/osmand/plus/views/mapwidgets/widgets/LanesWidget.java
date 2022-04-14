@@ -31,8 +31,6 @@ import java.util.List;
 
 public class LanesWidget extends MapWidget {
 
-	public static final String WIDGET_LANES = "lanes";
-
 	private static final int MAX_METERS_NOT_SPOKEN_TURN = 800;
 	private static final int MAX_METERS_SPOKEN_TURN = 1200;
 

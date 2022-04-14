@@ -123,13 +123,10 @@
     <string name="basemap_was_selected_to_download">Za pravilno delovanje programa mora biti nameščen osnovni zemljevid sveta.</string>
     <string name="map_widget_reset">Povrni na privzeto</string>
     <string name="map_widget_parking">Parkiranje</string>
-    <string name="map_widget_speed">Hitrost</string>
     <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_lock_screen">Zakleni zaslon</string>
     <string name="map_widget_back_to_loc">Kje sem?</string>
     <string name="map_widget_config">Nastavite zaslona</string>
-    <string name="map_widget_distance">Cilj</string>
-    <string name="map_widget_altitude">Nadmorska višina</string>
     <string name="map_widget_time">Čas do cilja</string>
     <string name="map_widget_next_turn">Naslednji zavoj</string>
     <string name="map_widget_next_turn_small">Naslednji zavoj (manjši)</string>

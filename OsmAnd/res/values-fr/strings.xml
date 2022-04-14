@@ -742,9 +742,6 @@
     <string name="map_widget_compass">Boussole</string>
     <string name="map_widget_reset">Rétablir les paramètres par défaut</string>
     <string name="map_widget_parking">Parking</string>
-    <string name="map_widget_speed">Vitesse</string>
-    <string name="map_widget_distance">Arrivée</string>
-    <string name="map_widget_altitude">Altitude</string>
     <string name="map_widget_time">Durée restante</string>
     <string name="map_widget_next_turn">Prochaine bifurcation</string>
     <string name="map_widget_next_turn_small">Prochaine bifurcation (petit)</string>

@@ -1750,9 +1750,6 @@
     <string name="map_widget_compass">Kompass</string>
     <string name="map_widget_reset">Taasta algväärtused</string>
     <string name="map_widget_parking">Parkimine</string>
-    <string name="map_widget_speed">Kiirus</string>
-    <string name="map_widget_distance">Sihtkoht</string>
-    <string name="map_widget_altitude">Kõrgus</string>
     <string name="map_widget_time">Aeg minna</string>
     <string name="map_widget_next_turn">Järgmine pöörang</string>
     <string name="map_widget_next_turn_small">Järgmine pöörang (väike)</string>

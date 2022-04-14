@@ -1636,9 +1636,6 @@
     <string name="map_widget_compass">Կողմնացույց</string>
     <string name="map_widget_reset">Վերականգնել սկզբնական պարամետրերը</string>
     <string name="map_widget_parking">Կայանատեղ</string>
-    <string name="map_widget_speed">Արագություն</string>
-    <string name="map_widget_distance">Նպատակակետ</string>
-    <string name="map_widget_altitude">Բարձրություն</string>
     <string name="map_widget_time">Ուղևորության ժամանակը</string>
     <string name="map_widget_next_turn">Հաջորդ շրջադարձը</string>
     <string name="map_widget_next_turn_small">Հաջորդ շրջադարձը (փոքր)</string>

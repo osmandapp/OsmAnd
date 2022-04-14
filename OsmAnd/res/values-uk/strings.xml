@@ -741,9 +741,6 @@
     <string name="map_widget_compass">Компас</string>
     <string name="map_widget_reset">Скидання налаштувань</string>
     <string name="map_widget_parking">Стоянка</string>
-    <string name="map_widget_speed">Швидкість</string>
-    <string name="map_widget_distance">Пункт призначення</string>
-    <string name="map_widget_altitude">Висота</string>
     <string name="map_widget_time">Час в дорозі</string>
     <string name="map_widget_next_turn">Наступний маневр</string>
     <string name="map_widget_next_turn_small">Наступний маневр (зменшено)</string>
