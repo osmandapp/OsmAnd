@@ -4585,4 +4585,9 @@
     <string name="apply_only_to_new_points">Yalnızca yeni noktalara uygula</string>
     <string name="apply_only_to_new_favorites">Yalnızca yeni favorilere uygula</string>
     <string name="apply_to_existing">Mevcut olanlara uygula</string>
+    <string name="add_page">Sayfa ekle</string>
+    <string name="map_widget_distance_to_destination">Varış noktasına uzaklık</string>
+    <string name="map_widget_current_speed">Geçerli hız</string>
+    <string name="page_number">Sayfa %1$s</string>
+    <string name="map_widget_altitude">Geçerli konumun rakımı</string>
 </resources>
