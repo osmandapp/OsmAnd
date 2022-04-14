@@ -259,28 +259,25 @@ public class RoutingHelper {
 	}
 
 	void newRouteCalculated(final boolean newRoute, final RouteCalculationResult res) {
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				ValueHolder<Boolean> showToast = new ValueHolder<>();
-				showToast.value = true;
-				Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
-				while (it.hasNext()) {
-					WeakReference<IRouteInformationListener> ref = it.next();
-					IRouteInformationListener l = ref.get();
-					if (l == null) {
-						it.remove();
-					} else {
-						l.newRouteIsCalculated(newRoute, showToast);
-					}
+		app.runInUIThread(() -> {
+			ValueHolder<Boolean> showToast = new ValueHolder<>();
+			showToast.value = true;
+			Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
+			while (it.hasNext()) {
+				WeakReference<IRouteInformationListener> ref = it.next();
+				IRouteInformationListener l = ref.get();
+				if (l == null) {
+					it.remove();
+				} else {
+					l.newRouteIsCalculated(newRoute, showToast);
 				}
-				if (showToast.value && newRoute && OsmandPlugin.isDevelopment()) {
-					String msg = app.getString(R.string.new_route_calculated_dist_dbg,
-							OsmAndFormatter.getFormattedDistance(res.getWholeDistance(), app),
-							((int) res.getRoutingTime()) + " sec",
-							res.getCalculateTime(), res.getVisitedSegments(), res.getLoadedTiles());
-					app.showToastMessage(msg);
-				}
+			}
+			if (showToast.value && newRoute && OsmandPlugin.isDevelopment()) {
+				String msg = app.getString(R.string.new_route_calculated_dist_dbg,
+						OsmAndFormatter.getFormattedDistance(res.getWholeDistance(), app),
+						((int) res.getRoutingTime()) + " sec",
+						res.getCalculateTime(), res.getVisitedSegments(), res.getLoadedTiles());
+				app.showToastMessage(msg);
 			}
 		});
 	}

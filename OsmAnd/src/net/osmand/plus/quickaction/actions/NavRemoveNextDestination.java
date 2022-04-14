@@ -11,7 +11,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
+import net.osmand.plus.mapcontextmenu.other.DestinationReachedFragment;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 
@@ -38,7 +38,7 @@ public class NavRemoveNextDestination extends QuickAction {
 		if (targetsHelper.getIntermediatePoints().size() > 0) {
 			targetsHelper.removeWayPoint(true, 0);
 		} else {
-			DestinationReachedMenu.show(mapActivity);
+			DestinationReachedFragment.show(mapActivity);
 		}
 	}
 
