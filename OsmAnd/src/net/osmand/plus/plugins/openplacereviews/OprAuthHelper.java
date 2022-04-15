@@ -14,7 +14,6 @@ import java.util.Set;
 public class OprAuthHelper {
 
 	private final OsmandApplication app;
-	private final OpenPlaceReviewsPlugin plugin;
 	private final Set<OprAuthorizationListener> listeners = new HashSet<>();
 
 	public interface OprAuthorizationListener {
@@ -23,7 +22,6 @@ public class OprAuthHelper {
 
 	public OprAuthHelper(@NonNull OsmandApplication app) {
 		this.app = app;
-		plugin = OsmandPlugin.getPlugin(OpenPlaceReviewsPlugin.class);
 	}
 
 	public void addListener(OprAuthorizationListener listener) {
@@ -35,6 +33,7 @@ public class OprAuthHelper {
 	}
 
 	public void resetAuthorization() {
+		OpenPlaceReviewsPlugin plugin = getPlugin();
 		if (isLoginExists()) {
 			plugin.OPR_USERNAME.resetToDefault();
 			plugin.OPR_ACCESS_TOKEN.resetToDefault();
@@ -43,6 +42,7 @@ public class OprAuthHelper {
 	}
 
 	public boolean isLoginExists() {
+		OpenPlaceReviewsPlugin plugin = getPlugin();
 		return !Algorithms.isEmpty(plugin.OPR_USERNAME.get())
 				&& !Algorithms.isEmpty(plugin.OPR_BLOCKCHAIN_NAME.get())
 				&& !Algorithms.isEmpty(plugin.OPR_ACCESS_TOKEN.get());
@@ -58,6 +58,7 @@ public class OprAuthHelper {
 	public void authorize(final String token, final String username) {
 		CheckOprAuthTask checkOprAuthTask = new CheckOprAuthTask(app, token, username, authorized -> {
 			if (authorized) {
+				OpenPlaceReviewsPlugin plugin = getPlugin();
 				plugin.OPR_ACCESS_TOKEN.set(token);
 				plugin.OPR_USERNAME.set(username);
 			} else {
@@ -66,5 +67,9 @@ public class OprAuthHelper {
 			notifyAndRemoveListeners();
 		});
 		checkOprAuthTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+	}
+
+	private OpenPlaceReviewsPlugin getPlugin() {
+		return OsmandPlugin.getPlugin(OpenPlaceReviewsPlugin.class);
 	}
 }
