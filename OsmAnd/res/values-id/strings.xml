@@ -3,7 +3,7 @@
     <string name="address_search_desc">Mencari alamat</string>
     <string name="navpoint_search_desc">Koordinat</string>
     <string name="transport_search_desc">Cari untuk transportasi publik</string>
-    <string name="favourites_search_desc">Mencari favorit</string>
+    <string name="favourites_search_desc">Sebuah cara untuk mencari Favorit</string>
     <string name="rendering_attr_noPolygons_name">Poligon</string>
     <string name="rendering_attr_appMode_name">Modus render</string>
     <string name="rendering_attr_appMode_description">Optimalkan peta untuk</string>
@@ -19,7 +19,7 @@
     <string name="phone">Telepon</string>
     <string name="monitoring_settings">Perekaman perjalanan</string>
     <string name="monitoring_settings_descr">Siapkan cara untuk merekam perjalanan Anda.</string>
-    <string name="osmand_background_plugin_description">Menampilkan pengaturan untuk mengaktifkan tracking dan navigasi pada mode sleep (layar mati) dengan secara periodik mengaktifkan GPS.</string>
+    <string name="osmand_background_plugin_description">Menampilkan pengaturan untuk mengaktifkan pelacakan dan navigasi pada latar belakang dengan membangunkan perangkat GPS secara berkala (dengan layar mati).</string>
     <string name="contribution_activity">Instal versi</string>
     <string name="choose_osmand_theme_descr">Ubah tampilan aplikasi.</string>
     <string name="choose_osmand_theme">Tema App</string>
@@ -267,14 +267,14 @@
     <string name="quick_action_add_destination">Tetapkan destinasi</string>
     <string name="quick_action_replace_destination">Ubah destinasi</string>
     <string name="quick_action_add_first_intermediate">Tambahkan perantara pertama</string>
-    <string name="quick_action_add_destination_desc">Mengetuk tombol tindakan akan menambahkan tujuan di lokasi layar tengah. Tujuan yang telah ditetapkan sebelumnya menjadi tujuan menengah terakhir.</string>
-    <string name="quick_action_replace_destination_desc">Mengetuk tombol aksi akan menggantikan tujuan dengan lokasi layar tengah.</string>
-    <string name="quick_action_add_first_intermediate_desc">Mengetuk tombol tindakan akan menambahkan titik tengah pertama di lokasi layar tengah.</string>
+    <string name="quick_action_add_destination_desc">Sebuah tombol untuk membuat layar di tengah destinasi rute, sebuah destinasi yang dipilih sebelumnya akan menjadi destinasi perantara terakhir.</string>
+    <string name="quick_action_replace_destination_desc">Sebuah tombol untuk membuat layar di tengah destinasi rute baru, menggantikan destinasi yang sebelumnya dipilih (jika ada).</string>
+    <string name="quick_action_add_first_intermediate_desc">Sebuah tombol untuk membuat layar di tengah destinasi perantara pertama.</string>
     <string name="no_overlay">Tidak ada hamparan</string>
     <string name="no_underlay">Tidak ada dasaran</string>
     <string name="subscribe_email_error">Kesalahan</string>
     <string name="subscribe_email_desc">Berlangganan ke daftar email kami tentang diskon aplikasi dan dapatkan 3 unduhan peta lainnya!</string>
-    <string name="depth_contour_descr">Kumpulan peta berisi garis kontur kedalaman laut dan titik bahari.</string>
+    <string name="depth_contour_descr">Garis kontur kedalaman laut dan tanda laut.</string>
     <string name="sea_depth_thanks">Terima kasih telah membeli \'Kontur kedalaman laut\'</string>
     <string name="index_item_depth_contours_osmand_ext">Kontur kedalaman laut</string>
     <string name="index_item_depth_points_southern_hemisphere">Titik kedalaman laut belahan bumi selatan</string>
@@ -372,7 +372,7 @@
     <string name="save_track_precision">Ketepatan minimum logging</string>
     <string name="save_track_precision_descr">Saring: Tidak ada pencatatan kecuali jika akurasi ini dicapai.</string>
     <string name="christmas_poi">POI Natal</string>
-    <string name="christmas_desc">Mengantisipasi liburan Natal dan Tahun Baru, Anda dapat memilih untuk menampilkan POI yang terkait dengan Natal: pohon natal, pasar, dll.</string>
+    <string name="christmas_desc">Mengantisipasi liburan Natal dan Tahun Baru, Anda dapat memilih untuk menampilkan POI yang terkait seperti pohon Natal, pasar, dll.</string>
     <string name="christmas_desc_q">Tampilkan POI liburan Natal\?</string>
     <string name="rendering_value_light_brown_name">Coklat Muda</string>
     <string name="rendering_value_dark_brown_name">Cokelat Tua</string>
@@ -799,7 +799,7 @@
 \n</string>
     <string name="copy_coordinates">Salin koordinat</string>
     <string name="please_provide_profile_name_message">Silahkan isi nama profil</string>
-    <string name="open_settings">Buka setelan</string>
+    <string name="open_settings">Buka pengaturan</string>
     <string name="plugin_disabled">Plugin mati</string>
     <string name="plugin_disabled_descr">Plugin ini adalah aplikasi yang terpisah, menonaktifkan tidak akan menghapus aplikasinya.
 \n
@@ -1398,7 +1398,7 @@
     <string name="recording_context_menu_delete">Hapus rekaman</string>
     <string name="layer_recordings">Lapisan rekaman</string>
     <string name="recording_error">Rekaman gagal</string>
-    <string name="av_settings">Setelan audio/video</string>
+    <string name="av_settings">Pengaturan audio/video</string>
     <string name="av_def_action_audio">Merekam audio</string>
     <string name="av_def_action_video">Merekam video</string>
     <string name="intermediate_points_change_order">Mengubah urutan</string>
@@ -2110,7 +2110,7 @@
     <string name="online_routing_example_hint">URL dengan semua parameter bernyala akan diperlihatkan seperti berikut:</string>
     <string name="file_import_error">%1$s gagal impor: %2$s</string>
     <string name="precision_hdop_and_vdop">Presisi horisontal: %1$s, vertikal: %2$s</string>
-    <string name="configure_profile_info">Setelan profil:</string>
+    <string name="configure_profile_info">Pengaturan profil:</string>
     <string name="pref_selected_by_default_for_profiles">Pengaturan ini dipilih secara standar buat profil: %s</string>
     <string name="lang_ca">Katalan</string>
     <string name="lang_hi">Hindi</string>
@@ -2304,7 +2304,7 @@
     <string name="quick_action_add_marker">Tambahkan penanda peta</string>
     <string name="quick_action_sh_poi_descr">Tambahkan satu atau lebih kategori POI untuk ditampilkan pada peta.</string>
     <string name="quick_action_map_overlay_action">Tambahkan hamparan</string>
-    <string name="internal_app_storage_description">Penyimpanan internal untuk OsmAnd, (disembunyikan dari pengguna dan aplikasi lain).</string>
+    <string name="internal_app_storage_description">Penyimpanan internal, tersembunyi dari semua pengguna dan aplikasi lainnya, jadi hanya OsmAnd yang dapat mengakses data Anda.</string>
     <string name="number_of_gpx_files_selected_pattern">%s berkas GPX dipilih</string>
     <string name="marker_save_as_track">Simpan sebagai berkas trek</string>
     <string name="fold_unfold">lipat/buka</string>
@@ -2342,4 +2342,36 @@
     <string name="map_widget_view_direction">Arah tampilan</string>
     <string name="quick_action_item_action">Aksi %d</string>
     <string name="fav_points_edited">Titik favorit diedit</string>
+    <string name="routing_attr_carriage_restrictions_description">Pertimbangkan izin akses untuk kendaraan yang ditarik kuda</string>
+    <string name="simulation_preview_mode_desc">Kecepatan simulasi akan maksimal pada ruas lurus dan melambat hanya pada persimpangan.</string>
+    <string name="simulation_real_mode_desc">Pada ruas jalan lurus, kecepatan akan mendekati kecepatan maksimum yang diizinkan.
+\nDi persimpangan, simulasi akan melambat.
+\nHukuman tambahan akan diterapkan pada lampu lalu lintas, rambu berhenti, dll.</string>
+    <string name="zoom_levels_difference_description">Perbedaan besar antara tingkat zoom dapat meningkatkan ukuran data yang diunduh.</string>
+    <string name="default_appearance_desc">Warna, ikon, dan bentuk bawaan akan diterapkan ke titik favorit yang ditambahkan ke dalam grup.</string>
+    <string name="selected_waypoints_descr">Titik jalan yang dipilih akan ditambahkan ke trek \"%1$s\"</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Terowongan jalur air</string>
+    <string name="shared_string_places">Tempat</string>
+    <string name="shared_string_clear">Hapus</string>
+    <string name="map_widget_altitude">Ketinggian lokasi saat ini</string>
+    <string name="apply_to_existing_favorites_descr">Terapkan perubahan pada titik favorit dalam grup yang sudah ada atau hanya yang ke baru\?</string>
+    <string name="apply_only_to_new_favorites">Terapkan ke favorit baru saja</string>
+    <string name="change_default_appearance">Ubah tampilan bawaan</string>
+    <string name="map_widget_distance_to_destination">Jarak ke destinasi</string>
+    <string name="map_widget_current_speed">Kecepatan saat ini</string>
+    <string name="add_page">Tambahkan laman</string>
+    <string name="apply_to_existing_points_descr">Terapkan perubahan pada titik dalam grup yang sudah ada atau hanya yang ke baru\?</string>
+    <string name="apply_to_existing">Terapkan ke yang sudah ada</string>
+    <string name="apply_only_to_new_points">Terapkan ke titk baru saja</string>
+    <string name="page_number">Laman %1$s</string>
+    <string name="shared_string_collapse">Tutup</string>
+    <string name="osmand_parking_overdue">kelebihan</string>
+    <string name="local_index_tile_data_zooms">Tingkat perbesaran diunduh: %1$s</string>
+    <string name="save_track_to_gpx_descrp">Mulai perekaman trek secara otomatis saat menavigasi dan simpan secara otomatis setelahnya.</string>
+    <string name="rendering_attr_seabedDetail_description">Info teks tambahan tentang surface_qualification dasar laut, jenis permukaan gabungan, kategori dan takson gulma atau lamun</string>
+    <string name="rendering_value_omit_name">Hilangkan</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Jangan sembunyikan terowongan jalur air</string>
+    <string name="always_ask_waypoint_appearance_description">Mengetuk tindakan ini akan membuka layar \"Tambahkan titik jalan\", di mana Anda dapat mengubah nama dan penampilan.</string>
+    <string name="waypoint_template">Templat titik jalan</string>
+    <string name="predefined_waypoint_appearance_description">Mengetuk tindakan ini akan menyimpan titik jalan secara otomatis dengan parameter yang telah ditentukan.</string>
 </resources>
