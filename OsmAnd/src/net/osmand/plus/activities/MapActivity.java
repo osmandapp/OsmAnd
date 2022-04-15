@@ -114,7 +114,7 @@ import net.osmand.plus.render.UpdateVectorRendererAsyncTask;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.IRouteInformationListener;
-import net.osmand.plus.routing.RouteCalculationProgressCallback;
+import net.osmand.plus.routing.RouteCalculationProgressListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper.TransportRouteCalculationProgressCallback;
 import net.osmand.plus.search.QuickSearchDialogFragment;
@@ -506,21 +506,20 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private void createProgressBarForRouting() {
 		final ProgressBar pb = findViewById(R.id.map_horizontal_progress);
-		final RouteCalculationProgressCallback progressCallback = new RouteCalculationProgressCallback() {
+		final RouteCalculationProgressListener progressCallback = new RouteCalculationProgressListener() {
 
 			@Override
-			public void start() {
+			public void onCalculationStart() {
 				setupRouteCalculationProgressBar(pb);
 				mapRouteInfoMenu.routeCalculationStarted();
 				RoutingHelper routingHelper = getRoutingHelper();
 				if (routingHelper.isPublicTransportMode() || !routingHelper.isOsmandRouting()) {
 					dashboardOnMap.updateRouteCalculationProgress(0);
 				}
-				DestinationReachedFragment.hideIfVisible();
 			}
 
 			@Override
-			public void updateProgress(int progress) {
+			public void onUpdateCalculationProgress(int progress) {
 				mapRouteInfoMenu.updateRouteCalculationProgress(progress);
 				dashboardOnMap.updateRouteCalculationProgress(progress);
 				if (findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE) {
@@ -538,7 +537,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 
 			@Override
-			public void requestPrivateAccessRouting() {
+			public void onRequestPrivateAccessRouting() {
 				if (!settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.getModeValue(getRoutingHelper().getAppMode())) {
 					final CommonPreference<Boolean> allowPrivate
 							= settings.getCustomRoutingBooleanProperty(GeneralRouter.ALLOW_PRIVATE, false);
@@ -566,34 +565,34 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 
 			@Override
-			public void updateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
+			public void onUpdateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
 				mapRouteInfoMenu.updateSuggestedMissingMaps(missingMaps, onlineSearch);
 			}
 
 			@Override
-			public void finish() {
+			public void onCalculationFinish() {
 				mapRouteInfoMenu.routeCalculationFinished();
 				dashboardOnMap.routeCalculationFinished();
 				pb.setVisibility(View.GONE);
 			}
 		};
 
-		app.getRoutingHelper().setProgressBar(progressCallback);
+		app.getRoutingHelper().addCalculationProgressListener(progressCallback);
 
 		app.getTransportRoutingHelper().setProgressBar(new TransportRouteCalculationProgressCallback() {
 			@Override
 			public void start() {
-				progressCallback.start();
+				progressCallback.onCalculationStart();
 			}
 
 			@Override
 			public void updateProgress(int progress) {
-				progressCallback.updateProgress(progress);
+				progressCallback.onUpdateCalculationProgress(progress);
 			}
 
 			@Override
 			public void finish() {
-				progressCallback.finish();
+				progressCallback.onCalculationFinish();
 			}
 		});
 	}

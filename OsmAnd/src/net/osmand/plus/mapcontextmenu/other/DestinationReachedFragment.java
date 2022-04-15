@@ -1,6 +1,5 @@
 package net.osmand.plus.mapcontextmenu.other;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.LatLon;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -25,21 +25,21 @@ import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.routing.RouteCalculationProgressListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
-import org.jetbrains.annotations.NotNull;
+import java.util.List;
 
-public class DestinationReachedFragment extends Fragment {
+public class DestinationReachedFragment extends Fragment implements RouteCalculationProgressListener {
 
 	public static final String TAG = DestinationReachedFragment.class.getSimpleName();
 
 	private static final String SHOULD_HIDE_MENU = "should_hide_menu";
 
 	private static boolean shown = false;
-	private static DestinationReachedFragment visibleFragment;
 
 	private MapActivity mapActivity;
 	private OsmandApplication app;
@@ -58,6 +58,7 @@ public class DestinationReachedFragment extends Fragment {
 		ctxMenu = mapActivity.getContextMenu();
 		nighMode = app.getDaynightHelper().isNightModeForMapControls();
 		isLandscapeLayout = !AndroidUiHelper.isOrientationPortrait(mapActivity);
+		app.getRoutingHelper().addCalculationProgressListener(this);
 		if (savedInstanceState != null) {
 			shouldHideMenu = savedInstanceState.getBoolean(SHOULD_HIDE_MENU);
 		}
@@ -141,15 +142,9 @@ public class DestinationReachedFragment extends Fragment {
 	}
 
 	@Override
-	public void onAttach(@NonNull @NotNull Context context) {
-		super.onAttach(context);
-		visibleFragment = this;
-	}
-
-	@Override
 	public void onDetach() {
 		super.onDetach();
-		visibleFragment = null;
+		app.getRoutingHelper().removeCalculationProgressListener(this);
 	}
 
 	@Override
@@ -195,6 +190,24 @@ public class DestinationReachedFragment extends Fragment {
 		}
 	}
 
+	@Override
+	public void onCalculationStart() {
+		// Hide dialog if a new route available.
+		dismiss();
+	}
+
+	@Override
+	public void onUpdateCalculationProgress(int progress) { }
+
+	@Override
+	public void onRequestPrivateAccessRouting() { }
+
+	@Override
+	public void onUpdateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) { }
+
+	@Override
+	public void onCalculationFinish() { }
+
 	public static boolean wasShown() {
 		return shown;
 	}
@@ -204,19 +217,13 @@ public class DestinationReachedFragment extends Fragment {
 	}
 
 	public static void show(MapActivity mapActivity) {
-		if (visibleFragment == null) {
+		if (!shown) {
 			shown = true;
 			OsmandApplication app = mapActivity.getMyApplication();
 			NavigationSession carNavigationSession = app.getCarNavigationSession();
 			if (carNavigationSession == null || !carNavigationSession.hasStarted()) {
 				showInstance(mapActivity);
 			}
-		}
-	}
-
-	public static void hideIfVisible() {
-		if (visibleFragment != null) {
-			visibleFragment.dismiss();
 		}
 	}
 

@@ -1,9 +1,5 @@
 package net.osmand.plus.measurementtool;
 
-import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.WHOLE_TRACK;
-import static net.osmand.plus.measurementtool.command.MeasurementModeCommand.MeasurementCommandType.APPROXIMATE_POINTS;
-import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
-
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -22,9 +18,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.measurementtool.command.ApplyGpxApproximationCommand;
 import net.osmand.plus.measurementtool.command.MeasurementCommandManager;
 import net.osmand.plus.measurementtool.command.MeasurementModeCommand;
+import net.osmand.plus.routing.RouteCalculationProgressListener;
 import net.osmand.plus.routing.IRouteSettingsListener;
 import net.osmand.plus.routing.RouteCalculationParams;
-import net.osmand.plus.routing.RouteCalculationProgressCallback;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.RouteCalculationProgress;
@@ -51,6 +47,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.WHOLE_TRACK;
+import static net.osmand.plus.measurementtool.command.MeasurementModeCommand.MeasurementCommandType.APPROXIMATE_POINTS;
+import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 
 public class MeasurementEditingContext implements IRouteSettingsListener {
 
@@ -1090,14 +1090,14 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		params.mode = appMode;
 		params.ctx = application;
 		params.calculationProgress = calculationProgress = new RouteCalculationProgress();
-		params.calculationProgressCallback = new RouteCalculationProgressCallback() {
+		params.calculationProgressListener = new RouteCalculationProgressListener() {
 
 			@Override
-			public void start() {
+			public void onCalculationStart() {
 			}
 
 			@Override
-			public void updateProgress(int progress) {
+			public void onUpdateCalculationProgress(int progress) {
 				int pairs = pointsToCalculateSize;
 				if (pairs != 0) {
 					float pairProgress = 100f / pairs;
@@ -1107,15 +1107,15 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			}
 
 			@Override
-			public void requestPrivateAccessRouting() {
+			public void onRequestPrivateAccessRouting() {
 			}
 
 			@Override
-			public void updateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
+			public void onUpdateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
 			}
 
 			@Override
-			public void finish() {
+			public void onCalculationFinish() {
 				calculatedPairs = 0;
 				pointsToCalculateSize = 0;
 			}
@@ -1137,7 +1137,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 				pts.add(pt);
 			}
 			calculatedPairs++;
-			params.calculationProgressCallback.updateProgress(0);
+			params.calculationProgressListener.onUpdateCalculationProgress(0);
 			List<RouteSegmentResult> originalRoute = route.getOriginalRoute();
 			if (Algorithms.isEmpty(originalRoute)) {
 				originalRoute = Collections.singletonList(RoutePlannerFrontEnd.generateStraightLineSegment(
