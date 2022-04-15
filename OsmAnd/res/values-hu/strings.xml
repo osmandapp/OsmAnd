@@ -4579,7 +4579,7 @@
     <string name="change_default_appearance">Alapértelmezett megjelenés módosítása</string>
     <string name="map_widget_distance_to_destination">Távolság a célig</string>
     <string name="map_widget_current_speed">Pillanatnyi sebesség</string>
-    <string name="add_page">Lap hozzáadása</string>
+    <string name="add_page">Oldal hozzáadása</string>
     <string name="page_number">%1$s oldal</string>
     <string name="map_widget_altitude">A jelenlegi pozíció magassága</string>
 </resources>
