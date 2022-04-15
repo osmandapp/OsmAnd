@@ -2374,5 +2374,5 @@
     <string name="always_ask_waypoint_appearance_description">Mengetuk tindakan ini akan membuka layar \"Tambahkan titik jalan\", di mana Anda dapat mengubah nama dan penampilan.</string>
     <string name="waypoint_template">Templat titik jalan</string>
     <string name="predefined_waypoint_appearance_description">Mengetuk tindakan ini akan menyimpan titik jalan secara otomatis dengan parameter yang telah ditentukan.</string>
-    <string name="rendering_attr_showRoadMaps_description">Pilih kapan menampilkan peta jalanraya:</string>
+    <string name="rendering_attr_showRoadMaps_description">Pilih kapan untuk menampilkan peta jalan:</string>
 </resources>
