@@ -2280,7 +2280,7 @@
     <string name="access_from_map">Akses dari peta</string>
     <string name="osn_comment_dialog_title">Tambahkan komentar</string>
     <string name="action_delete">Aksi hapus</string>
-    <string name="av_def_action_choose">Pada permintaan\?</string>
+    <string name="av_def_action_choose">Apabila diminta\?</string>
     <string name="new_destination_point_dialog">Anda sudah menetapkan sebuah destinasi:</string>
     <string name="avoid_motorway">Hindari jalan raya</string>
     <string name="avoid_ferries">Hindari kapal feri</string>
@@ -2374,4 +2374,5 @@
     <string name="always_ask_waypoint_appearance_description">Mengetuk tindakan ini akan membuka layar \"Tambahkan titik jalan\", di mana Anda dapat mengubah nama dan penampilan.</string>
     <string name="waypoint_template">Templat titik jalan</string>
     <string name="predefined_waypoint_appearance_description">Mengetuk tindakan ini akan menyimpan titik jalan secara otomatis dengan parameter yang telah ditentukan.</string>
+    <string name="rendering_attr_showRoadMaps_description">Pilih kapan menampilkan peta jalanraya:</string>
 </resources>
