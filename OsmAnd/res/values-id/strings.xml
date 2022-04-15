@@ -2281,8 +2281,8 @@
     <string name="osn_comment_dialog_title">Tambahkan komentar</string>
     <string name="action_delete">Aksi hapus</string>
     <string name="av_def_action_choose">Apabila diminta\?</string>
-    <string name="new_destination_point_dialog">Anda sudah menetapkan sebuah destinasi:</string>
-    <string name="avoid_motorway">Hindari jalan raya</string>
+    <string name="new_destination_point_dialog">Anda sudah menetapkan tujuan:</string>
+    <string name="avoid_motorway">x jalan tol</string>
     <string name="avoid_ferries">Hindari kapal feri</string>
     <string name="search_nothing_found">Tidak ada yang ditemukan</string>
     <string name="searching_address">Mencari alamat…</string>
