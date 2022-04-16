@@ -13,14 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 public class PageViewHolder extends RecyclerView.ViewHolder implements UnmovableItem {
 
 	public final View topDivider;
-	public final ImageButton actionButton;
+	public final ImageButton deletePageButton;
 	public final TextView pageText;
 	public final View moveIcon;
 
 	public PageViewHolder(@NonNull View itemView) {
 		super(itemView);
 		topDivider = itemView.findViewById(R.id.top_divider);
-		actionButton = itemView.findViewById(R.id.action_button);
+		deletePageButton = itemView.findViewById(R.id.action_button);
 		pageText = itemView.findViewById(R.id.page);
 		moveIcon = itemView.findViewById(R.id.move_button);
 	}
@@ -41,6 +41,10 @@ public class PageViewHolder extends RecyclerView.ViewHolder implements Unmovable
 
 		public void onPreviousPageDeleted() {
 			index--;
+		}
+
+		public void onPreviousPageRestored() {
+			index++;
 		}
 	}
 }

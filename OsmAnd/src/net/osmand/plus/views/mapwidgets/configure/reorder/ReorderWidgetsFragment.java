@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -149,6 +151,16 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 				if (toPosition >= 0 && fromPosition >= 0 && toPosition != fromPosition) {
 					adapter.notifyDataSetChanged();
 				}
+			}
+
+			@Override
+			public void onPageDeleted(int page, int position) {
+				String snackbarText = getString(R.string.snackbar_page_removed, String.valueOf(page + 1));
+				Snackbar snackbar = Snackbar.make(view, snackbarText, Snackbar.LENGTH_LONG)
+						.setAnchorView(R.id.apply_button_container)
+						.setAction(R.string.shared_string_undo, v -> adapter.restorePage(page, position));
+				UiUtilities.setupSnackbar(snackbar, nightMode);
+				snackbar.show();
 			}
 		});
 		recyclerView.setAdapter(adapter);

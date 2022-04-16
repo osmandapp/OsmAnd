@@ -109,6 +109,33 @@ public class WidgetsDataHolder {
 		pages = newPages;
 	}
 
+	public void shiftPageOrdersToRight(int page) {
+		for (Entry<String, Integer> entry : orders.entrySet()) {
+			String widgetId = entry.getKey();
+			int widgetPage = getWidgetPage(widgetId);
+			int widgetOrder = entry.getValue();
+
+			if (widgetPage == page) {
+				orders.put(widgetId, widgetOrder + 1);
+			}
+		}
+	}
+
+	public int getMaxOrderOfPage(int page) {
+		int maxOrder = -1;
+		for (Entry<String, Integer> entry : orders.entrySet()) {
+			String widgetId = entry.getKey();
+			int widgetPage = getWidgetPage(widgetId);
+			int widgetOrder = entry.getValue();
+
+			if (widgetPage == page && widgetOrder > maxOrder) {
+				maxOrder = widgetOrder;
+			}
+		}
+
+		return maxOrder;
+	}
+
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putSerializable(PAGES_ATTR, pages);
 		outState.putSerializable(ORDERS_ATTR, orders);

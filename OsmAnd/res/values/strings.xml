@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="snackbar_page_removed">\"Page %1$s\" has been removed.</string>
     <string name="map_widget_altitude">Altitude of current location</string>
     <string name="map_widget_distance_to_destination">Distance to destination</string>
     <string name="map_widget_current_speed">Current speed</string>

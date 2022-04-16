@@ -30,13 +30,10 @@ import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.WidgetViewH
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.WidgetViewHolder.WidgetUiInfo;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map.Entry;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
@@ -45,7 +42,7 @@ import static net.osmand.plus.utils.UiUtilities.getColoredSelectableDrawable;
 public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItemMoveCallback, ItemMovableCallback {
 
 	private final OsmandApplication app;
-	private final WidgetsDataHolder dataHolder;
+	private final ReorderWidgetsAdapterHelper reorderHelper;
 	private final List<ListItem> items = new ArrayList<>();
 
 	private WidgetAdapterListener listener;
@@ -69,7 +66,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		setHasStableIds(true);
 		this.app = app;
 		this.nightMode = nightMode;
-		this.dataHolder = dataHolder;
+		this.reorderHelper = new ReorderWidgetsAdapterHelper(this, dataHolder, items);
 
 		ApplicationMode mode = app.getSettings().getApplicationMode();
 		profileColor = mode.getProfileColor(nightMode);
@@ -89,6 +86,10 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 
 	public void setListener(@NonNull WidgetAdapterListener listener) {
 		this.listener = listener;
+	}
+
+	public void restorePage(int page, int position) {
+		reorderHelper.restorePage(page, position);
 	}
 
 	@NonNull
@@ -162,7 +163,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 			SpaceViewHolder holder = (SpaceViewHolder) viewHolder;
 			holder.setHeight((int) item.value);
 		} else if (viewHolder instanceof AddPageButtonViewHolder) {
-			((AddPageButtonViewHolder) viewHolder).buttonContainer.setOnClickListener(v -> addPage());
+			((AddPageButtonViewHolder) viewHolder).buttonContainer.setOnClickListener(v -> reorderHelper.addPage());
 		}
 	}
 
@@ -170,18 +171,18 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 	private void bindPageViewHolder(@NonNull PageViewHolder viewHolder, int position) {
 		int pageIndex = ((PageUiInfo) items.get(position).value).index;
 
-		OnClickListener actionListener;
-		Drawable actionIcon;
+		OnClickListener deletePageListener;
+		Drawable deleteIcon;
 		boolean firstPage = pageIndex == 0;
 		if (firstPage) {
-			actionListener = null;
-			actionIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_remove, nightMode);
+			deletePageListener = null;
+			deleteIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_remove, nightMode);
 		} else {
-			actionListener = v -> deletePage(viewHolder.getAdapterPosition(), pageIndex);
-			actionIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_remove, R.color.color_osm_edit_delete);
+			deletePageListener = v -> deletePage(viewHolder.getAdapterPosition(), pageIndex);
+			deleteIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_remove, R.color.color_osm_edit_delete);
 		}
-		viewHolder.actionButton.setOnClickListener(actionListener);
-		viewHolder.actionButton.setImageDrawable(actionIcon);
+		viewHolder.deletePageButton.setOnClickListener(deletePageListener);
+		viewHolder.deletePageButton.setImageDrawable(deleteIcon);
 
 		AndroidUiHelper.updateVisibility(viewHolder.topDivider, !firstPage);
 		viewHolder.pageText.setText(app.getString(R.string.page_number, String.valueOf(pageIndex + 1)));
@@ -196,195 +197,15 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 	}
 
 	private void deletePage(int position, int pageToDelete) {
-		if (position == RecyclerView.NO_POSITION) {
-			return;
-		}
-
-		moveWidgetsToPreviousPage(pageToDelete);
-		dataHolder.deletePage(pageToDelete);
-
-		items.remove(position);
-		List<Integer> changedPageItems = new ArrayList<>();
-		for (int i = position; i < getItemCount(); i++) {
-			ListItem listItem = items.get(i);
-			if (listItem.value instanceof PageUiInfo) {
-				((PageUiInfo) listItem.value).onPreviousPageDeleted();
-				changedPageItems.add(i);
-			}
-		}
-
-		notifyItemRemoved(position);
-		for (int itemIndex : changedPageItems) {
-			notifyItemChanged(itemIndex);
-		}
-	}
-
-	private void moveWidgetsToPreviousPage(int pageToMoveFrom) {
-		int previousPage = pageToMoveFrom - 1;
-		int previousPageSize = 0;
-		for (ListItem item : items) {
-			if (item.value instanceof WidgetUiInfo) {
-				WidgetUiInfo widgetUiInfo = ((WidgetUiInfo) item.value);
-				if (widgetUiInfo.page == previousPage) {
-					previousPageSize++;
-				} else if (widgetUiInfo.page == pageToMoveFrom) {
-					widgetUiInfo.page = previousPage;
-					widgetUiInfo.order = previousPageSize;
-					previousPageSize++;
-
-					dataHolder.addWidgetToPage(widgetUiInfo.key, widgetUiInfo.page);
-					dataHolder.getOrders().put(widgetUiInfo.key, widgetUiInfo.order);
-				}
-			}
-		}
-	}
-
-	private void addPage() {
-		int pagesCount = 0;
-		int addPageButtonIndex = -1;
-		for (int i = 0; i < items.size() && addPageButtonIndex == -1; i++) {
-			ItemType type = items.get(i).type;
-			if (type == ItemType.PAGE) {
-				pagesCount++;
-			} else if (type == ItemType.ADD_PAGE_BUTTON) {
-				addPageButtonIndex = i;
-			}
-		}
-
-		if (addPageButtonIndex != -1) {
-			dataHolder.addEmptyPage(pagesCount);
-			ListItem newPageListItem = new ListItem(ItemType.PAGE, new PageUiInfo(pagesCount));
-			items.add(addPageButtonIndex, newPageListItem);
-			notifyItemInserted(addPageButtonIndex);
+		reorderHelper.deletePage(position, pageToDelete);
+		if (listener != null) {
+			listener.onPageDeleted(pageToDelete, position);
 		}
 	}
 
 	@Override
 	public boolean onItemMove(int from, int to) {
-		ListItem itemFrom = items.get(from);
-		ListItem itemTo = items.get(to);
-		Object valueFrom = itemFrom.value;
-		Object valueTo = itemTo.value;
-
-		boolean swapWidgets = valueFrom instanceof WidgetUiInfo && valueTo instanceof WidgetUiInfo;
-		boolean swapWidgetWithPage = valueFrom instanceof WidgetUiInfo
-				&& valueTo instanceof PageUiInfo
-				&& ((PageUiInfo) valueTo).index > 0;
-		boolean swapPages = valueFrom instanceof PageUiInfo
-				&& valueTo instanceof PageUiInfo
-				&& ((PageUiInfo) valueFrom).index > 0
-				&& ((PageUiInfo) valueTo).index > 0;
-		boolean swapPageWithWidget = valueFrom instanceof PageUiInfo
-				&& ((PageUiInfo) valueFrom).index > 0
-				&& valueTo instanceof WidgetUiInfo;
-
-		if (swapWidgets) {
-			WidgetUiInfo widgetFrom = (WidgetUiInfo) valueFrom;
-			WidgetUiInfo widgetTo = (WidgetUiInfo) valueTo;
-
-			int tempPage = widgetFrom.page;
-			widgetFrom.page = widgetTo.page;
-			widgetTo.page = tempPage;
-
-			int tempOrder = widgetFrom.order;
-			widgetFrom.order = widgetTo.order;
-			widgetTo.order = tempOrder;
-
-			dataHolder.addWidgetToPage(widgetFrom.key, widgetFrom.page);
-			dataHolder.addWidgetToPage(widgetTo.key, widgetTo.page);
-
-			dataHolder.getOrders().put(widgetFrom.key, widgetFrom.order);
-			dataHolder.getOrders().put(widgetTo.key, widgetTo.order);
-
-			Collections.swap(items, from, to);
-			notifyItemMoved(from, to);
-			return true;
-		} else if (swapWidgetWithPage) {
-			WidgetUiInfo widgetFrom = ((WidgetUiInfo) valueFrom);
-
-			int currentWidgetPage = widgetFrom.page;
-			int pageIndex = ((PageUiInfo) itemTo.value).index;
-			boolean moveToAnotherPageStart = currentWidgetPage != pageIndex;
-
-			int newPage = moveToAnotherPageStart ? pageIndex : pageIndex - 1;
-			widgetFrom.page = newPage;
-
-			if (moveToAnotherPageStart) {
-				widgetFrom.order = 0;
-				shiftPageOrdersToRight(newPage);
-			} else {
-				widgetFrom.order = getMaxOrderOfPage(newPage) + 1;
-			}
-
-			dataHolder.addWidgetToPage(widgetFrom.key, newPage);
-			dataHolder.getOrders().put(widgetFrom.key, widgetFrom.order);
-
-			Collections.swap(items, from, to);
-			notifyItemMoved(from, to);
-			return true;
-		} else if (swapPages) {
-			PageUiInfo pageFrom = ((PageUiInfo) valueFrom);
-			PageUiInfo pageTo = ((PageUiInfo) valueTo);
-
-			int tempPage = pageFrom.index;
-			pageFrom.index = pageTo.index;
-			pageTo.index = tempPage;
-
-			Collections.swap(items, from, to);
-			notifyItemMoved(from, to);
-			notifyItemChanged(from);
-			notifyItemChanged(to);
-			return true;
-		} else if (swapPageWithWidget) {
-			PageUiInfo pageFrom = ((PageUiInfo) valueFrom);
-			WidgetUiInfo widgetTo = ((WidgetUiInfo) valueTo);
-
-			boolean movingUp = from > to;
-			if (movingUp) {
-				widgetTo.page = pageFrom.index;
-				widgetTo.order = 0;
-				shiftPageOrdersToRight(widgetTo.page);
-			} else {
-				widgetTo.page = pageFrom.index - 1;
-				widgetTo.order = getMaxOrderOfPage(widgetTo.page) + 1;
-			}
-
-			dataHolder.addWidgetToPage(widgetTo.key, widgetTo.page);
-			dataHolder.getOrders().put(widgetTo.key, widgetTo.order);
-
-			Collections.swap(items, from, to);
-			notifyItemMoved(from, to);
-			return true;
-		}
-
-		return false;
-	}
-
-	private void shiftPageOrdersToRight(int page) {
-		for (Entry<String, Integer> entry : dataHolder.getOrders().entrySet()) {
-			String widgetId = entry.getKey();
-			int widgetPage = dataHolder.getWidgetPage(widgetId);
-			int widgetOrder = entry.getValue();
-
-			if (widgetPage == page) {
-				dataHolder.getOrders().put(widgetId, widgetOrder + 1);
-			}
-		}
-	}
-
-	private int getMaxOrderOfPage(int page) {
-		int maxOrder = -1;
-		for (Entry<String, Integer> entry : dataHolder.getOrders().entrySet()) {
-			String widgetId = entry.getKey();
-			int widgetPage = dataHolder.getWidgetPage(widgetId);
-			int widgetOrder = entry.getValue();
-
-			if (widgetPage == page && widgetOrder > maxOrder) {
-				maxOrder = widgetOrder;
-			}
-		}
-
-		return maxOrder;
+		return reorderHelper.swapItemsIfAllowed(from, to);
 	}
 
 	@Override
@@ -438,5 +259,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		void onDragStarted(ViewHolder holder);
 
 		void onDragOrSwipeEnded(ViewHolder holder);
+
+		void onPageDeleted(int page, int position);
 	}
 }
