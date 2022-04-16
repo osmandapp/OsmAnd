@@ -29,6 +29,7 @@ import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ListItem;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.WidgetAdapterListener;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.ActionButtonViewHolder.ActionButtonInfo;
+import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.PageViewHolder.PageUiInfo;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.WidgetViewHolder.WidgetUiInfo;
 
 import java.util.ArrayList;
@@ -263,7 +264,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 		List<ListItem> pagedWidgetsItems = new ArrayList<>();
 		for (int page : dataHolder.getPages().keySet()) {
 
-			pagedWidgetsItems.add(new ListItem(ItemType.PAGE, page));
+			pagedWidgetsItems.add(new ListItem(ItemType.PAGE, new PageUiInfo(page)));
 
 			for (ListItem widgetItem : widgetsItems) {
 				int widgetPage = widgetItem.value instanceof WidgetUiInfo

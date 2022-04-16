@@ -23,6 +23,7 @@ import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AddPageButt
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.DividerViewHolder;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.HeaderViewHolder;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.PageViewHolder;
+import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.PageViewHolder.PageUiInfo;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.SpaceViewHolder;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.WidgetViewHolder;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.WidgetViewHolder.ItemMovableCallback;
@@ -165,8 +166,9 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		}
 	}
 
+	@SuppressLint("ClickableViewAccessibility")
 	private void bindPageViewHolder(@NonNull PageViewHolder viewHolder, int position) {
-		int pageIndex = ((int) items.get(position).value);
+		int pageIndex = ((PageUiInfo) items.get(position).value).index;
 
 		OnClickListener actionListener;
 		Drawable actionIcon;
@@ -183,6 +185,14 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 
 		AndroidUiHelper.updateVisibility(viewHolder.topDivider, !firstPage);
 		viewHolder.pageText.setText(app.getString(R.string.page_number, String.valueOf(pageIndex + 1)));
+
+		AndroidUiHelper.updateVisibility(viewHolder.moveIcon, !firstPage);
+		viewHolder.moveIcon.setOnTouchListener((v, event) -> {
+			if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+				listener.onDragStarted(viewHolder);
+			}
+			return false;
+		});
 	}
 
 	private void deletePage(int position, int pageToDelete) {
@@ -197,9 +207,8 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		List<Integer> changedPageItems = new ArrayList<>();
 		for (int i = position; i < getItemCount(); i++) {
 			ListItem listItem = items.get(i);
-			if (listItem.type == ItemType.PAGE) {
-				int pageIndex = ((int) listItem.value);
-				items.set(i, new ListItem(ItemType.PAGE, pageIndex - 1));
+			if (listItem.value instanceof PageUiInfo) {
+				((PageUiInfo) listItem.value).onPreviousPageDeleted();
 				changedPageItems.add(i);
 			}
 		}
@@ -244,7 +253,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 
 		if (addPageButtonIndex != -1) {
 			dataHolder.addEmptyPage(pagesCount);
-			ListItem newPageListItem = new ListItem(ItemType.PAGE, pagesCount);
+			ListItem newPageListItem = new ListItem(ItemType.PAGE, new PageUiInfo(pagesCount));
 			items.add(addPageButtonIndex, newPageListItem);
 			notifyItemInserted(addPageButtonIndex);
 		}
@@ -257,7 +266,19 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		Object valueFrom = itemFrom.value;
 		Object valueTo = itemTo.value;
 
-		if (valueFrom instanceof WidgetUiInfo && valueTo instanceof WidgetUiInfo) {
+		boolean swapWidgets = valueFrom instanceof WidgetUiInfo && valueTo instanceof WidgetUiInfo;
+		boolean swapWidgetWithPage = valueFrom instanceof WidgetUiInfo
+				&& valueTo instanceof PageUiInfo
+				&& ((PageUiInfo) valueTo).index > 0;
+		boolean swapPages = valueFrom instanceof PageUiInfo
+				&& valueTo instanceof PageUiInfo
+				&& ((PageUiInfo) valueFrom).index > 0
+				&& ((PageUiInfo) valueTo).index > 0;
+		boolean swapPageWithWidget = valueFrom instanceof PageUiInfo
+				&& ((PageUiInfo) valueFrom).index > 0
+				&& valueTo instanceof WidgetUiInfo;
+
+		if (swapWidgets) {
 			WidgetUiInfo widgetFrom = (WidgetUiInfo) valueFrom;
 			WidgetUiInfo widgetTo = (WidgetUiInfo) valueTo;
 
@@ -278,13 +299,11 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 			Collections.swap(items, from, to);
 			notifyItemMoved(from, to);
 			return true;
-		} else if (valueFrom instanceof WidgetUiInfo
-				&& itemTo.type == ItemType.PAGE
-				&& ((int) itemTo.value) > 0) {
+		} else if (swapWidgetWithPage) {
 			WidgetUiInfo widgetFrom = ((WidgetUiInfo) valueFrom);
 
 			int currentWidgetPage = widgetFrom.page;
-			int pageIndex = ((int) itemTo.value);
+			int pageIndex = ((PageUiInfo) itemTo.value).index;
 			boolean moveToAnotherPageStart = currentWidgetPage != pageIndex;
 
 			int newPage = moveToAnotherPageStart ? pageIndex : pageIndex - 1;
@@ -299,6 +318,39 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 
 			dataHolder.addWidgetToPage(widgetFrom.key, newPage);
 			dataHolder.getOrders().put(widgetFrom.key, widgetFrom.order);
+
+			Collections.swap(items, from, to);
+			notifyItemMoved(from, to);
+			return true;
+		} else if (swapPages) {
+			PageUiInfo pageFrom = ((PageUiInfo) valueFrom);
+			PageUiInfo pageTo = ((PageUiInfo) valueTo);
+
+			int tempPage = pageFrom.index;
+			pageFrom.index = pageTo.index;
+			pageTo.index = tempPage;
+
+			Collections.swap(items, from, to);
+			notifyItemMoved(from, to);
+			notifyItemChanged(from);
+			notifyItemChanged(to);
+			return true;
+		} else if (swapPageWithWidget) {
+			PageUiInfo pageFrom = ((PageUiInfo) valueFrom);
+			WidgetUiInfo widgetTo = ((WidgetUiInfo) valueTo);
+
+			boolean movingUp = from > to;
+			if (movingUp) {
+				widgetTo.page = pageFrom.index;
+				widgetTo.order = 0;
+				shiftPageOrdersToRight(widgetTo.page);
+			} else {
+				widgetTo.page = pageFrom.index - 1;
+				widgetTo.order = getMaxOrderOfPage(widgetTo.page) + 1;
+			}
+
+			dataHolder.addWidgetToPage(widgetTo.key, widgetTo.page);
+			dataHolder.getOrders().put(widgetTo.key, widgetTo.order);
 
 			Collections.swap(items, from, to);
 			notifyItemMoved(from, to);
@@ -366,8 +418,8 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 
 	@Override
 	public boolean isListItemMovable(int position) {
-		ListItem item = items.get(position);
-		return item.value instanceof WidgetUiInfo;
+		Object itemValue = items.get(position).value;
+		return itemValue instanceof PageUiInfo || itemValue instanceof WidgetUiInfo;
 	}
 
 	public static class ListItem {
