@@ -4579,4 +4579,15 @@
     <string name="speed_mode">Modo de velocidad</string>
     <string name="routeInfo_horse_scale_name">Dificultad de los senderos ecuestres</string>
     <string name="simulation_preview_mode_title">Modo de previsualización rápida</string>
+    <string name="map_widget_altitude">Altitud</string>
+    <string name="add_page">Añadir página</string>
+    <string name="page_number">Página %1$s</string>
+    <string name="map_widget_distance_to_destination">Distancia al destino</string>
+    <string name="map_widget_current_speed">Velocidad actual</string>
+    <string name="apply_to_existing_points_descr">¿Aplicar cambios a los puntos existentes del grupo o sólo a los nuevos\?</string>
+    <string name="apply_to_existing_favorites_descr">¿Aplicar cambios a los puntos favoritos existentes del grupo o sólo a los nuevos\?</string>
+    <string name="apply_to_existing">Aplicar a existentes</string>
+    <string name="apply_only_to_new_points">Aplicar sólo a puntos nuevos</string>
+    <string name="apply_only_to_new_favorites">Aplicar sólo a favoritos nuevos</string>
+    <string name="change_default_appearance">Cambiar el aspecto predefinido</string>
 </resources>

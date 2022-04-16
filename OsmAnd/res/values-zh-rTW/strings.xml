@@ -4578,4 +4578,9 @@
     <string name="apply_to_existing_points_descr">將變更套用於既有的點群組或僅套用到新的？</string>
     <string name="apply_only_to_new_favorites">僅套用到新的收藏</string>
     <string name="change_default_appearance">變更預設外觀</string>
+    <string name="map_widget_altitude">目前位置的海拔高度</string>
+    <string name="add_page">新增頁面</string>
+    <string name="page_number">頁面 %1$s</string>
+    <string name="map_widget_distance_to_destination">到目的地的距離</string>
+    <string name="map_widget_current_speed">目前速度</string>
 </resources>

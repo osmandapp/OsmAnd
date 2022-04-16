@@ -4591,4 +4591,9 @@
     <string name="change_default_appearance">Skift standardudseende</string>
     <string name="apply_to_existing_favorites_descr">Anvend ændringer på gruppens eksisterende favoritpunkter eller kun på nye\?</string>
     <string name="apply_only_to_new_points">Anvend kun på nye punkter</string>
+    <string name="map_widget_distance_to_destination">Afstand til destination</string>
+    <string name="map_widget_current_speed">Aktuel hastighed</string>
+    <string name="add_page">Tilføj side</string>
+    <string name="page_number">Side %1$s</string>
+    <string name="map_widget_altitude">Højde på nuværende placering</string>
 </resources>

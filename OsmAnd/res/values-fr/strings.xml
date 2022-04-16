@@ -4579,4 +4579,9 @@
     <string name="change_default_appearance">Modifier l’apparence par défaut</string>
     <string name="apply_to_existing_points_descr">Appliquer les modifications à tous les points du groupe ou seulement aux nouveaux \?</string>
     <string name="rendering_attr_showLightRailRoutes_name">Chemins de fer légers</string>
+    <string name="map_widget_altitude">Altitude de l\'emplacement actuel</string>
+    <string name="map_widget_current_speed">Vitesse instantanée</string>
+    <string name="page_number">Page %1$s</string>
+    <string name="map_widget_distance_to_destination">Distance jusqu\'à destination</string>
+    <string name="add_page">Ajouter page</string>
 </resources>
