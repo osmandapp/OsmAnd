@@ -54,6 +54,10 @@ public class MapWidgetRegistry {
 
 	public static final String WIDGET_COMPASS = "compass";
 
+	public static final int DISABLED_MODE = 0x1;
+	public static final int ENABLED_MODE = 0x2;
+	public static final int AVAILABLE_MODE = 0x4;
+
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 
@@ -78,7 +82,7 @@ public class MapWidgetRegistry {
 
 		List<MapWidget> widgetsToShow = new ArrayList<>();
 		for (MapWidgetInfo widgetInfo : widgets) {
-			if (widgetInfo.isVisibleForAppMode(mode)) {
+			if (widgetInfo.isEnabledForAppMode(mode)) {
 				widgetsToShow.add(widgetInfo.widget);
 			}
 		}
@@ -103,7 +107,7 @@ public class MapWidgetRegistry {
 	                             @NonNull ApplicationMode mode,
 	                             @NonNull DrawSettings drawSettings) {
 		for (MapWidgetInfo widgetInfo : panelWidgets) {
-			if (widgetInfo.isVisibleForAppMode(mode)) {
+			if (widgetInfo.isEnabledForAppMode(mode)) {
 				widgetInfo.widget.updateInfo(drawSettings);
 			}
 		}
@@ -199,7 +203,7 @@ public class MapWidgetRegistry {
 	                                                   @NonNull ApplicationMode mode) {
 		Set<String> widgetsVisibility = new LinkedHashSet<>();
 		for (MapWidgetInfo widgetInfo : widgetsInfo) {
-			if (widgetInfo.isVisibleForAppMode(mode)) {
+			if (widgetInfo.isEnabledForAppMode(mode)) {
 				widgetsVisibility.add(widgetInfo.key);
 			} else {
 				widgetsVisibility.add(HIDE_PREFIX + widgetInfo.key);
@@ -364,26 +368,37 @@ public class MapWidgetRegistry {
 
 	@NonNull
 	public Set<MapWidgetInfo> getAvailableWidgetsForPanel(@NonNull ApplicationMode appMode, @NonNull WidgetsPanel panel) {
-		Set<MapWidgetInfo> widgets = new TreeSet<>();
-		for (MapWidgetInfo widgetInfo : getWidgetsForPanel(panel)) {
-
-			OsmAndAppCustomization appCustomization = app.getAppCustomization();
-			if (!appCustomization.areWidgetsCustomized() || !appCustomization.isWidgetAvailable(widgetInfo.key, appMode)) {
-				widgets.add(widgetInfo);
-			}
-		}
-		return widgets;
+		return getWidgetsForPanel(appMode, panel, AVAILABLE_MODE);
 	}
 
 	@NonNull
-	public Set<MapWidgetInfo> getVisibleWidgets(@NonNull ApplicationMode appMode, @NonNull WidgetsPanel panel) {
-		Set<MapWidgetInfo> visible = new TreeSet<>();
+	public Set<MapWidgetInfo> getEnabledWidgets(@NonNull ApplicationMode appMode, @NonNull WidgetsPanel panel) {
+		return getWidgetsForPanel(appMode, panel, ENABLED_MODE);
+	}
+
+	@NonNull
+	public Set<MapWidgetInfo> getWidgetsForPanel(@NonNull ApplicationMode appMode,
+	                                             @NonNull WidgetsPanel panel,
+	                                             int filterModes) {
+		OsmAndAppCustomization appCustomization = app.getAppCustomization();
+		Set<MapWidgetInfo> filteredWidgets = new TreeSet<>();
 		for (MapWidgetInfo widget : getWidgetsForPanel(panel)) {
-			if (widget.isSelected(appMode)) {
-				visible.add(widget);
+
+			boolean disabledMode = (filterModes & DISABLED_MODE) == DISABLED_MODE;
+			boolean enabledMode = (filterModes & ENABLED_MODE) == ENABLED_MODE;
+			boolean availableMode = (filterModes & AVAILABLE_MODE) == AVAILABLE_MODE;
+
+			boolean passDisabled = !disabledMode || !widget.isEnabledForAppMode(appMode);
+			boolean passEnabled = !enabledMode || widget.isEnabledForAppMode(appMode);
+			boolean passAvailable = !availableMode || !appCustomization.areWidgetsCustomized()
+					|| appCustomization.isWidgetAvailable(widget.key, appMode);
+
+			if (passDisabled && passEnabled && passAvailable) {
+				filteredWidgets.add(widget);
 			}
 		}
-		return visible;
+
+		return filteredWidgets;
 	}
 
 	@NonNull
@@ -475,5 +490,4 @@ public class MapWidgetRegistry {
 	public interface WidgetsVisibilityListener {
 		void onWidgetVisibilityChanged(@NonNull MapWidgetInfo widgetInfo);
 	}
-
 }

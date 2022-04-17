@@ -135,7 +135,7 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 
 		public VisiblePages(@NonNull Set<MapWidgetInfo> widgets, @NonNull ApplicationMode appMode) {
 			for (MapWidgetInfo widgetInfo : widgets) {
-				if (widgetInfo.isVisibleForAppMode(appMode) && widgetInfo.widget.isViewVisible()) {
+				if (widgetInfo.isEnabledForAppMode(appMode) && widgetInfo.widget.isViewVisible()) {
 					addWidgetViewToPage(widgetInfo.pageIndex, widgetInfo.widget.getView());
 				}
 			}
