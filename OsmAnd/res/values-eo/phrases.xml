@@ -4312,4 +4312,20 @@
     <string name="poi_payment_maestro_contactless_no">Senkontaktaj kartoj Maestro malakceptataj</string>
     <string name="poi_payment_mastercard_contactless_no">Senkontaktaj kartoj MasterCard malakceptataj</string>
     <string name="poi_payment_visa_contactless_no">Senkontaktaj kartoj Visa malakceptataj</string>
+    <string name="poi_wool">Lana vendejo</string>
+    <string name="poi_laundry_service_yes">jes</string>
+    <string name="poi_laundry_service_no">ne</string>
+    <string name="poi_dovecote">Kolombejo</string>
+    <string name="poi_dry_cleaning_yes">jes</string>
+    <string name="poi_laundry_service_filter">Vestaĵ-lavado fare de homoj</string>
+    <string name="poi_dry_cleaning_filter">Vestaĵ-lavado per nepolara solvilo</string>
+    <string name="poi_rice">Riza vendejo</string>
+    <string name="poi_birds_nest">Birda nesto</string>
+    <string name="poi_fish_pass">Transnaĝaĵo por fiŝoj</string>
+    <string name="poi_dry_cleaning_no">ne</string>
+    <string name="poi_termite_mound">Termitejo</string>
+    <string name="poi_anthill">Formikejo</string>
+    <string name="poi_board_type_wildlife">sovaĝaj bestoj</string>
+    <string name="poi_board_type_nature">naturo</string>
+    <string name="poi_food_no">Manĝaĵo: ne</string>
 </resources>

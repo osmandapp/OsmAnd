@@ -4495,8 +4495,8 @@
     <string name="shared_string_reading_file">Lettura del file…</string>
     <string name="all_groups">Tutti i gruppi</string>
     <string name="list_of_groups">Lista dei gruppi</string>
-    <string name="points_selection_descr">Sei sicuro di voler chiudere\? Perderai le modifiche.</string>
-    <string name="exit_import_descr">Sei sicuro di voler uscire senza salvare\? Perderai tutte le modifiche.</string>
+    <string name="points_selection_descr">Chiudere perdendo tutte le modifiche\?</string>
+    <string name="exit_import_descr">Uscire senza salvare nessuna modifica\?</string>
     <string name="exit_import">Uscire dall\'importazione\?</string>
     <string name="import_tracks">Importa tracce</string>
     <string name="import_tracks_descr">%1$s, contiene %2$s tracce separate. Scegli le tracce che vuoi importare.</string>
@@ -4548,8 +4548,9 @@
     <string name="apply_only_to_new_favorites">Applica solo ai nuovi preferiti</string>
     <string name="simulation_preview_mode_desc">La velocità della simulazione sarà massima nelle tratte di strada diritte, e diminuirà solamente per le intersezioni.</string>
     <string name="add_page">Aggiungi pagina</string>
-    <string name="simulation_real_mode_desc">Sulle tratte di strada diritte, la velocità sarà approssimata alla massima consentita.
-\nAlle intersezioni la simulazione rallenterà, così come anche per i vari segnali stradali, gli stop, eccetera.</string>
+    <string name="simulation_real_mode_desc">Nei tratti di strada diritti, la velocità sarà approssimata alla massima consentita.
+\nAlle intersezioni la simulazione rallenterà.
+\nVerranno aggiunte penalizzazioni aggiuntive per i vari segnali stradali, gli stop, eccetera.</string>
     <string name="rendering_attr_showRunningRoutes_name">Itinerari corsa</string>
     <string name="location_source_descr">Come preimpostazione, OsmAnd installato da Google Play usa %1$s per determinare la posizione.
 \n
@@ -4562,10 +4563,20 @@
     <string name="move_map_to_select_area">Muovi la mappa per selezionare l\'area desiderata.</string>
     <string name="default_appearance">Grafica predefinita</string>
     <string name="apply_only_to_new_points">Applica solo ai nuovi punti</string>
-    <string name="configure_screen_widgets_descr">Seleziona il bordo dello schermo per aggiungere o riorganizzare i widget</string>
+    <string name="configure_screen_widgets_descr">Seleziona il lato dello schermo per aggiungere o riorganizzare i widget.</string>
     <string name="routeInfo_horse_scale_description">Disegna i percorsi in base alla difficoltà dell\'itinerario a cavallo</string>
     <string name="routing_attr_carriage_restrictions_name">Restrizioni al trasporto</string>
     <string name="routing_attr_carriage_restrictions_description">Considera l\'accesso consentito ai veicoli a trazione animale</string>
     <string name="rendering_attr_showLightRailRoutes_name">Percorsi ferroviari urbani leggeri</string>
     <string name="estimated_download_size">Stima quantità da scaricare</string>
+    <string name="apply_to_existing_favorites_descr">Applicare le modifiche ai preferiti esistenti o solo ai nuovi\?</string>
+    <string name="navigate_point_format_swiss_grid">Griglia Svizzera(CH1903)</string>
+    <string name="navigate_point_format_swiss_grid_plus">Griglia Svizzera (CH1903+)</string>
+    <string name="map_widget_altitude">Altitudine della localizzazione attuale</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Percorsi filobus</string>
+    <string name="map_markers_bar">Barra marcatori mappa</string>
+    <string name="rendering_attr_showRunningRoutes_description">Mostra i percorsi in uso</string>
+    <string name="rendering_attr_showFitnessTrails_name">Percorsi fitness</string>
+    <string name="rendering_attr_showFitnessTrails_description">Mostra i percorsi fitness</string>
+    <string name="rendering_attr_horse_scale_demanding_name">Impegnativo</string>
 </resources>
