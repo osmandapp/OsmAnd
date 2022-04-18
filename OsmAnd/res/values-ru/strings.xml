@@ -3233,7 +3233,7 @@
     <string name="add_new_profile_q">Добавить новый профиль «%1$s»\?</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Узловые сети велосипедных маршрутов</string>
     <string name="save_heading">Сохранять путевой угол</string>
-    <string name="save_heading_descr">Сохранять значение курса для каждой точки трека при записи.</string>
+    <string name="save_heading_descr">Сохранять путевой угол для каждой точки трека при записи.</string>
     <string name="layer_osm_edits">Правки OSM</string>
     <string name="swap_two_places">Поменять местами %1$s и %2$s</string>
     <string name="track_saved">Трек сохранён</string>
