@@ -2,8 +2,10 @@ package net.osmand.plus.views.mapwidgets.configure.reorder;
 
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ItemType;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ListItem;
+import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableWidgetViewHolder.AvailableWidgetUiInfo;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.PageViewHolder.PageUiInfo;
-import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.WidgetViewHolder.WidgetUiInfo;
+import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AddedWidgetViewHolder.AddedWidgetUiInfo;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,11 +28,50 @@ public class ReorderWidgetsAdapterHelper {
 		this.items = items;
 	}
 
+	public void deleteWidget(@NonNull AddedWidgetUiInfo addedWidgetUiInfo, int position) {
+		if (position != RecyclerView.NO_POSITION) {
+			dataHolder.deleteWidget(addedWidgetUiInfo.key);
+			items.remove(position);
+			adapter.notifyItemRemoved(position);
+
+			int order = dataHolder.getSelectedPanel().getOriginalWidgetOrder(addedWidgetUiInfo.key);
+			AvailableWidgetUiInfo availableWidgetInfo = new AvailableWidgetUiInfo(addedWidgetUiInfo, order);
+			int insertIndex = getInsertIndexForAvailableWidget(order);
+			if (insertIndex != -1) {
+				items.add(insertIndex, new ListItem(ItemType.AVAILABLE_WIDGET, availableWidgetInfo));
+			}
+		}
+	}
+
+	private int getInsertIndexForAvailableWidget(int order) {
+		int passedHeaders = 0;
+		int secondHeaderIndex = -1;
+		int closestHigherIndex = -1;
+		for (int i = 0; i < items.size(); i++) {
+			ListItem item = items.get(i);
+			if (item.type == ItemType.HEADER) {
+				passedHeaders++;
+				if (passedHeaders == 2) {
+					secondHeaderIndex = i;
+				}
+			} else if (item.value instanceof AvailableWidgetUiInfo) {
+				AvailableWidgetUiInfo widgetInfo = ((AvailableWidgetUiInfo) item.value);
+				if (widgetInfo.order > order) {
+					return i;
+				} else {
+					closestHigherIndex = i;
+				}
+			}
+		}
+
+		return closestHigherIndex == -1 ? secondHeaderIndex + 1 : closestHigherIndex + 1;
+	}
+
 	public void restorePage(int page, int position) {
 		for (int i = position; i < adapter.getItemCount(); i++) {
 			ListItem item = items.get(i);
-			if (item.value instanceof WidgetUiInfo) {
-				WidgetUiInfo widgetUiInfo = ((WidgetUiInfo) item.value);
+			if (item.value instanceof AddedWidgetUiInfo) {
+				AddedWidgetUiInfo widgetUiInfo = ((AddedWidgetUiInfo) item.value);
 				widgetUiInfo.page += 1;
 				dataHolder.addWidgetToPage(widgetUiInfo.key, widgetUiInfo.page);
 			} else if (item.value instanceof PageUiInfo) {
@@ -74,8 +115,8 @@ public class ReorderWidgetsAdapterHelper {
 		int previousPage = pageToMoveFrom - 1;
 		int previousPageSize = 0;
 		for (ListItem item : items) {
-			if (item.value instanceof WidgetUiInfo) {
-				WidgetUiInfo widgetUiInfo = ((WidgetUiInfo) item.value);
+			if (item.value instanceof AddedWidgetUiInfo) {
+				AddedWidgetUiInfo widgetUiInfo = ((AddedWidgetUiInfo) item.value);
 				if (widgetUiInfo.page == previousPage) {
 					previousPageSize++;
 				} else if (widgetUiInfo.page == pageToMoveFrom) {
@@ -116,8 +157,8 @@ public class ReorderWidgetsAdapterHelper {
 		Object valueFrom = itemFrom.value;
 		Object valueTo = itemTo.value;
 
-		boolean swapWidgets = valueFrom instanceof WidgetUiInfo && valueTo instanceof WidgetUiInfo;
-		boolean swapWidgetWithPage = valueFrom instanceof WidgetUiInfo
+		boolean swapWidgets = valueFrom instanceof AddedWidgetUiInfo && valueTo instanceof AddedWidgetUiInfo;
+		boolean swapWidgetWithPage = valueFrom instanceof AddedWidgetUiInfo
 				&& valueTo instanceof PageUiInfo
 				&& ((PageUiInfo) valueTo).index > 0;
 		boolean swapPages = valueFrom instanceof PageUiInfo
@@ -126,7 +167,7 @@ public class ReorderWidgetsAdapterHelper {
 				&& ((PageUiInfo) valueTo).index > 0;
 		boolean swapPageWithWidget = valueFrom instanceof PageUiInfo
 				&& ((PageUiInfo) valueFrom).index > 0
-				&& valueTo instanceof WidgetUiInfo;
+				&& valueTo instanceof AddedWidgetUiInfo;
 
 		if (swapWidgets) {
 			swapWidgets(from, to);
@@ -146,8 +187,8 @@ public class ReorderWidgetsAdapterHelper {
 	}
 
 	private void swapWidgets(int from, int to) {
-		WidgetUiInfo widgetFrom = ((WidgetUiInfo) items.get(from).value);
-		WidgetUiInfo widgetTo = ((WidgetUiInfo) items.get(to).value);
+		AddedWidgetUiInfo widgetFrom = ((AddedWidgetUiInfo) items.get(from).value);
+		AddedWidgetUiInfo widgetTo = ((AddedWidgetUiInfo) items.get(to).value);
 
 		int tempPage = widgetFrom.page;
 		widgetFrom.page = widgetTo.page;
@@ -168,7 +209,7 @@ public class ReorderWidgetsAdapterHelper {
 	}
 
 	private void swapWidgetWithPage(int from, int to) {
-		WidgetUiInfo widgetFrom = ((WidgetUiInfo) items.get(from).value);
+		AddedWidgetUiInfo widgetFrom = ((AddedWidgetUiInfo) items.get(from).value);
 		int pageIndex = ((PageUiInfo) items.get(to).value).index;
 
 		int currentWidgetPage = widgetFrom.page;
@@ -207,7 +248,7 @@ public class ReorderWidgetsAdapterHelper {
 
 	private void swapPageWithWidget(int from, int to) {
 		PageUiInfo pageFrom = ((PageUiInfo) items.get(from).value);
-		WidgetUiInfo widgetTo = ((WidgetUiInfo) items.get(to).value);
+		AddedWidgetUiInfo widgetTo = ((AddedWidgetUiInfo) items.get(to).value);
 
 		boolean movingUp = from > to;
 		if (movingUp) {
@@ -224,5 +265,44 @@ public class ReorderWidgetsAdapterHelper {
 
 		Collections.swap(items, from, to);
 		adapter.notifyItemMoved(from, to);
+	}
+
+	public void addWidget(int position) {
+		AvailableWidgetUiInfo availableWidgetInfo = ((AvailableWidgetUiInfo) items.get(position).value);
+
+		items.remove(position);
+		adapter.notifyItemRemoved(position);
+
+		int page = getLastPage();
+		int order = dataHolder.getMaxOrderOfPage(page) + 1;
+
+		dataHolder.addWidgetToPage(availableWidgetInfo.key, page);
+		dataHolder.getOrders().put(availableWidgetInfo.key, order);
+
+		AddedWidgetUiInfo addedWidgetInfo = new AddedWidgetUiInfo(availableWidgetInfo, page, order);
+		ListItem newAddedWidgetItem = new ListItem(ItemType.ADDED_WIDGET, addedWidgetInfo);
+
+		int insertIndex = getIndexOfLastAddedWidgetItem() + 1;
+		items.add(insertIndex, newAddedWidgetItem);
+		adapter.notifyItemInserted(insertIndex);
+	}
+
+	private int getLastPage() {
+		List<Integer> pages = new ArrayList<>(dataHolder.getPages().keySet());
+		return Algorithms.isEmpty(pages) ? 0 : pages.get(pages.size() - 1);
+	}
+
+	private int getIndexOfLastAddedWidgetItem() {
+		int index = -1;
+		for (int i = 0; i < items.size(); i++) {
+			ListItem item = items.get(i);
+			if (index == -1 && item.type == ItemType.HEADER) {
+				index = i;
+			} else if (item.type == ItemType.ADDED_WIDGET) {
+				index = i;
+			}
+		}
+
+		return index;
 	}
 }

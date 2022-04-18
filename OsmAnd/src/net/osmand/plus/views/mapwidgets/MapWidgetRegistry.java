@@ -351,10 +351,11 @@ public class MapWidgetRegistry {
 	}
 
 	@NonNull
-	public List<Set<MapWidgetInfo>> getAvailablePagedWidgetsForPanel(@NonNull ApplicationMode appMode,
-	                                                                 @NonNull WidgetsPanel panel) {
+	public List<Set<MapWidgetInfo>> getPagedWidgetsForPanel(@NonNull ApplicationMode appMode,
+	                                                        @NonNull WidgetsPanel panel,
+	                                                        int filterModes) {
 		Map<Integer, Set<MapWidgetInfo>> widgetsByPages = new TreeMap<>();
-		for (MapWidgetInfo widgetInfo : getAvailableWidgetsForPanel(appMode, panel)) {
+		for (MapWidgetInfo widgetInfo : getWidgetsForPanel(appMode, panel, filterModes)) {
 			int page = widgetInfo.pageIndex;
 			Set<MapWidgetInfo> widgetsOfPage = widgetsByPages.get(page);
 			if (widgetsOfPage == null) {
@@ -364,16 +365,6 @@ public class MapWidgetRegistry {
 			widgetsOfPage.add(widgetInfo);
 		}
 		return new ArrayList<>(widgetsByPages.values());
-	}
-
-	@NonNull
-	public Set<MapWidgetInfo> getAvailableWidgetsForPanel(@NonNull ApplicationMode appMode, @NonNull WidgetsPanel panel) {
-		return getWidgetsForPanel(appMode, panel, AVAILABLE_MODE);
-	}
-
-	@NonNull
-	public Set<MapWidgetInfo> getEnabledWidgets(@NonNull ApplicationMode appMode, @NonNull WidgetsPanel panel) {
-		return getWidgetsForPanel(appMode, panel, ENABLED_MODE);
 	}
 
 	@NonNull

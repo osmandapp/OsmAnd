@@ -20,7 +20,7 @@ public class PageViewHolder extends RecyclerView.ViewHolder implements Unmovable
 	public PageViewHolder(@NonNull View itemView) {
 		super(itemView);
 		topDivider = itemView.findViewById(R.id.top_divider);
-		deletePageButton = itemView.findViewById(R.id.action_button);
+		deletePageButton = itemView.findViewById(R.id.delete_page_button);
 		pageText = itemView.findViewById(R.id.page);
 		moveIcon = itemView.findViewById(R.id.move_button);
 	}

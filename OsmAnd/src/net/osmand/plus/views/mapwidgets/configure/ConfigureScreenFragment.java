@@ -51,6 +51,8 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+
 public class ConfigureScreenFragment extends BaseOsmAndFragment implements QuickActionUpdatesListener, WidgetsVisibilityListener {
 
 	public static final String TAG = ConfigureScreenFragment.class.getSimpleName();
@@ -286,7 +288,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		TextView tvTitle = view.findViewById(R.id.title);
 		TextView tvDesc = view.findViewById(R.id.items_count_descr);
 
-		int count = widgetRegistry.getEnabledWidgets(selectedAppMode, panel).size();
+		int count = widgetRegistry.getWidgetsForPanel(selectedAppMode, panel, ENABLED_MODE).size();
 		int iconColor = count > 0 ? activeColor : defColor;
 		Drawable icon = getPaintedContentIcon(panel.getIconId(), iconColor);
 		ivIcon.setImageDrawable(icon);
