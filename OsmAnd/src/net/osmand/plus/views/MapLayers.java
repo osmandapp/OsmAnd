@@ -18,6 +18,7 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
+import net.osmand.core.android.MapRendererView;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.DialogListItemAdapter;
@@ -137,7 +138,7 @@ public class MapLayers {
 		mapView.addLayer(downloadedRegionsLayer, 0.5f);
 
 		// 0.9 gpx layer
-		gpxLayer = new GPXLayer(app);
+		gpxLayer = new GPXLayer(app, -100000);
 		mapView.addLayer(gpxLayer, 0.9f);
 
 		// 1. route layer
@@ -216,6 +217,10 @@ public class MapLayers {
 				layer.setMapActivity(null);
 			}
 			layer.setMapActivity(mapActivity);
+		}
+		MapRendererView mapRenderer = mapView.getMapRenderer();
+		if (mapRenderer != null) {
+			mapRenderer.removeAllSymbolsProviders();
 		}
 	}
 

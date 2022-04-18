@@ -7,6 +7,9 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.Shader;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.QuadRect;
@@ -29,9 +32,6 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class Renderable {
 
@@ -66,8 +66,8 @@ public class Renderable {
         protected static final int MIN_CULLER_ZOOM = 16;
         protected static final int BORDER_TYPE_ZOOM_THRESHOLD = MapTileLayer.DEFAULT_MAX_ZOOM + MapTileLayer.OVERZOOM_IN;
 
-        public List<WptPt> points = null;                           // Original list of points
-        protected List<WptPt> culled = new ArrayList<>();           // Reduced/resampled list of points
+        public List<WptPt> points;                           // Original list of points
+        protected List<WptPt> culled = new ArrayList<>();    // Reduced/resampled list of points
         protected int pointSize;
         protected double segmentSize;
 
@@ -75,20 +75,33 @@ public class Renderable {
 
         protected QuadRect trackBounds;
         protected double zoom = -1;
-        protected AsynchronousResampler culler = null;                        // The currently active resampler
-        protected Paint paint = null;                               // MUST be set by 'updateLocalPaint' before use
+        protected AsynchronousResampler culler = null;       // The currently active resampler
+        protected Paint paint = null;                        // MUST be set by 'updateLocalPaint' before use
         protected Paint borderPaint;
+        protected int color;
+        protected String width;
 
         @NonNull
         protected ColoringType coloringType = ColoringType.TRACK_SOLID;
         protected String routeInfoAttribute = null;
 
         protected GpxGeometryWay geometryWay;
+        protected boolean drawArrows = false;
 
         public RenderableSegment(List<WptPt> points, double segmentSize) {
             this.points = points;
             this.segmentSize = segmentSize;
             trackBounds = GPXUtilities.calculateBounds(points);
+        }
+
+        public void setBorderPaint(Paint borderPaint) {
+            this.borderPaint = borderPaint;
+        }
+
+        public boolean setDrawArrows(boolean drawArrows) {
+            boolean changed = this.drawArrows != drawArrows;
+            this.drawArrows = drawArrows;
+            return changed;
         }
 
         protected void updateLocalPaint(Paint p) {
@@ -105,12 +118,18 @@ public class Renderable {
             }
         }
 
-        public void setTrackColoringParams(@NonNull ColoringType coloringType,
-                                           @Nullable String routeInfoAttribute,
-                                           @NonNull Paint borderPaint) {
+        public boolean setTrackParams(int color, String width,
+                                      @NonNull ColoringType coloringType,
+                                      @Nullable String routeInfoAttribute) {
+            boolean changed = this.color != color
+                    || !Algorithms.stringsEqual(this.width, width)
+                    || this.coloringType != coloringType
+                    || !Algorithms.stringsEqual(this.routeInfoAttribute, routeInfoAttribute);
+            this.color = color;
+            this.width = width;
             this.coloringType = coloringType;
             this.routeInfoAttribute = routeInfoAttribute;
-            this.borderPaint = borderPaint;
+            return changed;
         }
 
         public GpxGeometryWay getGeometryWay() {
@@ -158,8 +177,15 @@ public class Renderable {
             return culled.isEmpty() ? points : culled;
         }
 
-        public void setRoute(List<RouteSegmentResult> routeSegments) {
+        public boolean setRoute(List<RouteSegmentResult> routeSegments) {
+            boolean changed = this.routeSegments != routeSegments;
             this.routeSegments = routeSegments;
+            return changed;
+        }
+
+        public void drawGeometry(Canvas canvas, RotatedTileBox tileBox, QuadRect quadRect,
+                                 int trackColor, float trackWidth) {
+            drawGeometry(canvas, tileBox, quadRect, trackColor, trackWidth, drawArrows);
         }
 
         public void drawGeometry(Canvas canvas, RotatedTileBox tileBox, QuadRect quadRect,
@@ -175,7 +201,8 @@ public class Renderable {
             }
         }
 
-        protected void drawSolid(List<WptPt> pts, Paint p, Canvas canvas, RotatedTileBox tileBox) {
+        protected void drawSolid(@NonNull List<WptPt> pts, @NonNull Paint p,
+                                 @NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
             QuadRect tileBounds = tileBox.getLatLonBounds();
             WptPt lastPt = pts.get(0);
             boolean recalculateLastXY = true;
@@ -206,10 +233,14 @@ public class Renderable {
             }
         }
 
-        protected void drawGradient(double zoom, List<WptPt> pts, Paint p, Canvas canvas, RotatedTileBox tileBox) {
+        protected void drawGradient(double zoom, @NonNull List<WptPt> pts, @NonNull Paint p,
+                                    @NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
+            GradientScaleType scaleType = coloringType.toGradientScaleType();
+            if (scaleType == null) {
+                return;
+            }
             QuadRect tileBounds = tileBox.getLatLonBounds();
             boolean drawSegmentBorder = DRAW_BORDER && zoom >= BORDER_TYPE_ZOOM_THRESHOLD;
-            GradientScaleType scaleType = coloringType.toGradientScaleType();
             Path path = new Path();
             boolean recalculateLastXY = true;
             WptPt lastPt = pts.get(0);
@@ -284,7 +315,8 @@ public class Renderable {
             }
         }
 
-        private LinearGradient createGradient(List<PointF> gradientPoints, List<Integer> gradientColors) {
+        private LinearGradient createGradient(@NonNull List<PointF> gradientPoints,
+                                              @NonNull List<Integer> gradientColors) {
             float gradientLength = 0;
             List<Float> pointsLength = new ArrayList<>(gradientPoints.size() - 1);
             for (int i = 1; i < gradientPoints.size(); i++) {

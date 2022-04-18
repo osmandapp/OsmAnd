@@ -93,7 +93,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	private CoreMapMarker navigationMarker;
 	private CoreMapMarker navigationMarkerWithHeading;
 
-	private boolean markersNeedInvalidate = true;
+	private boolean markersInvalidated = true;
 	private boolean showHeadingCached = false;
 	private Location lastKnownLocation;
 	private float lastHeading = 0.0f;
@@ -172,7 +172,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	}
 
 	private void initCoreRenderer() {
-		markersNeedInvalidate = true;
+		markersInvalidated = true;
 	}
 
 	@Override
@@ -255,7 +255,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		}
 	}
 
-	private boolean invalidateMarkerCollection() {
+	private boolean recreateMarkerCollection() {
 		if (view == null || !view.hasMapRenderer()) {
 			return false;
 		}
@@ -419,22 +419,22 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		updateParams(view.getSettings().getApplicationMode(), nightMode, locationProvider.getLastKnownLocation() == null);
 
 		if (view.hasMapRenderer()) {
-			boolean markersInvalidated = false;
-			if (markersNeedInvalidate) {
-				markersInvalidated = invalidateMarkerCollection();
-				this.markersNeedInvalidate = false;
+			boolean markersRecreated = false;
+			if (this.markersInvalidated) {
+				markersRecreated = recreateMarkerCollection();
+				this.markersInvalidated = false;
 			}
 			boolean showHeading = shouldShowHeading();
 			boolean showBearing = shouldShowBearing(lastKnownLocation);
 			boolean stateUpdated = setMarkerState(showBearing ?
-					MarkerState.Move : MarkerState.Stay, showHeading, markersInvalidated);
+					MarkerState.Move : MarkerState.Stay, showHeading, markersRecreated);
 			if (showHeading != showHeadingCached) {
 				showHeadingCached = showHeading;
 				if (!stateUpdated) {
 					updateMarkerState(showHeading);
 				}
 			}
-			if (markersInvalidated) {
+			if (markersRecreated) {
 				updateMarkerData(lastKnownLocation, locationProvider.getHeading());
 			}
 		}
@@ -493,7 +493,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 				area.setColor(ColorUtilities.getColorWithAlpha(profileColor, 0.16f));
 				aroundArea.setColor(profileColor);
 			}
-			markersNeedInvalidate = true;
+			markersInvalidated = true;
 		}
 	}
 

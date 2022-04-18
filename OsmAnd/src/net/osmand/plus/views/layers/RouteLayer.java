@@ -81,12 +81,12 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	public RouteLayer(@NonNull Context context, int baseOrder) {
 		super(context);
+		this.baseOrder = baseOrder;
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		this.helper = app.getRoutingHelper();
 		this.transportHelper = helper.getTransportRoutingHelper();
 		this.chartPointsHelper = new ChartPointsHelper(app);
 		this.coloringAvailabilityCache = new ColoringTypeAvailabilityCache(app);
-		this.baseOrder = baseOrder;
 	}
 
 	public RoutingHelper getHelper() {
@@ -125,12 +125,12 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		routeWayContext = new RouteGeometryWayContext(view.getContext(), density);
 		routeWayContext.updatePaints(nightMode, attrs);
 		routeGeometry = new RouteGeometryWay(routeWayContext);
-		routeGeometry.vectorLinesBaseOrder = baseOrder;
+		routeGeometry.baseOrder = getBaseOrder();
 
 		publicTransportWayContext = new PublicTransportGeometryWayContext(view.getContext(), density);
 		publicTransportWayContext.updatePaints(nightMode, attrs, attrsPT, attrsW);
 		publicTransportRouteGeometry = new PublicTransportGeometryWay(publicTransportWayContext);
-		publicTransportRouteGeometry.vectorLinesBaseOrder = baseOrder;
+		publicTransportRouteGeometry.baseOrder = getBaseOrder();
 	}
 
 	@Override
@@ -177,6 +177,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		} else {
 			resetLayer();
 		}
+		mapActivitInvalidated = false;
 	}
 
 	@Override
@@ -278,7 +279,8 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			TransportRouteResult route = routes != null && routes.size() > currentRoute ? routes.get(currentRoute) : null;
 			routeGeometry.clearRoute();
 			boolean routeUpdated = publicTransportRouteGeometry.updateRoute(tb, route);
-			boolean draw = routeUpdated || renderState.shouldRebuildTransportRoute || !publicTransportRouteGeometry.hasMapRenderer();
+			boolean draw = routeUpdated || renderState.shouldRebuildTransportRoute
+					|| !publicTransportRouteGeometry.hasMapRenderer() || mapActivitInvalidated;
 			if (route != null && draw) {
 				LatLon start = transportHelper.getStartLocation();
 				Location startLocation = new Location("transport");
@@ -318,7 +320,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			if (routeGeometry.hasMapRenderer()) {
 				renderState.updateRouteState(startLocationIndex, actualColoringType, routeLineColor,
 						routeLineWidth, route.getCurrentRoute(), tb.getZoom(), shouldShowTurnArrows);
-				draw = routeUpdated || renderState.shouldRebuildRoute;
+				draw = routeUpdated || renderState.shouldRebuildRoute || mapActivitInvalidated;
 				if (draw) {
 					routeGeometry.resetSymbolProviders();
 				} else {
@@ -333,7 +335,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			Iterator<RouteDirectionInfo> it = rd.iterator();
 			if (!directTo && tb.getZoom() >= 14 && shouldShowTurnArrows) {
 				if (routeGeometry.hasMapRenderer()) {
-					if (renderState.shouldUpdateActionPoints) {
+					if (renderState.shouldUpdateActionPoints || mapActivitInvalidated) {
 						List<Location> actionPoints = calculateActionPoints(helper.getLastProjection(),
 								route.getRouteLocations(), route.getCurrentRoute(), it, tb.getZoom());
 						routeGeometry.buildActionArrows(actionPoints, customTurnArrowColor);
