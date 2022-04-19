@@ -277,8 +277,7 @@ public class MapLayers {
 			WptPt locToShow = null;
 			for (GPXFile g : result) {
 				if (g.showCurrentTrack) {
-					if (!settings.SAVE_TRACK_TO_GPX.get() && !
-							settings.SAVE_GLOBAL_TRACK_TO_GPX.get()) {
+					if (!settings.SAVE_TRACK_TO_GPX.get() && !settings.SAVE_GLOBAL_TRACK_TO_GPX.get()) {
 						app.showToastMessage(R.string.gpx_monitoring_disabled_warn);
 					}
 					break;
@@ -292,7 +291,7 @@ public class MapLayers {
 						mapView.getZoom(), true);
 			}
 			mapView.refreshMap();
-			dashboard.refreshContent(true);
+			dashboard.refreshContent(false);
 			return true;
 		};
 		return GpxUiHelper.selectGPXFiles(files, mapActivity, callbackWithObject, getThemeRes(), isNightMode());
