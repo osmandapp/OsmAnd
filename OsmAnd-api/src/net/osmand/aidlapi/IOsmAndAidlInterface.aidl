@@ -932,7 +932,7 @@ interface IOsmAndAidlInterface {
      * - "I" (info)
      * - "W" (warn)
      * - "E" (error)
-     * @params callback (IOsmAndAidlCallback) - callback to notify user on new application logs
+     * @params callback (IOsmAndAidlCallback) - callback to notify user on new OsmAnd logs
      */
     long registerForLogcatMessages(in ALogcatListenerParams params, IOsmAndAidlCallback callback);
 }
