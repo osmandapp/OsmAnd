@@ -63,7 +63,7 @@ public class RouteInfoCard extends MapBaseCard {
 			if (!Algorithms.isEmpty(operatorTag)) {
 				addInfoRow(container, operatorTag, app.getString(R.string.poi_operator));
 			}
-			addSymbolRow(container, routeKey);
+//			addSymbolRow(container, routeKey);
 		}
 	}
 
