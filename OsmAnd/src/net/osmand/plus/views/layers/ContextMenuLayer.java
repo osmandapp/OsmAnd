@@ -799,8 +799,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 						}
 					} else if (isRouteGpx) {
 						if (isUniqueRoute(selectedObjects.keySet(), renderedObject)) {
-							LatLon minLatLon = tileBox.getLatLonFromPixel(point.x - ROUTE_SEARCH_RADIUS_PX, point.y - ROUTE_SEARCH_RADIUS_PX);
-							LatLon maxLatLon = tileBox.getLatLonFromPixel(point.x + ROUTE_SEARCH_RADIUS_PX, point.y + ROUTE_SEARCH_RADIUS_PX);
+							int searchRadius = (int) (getScaledTouchRadius(app, getDefaultRadiusPoi(tileBox)) * 1.5f);
+							LatLon minLatLon = tileBox.getLatLonFromPixel(point.x - searchRadius, point.y - searchRadius);
+							LatLon maxLatLon = tileBox.getLatLonFromPixel(point.x + searchRadius, point.y + searchRadius);
 
 							QuadRect rect = new QuadRect(minLatLon.getLongitude(), maxLatLon.getLatitude(),
 									maxLatLon.getLongitude(), minLatLon.getLatitude());
