@@ -28,6 +28,7 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTitleWithDescrAndButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -152,7 +153,8 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 			}
 			app.getRendererRegistry().setCurrentSelectedRender(loaded);
 			mapActivity.refreshMapComplete();
-			mapActivity.getDashboard().refreshContent(true);
+			DashboardOnMap dashboard = mapActivity.getDashboard();
+			dashboard.refreshContent(false);
 		} else {
 			Toast.makeText(mapActivity, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
 		}

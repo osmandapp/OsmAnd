@@ -150,7 +150,8 @@ final class MapLayerMenuListener extends OnRowItemClick {
 	}
 
 	private void showGpxSelectionDialog(OnDataChangeUiAdapter uiAdapter, ContextMenuItem item) {
-		AlertDialog dialog = mapActivity.getMapLayers().showGPXFileLayer(getAlreadySelectedGpx(), mapActivity);
+		MapLayers layers = mapActivity.getMapLayers();
+		AlertDialog dialog = layers.showGPXFileLayer(getAlreadySelectedGpx(), mapActivity);
 		dialog.setOnDismissListener(dlg -> {
 			OsmandApplication app = mapActivity.getMyApplication();
 			boolean selected = app.getSelectedGpxHelper().isShowingAnyGpxFiles();
