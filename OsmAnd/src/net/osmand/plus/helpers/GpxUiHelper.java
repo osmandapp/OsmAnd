@@ -1,5 +1,19 @@
 package net.osmand.plus.helpers;
 
+import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
+import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
+import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
+import static net.osmand.plus.track.GpxAppearanceAdapter.SHOW_START_FINISH_ATTR;
+import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
+import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+import static net.osmand.util.Algorithms.capitalizeFirstLetter;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -66,6 +80,7 @@ import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
+import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
@@ -130,20 +145,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
-
-import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
-import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
-import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
-import static net.osmand.plus.track.GpxAppearanceAdapter.SHOW_START_FINISH_ATTR;
-import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
-import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
-import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
-import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 public class GpxUiHelper {
 
@@ -2225,7 +2226,7 @@ public class GpxUiHelper {
 	                                  @NonNull GPXFile gpxFile,
 	                                  @NonNull WptPt selectedPoint,
 	                                  @Nullable GPXTrackAnalysis analyses,
-	                                  @Nullable Drawable trackIcon) {
+	                                  @Nullable RenderedObject renderedObject) {
 		new SaveGpxAsyncTask(file, gpxFile, new SaveGpxListener() {
 			@Override
 			public void gpxSavingStarted() {
@@ -2240,7 +2241,7 @@ public class GpxUiHelper {
 					GPXTrackAnalysis trackAnalysis = analyses != null ? analyses : selectedGpxFile.getTrackAnalysis(app);
 					SelectedGpxPoint selectedGpxPoint = new SelectedGpxPoint(selectedGpxFile, selectedPoint);
 					TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint,
-							null, null, null, false, trackAnalysis, trackIcon);
+							null, null, null, false, trackAnalysis, renderedObject);
 				} else {
 					LOG.error(errorMessage);
 				}

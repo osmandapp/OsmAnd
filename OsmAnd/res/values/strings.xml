@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="on_with_params">%1$s on %2$s</string>
+    <string name="shared_string_symbol">Symbol</string>
     <string name="no_widgets_descr">Add one or more widgets from the list of available widgets.</string>
     <string name="no_widgets_here_yet">No widgets here yet</string>
     <string name="available_widgets">Available widgets</string>

@@ -2,7 +2,6 @@ package net.osmand.plus.views.layers;
 
 import static net.osmand.GPXUtilities.calculateTrackBounds;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.plus.mapcontextmenu.controllers.NetworkRouteMenuController.getIconForRouteObject;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 
@@ -1194,8 +1193,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 							String name = getObjectName(object).getName();
 							String fileName = name.endsWith(GPX_FILE_EXT) ? name : name + GPX_FILE_EXT;
 							File file = new File(FileUtils.getTempDir(app), fileName);
-							Drawable routeIcon = getIconForRouteObject(app, renderedObject);
-							GpxUiHelper.saveAndOpenGpx(mapActivity, file, gpxFile, wptPt, null, routeIcon);
+							GpxUiHelper.saveAndOpenGpx(mapActivity, file, gpxFile, wptPt, null, renderedObject);
 						}
 						return true;
 					};
