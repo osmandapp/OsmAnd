@@ -464,9 +464,11 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		AndroidUiHelper.updateVisibility(displayGroupsButton, hasPointsGroups());
 		AndroidUiHelper.updateVisibility(headerIcon, menuType != TrackMenuType.OPTIONS);
 
-		Drawable routeIcon = getIconForRouteObject(app, renderedObject);
-		Drawable icon = renderedObject != null ? routeIcon : app.getUIUtilities().getThemedIcon(R.drawable.ic_action_polygom_dark);
-		headerIcon.setImageDrawable(icon);
+		Drawable icon = null;
+		if (renderedObject != null) {
+			icon = getIconForRouteObject(app, renderedObject);
+		}
+		headerIcon.setImageDrawable(icon != null ? icon : app.getUIUtilities().getThemedIcon(R.drawable.ic_action_polygom_dark));
 	}
 
 	@NonNull
