@@ -275,6 +275,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 	                              boolean approximationEnabled,
 	                              @NonNull List<DrawPathData31> pathsData) {
 		PathPoint pathPoint = getArrowPathPoint(0, 0, style, 0, 0);
+		pathPoint.scaled = false;
 		Bitmap pointBitmap = pathPoint.drawBitmap(getContext());
 		double pxStep = style.getPointStepPx(1f);
 		buildVectorLine(collection, baseOrder, lineId, color, width, approximationEnabled,
@@ -287,6 +288,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		float y;
 		double angle;
 		GeometryWayStyle<?> style;
+		boolean scaled = true;
 
 		private final Matrix matrix = new Matrix();
 
@@ -306,6 +308,23 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			return style != null ? style.getPointBitmap() : null;
 		}
 
+		@Nullable
+		protected int[] getPointBitmapSize() {
+			Bitmap bitmap = getPointBitmap();
+			if (bitmap != null) {
+				float scaleCoef = 1f;
+				if (scaled) {
+					float styleWidth = style.getWidth(0);
+					if (styleWidth > 0) {
+						scaleCoef = (styleWidth / 2) / bitmap.getWidth();
+						scaleCoef = scaleCoef < 1 ? scaleCoef : 1f;
+					}
+				}
+				return new int[]{(int) (bitmap.getWidth() * scaleCoef), (int) (bitmap.getHeight() * scaleCoef)};
+			}
+			return null;
+		}
+
 		protected void draw(@NonNull Canvas canvas, @NonNull GeometryWayContext context) {
 			Bitmap bitmap = getPointBitmap();
 			if (bitmap != null && style != null) {
@@ -315,7 +334,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 
 				matrix.reset();
 				float styleWidth = style.getWidth(0);
-				if (styleWidth > 0) {
+				if (styleWidth > 0 && scaled) {
 					float scaleCoef = (styleWidth / 2) / bitmap.getWidth();
 					if (scaleCoef < 1) {
 						matrix.setScale(scaleCoef, scaleCoef, paintW2, paintH2);
@@ -343,15 +362,15 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 
 		@Nullable
 		public Bitmap drawBitmap(@NonNull GeometryWayContext context) {
-			Bitmap bitmap = getPointBitmap();
-			if (bitmap != null) {
+			int[] bitmapSize = getPointBitmapSize();
+			if (bitmapSize != null) {
 				int width;
 				int height;
 				if (angle == 0) {
-					width = bitmap.getWidth();
-					height = bitmap.getHeight();
+					width = bitmapSize[0];
+					height = bitmapSize[1];
 				} else {
-					float imageSize = (float) Math.sqrt(bitmap.getWidth() * bitmap.getWidth() + bitmap.getHeight() * bitmap.getHeight()) + 4f;
+					float imageSize = (float) Math.sqrt(bitmapSize[0] * bitmapSize[0] + bitmapSize[1] * bitmapSize[1]) + 4f;
 					width = (int) imageSize;
 					height = (int) imageSize;
 				}

@@ -130,6 +130,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private MapMarkersHelper mapMarkersHelper;
 	private GpxSelectionHelper selectedGpxHelper;
 
+	private List<SelectedGpxFile> selectedGPXFilesCache = new ArrayList<>();
 	private final Map<String, CachedTrack> segmentsCache = new HashMap<>();
 	private final Map<String, Set<TrkSegment>> renderedSegmentsCache = new HashMap<>();
 
@@ -267,9 +268,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		List<SelectedGpxFile> selectedGPXFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
-
 		cache.clear();
 		removeCachedUnselectedTracks(selectedGPXFiles);
+		selectedGPXFilesCache = selectedGPXFiles;
 		if (!selectedGPXFiles.isEmpty()) {
 			drawSelectedFilesSegments(canvas, tileBox, selectedGPXFiles, settings);
 			canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
@@ -290,8 +291,14 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private boolean updatePaints(int color, String width, boolean routePoints, boolean currentTrack, DrawSettings drawSettings, RotatedTileBox tileBox) {
 		RenderingRulesStorage rrs = view.getApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		boolean nightMode = drawSettings != null && drawSettings.isNightMode();
-		int hash = calculateHash(rrs, cachedTrackWidth, routePoints, nightMode, tileBox.getMapDensity(), tileBox.getZoom(),
-				defaultTrackColorPref.get(), defaultTrackWidthPref.get());
+		int hash;
+		if (!hasMapRenderer()) {
+			hash = calculateHash(rrs, cachedTrackWidth, routePoints, nightMode, tileBox.getMapDensity(), tileBox.getZoom(),
+					defaultTrackColorPref.get(), defaultTrackWidthPref.get());
+		} else {
+			hash = calculateHash(rrs, cachedTrackWidth, routePoints, nightMode, tileBox.getMapDensity(),
+					defaultTrackColorPref.get(), defaultTrackWidthPref.get());
+		}
 		boolean hashChanged = hash != cachedHash;
 		if (hashChanged) {
 			cachedHash = hash;
@@ -451,7 +458,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private void drawDirectionArrows(Canvas canvas, RotatedTileBox tileBox, List<SelectedGpxFile> selectedGPXFiles) {
-		if (!tileBox.isZoomAnimated()) {
+		if (!hasMapRenderer() && !tileBox.isZoomAnimated()) {
 			QuadRect correctedQuadRect = getCorrectedQuadRect(tileBox.getLatLonBounds());
 			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 				boolean showArrows = isShowArrowsForTrack(selectedGpxFile.getGpxFile());
@@ -690,13 +697,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			while (it.hasNext()) {
 				TrkSegment renderedSegment = it.next();
 				if (!segments.contains(renderedSegment)) {
-					if (renderedSegment.renderer instanceof RenderableSegment) {
-						RenderableSegment renderableSegment = (RenderableSegment) renderedSegment.renderer;
-						GpxGeometryWay geometryWay = renderableSegment.getGeometryWay();
-						if (geometryWay != null && geometryWay.hasMapRenderer()) {
-							geometryWay.resetSymbolProviders();
-						}
-					}
+					resetSymbolProviders(renderedSegment);
 					it.remove();
 				}
 			}
@@ -1060,17 +1061,48 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private void removeCachedUnselectedTracks(List<SelectedGpxFile> selectedGpxFiles) {
-		Set<String> cachedTracksPaths = segmentsCache.keySet();
 		List<String> selectedTracksPaths = new ArrayList<>();
 		for (SelectedGpxFile gpx : selectedGpxFiles) {
 			selectedTracksPaths.add(gpx.getGpxFile().path);
 		}
+		List<SelectedGpxFile> unselectedGpxFiles = new ArrayList<>();
+		for (SelectedGpxFile gpx : selectedGPXFilesCache) {
+			if (!selectedTracksPaths.contains(gpx.getGpxFile().path)) {
+				unselectedGpxFiles.add(gpx);
+			}
+		}
+		for (SelectedGpxFile gpx : unselectedGpxFiles) {
+			resetSymbolProviders(gpx.getPointsToDisplay());
+		}
+		Set<String> cachedTracksPaths = segmentsCache.keySet();
 		for (Iterator<String> iterator = cachedTracksPaths.iterator(); iterator.hasNext(); ) {
 			String cachedTrackPath = iterator.next();
 			boolean trackHidden = !selectedTracksPaths.contains(cachedTrackPath);
 			if (trackHidden) {
+				if (hasMapRenderer()) {
+					CachedTrack cachedTrack = segmentsCache.get(cachedTrackPath);
+					if (cachedTrack != null) {
+						resetSymbolProviders(cachedTrack.getAllCachedTrackSegments());
+					}
+				}
 				iterator.remove();
 			}
+		}
+	}
+
+	private void resetSymbolProviders(@NonNull TrkSegment segment) {
+		if (segment.renderer instanceof RenderableSegment) {
+			RenderableSegment renderableSegment = (RenderableSegment) segment.renderer;
+			GpxGeometryWay geometryWay = renderableSegment.getGeometryWay();
+			if (geometryWay != null && geometryWay.hasMapRenderer()) {
+				geometryWay.resetSymbolProviders();
+			}
+		}
+	}
+
+	private void resetSymbolProviders(@NonNull List<TrkSegment> segments) {
+		for (TrkSegment segment : segments) {
+			resetSymbolProviders(segment);
 		}
 	}
 

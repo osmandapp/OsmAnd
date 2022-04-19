@@ -68,6 +68,15 @@ public class CachedTrack {
 		}
 	}
 
+	@NonNull
+	public List<TrkSegment> getAllCachedTrackSegments() {
+		List<TrkSegment> result = new ArrayList<>();
+		for (List<TrkSegment> segments : segmentsCache.values()) {
+			result.addAll(segments);
+		}
+		return result;
+	}
+
 	public List<TrkSegment> getCachedTrackSegments(int zoom, @NonNull GradientScaleType scaleType) {
 		GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
 		boolean useFilteredGpx = selectedGpxFile.getFilteredSelectedGpxFile() != null;

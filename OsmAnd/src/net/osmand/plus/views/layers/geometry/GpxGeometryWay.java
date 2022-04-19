@@ -64,6 +64,9 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		if (customWidth != trackWidth) {
 			updateStylesWidth(trackWidth);
 		}
+		if (this.drawDirectionArrows != drawDirectionArrows) {
+			resetSymbolProviders();
+		}
 		updatePaints(trackWidth, routeColoringType);
 		getDrawer().setColoringType(routeColoringType);
 

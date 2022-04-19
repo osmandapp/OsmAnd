@@ -13,6 +13,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.Shader;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.core.jni.QListFColorARGB;
 import net.osmand.core.jni.VectorLinesCollection;
@@ -139,6 +140,7 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 	                              int lineId, int baseOrder, boolean shouldDrawArrows, boolean approximationEnabled,
 	                              @NonNull GeometryWayStyle<?> style, @NonNull List<DrawPathData31> pathsData) {
 		PathPoint pathPoint = getArrowPathPoint(0, 0, style, 0, 0);
+		pathPoint.scaled = false;
 		Bitmap pointBitmap = pathPoint.drawBitmap(getContext());
 		double pxStep = style.getPointStepPx(1f);
 		QListFColorARGB colorizationMapping = getColorizationMapping(pathsData);
@@ -226,6 +228,28 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 			this.percent = percent;
 		}
 
+		@Nullable
+		@Override
+		protected int[] getPointBitmapSize() {
+			Bitmap bitmap = getPointBitmap();
+			if (bitmap != null) {
+				Context ctx = style.getCtx();
+				GeometrySolidWayStyle<?> arrowsWayStyle = (GeometrySolidWayStyle<?>) style;
+				if (arrowsWayStyle.useSpecialArrow()) {
+					int bitmapSize = (int) (arrowsWayStyle.getOuterCircleRadius() * 2 + AndroidUtils.dpToPx(ctx, 2));
+					return new int[]{bitmapSize, bitmapSize};
+				} else {
+					float scaleCoef = 1f;
+					float styleWidth = arrowsWayStyle.getWidth(0);
+					if (styleWidth > 0 && scaled) {
+						scaleCoef = (styleWidth / 2f) / bitmap.getWidth();
+					}
+					return new int[]{(int) (bitmap.getWidth() * scaleCoef), bitmap.getHeight()};
+				}
+			}
+			return null;
+		}
+
 		@Override
 		protected void draw(@NonNull Canvas canvas, @NonNull GeometryWayContext context) {
 			if (style instanceof GeometrySolidWayStyle && shouldDrawArrow()) {
@@ -237,9 +261,16 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 				GeometrySolidWayStyle<?> arrowsWayStyle = (GeometrySolidWayStyle<?>) style;
 				boolean useSpecialArrow = arrowsWayStyle.useSpecialArrow();
 
-				float newWidth = useSpecialArrow
-						? AndroidUtils.dpToPx(ctx, 12)
-						: arrowsWayStyle.getWidth(0) == 0 ? 0 : arrowsWayStyle.getWidth(0) / 2f;
+				float newWidth;
+				if (useSpecialArrow) {
+					newWidth = AndroidUtils.dpToPx(ctx, 12);
+				} else {
+					if (scaled) {
+						newWidth = arrowsWayStyle.getWidth(0) == 0 ? 0 : arrowsWayStyle.getWidth(0) / 2f;
+					} else {
+						newWidth = bitmap.getWidth();
+					}
+				}
 				float paintH2 = bitmap.getHeight() / 2f;
 				float paintW2 = newWidth == 0 ? 0 : newWidth / 2f;
 
