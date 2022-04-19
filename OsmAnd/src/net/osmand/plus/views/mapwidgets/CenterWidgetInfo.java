@@ -1,6 +1,7 @@
 package net.osmand.plus.views.mapwidgets;
 
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 
@@ -26,8 +27,9 @@ public class CenterWidgetInfo extends MapWidgetInfo {
 	}
 
 	@Override
-	public boolean isVisibleForAppMode(@NonNull ApplicationMode appMode) {
-		return true;
+	public boolean isEnabledForAppMode(@NonNull ApplicationMode appMode) {
+		OsmandPreference<Boolean> visibilityPref = widget.getWidgetVisibilityPref();
+		return visibilityPref == null || visibilityPref.getModeValue(appMode);
 	}
 
 	@Override

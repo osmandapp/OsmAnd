@@ -11,6 +11,10 @@
 	Thx - Hardy
 -->
 
+    <string name="no_widgets_descr">Add one or more widgets from the list of available widgets.</string>
+    <string name="no_widgets_here_yet">No widgets here yet</string>
+    <string name="available_widgets">Available widgets</string>
+    <string name="snackbar_page_removed">\"Page %1$s\" has been removed.</string>
     <string name="map_widget_altitude">Altitude of current location</string>
     <string name="map_widget_distance_to_destination">Distance to destination</string>
     <string name="map_widget_current_speed">Current speed</string>
