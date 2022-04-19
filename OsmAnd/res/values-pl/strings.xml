@@ -4432,7 +4432,7 @@
     <string name="reading_files">Czytanie plików…</string>
     <string name="no_items_selected_warning">Wybierz co najmniej jedną pozycję</string>
     <string name="shared_storage_third_step">Przyznaj uprawnienia dostępu do folderu. Bez tego OsmAnd nie może kopiować plików.</string>
-    <string name="shared_storage_migration">Migracja pamięci współdzielonej</string>
+    <string name="shared_storage_migration">Migracja współdzielonej pamięci masowej</string>
     <string name="gps_filter_speed_altitude_desc">Na wykresie i mapie pojawią się tylko punkty trasy odpowiadające ustawionemu interwałowi, pozostałe zostaną ukryte.</string>
     <string name="gps_filter_smoothing_desc">Ustaw progową odległość między punktami.
 \nPunkty toru znajdujące się w odległości nie mniejszej niż ta odległość od ostatniego widocznego punktu zostaną ukryte.
@@ -4450,7 +4450,7 @@
     <string name="shared_string_copy_to">Kopiuj do</string>
     <string name="save_changes_into_file">Zapisz zmiany do pliku</string>
     <string name="gps_filter_precision">Dokładność GPS</string>
-    <string name="gps_filter_actions_description">OsmAnd zastosuje zmiany do ścieżki bez aktualizowania pliku. Zmiany można zapisywać ręcznie.</string>
+    <string name="gps_filter_actions_description">OsmAnd zastosuje zmiany w ścieżce bez aktualizacji pliku. Zmiany można zapisać ręcznie.</string>
     <string name="storage_migration_wrong_folder_warning">W wybranym folderze nie znaleziono danych OsmAnd. Proszę spróbuj ponownie.</string>
     <string name="fold_unfold">zwiń/rozwiń</string>
     <string name="app_profile_type">Typ profilu aplikacji</string>
@@ -4473,7 +4473,7 @@
     <string name="not_enough_contributions_descr">Co najmniej %1$s zmian w ciągu ostatnich dwóch miesięcy %2$s jest wymagane, aby uzyskać dostęp do nieograniczonych godzinowych aktualizacji map.</string>
     <string name="waypoint_template">Szablon punktu trasy</string>
     <string name="predefined_waypoint_appearance_description">Naciśnięcie tej akcji spowoduje automatyczne zapisanie punktu trasy z predefiniowanymi parametrami.</string>
-    <string name="always_ask_waypoint_appearance_description">Dotknięcie tej akcji otworzy ekran „Dodaj punkt trasy”, na którym możesz zmienić nazwę i wygląd.</string>
+    <string name="always_ask_waypoint_appearance_description">Stuknięcie tej akcji otworzy ekran „Dodaj punkt trasy”, na którym możesz zmienić nazwę i wygląd.</string>
     <string name="waypoint_appearance">Wygląd punktu trasy</string>
     <string name="track_file_description">Kliknięcie akcji spowoduje wyświetlenie dialogu ze wszystkimi dostępnymi ścieżkami do wybrania.</string>
     <string name="shared_string_not_used">Nieużywane</string>
@@ -4494,7 +4494,7 @@
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Nie ukrywaj tuneli dróg wodnych</string>
     <string name="turn_arrows">Strzałki skrętu</string>
     <string name="turn_arrows_descr">Wybierz, czy strzałki skrętu mają być wskazywane na linii trasy.</string>
-    <string name="rendering_attr_seabedDetail_description">Dodatkowe informacje tekstowe na temat powierzchni dna morskiego_kwalifikacja, połączone typy powierzchni, kategoria i takson chwastów lub trawy morskiej</string>
+    <string name="rendering_attr_seabedDetail_description">Dodatkowe informacje tekstowe o powierzchni dna morskiego, połączone typy powierzchni, kategoria i takson chwastów lub trawy morskiej</string>
     <string name="rendering_value_category_name">Kategoria</string>
     <string name="rendering_value_all_name">Wszystkie</string>
     <string name="rendering_attr_seabedDetail_name">Szczegóły dna morskiego</string>
@@ -4502,7 +4502,7 @@
     <string name="quick_action_add_route_descr">Przycisk rozpoczęcia trasy od środka ekranu.</string>
     <string name="gpx_no_routes_descr">Możesz użyć narzędzia „%1$s”, aby zapisać trasę w pliku.</string>
     <string name="gpx_no_routes_title">Brak tras</string>
-    <string name="save_track_to_gpx_descrp">Automatyczne uruchamianie nagrywania ścieżek podczas nawigacji i automatyczne zapisywanie później.</string>
+    <string name="save_track_to_gpx_descrp">Automatyczne rozpoczynanie nagrywania ścieżki podczas nawigacji i automatyczne zapisywanie po zakończeniu.</string>
     <string name="rendering_value_omit_name">Pomiń</string>
     <string name="google_play_services">Usługi Google Play</string>
     <string name="location_source">Źródło lokalizacji</string>
@@ -4554,4 +4554,31 @@
     <string name="simulation_constant_mode_desc">Symulacja będzie wykonywana ze stałą wybraną prędkością.</string>
     <string name="simulation_constant_mode_title">Stała prędkość</string>
     <string name="speed_mode">Tryb prędkości</string>
+    <string name="map_widget_altitude">Wysokość nad poziomem morza w bieżącej lokalizacji</string>
+    <string name="map_widget_distance_to_destination">Odległość do celu</string>
+    <string name="apply_to_existing_favorites_descr">Zastosować zmiany do istniejących ulubionych punktów grupy czy tylko do nowych\?</string>
+    <string name="add_page">Dodaj stronę</string>
+    <string name="points_selection_descr">Zamknąć i utracić wszystkie zmiany\?</string>
+    <string name="simulation_real_mode_desc">Na prostych odcinkach dróg prędkość będzie zbliżona do maksymalnej dozwolonej prędkości.
+\nNa skrzyżowaniach symulacja będzie zwalniać.
+\nW przypadku sygnalizacji świetlnej, znaków stop itp. zostaną zastosowane dodatkowe kary.</string>
+    <string name="apply_to_existing_points_descr">Zastosować zmiany do istniejących punktów grupy czy tylko do nowych\?</string>
+    <string name="apply_to_existing">Zastosuj do istniejących</string>
+    <string name="rendering_attr_horse_scale_common_name">Wspólny</string>
+    <string name="routing_attr_carriage_restrictions_description">Rozważ uprawnienia dostępu dla pojazdów konnych</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Trasy lekkiej kolei</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Trasy kolei jednoszynowej</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Trasy kolejki linowej</string>
+    <string name="zoom_levels_difference_description">Duża różnica między poziomami zbliżenia może zwiększać wielkość pobranych danych.</string>
+    <string name="navigate_point_format_swiss_grid">Szwajcarska siatka (CH1903)</string>
+    <string name="navigate_point_format_swiss_grid_plus">Szwajcarska siatka (CH1903+)</string>
+    <string name="routing_attr_carriage_restrictions_name">Ograniczenia przewozu</string>
+    <string name="apply_only_to_new_favorites">Zastosuj tylko do nowych ulubionych</string>
+    <string name="change_default_appearance">Zmień domyślny wygląd</string>
+    <string name="rendering_attr_horse_scale_impossible_name">Niemożliwy</string>
+    <string name="import_tracks_descr">%1$s, zawiera %2$s oddzielne ścieżki. Wybierz ścieżki do zaimportowania.</string>
+    <string name="page_number">Strona %1$s</string>
+    <string name="apply_only_to_new_points">Zastosuj tylko do nowych punktów</string>
+    <string name="simulation_preview_mode_desc">Prędkość symulacji będzie maksymalna na prostych odcinkach i zwolni tylko na skrzyżowaniach.</string>
+    <string name="simulation_preview_mode_title">Tryb szybkiego podglądu</string>
 </resources>
