@@ -2,31 +2,26 @@ package net.osmand.plus.plugins.development;
 
 import android.os.AsyncTask;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.PlatformUtil;
 import net.osmand.plus.activities.ActionBarProgressActivity;
 
 import org.apache.commons.logging.Log;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-
-public abstract class BaseLogcatActivity extends ActionBarProgressActivity {
+public abstract class BaseLogcatActivity extends ActionBarProgressActivity implements LogcatMessageListener {
 
 	private static final Log log = PlatformUtil.getLog(BaseLogcatActivity.class);
 
 	public static final String LOGCAT_PATH = "logcat.log";
-	public static int MAX_BUFFER_LOG = 10000;
 
 	protected final List<String> logs = new ArrayList<>();
 
@@ -60,10 +55,15 @@ public abstract class BaseLogcatActivity extends ActionBarProgressActivity {
 	}
 
 	protected void stopLogcatAsyncTask() {
-		if (logcatAsyncTask != null && logcatAsyncTask.getStatus() == AsyncTask.Status.RUNNING) {
-			logcatAsyncTask.cancel(false);
-			logcatAsyncTask.stopLogging();
+		if (logcatAsyncTask != null) {
+			logcatAsyncTask.stop();
 		}
+	}
+
+	@Override
+	public void onLogcatLogs(String filterLevel, List<String> logs) {
+		this.logs.addAll(logs);
+		onLogEntryAdded();
 	}
 
 	private static class SaveLogsAsyncTask extends AsyncTask<Void, String, File> {
@@ -110,61 +110,7 @@ public abstract class BaseLogcatActivity extends ActionBarProgressActivity {
 			BaseLogcatActivity activity = this.activityRef.get();
 			activity.setSupportProgressBarIndeterminateVisibility(false);
 			activity.getMyApplication().sendCrashLog(file);
-			}
-		}
-
-	private static class LogcatAsyncTask extends AsyncTask<Void, String, Void> {
-
-		private Process processLogcat;
-		private final WeakReference<BaseLogcatActivity> activityRef;
-		private final String filterLevel;
-
-		private LogcatAsyncTask(BaseLogcatActivity activity, String filterLevel) {
-			this.activityRef = new WeakReference<>(activity);
-			this.filterLevel = filterLevel;
-		}
-
-		@Override
-		protected Void doInBackground(Void... voids) {
-			try {
-				String pid = String.valueOf(android.os.Process.myPid());
-				String[] command =  {"logcat", filterLevel, "--pid=" + pid, "-T", String.valueOf(MAX_BUFFER_LOG)};
-
-				processLogcat = Runtime.getRuntime().exec(command);
-				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(processLogcat.getInputStream()));
-
-				String line;
-				while ((line = bufferedReader.readLine()) != null && activityRef.get() != null) {
-					if (isCancelled()) {
-						break;
-					}
-					publishProgress(line);
-				}
-				stopLogging();
-			} catch (IOException e) {
-				// ignore
-			} catch (Exception e) {
-				log.error(e);
-			}
-
-			return null;
-		}
-
-		@Override
-		protected void onProgressUpdate(String... values) {
-			if (values.length > 0 && !isCancelled()) {
-				BaseLogcatActivity activity = activityRef.get();
-				if (activity != null) {
-					activity.logs.addAll(Arrays.asList(values));
-					activity.onLogEntryAdded();
-				}
-			}
-		}
-
-		private void stopLogging() {
-			if (processLogcat != null) {
-				processLogcat.destroy();
-			}
 		}
 	}
+
 }
