@@ -107,6 +107,7 @@
 			osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
 
 		<LinearLayout
+			android:id="@+id/apply_button_container"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_gravity="bottom"

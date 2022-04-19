@@ -3,6 +3,7 @@ package net.osmand.plus.track.fragments;
 import static net.osmand.GPXUtilities.GPXTrackAnalysis;
 import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
 import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
+import static net.osmand.plus.mapcontextmenu.controllers.NetworkRouteMenuController.getIconForRouteObject;
 import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_BY_INTERVALS_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_ON_MAP_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
@@ -64,6 +65,7 @@ import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
+import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -107,6 +109,7 @@ import net.osmand.plus.track.cards.GpxInfoCard;
 import net.osmand.plus.track.cards.OptionsCard;
 import net.osmand.plus.track.cards.OverviewCard;
 import net.osmand.plus.track.cards.PointsGroupsCard;
+import net.osmand.plus.track.cards.RouteInfoCard;
 import net.osmand.plus.track.cards.SegmentsCard;
 import net.osmand.plus.track.cards.TrackPointsCard;
 import net.osmand.plus.track.fragments.DisplayGroupsBottomSheet.DisplayPointGroupsCallback;
@@ -164,6 +167,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private OptionsCard optionsCard;
 	private DescriptionCard descriptionCard;
 	private GpxInfoCard gpxInfoCard;
+	private RouteInfoCard routeInfoCard;
 	private OverviewCard overviewCard;
 	private TrackPointsCard pointsCard;
 	private PointsGroupsCard groupsCard;
@@ -188,7 +192,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private String callingFragmentTag;
 	private SelectedGpxPoint gpxPoint;
 	private TrackChartPoints trackChartPoints;
-	private Drawable trackIcon;
+	private RenderedObject renderedObject;
 
 	private Float heading;
 	private Location lastLocation;
@@ -378,8 +382,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		this.callingFragmentTag = callingFragmentTag;
 	}
 
-	public void setTrackIcon(Drawable trackIcon) {
-		this.trackIcon = trackIcon;
+	public void setRenderedObject(RenderedObject renderedObject) {
+		this.renderedObject = renderedObject;
 	}
 
 	public void setGpxPoint(SelectedGpxPoint point) {
@@ -460,8 +464,11 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		AndroidUiHelper.updateVisibility(displayGroupsButton, hasPointsGroups());
 		AndroidUiHelper.updateVisibility(headerIcon, menuType != TrackMenuType.OPTIONS);
 
-		Drawable icon = trackIcon != null ? trackIcon : app.getUIUtilities().getThemedIcon(R.drawable.ic_action_polygom_dark);
-		headerIcon.setImageDrawable(icon);
+		Drawable icon = null;
+		if (renderedObject != null) {
+			icon = getIconForRouteObject(app, renderedObject);
+		}
+		headerIcon.setImageDrawable(icon != null ? icon : app.getUIUtilities().getThemedIcon(R.drawable.ic_action_polygom_dark));
 	}
 
 	@NonNull
@@ -713,6 +720,14 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				} else {
 					descriptionCard = new DescriptionCard(getMapActivity(), this, displayHelper.getGpx());
 					cardsContainer.addView(descriptionCard.build(mapActivity));
+				}
+				if (renderedObject != null) {
+					if (routeInfoCard != null && routeInfoCard.getView() != null) {
+						reattachCard(cardsContainer, routeInfoCard);
+					} else {
+						routeInfoCard = new RouteInfoCard(getMapActivity(), renderedObject);
+						cardsContainer.addView(routeInfoCard.build(mapActivity));
+					}
 				}
 				if (gpxInfoCard != null && gpxInfoCard.getView() != null) {
 					reattachCard(cardsContainer, gpxInfoCard);
@@ -1638,7 +1653,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	                                   @Nullable String tabToOpenName,
 	                                   boolean adjustMapPosition,
 	                                   @Nullable GPXTrackAnalysis analyses,
-	                                   @Nullable Drawable trackIcon) {
+	                                   @Nullable RenderedObject renderedObject) {
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Bundle args = new Bundle();
@@ -1650,7 +1665,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			fragment.setAnalyses(analyses);
 			fragment.setSelectedGpxFile(selectedGpxFile);
 			fragment.setReturnScreenName(returnScreenName);
-			fragment.setTrackIcon(trackIcon);
+			fragment.setRenderedObject(renderedObject);
 			fragment.setCallingFragmentTag(callingFragmentTag);
 			fragment.setAdjustMapPosition(adjustMapPosition);
 			if (tabToOpenName != null) {

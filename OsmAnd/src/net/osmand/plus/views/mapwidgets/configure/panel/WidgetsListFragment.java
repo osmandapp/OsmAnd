@@ -6,11 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnScrollChangedListener;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
@@ -30,11 +29,17 @@ import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment;
-import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.WidgetViewHolder;
+import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AddedWidgetViewHolder;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
+import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DISABLED_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 
 public class WidgetsListFragment extends Fragment implements OnScrollChangedListener {
 
@@ -47,9 +52,11 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	private WidgetsPanel selectedPanel;
 	private ApplicationMode selectedAppMode;
 
+	private View view;
 	private View changeOrderListButton;
 	private View changeOrderFooterButton;
-	private LinearLayout widgetsContainer;
+	private ViewGroup enabledWidgetsContainer;
+	private ViewGroup availableWidgetsContainer;
 
 	private boolean nightMode;
 
@@ -75,9 +82,10 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		inflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View view = inflater.inflate(R.layout.fragment_widgets_list, container, false);
+		view = inflater.inflate(R.layout.fragment_widgets_list, container, false);
 
-		widgetsContainer = view.findViewById(R.id.widgets_list);
+		enabledWidgetsContainer = view.findViewById(R.id.enabled_widgets_list);
+		availableWidgetsContainer = view.findViewById(R.id.available_widgets_list);
 		changeOrderListButton = view.findViewById(R.id.change_order_button_in_list);
 		changeOrderFooterButton = view.findViewById(R.id.change_order_button_in_bottom);
 
@@ -127,79 +135,105 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	}
 
 	public void updateContent() {
-		widgetsContainer.removeAllViews();
+		enabledWidgetsContainer.removeAllViews();
+		availableWidgetsContainer.removeAllViews();
 
 		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
+
+		int enabledAvailableFilter = ENABLED_MODE | AVAILABLE_MODE;
+		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(selectedAppMode, selectedPanel, enabledAvailableFilter);
+		boolean noEnabledWidgets = Algorithms.isEmpty(enabledWidgets);
+
+		View noWidgetsContainer = view.findViewById(R.id.no_widgets_container);
+		AndroidUiHelper.updateVisibility(noWidgetsContainer, noEnabledWidgets);
+		if (noEnabledWidgets) {
+			ImageView noWidgetsImage = view.findViewById(R.id.no_widgets_image);
+			Drawable noWidgetsIcon = app.getUIUtilities().getIcon(selectedPanel.getIconId(), nightMode);
+			noWidgetsImage.setImageDrawable(noWidgetsIcon);
+		} else {
+			inflateEnabledWidgetItems(inflater);
+		}
+
+		int disabledAvailableFilter = AVAILABLE_MODE | DISABLED_MODE;
+		Set<MapWidgetInfo> disabledWidgets = widgetRegistry
+				.getWidgetsForPanel(selectedAppMode, selectedPanel, disabledAvailableFilter);
+		boolean allWidgetsEnabled = Algorithms.isEmpty(disabledWidgets);
+
+		View availableWidgetsCard = view.findViewById(R.id.available_widgets_container);
+		AndroidUiHelper.updateVisibility(availableWidgetsCard, !allWidgetsEnabled);
+		if (!allWidgetsEnabled) {
+			inflateWidgetItemsViews(disabledWidgets, inflater, availableWidgetsContainer,
+					R.layout.configure_screen_list_item_available_widget);
+		}
+	}
+
+	private void inflateEnabledWidgetItems(@NonNull LayoutInflater inflater) {
+		int enabledLayoutId = R.layout.configure_screen_widget_item;
+		int enabledAvailableFilter = AVAILABLE_MODE | ENABLED_MODE;
 		if (selectedPanel.isPagingAllowed()) {
 			List<Set<MapWidgetInfo>> pagedWidgets =
-					widgetRegistry.getAvailablePagedWidgetsForPanel(selectedAppMode, selectedPanel);
+					widgetRegistry.getPagedWidgetsForPanel(selectedAppMode, selectedPanel, enabledAvailableFilter);
 			for (int i = 0; i < pagedWidgets.size(); i++) {
 				inflatePageItemView(i, inflater);
-				inflatePageItemsViews(pagedWidgets.get(i), inflater);
+				inflateWidgetItemsViews(pagedWidgets.get(i), inflater, enabledWidgetsContainer, enabledLayoutId);
 			}
 		} else {
-			inflatePageItemsViews(widgetRegistry.getAvailableWidgetsForPanel(selectedAppMode, selectedPanel), inflater);
+			Set<MapWidgetInfo> widgets = widgetRegistry
+					.getWidgetsForPanel(selectedAppMode, selectedPanel, enabledAvailableFilter);
+			inflateWidgetItemsViews(widgets, inflater, enabledWidgetsContainer, enabledLayoutId);
 		}
 	}
 
 	private void inflatePageItemView(int index, @NonNull LayoutInflater inflater) {
-		View view = inflater.inflate(R.layout.configure_screen_list_item_page, widgetsContainer, false);
+		View view = inflater.inflate(R.layout.configure_screen_list_item_page, enabledWidgetsContainer, false);
 		View topDivider = view.findViewById(R.id.top_divider);
 		TextView pageText = view.findViewById(R.id.page);
 		AndroidUiHelper.updateVisibility(topDivider, index > 0);
 		pageText.setText(getString(R.string.page_number, String.valueOf(index + 1)));
-		widgetsContainer.addView(view);
+		enabledWidgetsContainer.addView(view);
 	}
 
-	private void inflatePageItemsViews(@NonNull Set<MapWidgetInfo> widgetsInfo, @NonNull LayoutInflater inflater) {
+	private void inflateWidgetItemsViews(@NonNull Set<MapWidgetInfo> widgetsInfo,
+	                                     @NonNull LayoutInflater inflater,
+	                                     @NonNull ViewGroup container,
+	                                     @LayoutRes int layoutId) {
 		int profileColor = selectedAppMode.getProfileColor(nightMode);
 		int defaultIconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
+		List<MapWidgetInfo> widgets = new ArrayList<>(widgetsInfo);
 
-		for (MapWidgetInfo widgetInfo : widgetsInfo) {
-			View view = inflater.inflate(R.layout.configure_screen_widget_item, widgetsContainer, false);
+		for (int i = 0; i < widgets.size(); i++) {
+			MapWidgetInfo widgetInfo = widgets.get(i);
+
+			View view = inflater.inflate(layoutId, container, false);
 
 			TextView title = view.findViewById(R.id.title);
 			title.setText(widgetInfo.getTitle(app));
 			AndroidUiHelper.updateVisibility(view.findViewById(R.id.description), false);
 
-			boolean selected = widgetInfo.isSelected(selectedAppMode);
-
 			ImageView imageView = view.findViewById(R.id.icon);
-			WidgetViewHolder.updateWidgetIcon(imageView, widgetInfo, profileColor, defaultIconColor, selected, nightMode);
+			AddedWidgetViewHolder.updateWidgetIcon(imageView, widgetInfo, profileColor, defaultIconColor, true, nightMode);
 
 			ImageView secondaryIcon = view.findViewById(R.id.secondary_icon);
-			secondaryIcon.setImageResource(R.drawable.ic_action_additional_option);
-			AndroidUiHelper.updateVisibility(secondaryIcon, widgetInfo.getWidgetState() != null);
+			if (secondaryIcon != null) {
+				secondaryIcon.setImageResource(R.drawable.ic_action_additional_option);
+				AndroidUiHelper.updateVisibility(secondaryIcon, widgetInfo.getWidgetState() != null);
 
-			CompoundButton compoundButton = view.findViewById(R.id.compound_button);
-			compoundButton.setChecked(selected);
-			UiUtilities.setupCompoundButton(nightMode, profileColor, compoundButton);
-
-			view.findViewById(R.id.switch_container).setOnClickListener(view1 -> {
-				compoundButton.performClick();
-
-				boolean checked = compoundButton.isChecked();
-				WidgetViewHolder.updateWidgetIcon(imageView, widgetInfo, profileColor, defaultIconColor, checked, nightMode);
-				widgetRegistry.setVisibility(widgetInfo, checked);
-			});
-
-			view.setOnClickListener(v -> {
-				if (widgetInfo.getWidgetState() == null) {
-					boolean checked = !compoundButton.isChecked();
-					compoundButton.setChecked(checked);
-					WidgetViewHolder.updateWidgetIcon(imageView, widgetInfo, profileColor, defaultIconColor, checked, nightMode);
-					widgetRegistry.setVisibility(widgetInfo, checked);
-				} else {
+				view.setOnClickListener(v -> {
 					CallbackWithObject<WidgetState> callback = result -> {
 						updateContent();
 						return true;
 					};
 					widgetRegistry.showPopUpMenu(view, callback, widgetInfo.getWidgetState(), selectedAppMode,
-							compoundButton.isChecked(), nightMode);
-				}
-			});
-			setupListItemBackground(view);
-			widgetsContainer.addView(view);
+							true, nightMode);
+				});
+				setupListItemBackground(view);
+			}
+
+			View bottomDivider = view.findViewById(R.id.bottom_divider);
+			boolean last = i + 1 == widgets.size();
+			AndroidUiHelper.updateVisibility(bottomDivider, !last);
+
+			container.addView(view);
 		}
 	}
 

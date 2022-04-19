@@ -72,37 +72,43 @@ public class NetworkRouteMenuController extends MenuController {
 		if (!Algorithms.isEmpty(routeKeys)) {
 			RouteKey routeKey = routeKeys.get(0);
 
-			String tag = routeKey.type.getTag();
-			String iconPrefix = "route_" + tag + "__osmc_foreground__";
-			String backgroundPrefix = "route_" + tag + "__osmc_background__";
-			String osmcText = renderedObject.getTagValue(tag + "_route_osmc_text");
-			String textColor = renderedObject.getTagValue(tag + "_route_osmc_textcolor");
+			Pair<String, Integer> foreground = getForegroundIconIdWithName(app, routeKey);
+			Pair<String, Integer> background = getBackgroundIconIdWithName(app, routeKey);
 
-			int iconRes = getIconId(app, routeKey.set, iconPrefix, "mm_osmc_", "");
-			int backgroundRes = getIconId(app, routeKey.set, backgroundPrefix, "h_osmc_", "_bg");
+			UiUtilities uiUtilities = app.getUIUtilities();
+			Drawable foregroundIcon = foreground != null ? uiUtilities.getIcon(foreground.second) : null;
+			Drawable backgroundIcon = background != null ? uiUtilities.getIcon(background.second) : null;
 
-			Drawable icon = iconRes != 0 ? app.getUIUtilities().getIcon(iconRes) : null;
-			Drawable background = backgroundRes != 0 ? app.getUIUtilities().getIcon(backgroundRes) : null;
-
-			if (icon != null && background != null) {
-				return UiUtilities.getLayeredIcon(background, icon);
+			if (foregroundIcon != null && backgroundIcon != null) {
+				return UiUtilities.getLayeredIcon(backgroundIcon, foregroundIcon);
 			}
-			return icon != null ? icon : background;
+			return foregroundIcon != null ? foregroundIcon : backgroundIcon;
 		}
 		return null;
 	}
 
-	private static int getIconId(@NonNull OsmandApplication app, @NonNull Set<String> routeTags,
-	                             @NonNull String key, @NonNull String prefix, @NonNull String suffix) {
+	public static Pair<String, Integer> getForegroundIconIdWithName(@NonNull OsmandApplication app, @NonNull RouteKey routeKey) {
+		String key = "route_" + routeKey.type.getTag() + "__osmc_foreground__";
+		return getIconIdWithName(app, routeKey.set, key, "mm_osmc_", "");
+	}
+
+	public static Pair<String, Integer> getBackgroundIconIdWithName(@NonNull OsmandApplication app, @NonNull RouteKey routeKey) {
+		String key = "route_" + routeKey.type.getTag() + "__osmc_background__";
+		return getIconIdWithName(app, routeKey.set, key, "h_osmc_", "_bg");
+	}
+
+	private static Pair<String, Integer> getIconIdWithName(@NonNull OsmandApplication app, @NonNull Set<String> routeTags,
+	                                                       @NonNull String key, @NonNull String prefix, @NonNull String suffix) {
 		for (String tag : routeTags) {
 			if (tag.startsWith(key)) {
-				String iconName = prefix + tag.replace(key, "") + suffix;
+				String name = tag.replace(key, "");
+				String iconName = prefix + name + suffix;
 				int iconRes = app.getResources().getIdentifier(iconName, "drawable", app.getPackageName());
 				if (iconRes != 0) {
-					return iconRes;
+					return new Pair<>(name, iconRes);
 				}
 			}
 		}
-		return 0;
+		return null;
 	}
 }

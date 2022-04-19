@@ -12,9 +12,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.TreeMap;
 
 import androidx.annotation.NonNull;
+
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 
 public class WidgetsDataHolder {
 
@@ -47,20 +51,19 @@ public class WidgetsDataHolder {
 	public void initOrders(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode, boolean orderByDefault) {
 		pages.clear();
 		orders.clear();
+
+		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		int availableEnabledFilter = AVAILABLE_MODE | ENABLED_MODE;
+		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(appMode, selectedPanel, availableEnabledFilter);
+
 		if (orderByDefault) {
-			List<String> orderIds = selectedPanel.getOriginalOrder();
-			MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-			for (MapWidgetInfo widgetInfo : widgetRegistry.getAvailableWidgetsForPanel(appMode, selectedPanel)) {
-				int order = orderIds.indexOf(widgetInfo.key);
-				if (order == -1) {
-					order = WidgetsPanel.DEFAULT_ORDER;
-				}
+			for (MapWidgetInfo widgetInfo : widgets) {
+				int order = selectedPanel.getOriginalWidgetOrder(widgetInfo.key);
 				addWidgetToPage(widgetInfo.key, 0);
 				orders.put(widgetInfo.key, order);
 			}
 		} else {
-			MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-			for (MapWidgetInfo widgetInfo : widgetRegistry.getAvailableWidgetsForPanel(appMode, selectedPanel)) {
+			for (MapWidgetInfo widgetInfo : widgets) {
 				int page = selectedPanel.getWidgetPage(appMode, widgetInfo.key, app.getSettings());
 				int order = selectedPanel.getWidgetOrder(appMode, widgetInfo.key, app.getSettings());
 				addWidgetToPage(widgetInfo.key, page);
@@ -107,6 +110,40 @@ public class WidgetsDataHolder {
 		}
 
 		pages = newPages;
+	}
+
+	public void deleteWidget(@NonNull String widgetId) {
+		for (List<String> widgetsOfPage : pages.values()) {
+			widgetsOfPage.remove(widgetId);
+		}
+		orders.remove(widgetId);
+	}
+
+	public void shiftPageOrdersToRight(int page) {
+		for (Entry<String, Integer> entry : orders.entrySet()) {
+			String widgetId = entry.getKey();
+			int widgetPage = getWidgetPage(widgetId);
+			int widgetOrder = entry.getValue();
+
+			if (widgetPage == page) {
+				orders.put(widgetId, widgetOrder + 1);
+			}
+		}
+	}
+
+	public int getMaxOrderOfPage(int page) {
+		int maxOrder = -1;
+		for (Entry<String, Integer> entry : orders.entrySet()) {
+			String widgetId = entry.getKey();
+			int widgetPage = getWidgetPage(widgetId);
+			int widgetOrder = entry.getValue();
+
+			if (widgetPage == page && widgetOrder > maxOrder) {
+				maxOrder = widgetOrder;
+			}
+		}
+
+		return maxOrder;
 	}
 
 	public void onSaveInstanceState(@NonNull Bundle outState) {

@@ -46,9 +46,11 @@ public class WrapContentViewPager2Callback extends OnPageChangeCallback {
 			viewToWrap.measure(unspecifiedSpec, unspecifiedSpec);
 
 			LayoutParams pagerParams = viewPager.getLayoutParams();
-			pagerParams.width = viewToWrap.getMeasuredWidth();
-			pagerParams.height = viewToWrap.getMeasuredHeight();
-			viewPager.setLayoutParams(pagerParams);
+			if (pagerParams.width != viewToWrap.getMeasuredWidth() || pagerParams.height != viewToWrap.getMeasuredHeight()) {
+				pagerParams.width = viewToWrap.getMeasuredWidth();
+				pagerParams.height = viewToWrap.getMeasuredHeight();
+				viewPager.setLayoutParams(pagerParams);
+			}
 		}
 	}
 

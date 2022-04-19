@@ -148,6 +148,7 @@ public class RightWidgetsPanel extends FrameLayout {
 
 	public void update() {
 		adapter.updateIfNeeded();
+		WrapContentViewPager2Callback.resizeViewPagerToWrapContent(viewPager, null);
 		boolean show = adapter.getItemCount() > 0 && selfShowAllowed;
 		selfVisibilityChanging = true;
 		if (AndroidUiHelper.updateVisibility(this, show) && !show) {

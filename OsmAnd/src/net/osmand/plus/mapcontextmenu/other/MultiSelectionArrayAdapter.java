@@ -11,9 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.plus.R;
+import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu.MenuObject;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
@@ -21,10 +22,10 @@ import java.util.List;
 
 public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMenu.MenuObject> {
 
-	private MapMultiSelectionMenu menu;
+	private final MapMultiSelectionMenu menu;
 	private OnClickListener listener;
 
-	MultiSelectionArrayAdapter(@NonNull MapMultiSelectionMenu menu, int resource, @NonNull List<MapMultiSelectionMenu.MenuObject> objects) {
+	MultiSelectionArrayAdapter(@NonNull MapMultiSelectionMenu menu, int resource, @NonNull List<MenuObject> objects) {
 		super(menu.getMapActivity(), resource, objects);
 		this.menu = menu;
 	}
@@ -39,7 +40,7 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 		if (convertView == null) {
 			convertView = menu.getMapActivity().getLayoutInflater().inflate(R.layout.menu_obj_list_item, parent, false);
 		}
-		final MapMultiSelectionMenu.MenuObject item = getItem(position);
+		final MenuObject item = getItem(position);
 		if (item != null) {
 			if (!menu.isLandscapeLayout()) {
 				int listBgColor = ColorUtilities.getListBgColorId(!menu.isLight());

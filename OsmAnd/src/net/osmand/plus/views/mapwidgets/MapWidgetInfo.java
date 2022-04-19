@@ -107,12 +107,7 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 				: messageId;
 	}
 
-	public boolean isSelected(@NonNull ApplicationMode appMode) {
-		OsmandPreference<Boolean> visibilityPref = widget.getWidgetVisibilityPref();
-		return visibilityPref != null ? visibilityPref.getModeValue(appMode) : isVisibleForAppMode(appMode);
-	}
-
-	public abstract boolean isVisibleForAppMode(@NonNull ApplicationMode appMode);
+	public abstract boolean isEnabledForAppMode(@NonNull ApplicationMode appMode);
 
 	public abstract void showHideForAppMode(@NonNull ApplicationMode appMode, boolean show);
 
