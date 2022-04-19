@@ -4449,4 +4449,21 @@
     <string name="send_logcat_log">Logcat log verzenden</string>
     <string name="shared_string_grade">Helling</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="map_widget_current_speed">Huidige snelheid</string>
+    <string name="shared_string_buttons">Knoppen</string>
+    <string name="rendering_attr_horse_scale_common_name">Gemeenschappelijk</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Moeilijk</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">Gevaarlijk</string>
+    <string name="rendering_attr_horse_scale_impossible_name">Onmogelijk</string>
+    <string name="stop_download">Stop download</string>
+    <string name="stop_and_exit">Stop en exit</string>
+    <string name="shared_string_complete">volledig</string>
+    <string name="number_of_tiles">Aantal titels</string>
+    <string name="add_page">Pagina toevoegen</string>
+    <string name="page_number">Pagina %1$s</string>
+    <string name="shared_string_reading_file">Lees bestand…</string>
+    <string name="all_groups">Alle groepen</string>
+    <string name="list_of_groups">lijst v/d groepen</string>
+    <string name="import_tracks">Tracks importeren</string>
+    <string name="please_provide_group_name_message">Geef de groep een naam.</string>
 </resources>

@@ -78,7 +78,7 @@ public class RouteGeometryWay extends
 			List<Location> locations = route.getImmutableAllLocations();
 
 			if (coloringType.isGradient()) {
-				updateGradientRoute(tb, locations);
+				updateGradientWay(tb, locations);
 			} else if (coloringType.isRouteInfoAttribute()) {
 				updateSolidMultiColorRoute(tb, locations, route.getOriginalRoute());
 			} else {
@@ -179,7 +179,7 @@ public class RouteGeometryWay extends
 		if (mapRenderer == null) {
 			return;
 		}
-		int baseOrder = this.vectorLinesBaseOrder - 1000;
+		int baseOrder = this.baseOrder - 1000;
 		List<List<Location>> actionArrows = getActionArrows(actionPoints);
 		if (!actionArrows.isEmpty()) {
 			int lineIdx = 0;

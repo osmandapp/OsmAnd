@@ -2,7 +2,6 @@ package net.osmand.plus.views.layers.geometry;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
@@ -15,9 +14,6 @@ import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.QVectorPointI;
-import net.osmand.core.jni.VectorLineBuilder;
-import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportRoute;
@@ -181,7 +177,7 @@ public class PublicTransportGeometryWay extends GeometryWay<PublicTransportGeome
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			MapMarkersCollection transportRouteMarkers = this.transportRouteMarkers;
-			if (transportRouteMarkers == null) {
+			if (transportRouteMarkers == null || !mapRenderer.hasSymbolsProvider(transportRouteMarkers)) {
 				transportRouteMarkers = new MapMarkersCollection();
 				drawTransportStops(transportRouteMarkers);
 				if (!transportRouteMarkers.getMarkers().isEmpty()) {
@@ -212,7 +208,7 @@ public class PublicTransportGeometryWay extends GeometryWay<PublicTransportGeome
 					MapMarkerBuilder transportMarkerBuilder = new MapMarkerBuilder();
 					transportMarkerBuilder
 							.setIsAccuracyCircleSupported(false)
-							.setBaseOrder(vectorLinesBaseOrder - 1500)
+							.setBaseOrder(baseOrder - 1500)
 							.setPosition(new PointI(x, y))
 							.setIsHidden(false)
 							.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal)

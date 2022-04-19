@@ -69,7 +69,7 @@
     <string name="poi_public_transport_station">Stazione trasporto pubblico</string>
     <string name="poi_bus_station">Stazione autobus</string>
     <string name="poi_subway_entrance">Entrata metropolitana</string>
-    <string name="poi_subway_station">Sì</string>
+    <string name="poi_subway_station">Sì;stazione metropolitana</string>
     <string name="poi_aerodrome">Aeroporto</string>
     <string name="poi_helipad">Eliporto</string>
     <string name="poi_bicycle_rental">Noleggio bici</string>
@@ -691,7 +691,7 @@
     <string name="poi_club">Club</string>
     <string name="poi_pasta">Pasta</string>
     <string name="poi_fuel_type">Tipo di carburante</string>
-    <string name="poi_fuel_avia_type">Tipo di carburante (aeroplani)</string>
+    <string name="poi_fuel_avia_type">»Tipo di carburante (aeroplani)</string>
     <string name="poi_payment_type">Tipo di pagamento</string>
     <string name="poi_payment_fuel_type">Carte carburante</string>
     <string name="poi_additional_type">Ulteriori</string>
@@ -3009,4 +3009,15 @@
     <string name="poi_telecommunication">Telecomunicazioni</string>
     <string name="poi_authentication_app">Autenticazione tramite applicazione</string>
     <string name="poi_handwashing_hand_disinfection_no">Disinfettante per mani: no</string>
+    <string name="poi_access_general">Accesso generico</string>
+    <string name="poi_access_bicycle">Accesso biciclette</string>
+    <string name="poi_access_scooter">Accesso motocicli</string>
+    <string name="poi_authentication_contactless">Autenticazione senza contatto</string>
+    <string name="poi_authentication_chip_card">Autenticazione con carta a chip</string>
+    <string name="poi_authentication_key">Autenticazione con chiave</string>
+    <string name="poi_authentication_phone_call">Autenticazione con chiamata telefonica</string>
+    <string name="poi_authentication_short_message">Autenticazione con messaggio di testo</string>
+    <string name="poi_authentication_none">Autenticazione non richiesta</string>
+    <string name="poi_access_motorcar">Accesso motoveicoli</string>
+    <string name="poi_seamark_light">Faro</string>
 </resources>

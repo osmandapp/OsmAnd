@@ -61,6 +61,7 @@ public abstract class OsmandMapLayer {
 	private final Context ctx;
 	@Nullable
 	private MapActivity mapActivity;
+	protected boolean mapActivitInvalidated = false;
 
 	protected List<LatLon> fullObjectsLatLon;
 	protected List<LatLon> smallObjectsLatLon;
@@ -93,6 +94,9 @@ public abstract class OsmandMapLayer {
 
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
+		if (mapActivity != null) {
+			mapActivitInvalidated = true;
+		}
 	}
 
 	@NonNull

@@ -2294,7 +2294,7 @@
     <string name="open_mapillary">Открыть Mapillary</string>
     <string name="shared_string_install">Установить</string>
     <string name="shared_string_paused">Приостановлено</string>
-    <string name="rendering_value_fine_name">Правильно</string>
+    <string name="rendering_value_fine_name">Тончайшая</string>
     <string name="average">Средняя</string>
     <string name="ascent_descent">Подъём/спуск</string>
     <string name="moving_time">Время движения</string>
@@ -3891,8 +3891,8 @@
     <string name="profile_type_osmand_string">Профиль OsmAnd</string>
     <string name="profile_by_default_description">Выберите профиль, который будет использоваться при запуске приложения.</string>
     <string name="shared_string_last_used">Последний используемый</string>
-    <string name="routing_attr_allow_intermittent_description">Разрешить прерывистые водные пути</string>
-    <string name="routing_attr_allow_intermittent_name">Разрешить прерывистые водные пути</string>
+    <string name="routing_attr_allow_intermittent_description">Разрешить пересыхающие водные пути</string>
+    <string name="routing_attr_allow_intermittent_name">Разрешить пересыхающие водные пути</string>
     <string name="release_3_9">• Добавлена возможность экспорта и импорта всех данных, включая настройки, ресурсы, мои места.
 \n
 \n• Планирование маршрута: графики для сегментов трека с маршрутом, добавлена возможность создавать и редактировать несколько сегментов трека.
@@ -3987,8 +3987,8 @@
     <string name="activity_type_winter_name">Зима</string>
     <string name="activity_type_riding_name">Верховая езда</string>
     <string name="reverse_all_points">Инвертировать все точки</string>
-    <string name="routing_attr_allow_streams_description">Разрешить ручьи и стоки</string>
-    <string name="routing_attr_allow_streams_name">Разрешить ручьи и стоки</string>
+    <string name="routing_attr_allow_streams_description">Разрешить ручьи и канавы</string>
+    <string name="routing_attr_allow_streams_name">Разрешить ручьи и канавы</string>
     <string name="open_place_reviews_plugin_description">Отправляйте ссылки, отзывы и фотографии общественных мест, таких как рестораны, отели, музеи и путевые точки, в виде открытых данных https://openplacereviews.org/data/.
 \n
 \nПодробнее на http://openplacereviews.org</string>
@@ -4590,4 +4590,9 @@
     <string name="apply_only_to_new_favorites">Применить только к новым избранным</string>
     <string name="apply_to_existing_points_descr">Применить изменения к существующим точкам группы или только к новым\?</string>
     <string name="apply_to_existing">Применить к существующим</string>
+    <string name="add_page">Добавить страницу</string>
+    <string name="page_number">Страница %1$s</string>
+    <string name="map_widget_altitude">Высота текущего местоположения</string>
+    <string name="map_widget_distance_to_destination">Расстояние до пункта назначения</string>
+    <string name="map_widget_current_speed">Текущая скорость</string>
 </resources>

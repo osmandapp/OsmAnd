@@ -2182,7 +2182,7 @@
     <string name="shared_string_color">Farbe</string>
     <string name="max_speed">Höchstgeschwindigkeit</string>
     <string name="average_speed">Durchschnittsgeschwindigkeit</string>
-    <string name="shared_string_gpx_track">Track</string>
+    <string name="shared_string_gpx_track">Verfolgen</string>
     <string name="points_delete_multiple_succesful">Punkt(e) gelöscht.</string>
     <string name="points_delete_multiple">%1$d Punkt(e) löschen\?</string>
     <string name="track_points_category_name">Wegpunkte, POI, markierte Orte</string>
@@ -4585,4 +4585,15 @@
     <string name="simulation_preview_mode_title">Schneller Vorschaumodus</string>
     <string name="speed_mode">Geschwindigkeitsmodus</string>
     <string name="rendering_attr_showShareTaxiRoutes_name">Sammeltaxirouten</string>
+    <string name="map_widget_distance_to_destination">Entfernung zum Ziel</string>
+    <string name="map_widget_altitude">Höhe des aktuellen Standorts</string>
+    <string name="page_number">Seite %1$s</string>
+    <string name="map_widget_current_speed">Aktuelle Geschwindigkeit</string>
+    <string name="add_page">Seite hinzufügen</string>
+    <string name="apply_to_existing_points_descr">Änderungen auf die bestehenden Punkte der Gruppe anwenden oder nur auf neue\?</string>
+    <string name="apply_to_existing_favorites_descr">Änderungen auf die bestehenden Favoritenpunkte der Gruppe anwenden oder nur auf neue\?</string>
+    <string name="apply_to_existing">Anwenden auf bestehende</string>
+    <string name="apply_only_to_new_points">Nur auf neue anwenden</string>
+    <string name="apply_only_to_new_favorites">Nur auf neue Favoriten anwenden</string>
+    <string name="change_default_appearance">Standdardaussehen ändern</string>
 </resources>

@@ -45,7 +45,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 	//OpenGL
 	private final List<Integer> tx31 = new ArrayList<>();
 	private final List<Integer> ty31 = new ArrayList<>();
-	public int vectorLinesBaseOrder = -1;
+	public int baseOrder = -1;
 	public VectorLinesCollection vectorLinesCollection;
 	public VectorLineArrowsProvider vectorLineArrowsProvider;
 //	public static FColorARGB OUTLINE_COLOR;
@@ -151,6 +151,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		this.locationProvider = null;
 		this.styleMap = Collections.emptyMap();
 		this.zooms = new TreeMap<>();
+		resetSymbolProviders();
 	}
 
 	public void resetSymbolProviders() {
@@ -538,13 +539,24 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 				if (hasMapRenderer) {
 					MapRendererView mapRenderer = getMapRenderer();
 					VectorLinesCollection vectorLinesCollection = this.vectorLinesCollection;
-					if (mapRenderer != null && vectorLinesCollection != null && this.vectorLineArrowsProvider == null) {
+					VectorLineArrowsProvider vectorLineArrowsProvider = this.vectorLineArrowsProvider;
+					if (mapRenderer != null && vectorLinesCollection != null
+							&& (vectorLineArrowsProvider == null || !mapRenderer.hasSymbolsProvider(vectorLineArrowsProvider))) {
 						VectorLineArrowsProvider arrowsProvider = new VectorLineArrowsProvider(vectorLinesCollection);
 						this.vectorLineArrowsProvider = arrowsProvider;
 						mapRenderer.addSymbolsProvider(arrowsProvider);
 					}
 				} else {
 					drawer.drawArrowsOverPath(canvas, tb, tx, ty, angles, distances, distToFinish, styles);
+				}
+			} else {
+				if (hasMapRenderer) {
+					MapRendererView mapRenderer = getMapRenderer();
+					VectorLineArrowsProvider arrowsProvider = this.vectorLineArrowsProvider;
+					if (mapRenderer != null && arrowsProvider != null) {
+						mapRenderer.removeSymbolsProvider(arrowsProvider);
+						this.vectorLineArrowsProvider = null;
+					}
 				}
 			}
 		} finally {
@@ -576,14 +588,13 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			VectorLinesCollection vectorLinesCollection = this.vectorLinesCollection;
-			VectorLinesCollection collection = vectorLinesCollection == null ? new VectorLinesCollection() : vectorLinesCollection;
-			drawer.drawFullBorder(collection, vectorLinesBaseOrder + 1000, tb.getZoom(), pathsData);
-			drawer.drawSegmentBorder(collection, vectorLinesBaseOrder + 900, tb.getZoom(), pathsData);
-			drawer.drawPath(collection, vectorLinesBaseOrder, shouldDrawArrows(), pathsData);
-			if (vectorLinesCollection == null) {
-				mapRenderer.addSymbolsProvider(collection);
-				this.vectorLinesCollection = collection;
-			}
+			VectorLinesCollection collection = vectorLinesCollection == null || !mapRenderer.hasSymbolsProvider(vectorLinesCollection)
+					? new VectorLinesCollection() : vectorLinesCollection;
+			drawer.drawFullBorder(collection, baseOrder + 1000, tb.getZoom(), pathsData);
+			drawer.drawSegmentBorder(collection, baseOrder + 900, tb.getZoom(), pathsData);
+			drawer.drawPath(collection, baseOrder, shouldDrawArrows(), pathsData);
+			mapRenderer.addSymbolsProvider(collection);
+			this.vectorLinesCollection = collection;
 		}
 	}
 

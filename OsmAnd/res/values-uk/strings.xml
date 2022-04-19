@@ -1197,7 +1197,7 @@
     <string name="lang_cy">Валлійська</string>
     <string name="index_name_canada">Північна Америка - Канада</string>
     <string name="index_name_italy">Європа - Італія</string>
-    <string name="index_name_gb">Європа - Великобританія</string>
+    <string name="index_name_gb">Європа - Велика Британія</string>
     <string name="calculate_osmand_route_without_internet">Прокладання відрізку маршруту в OsmAnd офлайн</string>
     <string name="gpx_option_calculate_first_last_segment">Прокласти маршрут в OsmAnd для першого та останнього відрізків маршруту</string>
     <string name="use_displayed_track_for_navigation">Використовувати показаний трек для навігації?</string>
@@ -2309,7 +2309,7 @@
 \nПриблизне охоплення та якість мап:
 \n• Західна Європа: ****
 \n• Східна Європа: ***
-\n• Росія: ***
+\n• РФ: ***
 \n• Північна Америка: ***
 \n• Південна Америка: **
 \n• Азія: **
@@ -2318,7 +2318,7 @@
 \n• Африка: **
 \n• Антарктида: *
 \nБільшість країн по всьому світу доступні для завантаження!
-\nОтримайте надійний навігатор у своїй країні — будь то Україна, Польща, Франція, Німеччина, Мексика, Великобританія, Іспанія, Нідерланди, США, Бразилія чи будь-яка інша.</string>
+\nОтримайте надійний навігатор у своїй країні — будь то Україна, Польща, Франція, Німеччина, Мексика, Велика Британія, Іспанія, Нідерланди, США, Бразилія чи будь-яка інша.</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) — картографічний навігаційний застосунок з доступом до вільних та високоякісних даних OSM зі всього світу.
 \nНасолоджуйтесь голосовою та візуальною навігацією, переглядом точок інтересу (англ. POI), створенням та керуванням GPX треками, використовуючи показ ізоліній та даних про висоти, вибором між режимами для авто, вело та пішохідної навігації, редагуванням OSM та ще багато чим іншим.
 \n
@@ -2372,7 +2372,7 @@
     <string name="osmand_plus_extended_description_part8">Приблизне охоплення мап та якість:
 \n • Західна Європа: ****
 \n • Східна Європа: ***
-\n • Росія: ***
+\n • РФ: ***
 \n • Північна Америка: ***
 \n • Південна Америка: **
 \n • Азія: **
@@ -2381,7 +2381,7 @@
 \n • Африка: **
 \n • Антарктида: *
 \nБільшість країн по всьому світу доступні для завантаження!
-\nОтримайте надійний навігатор у Вашій країні — будь то Україна, Польща, Франція, Німеччина, Мексика, Великобританія, Іспанія, Нідерланди, США, Бразилія чи будь-яка інша…
+\nОтримайте надійний навігатор у Вашій країні — будь то Україна, Польща, Франція, Німеччина, Мексика, Велика Британія, Іспанія, Нідерланди, США, Бразилія чи будь-яка інша…
 \n</string>
     <string name="save_poi_too_many_uppercase">Назва містить забагато великих літер. Продовжити\?</string>
     <string name="shared_string_add_photos">Додати світлини</string>
@@ -4208,10 +4208,10 @@
     <string name="backup_error_size_is_exceeded">Максимальний розмір OsmAnd Cloud перевищено %1$s</string>
     <string name="backup_error_gzip_only_supported_upload">Файл слід надіслати у форматі .gzip</string>
     <string name="backup_error_file_not_available">Файл недоступний</string>
-    <string name="backup_error_token_is_not_valid">Щось не так із наданим ідентифікатором пристрою або токеном</string>
-    <string name="backup_error_token_is_not_valid_or_expired">Токен недійсний або його термін дії завершився</string>
+    <string name="backup_error_token_is_not_valid">Щось не так із наданим ID пристрою або токеном</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Токен недійсний або не чинний</string>
     <string name="backup_error_user_is_not_registered">Жоден користувач не зареєстрований з цією адресою е-пошти</string>
-    <string name="backup_error_no_valid_subscription">Немає дійсної передплати</string>
+    <string name="backup_error_no_valid_subscription">Немає чинної передплати</string>
     <string name="approximate_route_description">Прикріпіть маршрут до доріг на мапі, щоб отримати всі повороти та додаткові дані про плавність, типи доріг тощо.</string>
     <string name="release_4_0">• Резервне копіювання в хмарі
 \n
@@ -4550,7 +4550,7 @@
     <string name="routing_attr_carriage_restrictions_name">Обмеження на перевезення</string>
     <string name="routing_attr_carriage_restrictions_description">Враховувати дозволи на доступ для кінних транспортних засобів</string>
     <string name="rendering_attr_showTrainRoutes_name">Залізничні маршрути</string>
-    <string name="rendering_attr_showLightRailRoutes_name">Легкі залізничні маршрути</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Маршрути легкорейкового транспорту</string>
     <string name="rendering_attr_showFunicularRoutes_name">Фунікулерні маршрути</string>
     <string name="rendering_attr_showBusRoutes_name">Автобусні маршрути</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">Тролейбусні маршрути</string>
@@ -4570,7 +4570,7 @@
     <string name="rendering_attr_horse_scale_dangerous_name">Небезпечно</string>
     <string name="rendering_attr_showTramRoutes_name">Трамвайні маршрути</string>
     <string name="rendering_attr_horse_scale_critical_name">Критич.</string>
-    <string name="rendering_attr_showMonorailRoutes_name">Одноколійні маршрути</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Монорейкові маршрути</string>
     <string name="top_widgets_panel">Верхня панель</string>
     <string name="bottom_widgets_panel">Нижня панель</string>
     <string name="configure_screen_widgets_descr">Виберіть сторону екрана, щоб додати або переставити віджети.</string>
@@ -4585,4 +4585,9 @@
     <string name="apply_only_to_new_points">Застосовувати лише до нових точок</string>
     <string name="apply_only_to_new_favorites">Застосовувати лише до нових вибраних</string>
     <string name="change_default_appearance">Змінити типовий зовнішній вигляд</string>
+    <string name="map_widget_altitude">Висота поточного розташування</string>
+    <string name="map_widget_distance_to_destination">Відстань до пункту призначення</string>
+    <string name="map_widget_current_speed">Поточна швидкість</string>
+    <string name="add_page">Додати сторінку</string>
+    <string name="page_number">Сторінка %1$s</string>
 </resources>
