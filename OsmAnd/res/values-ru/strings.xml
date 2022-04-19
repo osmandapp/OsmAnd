@@ -4595,4 +4595,10 @@
     <string name="map_widget_altitude">Высота текущего местоположения</string>
     <string name="map_widget_distance_to_destination">Расстояние до пункта назначения</string>
     <string name="map_widget_current_speed">Текущая скорость</string>
+    <string name="shared_string_symbol">Символ</string>
+    <string name="on_with_params">%1$s на %2$s</string>
+    <string name="no_widgets_descr">Добавьте один или несколько виджетов из списка доступных.</string>
+    <string name="no_widgets_here_yet">Здесь пока нет виджетов</string>
+    <string name="available_widgets">Доступные виджеты</string>
+    <string name="snackbar_page_removed">Страница %1$s была удалена.</string>
 </resources>
