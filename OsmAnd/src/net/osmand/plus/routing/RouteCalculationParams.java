@@ -30,7 +30,7 @@ public class RouteCalculationParams {
 	public boolean initialCalculation;
 
 	public RouteCalculationProgress calculationProgress;
-	public RouteCalculationProgressCallback calculationProgressCallback;
+	public RouteCalculationProgressListener calculationProgressListener;
 	public RouteCalculationResultListener alternateResultListener;
 
 	public interface RouteCalculationResultListener {

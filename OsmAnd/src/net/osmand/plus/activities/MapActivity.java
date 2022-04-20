@@ -1,10 +1,5 @@
 package net.osmand.plus.activities;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_CRASH_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RATE_US_ID;
-import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
-
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
@@ -100,7 +95,7 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
-import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
+import net.osmand.plus.mapcontextmenu.other.DestinationReachedFragment;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
@@ -119,7 +114,7 @@ import net.osmand.plus.render.UpdateVectorRendererAsyncTask;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.IRouteInformationListener;
-import net.osmand.plus.routing.RouteCalculationProgressCallback;
+import net.osmand.plus.routing.RouteCalculationProgressListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper.TransportRouteCalculationProgressCallback;
 import net.osmand.plus.search.QuickSearchDialogFragment;
@@ -166,6 +161,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_CRASH_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RATE_US_ID;
+import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
@@ -506,10 +506,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private void createProgressBarForRouting() {
 		final ProgressBar pb = findViewById(R.id.map_horizontal_progress);
-		final RouteCalculationProgressCallback progressCallback = new RouteCalculationProgressCallback() {
+		final RouteCalculationProgressListener progressCallback = new RouteCalculationProgressListener() {
 
 			@Override
-			public void start() {
+			public void onCalculationStart() {
 				setupRouteCalculationProgressBar(pb);
 				mapRouteInfoMenu.routeCalculationStarted();
 				RoutingHelper routingHelper = getRoutingHelper();
@@ -519,7 +519,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 
 			@Override
-			public void updateProgress(int progress) {
+			public void onUpdateCalculationProgress(int progress) {
 				mapRouteInfoMenu.updateRouteCalculationProgress(progress);
 				dashboardOnMap.updateRouteCalculationProgress(progress);
 				if (findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE) {
@@ -537,7 +537,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 
 			@Override
-			public void requestPrivateAccessRouting() {
+			public void onRequestPrivateAccessRouting() {
 				if (!settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.getModeValue(getRoutingHelper().getAppMode())) {
 					final CommonPreference<Boolean> allowPrivate
 							= settings.getCustomRoutingBooleanProperty(GeneralRouter.ALLOW_PRIVATE, false);
@@ -565,34 +565,34 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 
 			@Override
-			public void updateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
+			public void onUpdateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
 				mapRouteInfoMenu.updateSuggestedMissingMaps(missingMaps, onlineSearch);
 			}
 
 			@Override
-			public void finish() {
+			public void onCalculationFinish() {
 				mapRouteInfoMenu.routeCalculationFinished();
 				dashboardOnMap.routeCalculationFinished();
 				pb.setVisibility(View.GONE);
 			}
 		};
 
-		app.getRoutingHelper().setProgressBar(progressCallback);
+		app.getRoutingHelper().addCalculationProgressListener(progressCallback);
 
 		app.getTransportRoutingHelper().setProgressBar(new TransportRouteCalculationProgressCallback() {
 			@Override
 			public void start() {
-				progressCallback.start();
+				progressCallback.onCalculationStart();
 			}
 
 			@Override
 			public void updateProgress(int progress) {
-				progressCallback.updateProgress(progress);
+				progressCallback.onUpdateCalculationProgress(progress);
 			}
 
 			@Override
 			public void finish() {
-				progressCallback.finish();
+				progressCallback.onCalculationFinish();
 			}
 		});
 	}
@@ -792,8 +792,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app.getDownloadThread().setUiActivity(this);
 
 		boolean routeWasFinished = routingHelper.isRouteWasFinished();
-		if (routeWasFinished && !DestinationReachedMenu.wasShown()) {
-			DestinationReachedMenu.show(this);
+		if (routeWasFinished && !DestinationReachedFragment.wasShown()) {
+			DestinationReachedFragment.show(this);
 		}
 
 		routingHelper.addListener(this);
@@ -1256,7 +1256,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		settings.MAP_SCREEN_ORIENTATION.removeListener(mapScreenOrientationSettingListener);
 		settings.USE_SYSTEM_SCREEN_TIMEOUT.removeListener(useSystemScreenTimeoutListener);
 		if (!app.getRoutingHelper().isRouteWasFinished()) {
-			DestinationReachedMenu.resetShownState();
+			DestinationReachedFragment.resetShownState();
 		}
 		if (trackDetailsMenu.isVisible()) {
 			trackDetailsMenu.dismiss(false);
@@ -1870,7 +1870,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	public void routeWasFinished() {
 		if (!mIsDestroyed) {
-			DestinationReachedMenu.show(this);
+			DestinationReachedFragment.show(this);
 			changeKeyguardFlags();
 		}
 	}
