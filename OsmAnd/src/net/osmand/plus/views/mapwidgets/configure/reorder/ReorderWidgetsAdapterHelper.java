@@ -282,7 +282,7 @@ public class ReorderWidgetsAdapterHelper {
 		AddedWidgetUiInfo addedWidgetInfo = new AddedWidgetUiInfo(availableWidgetInfo, page, order);
 		ListItem newAddedWidgetItem = new ListItem(ItemType.ADDED_WIDGET, addedWidgetInfo);
 
-		int insertIndex = getIndexOfLastAddedWidgetItem() + 1;
+		int insertIndex = getIndexOfLastWidgetOrPageItem() + 1;
 		items.add(insertIndex, newAddedWidgetItem);
 		adapter.notifyItemInserted(insertIndex);
 	}
@@ -292,13 +292,14 @@ public class ReorderWidgetsAdapterHelper {
 		return Algorithms.isEmpty(pages) ? 0 : pages.get(pages.size() - 1);
 	}
 
-	private int getIndexOfLastAddedWidgetItem() {
+	private int getIndexOfLastWidgetOrPageItem() {
 		int index = -1;
 		for (int i = 0; i < items.size(); i++) {
 			ListItem item = items.get(i);
-			if (index == -1 && item.type == ItemType.HEADER) {
-				index = i;
-			} else if (item.type == ItemType.ADDED_WIDGET) {
+			boolean suitableIndex = (index == -1 && item.type == ItemType.HEADER)
+					|| (item.type == ItemType.ADDED_WIDGET)
+					|| (item.type == ItemType.PAGE);
+			if (suitableIndex) {
 				index = i;
 			}
 		}
