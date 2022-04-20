@@ -40,15 +40,18 @@ public class LocaleHelper {
 
 		if (!Algorithms.isEmpty(lang)) {
 			Locale.Builder builder = new Locale.Builder();
-			Boolean isLocaleCorrect = false;
-			for (String locale : Locale.getISOCountries()) {
-				if (locale.toLowerCase().equals(lang.toLowerCase())) {
+			boolean isLocaleCorrect = false;
+			String langLowerCase = lang.toLowerCase();
+			for (String locale : Locale.getISOLanguages()) {
+				if (locale.toLowerCase().equals(langLowerCase)) {
 					isLocaleCorrect = true;
 					break;
 				}
 			}
 			if (isLocaleCorrect) {
 				builder.setLanguage(lang);
+			} else {
+				lang = "";
 			}
 			if (!Algorithms.isEmpty(country)) {
 				builder.setRegion(country);
