@@ -40,7 +40,16 @@ public class LocaleHelper {
 
 		if (!Algorithms.isEmpty(lang)) {
 			Locale.Builder builder = new Locale.Builder();
-			builder.setLanguage(lang);
+			Boolean isLocaleCorrect = false;
+			for (String locale : Locale.getISOCountries()) {
+				if (locale.toLowerCase().equals(lang.toLowerCase())) {
+					isLocaleCorrect = true;
+					break;
+				}
+			}
+			if (isLocaleCorrect) {
+				builder.setLanguage(lang);
+			}
 			if (!Algorithms.isEmpty(country)) {
 				builder.setRegion(country);
 			}
