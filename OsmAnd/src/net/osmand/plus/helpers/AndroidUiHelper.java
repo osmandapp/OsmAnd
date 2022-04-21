@@ -3,10 +3,12 @@ package net.osmand.plus.helpers;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Surface;
 import android.view.View;
+import android.view.WindowInsetsController;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
@@ -111,7 +113,7 @@ public class AndroidUiHelper {
 			}
 		}
 	}
-    
+
 	public static boolean isXLargeDevice(@NonNull Activity ctx) {
 		int lt = (ctx.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK);
 		return lt == Configuration.SCREENLAYOUT_SIZE_XLARGE;
@@ -121,5 +123,32 @@ public class AndroidUiHelper {
 		int orientation = AndroidUiHelper.getScreenOrientation(ctx);
 		return orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ||
 				orientation == ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+	}
+
+	public static void setStatusBarContentColor(@Nullable View view, boolean isNightMode) {
+		if (view != null) {
+			setStatusBarContentColor(view, view.getSystemUiVisibility(), !isNightMode);
+		}
+	}
+
+	public static void setStatusBarContentColor(@NonNull View view, int flags, boolean addLightFlag) {
+		if (Build.VERSION.SDK_INT >= 30) {
+			WindowInsetsController controller = view.getWindowInsetsController();
+			if (controller != null) {
+				int flag = WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS;
+				if (addLightFlag) {
+					controller.setSystemBarsAppearance(flag, flag);
+				} else {
+					controller.setSystemBarsAppearance(0, flag);
+				}
+			}
+		} else if (Build.VERSION.SDK_INT >= 23) {
+		    if (addLightFlag) {
+			    flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+		    } else {
+			    flags &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+		    }
+		    view.setSystemUiVisibility(flags);
+	    }
 	}
 }

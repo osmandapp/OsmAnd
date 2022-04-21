@@ -1,8 +1,5 @@
 package net.osmand.plus.backup.ui;
 
-import static net.osmand.plus.importfiles.ImportHelper.ImportType.SETTINGS;
-import static net.osmand.plus.utils.UiUtilities.setupDialogButton;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +32,9 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 
+import static net.osmand.plus.importfiles.ImportHelper.ImportType.SETTINGS;
+import static net.osmand.plus.utils.UiUtilities.setupDialogButton;
+
 public class BackupAuthorizationFragment extends BaseSettingsFragment implements InAppPurchaseListener {
 
 	private static final String AUTHORIZE = "authorize";
@@ -53,10 +53,7 @@ public class BackupAuthorizationFragment extends BaseSettingsFragment implements
 
 	@ColorRes
 	public int getStatusBarColorId() {
-		View view = getView();
-		if (view != null && !isNightMode()) {
-			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-		}
+		AndroidUiHelper.setStatusBarContentColor(getView(), isNightMode());
 		return ColorUtilities.getActivityBgColorId(isNightMode());
 	}
 

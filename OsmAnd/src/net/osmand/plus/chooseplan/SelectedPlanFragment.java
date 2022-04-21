@@ -6,7 +6,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -25,13 +24,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.chooseplan.button.PriceButton;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -163,15 +162,11 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 		int toolbarColor = ColorUtilities.getProportionalColorMix(headerBgColor, activeColor, 0, totalScrollRange, Math.abs(verticalOffset));
 		appBar.setBackgroundColor(toolbarColor);
 		Dialog dialog = getDialog();
-		if (Build.VERSION.SDK_INT >= 21 && dialog != null && dialog.getWindow() != null) {
+		if (dialog != null && dialog.getWindow() != null) {
 			Window window = dialog.getWindow();
 			window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 			window.setStatusBarColor(toolbarColor);
-			if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
-				window.getDecorView().setSystemUiVisibility(collapsed ?
-						mainView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR :
-						mainView.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-			}
+			AndroidUiHelper.setStatusBarContentColor(window.getDecorView(), mainView.getSystemUiVisibility(), !nightMode && !collapsed);
 		}
 
 		View shadow = mainView.findViewById(R.id.shadowView);

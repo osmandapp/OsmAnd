@@ -1,6 +1,5 @@
 package net.osmand.plus.routepreparationmenu;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -10,6 +9,11 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.QuadRect;
@@ -27,11 +31,6 @@ import net.osmand.plus.track.helpers.GpxNavigationHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.TextViewExProgress;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
 
 public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		implements OnSegmentSelectedListener, DownloadEvents {
@@ -224,14 +223,12 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		if (view != null) {
 			boolean nightMode = isNightMode();
 			if (getViewY() <= getFullScreenTopPosY() || !isPortrait()) {
-				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
-					view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+				if (!nightMode) {
+					AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), true);
 				}
 				return ColorUtilities.getDividerColorId(nightMode);
-			} else {
-				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
-					view.setSystemUiVisibility(view.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-				}
+			} else if (!nightMode) {
+				AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), false);
 			}
 		}
 		return -1;

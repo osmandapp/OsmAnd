@@ -55,6 +55,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilitySettingsFragment;
 import net.osmand.plus.plugins.audionotes.MultimediaNotesFragment;
 import net.osmand.plus.plugins.development.DevelopmentSettingsFragment;
@@ -317,8 +318,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		boolean nightMode = isNightMode();
 		if (isProfileDependent()) {
 			View view = getView();
-			if (view != null && Build.VERSION.SDK_INT >= 23 && !nightMode) {
-				view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+			if (view != null && !nightMode) {
+				AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), true);
 			}
 			return ColorUtilities.getListBgColorId(nightMode);
 		} else {

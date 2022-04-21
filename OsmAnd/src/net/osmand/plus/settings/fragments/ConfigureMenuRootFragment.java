@@ -34,6 +34,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.configmap.ConfigureMapMenu;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.plugins.PluginsFragment;
@@ -151,10 +152,7 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 
 	@Override
 	public int getStatusBarColorId() {
-		View view = getView();
-		if (view != null && Build.VERSION.SDK_INT >= 23 && !nightMode) {
-			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-		}
+		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
 		return nightMode ? R.color.activity_background_dark : R.color.activity_background_light;
 	}
 
