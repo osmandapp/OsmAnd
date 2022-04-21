@@ -4,6 +4,7 @@ import net.osmand.plus.R;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
@@ -56,16 +57,32 @@ public enum WidgetParams {
 	@NonNull
 	public final WidgetsPanel defaultPanel;
 
-	WidgetParams(@NonNull String id, @StringRes int titleId, @DrawableRes int iconId, @NonNull WidgetsPanel defaultPanel) {
+	WidgetParams(@NonNull String id,
+	             @StringRes int titleId,
+	             @DrawableRes int iconId,
+	             @NonNull WidgetsPanel defaultPanel) {
 		this(id, titleId, iconId, iconId, defaultPanel);
 	}
 
-	WidgetParams(@NonNull String id, @StringRes int titleId, @DrawableRes int dayIconId,
-	             @DrawableRes int nightIconId, @NonNull WidgetsPanel defaultPanel) {
+	WidgetParams(@NonNull String id,
+	             @StringRes int titleId,
+	             @DrawableRes int dayIconId,
+	             @DrawableRes int nightIconId,
+	             @NonNull WidgetsPanel defaultPanel) {
 		this.id = id;
 		this.titleId = titleId;
 		this.dayIconId = dayIconId;
 		this.nightIconId = nightIconId;
 		this.defaultPanel = defaultPanel;
+	}
+
+	@Nullable
+	public WidgetGroup getGroup() {
+		for (WidgetGroup group : WidgetGroup.values()) {
+			if (group.getWidgets().contains(this)) {
+				return group;
+			}
+		}
+		return null;
 	}
 }

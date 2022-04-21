@@ -11,6 +11,14 @@
 	Thx - Hardy
 -->
 
+    <string name="audio_video_notes_desc">Widgets provides quick access to start/stop taking a recording (audio, video or photo).</string>
+    <string name="bearing_additional_note">You can change format of displayed data in: Configure Profile – General settings – Angular units.</string>
+    <string name="bearing_desc">The bearing widget shows the absolute or relative bearing to a target in angular units (Degrees 180, Degrees 360, Milliradians).</string>
+    <string name="map_markers_desc">On the top bar widget you could see the distance and the direction to the marker from current location. It is possible to configure to see 1 or 2 top markers in the widget.</string>
+    <string name="navigation_points_desc">Navigational widgets are enabled during navigation to display information such as distance, arrival or left time, next turns, bearing, current street name, lanes information, max speed, approaching alerts, POIs, waypoints.</string>
+    <string name="navigation_points">Navigation points</string>
+    <string name="route_maneuvers_desc">Navigational widgets are enabled during navigation to display information such as distance, arrival or left time, next turns, bearing, current street name, lanes information, max speed, approaching alerts, POIs, waypoints.</string>
+    <string name="route_maneuvers">Route maneuvers</string>
     <string name="release_4_2">
     • Widgets redesign: new Look &amp; Feel, group by Pages, change order and combine as you want.\n\n
     • Hiking / Cycling / Travel routes: tap on the route symbol and get full information about the route.\n\n
