@@ -86,6 +86,10 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 				@Override
 				public void onFavoriteDataUpdated(@NonNull FavouritePoint point) {
 				}
+
+				@Override
+				public void onFavoritePropertyUpdated() {
+				}
 			});
 		}
 		recyclerView = new RecyclerView(getContext());

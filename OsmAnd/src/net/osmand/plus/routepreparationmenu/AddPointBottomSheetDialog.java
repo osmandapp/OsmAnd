@@ -402,6 +402,10 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 					public void onFavoriteDataUpdated(@NonNull FavouritePoint point) {
 						reloadFavoritesItems();
 					}
+
+					@Override
+					public void onFavoritePropertyUpdated() {
+					}
 				});
 			}
 			BaseBottomSheetItem scrollItem = new HorizontalRecyclerBottomSheetItem.Builder()

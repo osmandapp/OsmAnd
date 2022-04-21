@@ -688,4 +688,12 @@ public class FavouritesHelper {
 
 		return group;
 	}
+
+	public void updateFavouriteProperties() {
+		app.runInUIThread(() -> {
+			for (FavoritesListener listener : listeners) {
+				listener.onFavoritePropertyUpdated();
+			}
+		});
+	}
 }

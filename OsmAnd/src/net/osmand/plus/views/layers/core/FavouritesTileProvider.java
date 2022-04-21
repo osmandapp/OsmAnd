@@ -1,12 +1,10 @@
 package net.osmand.plus.views.layers.core;
 
-import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.MapTiledCollectionProvider;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QListPointI;
 import net.osmand.core.jni.SWIGTYPE_p_sk_spT_SkImage_const_t;
@@ -14,7 +12,6 @@ import net.osmand.core.jni.TextRasterizer;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.core.jni.interface_MapTiledCollectionProvider;
 import net.osmand.data.BackgroundType;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.util.MapUtils;
@@ -26,12 +23,32 @@ import java.util.List;
 public class FavouritesTileProvider extends interface_MapTiledCollectionProvider {
 
     private List<FavouritesMapLayerData> favouritesMapLayerDataList = new ArrayList<>();
-    HashMap<String, Bitmap> bigBitmapCache = new HashMap<>();
-    HashMap<String, Bitmap> smallBitmapCache = new HashMap<>();
+    HashMap<Integer, Bitmap> bigBitmapCache = new HashMap<>();
+    HashMap<Integer, Bitmap> smallBitmapCache = new HashMap<>();
     private int baseOrder;
+    private Context ctx;
+    private MapTiledCollectionProvider instantiateProxy;
 
     public FavouritesTileProvider(int baseOrder) {
         this.baseOrder = baseOrder;
+    }
+
+    public void setContext(Context context) {
+        this.ctx = context;
+    }
+
+    public void drawSymbols(MapRendererView mapRendererView) {
+        if (instantiateProxy == null) {
+            instantiateProxy = instantiateProxy();
+        }
+        mapRendererView.addSymbolsProvider(instantiateProxy);
+    }
+
+    public void clearSymbols(MapRendererView mapRendererView) {
+        if (instantiateProxy != null) {
+            mapRendererView.removeSymbolsProvider(instantiateProxy);
+        }
+        favouritesMapLayerDataList.clear();
     }
 
     @Override
@@ -82,19 +99,41 @@ public class FavouritesTileProvider extends interface_MapTiledCollectionProvider
     @Override
     public SWIGTYPE_p_sk_spT_SkImage_const_t getImageBitmap(int index, boolean isFullSize) {
         FavouritesMapLayerData data = favouritesMapLayerDataList.get(index);
+
+        //bitmap width and height must be > 0 else occur error
+        Bitmap bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+        if (data == null || ctx == null) {
+            return NativeUtilities.createSkImageFromBitmap(bitmap);
+        }
+
         if (isFullSize) {
-            if (bigBitmapCache.containsKey(data.bitmapKey)) {
-                Bitmap bigBitmap = bigBitmapCache.get(data.bitmapKey);
-                return NativeUtilities.createSkImageFromBitmap(bigBitmap);
+            int bigBitmapKey = getKey(data.colorBigPoint, data.withShadow, data.overlayIconId, data.backgroundType, data.hasMarker, data.textScale);
+            if (!bigBitmapCache.containsKey(bigBitmapKey)) {
+                PointImageDrawable pointImageDrawable;
+                if (data.hasMarker) {
+                    pointImageDrawable = PointImageDrawable.getOrCreate(ctx, data.colorBigPoint, data.withShadow, true,
+                            data.overlayIconId, data.backgroundType);
+                } else {
+                    pointImageDrawable = PointImageDrawable.getOrCreate(ctx, data.colorBigPoint, data.withShadow, false,
+                            data.overlayIconId, data.backgroundType);
+                }
+                bitmap = pointImageDrawable.getBigMergedBitmap(data.textScale);
+                bigBitmapCache.put(bigBitmapKey, bitmap);
+            } else {
+                bitmap = bigBitmapCache.get(bigBitmapKey);
             }
         } else {
-            if (smallBitmapCache.containsKey(data.bitmapKey)) {
-                Bitmap smallBitmap = smallBitmapCache.get(data.bitmapKey);
-                return NativeUtilities.createSkImageFromBitmap(smallBitmap);
+            int smallBitmapKey = getKey(data.colorSmallPoint, data.withShadow, data.overlayIconId, data.backgroundType, data.hasMarker, data.textScale);
+            if (!smallBitmapCache.containsKey(smallBitmapKey)) {
+                PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx, data.colorSmallPoint, data.withShadow, false,
+                        data.overlayIconId, data.backgroundType);
+                bitmap = pointImageDrawable.getSmallMergedBitmap(data.textScale);
+                smallBitmapCache.put(smallBitmapKey, bitmap);
+            } else {
+                bitmap = smallBitmapCache.get(smallBitmapKey);
             }
         }
-        Bitmap emptyBitmap = Bitmap.createBitmap(0, 0, Bitmap.Config.ARGB_8888);
-        return NativeUtilities.createSkImageFromBitmap(emptyBitmap);
+        return NativeUtilities.createSkImageFromBitmap(bitmap);
     }
 
     @Override
@@ -118,37 +157,43 @@ public class FavouritesTileProvider extends interface_MapTiledCollectionProvider
         smallBitmapCache.clear();
     }
 
-    public void addToData(Context context, int colorSmallPoint, int colorBigPoint, boolean withShadow,
+    public void addToData(int colorSmallPoint, int colorBigPoint, boolean withShadow,
                           int overlayIconId, BackgroundType backgroundType, boolean hasMarker, float textScale, double lat, double lon) {
-        favouritesMapLayerDataList.add(new FavouritesMapLayerData(context, colorSmallPoint, colorBigPoint, withShadow,
+        favouritesMapLayerDataList.add(new FavouritesMapLayerData(colorSmallPoint, colorBigPoint, withShadow,
         overlayIconId, backgroundType, hasMarker, textScale, lat, lon));
     }
 
-    class FavouritesMapLayerData {
-        String bitmapKey;
+    static class FavouritesMapLayerData {
         PointI point;
+        int colorSmallPoint;
+        int colorBigPoint;
+        boolean withShadow;
+        int overlayIconId;
+        BackgroundType backgroundType;
+        boolean hasMarker;
+        float textScale;
 
-        FavouritesMapLayerData(Context context, int colorSmallPoint, int colorBigPoint, boolean withShadow,
+        FavouritesMapLayerData(int colorSmallPoint, int colorBigPoint, boolean withShadow,
                                int overlayIconId, BackgroundType backgroundType, boolean hasMarker, float textScale, double lat, double lon) {
-            bitmapKey = "" + colorBigPoint + colorSmallPoint + withShadow + overlayIconId + backgroundType.name() + hasMarker + textScale;
-            if (!bigBitmapCache.containsKey(bitmapKey)) {
-                PointImageDrawable pointImageDrawable;
-                if (hasMarker) {
-                    pointImageDrawable = PointImageDrawable.getOrCreate(context, colorBigPoint, withShadow, true, overlayIconId, backgroundType);
-                } else {
-                    pointImageDrawable = PointImageDrawable.getOrCreate(context, colorBigPoint, withShadow, false, overlayIconId, backgroundType);
-                }
-                Bitmap bigBitmap = pointImageDrawable.getBigMergedBitmap(textScale);
-                bigBitmapCache.put(bitmapKey, bigBitmap);
-            }
-            if (!smallBitmapCache.containsKey(bitmapKey)) {
-                PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(context, colorSmallPoint, withShadow, false, overlayIconId, backgroundType);
-                Bitmap smallBitmap = pointImageDrawable.getSmallMergedBitmap(textScale);
-                smallBitmapCache.put(bitmapKey, smallBitmap);
-            }
+            this.colorBigPoint = colorBigPoint;
+            this.colorSmallPoint = colorSmallPoint;
+            this.withShadow = withShadow;
+            this.overlayIconId = overlayIconId;
+            this.backgroundType = backgroundType;
+            this.hasMarker = hasMarker;
+            this.textScale = textScale;
             int x = MapUtils.get31TileNumberX(lon);
             int y = MapUtils.get31TileNumberY(lat);
             point = new PointI(x, y);
         }
+    }
+
+    private int getKey(int color, boolean withShadow, int overlayIconId, BackgroundType backgroundType, boolean hasMarker, float textScale) {
+        long hash = (color << 6) + (overlayIconId << 4) + ((withShadow ? 1 : 0) << 3)
+                + ((hasMarker ? 1 : 0) << 2) + (int)(textScale * 10) + backgroundType.ordinal();
+        if (hash >= Integer.MAX_VALUE || hash <= Integer.MIN_VALUE) {
+            return (int)(hash >> 4);
+        }
+        return (int)hash;
     }
 }

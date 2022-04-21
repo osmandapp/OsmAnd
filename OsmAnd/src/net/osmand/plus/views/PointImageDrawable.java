@@ -27,9 +27,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.TreeMap;
 
 public class PointImageDrawable extends Drawable {
@@ -301,8 +298,8 @@ public class PointImageDrawable extends Drawable {
 
     public Bitmap getBigMergedBitmap(float textScale) {
 		setScale(textScale);
-        int width = getMergedBitmapWidth();
-        int height = getMergedBitmapHeight();
+        int width = getBigMergedBitmapWidth();
+        int height = getBigMergedBitmapHeight();
         Bitmap bitmapResult = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmapResult);
         //get ready bitmap into bitmapResult
@@ -310,50 +307,44 @@ public class PointImageDrawable extends Drawable {
         return bitmapResult;
     }
 
-    private int getMergedBitmapWidth() {
-        List<Integer> widths = new ArrayList<>();
-        if (withShadow) {
-            widths.add(mapIconBackgroundBottom.getWidth());
-            widths.add(mapIconBackgroundCenter.getWidth());
-            widths.add(mapIconBackgroundTop.getWidth());
-            widths.add(mapIconBitmap.getWidth());
-        } else {
-            Bitmap background = getBitmapFromVectorDrawable(uiBackgroundIcon);
-            Bitmap listIcon = getBitmapFromVectorDrawable(uiListIcon);
-            widths.add(background.getWidth());
-            widths.add(listIcon.getWidth());
-        }
-        if (widths.size() > 0) {
-            return Collections.max(widths);
-        } else {
-            return 0;
-        }
+	private int getBigMergedBitmapWidth() {
+		//bitmap width must be > 0
+		int width = 1;
+		if (withShadow) {
+			width = Math.max(width, mapIconBackgroundBottom.getWidth());
+			width = Math.max(width, mapIconBackgroundCenter.getWidth());
+			width = Math.max(width, mapIconBackgroundTop.getWidth());
+			width = Math.max(width, mapIconBitmap.getWidth());
+		} else {
+			Bitmap background = getBitmapFromVectorDrawable(uiBackgroundIcon);
+			Bitmap listIcon = getBitmapFromVectorDrawable(uiListIcon);
+			width = Math.max(width, background.getWidth());
+			width = Math.max(width, listIcon.getWidth());
+		}
+        return width;
     }
 
-    private int getMergedBitmapHeight() {
-        List<Integer> heights = new ArrayList<>();
-        if (withShadow) {
-            heights.add(mapIconBackgroundBottom.getHeight());
-            heights.add(mapIconBackgroundCenter.getHeight());
-            heights.add(mapIconBackgroundTop.getHeight());
-            heights.add(mapIconBitmap.getHeight());
-        } else {
-            Bitmap background = getBitmapFromVectorDrawable(uiBackgroundIcon);
-            Bitmap listIcon = getBitmapFromVectorDrawable(uiListIcon);
-            heights.add(background.getHeight());
-            heights.add(listIcon.getHeight());
-        }
-        if (heights.size() > 0) {
-            return Collections.max(heights);
-        } else {
-            return 0;
-        }
+    private int getBigMergedBitmapHeight() {
+		//bitmap height must be > 0
+		int height = 1;
+		if (withShadow) {
+			height = Math.max(height, mapIconBackgroundBottom.getHeight());
+			height = Math.max(height, mapIconBackgroundCenter.getHeight());
+			height = Math.max(height, mapIconBackgroundTop.getHeight());
+			height = Math.max(height, mapIconBitmap.getHeight());
+		} else {
+			Bitmap background = getBitmapFromVectorDrawable(uiBackgroundIcon);
+			Bitmap listIcon = getBitmapFromVectorDrawable(uiListIcon);
+			height = Math.max(height, background.getHeight());
+			height = Math.max(height, listIcon.getHeight());
+		}
+		return height;
     }
 
     public Bitmap getSmallMergedBitmap(float textScale) {
 		setScale(textScale);
-        int width = getSmallBitmapWidth();
-        int height = getSmallBitmapHeight();
+        int width = getSmallMergedBitmapWidth();
+        int height = getSmallMergedBitmapHeight();
         Bitmap bitmapResult = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmapResult);
         //get ready bitmap into bitmapResult
@@ -361,27 +352,21 @@ public class PointImageDrawable extends Drawable {
         return bitmapResult;
     }
 
-    private int getSmallBitmapWidth() {
-        List<Integer> widths = new ArrayList<>();
-        widths.add(mapIconBackgroundBottomSmall.getWidth());
-        widths.add(mapIconBackgroundCenterSmall.getWidth());
-        widths.add(mapIconBackgroundTopSmall.getWidth());
-        if (widths.size() > 0) {
-            return Collections.max(widths);
-        } else {
-            return 0;
-        }
+    private int getSmallMergedBitmapWidth() {
+		//bitmap width must be > 0
+		int width = 1;
+		width = Math.max(width,mapIconBackgroundBottomSmall.getWidth());
+		width = Math.max(width,mapIconBackgroundCenterSmall.getWidth());
+		width = Math.max(width,mapIconBackgroundTopSmall.getWidth());
+        return width;
     }
 
-    private int getSmallBitmapHeight() {
-        List<Integer> heights = new ArrayList<>();
-        heights.add(mapIconBackgroundBottomSmall.getHeight());
-        heights.add(mapIconBackgroundCenterSmall.getHeight());
-        heights.add(mapIconBackgroundTopSmall.getHeight());
-        if (heights.size() > 0) {
-            return Collections.max(heights);
-        } else {
-            return 0;
-        }
+    private int getSmallMergedBitmapHeight() {
+		//bitmap height must be > 0
+		int height = 1;
+		height = Math.max(height,mapIconBackgroundBottomSmall.getHeight());
+		height = Math.max(height,mapIconBackgroundCenterSmall.getHeight());
+		height = Math.max(height,mapIconBackgroundTopSmall.getHeight());
+		return height;
     }
 }

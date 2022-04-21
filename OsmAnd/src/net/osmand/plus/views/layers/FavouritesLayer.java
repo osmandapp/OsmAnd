@@ -1,7 +1,6 @@
 package net.osmand.plus.views.layers;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.util.Pair;
@@ -39,7 +38,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvider,
 		IMoveObjectProvider, MapTextProvider<FavouritePoint> {
@@ -104,6 +102,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 			MapMarker mapMarker = mapMarkersHelper.getMapMarker(objectInMotion);
 			float textScale = getTextScale();
 			drawBigPoint(canvas, objectInMotion, pf.x, pf.y, mapMarker, textScale);
+			//TODO movable for OpenGL
 		}
 	}
 
@@ -111,7 +110,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		MapRendererView mapRendererView = getMapView().getMapRenderer();
 		if (mapRendererView != null) {
-			favouritesChangeListener.setZoom(tileBox.getZoom());
+			//OpenGL draw occur in favouritesChangeListener
 			return;
 		}
 		cache.clear();
@@ -321,8 +320,6 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	public class FavouritesChangeListener implements FavoritesListener {
 
-		private int zoom = 0;
-
 		@Override
 		public void onFavoritesLoaded() {
 			showFavourites();
@@ -333,14 +330,8 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 			showFavourites();
 		}
 
-		public void setZoom(int zoom) {
-			if (this.zoom != zoom) {
-				onZoomChanged();
-			}
-			this.zoom = zoom;
-		}
-
-		private void onZoomChanged() {
+		@Override
+		public void onFavoritePropertyUpdated() {
 			showFavourites();
 		}
 
@@ -351,7 +342,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 			}
 
 			if (favouritesMapLayerProvider != null) {
-				mapRendererView.removeSymbolsProvider(favouritesMapLayerProvider.instantiateProxy());
+				favouritesMapLayerProvider.clearSymbols(mapRendererView);
 				favouritesMapLayerProvider.clearData();
 			}
 
@@ -360,33 +351,32 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 			}
 
 			if (settings.SHOW_FAVORITES.get() && favouritesHelper.isFavoritesLoaded()) {
-				if (zoom >= START_ZOOM) {
-					float textScale = getTextScale();
-					for (FavoriteGroup group : favouritesHelper.getFavoriteGroups()) {
-						List<Pair<FavouritePoint, MapMarker>> fullObjects = new ArrayList<>();
-						boolean synced = isSynced(group);
-						for (FavouritePoint favoritePoint : group.getPoints()) {
-							double lat = favoritePoint.getLatitude();
-							double lon = favoritePoint.getLongitude();
-							if (favoritePoint.isVisible() && favoritePoint != contextMenuLayer.getMoveableObject()) {
-								MapMarker marker = null;
-								if (synced) {
-									marker = mapMarkersHelper.getMapMarker(favoritePoint);
-									if (marker == null || marker.history && !view.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
-										continue;
-									}
+				favouritesMapLayerProvider.setContext(view.getContext());
+				float textScale = getTextScale();
+				for (FavoriteGroup group : favouritesHelper.getFavoriteGroups()) {
+					List<Pair<FavouritePoint, MapMarker>> fullObjects = new ArrayList<>();
+					boolean synced = isSynced(group);
+					for (FavouritePoint favoritePoint : group.getPoints()) {
+						double lat = favoritePoint.getLatitude();
+						double lon = favoritePoint.getLongitude();
+						if (favoritePoint.isVisible() && favoritePoint != contextMenuLayer.getMoveableObject()) {
+							MapMarker marker = null;
+							if (synced) {
+								marker = mapMarkersHelper.getMapMarker(favoritePoint);
+								if (marker == null || marker.history && !view.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
+									continue;
 								}
-								int colorBigPoint = favouritesHelper.getColorWithCategory(favoritePoint, defaultColor);
-								int colorSmallPoint = (marker != null && marker.history) ? grayColor : colorBigPoint;
-								favouritesMapLayerProvider.addToData(view.getContext(), colorSmallPoint, colorBigPoint,
-										true, favoritePoint.getOverlayIconId(view.getContext()), favoritePoint.getBackgroundType(),
-										marker != null, textScale, lat, lon);
 							}
+							int colorBigPoint = favouritesHelper.getColorWithCategory(favoritePoint, defaultColor);
+							int colorSmallPoint = (marker != null && marker.history) ? grayColor : colorBigPoint;
+							favouritesMapLayerProvider.addToData(colorSmallPoint, colorBigPoint,
+									true, favoritePoint.getOverlayIconId(view.getContext()), favoritePoint.getBackgroundType(),
+									marker != null, textScale, lat, lon);
 						}
 					}
 				}
+				favouritesMapLayerProvider.drawSymbols(mapRendererView);
 			}
-			mapRendererView.addSymbolsProvider(favouritesMapLayerProvider.instantiateProxy());
 		}
 	}
 }
