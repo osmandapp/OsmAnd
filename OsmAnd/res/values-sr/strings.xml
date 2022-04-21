@@ -4580,4 +4580,9 @@
     <string name="apply_only_to_new_favorites">Примени само на нове омиљене</string>
     <string name="change_default_appearance">Промените подразумевани изглед</string>
     <string name="apply_to_existing_points_descr">Применити промене на постојеће тачке групе или само на нове\?</string>
+    <string name="map_widget_altitude">Надморска висина тренутне локације</string>
+    <string name="add_page">Додај страницу</string>
+    <string name="page_number">Страница %1$s</string>
+    <string name="map_widget_distance_to_destination">Удаљеност до одредишта</string>
+    <string name="map_widget_current_speed">Тренутна брзина</string>
 </resources>

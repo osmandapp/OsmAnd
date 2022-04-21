@@ -31,7 +31,7 @@ public class SideWidgetInfo extends MapWidgetInfo {
 	}
 
 	@Override
-	public boolean isVisibleForAppMode(@NonNull ApplicationMode appMode) {
+	public boolean isEnabledForAppMode(@NonNull ApplicationMode appMode) {
 		return visibilityForAppModes.contains(appMode);
 	}
 

@@ -142,4 +142,6 @@
     <string name="si_mi_yard">Mil/yard</string>
     <string name="km">km</string>
     <string name="m">m</string>
+    <string name="unit_of_length_descr">Ubah jarak apa yang diukuri.</string>
+    <string name="si_mi_feet">Mil/kaki</string>
 </resources>

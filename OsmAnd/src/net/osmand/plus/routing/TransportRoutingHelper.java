@@ -549,14 +549,14 @@ public class TransportRoutingHelper {
 			params.mode = walkingMode;
 			params.ctx = app;
 			params.calculationProgress = new RouteCalculationProgress();
-			params.calculationProgressCallback = new RouteCalculationProgressCallback() {
+			params.calculationProgressListener = new RouteCalculationProgressListener() {
 
 				@Override
-				public void start() {
+				public void onCalculationStart() {
 				}
 
 				@Override
-				public void updateProgress(int progress) {
+				public void onUpdateCalculationProgress(int progress) {
 					float p = Math.max(params.calculationProgress.distanceFromBegin,
 							params.calculationProgress.distanceFromEnd);
 
@@ -565,19 +565,19 @@ public class TransportRoutingHelper {
 				}
 
 				@Override
-				public void requestPrivateAccessRouting() {
+				public void onRequestPrivateAccessRouting() {
 				}
 
 				@Override
-				public void updateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
+				public void onUpdateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
 				}
 
 				@Override
-				public void finish() {
+				public void onCalculationFinish() {
 					if (walkingSegmentsToCalculate.isEmpty()) {
 						walkingSegmentsCalculated = true;
 					} else {
-						updateProgress(0);
+						onUpdateCalculationProgress(0);
 						RouteCalculationParams walkingRouteParams = getWalkingRouteParams();
 						if (walkingRouteParams != null) {
 							routingHelper.startRouteCalculationThread(walkingRouteParams);

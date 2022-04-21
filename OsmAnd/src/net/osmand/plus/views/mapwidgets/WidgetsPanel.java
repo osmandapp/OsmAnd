@@ -84,6 +84,11 @@ public enum WidgetsPanel {
 		}
 	}
 
+	public int getOriginalWidgetOrder(@NonNull String widgetId) {
+		int order = getOriginalOrder().indexOf(widgetId);
+		return order != -1 ? order : DEFAULT_ORDER;
+	}
+
 	public int getWidgetPage(@NonNull String widgetId, @NonNull OsmandSettings settings) {
 		return getWidgetPage(settings.getApplicationMode(), widgetId, settings);
 	}

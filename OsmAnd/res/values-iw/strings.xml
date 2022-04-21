@@ -4581,4 +4581,14 @@
     <string name="simulation_preview_mode_desc">מהירות ההדמיה שתהיה מרבית במקטעים ישרים ותאט רק בצמתים.</string>
     <string name="speed_mode">מצב מהירות</string>
     <string name="apply_to_existing_points_descr">להחיל את השינויים על הנקודות הקיימות בקבוצה או רק על חדשות\?</string>
+    <string name="apply_only_to_new_favorites">החלה רק על מועדפים חדשים</string>
+    <string name="change_default_appearance">החלפת מראה ברירת המחדל</string>
+    <string name="apply_to_existing_favorites_descr">להחיל את השינויים על הנקודות המועדפות הנוכחיות של הקבוצה או רק על חדשות\?</string>
+    <string name="apply_to_existing">החלה על הקיימות</string>
+    <string name="apply_only_to_new_points">החלה רק על נקודות חדשות</string>
+    <string name="map_widget_altitude">גובה המיקום הנוכחי</string>
+    <string name="page_number">עמוד %1$s</string>
+    <string name="map_widget_distance_to_destination">מרחק ליעד</string>
+    <string name="add_page">הוספת עמוד</string>
+    <string name="map_widget_current_speed">מהירות נוכחית</string>
 </resources>

@@ -8,23 +8,23 @@ import net.osmand.Location;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.data.ValueHolder;
 import net.osmand.data.LatLon;
+import net.osmand.data.ValueHolder;
 import net.osmand.plus.NavigationService;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.auto.NavigationSession;
-import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
-import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
+import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.RouteExporter;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
@@ -259,28 +259,25 @@ public class RoutingHelper {
 	}
 
 	void newRouteCalculated(final boolean newRoute, final RouteCalculationResult res) {
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				ValueHolder<Boolean> showToast = new ValueHolder<>();
-				showToast.value = true;
-				Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
-				while (it.hasNext()) {
-					WeakReference<IRouteInformationListener> ref = it.next();
-					IRouteInformationListener l = ref.get();
-					if (l == null) {
-						it.remove();
-					} else {
-						l.newRouteIsCalculated(newRoute, showToast);
-					}
+		app.runInUIThread(() -> {
+			ValueHolder<Boolean> showToast = new ValueHolder<>();
+			showToast.value = true;
+			Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
+			while (it.hasNext()) {
+				WeakReference<IRouteInformationListener> ref = it.next();
+				IRouteInformationListener l = ref.get();
+				if (l == null) {
+					it.remove();
+				} else {
+					l.newRouteIsCalculated(newRoute, showToast);
 				}
-				if (showToast.value && newRoute && OsmandPlugin.isDevelopment()) {
-					String msg = app.getString(R.string.new_route_calculated_dist_dbg,
-							OsmAndFormatter.getFormattedDistance(res.getWholeDistance(), app),
-							((int) res.getRoutingTime()) + " sec",
-							res.getCalculateTime(), res.getVisitedSegments(), res.getLoadedTiles());
-					app.showToastMessage(msg);
-				}
+			}
+			if (showToast.value && newRoute && OsmandPlugin.isDevelopment()) {
+				String msg = app.getString(R.string.new_route_calculated_dist_dbg,
+						OsmAndFormatter.getFormattedDistance(res.getWholeDistance(), app),
+						((int) res.getRoutingTime()) + " sec",
+						res.getCalculateTime(), res.getVisitedSegments(), res.getLoadedTiles());
+				app.showToastMessage(msg);
 			}
 		});
 	}
@@ -852,8 +849,12 @@ public class RoutingHelper {
 		params.fast = settings.FAST_ROUTE_MODE.getModeValue(mode);
 	}
 
-	public void setProgressBar(RouteCalculationProgressCallback progressRoute) {
-		routeRecalculationHelper.setProgressBar(progressRoute);
+	public void addCalculationProgressListener(@NonNull RouteCalculationProgressListener listener) {
+		routeRecalculationHelper.addCalculationProgressListener(listener);
+	}
+
+	public void removeCalculationProgressListener(@NonNull RouteCalculationProgressListener listener) {
+		routeRecalculationHelper.removeCalculationProgressListener(listener);
 	}
 
 	public boolean isPublicTransportMode() {

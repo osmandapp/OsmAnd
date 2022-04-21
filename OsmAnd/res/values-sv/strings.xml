@@ -3968,4 +3968,19 @@
     <string name="rendering_attr_showRunningRoutes_name">Rutter för löpning</string>
     <string name="rendering_attr_showRunningRoutes_description">Visa löprutter</string>
     <string name="routing_attr_prefer_horse_routes_description">Föredra hästvägar</string>
+    <string name="add_page">Addera sida</string>
+    <string name="apply_only_to_new_favorites">Applicera bara till nya favoriter</string>
+    <string name="change_default_appearance">Ändra standard utseende</string>
+    <string name="routeInfo_horse_scale_name">Svårigheter av häst spår</string>
+    <string name="map_widget_altitude">Den aktuella platsens höjd</string>
+    <string name="map_widget_distance_to_destination">Distans till destination</string>
+    <string name="map_widget_current_speed">Nuvarande hastighet</string>
+    <string name="page_number">Sida %1$s</string>
+    <string name="apply_to_existing_points_descr">Tillämpa ändringarna på befintliga punkter i gruppen eller bara på nya\?</string>
+    <string name="apply_to_existing_favorites_descr">Tillämpa ändringarna på gruppens befintliga favoritpunkter eller bara på nya\?</string>
+    <string name="apply_to_existing">Applicera på befintliga</string>
+    <string name="apply_only_to_new_points">Applicera bara på nya punkter</string>
+    <string name="rendering_attr_horse_scale_common_name">Allmän</string>
+    <string name="rendering_attr_horse_scale_demanding_name">Kräver</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Svår</string>
 </resources>

@@ -40,7 +40,19 @@ public class LocaleHelper {
 
 		if (!Algorithms.isEmpty(lang)) {
 			Locale.Builder builder = new Locale.Builder();
-			builder.setLanguage(lang);
+			boolean isLocaleCorrect = false;
+			String langLowerCase = lang.toLowerCase();
+			for (String locale : Locale.getISOLanguages()) {
+				if (locale.toLowerCase().equals(langLowerCase)) {
+					isLocaleCorrect = true;
+					break;
+				}
+			}
+			if (isLocaleCorrect) {
+				builder.setLanguage(lang);
+			} else {
+				lang = "";
+			}
 			if (!Algorithms.isEmpty(country)) {
 				builder.setRegion(country);
 			}

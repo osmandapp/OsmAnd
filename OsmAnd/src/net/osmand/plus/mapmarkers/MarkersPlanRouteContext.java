@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.map.WorldRegion;
-import net.osmand.plus.routing.RouteCalculationProgressCallback;
+import net.osmand.plus.routing.RouteCalculationProgressListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
@@ -220,15 +220,15 @@ public class MarkersPlanRouteContext {
 		params.mode = snappedMode;
 		params.ctx = app;
 		params.calculationProgress = calculationProgress = new RouteCalculationProgress();
-		params.calculationProgressCallback = new RouteCalculationProgressCallback() {
+		params.calculationProgressListener = new RouteCalculationProgressListener() {
 
 			@Override
-			public void start() {
+			public void onCalculationStart() {
 
 			}
 
 			@Override
-			public void updateProgress(int progress) {
+			public void onUpdateCalculationProgress(int progress) {
 				int pairs = calculatedPairs + snapToRoadPairsToCalculate.size();
 				if (pairs != 0) {
 					int pairProgress = 100 / pairs;
@@ -238,15 +238,15 @@ public class MarkersPlanRouteContext {
 			}
 
 			@Override
-			public void requestPrivateAccessRouting() {
+			public void onRequestPrivateAccessRouting() {
 			}
 
 			@Override
-			public void updateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
+			public void onUpdateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
 			}
 
 			@Override
-			public void finish() {
+			public void onCalculationFinish() {
 				calculatedPairs = 0;
 			}
 		};

@@ -2965,7 +2965,7 @@
     <string name="app_mode_personal_transporter">个人运输工具</string>
     <string name="new_profile">新配置文件</string>
     <string name="collected_data">已搜集资料</string>
-    <string name="routing_attr_piste_type_skitour_name">滑雪旅游</string>
+    <string name="routing_attr_piste_type_skitour_name">滑雪游览</string>
     <string name="application_profiles">应用程序配置文件</string>
     <string name="third_party_routing_type">第三方路线规划</string>
     <string name="special_routing_type">特殊路线规划</string>
@@ -3547,7 +3547,7 @@
     <string name="reset_items_descr">隐藏设置会将其重置为原始状态。</string>
     <string name="main_actions_descr">只有四个按钮。</string>
     <string name="main_actions">主要动作</string>
-    <string name="app_mode_ski_touring">滑雪旅游</string>
+    <string name="app_mode_ski_touring">滑雪游览</string>
     <string name="custom_osmand_plugin">自定义 OsmAnd 插件</string>
     <string name="settings_item_read_error">无法从 \'%1$s\' 中读取。</string>
     <string name="settings_item_write_error">无法写到 \'%1$s\'。</string>
@@ -3653,7 +3653,7 @@
     <string name="no_activity_for_intent">安装一个可以执行此操作的应用。</string>
     <string name="gpx_monitoring_stop">暂停旅程记录</string>
     <string name="gpx_monitoring_start">继续旅程记录</string>
-    <string name="routing_attr_allow_intermediate_name">允许中转点线路</string>
+    <string name="routing_attr_allow_intermediate_name">允许中等难度线路</string>
     <string name="shared_string_includes">包括</string>
     <string name="complete_purchase">完成购买</string>
     <string name="regular_price">正常价格</string>
@@ -4233,4 +4233,18 @@
     <string name="stop_download">停止下载</string>
     <string name="stop_download_desc">下载未完成。如果现在中断下载，则只有部分磁贴可供查看。</string>
     <string name="rendering_attr_showFitnessTrails_name">健身步道</string>
+    <string name="gpx_no_routes_title">无路径</string>
+    <string name="routing_attr_allow_advanced_name">允许高难路线</string>
+    <string name="routing_attr_allow_advanced_description">困难的路线，有危险的障碍物和陡峭的路段。</string>
+    <string name="routing_attr_piste_type_skitour_description">滑雪游览线路。</string>
+    <string name="map_widget_altitude">当前位置海拔高度</string>
+    <string name="default_appearance">默认外观</string>
+    <string name="exit_import_descr">确认要退出并不保存任何修改吗？</string>
+    <string name="add_page">添加页面</string>
+    <string name="points_selection_descr">确认要关闭并丢弃所有修改吗？</string>
+    <string name="page_number">第%1$s页</string>
+    <string name="rendering_value_category_name">类别</string>
+    <string name="map_widget_current_speed">当前速度</string>
+    <string name="map_widget_distance_to_destination">距目的地距离</string>
+    <string name="exit_import">是否退出？</string>
 </resources>

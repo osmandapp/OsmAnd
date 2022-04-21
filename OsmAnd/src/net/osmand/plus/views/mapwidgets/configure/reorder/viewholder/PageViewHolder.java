@@ -13,18 +13,38 @@ import androidx.recyclerview.widget.RecyclerView;
 public class PageViewHolder extends RecyclerView.ViewHolder implements UnmovableItem {
 
 	public final View topDivider;
-	public final ImageButton actionButton;
+	public final ImageButton deletePageButton;
 	public final TextView pageText;
+	public final View moveIcon;
 
 	public PageViewHolder(@NonNull View itemView) {
 		super(itemView);
 		topDivider = itemView.findViewById(R.id.top_divider);
-		actionButton = itemView.findViewById(R.id.action_button);
+		deletePageButton = itemView.findViewById(R.id.delete_page_button);
 		pageText = itemView.findViewById(R.id.page);
+		moveIcon = itemView.findViewById(R.id.move_button);
 	}
 
 	@Override
 	public boolean isMovingDisabled() {
 		return false;
+	}
+
+	// This class is needed as int wrapper, because pages reordering with plain int is buggy
+	public static class PageUiInfo {
+
+		public int index;
+
+		public PageUiInfo(int index) {
+			this.index = index;
+		}
+
+		public void onPreviousPageDeleted() {
+			index--;
+		}
+
+		public void onPreviousPageRestored() {
+			index++;
+		}
 	}
 }

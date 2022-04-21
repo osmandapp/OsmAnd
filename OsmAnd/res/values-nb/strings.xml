@@ -4545,4 +4545,45 @@
     <string name="rendering_attr_showTrainRoutes_name">Togruter</string>
     <string name="rendering_attr_showFunicularRoutes_name">Kabelbaneruter</string>
     <string name="rendering_attr_showBusRoutes_name">Bussruter</string>
+    <string name="routeInfo_horse_scale_description">Tegn stier etter vanskelighetsgrad for hestetråkk</string>
+    <string name="rendering_attr_horse_scale_demanding_name">Krevende</string>
+    <string name="rendering_attr_horse_scale_critical_name">Kritisk</string>
+    <string name="map_widget_altitude">Høyde for nåværende posisjon</string>
+    <string name="map_widget_distance_to_destination">Avstand til mål</string>
+    <string name="apply_to_existing_points_descr">Bruk endringer for eksisterende punkt i gruppen, eller kun nye\?</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Vanskelig</string>
+    <string name="page_number">Side %1$s</string>
+    <string name="shared_string_buttons">Knapper</string>
+    <string name="configure_screen_widgets_descr">Velg skjermside å legge til eller flytte rundt på miniprogrammer.</string>
+    <string name="map_markers_bar">Stolpe for kartmarkører</string>
+    <string name="apply_to_existing_favorites_descr">Bruk endringer for eksisterende favorittpunkt i gruppen, eller kun nye\?</string>
+    <string name="apply_to_existing">Bruk for eksisterende</string>
+    <string name="apply_only_to_new_points">Bruk kun for nye punkter</string>
+    <string name="apply_only_to_new_favorites">Bruk kun for nye favoritter</string>
+    <string name="simulation_preview_mode_desc">Simuleringen går fortest på rette strekk, og bruker lenger tid på kryss.</string>
+    <string name="simulation_constant_mode_title">Fastsatt hastighet</string>
+    <string name="simulation_constant_mode_desc">Simuleringen vil utføres med konstant valgt hastighet.</string>
+    <string name="simulation_real_mode_title">Realistisk simulering</string>
+    <string name="simulation_real_mode_desc">På rette veistrekk vil hastigheten være omtrent maksimalt tillatt hastighet.
+\nVed kryss vil simuleringen gå tregere.
+\nEkstra ned-sakking skjer ved trafikklys, stopp-skilt, osv.</string>
+    <string name="speed_mode">Hastighetsmodus</string>
+    <string name="map_widget_current_speed">Nåværende hastighet</string>
+    <string name="add_page">Legg til en side</string>
+    <string name="change_default_appearance">Endre forvalgt utseende</string>
+    <string name="routeInfo_horse_scale_name">Vanskelighetsgrad for hestetråkk</string>
+    <string name="rendering_attr_horse_scale_common_name">Vanlig</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">Farlig</string>
+    <string name="rendering_attr_horse_scale_impossible_name">Umulig</string>
+    <string name="routing_attr_carriage_restrictions_name">Vognbegrensninger</string>
+    <string name="routing_attr_carriage_restrictions_description">Overvei tilgangstilganger for kjøretøy som dras av hester</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Lettbanelinjer</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Énskinnebanelinje</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">Skytteltrafikklinjer</string>
+    <string name="shared_string_visible_widgets">Synlige miniprogrammer</string>
+    <string name="top_widgets_panel">Topp-panel</string>
+    <string name="bottom_widgets_panel">Bunn-panel</string>
+    <string name="shared_string_item">Element</string>
+    <string name="simulation_preview_mode_title">Hurtigforhåndsvisningsmodus</string>
+    <string name="osm_carto_render_descr">Ligner stilen til OpenStreetMap-carto brukt på OSM-nettsiden</string>
 </resources>

@@ -41,7 +41,7 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
     private static final String TAG = "MapRendererContext";
 
 	public static final int OBF_RASTER_LAYER = 0;
-	private OsmandApplication app;
+	private final OsmandApplication app;
 	
 	// input parameters
 	private MapStylesCollection mapStylesCollection;
@@ -50,8 +50,8 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 	private boolean nightMode;
 	private final float density;
 	
-	// ached objects
-	private Map<String, ResolvedMapStyle> mapStyles = new HashMap<String, ResolvedMapStyle>();
+	// сached objects
+	private final Map<String, ResolvedMapStyle> mapStyles = new HashMap<>();
 	private CachedMapPresentation presentationObjectParams;
 	private MapPresentationEnvironment mapPresentationEnvironment;
 	
@@ -182,7 +182,7 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 		RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
 		Map<String, String> props = new HashMap<String, String>();
 		for (RenderingRuleProperty customProp : storage.PROPS.getCustomRules()) {
-			if(RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN.equals(customProp.getCategory())){
+			if (RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN.equals(customProp.getCategory())){
 				continue;
 			} else if (customProp.isBoolean()) {
 				CommonPreference<Boolean> pref = prefs.getCustomRenderBooleanProperty(customProp.getAttrName());
@@ -276,7 +276,7 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 		}
 	}
 
-	private class CachedMapPresentation {
+	private static class CachedMapPresentation {
 		String langId ;
 		LanguagePreference langPref;
 		ResolvedMapStyle mapStyle;
@@ -326,16 +326,15 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
     }
 
     private void loadStyleFromStream(String name, InputStream source) {
-    	if(source == null) {
+    	if (source == null) {
     		return;
     	}
         if (RendererRegistry.DEFAULT_RENDER.equals(name)) {
-            if (source != null) {
-                try {
-                    source.close();
-                } catch(IOException e) {}
-            }
-            return;
+	        try {
+	            source.close();
+	        } catch (IOException ignored) {
+	        }
+	        return;
         }
 
         Log.d(TAG, "Going to pass '" + name + "' style content to native");
@@ -355,7 +354,8 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
         } finally {
             try {
             	source.close();
-            } catch(IOException e) {}
+            } catch (IOException ignored) {
+            }
         }
 
         if (!mapStylesCollection.addStyleFromByteArray(
@@ -363,6 +363,4 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
             Log.w(TAG, "Failed to add style from byte array");
         }
     }
-
-	
 }

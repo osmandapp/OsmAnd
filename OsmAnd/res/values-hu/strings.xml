@@ -4579,7 +4579,12 @@
     <string name="change_default_appearance">Alapértelmezett megjelenés módosítása</string>
     <string name="map_widget_distance_to_destination">Távolság a célig</string>
     <string name="map_widget_current_speed">Pillanatnyi sebesség</string>
-    <string name="add_page">Lap hozzáadása</string>
+    <string name="add_page">Oldal hozzáadása</string>
     <string name="page_number">%1$s oldal</string>
     <string name="map_widget_altitude">A jelenlegi pozíció magassága</string>
+    <string name="shared_string_symbol">Szimbólum</string>
+    <string name="no_widgets_descr">Egy vagy több widget hozzáadása a rendelkezésre állók közül.</string>
+    <string name="no_widgets_here_yet">Itt még nincs widget</string>
+    <string name="available_widgets">Elérhető widgetek</string>
+    <string name="snackbar_page_removed">„%1$s oldal” eltávolíttatott.</string>
 </resources>

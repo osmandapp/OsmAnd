@@ -4616,7 +4616,7 @@
     <string name="routeInfo_horse_scale_name">صعوبة مسارات الخيل</string>
     <string name="routeInfo_horse_scale_description">إصدار المسارات وفقا لصعوبة مسارات الخيل</string>
     <string name="rendering_attr_horse_scale_common_name">شائع</string>
-    <string name="rendering_attr_horse_scale_demanding_name">مطالب</string>
+    <string name="rendering_attr_horse_scale_demanding_name">مطالبة</string>
     <string name="rendering_attr_horse_scale_difficult_name">صعب</string>
     <string name="rendering_attr_horse_scale_critical_name">حرج</string>
     <string name="rendering_attr_horse_scale_dangerous_name">خطير</string>
@@ -4633,7 +4633,7 @@
     <string name="map_markers_bar">شريط علامات الخريطة</string>
     <string name="shared_string_visible_widgets">الأدوات المرئية</string>
     <string name="top_widgets_panel">الشزيط العلوي</string>
-    <string name="bottom_widgets_panel">الشزيط السفلي</string>
+    <string name="bottom_widgets_panel">الشريط السفلي</string>
     <string name="shared_string_item">غرض</string>
     <string name="shared_string_buttons">أزرار</string>
     <string name="configure_screen_widgets_descr">حدد جانب الشاشة لإضافة أدوات واجهة المستخدم أو إعادة ترتيبها.</string>
@@ -4643,4 +4643,20 @@
     <string name="simulation_preview_mode_desc">ستكون سرعة المحاكاة قصوى على طول الأقسام المستقيمة وبطيئة فقط عند التقاطعات.</string>
     <string name="simulation_preview_mode_title">وضع المعاينة السريعة</string>
     <string name="speed_mode">وضع السرعة</string>
+    <string name="map_widget_distance_to_destination">المسافة إلى الوجهة</string>
+    <string name="map_widget_current_speed">السرعة الحالية</string>
+    <string name="apply_only_to_new_favorites">تطبيق على المفضلة الجديدة فقط</string>
+    <string name="apply_to_existing_points_descr">تطبيق التغييرات على النقاط الموجودة في المجموعة أو على النقاط الجديدة فقط؟</string>
+    <string name="apply_to_existing_favorites_descr">تطبيق التغييرات على النقاط المفضلة الحالية للمجموعة أم على النقاط الجديدة فقط؟</string>
+    <string name="apply_only_to_new_points">تطبيق على النقاط الجديدة فقط</string>
+    <string name="change_default_appearance">تغيير المظهر الافتراضي</string>
+    <string name="map_widget_altitude">ارتفاع الموقع الحالي</string>
+    <string name="add_page">إضافة صفحة</string>
+    <string name="page_number">صفحة %1$s</string>
+    <string name="apply_to_existing">تطبيق على القائمة</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">مسارات الذهاب والعودة</string>
+    <string name="osm_carto_render_descr">مماثل لنمط OpenStreetMap-carto المستخدم في موقع OSM الرئيسي</string>
+    <string name="simulation_real_mode_desc">في الطرق المستقيمة ، ستصل السرعة تقريبا إلى أقصى سرعة مسموح بها.
+\nعند التقاطعات ، سوف تقل السرعة .
+\nسيتم تطبيق عقوبات إضافية على إشارات المرور وعلامات التوقف وما إلى ذلك.</string>
 </resources>
