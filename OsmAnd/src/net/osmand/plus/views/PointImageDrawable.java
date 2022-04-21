@@ -297,20 +297,20 @@ public class PointImageDrawable extends Drawable {
 		}
 	}
 
-    @Nullable
+	@Nullable
 	public Bitmap getBigMergedBitmap(float textScale) {
 		setScale(textScale);
-        int width = getBigMergedBitmapWidth();
-        int height = getBigMergedBitmapHeight();
-        if (width == 0 || height == 0) {
-        	return null;
+		int width = getBigMergedBitmapWidth();
+		int height = getBigMergedBitmapHeight();
+		if (width == 0 || height == 0) {
+			return null;
 		}
-        Bitmap bitmapResult = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmapResult);
-        //get ready bitmap into bitmapResult
-        drawPoint(canvas, width/2.0f, height/2.0f, scale, false);
-        return bitmapResult;
-    }
+		Bitmap bitmapResult = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(bitmapResult);
+		//get ready bitmap into bitmapResult
+		drawPoint(canvas, width / 2.0f, height / 2.0f, scale, false);
+		return bitmapResult;
+	}
 
 	private int getBigMergedBitmapWidth() {
 		int width = 0;
@@ -325,10 +325,10 @@ public class PointImageDrawable extends Drawable {
 			width = Math.max(width, background.getWidth());
 			width = Math.max(width, listIcon.getWidth());
 		}
-        return width;
-    }
+		return width;
+	}
 
-    private int getBigMergedBitmapHeight() {
+	private int getBigMergedBitmapHeight() {
 		int height = 0;
 		if (withShadow) {
 			height = Math.max(height, mapIconBackgroundBottom.getHeight());
@@ -342,36 +342,36 @@ public class PointImageDrawable extends Drawable {
 			height = Math.max(height, listIcon.getHeight());
 		}
 		return height;
-    }
+	}
 
-    @Nullable
-    public Bitmap getSmallMergedBitmap(float textScale) {
+	@Nullable
+	public Bitmap getSmallMergedBitmap(float textScale) {
 		setScale(textScale);
-        int width = getSmallMergedBitmapWidth();
-        int height = getSmallMergedBitmapHeight();
+		int width = getSmallMergedBitmapWidth();
+		int height = getSmallMergedBitmapHeight();
 		if (width == 0 || height == 0) {
 			return null;
 		}
-        Bitmap bitmapResult = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmapResult);
-        //get ready bitmap into bitmapResult
-        drawSmallPoint(canvas, width/2.0f, height/2.0f, textScale);
-        return bitmapResult;
-    }
+		Bitmap bitmapResult = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(bitmapResult);
+		//get ready bitmap into bitmapResult
+		drawSmallPoint(canvas, width / 2.0f, height / 2.0f, textScale);
+		return bitmapResult;
+	}
 
-    private int getSmallMergedBitmapWidth() {
+	private int getSmallMergedBitmapWidth() {
 		int width = 0;
-		width = Math.max(width,mapIconBackgroundBottomSmall.getWidth());
-		width = Math.max(width,mapIconBackgroundCenterSmall.getWidth());
-		width = Math.max(width,mapIconBackgroundTopSmall.getWidth());
-        return width;
-    }
+		width = Math.max(width, mapIconBackgroundBottomSmall.getWidth());
+		width = Math.max(width, mapIconBackgroundCenterSmall.getWidth());
+		width = Math.max(width, mapIconBackgroundTopSmall.getWidth());
+		return width;
+	}
 
-    private int getSmallMergedBitmapHeight() {
+	private int getSmallMergedBitmapHeight() {
 		int height = 0;
-		height = Math.max(height,mapIconBackgroundBottomSmall.getHeight());
-		height = Math.max(height,mapIconBackgroundCenterSmall.getHeight());
-		height = Math.max(height,mapIconBackgroundTopSmall.getHeight());
+		height = Math.max(height, mapIconBackgroundBottomSmall.getHeight());
+		height = Math.max(height, mapIconBackgroundCenterSmall.getHeight());
+		height = Math.max(height, mapIconBackgroundTopSmall.getHeight());
 		return height;
-    }
+	}
 }
