@@ -43,7 +43,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetParams.MAX_SPEED;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.NAVIGATION_TIME;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.NEXT_TURN;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.SMALL_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.PLAIN_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_TIME;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.RADIUS_RULER;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.SECOND_NEXT_TURN;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_1;
@@ -233,7 +233,7 @@ public class ApplicationMode {
 		regWidgetAvailability(BATTERY.id, all);
 		regWidgetAvailability(BEARING.id, all);
 		regWidgetAvailability(RADIUS_RULER.id, all);
-		regWidgetAvailability(PLAIN_TIME.id, all);
+		regWidgetAvailability(CURRENT_TIME.id, all);
 	}
 
 	// returns modifiable ! Set<ApplicationMode> to exclude non-wanted derived

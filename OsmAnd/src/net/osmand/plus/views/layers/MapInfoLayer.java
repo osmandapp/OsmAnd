@@ -64,7 +64,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetParams.MARKERS_TOP_BAR;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.MAX_SPEED;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.NAVIGATION_TIME;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.PLAIN_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_TIME;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.RADIUS_RULER;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.SECOND_NEXT_TURN;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_1;
@@ -300,7 +300,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		registerWidget(GPS_INFO, gpsInfo, rightPanel);
 
 		MapWidget plainTime = routeWidgetsFactory.createPlainTimeControl(mapActivity);
-		registerWidget(PLAIN_TIME, plainTime, rightPanel);
+		registerWidget(CURRENT_TIME, plainTime, rightPanel);
 
 		MapWidget battery = routeWidgetsFactory.createBatteryControl(mapActivity);
 		registerWidget(BATTERY, battery, rightPanel);
