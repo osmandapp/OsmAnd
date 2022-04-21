@@ -17,6 +17,7 @@ import android.graphics.drawable.Drawable;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.utils.AndroidUtils;
@@ -296,10 +297,14 @@ public class PointImageDrawable extends Drawable {
 		}
 	}
 
-    public Bitmap getBigMergedBitmap(float textScale) {
+    @Nullable
+	public Bitmap getBigMergedBitmap(float textScale) {
 		setScale(textScale);
         int width = getBigMergedBitmapWidth();
         int height = getBigMergedBitmapHeight();
+        if (width == 0 || height == 0) {
+        	return null;
+		}
         Bitmap bitmapResult = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmapResult);
         //get ready bitmap into bitmapResult
@@ -308,8 +313,7 @@ public class PointImageDrawable extends Drawable {
     }
 
 	private int getBigMergedBitmapWidth() {
-		//bitmap width must be > 0
-		int width = 1;
+		int width = 0;
 		if (withShadow) {
 			width = Math.max(width, mapIconBackgroundBottom.getWidth());
 			width = Math.max(width, mapIconBackgroundCenter.getWidth());
@@ -325,8 +329,7 @@ public class PointImageDrawable extends Drawable {
     }
 
     private int getBigMergedBitmapHeight() {
-		//bitmap height must be > 0
-		int height = 1;
+		int height = 0;
 		if (withShadow) {
 			height = Math.max(height, mapIconBackgroundBottom.getHeight());
 			height = Math.max(height, mapIconBackgroundCenter.getHeight());
@@ -341,10 +344,14 @@ public class PointImageDrawable extends Drawable {
 		return height;
     }
 
+    @Nullable
     public Bitmap getSmallMergedBitmap(float textScale) {
 		setScale(textScale);
         int width = getSmallMergedBitmapWidth();
         int height = getSmallMergedBitmapHeight();
+		if (width == 0 || height == 0) {
+			return null;
+		}
         Bitmap bitmapResult = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmapResult);
         //get ready bitmap into bitmapResult
@@ -353,8 +360,7 @@ public class PointImageDrawable extends Drawable {
     }
 
     private int getSmallMergedBitmapWidth() {
-		//bitmap width must be > 0
-		int width = 1;
+		int width = 0;
 		width = Math.max(width,mapIconBackgroundBottomSmall.getWidth());
 		width = Math.max(width,mapIconBackgroundCenterSmall.getWidth());
 		width = Math.max(width,mapIconBackgroundTopSmall.getWidth());
@@ -362,8 +368,7 @@ public class PointImageDrawable extends Drawable {
     }
 
     private int getSmallMergedBitmapHeight() {
-		//bitmap height must be > 0
-		int height = 1;
+		int height = 0;
 		height = Math.max(height,mapIconBackgroundBottomSmall.getHeight());
 		height = Math.max(height,mapIconBackgroundCenterSmall.getHeight());
 		height = Math.max(height,mapIconBackgroundTopSmall.getHeight());

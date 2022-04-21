@@ -98,14 +98,15 @@ public class FavouritesTileProvider extends interface_MapTiledCollectionProvider
 
     @Override
     public SWIGTYPE_p_sk_spT_SkImage_const_t getImageBitmap(int index, boolean isFullSize) {
-        FavouritesMapLayerData data = favouritesMapLayerDataList.get(index);
 
-        //bitmap width and height must be > 0 else occur error
-        Bitmap bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
-        if (data == null || ctx == null) {
-            return NativeUtilities.createSkImageFromBitmap(bitmap);
+        if (ctx == null || index >= favouritesMapLayerDataList.size()) {
+            //bitmap width and height must be > 0 else occur crash
+            Bitmap emptyBitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+            return NativeUtilities.createSkImageFromBitmap(emptyBitmap);
         }
 
+        FavouritesMapLayerData data = favouritesMapLayerDataList.get(index);
+        Bitmap bitmap;
         if (isFullSize) {
             int bigBitmapKey = getKey(data.colorBigPoint, data.withShadow, data.overlayIconId, data.backgroundType, data.hasMarker, data.textScale);
             if (!bigBitmapCache.containsKey(bigBitmapKey)) {
@@ -133,7 +134,12 @@ public class FavouritesTileProvider extends interface_MapTiledCollectionProvider
                 bitmap = smallBitmapCache.get(smallBitmapKey);
             }
         }
-        return NativeUtilities.createSkImageFromBitmap(bitmap);
+        if (bitmap == null) {
+            Bitmap emptyBitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+            return NativeUtilities.createSkImageFromBitmap(emptyBitmap);
+        } else {
+            return NativeUtilities.createSkImageFromBitmap(bitmap);
+        }
     }
 
     @Override

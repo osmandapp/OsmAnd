@@ -111,6 +111,11 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		MapRendererView mapRendererView = getMapView().getMapRenderer();
 		if (mapRendererView != null) {
 			//OpenGL draw occur in favouritesChangeListener
+			if (mapActivitInvalidated) {
+				//change screen orientation
+				favouritesChangeListener.showFavourites();
+				mapActivitInvalidated = false;
+			}
 			return;
 		}
 		cache.clear();
@@ -335,7 +340,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 			showFavourites();
 		}
 
-		private void showFavourites() {
+		public void showFavourites() {
 			MapRendererView mapRendererView = getMapView().getMapRenderer();
 			if (mapRendererView == null) {
 				return;

@@ -690,10 +690,8 @@ public class FavouritesHelper {
 	}
 
 	public void updateFavouriteProperties() {
-		app.runInUIThread(() -> {
-			for (FavoritesListener listener : listeners) {
-				listener.onFavoritePropertyUpdated();
-			}
-		});
+		for (FavoritesListener listener : listeners) {
+			listener.onFavoritePropertyUpdated();
+		}
 	}
 }
