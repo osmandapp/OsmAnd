@@ -326,7 +326,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 
 		@Override
-		public void onFavoriteDataUpdated(@NonNull @NotNull FavouritePoint point) {
+		public void onFavoriteDataUpdated(@NotNull FavouritePoint point) {
 			showFavourites();
 		}
 
