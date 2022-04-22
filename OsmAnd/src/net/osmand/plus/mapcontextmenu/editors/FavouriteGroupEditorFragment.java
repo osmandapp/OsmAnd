@@ -66,7 +66,6 @@ public class FavouriteGroupEditorFragment extends GroupEditorFragment {
 			favouritesHelper.updateGroupName(favoriteGroup, getNameTextValue(), false);
 
 			favouritesHelper.saveCurrentPointsIntoFile();
-			favouritesHelper.updateFavouriteProperties();
 			saved = true;
 		}
 		dismiss();

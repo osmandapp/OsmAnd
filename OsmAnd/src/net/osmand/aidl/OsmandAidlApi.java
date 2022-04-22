@@ -1017,7 +1017,6 @@ public class OsmandAidlApi {
 			favoritesHelper.updateGroupName(group, newGroupName, false);
 
 			favoritesHelper.saveCurrentPointsIntoFile();
-			favoritesHelper.updateFavouriteProperties();
 			return true;
 		}
 		return false;

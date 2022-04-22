@@ -113,8 +113,13 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 			//OpenGL draw occur in favouritesChangeListener
 			if (mapActivitInvalidated) {
 				//change screen orientation
-				favouritesChangeListener.showFavourites();
+				favouritesChangeListener.showFavourites(true);
 				mapActivitInvalidated = false;
+			}
+			if (!this.settings.SHOW_FAVORITES.get()) {
+				favouritesChangeListener.clearFavourites();
+			} else {
+				favouritesChangeListener.showFavourites(false);
 			}
 			return;
 		}
@@ -327,29 +332,30 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		@Override
 		public void onFavoritesLoaded() {
-			showFavourites();
+			showFavourites(true);
 		}
 
 		@Override
 		public void onFavoriteDataUpdated(@NotNull FavouritePoint point) {
-			showFavourites();
+			showFavourites(true);
 		}
 
 		@Override
 		public void onFavoritePropertyUpdated() {
-			showFavourites();
+			showFavourites(true);
 		}
 
-		public void showFavourites() {
+		public void showFavourites(boolean force) {
 			MapRendererView mapRendererView = getMapView().getMapRenderer();
 			if (mapRendererView == null) {
 				return;
 			}
 
-			if (favouritesMapLayerProvider != null) {
-				favouritesMapLayerProvider.clearSymbols(mapRendererView);
-				favouritesMapLayerProvider.clearData();
+			if (!force && favouritesMapLayerProvider != null && favouritesMapLayerProvider.getPointsCount() > 0) {
+				return;
 			}
+
+			clearFavourites();
 
 			if (favouritesMapLayerProvider == null) {
 				favouritesMapLayerProvider = new FavouritesTileProvider(baseOrder);
@@ -381,6 +387,17 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 					}
 				}
 				favouritesMapLayerProvider.drawSymbols(mapRendererView);
+			}
+		}
+
+		public void clearFavourites() {
+			MapRendererView mapRendererView = getMapView().getMapRenderer();
+			if (mapRendererView == null) {
+				return;
+			}
+			if (favouritesMapLayerProvider != null && favouritesMapLayerProvider.getPointsCount() > 0) {
+				favouritesMapLayerProvider.clearSymbols(mapRendererView);
+				favouritesMapLayerProvider.clearData();
 			}
 		}
 	}

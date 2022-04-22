@@ -439,6 +439,7 @@ public class FavouritesHelper {
 
 	public void saveCurrentPointsIntoFile() {
 		fileHelper.saveCurrentPointsIntoFile(new ArrayList<>(cachedFavoritePoints));
+		updateFavouriteProperties();
 	}
 
 	public Exception exportFavorites() {
@@ -689,7 +690,7 @@ public class FavouritesHelper {
 		return group;
 	}
 
-	public void updateFavouriteProperties() {
+	private void updateFavouriteProperties() {
 		for (FavoritesListener listener : listeners) {
 			listener.onFavoritePropertyUpdated();
 		}
