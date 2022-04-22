@@ -395,8 +395,6 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
 		mapMarkerBuilder
 				.setPosition(position)
-				.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.Top)
-				.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.Right)
 				.setIsHidden(false)
 				.setBaseOrder(baseOrder)
 				.setPinIcon(NativeUtilities.createSkImageFromBitmap(bitmap))

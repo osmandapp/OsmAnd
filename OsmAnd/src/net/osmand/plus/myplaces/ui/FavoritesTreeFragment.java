@@ -129,6 +129,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				public void onFavoriteDataUpdated(@NonNull FavouritePoint point) {
 					favouritesAdapter.notifyDataSetChanged();
 				}
+
+				@Override
+				public void onFavoritePropertyUpdated() {
+				}
 			});
 		}
 		setAdapter(favouritesAdapter);

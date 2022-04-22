@@ -63,6 +63,10 @@ public class LauncherShortcutsHelper {
 			@Override
 			public void onFavoriteDataUpdated(@NonNull FavouritePoint point) {
 			}
+
+			@Override
+			public void onFavoritePropertyUpdated() {
+			}
 		};
 		app.getFavoritesHelper().addListener(favoritesListener);
 	}

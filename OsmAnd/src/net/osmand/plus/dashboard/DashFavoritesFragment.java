@@ -80,6 +80,10 @@ public class DashFavoritesFragment extends DashLocationFragment {
 				@Override
 				public void onFavoriteDataUpdated(@NonNull FavouritePoint point) {
 				}
+
+				@Override
+				public void onFavoritePropertyUpdated() {
+				}
 			});
 		}
 	}

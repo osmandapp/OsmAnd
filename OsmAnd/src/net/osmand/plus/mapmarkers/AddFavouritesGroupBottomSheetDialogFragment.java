@@ -49,6 +49,10 @@ public class AddFavouritesGroupBottomSheetDialogFragment extends AddGroupBottomS
 				@Override
 				public void onFavoriteDataUpdated(@NonNull FavouritePoint point) {
 				}
+
+				@Override
+				public void onFavoritePropertyUpdated() {
+				}
 			});
 		}
 		return new FavouritesGroupsAdapter(getContext(), favouritesHelper.getFavoriteGroups());

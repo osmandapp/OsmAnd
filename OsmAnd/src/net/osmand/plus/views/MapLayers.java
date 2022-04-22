@@ -154,7 +154,7 @@ public class MapLayers {
 		poiMapLayer = new POIMapLayer(app);
 		mapView.addLayer(poiMapLayer, 3);
 		// 4. favorites layer
-		mFavouritesLayer = new FavouritesLayer(app);
+		mFavouritesLayer = new FavouritesLayer(app, -160000);
 		mapView.addLayer(mFavouritesLayer, 4);
 		// 4.6 measurement tool layer
 		measurementToolLayer = new MeasurementToolLayer(app);

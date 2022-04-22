@@ -2480,6 +2480,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		updateMenu();
 	}
 
+	@Override
+	public void onFavoritePropertyUpdated() {
+	}
+
 	@NonNull
 	public QuadRect getRouteRect(@NonNull MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();

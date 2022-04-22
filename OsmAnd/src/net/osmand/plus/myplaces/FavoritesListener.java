@@ -9,4 +9,6 @@ public interface FavoritesListener {
 	void onFavoritesLoaded();
 
 	void onFavoriteDataUpdated(@NonNull FavouritePoint point);
+
+	void onFavoritePropertyUpdated();
 }
