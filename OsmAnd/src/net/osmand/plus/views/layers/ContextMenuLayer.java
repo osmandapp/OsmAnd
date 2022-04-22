@@ -33,6 +33,7 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.NativeLibrary.RenderedObject;
+import net.osmand.PlatformUtil;
 import net.osmand.RenderingContext;
 import net.osmand.aidl.AidlMapPointWrapper;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -92,6 +93,8 @@ import net.osmand.router.network.NetworkRouteSelector.RouteType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -106,10 +109,9 @@ import gnu.trove.list.array.TIntArrayList;
 
 public class ContextMenuLayer extends OsmandMapLayer {
 
-	//private static final Log LOG = PlatformUtil.getLog(ContextMenuLayer.class);
+	private static final Log log = PlatformUtil.getLog(ContextMenuLayer.class);
 	public static final int VIBRATE_SHORT = 100;
 	private static final int AMENITY_SEARCH_RADIUS = 50;
-	private static final int ROUTE_SEARCH_RADIUS_PX = 10;
 
 	private OsmandMapTileView view;
 
@@ -885,7 +887,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		try {
 			segmentList.addAll(routeSelector.getFirstSegments(rect, null));
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error(e);
 		}
 		for (NetworkRouteSegment routeSegment : segmentList) {
 			if (isUniqueRoute(selectedObjects.keySet(), routeSegment)) {
