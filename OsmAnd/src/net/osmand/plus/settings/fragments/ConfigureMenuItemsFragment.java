@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.CtxMenuUtils;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
@@ -128,8 +129,8 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	@Override
 	public int getStatusBarColorId() {
 		View view = getView();
-		if (view != null && Build.VERSION.SDK_INT >= 23 && !nightMode) {
-			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+		if (view != null && !nightMode) {
+			AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), true);
 		}
 		return nightMode ? R.color.activity_background_dark : R.color.activity_background_light;
 	}
