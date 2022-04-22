@@ -13,9 +13,7 @@ public class OnVoiceNavigationParams extends AidlParams {
 	private ArrayList<String> cmds = new ArrayList<>();
 	private ArrayList<String> played = new ArrayList<>();
 
-	public OnVoiceNavigationParams() {
-
-	}
+	public OnVoiceNavigationParams() { }
 
 	public OnVoiceNavigationParams(List<String> cmds, List<String> played) {
 		if (cmds != null) {

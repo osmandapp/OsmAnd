@@ -42,6 +42,7 @@ import net.osmand.aidlapi.customization.PreferenceParams;
 import net.osmand.aidlapi.exit.ExitAppParams;
 import net.osmand.aidlapi.info.AppInfoParams;
 import net.osmand.aidlapi.info.GetTextParams;
+import net.osmand.aidlapi.logcat.OnLogcatMessageParams;
 import net.osmand.aidlapi.map.ALatLon;
 import net.osmand.aidlapi.map.ALocation;
 import net.osmand.aidlapi.navigation.ABlockedRoad;
@@ -72,6 +73,8 @@ import net.osmand.plus.myplaces.TrackBitmapDrawer.TracksDrawParams;
 import net.osmand.plus.plugins.CustomOsmandPlugin;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.plugins.development.LogcatAsyncTask;
+import net.osmand.plus.plugins.development.LogcatMessageListener;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.quickaction.QuickAction;
@@ -81,6 +84,7 @@ import net.osmand.plus.routing.IRoutingDataUpdateListener;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.VoiceRouter;
+import net.osmand.plus.routing.VoiceRouter.VoiceMessageListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsType;
@@ -163,6 +167,7 @@ public class OsmandAidlApi {
 	public static final int KEY_ON_CONTEXT_MENU_BUTTONS_CLICK = 4;
 	public static final int KEY_ON_VOICE_MESSAGE = 8;
 	public static final int KEY_ON_KEY_EVENT = 16;
+	public static final int KEY_ON_LOGCAT_MESSAGE = 32;
 
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlApi.class);
 
@@ -232,8 +237,11 @@ public class OsmandAidlApi {
 	private final OsmandApplication app;
 	private Map<String, BroadcastReceiver> receivers = new TreeMap<>();
 	private final Map<String, ConnectedApp> connectedApps = new ConcurrentHashMap<>();
+	private final Map<Long, IRoutingDataUpdateListener> navUpdateCallbacks = new ConcurrentHashMap<>();
 	private final Map<String, AidlContextMenuButtonsWrapper> contextMenuButtonsParams = new ConcurrentHashMap<>();
 	private final Map<Long, VoiceRouter.VoiceMessageListener> voiceRouterMessageCallbacks = new ConcurrentHashMap<>();
+	private final Map<Long, Set<Integer>> keyEventCallbacks = new ConcurrentHashMap<>();
+	private final Map<Long, LogcatAsyncTask> logcatAsyncTasks = new ConcurrentHashMap<>();
 
 	private MapActivity mapActivity;
 
@@ -2040,8 +2048,6 @@ public class OsmandAidlApi {
 		return app.getAppCustomization().changePluginStatus(pluginId, newState);
 	}
 
-	private final Map<Long, IRoutingDataUpdateListener> navUpdateCallbacks = new ConcurrentHashMap<>();
-
 	void registerForNavigationUpdates(long id) {
 		final NextDirectionInfo baseNdi = new NextDirectionInfo();
 		IRoutingDataUpdateListener listener = () -> {
@@ -2133,8 +2139,37 @@ public class OsmandAidlApi {
 	}
 
 	public void unregisterFromVoiceRouterMessages(long id) {
-		app.getRoutingHelper().getVoiceRouter().removeVoiceMessageListener(voiceRouterMessageCallbacks.get(id));
-		voiceRouterMessageCallbacks.remove(id);
+		VoiceMessageListener callback = voiceRouterMessageCallbacks.remove(id);
+		if (callback != null) {
+			app.getRoutingHelper().getVoiceRouter().removeVoiceMessageListener(callback);
+		}
+	}
+
+	public void registerLogcatListener(long id, String filterLevel) {
+		LogcatMessageListener listener = (_filterLevel, logs) -> {
+			if (aidlCallbackListenerV2 != null) {
+				for (OsmandAidlServiceV2.AidlCallbackParams cb : aidlCallbackListenerV2.getAidlCallbacks().values()) {
+					if (!aidlCallbackListenerV2.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_LOGCAT_MESSAGE) > 0) {
+						try {
+							cb.getCallback().onLogcatMessage(new OnLogcatMessageParams(_filterLevel, logs));
+						} catch (Exception e) {
+							LOG.error(e.getMessage(), e);
+						}
+					}
+				}
+			}
+		};
+		stopLogcatTask(id);
+		LogcatAsyncTask task = new LogcatAsyncTask(listener, filterLevel);
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		logcatAsyncTasks.put(id, task);
+	}
+
+	public void stopLogcatTask(long id) {
+		LogcatAsyncTask task = logcatAsyncTasks.remove(id);
+		if (task != null) {
+			task.stop();
+		}
 	}
 
 	public Map<String, AidlContextMenuButtonsWrapper> getContextMenuButtonsParams() {
@@ -2663,8 +2698,6 @@ public class OsmandAidlApi {
 				a.avgElevation, a.minElevation, a.maxElevation, a.minSpeed, a.maxSpeed, a.avgSpeed,
 				a.points, a.wptPoints, a.wptCategoryNames);
 	}
-
-	private final Map<Long, Set<Integer>> keyEventCallbacks = new ConcurrentHashMap<>();
 
 	public boolean onKeyEvent(KeyEvent event) {
 		if (aidlCallbackListenerV2 != null) {

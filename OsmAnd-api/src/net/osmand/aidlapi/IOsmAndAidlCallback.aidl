@@ -4,6 +4,7 @@ import net.osmand.aidlapi.search.SearchResult;
 import net.osmand.aidlapi.gpx.AGpxBitmap;
 import net.osmand.aidlapi.navigation.ADirectionInfo;
 import net.osmand.aidlapi.navigation.OnVoiceNavigationParams;
+import net.osmand.aidlapi.logcat.OnLogcatMessageParams;
 
 interface IOsmAndAidlCallback {
 
@@ -56,4 +57,9 @@ interface IOsmAndAidlCallback {
      *  Callback for {@link IOsmAndAidlInterface} registerForKeyEvents() method.
      */
     void onKeyEvent(in KeyEvent params);
+
+    /**
+     *  Callback for {@link IOsmAndAidlInterface} registerForLogcatMessages() method.
+     */
+    void onLogcatMessage(in OnLogcatMessageParams params);
 }
