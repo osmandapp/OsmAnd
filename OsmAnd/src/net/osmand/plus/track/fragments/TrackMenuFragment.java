@@ -65,7 +65,6 @@ import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
-import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -133,6 +132,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.widgets.IconPopupMenu;
+import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -192,7 +192,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private String callingFragmentTag;
 	private SelectedGpxPoint gpxPoint;
 	private TrackChartPoints trackChartPoints;
-	private RenderedObject renderedObject;
+	private NetworkRouteSegment routeSegment;
 
 	private Float heading;
 	private Location lastLocation;
@@ -382,8 +382,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		this.callingFragmentTag = callingFragmentTag;
 	}
 
-	public void setRenderedObject(RenderedObject renderedObject) {
-		this.renderedObject = renderedObject;
+	public void setRouteSegment(NetworkRouteSegment routeSegment) {
+		this.routeSegment = routeSegment;
 	}
 
 	public void setGpxPoint(SelectedGpxPoint point) {
@@ -465,8 +465,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		AndroidUiHelper.updateVisibility(headerIcon, menuType != TrackMenuType.OPTIONS);
 
 		Drawable icon = null;
-		if (renderedObject != null) {
-			icon = getIconForRouteObject(app, renderedObject);
+		if (routeSegment != null) {
+			icon = getIconForRouteObject(app, routeSegment);
 		}
 		headerIcon.setImageDrawable(icon != null ? icon : app.getUIUtilities().getThemedIcon(R.drawable.ic_action_polygom_dark));
 	}
@@ -721,11 +721,11 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					descriptionCard = new DescriptionCard(getMapActivity(), this, displayHelper.getGpx());
 					cardsContainer.addView(descriptionCard.build(mapActivity));
 				}
-				if (renderedObject != null) {
+				if (routeSegment != null) {
 					if (routeInfoCard != null && routeInfoCard.getView() != null) {
 						reattachCard(cardsContainer, routeInfoCard);
 					} else {
-						routeInfoCard = new RouteInfoCard(getMapActivity(), renderedObject);
+						routeInfoCard = new RouteInfoCard(getMapActivity(), routeSegment);
 						cardsContainer.addView(routeInfoCard.build(mapActivity));
 					}
 				}
@@ -1653,7 +1653,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	                                   @Nullable String tabToOpenName,
 	                                   boolean adjustMapPosition,
 	                                   @Nullable GPXTrackAnalysis analyses,
-	                                   @Nullable RenderedObject renderedObject) {
+	                                   @Nullable NetworkRouteSegment routeSegment) {
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Bundle args = new Bundle();
@@ -1665,7 +1665,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			fragment.setAnalyses(analyses);
 			fragment.setSelectedGpxFile(selectedGpxFile);
 			fragment.setReturnScreenName(returnScreenName);
-			fragment.setRenderedObject(renderedObject);
+			fragment.setRouteSegment(routeSegment);
 			fragment.setCallingFragmentTag(callingFragmentTag);
 			fragment.setAdjustMapPosition(adjustMapPosition);
 			if (tabToOpenName != null) {

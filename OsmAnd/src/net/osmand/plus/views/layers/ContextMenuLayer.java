@@ -3,6 +3,8 @@ package net.osmand.plus.views.layers;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.router.network.NetworkRouteContext.*;
+import static net.osmand.router.network.NetworkRouteSelector.*;
 
 import android.Manifest;
 import android.content.Context;
@@ -33,6 +35,7 @@ import net.osmand.IndexConstants;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.RenderingContext;
 import net.osmand.aidl.AidlMapPointWrapper;
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AmenitySymbolsProvider.AmenitySymbolsGroup;
 import net.osmand.core.jni.AreaI;
@@ -83,12 +86,14 @@ import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
+import net.osmand.router.network.NetworkRouteSelector;
 import net.osmand.router.network.NetworkRouteSelector.RouteKey;
 import net.osmand.router.network.NetworkRouteSelector.RouteType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -124,9 +129,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private MoveMarkerBottomSheetHelper mMoveMarkerBottomSheetHelper;
 	private AddGpxPointBottomSheetHelper mAddGpxPointBottomSheetHelper;
 	private boolean mInChangeMarkerPositionMode;
-	private IContextMenuProvider selectedObjectContextMenuProvider;
 	private boolean cancelApplyingNewMarkerPosition;
 	private LatLon applyingMarkerLatLon;
+	private IContextMenuProvider selectedObjectContextMenuProvider;
 	private boolean mInGpxDetailsMode;
 	private boolean mInAddGpxPointMode;
 
@@ -798,16 +803,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 							selectedObjects.put(new Pair<>(travelGpx, selectedGpxPoint), gpxMenuProvider);
 						}
 					} else if (isRouteGpx) {
-						if (isUniqueRoute(selectedObjects.keySet(), renderedObject)) {
-							int searchRadius = (int) (getScaledTouchRadius(app, getDefaultRadiusPoi(tileBox)) * 1.5f);
-							LatLon minLatLon = tileBox.getLatLonFromPixel(point.x - searchRadius, point.y - searchRadius);
-							LatLon maxLatLon = tileBox.getLatLonFromPixel(point.x + searchRadius, point.y + searchRadius);
-
-							QuadRect rect = new QuadRect(minLatLon.getLongitude(), maxLatLon.getLatitude(),
-									maxLatLon.getLongitude(), minLatLon.getLatitude());
-
-							selectedObjects.put(new Pair<>(renderedObject, rect), gpxMenuProvider);
-						}
+						int searchRadius = (int) (getScaledTouchRadius(app, getDefaultRadiusPoi(tileBox)) * 1.5f);
+						LatLon minLatLon = tileBox.getLatLonFromPixel(point.x - searchRadius, point.y - searchRadius);
+						LatLon maxLatLon = tileBox.getLatLonFromPixel(point.x + searchRadius, point.y + searchRadius);
+						QuadRect rect = new QuadRect(minLatLon.getLongitude(), maxLatLon.getLatitude(),
+								maxLatLon.getLongitude(), minLatLon.getLatitude());
+						putRouteGpxToSelected(selectedObjects, gpxMenuProvider, rect);
 					} else {
 						Amenity amenity = findAmenity(app, renderedObject.getId() >> 7,
 								renderedObject.getOriginalNames(), searchLatLon, AMENITY_SEARCH_RADIUS);
@@ -874,6 +875,25 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return false;
 	}
 
+	private void putRouteGpxToSelected(@NonNull Map<Object, IContextMenuProvider> selectedObjects,
+	                                   @NonNull IContextMenuProvider gpxMenuProvider, @NonNull QuadRect rect) {
+
+		BinaryMapIndexReader[] readers = getApplication().getResourceManager().getRoutingMapFiles();
+		NetworkRouteSelectorFilter selectorFilter = new NetworkRouteSelectorFilter();
+		NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter);
+		List<NetworkRouteSegment> segmentList = new ArrayList<>();
+		try {
+			segmentList.addAll(routeSelector.getFirstSegments(rect, null));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		for (NetworkRouteSegment routeSegment : segmentList) {
+			if (isUniqueRoute(selectedObjects.keySet(), routeSegment)) {
+				selectedObjects.put(new Pair<>(routeSegment, rect), gpxMenuProvider);
+			}
+		}
+	}
+
 	private PointF getPointFromLatLon(double latitude, double longitude) {
 		RotatedTileBox cp = getMapView().getCurrentRotatedTileBox();
 		float x = cp.getPixXFromLatLon(latitude, longitude);
@@ -921,16 +941,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return true;
 	}
 
-	private boolean isUniqueRoute(@NonNull Set<Object> set, @NonNull RenderedObject renderedObject) {
-		for (Object o : set) {
-			if (o instanceof Pair) {
-				Pair<?, ?> pair = (Pair<?, ?>) o;
-				if (pair.first instanceof RenderedObject) {
-					RenderedObject object = (RenderedObject) pair.first;
-					if (Algorithms.objectEquals(object.getId(), renderedObject.getId())
-							|| Algorithms.stringsEqual(object.getRouteName(), renderedObject.getRouteName())) {
-						return false;
-					}
+	private boolean isUniqueRoute(@NonNull Set<Object> set, @NonNull NetworkRouteSegment routeSegment) {
+		for (Object selectedObject : set) {
+			if (selectedObject instanceof Pair && ((Pair<?, ?>) selectedObject).first instanceof NetworkRouteSegment) {
+				NetworkRouteSegment rs = (NetworkRouteSegment) ((Pair<?, ?>) selectedObject).first;
+				if (rs.routeKey.equals(routeSegment.routeKey)) {
+					return false;
 				}
 			}
 		}

@@ -80,7 +80,6 @@ import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
-import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
@@ -129,6 +128,7 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
+import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -2226,7 +2226,7 @@ public class GpxUiHelper {
 	                                  @NonNull GPXFile gpxFile,
 	                                  @NonNull WptPt selectedPoint,
 	                                  @Nullable GPXTrackAnalysis analyses,
-	                                  @Nullable RenderedObject renderedObject) {
+	                                  @Nullable NetworkRouteSegment routeSegment) {
 		new SaveGpxAsyncTask(file, gpxFile, new SaveGpxListener() {
 			@Override
 			public void gpxSavingStarted() {
@@ -2240,8 +2240,8 @@ public class GpxUiHelper {
 					SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
 					GPXTrackAnalysis trackAnalysis = analyses != null ? analyses : selectedGpxFile.getTrackAnalysis(app);
 					SelectedGpxPoint selectedGpxPoint = new SelectedGpxPoint(selectedGpxFile, selectedPoint);
-					TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint,
-							null, null, null, false, trackAnalysis, renderedObject);
+					TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint, null,
+							null, null, false, trackAnalysis, routeSegment);
 				} else {
 					LOG.error(errorMessage);
 				}
