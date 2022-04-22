@@ -31,8 +31,8 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 public class NetworkRouteSelector {
-	
-	private static final String ROUTE_KEY_VALUE_SEPARATOR = "__";
+
+	public static final String ROUTE_KEY_VALUE_SEPARATOR = "__";
 
 	private static final boolean GROW_ALGORITHM = false; // not implemented fully and has flaws (should be deleted)
 	private static final int MAX_ITERATIONS = 16000;
@@ -41,7 +41,7 @@ public class NetworkRouteSelector {
 	private static final int CONNECT_POINTS_DISTANCE_STEP = 50;
 	private static final int CONNECT_POINTS_DISTANCE_MAX = 1000;
 
-	
+
 	private final NetworkRouteContext rCtx;
 	
 	// TODO - FIX & implement work with routing tags
@@ -97,7 +97,26 @@ public class NetworkRouteSelector {
 		}
 		return res;
 	}
-	
+
+	public List<NetworkRouteSegment> getFirstSegments(QuadRect bBox, RouteKey selected) throws IOException {
+		int y31T = MapUtils.get31TileNumberY(Math.max(bBox.bottom, bBox.top));
+		int y31B = MapUtils.get31TileNumberY(Math.min(bBox.bottom, bBox.top));
+		int x31L = MapUtils.get31TileNumberX(bBox.left);
+		int x31R = MapUtils.get31TileNumberX(bBox.right);
+		Map<RouteKey, List<NetworkRouteSegment>> res = rCtx.loadRouteSegmentTile(x31L, y31T, x31R, y31B, null);
+		List<NetworkRouteSegment> networkRouteSegmentList = new ArrayList<>();
+		for (RouteKey key : res.keySet()) {
+			if (selected != null && !selected.equals(key)) {
+				continue;
+			}
+			List<NetworkRouteSegment> list = res.get(key);
+			if (list.size() > 0) {
+				networkRouteSegmentList.add(list.get(0));
+			}
+		}
+		return networkRouteSegmentList;
+	}
+
 	public Map<RouteKey, GPXFile> getRoutes(QuadRect bBox, boolean loadRoutes, RouteKey selected) throws IOException {
 		int y31T = MapUtils.get31TileNumberY(Math.max(bBox.bottom, bBox.top));
 		int y31B = MapUtils.get31TileNumberY(Math.min(bBox.bottom, bBox.top));
@@ -106,7 +125,7 @@ public class NetworkRouteSelector {
 		Map<RouteKey, List<NetworkRouteSegment>> res = rCtx.loadRouteSegmentTile(x31L, y31T, x31R, y31B, null);
 		Map<RouteKey, GPXFile> r = new LinkedHashMap<>();
 		for (RouteKey key : res.keySet()) {
-			if(selected != null && !selected.equals(key)) {
+			if (selected != null && !selected.equals(key)) {
 				continue;
 			}
 			List<NetworkRouteSegment> list = res.get(key);
@@ -704,21 +723,32 @@ public class NetworkRouteSelector {
 		}
 
 	}
-	
+
 	public static class RouteKey {
-		
+
 		public final RouteType type;
-		public final Set<String> set = new TreeSet<String>();
-		
+		public final Set<String> set = new TreeSet<>();
+
 		public RouteKey(RouteType routeType) {
 			this.type = routeType;
+		}
+
+		public String getValue(String key) {
+			key = ROUTE_KEY_VALUE_SEPARATOR + key + ROUTE_KEY_VALUE_SEPARATOR;
+			for (String str : set) {
+				int i = str.indexOf(key);
+				if (i > 0) {
+					return str.substring(i + key.length());
+				}
+			}
+			return "";
 		}
 
 		@Override
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + ((set == null) ? 0 : set.hashCode());
+			result = prime * result + set.hashCode();
 			result = prime * result + ((type == null) ? 0 : type.hashCode());
 			return result;
 		}
@@ -732,21 +762,15 @@ public class NetworkRouteSelector {
 			if (getClass() != obj.getClass())
 				return false;
 			RouteKey other = (RouteKey) obj;
-			if (set == null) {
-				if (other.set != null)
-					return false;
-			} else if (!set.equals(other.set))
+			if (!set.equals(other.set))
 				return false;
-			if (type != other.type)
-				return false;
-			return true;
+			return type == other.type;
 		}
 
 		@Override
 		public String toString() {
 			return "Route [type=" + type + ", set=" + set + "]";
 		}
-		
 	}
 	
 	public enum RouteType {

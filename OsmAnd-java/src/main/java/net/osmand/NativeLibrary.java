@@ -623,32 +623,5 @@ public class NativeLibrary {
 			}
 			return null;
 		}
-
-		public String getRouteName() {
-			String name = null;
-			for (RouteType routeType : RouteType.values()) {
-				name = getTagValue(routeType.getTag() + "_route_name");
-				if (!Algorithms.isEmpty(name)) {
-					return name;
-				}
-			}
-			if (Algorithms.isEmpty(name)) {
-				name = getRouteRef();
-			}
-			if (Algorithms.isEmpty(name)) {
-				name = getName();
-			}
-			return name;
-		}
-
-		public String getRouteRef() {
-			for (RouteType routeType : RouteType.values()) {
-				String name = getTagValue(routeType.getTag() + "_route_ref");
-				if (!Algorithms.isEmpty(name)) {
-					return name;
-				}
-			}
-			return null;
-		}
 	}
 }

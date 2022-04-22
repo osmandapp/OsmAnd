@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu;
 
+import static net.osmand.router.network.NetworkRouteContext.*;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -225,8 +227,9 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			} else if (object instanceof Pair) {
 				Pair<?, ?> pair = (Pair<?, ?>) object;
 				if (pair.second instanceof SelectedGpxPoint) {
-					menuController = new SelectedGpxMenuController(mapActivity, pointDescription, (SelectedGpxPoint) ((Pair<?, ?>) object).second);
-				} else if (pair.first instanceof RenderedObject && pair.second instanceof QuadRect) {
+					menuController = new SelectedGpxMenuController(mapActivity, pointDescription,
+							(SelectedGpxPoint) ((Pair<?, ?>) object).second);
+				} else if (pair.first instanceof NetworkRouteSegment && pair.second instanceof QuadRect) {
 					menuController = new NetworkRouteMenuController(mapActivity, pointDescription, pair);
 				}
 			}
