@@ -1846,19 +1846,19 @@
     <string name="clear_active_markers_q">Ali želite odstraniti vse dejavne označbe?</string>
     <string name="clear_markers_history_q">Ali želite počistiti zgodovino označb\?</string>
     <string name="active_markers">Dejavne označbe</string>
-    <string name="map_markers">Označbe zemljevida</string>
-    <string name="map_marker">Označba zemljevida</string>
+    <string name="map_markers">Oznake zemljevida</string>
+    <string name="map_marker">Oznaka zemljevida</string>
     <string name="rendering_attr_showMtbRoutes_name">Pokaži poti MTB</string>
     <string name="show_polygons">Pokaži poligone</string>
-    <string name="map_marker_1st">Prva označba zemljevida</string>
-    <string name="map_marker_2nd">Druga označba na zemljevidu</string>
+    <string name="map_marker_1st">Prva oznaka zemljevida</string>
+    <string name="map_marker_2nd">Druga oznaka na zemljevidu</string>
     <string name="shared_string_toolbar">Orodna vrstica</string>
     <string name="shared_string_widgets">Gradniki</string>
     <string name="add_points_to_map_markers_q">Ali želite dodati vse točke na zemljevid kot označbe\?</string>
     <string name="shared_string_add_to_map_markers">Dodaj med označbe zemljevida</string>
     <string name="consider_turning_polygons_off">Priporočljivo je onemogočiti izrisovanje večkotnikov.</string>
     <string name="select_map_marker">Izbor označbe na zemljevidu</string>
-    <string name="map_markers_other">Druge označbe</string>
+    <string name="map_markers_other">Druge oznake</string>
     <string name="download_files_error_not_enough_space">Ni dovolj prostora!
 \n Možnost začasno zahteva {3} MB in trajno {1} MB pomnilnika.
 \n (Na voljo je le {2} MB prostora.)</string>
@@ -2425,7 +2425,7 @@
     <string name="do_not_use_animations">Brez animacij</string>
     <string name="do_not_use_animations_descr">Onemogoči predvajanje animacij v programu.</string>
     <string name="keep_showing_on_map">Prikazuj na zemljevidu</string>
-    <string name="exit_without_saving">Ali želite končati brez shranjevanja?</string>
+    <string name="exit_without_saving">Končati brez shranjevanja\?</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) je navigacijski program, ki kot vir podatkov uporablja visoko kakovostne zemljevide OSM. 
 \nProgram podpira glasovno in vizualno navigacijo, iskanje in ogledovanje točk POI (zanimive točke), ustvarjanje in upravljanje s sledmi GPX, izohipse in senčenje terena, podatke o poti, različne profile za pripravo poti in še veliko, veliko več. 
 \n 
@@ -3340,4 +3340,201 @@
     <string name="activity_type_motorbike_name">Motor</string>
     <string name="activity_type_car_name">Avto</string>
     <string name="speed_cameras_restart_descr">Za popolno odstranitev podatkov o hitrostnih kamerah je potreben ponovni zagon.</string>
+    <string name="please_provide_group_name_message">Prosim, navedi ime skupine.</string>
+    <string name="quick_action_add_route_descr">Gumb za začetek poti s sredine zaslona.</string>
+    <string name="app_modes_options">Izbira načinov aplikacije</string>
+    <string name="on_with_params">%1$s na %2$s</string>
+    <string name="shared_string_symbol">Simbol</string>
+    <string name="no_widgets_descr">Dodajte enega ali več gradnikov s seznama gradnikov, ki so na voljo.</string>
+    <string name="no_widgets_here_yet">Tu še ni gradnikov</string>
+    <string name="available_widgets">Razpoložljivi gradniki</string>
+    <string name="snackbar_page_removed">»Stran %1$s« je bila odstranjena.</string>
+    <string name="map_widget_distance_to_destination">Razdalja do cilja</string>
+    <string name="map_widget_current_speed">Trenutna hitrost</string>
+    <string name="routeInfo_horse_scale_description">Prikazovanje poti glede na zahtevnost konjskih poti</string>
+    <string name="rendering_attr_horse_scale_common_name">običajna</string>
+    <string name="rendering_attr_horse_scale_critical_name">kritična</string>
+    <string name="rendering_attr_horse_scale_impossible_name">nemogoča</string>
+    <string name="routing_attr_carriage_restrictions_name">Omejitve vozišča</string>
+    <string name="rendering_attr_showTrainRoutes_name">Proge vlakov</string>
+    <string name="rendering_attr_showTramRoutes_name">Proge tramvajev</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Proge vzpenjač</string>
+    <string name="rendering_attr_showBusRoutes_name">Proge avtobusov</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Proge trolejbusov</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">Proge rednih prevozov</string>
+    <string name="bottom_widgets_panel">Spodnja plošča</string>
+    <string name="shared_string_item">Predmet</string>
+    <string name="shared_string_buttons">Gumbi</string>
+    <string name="default_appearance">Privzeti videz</string>
+    <string name="all_groups">Vse skupine</string>
+    <string name="list_of_groups">Seznam skupin</string>
+    <string name="gpx_no_routes_title">Ni poti</string>
+    <string name="shared_string_not_used">Se ne uporablja</string>
+    <string name="turn_arrows_descr">Izberi, ali so na črti poti prikazane puščice za obračanje.</string>
+    <string name="save_as_copy">Shrani kot kopijo</string>
+    <string name="app_profile_type">Vrsta profila aplikacije</string>
+    <string name="add_to_group">Dodaj v skupino</string>
+    <string name="folder_access_denied">Za dostop do izbrane mape je potrebno dovoljenje.</string>
+    <string name="shared_storage_migration">Migracija shrambe v skupni rabi</string>
+    <string name="shared_string_migration">Migracija</string>
+    <string name="approx_safe_mode">Varen približek GPX</string>
+    <string name="rendering_attr_horse_scale_demanding_name">zahtevna</string>
+    <string name="rendering_attr_horse_scale_difficult_name">težavna</string>
+    <string name="routing_attr_carriage_restrictions_description">Upoštevaj dovoljenja za dostop za vozila s konjsko vprego</string>
+    <string name="speed_mode">Hitri način</string>
+    <string name="rendering_attr_showRunningRoutes_description">Pokaži tekaške poti</string>
+    <string name="rendering_attr_showFitnessTrails_name">Fitnes steze</string>
+    <string name="rendering_value_omit_name">Izpusti</string>
+    <string name="turn_arrows">Puščice za obračanje</string>
+    <string name="distance_between_points">Razdalja med točkami</string>
+    <string name="fold_unfold">skrij/razkrij</string>
+    <string name="shared_string_gps_filter">GPS filter</string>
+    <string name="use_routing_fallback_description">Uporabi usmerjanje brez povezave, če spletno usmerjanje ni na voljo.</string>
+    <string name="gps_filter_speed_altitude_desc">Na grafikonu in zemljevidu bodo prikazane samo točke sledi, ustrezajo nastavljenemu intervalu, ostale bodo skrite.</string>
+    <string name="memory_allocated_for_routing">Pomnilnik, dodeljen za usmerjanje</string>
+    <string name="shared_storage_third_step">Odobri dovoljenje za dostop do mape. Brez nje OsmAnd ne more kopirati datotek.</string>
+    <string name="shared_storage_first_step">Pritisni »%1$s«.
+\nUpravitelj datotek se bo odprl, nato poišči in odpri mapo osmand.</string>
+    <string name="shared_storage_migration_descr">Zaradi sprememb v dostopu do prostora za shranjevanje v sistemu Android, OsmAnd ne more več uporabljati %1$s.
+\n
+\nKopiraj vse svoje podatke v novo mapo.</string>
+    <string name="start_copying">Začni kopiranje</string>
+    <string name="skip_confirmation">Da, preskoči</string>
+    <string name="icon_group_industrial">Industrijski</string>
+    <string name="icon_group_education">Izobraževalna ustanova</string>
+    <string name="reading_files">Branje datotek …</string>
+    <string name="stop_download_desc">Prenos ni dokončan. Če zdaj prekinete prenos, bo za ogled na voljo le del ploščic.</string>
+    <string name="stop_download">Ustavi prenos</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Podvodni tuneli</string>
+    <string name="gps_filter_precision">Natančnost GPS-a</string>
+    <string name="copying_file">Kopiranje datoteke %1$s …</string>
+    <string name="shared_string_travelbooks">Potovalne knjige</string>
+    <string name="display_route_tracks">Prikaži sledi</string>
+    <string name="map_marker_options">Možnosti oznak zemljevida</string>
+    <string name="add_page">Dodaj stran</string>
+    <string name="page_number">Stran %1$s</string>
+    <string name="apply_to_existing_points_descr">Uporabiti spremembe za obstoječe točke skupine ali samo za nove\?</string>
+    <string name="apply_to_existing_favorites_descr">Uporabiti spremembe za obstoječe priljubljene točke skupine ali samo za nove\?</string>
+    <string name="apply_to_existing">Uporabi za obstoječe</string>
+    <string name="apply_only_to_new_points">Uporabi samo za nove točke</string>
+    <string name="apply_only_to_new_favorites">Uporabi samo za nove priljubljene</string>
+    <string name="change_default_appearance">Spreminjanje privzetega videza</string>
+    <string name="routeInfo_horse_scale_name">Zahtevnost konjskih poti</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">nevarna</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Proge enotirnih železnic</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Proge lahkih železnic</string>
+    <string name="map_markers_bar">Vrstica oznak zemljevida</string>
+    <string name="shared_string_visible_widgets">Vidni gradniki</string>
+    <string name="top_widgets_panel">Zgornja plošča</string>
+    <string name="configure_screen_widgets_descr">Izberi stran zaslona, za dodajanje ali razporeditev gradnikov.</string>
+    <string name="osm_carto_render_descr">Podoben slogu OpenStreetMap-carto, ki se uporablja na glavnem spletnem mestu OSM</string>
+    <string name="simulation_real_mode_desc">Na ravnih cestnih odsekih bo hitrost približno enaka največji dovoljeni hitrosti.
+\nNa križiščih simulacija upočasni hitrost.
+\nDodatno znižanje hitrosti se bo upoštevalo pri prometnih znakih, znakih za stop, itd.</string>
+    <string name="simulation_real_mode_title">Realistična simulacija</string>
+    <string name="simulation_constant_mode_desc">Simulacija bo izvedena s konstantno izbrano hitrostjo.</string>
+    <string name="simulation_constant_mode_title">Fiksna hitrost</string>
+    <string name="simulation_preview_mode_desc">Hitrost simulacije bo največja na ravnih odsekih in se bo upočasnila le na križiščih.</string>
+    <string name="simulation_preview_mode_title">Način hitrega predogleda</string>
+    <string name="rendering_attr_showFitnessTrails_description">Pokaži fitnes steze</string>
+    <string name="stop_and_exit">Ustavi in zapusti</string>
+    <string name="shared_string_complete">Dokončanj</string>
+    <string name="zoom_levels_difference_description">Velika razlika med stopnjami povečave lahko poveča velikost prenesenih podatkov.</string>
+    <string name="estimated_download_size">Ocenjena velikost prenosa</string>
+    <string name="number_of_tiles">Število ploščic</string>
+    <string name="move_map_to_select_area">Premakni zemljevid, za izbor potrebnega območja.</string>
+    <string name="edit_category">Uredi kategorijo</string>
+    <string name="shared_string_shape">Oblika</string>
+    <string name="default_appearance_desc">Privzeta barva, ikona in oblika bodo veljali za dodane priljubljene točke v skupini.</string>
+    <string name="location_source_descr">OsmAnd, nameščen iz Googla Play-a, privzeto uporablja %1$s za določanje lokacije.
+\n
+\nČe dobite netočne podatke o lokaciji ali uporabljate napravo brez %2$s, poskusite preklopiti na »%3$s«.</string>
+    <string name="location_source">Vir lokacije</string>
+    <string name="select_suggested_points">Izberi predlagane točke</string>
+    <string name="rendering_value_category_name">Skupina</string>
+    <string name="rendering_value_all_name">Vse</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Oznake Fixme</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Prikaži oznake fixme</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikone pri majhnih povečavah</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Shematski prikaz ikon pri majhnih povečavah</string>
+    <string name="waypoint_template">Predloga za točko poti</string>
+    <string name="always_ask_waypoint_appearance_description">S tapom na to dejanje, se odpre zaslon »Dodaj točko poti« na katerem lahko spremenite ime in videz.</string>
+    <string name="waypoint_appearance">Videz točke poti</string>
+    <string name="track_file_description">S tapom na to dejanje, se prikaže pogovorno okno za izbiro razpoložljivih sledi.</string>
+    <string name="track_file">Datoteka sledi</string>
+    <string name="shared_string_size">Velikost</string>
+    <string name="use_routing_fallback">Nadomestno usmerjanje brez povezave</string>
+    <string name="exit_without_saving_warning">Končati brez shranjevanja sprememb\?</string>
+    <string name="migration_files_present">Na izbranem mestu »%3$s« je %1$d datotek (%2$s).</string>
+    <string name="created_on">Ustvarjeno</string>
+    <string name="shared_string_memory">Pomnilnik</string>
+    <string name="no_items_selected_warning">Prosim, izberi vsaj en element</string>
+    <string name="show_parameter_seekbar">Prikaži iskalno vrstico parametrov</string>
+    <string name="display_groups_visibility_dialog_description">Nadzoruješ lahko vidnost skupine na zemljevidu. Če je sled skrita, bodo skrite tudi vse skupine.</string>
+    <string name="storage_found_files_descr">Tapni »%1$s« za kopiranje %2$s datotek iz »%3$s« v »%4$s«. Lahko traja nekaj časa.</string>
+    <string name="storage_copying_files_size">Kopiranje %1$s datotek (%2$s)</string>
+    <string name="storage_found_files_size">Najdeno %1$s datotek (%2$s)</string>
+    <string name="shared_storage_last_step">Kasneje lahko določiš novo podatkovno mapo.</string>
+    <string name="approx_safe_mode_description">Aproksimacijo GPX izvedi s počasnejšim sistemom Android namesto z izvirno kodo.</string>
+    <string name="map_markers_item">Oznake zemljevida</string>
+    <string name="map_widget_altitude">Nadmorska višina trenutne lokacije</string>
+    <string name="safe_settings">Varno</string>
+    <string name="rendering_attr_showRunningRoutes_name">Tekaške poti</string>
+    <string name="selected_waypoints_descr">Izbrane točke poti bodo dodane na sled »%1$s«</string>
+    <string name="shared_string_reading_file">Branje datoteke …</string>
+    <string name="points_selection_descr">Naj zaprem in izgubim vse spremembe\?</string>
+    <string name="import_tracks_descr">%1$s vsebuje %2$s različnih sledi. Izberi sledi, ki jih želiš uvoziti.</string>
+    <string name="exit_import_descr">Končati brez shranjevanja sprememb\?</string>
+    <string name="exit_import">Končati\?</string>
+    <string name="import_tracks">Uvozi sledi</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Oznake za opombe</string>
+    <string name="shared_string_used">Uporabljeno</string>
+    <string name="rendering_attr_seabedDetail_name">Podrobnosti o morskem dnu</string>
+    <string name="gpx_no_routes_descr">Z orodjem »%1$s« lahko pot shraniš v datoteko.</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Ne skrivaj podvodnih tunelov</string>
+    <string name="rendering_attr_seabedDetail_description">Dodatne tekstovne informacije o kvalifikaciji površine morskega dna, kombiniranih tipih površin, skupini in taksonu plevela ali morske trave</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Prikaži oznake za opombe</string>
+    <string name="files_with_route_restrictions">Datoteke z omejitvami poti</string>
+    <string name="predefined_waypoint_appearance_description">S tapom na to dejanje, se bo točka poti samodejno shranila z vnaprej določenimi parametri.</string>
+    <string name="shared_string_skip_warning">Preskočiti migracijo\? OsmAnd nima več dostopa do vaših datotek v skupni shrambi.
+\n
+\nAplikacija bo začela uporabljati vašo novo podatkovno mapo.</string>
+    <string name="storage_migration_wrong_folder_warning">V izbrani mapi ni bilo najdenih podatkov OsmAnd. Poskusi znova.</string>
+    <string name="memory_allocated_for_routing_ds">Večja dodelitev pomnilnika bo pospešila izračun dolgih poti (nad 500 km), vendar lahko vpliva na delovanje drugih aplikacij.
+\nNe vpliva na hitrost izračuna kratkih poti.</string>
+    <string name="files_remaining">Preostale datoteke: %1$s %2$s</string>
+    <string name="from_to_with_params">Od %1$s do %2$s</string>
+    <string name="shared_string_hide_all">Skrij vse</string>
+    <string name="progress_complete">%1$s dokončano</string>
+    <string name="copying_completed">Kopirano</string>
+    <string name="shared_string_copy_to">Kopiraj v</string>
+    <string name="shared_storage">Shramba v skupni rabi</string>
+    <string name="logcat_buffer_descr">Preverite in delite podrobne dnevnike aplikacije</string>
+    <string name="shared_string_precision">Natančnost</string>
+    <string name="shared_string_statistics">Statistika</string>
+    <string name="gps_filter_hdop_desc">Nastavi največjo dovoljeno vrednost za HDOP.
+\nTočke z višjo vrednostjo bodo skrite.</string>
+    <string name="gps_filter_smoothing">Glajenje</string>
+    <string name="save_changes_into_file">Shrani spremembe v datoteko</string>
+    <string name="gps_filter_actions_description">OsmAnd bo uporabil spremembe za sled, ne da bi posodobil datoteke. Spremembe se lahko shranijo ročno.</string>
+    <string name="gps_filter_smoothing_desc">Nastavi prag razdalje med točkami.
+\nTočke sledi, ki niso vsaj na tej razdalji od zadnje vidne točke, bodo skrite.
+\nPozor, ker lahko visoki prag preveč poenostavi geometrijo proge.</string>
+    <string name="storage_copied_files_size">Kopiranih %1$s datotek (%2$s)</string>
+    <string name="shared_storage_second_step">Klikni »Uporabi to mapo«.</string>
+    <string name="shared_storage_warning_description">Zaradi novih pravil sistema Android bo od novembra 2021 OsmAnd 4.2 izgubil dostop do skupne shrambe.
+\n
+\nPremaknite mapo s podatki iz skupne shrambe v razpoložljivo shrambo, sicer bo aplikacija izgubila dostop do vaših podatkov, kot so zemljevidi brez povezave, sledi GPX itd.</string>
+    <string name="search_history_is_disabled_descr">Zgodovino iskanja lahko omogočiš v nastavitvah.</string>
+    <string name="map_markers_history">Zgodovina oznak zemljevida</string>
+    <string name="delete_history_items_descr">Izbrisati izbrane elemente zgodovine\?</string>
+    <string name="delete_history_items">Brisati %1$s elementov zgodovine\?</string>
+    <string name="quick_action_toggle_preference">Stikalo za spremembo nastavitev.</string>
+    <string name="display_route_tracks_as_poi">Prikaži sledi kot POI</string>
+    <string name="use_external_timestamps">Uporabi zunanje časovne žige</string>
+    <string name="use_external_timestamps_description">Uporabi časovne žige spletnega usmerjevalnika za prilagoditev ocenjenega časa in povprečne hitrosti</string>
+    <string name="no_plugins_enabled">Nimaš omogočenih vtičnikov. Seznam razpoložljivih vtičnikov najdeš v »Meni« → »Vtičniki«.</string>
+    <string name="duration_ago">pred %1$s</string>
+    <string name="save_track_to_gpx_descrp">Samodejni zagon snemanja sledi med navigacijo in samodejno shranjevanje po tem.</string>
 </resources>

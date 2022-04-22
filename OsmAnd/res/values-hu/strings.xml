@@ -4586,5 +4586,5 @@
     <string name="no_widgets_descr">Egy vagy több widget hozzáadása a rendelkezésre állók közül.</string>
     <string name="no_widgets_here_yet">Itt még nincs widget</string>
     <string name="available_widgets">Elérhető widgetek</string>
-    <string name="snackbar_page_removed">„%1$s oldal” eltávolíttatott.</string>
+    <string name="snackbar_page_removed">A(z) „%1$s oldal” el lett távolítva.</string>
 </resources>

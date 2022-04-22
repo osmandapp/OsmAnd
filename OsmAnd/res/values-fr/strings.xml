@@ -4584,4 +4584,10 @@
     <string name="page_number">Page %1$s</string>
     <string name="map_widget_distance_to_destination">Distance jusqu\'à destination</string>
     <string name="add_page">Ajouter page</string>
+    <string name="no_widgets_descr">Ajoutez un ou plusieurs widgets grâce à la liste des widgets disponibles.</string>
+    <string name="snackbar_page_removed">La page \"%1$s\" a été supprimée.</string>
+    <string name="no_widgets_here_yet">Aucun widget pour l\'instant</string>
+    <string name="on_with_params">%1$s de %2$s</string>
+    <string name="shared_string_symbol">Symbole</string>
+    <string name="available_widgets">Widgets disponibles</string>
 </resources>

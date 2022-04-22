@@ -4583,4 +4583,10 @@
     <string name="page_number">頁面 %1$s</string>
     <string name="map_widget_distance_to_destination">到目的地的距離</string>
     <string name="map_widget_current_speed">目前速度</string>
+    <string name="no_widgets_descr">從可用的小工具清單新增一個或多個小工具。</string>
+    <string name="available_widgets">可用的小工具</string>
+    <string name="on_with_params">%1$s 於 %2$s</string>
+    <string name="shared_string_symbol">符號</string>
+    <string name="no_widgets_here_yet">這裡還沒有小工具</string>
+    <string name="snackbar_page_removed">「頁面 %1$s」已被移除。</string>
 </resources>
