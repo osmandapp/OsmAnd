@@ -926,7 +926,7 @@ interface IOsmAndAidlInterface {
      *
      * @params subscribeToUpdates (boolean) - boolean flag to subscribe or unsubscribe from messages
      * @params callbackId (long) - id of callback, needed to unsubscribe from messages
-     * @params filterLelev (String) determines which type of logs will be returned by callback
+     * @params filterLevel (String) determines which type of logs will be returned by callback
      * Must be one of the values below:
      * - "D" (debug)
      * - "I" (info)

@@ -60,7 +60,7 @@ public class OnLogcatMessageParams extends AidlParams {
 		return filterLevel;
 	}
 
-	public ArrayList<String> getLogs() {
+	public List<String> getLogs() {
 		return logs;
 	}
 }
