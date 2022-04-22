@@ -4588,4 +4588,10 @@
     <string name="simulation_constant_mode_desc">Sa simulatzione s\'at a fàghere a sa lestresa costante seletzionada.</string>
     <string name="simulation_constant_mode_title">Letresa fissa</string>
     <string name="routeInfo_horse_scale_name">Dificultade de sas camineras a caddu</string>
+    <string name="on_with_params">%1$s de %2$s</string>
+    <string name="shared_string_symbol">Sìmbulu</string>
+    <string name="no_widgets_descr">Annanghe unu o prus widgets dae sa lista de widgets a disponimentu.</string>
+    <string name="no_widgets_here_yet">Galu perunu widget inoghe</string>
+    <string name="available_widgets">Widgets a disponimentu</string>
+    <string name="snackbar_page_removed">\"Sa pàgina %1$s\" est istada bogada.</string>
 </resources>
