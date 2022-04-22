@@ -1,5 +1,9 @@
 package net.osmand.plus.base;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +15,9 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.base.ContextMenuFragment.ContextMenuFragmentListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
@@ -21,10 +25,6 @@ import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 
 import java.util.Arrays;
 import java.util.Collections;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
 
 public abstract class ContextMenuScrollFragment extends ContextMenuFragment implements ContextMenuFragmentListener {
 
@@ -102,8 +102,10 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 			MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
 			mapControlsLayer.removeHudButtons(Arrays.asList(ZOOM_IN_BUTTON_ID, ZOOM_OUT_BUTTON_ID, BACK_TO_LOC_BUTTON_ID));
 
-			MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
-			mapInfoLayer.removeRulerWidgets(Collections.singletonList(rulerWidget));
+			if (rulerWidget != null) {
+				MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
+				mapInfoLayer.removeRulerWidgets(Collections.singletonList(rulerWidget));
+			}
 		}
 	}
 
