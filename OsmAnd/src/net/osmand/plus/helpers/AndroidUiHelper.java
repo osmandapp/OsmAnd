@@ -4,17 +4,22 @@ import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Build;
+import android.os.Build.VERSION_CODES;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Surface;
 import android.view.View;
+import android.view.View.OnAttachStateChangeListener;
 import android.view.WindowInsetsController;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import net.osmand.PlatformUtil;
+
+import static android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS;
 
 /**
  * Created by dummy on 28.01.15.
@@ -138,6 +143,7 @@ public class AndroidUiHelper {
 				int flag = WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS;
 				if (addLightFlag) {
 					controller.setSystemBarsAppearance(flag, flag);
+					makeAbilityToResetLightStatusBar(view);
 				} else {
 					controller.setSystemBarsAppearance(0, flag);
 				}
@@ -150,5 +156,21 @@ public class AndroidUiHelper {
 		    }
 		    view.setSystemUiVisibility(flags);
 	    }
+	}
+
+	@RequiresApi(api = VERSION_CODES.R)
+	private static void makeAbilityToResetLightStatusBar(@NonNull View view) {
+    	WindowInsetsController controller = view.getWindowInsetsController();
+		view.addOnAttachStateChangeListener(new OnAttachStateChangeListener() {
+			@Override
+			public void onViewAttachedToWindow(View v) { }
+
+			@Override
+			public void onViewDetachedFromWindow(View v) {
+				// Automatically reset APPEARANCE_LIGHT_STATUS_BARS flag
+				// when user close the screen on which this flag was applied.
+				controller.setSystemBarsAppearance(0, APPEARANCE_LIGHT_STATUS_BARS);
+			}
+		});
 	}
 }
