@@ -4208,7 +4208,7 @@
     <string name="shared_string_view_all">Ver tudo</string>
     <string name="backup_error_user_is_already_registered">Este endereço de email está a ser utilizado noutra conta</string>
     <string name="backup_error_subscription_was_expired">Subscrição expirada</string>
-    <string name="backup_error_subscription_was_used">Subscrição ou código promocional usada por outra conta %1$s</string>
+    <string name="backup_error_subscription_was_used">Subscrição ou código promocional usado por outra conta %1$s</string>
     <string name="backup_error_size_is_exceeded">O tamanho máximo do OsmAnd Cloud excedeu %1$s</string>
     <string name="backup_error_gzip_only_supported_upload">O ficheiro tem de ser enviado no formato .gzip</string>
     <string name="backup_error_file_not_available">Ficheiro indisponível</string>
@@ -4253,7 +4253,7 @@
     <string name="shared_string_purchased">Comprado</string>
     <string name="explore_wikipedia_offline">Explore a Wikipédia offline.</string>
     <string name="backup_dont_have_any_descr">Configure uma cópia de segurança automática e nunca perca informação.</string>
-    <string name="backup_error_subscription_was_expired_descr">A sua subscrição do OsmAnd Pro expirou, renove-a para usar cópias de segurança. Ainda pode restaurar dados da Cloud.</string>
+    <string name="backup_error_subscription_was_expired_descr">A sua subscrição do OsmAnd Pro expirou, renove-a para poder usar cópias de segurança. Ainda pode restaurar os dados da Cloud.</string>
     <string name="contour_lines_hillshades_slope">Curvas de nível, sombras de relevo, declives</string>
     <string name="backup_deleting_all_data">A eliminar todos os dados…</string>
     <string name="backup_deleted_all_data">Todos os dados eliminados.</string>
@@ -4590,4 +4590,15 @@
     <string name="apply_only_to_new_favorites">Aplicar apenas aos favoritos novos</string>
     <string name="change_default_appearance">Alterar aparência predefinida</string>
     <string name="apply_to_existing_points_descr">Aplicar alterações aos pontos existentes do grupo ou apenas aos novos\?</string>
+    <string name="shared_string_symbol">Símbolo</string>
+    <string name="no_widgets_descr">Adicionar um ou mais widgets da lista de widgets disponíveis.</string>
+    <string name="no_widgets_here_yet">Ainda sem widgets aqui</string>
+    <string name="available_widgets">Widgets disponíveis</string>
+    <string name="snackbar_page_removed">A \"página %1$s\" foi removida.</string>
+    <string name="add_page">Adicionar página</string>
+    <string name="page_number">Página %1$s</string>
+    <string name="on_with_params">%1$s em %2$s</string>
+    <string name="map_widget_altitude">Altitude da localização atual</string>
+    <string name="map_widget_distance_to_destination">Distância até ao destino</string>
+    <string name="map_widget_current_speed">Velocidade atual</string>
 </resources>
