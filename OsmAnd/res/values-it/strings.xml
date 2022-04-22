@@ -4579,4 +4579,10 @@
     <string name="rendering_attr_showFitnessTrails_name">Percorsi fitness</string>
     <string name="rendering_attr_showFitnessTrails_description">Mostra i percorsi fitness</string>
     <string name="rendering_attr_horse_scale_demanding_name">Impegnativo</string>
+    <string name="on_with_params">%1$s su %2$s</string>
+    <string name="shared_string_symbol">Simbolo</string>
+    <string name="no_widgets_descr">Uno o più widget dalla lista dei widget.</string>
+    <string name="available_widgets">Widget disponibili</string>
+    <string name="snackbar_page_removed">\"La pagina %1$s\" è stata rimossa.</string>
+    <string name="no_widgets_here_yet">Qui ancora nessun widget</string>
 </resources>

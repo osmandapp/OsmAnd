@@ -4569,7 +4569,7 @@
     <string name="routeInfo_horse_scale_description">Відображати шляхи відповідно до складності кінних стежок</string>
     <string name="rendering_attr_horse_scale_dangerous_name">Небезпечно</string>
     <string name="rendering_attr_showTramRoutes_name">Трамвайні маршрути</string>
-    <string name="rendering_attr_horse_scale_critical_name">Критич.</string>
+    <string name="rendering_attr_horse_scale_critical_name">Критичність</string>
     <string name="rendering_attr_showMonorailRoutes_name">Монорейкові маршрути</string>
     <string name="top_widgets_panel">Верхня панель</string>
     <string name="bottom_widgets_panel">Нижня панель</string>
@@ -4590,4 +4590,10 @@
     <string name="map_widget_current_speed">Поточна швидкість</string>
     <string name="add_page">Додати сторінку</string>
     <string name="page_number">Сторінка %1$s</string>
+    <string name="shared_string_symbol">Символ</string>
+    <string name="no_widgets_descr">Додайте один або кілька віджетів зі списку доступних віджетів.</string>
+    <string name="available_widgets">Доступні віджети</string>
+    <string name="snackbar_page_removed">«Сторінку %1$s» видалено.</string>
+    <string name="no_widgets_here_yet">Тут ще немає віджетів</string>
+    <string name="on_with_params">%1$s на %2$s</string>
 </resources>

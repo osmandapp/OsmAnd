@@ -4596,4 +4596,10 @@
     <string name="add_page">Tilføj side</string>
     <string name="page_number">Side %1$s</string>
     <string name="map_widget_altitude">Højde på nuværende placering</string>
+    <string name="shared_string_symbol">Symbol</string>
+    <string name="snackbar_page_removed">\"Side %1$s\" er blevet fjernet.</string>
+    <string name="no_widgets_descr">Tilføj et eller flere moduler fra listen over tilgængelige moduler.</string>
+    <string name="no_widgets_here_yet">Ingen moduler her endnu</string>
+    <string name="available_widgets">Tilgængelige moduler</string>
+    <string name="on_with_params">%1$s på %2$s</string>
 </resources>

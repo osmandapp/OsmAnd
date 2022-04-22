@@ -4591,4 +4591,10 @@
     <string name="map_widget_distance_to_destination">מרחק ליעד</string>
     <string name="add_page">הוספת עמוד</string>
     <string name="map_widget_current_speed">מהירות נוכחית</string>
+    <string name="shared_string_symbol">סמל</string>
+    <string name="no_widgets_descr">ניתן להוסיף וידג׳ט אחד או יותר מרשימת הווידג׳טים הזמינים.</string>
+    <string name="on_with_params">%1$s על %2$s</string>
+    <string name="no_widgets_here_yet">אין כאן וידג׳טים עדיין</string>
+    <string name="available_widgets">וידג׳טים זמינים</string>
+    <string name="snackbar_page_removed">„העמוד %1$s” הוסר.</string>
 </resources>
