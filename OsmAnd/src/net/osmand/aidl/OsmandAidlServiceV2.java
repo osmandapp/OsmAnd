@@ -1525,7 +1525,7 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 				OsmandAidlApi api = getApi("registerForLogcatMessages");
 				if (api != null) {
 					if (!params.isSubscribeToUpdates() && params.getCallbackId() != -1) {
-						api.stopRunningLogcatTask(params.getCallbackId());
+						api.stopLogcatTask(params.getCallbackId());
 						removeAidlCallback(params.getCallbackId());
 						return -1;
 					} else {

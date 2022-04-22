@@ -241,7 +241,7 @@ public class OsmandAidlApi {
 	private final Map<String, AidlContextMenuButtonsWrapper> contextMenuButtonsParams = new ConcurrentHashMap<>();
 	private final Map<Long, VoiceRouter.VoiceMessageListener> voiceRouterMessageCallbacks = new ConcurrentHashMap<>();
 	private final Map<Long, Set<Integer>> keyEventCallbacks = new ConcurrentHashMap<>();
-	private final Map<Long, LogcatAsyncTask> runningLogcatAsyncTasks = new ConcurrentHashMap<>();
+	private final Map<Long, LogcatAsyncTask> logcatAsyncTasks = new ConcurrentHashMap<>();
 
 	private MapActivity mapActivity;
 
@@ -2159,14 +2159,14 @@ public class OsmandAidlApi {
 				}
 			}
 		};
-		stopRunningLogcatTask(id);
+		stopLogcatTask(id);
 		LogcatAsyncTask task = new LogcatAsyncTask(listener, filterLevel);
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-		runningLogcatAsyncTasks.put(id, task);
+		logcatAsyncTasks.put(id, task);
 	}
 
-	public void stopRunningLogcatTask(long id) {
-		LogcatAsyncTask task = runningLogcatAsyncTasks.remove(id);
+	public void stopLogcatTask(long id) {
+		LogcatAsyncTask task = logcatAsyncTasks.remove(id);
 		if (task != null) {
 			task.stop();
 		}
