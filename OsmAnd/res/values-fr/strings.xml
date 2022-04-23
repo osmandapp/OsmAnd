@@ -4590,4 +4590,12 @@
     <string name="on_with_params">%1$s de %2$s</string>
     <string name="shared_string_symbol">Symbole</string>
     <string name="available_widgets">Widgets disponibles</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Confirmé</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Aucune préférence</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Seulement si nécessaire</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Éviter le hors-piste</string>
+    <string name="routing_attr_freeride_policy_allow_name">Autoriser</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Préférer le hors-piste</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Débutant</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Expert</string>
 </resources>
