@@ -4586,4 +4586,18 @@
     <string name="shared_string_item">Element</string>
     <string name="simulation_preview_mode_title">Hurtigforhåndsvisningsmodus</string>
     <string name="osm_carto_render_descr">Ligner stilen til OpenStreetMap-carto brukt på OSM-nettsiden</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Nybegynner</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Avansert</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Ekspert</string>
+    <string name="on_with_params">%1$s på %2$s</string>
+    <string name="shared_string_symbol">Symbol</string>
+    <string name="no_widgets_descr">Legg til ett eller flere miniprogrammer fra listen av tilgjengelige miniprogrammer.</string>
+    <string name="no_widgets_here_yet">Ingen miniprogrammer her enda</string>
+    <string name="available_widgets">Tilgjengelige miniprogrammer</string>
+    <string name="snackbar_page_removed">«Side %1$s» har blitt fjernet.</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Ikke forlat løype</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Kun hvis nødvendig</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Foretrekk frikjøring</string>
+    <string name="routing_attr_freeride_policy_allow_name">Tillat</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Ingen preferanse</string>
 </resources>
