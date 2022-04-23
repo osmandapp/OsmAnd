@@ -4587,4 +4587,12 @@
     <string name="no_widgets_here_yet">Itt még nincs widget</string>
     <string name="available_widgets">Elérhető widgetek</string>
     <string name="snackbar_page_removed">A(z) „%1$s oldal” el lett távolítva.</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Csak ha szükséges</string>
+    <string name="routing_attr_freeride_policy_allow_name">Engedélyezés</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Elsősorban pályán kívül</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Kezdő</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Haladó</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Profi</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Nincs megadva</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Pályáról le nem térve</string>
 </resources>
