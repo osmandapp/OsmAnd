@@ -109,16 +109,13 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		MapRendererView mapRenderer = view.getMapRenderer();
 		if (mapRenderer != null) {
-			if (favoritesMapLayerProvider == null) {
-				favoritesMapLayerProvider = new FavoritesTileProvider(getContext(), baseOrder);
-			}
 			if (mapActivitInvalidated) {
 				//change screen orientation
 				showFavorites(true);
 				mapActivitInvalidated = false;
 			}
 			if (!this.settings.SHOW_FAVORITES.get()) {
-				clearFavourites();
+				clearFavorites();
 			} else {
 				showFavorites(false);
 			}
@@ -212,13 +209,14 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	public void showFavorites(boolean recreate) {
 		MapRendererView mapRenderer = view.getMapRenderer();
-		if (mapRenderer == null || favoritesMapLayerProvider == null) {
+		if (mapRenderer == null) {
 			return;
 		}
-		if (!recreate && favoritesMapLayerProvider.getPointsCount() > 0) {
+		if (!recreate && favoritesMapLayerProvider != null && favoritesMapLayerProvider.getPointsCount() > 0) {
 			return;
 		}
-		clearFavourites();
+		clearFavorites();
+		favoritesMapLayerProvider = new FavoritesTileProvider(getContext(), baseOrder);
 
 		if (settings.SHOW_FAVORITES.get() && favouritesHelper.isFavoritesLoaded()) {
 			float textScale = getTextScale();
@@ -247,15 +245,13 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 	}
 
-	public void clearFavourites() {
+	public void clearFavorites() {
 		MapRendererView mapRenderer = view.getMapRenderer();
 		if (mapRenderer == null || favoritesMapLayerProvider == null) {
 			return;
 		}
-		if (favoritesMapLayerProvider.getPointsCount() > 0) {
-			favoritesMapLayerProvider.clearSymbols(mapRenderer);
-			favoritesMapLayerProvider.clearData();
-		}
+		favoritesMapLayerProvider.clearSymbols(mapRenderer);
+		favoritesMapLayerProvider = null;
 	}
 
 	@Override

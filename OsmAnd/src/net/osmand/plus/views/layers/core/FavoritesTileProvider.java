@@ -10,6 +10,7 @@ import net.osmand.core.jni.MapTiledCollectionProvider;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QListPointI;
 import net.osmand.core.jni.SWIGTYPE_p_sk_spT_SkImage_const_t;
+import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.TextRasterizer;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.core.jni.interface_MapTiledCollectionProvider;
@@ -19,17 +20,15 @@ import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class FavoritesTileProvider extends interface_MapTiledCollectionProvider {
 
-	private final List<FavouritesMapLayerData> favouritesMapLayerDataList = Collections.synchronizedList(new ArrayList<>());
-	private final Map<Integer, Bitmap> bigBitmapCache = new ConcurrentHashMap<>();
-	private final Map<Integer, Bitmap> smallBitmapCache = new ConcurrentHashMap<>();
+	private final List<FavouritesMapLayerData> favouritesMapLayerDataList = new ArrayList<>();
+	private final Map<Integer, Bitmap> bigBitmapCache = new HashMap<>();
+	private final Map<Integer, Bitmap> smallBitmapCache = new HashMap<>();
 	private final int baseOrder;
 	private final Context ctx;
 	private MapTiledCollectionProvider providerInstance;
@@ -49,8 +48,8 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 	public void clearSymbols(@NonNull MapRendererView mapRenderer) {
 		if (providerInstance != null) {
 			mapRenderer.removeSymbolsProvider(providerInstance);
+			providerInstance = null;
 		}
-		favouritesMapLayerDataList.clear();
 	}
 
 	@Override
@@ -90,7 +89,9 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 
 	@Override
 	public PointI getPoint31(int index) {
-		return favouritesMapLayerDataList.get(index).point;
+		FavouritesMapLayerData data = index < favouritesMapLayerDataList.size()
+				? favouritesMapLayerDataList.get(index) : null;
+		return data != null ? data.point : new PointI(0, 0);
 	}
 
 	@Override
@@ -103,14 +104,14 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 		FavouritesMapLayerData data = index < favouritesMapLayerDataList.size()
 				? favouritesMapLayerDataList.get(index) : null;
 		if (data == null) {
-			Bitmap emptyBitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
-			return NativeUtilities.createSkImageFromBitmap(emptyBitmap);
+			return SwigUtilities.nullSkImage();
 		}
 		Bitmap bitmap;
 		if (isFullSize) {
 			int bigBitmapKey = getKey(data.colorBigPoint, data.withShadow, data.overlayIconId,
 					data.backgroundType, data.hasMarker, data.textScale);
-			if (!bigBitmapCache.containsKey(bigBitmapKey)) {
+			bitmap = bigBitmapCache.get(bigBitmapKey);
+			if (bitmap == null) {
 				PointImageDrawable pointImageDrawable;
 				if (data.hasMarker) {
 					pointImageDrawable = PointImageDrawable.getOrCreate(ctx, data.colorBigPoint,
@@ -121,27 +122,19 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 				}
 				bitmap = pointImageDrawable.getBigMergedBitmap(data.textScale);
 				bigBitmapCache.put(bigBitmapKey, bitmap);
-			} else {
-				bitmap = bigBitmapCache.get(bigBitmapKey);
 			}
 		} else {
 			int smallBitmapKey = getKey(data.colorSmallPoint, data.withShadow, data.overlayIconId,
 					data.backgroundType, data.hasMarker, data.textScale);
-			if (!smallBitmapCache.containsKey(smallBitmapKey)) {
+			bitmap = smallBitmapCache.get(smallBitmapKey);
+			if (bitmap == null) {
 				PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
 						data.colorSmallPoint, data.withShadow, false, data.overlayIconId, data.backgroundType);
 				bitmap = pointImageDrawable.getSmallMergedBitmap(data.textScale);
 				smallBitmapCache.put(smallBitmapKey, bitmap);
-			} else {
-				bitmap = smallBitmapCache.get(smallBitmapKey);
 			}
 		}
-		if (bitmap == null) {
-			Bitmap emptyBitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
-			return NativeUtilities.createSkImageFromBitmap(emptyBitmap);
-		} else {
-			return NativeUtilities.createSkImageFromBitmap(bitmap);
-		}
+		return bitmap != null ? NativeUtilities.createSkImageFromBitmap(bitmap) : SwigUtilities.nullSkImage();
 	}
 
 	@Override
@@ -159,15 +152,12 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 		return ZoomLevel.MaxZoomLevel;
 	}
 
-	public void clearData() {
-		favouritesMapLayerDataList.clear();
-		bigBitmapCache.clear();
-		smallBitmapCache.clear();
-	}
-
 	public void addToData(int colorSmallPoint, int colorBigPoint, boolean withShadow,
 	                      int overlayIconId, BackgroundType backgroundType, boolean hasMarker,
-	                      float textScale, double lat, double lon) {
+	                      float textScale, double lat, double lon) throws IllegalStateException {
+		if (providerInstance != null) {
+			throw new IllegalStateException("Provider already instantiated. Data cannot be modified at this stage.");
+		}
 		favouritesMapLayerDataList.add(new FavouritesMapLayerData(colorSmallPoint, colorBigPoint,
 				withShadow, overlayIconId, backgroundType, hasMarker, textScale, lat, lon));
 	}
