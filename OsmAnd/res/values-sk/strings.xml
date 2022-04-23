@@ -4580,4 +4580,23 @@
     <string name="apply_only_to_new_points">Použiť iba na nové body</string>
     <string name="change_default_appearance">Zmeniť predvolený vzhľad</string>
     <string name="apply_only_to_new_favorites">Použiť iba na nové obľúbené body</string>
+    <string name="on_with_params">%1$s na %2$s</string>
+    <string name="shared_string_symbol">Symbol</string>
+    <string name="add_page">Pridať stránku</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Neschádzať zo zjazdovky</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Len ak je potrebné</string>
+    <string name="routing_attr_freeride_policy_allow_name">Povoliť</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Preferovať mimo zjazdovky</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Bez preferencie</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Začiatočník</string>
+    <string name="map_widget_altitude">Nadmorská výška aktuálnej polohy</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Pokročilý</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Expert</string>
+    <string name="no_widgets_descr">Pridajte jeden alebo viac nástrojov zo zoznamu dostupných nástrojov.</string>
+    <string name="no_widgets_here_yet">Nie sú tu zatiaľ žiadne nástroje</string>
+    <string name="available_widgets">Dostupné nástroje</string>
+    <string name="snackbar_page_removed">\"Stránka %1$s\" bola odstránená.</string>
+    <string name="map_widget_distance_to_destination">Vzdialenosť do cieľa</string>
+    <string name="map_widget_current_speed">Súčasná rýchlosť</string>
+    <string name="page_number">Strana %1$s</string>
 </resources>
