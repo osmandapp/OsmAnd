@@ -4566,7 +4566,7 @@
     <string name="speed_mode">Режим швидкості</string>
     <string name="routeInfo_horse_scale_name">Складність кінних стежок</string>
     <string name="rendering_attr_horse_scale_difficult_name">Складність</string>
-    <string name="routeInfo_horse_scale_description">Відображати шляхи відповідно до складності кінних стежок</string>
+    <string name="routeInfo_horse_scale_description">Показувати шляхи відповідно до складності кінних стежок</string>
     <string name="rendering_attr_horse_scale_dangerous_name">Небезпечно</string>
     <string name="rendering_attr_showTramRoutes_name">Трамвайні маршрути</string>
     <string name="rendering_attr_horse_scale_critical_name">Критичність</string>
@@ -4596,4 +4596,12 @@
     <string name="snackbar_page_removed">«Сторінку %1$s» видалено.</string>
     <string name="no_widgets_here_yet">Тут ще немає віджетів</string>
     <string name="on_with_params">%1$s на %2$s</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Не сходити з траси</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Лише за необхідності</string>
+    <string name="routing_attr_freeride_policy_allow_name">Дозволити</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Надавати перевагу руху поза трасою</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Не налаштовувати</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Початківець</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Досвідчений</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Експерт</string>
 </resources>
