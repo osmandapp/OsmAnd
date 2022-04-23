@@ -3099,7 +3099,7 @@
     <string name="quick_action_need_to_add_item_to_list">Добавьте хотя бы один элемент в список «Быстрые действия» в настройках</string>
     <string name="routing_attr_piste_type_skitour_description">Маршруты для горнолыжного туризма.</string>
     <string name="routing_attr_freeride_policy_name">Вне трассы</string>
-    <string name="routing_attr_freeride_policy_description">Фрирайды и внетрассовые маршруты — это неофициальные неподготовленные трассы. Обычно неухоженные, неразмеченные и неосвещённые вечером. Вход на свой страх и риск.</string>
+    <string name="routing_attr_freeride_policy_description">Фрирайд и внетрассовые маршруты — это неофициальные неподготовленные трассы. Обычно неухоженные, неразмеченные и неосвещённые вечером. Вход на свой страх и риск.</string>
     <string name="shared_string_open_track">Открыть трек</string>
     <string name="gpx_join_gaps">Соединить разрывы (исключить пробелы)</string>
     <string name="app_mode_camper">Кемпер</string>
@@ -4601,4 +4601,12 @@
     <string name="no_widgets_here_yet">Здесь пока нет виджетов</string>
     <string name="available_widgets">Доступные виджеты</string>
     <string name="snackbar_page_removed">Страница %1$s была удалена.</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Только при необходимости</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Предпочитать внетрассовое катание</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Нет предпочтений</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Новичок</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Продвинутый</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Эксперт</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Не сходить с трасс</string>
+    <string name="routing_attr_freeride_policy_allow_name">Разрешить</string>
 </resources>
