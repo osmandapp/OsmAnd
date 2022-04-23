@@ -82,7 +82,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 				}
 
 				@Override
-				public void onFavoritePropertyUpdated() {
+				public void onFavoritePropertiesUpdated() {
 				}
 			});
 		}

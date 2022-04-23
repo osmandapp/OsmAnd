@@ -51,7 +51,7 @@ public class AddFavouritesGroupBottomSheetDialogFragment extends AddGroupBottomS
 				}
 
 				@Override
-				public void onFavoritePropertyUpdated() {
+				public void onFavoritePropertiesUpdated() {
 				}
 			});
 		}

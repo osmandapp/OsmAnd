@@ -32,7 +32,7 @@ import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IMoveObjectProvider;
 import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
-import net.osmand.plus.views.layers.core.FavouritesTileProvider;
+import net.osmand.plus.views.layers.core.FavoritesTileProvider;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -40,7 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvider,
-		IMoveObjectProvider, MapTextProvider<FavouritePoint> {
+		IMoveObjectProvider, MapTextProvider<FavouritePoint>, FavoritesListener {
 
 	private static final int START_ZOOM = 6;
 
@@ -57,8 +57,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	private ContextMenuLayer contextMenuLayer;
 
 	//OpenGl
-	private FavouritesChangeListener favouritesChangeListener = new FavouritesChangeListener();
-	private FavouritesTileProvider favouritesMapLayerProvider;
+	private FavoritesTileProvider favoritesMapLayerProvider;
 
 	public FavouritesLayer(@NonNull Context ctx, int baseOrder) {
 		super(ctx);
@@ -75,7 +74,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		defaultColor = ContextCompat.getColor(view.getContext(), R.color.color_favorite);
 		grayColor = ContextCompat.getColor(view.getContext(), R.color.color_favorite_gray);
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
-		favouritesHelper.addListener(favouritesChangeListener);
+		favouritesHelper.addListener(this);
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
@@ -108,18 +107,20 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		MapRendererView mapRendererView = getMapView().getMapRenderer();
-		if (mapRendererView != null) {
-			//OpenGL draw occur in favouritesChangeListener
+		MapRendererView mapRenderer = view.getMapRenderer();
+		if (mapRenderer != null) {
+			if (favoritesMapLayerProvider == null) {
+				favoritesMapLayerProvider = new FavoritesTileProvider(getContext(), baseOrder);
+			}
 			if (mapActivitInvalidated) {
 				//change screen orientation
-				favouritesChangeListener.showFavourites(true);
+				showFavorites(true);
 				mapActivitInvalidated = false;
 			}
 			if (!this.settings.SHOW_FAVORITES.get()) {
-				favouritesChangeListener.clearFavourites();
+				clearFavourites();
 			} else {
-				favouritesChangeListener.showFavourites(false);
+				showFavorites(false);
 			}
 			return;
 		}
@@ -207,6 +208,54 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 					favouritesHelper.getColorWithCategory(favoritePoint, defaultColor), true, favoritePoint);
 		}
 		pointImageDrawable.drawPoint(canvas, x, y, textScale, history);
+	}
+
+	public void showFavorites(boolean recreate) {
+		MapRendererView mapRenderer = view.getMapRenderer();
+		if (mapRenderer == null || favoritesMapLayerProvider == null) {
+			return;
+		}
+		if (!recreate && favoritesMapLayerProvider.getPointsCount() > 0) {
+			return;
+		}
+		clearFavourites();
+
+		if (settings.SHOW_FAVORITES.get() && favouritesHelper.isFavoritesLoaded()) {
+			float textScale = getTextScale();
+			for (FavoriteGroup group : favouritesHelper.getFavoriteGroups()) {
+				boolean synced = isSynced(group);
+				for (FavouritePoint favoritePoint : group.getPoints()) {
+					double lat = favoritePoint.getLatitude();
+					double lon = favoritePoint.getLongitude();
+					if (favoritePoint.isVisible() && favoritePoint != contextMenuLayer.getMoveableObject()) {
+						MapMarker marker = null;
+						if (synced) {
+							marker = mapMarkersHelper.getMapMarker(favoritePoint);
+							if (marker == null || marker.history && !view.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
+								continue;
+							}
+						}
+						int colorBigPoint = favouritesHelper.getColorWithCategory(favoritePoint, defaultColor);
+						int colorSmallPoint = (marker != null && marker.history) ? grayColor : colorBigPoint;
+						favoritesMapLayerProvider.addToData(colorSmallPoint, colorBigPoint,
+								true, favoritePoint.getOverlayIconId(view.getContext()), favoritePoint.getBackgroundType(),
+								marker != null, textScale, lat, lon);
+					}
+				}
+			}
+			favoritesMapLayerProvider.drawSymbols(mapRenderer);
+		}
+	}
+
+	public void clearFavourites() {
+		MapRendererView mapRenderer = view.getMapRenderer();
+		if (mapRenderer == null || favoritesMapLayerProvider == null) {
+			return;
+		}
+		if (favoritesMapLayerProvider.getPointsCount() > 0) {
+			favoritesMapLayerProvider.clearSymbols(mapRenderer);
+			favoritesMapLayerProvider.clearData();
+		}
 	}
 
 	@Override
@@ -328,78 +377,19 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 	}
 
-	public class FavouritesChangeListener implements FavoritesListener {
+	@Override
+	public void onFavoritesLoaded() {
+		showFavorites(true);
+	}
 
-		@Override
-		public void onFavoritesLoaded() {
-			showFavourites(true);
-		}
+	@Override
+	public void onFavoriteDataUpdated(@NotNull FavouritePoint point) {
+		showFavorites(true);
+	}
 
-		@Override
-		public void onFavoriteDataUpdated(@NotNull FavouritePoint point) {
-			showFavourites(true);
-		}
-
-		@Override
-		public void onFavoritePropertyUpdated() {
-			showFavourites(true);
-		}
-
-		public void showFavourites(boolean force) {
-			MapRendererView mapRendererView = getMapView().getMapRenderer();
-			if (mapRendererView == null) {
-				return;
-			}
-
-			if (!force && favouritesMapLayerProvider != null && favouritesMapLayerProvider.getPointsCount() > 0) {
-				return;
-			}
-
-			clearFavourites();
-
-			if (favouritesMapLayerProvider == null) {
-				favouritesMapLayerProvider = new FavouritesTileProvider(baseOrder);
-			}
-
-			if (settings.SHOW_FAVORITES.get() && favouritesHelper.isFavoritesLoaded()) {
-				favouritesMapLayerProvider.setContext(view.getContext());
-				float textScale = getTextScale();
-				for (FavoriteGroup group : favouritesHelper.getFavoriteGroups()) {
-					List<Pair<FavouritePoint, MapMarker>> fullObjects = new ArrayList<>();
-					boolean synced = isSynced(group);
-					for (FavouritePoint favoritePoint : group.getPoints()) {
-						double lat = favoritePoint.getLatitude();
-						double lon = favoritePoint.getLongitude();
-						if (favoritePoint.isVisible() && favoritePoint != contextMenuLayer.getMoveableObject()) {
-							MapMarker marker = null;
-							if (synced) {
-								marker = mapMarkersHelper.getMapMarker(favoritePoint);
-								if (marker == null || marker.history && !view.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
-									continue;
-								}
-							}
-							int colorBigPoint = favouritesHelper.getColorWithCategory(favoritePoint, defaultColor);
-							int colorSmallPoint = (marker != null && marker.history) ? grayColor : colorBigPoint;
-							favouritesMapLayerProvider.addToData(colorSmallPoint, colorBigPoint,
-									true, favoritePoint.getOverlayIconId(view.getContext()), favoritePoint.getBackgroundType(),
-									marker != null, textScale, lat, lon);
-						}
-					}
-				}
-				favouritesMapLayerProvider.drawSymbols(mapRendererView);
-			}
-		}
-
-		public void clearFavourites() {
-			MapRendererView mapRendererView = getMapView().getMapRenderer();
-			if (mapRendererView == null) {
-				return;
-			}
-			if (favouritesMapLayerProvider != null && favouritesMapLayerProvider.getPointsCount() > 0) {
-				favouritesMapLayerProvider.clearSymbols(mapRendererView);
-				favouritesMapLayerProvider.clearData();
-			}
-		}
+	@Override
+	public void onFavoritePropertiesUpdated() {
+		showFavorites(true);
 	}
 }
 

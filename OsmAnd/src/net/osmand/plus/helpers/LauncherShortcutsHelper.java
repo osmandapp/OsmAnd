@@ -65,7 +65,7 @@ public class LauncherShortcutsHelper {
 			}
 
 			@Override
-			public void onFavoritePropertyUpdated() {
+			public void onFavoritePropertiesUpdated() {
 			}
 		};
 		app.getFavoritesHelper().addListener(favoritesListener);
