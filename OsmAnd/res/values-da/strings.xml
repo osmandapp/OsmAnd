@@ -4602,4 +4602,12 @@
     <string name="no_widgets_here_yet">Ingen moduler her endnu</string>
     <string name="available_widgets">Tilgængelige moduler</string>
     <string name="on_with_params">%1$s på %2$s</string>
+    <string name="routing_attr_freeride_policy_allow_name">Tillad</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Foretræk offpiste</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Ingen præference</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Nybegynder</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Øvet</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Ekspert</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Kun hvis nødvendigt</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Gå ikke uden for pisterne</string>
 </resources>
