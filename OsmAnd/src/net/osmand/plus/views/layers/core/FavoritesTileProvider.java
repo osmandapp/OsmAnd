@@ -23,12 +23,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class FavoritesTileProvider extends interface_MapTiledCollectionProvider {
 
 	private final List<FavouritesMapLayerData> favouritesMapLayerDataList = new ArrayList<>();
-	private final Map<Integer, Bitmap> bigBitmapCache = new HashMap<>();
-	private final Map<Integer, Bitmap> smallBitmapCache = new HashMap<>();
+	private final Map<Integer, Bitmap> bigBitmapCache = new ConcurrentHashMap<>();
+	private final Map<Integer, Bitmap> smallBitmapCache = new ConcurrentHashMap<>();
 	private final int baseOrder;
 	private final Context ctx;
 	private MapTiledCollectionProvider providerInstance;
