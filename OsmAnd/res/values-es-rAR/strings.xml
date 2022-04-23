@@ -4590,4 +4590,18 @@
     <string name="apply_only_to_new_points">Aplicar sólo a puntos nuevos</string>
     <string name="apply_only_to_new_favorites">Aplicar sólo a favoritos nuevos</string>
     <string name="change_default_appearance">Cambiar el aspecto predefinido</string>
+    <string name="on_with_params">%1$s en %2$s</string>
+    <string name="shared_string_symbol">Símbolo</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Sólo si es necesario</string>
+    <string name="routing_attr_freeride_policy_allow_name">Permitir</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Preferir salirse de la pista</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Sin preferencias</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Principiante</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Avanzado</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Experto</string>
+    <string name="no_widgets_descr">Añade uno o más widgets de la lista de widgets disponibles.</string>
+    <string name="no_widgets_here_yet">Todavía sin widgets aquí</string>
+    <string name="available_widgets">Widgets disponibles</string>
+    <string name="snackbar_page_removed">Se ha quitado «Página %1$s»</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">No salirse de la pista</string>
 </resources>
