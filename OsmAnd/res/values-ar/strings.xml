@@ -2066,7 +2066,7 @@
     <string name="rendering_value_fine_name">اللون والسمك</string>
     <string name="route_roundabout_short">خذ المخرج %1$d ثم واصل</string>
     <string name="search_map_hint">المدينة أو المنطقة</string>
-    <string name="wiki_around">مقالات ويكيبيديا مجاورة</string>
+    <string name="wiki_around">مقالات ويكيبيديا قريبة</string>
     <string name="routing_attr_allow_motorway_name">استخدام الطرق السريعة</string>
     <string name="routing_attr_allow_motorway_description">السماح للطرق السريعة.</string>
     <string name="lang_sr_latn">صربي (لاتيني)</string>
@@ -3153,7 +3153,7 @@
     <string name="rendering_attr_piste_difficulty_intermediate_name">متوسط</string>
     <string name="rendering_attr_piste_difficulty_advanced_name">متقدم</string>
     <string name="rendering_attr_piste_difficulty_expert_name">خبير</string>
-    <string name="rendering_attr_piste_difficulty_freeride_name">الدراجات الجبلية</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">المسارات الغير منظمة</string>
     <string name="rendering_attr_piste_difficulty_extreme_name">أقصى</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">غير محدد</string>
     <string name="routeInfo_piste_difficulty_name">صعوبة الطريق</string>
@@ -3318,8 +3318,8 @@
     <string name="routing_attr_allow_classic_only_description">تم إعداد الطرق للأسلوب الكلاسيكي فقط دون مسارات التزلج. يشمل ذلك الطرق التي يتم إعدادها بواسطة عربة ثلجية أصغر مع زحلقة مرنة ومسارات مصنوعة يدوياً بواسطة المتزلجين.</string>
     <string name="routing_attr_difficulty_preference_name">الصعوبة المفضلة</string>
     <string name="routing_attr_difficulty_preference_description">أفضل الطرق لهذه الصعوبة على الرغم من أن التوجيه علي الممرات أصعب إذا كان طويلا وأسهل إذا كان أقصر.</string>
-    <string name="routing_attr_freeride_policy_name">خارج الممر</string>
-    <string name="routing_attr_freeride_policy_description">Freeride و offpiste طرق ومسارات غير رسمية. عادة ما يكون غير مرتب ، غير مصبوغ من قبل المسؤولين ولا يتم تسجيله دخوله في المساء. الدخول على مسؤوليتك الخاصة.</string>
+    <string name="routing_attr_freeride_policy_name">خارج الطريق</string>
+    <string name="routing_attr_freeride_policy_description">الطرق الزلقة والغير منتظمة طرق ومسارات غير رسمية. عادة ما يكون غير مرتبة ، وغير مصبوغة من قبل المسؤولين ولا ينصح بالذهاب معها في المساء خاصة. الدخول على مسؤوليتك الخاصة.</string>
     <string name="collected_data">البيانات المجمعة</string>
     <string name="app_mode_ufo">طبق</string>
     <string name="rendering_attr_highway_class_track_grade1_name">الصف 1</string>
@@ -4034,7 +4034,7 @@
     <string name="context_menu_edit_descr">تعديل الوصف</string>
     <string name="delete_waypoints">احذف الإحداثيات</string>
     <string name="copy_to_map_markers">نسخ لعلامات الخريطة</string>
-    <string name="copy_to_map_favorites">نسخ للمفضلة</string>
+    <string name="copy_to_map_favorites">نسخ إلى المفضلة</string>
     <string name="upload_photo">يتم الرفع</string>
     <string name="upload_photo_completed">اكتمال الرفع</string>
     <string name="uploading_count">رفع %1$d من %2$d</string>
@@ -4164,7 +4164,7 @@
     <string name="routing_attr_avoid_low_emission_zone_name">تجنب مناطق الانبعاثات المنخفضة</string>
     <string name="search_more">بحث عن المزيد…</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
-    <string name="backup_and_restore">نسخ احتياطي/استعادة</string>
+    <string name="backup_and_restore">النسخ الاحتياطي والاستعادة</string>
     <string name="last_backup">النسخ الاحتياطي الأخير</string>
     <string name="duration_ago">%1$s منذ</string>
     <string name="osmand_cloud">سحابة أوسماند</string>
@@ -4613,8 +4613,8 @@
     <string name="rendering_attr_showFitnessTrails_description">إظهار مسارات اللياقة البدنية</string>
     <string name="rendering_attr_showRunningRoutes_description">عرض مسارات الجري</string>
     <string name="rendering_attr_showRunningRoutes_name">مسارات الجري</string>
-    <string name="routeInfo_horse_scale_name">صعوبة مسارات الخيل</string>
-    <string name="routeInfo_horse_scale_description">إصدار المسارات وفقا لصعوبة مسارات الخيل</string>
+    <string name="routeInfo_horse_scale_name">عوائق مسارات الخيل</string>
+    <string name="routeInfo_horse_scale_description">تفضيل المسارات وفقا لصعوبة مسارات الخيل</string>
     <string name="rendering_attr_horse_scale_common_name">شائع</string>
     <string name="rendering_attr_horse_scale_demanding_name">مطالبة</string>
     <string name="rendering_attr_horse_scale_difficult_name">صعب</string>
@@ -4659,4 +4659,18 @@
     <string name="simulation_real_mode_desc">في الطرق المستقيمة ، ستصل السرعة تقريبا إلى أقصى سرعة مسموح بها.
 \nعند التقاطعات ، سوف تقل السرعة .
 \nسيتم تطبيق عقوبات إضافية على إشارات المرور وعلامات التوقف وما إلى ذلك.</string>
+    <string name="on_with_params">%1$s على %2$s</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">فقط إذا لزم الأمر</string>
+    <string name="routing_attr_freeride_policy_allow_name">السماح</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">بدون تفضيل</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">تفضيل الطرق الزلقة</string>
+    <string name="no_widgets_here_yet">لا يوجد ويدجت هنا حتى الان</string>
+    <string name="available_widgets">الويدجت المتاح</string>
+    <string name="routing_attr_difficulty_preference_expert_name">خبير</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">مبتدئ</string>
+    <string name="shared_string_symbol">رمز</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">متقدم</string>
+    <string name="no_widgets_descr">أضف أداة واحدة أو أكثر من قائمة الأدوات المتاحة.</string>
+    <string name="snackbar_page_removed">تمت إزالة \"الصفحة %1$s\".</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">لاتذهب للطرق الزلقة</string>
 </resources>
