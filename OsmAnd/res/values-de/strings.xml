@@ -4596,4 +4596,16 @@
     <string name="apply_only_to_new_points">Nur auf neue anwenden</string>
     <string name="apply_only_to_new_favorites">Nur auf neue Favoriten anwenden</string>
     <string name="change_default_appearance">Standdardaussehen ändern</string>
+    <string name="on_with_params">%1$s auf %2$s</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Nur wenn nötig</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Anfänger</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Experte</string>
+    <string name="shared_string_symbol">Symbol</string>
+    <string name="no_widgets_descr">Ein oder mehrere Widgets aus der Liste der verfügbaren Widgets hinzufügen.</string>
+    <string name="no_widgets_here_yet">Noch keine Widgets hier</string>
+    <string name="routing_attr_freeride_policy_allow_name">Erlauben</string>
+    <string name="snackbar_page_removed">Die „Seite %1$s“ wurde entfernt.</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Keine Präferenz</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Fortgeschrittene</string>
+    <string name="available_widgets">Verfügbare Widgets</string>
 </resources>
