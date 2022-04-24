@@ -1288,7 +1288,7 @@
     <string name="save_global_track_interval">Interval beleženja</string>
     <string name="save_track_interval_globally">Interval beleženja</string>
     <string name="rendering_attr_publicTransportMode_name">Avtobusne, trolejbusne in druge proge</string>
-    <string name="record_plugin_name">Dnevnik potovanj</string>
+    <string name="record_plugin_name">Beleženje potovanja</string>
     <string name="index_tours">Izleti</string>
     <string name="shared_string_waypoints">Vmesne točke</string>
     <string name="speak_poi">Bližnje točke POI</string>
@@ -2033,7 +2033,7 @@
     <string name="rendering_value_dark_brown_name">Temnorjava</string>
     <string name="rendering_attr_surfaceIntegrity_name">Kakovost površine ceste</string>
     <string name="search_hint">Vpišite mesto, naslov ali ime točke POI</string>
-    <string name="trip_rec_notification_settings">Omogoči hitro beleženje potovanja</string>
+    <string name="trip_rec_notification_settings">Vklopi hitro beleženje potovanja</string>
     <string name="shared_string_notifications">Obvestila</string>
     <string name="save_track_min_speed">Najmanjša hitrost beleženja</string>
     <string name="save_track_min_speed_descr">Filter: najmanjša hitrost, ko se točke na zemljevidu še beležijo.</string>
@@ -2384,7 +2384,7 @@
     <string name="quick_action_resume_pause_navigation">Ustavi/Nadaljuj navigacijo</string>
     <string name="quick_action_start_stop_navigation">Začni/Končaj navigacijo</string>
     <string name="rendering_value_translucent_pink_name">Prosojna rožnata</string>
-    <string name="quick_action_resume_pause_navigation_descr">Pritisnite gumb, če želite začasno ustaviti oziroma nadaljevati navigacijo.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Gumb za ustavitev oziroma nadaljevanje navigacije.</string>
     <string name="quick_action_show_navigation_finish_dialog">Pokaži pogovorno okno končanja navigacije</string>
     <string name="quick_action_start_stop_navigation_descr">Pritisnite gumb, če želite začeti ali končati navigacijo.</string>
     <string name="live_monitoring_max_interval_to_send">Časovni medpomnilnik za spletno sledenje</string>
@@ -3537,4 +3537,10 @@
     <string name="no_plugins_enabled">Nimaš omogočenih vtičnikov. Seznam razpoložljivih vtičnikov najdeš v »Meni« → »Vtičniki«.</string>
     <string name="duration_ago">pred %1$s</string>
     <string name="save_track_to_gpx_descrp">Samodejni zagon snemanja sledi med navigacijo in samodejno shranjevanje po tem.</string>
+    <string name="trip_recording_save_and_continue">Shrani in nadaljuj</string>
+    <string name="map_widget_monitoring">Beleženje potovanja</string>
+    <string name="shared_string_resume">Nadaljuj</string>
+    <string name="gpx_monitoring_start">Nadaljuj s snemanjem potovanja</string>
+    <string name="gpx_monitoring_stop">Začasno ustavi snemanje potovanja</string>
+    <string name="live_monitoring_descr">Omogoča skupno rabo trenutne lokacije s snemanjem potovanja.</string>
 </resources>
