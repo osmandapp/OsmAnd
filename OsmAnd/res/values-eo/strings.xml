@@ -1500,9 +1500,9 @@
 \n 
 \nPor reveni al unu de normaj mapaj aspektoj de OsmAnd, simple aŭ malaktivigi la kromprogramon, aŭ ŝanĝi ‘map-aspekton’ en la menuo ‘agordi mapon’.</string>
     <string name="plugin_ski_name">Skiada map-vido</string>
-    <string name="plugin_ski_descr">Tiu ĉi kromprogramo aldonas al OsmAnd detalojn pri descendejoj, skivojoj, montaraj skivojoj, kablovojoj kaj skiliftoj. Kursoj kaj vojoj estas kolorigitaj laŭ facileco kaj montrataj kiel speciala ‘vintra map-aspekto kiu ŝajnas kiel neĝ-kovrita landvidaĵo. 
-\n 
-\nAktivigo de tiu ĉi map-vido ŝanĝas map-aspekton al ‘vintro kaj skiado’, montranta ĉiun terenon kovritan de neĝo. La vidon oni povas malaktivigi, per malaktivigi la kromprogramon tie ĉi, aŭ per ŝanĝi de ‘map-aspekto’ en la menuo ‘agordi mapon.</string>
+    <string name="plugin_ski_descr">Tiu ĉi kromprogramo aldonas al OsmAnd detalojn pri descendejoj, skivojoj, montaraj skivojoj, kablovojoj kaj skiliftoj. Skiadaj kursoj kaj vojoj estas kolorigitaj laŭ facileco.
+\n
+\nAktivigo de tiu ĉi map-vido ŝanĝas la map-aspekton al “Vintro kaj skiado”, kiu montras ĉiun terenon kovritan de neĝo. La vidon oni povas malaktivigi, per malaktivigi la kromprogramon tie ĉi, aŭ per ŝanĝi la elekteblon “Map-aspekto” en la menuo “Agordi mapon”.</string>
     <string name="osmand_parking_plugin_name">Parkumeja pozicio</string>
     <string name="osmand_parking_plugin_description">Ebligas al vi registri kie via aŭto estas parkumata kaj kiom da parkumeja tempo restas.
 \n Ambaŭ loko kaj tempo estas montrataj en la stirpanelo de kaj sur la fenestraĵo sur la map‑ekrano. Memorigo povas esti aldonita al la Androida kalendaro.</string>
@@ -3002,8 +3002,8 @@
     <string name="routing_attr_allow_skating_only_description">Nur skivojoj preparitaj por glitkurado (sketado), sen klasikaj skivojoj.</string>
     <string name="routing_attr_allow_classic_only_name">Permesi nur klasikajn skivojojn</string>
     <string name="routing_attr_allow_classic_only_description">Skivojoj preparitaj nur por klasika skiado sen glitkurado. Ampleksas skivojojn preparitaj per malgranda motorsledo kaj skivojoj permane preparitaj de skiistoj.</string>
-    <string name="routing_attr_difficulty_preference_name">Preferata malfacilo</string>
-    <string name="routing_attr_difficulty_preference_description">Preferi skivojojn de tiu malfacilo, sed eblas difini kurson per pli (mal)facilaj skivojoj, se la rezulta kurso estos pli mallonga.</string>
+    <string name="routing_attr_difficulty_preference_name">Preferata facilo</string>
+    <string name="routing_attr_difficulty_preference_description">Preferi skivojojn tiu ĉi facilo, sed la aplikaĵo povos difini kurson tra pli (mal)facilaj skivojoj, se la rezulta kurso estos pli mallonga.</string>
     <string name="routing_attr_freeride_policy_name">Ekster skivojoj</string>
     <string name="routing_attr_freeride_policy_description">Skivojoj malfacilegaj, neoficialaj, nepreparataj kaj nekontrolataj je vespero. Vi eniras nur sub via risko.</string>
     <string name="process_downloading_service">Servo de elŝutoj OsmAnd</string>
@@ -4588,4 +4588,18 @@
     <string name="simulation_constant_mode_title">Konstanta rapido</string>
     <string name="simulation_preview_mode_desc">Rapido de la simulado estos maksimuma sur rektaj fragmentoj kaj malrapidiĝos nur sur vojkruciĝoj.</string>
     <string name="simulation_preview_mode_title">Rapida antaŭvido</string>
+    <string name="on_with_params">%1$s en %2$s</string>
+    <string name="shared_string_symbol">Simbolo</string>
+    <string name="no_widgets_descr">Aldonu almenaŭ unu fenestraĵon el la listo de disponeblaj fenestraĵoj.</string>
+    <string name="no_widgets_here_yet">Neniu fenestraĵo tie ĉi</string>
+    <string name="available_widgets">Disponeblaj fenestraĵoj</string>
+    <string name="snackbar_page_removed">Forigis la paĝon %1$s.</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">ne eniri neoficialajn skivojojn</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">nur kiam necesa</string>
+    <string name="routing_attr_freeride_policy_allow_name">permesi</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">preferi neoficialajn skivojojn</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">neniu prefero</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">facilaj</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">malfacilaj</string>
+    <string name="routing_attr_difficulty_preference_expert_name">malfacilegaj</string>
 </resources>
