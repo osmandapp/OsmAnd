@@ -2064,7 +2064,7 @@
     <string name="rendering_value_medium_w_name">Moyen</string>
     <string name="rendering_value_low_name">Faible</string>
     <string name="rendering_attr_contourDensity_description">Densité des courbes de niveaux</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Masquer l\'eau</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Eau</string>
     <string name="configure_screen_quick_action">Action rapide</string>
     <string name="quick_action_item_action">Action %d</string>
     <string name="quick_action_item_screen">Écran %d</string>
@@ -2976,7 +2976,7 @@
     <string name="routing_attr_max_num_changes_name">Nombre de correspondances</string>
     <string name="turn_screen_on_sensor">Utiliser le capteur de proximité</string>
     <string name="sett_no_ext_input">Aucun</string>
-    <string name="routing_attr_freeride_policy_description">Le freeride et le hors-piste sont des itinéraires non-officiels. Ces itinéraires ne sont généralement ni balisés ni damés et ne sont pas contrôlés en fin de journée. Entrez à vos risques et périls.</string>
+    <string name="routing_attr_freeride_policy_description">Le hors-piste (ou \'freeride\') emprunte des itinéraires non-officiels. Ces itinéraires ne sont généralement ni balisés ni damés et ne font l’objet d\'aucune surveillance. Vous pratiquez cette activité à vos risques et périls.</string>
     <string name="default_speed_setting_descr">Modifiez les paramètres de vitesse par défaut</string>
     <string name="app_mode_ufo">OVNI</string>
     <string name="app_mode_personal_transporter">Gyropode</string>
@@ -4593,9 +4593,9 @@
     <string name="routing_attr_difficulty_preference_advanced_name">Confirmé</string>
     <string name="routing_attr_difficulty_preference_no_preference_name">Aucune préférence</string>
     <string name="routing_attr_freeride_policy_only_if_necessary_name">Seulement si nécessaire</string>
-    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Éviter le hors-piste</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Ne pas faire de hors-piste</string>
     <string name="routing_attr_freeride_policy_allow_name">Autoriser</string>
-    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Préférer le hors-piste</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Privilégier le hors-piste</string>
     <string name="routing_attr_difficulty_preference_beginner_name">Débutant</string>
     <string name="routing_attr_difficulty_preference_expert_name">Expert</string>
 </resources>
