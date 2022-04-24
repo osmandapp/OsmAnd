@@ -38,13 +38,15 @@ import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetGroup;
+import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ItemType;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ListItem;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.WidgetAdapterListener;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.ActionButtonViewHolder.ActionButtonInfo;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AddedWidgetViewHolder.AddedWidgetUiInfo;
-import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableWidgetViewHolder.AvailableWidgetUiInfo;
+import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableItemViewHolder.AvailableWidgetUiInfo;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.PageViewHolder.PageUiInfo;
 import net.osmand.util.Algorithms;
 
@@ -292,7 +294,9 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 
 	@NonNull
 	private List<ListItem> createAvailableWidgetsList() {
-		List<ListItem> widgetsItems = new ArrayList<>();
+		Map<Integer, ListItem> defaultWidgetsItems = new TreeMap<>();
+		Map<Integer, ListItem> externalWidgetsItems = new TreeMap<>();
+		List<WidgetGroup> availableGroups = new ArrayList<>();
 
 		WidgetsPanel selectedPanel = dataHolder.getSelectedPanel();
 		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(selectedAppMode, selectedPanel, AVAILABLE_MODE);
@@ -303,23 +307,39 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 				continue;
 			}
 
-			int order = selectedPanel.getOriginalWidgetOrder(widgetInfo.key);
-			AvailableWidgetUiInfo info = new AvailableWidgetUiInfo();
-			info.key = widgetInfo.key;
-			info.title = widgetInfo.getTitle(app);
-			info.iconId = widgetInfo.getMapIconId(nightMode);
-			info.order = order;
-			info.info = widgetInfo;
-			widgetsItems.add(new ListItem(ItemType.AVAILABLE_WIDGET, info));
+			int widgetOrder = selectedPanel.getOriginalWidgetOrder(widgetInfo.key);
+			WidgetParams widgetParams = WidgetParams.getById(widgetInfo.key);
+			boolean defaultWidget = widgetParams != null;
+			if (defaultWidget) {
+				WidgetGroup group = widgetParams.getGroup();
+				if (group != null && !availableGroups.contains(group)) {
+					availableGroups.add(group);
+					defaultWidgetsItems.put(group.getOrder(), new ListItem(ItemType.AVAILABLE_GROUP, group));
+				} else if (group == null) {
+					AvailableWidgetUiInfo availableWidgetInfo = getWidgetInfo(widgetInfo);
+					defaultWidgetsItems.put(widgetOrder, new ListItem(ItemType.AVAILABLE_WIDGET, availableWidgetInfo));
+				}
+			} else {
+				AvailableWidgetUiInfo availableWidgetInfo = getWidgetInfo(widgetInfo);
+				externalWidgetsItems.put(widgetOrder, new ListItem(ItemType.AVAILABLE_WIDGET, availableWidgetInfo));
+			}
 		}
 
-		Collections.sort(widgetsItems, (o1, o2) -> {
-			AvailableWidgetUiInfo info1 = ((AvailableWidgetUiInfo) o1.value);
-			AvailableWidgetUiInfo info2 = ((AvailableWidgetUiInfo) o2.value);
-			return info1 == null || info2 == null ? 0 : Integer.compare(info1.order, info2.order);
-		});
+		List<ListItem> widgetItems = new ArrayList<>();
+		widgetItems.addAll(defaultWidgetsItems.values());
+		widgetItems.addAll(externalWidgetsItems.values());
+		return widgetItems;
+	}
 
-		return widgetsItems;
+	@NonNull
+	private AvailableWidgetUiInfo getWidgetInfo(@NonNull MapWidgetInfo widgetInfo) {
+		AvailableWidgetUiInfo info = new AvailableWidgetUiInfo();
+		info.key = widgetInfo.key;
+		info.title = widgetInfo.getTitle(app);
+		info.iconId = widgetInfo.getMapIconId(nightMode);
+		info.order = dataHolder.getSelectedPanel().getOriginalWidgetOrder(widgetInfo.key);
+		info.info = widgetInfo;
+		return info;
 	}
 
 	@NonNull

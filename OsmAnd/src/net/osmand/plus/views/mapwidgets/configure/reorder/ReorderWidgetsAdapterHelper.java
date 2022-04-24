@@ -1,8 +1,9 @@
 package net.osmand.plus.views.mapwidgets.configure.reorder;
 
+import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ItemType;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ListItem;
-import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableWidgetViewHolder.AvailableWidgetUiInfo;
+import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableItemViewHolder.AvailableWidgetUiInfo;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.PageViewHolder.PageUiInfo;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AddedWidgetViewHolder.AddedWidgetUiInfo;
 import net.osmand.util.Algorithms;
@@ -39,6 +40,8 @@ public class ReorderWidgetsAdapterHelper {
 			int insertIndex = getInsertIndexForAvailableWidget(order);
 			if (insertIndex != -1) {
 				items.add(insertIndex, new ListItem(ItemType.AVAILABLE_WIDGET, availableWidgetInfo));
+				adapter.notifyItemChanged(insertIndex - 1, null); // Show bottom divider, without animation
+				adapter.notifyItemInserted(insertIndex);
 			}
 		}
 	}
@@ -49,14 +52,18 @@ public class ReorderWidgetsAdapterHelper {
 		int closestHigherIndex = -1;
 		for (int i = 0; i < items.size(); i++) {
 			ListItem item = items.get(i);
+			Object value = item.value;
+
 			if (item.type == ItemType.HEADER) {
 				passedHeaders++;
 				if (passedHeaders == 2) {
 					secondHeaderIndex = i;
 				}
-			} else if (item.value instanceof AvailableWidgetUiInfo) {
-				AvailableWidgetUiInfo widgetInfo = ((AvailableWidgetUiInfo) item.value);
-				if (widgetInfo.order > order) {
+			} else if (value instanceof WidgetGroup || value instanceof AvailableWidgetUiInfo) {
+				int availableItemOrder = item.value instanceof WidgetGroup
+						? ((WidgetGroup) item.value).getOrder()
+						: ((AvailableWidgetUiInfo) item.value).order;
+				if (availableItemOrder > order) {
 					return i;
 				} else {
 					closestHigherIndex = i;
@@ -272,6 +279,7 @@ public class ReorderWidgetsAdapterHelper {
 
 		items.remove(position);
 		adapter.notifyItemRemoved(position);
+		adapter.notifyItemChanged(position - 1, null); // Hide bottom divider, without animation
 
 		int page = getLastPage();
 		int order = dataHolder.getMaxOrderOfPage(page) + 1;

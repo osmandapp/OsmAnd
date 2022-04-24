@@ -39,6 +39,10 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.MAX_SPEED;
+
 public class RouteInfoWidgetsFactory {
 
 	private final OsmandApplication app;
@@ -253,7 +257,7 @@ public class RouteInfoWidgetsFactory {
 			}
 		};
 		plainTimeControl.setText(null, null);
-		plainTimeControl.setIcons(R.drawable.widget_time_day, R.drawable.widget_time_night);
+		plainTimeControl.setIcons(CURRENT_TIME);
 		return plainTimeControl;
 	}
 
@@ -334,7 +338,7 @@ public class RouteInfoWidgetsFactory {
 				return true;
 			}
 		};
-		speedControl.setIcons(R.drawable.widget_max_speed_day, R.drawable.widget_max_speed_night);
+		speedControl.setIcons(MAX_SPEED);
 		speedControl.setText(null, null);
 		return speedControl;
 	}
@@ -375,7 +379,7 @@ public class RouteInfoWidgetsFactory {
 				return true;
 			}
 		};
-		speedControl.setIcons(R.drawable.widget_speed_day, R.drawable.widget_speed_night);
+		speedControl.setIcons(CURRENT_SPEED);
 		speedControl.setText(null, null);
 		return speedControl;
 	}

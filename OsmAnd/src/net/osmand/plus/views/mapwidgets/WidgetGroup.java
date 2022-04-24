@@ -24,9 +24,9 @@ public enum WidgetGroup {
 
 	ROUTE_MANEUVERS(R.string.route_maneuvers, R.string.route_maneuvers_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night),
 	NAVIGATION_POINTS(R.string.navigation_points, R.string.navigation_points_desc, R.drawable.widget_navigation_day, R.drawable.widget_navigation_night),
-	MAP_MARKERS(R.string.map_markers, R.string.map_markers_desc, R.drawable.ic_action_flag, R.drawable.ic_action_flag),
+	MAP_MARKERS(R.string.map_markers, R.string.map_markers_desc, R.drawable.widget_marker_day, R.drawable.widget_marker_day),
 	BEARING(R.string.shared_string_bearing, R.string.bearing_desc, R.drawable.widget_relative_bearing_day, R.drawable.widget_relative_bearing_night),
-	AUDIO_VIDEO_NOTES(R.string.map_widget_av_notes, R.string.audio_video_notes_desc, R.drawable.widget_av_video_day, R.drawable.widget_av_video_night);
+	AUDIO_VIDEO_NOTES(R.string.map_widget_av_notes, R.string.audio_video_notes_desc, R.drawable.widget_av_photo_day, R.drawable.widget_av_photo_night);
 
 	@StringRes
 	public int titleId;
@@ -64,6 +64,11 @@ public enum WidgetGroup {
 		}
 	}
 
+	@DrawableRes
+	public int getIconId(boolean nightMode) {
+		return nightMode ? nightIconId : dayIconId;
+	}
+
 	@StringRes
 	public int getAdditionalNoteId() {
 		if (this == BEARING) {
@@ -82,5 +87,9 @@ public enum WidgetGroup {
 			return R.drawable.ic_extension_dark;
 		}
 		return 0;
+	}
+
+	public int getOrder() {
+		return getWidgets().get(0).getDefaultOrder();
 	}
 }

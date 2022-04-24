@@ -404,44 +404,41 @@ public class MapWidgetRegistry {
 
 	public void showPopUpMenu(@NonNull View view,
 	                          @NonNull final CallbackWithObject<WidgetState> callback,
-	                          @Nullable final WidgetState widgetState,
+	                          @NonNull final WidgetState widgetState,
 	                          @NonNull ApplicationMode mode,
-	                          boolean selected,
 	                          boolean nightMode) {
 		final int currentModeColor = mode.getProfileColor(nightMode);
 		View parentView = view.findViewById(R.id.text_wrapper);
 		List<PopUpMenuItem> items = new ArrayList<>();
 		UiUtilities uiUtilities = app.getUIUtilities();
 
-		if (widgetState != null) {
-			final int[] menuIconIds = widgetState.getMenuIconIds();
-			final int[] menuTitleIds = widgetState.getMenuTitleIds();
-			final int[] menuItemIds = widgetState.getMenuItemIds();
-			if (menuIconIds != null && menuTitleIds != null && menuItemIds != null &&
-					menuIconIds.length == menuTitleIds.length && menuIconIds.length == menuItemIds.length) {
-				for (int i = 0; i < menuIconIds.length; i++) {
-					int iconId = menuIconIds[i];
-					int titleId = menuTitleIds[i];
-					final int id = menuItemIds[i];
-					boolean checkedItem = id == widgetState.getMenuItemId();
-					Drawable icon = checkedItem && selected ?
-							uiUtilities.getPaintedIcon(iconId, currentModeColor) :
-							uiUtilities.getThemedIcon(iconId);
-					items.add(new PopUpMenuItem.Builder(app)
-							.setTitle(getString(titleId))
-							.setIcon(icon)
-							.setOnClickListener(v -> {
-								widgetState.changeState(id);
-								MapInfoLayer layer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
-								if (layer != null) {
-									layer.recreateControls();
-								}
-								callback.processResult(widgetState);
-							})
-							.showCompoundBtn(currentModeColor)
-							.setSelected(checkedItem)
-							.create());
-				}
+		final int[] menuIconIds = widgetState.getMenuIconIds();
+		final int[] menuTitleIds = widgetState.getMenuTitleIds();
+		final int[] menuItemIds = widgetState.getMenuItemIds();
+		if (menuIconIds != null && menuTitleIds != null && menuItemIds != null &&
+				menuIconIds.length == menuTitleIds.length && menuIconIds.length == menuItemIds.length) {
+			for (int i = 0; i < menuIconIds.length; i++) {
+				int iconId = menuIconIds[i];
+				int titleId = menuTitleIds[i];
+				final int id = menuItemIds[i];
+				boolean checkedItem = id == widgetState.getMenuItemId();
+				Drawable icon = checkedItem ?
+						uiUtilities.getPaintedIcon(iconId, currentModeColor) :
+						uiUtilities.getThemedIcon(iconId);
+				items.add(new PopUpMenuItem.Builder(app)
+						.setTitle(getString(titleId))
+						.setIcon(icon)
+						.setOnClickListener(v -> {
+							widgetState.changeState(id);
+							MapInfoLayer layer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
+							if (layer != null) {
+								layer.recreateControls();
+							}
+							callback.processResult(widgetState);
+						})
+						.showCompoundBtn(currentModeColor)
+						.setSelected(checkedItem)
+						.create());
 			}
 		}
 

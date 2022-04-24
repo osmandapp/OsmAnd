@@ -14,22 +14,23 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.OnItemMoveCallback;
+import net.osmand.plus.views.mapwidgets.WidgetGroup;
+import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.ActionButtonViewHolder;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.ActionButtonViewHolder.ActionButtonInfo;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AddPageButtonViewHolder;
-import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableWidgetViewHolder;
-import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableWidgetViewHolder.AvailableWidgetUiInfo;
+import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AddedWidgetViewHolder;
+import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AddedWidgetViewHolder.AddedWidgetUiInfo;
+import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AddedWidgetViewHolder.ItemMovableCallback;
+import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableItemViewHolder;
+import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableItemViewHolder.AvailableWidgetUiInfo;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.DividerViewHolder;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.HeaderViewHolder;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.PageViewHolder;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.PageViewHolder.PageUiInfo;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.SpaceViewHolder;
-import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AddedWidgetViewHolder;
-import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AddedWidgetViewHolder.ItemMovableCallback;
-import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AddedWidgetViewHolder.AddedWidgetUiInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,13 +50,15 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 
 	private WidgetAdapterListener listener;
 	private final boolean nightMode;
+
+	private final WidgetIconsHelper iconsHelper;
 	private final int profileColor;
-	private final int defaultIconColor;
 
 	public enum ItemType {
 		HEADER,
 		PAGE,
 		ADDED_WIDGET,
+		AVAILABLE_GROUP,
 		AVAILABLE_WIDGET,
 		ADD_PAGE_BUTTON,
 		CARD_DIVIDER,
@@ -73,7 +76,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 
 		ApplicationMode mode = app.getSettings().getApplicationMode();
 		profileColor = mode.getProfileColor(nightMode);
-		defaultIconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
+		iconsHelper = new WidgetIconsHelper(app, profileColor, nightMode);
 	}
 
 	@NonNull
@@ -81,6 +84,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		return items;
 	}
 
+	@SuppressLint("NotifyDataSetChanged")
 	public void setItems(@NonNull List<ListItem> items) {
 		this.items.clear();
 		this.items.addAll(items);
@@ -113,9 +117,10 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 			case ADD_PAGE_BUTTON:
 				itemView = inflater.inflate(R.layout.configure_screen_list_item_add_page, parent, false);
 				return new AddPageButtonViewHolder(itemView, profileColor);
+			case AVAILABLE_GROUP:
 			case AVAILABLE_WIDGET:
-				itemView = inflater.inflate(R.layout.configure_screen_list_item_available_widget_reorder, parent, false);
-				return new AvailableWidgetViewHolder(itemView);
+				itemView = inflater.inflate(R.layout.configure_screen_list_item_available_item_reorder, parent, false);
+				return new AvailableItemViewHolder(itemView);
 			case CARD_DIVIDER:
 				return new DividerViewHolder(inflater.inflate(R.layout.list_item_divider, parent, false));
 			case CARD_TOP_DIVIDER:
@@ -141,8 +146,12 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 			bindPageViewHolder(((PageViewHolder) viewHolder), position);
 		} else if (viewHolder instanceof AddedWidgetViewHolder) {
 			bindAddedWidgetViewHolder(((AddedWidgetViewHolder) viewHolder), position);
-		} else if (viewHolder instanceof AvailableWidgetViewHolder) {
-			bindAvailableWidgetViewHolder(((AvailableWidgetViewHolder) viewHolder), position);
+		} else if (viewHolder instanceof AvailableItemViewHolder) {
+			if (item.type == ItemType.AVAILABLE_GROUP) {
+				bindAvailableGroupViewHolder(((AvailableItemViewHolder) viewHolder), position);
+			} else {
+				bindAvailableWidgetViewHolder(((AvailableItemViewHolder) viewHolder), position);
+			}
 		} else if (viewHolder instanceof HeaderViewHolder) {
 			HeaderViewHolder holder = (HeaderViewHolder) viewHolder;
 			holder.title.setText((String) item.value);
@@ -217,25 +226,40 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 			return false;
 		});
 		viewHolder.icon.setImageResource(widgetInfo.iconId);
-		AddedWidgetViewHolder.updateWidgetIcon(viewHolder.icon, widgetInfo.info, profileColor, defaultIconColor, true, nightMode);
+		iconsHelper.updateWidgetIcon(viewHolder.icon, widgetInfo.info);
 	}
 
-	private void bindAvailableWidgetViewHolder(@NonNull AvailableWidgetViewHolder viewHolder, int position) {
+	private void bindAvailableGroupViewHolder(@NonNull AvailableItemViewHolder viewHolder, int position) {
+		WidgetGroup widgetGroup = ((WidgetGroup) items.get(position).value);
+
+		viewHolder.addButton.setImageDrawable(getAddIcon());
+		viewHolder.addButton.setOnClickListener(v -> {
+			// TODO widgets
+		});
+
+		viewHolder.icon.setImageResource(widgetGroup.getIconId(nightMode));
+		viewHolder.title.setText(AvailableItemViewHolder.getGroupTitle(widgetGroup, app, nightMode));
+		updateAvailableItemDivider(viewHolder, position);
+	}
+
+	private void bindAvailableWidgetViewHolder(@NonNull AvailableItemViewHolder viewHolder, int position) {
 		AvailableWidgetUiInfo widgetInfo = (AvailableWidgetUiInfo) items.get(position).value;
 
-		Drawable addWidgetIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_add, R.color.color_osm_edit_create);
-		viewHolder.addWidgetButton.setImageDrawable(addWidgetIcon);
-		viewHolder.addWidgetButton.setOnClickListener(v -> {
+		viewHolder.addButton.setImageDrawable(getAddIcon());
+		viewHolder.addButton.setOnClickListener(v -> {
 			int pos = viewHolder.getAdapterPosition();
 			reorderHelper.addWidget(pos);
 		});
 
-		viewHolder.icon.setImageResource(widgetInfo.iconId);
-		AddedWidgetViewHolder.updateWidgetIcon(viewHolder.icon, widgetInfo.info, profileColor, defaultIconColor, false, nightMode);
+		iconsHelper.updateWidgetIcon(viewHolder.icon, widgetInfo.info);
 		viewHolder.title.setText(widgetInfo.title);
+		updateAvailableItemDivider(viewHolder, position);
+	}
 
-		boolean isLast = position + 1 == items.size() || items.get(position + 1).type != ItemType.AVAILABLE_WIDGET;
-		AndroidUiHelper.updateVisibility(viewHolder.bottomDivider, !isLast);
+	private void updateAvailableItemDivider(@NonNull AvailableItemViewHolder viewHolder, int position) {
+		ItemType nextItemType = position + 1 == items.size() ? null : items.get(position + 1).type;
+		boolean lastAvailableItem = nextItemType != ItemType.AVAILABLE_GROUP && nextItemType != ItemType.AVAILABLE_WIDGET;
+		AndroidUiHelper.updateVisibility(viewHolder.bottomDivider, !lastAvailableItem);
 	}
 
 	@Override
@@ -283,6 +307,11 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		return disabled
 				? app.getUIUtilities().getIcon(R.drawable.ic_action_remove, nightMode)
 				: app.getUIUtilities().getIcon(R.drawable.ic_action_remove, R.color.color_osm_edit_delete);
+	}
+
+	@NonNull
+	private Drawable getAddIcon() {
+		return app.getUIUtilities().getIcon(R.drawable.ic_action_add, R.color.color_osm_edit_create);
 	}
 
 	public static class ListItem {

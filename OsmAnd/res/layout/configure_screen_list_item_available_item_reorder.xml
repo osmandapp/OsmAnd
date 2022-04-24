@@ -4,18 +4,18 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="?attr/list_background_color"
-	android:gravity="center_vertical"
-	android:orientation="vertical">
+	android:orientation="vertical"
+	android:background="?attr/list_background_color">
 
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
-		android:minHeight="@dimen/bottom_sheet_list_item_height">
+		android:minHeight="@dimen/bottom_sheet_list_item_height"
+		android:gravity="center_vertical">
 
 		<ImageButton
-			android:id="@+id/add_widget_button"
+			android:id="@+id/add_button"
 			style="@style/Widget.AppCompat.ActionButton"
 			android:layout_width="@dimen/standard_icon_size"
 			android:layout_height="@dimen/standard_icon_size"
@@ -41,6 +41,7 @@
 			android:layout_gravity="center_vertical"
 			android:layout_marginHorizontal="@dimen/content_padding"
 			android:layout_weight="1"
+			android:maxLines="1"
 			android:ellipsize="marquee"
 			android:paddingTop="@dimen/content_padding_half"
 			android:paddingBottom="@dimen/content_padding_half"
@@ -48,6 +49,17 @@
 			android:textSize="@dimen/default_list_text_size"
 			osmand:typeface="@string/font_roboto_regular"
 			tools:text="@string/poi_aerialway_transport" />
+
+		<ImageButton
+			android:id="@+id/info_button"
+			style="@style/Widget.AppCompat.ActionButton"
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
+			android:layout_marginStart="@dimen/list_content_padding_large"
+			android:layout_marginEnd="@dimen/content_padding"
+			osmand:srcCompat="@drawable/ic_action_info_dark"
+			osmand:tint="?default_icon_color"
+			tools:ignore="ContentDescription" />
 
 	</LinearLayout>
 

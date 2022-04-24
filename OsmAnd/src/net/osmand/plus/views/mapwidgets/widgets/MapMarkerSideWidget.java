@@ -20,6 +20,8 @@ import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
 
 import java.util.List;
 
+import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_1;
+
 public class MapMarkerSideWidget extends RightTextInfoWidget {
 
 	private final MapMarkersHelper mapMarkersHelper;
@@ -40,7 +42,7 @@ public class MapMarkerSideWidget extends RightTextInfoWidget {
 		cachedNightMode = isNightMode();
 
 		setText(null, null);
-		setIcons(R.drawable.widget_marker_day, R.drawable.widget_marker_night);
+		setIcons(SIDE_MARKER_1);
 		setOnClickListener(v -> MarkersWidgetsHelper.showMarkerOnMap(mapActivity, firstMarker ? 0 : 1));
 	}
 
