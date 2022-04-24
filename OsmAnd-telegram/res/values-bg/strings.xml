@@ -33,7 +33,7 @@
     <string name="successfully_sent_and_updated">Изпратено и актуализирано успешно</string>
     <string name="last_updated_location">Последно актуализирано местоположение:</string>
     <string name="share_location_as_description">Ако искате да свържете няколко устройства към един акаунт в Telegram, трябва да използвате различни устройство за споделяне на местоположението.</string>
-    <string name="shared_string_hide">Скрии</string>
+    <string name="shared_string_hide">Скриване</string>
     <string name="device_name">Име на устройството</string>
     <string name="device_name_cannot_be_empty">Името на устройството не може да бъде празно</string>
     <string name="device_name_is_too_long">Името на устройството е твърде дълго</string>
