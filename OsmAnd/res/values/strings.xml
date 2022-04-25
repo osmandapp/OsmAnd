@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="routing_attr_difficulty_preference_intermediate_name">Intermediate</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Do not go offpiste</string>
     <string name="routing_attr_freeride_policy_only_if_necessary_name">Only if necessary</string>
     <string name="routing_attr_freeride_policy_allow_name">Allow</string>
