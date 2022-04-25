@@ -4604,4 +4604,14 @@
     <string name="routing_attr_difficulty_preference_beginner_name">Початківець</string>
     <string name="routing_attr_difficulty_preference_advanced_name">Досвідчений</string>
     <string name="routing_attr_difficulty_preference_expert_name">Експерт</string>
+    <string name="release_4_2">• Редизайн віджетів: новий вигляд, групування за сторінками, можливість зміни їхнього порядку і поєднання.
+\n
+\n• Пішохідні / Велосипедні / Туристичні маршрути: натисніть на символ маршруту та отримайте всі дані про маршрут.
+\n
+\n• Вибрані групи: встановлюйте типовий зовнішній вигляд для нових точок у групі
+\n
+\n• Виправлення: автооновлення плиток мап онлайн
+\n
+\n</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Середня</string>
 </resources>

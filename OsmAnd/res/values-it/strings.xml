@@ -4585,4 +4585,22 @@
     <string name="available_widgets">Widget disponibili</string>
     <string name="snackbar_page_removed">\"La pagina %1$s\" è stata rimossa.</string>
     <string name="no_widgets_here_yet">Qui ancora nessun widget</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Non andare in fuoripista</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Solo se necessario</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Avanzato</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Esperto</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Preferisci il fuoripista</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Nessuna preferenza</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Principiante</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Intermedio</string>
+    <string name="routing_attr_freeride_policy_allow_name">Permetti</string>
+    <string name="release_4_2">• Ridisegno dei widget: nuovo Look &amp; Feel, Pagine raggruppate, ordine cambiabile combinabile a volontà.
+\n
+\n • Percorsi escursionistici/ciclabili/viaggi: tocca sul simbolo del percorso e ottieni tutte le relative informazioni.
+\n
+\n • Gruppi dei preferiti: imposta l\'aspetto predefinito per i nuovi punti del gruppo
+\n
+\n • Correzioni: aggiornamento automatico delle mappe di sfondo online
+\n
+\n</string>
 </resources>

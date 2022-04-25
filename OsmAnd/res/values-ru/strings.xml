@@ -3018,7 +3018,7 @@
     <string name="routing_profile_broutrer">BRouter (локально)</string>
     <string name="routing_attr_piste_type_downhill_name">Альпийские и горные лыжи</string>
     <string name="routing_attr_piste_type_downhill_description">Склоны для катания и спуска на горных лыжах и доступ к подъёмникам.</string>
-    <string name="routing_attr_piste_type_skitour_name">Лыжные туры</string>
+    <string name="routing_attr_piste_type_skitour_name">Лыжный туризм</string>
     <string name="routing_attr_piste_type_sled_name">Сани</string>
     <string name="routing_attr_piste_type_sled_description">Склоны для катания на санях.</string>
     <string name="routing_attr_allow_intermediate_description">Более сложные маршруты с крутыми участками дороги. В целом, препятствия, которых следует избегать.</string>
@@ -3260,12 +3260,12 @@
     <string name="shared_string_downloading_formatted">Скачивание %s</string>
     <string name="rendering_value_thick_name">Толстая</string>
     <string name="default_speed_dialog_msg">Используется для оценки времени прибытия для неизвестного типа дорог и ограничения скорости для всех дорог (может изменить маршрут)</string>
-    <string name="routing_attr_allow_intermediate_name">Разрешить промежуточные маршруты</string>
-    <string name="routing_attr_allow_advanced_name">Разрешить расширенные маршруты</string>
+    <string name="routing_attr_allow_intermediate_name">Разрешить средние маршруты</string>
+    <string name="routing_attr_allow_advanced_name">Разрешить продвинутые маршруты</string>
     <string name="routing_attr_allow_expert_name">Разрешить экспертные маршруты</string>
     <string name="routing_attr_allow_expert_description">Чрезвычайно сложные маршруты с опасными препятствиями и небезопасным окружением.</string>
-    <string name="routing_attr_allow_skating_only_name">Разрешить только маршруты для катания на коньках</string>
-    <string name="routing_attr_allow_skating_only_description">Маршруты, подготовленные для фристайла или катания только на коньках без классических треков.</string>
+    <string name="routing_attr_allow_skating_only_name">Разрешить маршруты только для конькового хода</string>
+    <string name="routing_attr_allow_skating_only_description">Маршруты, подготовленные для свободного стиля или катания только коньковым ходом без классической лыжни.</string>
     <string name="routing_attr_allow_classic_only_name">Разрешить только классические маршруты</string>
     <string name="routing_attr_allow_classic_only_description">Маршруты только для классического стиля, без конькобежных трасс. Сюда входят маршруты, подготовленные небольшим снегоходом с более свободной лыжнёй и трассами, подготовленными вручную лыжниками.</string>
     <string name="routing_attr_difficulty_preference_description">Предпочитаемый уровень сложности маршрутов. Более сложные или лёгкие трассы могут использоваться, если они короче.</string>
@@ -4607,6 +4607,16 @@
     <string name="routing_attr_difficulty_preference_beginner_name">Новичок</string>
     <string name="routing_attr_difficulty_preference_advanced_name">Продвинутый</string>
     <string name="routing_attr_difficulty_preference_expert_name">Эксперт</string>
-    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Не сходить с трасс</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Не сходить с трассы</string>
     <string name="routing_attr_freeride_policy_allow_name">Разрешить</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Средний</string>
+    <string name="release_4_2">- Редизайн виджетов: новое оформление, группировка по страницам, изменение порядка и комбинирование по вашему желанию. 
+\n
+\n- Пешие / велосипедные / туристические маршруты: нажмите на символ маршрута и получите полную информацию о нем. 
+\n
+\n- Избранные группы: задание внешний вида по умолчанию для новых точек в группе. 
+\n
+\n- Исправления: автообновление тайловых онлайн-карт
+\n
+\n</string>
 </resources>

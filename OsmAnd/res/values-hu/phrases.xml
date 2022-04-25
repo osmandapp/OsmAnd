@@ -4328,4 +4328,5 @@
     <string name="poi_board_type_wildlife">Állatvilág</string>
     <string name="poi_board_type_nature">Természet</string>
     <string name="poi_food_no">Étel nincs</string>
+    <string name="poi_flow_rate">Áramlási sebesség</string>
 </resources>

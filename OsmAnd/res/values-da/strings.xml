@@ -4610,4 +4610,14 @@
     <string name="routing_attr_difficulty_preference_expert_name">Ekspert</string>
     <string name="routing_attr_freeride_policy_only_if_necessary_name">Kun hvis nødvendigt</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Gå ikke uden for pisterne</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Mellemsvær</string>
+    <string name="release_4_2">• Nyt design på moduler: Nyt udseende, gruppér efter sider, ændr rækkefølge og kombinér, som du vil.
+\n
+\n • Vandre- / cykel- / rejseruter: Tryk på rutesymbolet og få detaljerede oplysninger om ruten.
+\n
+\n • Favoritgrupper: Indstil standardudseende for nye punkter i gruppen.
+\n
+\n • Rettelser: online flise-kort auto-opdatering.
+\n
+\n</string>
 </resources>
