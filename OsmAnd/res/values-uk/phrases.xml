@@ -4302,7 +4302,7 @@
     <string name="poi_shop_fuel">Паливосховище</string>
     <string name="poi_printer_ink">Магазин чорнила для принтерів</string>
     <string name="poi_water_sports">Магазин для водних видів спорту</string>
-    <string name="poi_payment_girocard_contactless_yes">Girocard</string>
+    <string name="poi_payment_girocard_contactless_yes">Безконтактна Girocard</string>
     <string name="poi_payment_american_express_contactless_yes">Безконтактна American Express (AMEX)</string>
     <string name="poi_payment_maestro_contactless_yes">Безконтактна Maestro</string>
     <string name="poi_payment_mastercard_contactless_yes">Безконтактна MasterCard</string>
@@ -4328,4 +4328,5 @@
     <string name="poi_wool">Крамниця вовни</string>
     <string name="poi_laundry_service_yes">Є</string>
     <string name="poi_laundry_service_no">Немає</string>
+    <string name="poi_flow_rate">Швидкість потоку</string>
 </resources>
