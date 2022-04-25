@@ -4585,4 +4585,13 @@
     <string name="rendering_attr_horse_scale_common_name">Común</string>
     <string name="rendering_attr_horse_scale_demanding_name">Demandante</string>
     <string name="routeInfo_horse_scale_description">Mostrar rutas de acuerdo a la dificultad de las pistas a caballo</string>
+    <string name="release_4_2">• Rediseño de los widgets: nuevo aspecto, agrupación por páginas, reordenar y combinar como quieras.
+\n
+\n• Rutas de senderismo/ciclismo/viaje: pulsa el símbolo de la ruta y obtén información completa sobre ella.
+\n
+\n• Grupos favoritos: define el aspecto predefinido de los nuevos puntos del grupo.
+\n
+\n• Correcciones: actualización de teselas automáticas de los mapas en línea.
+\n
+\n</string>
 </resources>
