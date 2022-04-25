@@ -9,6 +9,7 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.ContextMenuItemsPreference;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -48,7 +49,7 @@ public class CtxMenuUtils {
 
 	public static void hideExtraDividers(@NonNull ContextMenuAdapter adapter) {
 		List<ContextMenuItem> items = adapter.getItems();
-		if (items.size() <= 0) {
+		if (Algorithms.isEmpty(items)) {
 			return;
 		}
 		int itemsSize = items.size();
