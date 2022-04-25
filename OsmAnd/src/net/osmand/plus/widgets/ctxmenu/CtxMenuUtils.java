@@ -48,7 +48,11 @@ public class CtxMenuUtils {
 
 	public static void hideExtraDividers(@NonNull ContextMenuAdapter adapter) {
 		List<ContextMenuItem> items = adapter.getItems();
-		for (int i = 0; i < items.size() - 1; i++) {
+		if (items.size() <= 0) {
+			return;
+		}
+		int itemsSize = items.size();
+		for (int i = 0; i < itemsSize - 1; i++) {
 			ContextMenuItem item = items.get(i);
 			if (!item.shouldHideDivider()) {
 				// Hide divider before next category
@@ -56,7 +60,8 @@ public class CtxMenuUtils {
 				item.setHideDivider(next.isCategory());
 			}
 		}
-		items.get(items.size() - 1).setHideDivider(true);
+		// Hide divider for last item
+		items.get(itemsSize - 1).setHideDivider(true);
 	}
 
 	public static Map<ContextMenuItem, List<ContextMenuItem>> collectItemsByCategories(@NonNull List<ContextMenuItem> items) {
