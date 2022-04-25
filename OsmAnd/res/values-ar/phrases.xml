@@ -4327,4 +4327,6 @@
     <string name="poi_payment_mastercard_contactless_no">بطاقة ماستركارد الذكية ليست مقبولة</string>
     <string name="poi_payment_girocard_contactless_yes">بطاقة جيروكارد الذكية</string>
     <string name="poi_payment_mastercard_contactless_yes">بطاقة ماستركارد الذكية</string>
+    <string name="poi_laundry_service_filter">خدمة غسيل الملابس</string>
+    <string name="poi_dry_cleaning_filter">التنظيف الجاف</string>
 </resources>
