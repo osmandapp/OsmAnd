@@ -220,7 +220,7 @@
     <string name="poi_water_supply">Cyflenwad dŵr</string>
     <string name="poi_power">Pŵer</string>
     <string name="poi_communication">Cyfathrebu</string>
-    <string name="poi_man_made"></string>
+    <string name="poi_man_made"/>
     <string name="poi_sustenance">Bwyd</string>
     <string name="poi_cafe_and_restaurant">Caffi a bwytu</string>
     <string name="poi_service">Gwasanaeth</string>
@@ -331,7 +331,7 @@
     <string name="poi_motorcycle_parking">Parcio i feiciau modur</string>
     <string name="poi_parking_entrance">Mynediad i barcio</string>
     <string name="poi_garages">Garejys</string>
-    <string name="poi_public_transport_platform_bus"></string>
+    <string name="poi_public_transport_platform_bus"/>
     <string name="poi_public_transport_station">Gorsaf drafnidiaeth cyhoeddus</string>
     <string name="poi_bus_station">Gorsaf fysiau</string>
     <string name="poi_railway_station">Gorsaf drenau</string>
