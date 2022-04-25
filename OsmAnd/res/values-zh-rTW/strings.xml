@@ -4589,4 +4589,12 @@
     <string name="shared_string_symbol">符號</string>
     <string name="no_widgets_here_yet">這裡還沒有小工具</string>
     <string name="snackbar_page_removed">「頁面 %1$s」已被移除。</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">僅在必要時</string>
+    <string name="routing_attr_freeride_policy_allow_name">允許</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">進階</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">不要離開越野滑雪道</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">新手</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">無偏好</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">偏好越野滑雪道</string>
+    <string name="routing_attr_difficulty_preference_expert_name">專家</string>
 </resources>
