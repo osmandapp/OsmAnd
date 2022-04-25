@@ -4161,7 +4161,7 @@
 \n
 \nAlcune mappe potrebbero non essere state caricate.</string>
     <string name="benefits_for_contributors">Benefici per i contributori OSM attivi</string>
-    <string name="enough_contributions_descr">Congratulazioni, hai contributo a OpensStreetMap a sufficienza per godere degli aggiornamenti illimitati delle mappe OsmAnd!</string>
+    <string name="enough_contributions_descr">Congratulazioni, hai contributo a OpenStreetMap a sufficienza per godere degli aggiornamenti illimitati delle mappe OsmAnd!</string>
     <string name="contributions_may_calculate_with_delay">L\'elaborazione dei contributi può richiedere diverse ore.</string>
     <string name="shared_string_includes">Include</string>
     <string name="complete_purchase">Completa l\'acquisto</string>
@@ -4581,7 +4581,7 @@
     <string name="rendering_attr_horse_scale_demanding_name">Impegnativo</string>
     <string name="on_with_params">%1$s su %2$s</string>
     <string name="shared_string_symbol">Simbolo</string>
-    <string name="no_widgets_descr">Uno o più widget dalla lista dei widget.</string>
+    <string name="no_widgets_descr">Aggiungi uno o più widget dalla lista dei widget disponibili.</string>
     <string name="available_widgets">Widget disponibili</string>
     <string name="snackbar_page_removed">\"La pagina %1$s\" è stata rimossa.</string>
     <string name="no_widgets_here_yet">Qui ancora nessun widget</string>
