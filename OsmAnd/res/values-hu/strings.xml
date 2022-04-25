@@ -4595,4 +4595,15 @@
     <string name="routing_attr_difficulty_preference_expert_name">Profi</string>
     <string name="routing_attr_difficulty_preference_no_preference_name">Nincs megadva</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Pályáról le nem térve</string>
+    <string name="on_with_params">%1$s ezen: %2$s</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Közepes</string>
+    <string name="release_4_2">• Újratervezett widgetek: új megjelenés és élmény, oldalak szerinti csoportosítás, sorrend módosítás és tetszés szerinti kombinálhatóság.
+\n
+\n • Túrázás / Kerékpározás / Utazási útvonalak: érintse meg az útvonal szimbólumot a részletes útvonal-információkhoz.
+\n
+\n • Kedvenc csoportok: a csoport új pontjainak alapértelmezett megjelenítési beállítása
+\n
+\n • Javítások: online csempe-térképek automatikus frissítése
+\n
+\n</string>
 </resources>
