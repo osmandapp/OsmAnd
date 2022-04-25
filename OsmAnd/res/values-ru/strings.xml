@@ -3099,7 +3099,7 @@
     <string name="quick_action_need_to_add_item_to_list">Добавьте хотя бы один элемент в список «Быстрые действия» в настройках</string>
     <string name="routing_attr_piste_type_skitour_description">Маршруты для горнолыжного туризма.</string>
     <string name="routing_attr_freeride_policy_name">Вне трассы</string>
-    <string name="routing_attr_freeride_policy_description">Фрирайд и внетрассовые маршруты — это неофициальные неподготовленные трассы. Обычно неухоженные, неразмеченные и неосвещённые вечером. Вход на свой страх и риск.</string>
+    <string name="routing_attr_freeride_policy_description">Фрирайд и внетрассовые маршруты — это неофициальные трассы и проезды. Как правило, они не подготовлены, не обслуживаются и не проверяются вечером. Вход на свой страх и риск.</string>
     <string name="shared_string_open_track">Открыть трек</string>
     <string name="gpx_join_gaps">Соединить разрывы (исключить пробелы)</string>
     <string name="app_mode_camper">Кемпер</string>
