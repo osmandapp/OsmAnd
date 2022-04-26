@@ -78,6 +78,7 @@ import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -179,7 +180,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		TERRAIN,
 		CYCLE_ROUTES,
 		HIKING_ROUTES,
-		TRAVEL_ROUTES
+		TRAVEL_ROUTES,
+		TRANSPORT_LINES
 	}
 
 	private final Map<DashboardActionButtonType, DashboardActionButton> actionButtons = new HashMap<>();
@@ -331,6 +333,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			tv.setText(R.string.rendering_attr_hikingRoutesOSMC_name);
 		} else if (visibleType == DashboardType.TRAVEL_ROUTES) {
 			tv.setText(R.string.travel_routes);
+		} else if (visibleType == DashboardType.TRANSPORT_LINES) {
+			tv.setText(R.string.rendering_category_transport);
 		}
 		ImageView edit = dashboardView.findViewById(R.id.toolbar_edit);
 		edit.setVisibility(View.GONE);
@@ -542,6 +546,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		mapActivity.enableDrawer();
 		removeFragment(MapillaryFiltersFragment.TAG);
 		removeFragment(TerrainFragment.TAG);
+		removeFragment(TransportLinesFragment.TAG);
 
 		if (visible) {
 			mapActivity.dismissCardDialog();
@@ -573,6 +578,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					|| visibleType == DashboardType.CYCLE_ROUTES
 					|| visibleType == DashboardType.HIKING_ROUTES
 					|| visibleType == DashboardType.TRAVEL_ROUTES
+					|| visibleType == DashboardType.TRANSPORT_LINES
 					|| visibleType == DashboardType.TERRAIN) {
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 				if (visibleType == DashboardType.DASHBOARD) {
@@ -587,7 +593,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					HikingRoutesFragment.showInstance(fragmentManager);
 				} else if (visibleType == DashboardType.TRAVEL_ROUTES) {
 					TravelRoutesFragment.showInstance(fragmentManager);
-				} else {
+				} else if (visibleType == DashboardType.TRANSPORT_LINES) {
+					TransportLinesFragment.showInstance(fragmentManager);
+				} else if (visibleType == DashboardType.TERRAIN){
 					TerrainFragment.showInstance(fragmentManager);
 				}
 				scrollView.setVisibility(View.VISIBLE);
@@ -659,7 +667,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				&& visibleType != DashboardType.HIKING_ROUTES
 				&& visibleType != DashboardType.TRAVEL_ROUTES
 				&& visibleType != DashboardType.OSM_NOTES
-				&& visibleType != DashboardType.WIKIPEDIA) {
+				&& visibleType != DashboardType.WIKIPEDIA
+				&& visibleType != DashboardType.TRANSPORT_LINES) {
 			listView.setDivider(dividerDrawable);
 			listView.setDividerHeight(AndroidUtils.dpToPx(mapActivity, 1f));
 		} else {
@@ -791,6 +800,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			refreshFragment(HikingRoutesFragment.TAG);
 		} else if (visibleType == DashboardType.TRAVEL_ROUTES) {
 			refreshFragment(TravelRoutesFragment.TAG);
+		} else if (visibleType == DashboardType.TRANSPORT_LINES) {
+			refreshFragment(TransportLinesFragment.TAG);
 		} else {
 			listAdapter.notifyDataSetChanged();
 		}

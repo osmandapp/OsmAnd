@@ -33,8 +33,10 @@ public class ShowHideTransportLinesAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull final MapActivity mapActivity) {
-		boolean enabled = TransportLinesMenu.isShowLines(mapActivity.getMyApplication());
-		TransportLinesMenu.toggleTransportLines(mapActivity, !enabled, null);
+		OsmandApplication app = mapActivity.getMyApplication();
+		TransportLinesMenu transportLinesMenu = new TransportLinesMenu(app);
+		boolean selected = transportLinesMenu.isShowAnyTransport();
+		transportLinesMenu.toggleTransportLines(mapActivity, !selected);
 	}
 
 	@Override
@@ -58,6 +60,6 @@ public class ShowHideTransportLinesAction extends QuickAction {
 
 	@Override
 	public boolean isActionWithSlash(OsmandApplication application) {
-		return TransportLinesMenu.isShowLines(application);
+		return TransportLinesMenu.isShowAnyTransport(application);
 	}
 }
