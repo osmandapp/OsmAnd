@@ -76,7 +76,7 @@ public class SelectFavouriteGroupBottomSheet extends SelectPointsCategoryBottomS
 	                                @NonNull String selectedCategory,
 	                                @Nullable CategorySelectionListener listener) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			SelectGpxGroupBottomSheet fragment = new SelectGpxGroupBottomSheet();
+			SelectFavouriteGroupBottomSheet fragment = new SelectFavouriteGroupBottomSheet();
 			Bundle args = new Bundle();
 			args.putString(KEY_SELECTED_CATEGORY, selectedCategory);
 
