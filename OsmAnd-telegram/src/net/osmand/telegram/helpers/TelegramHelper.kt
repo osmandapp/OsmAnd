@@ -772,7 +772,8 @@ class TelegramHelper private constructor() {
 					log.debug("createPrivateChatWithUser ERROR $obj")
 					val error = obj as TdApi.Error
 					if (error.code != IGNORED_ERROR_CODE) {
-						shareInfo.hasSharingError = true
+						shareInfo.hasTextSharingError = true
+						shareInfo.hasMapSharingError = true
 						listener?.onTelegramError(error.code, error.message)
 					}
 				}
@@ -923,7 +924,7 @@ class TelegramHelper private constructor() {
 				log.debug("handleMapLocationMessageUpdate - ERROR $obj")
 				val error = obj as TdApi.Error
 				if (error.code != IGNORED_ERROR_CODE) {
-					shareInfo.hasSharingError = true
+					shareInfo.hasMapSharingError = true
 					needRefreshActiveLiveLocationMessages = true
 					shareInfo.pendingMapMessage = false
 					outgoingMessagesListeners.forEach {
@@ -935,7 +936,7 @@ class TelegramHelper private constructor() {
 				if (obj is TdApi.Message) {
 					when {
 						obj.sendingState?.constructor == TdApi.MessageSendingStateFailed.CONSTRUCTOR -> {
-							shareInfo.hasSharingError = true
+							shareInfo.hasMapSharingError = true
 							needRefreshActiveLiveLocationMessages = true
 							shareInfo.pendingMapMessage = false
 							log.debug("handleTextLocationMessageUpdate - MessageSendingStateFailed")
@@ -951,7 +952,7 @@ class TelegramHelper private constructor() {
 							}
 						}
 						else -> {
-							shareInfo.hasSharingError = false
+							shareInfo.hasMapSharingError = false
 							shareInfo.pendingMapMessage = false
 							log.debug("handleMapLocationMessageUpdate - MessageSendingStateSuccess")
 							outgoingMessagesListeners.forEach {
@@ -972,7 +973,7 @@ class TelegramHelper private constructor() {
 				log.debug("handleTextLocationMessageUpdate - ERROR $obj")
 				val error = obj as TdApi.Error
 				if (error.code != IGNORED_ERROR_CODE) {
-					shareInfo.hasSharingError = true
+					shareInfo.hasTextSharingError = true
 					shareInfo.pendingTextMessage = false
 					outgoingMessagesListeners.forEach {
 						it.onSendLiveLocationError(error.code, error.message, shareInfo, messageType)
@@ -983,7 +984,7 @@ class TelegramHelper private constructor() {
 				if (obj is TdApi.Message) {
 					when {
 						obj.sendingState?.constructor == TdApi.MessageSendingStateFailed.CONSTRUCTOR -> {
-							shareInfo.hasSharingError = true
+							shareInfo.hasTextSharingError = true
 							shareInfo.pendingTextMessage = false
 							needRefreshActiveLiveLocationMessages = true
 							log.debug("handleTextLocationMessageUpdate - MessageSendingStateFailed")
@@ -999,7 +1000,7 @@ class TelegramHelper private constructor() {
 							}
 						}
 						else -> {
-							shareInfo.hasSharingError = false
+							shareInfo.hasTextSharingError = false
 							shareInfo.pendingTextMessage = false
 							log.debug("handleTextLocationMessageUpdate - MessageSendingStateSuccess")
 							outgoingMessagesListeners.forEach {
