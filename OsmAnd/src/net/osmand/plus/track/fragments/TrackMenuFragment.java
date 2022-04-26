@@ -4,6 +4,7 @@ import static net.osmand.GPXUtilities.GPXTrackAnalysis;
 import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
 import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
 import static net.osmand.plus.mapcontextmenu.controllers.NetworkRouteMenuController.getIconForRouteObject;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
 import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_BY_INTERVALS_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_ON_MAP_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
@@ -89,6 +90,7 @@ import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
+import net.osmand.plus.measurementtool.MeasurementToolFragment.MeasurementToolMode;
 import net.osmand.plus.myplaces.DeletePointsTask.OnPointsDeleteListener;
 import net.osmand.plus.myplaces.ui.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.myplaces.ui.MoveGpxFileBottomSheet;
@@ -131,6 +133,7 @@ import net.osmand.plus.utils.FileUtils.RenameCallback;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.IconPopupMenu;
 import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import net.osmand.util.Algorithms;
@@ -1410,6 +1413,25 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	@Override
+	public void openGetAltitudeBottomSheet(@NonNull GpxDisplayItem gpxItem) {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			int segmentIndex = getSegmentIndex(gpxItem);
+			TrackAltitudeBottomSheet.showInstance(activity.getSupportFragmentManager(), this, segmentIndex);
+		}
+	}
+
+	private int getSegmentIndex(@NonNull GpxDisplayItem gpxItem) {
+		GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT};
+		List<GpxDisplayItem> items = TrackDisplayHelper.flatten(displayHelper.getOriginalGroups(filterTypes));
+		int segmentIndex = items.indexOf(gpxItem);
+		if (segmentIndex == 0 && getGpx().hasGeneralTrack()) {
+			segmentIndex = -1;
+		}
+		return segmentIndex;
+	}
+
+	@Override
 	public void showOptionsPopupMenu(View view, final TrkSegment segment, final boolean confirmDeletion, final GpxDisplayItem gpxItem) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
@@ -1428,7 +1450,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				public boolean onMenuItemClick(MenuItem item) {
 					int i = item.getItemId();
 					if (i == R.id.action_edit) {
-						editSegment();
+						int segmentIndex = getSegmentIndex(gpxItem);
+						openPlanRoute(segmentIndex, PLAN_ROUTE_MODE);
 						return true;
 					} else if (i == R.id.action_delete) {
 						FragmentActivity activity = getActivity();
@@ -1466,18 +1489,23 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 	}
 
-	private void editSegment() {
-		GPXFile gpxFile = getGpx();
-		openPlanRoute(new GpxData(gpxFile));
-		hide();
-	}
+	public void openPlanRoute(int segmentIndex, @MeasurementToolMode int mode) {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			GPXFile gpxFile = getGpx();
+			GpxData gpxData = new GpxData(gpxFile);
 
-	public void openPlanRoute(GpxData gpxData) {
-		QuadRect qr = gpxData.getRect();
-		getMapActivity().getMapView().fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
-		MeasurementEditingContext editingContext = new MeasurementEditingContext(app);
-		editingContext.setGpxData(gpxData);
-		MeasurementToolFragment.showInstance(getFragmentManager(), editingContext);
+			QuadRect rect = gpxData.getRect();
+			OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+			mapView.fitRectToMap(rect.left, rect.right, rect.top, rect.bottom, (int) rect.width(), (int) rect.height(), 0);
+
+			MeasurementEditingContext editingContext = new MeasurementEditingContext(app);
+			editingContext.setGpxData(gpxData);
+			editingContext.setSelectedSegment(segmentIndex);
+			editingContext.setAppMode(app.getSettings().getApplicationMode());
+			MeasurementToolFragment.showInstance(activity.getSupportFragmentManager(), editingContext, mode, true);
+		}
+		hide();
 	}
 
 	private void deleteAndSaveSegment(TrkSegment segment) {

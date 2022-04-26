@@ -1,5 +1,17 @@
 package net.osmand.plus.measurementtool;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
+import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode;
+import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
+import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.ADD_TO_TRACK;
+import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.AFTER;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.ALL;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.BEFORE;
+import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -22,6 +34,18 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.TextViewCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.google.android.material.snackbar.Snackbar;
@@ -89,35 +113,14 @@ import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
-import androidx.core.widget.TextViewCompat;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.RecyclerView;
-
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode;
-import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
-import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.ADD_TO_TRACK;
-import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
-import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode;
-import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.AFTER;
-import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.ALL;
-import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.BEFORE;
-import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 
 public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
 		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener,
@@ -129,6 +132,18 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private static final String MODES_KEY = "modes_key";
 	private static final String INITIAL_POINT_KEY = "initial_point_key";
 	private static final String SHOW_SNAP_WARNING_KEY = "show_snap_warning_key";
+
+	public static final int PLAN_ROUTE_MODE = 0x1;
+	public static final int DIRECTION_MODE = 0x2;
+	public static final int FOLLOW_TRACK_MODE = 0x4;
+	public static final int UNDO_MODE = 0x8;
+	public static final int ATTACH_ROADS_MODE = 0x10;
+	public static final int CALCULATE_ONLINE_MODE = 0x20;
+
+	@Retention(RetentionPolicy.SOURCE)
+	@IntDef({PLAN_ROUTE_MODE, DIRECTION_MODE, FOLLOW_TRACK_MODE, UNDO_MODE, ATTACH_ROADS_MODE, CALCULATE_ONLINE_MODE})
+	public @interface MeasurementToolMode {
+	}
 
 	private String previousToolBarTitle = "";
 	private MeasurementToolBarController toolBarController;
@@ -162,10 +177,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private boolean progressBarVisible;
 	private boolean infoExpanded;
 
-	private static final int PLAN_ROUTE_MODE = 0x1;
-	private static final int DIRECTION_MODE = 0x2;
-	private static final int FOLLOW_TRACK_MODE = 0x4;
-	private static final int UNDO_MODE = 0x8;
 	private int modes = 0x0;
 
 	private boolean portrait;
@@ -235,6 +246,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return (this.modes & FOLLOW_TRACK_MODE) == FOLLOW_TRACK_MODE;
 	}
 
+	private boolean isAttachRoadsMode() {
+		return (this.modes & ATTACH_ROADS_MODE) == ATTACH_ROADS_MODE;
+	}
+
+	private boolean isCalculateOnlineMode() {
+		return (this.modes & CALCULATE_ONLINE_MODE) == CALCULATE_ONLINE_MODE;
+	}
+
 	private boolean isUndoMode() {
 		return (this.modes & UNDO_MODE) == UNDO_MODE;
 	}
@@ -256,7 +275,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-							 @Nullable Bundle savedInstanceState) {
+	                         @Nullable Bundle savedInstanceState) {
 		MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity == null) {
 			return null;
@@ -605,8 +624,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (savedInstanceState == null) {
 			if (fileName != null) {
 				addNewGpxData(getGpxFile(fileName));
-			} else if (isFollowTrackMode() && isShowSnapWarning()) {
+			} else if ((isFollowTrackMode() || isAttachRoadsMode()) && isShowSnapWarning()) {
 				enterApproximationMode(mapActivity);
+			} else if (isCalculateOnlineMode()) {
+				setInfoType(InfoType.GRAPH);
 			}
 		} else {
 			measurementLayer.setTapsDisabled(savedInstanceState.getBoolean(TAPS_DISABLED_KEY));
@@ -747,7 +768,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	public boolean isInEditMode() {
-		return !isPlanRouteMode() && !editingCtx.isNewData() && !isDirectionMode() && !isFollowTrackMode();
+		return !isPlanRouteMode() && !editingCtx.isNewData() && !isDirectionMode()
+				&& !isFollowTrackMode() && !isAttachRoadsMode();
 	}
 
 	public boolean isShowSnapWarning() {
@@ -1284,7 +1306,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	@Override
 	public void onChangeApplicationMode(ApplicationMode mode, RouteBetweenPointsDialogType dialogType,
-										RouteBetweenPointsDialogMode dialogMode) {
+	                                    RouteBetweenPointsDialogMode dialogMode) {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			ChangeRouteType changeRouteType = ChangeRouteType.NEXT_SEGMENT;
@@ -1529,7 +1551,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (mapActivity != null) {
 			if (editingCtx.getPointsCount() > 0) {
 				SaveAsNewTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-						this, "", getSuggestedFileName(), null,	true, true);
+						this, "", getSuggestedFileName(), null, true, true);
 			} else {
 				Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
 			}
@@ -1769,7 +1791,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private void saveNewGpx(String folderName, String fileName, boolean showOnMap,
-							boolean simplified, FinalSaveAction finalSaveAction) {
+	                        boolean simplified, FinalSaveAction finalSaveAction) {
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
 			File dir = getMyApplication().getAppPath(GPX_INDEX_DIR);
@@ -1782,31 +1804,25 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private void saveNewGpx(@NonNull File dir, @NonNull String fileName, boolean showOnMap,
-							boolean simplified, FinalSaveAction finalSaveAction) {
+	                        boolean simplified, FinalSaveAction finalSaveAction) {
 		saveGpx(new File(dir, fileName), null, simplified, false, finalSaveAction, showOnMap);
 	}
 
 	private void saveExistingGpx(@NonNull GPXFile gpx, boolean showOnMap,
-								 boolean simplified, boolean addToTrack, FinalSaveAction finalSaveAction) {
+	                             boolean simplified, boolean addToTrack, FinalSaveAction finalSaveAction) {
 		saveGpx(new File(gpx.path), gpx, simplified, addToTrack, finalSaveAction, showOnMap);
 	}
 
 	private void saveGpx(@NonNull final File outFile, @Nullable GPXFile gpxFile, boolean simplified,
-						 boolean addToTrack, final FinalSaveAction finalSaveAction, final boolean showOnMap) {
-		SaveGpxRouteListener saveGpxRouteListener = new SaveGpxRouteListener() {
-			@Override
-			public void gpxSavingFinished(Exception warning, GPXFile savedGpxFile, File backupFile) {
-				onGpxSaved(warning, savedGpxFile, outFile, backupFile, finalSaveAction, showOnMap);
-			}
-		};
-
+	                     boolean addToTrack, final FinalSaveAction finalSaveAction, final boolean showOnMap) {
+		SaveGpxRouteListener listener = (warning, savedGpxFile, backupFile) -> onGpxSaved(warning, savedGpxFile, outFile, backupFile, finalSaveAction, showOnMap);
 		SaveGpxRouteAsyncTask saveTask = new SaveGpxRouteAsyncTask(this, outFile, gpxFile, simplified,
-				addToTrack, showOnMap, saveGpxRouteListener);
+				addToTrack, showOnMap, listener);
 		saveTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void onGpxSaved(Exception warning, GPXFile savedGpxFile, final File outFile, final File backupFile,
-							FinalSaveAction finalSaveAction, final boolean showOnMap) {
+	                        FinalSaveAction finalSaveAction, final boolean showOnMap) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return;
@@ -2094,19 +2110,15 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return showFragment(fragment, fragmentManager);
 	}
 
-	public static boolean showInstance(FragmentManager fragmentManager, MeasurementEditingContext editingCtx,
-									   boolean followTrackMode, boolean showSnapWarning) {
+	public static boolean showInstance(@NonNull FragmentManager manager,
+	                                   @Nullable MeasurementEditingContext editingCtx,
+	                                   @MeasurementToolMode int mode,
+	                                   boolean showSnapWarning) {
 		MeasurementToolFragment fragment = new MeasurementToolFragment();
 		fragment.setEditingCtx(editingCtx);
-		fragment.setMode(FOLLOW_TRACK_MODE, followTrackMode);
+		fragment.setMode(mode, true);
 		fragment.setShowSnapWarning(showSnapWarning);
-		return showFragment(fragment, fragmentManager);
-	}
-
-	public static boolean showInstance(FragmentManager fragmentManager, MeasurementEditingContext editingCtx) {
-		MeasurementToolFragment fragment = new MeasurementToolFragment();
-		fragment.setEditingCtx(editingCtx);
-		return showFragment(fragment, fragmentManager);
+		return showFragment(fragment, manager);
 	}
 
 	public static boolean showInstance(FragmentManager fragmentManager) {

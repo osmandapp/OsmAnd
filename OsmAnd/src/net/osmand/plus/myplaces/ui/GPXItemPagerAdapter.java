@@ -5,9 +5,11 @@ import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SLOPE;
 import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SPEED;
 import static net.osmand.plus.myplaces.ui.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
 import static net.osmand.plus.myplaces.ui.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
+import static net.osmand.plus.myplaces.ui.GPXTabItemType.GPX_TAB_ITEM_NO_ALTITUDE;
 import static net.osmand.plus.myplaces.ui.GPXTabItemType.GPX_TAB_ITEM_SPEED;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Matrix;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -32,20 +34,13 @@ import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.CustomRadioButtonType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
@@ -53,8 +48,19 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.LineGraphType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.CustomRadioButtonType;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip.CustomTabProvider;
+import net.osmand.plus.views.controls.WrapContentHeightViewPager;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager.ViewAtPositionInterface;
 import net.osmand.util.Algorithms;
 
@@ -71,8 +77,13 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 	private static final int CHART_LABEL_COUNT = 4;
 
+	private static final int[] SINGLE_TAB_LAYOUT_ID = {R.layout.center_button_container};
+	private static final int[] DOUBLE_TABS_LAYOUT_IDS = {R.layout.left_button_container, R.layout.right_button_container};
+	private static final int[] TRIPLE_TABS_LAYOUT_IDS = {R.layout.left_button_container, R.layout.center_button_container, R.layout.right_button_container};
+
 	private final OsmandApplication app;
 	private final UiUtilities iconsCache;
+
 	private final TrackDisplayHelper displayHelper;
 	private final Map<GPXTabItemType, List<ILineDataSet>> dataSetsMap = new HashMap<>();
 
@@ -85,12 +96,11 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private final SparseArray<View> views = new SparseArray<>();
 	private final SegmentActionsListener actionsListener;
 
-	private boolean chartClicked;
-
 	private final boolean nightMode;
-	private final boolean hideStatistics;
-	private final boolean hideJoinGapsBottomButtons;
-
+	private boolean chartClicked;
+	private boolean showEmptyAltitudeTab;
+	private boolean hideStatistics;
+	private boolean hideJoinGapsBottomButtons;
 	private int chartHMargin = 0;
 
 	public void setChartHMargin(int chartHMargin) {
@@ -101,21 +111,27 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		return displayHelper.getGpx() != null && displayHelper.getGpx().showCurrentTrack;
 	}
 
+	public void setHideStatistics(boolean hideStatistics) {
+		this.hideStatistics = hideStatistics;
+	}
+
+	public void setHideJoinGapsBottomButtons(boolean hideJoinGapsBottomButtons) {
+		this.hideJoinGapsBottomButtons = hideJoinGapsBottomButtons;
+	}
+
 	public GPXItemPagerAdapter(@NonNull OsmandApplication app,
 	                           @Nullable GpxDisplayItem gpxItem,
 	                           @NonNull TrackDisplayHelper displayHelper,
-	                           boolean nightMode,
 	                           @NonNull SegmentActionsListener actionsListener,
-	                           boolean hideStatistics,
-	                           boolean hideJoinGapsBottomButtons) {
+	                           boolean nightMode,
+	                           boolean showEmptyAltitudeTab) {
 		super();
 		this.app = app;
 		this.gpxItem = gpxItem;
 		this.displayHelper = displayHelper;
 		this.nightMode = nightMode;
+		this.showEmptyAltitudeTab = showEmptyAltitudeTab;
 		this.actionsListener = actionsListener;
-		this.hideStatistics = hideStatistics;
-		this.hideJoinGapsBottomButtons = hideJoinGapsBottomButtons;
 		iconsCache = app.getUIUtilities();
 
 		updateAnalysis();
@@ -155,7 +171,8 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 	private void fetchTabTypes() {
 		List<GPXTabItemType> tabTypeList = new ArrayList<>();
-		if (isShowCurrentTrack()) {
+		boolean showCurrentTrack = isShowCurrentTrack();
+		if (showCurrentTrack) {
 			if (analysis != null && (analysis.hasElevationData || analysis.hasSpeedData)) {
 				tabTypeList.add(GPXTabItemType.GPX_TAB_ITEM_GENERAL);
 			}
@@ -165,6 +182,8 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		if (analysis != null) {
 			if (analysis.hasElevationData) {
 				tabTypeList.add(GPX_TAB_ITEM_ALTITUDE);
+			} else if (showEmptyAltitudeTab && !showCurrentTrack) {
+				tabTypeList.add(GPX_TAB_ITEM_NO_ALTITUDE);
 			}
 			if (analysis.isSpeedSpecified()) {
 				tabTypeList.add(GPX_TAB_ITEM_SPEED);
@@ -174,7 +193,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	}
 
 	private List<ILineDataSet> getDataSets(LineChart chart, GPXTabItemType tabType,
-										   LineGraphType firstType, LineGraphType secondType) {
+	                                       LineGraphType firstType, LineGraphType secondType) {
 		List<ILineDataSet> dataSets = dataSetsMap.get(tabType);
 		boolean withoutGaps = true;
 		if (isShowCurrentTrack()) {
@@ -253,11 +272,10 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		GPXTabItemType tabType = tabTypes[position];
 		View view = getViewForTab(container, tabType);
 		view.setTag(tabType);
-		LineChart chart = view.findViewById(R.id.chart);
-		ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) chart.getLayoutParams();
-		AndroidUtils.setMargins(lp, chartHMargin, lp.topMargin, chartHMargin, lp.bottomMargin);
 		if (analysis != null && gpxItem != null) {
+			LineChart chart = view.findViewById(R.id.chart);
 			setupChart(view, chart);
+
 			switch (tabType) {
 				case GPX_TAB_ITEM_GENERAL:
 					setupGeneralTab(view, chart, position);
@@ -268,6 +286,9 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				case GPX_TAB_ITEM_SPEED:
 					setupSpeedTab(view, chart, position);
 					break;
+				case GPX_TAB_ITEM_NO_ALTITUDE:
+					setupNoAltitudeTab(view);
+					break;
 			}
 		}
 		container.addView(view, 0);
@@ -277,15 +298,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 	private View getViewForTab(@NonNull ViewGroup container, @NonNull GPXTabItemType tabType) {
 		LayoutInflater inflater = LayoutInflater.from(container.getContext());
-		int layoutResId;
-		if (tabType == GPX_TAB_ITEM_ALTITUDE) {
-			layoutResId = R.layout.gpx_item_altitude;
-		} else if (tabType == GPX_TAB_ITEM_SPEED) {
-			layoutResId = R.layout.gpx_item_speed;
-		} else {
-			layoutResId = R.layout.gpx_item_general;
-		}
-		View view = inflater.inflate(layoutResId, container, false);
+		View view = inflater.inflate(tabType.getLayoutId(), container, false);
 		if (hideJoinGapsBottomButtons) {
 			AndroidUiHelper.setVisibility(View.GONE,
 					view.findViewById(R.id.gpx_join_gaps_container),
@@ -336,18 +349,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		}
 		if (!hideStatistics) {
 			updateJoinGapsInfo(view, position);
-			view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					openAnalyzeOnMap(GPX_TAB_ITEM_SPEED);
-				}
-			});
-			TextView overflowMenu = view.findViewById(R.id.overflow_menu);
-			if (!gpxItem.group.getTrack().generalTrack) {
-				setupOptionsPopupMenu(overflowMenu, false);
-			} else {
-				overflowMenu.setVisibility(View.GONE);
-			}
+			updateActionButtonsRow(view, GPX_TAB_ITEM_SPEED, false);
 		}
 	}
 
@@ -366,6 +368,16 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		overflowMenu.setVisibility(View.VISIBLE);
 		overflowMenu.setOnClickListener(view ->
 				actionsListener.showOptionsPopupMenu(view, getTrkSegment(), confirmDeletion, gpxItem));
+	}
+
+	private void setupNoAltitudeTab(@NonNull View view) {
+		View buttonView = view.findViewById(R.id.button_action);
+		buttonView.setOnClickListener(v -> actionsListener.openGetAltitudeBottomSheet(gpxItem));
+		UiUtilities.setupDialogButton(nightMode, buttonView, DialogButtonType.SECONDARY_ACTIVE, R.string.calculate_altitude);
+
+		if (!hideStatistics) {
+			updateActionButtonsRow(view, GPX_TAB_ITEM_GENERAL, true);
+		}
 	}
 
 	private void setupAltitudeTab(View view, LineChart chart, int position) {
@@ -402,18 +414,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		}
 		if (!hideStatistics) {
 			updateJoinGapsInfo(view, position);
-			view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					openAnalyzeOnMap(GPX_TAB_ITEM_ALTITUDE);
-				}
-			});
-			TextView overflowMenu = view.findViewById(R.id.overflow_menu);
-			if (!gpxItem.group.getTrack().generalTrack) {
-				setupOptionsPopupMenu(overflowMenu, false);
-			} else {
-				overflowMenu.setVisibility(View.GONE);
-			}
+			updateActionButtonsRow(view, GPX_TAB_ITEM_ALTITUDE, false);
 		}
 	}
 
@@ -468,18 +469,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		}
 		if (!hideStatistics) {
 			updateJoinGapsInfo(view, position);
-			view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_GENERAL);
-				}
-			});
-			TextView overflowMenu = view.findViewById(R.id.overflow_menu);
-			if (!gpxItem.group.getTrack().generalTrack) {
-				setupOptionsPopupMenu(overflowMenu, true);
-			} else {
-				overflowMenu.setVisibility(View.GONE);
-			}
+			updateActionButtonsRow(view, GPX_TAB_ITEM_GENERAL, true);
 		}
 	}
 
@@ -507,6 +497,11 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	}
 
 	private void setupChart(final View view, final LineChart chart) {
+		if (chart == null) {
+			return;
+		}
+		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) chart.getLayoutParams();
+		AndroidUtils.setMargins(params, chartHMargin, params.topMargin, chartHMargin, params.bottomMargin);
 		chart.setHighlightPerDragEnabled(chartClicked);
 		chart.setOnClickListener(new View.OnClickListener() {
 			@SuppressLint("ClickableViewAccessibility")
@@ -638,20 +633,16 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		return view == object;
 	}
 
-	int singleTabLayoutId[] = {R.layout.center_button_container};
-	int doubleTabsLayoutIds[] = {R.layout.left_button_container, R.layout.right_button_container};
-	int tripleTabsLayoutIds[] = {R.layout.left_button_container, R.layout.center_button_container, R.layout.right_button_container};
-
 	@Override
 	public View getCustomTabView(@NonNull ViewGroup parent, int position) {
 		int layoutId;
 		int count = getCount();
 		if (count == 1) {
-			layoutId = singleTabLayoutId[position];
+			layoutId = SINGLE_TAB_LAYOUT_ID[position];
 		} else if (count == 2) {
-			layoutId = doubleTabsLayoutIds[position];
+			layoutId = DOUBLE_TABS_LAYOUT_IDS[position];
 		} else {
-			layoutId = tripleTabsLayoutIds[position];
+			layoutId = TRIPLE_TABS_LAYOUT_IDS[position];
 		}
 		ViewGroup tab = (ViewGroup) UiUtilities.getInflater(parent.getContext(), nightMode).inflate(layoutId, parent, false);
 		tab.setTag(tabTypes[position].name());
@@ -710,6 +701,17 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		View view = getViewAtPosition(position);
 		if (view != null) {
 			updateChart(view.findViewById(R.id.chart));
+		}
+	}
+
+	private void updateActionButtonsRow(@NonNull View view, @NonNull GPXTabItemType tabType, boolean confirmDeletion) {
+		view.findViewById(R.id.analyze_on_map).setOnClickListener(v -> openAnalyzeOnMap(tabType));
+
+		TextView overflowMenu = view.findViewById(R.id.overflow_menu);
+		if (!gpxItem.group.getTrack().generalTrack) {
+			setupOptionsPopupMenu(overflowMenu, confirmDeletion);
+		} else {
+			overflowMenu.setVisibility(View.GONE);
 		}
 	}
 
@@ -919,5 +921,28 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			}
 		}
 		return null;
+	}
+
+	public static View createGpxTabsView(ViewGroup root, boolean nightMode) {
+		Context context = root.getContext();
+		View tabsView = UiUtilities.getInflater(context, nightMode)
+				.inflate(R.layout.gpx_list_item_tab_content, root, false);
+		setupGpxTabsView(tabsView, nightMode);
+		return tabsView;
+	}
+
+	public static void setupGpxTabsView(View tabsView, boolean nightMode) {
+		Context context = tabsView.getContext();
+
+		PagerSlidingTabStrip tabLayout = tabsView.findViewById(R.id.sliding_tabs);
+		tabLayout.setTabBackground(AndroidUtils.resolveAttribute(context, R.attr.btn_bg_border_inactive));
+		tabLayout.setDividerWidth(AndroidUtils.dpToPx(context, 1));
+		tabLayout.setDividerColor(ColorUtilities.getStrokedButtonsOutlineColor(context, nightMode));
+		tabLayout.setIndicatorHeight(0);
+		tabLayout.setShouldExpand(true);
+
+		WrapContentHeightViewPager pager = tabsView.findViewById(R.id.pager);
+		pager.setSwipeable(false);
+		pager.setOffscreenPageLimit(2);
 	}
 }

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:id="@+id/attach_roads"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/selectableItemBackground"
+		android:minHeight="@dimen/setting_list_item_large_height"
+		android:orientation="horizontal"
+		android:paddingTop="@dimen/content_padding_small"
+		android:paddingBottom="@dimen/content_padding_half">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding"
+			osmand:srcCompat="@drawable/ic_action_attach_track"
+			osmand:tint="?attr/active_color_basic" />
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<TextView
+				style="@style/TitleStyle.Medium"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/attach_to_the_roads"
+				android:textColor="?attr/active_color_basic" />
+
+			<TextView
+				style="@style/DescStyle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/track_attach_to_the_roads_descr"
+				android:textColor="?android:attr/textColorSecondary" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginStart="@dimen/settings_divider_margin_start"
+		android:background="?attr/divider_color_basic" />
+
+	<LinearLayout
+		android:id="@+id/calculate_online"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/selectableItemBackground"
+		android:minHeight="@dimen/setting_list_item_large_height"
+		android:orientation="horizontal"
+		android:paddingTop="@dimen/content_padding_small"
+		android:paddingBottom="@dimen/content_padding_half">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding"
+			osmand:srcCompat="@drawable/ic_action_world_globe"
+			osmand:tint="?attr/active_color_basic" />
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<TextView
+				style="@style/TitleStyle.Medium"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/calculate_online"
+				android:textColor="?attr/active_color_basic" />
+
+			<TextView
+				style="@style/DescStyle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/calculate_online_altitude_descr"
+				android:textColor="?android:attr/textColorSecondary" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>

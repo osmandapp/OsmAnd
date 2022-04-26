@@ -1,5 +1,7 @@
 package net.osmand.plus.routepreparationmenu;
 
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.FOLLOW_TRACK_MODE;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -493,7 +495,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			editingContext.setGpxData(gpxData);
 			editingContext.setAppMode(app.getRoutingHelper().getAppMode());
 			editingContext.setSelectedSegment(app.getSettings().GPX_ROUTE_SEGMENT.get());
-			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext, true, showSnapWarning);
+			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext, FOLLOW_TRACK_MODE, showSnapWarning);
 		}
 	}
 
