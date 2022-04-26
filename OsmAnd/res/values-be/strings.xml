@@ -1346,9 +1346,9 @@
     <string name="use_opengl_render_descr">Выкарыстоўваць апаратнае паскарэнне OpenGL (можа спажываць больш энергіі ці не працаваць на вельмі старых прыладах).</string>
     <string name="everything_up_to_date">Усе файлы ў актуальным стане</string>
     <string name="no_internet_connection">Немагчыма спампаваць. Калі ласка, праверце вашае Інтэрнэт-злучэнне.</string>
-    <string name="download_tab_downloads">Усе спампоўкі</string>
+    <string name="download_tab_downloads">Усе</string>
     <string name="download_tab_updates">Абнаўленні</string>
-    <string name="download_tab_local">Мясцовыя</string>
+    <string name="download_tab_local">Спампаваныя</string>
     <string name="navigate_point_zone">Зона</string>
     <string name="navigate_point_northing">Па шыраце</string>
     <string name="navigate_point_easting">Па даўгаце</string>
@@ -2781,7 +2781,7 @@
     <string name="access_intermediate_arrival_time">Прамежкавы час прыбыцця</string>
     <string name="map_widget_intermediate_time">Прамежкавы час</string>
     <string name="unirs_render_descr">Мадыфікацыя прадвызначанага стылю для павялічэння кантрастнасці пешаходных і роварных дарог. Выкарыстоўвае старыя Mapnik-колеры.</string>
-    <string name="get_osmand_live">Атрымайце OsmAnd Live, каб разблакаваць усе функцыі: штодзённыя абнаўленні мап з неабмежаванымі спампоўваннямі, усе платныя і бясплатныя ўбудовы, Вікіпедыю, Вікігід і шмат іншага.</string>
+    <string name="get_osmand_live">Атрымайце OsmAnd Live, каб разблакаваць усе функцыі: штодзённыя абнаўленні мапаў з неабмежаванымі спампоўваннямі, усе платныя і бясплатныя ўбудовы, Вікіпедыю, Вікігід і шмат іншага.</string>
     <string name="quick_action_edit_actions">Рэдагаваць дзеянні</string>
     <string name="error_notification_desc">Калі ласка, адпраўце здымак экрана з гэтым апавяшчэннем на support@osmand.net</string>
     <string name="coord_input_edit_point">Рэдагаваць пункт</string>
