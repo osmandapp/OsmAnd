@@ -21,6 +21,7 @@ private const val MIN_MESSAGE_SENDING_INTERVAL_MS = 1000 // 1 sec
 private const val MIN_MESSAGES_BUFFER_CHECK_INTERVAL_MS = 300 // 0.3 sec
 
 private const val SEND_MESSAGES_BUFFER_MS_MSG_ID = 5000
+private const val SEND_NEW_MESSAGE_INTERVAL_SEC = 15 * 60 // 15 min
 
 class ShareLocationHelper(private val app: TelegramApplication) {
 
@@ -330,7 +331,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 					} else {
 						app.locationMessages.addBufferedMessage(message)
 					}
-				} else {
+				} else if (!shareInfo.hasMapSharingError || ((System.currentTimeMillis() / 1000) - shareInfo.lastSendMapMessageTime) >= SEND_NEW_MESSAGE_INTERVAL_SEC) {
 					app.telegramHelper.sendNewMapLocation(shareInfo, message)
 				}
 			}

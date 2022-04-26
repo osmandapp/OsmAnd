@@ -386,7 +386,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 								shareInfo.shouldSendViaBotMapMessage = false
 							}
 						} else if (state.constructor == TdApi.MessageSendingStateFailed.CONSTRUCTOR) {
-							shareInfo.hasSharingError = true
+							shareInfo.hasMapSharingError = true
 							shareInfo.pendingMapMessage = false
 							if (!isOsmAndBot) {
 								shareInfo.pendingTdLibMap--
@@ -420,7 +420,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 							}
 						} else if (state.constructor == TdApi.MessageSendingStateFailed.CONSTRUCTOR) {
 							log.debug("updateShareInfo TEXT ${message.id} MessageSendingStateFailed")
-							shareInfo.hasSharingError = true
+							shareInfo.hasTextSharingError = true
 							shareInfo.pendingTextMessage = false
 							if (!isOsmAndBot) {
 								shareInfo.pendingTdLibText--
@@ -557,7 +557,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 								"\nLast map message handled: ${shareInfo.lastMapMessageHandled}" +
 								"\nMap sharing waiting time: ${mapSharingWaitingTime}s")
 					}
-					if (shareInfo.hasSharingError || waitingTimeError) {
+					if (shareInfo.hasTextSharingError || shareInfo.hasMapSharingError || waitingTimeError) {
 						sendChatsErrors = true
 						locationTime = max(shareInfo.lastTextSuccessfulSendTime, shareInfo.lastMapSuccessfulSendTime)
 						chatsIds.add(shareInfo.chatId)
@@ -1473,7 +1473,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 		var pendingMapMessage = false
 		var shouldSendViaBotTextMessage = false
 		var shouldSendViaBotMapMessage = false
-		var hasSharingError = false
+		var hasTextSharingError = false
+		var hasMapSharingError = false
 		var additionalActiveTime = ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
 		var lastMapMessageHandled = false
 		var lastTextMessageHandled = false
@@ -1508,12 +1509,14 @@ class TelegramSettings(private val app: TelegramApplication) {
 			pendingTdLibText = 0
 			currentTextMessageId = -1L
 			pendingTextMessage = false
+			hasTextSharingError = false
 		}
 
 		fun resetMapMessageInfo() {
 			pendingTdLibMap = 0
 			currentMapMessageId = -1L
 			pendingMapMessage = false
+			hasMapSharingError = false
 		}
 
 		fun isTextMessageIdPresent() = currentTextMessageId != -1L

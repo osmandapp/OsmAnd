@@ -329,7 +329,9 @@ class TelegramService : Service(), TelegramIncomingMessagesListener,
 	}
 
 	override fun onSendLiveLocationError(code: Int, message: String, shareInfo: ShareChatInfo, messageType: Int) {
-		Log.d(PlatformUtil.TAG, "Send live location error: $code - $message")
+		val text = "Send live location error: $code - $message";
+		Log.e(PlatformUtil.TAG, text)
+		app().runInUIThread { Toast.makeText(app(), text, Toast.LENGTH_LONG).show() }
 		when (messageType) {
 			TelegramHelper.MESSAGE_TYPE_TEXT -> shareInfo.pendingTdLibText--
 			TelegramHelper.MESSAGE_TYPE_MAP -> {
