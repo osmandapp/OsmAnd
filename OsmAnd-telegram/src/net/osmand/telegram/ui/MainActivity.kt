@@ -305,9 +305,9 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 
 	override fun onTelegramError(code: Int, message: String) {
 		runOnUi {
-			val text = "Error: $code - $message"
-			Log.e(PlatformUtil.TAG, text)
-			Toast.makeText(this@MainActivity, text, Toast.LENGTH_LONG).show()
+			Log.e(PlatformUtil.TAG, "Error: $code - $message")
+			val error = getString(R.string.shared_string_error);
+			Toast.makeText(this@MainActivity, "$error: $code - $message", Toast.LENGTH_LONG).show()
 			listeners.forEach { it.get()?.onTelegramError(code, message) }
 		}
 	}

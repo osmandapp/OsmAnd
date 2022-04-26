@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="shared_string_error">Error</string>
+    <string name="send_live_location_error">Send live location error: %1$s</string>
     <string name="send_report">Send report</string>
     <string name="logcat_buffer_descr">Check and share detailed logs of the app</string>
     <string name="logcat_buffer">Logcat buffer</string>
