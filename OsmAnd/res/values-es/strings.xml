@@ -803,7 +803,7 @@
     <string name="osmand_plus_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (Direcciones de navegación automatizadas de OSM)
 \n
-\n OsmAnd+ es una aplicación de navegación de software de código abierto con acceso a una amplia variedad de datos globales de OSM. Todos los datos de mapas (mapas vectoriales o de mosaicos) se pueden almacenar en la tarjeta de memoria del teléfono para usarlos sin conexión. También se ofrece la funcionalidad de enrutamiento fuera de línea y en línea, incluida la guía de voz paso a paso.
+\n OsmAnd+ es una aplicación de navegación de software de código abierto con acceso a una amplia variedad de datos globales de OSM. Todos los datos de mapas (vectoriales o de mosaicos) se pueden almacenar en la tarjeta de memoria del teléfono para usarlos sin conexión. También se ofrece la funcionalidad de enrutamiento fuera de línea y en línea, incluida la guía de voz paso a paso.
 \n
 \n OsmAnd+ es la versión de pago de la aplicación. Al comprarla, respalda el proyecto, financia el desarrollo de nuevas funciones y recibe las últimas actualizaciones.
 \n
@@ -1137,7 +1137,7 @@
     <string name="lang_id">Indonesio</string>
     <string name="lang_it">Italiano</string>
     <string name="lang_ja">Japonés</string>
-    <string name="lang_ko">Corano</string>
+    <string name="lang_ko">Coreano</string>
     <string name="lang_lv">Letón</string>
     <string name="lang_lt">Lituano</string>
     <string name="lang_mr">Marathi</string>
@@ -1147,7 +1147,7 @@
     <string name="lang_ro">Rumano</string>
     <string name="lang_ru">Ruso</string>
     <string name="lang_sk">Eslovaco</string>
-    <string name="lang_sl">Eslovenio</string>
+    <string name="lang_sl">Esloveno</string>
     <string name="lang_es">Español</string>
     <string name="lang_sv">Sueco</string>
     <string name="lang_tr">Turco</string>
@@ -1252,7 +1252,7 @@
     <string name="map_preferred_locale_descr">Idioma preferido para las etiquetas en el mapa (si no está disponible, se usarán nombres en inglés o locales).</string>
     <string name="map_preferred_locale">Idioma preferido del mapa</string>
     <string name="local_map_names">Nombres locales</string>
-    <string name="lang_sw">Swahili</string>
+    <string name="lang_sw">Suajili</string>
     <string name="lang_he">Hebreo</string>
     <string name="forward">Siguiente</string>
     <string name="home">Panel de control</string>
@@ -1483,7 +1483,7 @@
     <string name="shared_string_collapse">Contraer</string>
     <string name="shared_string_video">Video</string>
     <string name="shared_string_photo">Fotografía</string>
-    <string name="route_points">Puntos de ruta</string>
+    <string name="route_points">Puntos de la ruta</string>
     <string name="shared_string_release">Liberado</string>
     <string name="osmand_parking_overdue">vencido</string>
     <string name="delay_to_start_navigation">Iniciar la guía de giro-a-giro luego de…</string>
@@ -1552,7 +1552,7 @@
     <string name="lang_bn">Bengalí</string>
     <string name="lang_tl">Tagalo</string>
     <string name="lang_sh">Serbo-croata</string>
-    <string name="lang_az">Azerí</string>
+    <string name="lang_az">Azerí (Azerbaiyán)</string>
     <string name="lang_br">Bretón</string>
     <string name="lang_sq">Albanés</string>
     <string name="lang_is">Islandés</string>
@@ -1573,12 +1573,12 @@
     <string name="lang_ceb">Cebuano</string>
     <string name="archive_wikipedia_data">Tienes datos de Wikipedia viejos e incompatibles. ¿Archivarlos?</string>
     <string name="download_wikipedia_files">¿Descargar datos adicionales de Wikipedia (%1$s MB)?</string>
-    <string name="lang_bpy">Bishnupriya</string>
+    <string name="lang_bpy">Bishnupriya Manipuri</string>
     <string name="lang_ml">Malayalam</string>
     <string name="lang_os">Osetio</string>
     <string name="lang_nb">Noruego Bokmål</string>
-    <string name="lang_vo">Volapuk</string>
-    <string name="lang_te">Telugu</string>
+    <string name="lang_vo">Volapuque</string>
+    <string name="lang_te">Télugu</string>
     <string name="lang_new">Nevarí / Nepal Bhasa</string>
     <string name="rendering_value_default13_name">Predefinido (13)</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Predefinido (cian translúcido)</string>
@@ -1967,11 +1967,11 @@
     <string name="coords_format_descr">Formato de las coordenadas geográficas.</string>
     <string name="app_mode_bus">Autobús</string>
     <string name="app_mode_train">Tren</string>
-    <string name="lang_es_us">Español (Americano)</string>
+    <string name="lang_es_us">Español (Estados Unidos)</string>
     <string name="lang_ast">Asturiano</string>
-    <string name="lang_hsb">Sorabo</string>
+    <string name="lang_hsb">Sorabo (Alto)</string>
     <string name="lang_en_gb">Inglés (Reino Unido)</string>
-    <string name="lang_be_by">Bielorruso (Latín)</string>
+    <string name="lang_be_by">Bielorruso (Latino)</string>
     <string name="lang_kn">Canarés</string>
     <string name="share_history_subject">compartido vía OsmAnd</string>
     <string name="coords_search">Buscar coordenadas</string>
@@ -2064,7 +2064,7 @@
     <string name="new_filter">Nuevo filtro</string>
     <string name="new_filter_desc">Ingresa el nombre del nuevo filtro, que se añadirá en tu pestaña «Categorías».</string>
     <string name="rendering_value_fine_name">Muy fino</string>
-    <string name="lang_sr_latn">Serbio (latín)</string>
+    <string name="lang_sr_latn">Serbio (latino)</string>
     <string name="lang_zh_hk">Chino (Hong Kong)</string>
     <string name="rendering_attr_contourDensity_description">Densidad de la curva de nivel</string>
     <string name="rendering_attr_contourDensity_name">Densidad de la curva de nivel</string>
@@ -2401,7 +2401,7 @@
     <string name="mapillary_image">Imagen de Mapillary</string>
     <string name="shared_string_permissions">Permisos</string>
     <string name="import_gpx_failed_descr">No se pudo importar el archivo. Asegúrese de que OsmAnd tiene permiso para leerlo.</string>
-    <string name="distance_moving">Distancia corregida</string>
+    <string name="distance_moving">Distancia recorrida</string>
     <string name="store_tracks_in_monthly_directories">Guardar las trazas grabadas en carpetas mensuales</string>
     <string name="store_tracks_in_monthly_directories_descrp">Guardar las trazas grabadas en subcarpetas, por mes de grabación (como 2018-01).</string>
     <string name="shared_string_reset">Restablecer</string>
@@ -3279,7 +3279,7 @@
     <string name="rendering_attr_piste_difficulty_aerialway_name">Vía aérea</string>
     <string name="dialogs_and_notifications_descr">Controla las ventanas emergentes, diálogos y notificaciones.</string>
     <string name="add_new_profile_q">¿Añadir el nuevo perfil «%1$s»\?</string>
-    <string name="save_heading">Incluir el rumbo</string>
+    <string name="save_heading">Incluir rumbo</string>
     <string name="save_heading_descr">Guarda el rumbo para cada punto de la traza durante la grabación.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
@@ -3849,9 +3849,9 @@
     <string name="use_native_pt">Desarrollo nativo del transporte público</string>
     <string name="use_native_pt_desc">Cambiar al cálculo de ruta Java (seguro) del transporte público</string>
     <string name="message_need_calculate_route_before_show_graph">Los datos de «%1$s» sólo están disponibles con los caminos, calcula una ruta usando «Ruta entre puntos» para ver los gráficos.</string>
-    <string name="gpx_upload_public_visibility_descr">\"Público\" significa que la traza se mostrará públicamente en tus trazas GPS y en las lista públicas de trazas GPS, y en la lista pública de trazas con marcas de tiempo en crudo. Los datos servidos vía la APi no referenciarán tu página de trazas. Las marcas de tiempo de los puntos no estarán disponibles a través de la API pública de GPS, y los puntos de la ruta no se ordenarán de manera cronológica.</string>
+    <string name="gpx_upload_public_visibility_descr">«Público» significa que la traza se mostrará públicamente en tus trazas GPS y en las lista públicas de trazas GPS y con marcas de tiempo en crudo. Los datos servidos a través de la API no harán referencia a tu página de trazas. Las marcas de tiempo de los puntos no estarán disponibles a través de la API pública de GPS, y los puntos de la ruta no se ordenarán de manera cronológica.</string>
     <string name="gpx_upload_private_visibility_descr">«Privado» significa que la traza no aparecerá en ninguna lista pública, pero el conjunto de puntos seguirá estando disponible en orden cronológico a través de la API pública de GPS y sin marcas de tiempo.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">\"Identificable\" significa que la traza se mostrará públicamente en tus trazas GPS y en las listas públicas de trazas GPS, es decir, otros usuarios podrán descargar la ruta en crudo y asociarla a tu nombre de usuario. Los puntos públicos con datos de marca de tiempo de la API de GPS servidos vía la API de puntos de rutas referenciarán la página original de tu ruta.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">«Identificable» significa que la traza se mostrará públicamente en tus trazas GPS y en las listas públicas de trazas GPS, es decir que otros usuarios podrán descargar la traza en bruto y asociarla a tu nombre de usuario. Los datos públicos servidos a través de la API con marcas de tiempo GPS harán referencia a la página original de la traza.</string>
     <string name="gpx_upload_trackable_visibility_descr">«Trazable» significa que la traza no aparece en ninguna lista pública, pero el conjunto de puntos procesados con marcas de tiempo (no se pueden asociar directamente con usted) estarán disponibles a través de la API pública de GPS.</string>
     <string name="lang_de_casual">Alemán (casual)</string>
     <string name="snowmobile_render_descr">Para caminos y senderos exclusivos de motos de nieve.</string>
@@ -4013,7 +4013,7 @@
     <string name="on_pause">En pausa</string>
     <string name="app_restart_required">Es necesario reiniciar la aplicación para aplicar algunos ajustes.</string>
     <string name="routing_attr_height_obstacles_description">La ruta podría evitar las fuertes subidas.</string>
-    <string name="quick_action_coordinates_widget_descr">Alternar para mostrar u ocultar el widget de coordenadas en el mapa.</string>
+    <string name="quick_action_coordinates_widget_descr">Un botón que muestra u oculta el widget de coordenadas en el mapa.</string>
     <string name="map_widget_distance_by_tap">Distancia al pulsar</string>
     <string name="latest_openstreetmap_update">Última actualización de OpenStreetMap disponible:</string>
     <string name="updated">Actualizado: %s</string>
@@ -4039,7 +4039,7 @@
     <string name="lost_data_warning">Se perderán todos los datos no guardados.</string>
     <string name="show_start_dialog">Mostrar el diálogo inicial</string>
     <string name="trip_recording_show_start_dialog_setting">Si se desactiva, la grabación será iniciada al pulsar el widget o el elemento del menú, saltándose el diálogo de confirmación.</string>
-    <string name="customize_route_line">Personalizar la línea de ruta</string>
+    <string name="customize_route_line">Personalizar línea de ruta</string>
     <string name="shared_string_route_line">Línea de ruta</string>
     <string name="specify_color_for_map_mode">Define el color para el modo de mapa «%1$s».</string>
     <string name="no_purchases">No tienes compras</string>
@@ -4078,8 +4078,8 @@
     <string name="user_points">Puntos de usuario</string>
     <string name="output">Salida</string>
     <string name="shared_string_feet">pies</string>
-    <string name="shared_string_min_height">Altura mínima</string>
-    <string name="shared_string_max_height">Altura máxima</string>
+    <string name="shared_string_min_height">Altura mín.</string>
+    <string name="shared_string_max_height">Altura máx.</string>
     <string name="shared_string_itinerary">Itinerario</string>
     <string name="release_4_0">• Copia de seguridad en la nube.
 \n
@@ -4219,7 +4219,7 @@
     <string name="routing_attr_prefer_tactile_paving_description">Preferir el pavimento táctil</string>
     <string name="shared_string_mini">mini</string>
     <string name="empty_category_name">Nombre de categoría vacío</string>
-    <string name="start_point">Comenzar</string>
+    <string name="start_point">Iniciar</string>
     <string name="nautical_depth">Profundidad náutica</string>
     <string name="routing_attr_prefer_horse_routes_name">Preferir rutas a caballo</string>
     <string name="select_nav_profile_dialog_message">El «Tipo de navegación» determina cómo se calculan las rutas, entre motores de navegación en línea o sin conexión.</string>
@@ -4375,7 +4375,7 @@
     <string name="osmand_cloud_authorize_descr">Nunca pierdas tus datos. Haz una copia de seguridad y restaura toda la información fácilmente.</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
     <string name="last_backup">Última copia de seguridad</string>
-    <string name="backup_and_restore">Respaldar y restaurar</string>
+    <string name="backup_and_restore">Copia de seguridad y restauración</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="routing_attr_avoid_low_emission_zone_name">Evitar zonas de baja emisión</string>
     <string name="routing_attr_avoid_low_emission_zone_description">Evita las zonas de baja emisión o zonas urbanas de atmósfera protegida</string>
@@ -4545,7 +4545,7 @@
     <string name="rendering_attr_showTrainRoutes_name">Rutas de tren</string>
     <string name="rendering_attr_showLightRailRoutes_name">Rutas de tren ligero</string>
     <string name="rendering_attr_showMonorailRoutes_name">Rutas de monorriel</string>
-    <string name="move_map_to_select_area">Mover el mapa al área seleccionada.</string>
+    <string name="move_map_to_select_area">Mover el mapa para elegir el área necesaria.</string>
     <string name="add_page">Añadir página</string>
     <string name="page_number">Página %1$s</string>
     <string name="top_widgets_panel">Panel superior</string>
@@ -4581,7 +4581,7 @@
     <string name="simulation_preview_mode_desc">La velocidad de la simulación será la máxima en secciones rectas y desacelerará solo en las intersecciones.</string>
     <string name="simulation_preview_mode_title">Modo de vista previa rápida</string>
     <string name="speed_mode">Modo de velocidad</string>
-    <string name="routeInfo_horse_scale_name">Dificultad de pistas a caballo</string>
+    <string name="routeInfo_horse_scale_name">Dificultad de los senderos ecuestres</string>
     <string name="rendering_attr_horse_scale_common_name">Común</string>
     <string name="rendering_attr_horse_scale_demanding_name">Demandante</string>
     <string name="routeInfo_horse_scale_description">Mostrar rutas de acuerdo a la dificultad de las pistas a caballo</string>
@@ -4591,7 +4591,27 @@
 \n
 \n• Grupos favoritos: define el aspecto predefinido de los nuevos puntos del grupo.
 \n
-\n• Correcciones: actualización de teselas automáticas de los mapas en línea.
+\n• Correcciones: actualización automática de teselas en los mapas en línea.
 \n
 \n</string>
+    <string name="simulation_real_mode_desc">En los tramos rectos, la velocidad será aproximada a la máxima permitida.
+\nEn las intersecciones, la simulación reducirá la velocidad.
+\nSe aplicarán penalizaciones adicionales en semáforos, señales de pare, etc.</string>
+    <string name="rendering_attr_showRunningRoutes_name">Rutas para correr</string>
+    <string name="rendering_attr_showRunningRoutes_description">Mostrar rutas para correr</string>
+    <string name="routing_attr_freeride_policy_allow_name">Permitir</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Avanzado</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Experto</string>
+    <string name="on_with_params">%1$s en %2$s</string>
+    <string name="shared_string_symbol">Símbolo</string>
+    <string name="no_widgets_descr">Añade uno o más widgets de la lista de widgets disponibles.</string>
+    <string name="no_widgets_here_yet">Todavía sin widgets aquí</string>
+    <string name="available_widgets">Widgets disponibles</string>
+    <string name="snackbar_page_removed">Se ha quitado «Página %1$s».</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">No salirse de la pista</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Preferir salirse de la pista</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Sin preferencias</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Sólo si es necesario</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Principiante</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Intermedio</string>
 </resources>
