@@ -1812,7 +1812,7 @@
     <string name="poi_diet_lactose_free_filter_yes">Laktózmentes</string>
     <string name="poi_diet_vegan_filter_yes">Vegán</string>
     <string name="poi_diet_vegetarian_filter_yes">Vegetáriánus</string>
-    <string name="poi_fuel_avia_type">Üzemanyagtípus (avia)</string>
+    <string name="poi_fuel_avia_type">Üzemanyagtípus (légi jármű)</string>
     <string name="poi_vending_type">Árusított termék</string>
     <string name="poi_bicycle_service">Kerékpáros szolgáltatás</string>
     <string name="poi_service_bicycle_pump_yes">Pumpa;Kerékpárpumpa;Motorkerékpár-pumpa</string>
@@ -4329,4 +4329,5 @@
     <string name="poi_board_type_nature">Természet</string>
     <string name="poi_food_no">Étel nincs</string>
     <string name="poi_flow_rate">Áramlási sebesség</string>
+    <string name="poi_golf_pin">Golfzászló</string>
 </resources>
