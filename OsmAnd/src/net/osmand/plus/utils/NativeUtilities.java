@@ -38,4 +38,11 @@ public class NativeUtilities {
 		int b = (color) & 0xFF;
 		return new ColorARGB((short)a, (short)r , (short)g, (short)b);
 	}
+
+	public static ColorARGB createColorARGB(@ColorInt int color, int alpha) {
+		int r = (color >> 16) & 0xFF;
+		int g = (color >> 8) & 0xFF;
+		int b = (color) & 0xFF;
+		return new ColorARGB((short)alpha, (short)r , (short)g, (short)b);
+	}
 }

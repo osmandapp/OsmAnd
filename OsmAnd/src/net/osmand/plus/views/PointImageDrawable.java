@@ -298,7 +298,7 @@ public class PointImageDrawable extends Drawable {
 	}
 
 	@Nullable
-	public Bitmap getBigMergedBitmap(float textScale) {
+	public Bitmap getBigMergedBitmap(float textScale, boolean history) {
 		setScale(textScale);
 		int width = getBigMergedBitmapWidth();
 		int height = getBigMergedBitmapHeight();
@@ -308,7 +308,7 @@ public class PointImageDrawable extends Drawable {
 		Bitmap bitmapResult = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmapResult);
 		//get ready bitmap into bitmapResult
-		drawPoint(canvas, width / 2.0f, height / 2.0f, scale, false);
+		drawPoint(canvas, width / 2.0f, height / 2.0f, scale, history);
 		return bitmapResult;
 	}
 
