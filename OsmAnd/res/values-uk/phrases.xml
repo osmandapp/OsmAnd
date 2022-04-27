@@ -212,7 +212,7 @@
     <string name="poi_tram_stop">Трамвайна зупинка</string>
     <string name="poi_public_transport_station">Станція громадського транспорту</string>
     <string name="poi_bus_station">Автобусна станція</string>
-    <string name="poi_railway_station">Залізничний вокзал</string>
+    <string name="poi_railway_station">Залізничний вокзал;Залізнична станція</string>
     <string name="poi_railway_platform">Залізнична платформа</string>
     <string name="poi_transport_construction">Транспортна будівля</string>
     <string name="poi_cheese">Крамниця сирів</string>
@@ -225,11 +225,11 @@
     <string name="poi_free_flying">Крамниця для стрибків з парашутом</string>
     <string name="poi_garden_furniture">Крамниця садових меблів</string>
     <string name="poi_fuel_biogas">Біогаз</string>
-    <string name="poi_halt">Залізнична зупинка</string>
+    <string name="poi_halt">Залізнична зупинка;Зупинка потяга</string>
     <string name="poi_subway_entrance">Вхід в метро</string>
     <string name="poi_subway_station">Так;Станція метро</string>
     <string name="poi_taxi">Стоянка таксі</string>
-    <string name="poi_aerodrome">Аеропорт</string>
+    <string name="poi_aerodrome">Аеропорт;Аеродром</string>
     <string name="poi_helipad">Майданчик для гелікоптера</string>
     <string name="poi_runway">Злітна смуга</string>
     <string name="poi_aeroway_terminal">Термінал</string>
