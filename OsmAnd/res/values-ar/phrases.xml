@@ -4329,4 +4329,5 @@
     <string name="poi_payment_mastercard_contactless_yes">بطاقة ماستركارد الذكية</string>
     <string name="poi_laundry_service_filter">خدمة غسيل الملابس</string>
     <string name="poi_dry_cleaning_filter">التنظيف الجاف</string>
+    <string name="poi_golf_pin">دبوس غولف</string>
 </resources>
