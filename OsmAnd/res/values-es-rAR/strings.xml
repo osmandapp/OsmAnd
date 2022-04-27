@@ -4604,4 +4604,14 @@
     <string name="available_widgets">Widgets disponibles</string>
     <string name="snackbar_page_removed">Se ha quitado «Página %1$s»</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">No salirse de la pista</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Intermedia</string>
+    <string name="release_4_2">• Rediseño de los widgets: nuevo aspecto, agrupación por páginas, reordenar y combinar como quieras.
+\n
+\n• Rutas de senderismo/ciclismo/viaje: pulsa el símbolo de la ruta y obtén información completa sobre ella.
+\n
+\n• Grupos favoritos: define el aspecto predefinido de los nuevos puntos del grupo.
+\n
+\n• Correcciones: actualización de teselas automáticas de los mapas en línea.
+\n
+\n</string>
 </resources>

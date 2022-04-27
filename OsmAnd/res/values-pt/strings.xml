@@ -4500,11 +4500,11 @@
     <string name="shared_string_not_used">Não usado</string>
     <string name="files_with_route_restrictions">Ficheiros com restrições de rota</string>
     <string name="navigate_point_format_swiss_grid">Rede Suíça (CH1903)</string>
-    <string name="rendering_attr_OSMMapperAssistantFixme_name">Etiquetas fixme</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Etiquetas \"fixme\"</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
-    <string name="rendering_attr_OSMMapperAssistantFixme_description">Mostrar etiquetas fixme</string>
-    <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetas de notas</string>
-    <string name="rendering_attr_OSMMapperAssistantNote_description">Mostrar etiquetas de notas</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Mostrar pedidos de correções (com etiqueta \"fixme\")</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetas \"note\"</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Mostrar observações ou comentários (etiqueta \"note\")</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ícones em ampliações baixas</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualização esquemática de ícones em ampliações baixas</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Túneis de cursos de água</string>
@@ -4601,4 +4601,22 @@
     <string name="map_widget_altitude">Altitude da localização atual</string>
     <string name="map_widget_distance_to_destination">Distância até ao destino</string>
     <string name="map_widget_current_speed">Velocidade atual</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Não sair da pista</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Apenas se for necessário</string>
+    <string name="routing_attr_freeride_policy_allow_name">Permitir</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Iniciante</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Avançado</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Especialista</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Intermédia</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Preferir fora de pista</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Sem preferência</string>
+    <string name="release_4_2">• Redesenho de widgets: nova aparência, agrupar por Páginas, alterar a ordem e combinar como desejar.
+\n
+\n • Caminhadas / ciclismo / rotas de viagem: toque no símbolo da rota e obtenha informações completas sobre a rota.
+\n
+\n • Grupos de favoritos: defina a aparência predefinida para novos pontos no grupo
+\n
+\n • Correções: atualização automática de mapas de mosaicos online
+\n
+\n</string>
 </resources>

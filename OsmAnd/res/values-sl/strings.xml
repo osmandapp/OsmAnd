@@ -3580,4 +3580,111 @@
     <string name="navigation_history">Zgodovina navigacije</string>
     <string name="history_preferences_descr">Beleženje zgodovine lahko onemogočiš za vsako vrsto zgodovine posebej.</string>
     <string name="clear_all_history">Počisti vso zgodovino</string>
+    <string name="routing_attr_only_permitted_streets_name">Izrecno dovoljene ulice</string>
+    <string name="routing_attr_prefer_horse_routes_description">Prednostno bodo izbrane konjske poti</string>
+    <string name="add_group_to_markers">Dodaj skupino na seznam označevalcev</string>
+    <string name="routeInfo_winter_ice_road_description">Obarvaj pot ali sled glede na zimsko klasifikacijo ceste.</string>
+    <string name="routeInfo_tracktype_description">Obarvaj pot ali sled glede na sestavo njene površine. Običajno se uporablja, kadar je cestno omrežje večinoma neasfaltirano.</string>
+    <string name="service_is_not_available_please_try_later">Storitev ni na voljo. Poskusi znova pozneje.</string>
+    <string name="no_activity_for_intent">Namesti aplikacijo, ki lahko izvede to dejanje.</string>
+    <string name="history_is_disabled_descr">Omogoči zgodovino za hitrejši dostop do zadnjih uporabljenih rezultatov.</string>
+    <string name="start_point">Začni</string>
+    <string name="routing_attr_only_permitted_streets_description">Uporabljaj samo ulice, ki so izrecno dovoljene</string>
+    <string name="routing_attr_only_permitted_ways_name">Izrecno dovoljene poti</string>
+    <string name="routing_attr_allow_gate_name">Dovoli uporabo vrat</string>
+    <string name="routing_attr_allow_gate_description">Dovoli uporabo vrat</string>
+    <string name="routing_attr_prefer_horse_routes_name">Prednostno vodi po konjskih poteh</string>
+    <string name="horseback_riding">Jahanje</string>
+    <string name="travel_route_types">Vrste poti</string>
+    <string name="shared_string_mini">mini</string>
+    <string name="sample_wikivoyage">Primer Wikivoyage</string>
+    <string name="shared_string_files">Datoteke</string>
+    <string name="mapillary_menu_filter_description_new">Filtriranje slik po datumu in uporabniku. Filtri so dejavni le pri največji povečavi.</string>
+    <string name="remove_group_from_markers">Odstrani skupino s seznama označevalcev</string>
+    <string name="routeInfo_roadClass_description">Obarvaj pot ali sled glede na klasifikacijo ceste.</string>
+    <string name="routeInfo_surface_description">Navedi informacije o fizični površini cest/pešpoti.</string>
+    <string name="no_items_of_type_message">Nimaš nobenih elementov te vrste</string>
+    <string name="grey_color_undefined">Deli brez podatkov so sivi.</string>
+    <string name="use_login_and_password">Uporabi uporabniško ime in geslo</string>
+    <string name="benefits_for_contributors">Ugodnosti za aktivne sodelavce OSM</string>
+    <string name="map_updates_for_mappers">Posodobitve zemljevidov za kartografe</string>
+    <string name="backup_error_no_subscription">Ni nobene naročnine</string>
+    <string name="reset_to_original">Ponastavi na prvotno vrednost</string>
+    <string name="online_maps_searching_descr">Iskanje na spletu …</string>
+    <string name="online_maps_required_descr">Na žalost OsmAnd ni mogel določiti poti glede na izbrane nastavitve.
+\n
+\nMorda nekateri zemljevidi niso naloženi, lahko zaženeš spletno preverjanje za potrebne zemljevide.</string>
+    <string name="index_name_antarctica">Antarktika</string>
+    <string name="markers_history_is_disabled_descr">Omogoči zgodovino, da si zapomni seznam obiskanih oznak zemljevida.</string>
+    <string name="routing_attr_prefer_unpaved_name">Prednostno vodi po neasfaltiranih cestah</string>
+    <string name="is_disabled">%1$s je onemogočen</string>
+    <string name="amz_manage_subscription_descr">Upravljaj naročnino s pomočjo aplikacije Amazon ali spletnega mesta Amazon.</string>
+    <string name="cancel_anytime_in_amazon_app">Prekliči jo kadarkoli prek aplikacije Amazon</string>
+    <string name="empty_category_name">Prazno ime kategorije</string>
+    <string name="osm_live_payment_subscription_management_amz">Plačilo se zaračuna iz tvojega Amazon računa ob potrditvi nakupa.
+\n
+\nPodaljša se, razen če ni preklicana pred izbranim obdobjem podaljšanja.
+\n
+\nSvoje naročnine lahko kadar koli upravljaš ali prekličeš v nastavitvah Amazona.</string>
+    <string name="connect_track_points_as">Poveži točke poti</string>
+    <string name="map_updates_are_unavailable_yet">Posodobitve zemljevidov še niso na voljo. :-(</string>
+    <string name="not_enough_contributions_descr">Za dostop do neomejenih urnih posodobitev zemljevida je potreba, da si v zadnjih dveh mesecih %1$s opraviti najmanj %2$s sprememb.</string>
+    <string name="shared_string_contributions">Prispevki</string>
+    <string name="offline_maps_required_descr">Nekateri zemljevidi brez povezave, potrebni za to pot, manjkajo.</string>
+    <string name="online_direct_line_maps_link">Preveri potrebne zemljevide.</string>
+    <string name="benefits_for_contributors_secondary_descr">Prijavi se v OpenStreetMap in preveri, ali si upravičen do neomejenih mesečnih in urnih posodobitev zemljevidov.</string>
+    <string name="benefits_for_contributors_primary_descr">Aktivni sodelavci OpenStreetMap.org so lahko upravičeni do neomejenih urnih posodobitev zemljevida.</string>
+    <string name="setting_supported_by_style">To nastavitev zagotavlja slog zemljevida »%1$s«</string>
+    <string name="travel_routes">Turistične poti</string>
+    <string name="direct_line_maps_required_descr">Izračun poti traja dlje kot običajno.
+\n
+\nMorda nekateri zemljevidi niso naloženi.</string>
+    <string name="routing_attr_prefer_tactile_paving_name">Prednostno vodi po poteh s taktilnim tlakovanjem</string>
+    <string name="routeInfo_smoothness_description">Klasifikacija cest/pešpoti za vozila na kolesih po manevrski sposobnosti, zlasti glede pravilnosti/naravnanosti površine.</string>
+    <string name="routing_attr_prefer_tactile_paving_description">Prednostno bodo izbrane poti s taktilnim tlakovanjem</string>
+    <string name="routing_attr_prefer_unpaved_description">Prednostno bodo izbrane neasfaltirane ceste</string>
+    <string name="purchases_restored">Nakupi obnovljeni</string>
+    <string name="clear_all_history_warning">Želiš počisti vse vnose zgodovine aplikacij, vključno z zgodovino iskanja, navigacije in oznak\?</string>
+    <string name="pro_features">Pro funkcije</string>
+    <string name="contributions_may_calculate_with_delay">Izračun prispevkov lahko traja več ur.</string>
+    <string name="enough_contributions_descr">Čestitamo, zagotovil si dovolj prispevkov dodanih na OpenStreetMap in zdaj lahko uživaš v neomejenih posodobitvah zemljevida OsmAnd!</string>
+    <string name="available_until">Na voljo do %1$s</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Prednostno bodo izbrane pohodniške poti</string>
+    <string name="voice_prompts_timetable">Časi glasovnih pozivov</string>
+    <string name="routing_attr_only_permitted_ways_description">Uporabljaj samo izrecno dovoljene poti (gozdne poti, steze itd.)</string>
+    <string name="routing_attr_prefer_hiking_routes_name">Prednostno vodi po pohodniških poteh</string>
+    <string name="release_4_2">• Preoblikovanje pripomočkov: nov videz in občutek, združevanje po straneh, spreminjanje vrstnega reda in združevanje po želji.
+\n
+\n• Pohodniške / kolesarske / potovalne poti: s tapom na simbol poti se prikažejo vse informacije o poti.
+\n
+\n• Priljubljene skupine: nastavitev privzetega videza za nove točke v skupini.
+\n
+\n• Popravki: samodejno posodabljanje spletnih zemljevidov s ploščicami.
+\n
+\n</string>
+    <string name="release_4_1">• Dodana začetna podpora za Android Auto
+\n
+\n• Posodobitev uporabniškega vmesnika za iskanje koordinat UTM
+\n
+\n• GPS filter za GPX sledi
+\n
+\n• Gradnik za nadmorsko višino (Pro)
+\n
+\n• Priljubljeni: dodana možnost ogleda nedavno uporabljenih ikon
+\n
+\n• Načrtovanje poti: po zagonu se bo uporabil izbrani profil
+\n
+\n• Fiksna Mapillary plast, vtičnik je zdaj privzeto onemogočen
+\n
+\n• Dodan pogled za upravljanje vse zgodovine v aplikaciji
+\n
+\n• Usmeritev zemljevida se ne ponastavi, ko se aplikacija ponovno zažene
+\n
+\n• Izboljšano upodabljanje oznake SRTM višin
+\n
+\n• Popravljeni napisi arabskega zemljevida
+\n
+\n• Odpravljene različne težave z usmerjanje
+\n
+\n</string>
 </resources>

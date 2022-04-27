@@ -117,7 +117,7 @@
     <string name="unit_of_speed_system">Мерна единица за скорост</string>
     <string name="unit_of_speed_system_descr">Дефиниране на единица за скорост.</string>
     <string name="unit_of_length">Мерни единици за дължина</string>
-    <string name="unit_of_length_descr">Промяна на мерната единица за разстояние</string>
+    <string name="unit_of_length_descr">Промяна на мерната единица за разстояние.</string>
     <string name="units_and_formats">Мерни единици и формати</string>
     <string name="time_zone">Часова зона</string>
     <string name="time_zone_descr">Изберете часовата зона, която да се показва в съобщенията за местоположението ви.</string>

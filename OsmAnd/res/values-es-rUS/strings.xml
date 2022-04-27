@@ -4578,4 +4578,39 @@
     <string name="rendering_attr_horse_scale_common_name">Común</string>
     <string name="rendering_attr_horse_scale_demanding_name">Exigente</string>
     <string name="rendering_attr_horse_scale_difficult_name">Difícil</string>
+    <string name="map_widget_distance_to_destination">Distancia al destino</string>
+    <string name="map_widget_current_speed">Velocidad actual</string>
+    <string name="apply_to_existing_points_descr">¿Aplicar cambios a los puntos existentes del grupo o sólo a los nuevos\?</string>
+    <string name="apply_to_existing_favorites_descr">¿Aplicar cambios a los puntos favoritos existentes del grupo o sólo a los nuevos\?</string>
+    <string name="snackbar_page_removed">Se ha quitado «Página %1$s»</string>
+    <string name="map_widget_altitude">Altitud</string>
+    <string name="apply_to_existing">Aplicar a existentes</string>
+    <string name="apply_only_to_new_favorites">Aplicar sólo a favoritos nuevos</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">No salirse de la pista</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Sólo si es necesario</string>
+    <string name="routing_attr_freeride_policy_allow_name">Permitir</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Preferir salirse de la pista</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Sin preferencias</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Principiante</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Avanzado</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Experto</string>
+    <string name="on_with_params">%1$s en %2$s</string>
+    <string name="shared_string_symbol">Símbolo</string>
+    <string name="no_widgets_descr">Añade uno o más widgets de la lista de widgets disponibles.</string>
+    <string name="no_widgets_here_yet">Todavía sin widgets aquí</string>
+    <string name="available_widgets">Widgets disponibles</string>
+    <string name="add_page">Añadir página</string>
+    <string name="page_number">Página %1$s</string>
+    <string name="change_default_appearance">Cambiar el aspecto predefinido</string>
+    <string name="apply_only_to_new_points">Aplicar sólo a puntos nuevos</string>
+    <string name="release_4_2">• Rediseño de los widgets: nuevo aspecto, agrupación por páginas, reordenar y combinar como quieras.
+\n
+\n• Rutas de senderismo/ciclismo/viaje: pulsa el símbolo de la ruta y obtén información completa sobre ella.
+\n
+\n• Grupos favoritos: define el aspecto predefinido de los nuevos puntos del grupo.
+\n
+\n• Correcciones: actualización de teselas automáticas de los mapas en línea.
+\n
+\n</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Intermedia</string>
 </resources>

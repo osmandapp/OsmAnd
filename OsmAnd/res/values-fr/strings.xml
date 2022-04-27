@@ -4598,4 +4598,14 @@
     <string name="routing_attr_freeride_policy_prefer_offpiste_name">Privilégier le hors-piste</string>
     <string name="routing_attr_difficulty_preference_beginner_name">Débutant</string>
     <string name="routing_attr_difficulty_preference_expert_name">Expert</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Intermédiaire</string>
+    <string name="release_4_2">• Refonte graphique des Widgets : nouveau \"Look &amp; Feel\", modification de l\'ordre d\'affichage à volonté
+\n
+\n • Itinéraires Rando / Vélo : appuyez sur le symbole de l\'itinéraire pour afficher plus d\'informations
+\n
+\n • Groupes de favoris : il est maintenant possible de modifier l\'apparence par défaut des nouveaux points du groupe
+\n
+\n • Corrigé : mise à jour automatique des tuiles en ligne.
+\n
+\n</string>
 </resources>

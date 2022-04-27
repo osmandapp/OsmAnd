@@ -4673,4 +4673,14 @@
     <string name="no_widgets_descr">أضف أداة واحدة أو أكثر من قائمة الأدوات المتاحة.</string>
     <string name="snackbar_page_removed">تمت إزالة \"الصفحة %1$s\".</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">لاتذهب للطرق الزلقة</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">متوسط</string>
+    <string name="release_4_2">• إعادة تصميم الويدجت: الشكل والمظهر الجديد ، والمجموعة حسب الصفحات ، وتغيير الترتيب والجمع بينهما كما تريد.
+\n
+\n• مسارات المشي لمسافات طويلة / ركوب الدراجات / السفر: اضغط على رمز الطريق واحصل على معلومات كاملة حول الطريق.
+\n
+\n• المجموعات المفضلة: تعيين المظهر الافتراضي للنقاط الجديدة في المجموعة
+\n
+\n• إصلاحات: التحديث التلقائي لخرائط البلاط عبر الإنترنت
+\n
+\n</string>
 </resources>
