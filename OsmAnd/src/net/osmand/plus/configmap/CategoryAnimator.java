@@ -86,7 +86,7 @@ public class CategoryAnimator {
 				if (isExpanding) {
 					runningAnimations.remove(category);
 				} else {
-					onShowDescriptionAnimation(minValue, maxValue, (int) (duration * 0.7f));
+					onShowDescriptionAnimation(minValue, maxValue, duration);
 				}
 			}
 		});
@@ -104,7 +104,7 @@ public class CategoryAnimator {
 		itemsContainer.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		maxListHeight = itemsContainer.getMeasuredHeight();
 
-		maxDuration = getInteger(android.R.integer.config_mediumAnimTime);
+		maxDuration = getInteger(isExpanding ? android.R.integer.config_mediumAnimTime : android.R.integer.config_shortAnimTime);
 	}
 
 	private void onBeforeAnimation() {
