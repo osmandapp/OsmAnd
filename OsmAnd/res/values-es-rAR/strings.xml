@@ -302,7 +302,7 @@
     <string name="lang_al">Albanés</string>
     <string name="lang_ar">Árabe</string>
     <string name="lang_hy">Armenio</string>
-    <string name="lang_eu">Euskera</string>
+    <string name="lang_eu">Vasco</string>
     <string name="lang_be">Bielorruso</string>
     <string name="lang_bs">Bosnio</string>
     <string name="lang_bg">Búlgaro</string>
@@ -2167,7 +2167,7 @@
     <string name="file_can_not_be_moved">No se pudo mover el archivo.</string>
     <string name="shared_string_move">Mover</string>
     <string name="shared_string_gpx_tracks">Trazas</string>
-    <string name="shared_string_time_moving">Tiempo moviéndose</string>
+    <string name="shared_string_time_moving">Tiempo en movimiento</string>
     <string name="shared_string_time_span">Duración</string>
     <string name="shared_string_max">Máx</string>
     <string name="shared_string_start_time">Hora de inicio</string>
@@ -3846,8 +3846,8 @@
     <string name="enter_text_separated">Ingresa etiquetas separadas por comas.</string>
     <string name="gpx_upload_trackable_visibility_descr">«Trazable» significa que la traza no aparece en ninguna lista pública, pero el conjunto de puntos procesados con marcas de tiempo (no se pueden asociar directamente con usted) estarán disponibles a través de la API pública de GPS.</string>
     <string name="gpx_upload_private_visibility_descr">«Privado» significa que la traza no aparecerá en ninguna lista pública, pero el conjunto de puntos seguirá estando disponible en orden cronológico a través de la API pública de GPS y sin marcas de tiempo.</string>
-    <string name="gpx_upload_public_visibility_descr">«Público» significa que la traza se mostrará públicamente en tu listado de trazas y en los listados de trazas GPS públicas con marcas de tiempo en bruto. Los datos servidos a través de la API no harán referencia a su página de trazas. Las marcas de tiempo de los puntos de la traza no estarán disponible a través de la API pública de GPS, aunque los puntos se ordenan cronológicamente.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">«Identificable» significa que la traza se mostrará públicamente en tu listado de trazas y en el listado de trazas GPS públicas, es decir que otros usuarios podrán descargar la traza en bruto y asociarla con su nombre de usuario. Los datos servidos a través de la API de conjunto de puntos hará referencia a la página original de la traza.</string>
+    <string name="gpx_upload_public_visibility_descr">«Público» significa que la traza se mostrará públicamente en tus trazas GPS y en las lista públicas de trazas GPS y con marcas de tiempo en crudo. Los datos servidos a través de la API no harán referencia a tu página de trazas. Las marcas de tiempo de los puntos no estarán disponibles a través de la API pública de GPS, y los puntos de la ruta no se ordenarán de manera cronológica.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">«Identificable» significa que la traza se mostrará públicamente en tus trazas GPS y en las listas públicas de trazas GPS, es decir que otros usuarios podrán descargar la traza en bruto y asociarla a tu nombre de usuario. Los datos públicos servidos a través de la API con marcas de tiempo GPS harán referencia a la página original de la traza.</string>
     <string name="osm_edit_close_note">Cerrar nota de OSM</string>
     <string name="osm_edit_comment_note">Comentar nota de OSM</string>
     <string name="osm_login_descr">Inicia sesión con las credenciales de OAuth u OpenStreetMap.</string>
@@ -4012,7 +4012,7 @@
     <string name="on_pause">En pausa</string>
     <string name="app_restart_required">Es necesario reiniciar la aplicación para aplicar algunos ajustes.</string>
     <string name="routing_attr_height_obstacles_description">La ruta podría evitar las fuertes subidas.</string>
-    <string name="quick_action_coordinates_widget_descr">Alternar para mostrar u ocultar el widget de coordenadas en el mapa.</string>
+    <string name="quick_action_coordinates_widget_descr">Un botón que muestra u oculta el widget de coordenadas en el mapa.</string>
     <string name="latest_openstreetmap_update">Última actualización de OpenStreetMap disponible:</string>
     <string name="updated">Actualizado: %s</string>
     <string name="last_time_checked">Última comprobación: %s</string>
@@ -4611,7 +4611,7 @@
 \n
 \n• Grupos favoritos: define el aspecto predefinido de los nuevos puntos del grupo.
 \n
-\n• Correcciones: actualización de teselas automáticas de los mapas en línea.
+\n• Correcciones: actualización automática de teselas en los mapas en línea.
 \n
 \n</string>
 </resources>
