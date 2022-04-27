@@ -45,12 +45,12 @@ final public class TransportLinesMenu {
 		}
 	}
 
-	public void setTransportEnable(@NonNull MapActivity mapActivity, @NonNull String attrName, boolean enabled) {
+	public void toggleTransportType(@NonNull MapActivity mapActivity, @NonNull String attrName, boolean enable) {
 		ApplicationMode appMode = getAppMode();
 		CommonPreference<Boolean> preference = getTransportPreference(attrName);
-		preference.setModeValue(appMode, enabled);
+		preference.setModeValue(appMode, enable);
 		List<String> idsToSave = new ArrayList<>();
-		for (CommonPreference<Boolean> p : getTransportPreferences(app)) {
+		for (CommonPreference<Boolean> p : getTransportPreferences()) {
 			if (p.getModeValue(appMode)) {
 				idsToSave.add(p.getId());
 			}
@@ -65,18 +65,18 @@ final public class TransportLinesMenu {
 		return settings.DISPLAYED_TRANSPORT_SETTINGS.containsValue(getAppMode(), preference.getId());
 	}
 
-	public void refreshMap(@NonNull MapActivity mapActivity) {
-		mapActivity.refreshMapComplete();
-		MapLayers mapLayers = mapActivity.getMapLayers();
-		mapLayers.updateLayers(mapActivity);
-	}
-
 	public boolean isShowAnyTransport() {
 		return isShowAnyTransport(getAppMode());
 	}
 
 	public boolean isShowAnyTransport(@NonNull ApplicationMode appMode) {
-		return isShowAnyTransport(app, appMode);
+		List<CommonPreference<Boolean>> preferences = getTransportPreferences();
+		for (CommonPreference<Boolean> preference : preferences) {
+			if (preference.getModeValue(appMode)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public int getTransportIcon(@NonNull String attrName) {
@@ -116,39 +116,32 @@ final public class TransportLinesMenu {
 		refreshMap(mapActivity);
 	}
 
+	private void refreshMap(@NonNull MapActivity mapActivity) {
+		mapActivity.refreshMapComplete();
+		MapLayers mapLayers = mapActivity.getMapLayers();
+		mapLayers.updateLayers(mapActivity);
+	}
+
 	private ApplicationMode getAppMode() {
 		return settings.getApplicationMode();
+	}
+
+	private List<CommonPreference<Boolean>> getTransportPreferences() {
+		List<CommonPreference<Boolean>> preferences = new ArrayList<>();
+		for (RenderingRuleProperty property : getTransportRules(app)) {
+			CommonPreference<Boolean> preference = getTransportPreference(property.getAttrName());
+			preferences.add(preference);
+		}
+		return preferences;
 	}
 
 	private CommonPreference<Boolean> getTransportPreference(@NonNull String attrName) {
 		return settings.getCustomRenderBooleanProperty(attrName);
 	}
 
-	public static boolean isShowAnyTransport(@NonNull OsmandApplication app) {
-		ApplicationMode appMode = app.getSettings().getApplicationMode();
-		return isShowAnyTransport(app, appMode);
-	}
-
-	public static boolean isShowAnyTransport(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode) {
-		List<CommonPreference<Boolean>> preferences = getTransportPreferences(app);
-		for (CommonPreference<Boolean> preference : preferences) {
-			if (preference.getModeValue(appMode)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	private static List<CommonPreference<Boolean>> getTransportPreferences(@NonNull OsmandApplication app) {
-		List<RenderingRuleProperty> rules = getTransportRules(app);
-		List<CommonPreference<Boolean>> preferences = new ArrayList<>();
-		for (RenderingRuleProperty property : rules) {
-			String attrName = property.getAttrName();
-			OsmandSettings settings = app.getSettings();
-			CommonPreference<Boolean> pref = settings.getCustomRenderBooleanProperty(attrName);
-			preferences.add(pref);
-		}
-		return preferences;
+	public static void showTransportsDialog(@NonNull MapActivity mapActivity) {
+		DashboardOnMap dashboard = mapActivity.getDashboard();
+		dashboard.setDashboardVisibility(true, DashboardType.TRANSPORT_LINES);
 	}
 
 	public static List<RenderingRuleProperty> getTransportRules(OsmandApplication app) {
@@ -159,10 +152,5 @@ final public class TransportLinesMenu {
 			}
 		}
 		return rules;
-	}
-
-	public static void showTransportsDialog(@NonNull MapActivity mapActivity) {
-		DashboardOnMap dashboard = mapActivity.getDashboard();
-		dashboard.setDashboardVisibility(true, DashboardType.TRANSPORT_LINES);
 	}
 }

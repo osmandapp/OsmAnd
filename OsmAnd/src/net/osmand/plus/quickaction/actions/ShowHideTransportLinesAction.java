@@ -59,7 +59,8 @@ public class ShowHideTransportLinesAction extends QuickAction {
 	}
 
 	@Override
-	public boolean isActionWithSlash(OsmandApplication application) {
-		return TransportLinesMenu.isShowAnyTransport(application);
+	public boolean isActionWithSlash(OsmandApplication app) {
+		TransportLinesMenu menu = new TransportLinesMenu(app);
+		return menu.isShowAnyTransport();
 	}
 }

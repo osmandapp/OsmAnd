@@ -96,7 +96,7 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 				false,
 				v -> {
 					boolean enabled = !transportMenu.isTransportEnabled(type.getAttrName());
-					transportMenu.setTransportEnable(mapActivity, type.getAttrName(), enabled);
+					transportMenu.toggleTransportType(mapActivity, type.getAttrName(), enabled);
 				}
 		);
 	}
@@ -105,20 +105,20 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 		ViewGroup list = view.findViewById(R.id.transport_toggles_list);
 		List<RenderingRuleProperty> rules = getTransportRules(app);
 		for (int i = 0; i < rules.size(); i++) {
-			RenderingRuleProperty p = rules.get(i);
-			String attrName = p.getAttrName();
+			RenderingRuleProperty property = rules.get(i);
+			String attrName = property.getAttrName();
 			if (!TransportType.TRANSPORT_STOPS.getAttrName().equals(attrName)) {
 				View view = themedInflater.inflate(R.layout.bottom_sheet_item_with_switch, list, false);
 				boolean showDivider = i < rules.size() - 1;
 				setupButton(
 						view,
 						transportMenu.getTransportIcon(attrName),
-						transportMenu.getTransportName(attrName, p.getName()),
+						transportMenu.getTransportName(attrName, property.getName()),
 						transportMenu.isTransportEnabled(attrName),
 						showDivider,
 						v -> {
 							boolean enabled = !transportMenu.isTransportEnabled(attrName);
-							transportMenu.setTransportEnable(mapActivity, attrName, enabled);
+							transportMenu.toggleTransportType(mapActivity, attrName, enabled);
 						}
 				);
 				list.addView(view);
