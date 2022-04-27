@@ -4592,7 +4592,7 @@
     <string name="apply_to_existing">Применить к существующим</string>
     <string name="add_page">Добавить страницу</string>
     <string name="page_number">Страница %1$s</string>
-    <string name="map_widget_altitude">Высота текущего местоположения</string>
+    <string name="map_widget_altitude">Текущая высота</string>
     <string name="map_widget_distance_to_destination">Расстояние до пункта назначения</string>
     <string name="map_widget_current_speed">Текущая скорость</string>
     <string name="shared_string_symbol">Символ</string>

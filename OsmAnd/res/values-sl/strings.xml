@@ -20,8 +20,8 @@
     <string name="navigate_point_latitude">Zemljepisna širina</string>
     <string name="navigate_point_longitude">Zemljepisna dolžina</string>
     <string name="navigate_point_format_D">DDD.DD</string>
-    <string name="navigate_point_format_DM">DDD MM.MM</string>
-    <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
+    <string name="navigate_point_format_DM">DDD MM.MMM</string>
+    <string name="navigate_point_format_DMS">DDD MM SS.S</string>
     <string name="shared_string_show_on_map">Pokaži na zemljevidu</string>
     <string name="search_address_top_text">Izberi naslov</string>
     <string name="search_address_region">Država</string>
@@ -277,7 +277,7 @@
     <string name="auto_zoom_map_descr">Približevanje zemljevida glede na hitrost vožnje (zemljevid se usklajuje s trenutnim mestom).</string>
     <string name="auto_zoom_map">Samodejno približevanje zemljevida</string>
     <string name="snap_to_road">Pripni na cesto</string>
-    <string name="osmand_short_description_80_chars">OsmAnd je odprtokodni program za navigacijo z uporabo shranjenih ali spletnih zemljevidov</string>
+    <string name="osmand_short_description_80_chars">Globalno mobilno ogledovanje zemljevidov in navigacija za zemljevide OSM z in brez povezave</string>
     <string name="osmand_plus_short_description_80_chars">OsmAnd je odprtokodni program za navigacijo z uporabo shranjenih ali spletnih zemljevidov</string>
     <string name="filterpoi_activity">Ustvari filter POI</string>
     <string name="recalculate_route_to_your_location">Način prevoza:</string>
@@ -1711,7 +1711,7 @@
     <string name="first_usage_item_description">Kako prejeti zemljevide in prikrojiti osnovne nastavitve.</string>
     <string name="navigation_item_description">Prilagajanje možnosti načrtovanja poti in navigacije.</string>
     <string name="faq_item">Pogosta vprašanja</string>
-    <string name="faq_item_description">Pogosto zastavljena vprašanja</string>
+    <string name="faq_item_description">Pogosto zastavljena vprašanja.</string>
     <string name="map_viewing_item">Pogled zemljevida</string>
     <string name="search_on_the_map_item">Iskanje po zemljevidu</string>
     <string name="planning_trip_item">Načrtovanje potovanj</string>
@@ -2957,7 +2957,7 @@
     <string name="select_base_profile_dialog_message">Profil zasnujte na podlagi enega izmed osnovnih profilov, s katerimi so določene osnovne nastavitve, na primer privzet nabor gradnikov, enoti za hitrost in razdaljo. Osnovni profili, ki so privzeto na voljo so:</string>
     <string name="select_nav_profile_dialog_title">Izbor vrste navigacije</string>
     <string name="base_profile_descr_car">Za avtomobile, motorje, tovornjake ...</string>
-    <string name="base_profile_descr_bicycle">Za gorska kolesa, kolesa z motorjem, ježo s konji</string>
+    <string name="base_profile_descr_bicycle">Za gorska kolesa, motorna kolesa, ježo s konji</string>
     <string name="base_profile_descr_pedestrian">Za hojo, pohodništvo, tek ...</string>
     <string name="base_profile_descr_public_transport">Za uporabo javnega prevoza</string>
     <string name="base_profile_descr_boat">Za potovanje z ladjo, jadranje, veslanje ...</string>
@@ -3187,9 +3187,9 @@
     <string name="shared_string_downloading_formatted">Poteka prejemanje %s</string>
     <string name="rendering_value_thick_name">Debelo</string>
     <string name="desert_render_descr">Za puščave in druga redkeje naseljena območja. Prikazuje več podrobnosti na merilu pogleda.</string>
-    <string name="select_navigation_icon">Izbor navigacijske ikone</string>
-    <string name="select_map_icon">Izbor ikone zemljevida</string>
-    <string name="delete_profiles_descr">Po uveljavitvi bodo izbrisani profili izgubljeni za vedno.</string>
+    <string name="select_navigation_icon">Ikona položaja med premikanjem</string>
+    <string name="select_map_icon">Ikona položaja v mirovanju</string>
+    <string name="delete_profiles_descr">S tapom na »Uporabi«, se bodo odstranjeni profili trajno izbrisali.</string>
     <string name="master_profile">Glavni profil</string>
     <string name="select_color">Izbor barve</string>
     <string name="edit_profiles">Uredi profile</string>
@@ -3198,7 +3198,7 @@
     <string name="reorder_profiles">Uredi seznam profilov</string>
     <string name="selected_profile">Izbrani profil</string>
     <string name="reset_all_profile_settings_descr">Počisti vse nastavitve profila na stanje takoj po namestitvi.</string>
-    <string name="reset_all_profile_settings">Ali želite vse nastavitve profila povrniti na privzete vrednosti\?</string>
+    <string name="reset_all_profile_settings">Ali želiš ponastaviti vse nastavitve profila\?</string>
     <string name="shared_string_app_default_w_val">Programsko privzeto (%s)</string>
     <string name="profile_type_custom_string">Profil po meri</string>
     <string name="shared_string_angle_param">Kot: %s°</string>
@@ -3438,7 +3438,7 @@
     <string name="simulation_preview_mode_title">Način hitrega predogleda</string>
     <string name="rendering_attr_showFitnessTrails_description">Pokaži fitnes steze</string>
     <string name="stop_and_exit">Ustavi in zapusti</string>
-    <string name="shared_string_complete">Dokončanj</string>
+    <string name="shared_string_complete">dokončaj</string>
     <string name="zoom_levels_difference_description">Velika razlika med stopnjami povečave lahko poveča velikost prenesenih podatkov.</string>
     <string name="estimated_download_size">Ocenjena velikost prenosa</string>
     <string name="number_of_tiles">Število ploščic</string>
@@ -3642,7 +3642,7 @@
     <string name="routing_attr_prefer_tactile_paving_name">Prednostno vodi po poteh s taktilnim tlakovanjem</string>
     <string name="routeInfo_smoothness_description">Klasifikacija cest/pešpoti za vozila na kolesih po manevrski sposobnosti, zlasti glede pravilnosti/naravnanosti površine.</string>
     <string name="routing_attr_prefer_tactile_paving_description">Prednostno bodo izbrane poti s taktilnim tlakovanjem</string>
-    <string name="routing_attr_prefer_unpaved_description">Prednostno bodo izbrane neasfaltirane ceste</string>
+    <string name="routing_attr_prefer_unpaved_description">Prednostno bodo izbrane neasfaltirane ceste.</string>
     <string name="purchases_restored">Nakupi obnovljeni</string>
     <string name="clear_all_history_warning">Želiš počisti vse vnose zgodovine aplikacij, vključno z zgodovino iskanja, navigacije in oznak\?</string>
     <string name="pro_features">Pro funkcije</string>
@@ -3687,4 +3687,259 @@
 \n• Odpravljene različne težave z usmerjanje
 \n
 \n</string>
+    <string name="shared_string_grade">Razred</string>
+    <string name="shared_string_progress">Napredek</string>
+    <string name="shared_string_not_included">Ni vključeno</string>
+    <string name="in_grace_period">V roku odloga plačila</string>
+    <string name="on_hold">Na čakanju</string>
+    <string name="save_track_to_gpx_globally">Beleženje sledi v datoteko GPX</string>
+    <string name="show_gpx">Sledi</string>
+    <string name="layer_gpx_layer">Sledi</string>
+    <string name="backup_no_internet_descr">Preveri internetno povezavo in znova prenesi.</string>
+    <string name="shared_string_purchased">Kupljeno</string>
+    <string name="logout_from_osmand_cloud_decsr">Odjava\?
+\nZa varnostno kopiranje ali obnovitev podatkov, bo potrebna ponovna prijava.</string>
+    <string name="backup_deleted_all_data">Izbrisani vsi podatki.</string>
+    <string name="backup_deleting_all_data">Brisanje vseh podatkov …</string>
+    <string name="shared_string_view_all">Poglej vse</string>
+    <string name="backup_delete_types_descr">Želiš izbrisati vse podatke za zastarele vrste podatkov iz OsmAnd Cloud\?</string>
+    <string name="terrain_maps">Zemljevidi terena</string>
+    <string name="provided_by">Priskrbljeno od %1$s</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Izogibaj se območjem z nizkimi emisijami</string>
+    <string name="route_line_use_map_style_color">Uporabi privzeto barvo sloga zemljevida (%1$s).</string>
+    <string name="shared_string_downhill">Navzdol</string>
+    <string name="shared_string_min_height">Min. višina</string>
+    <string name="route_line_use_gradient_coloring">Črta poti je obarvana glede na naklon.</string>
+    <string name="language_description">Izberite želeni jezik in vrsto glasovnega vodenja.</string>
+    <string name="output">Izhodni podatki</string>
+    <string name="srtm_download_single_help_message">Izberi varianto. Datoteko boš moral ponovno prenesti, za spremembo oblike zapisa.</string>
+    <string name="shared_string_feet">čevlji</string>
+    <string name="srtm_download_list_help_message">OsmAnd zagotavlja podatke o izohipsah v metrih in čevljih. Datoteko boš moral znova prenesti, za spremembo oblike.</string>
+    <string name="srtm_unit_format">Različica enote izohips</string>
+    <string name="contact_support_description">Če imaš kakršno koli vprašanje, nas kontaktiraj na %1$s.</string>
+    <string name="new_device_account">Nova naprava / nov račun</string>
+    <string name="no_purchases">Nimaš nobenih nakupov</string>
+    <string name="specify_color_for_map_mode">Določi barvo za način zemljevida %1$s.</string>
+    <string name="monitoring_control_start">REG</string>
+    <string name="number_of_gpx_files_selected_pattern">%s izbranih datotek sledi</string>
+    <string name="shared_string_save_as_gpx">Shrani kot novo datoteko sledi</string>
+    <string name="you_can_get_feature_as_part_of_pattern">Pridobi »%1$s« kot del načrta %2$s. Primerjava:</string>
+    <string name="backup_delete_old_data">Odstrani stare različice</string>
+    <string name="attribute">Atribut</string>
+    <string name="backup_promocode">Promocijska koda</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Neveljaven ali potekel žeton</string>
+    <string name="backup_error_token_is_not_valid">Nekaj ni v redu z navedenim ID-jem naprave ali žetonom</string>
+    <string name="backup_error_size_is_exceeded">Največja velikost OsmAnd Cloud je presežena %1$s</string>
+    <string name="shared_string_learn_more">Preberi več</string>
+    <string name="purchases_feature_desc_monthly_map_updates">Dostopaj do rednih mesečnih posodobitev za zemljevide brez povezave.</string>
+    <string name="purchases_feature_desc_wikivoyage">Razišči Wikivoyage brez povezave. Članki, razdeljeni po državah in regijah, na voljo v vseh jezikih.</string>
+    <string name="routing_attr_avoid_tunnels_description">Izogibanje predorov</string>
+    <string name="backup_storage_taken">Shranjevanje vzeto</string>
+    <string name="backup_restore_data_descr">Obnovi podatke na napravi z uporabo spletnih varnostnih kopij.</string>
+    <string name="backup_data">Varnostno kopiranje podatkov</string>
+    <string name="backup_delete_old_data_descr">Trenutna različica vaših podatkov bo shranjena v OsmAnd Cloud</string>
+    <string name="delete_all_confirmation">Da, izbriši vse</string>
+    <string name="backup_danger_zone">Nevarno območje</string>
+    <string name="upload_local_version">Nalaganje lokalne različice</string>
+    <string name="verification_code_missing_description">Lahko traja 10 minut. Uporabi spodnji gumb, če ga ni v mapi za neželeno pošto.</string>
+    <string name="enter_verification_code">Vnesi enkratno geslo</string>
+    <string name="elevation_profile">Višinski profil</string>
+    <string name="use_system_language">Uporabi sistemski jezik</string>
+    <string name="shared_string_relation">Relacija</string>
+    <string name="troubleshooting">Odpravljanje težav</string>
+    <string name="routes_color_by_type">Obarvaj poti po …</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Razišči Načrte OsmAnd in poišči primernega zate.</string>
+    <string name="purchases_feature_desc_pro_widgets">Pridobi dostop do naprednih funkcij OsmAnd Pro: barvanje poti in drugo.</string>
+    <string name="option_available_only_in_osmand_pro">Na voljo kot del naročnine OsmAnd Pro.</string>
+    <string name="track_has_no_needed_data">Sledi manjkajo ustrezni podatki.</string>
+    <string name="active_till">Aktivno do %1$s</string>
+    <string name="backup_welcome_back_descr">Obnovi podatke v tej napravi z obstoječimi varnostnimi kopijami ali varnostno kopiraj podatke v OsmAnd Cloud.</string>
+    <string name="backup_dont_have_any_descr">Načrtuj samodejno varnostno kopiranje, da ne boš nikoli izgubil podatkov.</string>
+    <string name="backup_do_not_have_any">Še nimaš spletne varnostne kopije.</string>
+    <string name="backup_data_removed">Vsi podatki so bili odstranjeni.</string>
+    <string name="backup_version_history_removed">Vsa zgodovina različic je bila odstranjena.</string>
+    <string name="backup_deleted_all_data_descr">Vsi tvoji podatki so bili uspešno izbrisani iz OsmAnd Cloud.</string>
+    <string name="cancel_anytime_in_gplay">Prekliči ga kadarkoli v Googlu Play.</string>
+    <string name="cancel_anytime_in_huawei_appgallery">Prekliči ga kadarkoli v huawei AppGallery</string>
+    <string name="backup_delete_types">Izbriši onemogočene vrste podatkov</string>
+    <string name="from_with_param">Iz %1$s</string>
+    <string name="complete_purchase">Dokončaj nakup</string>
+    <string name="osmand_pro_tagline">Pridobi največ funkcij</string>
+    <string name="nautical_depth">Navtična globina</string>
+    <string name="offline_wikivoyage">Wikivoyage brez povezave</string>
+    <string name="continue_with">Nadaljuj z %1$s</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s ali %2$s</string>
+    <string name="purchases_feature_desc_osmand_cloud">Pridobi OsmAnd Cloud za shranjevanje vseh podatkov OsmAnd na spletu. Po ponovni namestitvi ni izgubljenih podatkov. Preprosto varnostno kopirajte in obnovitev vseh podatkov.</string>
+    <string name="purchases_feature_desc_nautical">Pridobi dostop do informacij o navtični globini</string>
+    <string name="backup_delete_all_data_warning">Izbrisani bodo vsi podatki, ki so bili prej naloženi v OsmAnd Cloud, vključno z zgodovino različic.
+\n
+\nIzbrisanih podatkov ne bo mogoče obnoviti.</string>
+    <string name="backup_delete_all_data_descr">Vsi podatki na OsmAnd Cloud bodo izbrisani. Lokalne različice bodo ostale nedotaknjene.</string>
+    <string name="backup_delete_old_data_warning">Izbrisana bo zgodovina sprememb za predhodno naložene podatke.
+\n
+\nTrenutna različica podatkov bo shranjena na strežniku, vendar se ne boš mogel vrniti na prejšnje spremembe.</string>
+    <string name="backup_pause_all">Premor vseh</string>
+    <string name="shared_string_predefined">Vnaprej določeno</string>
+    <string name="loading_list_of_routing_services">Nalaganje seznama razpoložljivih storitev usmerjanja</string>
+    <string name="verification_code_missing">Nisem prejel kode za preverjanje</string>
+    <string name="resend_verification_code">Ponovno pošlji</string>
+    <string name="failed_loading_predefined_engines">Seznama vnaprej določenih predlog ni bilo mogoče naložiti.
+\nPreveri svojo internetno povezavo.</string>
+    <string name="shared_string_external">Zunanji</string>
+    <string name="osmand_online_routing_promo">Uporabi vnaprej določene predloge ali dodaj OSRM, GraphHopper, openrouteservice ali GPX spletno usmerjanje.</string>
+    <string name="shared_string_offline">Brez povezave</string>
+    <string name="cloud_email_already_registered">Ta e-poštni naslov je že registriran.</string>
+    <string name="osmand_cloud_create_account_descr">Prosimo, vnesi svoj e-poštni naslov, nanj bo poslana potrditvena koda,
+\nin vsi tvoji podatki bodo povezani z njim.</string>
+    <string name="restore_from_file">Obnovi iz datoteke</string>
+    <string name="backup_into_file">Varnostno kopiraj kot datoteko</string>
+    <string name="local_backup">Lokalna varnostna kopija</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="osmand_cloud_help_descr">Potrebuješ pomoč\? Prosimo, kontaktiraj nas na %1$s</string>
+    <string name="search_more">Išči več …</string>
+    <string name="recorded_description">Posneti glas zveni bolje, vendar lahko izgovori samo vnaprej posnete fraze: navodila za obračanje. Ne more napovedati imen ulic ali POI.</string>
+    <string name="contact_support">Obrni se na podporo</string>
+    <string name="shared_string_route_line">Črta poti</string>
+    <string name="snap_to_road_descr">Ikona trenutnega položaja se bo prilepila na trenutno navigacijsko pot</string>
+    <string name="routing_attr_short_way_description">Optimizirana krajša pot (varčevanje z energijo)</string>
+    <string name="backup_and_restore">Varnostno kopiranje in obnovitev</string>
+    <string name="backup_delete_all_data">Izbriši vse moje podatke</string>
+    <string name="make_backup_descr">V tej napravi je veliko sprememb, zato naredi varnostno kopijo teh podatkov, da jih ne izgubiš.</string>
+    <string name="select_nav_profile_dialog_message">»Vrsta navigacije« izbere, kako se izračunajo poti, z razpoložljivimi mehanizmi za usmerjanje brez in z povezavo.</string>
+    <string name="empty_state_my_tracks">Dodaj datoteke sledi</string>
+    <string name="delete_version_history">Izbriši zgodovino različic</string>
+    <string name="shared_string_online">V povezavi</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Obarvaj glede na pripadnost omrežju.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Obarvaj poti glede na vrsto omrežja vozlišč (mednarodno, regionalno, lokalno).</string>
+    <string name="duration_moment_ago">pred nekaj trenutki</string>
+    <string name="backup_deleting_all_data_descr">Počakaj, da OsmAnd izbriše podatke iz oblaka. Vsi podatki v napravi bodo ostali nedotaknjeni.</string>
+    <string name="contour_lines_hillshades_slope">Izohipse, senčenje terena, naklon</string>
+    <string name="backup_error_file_not_available">Datoteka ni na voljo</string>
+    <string name="backup_error_user_is_not_registered">S tem e-poštnim naslovom ni registriran noben uporabnik</string>
+    <string name="backup_error_subscription_was_expired">Potekla naročnina</string>
+    <string name="shared_string_includes">Vključuje</string>
+    <string name="osmand_maps_plus_tagline">Pridobi razširjene funkcije</string>
+    <string name="backup_error_subscription_was_expired_descr">Naročnina na OsmAnd Pro je potekla: obnovi jo, če želiš uporabljati varnostno kopijo. Še vedno lahko obnoviš podatke iz oblaka.</string>
+    <string name="backup_error_user_is_already_registered">Ta e-poštni naslov se že uporablja v drugem računu</string>
+    <string name="shared_string_discussion">Razprava</string>
+    <string name="purchases_feature_desc_combined_wiki">Razišči članke iz Wikipedije na poti, brez internetne povezave. Podatki brez povezave, razdeljeni po državah in na voljo v vseh jezikih.</string>
+    <string name="purchases_feature_desc_wikipedia">Razišči Wikipedijo brez povezave. Članki, razdeljeni po državah in regijah, na voljo v vseh jezikih.</string>
+    <string name="purchases_feature_desc_unlimited_map_download">Pridobi neomejeno število prenosov za vse celine in regije zemljevidov brez povezave.</string>
+    <string name="restore_complete">Obnovljeno</string>
+    <string name="backup_version_history">Zgodovina različic</string>
+    <string name="receiving_data_from_server">Prejemanje podatkov iz strežnika …</string>
+    <string name="restore_from_osmand_cloud">Obnovi iz OsmAnd Cloud</string>
+    <string name="backup_restore_data">Obnovi podatke</string>
+    <string name="download_server_version">Prenos strežniške različice</string>
+    <string name="cloud_email_not_registered">Ta e-poštni naslov ni registriran za OsmAnd Cloud</string>
+    <string name="shared_string_hide_slope">Skrij naklon</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Izogibanje območjem odprtim samo za vozila z nizkimi emisijami</string>
+    <string name="osmand_cloud_login_descr">Prosimo, vnesi e-poštni naslov, s katerim si se registriral. Poslano mu bo enkratno geslo za naslednji korak.</string>
+    <string name="shared_string_show_slope">Prikaži naklon</string>
+    <string name="shared_string_uphill">Navkreber</string>
+    <string name="shared_string_max_height">Maks. višina</string>
+    <string name="user_points">Uporabniške točke</string>
+    <string name="tts_description">Sintetizator govora ali pretvorba besedila v govor (Text-to-speech ali TTS) lahko izgovori vse vrste navodil: imena ulic, navodila za zavijanje, imena POI itd.</string>
+    <string name="announce_when_exceeded">Obvestilo ob prekoračitvi</string>
+    <string name="save_global_track_interval_descr">Določi interval beleženja za splošno snemanje sledi (vklopljeno prek pripomočka »Snemanje poti« na zemljevidu).</string>
+    <string name="disable_recording_once_app_killed_descrp">Beleženje sledi se bo ustavilo, ko bo aplikacija prisilno ustavljena (prek nedavnih aplikacij). (Oznaka OsmAnd delovanja v ozadju izgine iz vrstice z obvestil Android.)</string>
+    <string name="logout_from_osmand_cloud">Odjava iz oblaka OsmAnd Cloud</string>
+    <string name="customize_route_line">Prilagodi črto poti</string>
+    <string name="annual_subscription">Letna naročnina</string>
+    <string name="osmand_live">OsmAnd Live</string>
+    <string name="troubleshooting_description">Če imaš težave z nakupi, sledi tej povezavi.</string>
+    <string name="regular_price">Redna cena</string>
+    <string name="tts_title">TTS</string>
+    <string name="walking_route_osmc_description">Obarvaj poti glede na njihovo posamezno lokalno barvo (če je prisotna v OpenStreetMap) in vrsto (mednarodna, regionalna, lokalna).</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Obarvaj poti glede na njihovo posamezno lokalno barvo (če je prisotna v OpenStreetMap) in glede na barvo markacije.</string>
+    <string name="promo_subscription">Promocijska naročnina</string>
+    <string name="on_hold_since">Na čakanju od %1$s</string>
+    <string name="explore_wikipedia_offline">Razišči Wikipedijo brez povezave.</string>
+    <string name="backup_restore_now">Obnovi zdaj</string>
+    <string name="backup_setup">Nastavi varnostno kopiranje</string>
+    <string name="backup_welcome_back">Dobrodošli nazaj!</string>
+    <string name="approximate_route_description">Pripni pot cestam na zemljevidu, za pridobivanje točnih zavojev in dodatnih podatkov, kot so gladkost, vrsta cest itd.</string>
+    <string name="backup_error_no_valid_subscription">Ni veljavne naročnine</string>
+    <string name="backup_error_gzip_only_supported_upload">Datoteka mora biti poslana v obliki .gzip</string>
+    <string name="backup_error_subscription_was_used">Naročnino ali promocijo uporablja drug račun %1$s</string>
+    <string name="redeem_promo_code">Unovči promocijsko kodo</string>
+    <string name="not_available_with">Ni na voljo z %1$s</string>
+    <string name="offline_wikipeadia">Wikipedija brez povezave</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">Zemljevidi terena: izohipse, senčenje terena, naklon</string>
+    <string name="wikipedia_and_wikivoyage_offline">Wikipedija in Wikivoyage brez povezave</string>
+    <string name="unlimited_map_downloads">Neomejen prenos zemljevidov</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Dostopaj do pogostejših posodobitev zemljevidov. Urne, dnevne ali tedenske posodobitve. Posodobitve se prenašajo postopno, samo za spremenjeno območje.</string>
+    <string name="purchases_feature_desc_terrain">Izohipse terena, popoln zemljevid senčenja terena, s temnimi odtenki, in zemljevidi naklonov z barvami, ki prikazujejo vrhove in nižine.</string>
+    <string name="send_logcat_log">Pošlji dnevnik logcat</string>
+    <string name="routing_attr_avoid_tunnels_name">Izogibaj se predorov</string>
+    <string name="backup_version_history_delete_descr">Želiš izbrisati dnevnik sprememb za zastarele vrste podatkov iz OsmAnd Cloud\?</string>
+    <string name="restore_selected_data">Obnovi izbrane podatke</string>
+    <string name="choose_what_to_restore">Izberi, kaj želiš obnoviti.</string>
+    <string name="select_backup_data_descr">Izberi podatke in mape za varnostno kopiranje.</string>
+    <string name="shared_string_logout">Odjavi se</string>
+    <string name="backup_view_conflicts">Ogled sporov</string>
+    <string name="backup_conflicts">Spori</string>
+    <string name="make_backup">Naredi varnostno kopijo</string>
+    <string name="backup_now">Varnostno kopiraj zdaj</string>
+    <string name="backup_complete">Varnostno kopiranje končano</string>
+    <string name="verify_email_address_descr">Koda za preverjanje je bila poslana na %1$s. Vnesi jo v spodnje polje.</string>
+    <string name="verify_email_address">Preveri e-poštni naslov</string>
+    <string name="poi_routes">Poti</string>
+    <string name="route_line_use_map_style_width">Uporabi privzeto širino sloga zemljevida (%1$s).</string>
+    <string name="shared_string_itinerary">Načrt poti</string>
+    <string name="exit_number">Številka izhoda</string>
+    <string name="update_all_maps_added">Želiš posodobiti vse zemljevide, dodane v %1$s\?</string>
+    <string name="expired">Poteklo</string>
+    <string name="renew_subscription">Obnovi naročnino</string>
+    <string name="osmand_live_cancelled">Preklicano</string>
+    <string name="next_billing_date">Datum naslednjega obračuna: %1$s</string>
+    <string name="monthly_subscription">Mesečna naročnina</string>
+    <string name="empty_purchases_description">Če tvoji nakupi niso prikazani tukaj, tapni na »%1$s« ali se obrni na našo ekipo za podporo.</string>
+    <string name="routing_attr_height_obstacles_description">Z načrtovanjem poti bi se lahko izognili močnim vzponom.</string>
+    <string name="quick_action_add_gpx">Dodaj točko poti</string>
+    <string name="context_menu_item_add_waypoint">Dodaj točko sledi</string>
+    <string name="shared_string_gpx_files">Sledi</string>
+    <string name="add_segment_to_the_track">Dodaj v datoteko sledi</string>
+    <string name="release_4_0">• Varnostno kopiranje v oblaku
+\n
+\n• Dodan nočni način za slog zemljevida »Topo«.
+\n
+\n• Dodana možnost za prenos izohips v čevljih
+\n
+\n• Sledi je zdaj mogoče obarvati glede na nadmorsko višino, hitrost ali naklon
+\n
+\n• Posodobljeno pogovorno okno »Snemanje potovanja«.
+\n
+\n• Razdalja s tapom premaknjena z ravnila za polmer v ločeno možnost
+\n
+\n• Načrtovanje poti: zdaj lahko spreminjaš možnosti navigacije, dostopaš do konfiguracije zemljevida in iščeš, ne da bi zapustil načrtovanje poti
+\n
+\n• Novo okno »Nakup« s podrobnimi informacijami o nakupu
+\n
+\n• Dodana možnost za spreminjanje videza linije poti
+\n
+\n• Posodobitve OsmAnd Live premaknjene v »Prenosi &gt; Posodobitve«
+\n
+\n</string>
+    <string name="backup_confilcts_descr">Nekaterih datotek ni bilo mogoče naložiti v strežnik, ker je na strežniku shranjena novejša različica.</string>
+    <string name="release_4_0_beta">• Dodana možnost za prenos izohips v čevljih
+\n
+\n• Plan Route landscape: dodani zavihki za preklapljanje med točkami ali grafi
+\n
+\n• Posodobitve za OsmAnd Live so se preselile v »Prenosi &gt; posodobitve«
+\n
+\n• Sledi se lahko sedaj obarvajo glede na višino, hitrost ali naklonom.
+\n
+\n• Dodana možnost za spremembo videza proge.
+\n
+\n• Posodobljeno pogovorno okno »Snemanje potovanja«
+\n
+\n</string>
+    <string name="three_months_subscription">Tromesečna naročnina</string>
+    <string name="marker_save_as_track">Shrani kot datoteko sledi</string>
+    <string name="local_backup_descr">Varnostno kopiranje ali obnovitev podatkov iz lokalne datoteke.</string>
+    <string name="osmand_cloud_authorize_descr">Nikoli ne izgubi svojih podatkov. Preprosto varnostno kopirajte in obnovitev vseh podatkov.</string>
+    <string name="last_backup">Zadnja varnostna kopija</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="send_crash_log">Pošlji dnevnik zrušitev</string>
 </resources>

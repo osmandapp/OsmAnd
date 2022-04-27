@@ -354,7 +354,7 @@
     <string name="left_side_navigation">Обратно движение</string>
     <string name="left_side_navigation_descr">За държави с движение в лявата лента</string>
     <string name="unknown_from_location">Не е зададено начало на навигацията</string>
-    <string name="unknown_location">Все още не е определена позицията</string>
+    <string name="unknown_location">Местоположението все още не е определено.</string>
     <string name="modify_transparency">Промяна на прозрачността (0 - прозрачно, 255 - плътно)</string>
     <string name="confirm_interrupt_download">Да се прекъсне ли тегленето?</string>
     <string name="first_time_msg">Благодарим Ви, че изтеглихте OsmAnd. Необходими са също и карти, които можете да изтеглите сега или по-късно от \'Настройки\'/\'Управление на карти\'. След това ще можете да използвате пълната функционалност на програмата.</string>
@@ -1095,7 +1095,7 @@
     <string name="routing_attr_avoid_motorway_name">Избягване на магистрали</string>
     <string name="routing_attr_avoid_motorway_description">Избягване на магистрали</string>
     <string name="routing_attr_weight_name">Ограничение за маса на МПС</string>
-    <string name="routing_attr_weight_description">Изберете максималната разрешена маса (тегло) на МПС</string>
+    <string name="routing_attr_weight_description">Посочете допустимото тегло на превозните средства по маршрутите.</string>
     <string name="copying_osmand_files">Копиране файловете на OsmAnd…</string>
     <string name="app_mode_truck">Камион</string>
     <string name="rendering_attr_publicTransportMode_name">Автобусни, тролейбусни, маршрутни линии</string>
@@ -1155,7 +1155,7 @@
     <string name="gpx_split_interval">Интервал</string>
     <string name="sort_by_distance">Сортирай по дистанция</string>
     <string name="sort_by_name">Сортирай по име</string>
-    <string name="show_zoom_buttons_navigation_descr">Показвай бутоните за мащаб по време на навигация</string>
+    <string name="show_zoom_buttons_navigation_descr">Бутони за мащабиране по време на маршрутизация.</string>
     <string name="show_zoom_buttons_navigation">Показвай бутоните за мащаб</string>
     <string name="select_destination_and_intermediate_points">Изберете крайна цел</string>
     <string name="layer_amenity_label">Етикети на точките</string>
@@ -1223,7 +1223,7 @@
     <string name="shared_string_message">Съобщение</string>
     <string name="agps_data_last_downloaded">A-GPS данни изтеглени в: %1$s</string>
     <string name="routing_attr_no_new_routing_name">Без ползване на алгоритми от v1.9</string>
-    <string name="routing_attr_no_new_routing_description">Да не се ползват алгоритми за маршрути въведени във версия 1.9</string>
+    <string name="routing_attr_no_new_routing_description">За изграждане на маршрути да не се използват алгоритмите, въведени в издание 1.9.</string>
     <string name="rendering_attr_hideHouseNumbers_name">Номер</string>
     <string name="application_dir_change_warning3">Да премести ли OsmAnd своите файлове на новото място\?</string>
     <string name="general_settings_2">Общи настройки</string>
@@ -1499,7 +1499,7 @@
     <string name="rate_this_app_long">Моля оценете OsmAnd в Google Play</string>
     <string name="user_hates_app_get_feedback">Споделете защо.</string>
     <string name="try_again">Нов опит</string>
-    <string name="no_updates_available">Няма налични актуализации</string>
+    <string name="no_updates_available">Няма налични обновявания</string>
     <string name="restart_is_required">Изисква се рестартиране за да бъдат приложени всички промени.</string>
     <string name="voice_pref_title">Глас</string>
     <string name="always_center_position_on_map">Винаги показвай позицията в центъра</string>
@@ -1544,7 +1544,7 @@
     <string name="read_more">Прочети повече</string>
     <string name="whats_new">Какво е новото в</string>
     <string name="rendering_attr_hideProposed_name">Предложени обекти</string>
-    <string name="shared_string_update">Актуализация</string>
+    <string name="shared_string_update">Обновяване</string>
     <string name="shared_string_upload">Качване</string>
     <string name="osm_edit_created_poi">Създаден OSM POI</string>
     <string name="world_map_download_descr">Световната базова карта (покриваща целия свят в малък мащаб) липсва или е остаряла. Изтеглете я, за да имате общ поглед.</string>
@@ -1623,7 +1623,7 @@
     <string name="routing_attr_avoid_shuttle_train_description">Избягване ползването на трансферни влакове</string>
     <string name="traffic_warning_hazard">Опасност</string>
     <string name="rendering_value_boldOutline_name">Получер контур</string>
-    <string name="download_live_updates">Актуализации на живо</string>
+    <string name="download_live_updates">Обновяване на живо</string>
     <string name="rendering_value_default13_name">По подразбиране (13)</string>
     <string name="rendering_value_defaultTranslucentCyan_name">По подразбиране (полупрозрачно синьо)</string>
     <string name="rendering_attr_currentTrackColor_description">GPX цвят</string>
@@ -1689,7 +1689,7 @@
     <string name="new_version">Нова версия</string>
     <string name="enter_country_name">Въведете име на държава</string>
     <string name="application_dir_description">Изберете къде искате да запазите файловете с карти.</string>
-    <string name="update_all">Актуализиране на всички (%1$s МБ)</string>
+    <string name="update_all">Обновяване на всичко (%1$s МБ)</string>
     <string name="free_downloads_used">Използвани безплатни изтегляния</string>
     <string name="file_size_in_mb">%.1f МБ</string>
     <string name="value_downloaded_of_max">%1$.1f от %2$.1f МБ</string>
@@ -1781,33 +1781,33 @@
     <string name="dashboard_or_drawer_description">Можете да управлявате приложението чрез гъвкаво табло или чрез статично меню. Вашият избор може да бъде променен по-късно.</string>
     <string name="rendering_attr_horseRoutes_name">Пътеки за конна езда</string>
     <string name="only_download_over_wifi">Изтегляне само чрез Wi-Fi</string>
-    <string name="live_update">Актуализиране на момента</string>
-    <string name="update_now">Актуализирай сега</string>
+    <string name="live_update">Обновяване на живо</string>
+    <string name="update_now">Обновяване</string>
     <string name="route_distance">Разстояние:</string>
     <string name="route_duration">Продължителност:</string>
     <string name="missing_write_external_storage_permission">Приложението няма разрешение да използва SD картата</string>
     <string name="no_location_permission">Разрешение за ползване на данни за местоположение.</string>
     <string name="no_camera_permission">Разрешение за ползване на камерата.</string>
     <string name="no_microphone_permission">Разрешение за ползване на микрофона.</string>
-    <string name="live_updates">Актуализации онлайн</string>
+    <string name="live_updates">Обновяване на живо</string>
     <string name="available_maps">Достъпни карти</string>
     <string name="select_voice_provider">Изберете гласови напътствия</string>
     <string name="select_voice_provider_descr">Изберете или свалете гласови напътствия на вашия език.</string>
     <string name="impassable_road_desc">Изберете пътищата, които да избегнете по време на маршрутизация.</string>
     <string name="shared_string_sound">Звук</string>
-    <string name="last_update">Последна актуализация: %s</string>
+    <string name="last_update">Последно обновяване: %s</string>
     <string name="rec_split">Записване на раздели</string>
     <string name="rec_split_clip_length">Дължина на клипа</string>
     <string name="rec_split_clip_length_desc">Ограничение за продължителност на записаните видео клипове.</string>
     <string name="rec_split_storage_size">Място за съхранение</string>
     <string name="rec_split_storage_size_desc">Общ размер на паметта за записани клипове.</string>
-    <string name="updates_size">Актуализации</string>
+    <string name="updates_size">Размер на обновяването</string>
     <string name="last_map_change">Последна промяна на картата: %s</string>
     <string name="shared_string_not_selected">Няма избран</string>
     <string name="rec_split_desc">Презаписване върху стари клипове при недостиг на място.</string>
     <string name="rec_split_title">Разделяне на клиповете чрез камерата</string>
-    <string name="update_time">Дата/час на актуализация</string>
-    <string name="hourly">На всеки час</string>
+    <string name="update_time">Време на обновяване</string>
+    <string name="hourly">Всеки час</string>
     <string name="daily">Всеки ден</string>
     <string name="weekly">Всяка седмица</string>
     <string name="morning">Сутрин</string>
@@ -1894,9 +1894,9 @@
     <string name="file_name_containes_illegal_char">Името на файла съдържа неправилен символ</string>
     <string name="storage_directory_readonly_desc">Използва се вътрешната памет, защото в избраната от Вас папка за съхранение не може да се записва. Моля, изберете място в паметта, върху което може да се записва.</string>
     <string name="osm_live_region_desc">Част от вашето дарение ще бъде изпратено до потребители на OSM, които са допринесли за картата в този район.</string>
-    <string name="osm_live_header">Този абонамент позволява актуализиране на всички карти на всеки час. 
+    <string name="osm_live_header">Този абонамент позволява обновяване на всички карти на всеки час.
 \nЧаст от прихода отива за общността на OSM, редакторите, които са допринесли за картата.
-\nАко харесвате OsmAnd и OSM, и искате да помогнете, това е перфектният начин да го сторите.</string>
+\nАко харесвате OsmAnd и OSM, и искате да помогнете, това е отличен начин да го сторите.</string>
     <string name="show_transparency_seekbar">Показване на прозрачна лента</string>
     <string name="search_categories">Категории</string>
     <string name="postcode">Пощенски код</string>
@@ -2193,7 +2193,7 @@
     <string name="select_nav_icon_descr">Икона, показана по време на маршрутизиране или движение.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="osm_editing">Редактиране на OSM</string>
-    <string name="plugin_global_prefs_info">Тези настройки на приставката се отнасят за всички профили.</string>
+    <string name="plugin_global_prefs_info">Тези настройки на приставката се отнасят за всички профили</string>
     <string name="login_and_pass">Потребителско име и парола</string>
     <string name="accessibility_announce">Обявяване</string>
     <string name="route_recalculation">Преизчисляване на маршрута</string>
@@ -2272,12 +2272,12 @@
     <string name="login_open_street_map">Вход в OpenStreetMap</string>
     <string name="login_open_street_map_org">Влезте в OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">Влизане с OpenStreetMap</string>
-    <string name="osm_live_subscription_desc">Абонаментът позволява почасови, ежедневни, седмични актуализации и неограничено изтегляне за всички карти в световен мащаб.</string>
+    <string name="osm_live_subscription_desc">Абонаментът дава възможност за почасови, ежедневни, седмични обновявания и за неограничено изтегляне за всички карти в световен мащаб.</string>
     <string name="select_wikipedia_article_langs">Изберете езиците на които Уикипедия публикациите ще се появяват на картата. Можете да превключвате между наличните езици докато четете публикацията.</string>
     <string name="extra_maps_menu_group">Допълнителни карти</string>
     <string name="opr_use_dev_url">Използване на test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Вход в OpenPlaceПрегледи</string>
-    <string name="open_place_reviews"></string>
+    <string name="open_place_reviews"/>
     <string name="activity_type_water_name">Вода</string>
     <string name="activity_type_winter_name">Зима</string>
     <string name="activity_type_snowmobile_name">Моторни шейни</string>
@@ -2374,8 +2374,8 @@
     <string name="purchases_feature_desc_wikivoyage">Разгледайте Wikivoyage офлайн. Статиите са разделени по държави и региони и са достъпни на всички езици.</string>
     <string name="purchases_feature_desc_wikipedia">Разгледайте Уикипедия офлайн. Статиите са разделени по държави и региони и са достъпни на всички езици.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Получете неограничени изтегляния на офлайн карти на всички континенти и региони.</string>
-    <string name="purchases_feature_desc_monthly_map_updates">Получете достъп до редовни месечни актуализации за офлайн карти.</string>
-    <string name="purchases_feature_desc_hourly_map_updates">Получете достъп до по-чести актуализации на картите. Часови, дневни или седмични актуализации. Актуализациите се изтеглят поетапно, само за променената област.</string>
+    <string name="purchases_feature_desc_monthly_map_updates">Достъп до редовни месечни обновявания за изтеглени карти.</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Достъп до по-често обновяване на картите. Почасови, ежедневни или ежеседмични обновявания. Изтеглят поетапно, само за променената област.</string>
     <string name="unlimited_map_downloads">Неограничено изтегляне на карти</string>
     <string name="wikipedia_and_wikivoyage_offline">Уикипедия и Wikivoyage офлайн</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Карти на терена: контурни линии, хълмове, наклони</string>
@@ -2458,10 +2458,10 @@
     <string name="online_maps_searching_descr">Отдалечено търсене…</string>
     <string name="reset_to_original">Връщане към първоначалното състояние</string>
     <string name="backup_error_no_subscription">Няма наличен абонамент</string>
-    <string name="map_updates_for_mappers">Актуализации на карти за картографи</string>
+    <string name="map_updates_for_mappers">Обновявания за картографи</string>
     <string name="benefits_for_contributors">Ползи за активните сътрудници на OSM</string>
-    <string name="benefits_for_contributors_primary_descr">Можете да се възползвате от почасови неограничени актуализации на картата без ограничения, ако сте активен участник в OpenStreetMap.org.</string>
-    <string name="benefits_for_contributors_secondary_descr">Влезте в OpenStreetMap и проверете дали имате право да получавате неограничени месечни и почасови актуализации на картата.</string>
+    <string name="benefits_for_contributors_primary_descr">Активните сътрудници на OpenStreetMap.org могат да имат право на неограничени почасови обновявания на картата.</string>
+    <string name="benefits_for_contributors_secondary_descr">Влезте в OpenStreetMap и проверете дали имате право да получавате неограничени месечни и почасови обновявания на картата.</string>
     <string name="use_login_and_password">Използване на потребителско име и парола</string>
     <string name="available_until">Налично до %1$s</string>
     <string name="enough_contributions_descr">Поздравления, направили сте достатъчно приноси към OpenStreetMap и можете да се наслаждавате на неограничени обновявания на картата!</string>
@@ -2617,4 +2617,8 @@
     <string name="shared_string_memory_tb_desc">%1$s ТБ</string>
     <string name="export_profile">Изнасяне на профил</string>
     <string name="profile_import">Внасяне на профил</string>
+    <string name="live_update_frequency_day_variant">Проверката за обновяване е всеки ден. Следващата %1$s е в %2$s.</string>
+    <string name="live_update_frequency_week_variant">Проверката за обновяване е всяка седмица. Следващата %1$s е в %2$s.</string>
+    <string name="update_frequency">Честота на проверка за обнояване</string>
+    <string name="live_update_frequency_hour_variant">Проверката за обновяване е през час. Следващата %1$s е в %2$s.</string>
 </resources>
