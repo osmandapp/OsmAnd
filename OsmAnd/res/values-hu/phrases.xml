@@ -1105,7 +1105,7 @@
     <string name="poi_tactile_paving_no">Vakvezető burkolat nincs</string>
     <string name="poi_traffic_signals_sound_yes">van;forgalmi hangjelzés</string>
     <string name="poi_traffic_signals_sound_no">Hang nincs</string>
-    <string name="poi_traffic_signals_sound_walk">Csak amikor zöld</string>
+    <string name="poi_traffic_signals_sound_walk">Csak amikor át szabad menni</string>
     <string name="poi_services">Pihenőhely</string>
     <string name="poi_mini_roundabout">Mini körforgalom</string>
     <string name="poi_railway_crossing">Gyalogos vasúti átjáró</string>
