@@ -15,6 +15,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
+import android.graphics.PathEffect;
 import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
@@ -63,6 +64,7 @@ import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.render.OsmandDashPathEffect;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.routing.ColoringType;
@@ -669,7 +671,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				for (TrkSegment segment : segments) {
 					if (segment.renderer instanceof RenderableSegment) {
 						((RenderableSegment) segment.renderer)
-								.drawGeometry(canvas, tileBox, correctedQuadRect, trackColor, trackWidth, true);
+								.drawGeometry(canvas, tileBox, correctedQuadRect, trackColor, trackWidth, null, true);
 					}
 				}
 			}
@@ -1080,8 +1082,13 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					updated |= renderableSegment.setRoute(getCachedTrack(selectedGpxFile).getCachedRouteSegments(segmentIdx));
 					updated |= renderableSegment.setDrawArrows(isShowArrowsForTrack(selectedGpxFile.getGpxFile()));
 					if (updated || !hasMapRenderer) {
+						float[] intervals = null;
+						PathEffect pathEffect = paint.getPathEffect();
+						if (pathEffect instanceof OsmandDashPathEffect) {
+							intervals = ((OsmandDashPathEffect) pathEffect).getIntervals();
+						}
 						renderableSegment.drawGeometry(canvas, tileBox, correctedQuadRect,
-								paint.getColor(), paint.getStrokeWidth());
+								paint.getColor(), paint.getStrokeWidth(), intervals);
 						renderedSegments.add(ts);
 					}
 				} else {

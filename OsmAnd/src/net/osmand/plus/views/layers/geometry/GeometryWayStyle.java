@@ -13,6 +13,7 @@ public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 	private final T context;
 	protected Integer color;
 	protected Float width;
+	protected float[] dashPattern;
 	public static final int COLORIZATION_NONE = 0;
 	public static final int COLORIZATION_GRADIENT = 1;
 	public static final int COLORIZATION_SOLID = 2;
@@ -58,6 +59,11 @@ public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 
 	public Float getWidth(Integer def) {
 		return width != null ? width : def;
+	}
+
+	@Nullable
+	public float[] getDashPattern() {
+		return dashPattern;
 	}
 
 	@Nullable
