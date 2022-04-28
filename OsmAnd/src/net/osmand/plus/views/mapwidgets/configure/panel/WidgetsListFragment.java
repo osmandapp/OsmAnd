@@ -199,7 +199,14 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 
 			TextView title = view.findViewById(R.id.title);
 			title.setText(widgetInfo.getTitle(app));
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.description), false);
+
+			WidgetParams widgetParams = WidgetParams.getById(widgetInfo.key);
+			WidgetGroup widgetGroup = widgetParams == null ? null : widgetParams.getGroup();
+			if (widgetGroup != null) {
+				TextView description = view.findViewById(R.id.description);
+				description.setText(widgetGroup.titleId);
+				AndroidUiHelper.updateVisibility(description, true);
+			}
 
 			ImageView imageView = view.findViewById(R.id.icon);
 			iconsHelper.updateWidgetIcon(imageView, widgetInfo);
