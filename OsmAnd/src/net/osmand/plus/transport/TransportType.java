@@ -1,5 +1,7 @@
 package net.osmand.plus.transport;
 
+import androidx.annotation.DrawableRes;
+
 import net.osmand.plus.R;
 
 public enum TransportType {
@@ -20,13 +22,14 @@ public enum TransportType {
 		this.iconId = iconId;
 	}
 
-	private String attrName;
-	private int iconId;
+	private final String attrName;
+	private final @DrawableRes int iconId;
 
 	public String getAttrName() {
 		return attrName;
 	}
 
+	@DrawableRes
 	public int getIconId() {
 		return iconId;
 	}
