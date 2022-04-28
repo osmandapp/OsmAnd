@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="turn_on_public_transport_description">Turn on to see public transport routes on the map.</string>
     <string name="release_4_2">
     • Widgets redesign: new Look &amp; Feel, group by Pages, change order and combine as you want.\n\n
     • Hiking / Cycling / Travel routes: tap on the route symbol and get full information about the route.\n\n
