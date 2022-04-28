@@ -3682,7 +3682,7 @@
     <string name="track_coloring_solid">Solido</string>
     <string name="set_working_days_to_continue">Imposta i giorni lavorativi per continuare</string>
     <string name="plan_a_route">Pianifica un percorso</string>
-    <string name="add_to_a_track">Aggiungi ad una traccia</string>
+    <string name="add_to_a_track">Aggiungi una traccia</string>
     <string name="gpx_split_interval_descr">Seleziona l\'intervallo a cui i segnaposti con distanza o orario sulla traccia verranno mostrati.</string>
     <string name="gpx_split_interval_none_descr">Seleziona l\'opzione desiderata per la divisione: per tempo o per distanza.</string>
     <string name="gpx_direction_arrows">Frecce della direzione</string>
@@ -4161,7 +4161,7 @@
 \n
 \nAlcune mappe potrebbero non essere state caricate.</string>
     <string name="benefits_for_contributors">Benefici per i contributori OSM attivi</string>
-    <string name="enough_contributions_descr">Congratulazioni, hai contributo a OpensStreetMap a sufficienza per godere degli aggiornamenti illimitati delle mappe OsmAnd!</string>
+    <string name="enough_contributions_descr">Congratulazioni, hai contributo a OpenStreetMap a sufficienza per godere degli aggiornamenti illimitati delle mappe OsmAnd!</string>
     <string name="contributions_may_calculate_with_delay">L\'elaborazione dei contributi può richiedere diverse ore.</string>
     <string name="shared_string_includes">Include</string>
     <string name="complete_purchase">Completa l\'acquisto</string>
@@ -4506,7 +4506,7 @@
     <string name="gpx_no_routes_title">Non ci sono percorsi</string>
     <string name="save_track_to_gpx_descrp">Avvia automaticamente la registrazione mentre si sta navigando. Al termine la traccia sarà salvata automaticamente.</string>
     <string name="rendering_attr_seabedDetail_name">Dettagli fondale marino</string>
-    <string name="rendering_attr_seabedDetail_description">Informazioni testuali sulla superficie del fondale marino tipi di superfici combinate, categorie e tassonomie delle alghe marine.</string>
+    <string name="rendering_attr_seabedDetail_description">Informazioni testuali aggiuntive sulla superficie del fondale marino, tipi di superfici combinate, categorie e tassonomie delle alghe marine</string>
     <string name="waypoint_template">Modello dei punti di passaggio</string>
     <string name="always_ask_waypoint_appearance_description">Toccando quest\'azione si aprirà la schermata \"Aggiungi punto intermedio\" dove puoi cambiare nome e aspetto.</string>
     <string name="track_file_description">Toccando questa azione verrà mostrato una finestra di dialogo di scelta delle tracce disponibili.</string>
@@ -4581,7 +4581,7 @@
     <string name="rendering_attr_horse_scale_demanding_name">Impegnativo</string>
     <string name="on_with_params">%1$s su %2$s</string>
     <string name="shared_string_symbol">Simbolo</string>
-    <string name="no_widgets_descr">Uno o più widget dalla lista dei widget.</string>
+    <string name="no_widgets_descr">Aggiungi uno o più widget dalla lista dei widget disponibili.</string>
     <string name="available_widgets">Widget disponibili</string>
     <string name="snackbar_page_removed">\"La pagina %1$s\" è stata rimossa.</string>
     <string name="no_widgets_here_yet">Qui ancora nessun widget</string>

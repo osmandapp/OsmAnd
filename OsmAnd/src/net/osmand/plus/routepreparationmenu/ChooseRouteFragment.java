@@ -795,8 +795,9 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			int visibility = visible ? View.VISIBLE : View.GONE;
-			mapActivity.findViewById(R.id.map_center_info).setVisibility(visibility);
-			mapActivity.findViewById(R.id.map_left_widgets_panel).setVisibility(visibility);
+			AndroidUiHelper.setVisibility(mapActivity, visibility,
+					R.id.map_center_info,
+					R.id.map_left_widgets_panel);
 			if (!visible) {
 				mapActivity.findViewById(R.id.map_right_widgets_panel).setVisibility(visibility);
 				if (!portrait) {

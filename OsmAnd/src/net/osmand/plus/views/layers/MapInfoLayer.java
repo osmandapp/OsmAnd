@@ -152,12 +152,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 	@NonNull
 	private StateChangedListener<ApplicationMode> createAppModeChangeListener() {
-		return appMode -> {
+		return appMode -> getApplication().runInUIThread(() -> {
 			if (mapInfoControls != null) {
 				mapInfoControls.reorderWidgets();
-				recreateControls();
+				MapInfoLayer.this.recreateControls();
 			}
-		};
+		});
 	}
 
 	@Nullable

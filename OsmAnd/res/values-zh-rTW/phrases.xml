@@ -4303,7 +4303,7 @@
     <string name="poi_printer_ink">印表機墨水商店</string>
     <string name="poi_water_sports">水上運動商店</string>
     <string name="poi_payment_american_express_contactless_yes">非接觸式美國運通 (AMEX)</string>
-    <string name="poi_payment_girocard_contactless_yes">Girocard</string>
+    <string name="poi_payment_girocard_contactless_yes">非接觸式 Girocard</string>
     <string name="poi_payment_maestro_contactless_yes">非接觸式萬事順卡</string>
     <string name="poi_payment_mastercard_contactless_yes">非接觸式萬事達卡</string>
     <string name="poi_payment_visa_contactless_yes">非接觸式 Visa 卡</string>
@@ -4328,4 +4328,5 @@
     <string name="poi_rice">米店</string>
     <string name="poi_wool">羊毛店</string>
     <string name="poi_laundry_service_no">否</string>
+    <string name="poi_flow_rate">流速</string>
 </resources>

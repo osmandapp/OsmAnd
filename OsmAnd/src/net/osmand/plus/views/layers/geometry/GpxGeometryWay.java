@@ -53,6 +53,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 
 	public void setTrackStyleParams(int trackColor,
 	                                float trackWidth,
+	                                @Nullable float[] dashPattern,
 	                                boolean drawDirectionArrows,
 	                                @NonNull ColoringType routeColoringType,
 	                                @Nullable String routeInfoAttribute) {
@@ -61,8 +62,11 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 				|| routeColoringType == ColoringType.ATTRIBUTE
 				&& !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute);
 
-		if (customWidth != trackWidth) {
+		if (this.customWidth != trackWidth) {
 			updateStylesWidth(trackWidth);
+		}
+		if (this.dashPattern != dashPattern) {
+			updateStylesDashPattern(dashPattern);
 		}
 		if (this.drawDirectionArrows != drawDirectionArrows) {
 			resetSymbolProviders();
@@ -72,6 +76,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 
 		this.customColor = trackColor;
 		this.customWidth = trackWidth;
+		this.dashPattern = dashPattern;
 		this.drawDirectionArrows = drawDirectionArrows;
 		this.coloringType = routeColoringType;
 		this.routeInfoAttribute = routeInfoAttribute;
@@ -146,15 +151,19 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 	@NonNull
 	@Override
 	public GeometryWayStyle<?> getDefaultWayStyle() {
-		return new GeometrySolidWayStyle<>(getContext(), customColor, customWidth,
-				getContrastLineColor(customColor), false);
+		GeometrySolidWayStyle<GpxGeometryWayContext> style = new GeometrySolidWayStyle<>(
+				getContext(), customColor, customWidth, getContrastLineColor(customColor), false);
+		style.dashPattern = dashPattern;
+		return style;
 	}
 
 	@NonNull
 	@Override
 	public GeometrySolidWayStyle<GpxGeometryWayContext> getSolidWayStyle(int lineColor) {
-		return new GeometrySolidWayStyle<>(getContext(), lineColor, customWidth,
-				getContrastLineColor(lineColor), true);
+		GeometrySolidWayStyle<GpxGeometryWayContext> style = new GeometrySolidWayStyle<>(
+				getContext(), lineColor, customWidth, getContrastLineColor(lineColor), true);
+		style.dashPattern = dashPattern;
+		return style;
 	}
 
 	@Override

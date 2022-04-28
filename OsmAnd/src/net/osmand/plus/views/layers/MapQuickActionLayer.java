@@ -17,6 +17,12 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import androidx.annotation.DimenRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.util.Pair;
+
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetView;
 
@@ -41,12 +47,6 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.DimenRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.util.Pair;
 
 import static net.osmand.plus.views.layers.ContextMenuLayer.VIBRATE_SHORT;
 
@@ -348,8 +348,11 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
         view.setLatLon(lat, lon);
 
         inMovingMarkerMode = true;
-        AndroidUiHelper.setVisibility(mapActivity, View.INVISIBLE, R.id.map_ruler_layout,
-                R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
+        AndroidUiHelper.setVisibility(mapActivity, View.INVISIBLE,
+                R.id.map_ruler_layout,
+                R.id.map_left_widgets_panel,
+                R.id.map_right_widgets_panel,
+                R.id.map_center_info);
 
         view.refreshMap();
     }
@@ -381,8 +384,11 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
         }
 
         inMovingMarkerMode = false;
-        AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE, R.id.map_ruler_layout,
-                R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
+        AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE,
+                R.id.map_ruler_layout,
+                R.id.map_left_widgets_panel,
+                R.id.map_right_widgets_panel,
+                R.id.map_center_info);
 
         view.refreshMap();
     }
