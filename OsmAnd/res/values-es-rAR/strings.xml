@@ -601,7 +601,7 @@
     <string name="cancel_route">¿Descartar ruta\?</string>
     <string name="cancel_navigation">Parar navegación</string>
     <string name="clear_destination">Limpiar destino</string>
-    <string name="download_using_mobile_internet">No está conectado a una red Wi-Fi. ¿Usar la conexión actual a Internet para descargar?</string>
+    <string name="download_using_mobile_internet">No estás conectado a una red Wi-Fi. ¿Usar la conexión actual a Internet para descargar\?</string>
     <string name="street_name">Nombre de calle</string>
     <string name="hno">Número</string>
     <string name="website">Sitio web</string>
@@ -4602,7 +4602,7 @@
     <string name="no_widgets_descr">Añade uno o más widgets de la lista de widgets disponibles.</string>
     <string name="no_widgets_here_yet">Todavía sin widgets aquí</string>
     <string name="available_widgets">Widgets disponibles</string>
-    <string name="snackbar_page_removed">Se ha quitado «Página %1$s»</string>
+    <string name="snackbar_page_removed">Se ha quitado «Página %1$s».</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">No salirse de la pista</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">Intermedia</string>
     <string name="release_4_2">• Rediseño de los widgets: nuevo aspecto, agrupación por páginas, reordenar y combinar como quieras.
