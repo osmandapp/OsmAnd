@@ -1,11 +1,12 @@
 package net.osmand.plus.views.mapwidgets.configure.reorder;
 
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
+import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ItemType;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ListItem;
+import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AddedWidgetViewHolder.AddedWidgetUiInfo;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableItemViewHolder.AvailableWidgetUiInfo;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.PageViewHolder.PageUiInfo;
-import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AddedWidgetViewHolder.AddedWidgetUiInfo;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -35,14 +36,22 @@ public class ReorderWidgetsAdapterHelper {
 			items.remove(position);
 			adapter.notifyItemRemoved(position);
 
-			int order = dataHolder.getSelectedPanel().getOriginalWidgetOrder(addedWidgetUiInfo.key);
-			AvailableWidgetUiInfo availableWidgetInfo = new AvailableWidgetUiInfo(addedWidgetUiInfo, order);
-			int insertIndex = getInsertIndexForAvailableWidget(order);
-			if (insertIndex != -1) {
-				items.add(insertIndex, new ListItem(ItemType.AVAILABLE_WIDGET, availableWidgetInfo));
-				adapter.notifyItemChanged(insertIndex - 1, null); // Show bottom divider, without animation
-				adapter.notifyItemInserted(insertIndex);
+			WidgetParams widgetParams = WidgetParams.getById(addedWidgetUiInfo.key);
+			boolean belongsToGroup = widgetParams != null && widgetParams.getGroup() != null;
+			if (!belongsToGroup) {
+				returnWidgetToAvailableList(addedWidgetUiInfo);
 			}
+		}
+	}
+
+	private void returnWidgetToAvailableList(@NonNull AddedWidgetUiInfo addedWidgetUiInfo) {
+		int order = dataHolder.getSelectedPanel().getOriginalWidgetOrder(addedWidgetUiInfo.key);
+		AvailableWidgetUiInfo availableWidgetInfo = new AvailableWidgetUiInfo(addedWidgetUiInfo, order);
+		int insertIndex = getInsertIndexForAvailableWidget(order);
+		if (insertIndex != -1) {
+			items.add(insertIndex, new ListItem(ItemType.AVAILABLE_WIDGET, availableWidgetInfo));
+			adapter.notifyItemChanged(insertIndex - 1, null); // Show bottom divider, without animation
+			adapter.notifyItemInserted(insertIndex);
 		}
 	}
 
