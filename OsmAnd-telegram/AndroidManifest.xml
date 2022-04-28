@@ -10,6 +10,12 @@
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
+    <queries>
+        <package android:name="net.osmand" />
+        <package android:name="net.osmand.plus" />
+        <package android:name="net.osmand.dev" />
+    </queries>
+
     <application
         android:name="net.osmand.telegram.TelegramApplication"
         android:allowBackup="true"
