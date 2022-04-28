@@ -50,7 +50,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapFragment;
-import net.osmand.plus.configmap.ConfigureMapMenu;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dashboard.tools.DashboardSettingsDialogFragment;
 import net.osmand.plus.dashboard.tools.TransactionBuilder;
@@ -683,9 +682,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private void updateListAdapter() {
 		listView.setEmptyView(null);
 		ContextMenuAdapter cm = null;
-		if (visibleType == DashboardType.CONFIGURE_MAP) {
-			cm = new ConfigureMapMenu().createListAdapter(mapActivity);
-		} else if (visibleType == DashboardType.LIST_MENU) {
+		if (visibleType == DashboardType.LIST_MENU) {
 			cm = mapActivity.getMapActions().createMainOptionsMenu();
 		} else if (visibleType == DashboardType.ROUTE_PREFERENCES) {
 			RoutePreferencesMenu routePreferencesMenu = new RoutePreferencesMenu(mapActivity);
@@ -736,7 +733,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	public void onNewDownloadIndexes() {
 		if (visibleType == DashboardType.CONTOUR_LINES
-				|| visibleType == DashboardType.TERRAIN
 				|| visibleType == DashboardType.WIKIPEDIA) {
 			refreshContent(true);
 		}
@@ -745,11 +741,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	@SuppressWarnings("unchecked")
 	public void onDownloadInProgress() {
 		if (visibleType == DashboardType.CONTOUR_LINES
-				|| visibleType == DashboardType.TERRAIN
 				|| visibleType == DashboardType.WIKIPEDIA) {
 			DownloadIndexesThread downloadThread = getMyApplication().getDownloadThread();
 			IndexItem downloadIndexItem = downloadThread.getCurrentDownloadingItem();
-			if (downloadIndexItem != null) {
+			if (downloadIndexItem != null && listAdapter != null) {
 				int downloadProgress = downloadThread.getCurrentDownloadingItemProgress();
 				ArrayAdapter<ContextMenuItem> adapter = (ArrayAdapter<ContextMenuItem>) listAdapter;
 				for (int i = 0; i < adapter.getCount(); i++) {
