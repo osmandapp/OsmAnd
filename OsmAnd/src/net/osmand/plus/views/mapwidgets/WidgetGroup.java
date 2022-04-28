@@ -3,22 +3,29 @@ package net.osmand.plus.views.mapwidgets;
 import net.osmand.plus.R;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
+import static net.osmand.plus.views.mapwidgets.WidgetParams.ARRIVAL_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.AV_NOTES_ON_REQUEST;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.AV_NOTES_RECORD_AUDIO;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.AV_NOTES_RECORD_VIDEO;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.AV_NOTES_TAKE_PHOTO;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.DISTANCE_TO_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_DISTANCE;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_TIME;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.NAVIGATION_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_ARRIVAL_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_TIME_TO_GO;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.MAGNETIC_BEARING;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.RELATIVE_BEARING;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.SECOND_NEXT_TURN;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_1;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_2;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.SMALL_NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TIME_TO_GO;
 
 public enum WidgetGroup {
 
@@ -52,13 +59,14 @@ public enum WidgetGroup {
 		if (this == ROUTE_MANEUVERS) {
 			return Arrays.asList(NEXT_TURN, SMALL_NEXT_TURN, SECOND_NEXT_TURN);
 		} else if (this == NAVIGATION_POINTS) {
-			return Arrays.asList(DISTANCE_TO_DESTINATION, INTERMEDIATE_DISTANCE, INTERMEDIATE_TIME, NAVIGATION_TIME);
+			return Arrays.asList(DISTANCE_TO_DESTINATION, INTERMEDIATE_DESTINATION, INTERMEDIATE_ARRIVAL_TIME,
+					INTERMEDIATE_TIME_TO_GO, ARRIVAL_TIME, TIME_TO_GO);
 		} else if (this == MAP_MARKERS) {
 			return Arrays.asList(SIDE_MARKER_1, SIDE_MARKER_2);
 		} else if (this == BEARING) {
-			return Collections.singletonList(WidgetParams.BEARING);
+			return Arrays.asList(RELATIVE_BEARING, MAGNETIC_BEARING);
 		} else if (this == AUDIO_VIDEO_NOTES) {
-			return Collections.singletonList(WidgetParams.AUDIO_VIDEO_NOTES);
+			return Arrays.asList(AV_NOTES_ON_REQUEST, AV_NOTES_RECORD_AUDIO, AV_NOTES_RECORD_VIDEO, AV_NOTES_TAKE_PHOTO);
 		} else {
 			throw new IllegalStateException("Unsupported widgets group");
 		}

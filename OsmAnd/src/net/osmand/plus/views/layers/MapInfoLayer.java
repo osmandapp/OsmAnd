@@ -28,17 +28,18 @@ import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
+import net.osmand.plus.views.mapwidgets.widgets.BearingWidget;
 import net.osmand.plus.views.mapwidgets.widgets.CoordinatesWidget;
 import net.osmand.plus.views.mapwidgets.widgets.ElevationProfileWidget;
 import net.osmand.plus.views.mapwidgets.widgets.LanesWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
+import net.osmand.plus.views.mapwidgets.widgets.NavigationTimeWidget.ArrivalTimeWidget;
+import net.osmand.plus.views.mapwidgets.widgets.NavigationTimeWidget.TimeToGoWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
-import net.osmand.plus.views.mapwidgets.widgetstates.BearingWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.CompassRulerWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.ElevationProfileWidgetState;
-import net.osmand.plus.views.mapwidgets.widgetstates.TimeWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 
 import java.util.ArrayList;
@@ -50,27 +51,30 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import static net.osmand.plus.views.mapwidgets.WidgetParams.ALTITUDE;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.ARRIVAL_TIME;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.BATTERY;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.BEARING;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.COORDINATES;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_TIME;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.DISTANCE_TO_DESTINATION;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.ELEVATION_PROFILE;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.GPS_INFO;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_DISTANCE;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_ARRIVAL_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_TIME_TO_GO;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.LANES;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.MAGNETIC_BEARING;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.MARKERS_TOP_BAR;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.MAX_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.NAVIGATION_TIME;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_TIME;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.RADIUS_RULER;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.RELATIVE_BEARING;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.SECOND_NEXT_TURN;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_1;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_2;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.SMALL_NEXT_TURN;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.STREET_NAME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TIME_TO_GO;
 
 public class MapInfoLayer extends OsmandMapLayer {
 
@@ -267,22 +271,31 @@ public class MapInfoLayer extends OsmandMapLayer {
 		WidgetsPanel rightPanel = WidgetsPanel.RIGHT;
 
 		MapWidget intermediateDist = routeWidgetsFactory.createIntermediateDistanceControl(mapActivity);
-		registerWidget(INTERMEDIATE_DISTANCE, intermediateDist, rightPanel);
+		registerWidget(INTERMEDIATE_DESTINATION, intermediateDist, rightPanel);
 
-		TextInfoWidget intermediateTime = routeWidgetsFactory.createTimeControl(mapActivity, true);
-		registerWidget(INTERMEDIATE_TIME, intermediateTime, new TimeWidgetState(app, true), rightPanel);
+		MapWidget intermediateArrivalTime = new ArrivalTimeWidget(mapActivity, true);
+		registerWidget(INTERMEDIATE_ARRIVAL_TIME, intermediateArrivalTime, rightPanel);
+
+		MapWidget intermediateTimeToGo = new TimeToGoWidget(mapActivity, true);
+		registerWidget(INTERMEDIATE_TIME_TO_GO, intermediateTimeToGo, rightPanel);
 
 		MapWidget distanceToDestination = routeWidgetsFactory.createDistanceControl(mapActivity);
 		registerWidget(DISTANCE_TO_DESTINATION, distanceToDestination, rightPanel);
 
-		MapWidget time = routeWidgetsFactory.createTimeControl(mapActivity, false);
-		registerWidget(NAVIGATION_TIME, time, new TimeWidgetState(app, false), rightPanel);
+		MapWidget arrivalTime = new ArrivalTimeWidget(mapActivity, false);
+		registerWidget(ARRIVAL_TIME, arrivalTime, rightPanel);
+
+		MapWidget timeToGo = new TimeToGoWidget(mapActivity, false);
+		registerWidget(TIME_TO_GO, timeToGo, rightPanel);
 
 		MapWidget marker = markersWidgetsHelper.getMapMarkerSideWidget(true);
 		registerWidget(SIDE_MARKER_1, marker, rightPanel);
 
-		MapWidget bearing = routeWidgetsFactory.createBearingControl(mapActivity);
-		registerWidget(BEARING, bearing, new BearingWidgetState(app), rightPanel);
+		MapWidget relativeBearing = new BearingWidget(mapActivity, true);
+		registerWidget(RELATIVE_BEARING, relativeBearing, rightPanel);
+
+		MapWidget magneticBearing = new BearingWidget(mapActivity, false);
+		registerWidget(MAGNETIC_BEARING, magneticBearing, rightPanel);
 
 		MapWidget marker2nd = markersWidgetsHelper.getMapMarkerSideWidget(false);
 		registerWidget(SIDE_MARKER_2, marker2nd, rightPanel);

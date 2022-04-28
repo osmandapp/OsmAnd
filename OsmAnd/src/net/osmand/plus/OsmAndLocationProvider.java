@@ -904,6 +904,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		return currentPositionHelper.getGeocodingResult(loc, result);
 	}
 
+	@Nullable
 	public net.osmand.Location getLastKnownLocation() {
 		net.osmand.Location loc = this.location;
 		if (loc != null) {
