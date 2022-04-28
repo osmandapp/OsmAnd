@@ -253,9 +253,25 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			List<WidgetParams> disabledDefaultWidgets = listDefaultWidgets(disabledWidgets);
 			List<MapWidgetInfo> externalWidgets = listExternalWidgets(disabledWidgets);
 
-			inflateAvailableDefaultWidgets(disabledDefaultWidgets, !Algorithms.isEmpty(externalWidgets));
+			inflateAvailableDefaultWidgets(excludeGroupsDuplicated(disabledDefaultWidgets), !Algorithms.isEmpty(externalWidgets));
 			inflateAvailableExternalWidgets(externalWidgets);
 		}
+	}
+
+	@NonNull
+	private List<WidgetParams> excludeGroupsDuplicated(List<WidgetParams> widgets) {
+		List<WidgetGroup> visitedGroups = new ArrayList<>();
+		List<WidgetParams> matchingWidgets = new ArrayList<>();
+		for (WidgetParams widget : widgets) {
+			WidgetGroup group = widget.getGroup();
+			if (group != null && !visitedGroups.contains(group)) {
+				visitedGroups.add(group);
+				matchingWidgets.add(widget);
+			} else if (group == null) {
+				matchingWidgets.add(widget);
+			}
+		}
+		return matchingWidgets;
 	}
 
 	private void inflateAvailableDefaultWidgets(@NonNull List<WidgetParams> widgets, boolean hasExternalWidgets) {
@@ -263,19 +279,10 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		int profileColor = selectedAppMode.getProfileColor(nightMode);
 		WidgetIconsHelper iconsHelper = new WidgetIconsHelper(app, profileColor, nightMode);
 
-		List<WidgetGroup> inflatedGroups = new ArrayList<>();
 
 		for (int i = 0; i < widgets.size(); i++) {
 			WidgetParams widget = widgets.get(i);
-
 			WidgetGroup widgetGroup = widget.getGroup();
-			if (widgetGroup != null) {
-				if (inflatedGroups.contains(widgetGroup)) {
-					continue;
-				} else {
-					inflatedGroups.add(widgetGroup);
-				}
-			}
 
 			View view = inflater.inflate(R.layout.configure_screen_list_item_available_widget,
 					availableWidgetsContainer, false);
