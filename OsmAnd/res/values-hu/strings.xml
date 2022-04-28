@@ -3001,7 +3001,7 @@
     <string name="routing_attr_difficulty_preference_name">Előnyben részesített nehézség</string>
     <string name="routing_attr_difficulty_preference_description">Az ilyen nehézségű pályák részesülnek előnyben, azonban az útvonalba továbbra is bekerülhetnek nehezebb vagy könnyebb pályák, ha úgy rövidebb.</string>
     <string name="routing_attr_freeride_policy_name">Pályán kívül</string>
-    <string name="routing_attr_freeride_policy_description">A \'freeride\' és a \'pályán kívüli utak\' nem hivatalos útvonalak és átjárók. Általában nem egyengetik el őket, nincsenek karbantartva, este pedig nem ellenőrzik őket. Belépés csak saját felelősségre.</string>
+    <string name="routing_attr_freeride_policy_description">A „freeride” és a „pályán kívüli utak” nem hivatalos útvonalak és átjárók. Általában nem egyengetik el őket, nincsenek karbantartva, este pedig nem ellenőrzik őket. Belépés csak saját felelősségre.</string>
     <string name="configure_profile_info">Profil beállításai:</string>
     <string name="coordinates_format_info">A kiválasztott formátum az alkalmazás összes területén alkalmazva lesz.</string>
     <string name="change_default_settings">Beállítás módosítása</string>
