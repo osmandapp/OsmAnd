@@ -884,7 +884,6 @@
     <string name="intermediate_points_change_order">Alterar ordem</string>
     <string name="srtm_paid_version_msg">Por favor considere comprar o complemento \"Curvas de nível\" para apoiar o desenvolvimento.</string>
     <string name="srtm_paid_version_title">Complemento curvas de nível</string>
-    <string name="av_def_action_choose">A pedido\?</string>
     <string name="av_video_format_descr">Formato de saída de vídeo:</string>
     <string name="av_use_external_recorder_descr">Usar gravador do sistema para vídeo.</string>
     <string name="av_use_external_camera_descr">Utilizar a aplicação do sistema para tirar fotografias.</string>

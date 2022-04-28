@@ -1222,7 +1222,6 @@
     <string name="select_address_activity">Укажите адрес</string>
     <string name="favourites_list_activity">Выбор избранной</string>
     <string name="local_openstreetmap_act_title">Модификации OSM</string>
-    <string name="av_def_action_choose">По запросу\?</string>
     <string name="osmand_play_title_30_chars">OsmAnd карты и навигация</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ карты и навигация</string>
     <string name="use_kalman_filter_compass_descr">Уменьшает «шум» компаса, но добавляет инерцию.</string>

@@ -572,7 +572,6 @@
     <string name="settings_preset">نمایهٔ پیش‌فرض</string>
     <string name="settings_preset_descr">نمای نقشه و تنظیمات ناوبری برای هر نمایه جداگانه ذخیره می‌شود. نمایه پیش‌فرض خود را اینجا تنظیم کنید.</string>
     <string name="osmand_background_plugin_description">تنظیمات مربوط به فعال‌سازی ردگیری و ناوبری در پس‌زمینه را نشان می‌دهد که با ارسال پیام‌های بیدارباش متناوب به جی‌پی‌اس دستگاه این کار را انجام می‌دهد (با نمایشگر خاموش).</string>
-    <string name="av_def_action_choose">هنگام درخواست؟</string>
     <string name="audionotes_location_not_defined">موقعیت‌یاب را روشن کنید یا به‌طور دستی از منوی زمینه اقدام کنید.</string>
     <string name="rendering_attr_showRoadMaps_description">انتخاب کنید نقشه‌های فقط-جاده چه زمانی نشان داده شود:</string>
     <string name="shared_string_target_points">مقصدها</string>

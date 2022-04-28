@@ -673,7 +673,6 @@
     <string name="dropbox_plugin_name">Complemento Dropbox</string>
     <string name="intermediate_points_change_order">Alterar ordem</string>
     <string name="srtm_paid_version_msg">Considere pagar pelo complemento \"Curvas de nível\" para apoiar o desenvolvimento.</string>
-    <string name="av_def_action_choose">Sob demanda\?</string>
     <string name="av_def_action_video">Gravar vídeo</string>
     <string name="av_def_action_audio">Gravar áudio</string>
     <string name="av_widget_action_descr">Ação padrão do widget:</string>

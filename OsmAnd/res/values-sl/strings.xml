@@ -936,7 +936,6 @@
     <string name="prefer_in_routing_title">Prednostno usmerjanje …</string>
     <string name="prefer_in_routing_descr">Prednostno naj bo izbrana navigacija po avtocestah.</string>
     <string name="max_speed_none">brez</string>
-    <string name="av_def_action_choose">Na zahtevo\?</string>
     <string name="item_checked">izbrano</string>
     <string name="item_unchecked">ni izbrano</string>
     <string name="shared_string_map">Zemljevid</string>

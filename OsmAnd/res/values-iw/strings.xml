@@ -939,7 +939,6 @@
     <string name="prefer_motorways">העדפת כבישים סלולים</string>
     <string name="prefer_in_routing_title">העדפה…</string>
     <string name="prefer_in_routing_descr">העדפת כבישים סלולים.</string>
-    <string name="av_def_action_choose">לפי בקשה\?</string>
     <string name="item_checked">לאחר בדיקה</string>
     <string name="item_unchecked">ללא בדיקה</string>
     <string name="shared_string_map">מפה</string>

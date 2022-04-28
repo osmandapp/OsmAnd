@@ -36,7 +36,6 @@
     <string name="precise_routing_mode">التوجيه الدقيق (ألفا)</string>
     <string name="recording_context_menu_precord">التقاط صورة</string>
     <string name="dropbox_plugin_name">إضافة Dropbox</string>
-    <string name="av_def_action_choose">وفقا لمتطلبات ؟</string>
     <string name="recording_error">حدث خطأ أثناء التسجيل</string>
     <string name="recording_delete_confirm">حذف هذا المسار ؟</string>
     <string name="recording_unavailable">غير متاح</string>

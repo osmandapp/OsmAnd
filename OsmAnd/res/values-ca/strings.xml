@@ -977,7 +977,6 @@
 \n * Premeu contínuament al mapa per suprimir el punt anterior. 
 \n * Premeu contínuament un punt per veure\'n i afegir-hi una descripció. 
 \n * Premeu el giny de mesura per veure més accions.</string>
-    <string name="av_def_action_choose">Sota demanda\?</string>
     <string name="background_service_provider">Proveïdor de la ubicació</string>
     <string name="converting_names">S\'estan convertint els noms nadius/anglesos …</string>
     <string name="save_track_interval_descr">Indiqueu l\'interval d\'enregistrament de traces a desar durant la navegació</string>

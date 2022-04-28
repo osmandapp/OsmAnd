@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="av_def_action_choose">On request</string>
     <string name="audio_video_notes_desc">Widgets provides quick access to start/stop taking a recording (audio, video or photo).</string>
     <string name="bearing_additional_note">You can change format of displayed data in: Configure Profile – General settings – Angular units.</string>
     <string name="bearing_desc">The bearing widget shows the absolute or relative bearing to a target in angular units (Degrees 180, Degrees 360, Milliradians).</string>
@@ -3342,7 +3343,6 @@
     <string name="dropbox_plugin_name">Dropbox plugin</string>
     <string name="intermediate_points_change_order">Change order</string>
     <string name="srtm_paid_version_msg">Please consider paying for the \'Contour lines\' plugin to support further development.</string>
-    <string name="av_def_action_choose">On request?</string>
     <string name="av_def_action_video">Record video</string>
     <string name="av_def_action_audio">Record audio</string>
     <string name="av_widget_action_descr">Default widget action:</string>

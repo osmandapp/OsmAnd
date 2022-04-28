@@ -1718,7 +1718,6 @@
     <string name="route_from">Mistä:</string>
     <string name="download_using_mobile_internet">Ei yhdistetty Wi-Fi-verkkoon. Haluatko käyttää nykyistä Internet-yhteyttä lataukseen\?</string>
     <string name="precise_routing_mode_descr">Ota käyttöön reitille tarkka laskenta ilman pikkuvirheitä. Vielä etäisyysrajoitteinen ja hidas.</string>
-    <string name="av_def_action_choose">Pyynnöstä\?</string>
     <string name="av_widget_action_descr">Oletustyökalutoiminto:</string>
     <string name="av_widget_action">Oletustyökalutoiminto</string>
     <string name="av_use_external_recorder_descr">Käytä järjestelmän nauhoitinta videolle.</string>

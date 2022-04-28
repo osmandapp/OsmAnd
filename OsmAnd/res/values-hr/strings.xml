@@ -492,7 +492,6 @@
     <string name="local_index_gpx_info_show">\n\nPritisnite i držite za opcije</string>
     <string name="local_index_installed">Izdanje</string>
     <string name="precise_routing_mode">Precizni način navođenja (alfa)</string>
-    <string name="av_def_action_choose">Odaberite na zahtjev</string>
     <string name="max_speed_none">bez</string>
     <string name="srtm_paid_version_msg">Molimo vas da razmislite o kupnji dodataka za prikaz Slojnica u Market trgovini kako biste podržati daljnji razvoj.</string>
     <string name="srtm_paid_version_title">Dodatak Slojnice</string>

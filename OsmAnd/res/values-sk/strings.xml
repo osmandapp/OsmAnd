@@ -906,7 +906,6 @@
     <string name="prefer_in_routing_descr">Uprednostniť diaľnice.</string>
     <string name="item_checked">označené</string>
     <string name="item_unchecked">neoznačené</string>
-    <string name="av_def_action_choose">Pri požiadaní\?</string>
     <string name="access_arrival_time">Čas príchodu</string>
     <string name="precise_routing_mode_descr">Výpočet presnej trasy bez závad. Zatiaľ však obmedzený na menšiu vzdialenosť a je pomalší.</string>
     <string name="map_widget_gps_info">Informácie o GPS</string>

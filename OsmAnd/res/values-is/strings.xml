@@ -1690,7 +1690,6 @@
     <string name="precise_routing_mode_descr">Reikna nákvæmar leiðir án hnökra. Er ennþá takmarkað út frá vegalengdum og fremur hægvirkt.</string>
     <string name="precise_routing_mode">Nákvæmt leiðaval (alfa-tilraunaútgáfa)</string>
     <string name="dropbox_plugin_description">Gerir þér kleift að samstilla ferla og minnispunkta við hljóð/myndskeið með því að nota Dropbox-aðganginn þinn.</string>
-    <string name="av_def_action_choose">Eftir þörfum\?</string>
     <string name="av_def_action_video">Taka upp myndskeið</string>
     <string name="av_def_action_audio">Taka upp hljóð</string>
     <string name="av_widget_action_descr">Sjálfgefin aðgerð viðmótshluta:</string>

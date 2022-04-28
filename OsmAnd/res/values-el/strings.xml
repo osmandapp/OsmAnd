@@ -931,7 +931,6 @@
     <string name="favourites_list_activity">Επιλογή αγαπημένου</string>
     <string name="local_openstreetmap_act_title">Τροποποιήσεις OSM</string>
     <string name="shared_string_more_actions">Άλλες ενέργειες</string>
-    <string name="av_def_action_choose">Κατόπιν αίτησης;</string>
     <string name="download_using_mobile_internet">Δεν είστε συνδεδεμένοι με ασύρματο δίκτυο. Θέλετε να χρησιμοποιήσετε την τρέχουσα διαδικτυακή σύνδεση για λήψη;</string>
     <string name="cancel_route">Απόρριψη διαδρομής</string>
     <string name="cancel_navigation">Διακοπή πλοήγησης</string>

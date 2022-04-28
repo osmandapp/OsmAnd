@@ -977,7 +977,6 @@
     <string name="av_def_action_picture">Foto aufnehmen</string>
     <string name="av_use_external_camera_descr">System-App für Fotos verwenden.</string>
     <string name="av_use_external_camera">System-Kamera-App nutzen</string>
-    <string name="av_def_action_choose">Auf Anfrage\?</string>
     <string name="dropbox_plugin_description">Synchronisieren Sie Tracks und Audio-/Video-Notizen mit Ihrem Dropbox-Konto.</string>
     <string name="dropbox_plugin_name">Dropbox-Modul</string>
     <string name="intermediate_points_change_order">Reihenfolge ändern</string>

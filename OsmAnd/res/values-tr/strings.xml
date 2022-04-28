@@ -597,7 +597,6 @@
     <string name="prefer_in_routing_title">Tercih et…</string>
     <string name="prefer_in_routing_descr">Otoyolları tercih et.</string>
     <string name="max_speed_none">hiçbiri</string>
-    <string name="av_def_action_choose">İstek üzerine\?</string>
     <string name="osmand_play_title_30_chars">OsmAnd Haritalar &amp; Navigasyon</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Haritalar &amp; Yolbul</string>
     <string name="poi_query_by_name_matches_categories">Birkaç ilgili POI kategorisi bulundu.</string>

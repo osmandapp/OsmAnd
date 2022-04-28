@@ -933,7 +933,6 @@
     <string name="prefer_motorways">Privilégier les autoroutes</string>
     <string name="prefer_in_routing_title">Privilégier…</string>
     <string name="prefer_in_routing_descr">Privilégier les itinéraires sur Autoroutes.</string>
-    <string name="av_def_action_choose">À la demande \?</string>
     <string name="item_checked">coché</string>
     <string name="item_unchecked">non vérifié</string>
     <string name="shared_string_map">Carte</string>

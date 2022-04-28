@@ -601,7 +601,6 @@ POIの更新は利用できません</string>
     <string name="intermediate_points_change_order">順序を変更</string>
     <string name="srtm_paid_version_msg">アプリケーションの発展を望むのであれば、Google Play上にある等高線プラグインのご購入をご検討下さい。</string>
     <string name="srtm_paid_version_title">等高線プラグイン</string>
-    <string name="av_def_action_choose">ウィジェット起動毎に選択</string>
     <string name="av_def_action_video">動画を撮影</string>
     <string name="av_def_action_audio">音声を録音</string>
     <string name="av_widget_action_descr">AVウィジェットボタン(音声・動画・写真で残すメモ機能)のデフォルト動作を指定します。</string>

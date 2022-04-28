@@ -126,7 +126,6 @@
     <string name="intermediate_points_change_order">Ordena aldatu</string>
     <string name="srtm_paid_version_msg">Baloratu \'Sestra-kurbak\' gehigarriagatik ordaintzea honen garapena babesteko.</string>
     <string name="srtm_paid_version_title">Sestra-kurben gehigarria</string>
-    <string name="av_def_action_choose">Eskatutakoan\?</string>
     <string name="av_def_action_video">Grabatu bideoa</string>
     <string name="av_def_action_audio">Grabatu audioa</string>
     <string name="av_widget_action_descr">Trepetaren ekintza lehenetsia:</string>
