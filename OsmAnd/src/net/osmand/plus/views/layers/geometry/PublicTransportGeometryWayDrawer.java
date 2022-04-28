@@ -70,7 +70,7 @@ public class PublicTransportGeometryWayDrawer extends GeometryWayDrawer<PublicTr
 					buildVectorOutline(collection, baseOrder--, outlineId++, prevStyle.getStrokeColor(0),
 							outlineWidth, outlineWidth - width, dataArr);
 					drawVectorLine(collection, lineId++, baseOrder--, shouldDrawArrows, prevStyle,
-							prevStyle.getColor(0), width, false, dataArr);
+							prevStyle.getColor(0), width, null, false, dataArr);
 				} else {
 					drawVectorLine(collection, lineId++, baseOrder--, shouldDrawArrows, true, prevStyle, dataArr);
 				}
@@ -84,7 +84,7 @@ public class PublicTransportGeometryWayDrawer extends GeometryWayDrawer<PublicTr
 				buildVectorOutline(collection, baseOrder--, outlineId, prevStyle.getStrokeColor(0),
 						outlineWidth, outlineWidth - width, dataArr);
 				drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, prevStyle,
-						prevStyle.getColor(0), width, false, dataArr);
+						prevStyle.getColor(0), width, null, false, dataArr);
 			} else {
 				drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, true, prevStyle, dataArr);
 			}

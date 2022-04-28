@@ -26,9 +26,9 @@ import java.util.TreeMap;
 
 public class MapTextLayer extends OsmandMapLayer {
 
-	private static final int TEXT_WRAP = 15;
-	private static final int TEXT_LINES = 3;
-	private static final int TEXT_SIZE = 13;
+	public static final int TEXT_WRAP = 15;
+	public static final int TEXT_LINES = 3;
+	public static final int TEXT_SIZE = 13;
 
 	private Map<OsmandMapLayer, Collection<?>> textObjects = new LinkedHashMap<>();
 	private Paint paintTextIcon;

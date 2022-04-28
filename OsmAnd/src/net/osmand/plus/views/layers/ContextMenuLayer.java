@@ -1,11 +1,5 @@
 package net.osmand.plus.views.layers;
 
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-import static net.osmand.router.network.NetworkRouteContext.*;
-import static net.osmand.router.network.NetworkRouteSelector.*;
-
 import android.Manifest;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -106,6 +100,12 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import gnu.trove.list.array.TIntArrayList;
+
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
+import static net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
 
 public class ContextMenuLayer extends OsmandMapLayer {
 
@@ -506,8 +506,11 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		mInGpxDetailsMode = true;
 		mapActivity.disableDrawer();
-		AndroidUiHelper.setVisibility(mapActivity, View.INVISIBLE, R.id.map_ruler_layout,
-				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
+		AndroidUiHelper.setVisibility(mapActivity, View.INVISIBLE,
+				R.id.map_ruler_layout,
+				R.id.map_left_widgets_panel,
+				R.id.map_right_widgets_panel,
+				R.id.map_center_info);
 	}
 
 	public void exitGpxDetailsMode() {
@@ -518,8 +521,11 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		mInGpxDetailsMode = false;
 		mapActivity.enableDrawer();
-		AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE, R.id.map_ruler_layout,
-				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
+		AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE,
+				R.id.map_ruler_layout,
+				R.id.map_left_widgets_panel,
+				R.id.map_right_widgets_panel,
+				R.id.map_center_info);
 	}
 
 	private void quitMovingMarker() {
@@ -529,8 +535,11 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 
 		mInChangeMarkerPositionMode = false;
-		AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE, R.id.map_ruler_layout,
-				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
+		AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE,
+				R.id.map_ruler_layout,
+				R.id.map_left_widgets_panel,
+				R.id.map_right_widgets_panel,
+				R.id.map_center_info);
 	}
 
 	public void quitAddGpxPoint() {
@@ -540,8 +549,11 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 
 		mInAddGpxPointMode = false;
-		AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE, R.id.map_ruler_layout,
-				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
+		AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE,
+				R.id.map_ruler_layout,
+				R.id.map_left_widgets_panel,
+				R.id.map_right_widgets_panel,
+				R.id.map_center_info);
 	}
 
 	public void enterAddGpxPointMode(NewGpxPoint newGpxPoint) {
@@ -557,8 +569,11 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		mInAddGpxPointMode = true;
 		mAddGpxPointBottomSheetHelper.show(newGpxPoint);
-		AndroidUiHelper.setVisibility(mapActivity, View.INVISIBLE, R.id.map_ruler_layout,
-				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
+		AndroidUiHelper.setVisibility(mapActivity, View.INVISIBLE,
+				R.id.map_ruler_layout,
+				R.id.map_left_widgets_panel,
+				R.id.map_right_widgets_panel,
+				R.id.map_center_info);
 
 		view.refreshMap();
 	}
@@ -587,8 +602,11 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		mInChangeMarkerPositionMode = true;
 		mMoveMarkerBottomSheetHelper.show(menu.getRightIcon());
-		AndroidUiHelper.setVisibility(mapActivity, View.INVISIBLE, R.id.map_ruler_layout,
-				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
+		AndroidUiHelper.setVisibility(mapActivity, View.INVISIBLE,
+				R.id.map_ruler_layout,
+				R.id.map_left_widgets_panel,
+				R.id.map_right_widgets_panel,
+				R.id.map_center_info);
 
 		view.refreshMap();
 	}

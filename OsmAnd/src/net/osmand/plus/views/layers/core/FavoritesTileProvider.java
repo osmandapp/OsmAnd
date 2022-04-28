@@ -20,14 +20,13 @@ import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class FavoritesTileProvider extends interface_MapTiledCollectionProvider {
 
-	private final List<FavouritesMapLayerData> favouritesMapLayerDataList = new ArrayList<>();
+	private final List<MapLayerData> mapLayerDataList = new ArrayList<>();
 	private final Map<Integer, Bitmap> bigBitmapCache = new ConcurrentHashMap<>();
 	private final Map<Integer, Bitmap> smallBitmapCache = new ConcurrentHashMap<>();
 	private final int baseOrder;
@@ -90,27 +89,26 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 
 	@Override
 	public PointI getPoint31(int index) {
-		FavouritesMapLayerData data = index < favouritesMapLayerDataList.size()
-				? favouritesMapLayerDataList.get(index) : null;
+		MapLayerData data = index < mapLayerDataList.size()
+				? mapLayerDataList.get(index) : null;
 		return data != null ? data.point : new PointI(0, 0);
 	}
 
 	@Override
 	public int getPointsCount() {
-		return favouritesMapLayerDataList.size();
+		return mapLayerDataList.size();
 	}
 
 	@Override
 	public SWIGTYPE_p_sk_spT_SkImage_const_t getImageBitmap(int index, boolean isFullSize) {
-		FavouritesMapLayerData data = index < favouritesMapLayerDataList.size()
-				? favouritesMapLayerDataList.get(index) : null;
+		MapLayerData data = index < mapLayerDataList.size()
+				? mapLayerDataList.get(index) : null;
 		if (data == null) {
 			return SwigUtilities.nullSkImage();
 		}
 		Bitmap bitmap;
 		if (isFullSize) {
-			int bigBitmapKey = getKey(data.colorBigPoint, data.withShadow, data.overlayIconId,
-					data.backgroundType, data.hasMarker, data.textScale);
+			int bigBitmapKey = data.getKey(true);
 			bitmap = bigBitmapCache.get(bigBitmapKey);
 			if (bitmap == null) {
 				PointImageDrawable pointImageDrawable;
@@ -121,12 +119,11 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 					pointImageDrawable = PointImageDrawable.getOrCreate(ctx, data.colorBigPoint,
 							data.withShadow, false, data.overlayIconId, data.backgroundType);
 				}
-				bitmap = pointImageDrawable.getBigMergedBitmap(data.textScale);
+				bitmap = pointImageDrawable.getBigMergedBitmap(data.textScale, false);
 				bigBitmapCache.put(bigBitmapKey, bitmap);
 			}
 		} else {
-			int smallBitmapKey = getKey(data.colorSmallPoint, data.withShadow, data.overlayIconId,
-					data.backgroundType, data.hasMarker, data.textScale);
+			int smallBitmapKey = data.getKey(false);
 			bitmap = smallBitmapCache.get(smallBitmapKey);
 			if (bitmap == null) {
 				PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
@@ -159,23 +156,23 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 		if (providerInstance != null) {
 			throw new IllegalStateException("Provider already instantiated. Data cannot be modified at this stage.");
 		}
-		favouritesMapLayerDataList.add(new FavouritesMapLayerData(colorSmallPoint, colorBigPoint,
+		mapLayerDataList.add(new MapLayerData(colorSmallPoint, colorBigPoint,
 				withShadow, overlayIconId, backgroundType, hasMarker, textScale, lat, lon));
 	}
 
-	private static class FavouritesMapLayerData {
+	private static class MapLayerData {
 		PointI point;
-		int colorSmallPoint;
 		int colorBigPoint;
+		int colorSmallPoint;
 		boolean withShadow;
 		int overlayIconId;
 		BackgroundType backgroundType;
 		boolean hasMarker;
 		float textScale;
 
-		FavouritesMapLayerData(int colorSmallPoint, int colorBigPoint, boolean withShadow, int overlayIconId,
-		                       @NonNull BackgroundType backgroundType, boolean hasMarker,
-		                       float textScale, double lat, double lon) {
+		MapLayerData(int colorSmallPoint, int colorBigPoint, boolean withShadow, int overlayIconId,
+		             @NonNull BackgroundType backgroundType, boolean hasMarker,
+		             float textScale, double lat, double lon) {
 			this.colorBigPoint = colorBigPoint;
 			this.colorSmallPoint = colorSmallPoint;
 			this.withShadow = withShadow;
@@ -187,15 +184,15 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 			int y = MapUtils.get31TileNumberY(lat);
 			point = new PointI(x, y);
 		}
-	}
 
-	private int getKey(int color, boolean withShadow, int overlayIconId,
-	                   @NonNull BackgroundType backgroundType, boolean hasMarker, float textScale) {
-		long hash = ((long) color << 6) + ((long) overlayIconId << 4) + ((withShadow ? 1 : 0) << 3)
-				+ ((hasMarker ? 1 : 0) << 2) + (int) (textScale * 10) + backgroundType.ordinal();
-		if (hash >= Integer.MAX_VALUE || hash <= Integer.MIN_VALUE) {
-			return (int) (hash >> 4);
+		int getKey(boolean bigPoint) {
+			int color = bigPoint ? colorBigPoint : colorSmallPoint;
+			long hash = ((long) color << 6) + ((long) overlayIconId << 4) + ((withShadow ? 1 : 0) << 3)
+					+ ((hasMarker ? 1 : 0) << 2) + (int) (textScale * 10) + (backgroundType != null ? backgroundType.ordinal() : 0);
+			if (hash >= Integer.MAX_VALUE || hash <= Integer.MIN_VALUE) {
+				return (int) (hash >> 4);
+			}
+			return (int) hash;
 		}
-		return (int) hash;
 	}
 }

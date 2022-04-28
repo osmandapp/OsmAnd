@@ -155,7 +155,7 @@ public class OsmandRenderer {
 			dashes[i] = rc.getDensityValue(cachedValues[i * 2]) + cachedValues[i * 2 + 1];
 		}
 		if(!dashEffect.containsKey(dashes)){
-			dashEffect.put(dashes, new DashPathEffect(dashes, st));
+			dashEffect.put(dashes, new OsmandDashPathEffect(dashes, st));
 		}
 		return dashEffect.get(dashes);
 	}

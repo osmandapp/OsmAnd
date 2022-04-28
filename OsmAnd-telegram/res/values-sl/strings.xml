@@ -125,7 +125,7 @@
     <string name="enter_password">Vnesite geslo</string>
     <string name="password_descr">Telegram geslo</string>
     <string name="shared_string_login">Prijava</string>
-    <string name="shared_string_logout">Odjava</string>
+    <string name="shared_string_logout">Odjavi se</string>
     <string name="initialization">Začenjanje</string>
     <string name="logging_out">Odjavljanje</string>
     <string name="closing">Zapiranje</string>

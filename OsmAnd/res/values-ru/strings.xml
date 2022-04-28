@@ -4592,7 +4592,7 @@
     <string name="apply_to_existing">Применить к существующим</string>
     <string name="add_page">Добавить страницу</string>
     <string name="page_number">Страница %1$s</string>
-    <string name="map_widget_altitude">Высота текущего местоположения</string>
+    <string name="map_widget_altitude">Текущая высота</string>
     <string name="map_widget_distance_to_destination">Расстояние до пункта назначения</string>
     <string name="map_widget_current_speed">Текущая скорость</string>
     <string name="shared_string_symbol">Символ</string>
@@ -4610,13 +4610,13 @@
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Не сходить с трассы</string>
     <string name="routing_attr_freeride_policy_allow_name">Разрешить</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">Средний</string>
-    <string name="release_4_2">- Редизайн виджетов: новое оформление, группировка по страницам, изменение порядка и комбинирование по вашему желанию. 
+    <string name="release_4_2">• Редизайн виджетов: новое оформление, группировка по страницам, изменение порядка и комбинирование по вашему желанию. 
 \n
-\n- Пешие / велосипедные / туристические маршруты: нажмите на символ маршрута и получите полную информацию о нем. 
+\n• Пешеходные / велосипедные / туристические маршруты: нажмите на символ маршрута и получите полную информацию о нем. 
 \n
-\n- Избранные группы: задание внешний вида по умолчанию для новых точек в группе. 
+\n• Избранные группы: задание внешнего вида по умолчанию для новых точек в группе. 
 \n
-\n- Исправления: автообновление тайловых онлайн-карт
+\n• Исправления: автообновление тайловых онлайн-карт
 \n
 \n</string>
 </resources>

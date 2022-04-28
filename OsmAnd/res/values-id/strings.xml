@@ -3122,4 +3122,161 @@
     <string name="routing_attr_allow_streams_name">Perbolehkan aliran dan saluran</string>
     <string name="shared_string_redo">Ulangi</string>
     <string name="shared_string_is_saved">disimpan</string>
+    <string name="gpx_upload_trackable_visibility_descr">\"Dapat dilacak\" berarti jejak tidak muncul di daftar publik mana pun, tetapi titik jejak yang diproses dengan stempel waktu darinya (yang tidak dapat dikaitkan dengan Anda secara langsung) dilakukan melalui unduhan dari API GPS publik.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Dapat diidentifikasi\" berarti bahwa jejak akan ditampilkan secara publik di jejak GPS Anda dan di daftar jejak GPS publik, yaitu pengguna lain akan dapat mengunduh jejak mentah dan mengaitkannya dengan nama pengguna Anda. Data tracepoint berstempel waktu publik dari API GPS yang disajikan melalui API trackpoint akan mereferensikan halaman pelacakan asli Anda.</string>
+    <string name="use_fast_recalculation_desc">Menghitung ulang hanya bagian awal rute, berguna untuk perjalanan jauh.</string>
+    <string name="complex_routing_descr">Perutean dua fase untuk navigasi mobil.</string>
+    <string name="message_need_calculate_route_before_show_graph">Data %1$s hanya tersedia di jalan raya, hitung rute menggunakan “Rute antar titik” untuk melihat grafik.</string>
+    <string name="use_native_pt_desc">Beralih ke perhitungan rute Angkutan Umum Java (aman)</string>
+    <string name="use_native_pt">Pengembangan Transportasi Umum Asli</string>
+    <string name="plan_route_exit_dialog_descr">Buang semua perubahan pada rute yang direncanakan\?</string>
+    <string name="route_between_points_add_track_desc">Pilih file trek untuk menambahkan segmen baru.</string>
+    <string name="set_working_days_to_continue">Tetapkan hari kerja untuk melanjutkan</string>
+    <string name="quick_action_remove_next_destination_descr">Menghapus tujuan berikutnya pada rute Anda. Jika itu adalah tujuan akhir, navigasi akan berhenti.</string>
+    <string name="please_provide_point_name_error">Mohon berikan nama untuk titik tersebut</string>
+    <string name="use_volume_buttons_as_zoom_descr">Kontrol tingkat perbesaran peta menggunakan tombol volume pada perangkat.</string>
+    <string name="disable_recording_once_app_killed_descrp">Pencatatan trek akan dijeda saat aplikasi dimatikan (melalui aplikasi terbaru). (Indikasi latar belakang OsmAnd menghilang dari bilah notifikasi Android.)</string>
+    <string name="vessel_width_limit_description">Atur lebar kapal untuk menghindari jembatan sempit</string>
+    <string name="routing_attr_length_description">Tentukan panjang kendaraan untuk diizinkan pada rute.</string>
+    <string name="uninstall_speed_cameras">Copot kamera kecepatan</string>
+    <string name="screen_timeout">Batas waktu layar</string>
+    <string name="keep_active">Tetap aktif</string>
+    <string name="lang_ml">Malayalam</string>
+    <string name="lang_os">Ossetia</string>
+    <string name="shared_string_navigation">Navigasi</string>
+    <string name="routing_attr_avoid_footways_name">Hindari jalan setapak</string>
+    <string name="routing_attr_avoid_footways_description">Hindari jalan setapak</string>
+    <string name="osm_live_payment_desc_hw">Langganan dikenakan biaya per periode yang dipilih. Batalkan di AppGallery Anda kapan saja.</string>
+    <string name="all_next_segments_will_be_recalc">Semua segmen berikutnya akan dihitung ulang menggunakan profil yang dipilih.</string>
+    <string name="only_selected_segment_recalc">Hanya segmen yang dipilih yang akan dihitung ulang menggunakan profil yang dipilih.</string>
+    <string name="all_next_segments">Semua segmen berikutnya</string>
+    <string name="save_global_track_interval_descr">Tentukan interval pencatatan untuk perekaman trek umum (diaktifkan melalui widget \'Perekaman perjalanan\' di peta).</string>
+    <string name="threshold_distance">Jarak ambang batas</string>
+    <string name="route_between_points_warning_desc">Selanjutnya, pasangkan trek Anda ke jalan terdekat yang diperbolehkan dengan salah satu profil navigasi Anda untuk menggunakan opsi ini.</string>
+    <string name="route_between_points_desc">Pilih cara menghubungkan titik-titik, dengan garis lurus, atau hitung rute di antara titik-titik tersebut seperti yang ditentukan di bawah ini.</string>
+    <string name="route_between_points_next_segment_button_desc">Hanya segmen berikutnya yang akan dihitung ulang menggunakan profil yang dipilih.</string>
+    <string name="route_between_points_whole_track_button_desc">Seluruh trek akan dihitung ulang menggunakan profil yang dipilih.</string>
+    <string name="track_coloring_solid">Padat</string>
+    <string name="gpx_direction_arrows">Panah arah</string>
+    <string name="gpx_split_interval_descr">Pilih interval di mana tanda dengan jarak atau waktu di trek akan ditampilkan.</string>
+    <string name="route_between_points">Rute antara titik-titik</string>
+    <string name="osm_edit_closed_note">Catatan OSM ditutup</string>
+    <string name="add_hidden_group_info">Poin tambahan dapat ditemukan di \"%s\". Perlihatkan grup yang dipilih untuk ditampilkan di peta.</string>
+    <string name="quick_action_showhide_mapillary_descr">Sebuah alihan untuk menampilkan atau menyembunyikan layer Mapillary pada peta.</string>
+    <string name="clear_tiles_warning">Menerapkan perubahan ini akan menghapus data cache untuk sumber ubin ini</string>
+    <string name="default_screen_timeout">Batas waktu layar default</string>
+    <string name="screen_timeout_descr">Jika \"%1$s\" aktif, waktu aktivitas akan bergantung padanya.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Ekspor atau impor tindakan cepat dengan profil aplikasi.</string>
+    <string name="map_source_zoom_levels_descr">Mempengaruhi layar saat digunakan sebagai peta atau hamparan/dasaran.
+\n
+\n%1$s: Peta terbatas pada rentang tingkat perbesaran yang dipilih.
+\n
+\n%2$s adalah level di mana ubin asli akan terlihat, peningkatan atau penurunan skala akan terjadi di luar nilai ini.</string>
+    <string name="pseudo_mercator_projection">Proyeksi Pseudo-Mercator</string>
+    <string name="turn_screen_on_wake_time_descr">Pilih batas waktu layar setelah bangun tidur. (\"%1$s\" tidak berlaku batas waktu.)</string>
+    <string name="turn_screen_on_proximity_sensor">Sensor kedekatan</string>
+    <string name="keep_screen_off">Biarkan layar mati</string>
+    <string name="turn_screen_on_power_button">Tombol daya</string>
+    <string name="turn_screen_on_power_button_disabled">Dinonaktifkan. Memerlukan \'Biarkan layar nyala\' di bagian \'Batas waktu setelah bangun\'.</string>
+    <string name="regions">Wilayah</string>
+    <string name="shared_string_upload">Unggah</string>
+    <string name="nm_h">kn</string>
+    <string name="plugin_settings">Plugin</string>
+    <string name="av_locations">Lokasi</string>
+    <string name="lang_eo">Esperanto</string>
+    <string name="lang_vo">Volapuk</string>
+    <string name="lang_te">Telugu</string>
+    <string name="lang_tl">Tagalog</string>
+    <string name="lang_az">Azerbaijan</string>
+    <string name="lang_br">Breton</string>
+    <string name="lang_nv">Navajo</string>
+    <string name="lang_ga">Irlandia</string>
+    <string name="lang_ku">Kurdi</string>
+    <string name="lang_lb">Luksemburg</string>
+    <string name="lang_ht">Haiti</string>
+    <string name="lang_gl">Galicia</string>
+    <string name="lang_et">Estonia</string>
+    <string name="keep_screen_on">Biarkan layar nyala</string>
+    <string name="vessel_height_warning_link">Atur ketinggian kapal</string>
+    <string name="speed_camera_pois">POI kamera kecepatan</string>
+    <string name="gpx_upload_private_visibility_descr">\"Pribadi\" berarti jejak tidak muncul di daftar publik mana pun, tetapi titik jejak darinya dalam urutan yang tidak berurutan tersedia melalui API GPS publik tanpa stempel waktu.</string>
+    <string name="one_image_per_tile">Satu file gambar per ubin</string>
+    <string name="lang_th">Thai</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Jangan pergi offpiste</string>
+    <string name="plugin_wikipedia_description">Dapatkan info tentang tempat menarik dari Wikipedia, panduan saku offline yang menampilkan artikel tentang tempat dan tujuan.</string>
+    <string name="quick_action_remove_next_destination">Hapus titik tujuan terdekat</string>
+    <string name="speed_cameras_removed_descr">Perangkat ini tidak memiliki kamera kecepatan.</string>
+    <string name="nm">nmi</string>
+    <string name="lang_is">Islandia</string>
+    <string name="lang_bpy">Bisnupriya</string>
+    <string name="app_mode_inline_skates">Sepatu roda</string>
+    <string name="expire_time_descr">Ubin yang di-cache akan diunduh ulang setelah jumlah menit yang ditentukan. Biarkan bidang ini kosong agar tidak pernah menyegarkan ubin untuk sumber ini.
+\n
+\nSatu hari adalah 1440 menit.
+\nSatu minggu adalah 10 080 menit.
+\nSatu bulan adalah 43 829 menit.</string>
+    <string name="map_source_zoom_levels">Atur tingkat perbesaran minimum dan maksimum untuk menampilkan atau memuat peta online.</string>
+    <string name="delete_all_actions_message_q">Hapus %d tindakan cepat\?</string>
+    <string name="online_map_name_helper_text">Berikan nama untuk sumber peta daring.</string>
+    <string name="turn_screen_on_power_button_descr">Menekan tombol daya perangkat akan menyalakan layar dengan OsmAnd di atas layar kunci.</string>
+    <string name="online_map_url_helper_text">Masukkan atau tempel URL untuk sumber online.</string>
+    <string name="lang_ceb">Cebuano</string>
+    <string name="light_theme">Terang</string>
+    <string name="lang_sq">Albania</string>
+    <string name="lang_pms">Piedmont</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Sedang</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Hanya jika perlu</string>
+    <string name="routing_attr_freeride_policy_allow_name">Perbolehkan</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Lebih suka offpiste</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Tidak ada preferensi</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Pemula</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Tingkat Lanjut</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Ahli</string>
+    <string name="use_two_phase_routing">Gunakan algoritma perutean A* 2 fase</string>
+    <string name="contour_lines_thanks">Terima kasih untuk membeli \'Garis kontur\'</string>
+    <string name="vessel_height_warning">Atur ketinggian kapal untuk menghindari jembatan rendah. Jika jembatan dapat digerakkan, digunakan ketinggian saat terbuka.</string>
+    <string name="speed_cameras_alert">Peringatan kamera pengukur kecepatan di beberapa negara dilarang oleh undang-undang.</string>
+    <string name="mercator_projection">Proyeksi Mercator</string>
+    <string name="speed_cameras_restart_descr">Mulai ulang aplikasi untuk menghapus semua data kamera kecepatan.</string>
+    <string name="shared_string_bearing">Bantalan</string>
+    <string name="routing_attr_length_name">Batas panjang</string>
+    <string name="vessel_height_limit_description">Atur ketinggian kapal untuk menghindari jembatan rendah. Perlu diingat, jika jembatan itu dapat dipindah, kita akan menggunakan ketinggiannya dalam keadaan terbuka.</string>
+    <string name="release_4_2">• Desain baru widget: Tampilan &amp; Nuansa baru, kelompokkan berdasarkan Laman, ubah urutan, dan gabungkan sesuai keinginan.
+\n
+\n • Rute Pendakian / Bersepeda / Perjalanan: ketuk simbol rute dan dapatkan informasi lengkap tentang rute tersebut.
+\n
+\n • Grup favorit: atur tampilan default untuk titik baru di grup
+\n
+\n • Perbaikan: pembaruan otomatis peta ubin daring
+\n
+\n</string>
+    <string name="gpx_upload_public_visibility_descr">\"Publik\" berarti jejak ditampilkan secara publik di jejak GPS Anda dan di daftar jejak GPS publik, dan di daftar jejak publik dengan stempel waktu dalam bentuk mentah. Data yang disajikan melalui API tidak mereferensikan halaman pelacakan Anda. Stempel waktu titik jejak tidak tersedia melalui API GPS publik, dan titik jejak tidak diurutkan secara kronologis.</string>
+    <string name="osm_live_payment_subscription_management_hw">Pembayaran dibebankan dari akun AppGallery Anda saat mengkonfirmasi pembelian.
+\n
+\nItu memperbarui kecuali dibatalkan sebelum periode pembaruan yang dipilih.
+\n
+\nKelola atau batalkan langganan Anda dari pengaturan AppGallery Anda kapan saja.</string>
+    <string name="release_3_8">• Pembaruan Rencanakan fungsi rute: memungkinkan penggunaan jenis navigasi yang berbeda per segmen dan penyertaan trek
+\n
+\n • Menu Penampilan Baru untuk trek: pilih warna, ketebalan, panah arah tampilan, ikon mulai dan selesai
+\n
+\n • Peningkatan visibilitas node sepeda.
+\n
+\n • Trek sekarang dapat diketuk, memiliki menu konteks dengan info dasar.
+\n
+\n • Algoritma Penelusuran yang ditingkatkan
+\n
+\n • Opsi Ikuti trek yang ditingkatkan di Navigasi
+\n
+\n • Perbaiki masalah dengan impor/ekspor pengaturan profil
+\n
+\n</string>
+    <string name="lang_bn">Benggala</string>
+    <string name="speed_cameras_legal_descr">Di beberapa negara atau wilayah, penggunaan aplikasi peringatan kamera kecepatan dilarang oleh undang-undang.
+\n
+\nAnda perlu membuat pilihan tergantung pada undang-undang negara Anda.
+\n
+\nPilih %1$s dan Anda akan menerima peringatan dan peringatan tentang kamera kecepatan.
+\n
+\nPilih %2$s. Semua data yang terkait dengan kamera kecepatan: peringatan, pemberitahuan, POI akan dihapus hingga OsmAnd diinstal ulang sepenuhnya.</string>
 </resources>

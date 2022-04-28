@@ -3299,7 +3299,7 @@
     <string name="reset_confirmation_descr">נגיעה ב־%1$s תסלק את כל השינויים שערכת.</string>
     <string name="reset_all_profile_settings_descr">איפוס כל הגדרות הפרופיל לבררות המחדל של ההתקנה.</string>
     <string name="reset_all_profile_settings">לאפס את הגדרות הפרופיל\?</string>
-    <string name="ltr_or_rtl_combine_via_colon">%1$s:‏ %2$s</string>
+    <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
     <string name="file_does_not_contain_routing_rules">אין כללי ניווט ב־‚%1$s’. נא לבחור בקובץ אחר.</string>
     <string name="not_support_file_type_with_ext">נא לבחור קובץ נתמך בסיומת %1$s במקום.</string>
@@ -3817,7 +3817,7 @@
     <string name="shared_string_graph">תרשים</string>
     <string name="message_graph_will_be_available_after_recalculation">נא להמתין.
 \nהתרשים יהיה זמין לאחר חישוב מחדש.</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s ‏— %2$s</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="shared_string_local_maps">מפות מקומיות</string>
     <string name="icon_group_amenity">שירות לציבור</string>
     <string name="icon_group_special">מיוחד</string>
@@ -4597,4 +4597,22 @@
     <string name="no_widgets_here_yet">אין כאן וידג׳טים עדיין</string>
     <string name="available_widgets">וידג׳טים זמינים</string>
     <string name="snackbar_page_removed">„העמוד %1$s” הוסר.</string>
+    <string name="routing_attr_freeride_policy_allow_name">לאפשר</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">מתקדמים</string>
+    <string name="routing_attr_difficulty_preference_expert_name">מומחים</string>
+    <string name="release_4_2">• עיצוב וידג׳טים מחדש: מראה ותחושה חדשים, קיבוץ לפי עמודים, החלפת הסדר ויצירת כל שילוב אפשרי.
+\n
+\n • מסלולי טיול / רכיבה / סיור: נגיעה בסמל המסלול מציגה את המידע המלא על המסלול.
+\n
+\n • קבוצות מועדפים: הגדרת מראה ברירת מחדל לנקודות חדשות בקבוצה.
+\n
+\n • תיקונים: מפות אריחים מקוונות מתעדכנות אוטומטית.
+\n
+\n</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">מתקדם</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">לא לרדת מהמסלול</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">רק במידת הצורך</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">להעדיף מחוץ למסלול</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">אין העדפה</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">מתחילים</string>
 </resources>
