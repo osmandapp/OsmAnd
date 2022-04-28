@@ -83,6 +83,8 @@ public class MapWidgetRegistry {
 		for (MapWidgetInfo widgetInfo : widgets) {
 			if (widgetInfo.isEnabledForAppMode(mode)) {
 				widgetsToShow.add(widgetInfo.widget);
+			} else {
+				widgetInfo.widget.detachView();
 			}
 		}
 
