@@ -9,7 +9,6 @@ import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.ColorUtilities;
@@ -371,7 +370,6 @@ public class MapWidgetRegistry {
 	public Set<MapWidgetInfo> getWidgetsForPanel(@NonNull ApplicationMode appMode,
 	                                             @NonNull WidgetsPanel panel,
 	                                             int filterModes) {
-		OsmAndAppCustomization appCustomization = app.getAppCustomization();
 		Set<MapWidgetInfo> filteredWidgets = new TreeSet<>();
 		for (MapWidgetInfo widget : getWidgetsForPanel(panel)) {
 
@@ -381,8 +379,7 @@ public class MapWidgetRegistry {
 
 			boolean passDisabled = !disabledMode || !widget.isEnabledForAppMode(appMode);
 			boolean passEnabled = !enabledMode || widget.isEnabledForAppMode(appMode);
-			boolean passAvailable = !availableMode || !appCustomization.areWidgetsCustomized()
-					|| appCustomization.isWidgetAvailable(widget.key, appMode);
+			boolean passAvailable = !availableMode || appMode.isWidgetAvailable(widget.key);
 
 			if (passDisabled && passEnabled && passAvailable) {
 				filteredWidgets.add(widget);
