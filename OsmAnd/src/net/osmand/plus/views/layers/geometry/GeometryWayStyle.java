@@ -8,6 +8,8 @@ import androidx.annotation.Nullable;
 
 import net.osmand.util.Algorithms;
 
+import java.util.Arrays;
+
 public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 
 	private final T context;
@@ -122,7 +124,9 @@ public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 			return false;
 		}
 		GeometryWayStyle<?> o = (GeometryWayStyle<?>) other;
-		return Algorithms.objectEquals(color, o.color) && Algorithms.objectEquals(width, o.width);
+		return Algorithms.objectEquals(color, o.color)
+				&& Algorithms.objectEquals(width, o.width)
+				&& Arrays.equals(dashPattern, o.dashPattern);
 	}
 
 	public int getColorizationScheme() {
