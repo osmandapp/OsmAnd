@@ -44,7 +44,7 @@ public enum WidgetParams {
 	RADIUS_RULER("ruler", R.string.map_widget_ruler_control, R.drawable.widget_ruler_circle_day, R.drawable.widget_ruler_circle_night, RIGHT),
 	FPS("fps", R.string.map_widget_fps_info, R.drawable.widget_fps_day, R.drawable.widget_fps_night, RIGHT),
 	AV_NOTES_ON_REQUEST("av_notes_on_request", R.string.av_def_action_choose, R.drawable.widget_av_photo_day, R.drawable.widget_av_photo_night, RIGHT),
-	AV_NOTES_RECORD_AUDIO("av_notes_record_audio", R.string.av_def_action_audio, R.drawable.widget_av_photo_day, R.drawable.widget_av_photo_night, RIGHT),
+	AV_NOTES_RECORD_AUDIO("av_notes_record_audio", R.string.av_def_action_audio, R.drawable.widget_av_audio_day, R.drawable.widget_av_audio_night, RIGHT),
 	AV_NOTES_RECORD_VIDEO("av_notes_record_video", R.string.av_def_action_video, R.drawable.widget_av_video_day, R.drawable.widget_av_video_night, RIGHT),
 	AV_NOTES_TAKE_PHOTO("av_notes_take_photo", R.string.av_def_action_picture, R.drawable.widget_av_photo_day, R.drawable.widget_av_photo_night, RIGHT),
 	MAPILLARY("mapillary", R.string.mapillary, R.drawable.widget_mapillary_day, R.drawable.widget_mapillary_night, RIGHT),
