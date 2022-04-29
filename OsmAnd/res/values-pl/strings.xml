@@ -4581,4 +4581,28 @@
     <string name="apply_only_to_new_points">Zastosuj tylko do nowych punktów</string>
     <string name="simulation_preview_mode_desc">Prędkość symulacji będzie maksymalna na prostych odcinkach i zwolni tylko na skrzyżowaniach.</string>
     <string name="simulation_preview_mode_title">Tryb szybkiego podglądu</string>
+    <string name="on_with_params">%1$s na %2$s</string>
+    <string name="no_widgets_descr">Dodaj jeden lub więcej widżetów z listy dostępnych widżetów.</string>
+    <string name="no_widgets_here_yet">Nie ma jeszcze widżetów</string>
+    <string name="available_widgets">Dostępne widżety</string>
+    <string name="snackbar_page_removed">\"Strona %1$s\" została usunięta.</string>
+    <string name="release_4_2">• Przeprojektowanie widżetów: nowy wygląd i działanie, grupowanie według stron, zmiana kolejności i łączenie według własnego uznania.
+\n
+\n• Trasy piesze/rowerowe/podróży: dotknij symbolu trasy i uzyskaj pełną informację o trasie.
+\n
+\n• Ulubione grupy: ustaw domyślny wygląd dla nowych punktów w grupie
+\n
+\n• Poprawki: automatyczna aktualizacja map kafelkowych online
+\n
+\n</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Średniozaawansowany</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Ekspert</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Nie wychodź poza trasę</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Zaawansowany</string>
+    <string name="map_widget_current_speed">Obecna prędkość</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Tylko w razie potrzeby</string>
+    <string name="routing_attr_freeride_policy_allow_name">Pozwól</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Preferuj jazdę poza trasą</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Brak preferencji</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Początkujący</string>
 </resources>

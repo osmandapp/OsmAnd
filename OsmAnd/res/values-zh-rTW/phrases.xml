@@ -205,7 +205,7 @@
     <string name="poi_public_transport_station">大眾運輸車站</string>
     <string name="poi_bus_station">公車站</string>
     <string name="poi_railway_station">火車站</string>
-    <string name="poi_railway_platform">鐵路月台</string>
+    <string name="poi_railway_platform">鐵路月台;火車月台</string>
     <string name="poi_halt">火車站</string>
     <string name="poi_subway_entrance">捷運入口</string>
     <string name="poi_subway_station">是;地下鐵車站</string>
@@ -4329,4 +4329,5 @@
     <string name="poi_wool">羊毛店</string>
     <string name="poi_laundry_service_no">否</string>
     <string name="poi_flow_rate">流速</string>
+    <string name="poi_golf_pin">標示高爾夫球洞的旗子</string>
 </resources>

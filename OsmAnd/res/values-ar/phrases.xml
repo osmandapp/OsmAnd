@@ -174,7 +174,7 @@
     <string name="poi_garden_centre">مركز الحديقة</string>
     <string name="poi_glaziery">محل زجاج</string>
     <string name="poi_hardware">متجر ملحقات الحاسوب</string>
-    <string name="poi_railway_station">محطة القطارات</string>
+    <string name="poi_railway_station">محطة السكك الحديدية غير الحضرية؛محطة السكك الحديدية الحضرية؛محطة القطار</string>
     <string name="poi_kitchen">أثاث المطبخ</string>
     <string name="poi_leather">متجر جلود</string>
     <string name="poi_medical_supply">مستلزمات طبية</string>
