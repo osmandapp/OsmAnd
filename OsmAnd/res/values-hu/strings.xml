@@ -736,7 +736,7 @@
     <string name="avoid_toll_roads">Fizetős út nélkül</string>
     <string name="map_widget_top_text">Utcanév</string>
     <string name="map_widget_config">Képernyő beállítása</string>
-    <string name="map_widget_back_to_loc">Hol vagyok</string>
+    <string name="map_widget_back_to_loc">Hol vagyok\?</string>
     <string name="map_widget_lock_screen">Képernyőzár</string>
     <string name="map_widget_compass">Iránytű</string>
     <string name="map_widget_reset">Alapértékek visszaállítása</string>
