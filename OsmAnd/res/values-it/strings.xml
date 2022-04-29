@@ -4603,4 +4603,5 @@
 \n • Correzioni: aggiornamento automatico delle mappe di sfondo online
 \n
 \n</string>
+    <string name="turn_on_public_transport_description">Attiva per vedere i percorsi del trasporto pubblico sulla mappa.</string>
 </resources>
