@@ -419,7 +419,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 		for (MapWidgetInfo widget : widgetRegistry.getWidgetsForPanel(panel)) {
 			boolean enabledFromApply = enabledWidgetsIds.contains(widget.key);
 			if (widget.isEnabledForAppMode(selectedAppMode) != enabledFromApply) {
-				widgetRegistry.setVisibility(widget, enabledFromApply);
+				widgetRegistry.enableDisableWidget(widget, enabledFromApply);
 			}
 		}
 	}

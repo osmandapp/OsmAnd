@@ -114,4 +114,9 @@ public abstract class MapWidget {
 	protected String getString(@StringRes int stringId, Object... args) {
 		return app.getString(stringId, args);
 	}
+
+	@NonNull
+	public OsmandApplication getMyApplication() {
+		return app;
+	}
 }
