@@ -4608,4 +4608,17 @@
     <string name="routing_attr_difficulty_preference_no_preference_name">Keine Präferenz</string>
     <string name="routing_attr_difficulty_preference_advanced_name">Fortgeschrittene</string>
     <string name="available_widgets">Verfügbare Widgets</string>
+    <string name="release_4_2">- Neugestaltung der Widgets: neues Look &amp; Feel, nach Seiten gruppieren, Reihenfolge ändern und nach Belieben kombinieren.
+\n
+\n - Wander-/Rad-/Reiserouten: Tippen Sie auf das Routensymbol und erhalten Sie vollständige Informationen über die Route.
+\n
+\n - Favoritengruppen: Legen Sie die Standardanzeige für neue Punkte in der Gruppe fest.
+\n
+\n - Korrekturen: Online-Kachel-Karten werden automatisch aktualisiert
+\n
+\n</string>
+    <string name="turn_on_public_transport_description">Einschalten, um die Routen der öffentlichen Verkehrsmittel auf der Karte anzuzeigen.</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Nicht abseits der Piste gehen</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Bevorzugt abseits der Piste</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Mittel</string>
 </resources>
