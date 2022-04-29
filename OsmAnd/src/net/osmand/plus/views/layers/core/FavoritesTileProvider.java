@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapTiledCollectionProvider;
@@ -15,6 +16,8 @@ import net.osmand.core.jni.TextRasterizer;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.core.jni.interface_MapTiledCollectionProvider;
 import net.osmand.data.BackgroundType;
+import net.osmand.data.FavouritePoint;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.util.MapUtils;
@@ -29,13 +32,20 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 	private final List<MapLayerData> mapLayerDataList = new ArrayList<>();
 	private final Map<Integer, Bitmap> bigBitmapCache = new ConcurrentHashMap<>();
 	private final Map<Integer, Bitmap> smallBitmapCache = new ConcurrentHashMap<>();
-	private final int baseOrder;
 	private final Context ctx;
+	private final int baseOrder;
+	private final boolean textVisible;
+	private final TextRasterizer.Style textStyle;
+	private final float density;
 	private MapTiledCollectionProvider providerInstance;
 
-	public FavoritesTileProvider(@NonNull Context context, int baseOrder) {
+	public FavoritesTileProvider(@NonNull Context context, int baseOrder, boolean textVisible,
+	                             @Nullable TextRasterizer.Style textStyle, float density) {
 		this.ctx = context;
 		this.baseOrder = baseOrder;
+		this.textVisible = textVisible;
+		this.textStyle = textStyle;
+		this.density = density;
 	}
 
 	public void drawSymbols(@NonNull MapRendererView mapRenderer) {
@@ -64,17 +74,17 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 
 	@Override
 	public boolean shouldShowCaptions() {
-		return false;
+		return textVisible;
 	}
 
 	@Override
 	public TextRasterizer.Style getCaptionStyle() {
-		return new TextRasterizer.Style();
+		return textStyle;
 	}
 
 	@Override
 	public double getCaptionTopSpace() {
-		return 0.0d;
+		return -4.0 * density;
 	}
 
 	@Override
@@ -89,8 +99,7 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 
 	@Override
 	public PointI getPoint31(int index) {
-		MapLayerData data = index < mapLayerDataList.size()
-				? mapLayerDataList.get(index) : null;
+		MapLayerData data = index < mapLayerDataList.size() ? mapLayerDataList.get(index) : null;
 		return data != null ? data.point : new PointI(0, 0);
 	}
 
@@ -101,8 +110,7 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 
 	@Override
 	public SWIGTYPE_p_sk_spT_SkImage_const_t getImageBitmap(int index, boolean isFullSize) {
-		MapLayerData data = index < mapLayerDataList.size()
-				? mapLayerDataList.get(index) : null;
+		MapLayerData data = index < mapLayerDataList.size() ? mapLayerDataList.get(index) : null;
 		if (data == null) {
 			return SwigUtilities.nullSkImage();
 		}
@@ -137,7 +145,8 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 
 	@Override
 	public String getCaption(int index) {
-		return "";
+		MapLayerData data = index < mapLayerDataList.size() ? mapLayerDataList.get(index) : null;
+		return data != null ? PointDescription.getSimpleName(data.favorite, ctx) : "";
 	}
 
 	@Override
@@ -150,17 +159,18 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 		return ZoomLevel.MaxZoomLevel;
 	}
 
-	public void addToData(int colorSmallPoint, int colorBigPoint, boolean withShadow,
-	                      int overlayIconId, BackgroundType backgroundType, boolean hasMarker,
-	                      float textScale, double lat, double lon) throws IllegalStateException {
+	public void addToData(@NonNull FavouritePoint favorite, int colorSmallPoint, int colorBigPoint, boolean withShadow,
+	                      boolean hasMarker, float textScale, double lat, double lon) throws IllegalStateException {
 		if (providerInstance != null) {
 			throw new IllegalStateException("Provider already instantiated. Data cannot be modified at this stage.");
 		}
-		mapLayerDataList.add(new MapLayerData(colorSmallPoint, colorBigPoint,
-				withShadow, overlayIconId, backgroundType, hasMarker, textScale, lat, lon));
+		mapLayerDataList.add(new MapLayerData(favorite, colorSmallPoint, colorBigPoint,
+				withShadow, favorite.getOverlayIconId(ctx), favorite.getBackgroundType(),
+				hasMarker, textScale, lat, lon));
 	}
 
 	private static class MapLayerData {
+		FavouritePoint favorite;
 		PointI point;
 		int colorBigPoint;
 		int colorSmallPoint;
@@ -170,9 +180,10 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 		boolean hasMarker;
 		float textScale;
 
-		MapLayerData(int colorSmallPoint, int colorBigPoint, boolean withShadow, int overlayIconId,
-		             @NonNull BackgroundType backgroundType, boolean hasMarker,
-		             float textScale, double lat, double lon) {
+		MapLayerData(@NonNull FavouritePoint favorite, int colorSmallPoint, int colorBigPoint,
+		             boolean withShadow, int overlayIconId, @NonNull BackgroundType backgroundType,
+		             boolean hasMarker, float textScale, double lat, double lon) {
+			this.favorite = favorite;
 			this.colorBigPoint = colorBigPoint;
 			this.colorSmallPoint = colorSmallPoint;
 			this.withShadow = withShadow;

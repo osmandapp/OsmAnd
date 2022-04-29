@@ -31,7 +31,7 @@ public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
    private final int baseOrder;
    private final boolean textVisible;
    private final TextRasterizer.Style textStyle;
-   private float density;
+   private final float density;
 
    private final List<MapLayerData> mapLayerDataList = new ArrayList<>();
    private final Map<Integer, Bitmap> bigBitmapCache = new ConcurrentHashMap<>();
