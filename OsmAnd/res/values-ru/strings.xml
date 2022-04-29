@@ -4619,4 +4619,5 @@
 \n• Исправления: автообновление тайловых онлайн-карт
 \n
 \n</string>
+    <string name="turn_on_public_transport_description">Включите, чтобы увидеть на карте маршруты общественного транспорта.</string>
 </resources>
