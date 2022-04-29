@@ -304,7 +304,7 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="gpxup_public">Javno</string>
-    <string name="gpxup_identifiable">Določljivo</string>
+    <string name="gpxup_identifiable">Prepoznavno</string>
     <string name="gpxup_trackable">Sledljivo</string>
     <string name="gpxup_private">Zasebno</string>
     <string name="asap">Čim prej</string>
@@ -3996,4 +3996,49 @@
     <string name="temporary_conditional_routing_descr">Uporabi cestne omejitve, ki so zdaj aktivne na zemljevidu</string>
     <string name="announcement_time_passing">Po</string>
     <string name="purchases">Nakupi</string>
+    <string name="osm_edit_close_note">Zapri OSM opombo</string>
+    <string name="turn_on_public_transport_description">Vklopi, če si želiš na zemljevidu ogledati poti javnega prevoza.</string>
+    <string name="add_online_routing_engine">Dodajanje spletnega usmerjevalnika</string>
+    <string name="release_3_9">• Dodana možnost za izvoz in uvoz vseh podatkov, vključno z nastavitvami, viri, mojimi kraji
+\n
+\n• Načrtovanje poti: grafi za odseke sledi s potjo in dodana možnost ustvarjanja in urejanja več odsekov sledi
+\n
+\n• Dodana OAuth metoda preverjanja pristnosti za OpenStreetMap, izboljšan uporabniški vmesnik dialogov OSM
+\n
+\n• Podpira barve po meri za točke priljubljenih in sledi
+\n
+\n</string>
+    <string name="routing_attr_allow_intermittent_description">Omogoči občasne vodne poti</string>
+    <string name="routing_attr_allow_streams_description">Omogoči potoke in odtoke</string>
+    <string name="routing_attr_allow_streams_name">Omogoči potoke in odtoke</string>
+    <string name="gpx_upload_private_visibility_descr">»Zasebno« pomeni, da se sled ne prikaže v nobenem javnem seznamu, vendar so točke iz sledi, v nekronološkem vrstnem redu in brez časovnih žigov, na voljo prek javnega API-ja GPS.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">»Prepoznavno« pomeni, da bo sled javno prikazana v tvojih GPS sledeh in v javnih seznamih GPS sledenja, to je, da bodo drugi uporabniki lahko prenesli neobdelano sled in jo povezali s tvojim uporabniškim imenom. Podatki o točkah iz sledi z javnim časovnim žigom iz API-ja GPS, ki se strežejo prek api točk sledenja, se bodo sklicevanja na tvojo prvotno sled.</string>
+    <string name="gpx_upload_public_visibility_descr">»Javno« pomeni, da je sled javno prikazana v vaših GPS sledeh in v javnih seznamih sledi GPS ter na javnem seznamu sledi s časovnimi žigi v neobdelani obliki. Podatki, posredovani prek API-ja, se ne sklicujejo na vašo stran za sledenje. Časovni žigi točk sledenja niso na voljo prek javnega API-ja GPS in točke sledenja niso kronološko urejene.</string>
+    <string name="shared_string_add_photo">Dodaj fotografijo</string>
+    <string name="online_routing_engines">Spletni motorji za usmerjanje</string>
+    <string name="online_routing_engine">Spletni motorji za usmerjanje</string>
+    <string name="file_size_needed_for_import">Potrebno za uvoz</string>
+    <string name="osm_edit_comment_note">Komentiraj OSM opombo</string>
+    <string name="gpx_upload_trackable_visibility_descr">»Sledljivo« pomeni, da se sled ne prikaže v nobenem javnem seznamu, ampak se prikažejo samo obdelane točke sledi s časovnimi žigi (ki jih ni mogoče neposredno povezati s tabo) iz javnega API-ja GPS.</string>
+    <string name="shared_string_search_history">Zgodovina iskanja</string>
+    <string name="open_place_reviews_plugin_description">Pošlji fotografije, ocene in povezave o javnih mestih, kot so restavracije, hoteli, muzeji in druge zanimive točke, kot odprte podatke https://openplacereviews.org/data/.
+\n
+\nPreberi več na https://openplacereviews.org</string>
+    <string name="routing_attr_allow_intermittent_name">Omogoči občasne vodotoke</string>
+    <string name="app_mode_motorboat">Motorni čoln</string>
+    <string name="edit_online_routing_engine">Urejanje spletnega usmerjevalnika</string>
+    <string name="export_not_enough_space_descr">Tvoja naprava ima še samo %1$s prostora. Prosim, sprosti nekaj prostora ali odstrani iz izbire nekatere elemente za izvoz.</string>
+    <string name="select_data_to_export">Izberi podatke, ki jih želiš izvoziti v datoteko.</string>
+    <string name="approximate_file_size">Približna velikost datoteke</string>
+    <string name="shared_string_resources">Viri</string>
+    <string name="cannot_upload_image">Slike ni mogoče naložiti: prosim, poskusite znova pozneje</string>
+    <string name="register_opr_have_account">Že imam račun</string>
+    <string name="register_opr_create_new_account">Ustvari nov račun</string>
+    <string name="register_on_openplacereviews_desc">Fotografije so na voljo v OpenPlaceReviews.org odprt podatkovni projekt. Za nalaganje fotografij se moraš prijaviti na njihovo spletno stran.</string>
+    <string name="register_on_openplacereviews">Registriraj se na
+\nOpenPlaceReviews.org</string>
+    <string name="osm_login_descr">Prijavi se z metodo OAuth ali z uporabniškim imenom in geslom OSM.</string>
+    <string name="keep_it_empty_if_not">Naj bo prazno, če že ni</string>
+    <string name="app_mode_kayak">Kajak</string>
+    <string name="select_picture">Izberi sliko</string>
 </resources>
