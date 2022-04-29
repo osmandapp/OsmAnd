@@ -55,7 +55,7 @@
 			style="@style/Widget.AppCompat.ActionButton"
 			android:layout_width="@dimen/standard_icon_size"
 			android:layout_height="@dimen/standard_icon_size"
-			android:layout_marginStart="@dimen/list_content_padding_large"
+			android:layout_marginStart="@dimen/title_padding"
 			android:layout_marginEnd="@dimen/content_padding"
 			osmand:srcCompat="@drawable/ic_action_info_dark"
 			osmand:tint="?default_icon_color"

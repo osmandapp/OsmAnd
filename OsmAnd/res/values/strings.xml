@@ -11,9 +11,35 @@
 	Thx - Hardy
 -->
 
+    <string name="parking_position_secondary_desc">Part of \“Parking position\” plugin.</string>
+    <string name="mapillary_secondary_desc">Part of \“Mapillary\” plugin.</string>
+    <string name="fps_secondary_desc">Part of \“OsmAnd development\” plugin.</string>
+    <string name="trip_recording_secondary_desc">Part of \“Trip recording\” plugin.</string>
+    <string name="av_notes_secondary_desc">Part of \“Audio/Video notes\” plugin.</string>
+    <string name="coordinates_widget_secondary_desc">Coordinates format could be change in Configure profile – General settings – Coordinates format.</string>
+    <string name="elevation_profile_widget_desc">Widget shows the elevation and slope profile of the current route.</string>
+    <string name="parking_widget_desc">Widget that shows distance from your screen center to the parking place.</string>
+    <string name="mapillary_widget_desc">Widget that provides quick access to Mapillary app to add Street-Level-Imagery.</string>
+    <string name="av_notes_choose_action_widget_desc">Choose action.</string>
+    <string name="fps_widget_desc">Widget show how fast map &amp; map elements are showed &amp; refreshed.</string>
+    <string name="radius_rules_widget_desc">Radius-ruler tool helps to determine the radius around the selected point on the map via displaying distance-circles on the map.</string>
+    <string name="current_time_widget_desc">This widget shows current time from your device.</string>
+    <string name="battery_widget_desc">Widget shows battery level of your device.</string>
+    <string name="gps_info_widget_desc">Widget shows a number of satellites that device detects and uses at that moment.</string>
+    <string name="altitude_widget_desc">Widget shows the height above sea level of current geolocation.</string>
+    <string name="max_speed_widget_desc">Widget shows a speed limit for a current driving road.</string>
+    <string name="current_speed_widget_desc">Widget shows your current speed detected by GPS-sensor.</string>
+    <string name="magnetic_bearing_widget_desc">Angle between magnetic north and the target point observed from your location.</string>
+    <string name="time_to_go_desc">Time in minutes or hours needed to reach your destination.</string>
+    <string name="arrival_time_widget_desc">Time of arrival at the destination point.</string>
+    <string name="lanes_widgets_desc">Lanes widget shows the current road lanes layout and highlights lanes to drive with active navigation.</string>
+    <string name="map_markers_bar_widget_desc">On the top bar widget you could see the distance and the direction to the marker from current location. It is possible to configure to see 1 or 2 top markers in the widget.</string>
+    <string name="street_name_widget_desc">Street name widget shows current street name with straight location arrow or next street name with the maneuver that has to be completed.</string>
+    <string name="coordinates_widget_desc">It shows the geographic coordinates of current geo-location.</string>
+    <string name="shared_string_widget">Widget</string>
     <string name="av_def_action_choose">On request</string>
     <string name="audio_video_notes_desc">Widgets provides quick access to start/stop taking a recording (audio, video or photo).</string>
-    <string name="bearing_additional_note">You can change format of displayed data in: Configure Profile – General settings – Angular units.</string>
+    <string name="bearing_secondary_desc">You can change format of displayed data in: Configure Profile – General settings – Angular units.</string>
     <string name="bearing_desc">The bearing widget shows the absolute or relative bearing to a target in angular units (Degrees 180, Degrees 360, Milliradians).</string>
     <string name="map_markers_desc">On the top bar widget you could see the distance and the direction to the marker from current location. It is possible to configure to see 1 or 2 top markers in the widget.</string>
     <string name="navigation_points_desc">Navigational widgets are enabled during navigation to display information such as distance, arrival or left time, next turns, bearing, current street name, lanes information, max speed, approaching alerts, POIs, waypoints.</string>
@@ -1981,7 +2007,6 @@
     <string name="yesterday">Yesterday</string>
     <string name="last_seven_days">Last 7 days</string>
     <string name="this_year">This year</string>
-    <!-- string name="widget">Widget</string if needed should be shared_string_widget -->
     <!-- string name="top_bar">Top bar</string use shared_string_topbar -->
     <string name="move_all_to_history">Move all to history</string>
     <string name="show_direction">Distance indication</string>

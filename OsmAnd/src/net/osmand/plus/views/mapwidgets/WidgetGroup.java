@@ -29,29 +29,33 @@ import static net.osmand.plus.views.mapwidgets.WidgetParams.TIME_TO_GO;
 
 public enum WidgetGroup {
 
-	ROUTE_MANEUVERS(R.string.route_maneuvers, R.string.route_maneuvers_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night),
-	NAVIGATION_POINTS(R.string.navigation_points, R.string.navigation_points_desc, R.drawable.widget_navigation_day, R.drawable.widget_navigation_night),
-	MAP_MARKERS(R.string.map_markers, R.string.map_markers_desc, R.drawable.widget_marker_day, R.drawable.widget_marker_day),
-	BEARING(R.string.shared_string_bearing, R.string.bearing_desc, R.drawable.widget_relative_bearing_day, R.drawable.widget_relative_bearing_night),
-	AUDIO_VIDEO_NOTES(R.string.map_widget_av_notes, R.string.audio_video_notes_desc, R.drawable.widget_av_photo_day, R.drawable.widget_av_photo_night);
+	ROUTE_MANEUVERS(R.string.route_maneuvers, R.string.route_maneuvers_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night, "https://docs.osmand.net/docs/user/widgets/nav-widgets#next-turns"),
+	NAVIGATION_POINTS(R.string.navigation_points, R.string.navigation_points_desc, R.drawable.widget_navigation_day, R.drawable.widget_navigation_night, "https://docs.osmand.net/docs/user/widgets/nav-widgets/#navigation-points"),
+	MAP_MARKERS(R.string.map_markers, R.string.map_markers_desc, R.drawable.widget_marker_day, R.drawable.widget_marker_day, "https://docs.osmand.net/docs/user/widgets/markers"),
+	BEARING(R.string.shared_string_bearing, R.string.bearing_desc, R.drawable.widget_relative_bearing_day, R.drawable.widget_relative_bearing_night, "https://docs.osmand.net/docs/user/widgets/nav-widgets#bearing"),
+	AUDIO_VIDEO_NOTES(R.string.map_widget_av_notes, R.string.audio_video_notes_desc, R.drawable.widget_av_photo_day, R.drawable.widget_av_photo_night, "https://docs.osmand.net/docs/user/widgets/info-widgets#-audio-video-notes-widget-android");
 
 	@StringRes
-	public int titleId;
+	public final int titleId;
 	@StringRes
-	public int descId;
+	public final int descId;
 	@DrawableRes
-	public int dayIconId;
+	public final int dayIconId;
 	@DrawableRes
-	public int nightIconId;
+	public final int nightIconId;
+	@NonNull
+	public String docsUrl;
 
 	WidgetGroup(@StringRes int titleId,
 	            @StringRes int descId,
 	            @DrawableRes int dayIconId,
-	            @DrawableRes int nightIconId) {
+	            @DrawableRes int nightIconId,
+	            @NonNull String docsUrl) {
 		this.titleId = titleId;
 		this.descId = descId;
 		this.dayIconId = dayIconId;
 		this.nightIconId = nightIconId;
+		this.docsUrl = docsUrl;
 	}
 
 	@NonNull
@@ -78,17 +82,17 @@ public enum WidgetGroup {
 	}
 
 	@StringRes
-	public int getAdditionalNoteId() {
+	public int getSecondaryDescriptionId() {
 		if (this == BEARING) {
-			return R.string.bearing_additional_note;
+			return R.string.bearing_secondary_desc;
 		} else if (this == AUDIO_VIDEO_NOTES) {
-			return R.string.bearing_additional_note;
+			return R.string.av_notes_secondary_desc;
 		}
 		return 0;
 	}
 
 	@DrawableRes
-	public int getAdditionalIconId() {
+	public int getSecondaryIconId() {
 		if (this == BEARING) {
 			return R.drawable.ic_action_help;
 		} else if (this == AUDIO_VIDEO_NOTES) {

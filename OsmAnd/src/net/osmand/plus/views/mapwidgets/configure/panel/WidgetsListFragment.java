@@ -22,6 +22,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.configure.AddWidgetFragment;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableItemViewHolder;
@@ -39,6 +40,7 @@ import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DISABLED_MODE;
@@ -308,7 +310,15 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 
 			View infoButton = view.findViewById(R.id.info_button);
 			infoButton.setOnClickListener(v -> {
-				// TODO widgets: show new dialog
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					FragmentManager fragmentManager = activity.getSupportFragmentManager();
+					if (widgetGroup != null) {
+						AddWidgetFragment.showInstance(fragmentManager, widgetGroup);
+					} else {
+						AddWidgetFragment.showInstance(fragmentManager, widget);
+					}
+				}
 			});
 
 			boolean last = i + 1 == widgets.size();

@@ -24,6 +24,7 @@ public class AvailableItemViewHolder extends ViewHolder implements UnmovableItem
 	public final ImageButton addButton;
 	public final ImageView icon;
 	public final TextView title;
+	public final View infoButton;
 	public final View bottomDivider;
 
 	public AvailableItemViewHolder(@NonNull View itemView) {
@@ -31,6 +32,7 @@ public class AvailableItemViewHolder extends ViewHolder implements UnmovableItem
 		addButton = itemView.findViewById(R.id.add_button);
 		icon = itemView.findViewById(R.id.icon);
 		title = itemView.findViewById(R.id.title);
+		infoButton = itemView.findViewById(R.id.info_button);
 		bottomDivider = itemView.findViewById(R.id.bottom_divider);
 	}
 

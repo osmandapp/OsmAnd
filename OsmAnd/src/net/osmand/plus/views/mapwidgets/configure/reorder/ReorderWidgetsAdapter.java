@@ -17,6 +17,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.OnItemMoveCallback;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
+import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.ActionButtonViewHolder;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.ActionButtonViewHolder.ActionButtonInfo;
@@ -48,7 +49,8 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 	private final ReorderWidgetsAdapterHelper reorderHelper;
 	private final List<ListItem> items = new ArrayList<>();
 
-	private WidgetAdapterListener listener;
+	private WidgetAdapterDragListener dragListener;
+	private WidgetsAdapterActionsListener actionsListener;
 	private final boolean nightMode;
 
 	private final WidgetIconsHelper iconsHelper;
@@ -91,8 +93,12 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		notifyDataSetChanged();
 	}
 
-	public void setListener(@NonNull WidgetAdapterListener listener) {
-		this.listener = listener;
+	public void setDragListener(@NonNull WidgetAdapterDragListener dragListener) {
+		this.dragListener = dragListener;
+	}
+
+	public void setActionsListener(@NonNull WidgetsAdapterActionsListener actionsListener) {
+		this.actionsListener = actionsListener;
 	}
 
 	public void restorePage(int page, int position) {
@@ -195,7 +201,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		AndroidUiHelper.updateVisibility(viewHolder.moveIcon, !firstPage);
 		viewHolder.moveIcon.setOnTouchListener((v, event) -> {
 			if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-				listener.onDragStarted(viewHolder);
+				dragListener.onDragStarted(viewHolder);
 			}
 			return false;
 		});
@@ -203,8 +209,8 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 
 	private void deletePage(int position, int pageToDelete) {
 		reorderHelper.deletePage(position, pageToDelete);
-		if (listener != null) {
-			listener.onPageDeleted(pageToDelete, position);
+		if (actionsListener != null) {
+			actionsListener.onPageDeleted(pageToDelete, position);
 		}
 	}
 
@@ -221,7 +227,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		viewHolder.title.setText(widgetInfo.title);
 		viewHolder.moveIcon.setOnTouchListener((view, event) -> {
 			if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-				listener.onDragStarted(viewHolder);
+				dragListener.onDragStarted(viewHolder);
 			}
 			return false;
 		});
@@ -231,14 +237,20 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 
 	private void bindAvailableGroupViewHolder(@NonNull AvailableItemViewHolder viewHolder, int position) {
 		WidgetGroup widgetGroup = ((WidgetGroup) items.get(position).value);
+		OnClickListener showInfoListener = v -> {
+			if (actionsListener != null) {
+				actionsListener.showWidgetGroupInfo(widgetGroup);
+			}
+		};
 
 		viewHolder.addButton.setImageDrawable(getAddIcon());
-		viewHolder.addButton.setOnClickListener(v -> {
-			// TODO widgets
-		});
+		viewHolder.addButton.setOnClickListener(showInfoListener);
 
 		viewHolder.icon.setImageResource(widgetGroup.getIconId(nightMode));
 		viewHolder.title.setText(AvailableItemViewHolder.getGroupTitle(widgetGroup, app, nightMode));
+
+		viewHolder.infoButton.setOnClickListener(showInfoListener);
+
 		updateAvailableItemDivider(viewHolder, position);
 	}
 
@@ -253,6 +265,16 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 
 		iconsHelper.updateWidgetIcon(viewHolder.icon, widgetInfo.info);
 		viewHolder.title.setText(widgetInfo.title);
+
+		WidgetParams widgetParams = WidgetParams.getById(widgetInfo.key);
+		if (widgetParams != null) {
+			viewHolder.infoButton.setOnClickListener(v -> {
+				if (actionsListener != null) {
+					actionsListener.showWidgetInfo(widgetParams);
+				}
+			});
+		}
+
 		updateAvailableItemDivider(viewHolder, position);
 	}
 
@@ -280,7 +302,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 
 	@Override
 	public void onItemDismiss(ViewHolder holder) {
-		listener.onDragOrSwipeEnded(holder);
+		dragListener.onDragOrSwipeEnded(holder);
 	}
 
 	@Override
@@ -325,12 +347,19 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		}
 	}
 
-	public interface WidgetAdapterListener {
+	public interface WidgetAdapterDragListener {
 
 		void onDragStarted(ViewHolder holder);
 
 		void onDragOrSwipeEnded(ViewHolder holder);
+	}
+
+	public interface WidgetsAdapterActionsListener{
 
 		void onPageDeleted(int page, int position);
+
+		void showWidgetInfo(@NonNull WidgetParams widget);
+
+		void showWidgetGroupInfo(@NonNull WidgetGroup widgetGroup);
 	}
 }
