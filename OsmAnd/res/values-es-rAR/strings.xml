@@ -4614,4 +4614,5 @@
 \n• Correcciones: actualización automática de teselas en los mapas en línea.
 \n
 \n</string>
+    <string name="turn_on_public_transport_description">Activar para ver rutas de transporte público en el mapa.</string>
 </resources>
