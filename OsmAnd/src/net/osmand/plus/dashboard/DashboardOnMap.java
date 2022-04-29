@@ -96,21 +96,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.CONFIGURE_MAP;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.CONTOUR_LINES;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.CYCLE_ROUTES;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.DASHBOARD;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.HIKING_ROUTES;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.LIST_MENU;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.MAPILLARY;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.OSM_NOTES;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.OVERLAY_MAP;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.ROUTE_PREFERENCES;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.TERRAIN;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.TRANSPORT_LINES;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.TRAVEL_ROUTES;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.UNDERLAY_MAP;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WIKIPEDIA;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.*;
 
 
 public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInformationListener {
