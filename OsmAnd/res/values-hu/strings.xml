@@ -4606,4 +4606,5 @@
 \n • Javítások: online csempetérképek automatikus frissítése
 \n
 \n</string>
+    <string name="turn_on_public_transport_description">Kapcsolja be a tömegközlekedési útvonalak megjelenítéséhez.</string>
 </resources>
