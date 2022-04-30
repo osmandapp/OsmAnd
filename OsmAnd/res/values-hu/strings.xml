@@ -2467,9 +2467,9 @@
     <string name="context_menu_read_article">Cikk elolvasása</string>
     <string name="context_menu_points_of_group">A csoport összes pontja</string>
     <string name="open_from">Ekkortól nyitva</string>
-    <string name="open_till">Nyitva eddig</string>
-    <string name="will_close_at">Ekkor zár</string>
-    <string name="will_open_at">Nyitás</string>
+    <string name="open_till">Nyitva eddig:</string>
+    <string name="will_close_at">Ekkor zár:</string>
+    <string name="will_open_at">Nyitás:</string>
     <string name="will_open_on">Nyitva</string>
     <string name="additional_actions">További műveletek</string>
     <string name="av_locations_selected_desc">GPX fájl a kijelölt jegyzetek koordinátáival és adataival.</string>
@@ -3722,7 +3722,7 @@
     <string name="monitoring_min_accuracy_descr_remark">Megjegyzés: Ha a GPS közvetlenül a felvétel előtt ki volt kapcsolva, akkor rosszabb lehet az első mért pont pontossága. A kódban ezért szeretnénk majd talán várni egy-két másodpercet egy pont rögzítése előtt (vagy a 3 egymást követő pont közül a legjobbat rögzíteni vagy valami hasonló), de ezt még nem programoztuk le.</string>
     <string name="delete_address">Cím törlése</string>
     <string name="context_menu_item_add_waypoint">Útpont hozzáadása a nyomvonalhoz</string>
-    <string name="plan_route_change_route_type_after">Utána módosítsa az útvonal típusát</string>
+    <string name="plan_route_change_route_type_after">Útvonal típus módosítása ezután</string>
     <string name="shared_string_gpx_route">Útvonal követése</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Ajánlás: Nehéz megjósolni, hogy mi lesz a felvételen és mi nem, így talán a legjobb ezt a szűrőt kikapcsolni.</string>
     <string name="map_widget_monitoring">Utazás felvétele</string>
@@ -4412,7 +4412,7 @@
     <string name="icon_group_education">Oktatás</string>
     <string name="copying_file">Fájl másolása: %1$s…</string>
     <string name="progress_complete">%1$s kész</string>
-    <string name="storage_found_files_descr">Koppintson a(z) \"%1$s\" gombra, hogy átmásoljon %2$s fájlt innen: \"%3$s\", ide: \"%4$s\". Ez eltarthat egy darabig.</string>
+    <string name="storage_found_files_descr">Koppintson a(z) „%1$s” gombra, hogy átmásoljon %2$s fájlt innen: „%3$s”, ide: „ %4$s” Ez eltarthat egy darabig.</string>
     <string name="storage_copied_files_size">%1$s fájl (%2$s) másolva</string>
     <string name="shared_storage_third_step">Adjon engedélyt a mappa eléréséhez. Enélkül az OsmAnd nem tud fájlokat másolni.</string>
     <string name="shared_storage_first_step">Nyomja meg a(z) „%1$s” gombot.
