@@ -106,6 +106,11 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 				: messageId;
 	}
 
+	@Nullable
+	public String getExternalProviderPackage() {
+		return null;
+	}
+
 	public abstract boolean isEnabledForAppMode(@NonNull ApplicationMode appMode);
 
 	public abstract void enableDisableForMode(@NonNull ApplicationMode appMode, boolean enabled);

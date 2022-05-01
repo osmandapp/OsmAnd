@@ -38,14 +38,13 @@ public class WidgetIconsHelper {
 
 	public void updateWidgetIcon(@NonNull ImageView icon, @NonNull WidgetParams widgetParams) {
 		int settingsIconId = widgetParams.getIconId(nightMode);
-		boolean shouldPaintIcon = !widgetParams.isIconColored();
-		updateWidgetIcon(icon, 0, settingsIconId, shouldPaintIcon);
+		updateWidgetIcon(icon, 0, settingsIconId, false);
 	}
 
-	private void updateWidgetIcon(@NonNull ImageView icon,
-	                              @DrawableRes int mapIconId,
-	                              @DrawableRes int settingsIconId,
-	                              boolean shouldPaintIcon) {
+	public void updateWidgetIcon(@NonNull ImageView icon,
+	                             @DrawableRes int mapIconId,
+	                             @DrawableRes int settingsIconId,
+	                             boolean shouldPaintIcon) {
 		if (mapIconId != 0) {
 			icon.setImageResource(mapIconId);
 			if (shouldPaintIcon) {

@@ -32,6 +32,7 @@ import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.HeaderViewH
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.PageViewHolder;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.PageViewHolder.PageUiInfo;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.SpaceViewHolder;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -266,16 +267,23 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		iconsHelper.updateWidgetIcon(viewHolder.icon, widgetInfo.info);
 		viewHolder.title.setText(widgetInfo.title);
 
-		WidgetParams widgetParams = WidgetParams.getById(widgetInfo.key);
-		if (widgetParams != null) {
-			viewHolder.infoButton.setOnClickListener(v -> {
-				if (actionsListener != null) {
-					actionsListener.showWidgetInfo(widgetParams);
-				}
-			});
-		}
+		viewHolder.infoButton.setOnClickListener(v -> showWidgetInfoIfPossible(widgetInfo));
 
 		updateAvailableItemDivider(viewHolder, position);
+	}
+
+	private void showWidgetInfoIfPossible(@NonNull AvailableWidgetUiInfo widgetInfo) {
+		if (actionsListener != null) {
+			WidgetParams widgetParams = WidgetParams.getById(widgetInfo.key);
+			if (widgetParams != null) {
+				actionsListener.showWidgetInfo(widgetParams);
+			} else {
+				String externalProviderPackage = widgetInfo.info.getExternalProviderPackage();
+				if (!Algorithms.isEmpty(externalProviderPackage)) {
+					actionsListener.showExternalWidgetIndo(widgetInfo.key, externalProviderPackage);
+				}
+			}
+		}
 	}
 
 	private void updateAvailableItemDivider(@NonNull AvailableItemViewHolder viewHolder, int position) {
@@ -361,5 +369,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		void showWidgetInfo(@NonNull WidgetParams widget);
 
 		void showWidgetGroupInfo(@NonNull WidgetGroup widgetGroup);
+
+		void showExternalWidgetIndo(@NonNull String widgetId, @NonNull String externalProviderPackage);
 	}
 }

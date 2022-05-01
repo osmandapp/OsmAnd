@@ -178,18 +178,31 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 
 			@Override
 			public void showWidgetGroupInfo(@NonNull WidgetGroup widgetGroup) {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					AddWidgetFragment.showInstance(activity.getSupportFragmentManager(), widgetGroup);
+				FragmentManager fragmentManager = getSupportFragmentManager();
+				if (fragmentManager != null) {
+					AddWidgetFragment.showInstance(fragmentManager, selectedAppMode, widgetGroup);
 				}
 			}
 
 			@Override
 			public void showWidgetInfo(@NonNull WidgetParams widget) {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					AddWidgetFragment.showInstance(activity.getSupportFragmentManager(), widget);
+				FragmentManager fragmentManager = getSupportFragmentManager();
+				if (fragmentManager != null) {
+					AddWidgetFragment.showInstance(fragmentManager, selectedAppMode, widget);
 				}
+			}
+
+			@Override
+			public void showExternalWidgetIndo(@NonNull String widgetId, @NonNull String externalProviderPackage) {
+				FragmentManager fragmentManager = getSupportFragmentManager();
+				if (fragmentManager != null) {
+					AddWidgetFragment.showInstance(fragmentManager, selectedAppMode, widgetId, externalProviderPackage);
+				}
+			}
+
+			@Nullable
+			private FragmentManager getSupportFragmentManager() {
+				return getActivity() != null ? getActivity().getSupportFragmentManager() : null;
 			}
 		});
 

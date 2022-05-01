@@ -20,6 +20,8 @@ import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARA
 
 public class SideWidgetInfo extends MapWidgetInfo {
 
+	private String externalProviderPackage;
+
 	public SideWidgetInfo(@NonNull String key,
 	                      @NonNull TextInfoWidget widget,
 	                      @Nullable WidgetState widgetState,
@@ -40,6 +42,15 @@ public class SideWidgetInfo extends MapWidgetInfo {
 		} else if (widgetState != null) {
 			widget.setContentTitle(widgetState.getMenuTitleId());
 		}
+	}
+
+	public void setExternalProviderPackage(@NonNull String externalProviderPackage) {
+		this.externalProviderPackage = externalProviderPackage;
+	}
+
+	@Nullable
+	public String getExternalProviderPackage() {
+		return externalProviderPackage;
 	}
 
 	@Override

@@ -99,10 +99,6 @@ public enum WidgetParams {
 		return night ? nightIconId : dayIconId;
 	}
 
-	public boolean isIconColored() {
-		return dayIconId != nightIconId;
-	}
-
 	@Nullable
 	public String getDocsUrl() {
 		if (this == COORDINATES) {

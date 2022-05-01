@@ -147,6 +147,7 @@ public class MapWidgetRegistry {
 	                                    @DrawableRes int nightSettingIconId,
 	                                    @StringRes int messageId,
 	                                    @Nullable String message,
+	                                    @Nullable String externalProviderPackage,
 	                                    int page,
 	                                    int order,
 	                                    @NonNull WidgetsPanel widgetPanel) {
@@ -155,6 +156,9 @@ public class MapWidgetRegistry {
 			TextInfoWidget textInfoWidget = ((TextInfoWidget) widget);
 			widgetInfo = new SideWidgetInfo(key, textInfoWidget, widgetState, daySettingsIconId, nightSettingIconId,
 					messageId, message, page, order, widgetPanel);
+			if (!Algorithms.isEmpty(externalProviderPackage)) {
+				((SideWidgetInfo) widgetInfo).setExternalProviderPackage(externalProviderPackage);
+			}
 		} else {
 			widgetInfo = new CenterWidgetInfo(key, widget, widgetState, daySettingsIconId, nightSettingIconId,
 					messageId, message, page, order, widgetPanel);

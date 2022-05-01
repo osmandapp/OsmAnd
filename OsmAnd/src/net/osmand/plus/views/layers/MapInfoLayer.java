@@ -326,44 +326,43 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public MapWidgetInfo registerWidget(@NonNull WidgetParams widgetParams,
 	                                    @NonNull MapWidget widget,
 	                                    @NonNull WidgetsPanel widgetPanel) {
-		if (mapInfoControls != null) {
-			int page = widgetPanel.getWidgetPage(widgetParams.id, settings);
-			int order = widgetPanel.getWidgetOrder(widgetParams.id, settings);
-			MapWidgetInfo widgetInfo = mapInfoControls.registerWidget(widgetParams.id, widget,
-					null, widgetParams.dayIconId, widgetParams.nightIconId, widgetParams.titleId,
-					null, page, order, widgetPanel);
-			widget.updateColors(calculateTextState());
-			return widgetInfo;
-		}
-		return null;
+		return registerWidget(widgetParams, widget, null, widgetPanel);
 	}
 
 	@Nullable
-	public MapWidgetInfo registerWidget(@NonNull String key, @NonNull MapWidget widget,
-	                                    @DrawableRes int settingsIconId, @Nullable String message,
-	                                    @NonNull WidgetsPanel widgetPanel, int order) {
+	public MapWidgetInfo registerWidget(@NonNull WidgetParams widgetParams,
+	                                    @NonNull MapWidget widget,
+	                                    @Nullable WidgetState widgetState,
+	                                    @NonNull WidgetsPanel widgetPanel) {
+		if (mapInfoControls != null) {
+			int page = widgetPanel.getWidgetPage(widgetParams.id, settings);
+			int order = widgetPanel.getWidgetOrder(widgetParams.id, settings);
+			MapWidgetInfo widgetInfo = mapInfoControls.registerWidget(widgetParams.id, widget, widgetState,
+					widgetParams.dayIconId, widgetParams.nightIconId, widgetParams.titleId,
+					null, null, page, order, widgetPanel);
+			widget.updateColors(calculateTextState());
+			return widgetInfo;
+		} else {
+			return null;
+		}
+	}
+
+	public void registerExternalWidget(@NonNull String key,
+	                                   @NonNull MapWidget widget,
+	                                   @DrawableRes int settingsIconId,
+	                                   @Nullable String message,
+	                                   @NonNull String externalProviderPackage,
+	                                   @NonNull WidgetsPanel widgetPanel,
+	                                   int order) {
 		if (mapInfoControls != null) {
 			int page = widgetPanel.getWidgetPage(key, settings);
 			int savedOrder = widgetPanel.getWidgetOrder(key, settings);
 			if (savedOrder != WidgetsPanel.DEFAULT_ORDER) {
 				order = savedOrder;
 			}
-			MapWidgetInfo reg = mapInfoControls.registerWidget(key, widget, null, settingsIconId,
-					settingsIconId, MapWidgetInfo.INVALID_ID, message, page, order, widgetPanel);
-			widget.updateColors(calculateTextState());
-			return reg;
-		} else {
-			return null;
-		}
-	}
-
-	public void registerWidget(@NonNull WidgetParams widgetParams, @NonNull MapWidget widget,
-	                           @NonNull WidgetState widgetState, @NonNull WidgetsPanel widgetPanel) {
-		if (mapInfoControls != null) {
-			int page = widgetPanel.getWidgetPage(widgetParams.id, settings);
-			int order = widgetPanel.getWidgetOrder(widgetParams.id, settings);
-			mapInfoControls.registerWidget(widgetParams.id, widget, widgetState, widgetParams.dayIconId,
-					widgetParams.nightIconId, widgetParams.titleId, null, page, order, widgetPanel);
+			mapInfoControls.registerWidget(key, widget, null, settingsIconId,
+					settingsIconId, MapWidgetInfo.INVALID_ID, message, externalProviderPackage,
+					page, order, widgetPanel);
 			widget.updateColors(calculateTextState());
 		}
 	}

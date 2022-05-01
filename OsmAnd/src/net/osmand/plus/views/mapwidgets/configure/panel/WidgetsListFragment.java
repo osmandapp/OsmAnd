@@ -314,9 +314,9 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 				if (activity != null) {
 					FragmentManager fragmentManager = activity.getSupportFragmentManager();
 					if (widgetGroup != null) {
-						AddWidgetFragment.showInstance(fragmentManager, widgetGroup);
+						AddWidgetFragment.showInstance(fragmentManager, selectedAppMode, widgetGroup);
 					} else {
-						AddWidgetFragment.showInstance(fragmentManager, widget);
+						AddWidgetFragment.showInstance(fragmentManager, selectedAppMode, widget);
 					}
 				}
 			});
@@ -347,7 +347,12 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 
 			View infoButton = view.findViewById(R.id.info_button);
 			infoButton.setOnClickListener(v -> {
-				// TODO widgets: show new dialog
+				FragmentActivity activity = getActivity();
+				String externalProviderPackage = widget.getExternalProviderPackage();
+				if (activity != null && !Algorithms.isEmpty(externalProviderPackage)) {
+					FragmentManager fragmentManager = activity.getSupportFragmentManager();
+					AddWidgetFragment.showInstance(fragmentManager, selectedAppMode, widget.key, externalProviderPackage);
+				}
 			});
 
 			boolean last = i + 1 == externalWidgets.size();
