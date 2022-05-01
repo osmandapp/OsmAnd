@@ -25,6 +25,7 @@ import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -259,7 +260,7 @@ public class MapWidgetRegistry {
 	                                                        @NonNull WidgetsPanel panel,
 	                                                        int filterModes) {
 		Map<Integer, Set<MapWidgetInfo>> widgetsByPages = new TreeMap<>();
-		for (MapWidgetInfo widgetInfo : getWidgetsForPanel(appMode, panel, filterModes)) {
+		for (MapWidgetInfo widgetInfo : getWidgetsForPanel(appMode, filterModes, panel)) {
 			int page = widgetInfo.pageIndex;
 			Set<MapWidgetInfo> widgetsOfPage = widgetsByPages.get(page);
 			if (widgetsOfPage == null) {
@@ -273,10 +274,16 @@ public class MapWidgetRegistry {
 
 	@NonNull
 	public Set<MapWidgetInfo> getWidgetsForPanel(@NonNull ApplicationMode appMode,
-	                                             @NonNull WidgetsPanel panel,
-	                                             int filterModes) {
+	                                             int filterModes,
+	                                             @NonNull WidgetsPanel... panels) {
 		Set<MapWidgetInfo> filteredWidgets = new TreeSet<>();
-		for (MapWidgetInfo widget : getWidgetsForPanel(panel)) {
+		List<WidgetsPanel> panelsList = Arrays.asList(panels);
+
+		for (MapWidgetInfo widget : getAllWidgets()) {
+
+			if (!panelsList.contains(widget.widgetPanel)) {
+				continue;
+			}
 
 			boolean disabledMode = (filterModes & DISABLED_MODE) == DISABLED_MODE;
 			boolean enabledMode = (filterModes & ENABLED_MODE) == ENABLED_MODE;

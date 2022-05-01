@@ -41,7 +41,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.configure.AddWidgetFragment;
+import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ItemType;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ListItem;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.WidgetAdapterDragListener;
@@ -284,7 +284,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 		List<ListItem> widgetsItems = new ArrayList<>();
 
 		WidgetsPanel selectedPanel = dataHolder.getSelectedPanel();
-		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(selectedAppMode, selectedPanel, AVAILABLE_MODE);
+		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(selectedAppMode, AVAILABLE_MODE, selectedPanel);
 		for (MapWidgetInfo widgetInfo : widgets) {
 			boolean enabled = dataHolder.getOrders().containsKey(widgetInfo.key);
 			if (!enabled) {
@@ -334,7 +334,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 		List<WidgetGroup> availableGroups = new ArrayList<>();
 
 		WidgetsPanel selectedPanel = dataHolder.getSelectedPanel();
-		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(selectedAppMode, selectedPanel, AVAILABLE_MODE);
+		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(selectedAppMode, AVAILABLE_MODE, selectedPanel);
 
 		for (MapWidgetInfo widgetInfo : widgets) {
 			boolean enabled = dataHolder.getOrders().containsKey(widgetInfo.key);

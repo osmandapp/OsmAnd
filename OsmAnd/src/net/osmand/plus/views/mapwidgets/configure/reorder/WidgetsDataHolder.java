@@ -54,7 +54,7 @@ public class WidgetsDataHolder {
 
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		int availableEnabledFilter = AVAILABLE_MODE | ENABLED_MODE;
-		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(appMode, selectedPanel, availableEnabledFilter);
+		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(appMode, availableEnabledFilter, selectedPanel);
 
 		if (orderByDefault) {
 			for (MapWidgetInfo widgetInfo : widgets) {

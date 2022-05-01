@@ -162,6 +162,7 @@
 	    <attr name="image_tile_placeholder" format="reference" />
 	    <attr name="toolbar_back_button_color" format="reference" />
 	    <attr name="toolbar_title_color" format="reference" />
+	    <attr name="ripple_solid_6dp" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">

@@ -22,7 +22,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.configure.AddWidgetFragment;
+import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableItemViewHolder;
@@ -148,7 +148,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		enabledWidgetsContainer.removeAllViews();
 
 		int enabledAvailableFilter = ENABLED_MODE | AVAILABLE_MODE;
-		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(selectedAppMode, selectedPanel, enabledAvailableFilter);
+		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(selectedAppMode, enabledAvailableFilter, selectedPanel);
 		boolean noEnabledWidgets = Algorithms.isEmpty(enabledWidgets);
 
 		View noWidgetsContainer = view.findViewById(R.id.no_widgets_container);
@@ -174,7 +174,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			}
 		} else {
 			Set<MapWidgetInfo> widgets = widgetRegistry
-					.getWidgetsForPanel(selectedAppMode, selectedPanel, enabledAvailableFilter);
+					.getWidgetsForPanel(selectedAppMode, enabledAvailableFilter, selectedPanel);
 			inflateWidgetItemsViews(widgets, inflater);
 		}
 	}
@@ -253,7 +253,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 
 		int disabledAvailableFilter = AVAILABLE_MODE | DISABLED_MODE;
 		Set<MapWidgetInfo> disabledWidgets = widgetRegistry
-				.getWidgetsForPanel(selectedAppMode, selectedPanel, disabledAvailableFilter);
+				.getWidgetsForPanel(selectedAppMode, disabledAvailableFilter, selectedPanel);
 		boolean allWidgetsEnabled = Algorithms.isEmpty(disabledWidgets);
 
 		View availableWidgetsCard = view.findViewById(R.id.available_widgets_container);

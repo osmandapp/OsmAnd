@@ -131,6 +131,7 @@
 					android:id="@+id/secondary_info_container"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding_small"
 					android:orientation="vertical"
 					android:visibility="gone"
 					tools:visibility="visible">
@@ -138,7 +139,6 @@
 					<View
 						android:layout_width="match_parent"
 						android:layout_height="1dp"
-						android:layout_marginTop="@dimen/dialog_content_margin"
 						android:background="?attr/divider_color_basic" />
 
 					<LinearLayout
