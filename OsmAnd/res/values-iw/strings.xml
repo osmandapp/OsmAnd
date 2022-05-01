@@ -4615,4 +4615,5 @@
     <string name="routing_attr_freeride_policy_prefer_offpiste_name">להעדיף מחוץ למסלול</string>
     <string name="routing_attr_difficulty_preference_no_preference_name">אין העדפה</string>
     <string name="routing_attr_difficulty_preference_beginner_name">מתחילים</string>
+    <string name="turn_on_public_transport_description">הפעלה תציג מסלולי תחבורה ציבורית במפה.</string>
 </resources>

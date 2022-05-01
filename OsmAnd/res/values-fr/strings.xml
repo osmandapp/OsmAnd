@@ -127,7 +127,7 @@
     <string name="shared_string_download">Télécharger</string>
     <string name="local_index_poi_data">Points d\'intérêt</string>
     <string name="local_index_address_data">Données adresses</string>
-    <string name="local_index_transport_data">Données des transports publics</string>
+    <string name="local_index_transport_data">Données des transports en commun</string>
     <string name="local_index_map_data">Cartes</string>
     <string name="local_indexes_cat_backup">Désactivé</string>
     <string name="local_indexes_cat_tts">Annonces vocales (synthèse vocale TTS)</string>
@@ -291,7 +291,7 @@
     <string name="use_high_res_maps">Carte haute résolution</string>
     <string name="use_high_res_maps_descr">Ne pas étirer (et rendre flou) les tuiles de carte sur les écrans haute résolution.</string>
     <string name="unknown_location">Position inconnue.</string>
-    <string name="context_menu_item_search_transport">Chercher un transport public</string>
+    <string name="context_menu_item_search_transport">Chercher un transport en commun</string>
     <string name="transport_searching_transport">Transports possibles (aucune arrivée définie) :</string>
     <string name="transport_searching_route">Transports possibles ({0} pour rejoindre l\'arrivée) :</string>
     <string name="transport_search_again">Réinitialiser la recherche de transport</string>
@@ -371,7 +371,7 @@
     <string name="route_head">Avancez</string>
     <string name="first_time_continue">Plus tard</string>
     <string name="first_time_download">Téléchargement des régions</string>
-    <string name="first_time_msg">Merci d\'avoir choisi OsmAnd. Téléchargez des données régionales pour une utilisation hors-ligne via \'Paramètres\' → \'Données hors-ligne\'. Ces données vous permettront d\'afficher des cartes, de rechercher une adresse, un point d\'intérêt ou un transport public et bien plus encore.</string>
+    <string name="first_time_msg">Merci d\'avoir choisi OsmAnd. Téléchargez des données régionales pour une utilisation hors-ligne via \'Paramètres\' → \'Données hors-ligne\'. Ces données vous permettront d\'afficher des cartes, de rechercher une adresse, un point d\'intérêt ou un transport en commun et bien plus encore.</string>
     <string name="search_poi_location">Recherche du signal…</string>
     <string name="search_near_map">Rechercher autour du centre de la carte</string>
     <string name="search_nearby">Rechercher à proximité</string>
@@ -395,8 +395,8 @@
     <string name="transport_route_distance">Distance de l\'itinéraire</string>
     <string name="transport">Transport</string>
     <string name="shared_string_ok">OK</string>
-    <string name="show_transport_over_map_description">Afficher les arrêts de transport publics sur la carte.</string>
-    <string name="show_transport_over_map">Afficher les arrêts de transports publics</string>
+    <string name="show_transport_over_map_description">Afficher les arrêts de transport en commun sur la carte.</string>
+    <string name="show_transport_over_map">Afficher les arrêts de transports en commun</string>
     <string name="hello">Application de navigation OsmAnd</string>
     <string name="update_poi_success">Mise à jour des points d\'intérêt ({0} ont été actualisés)</string>
     <string name="update_poi_error_local">Impossible de mettre à jour la liste des PI locaux.</string>
@@ -676,7 +676,7 @@
     <string name="poi_search_desc">Recherche par point d\'intérêt</string>
     <string name="address_search_desc">Recherche par adresse</string>
     <string name="navpoint_search_desc">Recherche par coordonnées</string>
-    <string name="transport_search_desc">Recherche de transports publics</string>
+    <string name="transport_search_desc">Recherche de transports en commun</string>
     <string name="favourites_search_desc">Recherche dans les favoris</string>
     <string name="route_roundabout">Giratoire : prenez la sortie %1$d puis continuez</string>
     <string name="route_kl">Serrez à gauche</string>
@@ -690,7 +690,7 @@
     <string name="rendering_attr_hmRendered_description">Augmenter le niveau de détail affiché.</string>
     <string name="rendering_attr_hmRendered_name">Afficher plus de détail</string>
     <string name="asap">Dès que possible</string>
-    <string name="gpxup_public">publique</string>
+    <string name="gpxup_public">Publique</string>
     <string name="gpxup_identifiable">Identifiable</string>
     <string name="gpxup_trackable">Traçable</string>
     <string name="gpxup_private">Privée</string>
@@ -835,7 +835,7 @@
     <string name="btn_advanced_mode">Mode avancé…</string>
     <string name="poi_filter_parking">Parking</string>
     <string name="poi_filter_emergency">Urgences</string>
-    <string name="poi_filter_public_transport">Transports publics</string>
+    <string name="poi_filter_public_transport">Transport en commun</string>
     <string name="poi_filter_entertainment">Divertissements</string>
     <string name="poi_filter_restaurants">Restauration</string>
     <string name="poi_filter_sightseeing">Tourisme</string>
@@ -2789,7 +2789,7 @@
     <string name="route_way">Mode</string>
     <string name="points_of_interests">Points d\'intérêt (PI)</string>
     <string name="waiting_for_route_calculation">Calcul de l\'itinéraire en cours…</string>
-    <string name="app_mode_public_transport">Transports publics</string>
+    <string name="app_mode_public_transport">Transport en commun</string>
     <string name="avoid_roads_descr">Sélectionnez la route que vous souhaitez éviter soit sur la carte soit dans la liste ci-dessous :</string>
     <string name="show_along_the_route">Afficher sur l\'itinéraire</string>
     <string name="simulate_navigation">Simuler le guidage</string>
@@ -2819,8 +2819,8 @@
     <string name="step_by_step">Instructions pas à pas</string>
     <string name="routeInfo_road_types_name">Types de route</string>
     <string name="exit_at">Sortir à</string>
-    <string name="use_osm_live_public_transport_description">Activer les modifications de transports publics en temps réel avec OsmAnd Live.</string>
-    <string name="use_osm_live_public_transport">Transports publics OsmAnd Live</string>
+    <string name="use_osm_live_public_transport_description">Activer les modifications de transports en commun en temps réel avec OsmAnd Live.</string>
+    <string name="use_osm_live_public_transport">Transports en commun OsmAnd Live</string>
     <string name="sit_on_the_stop">Panneau d\'affichage à l\'arrêt</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Bouton affichant ou masquant, sur la carte, les traces sélectionnées.</string>
     <string name="transfers_size">%1$d transferts</string>
@@ -2871,12 +2871,12 @@
     <string name="rendering_attr_surface_pebblestone_name">Galets</string>
     <string name="rendering_attr_surface_compacted_name">Compacté</string>
     <string name="public_transport_warning_descr_blog">Pour savoir comment OsmAnd calcule les itinéraires, visitez notre blog.</string>
-    <string name="public_transport_warning_title">Les itinéraires en transports publics sont actuellement en phase de test. Des erreurs ou des imprécisions peuvent avoir lieu.</string>
+    <string name="public_transport_warning_title">Les itinéraires en transports en commun sont actuellement en phase de test. Des erreurs ou des imprécisions peuvent avoir lieu.</string>
     <string name="add_intermediate">Ajouter un point intermédiaire</string>
     <string name="shared_string_walk">Marche</string>
     <string name="save_poi_value_exceed_length">Merci de réduire la taille de l\'étiquette « %s » à moins de 255 caractères.</string>
     <string name="save_poi_value_exceed_length_title">Taille de « %s »</string>
-    <string name="avoid_pt_types_descr">Sélectionnez les types de transports publics à éviter lors de la navigation :</string>
+    <string name="avoid_pt_types_descr">Sélectionnez les types de transports en commun à éviter lors de la navigation :</string>
     <string name="avoid_pt_types">Éviter des types de transports …</string>
     <string name="quick_action_day_night_mode">Mode %s</string>
     <string name="shared_string_degrees">Degrés</string>
@@ -2904,7 +2904,7 @@
     <string name="files_present">%1$d fichiers (%2$s) sont présents dans l\'emplacement précédent « %3$s ».</string>
     <string name="move_maps">Déplacer les cartes</string>
     <string name="dont_move_maps">Ne pas déplacer</string>
-    <string name="public_transport_ped_route_title">L\'itinéraire piéton est approximativement de %1$s et peut-être plus rapide qu\'en transport public</string>
+    <string name="public_transport_ped_route_title">L\'itinéraire piéton est approximativement de %1$s et peut-être plus rapide qu\'en transport en commun</string>
     <string name="public_transport_no_route_title">Malheureusement OsmAnd n\'a pas trouvé d\'itinéraire avec les paramètres actuels.</string>
     <string name="public_transport_try_ped">Essayez l\'itinéraire piéton.</string>
     <string name="public_transport_try_change_settings">Essayez de modifier les paramètres.</string>
@@ -3018,7 +3018,7 @@
     <string name="base_profile_descr_car">Voiture, camion, moto</string>
     <string name="base_profile_descr_bicycle">VTT, vélomoteur, cheval</string>
     <string name="base_profile_descr_pedestrian">Marche, randonnée, course à pied</string>
-    <string name="base_profile_descr_public_transport">Types de transports publics</string>
+    <string name="base_profile_descr_public_transport">Types de transports en commun</string>
     <string name="base_profile_descr_boat">Bateau, aviron, voile</string>
     <string name="base_profile_descr_aircraft">Avion, parapente</string>
     <string name="routing_profile_broutrer">BRouter (hors-ligne)</string>
@@ -3572,7 +3572,7 @@
 \n
 \n</string>
     <string name="additional_actions_descr">Accédez à ces actions en appuyant sur le bouton \"%1$s\".</string>
-    <string name="quick_action_transport_descr">Bouton pour afficher ou masquer les transports publics sur la carte.</string>
+    <string name="quick_action_transport_descr">Bouton pour afficher ou masquer les transports en commun sur la carte.</string>
     <string name="create_edit_poi">Créer ou modifier un PI</string>
     <string name="parking_positions">Emplacements de stationnement</string>
     <string name="add_edit_favorite">Ajouter ou modifier un favori</string>
@@ -3785,11 +3785,11 @@
     <string name="development">Développement</string>
     <string name="use_live_public_transport">OsmAnd Live data</string>
     <string name="use_live_routing">OsmAnd Live data</string>
-    <string name="use_native_pt_desc">Basculer vers le calcul d\'itinéraire Transport Public Java (sécurisé)</string>
+    <string name="use_native_pt_desc">Basculer vers le calcul d\'itinéraire Transport en commun Java (sécurisé)</string>
     <string name="perform_oauth_authorization_description">Connectez-vous avec OAuth pour utiliser les fonctionnalités osmedit</string>
     <string name="what_is_new">Nouveautés</string>
     <string name="complex_routing_descr">Routage en 2 phases pour le guidage en voiture.</string>
-    <string name="use_native_pt">Développement du transport public autochtone</string>
+    <string name="use_native_pt">Développement du transport en commun autochtone</string>
     <string name="perform_oauth_authorization">Connectez-vous avec OAuth</string>
     <string name="clear_osm_token">Supprimer le jeton OAuth d\'OpenStreetMap</string>
     <string name="osm_edit_logout_success">Déconnecté</string>
@@ -3981,8 +3981,7 @@
     <string name="activity_type_motorbike_name">Moto</string>
     <string name="open_place_reviews_plugin_description">Envoyez vos photos, avis et liens concernant des lieux publics tels que les restaurants, hôtels, musées et points d\'intérêts pour alimentez en données libres https://openplacereviews.org/data.
 \n
-\n
-\nPour en savoir plus, consultez https://openplacereviews.org</string>
+\nPour en savoir plus, consultez https://openplacereviews.org.</string>
     <string name="activity_type_racing_name">Course automobile</string>
     <string name="temporary_conditional_routing_descr">Utilisez les limitations routières actuellement actives sur la carte</string>
     <string name="track_recording_description">Arrêter l\'enregistrement \?
@@ -4608,4 +4607,5 @@
 \n • Corrigé : mise à jour automatique des tuiles en ligne.
 \n
 \n</string>
+    <string name="turn_on_public_transport_description">Activez pour afficher les itinéraires de transports en commun sur la carte.</string>
 </resources>

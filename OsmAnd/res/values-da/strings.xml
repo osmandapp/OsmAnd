@@ -669,7 +669,7 @@
     <string name="fav_imported_sucessfully">Favoritter importeret</string>
     <string name="fav_file_to_load_not_found">GPX-fil med Favoritter ikke fundet i {0}</string>
     <string name="fav_saved_sucessfully">Favoritter gemt i {0}</string>
-    <string name="no_fav_to_save">Ingen Favoritter at gemme</string>
+    <string name="no_fav_to_save">Ingen favoritpunkter at gemme</string>
     <string name="error_occurred_loading_gpx">GPX kunne ikke indlæses.</string>
     <string name="send_report">Send rapport</string>
     <string name="none_region_found">Kunne ikke finde nogen kort på hukommelseskortet.</string>
@@ -777,7 +777,7 @@
     <string name="voice_provider_descr">Vælg talevejledning til navigation.</string>
     <string name="transport_Stop">Stoppested</string>
     <string name="transport_stops">Stoppesteder</string>
-    <string name="osmand_net_previously_installed">Alle offline data i den gamle, installeret app vil understøttes af den nye, men Favoritpunkter skal eksporteres fra den gamle app og derefter importeres i den nye.</string>
+    <string name="osmand_net_previously_installed">Alle offline data i den gamle, installeret app vil understøttes af den nye, men favoritpunkter skal eksporteres fra den gamle app og derefter importeres i den nye.</string>
     <string name="voice_provider">Talevejledning</string>
     <string name="voice_data_initializing">Initialiserer taledata…</string>
     <string name="voice_data_not_supported">Ikke understøttet version af taledata</string>
@@ -825,7 +825,7 @@
     <string name="downloading_list_indexes">Henter liste over tilgængelige områder…</string>
     <string name="list_index_files_was_not_loaded">Kunne ikke hente liste over regioner fra https://osmand.net.</string>
     <string name="fav_points_edited">Favoritpunkt blev redigeret</string>
-    <string name="fav_points_not_exist">Der eksisterer ingen Favoritpunkter</string>
+    <string name="fav_points_not_exist">Der findes ingen favoritpunkter</string>
     <string name="update_existing">Erstat</string>
     <string name="only_show">Vis rute</string>
     <string name="follow">Start vejledning</string>
@@ -907,7 +907,7 @@
     <string name="navigate_point_format_D">DDD.DDDDD</string>
     <string name="navigate_point_format_DM">DDD MM.MMM</string>
     <string name="search_address_region">Område</string>
-    <string name="add_favorite_dialog_favourite_added_template">Favorit punkt \'{0}\' tilføjet.</string>
+    <string name="add_favorite_dialog_favourite_added_template">Favoritpunkt \'{0}\' tilføjet.</string>
     <string name="poi_dialog_comment_default">Interessepunkt ændres</string>
     <string name="app_mode_default">Gennemse kort</string>
     <string name="poi_error_info_not_loaded">Information om knudepunkt blev ikke indlæst</string>
@@ -1028,7 +1028,7 @@
     <string name="map_magnifier">Kortlup</string>
     <string name="auto_zoom_none">Ingen automatisk zoom</string>
     <string name="auto_zoom_far">Mellemafstand</string>
-    <string name="auto_zoom_farthest">Lange afstande</string>
+    <string name="auto_zoom_farthest">Lang afstand</string>
     <string name="auto_zoom_close">Tæt på</string>
     <string name="animate_routing_route_not_calculated">Beregn ruten først</string>
     <string name="animate_routing_route">Simuler med en beregnet rute </string>
@@ -2117,7 +2117,7 @@
     <string name="favorite_empty_place_name">Sted</string>
     <string name="quick_action_duplicates">Genvej omdøbt til %1$s for at undgå dubletter.</string>
     <string name="quick_action_duplicate">Dublet genvejsnavn</string>
-    <string name="quick_action_showhide_favorites_descr">En til/fra-knap til at vise eller skjule Favoritpunkter på kortet.</string>
+    <string name="quick_action_showhide_favorites_descr">En til/fra-knap til at vise eller skjule favoritpunkter på kortet.</string>
     <string name="quick_action_showhide_poi_descr">En til/fra-knap til at vise eller skjule interessepunkter på kortet.</string>
     <string name="quick_action_poi_show">Vis %1$s</string>
     <string name="quick_action_poi_hide">Skjul %1$s</string>
@@ -2371,7 +2371,7 @@
     <string name="change_color">Skift farve</string>
     <string name="edit_name">Rediger navn</string>
     <string name="save_poi_too_many_uppercase">Navnet indeholder for mange store bogstaver. Fortsæt?</string>
-    <string name="route_is_too_long_v2">For lange afstande: tilføj mellemliggende destinationer, hvis ingen rute er beregnet efter 10 minutter.</string>
+    <string name="route_is_too_long_v2">Ved lange afstande: tilføj mellemliggende destinationer, hvis ingen rute er beregnet efter 10 minutter.</string>
     <string name="display_zoom_level">Vise zoomniveau: %1$s</string>
     <string name="srtm_color_scheme">Farveskema</string>
     <string name="show_from_zoom_level">Vis fra zoomniveau</string>
@@ -4620,4 +4620,5 @@
 \n • Rettelser: online flise-kort auto-opdatering.
 \n
 \n</string>
+    <string name="turn_on_public_transport_description">Slå til for at se ruter med offentlige transport på kortet.</string>
 </resources>
