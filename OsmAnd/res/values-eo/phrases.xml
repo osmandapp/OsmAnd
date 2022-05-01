@@ -90,7 +90,7 @@
     <string name="poi_public_transport_platform_bus">Haltejo aŭtobusa</string>
     <string name="poi_public_transport_platform_trolleybus">Haltejo trolebusa</string>
     <string name="poi_parking">Parkumejo</string>
-    <string name="poi_aerodrome">Aerodromo</string>
+    <string name="poi_aerodrome">Aerodromo;aerdromo;flughaveno;aviadilejo;aerhaveno;aerohaveno</string>
     <string name="poi_country">Lando</string>
     <string name="poi_city">Urbego</string>
     <string name="poi_capital">jes;ĉefurbo</string>
@@ -162,9 +162,9 @@
     <string name="poi_public_transport_stop_position">Haltejo</string>
     <string name="poi_public_transport_station">Stacidomo</string>
     <string name="poi_bus_station">Stacidomo aŭtobusa</string>
-    <string name="poi_railway_station">Stacidomo fervoja</string>
-    <string name="poi_halt">Haltejo fervoja</string>
-    <string name="poi_railway_platform">Kajo fervoja</string>
+    <string name="poi_railway_station">Stacidomo fervoja;fervoja stacidomo;fervojstacio;trajnstacio;haltejo;stacio fervoja</string>
+    <string name="poi_halt">Haltejo fervoja;stacio fervoja;fervojstacio;trajnstacio</string>
+    <string name="poi_railway_platform">Kajo fervoja;perono;pasaĝerkajo</string>
     <string name="poi_subway_entrance">Metro-enirejo</string>
     <string name="poi_subway_station">jes;Metroa stacio</string>
     <string name="poi_waste_basket">Rubujo</string>
@@ -327,7 +327,7 @@
     <string name="poi_runway">Avia dromo</string>
     <string name="poi_aeroway_terminal">Flugstacio</string>
     <string name="poi_meadow">Kultiv-herbejo</string>
-    <string name="poi_aeroway_gate">Aerodroma enirejo</string>
+    <string name="poi_aeroway_gate">Kluzo aerodromo-aviadilo</string>
     <string name="poi_slipway">Ŝipglitejo</string>
     <string name="poi_ferry_terminal">Pramstacio</string>
     <string name="poi_bicycle_rental">Bicikl-pruntejo</string>
