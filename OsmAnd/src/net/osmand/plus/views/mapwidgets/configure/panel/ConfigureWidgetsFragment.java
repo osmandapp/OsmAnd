@@ -13,14 +13,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.viewpager2.widget.ViewPager2;
-import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback;
-
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener;
 import com.google.android.material.tabs.TabLayout;
@@ -37,13 +29,34 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment.AddWidgetListener;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment.WidgetsOrderListener;
+import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
-public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements WidgetsOrderListener, OnOffsetChangedListener {
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager2.widget.ViewPager2;
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback;
+
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+
+public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements WidgetsOrderListener,
+		OnOffsetChangedListener, AddWidgetListener {
 
 	public static final String TAG = ConfigureWidgetsFragment.class.getSimpleName();
 
@@ -215,6 +228,67 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	public void onWidgetsOrderApplied() {
 		if (selectedFragment != null) {
 			selectedFragment.updateContent();
+		}
+	}
+
+	@Override
+	public void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds) {
+		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		for (String widgetId : widgetsIds) {
+			MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
+			if (widgetInfo != null) {
+				addWidgetToEnd(widgetInfo);
+				widgetRegistry.enableDisableWidgetForMode(selectedAppMode, widgetInfo, true);
+			}
+		}
+
+		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
+		if (mapInfoLayer != null) {
+			mapInfoLayer.recreateControls();
+		}
+
+		if (selectedFragment != null) {
+			selectedFragment.updateContent();
+		}
+	}
+
+	private void addWidgetToEnd(@NonNull MapWidgetInfo targetWidget) {
+		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		WidgetsPanel panel = targetWidget.widgetPanel;
+
+		Map<Integer, List<String>> pagedOrder = new TreeMap<>();
+		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(selectedAppMode, ENABLED_MODE, panel);
+
+		for (MapWidgetInfo widget : enabledWidgets) {
+			int page = widget.pageIndex;
+			List<String> orders = pagedOrder.get(page);
+			if (orders == null) {
+				orders = new ArrayList<>();
+				pagedOrder.put(page, orders);
+			}
+			orders.add(widget.key);
+		}
+
+		if (Algorithms.isEmpty(pagedOrder)) {
+			targetWidget.pageIndex = 0;
+			targetWidget.priority = 0;
+			List<List<String>> flatOrder = new ArrayList<>();
+			flatOrder.add(Collections.singletonList(targetWidget.key));
+			panel.setWidgetsOrder(selectedAppMode, flatOrder, settings);
+		} else {
+			List<Integer> pages = new ArrayList<>(pagedOrder.keySet());
+			List<List<String>> orders = new ArrayList<>(pagedOrder.values());
+			List<String> lastPageOrder = orders.get(orders.size() - 1);
+
+			lastPageOrder.add(targetWidget.key);
+
+			int lastPage = pages.get(pages.size() - 1);
+			int lastOrder = lastPageOrder.size() - 1;
+
+			targetWidget.pageIndex = lastPage;
+			targetWidget.priority = lastOrder;
+
+			panel.setWidgetsOrder(selectedAppMode, orders, settings);
 		}
 	}
 

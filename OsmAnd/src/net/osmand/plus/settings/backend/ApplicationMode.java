@@ -48,6 +48,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetParams.RADIUS_RULER;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.RELATIVE_BEARING;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.SECOND_NEXT_TURN;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_1;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_2;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.SMALL_NEXT_TURN;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.TIME_TO_GO;
 
@@ -234,8 +235,8 @@ public class ApplicationMode {
 		regWidgetAvailability(ALTITUDE.id, all);
 
 		// all = null everything
-		regWidgetAvailability(SIDE_MARKER_1.id, none);
-		regWidgetAvailability(SIDE_MARKER_1.id, none);
+		regWidgetAvailability(SIDE_MARKER_1.id, all);
+		regWidgetAvailability(SIDE_MARKER_2.id, all);
 		regWidgetAvailability(GPS_INFO.id, all);
 		regWidgetAvailability(BATTERY.id, all);
 		regWidgetAvailability(RELATIVE_BEARING.id, all);

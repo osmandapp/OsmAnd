@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.aidl.AidlMapWidgetWrapper;
+import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -29,12 +30,16 @@ import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
+import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment;
+import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment;
 import net.osmand.util.Algorithms;
 
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -53,13 +58,15 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 
 	private static final String KEY_APP_MODE = "app_mode";
 	private static final String KEY_SELECTED_WIDGETS_IDS = "selected_widgets_ids";
+	private static final String KEY_ALREADY_SELECTED_WIDGETS_IDS = "already_selected_widgets_ids";
 
 	private OsmandApplication app;
 	private ApplicationMode appMode;
 	private boolean nightMode;
 
 	private WidgetDataHolder widgetsDataHolder;
-	private Set<String> selectedWidgetsIds = new HashSet<>();
+	private Map<Integer, String> selectedWidgetsIds = new TreeMap<>();
+	private List<String> alreadySelectedWidgetsIds;
 
 	private View view;
 
@@ -71,18 +78,25 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 
 		Bundle args = getArguments();
 		if (savedInstanceState != null) {
-			restoreAppMode(savedInstanceState);
-			widgetsDataHolder = new WidgetDataHolder(app, savedInstanceState);
-			selectedWidgetsIds = (Set<String>) savedInstanceState.getSerializable(KEY_SELECTED_WIDGETS_IDS);
+			initFromBundle(savedInstanceState);
 		} else if (args != null) {
-			restoreAppMode(args);
-			widgetsDataHolder = new WidgetDataHolder(app, args);
+			initFromBundle(args);
 		}
 	}
 
-	private void restoreAppMode(@NonNull Bundle bundle) {
+	private void initFromBundle(@NonNull Bundle bundle) {
 		String appModeKey = bundle.getString(KEY_APP_MODE);
 		appMode = ApplicationMode.valueOfStringKey(appModeKey, app.getSettings().getApplicationMode());
+
+		widgetsDataHolder = new WidgetDataHolder(app, bundle);
+
+		if (bundle.containsKey(KEY_ALREADY_SELECTED_WIDGETS_IDS)) {
+			alreadySelectedWidgetsIds = (List<String>) bundle.getSerializable(KEY_ALREADY_SELECTED_WIDGETS_IDS);
+		}
+
+		if (bundle.containsKey(KEY_SELECTED_WIDGETS_IDS)) {
+			selectedWidgetsIds = (Map<Integer, String>) bundle.getSerializable(KEY_SELECTED_WIDGETS_IDS);
+		}
 	}
 
 	@Nullable
@@ -142,13 +156,6 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private void dismiss() {
-		Activity activity = getActivity();
-		if (activity != null) {
-			activity.onBackPressed();
-		}
-	}
-
 	private void setupContent() {
 		TextView descriptionText = view.findViewById(R.id.description);
 		String description = widgetsDataHolder.getDescription();
@@ -185,7 +192,7 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 			String title = getString(widget.titleId);
 			String desc = widget.descId != 0 ? getString(widget.descId) : null;
 			Drawable icon = getIcon(widget.getIconId(nightMode));
-			setupWidgetItemView(view, widget.id, title, desc, icon);
+			setupWidgetItemView(view, widget.id, title, desc, icon, widget.getDefaultOrder());
 			container.addView(view);
 		}
 	}
@@ -195,12 +202,12 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 
 		View view = inflater.inflate(R.layout.selectable_widget_item, container, false);
-		String widgetId = aidlWidgetData.getId();
+		String widgetId = OsmandAidlApi.WIDGET_ID_PREFIX + aidlWidgetData.getId();
 		String title = aidlWidgetData.getMenuTitle();
 		String iconName = aidlWidgetData.getMenuIconName();
 		int iconId = AndroidUtils.getDrawableId(app, iconName);
 		Drawable icon = iconId != 0 ? getPaintedContentIcon(iconId, appMode.getProfileColor(nightMode)) : null;
-		setupWidgetItemView(view, widgetId, title, null, icon);
+		setupWidgetItemView(view, widgetId, title, null, icon, 0);
 
 		container.addView(view);
 	}
@@ -209,7 +216,8 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 	                                 @NonNull String widgetId,
 	                                 @NonNull String title,
 	                                 @Nullable String description,
-	                                 @Nullable Drawable icon) {
+	                                 @Nullable Drawable icon,
+	                                 int order) {
 		((ImageView) view.findViewById(R.id.icon)).setImageDrawable(icon);
 		((TextView) view.findViewById(R.id.title)).setText(title);
 
@@ -222,13 +230,15 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		CheckBox checkBox = view.findViewById(R.id.compound_button);
 		UiUtilities.setupCompoundButton(checkBox, nightMode, CompoundButtonType.GLOBAL);
 
-		boolean alreadyEnabled = isWidgetEnabled(widgetId);
+		boolean alreadyEnabled = alreadySelectedWidgetsIds != null
+				? alreadySelectedWidgetsIds.contains(widgetId)
+				: isWidgetEnabled(widgetId);
 		if (alreadyEnabled) {
 			checkBox.setChecked(true);
 			view.setSelected(true);
 			view.setOnClickListener(v -> app.showShortToastMessage(R.string.import_duplicates_title));
 		} else {
-			if (selectedWidgetsIds.contains(widgetId)) {
+			if (selectedWidgetsIds.containsValue(widgetId)) {
 				view.setSelected(true);
 				checkBox.setChecked(true);
 			}
@@ -238,9 +248,9 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 				view.setSelected(selected);
 				checkBox.setChecked(selected);
 				if (selected) {
-					selectedWidgetsIds.add(widgetId);
+					selectedWidgetsIds.put(order, widgetId);
 				} else {
-					selectedWidgetsIds.remove(widgetId);
+					selectedWidgetsIds.remove(order);
 				}
 			});
 		}
@@ -261,8 +271,21 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 
 	private void setupApplyButton() {
 		View applyButton = view.findViewById(R.id.dismiss_button);
-		applyButton.setOnClickListener(v -> app.showToastMessage("No action yet"));
+		applyButton.setOnClickListener(v -> {
+			Fragment target = getTargetFragment();
+			if (target instanceof AddWidgetListener) {
+				((AddWidgetListener) target).onWidgetsSelectedToAdd(new ArrayList<>(selectedWidgetsIds.values()));
+			}
+			dismiss();
+		});
 		UiUtilities.setupDialogButton(nightMode, applyButton, DialogButtonType.PRIMARY, R.string.shared_string_apply);
+	}
+
+	private void dismiss() {
+		Activity activity = getActivity();
+		if (activity != null) {
+			activity.onBackPressed();
+		}
 	}
 
 	@Override
@@ -270,6 +293,7 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		super.onSaveInstanceState(outState);
 		outState.putString(KEY_APP_MODE, appMode.getStringKey());
 		outState.putSerializable(KEY_SELECTED_WIDGETS_IDS, (Serializable) selectedWidgetsIds);
+		outState.putSerializable(KEY_ALREADY_SELECTED_WIDGETS_IDS, (Serializable) alreadySelectedWidgetsIds);
 		widgetsDataHolder.saveState(outState);
 	}
 
@@ -279,43 +303,75 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		return nightMode ? R.color.status_bar_color_dark : R.color.activity_background_color_light;
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager,
-	                                @NonNull ApplicationMode appMode,
-	                                @NonNull WidgetGroup widgetGroup) {
+	/**
+	 * @param alreadySelectedWidgetsIds If in edit mode ({@link ReorderWidgetsFragment}), non-null list
+	 *                                  of added widgets ids of this group; null if in view mode
+	 *                                  ({@link WidgetsListFragment})
+	 */
+	public static void showGroupDialog(@NonNull FragmentManager fragmentManager,
+	                                   @NonNull Fragment target,
+	                                   @NonNull ApplicationMode appMode,
+	                                   @NonNull WidgetGroup widgetGroup,
+	                                   @Nullable List<String> alreadySelectedWidgetsIds) {
 		Bundle args = new Bundle();
 		args.putString(KEY_APP_MODE, appMode.getStringKey());
 		args.putString(KEY_GROUP_NAME, widgetGroup.name());
-		showFragment(fragmentManager, args);
+		args.putSerializable(KEY_ALREADY_SELECTED_WIDGETS_IDS, (Serializable) alreadySelectedWidgetsIds);
+		AddWidgetFragment fragment = new AddWidgetFragment();
+		fragment.setArguments(args);
+		fragment.setTargetFragment(target, 0);
+		showFragment(fragmentManager, fragment);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager,
-	                                @NonNull ApplicationMode appMode,
-	                                @NonNull WidgetParams widgetParams) {
+	/**
+	 * @see AddWidgetListener#showGroupDialog
+	 */
+	public static void showWidgetDialog(@NonNull FragmentManager fragmentManager,
+	                                    @NonNull Fragment target,
+	                                    @NonNull ApplicationMode appMode,
+	                                    @NonNull WidgetParams widgetParams,
+	                                    @Nullable List<String> alreadySelectedWidgetsIds) {
 		Bundle args = new Bundle();
 		args.putString(KEY_APP_MODE, appMode.getStringKey());
 		args.putString(KEY_WIDGET_ID, widgetParams.id);
-		showFragment(fragmentManager, args);
+		args.putSerializable(KEY_ALREADY_SELECTED_WIDGETS_IDS, (Serializable) alreadySelectedWidgetsIds);
+		AddWidgetFragment fragment = new AddWidgetFragment();
+		fragment.setArguments(args);
+		fragment.setTargetFragment(target, 0);
+		showFragment(fragmentManager, fragment);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager,
-	                                @NonNull ApplicationMode appMode,
-	                                @NonNull String widgetId,
-	                                @NonNull String externalProviderPackage) {
+	/**
+	 * @see AddWidgetListener#showGroupDialog
+	 */
+	public static void showExternalWidgetDialog(@NonNull FragmentManager fragmentManager,
+	                                            @NonNull Fragment target,
+	                                            @NonNull ApplicationMode appMode,
+	                                            @NonNull String widgetId,
+	                                            @NonNull String externalProviderPackage,
+	                                            @Nullable List<String> alreadySelectedWidgetsIds) {
 		Bundle args = new Bundle();
 		args.putString(KEY_APP_MODE, appMode.getStringKey());
 		args.putString(KEY_WIDGET_ID, widgetId);
 		args.putString(KEY_EXTERNAL_PROVIDER_PACKAGE, externalProviderPackage);
-		showFragment(fragmentManager, args);
+		args.putSerializable(KEY_ALREADY_SELECTED_WIDGETS_IDS, (Serializable) alreadySelectedWidgetsIds);
+		AddWidgetFragment fragment = new AddWidgetFragment();
+		fragment.setArguments(args);
+		fragment.setTargetFragment(target, 0);
+		showFragment(fragmentManager, fragment);
 	}
 
-	private static void showFragment(@NonNull FragmentManager fragmentManager, @NonNull Bundle args) {
+	private static void showFragment(@NonNull FragmentManager fragmentManager, @NonNull AddWidgetFragment fragment) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			Fragment fragment = new AddWidgetFragment();
-			fragment.setArguments(args);
 			fragmentManager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 		}
+	}
+
+	public interface AddWidgetListener {
+
+		void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds);
 	}
 }

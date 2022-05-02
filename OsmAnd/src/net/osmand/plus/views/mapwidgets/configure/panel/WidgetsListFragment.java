@@ -314,9 +314,11 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 				if (activity != null) {
 					FragmentManager fragmentManager = activity.getSupportFragmentManager();
 					if (widgetGroup != null) {
-						AddWidgetFragment.showInstance(fragmentManager, selectedAppMode, widgetGroup);
+						AddWidgetFragment.showGroupDialog(fragmentManager, getParentFragment(),
+								selectedAppMode, widgetGroup, null);
 					} else {
-						AddWidgetFragment.showInstance(fragmentManager, selectedAppMode, widget);
+						AddWidgetFragment.showWidgetDialog(fragmentManager, getParentFragment(),
+								selectedAppMode, widget, null);
 					}
 				}
 			});
@@ -351,7 +353,8 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 				String externalProviderPackage = widget.getExternalProviderPackage();
 				if (activity != null && !Algorithms.isEmpty(externalProviderPackage)) {
 					FragmentManager fragmentManager = activity.getSupportFragmentManager();
-					AddWidgetFragment.showInstance(fragmentManager, selectedAppMode, widget.key, externalProviderPackage);
+					AddWidgetFragment.showExternalWidgetDialog(fragmentManager, getParentFragment(),
+							selectedAppMode, widget.key, externalProviderPackage, null);
 				}
 			});
 

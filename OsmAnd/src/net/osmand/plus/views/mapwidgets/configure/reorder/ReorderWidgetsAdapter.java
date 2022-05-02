@@ -16,6 +16,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.OnItemMoveCallback;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
@@ -75,7 +76,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		setHasStableIds(true);
 		this.app = app;
 		this.nightMode = nightMode;
-		this.reorderHelper = new ReorderWidgetsAdapterHelper(this, dataHolder, items);
+		this.reorderHelper = new ReorderWidgetsAdapterHelper(app, this, dataHolder, items, nightMode);
 
 		ApplicationMode mode = app.getSettings().getApplicationMode();
 		profileColor = mode.getProfileColor(nightMode);
@@ -92,6 +93,10 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		this.items.clear();
 		this.items.addAll(items);
 		notifyDataSetChanged();
+	}
+
+	public void addWidget(@NonNull MapWidgetInfo widgetInfo) {
+		reorderHelper.addWidget(widgetInfo);
 	}
 
 	public void setDragListener(@NonNull WidgetAdapterDragListener dragListener) {
@@ -240,7 +245,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		WidgetGroup widgetGroup = ((WidgetGroup) items.get(position).value);
 		OnClickListener showInfoListener = v -> {
 			if (actionsListener != null) {
-				actionsListener.showWidgetGroupInfo(widgetGroup);
+				actionsListener.showWidgetGroupInfo(widgetGroup, listAddedGroupWidgets(widgetGroup));
 			}
 		};
 
@@ -253,6 +258,22 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		viewHolder.infoButton.setOnClickListener(showInfoListener);
 
 		updateAvailableItemDivider(viewHolder, position);
+	}
+
+	@NonNull
+	private List<String> listAddedGroupWidgets(@NonNull WidgetGroup widgetGroup) {
+		List<String> addedGroupWidgets = new ArrayList<>();
+		for (ListItem listItem : items) {
+			if (listItem.value instanceof AddedWidgetUiInfo) {
+				AddedWidgetUiInfo addedWidgetUiInfo = (AddedWidgetUiInfo) listItem.value;
+				WidgetParams widgetParams = WidgetParams.getById(addedWidgetUiInfo.key);
+				if (widgetParams != null && widgetGroup.equals(widgetParams.getGroup())) {
+					addedGroupWidgets.add(widgetParams.id);
+				}
+			}
+		}
+
+		return addedGroupWidgets;
 	}
 
 	private void bindAvailableWidgetViewHolder(@NonNull AvailableItemViewHolder viewHolder, int position) {
@@ -368,7 +389,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 
 		void showWidgetInfo(@NonNull WidgetParams widget);
 
-		void showWidgetGroupInfo(@NonNull WidgetGroup widgetGroup);
+		void showWidgetGroupInfo(@NonNull WidgetGroup widgetGroup, @NonNull List<String> addedGroupWidgetsIds);
 
 		void showExternalWidgetIndo(@NonNull String widgetId, @NonNull String externalProviderPackage);
 	}

@@ -42,6 +42,7 @@ import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment;
+import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment.AddWidgetListener;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ItemType;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ListItem;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.WidgetAdapterDragListener;
@@ -61,7 +62,8 @@ import java.util.TreeMap;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 
-public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
+public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
+		CopyAppModePrefsListener, ResetAppModePrefsListener, AddWidgetListener {
 
 	public static final String TAG = ReorderWidgetsFragment.class.getSimpleName();
 
@@ -177,10 +179,11 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 			}
 
 			@Override
-			public void showWidgetGroupInfo(@NonNull WidgetGroup widgetGroup) {
+			public void showWidgetGroupInfo(@NonNull WidgetGroup widgetGroup, @NonNull List<String> addedGroupWidgets) {
 				FragmentManager fragmentManager = getSupportFragmentManager();
 				if (fragmentManager != null) {
-					AddWidgetFragment.showInstance(fragmentManager, selectedAppMode, widgetGroup);
+					AddWidgetFragment.showGroupDialog(fragmentManager, ReorderWidgetsFragment.this,
+							selectedAppMode, widgetGroup, addedGroupWidgets);
 				}
 			}
 
@@ -188,7 +191,8 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 			public void showWidgetInfo(@NonNull WidgetParams widget) {
 				FragmentManager fragmentManager = getSupportFragmentManager();
 				if (fragmentManager != null) {
-					AddWidgetFragment.showInstance(fragmentManager, selectedAppMode, widget);
+					AddWidgetFragment.showWidgetDialog(fragmentManager, ReorderWidgetsFragment.this,
+							selectedAppMode, widget, Collections.emptyList());
 				}
 			}
 
@@ -196,7 +200,8 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 			public void showExternalWidgetIndo(@NonNull String widgetId, @NonNull String externalProviderPackage) {
 				FragmentManager fragmentManager = getSupportFragmentManager();
 				if (fragmentManager != null) {
-					AddWidgetFragment.showInstance(fragmentManager, selectedAppMode, widgetId, externalProviderPackage);
+					AddWidgetFragment.showExternalWidgetDialog(fragmentManager, ReorderWidgetsFragment.this,
+							selectedAppMode, widgetId, externalProviderPackage, Collections.emptyList());
 				}
 			}
 
@@ -453,6 +458,16 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 	public void resetAppModePrefs(ApplicationMode appMode) {
 		dataHolder.initOrders(app, selectedAppMode, true);
 		updateItems();
+	}
+
+	@Override
+	public void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds) {
+		for (String widgetId : widgetsIds) {
+			MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
+			if (widgetInfo != null) {
+				adapter.addWidget(widgetInfo);
+			}
+		}
 	}
 
 	@Override
