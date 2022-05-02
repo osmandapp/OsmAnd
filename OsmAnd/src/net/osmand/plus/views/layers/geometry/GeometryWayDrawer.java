@@ -16,6 +16,7 @@ import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QListFColorARGB;
 import net.osmand.core.jni.QListVectorLine;
 import net.osmand.core.jni.QVectorPointI;
+import net.osmand.core.jni.VectorDouble;
 import net.osmand.core.jni.VectorLine;
 import net.osmand.core.jni.VectorLineBuilder;
 import net.osmand.core.jni.VectorLinesCollection;
@@ -177,8 +178,8 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 	}
 
 	protected void buildVectorLine(@NonNull VectorLinesCollection collection, int baseOrder,
-	                               int lineId, int color, float width, boolean approximationEnabled,
-	                               boolean showPathBitmaps, @Nullable Bitmap pathBitmap,
+	                               int lineId, int color, float width, @Nullable float[] dashPattern,
+	                               boolean approximationEnabled, boolean showPathBitmaps, @Nullable Bitmap pathBitmap,
 	                               @Nullable Bitmap specialPathBitmap, float bitmapStep,
 	                               @Nullable  QListFColorARGB colorizationMapping, int colorizationScheme,
 	                               @NonNull List<DrawPathData31> pathsData) {
@@ -208,6 +209,13 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 				.setFillColor(NativeUtilities.createFColorARGB(color))
 				.setApproximationEnabled(approximationEnabled)
 				.setBaseOrder(baseOrder);
+		if (dashPattern != null) {
+			VectorDouble vectorDouble = new VectorDouble();
+			for (float i : dashPattern) {
+				vectorDouble.add(i * 6);
+			}
+			builder.setLineDash(vectorDouble);
+		}
 		if (showPathBitmaps && pathBitmap != null) {
 			builder.setShouldShowArrows(true)
 					.setScreenScale(1f)
@@ -266,20 +274,21 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 	                              int lineId, int baseOrder, boolean shouldDrawArrows, boolean approximationEnabled,
 	                              @NonNull GeometryWayStyle<?> style, @NonNull List<DrawPathData31> pathsData) {
 		drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, style,
-				style.getColor(0), style.getWidth(0), approximationEnabled, pathsData);
+				style.getColor(0), style.getWidth(0), style.getDashPattern(), approximationEnabled, pathsData);
 	}
 
 	protected void drawVectorLine(@NonNull VectorLinesCollection collection,
 	                              int lineId, int baseOrder, boolean shouldDrawArrows,
 	                              @NonNull GeometryWayStyle<?> style, int color, float width,
+	                              @Nullable float[] dashPattern,
 	                              boolean approximationEnabled,
 	                              @NonNull List<DrawPathData31> pathsData) {
 		PathPoint pathPoint = getArrowPathPoint(0, 0, style, 0, 0);
 		pathPoint.scaled = false;
 		Bitmap pointBitmap = pathPoint.drawBitmap(getContext());
 		double pxStep = style.getPointStepPx(1f);
-		buildVectorLine(collection, baseOrder, lineId, color, width, approximationEnabled,
-				shouldDrawArrows, pointBitmap, null, (float) pxStep, null, 0,
+		buildVectorLine(collection, baseOrder, lineId, color, width, dashPattern,
+				approximationEnabled, shouldDrawArrows, pointBitmap, null, (float) pxStep, null, 0,
 				pathsData);
 	}
 

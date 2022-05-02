@@ -4590,4 +4590,29 @@
     <string name="map_widget_current_speed">Geçerli hız</string>
     <string name="page_number">Sayfa %1$s</string>
     <string name="map_widget_altitude">Geçerli konumun rakımı</string>
+    <string name="turn_on_public_transport_description">Haritada toplu taşıma güzergahlarını görmek için açın.</string>
+    <string name="on_with_params">%1$s / %2$s</string>
+    <string name="shared_string_symbol">Simge</string>
+    <string name="no_widgets_descr">Kullanılabilir widget\'lar listesinden bir veya daha fazla widget ekleyin.</string>
+    <string name="routing_attr_freeride_policy_allow_name">İzin ver</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Pist dışını tercih et</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Tercih yok</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Başlangıç</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">İleri</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Uzman</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Pist dışına çıkma</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Yalnızca gerekirse</string>
+    <string name="no_widgets_here_yet">Burada henüz widget yok</string>
+    <string name="release_4_2">• Widget\'lar yeniden tasarlandı: yeni görünüm, sayfalara göre gruplandırın, sırayı değiştirin ve istediğiniz gibi birleştirin.
+\n
+\n • Yürüyüş / Bisiklet / Seyahat güzergahları: güzergah simgesine dokunun ve güzergah hakkında tam bilgi alın.
+\n
+\n • Sık kullanılan gruplar: gruptaki yeni noktalar için öntanımlı görünümü ayarlayın
+\n
+\n • Düzeltmeler: çevrim içi döşeme haritalarının otomatik güncellenmesi
+\n
+\n</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Orta</string>
+    <string name="available_widgets">Kullanılabilir widget\'lar</string>
+    <string name="snackbar_page_removed">\"Sayfa %1$s\" kaldırıldı.</string>
 </resources>

@@ -182,15 +182,12 @@ public class ViewCreator {
 	@NonNull
 	private View getAppModeToggleView() {
 		Set<ApplicationMode> selected = new LinkedHashSet<>();
-		return AppModeDialog.prepareAppModeDrawerView((Activity) ctx,
-				selected, true, view -> {
+		return AppModeDialog.prepareAppModeDrawerView(ctx, selected, true,
+				view -> {
 					if (selected.size() > 0) {
 						OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
 						OsmandSettings settings = app.getSettings();
 						settings.setApplicationMode(selected.iterator().next());
-						if (uiAdapter != null) {
-							uiAdapter.onDataSetChanged();
-						}
 					}
 				});
 	}

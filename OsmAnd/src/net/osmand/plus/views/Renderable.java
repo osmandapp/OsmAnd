@@ -183,20 +183,23 @@ public class Renderable {
             return changed;
         }
 
-        public void drawGeometry(Canvas canvas, RotatedTileBox tileBox, QuadRect quadRect,
-                                 int trackColor, float trackWidth) {
-            drawGeometry(canvas, tileBox, quadRect, trackColor, trackWidth, drawArrows);
+        public void drawGeometry(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
+                                 @NonNull QuadRect quadRect, int trackColor, float trackWidth,
+                                 @Nullable float[] dashPattern) {
+            drawGeometry(canvas, tileBox, quadRect, trackColor, trackWidth, dashPattern, drawArrows);
         }
 
-        public void drawGeometry(Canvas canvas, RotatedTileBox tileBox, QuadRect quadRect,
-                                 int trackColor, float trackWidth, boolean drawArrows) {
+        public void drawGeometry(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
+                                 @NonNull QuadRect quadRect, int trackColor, float trackWidth,
+                                 @Nullable float[] dashPattern, boolean drawArrows) {
             if (geometryWay != null) {
                 List<WptPt> points = coloringType.isRouteInfoAttribute() ? this.points : getPointsForDrawing();
                 if (!Algorithms.isEmpty(points)) {
-                    geometryWay.setTrackStyleParams(trackColor, trackWidth, drawArrows, coloringType, routeInfoAttribute);
+                    geometryWay.setTrackStyleParams(trackColor, trackWidth, dashPattern, drawArrows,
+                            coloringType, routeInfoAttribute);
                     geometryWay.updateSegment(tileBox, points, routeSegments);
-                    geometryWay.drawSegments(tileBox, canvas, quadRect.top, quadRect.left, quadRect.bottom,
-                            quadRect.right, null, 0);
+                    geometryWay.drawSegments(tileBox, canvas, quadRect.top, quadRect.left,
+                            quadRect.bottom, quadRect.right, null, 0);
                 }
             }
         }

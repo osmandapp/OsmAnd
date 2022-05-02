@@ -1,6 +1,7 @@
 package net.osmand.plus;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -10,6 +11,8 @@ import android.graphics.drawable.LayerDrawable;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 
 import java.util.List;
 
@@ -87,5 +90,26 @@ public class ChartPointsHelper {
 				}
 			}
 		}
+	}
+
+	public Bitmap createHighlightedPointBitmap() {
+		return AndroidUtils.drawableToBitmap(highlightedPointIcon);
+	}
+
+	public Bitmap createXAxisPointBitmap(@ColorInt int pointColor, float density) {
+		float r = 3 * density;
+		density = (float) Math.ceil(density);
+		float outerRadius = r + 2 * density;
+		float innerRadius = r + density;
+		int margin = 2;
+		innerCirclePaint.setColor(pointColor);
+		innerCirclePaint.setAlpha(255);
+		Bitmap bitmap = Bitmap.createBitmap((int) (outerRadius * 2 + margin * 2), (int) (outerRadius * 2 + margin * 2), Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(bitmap);
+		float x = outerRadius + margin;
+		float y = outerRadius + margin;
+		canvas.drawCircle(x, y, outerRadius, outerCirclePaint);
+		canvas.drawCircle(x, y, innerRadius, innerCirclePaint);
+		return bitmap;
 	}
 }

@@ -318,7 +318,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 		addCommonType(R.string.shared_string_overview, true, hasElevationData, ALTITUDE, SLOPE);
 		addCommonType(R.string.altitude, true, hasElevationData, ALTITUDE, null);
 		addCommonType(R.string.shared_string_slope, true, hasElevationData, SLOPE, null);
-		addCommonType(R.string.map_widget_current_speed, false, hasSpeedData, SPEED, null);
+		addCommonType(R.string.shared_string_speed, false, hasSpeedData, SPEED, null);
 
 		// update custom graph data
 		List<RouteStatistics> routeStatistics = calculateRouteStatistics();

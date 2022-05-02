@@ -4602,4 +4602,15 @@
     <string name="routing_attr_difficulty_preference_beginner_name">facilaj</string>
     <string name="routing_attr_difficulty_preference_advanced_name">malfacilaj</string>
     <string name="routing_attr_difficulty_preference_expert_name">malfacilegaj</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">mezfacilaj</string>
+    <string name="release_4_2">• rekonstruo de fenestraĵoj: nova aspekto, eblo grupigi ilin laŭ paĝoj, ŝanĝi ordon kaj kunigi laŭ viaj bezonoj
+\n
+\n• kursoj piediradaj / biciklaj / vojaĝaj: frapetu simbolon de la kurso por akiri plenajn informojn pri la kurso
+\n
+\n• grupoj de ŝatataj punktoj: difini implicitan aspekton por novaj punktoj de la grupo
+\n
+\n• erar-riparoj: aŭtomate ĝisdatigi enretajn map-kahelojn
+\n
+\n</string>
+    <string name="turn_on_public_transport_description">Aktivigu por vidigi kursojn de publika transporto sur la mapo.</string>
 </resources>

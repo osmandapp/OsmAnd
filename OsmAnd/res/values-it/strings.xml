@@ -3682,7 +3682,7 @@
     <string name="track_coloring_solid">Solido</string>
     <string name="set_working_days_to_continue">Imposta i giorni lavorativi per continuare</string>
     <string name="plan_a_route">Pianifica un percorso</string>
-    <string name="add_to_a_track">Aggiungi ad una traccia</string>
+    <string name="add_to_a_track">Aggiungi una traccia</string>
     <string name="gpx_split_interval_descr">Seleziona l\'intervallo a cui i segnaposti con distanza o orario sulla traccia verranno mostrati.</string>
     <string name="gpx_split_interval_none_descr">Seleziona l\'opzione desiderata per la divisione: per tempo o per distanza.</string>
     <string name="gpx_direction_arrows">Frecce della direzione</string>
@@ -4161,7 +4161,7 @@
 \n
 \nAlcune mappe potrebbero non essere state caricate.</string>
     <string name="benefits_for_contributors">Benefici per i contributori OSM attivi</string>
-    <string name="enough_contributions_descr">Congratulazioni, hai contributo a OpensStreetMap a sufficienza per godere degli aggiornamenti illimitati delle mappe OsmAnd!</string>
+    <string name="enough_contributions_descr">Congratulazioni, hai contributo a OpenStreetMap a sufficienza per godere degli aggiornamenti illimitati delle mappe OsmAnd!</string>
     <string name="contributions_may_calculate_with_delay">L\'elaborazione dei contributi può richiedere diverse ore.</string>
     <string name="shared_string_includes">Include</string>
     <string name="complete_purchase">Completa l\'acquisto</string>
@@ -4475,7 +4475,7 @@
     <string name="shared_string_used">In uso</string>
     <string name="files_with_route_restrictions">File con limitazioni del percorso</string>
     <string name="shared_string_not_used">Non in uso</string>
-    <string name="predefined_waypoint_appearance_description">Toccando questa azione salverà automaticamente il punto intermedio con i parametri predefiniti.</string>
+    <string name="predefined_waypoint_appearance_description">Toccando questa azione il punto intermedio sarà salvato automaticamente con i parametri predefiniti.</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Etichette Fixme</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Mostra etichette Fixme</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etichette Note</string>
@@ -4497,16 +4497,16 @@
     <string name="list_of_groups">Lista dei gruppi</string>
     <string name="points_selection_descr">Chiudere perdendo tutte le modifiche\?</string>
     <string name="exit_import_descr">Uscire senza salvare nessuna modifica\?</string>
-    <string name="exit_import">Uscire dall\'importazione\?</string>
+    <string name="exit_import">Uscire\?</string>
     <string name="import_tracks">Importa tracce</string>
-    <string name="import_tracks_descr">%1$s, contiene %2$s tracce separate. Scegli le tracce che vuoi importare.</string>
-    <string name="please_provide_group_name_message">Fornisci un nome per il gruppo.</string>
+    <string name="import_tracks_descr">%1$s, contiene %2$s tracce separate. Scegli le tracce da importare.</string>
+    <string name="please_provide_group_name_message">Dai un nome al gruppo.</string>
     <string name="quick_action_add_route_descr">Un pulsante per avviare un percorso dal centro dello schermo.</string>
-    <string name="gpx_no_routes_descr">Per aggiungere il percorso al file puoi usare lo strumento \"%1$s\".</string>
+    <string name="gpx_no_routes_descr">Per salvare il percorso su un file puoi usare lo strumento \"%1$s\".</string>
     <string name="gpx_no_routes_title">Non ci sono percorsi</string>
-    <string name="save_track_to_gpx_descrp">Avvia automaticamente la registrazione mentre si sta navigando. Al termine la traccia sarà salvata automaticamente.</string>
+    <string name="save_track_to_gpx_descrp">Avvia automaticamente la registrazione mentre si sta navigando e la salva automaticamente al termine.</string>
     <string name="rendering_attr_seabedDetail_name">Dettagli fondale marino</string>
-    <string name="rendering_attr_seabedDetail_description">Informazioni testuali sulla superficie del fondale marino tipi di superfici combinate, categorie e tassonomie delle alghe marine.</string>
+    <string name="rendering_attr_seabedDetail_description">Informazioni testuali aggiuntive sulla superficie del fondale marino, tipi di superfici combinate, categorie e tassonomie delle alghe marine</string>
     <string name="waypoint_template">Modello dei punti di passaggio</string>
     <string name="always_ask_waypoint_appearance_description">Toccando quest\'azione si aprirà la schermata \"Aggiungi punto intermedio\" dove puoi cambiare nome e aspetto.</string>
     <string name="track_file_description">Toccando questa azione verrà mostrato una finestra di dialogo di scelta delle tracce disponibili.</string>
@@ -4575,13 +4575,13 @@
     <string name="map_widget_altitude">Altitudine della localizzazione attuale</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">Percorsi filobus</string>
     <string name="map_markers_bar">Barra marcatori mappa</string>
-    <string name="rendering_attr_showRunningRoutes_description">Mostra i percorsi in uso</string>
+    <string name="rendering_attr_showRunningRoutes_description">Mostra i percorsi da corsa</string>
     <string name="rendering_attr_showFitnessTrails_name">Percorsi fitness</string>
     <string name="rendering_attr_showFitnessTrails_description">Mostra i percorsi fitness</string>
     <string name="rendering_attr_horse_scale_demanding_name">Impegnativo</string>
     <string name="on_with_params">%1$s su %2$s</string>
     <string name="shared_string_symbol">Simbolo</string>
-    <string name="no_widgets_descr">Uno o più widget dalla lista dei widget.</string>
+    <string name="no_widgets_descr">Aggiungi uno o più widget dalla lista dei widget disponibili.</string>
     <string name="available_widgets">Widget disponibili</string>
     <string name="snackbar_page_removed">\"La pagina %1$s\" è stata rimossa.</string>
     <string name="no_widgets_here_yet">Qui ancora nessun widget</string>
@@ -4603,4 +4603,5 @@
 \n • Correzioni: aggiornamento automatico delle mappe di sfondo online
 \n
 \n</string>
+    <string name="turn_on_public_transport_description">Attiva per vedere i percorsi del trasporto pubblico sulla mappa.</string>
 </resources>

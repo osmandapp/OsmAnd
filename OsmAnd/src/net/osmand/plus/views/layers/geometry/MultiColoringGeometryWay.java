@@ -42,6 +42,7 @@ public abstract class MultiColoringGeometryWay
 
 	protected int customColor;
 	protected float customWidth;
+	protected float[] dashPattern;
 	@NonNull
 	protected ColoringType coloringType;
 	protected String routeInfoAttribute;
@@ -56,6 +57,13 @@ public abstract class MultiColoringGeometryWay
 	protected void updateStylesWidth(@Nullable Float newWidth) {
 		for (GeometryWayStyle<?> style : styleMap.values()) {
 			style.width = newWidth;
+		}
+		resetSymbolProviders();
+	}
+
+	protected void updateStylesDashPattern(@Nullable float[] dashPattern) {
+		for (GeometryWayStyle<?> style : styleMap.values()) {
+			style.dashPattern = dashPattern;
 		}
 		resetSymbolProviders();
 	}

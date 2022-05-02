@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.*
@@ -32,7 +33,6 @@ import org.drinkless.td.libcore.telegram.TdApi
 import java.io.File
 import java.lang.ref.WeakReference
 import java.util.*
-import kotlin.collections.ArrayList
 
 const val OPEN_MY_LOCATION_TAB_KEY = "open_my_location_tab"
 
@@ -305,7 +305,11 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 
 	override fun onTelegramError(code: Int, message: String) {
 		runOnUi {
-			Toast.makeText(this@MainActivity, "$code - $message", Toast.LENGTH_LONG).show()
+			Log.e(PlatformUtil.TAG, "Error: $code - $message")
+			val error = getString(R.string.shared_string_error)
+			val errorMessage = getString(R.string.ltr_or_rtl_combine_via_dash, code.toString(), message)
+			val text = 	getString(R.string.ltr_or_rtl_combine_via_colon, error, errorMessage)
+			Toast.makeText(this@MainActivity, text, Toast.LENGTH_LONG).show()
 			listeners.forEach { it.get()?.onTelegramError(code, message) }
 		}
 	}

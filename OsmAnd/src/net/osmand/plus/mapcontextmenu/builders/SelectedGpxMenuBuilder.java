@@ -118,7 +118,7 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 
 	public void buildSpeedRows(View view) {
 		if (analysis.isSpeedSpecified()) {
-			buildCategoryView(view, app.getString(R.string.map_widget_current_speed));
+			buildCategoryView(view, app.getString(R.string.shared_string_speed));
 
 			buildRow(view, getThemedIcon(R.drawable.ic_action_speed), null, app.getString(R.string.average_speed),
 					OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app), 0, null,
@@ -149,7 +149,7 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 					false, null, false, 0, false, false, false, null, false);
 		}
 		if (!Double.isNaN(selectedPoint.speed)) {
-			buildRow(view, getThemedIcon(R.drawable.ic_action_speed), null, app.getString(R.string.map_widget_current_speed),
+			buildRow(view, getThemedIcon(R.drawable.ic_action_speed), null, app.getString(R.string.shared_string_speed),
 					OsmAndFormatter.getFormattedSpeed((float) selectedPoint.speed, app), 0, null,
 					false, null, false, 0, false, false, false, null, false);
 		}

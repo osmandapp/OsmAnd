@@ -144,4 +144,5 @@
     <string name="m">m</string>
     <string name="unit_of_length_descr">Ubah jarak apa yang diukuri.</string>
     <string name="si_mi_feet">Mil/kaki</string>
+    <string name="nm">nmi</string>
 </resources>

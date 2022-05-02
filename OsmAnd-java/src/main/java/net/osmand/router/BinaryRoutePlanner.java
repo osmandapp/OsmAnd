@@ -259,10 +259,18 @@ public class BinaryRoutePlanner {
 		RouteSegment startNeg = initRouteSegment(ctx, start, false, false);
 		RouteSegment endPos = initRouteSegment(ctx, end, true, true);
 		RouteSegment endNeg = initRouteSegment(ctx, end, false, true);
-		startPos.setParentRoute(RouteSegment.NULL);
-		startNeg.setParentRoute(RouteSegment.NULL);
-		endPos.setParentRoute(RouteSegment.NULL);
-		endNeg.setParentRoute(RouteSegment.NULL);
+		if (startPos != null) {
+			startPos.setParentRoute(RouteSegment.NULL);
+		}
+		if (startNeg != null) {
+			startNeg.setParentRoute(RouteSegment.NULL);
+		}
+		if (endPos != null) {
+			endPos.setParentRoute(RouteSegment.NULL);
+		}
+		if (endNeg != null) {
+			endNeg.setParentRoute(RouteSegment.NULL);
+		}
 		// for start : f(start) = g(start) + h(start) = 0 + h(start) = h(start)
 		if (ctx.config.initialDirection != null) {
 			// mark here as positive for further check
@@ -339,20 +347,23 @@ public class BinaryRoutePlanner {
 		}
 	}
 
-
 	private void printRoad(String prefix, RouteSegment segment, Boolean reverseWaySearch) {
-		String pr;
-		if (segment.parentRoute != null) {
-			pr = " pend=" + segment.parentRoute.segEnd + " parent=" + segment.parentRoute.road;
-		} else {
-			pr = "";
-		}
 		String p = "";
 		if (reverseWaySearch != null) {
 			p = (reverseWaySearch ? "B" : "F");
 		}
-		println(p + prefix + "" + segment.road + " ind=" + segment.getSegmentStart() + "->" + segment.getSegmentEnd() +
-				" ds=" + ((float) segment.distanceFromStart) + " es=" + ((float) segment.distanceToEnd) + pr);
+		if (segment == null) {
+			println(p + prefix + " Segment=null");
+		} else {
+			String pr;
+			if (segment.parentRoute != null) {
+				pr = " pend=" + segment.parentRoute.segEnd + " parent=" + segment.parentRoute.road;
+			} else {
+				pr = "";
+			}
+			println(p + prefix + "" + segment.road + " ind=" + segment.getSegmentStart() + "->" + segment.getSegmentEnd() +
+					" ds=" + ((float) segment.distanceFromStart) + " es=" + ((float) segment.distanceToEnd) + pr);
+		}
 	}
 
 	private float estimatedDistance(final RoutingContext ctx, int targetEndX, int targetEndY,

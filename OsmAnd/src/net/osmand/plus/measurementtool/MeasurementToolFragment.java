@@ -17,7 +17,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -2005,11 +2004,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			mapActivity.enableDrawer();
 
 			ViewTreeObserver observer = mainView.getViewTreeObserver();
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-				observer.removeOnGlobalLayoutListener(getWidgetsLayoutListener());
-			} else {
-				observer.removeGlobalOnLayoutListener(getWidgetsLayoutListener());
-			}
+			observer.removeOnGlobalLayoutListener(getWidgetsLayoutListener());
 			AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE,
 					R.id.map_left_widgets_panel,
 					R.id.map_right_widgets_panel,

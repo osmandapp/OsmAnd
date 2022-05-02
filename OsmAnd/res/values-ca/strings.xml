@@ -370,24 +370,24 @@
 \nOsmAnd es desenvolupa activament i el nostre projecte i el seu progrés continu depenen de donacions pel desenvolupament i proves de noves funcions. Si us plau, considereu la compra d\'OsmAnd+ o patrocinar una nova característica concreta, o fer una donació genèrica a la pàgina https\\\\osmand.net.</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
 \n
-\nL\'OsmAnd+ és un programari de navegació de codi obert amb accés a una gran varietat de dades globals de OSM. Totes les dades de mapes (mapes de tessel·les o vectorials) poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús sense connexió. També proporciona que la funcionalitat de càlcul de rutes sigui amb connexió o sense, incloent-hi guiatge per veu.
+\n L\'OsmAnd+ és un programari de navegació de codi obert amb accés a una gran varietat de dades globals de OSM. Totes les dades de mapes (mapes de tessel·les o vectorials) poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús sense connexió. També proporciona que la funcionalitat de càlcul de rutes sigui amb connexió o sense, incloent-hi guiatge per veu.
 \n
-\nL\'OsmAnd+ és la versió de pagament; comprant-la esteu donant suport al projecte, financeu el desenvolupament de noves funcions i rebreu les darreres actualitzacions.
+\n L\'OsmAnd+ és la versió de pagament; comprant-la esteu donant suport al projecte, financeu el desenvolupament de noves funcions i rebreu les darreres actualitzacions.
 \n
-\nAlgunes de les característiques centrals són:
-\n- Funcionalitat completa fora de línia (desa en el dispositiu d\'emmagatzemament els mapes vectorials i de mosaic baixats)
-\n- Mapes vectorials compactes de tot el món disponibles
-\n- Baixada il·limitada de mapes nacionals o regionals directament des de l\'aplicació
-\n- Disponibilitat sense connexió dels PDI baixats prèviament de Viquipèdia, ideal per fer turisme
-\n- Possibilitat de superposar diverses capes de mapes simultànies, com traces GPX o de navegació, Punts d\'interès, Favorits, corbes de nivell, parades de transport públic, mapes addicionals amb nivell de transparència ajustable
+\n Algunes de les característiques centrals són:
+\n - Funcionalitat completa fora de línia (desa en el dispositiu d\'emmagatzemament els mapes vectorials i de mosaic baixats)
+\n - Mapes vectorials compactes de tot el món disponibles
+\n - Baixada il·limitada de mapes nacionals o regionals directament des de l\'aplicació
+\n - Disponibilitat sense connexió dels PDI baixats prèviament de Viquipèdia, ideal per fer turisme
+\n - Possibilitat de superposar diverses capes de mapes simultànies, com traces GPX o de navegació, Punts d\'interès, Favorits, corbes de nivell, parades de transport públic, mapes addicionals amb nivell de transparència ajustable
 \n
-\n- Cerca fora de línia d\'adreces i llocs d\'interès (PDI)
-\n- Càlcul de rutes fora de línia per distàncies d\'abast mitjà
-\n- Modalitats opcionals de cotxe, ciclista i vianant
-\n- Ajust automàtic de representació diürna/nocturna
-\n- Escala automàtica del mapa segons la velocitat
-\n- Orientació del mapa segons la brúixola o la direcció del moviment
-\n- Indicacions de carril, velocitat màxima permesa, veus enregistrades i sintetitzades
+\n - Cerca fora de línia d\'adreces i llocs d\'interès (PDI)
+\n - Càlcul de rutes fora de línia per distàncies d\'abast mitjà
+\n - Modalitats opcionals de cotxe, ciclista i vianant
+\n - Ajust automàtic de representació diürna/nocturna
+\n - Escala automàtica del mapa segons la velocitat
+\n - Orientació del mapa segons la brúixola o la direcció del moviment
+\n - Indicacions de carril, velocitat màxima permesa, veus enregistrades i sintetitzades
 \n</string>
     <string name="rendering_attr_contourLines_description">Seleccioneu el nivell mínim de zoom per mostrar el mapa si està disponible. Caldrà el fitxer SRTM separat:</string>
     <string name="osmand_development_plugin_description">Configuració de característiques per al desenvolupament i depuració, com simulació de navegació, rendiment de renderitzat o les indicacions de veu. Adreçat a desenvolupadorsimés que a usuaris normals de l\'aplicació.</string>
@@ -1716,7 +1716,7 @@
     <string name="navigation_item_description">Configuració de la navegació.</string>
     <string name="planning_trip_item">Planificació d\'un viatge</string>
     <string name="faq_item">PMF</string>
-    <string name="faq_item_description">Preguntes més freqüents</string>
+    <string name="faq_item_description">Preguntes més freqüents.</string>
     <string name="map_viewing_item">Visualització del mapa</string>
     <string name="search_on_the_map_item">Buscant al mapa</string>
     <string name="instalation_troubleshooting_item">Instal·lació i solució de problemes</string>
@@ -2680,7 +2680,7 @@
     <string name="welcome_to_open_beta">Benvingut a la beta oberta</string>
     <string name="monthly_map_updates">Actualització mensual de mapes</string>
     <string name="daily_map_updates">Actualització horària de mapes</string>
-    <string name="download_wikipedia_description">Baixeu els articles de la Viquipèdia per %1$s per llegir-los fora de línia.</string>
+    <string name="download_wikipedia_description">Baixeu els articles de la Viquipèdia de %1$s per llegir-los fora de línia.</string>
     <string name="download_wikipedia_label">Baixa dades de la Viquipèdia</string>
     <string name="open_in_browser_wiki">Obre l\'article en línia</string>
     <string name="open_in_browser_wiki_description">Consulta l\'article en un navegador.</string>
@@ -3827,7 +3827,7 @@
     <string name="exit_pan_mode_descr">Premeu Selecciona per sortir del mode panoràmic</string>
     <string name="upload_gpx_description_hint">Deixeu-ho buit, els noms de les traces s\'utilitzaran com a descripció. S\'aplicarà la descripció introduïda per a cada traça.</string>
     <string name="shared_app_storage_description">La memòria compartida ja no està disponible donat els canvis en les normes d\'accés a l\'emmagatzematge d\'Android.</string>
-    <string name="internal_app_storage_description">Emmagatzematge intern, amagat a l\'usuari i a d\'altres aplicacions, fent que ningú excepte OsmAnd pot accedir a les vostres dades</string>
+    <string name="internal_app_storage_description">Emmagatzematge intern, amagat a tots els usuaris i a d\'altres aplicacions, pel que només OsmAnd pot accedir a les vostres dades.</string>
     <string name="shared_storage_warning_title">Canvis en les normes d\'accés a l\'emmagatzematge</string>
     <string name="purchases_feature_desc_android_auto">Mapes locals OsmAnd i navegació a la pantalla del vostre vehicle. S\'integra amb els controls del vostre vehicle.</string>
     <string name="shared_string_details">Detalls</string>
@@ -3838,7 +3838,7 @@
     <string name="routing_attr_allow_gate_description">Permet l\'ús de portes</string>
     <string name="travel_route_types">Tipus de rutes</string>
     <string name="shared_string_files">Fitxers</string>
-    <string name="service_is_not_available_please_try_later">El servei no està disponible, si us plau, proveu-ho més tard</string>
+    <string name="service_is_not_available_please_try_later">Servei no disponible. Si us plau, proveu-ho de nou més tard.</string>
     <string name="shared_string_articles">Articles</string>
     <string name="release_4_1">• Afegit suport inicial per a Android Auto
 \n

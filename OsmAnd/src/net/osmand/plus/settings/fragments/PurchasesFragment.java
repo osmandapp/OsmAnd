@@ -40,7 +40,7 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 
 	public static final String TAG = PurchasesFragment.class.getName();
 
-	private static final String OSMAND_PURCHASES_URL = "https://docs.osmand.net/en/main@latest/osmand/purchases";
+	private static final String OSMAND_PURCHASES_URL = "https://docs.osmand.net/docs/user/purchases/";
 
 	private OsmandApplication app;
 	private InAppPurchaseHelper purchaseHelper;

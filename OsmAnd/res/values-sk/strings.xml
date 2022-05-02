@@ -4599,4 +4599,14 @@
     <string name="map_widget_distance_to_destination">Vzdialenosť do cieľa</string>
     <string name="map_widget_current_speed">Súčasná rýchlosť</string>
     <string name="page_number">Strana %1$s</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Stredne pokročilí</string>
+    <string name="release_4_2">• Prepracovanie nástrojov na obrazovke: nový vzhľad, zoskupenie na stránky, možnosť zmeny poradia a kombinácií ako potrebujete.
+\n
+\n • Turistické / cyklistické / cestovné trasy: stlačte symbol trasy a získajte informácie o trase.
+\n
+\n • Skupiny obľúbených bodov: nastavte predvolený vzhľad pre nové body v skupine.
+\n
+\n • Opravy: automatická aktualizácia online dlaždíc
+\n
+\n</string>
 </resources>

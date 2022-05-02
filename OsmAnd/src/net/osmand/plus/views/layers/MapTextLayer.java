@@ -9,12 +9,15 @@ import android.graphics.Paint.Style;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
+import net.osmand.core.jni.TextRasterizer;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.util.Algorithms;
@@ -203,5 +206,25 @@ public class MapTextLayer extends OsmandMapLayer {
 		if (paintTextIcon.getTextSize() != textSize) {
 			paintTextIcon.setTextSize(textSize);
 		}
+	}
+
+	public static TextRasterizer.Style getTextStyle(@NonNull Context ctx, boolean nightMode,
+	                                                float textScale, float density) {
+		TextRasterizer.Style textStyle = new TextRasterizer.Style();
+		textStyle.setWrapWidth(TEXT_WRAP);
+		textStyle.setMaxLines(TEXT_LINES);
+		textStyle.setBold(false);
+		textStyle.setItalic(false);
+		textStyle.setColor(NativeUtilities.createColorARGB(
+				ContextCompat.getColor(ctx, nightMode
+						? R.color.widgettext_night
+						: R.color.widgettext_day)));
+		textStyle.setSize(textScale * TEXT_SIZE * density);
+		textStyle.setHaloColor(NativeUtilities.createColorARGB(
+				ContextCompat.getColor(ctx, nightMode
+						? R.color.widgettext_shadow_night
+						: R.color.widgettext_shadow_day)));
+		textStyle.setHaloRadius(5);
+		return textStyle;
 	}
 }

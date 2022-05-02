@@ -188,7 +188,8 @@ public class ConfigureMapMenu {
 				.setItemDeleteAction(settings.SHOW_POI_LABEL)
 				.setListener(listener));
 
-		selected = TransportLinesMenu.isShowLines(app);
+		TransportLinesMenu transportLinesMenu = new TransportLinesMenu(app);
+		selected = transportLinesMenu.isShowAnyTransport();
 		adapter.addItem(new ContextMenuItem(TRANSPORT_ID)
 				.setTitleId(R.string.rendering_category_transport, activity)
 				.setIcon(R.drawable.ic_action_transport_bus)
