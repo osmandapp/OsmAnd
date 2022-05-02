@@ -81,7 +81,7 @@
     <string name="available_downloads_left">%1$d fitxategi deskargatzeke</string>
     <string name="install_paid">Bertsio osoa</string>
     <string name="cancel_route">Baztertu ibilbidea</string>
-    <string name="cancel_navigation">Nabigazioa gelditu</string>
+    <string name="cancel_navigation">Gelditu nabigazioa</string>
     <string name="clear_destination">Helmuga garbitu</string>
     <string name="download_using_mobile_internet">Ez zaude Wi-Fi batera konektatuta. Deskargatu uneko Internet konexioa erabiliz?</string>
     <string name="street_name">Kalearen izena</string>
@@ -359,8 +359,8 @@
     <string name="gpxup_private">Pribatua</string>
     <string name="asap">Azkar</string>
     <string name="route_roundabout">Biribilgunea: Hartu %1$d. irteera</string>
-    <string name="route_kl">Ezkerrean gelditu</string>
-    <string name="route_kr">Eskubian gelditu</string>
+    <string name="route_kl">Mantendu ezkerrean eta jarraitu</string>
+    <string name="route_kr">Mantendu eskubian eta jarraitu</string>
     <string name="rendering_attr_noPolygons_description">Egin mapako lur ezaugarri guztiak gardenak.</string>
     <string name="rendering_attr_noPolygons_name">Poligonoak</string>
     <string name="rendering_attr_appMode_name">Marrazte modua</string>
@@ -845,7 +845,7 @@
     <string name="opening_hours_not_supported">Ezin da irekiera ordutegien formatua aldatu.</string>
     <string name="add_new_rule">Erregela berria gehitu</string>
     <string name="transport_Routes">Ibilbideak</string>
-    <string name="transport_Stop">Gelditu</string>
+    <string name="transport_Stop">Geltokia</string>
     <string name="transport_stops">geltoki</string>
     <string name="transport_search_after">Ondorengo ibilbidea</string>
     <string name="transport_search_before">Aurreko ibilbidea</string>
