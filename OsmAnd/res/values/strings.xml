@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="shared_string_speed">Speed</string>
     <string name="app_mode_mountain_bicycle">Mountain bicycle</string>
     <string name="turn_on_public_transport_description">Turn on to see public transport routes on the map.</string>
     <string name="release_4_2">
