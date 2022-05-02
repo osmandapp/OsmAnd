@@ -15,13 +15,6 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.util.Pair;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
 import com.google.android.material.slider.RangeSlider;
 
 import net.osmand.IndexConstants;
@@ -45,6 +38,13 @@ import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.layers.base.BaseMapLayer;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.util.Pair;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLocationListener {
 
@@ -186,13 +186,13 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 
 	private void updateTileSourceContent() {
 		setupMapSourceSetting();
-		updateDownloadContent();
+		updateDownloadContent(mapView.getZoom());
 	}
 
-	private void updateDownloadContent() {
+	private void updateDownloadContent(int currentZoom) {
 		updateTilesPreviewZooms();
 		setupMinMaxZoom();
-		setupSlider();
+		setupSlider(currentZoom);
 		setupTilesDownloadInfo();
 	}
 
@@ -223,8 +223,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		selectedMapSourceText.setText(selectedMapSource);
 	}
 
-	private void setupSlider() {
-		int currentZoom = mapView.getZoom();
+	private void setupSlider(int currentZoom) {
 		int maxZoom = tileSource.getMaximumZoomSupported();
 		int minZoom = Math.min(currentZoom, maxZoom);
 
@@ -384,12 +383,14 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	@Override
 	public void locationChanged(double newLatitude, double newLongitude, Object source) {
 		app.runInUIThread(() -> {
+			int maxZoom = tileSource.getMaximumZoomSupported();
 			int currentZoom = mapView.getZoom();
-			if (currentZoom > selectedMinZoom) {
+			if (currentZoom > selectedMinZoom && currentZoom <= maxZoom) {
 				selectedMinZoom = currentZoom;
 			}
+
 			updateTilesPreview();
-			updateDownloadContent();
+			updateDownloadContent(currentZoom);
 		});
 	}
 
