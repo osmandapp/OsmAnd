@@ -50,7 +50,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 
 	public static final String TAG = DownloadTilesFragment.class.getSimpleName();
 
-	public static final Uri HELP_URI = Uri.parse("https://docs.osmand.net/en/main@latest/osmand/map/raster-maps#download--update-tiles");
+	public static final Uri HELP_URI = Uri.parse("https://docs.osmand.net/docs/user/map/raster-maps#download--update-tiles");
 
 	private static final String KEY_SELECTED_MIN_ZOOM = "selected_min_zoom";
 	private static final String KEY_SELECTED_MAX_ZOOM = "selected_max_zoom";

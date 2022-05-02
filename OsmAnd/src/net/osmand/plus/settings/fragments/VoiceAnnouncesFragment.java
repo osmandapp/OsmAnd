@@ -34,7 +34,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 
 	public static final String TAG = VoiceAnnouncesFragment.class.getSimpleName();
 
-	private static final String OSMAND_VOICE_NAVIGATION_URL = "https://docs.osmand.net/en/main@latest/osmand/troubleshooting/navigation#voice-navigation";
+	private static final String OSMAND_VOICE_NAVIGATION_URL = "https://docs.osmand.net/docs/user/troubleshooting/navigation#voice-navigation";
 
 	@Override
 	protected void createToolbar(LayoutInflater inflater, View view) {

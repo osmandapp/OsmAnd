@@ -58,7 +58,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 
 	public static final String TAG = ConfigureScreenFragment.class.getSimpleName();
 
-	private static final String INFO_LINK = "https://docs.osmand.net/en/main@latest/osmand/widgets/configure-screen";
+	private static final String INFO_LINK = "https://docs.osmand.net/docs/user/widgets/configure-screen";
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
