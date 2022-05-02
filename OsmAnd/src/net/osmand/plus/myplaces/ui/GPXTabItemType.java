@@ -11,7 +11,7 @@ public enum GPXTabItemType {
 
 	GPX_TAB_ITEM_GENERAL(R.string.shared_string_overview, R.drawable.ic_action_polygom_dark),
 	GPX_TAB_ITEM_ALTITUDE(R.string.altitude, R.drawable.ic_action_altitude_average),
-	GPX_TAB_ITEM_SPEED(R.string.map_widget_current_speed, R.drawable.ic_action_speed);
+	GPX_TAB_ITEM_SPEED(R.string.shared_string_speed, R.drawable.ic_action_speed);
 
 	private final int iconId;
 	private final int titleId;
