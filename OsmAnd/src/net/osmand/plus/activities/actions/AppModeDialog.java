@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.os.Build.VERSION_CODES;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +16,12 @@ import android.widget.LinearLayout.LayoutParams;
 import androidx.annotation.LayoutRes;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,11 +75,7 @@ public class AppModeDialog {
 				LinearLayout container = ll.findViewById(R.id.app_modes_content);
 				int s = container.getChildAt(idx) != null ? container.getChildAt(idx).getRight() : 0;
 				scrollView.scrollTo(Math.max(s - scrollView.getWidth(), 0), 0);
-				if (Build.VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN) {
-					ll.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-				} else {
-					ll.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-				}
+				ll.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 			}
 		};
 		ll.getViewTreeObserver().addOnGlobalLayoutListener(globalListener);
