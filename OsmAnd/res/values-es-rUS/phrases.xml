@@ -43,7 +43,7 @@
     <string name="poi_palaeontological_site">Yacimiento paleontológico</string>
     <string name="poi_bakery">Panadería</string>
     <string name="poi_alcohol">Licorería;Tienda de licores</string>
-    <string name="poi_convenience">Tienda de comestibles;Almácen;Minimercado</string>
+    <string name="poi_convenience">Tienda de comestibles;Almacén;Minimercado;Maxikiosco;Maxiquiosco</string>
     <string name="poi_mall">Centro comercial</string>
     <string name="poi_beverages">Venta de bebidas</string>
     <string name="poi_butcher">Carnicería</string>
@@ -203,9 +203,9 @@
     <string name="poi_tram_stop">Parada de tranvía</string>
     <string name="poi_public_transport_station">Estación de transporte público</string>
     <string name="poi_bus_station">Estación de autobús;Terminal de ómnibus;Estación de colectivos</string>
-    <string name="poi_railway_station">Estación de tren</string>
-    <string name="poi_railway_platform">Andén de tren</string>
-    <string name="poi_halt">Parada de tren</string>
+    <string name="poi_railway_station">Estación de ferrocarril;Estación ferroviaria;Estación de tren</string>
+    <string name="poi_railway_platform">Andén ferroviario;Andén de ferrocarril;Andén de tren</string>
+    <string name="poi_halt">Parada ferroviaria;Parada de ferrocarril;Parada de tren</string>
     <string name="poi_subway_entrance">Entrada de metro;Entrada de subte</string>
     <string name="poi_subway_station">Sí; Estación de subte</string>
     <string name="poi_railway_buffer_stop">Fin de vía</string>
@@ -4329,4 +4329,5 @@
     <string name="poi_dry_cleaning_filter">Tintorería</string>
     <string name="poi_laundry_service_yes">Sí</string>
     <string name="poi_flow_rate">Caudal</string>
+    <string name="poi_golf_pin">Pin de golf</string>
 </resources>

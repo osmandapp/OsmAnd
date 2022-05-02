@@ -1449,7 +1449,7 @@
     <string name="dist_away_from_my_location">搜索 %1$s 开外</string>
     <string name="share_history_subject">通过 OsmAnd 分享</string>
     <string name="postcode">邮政编码</string>
-    <string name="shared_string_from">从</string>
+    <string name="shared_string_from">之于</string>
     <string name="city_type_district">区</string>
     <string name="city_type_neighbourhood">邻里</string>
     <string name="map_widget_search">搜索</string>

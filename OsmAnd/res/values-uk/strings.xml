@@ -4613,4 +4613,5 @@
 \n
 \n</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">Середня</string>
+    <string name="turn_on_public_transport_description">Увімкніть, щоб побачити маршрути громадського транспорту на мапі.</string>
 </resources>

@@ -503,6 +503,11 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	@Override
 	public void downloadHasFinished() {
 		updateDownloadSection();
+		MapActivity mapActivity = getMapActivity();
+		SRTMPlugin plugin = OsmandPlugin.getActivePlugin(SRTMPlugin.class);
+		if (mapActivity != null && plugin != null && plugin.isTerrainLayerEnabled()) {
+			plugin.registerLayers(mapActivity, mapActivity);
+		}
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {

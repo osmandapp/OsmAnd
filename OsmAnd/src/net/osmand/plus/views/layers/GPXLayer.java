@@ -4,9 +4,6 @@ import static net.osmand.GPXUtilities.calculateTrackBounds;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
-import static net.osmand.plus.views.layers.MapTextLayer.TEXT_LINES;
-import static net.osmand.plus.views.layers.MapTextLayer.TEXT_SIZE;
-import static net.osmand.plus.views.layers.MapTextLayer.TEXT_WRAP;
 import static net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 
 import android.content.Context;
@@ -311,14 +308,13 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		pointsCache.clear();
 		removeCachedUnselectedTracks(selectedGPXFiles);
 		selectedGPXFilesCache = selectedGPXFiles;
+		boolean nightMode = settings != null && settings.isNightMode();
+		boolean nightModeChanged = this.nightMode != nightMode;
+		this.nightMode = nightMode;
 		MapRendererView mapRenderer = view.getMapRenderer();
 		if (mapRenderer != null)
 		{
-			boolean forceUpdate = updateBitmaps();
-			boolean nightMode = settings != null && settings.isNightMode();
-			forceUpdate |= this.nightMode != nightMode;
-			this.nightMode = nightMode;
-
+			boolean forceUpdate = updateBitmaps() || nightModeChanged;
 			if (!selectedGPXFiles.isEmpty()) {
 				drawSelectedFilesSegments(canvas, tileBox, selectedGPXFiles, settings);
 			}
@@ -571,22 +567,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private TextRasterizer.Style getTextStyle() {
-		TextRasterizer.Style textStyle = new TextRasterizer.Style();
-		textStyle.setWrapWidth(TEXT_WRAP);
-		textStyle.setMaxLines(TEXT_LINES);
-		textStyle.setBold(false);
-		textStyle.setItalic(false);
-		textStyle.setColor(NativeUtilities.createColorARGB(
-				ContextCompat.getColor(getContext(), nightMode
-						? R.color.widgettext_night
-						: R.color.widgettext_day)));
-		textStyle.setSize(textScale * TEXT_SIZE * view.getDensity());
-		textStyle.setHaloColor(NativeUtilities.createColorARGB(
-				ContextCompat.getColor(getContext(), nightMode
-						? R.color.widgettext_shadow_night
-						: R.color.widgettext_shadow_day)));
-		textStyle.setHaloRadius(5);
-		return textStyle;
+		return MapTextLayer.getTextStyle(getContext(), nightMode, textScale, view.getDensity());
 	}
 
 	private void clearSelectedFilesSplits() {

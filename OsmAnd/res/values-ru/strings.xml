@@ -1339,7 +1339,7 @@
     <string name="routing_attr_avoid_unpaved_name">Без грунтовых дорог</string>
     <string name="routing_attr_avoid_unpaved_description">Избегать грунтовых дорог</string>
     <string name="routing_attr_avoid_ferries_name">Без паромов</string>
-    <string name="routing_attr_avoid_ferries_description">Исключить паромные переправы</string>
+    <string name="routing_attr_avoid_ferries_description">Избегать паромные переправы</string>
     <string name="routing_attr_weight_name">Предельная масса</string>
     <string name="routing_attr_weight_description">Укажите допустимый предел массы автомобиля для учёта при построении маршрута.</string>
     <string name="map_widget_map_rendering">Отображение карты</string>
@@ -2928,17 +2928,17 @@
     <string name="angular_measeurement_descr">Изменить, в чём измеряется азимут.</string>
     <string name="shared_string_degrees">Градусы</string>
     <string name="routing_attr_avoid_tram_name">Без трамваев</string>
-    <string name="routing_attr_avoid_tram_description">Исключить трамваи</string>
+    <string name="routing_attr_avoid_tram_description">Избегать трамваи</string>
     <string name="routing_attr_avoid_bus_name">Без автобусов</string>
-    <string name="routing_attr_avoid_bus_description">Исключить автобусы и троллейбусы</string>
+    <string name="routing_attr_avoid_bus_description">Избегать автобусы и троллейбусы</string>
     <string name="routing_attr_avoid_share_taxi_name">Без маршрутных такси</string>
-    <string name="routing_attr_avoid_share_taxi_description">Исключить маршрутные такси</string>
+    <string name="routing_attr_avoid_share_taxi_description">Избегать маршрутные такси</string>
     <string name="routing_attr_avoid_train_name">Без поездов</string>
-    <string name="routing_attr_avoid_train_description">Исключить поезда</string>
+    <string name="routing_attr_avoid_train_description">Избегать поезда</string>
     <string name="routing_attr_avoid_subway_name">Без метро</string>
-    <string name="routing_attr_avoid_subway_description">Исключить метро и рельсовый транспорт</string>
+    <string name="routing_attr_avoid_subway_description">Избегать метро и легкорельсовый транспорт</string>
     <string name="routing_attr_avoid_ferry_name">Без паромов</string>
-    <string name="routing_attr_avoid_ferry_description">Исключить паромы</string>
+    <string name="routing_attr_avoid_ferry_description">Избегать паромы</string>
     <string name="send_log">Отправить лог</string>
     <string name="public_transport_no_route_title">К сожалению, OsmAnd не смог найти подходящий маршрут.</string>
     <string name="public_transport_try_ped">Попробуйте пройти навигацию пешком.</string>
@@ -3793,7 +3793,7 @@
     <string name="start_finish_icons">Значки старта и финиша</string>
     <string name="contour_lines_thanks">Спасибо за покупку «Контурных линий»</string>
     <string name="routing_attr_avoid_footways_description">Избегать пешеходных дорожек</string>
-    <string name="routing_attr_avoid_footways_name">Избегать пешеходных дорожек</string>
+    <string name="routing_attr_avoid_footways_name">Без пешеходных дорожек</string>
     <string name="osm_live_payment_desc_hw">Подписка оплачивается за выбранный период. Отмените её в AppGallery в любое время.</string>
     <string name="osm_live_payment_subscription_management_hw">Оплата будет снята с вашей учётной записи AppGallery при подтверждении покупки.
 \n
@@ -4095,7 +4095,7 @@
     <string name="shared_string_itinerary">Маркеры</string>
     <string name="route_line_use_map_style_width">Используется толщина линии стиля карты (%1$s).</string>
     <string name="route_line_use_map_style_color">Используется цвет стиля карты (%1$s).</string>
-    <string name="routing_attr_avoid_low_emission_zone_description">Без зон с низким уровнем выбросов</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Избегать зон с низким уровнем выбросов</string>
     <string name="routing_attr_avoid_low_emission_zone_name">Без зон с низким уровнем выбросов</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="search_more">Найти ещё…</string>
@@ -4167,7 +4167,7 @@
     <string name="backup_version_history">История версий</string>
     <string name="backup_version_history_delete_descr">Удалить историю изменений для отключенных типов данных из OsmAnd Cloud\?</string>
     <string name="delete_version_history">Удалить историю версий</string>
-    <string name="routing_attr_avoid_tunnels_description">Исключить тоннели</string>
+    <string name="routing_attr_avoid_tunnels_description">Избегать тоннели</string>
     <string name="routing_attr_avoid_tunnels_name">Без тоннелей</string>
     <string name="send_crash_log">Отправить журнал сбоев</string>
     <string name="send_logcat_log">Отправить logcat</string>
@@ -4618,4 +4618,5 @@
 \n• Исправления: автообновление тайловых онлайн-карт
 \n
 \n</string>
+    <string name="turn_on_public_transport_description">Включите, чтобы увидеть на карте маршруты общественного транспорта.</string>
 </resources>

@@ -174,7 +174,7 @@
     <string name="poi_garden_centre">مركز الحديقة</string>
     <string name="poi_glaziery">محل زجاج</string>
     <string name="poi_hardware">متجر ملحقات الحاسوب</string>
-    <string name="poi_railway_station">محطة القطارات</string>
+    <string name="poi_railway_station">محطة السكك الحديدية الشبه حضرية؛محطة السكك الحديدية الحضرية؛محطة القطار</string>
     <string name="poi_kitchen">أثاث المطبخ</string>
     <string name="poi_leather">متجر جلود</string>
     <string name="poi_medical_supply">مستلزمات طبية</string>
@@ -244,12 +244,12 @@
     <string name="poi_public_transport_stop_position">مكان توقف وسائل النقل العام</string>
     <string name="poi_public_transport_station">محطة النقل العام</string>
     <string name="poi_bus_station">محطة حافلات</string>
-    <string name="poi_railway_platform">منصة سكك حديدية</string>
-    <string name="poi_halt">محطة سكك حديدية</string>
+    <string name="poi_railway_platform">منصة محطة السكك الحديدية الشبه حضرية؛محطة السكك الحديدية الحضرية؛منصة القطار</string>
+    <string name="poi_halt">محطة توقف السكك الحديدية الشبه حضرية؛محطة السكك توقف القطار</string>
     <string name="poi_subway_entrance">مدخل مترو الإنفاق</string>
     <string name="poi_subway_station">نعم;محطة مترو الانفاق</string>
     <string name="poi_taxi">موقف سيارات الأجرة</string>
-    <string name="poi_aerodrome">مطار</string>
+    <string name="poi_aerodrome">مطار؛ميناء جوي</string>
     <string name="poi_helipad">مهبط للطائرات</string>
     <string name="poi_runway">المدرج</string>
     <string name="poi_slipway">مزلقة سفن</string>
@@ -490,7 +490,7 @@
     <string name="poi_payment_transport_type">نوع الدفع (نقل)</string>
     <string name="poi_social_facility_type">النوع</string>
     <string name="poi_fuel_type">نوع الوقود</string>
-    <string name="poi_drive_in">شراء في السيارة</string>
+    <string name="poi_drive_in">خدمة من داخل السيارة</string>
     <string name="poi_drive_through">مسار طلبات السيارة</string>
     <string name="poi_social_facility_for">الفئة المستهدفة</string>
     <string name="poi_compressed_air_filter">هواء مضغوط</string>
@@ -1838,11 +1838,11 @@
     <string name="poi_service_bicycle_chaintool_no">عربة دراجة: لا</string>
     <string name="poi_service_bicycle_chaintool_yes">أداة ضبط سلسلة الدراجة؛ أداة ضبط السلسلة للدراجة الهوائية؛ أداة ضبط السلسلة للدراجة النارية</string>
     <string name="poi_service_bicycle_cleaning_no">تنظيف الدراجة: لا</string>
-    <string name="poi_service_bicycle_cleaning_yes">تنظيف؛الدراجات؛الدراجات النارية</string>
+    <string name="poi_service_bicycle_cleaning_yes">التنظيف؛تنظيف الدراجات الهوائية؛تنظيف الدراجات النارية</string>
     <string name="poi_service_bicycle_diy_no">أدوات دراجة لإصلاح DIY: لا</string>
     <string name="poi_service_bicycle_diy_yes">أدوات لإصلاح DIY؛أدوات DIY للدراجات؛أدوات DIY للدراجات النارية</string>
     <string name="poi_service_bicycle_pump_no">مضخة دراجة: لا</string>
-    <string name="poi_service_bicycle_pump_yes">مضخة؛دراجات؛دراجات نارية</string>
+    <string name="poi_service_bicycle_pump_yes">المضخة؛مضخة دراجات هوائية؛مضخة دراجات نارية</string>
     <string name="poi_service_bicycle_rental_no">تأجير دراجات: لا</string>
     <string name="poi_service_bicycle_rental_yes">تأجير؛دراجات هوائية؛دراجات نارية</string>
     <string name="poi_service_bicycle_repair_no">إصلاح الدراجات: لا</string>
@@ -4294,7 +4294,7 @@
     <string name="poi_board_type_welcome_sign">لافتة ترحيب</string>
     <string name="poi_board_type_sport">رياضة</string>
     <string name="poi_board_type_sight">بصر</string>
-    <string name="poi_board_type_planet_walk">تجربة المشي ما بين الكواكب</string>
+    <string name="poi_board_type_planet_walk">نموذج تجربة المشي ما بين الكواكب المصغر</string>
     <string name="poi_landuse_education">التعليم</string>
     <string name="poi_greenery">الخضرة</string>
     <string name="poi_hairdresser_supply">متجر مستلزمات تصفيف الشعر</string>

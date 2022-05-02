@@ -242,7 +242,7 @@
 \n- Компактни векторни карти за целия свят на разположение извън мрежа;
 \n- Неограничено изтегляне на карти по държава или регион директно от приложението;
 \n- Показване на статии от Уикипедия извън мрежата (необходимо е да изтеглите Уикипедия POIs), чудесна възможност при разглеждане на забележителности,
-\n- Възможно е наслагването на няколко слоя карти като файлове на GPX, POI, контурни линии, спирки на транспорта, допълнителни карти с адаптивна прозрачност;
+\n- Възможно е наслагването на няколко слоя карти като файлове на GPX, POI, контурни линии, спирки на обществения транспорт, допълнителни карти с адаптивна прозрачност;
 \n
 \n- Търсене на адреси и места (POI) извън мрежа;
 \n- Маршрутизация за кратки разстояния извън мрежа;
@@ -347,7 +347,7 @@
     <string name="poi_search_desc">POI () търсене</string>
     <string name="address_search_desc">Търсене по адрес</string>
     <string name="navpoint_search_desc">Координати</string>
-    <string name="transport_search_desc">Търсене в обществен транспорт</string>
+    <string name="transport_search_desc">Търсене на обществен транспорт</string>
     <string name="favourites_search_desc">Търсене в \'Предпочитани\'</string>
     <string name="offline_navigation_not_available">OsmAnd офлайн навигацията временно не е достъпна.</string>
     <string name="left_side_navigation">Обратно движение</string>
@@ -356,7 +356,7 @@
     <string name="unknown_location">Местоположението все още не е определено.</string>
     <string name="modify_transparency">Промяна на прозрачността (0 - прозрачно, 255 - плътно)</string>
     <string name="confirm_interrupt_download">Да се прекъсне ли тегленето?</string>
-    <string name="first_time_msg">Благодарим Ви, че изтеглихте OsmAnd. Необходими са също и карти, които можете да изтеглите сега или по-късно от \'Настройки\'/\'Управление на карти\'. След това ще можете да използвате пълната функционалност на програмата.</string>
+    <string name="first_time_msg">Благодарим ви, че използвате OsmAnd. Изтеглете местни данни за използване извън мрежа от „Настройки“, профил, „Настройки на картата“, за да виждате карта, търсите адреси, POI, обществен транспорт и други.</string>
     <string name="basemap_was_selected_to_download">Базовата карта, необходима за осигуряване на основната функционалност, е в опашката за изтегляне.</string>
     <string name="select_index_file_to_download">Нищо не е намерено. Ако не намирате Вашия регион, можете да си направите сами карти (виж http://osmand.net).</string>
     <string name="local_indexes_cat_tile">Онлайн и кеширани карти</string>
@@ -824,7 +824,7 @@
     <string name="transport_route_distance">Изчислена дистанция</string>
     <string name="transport">Обществен транспорт</string>
     <string name="shared_string_ok">OK</string>
-    <string name="show_transport_over_map_description">Показване на спирките на обществения транспорт на картата</string>
+    <string name="show_transport_over_map_description">Спирки на обществения транспорт на картата.</string>
     <string name="show_transport_over_map">Спирки на общ. транспорт</string>
     <string name="hello">Приложение за навигация OsmAnd</string>
     <string name="update_poi_success">Данните за POI бяха обновени успешно ({0} заредени)</string>
@@ -1839,7 +1839,7 @@
     <string name="number_of_recipients">Брой на получателите</string>
     <string name="osm_user_stat">Редакции %1$s, ранг %2$s, общо редакции %3$s</string>
     <string name="osm_editors_ranking">Класация на OSM редактори</string>
-    <string name="osm_live_subscription">OsmAnd Live абонамент</string>
+    <string name="osm_live_subscription">Абонамент за OsmAnd Live</string>
     <string name="osm_live_subscribe_btn">Абонирайте се</string>
     <string name="osm_live_user_public_name">Видимо име</string>
     <string name="osm_live_hide_user_name">Не показвай името ми в отчети</string>
@@ -2246,7 +2246,7 @@
     <string name="use_live_public_transport">Данни на OsmAnd Live</string>
     <string name="use_live_routing">Данни на OsmAnd Live</string>
     <string name="complex_routing_descr">Двустъпково изчисляване на маршрута за автомобилна маршрутизация.</string>
-    <string name="use_native_pt_desc">Превключете на Java (безопасен режим) изчисляването на маршрути за обществения транспорт</string>
+    <string name="use_native_pt_desc">Превключете на Java (безопасен режим) за изчисляване на маршрут за обществения транспорт</string>
     <string name="perform_oauth_authorization_description">Влезте с OAuth, за да ползвате всички функции на osmedit</string>
     <string name="perform_oauth_authorization">Вход с OAuth</string>
     <string name="system_default_theme">Системна настройка</string>
@@ -2620,4 +2620,21 @@
     <string name="live_update_frequency_week_variant">Проверката за обновяване е всяка седмица. Следващата %1$s е в %2$s.</string>
     <string name="update_frequency">Честота на проверка за обнояване</string>
     <string name="live_update_frequency_hour_variant">Проверката за обновяване е през час. Следващата %1$s е в %2$s.</string>
+    <string name="use_osm_live_routing">Маршрутизация на OsmAnd Live</string>
+    <string name="turn_on_public_transport_description">Включете, за да виждате маршрутите на обществения транспорт на картата.</string>
+    <string name="change_default_appearance">Промяна на подразбирания външен вид</string>
+    <string name="quick_action_transport_descr">Превключва видимостта на обществения транспорт на картата.</string>
+    <string name="osmand_live">OsmAnd Live</string>
+    <string name="use_native_pt">Развитие на обществения транспорт със собствени средства</string>
+    <string name="subscription_osmandlive_item">Абонамент – OsmAnd Live</string>
+    <string name="base_profile_descr_public_transport">Вид на обществения транспорт</string>
+    <string name="public_transport_ped_route_title">Маршрутът пеша представлява около %1$s и вероятно е по-бърз от обществения транспорт</string>
+    <string name="avoid_pt_types_descr">Изберете видовете обществен транспорт, който да бъде избягван при маршрутизиране:</string>
+    <string name="use_osm_live_public_transport">Обществен транспорт в OsmAnd Live</string>
+    <string name="subscription_on_hold_title">Абонаментът за OsmAnd Live е временно спрян</string>
+    <string name="public_transport_warning_title">Маршрутизацията с обществен транспорт е</string>
+    <string name="use_osm_live_public_transport_description">Включване на обществения транспорт в обновяванията от OsmAnd Live.</string>
+    <string name="subscription_expired_title">Абонаментът за OsmAnd Live е изтекъл</string>
+    <string name="subscription_paused_title">Абонаментът за OsmAnd Live е временно спрян</string>
+    <string name="app_mode_public_transport">Обществен транспорт</string>
 </resources>
