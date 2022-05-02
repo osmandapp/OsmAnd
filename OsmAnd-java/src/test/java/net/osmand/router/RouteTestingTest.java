@@ -150,6 +150,14 @@ public class RouteTestingTest {
 				System.out.println("This is test on hanging routing");
 				break;
 			}
+			if (params.containsKey("maxRouteLength")) {
+				float maxRouteLength = Float.parseFloat(params.get("maxRouteLength"));
+				float routeLength = 0;
+				for (RouteSegmentResult segment : routeSegments) {
+					routeLength += segment.getDistance();
+				}
+				Assert.assertTrue("Calculated route length " + routeLength + " is greater then max route length " + maxRouteLength, routeLength < maxRouteLength);
+			}
 			for (Entry<String, String> es : expectedResults.entrySet()) {
 				long id = RouterUtilTest.getRoadId(es.getKey());
 				switch (es.getValue()) {
