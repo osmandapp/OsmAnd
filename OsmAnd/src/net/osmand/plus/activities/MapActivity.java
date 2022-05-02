@@ -68,6 +68,7 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
@@ -1316,7 +1317,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		getMapView().refreshMap(true);
 		applyScreenOrientation();
 		app.getAppCustomization().updateMapMargins(this);
-		dashboardOnMap.onApplicationModeSettingsUpdated();
+		dashboardOnMap.onAppModeChanged();
 	}
 
 	public void updateNavigationBarColor() {
@@ -1332,10 +1333,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			UpdateVectorRendererAsyncTask task = new UpdateVectorRendererAsyncTask(app, changed -> {
 				if (changed) {
 					OsmandPlugin.registerRenderingPreferences(app);
-				}
-				DashboardOnMap dashboard = getDashboard();
-				if (dashboard != null) {
-					dashboard.onMapSettingsUpdated();
+					ConfigureMapFragment cm = ConfigureMapFragment.getVisibleInstance(this);
+					if (cm != null) {
+						cm.onMapStyleChanged();
+					}
 				}
 				return true;
 			});
