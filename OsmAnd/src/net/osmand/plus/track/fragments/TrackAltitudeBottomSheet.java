@@ -99,27 +99,31 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment impl
 
 	private void createOsmAndProItem() {
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
-		View view = inflater.inflate(R.layout.online_srtm_promo_item, null);
-
-		View button = view.findViewById(R.id.button_action);
-		button.setOnClickListener(v -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				OsmAndProPlanFragment.showInstance(activity);
-			}
-		});
-		UiUtilities.setupDialogButton(nightMode, button, SECONDARY_ACTIVE, R.string.shared_string_get);
+		View view = inflater.inflate(R.layout.online_srtm_promo_item, itemsContainer, false);
 
 		UiUtilities utilities = app.getUIUtilities();
+		int color = AndroidUtils.getColorFromAttr(view.getContext(), R.attr.switch_button_active);
+		view.setBackground(utilities.getPaintedIcon(R.drawable.promo_banner_bg, color));
+
+		View button = view.findViewById(R.id.button_action);
+		UiUtilities.setupDialogButton(nightMode, button, SECONDARY_ACTIVE, R.string.shared_string_get);
+		button.findViewById(R.id.button_container).setBackground(null);
+
 		Drawable icon = utilities.getIcon(R.drawable.ic_action_osmand_pro_logo_colored);
 		TextView textView = button.findViewById(R.id.button_text);
 		textView.setCompoundDrawablePadding(AndroidUtils.dpToPx(app, 12));
 		textView.setCompoundDrawablesRelativeWithIntrinsicBounds(icon, null, null, null);
 
-		int color = AndroidUtils.getColorFromAttr(view.getContext(), R.attr.switch_button_active);
-		view.findViewById(R.id.container).setBackground(utilities.getPaintedIcon(R.drawable.promo_banner_bg, color));
-
-		items.add(new BaseBottomSheetItem.Builder().setCustomView(view).create());
+		BaseBottomSheetItem item = new BaseBottomSheetItem.Builder()
+				.setCustomView(view)
+				.setOnClickListener(v -> {
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						OsmAndProPlanFragment.showInstance(activity);
+					}
+				})
+				.create();
+		items.add(item);
 	}
 
 	@Override
