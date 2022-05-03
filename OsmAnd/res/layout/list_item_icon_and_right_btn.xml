@@ -106,7 +106,7 @@
         android:layout_alignParentRight="true"
         android:textSize="@dimen/default_list_text_size"
         android:textColor="@color/buy_button_color"
-        android:text="@string/get_plugin"
+        android:text="@string/shared_string_get"
         osmand:textAllCapsCompat="true"
 	    android:paddingEnd="18dp"
 	    android:paddingStart="18dp" />

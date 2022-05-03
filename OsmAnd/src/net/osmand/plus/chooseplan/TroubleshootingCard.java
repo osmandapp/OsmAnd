@@ -21,7 +21,7 @@ import net.osmand.plus.utils.AndroidUtils;
 
 public class TroubleshootingCard extends BaseCard {
 
-	private static final String OSMAND_NEW_DEVICE_URL = "https://docs.osmand.net/en/main@latest/osmand/purchases#new-device--new-account";
+	private static final String OSMAND_NEW_DEVICE_URL = "https://docs.osmand.net/docs/user/purchases/#new-device--new-account";
 	private static final String OSMAND_EMAIL = "support@osmand.net";
 
 	protected InAppPurchaseHelper purchaseHelper;

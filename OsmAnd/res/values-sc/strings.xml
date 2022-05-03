@@ -1411,7 +1411,7 @@
     <string name="shared_string_enable">Abìlita</string>
     <string name="shared_string_disable">Disabìlita</string>
     <string name="plugin_install_needs_network">Depes èssere connessu in lìnia pro installare custa estensione.</string>
-    <string name="get_plugin">Iscàrriga</string>
+    <string name="shared_string_get">Iscàrriga</string>
     <string name="plugin_nautical_name">Vista mapa nàutica</string>
     <string name="world_ski_missing">Iscàrriga sa mapa ispetziale non in lìnia pro ammustrare sos impiantos pro s’iscì.</string>
     <string name="plugin_ski_name">Vista mapa iscì</string>

@@ -60,7 +60,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 
 	public static final String TAG = ConfigureWidgetsFragment.class.getSimpleName();
 
-	private static final String INFO_LINK = "https://docs.osmand.net/en/main@latest/osmand/widgets";
+	private static final String INFO_LINK = "https://docs.osmand.net/docs/user/widgets/";
 
 	private static final String APP_MODE_ATTR = "app_mode_key";
 	private static final String SELECTED_GROUP_ATTR = "selected_group_key";

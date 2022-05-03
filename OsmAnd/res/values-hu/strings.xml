@@ -1404,7 +1404,7 @@
     <string name="shared_string_enable">Engedélyezés</string>
     <string name="shared_string_disable">Letiltás</string>
     <string name="plugin_install_needs_network">A bővítmény telepítéséhez csatlakoznia kell az internetre.</string>
-    <string name="get_plugin">Beszerzés</string>
+    <string name="shared_string_get">Beszerzés</string>
     <string name="version_settings">Összeállítások</string>
     <string name="plugin_ski_name">Sítérképnézet</string>
     <string name="plugin_nautical_name">Hajózásitérkép-nézet</string>

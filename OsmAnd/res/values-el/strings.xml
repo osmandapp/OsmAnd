@@ -2484,7 +2484,7 @@
     <string name="av_camera_pic_size">Μέγεθος εικόνας κάμερας</string>
     <string name="av_camera_pic_size_descr">Ορίστε μέγεθος εικόνας κάμερας</string>
     <string name="plugin_install_needs_network">Χρειάζεται να συνδεθείτε με το διαδίκτυο για να εγκαταστήσετε αυτό το πρόσθετο.</string>
-    <string name="get_plugin">Λήψη</string>
+    <string name="shared_string_get">Λήψη</string>
     <string name="use_fast_recalculation">Επανυπολογισμός έξυπνης διαδρομής</string>
     <string name="use_fast_recalculation_desc">Για μεγάλα ταξίδια, να επανυπολογίζεται μόνο το αρχικό μέρος της διαδρομής.</string>
     <string name="do_you_like_osmand">Σας αρέσει το OsmAnd;</string>

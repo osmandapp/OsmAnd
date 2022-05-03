@@ -1404,7 +1404,7 @@
     <string name="plugin_install_needs_network">Vous devez être connecté à Internet pour installer cette extension.</string>
     <string name="shared_string_enable">Activer</string>
     <string name="shared_string_disable">Désactiver</string>
-    <string name="get_plugin">Installer</string>
+    <string name="shared_string_get">Installer</string>
     <string name="plugin_ski_name">Pistes de ski</string>
     <string name="plugin_nautical_name">Carte marine</string>
     <string name="world_ski_missing">Téléchargez la carte hors-ligne dédiée pour afficher les pistes de ski.</string>

@@ -1346,7 +1346,7 @@
     <string name="remove_the_tag">RIMUOVI IL TAG</string>
     <string name="edit_group">Modifica il gruppo</string>
     <string name="plugin_install_needs_network">Per installare questo componente aggiuntivo è necessario essere online.</string>
-    <string name="get_plugin">Ottieni</string>
+    <string name="shared_string_get">Ottieni</string>
     <string name="plugin_ski_name">Visualizzazione mappa sci</string>
     <string name="plugin_nautical_name">Visualizzazione mappa nautica</string>
     <string name="world_ski_missing">Scarica la speciale mappa offline per visualizzare le infrastrutture per sciatori.</string>

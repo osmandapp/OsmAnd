@@ -2981,7 +2981,7 @@
     <string name="av_camera_pic_size">Kaamera pildi suurus</string>
     <string name="av_camera_pic_size_descr">Määra kaamera pildi suurus</string>
     <string name="navigation_intent_invalid">Vigane formaat: %s</string>
-    <string name="get_plugin">Hangi</string>
+    <string name="shared_string_get">Hangi</string>
     <string name="do_you_like_osmand">Kas sulle meeldib OsmAnd\?</string>
     <string name="we_really_care_about_your_opinion">Sinu arvamus ja tagasiside on väärtuslik.</string>
     <string name="rate_this_app">Hinda seda rakendust</string>

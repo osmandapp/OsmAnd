@@ -1114,7 +1114,7 @@
     <string name="days_behind">dager etter</string>
     <string name="settings_privacy">Personvern</string>
     <string name="download_type_to_filter">Filtrer</string>
-    <string name="get_plugin">Hent</string>
+    <string name="shared_string_get">Hent</string>
     <string name="shared_string_is_open">Åpen nå</string>
     <string name="application_dir_change_warning3">Flytt OsmAnd-datafiler til det nye målet\?</string>
     <string name="specified_directiory_not_writeable">Kart kunne ikke opprettes i angitte mappe</string>

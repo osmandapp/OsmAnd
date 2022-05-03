@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:paddingStart="@dimen/content_padding_half"
+	android:paddingEnd="@dimen/content_padding_half">
+
+	<LinearLayout
+		android:id="@+id/container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		tools:background="@drawable/promo_banner_bg">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:minHeight="@dimen/setting_list_item_large_height"
+			android:orientation="horizontal"
+			android:paddingTop="@dimen/content_padding_small"
+			android:paddingBottom="@dimen/content_padding_half">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="@dimen/standard_icon_size"
+				android:layout_marginStart="@dimen/content_padding_half"
+				android:layout_marginEnd="@dimen/content_padding"
+				osmand:srcCompat="@drawable/ic_action_world_globe"
+				osmand:tint="?attr/active_color_basic" />
+
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginEnd="@dimen/content_padding_half"
+				android:layout_weight="1"
+				android:orientation="vertical">
+
+				<TextView
+					style="@style/TitleStyle.Medium"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/calculate_online"
+					android:textColor="?attr/active_color_basic" />
+
+				<TextView
+					style="@style/DescStyle"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/calculate_online_altitude_descr"
+					android:textColor="?android:attr/textColorSecondary" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<include layout="@layout/divider" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:paddingStart="@dimen/content_padding_small"
+				android:paddingEnd="@dimen/content_padding_small">
+
+				<net.osmand.plus.widgets.TextViewEx
+					style="@style/DescStyle"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical"
+					android:layout_marginEnd="@dimen/context_menu_padding_margin_medium"
+					android:layout_weight="1"
+					android:text="@string/option_available_only_in_osmand_pro" />
+
+				<include
+					android:id="@+id/button_action"
+					layout="@layout/bottom_sheet_dialog_button"
+					android:layout_width="wrap_content"
+					android:layout_height="@dimen/dialog_button_height"
+					android:layout_marginTop="@dimen/content_padding_small"
+					android:layout_marginBottom="@dimen/content_padding_small" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>

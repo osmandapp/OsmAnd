@@ -1425,7 +1425,7 @@
     <string name="av_camera_pic_size">Fotokameras bildes izmērs</string>
     <string name="av_camera_pic_size_descr">Norādīt iebūvētās fotokameras bildes lielumu</string>
     <string name="plugin_install_needs_network">Lai instalētu spraudni, ir vajadzīgs interneta savienojums.</string>
-    <string name="get_plugin">Iegūt</string>
+    <string name="shared_string_get">Iegūt</string>
     <string name="rendering_attr_pisteGrooming_name">Sniega tīrīšana</string>
     <string name="application_dir_change_warning3">Vai kopēt OsmAnd datu failus uz jauno vietu?</string>
     <string name="specified_directiory_not_writeable">Norādītajā mapē nevar izveidot kartes</string>

@@ -153,7 +153,7 @@ public class CategoryAnimator {
 		AndroidUiHelper.updateVisibility(tvDescription, !isExpanding);
 		AndroidUiHelper.updateVisibility(itemsContainer, isExpanding);
 
-		// Items container height to wrap content
+		// Set items container height as WRAP_CONTENT
 		LayoutParams params = itemsContainer.getLayoutParams();
 		params.height = LayoutParams.WRAP_CONTENT;
 		itemsContainer.setLayoutParams(params);

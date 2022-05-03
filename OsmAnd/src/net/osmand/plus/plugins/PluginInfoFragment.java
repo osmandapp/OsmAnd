@@ -153,7 +153,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 			}
 		});
 		Button getButton = mainView.findViewById(R.id.plugin_get);
-		getButton.setText(plugin.isPaid() ? R.string.get_plugin : R.string.shared_string_install);
+		getButton.setText(plugin.isPaid() ? R.string.shared_string_get : R.string.shared_string_install);
 		getButton.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {

@@ -1475,7 +1475,7 @@
     <string name="proxy_host_descr">Określ nazwę hosta serwera proxy (np. 127.0.0.1).</string>
     <string name="proxy_port_descr">Określ numer portu serwera proxy (np. 8118).</string>
     <string name="shared_string_release">Data wydania</string>
-    <string name="get_plugin">Pobierz</string>
+    <string name="shared_string_get">Pobierz</string>
     <string name="local_osm_changes_upload_all_confirm">Wysłać %1$d zmian(ę/y) do OSM\?</string>
     <string name="confirmation_to_clear_history">Wyczyścić historię?</string>
     <string name="delay_to_start_navigation_descr">Określa czas wyświetlania ekranu planowania trasy.</string>

@@ -1484,7 +1484,7 @@
     <string name="app_mode_car">Aŭto</string>
     <string name="app_mode_bicycle">Biciklo</string>
     <string name="app_mode_pedestrian">Piediranto</string>
-    <string name="get_plugin">Akiri</string>
+    <string name="shared_string_get">Akiri</string>
     <string name="do_you_like_osmand">Ĉu OsmAnd plaĉas al ci?</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="access_direction_audio_feedback">Sonaj sciigoj pri direkto</string>

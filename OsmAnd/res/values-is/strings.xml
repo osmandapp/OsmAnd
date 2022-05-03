@@ -654,7 +654,7 @@
     <string name="edit_filter_save_as_menu_item">Vista sem</string>
     <string name="edit_filter_delete_dialog_title">Eyða þessari síu\?</string>
     <string name="email">tölvupóstur</string>
-    <string name="get_plugin">Sækja</string>
+    <string name="shared_string_get">Sækja</string>
     <string name="failed_to_upload">Gat ekki sent inn</string>
     <string name="try_again">Reyndu aftur</string>
     <string name="error_message_pattern">Villa: {0}</string>

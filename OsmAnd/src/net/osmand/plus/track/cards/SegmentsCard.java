@@ -1,5 +1,6 @@
 package net.osmand.plus.track.cards;
 
+import static net.osmand.plus.myplaces.ui.GPXItemPagerAdapter.createGpxTabsView;
 import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
 
 import android.view.View;
@@ -20,7 +21,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.myplaces.ui.GPXItemPagerAdapter;
 import net.osmand.plus.myplaces.ui.SegmentActionsListener;
-import net.osmand.plus.myplaces.ui.SegmentGPXAdapter;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
@@ -131,8 +131,7 @@ public class SegmentsCard extends MapBaseCard {
 		@NonNull
 		@Override
 		public SegmentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-			View segmentView = SegmentGPXAdapter.createGpxTabsView(parent, nightMode);
-			return new SegmentViewHolder(segmentView);
+			return new SegmentViewHolder(createGpxTabsView(parent, nightMode));
 		}
 
 		@Override
@@ -145,9 +144,8 @@ public class SegmentsCard extends MapBaseCard {
 				holder.title.setText(displayItem.trackSegmentName);
 			}
 			AndroidUiHelper.updateVisibility(holder.title, !Algorithms.isBlank(displayItem.trackSegmentName));
-
-			holder.pager.setAdapter(new GPXItemPagerAdapter(app, displayItem, displayHelper, nightMode,
-					listener, false, false));
+			GPXItemPagerAdapter adapter = new GPXItemPagerAdapter(app, displayItem, displayHelper, listener, nightMode, true);
+			holder.pager.setAdapter(adapter);
 			holder.tabLayout.setViewPager(holder.pager);
 
 			AndroidUiHelper.updateVisibility(holder.bottomDivider, position + 1 == displayItems.size());

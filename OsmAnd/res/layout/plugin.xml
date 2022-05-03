@@ -132,7 +132,7 @@
 				android:layout_marginLeft="@dimen/content_padding"
 				android:layout_marginRight="@dimen/content_padding"
 				android:layout_marginBottom="@dimen/content_padding"
-				android:text="@string/get_plugin"
+				android:text="@string/shared_string_get"
 				android:textColor="@color/color_white"
 				android:textSize="@dimen/default_sub_text_size"
 				android:visibility="visible"

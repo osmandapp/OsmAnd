@@ -513,6 +513,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		DashboardOnMap.staticVisible = visible;
 		DashboardOnMap.staticVisibleType = type;
 		mapActivity.enableDrawer();
+		removeFragment(ConfigureMapFragment.TAG);
 		removeFragment(MapillaryFiltersFragment.TAG);
 		removeFragment(TerrainFragment.TAG);
 		removeFragment(TransportLinesFragment.TAG);
@@ -727,7 +728,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			listView.clearParams();
 			updateListAdapter();
 		} else if (isCurrentType(CONFIGURE_MAP)) {
-			refreshFragment(ConfigureMapFragment.TAG);
+			ConfigureMapFragment cm = ConfigureMapFragment.getVisibleInstance(mapActivity);
+			if (cm != null) {
+				cm.onDataSetInvalidated();
+			}
 		} else if (isCurrentType(ROUTE_PREFERENCES)) {
 			int index = listView.getFirstVisiblePosition();
 			View v = listView.getChildAt(0);
@@ -985,13 +989,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		}
 	}
 
-	public void onMapSettingsUpdated() {
-		if (isCurrentType(CONFIGURE_MAP)) {
-			refreshContent(false);
-		}
-	}
-
-	public void onApplicationModeSettingsUpdated() {
+	public void onAppModeChanged() {
 		if (isCurrentType(CONFIGURE_MAP)) {
 			refreshContent(false);
 		}

@@ -126,7 +126,7 @@
     <string name="search_address_top_text">ᱴᱷᱤᱠᱟᱹᱬᱟ</string>
     <string name="poi_action_delete">ᱢᱮᱴᱟᱣ ᱢᱮ</string>
     <string name="poi_dialog_opening_hours">ᱡᱷᱤᱡ ᱢᱮ</string>
-    <string name="get_plugin">ᱧᱟᱢ ᱢᱮ</string>
+    <string name="shared_string_get">ᱧᱟᱢ ᱢᱮ</string>
     <string name="user_hates_app_get_feedback">ᱞᱟᱹᱭ ᱟᱞᱮ ᱢᱮ ᱪᱮᱫᱟᱜᱽ᱾</string>
     <string name="tab_title_basic">ᱥᱟᱫᱷᱟᱨᱚᱱ</string>
     <string name="error_message_pattern">ᱵᱷᱩᱞ: {0}</string>

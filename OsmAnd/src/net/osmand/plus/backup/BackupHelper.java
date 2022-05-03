@@ -9,16 +9,12 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.utils.AndroidNetworkUtils;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.FileUtils;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.StreamWriter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupExecutor.BackupExecutorListener;
@@ -37,7 +33,7 @@ import net.osmand.plus.backup.commands.RegisterDeviceCommand;
 import net.osmand.plus.backup.commands.RegisterUserCommand;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
@@ -47,6 +43,11 @@ import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtyp
 import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.backend.backup.items.StreamSettingsItem;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidNetworkUtils.NetworkResult;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.codec.binary.Hex;
@@ -476,7 +477,7 @@ public class BackupHelper {
 
 		OperationLog operationLog = new OperationLog("uploadFile", DEBUG);
 		operationLog.startOperation(type + " " + fileName);
-		String error = AndroidNetworkUtils.uploadFile(UPLOAD_FILE_URL, streamWriter, fileName, true, params, headers,
+		NetworkResult networkResult = AndroidNetworkUtils.uploadFile(UPLOAD_FILE_URL, streamWriter, fileName, true, params, headers,
 				new AbstractProgress() {
 
 					private int work = 0;
@@ -511,6 +512,7 @@ public class BackupHelper {
 						return super.isInterrupted();
 					}
 				});
+		String error = networkResult.getError();
 		if (error == null) {
 			updateFileUploadTime(type, fileName, uploadTime);
 		}

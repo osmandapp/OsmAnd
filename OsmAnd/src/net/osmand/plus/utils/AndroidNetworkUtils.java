@@ -61,7 +61,7 @@ public class AndroidNetworkUtils {
 	public interface OnFileUploadCallback {
 		void onFileUploadStarted();
 		void onFileUploadProgress(int percent);
-		void onFileUploadDone(@Nullable String error);
+		void onFileUploadDone(@NonNull NetworkResult networkResult);
 	}
 
 	public interface OnFilesUploadCallback {
@@ -458,7 +458,7 @@ public class AndroidNetworkUtils {
 							+ "failed: " + connection.getResponseMessage();
 				}
 				if (toastAllowed && ctx != null) {
-					showToast(ctx, error);
+					ctx.showToastMessage(error);
 				}
 				InputStream errorStream = connection.getErrorStream();
 				if (errorStream != null) {
@@ -475,7 +475,7 @@ public class AndroidNetworkUtils {
 				error = "Authorization failed";
 			}
 			if (toastAllowed && ctx != null) {
-				showToast(ctx, error);
+				ctx.showToastMessage(error);
 			}
 		} catch (MalformedURLException e) {
 			if (ctx != null) {
@@ -485,7 +485,7 @@ public class AndroidNetworkUtils {
 				error = "Action " + userOperation + ": Unexpected error";
 			}
 			if (toastAllowed && ctx != null) {
-				showToast(ctx, error);
+				ctx.showToastMessage(error);
 			}
 		} catch (IOException e) {
 			if (ctx != null) {
@@ -495,7 +495,7 @@ public class AndroidNetworkUtils {
 				error = "Action " + userOperation + ": I/O error";
 			}
 			if (toastAllowed && ctx != null) {
-				showToast(ctx, error);
+				ctx.showToastMessage(error);
 			}
 		} finally {
 			if (connection != null) {
@@ -595,18 +595,20 @@ public class AndroidNetworkUtils {
 
 	private static final String BOUNDARY = "CowMooCowMooCowCowCow";
 
-	public static String uploadFile(@NonNull String urlText, @NonNull File file, boolean gzip,
-									@NonNull Map<String, String> additionalParams,
-									@Nullable Map<String, String> headers,
-									@Nullable IProgress progress) throws IOException {
+	@NonNull
+	public static NetworkResult uploadFile(@NonNull String urlText, @NonNull File file, boolean gzip,
+	                                              @NonNull Map<String, String> additionalParams,
+	                                              @Nullable Map<String, String> headers,
+	                                              @Nullable IProgress progress) throws IOException {
 		return uploadFile(urlText, new FileInputStream(file), file.getName(), gzip, additionalParams, headers, progress);
 	}
 
-	public static String uploadFile(@NonNull String urlText, @NonNull InputStream inputStream,
-									@NonNull String fileName, boolean gzip,
-									@NonNull Map<String, String> additionalParams,
-									@Nullable Map<String, String> headers,
-									@Nullable IProgress progress) {
+	@NonNull
+	public static NetworkResult uploadFile(@NonNull String urlText, @NonNull InputStream inputStream,
+	                                              @NonNull String fileName, boolean gzip,
+	                                              @NonNull Map<String, String> additionalParams,
+	                                              @Nullable Map<String, String> headers,
+	                                              @Nullable IProgress progress) {
 		BufferedInputStream bis = new BufferedInputStream(inputStream, 20 * 1024);
 		StreamWriter streamWriter = (outputStream, pr) -> {
 			Algorithms.streamCopy(bis, outputStream, pr, 1024);
@@ -616,11 +618,14 @@ public class AndroidNetworkUtils {
 		return uploadFile(urlText, streamWriter, fileName, gzip, additionalParams, headers, progress);
 	}
 
-	public static String uploadFile(@NonNull String urlText, @NonNull StreamWriter streamWriter,
-									@NonNull String fileName, boolean gzip,
-									@NonNull Map<String, String> additionalParams,
-									@Nullable Map<String, String> headers,
-									@Nullable IProgress progress) {
+	@NonNull
+	public static NetworkResult uploadFile(@NonNull String urlText, @NonNull StreamWriter streamWriter,
+	                                              @NonNull String fileName, boolean gzip,
+	                                              @NonNull Map<String, String> additionalParams,
+	                                              @Nullable Map<String, String> headers,
+	                                              @Nullable IProgress progress) {
+		String error = null;
+		String response = null;
 		try {
 			boolean firstPrm = !urlText.contains("?");
 			StringBuilder sb = new StringBuilder(urlText);
@@ -667,43 +672,43 @@ public class AndroidNetworkUtils {
 			ous.flush();
 			Algorithms.closeStream(ous);
 
-			LOG.info("Finish uploading file " + fileName);
-			LOG.info("Response code and message : " + conn.getResponseCode() + " " + conn.getResponseMessage());
-			if (conn.getResponseCode() != 200) {
-				InputStream errorStream = conn.getErrorStream();
-				if (errorStream != null) {
-					return streamToString(errorStream);
-				}
-				return conn.getResponseMessage();
-			}
-			InputStream is = conn.getInputStream();
-			StringBuilder responseBody = new StringBuilder();
-			if (is != null) {
-				BufferedReader in = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-				String s;
-				boolean first = true;
-				while ((s = in.readLine()) != null) {
-					if (first) {
-						first = false;
-					} else {
-						responseBody.append("\n");
-					}
-					responseBody.append(s);
+			int responseCode = conn.getResponseCode();
+			String responseMessage = conn.getResponseMessage();
 
+			LOG.info("Finish uploading file " + fileName);
+			LOG.info("Response code and message : " + responseCode + " " + responseMessage);
+
+			if (responseCode != HttpURLConnection.HTTP_OK) {
+				InputStream errorStream = conn.getErrorStream();
+				error = errorStream != null ? streamToString(errorStream) : responseMessage;
+			} else {
+				InputStream is = conn.getInputStream();
+				StringBuilder responseBody = new StringBuilder();
+				if (is != null) {
+					BufferedReader in = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+					String s;
+					boolean first = true;
+					while ((s = in.readLine()) != null) {
+						if (first) {
+							first = false;
+						} else {
+							responseBody.append("\n");
+						}
+						responseBody.append(s);
+					}
+					is.close();
 				}
-				is.close();
+				response = responseBody.toString();
+				LOG.info("Response : " + response);
 			}
-			String response = responseBody.toString();
-			LOG.info("Response : " + response);
-			return null;
 		} catch (IOException e) {
-			String message = e.getMessage();
-			if (message == null && e instanceof InterruptedIOException) {
-				message = CANCELLED_MSG;
+			error = e.getMessage();
+			if (error == null && e instanceof InterruptedIOException) {
+				error = CANCELLED_MSG;
 			}
-			LOG.error(message, e);
-			return message;
+			LOG.error(error, e);
 		}
+		return new NetworkResult(response, error);
 	}
 
 	public static void uploadFilesAsync(final @NonNull String url,
@@ -750,9 +755,9 @@ public class AndroidNetworkUtils {
 								params.putAll(additionalParams);
 							}
 						}
-						String res = uploadFile(url, file, gzip, params, headers, progress);
-						if (res != null) {
-							errors.put(file, res);
+						NetworkResult result = uploadFile(url, file, gzip, params, headers, progress);
+						if (result.getError() != null) {
+							errors.put(file, result.getError());
 						}
 					} catch (Exception e) {
 						errors.put(file, e.getMessage());
@@ -785,24 +790,34 @@ public class AndroidNetworkUtils {
 		}.executeOnExecutor(executor, (Void) null);
 	}
 
-	public static void uploadFileAsync(final @NonNull String url,
-										final @NonNull InputStream inputStream,
-										final @NonNull String fileName,
-										final boolean gzip,
-										final @NonNull Map<String, String> parameters,
-										final @Nullable Map<String, String> headers,
-										final OnFileUploadCallback callback) {
-		uploadFileAsync(url, inputStream, fileName, gzip, parameters, headers, callback, AsyncTask.THREAD_POOL_EXECUTOR);
+	public static UploadFileTask uploadFileAsync(final @NonNull String url,
+	                                             final @NonNull File file,
+	                                             final @NonNull String fileName,
+	                                             final boolean gzip,
+	                                             final @NonNull Map<String, String> parameters,
+	                                             final @Nullable Map<String, String> headers,
+	                                             final OnFileUploadCallback callback) throws IOException {
+		return uploadFileAsync(url, new FileInputStream(file), fileName, gzip, parameters, headers, callback, AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public static void uploadFileAsync(final @NonNull String url,
-										final @NonNull InputStream inputStream,
-										final @NonNull String fileName,
-										final boolean gzip,
-										final @NonNull Map<String, String> parameters,
-										final @Nullable Map<String, String> headers,
-										final OnFileUploadCallback callback,
-										final Executor executor) {
+	public static UploadFileTask uploadFileAsync(final @NonNull String url,
+	                                             final @NonNull InputStream inputStream,
+	                                             final @NonNull String fileName,
+	                                             final boolean gzip,
+	                                             final @NonNull Map<String, String> parameters,
+	                                             final @Nullable Map<String, String> headers,
+	                                             final OnFileUploadCallback callback) {
+		return uploadFileAsync(url, inputStream, fileName, gzip, parameters, headers, callback, AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	public static UploadFileTask uploadFileAsync(final @NonNull String url,
+	                                             final @NonNull InputStream inputStream,
+	                                             final @NonNull String fileName,
+	                                             final boolean gzip,
+	                                             final @NonNull Map<String, String> parameters,
+	                                             final @Nullable Map<String, String> headers,
+	                                             final OnFileUploadCallback callback,
+	                                             final Executor executor) {
 
 		BufferedInputStream bis = new BufferedInputStream(inputStream, 20 * 1024);
 		StreamWriter streamWriter = (outputStream, progress) -> {
@@ -810,83 +825,51 @@ public class AndroidNetworkUtils {
 			outputStream.flush();
 			Algorithms.closeStream(bis);
 		};
-		uploadFileAsync(url, streamWriter, fileName, gzip, parameters, headers, callback, executor);
+		return uploadFileAsync(url, streamWriter, fileName, gzip, parameters, headers, callback, executor);
 	}
 
-	public static void uploadFileAsync(final @NonNull String url,
-										final @NonNull StreamWriter streamWriter,
-										final @NonNull String fileName,
-										final boolean gzip,
-										final @NonNull Map<String, String> parameters,
-										final @Nullable Map<String, String> headers,
-										final OnFileUploadCallback callback) {
-		uploadFileAsync(url, streamWriter, fileName, gzip, parameters, headers, callback, AsyncTask.THREAD_POOL_EXECUTOR);
+	public static UploadFileTask uploadFileAsync(final @NonNull String url,
+	                                             final @NonNull StreamWriter streamWriter,
+	                                             final @NonNull String fileName,
+	                                             final boolean gzip,
+	                                             final @NonNull Map<String, String> parameters,
+	                                             final @Nullable Map<String, String> headers,
+	                                             final OnFileUploadCallback callback) {
+		return uploadFileAsync(url, streamWriter, fileName, gzip, parameters, headers, callback, AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public static void uploadFileAsync(final @NonNull String url,
-										final @NonNull StreamWriter streamWriter,
-										final @NonNull String fileName,
-										final boolean gzip,
-										final @NonNull Map<String, String> parameters,
-										final @Nullable Map<String, String> headers,
-										final OnFileUploadCallback callback,
-										final Executor executor) {
-
-		new AsyncTask<Void, Integer, String>() {
-
-			@Override
-			protected void onPreExecute() {
-				if (callback != null) {
-					callback.onFileUploadStarted();
-				}
-			}
-
-			@Override
-			@Nullable
-			protected String doInBackground(Void... v) {
-				String error;
-				final int[] progressValue = {0};
-				publishProgress(0);
-				IProgress progress = null;
-				if (callback != null) {
-					progress = new NetworkProgress() {
-						@Override
-						public void progress(int deltaWork) {
-							progressValue[0] += deltaWork;
-							publishProgress(progressValue[0]);
-						}
-					};
-				}
-				try {
-					error = uploadFile(url, streamWriter, fileName, gzip, parameters, headers, progress);
-				} catch (Exception e) {
-					error = e.getMessage();
-				}
-				return error;
-			}
-
-			@Override
-			protected void onProgressUpdate(Integer... p) {
-				if (callback != null) {
-					Integer progress = p[0];
-					if (progress >= 0) {
-						callback.onFileUploadProgress(progress);
-					}
-				}
-			}
-
-			@Override
-			protected void onPostExecute(@Nullable String error) {
-				if (callback != null) {
-					callback.onFileUploadDone(error);
-				}
-			}
-
-		}.executeOnExecutor(executor, (Void) null);
+	public static UploadFileTask uploadFileAsync(final @NonNull String url,
+	                                             final @NonNull StreamWriter streamWriter,
+	                                             final @NonNull String fileName,
+	                                             final boolean gzip,
+	                                             final @NonNull Map<String, String> parameters,
+	                                             final @Nullable Map<String, String> headers,
+	                                             final OnFileUploadCallback callback,
+	                                             final Executor executor) {
+		UploadFileTask uploadFileTask = new UploadFileTask(url, streamWriter, fileName, gzip, parameters, headers, callback);
+		uploadFileTask.executeOnExecutor(executor, (Void) null);
+		return uploadFileTask;
 	}
 
-	private static void showToast(OsmandApplication ctx, String message) {
-		ctx.showToastMessage(message);
+	public static class NetworkResult {
+
+		private final String error;
+		private final String response;
+
+		public NetworkResult(@Nullable String response, @Nullable String error) {
+			this.error = error;
+			this.response = response;
+		}
+
+		@Nullable
+		public String getError() {
+			return error;
+		}
+
+		@Nullable
+		public String getResponse() {
+			return response;
+		}
 	}
 
 	public static class Request {
@@ -925,7 +908,7 @@ public class AndroidNetworkUtils {
 		}
 	}
 
-	private abstract static class NetworkProgress implements IProgress {
+	protected abstract static class NetworkProgress implements IProgress {
 		@Override
 		public void startTask(String taskName, int work) {
 		}
