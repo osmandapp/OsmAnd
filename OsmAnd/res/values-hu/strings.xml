@@ -4606,4 +4606,35 @@
 \n
 \n</string>
     <string name="turn_on_public_transport_description">Kapcsolja be a tömegközlekedési útvonalak megjelenítéséhez.</string>
+    <string name="av_notes_choose_action_widget_desc">Válassz műveletet.</string>
+    <string name="fps_widget_desc">A widget a térkép és térképelemek kirajzolásának sebességét mutatja.</string>
+    <string name="current_time_widget_desc">A widget az eszköze jelenlegi idejét mutatja.</string>
+    <string name="battery_widget_desc">A widget az akkumulátor töltöttségi szintjét mutatja.</string>
+    <string name="current_speed_widget_desc">A widget a GPS szenzor által érzékelt pillanatnyi sebességet mutatja.</string>
+    <string name="arrival_time_widget_desc">Várható érkezési idő az úticélhoz.</string>
+    <string name="time_to_go_desc">A célpont eléréséhez szükséges időtartam percben vagy órában kifejezve.</string>
+    <string name="magnetic_bearing_widget_desc">A célpont iránya és a mágneses északi pólus iránya által bezárt szög a jelenlegi helyen.</string>
+    <string name="coordinates_widget_secondary_desc">A koordináták formátuma megváltoztatható erre: %1$s – %2$s – %3$s.</string>
+    <string name="shared_string_widget">Widget</string>
+    <string name="audio_video_notes_desc">A widget gyors hozzáférést biztosít felvételek készítéséhez (hang, video, és fotó)</string>
+    <string name="coordinates_widget_desc">Ez a jelenlegi pozíció földrajzi koordinátáit jeleníti meg.</string>
+    <string name="get_altitude_information">Magassági információ lekérése</string>
+    <string name="calculating_altitude">Magasság kiszámítása</string>
+    <string name="calculate_online">Online kiszámítás</string>
+    <string name="bearing_secondary_desc">A megjelenített adatok formátuma megváltoztatható erre: %1$s – %2$s – %3$s.</string>
+    <string name="widget_secondary_desc_part_of">A(z) %1$s bővítmény része.</string>
+    <string name="gps_info_widget_desc">A widget az érzékelt és használt műholdak számát mutatja.</string>
+    <string name="elevation_profile_widget_desc">A widget a jelenlegi útvonal magassági adait és lejtési viszonyait mutatja.</string>
+    <string name="parking_widget_desc">A widget a kijelző közepén lévő helytől a parkolási helyig tartó távolságot mutatja.</string>
+    <string name="altitude_widget_desc">A widget a jelenlegi pozíció tengerszint feletti magasságát mutatja.</string>
+    <string name="max_speed_widget_desc">A widget a jelenleg igénybe vett úton érvényes megengedett maximális sebességet mutatja.</string>
+    <string name="navigation_points">Navigációs pontok</string>
+    <string name="route_maneuvers">Útvonal manőverek</string>
+    <string name="calculate_online_altitude_descr">A magassági adat az OsmAnd szerverén kerül kiszámításra.</string>
+    <string name="calculate_altitude">Magasság kiszámítása</string>
+    <string name="get_altitude_data">Magassági adat lekérése</string>
+    <string name="no_altitude_data">Nincs magassági adat</string>
+    <string name="shared_string_speed">Sebesség</string>
+    <string name="app_mode_mountain_bicycle">Hegyi kerékpár</string>
+    <string name="av_def_action_choose">Kérésre</string>
 </resources>
