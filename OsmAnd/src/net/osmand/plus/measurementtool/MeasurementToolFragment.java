@@ -43,6 +43,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.TextViewCompat;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -93,6 +94,8 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.fragments.GpsFilterFragment;
 import net.osmand.plus.track.fragments.GpsFilterFragment.GpsFilterFragmentLister;
+import net.osmand.plus.track.fragments.TrackAltitudeBottomSheet;
+import net.osmand.plus.track.fragments.TrackAltitudeBottomSheet.CalculateAltitudeListener;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidNetworkUtils;
@@ -134,7 +137,7 @@ import java.util.Locale;
 
 public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
 		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener,
-		SaveAsNewTrackFragmentListener, MapControlsThemeInfoProvider, GpsFilterFragmentLister, OnFileUploadCallback {
+		SaveAsNewTrackFragmentListener, MapControlsThemeInfoProvider, GpsFilterFragmentLister, OnFileUploadCallback, CalculateAltitudeListener {
 
 	public static final String TAG = MeasurementToolFragment.class.getSimpleName();
 	public static final String TAPS_DISABLED_KEY = "taps_disabled_key";
@@ -444,20 +447,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			}
 		});
 
-		mainView.findViewById(R.id.options_button).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
-					boolean trackSnappedToRoad = !editingCtx.isApproximationNeeded();
-					boolean addNewSegmentAllowed = editingCtx.isAddNewSegmentAllowed();
-					boolean plainTrack = editingCtx.getPointsCount() > 0
-							&& !editingCtx.hasRoutePoints() && !editingCtx.hasRoute();
-					OptionsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-							MeasurementToolFragment.this,
-							trackSnappedToRoad, addNewSegmentAllowed,
-							editingCtx.getAppMode().getStringKey(), plainTrack);
-				}
+		mainView.findViewById(R.id.options_button).setOnClickListener(view1 -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				FragmentManager manager = activity.getSupportFragmentManager();
+				OptionsBottomSheetDialogFragment.showInstance(manager, MeasurementToolFragment.this);
 			}
 		});
 
@@ -1198,6 +1192,31 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					R.id.map_ruler_container);
 			GpsFilterFragment.showInstance(mapActivity.getSupportFragmentManager(), selectedGpxFile, this);
 		}
+	}
+
+	@Override
+	public void getAltitudeClick() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			FragmentManager manager = activity.getSupportFragmentManager();
+			TrackAltitudeBottomSheet.showInstance(manager, this, editingCtx.getSelectedSegment());
+		}
+	}
+
+	@Override
+	public void attachToRoadsSelected(int segmentIndex) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			enterApproximationMode(mapActivity);
+		}
+	}
+
+	@Override
+	public void calculateOnlineSelected(int segmentIndex) {
+		setMode(CALCULATE_SRTM_MODE, true);
+		calculateSrtmTrack();
+		setInfoType(InfoType.GRAPH);
+		infoTypeBtn.setSelectedItem(graphBtn);
 	}
 
 	@Override

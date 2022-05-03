@@ -55,10 +55,9 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	protected View dismissButton;
 	protected View rightButton;
 	protected View thirdButton;
-
-	private View buttonsShadow;
-	private LinearLayout itemsContainer;
-	private LinearLayout buttonsContainer;
+	protected View buttonsShadow;
+	protected LinearLayout itemsContainer;
+	protected LinearLayout buttonsContainer;
 
 	public void setUsedOnMap(boolean usedOnMap) {
 		this.usedOnMap = usedOnMap;
@@ -77,7 +76,6 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-		createMenuItems(savedInstanceState);
 		Activity activity = requireActivity();
 		LayoutInflater themedInflater = UiUtilities.getInflater(activity, nightMode);
 		View mainView = themedInflater.inflate(R.layout.bottom_sheet_menu_base, null);
@@ -89,6 +87,8 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 			itemsContainer.setVisibility(View.VISIBLE);
 		}
 		buttonsShadow = mainView.findViewById(R.id.buttons_shadow);
+
+		createMenuItems(savedInstanceState);
 
 		inflateMenuItems();
 		setupScrollShadow(mainView);

@@ -777,13 +777,6 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 		} else {
 			routingParameters.addAll(AppModeOptions.OTHER.routingParameters);
 		}
-		if (routingHelper.isRouteCalculated()) {
-			GPXFile gpx = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), app);
-			GPXTrackAnalysis analysis = gpx.getAnalysis(0);
-			if (!analysis.hasElevationData) {
-				routingParameters.add(CalculateAltitudeItem.KEY);
-			}
-		}
 		return routingOptionsHelper.getRoutingParameters(applicationMode, routingParameters);
 	}
 
