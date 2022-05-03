@@ -122,14 +122,14 @@ public class WidgetDataHolder {
 		return aidlWidgetData;
 	}
 
-	@StringRes
-	public int getSecondaryDescriptionId() {
+	@Nullable
+	public String getSecondaryDescription() {
 		if (widgetGroup != null) {
-			return widgetGroup.getSecondaryDescriptionId();
+			return widgetGroup.getSecondaryDescriptionId(app);
 		} else if (widgetParams != null) {
-			return widgetParams.getSecondaryDescriptionId();
+			return widgetParams.getSecondaryDescriptionId(app);
 		}
-		return 0;
+		return null;
 	}
 
 	@DrawableRes

@@ -1,12 +1,17 @@
 package net.osmand.plus.views.mapwidgets;
 
+import android.content.Context;
+
 import net.osmand.plus.R;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 
 import java.util.Arrays;
 import java.util.List;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import static net.osmand.plus.views.mapwidgets.WidgetParams.ARRIVAL_TIME;
@@ -81,14 +86,14 @@ public enum WidgetGroup {
 		return nightMode ? nightIconId : dayIconId;
 	}
 
-	@StringRes
-	public int getSecondaryDescriptionId() {
+	@Nullable
+	public String getSecondaryDescriptionId(@NonNull Context context) {
 		if (this == BEARING) {
-			return R.string.bearing_secondary_desc;
+			return context.getString(R.string.bearing_secondary_desc);
 		} else if (this == AUDIO_VIDEO_NOTES) {
-			return R.string.av_notes_secondary_desc;
+			return getPartOfPluginDesc(context, AudioVideoNotesPlugin.class);
 		}
-		return 0;
+		return null;
 	}
 
 	@DrawableRes
@@ -103,5 +108,13 @@ public enum WidgetGroup {
 
 	public int getOrder() {
 		return getWidgets().get(0).getDefaultOrder();
+	}
+
+	@Nullable
+	public static <T extends OsmandPlugin> String getPartOfPluginDesc(@NonNull Context context, @NonNull Class<T> clz) {
+		OsmandPlugin plugin = OsmandPlugin.getPlugin(clz);
+		return plugin != null
+				? context.getString(R.string.widget_secondary_desc_part_of, plugin.getName())
+				: null;
 	}
 }

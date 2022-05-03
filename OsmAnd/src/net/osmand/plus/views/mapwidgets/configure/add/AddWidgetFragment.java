@@ -174,11 +174,11 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 			inflateAidlWidget(aidlWidgetData);
 		}
 
-		int secondaryDescId = widgetsDataHolder.getSecondaryDescriptionId();
+		String secondaryDesc = widgetsDataHolder.getSecondaryDescription();
 		int secondaryIconId = widgetsDataHolder.getSecondaryIconId();
-		if (secondaryDescId != 0 && secondaryIconId != 0) {
+		if (secondaryDesc != null && secondaryIconId != 0) {
 			AndroidUiHelper.updateVisibility(view.findViewById(R.id.secondary_info_container), true);
-			((TextView) view.findViewById(R.id.secondary_description)).setText(secondaryDescId);
+			((TextView) view.findViewById(R.id.secondary_description)).setText(secondaryDesc);
 			((ImageView) view.findViewById(R.id.secondary_icon)).setImageDrawable(getIcon(secondaryIconId));
 		}
 	}

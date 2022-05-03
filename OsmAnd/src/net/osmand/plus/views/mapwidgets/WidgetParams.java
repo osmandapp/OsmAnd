@@ -1,6 +1,12 @@
 package net.osmand.plus.views.mapwidgets;
 
+import android.content.Context;
+
 import net.osmand.plus.R;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
+import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -135,20 +141,20 @@ public enum WidgetParams {
 		return null;
 	}
 
-	@StringRes
-	public int getSecondaryDescriptionId() {
+	@Nullable
+	public String getSecondaryDescriptionId(@NonNull Context context) {
 		if (this == COORDINATES) {
-			return R.string.coordinates_widget_secondary_desc;
+			return context.getString(R.string.coordinates_widget_secondary_desc);
 		} else if (this == TRIP_RECORDING) {
-			return R.string.trip_recording_secondary_desc;
+			return WidgetGroup.getPartOfPluginDesc(context, OsmandMonitoringPlugin.class);
 		} else if (this == FPS) {
-			return R.string.fps_secondary_desc;
+			return WidgetGroup.getPartOfPluginDesc(context, OsmandDevelopmentPlugin.class);
 		} else if (this == MAPILLARY) {
-			return R.string.mapillary_secondary_desc;
+			return WidgetGroup.getPartOfPluginDesc(context, MapillaryPlugin.class);
 		} else if (this == PARKING) {
-			return R.string.parking_position_secondary_desc;
+			return WidgetGroup.getPartOfPluginDesc(context, ParkingPositionPlugin.class);
 		}
-		return 0;
+		return null;
 	}
 
 	@DrawableRes

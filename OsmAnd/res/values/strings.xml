@@ -11,11 +11,7 @@
 	Thx - Hardy
 -->
 
-    <string name="parking_position_secondary_desc">Part of \“Parking position\” plugin.</string>
-    <string name="mapillary_secondary_desc">Part of \“Mapillary\” plugin.</string>
-    <string name="fps_secondary_desc">Part of \“OsmAnd development\” plugin.</string>
-    <string name="trip_recording_secondary_desc">Part of \“Trip recording\” plugin.</string>
-    <string name="av_notes_secondary_desc">Part of \“Audio/Video notes\” plugin.</string>
+    <string name="widget_secondary_desc_part_of">Part of \“%1$s\” plugin.</string>
     <string name="coordinates_widget_secondary_desc">Coordinates format could be change in Configure profile – General settings – Coordinates format.</string>
     <string name="elevation_profile_widget_desc">Widget shows the elevation and slope profile of the current route.</string>
     <string name="parking_widget_desc">Widget that shows distance from your screen center to the parking place.</string>
