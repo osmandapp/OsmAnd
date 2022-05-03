@@ -89,7 +89,10 @@ public enum WidgetGroup {
 	@Nullable
 	public String getSecondaryDescriptionId(@NonNull Context context) {
 		if (this == BEARING) {
-			return context.getString(R.string.bearing_secondary_desc);
+			String configureProfile = context.getString(R.string.configure_profile);
+			String generalSettings = context.getString(R.string.general_settings_2);
+			String angularUnit = context.getString(R.string.angular_measeurement);
+			return context.getString(R.string.bearing_secondary_desc, configureProfile, generalSettings, angularUnit);
 		} else if (this == AUDIO_VIDEO_NOTES) {
 			return getPartOfPluginDesc(context, AudioVideoNotesPlugin.class);
 		}

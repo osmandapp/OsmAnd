@@ -144,7 +144,11 @@ public enum WidgetParams {
 	@Nullable
 	public String getSecondaryDescriptionId(@NonNull Context context) {
 		if (this == COORDINATES) {
-			return context.getString(R.string.coordinates_widget_secondary_desc);
+			String configureProfile = context.getString(R.string.configure_profile);
+			String generalSettings = context.getString(R.string.general_settings_2);
+			String coordinatesFormat = context.getString(R.string.coordinates_format);
+			return context.getString(R.string.coordinates_widget_secondary_desc, configureProfile,
+					generalSettings, coordinatesFormat);
 		} else if (this == TRIP_RECORDING) {
 			return WidgetGroup.getPartOfPluginDesc(context, OsmandMonitoringPlugin.class);
 		} else if (this == FPS) {
