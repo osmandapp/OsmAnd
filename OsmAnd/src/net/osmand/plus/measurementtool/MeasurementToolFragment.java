@@ -1,8 +1,9 @@
 package net.osmand.plus.measurementtool;
 
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode;
+import static net.osmand.plus.backup.BackupHelper.SERVER_URL;
 import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.ADD_TO_TRACK;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
@@ -17,8 +18,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.AsyncTask.Status;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -51,6 +52,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
@@ -65,6 +67,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.measurementtool.GpxApproximationFragment.GpxApproximationFragmentListener;
+import net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode;
 import net.osmand.plus.measurementtool.OptionsBottomSheetDialogFragment.OptionsFragmentListener;
 import net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.RouteBetweenPointsDialogMode;
 import net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.RouteBetweenPointsDialogType;
@@ -92,11 +95,15 @@ import net.osmand.plus.track.fragments.GpsFilterFragment;
 import net.osmand.plus.track.fragments.GpsFilterFragment.GpsFilterFragmentLister;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidNetworkUtils.OnFileUploadCallback;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UploadFileTask;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeInfoProvider;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
@@ -111,19 +118,22 @@ import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.util.Algorithms;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
 		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener,
-		SaveAsNewTrackFragmentListener, MapControlsThemeInfoProvider, GpsFilterFragmentLister {
+		SaveAsNewTrackFragmentListener, MapControlsThemeInfoProvider, GpsFilterFragmentLister, OnFileUploadCallback {
 
 	public static final String TAG = MeasurementToolFragment.class.getSimpleName();
 	public static final String TAPS_DISABLED_KEY = "taps_disabled_key";
@@ -131,16 +141,17 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private static final String MODES_KEY = "modes_key";
 	private static final String INITIAL_POINT_KEY = "initial_point_key";
 	private static final String SHOW_SNAP_WARNING_KEY = "show_snap_warning_key";
+	private static final String PROCESS_SRTM_URL = SERVER_URL + "/gpx/process-srtm";
 
 	public static final int PLAN_ROUTE_MODE = 0x1;
 	public static final int DIRECTION_MODE = 0x2;
 	public static final int FOLLOW_TRACK_MODE = 0x4;
 	public static final int UNDO_MODE = 0x8;
 	public static final int ATTACH_ROADS_MODE = 0x10;
-	public static final int CALCULATE_ONLINE_MODE = 0x20;
+	public static final int CALCULATE_SRTM_MODE = 0x20;
 
 	@Retention(RetentionPolicy.SOURCE)
-	@IntDef({PLAN_ROUTE_MODE, DIRECTION_MODE, FOLLOW_TRACK_MODE, UNDO_MODE, ATTACH_ROADS_MODE, CALCULATE_ONLINE_MODE})
+	@IntDef({PLAN_ROUTE_MODE, DIRECTION_MODE, FOLLOW_TRACK_MODE, UNDO_MODE, ATTACH_ROADS_MODE, CALCULATE_SRTM_MODE})
 	public @interface MeasurementToolMode {
 	}
 
@@ -186,6 +197,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private GraphDetailsMenu detailsMenu;
 
 	private LatLon initialPoint;
+	private UploadFileTask calculateSrtmTask;
 
 	enum FinalSaveAction {
 		SHOW_SNACK_BAR_AND_CLOSE,
@@ -249,8 +261,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return (this.modes & ATTACH_ROADS_MODE) == ATTACH_ROADS_MODE;
 	}
 
-	private boolean isCalculateOnlineMode() {
-		return (this.modes & CALCULATE_ONLINE_MODE) == CALCULATE_ONLINE_MODE;
+	protected boolean isCalculateSrtmMode() {
+		return (this.modes & CALCULATE_SRTM_MODE) == CALCULATE_SRTM_MODE;
 	}
 
 	private boolean isUndoMode() {
@@ -299,7 +311,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 			@Override
 			public void hideProgressBar() {
-				((ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar)).setVisibility(View.INVISIBLE);
+				mainView.findViewById(R.id.snap_to_road_progress_bar).setVisibility(View.INVISIBLE);
 				progressBarVisible = false;
 				updateInfoView();
 				updateInfoViewAppearance();
@@ -364,12 +376,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			showProgressBar();
 		}
 
-		distanceTv = (TextView) mainView.findViewById(R.id.measurement_distance_text_view);
-		pointsTv = (TextView) mainView.findViewById(R.id.measurement_points_text_view);
-		distanceToCenterTv = (TextView) mainView.findViewById(R.id.distance_to_center_text_view);
+		distanceTv = mainView.findViewById(R.id.measurement_distance_text_view);
+		pointsTv = mainView.findViewById(R.id.measurement_points_text_view);
+		distanceToCenterTv = mainView.findViewById(R.id.distance_to_center_text_view);
 
-		mainIcon = (ImageView) mainView.findViewById(R.id.main_icon);
-		upDownBtn = (ImageView) mainView.findViewById(R.id.up_down_button);
+		mainIcon = mainView.findViewById(R.id.main_icon);
+		upDownBtn = mainView.findViewById(R.id.up_down_button);
 		updateUpDownBtn();
 
 		mainView.findViewById(R.id.cancel_move_point_button).setOnClickListener(new OnClickListener() {
@@ -448,8 +460,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			}
 		});
 
-		undoBtn = ((ImageButton) mainView.findViewById(R.id.undo_point_button));
-		redoBtn = ((ImageButton) mainView.findViewById(R.id.redo_point_button));
+		undoBtn = mainView.findViewById(R.id.undo_point_button);
+		redoBtn = mainView.findViewById(R.id.redo_point_button);
 
 		Drawable undoDrawable = getActiveIcon(R.drawable.ic_action_undo_dark);
 		undoBtn.setImageDrawable(AndroidUtils.getDrawableForDirection(mapActivity, undoDrawable));
@@ -508,24 +520,17 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			}
 		});
 
-		measurementLayer.setOnMeasureDistanceToCenterListener(new MeasurementToolLayer.OnMeasureDistanceToCenter() {
-			@Override
-			public void onMeasure(float distance, float bearing) {
-				String distStr = OsmAndFormatter.getFormattedDistance(distance, app);
-				String azimuthStr = OsmAndFormatter.getFormattedAzimuth(bearing, app);
-				distanceToCenterTv.setText(String.format("%1$s • %2$s", distStr, azimuthStr));
-				TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
-						distanceToCenterTv, 14, 18, 2,
-						TypedValue.COMPLEX_UNIT_SP);
-			}
+		measurementLayer.setOnMeasureDistanceToCenterListener((distance, bearing) -> {
+			String distStr = OsmAndFormatter.getFormattedDistance(distance, app);
+			String azimuthStr = OsmAndFormatter.getFormattedAzimuth(bearing, app);
+			distanceToCenterTv.setText(String.format("%1$s • %2$s", distStr, azimuthStr));
+			TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(distanceToCenterTv,
+					14, 18, 2, COMPLEX_UNIT_SP);
 		});
 
-		measurementLayer.setOnEnterMovePointModeListener(new MeasurementToolLayer.OnEnterMovePointModeListener() {
-			@Override
-			public void onEnterMovePointMode() {
-				collapseInfoViewIfExpanded();
-				switchMovePointMode(true);
-			}
+		measurementLayer.setOnEnterMovePointModeListener(() -> {
+			collapseInfoViewIfExpanded();
+			switchMovePointMode(true);
 		});
 
 		if (!editingCtx.getCommandManager().canUndo()) {
@@ -567,7 +572,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			public void onClick(View v) {
 				if (isFollowTrackMode()) {
 					startTrackNavigation();
-				} else if (editingCtx.isNewData() || editingCtx.hasChanges()) {
+				} else if (editingCtx.isNewData() || editingCtx.hasChanges()
+						|| isCalculateSrtmMode() && editingCtx.hasElevationData()) {
 					saveChanges(FinalSaveAction.SHOW_SNACK_BAR_AND_CLOSE, false);
 				} else {
 					MapActivity mapActivity = getMapActivity();
@@ -623,10 +629,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (savedInstanceState == null) {
 			if (fileName != null) {
 				addNewGpxData(getGpxFile(fileName));
+			} else if (isCalculateSrtmMode()) {
+				calculateSrtmTrack();
+				setInfoType(InfoType.GRAPH);
 			} else if ((isFollowTrackMode() || isAttachRoadsMode()) && isShowSnapWarning()) {
 				enterApproximationMode(mapActivity);
-			} else if (isCalculateOnlineMode()) {
-				setInfoType(InfoType.GRAPH);
 			}
 		} else {
 			measurementLayer.setTapsDisabled(savedInstanceState.getBoolean(TAPS_DISABLED_KEY));
@@ -768,7 +775,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	public boolean isInEditMode() {
 		return !isPlanRouteMode() && !editingCtx.isNewData() && !isDirectionMode()
-				&& !isFollowTrackMode() && !isAttachRoadsMode();
+				&& !isFollowTrackMode() && !isAttachRoadsMode() && !isCalculateSrtmMode();
 	}
 
 	public boolean isShowSnapWarning() {
@@ -887,7 +894,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private void showProgressBar() {
-		ProgressBar progressBar = (ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar);
+		ProgressBar progressBar = mainView.findViewById(R.id.snap_to_road_progress_bar);
 		progressBar.setVisibility(View.VISIBLE);
 		progressBar.setMinimumHeight(0);
 		progressBar.setProgress(0);
@@ -923,6 +930,34 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 						editingCtx.getAppMode());
 			}
 		}
+	}
+
+	private void calculateSrtmTrack() {
+		GpxData gpxData = editingCtx.getGpxData();
+		if (isCalculateSrtmMode() && gpxData != null && calculateSrtmTask == null) {
+			GPXFile gpxFile = gpxData.getGpxFile();
+			GPXTrackAnalysis analysis = gpxFile.getAnalysis(0);
+			if (!analysis.hasElevationData) {
+				try {
+					File file = new File(gpxFile.path);
+					calculateSrtmTask = AndroidNetworkUtils.uploadFileAsync(PROCESS_SRTM_URL, file,
+							file.getName(), false, Collections.emptyMap(), null, this);
+				} catch (IOException e) {
+					Toast.makeText(getMapActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+				}
+			}
+		}
+	}
+
+	public boolean isCalculatingSrtmData() {
+		return calculateSrtmTask != null && calculateSrtmTask.getStatus() == Status.RUNNING;
+	}
+
+	public void stopUploadFileTask() {
+		if (isCalculatingSrtmData()) {
+			calculateSrtmTask.cancel(false);
+		}
+		quit(false);
 	}
 
 	public void saveChanges(FinalSaveAction finalSaveAction, boolean showDialog) {
@@ -2129,6 +2164,23 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return showFragment(fragment, fragmentManager);
 	}
 
+	public static boolean showInstance(@NonNull MapActivity activity, @NonNull GPXFile gpxFile,
+	                                   int segmentIndex, int modes) {
+		OsmandApplication app = activity.getMyApplication();
+		GpxData gpxData = new GpxData(gpxFile);
+
+		QuadRect rect = gpxData.getRect();
+		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+		mapView.fitRectToMap(rect.left, rect.right, rect.top, rect.bottom, (int) rect.width(), (int) rect.height(), 0);
+
+		MeasurementEditingContext editingCtx = new MeasurementEditingContext(app);
+		editingCtx.setGpxData(gpxData);
+		editingCtx.setSelectedSegment(segmentIndex);
+		editingCtx.setAppMode(app.getSettings().getApplicationMode());
+
+		return showInstance(activity.getSupportFragmentManager(), editingCtx, modes, true);
+	}
+
 	private static boolean showFragment(@NonNull MeasurementToolFragment fragment,
 	                                    @NonNull FragmentManager fragmentManager) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
@@ -2312,6 +2364,35 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					addNewGpxData(newGpxFile);
 				}
 			}
+		}
+	}
+
+	@Override
+	public void onFileUploadStarted() {
+	}
+
+	@Override
+	public void onFileUploadProgress(int percent) {
+	}
+
+	@Override
+	public void onFileUploadDone(@Nullable String result, @Nullable String error) {
+		calculateSrtmTask = null;
+
+		GpxData prevGpxData = editingCtx.getGpxData();
+		if (error == null && prevGpxData != null && !Algorithms.isEmpty(result)) {
+			GPXFile gpxFile = GPXUtilities.loadGPXFile(new ByteArrayInputStream(result.getBytes()));
+			gpxFile.path = prevGpxData.getGpxFile().path;
+			if (gpxFile.error == null) {
+				editingCtx.clearSegments();
+				addNewGpxData(gpxFile);
+			} else {
+				error = gpxFile.error.getMessage();
+			}
+		}
+		if (!Algorithms.isEmpty(error)) {
+			updateInfoView();
+			Toast.makeText(getMapActivity(), error, Toast.LENGTH_LONG).show();
 		}
 	}
 

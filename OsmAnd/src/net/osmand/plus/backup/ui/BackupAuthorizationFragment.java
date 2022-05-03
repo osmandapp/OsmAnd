@@ -120,7 +120,7 @@ public class BackupAuthorizationFragment extends BaseSettingsFragment implements
 					ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.OSMAND_CLOUD);
 				}
 			});
-			setupDialogButton(isNightMode(), signUpButton, DialogButtonType.PRIMARY, R.string.get_plugin);
+			setupDialogButton(isNightMode(), signUpButton, DialogButtonType.PRIMARY, R.string.shared_string_get);
 		}
 		setupAuthorizeButton(signInButton, DialogButtonType.SECONDARY, R.string.register_opr_have_account, false);
 	}

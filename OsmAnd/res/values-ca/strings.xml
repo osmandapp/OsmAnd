@@ -1414,7 +1414,7 @@
     <string name="shared_string_enable">Activa</string>
     <string name="shared_string_disable">Desactiva</string>
     <string name="rendering_attr_pisteGrooming_name">Pista condicionada</string>
-    <string name="get_plugin">Obteniu</string>
+    <string name="shared_string_get">Obteniu</string>
     <string name="free">%1$s disponible</string>
     <string name="device_memory">Memòria del dispositiu</string>
     <string name="shared_string_audio">Àudio</string>

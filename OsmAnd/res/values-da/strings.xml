@@ -1361,7 +1361,7 @@
     <string name="remove_the_tag">FJERN MÆRKET</string>
     <string name="edit_group">Rediger gruppe</string>
     <string name="plugin_install_needs_network">Internetforbindelse behøves for at installere udvidelsen.</string>
-    <string name="get_plugin">Hent</string>
+    <string name="shared_string_get">Hent</string>
     <string name="plugin_ski_name">Skikort</string>
     <string name="plugin_nautical_name">Søkort</string>
     <string name="world_ski_missing">Hent det særlige offlinekort for at få vist skifaciliteter.</string>

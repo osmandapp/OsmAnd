@@ -2271,7 +2271,7 @@
     <string name="poi_dialog_comment_default">POI മാറുന്നു</string>
     <string name="poi_dialog_other_tags_message">മറ്റെല്ലാ ടാഗുകളും സംരക്ഷിക്കപ്പെടും</string>
     <string name="plugin_install_needs_network">ഈ പ്ലഗിൻ ഇൻസ്റ്റാളുചെയ്യാൻ നിങ്ങൾ ഇന്റർനെറ്റിൽ കണക്റ്റുചെയ്യേണ്ടതുണ്ട്.</string>
-    <string name="get_plugin">നേടുക</string>
+    <string name="shared_string_get">നേടുക</string>
     <string name="rate_this_app">ഈ അപ്ലിക്കേഷൻ റേറ്റുചെയ്യുക</string>
     <string name="rate_this_app_long">Google Play- യിൽ OsmAnd-ന് സ്കോർ കൊടുക്കുക</string>
     <string name="poi_dialog_poi_type">POI തരം</string>

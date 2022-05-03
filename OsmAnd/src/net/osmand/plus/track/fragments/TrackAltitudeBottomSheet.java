@@ -1,36 +1,47 @@
 package net.osmand.plus.track.fragments;
 
-import static net.osmand.plus.measurementtool.MeasurementToolFragment.ATTACH_ROADS_MODE;
-import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_ONLINE_MODE;
+import static net.osmand.plus.utils.UiUtilities.DialogButtonType.SECONDARY_ACTIVE;
 
-import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
-public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment {
+public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment implements InAppPurchaseListener {
 
 	public static final String TAG = TrackAltitudeBottomSheet.class.getSimpleName();
 
 	private static final String SEGMENT_INDEX_KEY = "segment_index_key";
 
+	private OsmandApplication app;
 	private int segmentIndex;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		app = requiredMyApplication();
+
 		if (savedInstanceState != null) {
 			segmentIndex = savedInstanceState.getInt(SEGMENT_INDEX_KEY, -1);
 		}
@@ -38,35 +49,77 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		Context context = requireContext();
-
 		items.add(new TitleItem(getString(R.string.get_altitude_data)));
+		createAttachToRoadsItem();
+		if (InAppPurchaseHelper.isOsmAndProAvailable(app)) {
+			int margin = getResources().getDimensionPixelSize(R.dimen.settings_divider_margin_start);
+			DividerItem dividerItem = new DividerItem(app);
+			dividerItem.setMargins(margin, 0, 0, 0);
+			items.add(dividerItem);
 
-		LayoutInflater inflater = UiUtilities.getInflater(context, nightMode);
-		View view = inflater.inflate(R.layout.get_track_altitude_bottom_sheet, null);
+			createOnlineItem();
+		} else {
+			createOsmAndProItem();
+		}
+	}
 
-		View attachRoads = view.findViewById(R.id.attach_roads);
-		attachRoads.setOnClickListener(v -> {
-			Fragment fragment = getTargetFragment();
-			if (fragment instanceof TrackMenuFragment) {
-				((TrackMenuFragment) fragment).openPlanRoute(segmentIndex, ATTACH_ROADS_MODE);
-			}
-			dismiss();
-		});
-
-		View calculateOnline = view.findViewById(R.id.calculate_online);
-		calculateOnline.setOnClickListener(v -> {
-			Fragment fragment = getTargetFragment();
-			if (fragment instanceof TrackMenuFragment) {
-				((TrackMenuFragment) fragment).openPlanRoute(segmentIndex, CALCULATE_ONLINE_MODE);
-			}
-			dismiss();
-		});
-
-		BaseBottomSheetItem getAltitudeButtons = new BaseBottomSheetItem.Builder()
-				.setCustomView(view)
+	private void createAttachToRoadsItem() {
+		BaseBottomSheetItem attachToRoadsItem = new BottomSheetItemWithDescription.Builder()
+				.setDescription(getString(R.string.track_attach_to_the_roads_descr))
+				.setTitle(getString(R.string.attach_to_the_roads))
+				.setIcon(getActiveIcon(R.drawable.ic_action_attach_track))
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_active)
+				.setOnClickListener(v -> {
+					Fragment fragment = getTargetFragment();
+					if (fragment instanceof CalculateAltitudeListener) {
+						((CalculateAltitudeListener) fragment).attachToRoadsSelected(segmentIndex);
+					}
+					dismiss();
+				})
 				.create();
-		items.add(getAltitudeButtons);
+		items.add(attachToRoadsItem);
+	}
+
+	private void createOnlineItem() {
+		BaseBottomSheetItem attachToRoadsItem = new BottomSheetItemWithDescription.Builder()
+				.setDescription(getString(R.string.calculate_online_altitude_descr))
+				.setTitle(getString(R.string.calculate_online))
+				.setIcon(getActiveIcon(R.drawable.ic_action_world_globe))
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_active)
+				.setOnClickListener(v -> {
+					Fragment fragment = getTargetFragment();
+					if (fragment instanceof CalculateAltitudeListener) {
+						((CalculateAltitudeListener) fragment).calculateOnlineSelected(segmentIndex);
+					}
+					dismiss();
+				})
+				.create();
+		items.add(attachToRoadsItem);
+	}
+
+	private void createOsmAndProItem() {
+		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		View view = inflater.inflate(R.layout.online_srtm_promo_item, null);
+
+		View button = view.findViewById(R.id.button_action);
+		button.setOnClickListener(v -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				OsmAndProPlanFragment.showInstance(activity);
+			}
+		});
+		UiUtilities.setupDialogButton(nightMode, button, SECONDARY_ACTIVE, R.string.shared_string_get);
+
+		UiUtilities utilities = app.getUIUtilities();
+		Drawable icon = utilities.getIcon(R.drawable.ic_action_osmand_pro_logo_colored);
+		TextView textView = button.findViewById(R.id.button_text);
+		textView.setCompoundDrawablePadding(AndroidUtils.dpToPx(app, 12));
+		textView.setCompoundDrawablesRelativeWithIntrinsicBounds(icon, null, null, null);
+
+		int color = AndroidUtils.getColorFromAttr(view.getContext(), R.attr.switch_button_active);
+		view.findViewById(R.id.container).setBackground(utilities.getPaintedIcon(R.drawable.promo_banner_bg, color));
+
+		items.add(new BaseBottomSheetItem.Builder().setCustomView(view).create());
 	}
 
 	@Override
@@ -80,6 +133,31 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment {
 		return R.string.shared_string_cancel;
 	}
 
+	@Override
+	public void onError(InAppPurchaseTaskType taskType, String error) {
+
+	}
+
+	@Override
+	public void onGetItems() {
+
+	}
+
+	@Override
+	public void onItemPurchased(String sku, boolean active) {
+		updateMenuItems();
+	}
+
+	@Override
+	public void showProgress(InAppPurchaseTaskType taskType) {
+
+	}
+
+	@Override
+	public void dismissProgress(InAppPurchaseTaskType taskType) {
+
+	}
+
 	public static void showInstance(@NonNull FragmentManager manager, @Nullable Fragment target, int segmentIndex) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			TrackAltitudeBottomSheet fragment = new TrackAltitudeBottomSheet();
@@ -87,5 +165,12 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment {
 			fragment.setTargetFragment(target, 0);
 			fragment.show(manager, TAG);
 		}
+	}
+
+	public interface CalculateAltitudeListener {
+
+		void attachToRoadsSelected(int segmentIndex);
+
+		void calculateOnlineSelected(int segmentIndex);
 	}
 }

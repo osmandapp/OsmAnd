@@ -1417,7 +1417,7 @@
     <string name="nautical_maps_missing">Descargar el mapa especial sin conexión para mostrar los detalles náuticos.</string>
     <string name="shared_string_enable">Activar</string>
     <string name="shared_string_disable">Desactivar</string>
-    <string name="get_plugin">Obtener</string>
+    <string name="shared_string_get">Obtener</string>
     <string name="free">Libre %1$s</string>
     <string name="device_memory">Memoria del dispositivo</string>
     <string name="rendering_attr_pisteRoutes_name">Pistas de esquí</string>

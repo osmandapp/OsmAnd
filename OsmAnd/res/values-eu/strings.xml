@@ -1899,7 +1899,7 @@
     <string name="favourites_context_menu_add">Gehitu gogokoa</string>
     <string name="poi_action_delete">ezabatu</string>
     <string name="poi_dialog_reopen">Berrireki</string>
-    <string name="get_plugin">Eskuratu</string>
+    <string name="shared_string_get">Eskuratu</string>
     <string name="do_you_like_osmand">OsmAnd gogoko duzu?</string>
     <string name="we_really_care_about_your_opinion">Zure iritzia eskertzen dugu.</string>
     <string name="rate_this_app">Baloratu aplikazio hau</string>

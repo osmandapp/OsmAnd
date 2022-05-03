@@ -4,6 +4,8 @@ import static net.osmand.GPXUtilities.GPXTrackAnalysis;
 import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
 import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
 import static net.osmand.plus.mapcontextmenu.controllers.NetworkRouteMenuController.getIconForRouteObject;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.ATTACH_ROADS_MODE;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_SRTM_MODE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
 import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_BY_INTERVALS_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_ON_MAP_BUTTON_INDEX;
@@ -87,8 +89,6 @@ import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.Open
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
-import net.osmand.plus.measurementtool.GpxData;
-import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.MeasurementToolFragment.MeasurementToolMode;
 import net.osmand.plus.myplaces.DeletePointsTask.OnPointsDeleteListener;
@@ -115,6 +115,7 @@ import net.osmand.plus.track.cards.SegmentsCard;
 import net.osmand.plus.track.cards.TrackPointsCard;
 import net.osmand.plus.track.fragments.DisplayGroupsBottomSheet.DisplayPointGroupsCallback;
 import net.osmand.plus.track.fragments.GpsFilterFragment.GpsFilterFragmentLister;
+import net.osmand.plus.track.fragments.TrackAltitudeBottomSheet.CalculateAltitudeListener;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper.DisplayGroupsHolder;
@@ -133,7 +134,6 @@ import net.osmand.plus.utils.FileUtils.RenameCallback;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.IconPopupMenu;
 import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import net.osmand.util.Algorithms;
@@ -148,7 +148,7 @@ import java.util.List;
 public class TrackMenuFragment extends ContextMenuScrollFragment implements CardListener,
 		SegmentActionsListener, RenameCallback, OnTrackFileMoveListener, OnPointsDeleteListener,
 		OsmAndLocationListener, OsmAndCompassListener, OnSegmentSelectedListener, GpsFilterFragmentLister,
-		DisplayPointGroupsCallback {
+		DisplayPointGroupsCallback, CalculateAltitudeListener {
 
 	public static final String TAG = TrackMenuFragment.class.getName();
 	private static final Log log = PlatformUtil.getLog(TrackMenuFragment.class);
@@ -1490,20 +1490,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	public void openPlanRoute(int segmentIndex, @MeasurementToolMode int mode) {
-		FragmentActivity activity = getActivity();
+		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			GPXFile gpxFile = getGpx();
-			GpxData gpxData = new GpxData(gpxFile);
-
-			QuadRect rect = gpxData.getRect();
-			OsmandMapTileView mapView = app.getOsmandMap().getMapView();
-			mapView.fitRectToMap(rect.left, rect.right, rect.top, rect.bottom, (int) rect.width(), (int) rect.height(), 0);
-
-			MeasurementEditingContext editingContext = new MeasurementEditingContext(app);
-			editingContext.setGpxData(gpxData);
-			editingContext.setSelectedSegment(segmentIndex);
-			editingContext.setAppMode(app.getSettings().getApplicationMode());
-			MeasurementToolFragment.showInstance(activity.getSupportFragmentManager(), editingContext, mode, true);
+			MeasurementToolFragment.showInstance(activity, gpxFile, segmentIndex, mode);
 		}
 		hide();
 	}
@@ -1570,6 +1560,16 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					.show(this)
 					.commitAllowingStateLoss();
 		}
+	}
+
+	@Override
+	public void attachToRoadsSelected(int segmentIndex) {
+		openPlanRoute(segmentIndex, ATTACH_ROADS_MODE);
+	}
+
+	@Override
+	public void calculateOnlineSelected(int segmentIndex) {
+		openPlanRoute(segmentIndex, CALCULATE_SRTM_MODE);
 	}
 
 	@Override

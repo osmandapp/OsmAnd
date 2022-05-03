@@ -2259,7 +2259,7 @@
     <string name="av_camera_pic_size_descr">设置相机图片大小</string>
     <string name="navigation_intent_invalid">格式无效: %s</string>
     <string name="plugin_install_needs_network">你需要互联网连接来安装这个插件。</string>
-    <string name="get_plugin">获取</string>
+    <string name="shared_string_get">获取</string>
     <string name="use_fast_recalculation">路线智能重新规划</string>
     <string name="use_fast_recalculation_desc">只重新计算路线的初始部分，对长途旅行很有用。</string>
     <string name="do_you_like_osmand">你喜欢 OsmAnd 吗？</string>

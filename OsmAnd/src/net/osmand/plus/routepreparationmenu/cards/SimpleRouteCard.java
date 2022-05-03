@@ -9,15 +9,15 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,7 +80,7 @@ public class SimpleRouteCard extends MapBaseCard {
 
 	private void buildHeader(View headerView) {
 		final LineChart mChart = headerView.findViewById(R.id.chart);
-		final GPXUtilities.GPXTrackAnalysis analysis = gpx.getAnalysis(0);
+		final GPXTrackAnalysis analysis = gpx.getAnalysis(0);
 
 		GpxUiHelper.setupGPXChart(mChart, 10f, 4f, false);
 		if (analysis.hasElevationData) {

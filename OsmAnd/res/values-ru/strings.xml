@@ -1660,7 +1660,7 @@
     <string name="plugin_install_needs_network">Для установки плагина требуется подключение к сети.</string>
     <string name="shared_string_enable">Включить</string>
     <string name="shared_string_disable">Выключить</string>
-    <string name="get_plugin">Получить</string>
+    <string name="shared_string_get">Получить</string>
     <string name="plugin_ski_name">Лыжные карты</string>
     <string name="plugin_nautical_name">Морские карты</string>
     <string name="world_ski_missing">Для отображения лыжных объектов необходимо загрузить специализированную локальную карту.</string>
