@@ -3,7 +3,6 @@ package net.osmand.plus.utils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -62,7 +61,7 @@ public class AndroidNetworkUtils {
 	public interface OnFileUploadCallback {
 		void onFileUploadStarted();
 		void onFileUploadProgress(int percent);
-		void onFileUploadDone(@Nullable String result, @Nullable String error);
+		void onFileUploadDone(@NonNull NetworkResult networkResult);
 	}
 
 	public interface OnFilesUploadCallback {
@@ -597,7 +596,7 @@ public class AndroidNetworkUtils {
 	private static final String BOUNDARY = "CowMooCowMooCowCowCow";
 
 	@NonNull
-	public static Pair<String, String> uploadFile(@NonNull String urlText, @NonNull File file, boolean gzip,
+	public static NetworkResult uploadFile(@NonNull String urlText, @NonNull File file, boolean gzip,
 	                                              @NonNull Map<String, String> additionalParams,
 	                                              @Nullable Map<String, String> headers,
 	                                              @Nullable IProgress progress) throws IOException {
@@ -605,7 +604,7 @@ public class AndroidNetworkUtils {
 	}
 
 	@NonNull
-	public static Pair<String, String> uploadFile(@NonNull String urlText, @NonNull InputStream inputStream,
+	public static NetworkResult uploadFile(@NonNull String urlText, @NonNull InputStream inputStream,
 	                                              @NonNull String fileName, boolean gzip,
 	                                              @NonNull Map<String, String> additionalParams,
 	                                              @Nullable Map<String, String> headers,
@@ -620,13 +619,13 @@ public class AndroidNetworkUtils {
 	}
 
 	@NonNull
-	public static Pair<String, String> uploadFile(@NonNull String urlText, @NonNull StreamWriter streamWriter,
+	public static NetworkResult uploadFile(@NonNull String urlText, @NonNull StreamWriter streamWriter,
 	                                              @NonNull String fileName, boolean gzip,
 	                                              @NonNull Map<String, String> additionalParams,
 	                                              @Nullable Map<String, String> headers,
 	                                              @Nullable IProgress progress) {
 		String error = null;
-		String result = null;
+		String response = null;
 		try {
 			boolean firstPrm = !urlText.contains("?");
 			StringBuilder sb = new StringBuilder(urlText);
@@ -699,8 +698,8 @@ public class AndroidNetworkUtils {
 					}
 					is.close();
 				}
-				result = responseBody.toString();
-				LOG.info("Response : " + result);
+				response = responseBody.toString();
+				LOG.info("Response : " + response);
 			}
 		} catch (IOException e) {
 			error = e.getMessage();
@@ -709,7 +708,7 @@ public class AndroidNetworkUtils {
 			}
 			LOG.error(error, e);
 		}
-		return new Pair<>(result, error);
+		return new NetworkResult(response, error);
 	}
 
 	public static void uploadFilesAsync(final @NonNull String url,
@@ -756,9 +755,9 @@ public class AndroidNetworkUtils {
 								params.putAll(additionalParams);
 							}
 						}
-						Pair<String, String> pair = uploadFile(url, file, gzip, params, headers, progress);
-						if (pair.second != null) {
-							errors.put(file, pair.second);
+						NetworkResult result = uploadFile(url, file, gzip, params, headers, progress);
+						if (result.getError() != null) {
+							errors.put(file, result.getError());
 						}
 					} catch (Exception e) {
 						errors.put(file, e.getMessage());
@@ -850,6 +849,27 @@ public class AndroidNetworkUtils {
 		UploadFileTask uploadFileTask = new UploadFileTask(url, streamWriter, fileName, gzip, parameters, headers, callback);
 		uploadFileTask.executeOnExecutor(executor, (Void) null);
 		return uploadFileTask;
+	}
+
+	public static class NetworkResult {
+
+		private final String error;
+		private final String response;
+
+		public NetworkResult(@Nullable String response, @Nullable String error) {
+			this.error = error;
+			this.response = response;
+		}
+
+		@Nullable
+		public String getError() {
+			return error;
+		}
+
+		@Nullable
+		public String getResponse() {
+			return response;
+		}
 	}
 
 	public static class Request {

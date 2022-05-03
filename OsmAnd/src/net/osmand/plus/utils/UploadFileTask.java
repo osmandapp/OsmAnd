@@ -1,7 +1,6 @@
 package net.osmand.plus.utils;
 
 import android.os.AsyncTask;
-import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,11 +8,12 @@ import androidx.annotation.Nullable;
 import net.osmand.IProgress;
 import net.osmand.StreamWriter;
 import net.osmand.plus.utils.AndroidNetworkUtils.NetworkProgress;
+import net.osmand.plus.utils.AndroidNetworkUtils.NetworkResult;
 import net.osmand.plus.utils.AndroidNetworkUtils.OnFileUploadCallback;
 
 import java.util.Map;
 
-public class UploadFileTask extends AsyncTask<Void, Integer, Pair<String, String>> {
+public class UploadFileTask extends AsyncTask<Void, Integer, NetworkResult> {
 
 	private final String url;
 	private final StreamWriter streamWriter;
@@ -48,7 +48,7 @@ public class UploadFileTask extends AsyncTask<Void, Integer, Pair<String, String
 
 	@NonNull
 	@Override
-	protected Pair<String, String> doInBackground(Void... v) {
+	protected NetworkResult doInBackground(Void... v) {
 		final int[] progressValue = {0};
 		publishProgress(0);
 		IProgress progress = null;
@@ -61,13 +61,7 @@ public class UploadFileTask extends AsyncTask<Void, Integer, Pair<String, String
 				}
 			};
 		}
-		Pair<String, String> pair;
-		try {
-			pair = AndroidNetworkUtils.uploadFile(url, streamWriter, fileName, gzip, parameters, headers, progress);
-		} catch (Exception e) {
-			pair = new Pair<>(null, e.getMessage());
-		}
-		return pair;
+		return AndroidNetworkUtils.uploadFile(url, streamWriter, fileName, gzip, parameters, headers, progress);
 	}
 
 	@Override
@@ -81,9 +75,9 @@ public class UploadFileTask extends AsyncTask<Void, Integer, Pair<String, String
 	}
 
 	@Override
-	protected void onPostExecute(@NonNull Pair<String, String> pair) {
+	protected void onPostExecute(@NonNull NetworkResult networkResult) {
 		if (callback != null) {
-			callback.onFileUploadDone(pair.first, pair.second);
+			callback.onFileUploadDone(networkResult);
 		}
 	}
 }

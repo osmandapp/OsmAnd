@@ -45,6 +45,7 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.backend.backup.items.StreamSettingsItem;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidNetworkUtils.NetworkResult;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
@@ -476,7 +477,7 @@ public class BackupHelper {
 
 		OperationLog operationLog = new OperationLog("uploadFile", DEBUG);
 		operationLog.startOperation(type + " " + fileName);
-		Pair<String, String> pair = AndroidNetworkUtils.uploadFile(UPLOAD_FILE_URL, streamWriter, fileName, true, params, headers,
+		NetworkResult networkResult = AndroidNetworkUtils.uploadFile(UPLOAD_FILE_URL, streamWriter, fileName, true, params, headers,
 				new AbstractProgress() {
 
 					private int work = 0;
@@ -511,7 +512,7 @@ public class BackupHelper {
 						return super.isInterrupted();
 					}
 				});
-		String error = pair.second;
+		String error = networkResult.getError();
 		if (error == null) {
 			updateFileUploadTime(type, fileName, uploadTime);
 		}

@@ -96,6 +96,7 @@ import net.osmand.plus.track.fragments.GpsFilterFragment.GpsFilterFragmentLister
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidNetworkUtils.NetworkResult;
 import net.osmand.plus.utils.AndroidNetworkUtils.OnFileUploadCallback;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -2376,12 +2377,15 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	@Override
-	public void onFileUploadDone(@Nullable String result, @Nullable String error) {
+	public void onFileUploadDone(@NonNull NetworkResult networkResult) {
 		calculateSrtmTask = null;
 
+		String error = networkResult.getError();
+		String response = networkResult.getResponse();
+
 		GpxData prevGpxData = editingCtx.getGpxData();
-		if (error == null && prevGpxData != null && !Algorithms.isEmpty(result)) {
-			GPXFile gpxFile = GPXUtilities.loadGPXFile(new ByteArrayInputStream(result.getBytes()));
+		if (error == null && prevGpxData != null && !Algorithms.isEmpty(response)) {
+			GPXFile gpxFile = GPXUtilities.loadGPXFile(new ByteArrayInputStream(response.getBytes()));
 			gpxFile.path = prevGpxData.getGpxFile().path;
 			if (gpxFile.error == null) {
 				editingCtx.clearSegments();

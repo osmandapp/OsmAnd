@@ -5,12 +5,12 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Pair;
 
-import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
+import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidNetworkUtils.NetworkResult;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
@@ -187,9 +187,9 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 
 					String jsonStr = json.toString();
 					InputStream inputStream = new ByteArrayInputStream(jsonStr.getBytes());
-					Pair<String, String> pair = AndroidNetworkUtils.uploadFile(ANALYTICS_UPLOAD_URL,
+					NetworkResult networkResult = AndroidNetworkUtils.uploadFile(ANALYTICS_UPLOAD_URL,
 							inputStream, ANALYTICS_FILE_NAME, true, additionalData, null, null);
-					if (pair.second != null) {
+					if (networkResult.getError() != null) {
 						return;
 					}
 				} catch (Exception e) {
