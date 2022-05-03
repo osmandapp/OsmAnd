@@ -400,7 +400,7 @@
     <string name="get_for">Dapatkan untuk %1$s</string>
     <string name="osm_live_banner_desc">Dapatkan unduhan peta tak terbatas, menambahkan pembaruan setiap minggu, setiap hari, atau bahkan setiap jam.</string>
     <string name="osmand_plus_banner_desc">Download unduhan, pembaruan, dan plugin tak terbatas.</string>
-    <string name="si_mi_meters">Mil/Meter</string>
+    <string name="si_mi_meters">Mil/meter</string>
     <string name="skip_map_downloading">Lewati download peta</string>
     <string name="skip_map_downloading_desc">Anda tidak mempunyai peta luring yang terinstal. Anda dapat memilih sebuah peta dari daftar atau unduh peta nanti via \'Menu - %1$s\'.</string>
     <string name="search_another_country">Pilih Daerah lain</string>
@@ -1244,7 +1244,7 @@
     <string name="shared_string_off">Mati</string>
     <string name="shared_string_on">Hidup</string>
     <string name="shared_string_do_not_use">Jangan gunakan</string>
-    <string name="shared_string_cancel">Batal</string>
+    <string name="shared_string_cancel">Batalkan</string>
     <string name="shared_string_ok">OKE</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="general_settings_2">Pengaturan umum</string>
@@ -3278,4 +3278,223 @@
 \nPilih %1$s dan Anda akan menerima peringatan dan peringatan tentang kamera kecepatan.
 \n
 \nPilih %2$s. Semua data yang terkait dengan kamera kecepatan: peringatan, pemberitahuan, POI akan dihapus hingga OsmAnd diinstal ulang sepenuhnya.</string>
+    <string name="shared_string_launch">Luncur</string>
+    <string name="lang_gu">Gujarat</string>
+    <string name="lang_jv">Bahasa Jawa</string>
+    <string name="rendering_attr_surface_ground_name">Tanah</string>
+    <string name="shared_string_drawer">Laci</string>
+    <string name="sett_parrot_ext_input">Parrot</string>
+    <string name="quick_action_switch_profile_descr">Tombol tindakan beralih di antara profil yang dipilih.</string>
+    <string name="reset_deafult_order">Pulihkan urutan item bawaan</string>
+    <string name="favorites_item">Favorit</string>
+    <string name="map_markers_item">Penanda peta</string>
+    <string name="travel_item">Perjalanan (Wikivoyage dan Wikipedia)</string>
+    <string name="app_mode_ski_touring">Tur ski</string>
+    <string name="developer_plugin">Plugin Pengembang</string>
+    <string name="shared_string_items">Item</string>
+    <string name="custom_osmand_plugin">Plugin OsmAnd Kustom</string>
+    <string name="app_mode_ski_snowmobile">Mobil salju</string>
+    <string name="move_inside_category">Item hanya dapat dipindahkan dalam kategori ini.</string>
+    <string name="context_menu_actions">Tindakan menu konteks</string>
+    <string name="ui_customization">Kustomisasi UI</string>
+    <string name="ui_customization_short_descr">Item laci, menu konteks</string>
+    <string name="select_group">Pilih grup</string>
+    <string name="delete_description">Hapus deskripsi</string>
+    <string name="quick_action_terrain_descr">Tombol untuk menampilkan atau menyembunyikan lapisan medan pada peta.</string>
+    <string name="recalculate_route_in_deviation">Hitung ulang rute jika terjadi penyimpangan</string>
+    <string name="recalculate_route_distance_promo">Rute akan dikalkulasi ulang jika jarak dari rute ke lokasi saat ini lebih dari nilai yang dipilih.</string>
+    <string name="shared_string_importing">Mengimpor</string>
+    <string name="shared_string_hillshade">Bayangan bukit</string>
+    <string name="shared_string_legend">Legenda</string>
+    <string name="shared_string_transparency">Transparansi</string>
+    <string name="route_way">Jalan</string>
+    <string name="replace_destination_point">Ganti tujuan</string>
+    <string name="settings_item_write_error">Tidak dapat menulis ke \'%1$s\'.</string>
+    <string name="routing_profile_geocoding">Pengkodean geografis</string>
+    <string name="lang_ast">Asturia</string>
+    <string name="profiles_for_action_not_found">Tidak dapat menemukan profil seperti itu.</string>
+    <string name="quick_action_transport_descr">Tombol menampilkan atau menyembunyikan transportasi umum pada peta.</string>
+    <string name="legend_item_description">Panduan untuk simbologi peta.</string>
+    <string name="osmand_purchases_item">Pembelian OsmAnd</string>
+    <string name="subscription_osmandlive_item">Langganan - OsmAnd Live</string>
+    <string name="quick_action_item">Tindakan cepat</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="lang_cv">Chuvash</string>
+    <string name="lang_an">Aragon</string>
+    <string name="lang_ce">Chechnya</string>
+    <string name="lang_min">Minangkabau</string>
+    <string name="lang_kk">Kazakh</string>
+    <string name="lang_ky">Kirgistan</string>
+    <string name="lang_uz">Uzbek</string>
+    <string name="lang_yo">Yoruba</string>
+    <string name="lang_zhminnan">Min Selatan</string>
+    <string name="lang_zhyue">Kantonis</string>
+    <string name="some_articles_may_not_available_in_lang">Beberapa artikel Wikipedia mungkin tidak tersedia dalam bahasa Anda.</string>
+    <string name="wiki_menu_download_descr">Peta tambahan diperlukan untuk melihat POI Wikipedia pada peta.</string>
+    <string name="shared_string_languages">Bahasa</string>
+    <string name="replace_point_descr">Ganti titik lain dengan ini.</string>
+    <string name="reset_items_descr">Menyembunyikan pengaturan akan mengatur ulang ke keadaan semula.</string>
+    <string name="hidden_items_descr">Item-item ini disembunyikan dari menu, tetapi opsi atau plugin yang diwakili akan terus berfungsi.</string>
+    <string name="shared_string_hidden">Tersembunyi</string>
+    <string name="download_slope_maps">Lereng</string>
+    <string name="select_distance_route_will_recalc">Pilih jarak setelah itu rute akan dikalkulasi ulang.</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Kereta luncur</string>
+    <string name="rendering_attr_piste_type_sled_name">Kereta luncur</string>
+    <string name="rendering_attr_piste_type_hike_name">Kenaikan</string>
+    <string name="rendering_attr_piste_type_skitour_name">Tur ski</string>
+    <string name="rendering_attr_piste_type_downhill_name">Turun</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">Freeride</string>
+    <string name="app_mode_monowheel">Roda tunggal</string>
+    <string name="rendering_attr_highway_class_footway_name">Trotoar</string>
+    <string name="rendering_attr_highway_class_track_name">Trek</string>
+    <string name="rendering_attr_highway_class_bridleway_name">Kekang</string>
+    <string name="rendering_attr_highway_class_steps_name">Langkah</string>
+    <string name="lang_oc">Occitan</string>
+    <string name="lang_gn_py">Guaraní</string>
+    <string name="sett_generic_ext_input">Keyboard</string>
+    <string name="index_item_world_basemap_detailed">Peta ikhtisar dunia (rinci)</string>
+    <string name="lang_lmo">Lombardia</string>
+    <string name="shared_string_sound">Suara</string>
+    <string name="rendering_value_brown_name">Cokelat</string>
+    <string name="lang_ber">Berber</string>
+    <string name="shared_string_target_points">Destinasi</string>
+    <string name="navigation_profiles_item">Profil navigasi</string>
+    <string name="custom_color">Warna kustom</string>
+    <string name="lang_ba">Bashkir</string>
+    <string name="lang_bar">Bavaria</string>
+    <string name="shared_string_divider">Pembagi</string>
+    <string name="shared_string_min">Min</string>
+    <string name="shared_string_square">Kotak</string>
+    <string name="shared_string_octagon">Segi delapan</string>
+    <string name="shared_string_circle">Lingkaran</string>
+    <string name="select_shape">Pilih bentuk</string>
+    <string name="shared_string_type">Tipe</string>
+    <string name="lang_mg">Malagasi</string>
+    <string name="measure_distance_item">Ukur jarak</string>
+    <string name="system_screen_timeout_descr">Mematikan layar sesuai batas waktu layar sistem.</string>
+    <string name="switch_start_finish">Balikkan titik awal &amp; destinasi</string>
+    <string name="starting_point">Titik awal</string>
+    <string name="system_screen_timeout">Gunakan batas waktu layar sistem</string>
+    <string name="turn_on_public_transport_description">Aktifkan untuk melihat rute transportasi umum pada peta.</string>
+    <string name="release_3_7">• Peta Lereng luring baru
+\n
+\n • Kustomisasi penuh Favorit dan Titik Jalan GPX – warna, ikon, bentuk khusus
+\n
+\n • Sesuaikan urutan item di \"Menu Konteks\", \"Konfigurasi Peta\" dan \"Laci\"
+\n
+\n • Wikipedia sebagai lapisan terpisah di Konfigurasi peta, pilih hanya bahasa yang diperlukan
+\n
+\n • Buat filter / peta POI Anda sendiri dengan fleksibilitas total
+\n
+\n • Ditambahkan opsi untuk memulihkan pengaturan untuk profil khusus
+\n
+\n • Rute GPX lengkap dari navigasi mendukung jalur lalu lintas dan petunjuk belokan lengkap
+\n
+\n • Perbaiki ukuran UI pada tablet
+\n
+\n • Perbaiki bug dengan RTL
+\n
+\n</string>
+    <string name="tracker_item">Pelacak OsmAnd</string>
+    <string name="osm_live_payment_subscription_management">Pembayaran dibayar dari akun Google Play Anda ketika mengkonfirmasi pembelian.
+\n
+\nItu diperbarui kecuali dibatalkan sebelum periode perpanjangan yang dipilih.
+\n
+\nKelola atau batalkan langganan Anda dari pengaturan Google Play Anda kapan saja.</string>
+    <string name="ui_customization_description">Sesuaikan jumlah item pada \"Laci\", \"Konfigurasikan Peta\" dan \"Menu Konteks\".
+\n
+\nNonaktifkan plugin yang tidak digunakan untuk menyembunyikan semua kontrolnya. %1$s.</string>
+    <string name="shared_string_status">Status</string>
+    <string name="shared_string_widgets">Widget</string>
+    <string name="access_widget_expand">Luaskan</string>
+    <string name="lang_mk">Makedonia</string>
+    <string name="shared_string_remove">Hilangkan</string>
+    <string name="app_mode_offroad">Offroad</string>
+    <string name="shared_string_description">Deskripsi</string>
+    <string name="shared_string_revert">Pulihkan</string>
+    <string name="shared_string_location">Lokasi</string>
+    <string name="shared_string_near">Dekat</string>
+    <string name="shared_string_toolbar">Bilah Alat</string>
+    <string name="lang_lo">Laos</string>
+    <string name="shared_string_waypoints">Titik jalan</string>
+    <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
+    <string name="shared_string_undefined">Tidak tersedia</string>
+    <string name="lang_ne">Nepali</string>
+    <string name="routing_attr_piste_type_sled_name">Kereta luncur</string>
+    <string name="lang_scn">Sisilia</string>
+    <string name="lang_sco">Skotlandia</string>
+    <string name="reorder_or_hide_from">Susun ulang atau sembunyikan item dari %1$s.</string>
+    <string name="app_mode_camper">Kemping</string>
+    <string name="shared_string_commit">Komit</string>
+    <string name="settings_item_import_error">Tidak dapat mengimpor dari \'%1$s\'.</string>
+    <string name="turn_screen_on_descr">PIlih opsi bangunan layar (dan pastikan OsmAnd berada di latar belakang ketika perangkat dikunci):</string>
+    <string name="radius_ruler_item">Penggaris radius</string>
+    <string name="navigate_point_mgrs">MGRS</string>
+    <string name="shared_string_crash">Mogok</string>
+    <string name="transfers">Transfer</string>
+    <string name="lang_nap">Napolitan</string>
+    <string name="lang_tg">Tajik</string>
+    <string name="select_track_file">Pilih file trek</string>
+    <string name="settings_item_read_error">Tidak dapat membaca dari \'%1$s\'.</string>
+    <string name="changes_applied_to_profile">Perubahan diterapkan pada profil \'%1$s\'.</string>
+    <string name="shared_string_terrain">Medan</string>
+    <string name="rendering_attr_piste_type_connection_name">Koneksi</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Koneksi</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="rendering_attr_surface_unpaved_name">Tidak beraspal</string>
+    <string name="rendering_attr_surface_cobblestone_name">Batu besar</string>
+    <string name="rendering_attr_surface_pebblestone_name">Batu kerikil</string>
+    <string name="rendering_attr_highway_class_service_name">Layanan</string>
+    <string name="rendering_attr_highway_class_path_name">Jalur</string>
+    <string name="rendering_attr_highway_class_cycleway_name">Jalur sepeda</string>
+    <string name="rendering_attr_undefined_name">Tidak tersedia</string>
+    <string name="transport_nearby_routes">Dalam</string>
+    <string name="shared_string_current">Saat ini</string>
+    <string name="si_mph">Mil per jam</string>
+    <string name="si_min_m">Menit per mil</string>
+    <string name="si_nm">Mil bahari</string>
+    <string name="rendering_value_pink_name">Merah muda</string>
+    <string name="auto_zoom_close">Untuk close-up</string>
+    <string name="sett_no_ext_input">Nihil</string>
+    <string name="osmand_service">Mode latar belakang</string>
+    <string name="gpx_parse_error">GPX OsmAnd tidak terbentuk dengan baik, mohon hubungi tim dukungan untuk menyelidiki lebih lanjut.</string>
+    <string name="lenght_limit_description">Sediakan panjang kendaraan Anda, beberapa pembatasan rute mungkin diterapkan untuk kendaraan panjang.</string>
+    <string name="select_wikipedia_article_langs">Pilih bahasa untuk artikel Wikipedia pada peta. Beralih ke bahasa apa pun yang tersedia saat membaca artikel.</string>
+    <string name="shared_string_language">Bahasa</string>
+    <string name="lang_tt">Tatar</string>
+    <string name="lang_ur">Urdu</string>
+    <string name="divider_descr">Elemen di bawah titik ini dipisahkan oleh pembagi.</string>
+    <string name="additional_actions_descr">Akses tindakan ini dengan mengetuk tombol “%1$s”.</string>
+    <string name="main_actions">Tindakan utama</string>
+    <string name="main_actions_descr">Hanya memiliki empat tombol.</string>
+    <string name="clear_recorded_data_warning">Hapus data yang direkam\?</string>
+    <string name="routing_profile_direct_to">Langsung ke titik</string>
+    <string name="rendering_attr_piste_type_nordic_name">Nordik</string>
+    <string name="analytics_pref_title">Analitik</string>
+    <string name="rendering_attr_surface_sett_name">Sett</string>
+    <string name="shared_string_swap">Tukar</string>
+    <string name="shared_string_gpx_points">Titik</string>
+    <string name="search_poi_types">Cari tipe POI</string>
+    <string name="download_unsupported_action">Tindakan %1$s tidak didukung</string>
+    <string name="search_poi_types_descr">Gabungkan jenis POI dari berbagai kategori. Ketuk sakelar untuk memilih semua, ketuk sisi kiri untuk pilihan kategori.</string>
+    <string name="lang_war">Waray</string>
+    <string name="shared_string_routing">Perutean</string>
+    <string name="clear_all_intermediates">Hapus semua titik perantara</string>
+    <string name="lang_fy">Frysk</string>
+    <string name="lang_mn">Mongolia</string>
+    <string name="lang_my">Birma</string>
+    <string name="shared_string_angle">Sudut</string>
+    <string name="shared_string_preparing">Mempersiapkan</string>
+    <string name="shared_string_profiles">Profil</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Jalur udara</string>
+    <string name="rendering_attr_surface_paved_name">Beraspal</string>
+    <string name="rendering_attr_surface_compacted_name">Dipadatkan</string>
+    <string name="shared_string_marker">Penanda</string>
+    <string name="lang_kab">Kabyle</string>
+    <string name="error_avoid_specific_road">Tidak ada jalan pintas yang ditemukan</string>
+    <string name="shared_string_waypoint">Titik jalan</string>
+    <string name="auto_zoom_far">Ke mid-range</string>
+    <string name="extra_maps_menu_group">Peta tambahan</string>
+    <string name="shared_preference">Terbagi</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">Nihil</string>
 </resources>

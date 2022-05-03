@@ -1418,7 +1418,7 @@
     <string name="wake_on_voice">Ligar o ecrã</string>
     <string name="configure_map">Configurar mapa</string>
     <string name="shared_string_waypoints">Pontos de rota</string>
-    <string name="shared_string_dismiss">Rejeitar</string>
+    <string name="shared_string_dismiss">Cancelar</string>
     <string name="rendering_category_others">Outros atributos do mapa</string>
     <string name="rendering_attr_showAccess_name">Mostrar restrições de acesso e portagens</string>
     <string name="rendering_attr_showSurfaceGrade_name">Mostrar qualidade da via</string>

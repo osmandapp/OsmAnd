@@ -4606,4 +4606,5 @@
 \n
 \n</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">中等</string>
+    <string name="turn_on_public_transport_description">開啟以在地圖上檢視大眾運輸路線。</string>
 </resources>

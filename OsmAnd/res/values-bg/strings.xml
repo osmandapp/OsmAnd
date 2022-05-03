@@ -53,7 +53,7 @@
     <string name="files_limit">Остават Ви %1$d файла</string>
     <string name="available_downloads_left">Остават %1$d файла за изтегляне</string>
     <string name="install_paid">Пълна версия</string>
-    <string name="cancel_route">Прекратяване намаршрута\?</string>
+    <string name="cancel_route">Прекратяване на маршрута\?</string>
     <string name="cancel_navigation">Спиране на навигацията</string>
     <string name="clear_destination">Изчистване на крайна цел</string>
     <string name="download_using_mobile_internet">Няма свързан Wi-Fi. Ще използвате ли текущата връзка с интернет, за да изтегляте\?</string>
@@ -2632,7 +2632,7 @@
     <string name="avoid_pt_types_descr">Изберете видовете обществен транспорт, който да бъде избягван при маршрутизиране:</string>
     <string name="use_osm_live_public_transport">Обществен транспорт в OsmAnd Live</string>
     <string name="subscription_on_hold_title">Абонаментът за OsmAnd Live е временно спрян</string>
-    <string name="public_transport_warning_title">Маршрутизацията с обществен транспорт е</string>
+    <string name="public_transport_warning_title">Маршрутизацията с обществен транспорт е в изпитателна фаза, възможни са грешки и неточности.</string>
     <string name="use_osm_live_public_transport_description">Включване на обществения транспорт в обновяванията от OsmAnd Live.</string>
     <string name="subscription_expired_title">Абонаментът за OsmAnd Live е изтекъл</string>
     <string name="subscription_paused_title">Абонаментът за OsmAnd Live е временно спрян</string>

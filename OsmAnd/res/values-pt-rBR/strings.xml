@@ -4506,4 +4506,27 @@
     <string name="gpx_no_routes_descr">Pode usar a ferramenta \"%1$s\" para adicionar rota ao arquivo.</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ícones em ampliações baixas</string>
     <string name="stop_download_desc">O download não está completo. Se você interromper o download agora, apenas parte dos blocos estará disponível para visualização.</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Iniciante</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Intermediário</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Avançado</string>
+    <string name="available_widgets">Widgets disponíveis</string>
+    <string name="no_widgets_descr">Adicione um ou mais widgets da lista de widgets disponíveis.</string>
+    <string name="no_widgets_here_yet">Ainda não há widgets aqui</string>
+    <string name="turn_on_public_transport_description">Ative para ver as rotas de transporte público no mapa.</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Especialista</string>
+    <string name="release_4_2">• Redesenho de widgets: novo Look &amp; Feel, agrupar por Páginas, alterar a ordem e combinar como quiser.
+\n
+\n• Caminhadas / Ciclismo / Rotas de viagem: toque no símbolo da rota e obtenha informações completas sobre a rota.
+\n
+\n• Grupos favoritos: defina a aparência padrão para novos pontos no grupo
+\n
+\n• Correções: atualização automática de mapas online
+\n
+\n</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Não saia da pista</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Somente se necessário</string>
+    <string name="routing_attr_freeride_policy_allow_name">Permitir</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Prefira fora da pista</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Sem preferência</string>
+    <string name="shared_string_symbol">Símbolo</string>
 </resources>
