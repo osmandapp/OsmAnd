@@ -633,6 +633,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			} else if (isCalculateSrtmMode()) {
 				calculateSrtmTrack();
 				setInfoType(InfoType.GRAPH);
+				infoTypeBtn.setSelectedItem(graphBtn);
 			} else if ((isFollowTrackMode() || isAttachRoadsMode()) && isShowSnapWarning()) {
 				enterApproximationMode(mapActivity);
 			}
