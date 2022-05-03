@@ -4374,4 +4374,10 @@
     <string name="shared_string_details">جزئیات</string>
     <string name="routing_attr_difficulty_preference_beginner_name">مبتدی</string>
     <string name="routing_attr_freeride_policy_allow_name">اجازه</string>
+    <string name="stop_download_desc">دانلود کامل نیست. اگر اکنون دانلود را قطع کنید، تنها بخشی از کاشی‌ها برای مشاهده در دسترس خواهد بود.</string>
+    <string name="icon_group_education">آموزش</string>
+    <string name="shared_storage_warning_description">به دلیل قوانین جدید اندروید، از نوامبر ۲۰۲۱ (OsmAnd 4.2) دسترسی به فضای ذخیره‌سازی مشترک را از دست خواهد داد.
+\n
+\nلطفا پوشه داده را از ذخیره‌سازی مشترک به حافظه در دسترس منتقل کنید، در غیر این صورت برنامه دسترسی به داده‌های شما مانند نقشه‌های آفلاین، جی‌پی‌اکس، غیره را از دست خواهد داد.</string>
+    <string name="routeInfo_tracktype_description">مسیر یا خط مسیر را با ترکیب سطح آن رنگ کنید. معمولاً زمانی اعمال می‌شود که شبکه جاده تا حد زیادی آسفالت نشده باشد.</string>
 </resources>
