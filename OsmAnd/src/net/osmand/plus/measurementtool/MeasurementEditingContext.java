@@ -200,6 +200,10 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		this.gpxData = gpxData;
 	}
 
+	public int getSelectedSegment() {
+		return selectedSegment;
+	}
+
 	public void setSelectedSegment(int selectedSegment) {
 		this.selectedSegment = selectedSegment;
 	}
