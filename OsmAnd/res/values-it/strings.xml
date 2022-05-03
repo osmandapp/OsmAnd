@@ -3681,7 +3681,7 @@
     <string name="track_coloring_solid">Solido</string>
     <string name="set_working_days_to_continue">Imposta i giorni lavorativi per continuare</string>
     <string name="plan_a_route">Pianifica un percorso</string>
-    <string name="add_to_a_track">Aggiungi una traccia</string>
+    <string name="add_to_a_track">Aggiungi ad una traccia</string>
     <string name="gpx_split_interval_descr">Seleziona l\'intervallo a cui i segnaposti con distanza o orario sulla traccia verranno mostrati.</string>
     <string name="gpx_split_interval_none_descr">Seleziona l\'opzione desiderata per la divisione: per tempo o per distanza.</string>
     <string name="gpx_direction_arrows">Frecce della direzione</string>
