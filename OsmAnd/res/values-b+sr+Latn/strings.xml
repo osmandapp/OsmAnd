@@ -1844,7 +1844,6 @@
     <string name="access_no_destination">Dodatak za pristupačnost: Odredište nije podešeno</string>
     <string name="use_osm_live_routing">Navođenje uživo OSM-a</string>
     <string name="use_osm_live_routing_description">Omogući navođenje izmena OSM-a uživo.</string>
-    <string name="av_def_action_choose">Na zahtev\?</string>
     <string name="srtm_paid_version_msg">Razmislite o plaćanju dodatka za „izohipse“ radi davanja podrške daljem razvoju.</string>
     <string name="precise_routing_mode">Tačno računanje putanja (sporo)</string>
     <string name="precise_routing_mode_descr">Računanje tačnih putanja bez grešaka. Radnja je ograničena daljinom i spora.</string>

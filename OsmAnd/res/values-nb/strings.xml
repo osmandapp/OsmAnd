@@ -1425,7 +1425,6 @@
     <string name="local_openstreetmap_act_title">OSM-endringer</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="intermediate_points_change_order">Endre rekkefølge</string>
-    <string name="av_def_action_choose">På forespørsel\?</string>
     <string name="av_def_action_video">Ta opp video</string>
     <string name="av_def_action_audio">Ta opp lyd</string>
     <string name="recording_context_menu_delete">Slett opptak</string>

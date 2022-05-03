@@ -3,7 +3,6 @@ package net.osmand.plus.views.mapwidgets;
 
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.hardware.GeomagneticField;
 import android.os.BatteryManager;
 import android.text.format.DateFormat;
 import android.view.View;
@@ -11,21 +10,19 @@ import android.view.View;
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
-import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.plus.views.mapwidgets.widgets.DistanceToPointWidget;
 import net.osmand.plus.views.mapwidgets.widgets.NextTurnWidget;
@@ -34,10 +31,12 @@ import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.router.TurnType;
 
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.MAX_SPEED;
 
 public class RouteInfoWidgetsFactory {
 
@@ -169,71 +168,6 @@ public class RouteInfoWidgetsFactory {
 		return nextTurnInfo;
 	}
 
-	public TextInfoWidget createTimeControl(@NonNull MapActivity mapActivity, boolean intermediate) {
-		final OsmandPreference<Boolean> showArrival = intermediate
-				? settings.SHOW_INTERMEDIATE_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME
-				: settings.SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME;
-
-		final TextInfoWidget leftTimeControl = new RightTextInfoWidget(mapActivity) {
-			private long cachedLeftTime = 0;
-			
-			@Override
-			public void updateInfo(@Nullable DrawSettings drawSettings) {
-				setTimeControlIcons(this, showArrival.get(), intermediate);
-				int time = 0;
-				if (routingHelper != null && routingHelper.isRouteCalculated()) {
-					time = intermediate ? routingHelper.getLeftTimeNextIntermediate() : routingHelper.getLeftTime();
-
-					if (time != 0) {
-						if (showArrival.get()) {
-							long toFindTime = time * 1000L + System.currentTimeMillis();
-							if (Math.abs(toFindTime - cachedLeftTime) > 30000) {
-								cachedLeftTime = toFindTime;
-								setContentTitle(getString(R.string.access_arrival_time));
-								if (DateFormat.is24HourFormat(app)) {
-									setText(DateFormat.format("k:mm", toFindTime).toString(), null); //$NON-NLS-1$
-								} else {
-									setText(DateFormat.format("h:mm", toFindTime).toString(),
-											DateFormat.format("aa", toFindTime).toString()); //$NON-NLS-1$
-								}
-							}
-						} else {
-							if (Math.abs(time - cachedLeftTime) > 30) {
-								cachedLeftTime = time;
-								int hours = time / (60 * 60);
-								int minutes = (time / 60) % 60;
-								setContentTitle(getString(R.string.map_widget_time));
-								setText(String.format("%d:%02d", hours, minutes), null); //$NON-NLS-1$
-							}
-						}
-					}
-				}
-				if (time == 0 && cachedLeftTime != 0) {
-					cachedLeftTime = 0;
-					setText(null, null);
-				}
-			}
-		};
-		leftTimeControl.setOnClickListener(v -> {
-			showArrival.set(!showArrival.get());
-			setTimeControlIcons(leftTimeControl, showArrival.get(), intermediate);
-			mapActivity.refreshMap();
-		});
-		leftTimeControl.setText(null, null);
-		setTimeControlIcons(leftTimeControl, showArrival.get(), intermediate);
-		return leftTimeControl;
-	}
-
-	private void setTimeControlIcons(TextInfoWidget timeControl, boolean showArrival, boolean intermediate) {
-		int iconLight = intermediate
-				? R.drawable.widget_intermediate_time_day
-				: showArrival ? R.drawable.widget_time_day : R.drawable.widget_time_to_distance_day;
-		int iconDark = intermediate
-				? R.drawable.widget_intermediate_time_night
-				: showArrival ? R.drawable.widget_time_night : R.drawable.widget_time_to_distance_night;
-		timeControl.setIcons(iconLight, iconDark);
-	}
-
 	public TextInfoWidget createPlainTimeControl(@NonNull MapActivity mapActivity) {
 		TextInfoWidget plainTimeControl = new RightTextInfoWidget(mapActivity) {
 			private long cachedLeftTime = 0;
@@ -253,7 +187,7 @@ public class RouteInfoWidgetsFactory {
 			}
 		};
 		plainTimeControl.setText(null, null);
-		plainTimeControl.setIcons(R.drawable.widget_time_day, R.drawable.widget_time_night);
+		plainTimeControl.setIcons(CURRENT_TIME);
 		return plainTimeControl;
 	}
 
@@ -334,7 +268,7 @@ public class RouteInfoWidgetsFactory {
 				return true;
 			}
 		};
-		speedControl.setIcons(R.drawable.widget_max_speed_day, R.drawable.widget_max_speed_night);
+		speedControl.setIcons(MAX_SPEED);
 		speedControl.setText(null, null);
 		return speedControl;
 	}
@@ -375,7 +309,7 @@ public class RouteInfoWidgetsFactory {
 				return true;
 			}
 		};
-		speedControl.setIcons(R.drawable.widget_speed_day, R.drawable.widget_speed_night);
+		speedControl.setIcons(CURRENT_SPEED);
 		speedControl.setText(null, null);
 		return speedControl;
 	}
@@ -429,105 +363,8 @@ public class RouteInfoWidgetsFactory {
 		return distanceControl;
 	}
 
-	public TextInfoWidget createBearingControl(@NonNull MapActivity mapActivity) {
-		int bearingResId = R.drawable.widget_bearing_day;
-		int bearingNightResId = R.drawable.widget_bearing_night;
-		int relativeBearingResId = R.drawable.widget_relative_bearing_day;
-		int relativeBearingNightResId = R.drawable.widget_relative_bearing_night;
-		OsmandPreference<Boolean> showRelativeBearing = settings.SHOW_RELATIVE_BEARING_OTHERWISE_REGULAR_BEARING;
-
-		TextInfoWidget bearingControl = new RightTextInfoWidget(mapActivity) {
-			private int cachedDegrees;
-			private float MIN_SPEED_FOR_HEADING = 1f;
-
-			private LatLon getNextTargetPoint() {
-				List<TargetPoint> points = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
-				return points.isEmpty() ? null : points.get(0).point;
-			}
-
-			@Override
-			public void updateInfo(DrawSettings drawSettings) {
-				boolean relative = showRelativeBearing.get();
-				boolean modeChanged = setIcons(relative ? relativeBearingResId : bearingResId, relative ? relativeBearingNightResId : bearingNightResId);
-				setContentTitle(relative ? R.string.map_widget_bearing : R.string.map_widget_magnetic_bearing);
-				int b = getBearing(relative);
-				if (isUpdateNeeded() || degreesChanged(cachedDegrees, b) || modeChanged) {
-					cachedDegrees = b;
-					if (b != -1000) {
-						setText(OsmAndFormatter.getFormattedAzimuth(b, app) + (relative ? "" : " M"), null);
-					} else {
-						setText(null, null);
-					}
-				}
-			}
-
-			@Override
-			public boolean isAngularUnitsDepended() {
-				return true;
-			}
-
-			public int getBearing(boolean relative) {
-				int d = -1000;
-				Location myLocation = locationProvider.getLastKnownLocation();
-				LatLon l = getNextTargetPoint();
-				if (l == null) {
-					List<MapMarker> markers = app.getMapMarkersHelper().getMapMarkers();
-					if (markers.size() > 0) {
-						l = markers.get(0).point;
-					}
-				}
-				if (myLocation != null && l != null) {
-					Location dest = new Location("");
-					dest.setLatitude(l.getLatitude());
-					dest.setLongitude(l.getLongitude());
-					dest.setBearing(myLocation.bearingTo(dest));
-					GeomagneticField destGf = new GeomagneticField((float) dest.getLatitude(), (float) dest.getLongitude(), (float) dest.getAltitude(),
-							System.currentTimeMillis());
-					float bearingToDest = dest.getBearing() - destGf.getDeclination();
-					if (relative) {
-						float b = -1000;
-						Float heading = locationProvider.getHeading();
-						if ((myLocation.getSpeed() < MIN_SPEED_FOR_HEADING || !myLocation.hasBearing())
-								&& heading != null) {
-							b = heading;
-						} else if (myLocation.hasBearing()) {
-							GeomagneticField myLocGf = new GeomagneticField((float) myLocation.getLatitude(), (float) myLocation.getLongitude(), (float) myLocation.getAltitude(),
-									System.currentTimeMillis());
-							b = myLocation.getBearing() - myLocGf.getDeclination();
-						}
-						if (b > -1000) {
-							bearingToDest -= b;
-							if (bearingToDest > 180f) {
-								bearingToDest -= 360f;
-							} else if (bearingToDest < -180f) {
-								bearingToDest += 360f;
-							}
-							d = (int) bearingToDest;
-						}
-					} else {
-						d = (int) bearingToDest;
-					}
-				}
-				return d;
-			}
-		};
-
-		bearingControl.setOnClickListener(v -> {
-			showRelativeBearing.set(!showRelativeBearing.get());
-			mapActivity.refreshMap();
-		});
-		bearingControl.setText(null, null);
-		bearingControl.setIcons(!showRelativeBearing.get() ? bearingResId : relativeBearingResId,
-				!showRelativeBearing.get() ? bearingNightResId : relativeBearingNightResId);
-		return bearingControl;
-	}
-
 	public static boolean distChanged(int oldDist, int dist) {
 		return oldDist == 0 || Math.abs(oldDist - dist) >= 10;
-	}
-
-	public static boolean degreesChanged(int oldDegrees, int degrees) {
-		return Math.abs(oldDegrees - degrees) >= 1;
 	}
 
 	public static AlarmWidget createAlarmInfoControl(OsmandApplication app, MapActivity map) {

@@ -32,21 +32,25 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import static net.osmand.plus.views.mapwidgets.WidgetParams.ALTITUDE;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.ARRIVAL_TIME;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.BATTERY;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.BEARING;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_TIME;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.DISTANCE_TO_DESTINATION;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.GPS_INFO;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_DISTANCE;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_ARRIVAL_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_TIME_TO_GO;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.MAGNETIC_BEARING;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.MAX_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.NAVIGATION_TIME;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.SMALL_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.PLAIN_TIME;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.RADIUS_RULER;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.RELATIVE_BEARING;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.SECOND_NEXT_TURN;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_1;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_2;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.SMALL_NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TIME_TO_GO;
 
 public class ApplicationMode {
 
@@ -210,30 +214,35 @@ public class ApplicationMode {
 		regWidgetAvailability(SECOND_NEXT_TURN.id, exceptDefault);
 
 		// right
-		regWidgetVisibility(INTERMEDIATE_DISTANCE.id, all);
+		regWidgetVisibility(INTERMEDIATE_DESTINATION.id, all);
 		regWidgetVisibility(DISTANCE_TO_DESTINATION.id, all);
-		regWidgetVisibility(NAVIGATION_TIME.id, all);
-		regWidgetVisibility(INTERMEDIATE_TIME.id, all);
+		regWidgetVisibility(ARRIVAL_TIME.id, all);
+		regWidgetVisibility(TIME_TO_GO.id, none);
+		regWidgetVisibility(INTERMEDIATE_ARRIVAL_TIME.id, all);
+		regWidgetVisibility(INTERMEDIATE_TIME_TO_GO.id, none);
 		regWidgetVisibility(CURRENT_SPEED.id, CAR, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT, TRUCK,
 				MOTORCYCLE, HORSE);
 		regWidgetVisibility(MAX_SPEED.id, CAR, TRUCK, MOTORCYCLE);
 		regWidgetVisibility(ALTITUDE.id, PEDESTRIAN, BICYCLE);
-		regWidgetAvailability(INTERMEDIATE_DISTANCE.id, all);
+		regWidgetAvailability(INTERMEDIATE_DESTINATION.id, all);
 		regWidgetAvailability(DISTANCE_TO_DESTINATION.id, all);
-		regWidgetAvailability(NAVIGATION_TIME.id, all);
-		regWidgetAvailability(INTERMEDIATE_TIME.id, all);
+		regWidgetAvailability(ARRIVAL_TIME.id, all);
+		regWidgetAvailability(TIME_TO_GO.id, all);
+		regWidgetAvailability(INTERMEDIATE_ARRIVAL_TIME.id, all);
+		regWidgetAvailability(INTERMEDIATE_TIME_TO_GO.id, all);
 		regWidgetAvailability(CURRENT_SPEED.id, all);
 		regWidgetAvailability(MAX_SPEED.id, all);
 		regWidgetAvailability(ALTITUDE.id, all);
 
 		// all = null everything
-		regWidgetAvailability(SIDE_MARKER_1.id, none);
-		regWidgetAvailability(SIDE_MARKER_1.id, none);
+		regWidgetAvailability(SIDE_MARKER_1.id, all);
+		regWidgetAvailability(SIDE_MARKER_2.id, all);
 		regWidgetAvailability(GPS_INFO.id, all);
 		regWidgetAvailability(BATTERY.id, all);
-		regWidgetAvailability(BEARING.id, all);
+		regWidgetAvailability(RELATIVE_BEARING.id, all);
+		regWidgetAvailability(MAGNETIC_BEARING.id, all);
 		regWidgetAvailability(RADIUS_RULER.id, all);
-		regWidgetAvailability(PLAIN_TIME.id, all);
+		regWidgetAvailability(CURRENT_TIME.id, all);
 	}
 
 	// returns modifiable ! Set<ApplicationMode> to exclude non-wanted derived

@@ -792,7 +792,6 @@
     <string name="intermediate_points_change_order">순서 변경</string>
     <string name="srtm_paid_version_msg">등고선 추가 개발을 지원하기 위해 구글플레이에서 플러그인을 구입하시기 바랍니다 .</string>
     <string name="srtm_paid_version_title">등고선 플러그인</string>
-    <string name="av_def_action_choose">요청에 대한 선택</string>
     <string name="av_def_action_video">영상 녹화</string>
     <string name="av_def_action_audio">소리 녹음</string>
     <string name="av_widget_action_descr">기본 위젯의 동작을 선택합니다</string>

@@ -847,7 +847,6 @@
     <string name="stop_routing_confirm">¿Quies parar la navegación\?</string>
     <string name="clear_dest_confirm">Remove your destination (and intermediate destinations)\?</string>
     <string name="recording_context_menu_precord">Take a photo</string>
-    <string name="av_def_action_choose">¿Baxo demanda\?</string>
     <string name="av_def_action_video">Record video</string>
     <string name="av_def_action_audio">Record audio</string>
     <string name="av_widget_action_descr">Default widget action:</string>

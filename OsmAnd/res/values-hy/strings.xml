@@ -92,7 +92,6 @@
     <string name="local_indexes_cat_srtm">Կոնտուրային գծերի/եզրագծերի տվյալներ</string>
     <string name="precise_routing_mode_descr">Միացնել ճշգրիտ երթուղիների հաշվարկի ռեժիմը։ Այս ռեժիմը դեր սահմանափակված է հեռավորությամբ և դանդախ է։</string>
     <string name="dropbox_plugin_name">Dropbox փլագին</string>
-    <string name="av_def_action_choose">Ընտրել ըստ հարցման\?</string>
     <string name="av_widget_action_descr">Ընտրել default Widget գործողություն՝</string>
     <string name="av_widget_action">Default վիդջետի գործողություն</string>
     <string name="recording_is_recorded">Կատարվում է աուդիո/վիդեո ձայնագրում, դադարեցնելու համար սեխմեք AV վիջետը։</string>

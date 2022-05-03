@@ -1000,7 +1000,6 @@
     <string name="max_speed_none">არა</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="local_indexes_cat_srtm">კონტურული ხაზები</string>
-    <string name="av_def_action_choose">მოთხოვნისას\?</string>
     <string name="av_use_external_camera_descr">ფოტოებისათვის სისტემური აპლიკაციის გამოყენება.</string>
     <string name="av_use_external_camera">კამერის აპლიკაციის გამოყენება</string>
     <string name="osmand_play_title_30_chars">OsmAnd რუკები &amp; ნავიგაცია</string>

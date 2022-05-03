@@ -120,7 +120,6 @@
     <string name="max_speed_none">Ingen</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="dropbox_plugin_name">Dropbox udvidelse</string>
-    <string name="av_def_action_choose">På anmodning\?</string>
     <string name="av_use_external_camera_descr">Brug system-app til fotos.</string>
     <string name="av_use_external_camera">Brug kamera</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>

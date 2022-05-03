@@ -28,6 +28,7 @@ import androidx.annotation.Nullable;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_DEV;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.FPS;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
@@ -116,8 +117,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null && mapInfoLayer.getSideWidget(FPSTextInfoWidget.class) == null) {
 			FPSTextInfoWidget fps = new FPSTextInfoWidget(mapActivity);
-			fps.setIcons(R.drawable.widget_fps_day, R.drawable.widget_fps_night);
-			mapInfoLayer.registerWidget(WidgetParams.FPS, fps, WidgetsPanel.RIGHT);
+			fps.setIcons(FPS);
+			mapInfoLayer.registerWidget(FPS, fps, WidgetsPanel.RIGHT);
 			mapInfoLayer.recreateControls();
 		}
 	}

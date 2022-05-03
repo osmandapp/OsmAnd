@@ -895,7 +895,6 @@
     <string name="intermediate_points_change_order">變動排列</string>
     <string name="srtm_paid_version_msg">請考慮付款購買「等高線」外掛程式以支援未來開發。</string>
     <string name="srtm_paid_version_title">等高線外掛元件</string>
-    <string name="av_def_action_choose">根據要求？</string>
     <string name="av_def_action_video">錄取視訊</string>
     <string name="av_def_action_audio">錄取音訊</string>
     <string name="av_widget_action_descr">預設小工具動作：</string>

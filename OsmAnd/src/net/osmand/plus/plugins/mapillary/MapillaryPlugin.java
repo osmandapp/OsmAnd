@@ -31,6 +31,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
@@ -243,7 +244,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	private TextInfoWidget createMonitoringControl(final MapActivity map) {
 		mapillaryControl = new RightTextInfoWidget(map);
 		mapillaryControl.setText(map.getString(R.string.mapillary), "");
-		mapillaryControl.setIcons(R.drawable.widget_mapillary_day, R.drawable.widget_mapillary_night);
+		mapillaryControl.setIcons(WidgetParams.MAPILLARY);
 		mapillaryControl.setOnClickListener(v -> openMapillary(map, null));
 
 		return mapillaryControl;
@@ -251,9 +252,10 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	public void setWidgetVisible(MapActivity mapActivity, boolean visible) {
 		if (mapillaryWidgetRegInfo != null) {
+			MapWidgetRegistry widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
 			final List<ApplicationMode> allModes = ApplicationMode.allPossibleValues();
 			for (ApplicationMode mode : allModes) {
-				mapActivity.getMapLayers().getMapWidgetRegistry().setVisibility(mode, mapillaryWidgetRegInfo, visible);
+				widgetRegistry.enableDisableWidgetForMode(mode, mapillaryWidgetRegInfo, visible);
 			}
 			MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
 			if (mil != null) {

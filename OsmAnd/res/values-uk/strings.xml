@@ -799,7 +799,6 @@
     <string name="recording_error">Помилка запису</string>
     <string name="recording_camera_not_available">Камера недоступна</string>
     <string name="recording_default_name">Запис</string>
-    <string name="av_def_action_choose">За запитом\?</string>
     <string name="recording_is_recorded">Аудіо/відео зараз записується. Для зупинки натисніть на AV-віджет.</string>
     <string name="recording_context_menu_arecord">Створити аудіопримітку</string>
     <string name="recording_context_menu_vrecord">Створити відеопримітку</string>

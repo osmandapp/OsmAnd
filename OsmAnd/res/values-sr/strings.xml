@@ -894,7 +894,6 @@
     <string name="precise_routing_mode_descr">Рачунање тачних путања без грешака. Радња је ограничена даљином и спора.</string>
     <string name="precise_routing_mode">Тачно рачунање путања (споро)</string>
     <string name="srtm_paid_version_msg">Размислите о плаћању додатка за „изохипсе“ ради давања подршке даљем развоју.</string>
-    <string name="av_def_action_choose">На захтев\?</string>
     <string name="av_video_format_descr">Излазни видео формат:</string>
     <string name="av_video_format">Облик излазног снимка</string>
     <string name="av_use_external_recorder_descr">Користи системску апликацију за видео снимање.</string>

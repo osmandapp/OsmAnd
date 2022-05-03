@@ -3,7 +3,6 @@ package net.osmand.plus.views.mapwidgets;
 import android.content.Context;
 
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
@@ -107,9 +106,14 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 				: messageId;
 	}
 
+	@Nullable
+	public String getExternalProviderPackage() {
+		return null;
+	}
+
 	public abstract boolean isEnabledForAppMode(@NonNull ApplicationMode appMode);
 
-	public abstract void showHideForAppMode(@NonNull ApplicationMode appMode, boolean show);
+	public abstract void enableDisableForMode(@NonNull ApplicationMode appMode, boolean enabled);
 
 	@Override
 	public int hashCode() {

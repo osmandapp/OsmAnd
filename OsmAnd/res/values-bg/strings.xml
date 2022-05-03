@@ -99,7 +99,6 @@
     <string name="intermediate_points_change_order">Смяна на реда</string>
     <string name="srtm_paid_version_msg">Можете да закупите добавката Contour lines чрез Market и да подпомогнете нейното бъдещо развитие.</string>
     <string name="srtm_paid_version_title">Добавка за контури (Contour lines)</string>
-    <string name="av_def_action_choose">При поискване\?</string>
     <string name="av_def_action_video">Запиши видео</string>
     <string name="av_def_action_audio">Запиши аудио</string>
     <string name="av_widget_action_descr">Изберете действие по подразбиране:</string>

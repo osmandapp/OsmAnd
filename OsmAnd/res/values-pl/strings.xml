@@ -942,7 +942,6 @@
     <string name="shared_string_map">Mapa</string>
     <string name="item_checked">zaznaczone</string>
     <string name="item_unchecked">niezaznaczone</string>
-    <string name="av_def_action_choose">Na żądanie\?</string>
     <string name="access_arrival_time">Czas przybycia</string>
     <string name="map_widget_gps_info">Dane GPS</string>
     <string name="layer_hillshade">Warstwa mapy cieniowanej</string>

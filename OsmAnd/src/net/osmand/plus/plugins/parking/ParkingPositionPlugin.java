@@ -511,7 +511,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			}
 		});
 		parkingPlaceControl.setText(null, null);
-		parkingPlaceControl.setIcons(R.drawable.widget_parking_day, R.drawable.widget_parking_night);
+		parkingPlaceControl.setIcons(PARKING);
 		return parkingPlaceControl;
 	}
 

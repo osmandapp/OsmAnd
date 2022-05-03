@@ -88,6 +88,7 @@ public class ElevationProfileWidget extends MapWidget {
 	public ElevationProfileWidget(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
 		settings.MAP_LINKED_TO_LOCATION.addListener(linkedToLocationListener);
+		updateVisibility(false);
 	}
 
 	@Override

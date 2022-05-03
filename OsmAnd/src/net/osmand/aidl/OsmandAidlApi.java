@@ -16,9 +16,6 @@ import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.view.KeyEvent;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -138,6 +135,9 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_LAYER;
 import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_WIDGET;
 import static net.osmand.aidl.ConnectedApp.AIDL_OBJECT_ID;
@@ -168,6 +168,8 @@ public class OsmandAidlApi {
 	public static final int KEY_ON_VOICE_MESSAGE = 8;
 	public static final int KEY_ON_KEY_EVENT = 16;
 	public static final int KEY_ON_LOGCAT_MESSAGE = 32;
+
+	public static final String WIDGET_ID_PREFIX = "aidl_widget_";
 
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlApi.class);
 
@@ -380,17 +382,19 @@ public class OsmandAidlApi {
 				if (mapActivity != null && widgetId != null && packName != null) {
 					ConnectedApp connectedApp = connectedApps.get(packName);
 					if (connectedApp != null) {
-						AidlMapWidgetWrapper widget = connectedApp.getWidgets().get(widgetId);
+						AidlMapWidgetWrapper widgetData = connectedApp.getWidgets().get(widgetId);
 						MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
-						if (widget != null && layer != null) {
-							ApplicationMode.regWidgetVisibility(widget.getId(), (ApplicationMode[]) null);
-							TextInfoWidget control = connectedApp.createWidgetControl(mapActivity, widgetId);
-							connectedApp.getWidgetControls().put(widgetId, control);
+						if (widgetData != null && layer != null) {
+							ApplicationMode.regWidgetVisibility(widgetData.getId(), (ApplicationMode[]) null);
+							TextInfoWidget widget = connectedApp.createWidgetControl(mapActivity, widgetId);
+							connectedApp.getWidgetControls().put(widgetId, widget);
 
-							int iconId = AndroidUtils.getDrawableId(app, widget.getMenuIconName());
+							int iconId = AndroidUtils.getDrawableId(app, widgetData.getMenuIconName());
 							int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
-							String widgetKey = "aidl_widget_" + widgetId;
-							layer.registerWidget(widgetKey, control, menuIconId, widget.getMenuTitle(), WidgetsPanel.RIGHT, widget.getOrder());
+							String widgetKey = WIDGET_ID_PREFIX + widgetId;
+							layer.registerExternalWidget(widgetKey, widget, menuIconId,
+									widgetData.getMenuTitle(), connectedApp.getPack(),
+									WidgetsPanel.RIGHT, widgetData.getOrder());
 							layer.recreateControls();
 						}
 					}
@@ -1924,6 +1928,7 @@ public class OsmandAidlApi {
 		app.getAppCustomization().registerNavDrawerItems(activity, adapter);
 	}
 
+	@Nullable
 	public ConnectedApp getConnectedApp(@NonNull String pack) {
 		List<ConnectedApp> connectedApps = getConnectedApps();
 		for (ConnectedApp connectedApp : connectedApps) {

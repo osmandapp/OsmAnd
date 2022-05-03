@@ -38,13 +38,18 @@ import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetGroup;
+import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment;
+import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment.AddWidgetListener;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ItemType;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ListItem;
-import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.WidgetAdapterListener;
+import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.WidgetAdapterDragListener;
+import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.WidgetsAdapterActionsListener;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.ActionButtonViewHolder.ActionButtonInfo;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AddedWidgetViewHolder.AddedWidgetUiInfo;
-import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableWidgetViewHolder.AvailableWidgetUiInfo;
+import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableItemViewHolder.AvailableWidgetUiInfo;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.PageViewHolder.PageUiInfo;
 import net.osmand.util.Algorithms;
 
@@ -57,7 +62,8 @@ import java.util.TreeMap;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 
-public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
+public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
+		CopyAppModePrefsListener, ResetAppModePrefsListener, AddWidgetListener {
 
 	public static final String TAG = ReorderWidgetsFragment.class.getSimpleName();
 
@@ -142,7 +148,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 		ItemTouchHelper touchHelper = new ItemTouchHelper(new ReorderItemTouchHelperCallback(adapter));
 		touchHelper.attachToRecyclerView(recyclerView);
 
-		adapter.setListener(new WidgetAdapterListener() {
+		adapter.setDragListener(new WidgetAdapterDragListener() {
 			private int fromPosition;
 
 			@Override
@@ -158,6 +164,9 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 					adapter.notifyDataSetChanged();
 				}
 			}
+		});
+
+		adapter.setActionsListener(new WidgetsAdapterActionsListener() {
 
 			@Override
 			public void onPageDeleted(int page, int position) {
@@ -168,7 +177,40 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 				UiUtilities.setupSnackbar(snackbar, nightMode);
 				snackbar.show();
 			}
+
+			@Override
+			public void showWidgetGroupInfo(@NonNull WidgetGroup widgetGroup, @NonNull List<String> addedGroupWidgets) {
+				FragmentManager fragmentManager = getSupportFragmentManager();
+				if (fragmentManager != null) {
+					AddWidgetFragment.showGroupDialog(fragmentManager, ReorderWidgetsFragment.this,
+							selectedAppMode, widgetGroup, addedGroupWidgets);
+				}
+			}
+
+			@Override
+			public void showWidgetInfo(@NonNull WidgetParams widget) {
+				FragmentManager fragmentManager = getSupportFragmentManager();
+				if (fragmentManager != null) {
+					AddWidgetFragment.showWidgetDialog(fragmentManager, ReorderWidgetsFragment.this,
+							selectedAppMode, widget, Collections.emptyList());
+				}
+			}
+
+			@Override
+			public void showExternalWidgetIndo(@NonNull String widgetId, @NonNull String externalProviderPackage) {
+				FragmentManager fragmentManager = getSupportFragmentManager();
+				if (fragmentManager != null) {
+					AddWidgetFragment.showExternalWidgetDialog(fragmentManager, ReorderWidgetsFragment.this,
+							selectedAppMode, widgetId, externalProviderPackage, Collections.emptyList());
+				}
+			}
+
+			@Nullable
+			private FragmentManager getSupportFragmentManager() {
+				return getActivity() != null ? getActivity().getSupportFragmentManager() : null;
+			}
 		});
+
 		recyclerView.setAdapter(adapter);
 		updateItems();
 	}
@@ -247,7 +289,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 		List<ListItem> widgetsItems = new ArrayList<>();
 
 		WidgetsPanel selectedPanel = dataHolder.getSelectedPanel();
-		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(selectedAppMode, selectedPanel, AVAILABLE_MODE);
+		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(selectedAppMode, AVAILABLE_MODE, selectedPanel);
 		for (MapWidgetInfo widgetInfo : widgets) {
 			boolean enabled = dataHolder.getOrders().containsKey(widgetInfo.key);
 			if (!enabled) {
@@ -292,10 +334,12 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 
 	@NonNull
 	private List<ListItem> createAvailableWidgetsList() {
-		List<ListItem> widgetsItems = new ArrayList<>();
+		Map<Integer, ListItem> defaultWidgetsItems = new TreeMap<>();
+		List<ListItem> externalWidgetsItems = new ArrayList<>();
+		List<WidgetGroup> availableGroups = new ArrayList<>();
 
 		WidgetsPanel selectedPanel = dataHolder.getSelectedPanel();
-		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(selectedAppMode, selectedPanel, AVAILABLE_MODE);
+		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(selectedAppMode, AVAILABLE_MODE, selectedPanel);
 
 		for (MapWidgetInfo widgetInfo : widgets) {
 			boolean enabled = dataHolder.getOrders().containsKey(widgetInfo.key);
@@ -303,23 +347,39 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 				continue;
 			}
 
-			int order = selectedPanel.getOriginalWidgetOrder(widgetInfo.key);
-			AvailableWidgetUiInfo info = new AvailableWidgetUiInfo();
-			info.key = widgetInfo.key;
-			info.title = widgetInfo.getTitle(app);
-			info.iconId = widgetInfo.getMapIconId(nightMode);
-			info.order = order;
-			info.info = widgetInfo;
-			widgetsItems.add(new ListItem(ItemType.AVAILABLE_WIDGET, info));
+			int originalWidgetOrder = selectedPanel.getOriginalWidgetOrder(widgetInfo.key);
+			WidgetParams widgetParams = WidgetParams.getById(widgetInfo.key);
+			boolean defaultWidget = widgetParams != null;
+			if (defaultWidget) {
+				WidgetGroup group = widgetParams.getGroup();
+				if (group != null && !availableGroups.contains(group)) {
+					availableGroups.add(group);
+					defaultWidgetsItems.put(group.getOrder(), new ListItem(ItemType.AVAILABLE_GROUP, group));
+				} else if (group == null) {
+					AvailableWidgetUiInfo availableWidgetInfo = getWidgetInfo(widgetInfo);
+					defaultWidgetsItems.put(originalWidgetOrder, new ListItem(ItemType.AVAILABLE_WIDGET, availableWidgetInfo));
+				}
+			} else {
+				AvailableWidgetUiInfo availableWidgetInfo = getWidgetInfo(widgetInfo);
+				externalWidgetsItems.add(new ListItem(ItemType.AVAILABLE_WIDGET, availableWidgetInfo));
+			}
 		}
 
-		Collections.sort(widgetsItems, (o1, o2) -> {
-			AvailableWidgetUiInfo info1 = ((AvailableWidgetUiInfo) o1.value);
-			AvailableWidgetUiInfo info2 = ((AvailableWidgetUiInfo) o2.value);
-			return info1 == null || info2 == null ? 0 : Integer.compare(info1.order, info2.order);
-		});
+		List<ListItem> widgetItems = new ArrayList<>();
+		widgetItems.addAll(defaultWidgetsItems.values());
+		widgetItems.addAll(externalWidgetsItems);
+		return widgetItems;
+	}
 
-		return widgetsItems;
+	@NonNull
+	private AvailableWidgetUiInfo getWidgetInfo(@NonNull MapWidgetInfo widgetInfo) {
+		AvailableWidgetUiInfo info = new AvailableWidgetUiInfo();
+		info.key = widgetInfo.key;
+		info.title = widgetInfo.getTitle(app);
+		info.iconId = widgetInfo.getMapIconId(nightMode);
+		info.order = dataHolder.getSelectedPanel().getOriginalWidgetOrder(widgetInfo.key);
+		info.info = widgetInfo;
+		return info;
 	}
 
 	@NonNull
@@ -377,7 +437,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 		for (MapWidgetInfo widget : widgetRegistry.getWidgetsForPanel(panel)) {
 			boolean enabledFromApply = enabledWidgetsIds.contains(widget.key);
 			if (widget.isEnabledForAppMode(selectedAppMode) != enabledFromApply) {
-				widgetRegistry.setVisibility(widget, enabledFromApply);
+				widgetRegistry.enableDisableWidget(widget, enabledFromApply);
 			}
 		}
 	}
@@ -398,6 +458,16 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements CopyAp
 	public void resetAppModePrefs(ApplicationMode appMode) {
 		dataHolder.initOrders(app, selectedAppMode, true);
 		updateItems();
+	}
+
+	@Override
+	public void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds) {
+		for (String widgetId : widgetsIds) {
+			MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
+			if (widgetInfo != null) {
+				adapter.addWidget(widgetInfo);
+			}
+		}
 	}
 
 	@Override

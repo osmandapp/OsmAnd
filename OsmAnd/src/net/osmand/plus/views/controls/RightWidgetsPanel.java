@@ -162,6 +162,7 @@ public class RightWidgetsPanel extends FrameLayout {
 		this.nightMode = textState.night;
 		borderPaint.setColor(ContextCompat.getColor(getContext(), textState.rightBorderColorId));
 		updateDots();
+		invalidate();
 	}
 
 	@Override

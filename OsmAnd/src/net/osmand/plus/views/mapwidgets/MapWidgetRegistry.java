@@ -5,13 +5,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
@@ -28,12 +25,10 @@ import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -62,17 +57,12 @@ public class MapWidgetRegistry {
 	private final OsmandSettings settings;
 
 	private final Map<WidgetsPanel, Set<MapWidgetInfo>> allWidgets = new HashMap<>();
-	private final Map<ApplicationMode, Set<String>> sideWidgetsVisibilityFromSettings = new LinkedHashMap<>();
 
 	private Set<WidgetsVisibilityListener> visibilityListeners = new HashSet<>();
 
 	public MapWidgetRegistry(OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
-		loadVisibleElementsFromSettings();
-		StateChangedListener<String> listener = change -> updateVisibleSideWidgets();
-		settings.AVAILABLE_APP_MODES.addListener(listener);
-		settings.MAP_INFO_CONTROLS.addListener(listener);
 	}
 
 	public void populateControlsContainer(@NonNull ViewGroup container,
@@ -84,6 +74,8 @@ public class MapWidgetRegistry {
 		for (MapWidgetInfo widgetInfo : widgets) {
 			if (widgetInfo.isEnabledForAppMode(mode)) {
 				widgetsToShow.add(widgetInfo.widget);
+			} else {
+				widgetInfo.widget.detachView();
 			}
 		}
 
@@ -156,21 +148,17 @@ public class MapWidgetRegistry {
 	                                    @DrawableRes int nightSettingIconId,
 	                                    @StringRes int messageId,
 	                                    @Nullable String message,
+	                                    @Nullable String externalProviderPackage,
 	                                    int page,
 	                                    int order,
 	                                    @NonNull WidgetsPanel widgetPanel) {
 		MapWidgetInfo widgetInfo;
 		if (widget instanceof TextInfoWidget) {
-			widgetInfo = new SideWidgetInfo(key, widget, widgetState, daySettingsIconId, nightSettingIconId,
+			TextInfoWidget textInfoWidget = ((TextInfoWidget) widget);
+			widgetInfo = new SideWidgetInfo(key, textInfoWidget, widgetState, daySettingsIconId, nightSettingIconId,
 					messageId, message, page, order, widgetPanel);
-			processVisibleModes(widgetInfo);
-			TextInfoWidget textWidget = ((TextInfoWidget) widget);
-			if (message != null) {
-				textWidget.setContentTitle(message);
-			} else if (messageId != MapWidgetInfo.INVALID_ID) {
-				textWidget.setContentTitle(messageId);
-			} else if (widgetState != null) {
-				textWidget.setContentTitle(widgetState.getMenuTitleId());
+			if (!Algorithms.isEmpty(externalProviderPackage)) {
+				((SideWidgetInfo) widgetInfo).setExternalProviderPackage(externalProviderPackage);
 			}
 		} else {
 			widgetInfo = new CenterWidgetInfo(key, widget, widgetState, daySettingsIconId, nightSettingIconId,
@@ -182,75 +170,27 @@ public class MapWidgetRegistry {
 		return widgetInfo;
 	}
 
-	private void processVisibleModes(@NonNull MapWidgetInfo widgetInfo) {
-		String widgetId = widgetInfo.key;
-		for (ApplicationMode appMode : ApplicationMode.values(app)) {
-			boolean visible = appMode.isWidgetVisibleByDefault(widgetId);
-			Set<String> sideWidgetsVisibility = sideWidgetsVisibilityFromSettings.get(appMode);
-			if (sideWidgetsVisibility != null) {
-				if (isWidgetVisible(widgetId, sideWidgetsVisibility)) {
-					visible = true;
-				} else if (sideWidgetsVisibility.contains(HIDE_PREFIX + widgetId)) {
-					visible = false;
-				}
-			}
-			widgetInfo.showHideForAppMode(appMode, visible);
-		}
-	}
-
-	@NonNull
-	private Set<String> getWidgetsVisibilityForAppMode(@NonNull Set<MapWidgetInfo> widgetsInfo,
-	                                                   @NonNull ApplicationMode mode) {
-		Set<String> widgetsVisibility = new LinkedHashSet<>();
-		for (MapWidgetInfo widgetInfo : widgetsInfo) {
-			if (widgetInfo.isEnabledForAppMode(mode)) {
-				widgetsVisibility.add(widgetInfo.key);
-			} else {
-				widgetsVisibility.add(HIDE_PREFIX + widgetInfo.key);
-			}
-		}
-		return widgetsVisibility;
-	}
-
 	public boolean isWidgetVisible(@NonNull String widgetId) {
 		ApplicationMode appMode = settings.getApplicationMode();
-		Set<String> widgetsVisibility = sideWidgetsVisibilityFromSettings.get(appMode);
-		return widgetsVisibility != null && isWidgetVisible(widgetId, widgetsVisibility);
+		MapWidgetInfo widgetInfo = getWidgetInfoById(widgetId);
+		return widgetInfo != null && widgetInfo.isEnabledForAppMode(appMode);
 	}
 
-	private boolean isWidgetVisible(@NonNull String widgetId, @NonNull Set<String> widgetsVisibility) {
-		return widgetsVisibility.contains(widgetId) || widgetsVisibility.contains(COLLAPSED_PREFIX + widgetId);
+	public void enableDisableWidget(@NonNull MapWidgetInfo widgetInfo, boolean enabled) {
+		ApplicationMode appMode = settings.getApplicationMode();
+		enableDisableWidgetForMode(appMode, widgetInfo, enabled);
 	}
 
-	public void setVisibility(@NonNull MapWidgetInfo widgetInfo, boolean visible) {
-		OsmandPreference<Boolean> visibilityPref = widgetInfo.widget.getWidgetVisibilityPref();
-		if (visibilityPref != null) {
-			visibilityPref.set(!visibilityPref.get());
-			notifyWidgetVisibilityChanged(widgetInfo);
-		} else {
-			ApplicationMode mode = settings.APPLICATION_MODE.get();
-			setVisibility(mode, widgetInfo, visible);
-		}
+	public void enableDisableWidgetForMode(@NonNull ApplicationMode appMode,
+	                                       @NonNull MapWidgetInfo widgetInfo,
+	                                       boolean enabled) {
+		widgetInfo.enableDisableForMode(appMode, enabled);
+		notifyWidgetVisibilityChanged(widgetInfo);
 
 		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {
 			mapInfoLayer.recreateControls();
 		}
-	}
-
-	public void setVisibility(@NonNull ApplicationMode mode, @NonNull MapWidgetInfo widgetInfo, boolean visible) {
-		Set<String> widgetsVisibility = getOrInitWidgetsVisibility(mode);
-		widgetsVisibility.remove(widgetInfo.key);
-		widgetsVisibility.remove(COLLAPSED_PREFIX + widgetInfo.key);
-		widgetsVisibility.remove(HIDE_PREFIX + widgetInfo.key);
-		if (visible) {
-			widgetsVisibility.add(widgetInfo.key);
-		} else {
-			widgetsVisibility.add(HIDE_PREFIX + widgetInfo.key);
-		}
-		widgetInfo.showHideForAppMode(mode, visible);
-		saveWidgetsVisibilityToSettings(widgetsVisibility);
-		notifyWidgetVisibilityChanged(widgetInfo);
 	}
 
 	public void addWidgetsVisibilityListener(@NonNull WidgetsVisibilityListener visibilityListener) {
@@ -273,51 +213,6 @@ public class MapWidgetRegistry {
 		}
 	}
 
-	@NonNull
-	private Set<String> getOrInitWidgetsVisibility(@NonNull ApplicationMode appMode) {
-		Set<String> widgetsVisibility = sideWidgetsVisibilityFromSettings.get(appMode);
-		if (widgetsVisibility == null) {
-			widgetsVisibility = new LinkedHashSet<>();
-			widgetsVisibility.addAll(getWidgetsVisibilityForAppMode(getLeftWidgets(), appMode));
-			widgetsVisibility.addAll(getWidgetsVisibilityForAppMode(getRightWidgets(), appMode));
-			sideWidgetsVisibilityFromSettings.put(appMode, widgetsVisibility);
-		}
-		return widgetsVisibility;
-	}
-
-	public void updateVisibleSideWidgets() {
-		loadVisibleElementsFromSettings();
-		for (MapWidgetInfo widgetInfo : getLeftWidgets()) {
-			processVisibleModes(widgetInfo);
-		}
-		for (MapWidgetInfo widgetInfo : getRightWidgets()) {
-			processVisibleModes(widgetInfo);
-		}
-	}
-
-	private void loadVisibleElementsFromSettings() {
-		sideWidgetsVisibilityFromSettings.clear();
-		for (ApplicationMode appMode : ApplicationMode.values(app)) {
-			String widgetsVisibilityString = settings.MAP_INFO_CONTROLS.getModeValue(appMode);
-			boolean useDefaultVisibility = Algorithms.isEmpty(widgetsVisibilityString);
-			if (useDefaultVisibility) {
-				sideWidgetsVisibilityFromSettings.put(appMode, null);
-			} else {
-				Set<String> widgetsVisibility = new LinkedHashSet<>();
-				Collections.addAll(widgetsVisibility, widgetsVisibilityString.split(SETTINGS_SEPARATOR));
-				sideWidgetsVisibilityFromSettings.put(appMode, widgetsVisibility);
-			}
-		}
-	}
-
-	private void saveWidgetsVisibilityToSettings(@NonNull Set<String> widgetsVisibility) {
-		StringBuilder widgetsVisibilityString = new StringBuilder();
-		for (String widgetVisibility : widgetsVisibility) {
-			widgetsVisibilityString.append(widgetVisibility).append(SETTINGS_SEPARATOR);
-		}
-		settings.MAP_INFO_CONTROLS.set(widgetsVisibilityString.toString());
-	}
-
 	public void reorderWidgets() {
 		for (WidgetsPanel panel : WidgetsPanel.values()) {
 			Set<MapWidgetInfo> oldOrder = getWidgetsForPanel(panel);
@@ -329,6 +224,16 @@ public class MapWidgetRegistry {
 			}
 			allWidgets.put(panel, newOrder);
 		}
+	}
+
+	@Nullable
+	public MapWidgetInfo getWidgetInfoById(@NonNull String widgetId) {
+		for (MapWidgetInfo widgetInfo : getAllWidgets()) {
+			if (widgetId.equals(widgetInfo.key)) {
+				return widgetInfo;
+			}
+		}
+		return null;
 	}
 
 	@NonNull
@@ -355,7 +260,7 @@ public class MapWidgetRegistry {
 	                                                        @NonNull WidgetsPanel panel,
 	                                                        int filterModes) {
 		Map<Integer, Set<MapWidgetInfo>> widgetsByPages = new TreeMap<>();
-		for (MapWidgetInfo widgetInfo : getWidgetsForPanel(appMode, panel, filterModes)) {
+		for (MapWidgetInfo widgetInfo : getWidgetsForPanel(appMode, filterModes, panel)) {
 			int page = widgetInfo.pageIndex;
 			Set<MapWidgetInfo> widgetsOfPage = widgetsByPages.get(page);
 			if (widgetsOfPage == null) {
@@ -369,11 +274,16 @@ public class MapWidgetRegistry {
 
 	@NonNull
 	public Set<MapWidgetInfo> getWidgetsForPanel(@NonNull ApplicationMode appMode,
-	                                             @NonNull WidgetsPanel panel,
-	                                             int filterModes) {
-		OsmAndAppCustomization appCustomization = app.getAppCustomization();
+	                                             int filterModes,
+	                                             @NonNull WidgetsPanel... panels) {
 		Set<MapWidgetInfo> filteredWidgets = new TreeSet<>();
-		for (MapWidgetInfo widget : getWidgetsForPanel(panel)) {
+		List<WidgetsPanel> panelsList = Arrays.asList(panels);
+
+		for (MapWidgetInfo widget : getAllWidgets()) {
+
+			if (!panelsList.contains(widget.widgetPanel)) {
+				continue;
+			}
 
 			boolean disabledMode = (filterModes & DISABLED_MODE) == DISABLED_MODE;
 			boolean enabledMode = (filterModes & ENABLED_MODE) == ENABLED_MODE;
@@ -381,8 +291,7 @@ public class MapWidgetRegistry {
 
 			boolean passDisabled = !disabledMode || !widget.isEnabledForAppMode(appMode);
 			boolean passEnabled = !enabledMode || widget.isEnabledForAppMode(appMode);
-			boolean passAvailable = !availableMode || !appCustomization.areWidgetsCustomized()
-					|| appCustomization.isWidgetAvailable(widget.key, appMode);
+			boolean passAvailable = !availableMode || appMode.isWidgetAvailable(widget.key);
 
 			if (passDisabled && passEnabled && passAvailable) {
 				filteredWidgets.add(widget);
@@ -404,44 +313,41 @@ public class MapWidgetRegistry {
 
 	public void showPopUpMenu(@NonNull View view,
 	                          @NonNull final CallbackWithObject<WidgetState> callback,
-	                          @Nullable final WidgetState widgetState,
+	                          @NonNull final WidgetState widgetState,
 	                          @NonNull ApplicationMode mode,
-	                          boolean selected,
 	                          boolean nightMode) {
 		final int currentModeColor = mode.getProfileColor(nightMode);
 		View parentView = view.findViewById(R.id.text_wrapper);
 		List<PopUpMenuItem> items = new ArrayList<>();
 		UiUtilities uiUtilities = app.getUIUtilities();
 
-		if (widgetState != null) {
-			final int[] menuIconIds = widgetState.getMenuIconIds();
-			final int[] menuTitleIds = widgetState.getMenuTitleIds();
-			final int[] menuItemIds = widgetState.getMenuItemIds();
-			if (menuIconIds != null && menuTitleIds != null && menuItemIds != null &&
-					menuIconIds.length == menuTitleIds.length && menuIconIds.length == menuItemIds.length) {
-				for (int i = 0; i < menuIconIds.length; i++) {
-					int iconId = menuIconIds[i];
-					int titleId = menuTitleIds[i];
-					final int id = menuItemIds[i];
-					boolean checkedItem = id == widgetState.getMenuItemId();
-					Drawable icon = checkedItem && selected ?
-							uiUtilities.getPaintedIcon(iconId, currentModeColor) :
-							uiUtilities.getThemedIcon(iconId);
-					items.add(new PopUpMenuItem.Builder(app)
-							.setTitle(getString(titleId))
-							.setIcon(icon)
-							.setOnClickListener(v -> {
-								widgetState.changeState(id);
-								MapInfoLayer layer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
-								if (layer != null) {
-									layer.recreateControls();
-								}
-								callback.processResult(widgetState);
-							})
-							.showCompoundBtn(currentModeColor)
-							.setSelected(checkedItem)
-							.create());
-				}
+		final int[] menuIconIds = widgetState.getMenuIconIds();
+		final int[] menuTitleIds = widgetState.getMenuTitleIds();
+		final int[] menuItemIds = widgetState.getMenuItemIds();
+		if (menuIconIds != null && menuTitleIds != null && menuItemIds != null &&
+				menuIconIds.length == menuTitleIds.length && menuIconIds.length == menuItemIds.length) {
+			for (int i = 0; i < menuIconIds.length; i++) {
+				int iconId = menuIconIds[i];
+				int titleId = menuTitleIds[i];
+				final int id = menuItemIds[i];
+				boolean checkedItem = id == widgetState.getMenuItemId();
+				Drawable icon = checkedItem ?
+						uiUtilities.getPaintedIcon(iconId, currentModeColor) :
+						uiUtilities.getThemedIcon(iconId);
+				items.add(new PopUpMenuItem.Builder(app)
+						.setTitle(getString(titleId))
+						.setIcon(icon)
+						.setOnClickListener(v -> {
+							widgetState.changeState(id);
+							MapInfoLayer layer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
+							if (layer != null) {
+								layer.recreateControls();
+							}
+							callback.processResult(widgetState);
+						})
+						.showCompoundBtn(currentModeColor)
+						.setSelected(checkedItem)
+						.create());
 			}
 		}
 

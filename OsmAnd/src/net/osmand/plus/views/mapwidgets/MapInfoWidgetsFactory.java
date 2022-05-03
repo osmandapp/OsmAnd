@@ -39,6 +39,10 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
+import static net.osmand.plus.views.mapwidgets.WidgetParams.ALTITUDE;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.GPS_INFO;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.RADIUS_RULER;
+
 public class MapInfoWidgetsFactory {
 
 	private final OsmandApplication app;
@@ -90,7 +94,7 @@ public class MapInfoWidgetsFactory {
 			}
 		};
 		altitudeControl.setText(null, null);
-		altitudeControl.setIcons(R.drawable.widget_altitude_day, R.drawable.widget_altitude_night);
+		altitudeControl.setIcons(ALTITUDE);
 		return altitudeControl;
 	}
 
@@ -111,7 +115,7 @@ public class MapInfoWidgetsFactory {
 				}
 			}
 		};
-		gpsInfoControl.setIcons(R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night);
+		gpsInfoControl.setIcons(GPS_INFO);
 		gpsInfoControl.setText(null, null);
 		gpsInfoControl.setOnClickListener(view -> new StartGPSStatus(mapActivity).run());
 		return gpsInfoControl;
@@ -177,7 +181,7 @@ public class MapInfoWidgetsFactory {
 
 	private void setRulerControlIcon(TextInfoWidget rulerControl, RadiusRulerMode mode) {
 		if (mode == RadiusRulerMode.FIRST || mode == RadiusRulerMode.SECOND) {
-			rulerControl.setIcons(R.drawable.widget_ruler_circle_day, R.drawable.widget_ruler_circle_night);
+			rulerControl.setIcons(RADIUS_RULER);
 		} else {
 			rulerControl.setIcons(R.drawable.widget_hidden_day, R.drawable.widget_hidden_night);
 		}

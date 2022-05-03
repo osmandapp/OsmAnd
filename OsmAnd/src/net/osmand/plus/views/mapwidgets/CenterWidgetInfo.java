@@ -33,6 +33,10 @@ public class CenterWidgetInfo extends MapWidgetInfo {
 	}
 
 	@Override
-	public void showHideForAppMode(@NonNull ApplicationMode appMode, boolean show) {
+	public void enableDisableForMode(@NonNull ApplicationMode appMode, boolean enabled) {
+		OsmandPreference<Boolean> visibilityPref = widget.getWidgetVisibilityPref();
+		if (visibilityPref != null) {
+			visibilityPref.setModeValue(appMode, enabled);
+		}
 	}
 }

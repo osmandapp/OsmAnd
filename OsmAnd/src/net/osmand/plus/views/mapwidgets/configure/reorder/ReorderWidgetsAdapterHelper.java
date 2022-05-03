@@ -1,10 +1,14 @@
 package net.osmand.plus.views.mapwidgets.configure.reorder;
 
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.WidgetGroup;
+import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ItemType;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ListItem;
-import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableWidgetViewHolder.AvailableWidgetUiInfo;
-import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.PageViewHolder.PageUiInfo;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AddedWidgetViewHolder.AddedWidgetUiInfo;
+import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableItemViewHolder.AvailableWidgetUiInfo;
+import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.PageViewHolder.PageUiInfo;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -16,47 +20,80 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ReorderWidgetsAdapterHelper {
 
+	private final OsmandApplication app;
 	private final ReorderWidgetsAdapter adapter;
 	private final WidgetsDataHolder dataHolder;
 	private final List<ListItem> items;
+	private final boolean nightMode;
 
-	public ReorderWidgetsAdapterHelper(@NonNull ReorderWidgetsAdapter adapter,
+	public ReorderWidgetsAdapterHelper(@NonNull OsmandApplication app,
+	                                   @NonNull ReorderWidgetsAdapter adapter,
 	                                   @NonNull WidgetsDataHolder dataHolder,
-	                                   @NonNull List<ListItem> items) {
+	                                   @NonNull List<ListItem> items,
+	                                   boolean nightMode) {
+		this.app = app;
 		this.adapter = adapter;
 		this.dataHolder = dataHolder;
 		this.items = items;
+		this.nightMode = nightMode;
 	}
 
 	public void deleteWidget(@NonNull AddedWidgetUiInfo addedWidgetUiInfo, int position) {
 		if (position != RecyclerView.NO_POSITION) {
+			WidgetParams widgetParams = WidgetParams.getById(addedWidgetUiInfo.key);
+			WidgetGroup widgetGroup = widgetParams != null ? widgetParams.getGroup() : null;
+			if (widgetGroup != null) {
+				boolean addGroupItem = areAllGroupWidgetsAdded(widgetGroup);
+				if (addGroupItem) {
+					addGroupToAvailableList(widgetGroup);
+				}
+			} else {
+				moveWidgetToAvailableList(addedWidgetUiInfo);
+			}
+
 			dataHolder.deleteWidget(addedWidgetUiInfo.key);
 			items.remove(position);
 			adapter.notifyItemRemoved(position);
-
-			int order = dataHolder.getSelectedPanel().getOriginalWidgetOrder(addedWidgetUiInfo.key);
-			AvailableWidgetUiInfo availableWidgetInfo = new AvailableWidgetUiInfo(addedWidgetUiInfo, order);
-			int insertIndex = getInsertIndexForAvailableWidget(order);
-			if (insertIndex != -1) {
-				items.add(insertIndex, new ListItem(ItemType.AVAILABLE_WIDGET, availableWidgetInfo));
-			}
 		}
 	}
 
-	private int getInsertIndexForAvailableWidget(int order) {
+	private void addGroupToAvailableList(@NonNull WidgetGroup widgetGroup) {
+		int order = widgetGroup.getOrder();
+		int insertIndex = getInsertIndexForAvailableItem(order);
+		if (insertIndex != -1) {
+			ListItem groupItem = new ListItem(ItemType.AVAILABLE_GROUP, widgetGroup);
+			insertAvailableItem(groupItem, insertIndex);
+		}
+	}
+
+	private void moveWidgetToAvailableList(@NonNull AddedWidgetUiInfo addedWidgetUiInfo) {
+		int order = dataHolder.getSelectedPanel().getOriginalWidgetOrder(addedWidgetUiInfo.key);
+		AvailableWidgetUiInfo availableWidgetInfo = new AvailableWidgetUiInfo(addedWidgetUiInfo, order);
+		int insertIndex = getInsertIndexForAvailableItem(order);
+		if (insertIndex != -1) {
+			ListItem widgetItem = new ListItem(ItemType.AVAILABLE_WIDGET, availableWidgetInfo);
+			insertAvailableItem(widgetItem, insertIndex);
+		}
+	}
+
+	private int getInsertIndexForAvailableItem(int order) {
 		int passedHeaders = 0;
 		int secondHeaderIndex = -1;
 		int closestHigherIndex = -1;
 		for (int i = 0; i < items.size(); i++) {
 			ListItem item = items.get(i);
+			Object value = item.value;
+
 			if (item.type == ItemType.HEADER) {
 				passedHeaders++;
 				if (passedHeaders == 2) {
 					secondHeaderIndex = i;
 				}
-			} else if (item.value instanceof AvailableWidgetUiInfo) {
-				AvailableWidgetUiInfo widgetInfo = ((AvailableWidgetUiInfo) item.value);
-				if (widgetInfo.order > order) {
+			} else if (value instanceof WidgetGroup || value instanceof AvailableWidgetUiInfo) {
+				int availableItemOrder = item.value instanceof WidgetGroup
+						? ((WidgetGroup) item.value).getOrder()
+						: ((AvailableWidgetUiInfo) item.value).order;
+				if (availableItemOrder > order) {
 					return i;
 				} else {
 					closestHigherIndex = i;
@@ -65,6 +102,12 @@ public class ReorderWidgetsAdapterHelper {
 		}
 
 		return closestHigherIndex == -1 ? secondHeaderIndex + 1 : closestHigherIndex + 1;
+	}
+
+	private void insertAvailableItem(@NonNull ListItem listItem, int insertIndex) {
+		items.add(insertIndex, listItem);
+		adapter.notifyItemChanged(insertIndex - 1, null); // Show bottom divider, without animation
+		adapter.notifyItemInserted(insertIndex);
 	}
 
 	public void restorePage(int page, int position) {
@@ -270,8 +313,7 @@ public class ReorderWidgetsAdapterHelper {
 	public void addWidget(int position) {
 		AvailableWidgetUiInfo availableWidgetInfo = ((AvailableWidgetUiInfo) items.get(position).value);
 
-		items.remove(position);
-		adapter.notifyItemRemoved(position);
+		removeItemFromAvailable(position);
 
 		int page = getLastPage();
 		int order = dataHolder.getMaxOrderOfPage(page) + 1;
@@ -282,14 +324,101 @@ public class ReorderWidgetsAdapterHelper {
 		AddedWidgetUiInfo addedWidgetInfo = new AddedWidgetUiInfo(availableWidgetInfo, page, order);
 		ListItem newAddedWidgetItem = new ListItem(ItemType.ADDED_WIDGET, addedWidgetInfo);
 
-		int insertIndex = getIndexOfLastWidgetOrPageItem() + 1;
-		items.add(insertIndex, newAddedWidgetItem);
-		adapter.notifyItemInserted(insertIndex);
+		insertToEndOfAddedWidgets(newAddedWidgetItem);
+	}
+
+	public void addWidget(@NonNull MapWidgetInfo widgetInfo) {
+		String widgetId = widgetInfo.key;
+
+		int page = getLastPage();
+		int order = dataHolder.getMaxOrderOfPage(page) + 1;
+
+		dataHolder.addWidgetToPage(widgetId, page);
+		dataHolder.getOrders().put(widgetId, order);
+
+		AddedWidgetUiInfo addedWidgetUiInfo = new AddedWidgetUiInfo();
+		addedWidgetUiInfo.key = widgetId;
+		addedWidgetUiInfo.title = widgetInfo.getTitle(app);
+		addedWidgetUiInfo.info = widgetInfo;
+		addedWidgetUiInfo.page = page;
+		addedWidgetUiInfo.order = order;
+		addedWidgetUiInfo.iconId = widgetInfo.getMapIconId(nightMode);
+
+		insertToEndOfAddedWidgets(new ListItem(ItemType.ADDED_WIDGET, addedWidgetUiInfo));
+
+		WidgetParams widgetParams = WidgetParams.getById(widgetId);
+		if (widgetParams != null && widgetParams.getGroup() != null) {
+			WidgetGroup group = widgetParams.getGroup();
+			if (areAllGroupWidgetsAdded(group)) {
+				int indexToRemove = getIndexOfAvailableGroup(group);
+				if (indexToRemove != -1) {
+					removeItemFromAvailable(indexToRemove);
+				}
+			}
+		} else {
+			int indexToRemove = getIndexOfAvailableWidget(widgetId);
+			if (indexToRemove != -1) {
+				removeItemFromAvailable(indexToRemove);
+			}
+		}
+	}
+
+	private void removeItemFromAvailable(int indexToRemove) {
+		items.remove(indexToRemove);
+		adapter.notifyItemRemoved(indexToRemove);
+		adapter.notifyItemChanged(indexToRemove - 1, null); // Hide bottom divider, without animation
 	}
 
 	private int getLastPage() {
 		List<Integer> pages = new ArrayList<>(dataHolder.getPages().keySet());
 		return Algorithms.isEmpty(pages) ? 0 : pages.get(pages.size() - 1);
+	}
+
+	private boolean areAllGroupWidgetsAdded(@NonNull WidgetGroup group) {
+		int addedGroupWidgetsCount = 0;
+		for (int i = 0; i < items.size(); i++) {
+			ListItem listItem = items.get(i);
+			if (listItem.value instanceof AddedWidgetUiInfo) {
+				AddedWidgetUiInfo addedWidgetUiInfo = (AddedWidgetUiInfo) listItem.value;
+				WidgetParams widgetParams = WidgetParams.getById(addedWidgetUiInfo.key);
+				if (widgetParams != null && group.equals(widgetParams.getGroup())) {
+					addedGroupWidgetsCount++;
+				}
+			}
+		}
+
+		return addedGroupWidgetsCount == group.getWidgets().size();
+	}
+
+	private int getIndexOfAvailableGroup(@NonNull WidgetGroup group) {
+		for (int i = 0; i < items.size(); i++) {
+			ListItem listItem = items.get(i);
+			if (group.equals(listItem.value)) {
+				return i;
+			}
+		}
+
+		return -1;
+	}
+
+	private int getIndexOfAvailableWidget(@NonNull String widgetId) {
+		for (int i = 0; i < items.size(); i++) {
+			ListItem listItem = items.get(i);
+			if (listItem.value instanceof AvailableWidgetUiInfo) {
+				String availableWidgetId = ((AvailableWidgetUiInfo) listItem.value).key;
+				if (widgetId.equals(availableWidgetId)) {
+					return i;
+				}
+			}
+		}
+
+		return -1;
+	}
+
+	private void insertToEndOfAddedWidgets(@NonNull ListItem listItem) {
+		int insertIndex = getIndexOfLastWidgetOrPageItem() + 1;
+		items.add(insertIndex, listItem);
+		adapter.notifyItemInserted(insertIndex);
 	}
 
 	private int getIndexOfLastWidgetOrPageItem() {

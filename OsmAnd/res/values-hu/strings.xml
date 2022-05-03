@@ -939,7 +939,6 @@
     <string name="item_checked">kijelölt</string>
     <string name="item_unchecked">kijelöletlen</string>
     <string name="shared_string_map">Térkép</string>
-    <string name="av_def_action_choose">Kérésre\?</string>
     <string name="layer_hillshade">Domborzatárnyékolás réteg</string>
     <string name="map_widget_gps_info">GPS infó</string>
     <string name="osmand_play_title_30_chars">OsmAnd térkép és navigáció</string>

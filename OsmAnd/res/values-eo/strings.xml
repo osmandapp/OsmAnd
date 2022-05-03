@@ -951,7 +951,6 @@
     <string name="dropbox_plugin_name">Dropbox kromprogramo</string>
     <string name="intermediate_points_change_order">Ŝanĝi ordon</string>
     <string name="srtm_paid_version_msg">Bonvolu konsideri aĉeti la kromprogramon “nivelkurboj” en la vendejo por subteni ĝian pluan evoluigon.</string>
-    <string name="av_def_action_choose">Demandi</string>
     <string name="av_def_action_video">Registri videon</string>
     <string name="av_def_action_audio">Registri sonon</string>
     <string name="av_widget_action_descr">Implicita ago de fenestraĵo:</string>

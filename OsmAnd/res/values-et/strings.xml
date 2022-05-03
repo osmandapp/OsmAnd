@@ -1588,7 +1588,6 @@
     <string name="recording_context_menu_precord">Pildista</string>
     <string name="dropbox_plugin_name">Dropbox lisa</string>
     <string name="intermediate_points_change_order">Muuda järjekorda</string>
-    <string name="av_def_action_choose">Nõudmisel\?</string>
     <string name="av_def_action_video">Salvesta video</string>
     <string name="av_def_action_audio">Salvesta heli</string>
     <string name="av_widget_action_descr">Vaikimisi vidina tegevus:</string>

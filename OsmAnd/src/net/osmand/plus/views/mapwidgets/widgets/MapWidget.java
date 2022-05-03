@@ -4,6 +4,7 @@ import android.graphics.Paint.Style;
 import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
@@ -60,6 +61,13 @@ public abstract class MapWidget {
 		container.addView(view);
 	}
 
+	public void detachView() {
+		ViewParent parent = view.getParent();
+		if (parent instanceof ViewGroup) {
+			((ViewGroup) parent).removeView(view);
+		}
+	}
+
 	public boolean isNightMode() {
 		return nightMode;
 	}
@@ -105,5 +113,10 @@ public abstract class MapWidget {
 	@NonNull
 	protected String getString(@StringRes int stringId, Object... args) {
 		return app.getString(stringId, args);
+	}
+
+	@NonNull
+	public OsmandApplication getMyApplication() {
+		return app;
 	}
 }

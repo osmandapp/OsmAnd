@@ -8,9 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.CompoundButton;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -23,7 +20,6 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
-import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
@@ -37,11 +33,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import static net.osmand.aidl.OsmandAidlApi.WIDGET_ID_PREFIX;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
 
 public class ConnectedApp implements Comparable<ConnectedApp> {
@@ -181,15 +176,16 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 	}
 
 	void registerWidgetControls(@NonNull MapActivity mapActivity) {
-		for (AidlMapWidgetWrapper widget : widgets.values()) {
+		for (AidlMapWidgetWrapper widgetData : widgets.values()) {
 			MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
 			if (layer != null) {
-				TextInfoWidget control = createWidgetControl(mapActivity, widget.getId());
-				widgetControls.put(widget.getId(), control);
-				int iconId = AndroidUtils.getDrawableId(mapActivity.getMyApplication(), widget.getMenuIconName());
+				TextInfoWidget widget = createWidgetControl(mapActivity, widgetData.getId());
+				widgetControls.put(widgetData.getId(), widget);
+				int iconId = AndroidUtils.getDrawableId(mapActivity.getMyApplication(), widgetData.getMenuIconName());
 				int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
-				String widgetKey = "aidl_widget_" + widget.getId();
-				layer.registerWidget(widgetKey, control, menuIconId, widget.getMenuTitle(), WidgetsPanel.RIGHT, widget.getOrder());
+				String widgetKey = WIDGET_ID_PREFIX + widgetData.getId();
+				layer.registerExternalWidget(widgetKey, widget, menuIconId, widgetData.getMenuTitle(), pack,
+						WidgetsPanel.RIGHT, widgetData.getOrder());
 			}
 		}
 	}
