@@ -22,4 +22,6 @@ public interface SegmentActionsListener {
 	void showOptionsPopupMenu(View view, TrkSegment trkSegment, boolean confirmDeletion, GpxDisplayItem gpxItem);
 
 	void openAnalyzeOnMap(@NonNull GpxDisplayItem gpxItem);
+
+	void openGetAltitudeBottomSheet(@NonNull GpxDisplayItem gpxItem);
 }

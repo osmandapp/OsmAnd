@@ -2126,7 +2126,7 @@
     <string name="plugin_settings">დამატებები</string>
     <string name="osmand_parking_overdue">გადაცილებულია</string>
     <string name="shared_string_ellipsis">…</string>
-    <string name="get_plugin">გადმოწერა</string>
+    <string name="shared_string_get">გადმოწერა</string>
     <string name="version_settings">ქვევერსია</string>
     <string name="proxy_pref_title">პროქსი</string>
     <string name="download_tab_local">ადგილობრივი</string>

@@ -312,7 +312,7 @@ public class ItemViewHolder {
 		boolean disabled = clickAction != RightButtonAction.DOWNLOAD;
 		OnClickListener action = getRightButtonAction(item, clickAction);
 		if (clickAction != RightButtonAction.DOWNLOAD) {
-			rightButton.setText(R.string.get_plugin);
+			rightButton.setText(R.string.shared_string_get);
 			rightButton.setVisibility(View.VISIBLE);
 			rightImageButton.setVisibility(View.GONE);
 			rightButton.setOnClickListener(action);

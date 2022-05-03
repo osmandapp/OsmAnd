@@ -1382,7 +1382,7 @@
     <string name="av_camera_pic_size_descr">Kamera resim boyutunu ayarlayın</string>
     <string name="navigation_intent_invalid">Geçersiz biçim:%s</string>
     <string name="plugin_install_needs_network">Bu eklentiyi yüklemek için çevrim içi olmanız gerekmektedir.</string>
-    <string name="get_plugin">Al</string>
+    <string name="shared_string_get">Al</string>
     <string name="use_fast_recalculation">Akıllı rota yeniden hesaplama</string>
     <string name="use_fast_recalculation_desc">Rotanın yalnızca ilk bölümünü yeniden hesaplar, uzun yolculuklar için kullanışlıdır.</string>
     <string name="do_you_like_osmand">OsmAnd\'ı Sevdinizmi?</string>

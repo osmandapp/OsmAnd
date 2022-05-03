@@ -686,7 +686,7 @@
     <string name="edit_filter_delete_message">“%1$s” filtri silindi</string>
     <string name="edit_filter_create_message">“%1$s” filtri yaradıldı</string>
     <string name="email">e-poçt</string>
-    <string name="get_plugin">Əldə et</string>
+    <string name="shared_string_get">Əldə et</string>
     <string name="do_you_like_osmand">OsmAnd-ı bəyəndiniz?</string>
     <string name="failed_to_upload">Yükləmək mümkün olmadı</string>
     <string name="delete_change">Dəyişikliyi sil</string>

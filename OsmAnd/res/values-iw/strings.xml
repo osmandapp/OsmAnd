@@ -2147,7 +2147,7 @@
     <string name="av_camera_pic_size_descr">הגדרת גודל תמונת המצלמה</string>
     <string name="navigation_intent_invalid">תבנית שגויה: %s</string>
     <string name="plugin_install_needs_network">צריך חיבור לאינטרנט כדי להתקין את התוסף הזה.</string>
-    <string name="get_plugin">קבלה</string>
+    <string name="shared_string_get">קבלה</string>
     <string name="use_fast_recalculation">חישוב חכם לנתיב מחדש</string>
     <string name="use_fast_recalculation_desc">לחשב מחדש רק את החלק ההתחלתי של המסלול, שימושי לטיולים ארוכים.</string>
     <string name="do_you_like_osmand">OsmAnd נושא חן בעיניך?</string>

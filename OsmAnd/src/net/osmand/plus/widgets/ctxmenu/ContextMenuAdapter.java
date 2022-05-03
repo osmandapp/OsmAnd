@@ -3,6 +3,7 @@ package net.osmand.plus.widgets.ctxmenu;
 import android.app.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
@@ -46,6 +47,16 @@ public class ContextMenuAdapter {
 
 	public List<ContextMenuItem> getItems() {
 		return items;
+	}
+
+	@Nullable
+	public ContextMenuItem getItemById(@NonNull String id) {
+		for (ContextMenuItem item : items) {
+			if (Algorithms.objectEquals(item.getId(), id)) {
+				return item;
+			}
+		}
+		return null;
 	}
 
 	public void clear() {

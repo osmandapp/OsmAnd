@@ -2096,7 +2096,7 @@
     <string name="poi_action_delete">șters</string>
     <string name="poi_dialog_reopen">Redeschide</string>
     <string name="plugin_install_needs_network">Trebuie să fiți online pentru a instala acest plugin.</string>
-    <string name="get_plugin">Obțineți</string>
+    <string name="shared_string_get">Obțineți</string>
     <string name="use_fast_recalculation">Re-calcularea rutei inteligente</string>
     <string name="do_you_like_osmand">Îți place OsmAnd?</string>
     <string name="we_really_care_about_your_opinion">Opinia și feedback-ul dumneavoastră sunt apreciate.</string>

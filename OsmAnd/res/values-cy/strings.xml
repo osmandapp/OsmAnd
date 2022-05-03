@@ -1494,7 +1494,7 @@
     <string name="shared_string_api_key">Allwedd API</string>
     <string name="shared_string_visible">Gweledol</string>
     <string name="app_mode_bus">Bws</string>
-    <string name="get_plugin">Cael</string>
+    <string name="shared_string_get">Cael</string>
     <string name="location_source">Ffynhonnell lleoliad</string>
     <string name="copying_file">Yn copïo ffeil %1$s…</string>
     <string name="transparent_status_bar">Statws bar tryloyw</string>

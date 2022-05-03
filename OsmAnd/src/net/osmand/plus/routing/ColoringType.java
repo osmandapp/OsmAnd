@@ -37,7 +37,7 @@ public enum ColoringType {
 	CUSTOM_COLOR("custom_color", R.string.shared_string_custom, R.drawable.ic_action_settings),
 	// For gpx track only
 	TRACK_SOLID("solid", R.string.track_coloring_solid, R.drawable.ic_action_circle),
-	SPEED("speed", R.string.map_widget_current_speed, R.drawable.ic_action_speed),
+	SPEED("speed", R.string.shared_string_speed, R.drawable.ic_action_speed),
 	// For both route and gpx file
 	ALTITUDE("altitude", R.string.altitude, R.drawable.ic_action_hillshade_dark),
 	SLOPE("slope", R.string.shared_string_slope, R.drawable.ic_action_altitude_ascent),

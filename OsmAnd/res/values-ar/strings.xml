@@ -1251,7 +1251,7 @@
     <string name="index_name_netherlands">أوربا - هولندا</string>
     <string name="keep_informing">إعادة تعليمات الملاحة</string>
     <string name="shared_string_release">تم</string>
-    <string name="get_plugin">الحصول على</string>
+    <string name="shared_string_get">الحصول على</string>
     <string name="plugin_install_needs_network">تحتاج إلى اتصال إنترنت لثبيت الملحق.</string>
     <string name="navigation_intent_invalid">صيغة خاطئة: %s</string>
     <string name="av_camera_pic_size_descr">حدد حجم صورة الكاميرا الداخلية</string>

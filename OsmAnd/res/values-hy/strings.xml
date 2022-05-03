@@ -2331,7 +2331,7 @@
     <string name="av_camera_pic_size_descr">Ընտրեք տեսախցիկի և պատկերի չափը</string>
     <string name="navigation_intent_invalid">Սխալ ձևաչափ՝ %s</string>
     <string name="plugin_install_needs_network">Անհրաժեշտ է ինտերնետ կապ այս plugin-ը տեղադրելու համար:</string>
-    <string name="get_plugin">Ստանալ</string>
+    <string name="shared_string_get">Ստանալ</string>
     <string name="use_fast_recalculation">Երթուղու խելացի վերահաշվարկ</string>
     <string name="use_fast_recalculation_desc">Երկար ուղեւորությունների ժամանակ միայն վերահաշվարկել երթուղու նախնական մասը:</string>
     <string name="do_you_like_osmand">Ձեզ դուր է գալիս OsmAnd?</string>

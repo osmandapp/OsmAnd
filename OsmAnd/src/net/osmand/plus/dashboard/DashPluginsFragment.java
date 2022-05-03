@@ -176,7 +176,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 
 		CompoundButton enableDisableButton = (CompoundButton) view.findViewById(R.id.plugin_enable_disable);
 		Button getButton = (Button) view.findViewById(R.id.get_plugin);
-		getButton.setText(plugin.isPaid() ? R.string.get_plugin : R.string.shared_string_install);
+		getButton.setText(plugin.isPaid() ? R.string.shared_string_get : R.string.shared_string_install);
 		getButton.setOnClickListener(getListener(plugin));
 		enableDisableButton.setOnCheckedChangeListener(null);
 		updatePluginState(view, plugin);

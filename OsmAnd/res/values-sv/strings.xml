@@ -1340,7 +1340,7 @@
     <string name="plugin_install_needs_network">Du måste vara uppkopplad för att kunna installera denna modul.</string>
     <string name="shared_string_enable">Aktivera</string>
     <string name="shared_string_disable">Inaktivera</string>
-    <string name="get_plugin">Hämta</string>
+    <string name="shared_string_get">Hämta</string>
     <string name="plugin_ski_name">Skidkartsvy</string>
     <string name="plugin_nautical_name">Sjökortsvy</string>
     <string name="world_ski_missing">Ladda ner den speciella offline-kartan för att visa skidåkning.</string>

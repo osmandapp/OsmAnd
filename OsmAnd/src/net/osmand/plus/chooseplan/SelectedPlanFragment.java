@@ -46,7 +46,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 	public static final String TAG = SelectedPlanFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(SelectedPlanFragment.class);
 
-	private static final String PURCHASES_INFO = "https://docs.osmand.net/en/main@latest/osmand/purchases/android";
+	private static final String PURCHASES_INFO = "https://docs.osmand.net/docs/user/purchases/android";
 	public static final String SELECTED_PRICE_BTN_ID = "selected_price_btn_id";
 
 	protected List<OsmAndFeature> includedFeatures = new ArrayList<>();

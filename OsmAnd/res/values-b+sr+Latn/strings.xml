@@ -518,7 +518,7 @@
     <string name="we_really_care_about_your_opinion">Važno nam je da čujemo Vaše mišljenje.</string>
     <string name="do_you_like_osmand">Da li Vam se OsmAnd sviđa\?</string>
     <string name="use_fast_recalculation">Pmaetno preračunavanje puta</string>
-    <string name="get_plugin">Preuzmi</string>
+    <string name="shared_string_get">Preuzmi</string>
     <string name="plugin_install_needs_network">Morate imati internet da biste instalirali ovaj dodatak.</string>
     <string name="navigation_intent_invalid">Neispravni format: %s</string>
     <string name="av_camera_pic_size_descr">Beličinu slike ugrađenog fotoaparata</string>

@@ -169,6 +169,7 @@ public interface OsmAndCustomizationConstants {
 	String NAVIGATION_DIVIDER_ID = NAVIGATION_OPTIONS_ID + "divider";
 	String NAVIGATION_APP_MODES_OPTIONS_ID = NAVIGATION_OPTIONS_ID + "app_modes_options";
 	String NAVIGATION_ROUTE_DETAILS_OPTIONS_ID = NAVIGATION_OPTIONS_ID + "route_details_options";
+	String NAVIGATION_ROUTE_CALCULATE_ALTITUDE_ID = NAVIGATION_OPTIONS_ID + "calculate_altitude";
 
 	//Dialogs IDs:
 	String FRAGMENT_ID = "fragment.";

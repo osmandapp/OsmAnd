@@ -536,7 +536,7 @@ public class GpsFilterHelper {
 		@NonNull
 		@Override
 		public CharSequence getFilterTitle(@NonNull OsmandApplication app) {
-			String speed = app.getString(R.string.map_widget_current_speed);
+			String speed = app.getString(R.string.shared_string_speed);
 			String titleContent;
 			if (!isNeeded()) {
 				titleContent = app.getString(R.string.gpx_logging_no_data);
