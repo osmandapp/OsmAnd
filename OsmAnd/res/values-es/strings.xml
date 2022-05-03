@@ -818,7 +818,7 @@
 \n - Enrutamiento fuera de línea para distancias medias
 \n - Modos coche, bicicleta y peatón con opcional:
 \n - Cambio automático de vista diurna/nocturna
-\n - Zoom de mapa dependiente de la velocidad
+\n - Zum de mapa dependiente de la velocidad
 \n - Alineación del mapa según la brújula o la dirección del movimiento
 \n - Indicación de carril, visualización del límite de velocidad, voz grabada y de texto a voz
 \n</string>
@@ -4518,8 +4518,8 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Etiquetas fixme</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Muestra etiquetas de solicitud de arreglo (fixme)</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetas de nota</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Iconos en zooms bajos</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualización esquemática de los iconos en los zooms bajos</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Iconos en zums bajos</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualización esquemática de los iconos en los zums bajos</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Túneles fluviales</string>
     <string name="quick_action_add_route_descr">Un botón para iniciar una ruta desde el centro de la pantalla.</string>
     <string name="select_suggested_points">Selecciona puntos sugeridos</string>
