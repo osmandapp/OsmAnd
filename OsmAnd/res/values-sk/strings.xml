@@ -1350,7 +1350,7 @@
     <string name="gps_status">Stav GPS</string>
     <string name="edit_group">Upraviť skupinu</string>
     <string name="plugin_install_needs_network">Pre nainštalovanie tohto zásuvného modulu musíte byť pripojený na Internet.</string>
-    <string name="get_plugin">Získať</string>
+    <string name="shared_string_get">Získať</string>
     <string name="plugin_ski_name">Lyžiarsky mapový pohľad</string>
     <string name="plugin_nautical_name">Námorný mapový pohľad</string>
     <string name="world_ski_missing">Stiahnite samostatnú lyžiarsku mapu pre zobrazenie zariadení pre lyžovanie.</string>

@@ -1400,7 +1400,7 @@ public class MenuBuilder {
 		ivIcon.setImageResource(feature.getIconId(!light));
 
 		View btnGet = banner.findViewById(R.id.button_get);
-		UiUtilities.setupDialogButton(!light, btnGet, DialogButtonType.PRIMARY, R.string.get_plugin);
+		UiUtilities.setupDialogButton(!light, btnGet, DialogButtonType.PRIMARY, R.string.shared_string_get);
 		btnGet.setOnClickListener(v -> {
 			if (mapActivity != null) {
 				ChoosePlanFragment.showInstance(mapActivity, feature);

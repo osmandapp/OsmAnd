@@ -1343,7 +1343,7 @@
     <string name="gpx_selection_track">%1$s
 \nСледа %2$s</string>
     <string name="gpx_file_is_empty">Празен GPX файл</string>
-    <string name="get_plugin">Вземи</string>
+    <string name="shared_string_get">Вземи</string>
     <string name="download_tab_updates">Нови</string>
     <string name="map_update">%1$s карти са обновени</string>
     <string name="rendering_attr_pisteGrooming_name">Обработена ски писта</string>

@@ -667,7 +667,7 @@
     <string name="monitoring_settings">Matkan tallennus</string>
     <string name="plugin_ski_name">Hiihtokarttanäkymä</string>
     <string name="route_points">Reittipisteet</string>
-    <string name="get_plugin">Lataa</string>
+    <string name="shared_string_get">Lataa</string>
     <string name="plugin_nautical_name">Merikartat</string>
     <string name="osmand_distance_planning_plugin_name">Etäisyyslaskin &amp; suunnittelutyökalu</string>
     <string name="search_for">Etsi</string>

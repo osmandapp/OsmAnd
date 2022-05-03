@@ -179,7 +179,7 @@
     <string name="speak_pedestrian">Pasos peoniles</string>
     <string name="traffic_warning_railways">Pasu a nivel</string>
     <string name="traffic_warning_pedestrian">Pasu peonil</string>
-    <string name="get_plugin">Consiguir</string>
+    <string name="shared_string_get">Consiguir</string>
     <string name="map_widget_battery">Nivel de la batería</string>
     <string name="app_mode_bus">Bus</string>
     <string name="app_mode_train">Tren</string>

@@ -1,5 +1,11 @@
 package net.osmand.plus.activities;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_CRASH_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RATE_US_ID;
+import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
+
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
@@ -162,11 +168,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_CRASH_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RATE_US_ID;
-import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
@@ -1118,7 +1119,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					mapView.fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
 					MeasurementEditingContext editingContext = new MeasurementEditingContext(app);
 					editingContext.setGpxData(gpxData);
-					MeasurementToolFragment.showInstance(getSupportFragmentManager(), editingContext);
+					MeasurementToolFragment.showInstance(getSupportFragmentManager(), editingContext, PLAN_ROUTE_MODE, true);
 				} else {
 					mapContextMenu.show(latLonToShow, mapLabelToShow, toShow);
 				}

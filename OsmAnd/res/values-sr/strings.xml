@@ -2128,7 +2128,7 @@
     <string name="av_camera_focus_edof">Продужена дубина поља (EDOF)</string>
     <string name="navigation_intent_invalid">Неисправни формат: %s</string>
     <string name="plugin_install_needs_network">Морате имати интернет да бисте инсталирали овај додатак.</string>
-    <string name="get_plugin">Преузми</string>
+    <string name="shared_string_get">Преузми</string>
     <string name="use_fast_recalculation">Пмаетно прерачунавање пута</string>
     <string name="use_fast_recalculation_desc">Прерачунава само почетни део руте, корисно за дуга путовања.</string>
     <string name="do_you_like_osmand">Да ли Вам се OsmAnd свиђа?</string>

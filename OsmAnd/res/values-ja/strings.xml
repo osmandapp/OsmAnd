@@ -1506,7 +1506,7 @@ POIの更新は利用できません</string>
     <string name="edit_group">グループ編集</string>
     <string name="shared_string_release">リリース</string>
     <string name="plugin_install_needs_network">このプラグインのインストールには、オンライン環境が必要です。</string>
-    <string name="get_plugin">取得</string>
+    <string name="shared_string_get">取得</string>
     <string name="osm_changes_added_to_local_edits">OSMへの変更をストレージ内変更候補に追加しました</string>
     <string name="mark_to_delete">削除用にマーク</string>
     <string name="welmode_download_maps">マップダウンロード</string>

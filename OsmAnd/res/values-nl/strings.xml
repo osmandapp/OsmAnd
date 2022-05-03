@@ -1348,7 +1348,7 @@
     <string name="plugin_nautical_name">Nautische kaartweergave</string>
     <string name="world_ski_missing">Download de speciale offline kaart om skifaciliteiten weer te geven.</string>
     <string name="nautical_maps_missing">Download de speciale offline kaart om nautische details weer te geven.</string>
-    <string name="get_plugin">Installeren</string>
+    <string name="shared_string_get">Installeren</string>
     <string name="watch">Bekijk</string>
     <string name="rendering_attr_pisteRoutes_name">Ski-pistes</string>
     <string name="rendering_attr_pisteGrooming_name">Piste verzorging</string>

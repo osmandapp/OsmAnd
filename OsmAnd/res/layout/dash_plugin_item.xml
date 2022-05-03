@@ -88,7 +88,7 @@
 				android:paddingRight="9.5dp"
 				android:paddingTop="8dp"
 				android:textColor="@color/color_white"
-				android:text="@string/get_plugin"
+				android:text="@string/shared_string_get"
 				android:textSize="@dimen/default_sub_text_size"
 				android:lines="1"
 				android:maxLines="1"

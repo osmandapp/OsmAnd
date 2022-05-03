@@ -1543,7 +1543,7 @@ Lon %2$s</string>
     <string name="index_name_netherlands">Europa - Países Baixos</string>
     <string name="shared_string_release">Publicado</string>
     <string name="plugin_install_needs_network">Precisas estar conectado para instalar este plugin.</string>
-    <string name="get_plugin">Obter</string>
+    <string name="shared_string_get">Obter</string>
     <string name="use_fast_recalculation_desc">Recalcular só a parte inicial da ruta, útil para viaxes longas.</string>
     <string name="do_you_like_osmand">Gosta do OsmAnd?</string>
     <string name="we_really_care_about_your_opinion">A túa opinión e comentarios son valorados.</string>

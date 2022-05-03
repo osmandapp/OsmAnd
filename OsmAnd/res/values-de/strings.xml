@@ -1446,7 +1446,7 @@
     <string name="plugin_nautical_name">Seekarte</string>
     <string name="world_ski_missing">Laden Sie die spezielle Offline-Karte zur Anzeige der Skianlagen herunter.</string>
     <string name="nautical_maps_missing">Laden Sie die spezielle Offline-Karte zur Anzeige nautischer Details herunter.</string>
-    <string name="get_plugin">Erwerben</string>
+    <string name="shared_string_get">Erwerben</string>
     <string name="rename_failed">Umbenennen fehlgeschlagen.</string>
     <string name="shared_string_currently_recording_track">Momentane Track-Aufzeichnung</string>
     <string name="back_to_map">Zurück zur Karte</string>

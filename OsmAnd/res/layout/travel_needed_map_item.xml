@@ -86,7 +86,7 @@
 			android:minHeight="@dimen/list_content_padding_large"
 			android:paddingLeft="@dimen/bottom_sheet_exit_button_margin"
 			android:paddingRight="@dimen/bottom_sheet_exit_button_margin"
-			android:text="@string/get_plugin"
+			android:text="@string/shared_string_get"
 			android:textColor="@color/text_color_tab_active_light"
 			android:visibility="gone"
 			tools:visibility="visible"
