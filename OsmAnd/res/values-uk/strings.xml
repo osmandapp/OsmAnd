@@ -4509,7 +4509,7 @@
     <string name="rendering_value_omit_name">Пропустити</string>
     <string name="rendering_attr_seabedDetail_name">Подробиці про морське дно</string>
     <string name="save_track_to_gpx_descrp">Автозапуск запису треку під час навігації та автоматичне збереження після завершення.</string>
-    <string name="gpx_no_routes_descr">Ви можете використовувати інструмент «%1$s», щоб зберегти маршрут як файл.</string>
+    <string name="gpx_no_routes_descr">Ви можете використовувати інструмент «%1$s», щоб додати маршрут у файл.</string>
     <string name="gpx_no_routes_title">Маршрути відсутні</string>
     <string name="quick_action_add_route_descr">Кнопка запуску маршруту з середини екрана.</string>
     <string name="please_provide_group_name_message">Назвіть групу.</string>
@@ -4614,4 +4614,27 @@
 \n</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">Середня</string>
     <string name="turn_on_public_transport_description">Увімкніть, щоб побачити маршрути громадського транспорту на мапі.</string>
+    <string name="av_def_action_choose">За запитом</string>
+    <string name="coordinates_widget_secondary_desc">Формат координат може бути змінений на %1$s – %2$s – %3$s.</string>
+    <string name="widget_secondary_desc_part_of">Частина плагіну %1$s.</string>
+    <string name="elevation_profile_widget_desc">Віджет показує профіль висоти та нахилу поточного маршруту.</string>
+    <string name="parking_widget_desc">Віджет, який показує відстань від центру екрана до місця для паркування.</string>
+    <string name="mapillary_widget_desc">Віджет, який забезпечує швидкий доступ до програми Mapillary для додавання зображень у шарі вулиць.</string>
+    <string name="av_notes_choose_action_widget_desc">Виберіть дію.</string>
+    <string name="battery_widget_desc">Віджет показує рівень заряду акумулятора пристрою.</string>
+    <string name="gps_info_widget_desc">Віджет показує кількість супутників, які пристрій виявляє та використовує в цей момент.</string>
+    <string name="altitude_widget_desc">Віджет показує висоту над рівнем моря поточної геолокації.</string>
+    <string name="max_speed_widget_desc">Віджет показує обмеження швидкості для поточної дороги.</string>
+    <string name="arrival_time_widget_desc">Час прибуття в пункт призначення.</string>
+    <string name="coordinates_widget_desc">Він показує географічні координати поточної геолокації.</string>
+    <string name="shared_string_widget">Віджет</string>
+    <string name="bearing_secondary_desc">Ви можете змінити формат показуваних даних на: %1$s – %2$s – %3$s.</string>
+    <string name="radius_rules_widget_desc">Інструмент «Лінійка радіуса» допомагає визначити радіус навколо вибраної точки на мапі за допомогою кіл відстаней на мапі.</string>
+    <string name="fps_widget_desc">Віджет показує, як швидко з\'являються та оновлюються мапи та елементи на них.</string>
+    <string name="time_to_go_desc">Час у хвилинах або годинах, необхідний для досягнення пункту призначення.</string>
+    <string name="current_time_widget_desc">Цей віджет показує поточний час пристрою.</string>
+    <string name="current_speed_widget_desc">Віджет показує вашу поточну швидкість, визначену GPS-датчиком.</string>
+    <string name="magnetic_bearing_widget_desc">Кут між магнітною північчю та цільовою точкою, що визначається з місця вашого розташування.</string>
+    <string name="lanes_widgets_desc">Віджет «Смуги» показує поточне розташування доріг і виділяє смуги для їзди з активною навігацією.</string>
+    <string name="map_markers_bar_widget_desc">На верхньому віджеті панелі ви можете побачити відстань і напрямок до маркера від поточного розташування. Віджет можна налаштувати на показ 1 або 2 верхніх маркерів.</string>
 </resources>
