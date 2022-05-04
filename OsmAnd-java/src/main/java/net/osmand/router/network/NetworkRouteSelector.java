@@ -139,16 +139,15 @@ public class NetworkRouteSelector {
 		}
 		return r;
 	}
-	
-	
-	private static class NetworkRouteSegmentChain {
+
+	public static class NetworkRouteSegmentChain {
 		NetworkRouteSegment start;
 		List<NetworkRouteSegment> connected;
-		
+
 		public int getSize() {
 			return 1 + (connected == null ? 0 : connected.size());
 		}
-		
+
 		public NetworkRouteSegment getLast() {
 			if (connected != null && connected.size() > 0) {
 				return connected.get(connected.size() - 1);
@@ -228,12 +227,23 @@ public class NetworkRouteSelector {
 		}
 		return list;
 	}
-	
+
 	private void connectAlgorithm(NetworkRouteSegment segment, Map<RouteKey, GPXFile> res) throws IOException {
 		RouteKey rkey = segment.routeKey;
 		List<NetworkRouteSegment> loaded = new ArrayList<>();
 		debug("START ", null, segment);
 		loadData(segment, rkey, loaded);
+		List<NetworkRouteSegmentChain> lst = getNetworkRouteSegmentChains(segment.routeKey, res, loaded);
+		debug("FINISH " + lst.size(), null, segment);
+	}
+
+	public List<NetworkRouteSegmentChain> connectAlgorithmByGPX(GPXFile gpxFile, Map<RouteKey, GPXFile> res) throws IOException {
+		List<NetworkRouteSegment> loaded = new ArrayList<>();
+		loadDataByGPX(gpxFile, loaded);
+		return getNetworkRouteSegmentChains(null, res, loaded);
+	}
+
+	private List<NetworkRouteSegmentChain> getNetworkRouteSegmentChains(RouteKey routeKey, Map<RouteKey, GPXFile> res, List<NetworkRouteSegment> loaded) {
 		System.out.println("About to merge: " + loaded.size());
 		Map<Long, List<NetworkRouteSegmentChain>> chains = createChainStructure(loaded);
 		Map<Long, List<NetworkRouteSegmentChain>> endChains = prepareEndChain(chains);
@@ -245,13 +255,12 @@ public class NetworkRouteSelector {
 		connectToLongestChain(chains, endChains, CONNECT_POINTS_DISTANCE_STEP);
 		connectSimpleMerge(chains, endChains, 0, CONNECT_POINTS_DISTANCE_STEP);
 		connectSimpleMerge(chains, endChains, CONNECT_POINTS_DISTANCE_MAX / 2, CONNECT_POINTS_DISTANCE_MAX);
-		
+
 		List<NetworkRouteSegmentChain> lst = flattenChainStructure(chains);
 		GPXFile fl = createGpxFile(lst);
-		res.put(segment.routeKey, fl);
-		debug("FINISH " + lst.size(), null, segment);
+		res.put(routeKey, fl);
+		return lst;
 	}
-
 
 	private int connectToLongestChain(Map<Long, List<NetworkRouteSegmentChain>> chains,
 			Map<Long, List<NetworkRouteSegmentChain>> endChains, int rad) {
@@ -572,8 +581,21 @@ public class NetworkRouteSelector {
 			queue.add(NetworkRouteContext.getTileId(left, top - 1));
 		}
 	}
-	
-	
+
+	public void loadDataByGPX(GPXFile gpxFile, List<NetworkRouteSegment> lst) throws IOException {
+		for (GPXUtilities.Track t : gpxFile.tracks) {
+			for (GPXUtilities.TrkSegment ts : t.segments) {
+				for (int i = 0; i < ts.points.size() - 1; i++) {
+					GPXUtilities.WptPt ps = ts.points.get(i);
+					GPXUtilities.WptPt pe = ts.points.get(i + 1);
+					lst.addAll(rCtx.loadRouteSegmentByGPX(
+							MapUtils.get31TileNumberX(ps.lon), MapUtils.get31TileNumberY(ps.lat),
+							MapUtils.get31TileNumberX(pe.lon), MapUtils.get31TileNumberY(pe.lat)));
+				}
+			}
+		}
+	}
+
 	private void growAlgorithm(NetworkRouteSegment segment, Map<RouteKey, GPXFile> res) throws IOException {
 		List<NetworkRouteSegment> lst = new ArrayList<>();
 		TLongHashSet visitedIds = new TLongHashSet();
@@ -696,6 +718,7 @@ public class NetworkRouteSelector {
 	public static class NetworkRouteSelectorFilter {
 		public Set<RouteKey> keyFilter = null; // null - all
 		public Set<RouteType> typeFilter = null; // null -  all
+		public boolean useFilter = true;
 		
 		public List<RouteKey> convert(BinaryMapDataObject obj) {
 			return filterKeys(RouteType.getRouteKeys(obj));
