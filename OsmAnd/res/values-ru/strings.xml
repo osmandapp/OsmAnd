@@ -4619,4 +4619,45 @@
 \n
 \n</string>
     <string name="turn_on_public_transport_description">Включите, чтобы увидеть на карте маршруты общественного транспорта.</string>
+    <string name="av_def_action_choose">По запросу</string>
+    <string name="widget_secondary_desc_part_of">Часть плагина %1$s.</string>
+    <string name="elevation_profile_widget_desc">Виджет показывает профиль высоты и уклона текущего маршрута.</string>
+    <string name="mapillary_widget_desc">Виджет, обеспечивающий быстрый доступ к приложению Mapillary для добавления фото улиц.</string>
+    <string name="av_notes_choose_action_widget_desc">Выбор действия.</string>
+    <string name="navigation_points">Точки навигации</string>
+    <string name="get_altitude_information">Получить информацию о высоте</string>
+    <string name="calculating_altitude">Расчет высоты</string>
+    <string name="calculate_online_altitude_descr">Данные о высоте будут рассчитаны на сервере OsmAnd.</string>
+    <string name="calculate_online">Рассчитать онлайн</string>
+    <string name="track_attach_to_the_roads_descr">Трек будет привязан к дороге с помощью офлайн-карт, геометрия трека будет изменена.</string>
+    <string name="get_altitude_data">Получить данные о высоте</string>
+    <string name="current_time_widget_desc">Виджет показывает текущее время на вашем устройстве.</string>
+    <string name="gps_info_widget_desc">Виджет показывает количество спутников, которые устройство обнаружило и использует в данный момент.</string>
+    <string name="altitude_widget_desc">Виджет показывает высоту над уровнем моря в текущей геолокации.</string>
+    <string name="current_speed_widget_desc">Виджет показывает вашу текущую скорость, определенную GPS-датчиком.</string>
+    <string name="time_to_go_desc">Время в минутах или часах, необходимое для достижения пункта назначения.</string>
+    <string name="lanes_widgets_desc">Виджет «Полосы движения» показывает текущую схему дорожных полос и выделяет полосы для движения с активной навигацией.</string>
+    <string name="street_name_widget_desc">Виджет «Название улицы» показывает текущее название со стрелкой прямого местоположения или название следующей улицы с маневром, который необходимо выполнить.</string>
+    <string name="audio_video_notes_desc">Виджеты обеспечивают быстрый доступ к запуску/остановке записи (аудио, видео или фото).</string>
+    <string name="route_maneuvers">Маршрутные маневры</string>
+    <string name="bearing_desc">Виджет пеленга показывает абсолютный или относительный пеленг на цель в угловых единицах (градусы 180, градусы 360, миллирадианы).</string>
+    <string name="shared_string_speed">Скорость</string>
+    <string name="shared_string_widget">Виджет</string>
+    <string name="navigation_points_desc">Навигационные виджеты включаются во время навигации для отображения такой информации, как расстояние, время прибытия или отправления, следующие повороты, пеленг, текущее название улицы, информация о полосах движения, максимальная скорость, предупреждения о приближении, POI, путевые точки.</string>
+    <string name="route_maneuvers_desc">Навигационные виджеты включаются во время навигации для отображения такой информации, как расстояние, время прибытия или отправления, следующие повороты, пеленг, текущее название улицы, информация о полосах движения, максимальная скорость, предупреждения о приближении, POI, путевые точки.</string>
+    <string name="calculate_altitude">Рассчитать высоту</string>
+    <string name="no_altitude_data">Нет данных о высоте</string>
+    <string name="app_mode_mountain_bicycle">Горный велосипед</string>
+    <string name="coordinates_widget_secondary_desc">Формат координат может быть изменён в %1$s - %2$s - %3$s.</string>
+    <string name="parking_widget_desc">Виджет, показывающий расстояние от центра экрана до места парковки.</string>
+    <string name="fps_widget_desc">Виджет показывает, как быстро отображаются и обновляются элементы карты.</string>
+    <string name="battery_widget_desc">Виджет показывает уровень заряда батареи вашего устройства.</string>
+    <string name="radius_rules_widget_desc">Инструмент «Радиус-линейка» помогает определить радиус вокруг выбранной точки на карте, отображая на карте круги расстояний.</string>
+    <string name="max_speed_widget_desc">Виджет показывает ограничение скорости для текущей дороги.</string>
+    <string name="bearing_secondary_desc">Вы можете изменить формат отображаемых данных в: %1$s - %2$s - %3$s.</string>
+    <string name="magnetic_bearing_widget_desc">Угол между магнитным севером и целевой точкой, наблюдаемой с вашего местоположения.</string>
+    <string name="arrival_time_widget_desc">Время прибытия в пункт назначения.</string>
+    <string name="map_markers_bar_widget_desc">На виджете верхней панели можно увидеть расстояние и направление до маркера от текущего местоположения. Можно настроить отображение одного или двух верхних маркеров.</string>
+    <string name="coordinates_widget_desc">Виджет показывает географические координаты текущего местоположения.</string>
+    <string name="map_markers_desc">На виджете верхней панели можно увидеть расстояние и направление до маркера от текущего местоположения. Можно настроить отображение одного или двух верхних маркеров.</string>
 </resources>
