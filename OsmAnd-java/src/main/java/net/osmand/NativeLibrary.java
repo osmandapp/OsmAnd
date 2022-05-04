@@ -458,7 +458,7 @@ public class NativeLibrary {
 				boolean hasNumber = Character.isDigit(nm.charAt(0)) && Character.isDigit(nm.charAt(1));
 				if (hasNumber) {
 					// numeric fonts 05_NotoSans .. 65_NotoSansNastaliqUrdu
-					return Integer.parseInt(nm.substring(0,1));
+					return Integer.parseInt(nm.substring(0,2));
 				} else if (nm.contains("NotoSans".toLowerCase())) {
 					// downloaded fonts (e.g. NotoSans-Japanese.otf)
 					return 100;

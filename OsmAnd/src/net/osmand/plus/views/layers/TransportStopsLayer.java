@@ -90,11 +90,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 			}
 
 			@Override
-			protected List<TransportStop> calculateResult(RotatedTileBox tileBox) {
-				QuadRect latLonBounds = tileBox.getLatLonBounds();
-				if (latLonBounds == null) {
-					return new ArrayList<>();
-				}
+			protected List<TransportStop> calculateResult(@NonNull QuadRect latLonBounds, int zoom) {
 				try {
 					List<TransportStop> res = view.getApplication().getResourceManager().searchTransportSync(latLonBounds.top, latLonBounds.left,
 							latLonBounds.bottom, latLonBounds.right, new ResultMatcher<TransportStop>() {

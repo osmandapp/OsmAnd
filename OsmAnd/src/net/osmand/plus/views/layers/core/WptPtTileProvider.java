@@ -10,10 +10,12 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapTiledCollectionProvider;
 import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.QListMapTiledCollectionPoint;
 import net.osmand.core.jni.QListPointI;
 import net.osmand.core.jni.SWIGTYPE_p_sk_spT_SkImage_const_t;
 import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.TextRasterizer;
+import net.osmand.core.jni.TileId;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.core.jni.interface_MapTiledCollectionProvider;
 import net.osmand.plus.utils.NativeUtilities;
@@ -149,8 +151,13 @@ public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
    }
 
    @Override
+   public QListMapTiledCollectionPoint getTilePoints(TileId tileId, ZoomLevel zoom) {
+      return new QListMapTiledCollectionPoint();
+   }
+
+   @Override
    public ZoomLevel getMinZoom() {
-      return ZoomLevel.ZoomLevel6;
+      return ZoomLevel.ZoomLevel7;
    }
 
    @Override
