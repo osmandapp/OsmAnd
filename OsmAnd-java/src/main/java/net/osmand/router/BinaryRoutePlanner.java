@@ -86,14 +86,14 @@ public class BinaryRoutePlanner {
 		initQueuesWithStartEnd(ctx, start, end, recalculationEnd, graphDirectSegments, graphReverseSegments, 
 				visitedDirectSegments, visitedOppositeSegments);
 
-		// Extract & analyze segment with min(f(x)) from queue while final segment is not found
-		boolean forwardSearch = true;
 
-		PriorityQueue<RouteSegment> graphSegments = graphDirectSegments;
 
 		FinalRouteSegment finalSegment = null;
 		boolean onlyBackward = ctx.getPlanRoadDirection() < 0;
 		boolean onlyForward = ctx.getPlanRoadDirection() > 0;
+		// Extract & analyze segment with min(f(x)) from queue while final segment is not found
+		PriorityQueue<RouteSegment> graphSegments = onlyForward ? graphReverseSegments : graphDirectSegments;
+		boolean forwardSearch = !onlyForward;
 		while (!graphSegments.isEmpty()) {
 			RouteSegment segment = graphSegments.poll();
 			// use accumulative approach
