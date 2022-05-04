@@ -4606,7 +4606,7 @@
 \n
 \n</string>
     <string name="turn_on_public_transport_description">Kapcsolja be a tömegközlekedési útvonalak megjelenítéséhez.</string>
-    <string name="av_notes_choose_action_widget_desc">Válassz műveletet.</string>
+    <string name="av_notes_choose_action_widget_desc">Válasszon műveletet</string>
     <string name="fps_widget_desc">A widget a térkép és térképelemek kirajzolásának sebességét mutatja.</string>
     <string name="current_time_widget_desc">A widget az eszköze jelenlegi idejét mutatja.</string>
     <string name="battery_widget_desc">A widget az akkumulátor töltöttségi szintjét mutatja.</string>
