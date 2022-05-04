@@ -3775,7 +3775,7 @@
     <string name="poi_video_yes">是;視訊</string>
     <string name="poi_video_no">否</string>
     <string name="poi_internet_access_fee_customers">網際網路存取：顧客</string>
-    <string name="poi_traffic_signals_sound_locate">僅在步行時允許</string>
+    <string name="poi_traffic_signals_sound_locate">僅找到桿子</string>
     <string name="poi_tactile_paving_contrasted">對比</string>
     <string name="poi_tactile_paving_primitive">粗糙</string>
     <string name="poi_tactile_paving_incorrect">不正確</string>
