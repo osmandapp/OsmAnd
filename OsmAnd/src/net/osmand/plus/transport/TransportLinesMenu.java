@@ -13,7 +13,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.views.MapLayers;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
@@ -55,8 +55,8 @@ final public class TransportLinesMenu {
 				idsToSave.add(p.getId());
 			}
 		}
-		settings.DISPLAYED_TRANSPORT_SETTINGS.setModeValues(
-				appMode, !Algorithms.isEmpty(idsToSave) ? idsToSave : null);
+		idsToSave = !Algorithms.isEmpty(idsToSave) ? idsToSave : null;
+		settings.DISPLAYED_TRANSPORT_SETTINGS.setModeValues(appMode, idsToSave);
 		refreshMap(mapActivity);
 	}
 
@@ -117,9 +117,9 @@ final public class TransportLinesMenu {
 	}
 
 	private void refreshMap(@NonNull MapActivity mapActivity) {
-		mapActivity.refreshMapComplete();
-		MapLayers mapLayers = mapActivity.getMapLayers();
-		mapLayers.updateLayers(mapActivity);
+		OsmandMapTileView mapView = mapActivity.getMapView();
+		mapView.refreshMap(true);
+		mapActivity.updateLayers();
 	}
 
 	private ApplicationMode getAppMode() {

@@ -36,6 +36,7 @@
 		android:layout_height="wrap_content"
 		android:layout_gravity="center_vertical|end"
 		android:background="@null"
+		android:saveEnabled="false"
 		android:clickable="false"
 		android:focusable="false"
 		android:focusableInTouchMode="false"/>

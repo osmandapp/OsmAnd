@@ -112,6 +112,10 @@
 
 			<include layout="@layout/card_bottom_divider" />
 
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/card_row_min_height" />
+
 		</LinearLayout>
 
 	</LinearLayout>
