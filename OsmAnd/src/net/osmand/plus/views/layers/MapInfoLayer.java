@@ -15,7 +15,7 @@ import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.controls.RightWidgetsPanel;
+import net.osmand.plus.views.controls.SideWidgetsPanel;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
@@ -83,7 +83,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private OsmandMapTileView view;
 
 	private ViewGroup topWidgetsContainer;
-	private RightWidgetsPanel rightWidgetsPanel;
+	private SideWidgetsPanel rightWidgetsPanel;
 	private ViewGroup leftWidgetsContainer;
 	private ViewGroup bottomWidgetsContainer;
 

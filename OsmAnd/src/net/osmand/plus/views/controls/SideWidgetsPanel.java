@@ -1,6 +1,7 @@
 package net.osmand.plus.views.controls;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.CornerPathEffect;
 import android.graphics.Paint;
@@ -19,6 +20,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
@@ -27,7 +29,7 @@ import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
-public class RightWidgetsPanel extends FrameLayout {
+public class SideWidgetsPanel extends FrameLayout {
 
 	private static final int BORDER_WIDTH_DP = 2;
 	private static final int BORDER_RADIUS_DP = 5;
@@ -36,6 +38,7 @@ public class RightWidgetsPanel extends FrameLayout {
 	private final Path borderPath = new Path();
 
 	private boolean nightMode;
+	private boolean rightPanel;
 	private boolean selfShowAllowed;
 	private boolean selfVisibilityChanging;
 
@@ -43,27 +46,21 @@ public class RightWidgetsPanel extends FrameLayout {
 	private WidgetsPagerAdapter adapter;
 	private LinearLayout dots;
 
-	public RightWidgetsPanel(@NonNull Context context) {
-		super(context);
-		init();
+	public SideWidgetsPanel(@NonNull Context context) {
+		this(context, null);
 	}
 
-	public RightWidgetsPanel(@NonNull Context context, @Nullable AttributeSet attrs) {
-		super(context, attrs);
-		init();
+	public SideWidgetsPanel(@NonNull Context context, @Nullable AttributeSet attrs) {
+		this(context, attrs, 0);
 	}
 
-	public RightWidgetsPanel(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-		super(context, attrs, defStyleAttr);
-		init();
+	public SideWidgetsPanel(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+		this(context, attrs, defStyleAttr, 0);
 	}
 
-	public RightWidgetsPanel(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+	public SideWidgetsPanel(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
-		init();
-	}
 
-	private void init() {
 		nightMode = getMyApplication().getDaynightHelper().isNightMode();
 		setWillNotDraw(false);
 		setupPaddings();
@@ -89,7 +86,7 @@ public class RightWidgetsPanel extends FrameLayout {
 	private void setupChildren() {
 		dots = findViewById(R.id.dots);
 
-		adapter = new WidgetsPagerAdapter(getMyApplication());
+		adapter = new WidgetsPagerAdapter(getMyApplication(), rightPanel ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT);
 		adapter.setViewHolderBindListener((viewHolder, index) -> {
 			if (index == viewPager.getCurrentItem()) {
 				WrapContentViewPager2Callback.resizeViewPagerToWrapContent(viewPager, viewHolder.container);

@@ -274,7 +274,7 @@
 		</LinearLayout>
 
 		<!-- RIGHT widgets colon -->
-		<net.osmand.plus.views.controls.RightWidgetsPanel
+		<net.osmand.plus.views.controls.SideWidgetsPanel
 			android:id="@+id/map_right_widgets_panel"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"

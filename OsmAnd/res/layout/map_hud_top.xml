@@ -263,7 +263,7 @@
 				android:layout_gravity="top|end"
 				android:layout_weight="0.45">
 
-				<net.osmand.plus.views.controls.RightWidgetsPanel
+				<net.osmand.plus.views.controls.SideWidgetsPanel
 					android:id="@+id/map_right_widgets_panel"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
