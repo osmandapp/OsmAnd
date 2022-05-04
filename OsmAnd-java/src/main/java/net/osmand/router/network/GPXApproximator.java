@@ -34,6 +34,9 @@ public class GPXApproximator {
 	private List<Entity> convertToEntities(List<NetworkRouteSegmentChain> res) {
 		List<Entity> entityList = new ArrayList<>();
 		for (NetworkRouteSegmentChain chain : res) {
+			if (chain.connected == null) {
+				continue;
+			}
 			for (NetworkRouteSegment segment : chain.connected) {
 				boolean plus = segment.start < segment.end;
 				int ind = segment.start;

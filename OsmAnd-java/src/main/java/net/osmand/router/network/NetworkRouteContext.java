@@ -182,7 +182,7 @@ public class NetworkRouteContext {
 									segStart.end = i;
 									return new ArrayList<>(Collections.singletonList(segStart));
 								} else {
-									List<NetworkRouteSegment> segments = new ArrayList();
+									List<NetworkRouteSegment> segments = new ArrayList<>();
 									segStart.end = i;
 									segments.add(segStart);
 									NetworkRouteSegment additional = new NetworkRouteSegment(segEnd, segEnd.start, j);
