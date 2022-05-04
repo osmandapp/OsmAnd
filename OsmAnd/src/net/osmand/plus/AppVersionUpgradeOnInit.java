@@ -464,7 +464,7 @@ class AppVersionUpgradeOnInit {
 		}
 
 		if (widgetId.indexOf(COLLAPSED_PREFIX) == 0) {
-			String widgetIdNoPredix = widgetId.replaceFirst(COLLAPSED_PREFIX, "");
+			String widgetIdNoPredix = widgetId.replaceFirst("\\" + COLLAPSED_PREFIX, "");
 			String newWidgetIdNoPrefix = replacements.get(widgetIdNoPredix);
 			if (newWidgetIdNoPrefix != null) {
 				return newWidgetIdNoPrefix; // Without prefix, collapse is no longer supported
