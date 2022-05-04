@@ -192,10 +192,10 @@ public class RotatedTileBox {
 	}
 	
 	private double alignTile(double tile) {
-		if(tile < 0) {
+		if (tile < 0) {
 			return 0;
 		}
-		if(tile >= MapUtils.getPowZoom(zoom)) {
+		if (tile >= MapUtils.getPowZoom(zoom)) {
 			return MapUtils.getPowZoom(zoom) - .000001;
 		}
 		return tile;

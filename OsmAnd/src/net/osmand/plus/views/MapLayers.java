@@ -151,7 +151,7 @@ public class MapLayers {
 
 		// 2. osm bugs layer
 		// 3. poi layer
-		poiMapLayer = new POIMapLayer(app);
+		poiMapLayer = new POIMapLayer(app, -180000);
 		mapView.addLayer(poiMapLayer, 3);
 		// 4. favorites layer
 		mFavouritesLayer = new FavouritesLayer(app, -160000);
