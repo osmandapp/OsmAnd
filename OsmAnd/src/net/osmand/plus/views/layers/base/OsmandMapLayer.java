@@ -27,13 +27,10 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.PlatformUtil;
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -66,7 +63,7 @@ public abstract class OsmandMapLayer {
 	private final Context ctx;
 	@Nullable
 	private MapActivity mapActivity;
-	protected boolean mapActivitInvalidated = false;
+	protected boolean mapActivityInvalidated = false;
 
 	protected List<LatLon> fullObjectsLatLon;
 	protected List<LatLon> smallObjectsLatLon;
@@ -100,7 +97,7 @@ public abstract class OsmandMapLayer {
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		if (mapActivity != null) {
-			mapActivitInvalidated = true;
+			mapActivityInvalidated = true;
 		}
 	}
 
@@ -269,62 +266,19 @@ public abstract class OsmandMapLayer {
 		return rf;
 	}
 
-	public Amenity findAmenity(OsmandApplication app, long id, List<String> names, LatLon latLon, int radius) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
-		List<Amenity> amenities = app.getResourceManager().searchAmenities(
-				new BinaryMapIndexReader.SearchPoiTypeFilter() {
-					@Override
-					public boolean accept(PoiCategory type, String subcategory) {
-						return true;
-					}
-
-					@Override
-					public boolean isEmpty() {
-						return false;
-					}
-				}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
-
-		Amenity res = null;
-		for (Amenity amenity : amenities) {
-			Long initAmenityId = amenity.getId();
-			if (initAmenityId != null) {
-				long amenityId = initAmenityId >> 1;
-				if (amenityId == id && !amenity.isClosed()) {
-					res = amenity;
-					break;
-				}
-			}
-		}
-		if (res == null && names != null && names.size() > 0) {
-			for (Amenity amenity : amenities) {
-				for (String name : names) {
-					if (name.equals(amenity.getName()) && !amenity.isClosed()) {
-						res = amenity;
-						break;
-					}
-				}
-				if (res != null) {
-					break;
-				}
-			}
-		}
-
-		return res;
-	}
-
-	public int getDefaultRadiusPoi(RotatedTileBox tb) {
-		int r;
-		final double zoom = tb.getZoom();
+	public static int getDefaultRadiusPoi(@NonNull RotatedTileBox tileBox) {
+		int radius;
+		final double zoom = tileBox.getZoom();
 		if (zoom <= 15) {
-			r = 10;
+			radius = 10;
 		} else if (zoom <= 16) {
-			r = 14;
+			radius = 14;
 		} else if (zoom <= 17) {
-			r = 16;
+			radius = 16;
 		} else {
-			r = 18;
+			radius = 18;
 		}
-		return (int) (r * tb.getDensity());
+		return (int) (radius * tileBox.getDensity());
 	}
 
 	protected float getIconSize(OsmandApplication app) {
@@ -343,8 +297,8 @@ public abstract class OsmandMapLayer {
 		return rect;
 	}
 
-	public int getScaledTouchRadius(OsmandApplication app, int radiusPoi) {
-		float textScale = getTextScale();
+	public static int getScaledTouchRadius(@NonNull OsmandApplication app, int radiusPoi) {
+		float textScale = getTextScale(app);
 		if (textScale < 1.0f) {
 			textScale = 1.0f;
 		}
@@ -376,7 +330,11 @@ public abstract class OsmandMapLayer {
 	}
 
 	public float getTextScale() {
-		return getApplication().getOsmandMap().getTextScale();
+		return getTextScale(getApplication());
+	}
+
+	public static float getTextScale(@NonNull OsmandApplication app) {
+		return app.getOsmandMap().getTextScale();
 	}
 
 	public float getMapDensity() {

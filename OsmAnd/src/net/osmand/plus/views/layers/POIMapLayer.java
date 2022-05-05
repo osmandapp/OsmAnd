@@ -369,7 +369,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				boolean textVisibleChanged = this.textVisible != textVisible;
 				this.textVisible = textVisible;
 				if (poiTileProvider == null || dataChanged || textScaleChanged || nightModeChanged
-						|| textVisibleChanged || mapActivitInvalidated) {
+						|| textVisibleChanged || mapActivityInvalidated) {
 					clearPoiTileProvider();
 					if (!collectFilters().isEmpty()) {
 						float density = view.getDensity();
@@ -383,7 +383,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			} else {
 				clearPoiTileProvider();
 			}
-			mapActivitInvalidated = false;
+			mapActivityInvalidated = false;
 			return;
 		}
 		List<Amenity> fullObjects = new ArrayList<>();
@@ -442,7 +442,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			}
 		}
 		mapTextLayer.putData(this, fullObjects);
-		mapActivitInvalidated = false;
+		mapActivityInvalidated = false;
 	}
 
 	private void clearPoiTileProvider() {

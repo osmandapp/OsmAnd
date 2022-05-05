@@ -1,11 +1,18 @@
 package net.osmand.plus.views.mapwidgets;
 
 
+import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.MAX_SPEED;
+
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
 import android.text.format.DateFormat;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
@@ -23,20 +30,11 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.plus.views.mapwidgets.widgets.DistanceToPointWidget;
 import net.osmand.plus.views.mapwidgets.widgets.NextTurnWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
-import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.router.TurnType;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_TIME;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.MAX_SPEED;
 
 public class RouteInfoWidgetsFactory {
 
@@ -365,13 +363,5 @@ public class RouteInfoWidgetsFactory {
 
 	public static boolean distChanged(int oldDist, int dist) {
 		return oldDist == 0 || Math.abs(oldDist - dist) >= 10;
-	}
-
-	public static AlarmWidget createAlarmInfoControl(OsmandApplication app, MapActivity map) {
-		return new AlarmWidget(app, map);
-	}
-
-	public static RulerWidget createRulerControl(MapActivity map, View view) {
-		return new RulerWidget(map, view);
 	}
 }
