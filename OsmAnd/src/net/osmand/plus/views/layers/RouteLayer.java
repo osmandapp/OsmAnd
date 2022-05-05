@@ -177,7 +177,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			if (mapRenderer == null) {
 				drawXAxisPoints(trackChartPoints, canvas, tileBox);
 			} else {
-				if (highlightedPointCollection == null || mapActivitInvalidated) {
+				if (highlightedPointCollection == null || mapActivityInvalidated) {
 					recreateHighlightedPointCollection();
 				}
 				drawXAxisPointsOpenGl(trackChartPoints, mapRenderer, tileBox);
@@ -185,7 +185,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		} else {
 			resetLayer();
 		}
-		mapActivitInvalidated = false;
+		mapActivityInvalidated = false;
 	}
 
 	private void drawXAxisPoints(@Nullable TrackChartPoints chartPoints, @NonNull Canvas canvas,
@@ -219,7 +219,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			}
 
 			List<LatLon> xAxisPoints = chartPoints.getXAxisPoints();
-			if (Algorithms.objectEquals(xAxisPointsCached, xAxisPoints) && trackChartPointsProvider != null && !mapActivitInvalidated) {
+			if (Algorithms.objectEquals(xAxisPointsCached, xAxisPoints) && trackChartPointsProvider != null && !mapActivityInvalidated) {
 				return;
 			}
 			xAxisPointsCached = xAxisPoints;
@@ -378,7 +378,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			routeGeometry.clearRoute();
 			boolean routeUpdated = publicTransportRouteGeometry.updateRoute(tb, route);
 			boolean draw = routeUpdated || renderState.shouldRebuildTransportRoute
-					|| !publicTransportRouteGeometry.hasMapRenderer() || mapActivitInvalidated;
+					|| !publicTransportRouteGeometry.hasMapRenderer() || mapActivityInvalidated;
 			if (route != null && draw) {
 				LatLon start = transportHelper.getStartLocation();
 				Location startLocation = new Location("transport");
@@ -418,7 +418,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			if (routeGeometry.hasMapRenderer()) {
 				renderState.updateRouteState(startLocationIndex, actualColoringType, routeLineColor,
 						routeLineWidth, route.getCurrentRoute(), tb.getZoom(), shouldShowTurnArrows);
-				draw = routeUpdated || renderState.shouldRebuildRoute || mapActivitInvalidated;
+				draw = routeUpdated || renderState.shouldRebuildRoute || mapActivityInvalidated;
 				if (draw) {
 					routeGeometry.resetSymbolProviders();
 				} else {
@@ -433,7 +433,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			Iterator<RouteDirectionInfo> it = rd.iterator();
 			if (!directTo && tb.getZoom() >= 14 && shouldShowTurnArrows) {
 				if (routeGeometry.hasMapRenderer()) {
-					if (renderState.shouldUpdateActionPoints || mapActivitInvalidated) {
+					if (renderState.shouldUpdateActionPoints || mapActivityInvalidated) {
 						List<Location> actionPoints = calculateActionPoints(helper.getLastProjection(),
 								route.getRouteLocations(), route.getCurrentRoute(), it, tb.getZoom());
 						routeGeometry.buildActionArrows(actionPoints, customTurnArrowColor);

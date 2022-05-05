@@ -335,7 +335,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				textLayer.putData(this, pointsCache);
 			}
 		}
-		mapActivitInvalidated = false;
+		mapActivityInvalidated = false;
 	}
 
 	private boolean updatePaints(int color, String width, boolean routePoints, boolean currentTrack, DrawSettings drawSettings, RotatedTileBox tileBox) {
@@ -489,7 +489,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 			changed |= startFinishPointsCount != startFinishPointsCountCached;
 			changed |= splitLabelsCount != splitLabelsCountCached;
-			if (!changed && !mapActivitInvalidated) {
+			if (!changed && !mapActivityInvalidated) {
 				return;
 			}
 			startFinishPointsCountCached = startFinishPointsCount;
@@ -796,7 +796,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				pointsCount += getSelectedFilePointsSize(g);
 			}
 			boolean textVisible = isTextVisible();
-			if (!forceUpdate && pointCountCached == pointsCount && textVisible == textVisibleCached && !mapActivitInvalidated) {
+			if (!forceUpdate && pointCountCached == pointsCount && textVisible == textVisibleCached && !mapActivityInvalidated) {
 				return;
 			}
 			pointCountCached = pointsCount;
@@ -896,7 +896,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	                                   @NonNull RotatedTileBox tileBox) {
 		if (chartPoints != null) {
 			List<LatLon> xAxisPoints = chartPoints.getXAxisPoints();
-			if (Algorithms.objectEquals(xAxisPointsCached, xAxisPoints) && trackChartPointsProvider != null && !mapActivitInvalidated) {
+			if (Algorithms.objectEquals(xAxisPointsCached, xAxisPoints) && trackChartPointsProvider != null && !mapActivityInvalidated) {
 				return;
 			}
 			xAxisPointsCached = xAxisPoints;
@@ -1055,7 +1055,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				newTsRenderer = true;
 			}
 			boolean updated = updatePaints(color, width, selectedGpxFile.isRoutePoints(), currentTrack, settings, tileBox)
-					|| mapActivitInvalidated || newTsRenderer || !renderedSegments.contains(ts);
+					|| mapActivityInvalidated || newTsRenderer || !renderedSegments.contains(ts);
 			if (ts.renderer instanceof RenderableSegment) {
 				RenderableSegment renderableSegment = (RenderableSegment) ts.renderer;
 				updated |= renderableSegment.setTrackParams(color, width, coloringType, routeIndoAttribute);
