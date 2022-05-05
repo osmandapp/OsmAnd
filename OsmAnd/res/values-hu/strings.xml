@@ -4502,7 +4502,7 @@
     <string name="rendering_attr_seabedDetail_name">Tengerfenék részletei</string>
     <string name="save_track_to_gpx_descrp">Navigáció közben automatikusan rögzíti a nyomvonalat, utána pedig automatikusan elmenti.</string>
     <string name="gpx_no_routes_title">Nincs útvonal</string>
-    <string name="gpx_no_routes_descr">A(z) „%1$s” eszközzel fájlként menthet el útvonalakat.</string>
+    <string name="gpx_no_routes_descr">A(z) „%1$s” eszközzel fájlhoz adhat útvonalakat.</string>
     <string name="import_tracks">Nyomvonalak importálása</string>
     <string name="select_suggested_points">Javasolt pontok kijelölése</string>
     <string name="please_provide_group_name_message">Kérjük, nevezze el a csoportot.</string>
@@ -4606,7 +4606,7 @@
 \n
 \n</string>
     <string name="turn_on_public_transport_description">Kapcsolja be a tömegközlekedési útvonalak megjelenítéséhez.</string>
-    <string name="av_notes_choose_action_widget_desc">Válassz műveletet.</string>
+    <string name="av_notes_choose_action_widget_desc">Válasszon műveletet.</string>
     <string name="fps_widget_desc">A widget a térkép és térképelemek kirajzolásának sebességét mutatja.</string>
     <string name="current_time_widget_desc">A widget az eszköze jelenlegi idejét mutatja.</string>
     <string name="battery_widget_desc">A widget az akkumulátor töltöttségi szintjét mutatja.</string>
@@ -4616,7 +4616,7 @@
     <string name="magnetic_bearing_widget_desc">A célpont iránya és a mágneses északi pólus iránya által bezárt szög a jelenlegi helyen.</string>
     <string name="coordinates_widget_secondary_desc">A koordináták formátuma megváltoztatható erre: %1$s – %2$s – %3$s.</string>
     <string name="shared_string_widget">Widget</string>
-    <string name="audio_video_notes_desc">A widget gyors hozzáférést biztosít felvételek készítéséhez (hang, video, és fotó)</string>
+    <string name="audio_video_notes_desc">A widget gyors hozzáférést biztosít felvételek készítéséhez (hang, video, és fotó).</string>
     <string name="coordinates_widget_desc">Ez a jelenlegi pozíció földrajzi koordinátáit jeleníti meg.</string>
     <string name="get_altitude_information">Magassági információ lekérése</string>
     <string name="calculating_altitude">Magasság kiszámítása</string>
@@ -4637,4 +4637,14 @@
     <string name="shared_string_speed">Sebesség</string>
     <string name="app_mode_mountain_bicycle">Hegyi kerékpár</string>
     <string name="av_def_action_choose">Kérésre</string>
+    <string name="mapillary_widget_desc">Widget, amely gyors hozzáférést biztosít a Mapillary alkalmazáshoz utca szintű képek hozzáadásához.</string>
+    <string name="radius_rules_widget_desc">A Sugárvonalzó eszköz segít meghatározni a kiválasztott pont körüli sugarat a térképen távolságkörök megjelenítésével.</string>
+    <string name="lanes_widgets_desc">A sávok-widget az aktuális közlekedési sávok elrendezését mutatja és kiemeli az aktív navigációval érintetteket.</string>
+    <string name="map_markers_bar_widget_desc">A felső sávban lévő widgeten láthatja a jelölő távolságát és az irányát az aktuális helytől. 1 vagy 2 felső jelölő megjelenítésére van lehetőség a widgetben.</string>
+    <string name="bearing_desc">Az irányszög widget a cél abszolút vagy relatív irányát mutatja szögegységben (180 fok, 360 fok, milliradiánok stb).</string>
+    <string name="map_markers_desc">A felső sávban lévő widgeten láthatja a jelölő távolságát és az irányát az aktuális helytől. 1 vagy 2 felső jelölő megjelenítésére van lehetőség a widgetben.</string>
+    <string name="navigation_points_desc">A navigációs widgetek a navigáció során érhetőek el, hogy olyan információkat jelenítsenek meg, mint a távolság, a várható érkezési vagy hátralévő idő, következő kanyarodás, irány, aktuális utcanév, sávinformációk, maximális sebesség, közeledő riasztások, POI-k, útpontok.</string>
+    <string name="track_attach_to_the_roads_descr">A nyomvonal offline térképekkel lesz csatolva az úthoz, a nyomvonal geometriája megváltozik.</string>
+    <string name="street_name_widget_desc">Az utcanév widget egyenes nyíllal az aktuális utca nevét, vagy pedig a végrehajtandó manőverrel elérhető következő utca nevét mutatja.</string>
+    <string name="route_maneuvers_desc">A navigációs widgetek a navigáció során érhetőek el, hogy olyan információkat jelenítsenek meg, mint a távolság, a várható érkezési vagy hátralévő idő, következő kanyarodás, irány, aktuális utcanév, sávinformációk, maximális sebesség, közeledő riasztások, POI-k, útpontok.</string>
 </resources>

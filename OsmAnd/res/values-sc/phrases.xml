@@ -113,12 +113,12 @@
     <string name="poi_tram_stop">Firmada tram</string>
     <string name="poi_public_transport_station">Istatzione trasportu pùblicu</string>
     <string name="poi_bus_station">Istatzione bus</string>
-    <string name="poi_railway_station">Istatzione de sos trenos</string>
-    <string name="poi_railway_platform">Piattaredda ferroviària</string>
+    <string name="poi_railway_station">Istatzione de sos trenos;Istatzione ferroviària;Istatzione de trenos</string>
+    <string name="poi_railway_platform">Prataforma ferroviària;Prataforma de s\'istatzione;Prataforma de sos ternos;Piataredda ferroviària</string>
     <string name="poi_subway_entrance">Intrada de sa metropolitana</string>
     <string name="poi_subway_station">Eja;Istatzione de sa metropolitana</string>
     <string name="poi_taxi">Postèggiu de sos taxi</string>
-    <string name="poi_aerodrome">Aeroportu</string>
+    <string name="poi_aerodrome">Aeroportu;Aeròdromu</string>
     <string name="poi_helipad">Eliportu</string>
     <string name="poi_runway">Pista d\'aterazu</string>
     <string name="poi_slipway">Lassinadòrju</string>
@@ -578,7 +578,7 @@
     <string name="poi_internet_access_service">Atzessu ìnternet: servìtziu</string>
     <string name="poi_wine">Butega de binos</string>
     <string name="poi_public_transport_stop_position">Firmada de su trasportu pùblicu</string>
-    <string name="poi_halt">Firmada de sa ferrovia</string>
+    <string name="poi_halt">Firmada de sa ferrovia;Firmada de sos trenos</string>
     <string name="poi_railway_buffer_stop">Denegante pro sos trenos</string>
     <string name="poi_baby_hatch">Bàntzigu pro sa bida/Roda de sos espostos</string>
     <string name="poi_apartment">Apartamentu</string>
@@ -3775,7 +3775,7 @@
     <string name="poi_video_yes">Eja;Vìdeu</string>
     <string name="poi_video_no">Nono</string>
     <string name="poi_internet_access_fee_customers">Atzessu a ìnternet: clientes</string>
-    <string name="poi_traffic_signals_sound_locate">Petzi cando si podet camminare</string>
+    <string name="poi_traffic_signals_sound_locate">Petzi pro agatare su palu</string>
     <string name="poi_tactile_paving_contrasted">Cuntrastadu</string>
     <string name="poi_tactile_paving_primitive">Primitivu</string>
     <string name="poi_tactile_paving_incorrect">Incorretu</string>
@@ -4328,4 +4328,6 @@
     <string name="poi_shop_fuel">Butega de carburante</string>
     <string name="poi_water_sports">Butega pro isports de abba</string>
     <string name="poi_printer_ink">Butega de tinta pro imprenta</string>
+    <string name="poi_flow_rate">Portada</string>
+    <string name="poi_golf_pin">Ispilla de golf</string>
 </resources>
