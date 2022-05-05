@@ -4606,7 +4606,7 @@
 \n
 \n</string>
     <string name="turn_on_public_transport_description">Kapcsolja be a tömegközlekedési útvonalak megjelenítéséhez.</string>
-    <string name="av_notes_choose_action_widget_desc">Válasszon műveletet</string>
+    <string name="av_notes_choose_action_widget_desc">Válasszon műveletet.</string>
     <string name="fps_widget_desc">A widget a térkép és térképelemek kirajzolásának sebességét mutatja.</string>
     <string name="current_time_widget_desc">A widget az eszköze jelenlegi idejét mutatja.</string>
     <string name="battery_widget_desc">A widget az akkumulátor töltöttségi szintjét mutatja.</string>
@@ -4616,7 +4616,7 @@
     <string name="magnetic_bearing_widget_desc">A célpont iránya és a mágneses északi pólus iránya által bezárt szög a jelenlegi helyen.</string>
     <string name="coordinates_widget_secondary_desc">A koordináták formátuma megváltoztatható erre: %1$s – %2$s – %3$s.</string>
     <string name="shared_string_widget">Widget</string>
-    <string name="audio_video_notes_desc">A widget gyors hozzáférést biztosít felvételek készítéséhez (hang, video, és fotó)</string>
+    <string name="audio_video_notes_desc">A widget gyors hozzáférést biztosít felvételek készítéséhez (hang, video, és fotó).</string>
     <string name="coordinates_widget_desc">Ez a jelenlegi pozíció földrajzi koordinátáit jeleníti meg.</string>
     <string name="get_altitude_information">Magassági információ lekérése</string>
     <string name="calculating_altitude">Magasság kiszámítása</string>
