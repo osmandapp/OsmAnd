@@ -536,18 +536,6 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		return convertPoint(object, i);
 	}
 
-	public boolean isTrafficLight(int i) {
-		int[] pointTypes = object.getPointTypes(i);
-		if (pointTypes != null) {
-			for (int pointType : pointTypes) {
-				if (object.region.routeEncodingRules.get(pointType).getValue().startsWith("traffic_signals")) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
 	public LatLon getEndPoint() {
 		return convertPoint(object, endPointIndex);
 	}
@@ -555,7 +543,6 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	public boolean isForwardDirection() {
 		return endPointIndex - startPointIndex > 0;
 	}
-
 
 	private LatLon convertPoint(RouteDataObject o, int ind){
 		return new LatLon(MapUtils.get31LatitudeY(o.getPoint31YTile(ind)), MapUtils.get31LongitudeX(o.getPoint31XTile(ind)));
