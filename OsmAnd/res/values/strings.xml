@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="routing_attr_avoid_4wd_only_name">Avoid 4WD roads</string>
+    <string name="routing_attr_avoid_4wd_only_description">Avoid roads only suitable for 4WD only vehicles</string>
     <string name="bearing_secondary_desc">You can change format of displayed data in: %1$s – %2$s – %3$s.</string>
     <string name="coordinates_widget_secondary_desc">Coordinates format could be change in %1$s – %2$s – %3$s.</string>
     <string name="widget_secondary_desc_part_of">Part of \“%1$s\” plugin.</string>
