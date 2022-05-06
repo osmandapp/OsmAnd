@@ -3,7 +3,6 @@ package net.osmand.plus.track.fragments;
 import static net.osmand.GPXUtilities.GPXTrackAnalysis;
 import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
 import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
-import static net.osmand.plus.mapcontextmenu.controllers.NetworkRouteMenuController.getIconForRouteObject;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.ATTACH_ROADS_MODE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_SRTM_MODE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
@@ -85,6 +84,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapcontextmenu.controllers.NetworkRouteDrawable;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.OpenGpxDetailsTask;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
@@ -161,6 +161,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public static final String TRACK_DELETED_KEY = "track_deleted_key";
 
 	private OsmandApplication app;
+	private UiUtilities uiUtilities;
 	private TrackDisplayHelper displayHelper;
 	private SelectedGpxFile selectedGpxFile;
 	private GPXTrackAnalysis analyses;
@@ -282,7 +283,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
 		displayHelper = new TrackDisplayHelper(app);
-		updateLocationViewCache = app.getUIUtilities().getUpdateLocationViewCache();
+		uiUtilities = app.getUIUtilities();
+		updateLocationViewCache = uiUtilities.getUpdateLocationViewCache();
 
 		toolbarHeightPx = getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
 		if (selectedGpxFile == null && savedInstanceState != null) {
@@ -467,11 +469,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		AndroidUiHelper.updateVisibility(displayGroupsButton, hasPointsGroups());
 		AndroidUiHelper.updateVisibility(headerIcon, menuType != TrackMenuType.OPTIONS);
 
-		Drawable icon = null;
-		if (routeSegment != null) {
-			icon = getIconForRouteObject(app, routeSegment);
-		}
-		headerIcon.setImageDrawable(icon != null ? icon : app.getUIUtilities().getThemedIcon(R.drawable.ic_action_polygom_dark));
+		Drawable icon = routeSegment != null ? new NetworkRouteDrawable(app, routeSegment, isNightMode())
+				: uiUtilities.getThemedIcon(R.drawable.ic_action_polygom_dark);
+		headerIcon.setImageDrawable(icon);
 	}
 
 	@NonNull
@@ -902,7 +902,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			View view = overviewCard.getView();
 			TextView distanceText = view.findViewById(R.id.distance);
 			ImageView direction = view.findViewById(R.id.direction);
-			app.getUIUtilities().updateLocationView(updateLocationViewCache, direction, distanceText, latLon);
+			uiUtilities.updateLocationView(updateLocationViewCache, direction, distanceText, latLon);
 		}
 	}
 
@@ -1438,12 +1438,12 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			IconPopupMenu optionsPopupMenu = new IconPopupMenu(activity, view.findViewById(R.id.overflow_menu));
 			Menu menu = optionsPopupMenu.getMenu();
 			optionsPopupMenu.getMenuInflater().inflate(R.menu.track_segment_menu, menu);
-			menu.findItem(R.id.action_edit).setIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_edit_dark));
-			menu.findItem(R.id.action_delete).setIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_remove_dark));
+			menu.findItem(R.id.action_edit).setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_edit_dark));
+			menu.findItem(R.id.action_delete).setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_remove_dark));
 			if (getGpx().showCurrentTrack) {
 				menu.findItem(R.id.split_interval).setVisible(false);
 			} else {
-				menu.findItem(R.id.split_interval).setIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_split_interval));
+				menu.findItem(R.id.split_interval).setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_split_interval));
 			}
 			optionsPopupMenu.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
 				@Override
