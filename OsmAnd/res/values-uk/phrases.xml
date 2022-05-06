@@ -3775,7 +3775,7 @@
     <string name="poi_video_yes">Так;Відео</string>
     <string name="poi_video_no">Ні</string>
     <string name="poi_internet_access_fee_customers">Доступ до Інтернету: клієнти</string>
-    <string name="poi_traffic_signals_sound_locate">Тільки коли перехід дозволено</string>
+    <string name="poi_traffic_signals_sound_locate">Лише щоб знайти стовп</string>
     <string name="poi_tactile_paving_contrasted">Контрастний</string>
     <string name="poi_tactile_paving_primitive">Примітивний</string>
     <string name="poi_tactile_paving_incorrect">Неправильний</string>
