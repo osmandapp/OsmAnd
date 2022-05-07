@@ -3886,4 +3886,7 @@
     <string name="poi_fridge_filter">Халадзільнік</string>
     <string name="poi_heating_filter">Ацяпленне</string>
     <string name="poi_faculty_filter">Факультэт</string>
+    <string name="poi_post_office_type">Тып</string>
+    <string name="poi_laundry_service_filter">Паслугі пральні</string>
+    <string name="poi_dry_cleaning_filter">Хімчыстка</string>
 </resources>
