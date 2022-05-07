@@ -133,7 +133,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 		TextView title = toolbar.findViewById(R.id.toolbar_title);
 		TextView subtitle = toolbar.findViewById(R.id.toolbar_subtitle);
 
-		title.setText(dataHolder.getSelectedPanel().getTitleId());
+		title.setText(dataHolder.getSelectedPanel().getTitleId(AndroidUtils.isLayoutRtl(app)));
 		subtitle.setText(selectedAppMode.toHumanString());
 
 		toolbar.findViewById(R.id.back_button).setOnClickListener(v -> dismiss());

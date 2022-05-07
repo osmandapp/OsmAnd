@@ -100,7 +100,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		updateContent();
 
 		TextView panelTitle = view.findViewById(R.id.panel_title);
-		panelTitle.setText(getString(selectedPanel.getTitleId()));
+		panelTitle.setText(getString(selectedPanel.getTitleId(AndroidUtils.isLayoutRtl(app))));
 
 		setupReorderButton(changeOrderListButton);
 		setupReorderButton(changeOrderFooterButton);
@@ -155,7 +155,8 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		AndroidUiHelper.updateVisibility(noWidgetsContainer, noEnabledWidgets);
 		if (noEnabledWidgets) {
 			ImageView noWidgetsImage = view.findViewById(R.id.no_widgets_image);
-			Drawable noWidgetsIcon = app.getUIUtilities().getIcon(selectedPanel.getIconId(), nightMode);
+			boolean rtl = AndroidUtils.isLayoutRtl(app);
+			Drawable noWidgetsIcon = app.getUIUtilities().getIcon(selectedPanel.getIconId(rtl), nightMode);
 			noWidgetsImage.setImageDrawable(noWidgetsIcon);
 		} else {
 			inflateEnabledWidgets();
