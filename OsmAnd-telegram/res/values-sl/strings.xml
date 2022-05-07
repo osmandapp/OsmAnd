@@ -227,4 +227,5 @@
     <string name="last_response_date">Zadnji odziv: %1$s</string>
     <string name="buffer_time_descr">Najdaljši čas za shranjevanje točk v medpomnilnik</string>
     <string name="buffer_time">Čas trajanja medpomnilnika</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
 </resources>

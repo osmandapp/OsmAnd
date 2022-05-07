@@ -127,7 +127,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		this.showFavorites = showFavorites;
 		MapRendererView mapRenderer = view.getMapRenderer();
 		if (mapRenderer != null) {
-			if (mapActivitInvalidated || nightModeChanged || showFavoritesChanged
+			if (mapActivityInvalidated || nightModeChanged || showFavoritesChanged
 					|| textScaleChanged || textVisibleChanged) {
 				showFavorites();
 			}
@@ -195,7 +195,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 				textLayer.putData(this, cache);
 			}
 		}
-		mapActivitInvalidated = false;
+		mapActivityInvalidated = false;
 	}
 
 	private boolean isSynced(@NonNull FavoriteGroup group) {

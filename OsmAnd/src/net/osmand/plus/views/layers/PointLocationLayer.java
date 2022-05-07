@@ -213,7 +213,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	@Override
 	public void updateLocation(Location location) {
 		lastKnownLocation = location;
-		if (view != null && view.hasMapRenderer()) {
+		if (view != null && view.hasMapRenderer() && !markersInvalidated) {
 			getApplication().runInUIThread(() -> updateMarkerData(lastKnownLocation, null));
 		}
 	}
@@ -222,7 +222,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	public void updateCompassValue(float value) {
 		if (Math.abs(MapUtils.degreesDiff(value, lastHeading)) > MapViewTrackingUtilities.COMPASS_HEADING_THRESHOLD) {
 			lastHeading = value;
-			if (view != null && view.hasMapRenderer()) {
+			if (view != null && view.hasMapRenderer() && !markersInvalidated) {
 				getApplication().runInUIThread(() -> updateMarkerData(null, lastHeading));
 			}
 		}
@@ -311,7 +311,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		}
 		MapRendererView mapRenderer = getMapRenderer();
 		if (locMarker != null && locMarker.marker != null && mapRenderer != null) {
-			mapRenderer.suspendSymbolsUpdate();
+			//mapRenderer.suspendSymbolsUpdate();
 			if (location != null) {  // location
 				final PointI target31 = Utilities.convertLatLonTo31(
 						new net.osmand.core.jni.LatLon(location.getLatitude(), location.getLongitude()));
@@ -327,7 +327,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			if (locMarker.marker.isHidden()) {
 				locMarker.marker.setIsHidden(false);
 			}
-			mapRenderer.resumeSymbolsUpdate();
+			//mapRenderer.resumeSymbolsUpdate();
 		}
 	}
 
@@ -420,9 +420,9 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 
 		if (view.hasMapRenderer()) {
 			boolean markersRecreated = false;
-			if (this.markersInvalidated) {
+			if (markersInvalidated) {
 				markersRecreated = recreateMarkerCollection();
-				this.markersInvalidated = false;
+				markersInvalidated = false;
 			}
 			boolean showHeading = shouldShowHeading();
 			boolean showBearing = shouldShowBearing(lastKnownLocation);

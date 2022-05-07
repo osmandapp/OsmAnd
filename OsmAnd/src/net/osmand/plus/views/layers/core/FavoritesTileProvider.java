@@ -9,10 +9,12 @@ import androidx.annotation.Nullable;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapTiledCollectionProvider;
 import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.QListMapTiledCollectionPoint;
 import net.osmand.core.jni.QListPointI;
 import net.osmand.core.jni.SWIGTYPE_p_sk_spT_SkImage_const_t;
 import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.TextRasterizer;
+import net.osmand.core.jni.TileId;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.core.jni.interface_MapTiledCollectionProvider;
 import net.osmand.data.BackgroundType;
@@ -147,6 +149,11 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 	public String getCaption(int index) {
 		MapLayerData data = index < mapLayerDataList.size() ? mapLayerDataList.get(index) : null;
 		return data != null ? PointDescription.getSimpleName(data.favorite, ctx) : "";
+	}
+
+	@Override
+	public QListMapTiledCollectionPoint getTilePoints(TileId tileId, ZoomLevel zoom) {
+		return new QListMapTiledCollectionPoint();
 	}
 
 	@Override

@@ -133,7 +133,7 @@
     <string name="day_night_info_description">Solopgang: %1$s
 \nSolnedgang: %2$s</string>
     <string name="day_night_info">Dag/nat information</string>
-    <string name="map_widget_vector_attributes">Renderingsattributter</string>
+    <string name="map_widget_vector_attributes">Gengivelsesegenskaber</string>
     <string name="map_widget_renderer">Kortstilart</string>
     <string name="layer_map_appearance">Konfigurer skærm</string>
     <string name="show_lanes">Vognbaner</string>
@@ -219,7 +219,7 @@
     <string name="show_traffic_warnings">Trafikadvarsler</string>
     <string name="rendering_attr_noPolygons_description">Gør alle overflader på kortet transparent.</string>
     <string name="rendering_attr_noPolygons_name">Polygoner</string>
-    <string name="rendering_attr_appMode_name">Renderingsmåde</string>
+    <string name="rendering_attr_appMode_name">Gengivelsesmetode</string>
     <string name="rendering_attr_appMode_description">Optimer kort til</string>
     <string name="rendering_attr_contourLines_description">Vis fra zoom-niveau (kræver højdekurvedata):</string>
     <string name="rendering_attr_contourLines_name">Vis højdekurver</string>
@@ -256,7 +256,7 @@
 \nEthvert af disse kort kan enten bruges som det vigtigste (basis) kort, der skal vises på skærmen, eller som en over- eller underlejring til et andet basiskort (såsom OsmAnd\'s standard offline kort). Visse elementer af OsmAnd vektorkort kan skjules via \'Konfigurer kort\'-menuen for at gøre et eventuelt underlejringskortet mere synligt.
 \n
 \nKortfliser kan downloades direkte via online-kilder, eller kan fremstilles til offline brug (og manuelt kopieres til OsmAnd-datamappen) som en SQLite database, som kan fremstilles ved hjælp af en række tredjeparts kortværktøjer.</string>
-    <string name="osmand_development_plugin_description">Viser indstillinger for udviklings- og fejlretningsfunktioner som rutesimulering eller renderingsydeevne indikation, eller talevejledning. Indstillinger er beregnet til udviklere og er ikke nødvendig for den almindelige bruger.</string>
+    <string name="osmand_development_plugin_description">Viser indstillinger for udviklings- og fejlretningsfunktioner som rutesimulering eller gengivelsesydeevne, eller talevejledning. Indstillinger er beregnet til udviklere og er ikke nødvendig for den almindelige app-bruger.</string>
     <string name="plugins_screen">Udvidelser</string>
     <string name="prefs_plugins_descr">Udvidelser aktiverer avancerede indstillinger og ekstra funktionalitet,.</string>
     <string name="prefs_plugins">Udvidelser</string>
@@ -264,7 +264,7 @@
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorkort vises sandsynligvis hurtigere. Fungerer muligvis ikke godt på nogle enheder.</string>
     <string name="play_commands_of_currently_selected_voice">Vælg en stemme og test den ved at afspille meddelelser:</string>
     <string name="debugging_and_development">OsmAnd udvikling</string>
-    <string name="native_rendering">Indbygget rendering</string>
+    <string name="native_rendering">Indbygget gengivelse</string>
     <string name="test_voice_prompts">Test talemeddelelser</string>
     <string name="switch_to_raster_map_to_see">Download et offline vektorkort for denne lokalitet i \'Indstillinger\' → \'Administrer kortfiler\' eller skift til \'Onlinekort\'-udvidelsen.</string>
     <string name="send_files_to_osm">Sende GPX-filer til OSM?</string>
@@ -511,8 +511,8 @@
     <string name="search_offline_clear_search">Ny søgning</string>
     <string name="map_text_size_descr">Tekststørrelse for navne på kortet:</string>
     <string name="map_text_size">Tekststørrelse</string>
-    <string name="trace_rendering">Renderingsfejlfinding</string>
-    <string name="trace_rendering_descr">Vis renderingsydeevne.</string>
+    <string name="trace_rendering">Gengivelsesfejlfinding</string>
+    <string name="trace_rendering_descr">Vis gengivelsesydeevne.</string>
     <string name="installing_new_resources">Udpakker nye data…</string>
     <string name="internet_connection_required_for_online_route">Online navigation fungerer ikke offline.</string>
     <string name="tts_language_not_supported_title">Sproget er ikke understøttet</string>
@@ -632,14 +632,14 @@
     <string name="shared_string_download_map">Hent kort</string>
     <string name="select_max_zoom_preload_area">Maksimal zoom der skal indlæses på forhånd</string>
     <string name="maps_could_not_be_downloaded">Kortet kunne ikke hentes</string>
-    <string name="continuous_rendering">Kontinuerlig rendering</string>
-    <string name="continuous_rendering_descr">Vis kontinuerlig rendering i stedet for hele kortet på en gang.</string>
+    <string name="continuous_rendering">Kontinuerlig gengivelse</string>
+    <string name="continuous_rendering_descr">Vis kontinuerlig gengivelse i stedet for billede på én gang.</string>
     <string name="rendering_exception">Kunne ikke optegne det valgte område.</string>
     <string name="show_point_options">Brug placering…</string>
     <string name="renderer_load_sucess">Rendering indlæst</string>
     <string name="renderer_load_exception">Kunne ikke indlæse renderer.</string>
     <string name="renderers">Vektor-rendering</string>
-    <string name="renderers_descr">Vælg renderingsudseende</string>
+    <string name="renderers_descr">Vælg gengivelsesudseende</string>
     <string name="poi_context_menu_website">Vis hjemmeside (IP)</string>
     <string name="poi_context_menu_call">Vis telefon (IP)</string>
     <string name="website">Hjemmeside</string>
@@ -1037,7 +1037,7 @@
     <string name="app_mode_motorcycle">Motorcykel</string>
     <string name="app_mode_boat">Båd</string>
     <string name="app_mode_aircraft">Fly</string>
-    <string name="map_widget_map_rendering">Kort-rendering</string>
+    <string name="map_widget_map_rendering">Kort-gengivelse</string>
     <string name="app_modes_choose_descr">Vælg viste profiler.</string>
     <string name="app_modes_choose">App-profiler</string>
     <string name="amenity_type_seamark">Sømærke</string>
@@ -1158,7 +1158,7 @@
     <string name="gpx_info_maximum_speed">Maks hastighed: %1$s </string>
     <string name="gpx_info_avg_altitude">Gennemsnitshøjde: %1$s</string>
     <string name="gpx_info_diff_altitude">Højdeinterval: %1$s</string>
-    <string name="gpx_info_asc_altitude">Ned-/stigning: %1$s</string>
+    <string name="gpx_info_asc_altitude">Ned-/opstigning: %1$s</string>
     <string name="gpx_timespan">Tidsrum: %1$s</string>
     <string name="gpx_timemoving">Tid i bevægelse: %1$s</string>
     <string name="gpx_selection_segment_title">Segment</string>
@@ -1310,8 +1310,8 @@
     <string name="coordinates">Koordinater</string>
     <string name="map_update">Der er %1$s opdateringer</string>
     <string name="error_avoid_specific_road">Ingen omfartsvej fundet</string>
-    <string name="use_opengl_render">Brug OpenGL rendering</string>
-    <string name="use_opengl_render_descr">Brug hardware accelereret OpenGL rendering (kan bruge mere batteri, eller virker ikke på meget gamle enheder).</string>
+    <string name="use_opengl_render">Brug OpenGL gengivelse</string>
+    <string name="use_opengl_render_descr">Brug hardware accelereret OpenGL-gengivelse (kan bruge mere batteri, eller virker ikke på meget gamle enheder).</string>
     <string name="everything_up_to_date">Alt er opdateret</string>
     <string name="no_internet_connection">Ude af stand til at hente, kontroller internetforbindelsen.</string>
     <string name="download_tab_downloads">Alle filhentninger</string>
@@ -1481,7 +1481,7 @@
     <string name="shared_string_currently_recording_track">Nuværende optagelsesspor</string>
     <string name="waypoint_visit_after">Besøg efter</string>
     <string name="waypoint_visit_before">Besøg før</string>
-    <string name="shared_string_collapse">Kollapset</string>
+    <string name="shared_string_collapse">Fold sammen</string>
     <string name="action_create">Handling: oprette</string>
     <string name="action_modify">Handling: rediger</string>
     <string name="action_delete">Handling: slet</string>
@@ -1861,7 +1861,7 @@
     <string name="map_marker">Kortmarkør</string>
     <string name="shared_string_reverse_order">Omvendt rækkefølge</string>
     <string name="select_map_markers">Vælg kortmarkører</string>
-    <string name="consider_turning_polygons_off">Det anbefales at deaktivere polygon-rendering.</string>
+    <string name="consider_turning_polygons_off">Det anbefales at deaktivere polygon-gengivelse.</string>
     <string name="add_points_to_map_markers_q">Tilføj alle punkter som kortmarkører?</string>
     <string name="shared_string_add_to_map_markers">Tilføj til kortmarkører</string>
     <string name="map_marker_1st">Første kortmarkør</string>
@@ -1928,7 +1928,7 @@
     <string name="access_hint_enter_category">Indtast kategori</string>
     <string name="access_hint_enter_description">Indtast beskrivelse.</string>
     <string name="access_map_linked_to_location">Kort forbundet til placering</string>
-    <string name="access_collapsed_list">Minineret liste</string>
+    <string name="access_collapsed_list">Minimeret liste</string>
     <string name="access_expanded_list">Udvidet liste</string>
     <string name="access_empty_list">Tom liste</string>
     <string name="access_tree_list">Hierarkisk liste</string>
@@ -2697,7 +2697,7 @@
     <string name="paid_plugin">Betalt udvidelse</string>
     <string name="popular_destinations">Populære destinationer</string>
     <string name="travel_card_update_descr">Nye Wikivoyage data er tilgængelige, opdater for at bruge dem.</string>
-    <string name="travel_card_download_descr">Hent Wikivoyage rejseguider for at se artikler om steder rundt om i verden uden forbindelse til internettet.</string>
+    <string name="travel_card_download_descr">Hent Wikivoyage-rejseguider for at se artikler om steder rundt om i verden uden forbindelse til internettet.</string>
     <string name="update_is_available">Opdatering er tilgængelig</string>
     <string name="download_file">Hent fil</string>
     <string name="start_editing_card_image_text">Den gratis verdensomspændende rejseguide, som alle kan redigere.</string>
@@ -3346,8 +3346,8 @@
     <string name="multimedia_rec_split_title">Optagelse automatisk opdelt</string>
     <string name="multimedia_use_system_camera">Brug systemprogram</string>
     <string name="osm_authorization_success">Autorisationen lykkes</string>
-    <string name="rearrange_categories">Omarrangere kategorier</string>
-    <string name="create_custom_categories_list_promo">Skift sorteringsrækkefølgen på listen og skjul kategorier. Importer eller eksporter alle ændringer som profiler.</string>
+    <string name="rearrange_categories">Omorganiser kategorier</string>
+    <string name="create_custom_categories_list_promo">Ændr sorteringsrækkefølgen på listen og skjul kategorier. Importer eller eksporter alle ændringer som profiler.</string>
     <string name="add_new_custom_category_button_promo">Tilføj en ny brugerdefineret kategori ved at vælge en eller flere kategorier.</string>
     <string name="shared_string_available">Tilgængelig</string>
     <string name="add_custom_category">Tilføje brugerdefineret kategori</string>
@@ -3388,13 +3388,13 @@
     <string name="replace_all_desc">Aktuelle poster erstattes med poster fra filen</string>
     <string name="replace_all">Erstat alle</string>
     <string name="keep_both">Behold begge</string>
-    <string name="shared_string_rendering_style">Renderingsstil</string>
+    <string name="shared_string_rendering_style">Gengivelsesstil</string>
     <string name="search_offline_geo_error">Den geografiske hensigt \'%s\' kunne ikke fortolkes.</string>
     <string name="shared_string_app_default_w_val">App-standard (%s)</string>
     <string name="keep_both_desc">Importerede poster tilføjes med præfiks</string>
     <string name="import_duplicates_title">Nogle elementer findes allerede</string>
     <string name="select_data_to_import">Vælg data der skal importeres.</string>
-    <string name="import_rendering_file">Importer renderingsfil</string>
+    <string name="import_rendering_file">Importér gengivelsesfil</string>
     <string name="restore_all_profile_settings_descr">Alle profilindstillinger gendannes til deres oprindelige tilstand efter oprettelse/import af profilen.</string>
     <string name="restore_all_profile_settings">Gendan alle profilindstillinger\?</string>
     <string name="saving_new_profile">Gemmer ny profil</string>
@@ -4516,7 +4516,7 @@
     <string name="rendering_attr_seabedDetail_description">Yderligere tekstinformation om havbunds overfladebeskaffenhed, kombinerede overfladetyper og klasser af havgræs</string>
     <string name="save_track_to_gpx_descrp">Auto-start sporoptagelse ved navigation og auto-gem bagefter.</string>
     <string name="gpx_no_routes_title">Der er ingen ruter</string>
-    <string name="gpx_no_routes_descr">Du kan bruge værktøjet \"%1$s\" til at gemme ruten som en fil.</string>
+    <string name="gpx_no_routes_descr">Du kan bruge værktøjet \"%1$s\" til at føje rute til fil.</string>
     <string name="quick_action_add_route_descr">En knap til at starte en rute fra midten af skærmen.</string>
     <string name="please_provide_group_name_message">Navngiv gruppen.</string>
     <string name="selected_waypoints_descr">Valgte rutepunkter føjes til sporet \"%1$s\"</string>
@@ -4620,4 +4620,45 @@
 \n
 \n</string>
     <string name="turn_on_public_transport_description">Slå til for at se ruter med offentlige transport på kortet.</string>
+    <string name="coordinates_widget_secondary_desc">Koordinaters format kan være ændring i %1$s – %2$s – %3$s.</string>
+    <string name="widget_secondary_desc_part_of">En del af %1$s-udvidelsen.</string>
+    <string name="elevation_profile_widget_desc">Modul viser højden og hældningsprofilen for den aktuelle rute.</string>
+    <string name="parking_widget_desc">Modul der viser afstanden fra skærmens centrum til parkeringspladsen.</string>
+    <string name="altitude_widget_desc">Modul viser højden over havniveau for den aktuelle geografiske placering.</string>
+    <string name="arrival_time_widget_desc">Ankomsttidspunkt på bestemmelsesstedet.</string>
+    <string name="map_markers_bar_widget_desc">På modulet i topbjælken kan du se afstanden og retningen til markøren fra den aktuelle position. Det er muligt at konfigurere, om der skal vises 1 eller 2 topmarkører i modulet.</string>
+    <string name="coordinates_widget_desc">Det viser de geografiske koordinater for den aktuelle geografiske placering.</string>
+    <string name="audio_video_notes_desc">Moduler giver hurtig adgang til at starte/stoppe en optagelse (lyd, video eller foto).</string>
+    <string name="navigation_points">Navigationspunkter</string>
+    <string name="route_maneuvers_desc">Navigations-moduler er aktiveret under navigation for at vise oplysninger såsom afstand, ankomst- eller resterende tid, næste sving, pejling, aktuelt vejnavn, oplysninger om kørebaner, maksimal hastighed, kommende advarsler, IP\'er og rutepunkter.</string>
+    <string name="route_maneuvers">Rutemanøvrer</string>
+    <string name="calculating_altitude">Beregner højde</string>
+    <string name="calculate_online_altitude_descr">Højdedata vil blive beregnet på OsmAnd-serveren.</string>
+    <string name="calculate_online">Beregn online</string>
+    <string name="track_attach_to_the_roads_descr">Spor vil blive forbundet til vejen ved hjælp af offline-kort, og sporets geometri vil blive ændret.</string>
+    <string name="get_altitude_data">Få højdedata</string>
+    <string name="shared_string_speed">Hastighed</string>
+    <string name="app_mode_mountain_bicycle">Mountainbike</string>
+    <string name="gps_info_widget_desc">Modul viser antallet af satellitter, som enheden registrerer og bruger på det pågældende tidspunkt.</string>
+    <string name="time_to_go_desc">Den tid i minutter eller timer, der er nødvendig for at nå din destination.</string>
+    <string name="bearing_secondary_desc">Du kan ændre formatet for de viste data i: %1$s – %2$s – %3$s.</string>
+    <string name="mapillary_widget_desc">Modul der giver hurtig adgang til Mapillary-appen for at tilføje billeder på gadeniveau.</string>
+    <string name="fps_widget_desc">Modul viser, hvor hurtigt kort og kortelementer vises og opdateres.</string>
+    <string name="av_notes_choose_action_widget_desc">Vælg handling.</string>
+    <string name="radius_rules_widget_desc">Radiusmålerværktøjet hjælper med at bestemme radius omkring det valgte punkt på kortet ved at vise afstandscirkler på kortet.</string>
+    <string name="current_time_widget_desc">Dette modul viser den aktuelle tid fra din enhed.</string>
+    <string name="battery_widget_desc">Modul viser batteriniveauet på din enhed.</string>
+    <string name="max_speed_widget_desc">Modul viser en hastighedsgrænse for en aktuel kørevej.</string>
+    <string name="current_speed_widget_desc">Mmodul viser din aktuelle hastighed, som den er registreret af GPS-sensoren.</string>
+    <string name="magnetic_bearing_widget_desc">Vinkel mellem magnetisk nord og det målpunkt, der observeres fra din position.</string>
+    <string name="lanes_widgets_desc">Bane-modulet viser det aktuelle vejbanelayout og fremhæver de baner, der skal køres i med aktiv navigation.</string>
+    <string name="street_name_widget_desc">Gadenavn-modulet viser det aktuelle gadenavn med en lige placeringspil eller det næste gadenavn med den manøvre, der skal udføres.</string>
+    <string name="shared_string_widget">Modul</string>
+    <string name="map_markers_desc">På modulet i topbjælken kan du se afstanden og retningen til markøren fra den aktuelle position. Det er muligt at konfigurere, at der vises 1 eller 2 topmarkører i modulet.</string>
+    <string name="bearing_desc">Pejlingsmodulet viser den absolutte eller relative pejling til et mål i vinkelenheder (grader 180, grader 360, milliradianer).</string>
+    <string name="navigation_points_desc">Navigations-moduler er aktiveret under navigation for at vise oplysninger såsom afstand, ankomst- eller resterende tid, næste sving, pejling, aktuelt vejnavn, oplysninger om kørebaner, maksimal hastighed, kommende advarsler, IP\'er og rutepunkter.</string>
+    <string name="get_altitude_information">Få højdeoplysninger</string>
+    <string name="calculate_altitude">Beregn højde</string>
+    <string name="no_altitude_data">Ingen højdedata</string>
+    <string name="av_def_action_choose">På forespørgsel</string>
 </resources>

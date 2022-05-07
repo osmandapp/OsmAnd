@@ -1,5 +1,7 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
+
 import android.Manifest;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -8,8 +10,6 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.os.Vibrator;
-import android.text.TextUtils;
-import android.util.Pair;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
@@ -23,51 +23,20 @@ import androidx.annotation.RequiresPermission;
 import androidx.appcompat.content.res.AppCompatResources;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.WptPt;
-import net.osmand.IndexConstants;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
-import net.osmand.RenderingContext;
 import net.osmand.aidl.AidlMapPointWrapper;
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.AmenitySymbolsProvider.AmenitySymbolsGroup;
-import net.osmand.core.jni.AreaI;
-import net.osmand.core.jni.IBillboardMapSymbol;
-import net.osmand.core.jni.IMapRenderer.MapSymbolInformation;
-import net.osmand.core.jni.MapObject;
-import net.osmand.core.jni.MapObjectsSymbolsProvider.MapObjectSymbolsGroup;
-import net.osmand.core.jni.MapSymbolInformationList;
-import net.osmand.core.jni.MapSymbolsGroup.AdditionalBillboardSymbolInstanceParameters;
-import net.osmand.core.jni.ObfMapObject;
-import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.QStringList;
-import net.osmand.core.jni.QStringStringHash;
-import net.osmand.core.jni.Utilities;
 import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.data.TransportStop;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiFilter;
-import net.osmand.osm.PoiType;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
-import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
-import net.osmand.plus.plugins.osmedit.OsmBugsLayer;
-import net.osmand.plus.render.MapRenderRepositories;
-import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.utils.AndroidUtils;
@@ -75,43 +44,25 @@ import net.osmand.plus.views.AddGpxPointBottomSheetHelper;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.MoveMarkerBottomSheetHelper;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.plus.views.layers.MapSelectionHelper.MapSelectionResult;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
-import net.osmand.plus.wikivoyage.data.TravelGpx;
-import net.osmand.router.network.NetworkRouteSelector;
-import net.osmand.router.network.NetworkRouteSelector.RouteKey;
-import net.osmand.router.network.NetworkRouteSelector.RouteType;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
-import java.io.File;
-import java.io.IOException;
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import gnu.trove.list.array.TIntArrayList;
-
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-import static net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
-import static net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
 
 public class ContextMenuLayer extends OsmandMapLayer {
 
 	private static final Log log = PlatformUtil.getLog(ContextMenuLayer.class);
 	public static final int VIBRATE_SHORT = 100;
-	private static final int AMENITY_SEARCH_RADIUS = 50;
 
 	private OsmandMapTileView view;
 
@@ -123,8 +74,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private ImageView contextMarker;
 	private Paint paint;
 	private Paint outlinePaint;
-	private Map<LatLon, BackgroundType> pressedLatLonFull = new HashMap<>();
-	private Map<LatLon, BackgroundType> pressedLatLonSmall = new HashMap<>();
+
+	private final MapSelectionHelper selectionHelper;
 
 	private GestureDetector movementListener;
 
@@ -137,11 +88,11 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private boolean mInGpxDetailsMode;
 	private boolean mInAddGpxPointMode;
 
-	private List<String> publicTransportTypes;
 	private Object selectedObject;
 
 	public ContextMenuLayer(@NonNull Context context) {
 		super(context);
+		selectionHelper = new MapSelectionHelper(context);
 	}
 
 	@Override
@@ -202,29 +153,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		this.selectedObject = selectedObject;
 	}
 
-	@Nullable
-	private List<String> getPublicTransportTypes() {
-		OsmandApplication app = getApplication();
-		if (publicTransportTypes == null && !app.isApplicationInitializing()) {
-			PoiCategory category = app.getPoiTypes().getPoiCategoryByName("transportation");
-			if (category != null) {
-				List<PoiFilter> filters = category.getPoiFilters();
-				publicTransportTypes = new ArrayList<>();
-				for (PoiFilter poiFilter : filters) {
-					if (poiFilter.getKeyName().equals("public_transport")) {
-						for (PoiType poiType : poiFilter.getPoiTypes()) {
-							publicTransportTypes.add(poiType.getKeyName());
-							for (PoiType poiAdditionalType : poiType.getPoiAdditionals()) {
-								publicTransportTypes.add(poiAdditionalType.getKeyName());
-							}
-						}
-					}
-				}
-			}
-		}
-		return publicTransportTypes;
-	}
-
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings nightMode) {
 		MapActivity mapActivity = getMapActivity();
@@ -259,11 +187,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				}
 			}
 		}
-		float textScale = 1f;
-		if (!pressedLatLonSmall.isEmpty() || !pressedLatLonFull.isEmpty()) {
-			textScale = getTextScale();
-		}
-		for (Entry<LatLon, BackgroundType> entry : pressedLatLonSmall.entrySet()) {
+		float textScale = selectionHelper.hasPressedLatLon() ? getTextScale() : 1f;
+		for (Entry<LatLon, BackgroundType> entry : selectionHelper.getPressedLatLonSmall().entrySet()) {
 			LatLon latLon = entry.getKey();
 			int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
@@ -273,7 +198,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					x, y, pressedBitmapSmall.getWidth(), pressedBitmapSmall.getHeight(), textScale);
 			canvas.drawBitmap(pressedBitmapSmall, null, destRect, paint);
 		}
-		for (Entry<LatLon, BackgroundType> entry : pressedLatLonFull.entrySet()) {
+		for (Entry<LatLon, BackgroundType> entry : selectionHelper.getPressedLatLonFull().entrySet()) {
 			LatLon latLon = entry.getKey();
 			int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
@@ -644,9 +569,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	public boolean showContextMenu(@NonNull LatLon latLon,
-								   @Nullable PointDescription pointDescription,
-								   @Nullable Object object,
-								   @Nullable IContextMenuProvider provider) {
+	                               @Nullable PointDescription pointDescription,
+	                               @Nullable Object object,
+	                               @Nullable IContextMenuProvider provider) {
 		if (mInAddGpxPointMode) {
 			String title = pointDescription == null ? "" : pointDescription.getName();
 			if (mAddGpxPointBottomSheetHelper != null) {
@@ -671,193 +596,19 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (menu == null || mAddGpxPointBottomSheetHelper == null) {
 			return false;
 		}
+		MapSelectionResult selectionResult = selectionHelper.selectObjectsFromMap(point, tileBox, showUnknownLocation);
+		LatLon pointLatLon = selectionResult.pointLatLon;
+		Map<Object, IContextMenuProvider> selectedObjects = selectionResult.selectedObjects;
 
-		LatLon objectLatLon = null;
-		Map<Object, IContextMenuProvider> selectedObjects = selectObjectsForContextMenu(tileBox, point, false, showUnknownLocation);
-		NativeOsmandLibrary nativeLib = NativeOsmandLibrary.getLoadedLibrary();
-		LatLon pointLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
-		OsmandApplication app = getApplication();
-		IContextMenuProvider poiMenuProvider = app.getOsmandMap().getMapLayers().getPoiMapLayer();
-		IContextMenuProvider gpxMenuProvider = app.getOsmandMap().getMapLayers().getGpxLayer();
-
-		if (app.getSettings().USE_OPENGL_RENDER.get() && NativeCoreContext.isInit()) {
-			MapRendererView rendererView = view.getMapRenderer();
-			if (rendererView != null) {
-				int delta = 20;
-				PointI tl = new PointI((int) point.x - delta, (int) point.y - delta);
-				PointI br = new PointI((int) point.x + delta, (int) point.y + delta);
-				MapSymbolInformationList symbols = rendererView.getSymbolsIn(new AreaI(tl, br), false);
-				for (int i = 0; i < symbols.size(); i++) {
-					MapSymbolInformation symbolInfo = symbols.get(i);
-					IBillboardMapSymbol billboardMapSymbol;
-					try {
-						billboardMapSymbol = IBillboardMapSymbol.dynamic_pointer_cast(symbolInfo.getMapSymbol());
-					} catch (Exception eBillboard) {
-						billboardMapSymbol = null;
-					}
-					if (billboardMapSymbol != null) {
-						double lat = Utilities.get31LatitudeY(billboardMapSymbol.getPosition31().getY());
-						double lon = Utilities.get31LongitudeX(billboardMapSymbol.getPosition31().getX());
-						objectLatLon = new LatLon(lat, lon);
-
-						AdditionalBillboardSymbolInstanceParameters billboardAdditionalParams;
-						try {
-							billboardAdditionalParams = AdditionalBillboardSymbolInstanceParameters
-									.dynamic_pointer_cast(symbolInfo.getInstanceParameters());
-						} catch (Exception eBillboardParams) {
-							billboardAdditionalParams = null;
-						}
-						if (billboardAdditionalParams != null && billboardAdditionalParams.getOverridesPosition31()) {
-							lat = Utilities.get31LatitudeY(billboardAdditionalParams.getPosition31().getY());
-							lon = Utilities.get31LongitudeX(billboardAdditionalParams.getPosition31().getX());
-							objectLatLon = new LatLon(lat, lon);
-						}
-
-						Amenity amenity = null;
-						net.osmand.core.jni.Amenity jniAmenity;
-						try {
-							jniAmenity = AmenitySymbolsGroup.dynamic_cast(symbolInfo.getMapSymbol().getGroupPtr()).getAmenity();
-						} catch (Exception eAmenity) {
-							jniAmenity = null;
-						}
-						if (jniAmenity != null) {
-							List<String> names = getValues(jniAmenity.getLocalizedNames());
-							names.add(jniAmenity.getNativeName());
-							long id = jniAmenity.getId().getId().longValue() >> 7;
-							amenity = findAmenity(app, id, names, objectLatLon, AMENITY_SEARCH_RADIUS);
-						} else {
-							MapObject mapObject;
-							try {
-								mapObject = MapObjectSymbolsGroup.dynamic_cast(symbolInfo.getMapSymbol().getGroupPtr()).getMapObject();
-							} catch (Exception eMapObject) {
-								mapObject = null;
-							}
-							if (mapObject != null) {
-								ObfMapObject obfMapObject;
-								try {
-									obfMapObject = ObfMapObject.dynamic_pointer_cast(mapObject);
-								} catch (Exception eObfMapObject) {
-									obfMapObject = null;
-								}
-								if (obfMapObject != null) {
-									List<String> names = getValues(obfMapObject.getCaptionsInAllLanguages());
-									names.add(obfMapObject.getCaptionInNativeLanguage());
-									long id = obfMapObject.getId().getId().longValue() >> 7;
-									amenity = findAmenity(app, id, names, objectLatLon, AMENITY_SEARCH_RADIUS);
-								}
-							}
-						}
-						if (amenity != null && isUniqueAmenity(selectedObjects.keySet(), amenity)) {
-							selectedObjects.put(amenity, poiMenuProvider);
-						}
-					}
-				}
-			}
-		} else if (nativeLib != null) {
-			MapRenderRepositories maps = app.getResourceManager().getRenderer();
-			RenderingContext rc = maps.getVisibleRenderingContext();
-			RenderedObject[] renderedObjects = null;
-			if (rc != null && rc.zoom == tileBox.getZoom()) {
-				double sinRotate = Math.sin(Math.toRadians(rc.rotate - tileBox.getRotate()));
-				double cosRotate = Math.cos(Math.toRadians(rc.rotate - tileBox.getRotate()));
-				float x = tileBox.getPixXFrom31((int) (rc.leftX * rc.tileDivisor), (int) (rc.topY * rc.tileDivisor));
-				float y = tileBox.getPixYFrom31((int) (rc.leftX * rc.tileDivisor), (int) (rc.topY * rc.tileDivisor));
-				float dx = point.x - x;
-				float dy = point.y - y;
-				int coordX = (int) (dx * cosRotate - dy * sinRotate);
-				int coordY = (int) (dy * cosRotate + dx * sinRotate);
-
-				renderedObjects = nativeLib.searchRenderedObjectsFromContext(rc, coordX, coordY, true);
-			}
-			if (renderedObjects != null) {
-				int TILE_SIZE = 256;
-				double cosRotateTileSize = Math.cos(Math.toRadians(rc.rotate)) * TILE_SIZE;
-				double sinRotateTileSize = Math.sin(Math.toRadians(rc.rotate)) * TILE_SIZE;
-
-				for (RenderedObject renderedObject : renderedObjects) {
-
-					String routeID = renderedObject.getRouteID();
-					String fileName = renderedObject.getGpxFileName();
-					String filter = routeID != null ? routeID : fileName;
-					List<RouteKey> routeKeys = RouteType.getRouteStringKeys(renderedObject);
-
-					boolean isTravelGpx = !Algorithms.isEmpty(filter);
-					boolean isRouteGpx = !Algorithms.isEmpty(routeKeys);
-					if (!isTravelGpx && !isRouteGpx && (renderedObject.getId() == null
-							|| !renderedObject.isVisible() || renderedObject.isDrawOnPath())) {
-						continue;
-					}
-
-					if (renderedObject.getLabelX() != 0 && renderedObject.getLabelY() != 0) {
-						double lat = MapUtils.get31LatitudeY(renderedObject.getLabelY());
-						double lon = MapUtils.get31LongitudeX(renderedObject.getLabelX());
-						renderedObject.setLabelLatLon(new LatLon(lat, lon));
-					} else {
-						double cx = renderedObject.getBbox().centerX();
-						double cy = renderedObject.getBbox().centerY();
-						double dTileX = (cx * cosRotateTileSize + cy * sinRotateTileSize) / (TILE_SIZE * TILE_SIZE);
-						double dTileY = (cy * cosRotateTileSize - cx * sinRotateTileSize) / (TILE_SIZE * TILE_SIZE);
-						int x31 = (int) ((dTileX + rc.leftX) * rc.tileDivisor);
-						int y31 = (int) ((dTileY + rc.topY) * rc.tileDivisor);
-						double lat = MapUtils.get31LatitudeY(y31);
-						double lon = MapUtils.get31LongitudeX(x31);
-						renderedObject.setLabelLatLon(new LatLon(lat, lon));
-					}
-
-					if (renderedObject.getX() != null && renderedObject.getX().size() == 1
-							&& renderedObject.getY() != null && renderedObject.getY().size() == 1) {
-						objectLatLon = new LatLon(MapUtils.get31LatitudeY(renderedObject.getY().get(0)),
-								MapUtils.get31LongitudeX(renderedObject.getX().get(0)));
-					} else if (renderedObject.getLabelLatLon() != null) {
-						objectLatLon = renderedObject.getLabelLatLon();
-					}
-					LatLon searchLatLon = objectLatLon != null ? objectLatLon : pointLatLon;
-					if (isTravelGpx) {
-						TravelGpx travelGpx = app.getTravelHelper().searchGpx(pointLatLon, filter,
-								renderedObject.getTagValue("ref"));
-						if (travelGpx != null && isUniqueGpx(selectedObjects, travelGpx)) {
-							WptPt selectedPoint = new WptPt();
-							selectedPoint.lat = pointLatLon.getLatitude();
-							selectedPoint.lon = pointLatLon.getLongitude();
-							SelectedGpxPoint selectedGpxPoint = new SelectedGpxPoint(null, selectedPoint);
-							selectedObjects.put(new Pair<>(travelGpx, selectedGpxPoint), gpxMenuProvider);
-						}
-					} else if (isRouteGpx) {
-						int searchRadius = (int) (getScaledTouchRadius(app, getDefaultRadiusPoi(tileBox)) * 1.5f);
-						LatLon minLatLon = tileBox.getLatLonFromPixel(point.x - searchRadius, point.y - searchRadius);
-						LatLon maxLatLon = tileBox.getLatLonFromPixel(point.x + searchRadius, point.y + searchRadius);
-						QuadRect rect = new QuadRect(minLatLon.getLongitude(), maxLatLon.getLatitude(),
-								maxLatLon.getLongitude(), minLatLon.getLatitude());
-						putRouteGpxToSelected(selectedObjects, gpxMenuProvider, rect);
-					} else {
-						Amenity amenity = findAmenity(app, renderedObject.getId() >> 7,
-								renderedObject.getOriginalNames(), searchLatLon, AMENITY_SEARCH_RADIUS);
-						if (amenity != null) {
-							if (renderedObject.getX() != null && renderedObject.getX().size() > 1
-									&& renderedObject.getY() != null && renderedObject.getY().size() > 1) {
-								amenity.getX().addAll(renderedObject.getX());
-								amenity.getY().addAll(renderedObject.getY());
-							}
-							if (isUniqueAmenity(selectedObjects.keySet(), amenity)) {
-								selectedObjects.put(amenity, poiMenuProvider);
-							}
-						} else {
-							selectedObjects.put(renderedObject, null);
-						}
-					}
-				}
-			}
-		}
 		for (Map.Entry<Object, IContextMenuProvider> entry : selectedObjects.entrySet()) {
 			IContextMenuProvider provider = entry.getValue();
 			if (provider != null && provider.runExclusiveAction(entry.getKey(), showUnknownLocation)) {
 				return true;
 			}
 		}
-		processTransportStops(selectedObjects);
 		if (selectedObjects.size() == 1) {
 			Object selectedObj = selectedObjects.keySet().iterator().next();
-			LatLon latLon = objectLatLon;
+			LatLon latLon = selectionResult.getObjectLatLon();
 			PointDescription pointDescription = null;
 			final IContextMenuProvider provider = selectedObjects.get(selectedObj);
 			if (provider != null) {
@@ -895,82 +646,11 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return false;
 	}
 
-	private void putRouteGpxToSelected(@NonNull Map<Object, IContextMenuProvider> selectedObjects,
-	                                   @NonNull IContextMenuProvider gpxMenuProvider, @NonNull QuadRect rect) {
-
-		BinaryMapIndexReader[] readers = getApplication().getResourceManager().getRoutingMapFiles();
-		NetworkRouteSelectorFilter selectorFilter = new NetworkRouteSelectorFilter();
-		NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter);
-		List<NetworkRouteSegment> segmentList = new ArrayList<>();
-		try {
-			segmentList.addAll(routeSelector.getFirstSegments(rect, null));
-		} catch (IOException e) {
-			log.error(e);
-		}
-		for (NetworkRouteSegment routeSegment : segmentList) {
-			if (isUniqueRoute(selectedObjects.keySet(), routeSegment)) {
-				selectedObjects.put(new Pair<>(routeSegment, rect), gpxMenuProvider);
-			}
-		}
-	}
-
 	private PointF getPointFromLatLon(double latitude, double longitude) {
 		RotatedTileBox cp = getMapView().getCurrentRotatedTileBox();
 		float x = cp.getPixXFromLatLon(latitude, longitude);
 		float y = cp.getPixYFromLatLon(latitude, longitude);
 		return new PointF(x, y);
-	}
-
-	private List<String> getValues(@Nullable QStringStringHash set) {
-		List<String> res = new ArrayList<>();
-		if (set != null) {
-			QStringList keys = set.keys();
-			for (int i = 0; i < keys.size(); i++) {
-				res.add(set.get(keys.get(i)));
-			}
-		}
-		return res;
-	}
-
-	private boolean isUniqueGpx(Map<Object, IContextMenuProvider> selectedObjects, TravelGpx travelGpx) {
-		String tracksDir = view.getApplication().getAppPath(IndexConstants.GPX_TRAVEL_DIR).getPath();
-		File file = new File(tracksDir, travelGpx.getRouteId() + GPX_FILE_EXT);
-		if (file.exists()) {
-			return false;
-		}
-		for (Map.Entry<Object, IContextMenuProvider> entry : selectedObjects.entrySet()) {
-			if (entry.getKey() instanceof Pair && entry.getValue() instanceof GPXLayer
-					&& ((Pair<?, ?>) entry.getKey()).first instanceof TravelGpx) {
-				TravelGpx object = (TravelGpx) ((Pair<?, ?>) entry.getKey()).first;
-				if (travelGpx.equals(object)) {
-					return false;
-				}
-			}
-		}
-		return true;
-	}
-
-	private boolean isUniqueAmenity(@NonNull Set<Object> set, @NonNull Amenity amenity) {
-		for (Object o : set) {
-			if (o instanceof Amenity && ((Amenity) o).compareTo(amenity) == 0) {
-				return false;
-			} else if (o instanceof TransportStop && ((TransportStop) o).getName().startsWith(amenity.getName())) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	private boolean isUniqueRoute(@NonNull Set<Object> set, @NonNull NetworkRouteSegment routeSegment) {
-		for (Object selectedObject : set) {
-			if (selectedObject instanceof Pair && ((Pair<?, ?>) selectedObject).first instanceof NetworkRouteSegment) {
-				NetworkRouteSegment rs = (NetworkRouteSegment) ((Pair<?, ?>) selectedObject).first;
-				if (rs.routeKey.equals(routeSegment.routeKey)) {
-					return false;
-				}
-			}
-		}
-		return true;
 	}
 
 	public boolean disableSingleTap() {
@@ -1010,77 +690,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			}
 		}
 		return res;
-	}
-
-	private void processTransportStops(@NonNull Map<Object, IContextMenuProvider> selectedObjects) {
-		List<String> publicTransportTypes = getPublicTransportTypes();
-		if (publicTransportTypes != null) {
-			List<Amenity> transportStopAmenities = new ArrayList<>();
-			for (Object o : selectedObjects.keySet()) {
-				if (o instanceof Amenity) {
-					Amenity amenity = (Amenity) o;
-					if (!TextUtils.isEmpty(amenity.getSubType()) && publicTransportTypes.contains(amenity.getSubType())) {
-						transportStopAmenities.add(amenity);
-					}
-				}
-			}
-			if (transportStopAmenities.size() > 0) {
-				for (Amenity amenity : transportStopAmenities) {
-					TransportStop transportStop = TransportStopController.findBestTransportStopForAmenity(getApplication(), amenity);
-					if (transportStop != null) {
-						TransportStopsLayer transportStopsLayer = getApplication().getOsmandMap().getMapLayers().getTransportStopsLayer();
-						if (transportStopsLayer != null) {
-							selectedObjects.remove(amenity);
-							selectedObjects.put(transportStop, transportStopsLayer);
-						}
-					}
-				}
-			}
-		}
-	}
-
-	@NonNull
-	private Map<Object, IContextMenuProvider> selectObjectsForContextMenu(RotatedTileBox tileBox,
-																		  PointF point, boolean acquireObjLatLon,
-																		  boolean unknownLocation) {
-		Map<LatLon, BackgroundType> pressedLatLonFull = new HashMap<>();
-		Map<LatLon, BackgroundType> pressedLatLonSmall = new HashMap<>();
-		Map<Object, IContextMenuProvider> selectedObjects = new HashMap<>();
-		List<Object> s = new ArrayList<>();
-		for (OsmandMapLayer lt : view.getLayers()) {
-			if (lt instanceof IContextMenuProvider) {
-				s.clear();
-				final IContextMenuProvider l = (IContextMenuProvider) lt;
-				l.collectObjectsFromPoint(point, tileBox, s, unknownLocation);
-				for (Object o : s) {
-					selectedObjects.put(o, l);
-					if (acquireObjLatLon && l.isObjectClickable(o)) {
-						LatLon latLon = l.getObjectLocation(o);
-						BackgroundType backgroundType = DEFAULT_BACKGROUND_TYPE;
-						if (o instanceof OsmBugsLayer.OpenStreetNote) {
-							backgroundType = BackgroundType.COMMENT;
-						}
-						if (o instanceof FavouritePoint) {
-							backgroundType = ((FavouritePoint) o).getBackgroundType();
-						}
-						if (o instanceof GPXUtilities.WptPt) {
-							backgroundType = BackgroundType.getByTypeName(
-									((GPXUtilities.WptPt) o).getBackgroundType(), DEFAULT_BACKGROUND_TYPE);
-						}
-						if (lt.isPresentInFullObjects(latLon) && !pressedLatLonFull.containsKey(latLon)) {
-							pressedLatLonFull.put(latLon, backgroundType);
-						} else if (lt.isPresentInSmallObjects(latLon) && !pressedLatLonSmall.containsKey(latLon)) {
-							pressedLatLonSmall.put(latLon, backgroundType);
-						}
-					}
-				}
-			}
-		}
-		if (acquireObjLatLon) {
-			this.pressedLatLonFull = pressedLatLonFull;
-			this.pressedLatLonSmall = pressedLatLonSmall;
-		}
-		return selectedObjects;
 	}
 
 	@Override
@@ -1199,16 +808,17 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		switch (event.getAction()) {
 			case MotionEvent.ACTION_DOWN:
 				if (!mInChangeMarkerPositionMode && !mInGpxDetailsMode) {
-					selectObjectsForContextMenu(tileBox, new PointF(event.getX(), event.getY()), true, true);
-					if (pressedLatLonFull.size() > 0 || pressedLatLonSmall.size() > 0) {
+					PointF pointF = new PointF(event.getX(), event.getY());
+					selectionHelper.selectObjectsFromMap(tileBox, pointF, true, true);
+					if (selectionHelper.hasPressedLatLon()) {
 						view.refreshMap();
 					}
 				}
 				break;
 			case MotionEvent.ACTION_UP:
 			case MotionEvent.ACTION_CANCEL:
-				pressedLatLonFull.clear();
-				pressedLatLonSmall.clear();
+				selectionHelper.getPressedLatLonFull().clear();
+				selectionHelper.getPressedLatLonSmall().clear();
 				view.refreshMap();
 				break;
 		}
@@ -1240,8 +850,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		boolean isObjectMovable(Object o);
 
 		void applyNewObjectPosition(@NonNull Object o,
-									@NonNull LatLon position,
-									@Nullable ApplyMovedObjectCallback callback);
+		                            @NonNull LatLon position,
+		                            @Nullable ApplyMovedObjectCallback callback);
 	}
 
 	public interface ApplyMovedObjectCallback {

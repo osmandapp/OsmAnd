@@ -1,16 +1,7 @@
 package net.osmand.plus.mapmarkers;
 
-import static net.osmand.GPXUtilities.readText;
-import static net.osmand.GPXUtilities.writeNotNullText;
-import static net.osmand.util.MapUtils.createShortLinkString;
-
 import android.util.Pair;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
-import net.osmand.plus.utils.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXExtensionsReader;
 import net.osmand.GPXUtilities.GPXExtensionsWriter;
@@ -23,6 +14,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.codec.binary.Hex;
@@ -42,8 +34,16 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Random;
 import java.util.Set;
+import java.util.UUID;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
+import static net.osmand.GPXUtilities.readText;
+import static net.osmand.GPXUtilities.writeNotNullText;
+import static net.osmand.util.MapUtils.createShortLinkString;
 
 public class ItineraryDataHelper {
 
@@ -386,9 +386,10 @@ public class ItineraryDataHelper {
 
 	public static String getMarkerId(@NonNull OsmandApplication app, @NonNull MapMarker marker, @Nullable MapMarkersGroup group) {
 		if (group == null) {
-			return String.valueOf(System.currentTimeMillis()) + String.valueOf(new Random().nextInt(900) + 100);
+			return UUID.randomUUID().toString();
 		} else {
-			return group.getId() + marker.getName(app) + createShortLinkString(marker.point.getLatitude(), marker.point.getLongitude(), 15);
+			String shortLink = createShortLinkString(marker.point.getLatitude(), marker.point.getLongitude(), 15);
+			return group.getId() + marker.getName(app) + shortLink;
 		}
 	}
 

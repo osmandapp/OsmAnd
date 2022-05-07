@@ -1,10 +1,41 @@
 package net.osmand.plus.views.layers;
 
 
+import static net.osmand.plus.views.mapwidgets.WidgetParams.ALTITUDE;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.ARRIVAL_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.BATTERY;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.COORDINATES;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.DISTANCE_TO_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.ELEVATION_PROFILE;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.GPS_INFO;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_ARRIVAL_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_TIME_TO_GO;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.LANES;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.MAGNETIC_BEARING;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.MARKERS_TOP_BAR;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.MAX_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.RADIUS_RULER;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.RELATIVE_BEARING;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.SECOND_NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_1;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_2;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.SMALL_NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.STREET_NAME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TIME_TO_GO;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.StateChangedListener;
 import net.osmand.data.RotatedTileBox;
@@ -53,37 +84,6 @@ import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
-import static net.osmand.plus.views.mapwidgets.WidgetParams.ALTITUDE;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.ARRIVAL_TIME;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.BATTERY;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.COORDINATES;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_TIME;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.DISTANCE_TO_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.ELEVATION_PROFILE;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.GPS_INFO;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_ARRIVAL_TIME;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_TIME_TO_GO;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.LANES;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.MAGNETIC_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.MARKERS_TOP_BAR;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.MAX_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.RADIUS_RULER;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.RELATIVE_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.SECOND_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_1;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_2;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.SMALL_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.STREET_NAME;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.TIME_TO_GO;
 
 public class MapInfoLayer extends OsmandMapLayer {
 
@@ -389,10 +389,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 		}
 	}
 
-	public RulerWidget setupRulerWidget(View mapRulerView) {
+	public RulerWidget setupRulerWidget(@NonNull View mapRulerView) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			RulerWidget rulerWidget = new RulerWidget(mapActivity, mapRulerView);
+			RulerWidget rulerWidget = new RulerWidget(mapActivity.getMyApplication(), mapRulerView);
 			rulerWidget.setVisibility(false);
 
 			TextState ts = calculateTextState();
@@ -519,7 +519,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			alarmControl.updateInfo(drawSettings, false);
 
 			for (RulerWidget rulerWidget : rulerWidgets) {
-				rulerWidget.updateInfo(tileBox, drawSettings);
+				rulerWidget.updateInfo(tileBox);
 			}
 		}
 	}
