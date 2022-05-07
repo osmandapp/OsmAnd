@@ -196,7 +196,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 			WidgetsPanel panel = panels.get(i);
 			if (tab != null) {
 				tab.setTag(panel);
-				tab.setIcon(panel.getIconId());
+				tab.setIcon(panel.getIconId(AndroidUtils.isLayoutRtl(app)));
 			}
 		}
 

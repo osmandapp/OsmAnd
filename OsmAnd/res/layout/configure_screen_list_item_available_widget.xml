@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/container"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:orientation="vertical"
@@ -46,7 +47,7 @@
 			android:layout_height="@dimen/standard_icon_size"
 			android:layout_marginStart="@dimen/list_content_padding_large"
 			android:layout_marginEnd="@dimen/content_padding"
-			osmand:srcCompat="@drawable/ic_action_info_dark"
+			osmand:srcCompat="@drawable/ic_action_info"
 			osmand:tint="?default_icon_color"
 			tools:ignore="ContentDescription" />
 

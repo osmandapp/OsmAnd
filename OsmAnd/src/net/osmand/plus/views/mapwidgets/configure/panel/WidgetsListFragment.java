@@ -22,8 +22,8 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
+import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableItemViewHolder;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
@@ -100,7 +100,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		updateContent();
 
 		TextView panelTitle = view.findViewById(R.id.panel_title);
-		panelTitle.setText(getString(selectedPanel.getTitleId()));
+		panelTitle.setText(getString(selectedPanel.getTitleId(AndroidUtils.isLayoutRtl(app))));
 
 		setupReorderButton(changeOrderListButton);
 		setupReorderButton(changeOrderFooterButton);
@@ -155,7 +155,8 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		AndroidUiHelper.updateVisibility(noWidgetsContainer, noEnabledWidgets);
 		if (noEnabledWidgets) {
 			ImageView noWidgetsImage = view.findViewById(R.id.no_widgets_image);
-			Drawable noWidgetsIcon = app.getUIUtilities().getIcon(selectedPanel.getIconId(), nightMode);
+			boolean rtl = AndroidUtils.isLayoutRtl(app);
+			Drawable noWidgetsIcon = app.getUIUtilities().getIcon(selectedPanel.getIconId(rtl), nightMode);
 			noWidgetsImage.setImageDrawable(noWidgetsIcon);
 		} else {
 			inflateEnabledWidgets();
@@ -241,13 +242,6 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		}
 	}
 
-	private void setupListItemBackground(@NonNull View view) {
-		View button = view.findViewById(R.id.button_container);
-		int activeColor = selectedAppMode.getProfileColor(nightMode);
-		Drawable background = UiUtilities.getColoredSelectableDrawable(app, activeColor, 0.3f);
-		AndroidUtils.setBackground(button, background);
-	}
-
 	private void updateAvailableWidgets() {
 		availableWidgetsContainer.removeAllViews();
 
@@ -322,9 +316,12 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 					}
 				}
 			});
+			view.setOnClickListener(v -> infoButton.callOnClick());
 
 			boolean last = i + 1 == widgets.size();
 			AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_divider), !last || hasExternalWidgets);
+
+			setupListItemBackground(view);
 
 			availableWidgetsContainer.addView(view);
 		}
@@ -387,6 +384,13 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			}
 		}
 		return externalWidgets;
+	}
+
+	private void setupListItemBackground(@NonNull View view) {
+		View button = view.findViewById(R.id.container);
+		int profileColor = selectedAppMode.getProfileColor(nightMode);
+		Drawable background = UiUtilities.getColoredSelectableDrawable(app, profileColor, 0.3f);
+		AndroidUtils.setBackground(button, background);
 	}
 
 	@Override
