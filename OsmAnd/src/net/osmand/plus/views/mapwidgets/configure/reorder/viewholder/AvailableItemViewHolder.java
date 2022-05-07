@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 public class AvailableItemViewHolder extends ViewHolder implements UnmovableItem {
 
+	public final View container;
 	public final ImageButton addButton;
 	public final ImageView icon;
 	public final TextView title;
@@ -29,6 +30,7 @@ public class AvailableItemViewHolder extends ViewHolder implements UnmovableItem
 
 	public AvailableItemViewHolder(@NonNull View itemView) {
 		super(itemView);
+		container = itemView.findViewById(R.id.container);
 		addButton = itemView.findViewById(R.id.add_button);
 		icon = itemView.findViewById(R.id.icon);
 		title = itemView.findViewById(R.id.title);

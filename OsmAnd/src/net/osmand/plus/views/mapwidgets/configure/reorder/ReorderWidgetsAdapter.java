@@ -256,6 +256,8 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		viewHolder.title.setText(AvailableItemViewHolder.getGroupTitle(widgetGroup, app, nightMode));
 
 		viewHolder.infoButton.setOnClickListener(showInfoListener);
+		viewHolder.itemView.setOnClickListener(v -> viewHolder.infoButton.callOnClick());
+		AndroidUtils.setBackground(viewHolder.container, getColoredSelectableDrawable(app, profileColor, 0.3f));
 
 		updateAvailableItemDivider(viewHolder, position);
 	}
@@ -289,6 +291,8 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		viewHolder.title.setText(widgetInfo.title);
 
 		viewHolder.infoButton.setOnClickListener(v -> showWidgetInfoIfPossible(widgetInfo));
+		viewHolder.itemView.setOnClickListener(v -> viewHolder.infoButton.callOnClick());
+		AndroidUtils.setBackground(viewHolder.container, getColoredSelectableDrawable(app, profileColor, 0.3f));
 
 		updateAvailableItemDivider(viewHolder, position);
 	}
