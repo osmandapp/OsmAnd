@@ -19,6 +19,7 @@ import net.osmand.util.MapUtils;
 public class OsmMapUtils {
 	
 	private static final double POLY_CENTER_PRECISION= 1e-6;
+	private static final int LOOP_LIMITATION = 100000;
 
 	public static double getDistance(Node e1, Node e2) {
 		return MapUtils.getDistance(e1.getLatitude(), e1.getLongitude(), e2.getLatitude(), e2.getLongitude());
@@ -587,7 +588,8 @@ public class OsmMapUtils {
         Cell bboxCell = new Cell(minX + width / 2, minY + height / 2, 0, rings);
         if (bboxCell.d > bestCell.d) bestCell = bboxCell;
 
-        while (!cellQueue.isEmpty()) {
+        int count = 0;
+        while (!cellQueue.isEmpty() && count < LOOP_LIMITATION) {
             // pick the most promising cell from the queue
             Cell cell = cellQueue.poll();
 
@@ -606,6 +608,7 @@ public class OsmMapUtils {
             cellQueue.add(new Cell(cell.x + h, cell.y - h, h, rings));
             cellQueue.add(new Cell(cell.x - h, cell.y + h, h, rings));
             cellQueue.add(new Cell(cell.x + h, cell.y + h, h, rings));
+            count++;
         }
 //        System.out.println(String.format("Best lat/lon: %f, %f", bestCell.y, bestCell.x));
         return new LatLon(bestCell.y, bestCell.x);
