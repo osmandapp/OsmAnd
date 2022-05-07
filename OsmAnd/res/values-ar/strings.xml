@@ -4724,4 +4724,6 @@
     <string name="navigation_points_desc">يتم تمكين أدوات التنقل أثناء التنقل لعرض المعلومات مثل المسافة أو الوصول أو الوقت الأقل، والانعطافات التالية ، والاتجاه ، واسم الشارع الحالي ، ومعلومات الممرات ، والسرعة القصوى ، وتنبيهات الاقتراب ، ونقاط الاهتمام ، ونقاط الطريق.</string>
     <string name="calculate_online_altitude_descr">سيتم حساب بيانات الارتفاع على سيرفر أوسماند.</string>
     <string name="get_altitude_data">الحصول على بيانات الارتفاع</string>
+    <string name="routing_attr_avoid_4wd_only_name">تجنب طرق الدفع الرباعي</string>
+    <string name="routing_attr_avoid_4wd_only_description">تجنب الطرق المناسبة لمركبات الدفع الرباعي فقط</string>
 </resources>
