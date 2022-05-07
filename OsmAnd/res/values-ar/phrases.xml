@@ -3322,7 +3322,7 @@
     <string name="poi_tactile_paving_incorrect">غير صحيح</string>
     <string name="poi_tactile_paving_primitive">بدائي</string>
     <string name="poi_tactile_paving_contrasted">متباين اللون</string>
-    <string name="poi_traffic_signals_sound_locate">فقط عندما يسمح بالمشي</string>
+    <string name="poi_traffic_signals_sound_locate">فقط للعثور على القطب</string>
     <string name="poi_video_no">لا</string>
     <string name="poi_video_yes">نعم ، فيديو</string>
     <string name="poi_booth">نوع الكشك</string>
