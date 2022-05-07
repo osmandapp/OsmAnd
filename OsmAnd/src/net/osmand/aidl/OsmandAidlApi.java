@@ -393,8 +393,7 @@ public class OsmandAidlApi {
 							int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
 							String widgetKey = WIDGET_ID_PREFIX + widgetId;
 							layer.registerExternalWidget(widgetKey, widget, menuIconId,
-									widgetData.getMenuTitle(), connectedApp.getPack(),
-									WidgetsPanel.RIGHT, widgetData.getOrder());
+									widgetData.getMenuTitle(), connectedApp.getPack(), widgetData.getOrder());
 							layer.recreateControls();
 						}
 					}

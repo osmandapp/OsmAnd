@@ -1,6 +1,7 @@
 package net.osmand.plus.views.mapwidgets;
 
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
@@ -17,6 +18,9 @@ import androidx.annotation.StringRes;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.COLLAPSED_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.DEFAULT_ORDER;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.LEFT;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.RIGHT;
 
 public class SideWidgetInfo extends MapWidgetInfo {
 
@@ -51,6 +55,27 @@ public class SideWidgetInfo extends MapWidgetInfo {
 	@Nullable
 	public String getExternalProviderPackage() {
 		return externalProviderPackage;
+	}
+
+	@NonNull
+	@Override
+	public WidgetsPanel getUpdatedPanel() {
+		OsmandSettings settings = widget.getMyApplication().getSettings();
+		WidgetParams widgetParams = WidgetParams.getById(key);
+		if (widgetParams != null) {
+			if (widgetParams.defaultPanel == LEFT
+					&& RIGHT.getWidgetOrder(key, settings) != DEFAULT_ORDER) {
+				widgetPanel = RIGHT;
+			} else if (widgetParams.defaultPanel == RIGHT
+					&& LEFT.getWidgetOrder(key, settings) != DEFAULT_ORDER) {
+				widgetPanel = LEFT;
+			} else {
+				widgetPanel = widgetParams.defaultPanel;
+			}
+		} else {
+			widgetPanel = LEFT.getWidgetOrder(key, settings) != DEFAULT_ORDER ? LEFT : RIGHT;
+		}
+		return widgetPanel;
 	}
 
 	@Override

@@ -34,7 +34,6 @@ import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
@@ -237,12 +236,12 @@ public class MapillaryPlugin extends OsmandPlugin {
 	private void registerWidget(@NonNull MapActivity activity) {
 		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
 		mapillaryControl = createMonitoringControl(activity);
-		mapillaryWidgetRegInfo = layer.registerWidget(WidgetParams.MAPILLARY, mapillaryControl, WidgetsPanel.RIGHT);
+		mapillaryWidgetRegInfo = layer.registerWidget(WidgetParams.MAPILLARY, mapillaryControl);
 		layer.recreateControls();
 	}
 
 	private TextInfoWidget createMonitoringControl(final MapActivity map) {
-		mapillaryControl = new RightTextInfoWidget(map);
+		mapillaryControl = new TextInfoWidget(map);
 		mapillaryControl.setText(map.getString(R.string.mapillary), "");
 		mapillaryControl.setIcons(WidgetParams.MAPILLARY);
 		mapillaryControl.setOnClickListener(v -> openMapillary(map, null));

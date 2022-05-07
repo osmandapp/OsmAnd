@@ -13,11 +13,6 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentManager;
-
 import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.FavouritePoint.SpecialPointType;
@@ -40,7 +35,6 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
@@ -49,6 +43,11 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_PARKING_POSITION;
@@ -233,7 +232,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {
 			parkingPlaceControl = createParkingPlaceInfoControl(activity);
-			mapInfoLayer.registerWidget(PARKING, parkingPlaceControl, WidgetsPanel.RIGHT);
+			mapInfoLayer.registerWidget(PARKING, parkingPlaceControl);
 			mapInfoLayer.recreateControls();
 		}
 	}
@@ -447,7 +446,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	 * and the location of the parked car
 	 */
 	private TextInfoWidget createParkingPlaceInfoControl(@NonNull MapActivity mapActivity) {
-		TextInfoWidget parkingPlaceControl = new RightTextInfoWidget(mapActivity) {
+		TextInfoWidget parkingPlaceControl = new TextInfoWidget(mapActivity) {
 			private float[] calculations = new float[1];
 			private int cachedMeters = 0;			
 			

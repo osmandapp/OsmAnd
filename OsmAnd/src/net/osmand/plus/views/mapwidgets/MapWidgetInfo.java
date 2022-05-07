@@ -18,7 +18,8 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 
 	public final String key;
 	public final MapWidget widget;
-	public final WidgetsPanel widgetPanel;
+
+	public WidgetsPanel widgetPanel;
 	public int priority;
 	public int pageIndex;
 
@@ -110,6 +111,9 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 	public String getExternalProviderPackage() {
 		return null;
 	}
+
+	@NonNull
+	public abstract WidgetsPanel getUpdatedPanel();
 
 	public abstract boolean isEnabledForAppMode(@NonNull ApplicationMode appMode);
 

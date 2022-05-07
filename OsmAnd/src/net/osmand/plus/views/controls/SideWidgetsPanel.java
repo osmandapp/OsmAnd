@@ -38,7 +38,7 @@ public class SideWidgetsPanel extends FrameLayout {
 	private final Path borderPath = new Path();
 
 	private boolean nightMode;
-	private boolean rightPanel;
+	private boolean rightSide;
 	private boolean selfShowAllowed;
 	private boolean selfVisibilityChanging;
 
@@ -62,6 +62,7 @@ public class SideWidgetsPanel extends FrameLayout {
 		super(context, attrs, defStyleAttr, defStyleRes);
 
 		nightMode = getMyApplication().getDaynightHelper().isNightMode();
+		definePanelSide(attrs);
 		setWillNotDraw(false);
 		setupPaddings();
 		setupBorderPaint();
@@ -69,9 +70,17 @@ public class SideWidgetsPanel extends FrameLayout {
 		setupChildren();
 	}
 
+	private void definePanelSide(@Nullable AttributeSet attrs) {
+		TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.SideWidgetsPanel);
+		rightSide = typedArray.getBoolean(R.styleable.SideWidgetsPanel_rightSide, true);
+		typedArray.recycle();
+	}
+
 	private void setupPaddings() {
 		int padding = AndroidUtils.dpToPx(getContext(), BORDER_WIDTH_DP);
-		setPaddingRelative(padding, padding, 0, padding);
+		int startPadding = rightSide ? padding : 0;
+		int endPadding = rightSide ? 0 : padding;
+		setPaddingRelative(startPadding, padding, endPadding, padding);
 	}
 
 	private void setupBorderPaint() {
@@ -86,7 +95,7 @@ public class SideWidgetsPanel extends FrameLayout {
 	private void setupChildren() {
 		dots = findViewById(R.id.dots);
 
-		adapter = new WidgetsPagerAdapter(getMyApplication(), rightPanel ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT);
+		adapter = new WidgetsPagerAdapter(getMyApplication(), rightSide ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT);
 		adapter.setViewHolderBindListener((viewHolder, index) -> {
 			if (index == viewPager.getCurrentItem()) {
 				WrapContentViewPager2Callback.resizeViewPagerToWrapContent(viewPager, viewHolder.container);
@@ -157,7 +166,7 @@ public class SideWidgetsPanel extends FrameLayout {
 
 	public void updateColors(@NonNull TextState textState) {
 		this.nightMode = textState.night;
-		borderPaint.setColor(ContextCompat.getColor(getContext(), textState.rightBorderColorId));
+		borderPaint.setColor(ContextCompat.getColor(getContext(), textState.panelBorderColorId));
 		updateDots();
 		invalidate();
 	}
@@ -170,9 +179,10 @@ public class SideWidgetsPanel extends FrameLayout {
 
 	private void drawBorder(@NonNull Canvas canvas) {
 		boolean rtl = AndroidUtils.isLayoutRtl(getContext());
+		boolean positionedOnLeft = rtl ^ !rightSide;
 		float inset = (float) Math.ceil(borderPaint.getStrokeWidth() / 2);
-		float screenEdgeX = rtl ? 0 : getWidth();
-		float roundedCornerX = rtl ? getWidth() - inset : inset;
+		float screenEdgeX = positionedOnLeft ? 0 : getWidth();
+		float roundedCornerX = positionedOnLeft ? getWidth() - inset : inset;
 		float bottomY = getHeight() - inset;
 
 		borderPath.reset();

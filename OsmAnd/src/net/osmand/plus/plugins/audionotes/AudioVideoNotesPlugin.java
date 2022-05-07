@@ -756,25 +756,25 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 			if (onRequestWidget == null || recreateRegistered) {
 				onRequestWidget = new AudioVideoNotesWidget(mapActivity, AV_DEFAULT_ACTION_CHOOSE);
-				mapInfoLayer.registerWidget(AV_NOTES_ON_REQUEST, onRequestWidget, rightPanel);
+				mapInfoLayer.registerWidget(AV_NOTES_ON_REQUEST, onRequestWidget);
 				reinflateWidgets = true;
 			}
 
 			if (recordAudioWidget == null || recreateRegistered) {
 				recordAudioWidget = new AudioVideoNotesWidget(mapActivity, AV_DEFAULT_ACTION_AUDIO);
-				mapInfoLayer.registerWidget(AV_NOTES_RECORD_AUDIO, recordAudioWidget, rightPanel);
+				mapInfoLayer.registerWidget(AV_NOTES_RECORD_AUDIO, recordAudioWidget);
 				reinflateWidgets = true;
 			}
 
 			if (recordVideoWidget == null || recreateRegistered) {
 				recordVideoWidget = new AudioVideoNotesWidget(mapActivity, AV_DEFAULT_ACTION_VIDEO);
-				mapInfoLayer.registerWidget(AV_NOTES_RECORD_VIDEO, recordVideoWidget, rightPanel);
+				mapInfoLayer.registerWidget(AV_NOTES_RECORD_VIDEO, recordVideoWidget);
 				reinflateWidgets = true;
 			}
 
 			if (takePhotoWidget == null || recreateRegistered) {
 				takePhotoWidget = new AudioVideoNotesWidget(mapActivity, AV_DEFAULT_ACTION_TAKEPICTURE);
-				mapInfoLayer.registerWidget(AV_NOTES_TAKE_PHOTO, takePhotoWidget, rightPanel);
+				mapInfoLayer.registerWidget(AV_NOTES_TAKE_PHOTO, takePhotoWidget);
 				reinflateWidgets = true;
 			}
 
