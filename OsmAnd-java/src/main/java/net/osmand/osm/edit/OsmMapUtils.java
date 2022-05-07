@@ -19,7 +19,7 @@ import net.osmand.util.MapUtils;
 public class OsmMapUtils {
 	
 	private static final double POLY_CENTER_PRECISION= 1e-6;
-	private static final int LOOP_LIMITATION = 1000000;
+	private static final int LOOP_LIMITATION = 10000000;
 
 	public static double getDistance(Node e1, Node e2) {
 		return MapUtils.getDistance(e1.getLatitude(), e1.getLongitude(), e2.getLatitude(), e2.getLongitude());
