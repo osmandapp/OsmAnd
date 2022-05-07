@@ -589,7 +589,10 @@ public class OsmMapUtils {
         if (bboxCell.d > bestCell.d) bestCell = bboxCell;
 
         int count = 0;
-        while (!cellQueue.isEmpty() && count < LOOP_LIMITATION) {
+        while (!cellQueue.isEmpty()) {
+	    if (count > LOOP_LIMITATION) {
+		System.err.println("Error loop limitation: " + LOOP_LIMITATION);
+	    }
             // pick the most promising cell from the queue
             Cell cell = cellQueue.poll();
 
