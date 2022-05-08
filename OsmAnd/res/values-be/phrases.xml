@@ -3889,4 +3889,15 @@
     <string name="poi_post_office_type">Тып</string>
     <string name="poi_laundry_service_filter">Паслугі пральні</string>
     <string name="poi_dry_cleaning_filter">Хімчыстка</string>
+    <string name="poi_lifeguard_base">Ратавальная станцыя</string>
+    <string name="poi_mobile_money_agent">Мабільны грашовы агент</string>
+    <string name="poi_museum_type">Музейная тэматыка</string>
+    <string name="poi_pilates">Пілатэс</string>
+    <string name="poi_snooker">Снукер</string>
+    <string name="poi_jiu_jitsu">Джыу-джыцу</string>
+    <string name="poi_nurse">Медсястра</string>
+    <string name="poi_siren">Сірэна</string>
+    <string name="poi_karate">Каратэ</string>
+    <string name="poi_climbing_grade_saxon_min">Найпрасцейшы маршрут (саксонская класіфікацыя)</string>
+    <string name="poi_climbing_grade_french_min">Найпрасцейшы маршрут (французкая класіфікацыя)</string>
 </resources>
