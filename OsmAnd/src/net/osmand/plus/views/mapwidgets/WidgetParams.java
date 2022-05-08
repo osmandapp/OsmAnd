@@ -7,6 +7,8 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
+import net.osmand.plus.views.mapwidgets.configure.settings.ElevationProfileWidgetSettingsFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -173,6 +175,14 @@ public enum WidgetParams {
 
 	public int getDefaultOrder() {
 		return defaultPanel.getOriginalWidgetOrder(id);
+	}
+
+	@Nullable
+	public WidgetSettingsBaseFragment getSettingsFragment() {
+		if (this == ELEVATION_PROFILE) {
+			return new ElevationProfileWidgetSettingsFragment();
+		}
+		return null;
 	}
 
 	@Nullable
