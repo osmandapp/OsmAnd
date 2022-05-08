@@ -46,7 +46,6 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 
 	private static final int DEFAULT_WIDTH_MULTIPLIER = 7;
 
-	protected OsmandMapTileView view;
 	protected boolean nightMode;
 
 	protected PreviewRouteLineInfo previewRouteLineInfo;
@@ -75,7 +74,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
-		this.view = view;
+		super.initLayer(view);
 		init();
 	}
 
@@ -91,7 +90,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		attrs = new RenderingLineAttributes("route");
 		attrs.defaultWidth = (int) (12 * density);
 		attrs.defaultWidth3 = (int) (7 * density);
-		attrs.defaultColor = ContextCompat.getColor(view.getContext(), R.color.nav_track);
+		attrs.defaultColor = ContextCompat.getColor(getContext(), R.color.nav_track);
 		attrs.paint3.setStrokeCap(Paint.Cap.BUTT);
 		attrs.paint3.setColor(Color.WHITE);
 		attrs.paint2.setStrokeCap(Paint.Cap.BUTT);
@@ -131,7 +130,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		}
 
 		if (routeLineColor != customColor) {
-			directionArrowsColor = ColorUtilities.getContrastColor(view.getContext(), customColor, false);
+			directionArrowsColor = ColorUtilities.getContrastColor(getContext(), customColor, false);
 		}
 		routeLineColor = customColor;
 	}
@@ -195,7 +194,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 				req.setStringFilter(ctWidth, widthKey);
 			}
 			if (req.searchRenderingAttribute("gpx")) {
-				OsmandRenderer.RenderingContext rc = new OsmandRenderer.RenderingContext(view.getContext());
+				OsmandRenderer.RenderingContext rc = new OsmandRenderer.RenderingContext(getContext());
 				rc.setDensityValue((float) tileBox.getMapDensity());
 				resultValue = rc.getComplexValue(req, req.ALL.R_STROKE_WIDTH);
 			}
