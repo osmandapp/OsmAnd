@@ -13,7 +13,7 @@ public class CompassRulerWidgetState extends WidgetState {
 
 	public CompassRulerWidgetState(OsmandApplication app) {
 		super(app);
-		showCompass = app.getSettings().SHOW_COMPASS_CONTROL_RULER;
+		showCompass = app.getSettings().SHOW_COMPASS_ON_RADIUS_RULER;
 	}
 
 	@Override
