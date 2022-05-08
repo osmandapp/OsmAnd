@@ -186,7 +186,7 @@
     <string name="safe_mode">Бяспечны рэжым</string>
     <string name="native_library_not_running">Праграма працуе ў бяспечным рэжыме (адключыць ў «Наладах»).</string>
     <string name="background_service_is_enabled_question">Фонавы рэжым OsmAnd па-ранейшаму працуе. Спыніць яго?</string>
-    <string name="close_changeset">Закрыць набор змен</string>
+    <string name="close_changeset">Закрыць набор правак</string>
     <string name="zxing_barcode_scanner_not_found">Праграма «ZXing Barcode Scanner» не ўсталяваная. Знайсці ў Google Play\?</string>
     <string name="rendering_attr_roadColors_description">Абярыце схему колераў дарог:</string>
     <string name="rendering_attr_roadColors_name">Схема колераў дарог</string>
@@ -425,7 +425,7 @@
     <string name="select_index_file_to_download">Нічога не знойдзена. Калі вы не знайшлі свой рэгіён, вы можаце стварыць мапу самастойна (гл. https://osmand.net).</string>
     <string name="local_indexes_cat_tile">Сеціўныя і кэшаваныя растравыя мапы</string>
     <string name="local_indexes_cat_map">Стандартныя мапы (вектарныя)</string>
-    <string name="index_settings_descr">Спампоўка і кіраванне файламі мапаў, што захоўваюцца на вашай прыладзе.</string>
+    <string name="index_settings_descr">Спампоўванне і кіраванне файламі мапаў, што захоўваюцца на вашай прыладзе.</string>
     <string name="map_online_plugin_is_not_installed">Уключыце ўбудову «Сеціўныя мапы», каб мець магчымасць абраць розныя крыніцы для мапаў</string>
     <string name="map_online_data">Сеціўныя і растравыя мапы</string>
     <string name="map_online_data_descr">Выкарвстоўваць сеціўныя мапы (cпампаваць і захоўваць фрагменты на картцы памяці).</string>
@@ -512,7 +512,7 @@
     <string name="offline_edition">Пазасеціўнае рэдагаванне</string>
     <string name="offline_edition_descr">Калі ўключана пазасеціўнае рэдагаванне, то змены будуць захоўвацца на прыладзе і адпраўляцца на сервер толькі па запыце, інакш будуць адпраўляцца неадкладна.</string>
     <string name="update_poi_does_not_change_indexes">Змены цікавых пунктаў (POI) у праграме не паўплываюць на cпампаваныя файлы мапаў, змены захоўваюцца як файлы на вашай прыладзе.</string>
-    <string name="local_openstreetmap_uploading">Запампоўка…</string>
+    <string name="local_openstreetmap_uploading">Запампоўванне…</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/нататкі запампаваныя</string>
     <string name="local_openstreetmap_uploadall">Запампаваць усё</string>
     <string name="local_openstreetmap_upload">Адправіць змены ў OSM</string>
@@ -1515,7 +1515,7 @@
 \n 
 \nУ выпадку актывацыі гэтага выгляду, стыль мапы змяняецца на «Winter and ski», паказваючы ўсё дэталі пейзажу так, як яны выглядаюць зімой. Такі (зімовы) выгляд можа быць скасаваны альбо шляхам дэактывацыі тут, альбо калі вы зменіце «Стыль мапы» у меню «Налада мапы» на пажаданы выгляд.</string>
     <string name="current_route">Дзейны маршрут</string>
-    <string name="osm_changes_added_to_local_edits">Змены OSM дададзеныя ў лакальны набор змен</string>
+    <string name="osm_changes_added_to_local_edits">Праўкі OSM дададзеныя ў лакальны набор правак</string>
     <string name="mark_to_delete">Пазначыць для выдалення</string>
     <string name="welmode_download_maps">Спампаваць мапы</string>
     <string name="welcome_select_region">Каб правільна адлюстроўваць дарожныя знакі і правілы, калі ласка, абярыце рэгіён кіравання:</string>
@@ -1721,7 +1721,7 @@
     <string name="regions">Рэгіёны</string>
     <string name="region_maps">Рэгіянальныя мапы</string>
     <string name="world_maps">Сусветныя мапы</string>
-    <string name="downloads">Спампоўкі</string>
+    <string name="downloads">Спампоўванні</string>
     <string name="favorite_category_name">Назва катэгорыі</string>
     <string name="favorite_category_add_new_title">Дадаць новую катэгорыю</string>
     <string name="favorite_category_dublicate_message">Калі ласка, выкарыстайце назву катэгорыі, якая яшчэ не існуе.</string>
@@ -1762,7 +1762,7 @@
     <string name="first_usage_item_description">Як спампаваць мапы, вызначыць асноўныя налады.</string>
     <string name="navigation_item_description">Налады навігацыі.</string>
     <string name="planning_trip_item">Планаванне паездкі</string>
-    <string name="faq_item_description">Частыя пытанні</string>
+    <string name="faq_item_description">Частыя пытанні.</string>
     <string name="map_viewing_item">Агляд мапы</string>
     <string name="search_on_the_map_item">Пошук на мапе</string>
     <string name="instalation_troubleshooting_item">Усталёўка і вырашэнне праблемаў</string>
@@ -2273,18 +2273,18 @@
 \n 
 \nАтрымлівайце асалоду ад галасавога і візуальнага навігатара, прагляду цікавых пунктаў (анг. POI, points of interest), стварэння і кіравання GPX-слядоў, выкарыстання контурных ліній і інфармацыі аб вышыні (праз убудову), выбару паміж кіраваннем аўтамабілем, яздой на ровары і шпацырам, рэдагавання OSM і шмат іншым.</string>
     <string name="shared_string_overview">Агляд</string>
-    <string name="osmand_plus_extended_description_part8">Прыблізнае пакрыццё і якасць мапы: 
-\n • Заходняя Еўропа: **** 
-\n • Усходняя Еўропа: *** 
-\n • Расія: *** 
-\n • Паўночная Амерыка: *** 
-\n • Паўднёвая Амерыка: ** 
-\n • Азія: ** 
-\n • Японія і Карэя: *** 
-\n • Блізкі Усход: ** 
-\n • Афрыка: ** 
-\n • Антарктыка: * 
-\n Большасць краін па ўсім свеце даступныя для спампоўкі! 
+    <string name="osmand_plus_extended_description_part8">Прыблізнае пакрыццё і якасць мапы:
+\n • Заходняя Еўропа: ****
+\n • Усходняя Еўропа: ***
+\n • Расія: ***
+\n • Паўночная Амерыка: ***
+\n • Паўднёвая Амерыка: **
+\n • Азія: **
+\n • Японія і Карэя: ***
+\n • Блізкі Усход: **
+\n • Афрыка: **
+\n • Антарктыка: *
+\n Большасць краін па ўсім свеце даступныя для спампоўвання!
 \n Ад Аўганістана да Зімбабвэ, ад Аўстраліі да ЗША. Аргенціна, Бразілія, Канада, Францыя, Германія, Мексіка, Вялікабрытанія, Гіспанія, …
 \n</string>
     <string name="animate_my_location">Анімацыя сваёй пазіцыі</string>
@@ -2343,10 +2343,10 @@
 \n • GPS-навігацыя ў пешаходным рэжыме вылічвае маршрут, выкарыстоўваючы пешаходныя сцежкі 
 \n • Спампоўванне і прытрымліванне GPX-маршрута або запіс і магчымасць дзяліцца сваім уласным
 \n</string>
-    <string name="osmand_extended_description_part7">Удзел у OSM 
-\n • Паведамленне аб памылках 
-\n • Спампоўванне GPX-слядоў у OSM проста з праграмы 
-\n • Даданне цікавых пунктаў (POI) і запампоўка іх у OSM (ці пазней, па-за сецівам)
+    <string name="osmand_extended_description_part7">Удзел у OSM
+\n • Паведамленне аб памылках
+\n • Спампоўванне GPX-слядоў у OSM проста з праграмы
+\n • Даданне цікавых пунктаў (POI) і запампоўванне іх у OSM (ці пазней, па-за сецівам)
 \n</string>
     <string name="osmand_plus_extended_description_part2">Навігацыя 
 \n • Працуе праз Інтэрнэт (хутка) або аўтаномна (без платы за роўмінг за мяжой) 
@@ -2431,11 +2431,11 @@
 \n • Магчымасць запісу падарожжа ў лакальны GPX-файл ці інтэрнэт-сэрвіс 
 \n • Магчымасць адлюстравання хуткасці ды вышыні 
 \n • Адлюстраванне контурных ліній ды зацянення вышынь (праз праграму)</string>
-    <string name="osmand_plus_extended_description_part7">Непасрэдны ўнёсак у OSM 
-\n • Заявы аб памылках у даных 
-\n • Запампоўванне GPX-слядоў у OSM проста з праграмы 
-\n • Даданне цікавых пунктаў (POI) і непасрэдная запампоўка іх у OSM (ці пазней, па-за сецівам) 
-\n • Магчымасць запісу падарожжа ў фонавым рэжыме (у той час, як прылада знаходзіцца ў рэжыме сну) 
+    <string name="osmand_plus_extended_description_part7">Непасрэдны ўнёсак у OSM
+\n • Заявы аб памылках у даных
+\n • Запампоўванне GPX-слядоў у OSM проста з праграмы
+\n • Даданне цікавых пунктаў (POI) і непасрэднае запампоўванне іх у OSM (ці пазней, па-за сецівам)
+\n • Магчымасць запісу падарожжа ў фонавым рэжыме (у той час, як прылада знаходзіцца ў рэжыме сну)
 \n OsmAnd — адкрытае праграмнае забяспячэнне ў актыўнай распрацоўцы. Кожны можа ўнесці ўклад паведамляючы аб памылках, паляпшаючы пераклад ці распрацоўваючы новыя магчымасці. Ход праекта залежыць таксама ад фінансавых унёскаў для забяспячэння кадавання і тэставання новай функцыянальнасці.
 \n</string>
     <string name="shared_string_install">Усталяваць</string>
@@ -2731,7 +2731,7 @@
     <string name="in_app_purchase_desc_ex">Аднойчы набыты, будзе заўсёды даступны для вас.</string>
     <string name="purchase_unlim_title">Купіць - %1$s</string>
     <string name="wikivoyage_offline">Аўтаномны Wikivoyage</string>
-    <string name="unlimited_downloads">Неабмежаваныя спампоўкі</string>
+    <string name="unlimited_downloads">Неабмежаваная колькасць спампоўванняў</string>
     <string name="wikipedia_offline">Аўтаномная Вікіпедыя</string>
     <string name="unlock_all_features">Разблакаваць усе функцыі OsmAnd</string>
     <string name="purchase_dialog_title">Абярыце план</string>
@@ -4064,7 +4064,7 @@
     <string name="cancel_anytime_in_amazon_app">Можна ў любы момант скасаваць у праграме Amazon</string>
     <string name="amz_manage_subscription_descr">Кіраваць падпіскай можна з дапамогай праграмы Amazon або праз Amazon.com у сваім профілі.</string>
     <string name="empty_category_name">Назва катэгорыі пустая</string>
-    <string name="no_activity_for_intent">Не выяўлена праграм, якія могуць выканаць гэтае дзеянне</string>
+    <string name="no_activity_for_intent">Усталюйце праграму, якая можа выканаць гэтае дзеянне.</string>
     <string name="backup_and_restore">Рэзервовае капіяванне і аднаўленне</string>
     <string name="shared_string_predefined">Папярэдне вызначаныя</string>
     <string name="backup_complete">Рэзервовае капіяванне скончана</string>
@@ -4106,4 +4106,7 @@
     <string name="backup_restore_now">Аднавіць</string>
     <string name="backup_error_no_subscription">Падпіскі няма</string>
     <string name="select_nav_profile_dialog_message">Тып навігацыі ўплывае на разлік маршруту.</string>
+    <string name="av_def_action_choose">Па запыце</string>
+    <string name="save_track_to_gpx_descrp">Аўтаматычны запуск запісу следу падчас навігацыі і аўтаматычнае захаванне пасля завяршэння.</string>
+    <string name="internal_app_storage_description">Унутранае сховішча, схаванае ад іншых карыстальнікаў і праграм, таму толькі OsmAnd мае доступ да вашых даных.</string>
 </resources>
