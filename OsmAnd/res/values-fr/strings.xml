@@ -4638,7 +4638,7 @@
     <string name="gps_info_widget_desc">Widget indiquant le nombre de satellites que l\'appareil détecte et utilise actuellement.</string>
     <string name="bearing_secondary_desc">Vous pouvez modifier le format d\'affichage des données dans : %1$s - %2$s - %3$s.</string>
     <string name="av_def_action_choose">A la demande</string>
-    <string name="magnetic_bearing_widget_desc">Angle, depuis votre position, entre le nord magnétique et le point visé.</string>
+    <string name="magnetic_bearing_widget_desc">A partir de votre position, angle entre le nord magnétique et la destination.</string>
     <string name="routing_attr_avoid_4wd_only_description">Évitez les routes adaptées uniquement aux 4 x 4.</string>
     <string name="routing_attr_avoid_4wd_only_name">Évitez les routes pour 4 x 4</string>
 </resources>
