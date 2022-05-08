@@ -4655,4 +4655,6 @@
     <string name="shared_string_speed">Швидкість</string>
     <string name="app_mode_mountain_bicycle">Гірський велосипед</string>
     <string name="route_maneuvers">Маневри на маршруті</string>
+    <string name="routing_attr_avoid_4wd_only_description">Уникати доріг, призначених лише для автомобілів з повним приводом</string>
+    <string name="routing_attr_avoid_4wd_only_name">Уникати доріг 4х4</string>
 </resources>
