@@ -8,6 +8,7 @@ import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.views.mapwidgets.configure.settings.ElevationProfileWidgetSettingsFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkersBarWidgetSettingFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
 
 import androidx.annotation.DrawableRes;
@@ -181,6 +182,8 @@ public enum WidgetParams {
 	public WidgetSettingsBaseFragment getSettingsFragment() {
 		if (this == ELEVATION_PROFILE) {
 			return new ElevationProfileWidgetSettingsFragment();
+		} else if (this == MARKERS_TOP_BAR) {
+			return new MapMarkersBarWidgetSettingFragment();
 		}
 		return null;
 	}
