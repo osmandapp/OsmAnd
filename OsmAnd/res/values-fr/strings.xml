@@ -4638,4 +4638,5 @@
     <string name="gps_info_widget_desc">Widget indiquant le nombre de satellites que l\'appareil détecte et utilise actuellement.</string>
     <string name="bearing_secondary_desc">Vous pouvez modifier le format d\'affichage des données dans : %1$s - %2$s - %3$s.</string>
     <string name="av_def_action_choose">A la demande</string>
+    <string name="magnetic_bearing_widget_desc">Angle, depuis votre position, entre le nord magnétique et le point visé.</string>
 </resources>
