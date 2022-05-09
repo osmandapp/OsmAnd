@@ -17,9 +17,8 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenTyp
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
@@ -94,7 +93,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		}
 	}
 
-	public static class FPSTextInfoWidget extends RightTextInfoWidget {
+	public static class FPSTextInfoWidget extends TextInfoWidget {
 
 		private final OsmandMapTileView mapView;
 
@@ -118,7 +117,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		if (mapInfoLayer != null && mapInfoLayer.getSideWidget(FPSTextInfoWidget.class) == null) {
 			FPSTextInfoWidget fps = new FPSTextInfoWidget(mapActivity);
 			fps.setIcons(FPS);
-			mapInfoLayer.registerWidget(FPS, fps, WidgetsPanel.RIGHT);
+			mapInfoLayer.registerWidget(FPS, fps);
 			mapInfoLayer.recreateControls();
 		}
 	}

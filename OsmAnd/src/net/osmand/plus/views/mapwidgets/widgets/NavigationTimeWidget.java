@@ -16,7 +16,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_ARRIVAL
 import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_TIME_TO_GO;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.TIME_TO_GO;
 
-public abstract class NavigationTimeWidget extends RightTextInfoWidget {
+public abstract class NavigationTimeWidget extends TextInfoWidget {
 
 	private final RoutingHelper routingHelper;
 	private final boolean intermediate;

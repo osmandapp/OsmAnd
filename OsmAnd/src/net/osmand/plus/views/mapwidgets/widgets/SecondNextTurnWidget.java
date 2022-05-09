@@ -11,68 +11,63 @@ import net.osmand.router.TurnType;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class NextTurnWidget extends NextTurnBaseWidget {
+public class SecondNextTurnWidget extends NextTurnBaseWidget {
 
 	private final NextDirectionInfo nextDirectionInfo = new NextDirectionInfo();
 
-	public NextTurnWidget(@NonNull MapActivity mapActivity, boolean horizontalMini) {
-		super(mapActivity, horizontalMini);
+	public SecondNextTurnWidget(@NonNull MapActivity mapActivity) {
+		super(mapActivity, true);
 		setOnClickListener(getOnClickListener());
 	}
 
 	/**
-	 * Uncomment to test rendering
+	 * Do not delete to have pressed state. Uncomment to test rendering
 	 */
 	@NonNull
 	private OnClickListener getOnClickListener() {
 		return new View.OnClickListener() {
 //			int i = 0;
-//			boolean leftSide = false;
 			@Override
 			public void onClick(View v) {
 //				final int l = TurnType.predefinedTypes.length;
 //				final int exits = 5;
 //				i++;
 //				if (i % (l + exits) >= l ) {
-//					nextTurnInfo.turnType = TurnType.valueOf("EXIT" + (i % (l + exits) - l + 1), leftSide);
-//					float a = leftSide?  -180 + (i % (l + exits) - l + 1) * 50:  180 - (i % (l + exits) - l + 1) * 50;
-//					nextTurnInfo.turnType.setTurnAngle(a < 0 ? a + 360 : a);
+//					nextTurnInfo.turnType = TurnType.valueOf("EXIT" + (i % (l + exits) - l + 1), true);
 //					nextTurnInfo.exitOut = (i % (l + exits) - l + 1)+"";
+//					float a = 180 - (i % (l + exits) - l + 1) * 50;
+//					nextTurnInfo.turnType.setTurnAngle(a < 0 ? a + 360 : a);
 //				} else {
-//					nextTurnInfo.turnType = TurnType.valueOf(TurnType.predefinedTypes[i % (TurnType.predefinedTypes.length + exits)], leftSide);
+//					nextTurnInfo.turnType = TurnType.valueOf(TurnType.predefinedTypes[i % (TurnType.predefinedTypes.length + exits)], true);
 //					nextTurnInfo.exitOut = "";
 //				}
 //				nextTurnInfo.turnImminent = (nextTurnInfo.turnImminent + 1) % 3;
 //				nextTurnInfo.nextTurnDirection = 580;
-//				TurnPathHelper.calcTurnPath(nextTurnInfo.pathForTurn, nextTurnInfo.turnType,nextTurnInfo.pathTransform);
-				if (routingHelper.isRouteCalculated() && !routingHelper.isDeviatedFromRoute()) {
-					routingHelper.getVoiceRouter().announceCurrentDirection(null);
-				}
+//				TurnPathHelper.calcTurnPath(nextTurnInfo.pathForTurn, nexsweepAngletTurnInfo.turnType,nextTurnInfo.pathTransform);
+//				showMiniMap = true;
 			}
 		};
 	}
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		boolean followingMode = routingHelper.isFollowingMode()
-				|| locationProvider.getLocationSimulation().isRouteAnimating();
+		boolean followingMode = routingHelper.isFollowingMode() || locationProvider.getLocationSimulation().isRouteAnimating();
 		TurnType turnType = null;
 		boolean deviatedFromRoute = false;
 		int turnImminent = 0;
 		int nextTurnDistance = 0;
 		if (routingHelper.isRouteCalculated() && followingMode) {
 			deviatedFromRoute = routingHelper.isDeviatedFromRoute();
-
-			if (deviatedFromRoute) {
-				turnType = TurnType.valueOf(TurnType.OFFR, settings.DRIVING_REGION.get().leftHandDriving);
-				setDeviatePath((int) routingHelper.getRouteDeviation());
-			} else {
-				NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(nextDirectionInfo, true);
-				if (r != null && r.distanceTo > 0 && r.directionInfo != null) {
-					turnType = r.directionInfo.getTurnType();
-					nextTurnDistance = r.distanceTo;
-					turnImminent = r.imminent;
+			NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(nextDirectionInfo, true);
+			if (!deviatedFromRoute) {
+				if (r != null) {
+					r = routingHelper.getNextRouteDirectionInfoAfter(r, nextDirectionInfo, true);
 				}
+			}
+			if (r != null && r.distanceTo > 0 && r.directionInfo != null) {
+				turnType = r.directionInfo.getTurnType();
+				turnImminent = r.imminent;
+				nextTurnDistance = r.distanceTo;
 			}
 		}
 		setTurnType(turnType);

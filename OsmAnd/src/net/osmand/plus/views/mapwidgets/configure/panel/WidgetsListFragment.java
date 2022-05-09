@@ -149,7 +149,8 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		enabledWidgetsContainer.removeAllViews();
 
 		int enabledAvailableFilter = ENABLED_MODE | AVAILABLE_MODE;
-		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(selectedAppMode, enabledAvailableFilter, selectedPanel);
+		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(selectedAppMode,
+				enabledAvailableFilter, selectedPanel);
 		boolean noEnabledWidgets = Algorithms.isEmpty(enabledWidgets);
 
 		View noWidgetsContainer = view.findViewById(R.id.no_widgets_container);
@@ -249,7 +250,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 
 		int disabledAvailableFilter = AVAILABLE_MODE | DISABLED_MODE;
 		Set<MapWidgetInfo> disabledWidgets = widgetRegistry
-				.getWidgetsForPanel(selectedAppMode, disabledAvailableFilter, selectedPanel);
+				.getWidgetsForPanel(selectedAppMode, disabledAvailableFilter, selectedPanel.getMergedPanels());
 		boolean allWidgetsEnabled = Algorithms.isEmpty(disabledWidgets);
 
 		View availableWidgetsCard = view.findViewById(R.id.available_widgets_container);
@@ -309,12 +310,13 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
 					FragmentManager fragmentManager = activity.getSupportFragmentManager();
+					Fragment target = getParentFragment();
 					if (widgetGroup != null) {
-						AddWidgetFragment.showGroupDialog(fragmentManager, getParentFragment(),
-								selectedAppMode, widgetGroup, null);
+						AddWidgetFragment.showGroupDialog(fragmentManager, target,
+								selectedAppMode, selectedPanel, widgetGroup, null);
 					} else {
-						AddWidgetFragment.showWidgetDialog(fragmentManager, getParentFragment(),
-								selectedAppMode, widget, null);
+						AddWidgetFragment.showWidgetDialog(fragmentManager, target,
+								selectedAppMode, selectedPanel, widget, null);
 					}
 				}
 			});
@@ -353,7 +355,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 				if (activity != null && !Algorithms.isEmpty(externalProviderPackage)) {
 					FragmentManager fragmentManager = activity.getSupportFragmentManager();
 					AddWidgetFragment.showExternalWidgetDialog(fragmentManager, getParentFragment(),
-							selectedAppMode, widget.key, externalProviderPackage, null);
+							selectedAppMode, selectedPanel, widget.key, externalProviderPackage, null);
 				}
 			});
 

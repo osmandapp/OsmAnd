@@ -75,6 +75,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	private Toolbar toolbar;
 	private TabLayout tabLayout;
 	private ViewPager2 viewPager;
+	private WidgetsTabAdapter widgetsTabAdapter;
 	private View compensationView;
 
 	private boolean nightMode;
@@ -157,8 +158,8 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	}
 
 	private void setupTabLayout() {
-		WidgetsTabAdapter tabAdapter = new WidgetsTabAdapter(this);
-		viewPager.setAdapter(tabAdapter);
+		widgetsTabAdapter = new WidgetsTabAdapter(this);
+		viewPager.setAdapter(widgetsTabAdapter);
 		viewPager.registerOnPageChangeCallback(new OnPageChangeCallback() {
 			@Override
 			public void onPageSelected(int position) {
@@ -226,18 +227,17 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 
 	@Override
 	public void onWidgetsOrderApplied() {
-		if (selectedFragment != null) {
-			selectedFragment.updateContent();
-		}
+		// TODO widgets: update only current fragment after adding duplicates
+		widgetsTabAdapter.updateFragmentsContent();
 	}
 
 	@Override
-	public void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds) {
+	public void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds, @NonNull WidgetsPanel widgetsPanel) {
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		for (String widgetId : widgetsIds) {
 			MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
 			if (widgetInfo != null) {
-				addWidgetToEnd(widgetInfo);
+				addWidgetToEnd(widgetInfo, widgetsPanel);
 				widgetRegistry.enableDisableWidgetForMode(selectedAppMode, widgetInfo, true);
 			}
 		}
@@ -247,17 +247,18 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 			mapInfoLayer.recreateControls();
 		}
 
-		if (selectedFragment != null) {
-			selectedFragment.updateContent();
-		}
+		// TODO widgets: update only current fragment after adding duplicates
+		widgetsTabAdapter.updateFragmentsContent();
 	}
 
-	private void addWidgetToEnd(@NonNull MapWidgetInfo targetWidget) {
+	private void addWidgetToEnd(@NonNull MapWidgetInfo targetWidget, @NonNull WidgetsPanel widgetsPanel) {
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		WidgetsPanel panel = targetWidget.widgetPanel;
 
 		Map<Integer, List<String>> pagedOrder = new TreeMap<>();
-		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(selectedAppMode, ENABLED_MODE, panel);
+		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(selectedAppMode, ENABLED_MODE, widgetsPanel);
+
+		widgetRegistry.getWidgetsForPanel(targetWidget.widgetPanel).remove(targetWidget);
+		targetWidget.widgetPanel = widgetsPanel;
 
 		for (MapWidgetInfo widget : enabledWidgets) {
 			int page = widget.pageIndex;
@@ -272,9 +273,11 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		if (Algorithms.isEmpty(pagedOrder)) {
 			targetWidget.pageIndex = 0;
 			targetWidget.priority = 0;
+			widgetRegistry.getWidgetsForPanel(widgetsPanel).add(targetWidget);
+
 			List<List<String>> flatOrder = new ArrayList<>();
 			flatOrder.add(Collections.singletonList(targetWidget.key));
-			panel.setWidgetsOrder(selectedAppMode, flatOrder, settings);
+			widgetsPanel.setWidgetsOrder(selectedAppMode, flatOrder, settings);
 		} else {
 			List<Integer> pages = new ArrayList<>(pagedOrder.keySet());
 			List<List<String>> orders = new ArrayList<>(pagedOrder.values());
@@ -282,13 +285,23 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 
 			lastPageOrder.add(targetWidget.key);
 
-			int lastPage = pages.get(pages.size() - 1);
-			int lastOrder = lastPageOrder.size() - 1;
+			String previousLastWidgetId = lastPageOrder.get(lastPageOrder.size() - 2);
+			MapWidgetInfo previousLastVisibleWidgetInfo = widgetRegistry.getWidgetInfoById(previousLastWidgetId);
+			int lastPage;
+			int lastOrder;
+			if (previousLastVisibleWidgetInfo != null) {
+				lastPage = previousLastVisibleWidgetInfo.pageIndex;
+				lastOrder = previousLastVisibleWidgetInfo.priority + 1;
+			} else {
+				lastPage = pages.get(pages.size() - 1);
+				lastOrder = lastPageOrder.size() - 1;
+			}
 
 			targetWidget.pageIndex = lastPage;
 			targetWidget.priority = lastOrder;
+			widgetRegistry.getWidgetsForPanel(widgetsPanel).add(targetWidget);
 
-			panel.setWidgetsOrder(selectedAppMode, orders, settings);
+			widgetsPanel.setWidgetsOrder(selectedAppMode, orders, settings);
 		}
 	}
 

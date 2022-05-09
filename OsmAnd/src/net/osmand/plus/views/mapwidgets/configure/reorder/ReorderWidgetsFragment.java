@@ -183,7 +183,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 				FragmentManager fragmentManager = getSupportFragmentManager();
 				if (fragmentManager != null) {
 					AddWidgetFragment.showGroupDialog(fragmentManager, ReorderWidgetsFragment.this,
-							selectedAppMode, widgetGroup, addedGroupWidgets);
+							selectedAppMode, dataHolder.getSelectedPanel(), widgetGroup, addedGroupWidgets);
 				}
 			}
 
@@ -192,7 +192,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 				FragmentManager fragmentManager = getSupportFragmentManager();
 				if (fragmentManager != null) {
 					AddWidgetFragment.showWidgetDialog(fragmentManager, ReorderWidgetsFragment.this,
-							selectedAppMode, widget, Collections.emptyList());
+							selectedAppMode, dataHolder.getSelectedPanel(), widget, Collections.emptyList());
 				}
 			}
 
@@ -201,7 +201,8 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 				FragmentManager fragmentManager = getSupportFragmentManager();
 				if (fragmentManager != null) {
 					AddWidgetFragment.showExternalWidgetDialog(fragmentManager, ReorderWidgetsFragment.this,
-							selectedAppMode, widgetId, externalProviderPackage, Collections.emptyList());
+							selectedAppMode, dataHolder.getSelectedPanel(), widgetId, externalProviderPackage,
+							Collections.emptyList());
 				}
 			}
 
@@ -339,7 +340,8 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 		List<WidgetGroup> availableGroups = new ArrayList<>();
 
 		WidgetsPanel selectedPanel = dataHolder.getSelectedPanel();
-		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(selectedAppMode, AVAILABLE_MODE, selectedPanel);
+		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(selectedAppMode, AVAILABLE_MODE,
+				selectedPanel.getMergedPanels());
 
 		for (MapWidgetInfo widgetInfo : widgets) {
 			boolean enabled = dataHolder.getOrders().containsKey(widgetInfo.key);
@@ -347,7 +349,6 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 				continue;
 			}
 
-			int originalWidgetOrder = selectedPanel.getOriginalWidgetOrder(widgetInfo.key);
 			WidgetParams widgetParams = WidgetParams.getById(widgetInfo.key);
 			boolean defaultWidget = widgetParams != null;
 			if (defaultWidget) {
@@ -357,7 +358,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 					defaultWidgetsItems.put(group.getOrder(), new ListItem(ItemType.AVAILABLE_GROUP, group));
 				} else if (group == null) {
 					AvailableWidgetUiInfo availableWidgetInfo = getWidgetInfo(widgetInfo);
-					defaultWidgetsItems.put(originalWidgetOrder, new ListItem(ItemType.AVAILABLE_WIDGET, availableWidgetInfo));
+					defaultWidgetsItems.put(widgetParams.ordinal(), new ListItem(ItemType.AVAILABLE_WIDGET, availableWidgetInfo));
 				}
 			} else {
 				AvailableWidgetUiInfo availableWidgetInfo = getWidgetInfo(widgetInfo);
@@ -424,11 +425,24 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 			widgetsOrder.add(widgetInfo.key);
 		}
 
+		applyWidgetsPanel(enabledWidgetsIds);
 		applyWidgetsVisibility(enabledWidgetsIds);
 		applyWidgetsOrder(new ArrayList<>(pagedOrder.values()));
 		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {
 			mapInfoLayer.recreateControls();
+		}
+	}
+
+	private void applyWidgetsPanel(@NonNull List<String> enabledWidgetsIds) {
+		WidgetsPanel currentPanel = dataHolder.getSelectedPanel();
+		for (String widgetId : enabledWidgetsIds) {
+			MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
+			if (widgetInfo != null && widgetInfo.widgetPanel != currentPanel) {
+				widgetRegistry.getWidgetsForPanel(widgetInfo.widgetPanel).remove(widgetInfo);
+				widgetRegistry.getWidgetsForPanel(currentPanel).add(widgetInfo);
+				widgetInfo.widgetPanel = currentPanel;
+			}
 		}
 	}
 
@@ -461,7 +475,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 	}
 
 	@Override
-	public void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds) {
+	public void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds, @NonNull WidgetsPanel widgetsPanel) {
 		for (String widgetId : widgetsIds) {
 			MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
 			if (widgetInfo != null) {

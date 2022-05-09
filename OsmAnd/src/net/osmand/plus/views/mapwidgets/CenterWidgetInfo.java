@@ -26,6 +26,12 @@ public class CenterWidgetInfo extends MapWidgetInfo {
 				page, order, widgetPanel);
 	}
 
+	@NonNull
+	@Override
+	public WidgetsPanel getUpdatedPanel() {
+		return widgetPanel;
+	}
+
 	@Override
 	public boolean isEnabledForAppMode(@NonNull ApplicationMode appMode) {
 		OsmandPreference<Boolean> visibilityPref = widget.getWidgetVisibilityPref();

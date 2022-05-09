@@ -50,6 +50,7 @@ import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_EXTERNAL_PROVIDER_PACKAGE;
 import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_GROUP_NAME;
 import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_WIDGET_ID;
+import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_WIDGETS_PANEL_ID;
 
 public class AddWidgetFragment extends BaseOsmAndFragment {
 
@@ -273,7 +274,9 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		applyButton.setOnClickListener(v -> {
 			Fragment target = getTargetFragment();
 			if (target instanceof AddWidgetListener) {
-				((AddWidgetListener) target).onWidgetsSelectedToAdd(new ArrayList<>(selectedWidgetsIds.values()));
+				List<String> widgetsIds = new ArrayList<>(selectedWidgetsIds.values());
+				WidgetsPanel widgetsPanel = widgetsDataHolder.getWidgetsPanel();
+				((AddWidgetListener) target).onWidgetsSelectedToAdd(widgetsIds, widgetsPanel);
 			}
 			dismiss();
 		});
@@ -310,10 +313,12 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 	public static void showGroupDialog(@NonNull FragmentManager fragmentManager,
 	                                   @NonNull Fragment target,
 	                                   @NonNull ApplicationMode appMode,
+	                                   @NonNull WidgetsPanel widgetsPanel,
 	                                   @NonNull WidgetGroup widgetGroup,
 	                                   @Nullable List<String> alreadySelectedWidgetsIds) {
 		Bundle args = new Bundle();
 		args.putString(KEY_APP_MODE, appMode.getStringKey());
+		args.putString(KEY_WIDGETS_PANEL_ID, widgetsPanel.name());
 		args.putString(KEY_GROUP_NAME, widgetGroup.name());
 		args.putSerializable(KEY_ALREADY_SELECTED_WIDGETS_IDS, (Serializable) alreadySelectedWidgetsIds);
 		AddWidgetFragment fragment = new AddWidgetFragment();
@@ -328,10 +333,12 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 	public static void showWidgetDialog(@NonNull FragmentManager fragmentManager,
 	                                    @NonNull Fragment target,
 	                                    @NonNull ApplicationMode appMode,
+	                                    @NonNull WidgetsPanel widgetsPanel,
 	                                    @NonNull WidgetParams widgetParams,
 	                                    @Nullable List<String> alreadySelectedWidgetsIds) {
 		Bundle args = new Bundle();
 		args.putString(KEY_APP_MODE, appMode.getStringKey());
+		args.putString(KEY_WIDGETS_PANEL_ID, widgetsPanel.name());
 		args.putString(KEY_WIDGET_ID, widgetParams.id);
 		args.putSerializable(KEY_ALREADY_SELECTED_WIDGETS_IDS, (Serializable) alreadySelectedWidgetsIds);
 		AddWidgetFragment fragment = new AddWidgetFragment();
@@ -346,11 +353,13 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 	public static void showExternalWidgetDialog(@NonNull FragmentManager fragmentManager,
 	                                            @NonNull Fragment target,
 	                                            @NonNull ApplicationMode appMode,
+	                                            @NonNull WidgetsPanel widgetsPanel,
 	                                            @NonNull String widgetId,
 	                                            @NonNull String externalProviderPackage,
 	                                            @Nullable List<String> alreadySelectedWidgetsIds) {
 		Bundle args = new Bundle();
 		args.putString(KEY_APP_MODE, appMode.getStringKey());
+		args.putString(KEY_WIDGETS_PANEL_ID, widgetsPanel.name());
 		args.putString(KEY_WIDGET_ID, widgetId);
 		args.putString(KEY_EXTERNAL_PROVIDER_PACKAGE, externalProviderPackage);
 		args.putSerializable(KEY_ALREADY_SELECTED_WIDGETS_IDS, (Serializable) alreadySelectedWidgetsIds);
@@ -371,6 +380,6 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 
 	public interface AddWidgetListener {
 
-		void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds);
+		void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds, @NonNull WidgetsPanel widgetsPanel);
 	}
 }

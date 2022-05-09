@@ -48,7 +48,7 @@ public class MapWidgetRegistry {
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 
-	private final Map<WidgetsPanel, Set<MapWidgetInfo>> allWidgets = new HashMap<>();
+	private Map<WidgetsPanel, Set<MapWidgetInfo>> allWidgets = new HashMap<>();
 
 	private Set<WidgetsVisibilityListener> visibilityListeners = new HashSet<>();
 
@@ -81,17 +81,8 @@ public class MapWidgetRegistry {
 	}
 
 	public void updateWidgetsInfo(@NonNull ApplicationMode appMode, @NonNull DrawSettings drawSettings) {
-		for (WidgetsPanel panel : WidgetsPanel.values()) {
-			Set<MapWidgetInfo> panelWidgets = getWidgetsForPanel(panel);
-			updatePanelInfo(panelWidgets, appMode, drawSettings);
-		}
-	}
-
-	private void updatePanelInfo(@NonNull Set<MapWidgetInfo> panelWidgets,
-	                             @NonNull ApplicationMode mode,
-	                             @NonNull DrawSettings drawSettings) {
-		for (MapWidgetInfo widgetInfo : panelWidgets) {
-			if (widgetInfo.isEnabledForAppMode(mode)) {
+		for (MapWidgetInfo widgetInfo : getAllWidgets()) {
+			if (widgetInfo.isEnabledForAppMode(appMode)) {
 				widgetInfo.widget.updateInfo(drawSettings);
 			}
 		}
@@ -206,16 +197,21 @@ public class MapWidgetRegistry {
 	}
 
 	public void reorderWidgets() {
-		for (WidgetsPanel panel : WidgetsPanel.values()) {
-			Set<MapWidgetInfo> oldOrder = getWidgetsForPanel(panel);
-			Set<MapWidgetInfo> newOrder = new TreeSet<>();
-			for (MapWidgetInfo widgetInfo : oldOrder) {
-				widgetInfo.pageIndex = panel.getWidgetPage(widgetInfo.key, settings);
-				widgetInfo.priority = panel.getWidgetOrder(widgetInfo.key, settings);
-				newOrder.add(widgetInfo);
+		Map<WidgetsPanel, Set<MapWidgetInfo>> newAllWidgets = new HashMap<>();
+		for (MapWidgetInfo widget : getAllWidgets()) {
+			WidgetsPanel panel = widget.getUpdatedPanel();
+			widget.pageIndex = panel.getWidgetPage(widget.key, settings);
+			widget.priority = panel.getWidgetOrder(widget.key, settings);
+
+			Set<MapWidgetInfo> widgetsOfPanel = newAllWidgets.get(panel);
+			if (widgetsOfPanel == null) {
+				widgetsOfPanel = new TreeSet<>();
+				newAllWidgets.put(panel, widgetsOfPanel);
 			}
-			allWidgets.put(panel, newOrder);
+			widgetsOfPanel.add(widget);
 		}
+
+		allWidgets = newAllWidgets;
 	}
 
 	@Nullable
