@@ -274,11 +274,6 @@ public class NetworkRouteContext {
 		stats = new NetworkRouteContextStats();
 	}
 
-	public NetworkRouteSelectorFilter getFilter() {
-		return filter;
-	}
-
-
 	public static class NetworkRoutePoint {
 		public final int x31;
 		public final int y31;
@@ -293,9 +288,6 @@ public class NetworkRouteContext {
 		}
 
 		public void addObject(NetworkRouteSegment obj) {
-			if ((obj.getId() >> 6) == 156893320 && objects.size() > 1) {
-				int a = 1;
-			}
 			if (obj.getId() > 0) {
 				for (NetworkRouteSegment obj2 : objects) {
 					if (obj.getId() == obj2.getId() && obj.direction() == obj2.direction()) {
