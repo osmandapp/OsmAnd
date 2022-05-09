@@ -822,7 +822,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	public void onResume() {
 		super.onResume();
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		if (mapActivity != null && mapActivity.getMapLayers().hasMapActivity()) {
 			onBackPressedCallback.setEnabled(true);
 			detailsMenu.setMapActivity(mapActivity);
 			mapActivity.getMapLayers().getMapControlsLayer().addThemeInfoProviderTag(TAG);
