@@ -18,6 +18,7 @@ import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.monitoring.widgets.TripRecordingDistanceWidget;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
@@ -26,11 +27,8 @@ import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.track.helpers.SavingTrackHelper.SaveGpxResult;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.MapInfoLayer;
-import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
@@ -142,11 +140,11 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		}
 	}
 
-	private void registerWidget(@NonNull MapActivity activity) {
-		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
-		monitoringControl = createMonitoringControl(activity);
+	private void registerWidget(@NonNull MapActivity mapActivity) {
+		MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
+		monitoringControl = new TripRecordingDistanceWidget(mapActivity);
 
-		layer.registerWidget(TRIP_RECORDING, monitoringControl, WidgetsPanel.RIGHT);
+		layer.registerWidget(TRIP_RECORDING_DISTANCE, monitoringControl, WidgetsPanel.RIGHT);
 		layer.recreateControls();
 	}
 
@@ -182,119 +180,12 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		return app.getString(R.string.monitoring_prefs_descr);
 	}
 
-	/**
-	 * creates (if it wasn't created previously) the control to be added on a MapInfoLayer that shows a monitoring state (recorded/stopped)
-	 */
-	private TextInfoWidget createMonitoringControl(@NonNull MapActivity mapActivity) {
-		monitoringControl = new RightTextInfoWidget(mapActivity) {
-			long lastUpdateTime;
-
-			@Override
-			public void updateInfo(@Nullable DrawSettings drawSettings) {
-				if (isSaving) {
-					setText(getString(R.string.shared_string_save), "");
-					setIcons(R.drawable.widget_monitoring_rec_big_day, R.drawable.widget_monitoring_rec_big_night);
-					return;
-				}
-
-				String txt = getString(R.string.monitoring_control_start);
-				String subtxt = null;
-				int dn;
-				int d;
-				long last = lastUpdateTime;
-				final boolean globalRecord = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
-				final boolean isRecording = app.getSavingTrackHelper().getIsRecording();
-				float dist = app.getSavingTrackHelper().getDistance();
-
-				//make sure widget always shows recorded track distance if unsaved track exists
-				if (dist > 0) {
-					last = app.getSavingTrackHelper().getLastTimeUpdated();
-					String ds = OsmAndFormatter.getFormattedDistance(dist, app);
-					int ls = ds.lastIndexOf(' ');
-					if (ls == -1) {
-						txt = ds;
-					} else {
-						txt = ds.substring(0, ls);
-						subtxt = ds.substring(ls + 1);
-					}
-				}
-
-				final boolean liveMonitoringEnabled = liveMonitoringHelper.isLiveMonitoringEnabled();
-				if (globalRecord) {
-					//indicates global recording (+background recording)
-					if (liveMonitoringEnabled) {
-						dn = R.drawable.widget_live_monitoring_rec_big_night;
-						d = R.drawable.widget_live_monitoring_rec_big_day;
-					} else {
-						dn = R.drawable.widget_monitoring_rec_big_night;
-						d = R.drawable.widget_monitoring_rec_big_day;
-					}
-				} else if (isRecording) {
-					//indicates (profile-based, configured in settings) recording (looks like is only active during nav in follow mode)
-					if (liveMonitoringEnabled) {
-						dn = R.drawable.widget_live_monitoring_rec_small_night;
-						d = R.drawable.widget_live_monitoring_rec_small_day;
-					} else {
-						dn = R.drawable.widget_monitoring_rec_small_night;
-						d = R.drawable.widget_monitoring_rec_small_day;
-					}
-				} else {
-					dn = R.drawable.widget_monitoring_rec_inactive_night;
-					d = R.drawable.widget_monitoring_rec_inactive_day;
-				}
-
-				setText(txt, subtxt);
-				setIcons(d, dn);
-				if ((last != lastUpdateTime) && (globalRecord || isRecording)) {
-					lastUpdateTime = last;
-					//blink implementation with 2 indicator states (global logging + profile/navigation logging)
-					if (liveMonitoringEnabled) {
-						dn = R.drawable.widget_live_monitoring_rec_small_night;
-						d = R.drawable.widget_live_monitoring_rec_small_day;
-					} else {
-						dn = R.drawable.widget_monitoring_rec_small_night;
-						d = R.drawable.widget_monitoring_rec_small_day;
-					}
-					setIcons(d, dn);
-
-					app.runInUIThread(() -> {
-						int dn1;
-						int d1;
-						if (globalRecord) {
-							if (liveMonitoringEnabled) {
-								dn1 = R.drawable.widget_live_monitoring_rec_big_night;
-								d1 = R.drawable.widget_live_monitoring_rec_big_day;
-							} else {
-								dn1 = R.drawable.widget_monitoring_rec_big_night;
-								d1 = R.drawable.widget_monitoring_rec_big_day;
-							}
-						} else {
-							if (liveMonitoringEnabled) {
-								dn1 = R.drawable.widget_live_monitoring_rec_small_night;
-								d1 = R.drawable.widget_live_monitoring_rec_small_day;
-							} else {
-								dn1 = R.drawable.widget_monitoring_rec_small_night;
-								d1 = R.drawable.widget_monitoring_rec_small_day;
-							}
-						}
-						setIcons(d1, dn1);
-					}, 500);
-				}
-			}
-		};
-		monitoringControl.updateInfo(null);
-
-		// monitoringControl.addView(child);
-		monitoringControl.setOnClickListener(v -> controlDialog(mapActivity));
-		return monitoringControl;
-	}
-
 	@Override
 	public void mapActivityResume(MapActivity activity) {
 		this.mapActivity = activity;
 		if (showDialogWhenActivityResumed) {
 			showDialogWhenActivityResumed = false;
-			controlDialog(mapActivity);
+			showTripRecordingDialog(mapActivity);
 		}
 	}
 
@@ -327,7 +218,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		return app.getSavingTrackHelper().hasDataToSave();
 	}
 
-	public void controlDialog(@NonNull Activity activity) {
+	public void showTripRecordingDialog(@NonNull Activity activity) {
 		FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
 		if (hasDataToSave() || wasTrackMonitored()) {
 			TripRecordingBottomSheet.showInstance(fragmentManager);
@@ -437,6 +328,14 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		if (app.getNavigationService() != null) {
 			app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_GPX);
 		}
+	}
+
+	public boolean isSaving() {
+		return isSaving;
+	}
+
+	public boolean isLiveMonitoringEnabled() {
+		return liveMonitoringHelper.isLiveMonitoringEnabled();
 	}
 
 	public void startGPXMonitoring(final Activity map) {
