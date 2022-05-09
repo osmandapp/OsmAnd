@@ -4514,7 +4514,7 @@
     <string name="navigate_point_format_swiss_grid_plus">Svissneska hnitanetið (CH1903+)</string>
     <string name="please_provide_group_name_message">Gefðu hópnum eitthvað heiti.</string>
     <string name="quick_action_add_route_descr">Hnappur til að byrja leið af miðjum skjánum.</string>
-    <string name="gpx_no_routes_descr">Þú getur notað \"%1$s\" verkfærið til að vista leiðina inn í skrá.</string>
+    <string name="gpx_no_routes_descr">Þú getur notað \"%1$s\" verkfærið til að vista leið inn í skrá.</string>
     <string name="gpx_no_routes_title">Það eru engar leiðir</string>
     <string name="exit_import">Hætta\?</string>
     <string name="on_with_params">%1$s á %2$s</string>

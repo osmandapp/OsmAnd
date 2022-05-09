@@ -4604,4 +4604,20 @@
     <string name="routing_attr_freeride_policy_prefer_offpiste_name">Preferuj jazdę poza trasą</string>
     <string name="routing_attr_difficulty_preference_no_preference_name">Brak preferencji</string>
     <string name="routing_attr_difficulty_preference_beginner_name">Początkujący</string>
+    <string name="turn_on_public_transport_description">Włącz tę opcję, aby zobaczyć trasy transportu publicznego na mapie.</string>
+    <string name="av_def_action_choose">Na żądanie</string>
+    <string name="bearing_secondary_desc">Format wyświetlanych danych można zmienić w: %1$s - %2$s - %3$s.</string>
+    <string name="elevation_profile_widget_desc">Widget pokazuje wysokość i profil nachylenia bieżącej trasy.</string>
+    <string name="av_notes_choose_action_widget_desc">Wybierz akcję.</string>
+    <string name="shared_string_widget">Widżet</string>
+    <string name="fps_widget_desc">Widżet pokazuje, jak szybko mapa i elementy mapy są wyświetlane i odświeżane.</string>
+    <string name="current_time_widget_desc">Ten widżet pokazuje aktualny czas z Twojego urządzenia.</string>
+    <string name="battery_widget_desc">Widżet pokazuje poziom naładowania baterii urządzenia.</string>
+    <string name="time_to_go_desc">Czas w minutach lub godzinach potrzebny do osiągnięcia celu podróży.</string>
+    <string name="arrival_time_widget_desc">Czas przybycia do miejsca docelowego.</string>
+    <string name="navigation_points">Punkty nawigacyjne</string>
+    <string name="calculate_online">Oblicz online</string>
+    <string name="shared_string_speed">Prędkość</string>
+    <string name="coordinates_widget_desc">Pokazuje współrzędne geograficzne bieżącej lokalizacji geograficznej.</string>
+    <string name="app_mode_mountain_bicycle">Rower górski</string>
 </resources>

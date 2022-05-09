@@ -150,6 +150,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	@Override
 	public void initLayer(@NonNull final OsmandMapTileView view) {
+		super.initLayer(view);
 	}
 
 	@Override

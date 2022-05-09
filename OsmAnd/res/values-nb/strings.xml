@@ -4599,4 +4599,14 @@
     <string name="routing_attr_freeride_policy_prefer_offpiste_name">Foretrekk frikjøring</string>
     <string name="routing_attr_freeride_policy_allow_name">Tillat</string>
     <string name="routing_attr_difficulty_preference_no_preference_name">Ingen preferanse</string>
+    <string name="bearing_secondary_desc">Du kan endre format for vist data i: %1$s – %2$s – %3$s.</string>
+    <string name="routing_attr_avoid_4wd_only_description">Unngå veier som kun passer kjøretøy med firhjulstrekk</string>
+    <string name="coordinates_widget_secondary_desc">"Koordinatformatet kan endres i  %1$s – %2$s – %3$s."</string>
+    <string name="elevation_profile_widget_desc">Miniprogrammet viser høyde og helningen for nåværende rute.</string>
+    <string name="mapillary_widget_desc">Miniprogram som gir rask tilgang til Mapillary-programmer for å legge til gatenivå-bulder.</string>
+    <string name="av_notes_choose_action_widget_desc">Velg handling.</string>
+    <string name="routing_attr_avoid_4wd_only_name">Unngå 4WD-veier</string>
+    <string name="widget_secondary_desc_part_of">En del av %1$s-programtillegget.</string>
+    <string name="parking_widget_desc">Miniprogram som viser avstanden fra skjermsenter til parkeringsplassen.</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Middels</string>
 </resources>

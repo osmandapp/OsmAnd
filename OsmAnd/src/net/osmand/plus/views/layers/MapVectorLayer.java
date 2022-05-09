@@ -25,7 +25,6 @@ import net.osmand.util.MapUtils;
 
 public class MapVectorLayer extends BaseMapLayer {
 
-	private OsmandMapTileView view;
 	private final ResourceManager resourceManager;
 	private Paint paintImg;
 
@@ -51,7 +50,7 @@ public class MapVectorLayer extends BaseMapLayer {
 
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
-		this.view = view;
+		super.initLayer(view);
 
 		paintImg = new Paint();
 		paintImg.setFilterBitmap(true);
@@ -103,7 +102,7 @@ public class MapVectorLayer extends BaseMapLayer {
 	}
 
 	private void updateLayerProviderAlpha(int alpha) {
-		final MapRendererView mapRenderer = view.getMapRenderer();
+		final MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
 			mapLayerConfiguration.setOpacityFactor(((float) alpha) / 255.0f);
@@ -124,7 +123,7 @@ public class MapVectorLayer extends BaseMapLayer {
 		boolean alphaChanged = cachedAlpha != alpha;
 		cachedAlpha = alpha;
 
-		final MapRendererView mapRenderer = view.getMapRenderer();
+		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			// opengl renderer
 			if (visibleChanged) {

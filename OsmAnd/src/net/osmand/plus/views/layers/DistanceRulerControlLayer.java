@@ -38,7 +38,6 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	private static final int DISTANCE_TEXT_SIZE = 16;
 
 	private OsmandApplication app;
-	private OsmandMapTileView view;
 
 	private boolean showTwoFingersDistance;
 	private boolean showDistBetweenFingerAndLocation;
@@ -72,8 +71,9 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 
 	@Override
 	public void initLayer(@NonNull final OsmandMapTileView view) {
+		super.initLayer(view);
+
 		app = getApplication();
-		this.view = view;
 		touchPoint = new PointF();
 		acceptableTouchRadius = app.getResources().getDimensionPixelSize(R.dimen.acceptable_touch_radius);
 

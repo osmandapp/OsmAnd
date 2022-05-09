@@ -83,9 +83,9 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
-		this.mView = view;
-		initUI();
+		super.initLayer(view);
 
+		initUI();
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 	}
 

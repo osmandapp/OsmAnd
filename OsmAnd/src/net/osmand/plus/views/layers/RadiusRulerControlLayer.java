@@ -48,7 +48,6 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	private static final int SHOW_COMPASS_MIN_ZOOM = 8;
 
 	private OsmandApplication app;
-	private OsmandMapTileView view;
 	private View rightWidgetsPanel;
 
 	private TextSide textSide;
@@ -93,8 +92,9 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 
 	@Override
 	public void initLayer(@NonNull final OsmandMapTileView view) {
+		super.initLayer(view);
+
 		app = getApplication();
-		this.view = view;
 		cacheMetricSystem = app.getSettings().METRIC_SYSTEM.get();
 		cacheMapDensity = getMapDensity();
 		cacheDistances = new ArrayList<>();

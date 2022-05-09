@@ -77,8 +77,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 	public static final org.apache.commons.logging.Log log = PlatformUtil.getLog(POIMapLayer.class);
 
-	private OsmandMapTileView view;
-
 	private final OsmandApplication app;
 	private final RoutingHelper routingHelper;
 	private Set<PoiUIFilter> filters = new TreeSet<>();
@@ -245,7 +243,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
-		this.view = view;
+		super.initLayer(view);
 		mapTextLayer = view.getLayerByClass(MapTextLayer.class);
 	}
 
@@ -356,7 +354,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			dataChanged = true;
 		}
 		int zoom = tileBox.getZoom();
-		MapRendererView mapRenderer = view.getMapRenderer();
+		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			if (shouldDraw(zoom)) {
 				float textScale = app.getOsmandMap().getTextScale();
@@ -400,7 +398,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				for (Amenity o : objects) {
 					if (shouldDraw(tileBox, o)) {
 						PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(
-								view.getContext(), getColor(o), true);
+								getContext(), getColor(o), true);
 						pointImageDrawable.setAlpha(0.8f);
 						LatLon latLon = o.getLocation();
 						float x = tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
@@ -431,7 +429,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 						}
 						if (id != null) {
 							PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(
-									view.getContext(), getColor(o), true, RenderingIcons.getResId(id));
+									getContext(), getColor(o), true, RenderingIcons.getResId(id));
 							pointImageDrawable.setAlpha(0.8f);
 							pointImageDrawable.drawPoint(canvas, x, y, textScale, false);
 						}
@@ -446,7 +444,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	private void clearPoiTileProvider() {
-		MapRendererView mapRenderer = view.getMapRenderer();
+		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null && poiTileProvider != null) {
 			poiTileProvider.clearSymbols(mapRenderer);
 			poiTileProvider = null;

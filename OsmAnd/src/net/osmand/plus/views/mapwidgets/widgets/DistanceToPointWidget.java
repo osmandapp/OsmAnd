@@ -16,7 +16,7 @@ import androidx.annotation.Nullable;
 public abstract class DistanceToPointWidget extends RightTextInfoWidget {
 
 	private final OsmandMapTileView view;
-	private float[] calculations = new float[1];
+	private final float[] calculations = new float[1];
 	private int cachedMeters;
 
 	public DistanceToPointWidget(@NonNull MapActivity mapActivity, @DrawableRes int dayIconId, @DrawableRes int nightIconId) {
