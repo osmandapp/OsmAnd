@@ -17,6 +17,7 @@ import net.osmand.util.MapUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -162,5 +163,19 @@ public class NetworkRouteGpxApproximator {
 			}
 		}
 		return entityList;
+	}
+	
+	public static class GpxRoutePoint {
+		int idx;
+		double lat;
+		double lon;
+		NetworkRoutePoint routePoint = null;
+		
+		public List<NetworkRouteSegment> getObjects() {
+			if(routePoint == null) {
+				return Collections.emptyList();
+			}
+			return routePoint.objects;
+		}
 	}
 }

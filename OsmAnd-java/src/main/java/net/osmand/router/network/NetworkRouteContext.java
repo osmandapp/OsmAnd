@@ -284,19 +284,6 @@ public class NetworkRouteContext {
 		return filter;
 	}
 
-	public static class GpxRoutePoint {
-		int idx;
-		double lat;
-		double lon;
-		NetworkRoutePoint routePoint = null;
-		
-		public List<NetworkRouteSegment> getObjects() {
-			if(routePoint == null) {
-				return Collections.emptyList();
-			}
-			return routePoint.objects;
-		}
-	}
 
 	public static class NetworkRoutePoint {
 		public final int x31;
