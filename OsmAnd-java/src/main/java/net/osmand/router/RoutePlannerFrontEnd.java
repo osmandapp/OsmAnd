@@ -164,7 +164,7 @@ public class RoutePlannerFrontEnd {
 					if (road == null || currentsDistSquare < road.distSquare) {
 						RouteDataObject ro = new RouteDataObject(r);
 						
-						road = new RouteSegmentPoint(ro, j, currentsDistSquare);
+						road = new RouteSegmentPoint(ro, j - 1, currentsDistSquare);
 						road.preciseX = (int) pr.x;
 						road.preciseY = (int) pr.y;
 					}
@@ -726,6 +726,10 @@ public class RoutePlannerFrontEnd {
 
 	public List<RouteSegmentResult> searchRoute(final RoutingContext ctx, LatLon start, LatLon end, List<LatLon> intermediates,
 	                                            PrecalculatedRouteDirection routeDirection) throws IOException, InterruptedException {
+		ctx.slat = start.getLatitude();
+		ctx.slon = start.getLongitude();
+		ctx.elat = end.getLatitude();
+		ctx.elon = end.getLongitude();
 		long timeToCalculate = System.nanoTime();
 		if (ctx.calculationProgress == null) {
 			ctx.calculationProgress = new RouteCalculationProgress();

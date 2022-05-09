@@ -61,11 +61,21 @@ public class RoutingContext {
 	public int startY;
 	public long startRoadId;
 	public int startSegmentInd;
+	public int startESegmentInd;
+	
+	public double slat;
+	public double slon;
+	public double elat;
+	public double elon;
+	
+	public double distOnRoadStart;
+	public double distOnRoadEnd;
 	public boolean startTransportStop;
 	public int targetX;
 	public int targetY;
 	public long targetRoadId;
 	public int targetSegmentInd;
+	public int targetESegmentInd;
 	public boolean targetTransportStop;
 	
 	public boolean publicTransport;
@@ -187,17 +197,19 @@ public class RoutingContext {
 	
 	public void initStartAndTargetPoints(RouteSegment start, RouteSegment end) {
 		initTargetPoint(end);
+		startRoadId = start.road.getId();
 		startX = start.road.getPoint31XTile(start.getSegmentStart());
 		startY = start.road.getPoint31YTile(start.getSegmentStart());
-		startRoadId = start.road.getId();
 		startSegmentInd = start.getSegmentStart();
+		startESegmentInd = start.getSegmentEnd();
 	}
 
 	public void initTargetPoint(RouteSegment end) {
+		targetRoadId = end.road.getId();
 		targetX = end.road.getPoint31XTile(end.getSegmentStart());
 		targetY = end.road.getPoint31YTile(end.getSegmentStart());
-		targetRoadId = end.road.getId();
 		targetSegmentInd = end.getSegmentStart();
+		targetESegmentInd = end.getSegmentEnd();
 	}
 	
 	public void unloadAllData() {

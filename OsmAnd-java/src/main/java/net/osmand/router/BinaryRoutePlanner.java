@@ -18,6 +18,7 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
+import static java.lang.Math.abs;
 import static net.osmand.router.RoutePlannerFrontEnd.*;
 
 public class BinaryRoutePlanner {
@@ -38,7 +39,6 @@ public class BinaryRoutePlanner {
 
 	public static double squareRootDist(int x1, int y1, int x2, int y2) {
 		return MapUtils.squareRootDist31(x1, y1, x2, y2);
-//		return MapUtils.measuredDist31(x1, y1, x2, y2);
 	}
 
 
@@ -73,7 +73,7 @@ public class BinaryRoutePlanner {
 			RouteSegment recalculationEnd ) throws InterruptedException, IOException {
 		// measure time
 		ctx.memoryOverhead = 1000;
-
+		
 		// Initializing priority queue to visit way segments 
 		Comparator<RouteSegment> nonHeuristicSegmentsComparator = new NonHeuristicSegmentsComparator();
 		PriorityQueue<RouteSegment> graphDirectSegments = new PriorityQueue<RouteSegment>(50, new SegmentsComparator(ctx));
@@ -228,7 +228,7 @@ public class BinaryRoutePlanner {
 //		} else if (segment.getSegmentStart() == segment.getRoad().getPointsLength() - 1 && positiveDirection && segment.getSegmentStart() > 0) {
 		// assymetric cause we calculate initial point differently (segmentStart means that point is between ]segmentStart-1, segmentStart]
 		} else if (segment.getSegmentStart() > 0 && positiveDirection) {
-			segment = loadSameSegment(ctx, segment, segment.getSegmentStart() - 1, reverseSearchWay);
+			segment = loadSameSegment(ctx, segment, segment.getSegmentStart(), reverseSearchWay);
 		}
 		if (segment == null) {
 			return null;
@@ -259,6 +259,10 @@ public class BinaryRoutePlanner {
 		RouteSegment startNeg = initRouteSegment(ctx, start, false, false);
 		RouteSegment endPos = initRouteSegment(ctx, end, true, true);
 		RouteSegment endNeg = initRouteSegment(ctx, end, false, true);
+		ctx.distOnRoadStart = squareRootDist(start.road.getPoint31XTile(start.getSegmentEnd()), start.road.getPoint31YTile(start.getSegmentEnd()),
+				MapUtils.get31TileNumberX(ctx.slon), MapUtils.get31TileNumberY(ctx.slat));
+		ctx.distOnRoadEnd = squareRootDist(end.road.getPoint31XTile(end.getSegmentEnd()), end.road.getPoint31YTile(end.getSegmentEnd()),
+				MapUtils.get31TileNumberX(ctx.elon), MapUtils.get31TileNumberY(ctx.elat));
 		if (startPos != null) {
 			startPos.setParentRoute(RouteSegment.NULL);
 		}
@@ -276,11 +280,11 @@ public class BinaryRoutePlanner {
 			// mark here as positive for further check
 			double plusDir = start.getRoad().directionRoute(start.getSegmentStart(), true);
 			double diff = plusDir - ctx.config.initialDirection;
-			if (Math.abs(MapUtils.alignAngleDifference(diff)) <= Math.PI / 3) {
+			if (abs(MapUtils.alignAngleDifference(diff)) <= Math.PI / 3) {
 				if (startNeg != null) {
 					startNeg.distanceFromStart += 500;
 				}
-			} else if (Math.abs(MapUtils.alignAngleDifference(diff - Math.PI)) <= Math.PI / 3) {
+			} else if (abs(MapUtils.alignAngleDifference(diff - Math.PI)) <= Math.PI / 3) {
 				if (startPos != null) {
 					startPos.distanceFromStart += 500;
 				}
@@ -399,9 +403,26 @@ public class BinaryRoutePlanner {
 		final int y = road.getPoint31YTile(segmentInd);
 		final int prevX = road.getPoint31XTile(prevSegmentInd);
 		final int prevY = road.getPoint31YTile(prevSegmentInd);
+		double distOnRoadToPass;
+		
+		boolean isStartSeg = segment.getRoad().id == ctx.startRoadId
+				&& ((segment.getSegmentStart() == ctx.startSegmentInd && segment.getSegmentEnd() == ctx.startESegmentInd)
+				|| (segment.getSegmentStart() == ctx.startESegmentInd && segment.getSegmentEnd() == ctx.startSegmentInd));
+		
+		boolean isEndSeg = segment.getRoad().id == ctx.startRoadId
+				&& ((segment.getSegmentStart() == ctx.targetSegmentInd && segment.getSegmentEnd() == ctx.targetESegmentInd)
+				|| (segment.getSegmentStart() == ctx.targetESegmentInd && segment.getSegmentEnd() == ctx.targetSegmentInd));
+		
+		if (isStartSeg) {
+			distOnRoadToPass = ctx.distOnRoadStart;
+		} else if (isEndSeg) {
+			distOnRoadToPass = ctx.distOnRoadEnd;
+		} else {
+			distOnRoadToPass = squareRootDist(x, y, prevX, prevY);
+		}
 
 		// calculate point and try to load neighbor ways if they are not loaded
-		double distOnRoadToPass = squareRootDist(x, y, prevX, prevY);
+		//double distOnRoadToPass = squareRootDist(x, y, prevX, prevY);
 		float priority = ctx.getRouter().defineSpeedPriority(road);
 		float speed = (ctx.getRouter().defineRoutingSpeed(road) * priority);
 		if (speed == 0) {
@@ -424,6 +445,14 @@ public class BinaryRoutePlanner {
 		return obstacle + heightObstacle + distOnRoadToPass / speed;
 
 	}
+	
+//	private double correctedStartEndSegmentDist(final RoutingContext ctx, RouteSegment segment) {
+//		boolean isStartSeg = segment.getRoad().id == ctx.startRoadId && segment.getSegmentStart() == ctx.startSegmentInd;
+//		boolean isEndSeg = segment.getRoad().id == ctx.targetRoadId && segment.getSegmentStart() == ctx.targetSegmentInd;
+//		if (isStartSeg) {
+//			return squareRootDist(road.getPoint31XTile(segmentInd), road.getPoint31XTile(segmentInd), ctx.startX, ctx.startY);;
+//		}
+//	}
 
 
 	@SuppressWarnings("unused")
