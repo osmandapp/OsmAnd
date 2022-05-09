@@ -15,6 +15,7 @@ public class AMapWidget extends AidlParams {
 	private String text;
 	private String description;
 	private int order;
+	private boolean rightPanelByDefault = true;
 	private Intent intentOnClick;
 
 	public AMapWidget(String id, String menuIconName, String menuTitle,
@@ -79,6 +80,14 @@ public class AMapWidget extends AidlParams {
 		return order;
 	}
 
+	public boolean isRightPanelByDefault() {
+		return rightPanelByDefault;
+	}
+
+	public void setRightPanelByDefault(boolean rightPanelByDefault) {
+		this.rightPanelByDefault = rightPanelByDefault;
+	}
+
 	public Intent getIntentOnClick() {
 		return intentOnClick;
 	}
@@ -93,6 +102,7 @@ public class AMapWidget extends AidlParams {
 		bundle.putString("text", text);
 		bundle.putString("description", description);
 		bundle.putInt("order", order);
+		bundle.putBoolean("rightPanelByDefault", rightPanelByDefault);
 		bundle.putParcelable("intentOnClick", intentOnClick);
 	}
 
@@ -107,6 +117,7 @@ public class AMapWidget extends AidlParams {
 		text = bundle.getString("text");
 		description = bundle.getString("description");
 		order = bundle.getInt("order");
+		rightPanelByDefault = bundle.getBoolean("rightPanelByDefault");
 		intentOnClick = bundle.getParcelable("intentOnClick");
 	}
 }

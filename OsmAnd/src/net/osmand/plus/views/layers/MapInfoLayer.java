@@ -344,9 +344,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 	                                   @DrawableRes int settingsIconId,
 	                                   @Nullable String message,
 	                                   @NonNull String externalProviderPackage,
+	                                   @NonNull WidgetsPanel defaultPanel,
 	                                   int order) {
 		if (mapInfoControls != null) {
-			WidgetsPanel panel = getExternalWidgetPanel(widgetId);
+			WidgetsPanel panel = getExternalWidgetPanel(widgetId, defaultPanel);
 			int page = panel.getWidgetPage(widgetId, settings);
 			int savedOrder = panel.getWidgetOrder(widgetId, settings);
 			if (savedOrder != WidgetsPanel.DEFAULT_ORDER) {
@@ -360,10 +361,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	@NonNull
-	private WidgetsPanel getExternalWidgetPanel(@NonNull String widgetId) {
-		return WidgetsPanel.LEFT.getWidgetOrder(widgetId, settings) != WidgetsPanel.DEFAULT_ORDER
-				? WidgetsPanel.LEFT
-				: WidgetsPanel.RIGHT;
+	private WidgetsPanel getExternalWidgetPanel(@NonNull String widgetId, @NonNull WidgetsPanel defaultPanel) {
+		boolean storedInLeftPanel = WidgetsPanel.LEFT.getWidgetOrder(widgetId, settings) != WidgetsPanel.DEFAULT_ORDER;
+		boolean storedInRightPanel = WidgetsPanel.RIGHT.getWidgetOrder(widgetId, settings) != WidgetsPanel.DEFAULT_ORDER;
+		if (storedInLeftPanel) {
+			return WidgetsPanel.LEFT;
+		} else if (storedInRightPanel) {
+			return WidgetsPanel.RIGHT;
+		}
+		return defaultPanel;
 	}
 
 	public void recreateControls() {

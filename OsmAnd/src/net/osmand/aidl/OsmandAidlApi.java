@@ -392,8 +392,10 @@ public class OsmandAidlApi {
 							int iconId = AndroidUtils.getDrawableId(app, widgetData.getMenuIconName());
 							int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
 							String widgetKey = WIDGET_ID_PREFIX + widgetId;
+							WidgetsPanel defaultPanel = widgetData.isRightPanelByDefault() ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
 							layer.registerExternalWidget(widgetKey, widget, menuIconId,
-									widgetData.getMenuTitle(), connectedApp.getPack(), widgetData.getOrder());
+									widgetData.getMenuTitle(), connectedApp.getPack(), defaultPanel,
+									widgetData.getOrder());
 							layer.recreateControls();
 						}
 					}

@@ -18,6 +18,7 @@ import net.osmand.plus.views.layers.AidlMapLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
@@ -182,8 +183,9 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 				int iconId = AndroidUtils.getDrawableId(mapActivity.getMyApplication(), widgetData.getMenuIconName());
 				int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
 				String widgetKey = WIDGET_ID_PREFIX + widgetData.getId();
+				WidgetsPanel defaultPanel = widgetData.isRightPanelByDefault() ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
 				layer.registerExternalWidget(widgetKey, widget, menuIconId, widgetData.getMenuTitle(),
-						pack, widgetData.getOrder());
+						pack, defaultPanel, widgetData.getOrder());
 			}
 		}
 	}
