@@ -1,18 +1,8 @@
 package net.osmand.router.network;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.list.array.TLongArrayList;
@@ -26,6 +16,7 @@ import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.QuadRect;
+import net.osmand.router.network.NetworkRouteContext.GpxRoutePoint;
 import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -583,17 +574,30 @@ public class NetworkRouteSelector {
 	}
 
 	public void loadDataByGPX(GPXFile gpxFile, List<NetworkRouteSegment> lst) throws IOException {
+		LinkedList<GpxRoutePoint> gpxRoutePoints = new LinkedList<>();
 		for (GPXUtilities.Track t : gpxFile.tracks) {
 			for (GPXUtilities.TrkSegment ts : t.segments) {
 				for (int i = 0; i < ts.points.size() - 1; i++) {
 					GPXUtilities.WptPt ps = ts.points.get(i);
-					GPXUtilities.WptPt pe = ts.points.get(i + 1);
-					lst.addAll(rCtx.loadRouteSegmentByGPX(
-							MapUtils.get31TileNumberX(ps.lon), MapUtils.get31TileNumberY(ps.lat),
-							MapUtils.get31TileNumberX(pe.lon), MapUtils.get31TileNumberY(pe.lat)));
+					gpxRoutePoints.add(rCtx.getGpxRoutePoint(MapUtils.get31TileNumberX(ps.lon),
+							MapUtils.get31TileNumberY(ps.lat)));
 				}
 			}
 		}
+		LinkedList<GpxRoutePoint> pointsBuf = new LinkedList<>();
+		pointsBuf.add(gpxRoutePoints.get(0));
+		pointsBuf.add(gpxRoutePoints.get(1));
+		NetworkRouteSegment lastSeg = null;
+		for (int i = 2; i < gpxRoutePoints.size(); i++) {
+			GpxRoutePoint point = gpxRoutePoints.get(i);
+			if(point.isMatched()) {
+				pointsBuf.add(point);
+				lst.addAll(rCtx.loadRouteSegmentsByGPX(pointsBuf, lastSeg));
+				lastSeg = lst.get(lst.size() - 1);
+				pointsBuf.pollFirst();
+			}
+		}
+		lst.addAll(rCtx.loadRouteSegmentsByGPX(pointsBuf, lastSeg));
 	}
 
 	private void growAlgorithm(NetworkRouteSegment segment, Map<RouteKey, GPXFile> res) throws IOException {

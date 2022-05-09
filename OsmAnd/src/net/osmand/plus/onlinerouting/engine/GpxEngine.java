@@ -7,6 +7,7 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.LocationsHolder;
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
@@ -19,6 +20,8 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
+import net.osmand.router.network.GPXApproximator;
+import net.osmand.router.network.NetworkRouteSelector;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -33,6 +36,7 @@ import static net.osmand.plus.onlinerouting.engine.EngineType.GPX_TYPE;
 public class GpxEngine extends OnlineRoutingEngine {
 
 	private static final String ONLINE_ROUTING_GPX_FILE_NAME = "online_routing_gpx";
+	private boolean useNetwork = false;
 
 	public GpxEngine(@Nullable Map<String, String> params) {
 		super(params);
@@ -124,12 +128,27 @@ public class GpxEngine extends OnlineRoutingEngine {
 	                                              boolean initialCalculation) {
 		boolean calculatedTimeSpeed = useExternalTimestamps();
 		if (shouldApproximateRoute() && !initialCalculation) {
-			MeasurementEditingContext ctx = prepareApproximationContext(app, gpxFile);
-			if (ctx != null) {
-				GPXFile approximated = ctx.exportGpx(ONLINE_ROUTING_GPX_FILE_NAME);
-				if (approximated != null) {
-					calculatedTimeSpeed = ctx.hasCalculatedTimeSpeed();
-					gpxFile = approximated;
+			if(useNetwork){
+				BinaryMapIndexReader[] readers = app.getResourceManager().getRoutingMapFiles();
+				NetworkRouteSelector.NetworkRouteSelectorFilter selectorFilter = new NetworkRouteSelector.NetworkRouteSelectorFilter();
+				NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter);
+				GPXApproximator gpxApproximator = new GPXApproximator(routeSelector);
+				try {
+					gpxApproximator.setGpxFile(gpxFile);
+					gpxApproximator.approximate();
+					gpxFile = gpxApproximator.getGpxFile();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+			}else {
+				MeasurementEditingContext ctx = prepareApproximationContext(app, gpxFile);
+				if (ctx != null) {
+					GPXFile approximated = ctx.exportGpx(ONLINE_ROUTING_GPX_FILE_NAME);
+					if (approximated != null) {
+						calculatedTimeSpeed = ctx.hasCalculatedTimeSpeed();
+						gpxFile = approximated;
+					}
 				}
 			}
 		}

@@ -21,7 +21,9 @@ import net.osmand.util.MapUtils;
 public class NetworkRouteContext {
 	
 	private static final int ZOOM_TO_LOAD_TILES = 15;
-	
+	private static final double MAX_DISTANCE_M = 5;
+	private static final double MAX_INTER_DISTANCE = 10;
+
 	private final TLongObjectHashMap<NetworkRoutesTile> indexedTiles = new TLongObjectHashMap<>();
 	private final NetworkRouteSelectorFilter filter;
 	private final Map<BinaryMapIndexReader, List<RouteSubregion>> readers = new LinkedHashMap<>();
@@ -134,63 +136,41 @@ public class NetworkRouteContext {
 		return point.objects;
 	}
 
-	public List<NetworkRouteSegment> loadRouteSegmentByGPX(int sx31, int sy31, int ex31, int ey31) throws IOException {
-		NetworkRoutePoint nearStartPoint = getNetworkRoutePoint(sx31, sy31);
-		NetworkRoutePoint nearEndPoint = getNetworkRoutePoint(ex31, ey31);
-		if (nearStartPoint != null && nearEndPoint != null) {
-			List<NetworkRouteSegment> segments = getSegment(nearStartPoint, nearEndPoint);
-			if (segments != null) {
-				return segments;
-			}
+	public List<NetworkRouteSegment> loadRouteSegmentsByGPX(LinkedList<GpxRoutePoint> pointsBuf, NetworkRouteSegment lastSeg) throws IOException {
+		List<NetworkRouteSegment> segments = getSegments(pointsBuf, lastSeg);
+		if (segments != null) {
+			return segments;
 		}
 		return Collections.emptyList();
 	}
 
-	private NetworkRoutePoint getNetworkRoutePoint(int sx31, int sy31) throws IOException {
+	public GpxRoutePoint getGpxRoutePoint(int sx31, int sy31) throws IOException {
 		NetworkRoutesTile osmcRoutesTile = getMapRouteTile(sx31, sy31);
 		double minDistance = Double.MAX_VALUE;
 		NetworkRoutePoint nearPoint = null;
 		for (NetworkRoutePoint pt : osmcRoutesTile.routes.valueCollection()) {
-			double distance = MapUtils.getSqrtDistance(sx31, sy31, pt.x31, pt.y31);
+			double distance = MapUtils.squareRootDist31(sx31, sy31, pt.x31, pt.y31);
 			if (distance < minDistance) {
 				nearPoint = pt;
 				minDistance = distance;
 			}
 		}
-		return nearPoint;
+		GpxRoutePoint gpxRoutePoint = new GpxRoutePoint();
+		if (minDistance < MAX_DISTANCE_M) {
+			gpxRoutePoint.routePoint = nearPoint;
+		}else{
+			gpxRoutePoint.routePoint = null;
+		}
+		return gpxRoutePoint;
 	}
 
-	private List<NetworkRouteSegment> getSegment(NetworkRoutePoint nearStartPoint, NetworkRoutePoint nearEndPoint) {
-		for (NetworkRouteSegment segStart : nearStartPoint.objects) {
-			for (NetworkRouteSegment segEnd : nearEndPoint.objects) {
-				int stepS = (segStart.start < segStart.end) ? 1 : -1;
-				int endS = (segStart.start < segStart.end) ? segStart.robj.getPointsLength() : -1;
-				for (int i = segStart.start; i != endS; i += stepS) {
-					int xs = segStart.robj.getPoint31XTile(i);
-					int ys = segStart.robj.getPoint31YTile(i);
-					int stepE = (segEnd.start < segEnd.end) ? 1 : -1;
-					int endE = (segEnd.start < segEnd.end) ? segEnd.robj.getPointsLength() : -1;
-					for (int j = segEnd.start; j != endE; j += stepE) {
-						int xe = segEnd.robj.getPoint31XTile(j);
-						int ye = segEnd.robj.getPoint31YTile(j);
-						if (xs == xe && ys == ye) {
-							if (segStart.robj.getId() == segEnd.robj.getId()) {
-								segStart.end = segEnd.start;
-								return new ArrayList<>(Collections.singletonList(segStart));
-							} else {
-								if (j == segEnd.start) {
-									segStart.end = i;
-									return new ArrayList<>(Collections.singletonList(segStart));
-								} else {
-									List<NetworkRouteSegment> segments = new ArrayList<>();
-									segStart.end = i;
-									segments.add(segStart);
-									NetworkRouteSegment additional = new NetworkRouteSegment(segEnd, segEnd.start, j);
-									segments.add(additional);
-									return segments;
-								}
-							}
-						}
+	private List<NetworkRouteSegment> getSegments(LinkedList<GpxRoutePoint> points, NetworkRouteSegment lastSeg) {
+		if (points.get(0).isMatched() && points.get(1).isMatched()){
+			for (NetworkRouteSegment segStart : points.get(0).routePoint.objects) {
+				for (NetworkRouteSegment segEnd : points.get(1).routePoint.objects) {
+					if (segEnd.getId() == segStart.getId()) {
+						segStart.end = segEnd.start;
+						return new ArrayList<>(Collections.singletonList(segStart));
 					}
 				}
 			}
@@ -332,6 +312,17 @@ public class NetworkRouteContext {
 		return filter;
 	}
 
+	public static class GpxRoutePoint {
+		int idx;
+		double lat;
+		double lon;
+		NetworkRoutePoint routePoint = null;
+
+		public boolean isMatched() {
+			return routePoint != null;
+		}
+	}
+
 	public static class NetworkRoutePoint {
 		public final int x31;
 		public final int y31;
@@ -346,6 +337,9 @@ public class NetworkRouteContext {
 		}
 
 		public void addObject(NetworkRouteSegment obj) {
+			if ((obj.getId() >> 6) == 156893320 && objects.size() > 1) {
+				int a = 1;
+			}
 			if (obj.getId() > 0) {
 				for (NetworkRouteSegment obj2 : objects) {
 					if (obj.getId() == obj2.getId() && obj.direction() == obj2.direction()) {

@@ -37,17 +37,40 @@ public class MapUtils {
 	private static final String BASE_SHORT_OSM_URL = "https://openstreetmap.org/go/";
 
 	/**
-     * This array is a lookup table that translates 6-bit positive integer
-     * index values into their "Base64 Alphabet" equivalents as specified
-     * in Table 1 of RFC 2045.
-     */
-    private static final char intToBase64[] = {
-        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-        'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-        'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '_', '~'
-    };
+	 * This array is a lookup table that translates 6-bit positive integer
+	 * index values into their "Base64 Alphabet" equivalents as specified
+	 * in Table 1 of RFC 2045.
+	 */
+	private static final char intToBase64[] = {
+			'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+			'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+			'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+			'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+			'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '_', '~'
+	};
+	public static final int COUNT = 10;
+
+	public static void main(String[] args) {
+		MapUtils mapUtils = new MapUtils();
+		int x31;
+		int y31;
+		x31 = 1118359680;
+		y31 = 718046560;
+		long averageTime = 0;
+		for (int j = 0; j < COUNT; j++) {
+			long start = System.currentTimeMillis();
+			long dist = 0;
+			for (int i = x31; i < x31 + 1000000; i++) {
+//				dist += measuredDist31(x31,y31,i,y31);      //347 5854803289
+//				dist += squareRootDist31(x31, y31, i, y31); //10  5854803920
+				dist += getSqrtDistance(x31, y31, i, y31);  //6   499999500000
+			}
+			long time = System.currentTimeMillis() - start;
+			averageTime += time;
+			System.out.println(dist);
+		}
+		System.out.println("dist time " + averageTime / COUNT);
+	}
 
 	public static int calculateFromBaseZoomPrecisionXY(int baseZoom, int finalZoom, int xFinal, int yFinal) {
 		int px = xFinal;

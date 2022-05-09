@@ -19,15 +19,26 @@ import static net.osmand.router.network.NetworkRouteSelector.*;
 public class GPXApproximator {
 
 	NetworkRouteSelector routeSelector;
+	GPXFile gpxFile;
 
 	public GPXApproximator(NetworkRouteSelector routeSelector) {
 		this.routeSelector = routeSelector;
 		routeSelector.getNetworkRouteContext().getFilter().useFilter = false;
 	}
 
-	public List<Entity> approximate(GPXFile gpxFile) throws IOException {
+
+	public GPXFile getGpxFile() {
+		return gpxFile;
+	}
+
+	public void setGpxFile(GPXFile gpxFile) {
+		this.gpxFile = gpxFile;
+	}
+
+	public List<Entity> approximate() throws IOException {
 		Map<RouteKey, GPXFile> res = new HashMap<>();
 		List<NetworkRouteSegmentChain> lst = routeSelector.connectAlgorithmByGPX(gpxFile, res);
+		gpxFile = res.values().iterator().next();
 		return convertToEntities(lst);
 	}
 
