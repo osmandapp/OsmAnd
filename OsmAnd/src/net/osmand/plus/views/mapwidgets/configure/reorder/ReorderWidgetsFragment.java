@@ -28,8 +28,6 @@ import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
-import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -63,7 +61,7 @@ import java.util.TreeMap;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 
 public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
-		CopyAppModePrefsListener, ResetAppModePrefsListener, AddWidgetListener {
+		CopyAppModePrefsListener, AddWidgetListener {
 
 	public static final String TAG = ReorderWidgetsFragment.class.getSimpleName();
 
@@ -137,7 +135,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 		subtitle.setText(selectedAppMode.toHumanString());
 
 		toolbar.findViewById(R.id.back_button).setOnClickListener(v -> dismiss());
-		toolbar.findViewById(R.id.reset_button).setOnClickListener(v -> resetChanges());
+		toolbar.findViewById(R.id.reset_button).setOnClickListener(v -> resetToDefault());
 		toolbar.findViewById(R.id.copy_button).setOnClickListener(v -> copyFromProfile());
 	}
 
@@ -245,13 +243,6 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 		dismiss();
 	}
 
-	private void resetChanges() {
-		FragmentManager fragmentManager = getFragmentManager();
-		if (fragmentManager != null) {
-			ResetProfilePrefsBottomSheet.showInstance(fragmentManager, selectedAppMode, this, false);
-		}
-	}
-
 	private void updateItems() {
 		List<ListItem> items = new ArrayList<>();
 		items.add(new ListItem(ItemType.CARD_TOP_DIVIDER, null));
@@ -273,7 +264,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 		items.add(new ListItem(ItemType.ACTION_BUTTON, new ActionButtonInfo(
 				getString(R.string.reset_to_default),
 				R.drawable.ic_action_reset,
-				v -> resetChanges()
+				v -> resetToDefault()
 		)));
 		items.add(new ListItem(ItemType.ACTION_BUTTON, new ActionButtonInfo(
 				getString(R.string.copy_from_other_profile),
@@ -454,8 +445,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 		updateItems();
 	}
 
-	@Override
-	public void resetAppModePrefs(ApplicationMode appMode) {
+	private void resetToDefault() {
 		dataHolder.initOrders(app, selectedAppMode, true);
 		updateItems();
 	}
