@@ -212,14 +212,8 @@ public class NetworkRouteContext {
 						continue;
 					}
 					stats.loadedObjects++;
-					if (filter.useFilter) {
-						List<RouteKey> keys = filter.convert(obj);
-						for (RouteKey rk : keys) {
-							stats.loadedRoutes++;
-							osmcRoutesTile.add(obj, rk);
-						}
-					} else {
-						RouteKey rk = null;
+					List<RouteKey> keys = filter.convert(obj);
+					for (RouteKey rk : keys) {
 						stats.loadedRoutes++;
 						osmcRoutesTile.add(obj, rk);
 					}

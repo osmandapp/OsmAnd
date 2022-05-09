@@ -690,7 +690,6 @@ public class NetworkRouteSelector {
 	public static class NetworkRouteSelectorFilter {
 		public Set<RouteKey> keyFilter = null; // null - all
 		public Set<RouteType> typeFilter = null; // null -  all
-		public boolean useFilter = true;
 		
 		public List<RouteKey> convert(BinaryMapDataObject obj) {
 			return filterKeys(RouteType.getRouteKeys(obj));

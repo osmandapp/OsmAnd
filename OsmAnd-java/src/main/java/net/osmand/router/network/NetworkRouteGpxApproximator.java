@@ -2,12 +2,13 @@ package net.osmand.router.network;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
-import net.osmand.router.network.NetworkRouteContext.GpxRoutePoint;
 import net.osmand.router.network.NetworkRouteContext.NetworkRoutePoint;
 import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import net.osmand.router.network.NetworkRouteSelector.NetworkRouteSegmentChain;
@@ -35,13 +36,18 @@ public class NetworkRouteGpxApproximator {
 	private NetworkRouteSelector selector;
 
 
-	public NetworkRouteGpxApproximator(BinaryMapIndexReader[] files, NetworkRouteSelectorFilter filter, boolean routing) {
-		if (filter == null) {
-			filter = new NetworkRouteSelectorFilter();
-		}
-		selector = new NetworkRouteSelector(files, filter, routing);
-		// TODO
-		selector.rCtx.getFilter().useFilter = false;
+	public NetworkRouteGpxApproximator(BinaryMapIndexReader[] files, boolean routing) {
+		selector = new NetworkRouteSelector(files, new NetworkRouteSelectorFilter() {
+			@Override
+			public List<RouteKey> convert(RouteDataObject obj) {
+				return Collections.singletonList(null);
+			}
+			
+			@Override
+			public List<RouteKey> convert(BinaryMapDataObject obj) {
+				return Collections.singletonList(null);
+			}
+		}, routing);
 	}
 
 	public GPXFile getGpxFile() {
