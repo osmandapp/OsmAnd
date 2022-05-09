@@ -445,15 +445,6 @@ public class BinaryRoutePlanner {
 		return obstacle + heightObstacle + distOnRoadToPass / speed;
 
 	}
-	
-//	private double correctedStartEndSegmentDist(final RoutingContext ctx, RouteSegment segment) {
-//		boolean isStartSeg = segment.getRoad().id == ctx.startRoadId && segment.getSegmentStart() == ctx.startSegmentInd;
-//		boolean isEndSeg = segment.getRoad().id == ctx.targetRoadId && segment.getSegmentStart() == ctx.targetSegmentInd;
-//		if (isStartSeg) {
-//			return squareRootDist(road.getPoint31XTile(segmentInd), road.getPoint31XTile(segmentInd), ctx.startX, ctx.startY);;
-//		}
-//	}
-
 
 	@SuppressWarnings("unused")
 	private void processRouteSegment(final RoutingContext ctx, boolean reverseWaySearch,
