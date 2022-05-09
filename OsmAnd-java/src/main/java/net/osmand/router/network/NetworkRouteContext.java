@@ -21,9 +21,7 @@ import net.osmand.util.MapUtils;
 public class NetworkRouteContext {
 	
 	private static final int ZOOM_TO_LOAD_TILES = 15;
-	private static final double MAX_DISTANCE_M = 5;
-	private static final double MAX_INTER_DISTANCE = 10;
-
+	
 	private final TLongObjectHashMap<NetworkRoutesTile> indexedTiles = new TLongObjectHashMap<>();
 	private final NetworkRouteSelectorFilter filter;
 	private final Map<BinaryMapIndexReader, List<RouteSubregion>> readers = new LinkedHashMap<>();
@@ -136,15 +134,8 @@ public class NetworkRouteContext {
 		return point.objects;
 	}
 
-	public List<NetworkRouteSegment> loadRouteSegmentsByGPX(LinkedList<GpxRoutePoint> pointsBuf, NetworkRouteSegment lastSeg) throws IOException {
-		List<NetworkRouteSegment> segments = getSegments(pointsBuf, lastSeg);
-		if (segments != null) {
-			return segments;
-		}
-		return Collections.emptyList();
-	}
 
-	public GpxRoutePoint getGpxRoutePoint(int sx31, int sy31) throws IOException {
+	public NetworkRoutePoint getClosestNetworkRoutePoint(int sx31, int sy31) throws IOException {
 		NetworkRoutesTile osmcRoutesTile = getMapRouteTile(sx31, sy31);
 		double minDistance = Double.MAX_VALUE;
 		NetworkRoutePoint nearPoint = null;
@@ -155,28 +146,9 @@ public class NetworkRouteContext {
 				minDistance = distance;
 			}
 		}
-		GpxRoutePoint gpxRoutePoint = new GpxRoutePoint();
-		if (minDistance < MAX_DISTANCE_M) {
-			gpxRoutePoint.routePoint = nearPoint;
-		}else{
-			gpxRoutePoint.routePoint = null;
-		}
-		return gpxRoutePoint;
+		return nearPoint;
 	}
 
-	private List<NetworkRouteSegment> getSegments(LinkedList<GpxRoutePoint> points, NetworkRouteSegment lastSeg) {
-		if (points.get(0).isMatched() && points.get(1).isMatched()){
-			for (NetworkRouteSegment segStart : points.get(0).routePoint.objects) {
-				for (NetworkRouteSegment segEnd : points.get(1).routePoint.objects) {
-					if (segEnd.getId() == segStart.getId()) {
-						segStart.end = segEnd.start;
-						return new ArrayList<>(Collections.singletonList(segStart));
-					}
-				}
-			}
-		}
-		return null;
-	}
 
 	private NetworkRoutesTile getMapRouteTile(int x31, int y31) throws IOException {
 		long tileId = getTileId(x31, y31);
@@ -317,9 +289,12 @@ public class NetworkRouteContext {
 		double lat;
 		double lon;
 		NetworkRoutePoint routePoint = null;
-
-		public boolean isMatched() {
-			return routePoint != null;
+		
+		public List<NetworkRouteSegment> getObjects() {
+			if(routePoint == null) {
+				return Collections.emptyList();
+			}
+			return routePoint.objects;
 		}
 	}
 
@@ -361,7 +336,7 @@ public class NetworkRouteContext {
 
 	public static class NetworkRouteSegment {
 		public final int start;
-		public int end;
+		public final int end;
 		public final BinaryMapDataObject obj;
 		public final RouteDataObject robj;
 		public final RouteKey routeKey;

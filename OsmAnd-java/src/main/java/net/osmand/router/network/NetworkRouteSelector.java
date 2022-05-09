@@ -16,7 +16,6 @@ import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.QuadRect;
-import net.osmand.router.network.NetworkRouteContext.GpxRoutePoint;
 import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -33,11 +32,11 @@ public class NetworkRouteSelector {
 	private static final int CONNECT_POINTS_DISTANCE_MAX = 1000;
 
 
-	private final NetworkRouteContext rCtx;
+
+	final NetworkRouteContext rCtx;
 	
-	// TODO - FIX & implement work with routing tags
 	// TEST:
-	// TODO https://www.openstreetmap.org/relation/1075081#map=17/48.04245/11.51900 [21] -> ? 3 main not straight (137km, 114km, 80km, ...(12) <5km)
+	// --- https://www.openstreetmap.org/relation/1075081#map=17/48.04245/11.51900 [21] -> ? 3 main not straight (137km, 114km, 80km, ...(12) <5km)
 	// +++  https://www.openstreetmap.org/relation/1200009#map=8/60.592/10.940 [25] -> 3!
 	// +++  https://www.openstreetmap.org/relation/138401#map=19/51.06795/7.37955 [6] -> 1
 	// +++  https://www.openstreetmap.org/relation/145490#map=16/51.0607/7.3596 [2] -> 2
@@ -228,13 +227,8 @@ public class NetworkRouteSelector {
 		debug("FINISH " + lst.size(), null, segment);
 	}
 
-	public List<NetworkRouteSegmentChain> connectAlgorithmByGPX(GPXFile gpxFile, Map<RouteKey, GPXFile> res) throws IOException {
-		List<NetworkRouteSegment> loaded = new ArrayList<>();
-		loadDataByGPX(gpxFile, loaded);
-		return getNetworkRouteSegmentChains(null, res, loaded);
-	}
 
-	private List<NetworkRouteSegmentChain> getNetworkRouteSegmentChains(RouteKey routeKey, Map<RouteKey, GPXFile> res, List<NetworkRouteSegment> loaded) {
+	List<NetworkRouteSegmentChain> getNetworkRouteSegmentChains(RouteKey routeKey, Map<RouteKey, GPXFile> res, List<NetworkRouteSegment> loaded) {
 		System.out.println("About to merge: " + loaded.size());
 		Map<Long, List<NetworkRouteSegmentChain>> chains = createChainStructure(loaded);
 		Map<Long, List<NetworkRouteSegmentChain>> endChains = prepareEndChain(chains);
@@ -573,33 +567,7 @@ public class NetworkRouteSelector {
 		}
 	}
 
-	public void loadDataByGPX(GPXFile gpxFile, List<NetworkRouteSegment> lst) throws IOException {
-		LinkedList<GpxRoutePoint> gpxRoutePoints = new LinkedList<>();
-		for (GPXUtilities.Track t : gpxFile.tracks) {
-			for (GPXUtilities.TrkSegment ts : t.segments) {
-				for (int i = 0; i < ts.points.size() - 1; i++) {
-					GPXUtilities.WptPt ps = ts.points.get(i);
-					gpxRoutePoints.add(rCtx.getGpxRoutePoint(MapUtils.get31TileNumberX(ps.lon),
-							MapUtils.get31TileNumberY(ps.lat)));
-				}
-			}
-		}
-		LinkedList<GpxRoutePoint> pointsBuf = new LinkedList<>();
-		pointsBuf.add(gpxRoutePoints.get(0));
-		pointsBuf.add(gpxRoutePoints.get(1));
-		NetworkRouteSegment lastSeg = null;
-		for (int i = 2; i < gpxRoutePoints.size(); i++) {
-			GpxRoutePoint point = gpxRoutePoints.get(i);
-			if(point.isMatched()) {
-				pointsBuf.add(point);
-				lst.addAll(rCtx.loadRouteSegmentsByGPX(pointsBuf, lastSeg));
-				lastSeg = lst.get(lst.size() - 1);
-				pointsBuf.pollFirst();
-			}
-		}
-		lst.addAll(rCtx.loadRouteSegmentsByGPX(pointsBuf, lastSeg));
-	}
-
+	
 	private void growAlgorithm(NetworkRouteSegment segment, Map<RouteKey, GPXFile> res) throws IOException {
 		List<NetworkRouteSegment> lst = new ArrayList<>();
 		TLongHashSet visitedIds = new TLongHashSet();
