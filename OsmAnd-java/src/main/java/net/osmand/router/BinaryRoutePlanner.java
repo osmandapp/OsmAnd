@@ -85,9 +85,7 @@ public class BinaryRoutePlanner {
 
 		initQueuesWithStartEnd(ctx, start, end, recalculationEnd, graphDirectSegments, graphReverseSegments, 
 				visitedDirectSegments, visitedOppositeSegments);
-
-
-
+		
 		FinalRouteSegment finalSegment = null;
 		boolean onlyBackward = ctx.getPlanRoadDirection() < 0;
 		boolean onlyForward = ctx.getPlanRoadDirection() > 0;
@@ -259,10 +257,6 @@ public class BinaryRoutePlanner {
 		RouteSegment startNeg = initRouteSegment(ctx, start, false, false);
 		RouteSegment endPos = initRouteSegment(ctx, end, true, true);
 		RouteSegment endNeg = initRouteSegment(ctx, end, false, true);
-		ctx.distOnRoadStart = squareRootDist(start.road.getPoint31XTile(start.getSegmentEnd()), start.road.getPoint31YTile(start.getSegmentEnd()),
-				MapUtils.get31TileNumberX(ctx.slon), MapUtils.get31TileNumberY(ctx.slat));
-		ctx.distOnRoadEnd = squareRootDist(end.road.getPoint31XTile(end.getSegmentEnd()), end.road.getPoint31YTile(end.getSegmentEnd()),
-				MapUtils.get31TileNumberX(ctx.elon), MapUtils.get31TileNumberY(ctx.elat));
 		if (startPos != null) {
 			startPos.setParentRoute(RouteSegment.NULL);
 		}
@@ -414,9 +408,9 @@ public class BinaryRoutePlanner {
 				|| (segment.getSegmentStart() == ctx.targetESegmentInd && segment.getSegmentEnd() == ctx.targetSegmentInd));
 		
 		if (isStartSeg) {
-			distOnRoadToPass = ctx.distOnRoadStart;
+			distOnRoadToPass = ctx.distStartSeg;
 		} else if (isEndSeg) {
-			distOnRoadToPass = ctx.distOnRoadEnd;
+			distOnRoadToPass = ctx.distEndSeg;
 		} else {
 			distOnRoadToPass = squareRootDist(x, y, prevX, prevY);
 		}

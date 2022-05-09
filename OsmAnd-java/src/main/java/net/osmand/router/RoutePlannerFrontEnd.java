@@ -25,6 +25,8 @@ import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.util.MapUtils;
 
+import static net.osmand.router.BinaryRoutePlanner.squareRootDist;
+
 public class RoutePlannerFrontEnd {
 
 	protected static final Log log = PlatformUtil.getLog(RoutePlannerFrontEnd.class);
@@ -909,6 +911,10 @@ public class RoutePlannerFrontEnd {
 		if (routeDirection != null) {
 			ctx.precalculatedRouteDirection = routeDirection.adopt(ctx);
 		}
+		ctx.distStartSeg = squareRootDist(start.road.getPoint31XTile(ctx.startESegmentInd), start.road.getPoint31YTile(ctx.startESegmentInd),
+				MapUtils.get31TileNumberX(ctx.slon), MapUtils.get31TileNumberY(ctx.slat));
+		ctx.distEndSeg = squareRootDist(end.road.getPoint31XTile(ctx.targetSegmentInd), end.road.getPoint31YTile(ctx.targetSegmentInd),
+				MapUtils.get31TileNumberX(ctx.elon), MapUtils.get31TileNumberY(ctx.elat));
 		if (ctx.nativeLib != null) {
 			ctx.startX = start.preciseX;
 			ctx.startY = start.preciseY;

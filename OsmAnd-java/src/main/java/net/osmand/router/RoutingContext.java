@@ -68,8 +68,8 @@ public class RoutingContext {
 	public double elat;
 	public double elon;
 	
-	public double distOnRoadStart;
-	public double distOnRoadEnd;
+	public double distStartSeg;
+	public double distEndSeg;
 	public boolean startTransportStop;
 	public int targetX;
 	public int targetY;

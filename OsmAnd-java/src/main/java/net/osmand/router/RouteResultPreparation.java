@@ -352,9 +352,9 @@ public class RouteResultPreparation {
 	
 	private static double getDistSegment(RoutingContext ctx, int currPointInd, int nextPointInd, RouteDataObject currRoad, RouteSegmentResult currRes) {
 		if (currPointInd == currRes.getStartPointIndex()) {
-			return ctx.distOnRoadStart;
+			return ctx.distStartSeg;
 		} else if (currPointInd == currRes.getEndPointIndex()) {
-			return ctx.distOnRoadEnd;
+			return ctx.distEndSeg;
 		} else {
 			return measuredDist(currRoad.getPoint31XTile(currPointInd), currRoad.getPoint31YTile(currPointInd), currRoad.getPoint31XTile(nextPointInd),
 					currRoad.getPoint31YTile(nextPointInd));
