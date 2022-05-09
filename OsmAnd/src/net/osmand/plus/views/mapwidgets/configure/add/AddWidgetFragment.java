@@ -104,8 +104,11 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		Context context = requireContext();
 		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
-		view = themedInflater.inflate(R.layout.fragment_add_widget, container, false);
+		view = themedInflater.inflate(R.layout.base_widget_fragment_layout, container, false);
 		AndroidUtils.addStatusBarPadding21v(app, view);
+
+		ViewGroup mainContent = view.findViewById(R.id.main_content);
+		themedInflater.inflate(R.layout.add_widget_fragment_content, mainContent);
 
 		setupToolbar();
 		setupContent();

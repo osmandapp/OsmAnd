@@ -6,7 +6,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
-import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.util.MapUtils;
 
@@ -22,26 +21,19 @@ public class RadiusRulerWidget extends TextInfoWidget {
 	public RadiusRulerWidget(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
 
-		setIcons(settings.RADIUS_RULER_MODE.get());
+		setIcons(settings.SHOW_RADIUS_RULER_ON_MAP.get());
 		setText(DASH, null);
 		setOnClickListener(v -> switchRadiusRulerMode());
 	}
 
 	private void switchRadiusRulerMode() {
-		RadiusRulerMode currentMode = settings.RADIUS_RULER_MODE.get();
-		RadiusRulerMode newMode = RadiusRulerMode.FIRST;
-		if (currentMode == RadiusRulerMode.FIRST) {
-			newMode = RadiusRulerMode.SECOND;
-		} else if (currentMode == RadiusRulerMode.SECOND) {
-			newMode = RadiusRulerMode.EMPTY;
-		}
-		setIcons(newMode);
-		settings.RADIUS_RULER_MODE.set(newMode);
-		mapActivity.refreshMap();
-	}
+		boolean newShowRadiusRuler = !settings.SHOW_RADIUS_RULER_ON_MAP.get();
+		setIcons(newShowRadiusRuler);
+		settings.SHOW_RADIUS_RULER_ON_MAP.set(newShowRadiusRuler);
+		mapActivity.refreshMap();	}
 
-	private void setIcons(@Nullable RadiusRulerMode mode) {
-		if (mode == RadiusRulerMode.FIRST || mode == RadiusRulerMode.SECOND) {
+	private void setIcons(boolean showRadiusRuler) {
+		if (showRadiusRuler) {
 			setIcons(RADIUS_RULER);
 		} else {
 			setIcons(R.drawable.widget_hidden_day, R.drawable.widget_hidden_night);

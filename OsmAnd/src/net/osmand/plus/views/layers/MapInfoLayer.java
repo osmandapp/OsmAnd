@@ -1,41 +1,10 @@
 package net.osmand.plus.views.layers;
 
 
-import static net.osmand.plus.views.mapwidgets.WidgetParams.ALTITUDE;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.ARRIVAL_TIME;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.BATTERY;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.COORDINATES;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_TIME;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.DISTANCE_TO_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.ELEVATION_PROFILE;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.GPS_INFO;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_ARRIVAL_TIME;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_TIME_TO_GO;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.LANES;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.MAGNETIC_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.MARKERS_TOP_BAR;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.MAX_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.RADIUS_RULER;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.RELATIVE_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.SECOND_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_1;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_2;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.SMALL_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.STREET_NAME;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.TIME_TO_GO;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.view.View;
 import android.view.ViewGroup;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.StateChangedListener;
 import net.osmand.data.RotatedTileBox;
@@ -78,12 +47,41 @@ import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.views.mapwidgets.widgets.SecondNextTurnWidget;
 import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
-import net.osmand.plus.views.mapwidgets.widgetstates.CompassRulerWidgetState;
-import net.osmand.plus.views.mapwidgets.widgetstates.ElevationProfileWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
+import static net.osmand.plus.views.mapwidgets.WidgetParams.ALTITUDE;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.ARRIVAL_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.BATTERY;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.COORDINATES;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.DISTANCE_TO_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.ELEVATION_PROFILE;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.GPS_INFO;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_ARRIVAL_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_TIME_TO_GO;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.LANES;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.MAGNETIC_BEARING;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.MARKERS_TOP_BAR;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.MAX_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.RADIUS_RULER;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.RELATIVE_BEARING;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.SECOND_NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_1;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_2;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.SMALL_NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.STREET_NAME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TIME_TO_GO;
 
 public class MapInfoLayer extends OsmandMapLayer {
 
@@ -234,8 +232,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 	private void registerBottomWidgets(@NonNull MapActivity mapActivity) {
 		ElevationProfileWidget widget = new ElevationProfileWidget(mapActivity);
-		ElevationProfileWidgetState widgetState = new ElevationProfileWidgetState(getApplication());
-		registerWidget(ELEVATION_PROFILE, widget, widgetState);
+		registerWidget(ELEVATION_PROFILE, widget);
 	}
 
 	private void registerTopWidgets(@NonNull MapActivity mapActivity) {
@@ -265,7 +262,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	private void registerRightWidgets(@NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
 		MarkersWidgetsHelper markersWidgetsHelper = mapActivity.getMapLayers().getMapMarkersLayer().getMarkersWidgetsHelper();
 
 		MapWidget intermediateDist = new DistanceToIntermediateDestinationWidget(mapActivity);
@@ -317,7 +313,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		registerWidget(BATTERY, battery);
 
 		MapWidget radiusRuler = new RadiusRulerWidget(mapActivity);
-		registerWidget(RADIUS_RULER, radiusRuler, new CompassRulerWidgetState(app));
+		registerWidget(RADIUS_RULER, radiusRuler);
 	}
 
 	@Nullable
