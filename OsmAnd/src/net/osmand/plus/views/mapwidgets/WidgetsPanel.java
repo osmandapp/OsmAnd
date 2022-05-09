@@ -13,15 +13,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 import androidx.annotation.Nullable;
 
 public enum WidgetsPanel {
 
-	LEFT(R.drawable.ic_action_screen_side_left, R.string.map_widget_left, R.id.left_side),
-	RIGHT(R.drawable.ic_action_screen_side_right, R.string.map_widget_right, R.id.right_side),
-	TOP(R.drawable.ic_action_screen_side_top, R.string.top_widgets_panel, R.id.top_side),
-	BOTTOM(R.drawable.ic_action_screen_side_bottom, R.string.bottom_widgets_panel, R.id.bottom_side);
+	LEFT(R.drawable.ic_action_screen_side_left, R.string.map_widget_left),
+	RIGHT(R.drawable.ic_action_screen_side_right, R.string.map_widget_right),
+	TOP(R.drawable.ic_action_screen_side_top, R.string.top_widgets_panel),
+	BOTTOM(R.drawable.ic_action_screen_side_bottom, R.string.bottom_widgets_panel);
 
 	public static final String PAGE_SEPARATOR = ";";
 	public static final String WIDGET_SEPARATOR = ",";
@@ -50,26 +52,36 @@ public enum WidgetsPanel {
 		}
 	}
 
+	@DrawableRes
 	private final int iconId;
+	@StringRes
 	private final int titleId;
-	private final int tabId;
 
-	WidgetsPanel(int iconId, int titleId, int tabId) {
+	WidgetsPanel(@DrawableRes int iconId, @StringRes int titleId) {
 		this.iconId = iconId;
 		this.titleId = titleId;
-		this.tabId = tabId;
 	}
 
-	public int getIconId() {
-		return iconId;
+	@DrawableRes
+	public int getIconId(boolean rtl) {
+		return getRtlPanel(rtl).iconId;
 	}
 
-	public int getTitleId() {
-		return titleId;
+	@StringRes
+	public int getTitleId(boolean rtl) {
+		return getRtlPanel(rtl).titleId;
 	}
 
-	public int getTabId() {
-		return tabId;
+	@NonNull
+	private WidgetsPanel getRtlPanel(boolean rtl) {
+		if (!rtl || this == TOP || this == BOTTOM) {
+			return this;
+		} else if (this == LEFT) {
+			return RIGHT;
+		} else if (this == RIGHT) {
+			return LEFT;
+		}
+		throw new IllegalStateException("Unsupported panel");
 	}
 
 	@NonNull

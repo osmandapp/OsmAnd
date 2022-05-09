@@ -64,7 +64,6 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
     private ImageButton quickActionButton;
     private QuickActionsWidget quickActionsWidget;
 
-    private OsmandMapTileView view;
     private int previousMapPosition;
 
     private boolean inMovingMarkerMode;
@@ -82,9 +81,9 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 
     @Override
     public void initLayer(@NonNull OsmandMapTileView view) {
-        this.view = view;
+        super.initLayer(view);
 
-        Context context = view.getContext();
+        Context context = getContext();
         contextMarker = new ImageView(context);
         contextMarker.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT));
         contextMarker.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.map_pin_context_menu));

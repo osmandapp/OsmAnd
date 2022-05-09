@@ -119,7 +119,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		attrsPT = new RenderingLineAttributes("publicTransportLine");
 		attrsPT.defaultWidth = (int) (12 * density);
 		attrsPT.defaultWidth3 = (int) (7 * density);
-		attrsPT.defaultColor = ContextCompat.getColor(view.getContext(), R.color.nav_track);
+		attrsPT.defaultColor = ContextCompat.getColor(getContext(), R.color.nav_track);
 		attrsPT.paint3.setStrokeCap(Cap.BUTT);
 		attrsPT.paint3.setColor(Color.WHITE);
 		attrsPT.paint2.setStrokeCap(Cap.BUTT);
@@ -128,7 +128,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		attrsW = new RenderingLineAttributes("walkingRouteLine");
 		attrsW.defaultWidth = (int) (12 * density);
 		attrsW.defaultWidth3 = (int) (7 * density);
-		attrsW.defaultColor = ContextCompat.getColor(view.getContext(), R.color.nav_track_walk_fill);
+		attrsW.defaultColor = ContextCompat.getColor(getContext(), R.color.nav_track_walk_fill);
 		attrsW.paint3.setStrokeCap(Cap.BUTT);
 		attrsW.paint3.setColor(Color.WHITE);
 		attrsW.paint2.setStrokeCap(Cap.BUTT);
@@ -137,12 +137,12 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	@Override
 	protected void initGeometries(float density) {
-		routeWayContext = new RouteGeometryWayContext(view.getContext(), density);
+		routeWayContext = new RouteGeometryWayContext(getContext(), density);
 		routeWayContext.updatePaints(nightMode, attrs);
 		routeGeometry = new RouteGeometryWay(routeWayContext);
 		routeGeometry.baseOrder = getBaseOrder();
 
-		publicTransportWayContext = new PublicTransportGeometryWayContext(view.getContext(), density);
+		publicTransportWayContext = new PublicTransportGeometryWayContext(getContext(), density);
 		publicTransportWayContext.updatePaints(nightMode, attrs, attrsPT, attrsW);
 		publicTransportRouteGeometry = new PublicTransportGeometryWay(publicTransportWayContext);
 		publicTransportRouteGeometry.baseOrder = getBaseOrder();
@@ -173,7 +173,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			final QuadRect correctedQuadRect = getCorrectedQuadRect(latlonRect);
 
 			drawLocations(tileBox, canvas, correctedQuadRect.top, correctedQuadRect.left, correctedQuadRect.bottom, correctedQuadRect.right);
-			MapRendererView mapRenderer = view.getMapRenderer();
+			MapRendererView mapRenderer = getMapRenderer();
 			if (mapRenderer == null) {
 				drawXAxisPoints(trackChartPoints, canvas, tileBox);
 			} else {
@@ -251,7 +251,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	}
 
 	private void clearXAxisPoints() {
-		MapRendererView mapRenderer = view.getMapRenderer();
+		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null && trackChartPointsProvider != null) {
 			trackChartPointsProvider.clearPoints(mapRenderer);
 			trackChartPointsProvider = null;
@@ -259,7 +259,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	}
 
 	private void recreateHighlightedPointCollection() {
-		MapRendererView mapRenderer = view.getMapRenderer();
+		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			if (highlightedPointCollection != null) {
 				mapRenderer.removeSymbolsProvider(highlightedPointCollection);
@@ -355,7 +355,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	private void drawProjectionPoint(Canvas canvas, double[] projectionXY) {
 		if (projectionIcon == null) {
 			helper.getSettings().getApplicationMode().getLocationIcon();
-			projectionIcon = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), LocationIcon.DEFAULT.getIconId());
+			projectionIcon = (LayerDrawable) AppCompatResources.getDrawable(getContext(), LocationIcon.DEFAULT.getIconId());
 		}
 		if (projectionIcon != null) {
 			int locationX = (int) projectionXY[0];
@@ -492,7 +492,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			double distanceLoc2Proj = MapUtils.getSqrtDistance((int)projectionXY[0], (int) projectionXY[1],
 					box.getPixXFromLonNoRot(ll.getLongitude()), box.getPixYFromLatNoRot(ll.getLatitude()));
 			boolean visible = box.containsPoint((float) projectionXY[0], (float) projectionXY[1], 20.0f)
-					&& distanceLoc2Proj > AndroidUtils.dpToPx(view.getContext(), 52) / 2.0;
+					&& distanceLoc2Proj > AndroidUtils.dpToPx(getContext(), 52) / 2.0;
 			if (visible) {
 				return projectionXY;
 			}
@@ -713,7 +713,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof TransportStop){
-			return new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_STOP, view.getContext().getString(R.string.transport_Stop),
+			return new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_STOP, getContext().getString(R.string.transport_Stop),
 					((TransportStop)o).getName());
 		}
 		return null;

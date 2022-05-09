@@ -54,9 +54,12 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/context_menu_icon_view"
-                android:layout_width="@dimen/standard_icon_size"
-                android:layout_height="@dimen/standard_icon_size"
-                osmand:srcCompat="@drawable/ic_action_building_number"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="@dimen/standard_icon_size"
+                android:minHeight="@dimen/standard_icon_size"
+                osmand:srcCompat="@drawable/ic_action_building_number"
+                tools:tint="?attr/default_icon_color" />
 
         </LinearLayout>
 

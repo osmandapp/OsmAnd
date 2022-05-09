@@ -63,7 +63,6 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	private static final int ZOOM_THRESHOLD = 2;
 
 	private OsmandApplication app;
-	private OsmandMapTileView view;
 	private Paint paintDownloaded;
 	private Path pathDownloaded;
 	private Paint paintSelected;
@@ -130,7 +129,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	@Override
 	public void initLayer(@NonNull final OsmandMapTileView view) {
-		this.view = view;
+		super.initLayer(view);
+
 		app = view.getApplication();
 		rm = app.getResourceManager();
 		osmandRegions = rm.getOsmandRegions();
@@ -520,10 +520,10 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		if (o instanceof DownloadMapObject) {
 			DownloadMapObject mapObject = ((DownloadMapObject) o);
 			return new PointDescription(PointDescription.POINT_TYPE_WORLD_REGION,
-					view.getContext().getString(R.string.shared_string_map), mapObject.worldRegion.getLocaleName());
+					getContext().getString(R.string.shared_string_map), mapObject.worldRegion.getLocaleName());
 		}
 		return new PointDescription(PointDescription.POINT_TYPE_WORLD_REGION,
-				view.getContext().getString(R.string.shared_string_map), "");
+				getContext().getString(R.string.shared_string_map), "");
 	}
 
 	@Override

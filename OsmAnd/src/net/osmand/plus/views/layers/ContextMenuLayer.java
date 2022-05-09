@@ -64,8 +64,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private static final Log log = PlatformUtil.getLog(ContextMenuLayer.class);
 	public static final int VIBRATE_SHORT = 100;
 
-	private OsmandMapTileView view;
-
 	private MapContextMenu menu;
 	private MapMultiSelectionMenu multiSelectionMenu;
 	private CallbackWithObject<LatLon> selectOnMap = null;
@@ -123,9 +121,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
-		this.view = view;
+		super.initLayer(view);
 
-		Context context = view.getContext();
+		Context context = getContext();
 		contextMarker = new ImageView(context);
 		contextMarker.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 		contextMarker.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.map_pin_context_menu));

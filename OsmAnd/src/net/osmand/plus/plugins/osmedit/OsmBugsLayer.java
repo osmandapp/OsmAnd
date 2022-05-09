@@ -57,8 +57,6 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	private static final Log log = PlatformUtil.getLog(OsmBugsLayer.class);
 	private final OsmEditingPlugin plugin;
 
-	private OsmandMapTileView view;
-
 	private final Context ctx;
 	private final OsmBugsLocalUtil local;
 	private MapLayerData<List<OpenStreetNote>> data;
@@ -84,7 +82,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
-		this.view = view;
+		super.initLayer(view);
+
 		data = new OsmandMapLayer.MapLayerData<List<OpenStreetNote>>() {
 
 			{

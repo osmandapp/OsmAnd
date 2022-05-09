@@ -48,7 +48,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	// roughly 10 points per tile
 	private static final double MIN_DISTANCE_TO_SHOW_REF_ZOOM = MapUtils.getTileDistanceWidth(START_ZOOM) / 10;
 
-	private OsmandMapTileView view;
 	private boolean inMeasurementMode;
 
 	private Bitmap centerIconDay;
@@ -92,15 +91,16 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
-		this.view = view;
-		this.chartPointsHelper = new ChartPointsHelper(view.getContext());
+		super.initLayer(view);
+
+		this.chartPointsHelper = new ChartPointsHelper(getContext());
 
 		centerIconDay = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_day);
 		centerIconNight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_night);
 		pointIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_measure_point_day);
 		applyingPointIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_measure_point_move_day);
 
-		multiProfileGeometryWayContext = new MultiProfileGeometryWayContext(view.getContext(),
+		multiProfileGeometryWayContext = new MultiProfileGeometryWayContext(getContext(),
 				view.getApplication().getUIUtilities(), view.getDensity());
 		multiProfileGeometry = new MultiProfileGeometryWay(multiProfileGeometryWayContext);
 
@@ -272,7 +272,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			if (editingCtx.isInApproximationMode()) {
 				List<List<WptPt>> originalPointsList = editingCtx.getOriginalSegmentPointsList();
 				if (originalPointsList != null) {
-					lineAttrs.customColorPaint.setColor(ContextCompat.getColor(view.getContext(),
+					lineAttrs.customColorPaint.setColor(ContextCompat.getColor(getContext(),
 							R.color.activity_background_transparent_color_dark));
 					for (List<WptPt> points : originalPointsList) {
 						new Renderable.StandardTrack(new ArrayList<>(points), 17.2).

@@ -27,6 +27,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.PlatformUtil;
+import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
@@ -63,6 +64,7 @@ public abstract class OsmandMapLayer {
 	private final Context ctx;
 	@Nullable
 	private MapActivity mapActivity;
+	protected OsmandMapTileView view;
 	protected boolean mapActivityInvalidated = false;
 
 	protected List<LatLon> fullObjectsLatLon;
@@ -87,6 +89,19 @@ public abstract class OsmandMapLayer {
 	@NonNull
 	public Context getContext() {
 		return ctx;
+	}
+
+	@Nullable
+	public OsmandMapTileView getTileView() {
+		return view;
+	}
+
+	public boolean hasMapRenderer() {
+		return getMapRenderer() != null;
+	}
+
+	public MapRendererView getMapRenderer() {
+		return view != null ? view.getMapRenderer() : null;
 	}
 
 	@Nullable
@@ -131,7 +146,9 @@ public abstract class OsmandMapLayer {
 		return true;
 	}
 
-	public abstract void initLayer(@NonNull OsmandMapTileView view);
+	public void initLayer(@NonNull OsmandMapTileView view) {
+		this.view = view;
+	}
 
 	public abstract void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings);
 
