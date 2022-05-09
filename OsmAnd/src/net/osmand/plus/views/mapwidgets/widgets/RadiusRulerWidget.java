@@ -18,6 +18,8 @@ public class RadiusRulerWidget extends TextInfoWidget {
 
 	private static final String DASH = "—";
 
+	private boolean cachedShowRadiusRuler;
+
 	public RadiusRulerWidget(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
 
@@ -30,20 +32,18 @@ public class RadiusRulerWidget extends TextInfoWidget {
 		boolean newShowRadiusRuler = !settings.SHOW_RADIUS_RULER_ON_MAP.get();
 		setIcons(newShowRadiusRuler);
 		settings.SHOW_RADIUS_RULER_ON_MAP.set(newShowRadiusRuler);
-		mapActivity.refreshMap();	}
-
-	private void setIcons(boolean showRadiusRuler) {
-		if (showRadiusRuler) {
-			setIcons(RADIUS_RULER);
-		} else {
-			setIcons(R.drawable.widget_hidden_day, R.drawable.widget_hidden_night);
-		}
+		mapActivity.refreshMap();
 	}
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
 		Location currentLocation = locationProvider.getLastKnownLocation();
 		LatLon centerLocation = mapActivity.getMapLocation();
+
+		boolean showRadiusRuler = settings.SHOW_RADIUS_RULER_ON_MAP.get();
+		if (showRadiusRuler != cachedShowRadiusRuler) {
+			setIcons(showRadiusRuler);
+		}
 
 		if (currentLocation != null && centerLocation != null) {
 			if (mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
@@ -56,6 +56,15 @@ public class RadiusRulerWidget extends TextInfoWidget {
 			}
 		} else {
 			setText(DASH, null);
+		}
+	}
+
+	private void setIcons(boolean showRadiusRuler) {
+		cachedShowRadiusRuler = showRadiusRuler;
+		if (showRadiusRuler) {
+			setIcons(RADIUS_RULER);
+		} else {
+			setIcons(R.drawable.widget_hidden_day, R.drawable.widget_hidden_night);
 		}
 	}
 
