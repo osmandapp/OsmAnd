@@ -19,9 +19,9 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.StartGPSStatus;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
@@ -122,6 +122,7 @@ public class MapInfoWidgetsFactory {
 	}
 
 	public TextInfoWidget createRadiusRulerControl(@NonNull MapActivity mapActivity) {
+		OsmandSettings settings = app.getSettings();
 		final String title = "—";
 		final TextInfoWidget radiusRulerControl = new RightTextInfoWidget(mapActivity) {
 
@@ -159,28 +160,19 @@ public class MapInfoWidgetsFactory {
 		};
 
 		radiusRulerControl.setText(title, null);
-		setRulerControlIcon(radiusRulerControl, app.getSettings().RADIUS_RULER_MODE.get());
-		radiusRulerControl.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				final RadiusRulerMode mode = app.getSettings().RADIUS_RULER_MODE.get();
-				RadiusRulerMode newMode = RadiusRulerMode.FIRST;
-				if (mode == RadiusRulerMode.FIRST) {
-					newMode = RadiusRulerMode.SECOND;
-				} else if (mode == RadiusRulerMode.SECOND) {
-					newMode = RadiusRulerMode.EMPTY;
-				}
-				setRulerControlIcon(radiusRulerControl, newMode);
-				app.getSettings().RADIUS_RULER_MODE.set(newMode);
-				mapActivity.refreshMap();
-			}
+		setRulerControlIcon(radiusRulerControl, settings.SHOW_RADIUS_RULER_ON_MAP.get());
+		radiusRulerControl.setOnClickListener(view -> {
+			boolean newShowRadiusRuler = !settings.SHOW_RADIUS_RULER_ON_MAP.get();
+			setRulerControlIcon(radiusRulerControl, newShowRadiusRuler);
+			settings.SHOW_RADIUS_RULER_ON_MAP.set(newShowRadiusRuler);
+			mapActivity.refreshMap();
 		});
 
 		return radiusRulerControl;
 	}
 
-	private void setRulerControlIcon(TextInfoWidget rulerControl, RadiusRulerMode mode) {
-		if (mode == RadiusRulerMode.FIRST || mode == RadiusRulerMode.SECOND) {
+	private void setRulerControlIcon(@NonNull TextInfoWidget rulerControl, boolean showRadiusRuler) {
+		if (showRadiusRuler) {
 			rulerControl.setIcons(RADIUS_RULER);
 		} else {
 			rulerControl.setIcons(R.drawable.widget_hidden_day, R.drawable.widget_hidden_night);

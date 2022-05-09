@@ -26,6 +26,7 @@ import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
 import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableItemViewHolder;
+import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 import net.osmand.util.Algorithms;
 
@@ -214,25 +215,26 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			ImageView imageView = view.findViewById(R.id.icon);
 			iconsHelper.updateWidgetIcon(imageView, widgetInfo);
 
-			ImageView secondaryIcon = view.findViewById(R.id.secondary_icon);
-			if (secondaryIcon != null) {
-				WidgetState widgetState = widgetInfo.getWidgetState();
-				secondaryIcon.setImageResource(R.drawable.ic_action_additional_option);
-				AndroidUiHelper.updateVisibility(secondaryIcon, widgetState != null);
-
-				view.setOnClickListener(v -> {
-					if (widgetState == null) {
-						return;
+			ImageView settingsIcon = view.findViewById(R.id.settings_icon);
+			WidgetSettingsBaseFragment settingsFragment = widgetParams != null
+					? widgetParams.getSettingsFragment()
+					: null;
+			if (settingsFragment != null) {
+				settingsIcon.setOnClickListener(v -> {
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						FragmentManager fragmentManager = activity.getSupportFragmentManager();
+						WidgetSettingsBaseFragment.showFragment(fragmentManager, selectedAppMode, settingsFragment);
 					}
-					CallbackWithObject<WidgetState> callback = result -> {
-						updateContent();
-						return true;
-					};
-					widgetRegistry.showPopUpMenu(view, callback, widgetState, selectedAppMode, nightMode);
 				});
-
-				setupListItemBackground(view);
+			} else {
+				AndroidUiHelper.updateVisibility(settingsIcon, false);
 			}
+
+			view.setOnClickListener(v -> settingsIcon.callOnClick());
+
+
+			setupListItemBackground(view);
 
 			View bottomDivider = view.findViewById(R.id.bottom_divider);
 			boolean last = i + 1 == widgets.size();
