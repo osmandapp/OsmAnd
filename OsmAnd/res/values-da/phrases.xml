@@ -873,7 +873,7 @@
     <string name="poi_access_no">Ingen adgang</string>
     <string name="poi_access_destination">Adgang destination</string>
     <string name="poi_access_permissive">Adgang med tilladelse</string>
-    <string name="poi_access_customers">Kundenadgang</string>
+    <string name="poi_access_customers">Kundeadgang</string>
     <string name="poi_access_delivery">Adgang for levering</string>
     <string name="poi_access_agricultural">Adgang for landbrug</string>
     <string name="poi_monitoring_station">Målestation</string>
