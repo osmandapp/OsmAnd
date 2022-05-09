@@ -35,7 +35,7 @@ public class AudioVideoNotesWidget extends RightTextInfoWidget {
 				if (plugin.isRecording()) {
 					plugin.stopRecording(mapActivity, false);
 				} else {
-					plugin.defaultAction(mapActivity);
+					plugin.makeAction(mapActivity, actionId);
 				}
 			}
 		});
