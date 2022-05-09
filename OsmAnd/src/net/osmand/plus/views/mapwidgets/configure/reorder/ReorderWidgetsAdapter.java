@@ -341,14 +341,23 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 	@Override
 	public long getItemId(int position) {
 		ListItem item = items.get(position);
-		if (item.value instanceof AddedWidgetUiInfo) {
+		if (item.value instanceof PageUiInfo) {
+			int page = ((PageUiInfo) item.value).index;
+			return app.getString(R.string.page_number, String.valueOf(page)).hashCode();
+		} else if (item.value instanceof AddedWidgetUiInfo) {
 			return ((AddedWidgetUiInfo) item.value).key.hashCode();
+		} else if (item.type == ItemType.ADD_PAGE_BUTTON) {
+			return R.string.add_page;
 		} else if (item.value instanceof ActionButtonInfo) {
 			return ((ActionButtonInfo) item.value).title.hashCode();
+		} else if (item.value instanceof WidgetGroup) {
+			return ((WidgetGroup) item.value).titleId;
+		} else if (item.value instanceof AvailableWidgetUiInfo) {
+			return ((AvailableWidgetUiInfo) item.value).key.hashCode();
 		} else if (item.value != null) {
 			return item.value.hashCode();
 		}
-		return item.hashCode();
+		return (item.type.name() + position).hashCode();
 	}
 
 	@Override
