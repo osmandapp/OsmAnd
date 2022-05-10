@@ -233,7 +233,45 @@ public class BinaryRoutePlanner {
 		if (segment == null) {
 			return null;
 		}
-		return segment.initRouteSegment(positiveDirection);
+		
+		segment = segment.initRouteSegment(positiveDirection);
+		
+		if (segment != null) {
+			segment.setParentRoute(RouteSegment.NULL);
+
+			int prevx = segment.road.getPoint31XTile(segment.getSegmentStart());
+			int prevy = segment.road.getPoint31YTile(segment.getSegmentStart());
+			int x = segment.road.getPoint31XTile(segment.getSegmentEnd());
+			int y = segment.road.getPoint31YTile(segment.getSegmentEnd());
+			double distFromStart;
+			double fullDist = squareRootDist(prevx, prevy, x, y);
+			if(positiveDirection && !reverseSearchWay) {
+				distFromStart = squareRootDist(x, y, MapUtils.get31TileNumberX(ctx.slon), MapUtils.get31TileNumberY(ctx.slat));
+				segment.distanceFromStart += distFromStart - fullDist;
+				ctx.startPosDist = distFromStart;
+				ctx.startPosEndPoint = segment.getSegmentEnd();
+			}
+			if(!positiveDirection && !reverseSearchWay) {
+				distFromStart = squareRootDist(x, y, MapUtils.get31TileNumberX(ctx.slon), MapUtils.get31TileNumberY(ctx.slat));
+				segment.distanceFromStart += distFromStart - fullDist;
+				ctx.startNegDist = distFromStart;
+				ctx.startNegEndPoint = segment.getSegmentEnd();
+			}
+			if(positiveDirection && reverseSearchWay) {
+				distFromStart = squareRootDist(x, y, MapUtils.get31TileNumberX(ctx.elon), MapUtils.get31TileNumberY(ctx.elat));
+				segment.distanceFromStart += distFromStart - fullDist;
+				ctx.endPosDist = distFromStart;
+				ctx.endPosEndPoint = segment.getSegmentEnd();
+			}
+			if(!positiveDirection && reverseSearchWay) {
+				distFromStart = squareRootDist(x, y, MapUtils.get31TileNumberX(ctx.elon), MapUtils.get31TileNumberY(ctx.elat));
+				segment.distanceFromStart += distFromStart - fullDist;
+				ctx.endNegDist = distFromStart;
+				ctx.endNegEndPoint = segment.getSegmentEnd();
+			}
+		}
+		
+		return segment;
 	}
 
 
@@ -259,18 +297,7 @@ public class BinaryRoutePlanner {
 		RouteSegment startNeg = initRouteSegment(ctx, start, false, false);
 		RouteSegment endPos = initRouteSegment(ctx, end, true, true);
 		RouteSegment endNeg = initRouteSegment(ctx, end, false, true);
-		if (startPos != null) {
-			startPos.setParentRoute(RouteSegment.NULL);
-		}
-		if (startNeg != null) {
-			startNeg.setParentRoute(RouteSegment.NULL);
-		}
-		if (endPos != null) {
-			endPos.setParentRoute(RouteSegment.NULL);
-		}
-		if (endNeg != null) {
-			endNeg.setParentRoute(RouteSegment.NULL);
-		}
+		
 		// for start : f(start) = g(start) + h(start) = 0 + h(start) = h(start)
 		if (ctx.config.initialDirection != null) {
 			// mark here as positive for further check
@@ -290,7 +317,8 @@ public class BinaryRoutePlanner {
 			ctx.targetX = recalculationEnd.getRoad().getPoint31XTile(recalculationEnd.getSegmentStart());
 			ctx.targetY = recalculationEnd.getRoad().getPoint31YTile(recalculationEnd.getSegmentStart());
 		}
-		float estimatedDistance = (float) estimatedDistance(ctx, ctx.targetX, ctx.targetY, ctx.startX, ctx.startY);
+		
+		float estimatedDistance = estimatedDistance(ctx, ctx.targetX, ctx.targetY, ctx.startX, ctx.startY);
 		if (startPos != null && checkMovementAllowed(ctx, false, startPos)) {
 			startPos.distanceToEnd = estimatedDistance;
 			graphDirectSegments.add(startPos);

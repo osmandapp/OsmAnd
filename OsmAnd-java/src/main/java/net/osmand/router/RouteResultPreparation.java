@@ -317,8 +317,7 @@ public class RouteResultPreparation {
 
 			for (int j = rr.getStartPointIndex(); j != rr.getEndPointIndex(); j = next) {
 				next = plus ? j + 1 : j - 1;
-				double d = measuredDist(road.getPoint31XTile(j), road.getPoint31YTile(j), road.getPoint31XTile(next),
-						road.getPoint31YTile(next));
+				double d = getDistSegment(ctx, j, next, road, rr);
 				distance += d;
 				double obstacle = ctx.getRouter().defineObstacle(road, j, plus);
 				if (obstacle < 0) {
@@ -373,6 +372,18 @@ public class RouteResultPreparation {
 			rr.setSegmentTime((float) distOnRoadToPass);
 			rr.setSegmentSpeed((float) speed);
 			rr.setDistance((float) distance);
+		}
+	}
+	
+	private static double getDistSegment(RoutingContext ctx, int currPointInd, int nextPointInd, RouteDataObject currRoad, RouteSegmentResult currRes) {
+		double dist = measuredDist(currRoad.getPoint31XTile(currPointInd), currRoad.getPoint31YTile(currPointInd), currRoad.getPoint31XTile(nextPointInd),
+				currRoad.getPoint31YTile(nextPointInd));
+		if (currPointInd == currRes.getStartPointIndex()) {
+			return nextPointInd == ctx.startPosEndPoint ? ctx.startPosDist : ctx.startNegDist;
+		} else if (nextPointInd == currRes.getEndPointIndex()) {
+			return currPointInd == ctx. endPosEndPoint ? ctx.endPosDist : ctx.endNegDist;
+		} else {
+			return dist;
 		}
 	}
 

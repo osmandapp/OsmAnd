@@ -158,6 +158,15 @@ public class RouteTestingTest {
 				}
 				Assert.assertTrue("Calculated route length " + routeLength + " is greater then max route length " + maxRouteLength, routeLength < maxRouteLength);
 			}
+			
+			if (params.containsKey("maxRoutingTime")) {
+				float maxRoutingTime = Float.parseFloat(params.get("maxRoutingTime"));
+				float routingTime = 0;
+				for (RouteSegmentResult segment : routeSegments) {
+					routingTime += segment.getRoutingTime();
+				}
+				Assert.assertTrue("Calculated routing time " + routingTime + " is bigger then max routing time " + maxRoutingTime, routingTime < maxRoutingTime);
+			}
 			for (Entry<String, String> es : expectedResults.entrySet()) {
 				long id = RouterUtilTest.getRoadId(es.getKey());
 				switch (es.getValue()) {

@@ -70,6 +70,22 @@ public class RoutingContext {
 	
 	public boolean publicTransport;
 	
+	public double slat;
+	public double slon;
+	public double elat;
+	public double elon;
+	
+	
+	public double startPosDist;
+	public double startNegDist;
+	public double endPosDist;
+	public double endNegDist;
+	
+	public int startPosEndPoint;
+	public int startNegEndPoint;
+	public int endPosEndPoint;
+	public int endNegEndPoint;
+	
 	
 	public RouteCalculationProgress calculationProgress;
 	public RouteCalculationProgress calculationProgressFirstPhase;
