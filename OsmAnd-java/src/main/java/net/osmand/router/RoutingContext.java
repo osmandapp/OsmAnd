@@ -68,6 +68,17 @@ public class RoutingContext {
 	public double elat;
 	public double elon;
 	
+	public double startPosDist;
+	public double startNegDist;
+	public double endPosDist;
+	public double endNegDist;
+	
+	public int startPosEndPoint;
+	public int startNegEndPoint;
+	public int endPosEndPoint;
+	public int endNegEndPoint;
+	
+	
 	public double distStartSeg;
 	public double distEndSeg;
 	public boolean startTransportStop;

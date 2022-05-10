@@ -351,13 +351,14 @@ public class RouteResultPreparation {
 	}
 	
 	private static double getDistSegment(RoutingContext ctx, int currPointInd, int nextPointInd, RouteDataObject currRoad, RouteSegmentResult currRes) {
+		double dist = measuredDist(currRoad.getPoint31XTile(currPointInd), currRoad.getPoint31YTile(currPointInd), currRoad.getPoint31XTile(nextPointInd),
+				currRoad.getPoint31YTile(nextPointInd));
 		if (currPointInd == currRes.getStartPointIndex()) {
-			return ctx.distStartSeg;
-		} else if (currPointInd == currRes.getEndPointIndex()) {
-			return ctx.distEndSeg;
+			return dist + (nextPointInd == ctx.startPosEndPoint ? ctx.startPosDist : ctx.startNegDist);
+		} else if (nextPointInd == currRes.getEndPointIndex()) {
+			return dist + (currPointInd == ctx. endPosEndPoint ? ctx.endPosDist : ctx.endNegDist);
 		} else {
-			return measuredDist(currRoad.getPoint31XTile(currPointInd), currRoad.getPoint31YTile(currPointInd), currRoad.getPoint31XTile(nextPointInd),
-					currRoad.getPoint31YTile(nextPointInd));
+			return dist;
 		}
 	}
 

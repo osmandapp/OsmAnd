@@ -911,10 +911,16 @@ public class RoutePlannerFrontEnd {
 		if (routeDirection != null) {
 			ctx.precalculatedRouteDirection = routeDirection.adopt(ctx);
 		}
-		ctx.distStartSeg = squareRootDist(start.road.getPoint31XTile(ctx.startESegmentInd), start.road.getPoint31YTile(ctx.startESegmentInd),
-				MapUtils.get31TileNumberX(ctx.slon), MapUtils.get31TileNumberY(ctx.slat));
-		ctx.distEndSeg = squareRootDist(end.road.getPoint31XTile(ctx.targetSegmentInd), end.road.getPoint31YTile(ctx.targetSegmentInd),
-				MapUtils.get31TileNumberX(ctx.elon), MapUtils.get31TileNumberY(ctx.elat));
+//		ctx.distStartSeg = squareRootDist(start.road.getPoint31XTile(ctx.startESegmentInd), start.road.getPoint31YTile(ctx.startESegmentInd),
+//				MapUtils.get31TileNumberX(ctx.slon), MapUtils.get31TileNumberY(ctx.slat));
+//		ctx.distEndSeg = squareRootDist(end.road.getPoint31XTile(ctx.targetSegmentInd), end.road.getPoint31YTile(ctx.targetSegmentInd),
+//				MapUtils.get31TileNumberX(ctx.elon), MapUtils.get31TileNumberY(ctx.elat));
+		
+//		ctx.distStartSeg = squareRootDist(start.road.getPoint31XTile(start.getSegmentEnd()), start.road.getPoint31YTile(start.getSegmentEnd()),
+//				MapUtils.get31TileNumberX(ctx.slon), MapUtils.get31TileNumberY(ctx.slat));
+//		ctx.distEndSeg = squareRootDist(end.road.getPoint31XTile(end.getSegmentEnd()), end.road.getPoint31YTile(end.getSegmentEnd()),
+//				MapUtils.get31TileNumberX(ctx.elon), MapUtils.get31TileNumberY(ctx.elat));
+		
 		if (ctx.nativeLib != null) {
 			ctx.startX = start.preciseX;
 			ctx.startY = start.preciseY;

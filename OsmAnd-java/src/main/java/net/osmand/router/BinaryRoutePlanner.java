@@ -228,10 +228,48 @@ public class BinaryRoutePlanner {
 		} else if (segment.getSegmentStart() > 0 && positiveDirection) {
 			segment = loadSameSegment(ctx, segment, segment.getSegmentStart(), reverseSearchWay);
 		}
+		
 		if (segment == null) {
 			return null;
 		}
-		return segment.initRouteSegment(positiveDirection);
+		
+		segment = segment.initRouteSegment(positiveDirection);
+		
+		if (segment != null) {
+			segment.setParentRoute(RouteSegment.NULL);
+			int prevx = segment.road.getPoint31XTile(segment.getSegmentStart());
+			int prevy = segment.road.getPoint31YTile(segment.getSegmentStart());
+			int x = segment.road.getPoint31XTile(segment.getSegmentEnd());
+			int y = segment.road.getPoint31YTile(segment.getSegmentEnd());
+			double distFromStart;
+			double fullDist = squareRootDist(prevx, prevy, x, y);
+			if(positiveDirection && !reverseSearchWay) {
+				distFromStart = squareRootDist(x, y, MapUtils.get31TileNumberX(ctx.slon), MapUtils.get31TileNumberY(ctx.slat));
+				segment.distanceFromStart += distFromStart - fullDist;
+				ctx.startPosDist = distFromStart;
+				ctx.startPosEndPoint = segment.getSegmentEnd();
+			}
+			if(!positiveDirection && !reverseSearchWay) {
+				distFromStart = squareRootDist(x, y, MapUtils.get31TileNumberX(ctx.elon), MapUtils.get31TileNumberY(ctx.elat));
+				segment.distanceFromStart += distFromStart;
+				ctx.startNegDist = distFromStart;
+				ctx.startNegEndPoint = segment.getSegmentEnd();
+			}
+			if(positiveDirection && reverseSearchWay) {
+				distFromStart = squareRootDist(prevx, prevy, MapUtils.get31TileNumberX(ctx.slon), MapUtils.get31TileNumberY(ctx.slat));
+				segment.distanceFromStart += distFromStart - fullDist;
+				ctx.endPosDist = distFromStart;
+				ctx.endPosEndPoint = segment.getSegmentEnd();
+			}
+			if(!positiveDirection && reverseSearchWay) {
+				distFromStart = squareRootDist(x, y, MapUtils.get31TileNumberX(ctx.elon), MapUtils.get31TileNumberY(ctx.elat));
+				segment.distanceFromStart += distFromStart;
+				ctx.endNegDist = distFromStart;
+				ctx.endNegEndPoint = segment.getSegmentEnd();
+			}
+		}
+		
+		return segment;
 	}
 
 
@@ -257,18 +295,7 @@ public class BinaryRoutePlanner {
 		RouteSegment startNeg = initRouteSegment(ctx, start, false, false);
 		RouteSegment endPos = initRouteSegment(ctx, end, true, true);
 		RouteSegment endNeg = initRouteSegment(ctx, end, false, true);
-		if (startPos != null) {
-			startPos.setParentRoute(RouteSegment.NULL);
-		}
-		if (startNeg != null) {
-			startNeg.setParentRoute(RouteSegment.NULL);
-		}
-		if (endPos != null) {
-			endPos.setParentRoute(RouteSegment.NULL);
-		}
-		if (endNeg != null) {
-			endNeg.setParentRoute(RouteSegment.NULL);
-		}
+		
 		// for start : f(start) = g(start) + h(start) = 0 + h(start) = h(start)
 		if (ctx.config.initialDirection != null) {
 			// mark here as positive for further check
@@ -288,7 +315,7 @@ public class BinaryRoutePlanner {
 			ctx.targetX = recalculationEnd.getRoad().getPoint31XTile(recalculationEnd.getSegmentStart());
 			ctx.targetY = recalculationEnd.getRoad().getPoint31YTile(recalculationEnd.getSegmentStart());
 		}
-		float estimatedDistance = (float) estimatedDistance(ctx, ctx.targetX, ctx.targetY, ctx.startX, ctx.startY);
+		float estimatedDistance = estimatedDistance(ctx, ctx.targetX, ctx.targetY, ctx.startX, ctx.startY);
 		if (startPos != null && checkMovementAllowed(ctx, false, startPos)) {
 			startPos.distanceToEnd = estimatedDistance;
 			graphDirectSegments.add(startPos);
@@ -316,7 +343,6 @@ public class BinaryRoutePlanner {
 			printRoad("Initial segment end negative: ", endNeg, false);
 		}
 	}
-
 
 	private void printMemoryConsumption(String string) {
 		long h1 = RoutingContext.runGCUsedMemory();
@@ -397,23 +423,7 @@ public class BinaryRoutePlanner {
 		final int y = road.getPoint31YTile(segmentInd);
 		final int prevX = road.getPoint31XTile(prevSegmentInd);
 		final int prevY = road.getPoint31YTile(prevSegmentInd);
-		double distOnRoadToPass;
-		
-		boolean isStartSeg = segment.getRoad().id == ctx.startRoadId
-				&& ((segment.getSegmentStart() == ctx.startSegmentInd && segment.getSegmentEnd() == ctx.startESegmentInd)
-				|| (segment.getSegmentStart() == ctx.startESegmentInd && segment.getSegmentEnd() == ctx.startSegmentInd));
-		
-		boolean isEndSeg = segment.getRoad().id == ctx.startRoadId
-				&& ((segment.getSegmentStart() == ctx.targetSegmentInd && segment.getSegmentEnd() == ctx.targetESegmentInd)
-				|| (segment.getSegmentStart() == ctx.targetESegmentInd && segment.getSegmentEnd() == ctx.targetSegmentInd));
-		
-		if (isStartSeg) {
-			distOnRoadToPass = ctx.distStartSeg;
-		} else if (isEndSeg) {
-			distOnRoadToPass = ctx.distEndSeg;
-		} else {
-			distOnRoadToPass = squareRootDist(x, y, prevX, prevY);
-		}
+		double distOnRoadToPass = squareRootDist(x, y, prevX, prevY);
 
 		// calculate point and try to load neighbor ways if they are not loaded
 		//double distOnRoadToPass = squareRootDist(x, y, prevX, prevY);
