@@ -7,6 +7,11 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.mapwidgets.configure.settings.ElevationProfileWidgetSettingsFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkersBarWidgetSettingFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.RadiusRulerWidgetSettingsFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -14,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.DEFAULT_ORDER;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.LEFT;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.RIGHT;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.TOP;
@@ -173,6 +179,30 @@ public enum WidgetParams {
 
 	public int getDefaultOrder() {
 		return defaultPanel.getOriginalWidgetOrder(id);
+	}
+
+	@NonNull
+	public WidgetsPanel getPanel(@NonNull OsmandSettings settings) {
+		if (defaultPanel == TOP || defaultPanel == BOTTOM) {
+			return defaultPanel;
+		} else if (defaultPanel == LEFT) {
+			return RIGHT.getWidgetOrder(id, settings) != DEFAULT_ORDER ? RIGHT : LEFT;
+		} else if (defaultPanel == RIGHT) {
+			return LEFT.getWidgetOrder(id, settings) != DEFAULT_ORDER ? LEFT : RIGHT;
+		}
+		throw new IllegalStateException("Unsupported panel");
+	}
+
+	@Nullable
+	public WidgetSettingsBaseFragment getSettingsFragment() {
+		if (this == ELEVATION_PROFILE) {
+			return new ElevationProfileWidgetSettingsFragment();
+		} else if (this == MARKERS_TOP_BAR) {
+			return new MapMarkersBarWidgetSettingFragment();
+		} else if (this == RADIUS_RULER) {
+			return new RadiusRulerWidgetSettingsFragment();
+		}
+		return null;
 	}
 
 	@Nullable

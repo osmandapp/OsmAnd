@@ -8,13 +8,13 @@ import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class TripRecordingDistanceWidget extends RightTextInfoWidget {
+public class TripRecordingDistanceWidget extends TextInfoWidget {
 
 	private static final long BLINK_DELAY_MILLIS = 500;
 

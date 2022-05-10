@@ -28,7 +28,6 @@ import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.track.helpers.SavingTrackHelper.SaveGpxResult;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.layers.MapInfoLayer;
-import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
@@ -143,8 +142,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	private void registerWidget(@NonNull MapActivity mapActivity) {
 		MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
 		monitoringControl = new TripRecordingDistanceWidget(mapActivity);
-
-		layer.registerWidget(TRIP_RECORDING_DISTANCE, monitoringControl, WidgetsPanel.RIGHT);
+		layer.registerWidget(TRIP_RECORDING, monitoringControl);
 		layer.recreateControls();
 	}
 

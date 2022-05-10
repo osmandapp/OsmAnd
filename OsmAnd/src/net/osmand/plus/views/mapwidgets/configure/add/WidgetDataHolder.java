@@ -8,6 +8,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
 import java.util.Collections;
 import java.util.List;
@@ -21,11 +22,14 @@ import static net.osmand.aidl.OsmandAidlApi.WIDGET_ID_PREFIX;
 
 public class WidgetDataHolder {
 
+	public static final String KEY_WIDGETS_PANEL_ID = "widgets_panel_id";
 	public static final String KEY_GROUP_NAME = "group_name";
 	public static final String KEY_WIDGET_ID = "widget_id";
 	public static final String KEY_EXTERNAL_PROVIDER_PACKAGE = "external_provider_package";
 
 	private final OsmandApplication app;
+
+	private final WidgetsPanel widgetsPanel;
 
 	private WidgetGroup widgetGroup;
 	private WidgetParams widgetParams;
@@ -38,6 +42,7 @@ public class WidgetDataHolder {
 	public WidgetDataHolder(@NonNull OsmandApplication app, @NonNull Bundle bundle) {
 		this.app = app;
 
+		widgetsPanel = WidgetsPanel.valueOf(bundle.getString(KEY_WIDGETS_PANEL_ID));
 		if (bundle.containsKey(KEY_GROUP_NAME)) {
 			widgetGroup = WidgetGroup.valueOf(bundle.getString(KEY_GROUP_NAME));
 		} else if (bundle.containsKey(KEY_EXTERNAL_PROVIDER_PACKAGE)) {
@@ -51,6 +56,11 @@ public class WidgetDataHolder {
 		} else {
 			widgetParams = WidgetParams.getById(bundle.getString(KEY_WIDGET_ID));
 		}
+	}
+
+	@NonNull
+	public WidgetsPanel getWidgetsPanel() {
+		return widgetsPanel;
 	}
 
 	@Nullable
@@ -153,6 +163,7 @@ public class WidgetDataHolder {
 	}
 
 	public void saveState(@NonNull Bundle outState) {
+		outState.putString(KEY_WIDGETS_PANEL_ID, widgetsPanel.name());
 		if (widgetGroup != null) {
 			outState.putString(KEY_GROUP_NAME, widgetGroup.name());
 		} else if (widgetParams != null) {

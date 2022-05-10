@@ -21,7 +21,7 @@ import androidx.annotation.Nullable;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.MAGNETIC_BEARING;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.RELATIVE_BEARING;
 
-public class BearingWidget extends RightTextInfoWidget {
+public class BearingWidget extends TextInfoWidget {
 
 	private static final float MIN_SPEED = 1f;
 	private static final int INVALID_BEARING = -1000;

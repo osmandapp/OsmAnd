@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,6 +50,7 @@ import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_EXTERNAL_PROVIDER_PACKAGE;
 import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_GROUP_NAME;
 import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_WIDGET_ID;
+import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_WIDGETS_PANEL_ID;
 
 public class AddWidgetFragment extends BaseOsmAndFragment {
 
@@ -104,8 +104,11 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		Context context = requireContext();
 		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
-		view = themedInflater.inflate(R.layout.fragment_add_widget, container, false);
+		view = themedInflater.inflate(R.layout.base_widget_fragment_layout, container, false);
 		AndroidUtils.addStatusBarPadding21v(app, view);
+
+		ViewGroup mainContent = view.findViewById(R.id.main_content);
+		themedInflater.inflate(R.layout.add_widget_fragment_content, mainContent);
 
 		setupToolbar();
 		setupContent();
@@ -271,7 +274,9 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		applyButton.setOnClickListener(v -> {
 			Fragment target = getTargetFragment();
 			if (target instanceof AddWidgetListener) {
-				((AddWidgetListener) target).onWidgetsSelectedToAdd(new ArrayList<>(selectedWidgetsIds.values()));
+				List<String> widgetsIds = new ArrayList<>(selectedWidgetsIds.values());
+				WidgetsPanel widgetsPanel = widgetsDataHolder.getWidgetsPanel();
+				((AddWidgetListener) target).onWidgetsSelectedToAdd(widgetsIds, widgetsPanel);
 			}
 			dismiss();
 		});
@@ -308,10 +313,12 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 	public static void showGroupDialog(@NonNull FragmentManager fragmentManager,
 	                                   @NonNull Fragment target,
 	                                   @NonNull ApplicationMode appMode,
+	                                   @NonNull WidgetsPanel widgetsPanel,
 	                                   @NonNull WidgetGroup widgetGroup,
 	                                   @Nullable List<String> alreadySelectedWidgetsIds) {
 		Bundle args = new Bundle();
 		args.putString(KEY_APP_MODE, appMode.getStringKey());
+		args.putString(KEY_WIDGETS_PANEL_ID, widgetsPanel.name());
 		args.putString(KEY_GROUP_NAME, widgetGroup.name());
 		args.putSerializable(KEY_ALREADY_SELECTED_WIDGETS_IDS, (Serializable) alreadySelectedWidgetsIds);
 		AddWidgetFragment fragment = new AddWidgetFragment();
@@ -326,10 +333,12 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 	public static void showWidgetDialog(@NonNull FragmentManager fragmentManager,
 	                                    @NonNull Fragment target,
 	                                    @NonNull ApplicationMode appMode,
+	                                    @NonNull WidgetsPanel widgetsPanel,
 	                                    @NonNull WidgetParams widgetParams,
 	                                    @Nullable List<String> alreadySelectedWidgetsIds) {
 		Bundle args = new Bundle();
 		args.putString(KEY_APP_MODE, appMode.getStringKey());
+		args.putString(KEY_WIDGETS_PANEL_ID, widgetsPanel.name());
 		args.putString(KEY_WIDGET_ID, widgetParams.id);
 		args.putSerializable(KEY_ALREADY_SELECTED_WIDGETS_IDS, (Serializable) alreadySelectedWidgetsIds);
 		AddWidgetFragment fragment = new AddWidgetFragment();
@@ -344,11 +353,13 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 	public static void showExternalWidgetDialog(@NonNull FragmentManager fragmentManager,
 	                                            @NonNull Fragment target,
 	                                            @NonNull ApplicationMode appMode,
+	                                            @NonNull WidgetsPanel widgetsPanel,
 	                                            @NonNull String widgetId,
 	                                            @NonNull String externalProviderPackage,
 	                                            @Nullable List<String> alreadySelectedWidgetsIds) {
 		Bundle args = new Bundle();
 		args.putString(KEY_APP_MODE, appMode.getStringKey());
+		args.putString(KEY_WIDGETS_PANEL_ID, widgetsPanel.name());
 		args.putString(KEY_WIDGET_ID, widgetId);
 		args.putString(KEY_EXTERNAL_PROVIDER_PACKAGE, externalProviderPackage);
 		args.putSerializable(KEY_ALREADY_SELECTED_WIDGETS_IDS, (Serializable) alreadySelectedWidgetsIds);
@@ -369,6 +380,6 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 
 	public interface AddWidgetListener {
 
-		void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds);
+		void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds, @NonNull WidgetsPanel widgetsPanel);
 	}
 }

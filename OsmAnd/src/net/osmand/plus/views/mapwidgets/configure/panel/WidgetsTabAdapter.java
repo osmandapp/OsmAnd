@@ -6,10 +6,25 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
+import java.lang.ref.WeakReference;
+import java.util.HashMap;
+import java.util.Map;
+
 public class WidgetsTabAdapter extends FragmentStateAdapter {
+
+	private final Map<Integer, WeakReference<WidgetsListFragment>> fragments = new HashMap<>();
 
 	public WidgetsTabAdapter(@NonNull Fragment fragment) {
 		super(fragment);
+	}
+
+	public void updateFragmentsContent() {
+		for (WeakReference<WidgetsListFragment> fragmentRef : fragments.values()) {
+			WidgetsListFragment fragment = fragmentRef.get();
+			if (fragment != null && fragment.getView() != null && !fragment.isRemoving()) {
+				fragment.updateContent();
+			}
+		}
 	}
 
 	@NonNull
@@ -17,6 +32,7 @@ public class WidgetsTabAdapter extends FragmentStateAdapter {
 	public Fragment createFragment(int position) {
 		WidgetsListFragment fragment = new WidgetsListFragment();
 		fragment.setSelectedPanel(WidgetsPanel.values()[position]);
+		fragments.put(position, new WeakReference<>(fragment));
 		return fragment;
 	}
 

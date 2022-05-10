@@ -11,6 +11,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.controls.WidgetsPagerAdapter.PageViewHolder;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,12 +31,14 @@ import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 
 	private final OsmandApplication app;
+	private final WidgetsPanel widgetsPanel;
 
 	private VisiblePages visiblePages;
 	private ViewHolderBindListener bindListener;
 
-	public WidgetsPagerAdapter(@NonNull OsmandApplication app) {
+	public WidgetsPagerAdapter(@NonNull OsmandApplication app, @NonNull WidgetsPanel widgetsPanel) {
 		this.app = app;
+		this.widgetsPanel = widgetsPanel;
 		this.visiblePages = collectVisiblePages();
 	}
 
@@ -91,7 +94,7 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 	private VisiblePages collectVisiblePages() {
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		ApplicationMode appMode = app.getSettings().getApplicationMode();
-		return new VisiblePages(widgetRegistry.getRightWidgets(), appMode);
+		return new VisiblePages(widgetRegistry.getWidgetsForPanel(widgetsPanel), appMode);
 	}
 
 	private static class PagesDiffUtilCallback extends DiffUtil.Callback {

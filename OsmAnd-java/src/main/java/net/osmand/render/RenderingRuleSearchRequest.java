@@ -1,24 +1,30 @@
 package net.osmand.render;
 
+import static net.osmand.render.RenderingRuleProperty.BOOLEAN_TYPE;
+import static net.osmand.render.RenderingRuleProperty.COLOR_TYPE;
+import static net.osmand.render.RenderingRuleProperty.FLOAT_TYPE;
+import static net.osmand.render.RenderingRuleProperty.INT_TYPE;
+import static net.osmand.render.RenderingRuleProperty.STRING_TYPE;
+
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.util.Algorithms;
 
 
 public class RenderingRuleSearchRequest {
 
-	private final RenderingRulesStorage storage;
-	RenderingRuleProperty[] props;
-	int[] values;
-	BinaryMapDataObject object;
-	float[] fvalues;
-
-	int[] savedValues;
-	float[] savedFvalues;
-	
-	boolean searchResult = false;
-	
-	
 	public final RenderingRuleStorageProperties ALL;
+
+	private BinaryMapDataObject object;
+	private final RenderingRuleProperty[] props;
+	private final RenderingRulesStorage storage;
+
+	private final int[] values;
+	private final float[] fvalues;
+
+	private int[] savedValues;
+	private float[] savedFvalues;
+
+	private boolean searchResult = false;
 
 	public RenderingRuleSearchRequest(RenderingRulesStorage storage) {
 		this.storage = storage;
@@ -35,17 +41,25 @@ public class RenderingRuleSearchRequest {
 		saveState();
 	}
 
-	public RenderingRuleSearchRequest(RenderingRuleSearchRequest renderingRuleSearchRequest) {
-		this.storage = renderingRuleSearchRequest.storage;
-		this.props = renderingRuleSearchRequest.props;
-		this.values = new int[renderingRuleSearchRequest.values.length];
-		this.fvalues = new float[renderingRuleSearchRequest.fvalues.length];
-		this.object = renderingRuleSearchRequest.object;
-		this.searchResult = renderingRuleSearchRequest.searchResult;
-		this.ALL = renderingRuleSearchRequest.ALL;
-		System.arraycopy(renderingRuleSearchRequest.values, 0, values, 0, renderingRuleSearchRequest.values.length);
-		System.arraycopy(renderingRuleSearchRequest.fvalues, 0, fvalues, 0, renderingRuleSearchRequest.fvalues.length);
+	public RenderingRuleSearchRequest(RenderingRuleSearchRequest searchRequest) {
+		this.storage = searchRequest.storage;
+		this.props = searchRequest.props;
+		this.values = new int[searchRequest.values.length];
+		this.fvalues = new float[searchRequest.fvalues.length];
+		this.object = searchRequest.object;
+		this.searchResult = searchRequest.searchResult;
+		this.ALL = searchRequest.ALL;
+		System.arraycopy(searchRequest.values, 0, values, 0, searchRequest.values.length);
+		System.arraycopy(searchRequest.fvalues, 0, fvalues, 0, searchRequest.fvalues.length);
 		saveState();
+	}
+
+	RenderingRulesStorage getStorage() {
+		return storage;
+	}
+
+	public BinaryMapDataObject getObject() {
+		return object;
 	}
 
 	public void setStringFilter(RenderingRuleProperty p, String filter) {
@@ -82,19 +96,13 @@ public class RenderingRuleSearchRequest {
 	}
 	
 	public void clearValue(RenderingRuleProperty p) {
-		if(p.isIntParse()){
-			values[p.getId()] = savedValues[p.getId()];
-		} else {
+		if (!p.isIntParse()) {
 			fvalues[p.getId()] = savedFvalues[p.getId()];
-			values[p.getId()] = savedValues[p.getId()];
 		}
+		values[p.getId()] = savedValues[p.getId()];
 	}
-	
-	public BinaryMapDataObject getObject() {
-		return object;
-	}
-	
-	public void setInitialTagValueZoom(String tag, String val, int zoom, BinaryMapDataObject obj){
+
+	public void setInitialTagValueZoom(String tag, String val, int zoom, BinaryMapDataObject obj) {
 		clearState();
 		object = obj;
 		setIntFilter(ALL.R_MINZOOM, zoom);
@@ -102,8 +110,8 @@ public class RenderingRuleSearchRequest {
 		setStringFilter(ALL.R_TAG, tag);
 		setStringFilter(ALL.R_VALUE, val);
 	}
-	
-	public void setTagValueZoomLayer(String tag, String val, int zoom, int layer, BinaryMapDataObject obj){
+
+	public void setTagValueZoomLayer(String tag, String val, int zoom, int layer, BinaryMapDataObject obj) {
 		object = obj;
 		setIntFilter(ALL.R_MINZOOM, zoom);
 		setIntFilter(ALL.R_MAXZOOM, zoom);
@@ -119,14 +127,13 @@ public class RenderingRuleSearchRequest {
 	public boolean searchRenderingAttribute(String attribute) {
 		searchResult = false;
 		RenderingRule rule = storage.getRenderingAttributeRule(attribute);
-		if(rule == null){
+		if (rule == null) {
 			return false;
 		}
 		searchResult = visitRule(rule, true);
 		return searchResult;
 	}
-	
-	
+
 	public boolean search(int state) {
 		return search(state, true);
 	}
@@ -150,10 +157,8 @@ public class RenderingRuleSearchRequest {
 			searchResult = true;
 			return true;
 		}
-		
 		return false;
 	}
-
 
 	private boolean searchInternal(int state, int tagKey, int valueKey, boolean loadOutput) {
 		values[storage.PROPS.R_TAG.getId()] = tagKey;
@@ -164,7 +169,7 @@ public class RenderingRuleSearchRequest {
 			return false;
 		}
 		boolean match = visitRule(accept, loadOutput);
-		if(match && values[storage.PROPS.R_DISABLE.getId()] != 0) {
+		if (match && values[storage.PROPS.R_DISABLE.getId()] != 0) {
 			return false;
 		}
 		return match;
@@ -172,17 +177,17 @@ public class RenderingRuleSearchRequest {
 
 	private boolean visitRule(RenderingRule rule, boolean loadOutput) {
 		boolean input = checkInputProperties(rule);
-		if(!input) {
+		if (!input) {
 			return false;
 		}
 		if (!loadOutput && !rule.isGroup()) {
 			return true;
 		}
 		// accept it
-		if(!rule.isGroup()) {
+		if (!rule.isGroup()) {
 			loadOutputProperties(rule, true);
 		}
-		boolean match  = false;
+		boolean match = false;
 		for (RenderingRule rr : rule.getIfElseChildren()) {
 			match = visitRule(rr, loadOutput);
 			if (match) {
@@ -200,7 +205,6 @@ public class RenderingRuleSearchRequest {
 			}
 		}
 		return fit;
-		
 	}
 
 	protected void loadOutputProperties(RenderingRule rule, boolean override) {
@@ -210,14 +214,14 @@ public class RenderingRuleSearchRequest {
 			if (rp.isOutputProperty()) {
 				if (!isSpecified(rp) || override) {
 					RenderingRule rr = rule.getAttrProp(i);
-					if(rr != null) {
+					if (rr != null) {
 						visitRule(rr, true);
-						if(isSpecified(storage.PROPS.R_ATTR_COLOR_VALUE)){
+						if (isSpecified(storage.PROPS.R_ATTR_COLOR_VALUE)) {
 							values[rp.getId()] = getIntPropertyValue(storage.PROPS.R_ATTR_COLOR_VALUE);
-						} else if(isSpecified(storage.PROPS.R_ATTR_INT_VALUE)){
+						} else if (isSpecified(storage.PROPS.R_ATTR_INT_VALUE)) {
 							values[rp.getId()] = getIntPropertyValue(storage.PROPS.R_ATTR_INT_VALUE);
 							fvalues[rp.getId()] = getFloatPropertyValue(storage.PROPS.R_ATTR_INT_VALUE);
-						} else if(isSpecified(storage.PROPS.R_ATTR_BOOL_VALUE)){
+						} else if (isSpecified(storage.PROPS.R_ATTR_BOOL_VALUE)) {
 							values[rp.getId()] = getIntPropertyValue(storage.PROPS.R_ATTR_BOOL_VALUE);
 						}
 					} else if (rp.isFloat()) {
@@ -245,20 +249,20 @@ public class RenderingRuleSearchRequest {
 				if (!match) {
 					return false;
 				}
-			} else if(rp == storage.PROPS.R_DISABLE){
+			} else if (rp == storage.PROPS.R_DISABLE) {
 				// quick disable return even without load output
 				values[rp.getId()] = rule.getIntProp(i);
 			}
 		}
 		return true;
 	}
-	
-	public boolean isSpecified(RenderingRuleProperty property){
-		if(property.isFloat()){
+
+	public boolean isSpecified(RenderingRuleProperty property) {
+		if (property.isFloat()) {
 			return fvalues[property.getId()] != 0 || values[property.getId()] != -1;
 		} else {
 			int val = values[property.getId()];
-			if(property.isColor()){
+			if (property.isColor()) {
 				return val != 0;
 			} else {
 				return val != -1;
@@ -272,7 +276,7 @@ public class RenderingRuleSearchRequest {
 	
 	public String getStringPropertyValue(RenderingRuleProperty property) {
 		int val = values[property.getId()];
-		if(val < 0){
+		if (val < 0) {
 			return null;
 		}
 		return storage.getStringValue(val);
@@ -284,7 +288,7 @@ public class RenderingRuleSearchRequest {
 	
 	public float getFloatPropertyValue(RenderingRuleProperty property, float defVal) {
 		float f = fvalues[property.getId()];
-		if(f == 0) {
+		if (f == 0) {
 			return defVal;
 		}
 		return f;
@@ -307,8 +311,31 @@ public class RenderingRuleSearchRequest {
 		int val = values[property.getId()];
 		return val == -1 ? defValue : val;
 	}
-	
-	RenderingRulesStorage getStorage() {
-		return storage;
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("object ").append(object).append("\n");
+
+		for (int i = 0; i < props.length; i++) {
+			RenderingRuleProperty property = props[i];
+			if (isSpecified(property)) {
+				builder.append(i).append(" ").append(property.getAttrName()).append(" ");
+
+				if (property.type == INT_TYPE) {
+					builder.append(getIntPropertyValue(property));
+				} else if (property.type == FLOAT_TYPE) {
+					builder.append(getFloatPropertyValue(property));
+				} else if (property.type == STRING_TYPE) {
+					builder.append(getStringPropertyValue(property));
+				} else if (property.type == COLOR_TYPE) {
+					builder.append(getColorStringPropertyValue(property));
+				} else if (property.type == BOOLEAN_TYPE) {
+					builder.append(getBoolPropertyValue(property));
+				}
+				builder.append("\n");
+			}
+		}
+		return builder.toString();
 	}
 }

@@ -81,6 +81,15 @@ public enum WidgetGroup {
 		}
 	}
 
+	public boolean containsWidget(@NonNull String widgetId) {
+		for (WidgetParams widget : getWidgets()) {
+			if (widgetId.equals(widget.id)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	@DrawableRes
 	public int getIconId(boolean nightMode) {
 		return nightMode ? nightIconId : dayIconId;
@@ -110,7 +119,7 @@ public enum WidgetGroup {
 	}
 
 	public int getOrder() {
-		return getWidgets().get(0).getDefaultOrder();
+		return getWidgets().get(0).ordinal();
 	}
 
 	@Nullable
