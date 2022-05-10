@@ -35,7 +35,6 @@ import static net.osmand.plus.onlinerouting.engine.EngineType.GPX_TYPE;
 public class GpxEngine extends OnlineRoutingEngine {
 
 	private static final String ONLINE_ROUTING_GPX_FILE_NAME = "online_routing_gpx";
-	private boolean useNetwork = false;
 
 	public GpxEngine(@Nullable Map<String, String> params) {
 		super(params);
@@ -98,6 +97,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 		params.add(EngineParameter.NAME_INDEX);
 		params.add(EngineParameter.CUSTOM_URL);
 		params.add(EngineParameter.APPROXIMATE_ROUTE);
+		params.add(EngineParameter.NETWORK_APPROXIMATE_ROUTE);
 		params.add(EngineParameter.USE_EXTERNAL_TIMESTAMPS);
 		params.add(EngineParameter.USE_ROUTING_FALLBACK);
 	}
@@ -127,7 +127,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 	                                              boolean initialCalculation) {
 		boolean calculatedTimeSpeed = useExternalTimestamps();
 		if (shouldApproximateRoute() && !initialCalculation) {
-			if(useNetwork){
+			if(shouldNetworkApproximateRoute()){
 				BinaryMapIndexReader[] readers = app.getResourceManager().getRoutingMapFiles();
 				NetworkRouteGpxApproximator gpxApproximator = new NetworkRouteGpxApproximator(readers, true);
 				try {
@@ -137,7 +137,6 @@ public class GpxEngine extends OnlineRoutingEngine {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-
 			}else {
 				MeasurementEditingContext ctx = prepareApproximationContext(app, gpxFile);
 				if (ctx != null) {

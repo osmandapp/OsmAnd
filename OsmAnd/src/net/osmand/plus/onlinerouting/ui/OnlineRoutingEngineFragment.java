@@ -1,6 +1,7 @@
 package net.osmand.plus.onlinerouting.ui;
 
 import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.CUSTOM_VEHICLE;
+import static net.osmand.plus.profiles.SelectOnlineApproxProfileBottomSheet.NETWORK_KEY;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.*;
 
 import android.annotation.SuppressLint;
@@ -32,7 +33,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.CallbackWithObject;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -297,8 +297,9 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 		approximateCard.onClickCheckBox(getString(R.string.approximate_route_description), result -> {
 			if (getActivity() != null) {
 				String selected = approxRouteProfile;
+				boolean isNetwork = engine.shouldNetworkApproximateRoute();
 				SelectOnlineApproxProfileBottomSheet.showInstance(
-						getActivity(), this, appMode, selected, false);
+						getActivity(), this, appMode, selected, isNetwork, false);
 			}
 			return false;
 		});
@@ -309,9 +310,10 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 	private void setApproximateCardTitle() {
 		approxRouteProfile = engine.getApproximateRouteProfile();
 		String appModeName = approxRouteProfile != null ? " (" + approxRouteProfile + ")" : "";
+		appModeName = engine.shouldNetworkApproximateRoute() ? " (" + getString(R.string.network_provider) + ")" : appModeName;
 		String title = getString(R.string.attach_to_the_roads) + appModeName;
 		approximateCard.setHeaderTitle(title);
-		approximateCard.setCheckBox(approxRouteProfile != null);
+		approximateCard.setCheckBox(approxRouteProfile != null || engine.shouldNetworkApproximateRoute());
 	}
 
 	private void setupExternalTimestampsCard() {
@@ -874,6 +876,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 
 	@Override
 	public void onProfileSelected(Bundle args) {
+		boolean isNetwork = args.getBoolean(NETWORK_KEY);
+		engine.put(EngineParameter.NETWORK_APPROXIMATE_ROUTE, String.valueOf(isNetwork));
 		String profileKey = args.getString(PROFILE_KEY_ARG);
 		engine.put(EngineParameter.APPROXIMATE_ROUTE, String.valueOf(profileKey));
 		setApproximateCardTitle();

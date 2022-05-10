@@ -99,6 +99,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/content_padding"
             android:layout_marginRight="@dimen/content_padding"
+            android:saveEnabled="false"
             android:focusable="false"
             android:clickable="false" />
 
