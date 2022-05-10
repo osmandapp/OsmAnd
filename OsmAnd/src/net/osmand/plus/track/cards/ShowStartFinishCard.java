@@ -1,6 +1,5 @@
 package net.osmand.plus.track.cards;
 
-import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
@@ -11,17 +10,14 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.track.TrackDrawInfo;
 
 public class ShowStartFinishCard extends MapBaseCard {
 
-	private TrackDrawInfo trackDrawInfo;
 	private OsmandPreference<Boolean> showStartFinishPreference;
 
-	public ShowStartFinishCard(@NonNull MapActivity mapActivity, @NonNull TrackDrawInfo trackDrawInfo) {
+	public ShowStartFinishCard(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
 		this.showStartFinishPreference = app.getSettings().SHOW_START_FINISH_ICONS;
-		this.trackDrawInfo = trackDrawInfo;
 	}
 
 	@Override

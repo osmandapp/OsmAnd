@@ -1,6 +1,5 @@
 package net.osmand.plus.track.cards;
 
-import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
@@ -14,7 +13,7 @@ import net.osmand.plus.track.TrackDrawInfo;
 
 public class DirectionArrowsCard extends MapBaseCard {
 
-	private TrackDrawInfo trackDrawInfo;
+	private final TrackDrawInfo trackDrawInfo;
 
 	public DirectionArrowsCard(@NonNull MapActivity mapActivity, @NonNull TrackDrawInfo trackDrawInfo) {
 		super(mapActivity);
