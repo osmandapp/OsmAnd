@@ -236,10 +236,10 @@ public class BinaryRoutePlanner {
 		}
 		if (initSegment != null) {
 			initSegment.setParentRoute(RouteSegment.NULL);
-			int prevx = segment.road.getPoint31XTile(segment.getSegmentStart());
-			int prevy = segment.road.getPoint31YTile(segment.getSegmentStart());
-			int x = segment.road.getPoint31XTile(segment.getSegmentEnd());
-			int y = segment.road.getPoint31YTile(segment.getSegmentEnd());
+			int prevx = initSegment.road.getPoint31XTile(initSegment.getSegmentStart());
+			int prevy = initSegment.road.getPoint31YTile(initSegment.getSegmentStart());
+			int x = initSegment.road.getPoint31XTile(initSegment.getSegmentEnd());
+			int y = initSegment.road.getPoint31YTile(initSegment.getSegmentEnd());
 			double fullDist = squareRootDist(prevx, prevy, x, y);
 			double distFromStart = squareRootDist(x, y, !reverseSearchWay ? ctx.startX : ctx.targetX, !reverseSearchWay ? ctx.startY : ctx.targetY);
 			// compensate first segment difference
