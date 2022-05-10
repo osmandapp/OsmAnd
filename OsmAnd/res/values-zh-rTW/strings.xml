@@ -4650,4 +4650,8 @@
     <string name="app_mode_mountain_bicycle">山地腳踏車</string>
     <string name="routing_attr_avoid_4wd_only_description">避開僅適合四輪驅動車輛的道路</string>
     <string name="routing_attr_avoid_4wd_only_name">避開四輪驅動道路</string>
+    <string name="colour_of_circles">圓圈顏色</string>
+    <string name="compass_on_circles">圓圈上的指南針</string>
+    <string name="distance_circles">距離圓圈</string>
+    <string name="circle_settings">圓圈設定</string>
 </resources>
