@@ -20,8 +20,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
-import net.osmand.router.network.GPXApproximator;
-import net.osmand.router.network.NetworkRouteSelector;
+import net.osmand.router.network.NetworkRouteGpxApproximator;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -130,9 +129,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 		if (shouldApproximateRoute() && !initialCalculation) {
 			if(useNetwork){
 				BinaryMapIndexReader[] readers = app.getResourceManager().getRoutingMapFiles();
-				NetworkRouteSelector.NetworkRouteSelectorFilter selectorFilter = new NetworkRouteSelector.NetworkRouteSelectorFilter();
-				NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter);
-				GPXApproximator gpxApproximator = new GPXApproximator(routeSelector);
+				NetworkRouteGpxApproximator gpxApproximator = new NetworkRouteGpxApproximator(readers, true);
 				try {
 					gpxApproximator.setGpxFile(gpxFile);
 					gpxApproximator.approximate();

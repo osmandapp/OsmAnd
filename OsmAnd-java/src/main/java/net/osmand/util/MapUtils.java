@@ -48,29 +48,6 @@ public class MapUtils {
 			'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
 			'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '_', '~'
 	};
-	public static final int COUNT = 10;
-
-	public static void main(String[] args) {
-		MapUtils mapUtils = new MapUtils();
-		int x31;
-		int y31;
-		x31 = 1118359680;
-		y31 = 718046560;
-		long averageTime = 0;
-		for (int j = 0; j < COUNT; j++) {
-			long start = System.currentTimeMillis();
-			long dist = 0;
-			for (int i = x31; i < x31 + 1000000; i++) {
-//				dist += measuredDist31(x31,y31,i,y31);      //347 5854803289
-//				dist += squareRootDist31(x31, y31, i, y31); //10  5854803920
-				dist += getSqrtDistance(x31, y31, i, y31);  //6   499999500000
-			}
-			long time = System.currentTimeMillis() - start;
-			averageTime += time;
-			System.out.println(dist);
-		}
-		System.out.println("dist time " + averageTime / COUNT);
-	}
 
 	public static int calculateFromBaseZoomPrecisionXY(int baseZoom, int finalZoom, int xFinal, int yFinal) {
 		int px = xFinal;

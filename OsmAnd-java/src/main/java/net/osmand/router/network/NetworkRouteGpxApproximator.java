@@ -6,6 +6,7 @@ import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadPoint;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
@@ -26,15 +27,13 @@ import java.util.Map;
 
 public class NetworkRouteGpxApproximator {
 
-	NetworkRouteSelector routeSelector;
 	GPXFile gpxFile;
 	
 	private static final double GPX_MAX_DISTANCE_POINT_MATCH = 5;
 	private static final double GPX_MAX_INTER_SKIP_DISTANCE = 10;
 	private static final int GPX_SKIP_POINTS_GPX_MAX = 5;
 
-	private NetworkRouteSelector selector;
-
+	private final NetworkRouteSelector selector;
 
 	public NetworkRouteGpxApproximator(BinaryMapIndexReader[] files, boolean routing) {
 		selector = new NetworkRouteSelector(files, new NetworkRouteSelectorFilter() {
@@ -66,7 +65,6 @@ public class NetworkRouteGpxApproximator {
 		gpxFile = res.values().iterator().next();
 		return convertToEntities(lst);
 	}
-	
 
 	private NetworkRouteSegment getMatchingGpxSegments(GpxRoutePoint p1, GpxRoutePoint p2) {
 		for (NetworkRouteSegment segStart : p1.getObjects()) {
@@ -81,7 +79,7 @@ public class NetworkRouteGpxApproximator {
 
 	private List<NetworkRouteSegment> loadDataByGPX(GPXFile gpxFile) throws IOException {
 		List<GpxRoutePoint> gpxRoutePoints = new ArrayList<>();
-		List<NetworkRouteSegment> res = new ArrayList<NetworkRouteContext.NetworkRouteSegment>();
+		List<NetworkRouteSegment> res = new ArrayList<>();
 		for (GPXUtilities.Track t : gpxFile.tracks) {
 			for (GPXUtilities.TrkSegment ts : t.segments) {
 				for (int i = 0; i < ts.points.size() - 1; i++) {
@@ -92,6 +90,7 @@ public class NetworkRouteGpxApproximator {
 							nearesetPoint.x31, nearesetPoint.y31) < GPX_MAX_DISTANCE_POINT_MATCH) {
 						gpxRoutePoint.routePoint = nearesetPoint;
 					}
+					gpxRoutePoints.add(gpxRoutePoint);
 				}
 			}
 		}
@@ -136,10 +135,21 @@ public class NetworkRouteGpxApproximator {
 	}
 
 	private double getOrthogonalDistance(GpxRoutePoint gpxRoutePoint, NetworkRouteSegment matchingGpxSegment) {
-		// TODO Auto-generated method stub
-		return 0;
+		double minDistance = Double.MAX_VALUE;
+		int px31 = gpxRoutePoint.routePoint.x31;
+		int py31 = gpxRoutePoint.routePoint.y31;
+		int step = matchingGpxSegment.start < matchingGpxSegment.end ? 1 : -1;
+		for (int i = matchingGpxSegment.start; i < matchingGpxSegment.end; i += step) {
+			int x1 = matchingGpxSegment.robj.pointsX[i];
+			int y1 = matchingGpxSegment.robj.pointsY[i];
+			int x2 = matchingGpxSegment.robj.pointsX[i + step];
+			int y2 = matchingGpxSegment.robj.pointsY[i + step];
+			QuadPoint pp = MapUtils.getProjectionPoint31(px31, py31, x1, y1, x2, y2);
+			double distance = MapUtils.squareRootDist31(px31, py31, (int) pp.x, (int) pp.y);
+			minDistance = Math.min(minDistance, distance);
+		}
+		return minDistance;
 	}
-
 
 	private List<Entity> convertToEntities(List<NetworkRouteSegmentChain> res) {
 		List<Entity> entityList = new ArrayList<>();
@@ -170,7 +180,7 @@ public class NetworkRouteGpxApproximator {
 		}
 		return entityList;
 	}
-	
+
 	public static class GpxRoutePoint {
 		int idx;
 		double lat;
