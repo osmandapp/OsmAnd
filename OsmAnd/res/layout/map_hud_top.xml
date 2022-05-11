@@ -182,12 +182,13 @@
 				android:layout_weight="0.45"
 				android:orientation="vertical">
 
-				<LinearLayout
+				<net.osmand.plus.views.controls.SideWidgetsPanel
 					android:id="@+id/map_left_widgets_panel"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_gravity="top|start"
-					android:orientation="vertical" />
+					android:layout_marginTop="@dimen/content_padding_small_half"
+					osmand:rightSide="false" />
 
 				<LinearLayout
 					android:layout_width="wrap_content"
@@ -263,12 +264,13 @@
 				android:layout_gravity="top|end"
 				android:layout_weight="0.45">
 
-				<net.osmand.plus.views.controls.RightWidgetsPanel
+				<net.osmand.plus.views.controls.SideWidgetsPanel
 					android:id="@+id/map_right_widgets_panel"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_gravity="top|end"
 					android:layout_marginTop="@dimen/content_padding_small_half"
+					osmand:rightSide="true"
 					tools:ignore="UselessParent" />
 
 			</FrameLayout>

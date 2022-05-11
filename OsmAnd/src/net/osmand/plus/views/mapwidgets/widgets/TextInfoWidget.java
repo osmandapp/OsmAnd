@@ -26,6 +26,7 @@ public class TextInfoWidget extends MapWidget {
 	private final TextView textViewShadow;
 	private final TextView smallTextView;
 	private final TextView smallTextViewShadow;
+	private final View bottomDivider;
 
 	@DrawableRes
 	private int dayIconId;
@@ -42,6 +43,7 @@ public class TextInfoWidget extends MapWidget {
 		textViewShadow = view.findViewById(R.id.widget_text_shadow);
 		smallTextViewShadow = view.findViewById(R.id.widget_text_small_shadow);
 		smallTextView = view.findViewById(R.id.widget_text_small);
+		bottomDivider = view.findViewById(R.id.bottom_divider);
 	}
 
 	@Override
@@ -169,6 +171,9 @@ public class TextInfoWidget extends MapWidget {
 		if (iconId != 0) {
 			setImageDrawable(iconId);
 		}
+
+		view.setBackgroundResource(textState.widgetBackgroundId);
+		bottomDivider.setBackgroundResource(textState.widgetDividerColorId);
 	}
 
 	@Override

@@ -1,16 +1,11 @@
 package net.osmand.plus.views.mapwidgets;
 
-import android.graphics.drawable.Drawable;
-import android.view.View;
 import android.view.ViewGroup;
 
-import net.osmand.CallbackWithObject;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgets.CoordinatesWidget;
@@ -19,9 +14,6 @@ import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
-import net.osmand.plus.widgets.popup.PopUpMenuHelper;
-import net.osmand.plus.widgets.popup.PopUpMenuHelper.PopUpMenuWidthType;
-import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -56,7 +48,7 @@ public class MapWidgetRegistry {
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 
-	private final Map<WidgetsPanel, Set<MapWidgetInfo>> allWidgets = new HashMap<>();
+	private Map<WidgetsPanel, Set<MapWidgetInfo>> allWidgets = new HashMap<>();
 
 	private Set<WidgetsVisibilityListener> visibilityListeners = new HashSet<>();
 
@@ -89,17 +81,8 @@ public class MapWidgetRegistry {
 	}
 
 	public void updateWidgetsInfo(@NonNull ApplicationMode appMode, @NonNull DrawSettings drawSettings) {
-		for (WidgetsPanel panel : WidgetsPanel.values()) {
-			Set<MapWidgetInfo> panelWidgets = getWidgetsForPanel(panel);
-			updatePanelInfo(panelWidgets, appMode, drawSettings);
-		}
-	}
-
-	private void updatePanelInfo(@NonNull Set<MapWidgetInfo> panelWidgets,
-	                             @NonNull ApplicationMode mode,
-	                             @NonNull DrawSettings drawSettings) {
-		for (MapWidgetInfo widgetInfo : panelWidgets) {
-			if (widgetInfo.isEnabledForAppMode(mode)) {
+		for (MapWidgetInfo widgetInfo : getAllWidgets()) {
+			if (widgetInfo.isEnabledForAppMode(appMode)) {
 				widgetInfo.widget.updateInfo(drawSettings);
 			}
 		}
@@ -214,16 +197,21 @@ public class MapWidgetRegistry {
 	}
 
 	public void reorderWidgets() {
-		for (WidgetsPanel panel : WidgetsPanel.values()) {
-			Set<MapWidgetInfo> oldOrder = getWidgetsForPanel(panel);
-			Set<MapWidgetInfo> newOrder = new TreeSet<>();
-			for (MapWidgetInfo widgetInfo : oldOrder) {
-				widgetInfo.pageIndex = panel.getWidgetPage(widgetInfo.key, settings);
-				widgetInfo.priority = panel.getWidgetOrder(widgetInfo.key, settings);
-				newOrder.add(widgetInfo);
+		Map<WidgetsPanel, Set<MapWidgetInfo>> newAllWidgets = new HashMap<>();
+		for (MapWidgetInfo widget : getAllWidgets()) {
+			WidgetsPanel panel = widget.getUpdatedPanel();
+			widget.pageIndex = panel.getWidgetPage(widget.key, settings);
+			widget.priority = panel.getWidgetOrder(widget.key, settings);
+
+			Set<MapWidgetInfo> widgetsOfPanel = newAllWidgets.get(panel);
+			if (widgetsOfPanel == null) {
+				widgetsOfPanel = new TreeSet<>();
+				newAllWidgets.put(panel, widgetsOfPanel);
 			}
-			allWidgets.put(panel, newOrder);
+			widgetsOfPanel.add(widget);
 		}
+
+		allWidgets = newAllWidgets;
 	}
 
 	@Nullable
@@ -309,56 +297,6 @@ public class MapWidgetRegistry {
 			allWidgets.put(panel, widgets);
 		}
 		return widgets;
-	}
-
-	public void showPopUpMenu(@NonNull View view,
-	                          @NonNull final CallbackWithObject<WidgetState> callback,
-	                          @NonNull final WidgetState widgetState,
-	                          @NonNull ApplicationMode mode,
-	                          boolean nightMode) {
-		final int currentModeColor = mode.getProfileColor(nightMode);
-		View parentView = view.findViewById(R.id.text_wrapper);
-		List<PopUpMenuItem> items = new ArrayList<>();
-		UiUtilities uiUtilities = app.getUIUtilities();
-
-		final int[] menuIconIds = widgetState.getMenuIconIds();
-		final int[] menuTitleIds = widgetState.getMenuTitleIds();
-		final int[] menuItemIds = widgetState.getMenuItemIds();
-		if (menuIconIds != null && menuTitleIds != null && menuItemIds != null &&
-				menuIconIds.length == menuTitleIds.length && menuIconIds.length == menuItemIds.length) {
-			for (int i = 0; i < menuIconIds.length; i++) {
-				int iconId = menuIconIds[i];
-				int titleId = menuTitleIds[i];
-				final int id = menuItemIds[i];
-				boolean checkedItem = id == widgetState.getMenuItemId();
-				Drawable icon = checkedItem ?
-						uiUtilities.getPaintedIcon(iconId, currentModeColor) :
-						uiUtilities.getThemedIcon(iconId);
-				items.add(new PopUpMenuItem.Builder(app)
-						.setTitle(getString(titleId))
-						.setIcon(icon)
-						.setOnClickListener(v -> {
-							widgetState.changeState(id);
-							MapInfoLayer layer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
-							if (layer != null) {
-								layer.recreateControls();
-							}
-							callback.processResult(widgetState);
-						})
-						.showCompoundBtn(currentModeColor)
-						.setSelected(checkedItem)
-						.create());
-			}
-		}
-
-		new PopUpMenuHelper.Builder(parentView, items, nightMode)
-				.setWidthType(PopUpMenuWidthType.STANDARD)
-				.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode))
-				.show();
-	}
-
-	private String getString(@StringRes int resId) {
-		return app.getString(resId);
 	}
 
 	@ColorRes

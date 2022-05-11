@@ -68,6 +68,8 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
+		super.initLayer(view);
+
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 		mapTextLayer = view.getLayerByClass(MapTextLayer.class);
 	}
@@ -96,7 +98,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 	}
 
 	private void drawOsmBugsPoints(Canvas canvas, RotatedTileBox tileBox, List<LatLon> fullObjectsLatLon) {
-		drawPoints(canvas, tileBox, plugin.getDBBug().getOsmbugsPoints(), fullObjectsLatLon);
+		drawPoints(canvas, tileBox, plugin.getDBBug().getOsmBugsPoints(), fullObjectsLatLon);
 	}
 
 	private void drawOpenstreetmapPoints(Canvas canvas, RotatedTileBox tileBox, List<LatLon> fullObjectsLatLon) {
@@ -183,7 +185,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 		int ey = (int) point.y;
 		int compare = getScaledTouchRadius(app, getRadiusPoi(tileBox));
 		int radius = compare * 3 / 2;
-		compare = getFromPoint(tileBox, am, ex, ey, compare, radius, plugin.getDBBug().getOsmbugsPoints());
+		compare = getFromPoint(tileBox, am, ex, ey, compare, radius, plugin.getDBBug().getOsmBugsPoints());
 		getFromPoint(tileBox, am, ex, ey, compare, radius, plugin.getDBPOI().getOpenstreetmapPoints());
 	}
 

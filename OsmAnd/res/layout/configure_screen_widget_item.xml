@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
-	android:id="@+id/button_container"
+	android:id="@+id/container"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/bg_color"
@@ -50,13 +51,14 @@
 
 	</LinearLayout>
 
-	<androidx.appcompat.widget.AppCompatImageView
-		android:id="@+id/secondary_icon"
+	<androidx.appcompat.widget.AppCompatImageButton
+		android:id="@+id/settings_icon"
+		style="@style/Widget.AppCompat.ActionButton"
 		android:layout_width="@dimen/standard_icon_size"
 		android:layout_height="@dimen/standard_icon_size"
 		android:layout_gravity="center_vertical"
 		android:layout_margin="@dimen/content_padding"
-		android:tint="?attr/default_icon_color"
-		tools:src="@drawable/ic_action_additional_option" />
+		app:srcCompat="@drawable/ic_action_settings"
+		android:tint="?attr/default_icon_color" />
 
 </LinearLayout>

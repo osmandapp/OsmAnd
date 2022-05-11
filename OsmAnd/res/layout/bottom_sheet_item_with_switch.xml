@@ -12,13 +12,14 @@
 		android:layout_width="@dimen/standard_icon_size"
 		android:layout_height="@dimen/standard_icon_size"
 		android:layout_marginStart="@dimen/content_padding"
-		android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+		android:layout_marginEnd="@dimen/content_padding_half"
 		tools:src="@drawable/ic_action_coordinates_latitude" />
 
 	<LinearLayout
 		android:layout_width="0dp"
 		android:layout_height="wrap_content"
 		android:layout_weight="1"
+		android:layout_marginStart="@dimen/content_padding"
 		android:orientation="vertical">
 
 		<LinearLayout

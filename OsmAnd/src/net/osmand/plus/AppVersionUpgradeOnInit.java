@@ -19,6 +19,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.util.Algorithms;
@@ -91,8 +92,10 @@ class AppVersionUpgradeOnInit {
 	public static final int VERSION_4_0_02 = 4002;
 	// 4003 - 4.0-03 (Migrate state dependent widgets)
 	public static final int VERSION_4_0_03 = 4003;
+	// 4004 - 4.0-04 (Migrate Radius ruler widget preference)
+	public static final int VERSION_4_0_04 = 4004;
 
-	public static final int LAST_APP_VERSION = VERSION_4_0_03;
+	public static final int LAST_APP_VERSION = VERSION_4_0_04;
 
 	static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -200,6 +203,9 @@ class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_4_0_03) {
 					migrateStateDependentWidgets();
+				}
+				if (prevAppVersion < VERSION_4_0_04) {
+					migrateRadiusRulerWidgetPreference();
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -546,5 +552,22 @@ class AppVersionUpgradeOnInit {
 			newWidgetsVisibilityString.append(widgetVisibility).append(SETTINGS_SEPARATOR);
 		}
 		settings.MAP_INFO_CONTROLS.setModeValue(appMode, newWidgetsVisibilityString.toString());
+	}
+
+	private void migrateRadiusRulerWidgetPreference() {
+		OsmandSettings settings = app.getSettings();
+		CommonPreference<RadiusRulerMode> radiusRulerModePref = new EnumStringPreference<>(settings,
+				"ruler_mode", RadiusRulerMode.FIRST, RadiusRulerMode.values()).makeGlobal().makeShared();
+		if (radiusRulerModePref.isSet()) {
+			RadiusRulerMode radiusRulerMode = radiusRulerModePref.get();
+			for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+				boolean radiusRulerEnabled = radiusRulerMode == RadiusRulerMode.FIRST
+						|| radiusRulerMode == RadiusRulerMode.SECOND;
+				boolean radiusRulerNightMode = radiusRulerMode == RadiusRulerMode.SECOND;
+
+				settings.SHOW_RADIUS_RULER_ON_MAP.setModeValue(appMode, radiusRulerEnabled);
+				settings.RADIUS_RULER_NIGHT_MODE.setModeValue(appMode, radiusRulerNightMode);
+			}
+		}
 	}
 }

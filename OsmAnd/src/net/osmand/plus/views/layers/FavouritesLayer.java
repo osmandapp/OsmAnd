@@ -46,7 +46,6 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	private static final int START_ZOOM = 6;
 
-	protected OsmandMapTileView view;
 	private FavouritesHelper favouritesHelper;
 	private MapMarkersHelper mapMarkersHelper;
 	protected List<FavouritePoint> cache = new ArrayList<>();
@@ -72,13 +71,14 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
-		this.view = view;
+		super.initLayer(view);
+
 		settings = view.getApplication().getSettings();
 		favouritesHelper = view.getApplication().getFavoritesHelper();
 		mapMarkersHelper = view.getApplication().getMapMarkersHelper();
 		textLayer = view.getLayerByClass(MapTextLayer.class);
-		defaultColor = ContextCompat.getColor(view.getContext(), R.color.color_favorite);
-		grayColor = ContextCompat.getColor(view.getContext(), R.color.color_favorite_gray);
+		defaultColor = ContextCompat.getColor(getContext(), R.color.color_favorite);
+		grayColor = ContextCompat.getColor(getContext(), R.color.color_favorite_gray);
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 		favouritesHelper.addListener(this);
 	}
@@ -125,8 +125,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		boolean showFavorites = this.settings.SHOW_FAVORITES.get();
 		boolean showFavoritesChanged = !Algorithms.objectEquals(this.showFavorites, showFavorites);
 		this.showFavorites = showFavorites;
-		MapRendererView mapRenderer = view.getMapRenderer();
-		if (mapRenderer != null) {
+		if (hasMapRenderer()) {
 			if (mapActivityInvalidated || nightModeChanged || showFavoritesChanged
 					|| textScaleChanged || textVisibleChanged) {
 				showFavorites();
@@ -171,7 +170,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 										color = favouritesHelper.getColorWithCategory(favoritePoint, defaultColor);
 									}
 									PointImageDrawable pointImageDrawable = PointImageDrawable.getFromFavorite(
-											view.getContext(), color, true, favoritePoint);
+											getContext(), color, true, favoritePoint);
 									pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
 									smallObjectsLatLon.add(new LatLon(lat, lon));
 								} else {
@@ -208,18 +207,18 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		PointImageDrawable pointImageDrawable;
 		boolean history = false;
 		if (marker != null) {
-			pointImageDrawable = PointImageDrawable.getOrCreateSyncedIcon(view.getContext(),
+			pointImageDrawable = PointImageDrawable.getOrCreateSyncedIcon(getContext(),
 					favouritesHelper.getColorWithCategory(favoritePoint, defaultColor), favoritePoint);
 			history = marker.history;
 		} else {
-			pointImageDrawable = PointImageDrawable.getFromFavorite(view.getContext(),
+			pointImageDrawable = PointImageDrawable.getFromFavorite(getContext(),
 					favouritesHelper.getColorWithCategory(favoritePoint, defaultColor), true, favoritePoint);
 		}
 		pointImageDrawable.drawPoint(canvas, x, y, textScale, history);
 	}
 
 	public void showFavorites() {
-		MapRendererView mapRenderer = view.getMapRenderer();
+		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer == null) {
 			return;
 		}
@@ -258,7 +257,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	public void clearFavorites() {
-		MapRendererView mapRenderer = view.getMapRenderer();
+		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer == null || favoritesMapLayerProvider == null) {
 			return;
 		}
@@ -295,7 +294,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof FavouritePoint) {
-			return ((FavouritePoint) o).getPointDescription(view.getContext());
+			return ((FavouritePoint) o).getPointDescription(getContext());
 		}
 		return null;
 	}
@@ -352,7 +351,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public String getText(FavouritePoint o) {
-		return PointDescription.getSimpleName(o, view.getContext());
+		return PointDescription.getSimpleName(o, getContext());
 	}
 
 	@Override

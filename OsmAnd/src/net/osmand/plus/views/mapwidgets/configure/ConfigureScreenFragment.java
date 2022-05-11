@@ -281,6 +281,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	private View createWidgetGroupView(@NonNull WidgetsPanel panel, boolean showShortDivider, boolean showLongDivider) {
+		boolean rtl = AndroidUtils.isLayoutRtl(app);
 		int activeColor = selectedAppMode.getProfileColor(nightMode);
 		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 
@@ -291,10 +292,10 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 
 		int count = widgetRegistry.getWidgetsForPanel(selectedAppMode, ENABLED_MODE, panel).size();
 		int iconColor = count > 0 ? activeColor : defColor;
-		Drawable icon = getPaintedContentIcon(panel.getIconId(), iconColor);
+		Drawable icon = getPaintedContentIcon(panel.getIconId(rtl), iconColor);
 		ivIcon.setImageDrawable(icon);
 
-		String title = getString(panel.getTitleId());
+		String title = getString(panel.getTitleId(rtl));
 		tvTitle.setText(title);
 
 		tvDesc.setVisibility(View.VISIBLE);

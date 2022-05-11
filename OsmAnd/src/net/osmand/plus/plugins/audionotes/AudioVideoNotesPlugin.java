@@ -162,7 +162,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	public final CommonPreference<Integer> AV_CAMERA_PICTURE_SIZE;
 	public final CommonPreference<Integer> AV_CAMERA_FOCUS_TYPE;
-	public final CommonPreference<Integer> AV_DEFAULT_ACTION;
 	public final OsmandPreference<Boolean> SHOW_RECORDINGS;
 
 	public static final int CLIP_LENGTH_DEFAULT = 5;
@@ -584,7 +583,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		AV_VIDEO_QUALITY = registerIntPreference("av_video_quality", VIDEO_QUALITY_DEFAULT);
 		AV_AUDIO_FORMAT = registerIntPreference("av_audio_format", AUDIO_FORMAT_DEFAULT);
 		AV_AUDIO_BITRATE = registerIntPreference("av_audio_bitrate", AUDIO_BITRATE_DEFAULT);
-		AV_DEFAULT_ACTION = registerIntPreference(DEFAULT_ACTION_SETTING_ID, AV_DEFAULT_ACTION_CHOOSE);
 		// camera picture size:
 		AV_CAMERA_PICTURE_SIZE = registerIntPreference("av_camera_picture_size", AV_PHOTO_SIZE_DEFAULT);
 		// camera focus type:
@@ -756,25 +754,25 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 			if (onRequestWidget == null || recreateRegistered) {
 				onRequestWidget = new AudioVideoNotesWidget(mapActivity, AV_DEFAULT_ACTION_CHOOSE);
-				mapInfoLayer.registerWidget(AV_NOTES_ON_REQUEST, onRequestWidget, rightPanel);
+				mapInfoLayer.registerWidget(AV_NOTES_ON_REQUEST, onRequestWidget);
 				reinflateWidgets = true;
 			}
 
 			if (recordAudioWidget == null || recreateRegistered) {
 				recordAudioWidget = new AudioVideoNotesWidget(mapActivity, AV_DEFAULT_ACTION_AUDIO);
-				mapInfoLayer.registerWidget(AV_NOTES_RECORD_AUDIO, recordAudioWidget, rightPanel);
+				mapInfoLayer.registerWidget(AV_NOTES_RECORD_AUDIO, recordAudioWidget);
 				reinflateWidgets = true;
 			}
 
 			if (recordVideoWidget == null || recreateRegistered) {
 				recordVideoWidget = new AudioVideoNotesWidget(mapActivity, AV_DEFAULT_ACTION_VIDEO);
-				mapInfoLayer.registerWidget(AV_NOTES_RECORD_VIDEO, recordVideoWidget, rightPanel);
+				mapInfoLayer.registerWidget(AV_NOTES_RECORD_VIDEO, recordVideoWidget);
 				reinflateWidgets = true;
 			}
 
 			if (takePhotoWidget == null || recreateRegistered) {
 				takePhotoWidget = new AudioVideoNotesWidget(mapActivity, AV_DEFAULT_ACTION_TAKEPICTURE);
-				mapInfoLayer.registerWidget(AV_NOTES_TAKE_PHOTO, takePhotoWidget, rightPanel);
+				mapInfoLayer.registerWidget(AV_NOTES_TAKE_PHOTO, takePhotoWidget);
 				reinflateWidgets = true;
 			}
 
@@ -802,7 +800,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 	}
 
-	public void defaultAction(@NonNull MapActivity mapActivity) {
+	public void makeAction(@NonNull MapActivity mapActivity, int actionId) {
 		final Location loc = app.getLocationProvider().getLastKnownLocation();
 		if (loc == null) {
 			Toast.makeText(app, R.string.audionotes_location_not_defined, Toast.LENGTH_LONG).show();
@@ -810,11 +808,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 		double lon = loc.getLongitude();
 		double lat = loc.getLatitude();
-		int action = AV_DEFAULT_ACTION.get();
-		if (action == AV_DEFAULT_ACTION_CHOOSE) {
+		if (actionId == AV_DEFAULT_ACTION_CHOOSE) {
 			chooseDefaultAction(lat, lon, mapActivity);
 		} else {
-			takeAction(mapActivity, lon, lat, action);
+			takeAction(mapActivity, lon, lat, actionId);
 		}
 	}
 
@@ -1937,7 +1934,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	@Override
 	public boolean mapActivityKeyUp(MapActivity mapActivity, int keyCode) {
 		if (keyCode == KeyEvent.KEYCODE_CAMERA) {
-			defaultAction(mapActivity);
+			makeAction(mapActivity, AV_DEFAULT_ACTION_CHOOSE);
 			return true;
 		}
 		return false;

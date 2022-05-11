@@ -768,7 +768,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			}
 
 			addCard(container, new DirectionArrowsCard(mapActivity, trackDrawInfo));
-			addCard(container, new ShowStartFinishCard(mapActivity, trackDrawInfo));
+			addCard(container, new ShowStartFinishCard(mapActivity));
 
 			trackColoringCard = new TrackColoringCard(mapActivity, selectedGpxFile, trackDrawInfo);
 			addCard(container, trackColoringCard);

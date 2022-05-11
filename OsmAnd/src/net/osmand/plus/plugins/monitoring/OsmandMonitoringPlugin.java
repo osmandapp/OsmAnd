@@ -29,8 +29,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
@@ -146,7 +144,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
 		monitoringControl = createMonitoringControl(activity);
 
-		layer.registerWidget(TRIP_RECORDING, monitoringControl, WidgetsPanel.RIGHT);
+		layer.registerWidget(TRIP_RECORDING, monitoringControl);
 		layer.recreateControls();
 	}
 
@@ -186,7 +184,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	 * creates (if it wasn't created previously) the control to be added on a MapInfoLayer that shows a monitoring state (recorded/stopped)
 	 */
 	private TextInfoWidget createMonitoringControl(@NonNull MapActivity mapActivity) {
-		monitoringControl = new RightTextInfoWidget(mapActivity) {
+		monitoringControl = new TextInfoWidget(mapActivity) {
 			long lastUpdateTime;
 
 			@Override

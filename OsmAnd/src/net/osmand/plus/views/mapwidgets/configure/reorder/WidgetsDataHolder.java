@@ -53,16 +53,19 @@ public class WidgetsDataHolder {
 		orders.clear();
 
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		int availableEnabledFilter = AVAILABLE_MODE | ENABLED_MODE;
-		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(appMode, availableEnabledFilter, selectedPanel);
 
 		if (orderByDefault) {
+			Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(appMode, AVAILABLE_MODE, selectedPanel);
 			for (MapWidgetInfo widgetInfo : widgets) {
-				int order = selectedPanel.getOriginalWidgetOrder(widgetInfo.key);
-				addWidgetToPage(widgetInfo.key, 0);
-				orders.put(widgetInfo.key, order);
+				if (appMode.isWidgetVisibleByDefault(widgetInfo.key)) {
+					int order = selectedPanel.getOriginalWidgetOrder(widgetInfo.key);
+					addWidgetToPage(widgetInfo.key, 0);
+					orders.put(widgetInfo.key, order);
+				}
 			}
 		} else {
+			int availableEnabledFilter = AVAILABLE_MODE | ENABLED_MODE;
+			Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(appMode, availableEnabledFilter, selectedPanel);
 			for (MapWidgetInfo widgetInfo : widgets) {
 				int page = selectedPanel.getWidgetPage(appMode, widgetInfo.key, app.getSettings());
 				int order = selectedPanel.getWidgetOrder(appMode, widgetInfo.key, app.getSettings());

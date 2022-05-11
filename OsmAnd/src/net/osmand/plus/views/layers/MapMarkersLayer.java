@@ -61,8 +61,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 6;
 	protected static final int DIST_TO_SHOW = 80;
 
-	private OsmandMapTileView view;
-
 	private MarkersWidgetsHelper markersWidgetsHelper;
 
 	private Paint bitmapPaint;
@@ -229,7 +227,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
-		this.view = view;
+		super.initLayer(view);
+
 		handler = new Handler();
 		initUI();
 	}
@@ -651,7 +650,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof MapMarker) {
-			return ((MapMarker) o).getPointDescription(view.getContext());
+			return ((MapMarker) o).getPointDescription(getContext());
 		}
 		return null;
 	}

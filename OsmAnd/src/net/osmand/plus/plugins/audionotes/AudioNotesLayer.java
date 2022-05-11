@@ -33,7 +33,6 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	private static final int startZoom = 10;
 	private final Context ctx;
 	private final AudioVideoNotesPlugin plugin;
-	private OsmandMapTileView view;
 	private ContextMenuLayer contextMenuLayer;
 
 	public AudioNotesLayer(@NonNull Context context, @NonNull AudioVideoNotesPlugin plugin) {
@@ -44,7 +43,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
-		this.view = view;
+		super.initLayer(view);
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 	}
 

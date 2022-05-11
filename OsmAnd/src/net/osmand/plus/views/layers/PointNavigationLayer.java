@@ -40,7 +40,6 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 
 	private final TargetPointsHelper targetPoints;
 
-	private OsmandMapTileView mView;
 	private boolean carView;
 	private float textScale = 1f;
 	private double pointSizePx;
@@ -83,9 +82,9 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
-		this.mView = view;
-		initUI();
+		super.initLayer(view);
 
+		initUI();
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 	}
 
@@ -339,7 +338,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof TargetPoint) {
-			return ((TargetPoint) o).getPointDescription(mView.getContext());
+			return ((TargetPoint) o).getPointDescription(getContext());
 		}
 		return null;
 	}
