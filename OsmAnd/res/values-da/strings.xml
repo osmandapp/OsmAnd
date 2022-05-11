@@ -4663,4 +4663,8 @@
     <string name="av_def_action_choose">På forespørgsel</string>
     <string name="routing_attr_avoid_4wd_only_name">Undgå 4WD-veje</string>
     <string name="routing_attr_avoid_4wd_only_description">Undgå veje, der kun er egnet til køretøjer med firehjulstræk</string>
+    <string name="colour_of_circles">Farve på cirkler</string>
+    <string name="compass_on_circles">Kompas på cirkler</string>
+    <string name="distance_circles">Afstandscirkler</string>
+    <string name="circle_settings">Cirkelindstillinger</string>
 </resources>

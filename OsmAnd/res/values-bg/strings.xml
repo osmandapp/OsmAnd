@@ -459,10 +459,10 @@
     <string name="local_openstreetmap_descr_title">Асинхронно редактиране на OSM:</string>
     <string name="local_openstreetmap_settings">Запазени в устройството POI/Бележки за OSM</string>
     <string name="local_openstreetmap_settings_descr">Показване и управление на локално записаните в устройството забележителности и бележки за OSM</string>
-    <string name="live_monitoring_interval_descr">Определяне на интервал за изпращане на онлайн следа.</string>
-    <string name="live_monitoring_interval">Интервал за онлайн следене</string>
+    <string name="live_monitoring_interval_descr">Интервал на проследяване в реално време.</string>
+    <string name="live_monitoring_interval">Интервал за проследвяане</string>
     <string name="live_monitoring_url_descr">Задайте интернет адрес със следните параметри: геогр.ширина={0}, геогр.дължина={1}, време={2}, hdop={3}, надм.височина={4}, скорост={5}, посока={6}.</string>
-    <string name="live_monitoring_url">Интернет адрес за онлайн следи</string>
+    <string name="live_monitoring_url">Адрес за проследяване в реално време</string>
     <string name="gpx_monitoring_disabled_warn">Запишете следата чрез добавката за GPX или чрез настройките на \'Запис на пътуване\'.</string>
     <string name="show_current_gpx_title">Показване на текущата следа (трак)</string>
     <string name="free_version_message">%1$s карти за изтегляне или обновяване.</string>
@@ -1140,11 +1140,11 @@
     <string name="gps_wake_up_timer">Интервал за задействане на GPS-a</string>
     <string name="map_preferred_locale_descr">Предпочитан език за етикетите на картата (ако не е наличен, ще се използва английски или местния език).</string>
     <string name="map_preferred_locale">Предпочитан език на картата</string>
-    <string name="live_monitoring_m">Онлайн следа (изисква се GPX)</string>
+    <string name="live_monitoring_m">Проследяване в реално време (изисква GPX)</string>
     <string name="shared_string_my_places">Моите места</string>
     <string name="live_monitoring_m_descr">Изпращане на изминатия път по Интернет, при условие, че записът в GPX е включен.</string>
-    <string name="live_monitoring_start">Старт на онлайн следата</string>
-    <string name="live_monitoring_stop">Стоп на онлайн следата</string>
+    <string name="live_monitoring_start">Начало на проследяване в реално време</string>
+    <string name="live_monitoring_stop">Край на проследяване в реално време</string>
     <string name="rendering_attr_hideAccess_name">Скриване на ограниченията за достъп</string>
     <string name="rendering_attr_showAccess_name">Покажи ограниченията за достъп</string>
     <string name="rendering_attr_showSurfaceGrade_name">Покажи състоянието на пътя</string>
@@ -2002,8 +2002,8 @@
     <string name="monitoring_min_distance_descr_side_effect">Странични ефекти: Периодите на почивка не се записват изобщо или са отбелязани само от една точка. Малките движение в реалният живот може да бъдат филтрирани. Вашият файл съдържа по-малко информация за последваща обработка и има по-лоши статистики заради филтрирането на очевидно ненужни точки по време на запис, докато в същото време ще запази потенциалните артефакти причинени от лошо приемане на GPS модула.</string>
     <string name="monitoring_min_distance_descr_recommendation">Препоръка: Настройка от 5 метра ще работи добре, ако нямате по-детайлни изисквания.</string>
     <string name="live_monitoring_time_buffer">Времеви буфер</string>
-    <string name="live_monitoring_tracking_interval">Интервал на следене</string>
-    <string name="live_monitoring_adress">Уеб адрес</string>
+    <string name="live_monitoring_tracking_interval">Интервал за проследвяане</string>
+    <string name="live_monitoring_adress">Адрес</string>
     <string name="rearrange_categories">Подредба на категориите</string>
     <string name="create_custom_categories_list_promo">Може да променяте подредбата на списъкът, да скриете ненужните категории. Може да импортирате или експортирате промените чрез профилите.</string>
     <string name="add_new_custom_category_button_promo">Създайте собствена категория, избирайки една или няколко от категориите.</string>
@@ -2113,7 +2113,7 @@
     <string name="utm_format_descr">OsmAnd използва стандарта UTM, който е подобен, но не е еднакъв с формата UTM NATO .</string>
     <string name="configure_profile_info">Настройки за профил:</string>
     <string name="list_of_installed_plugins">Инсталирани добавки</string>
-    <string name="live_monitoring">Онлайн проследяване</string>
+    <string name="live_monitoring">Проследяване в реално време</string>
     <string name="accessibility_prefs_descr">Изберете икона, цвят и име</string>
     <string name="multimedia_notes_prefs_descr">Размер на картината, качество на аудио и видео</string>
     <string name="monitoring_prefs_descr">Маршрутизация, точност на регистриране</string>
@@ -2653,4 +2653,6 @@
     <string name="shared_string_gpx_track">Следа</string>
     <string name="rendering_attr_highway_class_track_name">Следа</string>
     <string name="live_monitoring_descr">Дава възможност за споделяне на текущото местоположение при записване на маршрута.</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Укажете времето за съхранение на местоположението при отсъствие на връзка</string>
+    <string name="circle_settings">Настройки на кръга</string>
 </resources>

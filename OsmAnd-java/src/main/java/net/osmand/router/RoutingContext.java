@@ -31,6 +31,7 @@ import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
+import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.router.RoutingConfiguration.DirectionPoint;
@@ -185,17 +186,17 @@ public class RoutingContext {
 				config.heuristicCoefficient);
 	}
 	
-	public void initStartAndTargetPoints(RouteSegment start, RouteSegment end) {
+	public void initStartAndTargetPoints(RouteSegmentPoint start, RouteSegmentPoint end) {
 		initTargetPoint(end);
-		startX = start.road.getPoint31XTile(start.getSegmentStart());
-		startY = start.road.getPoint31YTile(start.getSegmentStart());
+		startX = start.preciseX;
+		startY = start.preciseY;
 		startRoadId = start.road.getId();
 		startSegmentInd = start.getSegmentStart();
 	}
 
-	public void initTargetPoint(RouteSegment end) {
-		targetX = end.road.getPoint31XTile(end.getSegmentStart());
-		targetY = end.road.getPoint31YTile(end.getSegmentStart());
+	public void initTargetPoint(RouteSegmentPoint end) {
+		targetX = end.preciseX;
+		targetY = end.preciseY;
 		targetRoadId = end.road.getId();
 		targetSegmentInd = end.getSegmentStart();
 	}

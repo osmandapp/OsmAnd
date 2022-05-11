@@ -4657,4 +4657,8 @@
     <string name="route_maneuvers_desc">Estos widgets se activan durante la navegación para mostrar información como la distancia, la hora de llegada o de salida, los próximos giros, el rumbo, el nombre de la calle actual, la información de los carriles, la velocidad máxima, las alertas de aproximación, los PDI y los puntos de referencia.</string>
     <string name="routing_attr_avoid_4wd_only_name">Evitar caminos para 4x4</string>
     <string name="routing_attr_avoid_4wd_only_description">Evita los caminos adecuados solo para vehículos todo terreno 4x4</string>
+    <string name="compass_on_circles">Brújula en círculos</string>
+    <string name="distance_circles">Círculos de distancia</string>
+    <string name="circle_settings">Ajustes de los círculos</string>
+    <string name="colour_of_circles">Color de los círculos</string>
 </resources>

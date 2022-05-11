@@ -1,6 +1,5 @@
 package net.osmand.plus.myplaces.ui;
 
-import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
@@ -36,14 +35,11 @@ public class DirectionArrowsCard extends MapBaseCard {
 		final CompoundButton compoundButton = view.findViewById(R.id.compound_button);
 		compoundButton.setChecked(trackDrawInfo.isShowArrows());
 
-		view.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				boolean checked = !compoundButton.isChecked();
-				compoundButton.setChecked(checked);
-				trackDrawInfo.setShowArrows(checked);
-				mapActivity.refreshMap();
-			}
+		view.setOnClickListener(v -> {
+			boolean checked = !compoundButton.isChecked();
+			compoundButton.setChecked(checked);
+			trackDrawInfo.setShowArrows(checked);
+			mapActivity.refreshMap();
 		});
 	}
 }

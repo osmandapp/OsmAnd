@@ -3775,7 +3775,7 @@
     <string name="poi_video_yes">Sí;Video</string>
     <string name="poi_video_no">No</string>
     <string name="poi_internet_access_fee_customers">Conexión a Internet: clientes</string>
-    <string name="poi_traffic_signals_sound_locate">Sólo se permite al caminar</string>
+    <string name="poi_traffic_signals_sound_locate">Sólo para encontrar el poste</string>
     <string name="poi_tactile_paving_contrasted">Contrastado</string>
     <string name="poi_tactile_paving_primitive">Primitivo</string>
     <string name="poi_tactile_paving_incorrect">Incorrecto</string>

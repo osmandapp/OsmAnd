@@ -4657,4 +4657,8 @@
     <string name="route_maneuvers">Маневри на маршруті</string>
     <string name="routing_attr_avoid_4wd_only_description">Уникати доріг, призначених лише для автомобілів з повним приводом</string>
     <string name="routing_attr_avoid_4wd_only_name">Уникати доріг 4х4</string>
+    <string name="colour_of_circles">Колір кіл</string>
+    <string name="compass_on_circles">Компас на колах</string>
+    <string name="distance_circles">Відстані-кола</string>
+    <string name="circle_settings">Налаштування кола</string>
 </resources>

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.TypedValue;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,7 +17,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTwoChoicesButton;
-import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTwoChoicesButton.OnBottomBtnClickListener;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.configmap.ConfigureMapUtils;
@@ -131,27 +129,19 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 							.setLeftBtnSelected(!streetLightsNightPref.get())
 							.setLeftBtnTitleRes(R.string.shared_string_always)
 							.setRightBtnTitleRes(R.string.shared_string_night_map)
-							.setOnBottomBtnClickListener(new OnBottomBtnClickListener() {
-								@Override
-								public void onBottomBtnClick(boolean onLeftClick) {
-									streetLightsNightPref.set(!onLeftClick);
-								}
-							})
+							.setOnBottomBtnClickListener(onLeftClick -> streetLightsNightPref.set(!onLeftClick))
 							.setCompoundButtonColor(selectedProfileColor)
 							.setChecked(pref.get())
 							.setTitle(propertyName)
 							.setIconHidden(true)
 							.setLayoutId(R.layout.bottom_sheet_item_two_choices)
-							.setOnClickListener(new View.OnClickListener() {
-								@Override
-								public void onClick(View view) {
-									boolean checked = !pref.get();
-									pref.set(checked);
-									streetLightsNightPref.set(false);
-									item[0].setChecked(checked);
-									item[0].setIsLeftBtnSelected(true);
-									setupHeightAndBackground(getView());
-								}
+							.setOnClickListener(view -> {
+								boolean checked = !pref.get();
+								pref.set(checked);
+								streetLightsNightPref.set(false);
+								item[0].setChecked(checked);
+								item[0].setIsLeftBtnSelected(true);
+								setupHeightAndBackground(getView());
 							})
 							.create();
 					items.add(item[0]);
@@ -163,13 +153,10 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 							.setTitle(propertyName)
 							.setIconHidden(true)
 							.setLayoutId(R.layout.bottom_sheet_item_with_switch)
-							.setOnClickListener(new View.OnClickListener() {
-								@Override
-								public void onClick(View view) {
-									boolean checked = !pref.get();
-									pref.set(checked);
-									item[0].setChecked(checked);
-								}
+							.setOnClickListener(view -> {
+								boolean checked = !pref.get();
+								pref.set(checked);
+								item[0].setChecked(checked);
 							})
 							.create();
 					items.add(item[0]);
