@@ -11,15 +11,12 @@
 	Thx - Hardy
 -->
 
-<<<<<<< HEAD
     <string name="routing_attr_avoid_fords_name">Avoid fords</string>
     <string name="routing_attr_avoid_fords_description">Avoid fords</string>
-=======
     <string name="colour_of_circles">Colour of circles</string>
     <string name="compass_on_circles">Compass on circles</string>
     <string name="distance_circles">Distance-circles</string>
     <string name="circle_settings">Circle settings</string>
->>>>>>> 18ddece667640b7e7ee8e18a3286b222379edad8
     <string name="routing_attr_avoid_4wd_only_name">Avoid 4WD roads</string>
     <string name="routing_attr_avoid_4wd_only_description">Avoid roads only suitable for 4WD only vehicles</string>
     <string name="bearing_secondary_desc">You can change format of displayed data in: %1$s – %2$s – %3$s.</string>
