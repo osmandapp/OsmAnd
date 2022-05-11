@@ -4649,4 +4649,6 @@
     <string name="route_maneuvers_desc">A navigációs widgetek a navigáció során érhetőek el, hogy olyan információkat jelenítsenek meg, mint a távolság, a várható érkezési vagy hátralévő idő, következő kanyarodás, irány, aktuális utcanév, sávinformációk, maximális sebesség, közeledő riasztások, POI-k, útpontok.</string>
     <string name="routing_attr_avoid_4wd_only_name">Nehéz terep nélkül</string>
     <string name="routing_attr_avoid_4wd_only_description">Csak 4-kerék meghajtású járművek számára alkalmas utak elkerülése</string>
+    <string name="circle_settings">Kör beállításai</string>
+    <string name="colour_of_circles">A körök színe</string>
 </resources>

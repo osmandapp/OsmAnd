@@ -4109,4 +4109,16 @@
     <string name="av_def_action_choose">Па запыце</string>
     <string name="save_track_to_gpx_descrp">Аўтаматычны запуск запісу следу падчас навігацыі і аўтаматычнае захаванне пасля завяршэння.</string>
     <string name="internal_app_storage_description">Унутранае сховішча, схаванае ад іншых карыстальнікаў і праграм, таму толькі OsmAnd мае доступ да вашых даных.</string>
+    <string name="widget_secondary_desc_part_of">Частка ўбудовы %1$s.</string>
+    <string name="coordinates_widget_secondary_desc">Фармат адлюстравання каардынат можна змяніць на: %1$s-%2$s-%3$s.</string>
+    <string name="routing_attr_avoid_4wd_only_name">Пазбягаць прасёлачных дарог (4х4)</string>
+    <string name="routing_attr_avoid_4wd_only_description">Пазбягаць дарог, прызначаных для аўтамабіляў з поўным прывадам (4х4)</string>
+    <string name="elevation_profile_widget_desc">Віджэт паказвае профіль вышыні і ўхілу бягучага маршруту.</string>
+    <string name="parking_widget_desc">Віджэт, які паказвае адлегласць ад сярэдзіны экрана да паркоўкі.</string>
+    <string name="compass_on_circles">Компас на акружнасці</string>
+    <string name="distance_circles">Акружнасці-адлегласці</string>
+    <string name="circle_settings">Налады акружнасці</string>
+    <string name="bearing_secondary_desc">Вы можаце змяніць фармат адлюстравання даных на: %1$s-%2$s-%3$s.</string>
+    <string name="mapillary_widget_desc">Віджэт, які забяспечвае хуткі доступ да праграмы Mapillary для дадання здымкаў вуліц.</string>
+    <string name="av_notes_choose_action_widget_desc">Абярыце дзеянне.</string>
 </resources>

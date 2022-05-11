@@ -734,7 +734,7 @@
     <string name="route_updated_loc_found">A aguardar a posição para calcular a rota</string>
     <string name="continue_follow_previous_route_auto">Continuar a navegação a seguir que ficou antes inacabada\? (%1$s segundos)</string>
     <string name="show_cameras">Radares de velocidade</string>
-    <string name="show_traffic_warnings">Avisos de moderação de velocidade</string>
+    <string name="show_traffic_warnings">Avisos para abrandar</string>
     <string name="avoid_toll_roads">Evitar estradas com portagem</string>
     <string name="map_widget_top_text">Nome da rua</string>
     <string name="map_widget_config">Configuração do ecrã</string>
@@ -758,7 +758,7 @@
     <string name="bg_service_sleep_mode_on">Parar
 \na execução em segundo plano</string>
     <string name="show_warnings_title">Mostrar alertas…</string>
-    <string name="show_warnings_descr">Configure avisos de moderação de velocidade (limites de velocidade, portagens, lombas, passadeiras, túneis), radares e informação da via de trânsito.</string>
+    <string name="show_warnings_descr">Configure avisos para abrandar (limites de velocidade, sinal STOP, lombas, passadeiras, túneis), radares e informação da via de trânsito a tomar.</string>
     <string name="avoid_motorway">Evitar autoestradas</string>
     <string name="snap_to_road">Posicionar na estrada mais próxima</string>
     <string name="osmand_short_description_80_chars">Visualização e navegação móvel de mapas globais do OSM offline e online</string>
@@ -771,7 +771,7 @@
     <string name="map_widget_vector_attributes">Atributos de renderização</string>
     <string name="map_widget_renderer">Estilo do mapa</string>
     <string name="layer_map_appearance">Configurar ecrã</string>
-    <string name="show_lanes">Mostrar vias de trânsito</string>
+    <string name="show_lanes">Vias de trânsito</string>
     <string name="avoid_unpaved">Evitar estradas não pavimentadas</string>
     <string name="avoid_ferries">Evitar balsas/ferries</string>
     <string name="avoid_in_routing_title">Evitar…</string>
@@ -962,11 +962,11 @@
     <string name="driving_region_europe_asia">Europa, Ásia, América Latina e similares</string>
     <string name="driving_region_uk">Reino Unido, Índia e similares</string>
     <string name="speak_title">Avisar por voz…</string>
-    <string name="speak_descr">Configure os avisos por voz de nomes de ruas, avisos de moderação de velocidade (portagens, lombas, passadeiras), radares e limites de velocidade.</string>
+    <string name="speak_descr">Configure os avisos por voz de nomes de ruas, avisos para afrouxar (sinal de STOP, lombas), radares e limites de velocidade.</string>
     <string name="speak_street_names">Nomes das ruas (TTS)</string>
     <string name="speak_speed_limit">Limite de velocidade</string>
     <string name="speak_cameras">Radares de velocidade</string>
-    <string name="speak_traffic_warnings">Avisos de moderação de velocidade</string>
+    <string name="speak_traffic_warnings">Avisos para abrandar</string>
     <string name="osb_author_or_password_not_specified">Especifique o nome de utilizador e a palavra-passe no OSM em \"Configurações\"</string>
     <string name="clear_intermediate_points">Remover destinos intermédios</string>
     <string name="keep_intermediate_points">Manter destinos intermédios</string>
@@ -1236,10 +1236,10 @@
     <string name="traffic_warning_stop">Sinal de stop</string>
     <string name="traffic_warning_calming">Redutor de velocidade</string>
     <string name="traffic_warning_speed_camera">Radar de velocidade</string>
-    <string name="traffic_warning">Aviso de moderação de velocidade</string>
+    <string name="traffic_warning">Aviso para afrouxar</string>
     <string name="speak_favorites">Favoritos nas redondezas</string>
     <string name="speak_poi">POIs nas redondezas</string>
-    <string name="way_alarms">Avisos de moderação de velocidade</string>
+    <string name="way_alarms">Avisos para afrouxar</string>
     <string name="sleep_mode_stop_dialog">Parar o GPS quando em segundo plano\?</string>
     <string name="stop_navigation_service">Parar</string>
     <string name="confirm_every_run">Perguntar sempre</string>
@@ -3089,7 +3089,7 @@
     <string name="shared_string_track_is_saved">O trilho %s está guardado</string>
     <string name="rendering_attr_showLez_description">Mostrar zonas de baixas emissões (proibida circulação de veículos poluentes) no mapa. Não afeta o roteamento.</string>
     <string name="rendering_attr_showLez_name">Mostrar zonas de baixas emissões poluentes</string>
-    <string name="temporary_conditional_routing">Considerar limitações temporárias</string>
+    <string name="temporary_conditional_routing">Aplicar limitações temporárias (obras...)</string>
     <string name="shared_string_default">Predefinido</string>
     <string name="new_route_calculated_dist_dbg">Rota: distância %1$s; tempo do roteador %2$s
 \nCálculo: %3$.1f seg; %4$d estradas; %5$d mosaicos</string>
@@ -4572,7 +4572,7 @@
     <string name="rendering_attr_showBusRoutes_name">Rotas de autocarro</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">Rotas de troleicarro</string>
     <string name="rendering_attr_showShareTaxiRoutes_name">Rotas de vaivem</string>
-    <string name="map_markers_bar">Barra de marcadores de mapa</string>
+    <string name="map_markers_bar">Marcadores no mapa</string>
     <string name="shared_string_visible_widgets">Widgets visíveis</string>
     <string name="top_widgets_panel">Painel de cima</string>
     <string name="bottom_widgets_panel">Painel de baixo</string>
@@ -4582,7 +4582,7 @@
     <string name="simulation_real_mode_title">Simulação realista</string>
     <string name="simulation_constant_mode_desc">A simulação será feita na velocidade constante selecionada.</string>
     <string name="simulation_constant_mode_title">Velocidade fixa</string>
-    <string name="simulation_preview_mode_title">Modo de visualização rápida</string>
+    <string name="simulation_preview_mode_title">Visualização rápida</string>
     <string name="apply_to_existing_favorites_descr">Aplicar alterações aos pontos favoritos existentes do grupo ou apenas aos novos\?</string>
     <string name="apply_to_existing">Aplicar aos existentes</string>
     <string name="apply_only_to_new_points">Aplicar apenas aos novos</string>
@@ -4662,4 +4662,8 @@
     <string name="shared_string_speed">Velocidade</string>
     <string name="app_mode_mountain_bicycle">Bicicleta de montanha</string>
     <string name="lanes_widgets_desc">O widget das vias de trânsito mostra a disposição atual das vias de trânsito na estrada em que se encontra e destaca as vias que deve tomar para seguir a rota ativa.</string>
+    <string name="compass_on_circles">Compasso nos círculos</string>
+    <string name="distance_circles">Círculos-distância</string>
+    <string name="circle_settings">Configurações dos círculos</string>
+    <string name="colour_of_circles">Cor dos círculos</string>
 </resources>

@@ -3900,4 +3900,17 @@
     <string name="poi_karate">Каратэ</string>
     <string name="poi_climbing_grade_saxon_min">Найпрасцейшы маршрут (саксонская класіфікацыя)</string>
     <string name="poi_climbing_grade_french_min">Найпрасцейшы маршрут (французкая класіфікацыя)</string>
+    <string name="poi_water_source_water_tank">Рэзервуар</string>
+    <string name="poi_water_source_well">Крыніца</string>
+    <string name="poi_ranger_station">Лясніцтва</string>
+    <string name="poi_water_source_lake">Возера</string>
+    <string name="poi_weightbridge">Аўтамабільныя вагі;Загрузка аўтамабіляў</string>
+    <string name="poi_waste_transfer_station">Станцыя перапампоўкі адходаў</string>
+    <string name="poi_vaccination_covid19">Вакцынацыя: COVID19</string>
+    <string name="poi_water_source_tube_well">Свідравіна</string>
+    <string name="poi_water_source_water_works">Водазабор</string>
+    <string name="poi_water_source_tap">Кран</string>
+    <string name="poi_water_source_powered_pump">Электрычная помпа</string>
+    <string name="poi_water_source_river">Рака</string>
+    <string name="poi_lavoir">Грамадская пральня</string>
 </resources>
