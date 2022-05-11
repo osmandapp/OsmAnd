@@ -236,16 +236,32 @@ public class BinaryRoutePlanner {
 		}
 		if (initSegment != null) {
 			initSegment.setParentRoute(RouteSegment.NULL);
-			int prevx = initSegment.road.getPoint31XTile(initSegment.getSegmentStart());
-			int prevy = initSegment.road.getPoint31YTile(initSegment.getSegmentStart());
-			int x = initSegment.road.getPoint31XTile(initSegment.getSegmentEnd());
-			int y = initSegment.road.getPoint31YTile(initSegment.getSegmentEnd());
-			double fullDist = squareRootDist(prevx, prevy, x, y);
-			double distFromStart = squareRootDist(x, y, !reverseSearchWay ? ctx.startX : ctx.targetX, !reverseSearchWay ? ctx.startY : ctx.targetY);
 			// compensate first segment difference
-			initSegment.distanceFromStart += distFromStart - fullDist;
+			initSegment.distanceFromStart += initDistFromStart(ctx, initSegment, reverseSearchWay);
 		}
 		return initSegment;
+	}
+	
+	private double initDistFromStart(RoutingContext ctx, RouteSegment initSegment, boolean reverseSearchWay) {
+		int prevX = initSegment.road.getPoint31XTile(initSegment.getSegmentStart());
+		int prevY = initSegment.road.getPoint31YTile(initSegment.getSegmentStart());
+		int x = initSegment.road.getPoint31XTile(initSegment.getSegmentEnd());
+		int y = initSegment.road.getPoint31YTile(initSegment.getSegmentEnd());
+		
+		float priority = ctx.getRouter().defineSpeedPriority(initSegment.road);
+		float speed = (ctx.getRouter().defineRoutingSpeed(initSegment.road) * priority);
+		
+		if (speed == 0) {
+			speed = (ctx.getRouter().getDefaultSpeed() * priority);
+		}
+		// speed can not exceed max default speed according to A*
+		if (speed > ctx.getRouter().getMaxSpeed()) {
+			speed = ctx.getRouter().getMaxSpeed();
+		}
+		double fullDist = squareRootDist(prevX, prevY, x, y);
+		double distFromStart = squareRootDist(x, y, !reverseSearchWay ? ctx.startX : ctx.targetX, !reverseSearchWay ? ctx.startY : ctx.targetY);
+		
+		return (distFromStart - fullDist) / speed;
 	}
 
 

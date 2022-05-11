@@ -150,14 +150,10 @@ public class RouteTestingTest {
 				System.out.println("This is test on hanging routing");
 				break;
 			}
-			if (params.containsKey("maxRouteLength")) {
-				float maxRouteLength = Float.parseFloat(params.get("maxRouteLength"));
-				float routeLength = 0;
-				for (RouteSegmentResult segment : routeSegments) {
-					routeLength += segment.getDistance();
-				}
-				Assert.assertTrue("Calculated route length " + routeLength + " is greater then max route length " + maxRouteLength, routeLength < maxRouteLength);
-			}
+			
+			checkRouteLength(params, routeSegments);
+			checkRoutingTime(ctx, params);
+			
 			for (Entry<String, String> es : expectedResults.entrySet()) {
 				long id = RouterUtilTest.getRoadId(es.getKey());
 				switch (es.getValue()) {
@@ -175,6 +171,24 @@ public class RouteTestingTest {
 						break;
 				}
 			}
+		}
+	}
+	
+	private void checkRoutingTime(RoutingContext ctx, Map<String, String> params) {
+		if (params.containsKey("maxRoutingTime")) {
+			float maxRoutingTime = Float.parseFloat(params.get("maxRoutingTime"));
+			Assert.assertTrue("Calculated routing time " + ctx.routingTime + " is bigger then max routing time " + maxRoutingTime, ctx.routingTime < maxRoutingTime);
+		}
+	}
+	
+	private void checkRouteLength(Map<String, String> params, List<RouteSegmentResult> routeSegments) {
+		if (params.containsKey("maxRouteLength")) {
+			float maxRouteLength = Float.parseFloat(params.get("maxRouteLength"));
+			float routeLength = 0;
+			for (RouteSegmentResult segment : routeSegments) {
+				routeLength += segment.getDistance();
+			}
+			Assert.assertTrue("Calculated route length " + routeLength + " is greater then max route length " + maxRouteLength, routeLength < maxRouteLength);
 		}
 	}
 }
