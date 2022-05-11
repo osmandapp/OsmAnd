@@ -4612,6 +4612,22 @@
 \n
 \n• Correcciones: actualización automática de teselas en los mapas en línea.
 \n
+\n• Nuevos widgets: rumbo verdadero. Grabación del viaje: descenso, ascenso, duración.
+\n
+\n• Teselas SRTM en línea.
+\n
+\n• Ahora se admiten coordenadas de la red suiza CH1903 / CH1903+.
+\n
+\n• Reemplazo de coordenadas UTM como 31T en lugar de 31N.
+\n
+\n• Gráficos: el análisis en el mapa ahora muestra los datos de dos ejes.
+\n
+\n• El estilo de mapa «Mapnik» fue reemplazado por el nuevo estilo «OSM-Carto».
+\n
+\n• Todos los elementos relacionados con OpenStreetMap se han combinado en un solo grupo en el menú «Configurar mapa».
+\n
+\n• Wikipedia: se ha corregido la visibilidad de las imágenes en hebreo.
+\n
 \n</string>
     <string name="turn_on_public_transport_description">Activar para ver rutas de transporte público en el mapa.</string>
     <string name="bearing_secondary_desc">Puedes cambiar el formato de los datos mostrados en: %1$s → %2$s → %3$s.</string>
