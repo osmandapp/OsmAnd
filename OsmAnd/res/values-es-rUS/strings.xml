@@ -4610,6 +4610,22 @@
 \n
 \n• Correcciones: actualización automática de teselas en los mapas en línea.
 \n
+\n• Nuevos widgets: rumbo verdadero. Grabación del viaje: descenso, ascenso, duración.
+\n
+\n• Teselas SRTM en línea.
+\n
+\n• Ahora se admiten coordenadas de la red suiza CH1903 / CH1903+.
+\n
+\n• Reemplazo de coordenadas UTM como 31T en lugar de 31N.
+\n
+\n• Gráficos: el análisis en el mapa ahora muestra los datos de dos ejes.
+\n
+\n• El estilo de mapa «Mapnik» fue reemplazado por el nuevo estilo «OSM-Carto».
+\n
+\n• Todos los elementos relacionados con OpenStreetMap se han combinado en un solo grupo en el menú «Configurar mapa».
+\n
+\n• Wikipedia: se ha corregido la visibilidad de las imágenes en hebreo.
+\n
 \n</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">Intermedia</string>
     <string name="routing_attr_avoid_4wd_only_name">Evitar caminos para 4x4</string>
