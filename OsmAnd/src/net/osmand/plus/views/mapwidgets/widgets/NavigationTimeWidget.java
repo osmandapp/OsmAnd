@@ -67,10 +67,10 @@ public abstract class NavigationTimeWidget extends TextInfoWidget {
 			if (shouldUpdate) {
 				cachedTime = arrivalTime;
 				if (DateFormat.is24HourFormat(app)) {
-					setText(DateFormat.format("k:mm", leftSeconds).toString(), null);
+					setText(DateFormat.format("k:mm", arrivalTime).toString(), null);
 				} else {
-					setText(DateFormat.format("h:mm", leftSeconds).toString(),
-							DateFormat.format("aa", leftSeconds).toString());
+					setText(DateFormat.format("h:mm", arrivalTime).toString(),
+							DateFormat.format("aa", arrivalTime).toString());
 				}
 			}
 		}
