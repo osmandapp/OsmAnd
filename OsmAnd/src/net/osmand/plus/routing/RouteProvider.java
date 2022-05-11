@@ -81,6 +81,7 @@ public class RouteProvider {
 	private static final int MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT = 60;
 	private static final int ADDITIONAL_DISTANCE_FOR_START_POINT = 300;
 	private static final int MIN_STRAIGHT_DIST = 50000;
+	private static final int MIN_INTERMEDIATE_DIST = 10;
 
 	public static Location createLocation(WptPt pt){
 		Location loc = new Location("OsmandRouteProvider");
@@ -178,7 +179,7 @@ public class RouteProvider {
 		List<Location> locs = new ArrayList<Location>(rcr.getRouteLocations());
 		try {
 			int[] startI = new int[]{0};
-			int[] endI = new int[]{locs.size()}; 
+			int[] endI = new int[]{locs.size()};
 			locs = findStartAndEndLocationsFromRoute(locs, params.start, params.end, startI, endI);
 			List<RouteDirectionInfo> directions = calcDirections(startI, endI, rcr.getRouteDirections());
 			insertInitialSegment(params, locs, directions, true);
@@ -332,7 +333,7 @@ public class RouteProvider {
 		for (RouteDirectionInfo info : gpxDirections) {
 			// recalculate
 			info.distance = 0;
-			info.afterLeftTime = 0;			
+			info.afterLeftTime = 0;
 		}
 
 		return new RouteCalculationResult(gpxRoute, gpxDirections, routeParams,
@@ -362,19 +363,7 @@ public class RouteProvider {
 		rp.extraIntermediates = true;
 		rp.intermediates = new ArrayList<>();
 
-		int closest = 0;
-		if (!routeParams.gpxRoute.passWholeRoute) {
-			double maxDist = Double.POSITIVE_INFINITY;
-			for (int i = 0; i < intermediates.size(); i++) {
-				Location loc = intermediates.get(i);
-				double dist = MapUtils.getDistance(loc.getLatitude(), loc.getLongitude(),
-						rp.start.getLatitude(), rp.start.getLongitude());
-				if (dist <= maxDist) {
-					closest = i;
-					maxDist = dist;
-				}
-			}
-		}
+		int closest = findClosestIntermediate(routeParams, intermediates);
 		for (int i = closest; i < intermediates.size(); i++) {
 			Location w = intermediates.get(i);
 			rp.intermediates.add(new LatLon(w.getLatitude(), w.getLongitude()));
@@ -390,6 +379,25 @@ public class RouteProvider {
 			return findStraightRoute(rp);
 		}
 		return findVectorMapsRoute(rp, false);
+	}
+
+	private int findClosestIntermediate(RouteCalculationParams params, List<Location> intermediates) {
+		int closest = 0;
+		if (!params.gpxRoute.passWholeRoute) {
+			double maxDist = Double.POSITIVE_INFINITY;
+			for (int i = 0; i < intermediates.size(); i++) {
+				Location loc = intermediates.get(i);
+				double dist = MapUtils.getDistance(loc.getLatitude(), loc.getLongitude(),
+						params.start.getLatitude(), params.start.getLongitude());
+				if (dist <= MIN_INTERMEDIATE_DIST) {
+					return i;
+				} else if (dist < maxDist) {
+					closest = i;
+					maxDist = dist;
+				}
+			}
+		}
+		return closest;
 	}
 
 	private List<RouteDirectionInfo> calcDirections(int[] startI, int[] endI,
@@ -866,7 +874,7 @@ public class RouteProvider {
 //			ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
 //			activityManager.getMemoryInfo(memoryInfo);
 //			int avl = (int) (memoryInfo.availMem / (1 << 20));
-			int max = (int) (Runtime.getRuntime().maxMemory() / (1 << 20)); 
+			int max = (int) (Runtime.getRuntime().maxMemory() / (1 << 20));
 			int avl = (int) (Runtime.getRuntime().freeMemory() / (1 << 20));
 			String s = " (" + avl + " MB available of " + max  + ") ";
 			return new RouteCalculationResult("Not enough process memory "+ s);
