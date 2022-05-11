@@ -1,24 +1,18 @@
 package net.osmand.plus.chooseplan;
 
-import android.graphics.drawable.Drawable;
-import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 
 public class NoPurchasesCard extends BaseCard {
 
-	public NoPurchasesCard(@NonNull FragmentActivity activity,
-	                       boolean usedOnMap) {
-		super(activity, usedOnMap);
+	public NoPurchasesCard(@NonNull FragmentActivity activity) {
+		super(activity, false);
 	}
 
 	@Override
@@ -33,18 +27,8 @@ public class NoPurchasesCard extends BaseCard {
 		String infoPurchases = String.format(app.getString(R.string.empty_purchases_description), restorePurchases);
 		infoDescription.setText(infoPurchases);
 
-		View btnLearnMore = view.findViewById(R.id.button_learn_more);
-		UiUtilities.setupDialogButton(nightMode, btnLearnMore, DialogButtonType.PRIMARY, R.string.shared_string_learn_more);
-		btnLearnMore.setOnClickListener(v -> {
-			if (activity != null) {
-				ChoosePlanFragment.showDefaultInstance(activity);
-			}
-		});
-
-		int bgResId = R.drawable.promo_banner_bg;
-		int bgColor = ColorUtilities.getColorWithAlpha(getActiveColor(), 0.15f);
-		View background = view.findViewById(R.id.banner_background);
-		Drawable bgDrawable = app.getUIUtilities().getPaintedIcon(bgResId, bgColor);
-		AndroidUtils.setBackground(background, bgDrawable);
+		LinearLayout cardsContainer = view.findViewById(R.id.cards_container);
+		cardsContainer.removeAllViews();
+		cardsContainer.addView(new ExploreOsmAndPlansCard(activity).build(activity));
 	}
 }
