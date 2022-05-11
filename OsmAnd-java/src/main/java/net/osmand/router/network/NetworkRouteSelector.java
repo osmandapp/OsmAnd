@@ -240,7 +240,10 @@ public class NetworkRouteSelector {
 		connectToLongestChain(chains, endChains, CONNECT_POINTS_DISTANCE_STEP);
 		connectSimpleMerge(chains, endChains, 0, CONNECT_POINTS_DISTANCE_STEP);
 		connectSimpleMerge(chains, endChains, CONNECT_POINTS_DISTANCE_MAX / 2, CONNECT_POINTS_DISTANCE_MAX);
-
+		for (List<NetworkRouteSegmentChain> chainList : chains.values()) {
+			NetworkRouteSegmentChain first = chainList.get(0);
+			chainReverse(chains, endChains, first);
+		}
 		List<NetworkRouteSegmentChain> lst = flattenChainStructure(chains);
 		GPXFile fl = createGpxFile(lst);
 		res.put(routeKey, fl);
