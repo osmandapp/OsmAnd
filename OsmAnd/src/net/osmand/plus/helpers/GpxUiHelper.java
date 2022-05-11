@@ -2240,8 +2240,10 @@ public class GpxUiHelper {
 					SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
 					GPXTrackAnalysis trackAnalysis = analyses != null ? analyses : selectedGpxFile.getTrackAnalysis(app);
 					SelectedGpxPoint selectedGpxPoint = new SelectedGpxPoint(selectedGpxFile, selectedPoint);
-					TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint, null,
-							null, null, false, trackAnalysis, routeSegment);
+					Bundle params = new Bundle();
+					params.putBoolean(TrackMenuFragment.ADJUST_MAP_POSITION, false);
+					TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint,
+							trackAnalysis, routeSegment, params);
 				} else {
 					LOG.error(errorMessage);
 				}

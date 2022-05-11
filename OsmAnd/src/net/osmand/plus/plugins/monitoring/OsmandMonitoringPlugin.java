@@ -19,6 +19,9 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.monitoring.widgets.TripRecordingDistanceWidget;
+import net.osmand.plus.plugins.monitoring.widgets.TripRecordingElevationWidget.TripRecordingDownhillWidget;
+import net.osmand.plus.plugins.monitoring.widgets.TripRecordingElevationWidget.TripRecordingUphillWidget;
+import net.osmand.plus.plugins.monitoring.widgets.TripRecordingTimeWidget;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
@@ -28,6 +31,8 @@ import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.track.helpers.SavingTrackHelper.SaveGpxResult;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.mapwidgets.WidgetGroup;
+import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
@@ -46,7 +51,10 @@ import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_MONITORING;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_DOWNHILL;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_UPHILL;
 
 public class OsmandMonitoringPlugin extends OsmandPlugin {
 
@@ -58,15 +66,18 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	private final LiveMonitoringHelper liveMonitoringHelper;
 
 	private MapActivity mapActivity;
-	private TextInfoWidget monitoringControl;
 	private boolean isSaving;
 	private boolean showDialogWhenActivityResumed;
+
+	private TextInfoWidget distanceWidget;
+	private TextInfoWidget timeWidget;
+	private TextInfoWidget uphillWidget;
+	private TextInfoWidget downhillWidget;
 
 	public OsmandMonitoringPlugin(OsmandApplication app) {
 		super(app);
 		liveMonitoringHelper = new LiveMonitoringHelper(app);
-		final List<ApplicationMode> am = ApplicationMode.allPossibleValues();
-		ApplicationMode.regWidgetVisibility(TRIP_RECORDING.id, am.toArray(new ApplicationMode[0]));
+		registerWidgetsVisibility();
 		settings = app.getSettings();
 		pluginPreferences.add(settings.SAVE_TRACK_TO_GPX);
 		pluginPreferences.add(settings.SAVE_TRACK_INTERVAL);
@@ -82,6 +93,13 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		pluginPreferences.add(settings.LIVE_MONITORING_URL);
 		pluginPreferences.add(settings.LIVE_MONITORING_INTERVAL);
 		pluginPreferences.add(settings.LIVE_MONITORING_MAX_INTERVAL_TO_SEND);
+	}
+
+	private void registerWidgetsVisibility() {
+		for (WidgetParams widget : WidgetGroup.TRIP_RECORDING.getWidgets()) {
+			ApplicationMode[] appModes = widget == TRIP_RECORDING_DISTANCE ? null : new ApplicationMode[] {};
+			ApplicationMode.regWidgetVisibility(widget.id, appModes);
+		}
 	}
 
 	@Override
@@ -135,33 +153,61 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	@Override
 	public void registerLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
 		if (mapActivity != null) {
-			registerWidget(mapActivity);
+			registerWidgets(mapActivity);
 		}
-	}
-
-	private void registerWidget(@NonNull MapActivity mapActivity) {
-		MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
-		monitoringControl = new TripRecordingDistanceWidget(mapActivity);
-		layer.registerWidget(TRIP_RECORDING, monitoringControl);
-		layer.recreateControls();
 	}
 
 	@Override
 	public void updateLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
 		if (mapActivity != null) {
 			if (isActive()) {
-				if (monitoringControl == null) {
-					registerWidget(mapActivity);
-				}
+				registerWidgets(mapActivity);
 			} else {
-				if (monitoringControl != null) {
-					MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
-					layer.removeSideWidget(monitoringControl);
-					layer.recreateControls();
-					monitoringControl = null;
-				}
+				unregisterWidgets(mapActivity);
 			}
 		}
+	}
+
+	private void registerWidgets(@NonNull MapActivity mapActivity) {
+		MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
+		if (distanceWidget == null) {
+			distanceWidget = new TripRecordingDistanceWidget(mapActivity);
+			layer.registerWidget(TRIP_RECORDING_DISTANCE, distanceWidget);
+		}
+		if (timeWidget == null) {
+			timeWidget = new TripRecordingTimeWidget(mapActivity);
+			layer.registerWidget(TRIP_RECORDING_TIME, timeWidget);
+		}
+		if (uphillWidget == null) {
+			uphillWidget = new TripRecordingUphillWidget(mapActivity);
+			layer.registerWidget(TRIP_RECORDING_UPHILL, uphillWidget);
+		}
+		if (downhillWidget == null) {
+			downhillWidget = new TripRecordingDownhillWidget(mapActivity);
+			layer.registerWidget(TRIP_RECORDING_DOWNHILL, downhillWidget);
+		}
+		layer.recreateControls();
+	}
+
+	private void unregisterWidgets(@NonNull MapActivity mapActivity) {
+		MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
+		if (distanceWidget != null) {
+			mapInfoLayer.removeSideWidget(distanceWidget);
+			distanceWidget = null;
+		}
+		if (timeWidget != null) {
+			mapInfoLayer.removeSideWidget(timeWidget);
+			timeWidget = null;
+		}
+		if (uphillWidget != null) {
+			mapInfoLayer.removeSideWidget(uphillWidget);
+			uphillWidget = null;
+		}
+		if (downhillWidget != null) {
+			mapInfoLayer.removeSideWidget(downhillWidget);
+			downhillWidget = null;
+		}
+		mapInfoLayer.recreateControls();
 	}
 
 	public static final int[] SECONDS = new int[] {0, 1, 2, 3, 5, 10, 15, 20, 30, 60, 90};
@@ -189,7 +235,10 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	@Override
 	public void mapActivityPause(MapActivity activity) {
-		this.monitoringControl = null;
+		this.distanceWidget = null;
+		this.timeWidget = null;
+		this.uphillWidget = null;
+		this.downhillWidget = null;
 		this.mapActivity = null;
 	}
 
@@ -249,7 +298,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			@Override
 			protected void onPreExecute() {
 				isSaving = true;
-				updateControl();
+				updateWidgets();
 			}
 
 			@Override
@@ -269,7 +318,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			protected void onPostExecute(SaveGpxResult result) {
 				isSaving = false;
 				app.getNotificationHelper().refreshNotifications();
-				updateControl();
+				updateWidgets();
 
 				Map<String, GPXFile> gpxFilesByName = result.getGpxFilesByName();
 				GPXFile gpxFile = null;
@@ -315,9 +364,18 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		return null;
 	}
 
-	public void updateControl() {
-		if (monitoringControl != null) {
-			monitoringControl.updateInfo(null);
+	public void updateWidgets() {
+		if (distanceWidget != null) {
+			distanceWidget.updateInfo(null);
+		}
+		if (timeWidget != null) {
+			timeWidget.updateInfo(null);
+		}
+		if (uphillWidget != null) {
+			uphillWidget.updateInfo(null);
+		}
+		if (downhillWidget != null) {
+			downhillWidget.updateInfo(null);
 		}
 	}
 
