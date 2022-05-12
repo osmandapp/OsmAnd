@@ -156,7 +156,7 @@ public class AudioNotesTileProvider extends interface_MapTiledCollectionProvider
         return ZoomLevel.MaxZoomLevel;
     }
 
-    public void addToData(AudioVideoNotesPlugin.Recording recording, float textScale) {
+    public void addToData(@NonNull AudioVideoNotesPlugin.Recording recording, float textScale) {
         if (providerInstance != null) {
             throw new IllegalStateException("Provider already instantiated. Data cannot be modified at this stage.");
         }
@@ -167,7 +167,7 @@ public class AudioNotesTileProvider extends interface_MapTiledCollectionProvider
         TypeNotes type;
         PointI point;
         float textScale;
-        MapLayerData(AudioVideoNotesPlugin.Recording recording, float textScale) {
+        MapLayerData(@NonNull AudioVideoNotesPlugin.Recording recording, float textScale) {
             int x = MapUtils.get31TileNumberX(recording.getLongitude());
             int y = MapUtils.get31TileNumberY(recording.getLatitude());
             point = new PointI(x, y);
