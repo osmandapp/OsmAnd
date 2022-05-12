@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.core.android.MapRendererView;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -22,6 +23,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.core.AudioNotesTileProvider;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -34,6 +36,9 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	private final Context ctx;
 	private final AudioVideoNotesPlugin plugin;
 	private ContextMenuLayer contextMenuLayer;
+
+	//OpenGL
+	private AudioNotesTileProvider audioNotesTileProvider;
 
 	public AudioNotesLayer(@NonNull Context context, @NonNull AudioVideoNotesPlugin plugin) {
 		super(context);
@@ -64,47 +69,70 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
 			float textScale = getTextScale();
 			drawRecording(canvas, objectInMotion, pf.x, pf.y, textScale);
+			//TODO movable for OpenGL
 		}
 	}
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		if (tileBox.getZoom() >= startZoom) {
-			OsmandApplication app = getApplication();
-			float textScale = getTextScale();
-			float iconSize = getIconSize(app);
-			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
-
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
 			DataTileManager<Recording> recs = plugin.getRecordings();
-			final QuadRect latlon = tileBox.getLatLonBounds();
-			List<Recording> objects = recs.getObjects(latlon.top, latlon.left, latlon.bottom, latlon.right);
-			List<Recording> fullObjects = new ArrayList<>();
-			List<LatLon> fullObjectsLatLon = new ArrayList<>();
-			List<LatLon> smallObjectsLatLon = new ArrayList<>();
-			for (Recording o : objects) {
-				if (o != contextMenuLayer.getMoveableObject()) {
-					float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
-					float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
+			List<Recording> objects =  recs.getAllObjects();
 
-					if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
-						PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
-								ContextCompat.getColor(ctx, R.color.audio_video_icon_color), true);
-						pointImageDrawable.setAlpha(0.8f);
-						pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
-						smallObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
-					} else {
-						fullObjects.add(o);
-						fullObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
+			if (audioNotesTileProvider != null && objects.size() != audioNotesTileProvider.getPointsCount()) {
+				clearAudioVideoNotes();
+			}
+
+			if (audioNotesTileProvider == null) {
+				audioNotesTileProvider = new AudioNotesTileProvider(ctx, baseOrder, view.getDensity());
+			}
+
+			if (objects.size() > 0 && audioNotesTileProvider.getPointsCount() == 0) {
+				float textScale = getTextScale();
+				for (Recording o : objects) {
+					audioNotesTileProvider.addToData(o, textScale);
+				}
+				audioNotesTileProvider.drawSymbols(mapRenderer);
+			}
+		} else {
+			if (tileBox.getZoom() >= startZoom) {
+				OsmandApplication app = getApplication();
+				float textScale = getTextScale();
+				float iconSize = getIconSize(app);
+				QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
+
+				DataTileManager<Recording> recs = plugin.getRecordings();
+				final QuadRect latlon = tileBox.getLatLonBounds();
+				List<Recording> objects = recs.getObjects(latlon.top, latlon.left, latlon.bottom, latlon.right);
+				List<Recording> fullObjects = new ArrayList<>();
+				List<LatLon> fullObjectsLatLon = new ArrayList<>();
+				List<LatLon> smallObjectsLatLon = new ArrayList<>();
+				for (Recording o : objects) {
+					if (o != contextMenuLayer.getMoveableObject()) {
+						float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
+						float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
+
+						if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
+							PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
+									ContextCompat.getColor(ctx, R.color.audio_video_icon_color), true);
+							pointImageDrawable.setAlpha(0.8f);
+							pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
+							smallObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
+						} else {
+							fullObjects.add(o);
+							fullObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
+						}
 					}
 				}
+				for (Recording o : fullObjects) {
+					float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
+					float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
+					drawRecording(canvas, o, x, y, textScale);
+				}
+				this.fullObjectsLatLon = fullObjectsLatLon;
+				this.smallObjectsLatLon = smallObjectsLatLon;
 			}
-			for (Recording o : fullObjects) {
-				float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
-				float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
-				drawRecording(canvas, o, x, y, textScale);
-			}
-			this.fullObjectsLatLon = fullObjectsLatLon;
-			this.smallObjectsLatLon = smallObjectsLatLon;
 		}
 	}
 
@@ -125,6 +153,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 
 	@Override
 	public void destroyLayer() {
+		clearAudioVideoNotes();
 	}
 
 	@Override
@@ -222,5 +251,14 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 		if (callback != null) {
 			callback.onApplyMovedObject(result, o);
 		}
+	}
+
+	public void clearAudioVideoNotes() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null || audioNotesTileProvider == null) {
+			return;
+		}
+		audioNotesTileProvider.clearSymbols(mapRenderer);
+		audioNotesTileProvider = null;
 	}
 }
