@@ -193,7 +193,9 @@ public class TripHelper {
 			if (!deviatedFromRoute) {
 				nextDirInfo = routingHelper.getNextRouteDirectionInfo(calc, true);
 				CurrentStreetName currentName = routingHelper.getCurrentName(nextDirInfo);
-				tripBuilder.setCurrentRoad(currentName.text);
+				if (currentName.text != null) {
+					tripBuilder.setCurrentRoad(currentName.text);
+				}
 				lastCurrentRoad = currentName.text;
 			} else {
 				lastCurrentRoad = null;
