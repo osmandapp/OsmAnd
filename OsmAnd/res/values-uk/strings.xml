@@ -4661,4 +4661,9 @@
     <string name="compass_on_circles">Компас на колах</string>
     <string name="distance_circles">Відстані-кола</string>
     <string name="circle_settings">Налаштування кола</string>
+    <string name="routing_attr_avoid_highway_name">Уник. автомагістралей</string>
+    <string name="routing_attr_avoid_highway_description">Уникати автомагістралей</string>
+    <string name="rendering_attr_weatherTempContours_name">Ізолінії температури</string>
+    <string name="rendering_attr_weatherPressureContours_name">Ізолінії тиску</string>
+    <string name="rendering_attr_horseScale_name">Складність кінних стежок</string>
 </resources>
