@@ -1875,7 +1875,7 @@
     <string name="routing_attr_avoid_borders_description">تجنب عبور الحدود الوطنية</string>
     <string name="routing_attr_height_description">تحديد الارتفاع الأعلى المسموح به على الطرق.</string>
     <string name="disable_complex_routing_descr">تعطيل 2-مرحلة التوجيه للملاحة بالسيارة.</string>
-    <string name="rendering_attr_alpineHiking_name">مقياس التنزه في جبال الألب (SAC)</string>
+    <string name="rendering_attr_alpineHiking_name">مقياس رياضة الهايكنق (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">تقديم المسارات وفقاً لمقياس SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">طرق المشي الخلوي</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">تقديم المسارات وفقاً لآثار OSMC.</string>
@@ -2169,8 +2169,8 @@
     <string name="shared_string_start_time">وقت البدء</string>
     <string name="shared_string_end_time">وقت الانتهاء</string>
     <string name="routing_attr_driving_style_name">اسلوب القيادة</string>
-    <string name="altitude_descent">المنحدر</string>
-    <string name="altitude_ascent">المرتفع</string>
+    <string name="altitude_descent">منحدر</string>
+    <string name="altitude_ascent">وعر</string>
     <string name="altitude_range">مدى الارتفاع</string>
     <string name="average_altitude">متوسط الارتفاع</string>
     <string name="routing_attr_height_obstacles_name">بيانات الارتفاع</string>
@@ -3297,7 +3297,7 @@
     <string name="application_profiles_descr">حدد الأوضاع لتكون مرئية في التطبيق.</string>
     <string name="application_profiles">أوضاع التطبيق</string>
     <string name="quick_action_need_to_add_item_to_list">أضف عنصراً واحداً على الأقل إلى القائمة في إعدادات \"الاختصار السريع\"</string>
-    <string name="routing_attr_piste_type_downhill_name">التزلج على المنحدرات وجبال الألب</string>
+    <string name="routing_attr_piste_type_downhill_name">التزلج على المنحدرات والجبال</string>
     <string name="routing_attr_piste_type_downhill_description">التزلج على جبال الألب أو الانحدار.</string>
     <string name="routing_attr_piste_type_nordic_name">التزلج الريفي والتزلج الشمالي</string>
     <string name="routing_attr_piste_type_nordic_description">مسارات للتزلج الشمالي أو الريفي علي الثلج.</string>
@@ -4631,7 +4631,7 @@
     <string name="rendering_attr_showTrolleybusRoutes_name">خطوط الترولي باص</string>
     <string name="map_markers_bar">شريط علامات الخريطة</string>
     <string name="shared_string_visible_widgets">الأدوات المرئية</string>
-    <string name="top_widgets_panel">الشزيط العلوي</string>
+    <string name="top_widgets_panel">الشريط العلوي</string>
     <string name="bottom_widgets_panel">الشريط السفلي</string>
     <string name="shared_string_item">غرض</string>
     <string name="shared_string_buttons">أزرار</string>
@@ -4726,4 +4726,8 @@
     <string name="get_altitude_data">الحصول على بيانات الارتفاع</string>
     <string name="routing_attr_avoid_4wd_only_name">تجنب طرق الدفع الرباعي</string>
     <string name="routing_attr_avoid_4wd_only_description">تجنب الطرق المناسبة لمركبات الدفع الرباعي فقط</string>
+    <string name="colour_of_circles">لون الدوائر</string>
+    <string name="compass_on_circles">دوائر البوصلة</string>
+    <string name="distance_circles">دوائر المسافة</string>
+    <string name="circle_settings">إعدادات الدائرة</string>
 </resources>
