@@ -40,10 +40,11 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	//OpenGL
 	private AudioNotesTileProvider audioNotesTileProvider;
 
-	public AudioNotesLayer(@NonNull Context context, @NonNull AudioVideoNotesPlugin plugin) {
+	public AudioNotesLayer(@NonNull Context context, @NonNull AudioVideoNotesPlugin plugin, int baseOrder) {
 		super(context);
 		this.ctx = context;
 		this.plugin = plugin;
+		this.baseOrder = baseOrder;
 	}
 
 	@Override

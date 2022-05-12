@@ -649,7 +649,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		if (audioNotesLayer != null) {
 			app.getOsmandMap().getMapView().removeLayer(audioNotesLayer);
 		}
-		audioNotesLayer = new AudioNotesLayer(context, this);
+		audioNotesLayer = new AudioNotesLayer(context, this, -140000);
 		app.getOsmandMap().getMapView().addLayer(audioNotesLayer, 3.5f);
 		if (mapActivity != null) {
 			registerWidgets(mapActivity, true);

@@ -39,7 +39,7 @@ public class AudioNotesTileProvider extends interface_MapTiledCollectionProvider
     private final float density;
 
     public AudioNotesTileProvider(@NonNull Context context, int baseOrder, float density) {
-        this.baseOrder = -20000;
+        this.baseOrder = baseOrder;
         this.ctx = context;
         textStyle = new TextRasterizer.Style();
         this.density = density;
