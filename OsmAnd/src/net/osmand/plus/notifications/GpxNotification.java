@@ -55,7 +55,7 @@ public class GpxNotification extends OsmandNotification {
 				final OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 				if (plugin != null) {
 					plugin.startGPXMonitoring(null);
-					plugin.updateControl();
+					plugin.updateWidgets();
 				}
 			}
 		}, new IntentFilter(OSMAND_START_GPX_SERVICE_ACTION));
@@ -67,7 +67,7 @@ public class GpxNotification extends OsmandNotification {
 				final OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 				if (plugin != null) {
 					plugin.stopRecording();
-					plugin.updateControl();
+					plugin.updateWidgets();
 				}
 			}
 		}, new IntentFilter(OSMAND_STOP_GPX_SERVICE_ACTION));

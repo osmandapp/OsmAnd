@@ -371,16 +371,23 @@ public class OsmAndFormatter {
 
 	@NonNull
 	public static String getFormattedAlt(double alt, OsmandApplication ctx, MetricsConstants mc) {
+		return getFormattedAltitudeValue(alt, ctx, mc).format(ctx);
+	}
+
+	@NonNull
+	public static FormattedValue getFormattedAltitudeValue(double altitude,
+	                                                       @NonNull OsmandApplication ctx,
+	                                                       @NonNull MetricsConstants mc) {
 		boolean useFeet = mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.MILES_AND_YARDS;
 		FormattedValue formattedValue;
 		if (useFeet) {
-			int feet = (int) (alt * FEET_IN_ONE_METER + 0.5);
+			int feet = (int) (altitude * FEET_IN_ONE_METER + 0.5);
 			formattedValue = formatValue(feet, R.string.foot, false, 0, ctx);
 		} else {
-			int meters = (int) (alt + 0.5);
+			int meters = (int) (altitude + 0.5);
 			formattedValue = formatValue(meters, R.string.m, false, 0, ctx);
 		}
-		return formattedValue.format(ctx);
+		return formattedValue;
 	}
 
 	@NonNull

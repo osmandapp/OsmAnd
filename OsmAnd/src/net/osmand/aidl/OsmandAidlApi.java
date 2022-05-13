@@ -1685,7 +1685,7 @@ public class OsmandAidlApi {
 		OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 		if (plugin != null) {
 			plugin.startGPXMonitoring(null);
-			plugin.updateControl();
+			plugin.updateWidgets();
 			return true;
 		}
 		return false;
@@ -1695,7 +1695,7 @@ public class OsmandAidlApi {
 		OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 		if (plugin != null) {
 			plugin.stopRecording();
-			plugin.updateControl();
+			plugin.updateWidgets();
 			return true;
 		}
 		return false;
