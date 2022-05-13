@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -41,13 +42,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 
-import static net.osmand.plus.AppInitializer.LATEST_CHANGES_URL;
 
 public class HelpActivity extends BaseLogcatActivity implements OnItemClickListener, OnItemLongClickListener {
 
 	public static final String OSMAND_POLL_HTML = "https://osmand.net/android-poll.html";
 	public static final String GITHUB_DISCUSSIONS_URL = "https://github.com/osmandapp/OsmAnd/discussions";
-	// public static final String OSMAND_MAP_LEGEND = "https://osmand.net/help/map-legend_default.png";
 
 	public static final int COLLAPSED_TELEGRAM_CHATS_COUNT = 3;
 	public static final int NULL_ID = -1;
@@ -308,7 +307,8 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 		contextMenuAdapter.addItem(createItem(R.string.versions_item, NULL_ID,
 				"feature_articles/changes.html"));
 
-		contextMenuAdapter.addItem(createItem(R.string.what_is_new, NULL_ID, LATEST_CHANGES_URL));
+
+		contextMenuAdapter.addItem(createItem(R.string.what_is_new, NULL_ID, getString(R.string.docs_latest_version)));
 
 		String releaseDate = "";
 		if (!getString(R.string.app_edition).isEmpty()) {
@@ -415,6 +415,7 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 
 		@Override
 		public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter, @Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
+			String LATEST_CHANGES_URL = ctx.getString(R.string.docs_latest_version);
 			if (LATEST_CHANGES_URL.equals(path)) {
 				OsmandApplication app = (OsmandApplication) ctx.getApplication();
 				boolean nightMode = !app.getSettings().isLightContent();

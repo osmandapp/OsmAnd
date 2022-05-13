@@ -860,6 +860,15 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		updateJoinGapsInfo(container, position);
 	}
 
+	public int getTabIndex(@NonNull GPXTabItemType tab) {
+		for (int i = 0; i < tabTypes.length; i++) {
+			if (tabTypes[i] == tab) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
 	private TrkSegment getTrkSegment() {
 		for (Track track : gpxItem.group.getGpx().tracks) {
 			if (!track.generalTrack && !gpxItem.isGeneralTrack() || track.generalTrack && gpxItem.isGeneralTrack()) {

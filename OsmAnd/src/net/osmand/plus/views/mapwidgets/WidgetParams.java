@@ -5,7 +5,6 @@ import android.content.Context;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
-import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.mapwidgets.configure.settings.ElevationProfileWidgetSettingsFragment;
@@ -50,7 +49,10 @@ public enum WidgetParams {
 	MAX_SPEED("max_speed", R.string.map_widget_max_speed, R.string.max_speed_widget_desc, R.drawable.widget_max_speed_day, R.drawable.widget_max_speed_night, RIGHT),
 	ALTITUDE("altitude", R.string.map_widget_altitude, R.string.altitude_widget_desc, R.drawable.widget_altitude_day, R.drawable.widget_altitude_night, RIGHT),
 	GPS_INFO("gps_info", R.string.map_widget_gps_info, R.string.gps_info_widget_desc, R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night, RIGHT),
-	TRIP_RECORDING("monitoring", R.string.map_widget_monitoring, 0, R.drawable.widget_monitoring_rec_small_day, R.drawable.widget_monitoring_rec_small_night, RIGHT),
+	TRIP_RECORDING_DISTANCE("monitoring", R.string.map_widget_trip_recording_distance, 0, R.drawable.widget_trip_recording_day, R.drawable.widget_trip_recording_night, RIGHT),
+	TRIP_RECORDING_TIME("trip_recording_time", R.string.map_widget_trip_recording_duration, 0, R.drawable.widget_track_recording_duration_day, R.drawable.widget_track_recording_duration_night, RIGHT),
+	TRIP_RECORDING_UPHILL("trip_recording_uphill", R.string.map_widget_trip_recording_uphill, 0, R.drawable.widget_track_recording_uphill_day, R.drawable.widget_track_recording_uphill_night, RIGHT),
+	TRIP_RECORDING_DOWNHILL("trip_recording_downhill", R.string.map_widget_trip_recording_downhill, 0, R.drawable.widget_track_recording_downhill_day, R.drawable.widget_track_recording_downhill_night, RIGHT),
 	CURRENT_TIME("plain_time", R.string.map_widget_plain_time, R.string.current_time_widget_desc, R.drawable.widget_time_day, R.drawable.widget_time_night, RIGHT),
 	BATTERY("battery", R.string.map_widget_battery, R.string.battery_widget_desc, R.drawable.widget_battery_day, R.drawable.widget_battery_night, RIGHT),
 	RADIUS_RULER("ruler", R.string.map_widget_ruler_control, R.string.radius_rules_widget_desc, R.drawable.widget_ruler_circle_day, R.drawable.widget_ruler_circle_night, RIGHT),
@@ -129,8 +131,6 @@ public enum WidgetParams {
 			return "https://docs.osmand.net/docs/user/widgets/info-widgets/#altitude";
 		} else if (this == GPS_INFO) {
 			return "https://docs.osmand.net/docs/user/widgets/info-widgets/#gps-info-android";
-		} else if (this == TRIP_RECORDING) {
-			return "https://docs.osmand.net/docs/user/widgets/info-widgets/#-trip-recording-widget";
 		} else if (this == CURRENT_TIME) {
 			return "https://docs.osmand.net/docs/user/widgets/info-widgets/#current-time";
 		} else if (this == BATTERY) {
@@ -155,8 +155,6 @@ public enum WidgetParams {
 			String coordinatesFormat = context.getString(R.string.coordinates_format);
 			return context.getString(R.string.coordinates_widget_secondary_desc, configureProfile,
 					generalSettings, coordinatesFormat);
-		} else if (this == TRIP_RECORDING) {
-			return WidgetGroup.getPartOfPluginDesc(context, OsmandMonitoringPlugin.class);
 		} else if (this == FPS) {
 			return WidgetGroup.getPartOfPluginDesc(context, OsmandDevelopmentPlugin.class);
 		} else if (this == MAPILLARY) {
@@ -171,7 +169,7 @@ public enum WidgetParams {
 	public int getSecondaryIconId() {
 		if (this == COORDINATES) {
 			return R.drawable.ic_action_help;
-		} else if (this == TRIP_RECORDING || this == FPS || this == MAPILLARY || this == PARKING) {
+		} else if (this == FPS || this == MAPILLARY || this == PARKING) {
 			return R.drawable.ic_extension_dark;
 		}
 		return 0;

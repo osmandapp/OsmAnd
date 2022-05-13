@@ -93,6 +93,7 @@ import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.MeasurementToolFragment.MeasurementToolMode;
 import net.osmand.plus.myplaces.DeletePointsTask.OnPointsDeleteListener;
 import net.osmand.plus.myplaces.ui.AvailableGPXFragment.GpxInfo;
+import net.osmand.plus.myplaces.ui.GPXTabItemType;
 import net.osmand.plus.myplaces.ui.MoveGpxFileBottomSheet;
 import net.osmand.plus.myplaces.ui.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.ui.SegmentActionsListener;
@@ -155,9 +156,12 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	public static final String TRACK_FILE_NAME = "TRACK_FILE_NAME";
 	public static final String OPEN_TAB_NAME = "open_tab_name";
+	public static final String CHART_TAB_NAME = "chart_tab_name";
 	public static final String CURRENT_RECORDING = "CURRENT_RECORDING";
 	public static final String OPEN_TRACK_MENU = "open_track_menu";
 	public static final String RETURN_SCREEN_NAME = "return_screen_name";
+	public static final String CALLING_FRAGMENT_TAG = "calling_fragment_tag";
+	public static final String ADJUST_MAP_POSITION = "adjust_map_position";
 	public static final String TRACK_DELETED_KEY = "track_deleted_key";
 
 	private OsmandApplication app;
@@ -194,6 +198,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private String gpxTitle;
 	private String returnScreenName;
 	private String callingFragmentTag;
+	private GPXTabItemType chartTabToOpen;
 	private SelectedGpxPoint gpxPoint;
 	private TrackChartPoints trackChartPoints;
 	private NetworkRouteSegment routeSegment;
@@ -397,6 +402,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	public void setAdjustMapPosition(boolean adjustMapPosition) {
 		this.adjustMapPosition = adjustMapPosition;
+	}
+
+	public void setChartTabToOpen(@Nullable GPXTabItemType chartTabToOpen) {
+		this.chartTabToOpen = chartTabToOpen;
 	}
 
 	private void setAnalyses(@Nullable GPXTrackAnalysis analyses) {
@@ -694,7 +703,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				if (segmentsCard != null && segmentsCard.getView() != null) {
 					reattachCard(cardsContainer, segmentsCard);
 				} else {
-					segmentsCard = new SegmentsCard(mapActivity, displayHelper, gpxPoint, selectedGpxFile, this);
+					segmentsCard = new SegmentsCard(mapActivity, displayHelper, gpxPoint, selectedGpxFile,
+							this, chartTabToOpen);
 					segmentsCard.setListener(this);
 					cardsContainer.addView(segmentsCard.build(mapActivity));
 				}
@@ -1651,16 +1661,20 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public static void showInstance(@NonNull MapActivity mapActivity,
 	                                @Nullable String path,
 	                                boolean showCurrentTrack,
-	                                @Nullable final String returnScreenName,
-	                                @Nullable final String callingFragmentTag,
-	                                @Nullable final String tabToOpenName) {
+	                                @Nullable String returnScreenName,
+	                                @Nullable String callingFragmentTag,
+	                                @Nullable String tabToOpenName) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		loadSelectedGpxFile(mapActivity, path, showCurrentTrack, new CallbackWithObject<SelectedGpxFile>() {
 			@Override
 			public boolean processResult(SelectedGpxFile selectedGpxFile) {
 				MapActivity mapActivity = mapActivityRef.get();
 				if (mapActivity != null && selectedGpxFile != null) {
-					showInstance(mapActivity, selectedGpxFile, null, returnScreenName, callingFragmentTag, tabToOpenName, true, null, null);
+					Bundle params = new Bundle();
+					params.putString(RETURN_SCREEN_NAME, returnScreenName);
+					params.putString(CALLING_FRAGMENT_TAG, callingFragmentTag);
+					params.putString(OPEN_TAB_NAME, tabToOpenName);
+					showInstance(mapActivity, selectedGpxFile, null, null, null, params);
 				}
 				return true;
 			}
@@ -1670,18 +1684,17 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
 	                                   @NonNull SelectedGpxFile selectedGpxFile,
 	                                   @Nullable SelectedGpxPoint gpxPoint) {
-		return showInstance(mapActivity, selectedGpxFile, gpxPoint, null, null, null, false, null, null);
+		Bundle params = new Bundle();
+		params.putBoolean(ADJUST_MAP_POSITION, false);
+		return showInstance(mapActivity, selectedGpxFile, gpxPoint, null, null, params);
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
 	                                   @NonNull SelectedGpxFile selectedGpxFile,
 	                                   @Nullable SelectedGpxPoint gpxPoint,
-	                                   @Nullable String returnScreenName,
-	                                   @Nullable String callingFragmentTag,
-	                                   @Nullable String tabToOpenName,
-	                                   boolean adjustMapPosition,
 	                                   @Nullable GPXTrackAnalysis analyses,
-	                                   @Nullable NetworkRouteSegment routeSegment) {
+	                                   @Nullable NetworkRouteSegment routeSegment,
+	                                   @Nullable Bundle params) {
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Bundle args = new Bundle();
@@ -1692,12 +1705,20 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			fragment.setRetainInstance(true);
 			fragment.setAnalyses(analyses);
 			fragment.setSelectedGpxFile(selectedGpxFile);
-			fragment.setReturnScreenName(returnScreenName);
 			fragment.setRouteSegment(routeSegment);
-			fragment.setCallingFragmentTag(callingFragmentTag);
-			fragment.setAdjustMapPosition(adjustMapPosition);
-			if (tabToOpenName != null) {
-				fragment.setMenuType(TrackMenuType.valueOf(tabToOpenName));
+
+			if (params != null) {
+				fragment.setReturnScreenName(params.getString(RETURN_SCREEN_NAME, null));
+				fragment.setCallingFragmentTag(params.getString(CALLING_FRAGMENT_TAG, null));
+				String tabToOpenName = params.getString(OPEN_TAB_NAME, null);
+				if (!Algorithms.isEmpty(tabToOpenName)) {
+					fragment.setMenuType(TrackMenuType.valueOf(tabToOpenName));
+				}
+				fragment.setAdjustMapPosition(params.getBoolean(ADJUST_MAP_POSITION, true));
+				String chartTabToOpenName = params.getString(CHART_TAB_NAME);
+				if (!Algorithms.isEmpty(chartTabToOpenName)) {
+					fragment.setChartTabToOpen(GPXTabItemType.valueOf(chartTabToOpenName));
+				}
 			}
 
 			if (gpxPoint != null) {
