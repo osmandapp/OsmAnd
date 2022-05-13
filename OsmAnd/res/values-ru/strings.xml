@@ -58,7 +58,7 @@
     <string name="change_color">Выбрать цвет</string>
     <string name="edit_name">Задать имя</string>
     <string name="route_is_too_long_v2">Для больших расстояний: добавьте промежуточные пункты, если маршрут не построен в течение 10 минут.</string>
-    <string name="routing_attr_allow_private_name">Разрешить частные зоны</string>
+    <string name="routing_attr_allow_private_name">Разрешить частный доступ</string>
     <string name="routing_attr_allow_private_description">Разрешить доступ на частную территорию.</string>
     <string name="shared_string_overview">Обзор</string>
     <string name="select_street">Выберите улицу</string>
@@ -4618,7 +4618,7 @@
 \n• Исправления: автообновление тайловых онлайн-карт
 \n
 \n</string>
-    <string name="turn_on_public_transport_description">Включите, чтобы увидеть на карте маршруты общественного транспорта.</string>
+    <string name="turn_on_public_transport_description">Включите для отображения на карте маршрутов общественного транспорта.</string>
     <string name="av_def_action_choose">По запросу</string>
     <string name="widget_secondary_desc_part_of">Часть плагина «%1$s».</string>
     <string name="elevation_profile_widget_desc">Виджет показывает профиль высоты и уклона текущего маршрута.</string>
@@ -4657,9 +4657,9 @@
     <string name="bearing_secondary_desc">Вы можете изменить формат отображаемых данных через меню: %1$s - %2$s - %3$s.</string>
     <string name="magnetic_bearing_widget_desc">Угол между магнитным севером и целевой точкой, наблюдаемой из вашего местоположения.</string>
     <string name="arrival_time_widget_desc">Время прибытия в пункт назначения.</string>
-    <string name="map_markers_bar_widget_desc">На виджете верхней панели можно увидеть расстояние и направление до маркера от текущего местоположения. Можно настроить отображение одного или двух верхних маркеров.</string>
+    <string name="map_markers_bar_widget_desc">Виджет показывает направление и расстояние до маркера от текущего местоположения. Возможно настроить отображение одного или двух верхних маркеров.</string>
     <string name="coordinates_widget_desc">Виджет показывает географические координаты текущего местоположения.</string>
-    <string name="map_markers_desc">На виджете верхней панели можно увидеть расстояние и направление до маркера от текущего местоположения. Можно настроить отображение одного или двух верхних маркеров.</string>
+    <string name="map_markers_desc">Виджет показывает направление и расстояние до маркера от текущего местоположения. Возможно настроить отображение одного или двух верхних маркеров.</string>
     <string name="routing_attr_avoid_4wd_only_description">Избегать дорог, подходящих только для полноприводных автомобилей</string>
     <string name="routing_attr_avoid_4wd_only_name">Без дорог 4WD</string>
     <string name="compass_on_circles">Компас на окружности</string>
@@ -4668,4 +4668,18 @@
     <string name="colour_of_circles">Окраска окружностей</string>
     <string name="routing_attr_avoid_highway_name">Без автомагистралей</string>
     <string name="routing_attr_avoid_highway_description">Избегать автомагистрали</string>
+    <string name="routing_attr_allow_private_for_truck_description">Разрешить доступ грузовых автомобилей на частную территорию.</string>
+    <string name="map_widget_trip_recording_duration">Продолжительность</string>
+    <string name="map_widget_trip_recording_uphill">Подъём</string>
+    <string name="routing_attr_hazmat_category_name">Категория опасности</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">Без ограничений</string>
+    <string name="map_widget_trip_recording_distance">Расстояние</string>
+    <string name="routing_attr_hazmat_category_description">Категория опасных материалов / Учитывать разрешение на доступ к опасным веществам</string>
+    <string name="routing_attr_avoid_fords_name">Без бродов</string>
+    <string name="routing_attr_allow_private_for_truck_name">Разрешить частный доступ (грузовик)</string>
+    <string name="rendering_attr_weatherPressureContours_name">Изобары</string>
+    <string name="rendering_attr_weatherTempContours_name">Изотермы</string>
+    <string name="routing_attr_avoid_fords_description">Избегать броды</string>
+    <string name="rendering_attr_horseScale_name">Сложность конных маршрутов</string>
+    <string name="map_widget_trip_recording_downhill">Спуск</string>
 </resources>
