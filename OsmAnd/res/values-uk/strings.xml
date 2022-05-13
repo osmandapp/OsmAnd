@@ -2794,7 +2794,7 @@
     <string name="work_button">Робота</string>
     <string name="cubic_m">м³</string>
     <string name="metric_ton">т</string>
-    <string name="shared_string_capacity">Об\'єм</string>
+    <string name="shared_string_capacity">Обсяг</string>
     <string name="shared_string_width">Ширина</string>
     <string name="shared_string_height">Висота</string>
     <string name="add_destination_point">Додати пункт призначення</string>
