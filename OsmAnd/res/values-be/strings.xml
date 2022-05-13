@@ -2260,7 +2260,7 @@
     <string name="no_underlay">Няма падкладкі</string>
     <string name="subscribe_email_desc">Падпішыцеся на нашу паштовую рассылку аб зніжках і атрымайце 3 дадатковыя мапы!</string>
     <string name="depth_contour_descr">Контурныя лініі марскіх глыбінь і марскія знакі.</string>
-    <string name="sea_depth_thanks">Дзякуй за пакупку «Контураў марскіх глыбінь»</string>
+    <string name="sea_depth_thanks">Дзякуй, што купілі «Контуры марскіх глыбінь»</string>
     <string name="index_item_depth_contours_osmand_ext">Контуры марскіх глыбінь</string>
     <string name="index_item_depth_points_southern_hemisphere">Адзнакі марскіх глыбінь паўднёвага паўшар\'я</string>
     <string name="index_item_depth_points_northern_hemisphere">Адзнакі марскіх глыбінь паўночнага паўшар\'я</string>
@@ -2726,7 +2726,7 @@
     <string name="wikivoyage_travel_guide_descr">Дапаможнік па самым цікавым месцам на планеце ўнутры OsmAnd без злучэння з Інтэрнэтам.</string>
     <string name="monthly_map_updates">Штомесячныя абнаўленні мапаў</string>
     <string name="daily_map_updates">Штогадзінныя абнаўленні мапаў</string>
-    <string name="in_app_purchase">Пакупка ў праграме</string>
+    <string name="in_app_purchase">Купля ў праграме</string>
     <string name="in_app_purchase_desc">Разавы плацёж</string>
     <string name="in_app_purchase_desc_ex">Аднойчы набыты, будзе заўсёды даступны для вас.</string>
     <string name="purchase_unlim_title">Купіць - %1$s</string>
@@ -3396,7 +3396,7 @@
     <string name="map_markers_item">Адзнакі мапы</string>
     <string name="favorites_item">Улюбёнае</string>
     <string name="subscription_osmandlive_item">Падпіска - OsmAnd Live</string>
-    <string name="osmand_purchases_item">Пакупкі OsmAnd</string>
+    <string name="osmand_purchases_item">Куплі OsmAnd</string>
     <string name="legend_item_description">Даведка па знаках мапы.</string>
     <string name="navigation_profiles_item">Профілі навігацыі</string>
     <string name="create_edit_poi">Стварыць ці змяніць POI</string>
@@ -3754,9 +3754,9 @@
     <string name="ui_customization_description">Наладка колькасці элементаў у раздзелах \"Панэль\", \"Наладзіць мапу\" і кантэкстным меню.
 \n
 \nМожна адключыць невыкарыстоўваемыя ўбудовы, каб прыбраць іх элементы кіравання. %1$s.</string>
-    <string name="osm_live_payment_subscription_management">Пры пацвярджэнні пакупкі аплата будзе спаганяцца з рахунка, звязанага з вашым акаўнтам Google Plaу.
+    <string name="osm_live_payment_subscription_management">Пры пацвярджэнні куплі аплата будзе спаганяцца з рахунку, звязанага з вашым акаўнтам Google Plaу.
 \n
-\nПадпіска аўтаматычна працягваецца, калі вы не скасуеце яе да даты працягу. З вашага рахунка будзе адзін раз спаганяцца аплата за перыяд працягу (месяц/тры месяцы/год).
+\nПадпіска аўтаматычна працягваецца, калі вы не скасуеце яе да даты працягу. З вашага рахунку будзе адзін раз спаганяцца аплата за перыяд працягу (месяц/тры месяцы/год).
 \n
 \nВы можаце кіраваць падпіскамі і скасоўваць іх у наладах Google Play.</string>
     <string name="release_3_7">• Новыя лакальныя мапы схілаў
@@ -3888,7 +3888,7 @@
     <string name="open_street_map_login_mode">Вам неабходна ўвайсці ў сістэму, каб адправіць змены.
 \n
 \nВы можаце ўвайсці з дапамогай OAuth або лагіна і пароля.</string>
-    <string name="use_login_password">Выкарыстоўваць лагін і пароль</string>
+    <string name="use_login_password">Выкарыстоўваць імя карыстальніка і пароль</string>
     <string name="login_account">Акаўнт</string>
     <string name="user_login">Увайсці</string>
     <string name="manage_subscription">Кіраванне падпіскай</string>
@@ -3905,7 +3905,7 @@
     <string name="gpx_upload_trackable_visibility_descr">\"Можна адсачыць\" азначае, што след не з\'явіцца ў любым агульнадаступным спісе, але яго пункты (якія не могуць быць непасрэдна звязаныя з вамі) адпраўляюцца праз агульнадаступны API GPS.</string>
     <string name="osm_edit_close_note">Закрыць нататку OSM</string>
     <string name="osm_edit_comment_note">Каментаваць нататку OSM</string>
-    <string name="osm_login_descr">Вы можаце ўвайсці з дапамогай OAuth або лагіна і пароля.</string>
+    <string name="osm_login_descr">Увайдзіце з дапамогай OAuth або імя карыстальніка і пароля для OSM.</string>
     <string name="shared_string_add_photo">Дадаць фотаздымак</string>
     <string name="register_on_openplacereviews">Зарэгістравацца на
 \nOpenPlaceReviews.org</string>
@@ -4046,7 +4046,7 @@
     <string name="activity_type_motorbike_name">Матацыкл</string>
     <string name="activity_type_car_name">Аўтамабіль</string>
     <string name="routing_attr_short_way_description">Аптымальны карацейшы маршрут</string>
-    <string name="snap_to_road_descr">Значок бягучага месцазнаходжання будзе прыаязвацца да бягучага маршруту навігацыі</string>
+    <string name="snap_to_road_descr">Значок бягучага месцазнаходжання будзе прывязвацца да бягучага маршруту навігацыі</string>
     <string name="routing_attr_height_obstacles_description">Разлік маршруту дапаможа пазбегнуць вялікіх схілаў.</string>
     <string name="purchases">Куплі</string>
     <string name="shared_string_contributions">Унёскі</string>
@@ -4150,4 +4150,5 @@
     <string name="street_name_widget_desc">Віджэт назвы вуліцы паказвае бягучую назву вуліцы са стрэлкай прамога месцазнаходжання або наступную назву вуліцы з манеўрам, які трэба выканаць.</string>
     <string name="route_maneuvers_desc">Навігацыйныя віджэты ўключаны падчас навігацыі для адлюстравання такой інфармацыі, як адлегласць, час прыбыцця або пазасталы час, наступныя павароты, пеленг, назва бягучай вуліцы, інфармацыя аб палосах руху, максімальная хуткасць, звесткі аб набліжэнні, аб\'екты, пункты шляху.</string>
     <string name="audio_video_notes_desc">Віджэты забяспечваюць хуткі доступ да пачатку/спынення запісу (аўдыя, відэа ці фота).</string>
+    <string name="not_enough_contributions_descr">Каб атрымаць неабмежаваную колькасць абнаўленняў, трэба зрабіць прынамсі %1$s правак за апошнія два месяцы %2$s.</string>
 </resources>
