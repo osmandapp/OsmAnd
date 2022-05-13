@@ -4730,4 +4730,20 @@
     <string name="compass_on_circles">دوائر البوصلة</string>
     <string name="distance_circles">دوائر المسافة</string>
     <string name="circle_settings">إعدادات الدائرة</string>
+    <string name="rendering_attr_weatherTempContours_name">خطوط قياس درجة الحرارة</string>
+    <string name="routing_attr_allow_private_for_truck_name">السماح بدخول القطاع الخاص (الشاحنات)</string>
+    <string name="routing_attr_allow_private_for_truck_description">السماح بدخول الشاحنات إلى المناطق الخاصة.</string>
+    <string name="routing_attr_avoid_highway_description">تجنب الطرق السريعة</string>
+    <string name="map_widget_trip_recording_downhill">منحدر</string>
+    <string name="rendering_attr_weatherPressureContours_name">خطوط قياس الضغط</string>
+    <string name="rendering_attr_horseScale_name">مسارات الخيول الوعرة</string>
+    <string name="routing_attr_avoid_highway_name">تجنب الطرق السريعة</string>
+    <string name="map_widget_trip_recording_distance">المسافة</string>
+    <string name="map_widget_trip_recording_uphill">مرتفع</string>
+    <string name="routing_attr_hazmat_category_description">فئة المواد الخطرة / النظر في أذونات الوصول إلى المواد الخطرة</string>
+    <string name="routing_attr_avoid_fords_name">تجنب الوحل</string>
+    <string name="routing_attr_hazmat_category_name">فئة المواد الخطرة</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">لا قيود</string>
+    <string name="routing_attr_avoid_fords_description">تجنب الوحل</string>
+    <string name="map_widget_trip_recording_duration">المدة</string>
 </resources>
