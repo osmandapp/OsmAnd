@@ -337,9 +337,9 @@
     <string name="poi_guest_house">Gostišče</string>
     <string name="poi_hostel">Hostel</string>
     <string name="poi_motel">Motel</string>
-    <string name="poi_alpine_hut">Alpska koča</string>
+    <string name="poi_alpine_hut">Planinska koča;Zavetišče</string>
     <string name="poi_apartment">Apartma</string>
-    <string name="poi_hunting_lodge">Lovska koča</string>
+    <string name="poi_hunting_lodge">Lovska koča;Zavetišče</string>
     <string name="poi_place_of_worship">Svetišče</string>
     <string name="poi_religion_christian">Krščansko svetišče</string>
     <string name="poi_religion_jewish">Židovsko svetišče</string>
@@ -434,7 +434,7 @@
     <string name="poi_observatory_designation">Uradna označba</string>
     <string name="poi_pharmacy_dispensing">Izdaja zdravila na recept</string>
     <string name="poi_free_flying_characteristics">Značilnosti</string>
-    <string name="poi_denomination">Denominacija</string>
+    <string name="poi_denomination">Verska skupnost</string>
     <string name="poi_scout_camp">Taborniški kamp</string>
     <string name="poi_resort_type">Vrsta</string>
     <string name="poi_piste_difficulty">Zahtevnost proge</string>
@@ -1089,4 +1089,21 @@
     <string name="poi_office_religion">Verski urad</string>
     <string name="poi_financial">Finančni urad</string>
     <string name="poi_raceway">Dirkališče</string>
+    <string name="poi_cabin">Kabina;Zavetišče</string>
+    <string name="poi_religion_zoroastrian">Zoroastrizem</string>
+    <string name="poi_religion_voodoo">Vudu</string>
+    <string name="poi_religion_bahai">Bahaizem</string>
+    <string name="poi_religion_spiritualist">Spiritualizem</string>
+    <string name="poi_religion_jain">Džainizem</string>
+    <string name="poi_religion_multifaith">Večvernost</string>
+    <string name="poi_religion_unitarian_universalist">Unitaristični univerzalizem</string>
+    <string name="poi_wilderness_hut">Neoskrbovana planinska koča;Zavetišče</string>
+    <string name="poi_attraction_water_slide">Vodni tobogan</string>
+    <string name="poi_lodging">Nastanitev</string>
+    <string name="poi_chalet">Počitniška hišica;Zavetišče</string>
+    <string name="poi_lean_to">Prizidek;Zavetišče</string>
+    <string name="poi_religion_scientologist">Scientologizem</string>
+    <string name="poi_religion_pagan">Poganstvo</string>
+    <string name="poi_religion_tenrikyo">Tenrikyo</string>
+    <string name="poi_denomination_catholic">Katoliška</string>
 </resources>
