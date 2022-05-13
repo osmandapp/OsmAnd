@@ -18,7 +18,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
 import net.osmand.plus.utils.AndroidUtils;
 
-import static net.osmand.plus.AppInitializer.LATEST_CHANGES_URL;
 
 public class WhatsNewDialogFragment extends DialogFragment {
 
@@ -47,7 +46,7 @@ public class WhatsNewDialogFragment extends DialogFragment {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			OsmandApplication app = requireMyApplication();
-			Uri uri = Uri.parse(LATEST_CHANGES_URL);
+			Uri uri = Uri.parse(app.getString(R.string.docs_latest_version));
 			boolean nightMode = !app.getSettings().isLightContent();
 			AndroidUtils.openUrl(mapActivity, uri, nightMode);
 		}
