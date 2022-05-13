@@ -2684,4 +2684,8 @@
 \nПреместете папката с данни от споделеното хранилище в достъпно хранилище, в противен случай приложението ще загуби достъп до вашите данни като карти за ползване извън мрежа, трасета на GPX и др.</string>
     <string name="store_tracks_in_monthly_directories">Записване на трасета в месечна папка</string>
     <string name="store_tracks_in_monthly_directories_descrp">Трасетата се записват в различна папка всеки месец (напр. 2020-12).</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Бутон, превключващ избраното трасе на картата.</string>
+    <string name="looking_for_tracks_with_waypoints">Търсене на трасета с пътни точки</string>
+    <string name="snowmobile_render_descr">За каране на снегомобил по определени пътища и трасета.</string>
+    <string name="gpx_no_tracks_title">Нямате файлове с трасета</string>
 </resources>
