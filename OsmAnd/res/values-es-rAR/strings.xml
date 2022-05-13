@@ -4677,4 +4677,20 @@
     <string name="distance_circles">Círculos de distancia</string>
     <string name="circle_settings">Ajustes de los círculos</string>
     <string name="colour_of_circles">Color de los círculos</string>
+    <string name="rendering_attr_weatherTempContours_name">Isolíneas de temperatura</string>
+    <string name="routing_attr_allow_private_for_truck_name">Permitir el acceso privado (camión)</string>
+    <string name="rendering_attr_weatherPressureContours_name">Isolíneas de presión</string>
+    <string name="routing_attr_avoid_fords_name">Evitar vados</string>
+    <string name="routing_attr_allow_private_for_truck_description">Permitir el acceso a áreas privadas para camiones.</string>
+    <string name="rendering_attr_horseScale_name">Dificultad de los senderos ecuestres</string>
+    <string name="routing_attr_avoid_highway_name">Evitar los caminos</string>
+    <string name="map_widget_trip_recording_downhill">Descenso</string>
+    <string name="map_widget_trip_recording_uphill">Ascenso</string>
+    <string name="routing_attr_avoid_highway_description">Evita circular por caminos viales</string>
+    <string name="map_widget_trip_recording_duration">Duración</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">Sin restricciones</string>
+    <string name="map_widget_trip_recording_distance">Distancia</string>
+    <string name="routing_attr_hazmat_category_name">Categoría de materiales peligrosos</string>
+    <string name="routing_attr_hazmat_category_description">Categoría de materiales peligrosos / Considera los permisos de acceso para vehículos con materiales peligrosos</string>
+    <string name="routing_attr_avoid_fords_description">Evitar pasar por vados</string>
 </resources>
