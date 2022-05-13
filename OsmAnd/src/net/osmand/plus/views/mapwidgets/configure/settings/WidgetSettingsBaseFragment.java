@@ -20,7 +20,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
-import net.osmand.util.Algorithms;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -82,10 +81,11 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 		closeButton.setOnClickListener(v -> dismiss());
 
 		View helpButton = view.findViewById(R.id.help_button);
-		String docsUrl = widget.getDocsUrl();
-		if (Algorithms.isEmpty(docsUrl)) {
+		int docsUrlId = widget.docsUrlId;
+		if (docsUrlId == 0) {
 			AndroidUiHelper.updateVisibility(helpButton, false);
 		} else {
+			String docsUrl = getString(docsUrlId);
 			helpButton.setOnClickListener(v -> {
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
