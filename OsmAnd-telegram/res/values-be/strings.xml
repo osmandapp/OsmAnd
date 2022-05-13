@@ -271,4 +271,8 @@
     <string name="shared_string_export">Экспартаваць</string>
     <string name="logcat_buffer">Буфер logcat</string>
     <string name="logcat_buffer_descr">Праверце і падзяліцеся падрабязнымі журналамі праграмы</string>
+    <string name="send_live_location_error">Падчас адпраўлення месцазнаходжання адбылася памылка: %1$s</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
+    <string name="shared_string_error">Памылка</string>
 </resources>
